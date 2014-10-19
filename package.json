@@ -2,7 +2,7 @@
   "name": "react-dnd",
   "version": "0.1.0",
   "description": "HTML5 drag and drop mixin for React with full DOM control",
-  "main": "modules/index.js"
+  "main": "modules/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/gaearon/react-dnd.git"
