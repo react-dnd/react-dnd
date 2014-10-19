@@ -21,8 +21,7 @@ npm install --save react-dnd
 Dependencies: Flux and a couple of functions from lodash-node;  
 Peer Dependencies: React >= 0.11.0.
 
-Note: [I'm using ES6 features in this library](https://github.com/gaearon/react-dnd/issues/2), so you may want to enable Harmony transforms in JSX build step.  
-This library has to be used with a bundler such as Webpack (or Browserify).
+Note: [I'm using ES6 features in this library](https://github.com/gaearon/react-dnd/issues/2), so you may want to enable Harmony transforms in JSX build step. This library has to be used with a bundler such as Webpack (or Browserify).
 
 ## Rationale
 
