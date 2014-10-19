@@ -23,6 +23,7 @@ Peer Dependencies: React >= 0.11.0.
 
 Note: [I'm using ES6 features in this library](https://github.com/gaearon/react-dnd/issues/2), so you may want to enable Harmony transforms in JSX build step. This library has to be used with a bundler such as Webpack (or Browserify).
 
+
 ## Rationale
 
 Existing drag-and-drop libraries didn't fit my use case so I wrote my own. It's similar to the code we've been running for about a year on Stampsy.com, but rewritten to take advantage of React and Flux.
@@ -41,13 +42,177 @@ Key requirements:
 
 Hopefully the resulting API reflects that.
 
+## Usage
+
+### Simple Drag Source
+
+First, declare types of data that can be dragged.  
+
+These are used to check “compatibility” of drag sources and drop targets:
+
+```javascript
+// ItemTypes.js
+module.exports = {
+  BLOCK: 'block',
+  IMAGE: 'image'
+};
+```
+
+(If you don't have multiple data types, this libary may not be for you.)
+
+Then, let's make a very simple draggable component that, when dragged, represents `IMAGE`:
+
+```javascript
+var { DragDropMixin } = require('react-dnd'),
+    ItemTypes = require('./ItemTypes');
+
+var Image = React.createClass({
+  mixins: [DragDropMixin],
+  
+  configureDragDrop(registerType) {
+
+    // Specify all supported types by calling registerType(type, { dragSource?, dropTarget? })
+    registerType(ItemTypes.IMAGE, {
+
+      // dragSource, when specified, is { beginDrag(), canDrag()?, endDrag(didDrop)? }
+      dragSource: {
+
+        // beginDrag should return { item, dragOrigin?, dragPreview?, dragEffect? }
+        beginDrag() {
+          return {
+            item: this.props.image
+          };
+        }
+      }
+    });
+  },
+  
+  render() {
+
+    // {...this.dragSourceFor(ItemTypes.IMAGE)} will expand into
+    // { draggable: true, onDragStart: (handled by mixin), onDragEnd: (handled by mixin) }.
+
+    return (
+      <img src={this.props.image.url}
+           {...this.dragSourceFor(ItemTypes.IMAGE)} />
+    );
+  }
+);
+```
+
+By specifying `configureDragDrop`, we tell `DragDropMixin` the drag-drop behavior of this component. Both draggable and droppable components use the same mixin.
+
+Inside `configureDragDrop`, we need to call `registerType` for each of our custom `ItemTypes` that component supports. For example, there might be several representations of images in your app, and each would provide a `dragSource` for `ItemTypes.IMAGE`.
+
+A `dragSource` is just an object specifying how the drag source works. You must implement `beginDrag` to return `item` that represents the data you're dragging and, optionally, a few options that adjust the dragging UI. You can optionally  `canDrag` to forbid dragging, or `endDrag(didDrop)` to execute some logic when the drop has (or has not) occured. And you can share this logic between components by letting a shared mixins generate `dragSource` for them.
+
+Finally, you must use `{...this.dragSourceFor(itemType)}` on some (one or more) elements in `render` to attach drag handlers. This means you can have several “drag handles” in one element, and they may even correspond to different item types. (If you're not familiar with [JSX Spread Attributes syntax](https://gist.github.com/sebmarkbage/07bbe37bc42b6d4aef81), check it out).
+
+### Simple Drop Target
+
+Let's say we want `ImageBlock` to be a drop target for `IMAGE`s. It's pretty much the same, except that we need to give `registerType` a `dropTarget` implementation:
+
+```javascript
+var { DragDropMixin } = require('react-dnd'),
+    ItemTypes = require('./ItemTypes');
+
+var ImageBlock = React.createClass({
+  mixins: [DragDropMixin],
+  
+  configureDragDrop(registerType) {
+
+    registerType(ItemTypes.IMAGE, {
+
+      // dropTarget, when specified, is { acceptDrop(item)?, enter(item)?, over(item)?, leave(item)? }
+      dropTarget: {
+        acceptDrop(image) {
+          // Do something with image! for example,
+          DocumentActionCreators.setImage(this.props.blockId, image);
+        }
+      }
+    });
+  },
+  
+  render() {
+
+    // {...this.dropTargetFor(ItemTypes.IMAGE)} will expand into
+    // { onDragEnter: (handled by mixin), onDragOver: (handled by mixin), onDragLeave: (handled by mixin), onDrop: (handled by mixin) }.
+
+    return (
+      <div {...this.dropTargetFor(ItemTypes.IMAGE)}>
+        {this.props.image &&
+          <img src={this.props.image.url} />
+        }
+      </div>
+    );
+  }
+);
+```
+
+### Drag Source + Drop Target In One Component
+
+Say we now want the user to be able to *drag out* an image out of `ImageBlock`. We just need to add appropriate `dragSource` to it and a few handlers:
+
+```javascript
+var { DragDropMixin } = require('react-dnd'),
+    ItemTypes = require('./ItemTypes');
+
+var ImageBlock = React.createClass({
+  mixins: [DragDropMixin],
+  
+  configureDragDrop(registerType) {
+
+    registerType(ItemTypes.IMAGE, {
+
+      // Add a drag source that only works when ImageBlock has an image:
+      dragSource: {
+        canDrag() {
+          return !!this.props.image;
+        },
+        
+        beginDrag() {
+          return {
+            item: this.props.image
+          };
+        }
+      }
+  
+      dropTarget: {
+        acceptDrop(image) {
+          DocumentActionCreators.setImage(this.props.blockId, image);
+        }
+      }
+    });
+  },
+  
+  render() {
+
+    return (
+      <div {...this.dropTargetFor(ItemTypes.IMAGE)}>
+
+        {/* Note: Add dragSourceFor to a nested node */}
+        {this.props.image &&
+          <img src={this.props.image.url}
+               {...this.dragSourceFor(ItemTypes.IMAGE) />
+        }
+      </div>
+    );
+  }
+);
+```
+
+### What Else Is Possible?
+
+I have not covered everything but it's possible to use this API in a few more ways:
+
+* Specify `dragPreview` to be `Image` to use images as drag placeholders (use `ImagePreloaderMixin` to load them);
+* Say, we want to make `ImageBlock`s reorderable. We only need them to implement `dropTarget` and `dragSource` for `ItemTypes.BLOCK`.
+* Suppose we add other kinds of blocks. We can reuse their reordering logic by placing it in a mixin.
+* `dropTargetFor(...types)` allows to specify several types at once, so one drop zone can catch many different types.
+
 ## Examples
 
-This section is incomplete and will likely change as I work on this library.  
 If you want to play with this library, consider helping me [build a sample app for it](https://github.com/gaearon/react-dnd/issues/3).
-
-TODO: examples
-
 
 ## Known Issues
 
