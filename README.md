@@ -190,7 +190,7 @@ var ImageBlock = React.createClass({
     return (
       <div {...this.dropTargetFor(ItemTypes.IMAGE)}>
 
-        {/* Note: Add dragSourceFor to a nested node */}
+        {/* Add {...this.dragSourceFor} handlers to a nested node */}
         {this.props.image &&
           <img src={this.props.image.url}
                {...this.dragSourceFor(ItemTypes.IMAGE) />
