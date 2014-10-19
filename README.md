@@ -193,7 +193,7 @@ var ImageBlock = React.createClass({
         {/* Add {...this.dragSourceFor} handlers to a nested node */}
         {this.props.image &&
           <img src={this.props.image.url}
-               {...this.dragSourceFor(ItemTypes.IMAGE) />
+               {...this.dragSourceFor(ItemTypes.IMAGE)} />
         }
       </div>
     );
@@ -205,10 +205,61 @@ var ImageBlock = React.createClass({
 
 I have not covered everything but it's possible to use this API in a few more ways:
 
+* Use `getDragState(type)` and `getDropState(type)` to learn if dragging is active and use it to toggle CSS classes or attributes;
 * Specify `dragPreview` to be `Image` to use images as drag placeholders (use `ImagePreloaderMixin` to load them);
 * Say, we want to make `ImageBlock`s reorderable. We only need them to implement `dropTarget` and `dragSource` for `ItemTypes.BLOCK`.
 * Suppose we add other kinds of blocks. We can reuse their reordering logic by placing it in a mixin.
 * `dropTargetFor(...types)` allows to specify several types at once, so one drop zone can catch many different types.
+* When you need more fine-grained control, most methods are passed drag event that caused them as the last parameter.
+
+## API
+
+### `require('react-dnd').DragDropMixin`
+
+`configureDragDrop(registerType)`
+
+Gives you a chance to configure drag and drop on your component.  
+Components with `DragDropMixin` will have this method.
+
+`registerType(type, { dragSource?, dropTarget? })`
+
+Call this method to specify component behavior as drag source or drop target for given type.
+This method is passed as a parameter to `configureDragDrop`.
+
+`getDragState(type)`
+
+Returns `{ isDragging: bool }` describing whether a particular type is being dragged from this component's drag source. You may want to call this method from `render`, e.g. to hide an element that is being dragged.
+
+`getDropState(type)`
+
+Returns `{ isDragging: bool, isHovering: bool }` describing whether a particular type is being dragged or hovered, when it is compatible with this component's drop source. You may want to call this method from `render`, e.g. to highlight drop targets when they are comparible and when they are hovered.
+
+===================
+
+### Drag Source API
+
+Specifies drag behavior of a component in this object.
+
+* `beginDrag()` — return value must contain `item` with an object representing your data and may also contain `dragPreview: Image`, `dragOrigin: DragOrigins`.
+
+* `canDrag()` — optionally decide whether to allow dragging.
+
+* `endDrag(didDrop)` — optionally handle end of dragging operation.
+
+===================
+
+### Drop Target API
+
+Specifies drag behavior of a component in this object.
+
+* `enter(item)`, `leave(item)`, `over(item)` — optionally implement these to perform side effects (e.g. might use `over` for reordering items when they overlap). If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
+* `acceptDrop(item)` — optionally implement this method to perform some action when drop occurs.
+
+===================
+
+### `require('react-dnd').ImagePreloaderMixin`
+
+TODO: describe how to use it for preloading drag thumbnails
 
 ## Examples
 
