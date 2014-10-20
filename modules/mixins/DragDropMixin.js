@@ -23,10 +23,6 @@ function isSafari() {
   return !!window.safari;
 }
 
-function isSafari8OrNewer() {
-  return isSafari() && parseInt(navigator.appVersion.match(/Version\/(\d+)\./)[1], 10) >= 8;
-}
-
 function shouldUseDragPreview(dragPreview) {
   if (!dragPreview) {
     return false;
@@ -58,9 +54,9 @@ function getDragImageOffset(containerNode, dragPreview, dragAnchors, e) {
 
   // Work around @2x coordinate discrepancies in browsers
   if (isFirefox()) {
-    offsetX = e.layerX * window.devicePixelRatio;
-    offsetY = e.layerY * window.devicePixelRatio;
-  } else if (isSafari8OrNewer()) {
+    offsetX = e.layerX;
+    offsetY = e.layerY;
+  } else if (isSafari()) {
     previewHeight /= window.devicePixelRatio;
     previewWidth /= window.devicePixelRatio;
   }
@@ -88,7 +84,7 @@ function getDragImageOffset(containerNode, dragPreview, dragAnchors, e) {
   }
 
   // Work around Safari 8 positioning bug
-  if (isSafari8OrNewer()) {
+  if (isSafari()) {
     // We'll have to wait for @3x to see if this is entirely correct
     offsetY += (window.devicePixelRatio - 1) * previewHeight;
   }
@@ -105,7 +101,7 @@ function calculateDragPreviewSize(desiredSize) {
     height: desiredSize.height
   };
 
-  if (isFirefox() || isSafari8OrNewer()) {
+  if (isFirefox() || isSafari()) {
     size.width *= window.devicePixelRatio;
     size.height *= window.devicePixelRatio;
   }
