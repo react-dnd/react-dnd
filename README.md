@@ -268,10 +268,6 @@ TODO: describe how to use it for preloading drag thumbnails
 
 If you want to play with this library, consider helping me [build a sample app for it](https://github.com/gaearon/react-dnd/issues/3).
 
-## Known Issues
-
-* [Image previews seem to have incorrect offsets on Safari 8](https://github.com/gaearon/react-dnd/issues/1)
-
 ## Thanks
 
 This library is a React port of an API, parts of which were originally written by [Andrew Kuznetsov](http://github.com/cavinsmith/).
