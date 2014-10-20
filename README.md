@@ -79,7 +79,7 @@ var Image = React.createClass({
       // dragSource, when specified, is { beginDrag(), canDrag()?, endDrag(didDrop)? }
       dragSource: {
 
-        // beginDrag should return { item, dragOrigin?, dragPreview?, dragEffect? }
+        // beginDrag should return { item, dragAnchors?, dragPreview?, dragEffect? }
         beginDrag() {
           return {
             item: this.props.image
@@ -240,9 +240,9 @@ Returns `{ isDragging: bool, isHovering: bool }` describing whether a particular
 
 ### Drag Source API
 
-Specifies drag behavior of a component in this object.
+Implement to specify drag behavior of a component.
 
-* `beginDrag()` — return value must contain `item` with an object representing your data and may also contain `dragPreview: Image`, `dragOrigin: DragOrigins`.
+* `beginDrag()` — return value must contain `item` with an object representing your data and may also contain `dragPreview: Image`, `dragAnchors`.
 
 * `canDrag()` — optionally decide whether to allow dragging.
 
@@ -252,7 +252,7 @@ Specifies drag behavior of a component in this object.
 
 ### Drop Target API
 
-Specifies drag behavior of a component in this object.
+Implement to specify drop behavior of a component.
 
 * `enter(item)`, `leave(item)`, `over(item)` — optionally implement these to perform side effects (e.g. might use `over` for reordering items when they overlap). If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
 * `acceptDrop(item)` — optionally implement this method to perform some action when drop occurs.

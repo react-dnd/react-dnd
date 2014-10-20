@@ -1,8 +1,9 @@
 'use strict';
 
 var DragDropActionCreators = require('../actions/DragDropActionCreators'),
-    DragOrigins = require('../constants/DragOrigins'),
     DragDropStore = require('../stores/DragDropStore'),
+    HorizontalDragAnchors = require('../constants/HorizontalDragAnchors'),
+    VerticalDragAnchors = require('../constants/VerticalDragAnchors'),
     bindAll = require('../utils/bindAll'),
     invariant = require('react/lib/invariant'),
     merge = require('react/lib/merge'),
@@ -22,6 +23,10 @@ function isSafari() {
   return !!window.safari;
 }
 
+function isSafari8OrNewer() {
+  return isSafari() && parseInt(navigator.appVersion.match(/Version\/(\d+)\./)[1], 10) >= 8;
+}
+
 function shouldUseDragPreview(dragPreview) {
   if (!dragPreview) {
     return false;
@@ -35,32 +40,58 @@ function shouldUseDragPreview(dragPreview) {
   return true;
 }
 
-function getDragImageOffset(dragPreview, dragOrigin, e) {
-  var containerWidth = e.target.offsetWidth,
-      containerHeight = e.target.offsetHeight,
+/**
+ * Returns offset to be used as arguments for `dataTransfer.setDragImage(dragImage, x, y)`.
+ * Attempts to work around browser differences, especially on high-DPI screens.
+ */
+function getDragImageOffset(containerNode, dragPreview, dragAnchors, e) {
+  dragAnchors = dragAnchors || {};
+
+  var containerWidth = containerNode.offsetWidth,
+      containerHeight = containerNode.offsetHeight,
       isImage = dragPreview instanceof Image,
       previewWidth = isImage ? dragPreview.width : containerWidth,
       previewHeight = isImage ? dragPreview.height : containerHeight,
-      offsetX = e.offsetX,
-      offsetY = e.offsetY;
+      horizontalAnchor = dragAnchors.horizontal || HorizontalDragAnchors.CENTER,
+      verticalAnchor = dragAnchors.vertical || VerticalDragAnchors.CENTER,
+      { offsetX, offsetY } = e;
 
+  // Work around @2x coordinate discrepancies in browsers
   if (isFirefox()) {
     offsetX = e.layerX * window.devicePixelRatio;
     offsetY = e.layerY * window.devicePixelRatio;
+  } else if (isSafari8OrNewer()) {
+    previewHeight /= window.devicePixelRatio;
+    previewWidth /= window.devicePixelRatio;
   }
 
-  switch (dragOrigin) {
-  case DragOrigins.TOP:
+  switch (horizontalAnchor) {
+  case HorizontalDragAnchors.LEFT:
     break;
-  case DragOrigins.CENTER:
+  case HorizontalDragAnchors.CENTER:
     offsetX *= (previewWidth / containerWidth);
+    break;
+  case HorizontalDragAnchors.RIGHT:
+    offsetX = previewWidth - previewWidth * (1 - offsetX / containerWidth);
+    break;
+  }
+
+  switch (verticalAnchor) {
+  case VerticalDragAnchors.TOP:
+    break;
+  case VerticalDragAnchors.CENTER:
     offsetY *= (previewHeight / containerHeight);
     break;
-  default:
-    throw new Error('Unknown drag origin: ' + dragOrigin);
+  case VerticalDragAnchors.BOTTOM:
+    offsetY = previewHeight - previewHeight * (1 - offsetY / containerHeight);
+    break;
   }
 
-  // TODO: Safari 8
+  // Work around Safari 8 positioning bug
+  if (isSafari8OrNewer()) {
+    // We'll have to wait for @3x to see if this is entirely correct
+    offsetY += (window.devicePixelRatio - 1) * previewHeight;
+  }
 
   return {
     x: offsetX,
@@ -74,19 +105,17 @@ function calculateDragPreviewSize(desiredSize) {
     height: desiredSize.height
   };
 
-  if (isFirefox()) {
+  if (isFirefox() || isSafari8OrNewer()) {
     size.width *= window.devicePixelRatio;
     size.height *= window.devicePixelRatio;
   }
 
-  // TODO: Safari 8
-
   return size;
 }
 
-function configureDataTransfer(nativeEvent, dragOptions) {
+function configureDataTransfer(containerNode, nativeEvent, dragOptions) {
   var { dataTransfer } = nativeEvent,
-      { dragPreview, dragOrigin, effectAllowed } = dragOptions;
+      { dragPreview, effectAllowed, dragAnchors } = dragOptions;
 
   try {
     // Firefox won't drag without setting data
@@ -96,7 +125,7 @@ function configureDataTransfer(nativeEvent, dragOptions) {
   }
 
   if (shouldUseDragPreview(dragPreview) && dataTransfer.setDragImage) {
-    var dragOffset = getDragImageOffset(dragPreview, dragOrigin || DragOrigins.CENTER, nativeEvent);
+    var dragOffset = getDragImageOffset(containerNode, dragPreview, dragAnchors, nativeEvent);
     dataTransfer.setDragImage(dragPreview, dragOffset.x, dragOffset.y);
   }
 
@@ -198,7 +227,7 @@ var DragDropMixin = {
     var dragOptions = beginDrag(e),
         { item } = dragOptions;
 
-    configureDataTransfer(e.nativeEvent, dragOptions);
+    configureDataTransfer(this.getDOMNode(), e.nativeEvent, dragOptions);
     invariant(isObject(item), 'Expected return value of beginDrag to contain "item" object');
 
     this.setState({
