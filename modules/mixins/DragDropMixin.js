@@ -351,11 +351,9 @@ var DragDropMixin = {
       hasDragEntered: false
     });
 
-    if (acceptDrop) {
-      acceptDrop(item, e);
+    if (!acceptDrop || acceptDrop(item, e) !== false) {
+      DragDropActionCreators.recordDrop();
     }
-
-    DragDropActionCreators.recordDrop();
   }
 };
 
