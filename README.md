@@ -44,7 +44,11 @@ Key requirements:
 
 Hopefully the resulting API reflects that.
 
-## Usage
+## Examples
+
+>**While I'm working on better examples, [check out this fiddle](https://github.com/gaearon/react-dnd/issues/5#issuecomment-59856094).** It shows the most basic usage.  
+>If you have specific uses of drag and drop in mind, [let me know so I can include them in examples](https://github.com/gaearon/react-dnd/issues/3).
+
 
 ### Simple Drag Source
 
@@ -266,9 +270,6 @@ Implement to specify drop behavior of a component.
 
 TODO: describe how to use it for preloading drag thumbnails
 
-## Examples
-
-If you want to play with this library, consider helping me [build a sample app for it](https://github.com/gaearon/react-dnd/issues/3).
 
 ## Thanks
 
