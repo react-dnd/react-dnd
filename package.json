@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "HTML5 drag and drop mixin for React with full DOM control",
   "main": "modules/index.js",
   "repository": {
