@@ -138,6 +138,30 @@ var DragDropMixin = {
     return merge(state, this.getStateFromDragDropStore());
   },
 
+  getActiveDropTargetType() {
+    var { draggedItemType, draggedItem, ownDraggedItemType } = this.state,
+        dropTarget = this._dropTargets[draggedItemType];
+
+    if (!dropTarget) {
+      return null;
+    }
+
+    if (draggedItemType === ownDraggedItemType) {
+      return null;
+    }
+
+    var { canDrop } = dropTarget;
+    if (!canDrop || canDrop(draggedItem)) {
+      return draggedItemType;
+    } else {
+      return null;
+    }
+  },
+
+  isAnyDropTargetActive(types) {
+    return types.indexOf(this.getActiveDropTargetType()) > -1;
+  },
+
   getStateFromDragDropStore() {
     return {
       draggedItem: DragDropStore.getDraggedItem(),
@@ -156,13 +180,12 @@ var DragDropMixin = {
   getDropState(type) {
     invariant(this._dropTargets[type], 'No drop target for %s', type);
 
-    var isDragging = this.state.draggedItemType === type,
-        acceptsType = this._dropTargets.hasOwnProperty(type) && type !== this.state.ownDraggedItemType,
+    var isDragging = this.getActiveDropTargetType() === type,
         hasDragEntered = this.state.hasDragEntered;
 
     return {
-      isDragging: isDragging && acceptsType,
-      isHovering: isDragging && acceptsType && hasDragEntered
+      isDragging: isDragging,
+      isHovering: isDragging && hasDragEntered
     };
   },
 
@@ -262,15 +285,8 @@ var DragDropMixin = {
     };
   },
 
-  isDropTargetActive(types) {
-    var { draggedItemType, ownDraggedItemType } = this.state;
-
-    return types.indexOf(draggedItemType) > -1 &&
-           draggedItemType !== ownDraggedItemType;
-  },
-
   handleDragOver(types, e) {
-    if (!this.isDropTargetActive(types)) {
+    if (!this.isAnyDropTargetActive(types)) {
       return;
     }
 
@@ -283,7 +299,7 @@ var DragDropMixin = {
   },
 
   handleDragEnter(types, e) {
-    if (!this.isDropTargetActive(types)) {
+    if (!this.isAnyDropTargetActive(types)) {
       return;
     }
 
@@ -302,7 +318,7 @@ var DragDropMixin = {
   },
 
   handleDragLeave(types, e) {
-    if (!this.isDropTargetActive(types)) {
+    if (!this.isAnyDropTargetActive(types)) {
       return;
     }
 
@@ -321,7 +337,7 @@ var DragDropMixin = {
   },
 
   handleDrop(types, e) {
-    if (!this.isDropTargetActive(types)) {
+    if (!this.isAnyDropTargetActive(types)) {
       return;
     }
 

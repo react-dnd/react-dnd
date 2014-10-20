@@ -125,7 +125,7 @@ var ImageBlock = React.createClass({
 
     registerType(ItemTypes.IMAGE, {
 
-      // dropTarget, when specified, is { acceptDrop(item)?, enter(item)?, over(item)?, leave(item)? }
+      // dropTarget, when specified, is { acceptDrop(item)?, canDrop(item)? enter(item)?, over(item)?, leave(item)? }
       dropTarget: {
         acceptDrop(image) {
           // Do something with image! for example,
@@ -255,6 +255,7 @@ Implement to specify drag behavior of a component.
 Implement to specify drop behavior of a component.
 
 * `enter(item)`, `leave(item)`, `over(item)` — optionally implement these to perform side effects (e.g. might use `over` for reordering items when they overlap). If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
+* `canDrop(item)` — optionally implement this method to reject some of the items
 * `acceptDrop(item)` — optionally implement this method to perform some action when drop occurs.
 
 ===================
