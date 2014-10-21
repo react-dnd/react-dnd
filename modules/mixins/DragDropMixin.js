@@ -7,9 +7,15 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     bindAll = require('../utils/bindAll'),
     invariant = require('react/lib/invariant'),
     merge = require('react/lib/merge'),
+    shallowEqual = require('react/lib/shallowEqual'),
     union = require('lodash-node/modern/arrays/union'),
     without = require('lodash-node/modern/arrays/without'),
     isObject = require('lodash-node/modern/objects/isObject');
+
+// FIXME: this mixin is getting too fat.
+
+// Move utilities to ../utils and separate HTML5 "backend" from the
+// common logic so we can add touchmove/translateY backend and whatnot.
 
 function endsWith(str, suffix) {
   return str.indexOf(suffix, str.length - suffix.length) !== -1;
@@ -21,6 +27,10 @@ function isFirefox() {
 
 function isSafari() {
   return !!window.safari;
+}
+
+function isWebkit() {
+  return 'WebkitAppearance' in document.documentElement.style;
 }
 
 function shouldUseDragPreview(dragPreview) {
@@ -128,6 +138,62 @@ function configureDataTransfer(containerNode, nativeEvent, dragOptions) {
   dataTransfer.effectAllowed = effectAllowed;
 }
 
+
+/**
+ * Webkit animates items to their initial positions if drop wasn't handled:
+ * https://github.com/gaearon/react-dnd/issues/8
+ *
+ * This can be a pain if dragged item's DOM node was moved itself.
+ *
+ * We have to store these globally so we can check if dragged item's
+ * client rect has changed after drag started. We do this in window's
+ * dragover handler, and cancel the drag animation so it doesn't animate
+ * to the wrong (initial) position.
+ */
+var _currentDragTarget,
+    _initialDragTargetRect,
+    _dragTargetRectDidChange;
+
+function getElementRect(el) {
+  var rect = el.getBoundingClientRect();
+  // Copy so object doesn't get reused
+  return { top: rect.top, left: rect.left, width: rect.width, height: rect.height };
+}
+
+function setCurrentDragTarget(dragTarget) {
+  _currentDragTarget = dragTarget;
+  _initialDragTargetRect = getElementRect(dragTarget);
+  _dragTargetRectDidChange = false;
+}
+
+function checkIfCurrentDragTargetRectChanged() {
+  if (!_dragTargetRectDidChange) {
+    var currentRect = getElementRect(_currentDragTarget);
+    _dragTargetRectDidChange = !shallowEqual(_initialDragTargetRect, currentRect);
+  }
+
+  return _dragTargetRectDidChange;
+}
+
+function resetCurrentDragTarget() {
+  _currentDragTarget = null;
+  _initialDragTargetRect = null;
+  _dragTargetRectDidChange = false;
+}
+
+if (isWebkit()) {
+  window.addEventListener('dragover', function (e) {
+    if (checkIfCurrentDragTargetRectChanged()) {
+      // Prevent animating to incorrect position
+      e.preventDefault();
+    }
+  });
+}
+
+
+/**
+ * Use this mixin to define drag sources and drop targets.
+ */
 var DragDropMixin = {
   getInitialState() {
     var state = {
@@ -243,6 +309,8 @@ var DragDropMixin = {
       return;
     }
 
+    setCurrentDragTarget(e.target);
+
     var dragOptions = beginDrag(e),
         { item } = dragOptions;
 
@@ -257,6 +325,8 @@ var DragDropMixin = {
   },
 
   handleDragEnd(type, e) {
+    resetCurrentDragTarget();
+
     this.setState({
       ownDraggedItemType: null
     });
