@@ -268,6 +268,22 @@ Implement to specify drop behavior of a component.
 
 ### `require('react-dnd').ImagePreloaderMixin`
 
+Used to preload drag thumbnails images. In your component do this -
+
+```javascript
+mixins : [DragDropMixin,ImagePreloaderMixin],
+// This method should return array of image urls for preloading
+getImageUrlsToPreload(){
+    return ['some-img-url1','some-img-url2'];
+},
+
+```
+
+Above code will load the images after componentDidMount is executed.
+
+===================
+
+
 TODO: describe how to use it for preloading drag thumbnails
 
 
