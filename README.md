@@ -280,17 +280,22 @@ getImageUrlsToPreload() {
 }
 
 // You can now use `this.hasPreloadedImage(url)` and `this.getPreloadedImage(url)` in your `dragSource`:
-// ...
-// canDrag() {
-//   return this.hasPreloadedImage('some-img-url1');
-// },
-//
-// beginDrag() {
-//   return {
-//     item: ...,
-//     dragPreivew: this.getPreloadedImage('some-img-url1');
-//   };
-// }
+configureDragDrop(registerType) {
+  registerType(ItemTypes.IMAGE, {
+    dragSource: {
+      canDrag() {
+        return this.hasPreloadedImage('some-img-url1');
+      },
+
+      beginDrag() {
+        return {
+          item: ...,
+          dragPreivew: this.getPreloadedImage('some-img-url1');
+        };
+      }
+    }
+  });
+}
 ```
 
 Above code will load the images after `componentDidMount` is executed, and cache them until component unmounted.  
@@ -299,11 +304,6 @@ In `componentDidUpdate`, mixin will check if `getImageUrlsToPreload` has changed
 Note that, for best results, you want to use `this.calculateDragPreviewSize({ width, height }: desiredSize)`.  
 It will return the exact size of image you need to download, considering browser differences in handling Retina screens.  
 Of course you can only use this if you have some kind of custom image resizer.
-
-===================
-
-
-TODO: describe how to use it for preloading drag thumbnails
 
 
 ## Thanks
