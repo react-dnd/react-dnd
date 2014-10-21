@@ -268,18 +268,37 @@ Implement to specify drop behavior of a component.
 
 ### `require('react-dnd').ImagePreloaderMixin`
 
-Used to preload drag thumbnails images. In your component do this -
+You can optionally specify images to be used as drag thumbnails.
+Browsers can't do this reliably until image is loaded, so `ImagePreloaderMixin` provides an API to do just that:
 
 ```javascript
-mixins : [DragDropMixin,ImagePreloaderMixin],
-// This method should return array of image urls for preloading
-getImageUrlsToPreload(){
-    return ['some-img-url1','some-img-url2'];
-},
+mixins : [DragDropMixin, ImagePreloaderMixin],
 
+// This method should return array of image urls for preloading
+getImageUrlsToPreload() {
+  return ['some-img-url1', 'some-img-url2'];
+}
+
+// You can now use `this.hasPreloadedImage(url)` and `this.getPreloadedImage(url)` in your `dragSource`:
+// ...
+// canDrag() {
+//   return this.hasPreloadedImage('some-img-url1');
+// },
+//
+// beginDrag() {
+//   return {
+//     item: ...,
+//     dragPreivew: this.getPreloadedImage('some-img-url1');
+//   };
+// }
 ```
 
-Above code will load the images after componentDidMount is executed.
+Above code will load the images after `componentDidMount` is executed, and cache them until component unmounted.  
+In `componentDidUpdate`, mixin will check if `getImageUrlsToPreload` has changed, and load images again if needed.
+
+Note that, for best results, you want to use `this.calculateDragPreviewSize({ width, height }: desiredSize)`.  
+It will return the exact size of image you need to download, considering browser differences in handling Retina screens.  
+Of course you can only use this if you have some kind of custom image resizer.
 
 ===================
 
