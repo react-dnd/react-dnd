@@ -152,6 +152,7 @@ function configureDataTransfer(containerNode, nativeEvent, dragOptions) {
  */
 var _currentDragTarget,
     _initialDragTargetRect,
+    _handleCurrentDragEnd,
     _dragTargetRectDidChange;
 
 function getElementRect(el) {
@@ -160,10 +161,11 @@ function getElementRect(el) {
   return { top: rect.top, left: rect.left, width: rect.width, height: rect.height };
 }
 
-function setCurrentDragTarget(dragTarget) {
+function setGlobalDragState(dragTarget, handleDragEnd) {
   _currentDragTarget = dragTarget;
   _initialDragTargetRect = getElementRect(dragTarget);
   _dragTargetRectDidChange = false;
+  _handleCurrentDragEnd = handleDragEnd;
 }
 
 function checkIfCurrentDragTargetRectChanged() {
@@ -175,10 +177,11 @@ function checkIfCurrentDragTargetRectChanged() {
   return _dragTargetRectDidChange;
 }
 
-function resetCurrentDragTarget() {
+function resetGlobalDragState() {
   _currentDragTarget = null;
   _initialDragTargetRect = null;
   _dragTargetRectDidChange = false;
+  _handleCurrentDragEnd = null;
 }
 
 if (isWebkit()) {
@@ -189,6 +192,41 @@ if (isWebkit()) {
     }
   });
 }
+
+/**
+ * If source node is removed during drag, its `dragend` won't fire.
+ * We will attempt to fire it ourselves when global `drop` occurs.
+ */
+function triggerDragEndIfDragSourceWasRemovedFromDOM() {
+  if (_handleCurrentDragEnd &&
+      _currentDragTarget &&
+      !document.contains(_currentDragTarget)) {
+
+    _handleCurrentDragEnd();
+  }
+}
+
+if (!isFirefox()) {
+  window.addEventListener('drop', triggerDragEndIfDragSourceWasRemovedFromDOM);
+} else {
+
+  // Firefox won't trigger a global `drop` if source node was removed.
+  // It won't trigger `mouseup` either. It *will* however trigger `dragover`
+  // continually during drag, so our strategy is to simply wait until `dragover`
+  // has stopped firing.
+
+  var _lastDragSourceCheckTimeout = null;
+
+  window.addEventListener('dragover', function () {
+    clearTimeout(_lastDragSourceCheckTimeout);
+
+    _lastDragSourceCheckTimeout = setTimeout(
+      triggerDragEndIfDragSourceWasRemovedFromDOM,
+      140 // 70 seems enough on OS X with FF33, double it to be sure
+    );
+  });
+}
+
 
 
 /**
@@ -309,7 +347,12 @@ var DragDropMixin = {
       return;
     }
 
-    setCurrentDragTarget(e.target);
+    // Some browser-specific fixes rely on knowing
+    // current dragged element and its dragend handler.
+    setGlobalDragState(
+      e.target,
+      this.handleDragEnd.bind(this, type, null)
+    );
 
     var dragOptions = beginDrag(e),
         { item } = dragOptions;
@@ -325,11 +368,20 @@ var DragDropMixin = {
   },
 
   handleDragEnd(type, e) {
-    resetCurrentDragTarget();
 
-    this.setState({
-      ownDraggedItemType: null
-    });
+    // Note: this method may be invoked even *after* component was unmounted
+    // This happens if source node was removed from DOM while dragging.
+
+    // We mustn't assume being mounted, but still need to gracefully reset state.
+    // See `triggerDragEndIfDragSourceWasRemovedFromDOM` above.
+
+    resetGlobalDragState();
+
+    if (this.isMounted()) {
+      this.setState({
+        ownDraggedItemType: null
+      });
+    }
 
     var { endDrag } = this._dragSources[type],
         didDrop = DragDropStore.didDrop();
