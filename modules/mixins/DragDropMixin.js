@@ -186,7 +186,7 @@ function resetGlobalDragState() {
 
 if (isWebkit()) {
   window.addEventListener('dragover', function (e) {
-    if (checkIfCurrentDragTargetRectChanged()) {
+    if (_currentDragTarget && checkIfCurrentDragTargetRectChanged()) {
       // Prevent animating to incorrect position
       e.preventDefault();
     }
@@ -198,8 +198,8 @@ if (isWebkit()) {
  * We will attempt to fire it ourselves when global `drop` occurs.
  */
 function triggerDragEndIfDragSourceWasRemovedFromDOM() {
-  if (_handleCurrentDragEnd &&
-      _currentDragTarget &&
+  if (_currentDragTarget &&
+      _handleCurrentDragEnd &&
       !document.contains(_currentDragTarget)) {
 
     _handleCurrentDragEnd();
@@ -218,6 +218,10 @@ if (!isFirefox()) {
   var _lastDragSourceCheckTimeout = null;
 
   window.addEventListener('dragover', function () {
+    if (!_currentDragTarget) {
+      return;
+    }
+
     clearTimeout(_lastDragSourceCheckTimeout);
 
     _lastDragSourceCheckTimeout = setTimeout(
