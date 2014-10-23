@@ -449,6 +449,7 @@ var DragDropMixin = {
     }
 
     this._dragEntered = without(this._dragEntered, e.target);
+    this._dragEntered = this._dragEntered.filter(node => document.contains(node));
 
     if (!this._dragEntered.length) {
       this.setState({
