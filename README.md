@@ -11,6 +11,7 @@ Check these first and see if they fit your use case.
 
 * [react-draggable](https://github.com/mzabriskie/react-draggable) by [Matt Zabriskie](https://github.com/mzabriskie)
 * [react-sortable](https://github.com/danielstocks/react-sortable) by [Daniel Stocks](https://github.com/danielstocks)
+* [react-dropzone](https://github.com/paramaggarwal/react-dropzone) by [Param Aggarwal](https://github.com/paramaggarwal)
 
 If they don't, read on.
 
