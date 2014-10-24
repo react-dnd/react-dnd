@@ -1,5 +1,7 @@
 'use strict';
 
+var calculateDragPreviewSize = require('../utils/calculateDragPreviewSize');
+
 var TRANSPARENT_PIXEL_SRC = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
 var ImagePreloaderMixin = {
@@ -55,7 +57,9 @@ var ImagePreloaderMixin = {
     img.src = url;
 
     this._cachedImages[url] = img;
-  }
+  },
+
+  calculateDragPreviewSize: calculateDragPreviewSize
 };
 
 module.exports = ImagePreloaderMixin;
