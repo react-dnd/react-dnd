@@ -36,6 +36,7 @@ Key requirements:
 * Impose as little structure as possible on consuming components;
 * Use HTML5 drag and drop as primary backend but make it possible to add different backends in the future;
 * Like original HTML5 API, emphasize dragging data and not just “draggable views”;
+* Support dropping files;
 * Hide [HTML5 API quirks](http://www.quirksmode.org/blog/archives/2009/09/the_html5_drag.html) from the consuming code;
 * Different components may be “drag sources” or “drop targets” for different kinds of data;
 * Allow one component to contain several drag sources and drop targets when needed;
@@ -181,7 +182,7 @@ var ImageBlock = React.createClass({
             item: this.props.image
           };
         }
-      }
+      },
   
       dropTarget: {
         acceptDrop(image) {
@@ -200,6 +201,44 @@ var ImageBlock = React.createClass({
         {this.props.image &&
           <img src={this.props.image.url}
                {...this.dragSourceFor(ItemTypes.IMAGE)} />
+        }
+      </div>
+    );
+  }
+);
+```
+
+### Dropping Files from the Hard Drive
+
+The library provides one built-in item type: `NativeDragItemTypes.FILE`. You can't set up a drag source for it, but you can set up as many drop targets as you want with the same API as normal drop targets. The only way in which file drop target differs  from a normal one is that `item` parameter will always be `null` in `enter`, `over` and `leave`. In `drop`, its `files` property will contain a JS array of filenames as given by browser.
+
+```javascript
+var { DragDropMixin, NativeDragItemTypes } = require('react-dnd');
+
+var ImageUploader = React.createClass({
+  mixins: [DragDropMixin],
+  
+  configureDragDrop(registerType) {
+    registerType(NativeDragItemTypes.FILE, {
+      dropTarget: {
+        acceptDrop(item) {
+          // Do something with files
+          console.log(item.files);
+        }
+      }
+    });
+  },
+  
+  render() {
+    var fileDropState = this.getDropState(NativeDragItemTypes.FILE);
+
+    return (
+      <div {...this.dropTargetFor(NativeDragItemTypes.FILE)}>
+        {fileDropState.isDragging && !fileDropState.isHovering &&
+          <p>Drag file here</p>
+        }
+        {fileDropState.isHovering &&
+          <p>Release to upload a file</p>
         }
       </div>
     );
@@ -302,6 +341,9 @@ Above code will load the images after `componentDidMount` is executed, and cache
 
 Note that, for best results, you want to use `this.calculateDragPreviewSize({ width, height }: desiredSize)`. It will return the exact size of image you need to download, considering browser differences in handling Retina screens. Of course you can only use this if you have some kind of custom image resizer.
 
+### `require('react-dnd').NativeDragItemTypes`
+
+Provides a single constant, `NativeDragItemTypes.FILE`, that you can use as an item type for file drop targets.
 
 ## Thanks
 
