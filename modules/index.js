@@ -5,5 +5,6 @@ module.exports = {
   ImagePreloaderMixin: require('./mixins/ImagePreloaderMixin'),
   HorizontalDragAnchors: require('./constants/HorizontalDragAnchors'),
   VerticalDragAnchors: require('./constants/VerticalDragAnchors'),
-  NativeDragItemTypes: require('./constants/NativeDragItemTypes')
+  NativeDragItemTypes: require('./constants/NativeDragItemTypes'),
+  DragDropEffects: require('./constants/DragDropEffects')
 };
