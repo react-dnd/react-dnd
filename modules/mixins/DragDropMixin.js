@@ -160,23 +160,24 @@ var DragDropMixin = {
   },
 
   handleDragEnd(type, e) {
-
-    // Note: this method may be invoked even *after* component was unmounted
-    // This happens if source node was removed from DOM while dragging.
-    // We mustn't assume being mounted, but still need to gracefully reset state.
-
     NativeDragDropSupport.handleDragEnd();
-
-    if (this.isMounted()) {
-      this.setState({
-        ownDraggedItemType: null
-      });
-    }
 
     var { endDrag } = this._dragSources[type],
         didDrop = DragDropStore.didDrop();
 
     DragDropActionCreators.endDragging();
+
+    if (!this.isMounted()) {
+
+      // Note: this method may be invoked even *after* component was unmounted
+      // This happens if source node was removed from DOM while dragging.
+
+      return;
+    }
+
+    this.setState({
+      ownDraggedItemType: null
+    });
 
     if (endDrag) {
       endDrag(didDrop, e);
