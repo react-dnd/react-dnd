@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial;
+}
+
+h1, h2, h3 {
+  font-weight: 300;
+}
+
+hr {
+  border-top: solid #ddd 1px;
+  border-bottom: none;
+  margin: 2em 0;
+}
+
+a {
+  color: hsl(200, 50%, 50%);
+}
+
+a.active {
+  color: hsl(20, 50%, 50%);
+}
+
+p {
+  max-width: 50em;
+}
+
+[draggable] {
+  cursor: move;
+}
