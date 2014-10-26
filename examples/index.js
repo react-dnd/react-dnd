@@ -29,7 +29,7 @@ var App = React.createClass({
 });
 
 var routes = (
-  <Routes location='history'>
+  <Routes location={process.env.NODE_ENV === 'production' ? 'hash' : 'history'}>
     <Route handler={App}>
       <Route name='drag-around-naive' path='drag-around-naive' handler={DragAroundNaive} />
       <Route name='drag-around-custom' path='drag-around-custom' handler={DragAroundCustom} />
