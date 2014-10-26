@@ -15,6 +15,20 @@ Check these first and see if they fit your use case.
 
 If they don't, read on.
 
+## Examples
+
+After cloning the project, run:
+
+```
+npm install
+npm run
+open http://localhost:8080/
+```
+
+This will run the included examples.  
+Or you can **[view them in browser](http://gaearon.github.io/react-dnd/)** (and see their **[source code](https://github.com/gaearon/react-dnd/tree/master/examples)**).
+
+
 ## Installation
 
 ```
@@ -46,17 +60,7 @@ Key requirements:
 
 Hopefully the resulting API reflects that.
 
-## Examples
-
-After cloning the project, run:
-
-```
-npm install
-npm run
-open http://localhost:8080/
-```
-
-This will run the included examples.
+## Snippets
 
 ### Simple Drag Source
 
