@@ -48,9 +48,15 @@ Hopefully the resulting API reflects that.
 
 ## Examples
 
->**While I'm working on better examples, [check out this fiddle](https://github.com/gaearon/react-dnd/issues/5#issuecomment-59856094).** It shows the most basic usage.  
->If you have specific uses of drag and drop in mind, [let me know so I can include them in examples](https://github.com/gaearon/react-dnd/issues/3).
+After cloning the project, run:
 
+```
+npm install
+npm run
+open http://localhost:8080/
+```
+
+This will run the included examples.
 
 ### Simple Drag Source
 

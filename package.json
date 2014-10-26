@@ -3,6 +3,9 @@
   "version": "0.2.0",
   "description": "HTML5 drag and drop mixin for React with full DOM control",
   "main": "modules/index.js",
+  "scripts": {
+    "start": "cd examples && node server.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gaearon/react-dnd.git"
@@ -34,8 +37,12 @@
     "react": ">=0.11.0"
   },
   "devDependencies": {
+    "jsx-loader": "0.11.2",
+    "path": "0.4.9",
     "react": "0.11.2",
-    "webpack": "^1.4.8",
-    "jsx-loader": "0.11.2"
+    "react-router": "0.9.4",
+    "request": "2.46.0",
+    "webpack": "1.4.8",
+    "webpack-dev-server": "1.6.5"
   }
 }
