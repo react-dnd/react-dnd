@@ -10,7 +10,8 @@ var React = require('react'),
     DragAroundNaive = require('./_drag-around-naive/index'),
     DragAroundCustom = require('./_drag-around-custom/index'),
     DustbinSimple = require('./_dustbin-simple'),
-    DustbinInteresting = require('./_dustbin-interesting');
+    DustbinInteresting = require('./_dustbin-interesting'),
+    SortableSimple = require('./_sortable-simple');
 
 var App = React.createClass({
   render() {
@@ -20,6 +21,7 @@ var App = React.createClass({
         <ul>
           <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>)</li>
           <li>Drag Around (<Link to='drag-around-naive'>naive</Link>, <Link to='drag-around-custom'>custom</Link>)</li>
+          <li>Sortable (<Link to='sortable-simple'>simple</Link>, more coming...)</li>
         </ul>
         <hr />
         <this.props.activeRouteHandler />
@@ -35,6 +37,7 @@ var routes = (
       <Route name='drag-around-custom' path='drag-around-custom' handler={DragAroundCustom} />
       <Route name='dustbin-simple' path='dustbin-simple' handler={DustbinSimple} />
       <Route name='dustbin-interesting' path='dustbin-interesting' handler={DustbinInteresting} />
+      <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
 
       <Redirect from='/' to='dustbin-simple' />
     </Route>
