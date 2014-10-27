@@ -350,7 +350,7 @@ configureDragDrop(registerType) {
 
 Above code will load the images after `componentDidMount` is executed, and cache them until component unmounted. In `componentDidUpdate`, mixin will check if `getImageUrlsToPreload` has changed, and load images again if needed.
 
-Note that, for best results, you want to use `this.calculateDragPreviewSize({ width, height }: desiredSize)`. It will return the exact size of image you need to download, considering browser differences in handling Retina screens. Of course you can only use this if you have some kind of custom image resizer.
+Note that, for best results, you want to use `this.getDragImageScale()`. It will return correct scale to download for your images, considering browser differences in handling Retina screens (should either return `1` or `window.devicePixelRatio`). You can either use it with a custom server image resizer, or to choose between normal and `@2x` versions of predefined images.
 
 ### `require('react-dnd').NativeDragItemTypes`
 
