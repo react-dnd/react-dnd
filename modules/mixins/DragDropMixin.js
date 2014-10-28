@@ -13,6 +13,42 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     without = require('lodash-node/modern/arrays/without'),
     isObject = require('lodash-node/modern/objects/isObject');
 
+function checkValidType(component, type) {
+  invariant(
+    type && typeof type === 'string',
+    'Expected item type to be a non-empty string. See %s',
+    component.constructor.displayName
+  );
+}
+
+function checkDragSourceDefined(component, type) {
+  var displayName = component.constructor.displayName;
+
+  invariant(
+    component._dragSources[type],
+    'There is no drag source for "%s" registered in %s. ' +
+    'Have you forgotten to register it? ' +
+    'See configureDragDrop in %s',
+    type,
+    displayName,
+    displayName
+  );
+}
+
+function checkDropTargetDefined(component, type) {
+  var displayName = component.constructor.displayName;
+
+  invariant(
+    component._dropTargets[type],
+    'There is no drop target for "%s" registered in %s. ' +
+    'Have you forgotten to register it? ' +
+    'See configureDragDrop in %s',
+    type,
+    displayName,
+    displayName
+  );
+}
+
 /**
  * Use this mixin to define drag sources and drop targets.
  */
@@ -58,7 +94,8 @@ var DragDropMixin = {
   },
 
   getDragState(type) {
-    invariant(this._dragSources[type], 'No drag source for %s', type);
+    checkValidType(this, type);
+    checkDragSourceDefined(this, type);
 
     return {
       isDragging: this.state.ownDraggedItemType === type
@@ -66,7 +103,8 @@ var DragDropMixin = {
   },
 
   getDropState(type) {
-    invariant(this._dropTargets[type], 'No drop target for %s', type);
+    checkValidType(this, type);
+    checkDropTargetDefined(this, type);
 
     var isDragging = this.getActiveDropTargetType() === type,
         hasDragEntered = this.state.hasDragEntered;
@@ -95,15 +133,29 @@ var DragDropMixin = {
   },
 
   registerDragDropItemTypeHandlers(type, handlers) {
+    checkValidType(this, type);
+
     var { dragSource, dropTarget } = handlers;
 
     if (dragSource) {
-      invariant(!this._dragSources[type], 'Drag source for %s specified twice', type);
+      invariant(
+        !this._dragSources[type],
+        'Drag source for %s specified twice. See configureDragDrop in %s',
+        type,
+        this.constructor.displayName
+      );
+
       this._dragSources[type] = bindAll(dragSource, this);
     }
 
     if (dropTarget) {
-      invariant(!this._dropTargets[type], 'Drop target for %s specified twice', type);
+      invariant(
+        !this._dropTargets[type],
+        'Drop target for %s specified twice. See configureDragDrop in %s',
+        type,
+        this.constructor.displayName
+      );
+
       this._dropTargets[type] = bindAll(dropTarget, this);
     }
   },
@@ -113,7 +165,8 @@ var DragDropMixin = {
   },
 
   dragSourceFor(type) {
-    invariant(this._dragSources[type], 'No drag source for %s', type);
+    checkValidType(this, type);
+    checkDragSourceDefined(this, type);
 
     // TODO: optimize by caching binds
     return {
@@ -186,7 +239,8 @@ var DragDropMixin = {
 
   dropTargetFor(...types) {
     types.forEach(type => {
-      invariant(this._dropTargets[type], 'No drop target for %s', type);
+      checkValidType(this, type);
+      checkDropTargetDefined(this, type);
     });
 
     // TODO: optimize by caching binds
