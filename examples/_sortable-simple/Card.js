@@ -16,7 +16,7 @@ var Card = React.createClass({
   },
 
   configureDragDrop(registerType) {
-    registerType(ItemTypes.ITEM, {
+    registerType(ItemTypes.CARD, {
       dragSource: {
         beginDrag() {
           return {
@@ -36,11 +36,11 @@ var Card = React.createClass({
   },
 
   render() {
-    var { isDragging } = this.getDragState(ItemTypes.ITEM);
+    var { isDragging } = this.getDragState(ItemTypes.CARD);
 
     return (
-      <div {...this.dragSourceFor(ItemTypes.ITEM)}
-           {...this.dropTargetFor(ItemTypes.ITEM)}
+      <div {...this.dragSourceFor(ItemTypes.CARD)}
+           {...this.dropTargetFor(ItemTypes.CARD)}
            style={{
              border: '1px dashed gray',
              backgroundColor: 'white',
