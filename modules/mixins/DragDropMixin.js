@@ -10,9 +10,11 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     bindAll = require('../utils/bindAll'),
     invariant = require('react/lib/invariant'),
     merge = require('react/lib/merge'),
+    defaults = require('lodash-node/modern/objects/defaults'),
     union = require('lodash-node/modern/arrays/union'),
     without = require('lodash-node/modern/arrays/without'),
-    isObject = require('lodash-node/modern/objects/isObject');
+    isObject = require('lodash-node/modern/objects/isObject'),
+    noop = require('lodash-node/modern/utilities/noop');
 
 function checkValidType(component, type) {
   invariant(
@@ -56,6 +58,29 @@ function hashStringArray(arr) {
   return arr.join(UNLIKELY_CHAR);
 }
 
+var DefaultDragSource = {
+  canDrag() {
+    return true;
+  },
+
+  beginDrag() {
+    invariant(false, 'Drag source must contain a method called beginDrag. See https://github.com/gaearon/react-dnd#drag-source-api');
+  },
+
+  endDrag: noop
+};
+
+var DefaultDropTarget = {
+  canDrop() {
+    return true;
+  },
+
+  enter: noop,
+  over: noop,
+  leave: noop,
+  acceptDrop: noop
+};
+
 /**
  * Use this mixin to define drag sources and drop targets.
  */
@@ -84,11 +109,7 @@ var DragDropMixin = {
     }
 
     var { canDrop } = dropTarget;
-    if (!canDrop || canDrop(draggedItem)) {
-      return draggedItemType;
-    } else {
-      return null;
-    }
+    return canDrop(draggedItem) ? draggedItemType : null;
   },
 
   isAnyDropTargetActive(types) {
@@ -154,7 +175,7 @@ var DragDropMixin = {
         this.constructor.displayName
       );
 
-      this._dragSources[type] = bindAll(dragSource, this);
+      this._dragSources[type] = defaults(bindAll(dragSource, this), DefaultDragSource);
     }
 
     if (dropTarget) {
@@ -165,7 +186,7 @@ var DragDropMixin = {
         this.constructor.displayName
       );
 
-      this._dropTargets[type] = bindAll(dropTarget, this);
+      this._dropTargets[type] = defaults(bindAll(dropTarget, this), DefaultDropTarget);
     }
   },
 
@@ -187,7 +208,7 @@ var DragDropMixin = {
   handleDragStart(type, e) {
     var { canDrag, beginDrag } = this._dragSources[type];
 
-    if (canDrag && !canDrag(e)) {
+    if (!canDrag(e)) {
       e.preventDefault();
       return;
     }
@@ -240,9 +261,7 @@ var DragDropMixin = {
       ownDraggedItemType: null
     });
 
-    if (endDrag) {
-      endDrag(didDrop, e);
-    }
+    endDrag(didDrop, e);
   },
 
   dropTargetFor(...types) {
@@ -267,9 +286,7 @@ var DragDropMixin = {
     e.preventDefault();
 
     var { over } = this._dropTargets[this.state.draggedItemType];
-    if (over) {
-      over(this.state.draggedItem, e);
-    }
+    over(this.state.draggedItem, e);
   },
 
   handleDragEnter(types, e) {
@@ -286,9 +303,7 @@ var DragDropMixin = {
     });
 
     var { enter } = this._dropTargets[this.state.draggedItemType];
-    if (enter) {
-      enter(this.state.draggedItem, e);
-    }
+    enter(this.state.draggedItem, e);
   },
 
   handleDragLeave(types, e) {
@@ -305,9 +320,7 @@ var DragDropMixin = {
     });
 
     var { leave } = this._dropTargets[this.state.draggedItemType];
-    if (leave) {
-      leave(this.state.draggedItem, e);
-    }
+    leave(this.state.draggedItem, e);
   },
 
   handleDrop(types, e) {
@@ -334,7 +347,7 @@ var DragDropMixin = {
       hasDragEntered: false
     });
 
-    if (!acceptDrop || acceptDrop(item, e) !== false) {
+    if (acceptDrop(item, e) !== false) {
       DragDropActionCreators.recordDrop();
     }
   }
