@@ -6,5 +6,5 @@ module.exports = {
   HorizontalDragAnchors: require('./constants/HorizontalDragAnchors'),
   VerticalDragAnchors: require('./constants/VerticalDragAnchors'),
   NativeDragItemTypes: require('./constants/NativeDragItemTypes'),
-  DragDropEffects: require('./constants/DragDropEffects')
+  DropEffects: require('./constants/DropEffects')
 };

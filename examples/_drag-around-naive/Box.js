@@ -4,7 +4,7 @@
 var React = require('react'),
     ItemTypes = require('./ItemTypes'),
     { PropTypes } = React,
-    { DragDropMixin, DragDropEffects } = require('react-dnd');
+    { DragDropMixin, DropEffects } = require('react-dnd');
 
 var Box = React.createClass({
   mixins: [DragDropMixin],
@@ -21,7 +21,7 @@ var Box = React.createClass({
       dragSource: {
         beginDrag(e) {
           return {
-            effectAllowed: DragDropEffects.MOVE,
+            effectAllowed: DropEffects.MOVE,
             item: {
               id: this.props.id,
               startLeft: this.props.left,

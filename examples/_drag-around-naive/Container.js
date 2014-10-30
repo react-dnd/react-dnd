@@ -6,7 +6,7 @@ var React = require('react'),
     ItemTypes = require('./ItemTypes'),
     Box = require('./Box'),
     { PropTypes } = React,
-    { DragDropMixin, DragDropEffects } = require('react-dnd');
+    { DragDropMixin } = require('react-dnd');
 
 var Container = React.createClass({
   mixins: [DragDropMixin],
