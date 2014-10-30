@@ -4,6 +4,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     DragDropStore = require('../stores/DragDropStore'),
     NativeDragDropSupport = require('../utils/NativeDragDropSupport'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
+    MemoizeBindMixin = require('./MemoizeBindMixin'),
     configureDataTransfer = require('../utils/configureDataTransfer'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     bindAll = require('../utils/bindAll'),
@@ -49,10 +50,18 @@ function checkDropTargetDefined(component, type) {
   );
 }
 
+var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9);
+
+function hashStringArray(arr) {
+  return arr.join(UNLIKELY_CHAR);
+}
+
 /**
  * Use this mixin to define drag sources and drop targets.
  */
 var DragDropMixin = {
+  mixins: [MemoizeBindMixin],
+
   getInitialState() {
     var state = {
       ownDraggedItemType: null,
@@ -168,11 +177,10 @@ var DragDropMixin = {
     checkValidType(this, type);
     checkDragSourceDefined(this, type);
 
-    // TODO: optimize by caching binds
     return {
       draggable: true,
-      onDragStart: this.handleDragStart.bind(this, type),
-      onDragEnd: this.handleDragEnd.bind(this, type)
+      onDragStart: this.memoizeBind('handleDragStart', type),
+      onDragEnd: this.memoizeBind('handleDragEnd', type)
     };
   },
 
@@ -243,12 +251,11 @@ var DragDropMixin = {
       checkDropTargetDefined(this, type);
     });
 
-    // TODO: optimize by caching binds
     return {
-      onDragEnter: this.handleDragEnter.bind(this, types),
-      onDragOver: this.handleDragOver.bind(this, types),
-      onDragLeave: this.handleDragLeave.bind(this, types),
-      onDrop: this.handleDrop.bind(this, types)
+      onDragEnter: this.memoizeBind('handleDragEnter', types, hashStringArray),
+      onDragOver: this.memoizeBind('handleDragOver', types, hashStringArray),
+      onDragLeave: this.memoizeBind('handleDragLeave', types, hashStringArray),
+      onDrop: this.memoizeBind('handleDrop', types, hashStringArray)
     };
   },
 
