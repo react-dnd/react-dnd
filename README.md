@@ -368,8 +368,7 @@ Provides a single constant, `NativeDragItemTypes.FILE`, that you can use as an i
 
 ### `require('react-dnd').DropEffects`
 
-Provides constants to be passed in `effectsAllowed` array from `beginDrag()` and returned from drop target's `getDropEffect()`.  
-Correponds to singular native [`dropEffect`](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer#dropEffect.28.29) values.
+Provides constants to be passed in `effectsAllowed` array from `beginDrag()` and returned from drop target's `getDropEffect()`. Correponds to singular native [`dataTransfer.dropEffect`](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer#dropEffect.28.29) values.
 
 ## Thanks
 
