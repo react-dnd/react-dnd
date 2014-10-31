@@ -1,11 +1,11 @@
 'use strict';
 
 var shouldUseDragPreview = require('./shouldUseDragPreview'),
-    getDragImageOffset = require('./getDragImageOffset');
+    getDragImageOffset = require('./getDragImageOffset'),
+    getBrowserEffectAllowed = require('./getBrowserEffectAllowed');
 
-function configureDataTransfer(containerNode, nativeEvent, dragOptions) {
-  var { dataTransfer } = nativeEvent,
-      { dragPreview, effectAllowed, dragAnchors } = dragOptions;
+function configureDataTransfer(containerNode, nativeEvent, dragPreview, dragAnchors, effectsAllowed) {
+  var { dataTransfer } = nativeEvent;
 
   try {
     // Firefox won't drag without setting data
@@ -19,7 +19,7 @@ function configureDataTransfer(containerNode, nativeEvent, dragOptions) {
     dataTransfer.setDragImage(dragPreview, dragOffset.x, dragOffset.y);
   }
 
-  dataTransfer.effectAllowed = effectAllowed;
+  dataTransfer.effectAllowed = getBrowserEffectAllowed(effectsAllowed);
 }
 
 module.exports = configureDataTransfer;
