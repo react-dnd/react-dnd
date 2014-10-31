@@ -3,8 +3,7 @@
 var DropEffects = {
   COPY: 'copy',
   MOVE: 'move',
-  LINK: 'link',
-  NONE: 'none'
+  LINK: 'link'
 };
 
 module.exports = DropEffects;

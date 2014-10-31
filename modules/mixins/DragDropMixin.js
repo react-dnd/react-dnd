@@ -5,6 +5,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     NativeDragDropSupport = require('../utils/NativeDragDropSupport'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     MemoizeBindMixin = require('./MemoizeBindMixin'),
+    DropEffects = require('../constants/DropEffects'),
     configureDataTransfer = require('../utils/configureDataTransfer'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     bindAll = require('../utils/bindAll'),
@@ -13,6 +14,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     defaults = require('lodash-node/modern/objects/defaults'),
     union = require('lodash-node/modern/arrays/union'),
     without = require('lodash-node/modern/arrays/without'),
+    isArray = require('lodash-node/modern/objects/isArray'),
     isObject = require('lodash-node/modern/objects/isObject'),
     noop = require('lodash-node/modern/utilities/noop');
 
@@ -75,6 +77,10 @@ var DefaultDropTarget = {
     return true;
   },
 
+  getDropEffect(allowedEffects) {
+    return allowedEffects[0];
+  },
+
   enter: noop,
   over: noop,
   leave: noop,
@@ -90,7 +96,7 @@ var DragDropMixin = {
   getInitialState() {
     var state = {
       ownDraggedItemType: null,
-      hasDragEntered: false
+      currentDropEffect: null
     };
 
     return merge(state, this.getStateFromDragDropStore());
@@ -137,11 +143,11 @@ var DragDropMixin = {
     checkDropTargetDefined(this, type);
 
     var isDragging = this.getActiveDropTargetType() === type,
-        hasDragEntered = this.state.hasDragEntered;
+        isHovering = !!this.state.currentDropEffect;
 
     return {
       isDragging: isDragging,
-      isHovering: isDragging && hasDragEntered
+      isHovering: isDragging && isHovering
     };
   },
 
@@ -191,7 +197,9 @@ var DragDropMixin = {
   },
 
   handleDragDropStoreChange() {
-    this.setState(this.getStateFromDragDropStore());
+    if (this.isMounted()) {
+      this.setState(this.getStateFromDragDropStore());
+    }
   },
 
   dragSourceFor(type) {
@@ -221,12 +229,17 @@ var DragDropMixin = {
     );
 
     var dragOptions = beginDrag(e),
-        { item } = dragOptions;
+        { item, dragPreview, dragAnchors, effectsAllowed } = dragOptions;
 
-    configureDataTransfer(this.getDOMNode(), e.nativeEvent, dragOptions);
+    if (!effectsAllowed) {
+      effectsAllowed = [DropEffects.MOVE];
+    }
+
+    invariant(isArray(effectsAllowed) && effectsAllowed.length > 0, 'Expected effectsAllowed to be non-empty array');
     invariant(isObject(item), 'Expected return value of beginDrag to contain "item" object');
 
-    DragDropActionCreators.startDragging(type, item);
+    configureDataTransfer(this.getDOMNode(), e.nativeEvent, dragPreview, dragAnchors, effectsAllowed);
+    DragDropActionCreators.startDragging(type, item, effectsAllowed);
 
     // Delay setting own state by a tick so `getDragState(type).isDragging`
     // doesn't return `true` yet. Otherwise browser will capture dragged state
@@ -245,7 +258,7 @@ var DragDropMixin = {
     NativeDragDropSupport.handleDragEnd();
 
     var { endDrag } = this._dragSources[type],
-        didDrop = DragDropStore.didDrop();
+        recordedDropEffect = DragDropStore.getDropEffect();
 
     DragDropActionCreators.endDragging();
 
@@ -261,7 +274,7 @@ var DragDropMixin = {
       ownDraggedItemType: null
     });
 
-    endDrag(didDrop, e);
+    endDrag(recordedDropEffect, e);
   },
 
   dropTargetFor(...types) {
@@ -278,17 +291,6 @@ var DragDropMixin = {
     };
   },
 
-  handleDragOver(types, e) {
-    if (!this.isAnyDropTargetActive(types)) {
-      return;
-    }
-
-    e.preventDefault();
-
-    var { over } = this._dropTargets[this.state.draggedItemType];
-    over(this.state.draggedItem, e);
-  },
-
   handleDragEnter(types, e) {
     if (!this.isAnyDropTargetActive(types)) {
       return;
@@ -298,12 +300,38 @@ var DragDropMixin = {
       return;
     }
 
+    var { enter, getDropEffect } = this._dropTargets[this.state.draggedItemType],
+        effectsAllowed = DragDropStore.getEffectsAllowed(),
+        dropEffect = getDropEffect(effectsAllowed);
+
+    if (dropEffect && !isFileDragDropEvent(e)) {
+      invariant(
+        effectsAllowed.indexOf(dropEffect) > -1,
+        'Effect %s supplied by drop target is not one of the effects allowed by drag source: %s',
+        dropEffect,
+        effectsAllowed.join(', ')
+      );
+    }
+
     this.setState({
-      hasDragEntered: true
+      currentDropEffect: dropEffect
     });
 
-    var { enter } = this._dropTargets[this.state.draggedItemType];
     enter(this.state.draggedItem, e);
+  },
+
+  handleDragOver(types, e) {
+    if (!this.isAnyDropTargetActive(types)) {
+      return;
+    }
+
+    e.preventDefault();
+
+    var { over, getDropEffect } = this._dropTargets[this.state.draggedItemType];
+    over(this.state.draggedItem, e);
+
+    // Don't use `none` because this will prevent browser from firing `dragend`
+    NativeDragDropSupport.handleDragOver(e, this.state.currentDropEffect || 'move');
   },
 
   handleDragLeave(types, e) {
@@ -316,7 +344,7 @@ var DragDropMixin = {
     }
 
     this.setState({
-      hasDragEntered: false
+      currentDropEffect: null
     });
 
     var { leave } = this._dropTargets[this.state.draggedItemType];
@@ -331,7 +359,9 @@ var DragDropMixin = {
     e.preventDefault();
 
     var item = this.state.draggedItem,
-        { acceptDrop } = this._dropTargets[this.state.draggedItemType];
+        { acceptDrop } = this._dropTargets[this.state.draggedItemType],
+        { currentDropEffect } = this.state,
+        recordedDropEffect = DragDropStore.getDropEffect();
 
     if (isFileDragDropEvent(e)) {
       // We don't know file list until the `drop` event,
@@ -343,13 +373,15 @@ var DragDropMixin = {
 
     this._monitor.reset();
 
+    if (!recordedDropEffect && currentDropEffect) {
+      DragDropActionCreators.recordDrop(currentDropEffect);
+    }
+
     this.setState({
-      hasDragEntered: false
+      currentDropEffect: null
     });
 
-    if (acceptDrop(item, e) !== false) {
-      DragDropActionCreators.recordDrop();
-    }
+    acceptDrop(item, e, recordedDropEffect);
   }
 };
 
