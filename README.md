@@ -92,7 +92,7 @@ var Image = React.createClass({
     // Specify all supported types by calling registerType(type, { dragSource?, dropTarget? })
     registerType(ItemTypes.IMAGE, {
 
-      // dragSource, when specified, is { beginDrag(), canDrag()?, endDrag(didDrop)? }
+      // dragSource, when specified, is { beginDrag(), canDrag()?, endDrag(dropEffect)? }
       dragSource: {
 
         // beginDrag should return { item, dragAnchors?, dragPreview?, dragEffect? }
@@ -122,7 +122,7 @@ By specifying `configureDragDrop`, we tell `DragDropMixin` the drag-drop behavio
 
 Inside `configureDragDrop`, we need to call `registerType` for each of our custom `ItemTypes` that component supports. For example, there might be several representations of images in your app, and each would provide a `dragSource` for `ItemTypes.IMAGE`.
 
-A `dragSource` is just an object specifying how the drag source works. You must implement `beginDrag` to return `item` that represents the data you're dragging and, optionally, a few options that adjust the dragging UI. You can optionally  `canDrag` to forbid dragging, or `endDrag(didDrop)` to execute some logic when the drop has (or has not) occured. And you can share this logic between components by letting a shared mixins generate `dragSource` for them.
+A `dragSource` is just an object specifying how the drag source works. You must implement `beginDrag` to return `item` that represents the data you're dragging and, optionally, a few options that adjust the dragging UI. You can optionally  `canDrag` to forbid dragging, or `endDrag(dropEffect)` to execute some logic when the drop has (or has not) occured. And you can share this logic between components by letting a shared mixins generate `dragSource` for them.
 
 Finally, you must use `{...this.dragSourceFor(itemType)}` on some (one or more) elements in `render` to attach drag handlers. This means you can have several “drag handles” in one element, and they may even correspond to different item types. (If you're not familiar with [JSX Spread Attributes syntax](https://gist.github.com/sebmarkbage/07bbe37bc42b6d4aef81), check it out).
 
@@ -290,17 +290,25 @@ Returns `{ isDragging: bool }` describing whether a particular type is being dra
 
 Returns `{ isDragging: bool, isHovering: bool }` describing whether a particular type is being dragged or hovered, when it is compatible with this component's drop source. You may want to call this method from `render`, e.g. to highlight drop targets when they are comparible and when they are hovered.
 
+`dragSourceFor(type)`
+
+Returns props to be given to any DOM element you want to make a drag source. Intended to be used with JSX spread attribute syntax.
+
+`dropTargetFor(types...)`
+
+Returns props to be given to any DOM element you want to make a drop target. Intended to be used with JSX spread attribute syntax.
+
 ===================
 
 ### Drag Source API
 
 Implement to specify drag behavior of a component.
 
-* `beginDrag()` — return value must contain `item` with an object representing your data and may also contain `dragPreview: Image`, `dragAnchors`.
+* `beginDrag(e)` — return value must contain `item` with an object representing your data and may also contain `dragPreview: (Image | HTMLElement)?`, `dragAnchors: { horizontal: HorizontalDragAnchors?, vertical: VerticalDragAnchors? }?`, `effectsAllowed: Array<DropEffects>?`.
 
-* `canDrag()` — optionally decide whether to allow dragging.
+* `canDrag(e)` — optionally decide whether to allow dragging.
 
-* `endDrag(didDrop)` — optionally handle end of dragging operation. `didDrop` is `false` if item was dropped outside compatible drop targets, or if drop target returned `false` from `acceptDrop`.
+* `endDrag(recordedDropEffect: DropEffect?, e)` — optionally handle end of dragging operation. `recordedDropEffect` is falsy if item was dropped outside compatible drop targets, or if drop target returned `null` from `getDropEffect()`.
 
 ===================
 
@@ -308,11 +316,13 @@ Implement to specify drag behavior of a component.
 
 Implement to specify drop behavior of a component.
 
-* `enter(item)`, `leave(item)`, `over(item)` — optionally implement these to perform side effects (e.g. might use `over` for reordering items when they overlap). If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
+* `enter(item, e)`, `leave(item, e)`, `over(item, e)` — optionally implement these to perform side effects (e.g. might use `over` for reordering items when they overlap). If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
 
-* `canDrop(item)` — optionally implement this method to reject some of the items.
+* `canDrop(item): Boolean` — optionally implement this method to reject some of the items.
 
-* `acceptDrop(item)` — optionally implement this method to perform some action when drop occurs. If you explicitly return `false`, drop source will receive `false` as `didDrop` argument.
+* `acceptDrop(item, e, recordedDropEffect: DropEffect?)` — optionally implement this method to perform some action when drop occurs. If `recordedDropEffect` is not falsy, some nested drop target has already handled drop.
+
+* `getDropEffect(effectsAllowed): DropEffect?` — optionally implement this method to specify drop effect that will be used by some browser for cursor, and will be passed to drag source's `endDrag`. If returned, drop effect must be one of the `effectsAllowed` specified by drag source.
 
 ===================
 
@@ -355,6 +365,11 @@ Note that, for best results, you want to use `this.getDragImageScale()`. It will
 ### `require('react-dnd').NativeDragItemTypes`
 
 Provides a single constant, `NativeDragItemTypes.FILE`, that you can use as an item type for file drop targets.
+
+### `require('react-dnd').DropEffects`
+
+Provides constants to be passed in `effectsAllowed` array from `beginDrag()` and returned from drop target's `getDropEffect()`.  
+Correponds to singular native [`dropEffect`](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer#dropEffect.28.29) values.
 
 ## Thanks
 
