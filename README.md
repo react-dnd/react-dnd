@@ -322,7 +322,7 @@ Implement to specify drop behavior of a component.
 
 * `acceptDrop(item, e, recordedDropEffect: DropEffect?)` — optionally implement this method to perform some action when drop occurs. If `recordedDropEffect` is not falsy, some nested drop target has already handled drop.
 
-* `getDropEffect(effectsAllowed): DropEffect?` — optionally implement this method to specify drop effect that will be used by some browser for cursor, and will be passed to drag source's `endDrag`. If returned, drop effect must be one of the `effectsAllowed` specified by drag source.
+* `getDropEffect(effectsAllowed: Array<DropEffect>): DropEffect?` — optionally implement this method to specify drop effect that will be used by some browser for cursor, and will be passed to drag source's `endDrag`. If returned, drop effect must be one of the `effectsAllowed` specified by drag source.
 
 ===================
 
