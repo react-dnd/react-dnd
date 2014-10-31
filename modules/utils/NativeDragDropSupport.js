@@ -2,6 +2,7 @@
 
 var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     NativeDragItemTypes = require('../constants/NativeDragItemTypes'),
+    DropEffects = require('../constants/DropEffects'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     isFileDragDropEvent = require('./isFileDragDropEvent'),
     shallowEqual = require('react/lib/shallowEqual'),
@@ -16,7 +17,8 @@ var _monitor = new EnterLeaveMonitor(),
     _initialDragTargetRect,
     _imitateCurrentDragEnd,
     _dragTargetRectDidChange,
-    _lastDragSourceCheckTimeout;
+    _lastDragSourceCheckTimeout,
+    _currentDropEffect;
 
 function getElementRect(el) {
   var rect = el.getBoundingClientRect();
@@ -52,6 +54,10 @@ if (typeof window !== 'undefined') {
   });
 
   window.addEventListener('dragover', function (e) {
+    // At the top level of event bubbling, use previously set drop effect and reset it.
+    e.dataTransfer.dropEffect = _currentDropEffect;
+    _currentDropEffect = null;
+
     if (!_currentDragTarget) {
       return;
     }
@@ -106,6 +112,13 @@ var NativeDragDropSupport = {
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
     _imitateCurrentDragEnd = null;
+  },
+
+  handleDragOver(e, dropEffect) {
+    // As event bubbles top-down, first specified effect will be used
+    if (!_currentDropEffect) {
+      _currentDropEffect = dropEffect;
+    }
   }
 };
 
