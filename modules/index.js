@@ -2,6 +2,7 @@
 
 module.exports = {
   DragDropMixin: require('./mixins/DragDropMixin'),
+  DragFeedbackMixin: require('./mixins/DragFeedbackMixin'),
   ImagePreloaderMixin: require('./mixins/ImagePreloaderMixin'),
   HorizontalDragAnchors: require('./constants/HorizontalDragAnchors'),
   VerticalDragAnchors: require('./constants/VerticalDragAnchors'),

@@ -209,6 +209,7 @@ var DragDropMixin = {
     return {
       draggable: true,
       onDragStart: this.memoizeBind('handleDragStart', type),
+      onDrag: this.memoizeBind('handleDrag', type),
       onDragEnd: this.memoizeBind('handleDragEnd', type)
     };
   },
@@ -239,7 +240,7 @@ var DragDropMixin = {
     invariant(isObject(item), 'Expected return value of beginDrag to contain "item" object');
 
     configureDataTransfer(this.getDOMNode(), e.nativeEvent, dragPreview, dragAnchors, effectsAllowed);
-    DragDropActionCreators.startDragging(type, item, effectsAllowed);
+    DragDropActionCreators.startDragging(type, item, effectsAllowed, e.clientX, e.clientY);
 
     // Delay setting own state by a tick so `getDragState(type).isDragging`
     // doesn't return `true` yet. Otherwise browser will capture dragged state
@@ -252,6 +253,11 @@ var DragDropMixin = {
         });
       }
     });
+  },
+
+  handleDrag(type, e) {
+    // FIXME: this won't work on the browser abomination that Firefox is.
+    DragDropActionCreators.drag(e.clientX, e.clientY);
   },
 
   handleDragEnd(type, e) {
