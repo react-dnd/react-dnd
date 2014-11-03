@@ -44,19 +44,30 @@ function triggerDragEndIfDragSourceWasRemovedFromDOM() {
   }
 }
 
+function preventDefaultFileDropAction(e) {
+  if (isFileDragDropEvent(e)) {
+    e.preventDefault();
+  }
+}
+
 if (typeof window !== 'undefined') {
   window.addEventListener('dragenter', function (e) {
-    var isFirstEnter = _monitor.enter(e.target);
+    preventDefaultFileDropAction(e);
 
+    var isFirstEnter = _monitor.enter(e.target);
     if (isFirstEnter && isFileDragDropEvent(e)) {
       DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
     }
   });
 
   window.addEventListener('dragover', function (e) {
+    preventDefaultFileDropAction(e);
+
     // At the top level of event bubbling, use previously set drop effect and reset it.
-    e.dataTransfer.dropEffect = _currentDropEffect;
-    _currentDropEffect = null;
+    if (_currentDropEffect) {
+      e.dataTransfer.dropEffect = _currentDropEffect;
+      _currentDropEffect = null;
+    }
 
     if (!_currentDragTarget) {
       return;
@@ -81,14 +92,17 @@ if (typeof window !== 'undefined') {
   });
 
   window.addEventListener('dragleave', function (e) {
-    var isLastLeave = _monitor.leave(e.target);
+    preventDefaultFileDropAction(e);
 
+    var isLastLeave = _monitor.leave(e.target);
     if (isLastLeave && isFileDragDropEvent(e)) {
       DragDropActionCreators.endDragging();
     }
   });
 
   window.addEventListener('drop', function (e) {
+    preventDefaultFileDropAction(e);
+
     _monitor.reset();
 
     if (isFileDragDropEvent(e)) {
