@@ -302,27 +302,35 @@ Returns props to be given to any DOM element you want to make a drop target. Int
 
 ### Drag Source API
 
-Implement to specify drag behavior of a component.
+Implement to specify drag behavior of a component:
 
-* `beginDrag(e)` — return value must contain `item` with an object representing your data and may also contain `dragPreview: (Image | HTMLElement)?`, `dragAnchors: { horizontal: HorizontalDragAnchors?, vertical: VerticalDragAnchors? }?`, `effectsAllowed: Array<DropEffects>?`.
+* `beginDrag(e: SyntheticEvent)` — return value must contain `item: Object` representing your data and may also contain `dragPreview: (Image | HTMLElement)?`, `dragAnchors: { horizontal: HorizontalDragAnchors?, vertical: VerticalDragAnchors? }?`, `effectsAllowed: DropEffects[]?`.
 
-* `canDrag(e)` — optionally decide whether to allow dragging.
+* `canDrag(e: SyntheticEvent)` — optionally decide whether to allow dragging.
 
-* `endDrag(recordedDropEffect: DropEffect?, e)` — optionally handle end of dragging operation. `recordedDropEffect` is falsy if item was dropped outside compatible drop targets, or if drop target returned `null` from `getDropEffect()`.
+* `endDrag(effect: DropEffect?, e: SyntheticEvent)` — optionally handle end of dragging operation. `effect` is falsy if item was dropped outside compatible drop targets, or if drop target returned `null` from `getDropEffect()`.
 
 ===================
 
 ### Drop Target API
 
-Implement to specify drop behavior of a component.
+To perform side effects in response to changing drag state, use these methods:
 
-* `enter(item, e)`, `leave(item, e)`, `over(item, e)` — optionally implement these to perform side effects (e.g. might use `over` for reordering items when they overlap). If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
+* `enter(item: Object, e: SyntheticEvent)`
 
-* `canDrop(item): Boolean` — optionally implement this method to reject some of the items.
+* `leave(item: Object, e: SyntheticEvent)`
 
-* `acceptDrop(item, e, recordedDropEffect: DropEffect?)` — optionally implement this method to perform some action when drop occurs. If `recordedDropEffect` is not falsy, some nested drop target has already handled drop.
+* `over(item: Object, e: SyntheticEvent)`
 
-* `getDropEffect(effectsAllowed: Array<DropEffect>): DropEffect?` — optionally implement this method to specify drop effect that will be used by some browser for cursor, and will be passed to drag source's `endDrag`. If returned, drop effect must be one of the `effectsAllowed` specified by drag source.
+For example, you might use `over` for reordering items when they overlap. If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
+
+Implement these methods to specify drop behavior of a component:
+
+* `canDrop(item: Object): Boolean` — optionally implement this method to reject some of the items.
+
+* `getDropEffect(effectsAllowed: DropEffect[]): DropEffect?` — optionally implement this method to specify drop effect that will be used by some browser for cursor, and will be passed to drag source's `endDrag`. Returned drop effect must be one of the `effectsAllowed` specified by drag source or `null`. Default implementation returns `effectsAllowed[0]`.
+
+* `acceptDrop(item: Object, e: SyntheticEvent, isHandled: bool, effect: DropEffect?)` — optionally implement this method to perform some action when drop occurs. `isHandled` is `true` if some child drop target has already handled drop. `effect` is the drop effect you returned from `getDropEffect`, or if `isHandled` is `true`, drop effect of the child drop target that handled the drop.
 
 ===================
 

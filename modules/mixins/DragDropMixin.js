@@ -258,7 +258,7 @@ var DragDropMixin = {
     NativeDragDropSupport.handleDragEnd();
 
     var { endDrag } = this._dragSources[type],
-        recordedDropEffect = DragDropStore.getDropEffect();
+        effect = DragDropStore.getDropEffect();
 
     DragDropActionCreators.endDragging();
 
@@ -274,7 +274,7 @@ var DragDropMixin = {
       ownDraggedItemType: null
     });
 
-    endDrag(recordedDropEffect, e);
+    endDrag(effect, e);
   },
 
   dropTargetFor(...types) {
@@ -361,7 +361,7 @@ var DragDropMixin = {
     var item = this.state.draggedItem,
         { acceptDrop } = this._dropTargets[this.state.draggedItemType],
         { currentDropEffect } = this.state,
-        recordedDropEffect = DragDropStore.getDropEffect();
+        isHandled = !!DragDropStore.getDropEffect();
 
     if (isFileDragDropEvent(e)) {
       // We don't know file list until the `drop` event,
@@ -373,7 +373,7 @@ var DragDropMixin = {
 
     this._monitor.reset();
 
-    if (!recordedDropEffect && currentDropEffect) {
+    if (!isHandled) {
       DragDropActionCreators.recordDrop(currentDropEffect);
     }
 
@@ -381,7 +381,7 @@ var DragDropMixin = {
       currentDropEffect: null
     });
 
-    acceptDrop(item, e, recordedDropEffect);
+    acceptDrop(item, e, isHandled, DragDropStore.getDropEffect());
   }
 };
 
