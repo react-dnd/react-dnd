@@ -19,7 +19,7 @@ function getDragImageOffset(containerNode, dragPreview, dragAnchors, e) {
       previewHeight = isImage ? dragPreview.height : containerHeight,
       horizontalAnchor = dragAnchors.horizontal || HorizontalDragAnchors.CENTER,
       verticalAnchor = dragAnchors.vertical || VerticalDragAnchors.CENTER,
-      { offsetX, offsetY } = e;
+      { offsetX, offsetY, target: node } = e;
 
   // Work around @2x coordinate discrepancies in browsers
   if (isFirefox()) {
@@ -28,6 +28,12 @@ function getDragImageOffset(containerNode, dragPreview, dragAnchors, e) {
   } else if (isSafari()) {
     previewHeight /= window.devicePixelRatio;
     previewWidth /= window.devicePixelRatio;
+  }
+
+  while (node !== containerNode && containerNode.contains(node)) {
+    offsetX += node.offsetLeft;
+    offsetY += node.offsetTop;
+    node = node.offsetParent;
   }
 
   switch (horizontalAnchor) {
