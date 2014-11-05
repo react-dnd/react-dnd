@@ -34,7 +34,8 @@
     "lodash-node": "^2.4.1"
   },
   "peerDependencies": {
-    "react": ">=0.11.0"
+    "react": ">=0.11.0",
+    "reactify": "^0.15.2"
   },
   "devDependencies": {
     "jsx-loader": "0.12.0",
@@ -44,5 +45,10 @@
     "request": "2.46.0",
     "webpack": "1.4.8",
     "webpack-dev-server": "1.6.5"
+  },
+  "browserify": {
+    "transform": [
+      ["reactify", {"harmony": true}]
+    ]
   }
 }
