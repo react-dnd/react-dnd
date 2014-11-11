@@ -232,6 +232,8 @@ var DragDropMixin = {
         { item, dragPreview, dragAnchors, effectsAllowed } = dragOptions;
 
     if (!effectsAllowed) {
+      // Move is a sensible default drag effect.
+      // Browser shows a drag preview anyway so we usually don't want "+" icon.
       effectsAllowed = [DropEffects.MOVE];
     }
 
@@ -301,10 +303,16 @@ var DragDropMixin = {
     }
 
     var { enter, getDropEffect } = this._dropTargets[this.state.draggedItemType],
-        effectsAllowed = DragDropStore.getEffectsAllowed(),
-        dropEffect = getDropEffect(effectsAllowed);
+        effectsAllowed = DragDropStore.getEffectsAllowed();
 
-    if (dropEffect && !isFileDragDropEvent(e)) {
+    if (isFileDragDropEvent(e)) {
+      // Use Copy drop effect for dragging files.
+      // Because browser gives no drag preview, "+" icon is useful.
+      effectsAllowed = [DropEffects.COPY];
+    }
+
+    var dropEffect = getDropEffect(effectsAllowed);
+    if (dropEffect) {
       invariant(
         effectsAllowed.indexOf(dropEffect) > -1,
         'Effect %s supplied by drop target is not one of the effects allowed by drag source: %s',
