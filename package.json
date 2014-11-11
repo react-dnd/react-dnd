@@ -34,10 +34,10 @@
     "lodash-node": "^2.4.1"
   },
   "peerDependencies": {
-    "react": ">=0.11.0"
+    "react": "0.12.x"
   },
   "devDependencies": {
-    "jsx-loader": "0.12.0",
+    "jsx-loader": "0.12.1",
     "path": "0.4.9",
     "react": "0.12.0",
     "react-router": "0.10.2",
