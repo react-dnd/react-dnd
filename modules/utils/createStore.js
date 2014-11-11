@@ -1,13 +1,13 @@
 'use strict';
 
 var EventEmitter = require('events').EventEmitter,
-    merge = require('react/lib/merge'),
+    assign = require('react/lib/Object.assign'),
     shallowEqual = require('react/lib/shallowEqual'),
     bindAll = require('./bindAll'),
     CHANGE_EVENT = 'change';
 
 function createStore(spec) {
-  var store = merge(EventEmitter.prototype, merge(spec, {
+  var store = assign({
     emitChange() {
       this.emit(CHANGE_EVENT);
     },
@@ -19,7 +19,7 @@ function createStore(spec) {
     removeChangeListener(callback) {
       this.removeListener(CHANGE_EVENT, callback);
     }
-  }));
+  }, spec, EventEmitter.prototype);
 
   store.setMaxListeners(0);
   bindAll(store);

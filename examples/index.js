@@ -1,9 +1,4 @@
-/** @jsx React.DOM */
 'use strict';
-
-// Require Object.assign polyfill to use JSX Spread Attributes syntax
-// See https://gist.github.com/sebmarkbage/07bbe37bc42b6d4aef81
-require('./Object.es6');
 
 var React = require('react'),
     { Routes, Route, Redirect, Link } = require('react-router'),
@@ -15,6 +10,8 @@ var React = require('react'),
 
 var App = React.createClass({
   render() {
+    var RouteHandler = this.props.activeRouteHandler;
+
     return (
       <div>
         <h1>react-dnd examples (<a target='_href' href='https://github.com/gaearon/react-dnd/blob/master/examples'>source</a>)</h1>
@@ -24,7 +21,7 @@ var App = React.createClass({
           <li>Sortable (<Link to='sortable-simple'>simple</Link>, more coming...)</li>
         </ul>
         <hr />
-        <this.props.activeRouteHandler />
+        <RouteHandler />
       </div>
     );
   }
@@ -44,4 +41,4 @@ var routes = (
   </Routes>
 );
 
-React.renderComponent(routes, document.body);
+React.render(routes, document.body);

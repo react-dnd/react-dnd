@@ -1,9 +1,9 @@
 'use strict';
 
 var Dispatcher = require('flux').Dispatcher,
-    copyProperties = require('react/lib/copyProperties');
+    assign = require('react/lib/Object.assign');
 
-var DragDropDispatcher = copyProperties(new Dispatcher(), {
+var DragDropDispatcher = assign(new Dispatcher(), {
   handleAction(action) {
     this.dispatch({
       action: action

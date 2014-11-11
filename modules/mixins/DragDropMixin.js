@@ -10,7 +10,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     bindAll = require('../utils/bindAll'),
     invariant = require('react/lib/invariant'),
-    merge = require('react/lib/merge'),
+    assign = require('react/lib/Object.assign'),
     defaults = require('lodash-node/modern/objects/defaults'),
     union = require('lodash-node/modern/arrays/union'),
     without = require('lodash-node/modern/arrays/without'),
@@ -99,7 +99,7 @@ var DragDropMixin = {
       currentDropEffect: null
     };
 
-    return merge(state, this.getStateFromDragDropStore());
+    return assign(state, this.getStateFromDragDropStore());
   },
 
   getActiveDropTargetType() {
