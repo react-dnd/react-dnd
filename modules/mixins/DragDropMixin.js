@@ -10,7 +10,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     bindAll = require('../utils/bindAll'),
     invariant = require('react/lib/invariant'),
-    merge = require('react/lib/merge'),
+    assign = require('react/lib/Object.assign'),
     defaults = require('lodash-node/modern/objects/defaults'),
     union = require('lodash-node/modern/arrays/union'),
     without = require('lodash-node/modern/arrays/without'),
@@ -99,7 +99,7 @@ var DragDropMixin = {
       currentDropEffect: null
     };
 
-    return merge(state, this.getStateFromDragDropStore());
+    return assign(state, this.getStateFromDragDropStore());
   },
 
   getActiveDropTargetType() {
@@ -233,6 +233,8 @@ var DragDropMixin = {
         { item, dragPreview, dragAnchors, effectsAllowed } = dragOptions;
 
     if (!effectsAllowed) {
+      // Move is a sensible default drag effect.
+      // Browser shows a drag preview anyway so we usually don't want "+" icon.
       effectsAllowed = [DropEffects.MOVE];
     }
 
@@ -264,7 +266,7 @@ var DragDropMixin = {
     NativeDragDropSupport.handleDragEnd();
 
     var { endDrag } = this._dragSources[type],
-        recordedDropEffect = DragDropStore.getDropEffect();
+        effect = DragDropStore.getDropEffect();
 
     DragDropActionCreators.endDragging();
 
@@ -280,7 +282,7 @@ var DragDropMixin = {
       ownDraggedItemType: null
     });
 
-    endDrag(recordedDropEffect, e);
+    endDrag(effect, e);
   },
 
   dropTargetFor(...types) {
@@ -307,10 +309,16 @@ var DragDropMixin = {
     }
 
     var { enter, getDropEffect } = this._dropTargets[this.state.draggedItemType],
-        effectsAllowed = DragDropStore.getEffectsAllowed(),
-        dropEffect = getDropEffect(effectsAllowed);
+        effectsAllowed = DragDropStore.getEffectsAllowed();
 
-    if (dropEffect && !isFileDragDropEvent(e)) {
+    if (isFileDragDropEvent(e)) {
+      // Use Copy drop effect for dragging files.
+      // Because browser gives no drag preview, "+" icon is useful.
+      effectsAllowed = [DropEffects.COPY];
+    }
+
+    var dropEffect = getDropEffect(effectsAllowed);
+    if (dropEffect) {
       invariant(
         effectsAllowed.indexOf(dropEffect) > -1,
         'Effect %s supplied by drop target is not one of the effects allowed by drag source: %s',
@@ -367,7 +375,7 @@ var DragDropMixin = {
     var item = this.state.draggedItem,
         { acceptDrop } = this._dropTargets[this.state.draggedItemType],
         { currentDropEffect } = this.state,
-        recordedDropEffect = DragDropStore.getDropEffect();
+        isHandled = !!DragDropStore.getDropEffect();
 
     if (isFileDragDropEvent(e)) {
       // We don't know file list until the `drop` event,
@@ -379,7 +387,7 @@ var DragDropMixin = {
 
     this._monitor.reset();
 
-    if (!recordedDropEffect && currentDropEffect) {
+    if (!isHandled) {
       DragDropActionCreators.recordDrop(currentDropEffect);
     }
 
@@ -387,7 +395,7 @@ var DragDropMixin = {
       currentDropEffect: null
     });
 
-    acceptDrop(item, e, recordedDropEffect);
+    acceptDrop(item, e, isHandled, DragDropStore.getDropEffect());
   }
 };
 
