@@ -21,7 +21,7 @@ After cloning the project, run:
 
 ```
 npm install
-npm run
+npm start
 open http://localhost:8080/
 ```
 
