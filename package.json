@@ -4,7 +4,7 @@
   "description": "HTML5 drag and drop mixin for React with full DOM control",
   "main": "modules/index.js",
   "scripts": {
-    "start": "cd examples && node server.js"
+    "start": "./scripts/run-examples"
   },
   "repository": {
     "type": "git",
