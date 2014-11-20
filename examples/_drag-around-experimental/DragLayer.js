@@ -41,7 +41,12 @@ var DragLayer = React.createClass({
             width: '100%',
             height: '100%'
           }}>
-            <Box left={0} top={0} id={draggedItem.id}>{draggedItem.children}</Box>
+            <Box left={0}
+                 top={0}
+                 id={draggedItem.id}
+                 isDragFeedback>
+              {draggedItem.children}
+            </Box>
           </div>
         }
       </div>
