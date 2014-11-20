@@ -87,6 +87,17 @@ These types are just string constants that are used to match compatible drag sou
 Let's make a very simple draggable component that, when dragged, represents `IMAGE`:
 
 ```javascript
+/**
+ * Don't panic!
+ * Examples will use ES6 syntax.
+ *
+ *   var { DragDropMixin } = require('react-dnd');
+ *
+ * is equivalent to this in ES5:
+ *
+ *   var DragDropMixin = require('react-dnd').DragDropMixin;
+ */
+
 var { DragDropMixin } = require('react-dnd'),
     ItemTypes = require('./ItemTypes');
 
