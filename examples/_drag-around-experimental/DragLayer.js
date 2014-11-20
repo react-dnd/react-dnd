@@ -2,6 +2,7 @@
 'use strict';
 
 var React = require('react'),
+    Box = require('./Box'),
     { DragFeedbackMixin } = require('react-dnd');
 
 var DragLayer = React.createClass({
@@ -9,15 +10,15 @@ var DragLayer = React.createClass({
 
   render() {
     var {
-      clientX,
-      clientY,
+      x,
+      y,
+      draggedItem,
       isDragging
     } = this.state;
 
-    var rect;
-
-    if (this.isMounted()) {
-      rect = this.getDOMNode().getBoundingClientRect();
+    var transform;
+    if (isDragging) {
+      transform = `translate3d(${x}px, ${y}px, 0)`;
     }
 
     return (
@@ -32,14 +33,16 @@ var DragLayer = React.createClass({
       }}>
         {isDragging &&
           <div style={{
-                 position: 'absolute',
-                 left: clientX - rect.left - 25,
-                 top: clientY - rect.top - 25,
-                 width: 50,
-                 height: 50,
-                 border: '1px gray solid',
-                 background: 'yellow'
-               }} />
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            transform: transform,
+            WebkitTransform: transform,
+            width: '100%',
+            height: '100%'
+          }}>
+            <Box left={0} top={0} id={draggedItem.id}>{draggedItem.children}</Box>
+          </div>
         }
       </div>
     );

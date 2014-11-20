@@ -8,6 +8,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     DropEffects = require('../constants/DropEffects'),
     configureDataTransfer = require('../utils/configureDataTransfer'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
+    getDragStartOffset = require('../utils/getDragStartOffset'),
     bindAll = require('../utils/bindAll'),
     invariant = require('react/lib/invariant'),
     assign = require('react/lib/Object.assign'),
@@ -230,7 +231,11 @@ var DragDropMixin = {
     );
 
     var dragOptions = beginDrag(e),
-        { item, dragPreview, dragAnchors, effectsAllowed } = dragOptions;
+        containerNode = this.getDOMNode(),
+        dragOffset = { x: e.clientX, y: e.clientY },
+        dragStartOffset = getDragStartOffset(containerNode, e.nativeEvent),
+        { item, dragPreview, dragAnchors, effectsAllowed } = dragOptions,
+        { dataTransfer } = e.nativeEvent;
 
     if (!effectsAllowed) {
       // Move is a sensible default drag effect.
@@ -241,8 +246,8 @@ var DragDropMixin = {
     invariant(isArray(effectsAllowed) && effectsAllowed.length > 0, 'Expected effectsAllowed to be non-empty array');
     invariant(isObject(item), 'Expected return value of beginDrag to contain "item" object');
 
-    configureDataTransfer(this.getDOMNode(), e.nativeEvent, dragPreview, dragAnchors, effectsAllowed);
-    DragDropActionCreators.startDragging(type, item, effectsAllowed, e.clientX, e.clientY);
+    configureDataTransfer(containerNode, dataTransfer, dragPreview, dragAnchors, dragStartOffset, effectsAllowed);
+    DragDropActionCreators.startDragging(type, item, effectsAllowed, dragOffset, dragStartOffset);
 
     // Delay setting own state by a tick so `getDragState(type).isDragging`
     // doesn't return `true` yet. Otherwise browser will capture dragged state
@@ -259,7 +264,7 @@ var DragDropMixin = {
 
   handleDrag(type, e) {
     // FIXME: this won't work on the browser abomination that Firefox is.
-    DragDropActionCreators.drag(e.clientX, e.clientY);
+    DragDropActionCreators.drag({ x: e.clientX, y: e.clientY });
   },
 
   handleDragEnd(type, e) {

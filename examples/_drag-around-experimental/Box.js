@@ -25,10 +25,11 @@ var Box = React.createClass({
             dragPreview: getEmptyImage(),
             item: {
               id: this.props.id,
+              children: this.props.children,
               startLeft: this.props.left,
               startTop: this.props.top,
-              startPageX: e.pageX,
-              startPageY: e.pageY
+              startClientX: e.clientX,
+              startClientY: e.clientY
             }
           };
         }
@@ -45,7 +46,7 @@ var Box = React.createClass({
            style={{
             WebkitTransform: transform,
             transform: transform,
-            opacity: isDragging ? 0.8 : 1,
+            opacity: isDragging ? 0 : 1,
             position: 'absolute',
             top: 0,
             left: 0,
