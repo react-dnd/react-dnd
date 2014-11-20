@@ -1,2 +1,12 @@
 #!/bin/sh
+
+# build examples
+cd examples
+../node_modules/.bin/webpack --config webpack.config.production.js
+cd ..
+
+# build minified standalone version in dist
 ./node_modules/.bin/webpack
+
+# build ES5 modules in dist-modules
+./node_modules/jsx-loader/node_modules/.bin/jsx --harmony modules dist-modules
