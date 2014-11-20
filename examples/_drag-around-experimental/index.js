@@ -17,7 +17,7 @@ var DragAroundExperimental = React.createClass({
           Try dragging an item. It will change while being animated.
         </p>
         <p>
-          This is experimental and is <b>not</b> available in master yet. I'll be working on making this possible in next release.
+          <b>This is experimental and is <i>not</i> available in master yet.</b> I'll be working on making this possible in next release.
         </p>
       </div>
     );
