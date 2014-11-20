@@ -1,0 +1,3 @@
+#!/bin/sh
+cd examples
+../node_modules/.bin/webpack --config webpack.config.production.js
