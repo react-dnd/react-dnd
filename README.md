@@ -31,6 +31,8 @@ Or you can **[view them in browser](http://gaearon.github.io/react-dnd/)** (and 
 
 ## Installation
 
+The library can be used separately (`dist/ReactDND.min.js`) or with a bundler such as Webpack or Browserify.
+
 ```
 npm install --save react-dnd
 ```
@@ -38,8 +40,10 @@ npm install --save react-dnd
 Dependencies: Flux and a couple of functions from lodash-node;  
 Peer Dependencies: React >= 0.12.0.
 
-Note: [I'm using ES6 features in this library](https://github.com/gaearon/react-dnd/issues/2), so you may want to enable Harmony transforms in JSX build step. This library can either be used with a bundler such as Webpack (or Browserify), in which case you need to enable ES6 transforms, or separately, using compiled JS file in `dist` folder.
+It is written in ES6 but there's an ES5 version in `dist-modules` folder.  
+The ES5 version is what you get when you `require('react-dnd')`.
 
+The examples use ES6.
 
 ## Rationale
 
@@ -64,21 +68,23 @@ Hopefully the resulting API reflects that.
 
 ### Simple Drag Source
 
-First, declare types of data that can be dragged.  
+First, declare types of data that can be dragged. This library, in vein of native drag and drop API, emphasizes dragging *data* and not specific DOM nodes themselves. Drag sources provide data to be dragged, and drag targets choose to either accept or decline data depending on its type.
 
-These are used to check “compatibility” of drag sources and drop targets:
+It is up to you to update your models in response to drop or other drag events. The library won't touch the DOM nodes. You have full control over your DOM. This makes react-dnd very flexible: you can implement [selective drop targets](http://gaearon.github.io/react-dnd/#/dustbin-interesting), [2D dragging on a plane](http://gaearon.github.io/react-dnd/#/drag-around-custom) or [a sortable](http://gaearon.github.io/react-dnd/#/sortable-simple) with the same set of tools.
+
+String “types” are used to check compatibility of drag sources and drop targets:
 
 ```javascript
-// ItemTypes.js
+// A sample ItemTypes.js enumeration for an app where you can drag images and blocks
 module.exports = {
   BLOCK: 'block',
   IMAGE: 'image'
 };
 ```
 
-(If you don't have multiple data types, this libary may not be for you.)
+These types are just string constants that are used to match compatible drag sources and drop targets. Even if you only plan to have one draggable type of items, it's still neccessary to declare a string constant for it. This makes it trivial to later add additional draggable/droppable types without rewriting half of your drag and drop code. Also, always relying on types allows us to elegantly support file drag and drop via a “builtin” `NativeDragItemTypes.FILE` type.
 
-Then, let's make a very simple draggable component that, when dragged, represents `IMAGE`:
+Let's make a very simple draggable component that, when dragged, represents `IMAGE`:
 
 ```javascript
 var { DragDropMixin } = require('react-dnd'),
