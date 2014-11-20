@@ -4,22 +4,21 @@ var DragDropDispatcher = require('../dispatcher/DragDropDispatcher'),
     DragDropActionTypes = require('../constants/DragDropActionTypes');
 
 var DragDropActionCreators = {
-  startDragging(itemType, item, effectsAllowed, clientX, clientY) {
+  startDragging(itemType, item, effectsAllowed, dragOffset, dragStartOffset) {
     DragDropDispatcher.handleAction({
       type: DragDropActionTypes.DRAG_START,
       itemType: itemType,
       item: item,
       effectsAllowed: effectsAllowed,
-      clientX: clientX,
-      clientY: clientY
+      dragOffset: dragOffset,
+      dragStartOffset: dragStartOffset
     });
   },
 
-  drag(clientX, clientY) {
+  drag(dragOffset) {
     DragDropDispatcher.handleAction({
       type: DragDropActionTypes.DRAG,
-      clientX: clientX,
-      clientY: clientY
+      dragOffset: dragOffset
     });
   },
 

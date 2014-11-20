@@ -8,12 +8,15 @@ var DragFeedbackMixin = {
   },
 
   getStateFromDragDropStore() {
-    var coordinates = DragDropStore.getDragCoordinates();
+    var dragStartOffset = DragDropStore.getDragStartOffset(),
+        dragOffset = DragDropStore.getDragOffset(),
+        isDragging = DragDropStore.getDraggedItemType() !== null;
 
     return {
-      isDragging: DragDropStore.getDraggedItemType() !== null,
-      clientX: coordinates && coordinates.clientX,
-      clientY: coordinates && coordinates.clientY
+      isDragging: isDragging,
+      draggedItem: DragDropStore.getDraggedItem(),
+      x: isDragging ? dragOffset.x - dragStartOffset.x : undefined,
+      y: isDragging ? dragOffset.y - dragStartOffset.y : undefined
     };
   },
 
