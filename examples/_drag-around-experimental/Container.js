@@ -5,16 +5,11 @@ var React = require('react'),
     update = require('react/lib/update'),
     ItemTypes = require('./ItemTypes'),
     Box = require('./Box'),
-    DragLayer = require('./DragLayer'),
     { PropTypes } = React,
     { DragDropMixin } = require('react-dnd');
 
 var Container = React.createClass({
   mixins: [DragDropMixin],
-
-  propTypes: {
-    snapToGrid: PropTypes.bool.isRequired
-  },
 
   getInitialState() {
     return {
@@ -28,14 +23,9 @@ var Container = React.createClass({
   configureDragDrop(registerType) {
     registerType(ItemTypes.BOX, {
       dropTarget: {
-        over(item, e) {
-          var left = Math.round(item.startLeft + (e.pageX - item.startPageX)),
-              top = Math.round(item.startTop + (e.pageY - item.startPageY));
-
-          if (this.props.snapToGrid) {
-            left = Math.round(left / 32) * 32;
-            top = Math.round(top / 32) * 32;
-          }
+        acceptDrop(item, e) {
+          var left = Math.round(item.startLeft + (e.clientX - item.startClientX)),
+              top = Math.round(item.startTop + (e.clientY - item.startClientY));
 
           this.moveBox(item.id, left, top);
         }
@@ -67,8 +57,6 @@ var Container = React.createClass({
              border: '1px solid black',
              position: 'relative'
            }}>
-
-        <DragLayer />
 
         {Object.keys(this.state.boxes).map(key => {
           var box = this.state.boxes[key];

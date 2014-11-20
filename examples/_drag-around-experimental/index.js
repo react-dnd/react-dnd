@@ -3,27 +3,15 @@
 
 var React = require('react'),
     Container = require('./Container'),
+    DragLayer = require('./DragLayer'),
     LinkedStateMixin = require('react/lib/LinkedStateMixin');
 
 var DragAroundExperimental = React.createClass({
-  mixins: [LinkedStateMixin],
-
-  getInitialState() {
-    return {
-      snapToGrid: false
-    };
-  },
-
   render() {
     return (
       <div>
-        <Container snapToGrid={this.state.snapToGrid} />
-        <p>
-          <input type='checkbox'
-                 checkedLink={this.linkState('snapToGrid')}>
-            Snap to grid
-          </input>
-        </p>
+        <Container />
+        <DragLayer />
         <hr />
         <p>
           Just messing around.
