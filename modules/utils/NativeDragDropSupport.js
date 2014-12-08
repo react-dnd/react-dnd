@@ -38,7 +38,7 @@ function checkIfCurrentDragTargetRectChanged() {
 function triggerDragEndIfDragSourceWasRemovedFromDOM() {
   if (_currentDragTarget &&
       _imitateCurrentDragEnd &&
-      !document.contains(_currentDragTarget)) {
+      !document.body.contains(_currentDragTarget)) {
 
     _imitateCurrentDragEnd();
   }

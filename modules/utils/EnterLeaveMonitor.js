@@ -11,7 +11,7 @@ class EnterLeaveMonitor {
   enter(enteringNode) {
     this._entered = union(
       this._entered.filter(node =>
-        document.contains(node) &&
+        document.body.contains(node) &&
         node.contains(enteringNode)
       ),
       [enteringNode]
@@ -23,7 +23,7 @@ class EnterLeaveMonitor {
   leave(leavingNode) {
     this._entered = without(
       this._entered.filter(node =>
-        document.contains(node)
+        document.body.contains(node)
       ),
       leavingNode
     );
