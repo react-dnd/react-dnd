@@ -11,8 +11,8 @@ var union = require('lodash-node/modern/arrays/union'),
   EnterLeaveMonitor.prototype.enter=function(enteringNode) {
     this.$EnterLeaveMonitor_entered = union(
       this.$EnterLeaveMonitor_entered.filter(function(node) 
-        {return document.contains(node) &&
-        node.contains(enteringNode);}
+        {return document.body.contains(node) &&
+        (!node.contains || node.contains(enteringNode));}
       ),
       [enteringNode]
     );
@@ -23,7 +23,7 @@ var union = require('lodash-node/modern/arrays/union'),
   EnterLeaveMonitor.prototype.leave=function(leavingNode) {
     this.$EnterLeaveMonitor_entered = without(
       this.$EnterLeaveMonitor_entered.filter(function(node) 
-        {return document.contains(node);}
+        {return document.body.contains(node);}
       ),
       leavingNode
     );
