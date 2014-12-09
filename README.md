@@ -3,8 +3,6 @@ react-dnd
 
 HTML5 drag-and-drop mixin for React with full DOM control.  
 
-*Note: both API and docs are in a bit of a flux now (haha). I'll try to get them stable and more easily understandable during the course of the following weeks, but meanwhile I appreciate feedback and corrections to the docs.*
-
 ## Prior Work
 
 Check these first and see if they fit your use case.
