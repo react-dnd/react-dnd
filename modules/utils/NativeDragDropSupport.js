@@ -98,15 +98,6 @@ if (typeof window !== 'undefined') {
 
     triggerDragEndIfDragSourceWasRemovedFromDOM();
   });
-
-  // Mouse events tell us that dragging has ended but `dragend` didn't dire.
-  // This may happen if source DOM was removed while dragging.
-
-  window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
-  window.addEventListener('mouseout', triggerDragEndIfDragSourceWasRemovedFromDOM);
-  window.addEventListener('mouseenter', triggerDragEndIfDragSourceWasRemovedFromDOM);
-  window.addEventListener('mouseleave', triggerDragEndIfDragSourceWasRemovedFromDOM);
-  window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
 }
 
 var NativeDragDropSupport = {
@@ -115,6 +106,12 @@ var NativeDragDropSupport = {
     _initialDragTargetRect = getElementRect(dragTarget);
     _dragTargetRectDidChange = false;
     _imitateCurrentDragEnd = imitateDragEnd;
+
+    // Mouse event tell us that dragging has ended but `dragend` didn't fire.
+    // This may happen if source DOM was removed while dragging.
+
+    window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
   handleDragEnd() {
@@ -122,6 +119,9 @@ var NativeDragDropSupport = {
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
     _imitateCurrentDragEnd = null;
+
+    window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
   handleDragOver(e, dropEffect) {
