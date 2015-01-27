@@ -279,7 +279,7 @@ var DragDropMixin = {
     endDrag(effect, e);
   },
 
-  dropTargetFor:function() {var types=Array.prototype.slice.call(arguments,0);
+  dropTargetFor:function() {for (var types=[],$__0=0,$__1=arguments.length;$__0<$__1;$__0++) types.push(arguments[$__0]);
     types.forEach(function(type)  {
       checkValidType(this, type);
       checkDropTargetDefined(this, type);
