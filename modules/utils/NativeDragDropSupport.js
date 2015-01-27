@@ -17,7 +17,6 @@ var _monitor = new EnterLeaveMonitor(),
     _initialDragTargetRect,
     _imitateCurrentDragEnd,
     _dragTargetRectDidChange,
-    _lastDragSourceCheckTimeout,
     _currentDropEffect;
 
 function getElementRect(el) {
@@ -76,18 +75,6 @@ if (typeof window !== 'undefined') {
     if (isWebkit() && checkIfCurrentDragTargetRectChanged()) {
       // Prevent animating to incorrect position
       e.preventDefault();
-    } else if (isFirefox()) {
-
-      // Firefox won't trigger a global `drop` if source node was removed.
-      // It won't trigger `mouseup` either. It *will* however trigger `dragover`
-      // continually during drag, so our strategy is to simply wait until `dragover`
-      // has stopped firing.
-
-      clearTimeout(_lastDragSourceCheckTimeout);
-      _lastDragSourceCheckTimeout = setTimeout(
-        triggerDragEndIfDragSourceWasRemovedFromDOM,
-        140 // 70 seems enough on OS X with FF33, double it to be sure
-      );
     }
   });
 
@@ -107,9 +94,9 @@ if (typeof window !== 'undefined') {
 
     if (isFileDragDropEvent(e)) {
       DragDropActionCreators.endDragging();
-    } else if (!isFirefox()) {
-      triggerDragEndIfDragSourceWasRemovedFromDOM();
     }
+
+    triggerDragEndIfDragSourceWasRemovedFromDOM();
   });
 }
 
@@ -119,6 +106,12 @@ var NativeDragDropSupport = {
     _initialDragTargetRect = getElementRect(dragTarget);
     _dragTargetRectDidChange = false;
     _imitateCurrentDragEnd = imitateDragEnd;
+
+    // Mouse event tell us that dragging has ended but `dragend` didn't fire.
+    // This may happen if source DOM was removed while dragging.
+
+    window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
   handleDragEnd() {
@@ -126,6 +119,9 @@ var NativeDragDropSupport = {
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
     _imitateCurrentDragEnd = null;
+
+    window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
   handleDragOver(e, dropEffect) {
