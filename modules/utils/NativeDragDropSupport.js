@@ -76,19 +76,19 @@ if (typeof window !== 'undefined') {
     if (isWebkit() && checkIfCurrentDragTargetRectChanged()) {
       // Prevent animating to incorrect position
       e.preventDefault();
-    } else if (isFirefox()) {
-
-      // Firefox won't trigger a global `drop` if source node was removed.
-      // It won't trigger `mouseup` either. It *will* however trigger `dragover`
-      // continually during drag, so our strategy is to simply wait until `dragover`
-      // has stopped firing.
-
-      clearTimeout(_lastDragSourceCheckTimeout);
-      _lastDragSourceCheckTimeout = setTimeout(
-        triggerDragEndIfDragSourceWasRemovedFromDOM,
-        140 // 70 seems enough on OS X with FF33, double it to be sure
-      );
     }
+    // Firefox won't trigger a global `drop` if source node was removed.
+    // It won't trigger `mouseup` either. And Chrome won't trigger a
+    // global `drop` if source node was removed and the dragged item
+    // is dropped outside of browser window. They both *will* however trigger
+    //`dragover` continually during drag, so our strategy is to simply wait
+    // until `dragover` has stopped firing.
+    
+    clearTimeout(_lastDragSourceCheckTimeout);
+      _lastDragSourceCheckTimeout = setTimeout(
+      triggerDragEndIfDragSourceWasRemovedFromDOM,
+      140 // 70 seems enough on OS X with FF33, double it to be sure
+    );
   });
 
   window.addEventListener('dragleave', function (e) {
