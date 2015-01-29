@@ -1,6 +1,8 @@
 react-dnd
 =========
 
+[![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 HTML5 drag-and-drop mixin for React with full DOM control.  
 
 ## Prior Work
