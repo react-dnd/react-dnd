@@ -1,0 +1,35 @@
+{
+  "name": "react-dnd",
+  "version": "0.6.3",
+  "homepage": "https://github.com/gaearon/react-dnd",
+  "authors": [
+    "Dan Abramov <dan.abramov@me.com>"
+  ],
+  "description": "HTML5 drag-and-drop mixin for React with full DOM control.",
+  "main": "dist/ReactDND.min.js",
+  "dependencies": {
+    "react": "0.12.x"
+  },
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "react",
+    "drag",
+    "drop"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "examples/",
+    "scripts/",
+    "test",
+    "tests",
+    "package.json",
+    "webpack.config.js"
+  ]
+}
