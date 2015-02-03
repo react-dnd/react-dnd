@@ -5,6 +5,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     NativeDragDropSupport = require('../utils/NativeDragDropSupport'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     MemoizeBindMixin = require('./MemoizeBindMixin'),
+    MouseCoordsMixin = require('./MouseCoordsMixin'),
     DropEffects = require('../constants/DropEffects'),
     configureDataTransfer = require('../utils/configureDataTransfer'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
@@ -92,7 +93,7 @@ var DefaultDropTarget = {
  * Use this mixin to define drag sources and drop targets.
  */
 var DragDropMixin = {
-  mixins: [MemoizeBindMixin],
+  mixins: [MemoizeBindMixin, MouseCoordsMixin],
 
   getInitialState() {
     var state = {
@@ -263,8 +264,8 @@ var DragDropMixin = {
   },
 
   handleDrag(type, e) {
-    // FIXME: this won't work on the browser abomination that Firefox is.
-    DragDropActionCreators.drag({ x: e.clientX, y: e.clientY });
+    var coords = this.getMouseCoords();
+    DragDropActionCreators.drag({ x: coords.x, y: coords.y});
   },
 
   handleDragEnd(type, e) {
