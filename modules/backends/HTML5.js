@@ -4,12 +4,12 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     NativeDragItemTypes = require('../constants/NativeDragItemTypes'),
     DropEffects = require('../constants/DropEffects'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
-    isFileDragDropEvent = require('./isFileDragDropEvent'),
+    isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     shallowEqual = require('react/lib/shallowEqual'),
     union = require('lodash-node/modern/arrays/union'),
     without = require('lodash-node/modern/arrays/without'),
-    isWebkit = require('./isWebkit'),
-    isFirefox = require('./isFirefox');
+    isWebkit = require('../utils/isWebkit'),
+    isFirefox = require('../utils/isFirefox');
 
 // Store global state for browser-specific fixes and workarounds
 var _monitor = new EnterLeaveMonitor(),
@@ -49,59 +49,75 @@ function preventDefaultFileDropAction(e) {
   }
 }
 
-if (typeof window !== 'undefined') {
-  window.addEventListener('dragenter', function (e) {
-    preventDefaultFileDropAction(e);
+function handleDragEnter(e) {
+  preventDefaultFileDropAction(e);
 
-    var isFirstEnter = _monitor.enter(e.target);
-    if (isFirstEnter && isFileDragDropEvent(e)) {
-      DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
-    }
-  });
-
-  window.addEventListener('dragover', function (e) {
-    preventDefaultFileDropAction(e);
-
-    // At the top level of event bubbling, use previously set drop effect and reset it.
-    if (_currentDropEffect) {
-      e.dataTransfer.dropEffect = _currentDropEffect;
-      _currentDropEffect = null;
-    }
-
-    if (!_currentDragTarget) {
-      return;
-    }
-
-    if (isWebkit() && checkIfCurrentDragTargetRectChanged()) {
-      // Prevent animating to incorrect position
-      e.preventDefault();
-    }
-  });
-
-  window.addEventListener('dragleave', function (e) {
-    preventDefaultFileDropAction(e);
-
-    var isLastLeave = _monitor.leave(e.target);
-    if (isLastLeave && isFileDragDropEvent(e)) {
-      DragDropActionCreators.endDragging();
-    }
-  });
-
-  window.addEventListener('drop', function (e) {
-    preventDefaultFileDropAction(e);
-
-    _monitor.reset();
-
-    if (isFileDragDropEvent(e)) {
-      DragDropActionCreators.endDragging();
-    }
-
-    triggerDragEndIfDragSourceWasRemovedFromDOM();
-  });
+  var isFirstEnter = _monitor.enter(e.target);
+  if (isFirstEnter && isFileDragDropEvent(e)) {
+    DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
+  }
 }
 
-var NativeDragDropSupport = {
-  handleDragStart(dragTarget, imitateDragEnd) {
+function handleDragOver(e) {
+  preventDefaultFileDropAction(e);
+
+  // At the top level of event bubbling, use previously set drop effect and reset it.
+  if (_currentDropEffect) {
+    e.dataTransfer.dropEffect = _currentDropEffect;
+    _currentDropEffect = null;
+  }
+
+  if (!_currentDragTarget) {
+    return;
+  }
+
+  if (isWebkit() && checkIfCurrentDragTargetRectChanged()) {
+    // Prevent animating to incorrect position
+    e.preventDefault();
+  }
+}
+
+function handleDragLeave(e) {
+  preventDefaultFileDropAction(e);
+
+  var isLastLeave = _monitor.leave(e.target);
+  if (isLastLeave && isFileDragDropEvent(e)) {
+    DragDropActionCreators.endDragging();
+  }
+}
+
+function handleDrop(e) {
+  preventDefaultFileDropAction(e);
+
+  _monitor.reset();
+
+  if (isFileDragDropEvent(e)) {
+    DragDropActionCreators.endDragging();
+  }
+
+  triggerDragEndIfDragSourceWasRemovedFromDOM();
+}
+
+var HTML5 = {
+  setup() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('dragenter', handleDragEnter);
+      window.addEventListener('dragover', handleDragOver);
+      window.addEventListener('dragleave', handleDragLeave);
+      window.addEventListener('drop', handleDrop);
+    }
+  },
+
+  teardown() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('dragenter', handleDragEnter);
+      window.removeEventListener('dragover', handleDragOver);
+      window.removeEventListener('dragleave', handleDragLeave);
+      window.removeEventListener('drop', handleDrop);
+    }
+  },
+
+  beginDrag(dragTarget, imitateDragEnd) {
     _currentDragTarget = dragTarget;
     _initialDragTargetRect = getElementRect(dragTarget);
     _dragTargetRectDidChange = false;
@@ -114,7 +130,7 @@ var NativeDragDropSupport = {
     window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
-  handleDragEnd() {
+  endDrag() {
     _currentDragTarget = null;
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
@@ -124,7 +140,7 @@ var NativeDragDropSupport = {
     window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
-  handleDragOver(e, dropEffect) {
+  dragOver(e, dropEffect) {
     // As event bubbles top-down, first specified effect will be used
     if (!_currentDropEffect) {
       _currentDropEffect = dropEffect;
@@ -132,4 +148,4 @@ var NativeDragDropSupport = {
   }
 };
 
-module.exports = NativeDragDropSupport;
+module.exports = HTML5;
