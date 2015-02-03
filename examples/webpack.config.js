@@ -1,12 +1,10 @@
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
   entry: './index',
   output: {
     path: __dirname,
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'bundle.js'
   },
   resolveLoader: {
     modulesDirectories: ['..', 'node_modules']
@@ -16,7 +14,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loaders: ['jsx?harmony'] },
+      { test: /\.js$/, loaders: ['react-hot-loader', 'jsx-loader?harmony'] }
     ]
   },
   plugins: [
