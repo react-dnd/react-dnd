@@ -2,7 +2,7 @@
 
 var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     DragDropStore = require('../stores/DragDropStore'),
-    NativeDragDropSupport = require('../utils/NativeDragDropSupport'),
+    HTML5 = require('../backends/HTML5'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     MemoizeBindMixin = require('./MemoizeBindMixin'),
     DropEffects = require('../constants/DropEffects'),
@@ -161,10 +161,12 @@ var DragDropMixin = {
   },
 
   componentDidMount() {
+    HTML5.setup();
     DragDropStore.addChangeListener(this.handleDragDropStoreChange);
   },
 
   componentWillUnmount() {
+    HTML5.teardown();
     DragDropStore.removeChangeListener(this.handleDragDropStoreChange);
   },
 
@@ -223,7 +225,7 @@ var DragDropMixin = {
 
     // Some browser-specific fixes rely on knowing
     // current dragged element and its dragend handler.
-    NativeDragDropSupport.handleDragStart(
+    HTML5.beginDrag(
       e.target,
       this.handleDragEnd.bind(this, type, null)
     );
@@ -257,7 +259,7 @@ var DragDropMixin = {
   },
 
   handleDragEnd(type, e) {
-    NativeDragDropSupport.handleDragEnd();
+    HTML5.endDrag();
 
     var { endDrag } = this._dragSources[type],
         effect = DragDropStore.getDropEffect();
@@ -339,7 +341,7 @@ var DragDropMixin = {
     over(this.state.draggedItem, e);
 
     // Don't use `none` because this will prevent browser from firing `dragend`
-    NativeDragDropSupport.handleDragOver(e, this.state.currentDropEffect || 'move');
+    HTML5.dragOver(e, this.state.currentDropEffect || 'move');
   },
 
   handleDragLeave(types, e) {
