@@ -89,11 +89,19 @@ var DefaultDropTarget = {
   acceptDrop: noop
 };
 
+var dragDropBackend = HTML5;
+
+function setBackend(backend) {
+  dragDropBackend = backend;
+}
+
 /**
  * Use this mixin to define drag sources and drop targets.
  */
 var DragDropMixin = {
   mixins: [MemoizeBindMixin, MouseCoordsMixin],
+
+  setBackend: setBackend, // FIXME: i feel like this should be somewhere else
 
   getInitialState() {
     var state = {
@@ -163,12 +171,12 @@ var DragDropMixin = {
   },
 
   componentDidMount() {
-    HTML5.setup();
+    dragDropBackend.setup();
     DragDropStore.addChangeListener(this.handleDragDropStoreChange);
   },
 
   componentWillUnmount() {
-    HTML5.teardown();
+    dragDropBackend.teardown();
     DragDropStore.removeChangeListener(this.handleDragDropStoreChange);
   },
 
@@ -210,11 +218,17 @@ var DragDropMixin = {
     checkValidType(this, type);
     checkDragSourceDefined(this, type);
 
-    return {
+    if (this.dragDropBackend === HTML5) return {
       draggable: true,
       onDragStart: this.memoizeBind('handleDragStart', type),
       onDrag: this.memoizeBind('handleDrag', type),
       onDragEnd: this.memoizeBind('handleDragEnd', type)
+    };
+
+    return {
+      onMouseDown: this.memoizeBind('handleDragStart', type),
+      onMouseMove: this.memoizeBind('handleDrag', type),
+      onMouseUp: this.memoizeBind('handleDragEnd', type)
     };
   },
 
@@ -228,7 +242,7 @@ var DragDropMixin = {
 
     // Some browser-specific fixes rely on knowing
     // current dragged element and its dragend handler.
-    HTML5.beginDrag(
+    dragDropBackend.beginDrag(
       e.target,
       this.handleDragEnd.bind(this, type, null)
     );
@@ -249,7 +263,7 @@ var DragDropMixin = {
     invariant(isArray(effectsAllowed) && effectsAllowed.length > 0, 'Expected effectsAllowed to be non-empty array');
     invariant(isObject(item), 'Expected return value of beginDrag to contain "item" object');
 
-    configureDataTransfer(containerNode, dataTransfer, dragPreview, dragAnchors, dragStartOffset, effectsAllowed);
+    //FIXME if HTML5 configureDataTransfer(containerNode, dataTransfer, dragPreview, dragAnchors, dragStartOffset, effectsAllowed);
     DragDropActionCreators.startDragging(type, item, effectsAllowed, dragOffset, dragStartOffset);
 
     // Delay setting own state by a tick so `getDragState(type).isDragging`
@@ -271,7 +285,7 @@ var DragDropMixin = {
   },
 
   handleDragEnd(type, e) {
-    HTML5.endDrag();
+    dragDropBackend.endDrag();
 
     var { endDrag } = this._dragSources[type],
         effect = DragDropStore.getDropEffect();
@@ -300,11 +314,12 @@ var DragDropMixin = {
     });
 
     return {
-      onDragEnter: this.memoizeBind('handleDragEnter', types, hashStringArray),
-      onDragOver: this.memoizeBind('handleDragOver', types, hashStringArray),
-      onDragLeave: this.memoizeBind('handleDragLeave', types, hashStringArray),
-      onDrop: this.memoizeBind('handleDrop', types, hashStringArray)
+      //onDragEnter: this.memoizeBind('handleDragEnter', types, hashStringArray),
+      //onDragOver: this.memoizeBind('handleDragOver', types, hashStringArray),
+      //onDragLeave: this.memoizeBind('handleDragLeave', types, hashStringArray),
+      //onDrop: this.memoizeBind('handleDrop', types, hashStringArray)
     };
+
   },
 
   handleDragEnter(types, e) {
@@ -335,9 +350,9 @@ var DragDropMixin = {
       );
     }
 
-    this.setState({
-      currentDropEffect: dropEffect
-    });
+    //this.setState({
+    //  currentDropEffect: dropEffect
+    //});
 
     enter(this.state.draggedItem, e);
   },
@@ -353,7 +368,7 @@ var DragDropMixin = {
     over(this.state.draggedItem, e);
 
     // Don't use `none` because this will prevent browser from firing `dragend`
-    HTML5.dragOver(e, this.state.currentDropEffect || 'move');
+    dragDropBackend.dragOver(e, this.state.currentDropEffect || 'move');
   },
 
   handleDragLeave(types, e) {
