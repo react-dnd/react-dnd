@@ -5,7 +5,7 @@ var documentListener;
 var handlers = [];
 var refs = 0;
 
-var mouseEvent = 'dragover';
+var mouseEvent = 'mousemove'; // FIXME
 
 var x;
 var y;
@@ -22,8 +22,9 @@ function handle(nativeEvent) {
 }
 
 function dispatchEvent(event, handlers) {
-  x = event.clientX;
-  y = event.clientY;
+  x = event.pageX;
+  y = event.pageY;
+
 }
 
 module.exports = {
