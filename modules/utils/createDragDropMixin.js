@@ -202,9 +202,14 @@ function createDragDropMixin(backend) {
       }
 
       var dragOptions = beginDrag(e),
+          // TODO: there should be a better way to calculate all these offsets
           containerNode = this.getDOMNode(),
-          dragOffset = { x: e.clientX, y: e.clientY },
-          dragStartOffset = getDragStartOffset(containerNode, e.nativeEvent),
+          containerRect = containerNode.getBoundingClientRect(),
+          dragOffset = backend.getDragClientOffset(e),
+          dragStartOffset = {
+            x: dragOffset.x - containerRect.left,
+            y: dragOffset.y - containerRect.top
+          },
           { item, dragPreview, dragAnchors, effectsAllowed } = dragOptions;
 
       if (!effectsAllowed) {

@@ -100,7 +100,7 @@ function handleTopDrop(e) {
   triggerDragEndIfDragSourceWasRemovedFromDOM();
 }
 
-var HTML5Backend = {
+var HTML5 = {
   setup() {
     if (typeof window === 'undefined') {
       return;
@@ -174,7 +174,14 @@ var HTML5Backend = {
       onDragLeave: component.handleDragLeave.bind(component, types),
       onDrop: component.handleDrop.bind(component, types)
     };
+  },
+
+  getDragClientOffset(e) {
+    return {
+      x: e.clientX,
+      y: e.clientY
+    };
   }
 };
 
-module.exports = HTML5Backend;
+module.exports = HTML5;

@@ -16,7 +16,7 @@ function handleTopMouseUp() {
   _currentComponent.handleDragEnd(type, null);
 }
 
-var MouseMoveBackend = {
+var Mouse = {
   setup() {
   },
 
@@ -52,7 +52,14 @@ var MouseMoveBackend = {
       onMouseLeave: component.handleDragLeave.bind(component, types),
       onMouseUp: component.handleDrop.bind(component, types)
     };
+  },
+
+  getDragClientOffset(e) {
+    return {
+      x: e.clientX,
+      y: e.clientY
+    };
   }
 };
 
-module.exports = MouseMoveBackend;
+module.exports = Mouse;
