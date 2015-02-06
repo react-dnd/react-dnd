@@ -1,6 +1,7 @@
 'use strict';
 
 var DragDropActionCreators = require('../actions/DragDropActionCreators'),
+    DragDropStore = require('../stores/DragDropStore'),
     NativeDragItemTypes = require('../constants/NativeDragItemTypes'),
     DropEffects = require('../constants/DropEffects'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
@@ -15,8 +16,8 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
 // Store global state for browser-specific fixes and workarounds
 var _monitor = new EnterLeaveMonitor(),
     _currentDragTarget,
+    _currentComponent,
     _initialDragTargetRect,
-    _imitateCurrentDragEnd,
     _dragTargetRectDidChange,
     _currentDropEffect;
 
@@ -36,12 +37,12 @@ function checkIfCurrentDragTargetRectChanged() {
 }
 
 function triggerDragEndIfDragSourceWasRemovedFromDOM() {
-  if (_currentDragTarget &&
-      _imitateCurrentDragEnd &&
-      !document.body.contains(_currentDragTarget)) {
-
-    _imitateCurrentDragEnd();
+  if (!_currentComponent || document.body.contains(_currentDragTarget)) {
+    return;
   }
+
+  var type = DragDropStore.getDraggedItemType();
+  _currentComponent.handleDragEnd(type, null);
 }
 
 function preventDefaultFileDropAction(e) {
@@ -123,10 +124,10 @@ var HTML5Backend = {
     var { nativeEvent: { dataTransfer, target } } = e;
     configureDataTransfer(dataTransfer, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed);
 
+    _currentComponent = component;
     _currentDragTarget = target;
     _initialDragTargetRect = getElementRect(target);
     _dragTargetRectDidChange = false;
-    _imitateCurrentDragEnd = imitateDragEnd;
 
     // Mouse event tell us that dragging has ended but `dragend` didn't fire.
     // This may happen if source DOM was removed while dragging.
@@ -137,9 +138,9 @@ var HTML5Backend = {
 
   endDrag(component) {
     _currentDragTarget = null;
+    _currentComponent = null;
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
-    _imitateCurrentDragEnd = null;
 
     window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
     window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
