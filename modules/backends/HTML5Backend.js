@@ -5,6 +5,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     DropEffects = require('../constants/DropEffects'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
+    configureDataTransfer = require('../utils/configureDataTransfer'),
     shallowEqual = require('react/lib/shallowEqual'),
     union = require('lodash/array/union'),
     without = require('lodash/array/without'),
@@ -49,7 +50,7 @@ function preventDefaultFileDropAction(e) {
   }
 }
 
-function handleDragEnter(e) {
+function handleTopDragEnter(e) {
   preventDefaultFileDropAction(e);
 
   var isFirstEnter = _monitor.enter(e.target);
@@ -58,7 +59,7 @@ function handleDragEnter(e) {
   }
 }
 
-function handleDragOver(e) {
+function handleTopDragOver(e) {
   preventDefaultFileDropAction(e);
 
   // At the top level of event bubbling, use previously set drop effect and reset it.
@@ -77,7 +78,7 @@ function handleDragOver(e) {
   }
 }
 
-function handleDragLeave(e) {
+function handleTopDragLeave(e) {
   preventDefaultFileDropAction(e);
 
   var isLastLeave = _monitor.leave(e.target);
@@ -86,7 +87,7 @@ function handleDragLeave(e) {
   }
 }
 
-function handleDrop(e) {
+function handleTopDrop(e) {
   preventDefaultFileDropAction(e);
 
   _monitor.reset();
@@ -101,25 +102,29 @@ function handleDrop(e) {
 var HTML5Backend = {
   setup() {
     if (typeof window !== 'undefined') {
-      window.addEventListener('dragenter', handleDragEnter);
-      window.addEventListener('dragover', handleDragOver);
-      window.addEventListener('dragleave', handleDragLeave);
-      window.addEventListener('drop', handleDrop);
+      window.addEventListener('dragenter', handleTopDragEnter);
+      window.addEventListener('dragover', handleTopDragOver);
+      window.addEventListener('dragleave', handleTopDragLeave);
+      window.addEventListener('drop', handleTopDrop);
     }
   },
 
   teardown() {
     if (typeof window !== 'undefined') {
-      window.removeEventListener('dragenter', handleDragEnter);
-      window.removeEventListener('dragover', handleDragOver);
-      window.removeEventListener('dragleave', handleDragLeave);
-      window.removeEventListener('drop', handleDrop);
+      window.removeEventListener('dragenter', handleTopDragEnter);
+      window.removeEventListener('dragover', handleTopDragOver);
+      window.removeEventListener('dragleave', handleTopDragLeave);
+      window.removeEventListener('drop', handleTopDrop);
     }
   },
 
-  beginDrag(dragTarget, imitateDragEnd) {
-    _currentDragTarget = dragTarget;
-    _initialDragTargetRect = getElementRect(dragTarget);
+  // TODO: consolidate options
+  beginDrag(component, e, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed) {
+    var { nativeEvent: { dataTransfer, target } } = e;
+    configureDataTransfer(dataTransfer, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed);
+
+    _currentDragTarget = target;
+    _initialDragTargetRect = getElementRect(target);
     _dragTargetRectDidChange = false;
     _imitateCurrentDragEnd = imitateDragEnd;
 
@@ -130,7 +135,7 @@ var HTML5Backend = {
     window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
-  endDrag() {
+  endDrag(component) {
     _currentDragTarget = null;
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
@@ -140,11 +145,31 @@ var HTML5Backend = {
     window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
-  dragOver(e, dropEffect) {
+  dragOver(component, e, dropEffect) {
     // As event bubbles top-down, first specified effect will be used
     if (!_currentDropEffect) {
       _currentDropEffect = dropEffect;
     }
+  },
+
+  getDragSourceProps(component, type) {
+    // TODO: optimize bind when we figure this out
+    return {
+      draggable: true,
+      onDragStart: component.handleDragStart.bind(component, type),
+      onDrag: component.handleDrag.bind(component, type),
+      onDragEnd: component.handleDragEnd.bind(component, type)
+    };
+  },
+
+  getDropTargetProps(component, types) {
+    // TODO: optimize bind when we figure this out
+    return {
+      onDragEnter: component.handleDragEnter.bind(component, types),
+      onDragOver: component.handleDragOver.bind(component, types),
+      onDragLeave: component.handleDragLeave.bind(component, types),
+      onDrop: component.handleDrop.bind(component, types)
+    };
   }
 };
 
