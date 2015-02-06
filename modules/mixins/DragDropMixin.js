@@ -54,7 +54,8 @@ function checkDropTargetDefined(component, type) {
   );
 }
 
-var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9);
+var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9),
+    _refs = 0;
 
 function hashStringArray(arr) {
   return arr.join(UNLIKELY_CHAR);
@@ -161,12 +162,20 @@ var DragDropMixin = {
   },
 
   componentDidMount() {
-    HTML5.setup();
+    if (_refs === 0) {
+      HTML5.setup();
+    }
+    _refs++;
+
     DragDropStore.addChangeListener(this.handleDragDropStoreChange);
   },
 
   componentWillUnmount() {
-    HTML5.teardown();
+    _refs--;
+    if (_refs === 0) {
+      HTML5.teardown();
+    }
+
     DragDropStore.removeChangeListener(this.handleDragDropStoreChange);
   },
 
