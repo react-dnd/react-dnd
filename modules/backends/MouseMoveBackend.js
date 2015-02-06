@@ -17,29 +17,21 @@ function handleTopMouseUp() {
 
 var MouseMoveBackend = {
   setup() {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    window.addEventListener('mousemove', handleTopMouseMove);
-    window.addEventListener('mouseup', handleTopMouseUp);
   },
 
   teardown() {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    window.addEventListener('mousemove', handleTopMouseMove);
-    window.addEventListener('mouseup', handleTopMouseUp);
   },
 
   beginDrag(component, e, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed) {
     _currentComponent = component;
+    window.addEventListener('mousemove', handleTopMouseMove);
+    window.addEventListener('mouseup', handleTopMouseUp);
   },
 
   endDrag() {
     _currentComponent = null;
+    window.removeEventListener('mousemove', handleTopMouseMove);
+    window.removeEventListener('mouseup', handleTopMouseUp);
   },
 
   dragOver(e, dropEffect) {
