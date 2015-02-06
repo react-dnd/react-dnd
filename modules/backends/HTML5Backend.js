@@ -102,21 +102,25 @@ function handleTopDrop(e) {
 
 var HTML5Backend = {
   setup() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('dragenter', handleTopDragEnter);
-      window.addEventListener('dragover', handleTopDragOver);
-      window.addEventListener('dragleave', handleTopDragLeave);
-      window.addEventListener('drop', handleTopDrop);
+    if (typeof window === 'undefined') {
+      return;
     }
+
+    window.addEventListener('dragenter', handleTopDragEnter);
+    window.addEventListener('dragover', handleTopDragOver);
+    window.addEventListener('dragleave', handleTopDragLeave);
+    window.addEventListener('drop', handleTopDrop);
   },
 
   teardown() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('dragenter', handleTopDragEnter);
-      window.removeEventListener('dragover', handleTopDragOver);
-      window.removeEventListener('dragleave', handleTopDragLeave);
-      window.removeEventListener('drop', handleTopDrop);
+    if (typeof window === 'undefined') {
+      return;
     }
+
+    window.removeEventListener('dragenter', handleTopDragEnter);
+    window.removeEventListener('dragover', handleTopDragOver);
+    window.removeEventListener('dragleave', handleTopDragLeave);
+    window.removeEventListener('drop', handleTopDrop);
   },
 
   // TODO: consolidate options
