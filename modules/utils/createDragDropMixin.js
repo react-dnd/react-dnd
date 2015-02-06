@@ -232,14 +232,6 @@ function createDragDropMixin(backend) {
       });
     },
 
-    handleDrag(type, e) {
-      // TODO: Firefox again
-      DragDropActionCreators.drag({
-        x: e.pageX,
-        y: e.pageY
-      });
-    },
-
     handleDragEnd(type, e) {
       backend.endDrag();
 
