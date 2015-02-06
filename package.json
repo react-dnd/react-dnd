@@ -4,7 +4,8 @@
   "description": "HTML5 drag and drop mixin for React with full DOM control",
   "main": "dist-modules/index.js",
   "scripts": {
-    "start": "./scripts/run-examples"
+    "start": "./scripts/run-examples",
+    "build": "./scripts/build"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,6 @@
     "react-router": "0.10.2",
     "request": "2.46.0",
     "webpack": "1.4.8",
-    "webpack-dev-server": "1.6.5"
+    "webpack-dev-server": "1.7.0"
   }
 }
