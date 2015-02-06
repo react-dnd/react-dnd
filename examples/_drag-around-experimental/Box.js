@@ -5,10 +5,10 @@ var React = require('react'),
     ItemTypes = require('./ItemTypes'),
     getEmptyImage = require('./getEmptyImage'),
     { PropTypes } = React,
-    { DragDropMixin, DropEffects } = require('react-dnd');
+    { createDragDropMixin, DragDropBackends, DropEffects } = require('react-dnd');
 
 var Box = React.createClass({
-  mixins: [DragDropMixin],
+  mixins: [createDragDropMixin(DragDropBackends.MouseMove)],
 
   propTypes: {
     id: PropTypes.any.isRequired,
