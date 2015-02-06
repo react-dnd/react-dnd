@@ -5,6 +5,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     NativeDragItemTypes = require('../constants/NativeDragItemTypes'),
     DropEffects = require('../constants/DropEffects'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
+    getMouseCoordinates = require('../utils/getMouseCoordinates'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     configureDataTransfer = require('../utils/configureDataTransfer'),
     shallowEqual = require('react/lib/shallowEqual'),
@@ -63,17 +64,16 @@ function handleTopDragEnter(e) {
 function handleTopDragOver(e) {
   preventDefaultFileDropAction(e);
 
+  var coordinates = getMouseCoordinates(e);
+  DragDropActionCreators.drag(coordinates);
+
   // At the top level of event bubbling, use previously set drop effect and reset it.
   if (_currentDropEffect) {
     e.dataTransfer.dropEffect = _currentDropEffect;
     _currentDropEffect = null;
   }
 
-  if (!_currentDragTarget) {
-    return;
-  }
-
-  if (isWebkit() && checkIfCurrentDragTargetRectChanged()) {
+  if (_currentDragTarget && isWebkit() && checkIfCurrentDragTargetRectChanged()) {
     // Prevent animating to incorrect position
     e.preventDefault();
   }
@@ -162,7 +162,6 @@ var HTML5Backend = {
     return {
       draggable: true,
       onDragStart: component.handleDragStart.bind(component, type),
-      onDrag: component.handleDrag.bind(component, type),
       onDragEnd: component.handleDragEnd.bind(component, type)
     };
   },

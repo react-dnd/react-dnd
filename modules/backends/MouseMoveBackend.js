@@ -1,13 +1,14 @@
 'use strict';
 
 var DragDropActionCreators = require('../actions/DragDropActionCreators'),
-    DragDropStore = require('../stores/DragDropStore');
+    DragDropStore = require('../stores/DragDropStore'),
+    getMouseCoordinates = require('../utils/getMouseCoordinates');
 
 var _currentComponent;
 
 function handleTopMouseMove(e) {
-  var type = DragDropStore.getDraggedItemType();
-  _currentComponent.handleDrag(type, e);
+  var coordinates = getMouseCoordinates(e);
+  DragDropActionCreators.drag(coordinates);
 }
 
 function handleTopMouseUp() {
