@@ -2,7 +2,7 @@
 
 var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     DragDropStore = require('../stores/DragDropStore'),
-    HTML5 = require('../backends/HTML5'),
+    Backends = require('../backends/index'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     MemoizeBindMixin = require('./MemoizeBindMixin'),
     MouseCoordsMixin = require('./MouseCoordsMixin'),
@@ -90,7 +90,7 @@ var DefaultDropTarget = {
   acceptDrop: noop
 };
 
-var dragDropBackend = HTML5;
+var dragDropBackend = Backends.HTML5;
 
 function setBackend(backend) {
   dragDropBackend = backend;
@@ -232,7 +232,7 @@ var DragDropMixin = {
     checkValidType(this, type);
     checkDragSourceDefined(this, type);
 
-    if (this.dragDropBackend === HTML5) return {
+    if (this.dragDropBackend === Backends.HTML5) return {
       draggable: true,
       onDragStart: this.memoizeBind('handleDragStart', type),
       onDrag: this.memoizeBind('handleDrag', type),
