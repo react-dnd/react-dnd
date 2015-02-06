@@ -2,6 +2,7 @@
 
 module.exports = {
   DragDropBackends: require('./backends'),
+  createDragDropMixin: require('./utils/createDragDropMixin'),
   DragDropMixin: require('./mixins/DragDropMixin'),
   DragFeedbackMixin: require('./mixins/DragFeedbackMixin'),
   ImagePreloaderMixin: require('./mixins/ImagePreloaderMixin'),

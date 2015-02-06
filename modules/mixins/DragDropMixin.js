@@ -1,5 +1,6 @@
 'use strict';
 
+<<<<<<< HEAD
 var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     DragDropStore = require('../stores/DragDropStore'),
     Backends = require('../backends/index'),
@@ -418,3 +419,9 @@ var DragDropMixin = {
 };
 
 module.exports = DragDropMixin;
+=======
+var Backends = require('../backends'),
+    createDragDropMixin = require('../utils/createDragDropMixin');
+
+module.exports = createDragDropMixin(Backends.HTML5);
+>>>>>>> Make backend configurable
