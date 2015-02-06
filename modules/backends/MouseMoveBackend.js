@@ -45,8 +45,12 @@ var MouseMoveBackend = {
   },
 
   getDropTargetProps(component, types) {
-    // TODO
-    return {};
+    return {
+      onMouseEnter: component.handleDragEnter.bind(component, types),
+      onMouseOver: component.handleDragOver.bind(component, types),
+      onMouseLeave: component.handleDragLeave.bind(component, types),
+      onMouseUp: component.handleDrop.bind(component, types)
+    };
   }
 };
 
