@@ -1,3 +1,3 @@
 #!/bin/sh
 cd examples
-webpack-dev-server -d --hot --inline --history-api-fallback --display-reasons --display-error-details --progress --colors --display-chunks
+../node_modules/.bin/webpack-dev-server -d --hot --inline --display-error-details --colors --history-api-fallback
