@@ -98,7 +98,7 @@ function handleDrop(e) {
   triggerDragEndIfDragSourceWasRemovedFromDOM();
 }
 
-var HTML5 = {
+var HTML5Backend = {
   setup() {
     if (typeof window !== 'undefined') {
       window.addEventListener('dragenter', handleDragEnter);
@@ -148,4 +148,4 @@ var HTML5 = {
   }
 };
 
-module.exports = HTML5;
+module.exports = HTML5Backend;
