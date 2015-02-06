@@ -55,7 +55,8 @@ function checkDropTargetDefined(component, type) {
   );
 }
 
-var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9);
+var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9),
+    _refs = 0;
 
 function hashStringArray(arr) {
   return arr.join(UNLIKELY_CHAR);
@@ -88,10 +89,33 @@ var DefaultDropTarget = {
   acceptDrop: noop
 };
 
-var currentBackend = Backends.HTML5;
+var currentBackend = Backends.HTML5,
+    refs = 0;
+
+function setupCurrentBackend() {
+  if (refs === 0) {
+    currentBackend.setup();
+  }
+  refs++;
+}
+
+function teardownCurrentBackend() {
+  refs--;
+  if (refs === 0) {
+    currentBackend.teardown();
+  }
+}
 
 function setBackend(backend) {
+  if (currentBackend && refs > 0) {
+    currentBackend.teardown();
+  }
+
   currentBackend = backend;
+
+  if (currentBackend && refs > 0) {
+    currentBackend.setup();
+  }
 }
 
 /**
@@ -173,12 +197,12 @@ var DragDropMixin = {
   },
 
   componentDidMount() {
-    currentBackend.setup();
+    setupCurrentBackend();
     DragDropStore.addChangeListener(this.handleDragDropStoreChange);
   },
 
   componentWillUnmount() {
-    currentBackend.teardown();
+    teardownCurrentBackend();
     DragDropStore.removeChangeListener(this.handleDragDropStoreChange);
   },
 
