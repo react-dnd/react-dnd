@@ -4,7 +4,7 @@ var shouldUseDragPreview = require('./shouldUseDragPreview'),
     getDragImageOffset = require('./getDragImageOffset'),
     getBrowserEffectAllowed = require('./getBrowserEffectAllowed');
 
-function configureDataTransfer(containerNode, dataTransfer, dragPreview, dragAnchors, dragStartOffset, effectsAllowed) {
+function configureDataTransfer(dataTransfer, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed) {
   try {
     // Firefox won't drag without setting data
     dataTransfer.setData('application/json', {});
