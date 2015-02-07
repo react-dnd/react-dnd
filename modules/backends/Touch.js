@@ -67,6 +67,8 @@ var Touch = {
       throw new Error('Not really implemented yet.');
     }
 
+    e.preventDefault();
+
     return {
       x: e.targetTouches[0].clientX,
       y: e.targetTouches[0].clientY
