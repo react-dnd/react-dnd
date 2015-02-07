@@ -49,9 +49,15 @@ var Container = React.createClass({
   },
 
   render() {
+    var cursor;
+    if (this.state.draggedItemType === 'box') {
+      cursor = '-webkit-grabbing';
+    }
+
     return (
       <div {...this.dropTargetFor(ItemTypes.BOX)}
            style={{
+             cursor: cursor,
              width: 300,
              height: 300,
              border: '1px solid black',
