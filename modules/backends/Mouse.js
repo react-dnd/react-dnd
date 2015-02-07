@@ -56,8 +56,8 @@ var Mouse = {
 
   getDragClientOffset(e) {
     return {
-      x: e.clientX,
-      y: e.clientY
+      x: e.clientX + window.scrollX,
+      y: e.clientY + window.scrollY
     };
   }
 };
