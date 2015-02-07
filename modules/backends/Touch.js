@@ -70,8 +70,8 @@ var Touch = {
     e.preventDefault();
 
     return {
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY
+      x: e.targetTouches[0].clientX + window.scrollX,
+      y: e.targetTouches[0].clientY + window.scrollY
     };
   }
 };
