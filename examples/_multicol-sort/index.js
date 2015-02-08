@@ -3,7 +3,7 @@ var React = require('react');
 var _ = require('lodash-node');
 var update = React.addons.update;
 var { PropTypes } = React;
-var { MouseDragDropMixin, DropEffects } = require('react-dnd');
+var { MouseDragDropMixin, DropEffects, DragFeedbackMixin } = require('react-dnd');
 var keyMirror = require('react/lib/keyMirror');
 
 var DragLayer = require('./DragLayer');
@@ -51,10 +51,10 @@ var columnStyle = {
 
 var cardStyle = {
   overflow: 'hidden',
-  cursor: 'pointer',
   borderRadius: 3,
   background: '#fff',
   borderBottom: '1px solid #bbb',
+  minHeight: 50,
   margin: 8,
 };
 
@@ -120,7 +120,7 @@ var Card =  React.createClass({
             item: {
               id: this.props.id,
               columnId: this.props.columnId,
-              children: <Card style={{width: rect.width}} {...this.props}/>
+              children: <Card style={{cursor: 'inherit'}} {...this.props}/>
             }
           };
         }
@@ -139,7 +139,7 @@ var Card =  React.createClass({
 
     return (
       <section
-        style={_.extend(cardStyle, {opacity: isDragging ? 0 : 1})}
+        style={_.extend(cardStyle, { cursor: isDragging ? 'inherit' : 'pointer', opacity: isDragging ? 0 : 1})}
         {...this.dragSourceFor(DropTypes.CARD)}
         {...this.dropTargetFor(DropTypes.CARD)}
       >
@@ -150,6 +150,7 @@ var Card =  React.createClass({
 });
 
 var App = React.createClass({
+  mixins: [DragFeedbackMixin],
   getInitialState() {
     return {
       columns: [{
@@ -242,6 +243,7 @@ var App = React.createClass({
   render() {
     return (
       <div style={{
+        cursor: this.state.isDragging && '-webkit-grabbing',
         WebkitUserSelect: 'none',
       }}>
         <header style={headerStyle}>
