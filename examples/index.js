@@ -9,6 +9,7 @@ var React = require('react'),
     DustbinInteresting = require('./_dustbin-interesting'),
     SortableSimple = require('./_sortable-simple'),
     SortableMouse = require('./_sortable-mouse');
+    MultiCol = require('./_multicol-sort');
 
 var App = React.createClass({
   render() {
@@ -39,6 +40,7 @@ var routes = (
       <Route name='dustbin-interesting' path='dustbin-interesting' handler={DustbinInteresting} />
       <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
       <Route name='sortable-mouse' path='sortable-mouse' handler={SortableMouse} />
+      <Route name='multicol-sort' path='multicol-sort' handler={MultiCol} />
       <Redirect from='/' to='dustbin-simple' />
     </Route>
   </Routes>
