@@ -69,10 +69,7 @@ var Touch = {
 
     e.preventDefault();
 
-    return {
-      x: e.targetTouches[0].clientX + window.scrollX,
-      y: e.targetTouches[0].clientY + window.scrollY
-    };
+    return getMouseCoordinates(e.targetTouches[0]);
   }
 };
 
