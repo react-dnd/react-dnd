@@ -6,6 +6,8 @@ var DragDropDispatcher = require('../dispatcher/DragDropDispatcher'),
 
 var _draggedItem = null,
     _draggedItemType = null,
+    _lastDraggedItem = null,
+    _lastDraggedItemType = null,
     _effectsAllowed = null,
     _dropEffect = null;
 
@@ -24,6 +26,14 @@ var DragDropStore = createStore({
 
   getDraggedItem() {
     return _draggedItem;
+  },
+
+  getLastDraggedItem() {
+    return _lastDraggedItem;
+  },
+
+  getLastDraggedItemType() {
+    return _lastDraggedItemType;
   },
 
   getDraggedItemType() {
@@ -49,6 +59,8 @@ DragDropDispatcher.register(function (payload) {
     break;
 
   case DragDropActionTypes.DRAG_END:
+    _lastDraggedItem = _draggedItem;
+    _lastDraggedItemType = _draggedItemType;
     _draggedItem = null;
     _draggedItemType = null;
     _effectsAllowed = null;
