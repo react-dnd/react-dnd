@@ -2,8 +2,12 @@
 
 function getMouseCoordinates(e) {
   return {
-    x: e.pageX || e.clientX + window.pageXOffset || document.documentElement.scrollLeft,
-    y: e.pageY || e.clientY + window.pageYOffset || document.documentElement.scrollTop
+    x: 'pageX' in e ?
+      e.pageX :
+      e.clientX + (window.pageXOffset || document.documentElement.scrollLeft),
+    y: 'pageY' in e ?
+      e.pageY :
+      e.clientY + (window.pageYOffset || document.documentElement.scrollTop)
   };
 }
 
