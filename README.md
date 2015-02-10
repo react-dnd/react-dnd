@@ -108,12 +108,24 @@ var Image = React.createClass({
     configureDragDrop(registerType) {
 
       // Specify all supported types by calling registerType(type, { dragSource?, dropTarget? })
+
       registerType(ItemTypes.IMAGE, {
 
-        // dragSource, when specified, is { beginDrag(component), canDrag(component)?, endDrag(component, dropEffect)? }
+        // dragSource, when specified, is {
+        //   beginDrag(component),
+        //   canDrag(component)?,
+        //   endDrag(component, dropEffect)?
+        // }
+
         dragSource: {
 
-          // beginDrag should return { item, dragAnchors?, dragPreview?, dragEffect? }
+          // beginDrag should return {
+          //   item,
+          //   dragAnchors?,
+          //   dragPreview?,
+          //   dragEffect?
+          // }
+
           beginDrag(component) {
             return {
               item: component.props.image
@@ -181,12 +193,7 @@ var ImageBlock = React.createClass({
   render() {
 
     // {...this.dropTargetFor(ItemTypes.IMAGE)} will expand into
-    // {
-    //   onDragEnter: (handled by mixin),
-    //   onDragOver: (handled by mixin),
-    //   onDragLeave: (handled by mixin),
-    //   onDrop: (handled by mixin) }
-    // }
+    // { onDragEnter: (handled by mixin), onDragOver: (handled by mixin), onDragLeave: (handled by mixin), onDrop: (handled by mixin) }
 
     return (
       <div {...this.dropTargetFor(ItemTypes.IMAGE)}>
