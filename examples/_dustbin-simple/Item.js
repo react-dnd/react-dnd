@@ -12,18 +12,20 @@ var Item = React.createClass({
     name: PropTypes.string.isRequired
   },
 
-  configureDragDrop(registerType) {
-    registerType(ItemTypes.ITEM, {
-      dragSource: {
-        beginDrag() {
-          return {
-            item: {
-              name: this.props.name
-            }
-          };
+  statics: {
+    configureDragDrop(registerType) {
+      registerType(ItemTypes.ITEM, {
+        dragSource: {
+          beginDrag(component) {
+            return {
+              item: {
+                name: component.props.name
+              }
+            };
+          }
         }
-      }
-    });
+      });
+    }
   },
 
   render() {

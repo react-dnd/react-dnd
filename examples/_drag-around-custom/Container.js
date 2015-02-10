@@ -23,22 +23,24 @@ var Container = React.createClass({
     };
   },
 
-  configureDragDrop(registerType) {
-    registerType(ItemTypes.BOX, {
-      dropTarget: {
-        over(item, e) {
-          var left = Math.round(item.startLeft + (e.pageX - item.startPageX)),
-              top = Math.round(item.startTop + (e.pageY - item.startPageY));
+  statics: {
+    configureDragDrop(registerType) {
+      registerType(ItemTypes.BOX, {
+        dropTarget: {
+          over(component, item, e) {
+            var left = Math.round(item.startLeft + (e.pageX - item.startPageX)),
+                top = Math.round(item.startTop + (e.pageY - item.startPageY));
 
-          if (this.props.snapToGrid) {
-            left = Math.round(left / 32) * 32;
-            top = Math.round(top / 32) * 32;
+            if (component.props.snapToGrid) {
+              left = Math.round(left / 32) * 32;
+              top = Math.round(top / 32) * 32;
+            }
+
+            component.moveBox(item.id, left, top);
           }
-
-          this.moveBox(item.id, left, top);
         }
-      }
-    });
+      });
+    }
   },
 
   moveBox(id, left, top) {
