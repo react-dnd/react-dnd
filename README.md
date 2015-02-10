@@ -110,7 +110,7 @@ var Image = React.createClass({
       // Specify all supported types by calling registerType(type, { dragSource?, dropTarget? })
       registerType(ItemTypes.IMAGE, {
 
-        // dragSource, when specified, is { beginDrag(), canDrag()?, endDrag(dropEffect)? }
+        // dragSource, when specified, is { beginDrag(component), canDrag(component)?, endDrag(component, dropEffect)? }
         dragSource: {
 
           // beginDrag should return { item, dragAnchors?, dragPreview?, dragEffect? }
@@ -137,11 +137,11 @@ var Image = React.createClass({
 );
 ```
 
-By specifying `configureDragDrop`, we tell `DragDropMixin` the drag-drop behavior of this component. Both draggable and droppable components use the same mixin.
+By specifying `configureDragDrop` in `statics`, we tell `DragDropMixin` the drag-drop behavior of this component. Both draggable and droppable components use the same mixin.
 
 Inside `configureDragDrop`, we need to call `registerType` for each of our custom `ItemTypes` that component supports. For example, there might be several representations of images in your app, and each would provide a `dragSource` for `ItemTypes.IMAGE`.
 
-A `dragSource` is just an object specifying how the drag source works. You must implement `beginDrag` to return `item` that represents the data you're dragging and, optionally, a few options that adjust the dragging UI. You can optionally  `canDrag` to forbid dragging, or `endDrag(dropEffect)` to execute some logic when the drop has (or has not) occured. And you can share this logic between components by letting a shared mixins generate `dragSource` for them.
+A `dragSource` is just an object specifying how the drag source works. You must implement `beginDrag(component)` to return `item` that represents the data you're dragging and, optionally, a few options that adjust the dragging UI. You can optionally  `canDrag(component)` to forbid dragging, or `endDrag(component, dropEffect)` to execute some logic when the drop has (or has not) occured. And you can share this logic between components by letting a shared mixins generate `dragSource` for them.
 
 Finally, you must use `{...this.dragSourceFor(itemType)}` on some (one or more) elements in `render` to attach drag handlers. This means you can have several “drag handles” in one element, and they may even correspond to different item types. (If you're not familiar with [JSX Spread Attributes syntax](https://gist.github.com/sebmarkbage/07bbe37bc42b6d4aef81), check it out).
 
@@ -158,13 +158,19 @@ var ImageBlock = React.createClass({
 
   statics: {
     configureDragDrop(registerType) {
-
       registerType(ItemTypes.IMAGE, {
 
-        // dropTarget, when specified, is { acceptDrop(component, item)?, canDrop(component, item)? enter(component, item)?, over(item)?, leave(item)? }
+        // dropTarget, when specified, is {
+        //   acceptDrop(component, item)?,
+        //   canDrop(component, item)?,
+        //   enter(component, item)?,
+        //   over(component, item)?,
+        //   leave(component, item)?
+        // }
+
         dropTarget: {
           acceptDrop(component, image) {
-            // Do something with image! for example,
+            // Do something with image! For example,
             DocumentActionCreators.setImage(component.props.blockId, image);
           }
         }
@@ -175,7 +181,12 @@ var ImageBlock = React.createClass({
   render() {
 
     // {...this.dropTargetFor(ItemTypes.IMAGE)} will expand into
-    // { onDragEnter: (handled by mixin), onDragOver: (handled by mixin), onDragLeave: (handled by mixin), onDrop: (handled by mixin) }.
+    // {
+    //   onDragEnter: (handled by mixin),
+    //   onDragOver: (handled by mixin),
+    //   onDragLeave: (handled by mixin),
+    //   onDrop: (handled by mixin) }
+    // }
 
     return (
       <div {...this.dropTargetFor(ItemTypes.IMAGE)}>
@@ -201,10 +212,10 @@ var ImageBlock = React.createClass({
 
   statics: {
     configureDragDrop(registerType) {
-
       registerType(ItemTypes.IMAGE, {
 
         // Add a drag source that only works when ImageBlock has an image:
+
         dragSource: {
           canDrag(component) {
             return !!component.props.image;
@@ -232,6 +243,7 @@ var ImageBlock = React.createClass({
       <div {...this.dropTargetFor(ItemTypes.IMAGE)}>
 
         {/* Add {...this.dragSourceFor} handlers to a nested node */}
+
         {this.props.image &&
           <img src={this.props.image.url}
                {...this.dragSourceFor(ItemTypes.IMAGE)} />
@@ -256,7 +268,7 @@ var ImageUploader = React.createClass({
     configureDragDrop(registerType) {
       registerType(NativeDragItemTypes.FILE, {
         dropTarget: {
-          acceptDrop(component.item) {
+          acceptDrop(component, item) {
             // Do something with files
             console.log(item.files);
           }
@@ -273,6 +285,7 @@ var ImageUploader = React.createClass({
         {fileDropState.isDragging && !fileDropState.isHovering &&
           <p>Drag file here</p>
         }
+
         {fileDropState.isHovering &&
           <p>Release to upload a file</p>
         }
@@ -297,7 +310,7 @@ I have not covered everything but it's possible to use this API in a few more wa
 
 ### `require('react-dnd').DragDropMixin`
 
-`configureDragDrop(registerType)`
+`statics.configureDragDrop(registerType)`
 
 Gives you a chance to configure drag and drop on your component.  
 Components with `DragDropMixin` will have this method.
