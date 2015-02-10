@@ -14,24 +14,26 @@ var Card = React.createClass({
     moveCard: PropTypes.func.isRequired
   },
 
-  configureDragDrop(registerType) {
-    registerType(ItemTypes.CARD, {
-      dragSource: {
-        beginDrag() {
-          return {
-            item: {
-              id: this.props.id
-            }
-          };
-        }
-      },
+  statics: {
+    configureDragDrop(registerType) {
+      registerType(ItemTypes.CARD, {
+        dragSource: {
+          beginDrag(component) {
+            return {
+              item: {
+                id: component.props.id
+              }
+            };
+          }
+        },
 
-      dropTarget: {
-        over(item) {
-          this.props.moveCard(item.id, this.props.id);
+        dropTarget: {
+          over(component, item) {
+            component.props.moveCard(item.id, component.props.id);
+          }
         }
-      }
-    });
+      });
+    }
   },
 
   render() {
