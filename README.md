@@ -103,25 +103,27 @@ var { DragDropMixin } = require('react-dnd'),
 
 var Image = React.createClass({
   mixins: [DragDropMixin],
-  
-  configureDragDrop(registerType) {
 
-    // Specify all supported types by calling registerType(type, { dragSource?, dropTarget? })
-    registerType(ItemTypes.IMAGE, {
+  statics: {
+    configureDragDrop(registerType) {
 
-      // dragSource, when specified, is { beginDrag(), canDrag()?, endDrag(dropEffect)? }
-      dragSource: {
+      // Specify all supported types by calling registerType(type, { dragSource?, dropTarget? })
+      registerType(ItemTypes.IMAGE, {
 
-        // beginDrag should return { item, dragAnchors?, dragPreview?, dragEffect? }
-        beginDrag() {
-          return {
-            item: this.props.image
-          };
+        // dragSource, when specified, is { beginDrag(), canDrag()?, endDrag(dropEffect)? }
+        dragSource: {
+
+          // beginDrag should return { item, dragAnchors?, dragPreview?, dragEffect? }
+          beginDrag(component) {
+            return {
+              item: component.props.image
+            };
+          }
         }
-      }
-    });
+      });
+    }
   },
-  
+
   render() {
 
     // {...this.dragSourceFor(ItemTypes.IMAGE)} will expand into
@@ -153,21 +155,23 @@ var { DragDropMixin } = require('react-dnd'),
 
 var ImageBlock = React.createClass({
   mixins: [DragDropMixin],
-  
-  configureDragDrop(registerType) {
 
-    registerType(ItemTypes.IMAGE, {
+  statics: {
+    configureDragDrop(registerType) {
 
-      // dropTarget, when specified, is { acceptDrop(item)?, canDrop(item)? enter(item)?, over(item)?, leave(item)? }
-      dropTarget: {
-        acceptDrop(image) {
-          // Do something with image! for example,
-          DocumentActionCreators.setImage(this.props.blockId, image);
+      registerType(ItemTypes.IMAGE, {
+
+        // dropTarget, when specified, is { acceptDrop(component, item)?, canDrop(component, item)? enter(component, item)?, over(item)?, leave(item)? }
+        dropTarget: {
+          acceptDrop(component, image) {
+            // Do something with image! for example,
+            DocumentActionCreators.setImage(component.props.blockId, image);
+          }
         }
-      }
-    });
+      });
+    }
   },
-  
+
   render() {
 
     // {...this.dropTargetFor(ItemTypes.IMAGE)} will expand into
@@ -194,32 +198,34 @@ var { DragDropMixin } = require('react-dnd'),
 
 var ImageBlock = React.createClass({
   mixins: [DragDropMixin],
-  
-  configureDragDrop(registerType) {
 
-    registerType(ItemTypes.IMAGE, {
+  statics: {
+    configureDragDrop(registerType) {
 
-      // Add a drag source that only works when ImageBlock has an image:
-      dragSource: {
-        canDrag() {
-          return !!this.props.image;
+      registerType(ItemTypes.IMAGE, {
+
+        // Add a drag source that only works when ImageBlock has an image:
+        dragSource: {
+          canDrag(component) {
+            return !!component.props.image;
+          },
+
+          beginDrag(component) {
+            return {
+              item: component.props.image
+            };
+          }
         },
-        
-        beginDrag() {
-          return {
-            item: this.props.image
-          };
+
+        dropTarget: {
+          acceptDrop(component, image) {
+            DocumentActionCreators.setImage(component.props.blockId, image);
+          }
         }
-      },
-  
-      dropTarget: {
-        acceptDrop(image) {
-          DocumentActionCreators.setImage(this.props.blockId, image);
-        }
-      }
-    });
+      });
+    }
   },
-  
+
   render() {
 
     return (
@@ -245,18 +251,20 @@ var { DragDropMixin, NativeDragItemTypes } = require('react-dnd');
 
 var ImageUploader = React.createClass({
   mixins: [DragDropMixin],
-  
-  configureDragDrop(registerType) {
-    registerType(NativeDragItemTypes.FILE, {
-      dropTarget: {
-        acceptDrop(item) {
-          // Do something with files
-          console.log(item.files);
+
+  statics: {
+    configureDragDrop(registerType) {
+      registerType(NativeDragItemTypes.FILE, {
+        dropTarget: {
+          acceptDrop(component.item) {
+            // Do something with files
+            console.log(item.files);
+          }
         }
-      }
-    });
+      });
+    }
   },
-  
+
   render() {
     var fileDropState = this.getDropState(NativeDragItemTypes.FILE);
 
@@ -321,11 +329,11 @@ Returns props to be given to any DOM element you want to make a drop target. Int
 
 Implement to specify drag behavior of a component:
 
-* `beginDrag(e: SyntheticEvent)` — return value must contain `item: Object` representing your data and may also contain `dragPreview: (Image | HTMLElement)?`, `dragAnchors: { horizontal: HorizontalDragAnchors?, vertical: VerticalDragAnchors? }?`, `effectsAllowed: DropEffects[]?`.
+* `beginDrag(component: ReactComponent, e: SyntheticEvent)` — return value must contain `item: Object` representing your data and may also contain `dragPreview: (Image | HTMLElement)?`, `dragAnchors: { horizontal: HorizontalDragAnchors?, vertical: VerticalDragAnchors? }?`, `effectsAllowed: DropEffects[]?`.
 
-* `canDrag(e: SyntheticEvent)` — optionally decide whether to allow dragging.
+* `canDrag(component: ReactComponent, e: SyntheticEvent)` — optionally decide whether to allow dragging.
 
-* `endDrag(effect: DropEffect?, e: SyntheticEvent)` — optionally handle end of dragging operation. `effect` is falsy if item was dropped outside compatible drop targets, or if drop target returned `null` from `getDropEffect()`.
+* `endDrag(component: ReactComponent, effect: DropEffect?, e: SyntheticEvent)` — optionally handle end of dragging operation. `effect` is falsy if item was dropped outside compatible drop targets, or if drop target returned `null` from `getDropEffect()`.
 
 ===================
 
@@ -333,21 +341,21 @@ Implement to specify drag behavior of a component:
 
 To perform side effects in response to changing drag state, use these methods:
 
-* `enter(item: Object, e: SyntheticEvent)`
+* `enter(component: ReactComponent, item: Object, e: SyntheticEvent)`
 
-* `leave(item: Object, e: SyntheticEvent)`
+* `leave(component: ReactComponent, item: Object, e: SyntheticEvent)`
 
-* `over(item: Object, e: SyntheticEvent)`
+* `over(component: ReactComponent, item: Object, e: SyntheticEvent)`
 
 For example, you might use `over` for reordering items when they overlap. If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
 
 Implement these methods to specify drop behavior of a component:
 
-* `canDrop(item: Object): Boolean` — optionally implement this method to reject some of the items.
+* `canDrop(component: ReactComponent, item: Object): Boolean` — optionally implement this method to reject some of the items.
 
-* `getDropEffect(effectsAllowed: DropEffect[]): DropEffect?` — optionally implement this method to specify drop effect that will be used by some browser for cursor, and will be passed to drag source's `endDrag`. Returned drop effect must be one of the `effectsAllowed` specified by drag source or `null`. Default implementation returns `effectsAllowed[0]`.
+* `getDropEffect(component: ReactComponent, effectsAllowed: DropEffect[]): DropEffect?` — optionally implement this method to specify drop effect that will be used by some browser for cursor, and will be passed to drag source's `endDrag`. Returned drop effect must be one of the `effectsAllowed` specified by drag source or `null`. Default implementation returns `effectsAllowed[0]`.
 
-* `acceptDrop(item: Object, e: SyntheticEvent, isHandled: bool, effect: DropEffect?)` — optionally implement this method to perform some action when drop occurs. `isHandled` is `true` if some child drop target has already handled drop. `effect` is the drop effect you returned from `getDropEffect`, or if `isHandled` is `true`, drop effect of the child drop target that handled the drop.
+* `acceptDrop(component: ReactComponent, item: Object, e: SyntheticEvent, isHandled: bool, effect: DropEffect?)` — optionally implement this method to perform some action when drop occurs. `isHandled` is `true` if some child drop target has already handled drop. `effect` is the drop effect you returned from `getDropEffect`, or if `isHandled` is `true`, drop effect of the child drop target that handled the drop.
 
 ===================
 
@@ -365,21 +373,23 @@ getImageUrlsToPreload() {
 },
 
 // You can now use `this.hasPreloadedImage(url)` and `this.getPreloadedImage(url)` in your `dragSource`:
-configureDragDrop(registerType) {
-  registerType(ItemTypes.MY_ITEM, {
-    dragSource: {
-      canDrag() {
-        return this.hasPreloadedImage('some-img-url1');
-      },
+statics: {
+  configureDragDrop(registerType) {
+    registerType(ItemTypes.MY_ITEM, {
+      dragSource: {
+        canDrag(component) {
+          return component.hasPreloadedImage('some-img-url1');
+        },
 
-      beginDrag() {
-        return {
-          item: ...,
-          dragPreivew: this.getPreloadedImage('some-img-url1');
-        };
+        beginDrag(component) {
+          return {
+            item: ...,
+            dragPreivew: component.getPreloadedImage('some-img-url1');
+          };
+        }
       }
-    }
-  });
+    });
+  }
 }
 ```
 

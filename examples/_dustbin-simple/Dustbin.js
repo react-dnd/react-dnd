@@ -7,14 +7,16 @@ var React = require('react'),
 var Dustbin = React.createClass({
   mixins: [DragDropMixin],
 
-  configureDragDrop(registerType) {
-    registerType(ItemTypes.ITEM, {
-      dropTarget: {
-        acceptDrop(item) {
-          window.alert('You dropped ' + item.name + '!');
+  statics: {
+    configureDragDrop(registerType) {
+      registerType(ItemTypes.ITEM, {
+        dropTarget: {
+          acceptDrop(component, item) {
+            window.alert('You dropped ' + item.name + '!');
+          }
         }
-      }
-    });
+      });
+    }
   },
 
   render() {
