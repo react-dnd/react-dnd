@@ -5,67 +5,73 @@ var React = require('react'),
     { PropTypes } = React,
     { DragDropMixin } = require('react-dnd');
 
-var Item = React.createClass({
-  mixins: [DragDropMixin],
+function makeItem(dropType){
+  return (
 
-  propTypes: {
-    type: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  },
+    React.createClass({
+      mixins: [DragDropMixin],
 
-  getInitialState() {
-    return {
-      hasDropped: false
-    };
-  },
+      propTypes: {
+        type: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired
+      },
 
-  configureDragDrop(registerType) {
-    registerType(this.props.type, {
-      dragSource: {
-        beginDrag() {
-          return {
-            item: {
-              name: this.props.name,
+      getInitialState() {
+        return {
+          hasDropped: false
+        };
+      },
+
+      statics: {
+        configureDragDrop(registerType) {
+          registerType(dropType, {
+            dragSource: {
+              beginDrag(component) {
+                return {
+                  item: {
+                    name: component.props.name,
+                  }
+                };
+              },
+
+              endDrag(component, didDrop) {
+                if (didDrop) {
+                  component.setState({
+                    hasDropped: true
+                  });
+                }
+              }
             }
-          };
-        },
-
-        endDrag(didDrop) {
-          if (didDrop) {
-            this.setState({
-              hasDropped: true
-            });
-          }
+          });
         }
+      },
+
+      render() {
+        var { hasDropped } = this.state,
+            { isDragging } = this.getDragState(dropType);
+
+        return (
+          <div {...this.dragSourceFor(dropType)}
+               style={{
+                 border: '1px dashed gray',
+                 backgroundColor: 'white',
+                 padding: '0.5rem',
+                 margin: '0.5rem',
+                 opacity: isDragging ? 0.4 : 1,
+                 maxWidth: 80,
+                 float: 'left'
+               }}>
+
+            {hasDropped ?
+              <s>{this.props.name}</s> :
+              this.props.name
+            }
+
+          </div>
+        );
       }
-    });
-  },
+    })
+  );
+}
 
-  render() {
-    var { type } = this.props,
-        { hasDropped } = this.state,
-        { isDragging } = this.getDragState(type);
-
-    return (
-      <div {...this.dragSourceFor(type)}
-           style={{
-             border: '1px dashed gray',
-             backgroundColor: 'white',
-             padding: '0.5rem',
-             margin: '0.5rem',
-             opacity: isDragging ? 0.4 : 1,
-             maxWidth: 80,
-             float: 'left'
-           }}>
-
-        {hasDropped ?
-          <s>{this.props.name}</s> :
-          this.props.name
-        }
-
-      </div>
-    );
-  }
-});
-
-module.exports = Item;
+module.exports = makeItem;

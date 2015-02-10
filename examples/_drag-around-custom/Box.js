@@ -15,24 +15,26 @@ var Box = React.createClass({
     top: PropTypes.number.isRequired
   },
 
-  configureDragDrop(registerType) {
-    registerType(ItemTypes.BOX, {
-      dragSource: {
-        beginDrag(e) {
-          return {
-            effectAllowed: DropEffects.MOVE,
-            dragPreview: getEmptyImage(),
-            item: {
-              id: this.props.id,
-              startLeft: this.props.left,
-              startTop: this.props.top,
-              startPageX: e.pageX,
-              startPageY: e.pageY
-            }
-          };
+  statics: {
+    configureDragDrop(registerType) {
+      registerType(ItemTypes.BOX, {
+        dragSource: {
+          beginDrag(component, e) {
+            return {
+              effectAllowed: DropEffects.MOVE,
+              dragPreview: getEmptyImage(),
+              item: {
+                id: component.props.id,
+                startLeft: component.props.left,
+                startTop: component.props.top,
+                startPageX: e.pageX,
+                startPageY: e.pageY
+              }
+            };
+          }
         }
-      }
-    });
+      });
+    }
   },
 
   render() {
