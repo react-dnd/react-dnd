@@ -10,6 +10,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     bindAll = require('../utils/bindAll'),
     invariant = require('react/lib/invariant'),
+    warning = require('react/lib/warning'),
     assign = require('react/lib/Object.assign'),
     defaults = require('lodash-node/modern/objects/defaults'),
     union = require('lodash-node/modern/arrays/union'),
@@ -181,20 +182,23 @@ var DragDropMixin = {
     this._dragSources = {};
     this._dropTargets = {};
 
-    if (!this.constructor.configureDragDrop && !this.constructor._legacyConfigureDragDrop) {
-      console.warn('Warning: "%s" declares configureDragDrop as an instance method, which is deprecated.' +
-        ' Move configureDragDrop to statics and change signatures inside to accept component as first parameter.',
+    if (this.configureDragDrop) {
+      warning(
+        this.constructor._legacyConfigureDragDrop,
+        '%s declares configureDragDrop as an instance method, which is deprecated and will be removed in next version. ' +
+        'Move configureDragDrop to statics and change all methods inside it to accept component as first parameter instead of using "this".',
         this.constructor.displayName
       );
       this.constructor._legacyConfigureDragDrop = true;
-    }
-
-    if (this.constructor._legacyConfigureDragDrop) {
-      invariant(this.configureDragDrop, 'Implement configureDragDrop(registerType) to use DragDropMixin');
       this.configureDragDrop(this.registerDragDropItemTypeHandlers);
-    } else {
-      invariant(this.constructor.configureDragDrop, 'Implement configureDragDrop(registerType) to use DragDropMixin');
+    } else if (this.constructor.configureDragDrop) {
       this.constructor.configureDragDrop(this.registerDragDropItemTypeHandlers);
+    } else {
+      invariant(
+        this.constructor.configureDragDrop,
+        '%s must implement static configureDragDrop(registerType) to use DragDropMixin',
+        this.constructor.displayName
+      );
     }
   },
 
