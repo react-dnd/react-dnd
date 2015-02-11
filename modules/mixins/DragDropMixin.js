@@ -56,11 +56,15 @@ function checkDropTargetDefined(component, type) {
 }
 
 function callDragDropLifecycle(func, component, ...rest) {
-  if (component && component.constructor._legacyConfigureDragDrop) {
+  if (component.constructor._legacyConfigureDragDrop) {
     return func.apply(component, rest);
   }
 
-  return func.apply(null, [component].concat(rest));
+  return func.call(
+    null,
+    component.isMounted() ? component : null,
+    ...rest
+  );
 }
 
 var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9),
@@ -325,12 +329,7 @@ var DragDropMixin = {
       });
     }
 
-    callDragDropLifecycle(
-      endDrag,
-      (mounted || this.constructor._legacyConfigureDragDrop) ? this : null, // Don't send static api component if it's unmounted
-      effect,
-      e
-    );
+    callDragDropLifecycle(endDrag, this, effect, e);
   },
 
   dropTargetFor(...types) {
