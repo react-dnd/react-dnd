@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 function isSafari() {
   return !!window.safari;

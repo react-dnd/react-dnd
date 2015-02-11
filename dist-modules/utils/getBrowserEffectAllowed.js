@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var DropEffects = require('../constants/DropEffects');
+var DropEffects = require("../constants/DropEffects");
 
 function getBrowserEffectAllowed(effectsAllowed) {
   var allowCopy = effectsAllowed.indexOf(DropEffects.COPY) > -1,
@@ -8,21 +8,21 @@ function getBrowserEffectAllowed(effectsAllowed) {
       allowLink = effectsAllowed.indexOf(DropEffects.LINK) > -1;
 
   if (allowCopy && allowMove && allowLink) {
-    return 'all';
+    return "all";
   } else if (allowCopy && allowMove) {
-    return 'copyMove';
+    return "copyMove";
   } else if (allowLink && allowMove) {
-    return 'linkMove';
+    return "linkMove";
   } else if (allowCopy && allowLink) {
-    return 'copyLink';
+    return "copyLink";
   } else if (allowCopy) {
-    return 'copy';
+    return "copy";
   } else if (allowMove) {
-    return 'move';
+    return "move";
   } else if (allowLink) {
-    return 'link';
+    return "link";
   } else {
-    return 'none';
+    return "none";
   }
 }
 

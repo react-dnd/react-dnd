@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var isFirefox = require('./isFirefox'),
-    isSafari = require('./isSafari');
+var isFirefox = require("./isFirefox"),
+    isSafari = require("./isSafari");
 
 function getDragImageScale() {
   if (isFirefox() || isSafari()) {

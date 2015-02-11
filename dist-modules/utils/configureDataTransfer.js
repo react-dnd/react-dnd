@@ -1,18 +1,17 @@
-'use strict';
+"use strict";
 
-var shouldUseDragPreview = require('./shouldUseDragPreview'),
-    getDragImageOffset = require('./getDragImageOffset'),
-    getBrowserEffectAllowed = require('./getBrowserEffectAllowed');
+var shouldUseDragPreview = require("./shouldUseDragPreview"),
+    getDragImageOffset = require("./getDragImageOffset"),
+    getBrowserEffectAllowed = require("./getBrowserEffectAllowed");
 
 function configureDataTransfer(containerNode, nativeEvent, dragPreview, dragAnchors, effectsAllowed) {
-  var $__0=    nativeEvent,dataTransfer=$__0.dataTransfer;
+  var dataTransfer = nativeEvent.dataTransfer;
+
 
   try {
     // Firefox won't drag without setting data
-    dataTransfer.setData('application/json', {});
-  } catch (err) {
-    // IE doesn't support MIME types in setData
-  }
+    dataTransfer.setData("application/json", {});
+  } catch (err) {}
 
   if (shouldUseDragPreview(dragPreview) && dataTransfer.setDragImage) {
     var dragOffset = getDragImageOffset(containerNode, dragPreview, dragAnchors, nativeEvent);
@@ -23,3 +22,4 @@ function configureDataTransfer(containerNode, nativeEvent, dragPreview, dragAnch
 }
 
 module.exports = configureDataTransfer;
+// IE doesn't support MIME types in setData

@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-var DragDropActionCreators = require('../actions/DragDropActionCreators'),
-    NativeDragItemTypes = require('../constants/NativeDragItemTypes'),
-    DropEffects = require('../constants/DropEffects'),
-    EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
-    isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
-    shallowEqual = require('react/lib/shallowEqual'),
-    union = require('lodash-node/modern/arrays/union'),
-    without = require('lodash-node/modern/arrays/without'),
-    isWebkit = require('../utils/isWebkit'),
-    isFirefox = require('../utils/isFirefox');
+var DragDropActionCreators = require("../actions/DragDropActionCreators"),
+    NativeDragItemTypes = require("../constants/NativeDragItemTypes"),
+    DropEffects = require("../constants/DropEffects"),
+    EnterLeaveMonitor = require("../utils/EnterLeaveMonitor"),
+    isFileDragDropEvent = require("../utils/isFileDragDropEvent"),
+    shallowEqual = require("react/lib/shallowEqual"),
+    union = require("lodash/array/union"),
+    without = require("lodash/array/without"),
+    isWebkit = require("../utils/isWebkit"),
+    isFirefox = require("../utils/isFirefox");
 
 // Store global state for browser-specific fixes and workarounds
 var _monitor = new EnterLeaveMonitor(),
@@ -35,10 +35,7 @@ function checkIfCurrentDragTargetRectChanged() {
 }
 
 function triggerDragEndIfDragSourceWasRemovedFromDOM() {
-  if (_currentDragTarget &&
-      _imitateCurrentDragEnd &&
-      !document.body.contains(_currentDragTarget)) {
-
+  if (_currentDragTarget && _imitateCurrentDragEnd && !document.body.contains(_currentDragTarget)) {
     _imitateCurrentDragEnd();
   }
 }
@@ -99,25 +96,25 @@ function handleDrop(e) {
 }
 
 var HTML5 = {
-  setup:function() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('dragenter', handleDragEnter);
-      window.addEventListener('dragover', handleDragOver);
-      window.addEventListener('dragleave', handleDragLeave);
-      window.addEventListener('drop', handleDrop);
+  setup: function setup() {
+    if (typeof window !== "undefined") {
+      window.addEventListener("dragenter", handleDragEnter);
+      window.addEventListener("dragover", handleDragOver);
+      window.addEventListener("dragleave", handleDragLeave);
+      window.addEventListener("drop", handleDrop);
     }
   },
 
-  teardown:function() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('dragenter', handleDragEnter);
-      window.removeEventListener('dragover', handleDragOver);
-      window.removeEventListener('dragleave', handleDragLeave);
-      window.removeEventListener('drop', handleDrop);
+  teardown: function teardown() {
+    if (typeof window !== "undefined") {
+      window.removeEventListener("dragenter", handleDragEnter);
+      window.removeEventListener("dragover", handleDragOver);
+      window.removeEventListener("dragleave", handleDragLeave);
+      window.removeEventListener("drop", handleDrop);
     }
   },
 
-  beginDrag:function(dragTarget, imitateDragEnd) {
+  beginDrag: function beginDrag(dragTarget, imitateDragEnd) {
     _currentDragTarget = dragTarget;
     _initialDragTargetRect = getElementRect(dragTarget);
     _dragTargetRectDidChange = false;
@@ -126,21 +123,21 @@ var HTML5 = {
     // Mouse event tell us that dragging has ended but `dragend` didn't fire.
     // This may happen if source DOM was removed while dragging.
 
-    window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
-    window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.addEventListener("mousemove", triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.addEventListener("mousein", triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
-  endDrag:function() {
+  endDrag: function endDrag() {
     _currentDragTarget = null;
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
     _imitateCurrentDragEnd = null;
 
-    window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
-    window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.removeEventListener("mousemove", triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.removeEventListener("mousein", triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
-  dragOver:function(e, dropEffect) {
+  dragOver: function dragOver(e, dropEffect) {
     // As event bubbles top-down, first specified effect will be used
     if (!_currentDropEffect) {
       _currentDropEffect = dropEffect;

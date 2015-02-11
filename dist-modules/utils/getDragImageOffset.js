@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var HorizontalDragAnchors = require('../constants/HorizontalDragAnchors'),
-    VerticalDragAnchors = require('../constants/VerticalDragAnchors'),
-    isFirefox = require('./isFirefox'),
-    isSafari = require('./isSafari');
+var HorizontalDragAnchors = require("../constants/HorizontalDragAnchors"),
+    VerticalDragAnchors = require("../constants/VerticalDragAnchors"),
+    isFirefox = require("./isFirefox"),
+    isSafari = require("./isSafari");
 
 /**
  * Returns offset to be used as arguments for `dataTransfer.setDragImage(dragImage, x, y)`.
@@ -12,14 +12,16 @@ var HorizontalDragAnchors = require('../constants/HorizontalDragAnchors'),
 function getDragImageOffset(containerNode, dragPreview, dragAnchors, e) {
   dragAnchors = dragAnchors || {};
 
-  var containerWidth = containerNode.offsetWidth,
-      containerHeight = containerNode.offsetHeight,
-      isImage = dragPreview instanceof Image,
-      previewWidth = isImage ? dragPreview.width : containerWidth,
-      previewHeight = isImage ? dragPreview.height : containerHeight,
-      horizontalAnchor = dragAnchors.horizontal || HorizontalDragAnchors.CENTER,
-      verticalAnchor = dragAnchors.vertical || VerticalDragAnchors.CENTER,
-      $__0=       e,offsetX=$__0.offsetX,offsetY=$__0.offsetY,node=$__0.target;
+  var containerWidth = containerNode.offsetWidth;
+  var containerHeight = containerNode.offsetHeight;
+  var isImage = dragPreview instanceof Image;
+  var previewWidth = isImage ? dragPreview.width : containerWidth;
+  var previewHeight = isImage ? dragPreview.height : containerHeight;
+  var horizontalAnchor = dragAnchors.horizontal || HorizontalDragAnchors.CENTER;
+  var verticalAnchor = dragAnchors.vertical || VerticalDragAnchors.CENTER;var offsetX = e.offsetX;
+  var offsetY = e.offsetY;
+  var node = e.target;
+
 
   // Work around @2x coordinate discrepancies in browsers
   if (isFirefox()) {
@@ -37,25 +39,25 @@ function getDragImageOffset(containerNode, dragPreview, dragAnchors, e) {
   }
 
   switch (horizontalAnchor) {
-  case HorizontalDragAnchors.LEFT:
-    break;
-  case HorizontalDragAnchors.CENTER:
-    offsetX *= (previewWidth / containerWidth);
-    break;
-  case HorizontalDragAnchors.RIGHT:
-    offsetX = previewWidth - previewWidth * (1 - offsetX / containerWidth);
-    break;
+    case HorizontalDragAnchors.LEFT:
+      break;
+    case HorizontalDragAnchors.CENTER:
+      offsetX *= previewWidth / containerWidth;
+      break;
+    case HorizontalDragAnchors.RIGHT:
+      offsetX = previewWidth - previewWidth * (1 - offsetX / containerWidth);
+      break;
   }
 
   switch (verticalAnchor) {
-  case VerticalDragAnchors.TOP:
-    break;
-  case VerticalDragAnchors.CENTER:
-    offsetY *= (previewHeight / containerHeight);
-    break;
-  case VerticalDragAnchors.BOTTOM:
-    offsetY = previewHeight - previewHeight * (1 - offsetY / containerHeight);
-    break;
+    case VerticalDragAnchors.TOP:
+      break;
+    case VerticalDragAnchors.CENTER:
+      offsetY *= previewHeight / containerHeight;
+      break;
+    case VerticalDragAnchors.BOTTOM:
+      offsetY = previewHeight - previewHeight * (1 - offsetY / containerHeight);
+      break;
   }
 
   // Work around Safari 8 positioning bug
