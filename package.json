@@ -38,6 +38,7 @@
     "react": "0.12.x"
   },
   "devDependencies": {
+    "6to5": "^3.5.3",
     "6to5-core": "^3.5.3",
     "6to5-loader": "^3.0.0",
     "path": "0.4.9",

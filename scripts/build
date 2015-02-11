@@ -9,4 +9,4 @@ cd ..
 ./node_modules/.bin/webpack
 
 # build ES5 modules in dist-modules
-./node_modules/jsx-loader/node_modules/.bin/jsx --harmony --no-cache-dir modules dist-modules
+./node_modules/.bin/6to5 ./modules --out-dir dist-modules
