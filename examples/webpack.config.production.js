@@ -9,14 +9,14 @@ module.exports = {
     publicPath: '/'
   },
   resolveLoader: {
-    modulesDirectories: ['..', 'node_modules']
+    modulesDirectories: ['node_modules']
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['jsx?harmony'], exclude: /node_modules/ },
+      { test: /\.js$/, loaders: ['6to5'], exclude: /node_modules/ },
     ]
   },
   plugins: [
