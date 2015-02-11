@@ -32,7 +32,7 @@
   "homepage": "https://github.com/gaearon/react-dnd",
   "dependencies": {
     "flux": "^2.0.1",
-    "lodash-node": "^2.4.1"
+    "lodash": "^3.1.0"
   },
   "peerDependencies": {
     "react": "0.12.x"
@@ -44,7 +44,7 @@
     "react-hot-loader": "^1.1.4",
     "react-router": "0.10.2",
     "request": "2.46.0",
-    "webpack": "1.4.8",
+    "webpack": "1.5.3",
     "webpack-dev-server": "1.7.0"
   }
 }
