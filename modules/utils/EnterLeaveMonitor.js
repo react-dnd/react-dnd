@@ -1,7 +1,7 @@
 'use strict';
 
-var union = require('lodash-node/modern/arrays/union'),
-    without = require('lodash-node/modern/arrays/without');
+var union = require('lodash/array/union'),
+    without = require('lodash/array/without');
 
 class EnterLeaveMonitor {
   constructor() {

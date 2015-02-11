@@ -6,8 +6,8 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     shallowEqual = require('react/lib/shallowEqual'),
-    union = require('lodash-node/modern/arrays/union'),
-    without = require('lodash-node/modern/arrays/without'),
+    union = require('lodash/array/union'),
+    without = require('lodash/array/without'),
     isWebkit = require('../utils/isWebkit'),
     isFirefox = require('../utils/isFirefox');
 
