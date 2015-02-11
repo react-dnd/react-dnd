@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var keyMirror = require('react/lib/keyMirror');
+var keyMirror = require("react/lib/keyMirror");
 
 var VerticalDragAnchors = keyMirror({
   TOP: null,

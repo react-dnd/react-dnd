@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-var DragDropDispatcher = require('../dispatcher/DragDropDispatcher'),
-    DragDropActionTypes = require('../constants/DragDropActionTypes');
+var DragDropDispatcher = require("../dispatcher/DragDropDispatcher"),
+    DragDropActionTypes = require("../constants/DragDropActionTypes");
 
 var DragDropActionCreators = {
-  startDragging:function(itemType, item, effectsAllowed) {
+  startDragging: function startDragging(itemType, item, effectsAllowed) {
     DragDropDispatcher.handleAction({
       type: DragDropActionTypes.DRAG_START,
       itemType: itemType,
@@ -13,14 +13,14 @@ var DragDropActionCreators = {
     });
   },
 
-  recordDrop:function(dropEffect) {
+  recordDrop: function recordDrop(dropEffect) {
     DragDropDispatcher.handleAction({
       type: DragDropActionTypes.DROP,
       dropEffect: dropEffect
     });
   },
 
-  endDragging:function() {
+  endDragging: function endDragging() {
     DragDropDispatcher.handleAction({
       type: DragDropActionTypes.DRAG_END
     });

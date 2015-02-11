@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var keyMirror = require('react/lib/keyMirror');
+var keyMirror = require("react/lib/keyMirror");
 
 var DragDropActionTypes = keyMirror({
   DRAG_START: null,

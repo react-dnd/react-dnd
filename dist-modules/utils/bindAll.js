@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 function bindAll(obj, context) {
   if (!context) {
@@ -6,7 +6,7 @@ function bindAll(obj, context) {
   }
 
   for (var key in obj) {
-    if (obj.hasOwnProperty(key) && typeof obj[key] === 'function') {
+    if (obj.hasOwnProperty(key) && typeof obj[key] === "function") {
       obj[key] = obj[key].bind(context);
     }
   }

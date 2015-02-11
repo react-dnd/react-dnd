@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-var invariant = require('react/lib/invariant');
+var invariant = require("react/lib/invariant");
 
 var MemoizeBindMixin = {
-  memoizeBind:function(name, argument, hasher) {
+  memoizeBind: function memoizeBind(name, argument, hasher) {
     var key = hasher ? hasher(argument) : argument;
-    invariant(typeof key === 'string', 'Expected memoization key to be a string, got %s', argument);
+    invariant(typeof key === "string", "Expected memoization key to be a string, got %s", argument);
 
     if (!this.__cachedBoundMethods) {
       this.__cachedBoundMethods = {};
@@ -22,7 +22,7 @@ var MemoizeBindMixin = {
     return this.__cachedBoundMethods[name][key];
   },
 
-  componentWillUnmount:function() {
+  componentWillUnmount: function componentWillUnmount() {
     this.__cachedBoundMethods = {};
   }
 };

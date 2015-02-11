@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var keyMirror = require('react/lib/keyMirror');
+var keyMirror = require("react/lib/keyMirror");
 
 var NativeDragItemTypes = {
-  FILE: '__NATIVE_FILE__'
+  FILE: "__NATIVE_FILE__"
 };
 
 module.exports = NativeDragItemTypes;
