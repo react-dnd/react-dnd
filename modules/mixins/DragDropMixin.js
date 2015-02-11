@@ -14,7 +14,6 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     assign = require('react/lib/Object.assign'),
     defaults = require('lodash/object/defaults'),
     union = require('lodash/array/union'),
-    rest = require('lodash/array/rest'),
     without = require('lodash/array/without'),
     isArray = require('lodash/lang/isArray'),
     isObject = require('lodash/lang/isObject'),
@@ -56,12 +55,12 @@ function checkDropTargetDefined(component, type) {
   );
 }
 
-function callDragDropLifecycle(func, component) {
-  if (component.constructor._legacyConfigureDragDrop) {
-    return func.apply(component, rest(arguments, 2));
+function callDragDropLifecycle(func, component, ...rest) {
+  if (component && component.constructor._legacyConfigureDragDrop) {
+    return func.apply(component, rest);
   }
 
-  return func.apply(null, rest(arguments, 1));
+  return func.apply(null, [component].concat(rest));
 }
 
 var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9),
@@ -312,23 +311,26 @@ var DragDropMixin = {
     HTML5.endDrag();
 
     var { endDrag } = this._dragSources[type],
-        effect = DragDropStore.getDropEffect();
+        effect = DragDropStore.getDropEffect(),
+        mounted = this.isMounted();
 
     DragDropActionCreators.endDragging();
 
-    if (!this.isMounted()) {
+    // Note: this method may be invoked even *after* component was unmounted
+    // This happens if source node was removed from DOM while dragging.
 
-      // Note: this method may be invoked even *after* component was unmounted
-      // This happens if source node was removed from DOM while dragging.
-
-      return;
+    if (mounted) {
+      this.setState({
+        ownDraggedItemType: null
+      });
     }
 
-    this.setState({
-      ownDraggedItemType: null
-    });
-
-    callDragDropLifecycle(endDrag, this, effect, e);
+    callDragDropLifecycle(
+      endDrag,
+      (mounted || this.constructor._legacyConfigureDragDrop) ? this : null, // Don't send static api component if it's unmounted
+      effect,
+      e
+    );
   },
 
   dropTargetFor(...types) {
