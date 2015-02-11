@@ -38,7 +38,8 @@
     "react": "0.12.x"
   },
   "devDependencies": {
-    "jsx-loader": "0.12.2",
+    "6to5-core": "^3.5.3",
+    "6to5-loader": "^3.0.0",
     "path": "0.4.9",
     "react": "0.12.x",
     "react-hot-loader": "^1.1.4",
