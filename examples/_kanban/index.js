@@ -62,7 +62,7 @@ var Column = React.createClass({
     configureDragDrop(registerType) {
       registerType(DropTypes.COLUMN, {
         dragSource: {
-          key(component) {
+          getKey(component) {
             return DropTypes.COLUMN + component.props.id;
           },
           beginDrag(component) {
@@ -117,7 +117,7 @@ var Card =  React.createClass({
     configureDragDrop(registerType) {
       registerType(DropTypes.CARD, {
         dragSource: {
-          key(component) {
+          getKey(component) {
             return DropTypes.CARD + component.props.id;
           },
           beginDrag(component, e) {
