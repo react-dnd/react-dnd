@@ -60,11 +60,7 @@ function callDragDropLifecycle(func, component, ...rest) {
     return func.apply(component, rest);
   }
 
-  return func.call(
-    null,
-    component.isMounted() ? component : null,
-    ...rest
-  );
+  return func.call(null, component, ...rest);
 }
 
 var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9),
