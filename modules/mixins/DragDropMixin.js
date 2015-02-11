@@ -315,15 +315,14 @@ var DragDropMixin = {
     HTML5.endDrag();
 
     var { endDrag } = this._dragSources[type],
-        effect = DragDropStore.getDropEffect(),
-        mounted = this.isMounted();
+        effect = DragDropStore.getDropEffect();
 
     DragDropActionCreators.endDragging();
 
     // Note: this method may be invoked even *after* component was unmounted
     // This happens if source node was removed from DOM while dragging.
 
-    if (mounted) {
+    if (this.isMounted()) {
       this.setState({
         ownDraggedItemType: null
       });
