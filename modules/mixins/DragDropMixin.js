@@ -301,13 +301,14 @@ var DragDropMixin = {
     invariant(isObject(item), 'Expected return value of beginDrag to contain "item" object');
 
     configureDataTransfer(this.getDOMNode(), e.nativeEvent, dragPreview, dragAnchors, effectsAllowed);
-    DragDropActionCreators.startDragging(getKey(this), type, item, effectsAllowed);
+
 
     // Delay setting own state by a tick so `getDragState(type).isDragging`
     // doesn't return `true` yet. Otherwise browser will capture dragged state
     // as the element screenshot.
 
     setTimeout(() => {
+      DragDropActionCreators.startDragging(getKey(this), type, item, effectsAllowed); // this action sets state
       if (this.isMounted() && DragDropStore.getDraggedItem() === item) {
         this.setState({
           ownDraggedItemType: type
