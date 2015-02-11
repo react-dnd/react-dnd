@@ -10,7 +10,6 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     bindAll = require('../utils/bindAll'),
     invariant = require('react/lib/invariant'),
-    warning = require('react/lib/warning'),
     assign = require('react/lib/Object.assign'),
     defaults = require('lodash/object/defaults'),
     union = require('lodash/array/union'),
@@ -55,14 +54,6 @@ function checkDropTargetDefined(component, type) {
   );
 }
 
-function callDragDropLifecycle(func, component, ...rest) {
-  if (component.constructor._legacyConfigureDragDrop) {
-    return func.apply(component, rest);
-  }
-
-  return func.call(null, component, ...rest);
-}
-
 var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9),
     _refs = 0;
 
@@ -88,21 +79,6 @@ var DefaultDropTarget = {
   },
 
   getDropEffect(component, allowedEffects) {
-    return allowedEffects[0];
-  },
-
-  enter: noop,
-  over: noop,
-  leave: noop,
-  acceptDrop: noop
-};
-
-var LegacyDefaultDropTarget = {
-  canDrop() {
-    return true;
-  },
-
-  getDropEffect(allowedEffects) {
     return allowedEffects[0];
   },
 
@@ -140,7 +116,7 @@ var DragDropMixin = {
     }
 
     var { canDrop } = dropTarget;
-    return callDragDropLifecycle(canDrop, this, draggedItem) ? draggedItemType : null;
+    return canDrop(this, draggedItem) ? draggedItemType : null;
   },
 
   isAnyDropTargetActive(types) {
@@ -181,24 +157,13 @@ var DragDropMixin = {
     this._dragSources = {};
     this._dropTargets = {};
 
-    if (this.configureDragDrop) {
-      warning(
-        this.constructor._legacyConfigureDragDrop,
-        '%s declares configureDragDrop as an instance method, which is deprecated and will be removed in next version. ' +
-        'Move configureDragDrop to statics and change all methods inside it to accept component as first parameter instead of using "this".',
-        this.constructor.displayName
-      );
-      this.constructor._legacyConfigureDragDrop = true;
-      this.configureDragDrop(this.registerDragDropItemTypeHandlers);
-    } else if (this.constructor.configureDragDrop) {
-      this.constructor.configureDragDrop(this.registerDragDropItemTypeHandlers);
-    } else {
-      invariant(
-        this.constructor.configureDragDrop,
-        '%s must implement static configureDragDrop(registerType) to use DragDropMixin',
-        this.constructor.displayName
-      );
-    }
+    invariant(
+      this.constructor.configureDragDrop,
+      '%s must implement static configureDragDrop(registerType) to use DragDropMixin',
+      this.constructor.displayName
+    );
+
+    this.constructor.configureDragDrop(this.registerDragDropItemTypeHandlers);
   },
 
   componentDidMount() {
@@ -243,7 +208,7 @@ var DragDropMixin = {
         this.constructor.displayName
       );
 
-      this._dropTargets[type] = defaults(dropTarget, this.constructor._legacyConfigureDragDrop ? LegacyDefaultDropTarget : DefaultDropTarget);
+      this._dropTargets[type] = defaults(dropTarget, DefaultDropTarget);
     }
   },
 
@@ -267,7 +232,7 @@ var DragDropMixin = {
   handleDragStart(type, e) {
     var { canDrag, beginDrag } = this._dragSources[type];
 
-    if (!callDragDropLifecycle(canDrag, this, e)) {
+    if (!canDrag(this, e)) {
       e.preventDefault();
       return;
     }
@@ -279,7 +244,7 @@ var DragDropMixin = {
       this.handleDragEnd.bind(this, type, null)
     );
 
-    var dragOptions = callDragDropLifecycle(beginDrag, this, e),
+    var dragOptions = beginDrag(this, e),
         { item, dragPreview, dragAnchors, effectsAllowed } = dragOptions;
 
     if (!effectsAllowed) {
@@ -324,7 +289,7 @@ var DragDropMixin = {
       });
     }
 
-    callDragDropLifecycle(endDrag, this, effect, e);
+    endDrag(this, effect, e);
   },
 
   dropTargetFor(...types) {
@@ -359,7 +324,7 @@ var DragDropMixin = {
       effectsAllowed = [DropEffects.COPY];
     }
 
-    var dropEffect = callDragDropLifecycle(getDropEffect, this, effectsAllowed);
+    var dropEffect = getDropEffect(this, effectsAllowed);
     if (dropEffect) {
       invariant(
         effectsAllowed.indexOf(dropEffect) > -1,
@@ -373,7 +338,7 @@ var DragDropMixin = {
       currentDropEffect: dropEffect
     });
 
-    callDragDropLifecycle(enter, this, this.state.draggedItem, e);
+    enter(this, this.state.draggedItem, e);
   },
 
   handleDragOver(types, e) {
@@ -384,7 +349,7 @@ var DragDropMixin = {
     e.preventDefault();
 
     var { over } = this._dropTargets[this.state.draggedItemType];
-    callDragDropLifecycle(over, this, this.state.draggedItem, e);
+    over(this, this.state.draggedItem, e);
 
     // Don't use `none` because this will prevent browser from firing `dragend`
     HTML5.dragOver(e, this.state.currentDropEffect || 'move');
@@ -404,7 +369,7 @@ var DragDropMixin = {
     });
 
     var { leave } = this._dropTargets[this.state.draggedItemType];
-    callDragDropLifecycle(leave, this, this.state.draggedItem, e);
+    leave(this, this.state.draggedItem, e);
   },
 
   handleDrop(types, e) {
@@ -437,7 +402,7 @@ var DragDropMixin = {
       currentDropEffect: null
     });
 
-    callDragDropLifecycle(acceptDrop, this, item, e, isHandled, DragDropStore.getDropEffect());
+    acceptDrop(this, item, e, isHandled, DragDropStore.getDropEffect());
   }
 };
 
