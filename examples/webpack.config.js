@@ -7,14 +7,14 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolveLoader: {
-    modulesDirectories: ['..', 'node_modules']
+    modulesDirectories: ['node_modules']
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['react-hot-loader', 'jsx-loader?harmony'], exclude: /node_modules/ }
+      { test: /\.js$/, loaders: ['react-hot-loader', '6to5'], exclude: /node_modules/ }
     ]
   },
   plugins: [
