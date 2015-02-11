@@ -85,8 +85,7 @@ var Column = React.createClass({
       registerType(DropTypes.CARD, { // FIXME: not working
         dropTarget: {
           over(component, item, e) {
-            //if (component.props.children.length == 0)
-            //component.props.moveCard(item.id, component.props.id);
+            component.props.moveCard(item.id, component.props.id);
           }
         }
       });
@@ -120,6 +119,7 @@ var Card =  React.createClass({
           getKey(component) {
             return DropTypes.CARD + component.props.id;
           },
+
           beginDrag(component, e) {
             e.stopPropagation();
 
@@ -127,14 +127,15 @@ var Card =  React.createClass({
               item: {
                 id: component.props.id,
                 columnId: component.props.columnId,
-                children: React.addons.cloneWithProps(<Card style={{cursor: 'inherit'}} {...component.props}/>, {id: 'f'})
+                children: React.addons.cloneWithProps(<Card {...component.props}/>, {id: 'f'})
               }
             };
           }
         },
 
         dropTarget: {
-          over(component, item) {
+          over(component, item, e) {
+            e.stopPropagation();
             component.props.moveCard(item.id, component.props.id, component.props.columnId);
           }
         }
