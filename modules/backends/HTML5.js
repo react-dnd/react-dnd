@@ -101,7 +101,8 @@ function handleTopDrop(e) {
 }
 
 var HTML5 = {
-  setup() {
+  setup(component) {
+    // TODO: consider setting currentComponent here to help resurface
     if (typeof window === 'undefined') {
       return;
     }
@@ -112,7 +113,7 @@ var HTML5 = {
     window.addEventListener('drop', handleTopDrop);
   },
 
-  teardown() {
+  teardown(component) {
     if (typeof window === 'undefined') {
       return;
     }
@@ -177,6 +178,7 @@ var HTML5 = {
   },
 
   getDragClientOffset(e) {
+    // TODO: should this accept a component?
     return {
       x: e.clientX,
       y: e.clientY

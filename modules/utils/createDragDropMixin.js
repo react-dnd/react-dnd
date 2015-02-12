@@ -57,17 +57,17 @@ function checkDropTargetDefined(component, type) {
 function createDragDropMixin(backend) {
   var refs = 0;
 
-  function useBackend() {
+  function useBackend(component) {
     if (refs === 0) {
-      backend.setup();
+      backend.setup(component);
     }
     refs++;
   }
 
-  function unuseBackend() {
+  function unuseBackend(component) {
     refs--;
     if (refs === 0) {
-      backend.teardown();
+      backend.teardown(component);
     }
   }
 
@@ -143,12 +143,12 @@ function createDragDropMixin(backend) {
     },
 
     componentDidMount() {
-      useBackend();
+      useBackend(this);
       DragDropStore.addChangeListener(this.handleDragDropStoreChange);
     },
 
     componentWillUnmount() {
-      unuseBackend();
+      unuseBackend(this);
       DragDropStore.removeChangeListener(this.handleDragDropStoreChange);
     },
 
@@ -238,7 +238,7 @@ function createDragDropMixin(backend) {
     },
 
     handleDragEnd(type, e) {
-      backend.endDrag();
+      backend.endDrag(this);
 
       var { endDrag } = this._dragSources[type],
           effect = DragDropStore.getDropEffect();
@@ -312,7 +312,7 @@ function createDragDropMixin(backend) {
       over(this, this.state.draggedItem, e);
 
       // Don't use `none` because this will prevent browser from firing `dragend`
-      backend.dragOver(e, this.state.currentDropEffect || 'move');
+      backend.dragOver(this, e, this.state.currentDropEffect || 'move');
     },
 
     handleDragLeave(types, e) {
