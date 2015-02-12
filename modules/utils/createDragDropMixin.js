@@ -18,6 +18,8 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     isObject = require('lodash-node/modern/objects/isObject'),
     noop = require('lodash-node/modern/utilities/noop');
 
+var dropTargets = [];
+
 function checkValidType(component, type) {
   invariant(
     type && typeof type === 'string',
@@ -176,8 +178,23 @@ function createDragDropMixin(backend) {
           this.constructor.displayName
         );
 
+        dropTargets.push(this);
+
         this._dropTargets[type] = defaults(bindAll(dropTarget, this), DefaultDropTarget);
       }
+    },
+
+    getRegisteredComponent(domNode) {
+      var flag = false;
+
+      for (var i = 0; i < dropTargets.length; i++) {
+        if (dropTargets[i].isMounted() && dropTargets[i].getDOMNode() === domNode) {
+          flag = dropTargets[i];
+          break;
+        }
+      }
+
+      return flag;
     },
 
     handleDragDropStoreChange() {

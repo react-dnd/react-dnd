@@ -48,16 +48,49 @@ var Touch = {
   dragOver(e, dropEffect) {
   },
 
+  startElement: null,
+
   getDragSourceProps(component, type) {
     // TODO: optimize bind when we figure this out
     return {
-      onTouchStart: component.handleDragStart.bind(component, type),
+      onTouchStart: (e) => {
+        this.startElement = e.target;
+        component.handleDragStart(type, e);
+      }
     };
   },
 
+  element: null,
+
   getDropTargetProps(component, types) {
     // TODO
-    return {};
+    return {
+      onTouchMove: (e) => {
+        var element = document.elementFromPoint(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
+        var elementComponent = component.getRegisteredComponent(element);
+
+        if (element === this.startElement || elementComponent === false) {
+          return;
+        }
+
+        if (!this.element) {
+          this.element = element;
+          elementComponent.handleDragEnter(types, e);
+        } else if (this.element !== element) {
+          component.getRegisteredComponent(this.element).handleDragLeave(types, e);
+          this.element = element;
+          elementComponent.handleDragEnter(types, e);
+        } else {
+          elementComponent.handleDragOver(types, e);
+        }
+      },
+
+      onTouchEnd: (e) => {
+        this.element = null;
+        this.startElement = null;
+        component.handleDrop(types, e);
+      }
+    };
   },
 
   getDragClientOffset(e) {
