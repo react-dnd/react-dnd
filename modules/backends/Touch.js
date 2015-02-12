@@ -23,10 +23,10 @@ function handleTouchEnd() {
 }
 
 var Touch = {
-  setup() {
+  setup(component) {
   },
 
-  teardown() {
+  teardown(component) {
   },
 
   beginDrag(component, e, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed) {
@@ -37,7 +37,7 @@ var Touch = {
     _currentDragTarget.addEventListener('touchend', handleTouchEnd);
   },
 
-  endDrag() {
+  endDrag(component) {
     _currentDragTarget.removeEventListener('touchmove', handleTouchMove);
     _currentDragTarget.removeEventListener('touchend', handleTouchEnd);
 
@@ -45,7 +45,7 @@ var Touch = {
     _currentDragTarget = null;
   },
 
-  dragOver(e, dropEffect) {
+  dragOver(component, e, dropEffect) {
   },
 
   getDragSourceProps(component, type) {

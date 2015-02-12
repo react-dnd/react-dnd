@@ -17,10 +17,10 @@ function handleTopMouseUp() {
 }
 
 var Mouse = {
-  setup() {
+  setup(component) {
   },
 
-  teardown() {
+  teardown(component) {
   },
 
   beginDrag(component, e, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed) {
@@ -29,13 +29,13 @@ var Mouse = {
     window.addEventListener('mouseup', handleTopMouseUp);
   },
 
-  endDrag() {
+  endDrag(component) {
     _currentComponent = null;
     window.removeEventListener('mousemove', handleTopMouseMove);
     window.removeEventListener('mouseup', handleTopMouseUp);
   },
 
-  dragOver(e, dropEffect) {
+  dragOver(component, e, dropEffect) {
   },
 
   getDragSourceProps(component, type) {
