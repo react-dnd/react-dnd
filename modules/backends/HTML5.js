@@ -9,7 +9,8 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     union = require('lodash/array/union'),
     without = require('lodash/array/without'),
     isWebkit = require('../utils/isWebkit'),
-    isFirefox = require('../utils/isFirefox');
+    isFirefox = require('../utils/isFirefox'),
+    isIE = require('../utils/isIE');
 
 // Store global state for browser-specific fixes and workarounds
 var _monitor = new EnterLeaveMonitor(),
@@ -44,7 +45,7 @@ function triggerDragEndIfDragSourceWasRemovedFromDOM() {
 }
 
 function preventDefaultFileDropAction(e) {
-  if (isFileDragDropEvent(e)) {
+  if (isFileDragDropEvent(e) || isIE()) {
     e.preventDefault();
   }
 }
