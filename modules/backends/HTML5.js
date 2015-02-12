@@ -1,10 +1,13 @@
 'use strict';
 
 var DragDropActionCreators = require('../actions/DragDropActionCreators'),
+    DragDropStore = require('../stores/DragDropStore'),
     NativeDragItemTypes = require('../constants/NativeDragItemTypes'),
     DropEffects = require('../constants/DropEffects'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
+    getMouseCoordinates = require('../utils/getMouseCoordinates'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
+    configureDataTransfer = require('../utils/configureDataTransfer'),
     shallowEqual = require('react/lib/shallowEqual'),
     union = require('lodash/array/union'),
     without = require('lodash/array/without'),
@@ -14,8 +17,8 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
 // Store global state for browser-specific fixes and workarounds
 var _monitor = new EnterLeaveMonitor(),
     _currentDragTarget,
+    _currentComponent,
     _initialDragTargetRect,
-    _imitateCurrentDragEnd,
     _dragTargetRectDidChange,
     _currentDropEffect;
 
@@ -35,12 +38,12 @@ function checkIfCurrentDragTargetRectChanged() {
 }
 
 function triggerDragEndIfDragSourceWasRemovedFromDOM() {
-  if (_currentDragTarget &&
-      _imitateCurrentDragEnd &&
-      !document.body.contains(_currentDragTarget)) {
-
-    _imitateCurrentDragEnd();
+  if (!_currentComponent || document.body.contains(_currentDragTarget)) {
+    return;
   }
+
+  var type = DragDropStore.getDraggedItemType();
+  _currentComponent.handleDragEnd(type, null);
 }
 
 function preventDefaultFileDropAction(e) {
@@ -49,7 +52,7 @@ function preventDefaultFileDropAction(e) {
   }
 }
 
-function handleDragEnter(e) {
+function handleTopDragEnter(e) {
   preventDefaultFileDropAction(e);
 
   var isFirstEnter = _monitor.enter(e.target);
@@ -58,8 +61,11 @@ function handleDragEnter(e) {
   }
 }
 
-function handleDragOver(e) {
+function handleTopDragOver(e) {
   preventDefaultFileDropAction(e);
+
+  var coordinates = getMouseCoordinates(e);
+  DragDropActionCreators.drag(coordinates);
 
   // At the top level of event bubbling, use previously set drop effect and reset it.
   if (_currentDropEffect) {
@@ -67,17 +73,13 @@ function handleDragOver(e) {
     _currentDropEffect = null;
   }
 
-  if (!_currentDragTarget) {
-    return;
-  }
-
-  if (isWebkit() && checkIfCurrentDragTargetRectChanged()) {
+  if (_currentDragTarget && isWebkit() && checkIfCurrentDragTargetRectChanged()) {
     // Prevent animating to incorrect position
     e.preventDefault();
   }
 }
 
-function handleDragLeave(e) {
+function handleTopDragLeave(e) {
   preventDefaultFileDropAction(e);
 
   var isLastLeave = _monitor.leave(e.target);
@@ -86,7 +88,7 @@ function handleDragLeave(e) {
   }
 }
 
-function handleDrop(e) {
+function handleTopDrop(e) {
   preventDefaultFileDropAction(e);
 
   _monitor.reset();
@@ -99,29 +101,38 @@ function handleDrop(e) {
 }
 
 var HTML5 = {
-  setup() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('dragenter', handleDragEnter);
-      window.addEventListener('dragover', handleDragOver);
-      window.addEventListener('dragleave', handleDragLeave);
-      window.addEventListener('drop', handleDrop);
+  setup(component) {
+    // TODO: consider setting currentComponent here to help resurface
+    if (typeof window === 'undefined') {
+      return;
     }
+
+    window.addEventListener('dragenter', handleTopDragEnter);
+    window.addEventListener('dragover', handleTopDragOver);
+    window.addEventListener('dragleave', handleTopDragLeave);
+    window.addEventListener('drop', handleTopDrop);
   },
 
-  teardown() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('dragenter', handleDragEnter);
-      window.removeEventListener('dragover', handleDragOver);
-      window.removeEventListener('dragleave', handleDragLeave);
-      window.removeEventListener('drop', handleDrop);
+  teardown(component) {
+    if (typeof window === 'undefined') {
+      return;
     }
+
+    window.removeEventListener('dragenter', handleTopDragEnter);
+    window.removeEventListener('dragover', handleTopDragOver);
+    window.removeEventListener('dragleave', handleTopDragLeave);
+    window.removeEventListener('drop', handleTopDrop);
   },
 
-  beginDrag(dragTarget, imitateDragEnd) {
-    _currentDragTarget = dragTarget;
-    _initialDragTargetRect = getElementRect(dragTarget);
+  // TODO: consolidate options
+  beginDrag(component, e, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed) {
+    var { nativeEvent: { dataTransfer, target } } = e;
+    configureDataTransfer(dataTransfer, containerNode, dragPreview, dragAnchors, dragStartOffset, effectsAllowed);
+
+    _currentComponent = component;
+    _currentDragTarget = target;
+    _initialDragTargetRect = getElementRect(target);
     _dragTargetRectDidChange = false;
-    _imitateCurrentDragEnd = imitateDragEnd;
 
     // Mouse event tell us that dragging has ended but `dragend` didn't fire.
     // This may happen if source DOM was removed while dragging.
@@ -130,21 +141,48 @@ var HTML5 = {
     window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
-  endDrag() {
+  endDrag(component) {
     _currentDragTarget = null;
+    _currentComponent = null;
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
-    _imitateCurrentDragEnd = null;
 
     window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
     window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
-  dragOver(e, dropEffect) {
+  dragOver(component, e, dropEffect) {
     // As event bubbles top-down, first specified effect will be used
     if (!_currentDropEffect) {
       _currentDropEffect = dropEffect;
     }
+  },
+
+  getDragSourceProps(component, type) {
+    // TODO: optimize bind when we figure this out
+    return {
+      draggable: true,
+      onDragStart: component.handleDragStart.bind(component, type),
+      onDragEnd: component.handleDragEnd.bind(component, type)
+    };
+  },
+
+  getDropTargetProps(component, types) {
+    // TODO: optimize bind when we figure this out
+    return {
+      onDragEnter: component.handleDragEnter.bind(component, types),
+      onDragOver: component.handleDragOver.bind(component, types),
+      onDragLeave: component.handleDragLeave.bind(component, types),
+      onDrop: component.handleDrop.bind(component, types)
+    };
+  },
+
+  getDragClientOffset(e) {
+    // TODO: should this accept a component?
+    return {
+      x: e.clientX,
+      y: e.clientY
+    };
   }
 };
 
