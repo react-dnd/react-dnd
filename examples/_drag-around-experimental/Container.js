@@ -20,17 +20,19 @@ var Container = React.createClass({
     };
   },
 
-  configureDragDrop(registerType) {
-    registerType(ItemTypes.BOX, {
-      dropTarget: {
-        acceptDrop(item, e) {
-          var left = Math.round(item.startLeft + (e.clientX - item.startClientX)),
-              top = Math.round(item.startTop + (e.clientY - item.startClientY));
+  statics: {
+    configureDragDrop(registerType) {
+      registerType(ItemTypes.BOX, {
+        dropTarget: {
+          acceptDrop(component, item, e) {
+            var left = Math.round(item.startLeft + (e.clientX - item.startClientX)),
+                top = Math.round(item.startTop + (e.clientY - item.startClientY));
 
-          this.moveBox(item.id, left, top);
+            component.moveBox(item.id, left, top);
+          }
         }
-      }
-    });
+      });
+    }
   },
 
   moveBox(id, left, top) {

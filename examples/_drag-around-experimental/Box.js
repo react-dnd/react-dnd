@@ -33,25 +33,27 @@ var Box = React.createClass({
     clearInterval(this.interval);
   },
 
-  configureDragDrop(registerType) {
-    registerType(ItemTypes.BOX, {
-      dragSource: {
-        beginDrag(e) {
-          return {
-            effectAllowed: DropEffects.MOVE,
-            dragPreview: getEmptyImage(),
-            item: {
-              id: this.props.id,
-              children: this.props.children,
-              startLeft: this.props.left,
-              startTop: this.props.top,
-              startClientX: e.clientX,
-              startClientY: e.clientY
-            }
-          };
+  statics: {
+    configureDragDrop(registerType) {
+      registerType(ItemTypes.BOX, {
+        dragSource: {
+          beginDrag(component, e) {
+            return {
+              effectAllowed: DropEffects.MOVE,
+              dragPreview: getEmptyImage(),
+              item: {
+                id: component.props.id,
+                children: component.props.children,
+                startLeft: component.props.left,
+                startTop: component.props.top,
+                startClientX: e.clientX,
+                startClientY: e.clientY
+              }
+            };
+          }
         }
-      }
-    });
+      });
+    }
   },
 
   render() {
