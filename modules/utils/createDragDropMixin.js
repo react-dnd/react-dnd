@@ -11,12 +11,12 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     bindAll = require('./bindAll'),
     invariant = require('react/lib/invariant'),
     assign = require('react/lib/Object.assign'),
-    defaults = require('lodash-node/modern/objects/defaults'),
-    union = require('lodash-node/modern/arrays/union'),
-    without = require('lodash-node/modern/arrays/without'),
-    isArray = require('lodash-node/modern/objects/isArray'),
-    isObject = require('lodash-node/modern/objects/isObject'),
-    noop = require('lodash-node/modern/utilities/noop');
+    defaults = require('lodash/object/defaults'),
+    union = require('lodash/array/union'),
+    without = require('lodash/array/without'),
+    isArray = require('lodash/object/isArray'),
+    isObject = require('lodash/object/isObject'),
+    noop = require('lodash/utility/noop');
 
 function checkValidType(component, type) {
   invariant(

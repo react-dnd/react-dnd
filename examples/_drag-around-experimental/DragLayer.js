@@ -3,10 +3,10 @@
 
 var React = require('react'),
     Box = require('./Box'),
-    { DragFeedbackMixin } = require('react-dnd');
+    { DragLayerMixin } = require('react-dnd');
 
 var DragLayer = React.createClass({
-  mixins: [DragFeedbackMixin],
+  mixins: [DragLayerMixin],
 
   render() {
     var {
