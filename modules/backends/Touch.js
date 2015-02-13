@@ -48,13 +48,10 @@ var Touch = {
   dragOver(e, dropEffect) {
   },
 
-  startElement: null,
-
   getDragSourceProps(component, type) {
     // TODO: optimize bind when we figure this out
     return {
       onTouchStart: (e) => {
-        this.startElement = e.target;
         component.handleDragStart(type, e);
       }
     };
@@ -66,10 +63,11 @@ var Touch = {
     // TODO
     return {
       onTouchMove: (e) => {
-        var element = document.elementFromPoint(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
-        var elementComponent = component.getRegisteredComponent(element);
+        var touches = e.targetTouches[0],
+            element = document.elementFromPoint(touches.clientX, touches.clientY),
+            elementComponent = component.getRegisteredComponent(element);
 
-        if (element === this.startElement || elementComponent === false) {
+        if (element === e.target || elementComponent === false) {
           return;
         }
 
@@ -87,7 +85,6 @@ var Touch = {
 
       onTouchEnd: (e) => {
         this.element = null;
-        this.startElement = null;
         component.handleDrop(types, e);
       }
     };
