@@ -16,7 +16,10 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     without = require('lodash-node/modern/arrays/without'),
     isArray = require('lodash-node/modern/objects/isArray'),
     isObject = require('lodash-node/modern/objects/isObject'),
-    noop = require('lodash-node/modern/utilities/noop');
+    noop = require('lodash-node/modern/utilities/noop'),
+    findIndex = require('lodash-node/modern/arrays/findIndex');
+
+var _dropTargets = [];
 
 function checkValidType(component, type) {
   invariant(
@@ -149,6 +152,13 @@ function createDragDropMixin(backend) {
 
     componentWillUnmount() {
       unuseBackend();
+
+      var index = findIndex(_dropTargets, (c) => c === this);
+
+      if (index > -1) {
+        _dropTargets.splice(index, 1);
+      }
+
       DragDropStore.removeChangeListener(this.handleDragDropStoreChange);
     },
 
@@ -176,8 +186,16 @@ function createDragDropMixin(backend) {
           this.constructor.displayName
         );
 
+        _dropTargets.push(this);
+
         this._dropTargets[type] = defaults(bindAll(dropTarget, this), DefaultDropTarget);
       }
+    },
+
+    getRegisteredComponent(domNode) {
+      var index = findIndex(_dropTargets, (c) => c.isMounted() && c.getDOMNode() === domNode);
+
+      return index > -1 ? _dropTargets[index] : false;
     },
 
     handleDragDropStoreChange() {

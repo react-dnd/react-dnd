@@ -51,13 +51,43 @@ var Touch = {
   getDragSourceProps(component, type) {
     // TODO: optimize bind when we figure this out
     return {
-      onTouchStart: component.handleDragStart.bind(component, type),
+      onTouchStart: (e) => {
+        component.handleDragStart(type, e);
+      }
     };
   },
 
+  element: null,
+
   getDropTargetProps(component, types) {
     // TODO
-    return {};
+    return {
+      onTouchMove: (e) => {
+        var touches = e.targetTouches[0],
+            element = document.elementFromPoint(touches.clientX, touches.clientY),
+            elementComponent = component.getRegisteredComponent(element);
+
+        if (element === e.target || elementComponent === false) {
+          return;
+        }
+
+        if (!this.element) {
+          this.element = element;
+          elementComponent.handleDragEnter(types, e);
+        } else if (this.element !== element) {
+          component.getRegisteredComponent(this.element).handleDragLeave(types, e);
+          this.element = element;
+          elementComponent.handleDragEnter(types, e);
+        } else {
+          elementComponent.handleDragOver(types, e);
+        }
+      },
+
+      onTouchEnd: (e) => {
+        this.element = null;
+        component.handleDrop(types, e);
+      }
+    };
   },
 
   getDragClientOffset(e) {
