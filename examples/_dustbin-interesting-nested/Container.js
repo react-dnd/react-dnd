@@ -13,8 +13,8 @@ var InnerContainer = React.createClass({
     configureDragDrop(registerType) {
       registerType(ItemTypes.PAPER, {
         dropTarget: {
-          acceptDrop(component, item, e, isHandled, isCurrentDropTarget) {
-            if (!isCurrentDropTarget) {
+          acceptDrop(component, item, e, isHandled) {
+            if (isHandled) {
               return false;
             }
 
