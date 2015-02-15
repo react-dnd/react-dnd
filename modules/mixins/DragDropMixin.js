@@ -149,6 +149,7 @@ var DragDropMixin = {
 
   getStateFromDragDropStore() {
     return {
+      activeDropTarget: DragDropStore.getActiveDropTarget(),
       draggedItem: DragDropStore.getDraggedItem(),
       draggedItemType: DragDropStore.getDraggedItemType()
     };
@@ -172,7 +173,9 @@ var DragDropMixin = {
 
     return {
       isDragging: isDragging,
-      isHovering: isDragging && isHovering
+      isHovering: isDragging && isHovering,
+      isOver: isDragging && isHovering,
+      isOverCurrent: DragDropStore.getActiveDropTarget() === this
     };
   },
 
@@ -373,6 +376,8 @@ var DragDropMixin = {
       currentDropEffect: dropEffect
     });
 
+    DragDropActionCreators.captureDropTarget(this);
+
     callDragDropLifecycle(enter, this, this.state.draggedItem, e);
   },
 
@@ -402,6 +407,8 @@ var DragDropMixin = {
     this.setState({
       currentDropEffect: null
     });
+
+    DragDropActionCreators.releaseDropTarget(this);
 
     var { leave } = this._dropTargets[this.state.draggedItemType];
     callDragDropLifecycle(leave, this, this.state.draggedItem, e);
@@ -437,7 +444,7 @@ var DragDropMixin = {
       currentDropEffect: null
     });
 
-    callDragDropLifecycle(acceptDrop, this, item, e, isHandled, DragDropStore.getDropEffect());
+    callDragDropLifecycle(acceptDrop, this, item, e, isHandled);
   }
 };
 
