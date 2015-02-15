@@ -50,6 +50,7 @@ DragDropDispatcher.register(function (payload) {
 
   case DragDropActionTypes.DROP:
     _dropEffect = action.dropEffect;
+    _dropTargets = [];
     DragDropStore.emitChange();
     break;
 
