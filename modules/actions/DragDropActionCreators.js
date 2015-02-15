@@ -24,6 +24,13 @@ var DragDropActionCreators = {
     DragDropDispatcher.handleAction({
       type: DragDropActionTypes.DRAG_END
     });
+  },
+
+  recordDropTarget(component) {
+    DragDropDispatcher.handleAction({
+      type: DragDropActionTypes.RECORD_DROP_TARGET,
+      component: component
+    });
   }
 };
 

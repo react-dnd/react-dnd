@@ -149,6 +149,7 @@ var DragDropMixin = {
 
   getStateFromDragDropStore() {
     return {
+      activeDropTarget: DragDropStore.getActiveDropTarget(),
       draggedItem: DragDropStore.getDraggedItem(),
       draggedItemType: DragDropStore.getDraggedItemType()
     };
@@ -172,7 +173,7 @@ var DragDropMixin = {
 
     return {
       isDragging: isDragging,
-      isHovering: isDragging && isHovering
+      isHovering: isDragging && isHovering && DragDropStore.getActiveDropTarget() === this
     };
   },
 
@@ -372,6 +373,8 @@ var DragDropMixin = {
     this.setState({
       currentDropEffect: dropEffect
     });
+
+    DragDropActionCreators.recordDropTarget(this);
 
     callDragDropLifecycle(enter, this, this.state.draggedItem, e);
   },
