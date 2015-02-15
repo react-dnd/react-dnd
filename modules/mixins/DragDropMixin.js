@@ -436,6 +436,8 @@ var DragDropMixin = {
 
     this._monitor.reset();
 
+    var activeDropTarget = DragDropStore.getActiveDropTarget();
+
     if (!isHandled) {
       DragDropActionCreators.recordDrop(currentDropEffect);
     }
@@ -444,7 +446,7 @@ var DragDropMixin = {
       currentDropEffect: null
     });
 
-    callDragDropLifecycle(acceptDrop, this, item, e, isHandled, DragDropStore.getDropEffect());
+    callDragDropLifecycle(acceptDrop, this, item, e, isHandled, activeDropTarget === this);
   }
 };
 

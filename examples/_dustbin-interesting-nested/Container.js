@@ -13,9 +13,24 @@ var InnerContainer = React.createClass({
     configureDragDrop(registerType) {
       registerType(ItemTypes.PAPER, {
         dropTarget: {
+          acceptDrop(component, item, e, isHandled, isCurrentDropTarget) {
+            if (!isCurrentDropTarget) {
+              return false;
+            }
+
+            component.setState({
+              lastDroppedItem: item
+            });
+          }
         }
       });
     }
+  },
+
+  getInitialState() {
+    return {
+      lastDroppedItem: null
+    };
   },
 
   render() {
@@ -32,6 +47,15 @@ var InnerContainer = React.createClass({
       <div style={{backgroundColor: backgroundColor, overflow: 'hidden'}}
            {...this.dropTargetFor.apply(this, [ItemTypes.PAPER])}>
         {this.props.children}
+
+        {dropStates.some(s => s.isOverCurrent) ?
+          'Release to drop' :
+          'This dustbin accepts: ' + ItemTypes.PAPER
+        }
+
+        {this.state.lastDroppedItem &&
+          <p>Last dropped: {JSON.stringify(this.state.lastDroppedItem)}</p>
+        }
       </div>
     );
   }
