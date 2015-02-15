@@ -8,7 +8,7 @@ var _draggedItem = null,
     _draggedItemType = null,
     _effectsAllowed = null,
     _dropEffect = null,
-    _activeDropTarget;
+    _dropTargets = [];
 
 var DragDropStore = createStore({
   isDragging() {
@@ -32,7 +32,7 @@ var DragDropStore = createStore({
   },
 
   getActiveDropTarget() {
-    return _activeDropTarget;
+    return _dropTargets[_dropTargets.length - 1] || null;
   }
 });
 
@@ -50,7 +50,6 @@ DragDropDispatcher.register(function (payload) {
 
   case DragDropActionTypes.DROP:
     _dropEffect = action.dropEffect;
-    _activeDropTarget = null;
     DragDropStore.emitChange();
     break;
 
@@ -59,12 +58,24 @@ DragDropDispatcher.register(function (payload) {
     _draggedItemType = null;
     _effectsAllowed = null;
     _dropEffect = null;
-    _activeDropTarget = null;
     DragDropStore.emitChange();
     break;
 
-  case DragDropActionTypes.RECORD_DROP_TARGET:
-    _activeDropTarget = action.component;
+  case DragDropActionTypes.CAPTURE_DROP_TARGET:
+    if (_dropTargets.indexOf(action.component) === -1) {
+      _dropTargets.push(action.component);
+    }
+
+    DragDropStore.emitChange();
+    break;
+
+  case DragDropActionTypes.RELEASE_DROP_TARGET:
+    var index = _dropTargets.indexOf(action.component);
+
+    if (index > -1) {
+      _dropTargets.splice(index, 1);
+    }
+
     DragDropStore.emitChange();
     break;
   }

@@ -26,9 +26,16 @@ var DragDropActionCreators = {
     });
   },
 
-  recordDropTarget(component) {
+  captureDropTarget(component) {
     DragDropDispatcher.handleAction({
-      type: DragDropActionTypes.RECORD_DROP_TARGET,
+      type: DragDropActionTypes.CAPTURE_DROP_TARGET,
+      component: component
+    });
+  },
+
+  releaseDropTarget(component) {
+    DragDropDispatcher.handleAction({
+      type: DragDropActionTypes.RELEASE_DROP_TARGET,
       component: component
     });
   }

@@ -376,7 +376,7 @@ var DragDropMixin = {
       currentDropEffect: dropEffect
     });
 
-    DragDropActionCreators.recordDropTarget(this);
+    DragDropActionCreators.captureDropTarget(this);
 
     callDragDropLifecycle(enter, this, this.state.draggedItem, e);
   },
@@ -407,6 +407,8 @@ var DragDropMixin = {
     this.setState({
       currentDropEffect: null
     });
+
+    DragDropActionCreators.releaseDropTarget(this);
 
     var { leave } = this._dropTargets[this.state.draggedItemType];
     callDragDropLifecycle(leave, this, this.state.draggedItem, e);
