@@ -42,7 +42,7 @@ function makeDustbin(accepts) {
         var dropStates = accepts.map(this.getDropState),
             backgroundColor = '#222';
 
-        if (dropStates.some(s => s.isHovering)) {
+        if (dropStates.some(s => s.isOverCurrent)) {
           backgroundColor = 'darkgreen';
         } else if (dropStates.some(s => s.isDragging)) {
           backgroundColor = 'darkkhaki';

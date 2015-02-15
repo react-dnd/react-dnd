@@ -7,6 +7,7 @@ var React = require('react'),
     DragAroundCustom = require('./_drag-around-custom/index'),
     DustbinSimple = require('./_dustbin-simple'),
     DustbinInteresting = require('./_dustbin-interesting'),
+    DustbinInterestingNested = require('./_dustbin-interesting-nested'),
     SortableSimple = require('./_sortable-simple');
 
 var App = React.createClass({
@@ -15,7 +16,7 @@ var App = React.createClass({
       <div>
         <h1>react-dnd examples (<a target='_href' href='https://github.com/gaearon/react-dnd/blob/master/examples'>source</a>)</h1>
         <ul>
-          <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>)</li>
+          <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>, <Link to='dustbin-interesting-nested'>interesting nested</Link>)</li>
           <li>Drag Around (<Link to='drag-around-naive'>naive</Link>, <Link to='drag-around-custom'>custom</Link>)</li>
           <li>Sortable (<Link to='sortable-simple'>simple</Link>, more coming...)</li>
         </ul>
@@ -32,6 +33,7 @@ var routes = (
     <Route name='drag-around-custom' path='drag-around-custom' handler={DragAroundCustom} />
     <Route name='dustbin-simple' path='dustbin-simple' handler={DustbinSimple} />
     <Route name='dustbin-interesting' path='dustbin-interesting' handler={DustbinInteresting} />
+    <Route name='dustbin-interesting-nested' path='dustbin-interesting-nested' handler={DustbinInterestingNested} />
     <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
 
     <Redirect from='/' to='dustbin-simple' />

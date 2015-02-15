@@ -173,7 +173,9 @@ var DragDropMixin = {
 
     return {
       isDragging: isDragging,
-      isHovering: isDragging && isHovering && DragDropStore.getActiveDropTarget() === this
+      isHovering: isDragging && isHovering,
+      isOver: isDragging && isHovering,
+      isOverCurrent: DragDropStore.getActiveDropTarget() === this
     };
   },
 

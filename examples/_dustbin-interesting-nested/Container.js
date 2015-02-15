@@ -22,7 +22,7 @@ var InnerContainer = React.createClass({
     var dropStates = [ItemTypes.PAPER].map(this.getDropState),
         backgroundColor = 'red';
 
-    if (dropStates.some(s => s.isHovering)) {
+    if (dropStates.some(s => s.isOverCurrent)) {
       backgroundColor = 'blue';
     } else if (dropStates.some(s => s.isDragging)) {
       backgroundColor = 'yellow';
