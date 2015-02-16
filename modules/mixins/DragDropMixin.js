@@ -64,13 +64,21 @@ function callDragDropLifecycle(func, component, ...rest) {
 }
 
 var UNLIKELY_CHAR = String.fromCharCode(0xD83D, 0xDCA9),
-    _refs = 0;
+    _refs = 0,
+    _nextDragSourceKey = 0;
 
 function hashStringArray(arr) {
   return arr.join(UNLIKELY_CHAR);
 }
 
 var DefaultDragSource = {
+  getKey() {
+    if (!this._dragSourceKey) {
+      this._dragSourceKey = ('_' + _nextDragSourceKey++);
+    }
+    return this._dragSourceKey;
+  },
+
   canDrag() {
     return true;
   },
@@ -150,6 +158,7 @@ var DragDropMixin = {
   getStateFromDragDropStore() {
     return {
       draggedItem: DragDropStore.getDraggedItem(),
+      draggedItemKey: DragDropStore.getDraggedItemKey(),
       draggedItemType: DragDropStore.getDraggedItemType()
     };
   },
@@ -159,7 +168,7 @@ var DragDropMixin = {
     checkDragSourceDefined(this, type);
 
     return {
-      isDragging: this.state.ownDraggedItemType === type
+      isDragging: this._dragSources[type].getKey(this) === this.state.draggedItemKey
     };
   },
 
@@ -265,7 +274,7 @@ var DragDropMixin = {
   },
 
   handleDragStart(type, e) {
-    var { canDrag, beginDrag } = this._dragSources[type];
+    var { getKey, canDrag, beginDrag } = this._dragSources[type];
 
     if (!callDragDropLifecycle(canDrag, this, e)) {
       e.preventDefault();
@@ -292,13 +301,14 @@ var DragDropMixin = {
     invariant(isObject(item), 'Expected return value of beginDrag to contain "item" object');
 
     configureDataTransfer(this.getDOMNode(), e.nativeEvent, dragPreview, dragAnchors, effectsAllowed);
-    DragDropActionCreators.startDragging(type, item, effectsAllowed);
+
 
     // Delay setting own state by a tick so `getDragState(type).isDragging`
     // doesn't return `true` yet. Otherwise browser will capture dragged state
     // as the element screenshot.
 
     setTimeout(() => {
+      DragDropActionCreators.startDragging(getKey(this), type, item, effectsAllowed); // this action sets state
       if (this.isMounted() && DragDropStore.getDraggedItem() === item) {
         this.setState({
           ownDraggedItemType: type
