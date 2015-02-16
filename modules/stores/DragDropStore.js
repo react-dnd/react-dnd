@@ -7,6 +7,8 @@ var DragDropDispatcher = require('../dispatcher/DragDropDispatcher'),
 var _draggedItem = null,
     _draggedItemType = null,
     _effectsAllowed = null,
+    _dragStartOffset = null,
+    _dragOffset = null,
     _dropEffect = null;
 
 var DragDropStore = createStore({
@@ -16,6 +18,14 @@ var DragDropStore = createStore({
 
   getEffectsAllowed() {
     return _effectsAllowed;
+  },
+
+  getDragStartOffset() {
+    return _dragStartOffset;
+  },
+
+  getDragOffset() {
+    return _dragOffset;
   },
 
   getDropEffect() {
@@ -40,6 +50,13 @@ DragDropDispatcher.register(function (payload) {
     _draggedItem = action.item;
     _draggedItemType = action.itemType;
     _effectsAllowed = action.effectsAllowed;
+    _dragOffset = action.dragOffset;
+    _dragStartOffset = action.dragStartOffset;
+    DragDropStore.emitChange();
+    break;
+
+  case DragDropActionTypes.DRAG:
+    _dragOffset = action.dragOffset;
     DragDropStore.emitChange();
     break;
 
@@ -53,6 +70,8 @@ DragDropDispatcher.register(function (payload) {
     _draggedItemType = null;
     _effectsAllowed = null;
     _dropEffect = null;
+    _dragStartOffset = null;
+    _dragOffset = null;
     DragDropStore.emitChange();
     break;
   }
