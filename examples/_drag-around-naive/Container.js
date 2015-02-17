@@ -24,12 +24,13 @@ var Container = React.createClass({
   },
 
   statics: {
-    configureDragDrop(register) {
+    configureDragDrop(register, context) {
       register(ItemTypes.BOX, {
         dropTarget: {
-          acceptDrop(component, item, e) {
-            var left = Math.round(item.startLeft + (e.pageX - item.startPageX)),
-                top = Math.round(item.startTop + (e.pageY - item.startPageY));
+          acceptDrop(component, item) {
+            var delta = context.getCurrentOffsetDelta(),
+                left = Math.round(item.left + delta.x),
+                top = Math.round(item.top + delta.y);
 
             component.moveBox(item.id, left, top);
           }
