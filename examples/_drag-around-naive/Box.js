@@ -19,16 +19,10 @@ var Box = React.createClass({
     configureDragDrop(register) {
       register(ItemTypes.BOX, {
         dragSource: {
-          beginDrag(component, e) {
+          beginDrag(component) {
             return {
               effectAllowed: DropEffects.MOVE,
-              item: {
-                id: component.props.id,
-                startLeft: component.props.left,
-                startTop: component.props.top,
-                startPageX: e.pageX,
-                startPageY: e.pageY
-              }
+              item: component.props
             };
           }
         }
