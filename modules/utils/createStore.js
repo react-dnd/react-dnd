@@ -2,8 +2,6 @@
 
 var EventEmitter = require('events').EventEmitter,
     assign = require('react/lib/Object.assign'),
-    shallowEqual = require('react/lib/shallowEqual'),
-    bindAll = require('./bindAll'),
     CHANGE_EVENT = 'change';
 
 function createStore(spec) {
@@ -22,7 +20,6 @@ function createStore(spec) {
   }, spec, EventEmitter.prototype);
 
   store.setMaxListeners(0);
-  bindAll(store);
 
   return store;
 }

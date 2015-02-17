@@ -2,6 +2,7 @@
 
 var DragDropDispatcher = require('../dispatcher/DragDropDispatcher'),
     DragDropActionTypes = require('../constants/DragDropActionTypes'),
+    DragOffsetStore = require('../stores/DragOffsetStore'),
     createStore = require('../utils/createStore');
 
 var _draggedItem = null,
@@ -9,7 +10,7 @@ var _draggedItem = null,
     _effectsAllowed = null,
     _dropEffect = null;
 
-var DragDropStore = createStore({
+var DragOperationStore = createStore({
   isDragging() {
     return !!_draggedItem;
   },
@@ -31,7 +32,9 @@ var DragDropStore = createStore({
   }
 });
 
-DragDropDispatcher.register(function (payload) {
+DragOperationStore.dispatchToken = DragDropDispatcher.register(function (payload) {
+  DragDropDispatcher.waitFor([DragOffsetStore.dispatchToken]);
+
   var { action } = payload;
 
   switch (action.type) {
@@ -40,12 +43,12 @@ DragDropDispatcher.register(function (payload) {
     _draggedItem = action.item;
     _draggedItemType = action.itemType;
     _effectsAllowed = action.effectsAllowed;
-    DragDropStore.emitChange();
+    DragOperationStore.emitChange();
     break;
 
   case DragDropActionTypes.DROP:
     _dropEffect = action.dropEffect;
-    DragDropStore.emitChange();
+    DragOperationStore.emitChange();
     break;
 
   case DragDropActionTypes.DRAG_END:
@@ -53,9 +56,9 @@ DragDropDispatcher.register(function (payload) {
     _draggedItemType = null;
     _effectsAllowed = null;
     _dropEffect = null;
-    DragDropStore.emitChange();
+    DragOperationStore.emitChange();
     break;
   }
 });
 
-module.exports = DragDropStore;
+module.exports = DragOperationStore;
