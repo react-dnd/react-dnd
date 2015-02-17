@@ -1,20 +1,20 @@
 'use strict';
 
 var React = require('react'),
-    makeDustbin = require('./Dustbin'),
-    makeItem = require('./Item'),
+    makeDustbin = require('./makeDustbin'),
+    makeItem = require('./makeItem'),
     ItemTypes = require('./ItemTypes'),
     { NativeDragItemTypes } = require('react-dnd');
 
 var Container = React.createClass({
   renderDustbin(accepts) {
     var Dustbin = makeDustbin(accepts);
-    return <Dustbin/>;
+    return <Dustbin />;
   },
 
   renderItem(name, dropType) {
     var Item = makeItem(dropType);
-    return <Item name={name}/>;
+    return <Item name={name} />;
   },
 
   render() {
