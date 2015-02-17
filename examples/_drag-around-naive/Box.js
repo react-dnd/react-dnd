@@ -16,8 +16,8 @@ var Box = React.createClass({
   },
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(ItemTypes.BOX, {
+    configureDragDrop(register) {
+      register(ItemTypes.BOX, {
         dragSource: {
           beginDrag(component, e) {
             return {

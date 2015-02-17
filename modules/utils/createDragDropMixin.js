@@ -160,7 +160,7 @@ function createDragDropMixin(backend) {
       } else {
         invariant(
           this.constructor.configureDragDrop,
-          '%s must implement static configureDragDrop(registerType) to use DragDropMixin',
+          '%s must implement static configureDragDrop(register, context) to use DragDropMixin',
           this.constructor.displayName
         );
       }

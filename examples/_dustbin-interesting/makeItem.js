@@ -20,8 +20,8 @@ function makeItem(dropType) {
     },
 
     statics: {
-      configureDragDrop(registerType) {
-        registerType(dropType, {
+      configureDragDrop(register) {
+        register(dropType, {
           dragSource: {
             beginDrag(component) {
               return {
