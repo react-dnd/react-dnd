@@ -130,8 +130,7 @@ var HTML5 = {
     // Mouse event tell us that dragging has ended but `dragend` didn't fire.
     // This may happen if source DOM was removed while dragging.
 
-    window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
-    window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM, true);
   },
 
   endDrag(component) {
@@ -140,8 +139,7 @@ var HTML5 = {
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
 
-    window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
-    window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM, true);
   },
 
   dragOver(component, e, dropEffect) {
