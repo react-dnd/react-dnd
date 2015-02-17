@@ -105,11 +105,11 @@ var Image = React.createClass({
   mixins: [DragDropMixin],
 
   statics: {
-    configureDragDrop(registerType) {
+    configureDragDrop(register) {
 
-      // Specify all supported types by calling registerType(type, { dragSource?, dropTarget? })
+      // Specify all supported types by calling register(type, { dragSource?, dropTarget? })
 
-      registerType(ItemTypes.IMAGE, {
+      register(ItemTypes.IMAGE, {
 
         // dragSource, when specified, is {
         //   beginDrag(component),
@@ -151,7 +151,7 @@ var Image = React.createClass({
 
 By specifying `configureDragDrop` in `statics`, we tell `DragDropMixin` the drag-drop behavior of this component. Both draggable and droppable components use the same mixin.
 
-Inside `configureDragDrop`, we need to call `registerType` for each of our custom `ItemTypes` that component supports. For example, there might be several representations of images in your app, and each would provide a `dragSource` for `ItemTypes.IMAGE`.
+Inside `configureDragDrop`, we need to call `register` for each of our custom `ItemTypes` that component supports. For example, there might be several representations of images in your app, and each would provide a `dragSource` for `ItemTypes.IMAGE`.
 
 A `dragSource` is just an object specifying how the drag source works. You must implement `beginDrag(component)` to return `item` that represents the data you're dragging and, optionally, a few options that adjust the dragging UI. You can optionally  `canDrag(component)` to forbid dragging, or `endDrag(component, dropEffect)` to execute some logic when the drop has (or has not) occured. And you can share this logic between components by letting a shared mixins generate `dragSource` for them.
 
@@ -159,7 +159,7 @@ Finally, you must use `{...this.dragSourceFor(itemType)}` on some (one or more) 
 
 ### Simple Drop Target
 
-Let's say we want `ImageBlock` to be a drop target for `IMAGE`s. It's pretty much the same, except that we need to give `registerType` a `dropTarget` implementation:
+Let's say we want `ImageBlock` to be a drop target for `IMAGE`s. It's pretty much the same, except that we need to give `register` a `dropTarget` implementation:
 
 ```javascript
 var { DragDropMixin } = require('react-dnd'),
@@ -169,8 +169,8 @@ var ImageBlock = React.createClass({
   mixins: [DragDropMixin],
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(ItemTypes.IMAGE, {
+    configureDragDrop(register) {
+      register(ItemTypes.IMAGE, {
 
         // dropTarget, when specified, is {
         //   acceptDrop(component, item)?,
@@ -218,8 +218,8 @@ var ImageBlock = React.createClass({
   mixins: [DragDropMixin],
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(ItemTypes.IMAGE, {
+    configureDragDrop(register) {
+      register(ItemTypes.IMAGE, {
 
         // Add a drag source that only works when ImageBlock has an image:
 
@@ -272,8 +272,8 @@ var ImageUploader = React.createClass({
   mixins: [DragDropMixin],
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(NativeDragItemTypes.FILE, {
+    configureDragDrop(register) {
+      register(NativeDragItemTypes.FILE, {
         dropTarget: {
           acceptDrop(component, item) {
             // Do something with files
@@ -317,12 +317,12 @@ I have not covered everything but it's possible to use this API in a few more wa
 
 ### `require('react-dnd').DragDropMixin`
 
-`statics.configureDragDrop(registerType)`
+`statics.configureDragDrop(register)`
 
 Gives you a chance to configure drag and drop on your component.  
 Components with `DragDropMixin` will have this method.
 
-`registerType(type, { dragSource?, dropTarget? })`
+`register(type, { dragSource?, dropTarget? })`
 
 Call this method to specify component behavior as drag source or drop target for given type.
 This method is passed as a parameter to `configureDragDrop`.
@@ -394,8 +394,8 @@ getImageUrlsToPreload() {
 
 // You can now use `this.hasPreloadedImage(url)` and `this.getPreloadedImage(url)` in your `dragSource`:
 statics: {
-  configureDragDrop(registerType) {
-    registerType(ItemTypes.MY_ITEM, {
+  configureDragDrop(register) {
+    register(ItemTypes.MY_ITEM, {
       dragSource: {
         canDrag(component) {
           return component.hasPreloadedImage('some-img-url1');

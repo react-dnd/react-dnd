@@ -24,8 +24,8 @@ var Container = React.createClass({
   },
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(ItemTypes.BOX, {
+    configureDragDrop(register) {
+      register(ItemTypes.BOX, {
         dropTarget: {
           acceptDrop(component, item, e) {
             var left = Math.round(item.startLeft + (e.pageX - item.startPageX)),

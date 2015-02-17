@@ -8,8 +8,8 @@ var Dustbin = React.createClass({
   mixins: [DragDropMixin],
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(ItemTypes.ITEM, {
+    configureDragDrop(register) {
+      register(ItemTypes.ITEM, {
         dropTarget: {
           acceptDrop(component, item) {
             window.alert('You dropped ' + item.name + '!');
