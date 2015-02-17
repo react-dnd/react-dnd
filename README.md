@@ -82,6 +82,11 @@ npm install --save react-dnd
 * Support for mouse events instead of HTML5 drag-and-drop events;
 * Dragging multiple items at once.
 
+## Production Usage
+
+* [Stampsy](http://stampsy.com), where it was originally developed, is using **react-dnd** for the post editor.
+* [Add your company!](https://github.com/gaearon/react-dnd/edit/master/README.md)
+
 ## See Also
 
 * [react-draggable](https://github.com/mzabriskie/react-draggable) by [Matt Zabriskie](https://github.com/mzabriskie)
