@@ -84,7 +84,7 @@ npm install --save react-dnd
 
 ## Production Usage
 
-* [Stampsy](http://stampsy.com), where it was originally developed, is using **react-dnd** for the post editor.
+* [Stampsy](http://stampsy.com), where it was originally developed, is using react-dnd for the post editor.
 * [Add your company!](https://github.com/gaearon/react-dnd/edit/master/README.md)
 
 ## See Also
