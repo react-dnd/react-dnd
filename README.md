@@ -3,9 +3,8 @@ react-dnd
 
 [![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Drag and drop for React with full DOM control. 
-
-Currently works on top of HTML5 drag-and-drop API, but is moving towards a swappable implementation. Support for touch events is on the roadmap but not currently implemented.
+Drag and drop for React with full DOM control.  
+Currently works on top of HTML5 drag-and-drop API, but moves towards a swappable implementation.
 
 ## Philosophy
 
@@ -81,11 +80,6 @@ npm install --save react-dnd
 * Touch support;
 * Support for mouse events instead of HTML5 drag-and-drop events;
 * Dragging multiple items at once.
-
-## Production Usage
-
-* [Stampsy](http://stampsy.com), where it was originally developed, is using react-dnd for the post editor.
-* [Add your company!](https://github.com/gaearon/react-dnd/edit/master/README.md)
 
 ## See Also
 
