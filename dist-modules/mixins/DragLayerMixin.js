@@ -8,32 +8,43 @@ var DragLayerMixin = {
     return this.getStateForDragLayerMixin();
   },
 
-  getStateForDragLayerMixin: function getStateForDragLayerMixin() {
-    var draggedItemType = DragOperationStore.getDraggedItemType(),
-        draggedItem = DragOperationStore.getDraggedItem(),
-        initialOffsetFromContainer = DragOffsetStore.getInitialOffsetFromContainer(),
-        initialOffsetFromClient = DragOffsetStore.getInitialOffsetFromClient(),
-        currentOffsetFromClient = DragOffsetStore.getCurrentOffsetFromClient();
+  getDragLayerState: function getDragLayerState() {
+    var _state = this.state;
+    var isDragging = _state.isDragging;
+    var draggedItemType = _state.draggedItemType;
+    var draggedItem = _state.draggedItem;
+    var initialOffset = _state.initialOffset;
+    var currentOffset = _state.currentOffset;
+    return { isDragging: isDragging, draggedItemType: draggedItemType, draggedItem: draggedItem, initialOffset: initialOffset, currentOffset: currentOffset };
+  },
 
-    if (!initialOffsetFromClient || !currentOffsetFromClient) {
-      return {
-        isDragging: false
+  getStateForDragLayerMixin: function getStateForDragLayerMixin() {
+    var initialOffsetFromClient = DragOffsetStore.getInitialOffsetFromClient(),
+        currentOffsetFromClient = DragOffsetStore.getCurrentOffsetFromClient(),
+        initialOffsetFromContainer = DragOffsetStore.getInitialOffsetFromContainer(),
+        isDragging = false,
+        draggedItemType = null,
+        draggedItem = null,
+        initialOffset = null,
+        currentOffset = null;
+
+    if (initialOffsetFromClient && currentOffsetFromClient) {
+      isDragging = true;
+      draggedItemType = DragOperationStore.getDraggedItemType();
+      draggedItem = DragOperationStore.getDraggedItem();
+
+      initialOffset = {
+        x: initialOffsetFromClient.x - initialOffsetFromContainer.x,
+        y: initialOffsetFromClient.y - initialOffsetFromContainer.y
+      };
+
+      currentOffset = {
+        x: currentOffsetFromClient.x - initialOffsetFromContainer.x,
+        y: currentOffsetFromClient.y - initialOffsetFromContainer.y
       };
     }
 
-    return {
-      isDragging: true,
-      draggedItemType: draggedItemType,
-      draggedItem: draggedItem,
-      initialOffset: {
-        x: initialOffsetFromClient.x - initialOffsetFromContainer.x,
-        y: initialOffsetFromClient.y - initialOffsetFromContainer.y
-      },
-      currentOffset: {
-        x: currentOffsetFromClient.x - initialOffsetFromContainer.x,
-        y: currentOffsetFromClient.y - initialOffsetFromContainer.y
-      }
-    };
+    return { isDragging: isDragging, draggedItemType: draggedItemType, draggedItem: draggedItem, initialOffset: initialOffset, currentOffset: currentOffset };
   },
 
   handleStoreChangeInDragLayerMixin: function handleStoreChangeInDragLayerMixin() {
