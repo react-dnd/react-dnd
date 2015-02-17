@@ -5,7 +5,7 @@
   "authors": [
     "Dan Abramov <dan.abramov@me.com>"
   ],
-  "description": "HTML5 drag-and-drop mixin for React with full DOM control.",
+  "description": "Drag and drop for React with full DOM control.",
   "main": "dist/ReactDND.min.js",
   "dependencies": {
     "react": "0.12.x"
