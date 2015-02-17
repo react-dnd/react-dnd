@@ -61,7 +61,7 @@ var DragLayer = React.createClass({
       draggedItem,
       draggedItemType,
       isDragging
-    } = this.state;
+    } = this.getDragLayerState();
 
     if (!isDragging) {
       return null;
