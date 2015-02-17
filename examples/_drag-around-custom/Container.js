@@ -3,9 +3,19 @@
 var React = require('react'),
     update = require('react/lib/update'),
     ItemTypes = require('./ItemTypes'),
-    Box = require('./Box'),
+    DraggableBox = require('./DraggableBox'),
+    snapToGrid = require('./snapToGrid'),
     { PropTypes } = React,
-    { DragDropMixin } = require('react-dnd');
+    { DragDropMixin, DragLayerMixin } = require('react-dnd');
+
+var styles = {
+  container: {
+   width: 300,
+   height: 300,
+   border: '1px solid black',
+   position: 'relative'
+  }
+};
 
 var Container = React.createClass({
   mixins: [DragDropMixin],
@@ -24,16 +34,16 @@ var Container = React.createClass({
   },
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(ItemTypes.BOX, {
+    configureDragDrop(registerHandler, context) {
+      registerHandler(ItemTypes.BOX, {
         dropTarget: {
-          over(component, item, e) {
-            var left = Math.round(item.startLeft + (e.pageX - item.startPageX)),
-                top = Math.round(item.startTop + (e.pageY - item.startPageY));
+          acceptDrop(component, item, e) {
+            var delta = context.getCurrentOffsetDelta(),
+                left = Math.round(item.left + delta.x),
+                top = Math.round(item.top + delta.y);
 
             if (component.props.snapToGrid) {
-              left = Math.round(left / 32) * 32;
-              top = Math.round(top / 32) * 32;
+              [left, top] = snapToGrid(left, top);
             }
 
             component.moveBox(item.id, left, top);
@@ -44,43 +54,36 @@ var Container = React.createClass({
   },
 
   moveBox(id, left, top) {
-    var stateUpdate = {
-      boxes: {}
-    };
-
-    stateUpdate.boxes[id] = {
-      $merge: {
-        left: left,
-        top: top
+    this.setState(update(this.state, {
+      boxes: {
+        [id]: {
+          $merge: {
+            left: left,
+            top: top
+          }
+        }
       }
-    };
+    }));
+  },
 
-    this.setState(update(this.state, stateUpdate));
+  renderBox(item, key) {
+    return (
+      <DraggableBox key={key}
+                    id={key}
+                    {...item} />
+    );
   },
 
   render() {
+    var { boxes } = this.state;
+
     return (
-      <div {...this.dropTargetFor(ItemTypes.BOX)}
-           style={{
-             width: 300,
-             height: 300,
-             border: '1px solid black',
-             position: 'relative'
-           }}>
-
-        {Object.keys(this.state.boxes).map(key => {
-          var box = this.state.boxes[key];
-
-          return (
-            <Box key={key}
-                 id={key}
-                 left={box.left}
-                 top={box.top}>
-              {box.title}
-            </Box>
-          );
-        })}
-
+      <div style={styles.container}
+           {...this.dropTargetFor(ItemTypes.BOX)}>
+        {Object
+          .keys(boxes)
+          .map(key => this.renderBox(boxes[key], key))
+        }
       </div>
     );
   }
