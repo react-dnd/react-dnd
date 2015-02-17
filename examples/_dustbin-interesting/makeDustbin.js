@@ -16,7 +16,7 @@ function makeDustbin(accepts) {
     },
 
     statics: {
-      configureDragDrop(registerType) {
+      configureDragDrop(register) {
         var dropTarget = {
           acceptDrop(component, item) {
             component.setState({
@@ -26,7 +26,7 @@ function makeDustbin(accepts) {
         };
 
         accepts.forEach(itemType => {
-          registerType(itemType, {
+          register(itemType, {
             dropTarget: dropTarget
           });
         });
