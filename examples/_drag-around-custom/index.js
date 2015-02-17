@@ -2,6 +2,7 @@
 
 var React = require('react'),
     Container = require('./Container'),
+    DragLayer = require('./DragLayer'),
     LinkedStateMixin = require('react/lib/LinkedStateMixin');
 
 var DragAroundCustom = React.createClass({
@@ -9,18 +10,25 @@ var DragAroundCustom = React.createClass({
 
   getInitialState() {
     return {
-      snapToGrid: false
+      snapToGridAfterDrop: false,
+      snapToGridWhileDragging: false
     };
   },
 
   render() {
     return (
       <div>
-        <Container snapToGrid={this.state.snapToGrid} />
+        <Container snapToGrid={this.state.snapToGridAfterDrop} />
+        <DragLayer snapToGrid={this.state.snapToGridWhileDragging} />
         <p>
           <input type='checkbox'
-                 checkedLink={this.linkState('snapToGrid')}>
-            Snap to grid
+                 checkedLink={this.linkState('snapToGridAfterDrop')}>
+            Snap to grid after drop
+          </input>
+          <br />
+          <input type='checkbox'
+                 checkedLink={this.linkState('snapToGridWhileDragging')}>
+            Snap to grid while dragging
           </input>
         </p>
         <hr />
@@ -30,8 +38,11 @@ var DragAroundCustom = React.createClass({
           only supports browser drag and drop “backend” for now, so we have to accept its limitations.
         </p>
         <p>
-          We can, however, customize behavior a great deal if we feed the browser an empty image as drag preview,
-          and move the dragged DOM element itself continuously in response to dragover event.
+          We can, however, customize behavior a great deal if we feed the browser an empty image as drag preview.
+          This library provides <code>DragLayerMixin</code> that you can use to implement a fixed layer on top of your app where you'd draw a custom drag preview component.
+        </p>
+        <p>
+          Note that we can draw a completely different component on our drag layer if we wish so. It's not just a screenshot.
         </p>
         <p>
           With this approach, we miss out on default “return” animation when dropping outside the container.

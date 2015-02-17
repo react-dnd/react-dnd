@@ -13,8 +13,8 @@ var Item = React.createClass({
   },
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(ItemTypes.ITEM, {
+    configureDragDrop(register) {
+      register(ItemTypes.ITEM, {
         dragSource: {
           beginDrag(component) {
             return {

@@ -1,11 +1,11 @@
 {
   "name": "react-dnd",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "homepage": "https://github.com/gaearon/react-dnd",
   "authors": [
     "Dan Abramov <dan.abramov@me.com>"
   ],
-  "description": "HTML5 drag-and-drop mixin for React with full DOM control.",
+  "description": "Drag and drop for React with full DOM control.",
   "main": "dist/ReactDND.min.js",
   "dependencies": {
     "react": "0.12.x"

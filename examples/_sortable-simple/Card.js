@@ -15,8 +15,8 @@ var Card = React.createClass({
   },
 
   statics: {
-    configureDragDrop(registerType) {
-      registerType(ItemTypes.CARD, {
+    configureDragDrop(register) {
+      register(ItemTypes.CARD, {
         dragSource: {
           beginDrag(component) {
             return {
