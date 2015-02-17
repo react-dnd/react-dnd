@@ -48,7 +48,7 @@ function preventDefaultFileDropAction(e) {
 }
 
 function handleTopDragEnter(e) {
-  preventDefaultFileDropAction(e);
+  e.preventDefault(); // Necessary for IE and dropping files
 
   var isFirstEnter = _monitor.enter(e.target);
   if (isFirstEnter && isFileDragDropEvent(e)) {
@@ -130,7 +130,8 @@ var HTML5 = {
     // Mouse event tell us that dragging has ended but `dragend` didn't fire.
     // This may happen if source DOM was removed while dragging.
 
-    window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM, true);
+    window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.addEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
   endDrag(component) {
@@ -139,7 +140,8 @@ var HTML5 = {
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
 
-    window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM, true);
+    window.removeEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.removeEventListener('mousein', triggerDragEndIfDragSourceWasRemovedFromDOM);
   },
 
   dragOver(component, e, dropEffect) {
