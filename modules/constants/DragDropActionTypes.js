@@ -6,7 +6,9 @@ var DragDropActionTypes = keyMirror({
   DRAG_START: null,
   DRAG_END: null,
   DRAG: null,
-  DROP: null
+  DROP: null,
+  CAPTURE_DROP_TARGET: null,
+  RELEASE_DROP_TARGET: null
 });
 
 module.exports = DragDropActionTypes;
