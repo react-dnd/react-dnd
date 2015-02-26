@@ -1,8 +1,8 @@
 React DnD
 =========
 
-[![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-eve
+[![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
+
 Drag and drop for React with full DOM control. 
 
 Currently works on top of HTML5 drag-and-drop API, but is moving towards a swappable implementation. Support for touch events is on the roadmap but not currently implemented.
