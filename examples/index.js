@@ -7,7 +7,8 @@ var React = require('react'),
     DragAroundCustom = require('./_drag-around-custom/index'),
     DustbinSimple = require('./_dustbin-simple'),
     DustbinInteresting = require('./_dustbin-interesting'),
-    SortableSimple = require('./_sortable-simple');
+    SortableSimple = require('./_sortable-simple'),
+    NestedDropzones = require('./_dustbin-nested');
 
 var App = React.createClass({
   render() {
@@ -18,6 +19,7 @@ var App = React.createClass({
           <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>)</li>
           <li>Drag Around (<Link to='drag-around-naive'>naive</Link>, <Link to='drag-around-custom'>custom</Link>)</li>
           <li>Sortable (<Link to='sortable-simple'>simple</Link>)</li>
+          <li>Nested dropzones (<Link to='nested-dropzones'>nested dropzones</Link>)</li>
         </ul>
         <hr />
         <RouteHandler />
@@ -33,6 +35,7 @@ var routes = (
     <Route name='dustbin-simple' path='dustbin-simple' handler={DustbinSimple} />
     <Route name='dustbin-interesting' path='dustbin-interesting' handler={DustbinInteresting} />
     <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
+    <Route name='nested-dropzones' path='nested-dropzones' handler={NestedDropzones} />
     <Redirect from='/' to='dustbin-simple' />
   </Route>
 );
