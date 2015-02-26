@@ -21,7 +21,7 @@ Entry point. Returns:
 
 Implement to specify drag behavior of a component:
 
-##### `beginDrag(component: ReactComponent, e: SyntheticEvent)`
+##### `beginDrag(component: ReactComponent)`
 
 Return value must contain `item: Object` representing your data. Other fields are optional:
 
@@ -37,27 +37,25 @@ Return value must contain `item: Object` representing your data. Other fields ar
 }
 ```
 
-##### `canDrag(component: ReactComponent, e: SyntheticEvent)`
+##### `canDrag(component: ReactComponent)`
 
 Optionally decide whether to allow dragging. Default implementation returns `true`.
 
-##### `endDrag(component: ReactComponent, effect: DropEffect?, e: SyntheticEvent)`
+##### `endDrag(component: ReactComponent, effect: DropEffect?)`
 
 Optionally handle the end of dragging operation. `effect` is falsy if item was dropped outside compatible drop targets, or if the drop target returned `null` from `getDropEffect()`.
 
 ## Drop Target API
 
-##### `enter(component: ReactComponent, item: Object, e: SyntheticEvent)`
+##### `enter(component: ReactComponent, item: Object)`
 
-##### `leave(component: ReactComponent, item: Object, e: SyntheticEvent)`
+##### `leave(component: ReactComponent, item: Object)`
 
-##### `over(component: ReactComponent, item: Object, e: SyntheticEvent)`
+##### `over(component: ReactComponent, item: Object)`
 
 You can use these methods to perform side effects in response to changing drag state. For example, you might use `over` for reordering items when they overlap.
 
 If you need to render different states when drop target is active or hovered, it is easier to use `this.getDropState(type)` in `render` method.
-
-Note that you **don't** need to call `preventDefault` in any of these methods. Most of the times it's better that you don't use `e` argument at all, as it may be deprecated later.
 
 ##### `canDrop(component: ReactComponent, item: Object): Boolean`
 
@@ -67,7 +65,7 @@ Optionally implement this method to reject some of the items.
 
 Optionally implement this method to specify drop effect that will be used by some browser for cursor, and will be passed to drag source's `endDrag`. This allows drag source and drop target negotiate whether operation represents copying or moving an item. Returned drop effect must be one of the `effectsAllowed` specified by drag source or `null`. Default implementation returns `effectsAllowed[0]`.
 
-##### `acceptDrop(component: ReactComponent, item: Object, e: SyntheticEvent, isHandled: bool, effect: DropEffect?)`
+##### `acceptDrop(component: ReactComponent, item: Object, isHandled: bool, effect: DropEffect?)`
 
 Optionally implement this method to perform some action when drop occurs. `isHandled` is `true` if some child drop target has already handled the drop. `effect` is the drop effect you returned from `getDropEffect`, or if `isHandled` is `true`, drop effect specified by the child drop target that has already handled the drop.
 
