@@ -5,7 +5,6 @@ var DragDropActionCreators = require("../actions/DragDropActionCreators"),
     NativeDragItemTypes = require("../constants/NativeDragItemTypes"),
     EnterLeaveMonitor = require("../utils/EnterLeaveMonitor"),
     isFileDragDropEvent = require("../utils/isFileDragDropEvent"),
-    isUrlDragDropEvent = require("../utils/isUrlDragDropEvent"),
     configureDataTransfer = require("../utils/configureDataTransfer"),
     shallowEqual = require("react/lib/shallowEqual"),
     isWebkit = require("../utils/isWebkit");
@@ -42,8 +41,8 @@ function triggerDragEndIfDragSourceWasRemovedFromDOM() {
   _currentComponent.handleDragEnd(type, null);
 }
 
-function preventDefaultNativeDropAction(e) {
-  if (isFileDragDropEvent(e) || isUrlDragDropEvent(e)) {
+function preventDefaultFileDropAction(e) {
+  if (isFileDragDropEvent(e)) {
     e.preventDefault();
   }
 }
@@ -53,17 +52,13 @@ function handleTopDragEnter(e) {
   e.preventDefault();
 
   var isFirstEnter = _monitor.enter(e.target);
-  if (isFirstEnter) {
-    if (isFileDragDropEvent(e)) {
-      DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
-    } else if (isUrlDragDropEvent(e)) {
-      DragDropActionCreators.startDragging(NativeDragItemTypes.URL, null);
-    }
+  if (isFirstEnter && isFileDragDropEvent(e)) {
+    DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
   }
 }
 
 function handleTopDragOver(e) {
-  preventDefaultNativeDropAction(e);
+  preventDefaultFileDropAction(e);
 
   var offsetFromClient = HTML5.getOffsetFromClient(_currentComponent, e);
   DragDropActionCreators.drag(offsetFromClient);
@@ -81,20 +76,20 @@ function handleTopDragOver(e) {
 }
 
 function handleTopDragLeave(e) {
-  preventDefaultNativeDropAction(e);
+  preventDefaultFileDropAction(e);
 
   var isLastLeave = _monitor.leave(e.target);
-  if (isLastLeave && (isFileDragDropEvent(e) || isUrlDragDropEvent(e))) {
+  if (isLastLeave && isFileDragDropEvent(e)) {
     DragDropActionCreators.endDragging();
   }
 }
 
 function handleTopDrop(e) {
-  preventDefaultNativeDropAction(e);
+  preventDefaultFileDropAction(e);
 
   _monitor.reset();
 
-  if (isFileDragDropEvent(e) || isUrlDragDropEvent(e)) {
+  if (isFileDragDropEvent(e)) {
     DragDropActionCreators.endDragging();
   }
 
