@@ -42,8 +42,12 @@ function triggerDragEndIfDragSourceWasRemovedFromDOM() {
   _currentComponent.handleDragEnd(type, null);
 }
 
+function isNativeDragDropEvent(e) {
+  return isFileDragDropEvent(e) || isUrlDragDropEvent(e);
+}
+
 function preventDefaultNativeDropAction(e) {
-  if (isFileDragDropEvent(e) || isUrlDragDropEvent(e)) {
+  if (isNativeDragDropEvent(e)) {
     e.preventDefault();
   }
 }
@@ -84,7 +88,7 @@ function handleTopDragLeave(e) {
   preventDefaultNativeDropAction(e);
 
   var isLastLeave = _monitor.leave(e.target);
-  if (isLastLeave && (isFileDragDropEvent(e) || isUrlDragDropEvent(e))) {
+  if (isLastLeave && isNativeDragDropEvent(e)) {
     DragDropActionCreators.endDragging();
   }
 }
@@ -94,7 +98,7 @@ function handleTopDrop(e) {
 
   _monitor.reset();
 
-  if (isFileDragDropEvent(e) || isUrlDragDropEvent(e)) {
+  if (isNativeDragDropEvent(e)) {
     DragDropActionCreators.endDragging();
   }
 

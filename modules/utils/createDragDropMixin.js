@@ -379,15 +379,16 @@ function createDragDropMixin(backend) {
         // We don't know file list until the `drop` event,
         // so we couldn't put `item` into the store.
         item = {
-            files: Array.prototype.slice.call(e.dataTransfer.files)
+          files: Array.prototype.slice.call(e.dataTransfer.files)
         };
-      } else if(isUrlDragDropEvent(e)) {
-        var urls= e.dataTransfer.getData('text/uri-list').split("\n")
+      } else if (isUrlDragDropEvent(e)) {
+        // getData('Url')  --> IE support
+        var urlsStr = e.dataTransfer.getData('Url') || e.dataTransfer.getData('text/uri-list') || ''
+        var urls = urlsStr.split('\n');
         item = {
-            urls: urls
+          urls: urls
         };
       }
-
       this._monitor.reset();
 
       if (!isHandled) {
