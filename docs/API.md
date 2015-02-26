@@ -1,5 +1,7 @@
 # API
 
+Something changed? See [Upgrade Guide](https://github.com/gaearon/react-dnd/blob/master/docs/UPGRADE_GUIDE.md).
+
 ## `require('react-dnd')`
 
 Entry point. Returns:
