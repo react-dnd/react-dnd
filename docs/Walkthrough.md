@@ -243,4 +243,4 @@ I have not covered everything but it's possible to use this API in a few more wa
 * Say, we want to make `ImageBlock`s reorderable. We only need them to implement `dropTarget` and `dragSource` for `ItemTypes.BLOCK`.
 * Suppose we add other kinds of blocks. We can reuse their reordering logic by placing it in a mixin.
 * `dropTargetFor(...types)` allows to specify several types at once, so one drop zone can catch many different types.
-* When you need more fine-grained control, most methods are passed drag event that caused them as the last parameter.
+* Use `context` (second parameter on `configureDragDrop`) to query mouse position delta.
