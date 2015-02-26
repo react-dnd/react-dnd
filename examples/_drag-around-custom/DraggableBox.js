@@ -34,7 +34,7 @@ var DraggableBox = React.createClass({
     configureDragDrop(register) {
       register(ItemTypes.BOX, {
         dragSource: {
-          beginDrag(component, e) {
+          beginDrag(component) {
             return {
               effectAllowed: DropEffects.MOVE,
               dragPreview: getEmptyImage(),

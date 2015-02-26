@@ -198,12 +198,12 @@ function createDragDropMixin(backend) {
     handleDragStart(type, e) {
       var { canDrag, beginDrag } = this._dragSources[type];
 
-      if (!canDrag(this, e)) {
+      if (!canDrag(this)) {
         e.preventDefault();
         return;
       }
 
-      var { item, dragPreview, dragAnchors, effectsAllowed } = beginDrag(this, e),
+      var { item, dragPreview, dragAnchors, effectsAllowed } = beginDrag(this),
           containerNode = this.getDOMNode(),
           containerRect = containerNode.getBoundingClientRect(),
           offsetFromClient = backend.getOffsetFromClient(this, e),
@@ -256,7 +256,7 @@ function createDragDropMixin(backend) {
         });
       }
 
-      endDrag(this, effect, e);
+      endDrag(this, effect);
     },
 
     dropTargetFor(...types) {
@@ -303,7 +303,7 @@ function createDragDropMixin(backend) {
         currentDropEffect: dropEffect
       });
 
-      enter(this, this.state.draggedItem, e);
+      enter(this, this.state.draggedItem);
     },
 
     handleDragOver(types, e) {
@@ -314,7 +314,7 @@ function createDragDropMixin(backend) {
       e.preventDefault();
 
       var { over, getDropEffect } = this._dropTargets[this.state.draggedItemType];
-      over(this, this.state.draggedItem, e);
+      over(this, this.state.draggedItem);
 
       // Don't use `none` because this will prevent browser from firing `dragend`
       backend.dragOver(this, e, this.state.currentDropEffect || 'move');
@@ -334,7 +334,7 @@ function createDragDropMixin(backend) {
       });
 
       var { leave } = this._dropTargets[this.state.draggedItemType];
-      leave(this, this.state.draggedItem, e);
+      leave(this, this.state.draggedItem);
     },
 
     handleDrop(types, e) {
@@ -367,7 +367,7 @@ function createDragDropMixin(backend) {
         currentDropEffect: null
       });
 
-      acceptDrop(this, item, e, isHandled, DragOperationStore.getDropEffect());
+      acceptDrop(this, item, isHandled, DragOperationStore.getDropEffect());
     }
   };
 }
