@@ -1,4 +1,4 @@
-react-dnd
+React DnD
 =========
 
 [![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -84,7 +84,7 @@ npm install --save react-dnd
 
 ## Production Usage
 
-* [Stampsy](http://stampsy.com), where it was originally developed, is using react-dnd for the post editor.
+* [Stampsy](http://stampsy.com), where it was originally developed, is using React DnD for the post editor.
 * [Add your company!](https://github.com/gaearon/react-dnd/edit/master/README.md)
 
 ## See Also
