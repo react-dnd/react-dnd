@@ -9,6 +9,7 @@ var DragDropActionCreators = require("../actions/DragDropActionCreators"),
     DefaultDropTarget = require("./DefaultDropTarget"),
     LegacyDefaultDropTarget = require("./LegacyDefaultDropTarget"),
     isFileDragDropEvent = require("./isFileDragDropEvent"),
+    isUrlDragDropEvent = require("../utils/isUrlDragDropEvent"),
     invariant = require("react/lib/invariant"),
     warning = require("react/lib/warning"),
     assign = require("react/lib/Object.assign"),
@@ -291,8 +292,8 @@ function createDragDropMixin(backend) {
       var getDropEffect = _dropTargets$state$draggedItemType.getDropEffect;
       var effectsAllowed = DragOperationStore.getEffectsAllowed();
 
-      if (isFileDragDropEvent(e)) {
-        // Use Copy drop effect for dragging files.
+      if (isFileDragDropEvent(e) || isUrlDragDropEvent(e)) {
+        // Use Copy drop effect for dragging files or urls.
         // Because browser gives no drag preview, "+" icon is useful.
         effectsAllowed = [DropEffects.COPY];
       }
@@ -359,6 +360,11 @@ function createDragDropMixin(backend) {
         // so we couldn't put `item` into the store.
         item = {
           files: Array.prototype.slice.call(e.dataTransfer.files)
+        };
+      } else if (isUrlDragDropEvent(e)) {
+        var urls = e.dataTransfer.getData("text/uri-list").split("\n");
+        item = {
+          urls: urls
         };
       }
 
