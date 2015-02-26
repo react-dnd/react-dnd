@@ -99,11 +99,9 @@ function createDragDropMixin(backend) {
         return null;
       }
 
-    // https://github.com/gaearon/react-dnd/issues/35
-    // ALLOW to drop into itself
-    // if (draggedItemType === ownDraggedItemType) {
-    //   return null;
-    // }
+      if (draggedItemType === ownDraggedItemType) {
+        return null;
+      }
 
       var { canDrop } = dropTarget;
       return callDragDropLifecycle(canDrop, this, draggedItem) ? draggedItemType : null;
