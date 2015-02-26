@@ -37,7 +37,7 @@ var Container = React.createClass({
     configureDragDrop(register, context) {
       register(ItemTypes.BOX, {
         dropTarget: {
-          acceptDrop(component, item, e) {
+          acceptDrop(component, item) {
             var delta = context.getCurrentOffsetDelta(),
                 left = Math.round(item.left + delta.x),
                 top = Math.round(item.top + delta.y);
