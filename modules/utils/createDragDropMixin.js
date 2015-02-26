@@ -304,6 +304,9 @@ function createDragDropMixin(backend) {
         return;
       }
 
+      // IE requires this to trigger dragOver events
+      e.preventDefault();
+
       var { enter, getDropEffect } = this._dropTargets[this.state.draggedItemType],
           effectsAllowed = DragOperationStore.getEffectsAllowed();
 

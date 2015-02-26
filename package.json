@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "0.8.0",
+  "version": "0.8.2",
   "description": "Drag and drop for React with full DOM control",
   "main": "dist-modules/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "lodash": "^3.1.0"
   },
   "peerDependencies": {
-    "react": "0.12.x"
+    "react": "0.12.x || >=0.13.0-beta.1"
   },
   "devDependencies": {
     "6to5": "^3.5.3",

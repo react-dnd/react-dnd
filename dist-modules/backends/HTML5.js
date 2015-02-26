@@ -48,7 +48,8 @@ function preventDefaultFileDropAction(e) {
 }
 
 function handleTopDragEnter(e) {
-  preventDefaultFileDropAction(e);
+  // IE requires this to not show a nodrag icon over the container
+  e.preventDefault();
 
   var isFirstEnter = _monitor.enter(e.target);
   if (isFirstEnter && isFileDragDropEvent(e)) {
@@ -132,8 +133,7 @@ var HTML5 = {
     // Mouse event tell us that dragging has ended but `dragend` didn't fire.
     // This may happen if source DOM was removed while dragging.
 
-    window.addEventListener("mousemove", triggerDragEndIfDragSourceWasRemovedFromDOM);
-    window.addEventListener("mousein", triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.addEventListener("mousemove", triggerDragEndIfDragSourceWasRemovedFromDOM, true);
   },
 
   endDrag: function endDrag(component) {
@@ -142,8 +142,7 @@ var HTML5 = {
     _initialDragTargetRect = null;
     _dragTargetRectDidChange = false;
 
-    window.removeEventListener("mousemove", triggerDragEndIfDragSourceWasRemovedFromDOM);
-    window.removeEventListener("mousein", triggerDragEndIfDragSourceWasRemovedFromDOM);
+    window.removeEventListener("mousemove", triggerDragEndIfDragSourceWasRemovedFromDOM, true);
   },
 
   dragOver: function dragOver(component, e, dropEffect) {

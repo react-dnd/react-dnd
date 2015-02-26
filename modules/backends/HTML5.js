@@ -48,7 +48,8 @@ function preventDefaultFileDropAction(e) {
 }
 
 function handleTopDragEnter(e) {
-  preventDefaultFileDropAction(e);
+  // IE requires this to not show a nodrag icon over the container
+  e.preventDefault();
 
   var isFirstEnter = _monitor.enter(e.target);
   if (isFirstEnter && isFileDragDropEvent(e)) {
