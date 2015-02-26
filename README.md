@@ -2,7 +2,7 @@ React DnD
 =========
 
 [![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+eve
 Drag and drop for React with full DOM control. 
 
 Currently works on top of HTML5 drag-and-drop API, but is moving towards a swappable implementation. Support for touch events is on the roadmap but not currently implemented.
@@ -16,7 +16,7 @@ Currently works on top of HTML5 drag-and-drop API, but is moving towards a swapp
 
 ## Live Demo
 
-#### [See it in action!](http://gaearon.github.io/react-dnd/)
+#### [See it in action!](http://gaearon.github.io/react-dnd/) ([Source](https://github.com/gaearon/react-dnd/tree/master/examples))
 
 Demo contains a variety of things you can implement with this library, including:
 
@@ -45,6 +45,10 @@ You can do much more, but these examples will help you get started!
 * Lets you render a custom drag layer if you'd rather draw your own drag preview.
 
 ## Documentation
+
+### SemVer
+
+We plan to follow SemVer after 1.0. Before 1.0, minor version bumps may contain breaking changes. Breaking changes will be documented in the **[Upgrade Guide](https://github.com/gaearon/react-dnd/blob/master/docs/UPGRADE_GUIDE.md)**.
 
 ### API Reference
 
