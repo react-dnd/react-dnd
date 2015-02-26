@@ -6,7 +6,7 @@ This release contains several breaking changes.
 
 ### `configureDragDrop` is now static
 
-Declaring `configureDragDrop` as an instance method is now deprecated. You need to put it into `statics` and change all methods to accept `component` as the first parameter instead of using `this`.
+Declaring `configureDragDrop` as an instance method is now not supported. You need to put it into `statics` and change all methods to accept `component` as the first parameter instead of using `this`.
 
 If your code looked like this:
 
