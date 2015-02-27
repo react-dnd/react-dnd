@@ -23,7 +23,7 @@ var Dustbin = React.createClass({
     var dropState = this.getDropState(ItemTypes.ITEM),
         backgroundColor = '#222';
 
-    if (dropState.isHovering) {
+    if (dropState.isOver) {
       backgroundColor = 'darkgreen';
     } else if (dropState.isDragging) {
       backgroundColor = 'darkkhaki';
@@ -40,7 +40,7 @@ var Dustbin = React.createClass({
              textAlign: 'center'
            }}>
 
-        {dropState.isHovering ?
+        {dropState.isOver ?
           'Release to drop' :
           'Drag item here'
         }
