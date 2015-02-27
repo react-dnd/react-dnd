@@ -17,8 +17,8 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
 
 function checkValidType(component, type) {
   invariant(
-    type && typeof type === 'string',
-    'Expected item type to be a non-empty string. See %s',
+    type && (typeof type === 'string' || typeof type === 'symbol'),
+    'Expected item type to be a non-empty string or a symbol. See %s',
     component.constructor.displayName
   );
 }
