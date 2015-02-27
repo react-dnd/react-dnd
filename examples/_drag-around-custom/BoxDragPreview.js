@@ -2,6 +2,7 @@
 
 var React = require('react'),
     Box = require('./Box'),
+    { PureRenderMixin } = require('react/addons'),
     { PropTypes } = React;
 
 var styles = {
@@ -14,6 +15,8 @@ var styles = {
 };
 
 var BoxDragPreview = React.createClass({
+  mixins: [PureRenderMixin],
+
   propTypes: {
     title: PropTypes.string.isRequired
   },

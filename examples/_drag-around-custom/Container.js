@@ -6,6 +6,7 @@ var React = require('react'),
     DraggableBox = require('./DraggableBox'),
     snapToGrid = require('./snapToGrid'),
     { PropTypes } = React,
+    { PureRenderMixin } = require('react/addons'),
     { DragDropMixin, DragLayerMixin } = require('react-dnd');
 
 var styles = {
@@ -18,7 +19,7 @@ var styles = {
 };
 
 var Container = React.createClass({
-  mixins: [DragDropMixin],
+  mixins: [DragDropMixin, PureRenderMixin],
 
   propTypes: {
     snapToGrid: PropTypes.bool.isRequired

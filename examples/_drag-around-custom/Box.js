@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react'),
+    { PureRenderMixin } = require('react/addons'),
     { PropTypes } = React;
 
 var styles = {
@@ -12,6 +13,8 @@ var styles = {
 };
 
 var Box = React.createClass({
+  mixins: [PureRenderMixin],
+
   propTypes: {
     title: PropTypes.string.isRequired
   },
