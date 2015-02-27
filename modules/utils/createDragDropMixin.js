@@ -137,7 +137,7 @@ function createDragDropMixin(backend) {
       return {
         isDragging: isDragging,
         isOver: isDragging && isOver,
-        isOverCurrent: false // TODO
+        isOverCurrent: DragOperationStore.getActiveDropTarget() === this
       };
     },
 
@@ -326,6 +326,8 @@ function createDragDropMixin(backend) {
         currentDropEffect: dropEffect
       });
 
+      DragDropActionCreators.captureDropTarget(this);
+
       callDragDropLifecycle(enter, this, this.state.draggedItem, e);
     },
 
@@ -355,6 +357,8 @@ function createDragDropMixin(backend) {
       this.setState({
         currentDropEffect: null
       });
+
+      DragDropActionCreators.releaseDropTarget(this);
 
       var { leave } = this._dropTargets[this.state.draggedItemType];
       callDragDropLifecycle(leave, this, this.state.draggedItem, e);
