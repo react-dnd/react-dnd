@@ -11,6 +11,14 @@ var DragDropContext = {
       x: currentOffset.x - initialOffset.x,
       y: currentOffset.y - initialOffset.y
     };
+  },
+
+  getInitialOffsetFromClient() {
+    return DragOffsetStore.getInitialOffsetFromClient();
+  },
+
+  getCurrentOffsetFromClient() {
+    return DragOffsetStore.getCurrentOffsetFromClient();
   }
 };
 
