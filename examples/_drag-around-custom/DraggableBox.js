@@ -5,6 +5,7 @@ var React = require('react'),
     getEmptyImage = require('./getEmptyImage'),
     Box = require('./Box'),
     { PropTypes } = React,
+    { PureRenderMixin } = require('react/addons'),
     { DragDropMixin, DropEffects } = require('react-dnd');
 
 var styles = {
@@ -21,7 +22,7 @@ var styles = {
 };
 
 var DraggableBox = React.createClass({
-  mixins: [DragDropMixin],
+  mixins: [DragDropMixin, PureRenderMixin],
 
   propTypes: {
     id: PropTypes.any.isRequired,
