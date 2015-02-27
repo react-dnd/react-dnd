@@ -24,7 +24,7 @@ var Container = React.createClass({
           {this.renderDustbin([ItemTypes.GLASS])}
           {this.renderDustbin([ItemTypes.FOOD])}
           {this.renderDustbin([ItemTypes.PAPER])}
-          {this.renderDustbin([ItemTypes.PAPER, NativeDragItemTypes.FILE])}
+          {this.renderDustbin([NativeDragItemTypes.FILE, NativeDragItemTypes.URL])}
         </div>
 
         <div style={{ minHeight: '2rem' }}>

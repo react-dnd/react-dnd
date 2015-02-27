@@ -179,7 +179,7 @@ Note that, for best results, you want to use `this.getDragImageScale()`. It will
 
 ## `NativeDragItemTypes`
 
-Provides a single constant, `NativeDragItemTypes.FILE`, that you can use as an item type for file drop targets.
+Provides two constants, `NativeDragItemTypes.FILE` and `NativeDragItemTypes.URL`, that you can use as an item type for native file and URL drop targets.
 
 ## `DropEffects`
 
