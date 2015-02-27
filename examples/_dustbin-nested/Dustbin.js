@@ -5,48 +5,70 @@ var React = require('react'),
     { DragDropMixin } = require('react-dnd'),
     { PropTypes } = React;
 
-var OuterDustbin = React.createClass({
+var Dustbin = React.createClass({
   mixins: [DragDropMixin],
+
+  propTypes: {
+    greedy: PropTypes.bool
+  },
 
   getInitialState() {
     return {
-      lastDroppedItem: null
+      didDrop: null,
+      didDropOnCurrent: null
     };
   },
 
   statics: {
     configureDragDrop(register) {
       var dropTarget = {
+        enter() {
+          // TODO
+        },
+
+        over() {
+          // TODO
+        },
+
+        leave() {
+          // TODO
+        },
+
         acceptDrop(component, item, e, isHandled) {
-          if (component.props.checkIsHandled && isHandled) {
-            return false;
+          if (!component.props.greedy && isHandled) {
+            return;
           }
 
           component.setState({
-            lastDroppedItem: item
+            didDrop: true,
+            didDropOnCurrent: !isHandled
           });
         }
       };
 
-      register(ItemTypes.GLASS, {
+      register(ItemTypes.BOX, {
         dropTarget: dropTarget
       });
     }
   },
 
   render() {
-    var dropStates = [ItemTypes.GLASS].map(this.getDropState),
+    var { isOver, isOverCurrent, isDragging } = this.getDropState(ItemTypes.BOX),
+        { greedy } = this.props,
+        { didDrop, didDropOnCurrent } = this.state,
         backgroundColor = 'rgba(0, 0, 0, .5)',
-        prop = this.props.stopDeepHover ? 'isOverCurrent' : 'isHovering';
+        text = greedy ? 'greedy' : 'lazy';
 
-    if (dropStates.some(s => s[prop])) {
+    if (isOverCurrent || isOver && greedy) {
       backgroundColor = 'darkgreen';
-    } else if (dropStates.some(s => s.isDragging)) {
+      text = greedy ? 'active (greedy)' : 'active (lazy)';
+    } else if (isDragging) {
       backgroundColor = 'darkkhaki';
+      text = 'dragging';
     }
 
     return (
-      <div {...this.dropTargetFor.apply(this, [ItemTypes.GLASS])}
+      <div {...this.dropTargetFor(ItemTypes.BOX)}
            style={{
              border: '2px solid green',
              minHeight: '12rem',
@@ -59,13 +81,10 @@ var OuterDustbin = React.createClass({
              float: 'left'
            }}>
 
-        {dropStates.some(s => s.isHovering) ?
-          'Release to drop' :
-          'This dustbin accepts: ' + [ItemTypes.GLASS].join(', ')
-        }
+        {text}
 
-        {this.state.lastDroppedItem &&
-          <p>Last dropped: {JSON.stringify(this.state.lastDroppedItem)}</p>
+        {didDrop &&
+          <span> &middot; did drop {didDropOnCurrent && ' (on current)'}</span>
         }
 
         <div>
@@ -76,4 +95,4 @@ var OuterDustbin = React.createClass({
   }
 });
 
-module.exports = OuterDustbin;
+module.exports = Dustbin;

@@ -1,34 +1,35 @@
 'use strict';
 
 var React = require('react'),
-    OuterDustbin = require('./OuterDustbin'),
-    InnerDustbin = require('./InnerDustbin'),
-    makeItem = require('../_dustbin-interesting/makeItem'),
+    Dustbin = require('./Dustbin'),
+    Box = require('./Box'),
     ItemTypes = require('./ItemTypes'),
     { NativeDragItemTypes } = require('react-dnd');
 
 var Container = React.createClass({
-  renderItem(name, dropType) {
-    var Item = makeItem(dropType);
-    return <Item name={name} />;
-  },
-
   render() {
     return (
       <div>
         <div style={{minHeight: '14rem', overflow: 'auto'}}>
-          <OuterDustbin>
-            <InnerDustbin />
-          </OuterDustbin>
+          <Dustbin greedy>
+            <Dustbin greedy>
+              <Dustbin greedy>
+                <Dustbin greedy />
+              </Dustbin>
+            </Dustbin>
+          </Dustbin>
 
-          <OuterDustbin checkIsHandled
-                        stopDeepHover>
-            <InnerDustbin />
-          </OuterDustbin>
+          <Dustbin>
+            <Dustbin>
+              <Dustbin>
+                <Dustbin />
+              </Dustbin>
+            </Dustbin>
+          </Dustbin>
         </div>
 
         <div style={{ minHeight: '2rem' }}>
-          {this.renderItem('Glass', ItemTypes.GLASS)}
+          <Box />
         </div>
       </div>
     );
