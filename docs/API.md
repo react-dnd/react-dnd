@@ -107,9 +107,17 @@ Returns props to be given to any DOM element you want to make a drop target. Int
 
 This object is provided as a second argument to your `configureDragDrop` method.
 
+##### `getInitialOffsetFromClient()`
+
+Returns `{ x, y }` coordinates of mouse position when dragging started in client coordinates (as opposed to coordinates within the page).
+
+##### `getCurrentOffsetFromClient()`
+
+Returns `{ x, y }` coordinates of the last recorded mouse position in client coordinates (as opposed to coordinates within the page).
+
 ##### `getCurrentOffsetDelta()`
 
-Returns `{ x, y }` coordinate delta between current mouse position and its position when dragging started.
+Returns relative `{ x, y }` coordinate delta between last recorded mouse position and its position when dragging started.
 
 ## `DragLayerMixin`
 
