@@ -58,9 +58,9 @@ function handleTopDragEnter(e) {
 
   var isFirstEnter = _monitor.enter(e.target);
   if (isFirstEnter) {
-    if(isFileDragDropEvent(e)){
+    if (isFileDragDropEvent(e)) {
       DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
-    } else if (isUrlDragDropEvent(e)){
+    } else if (isUrlDragDropEvent(e)) {
       DragDropActionCreators.startDragging(NativeDragItemTypes.URL, null);
     }
   }
