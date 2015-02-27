@@ -8,6 +8,8 @@ var DragDropActionCreators = require("../actions/DragDropActionCreators"),
     DefaultDragSource = require("./DefaultDragSource"),
     DefaultDropTarget = require("./DefaultDropTarget"),
     isFileDragDropEvent = require("./isFileDragDropEvent"),
+    isUrlDragDropEvent = require("../utils/isUrlDragDropEvent"),
+    extractNativeItem = require("../utils/extractNativeItem"),
     invariant = require("react/lib/invariant"),
     assign = require("react/lib/Object.assign"),
     defaults = require("lodash/object/defaults"),
@@ -16,7 +18,8 @@ var DragDropActionCreators = require("../actions/DragDropActionCreators"),
     noop = require("lodash/utility/noop");
 
 function checkValidType(component, type) {
-  invariant(type && typeof type === "string", "Expected item type to be a non-empty string. See %s", component.constructor.displayName);
+  /*jshint -W122 */
+  invariant(type && (typeof type === "string" || typeof type === "symbol"), "Expected item type to be a non-empty string or a symbol. See %s", component.constructor.displayName);
 }
 
 function checkDragSourceDefined(component, type) {
@@ -270,8 +273,8 @@ function createDragDropMixin(backend) {
       var getDropEffect = _dropTargets$state$draggedItemType.getDropEffect;
       var effectsAllowed = DragOperationStore.getEffectsAllowed();
 
-      if (isFileDragDropEvent(e)) {
-        // Use Copy drop effect for dragging files.
+      if (isFileDragDropEvent(e) || isUrlDragDropEvent(e)) {
+        // Use Copy drop effect for dragging files or urls.
         // Because browser gives no drag preview, "+" icon is useful.
         effectsAllowed = [DropEffects.COPY];
       }
@@ -333,12 +336,11 @@ function createDragDropMixin(backend) {
       var currentDropEffect = this.state.currentDropEffect;
       var isHandled = !!DragOperationStore.getDropEffect();
 
-      if (isFileDragDropEvent(e)) {
-        // We don't know file list until the `drop` event,
-        // so we couldn't put `item` into the store.
-        item = {
-          files: Array.prototype.slice.call(e.dataTransfer.files)
-        };
+      // We don't know the exact list until the `drop` event,
+      // so we couldn't put `item` into the store.
+
+      if (!item) {
+        item = extractNativeItem(e);
       }
 
       this._monitor.reset();
