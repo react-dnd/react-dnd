@@ -5,6 +5,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     NativeDragItemTypes = require('../constants/NativeDragItemTypes'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
+    isUrlDragDropEvent = require('../utils/isUrlDragDropEvent'),
     configureDataTransfer = require('../utils/configureDataTransfer'),
     shallowEqual = require('react/lib/shallowEqual'),
     isWebkit = require('../utils/isWebkit');
@@ -41,8 +42,12 @@ function triggerDragEndIfDragSourceWasRemovedFromDOM() {
   _currentComponent.handleDragEnd(type, null);
 }
 
-function preventDefaultFileDropAction(e) {
-  if (isFileDragDropEvent(e)) {
+function isNativeDragDropEvent(e) {
+  return isFileDragDropEvent(e) || isUrlDragDropEvent(e);
+}
+
+function preventDefaultNativeDropAction(e) {
+  if (isNativeDragDropEvent(e)) {
     e.preventDefault();
   }
 }
@@ -52,13 +57,17 @@ function handleTopDragEnter(e) {
   e.preventDefault();
 
   var isFirstEnter = _monitor.enter(e.target);
-  if (isFirstEnter && isFileDragDropEvent(e)) {
-    DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
+  if (isFirstEnter) {
+    if(isFileDragDropEvent(e)){
+      DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
+    } else if (isUrlDragDropEvent(e)){
+      DragDropActionCreators.startDragging(NativeDragItemTypes.URL, null);
+    }
   }
 }
 
 function handleTopDragOver(e) {
-  preventDefaultFileDropAction(e);
+  preventDefaultNativeDropAction(e);
 
   var offsetFromClient = HTML5.getOffsetFromClient(_currentComponent, e);
   DragDropActionCreators.drag(offsetFromClient);
@@ -76,20 +85,20 @@ function handleTopDragOver(e) {
 }
 
 function handleTopDragLeave(e) {
-  preventDefaultFileDropAction(e);
+  preventDefaultNativeDropAction(e);
 
   var isLastLeave = _monitor.leave(e.target);
-  if (isLastLeave && isFileDragDropEvent(e)) {
+  if (isLastLeave && isNativeDragDropEvent(e)) {
     DragDropActionCreators.endDragging();
   }
 }
 
 function handleTopDrop(e) {
-  preventDefaultFileDropAction(e);
+  preventDefaultNativeDropAction(e);
 
   _monitor.reset();
 
-  if (isFileDragDropEvent(e)) {
+  if (isNativeDragDropEvent(e)) {
     DragDropActionCreators.endDragging();
   }
 
