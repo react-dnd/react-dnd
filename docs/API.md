@@ -115,6 +115,8 @@ Returns `{ x, y }` coordinate delta between current mouse position and its posit
 
 Allows you to draw a custom drag layer. This can be used in combination with returning a transparent one-pixel image as `dragPreview` from `beginDrag` so that only your custom layer is visible.
 
+If you have performance problems due to drag layer redrawing on every position change, you should use [`PureRenderMixin`](http://facebook.github.io/react/docs/pure-render-mixin.html) (or manually implement [`shouldComponentUpdate`](http://facebook.github.io/react/docs/advanced-performance.html)) in child components to avoid reconciling them.
+
 ##### `getDragLayerState()`
 
 Returns all you need in order to draw a custom drag layer:
