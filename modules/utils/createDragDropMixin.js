@@ -125,11 +125,12 @@ function createDragDropMixin(backend) {
       checkDropTargetDefined(this, type);
 
       var isDragging = this.getActiveDropTargetType() === type,
-          isHovering = !!this.state.currentDropEffect;
+          isOver = !!this.state.currentDropEffect;
 
       return {
         isDragging: isDragging,
-        isHovering: isDragging && isHovering
+        isOver: isDragging && isOver,
+        isOverCurrent: false // TODO
       };
     },
 

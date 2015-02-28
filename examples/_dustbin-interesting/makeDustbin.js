@@ -37,7 +37,7 @@ function makeDustbin(accepts) {
       var dropStates = accepts.map(this.getDropState),
           backgroundColor = '#222';
 
-      if (dropStates.some(s => s.isHovering)) {
+      if (dropStates.some(s => s.isOver)) {
         backgroundColor = 'darkgreen';
       } else if (dropStates.some(s => s.isDragging)) {
         backgroundColor = 'darkkhaki';
@@ -56,7 +56,7 @@ function makeDustbin(accepts) {
                float: 'left'
              }}>
 
-          {dropStates.some(s => s.isHovering) ?
+          {dropStates.some(s => s.isOver) ?
             'Release to drop' :
             'This dustbin accepts: ' + accepts.join(', ')
           }
