@@ -1,47 +1,43 @@
 'use strict';
 
-var React = require('react'),
-    ItemTypes = require('./ItemTypes'),
-    BoxDragPreview = require('./BoxDragPreview'),
-    snapToGrid = require('./snapToGrid'),
-    { DragLayerMixin } = require('react-dnd'),
-    { PureRenderMixin } = require('react/addons'),
-    { PropTypes } = React;
+import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import ItemTypes from './ItemTypes';
+import BoxDragPreview from './BoxDragPreview';
+import snapToGrid from './snapToGrid';
+import { DragLayerMixin } from 'react-dnd';
 
-var styles = {
-  dragLayer: {
-    position: 'fixed',
-    pointerEvents: 'none',
-    zIndex: 100,
-    left: 0,
-    top: 0,
-    width:'100%',
-    height: '100%'
-  },
-
-  draggedItem: (props, state) => {
-    var { x, y } = state.currentOffset;
-
-    if (props.snapToGrid) {
-      x -= state.initialOffset.x;
-      y -= state.initialOffset.y;
-
-      [x, y] = snapToGrid(x, y);
-
-      x += state.initialOffset.x;
-      y += state.initialOffset.y;
-    }
-
-    var transform = `translate(${x}px, ${y}px)`;
-
-    return {
-      transform: transform,
-      WebkitTransform: transform
-    };
-  }
+const layerStyles = {
+  position: 'fixed',
+  pointerEvents: 'none',
+  zIndex: 100,
+  left: 0,
+  top: 0,
+  width: '100%',
+  height: '100%'
 };
 
-var DragLayer = React.createClass({
+function getItemStyles(props, state) {
+  let { x, y } = state.currentOffset;
+
+  if (props.snapToGrid) {
+    x -= state.initialOffset.x;
+    y -= state.initialOffset.y;
+
+    [x, y] = snapToGrid(x, y);
+
+    x += state.initialOffset.x;
+    y += state.initialOffset.y;
+  }
+
+  const transform = `translate(${x}px, ${y}px)`;
+  return {
+    transform: transform,
+    WebkitTransform: transform
+  };
+}
+
+const DragLayer = React.createClass({
   mixins: [DragLayerMixin, PureRenderMixin],
 
   propTypes: {
@@ -58,7 +54,7 @@ var DragLayer = React.createClass({
   },
 
   render() {
-    var {
+    const {
       draggedItem,
       draggedItemType,
       isDragging
@@ -69,8 +65,8 @@ var DragLayer = React.createClass({
     }
 
     return (
-      <div style={styles.dragLayer}>
-        <div style={styles.draggedItem(this.props, this.state)}>
+      <div style={layerStyles}>
+        <div style={getItemStyles(this.props, this.state)}>
           {this.renderItem(draggedItemType, draggedItem)}
         </div>
       </div>
@@ -78,4 +74,4 @@ var DragLayer = React.createClass({
   }
 });
 
-module.exports = DragLayer;
+export default DragLayer;

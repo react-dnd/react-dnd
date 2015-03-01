@@ -1,25 +1,25 @@
 'use strict';
 
-var React = require('react'),
-    makeSource = require('./makeSource'),
-    Colors = require('./Colors'),
-    Target = require('./Target');
+import React from 'react';
+import makeSource from './makeSource';
+import Colors from './Colors';
+import Target from './Target';
 
-var Container = React.createClass({
+const Container = React.createClass({
   render() {
-    var Yellow = makeSource(Colors.YELLOW),
-        BlueSource = makeSource(Colors.BLUE);
+    const YellowSource = makeSource(Colors.YELLOW);
+    const BlueSource = makeSource(Colors.BLUE);
 
     return (
       <div style={{ height: 320 }}>
         <div style={{ float: 'left' }}>
           <BlueSource>
-            <Yellow>
-              <Yellow />
+            <YellowSource>
+              <YellowSource />
               <BlueSource />
-            </Yellow>
+            </YellowSource>
             <BlueSource>
-              <Yellow />
+              <YellowSource />
             </BlueSource>
           </BlueSource>
         </div>
@@ -32,4 +32,4 @@ var Container = React.createClass({
   }
 });
 
-module.exports = Container;
+export default Container;

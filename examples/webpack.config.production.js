@@ -16,7 +16,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['6to5'], exclude: /node_modules/ },
+      { test: /\.js$/, loaders: ['6to5?experimental'], exclude: /node_modules/ }
     ]
   },
   plugins: [
