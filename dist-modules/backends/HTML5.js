@@ -24,6 +24,13 @@ function getElementRect(el) {
   return { top: rect.top, left: rect.left, width: rect.width, height: rect.height };
 }
 
+function getClientOffset(e) {
+  return {
+    x: e.clientX,
+    y: e.clientY
+  };
+}
+
 function checkIfCurrentDragTargetRectChanged() {
   if (!_dragTargetRectDidChange) {
     var currentRect = getElementRect(_currentDragTarget);
@@ -52,6 +59,13 @@ function preventDefaultNativeDropAction(e) {
   }
 }
 
+function handleTopDragStart(e) {
+  // If by this time no drag source reacted, tell browser not to drag.
+  if (!DragOperationStore.isDragging()) {
+    e.preventDefault();
+  }
+}
+
 function handleTopDragEnter(e) {
   // IE requires this to not show a nodrag icon over the container
   e.preventDefault();
@@ -69,7 +83,7 @@ function handleTopDragEnter(e) {
 function handleTopDragOver(e) {
   preventDefaultNativeDropAction(e);
 
-  var offsetFromClient = HTML5.getOffsetFromClient(_currentComponent, e);
+  var offsetFromClient = getClientOffset(e);
   DragDropActionCreators.drag(offsetFromClient);
 
   // At the top level of event bubbling, use previously set drop effect and reset it.
@@ -106,22 +120,24 @@ function handleTopDrop(e) {
 }
 
 var HTML5 = {
-  setup: function setup(component) {
+  setup: function setup() {
     if (typeof window === "undefined") {
       return;
     }
 
+    window.addEventListener("dragstart", handleTopDragStart);
     window.addEventListener("dragenter", handleTopDragEnter);
     window.addEventListener("dragover", handleTopDragOver);
     window.addEventListener("dragleave", handleTopDragLeave);
     window.addEventListener("drop", handleTopDrop);
   },
 
-  teardown: function teardown(component) {
+  teardown: function teardown() {
     if (typeof window === "undefined") {
       return;
     }
 
+    window.removeEventListener("dragstart", handleTopDragStart);
     window.removeEventListener("dragenter", handleTopDragEnter);
     window.removeEventListener("dragover", handleTopDragOver);
     window.removeEventListener("dragleave", handleTopDragLeave);
@@ -145,7 +161,7 @@ var HTML5 = {
     window.addEventListener("mousemove", triggerDragEndIfDragSourceWasRemovedFromDOM, true);
   },
 
-  endDrag: function endDrag(component) {
+  endDrag: function endDrag() {
     _currentDragTarget = null;
     _currentComponent = null;
     _initialDragTargetRect = null;
@@ -179,10 +195,7 @@ var HTML5 = {
   },
 
   getOffsetFromClient: function getOffsetFromClient(component, e) {
-    return {
-      x: e.clientX,
-      y: e.clientY
-    };
+    return getClientOffset(e);
   }
 };
 

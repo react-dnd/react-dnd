@@ -14,8 +14,7 @@ var DragDropActionCreators = require("../actions/DragDropActionCreators"),
     assign = require("react/lib/Object.assign"),
     defaults = require("lodash/object/defaults"),
     isArray = require("lodash/lang/isArray"),
-    isObject = require("lodash/lang/isObject"),
-    noop = require("lodash/utility/noop");
+    isObject = require("lodash/lang/isObject");
 
 function checkValidType(component, type) {
   /*jshint -W122 */
@@ -174,10 +173,7 @@ function createDragDropMixin(backend) {
       var _dragSources$type = this._dragSources[type];
       var canDrag = _dragSources$type.canDrag;
       var beginDrag = _dragSources$type.beginDrag;
-
-
-      if (!canDrag(this)) {
-        e.preventDefault();
+      if (DragOperationStore.isDragging() || !canDrag(this)) {
         return;
       }
 
@@ -196,6 +192,10 @@ function createDragDropMixin(backend) {
         x: offsetFromClient.x - containerRect.left,
         y: offsetFromClient.y - containerRect.top
       };
+
+      if (!dragPreview) {
+        dragPreview = containerNode;
+      }
 
       if (!effectsAllowed) {
         // Move is a sensible default drag effect.
@@ -222,7 +222,7 @@ function createDragDropMixin(backend) {
       });
     },
 
-    handleDragEnd: function handleDragEnd(type, e) {
+    handleDragEnd: function handleDragEnd(type) {
       backend.endDrag(this);
 
       var endDrag = this._dragSources[type].endDrag;
@@ -298,9 +298,7 @@ function createDragDropMixin(backend) {
 
       e.preventDefault();
 
-      var _dropTargets$state$draggedItemType = this._dropTargets[this.state.draggedItemType];
-      var over = _dropTargets$state$draggedItemType.over;
-      var getDropEffect = _dropTargets$state$draggedItemType.getDropEffect;
+      var over = this._dropTargets[this.state.draggedItemType].over;
       over(this, this.state.draggedItem);
 
       // Don't use `none` because this will prevent browser from firing `dragend`
