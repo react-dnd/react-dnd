@@ -59,6 +59,13 @@ function preventDefaultNativeDropAction(e) {
   }
 }
 
+function handleTopDragStart(e) {
+  // If by this time no drag source reacted, tell browser not to drag.
+  if (!DragOperationStore.isDragging()) {
+    e.preventDefault();
+  }
+}
+
 function handleTopDragEnter(e) {
   // IE requires this to not show a nodrag icon over the container
   e.preventDefault();
@@ -118,6 +125,7 @@ var HTML5 = {
       return;
     }
 
+    window.addEventListener('dragstart', handleTopDragStart);
     window.addEventListener('dragenter', handleTopDragEnter);
     window.addEventListener('dragover', handleTopDragOver);
     window.addEventListener('dragleave', handleTopDragLeave);
@@ -129,6 +137,7 @@ var HTML5 = {
       return;
     }
 
+    window.removeEventListener('dragstart', handleTopDragStart);
     window.removeEventListener('dragenter', handleTopDragEnter);
     window.removeEventListener('dragover', handleTopDragOver);
     window.removeEventListener('dragleave', handleTopDragLeave);

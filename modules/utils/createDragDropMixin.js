@@ -199,9 +199,7 @@ function createDragDropMixin(backend) {
 
     handleDragStart(type, e) {
       var { canDrag, beginDrag } = this._dragSources[type];
-
-      if (!canDrag(this)) {
-        e.preventDefault();
+      if (DragOperationStore.isDragging() || !canDrag(this)) {
         return;
       }
 
@@ -215,6 +213,10 @@ function createDragDropMixin(backend) {
         x: offsetFromClient.x - containerRect.left,
         y: offsetFromClient.y - containerRect.top
       };
+
+      if (!dragPreview) {
+        dragPreview = containerNode;
+      }
 
       if (!effectsAllowed) {
         // Move is a sensible default drag effect.
