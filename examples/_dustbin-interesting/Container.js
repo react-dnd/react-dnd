@@ -1,19 +1,19 @@
 'use strict';
 
-var React = require('react'),
-    makeDustbin = require('./makeDustbin'),
-    makeItem = require('./makeItem'),
-    ItemTypes = require('./ItemTypes'),
-    { NativeDragItemTypes } = require('react-dnd');
+import React from 'react';
+import makeDustbin from './makeDustbin';
+import makeItem from './makeItem';
+import ItemTypes from './ItemTypes';
+import { NativeDragItemTypes } from 'react-dnd';
 
-var Container = React.createClass({
+const Container = React.createClass({
   renderDustbin(accepts) {
-    var Dustbin = makeDustbin(accepts);
+    const Dustbin = makeDustbin(accepts);
     return <Dustbin />;
   },
 
   renderItem(name, dropType) {
-    var Item = makeItem(dropType);
+    const Item = makeItem(dropType);
     return <Item name={name} />;
   },
 
@@ -39,4 +39,4 @@ var Container = React.createClass({
   }
 });
 
-module.exports = Container;
+export default Container;

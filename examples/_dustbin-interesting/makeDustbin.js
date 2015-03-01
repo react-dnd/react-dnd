@@ -1,12 +1,28 @@
 'use strict';
 
-var React = require('react'),
-    ItemTypes = require('./ItemTypes'),
-    { DragDropMixin } = require('react-dnd'),
-    { PropTypes } = React;
+import React from 'react';
+import { DragDropMixin } from 'react-dnd';
 
-function makeDustbin(accepts) {
-  var Dustbin = React.createClass({
+const dropTarget = {
+  acceptDrop(component, item) {
+    component.setState({
+      lastDroppedItem: item
+    });
+  }
+};
+
+const style = {
+  height: '12rem',
+  width: '12rem',
+  color: 'white',
+  padding: '2rem',
+  margin: '0.5rem',
+  textAlign: 'center',
+  float: 'left'
+};
+
+export default function makeDustbin(accepts) {
+  const Dustbin = React.createClass({
     mixins: [DragDropMixin],
 
     getInitialState() {
@@ -17,26 +33,17 @@ function makeDustbin(accepts) {
 
     statics: {
       configureDragDrop(register) {
-        var dropTarget = {
-          acceptDrop(component, item) {
-            component.setState({
-              lastDroppedItem: item
-            });
-          }
-        };
-
         accepts.forEach(itemType => {
-          register(itemType, {
-            dropTarget: dropTarget
-          });
+          register(itemType, { dropTarget });
         });
       }
     },
 
     render() {
-      var dropStates = accepts.map(this.getDropState),
-          backgroundColor = '#222';
+      const { lastDroppedItem } = this.state;
+      const dropStates = accepts.map(this.getDropState);
 
+      let backgroundColor = '#222';
       if (dropStates.some(s => s.isHovering)) {
         backgroundColor = 'darkgreen';
       } else if (dropStates.some(s => s.isDragging)) {
@@ -46,14 +53,8 @@ function makeDustbin(accepts) {
       return (
         <div {...this.dropTargetFor.apply(this, accepts)}
              style={{
-               height: '12rem',
-               width: '12rem',
-               color: 'white',
-               backgroundColor: backgroundColor,
-               padding: '2rem',
-               margin: '0.5rem',
-               textAlign: 'center',
-               float: 'left'
+               ...style,
+               backgroundColor
              }}>
 
           {dropStates.some(s => s.isHovering) ?
@@ -61,8 +62,8 @@ function makeDustbin(accepts) {
             'This dustbin accepts: ' + accepts.join(', ')
           }
 
-          {this.state.lastDroppedItem &&
-            <p>Last dropped: {JSON.stringify(this.state.lastDroppedItem)}</p>
+          {lastDroppedItem &&
+            <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
           }
         </div>
       );
@@ -71,5 +72,3 @@ function makeDustbin(accepts) {
 
   return Dustbin;
 }
-
-module.exports = makeDustbin;

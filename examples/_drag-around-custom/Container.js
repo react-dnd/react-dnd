@@ -1,24 +1,37 @@
 'use strict';
 
-var React = require('react'),
-    update = require('react/lib/update'),
-    ItemTypes = require('./ItemTypes'),
-    DraggableBox = require('./DraggableBox'),
-    snapToGrid = require('./snapToGrid'),
-    { PropTypes } = React,
-    { PureRenderMixin } = require('react/addons'),
-    { DragDropMixin, DragLayerMixin } = require('react-dnd');
+import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import update from 'react/lib/update';
+import ItemTypes from './ItemTypes';
+import DraggableBox from './DraggableBox';
+import snapToGrid from './snapToGrid';
+import { DragDropMixin } from 'react-dnd';
 
-var styles = {
-  container: {
-   width: 300,
-   height: 300,
-   border: '1px solid black',
-   position: 'relative'
-  }
+const styles = {
+  width: 300,
+  height: 300,
+  border: '1px solid black',
+  position: 'relative'
 };
 
-var Container = React.createClass({
+function makeDropTarget(context) {
+  return {
+    acceptDrop(component, item) {
+      const delta = context.getCurrentOffsetDelta();
+
+      let left = Math.round(item.left + delta.x);
+      let top = Math.round(item.top + delta.y);
+      if (component.props.snapToGrid) {
+        [left, top] = snapToGrid(left, top);
+      }
+
+      component.moveBox(item.id, left, top);
+    }
+  };
+}
+
+const Container = React.createClass({
   mixins: [DragDropMixin, PureRenderMixin],
 
   propTypes: {
@@ -29,7 +42,7 @@ var Container = React.createClass({
     return {
       boxes: {
         'a': { top: 20, left: 80, title: 'Drag me around' },
-        'b': { top: 180, left: 20, title: 'Drag me too' },
+        'b': { top: 180, left: 20, title: 'Drag me too' }
       }
     };
   },
@@ -37,19 +50,7 @@ var Container = React.createClass({
   statics: {
     configureDragDrop(register, context) {
       register(ItemTypes.BOX, {
-        dropTarget: {
-          acceptDrop(component, item) {
-            var delta = context.getCurrentOffsetDelta(),
-                left = Math.round(item.left + delta.x),
-                top = Math.round(item.top + delta.y);
-
-            if (component.props.snapToGrid) {
-              [left, top] = snapToGrid(left, top);
-            }
-
-            component.moveBox(item.id, left, top);
-          }
-        }
+        dropTarget: makeDropTarget(context)
       });
     }
   },
@@ -76,10 +77,10 @@ var Container = React.createClass({
   },
 
   render() {
-    var { boxes } = this.state;
+    const { boxes } = this.state;
 
     return (
-      <div style={styles.container}
+      <div style={styles}
            {...this.dropTargetFor(ItemTypes.BOX)}>
         {Object
           .keys(boxes)
@@ -90,4 +91,4 @@ var Container = React.createClass({
   }
 });
 
-module.exports = Container;
+export default Container;

@@ -1,13 +1,31 @@
 'use strict';
 
-var React = require('react'),
-    update = require('react/lib/update'),
-    ItemTypes = require('./ItemTypes'),
-    Box = require('./Box'),
-    { PropTypes } = React,
-    { DragDropMixin } = require('react-dnd');
+import React, { PropTypes } from 'react';
+import update from 'react/lib/update';
+import ItemTypes from './ItemTypes';
+import Box from './Box';
+import { DragDropMixin } from'react-dnd';
 
-var Container = React.createClass({
+function makeDropTarget(context) {
+  return {
+    acceptDrop(component, item) {
+      const delta = context.getCurrentOffsetDelta();
+      const left = Math.round(item.left + delta.x);
+      const top = Math.round(item.top + delta.y);
+
+      component.moveBox(item.id, left, top);
+    }
+  };
+}
+
+const styles = {
+  width: 300,
+  height: 300,
+  border: '1px solid black',
+  position: 'relative'
+};
+
+const Container = React.createClass({
   mixins: [DragDropMixin],
 
   propTypes: {
@@ -18,7 +36,7 @@ var Container = React.createClass({
     return {
       boxes: {
         'a': { top: 20, left: 80, title: 'Drag me around' },
-        'b': { top: 180, left: 20, title: 'Drag me too' },
+        'b': { top: 180, left: 20, title: 'Drag me too' }
       }
     };
   },
@@ -26,54 +44,42 @@ var Container = React.createClass({
   statics: {
     configureDragDrop(register, context) {
       register(ItemTypes.BOX, {
-        dropTarget: {
-          acceptDrop(component, item) {
-            var delta = context.getCurrentOffsetDelta(),
-                left = Math.round(item.left + delta.x),
-                top = Math.round(item.top + delta.y);
-
-            component.moveBox(item.id, left, top);
-          }
-        }
+        dropTarget: makeDropTarget(context)
       });
     }
   },
 
   moveBox(id, left, top) {
-    var stateUpdate = {
-      boxes: {}
-    };
-
-    stateUpdate.boxes[id] = {
-      $merge: {
-        left: left,
-        top: top
+    this.setState(update(this.state, {
+      boxes: {
+        [id]: {
+          $merge: {
+            left: left,
+            top: top
+          }
+        }
       }
-    };
-
-    this.setState(update(this.state, stateUpdate));
+    }));
   },
 
   render() {
+    const { hideSourceOnDrag } = this.props;
+    const { boxes} = this.state;
+
     return (
       <div {...this.dropTargetFor(ItemTypes.BOX)}
-           style={{
-             width: 300,
-             height: 300,
-             border: '1px solid black',
-             position: 'relative'
-           }}>
+           style={styles}>
 
-        {Object.keys(this.state.boxes).map(key => {
-          var box = this.state.boxes[key];
+        {Object.keys(boxes).map(key => {
+          const { left, top, title } = boxes[key];
 
           return (
             <Box key={key}
                  id={key}
-                 left={box.left}
-                 top={box.top}
-                 hideSourceOnDrag={this.props.hideSourceOnDrag}>
-              {box.title}
+                 left={left}
+                 top={top}
+                 hideSourceOnDrag={hideSourceOnDrag}>
+              {title}
             </Box>
           );
         })}
@@ -83,4 +89,4 @@ var Container = React.createClass({
   }
 });
 
-module.exports = Container;
+export default Container;

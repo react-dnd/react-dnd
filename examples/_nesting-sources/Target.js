@@ -1,8 +1,8 @@
 'use strict';
 
-var React = require('react'),
-    Colors = require('./Colors'),
-    { DragDropMixin } = require('react-dnd');
+import React from 'react';
+import Colors from './Colors';
+import { DragDropMixin } from 'react-dnd';
 
 function makeDropTarget(color) {
   return {
@@ -14,7 +14,15 @@ function makeDropTarget(color) {
   };
 }
 
-var Target = React.createClass({
+const style = {
+  border: '1px dashed gray',
+  height: '12rem',
+  width: '12rem',
+  padding: '2rem',
+  textAlign: 'center'
+};
+
+const Target = React.createClass({
   mixins: [DragDropMixin],
 
   statics: {
@@ -36,14 +44,14 @@ var Target = React.createClass({
   },
 
   render() {
-    var { lastDroppedColor } = this.state,
-        blueDropState = this.getDropState(Colors.BLUE),
-        yellowDropState = this.getDropState(Colors.YELLOW),
-        isDragging = blueDropState.isDragging || yellowDropState.isDragging,
-        isHovering = blueDropState.isHovering || yellowDropState.isHovering,
-        backgroundColor = '#fff',
-        opacity = isHovering ? 1 : 0.7;
+    const { lastDroppedColor } = this.state;
+    const blueDropState = this.getDropState(Colors.BLUE);
+    const yellowDropState = this.getDropState(Colors.YELLOW);
+    const isDragging = blueDropState.isDragging || yellowDropState.isDragging;
+    const isHovering = blueDropState.isHovering || yellowDropState.isHovering;
+    const opacity = isHovering ? 1 : 0.7;
 
+    let backgroundColor = '#fff';
     if (blueDropState.isDragging) {
       backgroundColor = 'lightblue';
     } else if (yellowDropState.isDragging) {
@@ -53,13 +61,9 @@ var Target = React.createClass({
     return (
       <div {...this.dropTargetFor(Colors.YELLOW, Colors.BLUE)}
            style={{
-             backgroundColor: backgroundColor,
-             opacity: opacity,
-             border: '1px dashed gray',
-             height: '12rem',
-             width: '12rem',
-             padding: '2rem',
-             textAlign: 'center'
+             ...style,
+             backgroundColor,
+             opacity
            }}>
 
         <p>Drop here.</p>
@@ -72,4 +76,4 @@ var Target = React.createClass({
   }
 });
 
-module.exports = Target;
+export default Target;
