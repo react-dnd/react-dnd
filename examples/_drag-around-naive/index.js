@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react'),
-    Container = require('./Container'),
-    LinkedStateMixin = require('react/lib/LinkedStateMixin'),
-    { Link } = require('react-router');
+import React from 'react';
+import LinkedStateMixin from 'react/lib/LinkedStateMixin';
+import Container from './Container';
+import { Link } from 'react-router';
 
-var DragAroundNaive = React.createClass({
+const DragAroundNaive = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState() {
@@ -15,9 +15,11 @@ var DragAroundNaive = React.createClass({
   },
 
   render() {
+    const { hideSourceOnDrag } = this.state;
+
     return (
       <div>
-        <Container hideSourceOnDrag={this.state.hideSourceOnDrag} />
+        <Container hideSourceOnDrag={hideSourceOnDrag} />
         <p>
           <input type='checkbox'
                  checkedLink={this.linkState('hideSourceOnDrag')}>
@@ -48,4 +50,4 @@ var DragAroundNaive = React.createClass({
   }
 });
 
-module.exports = DragAroundNaive;
+export default DragAroundNaive;

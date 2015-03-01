@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   YELLOW: 'yellow',
   BLUE: 'blue'
 };

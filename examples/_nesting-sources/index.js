@@ -1,9 +1,9 @@
 'use strict';
 
-var React = require('react'),
-    Container = require('./Container');
+import React from 'react';
+import Container from './Container';
 
-var NestingSources = React.createClass({
+const NestingSources = React.createClass({
   render() {
     return (
       <div>
@@ -17,4 +17,4 @@ var NestingSources = React.createClass({
   }
 });
 
-module.exports = NestingSources;
+export default NestingSources;

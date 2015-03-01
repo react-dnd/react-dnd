@@ -1,10 +1,10 @@
 'use strict';
 
-var React = require('react'),
-    Dustbin = require('./Dustbin'),
-    Item = require('./Item');
+import React from 'react';
+import Dustbin from './Dustbin';
+import Item from './Item';
 
-var Container = React.createClass({
+const Container = React.createClass({
   render() {
     return (
       <div>
@@ -19,4 +19,4 @@ var Container = React.createClass({
   }
 });
 
-module.exports = Container;
+export default Container;

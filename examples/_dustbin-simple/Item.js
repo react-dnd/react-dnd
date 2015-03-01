@@ -1,11 +1,28 @@
 'use strict';
 
-var React = require('react'),
-    ItemTypes = require('./ItemTypes'),
-    { PropTypes } = React,
-    { DragDropMixin } = require('react-dnd');
+import React, { PropTypes } from 'react';
+import ItemTypes from './ItemTypes';
+import { DragDropMixin } from 'react-dnd';
 
-var Item = React.createClass({
+const itemDragSource = {
+  beginDrag(component) {
+    return {
+      item: {
+        name: component.props.name
+      }
+    };
+  }
+};
+
+const style = {
+  border: '1px dashed gray',
+  backgroundColor: 'white',
+  padding: '0.5rem',
+  margin: '0.5rem',
+  maxWidth: 80
+};
+
+const Item = React.createClass({
   mixins: [DragDropMixin],
 
   propTypes: {
@@ -15,36 +32,26 @@ var Item = React.createClass({
   statics: {
     configureDragDrop(register) {
       register(ItemTypes.ITEM, {
-        dragSource: {
-          beginDrag(component) {
-            return {
-              item: {
-                name: component.props.name
-              }
-            };
-          }
-        }
+        dragSource: itemDragSource
       });
     }
   },
 
   render() {
-    var { isDragging } = this.getDragState(ItemTypes.ITEM);
+    const { name } = this.props;
+    const { isDragging } = this.getDragState(ItemTypes.ITEM);
+    const opacity = isDragging ? 0.4 : 1;
 
     return (
       <div {...this.dragSourceFor(ItemTypes.ITEM)}
            style={{
-             border: '1px dashed gray',
-             backgroundColor: 'white',
-             padding: '0.5rem',
-             margin: '0.5rem',
-             opacity: isDragging ? 0.4 : 1,
-             maxWidth: 80
+             ...style,
+             opacity
            }}>
-        {this.props.name}
+        {name}
       </div>
     );
   }
 });
 
-module.exports = Item;
+export default Item;

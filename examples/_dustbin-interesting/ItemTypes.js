@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   FOOD: 'food',
   GLASS: 'glass',
   PAPER: 'paper'

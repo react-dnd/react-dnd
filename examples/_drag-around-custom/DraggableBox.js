@@ -1,55 +1,52 @@
 'use strict';
 
-var React = require('react'),
-    ItemTypes = require('./ItemTypes'),
-    getEmptyImage = require('./getEmptyImage'),
-    Box = require('./Box'),
-    { PropTypes } = React,
-    { PureRenderMixin } = require('react/addons'),
-    { DragDropMixin, DropEffects } = require('react-dnd');
+import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import ItemTypes from './ItemTypes';
+import getEmptyImage from './getEmptyImage';
+import Box from './Box';
+import { DragDropMixin, DropEffects } from 'react-dnd';
 
-var styles = {
-  draggableBox: (props) => {
-    var { left, top } = props,
-        transform = `translate3d(${left}px, ${top}px, 0)`;
-
+const dragSource = {
+  beginDrag(component) {
     return {
-      position: 'absolute',
-      transform: transform,
-      WebkitTransform: transform
+      effectAllowed: DropEffects.MOVE,
+      dragPreview: getEmptyImage(),
+      item: component.props
     };
   }
 };
 
-var DraggableBox = React.createClass({
+function getStyles(props) {
+  const { left, top } = props;
+  const transform = `translate3d(${left}px, ${top}px, 0)`;
+
+  return {
+    position: 'absolute',
+    transform: transform,
+    WebkitTransform: transform
+  };
+}
+
+const DraggableBox = React.createClass({
   mixins: [DragDropMixin, PureRenderMixin],
 
   propTypes: {
     id: PropTypes.any.isRequired,
     title: PropTypes.string.isRequired,
     left: PropTypes.number.isRequired,
-    top: PropTypes.number.isRequired,
+    top: PropTypes.number.isRequired
   },
 
   statics: {
     configureDragDrop(register) {
-      register(ItemTypes.BOX, {
-        dragSource: {
-          beginDrag(component) {
-            return {
-              effectAllowed: DropEffects.MOVE,
-              dragPreview: getEmptyImage(),
-              item: component.props
-            };
-          }
-        }
-      });
+      register(ItemTypes.BOX, { dragSource });
     }
   },
 
   render() {
-    var { title } = this.props;
-    var { isDragging } = this.getDragState(ItemTypes.BOX);
+    const { title } = this.props;
+    const { isDragging } = this.getDragState(ItemTypes.BOX);
 
     if (isDragging) {
       return null;
@@ -57,11 +54,11 @@ var DraggableBox = React.createClass({
 
     return (
       <div {...this.dragSourceFor(ItemTypes.BOX)}
-           style={styles.draggableBox(this.props)}>
+           style={getStyles(this.props)}>
         <Box title={title} />
       </div>
     );
   }
 });
 
-module.exports = DraggableBox;
+export default DraggableBox;
