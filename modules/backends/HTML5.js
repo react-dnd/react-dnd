@@ -24,6 +24,13 @@ function getElementRect(el) {
   return { top: rect.top, left: rect.left, width: rect.width, height: rect.height };
 }
 
+function getClientOffset(e) {
+  return {
+    x: e.clientX,
+    y: e.clientY
+  };
+}
+
 function checkIfCurrentDragTargetRectChanged() {
   if (!_dragTargetRectDidChange) {
     var currentRect = getElementRect(_currentDragTarget);
@@ -69,7 +76,7 @@ function handleTopDragEnter(e) {
 function handleTopDragOver(e) {
   preventDefaultNativeDropAction(e);
 
-  var offsetFromClient = HTML5.getOffsetFromClient(_currentComponent, e);
+  var offsetFromClient = getClientOffset(e);
   DragDropActionCreators.drag(offsetFromClient);
 
   // At the top level of event bubbling, use previously set drop effect and reset it.
@@ -106,7 +113,7 @@ function handleTopDrop(e) {
 }
 
 var HTML5 = {
-  setup(component) {
+  setup() {
     if (typeof window === 'undefined') {
       return;
     }
@@ -117,7 +124,7 @@ var HTML5 = {
     window.addEventListener('drop', handleTopDrop);
   },
 
-  teardown(component) {
+  teardown() {
     if (typeof window === 'undefined') {
       return;
     }
@@ -143,7 +150,7 @@ var HTML5 = {
     window.addEventListener('mousemove', triggerDragEndIfDragSourceWasRemovedFromDOM, true);
   },
 
-  endDrag(component) {
+  endDrag() {
     _currentDragTarget = null;
     _currentComponent = null;
     _initialDragTargetRect = null;
@@ -177,10 +184,7 @@ var HTML5 = {
   },
 
   getOffsetFromClient(component, e) {
-    return {
-      x: e.clientX,
-      y: e.clientY
-    };
+    return getClientOffset(e);
   }
 };
 

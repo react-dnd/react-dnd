@@ -2,7 +2,7 @@
 
 function isFileDragDropEvent(e) {
   if (!e.dataTransfer) {
-  	return false;
+    return false;
   }
 
   var types = Array.prototype.slice.call(e.dataTransfer.types);
