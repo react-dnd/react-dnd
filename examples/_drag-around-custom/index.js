@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react'),
-    Container = require('./Container'),
-    DragLayer = require('./DragLayer'),
-    LinkedStateMixin = require('react/lib/LinkedStateMixin');
+import React from 'react';
+import LinkedStateMixin from 'react/lib/LinkedStateMixin';
+import Container from './Container';
+import DragLayer from './DragLayer';
 
-var DragAroundCustom = React.createClass({
+const DragAroundCustom = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState() {
@@ -16,10 +16,12 @@ var DragAroundCustom = React.createClass({
   },
 
   render() {
+    const { snapToGridAfterDrop, snapToGridWhileDragging } = this.state;
+
     return (
       <div>
-        <Container snapToGrid={this.state.snapToGridAfterDrop} />
-        <DragLayer snapToGrid={this.state.snapToGridWhileDragging} />
+        <Container snapToGrid={snapToGridAfterDrop} />
+        <DragLayer snapToGrid={snapToGridWhileDragging} />
         <p>
           <input type='checkbox'
                  checkedLink={this.linkState('snapToGridAfterDrop')}>
@@ -53,4 +55,4 @@ var DragAroundCustom = React.createClass({
   }
 });
 
-module.exports = DragAroundCustom;
+export default DragAroundCustom;

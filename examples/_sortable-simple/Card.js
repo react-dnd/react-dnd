@@ -1,11 +1,33 @@
 'use strict';
 
-var React = require('react'),
-    ItemTypes = require('./ItemTypes'),
-    { PropTypes } = React,
-    { DragDropMixin } = require('react-dnd');
+import React, { PropTypes } from 'react';
+import ItemTypes from './ItemTypes';
+import { DragDropMixin } from 'react-dnd';
 
-var Card = React.createClass({
+const dragSource = {
+  beginDrag(component) {
+    return {
+      item: {
+        id: component.props.id
+      }
+    };
+  }
+};
+
+const dropTarget = {
+  over(component, item) {
+    component.props.moveCard(item.id, component.props.id);
+  }
+};
+
+const style = {
+  border: '1px dashed gray',
+  backgroundColor: 'white',
+  padding: '0.5rem',
+  margin: '0.5rem'
+};
+
+const Card = React.createClass({
   mixins: [DragDropMixin],
 
   propTypes: {
@@ -17,42 +39,28 @@ var Card = React.createClass({
   statics: {
     configureDragDrop(register) {
       register(ItemTypes.CARD, {
-        dragSource: {
-          beginDrag(component) {
-            return {
-              item: {
-                id: component.props.id
-              }
-            };
-          }
-        },
-
-        dropTarget: {
-          over(component, item) {
-            component.props.moveCard(item.id, component.props.id);
-          }
-        }
+        dragSource,
+        dropTarget
       });
     }
   },
 
   render() {
-    var { isDragging } = this.getDragState(ItemTypes.CARD);
+    const { text } = this.props;
+    const { isDragging } = this.getDragState(ItemTypes.CARD);
+    const opacity = isDragging ? 0 : 1;
 
     return (
       <div {...this.dragSourceFor(ItemTypes.CARD)}
            {...this.dropTargetFor(ItemTypes.CARD)}
            style={{
-             border: '1px dashed gray',
-             backgroundColor: 'white',
-             padding: '0.5rem',
-             margin: '0.5rem',
-             opacity: isDragging ? 0 : 1
+             ...style,
+             opacity
            }}>
-        {this.props.text}
+        {text}
       </div>
     );
   }
 });
 
-module.exports = Card;
+export default Card;

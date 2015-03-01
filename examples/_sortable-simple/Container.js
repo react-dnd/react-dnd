@@ -1,10 +1,10 @@
 'use strict';
 
-var React = require('react'),
-    Card = require('./Card'),
-    update = require('react/lib/update');
+import React from 'react';
+import update from 'react/lib/update';
+import Card from './Card';
 
-var Container = React.createClass({
+const Container = React.createClass({
   getInitialState() {
     return {
       cards: [{
@@ -33,27 +33,29 @@ var Container = React.createClass({
   },
 
   moveCard(id, afterId) {
-    var card = this.state.cards.filter(c => c.id === id)[0],
-        afterCard = this.state.cards.filter(c => c.id === afterId)[0],
-        cardIndex = this.state.cards.indexOf(card),
-        afterIndex = this.state.cards.indexOf(afterCard);
+    const { cards } = this.state;
 
-    var stateUpdate = {
+    const card = cards.filter(c => c.id === id)[0];
+    const afterCard = cards.filter(c => c.id === afterId)[0];
+    const cardIndex = cards.indexOf(card);
+    const afterIndex = cards.indexOf(afterCard);
+
+    this.setState(update(this.state, {
       cards: {
         $splice: [
           [cardIndex, 1],
           [afterIndex, 0, card]
         ]
       }
-    };
-
-    this.setState(update(this.state, stateUpdate));
+    }));
   },
 
   render() {
+    const { cards } = this.state;
+
     return (
       <div>
-        {this.state.cards.map(card => {
+        {cards.map(card => {
           return (
             <Card key={card.id}
                   id={card.id}
@@ -66,4 +68,4 @@ var Container = React.createClass({
   }
 });
 
-module.exports = Container;
+export default Container;

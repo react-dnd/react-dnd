@@ -1,28 +1,38 @@
 'use strict';
 
-var React = require('react'),
-    ItemTypes = require('./ItemTypes'),
-    { DragDropMixin } = require('react-dnd');
+import React from 'react';
+import ItemTypes from './ItemTypes';
+import { DragDropMixin } from 'react-dnd';
 
-var Dustbin = React.createClass({
+const itemDropTarget = {
+  acceptDrop(component, item) {
+    window.alert('You dropped ' + item.name + '!');
+  }
+};
+
+const style = {
+  height: '12rem',
+  width: '12rem',
+  color: 'white',
+  padding: '2rem',
+  textAlign: 'center'
+};
+
+const Dustbin = React.createClass({
   mixins: [DragDropMixin],
 
   statics: {
     configureDragDrop(register) {
       register(ItemTypes.ITEM, {
-        dropTarget: {
-          acceptDrop(component, item) {
-            window.alert('You dropped ' + item.name + '!');
-          }
-        }
+        dropTarget: itemDropTarget
       });
     }
   },
 
   render() {
-    var dropState = this.getDropState(ItemTypes.ITEM),
-        backgroundColor = '#222';
+    const dropState = this.getDropState(ItemTypes.ITEM);
 
+    let backgroundColor = '#222';
     if (dropState.isHovering) {
       backgroundColor = 'darkgreen';
     } else if (dropState.isDragging) {
@@ -32,12 +42,8 @@ var Dustbin = React.createClass({
     return (
       <div {...this.dropTargetFor(ItemTypes.ITEM)}
            style={{
-             height: '12rem',
-             width: '12rem',
-             color: 'white',
-             backgroundColor: backgroundColor,
-             padding: '2rem',
-             textAlign: 'center'
+             ...style,
+             backgroundColor
            }}>
 
         {dropState.isHovering ?
@@ -49,4 +55,4 @@ var Dustbin = React.createClass({
   }
 });
 
-module.exports = Dustbin;
+export default Dustbin;

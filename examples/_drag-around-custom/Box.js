@@ -1,18 +1,15 @@
 'use strict';
 
-var React = require('react'),
-    { PureRenderMixin } = require('react/addons'),
-    { PropTypes } = React;
+import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 
-var styles = {
-  box: {
-    border: '1px dashed gray',
-    padding: '0.5rem',
-    display: 'inline-block'
-  }
+const styles = {
+  border: '1px dashed gray',
+  padding: '0.5rem',
+  display: 'inline-block'
 };
 
-var Box = React.createClass({
+const Box = React.createClass({
   mixins: [PureRenderMixin],
 
   propTypes: {
@@ -20,12 +17,14 @@ var Box = React.createClass({
   },
 
   render() {
+    const { title } = this.props;
+
     return (
-      <div style={styles.box}>
-        {this.props.title}
+      <div style={styles}>
+        {title}
       </div>
     );
   }
 });
 
-module.exports = Box;
+export default Box;

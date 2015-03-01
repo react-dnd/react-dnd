@@ -14,7 +14,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['react-hot-loader', '6to5'], exclude: /node_modules/ }
+      { test: /\.js$/, loaders: ['react-hot-loader', '6to5?experimental'], exclude: /node_modules/ }
     ]
   },
   plugins: [

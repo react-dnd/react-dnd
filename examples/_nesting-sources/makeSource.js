@@ -1,31 +1,35 @@
 'use strict';
 
-var React = require('react'),
-    Colors = require('./Colors'),
-    LinkedStateMixin = require('react/lib/LinkedStateMixin'),
-    { DragDropMixin } = require('react-dnd');
+import React from 'react';
+import LinkedStateMixin from 'react/lib/LinkedStateMixin';
+import Colors from './Colors';
+import { DragDropMixin } from 'react-dnd';
 
-function makeSource(sourceColor) {
-  var dragSource = {
-    canDrag(component) {
-      return !component.state.forbidDrag;
-    },
+const dragSource = {
+  canDrag(component) {
+    return !component.state.forbidDrag;
+  },
 
-    beginDrag() {
-      return {
-        item: { }
-      };
-    }
-  };
+  beginDrag() {
+    return {
+      item: { }
+    };
+  }
+};
 
+const style = {
+  border: '1px dashed gray',
+  padding: '0.5rem',
+  margin: '0.5rem'
+};
+
+export default function makeSource(sourceColor) {
   var Source = React.createClass({
     mixins: [DragDropMixin, LinkedStateMixin],
 
     statics: {
       configureDragDrop(register) {
-        register(sourceColor, {
-          dragSource: dragSource
-        });
+        register(sourceColor, { dragSource });
       }
     },
 
@@ -36,9 +40,11 @@ function makeSource(sourceColor) {
     },
 
     render() {
-      var { isDragging } = this.getDragState(sourceColor),
-          backgroundColor;
+      const { children } = this.props;
+      const { isDragging } = this.getDragState(sourceColor);
+      const opacity = isDragging ? 0.4 : 1;
 
+      let backgroundColor;
       switch (sourceColor) {
       case Colors.YELLOW:
         backgroundColor = 'lightgoldenrodyellow';
@@ -51,11 +57,9 @@ function makeSource(sourceColor) {
       return (
         <div {...this.dragSourceFor(sourceColor)}
              style={{
-               border: '1px dashed gray',
-               backgroundColor: backgroundColor,
-               padding: '0.5rem',
-               margin: '0.5rem',
-               opacity: isDragging ? 0.4 : 1
+               ...style,
+               backgroundColor,
+               opacity
              }}>
 
           <input type='checkbox'
@@ -63,7 +67,7 @@ function makeSource(sourceColor) {
             Forbid drag
           </input>
 
-          {this.props.children}
+          {children}
         </div>
       );
     }
@@ -71,5 +75,3 @@ function makeSource(sourceColor) {
 
   return Source;
 }
-
-module.exports = makeSource;

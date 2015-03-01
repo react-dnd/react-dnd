@@ -1,20 +1,16 @@
 'use strict';
 
-var React = require('react'),
-    Box = require('./Box'),
-    { PureRenderMixin } = require('react/addons'),
-    { PropTypes } = React;
+import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import Box from './Box';
 
-var styles = {
-  boxDragPreview: (props, state) => ({
-    backgroundColor: state.tickTock ? 'white' : 'yellow',
-    display: 'inline-block',
-    transform: 'rotate(-7deg)',
-    WebkitTransform: 'rotate(-7deg)'
-  })
+const styles = {
+  display: 'inline-block',
+  transform: 'rotate(-7deg)',
+  WebkitTransform: 'rotate(-7deg)'
 };
 
-var BoxDragPreview = React.createClass({
+const BoxDragPreview = React.createClass({
   mixins: [PureRenderMixin],
 
   propTypes: {
@@ -40,14 +36,19 @@ var BoxDragPreview = React.createClass({
   },
 
   render() {
-    var { title } = this.props;
+    const { title } = this.props;
+    const { tickTock } = this.state;
+    const backgroundColor = tickTock ? 'white' : 'yellow';
 
     return (
-      <div style={styles.boxDragPreview(this.props, this.state)}>
+      <div style={{
+        ...styles,
+        backgroundColor
+      }}>
         <Box title={title} />
       </div>
     );
   }
 });
 
-module.exports = BoxDragPreview;
+export default BoxDragPreview;
