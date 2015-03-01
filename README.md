@@ -70,7 +70,7 @@ npm start
 open http://localhost:8080/
 ```
 
-Examples use [ES6 syntax](https://babeljs.io/docs/learn-es6/).
+Examples use **[ES6 syntax](https://babeljs.io/docs/learn-es6/)** via **[Babel](https://babeljs.io/)** transpiler. You can still use React DnD in an ES5 codebase, but if you copy code from examples, make sure you translate it to ES5 where needed.
 
 ## Installation
 
