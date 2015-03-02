@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Drag and drop for React with full DOM control",
   "main": "dist-modules/index.js",
   "scripts": {
