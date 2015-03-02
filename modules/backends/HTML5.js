@@ -61,7 +61,7 @@ function preventDefaultNativeDropAction(e) {
 
 function handleTopDragStart(e) {
   // If by this time no drag source reacted, tell browser not to drag.
-  if (!DragOperationStore.isDragging()) {
+  if (!isNativeDragDropEvent(e) && !DragOperationStore.isDragging()) {
     e.preventDefault();
   }
 }
