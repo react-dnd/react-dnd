@@ -10,6 +10,8 @@ var DragDropActionCreators = require("../actions/DragDropActionCreators"),
     shallowEqual = require("react/lib/shallowEqual"),
     isWebkit = require("../utils/isWebkit");
 
+var ELEMENT_NODE = 1;
+
 // Store global state for browser-specific fixes and workarounds
 var _monitor = new EnterLeaveMonitor(),
     _currentDragTarget,
@@ -19,6 +21,14 @@ var _monitor = new EnterLeaveMonitor(),
     _currentDropEffect;
 
 function getElementRect(el) {
+  if (el.nodeType !== ELEMENT_NODE) {
+    el = el.parentElement;
+  }
+
+  if (!el) {
+    return null;
+  }
+
   var rect = el.getBoundingClientRect();
   // Copy so object doesn't get reused
   return { top: rect.top, left: rect.left, width: rect.width, height: rect.height };
@@ -61,7 +71,7 @@ function preventDefaultNativeDropAction(e) {
 
 function handleTopDragStart(e) {
   // If by this time no drag source reacted, tell browser not to drag.
-  if (!DragOperationStore.isDragging()) {
+  if (!isNativeDragDropEvent(e) && !DragOperationStore.isDragging()) {
     e.preventDefault();
   }
 }
