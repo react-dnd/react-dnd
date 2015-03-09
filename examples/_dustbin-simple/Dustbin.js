@@ -2,13 +2,17 @@
 
 import React from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDropMixin } from 'react-dnd';
+import { DropTarget} from 'dnd-core';
 
-const itemDropTarget = {
-  acceptDrop(component, item) {
-    window.alert('You dropped ' + item.name + '!');
+class ItemDropTarget extends DropTarget {
+  constructor(component) {
+    this.component = component;
   }
-};
+
+  drop() {
+    return {name: 'Dustbin'};
+  }
+}
 
 const style = {
   height: '12rem',
@@ -19,34 +23,48 @@ const style = {
 };
 
 const Dustbin = React.createClass({
-  mixins: [DragDropMixin],
 
-  statics: {
-    configureDragDrop(register) {
-      register(ItemTypes.ITEM, {
-        dropTarget: itemDropTarget
-      });
-    }
+  getInitialState() {
+   return this.getDropState();
+  },
+
+  getDropState() {
+    return {
+      isHovering: this.targetHandle && this.props.manager.getContext().isOver(this.targetHandle)
+    };
+  },
+
+  componentWillMount() {
+    this.targetHandle = this.props.manager.getRegistry().addTarget(ItemTypes.ITEM, new ItemDropTarget(this));
+  },
+
+  componentDidMount() {
+    this.props.manager.getContext().addChangeListener(this.handleDragContextChange);
+  },
+
+  componentWillUnmount() {
+    this.props.manager.getRegistry().removeTarget(this.targetHandle);
+    this.props.manager.getContext().removeChangeListener(this.handleDragContextChange);
+  },
+
+  handleDragContextChange() {
+    this.setState(this.getDropState());
   },
 
   render() {
-    const dropState = this.getDropState(ItemTypes.ITEM);
-
     let backgroundColor = '#222';
-    if (dropState.isHovering) {
+    if (this.state.isHovering) {
       backgroundColor = 'darkgreen';
-    } else if (dropState.isDragging) {
-      backgroundColor = 'darkkhaki';
     }
 
     return (
-      <div {...this.dropTargetFor(ItemTypes.ITEM)}
+      <div {...this.props.manager.getBackend().getDroppableProps(this.targetHandle)}
            style={{
              ...style,
              backgroundColor
            }}>
 
-        {dropState.isHovering ?
+        {this.state.isHovering ?
           'Release to drop' :
           'Drag item here'
         }
