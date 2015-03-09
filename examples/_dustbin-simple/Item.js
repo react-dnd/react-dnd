@@ -2,17 +2,26 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDropMixin } from 'react-dnd';
 
-const itemDragSource = {
-  beginDrag(component) {
+import { DragSource } from 'dnd-core';
+
+class ItemDragSource extends DragSource {
+  constructor(component) {
+    this.component = component;
+  }
+
+  beginDrag() {
     return {
-      item: {
-        name: component.props.name
-      }
+      name: this.component.props.name
     };
   }
-};
+
+  endDrag(context) {
+    const what = context.getItem();
+    const where = context.getDropResult();
+    alert('You dropped ' + what.name + ' into ' + where.name + '!');
+  }
+}
 
 const style = {
   border: '1px dashed gray',
@@ -23,27 +32,45 @@ const style = {
 };
 
 const Item = React.createClass({
-  mixins: [DragDropMixin],
 
   propTypes: {
     name: PropTypes.string.isRequired
   },
 
-  statics: {
-    configureDragDrop(register) {
-      register(ItemTypes.ITEM, {
-        dragSource: itemDragSource
-      });
-    }
+  getInitialState() {
+   return this.getDragState();
+  },
+
+  getDragState() {
+    return {
+      isDraggingItem: this.sourceHandle && this.props.manager.getContext().isDragging(this.sourceHandle)
+    };
+  },
+
+  componentWillMount() {
+    this.sourceHandle = this.props.manager.getRegistry().addSource(ItemTypes.ITEM, new ItemDragSource(this));
+  },
+
+  componentDidMount() {
+    this.props.manager.getContext().addChangeListener(this.handleDragContextChange);
+  },
+
+  componentWillUnmount() {
+    this.props.manager.getRegistry().removeSource(this.sourceHandle);
+    this.props.manager.getContext().removeChangeListener(this.handleDragContextChange);
+  },
+
+  handleDragContextChange() {
+    this.setState(this.getDragState());
   },
 
   render() {
     const { name } = this.props;
-    const { isDragging } = this.getDragState(ItemTypes.ITEM);
-    const opacity = isDragging ? 0.4 : 1;
+    const { isDraggingItem } = this.state;
+    const opacity = isDraggingItem ? 0.4 : 1;
 
     return (
-      <div {...this.dragSourceFor(ItemTypes.ITEM)}
+      <div {...this.props.manager.getBackend().getDraggableProps(this.sourceHandle)}
            style={{
              ...style,
              opacity
