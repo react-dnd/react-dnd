@@ -7,6 +7,8 @@ Drag and drop for React with full DOM control.
 
 Currently works on top of HTML5 drag-and-drop API, but is moving towards a swappable implementation. Support for touch events is on the roadmap but not currently implemented.
 
+>**If your company uses React DnD and would like to speed up its development, consider sponsoring the project. I'm currently doing it in the spare time but I would be happy to work on it part-time. Drop me an email at <a href='mailto:dan.abramov@me.com'>dan.abramov@me.com</a>. Exciting new features take time.**
+
 ## Philosophy
 
 * Keep user in full control over rendering;
