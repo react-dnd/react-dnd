@@ -29,8 +29,11 @@ const Dustbin = React.createClass({
   },
 
   getDropState() {
+    const context = this.props.manager.getContext();
+    
     return {
-      isHovering: this.targetHandle && this.props.manager.getContext().isOver(this.targetHandle)
+      isHovering: this.targetHandle && context.isOver(this.targetHandle),
+      isDragging: context.isDragging()
     };
   },
 
@@ -55,6 +58,8 @@ const Dustbin = React.createClass({
     let backgroundColor = '#222';
     if (this.state.isHovering) {
       backgroundColor = 'darkgreen';
+    } else if (this.state.isDragging) {
+      backgroundColor = 'darkkhaki';
     }
 
     return (
