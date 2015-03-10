@@ -7,9 +7,8 @@ var DragDropActionCreators = require("../actions/DragDropActionCreators"),
     DropEffects = require("../constants/DropEffects"),
     DefaultDragSource = require("./DefaultDragSource"),
     DefaultDropTarget = require("./DefaultDropTarget"),
-    isFileDragDropEvent = require("./isFileDragDropEvent"),
-    isUrlDragDropEvent = require("../utils/isUrlDragDropEvent"),
     extractNativeItem = require("../utils/extractNativeItem"),
+    isNativeDraggedItemType = require("../utils/isNativeDraggedItemType"),
     invariant = require("react/lib/invariant"),
     assign = require("react/lib/Object.assign"),
     defaults = require("lodash/object/defaults"),
@@ -272,8 +271,9 @@ function createDragDropMixin(backend) {
       var enter = _dropTargets$state$draggedItemType.enter;
       var getDropEffect = _dropTargets$state$draggedItemType.getDropEffect;
       var effectsAllowed = DragOperationStore.getEffectsAllowed();
+      var itemType = DragOperationStore.getDraggedItemType();
 
-      if (isFileDragDropEvent(e) || isUrlDragDropEvent(e)) {
+      if (isNativeDraggedItemType(itemType)) {
         // Use Copy drop effect for dragging files or urls.
         // Because browser gives no drag preview, "+" icon is useful.
         effectsAllowed = [DropEffects.COPY];
