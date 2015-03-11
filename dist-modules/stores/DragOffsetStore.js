@@ -40,7 +40,8 @@ DragOffsetStore.dispatchToken = DragDropDispatcher.register(function (payload) {
       break;
 
     case DragDropActionTypes.DRAG_END:
-      _currentOffsetFromClient = null;
+      _initialOffsetFromContainer = null;
+      _initialOffsetFromClient = null;
       _currentOffsetFromClient = null;
       DragOffsetStore.emitChange();
   }
