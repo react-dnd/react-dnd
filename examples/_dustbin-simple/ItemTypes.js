@@ -1,5 +1,5 @@
 'use strict';
 
 export default {
-  ITEM: 'item'
+  BOX: 'box'
 };

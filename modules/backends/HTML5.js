@@ -5,7 +5,7 @@ export default class HTML5Backend {
     this.actions = actions;
   }
 
-  getDraggableProps(sourceHandle) {
+  getSourceProps(sourceHandle) {
     return {
       draggable: true,
       onDragStart: (e) => this.handleDragStart(e, sourceHandle),
@@ -13,7 +13,7 @@ export default class HTML5Backend {
     };
   }
 
-  getDroppableProps(targetHandle) {
+  getTargetProps(targetHandle) {
     return {
       onDragEnter: (e) => this.handleDragEnter(e, targetHandle),
       onDragOver: (e) => this.handleDragOver(e, targetHandle),
