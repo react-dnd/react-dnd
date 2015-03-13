@@ -1,10 +1,10 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import ItemTypes from './ItemTypes';
-import { DropTarget} from 'dnd-core';
+import { configureDragDrop, DropTarget } from 'react-dnd';
 
-class ItemDropTarget extends DropTarget {
+class DustbinTarget extends DropTarget {
   drop() {
     return { name: 'Dustbin' };
   }
@@ -18,54 +18,27 @@ const style = {
   textAlign: 'center'
 };
 
-export default class Dustbin extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.getDropState();
-  }
+const propTypes = {
+  active: PropTypes.bool.isRequired,
+  hover: PropTypes.bool.isRequired,
+  boxTargetProps: PropTypes.object
+};
 
-  getDropState() {
-    const context = this.props.manager.getContext();
-    return {
-      isHovering: this.targetHandle && context.isOver(this.targetHandle),
-      isDragging: context.isDragging()
-    };
-  }
-
-  componentWillMount() {
-    console.log('test')
-    this.targetHandle = this.props.manager.getRegistry().addTarget(ItemTypes.ITEM, new ItemDropTarget());
-  }
-
-  componentDidMount() {
-    this._changeListener = this.props.manager.getContext().addChangeListener(() => this.handleDragContextChange());
-  }
-
-  componentWillUnmount() {
-    this.props.manager.getRegistry().removeTarget(this.targetHandle);
-    this.props.manager.getContext().removeChangeListener(this._changeListener);
-  }
-
-  handleDragContextChange() {
-    this.setState(this.getDropState());
-  }
-
+class Dustbin extends Component {
   render() {
+    const { active, hover, boxTargetProps } = this.props;
+
     let backgroundColor = '#222';
-    if (this.state.isHovering) {
+    if (hover) {
       backgroundColor = 'darkgreen';
-    } else if (this.state.isDragging) {
+    } else if (active) {
       backgroundColor = 'darkkhaki';
     }
 
     return (
-      <div {...this.props.manager.getBackend().getDroppableProps(this.targetHandle)}
-           style={{
-             ...style,
-             backgroundColor
-           }}>
-
-        {this.state.isHovering ?
+      <div {...boxTargetProps}
+           style={{ ...style, backgroundColor }}>
+        {hover ?
           'Release to drop' :
           'Drag item here'
         }
@@ -73,3 +46,16 @@ export default class Dustbin extends Component {
     );
   }
 }
+
+Dustbin.propTypes = propTypes;
+
+export default configureDragDrop(Dustbin, {
+  boxTarget: {
+    for: ItemTypes.BOX,
+    target: DustbinTarget
+  }
+}, (monitor, backend, { boxTarget }) => ({
+  active: monitor.canDrop(boxTarget),
+  hover: monitor.isOver(boxTarget),
+  boxTargetProps: backend.getTargetProps(boxTarget)
+}))

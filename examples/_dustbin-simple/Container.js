@@ -1,24 +1,36 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Dustbin from './Dustbin';
-import Item from './Item';
+import Box from './Box';
 import { HTML5Backend } from 'react-dnd';
 import { DragDropManager } from 'dnd-core';
 
 const manager = new DragDropManager(HTML5Backend);
 
+const childContextTypes = {
+  dnd: PropTypes.object.isRequired
+};
+
 export default class Container extends Component {
+  getChildContext() {
+    return {
+      dnd: manager
+    };
+  }
+
   render() {
     return (
       <div>
-        <Dustbin manager={manager} />
+        <Dustbin />
         <div style={{ marginTop: '2rem' }}>
-          <Item manager={manager} name='Glass' />
-          <Item manager={manager} name='Banana' />
-          <Item manager={manager} name='Paper' />
+          <Box name='Glass' />
+          <Box name='Banana' />
+          <Box name='Paper' />
         </div>
       </div>
     );
   }
 }
+
+Container.childContextTypes = childContextTypes;
