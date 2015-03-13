@@ -6,6 +6,7 @@ var DragDropActionCreators = require('../actions/DragDropActionCreators'),
     EnterLeaveMonitor = require('../utils/EnterLeaveMonitor'),
     isFileDragDropEvent = require('../utils/isFileDragDropEvent'),
     isUrlDragDropEvent = require('../utils/isUrlDragDropEvent'),
+    isNativeDraggedItemType = require('../utils/isNativeDraggedItemType'),
     configureDataTransfer = require('../utils/configureDataTransfer'),
     shallowEqual = require('react/lib/shallowEqual'),
     isWebkit = require('../utils/isWebkit');
@@ -59,19 +60,21 @@ function triggerDragEndIfDragSourceWasRemovedFromDOM() {
   _currentComponent.handleDragEnd(type, null);
 }
 
-function isNativeDragDropEvent(e) {
-  return isFileDragDropEvent(e) || isUrlDragDropEvent(e);
-}
-
-function preventDefaultNativeDropAction(e) {
-  if (isNativeDragDropEvent(e)) {
-    e.preventDefault();
-  }
+function isDraggingNativeItem() {
+  var itemType = DragOperationStore.getDraggedItemType();
+  return isNativeDraggedItemType(itemType);
 }
 
 function handleTopDragStart(e) {
-  // If by this time no drag source reacted, tell browser not to drag.
-  if (!isNativeDragDropEvent(e) && !DragOperationStore.isDragging()) {
+  if (DragOperationStore.isDragging()) {
+    return;
+  }
+
+  if (isUrlDragDropEvent(e)) {
+    // URL dragged from inside the document
+    DragDropActionCreators.startDragging(NativeDragItemTypes.URL, null);
+  } else {
+    // If by this time no drag source reacted, tell browser not to drag.
     e.preventDefault();
   }
 }
@@ -81,17 +84,23 @@ function handleTopDragEnter(e) {
   e.preventDefault();
 
   var isFirstEnter = _monitor.enter(e.target);
-  if (isFirstEnter) {
-    if (isFileDragDropEvent(e)) {
-      DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
-    } else if (isUrlDragDropEvent(e)) {
-      DragDropActionCreators.startDragging(NativeDragItemTypes.URL, null);
-    }
+  if (!isFirstEnter || DragOperationStore.isDragging()) {
+    return;
+  }
+
+  if (isFileDragDropEvent(e)) {
+    // File dragged from outside the document
+    DragDropActionCreators.startDragging(NativeDragItemTypes.FILE, null);
+  } else if (isUrlDragDropEvent(e)) {
+    // URL dragged from outside the document
+    DragDropActionCreators.startDragging(NativeDragItemTypes.URL, null);
   }
 }
 
 function handleTopDragOver(e) {
-  preventDefaultNativeDropAction(e);
+  if (isDraggingNativeItem()) {
+    e.preventDefault();
+  }
 
   var offsetFromClient = getClientOffset(e);
   DragDropActionCreators.drag(offsetFromClient);
@@ -109,20 +118,26 @@ function handleTopDragOver(e) {
 }
 
 function handleTopDragLeave(e) {
-  preventDefaultNativeDropAction(e);
+  if (isDraggingNativeItem(e)) {
+    e.preventDefault();
+  }
 
   var isLastLeave = _monitor.leave(e.target);
-  if (isLastLeave && isNativeDragDropEvent(e)) {
-    DragDropActionCreators.endDragging();
+  if (!isLastLeave || !isDraggingNativeItem()) {
+    return;
   }
+
+  DragDropActionCreators.endDragging();
 }
 
 function handleTopDrop(e) {
-  preventDefaultNativeDropAction(e);
+  if (isDraggingNativeItem()) {
+    e.preventDefault();
+  }
 
   _monitor.reset();
 
-  if (isNativeDragDropEvent(e)) {
+  if (isDraggingNativeItem()) {
     DragDropActionCreators.endDragging();
   }
 
