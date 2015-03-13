@@ -10,7 +10,11 @@ module.exports = {
     modulesDirectories: ['node_modules']
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      // TODO: temporary to work on unreleased 0.13-compat branch
+      'react-router': 'react-router/build/npm'
+    }
   },
   module: {
     loaders: [
