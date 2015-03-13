@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, { Component } from 'react';
 import ItemTypes from './ItemTypes';
 import { DropTarget} from 'dnd-core';
 
@@ -18,10 +18,11 @@ const style = {
   textAlign: 'center'
 };
 
-const Dustbin = React.createClass({
-  getInitialState() {
-   return this.getDropState();
-  },
+export default class Dustbin extends Component {
+  constructor(props) {
+    super(props);
+    this.state = this.getDropState();
+  }
 
   getDropState() {
     const context = this.props.manager.getContext();
@@ -29,24 +30,25 @@ const Dustbin = React.createClass({
       isHovering: this.targetHandle && context.isOver(this.targetHandle),
       isDragging: context.isDragging()
     };
-  },
+  }
 
   componentWillMount() {
+    console.log('test')
     this.targetHandle = this.props.manager.getRegistry().addTarget(ItemTypes.ITEM, new ItemDropTarget());
-  },
+  }
 
   componentDidMount() {
-    this.props.manager.getContext().addChangeListener(this.handleDragContextChange);
-  },
+    this._changeListener = this.props.manager.getContext().addChangeListener(() => this.handleDragContextChange());
+  }
 
   componentWillUnmount() {
     this.props.manager.getRegistry().removeTarget(this.targetHandle);
-    this.props.manager.getContext().removeChangeListener(this.handleDragContextChange);
-  },
+    this.props.manager.getContext().removeChangeListener(this._changeListener);
+  }
 
   handleDragContextChange() {
     this.setState(this.getDropState());
-  },
+  }
 
   render() {
     let backgroundColor = '#222';
@@ -70,6 +72,4 @@ const Dustbin = React.createClass({
       </div>
     );
   }
-});
-
-export default Dustbin;
+}

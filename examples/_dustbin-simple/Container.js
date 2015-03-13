@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, { Component } from 'react';
 import Dustbin from './Dustbin';
 import Item from './Item';
 import { HTML5Backend } from 'react-dnd';
@@ -8,7 +8,7 @@ import { DragDropManager } from 'dnd-core';
 
 const manager = new DragDropManager(HTML5Backend);
 
-const Container = React.createClass({
+export default class Container extends Component {
   render() {
     return (
       <div>
@@ -21,6 +21,4 @@ const Container = React.createClass({
       </div>
     );
   }
-});
-
-export default Container;
+}

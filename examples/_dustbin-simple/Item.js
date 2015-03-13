@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
 import { DragSource } from 'dnd-core';
 
@@ -33,37 +33,34 @@ const style = {
   maxWidth: 80
 };
 
-const Item = React.createClass({
-  propTypes: {
-    name: PropTypes.string.isRequired
-  },
-
-  getInitialState() {
-   return this.getDragState();
-  },
+export default class Item extends Component {
+  constructor(props) {
+    super(props);
+    this.state = this.getDragState();
+  }
 
   getDragState() {
     return {
       isDraggingItem: this.sourceHandle && this.props.manager.getContext().isDragging(this.sourceHandle)
     };
-  },
+  }
 
   componentWillMount() {
     this.sourceHandle = this.props.manager.getRegistry().addSource(ItemTypes.ITEM, new ItemDragSource(this));
-  },
+  }
 
   componentDidMount() {
-    this.props.manager.getContext().addChangeListener(this.handleDragContextChange);
-  },
+    this._changeListener = this.props.manager.getContext().addChangeListener(() => this.handleDragContextChange());
+  }
 
   componentWillUnmount() {
     this.props.manager.getRegistry().removeSource(this.sourceHandle);
-    this.props.manager.getContext().removeChangeListener(this.handleDragContextChange);
-  },
+    this.props.manager.getContext().removeChangeListener(this._changeListener);
+  }
 
   handleDragContextChange() {
     this.setState(this.getDragState());
-  },
+  }
 
   render() {
     const { name } = this.props;
@@ -80,6 +77,8 @@ const Item = React.createClass({
       </div>
     );
   }
-});
+}
 
-export default Item;
+Item.PropTypes = {
+  name: PropTypes.string.isRequired
+};
