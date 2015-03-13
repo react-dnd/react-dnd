@@ -19,7 +19,10 @@ class ItemDragSource extends DragSource {
   endDrag(context) {
     const what = context.getItem();
     const where = context.getDropResult();
-    alert('You dropped ' + what.name + ' into ' + where.name + '!');
+
+    if (where) {
+      alert('You dropped ' + what.name + ' into ' + where.name + '!');
+    }
   }
 }
 

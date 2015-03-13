@@ -30,7 +30,7 @@ const Dustbin = React.createClass({
 
   getDropState() {
     const context = this.props.manager.getContext();
-    
+
     return {
       isHovering: this.targetHandle && context.isOver(this.targetHandle),
       isDragging: context.isDragging()
