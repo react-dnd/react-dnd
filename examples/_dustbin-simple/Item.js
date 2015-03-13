@@ -2,7 +2,6 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-
 import { DragSource } from 'dnd-core';
 
 class ItemDragSource extends DragSource {
@@ -17,11 +16,11 @@ class ItemDragSource extends DragSource {
   }
 
   endDrag(context) {
-    const what = context.getItem();
-    const where = context.getDropResult();
+    const item = context.getItem();
+    const dropResult = context.getDropResult();
 
-    if (where) {
-      alert('You dropped ' + what.name + ' into ' + where.name + '!');
+    if (dropResult) {
+      window.alert(`You dropped ${item.name} into ${dropResult.name}!`);
     }
   }
 }
@@ -35,7 +34,6 @@ const style = {
 };
 
 const Item = React.createClass({
-
   propTypes: {
     name: PropTypes.string.isRequired
   },

@@ -5,12 +5,8 @@ import ItemTypes from './ItemTypes';
 import { DropTarget} from 'dnd-core';
 
 class ItemDropTarget extends DropTarget {
-  constructor(component) {
-    this.component = component;
-  }
-
   drop() {
-    return {name: 'Dustbin'};
+    return { name: 'Dustbin' };
   }
 }
 
@@ -23,14 +19,12 @@ const style = {
 };
 
 const Dustbin = React.createClass({
-
   getInitialState() {
    return this.getDropState();
   },
 
   getDropState() {
     const context = this.props.manager.getContext();
-
     return {
       isHovering: this.targetHandle && context.isOver(this.targetHandle),
       isDragging: context.isDragging()
@@ -38,7 +32,7 @@ const Dustbin = React.createClass({
   },
 
   componentWillMount() {
-    this.targetHandle = this.props.manager.getRegistry().addTarget(ItemTypes.ITEM, new ItemDropTarget(this));
+    this.targetHandle = this.props.manager.getRegistry().addTarget(ItemTypes.ITEM, new ItemDropTarget());
   },
 
   componentDidMount() {
