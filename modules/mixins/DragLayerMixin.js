@@ -9,8 +9,8 @@ var DragLayerMixin = {
   },
 
   getDragLayerState() {
-    var { isDragging, draggedItemType, draggedItem, initialOffset, currentOffset } = this.state;
-    return { isDragging, draggedItemType, draggedItem, initialOffset, currentOffset };
+    var { isDragging, draggedItemType, draggedItem, initialOffset, currentOffset, currentOffsetFromClient, initialOffsetFromClient, initialOffsetFromContainer } = this.state;
+    return { isDragging, draggedItemType, draggedItem, initialOffset, currentOffset, currentOffsetFromClient, initialOffsetFromClient, initialOffsetFromContainer };
   },
 
   getStateForDragLayerMixin() {
@@ -39,7 +39,7 @@ var DragLayerMixin = {
       };
     }
 
-    return { isDragging, draggedItemType, draggedItem, initialOffset, currentOffset };
+    return { isDragging, draggedItemType, draggedItem, initialOffset, currentOffset, currentOffsetFromClient, initialOffsetFromClient, initialOffsetFromContainer };
   },
 
   handleStoreChangeInDragLayerMixin() {
