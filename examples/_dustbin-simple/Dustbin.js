@@ -1,10 +1,11 @@
 'use strict';
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import ItemTypes from './ItemTypes';
-import { configureDragDrop, DropTarget } from 'react-dnd';
+import { DropTarget } from 'dnd-core';
+import { polyfillObserve } from 'react-dnd';
 
-class DustbinTarget extends DropTarget {
+class DustbinDropTarget extends DropTarget {
   drop() {
     return { name: 'Dustbin' };
   }
@@ -18,15 +19,26 @@ const style = {
   textAlign: 'center'
 };
 
-const propTypes = {
-  active: PropTypes.bool.isRequired,
-  hover: PropTypes.bool.isRequired,
-  boxTargetProps: PropTypes.object
-};
+function getDropTargetData(monitor, backend, handle) {
+  return {
+    active: monitor.canDrop(handle),
+    hover: monitor.isOver(handle),
+    dropTargetProps: backend.getTargetProps(handle)
+  };
+}
 
 class Dustbin extends Component {
+  observe() {
+    const manager = this.context.dnd;
+    const target = new DustbinDropTarget();
+
+    return {
+      dropTarget: manager.observeTarget(ItemTypes.BOX, target, getDropTargetData)
+    };
+  }
+
   render() {
-    const { active, hover, boxTargetProps } = this.props;
+    const { active, hover, dropTargetProps } = this.data.dropTarget;
 
     let backgroundColor = '#222';
     if (hover) {
@@ -36,7 +48,7 @@ class Dustbin extends Component {
     }
 
     return (
-      <div {...boxTargetProps}
+      <div {...dropTargetProps}
            style={{ ...style, backgroundColor }}>
         {hover ?
           'Release to drop' :
@@ -47,15 +59,4 @@ class Dustbin extends Component {
   }
 }
 
-Dustbin.propTypes = propTypes;
-
-export default configureDragDrop(Dustbin, {
-  boxTarget: {
-    for: ItemTypes.BOX,
-    target: DustbinTarget
-  }
-}, (monitor, backend, { boxTarget }) => ({
-  active: monitor.canDrop(boxTarget),
-  hover: monitor.isOver(boxTarget),
-  boxTargetProps: backend.getTargetProps(boxTarget)
-}))
+export default polyfillObserve(Dustbin);

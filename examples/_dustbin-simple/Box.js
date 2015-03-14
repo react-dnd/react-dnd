@@ -2,12 +2,18 @@
 
 import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragSource, configureDragDrop } from 'react-dnd';
+import { DragSource } from 'dnd-core';
+import { polyfillObserve } from 'react-dnd';
 
-class BoxSource extends DragSource {
+class BoxDragSource extends DragSource {
+  constructor(component, props) {
+    this.component = component;
+    this.props = props;
+  }
+
   beginDrag() {
     return {
-      name: this.getProps().name
+      name: this.props.name
     };
   }
 
@@ -30,18 +36,33 @@ const style = {
 };
 
 const propTypes = {
-  name: PropTypes.string.isRequired,
-  isBeingDragged: PropTypes.bool.isRequired,
-  boxSourceProps: PropTypes.object
+  name: PropTypes.string.isRequired
 };
 
+function getDragSourceData(monitor, backend, handle) {
+  return {
+    isDragging: monitor.isDragging(handle),
+    dragSourceProps: backend.getSourceProps(handle)
+  };
+}
+
 class Box extends Component {
+  observe(props) {
+    const manager = this.context.dnd;
+    const source = new BoxDragSource(this, props);
+
+    return {
+      dragSource: manager.observeSource(ItemTypes.BOX, source, getDragSourceData)
+    };
+  }
+
   render() {
-    const { name, isBeingDragged, boxSourceProps } = this.props;
-    const opacity = isBeingDragged ? 0.4 : 1;
+    const { isDragging, dragSourceProps } = this.data.dragSource;
+    const { name } = this.props;
+    const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div {...boxSourceProps}
+      <div {...dragSourceProps}
            style={{ ...style, opacity }}>
         {name}
       </div>
@@ -51,12 +72,4 @@ class Box extends Component {
 
 Box.propTypes = propTypes;
 
-export default configureDragDrop(Box, {
-  boxSource: {
-    for: ItemTypes.BOX,
-    source: BoxSource
-  }
-}, (monitor, backend, { boxSource }) => ({
-  isBeingDragged: monitor.isDragging(boxSource),
-  boxSourceProps: backend.getSourceProps(boxSource)
-}))
+export default polyfillObserve(Box);
