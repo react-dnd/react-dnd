@@ -135,7 +135,10 @@ Returns all you need in order to draw a custom drag layer:
   draggedItemType: string,
   draggedItem: Object,
   initialOffset: { x, y },
-  currentOffset: { x, y }
+  currentOffset: { x, y },
+  currentOffsetFromClient: { x, y },
+  initialOffsetFromClient: { x, y },
+  initialOffsetFromContainer: { x, y }
 }
 ```
 
