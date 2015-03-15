@@ -3,12 +3,15 @@
 import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
 import { DragSource } from 'dnd-core';
-import { polyfillObserve } from 'react-dnd';
+import { polyfillObserve, observeSource } from 'react-dnd';
 
 class BoxDragSource extends DragSource {
-  constructor(component, props) {
-    this.component = component;
+  constructor(props) {
     this.props = props;
+  }
+
+  isDragging(monitor) {
+    return this.props.name === monitor.getItem().name;
   }
 
   beginDrag() {
@@ -46,18 +49,18 @@ function getDragSourceData(monitor, backend, handle) {
   };
 }
 
+function observe(props, context) {
+  const manager = context.dnd;
+  const source = new BoxDragSource(props);
+
+  return {
+    dragSource: observeSource(manager, ItemTypes.BOX, source, getDragSourceData)
+  };
+}
+
 class Box extends Component {
-  observe(props) {
-    const manager = this.context.dnd;
-    const source = new BoxDragSource(this, props);
-
-    return {
-      dragSource: manager.observeSource(ItemTypes.BOX, source, getDragSourceData)
-    };
-  }
-
   render() {
-    const { isDragging, dragSourceProps } = this.data.dragSource;
+    const { isDragging, dragSourceProps } = this.props.data.dragSource;
     const { name } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
@@ -71,5 +74,8 @@ class Box extends Component {
 }
 
 Box.propTypes = propTypes;
+Box.contextTypes = {
+  dnd: PropTypes.object.isRequired
+};
 
-export default polyfillObserve(Box);
+export default polyfillObserve(Box, observe);

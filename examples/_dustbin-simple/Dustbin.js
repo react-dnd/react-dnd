@@ -1,9 +1,9 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import ItemTypes from './ItemTypes';
 import { DropTarget } from 'dnd-core';
-import { polyfillObserve } from 'react-dnd';
+import { polyfillObserve, observeTarget } from 'react-dnd';
 
 class DustbinDropTarget extends DropTarget {
   drop() {
@@ -27,18 +27,18 @@ function getDropTargetData(monitor, backend, handle) {
   };
 }
 
+function observe(props, context) {
+  const manager = context.dnd;
+  const target = new DustbinDropTarget();
+
+  return {
+    dropTarget: observeTarget(manager, ItemTypes.BOX, target, getDropTargetData)
+  };
+}
+
 class Dustbin extends Component {
-  observe() {
-    const manager = this.context.dnd;
-    const target = new DustbinDropTarget();
-
-    return {
-      dropTarget: manager.observeTarget(ItemTypes.BOX, target, getDropTargetData)
-    };
-  }
-
   render() {
-    const { active, hover, dropTargetProps } = this.data.dropTarget;
+    const { active, hover, dropTargetProps } = this.props.data.dropTarget;
 
     let backgroundColor = '#222';
     if (hover) {
@@ -59,4 +59,8 @@ class Dustbin extends Component {
   }
 }
 
-export default polyfillObserve(Dustbin);
+Dustbin.contextTypes = {
+  dnd: PropTypes.object.isRequired
+};
+
+export default polyfillObserve(Dustbin, observe);
