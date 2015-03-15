@@ -17,6 +17,10 @@ export default function polyfillObserve(ComposedComponent, observe) {
       this.resubscribe(props, context);
     }
 
+    componentWillUnmount() {
+      this.unsubscribe();
+    }
+
     resubscribe(props, context) {
       const newObservables = observe(props, context);
       const newSubscriptions = {};
@@ -32,13 +36,18 @@ export default function polyfillObserve(ComposedComponent, observe) {
         });
       }
 
+      this.unsubscribe();
+      this.subscriptions = newSubscriptions;
+    }
+
+    unsubscribe() {
       for (let key in this.subscriptions) {
         if (this.subscriptions.hasOwnProperty(key)) {
           this.subscriptions[key].dispose();
         }
       }
 
-      this.subscriptions = newSubscriptions;
+      this.subscriptions = {};
     }
 
     render() {
