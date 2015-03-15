@@ -15,7 +15,21 @@ var DragLayerMixin = {
     var draggedItem = _state.draggedItem;
     var initialOffset = _state.initialOffset;
     var currentOffset = _state.currentOffset;
-    return { isDragging: isDragging, draggedItemType: draggedItemType, draggedItem: draggedItem, initialOffset: initialOffset, currentOffset: currentOffset };
+    var currentOffsetFromClient = _state.currentOffsetFromClient;
+    var initialOffsetFromClient = _state.initialOffsetFromClient;
+    var initialOffsetFromContainer = _state.initialOffsetFromContainer;
+
+
+    return {
+      isDragging: isDragging,
+      draggedItemType: draggedItemType,
+      draggedItem: draggedItem,
+      initialOffset: initialOffset,
+      currentOffset: currentOffset,
+      currentOffsetFromClient: currentOffsetFromClient,
+      initialOffsetFromClient: initialOffsetFromClient,
+      initialOffsetFromContainer: initialOffsetFromContainer
+    };
   },
 
   getStateForDragLayerMixin: function getStateForDragLayerMixin() {
@@ -44,7 +58,16 @@ var DragLayerMixin = {
       };
     }
 
-    return { isDragging: isDragging, draggedItemType: draggedItemType, draggedItem: draggedItem, initialOffset: initialOffset, currentOffset: currentOffset };
+    return {
+      isDragging: isDragging,
+      draggedItemType: draggedItemType,
+      draggedItem: draggedItem,
+      initialOffset: initialOffset,
+      currentOffset: currentOffset,
+      currentOffsetFromClient: currentOffsetFromClient,
+      initialOffsetFromClient: initialOffsetFromClient,
+      initialOffsetFromContainer: initialOffsetFromContainer
+    };
   },
 
   handleStoreChangeInDragLayerMixin: function handleStoreChangeInDragLayerMixin() {
