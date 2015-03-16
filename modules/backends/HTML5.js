@@ -79,7 +79,7 @@ function handleTopDragStart(e) {
   }
 }
 
-function handleTopDragEnter(e) {
+function handleTopDragEnterCapture(e) {
   // IE requires this to not show a nodrag icon over the container
   e.preventDefault();
 
@@ -87,6 +87,10 @@ function handleTopDragEnter(e) {
   if (!isFirstEnter || DragOperationStore.isDragging()) {
     return;
   }
+
+  // It is important to try to catch these at capture phase.
+  // This is currently the only way to have drop zones recognize
+  // they're being hovered if they fill the screen completely.
 
   if (isFileDragDropEvent(e)) {
     // File dragged from outside the document
@@ -117,8 +121,8 @@ function handleTopDragOver(e) {
   }
 }
 
-function handleTopDragLeave(e) {
-  if (isDraggingNativeItem(e)) {
+function handleTopDragLeaveCapture(e) {
+  if (isDraggingNativeItem()) {
     e.preventDefault();
   }
 
@@ -151,9 +155,9 @@ var HTML5 = {
     }
 
     window.addEventListener('dragstart', handleTopDragStart);
-    window.addEventListener('dragenter', handleTopDragEnter);
+    window.addEventListener('dragenter', handleTopDragEnterCapture, true);
+    window.addEventListener('dragleave', handleTopDragLeaveCapture, true);
     window.addEventListener('dragover', handleTopDragOver);
-    window.addEventListener('dragleave', handleTopDragLeave);
     window.addEventListener('drop', handleTopDrop);
   },
 
@@ -163,9 +167,9 @@ var HTML5 = {
     }
 
     window.removeEventListener('dragstart', handleTopDragStart);
-    window.removeEventListener('dragenter', handleTopDragEnter);
+    window.removeEventListener('dragenter', handleTopDragEnterCapture, true);
+    window.removeEventListener('dragleave', handleTopDragLeaveCapture, true);
     window.removeEventListener('dragover', handleTopDragOver);
-    window.removeEventListener('dragleave', handleTopDragLeave);
     window.removeEventListener('drop', handleTopDrop);
   },
 
