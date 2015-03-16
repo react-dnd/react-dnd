@@ -21,17 +21,17 @@ class SourceAdapter {
   }
 
   addChangeListener(listener, context) {
-    const monitor = this.manager.getContext();
+    const monitor = this.manager.getMonitor();
     monitor.addChangeListener(listener, context);
   }
 
   removeChangeListener(listener, context) {
-    const monitor = this.manager.getContext();
+    const monitor = this.manager.getMonitor();
     monitor.removeChangeListener(listener, context);
   }
 
   getState(handle) {
-    const monitor = this.manager.getContext();
+    const monitor = this.manager.getMonitor();
     const backend = this.manager.getBackend();
 
     return {
