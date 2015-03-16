@@ -7,8 +7,7 @@ export function observeTarget(manager, type, target, getData) {
       const handle = registry.addTarget(type, target);
 
       function onChange() {
-        const data = getData(monitor, backend, handle);
-        observer.onNext(data);
+        observer.onNext({ monitor, backend, handle });
       }
 
       monitor.addChangeListener(onChange);
@@ -33,8 +32,7 @@ export function observeSource(manager, type, source, getData) {
       const handle = registry.addSource(type, source);
 
       function onChange() {
-        const data = getData(monitor, backend, handle);
-        observer.onNext(data);
+        observer.onNext({ monitor, backend, handle });
       }
 
       monitor.addChangeListener(onChange);

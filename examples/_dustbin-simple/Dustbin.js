@@ -1,9 +1,8 @@
 'use strict';
 
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, createClass } from 'react';
 import ItemTypes from './ItemTypes';
-import { DropTarget } from 'dnd-core';
-import { polyfillObserve, observeTarget } from 'react-dnd';
+import { DropTarget, ObservePolyfill } from 'react-dnd';
 
 class DustbinDropTarget extends DropTarget {
   drop() {
@@ -19,48 +18,43 @@ const style = {
   textAlign: 'center'
 };
 
-function getDropTargetData(monitor, backend, handle) {
-  return {
-    active: monitor.canDrop(handle),
-    hover: monitor.isOver(handle),
-    dropTargetProps: backend.getTargetProps(handle)
-  };
-}
+const Dustbin = createClass({
+  mixins: [ObservePolyfill],
 
-function observe(props, context) {
-  const manager = context.dnd;
-  const target = new DustbinDropTarget();
+  contextTypes: {
+    dragDrop: PropTypes.object.isRequired
+  },
 
-  return {
-    dropTarget: observeTarget(manager, ItemTypes.BOX, target, getDropTargetData)
-  };
-}
+  ctor() {
+    this.dropTarget = new DustbinDropTarget(this);
+  },
 
-class Dustbin extends Component {
+  observe() {
+    return {
+      dropTarget: this.dropTarget.connectTo(this.context.dragDrop, ItemTypes.BOX)
+    };
+  },
+
   render() {
-    const { active, hover, dropTargetProps } = this.props.data.dropTarget;
+    const { canDrop, isOver, dropEventHandlers } = this.state.data.dropTarget;
 
     let backgroundColor = '#222';
-    if (hover) {
+    if (isOver) {
       backgroundColor = 'darkgreen';
-    } else if (active) {
+    } else if (canDrop) {
       backgroundColor = 'darkkhaki';
     }
 
     return (
-      <div {...dropTargetProps}
+      <div {...dropEventHandlers}
            style={{ ...style, backgroundColor }}>
-        {hover ?
+        {isOver ?
           'Release to drop' :
           'Drag item here'
         }
       </div>
     );
   }
-}
+});
 
-Dustbin.contextTypes = {
-  dnd: PropTypes.object.isRequired
-};
-
-export default polyfillObserve(Dustbin, observe);
+export default Dustbin;

@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Router, { Route, Redirect, RouteHandler } from 'react-router';
+import Router, { Route, Link, Redirect, RouteHandler } from 'react-router';
 import DustbinSimple from './_dustbin-simple';
 
 /*
@@ -17,6 +17,8 @@ const App = React.createClass({
     return (
       <div>
         <h1>react-dnd examples (<a target='_href' href='https://github.com/gaearon/react-dnd/blob/master/examples'>source</a>)</h1>
+        <ul>
+        </ul>
         <hr />
         <RouteHandler />
       </div>

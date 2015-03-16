@@ -1,42 +1,47 @@
 'use strict';
 
-import React from 'react';
-import makeDustbin from './makeDustbin';
-import makeItem from './makeItem';
+import React, { PropTypes, Component } from 'react';
+import Dustbin from './Dustbin';
+import Box from './Box';
 import ItemTypes from './ItemTypes';
-import { NativeDragItemTypes } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd';
+import { DragDropManager } from 'dnd-core';
 
-const Container = React.createClass({
-  renderDustbin(accepts) {
-    const Dustbin = makeDustbin(accepts);
-    return <Dustbin />;
-  },
+const manager = new DragDropManager(HTML5Backend);
 
-  renderItem(name, dropType) {
-    const Item = makeItem(dropType);
-    return <Item name={name} />;
-  },
+const childContextTypes = {
+  dnd: PropTypes.object.isRequired
+};
+
+export default class Container extends Component {
+  getChildContext() {
+    return {
+      dnd: manager
+    };
+  }
 
   render() {
     return (
       <div>
         <div style={{minHeight: '14rem'}}>
-          {this.renderDustbin([ItemTypes.GLASS])}
-          {this.renderDustbin([ItemTypes.FOOD])}
-          {this.renderDustbin([ItemTypes.PAPER])}
+          <Dustbin types={[ItemTypes.GLASS]} />
+          <Dustbin types={[ItemTypes.FOOD]} />
+          <Dustbin types={[ItemTypes.PAPER]} />
+          {/*
           {this.renderDustbin([NativeDragItemTypes.FILE, NativeDragItemTypes.URL])}
+          */}
         </div>
 
         <div style={{ minHeight: '2rem' }}>
-          {this.renderItem('Glass', ItemTypes.GLASS)}
-          {this.renderItem('Banana', ItemTypes.FOOD)}
-          {this.renderItem('Bottle', ItemTypes.GLASS)}
-          {this.renderItem('Burger', ItemTypes.FOOD)}
-          {this.renderItem('Paper', ItemTypes.PAPER)}
+          <Box name='Box' type={ItemTypes.GLASS} />
+          <Box name='Banana' type={ItemTypes.FOOD} />
+          <Box name='Bottle' type={ItemTypes.GLASS} />
+          <Box name='Burger' type={ItemTypes.FOOD} />
+          <Box name='Paper' type={ItemTypes.PAPER} />
         </div>
       </div>
     );
   }
-});
+}
 
-export default Container;
+Container.childContextTypes = childContextTypes;

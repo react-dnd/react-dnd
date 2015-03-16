@@ -1,22 +1,13 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
+import React, { createClass, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragSource } from 'dnd-core';
-import { polyfillObserve, observeSource } from 'react-dnd';
+import { DragSource, ObservePolyfill } from 'react-dnd';
 
 class BoxDragSource extends DragSource {
-  constructor(props) {
-    this.props = props;
-  }
-
-  isDragging(monitor) {
-    return this.props.name === monitor.getItem().name;
-  }
-
   beginDrag() {
     return {
-      name: this.props.name
+      name: this.component.props.name
     };
   }
 
@@ -38,44 +29,39 @@ const style = {
   maxWidth: 80
 };
 
-const propTypes = {
-  name: PropTypes.string.isRequired
-};
+const Box = createClass({
+  mixins: [ObservePolyfill],
 
-function getDragSourceData(monitor, backend, handle) {
-  return {
-    isDragging: monitor.isDragging(handle),
-    dragSourceProps: backend.getSourceProps(handle)
-  };
-}
+  propTypes: {
+    name: PropTypes.string.isRequired
+  },
 
-function observe(props, context) {
-  const manager = context.dnd;
-  const source = new BoxDragSource(props);
+  contextTypes: {
+    dragDrop: PropTypes.object.isRequired
+  },
 
-  return {
-    dragSource: observeSource(manager, ItemTypes.BOX, source, getDragSourceData)
-  };
-}
+  ctor() {
+    this.dragSource = new BoxDragSource(this);
+  },
 
-class Box extends Component {
+  observe() {
+    return {
+      dragSource: this.dragSource.connectTo(this.context.dragDrop, ItemTypes.BOX)
+    };
+  },
+
   render() {
-    const { isDragging, dragSourceProps } = this.props.data.dragSource;
+    const { isDragging, dragEventHandlers } = this.state.data.dragSource;
     const { name } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div {...dragSourceProps}
+      <div {...dragEventHandlers}
            style={{ ...style, opacity }}>
         {name}
       </div>
     );
   }
-}
+});
 
-Box.propTypes = propTypes;
-Box.contextTypes = {
-  dnd: PropTypes.object.isRequired
-};
-
-export default polyfillObserve(Box, observe);
+export default Box;

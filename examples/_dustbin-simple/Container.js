@@ -1,61 +1,46 @@
 'use strict';
 
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, createClass } from 'react';
 import Dustbin from './Dustbin';
 import Box from './Box';
-import { HTML5Backend } from 'react-dnd';
-import { DragDropManager } from 'dnd-core';
+import { DragDropContext, HTML5Backend } from 'react-dnd';
 import shuffle from 'lodash/collection/shuffle';
 
-const manager = new DragDropManager(HTML5Backend);
+const Container = createClass({
+  mixins: [DragDropContext({
+    dragDrop: HTML5Backend
+  })],
 
-const childContextTypes = {
-  dnd: PropTypes.object.isRequired
-};
-
-export default class Container extends Component {
-  getChildContext() {
+  getInitialState() {
     return {
-      dnd: manager
+      boxes: ['Glass', 'Banana', 'Paper']
     };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = { boxes: ['Glass', 'Banana', 'Paper'] };
-  }
+  },
 
   componentDidMount() {
     this.interval = setInterval(() => this.shuffleBoxes(), 1000);
-  }
+  },
 
   shuffleBoxes() {
     this.setState({
       boxes: shuffle(this.state.boxes)
     });
-  }
+  },
 
   componentWillUnmount() {
     clearInterval(this.interval);
-  }
+  },
 
   render() {
-
-    // We don't them keys for a reason:
-    // we want to make sure drag source mirroring works correctly.
-
-    // Try to drag an item and notice how componentWillReceiveProps
-    // doesn't confuse components as to which item is being dragged.
-
     return (
       <div>
         <Dustbin />
         <div style={{ marginTop: '2rem' }}>
-          {this.state.boxes.map(name => <Box name={name} />)}
+          {this.state.boxes.map(name => <Box name={name} key={name} />)}
         </div>
       </div>
     );
   }
-}
+});
 
-Container.childContextTypes = childContextTypes;
+export default Container;
