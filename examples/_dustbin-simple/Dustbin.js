@@ -19,21 +19,21 @@ const style = {
 };
 
 const Dustbin = createClass({
-  mixins: [ObservePolyfill],
-
   contextTypes: {
     dragDrop: PropTypes.object.isRequired
   },
 
-  ctor() {
-    this.dropTarget = new DustbinDropTarget(this);
-  },
+  mixins: [ObservePolyfill({
+    constructor() {
+      this.dropTarget = new DustbinDropTarget(this);
+    },
 
-  observe() {
-    return {
-      dropTarget: this.dropTarget.connectTo(this.context.dragDrop, ItemTypes.BOX)
-    };
-  },
+    observe() {
+      return {
+        dropTarget: this.dropTarget.connectTo(this.context.dragDrop, ItemTypes.BOX)
+      };
+    }
+  })],
 
   render() {
     const { canDrop, isOver, dropEventHandlers } = this.state.data.dropTarget;

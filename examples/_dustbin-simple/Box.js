@@ -30,8 +30,6 @@ const style = {
 };
 
 const Box = createClass({
-  mixins: [ObservePolyfill],
-
   propTypes: {
     name: PropTypes.string.isRequired
   },
@@ -40,15 +38,17 @@ const Box = createClass({
     dragDrop: PropTypes.object.isRequired
   },
 
-  ctor() {
-    this.dragSource = new BoxDragSource(this);
-  },
+  mixins: [ObservePolyfill({
+    constructor() {
+      this.dragSource = new BoxDragSource(this);
+    },
 
-  observe() {
-    return {
-      dragSource: this.dragSource.connectTo(this.context.dragDrop, ItemTypes.BOX)
-    };
-  },
+    observe() {
+      return {
+        dragSource: this.dragSource.connectTo(this.context.dragDrop, ItemTypes.BOX)
+      };
+    }
+  })],
 
   render() {
     const { isDragging, dragEventHandlers } = this.state.data.dragSource;

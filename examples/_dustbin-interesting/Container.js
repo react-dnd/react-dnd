@@ -1,24 +1,15 @@
 'use strict';
 
-import React, { PropTypes, Component } from 'react';
+import React, { createClass } from 'react';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
-import { HTML5Backend } from 'react-dnd';
-import { DragDropManager } from 'dnd-core';
+import { DragDropContext, HTML5Backend } from 'react-dnd';
 
-const manager = new DragDropManager(HTML5Backend);
-
-const childContextTypes = {
-  dnd: PropTypes.object.isRequired
-};
-
-export default class Container extends Component {
-  getChildContext() {
-    return {
-      dnd: manager
-    };
-  }
+const Container = createClass({
+  mixins: [DragDropContext({
+    dragDrop: HTML5Backend
+  })],
 
   render() {
     return (
@@ -42,6 +33,6 @@ export default class Container extends Component {
       </div>
     );
   }
-}
+});
 
-Container.childContextTypes = childContextTypes;
+export default Container;
