@@ -1,12 +1,12 @@
 'use strict';
 
-import React from 'react';
-import { DragDropMixin } from 'react-dnd';
+import React, { PropTypes, createClass } from 'react';
+import { DropTarget, ObservePolyfill } from 'react-dnd';
 
-const dropTarget = {
-  acceptDrop(component, item) {
-    component.setState({
-      lastDroppedItem: item
+class DustbinDropTarget extends DropTarget {
+  drop(monitor) {
+    this.component.setState({
+      lastDroppedItem: monitor.getItem()
     });
   }
 };
@@ -21,54 +21,59 @@ const style = {
   float: 'left'
 };
 
-export default function makeDustbin(accepts) {
-  const Dustbin = React.createClass({
-    mixins: [DragDropMixin],
+const Dustbin = createClass({
+  propTypes: {
+    accepts: PropTypes.arrayOf(PropTypes.string).isRequired
+  }
 
-    getInitialState() {
-      return {
-        lastDroppedItem: null
-      };
+  mixins: [ObservePolyfill({
+    constructor() {
+      this.dropTarget = new DustbinDropTarget(this);
     },
 
-    statics: {
-      configureDragDrop(register) {
-        accepts.forEach(itemType => {
-          register(itemType, { dropTarget });
-        });
-      }
-    },
+    observe() {
+      const observables = {};
+      this.props.accepts.forEach(type =>
+        observables[type + 'DropTarget'] = this.dropTarget.connectTo(this.context.dragDrop, this.props.type)
+      )
 
-    render() {
-      const { lastDroppedItem } = this.state;
-      const dropStates = accepts.map(this.getDropState);
-
-      let backgroundColor = '#222';
-      if (dropStates.some(s => s.isHovering)) {
-        backgroundColor = 'darkgreen';
-      } else if (dropStates.some(s => s.isDragging)) {
-        backgroundColor = 'darkkhaki';
-      }
-
-      return (
-        <div {...this.dropTargetFor.apply(this, accepts)}
-             style={{
-               ...style,
-               backgroundColor
-             }}>
-
-          {dropStates.some(s => s.isHovering) ?
-            'Release to drop' :
-            'This dustbin accepts: ' + accepts.join(', ')
-          }
-
-          {lastDroppedItem &&
-            <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
-          }
-        </div>
-      );
+      return observables;
     }
-  });
+  })],
 
-  return Dustbin;
-}
+  getInitialState() {
+    return {
+      lastDroppedItem: null
+    };
+  },
+
+  render() {
+    const { accepts } = this.props;
+    const { lastDroppedItem } = this.state;
+    const dropTargetStates = accepts.map(type => this.state.data[type + 'DropTarget']);
+
+    let backgroundColor = '#222';
+    if (dropTargetStates.some(s => s.isOver)) {
+      backgroundColor = 'darkgreen';
+    } else if (dropTargetStates.some(s => s.canDrop)) {
+      backgroundColor = 'darkkhaki';
+    }
+
+    // TODO.. target should support multi types.. right??
+
+    return (
+      <div 
+           style={{ ...style, backgroundColor }}>
+
+        {dropStates.some(s => s.isHovering) ?
+          'Release to drop' :
+          'This dustbin accepts: ' + accepts.join(', ')
+        }
+
+        {lastDroppedItem &&
+          <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
+        }
+      </div>
+    );
+  }
+});
