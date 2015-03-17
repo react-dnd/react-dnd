@@ -30,14 +30,25 @@ class TargetAdapter {
     monitor.removeChangeListener(listener, context);
   }
 
+  // TODO: eww
   getState(handle) {
     const monitor = this.manager.getMonitor();
     const backend = this.manager.getBackend();
+    const registry = this.manager.getRegistry();
+
+    if (!registry.getTarget(handle)) {
+      return {
+        canDrop: false,
+        isOver: false,
+        isOverShallow: false,
+        dropEventHandlers: {}
+      };
+    }
 
     return {
       canDrop: monitor.canDrop(handle),
-      isOver: monitor.isOver(handle),
-      isOverShallow: monitor.isOver(handle, true),
+      isOver: monitor.canDrop(handle) && monitor.isOver(handle),
+      isOverShallow: monitor.canDrop(handle) && monitor.isOver(handle, true),
       dropEventHandlers: backend.getTargetProps(handle)
     };
   }

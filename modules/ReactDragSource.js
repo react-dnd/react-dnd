@@ -30,9 +30,19 @@ class SourceAdapter {
     monitor.removeChangeListener(listener, context);
   }
 
+  // TODO: eww
   getState(handle) {
     const monitor = this.manager.getMonitor();
     const backend = this.manager.getBackend();
+    const registry = this.manager.getRegistry();
+
+    if (!registry.getSource(handle)) {
+      return {
+        canDrag: false,
+        isDragging: false,
+        dragEventHandlers: {}
+      };
+    }
 
     return {
       canDrag: monitor.canDrag(handle),
