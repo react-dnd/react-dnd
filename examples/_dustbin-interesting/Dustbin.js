@@ -9,7 +9,7 @@ class DustbinDropTarget extends DropTarget {
       lastDroppedItem: monitor.getItem()
     });
   }
-};
+}
 
 const style = {
   height: '12rem',
@@ -24,7 +24,11 @@ const style = {
 const Dustbin = createClass({
   propTypes: {
     accepts: PropTypes.arrayOf(PropTypes.string).isRequired
-  }
+  },
+
+  contextTypes: {
+    dragDrop: PropTypes.object.isRequired
+  },
 
   mixins: [ObservePolyfill({
     constructor() {
@@ -32,12 +36,9 @@ const Dustbin = createClass({
     },
 
     observe() {
-      const observables = {};
-      this.props.accepts.forEach(type =>
-        observables[type + 'DropTarget'] = this.dropTarget.connectTo(this.context.dragDrop, this.props.type)
-      )
-
-      return observables;
+      return {
+        dropTarget: this.dropTarget.connectTo(this.context.dragDrop, this.props.accepts)
+      };
     }
   })],
 
@@ -50,22 +51,20 @@ const Dustbin = createClass({
   render() {
     const { accepts } = this.props;
     const { lastDroppedItem } = this.state;
-    const dropTargetStates = accepts.map(type => this.state.data[type + 'DropTarget']);
+    const { isOver, canDrop, dropEventHandlers } = this.state.data.dropTarget;
 
     let backgroundColor = '#222';
-    if (dropTargetStates.some(s => s.isOver)) {
+    if (isOver) {
       backgroundColor = 'darkgreen';
-    } else if (dropTargetStates.some(s => s.canDrop)) {
+    } else if (canDrop) {
       backgroundColor = 'darkkhaki';
     }
 
-    // TODO.. target should support multi types.. right??
-
     return (
-      <div 
+      <div {...dropEventHandlers}
            style={{ ...style, backgroundColor }}>
 
-        {dropStates.some(s => s.isHovering) ?
+        {isOver ?
           'Release to drop' :
           'This dustbin accepts: ' + accepts.join(', ')
         }
@@ -77,3 +76,5 @@ const Dustbin = createClass({
     );
   }
 });
+
+export default Dustbin;
