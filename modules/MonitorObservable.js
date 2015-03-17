@@ -24,7 +24,7 @@ export default class MonitorObservable {
   addObserver(observer) {
     this.observers.push(observer);
 
-    if (this.observers.length > 0) {
+    if (this.observers.length === 1) {
       this.handle = this.adapter.addHandler(this.type);
       this.adapter.addChangeListener(this.handleChange, this);
 
