@@ -1,0 +1,7 @@
+* figure out how to support multiple target types for one droppable
+* make a list of hacks to port over
+* custom state extractors
+* rethink TYPES
+* edge cases: type of droppable changes midflight. relax enter/leave?
+* check symbols
+* helpers for test context
