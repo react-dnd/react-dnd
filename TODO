@@ -3,5 +3,6 @@
 * custom state extractors
 * rethink TYPES
 * edge cases: type of droppable changes midflight. relax enter/leave?
+* fun edge case: nested entered drop target swaps handles with its parent. or similar.
 * check symbols
 * helpers for test context
