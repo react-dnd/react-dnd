@@ -1,7 +1,65 @@
+import { DragSource } from 'dnd-core';
+import NativeTypes from '../NativeTypes';
+import warning from 'react/lib/warning';
+
+function isUrlDataTransfer(dataTransfer) {
+  var types = Array.prototype.slice.call(dataTransfer.types);
+  return types.indexOf('Url') > -1 || types.indexOf('text/uri-list') > -1;
+}
+
+function isFileDataTransfer(dataTransfer) {
+  var types = Array.prototype.slice.call(dataTransfer.types);
+  return types.indexOf('Files') > -1;
+}
+
+class FileDragSource extends DragSource {
+  constructor() {
+    this.item = {
+      get files() {
+        warning(false, 'Browser doesn\'t allow reading file information until the files are dropped.');
+        return null;
+      }
+    };
+  }
+
+  mutateItemByReadingDataTransfer(dataTransfer) {
+    delete this.item.files;
+    this.item.files = Array.prototype.slice.call(dataTransfer.files);
+  }
+
+  beginDrag() {
+    return this.item;
+  }
+}
+
+class UrlDragSource extends DragSource {
+  constructor() {
+    this.item = {
+      get urls() {
+        warning(false, 'Browser doesn\'t allow reading URL information until the link is dropped.');
+        return null;
+      }
+    };
+  }
+
+  mutateItemByReadingDataTransfer(dataTransfer) {
+    delete this.item.urls;
+    this.item.urls = (
+      dataTransfer.getData('Url') ||
+      dataTransfer.getData('text/uri-list') || ''
+    ).split('\n');
+  }
+
+  beginDrag() {
+    return this.item;
+  }
+}
+
 export default class HTML5Backend {
-  constructor(actions, monitor) {
+  constructor(actions, monitor, registry) {
     this.actions = actions;
     this.monitor = monitor;
+    this.registry = registry;
 
     this.nodeHandlers = {};
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
@@ -55,6 +113,26 @@ export default class HTML5Backend {
     return [0, 0];
   }
 
+  isDraggingNativeItem() {
+    switch (this.monitor.getItemType()) {
+    case NativeTypes.FILE:
+    case NativeTypes.URL:
+      return true;
+    default:
+      return false;
+    }
+  }
+
+  beginDragNativeUrl() {
+    const sourceHandle = this.registry.addSource(NativeTypes.URL, new UrlDragSource());
+    this.actions.beginDrag(sourceHandle);
+  }
+
+  beginDragNativeFile() {
+    const sourceHandle = this.registry.addSource(NativeTypes.FILE, new FileDragSource());
+    this.actions.beginDrag(sourceHandle);
+  }
+
   handleTopDragStartCapture() {
     this.dragStartSourceHandles = [];
     this.dragStartOriginalTarget = null;
@@ -81,24 +159,22 @@ export default class HTML5Backend {
       }
     }
 
-    // If none agreed, cancel the dragging.
-    if (!this.monitor.isDragging()) {
+    const { dataTransfer } = e;
+    if (this.monitor.isDragging()) {
+      // If child drag source refuses drag but parent agrees,
+      // use parent's node as drag image. This won't work in IE.
+      const dragOffset = this.getDragImageOffset(node);
+      dataTransfer.setDragImage(node, ...dragOffset);
+      dataTransfer.setData('application/json', {});
+
+      this.dragStartOriginalTarget = e.target;
+    } else if (isUrlDataTransfer(dataTransfer)) {
+      // URL dragged from inside the document
+      this.beginDragNativeUrl();
+    } else {
+      // If by this time no drag source reacted, tell browser not to drag.
       e.preventDefault();
-      return;
     }
-
-    // Save the original target so we can later check
-    // dragend events against it.
-    this.dragStartOriginalTarget = e.target;
-
-    // Specify backend's MIME so other backends
-    // don't interfere with this drag operation.
-    e.dataTransfer.setData(this.mime, {});
-
-    // If child drag source refuses drag but parent agrees,
-    // use parent's node as drag image. This won't work in IE.
-    const dragOffset = this.getDragImageOffset(node);
-    e.dataTransfer.setDragImage(node, ...dragOffset);
   }
 
   handleTopDragEndCapture() {
@@ -116,8 +192,12 @@ export default class HTML5Backend {
   handleTopDragEnd() {
   }
 
-  handleTopDragOverCapture() {
+  handleTopDragOverCapture(e) {
     this.dragOverTargetHandles = [];
+
+    if (this.isDraggingNativeItem()) {
+      e.preventDefault();
+    }
   }
 
   handleDragOver(e, targetHandle) {
@@ -140,8 +220,21 @@ export default class HTML5Backend {
     }
   }
 
-  handleTopDragEnterCapture() {
+  handleTopDragEnterCapture(e) {
     this.dragEnterTargetHandles = [];
+
+    if (this.monitor.isDragging()) {
+      return;
+    }
+
+    const { dataTransfer } = e;
+    if (isFileDataTransfer(dataTransfer)) {
+      // File dragged from outside the document
+      this.beginDragNativeFile();
+    } else if (isUrlDataTransfer(dataTransfer)) {
+      // URL dragged from outside the document
+      this.beginDragNativeUrl();
+    }
   }
 
   handleDragEnter(e, targetHandle) {
@@ -164,14 +257,25 @@ export default class HTML5Backend {
     }
   }
 
-  handleTopDragLeaveCapture() {
+  handleTopDragLeaveCapture(e) {
+    if (this.isDraggingNativeItem()) {
+      e.preventDefault();
+    }
   }
 
   handleTopDragLeave() {
   }
 
-  handleTopDropCapture() {
+  handleTopDropCapture(e) {
     this.dropTargetHandles = [];
+
+    if (this.isDraggingNativeItem()) {
+      e.preventDefault();
+
+      const sourceHandle = this.monitor.getSourceHandle();
+      const source = this.registry.getSource(sourceHandle);
+      source.mutateItemByReadingDataTransfer(e.dataTransfer);
+    }
   }
 
   handleDrop(e, targetHandle) {
@@ -184,6 +288,10 @@ export default class HTML5Backend {
 
     this.actions.hover(dropTargetHandles);
     this.actions.drop();
+
+    if (this.isDraggingNativeItem()) {
+      this.actions.endDrag();
+    }
   }
 
   updateSourceNode(sourceHandle, node) {

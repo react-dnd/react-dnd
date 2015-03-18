@@ -18,7 +18,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['react-hot-loader', '6to5?experimental'], exclude: /node_modules/ }
+      // TODO: temp dnd-core for npm link
+      { test: /\.js$/, loaders: ['6to5?experimental'], exclude: /node_modules|dnd-core/ }
     ]
   },
   plugins: [
