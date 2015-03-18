@@ -68,10 +68,7 @@ export default class ReactDropTarget extends DropTarget {
       this.manager = manager;
     }
 
-    if (this.type !== type) {
-      this.observable.replaceType(type);
-    }
-
+    this.observable.receiveType(type);
     return this.observable;
   }
 }

@@ -41,8 +41,8 @@ export default class MonitorObservable {
     }
   }
 
-  replaceType(newType) {
-    if (this.handle) {
+  receiveType(newType) {
+    if (this.handle && this.type !== newType) {
       this.adapter.removeHandler(this.handle);
       this.handle = this.adapter.addHandler(newType);
     }

@@ -66,10 +66,7 @@ export default class ReactDragSource extends DragSource {
       this.manager = manager;
     }
 
-    if (this.type !== type) {
-      this.observable.replaceType(type);
-    }
-
+    this.observable.receiveType(type);
     return this.observable;
   }
 }
