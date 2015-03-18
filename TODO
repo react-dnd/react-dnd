@@ -1,8 +1,6 @@
-* figure out how to support multiple target types for one droppable
 * make a list of hacks to port over
 * custom state extractors
 * rethink TYPES
-* edge cases: type of droppable changes midflight. relax enter/leave?
-* fun edge case: nested entered drop target swaps handles with its parent. or similar.
 * check symbols
 * helpers for test context
+* drag offsets and alignments

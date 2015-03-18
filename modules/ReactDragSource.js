@@ -47,7 +47,7 @@ class SourceAdapter {
     return {
       canDrag: monitor.canDrag(handle),
       isDragging: monitor.isDragging(handle),
-      dragEventHandlers: backend.getSourceProps(handle)
+      dragEventHandlers: backend.getSourceProps(handle, this.source.component)
     };
   }
 }
