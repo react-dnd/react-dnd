@@ -1,3 +1,5 @@
+'use strict';
+
 import shallowEqual from 'react/lib/shallowEqual';
 
 /**
