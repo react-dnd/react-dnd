@@ -51,12 +51,12 @@ const Box = createClass({
   })],
 
   render() {
-    const { isDragging, dragEventHandlers } = this.state.data.dragSource;
+    const { isDragging, ref } = this.state.data.dragSource;
     const { name } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div {...dragEventHandlers}
+      <div ref={ref}
            style={{ ...style, opacity }}>
         {name}
       </div>

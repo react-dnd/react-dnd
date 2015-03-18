@@ -58,11 +58,11 @@ const Box = createClass({
 
   render() {
     const { name, isDropped } = this.props;
-    const { isDragging, dragEventHandlers } = this.state.data.dragSource;
+    const { isDragging, ref } = this.state.data.dragSource;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div {...dragEventHandlers}
+      <div ref={ref}
            style={{ ...style, opacity }}>
         {isDropped ?
           <s>{name}</s> :
