@@ -1,5 +1,6 @@
 import { DragSource } from 'dnd-core';
 import NativeTypes from '../NativeTypes';
+import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import warning from 'react/lib/warning';
 
 function isUrlDataTransfer(dataTransfer) {
@@ -62,6 +63,8 @@ export default class HTML5Backend {
     this.registry = registry;
 
     this.nodeHandlers = {};
+    this.enterLeaveCounter = new EnterLeaveCounter();
+
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
     this.handleTopDragStartCapture = this.handleTopDragStartCapture.bind(this);
     this.handleTopDragEnd = this.handleTopDragEnd.bind(this);
@@ -223,7 +226,8 @@ export default class HTML5Backend {
   handleTopDragEnterCapture(e) {
     this.dragEnterTargetHandles = [];
 
-    if (this.monitor.isDragging()) {
+    const isFirstEnter = this.enterLeaveCounter.enter(e.target);
+    if (!isFirstEnter || this.monitor.isDragging()) {
       return;
     }
 
@@ -261,6 +265,13 @@ export default class HTML5Backend {
     if (this.isDraggingNativeItem()) {
       e.preventDefault();
     }
+
+    const isLastLeave = this.enterLeaveCounter.leave(e.target);
+    if (!isLastLeave || !this.isDraggingNativeItem()) {
+      return;
+    }
+
+    this.actions.endDrag();
   }
 
   handleTopDragLeave() {
@@ -276,6 +287,8 @@ export default class HTML5Backend {
       const source = this.registry.getSource(sourceHandle);
       source.mutateItemByReadingDataTransfer(e.dataTransfer);
     }
+
+    this.enterLeaveCounter.reset();
   }
 
   handleDrop(e, targetHandle) {
