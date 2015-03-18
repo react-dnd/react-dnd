@@ -26,6 +26,7 @@ export default class MonitorObservable {
       this.handle = this.adapter.addHandler(this.type);
       this.adapter.addChangeListener(this.handleChange, this);
 
+      // Force a single synchronous value upon the first subscription.
       this.handleChange();
     }
   }
