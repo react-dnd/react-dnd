@@ -3,6 +3,9 @@
     "browser": true,
     "node": true
   },
+  "ecmaFeatures": {
+    "modules": true
+  },
   "parser": "babel-eslint",
   "rules": {
     "quotes": [2, "single"],

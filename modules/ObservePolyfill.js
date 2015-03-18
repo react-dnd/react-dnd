@@ -1,6 +1,5 @@
-'use strict';
-
 import shallowEqual from 'react/lib/shallowEqual';
+import noop from 'lodash/utility/noop';
 
 /**
  * This (and related hacks) will go away in React 0.14.
@@ -49,9 +48,9 @@ export default function(spec) {
 
       for (let key in newObservables) {
         newSubscriptions[key] = newObservables[key].subscribe({
-          onNext: (value) => onNext(key, value),
-          onError: () => {},
-          onCompleted: () => {}
+          onNext: onNext.bind(null, key),
+          onError: noop,
+          onCompleted: noop
         });
       }
 
@@ -68,5 +67,5 @@ export default function(spec) {
 
       this.subscriptions = {};
     }
-  }
-};
+  };
+}

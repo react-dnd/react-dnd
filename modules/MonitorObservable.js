@@ -1,5 +1,3 @@
-'use strict';
-
 export default class MonitorObservable {
   constructor(type, adapter) {
     this.type = type;

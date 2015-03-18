@@ -1,5 +1,3 @@
-'use strict';
-
 import { findDOMNode } from 'react';
 
 export default class HTML5Backend {
@@ -105,7 +103,7 @@ export default class HTML5Backend {
     e.dataTransfer.setDragImage(node, ...dragOffset);
   }
 
-  handleTopDragEndCapture(e) {
+  handleTopDragEndCapture() {
     if (!this.dragStartOriginalTarget) {
       // Firefox can dispatch this event in an infinite loop
       // if dragend handler does something like showing an alert.
@@ -120,7 +118,7 @@ export default class HTML5Backend {
   handleTopDragEnd() {
   }
 
-  handleTopDragOverCapture(e) {
+  handleTopDragOverCapture() {
     this.dragOverTargetHandles = [];
   }
 
@@ -144,7 +142,7 @@ export default class HTML5Backend {
     }
   }
 
-  handleTopDragEnterCapture(e) {
+  handleTopDragEnterCapture() {
     this.dragEnterTargetHandles = [];
   }
 
@@ -168,13 +166,13 @@ export default class HTML5Backend {
     }
   }
 
-  handleTopDragLeaveCapture(e) {
+  handleTopDragLeaveCapture() {
   }
 
-  handleTopDragLeave(e) {
+  handleTopDragLeave() {
   }
 
-  handleTopDropCapture(e) {
+  handleTopDropCapture() {
     this.dropTargetHandles = [];
   }
 
@@ -182,7 +180,7 @@ export default class HTML5Backend {
     this.dropTargetHandles.unshift(targetHandle);
   }
 
-  handleTopDrop(e) {
+  handleTopDrop() {
     const { dropTargetHandles } = this;
     this.dropTargetHandles = [];
 
