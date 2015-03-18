@@ -1,10 +1,9 @@
-import { findDOMNode } from 'react';
-
 export default class HTML5Backend {
   constructor(actions, monitor) {
     this.actions = actions;
     this.monitor = monitor;
 
+    this.nodeHandlers = {};
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
     this.handleTopDragStartCapture = this.handleTopDragStartCapture.bind(this);
     this.handleTopDragEnd = this.handleTopDragEnd.bind(this);
@@ -61,8 +60,8 @@ export default class HTML5Backend {
     this.dragStartOriginalTarget = null;
   }
 
-  handleDragStart(e, sourceHandle, component) {
-    this.dragStartSourceHandles.push([sourceHandle, component]);
+  handleDragStart(e, sourceHandle) {
+    this.dragStartSourceHandles.push([sourceHandle, e.currentTarget]);
   }
 
   handleTopDragStart(e) {
@@ -72,9 +71,9 @@ export default class HTML5Backend {
     // Try calling beginDrag() on each drag source
     // until one of them agrees to to be dragged.
     let sourceHandle = null;
-    let component = null;
+    let node = null;
     for (let i = 0; i < dragStartSourceHandles.length; i++) {
-      [sourceHandle, component] = dragStartSourceHandles[i];
+      [sourceHandle, node] = dragStartSourceHandles[i];
       this.actions.beginDrag(sourceHandle);
 
       if (this.monitor.isDragging()) {
@@ -98,7 +97,6 @@ export default class HTML5Backend {
 
     // If child drag source refuses drag but parent agrees,
     // use parent's node as drag image. This won't work in IE.
-    const node = findDOMNode(component);
     const dragOffset = this.getDragImageOffset(node);
     e.dataTransfer.setDragImage(node, ...dragOffset);
   }
@@ -188,18 +186,54 @@ export default class HTML5Backend {
     this.actions.drop();
   }
 
-  getSourceProps(sourceHandle, component) {
-    return {
-      draggable: true,
-      onDragStart: (e) => this.handleDragStart(e, sourceHandle, component)
-    };
+  updateSourceNode(sourceHandle, node) {
+    let nodeHandlers = this.nodeHandlers[sourceHandle];
+    if (nodeHandlers && nodeHandlers.node === node) {
+      return;
+    }
+
+    if (nodeHandlers) {
+      nodeHandlers.node.removeEventListener('dragstart', nodeHandlers.dragstart);
+    }
+
+    if (node) {
+      nodeHandlers = this.nodeHandlers[sourceHandle] = {
+        node,
+        dragstart: (e) => this.handleDragStart(e, sourceHandle)
+      };
+
+      node.setAttribute('draggable', true);
+      node.addEventListener('dragstart', nodeHandlers.dragstart);
+    } else {
+      delete this.nodeHandlers[sourceHandle];
+    }
   }
 
-  getTargetProps(targetHandle) {
-    return {
-      onDragEnter: (e) => this.handleDragEnter(e, targetHandle),
-      onDragOver: (e) => this.handleDragOver(e, targetHandle),
-      onDrop: (e) => this.handleDrop(e, targetHandle)
-    };
+  updateTargetNode(targetHandle, node) {
+    let nodeHandlers = this.nodeHandlers[targetHandle];
+    if (nodeHandlers && nodeHandlers.node === node) {
+      return;
+    }
+
+    if (nodeHandlers) {
+      nodeHandlers.node.removeEventListener('dragenter', nodeHandlers.dragenter);
+      nodeHandlers.node.removeEventListener('dragover', nodeHandlers.dragover);
+      nodeHandlers.node.removeEventListener('drop', nodeHandlers.drop);
+    }
+
+    if (node) {
+      nodeHandlers = this.nodeHandlers[targetHandle] = {
+        node,
+        dragenter: (e) => this.handleDragEnter(e, targetHandle),
+        dragover: (e) => this.handleDragOver(e, targetHandle),
+        drop: (e) => this.handleDrop(e, targetHandle)
+      };
+
+      node.addEventListener('dragenter', nodeHandlers.dragenter);
+      node.addEventListener('dragover', nodeHandlers.dragover);
+      node.addEventListener('drop', nodeHandlers.drop);
+    } else {
+      delete this.nodeHandlers[targetHandle];
+    }
   }
 }

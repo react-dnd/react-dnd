@@ -36,7 +36,7 @@ const Dustbin = createClass({
   })],
 
   render() {
-    const { canDrop, isOver, dropEventHandlers } = this.state.data.dropTarget;
+    const { canDrop, isOver, ref } = this.state.data.dropTarget;
 
     let backgroundColor = '#222';
     if (isOver) {
@@ -46,7 +46,7 @@ const Dustbin = createClass({
     }
 
     return (
-      <div {...dropEventHandlers}
+      <div ref={ref}
            style={{ ...style, backgroundColor }}>
         {isOver ?
           'Release to drop' :

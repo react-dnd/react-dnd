@@ -1,3 +1,4 @@
+import { findDOMNode } from 'react';
 import { DropTarget } from 'dnd-core';
 import MonitorObservable from './MonitorObservable';
 import invariant from 'react/lib/invariant';
@@ -39,7 +40,7 @@ class TargetAdapter {
         canDrop: false,
         isOver: false,
         isOverShallow: false,
-        dropEventHandlers: {}
+        ref: undefined
       };
     }
 
@@ -47,7 +48,7 @@ class TargetAdapter {
       canDrop: monitor.canDrop(handle),
       isOver: monitor.canDrop(handle) && monitor.isOver(handle),
       isOverShallow: monitor.canDrop(handle) && monitor.isOver(handle, true),
-      dropEventHandlers: backend.getTargetProps(handle, this.target.component)
+      ref: (component) => backend.updateTargetNode(handle, findDOMNode(component))
     };
   }
 }

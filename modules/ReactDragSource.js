@@ -1,3 +1,4 @@
+import { findDOMNode } from 'react';
 import { DragSource } from 'dnd-core';
 import MonitorObservable from './MonitorObservable';
 import invariant from 'react/lib/invariant';
@@ -38,14 +39,14 @@ class SourceAdapter {
       return {
         canDrag: false,
         isDragging: false,
-        dragEventHandlers: {}
+        ref: undefined
       };
     }
 
     return {
       canDrag: monitor.canDrag(handle),
       isDragging: monitor.isDragging(handle),
-      dragEventHandlers: backend.getSourceProps(handle, this.source.component)
+      ref: (component) => backend.updateSourceNode(handle, findDOMNode(component))
     };
   }
 }
