@@ -1,104 +1,190 @@
 'use strict';
 
-const ELEMENT_NODE_TYPE = 1;
-let nextId = 0;
+import { findDOMNode } from 'react';
 
 export default class HTML5Backend {
-  constructor(actions) {
+  constructor(actions, monitor) {
     this.actions = actions;
+    this.monitor = monitor;
 
-    this.id = nextId++;
-    this.mime = `application/dnd-${this.id}`;
-    this.dropTargetAttribute = `data-react-dnd-target-${this.id}`;
-
-    this.captureTopDragEnter = this.captureTopDragEnter.bind(this);
-    this.captureTopDragOver = this.captureTopDragOver.bind(this);
-    this.captureTopDrop = this.captureTopDrop.bind(this);
+    this.handleTopDragStart = this.handleTopDragStart.bind(this);
+    this.handleTopDragStartCapture = this.handleTopDragStartCapture.bind(this);
+    this.handleTopDragEnd = this.handleTopDragEnd.bind(this);
+    this.handleTopDragEndCapture = this.handleTopDragEndCapture.bind(this);
+    this.handleTopDragEnter = this.handleTopDragEnter.bind(this);
+    this.handleTopDragEnterCapture = this.handleTopDragEnterCapture.bind(this);
+    this.handleTopDragLeave = this.handleTopDragLeave.bind(this);
+    this.handleTopDragLeaveCapture = this.handleTopDragLeaveCapture.bind(this);
+    this.handleTopDragOver = this.handleTopDragOver.bind(this);
+    this.handleTopDragOverCapture = this.handleTopDragOverCapture.bind(this);
+    this.handleTopDrop = this.handleTopDrop.bind(this);
+    this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
   }
 
   setup() {
-    window.addEventListener('dragenter', this.captureTopDragEnter, true);
-    window.addEventListener('dragover', this.captureTopDragOver, true);
-    window.addEventListener('drop', this.captureTopDrop, true);
+    window.addEventListener('dragstart', this.handleTopDragStart);
+    window.addEventListener('dragstart', this.handleTopDragStartCapture, true);
+    window.addEventListener('dragend', this.handleTopDragEnd);
+    window.addEventListener('dragend', this.handleTopDragEndCapture, true);
+    window.addEventListener('dragenter', this.handleTopDragEnter);
+    window.addEventListener('dragenter', this.handleTopDragEnterCapture, true);
+    window.addEventListener('dragleave', this.handleTopDragLeave);
+    window.addEventListener('dragleave', this.handleTopDragLeaveCapture, true);
+    window.addEventListener('dragover', this.handleTopDragOver);
+    window.addEventListener('dragover', this.handleTopDragOverCapture, true);
+    window.addEventListener('drop', this.handleTopDrop);
+    window.addEventListener('drop', this.handleTopDropCapture, true);
   }
 
   teardown() {
-    window.removeEventListener('dragenter', this.captureTopDragEnter, true);
-    window.removeEventListener('dragover', this.captureTopDragOver, true);
-    window.removeEventListener('drop', this.captureTopDrop, true);
+    window.removeEventListener('dragstart', this.handleTopDragStart);
+    window.removeEventListener('dragstart', this.handleTopDragStartCapture, true);
+    window.removeEventListener('dragend', this.handleTopDragEnd);
+    window.removeEventListener('dragend', this.handleTopDragEndCapture, true);
+    window.removeEventListener('dragenter', this.handleTopDragEnter);
+    window.removeEventListener('dragenter', this.handleTopDragEnterCapture, true);
+    window.removeEventListener('dragleave', this.handleTopDragLeave);
+    window.removeEventListener('dragleave', this.handleTopDragLeaveCapture, true);
+    window.removeEventListener('dragover', this.handleTopDragOver);
+    window.removeEventListener('dragover', this.handleTopDragOverCapture, true);
+    window.removeEventListener('drop', this.handleTopDrop);
+    window.removeEventListener('drop', this.handleTopDropCapture, true);
   }
 
-  captureTopDragEnter(e) {
-    if (e.dataTransfer.types.indexOf(this.mime) === -1) {
-      return;
-    }
-
-    const targetHandles = this.getTargetHandles(e);
-    this.actions.hover(targetHandles);
+  getDragImageOffset() {
+    // TODO: not implemented
+    // A good test case is canDrag(): false on child.
+    // With parent as preview, we need to manually calculate the offset.
+    return [0, 0];
   }
 
-  captureTopDragOver(e) {
-    if (e.dataTransfer.types.indexOf(this.mime) === -1) {
-      return;
+  handleTopDragStartCapture() {
+    this.dragStartSourceHandles = [];
+    this.dragStartOriginalTarget = null;
+  }
+
+  handleDragStart(e, sourceHandle, component) {
+    this.dragStartSourceHandles.push([sourceHandle, component]);
+  }
+
+  handleTopDragStart(e) {
+    const { dragStartSourceHandles } = this;
+    this.dragStartSourceHandles = null;
+
+    // Try calling beginDrag() on each drag source
+    // until one of them agrees to to be dragged.
+    let sourceHandle = null;
+    let component = null;
+    for (let i = 0; i < dragStartSourceHandles.length; i++) {
+      [sourceHandle, component] = dragStartSourceHandles[i];
+      this.actions.beginDrag(sourceHandle);
+
+      if (this.monitor.isDragging()) {
+        break;
+      }
     }
 
-    const targetHandles = this.getTargetHandles(e);
-    this.actions.hover(targetHandles);
-
-    if (targetHandles.length > 0) {
+    // If none agreed, cancel the dragging.
+    if (!this.monitor.isDragging()) {
       e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-    }
-  }
-
-  captureTopDrop(e) {
-    if (e.dataTransfer.types.indexOf(this.mime) === -1) {
       return;
     }
 
-    const targetHandles = this.getTargetHandles(e);
-    this.actions.hover(targetHandles);
+    // Save the original target so we can later check
+    // dragend events against it.
+    this.dragStartOriginalTarget = e.target;
+
+    // Specify backend's MIME so other backends
+    // don't interfere with this drag operation.
+    e.dataTransfer.setData(this.mime, {});
+
+    // If child drag source refuses drag but parent agrees,
+    // use parent's node as drag image. This won't work in IE.
+    const node = findDOMNode(component);
+    const dragOffset = this.getDragImageOffset(node);
+    e.dataTransfer.setDragImage(node, ...dragOffset);
+  }
+
+  handleTopDragEndCapture(e) {
+    if (!this.dragStartOriginalTarget) {
+      // Firefox can dispatch this event in an infinite loop
+      // if dragend handler does something like showing an alert.
+      // Exit early if we know it has been handled.
+      return;
+    }
+
+    this.dragStartOriginalTarget = null;
+    this.actions.endDrag();
+  }
+
+  handleTopDragEnd() {
+  }
+
+  handleTopDragOverCapture(e) {
+    this.dragOverTargetHandles = [];
+  }
+
+  handleDragOver(e, targetHandle) {
+    this.dragOverTargetHandles.unshift(targetHandle);
+  }
+
+  handleTopDragOver(e) {
+    const { dragOverTargetHandles } = this;
+    this.dragOverTargetHandles = [];
+
+    this.actions.hover(dragOverTargetHandles);
+
+    const canDrop = dragOverTargetHandles.some(
+      targetHandle => this.monitor.canDrop(targetHandle)
+    );
+    if (canDrop) {
+      e.preventDefault();
+      // TODO: let user customize drop effect
+      e.dataTransfer.dropEffect = 'copy';
+    }
+  }
+
+  handleTopDragEnterCapture(e) {
+    // IE requires this to fire dragover events
+    e.preventDefault();
+  }
+
+  handleTopDragEnter(e) {
+  }
+
+  handleTopDragLeaveCapture(e) {
+  }
+
+  handleTopDragLeave(e) {
+  }
+
+  handleTopDropCapture(e) {
+    this.dropTargetHandles = [];
+  }
+
+  handleDrop(e, targetHandle) {
+    this.dropTargetHandles.unshift(targetHandle);
+  }
+
+  handleTopDrop(e) {
+    const { dropTargetHandles } = this;
+    this.dropTargetHandles = [];
+
+    this.actions.hover(dropTargetHandles);
     this.actions.drop();
   }
 
-  getTargetHandles(e) {
-    const targetHandles = [];
-
-    let target = e.target;
-    if (target.nodeType !== ELEMENT_NODE_TYPE) {
-      target = target.parentElement;
-    }
-
-    while (target) {
-      if (target.hasAttribute(this.dropTargetAttribute)) {
-        targetHandles.unshift(target.getAttribute(this.dropTargetAttribute));
-      }
-      target = target.parentElement;
-    }
-
-    return targetHandles;
-  }
-
-  getSourceProps(sourceHandle) {
+  getSourceProps(sourceHandle, component) {
     return {
       draggable: true,
-      onDragStart: (e) => this.handleDragStart(e, sourceHandle),
-      onDragEnd: (e) => this.handleDragEnd(e, sourceHandle)
+      onDragStart: (e) => this.handleDragStart(e, sourceHandle, component)
     };
   }
 
   getTargetProps(targetHandle) {
     return {
-      [this.dropTargetAttribute]: targetHandle
+      onDragOver: (e) => this.handleDragOver(e, targetHandle),
+      onDrop: (e) => this.handleDrop(e, targetHandle)
     };
-  }
-
-  handleDragStart(e, sourceHandle) {
-    e.dataTransfer.setData(this.mime, {});
-    this.actions.beginDrag(sourceHandle);
-  }
-
-  handleDragEnd() {
-    this.actions.endDrag();
   }
 }

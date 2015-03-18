@@ -49,7 +49,7 @@ class TargetAdapter {
       canDrop: monitor.canDrop(handle),
       isOver: monitor.canDrop(handle) && monitor.isOver(handle),
       isOverShallow: monitor.canDrop(handle) && monitor.isOver(handle, true),
-      dropEventHandlers: backend.getTargetProps(handle)
+      dropEventHandlers: backend.getTargetProps(handle, this.target.component)
     };
   }
 }
