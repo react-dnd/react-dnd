@@ -1,5 +1,3 @@
-'use strict';
-
 import { DragSource } from 'dnd-core';
 import MonitorObservable from './MonitorObservable';
 import invariant from 'react/lib/invariant';

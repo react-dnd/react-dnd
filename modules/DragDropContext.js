@@ -1,5 +1,3 @@
-'use strict';
-
 import { PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 
