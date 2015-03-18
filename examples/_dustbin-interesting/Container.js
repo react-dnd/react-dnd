@@ -4,7 +4,7 @@ import React, { createClass } from 'react';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
-import { DragDropContext, HTML5Backend } from 'react-dnd';
+import { DragDropContext, HTML5Backend, NativeTypes } from 'react-dnd';
 import shuffle from 'lodash/collection/shuffle';
 import update from 'react/lib/update';
 
@@ -18,7 +18,8 @@ const Container = createClass({
       dustbins: [
         [ItemTypes.GLASS],
         [ItemTypes.FOOD],
-        [ItemTypes.PAPER, ItemTypes.GLASS]
+        [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL],
+        [ItemTypes.PAPER, NativeTypes.FILE]
       ],
       boxes: [
         { name: 'Bottle', type: ItemTypes.GLASS },
