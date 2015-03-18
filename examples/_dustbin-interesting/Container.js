@@ -5,6 +5,8 @@ import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
 import { DragDropContext, HTML5Backend } from 'react-dnd';
+import shuffle from 'lodash/collection/shuffle';
+import update from 'react/lib/update';
 
 const Container = createClass({
   mixins: [DragDropContext({
@@ -13,7 +15,17 @@ const Container = createClass({
 
   getInitialState() {
     return {
-      tick: true
+      dustbins: [
+        [ItemTypes.GLASS],
+        [ItemTypes.FOOD],
+        [ItemTypes.PAPER, ItemTypes.GLASS]
+      ],
+      boxes: [
+        { name: 'Bottle', type: ItemTypes.GLASS },
+        { name: 'Banana', type: ItemTypes.FOOD },
+        { name: 'Magazine', type: ItemTypes.PAPER }
+      ],
+      droppedBoxNames: []
     };
   },
 
@@ -23,7 +35,8 @@ const Container = createClass({
 
   tickTock() {
     this.setState({
-      tick: !this.state.tick
+      boxes: shuffle(this.state.boxes),
+      dustbins: shuffle(this.state.dustbins)
     });
   },
 
@@ -31,29 +44,43 @@ const Container = createClass({
     clearInterval(this.interval);
   },
 
+  isDropped(boxName) {
+    return this.state.droppedBoxNames.indexOf(boxName) > -1;
+  },
+
   render() {
-    const { tick } = this.state;
+    const { boxes, dustbins } = this.state;
 
     return (
       <div>
         <div style={{minHeight: '14rem'}}>
-          <Dustbin accepts={tick ? [ItemTypes.GLASS] : [ItemTypes.FOOD]} />
-          <Dustbin accepts={tick ? [ItemTypes.FOOD] : [ItemTypes.PAPER]} />
-          <Dustbin accepts={tick ? [ItemTypes.PAPER] : [ItemTypes.GLASS]} />
-          {/*
-          {this.renderDustbin([NativeDragItemTypes.FILE, NativeDragItemTypes.URL])}
-          */}
+          {dustbins.map(accepts =>
+            <Dustbin accepts={accepts} />
+          )}
         </div>
 
         <div style={{ minHeight: '2rem' }}>
-          <Box name='Glass' type={ItemTypes.GLASS} />
-          <Box name='Banana' type={ItemTypes.FOOD} />
-          <Box name='Bottle' type={ItemTypes.GLASS} />
-          <Box name='Burger' type={ItemTypes.FOOD} />
-          <Box name='Paper' type={ItemTypes.PAPER} />
+          {boxes.map(({ name, type }) =>
+            <Box name={name}
+                 type={type}
+                 isDropped={this.isDropped(name)}
+                 onDrop={this.handleDrop} />
+          )}
         </div>
       </div>
     );
+  },
+
+  handleDrop(boxName) {
+    if (this.isDropped(boxName)) {
+      return;
+    }
+
+    this.setState(update(this.state, {
+      droppedBoxNames: {
+        $push: [boxName]
+      }
+    }));
   }
 });
 

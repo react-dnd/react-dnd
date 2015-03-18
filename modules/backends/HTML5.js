@@ -126,12 +126,12 @@ export default class HTML5Backend {
 
   handleDragOver(e, targetHandle) {
     this.dragOverTargetHandles.unshift(targetHandle);
+    this.actions.hover(this.dragEnterTargetHandles);
   }
 
   handleTopDragOver(e) {
     const { dragOverTargetHandles } = this;
     this.dragOverTargetHandles = [];
-
     this.actions.hover(dragOverTargetHandles);
 
     const canDrop = dragOverTargetHandles.some(
@@ -145,11 +145,27 @@ export default class HTML5Backend {
   }
 
   handleTopDragEnterCapture(e) {
-    // IE requires this to fire dragover events
-    e.preventDefault();
+    this.dragEnterTargetHandles = [];
+  }
+
+  handleDragEnter(e, targetHandle) {
+    this.dragEnterTargetHandles.unshift(targetHandle);
+    this.actions.hover(this.dragEnterTargetHandles);
   }
 
   handleTopDragEnter(e) {
+    const { dragEnterTargetHandles } = this;
+    this.dragEnterTargetHandles = [];
+    this.actions.hover(dragEnterTargetHandles);
+
+    const canDrop = dragEnterTargetHandles.some(
+      targetHandle => this.monitor.canDrop(targetHandle)
+    );
+
+    if (canDrop) {
+      // IE requires this to fire dragover events
+      e.preventDefault();
+    }
   }
 
   handleTopDragLeaveCapture(e) {
@@ -183,6 +199,7 @@ export default class HTML5Backend {
 
   getTargetProps(targetHandle) {
     return {
+      onDragEnter: (e) => this.handleDragEnter(e, targetHandle),
       onDragOver: (e) => this.handleDragOver(e, targetHandle),
       onDrop: (e) => this.handleDrop(e, targetHandle)
     };

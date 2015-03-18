@@ -4,3 +4,6 @@
 * check symbols
 * helpers for test context
 * drag offsets and alignments
+
+dnd-core
+* smarter canDrop()

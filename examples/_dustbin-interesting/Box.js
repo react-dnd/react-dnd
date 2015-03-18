@@ -10,13 +10,15 @@ class BoxDragSource extends DragSource {
     };
   }
 
-  endDrag(monitor) {
-    const didDrop = monitor.didDrop();
+  isDragging(monitor) {
+    const item = monitor.getItem();
+    return this.component.props.name === item.name;
+  }
 
-    if (didDrop) {
-      this.component.setState({
-        hasDropped: true
-      });
+  endDrag(monitor) {
+    if (monitor.didDrop()) {
+      const item = monitor.getItem();
+      this.component.props.onDrop(item.name);
     }
   }
 }
@@ -33,7 +35,9 @@ const style = {
 const Box = createClass({
   propTypes: {
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    isDropped: PropTypes.bool.isRequired,
+    onDrop: PropTypes.func.isRequired
   },
 
   contextTypes: {
@@ -52,22 +56,15 @@ const Box = createClass({
     }
   })],
 
-  getInitialState() {
-    return {
-      hasDropped: false
-    };
-  },
-
   render() {
-    const { name } = this.props;
-    const { hasDropped } = this.state;
+    const { name, isDropped } = this.props;
     const { isDragging, dragEventHandlers } = this.state.data.dragSource;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
       <div {...dragEventHandlers}
            style={{ ...style, opacity }}>
-        {hasDropped ?
+        {isDropped ?
           <s>{name}</s> :
           name
         }
