@@ -1,6 +1,7 @@
 import { DragSource } from 'dnd-core';
 import NativeTypes from '../NativeTypes';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
+import invariant from 'react/lib/invariant';
 import warning from 'react/lib/warning';
 
 function isUrlDataTransfer(dataTransfer) {
@@ -81,6 +82,9 @@ export default class HTML5Backend {
   }
 
   setup() {
+    invariant(!this.constructor.isSetUp, 'Cannot have two HTML5 backends at the same time.');
+    this.constructor.isSetUp = true;
+
     if (typeof window === 'undefined') {
       return;
     }
@@ -100,6 +104,8 @@ export default class HTML5Backend {
   }
 
   teardown() {
+    this.constructor.isSetUp = false;
+
     if (typeof window === 'undefined') {
       return;
     }
@@ -116,6 +122,8 @@ export default class HTML5Backend {
     window.removeEventListener('dragover', this.handleTopDragOverCapture, true);
     window.removeEventListener('drop', this.handleTopDrop);
     window.removeEventListener('drop', this.handleTopDropCapture, true);
+
+    this.clearCurrentDragSourceNode();
   }
 
   getDragImageOffset() {
@@ -136,13 +144,26 @@ export default class HTML5Backend {
   }
 
   beginDragNativeUrl() {
-    const sourceHandle = this.registry.addSource(NativeTypes.URL, new UrlDragSource());
-    this.actions.beginDrag(sourceHandle);
+    this.clearCurrentDragSourceNode();
+
+    this.currentNativeSource = new UrlDragSource();
+    this.currentNativeHandle = this.registry.addSource(NativeTypes.URL, this.currentNativeSource);
+    this.actions.beginDrag(this.currentNativeHandle);
   }
 
   beginDragNativeFile() {
-    const sourceHandle = this.registry.addSource(NativeTypes.FILE, new FileDragSource());
-    this.actions.beginDrag(sourceHandle);
+    this.clearCurrentDragSourceNode();
+
+    this.currentNativeSource = new FileDragSource();
+    this.currentNativeHandle = this.registry.addSource(NativeTypes.FILE, this.currentNativeSource);
+    this.actions.beginDrag(this.currentNativeHandle);
+  }
+
+  endDragNativeItem() {
+    this.actions.endDrag();
+    this.registry.removeSource(this.currentNativeHandle);
+    this.currentNativeHandle = null;
+    this.currentNativeSource = null;
   }
 
   endDragIfSourceWasRemovedFromDOM() {
@@ -244,12 +265,8 @@ export default class HTML5Backend {
   handleTopDragEnd() {
   }
 
-  handleTopDragOverCapture(e) {
+  handleTopDragOverCapture() {
     this.dragOverTargetHandles = [];
-
-    if (this.isDraggingNativeItem()) {
-      e.preventDefault();
-    }
   }
 
   handleDragOver(e, targetHandle) {
@@ -265,10 +282,15 @@ export default class HTML5Backend {
     const canDrop = dragOverTargetHandles.some(
       targetHandle => this.monitor.canDrop(targetHandle)
     );
+
     if (canDrop) {
       e.preventDefault();
-      // TODO: let user customize drop effect
       e.dataTransfer.dropEffect = 'copy';
+    } else if (this.isDraggingNativeItem()) {
+      // Don't show a nice cursor but still prevent default
+      // "drop and blow away the whole document" action.
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'none';
     }
   }
 
@@ -320,7 +342,7 @@ export default class HTML5Backend {
       return;
     }
 
-    this.actions.endDrag();
+    this.endDragNativeItem();
   }
 
   handleTopDragLeave() {
@@ -331,10 +353,7 @@ export default class HTML5Backend {
 
     if (this.isDraggingNativeItem()) {
       e.preventDefault();
-
-      const sourceHandle = this.monitor.getSourceHandle();
-      const source = this.registry.getSource(sourceHandle);
-      source.mutateItemByReadingDataTransfer(e.dataTransfer);
+      this.currentNativeSource.mutateItemByReadingDataTransfer(e.dataTransfer);
     }
 
     this.enterLeaveCounter.reset();
@@ -352,7 +371,7 @@ export default class HTML5Backend {
     this.actions.drop();
 
     if (this.isDraggingNativeItem()) {
-      this.actions.endDrag();
+      this.endDragNativeItem();
     } else {
       this.endDragIfSourceWasRemovedFromDOM();
     }
@@ -366,6 +385,7 @@ export default class HTML5Backend {
 
     if (nodeHandlers) {
       nodeHandlers.node.removeEventListener('dragstart', nodeHandlers.dragstart);
+      nodeHandlers.node.setAttribute('draggable', false);
     }
 
     if (node) {
