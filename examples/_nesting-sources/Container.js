@@ -1,27 +1,29 @@
 'use strict';
 
 import React from 'react';
-import makeSource from './makeSource';
+import Source from './Source';
 import Colors from './Colors';
 import Target from './Target';
+import { DragDropContext, HTML5Backend } from 'react-dnd';
 
 const Container = React.createClass({
-  render() {
-    const YellowSource = makeSource(Colors.YELLOW);
-    const BlueSource = makeSource(Colors.BLUE);
+  mixins: [DragDropContext({
+    dragDrop: HTML5Backend
+  })],
 
+  render() {
     return (
       <div style={{ height: 320 }}>
         <div style={{ float: 'left' }}>
-          <BlueSource>
-            <YellowSource>
-              <YellowSource />
-              <BlueSource />
-            </YellowSource>
-            <BlueSource>
-              <YellowSource />
-            </BlueSource>
-          </BlueSource>
+          <Source color={Colors.BLUE}>
+            <Source color={Colors.YELLOW}>
+              <Source color={Colors.YELLOW} />
+              <Source color={Colors.BLUE} />
+            </Source>
+            <Source color={Colors.BLUE}>
+              <Source color={Colors.YELLOW} />
+            </Source>
+          </Source>
         </div>
 
         <div style={{ float: 'left', marginLeft: 100, marginTop: 50 }}>

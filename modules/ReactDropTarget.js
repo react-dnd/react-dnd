@@ -48,6 +48,7 @@ class TargetAdapter {
       canDrop: monitor.canDrop(handle),
       isOver: monitor.canDrop(handle) && monitor.isOver(handle),
       isOverShallow: monitor.canDrop(handle) && monitor.isOver(handle, true),
+      itemType: monitor.getItemType(),
       ref: (component) => backend.updateTargetNode(handle, findDOMNode(component))
     };
   }

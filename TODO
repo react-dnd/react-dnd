@@ -6,6 +6,7 @@
 * drag offsets and alignments
 * are we okay with this API for refs? ask people & see how that works with actual refs
 * conflicting backends: must be a nicer solution.
+* using initial state in observe(): bummer
 
 dnd-core
 * smarter canDrop()

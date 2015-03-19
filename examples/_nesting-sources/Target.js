@@ -1,17 +1,15 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes, createClass } from 'react';
 import Colors from './Colors';
-import { DragDropMixin } from 'react-dnd';
+import { DropTarget, ObservePolyfill } from 'react-dnd';
 
-function makeDropTarget(color) {
-  return {
-    acceptDrop(component) {
-      component.setState({
-        lastDroppedColor: color
-      });
-    }
-  };
+class ColorDropTarget extends DropTarget {
+  drop(monitor) {
+    this.component.setState({
+      lastDroppedColor: monitor.getItemType()
+    });
+  }
 }
 
 const style = {
@@ -22,20 +20,22 @@ const style = {
   textAlign: 'center'
 };
 
-const Target = React.createClass({
-  mixins: [DragDropMixin],
-
-  statics: {
-    configureDragDrop(register) {
-      register(Colors.YELLOW, {
-        dropTarget: makeDropTarget(Colors.YELLOW)
-      });
-
-      register(Colors.BLUE, {
-        dropTarget: makeDropTarget(Colors.BLUE)
-      });
-    }
+const Target = createClass({
+  contextTypes: {
+    dragDrop: PropTypes.object.isRequired
   },
+
+  mixins: [ObservePolyfill({
+    constructor() {
+      this.dropTarget = new ColorDropTarget(this);
+    },
+
+    observe() {
+      return {
+        dropTarget: this.dropTarget.connectTo(this.context.dragDrop, [Colors.YELLOW, Colors.BLUE])
+      };
+    }
+  })],
 
   getInitialState() {
     return {
@@ -45,30 +45,26 @@ const Target = React.createClass({
 
   render() {
     const { lastDroppedColor } = this.state;
-    const blueDropState = this.getDropState(Colors.BLUE);
-    const yellowDropState = this.getDropState(Colors.YELLOW);
-    const isDragging = blueDropState.isDragging || yellowDropState.isDragging;
-    const isHovering = blueDropState.isHovering || yellowDropState.isHovering;
-    const opacity = isHovering ? 1 : 0.7;
+    const { canDrop, isOver, itemType, ref } = this.state.data.dropTarget;
+    const opacity = isOver ? 1 : 0.7;
 
     let backgroundColor = '#fff';
-    if (blueDropState.isDragging) {
+    switch (itemType) {
+    case Colors.BLUE:
       backgroundColor = 'lightblue';
-    } else if (yellowDropState.isDragging) {
+      break;
+    case Colors.YELLOW:
       backgroundColor = 'lightgoldenrodyellow';
+      break;
     }
 
     return (
-      <div {...this.dropTargetFor(Colors.YELLOW, Colors.BLUE)}
-           style={{
-             ...style,
-             backgroundColor,
-             opacity
-           }}>
+      <div ref={ref}
+           style={{ ...style, backgroundColor, opacity }}>
 
         <p>Drop here.</p>
 
-        {!isDragging && lastDroppedColor &&
+        {!canDrop && lastDroppedColor &&
           <p>Last dropped: {lastDroppedColor}</p>
         }
       </div>
