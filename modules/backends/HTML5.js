@@ -77,9 +77,14 @@ export default class HTML5Backend {
     this.handleTopDragOverCapture = this.handleTopDragOverCapture.bind(this);
     this.handleTopDrop = this.handleTopDrop.bind(this);
     this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
+    this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
   }
 
   setup() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     window.addEventListener('dragstart', this.handleTopDragStart);
     window.addEventListener('dragstart', this.handleTopDragStartCapture, true);
     window.addEventListener('dragend', this.handleTopDragEnd);
@@ -95,6 +100,10 @@ export default class HTML5Backend {
   }
 
   teardown() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     window.removeEventListener('dragstart', this.handleTopDragStart);
     window.removeEventListener('dragstart', this.handleTopDragStartCapture, true);
     window.removeEventListener('dragend', this.handleTopDragEnd);
@@ -136,9 +145,39 @@ export default class HTML5Backend {
     this.actions.beginDrag(sourceHandle);
   }
 
+  endDragIfSourceWasRemovedFromDOM() {
+    const node = this.currentDragSourceNode;
+    if (document.body.contains(node)) {
+      return;
+    }
+
+    this.actions.endDrag();
+    this.clearCurrentDragSourceNode();
+  }
+
+  setCurrentDragSourceNode(node) {
+    this.clearCurrentDragSourceNode();
+    this.currentDragSourceNode = node;
+
+    // Receiving a mouse event in the middle of a dragging operation
+    // means it has ended and the drag source node disappeared from DOM,
+    // so the browser didn't dispatch the dragend event.
+    window.addEventListener('mousemove', this.endDragIfSourceWasRemovedFromDOM, true);
+  }
+
+  clearCurrentDragSourceNode() {
+    if (this.currentDragSourceNode) {
+      this.currentDragSourceNode = null;
+      window.removeEventListener('mousemove', this.endDragIfSourceWasRemovedFromDOM, true);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   handleTopDragStartCapture() {
+    this.clearCurrentDragSourceNode();
     this.dragStartSourceHandles = [];
-    this.dragStartOriginalTarget = null;
   }
 
   handleDragStart(e, sourceHandle) {
@@ -155,7 +194,11 @@ export default class HTML5Backend {
     let node = null;
     for (let i = 0; i < dragStartSourceHandles.length; i++) {
       [sourceHandle, node] = dragStartSourceHandles[i];
-      this.actions.beginDrag(sourceHandle);
+      // Pass false to keep drag source unpublished.
+      // We will publish it in the next tick so browser
+      // has time to screenshot current state and doesn't
+      // cancel drag if the source DOM node is removed.
+      this.actions.beginDrag(sourceHandle, false);
 
       if (this.monitor.isDragging()) {
         break;
@@ -170,7 +213,16 @@ export default class HTML5Backend {
       dataTransfer.setDragImage(node, ...dragOffset);
       dataTransfer.setData('application/json', {});
 
-      this.dragStartOriginalTarget = e.target;
+      // Store drag source node so we can check whether
+      // it is removed from DOM and trigger endDrag manually.
+      this.setCurrentDragSourceNode(e.target);
+
+      setTimeout(() => {
+        // By now, the browser has taken drag screenshot
+        // and we can safely let the drag source know it's active.
+        this.actions.publishDragSource();
+      });
+
     } else if (isUrlDataTransfer(dataTransfer)) {
       // URL dragged from inside the document
       this.beginDragNativeUrl();
@@ -181,15 +233,12 @@ export default class HTML5Backend {
   }
 
   handleTopDragEndCapture() {
-    if (!this.dragStartOriginalTarget) {
+    if (this.clearCurrentDragSourceNode()) {
       // Firefox can dispatch this event in an infinite loop
       // if dragend handler does something like showing an alert.
-      // Exit early if we know it has been handled.
-      return;
+      // Only proceed if we have not handled it already.
+      this.actions.endDrag();
     }
-
-    this.dragStartOriginalTarget = null;
-    this.actions.endDrag();
   }
 
   handleTopDragEnd() {
@@ -304,6 +353,8 @@ export default class HTML5Backend {
 
     if (this.isDraggingNativeItem()) {
       this.actions.endDrag();
+    } else {
+      this.endDragIfSourceWasRemovedFromDOM();
     }
   }
 
