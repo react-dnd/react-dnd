@@ -2,23 +2,24 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDropMixin } from 'react-dnd';
+import { DragSource, DropTarget, ObservePolyfill } from 'react-dnd';
 
-const dragSource = {
-  beginDrag(component) {
+class CardDragSource extends DragSource {
+  beginDrag() {
     return {
       item: {
-        id: component.props.id
+        id: this.component.props.id
       }
     };
   }
-};
+}
 
-const dropTarget = {
-  over(component, item) {
-    component.props.moveCard(item.id, component.props.id);
+class CardDropTarget extends DropTarget {
+  over(monitor) {
+    const item = monitor.getItem();
+    this.component.props.moveCard(item.id, this.component.props.id);
   }
-};
+}
 
 const style = {
   border: '1px dashed gray',
@@ -28,7 +29,23 @@ const style = {
 };
 
 const Card = React.createClass({
-  mixins: [DragDropMixin],
+  contextTypes: {
+    dragDrop: PropTypes.object.isRequired
+  },
+
+  mixins: [ObservePolyfill({
+    constructor() {
+      this.dragSource = new CardDragSource(this);
+      //this.dropTarget = new CardDropTarget(this);
+    },
+
+    observe() {
+      return {
+        dragSource: this.dragSource.connectTo(this.context.dragDrop, ItemTypes.CARD),
+        //dropTarget: this.dropTarget.connectTo(this.context.dragDrop, ItemTypes.CARD)
+      };
+    }
+  })],
 
   propTypes: {
     id: PropTypes.any.isRequired,
@@ -36,27 +53,19 @@ const Card = React.createClass({
     moveCard: PropTypes.func.isRequired
   },
 
-  statics: {
-    configureDragDrop(register) {
-      register(ItemTypes.CARD, {
-        dragSource,
-        dropTarget
-      });
-    }
-  },
-
   render() {
     const { text } = this.props;
-    const { isDragging } = this.getDragState(ItemTypes.CARD);
+
+    // TODO: refs totally suck here.
+    // Need to rethink this.
+
+    const { isDragging, ref: sourceRef } = this.state.data.dragSource;
+    //const { ref: targetRef } = this.state.data.dropTarget;
     const opacity = isDragging ? 0 : 1;
 
     return (
-      <div {...this.dragSourceFor(ItemTypes.CARD)}
-           {...this.dropTargetFor(ItemTypes.CARD)}
-           style={{
-             ...style,
-             opacity
-           }}>
+      <div ref={sourceRef}
+           style={{ ...style, opacity }}>
         {text}
       </div>
     );
