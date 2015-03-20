@@ -3,8 +3,13 @@
 import React from 'react';
 import update from 'react/lib/update';
 import Card from './Card';
+import { DragDropContext, HTML5Backend } from 'react-dnd';
 
 const Container = React.createClass({
+  mixins: [DragDropContext({
+    dragDrop: HTML5Backend
+  })],
+
   getInitialState() {
     return {
       cards: [{
