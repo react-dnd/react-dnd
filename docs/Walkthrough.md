@@ -60,7 +60,9 @@ var Image = React.createClass({
 
           beginDrag(component) {
             return {
-              item: component.props.image
+              item: {
+                image: component.props.image
+              }
             };
           }
         }
@@ -162,7 +164,9 @@ var ImageBlock = React.createClass({
 
           beginDrag(component) {
             return {
-              item: component.props.image
+              item: {
+                image: component.props.image
+              }
             };
           }
         },
