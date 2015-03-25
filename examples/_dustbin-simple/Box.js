@@ -2,24 +2,7 @@
 
 import React, { createClass, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragSource, ObservePolyfill } from 'react-dnd';
-
-class BoxDragSource extends DragSource {
-  beginDrag() {
-    return {
-      name: this.component.props.name
-    };
-  }
-
-  endDrag(monitor) {
-    const item = monitor.getItem();
-    const dropResult = monitor.getDropResult();
-
-    if (dropResult) {
-      window.alert(`You dropped ${item.name} into ${dropResult.name}!`);
-    }
-  }
-}
+import { configureDragDrop } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -31,24 +14,10 @@ const style = {
 
 const Box = createClass({
   propTypes: {
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    attachDragSource: PropTypes.bool.isRequired
   },
-
-  contextTypes: {
-    dragDrop: PropTypes.object.isRequired
-  },
-
-  mixins: [ObservePolyfill({
-    constructor() {
-      this.dragSource = new BoxDragSource(this);
-    },
-
-    observe() {
-      return {
-        dragSource: this.dragSource.connectTo(this.context.dragDrop, ItemTypes.BOX)
-      };
-    }
-  })],
 
   render() {
     const { isDragging, ref } = this.state.data.dragSource;
@@ -64,4 +33,29 @@ const Box = createClass({
   }
 });
 
-export default Box;
+const registerHandlers = (register, props) => ({
+  boxSource: register.dragSource(ItemTypes.BOX, {
+    beginDrag() {
+      return {
+        name: props.name
+      };
+    },
+
+    endDrag(monitor) {
+      const item = monitor.getItem();
+      const dropResult = monitor.getDropResult();
+
+      if (dropResult) {
+        window.alert(`You dropped ${item.name} into ${dropResult.name}!`);
+      }
+    }
+  })
+});
+
+const pickProps = (attach, monitor, { boxSource }) => ({
+  attachDragSource: (node) => attach(boxSource, node),
+  isOver: monitor.isOver(boxSource),
+  canDrop: monitor.canDrop(boxSource)
+});
+
+export default configureDragDrop(Box, registerHandlers, pickProps);
