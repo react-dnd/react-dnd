@@ -44,21 +44,19 @@ class Dustbin extends Component {
 Dustbin.propTypes = propTypes;
 
 export default configureDragDrop(Dustbin, {
-  getHandlers(props, register) {
-    return {
-      boxTarget: register.dropTarget(ItemTypes.BOX, {
-        drop() {
-          return { name: 'Dustbin' };
-        }
-      })
-    };
+  getHandlers(props, sourceFor, targetFor) {
+    return targetFor(ItemTypes.BOX, {
+      drop() {
+        return { name: 'Dustbin' };
+      }
+    });
   },
 
-  getProps(connect, monitor, handlers) {
+  getProps(connect, monitor, target) {
     return {
-      connectDropTarget: connect(handlers.boxTarget),
-      isOver: monitor.isOver(handlers.boxTarget),
-      canDrop: monitor.canDrop(handlers.boxTarget)
+      connectDropTarget: connect(target),
+      isOver: monitor.isOver(target),
+      canDrop: monitor.canDrop(target)
     };
   }
 });
