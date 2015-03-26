@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { PropTypes, createClass } from 'react';
+import React, { PropTypes, Component } from 'react';
 import ItemTypes from './ItemTypes';
 import { configureDragDrop } from 'react-dnd';
 
@@ -12,13 +12,13 @@ const style = {
   textAlign: 'center'
 };
 
-const Dustbin = createClass({
-  propTypes: {
-    isOver: PropTypes.bool.isRequired,
-    canDrop: PropTypes.bool.isRequired,
-    attachDropTarget: PropTypes.func.isRequired
-  },
+const propTypes = {
+  isOver: PropTypes.bool.isRequired,
+  canDrop: PropTypes.bool.isRequired,
+  attachDropTarget: PropTypes.func.isRequired
+};
 
+class Dustbin extends Component {
   render() {
     const { canDrop, isOver, attachDropTarget } = this.props;
     const isActive = canDrop && isOver;
@@ -40,7 +40,8 @@ const Dustbin = createClass({
       </div>
     );
   }
-});
+}
+Dustbin.propTypes = propTypes;
 
 const boxTarget = {
   drop() {

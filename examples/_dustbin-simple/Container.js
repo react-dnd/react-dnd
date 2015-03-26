@@ -1,35 +1,32 @@
 'use strict';
 
-import React, { PropTypes, createClass } from 'react';
+import React, { PropTypes, Component } from 'react';
+import { configureDragDropContext, DragDropContext, HTML5Backend } from 'react-dnd';
 import Dustbin from './Dustbin';
 import Box from './Box';
-import { DragDropContext, HTML5Backend } from 'react-dnd';
 import shuffle from 'lodash/collection/shuffle';
 
-const Container = createClass({
-  mixins: [DragDropContext({
-    dragDrop: HTML5Backend
-  })],
-
-  getInitialState() {
-    return {
+class Container extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       boxes: ['Glass', 'Banana', 'Paper']
     };
-  },
+  }
 
   componentDidMount() {
     this.interval = setInterval(() => this.shuffleBoxes(), 1000);
-  },
+  }
 
   shuffleBoxes() {
     this.setState({
       boxes: shuffle(this.state.boxes)
     });
-  },
+  }
 
   componentWillUnmount() {
     clearInterval(this.interval);
-  },
+  }
 
   render() {
     return (
@@ -41,6 +38,6 @@ const Container = createClass({
       </div>
     );
   }
-});
+}
 
-export default Container;
+export default configureDragDropContext(Container, HTML5Backend);

@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { createClass, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
 import { configureDragDrop } from 'react-dnd';
 
@@ -12,13 +12,13 @@ const style = {
   maxWidth: 80
 };
 
-const Box = createClass({
-  propTypes: {
-    name: PropTypes.string.isRequired,
-    isDragging: PropTypes.bool.isRequired,
-    attachDragSource: PropTypes.func.isRequired
-  },
+const propTypes = {
+  name: PropTypes.string.isRequired,
+  isDragging: PropTypes.bool.isRequired,
+  attachDragSource: PropTypes.func.isRequired
+};
 
+class Box extends Component {
   render() {
     const { isDragging, attachDragSource } = this.props;
     const { name } = this.props;
@@ -31,7 +31,8 @@ const Box = createClass({
       </div>
     );
   }
-});
+}
+Box.propTypes = propTypes;
 
 function makeBoxSource(props) {
   return {

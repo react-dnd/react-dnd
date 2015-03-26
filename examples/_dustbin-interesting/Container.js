@@ -1,20 +1,17 @@
 'use strict';
 
-import React, { createClass } from 'react';
+import React, { Component } from 'react';
+import { configureDragDropContext, HTML5Backend, NativeTypes } from 'react-dnd';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
-import { DragDropContext, HTML5Backend, NativeTypes } from 'react-dnd';
 import shuffle from 'lodash/collection/shuffle';
 import update from 'react/lib/update';
 
-const Container = createClass({
-  mixins: [DragDropContext({
-    dragDrop: HTML5Backend
-  })],
-
-  getInitialState() {
-    return {
+class Container extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       dustbins: [
         { accepts: [ItemTypes.GLASS], lastDroppedItem: null },
         { accepts: [ItemTypes.FOOD], lastDroppedItem: null },
@@ -28,26 +25,26 @@ const Container = createClass({
       ],
       droppedBoxNames: []
     };
-  },
+  }
 
   componentDidMount() {
     this.interval = setInterval(() => this.tickTock(), 1000);
-  },
+  }
 
   tickTock() {
     this.setState({
       boxes: shuffle(this.state.boxes),
       dustbins: shuffle(this.state.dustbins)
     });
-  },
+  }
 
   componentWillUnmount() {
     clearInterval(this.interval);
-  },
+  }
 
   isDropped(boxName) {
     return this.state.droppedBoxNames.indexOf(boxName) > -1;
-  },
+  }
 
   render() {
     const { boxes, dustbins } = this.state;
@@ -71,7 +68,7 @@ const Container = createClass({
         </div>
       </div>
     );
-  },
+  }
 
   handleDrop(index, item) {
     const { name } = item;
@@ -89,6 +86,6 @@ const Container = createClass({
       } : {}
     }));
   }
-});
+}
 
-export default Container;
+export default configureDragDropContext(Container, HTML5Backend);
