@@ -5,6 +5,8 @@ import assign from 'lodash/object/assign';
 import invariant from 'react/lib/invariant';
 import shallowEqual from 'react/lib/shallowEqual';
 
+const DEFAULT_KEY = '__default__';
+
 export default function configureDragDrop(InnerComponent, { getHandlers, getProps, managerName = 'dragDropManager' }) {
   class DragDropContainer extends Component {
     constructor(props, context) {
@@ -50,15 +52,24 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
     }
 
     getNextHandlers(props) {
-      return getHandlers(props, {
-        dragSource(type, spec) {
-          return new ComponentDragSource(type, spec, props);
-        },
+      function sourceFor(type, spec) {
+        return new ComponentDragSource(type, spec, props);
+      }
 
-        dropTarget(type, spec) {
-          return new ComponentDropTarget(type, spec, props);
-        }
-      });
+      function targetFor(type, spec) {
+        return new ComponentDropTarget(type, spec, props);
+      }
+
+      let handlers = getHandlers(props, sourceFor, targetFor);
+      if (handlers instanceof ComponentDragSource ||
+          handlers instanceof ComponentDropTarget
+      ) {
+        handlers = {
+          [DEFAULT_KEY]: handlers
+        };
+      }
+
+      return handlers;
     }
 
     attachHandlers(handlers) {
@@ -158,7 +169,13 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
 
     getCurrentState() {
       const monitor = this.manager.getMonitor();
-      return getProps(this.connectTo, monitor, this.handles);
+
+      let handles = this.handles;
+      if (handles[DEFAULT_KEY]) {
+        handles = handles[DEFAULT_KEY];
+      }
+
+      return getProps(this.connectTo, monitor, handles);
     }
 
     render() {

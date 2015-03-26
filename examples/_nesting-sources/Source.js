@@ -51,24 +51,22 @@ class Source extends Component {
 Source.propTypes = propTypes;
 
 const DraggableSource = configureDragDrop(Source, {
-  getHandlers(props, register) {
-    return {
-      colorSource: register.dragSource(props.color, {
-        canDrag(props) {
-          return !props.forbidDrag;
-        },
+  getHandlers(props, sourceFor) {
+    return sourceFor(props.color, {
+      canDrag(props) {
+        return !props.forbidDrag;
+      },
 
-        beginDrag() {
-          return { };
-        }
-      })
-    };
+      beginDrag() {
+        return { };
+      }
+    });
   },
 
-  getProps(connect, monitor, handlers) {
+  getProps(connect, monitor, source) {
     return {
-      connectDragSource: connect(handlers.colorSource),
-      isDragging: monitor.isDragging(handlers.colorSource)
+      connectDragSource: connect(source),
+      isDragging: monitor.isDragging(source)
     };
   }
 });
