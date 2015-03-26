@@ -7,6 +7,7 @@
 * make sure missing methods are OK
 * make sure we don't screw server rendering (NoopBackend?)
 * export methods for verifying validness from dnd-core
+* make perf (shouldComponentUpdate) configurable
 
 dnd-core
 * smarter canDrop()
