@@ -1,15 +1,7 @@
 'use strict';
 
 import React, { PropTypes, createClass } from 'react';
-import { DropTarget, ObservePolyfill } from 'react-dnd';
-
-class DustbinDropTarget extends DropTarget {
-  drop(monitor) {
-    this.component.setState({
-      lastDroppedItem: monitor.getItem()
-    });
-  }
-}
+import { configureDragDrop } from 'react-dnd';
 
 const style = {
   height: '12rem',
@@ -23,48 +15,30 @@ const style = {
 
 const Dustbin = createClass({
   propTypes: {
-    accepts: PropTypes.arrayOf(PropTypes.string).isRequired
-  },
-
-  contextTypes: {
-    dragDrop: PropTypes.object.isRequired
-  },
-
-  mixins: [ObservePolyfill({
-    constructor() {
-      this.dropTarget = new DustbinDropTarget(this);
-    },
-
-    observe() {
-      return {
-        dropTarget: this.dropTarget.connectTo(this.context.dragDrop, this.props.accepts)
-      };
-    }
-  })],
-
-  getInitialState() {
-    return {
-      lastDroppedItem: null
-    };
+    accepts: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isOver: PropTypes.bool.isRequired,
+    canDrop: PropTypes.bool.isRequired,
+    attachDropTarget: PropTypes.func.isRequired,
+    lastDroppedItem: PropTypes.object,
+    onDrop: PropTypes.func.isRequired
   },
 
   render() {
-    const { accepts } = this.props;
-    const { lastDroppedItem } = this.state;
-    const { isOver, canDrop, ref } = this.state.data.dropTarget;
+    const { accepts, isOver, canDrop, attachDropTarget, lastDroppedItem } = this.props;
+    const isActive = isOver && canDrop;
 
     let backgroundColor = '#222';
-    if (isOver) {
+    if (isActive) {
       backgroundColor = 'darkgreen';
     } else if (canDrop) {
       backgroundColor = 'darkkhaki';
     }
 
     return (
-      <div ref={ref}
+      <div ref={attachDropTarget}
            style={{ ...style, backgroundColor }}>
 
-        {isOver ?
+        {isActive ?
           'Release to drop' :
           'This dustbin accepts: ' + accepts.join(', ')
         }
@@ -77,4 +51,26 @@ const Dustbin = createClass({
   }
 });
 
-export default Dustbin;
+function createDustbinTarget(props) {
+  return {
+    drop(monitor) {
+      props.onDrop(monitor.getItem());
+    }
+  };
+}
+
+function registerHandlers(props, register) {
+  return {
+    dustbinTarget: register.dropTarget(props.accepts, createDustbinTarget(props))
+  };
+}
+
+function pickProps(attach, monitor, handlers) {
+  return {
+    isOver: monitor.isOver(handlers.dustbinTarget),
+    canDrop: monitor.canDrop(handlers.dustbinTarget),
+    attachDropTarget: ref => attach(handlers.dustbinTarget, ref)
+  };
+}
+
+export default configureDragDrop(Dustbin, registerHandlers, pickProps);

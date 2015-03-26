@@ -16,10 +16,10 @@ const Container = createClass({
   getInitialState() {
     return {
       dustbins: [
-        [ItemTypes.GLASS],
-        [ItemTypes.FOOD],
-        [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL],
-        [ItemTypes.PAPER, NativeTypes.FILE]
+        { accepts: [ItemTypes.GLASS], lastDroppedItem: null },
+        { accepts: [ItemTypes.FOOD], lastDroppedItem: null },
+        { accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL], lastDroppedItem: null },
+        { accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null }
       ],
       boxes: [
         { name: 'Bottle', type: ItemTypes.GLASS },
@@ -55,8 +55,10 @@ const Container = createClass({
     return (
       <div>
         <div style={{minHeight: '14rem'}}>
-          {dustbins.map(accepts =>
-            <Dustbin accepts={accepts} />
+          {dustbins.map(({ accepts, lastDroppedItem }, index) =>
+            <Dustbin accepts={accepts}
+                     lastDroppedItem={lastDroppedItem}
+                     onDrop={(item) => this.handleDrop(index, item)} />
           )}
         </div>
 
@@ -64,23 +66,27 @@ const Container = createClass({
           {boxes.map(({ name, type }) =>
             <Box name={name}
                  type={type}
-                 isDropped={this.isDropped(name)}
-                 onDrop={this.handleDrop} />
+                 isDropped={this.isDropped(name)} />
           )}
         </div>
       </div>
     );
   },
 
-  handleDrop(boxName) {
-    if (this.isDropped(boxName)) {
-      return;
-    }
+  handleDrop(index, item) {
+    const { name } = item;
 
     this.setState(update(this.state, {
-      droppedBoxNames: {
-        $push: [boxName]
-      }
+      dustbins: {
+        [index]: {
+          lastDroppedItem: {
+            $set: item
+          }
+        }
+      },
+      droppedBoxNames: name ? {
+        $push: [name]
+      } : {}
     }));
   }
 });
