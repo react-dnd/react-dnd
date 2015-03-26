@@ -271,7 +271,6 @@ export default class HTML5Backend {
 
   handleDragOver(e, targetHandle) {
     this.dragOverTargetHandles.unshift(targetHandle);
-    this.actions.hover(this.dragEnterTargetHandles);
   }
 
   handleTopDragOver(e) {
@@ -314,7 +313,6 @@ export default class HTML5Backend {
 
   handleDragEnter(e, targetHandle) {
     this.dragEnterTargetHandles.unshift(targetHandle);
-    this.actions.hover(this.dragEnterTargetHandles);
   }
 
   handleTopDragEnter(e) {

@@ -36,6 +36,14 @@ export default class ComponentDropTarget extends DropTarget {
     }
   }
 
+  hover(...args) {
+    if (this.spec.hover) {
+      return this.spec.hover.call(null, this.props, ...args);
+    } else {
+      return super.hover(...args);
+    }
+  }
+
   drop(...args) {
     if (this.spec.drop) {
       return this.spec.drop.call(null, this.props, ...args);

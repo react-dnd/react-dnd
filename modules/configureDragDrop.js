@@ -6,6 +6,7 @@ import invariant from 'react/lib/invariant';
 import shallowEqual from 'react/lib/shallowEqual';
 
 const DEFAULT_KEY = '__default__';
+const HANDLE_SEPARATOR = '🍣';
 
 export default function configureDragDrop(InnerComponent, { getHandlers, getProps, managerName = 'dragDropManager' }) {
   class DragDropContainer extends Component {
@@ -14,6 +15,7 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
 
       this.handleChange = this.handleChange.bind(this);
       this.connectRefTo = this.connectRefTo.bind(this);
+      this.memoizedConnectRefTo = {};
 
       this.manager = context[managerName];
       this.handles = {};
@@ -42,6 +44,8 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
       const monitor = this.manager.getMonitor();
       monitor.removeChangeListener(this.handleChange);
       this.detachHandlers();
+
+      this.memoizedConnectRefTo = {};
     }
 
     handleChange() {
@@ -150,23 +154,30 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
     }
 
     connectRefTo(...handles) {
-      const manager = this.manager;
+      const key = handles.join(HANDLE_SEPARATOR);
 
-      return function (ref) {
-        const node = findDOMNode(ref);
-        const backend = manager.getBackend();
-        const registry = manager.getRegistry();
-
-        handles.forEach(handle => {
-          if (registry.isSourceHandle(handle)) {
-            backend.updateSourceNode(handle, node);
-          } else if (registry.isTargetHandle(handle)) {
-            backend.updateTargetNode(handle, node);
-          } else {
-            invariant(false, 'Handle is neither a source nor a target.');
-          }
-        });
+      if (!this.memoizedConnectRefTo[key]) {
+        this.memoizedConnectRefTo[key] = this.connectRefToHandles.bind(this, handles);
       }
+
+      return this.memoizedConnectRefTo[key];
+    }
+
+    connectRefToHandles(handles, ref) {
+      const manager = this.manager;
+      const node = findDOMNode(ref);
+      const backend = manager.getBackend();
+      const registry = manager.getRegistry();
+
+      handles.forEach(handle => {
+        if (registry.isSourceHandle(handle)) {
+          backend.updateSourceNode(handle, node);
+        } else if (registry.isTargetHandle(handle)) {
+          backend.updateTargetNode(handle, node);
+        } else {
+          invariant(false, 'Handle is neither a source nor a target.');
+        }
+      });
     }
 
     getCurrentState() {
