@@ -52,17 +52,15 @@ class Dustbin extends Component {
 }
 Dustbin.propTypes = propTypes;
 
-function createDustbinTarget(props) {
-  return {
-    drop(monitor) {
-      props.onDrop(monitor.getItem());
-    }
-  };
-}
+const dustbinTarget = {
+  drop(props, monitor) {
+    props.onDrop(monitor.getItem());
+  }
+};
 
 function registerHandlers(props, register) {
   return {
-    dustbinTarget: register.dropTarget(props.accepts, createDustbinTarget(props))
+    dustbinTarget: register.dropTarget(props.accepts, dustbinTarget)
   };
 }
 

@@ -34,28 +34,26 @@ class Box extends Component {
 }
 Box.propTypes = propTypes;
 
-function makeBoxSource(props) {
-  return {
-    beginDrag() {
-      return {
-        name: props.name
-      };
-    },
+const boxSource = {
+  beginDrag(props) {
+    return {
+      name: props.name
+    };
+  },
 
-    endDrag(monitor) {
-      const item = monitor.getItem();
-      const dropResult = monitor.getDropResult();
+  endDrag(props, monitor) {
+    const item = monitor.getItem();
+    const dropResult = monitor.getDropResult();
 
-      if (dropResult) {
-        window.alert(`You dropped ${item.name} into ${dropResult.name}!`);
-      }
+    if (dropResult) {
+      window.alert(`You dropped ${item.name} into ${dropResult.name}!`);
     }
-  };
-}
+  }
+};
 
 function registerHandlers(props, register) {
   return {
-    boxSource: register.dragSource(ItemTypes.BOX, makeBoxSource(props))
+    boxSource: register.dragSource(ItemTypes.BOX, boxSource)
   };
 }
 
