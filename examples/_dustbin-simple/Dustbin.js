@@ -50,7 +50,7 @@ const registerHandlers = (register) => ({
 });
 
 const pickProps = (attach, monitor, handlers) => ({
-  attachDropTarget: (node) => attach(handlers.boxTarget, node),
+  attachDropTarget: (ref) => attach(handlers.boxTarget, ref),
   isOver: monitor.isOver(handlers.boxTarget),
   canDrop: monitor.canDrop(handlers.boxTarget)
 });

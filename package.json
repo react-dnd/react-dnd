@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/gaearon/react-dnd",
   "dependencies": {
-    "dnd-core": "^0.5.4",
+    "dnd-core": "^0.5.5",
     "flux": "^2.0.1",
     "lodash": "^3.1.0",
     "react-router": "git://github.com/gaearon/react-router.git#13"
