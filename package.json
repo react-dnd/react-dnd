@@ -34,7 +34,6 @@
     "dnd-core": "^0.5.5",
     "flux": "^2.0.1",
     "lodash": "^3.1.0",
-    "react-router": "git://github.com/gaearon/react-router.git#13"
   },
   "peerDependencies": {
     "react": ">=0.12.0 <0.14.0"
@@ -46,7 +45,7 @@
     "path": "0.4.9",
     "react": "0.13.0",
     "react-hot-loader": "^1.2.3",
-    "react-router": "0.12.x",
+    "react-router": "^0.13.2",
     "request": "2.46.0",
     "webpack": "^1.7.3",
     "webpack-dev-server": "^1.7.0"

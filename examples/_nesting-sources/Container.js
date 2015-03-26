@@ -4,13 +4,9 @@ import React from 'react';
 import Source from './Source';
 import Colors from './Colors';
 import Target from './Target';
-import { DragDropContext, HTML5Backend } from 'react-dnd';
+import { configureDragDropContext, HTML5Backend } from 'react-dnd';
 
-const Container = React.createClass({
-  mixins: [DragDropContext({
-    dragDrop: HTML5Backend
-  })],
-
+class Container {
   render() {
     return (
       <div style={{ height: 320 }}>
@@ -32,6 +28,8 @@ const Container = React.createClass({
       </div>
     );
   }
-});
+}
 
-export default Container;
+export default configureDragDropContext(Container, {
+  backend: HTML5Backend
+});

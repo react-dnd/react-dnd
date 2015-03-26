@@ -51,17 +51,17 @@ const boxSource = {
   }
 };
 
-function registerHandlers(props, register) {
-  return {
-    boxSource: register.dragSource(ItemTypes.BOX, boxSource)
-  };
-}
+export default configureDragDrop(Box, {
+  getHandlers(props, register) {
+    return {
+      boxSource: register.dragSource(ItemTypes.BOX, boxSource)
+    };
+  },
 
-function pickProps(attach, monitor, handlers) {
-  return {
-    attachDragSource: (ref) => attach(handlers.boxSource, ref),
-    isDragging: monitor.isDragging(handlers.boxSource)
-  };
-}
-
-export default configureDragDrop(Box, registerHandlers, pickProps);
+  getProps(attach, monitor, handlers) {
+    return {
+      attachDragSource: (ref) => attach(handlers.boxSource, ref),
+      isDragging: monitor.isDragging(handlers.boxSource)
+    };
+  }
+});

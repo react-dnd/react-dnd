@@ -5,13 +5,13 @@ import assign from 'lodash/object/assign';
 import invariant from 'react/lib/invariant';
 import shallowEqual from 'react/lib/shallowEqual';
 
-export default function configureDragDrop(InnerComponent, registerHandlers, pickProps, contextProp = 'dragDropManager') {
+export default function configureDragDrop(InnerComponent, { getHandlers, getProps, managerName = 'dragDropManager' }) {
   class DragDropContainer extends Component {
     constructor(props, context) {
       super(props);
 
       this.handleChange = this.handleChange.bind(this);
-      this.manager = context[contextProp];
+      this.manager = context[managerName];
       this.handles = {};
       this.handlers = {};
 
@@ -48,7 +48,7 @@ export default function configureDragDrop(InnerComponent, registerHandlers, pick
     }
 
     getNextHandlers(props) {
-      return registerHandlers(props, {
+      return getHandlers(props, {
         dragSource(type, spec) {
           return new ComponentDragSource(type, spec, props);
         },
@@ -153,7 +153,7 @@ export default function configureDragDrop(InnerComponent, registerHandlers, pick
         }
       }
 
-      return pickProps(attach, monitor, this.handles);
+      return getProps(attach, monitor, this.handles);
     }
 
     render() {
@@ -162,7 +162,7 @@ export default function configureDragDrop(InnerComponent, registerHandlers, pick
   }
 
   DragDropContainer.contextTypes = {
-    [contextProp]: PropTypes.object.isRequired
+    [managerName]: PropTypes.object.isRequired
   };
 
   return DragDropContainer;

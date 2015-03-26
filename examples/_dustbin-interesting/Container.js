@@ -88,4 +88,6 @@ class Container extends Component {
   }
 }
 
-export default configureDragDropContext(Container, HTML5Backend);
+export default configureDragDropContext(Container, {
+  backend: HTML5Backend
+});

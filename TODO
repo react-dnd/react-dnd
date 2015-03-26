@@ -7,6 +7,8 @@
 * make sure missing methods are OK
 * make sure we don't screw server rendering (NoopBackend?)
 * export methods for verifying validness from dnd-core
+* make simple case less verbose
+* nicer attach API
 
 dnd-core
 * smarter canDrop()
