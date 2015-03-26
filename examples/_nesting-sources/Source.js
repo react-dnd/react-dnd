@@ -1,20 +1,9 @@
 'use strict';
 
-import React, { createClass, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import LinkedStateMixin from 'react/lib/LinkedStateMixin';
 import Colors from './Colors';
-import { DragSource, ObservePolyfill } from 'react-dnd';
-
-class ColorDragSource extends DragSource {
-  canDrag() {
-    var { state } = this.component;
-    return state && !state.forbidDrag || false;
-  }
-
-  beginDrag() {
-    return { };
-  }
-}
+import { configureDragDrop } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -22,36 +11,17 @@ const style = {
   margin: '0.5rem'
 };
 
-const Source = createClass({
-  propTypes: {
-    color: PropTypes.string.isRequired
-  },
+const propTypes = {
+  color: PropTypes.string.isRequired,
+  isDragging: PropTypes.bool.isRequired,
+  forbidDrag: PropTypes.bool.isRequired,
+  onToggleForbidDrag: PropTypes.func.isRequired,
+  attachDragSource: PropTypes.func.isRequired
+};
 
-  contextTypes: {
-    dragDrop: PropTypes.object.isRequired
-  },
-
-  mixins: [LinkedStateMixin, ObservePolyfill({
-    constructor() {
-      this.dragSource = new ColorDragSource(this);
-    },
-
-    observe() {
-      return {
-        dragSource: this.dragSource.connectTo(this.context.dragDrop, this.props.color)
-      };
-    }
-  })],
-
-  getInitialState() {
-    return {
-      forbidDrag: false
-    };
-  },
-
+class Source extends Component {
   render() {
-    const { color, children } = this.props;
-    const { isDragging, ref } = this.state.data.dragSource;
+    const { color, children, isDragging, attachDragSource, forbidDrag, onToggleForbidDrag } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     let backgroundColor;
@@ -65,10 +35,11 @@ const Source = createClass({
     }
 
     return (
-      <div ref={ref}
+      <div ref={attachDragSource}
            style={{ ...style, backgroundColor, opacity }}>
         <input type='checkbox'
-               checkedLink={this.linkState('forbidDrag')}>
+               checked={forbidDrag}
+               onChange={onToggleForbidDrag}>
           Forbid drag
         </input>
 
@@ -76,6 +47,51 @@ const Source = createClass({
       </div>
     );
   }
+}
+Source.propTypes = propTypes;
+
+const DraggableSource = configureDragDrop(Source, {
+  getHandlers(props, register) {
+    return {
+      colorSource: register.dragSource(props.color, {
+        canDrag(props) {
+          return !props.forbidDrag;
+        },
+
+        beginDrag() {
+          return { };
+        }
+      })
+    };
+  },
+
+  getProps(attach, monitor, handlers) {
+    return {
+      attachDragSource: (ref) => attach(handlers.colorSource, ref),
+      isDragging: monitor.isDragging(handlers.colorSource)
+    };
+  }
 });
 
-export default Source;
+export default class StatefulSource extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      forbidDrag: false
+    };
+  }
+
+  render() {
+    return (
+      <DraggableSource {...this.props}
+                       forbidDrag={this.state.forbidDrag}
+                       onToggleForbidDrag={() => this.handleToggleForbidDrag()} />
+    );
+  }
+
+  handleToggleForbidDrag() {
+    this.setState({
+      forbidDrag: !this.state.forbidDrag
+    });
+  }
+}

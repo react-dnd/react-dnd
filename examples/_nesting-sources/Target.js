@@ -1,16 +1,8 @@
 'use strict';
 
-import React, { PropTypes, createClass } from 'react';
+import React, { PropTypes, Component } from 'react';
+import { configureDragDrop } from 'react-dnd';
 import Colors from './Colors';
-import { DropTarget, ObservePolyfill } from 'react-dnd';
-
-class ColorDropTarget extends DropTarget {
-  drop(monitor) {
-    this.component.setState({
-      lastDroppedColor: monitor.getItemType()
-    });
-  }
-}
 
 const style = {
   border: '1px dashed gray',
@@ -20,36 +12,22 @@ const style = {
   textAlign: 'center'
 };
 
-const Target = createClass({
-  contextTypes: {
-    dragDrop: PropTypes.object.isRequired
-  },
+const propTypes = {
+  isOver: PropTypes.bool.isRequired,
+  canDrop: PropTypes.bool.isRequired,
+  draggingColor: PropTypes.string,
+  lastDroppedColor: PropTypes.string,
+  attachDropTarget: PropTypes.func.isRequired,
+  onDrop: PropTypes.func.isRequired
+}
 
-  mixins: [ObservePolyfill({
-    constructor() {
-      this.dropTarget = new ColorDropTarget(this);
-    },
-
-    observe() {
-      return {
-        dropTarget: this.dropTarget.connectTo(this.context.dragDrop, [Colors.YELLOW, Colors.BLUE])
-      };
-    }
-  })],
-
-  getInitialState() {
-    return {
-      lastDroppedColor: null
-    };
-  },
-
+class Target extends Component {
   render() {
-    const { lastDroppedColor } = this.state;
-    const { canDrop, isOver, itemType, ref } = this.state.data.dropTarget;
+    const { canDrop, isOver, draggingColor, lastDroppedColor, attachDropTarget } = this.props;
     const opacity = isOver ? 1 : 0.7;
 
     let backgroundColor = '#fff';
-    switch (itemType) {
+    switch (draggingColor) {
     case Colors.BLUE:
       backgroundColor = 'lightblue';
       break;
@@ -59,7 +37,7 @@ const Target = createClass({
     }
 
     return (
-      <div ref={ref}
+      <div ref={attachDropTarget}
            style={{ ...style, backgroundColor, opacity }}>
 
         <p>Drop here.</p>
@@ -70,6 +48,45 @@ const Target = createClass({
       </div>
     );
   }
+}
+Target.propTypes = propTypes;
+
+const DraggableTarget = configureDragDrop(Target, {
+  getHandlers(props, register) {
+    return {
+      colorTarget: register.dropTarget([Colors.YELLOW, Colors.BLUE], {
+        drop(props, monitor) {
+          props.onDrop(monitor.getItemType());
+        }
+      })
+    }
+  },
+
+  getProps(attach, monitor, handlers) {
+    return {
+      attachDropTarget: (ref) => attach(handlers.colorTarget, ref),
+      isOver: monitor.isOver(handlers.colorTarget),
+      canDrop: monitor.canDrop(handlers.colorTarget),
+      draggingColor: monitor.getItemType()
+    };
+  }
 });
 
-export default Target;
+export default class StatefulTarget extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { lastDroppedColor: null };
+  }
+
+  render() {
+    return <DraggableTarget {...this.props}
+                            lastDroppedColor={this.state.lastDroppedColor}
+                            onDrop={color => this.handleDrop(color)} />
+  }
+
+  handleDrop(color) {
+    this.setState({
+      lastDroppedColor: color
+    });
+  }
+}

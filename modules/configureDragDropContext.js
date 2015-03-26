@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 
-export default function configureDragDropContext(InnerComponent, Backend, contextProp = 'dragDropManager') {
-  const manager = new DragDropManager(Backend);
+export default function configureDragDropContext(InnerComponent, { backend, managerName = 'dragDropManager' }) {
+  const manager = new DragDropManager(backend);
 
   class DragDropContext extends Component {
     getChildContext() {
       return {
-        [contextProp]: manager
+        [managerName]: manager
       };
     }
 
@@ -17,7 +17,7 @@ export default function configureDragDropContext(InnerComponent, Backend, contex
   }
 
   DragDropContext.childContextTypes = {
-    [contextProp]: PropTypes.object.isRequired
+    [managerName]: PropTypes.object.isRequired
   };
 
   return DragDropContext;
