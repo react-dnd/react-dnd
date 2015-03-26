@@ -5,12 +5,13 @@ import isArray from 'lodash/lang/isArray';
 import isObject from 'lodash/lang/isObject';
 
 export default class ComponentDropTarget extends DropTarget {
-  constructor(type, spec) {
+  constructor(type, spec, props) {
     invariant(isString(type) || isArray(type), 'Expected type to be a string or an array.');
     invariant(isObject(spec), 'Expected spec to be an object.');
 
     this.type = type;
     this.spec = spec;
+    this.props = props;
   }
 
   receive(handler) {
@@ -23,12 +24,13 @@ export default class ComponentDropTarget extends DropTarget {
     }
 
     this.spec = handler.spec;
+    this.props = handler.props;
     return true;
   }
 
   canDrop(...args) {
     if (this.spec.canDrop) {
-      return this.spec.canDrop.apply(null, args);
+      return this.spec.canDrop.call(null, this.props, ...args);
     } else {
       return super.canDrop(...args);
     }
@@ -36,7 +38,7 @@ export default class ComponentDropTarget extends DropTarget {
 
   drop(...args) {
     if (this.spec.drop) {
-      return this.spec.drop.apply(null, args);
+      return this.spec.drop.call(null, this.props, ...args);
     } else {
       return super.drop(...args);
     }

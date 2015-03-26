@@ -50,11 +50,11 @@ export default function configureDragDrop(InnerComponent, registerHandlers, pick
     getNextHandlers(props) {
       return registerHandlers(props, {
         dragSource(type, spec) {
-          return new ComponentDragSource(type, spec);
+          return new ComponentDragSource(type, spec, props);
         },
 
         dropTarget(type, spec) {
-          return new ComponentDropTarget(type, spec);
+          return new ComponentDropTarget(type, spec, props);
         }
       });
     }
