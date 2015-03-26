@@ -16,16 +16,16 @@ const Box = createClass({
   propTypes: {
     name: PropTypes.string.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    attachDragSource: PropTypes.bool.isRequired
+    attachDragSource: PropTypes.func.isRequired
   },
 
   render() {
-    const { isDragging, ref } = this.state.data.dragSource;
+    const { isDragging, attachDragSource } = this.props;
     const { name } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div ref={ref}
+      <div ref={attachDragSource}
            style={{ ...style, opacity }}>
         {name}
       </div>
@@ -52,10 +52,9 @@ const registerHandlers = (register, props) => ({
   })
 });
 
-const pickProps = (attach, monitor, { boxSource }) => ({
-  attachDragSource: (node) => attach(boxSource, node),
-  isOver: monitor.isOver(boxSource),
-  canDrop: monitor.canDrop(boxSource)
+const pickProps = (attach, monitor, handlers) => ({
+  attachDragSource: (ref) => attach(handlers.boxSource, ref),
+  isDragging: monitor.isDragging(handlers.boxSource)
 });
 
 export default configureDragDrop(Box, registerHandlers, pickProps);
