@@ -16,12 +16,12 @@ const propTypes = {
   isDragging: PropTypes.bool.isRequired,
   forbidDrag: PropTypes.bool.isRequired,
   onToggleForbidDrag: PropTypes.func.isRequired,
-  attachDragSource: PropTypes.func.isRequired
+  connectDragSource: PropTypes.func.isRequired
 };
 
 class Source extends Component {
   render() {
-    const { color, children, isDragging, attachDragSource, forbidDrag, onToggleForbidDrag } = this.props;
+    const { color, children, isDragging, connectDragSource, forbidDrag, onToggleForbidDrag } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     let backgroundColor;
@@ -35,7 +35,7 @@ class Source extends Component {
     }
 
     return (
-      <div ref={attachDragSource}
+      <div ref={connectDragSource}
            style={{ ...style, backgroundColor, opacity }}>
         <input type='checkbox'
                checked={forbidDrag}
@@ -65,9 +65,9 @@ const DraggableSource = configureDragDrop(Source, {
     };
   },
 
-  getProps(attach, monitor, handlers) {
+  getProps(connect, monitor, handlers) {
     return {
-      attachDragSource: (ref) => attach(handlers.colorSource, ref),
+      connectDragSource: connect(handlers.colorSource),
       isDragging: monitor.isDragging(handlers.colorSource)
     };
   }

@@ -15,12 +15,12 @@ const style = {
 const propTypes = {
   isOver: PropTypes.bool.isRequired,
   canDrop: PropTypes.bool.isRequired,
-  attachDropTarget: PropTypes.func.isRequired
+  connectDropTarget: PropTypes.func.isRequired
 };
 
 class Dustbin extends Component {
   render() {
-    const { canDrop, isOver, attachDropTarget } = this.props;
+    const { canDrop, isOver, connectDropTarget } = this.props;
     const isActive = canDrop && isOver;
 
     let backgroundColor = '#222';
@@ -31,7 +31,7 @@ class Dustbin extends Component {
     }
 
     return (
-      <div ref={attachDropTarget}
+      <div ref={connectDropTarget}
            style={{ ...style, backgroundColor }}>
         {isActive ?
           'Release to drop' :
@@ -54,9 +54,9 @@ export default configureDragDrop(Dustbin, {
     };
   },
 
-  getProps(attach, monitor, handlers) {
+  getProps(connect, monitor, handlers) {
     return {
-      attachDropTarget: (ref) => attach(handlers.boxTarget, ref),
+      connectDropTarget: connect(handlers.boxTarget),
       isOver: monitor.isOver(handlers.boxTarget),
       canDrop: monitor.canDrop(handlers.boxTarget)
     };
