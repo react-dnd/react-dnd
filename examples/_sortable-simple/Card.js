@@ -15,21 +15,11 @@ const propTypes = {
   id: PropTypes.any.isRequired,
   text: PropTypes.string.isRequired,
   isDragging: PropTypes.bool.isRequired,
-  overlappingCardId: PropTypes.bool.isRequired,
   moveCard: PropTypes.func.isRequired,
   connectDragDrop: PropTypes.func.isRequired
 };
 
 class Card {
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.overlappingCardId && nextProps.overlappingCardId) {
-      const { id, overlappingCardId } = nextProps;
-      if (overlappingCardId !== id) {
-        this.props.moveCard(overlappingCardId, id);
-      }
-    }
-  }
-
   render() {
     const { text, isDragging, connectDragDrop } = this.props;
     const opacity = isDragging ? 0 : 1;
@@ -42,8 +32,16 @@ class Card {
     );
   }
 }
+Card.propTypes = propTypes;
 
 export default configureDragDrop(Card, {
+  getProps(connect, monitor, handlers) {
+    return {
+      isDragging: monitor.isDragging(handlers.cardSource),
+      connectDragDrop: connect(handlers.cardSource, handlers.cardTarget)
+    };
+  },
+
   getHandlers(props, sourceFor, targetFor) {
     return {
       cardSource: sourceFor(ItemTypes.CARD, {
@@ -51,15 +49,15 @@ export default configureDragDrop(Card, {
           return { id: props.id };
         }
       }),
-      cardTarget: targetFor(ItemTypes.CARD)
-    };
-  },
+      cardTarget: targetFor(ItemTypes.CARD, {
+        hover(props, monitor) {
+          const draggedId = monitor.getItem().id;
 
-  getProps(connect, monitor, handlers) {
-    return {
-      isDragging: monitor.isDragging(handlers.cardSource),
-      overlappingCardId: monitor.isOver(handlers.cardTarget) && monitor.getItem().id || null,
-      connectDragDrop: connect(handlers.cardSource, handlers.cardTarget)
+          if (draggedId !== props.id) {
+            props.moveCard(draggedId, props.id);
+          }
+        }
+      })
     };
   }
 });
