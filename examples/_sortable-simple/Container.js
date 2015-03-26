@@ -8,6 +8,9 @@ import { configureDragDropContext, HTML5Backend } from 'react-dnd';
 class Container extends Component {
   constructor(props) {
     super(props);
+
+    this.moveCard = this.moveCard.bind(this);
+
     this.state = {
       cards: [{
         id: 1,
@@ -62,7 +65,7 @@ class Container extends Component {
             <Card key={card.id}
                   id={card.id}
                   text={card.text}
-                  moveCard={(id, afterId) => this.moveCard(id, afterId)} />
+                  moveCard={this.moveCard} />
           );
         })}
       </div>

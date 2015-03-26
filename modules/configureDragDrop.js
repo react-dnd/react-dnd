@@ -10,6 +10,11 @@ const HANDLE_SEPARATOR = '🍣';
 
 export default function configureDragDrop(InnerComponent, { getHandlers, getProps, managerName = 'dragDropManager' }) {
   class DragDropContainer extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+      return !shallowEqual(nextProps, this.props) ||
+             !shallowEqual(nextState, this.state);
+    }
+
     constructor(props, context) {
       super(props);
 
@@ -31,6 +36,10 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
     }
 
     componentWillReceiveProps(nextProps) {
+      if (shallowEqual(nextProps, this.props)) {
+        return;
+      }
+
       const monitor = this.manager.getMonitor();
 
       monitor.removeChangeListener(this.handleChange);
