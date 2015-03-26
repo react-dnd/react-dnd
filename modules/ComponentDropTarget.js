@@ -5,7 +5,7 @@ import isArray from 'lodash/lang/isArray';
 import isObject from 'lodash/lang/isObject';
 
 export default class ComponentDropTarget extends DropTarget {
-  constructor(type, spec, props) {
+  constructor(type, spec = {}, props) {
     invariant(isString(type) || isArray(type), 'Expected type to be a string or an array.');
     invariant(isObject(spec), 'Expected spec to be an object.');
 

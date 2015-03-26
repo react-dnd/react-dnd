@@ -2,24 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragSource, DropTarget, ObservePolyfill } from 'react-dnd';
-
-class CardDragSource extends DragSource {
-  beginDrag() {
-    return {
-      item: {
-        id: this.component.props.id
-      }
-    };
-  }
-}
-
-class CardDropTarget extends DropTarget {
-  over(monitor) {
-    const item = monitor.getItem();
-    this.component.props.moveCard(item.id, this.component.props.id);
-  }
-}
+import { configureDragDrop } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -28,48 +11,55 @@ const style = {
   margin: '0.5rem'
 };
 
-const Card = React.createClass({
-  contextTypes: {
-    dragDrop: PropTypes.object.isRequired
-  },
+const propTypes = {
+  id: PropTypes.any.isRequired,
+  text: PropTypes.string.isRequired,
+  isDragging: PropTypes.bool.isRequired,
+  overlappingCardId: PropTypes.bool.isRequired,
+  moveCard: PropTypes.func.isRequired,
+  connectDragDrop: PropTypes.func.isRequired
+};
 
-  mixins: [ObservePolyfill({
-    constructor() {
-      this.dragSource = new CardDragSource(this);
-      //this.dropTarget = new CardDropTarget(this);
-    },
-
-    observe() {
-      return {
-        dragSource: this.dragSource.connectTo(this.context.dragDrop, ItemTypes.CARD),
-        //dropTarget: this.dropTarget.connectTo(this.context.dragDrop, ItemTypes.CARD)
-      };
+class Card {
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.overlappingCardId && nextProps.overlappingCardId) {
+      const { id, overlappingCardId } = nextProps;
+      if (overlappingCardId !== id) {
+        this.props.moveCard(overlappingCardId, id);
+      }
     }
-  })],
-
-  propTypes: {
-    id: PropTypes.any.isRequired,
-    text: PropTypes.string.isRequired,
-    moveCard: PropTypes.func.isRequired
-  },
+  }
 
   render() {
-    const { text } = this.props;
-
-    // TODO: refs totally suck here.
-    // Need to rethink this.
-
-    const { isDragging, ref: sourceRef } = this.state.data.dragSource;
-    //const { ref: targetRef } = this.state.data.dropTarget;
+    const { text, isDragging, connectDragDrop } = this.props;
     const opacity = isDragging ? 0 : 1;
 
     return (
-      <div ref={sourceRef}
+      <div ref={connectDragDrop}
            style={{ ...style, opacity }}>
         {text}
       </div>
     );
   }
-});
+}
 
-export default Card;
+export default configureDragDrop(Card, {
+  getHandlers(props, sourceFor, targetFor) {
+    return {
+      cardSource: sourceFor(ItemTypes.CARD, {
+        beginDrag(props) {
+          return { id: props.id };
+        }
+      }),
+      cardTarget: targetFor(ItemTypes.CARD)
+    };
+  },
+
+  getProps(connect, monitor, handlers) {
+    return {
+      isDragging: monitor.isDragging(handlers.cardSource),
+      overlappingCardId: monitor.isOver(handlers.cardTarget) && monitor.getItem().id || null,
+      connectDragDrop: connect(handlers.cardSource, handlers.cardTarget)
+    };
+  }
+});

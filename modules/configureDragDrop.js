@@ -13,7 +13,7 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
       super(props);
 
       this.handleChange = this.handleChange.bind(this);
-      this.connectTo = this.connectTo.bind(this);
+      this.connectRefTo = this.connectRefTo.bind(this);
 
       this.manager = context[managerName];
       this.handles = {};
@@ -149,7 +149,7 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
       this.attachHandler(key, nextHandler);
     }
 
-    connectTo(handle) {
+    connectRefTo(...handles) {
       const manager = this.manager;
 
       return function (ref) {
@@ -157,13 +157,15 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
         const backend = manager.getBackend();
         const registry = manager.getRegistry();
 
-        if (registry.isSourceHandle(handle)) {
-          backend.updateSourceNode(handle, node);
-        } else if (registry.isTargetHandle(handle)) {
-          backend.updateTargetNode(handle, node);
-        } else {
-          invariant(false, 'Handle is neither a source nor a target.');
-        }
+        handles.forEach(handle => {
+          if (registry.isSourceHandle(handle)) {
+            backend.updateSourceNode(handle, node);
+          } else if (registry.isTargetHandle(handle)) {
+            backend.updateTargetNode(handle, node);
+          } else {
+            invariant(false, 'Handle is neither a source nor a target.');
+          }
+        });
       }
     }
 
@@ -175,7 +177,7 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
         handles = handles[DEFAULT_KEY];
       }
 
-      return getProps(this.connectTo, monitor, handles);
+      return getProps(this.connectRefTo, monitor, handles);
     }
 
     render() {
