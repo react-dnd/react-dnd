@@ -1,91 +1,139 @@
-'use strict';
-
 import React, { Component, PropTypes, findDOMNode } from 'react';
-import { DragSource, DropTarget } from 'dnd-core';
+import ComponentDragSource from './ComponentDragSource';
+import ComponentDropTarget from './ComponentDropTarget';
 import assign from 'lodash/object/assign';
 import invariant from 'react/lib/invariant';
-
-const REGISTRY_FIELD = `_registry${Math.random() * 10}`;
-const OWNER_FIELD = `_owner${Math.random() * 10}`;
-
-class ComponentDragSource extends DragSource {
-  constructor(owner, registry) {
-    this[REGISTRY_FIELD] = registry;
-    this[OWNER_FIELD] = owner;
-  }
-
-  isDragging(monitor) {
-    const registry = this[REGISTRY_FIELD];
-    const source = registry.getSource(monitor.getSourceHandle(), true);
-    return source[OWNER_FIELD] === this[OWNER_FIELD];
-  }
-}
+import shallowEqual from 'react/lib/shallowEqual';
 
 export default function configureDragDrop(InnerComponent, registerHandlers, pickProps) {
   class DragDropContainer extends Component {
     constructor(props, context) {
       super(props);
-      this.handles = {};
 
+      this.handleChange = this.handleChange.bind(this);
       this.manager = context.dragDrop;
-      this.attachHandlers(props);
+      this.handles = {};
+      this.handlers = {};
+
+      this.attachHandlers(this.getNextHandlers(props));
       this.state = this.getCurrentState();
     }
 
     componentWillMount() {
       const monitor = this.manager.getMonitor();
-      monitor.addChangeListener(this.handleChange, this);
+      monitor.addChangeListener(this.handleChange);
     }
 
     componentWillReceiveProps(nextProps) {
-      this.detachHandlers();
-      this.attachHandlers(nextProps);
+      const monitor = this.manager.getMonitor();
+
+      monitor.removeChangeListener(this.handleChange);
+      this.receiveHandlers(this.getNextHandlers(nextProps));
+      monitor.addChangeListener(this.handleChange);
+
       this.handleChange();
     }
 
     componentWillUnmount() {
       const monitor = this.manager.getMonitor();
-      monitor.removeChangeListener(this.handleChange, this);
+      monitor.removeChangeListener(this.handleChange);
       this.detachHandlers();
     }
 
     handleChange() {
-      this.setState(this.getCurrentState());
+      const nextState = this.getCurrentState();
+      if (!shallowEqual(nextState, this.state)) {
+        this.setState(nextState);
+      }
+    }
+
+    getNextHandlers(props) {
+      return registerHandlers(props, {
+        dragSource(type, spec) {
+          return new ComponentDragSource(type, spec);
+        },
+
+        dropTarget(type, spec) {
+          return new ComponentDropTarget(type, spec);
+        }
+      });
+    }
+
+    attachHandlers(handlers) {
+      this.handlers = assign({}, this.handlers);
+      this.handles = assign({}, this.handles);
+
+      Object.keys(handlers).forEach(key => {
+        this.attachHandler(key, handlers[key]);
+      });
     }
 
     detachHandlers() {
-      const registry = this.manager.getRegistry();
+      this.handlers = assign({}, this.handlers);
+      this.handles = assign({}, this.handles);
 
       Object.keys(this.handles).forEach(key => {
-        const handle = this.handles[key];
-
-        if (registry.isSourceHandle(handle)) {
-          registry.removeSource(handle);
-        } else if (registry.isTargetHandle(handle)) {
-          registry.removeTarget(handle);
-        } else {
-          invariant(false, 'Handle is neither a source nor a target.');
-        }
+        this.detachHandler(key);
       });
-
-      this.handles = {};
     }
 
-    attachHandlers(props) {
+    receiveHandlers(nextHandlers) {
+      this.handlers = assign({}, this.handlers);
+      this.handles = assign({}, this.handles);
+
+      const keys = Object.keys(this.handlers);
+      const nextKeys = Object.keys(nextHandlers);
+
+      invariant(
+        keys.every(k => nextKeys.indexOf(k) > -1) &&
+        nextKeys.every(k => keys.indexOf(k) > -1) &&
+        keys.length === nextKeys.length,
+        'Expected handlers to have stable keys at runtime.'
+      );
+
+      keys.forEach(key => {
+        this.receiveHandler(key, nextHandlers[key]);
+      });
+    }
+
+    attachHandler(key, handler) {
       const registry = this.manager.getRegistry();
-      const owner = this;
 
-      this.handles = registerHandlers({
-        dragSource(type, handler) {
-          handler = assign(new ComponentDragSource(owner, registry), handler);
-          return registry.addSource(type, handler);
-        },
+      if (handler instanceof ComponentDragSource) {
+        this.handles[key] = registry.addSource(handler.type, handler);
+      } else if (handler instanceof ComponentDropTarget) {
+        this.handles[key] = registry.addTarget(handler.type, handler);
+      } else {
+        invariant(false, 'Handle is neither a source nor a target.');
+      }
 
-        dropTarget(type, handler) {
-          handler = assign(new DropTarget(), handler);
-          return registry.addTarget(type, handler);
-        }
-      }, props);
+      this.handlers[key] = handler;
+    }
+
+    detachHandler(key) {
+      const registry = this.manager.getRegistry();
+      const handle = this.handles[key];
+
+      if (registry.isSourceHandle(handle)) {
+        registry.removeSource(handle);
+      } else if (registry.isTargetHandle(handle)) {
+        registry.removeTarget(handle);
+      } else {
+        invariant(false, 'Handle is neither a source nor a target.');
+      }
+
+      delete this.handles[key];
+      delete this.handlers[key];
+    }
+
+    receiveHandler(key, nextHandler) {
+      const handler = this.handlers[key];
+      if (handler.receive(nextHandler)) {
+        return;
+      }
+
+      this.detachHandler(key);
+      this.attachHandler(key, nextHandler);
     }
 
     getCurrentState() {

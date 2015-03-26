@@ -33,8 +33,8 @@ const Box = createClass({
   }
 });
 
-const registerHandlers = (register, props) => ({
-  boxSource: register.dragSource(ItemTypes.BOX, {
+function makeBoxSource(props) {
+  return {
     beginDrag() {
       return {
         name: props.name
@@ -49,12 +49,20 @@ const registerHandlers = (register, props) => ({
         window.alert(`You dropped ${item.name} into ${dropResult.name}!`);
       }
     }
-  })
-});
+  };
+}
 
-const pickProps = (attach, monitor, handlers) => ({
-  attachDragSource: (ref) => attach(handlers.boxSource, ref),
-  isDragging: monitor.isDragging(handlers.boxSource)
-});
+function registerHandlers(props, register) {
+  return {
+    boxSource: register.dragSource(ItemTypes.BOX, makeBoxSource(props))
+  };
+}
+
+function pickProps(attach, monitor, handlers) {
+  return {
+    attachDragSource: (ref) => attach(handlers.boxSource, ref),
+    isDragging: monitor.isDragging(handlers.boxSource)
+  };
+}
 
 export default configureDragDrop(Box, registerHandlers, pickProps);

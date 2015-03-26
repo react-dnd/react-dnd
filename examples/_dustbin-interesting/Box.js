@@ -1,27 +1,7 @@
 'use strict';
 
 import React, { PropTypes, createClass } from 'react';
-import { DragSource, ObservePolyfill } from 'react-dnd';
-
-class BoxDragSource extends DragSource {
-  beginDrag() {
-    return {
-      name: this.component.props.name
-    };
-  }
-
-  isDragging(monitor) {
-    const item = monitor.getItem();
-    return this.component.props.name === item.name;
-  }
-
-  endDrag(monitor) {
-    if (monitor.didDrop()) {
-      const item = monitor.getItem();
-      this.component.props.onDrop(item.name);
-    }
-  }
-}
+import { configureDragDrop } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -36,33 +16,17 @@ const Box = createClass({
   propTypes: {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    isDropped: PropTypes.bool.isRequired,
-    onDrop: PropTypes.func.isRequired
+    attachDragSource: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    isDropped: PropTypes.bool.isRequired
   },
-
-  contextTypes: {
-    dragDrop: PropTypes.object.isRequired
-  },
-
-  mixins: [ObservePolyfill({
-    constructor() {
-      this.dragSource = new BoxDragSource(this);
-    },
-
-    observe() {
-      return {
-        dragSource: this.dragSource.connectTo(this.context.dragDrop, this.props.type)
-      };
-    }
-  })],
 
   render() {
-    const { name, isDropped } = this.props;
-    const { isDragging, ref } = this.state.data.dragSource;
+    const { name, isDropped, isDragging, attachDragSource } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div ref={ref}
+      <div ref={attachDragSource}
            style={{ ...style, opacity }}>
         {isDropped ?
           <s>{name}</s> :
@@ -73,4 +37,32 @@ const Box = createClass({
   }
 });
 
-export default Box;
+function createBoxSource(props) {
+  return {
+    beginDrag() {
+      return {
+        name: props.name
+      };
+    },
+
+    isDragging(monitor) {
+      const item = monitor.getItem();
+      return props.name === item.name;
+    }
+  };
+}
+
+function registerHandlers(props, register) {
+  return {
+    boxSource: register.dragSource(props.type, createBoxSource(props))
+  };
+}
+
+function pickProps(attach, monitor, handlers) {
+  return {
+    attachDragSource: (ref) => attach(handlers.boxSource, ref),
+    isDragging: monitor.isDragging(handlers.boxSource)
+  };
+}
+
+export default configureDragDrop(Box, registerHandlers, pickProps);
