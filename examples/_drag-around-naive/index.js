@@ -21,10 +21,12 @@ const DragAroundNaive = React.createClass({
       <div>
         <Container hideSourceOnDrag={hideSourceOnDrag} />
         <p>
-          <input type='checkbox'
-                 checkedLink={this.linkState('hideSourceOnDrag')}>
-            Hide source item while dragging
-          </input>
+          <label>
+            <input type='checkbox'
+                   checkedLink={this.linkState('hideSourceOnDrag')}>
+              Hide source item while dragging
+            </input>
+          </label>
         </p>
         <hr />
         <p>
