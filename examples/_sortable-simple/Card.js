@@ -8,7 +8,8 @@ const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
   padding: '0.5rem',
-  margin: '0.5rem'
+  margin: '0.5rem',
+  maxWidth: '20em'
 };
 
 const propTypes = {
