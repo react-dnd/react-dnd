@@ -232,7 +232,13 @@ export default class HTML5Backend {
       // use parent's node as drag image. This won't work in IE.
       const dragOffset = this.getDragImageOffset(node);
       dataTransfer.setDragImage(node, ...dragOffset);
-      dataTransfer.setData('application/json', {});
+
+      try {
+        // Firefox won't drag without setting data
+        dataTransfer.setData('application/json', {});
+      } catch (err) {
+        // IE doesn't support MIME types in setData
+      }
 
       // Store drag source node so we can check whether
       // it is removed from DOM and trigger endDrag manually.
