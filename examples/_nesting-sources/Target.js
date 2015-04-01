@@ -19,7 +19,7 @@ const propTypes = {
   lastDroppedColor: PropTypes.string,
   connectDropTarget: PropTypes.func.isRequired,
   onDrop: PropTypes.func.isRequired
-}
+};
 
 class Target extends Component {
   render() {
@@ -51,23 +51,22 @@ class Target extends Component {
 }
 Target.propTypes = propTypes;
 
-const DraggableTarget = configureDragDrop(Target, {
-  getHandlers(props, sourceFor, targetFor) {
-    return targetFor([Colors.YELLOW, Colors.BLUE], {
-      drop(props, monitor) {
-        props.onDrop(monitor.getItemType());
-      }
-    });
-  },
-
-  getProps(connect, monitor, target) {
-    return {
-      connectDropTarget: connect(target),
-      isOver: monitor.isOver(target),
-      canDrop: monitor.canDrop(target),
-      draggingColor: monitor.getItemType()
-    };
+const dropTarget = {
+  drop(props, monitor) {
+    props.onDrop(monitor.getItemType());
   }
+};
+
+const DraggableTarget = configureDragDrop(Target, {
+  configure: (register) =>
+    register.dropTarget([Colors.YELLOW, Colors.BLUE], dropTarget),
+
+  inject: (connect, monitor, target) => ({
+    connectDropTarget: connect(target),
+    isOver: monitor.isOver(target),
+    canDrop: monitor.canDrop(target),
+    draggingColor: monitor.getItemType()
+  })
 });
 
 export default class StatefulTarget extends Component {

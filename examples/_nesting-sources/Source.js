@@ -16,12 +16,12 @@ const propTypes = {
   isDragging: PropTypes.bool.isRequired,
   forbidDrag: PropTypes.bool.isRequired,
   onToggleForbidDrag: PropTypes.func.isRequired,
-  connectDragSource: PropTypes.func.isRequired
+  dragSourceRef: PropTypes.func.isRequired
 };
 
 class Source extends Component {
   render() {
-    const { color, children, isDragging, connectDragSource, forbidDrag, onToggleForbidDrag } = this.props;
+    const { color, children, isDragging, dragSourceRef, forbidDrag, onToggleForbidDrag } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     let backgroundColor;
@@ -35,7 +35,7 @@ class Source extends Component {
     }
 
     return (
-      <div ref={connectDragSource}
+      <div ref={dragSourceRef}
            style={{ ...style, backgroundColor, opacity }}>
         <input type='checkbox'
                checked={forbidDrag}
@@ -50,25 +50,24 @@ class Source extends Component {
 }
 Source.propTypes = propTypes;
 
-const DraggableSource = configureDragDrop(Source, {
-  getHandlers(props, sourceFor) {
-    return sourceFor(props.color, {
-      canDrag(props) {
-        return !props.forbidDrag;
-      },
-
-      beginDrag() {
-        return { };
-      }
-    });
+const dragSource = {
+  canDrag(props) {
+    return !props.forbidDrag;
   },
 
-  getProps(connect, monitor, source) {
-    return {
-      connectDragSource: connect(source),
-      isDragging: monitor.isDragging(source)
-    };
+  beginDrag() {
+    return { };
   }
+};
+
+const DraggableSource = configureDragDrop(Source, {
+  configure: (register, props) =>
+    register.dragSource(props.color, dragSource),
+
+  inject: (connect, monitor, sourceId) => ({
+    dragSourceRef: connect.dragSource(sourceId),
+    isDragging: monitor.isDragging(sourceId)
+  })
 });
 
 export default class StatefulSource extends Component {

@@ -11,6 +11,7 @@
 * make perf (shouldComponentUpdate) configurable
 * early invariants for common mistakes (e.g. missing context?)
 * fix hot reloading
+* higher-level components
 
 dnd-core
 * smarter canDrop()

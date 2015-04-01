@@ -15,17 +15,17 @@ const style = {
 const propTypes = {
   name: PropTypes.string.isRequired,
   isDragging: PropTypes.bool.isRequired,
-  connectDragSource: PropTypes.func.isRequired
+  dragSourceRef: PropTypes.func.isRequired
 };
 
 class Box extends Component {
   render() {
-    const { isDragging, connectDragSource } = this.props;
+    const { isDragging, dragSourceRef } = this.props;
     const { name } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div ref={connectDragSource}
+      <div ref={dragSourceRef}
            style={{ ...style, opacity }}>
         {name}
       </div>
@@ -52,14 +52,11 @@ const boxSource = {
 };
 
 export default configureDragDrop(Box, {
-  getHandlers(props, sourceFor) {
-    return sourceFor(ItemTypes.BOX, boxSource);
-  },
+  configure: (register) =>
+    register.dragSource(ItemTypes.BOX, boxSource),
 
-  getProps(connect, monitor, source) {
-    return {
-      connectDragSource: connect(source),
-      isDragging: monitor.isDragging(source)
-    };
-  }
+  inject: (connect, monitor, dragSourceId) => ({
+    dragSourceRef: connect.dragSource(dragSourceId),
+    isDragging: monitor.isDragging(dragSourceId)
+  })
 });
