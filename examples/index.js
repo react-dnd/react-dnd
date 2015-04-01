@@ -7,6 +7,7 @@ import DustbinInteresting from './_dustbin-interesting';
 import DustbinStress from './_dustbin-stress';
 import NestingSources from './_nesting-sources';
 import SortableSimple from './_sortable-simple';
+import CustomizeHandles from './_customize-handles';
 
 /*
 DragAroundNaive = require('./_drag-around-naive/index'),
@@ -23,6 +24,7 @@ const App = React.createClass({
           <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>, <Link to='dustbin-stress'>stress test</Link>)</li>
           <li>Nesting (<Link to='nesting-sources'>drag sources</Link>)</li>
           <li>Sortable (<Link to='sortable-simple'>simple</Link>)</li>
+          <li>Customize (<Link to='customize-handles'>drag handles</Link>)</li>
         </ul>
         <hr />
         <RouteHandler />
@@ -44,6 +46,7 @@ const routes = (
     <Route name='dustbin-stress' path='dustbin-stress' handler={DustbinStress} />
     <Route name='nesting-sources' path='nesting-sources' handler={NestingSources} />
     <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
+    <Route name='customize-handles' path='customize-handles' handler={CustomizeHandles} />
     <Redirect from='/' to='dustbin-simple' />
   </Route>
 );

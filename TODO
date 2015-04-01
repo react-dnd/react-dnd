@@ -10,6 +10,7 @@
 * export methods for verifying validness from dnd-core
 * make perf (shouldComponentUpdate) configurable
 * early invariants for common mistakes (e.g. missing context?)
+* fix hot reloading
 
 dnd-core
 * smarter canDrop()
