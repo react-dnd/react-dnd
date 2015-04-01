@@ -8,9 +8,7 @@ import { configureDragDropContext, HTML5Backend } from 'react-dnd';
 class Container extends Component {
   constructor(props) {
     super(props);
-
     this.moveCard = this.moveCard.bind(this);
-
     this.state = {
       cards: [{
         id: 1,
