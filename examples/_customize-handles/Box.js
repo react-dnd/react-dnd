@@ -22,18 +22,21 @@ const handleStyle = {
 
 const propTypes = {
   isDragging: PropTypes.bool.isRequired,
-  connectDragSource: PropTypes.func.isRequired
+  dragPreviewRef: PropTypes.func.isRequired,
+  dragSourceRef: PropTypes.func.isRequired
 };
 
 class Box extends Component {
   render() {
-    const { isDragging, connectDragSource } = this.props;
+    const { isDragging, dragSourceRef, dragPreviewRef } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div style={{ ...style, opacity }}>
+      <div style={{ ...style, opacity }}
+           ref={dragPreviewRef}>
+
         <div style={handleStyle}
-             ref={connectDragSource} />
+             ref={dragSourceRef} />
 
         Drag me by the handle
       </div>
@@ -49,14 +52,15 @@ const boxSource = {
 };
 
 export default configureDragDrop(Box, {
-  getHandlers(props, sourceFor) {
+  configure(props, sourceFor) {
     return sourceFor(ItemTypes.BOX, boxSource);
   },
 
-  getProps(connect, monitor, source) {
+  inject(connect, monitor, dragSourceId) {
     return {
-      connectDragSource: connect(source),
-      isDragging: monitor.isDragging(source)
+      dragPreviewRef: connect.dragSourcePreview(dragSourceId),
+      dragSourceRef: connect.dragSource(dragSourceId),
+      isDragging: monitor.isDragging(dragSourceId)
     };
   }
 });

@@ -17,16 +17,16 @@ const propTypes = {
   text: PropTypes.string.isRequired,
   isDragging: PropTypes.bool.isRequired,
   moveCard: PropTypes.func.isRequired,
-  connectDragDrop: PropTypes.func.isRequired
+  dragDropRef: PropTypes.func.isRequired
 };
 
 class Card {
   render() {
-    const { text, isDragging, connectDragDrop } = this.props;
+    const { text, isDragging, dragDropRef } = this.props;
     const opacity = isDragging ? 0 : 1;
 
     return (
-      <div ref={connectDragDrop}
+      <div ref={dragDropRef}
            style={{ ...style, opacity }}>
         {text}
       </div>
@@ -35,30 +35,33 @@ class Card {
 }
 Card.propTypes = propTypes;
 
-export default configureDragDrop(Card, {
-  getProps(connect, monitor, handlers) {
-    return {
-      isDragging: monitor.isDragging(handlers.cardSource),
-      connectDragDrop: connect(handlers.cardSource, handlers.cardTarget)
-    };
-  },
-
-  getHandlers(props, sourceFor, targetFor) {
-    return {
-      cardSource: sourceFor(ItemTypes.CARD, {
-        beginDrag(props) {
-          return { id: props.id };
-        }
-      }),
-      cardTarget: targetFor(ItemTypes.CARD, {
-        hover(props, monitor) {
-          const draggedId = monitor.getItem().id;
-
-          if (draggedId !== props.id) {
-            props.moveCard(draggedId, props.id);
-          }
-        }
-      })
-    };
+const cardSource = {
+  beginDrag(props) {
+    return { id: props.id };
   }
+};
+
+const cardTarget = {
+  hover(props, monitor) {
+    const draggedId = monitor.getItem().id;
+
+    if (draggedId !== props.id) {
+      props.moveCard(draggedId, props.id);
+    }
+  }
+};
+
+export default configureDragDrop(Card, {
+  configure: (register) => ({
+    cardSourceId: register.dragSource(ItemTypes.CARD, cardSource),
+    cardTargetId: register.dropTarget(ItemTypes.CARD, cardTarget)
+  }),
+
+  inject: (connect, monitor, { cardSourceId, cardTargetId }) => ({
+    isDragging: monitor.isDragging(cardSourceId),
+    dragDropRef: [
+      connect.dragSource(cardSourceId),
+      connect.dropTarget(cardTargetId)
+    ]
+  })
 });
