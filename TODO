@@ -2,12 +2,13 @@
 * check symbols
 * helpers for test context
 * drag offsets and alignments
-* are we okay with this API for refs? ask people & see how that works with actual refs
+* missing examples: images as drag previews
 * conflicting backends: must be a nicer solution.
 * make sure missing methods are OK
 * make sure we don't screw server rendering (NoopBackend?)
 * export methods for verifying validness from dnd-core
 * make perf (shouldComponentUpdate) configurable
+* early invariants for common mistakes (e.g. missing context?)
 
 dnd-core
 * smarter canDrop()
