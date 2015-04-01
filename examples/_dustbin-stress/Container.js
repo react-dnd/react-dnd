@@ -27,6 +27,21 @@ class Container extends Component {
     };
   }
 
+  componentDidMount() {
+    this.interval = setInterval(() => this.tickTock(), 1000);
+  }
+
+  tickTock() {
+    this.setState({
+      boxes: shuffle(this.state.boxes),
+      dustbins: shuffle(this.state.dustbins)
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   isDropped(boxName) {
     return this.state.droppedBoxNames.indexOf(boxName) > -1;
   }
@@ -40,17 +55,15 @@ class Container extends Component {
           {dustbins.map(({ accepts, lastDroppedItem }, index) =>
             <Dustbin accepts={accepts}
                      lastDroppedItem={lastDroppedItem}
-                     onDrop={(item) => this.handleDrop(index, item)}
-                     key={index} />
+                     onDrop={(item) => this.handleDrop(index, item)} />
           )}
         </div>
 
         <div style={{ minHeight: '2rem' }}>
-          {boxes.map(({ name, type }, index) =>
+          {boxes.map(({ name, type }) =>
             <Box name={name}
                  type={type}
-                 isDropped={this.isDropped(name)}
-                 key={index} />
+                 isDropped={this.isDropped(name)} />
           )}
         </div>
       </div>

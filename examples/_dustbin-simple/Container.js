@@ -14,26 +14,15 @@ class Container extends Component {
     };
   }
 
-  componentDidMount() {
-    this.interval = setInterval(() => this.shuffleBoxes(), 1000);
-  }
-
-  shuffleBoxes() {
-    this.setState({
-      boxes: shuffle(this.state.boxes)
-    });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   render() {
     return (
       <div>
         <Dustbin />
         <div style={{ marginTop: '2rem' }}>
-          {this.state.boxes.map(name => <Box name={name} key={name} />)}
+          {this.state.boxes.map((name, index) =>
+            <Box name={name}
+                 key={index} />
+          )}
         </div>
       </div>
     );

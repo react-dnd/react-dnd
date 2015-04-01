@@ -2,7 +2,8 @@
 * check symbols
 * helpers for test context
 * drag offsets and alignments
-* missing examples: images as drag previews
+* missing examples: images, nodes as drag previews
+* separate stress tests from normal examples
 * conflicting backends: must be a nicer solution.
 * make sure missing methods are OK
 * make sure we don't screw server rendering (NoopBackend?)

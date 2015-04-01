@@ -43,6 +43,11 @@ const boxSource = {
     return {
       name: props.name
     };
+  },
+
+  isDragging(props, monitor) {
+    const item = monitor.getItem();
+    return props.name === item.name;
   }
 };
 
