@@ -23,7 +23,7 @@ class EnterLeaveMonitor {
   leave(leavingNode) {
     this._entered = without(
       this._entered.filter(node =>
-        document.body.contains(node)
+        node.nodeType && document.body.contains(node)
       ),
       leavingNode
     );

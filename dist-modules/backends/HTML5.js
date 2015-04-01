@@ -9,9 +9,8 @@ var DragDropActionCreators = require("../actions/DragDropActionCreators"),
     isNativeDraggedItemType = require("../utils/isNativeDraggedItemType"),
     configureDataTransfer = require("../utils/configureDataTransfer"),
     shallowEqual = require("react/lib/shallowEqual"),
-    isWebkit = require("../utils/isWebkit");
-
-var ELEMENT_NODE = 1;
+    isWebkit = require("../utils/isWebkit"),
+    getElementRect = require("../utils/getElementRect");;
 
 // Store global state for browser-specific fixes and workarounds
 var _monitor = new EnterLeaveMonitor(),
@@ -20,20 +19,6 @@ var _monitor = new EnterLeaveMonitor(),
     _initialDragTargetRect,
     _dragTargetRectDidChange,
     _currentDropEffect;
-
-function getElementRect(el) {
-  if (el.nodeType !== ELEMENT_NODE) {
-    el = el.parentElement;
-  }
-
-  if (!el) {
-    return null;
-  }
-
-  var rect = el.getBoundingClientRect();
-  // Copy so object doesn't get reused
-  return { top: rect.top, left: rect.left, width: rect.width, height: rect.height };
-}
 
 function getClientOffset(e) {
   return {

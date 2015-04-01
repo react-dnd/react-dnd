@@ -1,10 +1,11 @@
 'use strict';
 
-var { HTML5 } = require('./backends'),
+var { HTML5, Mouse } = require('./backends'),
     createDragDropMixin = require('./utils/createDragDropMixin');
 
 module.exports = {
   DragDropMixin: createDragDropMixin(HTML5),
+  MouseDragDropMixin: createDragDropMixin(Mouse),
   ImagePreloaderMixin: require('./mixins/ImagePreloaderMixin'),
   DragLayerMixin: require('./mixins/DragLayerMixin'),
   HorizontalDragAnchors: require('./constants/HorizontalDragAnchors'),
