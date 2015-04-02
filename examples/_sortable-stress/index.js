@@ -3,7 +3,7 @@
 import React from 'react';
 import Container from './Container';
 
-export default class SortableSimple {
+export default class SortableStress {
   render() {
     return (
       <div>
