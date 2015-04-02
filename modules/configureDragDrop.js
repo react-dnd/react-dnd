@@ -46,7 +46,6 @@ export default function configureDragDrop(InnerComponent, {
       }
 
       const monitor = this.manager.getMonitor();
-
       monitor.removeChangeListener(this.handleChange);
       this.receiveHandlers(this.getNextHandlers(nextProps));
       monitor.addChangeListener(this.handleChange);
@@ -57,6 +56,7 @@ export default function configureDragDrop(InnerComponent, {
     componentWillUnmount() {
       const monitor = this.manager.getMonitor();
       monitor.removeChangeListener(this.handleChange);
+
       this.detachHandlers();
       this.connector = null;
     }
