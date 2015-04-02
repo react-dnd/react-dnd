@@ -23,10 +23,6 @@ const propTypes = {
 };
 
 class Card {
-  shouldComponentUpdate(nextProps) {
-    return !shallowEqual(nextProps, this.props);
-  }
-
   render() {
     const { text, isDragging, dragSourceRef, dropTargetRef } = this.props;
     const opacity = isDragging ? 0 : 1;
@@ -58,8 +54,6 @@ const cardTarget = {
 };
 
 export default configureDragDrop(Card, {
-  arePropsEqual: shallowEqual,
-
   configure: (register) => ({
     cardSourceId: register.dragSource(ItemTypes.CARD, cardSource),
     cardTargetId: register.dropTarget(ItemTypes.CARD, cardTarget)

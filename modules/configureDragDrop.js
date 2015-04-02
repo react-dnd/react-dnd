@@ -1,23 +1,23 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
+import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
 import memoize from 'lodash/function/memoize';
 import invariant from 'react/lib/invariant';
-import shallowEqual from 'react/lib/shallowEqual';
 
 const DEFAULT_KEY = '__default__';
 
 export default function configureDragDrop(InnerComponent, {
   configure,
   inject,
-  arePropsEqual = () => false,
+  arePropsEqual = shallowEqualScalar,
   managerName = 'dragDropManager'
 }) {
   class DragDropContainer extends Component {
     shouldComponentUpdate(nextProps, nextState) {
       return !arePropsEqual(nextProps, this.props) ||
-             !shallowEqual(nextState, this.state);
+             !shallowEqualScalar(nextState, this.state);
     }
 
     constructor(props, context) {
@@ -63,7 +63,7 @@ export default function configureDragDrop(InnerComponent, {
 
     handleChange() {
       const nextState = this.getCurrentState();
-      if (!shallowEqual(nextState, this.state)) {
+      if (!shallowEqualScalar(nextState, this.state)) {
         this.setState(nextState);
       }
     }
