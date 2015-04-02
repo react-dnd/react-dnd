@@ -52,15 +52,12 @@ const boxSource = {
 };
 
 export default configureDragDrop(Box, {
-  configure(props, sourceFor) {
-    return sourceFor(ItemTypes.BOX, boxSource);
-  },
+  configure: (register) =>
+    register.dragSource(ItemTypes.BOX, boxSource),
 
-  inject(connect, monitor, dragSourceId) {
-    return {
-      dragPreviewRef: connect.dragSourcePreview(dragSourceId),
-      dragSourceRef: connect.dragSource(dragSourceId),
-      isDragging: monitor.isDragging(dragSourceId)
-    };
-  }
+  inject: (connect, monitor, dragSourceId) => ({
+    dragPreviewRef: connect.dragSourcePreview(dragSourceId),
+    dragSourceRef: connect.dragSource(dragSourceId),
+    isDragging: monitor.isDragging(dragSourceId)
+  })
 });

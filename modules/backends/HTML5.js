@@ -79,6 +79,8 @@ export default class HTML5Backend {
     this.handleTopDrop = this.handleTopDrop.bind(this);
     this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
     this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
+    this.setSourceNode = this.setSourceNode.bind(this);
+    this.setTargetNode = this.setTargetNode.bind(this);
   }
 
   setup() {
@@ -381,7 +383,15 @@ export default class HTML5Backend {
     }
   }
 
-  updateSourceNode(sourceHandle, node) {
+  getConnector() {
+    return {
+      dragSource: this.setSourceNode,
+      dragSourcePreview: () => {},
+      dropTarget: this.setTargetNode
+    };
+  }
+
+  setSourceNode(sourceHandle, node) {
     let nodeHandlers = this.nodeHandlers[sourceHandle];
     if (nodeHandlers && nodeHandlers.node === node) {
       return;
@@ -405,7 +415,7 @@ export default class HTML5Backend {
     }
   }
 
-  updateTargetNode(targetHandle, node) {
+  setTargetNode(targetHandle, node) {
     let nodeHandlers = this.nodeHandlers[targetHandle];
     if (nodeHandlers && nodeHandlers.node === node) {
       return;

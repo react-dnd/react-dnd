@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { configureDragDrop } from 'react-dnd';
+import { configureDragDrop, joinRefs } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -17,16 +17,17 @@ const propTypes = {
   text: PropTypes.string.isRequired,
   isDragging: PropTypes.bool.isRequired,
   moveCard: PropTypes.func.isRequired,
-  dragDropRef: PropTypes.func.isRequired
+  dragSourceRef: PropTypes.func.isRequired,
+  dropTargetRef: PropTypes.func.isRequired
 };
 
 class Card {
   render() {
-    const { text, isDragging, dragDropRef } = this.props;
+    const { text, isDragging, dragSourceRef, dropTargetRef } = this.props;
     const opacity = isDragging ? 0 : 1;
 
     return (
-      <div ref={dragDropRef}
+      <div ref={joinRefs(dragSourceRef, dropTargetRef)}
            style={{ ...style, opacity }}>
         {text}
       </div>
@@ -59,9 +60,7 @@ export default configureDragDrop(Card, {
 
   inject: (connect, monitor, { cardSourceId, cardTargetId }) => ({
     isDragging: monitor.isDragging(cardSourceId),
-    dragDropRef: [
-      connect.dragSource(cardSourceId),
-      connect.dropTarget(cardTargetId)
-    ]
+    dragSourceRef: connect.dragSource(cardSourceId),
+    dropTargetRef: connect.dropTarget(cardTargetId)
   })
 });

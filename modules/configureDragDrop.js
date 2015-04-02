@@ -6,9 +6,8 @@ import invariant from 'react/lib/invariant';
 import shallowEqual from 'react/lib/shallowEqual';
 
 const DEFAULT_KEY = '__default__';
-const HANDLE_SEPARATOR = '🍣';
 
-export default function configureDragDrop(InnerComponent, { getHandlers, getProps, managerName = 'dragDropManager' }) {
+export default function configureDragDrop(InnerComponent, { configure, inject, managerName = 'dragDropManager' }) {
   class DragDropContainer extends Component {
     shouldComponentUpdate(nextProps, nextState) {
       return !shallowEqual(nextProps, this.props) ||
@@ -17,15 +16,15 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
 
     constructor(props, context) {
       super(props);
-
       this.handleChange = this.handleChange.bind(this);
-      this.connectRefTo = this.connectRefTo.bind(this);
-      this.memoizedConnectRefTo = {};
 
       this.manager = context[managerName];
+      invariant(this.manager, 'Could not read manager from context.');
+
       this.handles = {};
       this.handlers = {};
 
+      this.connector = this.createConnector();
       this.attachHandlers(this.getNextHandlers(props));
       this.state = this.getCurrentState();
     }
@@ -53,8 +52,7 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
       const monitor = this.manager.getMonitor();
       monitor.removeChangeListener(this.handleChange);
       this.detachHandlers();
-
-      this.memoizedConnectRefTo = {};
+      this.connector = null;
     }
 
     handleChange() {
@@ -65,18 +63,19 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
     }
 
     getNextHandlers(props) {
-      function sourceFor(type, spec) {
-        return new ComponentDragSource(type, spec, props);
-      }
+      const register = {
+        dragSource(type, spec) {
+          return new ComponentDragSource(type, spec, props);
+        },
+        dropTarget(type, spec) {
+          return new ComponentDropTarget(type, spec, props);
+        }
+      };
 
-      function targetFor(type, spec) {
-        return new ComponentDropTarget(type, spec, props);
-      }
-
-      let handlers = getHandlers(props, sourceFor, targetFor);
+      let handlers = configure(register, props);
       if (handlers instanceof ComponentDragSource ||
-          handlers instanceof ComponentDropTarget
-      ) {
+          handlers instanceof ComponentDropTarget) {
+
         handlers = {
           [DEFAULT_KEY]: handlers
         };
@@ -162,33 +161,6 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
       this.attachHandler(key, nextHandler);
     }
 
-    connectRefTo(...handles) {
-      const key = handles.join(HANDLE_SEPARATOR);
-
-      if (!this.memoizedConnectRefTo[key]) {
-        this.memoizedConnectRefTo[key] = this.connectRefToHandles.bind(this, handles);
-      }
-
-      return this.memoizedConnectRefTo[key];
-    }
-
-    connectRefToHandles(handles, ref) {
-      const manager = this.manager;
-      const node = findDOMNode(ref);
-      const backend = manager.getBackend();
-      const registry = manager.getRegistry();
-
-      handles.forEach(handle => {
-        if (registry.isSourceHandle(handle)) {
-          backend.updateSourceNode(handle, node);
-        } else if (registry.isTargetHandle(handle)) {
-          backend.updateTargetNode(handle, node);
-        } else {
-          invariant(false, 'Handle is neither a source nor a target.');
-        }
-      });
-    }
-
     getCurrentState() {
       const monitor = this.manager.getMonitor();
 
@@ -197,7 +169,24 @@ export default function configureDragDrop(InnerComponent, { getHandlers, getProp
         handles = handles[DEFAULT_KEY];
       }
 
-      return getProps(this.connectRefTo, monitor, handles);
+      return inject(this.connector, monitor, handles);
+    }
+
+    createConnector() {
+      const backend = this.manager.getBackend();
+      const connector = backend.getConnector();
+      const wrappedConnector = {};
+
+      Object.keys(connector).forEach(function (key) {
+        wrappedConnector[key] = function (handle) {
+          return function (componentOrNode) {
+            const node = findDOMNode(componentOrNode);
+            return connector[key].call(connector, handle, node);
+          };
+        };
+      });
+
+      return wrappedConnector;
     }
 
     render() {

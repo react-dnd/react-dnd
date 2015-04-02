@@ -12,6 +12,8 @@
 * early invariants for common mistakes (e.g. missing context?)
 * fix hot reloading
 * higher-level components
+* change sortable example to avoid indexOf
+* try fun sCU optimizations with monitor
 
 dnd-core
 * smarter canDrop()
