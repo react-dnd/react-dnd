@@ -17,13 +17,13 @@ const propTypes = {
   canDrop: PropTypes.bool.isRequired,
   draggingColor: PropTypes.string,
   lastDroppedColor: PropTypes.string,
-  connectDropTarget: PropTypes.func.isRequired,
+  dropTargetRef: PropTypes.func.isRequired,
   onDrop: PropTypes.func.isRequired
 };
 
 class Target extends Component {
   render() {
-    const { canDrop, isOver, draggingColor, lastDroppedColor, connectDropTarget } = this.props;
+    const { canDrop, isOver, draggingColor, lastDroppedColor, dropTargetRef } = this.props;
     const opacity = isOver ? 1 : 0.7;
 
     let backgroundColor = '#fff';
@@ -37,7 +37,7 @@ class Target extends Component {
     }
 
     return (
-      <div ref={connectDropTarget}
+      <div ref={dropTargetRef}
            style={{ ...style, backgroundColor, opacity }}>
 
         <p>Drop here.</p>
@@ -62,7 +62,7 @@ const DraggableTarget = configureDragDrop(Target, {
     register.dropTarget([Colors.YELLOW, Colors.BLUE], dropTarget),
 
   inject: (connect, monitor, target) => ({
-    connectDropTarget: connect(target),
+    dropTargetRef: connect.dropTarget(target),
     isOver: monitor.isOver(target),
     canDrop: monitor.canDrop(target),
     draggingColor: monitor.getItemType()

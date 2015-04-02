@@ -8,7 +8,6 @@
 * make sure missing methods are OK
 * make sure we don't screw server rendering (NoopBackend?)
 * export methods for verifying validness from dnd-core
-* make perf (shouldComponentUpdate) configurable
 * early invariants for common mistakes (e.g. missing context?)
 * fix hot reloading
 * higher-level components
