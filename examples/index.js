@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Router, { Route, Link, Redirect, RouteHandler } from 'react-router';
+import AnimationFrame from 'animation-frame';
 import DustbinSimple from './_dustbin-simple';
 import DustbinInteresting from './_dustbin-interesting';
 import DustbinStress from './_dustbin-stress';
@@ -52,6 +53,8 @@ const routes = (
     <Redirect from='/' to='dustbin-simple' />
   </Route>
 );
+
+AnimationFrame.shim();
 
 Router.run(routes,
   process.env.NODE_ENV === 'production' ? Router.HashLocation : Router.HistoryLocation,

@@ -10,7 +10,9 @@ import { configureDragDropContext, HTML5Backend } from 'react-dnd';
 class Container extends Component {
   constructor(props) {
     super(props);
+
     this.moveCard = this.moveCard.bind(this);
+    this.applyNextState = this.applyNextState.bind(this);
 
     this.state = {
       cards: range(1000).map(i => ({
@@ -28,14 +30,27 @@ class Container extends Component {
     const cardIndex = cards.indexOf(card);
     const afterIndex = cards.indexOf(afterCard);
 
-    this.setState(update(this.state, {
+    this.nextState = update(this.state, {
       cards: {
         $splice: [
           [cardIndex, 1],
           [afterIndex, 0, card]
         ]
       }
-    }));
+    });
+
+    if (!this.frame) {
+      this.frame = requestAnimationFrame(this.applyNextState);
+    }
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.frame);
+  }
+
+  applyNextState() {
+    this.setState(this.nextState);
+    this.frame = null;
   }
 
   render() {
