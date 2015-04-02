@@ -2,6 +2,7 @@ import React, { Component, PropTypes, findDOMNode } from 'react';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
 import assign from 'lodash/object/assign';
+import memoize from 'lodash/function/memoize';
 import invariant from 'react/lib/invariant';
 import shallowEqual from 'react/lib/shallowEqual';
 
@@ -178,12 +179,9 @@ export default function configureDragDrop(InnerComponent, { configure, inject, m
       const wrappedConnector = {};
 
       Object.keys(connector).forEach(function (key) {
-        wrappedConnector[key] = function (handle) {
-          return function (componentOrNode) {
-            const node = findDOMNode(componentOrNode);
-            return connector[key].call(connector, handle, node);
-          };
-        };
+        wrappedConnector[key] = memoize(handle => componentOrNode =>
+          connector[key].call(connector, handle, findDOMNode(componentOrNode))
+        );
       });
 
       return wrappedConnector;
