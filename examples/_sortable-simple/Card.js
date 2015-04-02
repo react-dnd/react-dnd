@@ -58,8 +58,6 @@ const cardTarget = {
 };
 
 export default configureDragDrop(Card, {
-  arePropsEqual: shallowEqual,
-
   configure: (register) => ({
     cardSourceId: register.dragSource(ItemTypes.CARD, cardSource),
     cardTargetId: register.dropTarget(ItemTypes.CARD, cardTarget)
