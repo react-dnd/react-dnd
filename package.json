@@ -42,10 +42,10 @@
     "6to5": "^3.5.3",
     "6to5-core": "^3.5.3",
     "6to5-loader": "^3.0.0",
-    "path": "0.4.9",
-    "react": "0.13.0",
+    "faker": "2.1.2",
+    "react": "~0.13.0",
     "react-hot-loader": "^1.2.3",
-    "react-router": "^0.13.2",
+    "react-router": "~0.13.2",
     "request": "2.46.0",
     "webpack": "^1.7.3",
     "webpack-dev-server": "^1.7.0"
