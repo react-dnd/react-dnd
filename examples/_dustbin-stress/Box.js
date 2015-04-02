@@ -53,7 +53,7 @@ const boxSource = {
 
 export default configureDragDrop(Box, {
   configure: (register, props) =>
-    register(props.type, boxSource),
+    register.dragSource(props.type, boxSource),
 
   inject: (connect, monitor, dragSourceId) => ({
     connectDragSource: connect.dragSource(dragSourceId),

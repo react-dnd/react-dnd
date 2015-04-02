@@ -8,10 +8,15 @@ import shallowEqual from 'react/lib/shallowEqual';
 
 const DEFAULT_KEY = '__default__';
 
-export default function configureDragDrop(InnerComponent, { configure, inject, managerName = 'dragDropManager' }) {
+export default function configureDragDrop(InnerComponent, {
+  configure,
+  inject,
+  arePropsEqual = () => false,
+  managerName = 'dragDropManager'
+}) {
   class DragDropContainer extends Component {
     shouldComponentUpdate(nextProps, nextState) {
-      return !shallowEqual(nextProps, this.props) ||
+      return !arePropsEqual(nextProps, this.props) ||
              !shallowEqual(nextState, this.state);
     }
 
@@ -36,7 +41,7 @@ export default function configureDragDrop(InnerComponent, { configure, inject, m
     }
 
     componentWillReceiveProps(nextProps) {
-      if (shallowEqual(nextProps, this.props)) {
+      if (arePropsEqual(nextProps, this.props)) {
         return;
       }
 
