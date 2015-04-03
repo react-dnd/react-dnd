@@ -17,3 +17,4 @@
 dnd-core
 * smarter canDrop()
 * state extractor on removed target
+* OKAY we prob need this big optimization: materialized views. (stream of props) + (stream of actions)

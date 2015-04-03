@@ -1,7 +1,7 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
-import shallowEqual from 'react/lib/shallowEqual';
+import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
 import memoize from 'lodash/function/memoize';
@@ -28,7 +28,7 @@ export default function configureDragDrop(InnerComponent, {
       this.manager = context[managerName];
       invariant(this.manager, 'Could not read manager from context.');
 
-      this.handles = {};
+      this.handlerIds = {};
       this.handlers = {};
 
       this.connector = this.createConnector();
@@ -93,7 +93,7 @@ export default function configureDragDrop(InnerComponent, {
 
     attachHandlers(handlers) {
       this.handlers = assign({}, this.handlers);
-      this.handles = assign({}, this.handles);
+      this.handlerIds = assign({}, this.handlerIds);
 
       Object.keys(handlers).forEach(key => {
         this.attachHandler(key, handlers[key]);
@@ -102,16 +102,16 @@ export default function configureDragDrop(InnerComponent, {
 
     detachHandlers() {
       this.handlers = assign({}, this.handlers);
-      this.handles = assign({}, this.handles);
+      this.handlerIds = assign({}, this.handlerIds);
 
-      Object.keys(this.handles).forEach(key => {
+      Object.keys(this.handlerIds).forEach(key => {
         this.detachHandler(key);
       });
     }
 
     receiveHandlers(nextHandlers) {
       this.handlers = assign({}, this.handlers);
-      this.handles = assign({}, this.handles);
+      this.handlerIds = assign({}, this.handlerIds);
 
       const keys = Object.keys(this.handlers);
       const nextKeys = Object.keys(nextHandlers);
@@ -132,9 +132,9 @@ export default function configureDragDrop(InnerComponent, {
       const registry = this.manager.getRegistry();
 
       if (handler instanceof ComponentDragSource) {
-        this.handles[key] = registry.addSource(handler.type, handler);
+        this.handlerIds[key] = registry.addSource(handler.type, handler);
       } else if (handler instanceof ComponentDropTarget) {
-        this.handles[key] = registry.addTarget(handler.type, handler);
+        this.handlerIds[key] = registry.addTarget(handler.type, handler);
       } else {
         invariant(false, 'Handle is neither a source nor a target.');
       }
@@ -144,17 +144,17 @@ export default function configureDragDrop(InnerComponent, {
 
     detachHandler(key) {
       const registry = this.manager.getRegistry();
-      const handle = this.handles[key];
+      const handlerId = this.handlerIds[key];
 
-      if (registry.isSourceHandle(handle)) {
-        registry.removeSource(handle);
-      } else if (registry.isTargetHandle(handle)) {
-        registry.removeTarget(handle);
+      if (registry.isSourceId(handlerId)) {
+        registry.removeSource(handlerId);
+      } else if (registry.isTargetId(handlerId)) {
+        registry.removeTarget(handlerId);
       } else {
         invariant(false, 'Handle is neither a source nor a target.');
       }
 
-      delete this.handles[key];
+      delete this.handlerIds[key];
       delete this.handlers[key];
     }
 
@@ -171,12 +171,12 @@ export default function configureDragDrop(InnerComponent, {
     getCurrentState() {
       const monitor = this.manager.getMonitor();
 
-      let handles = this.handles;
-      if (handles[DEFAULT_KEY]) {
-        handles = handles[DEFAULT_KEY];
+      let handlerIds = this.handlerIds;
+      if (typeof handlerIds[DEFAULT_KEY] !== 'undefined') {
+        handlerIds = handlerIds[DEFAULT_KEY];
       }
 
-      return inject(this.connector, monitor, handles);
+      return inject(this.connector, monitor, handlerIds);
     }
 
     createConnector() {
@@ -185,8 +185,8 @@ export default function configureDragDrop(InnerComponent, {
       const wrappedConnector = {};
 
       Object.keys(connector).forEach(function (key) {
-        wrappedConnector[key] = memoize(handle => componentOrNode =>
-          connector[key].call(connector, handle, findDOMNode(componentOrNode))
+        wrappedConnector[key] = memoize(handlerId => componentOrNode =>
+          connector[key].call(connector, handlerId, findDOMNode(componentOrNode))
         );
       });
 

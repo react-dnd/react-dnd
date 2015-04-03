@@ -203,8 +203,8 @@ export default class HTML5Backend {
     this.dragStartSourceHandles = [];
   }
 
-  handleDragStart(e, sourceHandle) {
-    this.dragStartSourceHandles.push([sourceHandle, e.currentTarget]);
+  handleDragStart(e, sourceId) {
+    this.dragStartSourceHandles.push([sourceId, e.currentTarget]);
   }
 
   handleTopDragStart(e) {
@@ -213,15 +213,15 @@ export default class HTML5Backend {
 
     // Try calling beginDrag() on each drag source
     // until one of them agrees to to be dragged.
-    let sourceHandle = null;
+    let sourceId = null;
     let node = null;
     for (let i = 0; i < dragStartSourceHandles.length; i++) {
-      [sourceHandle, node] = dragStartSourceHandles[i];
+      [sourceId, node] = dragStartSourceHandles[i];
       // Pass false to keep drag source unpublished.
       // We will publish it in the next tick so browser
       // has time to screenshot current state and doesn't
       // cancel drag if the source DOM node is removed.
-      this.actions.beginDrag(sourceHandle, false);
+      this.actions.beginDrag(sourceId, false);
 
       if (this.monitor.isDragging()) {
         break;
@@ -277,8 +277,8 @@ export default class HTML5Backend {
     this.dragOverTargetHandles = [];
   }
 
-  handleDragOver(e, targetHandle) {
-    this.dragOverTargetHandles.unshift(targetHandle);
+  handleDragOver(e, targetId) {
+    this.dragOverTargetHandles.unshift(targetId);
   }
 
   handleTopDragOver(e) {
@@ -287,7 +287,7 @@ export default class HTML5Backend {
     this.actions.hover(dragOverTargetHandles);
 
     const canDrop = dragOverTargetHandles.some(
-      targetHandle => this.monitor.canDrop(targetHandle)
+      targetId => this.monitor.canDrop(targetId)
     );
 
     if (canDrop) {
@@ -319,8 +319,8 @@ export default class HTML5Backend {
     }
   }
 
-  handleDragEnter(e, targetHandle) {
-    this.dragEnterTargetHandles.unshift(targetHandle);
+  handleDragEnter(e, targetId) {
+    this.dragEnterTargetHandles.unshift(targetId);
   }
 
   handleTopDragEnter(e) {
@@ -329,7 +329,7 @@ export default class HTML5Backend {
     this.actions.hover(dragEnterTargetHandles);
 
     const canDrop = dragEnterTargetHandles.some(
-      targetHandle => this.monitor.canDrop(targetHandle)
+      targetId => this.monitor.canDrop(targetId)
     );
 
     if (canDrop) {
@@ -365,8 +365,8 @@ export default class HTML5Backend {
     this.enterLeaveCounter.reset();
   }
 
-  handleDrop(e, targetHandle) {
-    this.dropTargetHandles.unshift(targetHandle);
+  handleDrop(e, targetId) {
+    this.dropTargetHandles.unshift(targetId);
   }
 
   handleTopDrop() {
@@ -391,8 +391,8 @@ export default class HTML5Backend {
     };
   }
 
-  setSourceNode(sourceHandle, node) {
-    let nodeHandlers = this.nodeHandlers[sourceHandle];
+  setSourceNode(sourceId, node) {
+    let nodeHandlers = this.nodeHandlers[sourceId];
     if (nodeHandlers && nodeHandlers.node === node) {
       return;
     }
@@ -403,20 +403,20 @@ export default class HTML5Backend {
     }
 
     if (node) {
-      nodeHandlers = this.nodeHandlers[sourceHandle] = {
+      nodeHandlers = this.nodeHandlers[sourceId] = {
         node,
-        dragstart: (e) => this.handleDragStart(e, sourceHandle)
+        dragstart: (e) => this.handleDragStart(e, sourceId)
       };
 
       node.setAttribute('draggable', true);
       node.addEventListener('dragstart', nodeHandlers.dragstart);
     } else {
-      delete this.nodeHandlers[sourceHandle];
+      delete this.nodeHandlers[sourceId];
     }
   }
 
-  setTargetNode(targetHandle, node) {
-    let nodeHandlers = this.nodeHandlers[targetHandle];
+  setTargetNode(targetId, node) {
+    let nodeHandlers = this.nodeHandlers[targetId];
     if (nodeHandlers && nodeHandlers.node === node) {
       return;
     }
@@ -428,18 +428,18 @@ export default class HTML5Backend {
     }
 
     if (node) {
-      nodeHandlers = this.nodeHandlers[targetHandle] = {
+      nodeHandlers = this.nodeHandlers[targetId] = {
         node,
-        dragenter: (e) => this.handleDragEnter(e, targetHandle),
-        dragover: (e) => this.handleDragOver(e, targetHandle),
-        drop: (e) => this.handleDrop(e, targetHandle)
+        dragenter: (e) => this.handleDragEnter(e, targetId),
+        dragover: (e) => this.handleDragOver(e, targetId),
+        drop: (e) => this.handleDrop(e, targetId)
       };
 
       node.addEventListener('dragenter', nodeHandlers.dragenter);
       node.addEventListener('dragover', nodeHandlers.dragover);
       node.addEventListener('drop', nodeHandlers.drop);
     } else {
-      delete this.nodeHandlers[targetHandle];
+      delete this.nodeHandlers[targetId];
     }
   }
 }
