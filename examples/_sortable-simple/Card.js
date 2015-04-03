@@ -23,10 +23,6 @@ const propTypes = {
 };
 
 class Card {
-  shouldComponentUpdate(nextProps) {
-    return !shallowEqual(nextProps, this.props);
-  }
-
   render() {
     const { text, isDragging, dragSourceRef, dropTargetRef } = this.props;
     const opacity = isDragging ? 0 : 1;
