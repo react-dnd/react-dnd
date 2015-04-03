@@ -50,6 +50,7 @@ class Source extends Component {
 }
 Source.propTypes = propTypes;
 
+
 const dragSource = {
   canDrag(props) {
     return !props.forbidDrag;
@@ -69,6 +70,7 @@ const DraggableSource = configureDragDrop(Source, {
     isDragging: monitor.isDragging(sourceId)
   })
 });
+
 
 export default class StatefulSource extends Component {
   constructor(props) {

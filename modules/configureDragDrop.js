@@ -24,6 +24,8 @@ export default function configureDragDrop(InnerComponent, {
     constructor(props, context) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
+      this.getComponentRef = this.getComponentRef.bind(this);
+      this.setComponentRef = this.setComponentRef.bind(this);
 
       this.manager = context[managerName];
       invariant(this.manager, 'Could not read manager from context.');
@@ -31,9 +33,18 @@ export default function configureDragDrop(InnerComponent, {
       this.handlerIds = {};
       this.handlers = {};
 
+      this.componentRef = null;
       this.connector = this.createConnector();
       this.attachHandlers(this.getNextHandlers(props));
       this.state = this.getCurrentState();
+    }
+
+    setComponentRef(ref) {
+      this.componentRef = ref;
+    }
+
+    getComponentRef() {
+      return this.componentRef;
     }
 
     componentWillMount() {
@@ -71,11 +82,11 @@ export default function configureDragDrop(InnerComponent, {
 
     getNextHandlers(props) {
       const register = {
-        dragSource(type, spec) {
-          return new ComponentDragSource(type, spec, props);
+        dragSource: (type, spec) => {
+          return new ComponentDragSource(type, spec, props, this.getComponentRef);
         },
-        dropTarget(type, spec) {
-          return new ComponentDropTarget(type, spec, props);
+        dropTarget: (type, spec) => {
+          return new ComponentDropTarget(type, spec, props, this.getComponentRef);
         }
       };
 
@@ -194,7 +205,11 @@ export default function configureDragDrop(InnerComponent, {
     }
 
     render() {
-      return <InnerComponent {...this.props} {...this.state} />;
+      return (
+        <InnerComponent {...this.props}
+                        {...this.state}
+                        ref={this.setComponentRef} />
+      );
     }
   }
 
