@@ -63,7 +63,10 @@ export default class HTML5Backend {
     this.monitor = monitor;
     this.registry = registry;
 
-    this.nodeHandlers = {};
+    this.sourceNodes = {};
+    this.sourcePreviewNodes = {};
+    this.targetNodes = {};
+
     this.enterLeaveCounter = new EnterLeaveCounter();
 
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
@@ -80,6 +83,7 @@ export default class HTML5Backend {
     this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
     this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
     this.setSourceNode = this.setSourceNode.bind(this);
+    this.setSourcePreviewNode = this.setSourcePreviewNode.bind(this);
     this.setTargetNode = this.setTargetNode.bind(this);
   }
 
@@ -230,10 +234,12 @@ export default class HTML5Backend {
 
     const { dataTransfer } = e;
     if (this.monitor.isDragging()) {
+      // Use custom drag image if user specifies it.
       // If child drag source refuses drag but parent agrees,
-      // use parent's node as drag image. This won't work in IE.
-      const dragOffset = this.getDragImageOffset(node);
-      dataTransfer.setDragImage(node, ...dragOffset);
+      // use parent's node as drag image. Neither works in IE though.
+      const dragPreview = this.sourcePreviewNodes[sourceId] || node;
+      const dragOffset = this.getDragImageOffset(dragPreview);
+      dataTransfer.setDragImage(dragPreview, ...dragOffset);
 
       try {
         // Firefox won't drag without setting data
@@ -386,60 +392,68 @@ export default class HTML5Backend {
   getConnector() {
     return {
       dragSource: this.setSourceNode,
-      dragSourcePreview: () => {},
+      dragSourcePreview: this.setSourcePreviewNode,
       dropTarget: this.setTargetNode
     };
   }
 
+  setSourcePreviewNode(sourceId, dragPreview) {
+    if (dragPreview) {
+      this.sourcePreviewNodes[sourceId] = dragPreview;
+    } else {
+      delete this.sourcePreviewNodes[sourceId];
+    }
+  }
+
   setSourceNode(sourceId, node) {
-    let nodeHandlers = this.nodeHandlers[sourceId];
-    if (nodeHandlers && nodeHandlers.node === node) {
+    let sourceNodes = this.sourceNodes[sourceId];
+    if (sourceNodes && sourceNodes.node === node) {
       return;
     }
 
-    if (nodeHandlers) {
-      nodeHandlers.node.removeEventListener('dragstart', nodeHandlers.dragstart);
-      nodeHandlers.node.setAttribute('draggable', false);
+    if (sourceNodes && sourceNodes.node) {
+      sourceNodes.node.removeEventListener('dragstart', sourceNodes.dragstart);
+      sourceNodes.node.setAttribute('draggable', false);
     }
 
     if (node) {
-      nodeHandlers = this.nodeHandlers[sourceId] = {
+      this.sourceNodes[sourceId] = sourceNodes = {
         node,
         dragstart: (e) => this.handleDragStart(e, sourceId)
       };
 
       node.setAttribute('draggable', true);
-      node.addEventListener('dragstart', nodeHandlers.dragstart);
+      node.addEventListener('dragstart', sourceNodes.dragstart);
     } else {
-      delete this.nodeHandlers[sourceId];
+      delete this.sourceNodes[sourceId];
     }
   }
 
   setTargetNode(targetId, node) {
-    let nodeHandlers = this.nodeHandlers[targetId];
-    if (nodeHandlers && nodeHandlers.node === node) {
+    let targetNodes = this.targetNodes[targetId];
+    if (targetNodes && targetNodes.node === node) {
       return;
     }
 
-    if (nodeHandlers) {
-      nodeHandlers.node.removeEventListener('dragenter', nodeHandlers.dragenter);
-      nodeHandlers.node.removeEventListener('dragover', nodeHandlers.dragover);
-      nodeHandlers.node.removeEventListener('drop', nodeHandlers.drop);
+    if (targetNodes && targetNodes.node) {
+      targetNodes.node.removeEventListener('dragenter', targetNodes.dragenter);
+      targetNodes.node.removeEventListener('dragover', targetNodes.dragover);
+      targetNodes.node.removeEventListener('drop', targetNodes.drop);
     }
 
     if (node) {
-      nodeHandlers = this.nodeHandlers[targetId] = {
+      this.targetNodes[targetId] = targetNodes = {
         node,
         dragenter: (e) => this.handleDragEnter(e, targetId),
         dragover: (e) => this.handleDragOver(e, targetId),
         drop: (e) => this.handleDrop(e, targetId)
       };
 
-      node.addEventListener('dragenter', nodeHandlers.dragenter);
-      node.addEventListener('dragover', nodeHandlers.dragover);
-      node.addEventListener('drop', nodeHandlers.drop);
+      node.addEventListener('dragenter', targetNodes.dragenter);
+      node.addEventListener('dragover', targetNodes.dragover);
+      node.addEventListener('drop', targetNodes.drop);
     } else {
-      delete this.nodeHandlers[targetId];
+      delete this.targetNodes[targetId];
     }
   }
 }
