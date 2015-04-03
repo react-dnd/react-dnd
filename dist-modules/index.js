@@ -1,16 +1,12 @@
 "use strict";
 
-var _require = require("./backends");
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-var HTML5 = _require.HTML5;
-var createDragDropMixin = require("./utils/createDragDropMixin");
-
-module.exports = {
-  DragDropMixin: createDragDropMixin(HTML5),
-  ImagePreloaderMixin: require("./mixins/ImagePreloaderMixin"),
-  DragLayerMixin: require("./mixins/DragLayerMixin"),
-  HorizontalDragAnchors: require("./constants/HorizontalDragAnchors"),
-  VerticalDragAnchors: require("./constants/VerticalDragAnchors"),
-  NativeDragItemTypes: require("./constants/NativeDragItemTypes"),
-  DropEffects: require("./constants/DropEffects")
-};
+exports.HTML5Backend = _interopRequire(require("./backends/HTML5"));
+exports.NativeTypes = _interopRequire(require("./NativeTypes"));
+exports.configureDragDrop = _interopRequire(require("./configureDragDrop"));
+exports.configureDragDropContext = _interopRequire(require("./configureDragDropContext"));
+exports.joinRefs = _interopRequire(require("./joinRefs"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
