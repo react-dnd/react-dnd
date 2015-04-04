@@ -1,4 +1,5 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
+import { CompositeDisposable, SerialDisposable } from 'rx-lite';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
 import shallowEqual from './utils/shallowEqual';
@@ -32,9 +33,10 @@ export default function configureDragDrop(InnerComponent, {
 
       this.handlerIds = {};
       this.handlers = {};
+      this.resources = {};
 
       this.componentRef = null;
-      this.connector = this.createConnector();
+      this.componentConnector = this.createComponentConnector();
       this.attachHandlers(this.getNextHandlers(props));
       this.state = this.getCurrentState();
     }
@@ -70,7 +72,7 @@ export default function configureDragDrop(InnerComponent, {
       monitor.removeChangeListener(this.handleChange);
 
       this.detachHandlers();
-      this.connector = null;
+      this.componentConnector = null;
     }
 
     handleChange() {
@@ -144,15 +146,19 @@ export default function configureDragDrop(InnerComponent, {
     attachHandler(key, handler) {
       const registry = this.manager.getRegistry();
 
+      let handlerId;
       if (handler instanceof ComponentDragSource) {
-        this.handlerIds[key] = registry.addSource(handler.type, handler);
+        handlerId = registry.addSource(handler.type, handler);
       } else if (handler instanceof ComponentDropTarget) {
-        this.handlerIds[key] = registry.addTarget(handler.type, handler);
+        handlerId = registry.addTarget(handler.type, handler);
       } else {
         invariant(false, 'Handle is neither a source nor a target.');
       }
 
+      this.handlerIds[key] = handlerId;
       this.handlers[key] = handler;
+
+      this.resources[handlerId] = new CompositeDisposable();
     }
 
     detachHandler(key) {
@@ -166,6 +172,9 @@ export default function configureDragDrop(InnerComponent, {
       } else {
         invariant(false, 'Handle is neither a source nor a target.');
       }
+
+      this.resources[handlerId].dispose();
+      delete this.resources[handlerId];
 
       delete this.handlerIds[key];
       delete this.handlers[key];
@@ -181,6 +190,11 @@ export default function configureDragDrop(InnerComponent, {
       this.attachHandler(key, nextHandler);
     }
 
+    useResource(handlerId, disposable) {
+      this.resources[handlerId].add(disposable);
+      return disposable;
+    }
+
     getCurrentState() {
       const monitor = this.manager.getMonitor();
 
@@ -189,21 +203,44 @@ export default function configureDragDrop(InnerComponent, {
         handlerIds = handlerIds[DEFAULT_KEY];
       }
 
-      return inject(this.connector, monitor, handlerIds);
+      return inject(this.componentConnector, monitor, handlerIds);
     }
 
-    createConnector() {
+    createComponentConnector() {
       const backend = this.manager.getBackend();
       const connector = backend.getConnector();
-      const wrappedConnector = {};
+      const componentConnector = {};
 
-      Object.keys(connector).forEach(function (key) {
-        wrappedConnector[key] = memoize(handlerId => componentOrNode =>
-          connector[key].call(connector, handlerId, findDOMNode(componentOrNode))
-        );
+      Object.keys(connector).forEach(key => {
+        const connectBackend = connector[key].bind(connector);
+        const connectComponent = this.createComponentConnectorMethod(key, connectBackend);
+
+        componentConnector[key] = memoize(connectComponent);
       });
 
-      return wrappedConnector;
+      return componentConnector;
+    }
+
+    createComponentConnectorMethod(key, connectBackend) {
+      return (handlerId) => {
+        const serialDisposable = this.useResource(handlerId, new SerialDisposable());
+        let currentNode = null;
+
+        return (componentOrNode) => {
+          var nextNode = findDOMNode(componentOrNode);
+          if (nextNode === currentNode) {
+            return;
+          }
+
+          serialDisposable.setDisposable(null);
+
+          if (nextNode) {
+            const nextDisposable = connectBackend(handlerId, nextNode);
+            serialDisposable.setDisposable(nextDisposable);
+            currentNode = nextNode;
+          }
+        };
+      };
     }
 
     render() {
