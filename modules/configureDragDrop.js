@@ -81,6 +81,8 @@ export default function configureDragDrop(InnerComponent, {
     }
 
     getNextHandlers(props) {
+      props = assign({}, props);
+
       const register = {
         dragSource: (type, spec) => {
           return new ComponentDragSource(type, spec, props, this.getComponentRef);
