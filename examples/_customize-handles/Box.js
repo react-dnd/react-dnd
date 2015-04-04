@@ -55,7 +55,7 @@ export default configureDragDrop(Box, {
   configure: (register) =>
     register.dragSource(ItemTypes.BOX, boxSource),
 
-  inject: (connect, monitor, dragSourceId) => ({
+  collect: (connect, monitor, dragSourceId) => ({
     dragPreviewRef: connect.dragSourcePreview(dragSourceId),
     dragSourceRef: connect.dragSource(dragSourceId),
     isDragging: monitor.isDragging(dragSourceId)

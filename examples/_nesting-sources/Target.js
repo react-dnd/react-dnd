@@ -61,7 +61,7 @@ const DraggableTarget = configureDragDrop(Target, {
   configure: (register) =>
     register.dropTarget([Colors.YELLOW, Colors.BLUE], dropTarget),
 
-  inject: (connect, monitor, target) => ({
+  collect: (connect, monitor, target) => ({
     dropTargetRef: connect.dropTarget(target),
     isOver: monitor.isOver(target),
     canDrop: monitor.canDrop(target),
