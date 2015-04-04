@@ -387,7 +387,7 @@ export default class HTML5Backend {
     }
   }
 
-  getConnector() {
+  connect() {
     return {
       dragSource: this.connectSourceNode,
       dragSourcePreview: this.connectSourcePreviewNode,

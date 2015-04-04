@@ -208,12 +208,12 @@ export default function configureDragDrop(InnerComponent, {
 
     createComponentConnector() {
       const backend = this.manager.getBackend();
-      const connector = backend.getConnector();
+      const backendConnector = backend.connect();
       const componentConnector = {};
 
-      Object.keys(connector).forEach(key => {
-        const connectBackend = connector[key].bind(connector);
-        const connectComponent = this.createComponentConnectorMethod(key, connectBackend);
+      Object.keys(backendConnector).forEach(key => {
+        const connectBackend = backendConnector[key].bind(backendConnector);
+        const connectComponent = this.wrapConnectBackend(key, connectBackend);
 
         componentConnector[key] = memoize(connectComponent);
       });
@@ -221,7 +221,7 @@ export default function configureDragDrop(InnerComponent, {
       return componentConnector;
     }
 
-    createComponentConnectorMethod(key, connectBackend) {
+    wrapConnectBackend(key, connectBackend) {
       return (handlerId) => {
         const serialDisposable = this.useResource(handlerId, new SerialDisposable());
         let currentNode = null;
