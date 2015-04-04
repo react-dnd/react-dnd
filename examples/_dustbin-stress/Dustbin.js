@@ -62,7 +62,7 @@ export default configureDragDrop(Dustbin, {
   configure: (register, props) =>
     register.dropTarget(props.accepts, dropTarget),
 
-  inject: (connect, monitor, dropTargetId) => ({
+  collect: (connect, monitor, dropTargetId) => ({
     isOver: monitor.isOver(dropTargetId),
     canDrop: monitor.canDrop(dropTargetId),
     connectDropTarget: connect.dropTarget(dropTargetId)

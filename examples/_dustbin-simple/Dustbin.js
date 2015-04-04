@@ -53,7 +53,7 @@ export default configureDragDrop(Dustbin, {
   configure: (register) =>
     register.dropTarget(ItemTypes.BOX, boxDropTarget),
 
-  inject: (connect, monitor, targetId) => ({
+  collect: (connect, monitor, targetId) => ({
     dropTargetRef: connect.dropTarget(targetId),
     isOver: monitor.isOver(targetId),
     canDrop: monitor.canDrop(targetId)

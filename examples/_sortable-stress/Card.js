@@ -59,7 +59,7 @@ export default configureDragDrop(Card, {
     cardTargetId: register.dropTarget(ItemTypes.CARD, cardTarget)
   }),
 
-  inject: (connect, monitor, { cardSourceId, cardTargetId }) => ({
+  collect: (connect, monitor, { cardSourceId, cardTargetId }) => ({
     isDragging: monitor.isDragging(cardSourceId),
     dragSourceRef: connect.dragSource(cardSourceId),
     dropTargetRef: connect.dropTarget(cardTargetId)

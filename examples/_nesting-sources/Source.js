@@ -65,7 +65,7 @@ const DraggableSource = configureDragDrop(Source, {
   configure: (register, props) =>
     register.dragSource(props.color, dragSource),
 
-  inject: (connect, monitor, sourceId) => ({
+  collect: (connect, monitor, sourceId) => ({
     dragSourceRef: connect.dragSource(sourceId),
     isDragging: monitor.isDragging(sourceId)
   })

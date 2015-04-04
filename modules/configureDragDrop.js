@@ -12,7 +12,7 @@ const DEFAULT_KEY = '__default__';
 
 export default function configureDragDrop(InnerComponent, {
   configure,
-  inject,
+  collect,
   arePropsEqual = shallowEqualScalar,
   managerName = 'dragDropManager'
 }) {
@@ -203,7 +203,7 @@ export default function configureDragDrop(InnerComponent, {
         handlerIds = handlerIds[DEFAULT_KEY];
       }
 
-      return inject(this.componentConnector, monitor, handlerIds);
+      return collect(this.componentConnector, monitor, handlerIds);
     }
 
     createComponentConnector() {
