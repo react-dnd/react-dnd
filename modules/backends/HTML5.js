@@ -1,5 +1,4 @@
 import { DragSource } from 'dnd-core';
-import { Disposable } from 'rx-lite';
 import NativeTypes from '../NativeTypes';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import invariant from 'react/lib/invariant';
@@ -398,9 +397,9 @@ export default class HTML5Backend {
   connectSourcePreviewNode(sourceId, node) {
     this.sourcePreviewNodes[sourceId] = node;
 
-    return new Disposable(() => {
+    return () => {
       delete this.sourcePreviewNodes[sourceId];
-    });
+    };
   }
 
   connectSourceNode(sourceId, node) {
@@ -409,10 +408,10 @@ export default class HTML5Backend {
     node.setAttribute('draggable', true);
     node.addEventListener('dragstart', handleDragStart);
 
-    return new Disposable(() => {
+    return () => {
       node.removeEventListener('dragstart', handleDragStart);
       node.setAttribute('draggable', false);
-    });
+    };
   }
 
   connectTargetNode(targetId, node) {
@@ -424,10 +423,10 @@ export default class HTML5Backend {
     node.addEventListener('dragover', handleDragOver);
     node.addEventListener('drop', handleDrop);
 
-    return new Disposable(() => {
+    return () => {
       node.removeEventListener('dragenter', handleDragEnter);
       node.removeEventListener('dragover', handleDragOver);
       node.removeEventListener('drop', handleDrop);
-    });
+    };
   }
 }

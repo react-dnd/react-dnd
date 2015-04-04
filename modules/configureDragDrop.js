@@ -1,5 +1,5 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
-import { CompositeDisposable, SerialDisposable } from 'rx-lite';
+import { CompositeDisposable, SerialDisposable, Disposable } from 'rx-lite';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
 import shallowEqual from './utils/shallowEqual';
@@ -235,8 +235,8 @@ export default function configureDragDrop(InnerComponent, {
           serialDisposable.setDisposable(null);
 
           if (nextNode) {
-            const nextDisposable = connectBackend(handlerId, nextNode);
-            serialDisposable.setDisposable(nextDisposable);
+            const dispose = connectBackend(handlerId, nextNode);
+            serialDisposable.setDisposable(new Disposable(dispose));
             currentNode = nextNode;
           }
         };
