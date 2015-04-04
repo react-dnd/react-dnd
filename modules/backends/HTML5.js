@@ -1,4 +1,5 @@
 import { DragSource } from 'dnd-core';
+import { Disposable } from 'rx-lite';
 import NativeTypes from '../NativeTypes';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import invariant from 'react/lib/invariant';
@@ -63,10 +64,7 @@ export default class HTML5Backend {
     this.monitor = monitor;
     this.registry = registry;
 
-    this.sourceNodes = {};
     this.sourcePreviewNodes = {};
-    this.targetNodes = {};
-
     this.enterLeaveCounter = new EnterLeaveCounter();
 
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
@@ -82,9 +80,9 @@ export default class HTML5Backend {
     this.handleTopDrop = this.handleTopDrop.bind(this);
     this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
     this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
-    this.setSourceNode = this.setSourceNode.bind(this);
-    this.setSourcePreviewNode = this.setSourcePreviewNode.bind(this);
-    this.setTargetNode = this.setTargetNode.bind(this);
+    this.connectSourceNode = this.connectSourceNode.bind(this);
+    this.connectSourcePreviewNode = this.connectSourcePreviewNode.bind(this);
+    this.connectTargetNode = this.connectTargetNode.bind(this);
   }
 
   setup() {
@@ -391,69 +389,45 @@ export default class HTML5Backend {
 
   getConnector() {
     return {
-      dragSource: this.setSourceNode,
-      dragSourcePreview: this.setSourcePreviewNode,
-      dropTarget: this.setTargetNode
+      dragSource: this.connectSourceNode,
+      dragSourcePreview: this.connectSourcePreviewNode,
+      dropTarget: this.connectTargetNode
     };
   }
 
-  setSourcePreviewNode(sourceId, dragPreview) {
-    if (dragPreview) {
-      this.sourcePreviewNodes[sourceId] = dragPreview;
-    } else {
+  connectSourcePreviewNode(sourceId, node) {
+    this.sourcePreviewNodes[sourceId] = node;
+
+    return new Disposable(() => {
       delete this.sourcePreviewNodes[sourceId];
-    }
+    });
   }
 
-  setSourceNode(sourceId, node) {
-    let sourceNodes = this.sourceNodes[sourceId];
-    if (sourceNodes && sourceNodes.node === node) {
-      return;
-    }
+  connectSourceNode(sourceId, node) {
+    const handleDragStart = (e) => this.handleDragStart(e, sourceId);
 
-    if (sourceNodes && sourceNodes.node) {
-      sourceNodes.node.removeEventListener('dragstart', sourceNodes.dragstart);
-      sourceNodes.node.setAttribute('draggable', false);
-    }
+    node.setAttribute('draggable', true);
+    node.addEventListener('dragstart', handleDragStart);
 
-    if (node) {
-      this.sourceNodes[sourceId] = sourceNodes = {
-        node,
-        dragstart: (e) => this.handleDragStart(e, sourceId)
-      };
-
-      node.setAttribute('draggable', true);
-      node.addEventListener('dragstart', sourceNodes.dragstart);
-    } else {
-      delete this.sourceNodes[sourceId];
-    }
+    return new Disposable(() => {
+      node.removeEventListener('dragstart', handleDragStart);
+      node.setAttribute('draggable', false);
+    });
   }
 
-  setTargetNode(targetId, node) {
-    let targetNodes = this.targetNodes[targetId];
-    if (targetNodes && targetNodes.node === node) {
-      return;
-    }
+  connectTargetNode(targetId, node) {
+    const handleDragEnter = (e) => this.handleDragEnter(e, targetId);
+    const handleDragOver = (e) => this.handleDragOver(e, targetId);
+    const handleDrop = (e) => this.handleDrop(e, targetId);
 
-    if (targetNodes && targetNodes.node) {
-      targetNodes.node.removeEventListener('dragenter', targetNodes.dragenter);
-      targetNodes.node.removeEventListener('dragover', targetNodes.dragover);
-      targetNodes.node.removeEventListener('drop', targetNodes.drop);
-    }
+    node.addEventListener('dragenter', handleDragEnter);
+    node.addEventListener('dragover', handleDragOver);
+    node.addEventListener('drop', handleDrop);
 
-    if (node) {
-      this.targetNodes[targetId] = targetNodes = {
-        node,
-        dragenter: (e) => this.handleDragEnter(e, targetId),
-        dragover: (e) => this.handleDragOver(e, targetId),
-        drop: (e) => this.handleDrop(e, targetId)
-      };
-
-      node.addEventListener('dragenter', targetNodes.dragenter);
-      node.addEventListener('dragover', targetNodes.dragover);
-      node.addEventListener('drop', targetNodes.drop);
-    } else {
-      delete this.targetNodes[targetId];
-    }
+    return new Disposable(() => {
+      node.removeEventListener('dragenter', handleDragEnter);
+      node.removeEventListener('dragover', handleDragOver);
+      node.removeEventListener('drop', handleDrop);
+    });
   }
 }
