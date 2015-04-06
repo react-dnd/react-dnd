@@ -232,12 +232,12 @@ export default function configureDragDrop(InnerComponent, {
             return;
           }
 
+          currentNode = nextNode;
           serialDisposable.setDisposable(null);
 
           if (nextNode) {
-            const dispose = connectBackend(handlerId, nextNode);
-            serialDisposable.setDisposable(new Disposable(dispose));
-            currentNode = nextNode;
+            const nextDispose = connectBackend(handlerId, nextNode);
+            serialDisposable.setDisposable(new Disposable(nextDispose));
           }
         };
       };
