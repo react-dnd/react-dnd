@@ -9,7 +9,7 @@ export default class EnterLeaveCounter {
   enter(enteringNode) {
     this.entered = union(
       this.entered.filter(node =>
-        document.body.contains(node) &&
+        document.documentElement.contains(node) &&
         (!node.contains || node.contains(enteringNode))
       ),
       [enteringNode]
@@ -21,7 +21,7 @@ export default class EnterLeaveCounter {
   leave(leavingNode) {
     this.entered = without(
       this.entered.filter(node =>
-        document.body.contains(node)
+        document.documentElement.contains(node)
       ),
       leavingNode
     );
