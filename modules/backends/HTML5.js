@@ -1,6 +1,7 @@
 import { DragSource } from 'dnd-core';
 import NativeTypes from '../NativeTypes';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
+import shallowEqual from '../utils/shallowEqual';
 import invariant from 'react/lib/invariant';
 import warning from 'react/lib/warning';
 
@@ -12,6 +13,21 @@ function isUrlDataTransfer(dataTransfer) {
 function isFileDataTransfer(dataTransfer) {
   var types = Array.prototype.slice.call(dataTransfer.types);
   return types.indexOf('Files') > -1;
+}
+
+const ELEMENT_NODE = 1;
+
+function getElementRect(el) {
+  if (el.nodeType !== ELEMENT_NODE) {
+    el = el.parentElement;
+  }
+
+  if (!el) {
+    return null;
+  }
+
+  const { top, left, width, height } = el.getBoundingClientRect();
+  return { top, left, width, height };
 }
 
 class FileDragSource extends DragSource {
@@ -182,6 +198,8 @@ export default class HTML5Backend {
   setCurrentDragSourceNode(node) {
     this.clearCurrentDragSourceNode();
     this.currentDragSourceNode = node;
+    this.currentDragSourceNodeRect = getElementRect(node);
+    this.currentDragSourceNodeRectChanged = false;
 
     // Receiving a mouse event in the middle of a dragging operation
     // means it has ended and the drag source node disappeared from DOM,
@@ -192,11 +210,31 @@ export default class HTML5Backend {
   clearCurrentDragSourceNode() {
     if (this.currentDragSourceNode) {
       this.currentDragSourceNode = null;
+      this.currentDragSourceNodeRect = null;
+      this.currentDragSourceNodeRectChanged = false;
       window.removeEventListener('mousemove', this.endDragIfSourceWasRemovedFromDOM, true);
       return true;
     } else {
       return false;
     }
+  }
+
+  checkIfCurrentDragSourceRectChanged() {
+    const node = this.currentDragSourceNode;
+    if (!node) {
+      return false;
+    }
+
+    if (this.currentDragSourceNodeRectChanged) {
+      return true;
+    }
+
+    this.currentDragSourceNodeRectChanged = !shallowEqual(
+      getElementRect(node),
+      this.currentDragSourceNodeRect
+    );
+
+    return this.currentDragSourceNodeRectChanged;
   }
 
   handleTopDragStartCapture() {
@@ -301,6 +339,10 @@ export default class HTML5Backend {
       // "drop and blow away the whole document" action.
       e.preventDefault();
       e.dataTransfer.dropEffect = 'none';
+    } else if (this.checkIfCurrentDragSourceRectChanged()) {
+      // Prevent animating to incorrect position.
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
     }
   }
 
