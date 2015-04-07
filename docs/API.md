@@ -167,7 +167,7 @@ statics: {
         beginDrag(component) {
           return {
             item: ...,
-            dragPreivew: component.getPreloadedImage('some-img-url1');
+            dragPreview: component.getPreloadedImage('some-img-url1');
           };
         }
       }
