@@ -82,6 +82,7 @@ export default class HTML5Backend {
     this.registry = registry;
 
     this.sourcePreviewNodes = {};
+    this.sourceNodeOptions = {};
     this.enterLeaveCounter = new EnterLeaveCounter();
 
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
@@ -152,6 +153,12 @@ export default class HTML5Backend {
     // A good test case is canDrag(): false on child.
     // With parent as preview, we need to manually calculate the offset.
     return [0, 0];
+  }
+
+  getDesiredDropEffect() {
+    const sourceId = this.monitor.getSourceId();
+    const sourceNodeOptions = this.sourceNodeOptions[sourceId];
+    return sourceNodeOptions.effect || 'move';
   }
 
   isDraggingNativeItem() {
@@ -334,8 +341,9 @@ export default class HTML5Backend {
     );
 
     if (canDrop) {
+      // Show user-specified drop effect.
       e.preventDefault();
-      e.dataTransfer.dropEffect = 'copy';
+      e.dataTransfer.dropEffect = this.getDesiredDropEffect();
     } else if (this.isDraggingNativeItem()) {
       // Don't show a nice cursor but still prevent default
       // "drop and blow away the whole document" action.
@@ -343,6 +351,7 @@ export default class HTML5Backend {
       e.dataTransfer.dropEffect = 'none';
     } else if (this.checkIfCurrentDragSourceRectChanged()) {
       // Prevent animating to incorrect position.
+      // Drop effect must be other than 'none' to prevent animation.
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
     }
@@ -382,6 +391,7 @@ export default class HTML5Backend {
     if (canDrop) {
       // IE requires this to fire dragover events
       e.preventDefault();
+      e.dataTransfer.dropEffect = this.getDesiredDropEffect();
     }
   }
 
@@ -446,13 +456,15 @@ export default class HTML5Backend {
     };
   }
 
-  connectSourceNode(sourceId, node) {
+  connectSourceNode(sourceId, node, options = {}) {
     const handleDragStart = (e) => this.handleDragStart(e, sourceId);
 
+    this.sourceNodeOptions[sourceId] = options;
     node.setAttribute('draggable', true);
     node.addEventListener('dragstart', handleDragStart);
 
     return () => {
+      delete this.sourceNodeOptions[sourceId];
       node.removeEventListener('dragstart', handleDragStart);
       node.setAttribute('draggable', false);
     };

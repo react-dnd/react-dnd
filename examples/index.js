@@ -10,6 +10,7 @@ import NestingSources from './_nesting-sources';
 import SortableSimple from './_sortable-simple';
 import SortableStress from './_sortable-stress';
 import CustomizeHandles from './_customize-handles';
+import CustomizeEffects from './_customize-effects';
 
 /*
 DragAroundNaive = require('./_drag-around-naive/index'),
@@ -26,7 +27,7 @@ const App = React.createClass({
           <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>, <Link to='dustbin-stress'>stress test</Link>)</li>
           <li>Nesting (<Link to='nesting-sources'>drag sources</Link>)</li>
           <li>Sortable (<Link to='sortable-simple'>simple</Link>, <Link to='sortable-stress'>stress test</Link>)</li>
-          <li>Customize (<Link to='customize-handles'>drag handles</Link>)</li>
+          <li>Customize (<Link to='customize-handles'>drag handles</Link>, <Link to='customize-effects'>drop effects</Link>)</li>
         </ul>
         <hr />
         <RouteHandler />
@@ -50,6 +51,7 @@ const routes = (
     <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
     <Route name='sortable-stress' path='sortable-stress' handler={SortableStress} />
     <Route name='customize-handles' path='customize-handles' handler={CustomizeHandles} />
+    <Route name='customize-effects' path='customize-effects' handler={CustomizeEffects} />
     <Redirect from='/' to='dustbin-simple' />
   </Route>
 );

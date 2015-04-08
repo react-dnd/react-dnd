@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
 import shallowEqual from 'react/lib/shallowEqual';
-import { configureDragDrop, joinRefs } from 'react-dnd';
+import { configureDragDrop } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -28,7 +28,7 @@ class Card {
     const opacity = isDragging ? 0 : 1;
 
     return (
-      <div ref={joinRefs(dragSourceRef, dropTargetRef)}
+      <div ref={c => { dragSourceRef(c); dropTargetRef(c); }}
            style={{ ...style, opacity }}>
         {text}
       </div>

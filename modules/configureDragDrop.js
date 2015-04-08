@@ -224,20 +224,24 @@ export default function configureDragDrop(InnerComponent, {
     wrapConnectBackend(key, connectBackend) {
       return (handlerId) => {
         const serialDisposable = this.useResource(handlerId, new SerialDisposable());
-        let currentNode = null;
 
-        return (componentOrNode) => {
-          var nextNode = findDOMNode(componentOrNode);
-          if (nextNode === currentNode) {
+        let currentNode = null;
+        let currentOptions = null;
+
+        return (nextComponentOrNode, nextOptions) => {
+          const nextNode = findDOMNode(nextComponentOrNode);
+          if (nextNode === currentNode && shallowEqualScalar(currentOptions, nextOptions)) {
             return;
           }
 
           currentNode = nextNode;
-          serialDisposable.setDisposable(null);
+          currentOptions = nextOptions;
 
           if (nextNode) {
-            const nextDispose = connectBackend(handlerId, nextNode);
+            const nextDispose = connectBackend(handlerId, nextNode, nextOptions);
             serialDisposable.setDisposable(new Disposable(nextDispose));
+          } else {
+            serialDisposable.setDisposable(null);
           }
         };
       };
