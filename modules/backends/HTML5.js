@@ -15,6 +15,68 @@ function isFileDataTransfer(dataTransfer) {
   return types.indexOf('Files') > -1;
 }
 
+function getMouseEventOffsets(e, sourceNode, dragPreview) {
+  const dragPreviewNode = dragPreview instanceof Image ?
+    sourceNode :
+    dragPreview;
+
+  const sourceNodeRect = sourceNode.getBoundingClientRect();
+  const dragPreviewNodeRect = dragPreviewNode.getBoundingClientRect();
+
+  const offsetFromClient = {
+    x: e.clientX,
+    y: e.clientY
+  };
+  const offsetFromDragPreview = {
+    x: e.clientX - dragPreviewNodeRect.left,
+    y: e.clientY - dragPreviewNodeRect.top
+  };
+  const offsetFromSource = {
+    x: e.clientX - sourceNodeRect.left,
+    y: e.clientY - sourceNodeRect.top
+  };
+
+  return { offsetFromClient, offsetFromSource, offsetFromDragPreview };
+}
+
+function isDesktopSafari() {
+  return !!window.safari;
+}
+
+function isFirefox() {
+  return /firefox/i.test(navigator.userAgent);
+}
+
+function getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview) {
+  const { offsetWidth: sourceWidth, offsetHeight: sourceHeight } = sourceNode;
+  const isImage = dragPreview instanceof Image;
+
+  let dragPreviewWidth = isImage ? dragPreview.width : sourceWidth;
+  let dragPreviewHeight = isImage ? dragPreview.height : sourceHeight;
+  let { x, y } = offsetFromDragPreview;
+
+  // Work around @2x coordinate discrepancies in browsers
+  if (isDesktopSafari() && isImage) {
+    dragPreviewHeight /= window.devicePixelRatio;
+    dragPreviewWidth /= window.devicePixelRatio;
+  } else if (isFirefox() && !isImage) {
+    dragPreviewHeight *= window.devicePixelRatio;
+    dragPreviewWidth *= window.devicePixelRatio;
+  }
+
+  // Scale to translate coordinates to preview size
+  x *= (dragPreviewWidth / sourceWidth);
+  y *= (dragPreviewHeight / sourceHeight);
+
+  // Work around Safari 8 positioning bug
+  if (isDesktopSafari() && isImage) {
+    // We'll have to wait for @3x to see if this is entirely correct
+    y += (window.devicePixelRatio - 1) * dragPreviewHeight;
+  }
+
+  return { x, y };
+}
+
 const ELEMENT_NODE = 1;
 
 function getElementRect(el) {
@@ -148,13 +210,6 @@ export default class HTML5Backend {
     this.clearCurrentDragSourceNode();
   }
 
-  getDragImageOffset() {
-    // TODO: not implemented
-    // A good test case is canDrag(): false on child.
-    // With parent as preview, we need to manually calculate the offset.
-    return [0, 0];
-  }
-
   getDesiredDropEffect() {
     const sourceId = this.monitor.getSourceId();
     const sourceNodeOptions = this.sourceNodeOptions[sourceId];
@@ -262,9 +317,9 @@ export default class HTML5Backend {
     // Try calling beginDrag() on each drag source
     // until one of them agrees to to be dragged.
     let sourceId = null;
-    let node = null;
+    let sourceNode = null;
     for (let i = 0; i < dragStartSourceHandles.length; i++) {
-      [sourceId, node] = dragStartSourceHandles[i];
+      [sourceId, sourceNode] = dragStartSourceHandles[i];
       // Pass false to keep drag source unpublished.
       // We will publish it in the next tick so browser
       // has time to screenshot current state and doesn't
@@ -281,9 +336,10 @@ export default class HTML5Backend {
       // Use custom drag image if user specifies it.
       // If child drag source refuses drag but parent agrees,
       // use parent's node as drag image. Neither works in IE though.
-      const dragPreview = this.sourcePreviewNodes[sourceId] || node;
-      const dragOffset = this.getDragImageOffset(dragPreview);
-      dataTransfer.setDragImage(dragPreview, ...dragOffset);
+      const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
+      const { offsetFromDragPreview } = getMouseEventOffsets(e, sourceNode, dragPreview);
+      const dragPreviewOffset = getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview);
+      dataTransfer.setDragImage(dragPreview, dragPreviewOffset.x, dragPreviewOffset.y);
 
       try {
         // Firefox won't drag without setting data

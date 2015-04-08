@@ -13,5 +13,10 @@
 * (?) change beginDrag() to accept an array and transform value, symmetric to drop()
 * this should make HTML5#handleTopDragStart shorter and loopless
 * add support for alignments and implement them
+* should we allow gif drag previews? see: safari
+* setDragImage and IE
+* sortable gets buggy in Firefox
+
+* don't use react internals.
 
 * example: advanced communication (drop results, overriding parent drop zones)
