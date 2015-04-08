@@ -4,7 +4,7 @@ module.exports = {
   entry: './modules/index',
   module: {
     loaders: [
-      { test: /\.js$/, loader: '6to5?experimental', exclude: /node_modules/ }
+      { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
     ]
   },
   output: {

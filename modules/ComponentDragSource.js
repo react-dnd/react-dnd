@@ -5,6 +5,8 @@ import isObject from 'lodash/lang/isObject';
 
 export default class ComponentDragSource extends DragSource {
   constructor(type, spec, props, getComponentRef) {
+    super();
+
     invariant(isString(type), 'Expected type to be a string.');
     invariant(isObject(spec), 'Expected spec to be an object.');
 
