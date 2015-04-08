@@ -40,10 +40,10 @@
     "react": ">=0.12.0 <0.14.0"
   },
   "devDependencies": {
-    "6to5": "^3.5.3",
-    "6to5-core": "^3.5.3",
-    "6to5-loader": "^3.0.0",
     "animation-frame": "^0.2.4",
+    "babel": "^5.0.10",
+    "babel-core": "^5.0.10",
+    "babel-loader": "^5.0.0",
     "faker": "2.1.2",
     "react": "~0.13.0",
     "react-hot-loader": "^1.2.3",

@@ -32,6 +32,7 @@ function getElementRect(el) {
 
 class FileDragSource extends DragSource {
   constructor() {
+    super();
     this.item = {
       get files() {
         warning(false, 'Browser doesn\'t allow reading file information until the files are dropped.');
@@ -52,6 +53,7 @@ class FileDragSource extends DragSource {
 
 class UrlDragSource extends DragSource {
   constructor() {
+    super();
     this.item = {
       get urls() {
         warning(false, 'Browser doesn\'t allow reading URL information until the link is dropped.');
