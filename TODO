@@ -7,12 +7,11 @@
 * early invariants for common mistakes (e.g. missing context?)
 * fix hot reloading
 * higher-level components
+* what do we do about DragImagePreloader?
 
 * change drop() to always work with object, remove didDrop
-* change beginDrag() to accept an array and transform value, symmetric to drop()
+* (?) change beginDrag() to accept an array and transform value, symmetric to drop()
 * this should make HTML5#handleTopDragStart shorter and loopless
-* add support for drag effect
 * add support for alignments and implement them
 
-* example: image as drag preview (what do we do about DragImagePreloader?)
-* example: advanced communication (different effects, drop results, overriding parent drop zones)
+* example: advanced communication (drop results, overriding parent drop zones)
