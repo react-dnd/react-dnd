@@ -22,12 +22,12 @@ class Box extends Component {
   render() {
     const { isDragging, dragSourceRef, showCopyIcon } = this.props;
     const opacity = isDragging ? 0.4 : 1;
-    const effect = showCopyIcon ? 'copy' : 'move';
+    const dropEffect = showCopyIcon ? 'copy' : 'move';
 
     return (
       <div style={{ ...style, opacity }}
-           ref={c => dragSourceRef(c, { effect })}>
-        When I am dragged over a compatible drop zone, I have '{effect}' icon.
+           ref={c => dragSourceRef(c, { dropEffect })}>
+        When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
       </div>
     );
   }

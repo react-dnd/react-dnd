@@ -2,6 +2,7 @@ import { DragSource } from 'dnd-core';
 import NativeTypes from '../NativeTypes';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import shallowEqual from '../utils/shallowEqual';
+import defaults from 'lodash/object/defaults';
 import invariant from 'react/lib/invariant';
 import warning from 'react/lib/warning';
 
@@ -47,13 +48,109 @@ function isFirefox() {
   return /firefox/i.test(navigator.userAgent);
 }
 
-function getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview) {
+/**
+ * I took this straight from Wikipedia, it must be good!
+ */
+function createMonotonicInterpolant(xs, ys) {
+  const length = xs.length;
+
+  // Rearrange xs and ys so that xs is sorted
+  const indexes = [];
+  for (let i = 0; i < length; i++) {
+    indexes.push(i);
+  }
+  indexes.sort((a, b) => xs[a] < xs[b] ? -1 : 1);
+
+  const oldXs = xs, oldYs = ys;
+  // Impl: Creating new arrays also prevents problems if the input arrays are mutated later
+  xs = [];
+  ys = [];
+  // Impl: Unary plus properly converts values to numbers
+  for (let i = 0; i < length; i++) {
+    xs.push(+oldXs[indexes[i]]);
+    ys.push(+oldYs[indexes[i]]);
+  }
+
+  // Get consecutive differences and slopes
+  const dys = [];
+  const dxs = [];
+  const ms = [];
+  let dx, dy;
+  for (let i = 0; i < length - 1; i++) {
+    dx = xs[i + 1] - xs[i];
+    dy = ys[i + 1] - ys[i];
+    dxs.push(dx);
+    dys.push(dy);
+    ms.push(dy / dx);
+  }
+
+  // Get degree-1 coefficients
+  const c1s = [ms[0]];
+  for (let i = 0; i < dxs.length - 1; i++) {
+    const m = ms[i];
+    const mNext = ms[i + 1];
+    if (m * mNext <= 0) {
+      c1s.push(0);
+    } else {
+      dx = dxs[i];
+      const dxNext = dxs[i + 1];
+      const common = dx + dxNext;
+      c1s.push(3 * common / ((common + dxNext) / m + (common + dx) / mNext));
+    }
+  }
+  c1s.push(ms[ms.length - 1]);
+
+  // Get degree-2 and degree-3 coefficients
+  const c2s = [];
+  const c3s = [];
+  let m;
+  for (let i = 0; i < c1s.length - 1; i++) {
+    m = ms[i];
+    const c1 = c1s[i];
+    const invDx = 1 / dxs[i];
+    const common = c1 + c1s[i + 1] - m - m;
+    c2s.push((m - c1 - common) * invDx);
+    c3s.push(common * invDx * invDx);
+  }
+
+  // Return interpolant function
+  return function (x) {
+    // The rightmost point in the dataset should give an exact result
+    let i = xs.length - 1;
+    if (x === xs[i]) {
+      return ys[i];
+    }
+
+    // Search for the interval x is in, returning the corresponding y if x is one of the original xs
+    let low = 0;
+    let high = c3s.length - 1;
+    let mid;
+    while (low <= high) {
+      mid = Math.floor(0.5 * (low + high));
+      const xHere = xs[mid];
+      if (xHere < x) {
+        low = mid + 1;
+      } else if (xHere > x) {
+        high = mid - 1;
+      } else {
+        return ys[mid];
+      }
+    }
+    i = Math.max(0, high);
+
+    // Interpolate
+    const diff = x - xs[i], diffSq = diff * diff;
+    return ys[i] + c1s[i] * diff + c2s[i] * diffSq + c3s[i] * diff * diffSq;
+  };
+}
+
+function getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview, anchorPoint) {
   const { offsetWidth: sourceWidth, offsetHeight: sourceHeight } = sourceNode;
+  const { anchorX, anchorY } = anchorPoint;
   const isImage = dragPreview instanceof Image;
 
   let dragPreviewWidth = isImage ? dragPreview.width : sourceWidth;
   let dragPreviewHeight = isImage ? dragPreview.height : sourceHeight;
-  let { x, y } = offsetFromDragPreview;
 
   // Work around @2x coordinate discrepancies in browsers
   if (isDesktopSafari() && isImage) {
@@ -64,9 +161,26 @@ function getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview) {
     dragPreviewWidth *= window.devicePixelRatio;
   }
 
-  // Scale to translate coordinates to preview size
-  x *= (dragPreviewWidth / sourceWidth);
-  y *= (dragPreviewHeight / sourceHeight);
+  // Interpolate coordinates depending on anchor point
+  // If you know a simpler way to do this, let me know
+  var interpolateX = createMonotonicInterpolant([0, 0.5, 1], [
+    // Dock to the left
+    offsetFromDragPreview.x,
+    // Align at the center
+    (offsetFromDragPreview.x / sourceWidth) * dragPreviewWidth,
+    // Dock to the right
+    offsetFromDragPreview.x + dragPreviewWidth - sourceWidth
+  ]);
+  var interpolateY = createMonotonicInterpolant([0, 0.5, 1], [
+    // Dock to the top
+    offsetFromDragPreview.y,
+    // Align at the center
+    (offsetFromDragPreview.y / sourceHeight) * dragPreviewHeight,
+    // Dock to the right
+    offsetFromDragPreview.y + dragPreviewHeight - sourceHeight
+  ]);
+  let x = interpolateX(anchorX);
+  let y = interpolateY(anchorY);
 
   // Work around Safari 8 positioning bug
   if (isDesktopSafari() && isImage) {
@@ -144,6 +258,7 @@ export default class HTML5Backend {
     this.registry = registry;
 
     this.sourcePreviewNodes = {};
+    this.sourcePreviewNodeOptions = {};
     this.sourceNodeOptions = {};
     this.enterLeaveCounter = new EnterLeaveCounter();
 
@@ -210,10 +325,23 @@ export default class HTML5Backend {
     this.clearCurrentDragSourceNode();
   }
 
-  getDesiredDropEffect() {
+  getSpecifiedDropEffect() {
     const sourceId = this.monitor.getSourceId();
     const sourceNodeOptions = this.sourceNodeOptions[sourceId];
-    return sourceNodeOptions.effect || 'move';
+
+    return defaults(sourceNodeOptions || {}, {
+      dropEffect: 'move'
+    }).dropEffect;
+  }
+
+  getSpecifiedAnchorPoint() {
+    const sourceId = this.monitor.getSourceId();
+    const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[sourceId];
+
+    return defaults(sourcePreviewNodeOptions || {}, {
+      anchorX: 0.5,
+      anchorY: 0.5
+    });
   }
 
   isDraggingNativeItem() {
@@ -337,8 +465,14 @@ export default class HTML5Backend {
       // If child drag source refuses drag but parent agrees,
       // use parent's node as drag image. Neither works in IE though.
       const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
+      const anchorPoint = this.getSpecifiedAnchorPoint();
       const { offsetFromDragPreview } = getMouseEventOffsets(e, sourceNode, dragPreview);
-      const dragPreviewOffset = getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview);
+      const dragPreviewOffset = getDragPreviewOffset(
+        sourceNode,
+        dragPreview,
+        offsetFromDragPreview,
+        anchorPoint
+      );
       dataTransfer.setDragImage(dragPreview, dragPreviewOffset.x, dragPreviewOffset.y);
 
       try {
@@ -399,7 +533,7 @@ export default class HTML5Backend {
     if (canDrop) {
       // Show user-specified drop effect.
       e.preventDefault();
-      e.dataTransfer.dropEffect = this.getDesiredDropEffect();
+      e.dataTransfer.dropEffect = this.getSpecifiedDropEffect();
     } else if (this.isDraggingNativeItem()) {
       // Don't show a nice cursor but still prevent default
       // "drop and blow away the whole document" action.
@@ -447,7 +581,7 @@ export default class HTML5Backend {
     if (canDrop) {
       // IE requires this to fire dragover events
       e.preventDefault();
-      e.dataTransfer.dropEffect = this.getDesiredDropEffect();
+      e.dataTransfer.dropEffect = this.getSpecifiedDropEffect();
     }
   }
 
@@ -504,15 +638,17 @@ export default class HTML5Backend {
     };
   }
 
-  connectSourcePreviewNode(sourceId, node) {
+  connectSourcePreviewNode(sourceId, node, options) {
+    this.sourcePreviewNodeOptions[sourceId] = options;
     this.sourcePreviewNodes[sourceId] = node;
 
     return () => {
       delete this.sourcePreviewNodes[sourceId];
+      delete this.sourcePreviewNodeOptions[sourceId];
     };
   }
 
-  connectSourceNode(sourceId, node, options = {}) {
+  connectSourceNode(sourceId, node, options) {
     const handleDragStart = (e) => this.handleDragStart(e, sourceId);
 
     this.sourceNodeOptions[sourceId] = options;
