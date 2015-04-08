@@ -26,7 +26,7 @@ const propTypes = {
   dragSourceRef: PropTypes.func.isRequired
 };
 
-class Box extends Component {
+class BoxWithHandle extends Component {
   render() {
     const { isDragging, dragSourceRef, dragPreviewRef } = this.props;
     const opacity = isDragging ? 0.4 : 1;
@@ -43,7 +43,7 @@ class Box extends Component {
     );
   }
 }
-Box.propTypes = propTypes;
+BoxWithHandle.propTypes = propTypes;
 
 const boxSource = {
   beginDrag() {
@@ -51,7 +51,7 @@ const boxSource = {
   }
 };
 
-export default configureDragDrop(Box, {
+export default configureDragDrop(BoxWithHandle, {
   configure: (register) =>
     register.dragSource(ItemTypes.BOX, boxSource),
 
