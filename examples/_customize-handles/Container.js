@@ -2,7 +2,8 @@
 
 import React, { PropTypes, Component } from 'react';
 import { configureDragDropContext, DragDropContext, HTML5Backend } from 'react-dnd';
-import Box from './Box';
+import BoxWithImage from './BoxWithImage';
+import BoxWithHandle from './BoxWithHandle';
 import shuffle from 'lodash/collection/shuffle';
 
 class Container extends Component {
@@ -10,7 +11,8 @@ class Container extends Component {
     return (
       <div>
         <div style={{ marginTop: '2rem' }}>
-          <Box />
+          <BoxWithHandle />
+          <BoxWithImage />
         </div>
       </div>
     );
