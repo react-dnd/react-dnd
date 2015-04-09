@@ -35,8 +35,7 @@
     "flux": "^2.0.1",
     "invariant": "^2.0.0",
     "lodash": "^3.1.0",
-    "rx-lite": "^2.4.10",
-    "warning": "^1.0.0"
+    "rx-lite": "^2.4.10"
   },
   "peerDependencies": {
     "react": ">=0.13.0 <0.14.0"

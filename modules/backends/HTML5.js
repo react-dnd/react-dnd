@@ -8,14 +8,13 @@ import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import memoize from 'lodash/function/memoize';
 import invariant from 'invariant';
-import warning from 'warning';
 
 class FileDragSource extends DragSource {
   constructor() {
     super();
     this.item = {
       get files() {
-        warning(false, 'Browser doesn\'t allow reading file information until the files are dropped.');
+        console.warn('Browser doesn\'t allow reading file information until the files are dropped.');
         return null;
       }
     };
@@ -36,7 +35,7 @@ class UrlDragSource extends DragSource {
     super();
     this.item = {
       get urls() {
-        warning(false, 'Browser doesn\'t allow reading URL information until the link is dropped.');
+        console.warn('Browser doesn\'t allow reading URL information until the link is dropped.');
         return null;
       }
     };
