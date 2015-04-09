@@ -7,6 +7,8 @@ export default class EnterLeaveCounter {
   }
 
   enter(enteringNode) {
+    const previousLength = this.entered.length;
+
     this.entered = union(
       this.entered.filter(node =>
         document.documentElement.contains(node) &&
@@ -15,10 +17,12 @@ export default class EnterLeaveCounter {
       [enteringNode]
     );
 
-    return this.entered.length === 1;
+    return previousLength === 0 && this.entered.length > 0;
   }
 
   leave(leavingNode) {
+    const previousLength = this.entered.length;
+
     this.entered = without(
       this.entered.filter(node =>
         document.documentElement.contains(node)
@@ -26,7 +30,7 @@ export default class EnterLeaveCounter {
       leavingNode
     );
 
-    return this.entered.length === 0;
+    return previousLength > 0 && this.entered.length === 0;
   }
 
   reset() {
