@@ -7,6 +7,14 @@ module.exports = {
       { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
     ]
   },
+  externals: [{
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    }
+  }],
   output: {
     filename: 'dist/ReactDND.min.js',
     libraryTarget: 'umd',
