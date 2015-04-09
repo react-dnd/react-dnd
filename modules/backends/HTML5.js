@@ -276,39 +276,33 @@ export default class HTML5Backend {
 
   handleTopDragStartCapture() {
     this.clearCurrentDragSourceNode();
-    this.dragStartSourceHandles = [];
+    this.dragStartSourceIds = [];
+    this.dragStartSourceNodes = {};
   }
 
   handleDragStart(e, sourceId) {
-    this.dragStartSourceHandles.push([sourceId, e.currentTarget]);
+    this.dragStartSourceIds.unshift(sourceId);
+    this.dragStartSourceNodes[sourceId] = e.currentTarget;
   }
 
   handleTopDragStart(e) {
-    const { dragStartSourceHandles } = this;
-    this.dragStartSourceHandles = null;
+    const { dragStartSourceIds, dragStartSourceNodes } = this;
+    this.dragStartSourceIds = null;
+    this.dragStartSourceNodes = null;
 
-    // Try calling beginDrag() on each drag source
-    // until one of them agrees to to be dragged.
-    let sourceId = null;
-    let sourceNode = null;
-    for (let i = 0; i < dragStartSourceHandles.length; i++) {
-      [sourceId, sourceNode] = dragStartSourceHandles[i];
-      // Pass false to keep drag source unpublished.
-      // We will publish it in the next tick so browser
-      // has time to screenshot current state and doesn't
-      // cancel drag if the source DOM node is removed.
-      this.actions.beginDrag(sourceId, false);
-
-      if (this.monitor.isDragging()) {
-        break;
-      }
-    }
+    // Pass false to keep drag source unpublished.
+    // We will publish it in the next tick so browser
+    // has time to screenshot current state and doesn't
+    // cancel drag if the source DOM node is removed.
+    this.actions.beginDrag(dragStartSourceIds, false);
 
     const { dataTransfer } = e;
     if (this.monitor.isDragging()) {
       // Use custom drag image if user specifies it.
       // If child drag source refuses drag but parent agrees,
       // use parent's node as drag image. Neither works in IE though.
+      const sourceId = this.monitor.getSourceId();
+      const sourceNode = dragStartSourceNodes[sourceId];
       const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
       const anchorPoint = this.getSpecifiedAnchorPoint();
       const { offsetFromDragPreview } = getMouseEventOffsets(e, sourceNode, dragPreview);
@@ -356,7 +350,7 @@ export default class HTML5Backend {
   }
 
   handleTopDragEnterCapture(e) {
-    this.dragEnterTargetHandles = [];
+    this.dragEnterTargetIds = [];
 
     const isFirstEnter = this.enterLeaveCounter.enter(e.target);
     if (!isFirstEnter || this.monitor.isDragging()) {
@@ -374,22 +368,22 @@ export default class HTML5Backend {
   }
 
   handleDragEnter(e, targetId) {
-    this.dragEnterTargetHandles.unshift(targetId);
+    this.dragEnterTargetIds.unshift(targetId);
   }
 
   handleTopDragEnter(e) {
-    const { dragEnterTargetHandles } = this;
-    this.dragEnterTargetHandles = [];
+    const { dragEnterTargetIds } = this;
+    this.dragEnterTargetIds = [];
 
     if (!isFirefox()) {
       // Don't emit hover in `dragenter` on Firefox due to an edge case.
       // If the target changes position as the result of `dragenter`, Firefox
       // will still happily dispatch `dragover` despite target being no longer
       // there. The easy solution is to only fire `hover` in `dragover` on FF.
-      this.actions.hover(dragEnterTargetHandles);
+      this.actions.hover(dragEnterTargetIds);
     }
 
-    const canDrop = dragEnterTargetHandles.some(
+    const canDrop = dragEnterTargetIds.some(
       targetId => this.monitor.canDrop(targetId)
     );
 
@@ -401,19 +395,19 @@ export default class HTML5Backend {
   }
 
   handleTopDragOverCapture() {
-    this.dragOverTargetHandles = [];
+    this.dragOverTargetIds = [];
   }
 
   handleDragOver(e, targetId) {
-    this.dragOverTargetHandles.unshift(targetId);
+    this.dragOverTargetIds.unshift(targetId);
   }
 
   handleTopDragOver(e) {
-    const { dragOverTargetHandles } = this;
-    this.dragOverTargetHandles = [];
-    this.actions.hover(dragOverTargetHandles);
+    const { dragOverTargetIds } = this;
+    this.dragOverTargetIds = [];
+    this.actions.hover(dragOverTargetIds);
 
-    const canDrop = dragOverTargetHandles.some(
+    const canDrop = dragOverTargetIds.some(
       targetId => this.monitor.canDrop(targetId)
     );
 
@@ -448,7 +442,7 @@ export default class HTML5Backend {
   }
 
   handleTopDropCapture(e) {
-    this.dropTargetHandles = [];
+    this.dropTargetIds = [];
 
     if (this.isDraggingNativeItem()) {
       e.preventDefault();
@@ -459,14 +453,14 @@ export default class HTML5Backend {
   }
 
   handleDrop(e, targetId) {
-    this.dropTargetHandles.unshift(targetId);
+    this.dropTargetIds.unshift(targetId);
   }
 
   handleTopDrop() {
-    const { dropTargetHandles } = this;
-    this.dropTargetHandles = [];
+    const { dropTargetIds } = this;
+    this.dropTargetIds = [];
 
-    this.actions.hover(dropTargetHandles);
+    this.actions.hover(dropTargetIds);
     this.actions.drop();
 
     if (this.isDraggingNativeItem()) {
