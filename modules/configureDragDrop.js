@@ -1,5 +1,5 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
-import { CompositeDisposable, SerialDisposable, Disposable } from 'rx-lite';
+import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
 import shallowEqual from './utils/shallowEqual';
