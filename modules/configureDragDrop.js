@@ -6,7 +6,7 @@ import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
 import memoize from 'lodash/function/memoize';
-import invariant from 'react/lib/invariant';
+import invariant from 'invariant';
 
 const DEFAULT_KEY = '__default__';
 

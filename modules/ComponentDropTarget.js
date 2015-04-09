@@ -1,5 +1,5 @@
 import { DropTarget } from 'dnd-core';
-import invariant from 'react/lib/invariant';
+import invariant from 'invariant';
 import isString from 'lodash/lang/isString';
 import isArray from 'lodash/lang/isArray';
 import isObject from 'lodash/lang/isObject';

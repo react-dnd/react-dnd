@@ -1,5 +1,5 @@
 import { DragSource } from 'dnd-core';
-import invariant from 'react/lib/invariant';
+import invariant from 'invariant';
 import isString from 'lodash/lang/isString';
 import isObject from 'lodash/lang/isObject';
 
