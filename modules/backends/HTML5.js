@@ -381,7 +381,14 @@ export default class HTML5Backend {
   handleTopDragEnter(e) {
     const { dragEnterTargetHandles } = this;
     this.dragEnterTargetHandles = [];
-    this.actions.hover(dragEnterTargetHandles);
+
+    if (!isFirefox()) {
+      // Don't emit hover in `dragenter` on Firefox due to an edge case.
+      // If the target changes position as the result of `dragenter`, Firefox
+      // will still happily dispatch `dragover` despite target being no longer
+      // there. The easy solution is to only fire `hover` in `dragover` on FF.
+      this.actions.hover(dragEnterTargetHandles);
+    }
 
     const canDrop = dragEnterTargetHandles.some(
       targetId => this.monitor.canDrop(targetId)

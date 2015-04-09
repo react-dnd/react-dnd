@@ -14,7 +14,6 @@
 * this should make HTML5#handleTopDragStart shorter and loopless
 * should we allow gif drag previews? see: safari
 * setDragImage and IE
-* sortable gets buggy in Firefox
 
 * don't use react internals.
 
