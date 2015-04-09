@@ -68,11 +68,9 @@ export default class HTML5Backend {
 
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
     this.handleTopDragStartCapture = this.handleTopDragStartCapture.bind(this);
-    this.handleTopDragEnd = this.handleTopDragEnd.bind(this);
     this.handleTopDragEndCapture = this.handleTopDragEndCapture.bind(this);
     this.handleTopDragEnter = this.handleTopDragEnter.bind(this);
     this.handleTopDragEnterCapture = this.handleTopDragEnterCapture.bind(this);
-    this.handleTopDragLeave = this.handleTopDragLeave.bind(this);
     this.handleTopDragLeaveCapture = this.handleTopDragLeaveCapture.bind(this);
     this.handleTopDragOver = this.handleTopDragOver.bind(this);
     this.handleTopDragOverCapture = this.handleTopDragOverCapture.bind(this);
@@ -94,11 +92,9 @@ export default class HTML5Backend {
 
     window.addEventListener('dragstart', this.handleTopDragStart);
     window.addEventListener('dragstart', this.handleTopDragStartCapture, true);
-    window.addEventListener('dragend', this.handleTopDragEnd);
     window.addEventListener('dragend', this.handleTopDragEndCapture, true);
     window.addEventListener('dragenter', this.handleTopDragEnter);
     window.addEventListener('dragenter', this.handleTopDragEnterCapture, true);
-    window.addEventListener('dragleave', this.handleTopDragLeave);
     window.addEventListener('dragleave', this.handleTopDragLeaveCapture, true);
     window.addEventListener('dragover', this.handleTopDragOver);
     window.addEventListener('dragover', this.handleTopDragOverCapture, true);
@@ -115,11 +111,9 @@ export default class HTML5Backend {
 
     window.removeEventListener('dragstart', this.handleTopDragStart);
     window.removeEventListener('dragstart', this.handleTopDragStartCapture, true);
-    window.removeEventListener('dragend', this.handleTopDragEnd);
     window.removeEventListener('dragend', this.handleTopDragEndCapture, true);
     window.removeEventListener('dragenter', this.handleTopDragEnter);
     window.removeEventListener('dragenter', this.handleTopDragEnterCapture, true);
-    window.removeEventListener('dragleave', this.handleTopDragLeave);
     window.removeEventListener('dragleave', this.handleTopDragLeaveCapture, true);
     window.removeEventListener('dragover', this.handleTopDragOver);
     window.removeEventListener('dragover', this.handleTopDragOverCapture, true);
@@ -362,43 +356,6 @@ export default class HTML5Backend {
     }
   }
 
-  handleTopDragEnd() {
-  }
-
-  handleTopDragOverCapture() {
-    this.dragOverTargetHandles = [];
-  }
-
-  handleDragOver(e, targetId) {
-    this.dragOverTargetHandles.unshift(targetId);
-  }
-
-  handleTopDragOver(e) {
-    const { dragOverTargetHandles } = this;
-    this.dragOverTargetHandles = [];
-    this.actions.hover(dragOverTargetHandles);
-
-    const canDrop = dragOverTargetHandles.some(
-      targetId => this.monitor.canDrop(targetId)
-    );
-
-    if (canDrop) {
-      // Show user-specified drop effect.
-      e.preventDefault();
-      e.dataTransfer.dropEffect = this.getSpecifiedDropEffect();
-    } else if (this.isDraggingNativeItem()) {
-      // Don't show a nice cursor but still prevent default
-      // "drop and blow away the whole document" action.
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'none';
-    } else if (this.checkIfCurrentDragSourceRectChanged()) {
-      // Prevent animating to incorrect position.
-      // Drop effect must be other than 'none' to prevent animation.
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-    }
-  }
-
   handleTopDragEnterCapture(e) {
     this.dragEnterTargetHandles = [];
 
@@ -437,6 +394,40 @@ export default class HTML5Backend {
     }
   }
 
+  handleTopDragOverCapture() {
+    this.dragOverTargetHandles = [];
+  }
+
+  handleDragOver(e, targetId) {
+    this.dragOverTargetHandles.unshift(targetId);
+  }
+
+  handleTopDragOver(e) {
+    const { dragOverTargetHandles } = this;
+    this.dragOverTargetHandles = [];
+    this.actions.hover(dragOverTargetHandles);
+
+    const canDrop = dragOverTargetHandles.some(
+      targetId => this.monitor.canDrop(targetId)
+    );
+
+    if (canDrop) {
+      // Show user-specified drop effect.
+      e.preventDefault();
+      e.dataTransfer.dropEffect = this.getSpecifiedDropEffect();
+    } else if (this.isDraggingNativeItem()) {
+      // Don't show a nice cursor but still prevent default
+      // "drop and blow away the whole document" action.
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'none';
+    } else if (this.checkIfCurrentDragSourceRectChanged()) {
+      // Prevent animating to incorrect position.
+      // Drop effect must be other than 'none' to prevent animation.
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    }
+  }
+
   handleTopDragLeaveCapture(e) {
     if (this.isDraggingNativeItem()) {
       e.preventDefault();
@@ -448,9 +439,6 @@ export default class HTML5Backend {
     }
 
     this.endDragNativeItem();
-  }
-
-  handleTopDragLeave() {
   }
 
   handleTopDropCapture(e) {
