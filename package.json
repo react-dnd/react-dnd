@@ -31,11 +31,11 @@
   },
   "homepage": "https://github.com/gaearon/react-dnd",
   "dependencies": {
+    "disposables": "^1.0.1",
     "dnd-core": "~0.7.0",
     "flux": "^2.0.1",
     "invariant": "^2.0.0",
-    "lodash": "^3.1.0",
-    "rx-lite": "^2.4.10"
+    "lodash": "^3.1.0"
   },
   "peerDependencies": {
     "react": ">=0.13.0 <0.14.0"
