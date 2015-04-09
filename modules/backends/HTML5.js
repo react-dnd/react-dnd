@@ -7,8 +7,8 @@ import { getElementRect, getMouseEventOffsets, getDragPreviewOffset } from '../u
 import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import memoize from 'lodash/function/memoize';
-import invariant from 'react/lib/invariant';
-import warning from 'react/lib/warning';
+import invariant from 'invariant';
+import warning from 'warning';
 
 class FileDragSource extends DragSource {
   constructor() {
