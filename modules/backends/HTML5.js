@@ -1,111 +1,14 @@
 import { DragSource } from 'dnd-core';
 import NativeTypes from '../NativeTypes';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
-import createMonotonicInterpolant from '../utils/createMonotonicInterpolant';
+import { isSafari, isFirefox } from '../utils/BrowserDetector';
+import { isUrlDataTransfer, isFileDataTransfer } from '../utils/DataTransfer';
+import { getElementRect, getMouseEventOffsets, getDragPreviewOffset } from '../utils/OffsetHelpers';
 import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import memoize from 'lodash/function/memoize';
 import invariant from 'react/lib/invariant';
 import warning from 'react/lib/warning';
-
-const isSafari = memoize(() => Boolean(window.safari));
-const isFirefox = memoize(() => /firefox/i.test(navigator.userAgent));
-
-function isUrlDataTransfer(dataTransfer) {
-  var types = Array.prototype.slice.call(dataTransfer.types);
-  return types.indexOf('Url') > -1 || types.indexOf('text/uri-list') > -1;
-}
-
-function isFileDataTransfer(dataTransfer) {
-  var types = Array.prototype.slice.call(dataTransfer.types);
-  return types.indexOf('Files') > -1;
-}
-
-function getMouseEventOffsets(e, sourceNode, dragPreview) {
-  const dragPreviewNode = dragPreview instanceof Image ?
-    sourceNode :
-    dragPreview;
-
-  const sourceNodeRect = sourceNode.getBoundingClientRect();
-  const dragPreviewNodeRect = dragPreviewNode.getBoundingClientRect();
-
-  const offsetFromClient = {
-    x: e.clientX,
-    y: e.clientY
-  };
-  const offsetFromDragPreview = {
-    x: e.clientX - dragPreviewNodeRect.left,
-    y: e.clientY - dragPreviewNodeRect.top
-  };
-  const offsetFromSource = {
-    x: e.clientX - sourceNodeRect.left,
-    y: e.clientY - sourceNodeRect.top
-  };
-
-  return { offsetFromClient, offsetFromSource, offsetFromDragPreview };
-}
-
-function getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview, anchorPoint) {
-  const { offsetWidth: sourceWidth, offsetHeight: sourceHeight } = sourceNode;
-  const { anchorX, anchorY } = anchorPoint;
-  const isImage = dragPreview instanceof Image;
-
-  let dragPreviewWidth = isImage ? dragPreview.width : sourceWidth;
-  let dragPreviewHeight = isImage ? dragPreview.height : sourceHeight;
-
-  // Work around @2x coordinate discrepancies in browsers
-  if (isSafari() && isImage) {
-    dragPreviewHeight /= window.devicePixelRatio;
-    dragPreviewWidth /= window.devicePixelRatio;
-  } else if (isFirefox() && !isImage) {
-    dragPreviewHeight *= window.devicePixelRatio;
-    dragPreviewWidth *= window.devicePixelRatio;
-  }
-
-  // Interpolate coordinates depending on anchor point
-  // If you know a simpler way to do this, let me know
-  var interpolateX = createMonotonicInterpolant([0, 0.5, 1], [
-    // Dock to the left
-    offsetFromDragPreview.x,
-    // Align at the center
-    (offsetFromDragPreview.x / sourceWidth) * dragPreviewWidth,
-    // Dock to the right
-    offsetFromDragPreview.x + dragPreviewWidth - sourceWidth
-  ]);
-  var interpolateY = createMonotonicInterpolant([0, 0.5, 1], [
-    // Dock to the top
-    offsetFromDragPreview.y,
-    // Align at the center
-    (offsetFromDragPreview.y / sourceHeight) * dragPreviewHeight,
-    // Dock to the right
-    offsetFromDragPreview.y + dragPreviewHeight - sourceHeight
-  ]);
-  let x = interpolateX(anchorX);
-  let y = interpolateY(anchorY);
-
-  // Work around Safari 8 positioning bug
-  if (isSafari() && isImage) {
-    // We'll have to wait for @3x to see if this is entirely correct
-    y += (window.devicePixelRatio - 1) * dragPreviewHeight;
-  }
-
-  return { x, y };
-}
-
-const ELEMENT_NODE = 1;
-
-function getElementRect(el) {
-  if (el.nodeType !== ELEMENT_NODE) {
-    el = el.parentElement;
-  }
-
-  if (!el) {
-    return null;
-  }
-
-  const { top, left, width, height } = el.getBoundingClientRect();
-  return { top, left, width, height };
-}
 
 class FileDragSource extends DragSource {
   constructor() {
