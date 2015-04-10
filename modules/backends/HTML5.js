@@ -204,7 +204,7 @@ export default class HTML5Backend {
 
     this.currentNativeSource = new UrlDragSource();
     this.currentNativeHandle = this.registry.addSource(NativeTypes.URL, this.currentNativeSource);
-    this.actions.beginDrag(this.currentNativeHandle);
+    this.actions.beginDrag([this.currentNativeHandle]);
   }
 
   beginDragNativeFile() {
@@ -212,7 +212,7 @@ export default class HTML5Backend {
 
     this.currentNativeSource = new FileDragSource();
     this.currentNativeHandle = this.registry.addSource(NativeTypes.FILE, this.currentNativeSource);
-    this.actions.beginDrag(this.currentNativeHandle);
+    this.actions.beginDrag([this.currentNativeHandle]);
   }
 
   endDragNativeItem() {
