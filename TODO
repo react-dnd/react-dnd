@@ -1,18 +1,11 @@
-* make a list of hacks to port over
-* check symbols
+* coordinates
+* setDragImage and IE
 * helpers for test context
-* conflicting backends: must be a nicer solution.
 * make sure we don't screw server rendering (NoopBackend?)
-* export methods for verifying validness from dnd-core
 * early invariants for common mistakes (e.g. missing context?)
 * fix hot reloading
-* higher-level components
-* what do we do about DragImagePreloader?
-
 * change drop() to always work with object, remove didDrop
+* what do we do about DragImagePreloader?
 * should we allow gif drag previews? see: safari
-* setDragImage and IE
-
-* don't use react internals.
-
-* example: advanced communication (drop results, overriding parent drop zones)
+* nested targets example
+* support symbols
