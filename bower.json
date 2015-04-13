@@ -8,7 +8,7 @@
   "description": "Drag and drop for React with full DOM control.",
   "main": "dist/ReactDND.min.js",
   "dependencies": {
-    "react": "0.12.x"
+    "react": ">=0.12.0 <0.14.0"
   },
   "moduleType": [
     "amd",
