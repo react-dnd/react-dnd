@@ -1,6 +1,8 @@
-"use strict";
+'use strict';
 
-module.exports = {
-  FILE: "__NATIVE_FILE__",
-  URL: "__NATIVE_URL__"
+exports.__esModule = true;
+exports['default'] = {
+  FILE: '__NATIVE_FILE__',
+  URL: '__NATIVE_URL__'
 };
+module.exports = exports['default'];

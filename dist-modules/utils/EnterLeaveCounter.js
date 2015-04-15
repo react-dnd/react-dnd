@@ -1,14 +1,18 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
-var _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+exports.__esModule = true;
 
-var union = _interopRequire(require("lodash/array/union"));
+var _union = require('lodash/array/union');
 
-var without = _interopRequire(require("lodash/array/without"));
+var _union2 = _interopRequireWildcard(_union);
+
+var _without = require('lodash/array/without');
+
+var _without2 = _interopRequireWildcard(_without);
 
 var EnterLeaveCounter = (function () {
   function EnterLeaveCounter() {
@@ -17,39 +21,32 @@ var EnterLeaveCounter = (function () {
     this.entered = [];
   }
 
-  _prototypeProperties(EnterLeaveCounter, null, {
-    enter: {
-      value: function enter(enteringNode) {
-        this.entered = union(this.entered.filter(function (node) {
-          return document.body.contains(node) && (!node.contains || node.contains(enteringNode));
-        }), [enteringNode]);
+  EnterLeaveCounter.prototype.enter = function enter(enteringNode) {
+    var previousLength = this.entered.length;
 
-        return this.entered.length === 1;
-      },
-      writable: true,
-      configurable: true
-    },
-    leave: {
-      value: function leave(leavingNode) {
-        this.entered = without(this.entered.filter(function (node) {
-          return document.body.contains(node);
-        }), leavingNode);
+    this.entered = _union2['default'](this.entered.filter(function (node) {
+      return document.documentElement.contains(node) && (!node.contains || node.contains(enteringNode));
+    }), [enteringNode]);
 
-        return this.entered.length === 0;
-      },
-      writable: true,
-      configurable: true
-    },
-    reset: {
-      value: function reset() {
-        this.entered = [];
-      },
-      writable: true,
-      configurable: true
-    }
-  });
+    return previousLength === 0 && this.entered.length > 0;
+  };
+
+  EnterLeaveCounter.prototype.leave = function leave(leavingNode) {
+    var previousLength = this.entered.length;
+
+    this.entered = _without2['default'](this.entered.filter(function (node) {
+      return document.documentElement.contains(node);
+    }), leavingNode);
+
+    return previousLength > 0 && this.entered.length === 0;
+  };
+
+  EnterLeaveCounter.prototype.reset = function reset() {
+    this.entered = [];
+  };
 
   return EnterLeaveCounter;
 })();
 
-module.exports = EnterLeaveCounter;
+exports['default'] = EnterLeaveCounter;
+module.exports = exports['default'];

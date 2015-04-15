@@ -1,12 +1,14 @@
-"use strict";
+'use strict';
 
-module.exports = shallowEqualScalar;
+exports.__esModule = true;
+exports['default'] = shallowEqualScalar;
+
 function shallowEqualScalar(objA, objB) {
   if (objA === objB) {
     return true;
   }
 
-  if (typeof objA !== "object" || objA === null || typeof objB !== "object" || objB === null) {
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
     return false;
   }
 
@@ -27,10 +29,12 @@ function shallowEqualScalar(objA, objB) {
     var valA = objA[keysA[i]];
     var valB = objB[keysA[i]];
 
-    if (valA !== valB || typeof valA === "object" || typeof valB === "object") {
+    if (valA !== valB || typeof valA === 'object' || typeof valB === 'object') {
       return false;
     }
   }
 
   return true;
 }
+
+module.exports = exports['default'];
