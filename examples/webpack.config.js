@@ -14,11 +14,15 @@ module.exports = {
   },
   module: {
     loaders: [
-      // TODO: temp dnd-core for npm link
-      { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules|dnd-core/ }
+      { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ }
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
     new webpack.NormalModuleReplacementPlugin(
       /^react-dnd$/,
       '../../modules/index'
