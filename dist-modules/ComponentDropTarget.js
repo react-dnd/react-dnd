@@ -1,108 +1,115 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
-var _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
 
-var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc && desc.writable) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+exports.__esModule = true;
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+var _DropTarget2 = require('dnd-core');
 
-var DropTarget = require("dnd-core").DropTarget;
-var invariant = _interopRequire(require("react/lib/invariant"));
+var _invariant = require('invariant');
 
-var isString = _interopRequire(require("lodash/lang/isString"));
+var _invariant2 = _interopRequireWildcard(_invariant);
 
-var isArray = _interopRequire(require("lodash/lang/isArray"));
+var _isString = require('lodash/lang/isString');
 
-var isObject = _interopRequire(require("lodash/lang/isObject"));
+var _isString2 = _interopRequireWildcard(_isString);
 
-var ComponentDropTarget = (function (DropTarget) {
-  function ComponentDropTarget(type, _x, props) {
+var _isArray = require('lodash/lang/isArray');
+
+var _isArray2 = _interopRequireWildcard(_isArray);
+
+var _isObject = require('lodash/lang/isObject');
+
+var _isObject2 = _interopRequireWildcard(_isObject);
+
+var ComponentDropTarget = (function (_DropTarget) {
+  function ComponentDropTarget(type, _x, props, getComponentRef) {
     var spec = arguments[1] === undefined ? {} : arguments[1];
+
     _classCallCheck(this, ComponentDropTarget);
 
-    invariant(isString(type) || isArray(type), "Expected type to be a string or an array.");
-    invariant(isObject(spec), "Expected spec to be an object.");
+    _DropTarget.call(this);
+
+    _invariant2['default'](_isString2['default'](type) || _isArray2['default'](type), 'Expected type to be a string or an array.');
+    _invariant2['default'](_isObject2['default'](spec), 'Expected spec to be an object.');
 
     this.type = type;
     this.spec = spec;
     this.props = props;
+    this.getComponentRef = getComponentRef;
   }
 
-  _inherits(ComponentDropTarget, DropTarget);
+  _inherits(ComponentDropTarget, _DropTarget);
 
-  _prototypeProperties(ComponentDropTarget, null, {
-    receive: {
-      value: function receive(handler) {
-        if (!(handler instanceof ComponentDropTarget)) {
-          return false;
-        }
-
-        if (this.type !== handler.type) {
-          return false;
-        }
-
-        this.spec = handler.spec;
-        this.props = handler.props;
-        return true;
-      },
-      writable: true,
-      configurable: true
-    },
-    canDrop: {
-      value: function canDrop() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        if (this.spec.canDrop) {
-          var _spec$canDrop;
-          return (_spec$canDrop = this.spec.canDrop).call.apply(_spec$canDrop, [null, this.props].concat(args));
-        } else {
-          return _get(Object.getPrototypeOf(ComponentDropTarget.prototype), "canDrop", this).apply(this, args);
-        }
-      },
-      writable: true,
-      configurable: true
-    },
-    hover: {
-      value: function hover() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        if (this.spec.hover) {
-          var _spec$hover;
-          return (_spec$hover = this.spec.hover).call.apply(_spec$hover, [null, this.props].concat(args));
-        } else {
-          return _get(Object.getPrototypeOf(ComponentDropTarget.prototype), "hover", this).apply(this, args);
-        }
-      },
-      writable: true,
-      configurable: true
-    },
-    drop: {
-      value: function drop() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        if (this.spec.drop) {
-          var _spec$drop;
-          return (_spec$drop = this.spec.drop).call.apply(_spec$drop, [null, this.props].concat(args));
-        } else {
-          return _get(Object.getPrototypeOf(ComponentDropTarget.prototype), "drop", this).apply(this, args);
-        }
-      },
-      writable: true,
-      configurable: true
+  ComponentDropTarget.prototype.receive = function receive(handler) {
+    if (!(handler instanceof ComponentDropTarget)) {
+      return false;
     }
-  });
+
+    if (this.type !== handler.type) {
+      return false;
+    }
+
+    this.spec = handler.spec;
+    this.props = handler.props;
+    this.getComponentRef = handler.getComponentRef;
+    return true;
+  };
+
+  ComponentDropTarget.prototype.canDrop = function canDrop() {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    if (this.spec.canDrop) {
+      var _spec$canDrop;
+
+      return (_spec$canDrop = this.spec.canDrop).call.apply(_spec$canDrop, [null, this.props].concat(args));
+    } else {
+      var _DropTarget$prototype$canDrop;
+
+      return (_DropTarget$prototype$canDrop = _DropTarget.prototype.canDrop).call.apply(_DropTarget$prototype$canDrop, [this].concat(args));
+    }
+  };
+
+  ComponentDropTarget.prototype.hover = function hover() {
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    if (this.spec.hover) {
+      var _spec$hover;
+
+      return (_spec$hover = this.spec.hover).call.apply(_spec$hover, [null, this.props].concat(args, [this.getComponentRef()]));
+    } else {
+      var _DropTarget$prototype$hover;
+
+      return (_DropTarget$prototype$hover = _DropTarget.prototype.hover).call.apply(_DropTarget$prototype$hover, [this].concat(args));
+    }
+  };
+
+  ComponentDropTarget.prototype.drop = function drop() {
+    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      args[_key3] = arguments[_key3];
+    }
+
+    if (this.spec.drop) {
+      var _spec$drop;
+
+      return (_spec$drop = this.spec.drop).call.apply(_spec$drop, [null, this.props].concat(args, [this.getComponentRef()]));
+    } else {
+      var _DropTarget$prototype$drop;
+
+      return (_DropTarget$prototype$drop = _DropTarget.prototype.drop).call.apply(_DropTarget$prototype$drop, [this].concat(args));
+    }
+  };
 
   return ComponentDropTarget;
-})(DropTarget);
+})(_DropTarget2.DropTarget);
 
-module.exports = ComponentDropTarget;
+exports['default'] = ComponentDropTarget;
+module.exports = exports['default'];
