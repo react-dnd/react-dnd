@@ -2,6 +2,7 @@ import React, { Component, PropTypes, findDOMNode } from 'react';
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
+import ComponentHandlerMap from './ComponentHandlerMap';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
@@ -27,17 +28,18 @@ export default function configureDragDrop(InnerComponent, {
       this.handleChange = this.handleChange.bind(this);
       this.getComponentRef = this.getComponentRef.bind(this);
       this.setComponentRef = this.setComponentRef.bind(this);
+      this.componentRef = null;
 
       this.manager = context[managerName];
       invariant(this.manager, 'Could not read manager from context.');
 
-      this.handlerIds = {};
-      this.handlers = {};
-      this.resources = {};
-
-      this.componentRef = null;
       this.componentConnector = this.createComponentConnector();
-      this.attachHandlers(this.getNextHandlers(props));
+      this.handlerMap = new ComponentHandlerMap(
+        this.manager.getRegistry(),
+        this.manager.getMonitor(),
+        this.getNextHandlers(props),
+        this.handleChange
+      );
       this.state = this.getCurrentState();
     }
 
@@ -49,30 +51,17 @@ export default function configureDragDrop(InnerComponent, {
       return this.componentRef;
     }
 
-    componentWillMount() {
-      const monitor = this.manager.getMonitor();
-      monitor.addChangeListener(this.handleChange);
-    }
-
     componentWillReceiveProps(nextProps) {
-      if (arePropsEqual(nextProps, this.props)) {
-        return;
+      if (!arePropsEqual(nextProps, this.props)) {
+        const nextHandlers = this.getNextHandlers(nextProps);
+        this.handlerMap.receiveHandlers(nextHandlers);
+        this.handleChange();
       }
-
-      const monitor = this.manager.getMonitor();
-      monitor.removeChangeListener(this.handleChange);
-      this.receiveHandlers(this.getNextHandlers(nextProps));
-      monitor.addChangeListener(this.handleChange);
-
-      this.handleChange();
     }
 
     componentWillUnmount() {
-      const monitor = this.manager.getMonitor();
-      monitor.removeChangeListener(this.handleChange);
-
-      this.detachHandlers();
-      this.componentConnector = null;
+      const disposable = this.handlerMap.getDisposable();
+      disposable.dispose();
     }
 
     handleChange() {
@@ -95,110 +84,17 @@ export default function configureDragDrop(InnerComponent, {
       };
 
       let handlers = configure(register, props);
-      if (handlers instanceof ComponentDragSource ||
-          handlers instanceof ComponentDropTarget) {
-
-        handlers = {
-          [DEFAULT_KEY]: handlers
-        };
+      if (handlers instanceof ComponentDragSource || handlers instanceof ComponentDropTarget) {
+        handlers = { [DEFAULT_KEY]: handlers };
       }
 
       return handlers;
     }
 
-    attachHandlers(handlers) {
-      this.handlers = assign({}, this.handlers);
-      this.handlerIds = assign({}, this.handlerIds);
-
-      Object.keys(handlers).forEach(key => {
-        this.attachHandler(key, handlers[key]);
-      });
-    }
-
-    detachHandlers() {
-      this.handlers = assign({}, this.handlers);
-      this.handlerIds = assign({}, this.handlerIds);
-
-      Object.keys(this.handlerIds).forEach(key => {
-        this.detachHandler(key);
-      });
-    }
-
-    receiveHandlers(nextHandlers) {
-      this.handlers = assign({}, this.handlers);
-      this.handlerIds = assign({}, this.handlerIds);
-
-      const keys = Object.keys(this.handlers);
-      const nextKeys = Object.keys(nextHandlers);
-
-      invariant(
-        keys.every(k => nextKeys.indexOf(k) > -1) &&
-        nextKeys.every(k => keys.indexOf(k) > -1) &&
-        keys.length === nextKeys.length,
-        'Expected handlers to have stable keys at runtime.'
-      );
-
-      keys.forEach(key => {
-        this.receiveHandler(key, nextHandlers[key]);
-      });
-    }
-
-    attachHandler(key, handler) {
-      const registry = this.manager.getRegistry();
-
-      let handlerId;
-      if (handler instanceof ComponentDragSource) {
-        handlerId = registry.addSource(handler.type, handler);
-      } else if (handler instanceof ComponentDropTarget) {
-        handlerId = registry.addTarget(handler.type, handler);
-      } else {
-        invariant(false, 'Handle is neither a source nor a target.');
-      }
-
-      this.handlerIds[key] = handlerId;
-      this.handlers[key] = handler;
-
-      this.resources[handlerId] = new CompositeDisposable();
-    }
-
-    detachHandler(key) {
-      const registry = this.manager.getRegistry();
-      const handlerId = this.handlerIds[key];
-
-      if (registry.isSourceId(handlerId)) {
-        registry.removeSource(handlerId);
-      } else if (registry.isTargetId(handlerId)) {
-        registry.removeTarget(handlerId);
-      } else {
-        invariant(false, 'Handle is neither a source nor a target.');
-      }
-
-      this.resources[handlerId].dispose();
-      delete this.resources[handlerId];
-
-      delete this.handlerIds[key];
-      delete this.handlers[key];
-    }
-
-    receiveHandler(key, nextHandler) {
-      const handler = this.handlers[key];
-      if (handler.receive(nextHandler)) {
-        return;
-      }
-
-      this.detachHandler(key);
-      this.attachHandler(key, nextHandler);
-    }
-
-    useResource(handlerId, disposable) {
-      this.resources[handlerId].add(disposable);
-      return disposable;
-    }
-
     getCurrentState() {
       const monitor = this.manager.getMonitor();
+      let handlerIds = this.handlerMap.getHandlerIds();
 
-      let handlerIds = this.handlerIds;
       if (typeof handlerIds[DEFAULT_KEY] !== 'undefined') {
         handlerIds = handlerIds[DEFAULT_KEY];
       }
@@ -223,7 +119,8 @@ export default function configureDragDrop(InnerComponent, {
 
     wrapConnectBackend(key, connectBackend) {
       return (handlerId) => {
-        const serialDisposable = this.useResource(handlerId, new SerialDisposable());
+        const nodeDisposable = new SerialDisposable();
+        this.handlerMap.addDisposable(handlerId, nodeDisposable);
 
         let currentNode = null;
         let currentOptions = null;
@@ -239,9 +136,9 @@ export default function configureDragDrop(InnerComponent, {
 
           if (nextNode) {
             const nextDispose = connectBackend(handlerId, nextNode, nextOptions);
-            serialDisposable.setDisposable(new Disposable(nextDispose));
+            nodeDisposable.setDisposable(new Disposable(nextDispose));
           } else {
-            serialDisposable.setDisposable(null);
+            nodeDisposable.setDisposable(null);
           }
         };
       };

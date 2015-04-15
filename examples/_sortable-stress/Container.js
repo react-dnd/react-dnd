@@ -12,53 +12,68 @@ class Container extends Component {
     super(props);
 
     this.moveCard = this.moveCard.bind(this);
-    this.applyNextState = this.applyNextState.bind(this);
+    this.drawFrame = this.drawFrame.bind(this);
+
+    const cardsById = {};
+    const cardsByIndex = [];
+
+    for (let i = 0; i < 1000; i++) {
+      const card = { id: i, text: name.findName() };
+      cardsById[card.id] = card;
+      cardsByIndex[i] = card;
+    }
 
     this.state = {
-      cards: range(1000).map(i => ({
-        id: i,
-        text: name.findName()
-      }))
+      cardsById,
+      cardsByIndex
     };
   }
 
   moveCard(id, afterId) {
-    const { cards } = this.state;
+    const { cardsById, cardsByIndex } = this.state;
 
-    const card = cards.filter(c => c.id === id)[0];
-    const afterCard = cards.filter(c => c.id === afterId)[0];
-    const cardIndex = cards.indexOf(card);
-    const afterIndex = cards.indexOf(afterCard);
+    const card = cardsById[id];
+    const afterCard = cardsById[afterId];
 
-    this.nextState = update(this.state, {
-      cards: {
+    const cardIndex = cardsByIndex.indexOf(card);
+    const afterIndex = cardsByIndex.indexOf(afterCard);
+
+    this.scheduleUpdate({
+      cardsByIndex: {
         $splice: [
           [cardIndex, 1],
           [afterIndex, 0, card]
         ]
       }
     });
-
-    if (!this.frame) {
-      this.frame = requestAnimationFrame(this.applyNextState);
-    }
   }
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.frame);
+    cancelAnimationFrame(this.requestedFrame);
   }
 
-  applyNextState() {
-    this.setState(this.nextState);
-    this.frame = null;
+  scheduleUpdate(update) {
+    this.pendingUpdate = update;
+
+    if (!this.requestedFrame) {
+      this.requestedFrame = requestAnimationFrame(this.drawFrame);
+    }
+  }
+
+  drawFrame() {
+    const nextState = update(this.state, this.pendingUpdate);
+    this.setState(nextState);
+
+    this.pendingUpdate = null;
+    this.requestedFrame = null;
   }
 
   render() {
-    const { cards } = this.state;
+    const { cardsByIndex } = this.state;
 
     return (
       <div>
-        {cards.map(card => {
+        {cardsByIndex.map(card => {
           return (
             <Card key={card.id}
                   id={card.id}
