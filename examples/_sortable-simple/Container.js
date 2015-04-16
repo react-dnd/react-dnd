@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import update from 'react/lib/update';
 import Card from './Card';
-import { configureDragDropContext, HTML5Backend } from 'react-dnd';
+import { configureDragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
 class Container extends Component {
   constructor(props) {
@@ -71,6 +72,4 @@ class Container extends Component {
   }
 }
 
-export default configureDragDropContext(Container, {
-  backend: HTML5Backend
-});
+export default configureDragDropContext(Container, HTML5Backend);

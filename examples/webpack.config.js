@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: './index',
@@ -10,7 +11,11 @@ module.exports = {
     modulesDirectories: ['node_modules']
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      'react-dnd/modules': path.join(__dirname, '../modules'),
+      'react-dnd': path.join(__dirname, '../modules')
+    }
   },
   module: {
     loaders: [
@@ -22,10 +27,6 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
-    }),
-    new webpack.NormalModuleReplacementPlugin(
-      /^react-dnd$/,
-      '../../modules/index'
-    )
+    })
   ]
 };
