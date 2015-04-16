@@ -15,9 +15,13 @@ export default function configureDragDrop(InnerComponent, {
   configure,
   collect,
   arePropsEqual = shallowEqualScalar,
-  managerName = 'dragDropManager'
+  managerKey = 'dragDropManager'
 }) {
   class DragDropContainer extends Component {
+    static contextTypes = {
+      [managerKey]: PropTypes.object.isRequired
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
       return !arePropsEqual(nextProps, this.props) ||
              !shallowEqual(nextState, this.state);
@@ -30,7 +34,7 @@ export default function configureDragDrop(InnerComponent, {
       this.setComponentRef = this.setComponentRef.bind(this);
       this.componentRef = null;
 
-      this.manager = context[managerName];
+      this.manager = context[managerKey];
       invariant(this.manager, 'Could not read manager from context.');
 
       this.componentConnector = this.createComponentConnector();
@@ -152,10 +156,6 @@ export default function configureDragDrop(InnerComponent, {
       );
     }
   }
-
-  DragDropContainer.contextTypes = {
-    [managerName]: PropTypes.object.isRequired
-  };
 
   return DragDropContainer;
 }
