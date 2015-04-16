@@ -4,7 +4,8 @@ import React from 'react';
 import Source from './Source';
 import Colors from './Colors';
 import Target from './Target';
-import { configureDragDropContext, HTML5Backend } from 'react-dnd';
+import { configureDragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
 class Container {
   render() {
@@ -30,6 +31,4 @@ class Container {
   }
 }
 
-export default configureDragDropContext(Container, {
-  backend: HTML5Backend
-});
+export default configureDragDropContext(Container, HTML5Backend);

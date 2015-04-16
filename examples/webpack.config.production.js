@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   devtool: 'source-map',
@@ -12,7 +13,11 @@ module.exports = {
     modulesDirectories: ['node_modules']
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      'react-dnd/modules': path.join(__dirname, '../modules'),
+      'react-dnd': path.join(__dirname, '../modules')
+    }
   },
   module: {
     loaders: [
@@ -20,10 +25,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.NormalModuleReplacementPlugin(
-      /^react-dnd$/,
-      '../../modules/index'
-    ),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {

@@ -1,7 +1,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { configureDragDropContext, HTML5Backend, NativeTypes } from 'react-dnd';
+import { configureDragDropContext } from 'react-dnd';
+import HTML5Backend, { NativeTypes } from 'react-dnd/modules/backends/HTML5';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
@@ -75,6 +76,4 @@ class Container extends Component {
   }
 }
 
-export default configureDragDropContext(Container, {
-  backend: HTML5Backend
-});
+export default configureDragDropContext(Container, HTML5Backend);

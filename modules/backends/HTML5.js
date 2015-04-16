@@ -1,5 +1,4 @@
 import { DragSource } from 'dnd-core';
-import NativeTypes from '../NativeTypes';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import { isSafari, isFirefox } from '../utils/BrowserDetector';
 import { isUrlDataTransfer, isFileDataTransfer } from '../utils/DataTransfer';
@@ -54,11 +53,16 @@ class UrlDragSource extends DragSource {
   }
 }
 
-export default class HTML5Backend {
-  constructor(actions, monitor, registry) {
-    this.actions = actions;
-    this.monitor = monitor;
-    this.registry = registry;
+export const NativeTypes = {
+  FILE: '__NATIVE_FILE__',
+  URL: '__NATIVE_URL__'
+};
+
+class HTML5Backend {
+  constructor(manager) {
+    this.actions = manager.getActions();
+    this.monitor = manager.getMonitor();
+    this.registry = manager.getRegistry();
 
     this.sourcePreviewNodes = {};
     this.sourcePreviewNodeOptions = {};
@@ -469,4 +473,8 @@ export default class HTML5Backend {
       this.endDragIfSourceWasRemovedFromDOM();
     }
   }
+}
+
+export default function createHTML5Backend(manager) {
+  return new HTML5Backend(manager);
 }
