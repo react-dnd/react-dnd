@@ -350,6 +350,7 @@ class HTML5Backend {
       // if dragend handler does something like showing an alert.
       // Only proceed if we have not handled it already.
       this.actions.endDrag();
+      this.actions.hover([]);
     }
   }
 
