@@ -48,13 +48,12 @@ class Dustbin extends Component {
   }
 }
 
-export default configureDragDrop(Dustbin, {
-  configure: (register) =>
-    register.dropTarget(ItemTypes.BOX, BoxTarget),
+export default configureDragDrop(Dustbin,
+  register => register.dropTarget(ItemTypes.BOX, BoxTarget),
 
-  collect: (connect, monitor, targetId) => ({
+  (connect, monitor, targetId) => ({
     dropTargetRef: connect.dropTarget(targetId),
     isOver: monitor.isOver(targetId),
     canDrop: monitor.canDrop(targetId)
   })
-});
+);
