@@ -7,18 +7,15 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
 exports.__esModule = true;
+exports['default'] = createHTML5Backend;
 
 var _DragSource3 = require('dnd-core');
-
-var _NativeTypes = require('../NativeTypes');
-
-var _NativeTypes2 = _interopRequireWildcard(_NativeTypes);
 
 var _EnterLeaveCounter = require('../utils/EnterLeaveCounter');
 
 var _EnterLeaveCounter2 = _interopRequireWildcard(_EnterLeaveCounter);
 
-var _isSafari$isFirefox = require('../utils/BrowserDetector');
+var _isFirefox = require('../utils/BrowserDetector');
 
 var _isUrlDataTransfer$isFileDataTransfer = require('../utils/DataTransfer');
 
@@ -31,10 +28,6 @@ var _shallowEqual2 = _interopRequireWildcard(_shallowEqual);
 var _defaults = require('lodash/object/defaults');
 
 var _defaults2 = _interopRequireWildcard(_defaults);
-
-var _memoize = require('lodash/function/memoize');
-
-var _memoize2 = _interopRequireWildcard(_memoize);
 
 var _invariant = require('invariant');
 
@@ -102,13 +95,20 @@ var UrlDragSource = (function (_DragSource2) {
   return UrlDragSource;
 })(_DragSource3.DragSource);
 
+var NativeTypes = {
+  FILE: '__NATIVE_FILE__',
+  URL: '__NATIVE_URL__'
+};
+
+exports.NativeTypes = NativeTypes;
+
 var HTML5Backend = (function () {
-  function HTML5Backend(actions, monitor, registry) {
+  function HTML5Backend(manager) {
     _classCallCheck(this, HTML5Backend);
 
-    this.actions = actions;
-    this.monitor = monitor;
-    this.registry = registry;
+    this.actions = manager.getActions();
+    this.monitor = manager.getMonitor();
+    this.registry = manager.getRegistry();
 
     this.sourcePreviewNodes = {};
     this.sourcePreviewNodeOptions = {};
@@ -126,9 +126,6 @@ var HTML5Backend = (function () {
     this.handleTopDrop = this.handleTopDrop.bind(this);
     this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
     this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
-    this.connectSourceNode = this.connectSourceNode.bind(this);
-    this.connectSourcePreviewNode = this.connectSourcePreviewNode.bind(this);
-    this.connectTargetNode = this.connectTargetNode.bind(this);
   }
 
   HTML5Backend.prototype.setup = function setup() {
@@ -172,31 +169,46 @@ var HTML5Backend = (function () {
     this.clearCurrentDragSourceNode();
   };
 
-  HTML5Backend.prototype.connect = function connect() {
+  HTML5Backend.prototype.connectDragSource = function connectDragSource(sourceId) {
+    var _this = this;
+
     return {
-      dragSource: this.connectSourceNode,
-      dragSourcePreview: this.connectSourcePreviewNode,
-      dropTarget: this.connectTargetNode
+      connect: function connect(node, options) {
+        return _this.connectSourceNode(sourceId, node, options);
+      },
+      connectPreview: function connectPreview(node, options) {
+        return _this.connectSourcePreviewNode(sourceId, node, options);
+      }
+    };
+  };
+
+  HTML5Backend.prototype.connectDropTarget = function connectDropTarget(targetId) {
+    var _this2 = this;
+
+    return {
+      connect: function connect(node) {
+        return _this2.connectTargetNode(targetId, node);
+      }
     };
   };
 
   HTML5Backend.prototype.connectSourcePreviewNode = function connectSourcePreviewNode(sourceId, node, options) {
-    var _this = this;
+    var _this3 = this;
 
     this.sourcePreviewNodeOptions[sourceId] = options;
     this.sourcePreviewNodes[sourceId] = node;
 
     return function () {
-      delete _this.sourcePreviewNodes[sourceId];
-      delete _this.sourcePreviewNodeOptions[sourceId];
+      delete _this3.sourcePreviewNodes[sourceId];
+      delete _this3.sourcePreviewNodeOptions[sourceId];
     };
   };
 
   HTML5Backend.prototype.connectSourceNode = function connectSourceNode(sourceId, node, options) {
-    var _this2 = this;
+    var _this4 = this;
 
     var handleDragStart = function handleDragStart(e) {
-      return _this2.handleDragStart(e, sourceId);
+      return _this4.handleDragStart(e, sourceId);
     };
 
     this.sourceNodeOptions[sourceId] = options;
@@ -204,23 +216,23 @@ var HTML5Backend = (function () {
     node.addEventListener('dragstart', handleDragStart);
 
     return function () {
-      delete _this2.sourceNodeOptions[sourceId];
+      delete _this4.sourceNodeOptions[sourceId];
       node.removeEventListener('dragstart', handleDragStart);
       node.setAttribute('draggable', false);
     };
   };
 
   HTML5Backend.prototype.connectTargetNode = function connectTargetNode(targetId, node) {
-    var _this3 = this;
+    var _this5 = this;
 
     var handleDragEnter = function handleDragEnter(e) {
-      return _this3.handleDragEnter(e, targetId);
+      return _this5.handleDragEnter(e, targetId);
     };
     var handleDragOver = function handleDragOver(e) {
-      return _this3.handleDragOver(e, targetId);
+      return _this5.handleDragOver(e, targetId);
     };
     var handleDrop = function handleDrop(e) {
-      return _this3.handleDrop(e, targetId);
+      return _this5.handleDrop(e, targetId);
     };
 
     node.addEventListener('dragenter', handleDragEnter);
@@ -255,8 +267,8 @@ var HTML5Backend = (function () {
 
   HTML5Backend.prototype.isDraggingNativeItem = function isDraggingNativeItem() {
     switch (this.monitor.getItemType()) {
-      case _NativeTypes2['default'].FILE:
-      case _NativeTypes2['default'].URL:
+      case NativeTypes.FILE:
+      case NativeTypes.URL:
         return true;
       default:
         return false;
@@ -267,7 +279,7 @@ var HTML5Backend = (function () {
     this.clearCurrentDragSourceNode();
 
     this.currentNativeSource = new UrlDragSource();
-    this.currentNativeHandle = this.registry.addSource(_NativeTypes2['default'].URL, this.currentNativeSource);
+    this.currentNativeHandle = this.registry.addSource(NativeTypes.URL, this.currentNativeSource);
     this.actions.beginDrag([this.currentNativeHandle]);
   };
 
@@ -275,7 +287,7 @@ var HTML5Backend = (function () {
     this.clearCurrentDragSourceNode();
 
     this.currentNativeSource = new FileDragSource();
-    this.currentNativeHandle = this.registry.addSource(_NativeTypes2['default'].FILE, this.currentNativeSource);
+    this.currentNativeHandle = this.registry.addSource(NativeTypes.FILE, this.currentNativeSource);
     this.actions.beginDrag([this.currentNativeHandle]);
   };
 
@@ -347,7 +359,7 @@ var HTML5Backend = (function () {
   };
 
   HTML5Backend.prototype.handleTopDragStart = function handleTopDragStart(e) {
-    var _this4 = this;
+    var _this6 = this;
 
     var dragStartSourceIds = this.dragStartSourceIds;
     var dragStartSourceNodes = this.dragStartSourceNodes;
@@ -355,11 +367,11 @@ var HTML5Backend = (function () {
     this.dragStartSourceIds = null;
     this.dragStartSourceNodes = null;
 
-    // Pass false to keep drag source unpublished.
+    // Keep drag source unpublished.
     // We will publish it in the next tick so browser
     // has time to screenshot current state and doesn't
     // cancel drag if the source DOM node is removed.
-    this.actions.beginDrag(dragStartSourceIds, false);
+    this.actions.beginDrag(dragStartSourceIds, { publishSource: false });
 
     var dataTransfer = e.dataTransfer;
 
@@ -391,7 +403,7 @@ var HTML5Backend = (function () {
       setTimeout(function () {
         // By now, the browser has taken drag screenshot
         // and we can safely let the drag source know it's active.
-        _this4.actions.publishDragSource();
+        _this6.actions.publishDragSource();
       });
     } else if (_isUrlDataTransfer$isFileDataTransfer.isUrlDataTransfer(dataTransfer)) {
       // URL dragged from inside the document
@@ -408,6 +420,7 @@ var HTML5Backend = (function () {
       // if dragend handler does something like showing an alert.
       // Only proceed if we have not handled it already.
       this.actions.endDrag();
+      this.actions.hover([]);
     }
   };
 
@@ -435,13 +448,13 @@ var HTML5Backend = (function () {
   };
 
   HTML5Backend.prototype.handleTopDragEnter = function handleTopDragEnter(e) {
-    var _this5 = this;
+    var _this7 = this;
 
     var dragEnterTargetIds = this.dragEnterTargetIds;
 
     this.dragEnterTargetIds = [];
 
-    if (!_isSafari$isFirefox.isFirefox()) {
+    if (!_isFirefox.isFirefox()) {
       // Don't emit hover in `dragenter` on Firefox due to an edge case.
       // If the target changes position as the result of `dragenter`, Firefox
       // will still happily dispatch `dragover` despite target being no longer
@@ -450,7 +463,7 @@ var HTML5Backend = (function () {
     }
 
     var canDrop = dragEnterTargetIds.some(function (targetId) {
-      return _this5.monitor.canDrop(targetId);
+      return _this7.monitor.canDropOnTarget(targetId);
     });
 
     if (canDrop) {
@@ -469,7 +482,7 @@ var HTML5Backend = (function () {
   };
 
   HTML5Backend.prototype.handleTopDragOver = function handleTopDragOver(e) {
-    var _this6 = this;
+    var _this8 = this;
 
     var dragOverTargetIds = this.dragOverTargetIds;
 
@@ -477,7 +490,7 @@ var HTML5Backend = (function () {
     this.actions.hover(dragOverTargetIds);
 
     var canDrop = dragOverTargetIds.some(function (targetId) {
-      return _this6.monitor.canDrop(targetId);
+      return _this8.monitor.canDropOnTarget(targetId);
     });
 
     if (canDrop) {
@@ -543,7 +556,8 @@ var HTML5Backend = (function () {
   return HTML5Backend;
 })();
 
-exports['default'] = HTML5Backend;
-module.exports = exports['default'];
+function createHTML5Backend(manager) {
+  return new HTML5Backend(manager);
+}
 
 // IE doesn't support MIME types in setData

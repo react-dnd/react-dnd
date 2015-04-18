@@ -13,10 +13,10 @@ var _HandlerRegistration = require('./HandlerRegistration');
 var _HandlerRegistration2 = _interopRequireWildcard(_HandlerRegistration);
 
 var ComponentHandlerMapping = (function () {
-  function ComponentHandlerMapping(registry, handler) {
+  function ComponentHandlerMapping(manager, handler) {
     _classCallCheck(this, ComponentHandlerMapping);
 
-    this.registry = registry;
+    this.manager = manager;
     this.registration = null;
 
     this.disposable = new _SerialDisposable.SerialDisposable();
@@ -24,26 +24,22 @@ var ComponentHandlerMapping = (function () {
   }
 
   ComponentHandlerMapping.prototype.getHandlerId = function getHandlerId() {
-    if (this.registration) {
-      return this.registration.handlerId || null;
-    } else {
-      return null;
-    }
+    return this.registration.getHandlerId();
   };
 
-  ComponentHandlerMapping.prototype.addDisposable = function addDisposable(disposable) {
-    this.registration.addDisposable(disposable);
+  ComponentHandlerMapping.prototype.getHandlerMonitor = function getHandlerMonitor() {
+    return this.registration.getHandlerMonitor();
   };
 
   ComponentHandlerMapping.prototype.receiveHandler = function receiveHandler(nextHandler) {
     var registration = this.registration;
-    var registry = this.registry;
+    var manager = this.manager;
 
     if (registration && registration.receiveHandler(nextHandler)) {
       return true;
     }
 
-    var nextRegistration = new _HandlerRegistration2['default'](registry, nextHandler);
+    var nextRegistration = new _HandlerRegistration2['default'](manager, nextHandler);
     var nextDisposable = nextRegistration.getDisposable();
 
     this.disposable.setDisposable(nextDisposable);

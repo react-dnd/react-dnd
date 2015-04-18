@@ -25,11 +25,10 @@ var _xor = require('lodash/array/xor');
 var _xor2 = _interopRequireWildcard(_xor);
 
 var ComponentHandlerMap = (function () {
-  function ComponentHandlerMap(registry, monitor, handlers, onChange) {
+  function ComponentHandlerMap(manager, handlers, onChange) {
     _classCallCheck(this, ComponentHandlerMap);
 
-    this.registry = registry;
-    this.monitor = monitor;
+    this.manager = manager;
     this.onChange = onChange;
 
     this.changeSubscriptionDisposable = new _Disposable$CompositeDisposable$SerialDisposable.SerialDisposable();
@@ -46,40 +45,36 @@ var ComponentHandlerMap = (function () {
 
     Object.keys(handlers).forEach(function (key) {
       var handler = handlers[key];
-      var mapping = new _ComponentHandlerMapping2['default'](_this.registry, handler);
+      var mapping = new _ComponentHandlerMapping2['default'](_this.manager, handler);
 
       _this.mappings[key] = mapping;
       _this.disposable.add(mapping.getDisposable());
     });
   };
 
-  ComponentHandlerMap.prototype.addDisposable = function addDisposable(handlerId, disposable) {
-    var keys = Object.keys(this.mappings);
-
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      var mapping = this.mappings[key];
-
-      if (mapping.getHandlerId() === handlerId) {
-        mapping.addDisposable(disposable);
-        return;
-      }
-    }
-
-    disposable.dispose();
-  };
-
-  ComponentHandlerMap.prototype.getHandlerIds = function getHandlerIds() {
+  ComponentHandlerMap.prototype.mapMappings = function mapMappings(selector) {
     var _this2 = this;
 
-    var handlerIds = {};
+    var result = {};
 
     Object.keys(this.mappings).forEach(function (key) {
       var mapping = _this2.mappings[key];
-      handlerIds[key] = mapping.getHandlerId();
+      result[key] = selector(mapping);
     });
 
-    return handlerIds;
+    return result;
+  };
+
+  ComponentHandlerMap.prototype.getHandlerIds = function getHandlerIds() {
+    return this.mapMappings(function (m) {
+      return m.getHandlerId();
+    });
+  };
+
+  ComponentHandlerMap.prototype.getHandlerMonitors = function getHandlerMonitors() {
+    return this.mapMappings(function (m) {
+      return m.getHandlerMonitor();
+    });
   };
 
   ComponentHandlerMap.prototype.receiveHandlers = function receiveHandlers(nextHandlers) {
@@ -105,9 +100,10 @@ var ComponentHandlerMap = (function () {
 
   ComponentHandlerMap.prototype.resubscribe = function resubscribe() {
     var handlerIds = this.getHandlerIds();
-    var unsubscribe = this.monitor.subscribe(this.onChange, _values2['default'](handlerIds));
-    var disposable = new _Disposable$CompositeDisposable$SerialDisposable.Disposable(unsubscribe);
+    var monitor = this.manager.getMonitor();
 
+    var unsubscribe = monitor.subscribe(this.onChange, _values2['default'](handlerIds));
+    var disposable = new _Disposable$CompositeDisposable$SerialDisposable.Disposable(unsubscribe);
     this.changeSubscriptionDisposable.setDisposable(disposable);
   };
 
