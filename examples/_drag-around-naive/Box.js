@@ -2,16 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDropMixin, DropEffects } from 'react-dnd';
-
-const dragSource = {
-  beginDrag(component) {
-    return {
-      effectAllowed: DropEffects.MOVE,
-      item: component.props
-    };
-  }
-};
+import { configureDragDrop } from 'react-dnd';
 
 const style = {
   position: 'absolute',
@@ -19,41 +10,43 @@ const style = {
   padding: '0.5rem'
 };
 
-const Box = React.createClass({
-  mixins: [DragDropMixin],
+const BoxSource = {
+  beginDrag(props) {
+    const { id, left, top } = props;
+    return { id, left, top };
+  }
+};
 
-  propTypes: {
+@configureDragDrop(
+  register =>
+    register.dragSource(ItemTypes.BOX, BoxSource),
+
+  boxSource => ({
+    connectDragSource: boxSource.connect(),
+    isDragging: boxSource.isDragging()
+  })
+)
+export default class Box {
+  static propTypes = {
+    connectDragSource: PropTypes.bool.isRequired,
+    isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
     left: PropTypes.number.isRequired,
     top: PropTypes.number.isRequired,
     hideSourceOnDrag: PropTypes.bool.isRequired
-  },
-
-  statics: {
-    configureDragDrop(register) {
-      register(ItemTypes.BOX, { dragSource });
-    }
-  },
+  };
 
   render() {
-    const { hideSourceOnDrag, left, top, children } = this.props;
-    const { isDragging } = this.getDragState(ItemTypes.BOX);
-
+    const { hideSourceOnDrag, left, top, connectDragSource, isDragging, children } = this.props;
     if (isDragging && hideSourceOnDrag) {
       return null;
     }
 
     return (
-      <div {...this.dragSourceFor(ItemTypes.BOX)}
-           style={{
-            ...style,
-            left,
-            top
-           }}>
+      <div ref={connectDragSource}
+           style={{ ...style, left, top }}>
         {children}
       </div>
     );
   }
-});
-
-export default Box;
+}
