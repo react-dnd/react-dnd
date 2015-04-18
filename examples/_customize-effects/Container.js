@@ -1,26 +1,24 @@
 'use strict';
 
-import React, { PropTypes, Component } from 'react';
-import { configureDragDropContext, DragDropContext } from 'react-dnd';
+import React, { Component } from 'react';
+import { configureDragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
-import Box from './Box';
-import Target from './Target';
-import shuffle from 'lodash/collection/shuffle';
+import SourceBox from './SourceBox';
+import TargetBox from './TargetBox';
 
-class Container extends Component {
+@configureDragDropContext(HTML5Backend)
+export default class Container extends Component {
   render() {
     return (
       <div style={{ height: 200 }}>
         <div style={{ float: 'left', marginTop: 20 }}>
-          <Box showCopyIcon />
-          <Box />
+          <SourceBox showCopyIcon />
+          <SourceBox />
         </div>
         <div style={{ float: 'left', marginLeft: 100 }}>
-          <Target />
+          <TargetBox />
         </div>
       </div>
     );
   }
 }
-
-export default configureDragDropContext(Container, HTML5Backend);

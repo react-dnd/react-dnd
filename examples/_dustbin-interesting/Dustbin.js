@@ -13,18 +13,34 @@ const style = {
   float: 'left'
 };
 
-const propTypes = {
-  accepts: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isOver: PropTypes.bool.isRequired,
-  canDrop: PropTypes.bool.isRequired,
-  dropTargetRef: PropTypes.func.isRequired,
-  lastDroppedItem: PropTypes.object,
-  onDrop: PropTypes.func.isRequired
+const DustbinTarget = {
+  drop(props, monitor) {
+    props.onDrop(monitor.getItem());
+  }
 };
 
-class Dustbin extends Component {
+@configureDragDrop(
+  (register, props) =>
+    register.dropTarget(props.accepts, DustbinTarget),
+
+  dustbinTarget => ({
+    connectDropTarget: dustbinTarget.connect(),
+    isOver: dustbinTarget.isOver(),
+    canDrop: dustbinTarget.canDrop()
+  })
+)
+export default class Dustbin extends Component {
+  static propTypes = {
+    connectDropTarget: PropTypes.func.isRequired,
+    isOver: PropTypes.bool.isRequired,
+    canDrop: PropTypes.bool.isRequired,
+    accepts: PropTypes.arrayOf(PropTypes.string).isRequired,
+    lastDroppedItem: PropTypes.object,
+    onDrop: PropTypes.func.isRequired
+  };
+
   render() {
-    const { accepts, isOver, canDrop, dropTargetRef, lastDroppedItem } = this.props;
+    const { accepts, isOver, canDrop, connectDropTarget, lastDroppedItem } = this.props;
     const isActive = isOver && canDrop;
 
     let backgroundColor = '#222';
@@ -35,7 +51,7 @@ class Dustbin extends Component {
     }
 
     return (
-      <div ref={dropTargetRef}
+      <div ref={connectDropTarget}
            style={{ ...style, backgroundColor }}>
 
         {isActive ?
@@ -50,21 +66,3 @@ class Dustbin extends Component {
     );
   }
 }
-Dustbin.propTypes = propTypes;
-
-const dropTarget = {
-  drop(props, monitor) {
-    props.onDrop(monitor.getItem());
-  }
-};
-
-export default configureDragDrop(Dustbin, {
-  configure: (register, props) =>
-    register.dropTarget(props.accepts, dropTarget),
-
-  collect: (connect, monitor, dropTargetId) => ({
-    dropTargetRef: connect.dropTarget(dropTargetId),
-    isOver: monitor.isOver(dropTargetId),
-    canDrop: monitor.canDrop(dropTargetId)
-  })
-});

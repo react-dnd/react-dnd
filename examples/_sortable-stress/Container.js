@@ -2,13 +2,13 @@
 
 import React, { Component } from 'react';
 import update from 'react/lib/update';
-import range from 'lodash/utility/range';
 import { name } from 'faker';
 import Card from './Card';
 import { configureDragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
-class Container extends Component {
+@configureDragDropContext(HTML5Backend)
+export default class Container extends Component {
   constructor(props) {
     super(props);
 
@@ -86,5 +86,3 @@ class Container extends Component {
     );
   }
 }
-
-export default configureDragDropContext(Container, HTML5Backend);

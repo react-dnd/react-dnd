@@ -93,7 +93,8 @@ function configureDragDrop(InnerComponent, configure, collect, {
         handlerMonitors = handlerMonitors[DEFAULT_KEY];
       }
 
-      return collect(handlerMonitors);
+      const monitor = this.manager.getMonitor();
+      return collect(handlerMonitors, monitor);
     }
 
     render() {
