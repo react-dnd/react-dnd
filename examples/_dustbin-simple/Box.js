@@ -12,29 +12,7 @@ const style = {
   maxWidth: 80
 };
 
-const propTypes = {
-  name: PropTypes.string.isRequired,
-  isDragging: PropTypes.bool.isRequired,
-  dragSourceRef: PropTypes.func.isRequired
-};
-
-class Box extends Component {
-  render() {
-    const { isDragging, dragSourceRef } = this.props;
-    const { name } = this.props;
-    const opacity = isDragging ? 0.4 : 1;
-
-    return (
-      <div ref={dragSourceRef}
-           style={{ ...style, opacity }}>
-        {name}
-      </div>
-    );
-  }
-}
-Box.propTypes = propTypes;
-
-const boxSource = {
+const BoxSource = {
   beginDrag(props) {
     return {
       name: props.name
@@ -51,9 +29,30 @@ const boxSource = {
   }
 };
 
+class Box extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    dragSourceRef: PropTypes.func.isRequired
+  };
+
+  render() {
+    const { isDragging, dragSourceRef } = this.props;
+    const { name } = this.props;
+    const opacity = isDragging ? 0.4 : 1;
+
+    return (
+      <div ref={dragSourceRef}
+           style={{ ...style, opacity }}>
+        {name}
+      </div>
+    );
+  }
+}
+
 export default configureDragDrop(Box, {
   configure: (register) =>
-    register.dragSource(ItemTypes.BOX, boxSource),
+    register.dragSource(ItemTypes.BOX, BoxSource),
 
   collect: (connect, monitor, dragSourceId) => ({
     dragSourceRef: connect.dragSource(dragSourceId),
