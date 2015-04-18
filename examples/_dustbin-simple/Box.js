@@ -50,12 +50,11 @@ class Box extends Component {
   }
 }
 
-export default configureDragDrop(Box, {
-  configure: (register) =>
-    register.dragSource(ItemTypes.BOX, BoxSource),
+export default configureDragDrop(Box,
+  register => register.dragSource(ItemTypes.BOX, BoxSource),
 
-  collect: (connect, monitor, dragSourceId) => ({
+  (connect, monitor, dragSourceId) => ({
     dragSourceRef: connect.dragSource(dragSourceId),
     isDragging: monitor.isDragging(dragSourceId)
   })
-});
+);

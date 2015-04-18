@@ -1,5 +1,5 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
-import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
+import { Disposable, SerialDisposable } from 'disposables';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
 import ComponentHandlerMap from './ComponentHandlerMap';
@@ -11,12 +11,10 @@ import invariant from 'invariant';
 
 const DEFAULT_KEY = '__default__';
 
-export default function configureDragDrop(InnerComponent, {
-  configure,
-  collect,
+export default function configureDragDrop(InnerComponent, configure, collect, {
   arePropsEqual = shallowEqualScalar,
   managerKey = 'dragDropManager'
-}) {
+}: options = {}) {
   class DragDropContainer extends Component {
     static contextTypes = {
       [managerKey]: PropTypes.object.isRequired
