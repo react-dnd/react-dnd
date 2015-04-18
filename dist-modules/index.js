@@ -4,18 +4,10 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj['defau
 
 exports.__esModule = true;
 
-var _default = require('./backends/HTML5');
+var _default = require('./configureDragDrop');
 
-exports.HTML5Backend = _interopRequire(_default);
+exports.configureDragDrop = _interopRequire(_default);
 
-var _default2 = require('./NativeTypes');
+var _default2 = require('./configureDragDropContext');
 
-exports.NativeTypes = _interopRequire(_default2);
-
-var _default3 = require('./configureDragDrop');
-
-exports.configureDragDrop = _interopRequire(_default3);
-
-var _default4 = require('./configureDragDropContext');
-
-exports.configureDragDropContext = _interopRequire(_default4);
+exports.configureDragDropContext = _interopRequire(_default2);

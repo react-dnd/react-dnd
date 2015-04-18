@@ -6,18 +6,17 @@ var _defineProperty = function (obj, key, value) { return Object.defineProperty(
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.__esModule = true;
-exports['default'] = configureDragDrop;
 
-var _React$Component$PropTypes$findDOMNode = require('react');
+var _React$Component$PropTypes = require('react');
 
-var _React$Component$PropTypes$findDOMNode2 = _interopRequireWildcard(_React$Component$PropTypes$findDOMNode);
-
-var _Disposable$CompositeDisposable$SerialDisposable = require('disposables');
+var _React$Component$PropTypes2 = _interopRequireWildcard(_React$Component$PropTypes);
 
 var _ComponentDragSource = require('./ComponentDragSource');
 
@@ -43,25 +42,21 @@ var _assign = require('lodash/object/assign');
 
 var _assign2 = _interopRequireWildcard(_assign);
 
-var _memoize = require('lodash/function/memoize');
-
-var _memoize2 = _interopRequireWildcard(_memoize);
-
 var _invariant = require('invariant');
 
 var _invariant2 = _interopRequireWildcard(_invariant);
 
 var DEFAULT_KEY = '__default__';
 
-function configureDragDrop(InnerComponent, _ref) {
-  var configure = _ref.configure;
-  var collect = _ref.collect;
+function configureDragDrop(InnerComponent, configure, collect) {
+  var _ref = arguments[3] === undefined ? {} : arguments[3];
+
   var _ref$arePropsEqual = _ref.arePropsEqual;
   var arePropsEqual = _ref$arePropsEqual === undefined ? _shallowEqualScalar2['default'] : _ref$arePropsEqual;
-  var _ref$managerName = _ref.managerName;
-  var managerName = _ref$managerName === undefined ? 'dragDropManager' : _ref$managerName;
+  var _ref$managerKey = _ref.managerKey;
+  var managerKey = _ref$managerKey === undefined ? 'dragDropManager' : _ref$managerKey;
 
-  var DragDropContainer = (function (_Component) {
+  return (function (_Component) {
     function DragDropContainer(props, context) {
       _classCallCheck(this, DragDropContainer);
 
@@ -71,11 +66,11 @@ function configureDragDrop(InnerComponent, _ref) {
       this.setComponentRef = this.setComponentRef.bind(this);
       this.componentRef = null;
 
-      this.manager = context[managerName];
+      this.manager = context[managerKey];
       _invariant2['default'](this.manager, 'Could not read manager from context.');
 
-      this.componentConnector = this.createComponentConnector();
-      this.handlerMap = new _ComponentHandlerMap2['default'](this.manager.getRegistry(), this.manager.getMonitor(), this.getNextHandlers(props), this.handleChange);
+      var handlers = this.getNextHandlers(props);
+      this.handlerMap = new _ComponentHandlerMap2['default'](this.manager, handlers, this.handleChange);
       this.state = this.getCurrentState();
     }
 
@@ -136,73 +131,43 @@ function configureDragDrop(InnerComponent, _ref) {
     };
 
     DragDropContainer.prototype.getCurrentState = function getCurrentState() {
-      var monitor = this.manager.getMonitor();
-      var handlerIds = this.handlerMap.getHandlerIds();
+      var handlerMonitors = this.handlerMap.getHandlerMonitors();
 
-      if (typeof handlerIds[DEFAULT_KEY] !== 'undefined') {
-        handlerIds = handlerIds[DEFAULT_KEY];
+      if (typeof handlerMonitors[DEFAULT_KEY] !== 'undefined') {
+        handlerMonitors = handlerMonitors[DEFAULT_KEY];
       }
 
-      return collect(this.componentConnector, monitor, handlerIds);
-    };
-
-    DragDropContainer.prototype.createComponentConnector = function createComponentConnector() {
-      var _this2 = this;
-
-      var backend = this.manager.getBackend();
-      var backendConnector = backend.connect();
-      var componentConnector = {};
-
-      Object.keys(backendConnector).forEach(function (key) {
-        var connectBackend = backendConnector[key].bind(backendConnector);
-        var connectComponent = _this2.wrapConnectBackend(key, connectBackend);
-
-        componentConnector[key] = _memoize2['default'](connectComponent);
-      });
-
-      return componentConnector;
-    };
-
-    DragDropContainer.prototype.wrapConnectBackend = function wrapConnectBackend(key, connectBackend) {
-      var _this3 = this;
-
-      return function (handlerId) {
-        var nodeDisposable = new _Disposable$CompositeDisposable$SerialDisposable.SerialDisposable();
-        _this3.handlerMap.addDisposable(handlerId, nodeDisposable);
-
-        var currentNode = null;
-        var currentOptions = null;
-
-        return function (nextComponentOrNode, nextOptions) {
-          var nextNode = _React$Component$PropTypes$findDOMNode.findDOMNode(nextComponentOrNode);
-          if (nextNode === currentNode && _shallowEqualScalar2['default'](currentOptions, nextOptions)) {
-            return;
-          }
-
-          currentNode = nextNode;
-          currentOptions = nextOptions;
-
-          if (nextNode) {
-            var nextDispose = connectBackend(handlerId, nextNode, nextOptions);
-            nodeDisposable.setDisposable(new _Disposable$CompositeDisposable$SerialDisposable.Disposable(nextDispose));
-          } else {
-            nodeDisposable.setDisposable(null);
-          }
-        };
-      };
+      var monitor = this.manager.getMonitor();
+      return collect(handlerMonitors, monitor);
     };
 
     DragDropContainer.prototype.render = function render() {
-      return _React$Component$PropTypes$findDOMNode2['default'].createElement(InnerComponent, _extends({}, this.props, this.state, {
+      return _React$Component$PropTypes2['default'].createElement(InnerComponent, _extends({}, this.props, this.state, {
         ref: this.setComponentRef }));
     };
 
+    _createClass(DragDropContainer, null, [{
+      key: 'contextTypes',
+      enumerable: true,
+      value: _defineProperty({}, managerKey, _React$Component$PropTypes.PropTypes.object.isRequired)
+    }]);
+
     return DragDropContainer;
-  })(_React$Component$PropTypes$findDOMNode.Component);
-
-  DragDropContainer.contextTypes = _defineProperty({}, managerName, _React$Component$PropTypes$findDOMNode.PropTypes.object.isRequired);
-
-  return DragDropContainer;
+  })(_React$Component$PropTypes.Component);
 }
+
+exports['default'] = function () {
+  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  if (typeof args[2] === 'function') {
+    return configureDragDrop.apply(undefined, args);
+  } else {
+    return function (DecoratedComponent) {
+      return configureDragDrop.apply(undefined, [DecoratedComponent].concat(args));
+    };
+  }
+};
 
 module.exports = exports['default'];
