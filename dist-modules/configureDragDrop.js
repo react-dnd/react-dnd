@@ -13,6 +13,7 @@ var _inherits = function (subClass, superClass) { if (typeof superClass !== 'fun
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.__esModule = true;
+exports['default'] = configureDragDrop;
 
 var _React$Component$PropTypes = require('react');
 
@@ -48,126 +49,114 @@ var _invariant2 = _interopRequireWildcard(_invariant);
 
 var DEFAULT_KEY = '__default__';
 
-function configureDragDrop(InnerComponent, configure, collect) {
-  var _ref = arguments[3] === undefined ? {} : arguments[3];
+function configureDragDrop(configure, collect) {
+  var _ref = arguments[2] === undefined ? {} : arguments[2];
 
   var _ref$arePropsEqual = _ref.arePropsEqual;
   var arePropsEqual = _ref$arePropsEqual === undefined ? _shallowEqualScalar2['default'] : _ref$arePropsEqual;
   var _ref$managerKey = _ref.managerKey;
   var managerKey = _ref$managerKey === undefined ? 'dragDropManager' : _ref$managerKey;
 
-  return (function (_Component) {
-    function DragDropContainer(props, context) {
-      _classCallCheck(this, DragDropContainer);
+  return function (DecoratedComponent) {
+    return (function (_Component) {
+      function DragDropHandler(props, context) {
+        _classCallCheck(this, DragDropHandler);
 
-      _Component.call(this, props);
-      this.handleChange = this.handleChange.bind(this);
-      this.getComponentRef = this.getComponentRef.bind(this);
-      this.setComponentRef = this.setComponentRef.bind(this);
-      this.componentRef = null;
+        _Component.call(this, props);
+        this.handleChange = this.handleChange.bind(this);
+        this.getComponentRef = this.getComponentRef.bind(this);
+        this.setComponentRef = this.setComponentRef.bind(this);
+        this.componentRef = null;
 
-      this.manager = context[managerKey];
-      _invariant2['default'](this.manager, 'Could not read manager from context.');
+        this.manager = context[managerKey];
+        _invariant2['default'](this.manager, 'Could not read manager from context.');
 
-      var handlers = this.getNextHandlers(props);
-      this.handlerMap = new _ComponentHandlerMap2['default'](this.manager, handlers, this.handleChange);
-      this.state = this.getCurrentState();
-    }
-
-    _inherits(DragDropContainer, _Component);
-
-    DragDropContainer.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-      return !arePropsEqual(nextProps, this.props) || !_shallowEqual2['default'](nextState, this.state);
-    };
-
-    DragDropContainer.prototype.setComponentRef = function setComponentRef(ref) {
-      this.componentRef = ref;
-    };
-
-    DragDropContainer.prototype.getComponentRef = function getComponentRef() {
-      return this.componentRef;
-    };
-
-    DragDropContainer.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-      if (!arePropsEqual(nextProps, this.props)) {
-        var nextHandlers = this.getNextHandlers(nextProps);
-        this.handlerMap.receiveHandlers(nextHandlers);
-        this.handleChange();
+        var handlers = this.getNextHandlers(props);
+        this.handlerMap = new _ComponentHandlerMap2['default'](this.manager, handlers, this.handleChange);
+        this.state = this.getCurrentState();
       }
-    };
 
-    DragDropContainer.prototype.componentWillUnmount = function componentWillUnmount() {
-      var disposable = this.handlerMap.getDisposable();
-      disposable.dispose();
-    };
+      _inherits(DragDropHandler, _Component);
 
-    DragDropContainer.prototype.handleChange = function handleChange() {
-      var nextState = this.getCurrentState();
-      if (!_shallowEqual2['default'](nextState, this.state)) {
-        this.setState(nextState);
-      }
-    };
+      DragDropHandler.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+        return !arePropsEqual(nextProps, this.props) || !_shallowEqual2['default'](nextState, this.state);
+      };
 
-    DragDropContainer.prototype.getNextHandlers = function getNextHandlers(props) {
-      var _this = this;
+      DragDropHandler.prototype.setComponentRef = function setComponentRef(ref) {
+        this.componentRef = ref;
+      };
 
-      props = _assign2['default']({}, props);
+      DragDropHandler.prototype.getComponentRef = function getComponentRef() {
+        return this.componentRef;
+      };
 
-      var register = {
-        dragSource: function dragSource(type, spec) {
-          return new _ComponentDragSource2['default'](type, spec, props, _this.getComponentRef);
-        },
-        dropTarget: function dropTarget(type, spec) {
-          return new _ComponentDropTarget2['default'](type, spec, props, _this.getComponentRef);
+      DragDropHandler.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        if (!arePropsEqual(nextProps, this.props)) {
+          var nextHandlers = this.getNextHandlers(nextProps);
+          this.handlerMap.receiveHandlers(nextHandlers);
+          this.handleChange();
         }
       };
 
-      var handlers = configure(register, props);
-      if (handlers instanceof _ComponentDragSource2['default'] || handlers instanceof _ComponentDropTarget2['default']) {
-        handlers = _defineProperty({}, DEFAULT_KEY, handlers);
-      }
+      DragDropHandler.prototype.componentWillUnmount = function componentWillUnmount() {
+        var disposable = this.handlerMap.getDisposable();
+        disposable.dispose();
+      };
 
-      return handlers;
-    };
+      DragDropHandler.prototype.handleChange = function handleChange() {
+        var nextState = this.getCurrentState();
+        if (!_shallowEqual2['default'](nextState, this.state)) {
+          this.setState(nextState);
+        }
+      };
 
-    DragDropContainer.prototype.getCurrentState = function getCurrentState() {
-      var handlerMonitors = this.handlerMap.getHandlerMonitors();
+      DragDropHandler.prototype.getNextHandlers = function getNextHandlers(props) {
+        var _this = this;
 
-      if (typeof handlerMonitors[DEFAULT_KEY] !== 'undefined') {
-        handlerMonitors = handlerMonitors[DEFAULT_KEY];
-      }
+        props = _assign2['default']({}, props);
 
-      var monitor = this.manager.getMonitor();
-      return collect(handlerMonitors, monitor);
-    };
+        var register = {
+          dragSource: function dragSource(type, spec) {
+            return new _ComponentDragSource2['default'](type, spec, props, _this.getComponentRef);
+          },
+          dropTarget: function dropTarget(type, spec) {
+            return new _ComponentDropTarget2['default'](type, spec, props, _this.getComponentRef);
+          }
+        };
 
-    DragDropContainer.prototype.render = function render() {
-      return _React$Component$PropTypes2['default'].createElement(InnerComponent, _extends({}, this.props, this.state, {
-        ref: this.setComponentRef }));
-    };
+        var handlers = configure(register, props);
+        if (handlers instanceof _ComponentDragSource2['default'] || handlers instanceof _ComponentDropTarget2['default']) {
+          handlers = _defineProperty({}, DEFAULT_KEY, handlers);
+        }
 
-    _createClass(DragDropContainer, null, [{
-      key: 'contextTypes',
-      enumerable: true,
-      value: _defineProperty({}, managerKey, _React$Component$PropTypes.PropTypes.object.isRequired)
-    }]);
+        return handlers;
+      };
 
-    return DragDropContainer;
-  })(_React$Component$PropTypes.Component);
+      DragDropHandler.prototype.getCurrentState = function getCurrentState() {
+        var handlerMonitors = this.handlerMap.getHandlerMonitors();
+
+        if (typeof handlerMonitors[DEFAULT_KEY] !== 'undefined') {
+          handlerMonitors = handlerMonitors[DEFAULT_KEY];
+        }
+
+        var monitor = this.manager.getMonitor();
+        return collect(handlerMonitors, monitor);
+      };
+
+      DragDropHandler.prototype.render = function render() {
+        return _React$Component$PropTypes2['default'].createElement(DecoratedComponent, _extends({}, this.props, this.state, {
+          ref: this.setComponentRef }));
+      };
+
+      _createClass(DragDropHandler, null, [{
+        key: 'contextTypes',
+        enumerable: true,
+        value: _defineProperty({}, managerKey, _React$Component$PropTypes.PropTypes.object.isRequired)
+      }]);
+
+      return DragDropHandler;
+    })(_React$Component$PropTypes.Component);
+  };
 }
-
-exports['default'] = function () {
-  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
-  if (typeof args[2] === 'function') {
-    return configureDragDrop.apply(undefined, args);
-  } else {
-    return function (DecoratedComponent) {
-      return configureDragDrop.apply(undefined, [DecoratedComponent].concat(args));
-    };
-  }
-};
 
 module.exports = exports['default'];
