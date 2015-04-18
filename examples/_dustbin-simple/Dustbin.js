@@ -12,13 +12,19 @@ const style = {
   textAlign: 'center'
 };
 
-const propTypes = {
-  isOver: PropTypes.bool.isRequired,
-  canDrop: PropTypes.bool.isRequired,
-  dropTargetRef: PropTypes.func.isRequired
+const BoxTarget = {
+  drop() {
+    return { name: 'Dustbin' };
+  }
 };
 
 class Dustbin extends Component {
+  static propTypes = {
+    isOver: PropTypes.bool.isRequired,
+    canDrop: PropTypes.bool.isRequired,
+    dropTargetRef: PropTypes.func.isRequired
+  };
+
   render() {
     const { canDrop, isOver, dropTargetRef } = this.props;
     const isActive = canDrop && isOver;
@@ -41,17 +47,10 @@ class Dustbin extends Component {
     );
   }
 }
-Dustbin.propTypes = propTypes;
-
-const boxDropTarget = {
-  drop() {
-    return { name: 'Dustbin' };
-  }
-};
 
 export default configureDragDrop(Dustbin, {
   configure: (register) =>
-    register.dropTarget(ItemTypes.BOX, boxDropTarget),
+    register.dropTarget(ItemTypes.BOX, BoxTarget),
 
   collect: (connect, monitor, targetId) => ({
     dropTargetRef: connect.dropTarget(targetId),
