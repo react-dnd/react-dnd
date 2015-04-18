@@ -12,15 +12,37 @@ const style = {
   float: 'left'
 };
 
-const propTypes = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  connectDragSource: PropTypes.func.isRequired,
-  isDragging: PropTypes.bool.isRequired,
-  isDropped: PropTypes.bool.isRequired
+const BoxSource = {
+  beginDrag(props) {
+    return {
+      name: props.name
+    };
+  },
+
+  isDragging(props, monitor) {
+    const item = monitor.getItem();
+    return props.name === item.name;
+  }
 };
 
-class Box extends Component {
+@configureDragDrop(
+  (register, props) =>
+    register.dragSource(props.type, BoxSource),
+
+  boxSource => ({
+    connectDragSource: boxSource.connect(),
+    isDragging: boxSource.isDragging()
+  })
+)
+export default class Box extends Component {
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    isDropped: PropTypes.bool.isRequired
+  };
+
   render() {
     const { name, isDropped, isDragging, connectDragSource } = this.props;
     const opacity = isDragging ? 0.4 : 1;
@@ -36,27 +58,3 @@ class Box extends Component {
     );
   }
 }
-Box.propTypes = propTypes;
-
-const boxSource = {
-  beginDrag(props) {
-    return {
-      name: props.name
-    };
-  },
-
-  isDragging(props, monitor) {
-    const item = monitor.getItem();
-    return props.name === item.name;
-  }
-};
-
-export default configureDragDrop(Box, {
-  configure: (register, props) =>
-    register.dragSource(props.type, boxSource),
-
-  collect: (connect, monitor, dragSourceId) => ({
-    connectDragSource: connect.dragSource(dragSourceId),
-    isDragging: monitor.isDragging(dragSourceId)
-  })
-});

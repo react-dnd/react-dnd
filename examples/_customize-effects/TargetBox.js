@@ -7,14 +7,14 @@ import { configureDragDrop } from 'react-dnd';
 const style = {
   height: '12rem',
   width: '12rem',
-  color: 'white',
+  color: '#222',
   padding: '2rem',
-  textAlign: 'center'
+  textAlign: 'center',
+  backgroundColor: '#eee'
 };
 
 const BoxTarget = {
   drop() {
-    return { name: 'Dustbin' };
   }
 };
 
@@ -28,7 +28,7 @@ const BoxTarget = {
     canDrop: boxTarget.canDrop()
   })
 )
-export default class Dustbin extends Component {
+export default class TargetBox extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
@@ -39,16 +39,9 @@ export default class Dustbin extends Component {
     const { canDrop, isOver, connectDropTarget } = this.props;
     const isActive = canDrop && isOver;
 
-    let backgroundColor = '#222';
-    if (isActive) {
-      backgroundColor = 'darkgreen';
-    } else if (canDrop) {
-      backgroundColor = 'darkkhaki';
-    }
-
     return (
       <div ref={connectDropTarget}
-           style={{ ...style, backgroundColor }}>
+           style={style}>
         {isActive ?
           'Release to drop' :
           'Drag item here'

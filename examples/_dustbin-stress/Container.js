@@ -9,7 +9,8 @@ import ItemTypes from './ItemTypes';
 import shuffle from 'lodash/collection/shuffle';
 import update from 'react/lib/update';
 
-class Container extends Component {
+@configureDragDropContext(HTML5Backend)
+export default class Container extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,5 +89,3 @@ class Container extends Component {
     }));
   }
 }
-
-export default configureDragDropContext(Container, HTML5Backend);

@@ -20,44 +20,42 @@ const handleStyle = {
   marginRight: '0.5rem'
 };
 
-const propTypes = {
-  isDragging: PropTypes.bool.isRequired,
-  dragPreviewRef: PropTypes.func.isRequired,
-  dragSourceRef: PropTypes.func.isRequired
+const BoxSource = {
+  beginDrag() {
+    return {};
+  }
 };
 
-class BoxWithHandle extends Component {
+@configureDragDrop(
+  register =>
+    register.dragSource(ItemTypes.BOX, BoxSource),
+
+  boxSource => ({
+    connectDragSource: boxSource.connect(),
+    connectDragPreview: boxSource.connectPreview(),
+    isDragging: boxSource.isDragging()
+  })
+)
+export default class BoxWithHandle extends Component {
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    connectDragPreview: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired
+  };
+
   render() {
-    const { isDragging, dragSourceRef, dragPreviewRef } = this.props;
+    const { isDragging, connectDragSource, connectDragPreview } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
       <div style={{ ...style, opacity }}
-           ref={dragPreviewRef}>
+           ref={connectDragPreview}>
 
         <div style={handleStyle}
-             ref={dragSourceRef} />
+             ref={connectDragSource} />
 
         Drag me by the handle
       </div>
     );
   }
 }
-BoxWithHandle.propTypes = propTypes;
-
-const boxSource = {
-  beginDrag() {
-    return {};
-  }
-};
-
-export default configureDragDrop(BoxWithHandle, {
-  configure: (register) =>
-    register.dragSource(ItemTypes.BOX, boxSource),
-
-  collect: (connect, monitor, dragSourceId) => ({
-    dragPreviewRef: connect.dragSourcePreview(dragSourceId),
-    dragSourceRef: connect.dragSource(dragSourceId),
-    isDragging: monitor.isDragging(dragSourceId)
-  })
-});

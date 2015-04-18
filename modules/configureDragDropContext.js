@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 
-export default function configureDragDropContext(InnerComponent, backendFactories) {
+function configureDragDropContext(InnerComponent, backendFactories) {
   const childContextTypes = {};
   const childContext = {};
 
@@ -29,4 +29,12 @@ export default function configureDragDropContext(InnerComponent, backendFactorie
   }
 
   return DragDropContext;
+}
+
+export default function(...args) {
+  if (args.length === 1) {
+    return (DecoratedComponent) => configureDragDropContext(DecoratedComponent, ...args);
+  } else {
+    return configureDragDropContext(...args);
+  }
 }

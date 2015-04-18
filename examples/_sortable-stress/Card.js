@@ -2,7 +2,6 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import shallowEqual from 'react/lib/shallowEqual';
 import { configureDragDrop } from 'react-dnd';
 
 const style = {
@@ -13,37 +12,13 @@ const style = {
   maxWidth: '20em'
 };
 
-const propTypes = {
-  id: PropTypes.any.isRequired,
-  text: PropTypes.string.isRequired,
-  isDragging: PropTypes.bool.isRequired,
-  moveCard: PropTypes.func.isRequired,
-  dragSourceRef: PropTypes.func.isRequired,
-  dropTargetRef: PropTypes.func.isRequired
-};
-
-class Card {
-  render() {
-    const { text, isDragging, dragSourceRef, dropTargetRef } = this.props;
-    const opacity = isDragging ? 0 : 1;
-
-    return (
-      <div ref={c => { dragSourceRef(c); dropTargetRef(c); }}
-           style={{ ...style, opacity }}>
-        {text}
-      </div>
-    );
-  }
-}
-Card.propTypes = propTypes;
-
-const cardSource = {
+const CardSource = {
   beginDrag(props) {
     return { id: props.id };
   }
 };
 
-const cardTarget = {
+const CardTarget = {
   hover(props, monitor) {
     const draggedId = monitor.getItem().id;
 
@@ -53,15 +28,37 @@ const cardTarget = {
   }
 };
 
-export default configureDragDrop(Card, {
-  configure: (register) => ({
-    cardSourceId: register.dragSource(ItemTypes.CARD, cardSource),
-    cardTargetId: register.dropTarget(ItemTypes.CARD, cardTarget)
+@configureDragDrop(
+  register => ({
+    cardSource: register.dragSource(ItemTypes.CARD, CardSource),
+    cardTarget: register.dropTarget(ItemTypes.CARD, CardTarget)
   }),
 
-  collect: (connect, monitor, { cardSourceId, cardTargetId }) => ({
-    isDragging: monitor.isDragging(cardSourceId),
-    dragSourceRef: connect.dragSource(cardSourceId),
-    dropTargetRef: connect.dropTarget(cardTargetId)
+  ({ cardSource, cardTarget }) => ({
+    connectDragSource: cardSource.connect(),
+    connectDropTarget: cardTarget.connect(),
+    isDragging: cardSource.isDragging()
   })
-});
+)
+export default class Card {
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    id: PropTypes.any.isRequired,
+    text: PropTypes.string.isRequired,
+    moveCard: PropTypes.func.isRequired
+  };
+
+  render() {
+    const { text, isDragging, connectDragSource, connectDropTarget } = this.props;
+    const opacity = isDragging ? 0 : 1;
+
+    return (
+      <div ref={c => { connectDragSource(c); connectDropTarget(c); }}
+           style={{ ...style, opacity }}>
+        {text}
+      </div>
+    );
+  }
+}

@@ -12,39 +12,38 @@ const style = {
   width: '15rem'
 };
 
-class Box extends Component {
-  static propTypes = {
-    isDragging: PropTypes.bool.isRequired,
-    dragSourceRef: PropTypes.func.isRequired,
-    showCopyIcon: PropTypes.bool
-  };
-
-  render() {
-    const { isDragging, dragSourceRef, showCopyIcon } = this.props;
-    const opacity = isDragging ? 0.4 : 1;
-    const dropEffect = showCopyIcon ? 'copy' : 'move';
-
-    return (
-      <div style={{ ...style, opacity }}
-           ref={c => dragSourceRef(c, { dropEffect })}>
-        When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
-      </div>
-    );
-  }
-}
-
-const boxSource = {
+const BoxSource = {
   beginDrag() {
     return {};
   }
 };
 
-export default configureDragDrop(Box, {
-  configure: (register) =>
-    register.dragSource(ItemTypes.BOX, boxSource),
+@configureDragDrop(
+  register =>
+    register.dragSource(ItemTypes.BOX, BoxSource),
 
-  collect: (connect, monitor, dragSourceId) => ({
-    dragSourceRef: connect.dragSource(dragSourceId),
-    isDragging: monitor.isDragging(dragSourceId)
+  boxSource => ({
+    isDragging: boxSource.isDragging(),
+    connectDragSource: boxSource.connect()
   })
-});
+)
+export default class SourceBox extends Component {
+  static propTypes = {
+    isDragging: PropTypes.bool.isRequired,
+    connectDragSource: PropTypes.func.isRequired,
+    showCopyIcon: PropTypes.bool
+  };
+
+  render() {
+    const { isDragging, connectDragSource, showCopyIcon } = this.props;
+    const opacity = isDragging ? 0.4 : 1;
+    const dropEffect = showCopyIcon ? 'copy' : 'move';
+
+    return (
+      <div style={{ ...style, opacity }}
+           ref={c => connectDragSource(c, { dropEffect })}>
+        When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
+      </div>
+    );
+  }
+}

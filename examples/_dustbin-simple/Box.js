@@ -30,26 +30,28 @@ const BoxSource = {
 };
 
 @configureDragDrop(
-  register => register.dragSource(ItemTypes.BOX, BoxSource),
+  register =>
+    register.dragSource(ItemTypes.BOX, BoxSource),
+
   boxSource => ({
-    dragSourceRef: boxSource.connect(),
+    connectDragSource: boxSource.connect(),
     isDragging: boxSource.isDragging()
   })
 )
 export default class Box extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    dragSourceRef: PropTypes.func.isRequired
+    name: PropTypes.string.isRequired
   };
 
   render() {
-    const { isDragging, dragSourceRef } = this.props;
+    const { isDragging, connectDragSource } = this.props;
     const { name } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div ref={dragSourceRef}
+      <div ref={connectDragSource}
            style={{ ...style, opacity }}>
         {name}
       </div>
