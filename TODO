@@ -4,12 +4,10 @@
 * make sure we don't screw server rendering (NoopBackend?)
 * early invariants for common mistakes (e.g. missing context?)
 * fix hot reloading
-* change drop() to always work with object, remove didDrop
 * what do we do about DragImagePreloader?
 * should we allow gif drag previews? see: safari
 * nested targets example
 * support symbols
 * example: Kanban
 * update example notes
-* ES7 Babel propTypes
 * include HTML5 backend in dist

@@ -42,8 +42,8 @@
   },
   "devDependencies": {
     "animation-frame": "^0.2.4",
-    "babel": "^5.0.10",
-    "babel-core": "^5.0.10",
+    "babel": "^5.1.10",
+    "babel-core": "^5.1.10",
     "babel-loader": "^5.0.0",
     "faker": "2.1.2",
     "react": "~0.13.0",
