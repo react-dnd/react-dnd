@@ -1,21 +1,19 @@
-import React, { Component, PropTypes, findDOMNode } from 'react';
-import { Disposable, SerialDisposable } from 'disposables';
+import React, { Component, PropTypes } from 'react';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
 import ComponentHandlerMap from './ComponentHandlerMap';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
-import memoize from 'lodash/function/memoize';
 import invariant from 'invariant';
 
 const DEFAULT_KEY = '__default__';
 
-export default function configureDragDrop(InnerComponent, configure, collect, {
+function configureDragDrop(InnerComponent, configure, collect, {
   arePropsEqual = shallowEqualScalar,
   managerKey = 'dragDropManager'
 }: options = {}) {
-  class DragDropContainer extends Component {
+  return class DragDropContainer extends Component {
     static contextTypes = {
       [managerKey]: PropTypes.object.isRequired
     }
@@ -35,13 +33,8 @@ export default function configureDragDrop(InnerComponent, configure, collect, {
       this.manager = context[managerKey];
       invariant(this.manager, 'Could not read manager from context.');
 
-      this.componentConnector = this.createComponentConnector();
-      this.handlerMap = new ComponentHandlerMap(
-        this.manager.getRegistry(),
-        this.manager.getMonitor(),
-        this.getNextHandlers(props),
-        this.handleChange
-      );
+      const handlers = this.getNextHandlers(props);
+      this.handlerMap = new ComponentHandlerMap(this.manager, handlers, this.handleChange);
       this.state = this.getCurrentState();
     }
 
@@ -94,56 +87,13 @@ export default function configureDragDrop(InnerComponent, configure, collect, {
     }
 
     getCurrentState() {
-      const monitor = this.manager.getMonitor();
-      let handlerIds = this.handlerMap.getHandlerIds();
+      let handlerMonitors = this.handlerMap.getHandlerMonitors();
 
-      if (typeof handlerIds[DEFAULT_KEY] !== 'undefined') {
-        handlerIds = handlerIds[DEFAULT_KEY];
+      if (typeof handlerMonitors[DEFAULT_KEY] !== 'undefined') {
+        handlerMonitors = handlerMonitors[DEFAULT_KEY];
       }
 
-      return collect(this.componentConnector, monitor, handlerIds);
-    }
-
-    createComponentConnector() {
-      const backend = this.manager.getBackend();
-      const backendConnector = backend.connect();
-      const componentConnector = {};
-
-      Object.keys(backendConnector).forEach(key => {
-        const connectBackend = backendConnector[key].bind(backendConnector);
-        const connectComponent = this.wrapConnectBackend(key, connectBackend);
-
-        componentConnector[key] = memoize(connectComponent);
-      });
-
-      return componentConnector;
-    }
-
-    wrapConnectBackend(key, connectBackend) {
-      return (handlerId) => {
-        const nodeDisposable = new SerialDisposable();
-        this.handlerMap.addDisposable(handlerId, nodeDisposable);
-
-        let currentNode = null;
-        let currentOptions = null;
-
-        return (nextComponentOrNode, nextOptions) => {
-          const nextNode = findDOMNode(nextComponentOrNode);
-          if (nextNode === currentNode && shallowEqualScalar(currentOptions, nextOptions)) {
-            return;
-          }
-
-          currentNode = nextNode;
-          currentOptions = nextOptions;
-
-          if (nextNode) {
-            const nextDispose = connectBackend(handlerId, nextNode, nextOptions);
-            nodeDisposable.setDisposable(new Disposable(nextDispose));
-          } else {
-            nodeDisposable.setDisposable(null);
-          }
-        };
-      };
+      return collect(handlerMonitors);
     }
 
     render() {
@@ -153,7 +103,13 @@ export default function configureDragDrop(InnerComponent, configure, collect, {
                         ref={this.setComponentRef} />
       );
     }
-  }
+  };
+}
 
-  return DragDropContainer;
+export default function(...args) {
+  if (typeof args[2] === 'function') {
+    return configureDragDrop(...args);
+  } else {
+    return (DecoratedComponent) => configureDragDrop(DecoratedComponent, ...args);
+  }
 }

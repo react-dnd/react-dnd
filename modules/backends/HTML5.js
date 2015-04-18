@@ -1,11 +1,10 @@
 import { DragSource } from 'dnd-core';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
-import { isSafari, isFirefox } from '../utils/BrowserDetector';
+import { isFirefox } from '../utils/BrowserDetector';
 import { isUrlDataTransfer, isFileDataTransfer } from '../utils/DataTransfer';
 import { getElementRect, getMouseEventOffsets, getDragPreviewOffset } from '../utils/OffsetHelpers';
 import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
-import memoize from 'lodash/function/memoize';
 import invariant from 'invariant';
 
 class FileDragSource extends DragSource {
@@ -80,9 +79,6 @@ class HTML5Backend {
     this.handleTopDrop = this.handleTopDrop.bind(this);
     this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
     this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
-    this.connectSourceNode = this.connectSourceNode.bind(this);
-    this.connectSourcePreviewNode = this.connectSourcePreviewNode.bind(this);
-    this.connectTargetNode = this.connectTargetNode.bind(this);
   }
 
   setup() {
@@ -126,11 +122,16 @@ class HTML5Backend {
     this.clearCurrentDragSourceNode();
   }
 
-  connect() {
+  connectDragSource(sourceId) {
     return {
-      dragSource: this.connectSourceNode,
-      dragSourcePreview: this.connectSourcePreviewNode,
-      dropTarget: this.connectTargetNode
+      connect: (node, options) => this.connectSourceNode(sourceId, node, options),
+      connectPreview: (node, options) => this.connectSourcePreviewNode(sourceId, node, options)
+    };
+  }
+
+  connectDropTarget(targetId) {
+    return {
+      connect: (node) => this.connectTargetNode(targetId, node)
     };
   }
 
@@ -294,11 +295,11 @@ class HTML5Backend {
     this.dragStartSourceIds = null;
     this.dragStartSourceNodes = null;
 
-    // Pass false to keep drag source unpublished.
+    // Keep drag source unpublished.
     // We will publish it in the next tick so browser
     // has time to screenshot current state and doesn't
     // cancel drag if the source DOM node is removed.
-    this.actions.beginDrag(dragStartSourceIds, false);
+    this.actions.beginDrag(dragStartSourceIds, { publishSource: false });
 
     const { dataTransfer } = e;
     if (this.monitor.isDragging()) {
@@ -389,7 +390,7 @@ class HTML5Backend {
     }
 
     const canDrop = dragEnterTargetIds.some(
-      targetId => this.monitor.canDrop(targetId)
+      targetId => this.monitor.canDropOnTarget(targetId)
     );
 
     if (canDrop) {
@@ -413,7 +414,7 @@ class HTML5Backend {
     this.actions.hover(dragOverTargetIds);
 
     const canDrop = dragOverTargetIds.some(
-      targetId => this.monitor.canDrop(targetId)
+      targetId => this.monitor.canDropOnTarget(targetId)
     );
 
     if (canDrop) {

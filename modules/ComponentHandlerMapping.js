@@ -1,9 +1,9 @@
-import { SerialDisposable } from 'disposables'
+import { SerialDisposable } from 'disposables';
 import HandlerRegistration from './HandlerRegistration';
 
 export default class ComponentHandlerMapping {
-  constructor(registry, handler) {
-    this.registry = registry;
+  constructor(manager, handler) {
+    this.manager = manager;
     this.registration = null;
 
     this.disposable = new SerialDisposable();
@@ -11,24 +11,20 @@ export default class ComponentHandlerMapping {
   }
 
   getHandlerId() {
-    if (this.registration) {
-      return this.registration.handlerId || null;
-    } else {
-      return null;
-    }
+    return this.registration.getHandlerId();
   }
 
-  addDisposable(disposable) {
-    this.registration.addDisposable(disposable);
+  getHandlerMonitor() {
+    return this.registration.getHandlerMonitor();
   }
 
   receiveHandler(nextHandler) {
-    const { registration, registry } = this;
+    const { registration, manager } = this;
     if (registration && registration.receiveHandler(nextHandler)) {
       return true;
     }
 
-    const nextRegistration = new HandlerRegistration(registry, nextHandler);
+    const nextRegistration = new HandlerRegistration(manager, nextHandler);
     const nextDisposable = nextRegistration.getDisposable();
 
     this.disposable.setDisposable(nextDisposable);

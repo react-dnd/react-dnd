@@ -29,7 +29,14 @@ const BoxSource = {
   }
 };
 
-class Box extends Component {
+@configureDragDrop(
+  register => register.dragSource(ItemTypes.BOX, BoxSource),
+  boxSource => ({
+    dragSourceRef: boxSource.connect(),
+    isDragging: boxSource.isDragging()
+  })
+)
+export default class Box extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     isDragging: PropTypes.bool.isRequired,
@@ -49,12 +56,3 @@ class Box extends Component {
     );
   }
 }
-
-export default configureDragDrop(Box,
-  register => register.dragSource(ItemTypes.BOX, BoxSource),
-
-  (connect, monitor, dragSourceId) => ({
-    dragSourceRef: connect.dragSource(dragSourceId),
-    isDragging: monitor.isDragging(dragSourceId)
-  })
-);

@@ -18,7 +18,15 @@ const BoxTarget = {
   }
 };
 
-class Dustbin extends Component {
+@configureDragDrop(
+  register => register.dropTarget(ItemTypes.BOX, BoxTarget),
+  boxTarget => ({
+    dropTargetRef: boxTarget.connect(),
+    isOver: boxTarget.isOver(),
+    canDrop: boxTarget.canDrop()
+  })
+)
+export default class Dustbin extends Component {
   static propTypes = {
     isOver: PropTypes.bool.isRequired,
     canDrop: PropTypes.bool.isRequired,
@@ -47,13 +55,3 @@ class Dustbin extends Component {
     );
   }
 }
-
-export default configureDragDrop(Dustbin,
-  register => register.dropTarget(ItemTypes.BOX, BoxTarget),
-
-  (connect, monitor, targetId) => ({
-    dropTargetRef: connect.dropTarget(targetId),
-    isOver: monitor.isOver(targetId),
-    canDrop: monitor.canDrop(targetId)
-  })
-);

@@ -5,9 +5,8 @@ import values from 'lodash/object/values';
 import xor from 'lodash/array/xor';
 
 export default class ComponentHandlerMap {
-  constructor(registry, monitor, handlers, onChange) {
-    this.registry = registry;
-    this.monitor = monitor;
+  constructor(manager, handlers, onChange) {
+    this.manager = manager;
     this.onChange = onChange;
 
     this.changeSubscriptionDisposable = new SerialDisposable();
@@ -22,38 +21,30 @@ export default class ComponentHandlerMap {
 
     Object.keys(handlers).forEach(key => {
       const handler = handlers[key];
-      const mapping = new ComponentHandlerMapping(this.registry, handler);
+      const mapping = new ComponentHandlerMapping(this.manager, handler);
 
       this.mappings[key] = mapping;
       this.disposable.add(mapping.getDisposable());
     });
   }
 
-  addDisposable(handlerId, disposable) {
-    const keys = Object.keys(this.mappings);
-
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      const mapping = this.mappings[key];
-
-      if (mapping.getHandlerId() === handlerId) {
-        mapping.addDisposable(disposable);
-        return;
-      }
-    }
-
-    disposable.dispose();
-  }
-
-  getHandlerIds() {
-    const handlerIds = {};
+  mapMappings(selector) {
+    const result = {};
 
     Object.keys(this.mappings).forEach(key => {
       const mapping = this.mappings[key];
-      handlerIds[key] = mapping.getHandlerId();
+      result[key] = selector(mapping);
     });
 
-    return handlerIds;
+    return result;
+  }
+
+  getHandlerIds() {
+    return this.mapMappings(m => m.getHandlerId());
+  }
+
+  getHandlerMonitors() {
+    return this.mapMappings(m => m.getHandlerMonitor());
   }
 
   receiveHandlers(nextHandlers) {
@@ -80,9 +71,10 @@ export default class ComponentHandlerMap {
 
   resubscribe() {
     const handlerIds = this.getHandlerIds();
-    const unsubscribe = this.monitor.subscribe(this.onChange, values(handlerIds));
-    const disposable = new Disposable(unsubscribe);
+    const monitor = this.manager.getMonitor();
 
+    const unsubscribe = monitor.subscribe(this.onChange, values(handlerIds));
+    const disposable = new Disposable(unsubscribe);
     this.changeSubscriptionDisposable.setDisposable(disposable);
   }
 
