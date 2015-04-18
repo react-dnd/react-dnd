@@ -9,11 +9,11 @@ import invariant from 'invariant';
 
 const DEFAULT_KEY = '__default__';
 
-function configureDragDrop(InnerComponent, configure, collect, {
+export default function configureDragDrop(configure, collect, {
   arePropsEqual = shallowEqualScalar,
   managerKey = 'dragDropManager'
 }: options = {}) {
-  return class DragDropContainer extends Component {
+  return DecoratedComponent => class DragDropHandler extends Component {
     static contextTypes = {
       [managerKey]: PropTypes.object.isRequired
     }
@@ -99,18 +99,10 @@ function configureDragDrop(InnerComponent, configure, collect, {
 
     render() {
       return (
-        <InnerComponent {...this.props}
-                        {...this.state}
-                        ref={this.setComponentRef} />
+        <DecoratedComponent {...this.props}
+                            {...this.state}
+                            ref={this.setComponentRef} />
       );
     }
   };
-}
-
-export default function(...args) {
-  if (typeof args[2] === 'function') {
-    return configureDragDrop(...args);
-  } else {
-    return (DecoratedComponent) => configureDragDrop(DecoratedComponent, ...args);
-  }
 }
