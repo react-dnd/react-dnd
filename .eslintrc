@@ -13,6 +13,7 @@
     "no-mixed-requires": [0],
     "no-underscore-dangle": [0],
     "no-alert": [0],
-    "new-cap": [0]
+    "new-cap": [0],
+    "no-empty": [0]
   }
 }

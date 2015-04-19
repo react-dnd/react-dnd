@@ -2,7 +2,7 @@ import { DragSource } from 'dnd-core';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import { isFirefox } from '../utils/BrowserDetector';
 import { isUrlDataTransfer, isFileDataTransfer } from '../utils/DataTransfer';
-import { getElementRect, getMouseEventOffsets, getDragPreviewOffset } from '../utils/OffsetHelpers';
+import { getElementClientOffset, getDragPreviewOffset } from '../utils/OffsetHelpers';
 import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import invariant from 'invariant';
@@ -65,6 +65,7 @@ class HTML5Backend {
 
     this.sourcePreviewNodes = {};
     this.sourcePreviewNodeOptions = {};
+    this.sourceNodes = {};
     this.sourceNodeOptions = {};
     this.enterLeaveCounter = new EnterLeaveCounter();
 
@@ -146,14 +147,18 @@ class HTML5Backend {
   }
 
   connectSourceNode(sourceId, node, options) {
+    this.sourceNodes[sourceId] = node;
+    this.sourceNodeOptions[sourceId] = options;
+
     const handleDragStart = (e) => this.handleDragStart(e, sourceId);
 
-    this.sourceNodeOptions[sourceId] = options;
     node.setAttribute('draggable', true);
     node.addEventListener('dragstart', handleDragStart);
 
     return () => {
+      delete this.sourceNodes[sourceId];
       delete this.sourceNodeOptions[sourceId];
+
       node.removeEventListener('dragstart', handleDragStart);
       node.setAttribute('draggable', false);
     };
@@ -240,8 +245,8 @@ class HTML5Backend {
   setCurrentDragSourceNode(node) {
     this.clearCurrentDragSourceNode();
     this.currentDragSourceNode = node;
-    this.currentDragSourceNodeRect = getElementRect(node);
-    this.currentDragSourceNodeRectChanged = false;
+    this.currentDragSourceNodeOffset = getElementClientOffset(node);
+    this.currentDragSourceNodeOffsetChanged = false;
 
     // Receiving a mouse event in the middle of a dragging operation
     // means it has ended and the drag source node disappeared from DOM,
@@ -252,8 +257,8 @@ class HTML5Backend {
   clearCurrentDragSourceNode() {
     if (this.currentDragSourceNode) {
       this.currentDragSourceNode = null;
-      this.currentDragSourceNodeRect = null;
-      this.currentDragSourceNodeRectChanged = false;
+      this.currentDragSourceNodeOffset = null;
+      this.currentDragSourceNodeOffsetChanged = false;
       window.removeEventListener('mousemove', this.endDragIfSourceWasRemovedFromDOM, true);
       return true;
     } else {
@@ -267,39 +272,45 @@ class HTML5Backend {
       return false;
     }
 
-    if (this.currentDragSourceNodeRectChanged) {
+    if (this.currentDragSourceNodeOffsetChanged) {
       return true;
     }
 
-    this.currentDragSourceNodeRectChanged = !shallowEqual(
-      getElementRect(node),
-      this.currentDragSourceNodeRect
+    this.currentDragSourceNodeOffsetChanged = !shallowEqual(
+      getElementClientOffset(node),
+      this.currentDragSourceNodeOffset
     );
 
-    return this.currentDragSourceNodeRectChanged;
+    return this.currentDragSourceNodeOffsetChanged;
   }
 
   handleTopDragStartCapture() {
     this.clearCurrentDragSourceNode();
     this.dragStartSourceIds = [];
-    this.dragStartSourceNodes = {};
   }
 
   handleDragStart(e, sourceId) {
     this.dragStartSourceIds.unshift(sourceId);
-    this.dragStartSourceNodes[sourceId] = e.currentTarget;
   }
 
   handleTopDragStart(e) {
-    const { dragStartSourceIds, dragStartSourceNodes } = this;
+    const { dragStartSourceIds } = this;
     this.dragStartSourceIds = null;
-    this.dragStartSourceNodes = null;
+
+    const clientOffset = {
+      x: e.clientX,
+      y: e.clientY
+    };
 
     // Keep drag source unpublished.
     // We will publish it in the next tick so browser
     // has time to screenshot current state and doesn't
     // cancel drag if the source DOM node is removed.
-    this.actions.beginDrag(dragStartSourceIds, { publishSource: false });
+    this.actions.beginDrag(dragStartSourceIds, {
+      publishSource: false,
+      getSourceClientOffset: sourceId => getElementClientOffset(this.sourceNodes[sourceId]),
+      clientOffset
+    });
 
     const { dataTransfer } = e;
     if (this.monitor.isDragging()) {
@@ -307,14 +318,13 @@ class HTML5Backend {
       // If child drag source refuses drag but parent agrees,
       // use parent's node as drag image. Neither works in IE though.
       const sourceId = this.monitor.getSourceId();
-      const sourceNode = dragStartSourceNodes[sourceId];
+      const sourceNode = this.sourceNodes[sourceId];
       const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
       const anchorPoint = this.getSpecifiedAnchorPoint();
-      const { offsetFromDragPreview } = getMouseEventOffsets(e, sourceNode, dragPreview);
       const dragPreviewOffset = getDragPreviewOffset(
         sourceNode,
         dragPreview,
-        offsetFromDragPreview,
+        clientOffset,
         anchorPoint
       );
       dataTransfer.setDragImage(dragPreview, dragPreviewOffset.x, dragPreviewOffset.y);
