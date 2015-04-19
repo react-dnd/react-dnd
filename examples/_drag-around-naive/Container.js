@@ -40,10 +40,6 @@ export default class Container extends Component {
     connectDropTarget: PropTypes.func.isRequired
   };
 
-  static contextTypes = {
-    dragDropManager: PropTypes.object
-  }
-
   constructor(props) {
     super(props);
     this.state = {

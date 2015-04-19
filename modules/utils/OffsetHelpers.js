@@ -3,7 +3,7 @@ import createMonotonicInterpolant from './createMonotonicInterpolant';
 
 const ELEMENT_NODE = 1;
 
-export function getElementRect(el) {
+export function getElementClientOffset(el) {
   if (el.nodeType !== ELEMENT_NODE) {
     el = el.parentElement;
   }
@@ -12,35 +12,17 @@ export function getElementRect(el) {
     return null;
   }
 
-  const { top, left, width, height } = el.getBoundingClientRect();
-  return { top, left, width, height };
+  const { top, left } = el.getBoundingClientRect();
+  return { x: left, y: top };
 }
 
-export function getMouseEventOffsets(e, sourceNode, dragPreview) {
-  const dragPreviewNode = dragPreview instanceof Image ?
-    sourceNode :
-    dragPreview;
-
-  const sourceNodeRect = sourceNode.getBoundingClientRect();
-  const dragPreviewNodeRect = dragPreviewNode.getBoundingClientRect();
-
-  const offsetFromClient = {
-    x: e.clientX,
-    y: e.clientY
-  };
+export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anchorPoint) {
+  const dragPreviewOffsetFromClient = getElementClientOffset(dragPreview);
   const offsetFromDragPreview = {
-    x: e.clientX - dragPreviewNodeRect.left,
-    y: e.clientY - dragPreviewNodeRect.top
-  };
-  const offsetFromSource = {
-    x: e.clientX - sourceNodeRect.left,
-    y: e.clientY - sourceNodeRect.top
+    x: clientOffset.x - dragPreviewOffsetFromClient.x,
+    y: clientOffset.y - dragPreviewOffsetFromClient.y
   };
 
-  return { offsetFromClient, offsetFromSource, offsetFromDragPreview };
-}
-
-export function getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview, anchorPoint) {
   const { offsetWidth: sourceWidth, offsetHeight: sourceHeight } = sourceNode;
   const { anchorX, anchorY } = anchorPoint;
   const isImage = dragPreview instanceof Image;
