@@ -4,10 +4,14 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj['defau
 
 exports.__esModule = true;
 
-var _default = require('./configureDragDrop');
+var _default = require('./configureDragDropContext');
 
-exports.configureDragDrop = _interopRequire(_default);
+exports.configureDragDropContext = _interopRequire(_default);
 
-var _default2 = require('./configureDragDropContext');
+var _default2 = require('./configureDragDropLayer');
 
-exports.configureDragDropContext = _interopRequire(_default2);
+exports.configureDragDropLayer = _interopRequire(_default2);
+
+var _default3 = require('./configureDragDrop');
+
+exports.configureDragDrop = _interopRequire(_default3);

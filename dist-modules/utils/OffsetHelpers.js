@@ -3,8 +3,8 @@
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
 exports.__esModule = true;
-exports.getElementRect = getElementRect;
-exports.getMouseEventOffsets = getMouseEventOffsets;
+exports.getElementClientOffset = getElementClientOffset;
+exports.getEventClientOffset = getEventClientOffset;
 exports.getDragPreviewOffset = getDragPreviewOffset;
 
 var _isSafari$isFirefox = require('./BrowserDetector');
@@ -15,7 +15,7 @@ var _createMonotonicInterpolant2 = _interopRequireWildcard(_createMonotonicInter
 
 var ELEMENT_NODE = 1;
 
-function getElementRect(el) {
+function getElementClientOffset(el) {
   if (el.nodeType !== ELEMENT_NODE) {
     el = el.parentElement;
   }
@@ -28,35 +28,24 @@ function getElementRect(el) {
 
   var top = _el$getBoundingClientRect.top;
   var left = _el$getBoundingClientRect.left;
-  var width = _el$getBoundingClientRect.width;
-  var height = _el$getBoundingClientRect.height;
 
-  return { top: top, left: left, width: width, height: height };
+  return { x: left, y: top };
 }
 
-function getMouseEventOffsets(e, sourceNode, dragPreview) {
-  var dragPreviewNode = dragPreview instanceof Image ? sourceNode : dragPreview;
-
-  var sourceNodeRect = sourceNode.getBoundingClientRect();
-  var dragPreviewNodeRect = dragPreviewNode.getBoundingClientRect();
-
-  var offsetFromClient = {
+function getEventClientOffset(e) {
+  return {
     x: e.clientX,
     y: e.clientY
   };
-  var offsetFromDragPreview = {
-    x: e.clientX - dragPreviewNodeRect.left,
-    y: e.clientY - dragPreviewNodeRect.top
-  };
-  var offsetFromSource = {
-    x: e.clientX - sourceNodeRect.left,
-    y: e.clientY - sourceNodeRect.top
-  };
-
-  return { offsetFromClient: offsetFromClient, offsetFromSource: offsetFromSource, offsetFromDragPreview: offsetFromDragPreview };
 }
 
-function getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview, anchorPoint) {
+function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anchorPoint) {
+  var dragPreviewOffsetFromClient = getElementClientOffset(dragPreview);
+  var offsetFromDragPreview = {
+    x: clientOffset.x - dragPreviewOffsetFromClient.x,
+    y: clientOffset.y - dragPreviewOffsetFromClient.y
+  };
+
   var sourceWidth = sourceNode.offsetWidth;
   var sourceHeight = sourceNode.offsetHeight;
   var anchorX = anchorPoint.anchorX;

@@ -102,7 +102,9 @@ var ComponentHandlerMap = (function () {
     var handlerIds = this.getHandlerIds();
     var monitor = this.manager.getMonitor();
 
-    var unsubscribe = monitor.subscribe(this.onChange, _values2['default'](handlerIds));
+    var unsubscribe = monitor.subscribeToStateChange(this.onChange, {
+      handlerIds: _values2['default'](handlerIds)
+    });
     var disposable = new _Disposable$CompositeDisposable$SerialDisposable.Disposable(unsubscribe);
     this.changeSubscriptionDisposable.setDisposable(disposable);
   };
