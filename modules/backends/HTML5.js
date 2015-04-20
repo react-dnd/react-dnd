@@ -2,7 +2,7 @@ import { DragSource } from 'dnd-core';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import { isFirefox } from '../utils/BrowserDetector';
 import { isUrlDataTransfer, isFileDataTransfer } from '../utils/DataTransfer';
-import { getElementClientOffset, getDragPreviewOffset } from '../utils/OffsetHelpers';
+import { getElementClientOffset, getEventClientOffset, getDragPreviewOffset } from '../utils/OffsetHelpers';
 import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import invariant from 'invariant';
@@ -69,6 +69,7 @@ class HTML5Backend {
     this.sourceNodeOptions = {};
     this.enterLeaveCounter = new EnterLeaveCounter();
 
+    this.getSourceClientOffset = this.getSourceClientOffset.bind(this);
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
     this.handleTopDragStartCapture = this.handleTopDragStartCapture.bind(this);
     this.handleTopDragEndCapture = this.handleTopDragEndCapture.bind(this);
@@ -199,6 +200,10 @@ class HTML5Backend {
     });
   }
 
+  getSourceClientOffset(sourceId) {
+    return getElementClientOffset(this.sourceNodes[sourceId]);
+  }
+
   isDraggingNativeItem() {
     switch (this.monitor.getItemType()) {
     case NativeTypes.FILE:
@@ -297,10 +302,7 @@ class HTML5Backend {
     const { dragStartSourceIds } = this;
     this.dragStartSourceIds = null;
 
-    const clientOffset = {
-      x: e.clientX,
-      y: e.clientY
-    };
+    const clientOffset = getEventClientOffset(e);
 
     // Keep drag source unpublished.
     // We will publish it in the next tick so browser
@@ -308,7 +310,7 @@ class HTML5Backend {
     // cancel drag if the source DOM node is removed.
     this.actions.beginDrag(dragStartSourceIds, {
       publishSource: false,
-      getSourceClientOffset: sourceId => getElementClientOffset(this.sourceNodes[sourceId]),
+      getSourceClientOffset: this.getSourceClientOffset,
       clientOffset
     });
 
@@ -361,7 +363,6 @@ class HTML5Backend {
       // if dragend handler does something like showing an alert.
       // Only proceed if we have not handled it already.
       this.actions.endDrag();
-      this.actions.hover([]);
     }
   }
 
@@ -396,7 +397,9 @@ class HTML5Backend {
       // If the target changes position as the result of `dragenter`, Firefox
       // will still happily dispatch `dragover` despite target being no longer
       // there. The easy solution is to only fire `hover` in `dragover` on FF.
-      this.actions.hover(dragEnterTargetIds);
+      this.actions.hover(dragEnterTargetIds, {
+        clientOffset: getEventClientOffset(e)
+      });
     }
 
     const canDrop = dragEnterTargetIds.some(
@@ -421,7 +424,9 @@ class HTML5Backend {
   handleTopDragOver(e) {
     const { dragOverTargetIds } = this;
     this.dragOverTargetIds = [];
-    this.actions.hover(dragOverTargetIds);
+    this.actions.hover(dragOverTargetIds, {
+      clientOffset: getEventClientOffset(e)
+    });
 
     const canDrop = dragOverTargetIds.some(
       targetId => this.monitor.canDropOnTarget(targetId)
@@ -472,11 +477,13 @@ class HTML5Backend {
     this.dropTargetIds.unshift(targetId);
   }
 
-  handleTopDrop() {
+  handleTopDrop(e) {
     const { dropTargetIds } = this;
     this.dropTargetIds = [];
 
-    this.actions.hover(dropTargetIds);
+    this.actions.hover(dropTargetIds, {
+      clientOffset: getEventClientOffset(e)
+    });
     this.actions.drop();
 
     if (this.isDraggingNativeItem()) {

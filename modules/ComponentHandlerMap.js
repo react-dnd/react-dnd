@@ -73,7 +73,9 @@ export default class ComponentHandlerMap {
     const handlerIds = this.getHandlerIds();
     const monitor = this.manager.getMonitor();
 
-    const unsubscribe = monitor.subscribe(this.onChange, values(handlerIds));
+    const unsubscribe = monitor.subscribeToStateChange(this.onChange, {
+      handlerIds: values(handlerIds)
+    });
     const disposable = new Disposable(unsubscribe);
     this.changeSubscriptionDisposable.setDisposable(disposable);
   }

@@ -16,6 +16,13 @@ export function getElementClientOffset(el) {
   return { x: left, y: top };
 }
 
+export function getEventClientOffset(e) {
+  return {
+    x: e.clientX,
+    y: e.clientY
+  };
+}
+
 export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anchorPoint) {
   const dragPreviewOffsetFromClient = getElementClientOffset(dragPreview);
   const offsetFromDragPreview = {
