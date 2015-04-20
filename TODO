@@ -11,4 +11,4 @@
 * update example notes
 * include HTML5 backend in dist
 * figure out monitor parameter
-* change dist-modules => modules, modules => src
+* test w/ React 0.14

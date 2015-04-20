@@ -15,8 +15,8 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      'react-dnd/modules': path.join(__dirname, '../modules'),
-      'react-dnd': path.join(__dirname, '../modules')
+      'react-dnd/modules': path.join(__dirname, '../src'),
+      'react-dnd': path.join(__dirname, '../src')
     }
   },
   module: {
