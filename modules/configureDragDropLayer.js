@@ -29,11 +29,11 @@ export default function configureDragDropLayer(collect, {
 
     componentDidMount() {
       const monitor = this.manager.getMonitor();
-      this.disposable = monitor.subscribeToOffsetChange(this.handleChange);
+      this.unsubscribe = monitor.subscribeToOffsetChange(this.handleChange);
     }
 
     componentWillUnmount() {
-      this.disposable.dispose();
+      this.unsubscribe();
     }
 
     handleChange() {
