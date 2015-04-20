@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 
 const styles = {
   border: '1px dashed gray',
@@ -9,12 +9,12 @@ const styles = {
   display: 'inline-block'
 };
 
-const Box = React.createClass({
-  mixins: [PureRenderMixin],
-
-  propTypes: {
+export default class Box {
+  static propTypes = {
     title: PropTypes.string.isRequired
-  },
+  };
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
     const { title } = this.props;
@@ -25,6 +25,4 @@ const Box = React.createClass({
       </div>
     );
   }
-});
-
-export default Box;
+}

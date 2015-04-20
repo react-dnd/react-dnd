@@ -1,7 +1,7 @@
 'use strict';
 
-import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import React, { Component, PropTypes } from 'react';
+import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import Box from './Box';
 
 const styles = {
@@ -10,30 +10,34 @@ const styles = {
   WebkitTransform: 'rotate(-7deg)'
 };
 
-const BoxDragPreview = React.createClass({
-  mixins: [PureRenderMixin],
-
-  propTypes: {
+export default class BoxDragPreview extends Component {
+  static propTypes = {
     title: PropTypes.string.isRequired
-  },
+  };
 
-  getInitialState() {
-    return {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
+  constructor(props) {
+    super(props);
+    this.tick = this.tick.bind(this);
+    this.state = {
       tickTock: false
     };
-  },
+  }
 
   componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({
-        tickTock: !this.state.tickTock
-      });
-    }, 500);
-  },
+    this.interval = setInterval(this.tick, 500);
+  }
 
   componentWillUnmount() {
     clearInterval(this.interval);
-  },
+  }
+
+  tick() {
+    this.setState({
+      tickTock: !this.state.tickTock
+    });
+  }
 
   render() {
     const { title } = this.props;
@@ -41,14 +45,9 @@ const BoxDragPreview = React.createClass({
     const backgroundColor = tickTock ? 'white' : 'yellow';
 
     return (
-      <div style={{
-        ...styles,
-        backgroundColor
-      }}>
+      <div style={{ ...styles, backgroundColor }}>
         <Box title={title} />
       </div>
     );
   }
-});
-
-export default BoxDragPreview;
+}
