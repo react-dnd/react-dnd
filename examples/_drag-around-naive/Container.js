@@ -17,7 +17,7 @@ const styles = {
 const BoxTarget = {
   drop(props, monitor, dropTargetId, component) {
     const item = monitor.getItem();
-    const delta = monitor.getCurrentOffsetDelta();
+    const delta = monitor.getDifferenceFromInitialOffset();
     const left = Math.round(item.left + delta.x);
     const top = Math.round(item.top + delta.y);
 
