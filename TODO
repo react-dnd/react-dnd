@@ -1,4 +1,3 @@
-* coordinates
 * setDragImage and IE
 * helpers for test context
 * make sure we don't screw server rendering (NoopBackend?)
