@@ -1,11 +1,11 @@
 'use strict';
 
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
 import snapToGrid from './snapToGrid';
-import { DragLayerMixin } from 'react-dnd';
+import { configureDragDropLayer } from 'react-dnd';
 
 const layerStyles = {
   position: 'fixed',
@@ -17,17 +17,22 @@ const layerStyles = {
   height: '100%'
 };
 
-function getItemStyles(props, state) {
-  let { x, y } = state.currentOffset;
+function getItemStyles(props) {
+  const { initialOffset, currentOffset } = props;
+  if (!initialOffset || !currentOffset) {
+    return {
+      display: 'none'
+    };
+  }
+
+  let { x, y } = currentOffset;
 
   if (props.snapToGrid) {
-    x -= state.initialOffset.x;
-    y -= state.initialOffset.y;
-
+    x -= initialOffset.x;
+    y -= initialOffset.y;
     [x, y] = snapToGrid(x, y);
-
-    x += state.initialOffset.x;
-    y += state.initialOffset.y;
+    x += initialOffset.x;
+    y += initialOffset.y;
   }
 
   const transform = `translate(${x}px, ${y}px)`;
@@ -37,12 +42,30 @@ function getItemStyles(props, state) {
   };
 }
 
-const DragLayer = React.createClass({
-  mixins: [DragLayerMixin, PureRenderMixin],
-
-  propTypes: {
+@configureDragDropLayer(
+  monitor => ({
+    item: monitor.getItem(),
+    itemType: monitor.getItemType(),
+    initialOffset: monitor.getInitialSourceClientOffset(),
+    currentOffset: monitor.getSourceClientOffset(),
+    isDragging: monitor.isDragging()
+  })
+)
+export default class DragLayer {
+  static propTypes = {
+    item: PropTypes.object,
+    itemType: PropTypes.string,
+    initialOffset: PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired
+    }),
+    currentOffset: PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired
+    }),
+    isDragging: PropTypes.bool.isRequired,
     snapToGrid: PropTypes.bool.isRequired
-  },
+  };
 
   renderItem(type, item) {
     switch (type) {
@@ -51,14 +74,10 @@ const DragLayer = React.createClass({
         <BoxDragPreview title={item.title} />
       );
     }
-  },
+  }
 
   render() {
-    const {
-      draggedItem,
-      draggedItemType,
-      isDragging
-    } = this.getDragLayerState();
+    const { item, itemType, isDragging } = this.props;
 
     if (!isDragging) {
       return null;
@@ -66,12 +85,10 @@ const DragLayer = React.createClass({
 
     return (
       <div style={layerStyles}>
-        <div style={getItemStyles(this.props, this.state)}>
-          {this.renderItem(draggedItemType, draggedItem)}
+        <div style={getItemStyles(this.props)}>
+          {this.renderItem(itemType, item)}
         </div>
       </div>
     );
   }
-});
-
-export default DragLayer;
+}

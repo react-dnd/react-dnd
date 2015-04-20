@@ -1,12 +1,12 @@
 'use strict';
 
-import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import React, { Component, PropTypes } from 'react';
+import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import update from 'react/lib/update';
 import ItemTypes from './ItemTypes';
 import DraggableBox from './DraggableBox';
 import snapToGrid from './snapToGrid';
-import { DragDropMixin } from 'react-dnd';
+import { configureDragDrop } from 'react-dnd';
 
 const styles = {
   width: 300,
@@ -15,45 +15,46 @@ const styles = {
   position: 'relative'
 };
 
-function makeDropTarget(context) {
-  return {
-    acceptDrop(component, item) {
-      const delta = context.getCurrentOffsetDelta();
+const BoxTarget = {
+  drop(props, monitor, boxTargetId, component) {
+    const delta = monitor.getDifferenceFromInitialOffset();
+    const item = monitor.getItem();
 
-      let left = Math.round(item.left + delta.x);
-      let top = Math.round(item.top + delta.y);
-      if (component.props.snapToGrid) {
-        [left, top] = snapToGrid(left, top);
-      }
-
-      component.moveBox(item.id, left, top);
+    let left = Math.round(item.left + delta.x);
+    let top = Math.round(item.top + delta.y);
+    if (component.props.snapToGrid) {
+      [left, top] = snapToGrid(left, top);
     }
-  };
-}
 
-const Container = React.createClass({
-  mixins: [DragDropMixin, PureRenderMixin],
+    component.moveBox(item.id, left, top);
+  }
+};
 
-  propTypes: {
+@configureDragDrop(
+  register =>
+    register.dropTarget(ItemTypes.BOX, BoxTarget),
+
+  boxTarget => ({
+    connectDropTarget: boxTarget.connect()
+  })
+)
+export default class Container extends Component {
+  static propTypes = {
+    connectDropTarget: PropTypes.func.isRequired,
     snapToGrid: PropTypes.bool.isRequired
-  },
+  }
 
-  getInitialState() {
-    return {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
+  constructor(props) {
+    super(props);
+    this.state = {
       boxes: {
         'a': { top: 20, left: 80, title: 'Drag me around' },
         'b': { top: 180, left: 20, title: 'Drag me too' }
       }
     };
-  },
-
-  statics: {
-    configureDragDrop(register, context) {
-      register(ItemTypes.BOX, {
-        dropTarget: makeDropTarget(context)
-      });
-    }
-  },
+  }
 
   moveBox(id, left, top) {
     this.setState(update(this.state, {
@@ -66,7 +67,7 @@ const Container = React.createClass({
         }
       }
     }));
-  },
+  }
 
   renderBox(item, key) {
     return (
@@ -74,14 +75,15 @@ const Container = React.createClass({
                     id={key}
                     {...item} />
     );
-  },
+  }
 
   render() {
+    const { connectDropTarget } = this.props;
     const { boxes } = this.state;
 
     return (
       <div style={styles}
-           {...this.dropTargetFor(ItemTypes.BOX)}>
+           ref={connectDropTarget}>
         {Object
           .keys(boxes)
           .map(key => this.renderBox(boxes[key], key))
@@ -89,6 +91,4 @@ const Container = React.createClass({
       </div>
     );
   }
-});
-
-export default Container;
+}

@@ -1,19 +1,16 @@
 'use strict';
 
 import React, { PropTypes } from 'react';
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
+import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import getEmptyImage from './getEmptyImage';
 import Box from './Box';
-import { DragDropMixin, DropEffects } from 'react-dnd';
+import { configureDragDrop } from 'react-dnd';
 
-const dragSource = {
-  beginDrag(component) {
-    return {
-      effectAllowed: DropEffects.MOVE,
-      dragPreview: getEmptyImage(),
-      item: component.props
-    };
+const BoxSource = {
+  beginDrag(props) {
+    const { id, title, left, top } = props;
+    return { id, title, left, top };
   }
 };
 
@@ -28,37 +25,45 @@ function getStyles(props) {
   };
 }
 
-const DraggableBox = React.createClass({
-  mixins: [DragDropMixin, PureRenderMixin],
+@configureDragDrop(
+  register =>
+    register.dragSource(ItemTypes.BOX, BoxSource),
 
-  propTypes: {
+  boxSource => ({
+    connectDragSource: boxSource.connect(),
+    connectDragPreview: boxSource.connectPreview(),
+    isDragging: boxSource.isDragging()
+  })
+)
+export default class DraggableBox {
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    connectDragPreview: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
     title: PropTypes.string.isRequired,
     left: PropTypes.number.isRequired,
     top: PropTypes.number.isRequired
-  },
+  };
 
-  statics: {
-    configureDragDrop(register) {
-      register(ItemTypes.BOX, { dragSource });
-    }
-  },
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
+  componentDidMount() {
+    this.props.connectDragPreview(getEmptyImage());
+  }
 
   render() {
-    const { title } = this.props;
-    const { isDragging } = this.getDragState(ItemTypes.BOX);
+    const { title, isDragging, connectDragSource } = this.props;
 
     if (isDragging) {
       return null;
     }
 
     return (
-      <div {...this.dragSourceFor(ItemTypes.BOX)}
+      <div ref={connectDragSource}
            style={getStyles(this.props)}>
         <Box title={title} />
       </div>
     );
   }
-});
-
-export default DraggableBox;
+}
