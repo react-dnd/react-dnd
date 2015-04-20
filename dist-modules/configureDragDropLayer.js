@@ -61,11 +61,11 @@ function configureDragDropLayer(collect) {
 
       DragDropHandler.prototype.componentDidMount = function componentDidMount() {
         var monitor = this.manager.getMonitor();
-        this.disposable = monitor.subscribeToOffsetChange(this.handleChange);
+        this.unsubscribe = monitor.subscribeToOffsetChange(this.handleChange);
       };
 
       DragDropHandler.prototype.componentWillUnmount = function componentWillUnmount() {
-        this.disposable.dispose();
+        this.unsubscribe();
       };
 
       DragDropHandler.prototype.handleChange = function handleChange() {
