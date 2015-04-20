@@ -80,7 +80,7 @@ var Image = React.createClass({
            {...this.dragSourceFor(ItemTypes.IMAGE)} />
     );
   }
-);
+});
 ```
 
 By specifying `configureDragDrop` in `statics`, we tell `DragDropMixin` the drag-drop behavior of this component. Both draggable and droppable components use the same mixin.
@@ -137,7 +137,7 @@ var ImageBlock = React.createClass({
       </div>
     );
   }
-);
+});
 ```
 
 ### Drag Source + Drop Target In One Component
@@ -194,7 +194,7 @@ var ImageBlock = React.createClass({
       </div>
     );
   }
-);
+});
 ```
 
 ### Dropping Files from the Hard Drive
@@ -235,7 +235,7 @@ var ImageUploader = React.createClass({
       </div>
     );
   }
-);
+});
 ```
 
 ### What Else Is Possible?
