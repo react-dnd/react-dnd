@@ -19,7 +19,7 @@ var _isFirefox = require('../utils/BrowserDetector');
 
 var _isUrlDataTransfer$isFileDataTransfer = require('../utils/DataTransfer');
 
-var _getElementRect$getMouseEventOffsets$getDragPreviewOffset = require('../utils/OffsetHelpers');
+var _getElementClientOffset$getEventClientOffset$getDragPreviewOffset = require('../utils/OffsetHelpers');
 
 var _shallowEqual = require('../utils/shallowEqual');
 
@@ -112,9 +112,11 @@ var HTML5Backend = (function () {
 
     this.sourcePreviewNodes = {};
     this.sourcePreviewNodeOptions = {};
+    this.sourceNodes = {};
     this.sourceNodeOptions = {};
     this.enterLeaveCounter = new _EnterLeaveCounter2['default']();
 
+    this.getSourceClientOffset = this.getSourceClientOffset.bind(this);
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
     this.handleTopDragStartCapture = this.handleTopDragStartCapture.bind(this);
     this.handleTopDragEndCapture = this.handleTopDragEndCapture.bind(this);
@@ -207,16 +209,20 @@ var HTML5Backend = (function () {
   HTML5Backend.prototype.connectSourceNode = function connectSourceNode(sourceId, node, options) {
     var _this4 = this;
 
+    this.sourceNodes[sourceId] = node;
+    this.sourceNodeOptions[sourceId] = options;
+
     var handleDragStart = function handleDragStart(e) {
       return _this4.handleDragStart(e, sourceId);
     };
 
-    this.sourceNodeOptions[sourceId] = options;
     node.setAttribute('draggable', true);
     node.addEventListener('dragstart', handleDragStart);
 
     return function () {
+      delete _this4.sourceNodes[sourceId];
       delete _this4.sourceNodeOptions[sourceId];
+
       node.removeEventListener('dragstart', handleDragStart);
       node.setAttribute('draggable', false);
     };
@@ -265,6 +271,10 @@ var HTML5Backend = (function () {
     });
   };
 
+  HTML5Backend.prototype.getSourceClientOffset = function getSourceClientOffset(sourceId) {
+    return _getElementClientOffset$getEventClientOffset$getDragPreviewOffset.getElementClientOffset(this.sourceNodes[sourceId]);
+  };
+
   HTML5Backend.prototype.isDraggingNativeItem = function isDraggingNativeItem() {
     switch (this.monitor.getItemType()) {
       case NativeTypes.FILE:
@@ -311,8 +321,8 @@ var HTML5Backend = (function () {
   HTML5Backend.prototype.setCurrentDragSourceNode = function setCurrentDragSourceNode(node) {
     this.clearCurrentDragSourceNode();
     this.currentDragSourceNode = node;
-    this.currentDragSourceNodeRect = _getElementRect$getMouseEventOffsets$getDragPreviewOffset.getElementRect(node);
-    this.currentDragSourceNodeRectChanged = false;
+    this.currentDragSourceNodeOffset = _getElementClientOffset$getEventClientOffset$getDragPreviewOffset.getElementClientOffset(node);
+    this.currentDragSourceNodeOffsetChanged = false;
 
     // Receiving a mouse event in the middle of a dragging operation
     // means it has ended and the drag source node disappeared from DOM,
@@ -323,8 +333,8 @@ var HTML5Backend = (function () {
   HTML5Backend.prototype.clearCurrentDragSourceNode = function clearCurrentDragSourceNode() {
     if (this.currentDragSourceNode) {
       this.currentDragSourceNode = null;
-      this.currentDragSourceNodeRect = null;
-      this.currentDragSourceNodeRectChanged = false;
+      this.currentDragSourceNodeOffset = null;
+      this.currentDragSourceNodeOffsetChanged = false;
       window.removeEventListener('mousemove', this.endDragIfSourceWasRemovedFromDOM, true);
       return true;
     } else {
@@ -338,40 +348,42 @@ var HTML5Backend = (function () {
       return false;
     }
 
-    if (this.currentDragSourceNodeRectChanged) {
+    if (this.currentDragSourceNodeOffsetChanged) {
       return true;
     }
 
-    this.currentDragSourceNodeRectChanged = !_shallowEqual2['default'](_getElementRect$getMouseEventOffsets$getDragPreviewOffset.getElementRect(node), this.currentDragSourceNodeRect);
+    this.currentDragSourceNodeOffsetChanged = !_shallowEqual2['default'](_getElementClientOffset$getEventClientOffset$getDragPreviewOffset.getElementClientOffset(node), this.currentDragSourceNodeOffset);
 
-    return this.currentDragSourceNodeRectChanged;
+    return this.currentDragSourceNodeOffsetChanged;
   };
 
   HTML5Backend.prototype.handleTopDragStartCapture = function handleTopDragStartCapture() {
     this.clearCurrentDragSourceNode();
     this.dragStartSourceIds = [];
-    this.dragStartSourceNodes = {};
   };
 
   HTML5Backend.prototype.handleDragStart = function handleDragStart(e, sourceId) {
     this.dragStartSourceIds.unshift(sourceId);
-    this.dragStartSourceNodes[sourceId] = e.currentTarget;
   };
 
   HTML5Backend.prototype.handleTopDragStart = function handleTopDragStart(e) {
     var _this6 = this;
 
     var dragStartSourceIds = this.dragStartSourceIds;
-    var dragStartSourceNodes = this.dragStartSourceNodes;
 
     this.dragStartSourceIds = null;
-    this.dragStartSourceNodes = null;
+
+    var clientOffset = _getElementClientOffset$getEventClientOffset$getDragPreviewOffset.getEventClientOffset(e);
 
     // Keep drag source unpublished.
     // We will publish it in the next tick so browser
     // has time to screenshot current state and doesn't
     // cancel drag if the source DOM node is removed.
-    this.actions.beginDrag(dragStartSourceIds, { publishSource: false });
+    this.actions.beginDrag(dragStartSourceIds, {
+      publishSource: false,
+      getSourceClientOffset: this.getSourceClientOffset,
+      clientOffset: clientOffset
+    });
 
     var dataTransfer = e.dataTransfer;
 
@@ -380,15 +392,10 @@ var HTML5Backend = (function () {
       // If child drag source refuses drag but parent agrees,
       // use parent's node as drag image. Neither works in IE though.
       var sourceId = this.monitor.getSourceId();
-      var sourceNode = dragStartSourceNodes[sourceId];
+      var sourceNode = this.sourceNodes[sourceId];
       var dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
       var anchorPoint = this.getSpecifiedAnchorPoint();
-
-      var _getMouseEventOffsets = _getElementRect$getMouseEventOffsets$getDragPreviewOffset.getMouseEventOffsets(e, sourceNode, dragPreview);
-
-      var offsetFromDragPreview = _getMouseEventOffsets.offsetFromDragPreview;
-
-      var dragPreviewOffset = _getElementRect$getMouseEventOffsets$getDragPreviewOffset.getDragPreviewOffset(sourceNode, dragPreview, offsetFromDragPreview, anchorPoint);
+      var dragPreviewOffset = _getElementClientOffset$getEventClientOffset$getDragPreviewOffset.getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anchorPoint);
       dataTransfer.setDragImage(dragPreview, dragPreviewOffset.x, dragPreviewOffset.y);
 
       try {
@@ -420,7 +427,6 @@ var HTML5Backend = (function () {
       // if dragend handler does something like showing an alert.
       // Only proceed if we have not handled it already.
       this.actions.endDrag();
-      this.actions.hover([]);
     }
   };
 
@@ -459,7 +465,9 @@ var HTML5Backend = (function () {
       // If the target changes position as the result of `dragenter`, Firefox
       // will still happily dispatch `dragover` despite target being no longer
       // there. The easy solution is to only fire `hover` in `dragover` on FF.
-      this.actions.hover(dragEnterTargetIds);
+      this.actions.hover(dragEnterTargetIds, {
+        clientOffset: _getElementClientOffset$getEventClientOffset$getDragPreviewOffset.getEventClientOffset(e)
+      });
     }
 
     var canDrop = dragEnterTargetIds.some(function (targetId) {
@@ -487,7 +495,9 @@ var HTML5Backend = (function () {
     var dragOverTargetIds = this.dragOverTargetIds;
 
     this.dragOverTargetIds = [];
-    this.actions.hover(dragOverTargetIds);
+    this.actions.hover(dragOverTargetIds, {
+      clientOffset: _getElementClientOffset$getEventClientOffset$getDragPreviewOffset.getEventClientOffset(e)
+    });
 
     var canDrop = dragOverTargetIds.some(function (targetId) {
       return _this8.monitor.canDropOnTarget(targetId);
@@ -538,12 +548,14 @@ var HTML5Backend = (function () {
     this.dropTargetIds.unshift(targetId);
   };
 
-  HTML5Backend.prototype.handleTopDrop = function handleTopDrop() {
+  HTML5Backend.prototype.handleTopDrop = function handleTopDrop(e) {
     var dropTargetIds = this.dropTargetIds;
 
     this.dropTargetIds = [];
 
-    this.actions.hover(dropTargetIds);
+    this.actions.hover(dropTargetIds, {
+      clientOffset: _getElementClientOffset$getEventClientOffset$getDragPreviewOffset.getEventClientOffset(e)
+    });
     this.actions.drop();
 
     if (this.isDraggingNativeItem()) {

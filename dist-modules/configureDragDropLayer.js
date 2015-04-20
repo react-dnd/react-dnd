@@ -13,23 +13,11 @@ var _inherits = function (subClass, superClass) { if (typeof superClass !== 'fun
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.__esModule = true;
-exports['default'] = configureDragDrop;
+exports['default'] = configureDragDropLayer;
 
 var _React$Component$PropTypes = require('react');
 
 var _React$Component$PropTypes2 = _interopRequireWildcard(_React$Component$PropTypes);
-
-var _ComponentDragSource = require('./ComponentDragSource');
-
-var _ComponentDragSource2 = _interopRequireWildcard(_ComponentDragSource);
-
-var _ComponentDropTarget = require('./ComponentDropTarget');
-
-var _ComponentDropTarget2 = _interopRequireWildcard(_ComponentDropTarget);
-
-var _ComponentHandlerMap = require('./ComponentHandlerMap');
-
-var _ComponentHandlerMap2 = _interopRequireWildcard(_ComponentHandlerMap);
 
 var _shallowEqual = require('./utils/shallowEqual');
 
@@ -39,18 +27,12 @@ var _shallowEqualScalar = require('./utils/shallowEqualScalar');
 
 var _shallowEqualScalar2 = _interopRequireWildcard(_shallowEqualScalar);
 
-var _assign = require('lodash/object/assign');
-
-var _assign2 = _interopRequireWildcard(_assign);
-
 var _invariant = require('invariant');
 
 var _invariant2 = _interopRequireWildcard(_invariant);
 
-var DEFAULT_KEY = '__default__';
-
-function configureDragDrop(configure, collect) {
-  var _ref = arguments[2] === undefined ? {} : arguments[2];
+function configureDragDropLayer(collect) {
+  var _ref = arguments[1] === undefined ? {} : arguments[1];
 
   var _ref$arePropsEqual = _ref.arePropsEqual;
   var arePropsEqual = _ref$arePropsEqual === undefined ? _shallowEqualScalar2['default'] : _ref$arePropsEqual;
@@ -64,15 +46,10 @@ function configureDragDrop(configure, collect) {
 
         _Component.call(this, props);
         this.handleChange = this.handleChange.bind(this);
-        this.getComponentRef = this.getComponentRef.bind(this);
-        this.setComponentRef = this.setComponentRef.bind(this);
-        this.componentRef = null;
 
         this.manager = context[managerKey];
         _invariant2['default'](this.manager, 'Could not read manager from context.');
 
-        var handlers = this.getNextHandlers(props);
-        this.handlerMap = new _ComponentHandlerMap2['default'](this.manager, handlers, this.handleChange);
         this.state = this.getCurrentState();
       }
 
@@ -82,25 +59,13 @@ function configureDragDrop(configure, collect) {
         return !arePropsEqual(nextProps, this.props) || !_shallowEqual2['default'](nextState, this.state);
       };
 
-      DragDropHandler.prototype.setComponentRef = function setComponentRef(ref) {
-        this.componentRef = ref;
-      };
-
-      DragDropHandler.prototype.getComponentRef = function getComponentRef() {
-        return this.componentRef;
-      };
-
-      DragDropHandler.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-        if (!arePropsEqual(nextProps, this.props)) {
-          var nextHandlers = this.getNextHandlers(nextProps);
-          this.handlerMap.receiveHandlers(nextHandlers);
-          this.handleChange();
-        }
+      DragDropHandler.prototype.componentDidMount = function componentDidMount() {
+        var monitor = this.manager.getMonitor();
+        this.disposable = monitor.subscribeToOffsetChange(this.handleChange);
       };
 
       DragDropHandler.prototype.componentWillUnmount = function componentWillUnmount() {
-        var disposable = this.handlerMap.getDisposable();
-        disposable.dispose();
+        this.disposable.dispose();
       };
 
       DragDropHandler.prototype.handleChange = function handleChange() {
@@ -110,42 +75,13 @@ function configureDragDrop(configure, collect) {
         }
       };
 
-      DragDropHandler.prototype.getNextHandlers = function getNextHandlers(props) {
-        var _this = this;
-
-        props = _assign2['default']({}, props);
-
-        var register = {
-          dragSource: function dragSource(type, spec) {
-            return new _ComponentDragSource2['default'](type, spec, props, _this.getComponentRef);
-          },
-          dropTarget: function dropTarget(type, spec) {
-            return new _ComponentDropTarget2['default'](type, spec, props, _this.getComponentRef);
-          }
-        };
-
-        var handlers = configure(register, props);
-        if (handlers instanceof _ComponentDragSource2['default'] || handlers instanceof _ComponentDropTarget2['default']) {
-          handlers = _defineProperty({}, DEFAULT_KEY, handlers);
-        }
-
-        return handlers;
-      };
-
       DragDropHandler.prototype.getCurrentState = function getCurrentState() {
-        var handlerMonitors = this.handlerMap.getHandlerMonitors();
-
-        if (typeof handlerMonitors[DEFAULT_KEY] !== 'undefined') {
-          handlerMonitors = handlerMonitors[DEFAULT_KEY];
-        }
-
         var monitor = this.manager.getMonitor();
-        return collect(handlerMonitors, monitor);
+        return collect(monitor);
       };
 
       DragDropHandler.prototype.render = function render() {
-        return _React$Component$PropTypes2['default'].createElement(DecoratedComponent, _extends({}, this.props, this.state, {
-          ref: this.setComponentRef }));
+        return _React$Component$PropTypes2['default'].createElement(DecoratedComponent, _extends({}, this.props, this.state));
       };
 
       _createClass(DragDropHandler, null, [{

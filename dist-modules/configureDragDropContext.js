@@ -54,8 +54,8 @@ function configureDragDropContext(backendFactories) {
 
       _createClass(DragDropContext, null, [{
         key: 'childContextTypes',
-        enumerable: true,
-        value: childContextTypes
+        value: childContextTypes,
+        enumerable: true
       }]);
 
       return DragDropContext;
