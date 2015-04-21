@@ -32,27 +32,29 @@ export default class ComponentDropTarget extends DropTarget {
     return true;
   }
 
-  canDrop(...args) {
+  canDrop(monitor, id) {
     if (this.spec.canDrop) {
-      return this.spec.canDrop.call(null, this.props, ...args);
+      return this.spec.canDrop.call(null, this.props, monitor);
     } else {
-      return super.canDrop(...args);
+      return super.canDrop(monitor, id);
     }
   }
 
-  hover(...args) {
+  hover(monitor, id) {
     if (this.spec.hover) {
-      return this.spec.hover.call(null, this.props, ...args, this.getComponentRef());
+      const component = this.getComponentRef();
+      return this.spec.hover.call(null, this.props, monitor, component, id);
     } else {
-      return super.hover(...args);
+      return super.hover(monitor, id);
     }
   }
 
-  drop(...args) {
+  drop(monitor, id) {
     if (this.spec.drop) {
-      return this.spec.drop.call(null, this.props, ...args, this.getComponentRef());
+      const component = this.getComponentRef();
+      return this.spec.drop.call(null, this.props, monitor, component, id);
     } else {
-      return super.drop(...args);
+      return super.drop(monitor, id);
     }
   }
 }
