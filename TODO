@@ -1,7 +1,7 @@
 * setDragImage and IE
 * helpers for test context
 * make sure we don't screw server rendering (NoopBackend?)
-* early invariants for common mistakes (e.g. missing context?)
+* early invariants for common mistakes (e.g. missing context, missing methods?)
 * fix hot reloading
 * what do we do about DragImagePreloader?
 * should we allow gif drag previews? see: safari

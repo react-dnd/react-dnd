@@ -16,13 +16,13 @@ const styles = {
 };
 
 const BoxTarget = {
-  drop(props, monitor, boxTargetId, component) {
+  drop(props, monitor, component) {
     const delta = monitor.getDifferenceFromInitialOffset();
     const item = monitor.getItem();
 
     let left = Math.round(item.left + delta.x);
     let top = Math.round(item.top + delta.y);
-    if (component.props.snapToGrid) {
+    if (props.snapToGrid) {
       [left, top] = snapToGrid(left, top);
     }
 
