@@ -8,6 +8,7 @@ import DragAroundCustom from './_drag-around-custom/index';
 import DustbinSimple from './_dustbin-simple';
 import DustbinInteresting from './_dustbin-interesting';
 import DustbinStress from './_dustbin-stress';
+import NestingTargets from './_nesting-targets';
 import NestingSources from './_nesting-sources';
 import SortableSimple from './_sortable-simple';
 import SortableStress from './_sortable-stress';
@@ -22,7 +23,7 @@ const App = React.createClass({
         <ul>
           <li>Drag Around (<Link to='drag-around-naive'>naive</Link>, <Link to='drag-around-custom'>custom</Link>)</li>
           <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>, <Link to='dustbin-stress'>stress test</Link>)</li>
-          <li>Nesting (<Link to='nesting-sources'>drag sources</Link>)</li>
+          <li>Nesting (<Link to='nesting-sources'>drag sources</Link>, <Link to='nesting-targets'>drop targets</Link>)</li>
           <li>Sortable (<Link to='sortable-simple'>simple</Link>, <Link to='sortable-stress'>stress test</Link>)</li>
           <li>Customize (<Link to='customize-handles'>drag handles</Link>, <Link to='customize-effects'>drop effects</Link>)</li>
         </ul>
@@ -41,6 +42,7 @@ const routes = (
     <Route name='dustbin-interesting' path='dustbin-interesting' handler={DustbinInteresting} />
     <Route name='dustbin-stress' path='dustbin-stress' handler={DustbinStress} />
     <Route name='nesting-sources' path='nesting-sources' handler={NestingSources} />
+    <Route name='nesting-targets' path='nesting-targets' handler={NestingTargets} />
     <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
     <Route name='sortable-stress' path='sortable-stress' handler={SortableStress} />
     <Route name='customize-handles' path='customize-handles' handler={CustomizeHandles} />
