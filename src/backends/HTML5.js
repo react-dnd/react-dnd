@@ -80,6 +80,7 @@ class HTML5Backend {
     this.handleTopDragOverCapture = this.handleTopDragOverCapture.bind(this);
     this.handleTopDrop = this.handleTopDrop.bind(this);
     this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
+    this.handleSelectStart = this.handleSelectStart.bind(this);
     this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
   }
 
@@ -152,15 +153,18 @@ class HTML5Backend {
     this.sourceNodeOptions[sourceId] = options;
 
     const handleDragStart = (e) => this.handleDragStart(e, sourceId);
+    const handleSelectStart = (e) => this.handleSelectStart(e, sourceId);
 
     node.setAttribute('draggable', true);
     node.addEventListener('dragstart', handleDragStart);
+    node.addEventListener('selectstart', handleSelectStart);
 
     return () => {
       delete this.sourceNodes[sourceId];
       delete this.sourceNodeOptions[sourceId];
 
       node.removeEventListener('dragstart', handleDragStart);
+      node.removeEventListener('selectstart', handleSelectStart);
       node.setAttribute('draggable', false);
     };
   }
@@ -316,20 +320,22 @@ class HTML5Backend {
 
     const { dataTransfer } = e;
     if (this.monitor.isDragging()) {
-      // Use custom drag image if user specifies it.
-      // If child drag source refuses drag but parent agrees,
-      // use parent's node as drag image. Neither works in IE though.
-      const sourceId = this.monitor.getSourceId();
-      const sourceNode = this.sourceNodes[sourceId];
-      const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
-      const anchorPoint = this.getSpecifiedAnchorPoint();
-      const dragPreviewOffset = getDragPreviewOffset(
-        sourceNode,
-        dragPreview,
-        clientOffset,
-        anchorPoint
-      );
-      dataTransfer.setDragImage(dragPreview, dragPreviewOffset.x, dragPreviewOffset.y);
+      if (typeof dataTransfer.setDragImage === 'function') {
+        // Use custom drag image if user specifies it.
+        // If child drag source refuses drag but parent agrees,
+        // use parent's node as drag image. Neither works in IE though.
+        const sourceId = this.monitor.getSourceId();
+        const sourceNode = this.sourceNodes[sourceId];
+        const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
+        const anchorPoint = this.getSpecifiedAnchorPoint();
+        const dragPreviewOffset = getDragPreviewOffset(
+          sourceNode,
+          dragPreview,
+          clientOffset,
+          anchorPoint
+        );
+        dataTransfer.setDragImage(dragPreview, dragPreviewOffset.x, dragPreviewOffset.y);
+      }
 
       try {
         // Firefox won't drag without setting data
@@ -490,6 +496,15 @@ class HTML5Backend {
       this.endDragNativeItem();
     } else {
       this.endDragIfSourceWasRemovedFromDOM();
+    }
+  }
+
+  handleSelectStart(e) {
+    // Prevent selection on IE
+    // and instead ask it to consider dragging.
+    e.preventDefault();
+    if (typeof e.target.dragDrop === 'function') {
+      e.target.dragDrop();
     }
   }
 }
