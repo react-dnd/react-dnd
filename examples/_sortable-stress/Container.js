@@ -6,8 +6,10 @@ import { name } from 'faker';
 import Card from './Card';
 import { configureDragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import TouchBackend from 'react-dnd/modules/backends/Touch';
+import supportsTouch from '../supportsTouch';
 
-@configureDragDropContext(HTML5Backend)
+@configureDragDropContext(supportsTouch() ? TouchBackend : HTML5Backend)
 export default class Container extends Component {
   constructor(props) {
     super(props);

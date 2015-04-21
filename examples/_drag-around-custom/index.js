@@ -5,8 +5,10 @@ import Container from './Container';
 import DragLayer from './DragLayer';
 import { configureDragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import TouchBackend from 'react-dnd/modules/backends/Touch';
+import supportsTouch from '../supportsTouch';
 
-@configureDragDropContext(HTML5Backend)
+@configureDragDropContext(supportsTouch() ? TouchBackend : HTML5Backend)
 export default class DragAroundCustom extends Component {
   constructor(props) {
     super(props);

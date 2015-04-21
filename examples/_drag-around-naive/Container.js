@@ -6,6 +6,8 @@ import ItemTypes from './ItemTypes';
 import Box from './Box';
 import { configureDragDrop, configureDragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import TouchBackend from 'react-dnd/modules/backends/Touch';
+import supportsTouch from '../supportsTouch';
 
 const styles = {
   width: 300,
@@ -25,7 +27,7 @@ const BoxTarget = {
   }
 };
 
-@configureDragDropContext(HTML5Backend)
+@configureDragDropContext(supportsTouch() ? TouchBackend : HTML5Backend)
 @configureDragDrop(
   register =>
     register.dropTarget(ItemTypes.BOX, BoxTarget),

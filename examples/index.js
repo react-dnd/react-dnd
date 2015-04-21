@@ -21,10 +21,8 @@ const App = React.createClass({
         <h1>react-dnd examples (<a target='_href' href='https://github.com/gaearon/react-dnd/blob/master/examples'>source</a>)</h1>
         <ul>
           <li>Drag Around (<Link to='drag-around-naive'>naive</Link>, <Link to='drag-around-custom'>custom</Link>)</li>
-          <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>, <Link to='dustbin-stress'>stress test</Link>)</li>
-          <li>Nesting (<Link to='nesting-sources'>drag sources</Link>)</li>
-          <li>Sortable (<Link to='sortable-simple'>simple</Link>, <Link to='sortable-stress'>stress test</Link>)</li>
-          <li>Customize (<Link to='customize-handles'>drag handles</Link>, <Link to='customize-effects'>drop effects</Link>)</li>
+          <li>Dustbin (<Link to='dustbin-simple'>simple</Link>)</li>
+          <li>Sortable (<Link to='sortable-simple'>simple</Link>)</li>
         </ul>
         <hr />
         <RouteHandler />

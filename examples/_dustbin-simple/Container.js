@@ -3,10 +3,12 @@
 import React, { Component } from 'react';
 import { configureDragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import TouchBackend from 'react-dnd/modules/backends/Touch';
+import supportsTouch from '../supportsTouch';
 import Dustbin from './Dustbin';
 import Box from './Box';
 
-@configureDragDropContext(HTML5Backend)
+@configureDragDropContext(supportsTouch() ? TouchBackend : HTML5Backend)
 export default class Container extends Component {
   render() {
     return (
