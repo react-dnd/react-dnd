@@ -2,13 +2,8 @@
 * helpers for test context
 * make sure we don't screw server rendering (NoopBackend?)
 * early invariants for common mistakes (e.g. missing context, missing methods?)
-* fix hot reloading
-* what do we do about DragImagePreloader?
-* should we allow gif drag previews? see: safari
-* nested targets example
 * support symbols
 * example: Kanban
 * update example notes
 * include HTML5 backend in dist
-* figure out monitor parameter
 * test w/ React 0.14
