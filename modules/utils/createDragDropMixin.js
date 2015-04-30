@@ -276,7 +276,7 @@ function createDragDropMixin(backend) {
         return;
       }
 
-      if (!this._monitor.enter(e.target)) {
+      if (!this._monitor.enter(e.currentTarget)) {
         return;
       }
 
@@ -329,7 +329,7 @@ function createDragDropMixin(backend) {
         return;
       }
 
-      if (!this._monitor.leave(e.target)) {
+      if (!this._monitor.leave(e.currentTarget)) {
         return;
       }
 

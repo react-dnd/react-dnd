@@ -29,7 +29,7 @@ var EnterLeaveMonitor = (function () {
     leave: {
       value: function leave(leavingNode) {
         this._entered = without(this._entered.filter(function (node) {
-          return document.body.contains(node);
+          return node.nodeType && document.body.contains(node);
         }), leavingNode);
 
         return this._entered.length === 0;
