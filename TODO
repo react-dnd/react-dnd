@@ -1,7 +1,6 @@
 * helpers for test context
 * make sure we don't screw server rendering (NoopBackend?)
 * early invariants for common mistakes (e.g. missing context, missing methods?)
-* support symbols
 * example: Kanban
 * update example notes
 * include HTML5 backend in dist
