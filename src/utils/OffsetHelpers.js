@@ -24,15 +24,17 @@ export function getEventClientOffset(e) {
 }
 
 export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anchorPoint) {
-  const dragPreviewOffsetFromClient = getElementClientOffset(dragPreview);
+  const isImage = dragPreview instanceof Image;
+  const dragPreviewNode = isImage ? sourceNode : dragPreview;
+
+  const dragPreviewNodeOffsetFromClient = getElementClientOffset(dragPreviewNode);
   const offsetFromDragPreview = {
-    x: clientOffset.x - dragPreviewOffsetFromClient.x,
-    y: clientOffset.y - dragPreviewOffsetFromClient.y
+    x: clientOffset.x - dragPreviewNodeOffsetFromClient.x,
+    y: clientOffset.y - dragPreviewNodeOffsetFromClient.y
   };
 
   const { offsetWidth: sourceWidth, offsetHeight: sourceHeight } = sourceNode;
   const { anchorX, anchorY } = anchorPoint;
-  const isImage = dragPreview instanceof Image;
 
   let dragPreviewWidth = isImage ? dragPreview.width : sourceWidth;
   let dragPreviewHeight = isImage ? dragPreview.height : sourceHeight;
