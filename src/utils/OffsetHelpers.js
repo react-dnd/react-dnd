@@ -63,7 +63,7 @@ export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anch
     offsetFromDragPreview.y,
     // Align at the center
     (offsetFromDragPreview.y / sourceHeight) * dragPreviewHeight,
-    // Dock to the right
+    // Dock to the bottom
     offsetFromDragPreview.y + dragPreviewHeight - sourceHeight
   ]);
   let x = interpolateX(anchorX);
