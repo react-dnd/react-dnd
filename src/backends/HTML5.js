@@ -7,6 +7,21 @@ import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import invariant from 'invariant';
 
+export const NativeTypes = {
+  FILE: '__NATIVE_FILE__',
+  URL: '__NATIVE_URL__'
+};
+
+let emptyImage;
+export function getEmptyImage() {
+  if (!emptyImage) {
+    emptyImage = new Image();
+    emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  }
+
+  return emptyImage;
+}
+
 class FileDragSource extends DragSource {
   constructor() {
     super();
@@ -51,11 +66,6 @@ class UrlDragSource extends DragSource {
     return this.item;
   }
 }
-
-export const NativeTypes = {
-  FILE: '__NATIVE_FILE__',
-  URL: '__NATIVE_URL__'
-};
 
 class HTML5Backend {
   constructor(manager) {
@@ -185,22 +195,23 @@ class HTML5Backend {
     };
   }
 
-  getSpecifiedDropEffect() {
+  getCurrentSourceNodeOptions() {
     const sourceId = this.monitor.getSourceId();
     const sourceNodeOptions = this.sourceNodeOptions[sourceId];
 
     return defaults(sourceNodeOptions || {}, {
       dropEffect: 'move'
-    }).dropEffect;
+    });
   }
 
-  getSpecifiedAnchorPoint() {
+  getCurrentSourcePreviewNodeOptions() {
     const sourceId = this.monitor.getSourceId();
     const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[sourceId];
 
     return defaults(sourcePreviewNodeOptions || {}, {
       anchorX: 0.5,
-      anchorY: 0.5
+      anchorY: 0.5,
+      captureDraggingState: false
     });
   }
 
@@ -308,10 +319,7 @@ class HTML5Backend {
 
     const clientOffset = getEventClientOffset(e);
 
-    // Keep drag source unpublished.
-    // We will publish it in the next tick so browser
-    // has time to screenshot current state and doesn't
-    // cancel drag if the source DOM node is removed.
+    // Don't publish the source just yet (see why below)
     this.actions.beginDrag(dragStartSourceIds, {
       publishSource: false,
       getSourceClientOffset: this.getSourceClientOffset,
@@ -327,7 +335,8 @@ class HTML5Backend {
         const sourceId = this.monitor.getSourceId();
         const sourceNode = this.sourceNodes[sourceId];
         const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
-        const anchorPoint = this.getSpecifiedAnchorPoint();
+        const { anchorX, anchorY } = this.getCurrentSourcePreviewNodeOptions();
+        const anchorPoint = { anchorX, anchorY };
         const dragPreviewOffset = getDragPreviewOffset(
           sourceNode,
           dragPreview,
@@ -348,12 +357,28 @@ class HTML5Backend {
       // it is removed from DOM and trigger endDrag manually.
       this.setCurrentDragSourceNode(e.target);
 
-      setTimeout(() => {
-        // By now, the browser has taken drag screenshot
-        // and we can safely let the drag source know it's active.
+      // Now we are ready to publish the drag source.. or are we not?
+      const { captureDraggingState } = this.getCurrentSourcePreviewNodeOptions();
+      if (!captureDraggingState) {
+        // Usually we want to publish it in the next tick so that browser
+        // is able to screenshot the current (not yet dragging) state.
+        //
+        // It also neatly avoids a situation where render() returns null
+        // in the same tick for the source element, and browser freaks out.
+        setTimeout(() => this.actions.publishDragSource());
+      } else {
+        // In some cases the user may want to override this behavior, e.g.
+        // to work around IE not supporting custom drag previews.
+        //
+        // When using a custom drag layer, the only way to prevent
+        // the default drag preview from drawing in IE is to screenshot
+        // the dragging state in which the node itself has zero opacity
+        // and height. In this case, though, returning null from render()
+        // will abruptly end the dragging, which is not obvious.
+        //
+        // This is the reason such behavior is strictly opt-in.
         this.actions.publishDragSource();
-      });
-
+      }
     } else if (isUrlDataTransfer(dataTransfer)) {
       // URL dragged from inside the document
       this.beginDragNativeUrl();
@@ -415,7 +440,8 @@ class HTML5Backend {
     if (canDrop) {
       // IE requires this to fire dragover events
       e.preventDefault();
-      e.dataTransfer.dropEffect = this.getSpecifiedDropEffect();
+      const { dropEffect } = this.getCurrentSourceNodeOptions();
+      e.dataTransfer.dropEffect = dropEffect;
     }
   }
 
@@ -441,7 +467,8 @@ class HTML5Backend {
     if (canDrop) {
       // Show user-specified drop effect.
       e.preventDefault();
-      e.dataTransfer.dropEffect = this.getSpecifiedDropEffect();
+      const { dropEffect } = this.getCurrentSourceNodeOptions();
+      e.dataTransfer.dropEffect = dropEffect;
     } else if (this.isDraggingNativeItem()) {
       // Don't show a nice cursor but still prevent default
       // "drop and blow away the whole document" action.
