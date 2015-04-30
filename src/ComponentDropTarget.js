@@ -1,6 +1,5 @@
 import { DropTarget } from 'dnd-core';
 import invariant from 'invariant';
-import isString from 'lodash/lang/isString';
 import isArray from 'lodash/lang/isArray';
 import isObject from 'lodash/lang/isObject';
 
@@ -8,7 +7,12 @@ export default class ComponentDropTarget extends DropTarget {
   constructor(type, spec = {}, props, getComponentRef) {
     super();
 
-    invariant(isString(type) || isArray(type), 'Expected type to be a string or an array.');
+    invariant(
+      typeof type === 'string' ||
+      typeof type === 'symbol' ||
+      isArray(type),
+      'Expected type to be a string, a symbol, or an array.'
+    );
     invariant(isObject(spec), 'Expected spec to be an object.');
 
     this.type = type;
