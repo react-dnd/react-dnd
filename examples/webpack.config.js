@@ -1,4 +1,3 @@
-var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
@@ -21,12 +20,5 @@ module.exports = {
     loaders: [
       { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ }
     ]
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ]
+  }
 };
