@@ -83,7 +83,17 @@ export default class ComponentDropTarget extends DropTarget {
   drop(monitor, id) {
     if (this.spec.drop) {
       const component = this.getComponentRef();
-      return this.spec.drop.call(null, this.props, monitor, component, id);
+      const dropResult = this.spec.drop.call(null, this.props, monitor, component, id);
+      if (process.env.NODE_ENV !== 'production') {
+        invariant(
+          typeof dropResult === 'undefined' ||
+          isObject(dropResult) && typeof dropResult !== 'function',
+          'drop() must either return undefined, or an object that represents the drop result. ' +
+          'Instead received %s.',
+          dropResult
+        );
+      }
+      return dropResult;
     } else {
       return super.drop(monitor, id);
     }

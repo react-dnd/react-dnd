@@ -93,7 +93,16 @@ export default class ComponentDragSource extends DragSource {
 
   beginDrag(monitor, id) {
     const component = this.getComponentRef();
-    return this.spec.beginDrag.call(null, this.props, monitor, component, id);
+    const item = this.spec.beginDrag.call(null, this.props, monitor, component, id);
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
+        isObject(item) && typeof item !== 'function',
+        'beginDrag() must return an object that represents the dragged item. ' +
+        'Instead received %s.',
+        item
+      );
+    }
+    return item;
   }
 
   endDrag(monitor, id) {
