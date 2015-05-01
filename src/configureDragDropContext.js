@@ -19,17 +19,26 @@ export default function configureDragDropContext(backend) {
     dragDropManager: new DragDropManager(backend)
   };
 
-  return DecoratedComponent => class DragDropContext extends Component {
-    static childContextTypes = {
-      dragDropManager: PropTypes.object.isRequired
+  return function (DecoratedComponent) {
+    const displayName =
+      DecoratedComponent.displayName ||
+      DecoratedComponent.name ||
+      'Component';
+
+    return class DragDropContext extends Component {
+      static displayName = `configureDragDropContext@${displayName}`;
+
+      static childContextTypes = {
+        dragDropManager: PropTypes.object.isRequired
+      };
+
+      getChildContext() {
+        return childContext;
+      }
+
+      render() {
+        return <DecoratedComponent {...this.props} />;
+      }
     };
-
-    getChildContext() {
-      return childContext;
-    }
-
-    render() {
-      return <DecoratedComponent {...this.props} />;
-    }
   };
 }
