@@ -42,7 +42,7 @@ export default function configureDragDrop(configure, collect, options = {}) {
       'Component';
 
     return class DragDropHandler extends Component {
-      static displayName = `${displayName}DragDropHandler`;
+      static displayName = `configureDragDrop@${displayName}`;
 
       static contextTypes = {
         dragDropManager: PropTypes.object.isRequired
