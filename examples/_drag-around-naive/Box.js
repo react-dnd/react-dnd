@@ -28,7 +28,7 @@ const BoxSource = {
 )
 export default class Box {
   static propTypes = {
-    connectDragSource: PropTypes.bool.isRequired,
+    connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
     left: PropTypes.number.isRequired,
