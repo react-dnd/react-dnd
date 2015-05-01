@@ -46,7 +46,7 @@ const BoxTarget = {
 )
 export default class Dustbin extends Component {
   static propTypes = {
-    connectDropTarget: PropTypes.bool.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
     isOverCurrent: PropTypes.bool.isRequired,
     greedy: PropTypes.bool
