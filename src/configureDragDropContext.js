@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
-import validateDecoratorArguments from './utils/validateDecoratorArguments';
+import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
 export default function configureDragDropContext(backend) {
-  validateDecoratorArguments('configureDragDropContext', ...arguments);
+  checkDecoratorArguments('configureDragDropContext', ...arguments);
 
   // Auto-detect ES6 default export for people still using ES5
   if (typeof backend === 'object' && typeof backend.default === 'function') {

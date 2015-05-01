@@ -1,16 +1,16 @@
 import { DragSource } from 'dnd-core';
 import invariant from 'invariant';
 import isObject from 'lodash/lang/isObject';
+import isValidType from './utils/isValidType';
 
 export default class ComponentDragSource extends DragSource {
   constructor(type, spec, props, getComponentRef) {
     super();
 
-    invariant(
-      typeof type === 'string' || typeof type === 'symbol',
-      'Expected type to be a string or a symbol.'
-    );
-    invariant(isObject(spec), 'Expected spec to be an object.');
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(isValidType(type), 'Expected the drag source type to either be a string or a symbol. Instead received %s.', type);
+      invariant(isObject(spec), 'Expected spec to be an object.');
+    }
 
     this.type = type;
     this.spec = spec;

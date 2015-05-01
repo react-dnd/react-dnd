@@ -1,19 +1,16 @@
 import { DropTarget } from 'dnd-core';
 import invariant from 'invariant';
-import isArray from 'lodash/lang/isArray';
 import isObject from 'lodash/lang/isObject';
+import isValidType from './utils/isValidType';
 
 export default class ComponentDropTarget extends DropTarget {
   constructor(type, spec = {}, props, getComponentRef) {
     super();
 
-    invariant(
-      typeof type === 'string' ||
-      typeof type === 'symbol' ||
-      isArray(type),
-      'Expected type to be a string, a symbol, or an array.'
-    );
-    invariant(isObject(spec), 'Expected spec to be an object.');
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(isValidType(type, true), 'Expected the drop target type to either be a string, a symbol, or an array of either. Instead received %s.', type);
+      invariant(isObject(spec), 'Expected spec to be an object.');
+    }
 
     this.type = type;
     this.spec = spec;
