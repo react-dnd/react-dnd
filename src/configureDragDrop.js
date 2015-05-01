@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { DragDropManager } from 'dnd-core';
 import ComponentDragSource from './ComponentDragSource';
 import ComponentDropTarget from './ComponentDropTarget';
 import ComponentHandlerMap from './ComponentHandlerMap';
@@ -31,7 +32,16 @@ export default function configureDragDrop(configure, collect, {
       this.componentRef = null;
 
       this.manager = context[managerKey];
-      invariant(this.manager, 'Could not read manager from context.');
+
+      const displayName = DecoratedComponent.displayName || DecoratedComponent.name || 'Component';
+      invariant(
+        this.manager instanceof DragDropManager,
+        'Could not find the drag and drop manager in the context of %s. ' +
+        'Make sure to wrap the top-level component of your app with configureDragDropContext. ' +
+        'Read more: https://gist.github.com/gaearon/7d6d01748b772fda824e',
+        displayName,
+        displayName
+      );
 
       const handlers = this.getNextHandlers(props);
       this.handlerMap = new ComponentHandlerMap(this.manager, handlers, this.handleChange);
