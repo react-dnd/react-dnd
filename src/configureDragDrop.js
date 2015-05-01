@@ -8,6 +8,7 @@ import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
+import isPlainObject from 'lodash/lang/isPlainObject';
 
 const DEFAULT_KEY = '__default__';
 
@@ -141,14 +142,25 @@ export default function configureDragDrop(configure, collect, options = {}) {
       }
 
       getCurrentState() {
-        let handlerMonitors = this.handlerMap.getHandlerMonitors();
-
-        if (typeof handlerMonitors[DEFAULT_KEY] !== 'undefined') {
-          handlerMonitors = handlerMonitors[DEFAULT_KEY];
-        }
+        const wrappedHandlerMonitors = this.handlerMap.getHandlerMonitors();
+        const handlerMonitors = typeof wrappedHandlerMonitors[DEFAULT_KEY] !== 'undefined' ?
+          wrappedHandlerMonitors[DEFAULT_KEY] :
+          wrappedHandlerMonitors;
 
         const monitor = this.manager.getMonitor();
-        return collect(handlerMonitors, monitor);
+        const propsToInject = collect(handlerMonitors, monitor);
+        if (process.env.NODE_ENV !== 'production') {
+          invariant(
+            isPlainObject(propsToInject),
+            'Expected the second argument to configureDragDrop for %s ' +
+            'to return a plain object of props to inject into %s. ' +
+            'Instead received %s.',
+            displayName,
+            displayName,
+            propsToInject
+          );
+        }
+        return propsToInject;
       }
 
       render() {
