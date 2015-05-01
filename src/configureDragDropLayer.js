@@ -3,10 +3,18 @@ import { DragDropManager } from 'dnd-core';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import invariant from 'invariant';
+import validateDecoratorArguments from './utils/validateDecoratorArguments';
 
-export default function configureDragDropLayer(collect, {
-  arePropsEqual = shallowEqualScalar
-}: options = {}) {
+export default function configureDragDropLayer(collect, options = {}) {
+  validateDecoratorArguments('configureDragDropLayer', ...arguments);
+  const { arePropsEqual = shallowEqualScalar } = options;
+
+  invariant(
+    typeof collect === 'function',
+    'configureDragDropLayer call is missing its only required parameter, ' +
+    'a function that collects props to inject into the component.'
+  );
+
   return DecoratedComponent => class DragDropHandler extends Component {
     static contextTypes = {
       dragDropManager: PropTypes.object.isRequired
