@@ -1,6 +1,6 @@
 import { DragSource } from 'dnd-core';
 import invariant from 'invariant';
-import isObject from 'lodash/lang/isObject';
+import isPlainObject from 'lodash/lang/isPlainObject';
 import isValidType from './utils/isValidType';
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'canDrag', 'isDragging', 'endDrag'];
@@ -19,8 +19,8 @@ export default class ComponentDragSource extends DragSource {
       );
 
       invariant(
-        isObject(spec) && typeof spec !== 'function',
-        'Expected the drag source specification to be an object. ' +
+        isPlainObject(spec),
+        'Expected the drag source specification to be a plain object. ' +
         'Instead received %s.',
         spec
       );
@@ -96,8 +96,8 @@ export default class ComponentDragSource extends DragSource {
     const item = this.spec.beginDrag.call(null, this.props, monitor, component, id);
     if (process.env.NODE_ENV !== 'production') {
       invariant(
-        isObject(item) && typeof item !== 'function',
-        'beginDrag() must return an object that represents the dragged item. ' +
+        isPlainObject(item),
+        'beginDrag() must return a plain object that represents the dragged item. ' +
         'Instead received %s.',
         item
       );

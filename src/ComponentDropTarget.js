@@ -1,6 +1,6 @@
 import { DropTarget } from 'dnd-core';
 import invariant from 'invariant';
-import isObject from 'lodash/lang/isObject';
+import isPlainObject from 'lodash/lang/isPlainObject';
 import isValidType from './utils/isValidType';
 
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop'];
@@ -17,7 +17,7 @@ export default class ComponentDropTarget extends DropTarget {
         type
       );
       invariant(
-        isObject(spec) && typeof spec !== 'function',
+        isPlainObject(spec),
         'Expected the drop target specification to be an object. ' +
         'Instead received %s.',
         spec
@@ -87,7 +87,7 @@ export default class ComponentDropTarget extends DropTarget {
       if (process.env.NODE_ENV !== 'production') {
         invariant(
           typeof dropResult === 'undefined' ||
-          isObject(dropResult) && typeof dropResult !== 'function',
+          isPlainObject(dropResult),
           'drop() must either return undefined, or an object that represents the drop result. ' +
           'Instead received %s.',
           dropResult
