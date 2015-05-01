@@ -11,6 +11,11 @@ import validateDecoratorArguments from './utils/validateDecoratorArguments';
 
 const DEFAULT_KEY = '__default__';
 
+function isComponentDragDropHandler(obj) {
+  return obj instanceof ComponentDragSource ||
+         obj instanceof ComponentDropTarget;
+}
+
 export default function configureDragDrop(configure, collect, options = {}) {
   validateDecoratorArguments('configureDragDrop', ...arguments);
   const { arePropsEqual = shallowEqualScalar } = options;
@@ -26,105 +31,127 @@ export default function configureDragDrop(configure, collect, options = {}) {
     'a function that collects props to inject into the component.'
   );
 
-  return DecoratedComponent => class DragDropHandler extends Component {
-    static contextTypes = {
-      dragDropManager: PropTypes.object.isRequired
-    }
+  return function (DecoratedComponent) {
+    const displayName =
+      DecoratedComponent.displayName ||
+      DecoratedComponent.name ||
+      'Component';
 
-    shouldComponentUpdate(nextProps, nextState) {
-      return !arePropsEqual(nextProps, this.props) ||
-             !shallowEqual(nextState, this.state);
-    }
+    return class DragDropHandler extends Component {
+      static displayName = `${displayName}DragDropHandler`;
 
-    constructor(props, context) {
-      super(props);
-      this.handleChange = this.handleChange.bind(this);
-      this.getComponentRef = this.getComponentRef.bind(this);
-      this.setComponentRef = this.setComponentRef.bind(this);
-      this.componentRef = null;
-
-      this.manager = context.dragDropManager;
-
-      const displayName = DecoratedComponent.displayName || DecoratedComponent.name || 'Component';
-      invariant(
-        this.manager instanceof DragDropManager,
-        'Could not find the drag and drop manager in the context of %s. ' +
-        'Make sure to wrap the top-level component of your app with configureDragDropContext. ' +
-        'Read more: https://gist.github.com/gaearon/7d6d01748b772fda824e',
-        displayName,
-        displayName
-      );
-
-      const handlers = this.getNextHandlers(props);
-      this.handlerMap = new ComponentHandlerMap(this.manager, handlers, this.handleChange);
-      this.state = this.getCurrentState();
-    }
-
-    setComponentRef(ref) {
-      this.componentRef = ref;
-    }
-
-    getComponentRef() {
-      return this.componentRef;
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (!arePropsEqual(nextProps, this.props)) {
-        const nextHandlers = this.getNextHandlers(nextProps);
-        this.handlerMap.receiveHandlers(nextHandlers);
-        this.handleChange();
+      static contextTypes = {
+        dragDropManager: PropTypes.object.isRequired
       }
-    }
 
-    componentWillUnmount() {
-      const disposable = this.handlerMap.getDisposable();
-      disposable.dispose();
-    }
-
-    handleChange() {
-      const nextState = this.getCurrentState();
-      if (!shallowEqual(nextState, this.state)) {
-        this.setState(nextState);
+      shouldComponentUpdate(nextProps, nextState) {
+        return !arePropsEqual(nextProps, this.props) ||
+               !shallowEqual(nextState, this.state);
       }
-    }
 
-    getNextHandlers(props) {
-      props = assign({}, props);
+      constructor(props, context) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.getComponentRef = this.getComponentRef.bind(this);
+        this.setComponentRef = this.setComponentRef.bind(this);
+        this.componentRef = null;
 
-      const register = {
-        dragSource: (type, spec) => {
-          return new ComponentDragSource(type, spec, props, this.getComponentRef);
-        },
-        dropTarget: (type, spec) => {
-          return new ComponentDropTarget(type, spec, props, this.getComponentRef);
+        this.manager = context.dragDropManager;
+        invariant(
+          this.manager instanceof DragDropManager,
+          'Could not find the drag and drop manager in the context of %s. ' +
+          'Make sure to wrap the top-level component of your app with configureDragDropContext. ' +
+          'Read more: https://gist.github.com/gaearon/7d6d01748b772fda824e',
+          displayName,
+          displayName
+        );
+
+        const handlers = this.getNextHandlers(props);
+        this.handlerMap = new ComponentHandlerMap(this.manager, handlers, this.handleChange);
+        this.state = this.getCurrentState();
+      }
+
+      setComponentRef(ref) {
+        this.componentRef = ref;
+      }
+
+      getComponentRef() {
+        return this.componentRef;
+      }
+
+      componentWillReceiveProps(nextProps) {
+        if (!arePropsEqual(nextProps, this.props)) {
+          const nextHandlers = this.getNextHandlers(nextProps);
+          this.handlerMap.receiveHandlers(nextHandlers);
+          this.handleChange();
         }
-      };
-
-      let handlers = configure(register, props);
-      if (handlers instanceof ComponentDragSource || handlers instanceof ComponentDropTarget) {
-        handlers = { [DEFAULT_KEY]: handlers };
       }
 
-      return handlers;
-    }
-
-    getCurrentState() {
-      let handlerMonitors = this.handlerMap.getHandlerMonitors();
-
-      if (typeof handlerMonitors[DEFAULT_KEY] !== 'undefined') {
-        handlerMonitors = handlerMonitors[DEFAULT_KEY];
+      componentWillUnmount() {
+        const disposable = this.handlerMap.getDisposable();
+        disposable.dispose();
       }
 
-      const monitor = this.manager.getMonitor();
-      return collect(handlerMonitors, monitor);
-    }
+      handleChange() {
+        const nextState = this.getCurrentState();
+        if (!shallowEqual(nextState, this.state)) {
+          this.setState(nextState);
+        }
+      }
 
-    render() {
-      return (
-        <DecoratedComponent {...this.props}
-                            {...this.state}
-                            ref={this.setComponentRef} />
-      );
-    }
+      getNextHandlers(props) {
+        props = assign({}, props);
+
+        const register = {
+          dragSource: (type, spec) => {
+            return new ComponentDragSource(type, spec, props, this.getComponentRef);
+          },
+          dropTarget: (type, spec) => {
+            return new ComponentDropTarget(type, spec, props, this.getComponentRef);
+          }
+        };
+
+        let handlers = configure(register, props);
+        if (isComponentDragDropHandler(handlers)) {
+          handlers = { [DEFAULT_KEY]: handlers };
+        }
+
+        if (process.env.NODE_ENV !== 'production') {
+          invariant(
+            handlers != null &&
+            typeof handlers === 'object' &&
+            Object.keys(handlers).every(key =>
+              isComponentDragDropHandler(handlers[key])
+            ),
+            'Expected the first argument to configureDragDrop for %s to ' +
+            'either return the result of calling register.dragSource() ' +
+            'or register.dropTarget(), or an object containing only such values. ' +
+            'Read more: https://gist.github.com/gaearon/9222a74aaf82ad65fd2e',
+            displayName
+          );
+        }
+
+        return handlers;
+      }
+
+      getCurrentState() {
+        let handlerMonitors = this.handlerMap.getHandlerMonitors();
+
+        if (typeof handlerMonitors[DEFAULT_KEY] !== 'undefined') {
+          handlerMonitors = handlerMonitors[DEFAULT_KEY];
+        }
+
+        const monitor = this.manager.getMonitor();
+        return collect(handlerMonitors, monitor);
+      }
+
+      render() {
+        return (
+          <DecoratedComponent {...this.props}
+                              {...this.state}
+                              ref={this.setComponentRef} />
+        );
+      }
+    };
   };
 }
