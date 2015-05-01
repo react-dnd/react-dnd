@@ -22,7 +22,7 @@ export default function configureDragDropLayer(collect, options = {}) {
       'Component';
 
     return class DragDropHandler extends Component {
-      static displayName = `configureDragDropLayer@${displayName}`;
+      static displayName = `configureDragDropLayer!${displayName}`;
 
       static contextTypes = {
         dragDropManager: PropTypes.object.isRequired

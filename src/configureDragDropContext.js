@@ -26,7 +26,7 @@ export default function configureDragDropContext(backend) {
       'Component';
 
     return class DragDropContext extends Component {
-      static displayName = `configureDragDropContext@${displayName}`;
+      static displayName = `configureDragDropContext!${displayName}`;
 
       static childContextTypes = {
         dragDropManager: PropTypes.object.isRequired
