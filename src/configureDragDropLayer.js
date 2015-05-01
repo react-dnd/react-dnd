@@ -3,10 +3,10 @@ import { DragDropManager } from 'dnd-core';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import invariant from 'invariant';
-import validateDecoratorArguments from './utils/validateDecoratorArguments';
+import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
 export default function configureDragDropLayer(collect, options = {}) {
-  validateDecoratorArguments('configureDragDropLayer', ...arguments);
+  checkDecoratorArguments('configureDragDropLayer', ...arguments);
   const { arePropsEqual = shallowEqualScalar } = options;
 
   invariant(

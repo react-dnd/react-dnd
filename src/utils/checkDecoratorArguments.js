@@ -1,4 +1,4 @@
-export default function validateDecoratorArguments(functionName, ...args) {
+export default function checkDecoratorArguments(functionName, ...args) {
   if (process.env.NODE_ENV !== 'production') {
     for (let i = 0; i < args.length; i++) {
       const arg = args[i];

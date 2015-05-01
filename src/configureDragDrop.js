@@ -7,7 +7,7 @@ import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
 import invariant from 'invariant';
-import validateDecoratorArguments from './utils/validateDecoratorArguments';
+import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
 const DEFAULT_KEY = '__default__';
 
@@ -17,18 +17,22 @@ function isComponentDragDropHandler(obj) {
 }
 
 export default function configureDragDrop(configure, collect, options = {}) {
-  validateDecoratorArguments('configureDragDrop', ...arguments);
+  checkDecoratorArguments('configureDragDrop', ...arguments);
   const { arePropsEqual = shallowEqualScalar } = options;
 
   invariant(
     typeof configure === 'function',
     'configureDragDrop call is missing its first required parameter, ' +
-    'a function that registers drag sources and/or drop targets.'
+    'a function that registers drag sources and/or drop targets. ' +
+    'Instead received %s.',
+    configure
   );
   invariant(
     typeof collect === 'function',
     'configureDragDrop call is missing its second required parameter, ' +
-    'a function that collects props to inject into the component.'
+    'a function that collects props to inject into the component. ' +
+    'Instead received %s.',
+    collect
   );
 
   return function (DecoratedComponent) {
@@ -111,27 +115,29 @@ export default function configureDragDrop(configure, collect, options = {}) {
           }
         };
 
-        let handlers = configure(register, props);
-        if (isComponentDragDropHandler(handlers)) {
-          handlers = { [DEFAULT_KEY]: handlers };
-        }
+        const handlers = configure(register, props);
+        const wrappedHandlers = isComponentDragDropHandler(handlers) ? {
+          [DEFAULT_KEY]: handlers
+        } : handlers;
 
         if (process.env.NODE_ENV !== 'production') {
           invariant(
-            handlers != null &&
-            typeof handlers === 'object' &&
-            Object.keys(handlers).every(key =>
-              isComponentDragDropHandler(handlers[key])
+            wrappedHandlers != null &&
+            typeof wrappedHandlers === 'object' &&
+            Object.keys(wrappedHandlers).every(key =>
+              isComponentDragDropHandler(wrappedHandlers[key])
             ),
             'Expected the first argument to configureDragDrop for %s to ' +
             'either return the result of calling register.dragSource() ' +
             'or register.dropTarget(), or an object containing only such values. ' +
+            'Instead received %s. ' +
             'Read more: https://gist.github.com/gaearon/9222a74aaf82ad65fd2e',
-            displayName
+            displayName,
+            handlers
           );
         }
 
-        return handlers;
+        return wrappedHandlers;
       }
 
       getCurrentState() {
