@@ -3,13 +3,43 @@ import invariant from 'invariant';
 import isObject from 'lodash/lang/isObject';
 import isValidType from './utils/isValidType';
 
+const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop'];
+
 export default class ComponentDropTarget extends DropTarget {
-  constructor(type, spec = {}, props, getComponentRef) {
+  constructor(type, spec, props, getComponentRef) {
     super();
 
     if (process.env.NODE_ENV !== 'production') {
-      invariant(isValidType(type, true), 'Expected the drop target type to either be a string, a symbol, or an array of either. Instead received %s.', type);
-      invariant(isObject(spec), 'Expected spec to be an object.');
+      invariant(
+        isValidType(type, true),
+        'Expected the drop target type to either be a string, a symbol, ' +
+        'or an array of either. Instead received %s.',
+        type
+      );
+      invariant(
+        isObject(spec) && typeof spec !== 'function',
+        'Expected the drop target specification to be an object. ' +
+        'Instead received %s.',
+        spec
+      );
+      Object.keys(spec).forEach(key => {
+        invariant(
+          ALLOWED_SPEC_METHODS.indexOf(key) > -1,
+          'Expected the drop target specification to only have ' +
+          'some of the following keys: %s. ' +
+          'Instead received a specification with an unexpected "%s" key.',
+          ALLOWED_SPEC_METHODS.join(', '),
+          key
+        );
+        invariant(
+          typeof spec[key] === 'function',
+          'Expected %s in the drop target specification to be a function. ' +
+          'Instead received a specification with %s: %s.',
+          key,
+          key,
+          spec[key]
+        );
+      });
     }
 
     this.type = type;
