@@ -1,6 +1,6 @@
 * helpers for test context (and update the gist)
 * make sure we don't screw server rendering (NoopBackend?)
-* early invariants for common mistakes (e.g. missing context, missing methods?)
 * example: Kanban
 * update example notes
 * include HTML5 backend in dist
+* add non-minified dist with warnings on
