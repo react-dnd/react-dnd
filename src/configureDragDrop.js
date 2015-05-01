@@ -7,12 +7,25 @@ import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
 import invariant from 'invariant';
+import validateDecoratorArguments from './utils/validateDecoratorArguments';
 
 const DEFAULT_KEY = '__default__';
 
-export default function configureDragDrop(configure, collect, {
-  arePropsEqual = shallowEqualScalar
-}: options = {}) {
+export default function configureDragDrop(configure, collect, options = {}) {
+  validateDecoratorArguments('configureDragDrop', ...arguments);
+  const { arePropsEqual = shallowEqualScalar } = options;
+
+  invariant(
+    typeof configure === 'function',
+    'configureDragDrop call is missing its first required parameter, ' +
+    'a function that registers drag sources and/or drop targets.'
+  );
+  invariant(
+    typeof collect === 'function',
+    'configureDragDrop call is missing its second required parameter, ' +
+    'a function that collects props to inject into the component.'
+  );
+
   return DecoratedComponent => class DragDropHandler extends Component {
     static contextTypes = {
       dragDropManager: PropTypes.object.isRequired

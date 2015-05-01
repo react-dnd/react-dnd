@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
+import validateDecoratorArguments from './utils/validateDecoratorArguments';
 
-export default function configureDragDropContext(backendFactory) {
+export default function configureDragDropContext(backend) {
+  validateDecoratorArguments('configureDragDropContext', ...arguments);
+
   // Auto-detect ES6 default export for people still using ES5
-  if (typeof backendFactory === 'object' && typeof backendFactory.default === 'function') {
-    backendFactory = backendFactory.default;
+  if (typeof backend === 'object' && typeof backend.default === 'function') {
+    backend = backend.default;
   }
   invariant(
-    typeof backendFactory === 'function',
+    typeof backend === 'function',
     'Expected the backend to be a function or an ES6 module exporting a default function.'
   );
 
   const childContext = {
-    dragDropManager: new DragDropManager(backendFactory)
+    dragDropManager: new DragDropManager(backend)
   };
 
   return DecoratedComponent => class DragDropContext extends Component {
