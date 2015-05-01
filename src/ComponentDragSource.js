@@ -3,13 +3,55 @@ import invariant from 'invariant';
 import isObject from 'lodash/lang/isObject';
 import isValidType from './utils/isValidType';
 
+const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'canDrag', 'isDragging', 'endDrag'];
+const REQUIRED_SPEC_METHODS = ['beginDrag'];
+
 export default class ComponentDragSource extends DragSource {
   constructor(type, spec, props, getComponentRef) {
     super();
 
     if (process.env.NODE_ENV !== 'production') {
-      invariant(isValidType(type), 'Expected the drag source type to either be a string or a symbol. Instead received %s.', type);
-      invariant(isObject(spec), 'Expected spec to be an object.');
+      invariant(
+        isValidType(type),
+        'Expected the drag source type to either be a string or a symbol. ' +
+        'Instead received %s.',
+        type
+      );
+
+      invariant(
+        isObject(spec) && typeof spec !== 'function',
+        'Expected the drag source specification to be an object. ' +
+        'Instead received %s.',
+        spec
+      );
+      Object.keys(spec).forEach(key => {
+        invariant(
+          ALLOWED_SPEC_METHODS.indexOf(key) > -1,
+          'Expected the drag source specification to only have ' +
+          'some of the following keys: %s. ' +
+          'Instead received a specification with an unexpected "%s" key.',
+          ALLOWED_SPEC_METHODS.join(', '),
+          key
+        );
+        invariant(
+          typeof spec[key] === 'function',
+          'Expected %s in the drag source specification to be a function. ' +
+          'Instead received a specification with %s: %s.',
+          key,
+          key,
+          spec[key]
+        );
+      });
+      REQUIRED_SPEC_METHODS.forEach(key => {
+        invariant(
+          typeof spec[key] === 'function',
+          'Expected %s in the drag source specification to be a function. ' +
+          'Instead received a specification with %s: %s.',
+          key,
+          key,
+          spec[key]
+        );
+      });
     }
 
     this.type = type;
