@@ -11,6 +11,7 @@ import DustbinStress from './_dustbin-stress';
 import NestingTargets from './_nesting-targets';
 import NestingSources from './_nesting-sources';
 import SortableSimple from './_sortable-simple';
+import SortableCancelable from './_sortable-cancelable';
 import SortableStress from './_sortable-stress';
 import CustomizeHandles from './_customize-handles';
 import CustomizeEffects from './_customize-effects';
@@ -24,7 +25,7 @@ const App = React.createClass({
           <li>Drag Around (<Link to='drag-around-naive'>naive</Link>, <Link to='drag-around-custom'>custom</Link>)</li>
           <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>, <Link to='dustbin-stress'>stress test</Link>)</li>
           <li>Nesting (<Link to='nesting-sources'>drag sources</Link>, <Link to='nesting-targets'>drop targets</Link>)</li>
-          <li>Sortable (<Link to='sortable-simple'>simple</Link>, <Link to='sortable-stress'>stress test</Link>)</li>
+          <li>Sortable (<Link to='sortable-simple'>simple</Link>, <Link to='sortable-cancelable'>cancel on drop outside</Link>, <Link to='sortable-stress'>stress test</Link>)</li>
           <li>Customize (<Link to='customize-handles'>drag handles</Link>, <Link to='customize-effects'>drop effects</Link>)</li>
         </ul>
         <hr />
@@ -44,6 +45,7 @@ const routes = (
     <Route name='nesting-sources' path='nesting-sources' handler={NestingSources} />
     <Route name='nesting-targets' path='nesting-targets' handler={NestingTargets} />
     <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
+    <Route name='sortable-cancelable' path='sortable-cancelable' handler={SortableCancelable} />
     <Route name='sortable-stress' path='sortable-stress' handler={SortableStress} />
     <Route name='customize-handles' path='customize-handles' handler={CustomizeHandles} />
     <Route name='customize-effects' path='customize-effects' handler={CustomizeEffects} />
