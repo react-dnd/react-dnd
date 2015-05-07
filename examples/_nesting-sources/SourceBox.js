@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Colors from './Colors';
-import { configureDragDrop } from 'react-dnd';
+import { DragDrop } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -20,7 +20,7 @@ const ColorSource = {
   }
 };
 
-@configureDragDrop(
+@DragDrop(
   (register, props) =>
     register.dragSource(props.color, ColorSource),
 

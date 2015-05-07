@@ -1,7 +1,7 @@
 import { CompositeDisposable } from 'disposables';
 import createConnectRef from './createConnectRef';
 
-export default class SourceMonitor {
+export default class DragSourceMonitor {
   constructor(manager, sourceId) {
     this.manager = manager;
     this.sourceId = sourceId;

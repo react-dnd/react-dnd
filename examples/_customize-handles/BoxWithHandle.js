@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { configureDragDrop } from 'react-dnd';
+import { DragDrop } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -26,7 +26,7 @@ const BoxSource = {
   }
 };
 
-@configureDragDrop(
+@DragDrop(
   register =>
     register.dragSource(ItemTypes.BOX, BoxSource),
 

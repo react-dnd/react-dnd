@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import Card from './Card';
-import { configureDragDrop, configureDragDropContext } from 'react-dnd';
+import { DragDrop, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 import ItemTypes from './ItemTypes';
 
@@ -16,8 +16,8 @@ const CardDropTarget = {
   }
 };
 
-@configureDragDropContext(HTML5Backend)
-@configureDragDrop(
+@DragDropContext(HTML5Backend)
+@DragDrop(
   register =>
     register.dropTarget(ItemTypes.CARD, CardDropTarget),
 
