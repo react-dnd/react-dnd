@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
-import { configureDragDrop } from 'react-dnd';
+import { DragDrop } from 'react-dnd';
 
 const style = {
   height: '12rem',
@@ -19,7 +19,7 @@ const DustbinTarget = {
   }
 };
 
-@configureDragDrop(
+@DragDrop(
   (register, props) =>
     register.dropTarget(props.accepts, DustbinTarget),
 

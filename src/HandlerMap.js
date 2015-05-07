@@ -1,10 +1,10 @@
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
-import ComponentHandlerMapping from './ComponentHandlerMapping';
+import HandlerMapping from './HandlerMapping';
 import invariant from 'invariant';
 import values from 'lodash/object/values';
 import xor from 'lodash/array/xor';
 
-export default class ComponentHandlerMap {
+export default class HandlerMap {
   constructor(manager, handlers, onChange) {
     this.manager = manager;
     this.onChange = onChange;
@@ -21,7 +21,7 @@ export default class ComponentHandlerMap {
 
     Object.keys(handlers).forEach(key => {
       const handler = handlers[key];
-      const mapping = new ComponentHandlerMapping(this.manager, handler);
+      const mapping = new HandlerMapping(this.manager, handler);
 
       this.mappings[key] = mapping;
       this.disposable.add(mapping.getDisposable());
