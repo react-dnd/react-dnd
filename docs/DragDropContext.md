@@ -1,4 +1,4 @@
-`configureDragDropContext`
+`@DragDropContext`
 =========================
 
 Lol.

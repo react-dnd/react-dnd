@@ -1,4 +1,4 @@
-`configureDragDrop`
+`@DragDrop`
 ====================
 
 Meh

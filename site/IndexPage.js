@@ -14,9 +14,9 @@ var APIPages = Constants.APIPages;
 var Pages = Constants.Pages;
 
 var APIDocs = {
-  CONFIGURE_DRAG_DROP: require('../docs/configureDragDrop.md'),
-  CONFIGURE_DRAG_DROP_CONTEXT: require('../docs/configureDragDropContext.md'),
-  CONFIGURE_DRAG_DROP_LAYER: require('../docs/configureDragDropLayer.md'),
+  DRAG_DROP: require('../docs/DragDrop.md'),
+  DRAG_DROP_CONTEXT: require('../docs/DragDropContext.md'),
+  DRAG_DROP_LAYER: require('../docs/DragDropLayer.md'),
   DRAG_DROP_MONITOR: require('../docs/DragDropMonitor.md'),
   DRAG_SOURCE: require('../docs/DragSource.md'),
   DRAG_SOURCE_MONITOR: require('../docs/DragSourceMonitor.md'),
