@@ -9,7 +9,11 @@ module.exports = {
 
   devtool: 'source-map',
 
-  entry: path.join(__dirname, 'client.js'),
+  entry: [
+    path.join(__dirname, 'client.js'),
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server'
+  ],
 
   output: {
     path: '__site__/',
@@ -31,7 +35,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loaders: ['react-hot-loader', 'babel-loader']
       },
       {
         test: /\.css$/,
