@@ -1,3 +1,0 @@
-#!/bin/sh
-cd examples
-../node_modules/.bin/webpack-dev-server -d --hot --inline --display-error-details --colors --history-api-fallback

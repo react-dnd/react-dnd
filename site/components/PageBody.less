@@ -1,0 +1,17 @@
+.PageBody {
+  @import (less) '../base.less';
+
+  padding: @content-padding*4 @content-padding;
+  background-color: #fff;
+
+  .PageBody-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: @content-width;
+
+    @media only screen and (min-width: 680px) {
+      flex-direction: row;
+    }
+  }
+}
