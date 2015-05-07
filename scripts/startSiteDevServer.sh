@@ -6,4 +6,4 @@ rm -rf ./__site__
 rm -rf ./__site_prerender__
 webpack --config "$PWD/site/webpack-prerender.config.js"
 ./scripts/buildSiteIndexPages.sh
-webpack-dev-server --config "$PWD/site/webpack-client.config.js" --no-info --hot --content-base __site__
+webpack-dev-server --config "$PWD/site/webpack-client.config.js" --hot --content-base __site__

@@ -10,7 +10,7 @@ var Cover = React.createClass({
       <div className="Cover">
         <div className="Cover-header">
           <p className="Cover-description">
-            Drag and drop for React with full DOM control
+            Drag and Drop for React
           </p>
         </div>
       </div>
