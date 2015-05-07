@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
-import ComponentDragSource from './ComponentDragSource';
-import ComponentDropTarget from './ComponentDropTarget';
-import ComponentHandlerMap from './ComponentHandlerMap';
+import DragSource from './DragSource';
+import DropTarget from './DropTarget';
+import HandlerMap from './HandlerMap';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import assign from 'lodash/object/assign';
@@ -12,38 +12,38 @@ import isPlainObject from 'lodash/lang/isPlainObject';
 
 const DEFAULT_KEY = '__default__';
 
-function isComponentDragDropHandler(obj) {
-  return obj instanceof ComponentDragSource ||
-         obj instanceof ComponentDropTarget;
+function isDragDropHandler(obj) {
+  return obj instanceof DragSource ||
+         obj instanceof DropTarget;
 }
 
-export default function configureDragDrop(configure, collect, options = {}) {
-  checkDecoratorArguments('configureDragDrop', ...arguments);
+export default function DragDrop(configure, collect, options = {}) {
+  checkDecoratorArguments('DragDrop', ...arguments);
   const { arePropsEqual = shallowEqualScalar } = options;
 
   invariant(
     typeof configure === 'function',
-    'configureDragDrop call is missing its first required parameter, ' +
+    'DragDrop call is missing its first required parameter, ' +
     'a function that registers drag sources and/or drop targets. ' +
     'Instead received %s.',
     configure
   );
   invariant(
     typeof collect === 'function',
-    'configureDragDrop call is missing its second required parameter, ' +
+    'DragDrop call is missing its second required parameter, ' +
     'a function that collects props to inject into the component. ' +
     'Instead received %s.',
     collect
   );
 
-  return function (DecoratedComponent) {
+  return function createDragDropContainer(DecoratedComponent) {
     const displayName =
       DecoratedComponent.displayName ||
       DecoratedComponent.name ||
       'Component';
 
-    return class DragDropHandler extends Component {
-      static displayName = `configureDragDrop!${displayName}`;
+    return class DragDropContainer extends Component {
+      static displayName = `DragDrop(${displayName})`;
 
       static contextTypes = {
         dragDropManager: PropTypes.object.isRequired
@@ -65,14 +65,14 @@ export default function configureDragDrop(configure, collect, options = {}) {
         invariant(
           this.manager instanceof DragDropManager,
           'Could not find the drag and drop manager in the context of %s. ' +
-          'Make sure to wrap the top-level component of your app with configureDragDropContext. ' +
+          'Make sure to wrap the top-level component of your app with DragDropContext. ' +
           'Read more: https://gist.github.com/gaearon/7d6d01748b772fda824e',
           displayName,
           displayName
         );
 
         const handlers = this.getNextHandlers(props);
-        this.handlerMap = new ComponentHandlerMap(this.manager, handlers, this.handleChange);
+        this.handlerMap = new HandlerMap(this.manager, handlers, this.handleChange);
         this.state = this.getCurrentState();
       }
 
@@ -109,15 +109,15 @@ export default function configureDragDrop(configure, collect, options = {}) {
 
         const register = {
           dragSource: (type, spec) => {
-            return new ComponentDragSource(type, spec, props, this.getComponentRef);
+            return new DragSource(type, spec, props, this.getComponentRef);
           },
           dropTarget: (type, spec) => {
-            return new ComponentDropTarget(type, spec, props, this.getComponentRef);
+            return new DropTarget(type, spec, props, this.getComponentRef);
           }
         };
 
         const handlers = configure(register, props);
-        const wrappedHandlers = isComponentDragDropHandler(handlers) ? {
+        const wrappedHandlers = isDragDropHandler(handlers) ? {
           [DEFAULT_KEY]: handlers
         } : handlers;
 
@@ -126,9 +126,9 @@ export default function configureDragDrop(configure, collect, options = {}) {
             wrappedHandlers != null &&
             typeof wrappedHandlers === 'object' &&
             Object.keys(wrappedHandlers).every(key =>
-              isComponentDragDropHandler(wrappedHandlers[key])
+              isDragDropHandler(wrappedHandlers[key])
             ),
-            'Expected the first argument to configureDragDrop for %s to ' +
+            'Expected the first argument to DragDrop for %s to ' +
             'either return the result of calling register.dragSource() ' +
             'or register.dropTarget(), or an object containing only such values. ' +
             'Instead received %s. ' +
@@ -152,7 +152,7 @@ export default function configureDragDrop(configure, collect, options = {}) {
         if (process.env.NODE_ENV !== 'production') {
           invariant(
             isPlainObject(propsToInject),
-            'Expected the second argument to configureDragDrop for %s ' +
+            'Expected the second argument to DragDrop for %s ' +
             'to return a plain object of props to inject into %s. ' +
             'Instead received %s.',
             displayName,

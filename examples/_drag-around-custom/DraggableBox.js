@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
-import { configureDragDrop } from 'react-dnd';
+import { DragDrop } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd/modules/backends/HTML5';
 
 const BoxSource = {
@@ -29,7 +29,7 @@ function getStyles(props) {
   };
 }
 
-@configureDragDrop(
+@DragDrop(
   register =>
     register.dragSource(ItemTypes.BOX, BoxSource),
 

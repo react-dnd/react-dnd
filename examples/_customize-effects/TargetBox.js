@@ -2,7 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import ItemTypes from './ItemTypes';
-import { configureDragDrop } from 'react-dnd';
+import { DragDrop } from 'react-dnd';
 
 const style = {
   height: '12rem',
@@ -18,7 +18,7 @@ const BoxTarget = {
   }
 };
 
-@configureDragDrop(
+@DragDrop(
   register =>
     register.dropTarget(ItemTypes.BOX, BoxTarget),
 

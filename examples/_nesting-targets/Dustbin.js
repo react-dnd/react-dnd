@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { configureDragDrop } from 'react-dnd';
+import { DragDrop } from 'react-dnd';
 
 function getStyle(backgroundColor) {
   return {
@@ -34,7 +34,7 @@ const BoxTarget = {
   }
 };
 
-@configureDragDrop(
+@DragDrop(
   register =>
     register.dropTarget(ItemTypes.BOX, BoxTarget),
 

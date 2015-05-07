@@ -1,14 +1,11 @@
-import { DropTarget } from 'dnd-core';
 import invariant from 'invariant';
 import isPlainObject from 'lodash/lang/isPlainObject';
 import isValidType from './utils/isValidType';
 
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop'];
 
-export default class ComponentDropTarget extends DropTarget {
-  constructor(type, spec, props, getComponentRef) {
-    super();
-
+export default class DropTarget {
+  constructor(type, spec, props, getInstance) {
     if (process.env.NODE_ENV !== 'production') {
       invariant(
         isValidType(type, true),
@@ -45,11 +42,11 @@ export default class ComponentDropTarget extends DropTarget {
     this.type = type;
     this.spec = spec;
     this.props = props;
-    this.getComponentRef = getComponentRef;
+    this.getInstance = getInstance;
   }
 
   receive(handler) {
-    if (!(handler instanceof ComponentDropTarget)) {
+    if (!(handler instanceof DropTarget)) {
       return false;
     }
 
@@ -59,43 +56,43 @@ export default class ComponentDropTarget extends DropTarget {
 
     this.spec = handler.spec;
     this.props = handler.props;
-    this.getComponentRef = handler.getComponentRef;
+    this.getInstance = handler.getInstance;
     return true;
   }
 
   canDrop(monitor, id) {
-    if (this.spec.canDrop) {
-      return this.spec.canDrop.call(null, this.props, monitor);
-    } else {
-      return super.canDrop(monitor, id);
+    if (!this.spec.canDrop) {
+      return true;
     }
+
+    return this.spec.canDrop.call(null, this.props, monitor);
   }
 
   hover(monitor, id) {
-    if (this.spec.hover) {
-      const component = this.getComponentRef();
-      return this.spec.hover.call(null, this.props, monitor, component, id);
-    } else {
-      return super.hover(monitor, id);
+    if (!this.spec.hover) {
+      return;
     }
+
+    const component = this.getInstance();
+    this.spec.hover.call(null, this.props, monitor, component, id);
   }
 
   drop(monitor, id) {
-    if (this.spec.drop) {
-      const component = this.getComponentRef();
-      const dropResult = this.spec.drop.call(null, this.props, monitor, component, id);
-      if (process.env.NODE_ENV !== 'production') {
-        invariant(
-          typeof dropResult === 'undefined' ||
-          isPlainObject(dropResult),
-          'drop() must either return undefined, or an object that represents the drop result. ' +
-          'Instead received %s.',
-          dropResult
-        );
-      }
-      return dropResult;
-    } else {
-      return super.drop(monitor, id);
+    if (!this.spec.drop) {
+      return;
     }
+
+    const component = this.getInstance();
+    const dropResult = this.spec.drop.call(null, this.props, monitor, component, id);
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
+        typeof dropResult === 'undefined' ||
+        isPlainObject(dropResult),
+        'drop() must either return undefined, or an object that represents the drop result. ' +
+        'Instead received %s.',
+        dropResult
+      );
+    }
+    return dropResult;
   }
 }

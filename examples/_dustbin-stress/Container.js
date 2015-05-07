@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { configureDragDropContext } from 'react-dnd';
+import { DragDropContext } from 'react-dnd';
 import HTML5Backend, { NativeTypes } from 'react-dnd/modules/backends/HTML5';
 import Dustbin from './Dustbin';
 import Box from './Box';
@@ -9,7 +9,7 @@ import ItemTypes from './ItemTypes';
 import shuffle from 'lodash/collection/shuffle';
 import update from 'react/lib/update';
 
-@configureDragDropContext(HTML5Backend)
+@DragDropContext(HTML5Backend)
 export default class Container extends Component {
   constructor(props) {
     super(props);

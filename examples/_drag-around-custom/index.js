@@ -3,10 +3,10 @@
 import React, { Component } from 'react';
 import Container from './Container';
 import DragLayer from './DragLayer';
-import { configureDragDropContext } from 'react-dnd';
+import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
-@configureDragDropContext(HTML5Backend)
+@DragDropContext(HTML5Backend)
 export default class DragAroundCustom extends Component {
   constructor(props) {
     super(props);

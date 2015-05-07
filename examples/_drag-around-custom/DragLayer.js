@@ -5,7 +5,7 @@ import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
 import snapToGrid from './snapToGrid';
-import { configureDragDropLayer } from 'react-dnd';
+import { DragDropLayer } from 'react-dnd';
 
 const layerStyles = {
   position: 'fixed',
@@ -42,7 +42,7 @@ function getItemStyles(props) {
   };
 }
 
-@configureDragDropLayer(
+@DragDropLayer(
   monitor => ({
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
