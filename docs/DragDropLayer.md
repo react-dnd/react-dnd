@@ -1,4 +1,4 @@
-`configureDragDropLayer`
+`@DragDropLayer`
 ===================
 
 Lol.
