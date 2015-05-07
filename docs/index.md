@@ -59,7 +59,6 @@ function collect(cardSource) {
 var Card = React.createClass({
   propTypes: {
     text: PropTypes.string.isRequired,
-
     isDragging: PropTypes.bool.isRequired,
     connectDragSource: PropTypes.func.isRequired
   },
@@ -100,10 +99,20 @@ const CardDragSource = {
   }
 };
 
+function configure(register) {
+  return register.dragSource(ItemTypes.CARD, CardDragSource);
+}
+
+function collect(cardSource) {
+  return {
+    isDragging: cardSource.isDragging(),
+    connectDragSource: cardSource.connect()
+  };
+}
+
 class Card {
   render() {
-    var { isDragging, connectDragSource, text } = this.props;
-
+    const { isDragging, connectDragSource, text } = this.props;
     return (
       <div ref={connectDragSource}
            style={{ opacity: isDragging ? 0.5 : 1 }}>
@@ -119,15 +128,7 @@ Card.propTypes = {
   connectDragSource: PropTypes.func.isRequired
 }
 
-export default DragDrop(
-  register =>
-    register.dragSource(ItemTypes.CARD, CardDragSource),
-
-  cardSource => ({
-    isDragging: cardSource.isDragging(),
-    connectDragSource: cardSource.connect()
-  })
-)(Card);
+export default DragDrop(configure, collect)(Card);
 ```
 -------------------
 ```js
@@ -149,15 +150,18 @@ const CardDragSource = {
   }
 };
 
-@DragDrop(
-  register =>
-    register.dragSource(ItemTypes.CARD, CardDragSource),
+function configure(register) {
+  return register.dragSource(ItemTypes.CARD, CardDragSource);
+}
 
-  cardSource => ({
+function collect(cardSource) {
+  return {
     isDragging: cardSource.isDragging(),
     connectDragSource: cardSource.connect()
-  })
-)
+  };
+}
+
+@DragDrop(configure, collect)
 export default class Card {
   static propTypes = {
     text: PropTypes.string.isRequired,
@@ -166,8 +170,7 @@ export default class Card {
   };
 
   render() {
-    var { isDragging, connectDragSource, text } = this.props;
-
+    const { isDragging, connectDragSource, text } = this.props;
     return (
       <div ref={connectDragSource}
            style={{ opacity: isDragging ? 0.5 : 1 }}>
