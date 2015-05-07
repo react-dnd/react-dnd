@@ -1,4 +1,3 @@
-import { DragSource } from 'dnd-core';
 import invariant from 'invariant';
 import isPlainObject from 'lodash/lang/isPlainObject';
 import isValidType from './utils/isValidType';
@@ -6,10 +5,8 @@ import isValidType from './utils/isValidType';
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'canDrag', 'isDragging', 'endDrag'];
 const REQUIRED_SPEC_METHODS = ['beginDrag'];
 
-export default class ComponentDragSource extends DragSource {
-  constructor(type, spec, props, getComponentRef) {
-    super();
-
+export default class DragSource {
+  constructor(type, spec, props, getInstance) {
     if (process.env.NODE_ENV !== 'production') {
       invariant(
         isValidType(type),
@@ -57,11 +54,11 @@ export default class ComponentDragSource extends DragSource {
     this.type = type;
     this.spec = spec;
     this.props = props;
-    this.getComponentRef = getComponentRef;
+    this.getInstance = getInstance;
   }
 
   receive(handler) {
-    if (!(handler instanceof ComponentDragSource)) {
+    if (!(handler instanceof DragSource)) {
       return false;
     }
 
@@ -71,28 +68,28 @@ export default class ComponentDragSource extends DragSource {
 
     this.spec = handler.spec;
     this.props = handler.props;
-    this.getComponentRef = handler.getComponentRef;
+    this.getInstance = handler.getInstance;
     return true;
   }
 
   canDrag(monitor, id) {
-    if (this.spec.canDrag) {
-      return this.spec.canDrag.call(null, this.props, monitor);
-    } else {
-      return super.canDrag(monitor, id);
+    if (!this.spec.canDrag) {
+      return true;
     }
+
+    return this.spec.canDrag.call(null, this.props, monitor);
   }
 
   isDragging(monitor, id) {
-    if (this.spec.isDragging) {
-      return this.spec.isDragging.call(null, this.props, monitor);
-    } else {
-      return super.isDragging(monitor, id);
+    if (!this.spec.isDragging) {
+      return id === monitor.getSourceId();
     }
+
+    return this.spec.isDragging.call(null, this.props, monitor);
   }
 
   beginDrag(monitor, id) {
-    const component = this.getComponentRef();
+    const component = this.getInstance();
     const item = this.spec.beginDrag.call(null, this.props, monitor, component, id);
     if (process.env.NODE_ENV !== 'production') {
       invariant(
@@ -106,11 +103,11 @@ export default class ComponentDragSource extends DragSource {
   }
 
   endDrag(monitor, id) {
-    if (this.spec.endDrag) {
-      const component = this.getComponentRef();
-      return this.spec.endDrag.call(null, this.props, monitor, component, id);
-    } else {
-      return super.endDrag(monitor, id);
+    if (!this.spec.endDrag) {
+      return;
     }
+
+    const component = this.getInstance();
+    this.spec.endDrag.call(null, this.props, monitor, component, id);
   }
 }

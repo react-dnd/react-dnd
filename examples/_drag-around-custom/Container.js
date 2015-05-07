@@ -6,7 +6,7 @@ import update from 'react/lib/update';
 import ItemTypes from './ItemTypes';
 import DraggableBox from './DraggableBox';
 import snapToGrid from './snapToGrid';
-import { configureDragDrop } from 'react-dnd';
+import { DragDrop } from 'react-dnd';
 
 const styles = {
   width: 300,
@@ -30,7 +30,7 @@ const BoxTarget = {
   }
 };
 
-@configureDragDrop(
+@DragDrop(
   register =>
     register.dropTarget(ItemTypes.BOX, BoxTarget),
 

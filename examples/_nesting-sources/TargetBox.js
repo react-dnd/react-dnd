@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
-import { configureDragDrop } from 'react-dnd';
+import { DragDrop } from 'react-dnd';
 import Colors from './Colors';
 
 const style = {
@@ -18,7 +18,7 @@ const ColorTarget = {
   }
 };
 
-@configureDragDrop(
+@DragDrop(
   register =>
     register.dropTarget([Colors.YELLOW, Colors.BLUE], ColorTarget),
 

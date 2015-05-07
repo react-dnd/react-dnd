@@ -1,7 +1,7 @@
 import { SerialDisposable } from 'disposables';
 import HandlerRegistration from './HandlerRegistration';
 
-export default class ComponentHandlerMapping {
+export default class HandlerMapping {
   constructor(manager, handler) {
     this.manager = manager;
     this.registration = null;

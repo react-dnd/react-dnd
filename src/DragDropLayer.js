@@ -5,24 +5,24 @@ import shallowEqualScalar from './utils/shallowEqualScalar';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
-export default function configureDragDropLayer(collect, options = {}) {
-  checkDecoratorArguments('configureDragDropLayer', ...arguments);
+export default function DragDropLayer(collect, options = {}) {
+  checkDecoratorArguments('DragDropLayer', ...arguments);
   const { arePropsEqual = shallowEqualScalar } = options;
 
   invariant(
     typeof collect === 'function',
-    'configureDragDropLayer call is missing its only required parameter, ' +
+    'DragDropLayer call is missing its only required parameter, ' +
     'a function that collects props to inject into the component.'
   );
 
-  return function (DecoratedComponent) {
+  return function createDragDropLayerContainer(DecoratedComponent) {
     const displayName =
       DecoratedComponent.displayName ||
       DecoratedComponent.name ||
       'Component';
 
-    return class DragDropHandler extends Component {
-      static displayName = `configureDragDropLayer!${displayName}`;
+    return class DragDropLayerContainer extends Component {
+      static displayName = `DragDropLayer(${displayName})`;
 
       static contextTypes = {
         dragDropManager: PropTypes.object.isRequired
@@ -42,7 +42,7 @@ export default function configureDragDropLayer(collect, options = {}) {
         invariant(
           this.manager instanceof DragDropManager,
           'Could not find the drag and drop manager in the context of %s. ' +
-          'Make sure to wrap the top-level component of your app with configureDragDropContext. ' +
+          'Make sure to wrap the top-level component of your app with DragDropContext. ' +
           'Read more: https://gist.github.com/gaearon/7d6d01748b772fda824e',
           displayName,
           displayName
