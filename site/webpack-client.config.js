@@ -7,7 +7,7 @@ var isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
 
-  devtool: 'source-map',
+  devtool: 'cheap-eval-source-map',
 
   entry: [
     path.join(__dirname, 'client.js'),
