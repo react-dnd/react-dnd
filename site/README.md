@@ -9,11 +9,9 @@ npm install
 Then, run the server via
 
 ```
-npm run site-dev-server
+npm start
 Open http://localhost:8080/
 ```
-
-Anytime you change the contents, just refresh the page and it's going to be updated.
 
 # Publish the website
 
