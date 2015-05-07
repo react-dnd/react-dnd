@@ -1,0 +1,37 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/iojs', '/usr/local/bin/npm', 'start' ]
+2 info using npm@2.8.3
+3 info using node@v1.8.1
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info prestart fixed-data-table@0.1.2
+6 info start fixed-data-table@0.1.2
+7 verbose unsafe-perm in lifecycle true
+8 info fixed-data-table@0.1.2 Failed to exec start script
+9 verbose stack Error: fixed-data-table@0.1.2 start: `./scripts/startSiteDevServer.sh`
+9 verbose stack Exit status 1
+9 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
+9 verbose stack     at emitTwo (events.js:87:13)
+9 verbose stack     at EventEmitter.emit (events.js:169:7)
+9 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+9 verbose stack     at emitTwo (events.js:87:13)
+9 verbose stack     at ChildProcess.emit (events.js:169:7)
+9 verbose stack     at maybeClose (child_process.js:953:16)
+9 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1020:5)
+10 verbose pkgid fixed-data-table@0.1.2
+11 verbose cwd /Users/dan/Documents/Projects/react-dnd/site
+12 error Darwin 14.3.0
+13 error argv "/usr/local/bin/iojs" "/usr/local/bin/npm" "start"
+14 error node v1.8.1
+15 error npm  v2.8.3
+16 error code ELIFECYCLE
+17 error fixed-data-table@0.1.2 start: `./scripts/startSiteDevServer.sh`
+17 error Exit status 1
+18 error Failed at the fixed-data-table@0.1.2 start script './scripts/startSiteDevServer.sh'.
+18 error This is most likely a problem with the fixed-data-table package,
+18 error not with npm itself.
+18 error Tell the author that this fails on your system:
+18 error     ./scripts/startSiteDevServer.sh
+18 error You can get their info via:
+18 error     npm owner ls fixed-data-table
+18 error There is likely additional logging output above.
+19 verbose exit [ 1, true ]

@@ -1,0 +1,29 @@
+.NavBar {
+  @import (less) '../base.less';
+
+  z-index: 3;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  padding: @content-padding/2 @content-padding;
+  background-color: @color-darkBlue;
+
+  .NavBar-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: @content-width;
+  }
+
+  .NavBar-logo {
+
+  }
+
+  .NavBar-link {
+    color: @color-lightBlue;
+  }
+
+  .NavBar-link + .NavBar-link {
+    margin-left: 1em;
+  }
+}

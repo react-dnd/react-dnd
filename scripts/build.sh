@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# build examples
-cd examples
-../node_modules/.bin/webpack --config webpack.config.production.js
-cd ..
-
 # build minified standalone version in dist
 ./node_modules/.bin/webpack
 
