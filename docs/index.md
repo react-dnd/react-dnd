@@ -19,3 +19,17 @@ React DnD uses the HTML5 drag and drop under the hood, but it also lets you supp
 ### Embrace the future
 
 React DnD does not export mixins and works equally well with any components, whether they are created using ES6 classes, `createClass` or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.
+
+-------------------
+```js
+// es5 example gonna be here
+```
+-------------------
+```js
+// es6 example gonna be here
+```
+-------------------
+```js
+// es7 example gonna be here
+```
+-------------------
