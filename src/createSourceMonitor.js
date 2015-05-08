@@ -1,6 +1,11 @@
+import invariant from 'invariant';
+
+let isCallingCanDrag = false;
+let isCallingIsDragging = false;
+
 class SourceMonitor {
   constructor(manager) {
-    this.monitor = manager.getMonitor();
+    this.internalMonitor = manager.getMonitor();
   }
 
   receiveHandlerId(sourceId) {
@@ -8,47 +13,67 @@ class SourceMonitor {
   }
 
   canDrag() {
-    return this.monitor.canDragSource(this.sourceId);
+    invariant(
+      !isCallingCanDrag,
+      'You may not call monitor.canDrag() inside your canDrag() implementation.'
+    );
+
+    try {
+      isCallingCanDrag = true;
+      return this.internalMonitor.canDragSource(this.sourceId);
+    } finally {
+      isCallingCanDrag = false;
+    }
   }
 
   isDragging() {
-    return this.monitor.isDraggingSource(this.sourceId);
+    invariant(
+      !isCallingIsDragging,
+      'You may not call monitor.isDragging() inside your isDragging() implementation.'
+    );
+
+    try {
+      isCallingIsDragging = true;
+      return this.internalMonitor.isDraggingSource(this.sourceId);
+    } finally {
+      isCallingIsDragging = false;
+    }
   }
 
   getItemType() {
-    return this.monitor.getItemType();
+    return this.internalMonitor.getItemType();
   }
 
   getItem() {
-    return this.monitor.getItem();
+    return this.internalMonitor.getItem();
   }
 
   getDropResult() {
-    return this.monitor.getDropResult();
+    return this.internalMonitor.getDropResult();
   }
 
   didDrop() {
-    return this.monitor.didDrop();
+    return this.internalMonitor.didDrop();
   }
 
   getInitialClientOffset() {
-    return this.monitor.getInitialClientOffset();
+    return this.internalMonitor.getInitialClientOffset();
   }
 
   getInitialSourceClientOffset() {
-    return this.monitor.getInitialSourceClientOffset();
+    return this.internalMonitor.getInitialSourceClientOffset();
   }
 
   getSourceClientOffset() {
-    return this.monitor.getSourceClientOffset();
+    return this.internalMonitor.getSourceClientOffset();
   }
 
   getClientOffset() {
-    return this.monitor.getClientOffset();
+    return this.internalMonitor.getClientOffset();
   }
 
   getDifferenceFromInitialOffset() {
-    return this.monitor.getDifferenceFromInitialOffset();
+    return this.internalMonitor.getDifferenceFromInitialOffset();
   }
 }
 

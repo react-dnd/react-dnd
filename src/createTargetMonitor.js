@@ -1,6 +1,10 @@
+import invariant from 'invariant';
+
+let isCallingCanDrop = false;
+
 class TargetMonitor {
   constructor(manager) {
-    this.monitor = manager.getMonitor();
+    this.internalMonitor = manager.getMonitor();
   }
 
   receiveHandlerId(targetId) {
@@ -8,47 +12,57 @@ class TargetMonitor {
   }
 
   canDrop() {
-    return this.monitor.canDropOnTarget(this.targetId);
+    invariant(
+      !isCallingCanDrop,
+      'You may not call monitor.canDrop() inside your canDrop() implementation.'
+    );
+
+    try {
+      isCallingCanDrop = true;
+      return this.internalMonitor.canDropOnTarget(this.targetId);
+    } finally {
+      isCallingCanDrop = false;
+    }
   }
 
   isOver(options) {
-    return this.monitor.isOverTarget(this.targetId, options);
+    return this.internalMonitor.isOverTarget(this.targetId, options);
   }
 
   getItemType() {
-    return this.monitor.getItemType();
+    return this.internalMonitor.getItemType();
   }
 
   getItem() {
-    return this.monitor.getItem();
+    return this.internalMonitor.getItem();
   }
 
   getDropResult() {
-    return this.monitor.getDropResult();
+    return this.internalMonitor.getDropResult();
   }
 
   didDrop() {
-    return this.monitor.didDrop();
+    return this.internalMonitor.didDrop();
   }
 
   getInitialClientOffset() {
-    return this.monitor.getInitialClientOffset();
+    return this.internalMonitor.getInitialClientOffset();
   }
 
   getInitialSourceClientOffset() {
-    return this.monitor.getInitialSourceClientOffset();
+    return this.internalMonitor.getInitialSourceClientOffset();
   }
 
   getSourceClientOffset() {
-    return this.monitor.getSourceClientOffset();
+    return this.internalMonitor.getSourceClientOffset();
   }
 
   getClientOffset() {
-    return this.monitor.getClientOffset();
+    return this.internalMonitor.getClientOffset();
   }
 
   getDifferenceFromInitialOffset() {
-    return this.monitor.getDifferenceFromInitialOffset();
+    return this.internalMonitor.getDifferenceFromInitialOffset();
   }
 }
 
