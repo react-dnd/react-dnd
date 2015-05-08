@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
-import { DragDrop } from 'react-dnd';
+import { DropTarget } from 'react-dnd';
 import Colors from './Colors';
 
 const style = {
@@ -18,17 +18,12 @@ const ColorTarget = {
   }
 };
 
-@DragDrop(
-  register =>
-    register.dropTarget([Colors.YELLOW, Colors.BLUE], ColorTarget),
-
-  (colorTarget, monitor) => ({
-    connectDropTarget: colorTarget.connect(),
-    isOver: colorTarget.isOver(),
-    canDrop: colorTarget.canDrop(),
-    draggingColor: monitor.getItemType()
-  })
-)
+@DropTarget([Colors.YELLOW, Colors.BLUE], ColorTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop(),
+  draggingColor: monitor.getItemType()
+}))
 class TargetBox extends Component {
   static propTypes = {
     isOver: PropTypes.bool.isRequired,

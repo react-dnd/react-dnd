@@ -4,10 +4,10 @@ import React, { PropTypes } from 'react';
 import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
-import { DragDrop } from 'react-dnd';
+import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd/modules/backends/HTML5';
 
-const BoxSource = {
+const boxSource = {
   beginDrag(props) {
     const { id, title, left, top } = props;
     return { id, title, left, top };
@@ -29,16 +29,11 @@ function getStyles(props) {
   };
 }
 
-@DragDrop(
-  register =>
-    register.dragSource(ItemTypes.BOX, BoxSource),
-
-  boxSource => ({
-    connectDragSource: boxSource.connect(),
-    connectDragPreview: boxSource.connectPreview(),
-    isDragging: boxSource.isDragging()
-  })
-)
+@DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  connectDragPreview: connect.dragPreview(),
+  isDragging: monitor.isDragging()
+}))
 export default class DraggableBox {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
@@ -57,7 +52,7 @@ export default class DraggableBox {
     // and we can draw whatever we want on the custom drag layer instead.
     this.props.connectDragPreview(getEmptyImage(), {
       // IE fallback: specify that we'd rather screenshot the node
-      // when it already knows it's being dragged we can hide it with CSS.
+      // when it already knows it's being dragged so we can hide it with CSS.
       captureDraggingState: true
     });
   }

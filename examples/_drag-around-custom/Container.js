@@ -6,7 +6,7 @@ import update from 'react/lib/update';
 import ItemTypes from './ItemTypes';
 import DraggableBox from './DraggableBox';
 import snapToGrid from './snapToGrid';
-import { DragDrop } from 'react-dnd';
+import { DropTarget } from 'react-dnd';
 
 const styles = {
   width: 300,
@@ -15,7 +15,7 @@ const styles = {
   position: 'relative'
 };
 
-const BoxTarget = {
+const boxTarget = {
   drop(props, monitor, component) {
     const delta = monitor.getDifferenceFromInitialOffset();
     const item = monitor.getItem();
@@ -30,14 +30,9 @@ const BoxTarget = {
   }
 };
 
-@DragDrop(
-  register =>
-    register.dropTarget(ItemTypes.BOX, BoxTarget),
-
-  boxTarget => ({
-    connectDropTarget: boxTarget.connect()
-  })
-)
+@DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+  connectDropTarget: connect.dropTarget()
+}))
 export default class Container extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
