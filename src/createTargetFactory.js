@@ -4,12 +4,6 @@ import isPlainObject from 'lodash/lang/isPlainObject';
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop'];
 
 export default function createTargetFactory(spec) {
-  invariant(
-    isPlainObject(spec),
-    'Expected the drop target specification to be an object. ' +
-    'Instead received %s.',
-    spec
-  );
   Object.keys(spec).forEach(key => {
     invariant(
       ALLOWED_SPEC_METHODS.indexOf(key) > -1,

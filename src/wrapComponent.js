@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
+import isPlainObject from 'lodash/lang/isPlainObject';
 import invariant from 'invariant';
 import createBackendConnector from './createBackendConnector';
 
@@ -11,25 +12,26 @@ export default function wrapComponent({
   createMonitor,
   connectBackend,
   registerHandler,
-  wrapDisplayName,
+  containerDisplayName,
   getType,
-  collect
+  collect,
+  options
 }) {
-  const displayName = wrapDisplayName(
+  const { arePropsEqual = shallowEqualScalar } = options;
+  const displayName =
     DecoratedComponent.displayName ||
     DecoratedComponent.name ||
-    'Component'
-  );
+    'Component';
 
   return class DragDropContainer extends Component {
-    static displayName = displayName;
+    static displayName = `${containerDisplayName}(${displayName})`;
 
     static contextTypes = {
       dragDropManager: PropTypes.object.isRequired
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      return !shallowEqualScalar(nextProps, this.props) ||
+      return !arePropsEqual(nextProps, this.props) ||
              !shallowEqual(nextState, this.state);
     }
 
@@ -61,7 +63,7 @@ export default function wrapComponent({
     }
 
     componentWillReceiveProps(nextProps) {
-      if (!shallowEqualScalar(nextProps, this.props)) {
+      if (!arePropsEqual(nextProps, this.props)) {
         this.receiveProps(nextProps);
         this.handleChange();
       }
@@ -131,7 +133,19 @@ export default function wrapComponent({
     }
 
     getCurrentState() {
-      return collect(this.connector, this.monitor);
+      const nextState = collect(this.connector, this.monitor);
+      if (process.env.NODE_ENV !== 'production') {
+        invariant(
+          isPlainObject(nextState),
+          'Expected `collect` specified as the second argument to ' +
+          '%s for %s to return a plain object of props to inject. ' +
+          'Instead, received %s.',
+          containerDisplayName,
+          displayName,
+          nextState
+        );
+      }
+      return nextState;
     }
 
     render() {

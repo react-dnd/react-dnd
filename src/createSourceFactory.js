@@ -5,12 +5,6 @@ const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'canDrag', 'isDragging', '
 const REQUIRED_SPEC_METHODS = ['beginDrag'];
 
 export default function createSourceFactory(spec) {
-  invariant(
-    isPlainObject(spec),
-    'Expected the drag source specification to be a plain object. ' +
-    'Instead received %s.',
-    spec
-  );
   Object.keys(spec).forEach(key => {
     invariant(
       ALLOWED_SPEC_METHODS.indexOf(key) > -1,
