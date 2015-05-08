@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Colors from './Colors';
-import { DragDrop } from 'react-dnd';
+import { DragSource } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -20,15 +20,10 @@ const ColorSource = {
   }
 };
 
-@DragDrop(
-  (register, props) =>
-    register.dragSource(props.color, ColorSource),
-
-  colorSource => ({
-    connectDragSource: colorSource.connect(),
-    isDragging: colorSource.isDragging()
-  })
-)
+@DragSource(props => props.color, ColorSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
+}))
 class SourceBox extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,

@@ -2,7 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDrop } from 'react-dnd';
+import { DropTarget } from 'react-dnd';
 
 const style = {
   height: '12rem',
@@ -13,21 +13,16 @@ const style = {
   backgroundColor: '#eee'
 };
 
-const BoxTarget = {
+const boxTarget = {
   drop() {
   }
 };
 
-@DragDrop(
-  register =>
-    register.dropTarget(ItemTypes.BOX, BoxTarget),
-
-  boxTarget => ({
-    connectDropTarget: boxTarget.connect(),
-    isOver: boxTarget.isOver(),
-    canDrop: boxTarget.canDrop()
-  })
-)
+@DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop()
+}))
 export default class TargetBox extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,

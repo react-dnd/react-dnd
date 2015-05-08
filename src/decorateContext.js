@@ -3,7 +3,7 @@ import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
-export default function DragDropContext(backend) {
+export default function decorateContext(backend) {
   checkDecoratorArguments('DragDropContext', ...arguments);
 
   // Auto-detect ES6 default export for people still using ES5

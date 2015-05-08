@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDrop } from 'react-dnd';
+import { DropTarget } from 'react-dnd';
 
 function getStyle(backgroundColor) {
   return {
@@ -20,7 +20,7 @@ function getStyle(backgroundColor) {
   };
 }
 
-const BoxTarget = {
+const boxTarget = {
   drop(props, monitor, component) {
     const hasDroppedOnChild = monitor.didDrop();
     if (hasDroppedOnChild && !props.greedy) {
@@ -34,14 +34,10 @@ const BoxTarget = {
   }
 };
 
-@DragDrop(
-  register =>
-    register.dropTarget(ItemTypes.BOX, BoxTarget),
-
-  boxTarget => ({
-    connectDropTarget: boxTarget.connect(),
-    isOver: boxTarget.isOver(),
-    isOverCurrent: boxTarget.isOver({ shallow: true })
+@DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    isOverCurrent: monitor.isOver({ shallow: true })
   })
 )
 export default class Dustbin extends Component {
