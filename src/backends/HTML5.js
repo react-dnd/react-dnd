@@ -137,14 +137,14 @@ class HTML5Backend {
 
   connectDragSource(sourceId) {
     return {
-      connect: (node, options) => this.connectSourceNode(sourceId, node, options),
-      connectPreview: (node, options) => this.connectSourcePreviewNode(sourceId, node, options)
+      dragSource: (node, options) => this.connectSourceNode(sourceId, node, options),
+      dragPreview: (node, options) => this.connectSourcePreviewNode(sourceId, node, options)
     };
   }
 
   connectDropTarget(targetId) {
     return {
-      connect: (node) => this.connectTargetNode(targetId, node)
+      dropTarget: (node) => this.connectTargetNode(targetId, node)
     };
   }
 

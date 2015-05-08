@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import Container from './Container';
-import DragLayer from './DragLayer';
+import CustomDragLayer from './CustomDragLayer';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
@@ -26,7 +26,7 @@ export default class DragAroundCustom extends Component {
     return (
       <div>
         <Container snapToGrid={snapToGridAfterDrop} />
-        <DragLayer snapToGrid={snapToGridWhileDragging} />
+        <CustomDragLayer snapToGrid={snapToGridWhileDragging} />
         <p>
           <input type='checkbox'
                  checked={snapToGridAfterDrop}
