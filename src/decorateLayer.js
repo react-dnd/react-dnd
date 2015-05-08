@@ -5,24 +5,24 @@ import shallowEqualScalar from './utils/shallowEqualScalar';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
-export default function DragDropLayer(collect, options = {}) {
-  checkDecoratorArguments('DragDropLayer', ...arguments);
+export default function decorateLayer(collect, options = {}) {
+  checkDecoratorArguments('DragLayer', ...arguments);
   const { arePropsEqual = shallowEqualScalar } = options;
 
   invariant(
     typeof collect === 'function',
-    'DragDropLayer call is missing its only required parameter, ' +
+    'DragLayer call is missing its only required parameter, ' +
     'a function that collects props to inject into the component.'
   );
 
-  return function createDragDropLayerContainer(DecoratedComponent) {
+  return function createDragLayerContainer(DecoratedComponent) {
     const displayName =
       DecoratedComponent.displayName ||
       DecoratedComponent.name ||
       'Component';
 
-    return class DragDropLayerContainer extends Component {
-      static displayName = `DragDropLayer(${displayName})`;
+    return class DragLayerContainer extends Component {
+      static displayName = `DragLayer(${displayName})`;
 
       static contextTypes = {
         dragDropManager: PropTypes.object.isRequired

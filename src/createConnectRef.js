@@ -26,5 +26,8 @@ export default function createConnectRef(connect) {
     disposable.setDisposable(new Disposable(currentDispose));
   }
 
-  return { disposable, ref };
+  return {
+    ref,
+    disposable
+  };
 }

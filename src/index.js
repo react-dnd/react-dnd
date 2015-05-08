@@ -1,6 +1,7 @@
-export { default as DragDropContext } from './DragDropContext';
-export { default as DragDropLayer } from './DragDropLayer';
-export { default as DragDrop } from './DragDrop';
+export { default as DragDropContext } from './decorateContext';
+export { default as DragLayer } from './decorateLayer';
+export { default as DragSource } from './decorateSource';
+export { default as DropTarget } from './decorateTarget';
 
 if (process.env.NODE_ENV !== 'production') {
   Object.defineProperty(exports, 'default', {

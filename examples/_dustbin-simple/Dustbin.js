@@ -2,7 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDrop } from 'react-dnd';
+import { DropTarget } from 'react-dnd';
 
 const style = {
   height: '12rem',
@@ -12,22 +12,17 @@ const style = {
   textAlign: 'center'
 };
 
-const BoxTarget = {
+const boxTarget = {
   drop() {
     return { name: 'Dustbin' };
   }
 };
 
-@DragDrop(
-  register =>
-    register.dropTarget(ItemTypes.BOX, BoxTarget),
-
-  boxTarget => ({
-    connectDropTarget: boxTarget.connect(),
-    isOver: boxTarget.isOver(),
-    canDrop: boxTarget.canDrop()
-  })
-)
+@DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop()
+}))
 export default class Dustbin extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,

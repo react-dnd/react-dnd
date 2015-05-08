@@ -5,7 +5,7 @@ import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
 import snapToGrid from './snapToGrid';
-import { DragDropLayer } from 'react-dnd';
+import { DragLayer } from 'react-dnd';
 
 const layerStyles = {
   position: 'fixed',
@@ -42,16 +42,14 @@ function getItemStyles(props) {
   };
 }
 
-@DragDropLayer(
-  monitor => ({
-    item: monitor.getItem(),
-    itemType: monitor.getItemType(),
-    initialOffset: monitor.getInitialSourceClientOffset(),
-    currentOffset: monitor.getSourceClientOffset(),
-    isDragging: monitor.isDragging()
-  })
-)
-export default class DragLayer {
+@DragLayer(monitor => ({
+  item: monitor.getItem(),
+  itemType: monitor.getItemType(),
+  initialOffset: monitor.getInitialSourceClientOffset(),
+  currentOffset: monitor.getSourceClientOffset(),
+  isDragging: monitor.isDragging()
+}))
+export default class CustomDragLayer {
   static propTypes = {
     item: PropTypes.object,
     itemType: PropTypes.string,
