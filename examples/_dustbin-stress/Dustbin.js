@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
-import { DragDrop } from 'react-dnd';
+import { DropTarget } from 'react-dnd';
 
 const style = {
   height: '12rem',
@@ -13,22 +13,17 @@ const style = {
   float: 'left'
 };
 
-const DustbinTarget = {
+const dustbinTarget = {
   drop(props, monitor) {
     props.onDrop(monitor.getItem());
   }
 };
 
-@DragDrop(
-  (register, props) =>
-    register.dropTarget(props.accepts, DustbinTarget),
-
-  dustbinTarget => ({
-    connectDropTarget: dustbinTarget.connect(),
-    isOver: dustbinTarget.isOver(),
-    canDrop: dustbinTarget.canDrop()
-  })
-)
+@DropTarget(props => props.accepts, dustbinTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop()
+}))
 export default class Dustbin extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,

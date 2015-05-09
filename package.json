@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-beta.0",
   "description": "Drag and drop for React with full DOM control",
   "main": "modules/index.js",
   "scripts": {
@@ -46,10 +46,12 @@
     "animation-frame": "^0.2.4",
     "autoprefixer": "^5.0.0",
     "babel": "^5.1.10",
-    "babel-core": "^5.1.10",
+    "babel-core": "^5.2.17",
+    "babel-eslint": "^3.1.1",
     "babel-loader": "^5.0.0",
     "css-loader": "^0.9.1",
     "extract-text-webpack-plugin": "^0.3.8",
+    "eslint": "^0.20.0",
     "faker": "2.1.2",
     "file-loader": "^0.8.1",
     "glob": "^4.3.5",
