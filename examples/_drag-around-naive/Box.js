@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDrop } from 'react-dnd';
+import { DragSource } from 'react-dnd';
 
 const style = {
   position: 'absolute',
@@ -10,22 +10,17 @@ const style = {
   padding: '0.5rem'
 };
 
-const BoxSource = {
+const boxSource = {
   beginDrag(props) {
     const { id, left, top } = props;
     return { id, left, top };
   }
 };
 
-@DragDrop(
-  register =>
-    register.dragSource(ItemTypes.BOX, BoxSource),
-
-  boxSource => ({
-    connectDragSource: boxSource.connect(),
-    isDragging: boxSource.isDragging()
-  })
-)
+@DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
+}))
 export default class Box {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,

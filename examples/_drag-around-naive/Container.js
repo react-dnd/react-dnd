@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
-import { DragDrop, DragDropContext } from 'react-dnd';
+import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
 const styles = {
@@ -14,7 +14,7 @@ const styles = {
   position: 'relative'
 };
 
-const BoxTarget = {
+const boxTarget = {
   drop(props, monitor, component) {
     const item = monitor.getItem();
     const delta = monitor.getDifferenceFromInitialOffset();
@@ -26,14 +26,9 @@ const BoxTarget = {
 };
 
 @DragDropContext(HTML5Backend)
-@DragDrop(
-  register =>
-    register.dropTarget(ItemTypes.BOX, BoxTarget),
-
-  boxTarget => ({
-    connectDropTarget: boxTarget.connect()
-  })
-)
+@DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+  connectDropTarget: connect.dropTarget()
+}))
 export default class Container extends Component {
   static propTypes = {
     hideSourceOnDrag: PropTypes.bool.isRequired,

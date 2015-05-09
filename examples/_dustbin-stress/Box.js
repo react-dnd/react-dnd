@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
-import { DragDrop } from 'react-dnd';
+import { DragSource } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -12,7 +12,7 @@ const style = {
   float: 'left'
 };
 
-const BoxSource = {
+const boxSource = {
   beginDrag(props) {
     return {
       name: props.name
@@ -25,15 +25,10 @@ const BoxSource = {
   }
 };
 
-@DragDrop(
-  (register, props) =>
-    register.dragSource(props.type, BoxSource),
-
-  boxSource => ({
-    connectDragSource: boxSource.connect(),
-    isDragging: boxSource.isDragging()
-  })
-)
+@DragSource(props => props.type, boxSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
+}))
 export default class Box extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,

@@ -2,27 +2,36 @@ import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
+import isPlainObject from 'lodash/lang/isPlainObject';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
-export default function DragDropLayer(collect, options = {}) {
-  checkDecoratorArguments('DragDropLayer', ...arguments);
-  const { arePropsEqual = shallowEqualScalar } = options;
-
+export default function decorateLayer(collect, options = {}) {
+  checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments);
   invariant(
     typeof collect === 'function',
-    'DragDropLayer call is missing its only required parameter, ' +
-    'a function that collects props to inject into the component.'
+    'Expected "collect" provided as the first argument to DragLayer ' +
+    'to be a function that collects props to inject into the component. ',
+    'Instead, received %s.',
+    collect
+  );
+  invariant(
+    isPlainObject(options),
+    'Expected "options" provided as the second argument to DragLayer to be ' +
+    'a plain object when specified. ' +
+    'Instead, received %s.',
+    options
   );
 
-  return function createDragDropLayerContainer(DecoratedComponent) {
+  return function createDragLayerContainer(DecoratedComponent) {
+    const { arePropsEqual = shallowEqualScalar } = options;
     const displayName =
       DecoratedComponent.displayName ||
       DecoratedComponent.name ||
       'Component';
 
-    return class DragDropLayerContainer extends Component {
-      static displayName = `DragDropLayer(${displayName})`;
+    return class DragLayerContainer extends Component {
+      static displayName = `DragLayer(${displayName})`;
 
       static contextTypes = {
         dragDropManager: PropTypes.object.isRequired
@@ -38,9 +47,8 @@ export default function DragDropLayer(collect, options = {}) {
         this.handleChange = this.handleChange.bind(this);
 
         this.manager = context.dragDropManager;
-        const displayName = DecoratedComponent.displayName || DecoratedComponent.name || 'Component';
         invariant(
-          this.manager instanceof DragDropManager,
+          typeof this.manager === 'object',
           'Could not find the drag and drop manager in the context of %s. ' +
           'Make sure to wrap the top-level component of your app with DragDropContext. ' +
           'Read more: https://gist.github.com/gaearon/7d6d01748b772fda824e',

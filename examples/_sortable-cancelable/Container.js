@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import Card from './Card';
-import { DragDrop, DragDropContext } from 'react-dnd';
+import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 import ItemTypes from './ItemTypes';
 
@@ -11,20 +11,15 @@ const style = {
   width: 320
 };
 
-const CardDropTarget = {
+const cardTarget = {
   drop() {
   }
 };
 
 @DragDropContext(HTML5Backend)
-@DragDrop(
-  register =>
-    register.dropTarget(ItemTypes.CARD, CardDropTarget),
-
-  cardTarget => ({
-    connectDropTarget: cardTarget.connect()
-  })
-)
+@DropTarget(ItemTypes.CARD, cardTarget, connect => ({
+  connectDropTarget: connect.dropTarget()
+}))
 export default class Container extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired

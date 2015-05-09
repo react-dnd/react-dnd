@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDrop } from 'react-dnd';
+import { DragSource, DropTarget } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
@@ -12,13 +12,13 @@ const style = {
   maxWidth: '20em'
 };
 
-const CardSource = {
+const cardSource = {
   beginDrag(props) {
     return { id: props.id };
   }
 };
 
-const CardTarget = {
+const cardTarget = {
   hover(props, monitor) {
     const draggedId = monitor.getItem().id;
 
@@ -28,18 +28,13 @@ const CardTarget = {
   }
 };
 
-@DragDrop(
-  register => ({
-    cardSource: register.dragSource(ItemTypes.CARD, CardSource),
-    cardTarget: register.dropTarget(ItemTypes.CARD, CardTarget)
-  }),
-
-  ({ cardSource, cardTarget }) => ({
-    connectDragSource: cardSource.connect(),
-    connectDropTarget: cardTarget.connect(),
-    isDragging: cardSource.isDragging()
-  })
-)
+@DropTarget(ItemTypes.CARD, cardTarget, connect => ({
+  connectDropTarget: connect.dropTarget()
+}))
+@DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
+}))
 export default class Card {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
