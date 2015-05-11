@@ -34,9 +34,8 @@ export default class TargetBox extends Component {
     const { canDrop, isOver, connectDropTarget } = this.props;
     const isActive = canDrop && isOver;
 
-    return (
-      <div ref={connectDropTarget}
-           style={style}>
+    return connectDropTarget(
+      <div style={style}>
         {isActive ?
           'Release to drop' :
           'Drag item here'

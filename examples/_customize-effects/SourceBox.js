@@ -34,11 +34,11 @@ export default class SourceBox extends Component {
     const opacity = isDragging ? 0.4 : 1;
     const dropEffect = showCopyIcon ? 'copy' : 'move';
 
-    return (
-      <div style={{ ...style, opacity }}
-           ref={c => connectDragSource(c, { dropEffect })}>
+    return connectDragSource(
+      <div style={{ ...style, opacity }}>
         When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
-      </div>
+      </div>,
+      { dropEffect }
     );
   }
 }

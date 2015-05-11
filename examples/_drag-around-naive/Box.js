@@ -37,9 +37,8 @@ export default class Box {
       return null;
     }
 
-    return (
-      <div ref={connectDragSource}
-           style={{ ...style, left, top }}>
+    return connectDragSource(
+      <div style={{ ...style, left, top }}>
         {children}
       </div>
     );

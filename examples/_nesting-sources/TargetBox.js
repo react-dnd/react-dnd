@@ -48,9 +48,8 @@ class TargetBox extends Component {
       break;
     }
 
-    return (
-      <div ref={connectDropTarget}
-           style={{ ...style, backgroundColor, opacity }}>
+    return connectDropTarget(
+      <div style={{ ...style, backgroundColor, opacity }}>
 
         <p>Drop here.</p>
 

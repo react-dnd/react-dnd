@@ -30,9 +30,8 @@ export default class Box {
   render() {
     const { isDragging, connectDragSource } = this.props;
 
-    return (
-      <div ref={connectDragSource}
-           style={style}>
+    return connectDragSource(
+      <div style={style}>
         Drag me
       </div>
     );

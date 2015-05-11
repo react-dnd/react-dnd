@@ -81,9 +81,8 @@ export default class Container extends Component {
     const { connectDropTarget } = this.props;
     const { cards } = this.state;
 
-    return (
-      <div ref={connectDropTarget}
-           style={style}>
+    return connectDropTarget(
+      <div style={style}>
         {cards.map((card, index) => {
           return (
             <Card key={card.id}
