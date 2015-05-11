@@ -1,4 +1,4 @@
-React DnD is a set of React [higher-order components](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) to help you build complex drag and drop interfaces without coupling your components. It is a perfect fit for apps like Trello and Storify, where dragging transfers data between different parts of the application, and the components change their appearance and the application state in response to the drag and drop events.
+React DnD is a set of React [higher-order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) components to help you build complex drag and drop interfaces while keeping your components decoupled. It is a perfect fit for apps like Trello and Storify, where dragging transfers data between different parts of the application, and the components change their appearance and the application state in response to the drag and drop events.
 
 ## Features
 
@@ -78,9 +78,8 @@ var Card = React.createClass({
     var connectDragSource = this.props.connectDragSource;
     var text = this.props.text;
 
-    return (
-      <div ref={connectDragSource}
-           style={{ opacity: isDragging ? 0.5 : 1 }}>
+    return connectDragSource(
+      <div style={{ opacity: isDragging ? 0.5 : 1 }}>
         {text}
       </div>
     );
@@ -130,9 +129,8 @@ const propTypes = {
 class Card {
   render() {
     const { isDragging, connectDragSource, text } = this.props;
-    return (
-      <div ref={connectDragSource}
-           style={{ opacity: isDragging ? 0.5 : 1 }}>
+    return connectDragSource(
+      <div style={{ opacity: isDragging ? 0.5 : 1 }}>
         {text}
       </div>
     );
@@ -178,9 +176,8 @@ export default class Card {
 
   render() {
     const { isDragging, connectDragSource, text } = this.props;
-    return (
-      <div ref={connectDragSource}
-           style={{ opacity: isDragging ? 0.5 : 1 }}>
+    return connectDragSource(
+      <div style={{ opacity: isDragging ? 0.5 : 1 }}>
         {text}
       </div>
     );
@@ -188,3 +185,13 @@ export default class Card {
 }
 ```
 -------------------
+
+## Support and Contributions
+
+Issues and potential improvements are discussed on [Github](https://github.com/gaearon/react-dnd/issues).
+
+The [Gitter room](https://gitter.im/gaearon/react-dnd) is another good place to get support.
+
+## License
+
+React DnD is licensed as MIT. Use it as you will.
