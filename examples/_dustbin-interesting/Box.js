@@ -37,9 +37,8 @@ export default class Box extends Component {
     const { name, isDropped, isDragging, connectDragSource } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
-    return (
-      <div ref={connectDragSource}
-           style={{ ...style, opacity }}>
+    return connectDragSource(
+      <div style={{ ...style, opacity }}>
         {isDropped ?
           <s>{name}</s> :
           name

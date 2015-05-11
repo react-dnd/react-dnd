@@ -62,13 +62,10 @@ export default class Container extends Component {
     const { hideSourceOnDrag, connectDropTarget } = this.props;
     const { boxes} = this.state;
 
-    return (
-      <div ref={connectDropTarget}
-           style={styles}>
-
+    return connectDropTarget(
+      <div style={styles}>
         {Object.keys(boxes).map(key => {
           const { left, top, title } = boxes[key];
-
           return (
             <Box key={key}
                  id={key}
@@ -79,7 +76,6 @@ export default class Container extends Component {
             </Box>
           );
         })}
-
       </div>
     );
   }
