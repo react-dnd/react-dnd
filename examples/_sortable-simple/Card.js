@@ -49,11 +49,10 @@ export default class Card {
     const { text, isDragging, connectDragSource, connectDropTarget } = this.props;
     const opacity = isDragging ? 0 : 1;
 
-    return (
-      <div ref={c => { connectDragSource(c); connectDropTarget(c); }}
-           style={{ ...style, opacity }}>
+    return connectDragSource(connectDropTarget(
+      <div style={{ ...style, opacity }}>
         {text}
       </div>
-    );
+    ));
   }
 }

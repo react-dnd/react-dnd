@@ -58,11 +58,10 @@ export default class DraggableBox {
   }
 
   render() {
-    const { title, isDragging, connectDragSource } = this.props;
+    const { title, connectDragSource } = this.props;
 
-    return (
-      <div ref={connectDragSource}
-           style={getStyles(this.props)}>
+    return connectDragSource(
+      <div style={getStyles(this.props)}>
         <Box title={title} />
       </div>
     );
