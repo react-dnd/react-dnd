@@ -43,6 +43,9 @@ If a drag source is nested in another drag source, the innermost drag source of 
 
 -------------------
 ```js
+var React = require('react');
+var DragSource = require('react-dnd').DragSource;
+
 // Drag sources and drop targets only interact
 // if they have the same string type.
 // You want to keep types in a separate file with
@@ -111,6 +114,9 @@ module.exports = DragSource(Types.CARD, CardSource, collect)(Card);
 ```
 -------------------
 ```js
+import React from 'react';
+import { DragSource } from 'react-dnd';
+
 // Drag sources and drop targets only interact
 // if they have the same string type.
 // You want to keep types in a separate file with
@@ -178,6 +184,9 @@ export default DragSource(Types.CARD, CardSource, collect)(Card);
 ```
 -------------------
 ```js
+import React from 'react';
+import { DragSource } from 'react-dnd';
+
 // Drag sources and drop targets only interact
 // if they have the same string type.
 // You want to keep types in a separate file with
