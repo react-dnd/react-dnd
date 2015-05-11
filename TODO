@@ -5,3 +5,4 @@
 * add non-minified dist with warnings on
 * update all gists
 * update favicon
+* document native types (url, file)
