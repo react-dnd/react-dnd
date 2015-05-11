@@ -12,25 +12,21 @@ exports.Pages = {
 };
 
 exports.APIPages = {
-  DRAG_DROP: {
-    location: 'api-drag-drop.html',
-    title: '@DragDrop'
-  },
-  DRAG_DROP_CONTEXT: {
-    location: 'api-drag-drop-context.html',
-    title: '@DragDropContext'
-  },
-  DRAG_DROP_LAYER: {
-    location: 'api-drag-drop-layer.html',
-    title: '@DragDropLayer'
-  },
   DRAG_SOURCE: {
     location: 'api-drag-source.html',
-    title: 'Drag Source Spec'
+    title: 'DragSource'
   },
   DROP_TARGET: {
     location: 'api-drop-target.html',
-    title: 'Drop Target Spec'
+    title: 'DropTarget'
+  },
+  DRAG_LAYER: {
+    location: 'api-drag-layer.html',
+    title: 'DragLayer'
+  },
+  DRAG_DROP_CONTEXT: {
+    location: 'api-drag-drop-context.html',
+    title: 'DragDropContext'
   },
   DRAG_SOURCE_MONITOR: {
     location: 'api-drag-source-monitor.html',
@@ -50,4 +46,4 @@ exports.APIPages = {
   }
 };
 
-exports.DOCS_DEFAULT = exports.APIPages.DRAG_DROP;
+exports.DOCS_DEFAULT = exports.APIPages.DRAG_SOURCE;

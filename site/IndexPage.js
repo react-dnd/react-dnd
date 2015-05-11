@@ -14,14 +14,13 @@ var APIPages = Constants.APIPages;
 var Pages = Constants.Pages;
 
 var APIDocs = {
-  DRAG_DROP: require('../docs/DragDrop.md'),
-  DRAG_DROP_CONTEXT: require('../docs/DragDropContext.md'),
-  DRAG_DROP_LAYER: require('../docs/DragDropLayer.md'),
-  DRAG_DROP_MONITOR: require('../docs/DragDropMonitor.md'),
   DRAG_SOURCE: require('../docs/DragSource.md'),
   DRAG_SOURCE_MONITOR: require('../docs/DragSourceMonitor.md'),
   DROP_TARGET: require('../docs/DropTarget.md'),
   DROP_TARGET_MONITOR: require('../docs/DropTargetMonitor.md'),
+  DRAG_DROP_CONTEXT: require('../docs/DragDropContext.md'),
+  DRAG_LAYER: require('../docs/DragLayer.md'),
+  DRAG_DROP_MONITOR: require('../docs/DragDropMonitor.md'),
   HTML5: require('../docs/HTML5.md')
 };
 

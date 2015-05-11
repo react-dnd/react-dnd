@@ -16,15 +16,19 @@ HTML5 drag and drop has an awkward API full of pitfalls and browser inconsistenc
 
 ### It is extensible and testable
 
-React DnD uses the HTML5 drag and drop under the hood, but it also lets you supply a custom engine. You can create a custom DnD engine based on the touch events, the mouse events, or something else entirely. For example, a built-in simulation engine lets you test drag and drop interaction of your components in a Node environment.
+React DnD uses the HTML5 drag and drop under the hood, but it also lets you supply a custom “backend”. You can create a custom DnD backend based on the touch events, the mouse events, or something else entirely. For example, a built-in simulation backend lets you test drag and drop interaction of your components in a Node environment.
 
 ### It is ready for the future
 
 React DnD does not export mixins, and works equally great with any components, whether they are created using ES6 classes, `createClass` or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.
 
+## Touch Support
+
+React DnD does not work on mobile browsers yet because it currently relies on the HTML5 drag and drop API which no mobile browsers implement. However, because React DnD is extensible, it is possible to add touch support using a custom backend [with about 200 lines of code](https://github.com/gaearon/react-dnd/blob/ba8359ab3d7c76592357e078561d0e9d96afbcb0/src/backends/Touch.js). This is currently a proof of concept, but any contributions in this direction are welcome. Touch support will be a priority for the upcoming 1.x releases.
+
 ## Non-Goals
 
-React DnD gives a set of powerful primitives, but it does not contain any readymade components. It provides you a lower level of abstraction than [jQuery UI](https://jqueryui.com/) or [interact.js](http://interactjs.io/) and is focused on getting the drag and drop interaction right, leaving its visual aspects such as axis constraints and snapping to you. For example, React DnD doesn't plan to provide a `Sortable` component, but it makes it easy to build your own with any rendering customizations you need.
+React DnD gives a set of powerful primitives, but it does not contain any readymade components. It provides you a lower level of abstraction than [jQuery UI](https://jqueryui.com/) or [interact.js](http://interactjs.io/) and is focused on getting the drag and drop interaction right, leaving its visual aspects such as axis constraints or snapping to you. For example, React DnD doesn't plan to provide a `Sortable` component, but it makes it easy to build your own with any rendering customizations that you need.
 
 ## Installation
 
