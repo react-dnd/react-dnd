@@ -47,9 +47,8 @@ class SourceBox extends Component {
       break;
     }
 
-    return (
-      <div ref={connectDragSource}
-           style={{ ...style, backgroundColor, opacity }}>
+    return connectDragSource(
+      <div style={{ ...style, backgroundColor, opacity }}>
         <input type='checkbox'
                checked={forbidDrag}
                onChange={onToggleForbidDrag}>

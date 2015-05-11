@@ -42,12 +42,12 @@ export default class BoxWithHandle extends Component {
     const { isDragging, connectDragSource, connectDragPreview } = this.props;
     const opacity = isDragging ? 0.4 : 1;
 
-    return (
-      <div style={{ ...style, opacity }}
-           ref={connectDragPreview}>
+    return connectDragPreview(
+      <div style={{ ...style, opacity }}>
 
-        <div style={handleStyle}
-             ref={connectDragSource} />
+        {connectDragSource(
+          <div style={handleStyle} />
+        )}
 
         Drag me by the handle
       </div>

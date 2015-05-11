@@ -69,10 +69,8 @@ export default class Dustbin extends Component {
       backgroundColor = 'darkkhaki';
     }
 
-    return (
-      <div ref={connectDropTarget}
-           style={getStyle(backgroundColor)}>
-
+    return connectDropTarget(
+      <div style={getStyle(backgroundColor)}>
         {text}
 
         {hasDropped &&

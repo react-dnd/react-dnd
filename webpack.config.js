@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index',
+  entry: './src/index.umd',
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
@@ -16,9 +16,9 @@ module.exports = {
     }
   }],
   output: {
-    filename: 'dist/ReactDND.min.js',
+    filename: 'dist/ReactDnD.min.js',
     libraryTarget: 'umd',
-    library: 'ReactDND'
+    library: 'ReactDnD'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

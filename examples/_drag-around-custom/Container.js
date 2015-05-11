@@ -76,9 +76,8 @@ export default class Container extends Component {
     const { connectDropTarget } = this.props;
     const { boxes } = this.state;
 
-    return (
-      <div style={styles}
-           ref={connectDropTarget}>
+    return connectDropTarget(
+      <div style={styles}>
         {Object
           .keys(boxes)
           .map(key => this.renderBox(boxes[key], key))
