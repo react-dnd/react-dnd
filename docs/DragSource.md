@@ -346,7 +346,7 @@ type DragSourceSpec = {
 };
 
 // Depends on the backend you're using
-type DragSourceConnector = {
+type HTML5BackendDragSourceConnector = {
   dragSource: () => Function,
   dragPreview: () => Function
 };
@@ -359,7 +359,7 @@ DragSource: (
   type: DragSourceType,
   spec: DragSourceSpec,
   collect: (
-    connect: DragSourceConnector,
+    connect: HTML5BackendDragSourceConnector,
     monitor: DragSourceMonitor
   ) => Object,
   options: ?DragSourceOptions
