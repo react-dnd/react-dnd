@@ -1,10 +1,7 @@
-"use strict";
+import React from 'react';
+import './Cover.less';
 
-var React = require('react');
-
-require('./Cover.less');
-
-var Cover = React.createClass({
+export default class Cover {
   render() {
     return (
       <div className="Cover">
@@ -15,7 +12,5 @@ var Cover = React.createClass({
         </div>
       </div>
     );
-  },
-});
-
-module.exports = Cover;
+  }
+}

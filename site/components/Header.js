@@ -1,17 +1,12 @@
-"use strict";
+import React, { PropTypes } from 'react';
+import NavBar from './NavBar';
+import Cover from './Cover';
+import './Header.less';
 
-var React = require('react');
-var PropTypes = React.PropTypes;
-
-var NavBar = require('./NavBar');
-var Cover = require('./Cover');
-
-require('./Header.less');
-
-var Header = React.createClass({
-  propTypes: {
+export default class Header {
+  static propTypes = {
     showCover: React.PropTypes.bool
-  },
+  };
 
   render() {
     return (
@@ -23,7 +18,5 @@ var Header = React.createClass({
         }
       </header>
     );
-  },
-});
-
-module.exports = Header;
+  }
+}

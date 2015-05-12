@@ -1,6 +1,4 @@
-"use strict";
-
-exports.Pages = {
+export const Pages = {
   HOME: {
     location: 'index.html',
     title: 'Home'
@@ -11,7 +9,7 @@ exports.Pages = {
   }
 };
 
-exports.APIPages = {
+export const APIPages = {
   DRAG_SOURCE: {
     location: 'api-drag-source.html',
     title: 'DragSource'
@@ -46,4 +44,4 @@ exports.APIPages = {
   }
 };
 
-exports.DOCS_DEFAULT = exports.APIPages.DRAG_SOURCE;
+export const DOCS_DEFAULT = APIPages.DRAG_SOURCE;
