@@ -1,19 +1,12 @@
-"use strict";
+import './base.less';
+import Constants, { APIPages, Pages } from './Constants';
+import HomePage from './pages/HomePage';
+import APIPage from './pages/APIPage';
+import ExamplesPage from './pages/ExamplesPage';
+import React, { Component } from 'react';
+import faviconURL from './images/favicon.png';
 
-require('./base.less');
-
-var Constants = require('./Constants');
-var HomePage = require('./pages/HomePage');
-var APIPage = require('./pages/APIPage');
-var ExamplesPage = require('./pages/ExamplesPage');
-var React = require('react');
-
-var faviconURL = require('./images/favicon.png');
-
-var APIPages = Constants.APIPages;
-var Pages = Constants.Pages;
-
-var APIDocs = {
+const APIDocs = {
   DRAG_SOURCE: require('../docs/DragSource.md'),
   DRAG_SOURCE_MONITOR: require('../docs/DragSourceMonitor.md'),
   DROP_TARGET: require('../docs/DropTarget.md'),
@@ -24,29 +17,28 @@ var APIDocs = {
   HTML5: require('../docs/HTML5.md')
 };
 
-var IndexPage = React.createClass({
-  statics: {
-    getDoctype() {
-      return '<!doctype html>';
-    },
+export default class IndexPage extends Component {
+  static getDoctype() {
+    return '<!doctype html>';
+  }
 
-    renderToString(props) {
-      return IndexPage.getDoctype() +
-        React.renderToString(<IndexPage {...props} />);
-    },
-  },
+  static renderToString(props) {
+    return IndexPage.getDoctype() +
+           React.renderToString(<IndexPage {...props} />);
+  }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       renderPage: !this.props.devMode
     };
-  },
+  }
 
   render() {
     // Dump out our current props to a global object via a script tag so
     // when initialising the browser environment we can bootstrap from the
     // same props as what each page was rendered with.
-    var browserInitScriptObj = {
+    const browserInitScriptObj = {
       __html: 'window.INITIAL_PROPS = ' + JSON.stringify(this.props) + ';\n'
     };
 
@@ -68,7 +60,7 @@ var IndexPage = React.createClass({
         </body>
       </html>
     );
-  },
+  }
 
   renderPage() {
     switch (this.props.location) {
@@ -78,10 +70,10 @@ var IndexPage = React.createClass({
       return <ExamplesPage />;
     }
 
-    var apiKeys = Object.keys(APIPages);
-    for (var i = 0; i < apiKeys.length; i++) {
-      var key = apiKeys[i];
-      var page = APIPages[key];
+    const apiKeys = Object.keys(APIPages);
+    for (let i = 0; i < apiKeys.length; i++) {
+      const key = apiKeys[i];
+      const page = APIPages[key];
 
       if (this.props.location === page.location) {
         return <APIPage example={page}
@@ -94,7 +86,7 @@ var IndexPage = React.createClass({
         JSON.stringify(this.props.location) +
         ' not found.'
     );
-  },
+  }
 
   componentDidMount() {
     if (!this.state.renderPage) {
@@ -103,6 +95,4 @@ var IndexPage = React.createClass({
       });
     }
   }
-});
-
-module.exports = IndexPage;
+}

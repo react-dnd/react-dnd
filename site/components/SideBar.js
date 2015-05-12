@@ -1,11 +1,8 @@
-"use strict";
+import React from 'react';
+import Constants from '../Constants';
+import './SideBar.less';
 
-var React = require('react');
-var Constants = require('../Constants');
-
-require('./SideBar.less');
-
-var SideBar = React.createClass({
+export default class SideBar {
   render() {
     return (
       <div className="SideBar">
@@ -20,11 +17,12 @@ var SideBar = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
   renderLink(linkName, linkUrl) {
-    var arrow = <span className="arrowBullet" />;
-    var linkClass = 'SideBar-item';
+    const arrow = <span className="arrowBullet" />;
+
+    let linkClass = 'SideBar-item';
     if (this.props.example.location === linkUrl) {
       linkClass += ' SideBar-item--selected';
     }
@@ -38,6 +36,4 @@ var SideBar = React.createClass({
       </h2>
     );
   }
-});
-
-module.exports = SideBar;
+}

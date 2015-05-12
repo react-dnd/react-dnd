@@ -1,14 +1,10 @@
-"use strict";
+import React from 'react';
+import Header from '../components/Header';
+import PageBody from '../components/PageBody';
+import StaticHTMLBlock from '../components/StaticHTMLBlock';
+import IndexHTML from '../../docs/index.md';
 
-var React = require('react');
-
-var Header = require('../components/Header');
-var PageBody = require('../components/PageBody');
-var StaticHTMLBlock = require('../components/StaticHTMLBlock');
-
-var IndexHTML = require('../../docs/index.md');
-
-var HomePage = React.createClass({
+export default class HomePage {
   render() {
     return (
       <div>
@@ -20,6 +16,4 @@ var HomePage = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = HomePage;
+}

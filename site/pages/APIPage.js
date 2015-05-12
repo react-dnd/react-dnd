@@ -1,15 +1,11 @@
-"use strict";
+import React from 'react';
+import Header from '../components/Header';
+import PageBody from '../components/PageBody';
+import SideBar from '../components/SideBar';
+import StaticHTMLBlock from '../components/StaticHTMLBlock';
+import { APIPages } from '../Constants';
 
-var React = require('react');
-
-var Header = require('../components/Header');
-var PageBody = require('../components/PageBody');
-var SideBar = require('../components/SideBar');
-var StaticHTMLBlock = require('../components/StaticHTMLBlock');
-
-var Constants = require('../Constants');
-
-var APIPage = React.createClass({
+export default class APIPage {
   render() {
     return (
       <div>
@@ -18,7 +14,7 @@ var APIPage = React.createClass({
         <PageBody>
           <SideBar
             title="API"
-            pages={Constants.APIPages}
+            pages={APIPages}
             example={this.props.example}
           />
 
@@ -27,6 +23,4 @@ var APIPage = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = APIPage;
+}

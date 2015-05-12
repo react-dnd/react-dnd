@@ -1,10 +1,7 @@
-"use strict";
+import React from 'react';
+import './PageBody.less';
 
-var React = require('react');
-
-require('./PageBody.less');
-
-var PageBody = React.createClass({
+export default class PageBody {
   render() {
     var {html, ...props} = this.props;
     return (
@@ -14,7 +11,5 @@ var PageBody = React.createClass({
         </div>
       </div>
     );
-  },
-});
-
-module.exports = PageBody;
+  }
+}

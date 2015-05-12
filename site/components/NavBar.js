@@ -1,15 +1,12 @@
-"use strict";
+import React from 'react';
+import { DOCS_DEFAULT, Pages } from '../Constants';
+import './NavBar.less';
 
-var React = require('react');
-var Constants = require('../Constants');
+const GITHUB_URL = 'https://github.com/gaearon/react-dnd';
+const DOCS_LOCATION = DOCS_DEFAULT.location;
+const EXAMPLES_LOCATION = Pages.EXAMPLES.location;
 
-require('./NavBar.less');
-
-var GITHUB_URL = 'https://github.com/gaearon/react-dnd';
-var DOCS_LOCATION = Constants.DOCS_DEFAULT.location;
-var EXAMPLES_LOCATION = Constants.Pages.EXAMPLES.location;
-
-var NavBar = React.createClass({
+export default class NavBar {
   render() {
     return (
       <div className="NavBar">
@@ -27,6 +24,4 @@ var NavBar = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = NavBar;
+}

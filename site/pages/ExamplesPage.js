@@ -1,15 +1,11 @@
-"use strict";
+import React from 'react';
+import Header from '../components/Header';
+import PageBody from '../components/PageBody';
+import SideBar from '../components/SideBar';
+import StaticHTMLBlock from '../components/StaticHTMLBlock';
+import Constants from '../Constants';
 
-var React = require('react');
-
-var Header = require('../components/Header');
-var PageBody = require('../components/PageBody');
-var SideBar = require('../components/SideBar');
-var StaticHTMLBlock = require('../components/StaticHTMLBlock');
-
-var Constants = require('../Constants');
-
-var ExamplesPage = React.createClass({
+export default class ExamplesPage {
   render() {
     return (
       <div>
@@ -20,6 +16,4 @@ var ExamplesPage = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = ExamplesPage;
+}
