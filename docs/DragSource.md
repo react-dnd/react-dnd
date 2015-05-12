@@ -2,6 +2,53 @@ DragSource (higher-order component)
 ===================
 
 Wrap your component with `DragSource` to make it dragggable.
+It accepts three required parameters:
+
+* a constant uniquely identifying the kind of data being dragged;
+* a specification object that lets you react to the drag events;
+* a function collecting the props to inject into the draggable component.
+
+They are explored in detail below.
+
+### Usage
+
+-------------------
+```js
+var DragSource = require('react-dnd').DragSource;
+
+// ...
+
+var YourReactClass = React.createClass({
+  // ...
+});
+
+module.exports = DragSource(type, spec, collect)(YourReactClass);
+```
+-------------------
+```js
+import { DragSource } from 'react-dnd';
+
+// ...
+
+class YourReactClass {
+  // ...
+}
+
+export default DragSource(type, spec, collect)(YourReactClass);
+```
+-------------------
+```js
+import { DragSource } from 'react-dnd';
+
+// ...
+
+@DragSource(type, spec, collect)
+export default class YourReactClass {
+  // ...
+}
+```
+-------------------
+
 
 ### Parameters
 
@@ -17,7 +64,7 @@ Wrap your component with `DragSource` to make it dragggable.
 
 The second `spec` parameter must be a plain object implementing the drag source specification. Below is the list of all methods that it may have.
 
-#### Methods
+#### Specification Methods
 
 * **`beginDrag(props, monitor, component)`**: Required. When the dragging starts, `beginDrag` is called. You must return a plain JavaScript object describing the data being dragged. What you return is the *only* information available to the drop targets about the drag source so it's important to pick the *minimal* data they need to know. You may be tempted to put a reference to the `component` into it, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ id: props.id }` from this method.
 
@@ -27,13 +74,31 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 * **`isDragging(props, monitor)`**: Optional. By default, only the drag source that started the drag operation is considered to be dragging. You can override this behavior by defining a custom `isDragging` method. It might return something like `props.id === monitor.getItem().id`. Do this if the original component may be unmounted during the dragging and later “resurrected” with a different parent. For example, when moving a card across the lists in a Kanban board, you want it to retain the dragged appearance—even though technically, the component gets unmounted and a different one gets mounted every time you move it to another list. *Note: You may not call `monitor.isDragging()` inside this method.*
 
-#### Method Parameters
+#### Specification Method Parameters
 
 * **`props`**: Your component's current props.
 
 * **`monitor`**: An instance of [`DragSourceMonitor`](/api-drag-source-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Refer to the [`DragSourceMonitor` documentation](api-drag-source-monitor.html) for a complete list of `monitor` methods.
 
 * **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `isDragging` and `canDrag` because the instance may not be available by the time they are called. If you want these methods to depend on the component's state, consider lifting the state to the parent component, so that you could just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
+
+### Writing the `collect` Function
+
+Just specifying the drag source `type` and `spec` is not quite enough.  
+There's still a few more things we need to take care of:
+
+* attach React DnD event handlers to some node in the component;
+* pass some knowledge about the dragging state to our component.
+
+All communication between React components happens via props, so it makes sense that React DnD injects special props into your component. However it gives you the freedom to name them and decide what props your component will receive.
+
+In your `collect` function, you receive a `connect` object that lets you connect nodes to the DnD backend you're using, and a `monitor` object to query information about the drag state. You should return a plain object of props to inject into your component from that function.
+
+#### Parameters
+
+* `connect`: An object. Its exact list of methods may vary by the backend you use, but with the default [HTML5 backend](/api-html5.html), it will have `dragSource()` and `dragPreview()` methods. These methods return the functions you need to pass as props to your component. If you return `{ connectDragSource: connect.dragSource() }` from your `collect` function, the component will receive `connectDragSource` as a prop and can then use it to mark the relevant node inside its `render()` function as draggable: `return this.props.connectDragSource(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Please refer to your backend documentation ([HTML5 backend](/api-html5.html) by default) to learn about the available `connect` methods and their arguments.
+
+* `monitor`: An instance of [`DragSourceMonitor`](/api-drag-source-monitor.html). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Please refer to the [`DragSourceMonitor` documentation](api-drag-source-monitor.html) for a complete list of `monitor` methods.
 
 ### Nesting Behavior
 
@@ -58,7 +123,7 @@ var Types = {
  * Specifies the drag source contract.
  * Only `beginDrag` function is required.
  */
-var CardSource = {
+var cardSource = {
   beginDrag: function (props) {
     // Specify the data describing dragged item
     return {
@@ -110,7 +175,7 @@ var Card = React.createClass({
   }
 });
 
-module.exports = DragSource(Types.CARD, CardSource, collect)(Card);
+module.exports = DragSource(Types.CARD, cardSource, collect)(Card);
 ```
 -------------------
 ```js
@@ -129,7 +194,7 @@ const Types = {
  * Specifies the drag source contract.
  * Only `beginDrag` function is required.
  */
-const CardSource = {
+const cardSource = {
   beginDrag(props) {
     // Specify the data describing dragged item
     return {
@@ -180,7 +245,7 @@ class Card {
   }
 }
 
-export default DragSource(Types.CARD, CardSource, collect)(Card);
+export default DragSource(Types.CARD, cardSource, collect)(Card);
 ```
 -------------------
 ```js
@@ -199,7 +264,7 @@ const Types = {
  * Specifies the drag source contract.
  * Only `beginDrag` function is required.
  */
-const CardSource = {
+const cardSource = {
   beginDrag(props) {
     // Specify the data describing dragged item
     return {
@@ -219,7 +284,7 @@ const CardSource = {
   }
 };
 
-@DragSource(Types.CARD, CardSource, (connect, monitor) => ({
+@DragSource(Types.CARD, cardSource, (connect, monitor) => ({
   // Call this function inside render()
   // to let React DnD handle the drag events:
   connectDragSource: connect.dragSource(),
