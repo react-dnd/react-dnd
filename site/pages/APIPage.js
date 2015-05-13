@@ -13,8 +13,7 @@ export default class APIPage {
 
         <PageBody>
           <SideBar
-            title="API"
-            pages={APIPages}
+            groups={APIPages}
             example={this.props.example}
           />
 
