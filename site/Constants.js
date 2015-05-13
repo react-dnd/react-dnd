@@ -27,10 +27,6 @@ export const APIPages = [{
     DRAG_DROP_CONTEXT: {
       location: 'api-drag-drop-context.html',
       title: 'DragDropContext'
-    },
-    HTML5: {
-      location: 'api-html5.html',
-      title: 'HTML5'
     }
   }
 }, {
@@ -59,6 +55,14 @@ export const APIPages = [{
     DROP_TARGET_CONNECTOR: {
       location: 'api-drop-target-connector.html',
       title: 'DropTargetConnector'
+    }
+  }
+}, {
+  title: 'Backends',
+  pages: {
+    HTML5: {
+      location: 'api-html5.html',
+      title: 'HTML5'
     }
   }
 }];
