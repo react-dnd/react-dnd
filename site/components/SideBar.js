@@ -1,5 +1,4 @@
 import React from 'react';
-import Constants from '../Constants';
 import './SideBar.less';
 
 export default class SideBar {
@@ -7,30 +6,35 @@ export default class SideBar {
     return (
       <div className="SideBar">
         <div className="SideBar-content">
-          <h4 className="SideBar-groupTitle">{this.props.title}</h4>
-          {Object.keys(this.props.pages).map(
-              page => this.renderLink(
-                this.props.pages[page].title,
-                this.props.pages[page].location
-              )
-            )}
+          {this.props.groups.map(this.renderGroup, this)}
         </div>
       </div>
     );
   }
 
-  renderLink(linkName, linkUrl) {
+  renderGroup({ title, pages }) {
+    return (
+      <div className="SideBar-group">
+        <h4 className="SideBar-groupTitle">
+          {title}
+        </h4>
+        {Object.keys(pages).map(key => this.renderLink(pages[key]))}
+      </div>
+    );
+  }
+
+  renderLink({ title, location }) {
     const arrow = <span className="arrowBullet" />;
 
     let linkClass = 'SideBar-item';
-    if (this.props.example.location === linkUrl) {
+    if (this.props.example.location === location) {
       linkClass += ' SideBar-item--selected';
     }
 
     return (
-      <h2 key={linkName}>
-        <a href={linkUrl} target="_self" className={linkClass}>
-          <span className="SideBar-itemText">{linkName}</span>
+      <h2 key={title}>
+        <a href={location} target="_self" className={linkClass}>
+          <span className="SideBar-itemText">{title}</span>
           {arrow}
         </a>
       </h2>

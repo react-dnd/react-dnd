@@ -9,6 +9,7 @@ var path = require('path');
 var glob = require('glob');
 var Constants = require('../site/Constants');
 var renderPath = require('../__site_prerender__/renderPath');
+var flatten = require('lodash/array/flatten');
 
 var sitePath = path.join(__dirname, '../__site__');
 if (!fs.existsSync(sitePath)) {
@@ -38,10 +39,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-var locations = [
-  Constants.APIPages,
+var locations = flatten([
+  Constants.APIPages.map(function (group) {
+    return group.pages;
+  }),
   Constants.Pages
-].reduce(function(paths, pages) {
+]).reduce(function(paths, pages) {
   return paths.concat(
     Object.keys(pages).map(function(key) {
       return pages[key].location;

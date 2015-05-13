@@ -72,14 +72,18 @@ export default class IndexPage extends Component {
       return <ExamplesPage />;
     }
 
-    const apiKeys = Object.keys(APIPages);
-    for (let i = 0; i < apiKeys.length; i++) {
-      const key = apiKeys[i];
-      const page = APIPages[key];
+    for (let groupIndex in APIPages) {
+      const group = APIPages[groupIndex];
+      const pageKeys = Object.keys(group.pages);
 
-      if (this.props.location === page.location) {
-        return <APIPage example={page}
-                        html={APIDocs[key]} />;
+      for (let i = 0; i < pageKeys.length; i++) {
+        const key = pageKeys[i];
+        const page = group.pages[key];
+
+        if (this.props.location === page.location) {
+          return <APIPage example={page}
+                          html={APIDocs[key]} />;
+        }
       }
     }
 
