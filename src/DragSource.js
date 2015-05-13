@@ -4,13 +4,14 @@ import shallowEqualScalar from './utils/shallowEqualScalar';
 import invariant from 'invariant';
 import isPlainObject from 'lodash/lang/isPlainObject';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
-import wrapComponent from './wrapComponent';
+import decorateHandler from './decorateHandler';
 import registerSource from './registerSource';
 import createSourceFactory from './createSourceFactory';
 import createSourceMonitor from './createSourceMonitor';
+import createSourceConnector from './createSourceConnector';
 import isValidType from './utils/isValidType';
 
-export default function decorateSource(type, spec, collect, options = {}) {
+export default function DragSource(type, spec, collect, options = {}) {
   checkDecoratorArguments('DragSource', 'type, spec, collect[, options]', ...arguments);
   let getType = type;
   if (typeof type !== 'function') {
@@ -45,13 +46,14 @@ export default function decorateSource(type, spec, collect, options = {}) {
     collect
   );
 
-  return function wrapSource(DecoratedComponent) {
-    return wrapComponent({
+  return function decorateSource(DecoratedComponent) {
+    return decorateHandler({
       connectBackend: (backend, sourceId) => backend.connectDragSource(sourceId),
       containerDisplayName: 'DragSource',
       createHandler: createSource,
       registerHandler: registerSource,
       createMonitor: createSourceMonitor,
+      createConnector: createSourceConnector,
       DecoratedComponent,
       getType,
       collect,
