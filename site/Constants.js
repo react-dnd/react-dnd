@@ -26,9 +26,17 @@ export const APIPages = {
     location: 'api-drag-drop-context.html',
     title: 'DragDropContext'
   },
+  DRAG_SOURCE_CONNECTOR: {
+    location: 'api-drag-source-connector.html',
+    title: 'DragSourceConnector'
+  },
   DRAG_SOURCE_MONITOR: {
     location: 'api-drag-source-monitor.html',
     title: 'DragSourceMonitor'
+  },
+  DROP_TARGET_CONNECTOR: {
+    location: 'api-drop-target-connector.html',
+    title: 'DropTargetConnector'
   },
   DROP_TARGET_MONITOR: {
     location: 'api-drop-target-monitor.html',
