@@ -7,16 +7,18 @@ import React, { Component } from 'react';
 import faviconURL from './images/favicon.png';
 
 const APIDocs = {
-  DRAG_SOURCE: require('../docs/top-level-api/DragSource.md'),
-  DRAG_SOURCE_MONITOR: require('../docs/monitoring-state/DragSourceMonitor.md'),
-  DRAG_SOURCE_CONNECTOR: require('../docs/connecting-to-dom/DragSourceConnector.md'),
-  DROP_TARGET: require('../docs/top-level-api/DropTarget.md'),
-  DROP_TARGET_CONNECTOR: require('../docs/connecting-to-dom/DropTargetConnector.md'),
-  DROP_TARGET_MONITOR: require('../docs/monitoring-state/DropTargetMonitor.md'),
-  DRAG_DROP_CONTEXT: require('../docs/top-level-api/DragDropContext.md'),
-  DRAG_LAYER: require('../docs/top-level-api/DragLayer.md'),
-  DRAG_DROP_MONITOR: require('../docs/monitoring-state/DragDropMonitor.md'),
-  HTML5: require('../docs/backends/HTML5.md')
+  OVERVIEW: require('../docs/00 Quick Start/Overview.md'),
+  TUTORIAL: require('../docs/00 Quick Start/Tutorial.md'),
+  DRAG_SOURCE: require('../docs/01 Top Level API/DragSource.md'),
+  DRAG_SOURCE_MONITOR: require('../docs/03 Monitoring State/DragSourceMonitor.md'),
+  DRAG_SOURCE_CONNECTOR: require('../docs/02 Connecting to DOM/DragSourceConnector.md'),
+  DROP_TARGET: require('../docs/01 Top Level API/DropTarget.md'),
+  DROP_TARGET_CONNECTOR: require('../docs/02 Connecting to DOM/DropTargetConnector.md'),
+  DROP_TARGET_MONITOR: require('../docs/03 Monitoring State/DropTargetMonitor.md'),
+  DRAG_DROP_CONTEXT: require('../docs/01 Top Level API/DragDropContext.md'),
+  DRAG_LAYER: require('../docs/01 Top Level API/DragLayer.md'),
+  DRAG_DROP_MONITOR: require('../docs/03 Monitoring State/DragDropMonitor.md'),
+  HTML5: require('../docs/04 Backends/HTML5.md')
 };
 
 export default class IndexPage extends Component {

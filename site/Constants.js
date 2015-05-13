@@ -10,61 +10,73 @@ export const Pages = {
 };
 
 export const APIPages = [{
-  title: 'Top-Level API',
+  title: 'Quick Start',
   pages: {
-    DRAG_SOURCE: {
-      location: 'api-drag-source.html',
-      title: 'DragSource'
+    OVERVIEW: {
+      location: 'docs-overview.html',
+      title: 'Overview'
     },
-    DROP_TARGET: {
-      location: 'api-drop-target.html',
-      title: 'DropTarget'
-    },
-    DRAG_LAYER: {
-      location: 'api-drag-layer.html',
-      title: 'DragLayer'
-    },
-    DRAG_DROP_CONTEXT: {
-      location: 'api-drag-drop-context.html',
-      title: 'DragDropContext'
+    TUTORIAL: {
+      location: 'docs-tutorial.html',
+      title: 'Tutorial'
     }
   }
 }, {
-  title: 'Monitoring State',
+  title: 'Top-Level API',
   pages: {
-    DRAG_SOURCE_MONITOR: {
-      location: 'api-drag-source-monitor.html',
-      title: 'DragSourceMonitor'
+    DRAG_SOURCE: {
+      location: 'docs-drag-source.html',
+      title: 'DragSource'
     },
-    DROP_TARGET_MONITOR: {
-      location: 'api-drop-target-monitor.html',
-      title: 'DropTargetMonitor'
+    DROP_TARGET: {
+      location: 'docs-drop-target.html',
+      title: 'DropTarget'
     },
-    DRAG_DROP_MONITOR: {
-      location: 'api-drag-drop-monitor.html',
-      title: 'DragDropMonitor'
+    DRAG_LAYER: {
+      location: 'docs-drag-layer.html',
+      title: 'DragLayer'
+    },
+    DRAG_DROP_CONTEXT: {
+      location: 'docs-drag-drop-context.html',
+      title: 'DragDropContext'
     }
   }
 }, {
   title: 'Connecting to DOM',
   pages: {
     DRAG_SOURCE_CONNECTOR: {
-      location: 'api-drag-source-connector.html',
+      location: 'docs-drag-source-connector.html',
       title: 'DragSourceConnector'
     },
     DROP_TARGET_CONNECTOR: {
-      location: 'api-drop-target-connector.html',
+      location: 'docs-drop-target-connector.html',
       title: 'DropTargetConnector'
+    }
+  }
+}, {
+  title: 'Monitoring State',
+  pages: {
+    DRAG_SOURCE_MONITOR: {
+      location: 'docs-drag-source-monitor.html',
+      title: 'DragSourceMonitor'
+    },
+    DROP_TARGET_MONITOR: {
+      location: 'docs-drop-target-monitor.html',
+      title: 'DropTargetMonitor'
+    },
+    DRAG_DROP_MONITOR: {
+      location: 'docs-drag-drop-monitor.html',
+      title: 'DragDropMonitor'
     }
   }
 }, {
   title: 'Backends',
   pages: {
     HTML5: {
-      location: 'api-html5.html',
+      location: 'docs-html5.html',
       title: 'HTML5'
     }
   }
 }];
 
-export const DOCS_DEFAULT = APIPages[0].pages.DRAG_SOURCE;
+export const DOCS_DEFAULT = APIPages[0].pages.OVERVIEW;
