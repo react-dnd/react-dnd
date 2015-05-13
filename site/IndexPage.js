@@ -9,7 +9,9 @@ import faviconURL from './images/favicon.png';
 const APIDocs = {
   DRAG_SOURCE: require('../docs/DragSource.md'),
   DRAG_SOURCE_MONITOR: require('../docs/DragSourceMonitor.md'),
+  DRAG_SOURCE_CONNECTOR: require('../docs/DragSourceConnector.md'),
   DROP_TARGET: require('../docs/DropTarget.md'),
+  DROP_TARGET_CONNECTOR: require('../docs/DropTargetConnector.md'),
   DROP_TARGET_MONITOR: require('../docs/DropTargetMonitor.md'),
   DRAG_DROP_CONTEXT: require('../docs/DragDropContext.md'),
   DRAG_LAYER: require('../docs/DragLayer.md'),
