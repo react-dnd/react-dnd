@@ -1,8 +1,8 @@
-DragSource (higher-order component)
+DragSource
 ===================
 
 Wrap your component with `DragSource` to make it dragggable.
-It accepts three required parameters:
+It is a higher-order component that accepts three required parameters:
 
 * a constant uniquely identifying the kind of data being dragged;
 * a specification object that lets you react to the drag events;
@@ -10,42 +10,30 @@ It accepts three required parameters:
 
 They are explored in detail below.
 
-### Usage
+>Note: `DragSource` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragSource` usable as an ES7 decorator. If this sounds like mumbo jumbo, please refer to the [Overview](/docs-overview.html).
+
+### Signature
 
 -------------------
 ```js
 var DragSource = require('react-dnd').DragSource;
 
-// ...
-
-var YourReactClass = React.createClass({
-  // ...
-});
-
-module.exports = DragSource(type, spec, collect)(YourReactClass);
+var YourComponent = React.createClass({ ... });
+module.exports = DragSource(type, spec, collect)(YourComponent);
 ```
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
 
-// ...
-
-class YourReactClass {
-  // ...
-}
-
-export default DragSource(type, spec, collect)(YourReactClass);
+class YourComponent { ... }
+export default DragSource(type, spec, collect)(YourComponent);
 ```
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
-
-// ...
 
 @DragSource(type, spec, collect)
-export default class YourReactClass {
-  // ...
-}
+export default class YourComponent { ... }
 ```
 -------------------
 
@@ -78,7 +66,7 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 * **`props`**: Your component's current props.
 
-* **`monitor`**: An instance of [`DragSourceMonitor`](/api-drag-source-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Refer to the [`DragSourceMonitor` documentation](api-drag-source-monitor.html) for a complete list of `monitor` methods.
+* **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Refer to the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for a complete list of `monitor` methods.
 
 * **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `isDragging` and `canDrag` because the instance may not be available by the time they are called. If you want these methods to depend on the component's state, consider lifting the state to the parent component, so that you could just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
 
@@ -96,9 +84,9 @@ In your `collect` function, you receive a `connect` object that lets you connect
 
 #### Parameters
 
-* **`connect`**: An object. Its exact list of methods may vary by the backend you use, but with the default [HTML5 backend](/api-html5.html), it will have `dragSource()` and `dragPreview()` methods. These methods return the functions you need to pass as props to your component. If you return `{ connectDragSource: connect.dragSource() }` from your `collect` function, the component will receive `connectDragSource` as a prop and can then use it to mark the relevant node inside its `render()` function as draggable: `return this.props.connectDragSource(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Please refer to your backend documentation ([HTML5 backend](/api-html5.html) by default) to learn about the available `connect` methods and their arguments.
+* **`connect`**: An instance of [`DragSourceConnector`](/docs-drag-source-connector.html). It has two methods: `dragPreview()` and `dragSource()`. Of them, `dragSource()` is the one you'll use the most. It returns a function you need to pass down to your component to connect the source DOM node to the React DnD backend. If you return something like `{ connectDragSource: connect.dragSource() }` from your `collect` function, the component will receive `connectDragSource` as a prop and can then use it to mark the relevant node inside its `render()` function as draggable: `return this.props.connectDragSource(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Please refer to the [`DragSourceConnector` documentation](docs-drag-source-connect.html) for more details.
 
-* **`monitor`**: An instance of [`DragSourceMonitor`](/api-drag-source-monitor.html). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Please refer to the [`DragSourceMonitor` documentation](api-drag-source-monitor.html) for a complete list of `monitor` methods.
+* **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Please refer to the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for more details.
 
 ### Nesting Behavior
 
@@ -345,12 +333,6 @@ type DragSourceSpec = {
   ) => boolean;
 };
 
-// Depends on the backend you're using
-type HTML5BackendDragSourceConnector = {
-  dragSource: () => Function,
-  dragPreview: () => Function
-};
-
 type DragSourceOptions = {
   arePropsEqual: ?(Object, Object) => boolean
 };
@@ -359,7 +341,7 @@ DragSource: (
   type: DragSourceType,
   spec: DragSourceSpec,
   collect: (
-    connect: HTML5BackendDragSourceConnector,
+    connect: DragSourceConnector,
     monitor: DragSourceMonitor
   ) => Object,
   options: ?DragSourceOptions
