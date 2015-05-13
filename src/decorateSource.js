@@ -8,6 +8,7 @@ import wrapComponent from './wrapComponent';
 import registerSource from './registerSource';
 import createSourceFactory from './createSourceFactory';
 import createSourceMonitor from './createSourceMonitor';
+import createSourceConnector from './createSourceConnector';
 import isValidType from './utils/isValidType';
 
 export default function decorateSource(type, spec, collect, options = {}) {
@@ -52,6 +53,7 @@ export default function decorateSource(type, spec, collect, options = {}) {
       createHandler: createSource,
       registerHandler: registerSource,
       createMonitor: createSourceMonitor,
+      createConnector: createSourceConnector,
       DecoratedComponent,
       getType,
       collect,
