@@ -4,13 +4,13 @@ import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import isPlainObject from 'lodash/lang/isPlainObject';
 import invariant from 'invariant';
-import createBackendConnector from './createBackendConnector';
+import bindConnector from './bindConnector';
 
-export default function wrapComponent({
+export default function decorateHandler({
   DecoratedComponent,
   createHandler,
   createMonitor,
-  connectBackend,
+  createConnector,
   registerHandler,
   containerDisplayName,
   getType,
@@ -54,8 +54,8 @@ export default function wrapComponent({
       );
 
       this.manager = this.context.dragDropManager;
-      this.monitor = createMonitor(this.manager);
-      this.handler = createHandler(this.monitor);
+      this.handlerMonitor = createMonitor(this.manager);
+      this.handler = createHandler(this.handlerMonitor);
       this.disposable = new SerialDisposable();
 
       this.receiveProps(props);
@@ -94,14 +94,11 @@ export default function wrapComponent({
         this.manager
       );
 
+      const connector = createConnector(this.manager.getBackend());
       const {
-        connector,
+        handlerConnector,
         disposable: connectorDisposable
-      } = createBackendConnector(
-        handlerId,
-        connectBackend,
-        this.manager
-      );
+      } = bindConnector(connector, handlerId);
 
       const globalMonitor = this.manager.getMonitor();
       const unsubscribe = globalMonitor.subscribeToStateChange(
@@ -117,8 +114,8 @@ export default function wrapComponent({
         )
       );
 
-      this.monitor.receiveHandlerId(handlerId);
-      this.connector = connector;
+      this.handlerMonitor.receiveHandlerId(handlerId);
+      this.handlerConnector = handlerConnector;
     }
 
     handleChange() {
@@ -133,7 +130,7 @@ export default function wrapComponent({
     }
 
     getCurrentState() {
-      const nextState = collect(this.connector, this.monitor);
+      const nextState = collect(this.handlerConnector, this.handlerMonitor);
       if (process.env.NODE_ENV !== 'production') {
         invariant(
           isPlainObject(nextState),
