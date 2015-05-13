@@ -4,14 +4,14 @@ import shallowEqualScalar from './utils/shallowEqualScalar';
 import invariant from 'invariant';
 import isPlainObject from 'lodash/lang/isPlainObject';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
-import wrapComponent from './wrapComponent';
+import decorateHandler from './decorateHandler';
 import registerTarget from './registerTarget';
 import createTargetFactory from './createTargetFactory';
 import createTargetMonitor from './createTargetMonitor';
 import createTargetConnector from './createTargetConnector';
 import isValidType from './utils/isValidType';
 
-export default function decorateTarget(type, spec, collect, options = {}) {
+export default function DropTarget(type, spec, collect, options = {}) {
   checkDecoratorArguments('DropTarget', 'type, spec, collect[, options]', ...arguments);
   let getType = type;
   if (typeof type !== 'function') {
@@ -46,8 +46,8 @@ export default function decorateTarget(type, spec, collect, options = {}) {
     collect
   );
 
-  return function wrapTarget(DecoratedComponent) {
-    return wrapComponent({
+  return function decorateTarget(DecoratedComponent) {
+    return decorateHandler({
       connectBackend: (backend, targetId) => backend.connectDropTarget(targetId),
       containerDisplayName: 'DropTarget',
       createHandler: createTarget,

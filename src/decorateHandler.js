@@ -6,7 +6,7 @@ import isPlainObject from 'lodash/lang/isPlainObject';
 import invariant from 'invariant';
 import bindConnector from './bindConnector';
 
-export default function wrapComponent({
+export default function decorateHandler({
   DecoratedComponent,
   createHandler,
   createMonitor,
