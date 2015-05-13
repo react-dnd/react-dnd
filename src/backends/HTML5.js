@@ -135,20 +135,7 @@ class HTML5Backend {
     this.clearCurrentDragSourceNode();
   }
 
-  connectDragSource(sourceId) {
-    return {
-      dragSource: (node, options) => this.connectSourceNode(sourceId, node, options),
-      dragPreview: (node, options) => this.connectSourcePreviewNode(sourceId, node, options)
-    };
-  }
-
-  connectDropTarget(targetId) {
-    return {
-      dropTarget: (node) => this.connectTargetNode(targetId, node)
-    };
-  }
-
-  connectSourcePreviewNode(sourceId, node, options) {
+  connectDragPreview(sourceId, node, options) {
     this.sourcePreviewNodeOptions[sourceId] = options;
     this.sourcePreviewNodes[sourceId] = node;
 
@@ -158,7 +145,7 @@ class HTML5Backend {
     };
   }
 
-  connectSourceNode(sourceId, node, options) {
+  connectDragSource(sourceId, node, options) {
     this.sourceNodes[sourceId] = node;
     this.sourceNodeOptions[sourceId] = options;
 
@@ -179,7 +166,7 @@ class HTML5Backend {
     };
   }
 
-  connectTargetNode(targetId, node) {
+  connectDropTarget(targetId, node) {
     const handleDragEnter = (e) => this.handleDragEnter(e, targetId);
     const handleDragOver = (e) => this.handleDragOver(e, targetId);
     const handleDrop = (e) => this.handleDrop(e, targetId);

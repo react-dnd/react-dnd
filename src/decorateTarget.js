@@ -8,6 +8,7 @@ import wrapComponent from './wrapComponent';
 import registerTarget from './registerTarget';
 import createTargetFactory from './createTargetFactory';
 import createTargetMonitor from './createTargetMonitor';
+import createTargetConnector from './createTargetConnector';
 import isValidType from './utils/isValidType';
 
 export default function decorateTarget(type, spec, collect, options = {}) {
@@ -52,6 +53,7 @@ export default function decorateTarget(type, spec, collect, options = {}) {
       createHandler: createTarget,
       registerHandler: registerTarget,
       createMonitor: createTargetMonitor,
+      createConnector: createTargetConnector,
       DecoratedComponent,
       getType,
       collect,

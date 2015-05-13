@@ -3,7 +3,7 @@ import cloneWithRef from './utils/cloneWithRef';
 import { Disposable, SerialDisposable } from 'disposables';
 import { findDOMNode, isValidElement } from 'react';
 
-export default function createConnectRef(connect) {
+export default function bindConnectorMethod(handlerId, connect) {
   const disposable = new SerialDisposable();
 
   let currentNode = null;
@@ -35,7 +35,7 @@ export default function createConnectRef(connect) {
     }
 
     // Re-connect the node to the backend.
-    const currentDispose = connect(nextNode, nextOptions);
+    const currentDispose = connect(handlerId, nextNode, nextOptions);
     disposable.setDisposable(new Disposable(currentDispose));
   }
 
