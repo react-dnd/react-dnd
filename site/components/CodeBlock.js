@@ -5,14 +5,24 @@ import './CodeBlock.less';
 
 export default class CodeBlock extends Component {
   static propTypes = {
-    es5: PropTypes.string.isRequired,
-    es6: PropTypes.string.isRequired,
+    es5: PropTypes.string,
+    es6: PropTypes.string,
     es7: PropTypes.string
+  };
+
+  static defaultProps = {
+    es5: '',
+    es6: '',
+    es7: ''
   };
 
   constructor(props) {
     super(props);
-    this.state = { syntax: 'es5' };
+    this.state = {
+      syntax: this.props.es5.trim().length && 'es5' ||
+              this.props.es6.trim().length && 'es6' ||
+              this.props.es7.trim().length && 'es7'
+    };
   }
 
   handleSyntaxClick(syntax) {
