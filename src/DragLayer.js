@@ -6,7 +6,7 @@ import isPlainObject from 'lodash/lang/isPlainObject';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
-export default function decorateLayer(collect, options = {}) {
+export default function DragLayer(collect, options = {}) {
   checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments);
   invariant(
     typeof collect === 'function',
@@ -23,7 +23,7 @@ export default function decorateLayer(collect, options = {}) {
     options
   );
 
-  return function createDragLayerContainer(DecoratedComponent) {
+  return function decorateLayer(DecoratedComponent) {
     const { arePropsEqual = shallowEqualScalar } = options;
     const displayName =
       DecoratedComponent.displayName ||
