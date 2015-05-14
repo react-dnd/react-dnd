@@ -32,12 +32,10 @@ export default class SideBar {
     }
 
     return (
-      <h2 key={title}>
-        <a href={location} target="_self" className={linkClass}>
-          <span className="SideBar-itemText">{title}</span>
-          {arrow}
-        </a>
-      </h2>
+      <a key={title} href={location} target="_self" className={linkClass}>
+        <span className="SideBar-itemText">{title}</span>
+        {arrow}
+      </a>
     );
   }
 }

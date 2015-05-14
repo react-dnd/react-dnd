@@ -1,6 +1,6 @@
-.PageBody {
-  @import (less) '../base.less';
+@import (less) '../base.less';
 
+.PageBody {
   padding: @content-padding*4 @content-padding;
   background-color: #fff;
 
@@ -10,8 +10,16 @@
     margin: 0 auto;
     max-width: @content-width;
 
-    @media only screen and (min-width: 680px) {
+    @media only screen and (min-width: @screen-tablet) {
       flex-direction: row;
+    }
+  }
+}
+
+.PageBody.PageBody--hasSidebar {
+  .PageBody-container {
+    @media only screen and (min-width: @screen-tablet) {
+      margin-left: @sidebar-width + @content-padding*2;
     }
   }
 }

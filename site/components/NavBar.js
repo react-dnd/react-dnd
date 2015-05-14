@@ -11,8 +11,9 @@ export default class NavBar {
     return (
       <div className="NavBar">
         <div className="NavBar-container">
-          <div className="NavBar-item">
-            <a href="./" target="_self" className="NavBar-logo">React <b><i>DnD</i></b></a>
+          <div className="NavBar-logo">
+            <a href="./" target="_self" className="NavBar-logoTitle">React <i>DnD</i></a>
+            <p className="NavBar-logoDescription">Drag and Drop for React</p>
           </div>
 
           <div className="NavBar-item">

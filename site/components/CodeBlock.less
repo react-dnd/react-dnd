@@ -1,3 +1,5 @@
+@import (less) '../base.less';
+
 .CodeBlock-tabs {
   padding: 0;
 }
@@ -9,8 +11,9 @@
 
 .CodeBlock-tab a {
   cursor: pointer;
+  color: @body-color;
 }
 
 .CodeBlock-activeTab a {
-  color: #626466;
+  color: @accent-color;
 }

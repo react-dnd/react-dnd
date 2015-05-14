@@ -1,14 +1,17 @@
-@color-darkBlue: #001F3F;
-@color-lightBlue: #7FDBFF;
+@accent-color: #0074D9;
 
-@link-color: @color-lightBlue;
+@link-color: @accent-color;
 @header-color: #212325;
 @body-color: #626466;
 
-@cover-height: 85vh;
+@navbar-height: 5em;
 
-@content-width: 64rem;
+@content-width: 52em;
 @content-padding: 1.5em;
+
+@sidebar-width: 12em;
+
+@screen-tablet: 680px;
 
 * { box-sizing: border-box; }
 
@@ -21,14 +24,14 @@ html, body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color: @body-color;
-  font-family: Roboto, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.625;
 }
 
-@media only screen and (min-width: 680px) {
+@media only screen and (min-width: @screen-tablet) {
   body {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 

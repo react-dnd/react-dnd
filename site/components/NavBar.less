@@ -1,26 +1,39 @@
-.NavBar {
-  @import (less) '../base.less';
+@import (less) '../base.less';
 
+.NavBar {
   z-index: 3;
   top: 0;
   position: fixed;
   width: 100%;
-  padding: @content-padding/2 @content-padding;
-  background-color: @color-darkBlue;
+  padding:  0 @content-padding;
+  background-color: fade(#fff, 90%);
 
   .NavBar-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 0 auto;
-    max-width: @content-width;
+    height: @navbar-height;
+    padding: @content-padding/2 0;
+    border-bottom: 2px solid fade(@accent-color, 10%);
   }
 
   .NavBar-logo {
+    color: @accent-color;
+  }
 
+  .NavBar-logoTitle {
+    font-weight: bold;
+    font-size: 1.125em;
+  }
+
+  .NavBar-logoDescription {
+    margin: 0;
+    font-size: .875em;
   }
 
   .NavBar-link {
-    color: @color-lightBlue;
+    color: @accent-color;
   }
 
   .NavBar-link + .NavBar-link {
