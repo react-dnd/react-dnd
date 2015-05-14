@@ -1,18 +1,21 @@
 DragSource
 ===================
 
-Wrap your component with `DragSource` to make it dragggable.
+Wrap your component with `DragSource` to make it draggable.  
 It is a higher-order component that accepts three required parameters:
 
-* a constant uniquely identifying the kind of data being dragged;
-* a specification object that lets you react to the drag events;
-* a function collecting the props to inject into the draggable component.
+* `type`, a constant uniquely identifying the kind of data being dragged;
+* `spec`, a specification object that lets you react to the drag events;
+* `collect`, a function collecting the props to inject into the draggable component.
 
 They are explored in detail below.
 
+>**Note: This documentation page uses the concepts established in the overview.**  
+>**Please make sure to [read the overview](/docs-overview.html) first.**
+
 ### Signature
 
-`DragSource` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragSource` usable as an ES7 decorator. If this sounds like mumbo jumbo, please refer to the [Overview](/docs-overview.html).
+`DragSource` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragSource` usable as an ES7 decorator. Read the [overview](/docs-overview.html) for a more detailed explanation of the decorators and the higher-order components.
 
 -------------------
 ```js
@@ -41,17 +44,18 @@ import { DragSource } from 'react-dnd';
 @DragSource(type, spec, collect)
 export default class MyComponent {
   /* ... */
-}```
+}
+```
 -------------------
 
 
 ### Parameters
 
-* **`type`**: Required. Either a string, an ES6 symbol, or a function that returns either, given component's `props`. It uniquely identifies the kind of data that this drag source provides. The type is then used to match compatible drag sources and drop targets. You should share a few type constants between the components so they can register sources and targets for the same types of data.
+* **`type`**: Required. Either a string, an ES6 symbol, or a function that returns either, given component's `props`. It uniquely identifies the kind of data that this drag source provides. The type is then used to match compatible drag sources and drop targets. You should share a few type constants between the components so they can register sources and targets for the same types of data. Read the [overview](/docs-overview.html) to get a better idea about types.
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drag source reacts to the drag and drop events. See the drag source specification described in detail in the next section.
 
-* **`collect`**: Required. A function. It should return a plain object of the props to inject into your component. It receives two parameters: `connect` and `monitor`. See the example below to learn how to use them to connect the DnD event handlers to React elements and query the current drag state.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](/docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function as an `options` key can improve the performance. Unless you have performance problems, don't worry about it.
 
@@ -73,11 +77,11 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 * **`props`**: Your component's current props.
 
-* **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Refer to the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for a complete list of `monitor` methods.
+* **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Read the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
 
 * **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `isDragging` and `canDrag` because the instance may not be available by the time they are called. If you want these methods to depend on the component's state, consider lifting the state to the parent component, so that you could just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
 
-### Writing the `collect` Function
+### The Collecting Function
 
 Just specifying the drag source `type` and `spec` is not quite enough.  
 There's still a few more things we need to take care of:
@@ -87,13 +91,15 @@ There's still a few more things we need to take care of:
 
 All communication between React components happens via props, so it makes sense that React DnD injects special props into your component. However it gives you the freedom to name them and decide what props your component will receive.
 
-In your `collect` function, you receive a `connect` object that lets you connect nodes to the DnD backend you're using, and a `monitor` object to query information about the drag state. You should return a plain object of props to inject into your component from that function.
+Your *collecting function* will be called by React DnD with a *connector* that lets you connect nodes to the DnD backend, and a *monitor* to query information about the drag state. It should return a plain object of props to inject into your component.
+
+If you're new to these concepts, the [overview](/docs-overview.html) should give you a good idea about them.
 
 #### Parameters
 
-* **`connect`**: An instance of [`DragSourceConnector`](/docs-drag-source-connector.html). It has two methods: `dragPreview()` and `dragSource()`. Of them, `dragSource()` is the one you'll use the most. It returns a function you need to pass down to your component to connect the source DOM node to the React DnD backend. If you return something like `{ connectDragSource: connect.dragSource() }` from your `collect` function, the component will receive `connectDragSource` as a prop and can then use it to mark the relevant node inside its `render()` function as draggable: `return this.props.connectDragSource(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Please refer to the [`DragSourceConnector` documentation](docs-drag-source-connect.html) for more details.
+* **`connect`**: An instance of [`DragSourceConnector`](/docs-drag-source-connector.html). It has two methods: `dragPreview()` and `dragSource()`. Of them, `dragSource()` is the one you'll use the most. It returns a function you need to pass down to your component to connect the source DOM node to the React DnD backend. If you return something like `{ connectDragSource: connect.dragSource() }` from your `collect` function, the component will receive `connectDragSource` as a prop and can then use it to mark the relevant node inside its `render()` function as draggable: `return this.props.connectDragSource(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Read the [`DragSourceConnector` documentation](docs-drag-source-connector.html) for a complete list of `connect` methods, or read the [overview](/docs-overview.html) for an introduction to the connectors.
 
-* **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Please refer to the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for more details.
+* **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Read the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
 
 ### Nesting Behavior
 

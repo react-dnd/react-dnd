@@ -3,11 +3,12 @@ Overview
 
 React DnD is unlike most of the drag and drop libraries out there, and it can be intimidating if you've never used it before. However, once you get a taste of a few concepts at the heart of its design, it starts to make sense. I suggest you read about these concepts before the rest of the docs.
 
-Some of these concepts may seem to have a certain familiarity to the ideas from the [Flux architecture](http://facebook.github.io/flux/). This is not a coincidence, as React DnD uses Flux internally.
+Some of these concepts may seem to have a certain resemblance to the [Flux architecture](http://facebook.github.io/flux/).  
+This is not a coincidence, as React DnD uses Flux internally.
 
 ### Backends
 
-React DnD is built on top of the [HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop). It is a reasonable default because it screenshots the dragged DOM node and uses it as a “drag preview” out of the box. It's handy because you don't have to do any drawing as the cursor moves. It also lets you handle the file drop events.
+React DnD is built on top of the [HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop). It is a reasonable default because it screenshots the dragged DOM node and uses it as a “drag preview” out of the box. It's handy that you don't have to do any drawing as the cursor moves. This API is also the only way to handle file drop events.
 
 Unfortunately, the HTML5 drag and drop API also has some downsides. It does not work on touch screens, and it provides less customization opportunities on IE than in other browsers.
 
@@ -120,7 +121,7 @@ The `connectDropTarget` call tells React DnD that the root DOM node of our compo
 
 So far we have covered the backends which work with the DOM, the data, as represented by the items and types, and the collecting functions that, thanks to the monitors and the connectors, let you describe what props React DnD should inject into your components.
 
-But how do we configure our components to actually have those props injected? How do we perform the side effects in response to the drag and drop events? Meet the *drag sources* and the *drop targets*, the primary abstraction units of React DnD. **They tie the types, the items, the side effects, and the collecting function together with your components.**
+But how do we configure our components to actually have those props injected? How do we perform the side effects in response to the drag and drop events? Meet the *drag sources* and the *drop targets*, the primary abstraction units of React DnD. **They really tie the types, the items, the side effects, and the collecting function together with your components.**
 
 Whenever you want to make a component or some part of it draggable, you need to wrap that component into a *drag source* declaration. Every drag source is registered for a certain *type*, and has to implement a method producing an *item* from the component's props, and optionally a few other methods for handling the drag and drop events. The drag source declaration also lets you specify the *collecting function* for the given component.
 
@@ -134,7 +135,7 @@ How do you wrap your components? What does wrapping even mean? If you have not w
 
 In React DnD, [`DragSource`](/docs-drag-source.html) and [`DropTarget`](/docs-drop-target.html), as well as a few other top-level exported functions, are in fact higher-order components. They breathe the drag and drop magic into your components.
 
-One caveat of using them is that they require *two* function applications. For example, here's how to wrap `YourClass` in a [`DragSource`](/docs-drag-source.html):
+One caveat of using them is that they require *two* function applications. For example, here's how to wrap `YourComponent` in a [`DragSource`](/docs-drag-source.html):
 
 -------------------
 ```js
@@ -228,7 +229,7 @@ export default class YourComponent {
 
 ### Putting It All Together
 
-Here is a complete example of wrapping an existing `Card` component into a drag source with some side effects and injecting props into it:
+Below is an example of wrapping an existing `Card` component into a drag source.
 
 -------------------
 ```js
@@ -435,3 +436,4 @@ export default class Card {
 ```
 -------------------
 
+Now you know enough about React DnD to explore the rest of the documentation!
