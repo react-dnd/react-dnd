@@ -18,23 +18,21 @@ They are explored in detail below.
 ```js
 var DragSource = require('react-dnd').DragSource;
 
-var YourComponent = React.createClass({ ... });
+var YourComponent = React.createClass({ /* ...;
 module.exports = DragSource(type, spec, collect)(YourComponent);
 ```
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
 
-class YourComponent { ... }
-export default DragSource(type, spec, collect)(YourComponent);
+class YourComponent { /* ...export default DragSource(type, spec, collect)(YourComponent);
 ```
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
 
 @DragSource(type, spec, collect)
-export default class YourComponent { ... }
-```
+export default class YourComponent { /* ...```
 -------------------
 
 
