@@ -47,6 +47,12 @@ export default class CodeBlock extends Component {
       return;
     }
 
+    if (syntax === 'es5' &&
+        !this.props.es6.trim().length &&
+        !this.props.es7.trim().length) {
+      return;
+    }
+
     const active = this.state.syntax === syntax;
     return (
       <li className={`CodeBlock-tab ${active ? 'CodeBlock-activeTab' : ''}`}
