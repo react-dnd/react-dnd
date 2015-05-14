@@ -2,10 +2,14 @@ import React from 'react';
 import './PageBody.less';
 
 export default class PageBody {
+  static propTypes = {
+    hasSidebar: React.PropTypes.bool
+  };
+
   render() {
-    var {html, ...props} = this.props;
+    var {hasSidebar, html, ...props} = this.props;
     return (
-      <div className="PageBody">
+      <div className={`PageBody ${hasSidebar ? 'PageBody--hasSidebar' : ''}`}>
         <div className="PageBody-container">
           {this.props.children}
         </div>

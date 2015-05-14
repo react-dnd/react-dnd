@@ -4,18 +4,10 @@ import Cover from './Cover';
 import './Header.less';
 
 export default class Header {
-  static propTypes = {
-    showCover: React.PropTypes.bool
-  };
-
   render() {
     return (
       <header className="Header">
         <NavBar />
-
-        {this.props.showCover &&
-          <Cover />
-        }
       </header>
     );
   }

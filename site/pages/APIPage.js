@@ -11,7 +11,7 @@ export default class APIPage {
       <div>
         <Header/>
 
-        <PageBody>
+        <PageBody hasSidebar>
           <SideBar
             groups={APIPages}
             example={this.props.example}
