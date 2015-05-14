@@ -54,7 +54,7 @@ It instructs React DnD to pass the up-to-date values of `highlighted` and `hover
 
 ### Connectors
 
-If the backend handles the DOM events, but the components use React to describe the DOM, how does the backend know which DOM nodes to listen to? Enter *connectors*. Connectors let you assign one of the predefined roles (a drag source, a drag preview, or a drop target) to the DOM nodes in your `render` function.
+If the backend handles the DOM events, but the components use React to describe the DOM, how does the backend know which DOM nodes to listen to? Enter the *connectors*. The connectors let you assign one of the predefined roles (a drag source, a drag preview, or a drop target) to the DOM nodes in your `render` function.
 
 In fact, a connector is passed as a second argument to the *collecting function* we described above. Let's see how we can use it to specify the drag source:
 
@@ -74,7 +74,7 @@ function collect(monitor, connect) {
 
 -------------------
 
-In the component's `render` method, we are then able to access both the data obtained from the monitor, and the connecting function obtained from the connector:
+In the component's `render` method, we are then able to access both the data obtained from the monitor, and the function obtained from the connector:
 
 -------------------
 ```js
@@ -114,17 +114,17 @@ render() {
 
 -------------------
 
-The `connectDropTarget` call tells React DnD that the root DOM node of our component is a valid drop target, and that its hover and drop events should be handled by the backend. Internally it works by attaching a React 0.13 callback ref to the React element that you pass as an argument, and notifying the backend any time the ref changes. The function returned by the connector is memoized, so it doesn't break the `shouldComponentUpdate` optimizations.
+The `connectDropTarget` call tells React DnD that the root DOM node of our component is a valid drop target, and that its hover and drop events should be handled by the backend. Internally it works by attaching a [callback ref](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the React element you gave it. The function returned by the connector is memoized, so it doesn't break the `shouldComponentUpdate` optimizations.
 
 ### Drag Sources and Drop Targets
 
 So far we have covered the backends which work with the DOM, the data, as represented by the items and types, and the collecting functions that, thanks to the monitors and the connectors, let you describe what props React DnD should inject into your components.
 
-But how do we configure our components to have those props injected automatically? How we perform the side effects in response to the drag and drop events? Where do the event handlers go? Meet the *drag sources* and the *drop targets*, the primary abstraction units of React DnD.
+But how do we configure our components to actually have those props injected? How do we perform the side effects in response to the drag and drop events? Meet the *drag sources* and the *drop targets*, the primary abstraction units of React DnD.
 
 Whenever you want to make a component or some part of it draggable, you need to wrap that component into a *drag source* declaration. Every drag source is registered for a certain *type*, and has to implement a method producing an *item* from the component's props, and optionally a few other methods for handling the drag and drop events. The drag source declaration also lets you specify the *collecting function* for the given component.
 
-Similarly, if you want some components to activate and receive the hover and the drop events when the items of the compatible types are being dragged, you need to wrap these components into the symmetrical *drop target* declarations.
+The *drop targets* are very similar to the drag sources. The only difference is that a single drop target may register for several item types at once, and instead of producing an item, it may handle its hover or drop.
 
 ### Higher-Order Components and ES7 decorators
 
@@ -173,7 +173,7 @@ export default class YourComponent { /* ... */ }
 
 You don't have to use this syntax, but if you like it, you can enable it by transpiling your code with [Babel](http://babeljs.io), and putting `{ "stage": 1 }` into your [.babelrc file](https://babeljs.io/docs/usage/babelrc/).
 
-Even if you don't plan to use ES7, the partial application can still be handy, because you can combine several `DragSource` and `DropTarget` declarations in ES5 or ES6 using a functional composition helper such as [`_.compose`](https://lodash.com/docs#compose).
+Even if you don't plan to use ES7, the partial application can still be handy, because you can combine several `DragSource` and `DropTarget` declarations in ES5 or ES6 using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow).
 
 Finally, in ES7, you can just stack the decorators to achieve the same effect.
 
@@ -181,10 +181,10 @@ Finally, in ES7, you can just stack the decorators to achieve the same effect.
 ```js
 var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
-var compose = require('lodash/function/compose');
+var flow = require('lodash/function/flow');
 
 var YourComponent = React.createClass({ /* ... */ });
-module.exports = compose(
+module.exports = flow(
   DragSource(/* ... */),
   DropTarget(/* ... */)
 )(YourComponent);
@@ -192,8 +192,9 @@ module.exports = compose(
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
-class YourComponent { /* ... */ }
+import flow from 'lodash/function/flow';
 
+class YourComponent { /* ... */ }
 export default flow(
   DragSource(/* ... */)
   DropTarget(/* ... */)
@@ -208,3 +209,216 @@ import { DragSource } from 'react-dnd';
 export default class YourComponent { /* ... */ }
 ```
 -------------------
+
+### Putting It All Together
+
+Here is a complete example of wrapping an existing `Card` component into a drag source with some side effects and injecting props into it:
+
+-------------------
+```js
+var React = require('react');
+var DragSource = require('react-dnd').DragSource;
+
+// Drag sources and drop targets only interact
+// if they have the same string type.
+// You want to keep types in a separate file with
+// the rest of your app's constants.
+var Types = {
+  CARD: 'card'
+};
+
+/**
+ * Specifies the drag source contract.
+ * Only `beginDrag` function is required.
+ */
+var cardSource = {
+  beginDrag: function (props) {
+    // Specify the data describing dragged item
+    return {
+      id: props.id
+    };
+  },
+
+  endDrag: function (props, monitor, component) {
+    if (!monitor.didDrop()) {
+      return;
+    }
+
+    // When dropped on a compatible target, do something
+    var item = monitor.getItem();
+    var dropResult = monitor.getDropResult();
+    CardActions.moveCardToList(item.id, dropResult.listId);
+  }
+};
+
+/**
+ * Specifies which props to inject into your component.
+ */
+function collect(connect, monitor) {
+  return {
+    // Call this function inside render()
+    // to let React DnD handle the drag events:
+    connectDragSource: connect.dragSource(),
+    // You can ask the monitor about the current drag state:
+    isDragging: monitor.isDragging()
+  };
+}
+
+var Card = React.createClass({
+  render: function () {
+    // Your component receives its own props as usual
+    var id = this.props.id;
+
+    // These two props are injected by React DnD,
+    // as defined by your `collect` function above:
+    var isDragging = this.props.isDragging;
+    var connectDragSource = this.props.connectDragSource;
+
+    return connectDragSource(
+      <div>
+        I am a draggable card number {id}
+        {isDragging && ' (and I am being dragged now)'}
+      </div>
+    );
+  }
+});
+
+// Export the wrapped version
+module.exports = DragSource(Types.CARD, cardSource, collect)(Card);
+```
+-------------------
+```js
+import React from 'react';
+import { DragSource } from 'react-dnd';
+
+// Drag sources and drop targets only interact
+// if they have the same string type.
+// You want to keep types in a separate file with
+// the rest of your app's constants.
+const Types = {
+  CARD: 'card'
+};
+
+/**
+ * Specifies the drag source contract.
+ * Only `beginDrag` function is required.
+ */
+const cardSource = {
+  beginDrag(props) {
+    // Specify the data describing dragged item
+    return {
+      id: props.id
+    };
+  },
+
+  endDrag(props, monitor, component) {
+    if (!monitor.didDrop()) {
+      return;
+    }
+
+    // When dropped on a compatible target, do something
+    const item = monitor.getItem();
+    const dropResult = monitor.getDropResult();
+    CardActions.moveCardToList(item.id, dropResult.listId);
+  }
+};
+
+/**
+ * Specifies which props to inject into your component.
+ */
+function collect(connect, monitor) {
+  return {
+    // Call this function inside render()
+    // to let React DnD handle the drag events:
+    connectDragSource: connect.dragSource(),
+    // You can ask the monitor about the current drag state:
+    isDragging: monitor.isDragging()
+  };
+}
+
+class Card {
+  render() {
+    // Your component receives its own props as usual
+    const { id } = this.props;
+
+    // These two props are injected by React DnD,
+    // as defined by your `collect` function above:
+    const { isDragging, connectDragSource } = this.props;
+
+    return connectDragSource(
+      <div>
+        I am a draggable card number {id}
+        {isDragging && ' (and I am being dragged now)'}
+      </div>
+    );
+  }
+}
+
+// Export the wrapped version
+export default DragSource(Types.CARD, cardSource, collect)(Card);
+```
+-------------------
+```js
+import React from 'react';
+import { DragSource } from 'react-dnd';
+
+// Drag sources and drop targets only interact
+// if they have the same string type.
+// You want to keep types in a separate file with
+// the rest of your app's constants.
+const Types = {
+  CARD: 'card'
+};
+
+/**
+ * Specifies the drag source contract.
+ * Only `beginDrag` function is required.
+ */
+const cardSource = {
+  beginDrag(props) {
+    // Specify the data describing dragged item
+    return {
+      id: props.id
+    };
+  },
+
+  endDrag(props, monitor, component) {
+    if (!monitor.didDrop()) {
+      return;
+    }
+
+    // When dropped on a compatible target, do something
+    const item = monitor.getItem();
+    const dropResult = monitor.getDropResult();
+    CardActions.moveCardToList(item.id, dropResult.listId);
+  }
+};
+
+// Use the decorator syntax
+@DragSource(Types.CARD, cardSource, (connect, monitor) => ({
+  // Call this function inside render()
+  // to let React DnD handle the drag events:
+  connectDragSource: connect.dragSource(),
+  // You can ask the monitor about the current drag state:
+  isDragging: monitor.isDragging()
+}))
+export default class Card {
+  render() {
+    // Your component receives its own props as usual
+    const { id } = this.props;
+
+    // These two props are injected by React DnD,
+    // as defined by your `collect` function above:
+    const { isDragging, connectDragSource } = this.props;
+
+    return connectDragSource(
+      <div>
+        I am a draggable card number {id}
+        {isDragging && ' (and I am being dragged now)'}
+      </div>
+    );
+  }
+}
+```
+-------------------
+
