@@ -10,29 +10,38 @@ It is a higher-order component that accepts three required parameters:
 
 They are explored in detail below.
 
->Note: `DragSource` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragSource` usable as an ES7 decorator. If this sounds like mumbo jumbo, please refer to the [Overview](/docs-overview.html).
-
 ### Signature
+
+`DragSource` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragSource` usable as an ES7 decorator. If this sounds like mumbo jumbo, please refer to the [Overview](/docs-overview.html).
 
 -------------------
 ```js
 var DragSource = require('react-dnd').DragSource;
 
-var YourComponent = React.createClass({ /* ...;
-module.exports = DragSource(type, spec, collect)(YourComponent);
+var MyComponent = React.createClass({
+  /* ... */
+});
+
+module.exports = DragSource(type, spec, collect)(MyComponent);
 ```
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
 
-class YourComponent { /* ...export default DragSource(type, spec, collect)(YourComponent);
+class MyComponent {
+  /* ... */
+}
+
+export default DragSource(type, spec, collect)(MyComponent);
 ```
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
 
 @DragSource(type, spec, collect)
-export default class YourComponent { /* ...```
+export default class MyComponent {
+  /* ... */
+}```
 -------------------
 
 
@@ -111,10 +120,9 @@ var Types = {
  */
 var cardSource = {
   beginDrag: function (props) {
-    // Specify the data describing dragged item
-    return {
-      id: props.id
-    };
+    // Return the data describing the dragged item
+    var item = { id: props.id };
+    return item;
   },
 
   endDrag: function (props, monitor, component) {
@@ -182,10 +190,9 @@ const Types = {
  */
 const cardSource = {
   beginDrag(props) {
-    // Specify the data describing dragged item
-    return {
-      id: props.id
-    };
+    // Return the data describing the dragged item
+    const item = { id: props.id };
+    return item;
   },
 
   endDrag(props, monitor, component) {
@@ -252,10 +259,9 @@ const Types = {
  */
 const cardSource = {
   beginDrag(props) {
-    // Specify the data describing dragged item
-    return {
-      id: props.id
-    };
+    // Return the data describing the dragged item
+    const item = { id: props.id };
+    return item;
   },
 
   endDrag(props, monitor, component) {

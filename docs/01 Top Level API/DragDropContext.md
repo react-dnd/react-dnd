@@ -1,4 +1,4 @@
-DragDropContext (higher-order component)
+DragDropContext
 =========================
 
 Wrap the root component of your application with `DragDropContext` to set up React DnD.  
