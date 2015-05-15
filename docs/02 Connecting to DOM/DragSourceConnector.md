@@ -1,10 +1,9 @@
+*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+
 DragSourceConnector
 ===================
 
 `DragSourceConnector` is an object passed to a collecting function of [`DragSource`](/docs-drag-source.html). Its methods return functions that let you assign the roles to your component's DOM nodes.
-
->**Note: This documentation page uses the concepts established in the overview.**  
->**Please make sure to [read the overview](/docs-overview.html) first.**
 
 ### Signature
 

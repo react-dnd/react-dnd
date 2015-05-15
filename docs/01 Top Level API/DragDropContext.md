@@ -1,11 +1,10 @@
+*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+
 DragDropContext
 =========================
 
 Wrap the root component of your application with `DragDropContext` to set up React DnD.  
 This lets you specify the backend, and sets up the shared DnD state behind the scenes.
-
->**Note: This documentation page uses the concepts established in the overview.**  
->**Please make sure to [read the overview](/docs-overview.html) first.**
 
 ### Usage
 

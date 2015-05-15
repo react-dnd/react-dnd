@@ -1,10 +1,11 @@
+*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+
 DragSource
 ===================
 
 Wrap your component with `DragSource` to make it draggable. `DragSource` is a higher-order component accepting three required parameters. They are described in detail below.
 
->**Note: This documentation page uses the concepts established in the overview.**  
->**Please make sure to [read the overview](/docs-overview.html) first.**
+To use `DragSource`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](/docs-drag-drop-context.html).
 
 ### Signature
 

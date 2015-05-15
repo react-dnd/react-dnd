@@ -1,10 +1,9 @@
+*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+
 DropTargetConnector
 ===================
 
 `DropTargetConnector` is an object passed to a collecting function of [`DropTarget`](/docs-drop-target.html). Its only method `dropTarget()` returns a function that lets you assign the drop target role to one of your component's DOM nodes.
-
->**Note: This documentation page uses the concepts established in the overview.**  
->**Please make sure to [read the overview](/docs-overview.html) first.**
 
 ### Signature
 
