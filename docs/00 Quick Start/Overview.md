@@ -436,4 +436,5 @@ export default class Card {
 ```
 -------------------
 
-Now you know enough about React DnD to explore the rest of the documentation!
+Now you know enough about React DnD to explore the rest of the documentation!  
+The [tutorial](/docs-tutorial.html) is a great place to start.

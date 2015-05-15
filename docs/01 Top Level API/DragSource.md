@@ -1,14 +1,7 @@
 DragSource
 ===================
 
-Wrap your component with `DragSource` to make it draggable.  
-It is a higher-order component that accepts three required parameters:
-
-* `type`, a constant uniquely identifying the kind of data being dragged;
-* `spec`, a specification object that lets you react to the drag events;
-* `collect`, a function collecting the props to inject into the draggable component.
-
-They are explored in detail below.
+Wrap your component with `DragSource` to make it draggable. `DragSource` is a higher-order component accepting three required parameters. They are described in detail below.
 
 >**Note: This documentation page uses the concepts established in the overview.**  
 >**Please make sure to [read the overview](/docs-overview.html) first.**
@@ -51,7 +44,7 @@ export default class MyComponent {
 
 ### Parameters
 
-* **`type`**: Required. Either a string, an ES6 symbol, or a function that returns either, given component's `props`. It uniquely identifies the kind of data that this drag source provides. The type is then used to match compatible drag sources and drop targets. You should share a few type constants between the components so they can register sources and targets for the same types of data. Read the [overview](/docs-overview.html) to get a better idea about types.
+* **`type`**: Required. Either a string, an ES6 symbol, or a function that returns either given the component's `props`. Only the [drop targets](/docs-drop-target.html) registered for the same type will react to this drag source's items. Read the [overview](/docs-overview.html) to learn more about the types.
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drag source reacts to the drag and drop events. See the drag source specification described in detail in the next section.
 
@@ -67,7 +60,7 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 * **`beginDrag(props, monitor, component)`**: Required. When the dragging starts, `beginDrag` is called. You must return a plain JavaScript object describing the data being dragged. What you return is the *only* information available to the drop targets about the drag source so it's important to pick the *minimal* data they need to know. You may be tempted to put a reference to the `component` into it, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ id: props.id }` from this method.
 
-* **`endDrag(props, monitor, component)`**: Optional. When the dragging stops, `endDrag` is called. For every `beginDrag` call, a corresponding `endDrag` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. Use `monitor.getDropResult()` to get the “drop result” object optionally specified by the drop target. It is a good place to fire a Flux action. *Note: If the component is unmounted while dragging, `component` parameter is set to be `null`.*
+* **`endDrag(props, monitor, component)`**: Optional. When the dragging stops, `endDrag` is called. For every `beginDrag` call, a corresponding `endDrag` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target also specified a *drop result* by returning a plain object from its `drop()` method, this object will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. *Note: If the component is unmounted while dragging, `component` parameter is set to be `null`.*
 
 * **`canDrag(props, monitor)`**: Optional. Use it to specify whether the dragging is currently allowed. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dragging based on some predicate over `props`. *Note: You may not call `monitor.canDrag()` inside this method.*
 
@@ -97,7 +90,7 @@ If you're new to these concepts, the [overview](/docs-overview.html) should give
 
 #### Parameters
 
-* **`connect`**: An instance of [`DragSourceConnector`](/docs-drag-source-connector.html). It has two methods: `dragPreview()` and `dragSource()`. Of them, `dragSource()` is the one you'll use the most. It returns a function you need to pass down to your component to connect the source DOM node to the React DnD backend. If you return something like `{ connectDragSource: connect.dragSource() }` from your `collect` function, the component will receive `connectDragSource` as a prop and can then use it to mark the relevant node inside its `render()` function as draggable: `return this.props.connectDragSource(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Read the [`DragSourceConnector` documentation](docs-drag-source-connector.html) for a complete list of `connect` methods, or read the [overview](/docs-overview.html) for an introduction to the connectors.
+* **`connect`**: An instance of [`DragSourceConnector`](/docs-drag-source-connector.html). It has two methods: `dragPreview()` and `dragSource()`. Of them, `dragSource()` is the one you'll use the most. It returns a function you need to pass down to your component to connect the source DOM node to the React DnD backend. If you return something like `{ connectDragSource: connect.dragSource() }` from your `collect` function, the component will receive `connectDragSource` as a prop so you can mark the relevant node inside its `render()` as draggable: `return this.props.connectDragSource(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Read the [`DragSourceConnector` documentation](docs-drag-source-connector.html) for a complete list of `connect` methods, or read the [overview](/docs-overview.html) for an introduction to the connectors.
 
 * **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Read the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
 
