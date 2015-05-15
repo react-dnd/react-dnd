@@ -27,7 +27,7 @@ Let's consider their props.
 
 * `Knight` probably needs no props. It has a position, but there's no reason for the `Knight` to know it, because it can be positioned by being placed into a `Square`.
 
-* It is tempting to give `Square` its position via props, but this, again, is not necessary, because the only information it really needs for the rendering is the color. I'm going to make `Square` white by default, and add an `black` boolean prop that, when `true`, paints the `Square` black. And of course `Square` may accept a single child: the chess piece that is currently on it. I chose white as the default background color to match the browser defaults.
+* It is tempting to give `Square` its position via props, but this, again, is not necessary, because the only information it really needs for the rendering is the color. I'm going to make `Square` white by default, and add a `black` boolean prop. And of course `Square` may accept a single child: the chess piece that is currently on it. I chose white as the default background color to match the browser defaults.
 
 * The `Board` is tricky. It makes no sense to pass `Square`s as children to it, because what else could a board contain? Therefore it probably owns the `Square`s. But then, it also need to own the `Knight` because this guy needs to be placed inside one of those `Square`s. This means that the `Board` needs to know the knight's current position. In a real Chess game, the `Board` would accept a data structure describing all the pieces, their colors and positions, but for us, a `knightPosition` prop will suffice. We will use two-item arrays as coordinates, with `[0, 0]` referring to the A8 square. Why A8 instead of A1? To match the browser coordinate orientation. I tried it another way and it just messed with my head too much.
 
@@ -528,11 +528,11 @@ export default class Knight {
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/3L1d0C203C0s1r1H2H0m/Screen%20Recording%202015-05-15%20at%2001.11%20pm.gif' width='404' height='445' alt='Screenshot'>
 
-The `Knight` is now a drag source, but there's no drop targets to handle the drop yet. We're going to make the `Square` a drop target now.
+The `Knight` is now a drag source, but there are no drop targets to handle the drop yet. We're going to make the `Square` a drop target now.
 
 This time, we can't avoid passing the position to the `Square`. After all, how can it know where to move the knight if it doesn't know its own position? On the other hand, it still feels wrong because the `Square` as an entity in our application has not changed, and if it used to be simple, why complicate it? When you face this dilemma, it's usually a sign that it is time to separate the [smart and dumb components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
-I'm going to introduce a new component called the `BoardSquare`. It renders the old good `Square`, but is also aware of its position. In fact, it's encapsulating what the `renderSquare` method inside the `Board` used to do. React components are often extracted from such render submethods when the time is right.
+I'm going to introduce a new component called the `BoardSquare`. It renders the good old `Square`, but is also aware of its position. In fact, it's encapsulating what the `renderSquare` method inside the `Board` used to do. React components are often extracted from such render submethods when the time is right.
 
 Here is the `BoardSquare` I extracted:
 
