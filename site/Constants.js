@@ -64,9 +64,9 @@ export const APIPages = [{
       location: 'docs-drop-target-monitor.html',
       title: 'DropTargetMonitor'
     },
-    DRAG_DROP_MONITOR: {
-      location: 'docs-drag-drop-monitor.html',
-      title: 'DragDropMonitor'
+    DRAG_LAYER_MONITOR: {
+      location: 'docs-drag-layer-monitor.html',
+      title: 'DragLayerMonitor'
     }
   }
 }, {
