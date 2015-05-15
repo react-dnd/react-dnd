@@ -3,15 +3,11 @@
 DropTargetConnector
 ===================
 
-`DropTargetConnector` is an object passed to a collecting function of [`DropTarget`](/docs-drop-target.html). Its only method `dropTarget()` returns a function that lets you assign the drop target role to one of your component's DOM nodes.
-
-### Signature
-
-Call the `DropTargetConnector`'s `dropTarget()` method inside your *collecting function*. When the returned function is passed to your component as a prop, you can indicate that a DOM node should act as a drop target by using that function inside your `render` function. Internally it works by attaching a [callback ref](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the React element you give it. This callback connects the DOM node of your component to the chosen DnD backend.
+`DropTargetConnector` is an object passed to a collecting function of the [`DropTarget`](/docs-drop-target.html). Its only method `dropTarget()` returns a function that lets you assign the drop target role to one of your component's DOM nodes.
 
 ### Methods
 
-The function returned by the `dropTarget()` connector method needs to be applied inside the component's `render` method. It will return the clone of your React element with the backend event handlers attached.
+Call the `DropTargetConnector`'s `dropTarget()` method inside your *collecting function*. This will pass the returned function to your component as a prop. You can then use it inside `render` or `componentDidMount` to indicate a DOM node should react to drop target events. Internally it works by attaching a [callback ref](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the React element you give it. This callback connects the DOM node of your component to the chosen DnD backend.
 
 * **`dropTarget() => (elementOrNode)`**: Returns a function that must be used inside the component to assign the drop target role to a node. By returning `{ connectDropTarget: connect.dropTarget() }` from your collecting function, you can mark any React element as the droppable node. To do that, replace any `element` with `this.props.connectDropTarget(element)` inside the `render` function.
 

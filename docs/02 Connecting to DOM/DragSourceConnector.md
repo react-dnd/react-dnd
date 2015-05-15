@@ -3,15 +3,11 @@
 DragSourceConnector
 ===================
 
-`DragSourceConnector` is an object passed to a collecting function of [`DragSource`](/docs-drag-source.html). Its methods return functions that let you assign the roles to your component's DOM nodes.
-
-### Signature
-
-Call the `DragSourceConnector` methods inside your *collecting function*. When the returned functions are passed to your component as props, you can indicate the DOM node roles by using them inside the `render` function or the lifecycle hooks. Internally they work by attaching a [callback ref](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the React elements you give them. These callbacks connect the DOM nodes of your component to the chosen DnD backend.
+`DragSourceConnector` is an object passed to a collecting function of the [`DragSource`](/docs-drag-source.html). Its methods return functions that let you assign the roles to your component's DOM nodes.
 
 ### Methods
 
-The functions returned by the connector methods need to be applied inside the component. Normally you can just call them inside `render`, and they will return the clones of your React elements with the backend event handlers attached. You may also call them in the lifecycle methods such as `componentDidMount` with arbitrary DOM nodes.
+Call the `DragSourceConnector` methods inside your *collecting function*. This will pass the returned functions to your component as props. You can then use them inside `render` or `componentDidMount` to indicate the DOM node roles. Internally they work by attaching a [callback ref](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the React elements you give them. These callbacks connect the DOM nodes of your component to the chosen DnD backend.
 
 * **`dragSource() => (elementOrNode, options?)`**: Returns a function that must be used inside the component to assign the drag source role to a node. By returning `{ connectDragSource: connect.dragSource() }` from your collecting function, you can mark any React element as the draggable node. To do that, replace any `element` with `this.props.connectDragSource(element)` inside the `render` function.
 
