@@ -4,6 +4,9 @@ DragDropContext
 Wrap the root component of your application with `DragDropContext` to set up React DnD.  
 This lets you specify the backend, and sets up the shared DnD state behind the scenes.
 
+>**Note: This documentation page uses the concepts established in the overview.**  
+>**Please make sure to [read the overview](/docs-overview.html) first.**
+
 ### Usage
 
 -------------------
@@ -12,7 +15,7 @@ var HTML5Backend = require('react-dnd/modules/backends/HTML5');
 var DragDropContext = require('react-dnd').DragDropContext;
 
 var YourApp = React.createClass(
-  // ...
+  /* ... */
 );
 
 module.exports = DragDropContext(HTML5Backend)(YourApp);
@@ -23,7 +26,7 @@ import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 import { DragDropContext } from 'react-dnd';
 
 class YourApp {
-  // ...
+  /* ... */
 }
 
 export default DragDropContext(HTML5Backend)(YourApp);
@@ -35,7 +38,7 @@ import { DragDropContext } from 'react-dnd';
 
 @DragDropContext(HTML5Backend)
 export default class YourApp {
-  // ...
+  /* ... */
 }
 ```
 -------------------

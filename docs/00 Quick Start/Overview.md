@@ -20,9 +20,9 @@ Backends perform a similar role to that of React's synthetic event system: **the
 
 Like Flux, React DnD uses data, and not the views, as the source of truth. When you drag something across the screen, we don't say that a component, or a DOM node is being dragged. Instead, we say that an *item* of a certain *type* is being dragged.
 
-What is an item? An *item* is a plain JavaScript object *describing* what's being dragged. For example, in a Kanban board application, when you drag a card, an item might look like `{ cardId: 42 }`. In a Chess game, when you pick up a figure, the item might look like `{ fromCell: 'C5', figure: 'queen' }`. **Describing the dragged data as a plain object helps you keep the components decoupled and unaware of each other.**
+What is an item? An *item* is a plain JavaScript object *describing* what's being dragged. For example, in a Kanban board application, when you drag a card, an item might look like `{ cardId: 42 }`. In a Chess game, when you pick up a piece, the item might look like `{ fromCell: 'C5', piece: 'queen' }`. **Describing the dragged data as a plain object helps you keep the components decoupled and unaware of each other.**
 
-What is a type, then? A *type* is a string (or a [symbol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)) uniquely identifying *a whole class of items* in your application. In a Kanban board app, you might have a `'card'` type representing the draggable cards and a `'list'` type for the draggable lists of those cards. In Chess, you might only have a single `'figure'` type.
+What is a type, then? A *type* is a string (or a [symbol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)) uniquely identifying *a whole class of items* in your application. In a Kanban board app, you might have a `'card'` type representing the draggable cards and a `'list'` type for the draggable lists of those cards. In Chess, you might only have a single `'piece'` type.
 
 Types are useful because, as your app grows, you might want to make more things draggable, but you don't necessarily want all the existing drop targets to suddenly start reacting to them. **Types let you specify which drag sources and drop targets are compatible.** You're probably going to have an enumeration of the type constants in your application, just like you may have an enumeration of Flux action types.
 
@@ -34,7 +34,7 @@ React DnD exposes this state to your components via a few tiny wrappers over the
 
 For each component that needs to track the drag and drop state, you can define a *collecting function* that retrieves the relevant bits of it from the monitors. React DnD then takes care of timely calling your collecting function and injecting the result into your components' props.
 
-Let's say you want to highlight the Chess cells when a figure is being dragged. A collecting function for the `Cell` component might look like this:
+Let's say you want to highlight the Chess cells when a piece is being dragged. A collecting function for the `Cell` component might look like this:
 
 -------------------
 ```js
