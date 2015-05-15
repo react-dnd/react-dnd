@@ -97,10 +97,346 @@ If you're new to these concepts, the [overview](/docs-overview.html) should give
 
 If a drop target is nested in another drop target, both `hover()` and `drop()` bubble from the innermost target up the chain. There is no way to cancel the propagation by design. Instead, any drop target may compare `monitor.isOver()` and `monitor.isOver({ shallow: true })` to verify whether a child, or just the current drop target is being hovered. When dropping, any drop target in the chain may check whether it is the first in chain by testing if `monitor.didDrop()` returns `false`. Any parent drop target may override the drop result specified by the child drop target by explicitly returning another drop result from `drop()`. If a parent target returns `undefined` from its `drop()` handler, it does not change the existing drop result that may have been specified by a nested drop target. The drop targets that return `false` from `canDrop()` are exluded from the `drop()` dispatch.
 
+### Handling Files and URLs
+
+When using the [`HTML5` backend](/docs-html5.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` and `HTML5Backend.NativeTypes.URL` types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
+
 ### Example
 
-TODO
+-------------------
+```js
+var React = require('react');
+var DropTarget = require('react-dnd').DropTarget;
 
+// Drag sources and drop targets only interact
+// if they have the same string type.
+// You want to keep types in a separate file with
+// the rest of your app's constants.
+var Types = {
+  CHESSPIECE: 'chesspiece'
+};
+
+/**
+ * Specifies the drop target contract.
+ * All methods are optional.
+ */
+var chessSquareTarget = {
+  canDrop: function (props, monitor) {
+    // You can disallow drop based on props or item
+    var item = monitor.getItem();
+    return canMakeChessMove(item.fromPosition, props.position);
+  },
+
+  hover: function (props, monitor, component) {
+    // This is fired very often and lets you perform side effects
+    // in response to the hover. You can't handle enter and leave
+    // here—if you need them, put monitor.isOver() into collect() so you
+    // can just use componentWillReceiveProps() to handle enter/leave.
+
+    // You can access the coordinates if you need them
+    var clientOffset = monitor.getClientOffset();
+    var componentRect = findDOMNode(component).getBoundingClientRect();
+
+    // You can check whether we're over a nested drop target
+    var isJustOverThisOne = monitor.isOver({ shallow: true });
+
+    // You will receive hover() even for items for which canDrop() is false
+    var canDrop = monitor.canDrop();
+  },
+
+  drop: function (props, monitor, component) {
+    if (monitor.didDrop()) {
+      // If you want, you can check whether some nested
+      // target already handled drop
+      return;
+    }
+
+    // Obtain the dragged item
+    var item = monitor.getItem();
+
+    // You can do something with it
+    ChessActions.movePiece(item.fromPosition, props.position);
+
+    // You can also do nothing and return a drop result,
+    // which will be available as monitor.getDropResult()
+    // in the drag source's endDrag() method
+    return { moved: true };
+  }
+};
+
+/**
+ * Specifies which props to inject into your component.
+ */
+function collect(connect, monitor) {
+  return {
+    // Call this function inside render()
+    // to let React DnD handle the drag events:
+    connectDropTarget: connect.dropTarget(),
+    // You can ask the monitor about the current drag state:
+    isOver: monitor.isOver(),
+    isOverCurrent: monitor.isOver({ shallow: true }),
+    canDrop: monitor.canDrop(),
+    itemType: monitor.getItemType()
+  };
+}
+
+var ChessSquare = React.createClass({
+  componentWillReceiveProps: function (nextProps) {
+    if (!this.props.isOver && nextProps.isOver) {
+      // You can use this as enter handler
+    }
+
+    if (this.props.isOver && !nextProps.isOver) {
+      // You can use this as leave handler
+    }
+
+    if (this.props.isOverCurrent && !nextProps.isOverCurrent) {
+      // You can be more specific and track enter/leave
+      // shallowly, not including nested targets
+    }
+  },
+
+  render: function () {
+    // Your component receives its own props as usual
+    var position = this.props.position;
+
+    // These props are injected by React DnD,
+    // as defined by your `collect` function above:
+    var isOver = this.props.isOver;
+    var canDrop = this.props.canDrop;
+    var connectDropTarget = this.props.connectDropTarget;
+
+    return connectDropTarget(
+      <div className='Cell'>
+        {isOver && canDrop && <div class='green' />}
+        {!isOver && canDrop && <div class='yellow' />}
+        {isOver && !canDrop && <div class='red' />}
+      </div>
+    );
+  }
+});
+
+module.exports = DropTarget(Types.CHESSPIECE, chessSquareTarget, collect)(ChessSquare);
+```
+-------------------
+```js
+import React from 'react';
+import { DropTarget } from 'react-dnd';
+
+// Drag sources and drop targets only interact
+// if they have the same string type.
+// You want to keep types in a separate file with
+// the rest of your app's constants.
+const Types = {
+  CHESSPIECE: 'chesspiece'
+};
+
+/**
+ * Specifies the drop target contract.
+ * All methods are optional.
+ */
+const chessSquareTarget = {
+  canDrop(props, monitor) {
+    // You can disallow drop based on props or item
+    const item = monitor.getItem();
+    return canMakeChessMove(item.fromPosition, props.position);
+  },
+
+  hover(props, monitor, component) {
+    // This is fired very often and lets you perform side effects
+    // in response to the hover. You can't handle enter and leave
+    // here—if you need them, put monitor.isOver() into collect() so you
+    // can just use componentWillReceiveProps() to handle enter/leave.
+
+    // You can access the coordinates if you need them
+    const clientOffset = monitor.getClientOffset();
+    const componentRect = findDOMNode(component).getBoundingClientRect();
+
+    // You can check whether we're over a nested drop target
+    const isJustOverThisOne = monitor.isOver({ shallow: true });
+
+    // You will receive hover() even for items for which canDrop() is false
+    const canDrop = monitor.canDrop();
+  },
+
+  drop(props, monitor, component) {
+    if (monitor.didDrop()) {
+      // If you want, you can check whether some nested
+      // target already handled drop
+      return;
+    }
+
+    // Obtain the dragged item
+    const item = monitor.getItem();
+
+    // You can do something with it
+    ChessActions.movePiece(item.fromPosition, props.position);
+
+    // You can also do nothing and return a drop result,
+    // which will be available as monitor.getDropResult()
+    // in the drag source's endDrag() method
+    return { moved: true };
+  }
+};
+
+/**
+ * Specifies which props to inject into your component.
+ */
+function collect(connect, monitor) {
+  return {
+    // Call this function inside render()
+    // to let React DnD handle the drag events:
+    connectDropTarget: connect.dropTarget(),
+    // You can ask the monitor about the current drag state:
+    isOver: monitor.isOver(),
+    isOverCurrent: monitor.isOver({ shallow: true }),
+    canDrop: monitor.canDrop(),
+    itemType: monitor.getItemType()
+  };
+}
+
+class ChessSquare {
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.isOver && nextProps.isOver) {
+      // You can use this as enter handler
+    }
+
+    if (this.props.isOver && !nextProps.isOver) {
+      // You can use this as leave handler
+    }
+
+    if (this.props.isOverCurrent && !nextProps.isOverCurrent) {
+      // You can be more specific and track enter/leave
+      // shallowly, not including nested targets
+    }
+  }
+
+  render() {
+    // Your component receives its own props as usual
+    const { position } = this.props;
+
+    // These props are injected by React DnD,
+    // as defined by your `collect` function above:
+    const { isOver, canDrop, connectDropTarget } = this.props;
+
+    return connectDropTarget(
+      <div className='Cell'>
+        {isOver && canDrop && <div class='green' />}
+        {!isOver && canDrop && <div class='yellow' />}
+        {isOver && !canDrop && <div class='red' />}
+      </div>
+    );
+  }
+}
+
+export default DropTarget(Types.CHESSPIECE, chessSquareTarget, collect)(ChessSquare);
+```
+-------------------
+```js
+import React from 'react';
+import { DropTarget } from 'react-dnd';
+
+// Drag sources and drop targets only interact
+// if they have the same string type.
+// You want to keep types in a separate file with
+// the rest of your app's constants.
+const Types = {
+  CHESSPIECE: 'chesspiece'
+};
+
+/**
+ * Specifies the drop target contract.
+ * All methods are optional.
+ */
+const chessSquareTarget = {
+  canDrop(props, monitor) {
+    // You can disallow drop based on props or item
+    const item = monitor.getItem();
+    return canMakeChessMove(item.fromPosition, props.position);
+  },
+
+  hover(props, monitor, component) {
+    // This is fired very often and lets you perform side effects
+    // in response to the hover. You can't handle enter and leave
+    // here—if you need them, put monitor.isOver() into collect() so you
+    // can just use componentWillReceiveProps() to handle enter/leave.
+
+    // You can access the coordinates if you need them
+    const clientOffset = monitor.getClientOffset();
+    const componentRect = findDOMNode(component).getBoundingClientRect();
+
+    // You can check whether we're over a nested drop target
+    const isJustOverThisOne = monitor.isOver({ shallow: true });
+
+    // You will receive hover() even for items for which canDrop() is false
+    const canDrop = monitor.canDrop();
+  },
+
+  drop(props, monitor, component) {
+    if (monitor.didDrop()) {
+      // If you want, you can check whether some nested
+      // target already handled drop
+      return;
+    }
+
+    // Obtain the dragged item
+    const item = monitor.getItem();
+
+    // You can do something with it
+    ChessActions.movePiece(item.fromPosition, props.position);
+
+    // You can also do nothing and return a drop result,
+    // which will be available as monitor.getDropResult()
+    // in the drag source's endDrag() method
+    return { moved: true };
+  }
+};
+
+@DropTarget(Types.CHESSPIECE, chessSquareTarget, (collect, monitor) => ({
+  // Call this function inside render()
+  // to let React DnD handle the drag events:
+  connectDropTarget: connect.dropTarget(),
+  // You can ask the monitor about the current drag state:
+  isOver: monitor.isOver(),
+  isOverCurrent: monitor.isOver({ shallow: true }),
+  canDrop: monitor.canDrop(),
+  itemType: monitor.getItemType()
+}))
+export default class ChessSquare {
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.isOver && nextProps.isOver) {
+      // You can use this as enter handler
+    }
+
+    if (this.props.isOver && !nextProps.isOver) {
+      // You can use this as leave handler
+    }
+
+    if (this.props.isOverCurrent && !nextProps.isOverCurrent) {
+      // You can be more specific and track enter/leave
+      // shallowly, not including nested targets
+    }
+  }
+
+  render() {
+    // Your component receives its own props as usual
+    const { position } = this.props;
+
+    // These props are injected by React DnD,
+    // as defined by your `collect` function above:
+    const { isOver, canDrop, connectDropTarget } = this.props;
+
+    return connectDropTarget(
+      <div className='Cell'>
+        {isOver && canDrop && <div class='green' />}
+        {!isOver && canDrop && <div class='yellow' />}
+        {isOver && !canDrop && <div class='red' />}
+      </div>
+    );
+  }
+}
+```
+-------------------
 
 ## Type Definitions
 
@@ -136,7 +472,7 @@ type DropTargetOptions = {
   arePropsEqual: ?(Object, Object) => boolean
 };
 
-DragSource: (
+DropTarget: (
   type: DropTargetType,
   spec: DropTargetSpec,
   collect: (
