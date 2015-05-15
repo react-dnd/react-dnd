@@ -1,10 +1,11 @@
+*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+
 DropTarget
 ===================
 
 Wrap your component with `DropTarget` to make it react to the compatible items being dragged, hovered, or dropped on it. `DropTarget` is a higher-order component.
 
->**Note: This documentation page uses the concepts established in the overview.**  
->**Please make sure to [read the overview](/docs-overview.html) first.**
+To use `DropTarget`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](/docs-drag-drop-context.html).
 
 ### Signature
 

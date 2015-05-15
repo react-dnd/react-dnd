@@ -1,14 +1,15 @@
+*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+
 DragLayer
 ===================
 
 **This is an advanced feature.**  
 
-For most use cases, the default rendering of [`HTML5` backend](/docs-html5.html) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
+For most use cases, the default rendering of the [`HTML5` backend](/docs-html5.html) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
 
 Sometimes you might want to perform the custom rendering. This also becomes necessary if you're using a custom backend. `DragLayer` lets you perform the rendering of the drag preview yourself using just the React components. It is a higher-order component accepting one required parameter that is described below.
 
->**Note: This documentation page uses the concepts established in the overview.**  
->**Please make sure to [read the overview](/docs-overview.html) first.**
+To use `DragLayer`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](/docs-drag-drop-context.html).
 
 ### Signature
 
