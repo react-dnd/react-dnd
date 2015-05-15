@@ -118,20 +118,42 @@ var Types = {
  * Only `beginDrag` function is required.
  */
 var cardSource = {
+  canDrag: function (props) {
+    // You can disallow drag based on props
+    return props.isReady;
+  },
+
   beginDrag: function (props) {
     // Return the data describing the dragged item
     var item = { id: props.id };
     return item;
   },
 
+  isDragging: function (props) {
+    // If your component gets unmounted while dragged
+    // (like a card in Kanban board dragged between lists)
+    // you can implement something like this to keep its
+    // appearance dragged:
+    return monitor.getItem().id === props.id;
+  },
+
   endDrag: function (props, monitor, component) {
     if (!monitor.didDrop()) {
+      // You can check whether the drop was successful
+      // or if the drag ended but nobody handled the drop
       return;
     }
 
-    // When dropped on a compatible target, do something
+    // When dropped on a compatible target, do something.
+    // Read the original dragged item from getItem():
     var item = monitor.getItem();
+
+    // You may also read the drop result from the drop target
+    // that handled the drop, if it returned an object from
+    // its drop() method.
     var dropResult = monitor.getDropResult();
+
+    // This is a good place to call some Flux action
     CardActions.moveCardToList(item.id, dropResult.listId);
   }
 };
@@ -154,7 +176,7 @@ var Card = React.createClass({
     // Your component receives its own props as usual
     var id = this.props.id;
 
-    // These two props are injected by React DnD,
+    // These props are injected by React DnD,
     // as defined by your `collect` function above:
     var isDragging = this.props.isDragging;
     var connectDragSource = this.props.connectDragSource;
@@ -188,7 +210,20 @@ const Types = {
  * Only `beginDrag` function is required.
  */
 const cardSource = {
-  beginDrag(props) {
+  canDrag(props) {
+    // You can disallow drag based on props
+    return props.isReady;
+  },
+
+  isDragging(props, monitor) {
+    // If your component gets unmounted while dragged
+    // (like a card in Kanban board dragged between lists)
+    // you can implement something like this to keep its
+    // appearance dragged:
+    return monitor.getItem().id === props.id;
+  },
+
+  beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
     const item = { id: props.id };
     return item;
@@ -196,12 +231,21 @@ const cardSource = {
 
   endDrag(props, monitor, component) {
     if (!monitor.didDrop()) {
+      // You can check whether the drop was successful
+      // or if the drag ended but nobody handled the drop
       return;
     }
 
-    // When dropped on a compatible target, do something
+    // When dropped on a compatible target, do something.
+    // Read the original dragged item from getItem():
     const item = monitor.getItem();
+
+    // You may also read the drop result from the drop target
+    // that handled the drop, if it returned an object from
+    // its drop() method.
     const dropResult = monitor.getDropResult();
+
+    // This is a good place to call some Flux action
     CardActions.moveCardToList(item.id, dropResult.listId);
   }
 };
@@ -224,7 +268,7 @@ class Card {
     // Your component receives its own props as usual
     const { id } = this.props;
 
-    // These two props are injected by React DnD,
+    // These props are injected by React DnD,
     // as defined by your `collect` function above:
     const { isDragging, connectDragSource } = this.props;
 
@@ -257,7 +301,20 @@ const Types = {
  * Only `beginDrag` function is required.
  */
 const cardSource = {
-  beginDrag(props) {
+  canDrag(props) {
+    // You can disallow drag based on props
+    return props.isReady;
+  },
+
+  isDragging(props, monitor) {
+    // If your component gets unmounted while dragged
+    // (like a card in Kanban board dragged between lists)
+    // you can implement something like this to keep its
+    // appearance dragged:
+    return monitor.getItem().id === props.id;
+  },
+
+  beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
     const item = { id: props.id };
     return item;
@@ -265,12 +322,21 @@ const cardSource = {
 
   endDrag(props, monitor, component) {
     if (!monitor.didDrop()) {
+      // You can check whether the drop was successful
+      // or if the drag ended but nobody handled the drop
       return;
     }
 
-    // When dropped on a compatible target, do something
+    // When dropped on a compatible target, do something.
+    // Read the original dragged item from getItem():
     const item = monitor.getItem();
+
+    // You may also read the drop result from the drop target
+    // that handled the drop, if it returned an object from
+    // its drop() method.
     const dropResult = monitor.getDropResult();
+
+    // This is a good place to call some Flux action
     CardActions.moveCardToList(item.id, dropResult.listId);
   }
 };
@@ -287,7 +353,7 @@ export default class Card {
     // Your component receives its own props as usual
     const { id } = this.props;
 
-    // These two props are injected by React DnD,
+    // These props are injected by React DnD,
     // as defined by your `collect` function above:
     const { isDragging, connectDragSource } = this.props;
 
