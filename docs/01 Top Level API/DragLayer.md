@@ -5,7 +5,7 @@ DragLayer
 
 **This is an advanced feature.**  
 
-For most use cases, the default rendering of the [`HTML5` backend](/docs-html5.html) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
+For the most use cases, the default rendering of the [`HTML5` backend](/docs-html5.html) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
 
 Sometimes you might want to perform the custom rendering. This also becomes necessary if you're using a custom backend. `DragLayer` lets you perform the rendering of the drag preview yourself using just the React components. It is a higher-order component accepting one required parameter that is described below.
 
@@ -48,9 +48,9 @@ export default class CustomDragLayer {
 
 ### Parameters
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives a single `monitor` parameter. Read the [overview](/docs-overview.html) for an introduction to the monitors and the collecting function.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives a single `monitor` parameter. Read the [overview](/docs-overview.html) for an introduction to the monitors and the collecting function. See the collecting function described in detail in the next section.
 
-* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function as an `options` key can improve the performance. Unless you have performance problems, don't worry about it.
+* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
 ### The Collecting Function
 

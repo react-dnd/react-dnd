@@ -31,7 +31,7 @@ The functions returned by the connector methods also accept options. They need t
 
 ### Example
 
-Check out [the tutorial](/docs-tutoria.html) for more real examples!
+Check out [the tutorial](/docs-tutorial.html) for more real examples!
 
 -------------------
 ```js
