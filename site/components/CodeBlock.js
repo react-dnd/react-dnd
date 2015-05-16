@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, Component, findDOMNode } from 'react';
+import ReactUpdates from 'react/lib/ReactUpdates';
 import StaticHTMLBlock from './StaticHTMLBlock';
 
 import './CodeBlock.less';
@@ -67,7 +68,15 @@ export default class CodeBlock extends Component {
       chosen: true
     });
 
+    const scrollTopBefore = findDOMNode(this).getBoundingClientRect().top;
     setPreferredSyntax(syntax);
+    ReactUpdates.flushBatchedUpdates();
+    const scrollTopAfter = findDOMNode(this).getBoundingClientRect().top;
+
+    window.scroll(
+      window.pageXOffset || window.scrollX,
+      (window.pageYOffset || window.scrollY) - (scrollTopBefore - scrollTopAfter)
+    );
   }
 
   render() {
