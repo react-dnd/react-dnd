@@ -13,6 +13,8 @@ Call the `DropTargetConnector`'s `dropTarget()` method inside your *collecting f
 
 ### Example
 
+Check out [the tutorial](/docs-tutoria.html) for more real examples!
+
 -------------------
 ```js
 var React = require('react');

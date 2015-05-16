@@ -36,7 +36,6 @@ For each component that needs to track the drag and drop state, you can define a
 
 Let's say you want to highlight the Chess cells when a piece is being dragged. A collecting function for the `Cell` component might look like this:
 
--------------------
 ```js
 function collect(monitor) {
   return {
@@ -45,11 +44,6 @@ function collect(monitor) {
   };
 }
 ```
--------------------
-
--------------------
-
--------------------
 
 It instructs React DnD to pass the up-to-date values of `highlighted` and `hovered` to all the `Cell` instances as props.
 
@@ -59,7 +53,6 @@ If the backend handles the DOM events, but the components use React to describe 
 
 In fact, a connector is passed as a second argument to the *collecting function* we described above. Let's see how we can use it to specify the drag source:
 
--------------------
 ```js
 function collect(monitor, connect) {
   return {
@@ -69,11 +62,6 @@ function collect(monitor, connect) {
   };
 }
 ```
--------------------
-
--------------------
-
--------------------
 
 In the component's `render` method, we are then able to access both the data obtained from the monitor, and the function obtained from the connector:
 

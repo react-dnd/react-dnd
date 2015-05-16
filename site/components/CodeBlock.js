@@ -3,6 +3,21 @@ import StaticHTMLBlock from './StaticHTMLBlock';
 
 import './CodeBlock.less';
 
+let preferredSyntax = 'es5';
+let observers = [];
+
+function subscribe(observer) {
+  observers.push(observer);
+  return () => {
+    observers.slice(observers.indexOf(observer), 1);
+  };
+}
+
+function setPreferredSyntax(syntax) {
+  preferredSyntax = syntax;
+  observers.forEach(o => o(preferredSyntax));
+}
+
 export default class CodeBlock extends Component {
   static propTypes = {
     es5: PropTypes.string,
@@ -19,14 +34,40 @@ export default class CodeBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      chosen: false,
       syntax: this.props.es5.trim().length && 'es5' ||
               this.props.es6.trim().length && 'es6' ||
               this.props.es7.trim().length && 'es7'
     };
   }
 
+  componentDidMount() {
+    this.unsubscribe = subscribe(this.handlePreferredSyntaxChange.bind(this));
+  }
+
+  handlePreferredSyntaxChange(syntax) {
+    if (this.state.chosen || this.state.syntax === syntax) {
+      return;
+    }
+
+    if (this.props[syntax].trim().length) {
+      this.setState({
+        syntax
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   handleSyntaxClick(syntax) {
-    this.setState({ syntax });
+    this.setState({
+      syntax,
+      chosen: true
+    });
+
+    setPreferredSyntax(syntax);
   }
 
   render() {
