@@ -101,6 +101,8 @@ If a drag source is nested in another drag source, the innermost drag source of 
 
 ### Example
 
+Check out [the tutorial](/docs-tutoria.html) for more real examples!
+
 -------------------
 ```js
 var React = require('react');

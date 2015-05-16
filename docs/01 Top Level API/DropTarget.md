@@ -104,6 +104,8 @@ When using the [`HTML5` backend](/docs-html5.html), you can handle the file drop
 
 ### Example
 
+Check out [the tutorial](/docs-tutoria.html) for more real examples!
+
 -------------------
 ```js
 var React = require('react');
