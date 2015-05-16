@@ -1546,7 +1546,7 @@ canDrop(props) {
 -------------------
 
 
-I also adding `monitor.canDrop()` query to my collecting function, and some overlay rendering code to the component:
+I'm also adding `monitor.canDrop()` query to my collecting function, and some overlay rendering code to the component:
 
 -------------------
 ```js
