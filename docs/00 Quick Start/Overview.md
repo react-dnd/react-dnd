@@ -8,13 +8,13 @@ This is not a coincidence, as React DnD uses Flux internally.
 
 ### Backends
 
-React DnD is built on top of the [HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop). It is a reasonable default because it screenshots the dragged DOM node and uses it as a “drag preview” out of the box. It's handy that you don't have to do any drawing as the cursor moves. This API is also the only way to handle file drop events.
+React DnD is built on top of the [HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop). It is a reasonable default because it screenshots the dragged DOM node and uses it as a “drag preview” out of the box. It's handy that you don't have to do any drawing as the cursor moves. This API is also the only way to handle the file drop events.
 
 Unfortunately, the HTML5 drag and drop API also has some downsides. It does not work on touch screens, and it provides less customization opportunities on IE than in other browsers.
 
-This is why **the HTML5 drag and drop support is implemented in a pluggable way** in React DnD. You don't have to use it. You can write a different implementation, based on touch events, mouse events, or something else entirely. Such pluggable implementations are called *backends* in React DnD. Only the [HTML5 backend](/docs-html5.html) comes with the library, but more may be added in the future.
+This is why **the HTML5 drag and drop support is implemented in a pluggable way** in React DnD. You don't have to use it. You can write a different implementation, based on touch events, mouse events, or something else entirely. Such pluggable implementations are called the *backends* in React DnD. Only the [HTML5 backend](/docs-html5.html) comes with the library, but more may be added in the future.
 
-Backends perform a similar role to that of React's synthetic event system: **they abstract away the browser differences and process the native DOM events.** Despite the similarities, React DnD backends do not have a dependency on React or its synthetic event system. Under the hood, all the backends do is translate the DOM events into the internal Flux actions that React DnD can process.
+The backends perform a similar role to that of React's synthetic event system: **they abstract away the browser differences and process the native DOM events.** Despite the similarities, React DnD backends do not have a dependency on React or its synthetic event system. Under the hood, all the backends do is translate the DOM events into the internal Flux actions that React DnD can process.
 
 ### Items and Types
 
@@ -24,7 +24,7 @@ What is an item? An *item* is a plain JavaScript object *describing* what's bein
 
 What is a type, then? A *type* is a string (or a [symbol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)) uniquely identifying *a whole class of items* in your application. In a Kanban board app, you might have a `'card'` type representing the draggable cards and a `'list'` type for the draggable lists of those cards. In Chess, you might only have a single `'piece'` type.
 
-Types are useful because, as your app grows, you might want to make more things draggable, but you don't necessarily want all the existing drop targets to suddenly start reacting to them. **Types let you specify which drag sources and drop targets are compatible.** You're probably going to have an enumeration of the type constants in your application, just like you may have an enumeration of Flux action types.
+Types are useful because, as your app grows, you might want to make more things draggable, but you don't necessarily want all the existing drop targets to suddenly start reacting to the new items. **The types let you specify which drag sources and drop targets are compatible.** You're probably going to have an enumeration of the type constants in your application, just like you may have an enumeration of the Flux action types.
 
 ### Monitors
 
@@ -32,7 +32,7 @@ Drag and drop is inherently stateful. Either a drag operation is in progress, or
 
 React DnD exposes this state to your components via a few tiny wrappers over the internal state storage called the *monitors*. **The monitors let you update the props of your components in response to the drag and drop state changes.**
 
-For each component that needs to track the drag and drop state, you can define a *collecting function* that retrieves the relevant bits of it from the monitors. React DnD then takes care of timely calling your collecting function and injecting the result into your components' props.
+For each component that needs to track the drag and drop state, you can define a *collecting function* that retrieves the relevant bits of it from the monitors. React DnD then takes care of timely calling your collecting function and merging its return value into your components' props.
 
 Let's say you want to highlight the Chess cells when a piece is being dragged. A collecting function for the `Cell` component might look like this:
 
@@ -109,9 +109,9 @@ The `connectDropTarget` call tells React DnD that the root DOM node of our compo
 
 So far we have covered the backends which work with the DOM, the data, as represented by the items and types, and the collecting functions that, thanks to the monitors and the connectors, let you describe what props React DnD should inject into your components.
 
-But how do we configure our components to actually have those props injected? How do we perform the side effects in response to the drag and drop events? Meet the *drag sources* and the *drop targets*, the primary abstraction units of React DnD. **They really tie the types, the items, the side effects, and the collecting function together with your components.**
+But how do we configure our components to actually have those props injected? How do we perform the side effects in response to the drag and drop events? Meet the *drag sources* and the *drop targets*, the primary abstraction units of React DnD. **They really tie the types, the items, the side effects, and the collecting functions together with your components.**
 
-Whenever you want to make a component or some part of it draggable, you need to wrap that component into a *drag source* declaration. Every drag source is registered for a certain *type*, and has to implement a method producing an *item* from the component's props, and optionally a few other methods for handling the drag and drop events. The drag source declaration also lets you specify the *collecting function* for the given component.
+Whenever you want to make a component or some part of it draggable, you need to wrap that component into a *drag source* declaration. Every drag source is registered for a certain *type*, and has to implement a method producing an *item* from the component's props. It can also optionally a few other methods for handling the drag and drop events. The drag source declaration also lets you specify the *collecting function* for the given component.
 
 The *drop targets* are very similar to the drag sources. The only difference is that a single drop target may register for several item types at once, and instead of producing an item, it may handle its hover or drop.
 
@@ -149,9 +149,7 @@ export default DragSource(/* ... */)(YourComponent);
 
 -------------------
 
-Notice how, after specifying the [`DragSource`](/docs-drag-source.html) parameters in the first function call, there is a *second* function call, where you finally pass your class.
-
-This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [ES7 decorator syntax](github.com/wycats/javascript-decorators) to work out of the box:
+Notice how, after specifying the [`DragSource`](/docs-drag-source.html) parameters in the first function call, there is a *second* function call, where you finally pass your class. This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [ES7 decorator syntax](github.com/wycats/javascript-decorators) to work out of the box:
 
 -------------------
 
@@ -170,9 +168,7 @@ export default class YourComponent {
 
 You don't have to use this syntax, but if you like it, you can enable it by transpiling your code with [Babel](http://babeljs.io), and putting `{ "stage": 1 }` into your [.babelrc file](https://babeljs.io/docs/usage/babelrc/).
 
-Even if you don't plan to use ES7, the partial application can still be handy, because you can combine several [`DragSource`](/docs-drag-source.html) and [`DropTarget`](/docs-drop-target.html) declarations in ES5 or ES6 using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow).
-
-In ES7, you can just stack the decorators to achieve the same effect.
+Even if you don't plan to use ES7, the partial application can still be handy, because you can combine several [`DragSource`](/docs-drag-source.html) and [`DropTarget`](/docs-drop-target.html) declarations in ES5 or ES6 using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). In ES7, you can just stack the decorators to achieve the same effect.
 
 -------------------
 ```js

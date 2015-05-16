@@ -44,4 +44,4 @@ export default class YourApp {
 
 ### Parameters
 
-* **`backend`**: Required. A React DnD backend. Unless you're writing a custom one, you probably want to use the [HTML5 backend](/api-html5.html) that ships with React DnD.
+* **`backend`**: Required. A React DnD backend. Unless you're writing a custom one, you probably want to use the [HTML5 backend](/docs-html5.html) that ships with React DnD.

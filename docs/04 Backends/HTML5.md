@@ -3,12 +3,14 @@
 HTML5
 ===================
 
-This is the only backend currently shipping with React DnD. It uses [the HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop) under the hood and hides [its quirks](quirksmode.org/blog/archives/2009/09/the_html5_drag.html).
+This is the only backend currently shipping with React DnD. It uses [the HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop) under the hood and hides [its quirks](http://quirksmode.org/blog/archives/2009/09/the_html5_drag.html).
 
 ### Importing
 
 * In the UMD build it is available as `ReactDnD.HTML5`;
 * In the CommonJS build, you can import it from `react-dnd/modules/backends/HTML5`.
+
+It is not a top-level export by purpose so that you don't need to include it if you use a custom backend.
 
 ### Extras
 

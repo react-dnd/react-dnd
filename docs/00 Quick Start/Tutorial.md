@@ -1,23 +1,23 @@
 Tutorial
 ===================
 
-Now that you've read [the overview](/docs-overview.html), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/blog/2013/11/05/thinking-in-react.html) tutorial. Adding  drag and drop support is just be an icing on a cake.
+Now that you've read [the overview](/docs-overview.html), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/blog/2013/11/05/thinking-in-react.html) tutorial. Adding the drag and drop support is just the icing on the cake.
 
 In this tutorial, we're going to build a Chess game with React and React DnD. Just kidding! Writing a full-blown Chess game is totally out of scope of this tutorial. **What we're going to build is a tiny app with a Chess board and a lonely Knight. The Knight will be draggable according to the Chess rules.**
 
 We will use this example to demonstrate the data-driven approach of React DnD. You will learn how to create a drag source and a drop target, wire them together with your components, and change their appearance in response to the drag and drop events.
 
-If you're new to React and know a thing or two about it, but yet have to gain some experience building components, this tutorial can also serve as an introduction to the React mode of thinking and the React workflow.
-
-If you are a seasoned React developer and only came here for the drag and drop part, feel free to skip it to the third and the final chapter of this tutorial.
+If you're new to React and know a thing or two about it, but yet have to gain some experience building components, this tutorial can also serve as an introduction to the React mode of thinking and the React workflow. **If you are a seasoned React developer and only came here for the drag and drop part, feel free to skip it to the third and the final chapter of this tutorial.**
 
 Enough talk! It's time to set up a build workflow for our little project. I use [Webpack](http://webpack.github.io/), you might be using [Browserify](http://browserify.org/). I don't want to get into that now, so just set up an empty React project in whatever way is most convenient for you. If you're feeling lazy, you are free to clone [React Hot Boilerplate](https://github.com/gaearon/react-hot-boilerplate) and work on top of it. In fact, that's what I'm going to do myself.
 
 In this tutorial, the code examples are available simultaneously in ES5, ES6, and ES7. If you want to follow along using ES6 or ES7, you will need to set up a compilation step using [Babel](https://babeljs.io/). It's easy to [make it work with the tool of your choice](https://babeljs.io/docs/using-babel/) so we're going to skip this step, too, and assume you've dealt with it and you are ready to write code now. The boilerplate project [I linked to before](https://github.com/gaearon/react-hot-boilerplate) already includes Babel.
 
+>Note: When I say “ES7”, I actually mean ES6 + a few extensions that *might* make it into ES7 (also known as ES2016). There's a lot of confusion around this, so, for extra clarification, **in this tutorial the ES7 code is actually ES6 + [class properties](https://gist.github.com/jeffmo/054df782c05639da2adb) + [decorators](https://github.com/wycats/javascript-decorators).** You can enable these features by putting `{ "stage": 0 }` into your [.babelrc](https://babeljs.io/docs/usage/babelrc/) file. You can also [enable them individually](https://babeljs.io/docs/usage/experimental/).
+
 ## Identifying the Components
 
-We're going to start by creating some React components first, with no thoughts of the drag and drop interaction. What components our Lonely Knight app be made of? I can think of a few:
+We're going to start by creating some React components first, with no thoughts of the drag and drop interaction. Which components is our Lonely Knight app going to be made of? I can think of a few:
 
 * `Knight`, our lonely knight piece;
 * `Square`, a single square on the board;
@@ -25,19 +25,19 @@ We're going to start by creating some React components first, with no thoughts o
 
 Let's consider their props.
 
-* `Knight` probably needs no props. It has a position, but there's no reason for the `Knight` to know it, because it can be positioned by being placed into a `Square`.
+* `Knight` probably needs no props. It has a position, but there's no reason for the `Knight` to know it, because it can be positioned by being placed into a `Square` as a child.
 
 * It is tempting to give `Square` its position via props, but this, again, is not necessary, because the only information it really needs for the rendering is the color. I'm going to make `Square` white by default, and add a `black` boolean prop. And of course `Square` may accept a single child: the chess piece that is currently on it. I chose white as the default background color to match the browser defaults.
 
 * The `Board` is tricky. It makes no sense to pass `Square`s as children to it, because what else could a board contain? Therefore it probably owns the `Square`s. But then, it also need to own the `Knight` because this guy needs to be placed inside one of those `Square`s. This means that the `Board` needs to know the knight's current position. In a real Chess game, the `Board` would accept a data structure describing all the pieces, their colors and positions, but for us, a `knightPosition` prop will suffice. We will use two-item arrays as coordinates, with `[0, 0]` referring to the A8 square. Why A8 instead of A1? To match the browser coordinate orientation. I tried it another way and it just messed with my head too much.
 
-Where will the current state live? I really don't want to put it into the `Board` component. It's a good idea to have as little state in your components as possible, and because `Board` will already have some layout logic, I don't want to also burden it with managing the state.
+Where will the current state live? I really don't want to put it into the `Board` component. It's a good idea to have as little state in your components as possible, and because the `Board` will already have some layout logic, I don't want to also burden it with managing the state.
 
-The good news is, it doesn't matter at this point. We're just going to write the components as if the state existed somewhere, and make sure that they render correctly when they receive it via props, and think about managing the state afterwards!
+The good news is, it doesn't matter at this point. We're just going to write the components as if the state existed *somewhere*, and make sure that they render correctly when they receive it via props, and think about managing the state afterwards!
 
 ## Creating the Components
 
-I prefer to start bottom-up, because this way I'm always working with something that already exists. If I were to build the `Board` first, I wouldn't see my results until I'm done with `Square`. On the other hand, I can build and see the `Square` right away without even thinking of the `Board`. I think that the immediate feedback loop is important (you can tell that by [another project I work on](https://gaearon.github.io/react-hot-loader)).
+I prefer to start bottom-up, because this way I'm always working with something that already exists. If I were to build the `Board` first, I wouldn't see my results until I'm done with the `Square`. On the other hand, I can build and see the `Square` right away without even thinking of the `Board`. I think that the immediate feedback loop is important (you can tell that by [another project I work on](https://gaearon.github.io/react-hot-loader)).
 
 In fact I'm going to start with the `Knight`. It doesn't have any props at all, and it the easiest one to build:
 
@@ -185,7 +185,7 @@ React.render(
 
 Sadly, the screen is empty. I made a few mistakes:
 
-* I forgot to give `Square` any dimensions so it just collapses. I don't want it to have any fixed size, so I'll give it `width: '100%'` and `height: '100%'` so it fills the container.
+* I forgot to give `Square` any dimensions so it just collapses. I don't want it to have any fixed size, so I'll give it `width: '100%'` and `height: '100%'` to fill the container.
 
 * I forgot to put `{this.props.children}` inside the `div` returned by the `Square`, so it ignores the `Knight` passed to it.
 
@@ -384,7 +384,7 @@ React.render(
 
 -------------------
 
-Indeed, I can see the same single square. I'm now going to add a whole bunch of them! But I don't know where to start. What do I put in `render`? Some kind of `for` loop? A `map` over some array?
+Indeed, I can see the same single square. I'm now going to add a whole bunch of them! But I don't know where to start. What do I put in `render`? Some kind of a `for` loop? A `map` over some array?
 
 To be honest, I don't want to think about it now. I already know how to render a single square with or without a knight. I also know the knight's position thanks to the `knightPosition` prop. This means I can write the `renderSquare` method and not worry about rendering the whole board just yet.
 
@@ -635,7 +635,7 @@ export default class Board {
 
 It looks pretty awesome! I don't know how to constrain the `Board` to maintain a square aspect ratio, but this should be easy to add later.
 
-Think about it for a moment. We just went from nothing to being able to move the `Knight` on a beautiful `Board` by changing `knightPosition`:
+Think about it for a moment. We just went from nothing to being able to move the `Knight` on a beautiful `Board` by changing the `knightPosition`:
 
 -------------------
 ```js
@@ -669,11 +669,11 @@ Declarative much? That's why people love working with React.
 
 We want to make the `Knight` draggable. It's a noble goal, but we need to see past it. What we really mean is that we want to keep the current `knightPosition` in some kind of state storage, and have some way to change it.
 
-Because setting up this state requires some thought, we won't try to implement dragging at the same time. Instead, we'll start with a simpler implementation. We will move the `Knight` when you click a particular `Square`, but only if this is allowed by the Chess rules. Implementing this logic should give us enough insight into managing the state, so we can replace clicking with drag and drop once we've dealt with that.
+Because setting up this state requires some thought, we won't try to implement dragging at the same time. Instead, we'll start with a simpler implementation. We will move the `Knight` when you click a particular `Square`, but only if this is allowed by the Chess rules. Implementing this logic should give us enough insight into managing the state, so we can replace clicking with the drag and drop once we've dealt with that.
 
 React is not opinionated about the state management or the data flow; you can use [Flux](https://facebook.github.io/flux/), [Rx](https://github.com/Reactive-Extensions/RxJS) or <s>even Backbone</s> nah, [avoid fat models and separate your reads from writes](http://martinfowler.com/bliki/CQRS.html).
 
-I'm not going to bother with installing or setting up Flux for this simple example, so I'm going to follow a simpler pattern. It won't scale as well as Flux, but I also don't need it to. I have not decided on the API for my state manager yet, but I'm going to call it `Game`, and it will definitely need to have some way of signaling data changes to my React code.
+I don't want to bother with installing or setting up Flux for this simple example, so I'm going to follow a simpler pattern. It won't scale as well as Flux, but I also don't need it to. I have not decided on the API for my state manager yet, but I'm going to call it `Game`, and it will definitely need to have some way of signaling data changes to my React code.
 
 Since I know this much, I can rewrite my `index.js` with a hypothetical `Game` that doesn't exist yet. Note that this time, I'm writing my code in blind, not being able to run it yet. This is because I'm still figuring out the API:
 
@@ -711,7 +711,7 @@ observe(knightPosition =>
 
 -------------------
 
-What is that `observe` function I import? It's just the most minimal way I can think of to subscribing to the changing state. I could've made it an `EventEmitter` but why on Earth even *go there* when all I need is a single change event? I could have made `Game` an object model, but why do that, when all I need is a stream of values?
+What is this `observe` function I import? It's just the most minimal way I can think of to subscribe to a changing state. I could've made it an `EventEmitter` but why on Earth even *go there* when all I need is a single change event? I could have made `Game` an object model, but why do that, when all I need is a stream of values?
 
 Just to verify that this subscription API makes some sense, I'm going to write a fake `Game` that emits random positions:
 
@@ -743,7 +743,7 @@ Nothing feels as good as being back into the rendering game!
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/1K0s0n0r0C0e2P2N2D1d/Screen%20Recording%202015-05-15%20at%2012.06%20pm.gif' width='404' height='445' alt='Screenshot'>
 
-This is obviously not very useful. If we want some interactivity, we're going to need to have a way to modify the `Game` state from our components. For now, I'm going to keep it simple and expose `moveKnight` function that directly modifies the internal state. This is not going to fare well in a moderately complex app where different state storages may be interested in updating their state in response to a single user action, but in our case this will suffice:
+This is obviously not very useful. If we want some interactivity, we're going to need a way to modify the `Game` state from our components. For now, I'm going to keep it simple and expose a `moveKnight` function that directly modifies the internal state. This is not going to fare well in a moderately complex app where different state storages may be interested in updating their state in response to a single user action, but in our case this will suffice:
 
 -------------------
 ```js
@@ -796,7 +796,7 @@ export function moveKnight(toX, toY) {
 -------------------
 
 
-Now, let's go back to our components. Our goal at this point is to move the `Knight` to a `Square` that was clicked. One way to do that is to call `moveKnight` from the `Square` itself. However, this would require us to pass `Square` its position. Here is a good rule of thumb:
+Now, let's go back to our components. Our goal at this point is to move the `Knight` to a `Square` that was clicked. One way to do that is to call `moveKnight` from the `Square` itself. However, this would require us to pass the `Square` its position. Here is a good rule of thumb:
 
 >If a component doesn't need some data for rendering, it doesn't need that data at all.
 
@@ -810,7 +810,7 @@ var Square = require('./Square');
 var Knight = require('./Knight');
 var moveKnight = require('./Game').moveKnight;
 
-// ...
+/* ... */
 
 renderSquare: function (i) {
   var x = i % 8;
@@ -845,7 +845,7 @@ import Square from './Square';
 import Knight from './Knight';
 import { moveKnight } from './Game';
 
-// ...
+/* ... */
 
 renderSquare(i) {
   const x = i % 8;
@@ -877,15 +877,15 @@ handleSquareClick(toX, toY) {
 -------------------
 
 
-We could have also added an `onClick` prop to `Square` and used it instead, but since we're going to remove it in favor of a drag and drop interface later anyway, why bother.
+We could have also added an `onClick` prop to `Square` and used it instead, but since we're going to remove the click handler in favor of the drag and drop interface later anyway, why bother.
 
-The last missing piece right now is the Chess rule check. The `Knight` can't just move to an arbitrary square, it is only allowed to make [L-shaped moves](http://en.wikipedia.org/wiki/Knight_%28chess%29#Movement). I'm adding `canMoveKnight(toX, toY)` to the `Game` and changing its initial position to A2:
+The last missing piece right now is the Chess rule check. The `Knight` can't just move to an arbitrary square, it is only allowed to make [L-shaped moves](http://en.wikipedia.org/wiki/Knight_%28chess%29#Movement). I'm adding a `canMoveKnight(toX, toY)` function to the `Game` and changing the initial position to A2 to match the Chess rules:
 
 -------------------
 ```js
 var knightPosition = [1, 7];
 
-// ...
+/* ... */
 
 exports.canMoveKnight = function (toX, toY) {
   const x = knightPosition.x;
@@ -901,7 +901,7 @@ exports.canMoveKnight = function (toX, toY) {
 ```js
 let knightPosition = [1, 7];
 
-// ...
+/* ... */
 
 export function canMoveKnight(toX, toY) {
   const [x, y] = knightPosition;
@@ -922,7 +922,7 @@ Finally, I'm adding a `canMoveKnight` check to the `handleSquareClick` method:
 
 -------------------
 ```js
-handleSquareClick(toX, toY) {
+handleSquareClick: function (toX, toY) {
   if (canMoveKnight(toX, toY)) {
     moveKnight(toX, toY);
   }
@@ -930,7 +930,7 @@ handleSquareClick(toX, toY) {
 ```
 -------------------
 ```js
-handleSquareClick: function (toX, toY) {
+handleSquareClick(toX, toY) {
   if (canMoveKnight(toX, toY)) {
     moveKnight(toX, toY);
   }
@@ -944,7 +944,7 @@ handleSquareClick: function (toX, toY) {
 
 Working great so far!
 
-## Adding Drag and Drop Interaction
+## Adding the Drag and Drop Interaction
 
 This is the part that actually prompted me to write this tutorial. We are now going to see how easy React DnD makes it to add some drag and drop interaction to your existing components.
 
@@ -992,7 +992,7 @@ export default class Board {
 -------------------
 
 
-Next, I'm going to create constants for the draggable item types. We're only going to have a single item type in our game, a `KNIGHT`. I'm creating a `Constants` module that exports it:
+Next, I'm going to create the constants for the draggable item types. We're only going to have a single item type in our game, a `KNIGHT`. I'm creating a `Constants` module that exports it:
 
 -------------------
 ```js
@@ -1036,7 +1036,9 @@ const knightSource = {
 
 This is because there is nothing to describe: there is literally a single draggable object in the whole application! If we had a bunch of chess pieces, it might be a good idea to use the `props` parameter and return something like `{ pieceId: props.id }`. In our case, an empty object will suffice.
 
-Next, we're going to write a collecting function. What props does the `Knight` need? It will sure need a way to specify the drag source node. It would also be nice to slightly dim the `Knight`'s opacity while it is being dragged. Therefore, it needs to know whether it is currently being dragged. Here's the collecting function I wrote for it:
+Next, we're going to write a collecting function. What props does the `Knight` need? It will sure need a way to specify the drag source node. It would also be nice to slightly dim the `Knight`'s opacity while it is being dragged. Therefore, it needs to know whether it is currently being dragged.
+
+Here is the collecting function I wrote for it:
 
 ```js
 function collect(connect, monitor) {
@@ -1047,7 +1049,7 @@ function collect(connect, monitor) {
 }
 ```
 
-Let's take a look at the whole `Knight` component now, including the `DragSource` call and the changes in the `render` function:
+Let's take a look at the whole `Knight` component now, including the `DragSource` call and the updated `render` function:
 
 -------------------
 ```js
@@ -1180,9 +1182,9 @@ export default class Knight {
 
 The `Knight` is now a drag source, but there are no drop targets to handle the drop yet. We're going to make the `Square` a drop target now.
 
-This time, we can't avoid passing the position to the `Square`. After all, how can it know where to move the knight if it doesn't know its own position? On the other hand, it still feels wrong because the `Square` as an entity in our application has not changed, and if it used to be simple, why complicate it? When you face this dilemma, it's usually a sign that it is time to separate the [smart and dumb components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
+This time, we can't avoid passing the position to the `Square`. After all, how can the `Square` know where to move the dragged knight if the `Square` doesn't know its own position? On the other hand, it still feels wrong because the `Square` as an entity in our application has not changed, and if it used to be simple, why complicate it? When you face this dilemma, it's time to separate the [smart and dumb components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
-I'm going to introduce a new component called the `BoardSquare`. It renders the good old `Square`, but is also aware of its position. In fact, it's encapsulating what the `renderSquare` method inside the `Board` used to do. React components are often extracted from such render submethods when the time is right.
+I'm going to introduce a new component called the `BoardSquare`. It renders the good old `Square`, but is also aware of its position. In fact, it's encapsulating some of the logic that the `renderSquare` method inside the `Board` used to do. React components are often extracted from such render submethods when the time is right.
 
 Here is the `BoardSquare` I extracted:
 
@@ -1269,21 +1271,24 @@ renderSquare: function (i) {
   var x = i % 8;
   var y = Math.floor(i / 8);
 
-  var knightX = this.props.knightPosition[0];
-  var knightY = this.props.knightPosition[1];
-  var piece = (x === knightX && y === knightY) ?
-    <Knight /> :
-    null;
-
   return (
     <div key={i}
          style={{ width: '12.5%', height: '12.5%' }}>
       <BoardSquare x={x}
                    y={y}>
-        {piece}
+        {this.renderPiece(x, y)}
       </BoardSquare>
     </div>
   );
+}
+
+renderPiece: function (x, y) {
+  var knightX = this.props.knightPosition[0]
+  var knightY = this.props.knightPosition[1];
+
+  if (x === knightX && y === knightY) {
+    return <Knight />;
+  }
 }
 ```
 -------------------
@@ -1291,28 +1296,29 @@ renderSquare: function (i) {
 renderSquare(i) {
   const x = i % 8;
   const y = Math.floor(i / 8);
-
-  const [knightX, knightY] = this.props.knightPosition;
-  const piece = (x === knightX && y === knightY) ?
-    <Knight /> :
-    null;
-
   return (
     <div key={i}
          style={{ width: '12.5%', height: '12.5%' }}>
       <BoardSquare x={x}
                    y={y}>
-        {piece}
+        {this.renderPiece(x, y)}
       </BoardSquare>
     </div>
   );
+}
+
+renderPiece(x, y) {
+  const [knightX, knightY] = this.props.knightPosition;
+  if (x === knightX && y === knightY) {
+    return <Knight />;
+  }
 }
 ```
 -------------------
 
 -------------------
 
-Let's now wrap the `BoardSquare` with a [`DropTarget`](/docs-drop-target.html). I'm going to write a drop target specification that only handles `drop`:
+Let's now wrap the `BoardSquare` with a [`DropTarget`](/docs-drop-target.html). I'm going to write a drop target specification that only handles the `drop` event:
 
 -------------------
 ```js
@@ -1334,9 +1340,9 @@ const squareTarget = {
 
 -------------------
 
-In a real app, I could have used `monitor.getItem()` to retrieve the item that the drag source returned from `beginDrag`, but since we only have a single draggable thing in the whole application, I don't really need it.
+See? The `drop` method receives the `props` of the `BoardSquare` so it knows *where* to move the knight when it drops. In a real app, I might also use `monitor.getItem()` to retrieve *the dragged item* that the drag source returned from `beginDrag`, but since we only have a single draggable thing in the whole application, I don't need it.
 
-In my collecting function, I'm going to obtain the function to connect my drop target node, and I'm also going to ask the monitor if the cursor is currently over the `BoardSquare` so I can highlight it:
+In my collecting function, I'm going to obtain the function to connect my drop target node, and I'm also going to ask the monitor whether the pointer is currently over the `BoardSquare` so I can highlight it:
 
 ```js
 function collect(connect, monitor) {
@@ -1347,7 +1353,7 @@ function collect(connect, monitor) {
 }
 ```
 
-After changing the `render` function to connect the drop target and to show the highlight overlay, here is what `BoardSquare` came to be:
+After changing the `render` function to connect the drop target and show the highlight overlay, here is what `BoardSquare` came to be:
 
 -------------------
 ```js
@@ -1546,7 +1552,7 @@ canDrop(props) {
 -------------------
 
 
-I'm also adding `monitor.canDrop()` query to my collecting function, and some overlay rendering code to the component:
+I'm also adding `monitor.canDrop()` to my collecting function, as well as some overlay rendering code to the component:
 
 -------------------
 ```js
@@ -1760,9 +1766,9 @@ export default class BoardSquare {
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/0X3c342g0i3u100p1o18/Screen%20Recording%202015-05-15%20at%2002.05%20pm.gif' width='404' height='445' alt='Screenshot'>
 
-### Finishing Touches
+### Final Touches
 
-This tutorial guided you through creating the React components, making the design decisions about them and the app's data layer, and finally adding the drag and drop. My intention was to show you that React DnD fits great with the philosophy of React, and that you should think about the app architecture first before diving into implementing the complex interactions.
+This tutorial guided you through creating the React components, making the design decisions about them and the app's data layer, and finally adding the drag and drop interaction. My intention was to show you that React DnD fits great with the philosophy of React, and that you should think about the app architecture first before diving into implementing the complex interactions.
 
 The last thing I want to demonstrate is drag preview customization. Sure, the browser will screenshot the DOM node, but what if we want to show something different?
 
@@ -1778,7 +1784,7 @@ function collect(connect, monitor) {
 }
 ```
 
-This lets us use `connectDragPreview`, either in `render` method, like used `connectDragSource`, or even in `componentDidMount` with a custom image:
+This lets us use `connectDragPreview`, either in `render` method, just like we used `connectDragSource`, or even in `componentDidMount` with a custom image:
 
 -------------------
 ```js

@@ -45,13 +45,13 @@ export default class MyComponent {
 
 ### Parameters
 
-* **`type`**: Required. Either a string, an ES6 symbol, or a function that returns either given the component's `props`. Only the [drop targets](/docs-drop-target.html) registered for the same type will react to this drag source's items. Read the [overview](/docs-overview.html) to learn more about the types.
+* **`type`**: Required. Either a string, an ES6 symbol, or a function that returns either given the component's `props`. Only the [drop targets](/docs-drop-target.html) registered for the same type will react to the items produced by this drag source. Read the [overview](/docs-overview.html) to learn more about the items and types.
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drag source reacts to the drag and drop events. See the drag source specification described in detail in the next section.
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](/docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](/docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
 
-* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function as an `options` key can improve the performance. Unless you have performance problems, don't worry about it.
+* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
 ### Drag Source Specification
 
@@ -61,11 +61,11 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 * **`beginDrag(props, monitor, component)`**: Required. When the dragging starts, `beginDrag` is called. You must return a plain JavaScript object describing the data being dragged. What you return is the *only* information available to the drop targets about the drag source so it's important to pick the *minimal* data they need to know. You may be tempted to put a reference to the `component` into it, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ id: props.id }` from this method.
 
-* **`endDrag(props, monitor, component)`**: Optional. When the dragging stops, `endDrag` is called. For every `beginDrag` call, a corresponding `endDrag` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target also specified a *drop result* by returning a plain object from its `drop()` method, this object will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. *Note: If the component is unmounted while dragging, `component` parameter is set to be `null`.*
+* **`endDrag(props, monitor, component)`**: Optional. When the dragging stops, `endDrag` is called. For every `beginDrag` call, a corresponding `endDrag` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a *drop result* by returning a plain object from its `drop()` method, it will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. *Note: If the component is unmounted while dragging, `component` parameter is set to be `null`.*
 
 * **`canDrag(props, monitor)`**: Optional. Use it to specify whether the dragging is currently allowed. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dragging based on some predicate over `props`. *Note: You may not call `monitor.canDrag()` inside this method.*
 
-* **`isDragging(props, monitor)`**: Optional. By default, only the drag source that started the drag operation is considered to be dragging. You can override this behavior by defining a custom `isDragging` method. It might return something like `props.id === monitor.getItem().id`. Do this if the original component may be unmounted during the dragging and later “resurrected” with a different parent. For example, when moving a card across the lists in a Kanban board, you want it to retain the dragged appearance—even though technically, the component gets unmounted and a different one gets mounted every time you move it to another list. *Note: You may not call `monitor.isDragging()` inside this method.*
+* **`isDragging(props, monitor)`**: Optional. By default, only the drag source that initiated the drag operation is considered to be dragging. You can override this behavior by defining a custom `isDragging` method. It might return something like `props.id === monitor.getItem().id`. Do this if the original component may be unmounted during the dragging and later “resurrected” with a different parent. For example, when moving a card across the lists in a Kanban board, you want it to retain the dragged appearance—even though technically, the component gets unmounted and a different one gets mounted every time you move it to another list. *Note: You may not call `monitor.isDragging()` inside this method.*
 
 #### Specification Method Parameters
 
@@ -73,17 +73,17 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 * **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Read the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
 
-* **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `isDragging` and `canDrag` because the instance may not be available by the time they are called. If you want these methods to depend on the component's state, consider lifting the state to the parent component, so that you could just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
+* **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `isDragging` and `canDrag` because the instance may not be available by the time they are called. If you want these methods to depend on the component's state, consider lifting the state to the parent component, so that you can just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
 
 ### The Collecting Function
 
 Just specifying the drag source `type` and `spec` is not quite enough.  
 There's still a few more things we need to take care of:
 
-* attach React DnD event handlers to some node in the component;
+* connect the React DnD event handlers to some node in the component;
 * pass some knowledge about the dragging state to our component.
 
-All communication between React components happens via props, so it makes sense that React DnD injects special props into your component. However it gives you the freedom to name them and decide what props your component will receive.
+All communication between the React components happens via props, so it makes sense that React DnD injects special props into your component. However it gives you the freedom to name them and decide what props your component will receive.
 
 Your *collecting function* will be called by React DnD with a *connector* that lets you connect nodes to the DnD backend, and a *monitor* to query information about the drag state. It should return a plain object of props to inject into your component.
 
@@ -101,7 +101,7 @@ If a drag source is nested in another drag source, the innermost drag source of 
 
 ### Example
 
-Check out [the tutorial](/docs-tutoria.html) for more real examples!
+Check out [the tutorial](/docs-tutorial.html) for more real examples!
 
 -------------------
 ```js

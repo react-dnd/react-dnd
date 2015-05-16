@@ -44,13 +44,13 @@ export default class MyComponent {
 
 ### Parameters
 
-* **`types`**: Required. A string, an ES6 symbol, an array of either, or a function that returns either of those, given component's `props`. This drop target will only react to the items created by the [drag sources](/docs-drag-source.html) of the specified type(s). Read the [overview](/docs-overview.html) to learn more about the types.
+* **`types`**: Required. A string, an ES6 symbol, an array of either, or a function that returns either of those, given component's `props`. This drop target will only react to the items produced by the [drag sources](/docs-drag-source.html) of the specified type or types. Read the [overview](/docs-overview.html) to learn more about the items and types.
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drop target reacts to the drag and drop events. See the drop target specification described in detail in the next section.
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](/docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](/docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
 
-* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function as an `options` key can improve the performance. Unless you have performance problems, don't worry about it.
+* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
 ### Drop Target Specification
 
@@ -58,9 +58,9 @@ The second `spec` parameter must be a plain object implementing the drop target 
 
 #### Specification Methods
 
-* **`drop(props, monitor, component)`**: Optional. Called when a compatible item is dropped on the target. You may either return undefined, or a plain object. If you return an object, it is going to become *the drop result* and will be available to the drag source in its `endDrag` method as `monitor.getDropResult()`. This is useful in case you want to perform different actions depending on which target received the drop. If you work with nested drop targets, you can check whether a nested target has already handled `drop` by calling `monitor.didDrop()` and `monitor.getDropResult()`. Both this method and the source's `endDrag` method are good places to fire Flux actions. This method will not be called if `canDrop()` is defined and returns `false`.
+* **`drop(props, monitor, component)`**: Optional. Called when a compatible item is dropped on the target. You may either return undefined, or a plain object. If you return an object, it is going to become *the drop result* and will be available to the drag source in its `endDrag` method as `monitor.getDropResult()`. This is useful in case you want to perform different actions depending on which target received the drop. If you have nested drop targets, you can test whether a nested target has already handled `drop` by checking `monitor.didDrop()` and `monitor.getDropResult()`. Both this method and the source's `endDrag` method are good places to fire Flux actions. This method will not be called if `canDrop()` is defined and returns `false`.
 
-* **`hover(props, monitor, component)`**: Optional. Called when an item is hovered over the component. You can check `monitor.isOver({ shallow: true })` to test whether the hover happens over *just* the current target, or over a nested one. Unlike `drop()`, this method will be called even if `canDrop()` is defined and returns `false`. You can check `monitor.canDrop()` to test whether this was the case.
+* **`hover(props, monitor, component)`**: Optional. Called when an item is hovered over the component. You can check `monitor.isOver({ shallow: true })` to test whether the hover happens over *just* the current target, or over a nested one. Unlike `drop()`, this method will be called even if `canDrop()` is defined and returns `false`. You can check `monitor.canDrop()` to test whether this is the case.
 
 * **`canDrop(props, monitor)`**: Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over `props` or `monitor.getItem()`. *Note: You may not call `monitor.canDrop()` inside this method.*
 
@@ -72,17 +72,17 @@ The second `spec` parameter must be a plain object implementing the drop target 
 
 * **`monitor`**: An instance of [`DropTargetMonitor`](/docs-drop-target-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, whether it is over the current target, and whether it can be dropped. Read the [`DropTargetMonitor` documentation](docs-drop-target-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
 
-* **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `canDrop` because the instance may not be available by the time it is called. If you want this method to depend on the component's state, consider lifting the state to the parent component, so that you could just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
+* **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `canDrop` because the instance may not be available by the time it is called. If you want this method to depend on the component's state, consider lifting the state to the parent component, so that you can just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
 
 ### The Collecting Function
 
 Just specifying the drop target `types` and `spec` is not quite enough.  
 There's still a few more things we need to take care of:
 
-* attach React DnD event handlers to some node in the component;
+* connect the React DnD event handlers to some node in the component;
 * pass some knowledge about the dragging state to our component.
 
-All communication between React components happens via props, so it makes sense that React DnD injects special props into your component. However it gives you the freedom to name them and decide what props your component will receive.
+All communication between the React components happens via props, so it makes sense that React DnD injects special props into your component. However it gives you the freedom to name them and decide what props your component will receive.
 
 Your *collecting function* will be called by React DnD with a *connector* that lets you connect nodes to the DnD backend, and a *monitor* to query information about the drag state. It should return a plain object of props to inject into your component.
 
@@ -100,11 +100,11 @@ If a drop target is nested in another drop target, both `hover()` and `drop()` b
 
 ### Handling Files and URLs
 
-When using the [`HTML5` backend](/docs-html5.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` and `HTML5Backend.NativeTypes.URL` types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
+When using the [`HTML5` backend](/docs-html5.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` or `HTML5Backend.NativeTypes.URL` built-in types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
 
 ### Example
 
-Check out [the tutorial](/docs-tutoria.html) for more real examples!
+Check out [the tutorial](/docs-tutorial.html) for more real examples!
 
 -------------------
 ```js
@@ -446,7 +446,7 @@ export default class ChessSquare {
 ```js
 type ReactProps = Object;
 
-type DropTargetType =
+type DropTargetTypes =
   string |
   symbol |
   Array<string | symbol> |
@@ -476,7 +476,7 @@ type DropTargetOptions = {
 };
 
 DropTarget: (
-  type: DropTargetType,
+  type: DropTargetTypes,
   spec: DropTargetSpec,
   collect: (
     connect: DropTargetConnector,
