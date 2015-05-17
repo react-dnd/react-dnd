@@ -6,11 +6,71 @@ export const Pages = {
 };
 
 export const ExamplePages = [{
-  title: 'Passing Data',
+  title: 'Dustbin',
   pages: {
     DUSTBIN_SIMPLE: {
       location: 'examples-dustbin-simple.html',
-      title: 'Single Drop Target'
+      title: 'Single Target'
+    },
+    DUSTBIN_INTERESTING: {
+      location: 'examples-dustbin-interesting.html',
+      title: 'Multiple Targets'
+    },
+    DUSTBIN_STRESS: {
+      location: 'examples-dustbin-stress.html',
+      title: 'Stress Test'
+    }
+  }
+}, {
+  title: 'Drag Around',
+  pages: {
+    DRAG_AROUND_NAIVE: {
+      location: 'examples-drag-around-naive.html',
+      title: 'Naïve'
+    },
+    DRAG_AROUND_CUSTOM: {
+      location: 'examples-drag-around-custom.html',
+      title: 'Custom Drag Layer'
+    }
+  }
+}, {
+  title: 'Nesting',
+  pages: {
+    NESTING_SOURCES: {
+      location: 'examples-nesting-sources.html',
+      title: 'Drag Sources'
+    },
+    NESTING_TARGETS: {
+      location: 'examples-nesting-targets.html',
+      title: 'Drop Targets'
+    }
+  }
+}, {
+  title: 'Sortable',
+  pages: {
+    SORTABLE_SIMPLE: {
+      location: 'examples-sortable-simple.html',
+      title: 'Simple'
+    },
+    SORTABLE_CANCELABLE: {
+      location: 'examples-sortable-cancelable.html',
+      title: 'Cancel on Drop Outside'
+    },
+    SORTABLE_STRESS: {
+      location: 'examples-sortable-stress.html',
+      title: 'Stress Test'
+    }
+  }
+}, {
+  title: 'Customization',
+  pages: {
+    CUSTOMIZE_HANDLES: {
+      location: 'examples-customize-handles.html',
+      title: 'Handles and Previews'
+    },
+    CUSTOMIZE_EFFECTS: {
+      location: 'examples-customize-effects.html',
+      title: 'Drop Effects'
     }
   }
 }];
