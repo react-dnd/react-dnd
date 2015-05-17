@@ -1,8 +1,8 @@
 import './base.less';
-import Constants, { APIPages, Pages } from './Constants';
+import Constants, { APIPages, ExamplePages, Pages } from './Constants';
 import HomePage from './pages/HomePage';
 import APIPage from './pages/APIPage';
-import ExamplesPage from './pages/ExamplesPage';
+import ExamplePage from './pages/ExamplePage';
 import React, { Component } from 'react';
 import faviconURL from './images/favicon.png';
 
@@ -19,6 +19,10 @@ const APIDocs = {
   DRAG_LAYER: require('../docs/01 Top Level API/DragLayer.md'),
   DRAG_LAYER_MONITOR: require('../docs/03 Monitoring State/DragLayerMonitor.md'),
   HTML5: require('../docs/04 Backends/HTML5.md')
+};
+
+const Examples = {
+  DUSTBIN_SIMPLE: require('../examples/_dustbin-simple')
 };
 
 export default class IndexPage extends Component {
@@ -70,8 +74,6 @@ export default class IndexPage extends Component {
     switch (this.props.location) {
     case Pages.HOME.location:
       return <HomePage />;
-    case Pages.EXAMPLES.location:
-      return <ExamplesPage />;
     }
 
     for (let groupIndex in APIPages) {
@@ -85,6 +87,25 @@ export default class IndexPage extends Component {
         if (this.props.location === page.location) {
           return <APIPage example={page}
                           html={APIDocs[key]} />;
+        }
+      }
+    }
+
+    for (let groupIndex in ExamplePages) {
+      const group = ExamplePages[groupIndex];
+      const pageKeys = Object.keys(group.pages);
+
+      for (let i = 0; i < pageKeys.length; i++) {
+        const key = pageKeys[i];
+        const page = group.pages[key];
+        const Component = Examples[key];
+
+        if (this.props.location === page.location) {
+          return (
+            <ExamplePage example={page}>
+              <Component />
+            </ExamplePage>
+          );
         }
       }
     }
