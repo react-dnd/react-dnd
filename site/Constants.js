@@ -2,12 +2,18 @@ export const Pages = {
   HOME: {
     location: 'index.html',
     title: 'Home'
-  },
-  EXAMPLES: {
-    location: 'examples.html',
-    title: 'Examples'
   }
 };
+
+export const ExamplePages = [{
+  title: 'Passing Data',
+  pages: {
+    DUSTBIN_SIMPLE: {
+      location: 'examples-dustbin-simple.html',
+      title: 'Single Drop Target'
+    }
+  }
+}];
 
 export const APIPages = [{
   title: 'Quick Start',
@@ -80,3 +86,4 @@ export const APIPages = [{
 }];
 
 export const DOCS_DEFAULT = APIPages[0].pages.OVERVIEW;
+export const EXAMPLES_DEFAULT = ExamplePages[0].pages.DUSTBIN_SIMPLE;
