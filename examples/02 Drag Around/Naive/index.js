@@ -38,7 +38,7 @@ export default class DragAroundNaive extends Component {
         <p>
           If we want to add custom logic such as snapping to grid or bounds checking, we can only do this on drop.
           There is no way for us to control what happens to dragged preview once the browser has drawn it.
-          You might be interesting in the <a href='/examples-drag-around-custom-drag-layer.html'>custom rendering example</a> if this doesn't work for you.
+          Check out the <a href='/examples-drag-around-custom-drag-layer.html'>custom rendering example</a> if you'd rather trade more control for some more work.
         </p>
         <Container hideSourceOnDrag={hideSourceOnDrag} />
         <p>
