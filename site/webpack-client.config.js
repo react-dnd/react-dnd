@@ -7,18 +7,19 @@ var isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
 
-  devtool: 'cheap-eval-source-map',
+  devtool: isDev ? 'cheap-eval-source-map' : 'source-map',
 
   entry: [
-    path.join(__dirname, 'client.js'),
+    path.join(__dirname, 'client.js')
+  ].concat(isDev ? [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server'
-  ],
+  ] : []),
 
   output: {
     path: '__site__/',
     filename: isDev ? '[name].js' : '[name]-[hash].js',
-    publicPath: '',
+    publicPath: ''
   },
 
   target: 'web',
@@ -35,7 +36,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot-loader', 'babel-loader']
+        loaders: isDev ? ['react-hot-loader', 'babel-loader'] : ['babel-loader']
       },
       {
         test: /\.css$/,
