@@ -24,19 +24,25 @@ export default function decorateHandler({
     'Component';
 
   return class DragDropContainer extends Component {
+    static DecoratedComponent = DecoratedComponent;
+
     static displayName = `${containerDisplayName}(${displayName})`;
 
     static contextTypes = {
       dragDropManager: PropTypes.object.isRequired
     }
 
+    getHandlerId() {
+      return this.handlerId;
+    }
+
+    getDecoratedComponentInstance() {
+      return this.decoratedComponentInstance;
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
       return !arePropsEqual(nextProps, this.props) ||
              !shallowEqual(nextState, this.state);
-    }
-
-    getInstance() {
-      return this.refs.child;
     }
 
     constructor(props, context) {
@@ -116,6 +122,7 @@ export default function decorateHandler({
 
       this.handlerMonitor.receiveHandlerId(handlerId);
       this.handlerConnector = handlerConnector;
+      this.handlerId = handlerId;
     }
 
     handleChange() {
@@ -126,6 +133,7 @@ export default function decorateHandler({
     }
 
     handleChildRef(component) {
+      this.decoratedComponentInstance = component;
       this.handler.receiveComponent(component);
     }
 
