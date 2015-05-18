@@ -12,18 +12,18 @@ export default class SideBar {
     );
   }
 
-  renderGroup({ title, pages }) {
+  renderGroup({ title, pages}, index) {
     return (
-      <div className="SideBar-group">
+      <div className="SideBar-group" key={index}>
         <h4 className="SideBar-groupTitle">
           {title}
         </h4>
-        {Object.keys(pages).map(key => this.renderLink(pages[key]))}
+        {Object.keys(pages).map(key => this.renderLink(pages[key], key))}
       </div>
     );
   }
 
-  renderLink({ title, location }) {
+  renderLink({ title, location }, key) {
     const arrow = <span className="arrowBullet" />;
 
     let linkClass = 'SideBar-item';
@@ -32,7 +32,7 @@ export default class SideBar {
     }
 
     return (
-      <a key={title} href={location} target="_self" className={linkClass}>
+      <a key={key} href={location} target="_self" className={linkClass}>
         <span className="SideBar-itemText">{title}</span>
         {arrow}
       </a>
