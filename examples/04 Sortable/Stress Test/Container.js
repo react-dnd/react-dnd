@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component } from 'react';
 import update from 'react/lib/update';
 import { name } from 'faker';
