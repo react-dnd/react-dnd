@@ -27,7 +27,7 @@ if [ ! -d "$SITE_DIRECTORY" ]; then
 fi
 
 cd "$PROJECT_DIRECTORY"
-npm run site-build
+npm run build-site
 open __site__/index.html
 cd ../
 
