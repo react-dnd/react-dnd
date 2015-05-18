@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import APIPage from './pages/APIPage';
 import ExamplePage from './pages/ExamplePage';
 import React, { Component } from 'react';
-import faviconURL from './images/favicon.png';
 
 const APIDocs = {
   OVERVIEW: require('../docs/00 Quick Start/Overview.md'),
@@ -73,7 +72,6 @@ export default class IndexPage extends Component {
           <title>React DnD</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
           <link rel="stylesheet" type="text/css" href={this.props.files['main.css']} />
-          <link rel="shortcut icon" type="image/png" href={faviconURL} />
           <base target="_blank" />
         </head>
         <body>
