@@ -1,22 +1,12 @@
-# Run the server
+React DnD website is based on the [fixed-data-table](https://github.com/facebook/fixed-data-table) website and uses its code with a permission.
 
-The first time, get all the dependencies loaded via
+View it on the web: http://gaearon.github.io/react-dnd
+
+Run it locally:
 
 ```
 npm install
-```
-
-Then, run the server via
-
-```
 npm start
-Open http://localhost:8080/
 ```
 
-# Publish the website
-
-Just run the publish script, this will setup your environment if it's not already then it'll automatically build a static version of the site and publish it to gh-pages.
-
-```
-npm run site-publish
-```
+After it builds the static site (might take about half a minute), open http://localhost:8080/.
