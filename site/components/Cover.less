@@ -1,0 +1,36 @@
+@import '../constants.less';
+
+.Cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // background-color: @color-darkBlue;
+  padding: 2em;
+  overflow: hidden;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  border-bottom: inset 1px solid rgba(255,255,255,0.1);
+
+  .Cover-header {
+    margin: 6rem 0 3rem;
+    text-align: center;
+  }
+
+  .Cover-logo {
+    margin: 0;
+    font-size: 7vw;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    // color: @color-lightBlue;
+  }
+
+  .Cover-description {
+    margin: 0;
+    font-size: 2.25em;
+    line-height: 1.3;
+    // color: @color-lightBlue;
+  }
+}

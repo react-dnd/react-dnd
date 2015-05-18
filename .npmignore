@@ -2,3 +2,10 @@ src
 dist
 scripts
 examples
+site
+__site__
+__site_prerender__
+webpack.config.js
+.babelrc
+.eslintrc
+bower.json

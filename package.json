@@ -1,11 +1,14 @@
 {
   "name": "react-dnd",
-  "version": "1.0.0-rc",
-  "description": "Drag and drop for React with full DOM control",
+  "version": "1.0.0",
+  "description": "Drag and Drop for React",
   "main": "modules/index.js",
   "scripts": {
-    "start": "./scripts/run-examples",
-    "build": "./scripts/build",
+    "start": "./scripts/startSiteDevServer.sh",
+    "build-site": "./scripts/buildStaticSite.sh",
+    "publish-site": "./scripts/publishStaticSite.sh",
+    "build": "./scripts/build.sh",
+    "test": "karma start",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -14,16 +17,18 @@
   },
   "keywords": [
     "react",
+    "reactjs",
     "file",
     "drag",
     "drop",
-    "upload",
     "html5",
     "draggable",
     "droppable",
-    "mixin",
+    "drag-and-drop",
+    "dnd",
     "javascript",
-    "react-component"
+    "react-component",
+    "hoc"
   ],
   "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
   "license": "MIT",
@@ -33,7 +38,7 @@
   "homepage": "https://github.com/gaearon/react-dnd",
   "dependencies": {
     "disposables": "^1.0.1",
-    "dnd-core": "^1.0.2",
+    "dnd-core": "^1.1.0",
     "invariant": "^2.0.0",
     "lodash": "^3.1.0"
   },
@@ -42,17 +47,39 @@
   },
   "devDependencies": {
     "animation-frame": "^0.2.4",
+    "autoprefixer": "^5.0.0",
     "babel": "^5.1.10",
     "babel-core": "^5.2.17",
     "babel-eslint": "^3.1.1",
     "babel-loader": "^5.0.0",
+    "css-loader": "^0.9.1",
     "eslint": "^0.20.0",
-    "faker": "2.1.2",
-    "react": "~0.13.0",
+    "expect": "^1.6.0",
+    "extract-text-webpack-plugin": "^0.3.8",
+    "faker": "^2.1.3",
+    "file-loader": "^0.8.1",
+    "glob": "^4.3.5",
+    "html-loader": "^0.2.3",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-cli": "0.0.4",
+    "karma-mocha": "^0.1.10",
+    "karma-sourcemap-loader": "^0.3.4",
+    "karma-webpack": "^1.5.1",
+    "less": "^2.2.0",
+    "less-loader": "^2.0.0",
+    "marked": "^0.3.2",
+    "mocha": "^2.2.5",
+    "null-loader": "^0.1.0",
+    "postcss": "^4.0.2",
+    "postcss-custom-properties": "3.0.1",
+    "react": "^0.13.3",
     "react-hot-loader": "^1.2.3",
     "react-router": "~0.13.2",
     "request": "2.46.0",
-    "webpack": "^1.7.3",
-    "webpack-dev-server": "^1.7.0"
+    "style-loader": "^0.8.3",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.8.11",
+    "webpack-dev-server": "^1.8.2"
   }
 }
