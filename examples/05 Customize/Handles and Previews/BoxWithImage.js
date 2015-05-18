@@ -4,11 +4,11 @@ import { DragSource } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
+  padding: '0.5rem 1rem',
+  marginBottom: '.5rem',
   backgroundColor: 'white',
-  padding: '0.5rem',
-  margin: '0.5rem',
-  width: '20rem',
-  cursor: 'move'
+  cursor: 'move',
+  width: '20rem'
 };
 
 const BoxSource = {

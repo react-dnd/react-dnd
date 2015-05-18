@@ -3,12 +3,11 @@ import ItemTypes from './ItemTypes';
 import { DropTarget } from 'react-dnd';
 
 const style = {
-  height: '12rem',
-  width: '12rem',
-  color: '#222',
+  border: '1px solid gray',
+  height: '15rem',
+  width: '15rem',
   padding: '2rem',
-  textAlign: 'center',
-  backgroundColor: '#eee'
+  textAlign: 'center'
 };
 
 const boxTarget = {

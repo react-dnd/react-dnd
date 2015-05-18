@@ -8,12 +8,12 @@ import TargetBox from './TargetBox';
 export default class Container extends Component {
   render() {
     return (
-      <div style={{ height: 200 }}>
-        <div style={{ float: 'left', marginTop: 20 }}>
+      <div style={{ overflow: 'hidden', clear: 'both', marginTop: '1.5rem' }}>
+        <div style={{ float: 'left' }}>
           <SourceBox showCopyIcon />
           <SourceBox />
         </div>
-        <div style={{ float: 'left', marginLeft: 100 }}>
+        <div style={{ float: 'left' }}>
           <TargetBox />
         </div>
       </div>
