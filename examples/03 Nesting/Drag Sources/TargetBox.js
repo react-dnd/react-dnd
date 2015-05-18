@@ -3,7 +3,7 @@ import { DropTarget } from 'react-dnd';
 import Colors from './Colors';
 
 const style = {
-  border: '1px dashed gray',
+  border: '1px solid gray',
   height: '15rem',
   width: '15rem',
   padding: '2rem',

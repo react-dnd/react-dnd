@@ -4,17 +4,17 @@ import { DropTarget } from 'react-dnd';
 
 function getStyle(backgroundColor) {
   return {
-    border: '2px dashed #ddd',
+    border: '1px solid rgba(0,0,0,0.2)',
     minHeight: '8rem',
     minWidth: '8rem',
     color: 'white',
     backgroundColor: backgroundColor,
     padding: '2rem',
-    marginRight: '0.5rem',
-    marginBottom: '0.5rem',
-    marginTop: '0.5rem',
+    paddingTop: '1rem',
+    margin: '1rem',
     textAlign: 'center',
-    float: 'left'
+    float: 'left',
+    fontSize: '1rem'
   };
 }
 
@@ -70,9 +70,9 @@ export default class Dustbin extends Component {
     return connectDropTarget(
       <div style={getStyle(backgroundColor)}>
         {text}
-
+        <br/>
         {hasDropped &&
-          <span> &middot; dropped {hasDroppedOnChild && ' on child'}</span>
+          <span>dropped {hasDroppedOnChild && ' on child'}</span>
         }
 
         <div>
