@@ -46,14 +46,14 @@ export default class DragAroundCustomDragLayer extends Component {
             <input type='checkbox'
                    checked={snapToGridWhileDragging}
                    onChange={this.handleSnapToGridWhileDraggingChange} />
-            Snap to grid while dragging
+            <small>Snap to grid while dragging</small>
           </label>
           <br />
           <label>
             <input type='checkbox'
                    checked={snapToGridAfterDrop}
                    onChange={this.handleSnapToGridAfterDropChange} />
-            Snap to grid after drop
+            <small>Snap to grid after drop</small>
           </label>
         </p>
       </div>
