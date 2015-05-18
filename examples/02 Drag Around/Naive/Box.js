@@ -5,8 +5,9 @@ import { DragSource } from 'react-dnd';
 const style = {
   position: 'absolute',
   border: '1px dashed gray',
-  padding: '0.5rem',
-  cursor: 'move'
+  backgroundColor: 'white',
+  padding: '0.5rem 1rem',
+  cursor: 'move',
 };
 
 const boxSource = {
