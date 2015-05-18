@@ -31,10 +31,16 @@ export default function DragLayer(collect, options = {}) {
       'Component';
 
     return class DragLayerContainer extends Component {
+      static DecoratedComponent = DecoratedComponent;
+
       static displayName = `DragLayer(${displayName})`;
 
       static contextTypes = {
         dragDropManager: PropTypes.object.isRequired
+      }
+
+      getDecoratedComponentInstance() {
+        return this.refs.child;
       }
 
       shouldComponentUpdate(nextProps, nextState) {
@@ -83,7 +89,8 @@ export default function DragLayer(collect, options = {}) {
       render() {
         return (
           <DecoratedComponent {...this.props}
-                              {...this.state} />
+                              {...this.state}
+                              ref='child' />
         );
       }
     };
