@@ -6,7 +6,8 @@ const style = {
   display: 'inline-block',
   border: '1px dashed gray',
   padding: '0.5rem',
-  backgroundColor: 'white'
+  backgroundColor: 'white',
+  cursor: 'move'
 };
 
 const boxSource = {

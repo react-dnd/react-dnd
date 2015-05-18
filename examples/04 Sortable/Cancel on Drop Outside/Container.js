@@ -6,7 +6,7 @@ import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 import ItemTypes from './ItemTypes';
 
 const style = {
-  width: 320
+  width: 400
 };
 
 const cardTarget = {

@@ -6,7 +6,8 @@ const style = {
   backgroundColor: 'white',
   padding: '0.5rem',
   margin: '0.5rem',
-  float: 'left'
+  float: 'left',
+  cursor: 'move'
 };
 
 const boxSource = {

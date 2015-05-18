@@ -7,7 +7,8 @@ const style = {
   backgroundColor: 'white',
   padding: '0.5rem',
   margin: '0.5rem',
-  maxWidth: '20em'
+  maxWidth: '20em',
+  cursor: 'move'
 };
 
 const cardSource = {

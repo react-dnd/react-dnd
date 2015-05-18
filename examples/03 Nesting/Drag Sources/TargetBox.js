@@ -4,8 +4,8 @@ import Colors from './Colors';
 
 const style = {
   border: '1px dashed gray',
-  height: '12rem',
-  width: '12rem',
+  height: '15rem',
+  width: '15rem',
   padding: '2rem',
   textAlign: 'center'
 };

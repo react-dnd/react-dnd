@@ -4,7 +4,8 @@ import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 const styles = {
   border: '1px dashed gray',
   padding: '0.5rem',
-  display: 'inline-block'
+  display: 'inline-block',
+  cursor: 'move'
 };
 
 export default class Box {

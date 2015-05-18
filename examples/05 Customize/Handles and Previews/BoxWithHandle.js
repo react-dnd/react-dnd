@@ -7,7 +7,7 @@ const style = {
   backgroundColor: 'white',
   padding: '0.5rem',
   margin: '0.5rem',
-  width: '15rem'
+  width: '20rem'
 };
 
 const handleStyle = {
@@ -15,7 +15,8 @@ const handleStyle = {
   width: '1rem',
   height: '1rem',
   display: 'inline-block',
-  marginRight: '0.5rem'
+  marginRight: '0.5rem',
+  cursor: 'move'
 };
 
 const boxSource = {
