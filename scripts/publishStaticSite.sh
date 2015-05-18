@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-PROJECT_DIRECTORY="fixed-data-table"
+PROJECT_DIRECTORY="react-dnd"
 SITE_DIRECTORY="$PROJECT_DIRECTORY-site"
-GITHUB_REPO="git@github.com:facebook/fixed-data-table.git"
-GH_PAGES_SITE="http://facebook.github.io/fixed-data-table/"
+GITHUB_REPO="git@github.com:gaearon/react-dnd.git"
+GH_PAGES_SITE="http://gaearon.github.io/react-dnd/"
 
 # Move to parent dir
 cd ../
