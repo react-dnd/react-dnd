@@ -11,9 +11,9 @@ If you're new to React and know a thing or two about it, but yet have to gain so
 
 Enough talk! It's time to set up a build workflow for our little project. I use [Webpack](http://webpack.github.io/), you might be using [Browserify](http://browserify.org/). I don't want to get into that now, so just set up an empty React project in whatever way is most convenient for you. If you're feeling lazy, you are free to clone [React Hot Boilerplate](https://github.com/gaearon/react-hot-boilerplate) and work on top of it. In fact, that's what I'm going to do myself.
 
-In this tutorial, the code examples are available simultaneously in ES5, ES6, and ES7. If you want to follow along using ES6 or ES7, you will need to set up a compilation step using [Babel](https://babeljs.io/). It's easy to [make it work with the tool of your choice](https://babeljs.io/docs/using-babel/) so we're going to skip this step, too, and assume you've dealt with it and you are ready to write code now. The boilerplate project [I linked to before](https://github.com/gaearon/react-hot-boilerplate) already includes Babel.
+In this tutorial, the code examples are available simultaneously in ES5, ES6, and [ES7](/docs-faq.html). If you want to follow along using ES6 or ES7, you will need to set up a compilation step using [Babel](https://babeljs.io/). It's easy to [make it work with the tool of your choice](https://babeljs.io/docs/using-babel/) so we're going to skip this step, too, and assume you've dealt with it and you are ready to write code now. The boilerplate project [I linked to before](https://github.com/gaearon/react-hot-boilerplate) already includes Babel.
 
->Note: When I say “ES7”, I actually mean ES6 + a few extensions that *might* make it into ES7 (also known as ES2016). There's a lot of confusion around this, so, for extra clarification, **in this tutorial the ES7 code is actually ES6 + [class properties](https://gist.github.com/jeffmo/054df782c05639da2adb) + [decorators](https://github.com/wycats/javascript-decorators).** You can enable these features by putting `{ "stage": 0 }` into your [.babelrc](https://babeljs.io/docs/usage/babelrc/) file. You can also [enable them individually](https://babeljs.io/docs/usage/experimental/).
+The app we're going to build is [available as an example on this website](/examples-chessboard-tutorial-app.html).
 
 ## Identifying the Components
 
@@ -1085,7 +1085,8 @@ var Knight = React.createClass({
       <div style={{
         opacity: isDragging ? 0.5 : 1,
         fontSize: 25,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        cursor: 'move'
       }}>
         ♘
       </div>
@@ -1121,7 +1122,8 @@ class Knight {
       <div style={{
         opacity: isDragging ? 0.5 : 1,
         fontSize: 25,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        cursor: 'move'
       }}>
         ♘
       </div>
@@ -1168,7 +1170,8 @@ export default class Knight {
       <div style={{
         opacity: isDragging ? 0.5 : 1,
         fontSize: 25,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        cursor: 'move'
       }}>
         ♘
       </div>
@@ -1393,7 +1396,11 @@ var BoardSquare = React.createClass({
     var black = (x + y) % 2 === 1;
 
     return connectDropTarget(
-      <div style={{ position: 'relative' }}>
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
         <Square black={black}>
           {this.props.children}
         </Square>
@@ -1443,7 +1450,11 @@ class BoardSquare {
     const black = (x + y) % 2 === 1;
 
     return connectDropTarget(
-      <div style={{ position: 'relative' }}>
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
         <Square black={black}>
           {this.props.children}
         </Square>
@@ -1506,7 +1517,11 @@ export default class BoardSquare {
     const black = (x + y) % 2 === 1;
 
     return connectDropTarget(
-      <div style={{ position: 'relative' }}>
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
         <Square black={black}>
           {this.props.children}
         </Square>
@@ -1613,7 +1628,11 @@ var BoardSquare = React.createClass({
     var black = (x + y) % 2 === 1;
 
     return connectDropTarget(
-      <div style={{ position: 'relative' }}>
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
         <Square black={black}>
           {this.props.children}
         </Square>
@@ -1812,3 +1831,5 @@ componentDidMount() {
 Happy dragging and dropping.
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/1F2g2F0D470X0d0k2A1U/Screen%20Recording%202015-05-15%20at%2002.22%20pm.gif' width='404' height='445' alt='Screenshot'>
+
+Now go and [play with it](/examples-chessboard-tutorial-app.html)!
