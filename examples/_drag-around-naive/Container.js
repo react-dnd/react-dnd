@@ -1,22 +1,11 @@
 'use strict';
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
-import { DragDropMixin } from'react-dnd';
-
-function makeDropTarget(context) {
-  return {
-    acceptDrop(component, item) {
-      const delta = context.getCurrentOffsetDelta();
-      const left = Math.round(item.left + delta.x);
-      const top = Math.round(item.top + delta.y);
-
-      component.moveBox(item.id, left, top);
-    }
-  };
-}
+import { DropTarget, DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
 const styles = {
   width: 300,
@@ -25,29 +14,36 @@ const styles = {
   position: 'relative'
 };
 
-const Container = React.createClass({
-  mixins: [DragDropMixin],
+const boxTarget = {
+  drop(props, monitor, component) {
+    const item = monitor.getItem();
+    const delta = monitor.getDifferenceFromInitialOffset();
+    const left = Math.round(item.left + delta.x);
+    const top = Math.round(item.top + delta.y);
 
-  propTypes: {
-    hideSourceOnDrag: PropTypes.bool.isRequired
-  },
+    component.moveBox(item.id, left, top);
+  }
+};
 
-  getInitialState() {
-    return {
+@DragDropContext(HTML5Backend)
+@DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+  connectDropTarget: connect.dropTarget()
+}))
+export default class Container extends Component {
+  static propTypes = {
+    hideSourceOnDrag: PropTypes.bool.isRequired,
+    connectDropTarget: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
       boxes: {
         'a': { top: 20, left: 80, title: 'Drag me around' },
         'b': { top: 180, left: 20, title: 'Drag me too' }
       }
     };
-  },
-
-  statics: {
-    configureDragDrop(register, context) {
-      register(ItemTypes.BOX, {
-        dropTarget: makeDropTarget(context)
-      });
-    }
-  },
+  }
 
   moveBox(id, left, top) {
     this.setState(update(this.state, {
@@ -60,19 +56,16 @@ const Container = React.createClass({
         }
       }
     }));
-  },
+  }
 
   render() {
-    const { hideSourceOnDrag } = this.props;
+    const { hideSourceOnDrag, connectDropTarget } = this.props;
     const { boxes} = this.state;
 
-    return (
-      <div {...this.dropTargetFor(ItemTypes.BOX)}
-           style={styles}>
-
+    return connectDropTarget(
+      <div style={styles}>
         {Object.keys(boxes).map(key => {
           const { left, top, title } = boxes[key];
-
           return (
             <Box key={key}
                  id={key}
@@ -83,10 +76,7 @@ const Container = React.createClass({
             </Box>
           );
         })}
-
       </div>
     );
   }
-});
-
-export default Container;
+}

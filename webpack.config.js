@@ -1,16 +1,24 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './modules/index',
+  entry: './src/index.umd',
   module: {
     loaders: [
-      { test: /\.js$/, loader: '6to5', exclude: /node_modules/ }
+      { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
     ]
   },
+  externals: [{
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    }
+  }],
   output: {
-    filename: 'dist/ReactDND.min.js',
+    filename: 'dist/ReactDnD.min.js',
     libraryTarget: 'umd',
-    library: 'ReactDND'
+    library: 'ReactDnD'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

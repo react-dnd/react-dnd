@@ -1,4 +1,4 @@
-React *DnD*
+React DnD
 =========
 
 [![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
@@ -7,7 +7,7 @@ Drag and drop for React with full DOM control.
 
 Currently works on top of HTML5 drag-and-drop API, but is moving towards a swappable implementation. Support for touch events is on the roadmap but not currently implemented.
 
->Note: **next version with support for ES6 classes and no mixins is coming soon.** Stay tuned!
+>**If your company uses React DnD and would like to speed up its development, consider sponsoring the project. I'm currently doing it in the spare time but I would be happy to work on it part-time. Drop me an email at <a href='mailto:dan.abramov@me.com'>dan.abramov@me.com</a>. Exciting new features take time.**
 
 ## Philosophy
 
@@ -15,9 +15,6 @@ Currently works on top of HTML5 drag-and-drop API, but is moving towards a swapp
 * Don't make assumptions about consuming components and their structure;
 * Hide underlying implementation and its quirks;
 * Make 80% easy, 20% possible.
-
-You can also read **[The Future of Drag and Drop APIs](https://medium.com/@dan_abramov/the-future-of-drag-and-drop-apis-249dfea7a15f)** to get an idea of where we're heading.
-
 
 ## Live Demo
 

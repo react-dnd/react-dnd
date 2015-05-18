@@ -1,12 +1,17 @@
 'use strict';
 
-import React from 'react';
+import React, { Component } from 'react';
 import update from 'react/lib/update';
 import Card from './Card';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
-const Container = React.createClass({
-  getInitialState() {
-    return {
+@DragDropContext(HTML5Backend)
+export default class Container extends Component {
+  constructor(props) {
+    super(props);
+    this.moveCard = this.moveCard.bind(this);
+    this.state = {
       cards: [{
         id: 1,
         text: 'Write a cool JS library'
@@ -30,7 +35,7 @@ const Container = React.createClass({
         text: 'PROFIT'
       }]
     };
-  },
+  }
 
   moveCard(id, afterId) {
     const { cards } = this.state;
@@ -48,7 +53,7 @@ const Container = React.createClass({
         ]
       }
     }));
-  },
+  }
 
   render() {
     const { cards } = this.state;
@@ -66,6 +71,4 @@ const Container = React.createClass({
       </div>
     );
   }
-});
-
-export default Container;
+}

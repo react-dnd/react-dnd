@@ -1,19 +1,24 @@
 'use strict';
 
-import React from 'react';
-import LinkedStateMixin from 'react/lib/LinkedStateMixin';
+import React, { Component } from 'react';
 import Container from './Container';
-import DragLayer from './DragLayer';
+import CustomDragLayer from './CustomDragLayer';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
-const DragAroundCustom = React.createClass({
-  mixins: [LinkedStateMixin],
+@DragDropContext(HTML5Backend)
+export default class DragAroundCustom extends Component {
+  constructor(props) {
+    super(props);
 
-  getInitialState() {
-    return {
+    this.handleSnapToGridAfterDropChange = this.handleSnapToGridAfterDropChange.bind(this);
+    this.handleSnapToGridWhileDraggingChange = this.handleSnapToGridWhileDraggingChange.bind(this);
+
+    this.state = {
       snapToGridAfterDrop: false,
       snapToGridWhileDragging: false
     };
-  },
+  }
 
   render() {
     const { snapToGridAfterDrop, snapToGridWhileDragging } = this.state;
@@ -21,21 +26,19 @@ const DragAroundCustom = React.createClass({
     return (
       <div>
         <Container snapToGrid={snapToGridAfterDrop} />
-        <DragLayer snapToGrid={snapToGridWhileDragging} />
+        <CustomDragLayer snapToGrid={snapToGridWhileDragging} />
         <p>
-          <label>
-            <input type='checkbox'
-                   checkedLink={this.linkState('snapToGridAfterDrop')}>
-              Snap to grid after drop
-            </input>
-          </label>
+          <input type='checkbox'
+                 checked={snapToGridAfterDrop}
+                 onChange={this.handleSnapToGridAfterDropChange}>
+            Snap to grid after drop
+          </input>
           <br />
-          <label>
-            <input type='checkbox'
-                   checkedLink={this.linkState('snapToGridWhileDragging')}>
-              Snap to grid while dragging
-            </input>
-          </label>
+          <input type='checkbox'
+                 checked={snapToGridWhileDragging}
+                 onChange={this.handleSnapToGridWhileDraggingChange}>
+            Snap to grid while dragging
+          </input>
         </p>
         <hr />
         <p>
@@ -57,6 +60,16 @@ const DragAroundCustom = React.createClass({
       </div>
     );
   }
-});
 
-export default DragAroundCustom;
+  handleSnapToGridAfterDropChange() {
+    this.setState({
+      snapToGridAfterDrop: !this.state.snapToGridAfterDrop
+    });
+  }
+
+  handleSnapToGridWhileDraggingChange() {
+    this.setState({
+      snapToGridWhileDragging: !this.state.snapToGridWhileDragging
+    });
+  }
+}

@@ -3,7 +3,7 @@
 import React from 'react';
 import Container from './Container';
 
-const NestingSources = React.createClass({
+export default class NestingSources {
   render() {
     return (
       <div>
@@ -15,6 +15,4 @@ const NestingSources = React.createClass({
       </div>
     );
   }
-});
-
-export default NestingSources;
+}

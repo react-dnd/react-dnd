@@ -135,10 +135,7 @@ Returns all you need in order to draw a custom drag layer:
   draggedItemType: string,
   draggedItem: Object,
   initialOffset: { x, y },
-  currentOffset: { x, y },
-  currentOffsetFromClient: { x, y },
-  initialOffsetFromClient: { x, y },
-  initialOffsetFromContainer: { x, y }
+  currentOffset: { x, y }
 }
 ```
 
@@ -167,7 +164,7 @@ statics: {
         beginDrag(component) {
           return {
             item: ...,
-            dragPreview: component.getPreloadedImage('some-img-url1');
+            dragPreivew: component.getPreloadedImage('some-img-url1');
           };
         }
       }

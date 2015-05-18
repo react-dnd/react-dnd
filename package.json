@@ -1,11 +1,12 @@
 {
   "name": "react-dnd",
-  "version": "0.9.8",
+  "version": "1.0.0-rc",
   "description": "Drag and drop for React with full DOM control",
-  "main": "dist-modules/index.js",
+  "main": "modules/index.js",
   "scripts": {
     "start": "./scripts/run-examples",
-    "build": "./scripts/build"
+    "build": "./scripts/build",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -31,22 +32,27 @@
   },
   "homepage": "https://github.com/gaearon/react-dnd",
   "dependencies": {
-    "flux": "^2.0.1",
+    "disposables": "^1.0.1",
+    "dnd-core": "^1.0.2",
+    "invariant": "^2.0.0",
     "lodash": "^3.1.0"
   },
   "peerDependencies": {
-    "react": ">=0.12.0 <0.14.0"
+    "react": ">=0.13.0 <0.15.0"
   },
   "devDependencies": {
-    "6to5": "^3.5.3",
-    "6to5-core": "^3.5.3",
-    "6to5-loader": "^3.0.0",
-    "path": "0.4.9",
-    "react": "0.12.x",
-    "react-hot-loader": "^1.1.4",
-    "react-router": "0.12.x",
+    "animation-frame": "^0.2.4",
+    "babel": "^5.1.10",
+    "babel-core": "^5.2.17",
+    "babel-eslint": "^3.1.1",
+    "babel-loader": "^5.0.0",
+    "eslint": "^0.20.0",
+    "faker": "2.1.2",
+    "react": "~0.13.0",
+    "react-hot-loader": "^1.2.3",
+    "react-router": "~0.13.2",
     "request": "2.46.0",
-    "webpack": "1.5.3",
-    "webpack-dev-server": "1.7.0"
+    "webpack": "^1.7.3",
+    "webpack-dev-server": "^1.7.0"
   }
 }
