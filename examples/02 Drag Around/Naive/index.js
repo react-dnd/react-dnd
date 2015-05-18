@@ -1,52 +1,55 @@
-'use strict';
-
-import React from 'react';
-import LinkedStateMixin from 'react/lib/LinkedStateMixin';
+import React, { Component } from 'react';
 import Container from './Container';
 import { Link } from 'react-router';
 
-const DragAroundNaive = React.createClass({
-  mixins: [LinkedStateMixin],
-
-  getInitialState() {
-    return {
-      hideSourceOnDrag: false
+export default class DragAroundNaive extends Component {
+  constructor(props) {
+    super(props);
+    this.handleHideSourceClick = this.handleHideSourceClick.bind(this);
+    this.state = {
+      hideSourceOnDrag: true
     };
-  },
+  }
+
+  handleHideSourceClick() {
+    this.setState({
+      hideSourceOnDrag: !this.state.hideSourceOnDrag
+    });
+  }
 
   render() {
     const { hideSourceOnDrag } = this.state;
 
     return (
       <div>
-        <Container hideSourceOnDrag={hideSourceOnDrag} />
-        <p>
-          <input type='checkbox'
-                 checkedLink={this.linkState('hideSourceOnDrag')}>
-            Hide source item while dragging
-          </input>
-        </p>
-        <hr />
         <p>
           This example naively relies on browser drag and drop implementation without much custom logic.
         </p>
         <p>
-          When element is dragged, we remove its original DOM node and let browser draw the drag preview.
-          When element is released, we draw an element at the new coordinates.
-          If you try to drag an item outside the container, browser will animate its return.
+          When the box is dragged, we remove its original DOM node by returning <code>null</code> from <code>render()</code> and let browser draw the drag preview.
+          When the is released, we draw it at the new coordinates.
+          If you try to drag the box outside the container, the browser will animate its return.
         </p>
         <p>
           While this approach works for simple cases, it flickers on drop.
-          This happens because browser removes drag preview before we have a chance to make dragged item visible.
-          This might not be a problem if you dim original item instead of hiding it, but it's clearly visible otherwise.
+          This happens because the browser removes the drag preview before we have a chance to make the dragged item visible.
+          This might not be a problem if you dim the original item instead of hiding it, but it's clearly visible otherwise.
         </p>
         <p>
           If we want to add custom logic such as snapping to grid or bounds checking, we can only do this on drop.
           There is no way for us to control what happens to dragged preview once the browser has drawn it.
+          You might be interesting in the <a href='/examples-drag-around-custom-drag-layer.html'>custom rendering example</a> if this doesn't work for you.
+        </p>
+        <Container hideSourceOnDrag={hideSourceOnDrag} />
+        <p>
+          <label>
+            <input type='checkbox'
+                   checked={hideSourceOnDrag}
+                   onChange={this.handleHideSourceClick} />
+            Hide the source item while dragging
+          </label>
         </p>
       </div>
     );
   }
-});
-
-export default DragAroundNaive;
+}

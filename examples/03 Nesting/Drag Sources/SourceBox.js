@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component, PropTypes } from 'react';
 import Colors from './Colors';
 import { DragSource } from 'react-dnd';

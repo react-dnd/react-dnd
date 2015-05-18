@@ -5,11 +5,14 @@ export default class DustbinMultipleTargets {
   render() {
     return (
       <div>
-        <Container />
-        <hr />
         <p>
-          Several different dustbins can handle several types of items. Note that the last dustbin is special: it can handle files from your hard drive and URLs.
+          This is a slightly more interesting example.
         </p>
+        <p>
+          It demonstrates how a single drop target may accept multiple types, and how those types may be derived from props.
+          It also demonstrates the handling of native files and URLs (try dropping them onto the last two dustbins).
+        </p>
+        <Container />
       </div>
     );
   }
