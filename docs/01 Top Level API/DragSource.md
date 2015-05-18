@@ -95,6 +95,21 @@ If you're new to these concepts, the [overview](/docs-overview.html) should give
 
 * **`monitor`**: An instance of [`DragSourceMonitor`](/docs-drag-source-monitor.html). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Read the [`DragSourceMonitor` documentation](docs-drag-source-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
 
+### Return Value
+
+`DragSource` wraps your component and returns another React component.  
+For easier [testing](/docs-testing.html), it provides an API to reach into the internals:
+
+#### Static Properties
+
+* **`DecoratedComponent`**: Returns the wrapped component type.
+
+#### Instance Methods
+
+* **`getDecoratedComponentInstance()`**: Returns the wrapped component instance.
+
+* **`getHandlerId()`**: Returns the drag source ID that can be used to simulate the drag and drop events with the testing backend. Refer to the [testing](/docs-testing.html) tutorial for a usage example.
+
 ### Nesting Behavior
 
 If a drag source is nested in another drag source, the innermost drag source of the compatible type wins. Drag sources that return `false` from `canDrag` are skipped. The chosen drag source is the only one that will receive `beginDrag` and, subsequently, `endDrag`. There is no propagation once the drag source is determined.

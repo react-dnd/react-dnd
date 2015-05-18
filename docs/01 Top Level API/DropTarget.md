@@ -94,13 +94,28 @@ If you're new to these concepts, the [overview](/docs-overview.html) should give
 
 * **`monitor`**: An instance of [`DropTargetMonitor`](/docs-drop-target-monitor.html). It is precisely the same `monitor` you receive in the drop target specification methods, and you can use it to query the information about the current drag state. Read the [`DropTargetMonitor` documentation](docs-drop-target-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
 
+### Return Value
+
+`DropTarget` wraps your component and returns another React component.  
+For easier [testing](/docs-testing.html), it provides an API to reach into the internals:
+
+#### Static Properties
+
+* **`DecoratedComponent`**: Returns the wrapped component type.
+
+#### Instance Methods
+
+* **`getDecoratedComponentInstance()`**: Returns the wrapped component instance.
+
+* **`getHandlerId()`**: Returns the drag source ID that can be used to simulate the drag and drop events with the testing backend. Refer to the [testing](/docs-testing.html) tutorial for a usage example.
+
 ### Nesting Behavior
 
 If a drop target is nested in another drop target, both `hover()` and `drop()` bubble from the innermost target up the chain. There is no way to cancel the propagation by design. Instead, any drop target may compare `monitor.isOver()` and `monitor.isOver({ shallow: true })` to verify whether a child, or just the current drop target is being hovered. When dropping, any drop target in the chain may check whether it is the first in chain by testing if `monitor.didDrop()` returns `false`. Any parent drop target may override the drop result specified by the child drop target by explicitly returning another drop result from `drop()`. If a parent target returns `undefined` from its `drop()` handler, it does not change the existing drop result that may have been specified by a nested drop target. The drop targets that return `false` from `canDrop()` are exluded from the `drop()` dispatch.
 
 ### Handling Files and URLs
 
-When using the [`HTML5` backend](/docs-html5.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` or `HTML5Backend.NativeTypes.URL` built-in types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
+When using the [`HTML5` backend](/docs-html5-backend.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` or `HTML5Backend.NativeTypes.URL` built-in types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
 
 ### Example
 

@@ -9,6 +9,7 @@ import faviconURL from './images/favicon.png';
 const APIDocs = {
   OVERVIEW: require('../docs/00 Quick Start/Overview.md'),
   TUTORIAL: require('../docs/00 Quick Start/Tutorial.md'),
+  TESTING: require('../docs/00 Quick Start/Testing.md'),
   DRAG_SOURCE: require('../docs/01 Top Level API/DragSource.md'),
   DRAG_SOURCE_MONITOR: require('../docs/03 Monitoring State/DragSourceMonitor.md'),
   DRAG_SOURCE_CONNECTOR: require('../docs/02 Connecting to DOM/DragSourceConnector.md'),
@@ -18,7 +19,8 @@ const APIDocs = {
   DRAG_DROP_CONTEXT: require('../docs/01 Top Level API/DragDropContext.md'),
   DRAG_LAYER: require('../docs/01 Top Level API/DragLayer.md'),
   DRAG_LAYER_MONITOR: require('../docs/03 Monitoring State/DragLayerMonitor.md'),
-  HTML5: require('../docs/04 Backends/HTML5.md')
+  HTML5_BACKEND: require('../docs/04 Backends/HTML5.md'),
+  TEST_BACKEND: require('../docs/04 Backends/Test.md')
 };
 
 const Examples = {

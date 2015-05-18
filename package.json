@@ -8,7 +8,7 @@
     "build-site": "./scripts/buildStaticSite.sh",
     "publish-site": "./scripts/publishStaticSite.sh",
     "build": "./scripts/build.sh",
-    "test": "./scripts/test.sh",
+    "test": "karma start",
     "prepublish": "npm run build"
   },
   "repository": {

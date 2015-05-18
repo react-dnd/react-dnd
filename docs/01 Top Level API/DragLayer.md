@@ -5,7 +5,7 @@ DragLayer
 
 **This is an advanced feature.**  
 
-For the most use cases, the default rendering of the [`HTML5` backend](/docs-html5.html) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
+For the most use cases, the default rendering of the [`HTML5` backend](/docs-html5-backend.html) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
 
 Sometimes you might want to perform the custom rendering. This also becomes necessary if you're using a custom backend. `DragLayer` lets you perform the rendering of the drag preview yourself using just the React components. It is a higher-order component accepting one required parameter that is described below.
 
@@ -59,6 +59,19 @@ The collecting function signature is similar to the collecting functions of [`Dr
 #### Parameters
 
 * **`monitor`**: An instance of [`DragLayerMonitor`](/docs-drag-layer-monitor.html). You can use it to query the information about the current drag state, including the coordinates. Read the [`DragLayerMonitor` documentation](docs-drag-layer-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
+
+### Return Value
+
+`DragLayer` wraps your component and returns another React component.  
+For easier [testing](/docs-testing.html), it provides an API to reach into the internals:
+
+#### Static Properties
+
+* **`DecoratedComponent`**: Returns the wrapped component type.
+
+#### Instance Methods
+
+* **`getDecoratedComponentInstance()`**: Returns the wrapped component instance.
 
 ### Example
 

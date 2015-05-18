@@ -44,4 +44,19 @@ export default class YourApp {
 
 ### Parameters
 
-* **`backend`**: Required. A React DnD backend. Unless you're writing a custom one, you probably want to use the [HTML5 backend](/docs-html5.html) that ships with React DnD.
+* **`backend`**: Required. A React DnD backend. Unless you're writing a custom one, you probably want to use the [HTML5 backend](/docs-html5-backend.html) that ships with React DnD.
+
+### Return Value
+
+`DragDropContext` wraps your component and returns another React component.  
+For easier [testing](/docs-testing.html), it provides an API to reach into the internals:
+
+#### Static Properties
+
+* **`DecoratedComponent`**: Returns the wrapped component type.
+
+#### Instance Methods
+
+* **`getDecoratedComponentInstance()`**: Returns the wrapped component instance.
+
+* **`getManager()`**: Returns the internal manager that provides access to the underlying backend. This part is currently not documented, but you can refer to the [testing](/docs-testing.html) tutorial for a usage example.
