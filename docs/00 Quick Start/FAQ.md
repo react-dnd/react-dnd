@@ -242,8 +242,8 @@ It is loosely based on the pre-React code written at Stampsy by [Andrew Kuznetso
 
 React DnD would not have reached the 1.0 release without the generous donations from:
 
-* [Macropod](https://macropod.com/), who make team productivity software;
-* [Webflow](https://webflow.com/), who make a professional responsive website builder.
+* [Macropod](https://macropod.com/), a company developing team productivity software;
+* [Webflow](https://webflow.com/), a company creating a professional responsive website builder.
 
 [Gadzhi Kharkharov](http://kkga.me/) styled the website, and the [fixed-data-table](https://github.com/facebook/fixed-data-table) project provided the website template.
 
