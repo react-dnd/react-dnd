@@ -85,6 +85,10 @@ export const APIPages = [{
     TUTORIAL: {
       location: 'docs-tutorial.html',
       title: 'Tutorial'
+    },
+    TESTING: {
+      location: 'docs-testing.html',
+      title: 'Testing'
     }
   }
 }, {
@@ -138,9 +142,13 @@ export const APIPages = [{
 }, {
   title: 'Backends',
   pages: {
-    HTML5: {
-      location: 'docs-html5.html',
+    HTML5_BACKEND: {
+      location: 'docs-html5-backend.html',
       title: 'HTML5'
+    },
+    TEST_BACKEND: {
+      location: 'docs-test-backend.html',
+      title: 'Test'
     }
   }
 }];

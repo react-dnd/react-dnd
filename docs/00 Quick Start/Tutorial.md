@@ -950,7 +950,7 @@ This is the part that actually prompted me to write this tutorial. We are now go
 
 This part assumes you are at least somewhat familiar with the concepts presented in the [overview](/docs-overview.html), such as the backends, the collecting functions, the types, the items, the drag sources, and the drop targets. If you didn't understand everything, it's fine, but make sure you at least give it a chance before jumping into the coding process.
 
-We're going to start by running `npm install --save react-dnd`. The first thing we need to set up in our app is the [`DragDropContext`](/docs-drag-drop-context.html). We need it to specify that we're going to use the [`HTML5` backend](/docs-html5.html) in our app.
+We're going to start by running `npm install --save react-dnd`. The first thing we need to set up in our app is the [`DragDropContext`](/docs-drag-drop-context.html). We need it to specify that we're going to use the [`HTML5` backend](/docs-html5-backend.html) in our app.
 
 Because the `Board` is the top-level component in our app, I'm going to put the [`DragDropContext`](/docs-drag-drop-context.html) on it:
 

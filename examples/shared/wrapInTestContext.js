@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { createTestBackend } from 'dnd-core';
+import TestBackend from 'react-dnd/modules/backends/Test';
 import { DragDropContext } from 'react-dnd';
 
 export default function wrapInTestContext(DecoratedComponent) {
-  @DragDropContext(createTestBackend)
+  @DragDropContext(TestBackend)
   class TestStub extends Component {
     render() {
       return <DecoratedComponent {...this.props} />;
