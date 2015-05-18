@@ -9,7 +9,7 @@ export default class Container extends Component {
   render() {
     return (
       <div>
-        <div style={{ marginTop: '2rem' }}>
+        <div style={{ marginTop: '1.5rem' }}>
           <BoxWithHandle />
           <BoxWithImage />
         </div>

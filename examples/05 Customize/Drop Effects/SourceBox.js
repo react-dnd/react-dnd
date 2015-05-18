@@ -5,9 +5,9 @@ import { DragSource } from 'react-dnd';
 const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
-  padding: '0.5rem',
-  margin: '0.5rem',
-  width: '15rem',
+  padding: '0.5rem 1rem',
+  marginRight: '1rem',
+  marginBottom: '1rem',
   cursor: 'move'
 };
 

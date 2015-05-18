@@ -4,9 +4,9 @@ import { DragSource } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
+  padding: '0.5rem 1rem',
+  marginBottom: '.5rem',
   backgroundColor: 'white',
-  padding: '0.5rem',
-  margin: '0.5rem',
   width: '20rem'
 };
 
@@ -15,7 +15,7 @@ const handleStyle = {
   width: '1rem',
   height: '1rem',
   display: 'inline-block',
-  marginRight: '0.5rem',
+  marginRight: '0.75rem',
   cursor: 'move'
 };
 

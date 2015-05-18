@@ -5,6 +5,10 @@ import Card from './Card';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
+const style = {
+  width: 400
+};
+
 @DragDropContext(HTML5Backend)
 export default class Container extends Component {
   constructor(props) {
@@ -71,7 +75,7 @@ export default class Container extends Component {
     const { cardsByIndex } = this.state;
 
     return (
-      <div>
+      <div style={style}>
         {cardsByIndex.map(card => {
           return (
             <Card key={card.id}
