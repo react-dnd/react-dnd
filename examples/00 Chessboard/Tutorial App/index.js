@@ -27,12 +27,23 @@ export default class ChessboardTutorialApp extends Component {
   render() {
     const { knightPosition } = this.state;
     return (
-      <div style={{
-        width: 500,
-        height: 500,
-        border: '1px solid gray'
-      }}>
-        <Board knightPosition={knightPosition} />
+      <div>
+        <p>
+          This is a sample app you'll build as you work through the <a href='/docs-tutorial.html'>tutorial</a>.
+        </p>
+        <p>
+          It illustrates creating the drag sources and the drop targets, using the monitors to query the current drag state, and customizing the drag previews.
+        </p>
+        <div style={{
+          width: 500,
+          height: 500,
+          border: '1px solid gray'
+        }}>
+          <Board knightPosition={knightPosition} />
+        </div>
+        <p>
+          Make sure to check out the <a href='/docs-tutorial.html'>tutorial</a> for step-by-step instructions on building it!
+        </p>
       </div>
     );
   }

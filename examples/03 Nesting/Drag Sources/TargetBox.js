@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { PropTypes, Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import Colors from './Colors';
