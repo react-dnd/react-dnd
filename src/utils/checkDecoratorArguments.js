@@ -4,9 +4,9 @@ export default function checkDecoratorArguments(functionName, signature, ...args
       const arg = args[i];
       if (arg && arg.prototype && arg.prototype.render) {
         console.error(
-          `You seem to be applying ${functionName} arguments in the wrong order. ` +
+          `You seem to be applying the arguments in the wrong order. ` +
           `It should be ${functionName}(${signature})(Component), not the other way around. ` +
-          `Read more: https://gist.github.com/gaearon/738da07796d2e34af5ba`
+          `Read more: http://gaearon.github.io/react-dnd/docs-troubleshooting.html#you-seem-to-be-applying-the-arguments-in-the-wrong-order`
         );
         return;
       }

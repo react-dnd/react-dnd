@@ -15,7 +15,8 @@ class SourceMonitor {
   canDrag() {
     invariant(
       !isCallingCanDrag,
-      'You may not call monitor.canDrag() inside your canDrag() implementation.'
+      'You may not call monitor.canDrag() inside your canDrag() implementation. ' +
+      'Read more: http://gaearon.github.io/react-dnd/docs-drag-source-monitor.html'
     );
 
     try {
@@ -29,7 +30,8 @@ class SourceMonitor {
   isDragging() {
     invariant(
       !isCallingIsDragging,
-      'You may not call monitor.isDragging() inside your isDragging() implementation.'
+      'You may not call monitor.isDragging() inside your isDragging() implementation. ' +
+      'Read more: http://gaearon.github.io/react-dnd/docs-drag-source-monitor.html'
     );
 
     try {
