@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import Card from './Card';

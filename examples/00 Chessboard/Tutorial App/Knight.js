@@ -13,7 +13,7 @@ function collect(connect, monitor) {
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
-  }
+  };
 }
 
 @DragSource(ItemTypes.KNIGHT, knightSource, collect)
@@ -33,7 +33,7 @@ export default class Knight {
     const { connectDragSource, isDragging } = this.props;
     return connectDragSource(
       <div style={{
-        fontSize: 25,
+        fontSize: 40,
         fontWeight: 'bold',
         cursor: 'move',
         opacity: isDragging ? 0.5 : 1

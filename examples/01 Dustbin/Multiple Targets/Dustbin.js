@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { DropTarget } from 'react-dnd';
 
 const style = {
-  height: '12rem',
-  width: '12rem',
+  height: '15rem',
+  width: '15rem',
   color: 'white',
   padding: '2rem',
   margin: '0.5rem',

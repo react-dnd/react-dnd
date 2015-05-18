@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
 import { DragSource } from 'react-dnd';
@@ -9,7 +7,9 @@ const style = {
   backgroundColor: 'white',
   padding: '0.5rem',
   margin: '0.5rem',
-  maxWidth: 80
+  maxWidth: 80,
+  cursor: 'move',
+  float: 'left'
 };
 
 const boxSource = {

@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { PropTypes, Component } from 'react';
 import { DragSource } from 'react-dnd';
 
@@ -8,7 +6,6 @@ const style = {
   backgroundColor: 'white',
   padding: '0.5rem',
   margin: '0.5rem',
-  maxWidth: 80,
   float: 'left'
 };
 

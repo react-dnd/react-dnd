@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { PropTypes, Component } from 'react';
 import ItemTypes from './ItemTypes';
 import { DropTarget } from 'react-dnd';
@@ -45,7 +43,7 @@ export default class Dustbin extends Component {
       <div style={{ ...style, backgroundColor }}>
         {isActive ?
           'Release to drop' :
-          'Drag item here'
+          'Drag a box here'
         }
       </div>
     );

@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { PropTypes } from 'react';
 import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';

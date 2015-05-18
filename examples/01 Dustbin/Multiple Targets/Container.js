@@ -35,7 +35,7 @@ export default class Container extends Component {
 
     return (
       <div>
-        <div style={{minHeight: '14rem'}}>
+        <div style={{ minHeight: '14rem', clear: 'both' }}>
           {dustbins.map(({ accepts, lastDroppedItem }, index) =>
             <Dustbin accepts={accepts}
                      lastDroppedItem={lastDroppedItem}
@@ -44,7 +44,7 @@ export default class Container extends Component {
           )}
         </div>
 
-        <div style={{ minHeight: '2rem' }}>
+        <div style={{ minHeight: '2rem', clear: 'both' }}>
           {boxes.map(({ name, type }, index) =>
             <Box name={name}
                  type={type}
