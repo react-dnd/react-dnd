@@ -3,7 +3,7 @@
 import React from 'react';
 import Container from './Container';
 
-export default class DustbinInteresting {
+export default class DustbinStressTest {
   render() {
     return (
       <div>
