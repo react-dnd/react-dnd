@@ -23,6 +23,10 @@ export const APIPages = [{
     FAQ: {
       location: 'docs-faq.html',
       title: 'FAQ'
+    },
+    TROUBLESHOOTING: {
+      location: 'docs-troubleshooting.html',
+      title: 'Troubleshooting'
     }
   }
 }, {
