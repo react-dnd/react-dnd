@@ -26,9 +26,16 @@ h1, h2, h3, h4, h5, h6 {
   color: @header-color;
 }
 
-a {
+a[href] {
   color: @link-color;
   text-decoration: none;
+}
+
+a[id]:not([href]) {
+  // This is quite a badass hack.
+  // We really those anchors despite the navbar!
+  position: relative;
+  top: -@navbar-height;
 }
 
 pre, code {

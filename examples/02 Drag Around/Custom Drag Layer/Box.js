@@ -3,23 +3,24 @@ import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 
 const styles = {
   border: '1px dashed gray',
-  backgroundColor: 'white',
   padding: '0.5rem 1rem',
-  cursor: 'move',
+  cursor: 'move'
 };
 
 export default class Box {
   static propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    yellow: PropTypes.bool
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
-    const { title } = this.props;
+    const { title, yellow } = this.props;
+    const backgroundColor = yellow ? 'yellow' : 'white';
 
     return (
-      <div style={styles}>
+      <div style={{...styles, backgroundColor }}>
         {title}
       </div>
     );

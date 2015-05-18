@@ -24,6 +24,14 @@ marked.setOptions({
 
 var renderer = new marked.Renderer();
 
+renderer.heading = function (text, level) {
+  var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+  // A hack to have proper anchor scrolling despite the navbar on top of them.
+  // In CSS, they'll be positioned relatively.
+  return '<h' + level + '>' + text + '<a id="' + escapedText + '">&nbsp;</a></h' + level + '>';
+};
+
 renderer.code = function(code, lang, escaped) {
   if (this.options.highlight) {
     var out = this.options.highlight(code, lang);

@@ -1,0 +1,3 @@
+The examples are written using ES7 ([read the FAQ for a clarification](http://gaearon.github.io/react-dnd/docs-faq.html)). You don't have to use ES7 in order to use React DnD, it's purely optional. [The tutorial](http://gaearon.github.io/react-dnd/docs-tutorial.html) should give you a good idea about using it in ES5, ES6, or ES7.
+
+Check out the [hosted versions of this examples](http://gaearon.github.io/react-dnd/examples-chessboard-tutorial-app.html). To run them locally, clone the repo, and run `npm install && npm start`. It will take a while to start (the command builds a static site first), but then you can access the examples by opening http://localhost:8080/ and clicking “Examples” in the navigation bar.
