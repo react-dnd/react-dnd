@@ -7,7 +7,8 @@ const style = {
   backgroundColor: 'white',
   padding: '0.5rem',
   margin: '0.5rem',
-  width: '15rem'
+  width: '20rem',
+  cursor: 'move'
 };
 
 const BoxSource = {
@@ -40,7 +41,7 @@ export default class BoxWithImage extends Component {
 
     return connectDragSource(
       <div style={{ ...style, opacity }}>
-        Drag me to see an image.
+        Drag me to see an image
       </div>
     );
   }
