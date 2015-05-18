@@ -10,6 +10,7 @@ const APIDocs = {
   OVERVIEW: require('../docs/00 Quick Start/Overview.md'),
   TUTORIAL: require('../docs/00 Quick Start/Tutorial.md'),
   TESTING: require('../docs/00 Quick Start/Testing.md'),
+  FAQ: require('../docs/00 Quick Start/FAQ.md'),
   DRAG_SOURCE: require('../docs/01 Top Level API/DragSource.md'),
   DRAG_SOURCE_MONITOR: require('../docs/03 Monitoring State/DragSourceMonitor.md'),
   DRAG_SOURCE_CONNECTOR: require('../docs/02 Connecting to DOM/DragSourceConnector.md'),
