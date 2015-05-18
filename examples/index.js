@@ -1,25 +1,32 @@
 'use strict';
 
-var React = require('react'),
-    Router = require('react-router'),
-    { Route, Redirect, Link, RouteHandler } = Router,
-    DragAroundNaive = require('./_drag-around-naive/index'),
-    DragAroundCustom = require('./_drag-around-custom/index'),
-    DustbinSimple = require('./_dustbin-simple'),
-    DustbinInteresting = require('./_dustbin-interesting'),
-    SortableSimple = require('./_sortable-simple'),
-    NestingSources = require('./_nesting-sources');
+import React from 'react';
+import Router, { Route, Link, Redirect, RouteHandler } from 'react-router';
+import AnimationFrame from 'animation-frame';
+import DragAroundNaive from './_drag-around-naive/index';
+import DragAroundCustom from './_drag-around-custom/index';
+import DustbinSimple from './_dustbin-simple';
+import DustbinInteresting from './_dustbin-interesting';
+import DustbinStress from './_dustbin-stress';
+import NestingTargets from './_nesting-targets';
+import NestingSources from './_nesting-sources';
+import SortableSimple from './_sortable-simple';
+import SortableCancelable from './_sortable-cancelable';
+import SortableStress from './_sortable-stress';
+import CustomizeHandles from './_customize-handles';
+import CustomizeEffects from './_customize-effects';
 
-var App = React.createClass({
+const App = React.createClass({
   render() {
     return (
       <div>
         <h1>react-dnd examples (<a target='_href' href='https://github.com/gaearon/react-dnd/blob/master/examples'>source</a>)</h1>
         <ul>
-          <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>)</li>
           <li>Drag Around (<Link to='drag-around-naive'>naive</Link>, <Link to='drag-around-custom'>custom</Link>)</li>
-          <li>Nesting (<Link to='nesting-sources'>drag sources</Link>)</li>
-          <li>Sortable (<Link to='sortable-simple'>simple</Link>)</li>
+          <li>Dustbin (<Link to='dustbin-simple'>simple</Link>, <Link to='dustbin-interesting'>interesting</Link>, <Link to='dustbin-stress'>stress test</Link>)</li>
+          <li>Nesting (<Link to='nesting-sources'>drag sources</Link>, <Link to='nesting-targets'>drop targets</Link>)</li>
+          <li>Sortable (<Link to='sortable-simple'>simple</Link>, <Link to='sortable-cancelable'>cancel on drop outside</Link>, <Link to='sortable-stress'>stress test</Link>)</li>
+          <li>Customize (<Link to='customize-handles'>drag handles</Link>, <Link to='customize-effects'>drop effects</Link>)</li>
         </ul>
         <hr />
         <RouteHandler />
@@ -28,17 +35,25 @@ var App = React.createClass({
   }
 });
 
-var routes = (
+const routes = (
   <Route handler={App}>
     <Route name='drag-around-naive' path='drag-around-naive' handler={DragAroundNaive} />
     <Route name='drag-around-custom' path='drag-around-custom' handler={DragAroundCustom} />
     <Route name='dustbin-simple' path='dustbin-simple' handler={DustbinSimple} />
     <Route name='dustbin-interesting' path='dustbin-interesting' handler={DustbinInteresting} />
+    <Route name='dustbin-stress' path='dustbin-stress' handler={DustbinStress} />
     <Route name='nesting-sources' path='nesting-sources' handler={NestingSources} />
+    <Route name='nesting-targets' path='nesting-targets' handler={NestingTargets} />
     <Route name='sortable-simple' path='sortable-simple' handler={SortableSimple} />
+    <Route name='sortable-cancelable' path='sortable-cancelable' handler={SortableCancelable} />
+    <Route name='sortable-stress' path='sortable-stress' handler={SortableStress} />
+    <Route name='customize-handles' path='customize-handles' handler={CustomizeHandles} />
+    <Route name='customize-effects' path='customize-effects' handler={CustomizeEffects} />
     <Redirect from='/' to='dustbin-simple' />
   </Route>
 );
+
+AnimationFrame.shim();
 
 Router.run(routes,
   process.env.NODE_ENV === 'production' ? Router.HashLocation : Router.HistoryLocation,

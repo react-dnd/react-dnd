@@ -3,7 +3,7 @@
 import React from 'react';
 import Container from './Container';
 
-const DustbinSimple = React.createClass({
+export default class SortableSimple {
   render() {
     return (
       <div>
@@ -14,6 +14,4 @@ const DustbinSimple = React.createClass({
       </div>
     );
   }
-});
-
-export default DustbinSimple;
+}

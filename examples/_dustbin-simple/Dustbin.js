@@ -1,14 +1,8 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDropMixin } from 'react-dnd';
-
-const itemDropTarget = {
-  acceptDrop(component, item) {
-    window.alert('You dropped ' + item.name + '!');
-  }
-};
+import { DropTarget } from 'react-dnd';
 
 const style = {
   height: '12rem',
@@ -18,41 +12,42 @@ const style = {
   textAlign: 'center'
 };
 
-const Dustbin = React.createClass({
-  mixins: [DragDropMixin],
+const boxTarget = {
+  drop() {
+    return { name: 'Dustbin' };
+  }
+};
 
-  statics: {
-    configureDragDrop(register) {
-      register(ItemTypes.ITEM, {
-        dropTarget: itemDropTarget
-      });
-    }
-  },
+@DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop()
+}))
+export default class Dustbin extends Component {
+  static propTypes = {
+    connectDropTarget: PropTypes.func.isRequired,
+    isOver: PropTypes.bool.isRequired,
+    canDrop: PropTypes.bool.isRequired
+  };
 
   render() {
-    const dropState = this.getDropState(ItemTypes.ITEM);
+    const { canDrop, isOver, connectDropTarget } = this.props;
+    const isActive = canDrop && isOver;
 
     let backgroundColor = '#222';
-    if (dropState.isHovering) {
+    if (isActive) {
       backgroundColor = 'darkgreen';
-    } else if (dropState.isDragging) {
+    } else if (canDrop) {
       backgroundColor = 'darkkhaki';
     }
 
-    return (
-      <div {...this.dropTargetFor(ItemTypes.ITEM)}
-           style={{
-             ...style,
-             backgroundColor
-           }}>
-
-        {dropState.isHovering ?
+    return connectDropTarget(
+      <div style={{ ...style, backgroundColor }}>
+        {isActive ?
           'Release to drop' :
           'Drag item here'
         }
       </div>
     );
   }
-});
-
-export default Dustbin;
+}

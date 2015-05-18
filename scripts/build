@@ -6,7 +6,9 @@ cd examples
 cd ..
 
 # build minified standalone version in dist
+rm -rf dist
 ./node_modules/.bin/webpack
 
-# build ES5 modules in dist-modules
-./node_modules/.bin/6to5 ./modules --out-dir dist-modules
+# build ES5 modules in modules
+rm -rf modules
+./node_modules/.bin/babel src --out-dir modules

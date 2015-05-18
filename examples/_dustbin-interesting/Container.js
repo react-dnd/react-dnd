@@ -1,42 +1,77 @@
 'use strict';
 
-import React from 'react';
-import makeDustbin from './makeDustbin';
-import makeItem from './makeItem';
+import React, { Component } from 'react';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend, { NativeTypes } from 'react-dnd/modules/backends/HTML5';
+import Dustbin from './Dustbin';
+import Box from './Box';
 import ItemTypes from './ItemTypes';
-import { NativeDragItemTypes } from 'react-dnd';
+import update from 'react/lib/update';
 
-const Container = React.createClass({
-  renderDustbin(accepts) {
-    const Dustbin = makeDustbin(accepts);
-    return <Dustbin />;
-  },
+@DragDropContext(HTML5Backend)
+export default class Container extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dustbins: [
+        { accepts: [ItemTypes.GLASS], lastDroppedItem: null },
+        { accepts: [ItemTypes.FOOD], lastDroppedItem: null },
+        { accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL], lastDroppedItem: null },
+        { accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null }
+      ],
+      boxes: [
+        { name: 'Bottle', type: ItemTypes.GLASS },
+        { name: 'Banana', type: ItemTypes.FOOD },
+        { name: 'Magazine', type: ItemTypes.PAPER }
+      ],
+      droppedBoxNames: []
+    };
+  }
 
-  renderItem(name, dropType) {
-    const Item = makeItem(dropType);
-    return <Item name={name} />;
-  },
+  isDropped(boxName) {
+    return this.state.droppedBoxNames.indexOf(boxName) > -1;
+  }
 
   render() {
+    const { boxes, dustbins } = this.state;
+
     return (
       <div>
         <div style={{minHeight: '14rem'}}>
-          {this.renderDustbin([ItemTypes.GLASS])}
-          {this.renderDustbin([ItemTypes.FOOD])}
-          {this.renderDustbin([ItemTypes.PAPER])}
-          {this.renderDustbin([NativeDragItemTypes.FILE, NativeDragItemTypes.URL])}
+          {dustbins.map(({ accepts, lastDroppedItem }, index) =>
+            <Dustbin accepts={accepts}
+                     lastDroppedItem={lastDroppedItem}
+                     onDrop={(item) => this.handleDrop(index, item)}
+                     key={index} />
+          )}
         </div>
 
         <div style={{ minHeight: '2rem' }}>
-          {this.renderItem('Glass', ItemTypes.GLASS)}
-          {this.renderItem('Banana', ItemTypes.FOOD)}
-          {this.renderItem('Bottle', ItemTypes.GLASS)}
-          {this.renderItem('Burger', ItemTypes.FOOD)}
-          {this.renderItem('Paper', ItemTypes.PAPER)}
+          {boxes.map(({ name, type }, index) =>
+            <Box name={name}
+                 type={type}
+                 isDropped={this.isDropped(name)}
+                 key={index} />
+          )}
         </div>
       </div>
     );
   }
-});
 
-export default Container;
+  handleDrop(index, item) {
+    const { name } = item;
+
+    this.setState(update(this.state, {
+      dustbins: {
+        [index]: {
+          lastDroppedItem: {
+            $set: item
+          }
+        }
+      },
+      droppedBoxNames: name ? {
+        $push: [name]
+      } : {}
+    }));
+  }
+}

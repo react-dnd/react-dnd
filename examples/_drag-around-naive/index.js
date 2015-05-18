@@ -21,12 +21,10 @@ const DragAroundNaive = React.createClass({
       <div>
         <Container hideSourceOnDrag={hideSourceOnDrag} />
         <p>
-          <label>
-            <input type='checkbox'
-                   checkedLink={this.linkState('hideSourceOnDrag')}>
-              Hide source item while dragging
-            </input>
-          </label>
+          <input type='checkbox'
+                 checkedLink={this.linkState('hideSourceOnDrag')}>
+            Hide source item while dragging
+          </input>
         </p>
         <hr />
         <p>
@@ -46,7 +44,6 @@ const DragAroundNaive = React.createClass({
           If we want to add custom logic such as snapping to grid or bounds checking, we can only do this on drop.
           There is no way for us to control what happens to dragged preview once the browser has drawn it.
         </p>
-        <p>Next: <Link to='drag-around-custom'>providing custom drag feedback</Link>.</p>
       </div>
     );
   }

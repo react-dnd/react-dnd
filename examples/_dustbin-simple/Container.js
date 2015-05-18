@@ -1,22 +1,23 @@
 'use strict';
 
-import React from 'react';
+import React, { Component } from 'react';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 import Dustbin from './Dustbin';
-import Item from './Item';
+import Box from './Box';
 
-const Container = React.createClass({
+@DragDropContext(HTML5Backend)
+export default class Container extends Component {
   render() {
     return (
       <div>
         <Dustbin />
         <div style={{ marginTop: '2rem' }}>
-          <Item name='Glass' />
-          <Item name='Banana' />
-          <Item name='Paper' />
+          <Box name='Glass' />
+          <Box name='Banana' />
+          <Box name='Paper' />
         </div>
       </div>
     );
   }
-});
-
-export default Container;
+}

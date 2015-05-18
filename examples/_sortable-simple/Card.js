@@ -2,65 +2,57 @@
 
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
-import { DragDropMixin } from 'react-dnd';
-
-const dragSource = {
-  beginDrag(component) {
-    return {
-      item: {
-        id: component.props.id
-      }
-    };
-  }
-};
-
-const dropTarget = {
-  over(component, item) {
-    component.props.moveCard(item.id, component.props.id);
-  }
-};
+import { DragSource, DropTarget } from 'react-dnd';
 
 const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
   padding: '0.5rem',
-  margin: '0.5rem'
+  margin: '0.5rem',
+  maxWidth: '20em'
 };
 
-const Card = React.createClass({
-  mixins: [DragDropMixin],
+const cardSource = {
+  beginDrag(props) {
+    return { id: props.id };
+  }
+};
 
-  propTypes: {
+const cardTarget = {
+  hover(props, monitor) {
+    const draggedId = monitor.getItem().id;
+
+    if (draggedId !== props.id) {
+      props.moveCard(draggedId, props.id);
+    }
+  }
+};
+
+@DropTarget(ItemTypes.CARD, cardTarget, connect => ({
+  connectDropTarget: connect.dropTarget(),
+}))
+@DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
+}))
+export default class Card {
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
     moveCard: PropTypes.func.isRequired
-  },
-
-  statics: {
-    configureDragDrop(register) {
-      register(ItemTypes.CARD, {
-        dragSource,
-        dropTarget
-      });
-    }
-  },
+  };
 
   render() {
-    const { text } = this.props;
-    const { isDragging } = this.getDragState(ItemTypes.CARD);
+    const { text, isDragging, connectDragSource, connectDropTarget } = this.props;
     const opacity = isDragging ? 0 : 1;
 
-    return (
-      <div {...this.dragSourceFor(ItemTypes.CARD)}
-           {...this.dropTargetFor(ItemTypes.CARD)}
-           style={{
-             ...style,
-             opacity
-           }}>
+    return connectDragSource(connectDropTarget(
+      <div style={{ ...style, opacity }}>
         {text}
       </div>
-    );
+    ));
   }
-});
-
-export default Card;
+}
