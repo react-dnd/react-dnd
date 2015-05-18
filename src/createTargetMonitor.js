@@ -14,7 +14,8 @@ class TargetMonitor {
   canDrop() {
     invariant(
       !isCallingCanDrop,
-      'You may not call monitor.canDrop() inside your canDrop() implementation.'
+      'You may not call monitor.canDrop() inside your canDrop() implementation. ' +
+      'Read more: http://gaearon.github.io/react-dnd/docs-drop-target-monitor.html'
     );
 
     try {
