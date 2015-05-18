@@ -45,6 +45,11 @@ export default class MyComponent {
 ```
 -------------------
 
+### Where do I get the precompiled version?
+
+Grab it from the [dist folder](https://github.com/gaearon/react-dnd/tree/master/dist) in the repo.  
+It exports `ReactDnD` (watch the casing!) and `ReactDnD.HTML5` for the [`HTML5` backend](/docs-html5-backend.html).
+
 ### How do I test React DnD components and their interaction?
 
 See the [testing](/docs-testing.html) tutorial for examples.
