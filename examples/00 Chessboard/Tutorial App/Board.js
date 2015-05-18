@@ -44,7 +44,7 @@ export default class Board {
       <div style={{
         width: '100%',
         height: '100%',
-        display: window.safari ? '-webkit-flex' : 'flex', // Don't do that in a real app
+        display: typeof window !== 'undefined' && window.safari ? '-webkit-flex' : 'flex', // Don't do that in a real app
         flexWrap: 'wrap',
         WebkitFlexWrap: 'wrap'
       }}>
