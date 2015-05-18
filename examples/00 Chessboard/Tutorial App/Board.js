@@ -44,8 +44,9 @@ export default class Board {
       <div style={{
         width: '100%',
         height: '100%',
-        display: 'flex',
-        flexWrap: 'wrap'
+        display: window.safari ? '-webkit-flex' : 'flex', // Don't do that in a real app
+        flexWrap: 'wrap',
+        WebkitFlexWrap: 'wrap'
       }}>
         {squares}
       </div>
