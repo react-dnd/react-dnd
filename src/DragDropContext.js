@@ -26,18 +26,29 @@ export default function DragDropContext(backend) {
       'Component';
 
     return class DragDropContextContainer extends Component {
+      static DecoratedComponent = DecoratedComponent;
+
       static displayName = `DragDropContext(${displayName})`;
 
       static childContextTypes = {
         dragDropManager: PropTypes.object.isRequired
       };
 
+      getDecoratedComponentInstance() {
+        return this.refs.child;
+      }
+
+      getManager() {
+        return childContext.dragDropManager;
+      }
+
       getChildContext() {
         return childContext;
       }
 
       render() {
-        return <DecoratedComponent {...this.props} />;
+        return <DecoratedComponent {...this.props}
+                                   ref='child' />;
       }
     };
   };
