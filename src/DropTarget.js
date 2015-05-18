@@ -19,7 +19,8 @@ export default function DropTarget(type, spec, collect, options = {}) {
       isValidType(type, true),
       'Expected "type" provided as the first argument to DropTarget to be ' +
       'a string, an array of strings, or a function that returns either given ' +
-      'the current props. Instead, received %s.',
+      'the current props. Instead, received %s. ' +
+      'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
       type
     );
     getType = () => type;
@@ -27,7 +28,8 @@ export default function DropTarget(type, spec, collect, options = {}) {
   invariant(
     isPlainObject(spec),
     'Expected "spec" provided as the second argument to DropTarget to be ' +
-    'a plain object. Instead, received %s.',
+    'a plain object. Instead, received %s. ' +
+    'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
     spec
   );
   const createTarget = createTargetFactory(spec);
@@ -35,14 +37,16 @@ export default function DropTarget(type, spec, collect, options = {}) {
     typeof collect === 'function',
     'Expected "collect" provided as the third argument to DropTarget to be ' +
     'a function that returns a plain object of props to inject. ' +
-    'Instead, received %s.',
+    'Instead, received %s. ' +
+    'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
     collect
   );
   invariant(
     isPlainObject(options),
     'Expected "options" provided as the fourth argument to DropTarget to be ' +
     'a plain object when specified. ' +
-    'Instead, received %s.',
+    'Instead, received %s. ' +
+    'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
     collect
   );
 
