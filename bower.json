@@ -1,12 +1,12 @@
 {
   "name": "react-dnd",
-  "version": "1.0.0-rc",
+  "version": "1.0.0",
   "homepage": "https://github.com/gaearon/react-dnd",
   "authors": [
     "Dan Abramov <dan.abramov@me.com>"
   ],
-  "description": "Drag and drop for React with full DOM control.",
-  "main": "dist/ReactDND.min.js",
+  "description": "Drag and Drop for React",
+  "main": "dist/ReactDnD.min.js",
   "dependencies": {
     "react": ">=0.13.0 <0.15.0"
   },
@@ -17,19 +17,31 @@
   ],
   "keywords": [
     "react",
+    "reactjs",
+    "file",
     "drag",
-    "drop"
+    "drop",
+    "html5",
+    "draggable",
+    "droppable",
+    "drag-and-drop",
+    "dnd",
+    "javascript",
+    "react-component",
+    "hoc"
   ],
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "examples/",
+    "src/",
+    "dist/",
     "scripts/",
-    "test",
-    "tests",
+    "examples/",
+    "site/",
     "package.json",
-    "webpack.config.js"
+    "webpack.config.js",
+    ".babelrc",
+    ".eslintrc"
   ]
 }
