@@ -22,18 +22,18 @@ const APIDocs = {
 };
 
 const Examples = {
-  DUSTBIN_SIMPLE: require('../examples/_dustbin-simple'),
-  DUSTBIN_INTERESTING: require('../examples/_dustbin-interesting'),
-  DUSTBIN_STRESS: require('../examples/_dustbin-stress'),
-  DRAG_AROUND_NAIVE: require('../examples/_drag-around-naive'),
-  DRAG_AROUND_CUSTOM: require('../examples/_drag-around-custom'),
-  NESTING_SOURCES: require('../examples/_nesting-sources'),
-  NESTING_TARGETS: require('../examples/_nesting-targets'),
-  SORTABLE_SIMPLE: require('../examples/_sortable-simple'),
-  SORTABLE_CANCELABLE: require('../examples/_sortable-cancelable'),
-  SORTABLE_STRESS: require('../examples/_sortable-stress'),
-  CUSTOMIZE_HANDLES: require('../examples/_customize-handles'),
-  CUSTOMIZE_EFFECTS: require('../examples/_customize-effects')
+  DUSTBIN_SIMPLE: require('../examples/dustbin-simple'),
+  DUSTBIN_INTERESTING: require('../examples/dustbin-interesting'),
+  DUSTBIN_STRESS: require('../examples/dustbin-stress'),
+  DRAG_AROUND_NAIVE: require('../examples/drag-around-naive'),
+  DRAG_AROUND_CUSTOM: require('../examples/drag-around-custom'),
+  NESTING_SOURCES: require('../examples/nesting-sources'),
+  NESTING_TARGETS: require('../examples/nesting-targets'),
+  SORTABLE_SIMPLE: require('../examples/sortable-simple'),
+  SORTABLE_CANCELABLE: require('../examples/sortable-cancelable'),
+  SORTABLE_STRESS: require('../examples/sortable-stress'),
+  CUSTOMIZE_HANDLES: require('../examples/customize-handles'),
+  CUSTOMIZE_EFFECTS: require('../examples/customize-effects')
 };
 
 export default class IndexPage extends Component {
