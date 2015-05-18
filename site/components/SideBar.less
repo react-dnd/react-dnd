@@ -1,0 +1,42 @@
+@import '../constants.less';
+
+.SideBar {
+  flex-shrink: 0;
+
+  @media only screen and (min-width: @screen-tablet) {
+    position: fixed;
+    left: @content-padding;
+    top: @navbar-height;
+    bottom: 0;
+    width: @sidebar-width;
+    overflow: scroll;
+    padding: @content-padding*2 0;
+  }
+
+  .SideBar-group + .SideBar-group {
+    margin-top: @content-padding;
+  }
+
+  .SideBar-groupTitle {
+    border-bottom: 2px solid fade(@accent-color, 10%);
+    padding-bottom: .5em;
+    margin: 0 0 .5em 0;
+  }
+
+  .SideBar-item {
+    display: block;
+    color: @body-color;
+
+    &.SideBar-item--selected {
+      color: @accent-color;
+      position: relative;
+
+      &:after {
+        content: '·';
+        position: absolute;
+        left: -.5em; top: 0; bottom: 0;
+        // color: fade(@accent-color, 10%);
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@import '../constants.less';
+
+.NavBar {
+  z-index: 3;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  padding:  0 @content-padding;
+  background-color: fade(#fff, 90%);
+
+  .NavBar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    height: @navbar-height;
+    padding: @content-padding/2 0;
+    border-bottom: 2px solid fade(@accent-color, 10%);
+  }
+
+  .NavBar-logo {
+    color: @accent-color;
+    line-height: 1.4;
+  }
+
+  .NavBar-logoTitle {
+    font-weight: bold;
+    font-size: 1.125em;
+  }
+
+  .NavBar-logoDescription {
+    margin: 0;
+    font-size: .875em;
+  }
+
+  .NavBar-link {
+    color: @accent-color;
+  }
+
+  .NavBar-link + .NavBar-link {
+    margin-left: 1em;
+  }
+}
