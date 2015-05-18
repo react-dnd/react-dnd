@@ -5,7 +5,7 @@ import { DragSource } from 'react-dnd';
 const style = {
   border: '1px dashed gray',
   padding: '0.5rem',
-  margin: '0.5rem'
+  margin: '0.5rem',
 };
 
 const ColorSource = {
@@ -55,7 +55,7 @@ class SourceBox extends Component {
         <input type='checkbox'
                checked={forbidDrag}
                onChange={onToggleForbidDrag}>
-          Forbid drag
+          <small>Forbid drag</small>
         </input>
 
         {children}

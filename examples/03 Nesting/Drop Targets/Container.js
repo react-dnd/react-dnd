@@ -9,7 +9,7 @@ export default class Container {
   render() {
     return (
       <div>
-        <div style={{minHeight: '14rem', overflow: 'auto'}}>
+        <div style={{ overflow: 'hidden', clear: 'both', margin: '-1rem' }}>
           <Dustbin greedy>
             <Dustbin greedy>
               <Dustbin greedy />
@@ -23,7 +23,7 @@ export default class Container {
           </Dustbin>
         </div>
 
-        <div style={{ minHeight: '2rem' }}>
+        <div style={{ overflow: 'hidden', clear: 'both', marginTop: '1.5rem' }}>
           <Box />
         </div>
       </div>
