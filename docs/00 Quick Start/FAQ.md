@@ -206,7 +206,9 @@ export default class FileDropZone extends Component {
 
 This is not currently documented, but you can take cues from the built-in [`HTML5`](/docs-html5-backend.html) and [`Test`](/docs-test-backend.html) backend implementations. The backend contract includes `setup()` and `teardown()` methods, and `connectDragSource()`, `connectDragPreview()` and `connectDropTarget()` methods that pass the DOM nodes to the backend. Contributions to the documentation are welcome.
 
+### I am getting a “Super expression must either be null or a function, not undefined” error
 
+React DnD *requires* React 0.13.
 
 ## Meta
 

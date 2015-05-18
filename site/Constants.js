@@ -88,18 +88,26 @@ export const APIPages = [{
 }];
 
 export const ExamplePages = [{
+  title: 'Chessboard',
+  pages: {
+    CHESSBOARD_TUTORIAL_APP: {
+      location: 'examples-chessboard-tutorial-app.html',
+      title: 'Tutorial App'
+    }
+  }
+}, {
   title: 'Dustbin',
   pages: {
-    DUSTBIN_SIMPLE: {
-      location: 'examples-dustbin-simple.html',
+    DUSTBIN_SINGLE_TARGET: {
+      location: 'examples-dustbin-single-target.html',
       title: 'Single Target'
     },
-    DUSTBIN_INTERESTING: {
-      location: 'examples-dustbin-interesting.html',
+    DUSTBIN_MULTIPLE_TARGETS: {
+      location: 'examples-dustbin-multiple-targets.html',
       title: 'Multiple Targets'
     },
-    DUSTBIN_STRESS: {
-      location: 'examples-dustbin-stress.html',
+    DUSTBIN_STRESS_TEST: {
+      location: 'examples-dustbin-stress-test.html',
       title: 'Stress Test'
     }
   }
@@ -108,22 +116,22 @@ export const ExamplePages = [{
   pages: {
     DRAG_AROUND_NAIVE: {
       location: 'examples-drag-around-naive.html',
-      title: 'Naïve'
+      title: 'Naive'
     },
-    DRAG_AROUND_CUSTOM: {
-      location: 'examples-drag-around-custom.html',
+    DRAG_AROUND_CUSTOM_DRAG_LAYER: {
+      location: 'examples-drag-around-custom-drag-layer.html',
       title: 'Custom Drag Layer'
     }
   }
 }, {
   title: 'Nesting',
   pages: {
-    NESTING_SOURCES: {
-      location: 'examples-nesting-sources.html',
+    NESTING_DRAG_SOURCES: {
+      location: 'examples-nesting-drag-sources.html',
       title: 'Drag Sources'
     },
-    NESTING_TARGETS: {
-      location: 'examples-nesting-targets.html',
+    NESTING_DROP_TARGETS: {
+      location: 'examples-nesting-drop-targets.html',
       title: 'Drop Targets'
     }
   }
@@ -134,28 +142,28 @@ export const ExamplePages = [{
       location: 'examples-sortable-simple.html',
       title: 'Simple'
     },
-    SORTABLE_CANCELABLE: {
-      location: 'examples-sortable-cancelable.html',
+    SORTABLE_CANCEL_ON_DROP_OUTSIDE: {
+      location: 'examples-sortable-cancel-on-drop-outside.html',
       title: 'Cancel on Drop Outside'
     },
-    SORTABLE_STRESS: {
+    SORTABLE_STRESS_TEST: {
       location: 'examples-sortable-stress.html',
       title: 'Stress Test'
     }
   }
 }, {
-  title: 'Customization',
+  title: 'Customize',
   pages: {
-    CUSTOMIZE_HANDLES: {
-      location: 'examples-customize-handles.html',
+    CUSTOMIZE_HANDLES_AND_PREVIEWS: {
+      location: 'examples-customize-handles-and-previews.html',
       title: 'Handles and Previews'
     },
-    CUSTOMIZE_EFFECTS: {
-      location: 'examples-customize-effects.html',
+    CUSTOMIZE_DROP_EFFECTS: {
+      location: 'examples-customize-drop-effects.html',
       title: 'Drop Effects'
     }
   }
 }];
 
 export const DOCS_DEFAULT = APIPages[0].pages.OVERVIEW;
-export const EXAMPLES_DEFAULT = ExamplePages[0].pages.DUSTBIN_SIMPLE;
+export const EXAMPLES_DEFAULT = ExamplePages[0].pages.CHESSBOARD_TUTORIAL_APP;

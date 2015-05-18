@@ -1,9 +1,7 @@
-'use strict';
-
 import React from 'react';
 import Container from './Container';
 
-export default class DustbinStress {
+export default class DustbinMultipleTargets {
   render() {
     return (
       <div>
