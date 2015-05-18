@@ -95,12 +95,12 @@ class HTML5Backend {
   }
 
   setup() {
-    invariant(!this.constructor.isSetUp, 'Cannot have two HTML5 backends at the same time.');
-    this.constructor.isSetUp = true;
-
     if (typeof window === 'undefined') {
       return;
     }
+
+    invariant(!this.constructor.isSetUp, 'Cannot have two HTML5 backends at the same time.');
+    this.constructor.isSetUp = true;
 
     window.addEventListener('dragstart', this.handleTopDragStart);
     window.addEventListener('dragstart', this.handleTopDragStartCapture, true);
@@ -115,11 +115,11 @@ class HTML5Backend {
   }
 
   teardown() {
-    this.constructor.isSetUp = false;
-
     if (typeof window === 'undefined') {
       return;
     }
+
+    this.constructor.isSetUp = false;
 
     window.removeEventListener('dragstart', this.handleTopDragStart);
     window.removeEventListener('dragstart', this.handleTopDragStartCapture, true);
