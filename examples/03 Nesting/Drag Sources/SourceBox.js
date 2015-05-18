@@ -46,7 +46,12 @@ class SourceBox extends Component {
     }
 
     return connectDragSource(
-      <div style={{ ...style, backgroundColor, opacity }}>
+      <div style={{
+        ...style,
+        backgroundColor,
+        opacity,
+        cursor: forbidDrag ? 'default' : 'move'
+      }}>
         <input type='checkbox'
                checked={forbidDrag}
                onChange={onToggleForbidDrag}>
