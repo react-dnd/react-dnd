@@ -10,7 +10,7 @@ export default class Container extends Component {
     return (
       <div>
         <Dustbin />
-        <div style={{ marginTop: '2rem' }}>
+        <div style={{ marginTop: '1em' }}>
           <Box name='Glass' />
           <Box name='Banana' />
           <Box name='Paper' />
