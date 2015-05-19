@@ -7,7 +7,7 @@ FAQ
 
 ### What is the @ syntax I see in the ES7 code examples?
 
-First of all, you don't have to be use ES6 or ES7 for React DnD. They make some of the code patterns more succinct, but it's up to you whether to enable these transformations.
+First of all, you don't have to use ES6 or ES7 for React DnD. They make some of the code patterns more succinct, but it's up to you whether to enable these transformations.
 
 When I say “ES7”, I mean ES6 + a few extensions that *might* make it into ES7 (also known as ES2016). What I mark as the ES7 code in the docs is actually ES6 code + [class properties](https://gist.github.com/jeffmo/054df782c05639da2adb) + [decorators](https://github.com/wycats/javascript-decorators). You can enable these features by putting `{ "stage": 0 }` into your [.babelrc](https://babeljs.io/docs/usage/babelrc/) file. You can also [enable them individually](https://babeljs.io/docs/usage/experimental/).
 
