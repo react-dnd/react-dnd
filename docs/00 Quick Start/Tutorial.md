@@ -1094,7 +1094,7 @@ var Knight = React.createClass({
   }
 });
 
-module.exports = DragSource(ItemTypes.KNIGHT, knightSource, collect);
+module.exports = DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
 ```
 -------------------
 ```js
@@ -1136,7 +1136,7 @@ Knight.propTypes = {
   isDragging: PropTypes.bool.isRequired
 };
 
-export default DragSource(ItemTypes.KNIGHT, knightSource, collect);
+export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
 ```
 -------------------
 ```js
@@ -1481,7 +1481,7 @@ BoardSquare.propTypes = {
   isOver: PropTypes.bool.isRequired
 };
 
-export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect);
+export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
 -------------------
 ```js
@@ -1712,7 +1712,7 @@ BoardSquare.propTypes = {
   canDrop: PropTypes.bool.isRequired
 };
 
-export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect);
+export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
 -------------------
 ```js
