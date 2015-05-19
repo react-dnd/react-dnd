@@ -1,19 +1,19 @@
-*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
 
 DragLayer
 ===================
 
 **This is an advanced feature.**  
 
-For the most use cases, the default rendering of the [`HTML5` backend](/docs-html5-backend.html) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
+For the most use cases, the default rendering of the [`HTML5` backend](docs-html5-backend.html) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
 
 Sometimes you might want to perform the custom rendering. This also becomes necessary if you're using a custom backend. `DragLayer` lets you perform the rendering of the drag preview yourself using just the React components. It is a higher-order component accepting one required parameter that is described below.
 
-To use `DragLayer`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](/docs-drag-drop-context.html).
+To use `DragLayer`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](docs-drag-drop-context.html).
 
 ### Signature
 
-`DragLayer` uses partial application. After specifying its only parameter with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragLayer` usable as an ES7 decorator. Read the [overview](/docs-overview.html) for a more detailed explanation of the decorators and the higher-order components.
+`DragLayer` uses partial application. After specifying its only parameter with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragLayer` usable as an ES7 decorator. Read the [overview](docs-overview.html) for a more detailed explanation of the decorators and the higher-order components.
 
 -------------------
 ```js
@@ -48,22 +48,22 @@ export default class CustomDragLayer {
 
 ### Parameters
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives a single `monitor` parameter. Read the [overview](/docs-overview.html) for an introduction to the monitors and the collecting function. See the collecting function described in detail in the next section.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives a single `monitor` parameter. Read the [overview](docs-overview.html) for an introduction to the monitors and the collecting function. See the collecting function described in detail in the next section.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
 ### The Collecting Function
 
-The collecting function signature is similar to the collecting functions of [`DragSource`](/docs-drag-source.html) and [`DropTarget`](/docs-drop-target.html), except that it doesn't have a `connect` parameter because the drag layer is not interactive and only *reflects* the drag state. The collecting function is called any time the global drag state changes, including the coordinate changes, so that your component can provide a timely updated custom drag preview. You can ask the `monitor` for the client coordinates of the dragged item.
+The collecting function signature is similar to the collecting functions of [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html), except that it doesn't have a `connect` parameter because the drag layer is not interactive and only *reflects* the drag state. The collecting function is called any time the global drag state changes, including the coordinate changes, so that your component can provide a timely updated custom drag preview. You can ask the `monitor` for the client coordinates of the dragged item.
 
 #### Parameters
 
-* **`monitor`**: An instance of [`DragLayerMonitor`](/docs-drag-layer-monitor.html). You can use it to query the information about the current drag state, including the coordinates. Read the [`DragLayerMonitor` documentation](docs-drag-layer-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
+* **`monitor`**: An instance of [`DragLayerMonitor`](docs-drag-layer-monitor.html). You can use it to query the information about the current drag state, including the coordinates. Read the [`DragLayerMonitor` documentation](docs-drag-layer-monitor.html) for a complete list of `monitor` methods, or read the [overview](docs-overview.html) for an introduction to the monitors.
 
 ### Return Value
 
 `DragLayer` wraps your component and returns another React component.  
-For easier [testing](/docs-testing.html), it provides an API to reach into the internals:
+For easier [testing](docs-testing.html), it provides an API to reach into the internals:
 
 #### Static Properties
 

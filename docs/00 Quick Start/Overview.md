@@ -12,7 +12,7 @@ React DnD is built on top of the [HTML5 drag and drop API](https://developer.moz
 
 Unfortunately, the HTML5 drag and drop API also has some downsides. It does not work on touch screens, and it provides less customization opportunities on IE than in other browsers.
 
-This is why **the HTML5 drag and drop support is implemented in a pluggable way** in React DnD. You don't have to use it. You can write a different implementation, based on touch events, mouse events, or something else entirely. Such pluggable implementations are called the *backends* in React DnD. Only the [HTML5 backend](/docs-html5-backend.html) comes with the library, but more may be added in the future.
+This is why **the HTML5 drag and drop support is implemented in a pluggable way** in React DnD. You don't have to use it. You can write a different implementation, based on touch events, mouse events, or something else entirely. Such pluggable implementations are called the *backends* in React DnD. Only the [HTML5 backend](docs-html5-backend.html) comes with the library, but more may be added in the future.
 
 The backends perform a similar role to that of React's synthetic event system: **they abstract away the browser differences and process the native DOM events.** Despite the similarities, React DnD backends do not have a dependency on React or its synthetic event system. Under the hood, all the backends do is translate the DOM events into the internal Flux actions that React DnD can process.
 
@@ -121,9 +121,9 @@ How do you wrap your components? What does wrapping even mean? If you have not w
 
 **A higher-order component is just a function that takes a React component class, and returns another React component class.** The wrapping component provided by the library renders *your* component in its `render` method and forwards the props to it, but also adds some useful behavior.
 
-In React DnD, [`DragSource`](/docs-drag-source.html) and [`DropTarget`](/docs-drop-target.html), as well as a few other top-level exported functions, are in fact higher-order components. They breathe the drag and drop magic into your components.
+In React DnD, [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html), as well as a few other top-level exported functions, are in fact higher-order components. They breathe the drag and drop magic into your components.
 
-One caveat of using them is that they require *two* function applications. For example, here's how to wrap `YourComponent` in a [`DragSource`](/docs-drag-source.html):
+One caveat of using them is that they require *two* function applications. For example, here's how to wrap `YourComponent` in a [`DragSource`](docs-drag-source.html):
 
 -------------------
 ```js
@@ -149,7 +149,7 @@ export default DragSource(/* ... */)(YourComponent);
 
 -------------------
 
-Notice how, after specifying the [`DragSource`](/docs-drag-source.html) parameters in the first function call, there is a *second* function call, where you finally pass your class. This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [ES7 decorator syntax](github.com/wycats/javascript-decorators) to work out of the box:
+Notice how, after specifying the [`DragSource`](docs-drag-source.html) parameters in the first function call, there is a *second* function call, where you finally pass your class. This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [ES7 decorator syntax](github.com/wycats/javascript-decorators) to work out of the box:
 
 -------------------
 
@@ -168,7 +168,7 @@ export default class YourComponent {
 
 You don't have to use this syntax, but if you like it, you can enable it by transpiling your code with [Babel](http://babeljs.io), and putting `{ "stage": 1 }` into your [.babelrc file](https://babeljs.io/docs/usage/babelrc/).
 
-Even if you don't plan to use ES7, the partial application can still be handy, because you can combine several [`DragSource`](/docs-drag-source.html) and [`DropTarget`](/docs-drop-target.html) declarations in ES5 or ES6 using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). In ES7, you can just stack the decorators to achieve the same effect.
+Even if you don't plan to use ES7, the partial application can still be handy, because you can combine several [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html) declarations in ES5 or ES6 using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). In ES7, you can just stack the decorators to achieve the same effect.
 
 -------------------
 ```js
@@ -421,4 +421,4 @@ export default class Card {
 -------------------
 
 Now you know enough about React DnD to explore the rest of the documentation!  
-The [tutorial](/docs-tutorial.html) is a great place to start.
+The [tutorial](docs-tutorial.html) is a great place to start.

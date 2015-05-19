@@ -1,7 +1,7 @@
 Tutorial
 ===================
 
-Now that you've read [the overview](/docs-overview.html), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/blog/2013/11/05/thinking-in-react.html) tutorial. Adding the drag and drop support is just the icing on the cake.
+Now that you've read [the overview](docs-overview.html), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/blog/2013/11/05/thinking-in-react.html) tutorial. Adding the drag and drop support is just the icing on the cake.
 
 In this tutorial, we're going to build a Chess game with React and React DnD. Just kidding! Writing a full-blown Chess game is totally out of scope of this tutorial. **What we're going to build is a tiny app with a Chess board and a lonely Knight. The Knight will be draggable according to the Chess rules.**
 
@@ -11,9 +11,9 @@ If you're new to React and know a thing or two about it, but yet have to gain so
 
 Enough talk! It's time to set up a build workflow for our little project. I use [Webpack](http://webpack.github.io/), you might be using [Browserify](http://browserify.org/). I don't want to get into that now, so just set up an empty React project in whatever way is most convenient for you. If you're feeling lazy, you are free to clone [React Hot Boilerplate](https://github.com/gaearon/react-hot-boilerplate) and work on top of it. In fact, that's what I'm going to do myself.
 
-In this tutorial, the code examples are available simultaneously in ES5, ES6, and [ES7](/docs-faq.html). If you want to follow along using ES6 or ES7, you will need to set up a compilation step using [Babel](https://babeljs.io/). It's easy to [make it work with the tool of your choice](https://babeljs.io/docs/using-babel/) so we're going to skip this step, too, and assume you've dealt with it and you are ready to write code now. The boilerplate project [I linked to before](https://github.com/gaearon/react-hot-boilerplate) already includes Babel.
+In this tutorial, the code examples are available simultaneously in ES5, ES6, and [ES7](docs-faq.html). If you want to follow along using ES6 or ES7, you will need to set up a compilation step using [Babel](https://babeljs.io/). It's easy to [make it work with the tool of your choice](https://babeljs.io/docs/using-babel/) so we're going to skip this step, too, and assume you've dealt with it and you are ready to write code now. The boilerplate project [I linked to before](https://github.com/gaearon/react-hot-boilerplate) already includes Babel.
 
-The app we're going to build is [available as an example on this website](/examples-chessboard-tutorial-app.html).
+The app we're going to build is [available as an example on this website](examples-chessboard-tutorial-app.html).
 
 ## Identifying the Components
 
@@ -948,11 +948,11 @@ Working great so far!
 
 This is the part that actually prompted me to write this tutorial. We are now going to see how easy React DnD makes it to add some drag and drop interaction to your existing components.
 
-This part assumes you are at least somewhat familiar with the concepts presented in the [overview](/docs-overview.html), such as the backends, the collecting functions, the types, the items, the drag sources, and the drop targets. If you didn't understand everything, it's fine, but make sure you at least give it a chance before jumping into the coding process.
+This part assumes you are at least somewhat familiar with the concepts presented in the [overview](docs-overview.html), such as the backends, the collecting functions, the types, the items, the drag sources, and the drop targets. If you didn't understand everything, it's fine, but make sure you at least give it a chance before jumping into the coding process.
 
-We're going to start by running `npm install --save react-dnd`. The first thing we need to set up in our app is the [`DragDropContext`](/docs-drag-drop-context.html). We need it to specify that we're going to use the [`HTML5` backend](/docs-html5-backend.html) in our app.
+We're going to start by running `npm install --save react-dnd`. The first thing we need to set up in our app is the [`DragDropContext`](docs-drag-drop-context.html). We need it to specify that we're going to use the [`HTML5` backend](docs-html5-backend.html) in our app.
 
-Because the `Board` is the top-level component in our app, I'm going to put the [`DragDropContext`](/docs-drag-drop-context.html) on it:
+Because the `Board` is the top-level component in our app, I'm going to put the [`DragDropContext`](docs-drag-drop-context.html) on it:
 
 -------------------
 ```js
@@ -1321,7 +1321,7 @@ renderPiece(x, y) {
 
 -------------------
 
-Let's now wrap the `BoardSquare` with a [`DropTarget`](/docs-drop-target.html). I'm going to write a drop target specification that only handles the `drop` event:
+Let's now wrap the `BoardSquare` with a [`DropTarget`](docs-drop-target.html). I'm going to write a drop target specification that only handles the `drop` event:
 
 -------------------
 ```js
@@ -1832,4 +1832,4 @@ Happy dragging and dropping.
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/1F2g2F0D470X0d0k2A1U/Screen%20Recording%202015-05-15%20at%2002.22%20pm.gif' width='404' height='445' alt='Screenshot'>
 
-Now go and [play with it](/examples-chessboard-tutorial-app.html)!
+Now go and [play with it](examples-chessboard-tutorial-app.html)!

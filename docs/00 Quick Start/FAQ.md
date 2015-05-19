@@ -1,4 +1,4 @@
-*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
 
 FAQ
 ===================
@@ -48,28 +48,28 @@ export default class MyComponent {
 ### Where do I get the precompiled version?
 
 Grab it from the [dist folder](https://github.com/gaearon/react-dnd/tree/master/dist) in the repo.  
-It exports `ReactDnD` (watch the casing!) and `ReactDnD.HTML5` for the [`HTML5` backend](/docs-html5-backend.html).
+It exports `ReactDnD` (watch the casing!) and `ReactDnD.HTML5` for the [`HTML5` backend](docs-html5-backend.html).
 
 ### How do I test React DnD components and their interaction?
 
-See the [testing](/docs-testing.html) tutorial for examples.
+See the [testing](docs-testing.html) tutorial for examples.
 
 ### How do I make the component draggable only by a small handle?
 
 Specify the container node as the `dragPreview`, but only make the drag handle a `dragSource()`.  
-See the [custom drag handle example](/examples-customize-handles-and-previews.html).
+See the [custom drag handle example](examples-customize-handles-and-previews.html).
 
 ### How do I constrain the drag preview movement?
 
-By default, you can't constrain the drag preview movement because the drag preview is drawn by the browser. You can, however, use a [custom drag layer](/examples-drag-around-custom-drag-layer.html) where you're free to rendering anything, with any snapping or constraints.
+By default, you can't constrain the drag preview movement because the drag preview is drawn by the browser. You can, however, use a [custom drag layer](examples-drag-around-custom-drag-layer.html) where you're free to rendering anything, with any snapping or constraints.
 
 ### How do I register a drag source or a drop target when the type depends on props?
 
-Both [`DragSource`](/docs-drag-source.html) and [`DropTarget`](/docs-drop-target.html) let you pass a function as the first parameter instead of a string or a symbol. If you pass a function, it will be given the current props, and it should return a string, a symbol, or (for drop targets only) an array of either.
+Both [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html) let you pass a function as the first parameter instead of a string or a symbol. If you pass a function, it will be given the current props, and it should return a string, a symbol, or (for drop targets only) an array of either.
 
 ### How do I combine several drag sources and drop targets in a single component?
 
-Because [`DragSource`](/docs-drag-source.html) and [`DropTarget`](/docs-drop-target.html) use the partial application, you may compose them using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). In ES7, you can just stack the decorators to achieve the same effect.
+Because [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html) use the partial application, you may compose them using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). In ES7, you can just stack the decorators to achieve the same effect.
 
 -------------------
 ```js
@@ -114,7 +114,7 @@ export default class YourComponent {
 
 ### How do I register a drop target for the native files?
 
-If you are using the [`HTML5` backend](/docs-html5-backend.html), you can register a drop target for one of the `NativeTypes` it exports:
+If you are using the [`HTML5` backend](docs-html5-backend.html), you can register a drop target for one of the `NativeTypes` it exports:
 
 -------------------
 ```js
@@ -217,7 +217,7 @@ export default class FileDropZone extends Component {
 
 ### How do I write a custom backend?
 
-This is not currently documented, but you can take cues from the built-in [`HTML5`](/docs-html5-backend.html) and [`Test`](/docs-test-backend.html) backend implementations. The backend contract includes `setup()` and `teardown()` methods, and `connectDragSource()`, `connectDragPreview()` and `connectDropTarget()` methods that pass the DOM nodes to the backend. Contributions to the documentation are welcome.
+This is not currently documented, but you can take cues from the built-in [`HTML5`](docs-html5-backend.html) and [`Test`](docs-test-backend.html) backend implementations. The backend contract includes `setup()` and `teardown()` methods, and `connectDragSource()`, `connectDragPreview()` and `connectDropTarget()` methods that pass the DOM nodes to the backend. Contributions to the documentation are welcome.
 
 ### I am getting a “Super expression must either be null or a function, not undefined” error
 
@@ -254,7 +254,7 @@ React DnD would not have reached the 1.0 release without the generous donations 
 
 ### How Do I Contribute?
 
-Contributing the documentation for the underlying [DnD Core](https://github.com/gaearon/dnd-core) library would be a huge help, as it is currently not documented at all, but its concepts leak in some advanced scenarios such as [writing tests](/docs-testing.html).
+Contributing the documentation for the underlying [DnD Core](https://github.com/gaearon/dnd-core) library would be a huge help, as it is currently not documented at all, but its concepts leak in some advanced scenarios such as [writing tests](docs-testing.html).
 
 Porting the library to other modern frameworks such as Cycle, Mercury, or Deku, is also appreciated. Such ports would be able to reuse DnD Core logic and the existing backends.
 
