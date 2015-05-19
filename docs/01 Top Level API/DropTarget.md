@@ -1,15 +1,15 @@
-*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
 
 DropTarget
 ===================
 
 Wrap your component with `DropTarget` to make it react to the compatible items being dragged, hovered, or dropped on it. `DropTarget` is a higher-order component.
 
-To use `DropTarget`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](/docs-drag-drop-context.html).
+To use `DropTarget`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](docs-drag-drop-context.html).
 
 ### Signature
 
-`DropTarget` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DropTarget` usable as an ES7 decorator. Read the [overview](/docs-overview.html) for a more detailed explanation of the decorators and the higher-order components.
+`DropTarget` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DropTarget` usable as an ES7 decorator. Read the [overview](docs-overview.html) for a more detailed explanation of the decorators and the higher-order components.
 
 -------------------
 ```js
@@ -44,11 +44,11 @@ export default class MyComponent {
 
 ### Parameters
 
-* **`types`**: Required. A string, an ES6 symbol, an array of either, or a function that returns either of those, given component's `props`. This drop target will only react to the items produced by the [drag sources](/docs-drag-source.html) of the specified type or types. Read the [overview](/docs-overview.html) to learn more about the items and types.
+* **`types`**: Required. A string, an ES6 symbol, an array of either, or a function that returns either of those, given component's `props`. This drop target will only react to the items produced by the [drag sources](docs-drag-source.html) of the specified type or types. Read the [overview](docs-overview.html) to learn more about the items and types.
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drop target reacts to the drag and drop events. See the drop target specification described in detail in the next section.
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](/docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
@@ -70,7 +70,7 @@ The second `spec` parameter must be a plain object implementing the drop target 
 
 * **`props`**: Your component's current props.
 
-* **`monitor`**: An instance of [`DropTargetMonitor`](/docs-drop-target-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, whether it is over the current target, and whether it can be dropped. Read the [`DropTargetMonitor` documentation](docs-drop-target-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
+* **`monitor`**: An instance of [`DropTargetMonitor`](docs-drop-target-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, whether it is over the current target, and whether it can be dropped. Read the [`DropTargetMonitor` documentation](docs-drop-target-monitor.html) for a complete list of `monitor` methods, or read the [overview](docs-overview.html) for an introduction to the monitors.
 
 * **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `canDrop` because the instance may not be available by the time it is called. If you want this method to depend on the component's state, consider lifting the state to the parent component, so that you can just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
 
@@ -86,18 +86,18 @@ All communication between the React components happens via props, so it makes se
 
 Your *collecting function* will be called by React DnD with a *connector* that lets you connect nodes to the DnD backend, and a *monitor* to query information about the drag state. It should return a plain object of props to inject into your component.
 
-If you're new to these concepts, the [overview](/docs-overview.html) should give you a good idea about them.
+If you're new to these concepts, the [overview](docs-overview.html) should give you a good idea about them.
 
 #### Parameters
 
-* **`connect`**: An instance of [`DropTargetConnector`](/docs-drop-target-connector.html). It only has a single `dropTarget()` method. It returns a function you need to pass down to your component to connect the target DOM node to the React DnD backend. If you return something like `{ connectDropTarget: connect.dropTarget() }` from your `collect` function, the component will receive `connectDropTarget` as a prop so you can mark the relevant node inside its `render()` as droppable: `return this.props.connectDropTarget(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Read the [`DropTargetConnector` documentation](docs-drop-target-connector.html) for a complete list of `connect` methods, or read the [overview](/docs-overview.html) for an introduction to the connectors.
+* **`connect`**: An instance of [`DropTargetConnector`](docs-drop-target-connector.html). It only has a single `dropTarget()` method. It returns a function you need to pass down to your component to connect the target DOM node to the React DnD backend. If you return something like `{ connectDropTarget: connect.dropTarget() }` from your `collect` function, the component will receive `connectDropTarget` as a prop so you can mark the relevant node inside its `render()` as droppable: `return this.props.connectDropTarget(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Read the [`DropTargetConnector` documentation](docs-drop-target-connector.html) for a complete list of `connect` methods, or read the [overview](docs-overview.html) for an introduction to the connectors.
 
-* **`monitor`**: An instance of [`DropTargetMonitor`](/docs-drop-target-monitor.html). It is precisely the same `monitor` you receive in the drop target specification methods, and you can use it to query the information about the current drag state. Read the [`DropTargetMonitor` documentation](docs-drop-target-monitor.html) for a complete list of `monitor` methods, or read the [overview](/docs-overview.html) for an introduction to the monitors.
+* **`monitor`**: An instance of [`DropTargetMonitor`](docs-drop-target-monitor.html). It is precisely the same `monitor` you receive in the drop target specification methods, and you can use it to query the information about the current drag state. Read the [`DropTargetMonitor` documentation](docs-drop-target-monitor.html) for a complete list of `monitor` methods, or read the [overview](docs-overview.html) for an introduction to the monitors.
 
 ### Return Value
 
 `DropTarget` wraps your component and returns another React component.  
-For easier [testing](/docs-testing.html), it provides an API to reach into the internals:
+For easier [testing](docs-testing.html), it provides an API to reach into the internals:
 
 #### Static Properties
 
@@ -107,7 +107,7 @@ For easier [testing](/docs-testing.html), it provides an API to reach into the i
 
 * **`getDecoratedComponentInstance()`**: Returns the wrapped component instance.
 
-* **`getHandlerId()`**: Returns the drag source ID that can be used to simulate the drag and drop events with the testing backend. Refer to the [testing](/docs-testing.html) tutorial for a usage example.
+* **`getHandlerId()`**: Returns the drag source ID that can be used to simulate the drag and drop events with the testing backend. Refer to the [testing](docs-testing.html) tutorial for a usage example.
 
 ### Nesting Behavior
 
@@ -115,11 +115,11 @@ If a drop target is nested in another drop target, both `hover()` and `drop()` b
 
 ### Handling Files and URLs
 
-When using the [`HTML5` backend](/docs-html5-backend.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` or `HTML5Backend.NativeTypes.URL` built-in types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
+When using the [`HTML5` backend](docs-html5-backend.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` or `HTML5Backend.NativeTypes.URL` built-in types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
 
 ### Example
 
-Check out [the tutorial](/docs-tutorial.html) for more real examples!
+Check out [the tutorial](docs-tutorial.html) for more real examples!
 
 -------------------
 ```js

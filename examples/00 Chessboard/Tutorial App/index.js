@@ -29,7 +29,7 @@ export default class ChessboardTutorialApp extends Component {
     return (
       <div>
         <p>
-          This is a sample app you'll build as you work through the <a href='/docs-tutorial.html'>tutorial</a>.
+          This is a sample app you'll build as you work through the <a href='docs-tutorial.html'>tutorial</a>.
         </p>
         <p>
           It illustrates creating the drag sources and the drop targets, using the monitors to query the current drag state, and customizing the drag previews.
@@ -42,7 +42,7 @@ export default class ChessboardTutorialApp extends Component {
           <Board knightPosition={knightPosition} />
         </div>
         <p>
-          Make sure to check out the <a href='/docs-tutorial.html'>tutorial</a> for step-by-step instructions on building it!
+          Make sure to check out the <a href='docs-tutorial.html'>tutorial</a> for step-by-step instructions on building it!
         </p>
       </div>
     );

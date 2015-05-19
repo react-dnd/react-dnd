@@ -1,9 +1,9 @@
-*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
 
 DragLayerMonitor
 ===================
 
-`DragLayerMonitor` is an object passed to a collecting function of the [`DragLayer`](/docs-drag-layer.html). Its methods let you get information about the global drag state.
+`DragLayerMonitor` is an object passed to a collecting function of the [`DragLayer`](docs-drag-layer.html). Its methods let you get information about the global drag state.
 
 ### Methods
 

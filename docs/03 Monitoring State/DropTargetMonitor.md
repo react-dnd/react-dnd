@@ -1,9 +1,9 @@
-*New to React DnD? [Read the overview](/docs-overview.html) before jumping into the docs.*
+*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
 
 DropTargetMonitor
 ===================
 
-`DropTargetMonitor` is an object passed to a collecting function of the [`DropTarget`](/docs-drop-target.html). Its methods let you get information about the drag state of a specific drop target. The specific drop target bound to that monitor is called the monitor's *owner* below.
+`DropTargetMonitor` is an object passed to a collecting function of the [`DropTarget`](docs-drop-target.html). Its methods let you get information about the drag state of a specific drop target. The specific drop target bound to that monitor is called the monitor's *owner* below.
 
 ### Methods
 
