@@ -3,25 +3,7 @@ import BoardSquare from './BoardSquare';
 import Knight from './Knight';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
-
-// In a real app, you should use Autoprefixer
-let testEl;
-function getDisplayFlexValue() {
-  if (typeof document === 'undefined') {
-    return 'flex';
-  }
-
-  if (!testEl) {
-    testEl = document.createElement('div');
-  }
-
-  testEl.style.display = '-webkit-flex';
-  if (testEl.style.display === '-webkit-flex') {
-    return '-webkit-flex';
-  } else {
-    return 'flex';
-  }
-}
+import './Board.less';
 
 @DragDropContext(HTML5Backend)
 export default class Board {
@@ -60,13 +42,7 @@ export default class Board {
     }
 
     return (
-      <div style={{
-        width: '100%',
-        height: '100%',
-        display: getDisplayFlexValue(),
-        flexWrap: 'wrap',
-        WebkitFlexWrap: 'wrap'
-      }}>
+      <div className='Board'>
         {squares}
       </div>
     );
