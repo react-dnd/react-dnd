@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Container from './Container';
 
-export default class SortableStress extends Component {
+export default class SortableStressTest extends Component {
   constructor(props) {
     super(props);
     // Avoid rendering on server because the big data list is generated
@@ -18,6 +18,9 @@ export default class SortableStress extends Component {
 
     return (
       <div>
+        <p>
+          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/04%20Sortable/Stress%20Test'>Browse the Source</a></b>
+        </p>
         <p>
           How many items can React DnD handle at the same time?
           There is a thousand items in this list.

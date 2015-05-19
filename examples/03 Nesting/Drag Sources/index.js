@@ -1,10 +1,13 @@
 import React from 'react';
 import Container from './Container';
 
-export default class NestingSources {
+export default class NestingDragSources {
   render() {
     return (
       <div>
+        <p>
+          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/03%20Nesting/Drag%20Sources'>Browse the Source</a></b>
+        </p>
         <p>
           You can nest the drag sources in one another.
           If a nested drag source returns <code>false</code> from <code>canDrag</code>, its parent will be asked, until a draggable source is found and activated.
