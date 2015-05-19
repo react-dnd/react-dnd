@@ -23,7 +23,7 @@ export default class SortableStressTest extends Component {
         </p>
         <p>
           How many items can React DnD handle at the same time?
-          There is a thousand items in this list.
+          There are a thousand items in this list.
           With some optimizations like updating the state inside a <code>requestAnimationFrame</code> callback, it can handle a few thousand items without lagging.
           After that, you're better off using virtual lists like <a href='https://github.com/facebook/fixed-data-table'>fixed-data-table</a>.
           Luckily, React DnD is designed to work great with any virtual React data list components because it doesn't keep any state in the DOM.
