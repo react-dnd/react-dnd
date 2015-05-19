@@ -72,7 +72,6 @@
     "mocha": "^2.2.5",
     "null-loader": "^0.1.0",
     "postcss": "^4.0.2",
-    "postcss-custom-properties": "3.0.1",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.3",
     "react-router": "~0.13.2",
