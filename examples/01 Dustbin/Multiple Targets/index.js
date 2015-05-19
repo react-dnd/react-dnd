@@ -6,6 +6,9 @@ export default class DustbinMultipleTargets {
     return (
       <div>
         <p>
+          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/01%20Dustbin/Multiple%20Targets'>Browse the Source</a></b>
+        </p>
+        <p>
           This is a slightly more interesting example.
         </p>
         <p>

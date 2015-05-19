@@ -1,10 +1,13 @@
 import React from 'react';
 import Container from './Container';
 
-export default class NestingTargets {
+export default class NestingDropTargets {
   render() {
     return (
       <div>
+        <p>
+          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/03%20Nesting/Drop%20Targets'>Browse the Source</a></b>
+        </p>
         <p>
           Drop targets can, too, be nested in one another.
           Unlike the drag sources, several drop targets may react to the same item being dragged.

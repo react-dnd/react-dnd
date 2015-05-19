@@ -24,6 +24,9 @@ export default class DragAroundCustomDragLayer extends Component {
     return (
       <div>
         <p>
+          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/02%20Drag%20Around/Custom%20Drag%20Layer'>Browse the Source</a></b>
+        </p>
+        <p>
           The browser APIs provide no way to change the drag preview or its behavior once drag has started.
           Libraries such as jQuery UI implement the drag and drop from scratch to work around this, but react-dnd
           only supports browser drag and drop “backend” for now, so we have to accept its limitations.

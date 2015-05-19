@@ -6,6 +6,9 @@ export default class DustbinSingleTarget {
     return (
       <div>
         <p>
+          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/01%20Dustbin/Single%20Target'>Browse the Source</a></b>
+        </p>
+        <p>
           This is the simplest example there is.
         </p>
         <p>
