@@ -39,20 +39,14 @@ module.exports = {
         loaders: isDev ? ['react-hot-loader', 'babel-loader'] : ['babel-loader']
       },
       {
-        test: /\.css$/,
+        test: /\.less$/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
           [
             'css-loader',
-            path.join(__dirname, '../scripts/cssTransformLoader')
+            path.join(__dirname, '../scripts/cssTransformLoader'),
+            'less-loader'
           ].join('!')
-        )
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader!less-loader'
         )
       },
       {

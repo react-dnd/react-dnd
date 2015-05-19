@@ -4,6 +4,25 @@ import Knight from './Knight';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
+// In a real app, you should use Autoprefixer
+let testEl;
+function getDisplayFlexValue() {
+  if (typeof document === 'undefined') {
+    return 'flex';
+  }
+
+  if (!testEl) {
+    testEl = document.createElement('div');
+  }
+
+  testEl.style.display = '-webkit-flex';
+  if (testEl.style.display === '-webkit-flex') {
+    return '-webkit-flex';
+  } else {
+    return 'flex';
+  }
+}
+
 @DragDropContext(HTML5Backend)
 export default class Board {
   static propTypes = {
@@ -44,7 +63,7 @@ export default class Board {
       <div style={{
         width: '100%',
         height: '100%',
-        display: typeof window !== 'undefined' && window.safari ? '-webkit-flex' : 'flex', // Don't do that in a real app
+        display: getDisplayFlexValue(),
         flexWrap: 'wrap',
         WebkitFlexWrap: 'wrap'
       }}>
