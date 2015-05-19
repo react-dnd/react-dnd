@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Container from './Container';
 
-export default class SortableStress {
+export default class SortableStress extends Component {
+  constructor(props) {
+    super(props);
+    // Avoid rendering on server because the big data list is generated
+    this.state = { shouldRender: false };
+  }
+
+  componentDidMount() {
+    // Won't fire on server.
+    this.setState({ shouldRender: true });
+  }
+
   render() {
+    const { shouldRender } = this.state;
+
     return (
       <div>
         <p>
@@ -16,7 +29,7 @@ export default class SortableStress {
           This example does not scroll automatically but you can add the scrolling with a parent drop target that compares <code>component.getBoundingClientRect()</code> with <code>monitor.getClientOffset()</code> inside its <code>hover</code> handler.
           In fact, you are welcome to contribute this functionality to this example!
         </p>
-        <Container />
+        {shouldRender && <Container />}
       </div>
     );
   }
