@@ -1,15 +1,16 @@
 import { DragSource } from 'dnd-core';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import { isFirefox } from '../utils/BrowserDetector';
-import { isUrlDataTransfer, isFileDataTransfer } from '../utils/DataTransfer';
+import { isUrlDataTransfer, isFileDataTransfer, isTextDataTransfer } from '../utils/DataTransfer';
 import { getElementClientOffset, getEventClientOffset, getDragPreviewOffset } from '../utils/OffsetHelpers';
 import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import invariant from 'invariant';
 
 export const NativeTypes = {
-  FILE: '__NATIVE_FILE__',
-  URL: '__NATIVE_URL__'
+  FILE: Symbol('Native File'),
+  URL: Symbol('Native URL'),
+  TEXT: Symbol('Native Text')
 };
 
 let emptyImage;
@@ -60,6 +61,30 @@ class UrlDragSource extends DragSource {
       dataTransfer.getData('Url') ||
       dataTransfer.getData('text/uri-list') || ''
     ).split('\n');
+  }
+
+  beginDrag() {
+    return this.item;
+  }
+}
+
+class TextDragSource extends DragSource {
+  constructor() {
+    super();
+    this.item = {
+      get text() {
+        console.warn('Browser doesn\'t allow reading the text until it is dropped.');
+        return null;
+      }
+    };
+  }
+
+  mutateItemByReadingDataTransfer(dataTransfer) {
+    delete this.item.text;
+    this.item.text = (
+      dataTransfer.getData('Text') ||
+      dataTransfer.getData('text/text-plain') || ''
+    );
   }
 
   beginDrag() {
@@ -210,25 +235,18 @@ class HTML5Backend {
     switch (this.monitor.getItemType()) {
     case NativeTypes.FILE:
     case NativeTypes.URL:
+    case NativeTypes.TEXT:
       return true;
     default:
       return false;
     }
   }
 
-  beginDragNativeUrl() {
+  beginDragNativeItem(type, NativeDragSource) {
     this.clearCurrentDragSourceNode();
 
-    this.currentNativeSource = new UrlDragSource();
-    this.currentNativeHandle = this.registry.addSource(NativeTypes.URL, this.currentNativeSource);
-    this.actions.beginDrag([this.currentNativeHandle]);
-  }
-
-  beginDragNativeFile() {
-    this.clearCurrentDragSourceNode();
-
-    this.currentNativeSource = new FileDragSource();
-    this.currentNativeHandle = this.registry.addSource(NativeTypes.FILE, this.currentNativeSource);
+    this.currentNativeSource = new NativeDragSource();
+    this.currentNativeHandle = this.registry.addSource(type, this.currentNativeSource);
     this.actions.beginDrag([this.currentNativeHandle]);
   }
 
@@ -368,7 +386,10 @@ class HTML5Backend {
       }
     } else if (isUrlDataTransfer(dataTransfer)) {
       // URL dragged from inside the document
-      this.beginDragNativeUrl();
+      this.beginDragNativeItem(NativeTypes.URL, UrlDragSource);
+    } else if (isTextDataTransfer(dataTransfer)) {
+      // Text dragged from inside the document
+      this.beginDragNativeItem(NativeTypes.TEXT, TextDragSource);
     } else {
       // If by this time no drag source reacted, tell browser not to drag.
       e.preventDefault();
@@ -395,10 +416,13 @@ class HTML5Backend {
     const { dataTransfer } = e;
     if (isFileDataTransfer(dataTransfer)) {
       // File dragged from outside the document
-      this.beginDragNativeFile();
+      this.beginDragNativeItem(NativeTypes.FILE, FileDragSource);
     } else if (isUrlDataTransfer(dataTransfer)) {
       // URL dragged from outside the document
-      this.beginDragNativeUrl();
+      this.beginDragNativeItem(NativeTypes.URL, UrlDragSource);
+    } else if (isTextDataTransfer(dataTransfer)) {
+      // Text dragged from outside the document
+      this.beginDragNativeItem(NativeTypes.TEXT, TextDragSource);
     }
   }
 
