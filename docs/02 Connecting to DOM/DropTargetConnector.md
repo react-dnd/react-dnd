@@ -24,7 +24,7 @@ var DropTarget = require('react-dnd').DropTarget;
 
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dragSource()
+    connectDropTarget: connect.dropTarget()
   };
 }
 
@@ -51,7 +51,7 @@ import { DropTarget } from 'react-dnd';
 
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dragSource()
+    connectDropTarget: connect.dropTarget()
   };
 }
 
@@ -78,7 +78,7 @@ import { DropTarget } from 'react-dnd';
 
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dragSource()
+    connectDropTarget: connect.dropTarget()
   };
 }
 
