@@ -25,7 +25,9 @@ export default class StaticHTMLBlock {
       switch (i % 4) {
       case 0:
         elements.push(
-          <div key={i} dangerouslySetInnerHTML={{__html: content}} />
+          <div key={i}
+               style={{ width: '100%' }}
+               dangerouslySetInnerHTML={{__html: content}} />
         );
         break;
       case 1:
@@ -47,7 +49,7 @@ export default class StaticHTMLBlock {
     }
 
     return (
-      <div>
+      <div style={{ width: '100%' }}>
         {elements}
       </div>
     );
