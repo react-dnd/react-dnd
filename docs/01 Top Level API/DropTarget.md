@@ -410,7 +410,7 @@ const chessSquareTarget = {
   }
 };
 
-@DropTarget(Types.CHESSPIECE, chessSquareTarget, (collect, monitor) => ({
+@DropTarget(Types.CHESSPIECE, chessSquareTarget, (connect, monitor) => ({
   // Call this function inside render()
   // to let React DnD handle the drag events:
   connectDropTarget: connect.dropTarget(),
