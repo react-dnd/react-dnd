@@ -1,16 +1,10 @@
 import { DragSource } from 'dnd-core';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import { isFirefox } from '../utils/BrowserDetector';
-import { isUrlDataTransfer, isFileDataTransfer } from '../utils/DataTransfer';
 import { getElementClientOffset, getEventClientOffset, getDragPreviewOffset } from '../utils/OffsetHelpers';
 import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import invariant from 'invariant';
-
-export const NativeTypes = {
-  FILE: '__NATIVE_FILE__',
-  URL: '__NATIVE_URL__'
-};
 
 let emptyImage;
 export function getEmptyImage() {
@@ -22,49 +16,80 @@ export function getEmptyImage() {
   return emptyImage;
 }
 
-class FileDragSource extends DragSource {
-  constructor() {
-    super();
-    this.item = {
-      get files() {
-        console.warn('Browser doesn\'t allow reading file information until the files are dropped.');
-        return null;
-      }
-    };
-  }
+export const NativeTypes = {
+  FILE: '__NATIVE_FILE__',
+  URL: '__NATIVE_URL__',
+  TEXT: '__NATIVE_TEXT__'
+};
 
-  mutateItemByReadingDataTransfer(dataTransfer) {
-    delete this.item.files;
-    this.item.files = Array.prototype.slice.call(dataTransfer.files);
-  }
+function getDataFromDataTransfer(dataTransfer, typesToTry, defaultValue) {
+  const result = typesToTry.reduce((resultSoFar, typeToTry) =>
+    resultSoFar || dataTransfer.getData(typeToTry),
+    null
+  );
 
-  beginDrag() {
-    return this.item;
-  }
+  return (result != null) ?
+    result :
+    defaultValue;
 }
 
-class UrlDragSource extends DragSource {
-  constructor() {
-    super();
-    this.item = {
-      get urls() {
-        console.warn('Browser doesn\'t allow reading URL information until the link is dropped.');
-        return null;
-      }
-    };
+const nativeTypesConfig = {
+  [NativeTypes.FILE]: {
+    exposeProperty: 'files',
+    matchesTypes: ['Files'],
+    getData: (dataTransfer) =>
+      Array.prototype.slice.call(dataTransfer.files)
+  },
+  [NativeTypes.URL]: {
+    exposeProperty: 'urls',
+    matchesTypes: ['Url', 'text/uri-list'],
+    getData: (dataTransfer, matchesTypes) =>
+      getDataFromDataTransfer(dataTransfer, matchesTypes, '').split('\n')
+  },
+  [NativeTypes.TEXT]: {
+    exposeProperty: 'text',
+    matchesTypes: ['Text', 'text/plain'],
+    getData: (dataTransfer, matchesTypes) =>
+      getDataFromDataTransfer(dataTransfer, matchesTypes, '')
   }
+};
 
-  mutateItemByReadingDataTransfer(dataTransfer) {
-    delete this.item.urls;
-    this.item.urls = (
-      dataTransfer.getData('Url') ||
-      dataTransfer.getData('text/uri-list') || ''
-    ).split('\n');
-  }
+function createNativeDragSource(type) {
+  const {
+    exposeProperty,
+    matchesTypes,
+    getData
+  } = nativeTypesConfig[type];
 
-  beginDrag() {
-    return this.item;
-  }
+  return class NativeDragSource extends DragSource {
+    constructor() {
+      super();
+      this.item = {
+        get [exposeProperty]() {
+          console.warn(`Browser doesn't allow reading "${exposeProperty}" until the drop event.`);
+          return null;
+        }
+      };
+    }
+
+    mutateItemByReadingDataTransfer(dataTransfer) {
+      delete this.item[exposeProperty];
+      this.item[exposeProperty] = getData(dataTransfer, matchesTypes);
+    }
+
+    beginDrag() {
+      return this.item;
+    }
+  };
+}
+
+function matchNativeItemType(dataTransfer) {
+  const dataTransferTypes = Array.prototype.slice.call(dataTransfer.types);
+
+  return Object.keys(nativeTypesConfig).filter(nativeItemType => {
+    const { matchesTypes } = nativeTypesConfig[nativeItemType];
+    return matchesTypes.some(t => dataTransferTypes.indexOf(t) > -1)
+  })[0] || null;
 }
 
 class HTML5Backend {
@@ -191,6 +216,15 @@ class HTML5Backend {
     });
   }
 
+  getCurrentDropEffect() {
+    if (this.isDraggingNativeItem()) {
+      // It makes more sense to default to 'copy' for native resources
+      return 'copy';
+    } else {
+      return this.getCurrentSourceNodeOptions().dropEffect;
+    }
+  }
+
   getCurrentSourcePreviewNodeOptions() {
     const sourceId = this.monitor.getSourceId();
     const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[sourceId];
@@ -207,28 +241,18 @@ class HTML5Backend {
   }
 
   isDraggingNativeItem() {
-    switch (this.monitor.getItemType()) {
-    case NativeTypes.FILE:
-    case NativeTypes.URL:
-      return true;
-    default:
-      return false;
-    }
+    const itemType = this.monitor.getItemType();
+    return Object.keys(NativeTypes).some(
+      key => NativeTypes[key] === itemType
+    );
   }
 
-  beginDragNativeUrl() {
+  beginDragNativeItem(type) {
     this.clearCurrentDragSourceNode();
 
-    this.currentNativeSource = new UrlDragSource();
-    this.currentNativeHandle = this.registry.addSource(NativeTypes.URL, this.currentNativeSource);
-    this.actions.beginDrag([this.currentNativeHandle]);
-  }
-
-  beginDragNativeFile() {
-    this.clearCurrentDragSourceNode();
-
-    this.currentNativeSource = new FileDragSource();
-    this.currentNativeHandle = this.registry.addSource(NativeTypes.FILE, this.currentNativeSource);
+    const SourceType = createNativeDragSource(type);
+    this.currentNativeSource = new SourceType();
+    this.currentNativeHandle = this.registry.addSource(type, this.currentNativeSource);
     this.actions.beginDrag([this.currentNativeHandle]);
   }
 
@@ -314,6 +338,8 @@ class HTML5Backend {
     });
 
     const { dataTransfer } = e;
+    const nativeType = matchNativeItemType(dataTransfer);
+
     if (this.monitor.isDragging()) {
       if (typeof dataTransfer.setDragImage === 'function') {
         // Use custom drag image if user specifies it.
@@ -366,9 +392,9 @@ class HTML5Backend {
         // This is the reason such behavior is strictly opt-in.
         this.actions.publishDragSource();
       }
-    } else if (isUrlDataTransfer(dataTransfer)) {
-      // URL dragged from inside the document
-      this.beginDragNativeUrl();
+    } else if (nativeType) {
+      // A native item (such as URL) dragged from inside the document
+      this.beginDragNativeItem(nativeType);
     } else {
       // If by this time no drag source reacted, tell browser not to drag.
       e.preventDefault();
@@ -393,12 +419,11 @@ class HTML5Backend {
     }
 
     const { dataTransfer } = e;
-    if (isFileDataTransfer(dataTransfer)) {
-      // File dragged from outside the document
-      this.beginDragNativeFile();
-    } else if (isUrlDataTransfer(dataTransfer)) {
-      // URL dragged from outside the document
-      this.beginDragNativeUrl();
+    const nativeType = matchNativeItemType(dataTransfer);
+
+    if (nativeType) {
+      // A native item (such as file or URL) dragged from outside the document
+      this.beginDragNativeItem(nativeType);
     }
   }
 
@@ -409,6 +434,11 @@ class HTML5Backend {
   handleTopDragEnter(e) {
     const { dragEnterTargetIds } = this;
     this.dragEnterTargetIds = [];
+
+    if (!this.monitor.isDragging()) {
+      // This is probably a native item type we don't understand.
+      return;
+    }
 
     if (!isFirefox()) {
       // Don't emit hover in `dragenter` on Firefox due to an edge case.
@@ -427,8 +457,7 @@ class HTML5Backend {
     if (canDrop) {
       // IE requires this to fire dragover events
       e.preventDefault();
-      const { dropEffect } = this.getCurrentSourceNodeOptions();
-      e.dataTransfer.dropEffect = dropEffect;
+      e.dataTransfer.dropEffect = this.getCurrentDropEffect();
     }
   }
 
@@ -443,6 +472,15 @@ class HTML5Backend {
   handleTopDragOver(e) {
     const { dragOverTargetIds } = this;
     this.dragOverTargetIds = [];
+
+    if (!this.monitor.isDragging()) {
+      // This is probably a native item type we don't understand.
+      // Prevent default "drop and blow away the whole document" action.
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'none';
+      return;
+    }
+
     this.actions.hover(dragOverTargetIds, {
       clientOffset: getEventClientOffset(e)
     });
@@ -454,8 +492,7 @@ class HTML5Backend {
     if (canDrop) {
       // Show user-specified drop effect.
       e.preventDefault();
-      const { dropEffect } = this.getCurrentSourceNodeOptions();
-      e.dataTransfer.dropEffect = dropEffect;
+      e.dataTransfer.dropEffect = this.getCurrentDropEffect();
     } else if (this.isDraggingNativeItem()) {
       // Don't show a nice cursor but still prevent default
       // "drop and blow away the whole document" action.
@@ -475,11 +512,13 @@ class HTML5Backend {
     }
 
     const isLastLeave = this.enterLeaveCounter.leave(e.target);
-    if (!isLastLeave || !this.isDraggingNativeItem()) {
+    if (!isLastLeave) {
       return;
     }
 
-    this.endDragNativeItem();
+    if (this.isDraggingNativeItem()) {
+      this.endDragNativeItem();
+    }
   }
 
   handleTopDropCapture(e) {

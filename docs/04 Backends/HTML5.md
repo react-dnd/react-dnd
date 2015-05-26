@@ -18,7 +18,7 @@ Aside from the default export, `HTML5` module also provides a few extras:
 
 * **`getEmptyImage()`**: a function returning a transparent empty [`Image`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image). Use `connect.dragPreview()` of the [DragSourceConnector](docs-drag-source-connector.html) to hide the browser-drawn drag preview completely. Handy for drawing the [custom drag layers with `DragLayer`](docs-drag-layer.html). Note that the custom drag previews don't work in IE.
 
-* **`NativeTypes`**: an enumeration of two constants, `NativeTypes.FILE` and `NativeTypes.URL`. You may register the [drop targets](docs-drop-target.html) for these types to handle the drop of the native files and URLs.
+* **`NativeTypes`**: an enumeration of three constants, `NativeTypes.FILE`, `NativeTypes.URL` and `NativeTypes.TEXT`. You may register the [drop targets](docs-drop-target.html) for these types to handle the drop of the native files, URLs, or the regular page text.
 
 ### Usage
 
