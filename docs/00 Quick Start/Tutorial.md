@@ -957,7 +957,7 @@ Because the `Board` is the top-level component in our app, I'm going to put the 
 -------------------
 ```js
 var React = require('react');
-var DragDropContext = require('react-dnd');
+var DragDropContext = require('react-dnd').DragDropContext;
 var HTML5Backend = require('react-dnd/modules/backends/HTML5');
 
 var Board = React.createClass({
