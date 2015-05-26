@@ -35,6 +35,8 @@ export default class Container extends Component {
 
     return (
       <div>
+        <a href='javascript:alert("hi")'>Drag me!</a>
+
         <div style={{ overflow: 'hidden', clear: 'both' }}>
           {dustbins.map(({ accepts, lastDroppedItem }, index) =>
             <Dustbin accepts={accepts}
