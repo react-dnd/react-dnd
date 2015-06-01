@@ -223,6 +223,89 @@ This is not currently documented, but you can take cues from the built-in [`HTML
 
 React DnD requires React 0.13. Make sure you are using at least that version.
 
+### Why my static methods and properties won't work?
+
+Consider example
+
+```javascript
+var Page = React.createClass({
+    mixins: [
+        Router.State
+    ],
+
+    statics: {
+        willTransitionTo: function(transition, params) {
+            ...
+        },
+    },
+
+    render: function() {
+        ...
+    },
+});
+
+module.exports = DragDropContext(HTML5Backend)(Page);
+```
+
+Even though a bit surprising `willTransitionTo` won't get triggered in this case! React DnD doesn't proxy static methods and properties as that is a problem that gets complex quite fast. Hence if you want to use static you should apply them before `DragDropContext` like this:
+
+-------------------
+```javascript
+var Page = React.createClass({
+    mixins: [
+        Router.State
+    ],
+
+    render: function() {
+        ...
+    },
+});
+
+module.exports = DragDropContext(HTML5Backend)(Page);
+module.exports.willTransitionTo = function(transition, params) {
+  ...
+};
+```
+-------------------
+```javascript
+function statics(a) {
+  return b => Object.assign(b, a)
+}
+
+class Page {
+    render() {
+        ...
+    },
+})
+
+export default statics({
+  willTransitionTo(transition, params) {
+    ...
+  }
+})(DragDropContext(HTML5Backend)(Page));
+```
+-------------------
+```javascript
+function statics(a) {
+  return b => Object.assign(b, a)
+}
+
+@statics({
+  willTransitionTo(transition, params) {
+    ...
+  }
+})
+@DragDropContext(HTML5Backend)
+class Page {
+    render() {
+        ...
+    },
+});
+
+export default Page;
+```
+-------------------
+
 ## Meta
 
 ### Is this Dungeons & Dragons?
