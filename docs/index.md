@@ -116,7 +116,7 @@ class Card {
 Card.propTypes = propTypes;
 
 // Export the wrapped component:
-export default DragSource(ItemTypes.CARD, cardSource)(Card);
+export default DragSource(ItemTypes.CARD, cardSource, collect)(Card);
 ```
 -------------------
 ```js
