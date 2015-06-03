@@ -149,7 +149,7 @@ export default DragSource(/* ... */)(YourComponent);
 
 -------------------
 
-Notice how, after specifying the [`DragSource`](docs-drag-source.html) parameters in the first function call, there is a *second* function call, where you finally pass your class. This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [ES7 decorator syntax](github.com/wycats/javascript-decorators) to work out of the box:
+Notice how, after specifying the [`DragSource`](docs-drag-source.html) parameters in the first function call, there is a *second* function call, where you finally pass your class. This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [ES7 decorator syntax](http://github.com/wycats/javascript-decorators) to work out of the box:
 
 -------------------
 
