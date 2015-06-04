@@ -223,86 +223,105 @@ This is not currently documented, but you can take cues from the built-in [`HTML
 
 React DnD requires React 0.13. Make sure you are using at least that version.
 
-### Why my static methods and properties won't work?
+### Why won't my static methods and properties work?
 
-Consider example
-
-```javascript
-var Page = React.createClass({
-    mixins: [
-        Router.State
-    ],
-
-    statics: {
-        willTransitionTo: function(transition, params) {
-            ...
-        },
-    },
-
-    render: function() {
-        ...
-    },
-});
-
-module.exports = DragDropContext(HTML5Backend)(Page);
-```
-
-Even though a bit surprising `willTransitionTo` won't get triggered in this case! React DnD doesn't proxy static methods and properties as that is a problem that gets complex quite fast. Hence if you want to use static you should apply them before `DragDropContext` like this:
+Consider this example:
 
 -------------------
 ```javascript
 var Page = React.createClass({
-    mixins: [
-        Router.State
-    ],
-
-    render: function() {
-        ...
+  statics: {
+    willTransitionTo: function (transition, params) {
+      /* ... */
     },
-});
+  },
 
-module.exports = DragDropContext(HTML5Backend)(Page);
-module.exports.willTransitionTo = function(transition, params) {
-  ...
-};
-```
--------------------
-```javascript
-function statics(a) {
-  return b => Object.assign(b, a)
-}
-
-class Page {
-    render() {
-        ...
-    },
-})
-
-export default statics({
-  willTransitionTo(transition, params) {
-    ...
+  render: function () {
+    /* ... */
   }
-})(DragDropContext(HTML5Backend)(Page));
+});
+
+module.exports = DragDropContext(HTML5Backend)(Page);
 ```
 -------------------
 ```javascript
-function statics(a) {
+class Page {
+  static willTransitionTo(transition, params) {
+    /* ... */
+  }
+
+  render() {
+    /* ... */
+  }
+}
+
+export default DragDropContext(HTML5Backend)(Page);
+```
+-------------------
+```javascript
+@DragDropContext(HTML5Backend)
+export default class Page {
+  static willTransitionTo(transition, params) {
+    /* ... */
+  }
+
+  render() {
+    /* ... */
+  }
+}
+```
+-------------------
+
+It might surprise you that your route handler's `willTransitionTo` (or a similar method) won't get triggered in this case! React DnD doesn't proxy your components' static methods and properties. This is too fragile and full of edge cases, so you must do it yourself. It's not hard! Just put your statics onto the components returned by React DnD instead:
+
+-------------------
+```javascript
+var Page = React.createClass({
+  render: function () {
+    /* ... */
+  }
+});
+
+Page = DragDropContext(HTML5Backend)(Page);
+Page.willTransitionTo = function (transition, params) {
+  /* ... */
+};
+
+module.exports = Page;
+```
+-------------------
+```javascript
+class Page {
+  render() {
+    /* ... */
+  }
+}
+
+Page = DragDropContext(HTML5Backend)(Page);
+Page.willTransitionTo = function (transition, params) {
+  /* ... */
+}
+
+export default Page;
+```
+-------------------
+```javascript
+// You can write your own decorator like this
+function assignStatics(a) {
   return b => Object.assign(b, a)
 }
 
-@statics({
+@assignStatics({
   willTransitionTo(transition, params) {
-    ...
+    /* ... */
   }
 })
 @DragDropContext(HTML5Backend)
-class Page {
-    render() {
-        ...
-    },
-});
-
-export default Page;
+export default class Page {
+  render() {
+    /* ... */
+  }
+}
 ```
 -------------------
 
