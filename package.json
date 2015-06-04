@@ -39,7 +39,7 @@
   "dependencies": {
     "disposables": "^1.0.1",
     "dnd-core": "^1.1.0",
-    "invariant": "^2.0.0",
+    "invariant": "^2.1.0",
     "lodash": "^3.1.0"
   },
   "peerDependencies": {
