@@ -35,7 +35,6 @@
     "**/.*",
     "node_modules",
     "src/",
-    "dist/",
     "scripts/",
     "examples/",
     "site/",
