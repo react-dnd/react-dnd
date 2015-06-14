@@ -7,7 +7,7 @@ In this tutorial, we're going to build a Chess game with React and React DnD. Ju
 
 We will use this example to demonstrate the data-driven approach of React DnD. You will learn how to create a drag source and a drop target, wire them together with your components, and change their appearance in response to the drag and drop events.
 
-If you're new to React and know a thing or two about it, but yet have to gain some experience building components, this tutorial can also serve as an introduction to the React mode of thinking and the React workflow. **If you are a seasoned React developer and only came here for the drag and drop part, feel free to skip it to the third and the final chapter of this tutorial.**
+If you're new to React and know a thing or two about it, but yet have to gain some experience building components, this tutorial can also serve as an introduction to the React mode of thinking and the React workflow. **If you are a seasoned React developer and only came here for the drag and drop part, feel free to skip to the third and the final chapter of this tutorial.**
 
 Enough talk! It's time to set up a build workflow for our little project. I use [Webpack](http://webpack.github.io/), you might be using [Browserify](http://browserify.org/). I don't want to get into that now, so just set up an empty React project in whatever way is most convenient for you. If you're feeling lazy, you are free to clone [React Hot Boilerplate](https://github.com/gaearon/react-hot-boilerplate) and work on top of it. In fact, that's what I'm going to do myself.
 
@@ -756,7 +756,7 @@ function emitChange() {
 
 exports.observe = function (o) {
   if (observer) {
-    throw new Error('Multiple observers not implemented'.);
+    throw new Error('Multiple observers not implemented.');
   }
 
   observer = o;
@@ -779,7 +779,7 @@ function emitChange() {
 
 export function observe(o) {
   if (observer) {
-    throw new Error('Multiple observers not implemented'.);
+    throw new Error('Multiple observers not implemented.');
   }
 
   observer = o;
@@ -888,8 +888,8 @@ var knightPosition = [1, 7];
 /* ... */
 
 exports.canMoveKnight = function (toX, toY) {
-  const x = knightPosition.x;
-  const y = knightPosition.y;
+  const x = knightPosition[0];
+  const y = knightPosition[1];
   const dx = toX - x;
   const dy = toY - y;
 
@@ -1803,7 +1803,7 @@ function collect(connect, monitor) {
 }
 ```
 
-This lets us use `connectDragPreview`, either in `render` method, just like we used `connectDragSource`, or even in `componentDidMount` with a custom image:
+This lets us use `connectDragPreview` in `render` method, just like we used `connectDragSource`, or even in `componentDidMount` with a custom image:
 
 -------------------
 ```js
