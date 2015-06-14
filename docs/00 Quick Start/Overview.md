@@ -111,7 +111,7 @@ So far we have covered the backends which work with the DOM, the data, as repres
 
 But how do we configure our components to actually have those props injected? How do we perform the side effects in response to the drag and drop events? Meet the *drag sources* and the *drop targets*, the primary abstraction units of React DnD. **They really tie the types, the items, the side effects, and the collecting functions together with your components.**
 
-Whenever you want to make a component or some part of it draggable, you need to wrap that component into a *drag source* declaration. Every drag source is registered for a certain *type*, and has to implement a method producing an *item* from the component's props. It can also optionally a few other methods for handling the drag and drop events. The drag source declaration also lets you specify the *collecting function* for the given component.
+Whenever you want to make a component or some part of it draggable, you need to wrap that component into a *drag source* declaration. Every drag source is registered for a certain *type*, and has to implement a method producing an *item* from the component's props. It can also optionally specify a few other methods for handling the drag and drop events. The drag source declaration also lets you specify the *collecting function* for the given component.
 
 The *drop targets* are very similar to the drag sources. The only difference is that a single drop target may register for several item types at once, and instead of producing an item, it may handle its hover or drop.
 
