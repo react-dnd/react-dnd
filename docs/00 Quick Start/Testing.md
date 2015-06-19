@@ -125,6 +125,13 @@ it('can be tested with the testing backend', function () {
   var box = TestUtils.findRenderedComponentWithType(root, Box);
   backend.simulateBeginDrag([box.getHandlerId()]);
 
+  // Optionally you can pass in a clientOffset for testing operations that
+  // depend on mouse movements.
+  // backend.simulateBeginDrag([box.getHandlerId()], {
+  //   clientOffset: { x: 0, y: 0 },
+  //   getSourceClientOffset: () => { x: 0, y: 0 },
+  // });
+
   // Verify that the div changed its opacity
   div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
   expect(div.props.style.opacity).toEqual(0.4);
