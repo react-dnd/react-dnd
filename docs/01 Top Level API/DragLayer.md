@@ -238,7 +238,7 @@ function collect(monitor) {
   };
 }
 
-export default DragLayer(collect)(CustomDragSource);
+export default DragLayer(collect)(CustomDragLayer);
 ```
 -------------------
 ```js
