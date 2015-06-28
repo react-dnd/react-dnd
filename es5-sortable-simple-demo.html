@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React DnD ES5 example for Sortable Simple</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://fb.me/react-with-addons-0.13.3.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script src="http://rawgit.com/gaearon/react-dnd/v1.1.3/dist/ReactDnD.min.js"></script>
+</head>
+<body>
+  <div id="main"></div>
+  
+  <script type="text/javascript">
+  // ItemTypes.js
+  
+  (function(exports){
+    exports.ItemTypes = {
+      CARD: 'card'
+    };
+  })(window);
+  </script>
+  
+  <script type="text/jsx">
+  // Card.js
+  
+  (function(exports, React, ItemTypes, DragSource, DropTarget){
+    var cardSource = {
+      beginDrag: function(props) {
+        return { id: props.id };
+      }
+    };
+
+    var cardTarget = {
+      hover: function(props, monitor) {
+        var draggedId = monitor.getItem().id;
+
+        if (draggedId !== props.id) {
+          props.moveCard(draggedId, props.id);
+        }
+      }
+    };
+
+    var Card = React.createClass({
+      propTypes: {
+        connectDragSource: React.PropTypes.func.isRequired,
+        connectDropTarget: React.PropTypes.func.isRequired,
+        isDragging: React.PropTypes.bool.isRequired,
+        id: React.PropTypes.any.isRequired,
+        text: React.PropTypes.string.isRequired,
+        moveCard: React.PropTypes.func.isRequired
+      },
+
+      render: function() {
+        var style = {
+          border: '1px dashed gray',
+          padding: '0.5rem 1rem',
+          marginBottom: '.5rem',
+          backgroundColor: 'white',
+          cursor: 'move',
+          opacity: this.props.isDragging ? 0 : 1
+        };
+        return this.props.connectDragSource(this.props.connectDropTarget(
+          <div style={style}>
+            {this.props.text}
+          </div>
+        ));
+      }
+    });
+    
+    var DragSourceDecorator = DragSource(ItemTypes.CARD, cardSource,    
+      function(connect, monitor) {
+        return {
+          connectDragSource: connect.dragSource(),
+          isDragging: monitor.isDragging()
+        };
+    });
+    var DropTargetDecorator = DropTarget(ItemTypes.CARD, cardTarget, 
+      function(connect) {
+        return {
+          connectDropTarget: connect.dropTarget()
+        };
+    });
+    exports.Card = DropTargetDecorator(DragSourceDecorator(Card));
+  })(window, React, window.ItemTypes, ReactDnD.DragSource, ReactDnD.DropTarget);
+  </script>
+  
+  <script type="text/jsx">
+  // Container.js
+  
+  (function(exports, React, DragDropContext, HTML5Backend){
+    var style = {
+      width: 400
+    };
+
+    var Container = React.createClass({
+      getInitialState: function(){
+        return {
+          cards: [{
+            id: 1,
+            order: 1,
+            text: 'Write a cool JS library'
+          }, {
+            id: 2,
+            order: 2,
+            text: 'Make it generic enough'
+          }, {
+            id: 3,
+            order: 3,
+            text: 'Write README'
+          }, {
+            id: 4,
+            order: 4,
+            text: 'Create some examples'
+          }, {
+            id: 5,
+            order: 5,
+            text: 'Spam in Twitter and IRC to promote it'
+          }, {
+            id: 6,
+            order: 6,
+            text: '???'
+          }, {
+            id: 7,
+            order: 7,
+            text: 'PROFIT'
+          }]
+        };
+      },
+
+      compareCards: function(card1, card2){
+        return card1.order - card2.order;
+      },
+
+      moveCard: function(id, afterId) {
+        var cards = this.state.cards;
+
+        var card = cards.filter(function(c){return c.id === id})[0];
+        var afterCard = cards.filter(function(c){return c.id === afterId})[0];
+        var cardOrder = card.order;
+        card.order = afterCard.order;
+        afterCard.order = cardOrder;
+
+        cards.sort(this.compareCards);
+
+        this.setState({
+          cards: cards
+        });
+      },
+
+      render: function() {
+        return (
+          <div style={style}>
+            {this.state.cards.map(function(card) {
+              return (
+                <Card key={card.id}
+                      id={card.id}
+                      text={card.text}
+                      moveCard={this.moveCard} />
+              );
+            }, this)}
+          </div>
+        );
+      }
+    });
+    exports.Container = DragDropContext(HTML5Backend)(Container);
+  })(window, React, ReactDnD.DragDropContext, ReactDnD.HTML5);
+  </script>
+  
+  <script type="text/jsx">
+  // index.js
+
+  (function(exports, React, Container){
+    var SortableSimple = React.createClass( {
+      render: function() {
+        return (
+          <div>
+            <p>
+              <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/04%20Sortable/Simple'>Browse the Source (TODO ES5 link)</a></b>
+            </p>
+            <p>
+              It is easy to implement a sortable interface with React DnD. Just make the same component both a drag source and a drop target, and reorder the data in the <code>hover</code> handler.
+            </p>
+            <Container />
+          </div>
+        );
+      }
+    });
+    exports.SortableSimple = SortableSimple;
+  })(window, React, window.Container);
+  </script>
+
+  <script type="text/jsx">
+      $(function () {
+          var elem = React.createElement(window.SortableSimple, {});
+          React.render(elem, document.getElementById("main"));
+      });
+  </script>
+</body>
+</html>
