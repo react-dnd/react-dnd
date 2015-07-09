@@ -54,7 +54,7 @@ If the backend handles the DOM events, but the components use React to describe 
 In fact, a connector is passed as a second argument to the *collecting function* we described above. Let's see how we can use it to specify the drag source:
 
 ```js
-function collect(monitor, connect) {
+function collect(connect, monitor) {
   return {
     highlighted: monitor.canDrop(),
     hovered: monitor.isOver(),
