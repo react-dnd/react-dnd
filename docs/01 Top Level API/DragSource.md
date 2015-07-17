@@ -147,7 +147,7 @@ var cardSource = {
     return item;
   },
 
-  isDragging: function (props) {
+  isDragging: function (props, monitor) {
     // If your component gets unmounted while dragged
     // (like a card in Kanban board dragged between lists)
     // you can implement something like this to keep its
