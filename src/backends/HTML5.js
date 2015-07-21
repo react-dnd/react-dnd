@@ -542,6 +542,9 @@ class HTML5Backend {
   }
 
   handleDrop(e, targetId) {
+    // prevent default action. This happens when the child of
+    // the draggable element is an anchor link.
+    isFirefox() && e.preventDefault();
     this.dropTargetIds.unshift(targetId);
   }
 
