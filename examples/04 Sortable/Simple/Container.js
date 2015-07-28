@@ -28,7 +28,7 @@ export default class Container extends Component {
         text: 'Create some examples'
       }, {
         id: 5,
-        text: 'Spam in Twitter and IRC to promote it'
+        text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)'
       }, {
         id: 6,
         text: '???'
