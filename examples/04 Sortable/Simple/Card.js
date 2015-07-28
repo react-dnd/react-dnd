@@ -17,12 +17,42 @@ const cardSource = {
 };
 
 const cardTarget = {
-  hover(props, monitor) {
+  hover(props, monitor, component) {
+    const ownId = props.id;
     const draggedId = monitor.getItem().id;
-
-    if (draggedId !== props.id) {
-      props.moveCard(draggedId, props.id);
+    if (draggedId === ownId) {
+      return;
     }
+  
+    // assuming something like findTodoIndex is implemented
+    const ownIndex = props.findTodoIndex(ownId);
+    const draggedIndex = props.findTodoIndex(draggedId);
+  
+    // What is my rectangle on screen?
+    const boundingRect = React.findDOMNode(component).getBoundingClientRect();
+    // Where is the mouse right now?
+    const clientOffset = monitor.getClientOffset();
+    // Where is my vertical middle?
+    const ownMiddleY = (boundingRect.bottom - boundingRect.top) / 2;
+    // How many pixels to the top?
+    const offsetY = clientOffset.y - boundingRect.top;
+  
+    // We only want to move when the mouse has crossed half of the item's height.
+    // If we're dragging down, we want to move only if we're below 50%.
+    // If we're dragging up, we want to move only if we're above 50%.
+  
+    // Moving down: exit if we're in upper half
+    if (draggedIndex < ownIndex && offsetY < ownMiddleY) {
+      return;
+    }
+  
+    // Moving up: exit if we're in lower half
+    if (draggedIndex > ownIndex && offsetY > ownMiddleY) {
+      return;
+    }
+  
+    // Time to actually perform the action!
+    props.moveCard(draggedId, ownId);
   }
 };
 
