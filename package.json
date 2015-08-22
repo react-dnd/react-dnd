@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Drag and Drop for React",
   "main": "modules/index.js",
   "scripts": {
@@ -43,7 +43,7 @@
     "lodash": "^3.1.0"
   },
   "peerDependencies": {
-    "react": ">=0.13.0 <0.15.0 || 0.14.0-beta1"
+    "react": ">=0.13.0 <0.15.0 || ^0.14.0-alpha"
   },
   "devDependencies": {
     "animation-frame": "^0.2.4",
