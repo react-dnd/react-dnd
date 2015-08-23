@@ -532,9 +532,9 @@ class HTML5Backend {
 
   handleTopDropCapture(e) {
     this.dropTargetIds = [];
+    e.preventDefault();
 
     if (this.isDraggingNativeItem()) {
-      e.preventDefault();
       this.currentNativeSource.mutateItemByReadingDataTransfer(e.dataTransfer);
     }
 
