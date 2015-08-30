@@ -32,6 +32,8 @@ export default function decorateHandler({
       dragDropManager: PropTypes.object.isRequired
     }
 
+    static defaultProps = DecoratedComponent.defaultProps;
+
     getHandlerId() {
       return this.handlerId;
     }
