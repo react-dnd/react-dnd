@@ -2,7 +2,7 @@ import shallowEqual from './utils/shallowEqual';
 import cloneWithRef from './utils/cloneWithRef';
 import { Disposable, SerialDisposable } from 'disposables';
 import { isValidElement } from 'react';
-import {findDOMNode} from 'react-dom';
+import { findDOMNode } from 'react-dom';
 
 export default function bindConnectorMethod(handlerId, connect) {
   const disposable = new SerialDisposable();
