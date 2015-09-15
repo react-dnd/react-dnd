@@ -106,6 +106,10 @@ export default function decorateHandler({
         disposable: connectorDisposable
       } = bindConnector(connector, handlerId);
 
+      this.handlerId = handlerId;
+      this.handlerConnector = handlerConnector;
+      this.handlerMonitor.receiveHandlerId(handlerId);
+
       const globalMonitor = this.manager.getMonitor();
       const unsubscribe = globalMonitor.subscribeToStateChange(
         this.handleChange,
@@ -114,15 +118,11 @@ export default function decorateHandler({
 
       this.disposable.setDisposable(
         new CompositeDisposable(
-          new Disposable(unregister),
           new Disposable(unsubscribe),
+          new Disposable(unregister),
           connectorDisposable
         )
       );
-
-      this.handlerMonitor.receiveHandlerId(handlerId);
-      this.handlerConnector = handlerConnector;
-      this.handlerId = handlerId;
     }
 
     handleChange() {
