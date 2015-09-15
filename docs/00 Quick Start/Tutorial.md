@@ -922,6 +922,11 @@ Finally, I'm adding a `canMoveKnight` check to the `handleSquareClick` method:
 
 -------------------
 ```js
+var canMoveKnight = require('./Game').canMoveKnight;
+var moveKnight = require('./Game').moveKnight;
+
+/* ... */
+
 handleSquareClick: function (toX, toY) {
   if (canMoveKnight(toX, toY)) {
     moveKnight(toX, toY);
@@ -930,6 +935,10 @@ handleSquareClick: function (toX, toY) {
 ```
 -------------------
 ```js
+import { canMoveKnight, moveKnight } from './Game';
+
+/* ... */
+
 handleSquareClick(toX, toY) {
   if (canMoveKnight(toX, toY)) {
     moveKnight(toX, toY);
