@@ -12,7 +12,10 @@ const style = {
 
 const cardSource = {
   beginDrag(props) {
-    return { id: props.id };
+    return {
+      id: props.id,
+      index: props.index
+    };
   }
 };
 
@@ -23,10 +26,9 @@ const cardTarget = {
     if (draggedId === ownId) {
       return;
     }
-  
-    // assuming something like findTodoIndex is implemented
-    const ownIndex = props.findTodoIndex(ownId);
-    const draggedIndex = props.findTodoIndex(draggedId);
+
+    const ownIndex = props.index;
+    const draggedIndex = monitor.getItem().index;
   
     // What is my rectangle on screen?
     const boundingRect = React.findDOMNode(component).getBoundingClientRect();
