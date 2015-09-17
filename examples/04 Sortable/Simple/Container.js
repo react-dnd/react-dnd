@@ -28,7 +28,7 @@ export default class Container extends Component {
         text: 'Create some examples'
       }, {
         id: 5,
-        text: 'Spam in Twitter and IRC to promote it'
+        text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)'
       }, {
         id: 6,
         text: '???'
@@ -62,9 +62,10 @@ export default class Container extends Component {
 
     return (
       <div style={style}>
-        {cards.map(card => {
+        {cards.map((card, i) => {
           return (
             <Card key={card.id}
+                  index={i}
                   id={card.id}
                   text={card.text}
                   moveCard={this.moveCard} />
