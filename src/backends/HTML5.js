@@ -564,8 +564,8 @@ class HTML5Backend {
   handleSelectStart(e) {
     // Prevent selection on IE
     // and instead ask it to consider dragging.
-    e.preventDefault();
     if (typeof e.target.dragDrop === 'function') {
+      e.preventDefault();
       e.target.dragDrop();
     }
   }
