@@ -101,7 +101,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 var Square = React.createClass({
-  propTypes = {
+  propTypes: {
     black: PropTypes.bool
   },
 
