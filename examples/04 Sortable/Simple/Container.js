@@ -39,19 +39,19 @@ export default class Container extends Component {
     };
   }
 
-  moveCard(id, afterId) {
+  moveCard(dragId, hoverId) {
     const { cards } = this.state;
 
-    const card = cards.filter(c => c.id === id)[0];
-    const afterCard = cards.filter(c => c.id === afterId)[0];
-    const cardIndex = cards.indexOf(card);
-    const afterIndex = cards.indexOf(afterCard);
+    const dragCard = cards.filter(c => c.id === dragId)[0];
+    const hoverCard = cards.filter(c => c.id === hoverId)[0];
+    const dragIndex = cards.indexOf(dragCard);
+    const hoverIndex = cards.indexOf(hoverCard);
 
     this.setState(update(this.state, {
       cards: {
         $splice: [
-          [cardIndex, 1],
-          [afterIndex, 0, card]
+          [dragIndex, 1],
+          [hoverIndex, 0, dragCard]
         ]
       }
     }));
