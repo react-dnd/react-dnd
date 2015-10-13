@@ -11,21 +11,12 @@ export default function createMonotonicInterpolant(xs, ys) {
   }
   indexes.sort((a, b) => xs[a] < xs[b] ? -1 : 1);
 
-  const oldXs = xs, oldYs = ys;
-  // Impl: Creating new arrays also prevents problems if the input arrays are mutated later
-  xs = [];
-  ys = [];
-  // Impl: Unary plus properly converts values to numbers
-  for (let i = 0; i < length; i++) {
-    xs.push(+oldXs[indexes[i]]);
-    ys.push(+oldYs[indexes[i]]);
-  }
-
   // Get consecutive differences and slopes
   const dys = [];
   const dxs = [];
   const ms = [];
-  let dx, dy;
+  let dx;
+  let dy;
   for (let i = 0; i < length - 1; i++) {
     dx = xs[i + 1] - xs[i];
     dy = ys[i + 1] - ys[i];
@@ -64,7 +55,7 @@ export default function createMonotonicInterpolant(xs, ys) {
   }
 
   // Return interpolant function
-  return function (x) {
+  return function interpolant(x) {
     // The rightmost point in the dataset should give an exact result
     let i = xs.length - 1;
     if (x === xs[i]) {
@@ -89,7 +80,8 @@ export default function createMonotonicInterpolant(xs, ys) {
     i = Math.max(0, high);
 
     // Interpolate
-    const diff = x - xs[i], diffSq = diff * diff;
+    const diff = x - xs[i];
+    const diffSq = diff * diff;
     return ys[i] + c1s[i] * diff + c2s[i] * diffSq + c3s[i] * diff * diffSq;
   };
 }

@@ -3,13 +3,17 @@ import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
-export default function DragDropContext(backend) {
+export default function DragDropContext(backendOrModule) {
   checkDecoratorArguments('DragDropContext', 'backend', ...arguments);
 
   // Auto-detect ES6 default export for people still using ES5
-  if (typeof backend === 'object' && typeof backend.default === 'function') {
-    backend = backend.default;
+  let backend;
+  if (typeof backendOrModule === 'object' && typeof backendOrModule.default === 'function') {
+    backend = backendOrModule.default;
+  } else {
+    backend = backendOrModule;
   }
+
   invariant(
     typeof backend === 'function',
     'Expected the backend to be a function or an ES6 module exporting a default function. ' +
@@ -48,8 +52,10 @@ export default function DragDropContext(backend) {
       }
 
       render() {
-        return <DecoratedComponent {...this.props}
-                                   ref='child' />;
+        return (
+          <DecoratedComponent {...this.props}
+                              ref='child' />
+        );
       }
     };
   };

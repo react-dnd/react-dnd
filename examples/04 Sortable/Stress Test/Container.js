@@ -55,8 +55,8 @@ export default class Container extends Component {
     cancelAnimationFrame(this.requestedFrame);
   }
 
-  scheduleUpdate(update) {
-    this.pendingUpdate = update;
+  scheduleUpdate(updateFn) {
+    this.pendingUpdateFn = updateFn;
 
     if (!this.requestedFrame) {
       this.requestedFrame = requestAnimationFrame(this.drawFrame);
@@ -64,10 +64,10 @@ export default class Container extends Component {
   }
 
   drawFrame() {
-    const nextState = update(this.state, this.pendingUpdate);
+    const nextState = update(this.state, this.pendingUpdateFn);
     this.setState(nextState);
 
-    this.pendingUpdate = null;
+    this.pendingUpdateFn = null;
     this.requestedFrame = null;
   }
 

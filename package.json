@@ -8,8 +8,9 @@
     "build-site": "./scripts/buildStaticSite.sh",
     "publish-site": "./scripts/publishStaticSite.sh",
     "build": "./scripts/build.sh",
+    "lint": "eslint .",
     "test": "karma start",
-    "prepublish": "npm run build"
+    "prepublish": "npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -50,10 +51,12 @@
     "autoprefixer": "^5.0.0",
     "babel": "^5.8.23",
     "babel-core": "^5.8.24",
-    "babel-eslint": "^3.1.1",
+    "babel-eslint": "^4.1.3",
     "babel-loader": "^5.0.0",
     "css-loader": "^0.9.1",
-    "eslint": "^0.20.0",
+    "eslint": "^1.6.0",
+    "eslint-config-airbnb": "^0.1.0",
+    "eslint-plugin-react": "^3.5.1",
     "expect": "^1.6.0",
     "extract-text-webpack-plugin": "^0.3.8",
     "faker": "^2.1.3",

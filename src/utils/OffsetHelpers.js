@@ -3,10 +3,10 @@ import createMonotonicInterpolant from './createMonotonicInterpolant';
 
 const ELEMENT_NODE = 1;
 
-export function getElementClientOffset(el) {
-  if (el.nodeType !== ELEMENT_NODE) {
-    el = el.parentElement;
-  }
+export function getNodeClientOffset(node) {
+  const el = node.nodeType === ELEMENT_NODE ?
+    node :
+    node.parentElement;
 
   if (!el) {
     return null;
@@ -32,7 +32,7 @@ export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anch
   );
   const dragPreviewNode = isImage ? sourceNode : dragPreview;
 
-  const dragPreviewNodeOffsetFromClient = getElementClientOffset(dragPreviewNode);
+  const dragPreviewNodeOffsetFromClient = getNodeClientOffset(dragPreviewNode);
   const offsetFromDragPreview = {
     x: clientOffset.x - dragPreviewNodeOffsetFromClient.x,
     y: clientOffset.y - dragPreviewNodeOffsetFromClient.y
@@ -55,7 +55,7 @@ export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anch
 
   // Interpolate coordinates depending on anchor point
   // If you know a simpler way to do this, let me know
-  var interpolateX = createMonotonicInterpolant([0, 0.5, 1], [
+  const interpolateX = createMonotonicInterpolant([0, 0.5, 1], [
     // Dock to the left
     offsetFromDragPreview.x,
     // Align at the center
@@ -63,7 +63,7 @@ export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anch
     // Dock to the right
     offsetFromDragPreview.x + dragPreviewWidth - sourceWidth
   ]);
-  var interpolateY = createMonotonicInterpolant([0, 0.5, 1], [
+  const interpolateY = createMonotonicInterpolant([0, 0.5, 1], [
     // Dock to the top
     offsetFromDragPreview.y,
     // Align at the center
@@ -71,7 +71,7 @@ export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anch
     // Dock to the bottom
     offsetFromDragPreview.y + dragPreviewHeight - sourceHeight
   ]);
-  let x = interpolateX(anchorX);
+  const x = interpolateX(anchorX);
   let y = interpolateY(anchorY);
 
   // Work around Safari 8 positioning bug

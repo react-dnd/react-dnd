@@ -44,6 +44,8 @@ class TargetBox extends Component {
     case Colors.YELLOW:
       backgroundColor = 'lightgoldenrodyellow';
       break;
+    default:
+      break;
     }
 
     return connectDropTarget(

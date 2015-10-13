@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
 import snapToGrid from './snapToGrid';
@@ -69,6 +68,8 @@ export default class CustomDragLayer {
       return (
         <BoxDragPreview title={item.title} />
       );
+    default:
+      return null;
     }
   }
 

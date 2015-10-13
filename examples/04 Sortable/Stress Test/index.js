@@ -10,7 +10,7 @@ export default class SortableStressTest extends Component {
 
   componentDidMount() {
     // Won't fire on server.
-    this.setState({ shouldRender: true });
+    this.setState({ shouldRender: true }); // eslint-disable-line react/no-did-mount-set-state
   }
 
   render() {
