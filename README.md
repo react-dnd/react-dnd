@@ -11,4 +11,7 @@ See the changelog on the Releases page:
 
 https://github.com/gaearon/react-dnd/releases
 
-[![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
+[![build status](https://img.shields.io/travis/gaearon/react-dnd/master.svg?style=flat-square)](https://travis-ci.org/gaearon/react-dnd)
+[![npm version](https://img.shields.io/npm/v/react-dnd.svg?style=flat-square)](https://www.npmjs.com/package/react-dnd)
+[![npm downloads](https://img.shields.io/npm/dm/react-dnd.svg?style=flat-square)](https://www.npmjs.com/package/react-dnd)
+[![join chat](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/gaearon/react-dnd)  
