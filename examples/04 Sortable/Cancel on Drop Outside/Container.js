@@ -81,7 +81,7 @@ export default class Container extends Component {
 
     return connectDropTarget(
       <div style={style}>
-        {cards.map((card, index) => {
+        {cards.map(card => {
           return (
             <Card key={card.id}
                   id={card.id}

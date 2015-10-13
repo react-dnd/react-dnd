@@ -28,7 +28,8 @@ export default class Box {
     id: PropTypes.any.isRequired,
     left: PropTypes.number.isRequired,
     top: PropTypes.number.isRequired,
-    hideSourceOnDrag: PropTypes.bool.isRequired
+    hideSourceOnDrag: PropTypes.bool.isRequired,
+    children: PropTypes.node
   };
 
   render() {

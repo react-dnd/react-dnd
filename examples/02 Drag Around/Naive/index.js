@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Container from './Container';
-import { Link } from 'react-router';
 
 export default class DragAroundNaive extends Component {
   constructor(props) {

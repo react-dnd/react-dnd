@@ -28,7 +28,7 @@ const cardTarget = {
     if (dragIndex === hoverIndex) {
       return;
     }
-  
+
     // Determine rectangle on screen
     const hoverBoundingRect = React.findDOMNode(component).getBoundingClientRect();
 
@@ -49,7 +49,7 @@ const cardTarget = {
     if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
       return;
     }
-  
+
     // Dragging upwards
     if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
       return;

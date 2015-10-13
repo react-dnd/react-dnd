@@ -1,6 +1,6 @@
 export default function snapToGrid(x, y) {
-  x = Math.round(x / 32) * 32;
-  y = Math.round(y / 32) * 32;
+  const snappedX = Math.round(x / 32) * 32;
+  const snappedY = Math.round(y / 32) * 32;
 
-  return [x, y];
+  return [snappedX, snappedY];
 }

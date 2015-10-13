@@ -1,7 +1,7 @@
 import { DragSource } from 'dnd-core';
 import EnterLeaveCounter from '../utils/EnterLeaveCounter';
 import { isFirefox } from '../utils/BrowserDetector';
-import { getElementClientOffset, getEventClientOffset, getDragPreviewOffset } from '../utils/OffsetHelpers';
+import { getNodeClientOffset, getEventClientOffset, getDragPreviewOffset } from '../utils/OffsetHelpers';
 import shallowEqual from '../utils/shallowEqual';
 import defaults from 'lodash/object/defaults';
 import invariant from 'invariant';
@@ -28,7 +28,7 @@ function getDataFromDataTransfer(dataTransfer, typesToTry, defaultValue) {
     null
   );
 
-  return (result != null) ?
+  return (result != null) ? // eslint-disable-line eqeqeq
     result :
     defaultValue;
 }
@@ -66,7 +66,9 @@ function createNativeDragSource(type) {
       super();
       this.item = {
         get [exposeProperty]() {
-          console.warn(`Browser doesn't allow reading "${exposeProperty}" until the drop event.`);
+          console.warn( // eslint-disable-line no-console
+            `Browser doesn't allow reading "${exposeProperty}" until the drop event.`
+          );
           return null;
         }
       };
@@ -88,7 +90,7 @@ function matchNativeItemType(dataTransfer) {
 
   return Object.keys(nativeTypesConfig).filter(nativeItemType => {
     const { matchesTypes } = nativeTypesConfig[nativeItemType];
-    return matchesTypes.some(t => dataTransferTypes.indexOf(t) > -1)
+    return matchesTypes.some(t => dataTransferTypes.indexOf(t) > -1);
   })[0] || null;
 }
 
@@ -220,9 +222,9 @@ class HTML5Backend {
     if (this.isDraggingNativeItem()) {
       // It makes more sense to default to 'copy' for native resources
       return 'copy';
-    } else {
-      return this.getCurrentSourceNodeOptions().dropEffect;
     }
+
+    return this.getCurrentSourceNodeOptions().dropEffect;
   }
 
   getCurrentSourcePreviewNodeOptions() {
@@ -237,7 +239,7 @@ class HTML5Backend {
   }
 
   getSourceClientOffset(sourceId) {
-    return getElementClientOffset(this.sourceNodes[sourceId]);
+    return getNodeClientOffset(this.sourceNodes[sourceId]);
   }
 
   isDraggingNativeItem() {
@@ -276,7 +278,7 @@ class HTML5Backend {
   setCurrentDragSourceNode(node) {
     this.clearCurrentDragSourceNode();
     this.currentDragSourceNode = node;
-    this.currentDragSourceNodeOffset = getElementClientOffset(node);
+    this.currentDragSourceNodeOffset = getNodeClientOffset(node);
     this.currentDragSourceNodeOffsetChanged = false;
 
     // Receiving a mouse event in the middle of a dragging operation
@@ -292,9 +294,9 @@ class HTML5Backend {
       this.currentDragSourceNodeOffsetChanged = false;
       window.removeEventListener('mousemove', this.endDragIfSourceWasRemovedFromDOM, true);
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   checkIfCurrentDragSourceRectChanged() {
@@ -308,7 +310,7 @@ class HTML5Backend {
     }
 
     this.currentDragSourceNodeOffsetChanged = !shallowEqual(
-      getElementClientOffset(node),
+      getNodeClientOffset(node),
       this.currentDragSourceNodeOffset
     );
 

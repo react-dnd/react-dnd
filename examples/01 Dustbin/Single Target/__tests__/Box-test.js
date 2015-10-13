@@ -15,7 +15,8 @@ describe('Box', () => {
     // Render with one set of props and test
     let root = TestUtils.renderIntoDocument(
       <OriginalBox name='test'
-                   connectDragSource={identity} />
+                   connectDragSource={identity}
+                   isDragging={false} />
     );
     let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
     expect(div.props.style.opacity).toEqual(1);
