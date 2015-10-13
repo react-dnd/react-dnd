@@ -16,18 +16,16 @@ const boxSource = {
   }
 };
 
-@DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+@DragSource(ItemTypes.BOX, boxSource, (connect) => ({
+  connectDragSource: connect.dragSource()
 }))
 export default class Box {
   static propTypes = {
-    connectDragSource: PropTypes.func.isRequired,
-    isDragging: PropTypes.bool.isRequired
+    connectDragSource: PropTypes.func.isRequired
   }
 
   render() {
-    const { isDragging, connectDragSource } = this.props;
+    const { connectDragSource } = this.props;
 
     return connectDragSource(
       <div style={style}>
