@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { DragDropManager } from 'dnd-core';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import isPlainObject from 'lodash/lang/isPlainObject';

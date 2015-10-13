@@ -43,6 +43,8 @@ class SourceBox extends Component {
     case Colors.BLUE:
       backgroundColor = 'lightblue';
       break;
+    default:
+      break;
     }
 
     return connectDragSource(

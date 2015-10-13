@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 
 export default class Square {
   static propTypes = {
-    black: PropTypes.bool
+    black: PropTypes.bool,
+    children: PropTypes.node
   };
 
   render() {
