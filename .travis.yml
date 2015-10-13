@@ -3,5 +3,4 @@ node_js:
   - "iojs-2"
 script:
   - npm run lint
-  - npm test
   - npm run build
