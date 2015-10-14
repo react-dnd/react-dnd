@@ -10,7 +10,7 @@ This lets you specify the backend, and sets up the shared DnD state behind the s
 
 -------------------
 ```js
-var HTML5Backend = require('react-dnd/modules/backends/HTML5');
+var HTML5Backend = require('react-dnd-html5-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
 
 var YourApp = React.createClass(
@@ -21,7 +21,7 @@ module.exports = DragDropContext(HTML5Backend)(YourApp);
 ```
 -------------------
 ```js
-import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
 class YourApp {
@@ -32,7 +32,7 @@ export default DragDropContext(HTML5Backend)(YourApp);
 ```
 -------------------
 ```js
-import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
 @DragDropContext(HTML5Backend)

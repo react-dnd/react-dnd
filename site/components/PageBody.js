@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './PageBody.less';
 
-export default class PageBody {
+export default class PageBody extends Component {
   static propTypes = {
     hasSidebar: React.PropTypes.bool
   };

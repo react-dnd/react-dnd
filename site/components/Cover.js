@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Cover.less';
 
-export default class Cover {
+export default class Cover extends Component {
   render() {
     return (
       <div className="Cover">

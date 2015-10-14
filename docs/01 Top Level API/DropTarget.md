@@ -115,7 +115,7 @@ If a drop target is nested in another drop target, both `hover()` and `drop()` b
 
 ### Handling Files and URLs
 
-When using the [`HTML5` backend](docs-html5-backend.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` or `HTML5Backend.NativeTypes.URL` built-in types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
+When using the [HTML5 backend](docs-html5-backend.html), you can handle the file drops just by registering a drop target for `HTML5Backend.NativeTypes.FILE` or `HTML5Backend.NativeTypes.URL` built-in types. Due to the browser security restrictions, `monitor.getItem()` does not provide any information about the files or the URLs until they are dropped.
 
 ### Example
 
