@@ -1,6 +1,10 @@
 export default function createSourceConnector(backend) {
   return {
-    dragSource: backend.connectDragSource.bind(backend),
-    dragPreview: backend.connectDragPreview.bind(backend)
+    dragSource: function connectDragSource(...args) {
+      return backend.connectDragSource(...args);
+    },
+    dragPreview: function connectDragPreview(...args) {
+      return backend.connectDragPreview(...args);
+    }
   };
 }

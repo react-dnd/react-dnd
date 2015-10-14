@@ -1,5 +1,7 @@
 export default function createTargetConnector(backend) {
   return {
-    dropTarget: backend.connectDropTarget.bind(backend)
+    dropTarget: function connectDropTarget(...args) {
+      return backend.connectDropTarget(...args);
+    }
   };
 }
