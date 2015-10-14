@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
 import { DragSource } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd/modules/backends/HTML5';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 
 const boxSource = {
   beginDrag(props) {
@@ -32,7 +32,7 @@ function getStyles(props) {
   connectDragPreview: connect.dragPreview(),
   isDragging: monitor.isDragging()
 }))
-export default class DraggableBox {
+export default class DraggableBox extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,

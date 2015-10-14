@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
 import { DragSource, DropTarget } from 'react-dnd';
 
@@ -51,7 +51,7 @@ const cardTarget = {
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
 }))
-export default class Card {
+export default class Card extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,

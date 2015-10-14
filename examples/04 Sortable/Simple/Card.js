@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
 import ItemTypes from './ItemTypes';
 import { DragSource, DropTarget } from 'react-dnd';
 
@@ -30,7 +31,7 @@ const cardTarget = {
     }
 
     // Determine rectangle on screen
-    const hoverBoundingRect = React.findDOMNode(component).getBoundingClientRect();
+    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
 
     // Get vertical middle
     const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
@@ -73,7 +74,7 @@ const cardTarget = {
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
 }))
-export default class Card {
+export default class Card extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,

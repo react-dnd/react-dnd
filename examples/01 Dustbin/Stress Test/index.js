@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Container from './Container';
 
-export default class DustbinStressTest {
+export default class DustbinStressTest extends Component {
   render() {
     return (
       <div>

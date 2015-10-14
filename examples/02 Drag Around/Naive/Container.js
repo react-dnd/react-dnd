@@ -3,7 +3,7 @@ import update from 'react/lib/update';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
 import { DropTarget, DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 const styles = {
   width: 300,

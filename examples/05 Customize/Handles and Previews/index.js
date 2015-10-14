@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Container from './Container';
 
-export default class CustomizeHandlesAndPreviews {
+export default class CustomizeHandlesAndPreviews extends Component {
   render() {
     return (
       <div>

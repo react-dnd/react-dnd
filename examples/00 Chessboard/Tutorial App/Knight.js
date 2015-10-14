@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { ItemTypes } from './Constants';
 import { DragSource } from 'react-dnd';
 
@@ -17,7 +17,7 @@ function collect(connect, monitor) {
 }
 
 @DragSource(ItemTypes.KNIGHT, knightSource, collect)
-export default class Knight {
+export default class Knight extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired

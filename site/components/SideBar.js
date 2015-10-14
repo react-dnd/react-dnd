@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './SideBar.less';
 
-export default class SideBar {
+export default class SideBar extends Component {
   render() {
     return (
       <div className="SideBar">

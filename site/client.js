@@ -1,9 +1,8 @@
-"use strict";
+import React from 'react';
+import { render } from 'react-dom';
+import IndexPage from './IndexPage';
 
-var React = require('react');
-var IndexPage = require('./IndexPage');
-
-React.render(
+render(
   <IndexPage
     {...window.INITIAL_PROPS}
   />,

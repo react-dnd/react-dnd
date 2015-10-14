@@ -1,8 +1,8 @@
 {
   "name": "react-dnd",
-  "version": "1.1.8",
+  "version": "2.0.0",
   "description": "Drag and Drop for React",
-  "main": "modules/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "start": "./scripts/startSiteDevServer.sh",
     "build-site": "./scripts/buildStaticSite.sh",
@@ -10,7 +10,8 @@
     "build": "./scripts/build.sh",
     "lint": "eslint .",
     "test": "karma start",
-    "prepublish": "npm run lint && npm run build"
+    "prepublish": "npm run lint && npm run build",
+    "postpublish": "publish-latest"
   },
   "repository": {
     "type": "git",
@@ -39,12 +40,12 @@
   "homepage": "https://github.com/gaearon/react-dnd",
   "dependencies": {
     "disposables": "^1.0.1",
-    "dnd-core": "^1.2.1",
+    "dnd-core": "^1.2.2",
     "invariant": "^2.1.0",
     "lodash": "^3.10.1"
   },
   "peerDependencies": {
-    "react": ">=0.13.0 <0.15.0 || ^0.14.0-rc1"
+    "react": "^0.14.0"
   },
   "devDependencies": {
     "animation-frame": "^0.2.4",
@@ -75,7 +76,11 @@
     "mocha": "^2.2.5",
     "null-loader": "^0.1.0",
     "postcss": "^4.0.2",
-    "react": "^0.13.3",
+    "publish-latest": "^1.1.2",
+    "react": "^0.14.0",
+    "react-dnd-html5-backend": "^2.0.0",
+    "react-dnd-test-backend": "^1.0.0",
+    "react-dom": "^0.14.0",
     "react-hot-loader": "^1.2.3",
     "react-router": "~0.13.2",
     "request": "2.46.0",
