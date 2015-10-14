@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend, { NativeTypes } from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';

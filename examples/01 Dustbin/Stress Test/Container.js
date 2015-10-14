@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend, { NativeTypes } from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
@@ -55,15 +55,17 @@ export default class Container extends Component {
           {dustbins.map(({ accepts, lastDroppedItem }, index) =>
             <Dustbin accepts={accepts}
                      lastDroppedItem={lastDroppedItem}
-                     onDrop={(item) => this.handleDrop(index, item)} />
+                     onDrop={(item) => this.handleDrop(index, item)}
+                     key={index} />
           )}
         </div>
 
         <div style={{ overflow: 'hidden', clear: 'both' }}>
-          {boxes.map(({ name, type }) =>
+          {boxes.map(({ name, type }, index) =>
             <Box name={name}
                  type={type}
-                 isDropped={this.isDropped(name)} />
+                 isDropped={this.isDropped(name)}
+                 key={index} />
           )}
         </div>
       </div>

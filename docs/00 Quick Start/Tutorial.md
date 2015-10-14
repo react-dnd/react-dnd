@@ -55,9 +55,9 @@ module.exports = Knight;
 ```
 -------------------
 ```js
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Knight {
+export default class Knight extends Component {
   render() {
     return <span>♘</span>;
   }
@@ -74,16 +74,18 @@ It seems to render fine, but just to be sure, I immediately changed my entry poi
 -------------------
 ```js
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Knight = require('./Knight');
 
-React.render(<Knight />, document.getElementById('root'));
+ReactDOM.render(<Knight />, document.getElementById('root'));
 ```
 -------------------
 ```js
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Knight from './Knight';
 
-React.render(<Knight />, document.getElementById('root'));
+ReactDOM.render(<Knight />, document.getElementById('root'));
 ```
 -------------------
 
@@ -117,9 +119,9 @@ module.exports = Square;
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class Square {
+export default class Square extends Component {
   render() {
     const { black } = this.props;
     const fill = black ? 'black' : 'white';
@@ -134,9 +136,9 @@ Square.propTypes = {
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class Square {
+export default class Square extends Component {
   static propTypes = {
     black: PropTypes.bool
   };
@@ -156,10 +158,11 @@ Now I change the entry point code to see how the `Knight` looks inside a `Square
 -------------------
 ```js
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Knight = require('./Knight');
 var Square = require('./Square');
 
-React.render(
+ReactDOM.render(
   <Square black>
     <Knight />
   </Square>,
@@ -169,10 +172,11 @@ React.render(
 -------------------
 ```js
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Knight from './Knight';
 import Square from './Square';
 
-React.render(
+ReactDOM.render(
   <Square black>
     <Knight />
   </Square>,
@@ -223,9 +227,9 @@ module.exports = Square;
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class Square {
+export default class Square extends Component {
   render() {
     const { black } = this.props;
     const fill = black ? 'black' : 'white';
@@ -250,9 +254,9 @@ Square.propTypes = {
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class Square {
+export default class Square extends Component {
   static propTypes = {
     black: PropTypes.bool
   };
@@ -310,11 +314,11 @@ module.exports = Board;
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import Knight from './Knight';
 
-export default class Board {
+export default class Board extends Component {
   render() {
     return (
       <div>
@@ -334,11 +338,11 @@ Board.propTypes = {
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import Knight from './Knight';
 
-export default class Board {
+export default class Board extends Component {
   static propTypes = {
     knightPosition: PropTypes.arrayOf(
       PropTypes.number.isRequired
@@ -363,9 +367,10 @@ My only intention so far is to make it render, so that I can start tweaking it:
 -------------------
 ```js
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Board = require('./Board');
 
-React.render(
+ReactDOM.render(
   <Board knightPosition={[0, 0]} />,
   document.getElementById('root')
 );
@@ -373,9 +378,10 @@ React.render(
 -------------------
 ```js
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Board from './Board';
 
-React.render(
+ReactDOM.render(
   <Board knightPosition={[0, 0]} />,
   document.getElementById('root')
 );
@@ -527,11 +533,11 @@ module.exports = Board;
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import Knight from './Knight';
 
-export default class Board {
+export default class Board extends Component {
   renderSquare(i) {
     const x = i % 8;
     const y = Math.floor(i / 8);
@@ -579,11 +585,11 @@ Board.propTypes = {
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import Knight from './Knight';
 
-export default class Board {
+export default class Board extends Component {
   static propTypes = {
     knightPosition: PropTypes.arrayOf(
       PropTypes.number.isRequired
@@ -640,9 +646,10 @@ Think about it for a moment. We just went from nothing to being able to move the
 -------------------
 ```js
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Board = require('./Board');
 
-React.render(
+ReactDOM.render(
   <Board knightPosition={[4, 7]} />,
   document.getElementById('root')
 );
@@ -650,9 +657,10 @@ React.render(
 -------------------
 ```js
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Board from './Board';
 
-React.render(
+ReactDOM.render(
   <Board knightPosition={[4, 7]} />,
   document.getElementById('root')
 );
@@ -680,13 +688,14 @@ Since I know this much, I can rewrite my `index.js` with a hypothetical `Game` t
 -------------------
 ```js
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Board = require('./Board');
 var observe = require('./Game').observe;
 
 var rootEl = document.getElementById('root');
 
 observe(function (knightPosition) {
-  React.render(
+  ReactDOM.render(
     <Board knightPosition={knightPosition} />,
     rootEl
   );
@@ -695,13 +704,14 @@ observe(function (knightPosition) {
 -------------------
 ```js
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Board from './Board';
 import { observe } from './Game';
 
 const rootEl = document.getElementById('root');
 
 observe(knightPosition =>
-  React.render(
+  ReactDOM.render(
     <Board knightPosition={knightPosition} />,
     rootEl
   )
@@ -959,7 +969,15 @@ This is the part that actually prompted me to write this tutorial. We are now go
 
 This part assumes you are at least somewhat familiar with the concepts presented in the [overview](docs-overview.html), such as the backends, the collecting functions, the types, the items, the drag sources, and the drop targets. If you didn't understand everything, it's fine, but make sure you at least give it a chance before jumping into the coding process.
 
-We're going to start by running `npm install --save react-dnd`. The first thing we need to set up in our app is the [`DragDropContext`](docs-drag-drop-context.html). We need it to specify that we're going to use the [`HTML5` backend](docs-html5-backend.html) in our app.
+We're going to start by installing React DnD and the HTML5 backend for it:
+
+```
+npm install --save react-dnd react-dnd-html5-backend
+```
+
+In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://github.com/yahoo/react-dnd-touch-backend), but this is out of scope of this tutorial.
+
+The first thing we need to set up in our app is the [`DragDropContext`](docs-drag-drop-context.html). We need it to specify that we're going to use the [`HTML5` backend](docs-html5-backend.html) in our app.
 
 Because the `Board` is the top-level component in our app, I'm going to put the [`DragDropContext`](docs-drag-drop-context.html) on it:
 
@@ -967,7 +985,7 @@ Because the `Board` is the top-level component in our app, I'm going to put the 
 ```js
 var React = require('react');
 var DragDropContext = require('react-dnd').DragDropContext;
-var HTML5Backend = require('react-dnd/modules/backends/HTML5');
+var HTML5Backend = require('react-dnd-html5-backend');
 
 var Board = React.createClass({
   /* ... */
@@ -977,11 +995,11 @@ module.exports = DragDropContext(HTML5Backend)(Board);
 ```
 -------------------
 ```js
-import React from 'react';
+import React, { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend from 'react-dnd-html5-backend';
 
-class Board {
+class Board extends Component {
   /* ... */
 }
 
@@ -989,12 +1007,12 @@ export default DragDropContext(HTML5Backend)(Board);
 ```
 -------------------
 ```js
-import React from 'react';
+import React, { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 @DragDropContext(HTML5Backend)
-export default class Board {
+export default class Board extends Component {
   /* ... */
 }
 ```
@@ -1107,7 +1125,7 @@ module.exports = DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { ItemTypes } from './Constants';
 import { DragSource } from 'react-dnd';
 
@@ -1124,7 +1142,7 @@ function collect(connect, monitor) {
   }
 }
 
-class Knight {
+class Knight extends Component {
   render() {
     const { connectDragSource, isDragging } = this.props;
     return connectDragSource(
@@ -1149,7 +1167,7 @@ export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { ItemTypes } from './Constants';
 import { DragSource } from 'react-dnd';
 
@@ -1167,7 +1185,7 @@ function collect(connect, monitor) {
 }
 
 @DragSource(ItemTypes.KNIGHT, knightSource, collect)
-export default class Knight {
+export default class Knight extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired
@@ -1229,10 +1247,10 @@ module.exports = BoardSquare;
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 
-export default class BoardSquare {
+export default class BoardSquare extends Component {
   render() {
     const { x, y } = this.props;
     const black = (x + y) % 2 === 1;
@@ -1252,10 +1270,10 @@ BoardSquare.propTypes = {
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 
-export default class BoardSquare {
+export default class BoardSquare extends Component {
   static propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
@@ -1434,7 +1452,7 @@ module.exports = DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
@@ -1453,7 +1471,7 @@ function collect(connect, monitor) {
   };
 }
 
-class BoardSquare {
+class BoardSquare extends Component {
   render() {
     const { x, y, connectDropTarget, isOver } = this.props;
     const black = (x + y) % 2 === 1;
@@ -1494,7 +1512,7 @@ export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
@@ -1514,7 +1532,7 @@ function collect(connect, monitor) {
 }
 
 @DropTarget(ItemTypes.KNIGHT, squareTarget, collect)
-export default class BoardSquare {
+export default class BoardSquare extends Component {
   static propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
@@ -1657,7 +1675,7 @@ module.exports = DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
@@ -1681,7 +1699,7 @@ function collect(connect, monitor) {
   };
 }
 
-class BoardSquare {
+class BoardSquare extends Component {
   renderOverlay(color) {
     return (
       <div style={{
@@ -1725,7 +1743,7 @@ export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
@@ -1750,7 +1768,7 @@ function collect(connect, monitor) {
 }
 
 @DropTarget(ItemTypes.KNIGHT, squareTarget, collect)
-export default class BoardSquare {
+export default class BoardSquare extends Component {
   static propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,

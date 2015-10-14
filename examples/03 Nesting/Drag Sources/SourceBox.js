@@ -56,9 +56,8 @@ class SourceBox extends Component {
       }}>
         <input type='checkbox'
                checked={forbidDrag}
-               onChange={onToggleForbidDrag}>
-          <small>Forbid drag</small>
-        </input>
+               onChange={onToggleForbidDrag} />
+        <small>Forbid drag</small>
 
         {children}
       </div>
