@@ -4,3 +4,5 @@ node_js:
 script:
   - npm run lint
   - npm run build
+before_install:
+  - npm install -g npm@3.x

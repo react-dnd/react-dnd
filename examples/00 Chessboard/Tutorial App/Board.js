@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import BoardSquare from './BoardSquare';
 import Knight from './Knight';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend from 'react-dnd-html5-backend';
 import './Board.less';
 
 @DragDropContext(HTML5Backend)
-export default class Board {
+export default class Board extends Component {
   static propTypes = {
     knightPosition: PropTypes.arrayOf(
       PropTypes.number.isRequired

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CodeBlock from './CodeBlock';
 
-export default class StaticHTMLBlock {
+export default class StaticHTMLBlock extends Component {
   static propTypes = {
     html: React.PropTypes.string.isRequired
   };

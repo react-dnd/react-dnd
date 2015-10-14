@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 
 const styles = {
@@ -7,7 +7,7 @@ const styles = {
   cursor: 'move'
 };
 
-export default class Box {
+export default class Box extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     yellow: PropTypes.bool

@@ -16,7 +16,7 @@ If you are only interested in testing the *rendering* of your components in isol
 -------------------
 ```js
 var React = require('react');
-var TestUtils = require('react/lib/ReactTestUtils');
+var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 
 it('can be tested independently', function () {
@@ -47,7 +47,7 @@ it('can be tested independently', function () {
 -------------------
 ```js
 import React from 'react';
-import TestUtils from 'react/lib/ReactTestUtils';
+import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 
 it('can be tested independently', () => {
@@ -81,9 +81,15 @@ it('can be tested independently', () => {
 
 ### Testing the Drag and Drop Interaction
 
-If you want to test the whole interaction, and not just the individual component rendering, you should use the [test backend](docs-test-backend.html) that ships with React DnD. **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) just fine.
+If you want to test the whole interaction, and not just the individual component rendering, you should use the [test backend](docs-test-backend.html). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) just fine.
 
 This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/gaearon/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/gaearon/dnd-core/tree/v1.1.0/src/__tests__).
+
+First, you need to install the test backend:
+
+```
+npm install --save-dev react-dnd-test-backend
+```
 
 Here is an example to get you started:
 
@@ -91,9 +97,9 @@ Here is an example to get you started:
 ```js
 var React = require('react');
 var Component = React.Component;
-var TestBackend = require('react-dnd/modules/backends/Test');
+var TestBackend = require('react-dnd-test-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
-var TestUtils = require('react/lib/ReactTestUtils');
+var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 
 /**
@@ -142,9 +148,9 @@ it('can be tested with the testing backend', function () {
 -------------------
 ```js
 import React, { Component } from 'react';
-import TestBackend from 'react-dnd/modules/backends/Test';
+import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
-import TestUtils from 'react/lib/ReactTestUtils';
+import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 
 /**
@@ -186,9 +192,9 @@ it('can be tested with the testing backend', () => {
 -------------------
 ```js
 import React, { Component } from 'react';
-import TestBackend from 'react-dnd/modules/backends/Test';
+import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
-import TestUtils from 'react/lib/ReactTestUtils';
+import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 
 /**
