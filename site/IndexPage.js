@@ -30,6 +30,7 @@ const Examples = {
   DUSTBIN_MULTIPLE_TARGETS: require('../examples/01 Dustbin/Multiple Targets'),
   DUSTBIN_STRESS_TEST: require('../examples/01 Dustbin/Stress Test'),
   DRAG_AROUND_NAIVE: require('../examples/02 Drag Around/Naive'),
+  DRAG_AROUND_RESPECT_BOUNDS: require('../examples/02 Drag Around/Respect Bounds'),
   DRAG_AROUND_CUSTOM_DRAG_LAYER: require('../examples/02 Drag Around/Custom Drag Layer'),
   NESTING_DRAG_SOURCES: require('../examples/03 Nesting/Drag Sources'),
   NESTING_DROP_TARGETS: require('../examples/03 Nesting/Drop Targets'),

@@ -122,6 +122,10 @@ export const ExamplePages = [{
       location: 'examples-drag-around-naive.html',
       title: 'Naive'
     },
+    DRAG_AROUND_RESPECT_BOUNDS: {
+      location: 'examples-drag-around-respect-bounds.html',
+      title: 'Respect Bounds'
+    },
     DRAG_AROUND_CUSTOM_DRAG_LAYER: {
       location: 'examples-drag-around-custom-drag-layer.html',
       title: 'Custom Drag Layer'
