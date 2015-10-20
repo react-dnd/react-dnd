@@ -20,6 +20,7 @@ function collect(connect, monitor) {
 export default class Knight extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
+    connectDragPreview: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired
   };
 

@@ -28,7 +28,8 @@ class SourceBox extends Component {
     isDragging: PropTypes.bool.isRequired,
     color: PropTypes.string.isRequired,
     forbidDrag: PropTypes.bool.isRequired,
-    onToggleForbidDrag: PropTypes.func.isRequired
+    onToggleForbidDrag: PropTypes.func.isRequired,
+    children: PropTypes.node
   };
 
   render() {
