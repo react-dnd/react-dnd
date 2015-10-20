@@ -3,13 +3,23 @@ import cloneWithRef from './utils/cloneWithRef';
 import { Disposable, SerialDisposable } from 'disposables';
 import { isValidElement } from 'react';
 
+function areOptionsEqual(currentOptions, nextOptions) {
+  if (currentOptions === nextOptions) {
+    return true;
+  }
+
+  return currentOptions !== null &&
+         nextOptions !== null &&
+         shallowEqual(currentOptions, nextOptions);
+}
+
 export default function bindConnectorMethod(handlerId, connect) {
   const disposable = new SerialDisposable();
 
   let currentNode = null;
   let currentOptions = null;
 
-  function ref(nextWhatever, nextOptions) {
+  function ref(nextWhatever = null, nextOptions = null) {
     // If passed a ReactElement, clone it and attach this function as a ref.
     // This helps us achieve a neat API where user doesn't even know that refs
     // are being used under the hood.
@@ -35,13 +45,8 @@ export default function bindConnectorMethod(handlerId, connect) {
     const nextNode = nextWhatever;
 
     // If nothing changed, bail out of re-connecting the node to the backend.
-    if (nextNode == currentNode) { // eslint-disable-line eqeqeq
-      if (
-        currentOptions == nextOptions || // eslint-disable-line eqeqeq
-        shallowEqual(currentOptions, nextOptions)
-      ) {
-        return;
-      }
+    if (nextNode === currentNode && areOptionsEqual(currentOptions, nextOptions)) {
+      return;
     }
 
     currentNode = nextNode;
