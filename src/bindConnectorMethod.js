@@ -35,8 +35,13 @@ export default function bindConnectorMethod(handlerId, connect) {
     const nextNode = nextWhatever;
 
     // If nothing changed, bail out of re-connecting the node to the backend.
-    if (nextNode === currentNode && shallowEqual(currentOptions, nextOptions)) {
-      return;
+    if (nextNode == currentNode) { // eslint-disable-line eqeqeq
+      if (
+        currentOptions == nextOptions || // eslint-disable-line eqeqeq
+        shallowEqual(currentOptions, nextOptions)
+      ) {
+        return;
+      }
     }
 
     currentNode = nextNode;
