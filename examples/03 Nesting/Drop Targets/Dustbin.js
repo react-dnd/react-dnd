@@ -42,7 +42,8 @@ export default class Dustbin extends Component {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
     isOverCurrent: PropTypes.bool.isRequired,
-    greedy: PropTypes.bool
+    greedy: PropTypes.bool,
+    children: PropTypes.node
   }
 
   constructor(props) {
@@ -54,7 +55,7 @@ export default class Dustbin extends Component {
   }
 
   render() {
-    const { greedy, isOver, isOverCurrent, isDragging, connectDropTarget } = this.props;
+    const { greedy, isOver, isOverCurrent, connectDropTarget, children } = this.props;
     const { hasDropped, hasDroppedOnChild } = this.state;
 
     const text = greedy ? 'greedy' : 'not greedy';
@@ -62,8 +63,6 @@ export default class Dustbin extends Component {
 
     if (isOverCurrent || isOver && greedy) {
       backgroundColor = 'darkgreen';
-    } else if (isDragging) {
-      backgroundColor = 'darkkhaki';
     }
 
     return connectDropTarget(
@@ -75,7 +74,7 @@ export default class Dustbin extends Component {
         }
 
         <div>
-          {this.props.children}
+          {children}
         </div>
       </div>
     );

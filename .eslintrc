@@ -10,6 +10,7 @@
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "react/sort-comp": 0,
+    "react/no-multi-comp": 0,
     "comma-dangle": 0,
     "id-length": 0,
     "new-cap": 0,
