@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
 import update from 'react/lib/update';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
@@ -13,14 +14,23 @@ const styles = {
 };
 
 const boxTarget = {
-  drop(props, monitor, component) {
-    const item = monitor.getItem();
+  hover(props, monitor, component) {
+    const parentRectangle = findDOMNode(component).getBoundingClientRect();
     const delta = monitor.getDifferenceFromInitialOffset();
-    const left = Math.round(item.left + delta.x);
-    const top = Math.round(item.top + delta.y);
+    const item = monitor.getItem();
+
+    let left = Math.round(item.left + delta.x);
+    let top = Math.round(item.top + delta.y);
+
+    // Don't let box leave parent bounds.
+    left = Math.max(0, left);
+    top = Math.max(0, top);
+
+    left = Math.min(parentRectangle.width - item.width, left);
+    top = Math.min(parentRectangle.height - item.height, top);
 
     component.moveBox(item.id, left, top);
-  }
+  },
 };
 
 @DragDropContext(HTML5Backend)
@@ -68,8 +78,7 @@ export default class Container extends Component {
             <Box key={key}
                  id={key}
                  left={left}
-                 top={top}
-                 hideSourceOnDrag={hideSourceOnDrag}>
+                 top={top} >
               {title}
             </Box>
           );
