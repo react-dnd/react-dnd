@@ -34,6 +34,7 @@ const Examples = {
   NESTING_DRAG_SOURCES: require('../examples/03 Nesting/Drag Sources'),
   NESTING_DROP_TARGETS: require('../examples/03 Nesting/Drop Targets'),
   SORTABLE_SIMPLE: require('../examples/04 Sortable/Simple'),
+  SORTABLE_GENERIC: require('../examples/04 Sortable/Generic'),
   SORTABLE_CANCEL_ON_DROP_OUTSIDE: require('../examples/04 Sortable/Cancel on Drop Outside'),
   SORTABLE_STRESS_TEST: require('../examples/04 Sortable/Stress Test'),
   CUSTOMIZE_HANDLES_AND_PREVIEWS: require('../examples/05 Customize/Handles and Previews'),
