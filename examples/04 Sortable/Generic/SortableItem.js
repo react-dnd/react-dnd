@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {findDOMNode} from 'react-dom';
+//import {findDOMNode} from 'react-dom';
 import {DragSource, DropTarget} from 'react-dnd';
 
 const sortableSource = {
