@@ -78,6 +78,7 @@ export default class Card extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
