@@ -103,7 +103,7 @@ function getItemStyles(props) {
 
   var x = currentOffset.x;
   var y = currentOffset.y;
-  const transform = 'translate(' + x + 'px, ' + y + 'px)';
+  var transform = 'translate(' + x + 'px, ' + y + 'px)';
   return {
     transform: transform,
     WebkitTransform: transform
