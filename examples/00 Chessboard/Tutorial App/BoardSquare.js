@@ -27,9 +27,9 @@ export default class BoardSquare extends Component {
   static propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
-    isOver: PropTypes.bool.isRequired,
-    canDrop: PropTypes.bool.isRequired,
-    connectDropTarget: PropTypes.func.isRequired,
+    isOver: PropTypes.bool,
+    canDrop: PropTypes.bool,
+    connectDropTarget: PropTypes.func,
     children: PropTypes.node
   };
 
@@ -51,8 +51,7 @@ export default class BoardSquare extends Component {
   render() {
     const { x, y, connectDropTarget, isOver, canDrop, children } = this.props;
     const black = (x + y) % 2 === 1;
-
-    return connectDropTarget(
+    const content = (
       <div style={{
         position: 'relative',
         width: '100%',
@@ -66,5 +65,11 @@ export default class BoardSquare extends Component {
         {isOver && canDrop && this.renderOverlay('green')}
       </div>
     );
+
+    if (connectDropTarget) {
+      return connectDropTarget(content);
+    }
+
+    return content;
   }
 }

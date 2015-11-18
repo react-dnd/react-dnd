@@ -62,10 +62,7 @@ export default function decorateHandler({
       this.manager = this.context.dragDropManager;
       this.handlerMonitor = createMonitor(this.manager);
       this.handler = createHandler(this.handlerMonitor);
-      this.disposable = new SerialDisposable();
-
-      this.receiveProps(props);
-      this.state = this.getCurrentState();
+      this.state = {};
     }
 
     componentWillReceiveProps(nextProps) {
@@ -73,6 +70,13 @@ export default function decorateHandler({
         this.receiveProps(nextProps);
         this.handleChange();
       }
+    }
+
+    componentDidMount() {
+      this.disposable = new SerialDisposable();
+
+      this.receiveProps(this.props);
+      this.setState(this.getCurrentState());
     }
 
     componentWillUnmount() {
