@@ -1039,7 +1039,7 @@ export const ItemTypes = {
 
 The preparation work is done now. Let's make the `Knight` draggable!
 
-The [`DragSource`](http://localhost:8080/docs-drag-source.html) higher-order component accepts three parameters: `type`, `spec`, and `collect`. Our `type` is the constant we just defined, so now we need to write a drag source specification and a collecting function. For the `Knight`, the drag source specification is going to be ridiculously simple:
+The [`DragSource`](docs-drag-source.html) higher-order component accepts three parameters: `type`, `spec`, and `collect`. Our `type` is the constant we just defined, so now we need to write a drag source specification and a collecting function. For the `Knight`, the drag source specification is going to be ridiculously simple:
 
 -------------------
 ```js
