@@ -135,7 +135,7 @@ it('can be tested with the testing backend', function () {
   // depend on mouse movements.
   // backend.simulateBeginDrag([box.getHandlerId()], {
   //   clientOffset: { x: 0, y: 0 },
-  //   getSourceClientOffset: () => { x: 0, y: 0 },
+  //   getSourceClientOffset: () => ({ x: 0, y: 0 }),
   // });
 
   // Verify that the div changed its opacity
