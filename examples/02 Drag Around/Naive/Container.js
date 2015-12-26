@@ -39,7 +39,6 @@ const boxTarget = {
 }))
 export default class Container extends Component {
   static propTypes = {
-    hideSourceOnDrag: PropTypes.bool.isRequired,
     connectDropTarget: PropTypes.func.isRequired
   };
 
@@ -67,7 +66,7 @@ export default class Container extends Component {
   }
 
   render() {
-    const { hideSourceOnDrag, connectDropTarget } = this.props;
+    const { connectDropTarget } = this.props;
     const { boxes} = this.state;
 
     return connectDropTarget(
