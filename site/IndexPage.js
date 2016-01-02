@@ -31,6 +31,7 @@ const Examples = {
   DUSTBIN_STRESS_TEST: require('../examples/01 Dustbin/Stress Test'),
   DRAG_AROUND_NAIVE: require('../examples/02 Drag Around/Naive'),
   DRAG_AROUND_CUSTOM_DRAG_LAYER: require('../examples/02 Drag Around/Custom Drag Layer'),
+  DRAG_AROUND_CHECK_OVER_TARGET_OR_NOT: require('../examples/02 Drag Around/Check Over Target or Not'),
   NESTING_DRAG_SOURCES: require('../examples/03 Nesting/Drag Sources'),
   NESTING_DROP_TARGETS: require('../examples/03 Nesting/Drop Targets'),
   SORTABLE_SIMPLE: require('../examples/04 Sortable/Simple'),

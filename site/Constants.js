@@ -125,6 +125,10 @@ export const ExamplePages = [{
     DRAG_AROUND_CUSTOM_DRAG_LAYER: {
       location: 'examples-drag-around-custom-drag-layer.html',
       title: 'Custom Drag Layer'
+    },
+    DRAG_AROUND_CHECK_OVER_TARGET_OR_NOT: {
+      location: 'examples-drag-around-check-over-target-or-not.html',
+      title: 'Check Over Target or Not'
     }
   }
 }, {

@@ -11,7 +11,7 @@ First of all, you don't have to use ES6 or ES7 for React DnD. They make some of 
 
 When I say “ES7”, I mean ES6 + a few extensions that *might* make it into ES7 (also known as ES2016). What I mark as the ES7 code in the docs is actually ES6 code + [class properties](https://gist.github.com/jeffmo/054df782c05639da2adb) + [decorators](https://github.com/wycats/javascript-decorators). You can enable these features by putting `{ "stage": 0 }` into your [.babelrc](https://babeljs.io/docs/usage/babelrc/) file. You can also [enable them individually](https://babeljs.io/docs/usage/experimental/).
 
-The `@` syntax desugars into the simple function calls.  
+The `@` syntax desugars into the simple function calls.
 You can see that in every example on the website that uses it, such as:
 
 -------------------
@@ -47,10 +47,10 @@ export default class MyComponent {
 
 ### Where do I get the precompiled version?
 
-Grab it from the `dist` folders of [React DnD](https://github.com/gaearon/react-dnd/tree/latest/dist) and [the HTML5 backend](https://github.com/gaearon/react-dnd-html5-backend/tree/latest/dist)’s `latest` branch or tagged releases.  
+Grab it from the `dist` folders of [React DnD](https://github.com/gaearon/react-dnd/tree/latest/dist) and [the HTML5 backend](https://github.com/gaearon/react-dnd-html5-backend/tree/latest/dist)’s `latest` branch or tagged releases.
 They export `ReactDnD` (watch the casing!) and `ReactDnDHTML5Backend`, respectively.
 
-Note that the `dist` folders are **only** available on the `latest` branch and the tagged releases.  
+Note that the `dist` folders are **only** available on the `latest` branch and the tagged releases.
 There is no `dist` folder in the `master` branch of either repo.
 
 ### How do I test React DnD components and their interaction?
@@ -59,12 +59,293 @@ See the [testing](docs-testing.html) tutorial for examples.
 
 ### How do I make the component draggable only by a small handle?
 
-Specify the container node as the `dragPreview`, but only make the drag handle a `dragSource()`.  
+Specify the container node as the `dragPreview`, but only make the drag handle a `dragSource()`.
 See the [custom drag handle example](examples-customize-handles-and-previews.html).
 
 ### How do I constrain the drag preview movement?
 
 By default, you can't constrain the drag preview movement because the drag preview is drawn by the browser. You can, however, use a [custom drag layer](examples-drag-around-custom-drag-layer.html) where you're free to rendering anything, with any snapping or constraints.
+
+### How do I know whether the drag preview is over the targets or not?
+
+That is very useful if you can check whether the drag preview is over the target or not
+when you are using a [custom drag layer](examples-drag-around-custom-drag-layer.html).
+Such as, you can hide the drag preview when it's over the targets,
+and render the snapshot of the drag source in the target, and change the position of the snapshot by the time.
+So, it will look like the drag preview is moving in the target, not just over it.
+That is awesome, isn't it？
+
+The [`DragLayerMonitor`](docs-drag-layer-monitor.html) has one method: `isOverTarget(targetId)`,
+it will return `true` if the drag preview is over the specified `targetId`, otherwise it will return `false`.
+
+You maybe notice that we must specify the id of the target as the first argument of `isOverTarget(targetId)`.
+But usually, we don't need to know the concrete target, any target which will receive the drag source is fine.
+So, we can get all targets by `monitor.getTargetIds()`,
+and check them one by one until `monitor.isOverTarget(targetId)` return `true` or no one fits the condition.
+
+See the [Check Over Target or Not](examples-drag-around-check-over-target-or-not.html).
+
+-------------------
+```js
+var React = require('react');
+var PropTypes = React.PropTypes;
+var DragLayer = require('react-dnd').DragLayer;
+var Box = require('./Box');
+
+var layerStyles = {
+  pointerEvents: 'none', // never receive hover/click events
+  zIndex: 100, // keep the preview visible all time
+  /* cover the whole page */
+  position: 'fixed',
+  left: 0,
+  top: 0,
+  width: '100%',
+  height: '100%'
+};
+
+function getItemStyles(props) {
+  var { currentOffset } = props;
+  if (!currentOffset) {
+    return {
+      display: 'none'
+    };
+  }
+
+  var x = currentOffset.x, y = currentOffset.y;
+  var width = 210, height = 45;
+  return {
+    position: 'absolute',
+    width: width,
+    height: height,
+    left: x - width / 2,
+    top: y - height + 5
+  };
+}
+
+function collect(monitor) {
+  return {
+    item: monitor.getItem(),
+    currentOffset: monitor.getClientOffset(),
+    isDragging: monitor.isDragging(),
+    isOverTargets: (function () {
+      var targetIds = monitor.isDragging() ? monitor.getTargetIds() : [];
+
+      for (var i = targetIds.length - 1; i >= 0; i--) {
+        if (monitor.isOverTarget(targetIds[i])) {
+          return true;
+        }
+      }
+      return false;
+    })()
+  };
+}
+
+var BoxDragLayer = React.createClass({
+  propTypes: {
+    item: PropTypes.object,
+    currentOffset: React.PropTypes.shape({
+      x: React.PropTypes.number.isRequired,
+      y: React.PropTypes.number.isRequired
+    }),
+    isDragging: PropTypes.bool.isRequired,
+    isOverTargets: React.PropTypes.bool.isRequired
+  },
+  render: function () {
+    var isDragging = this.props.isDragging;
+    var isOverTargets = this.props.isOverTargets;
+    if (!isDragging) {
+      return null;
+    }
+
+    return (
+      <div style={layerStyles}>
+        <div style={getItemStyles(this.props)}>
+          <Box>
+            {isOverTargets ?
+              "I'm over the target :)" :
+              "I'm out of the target :("
+            }
+          </Box>
+        </div>
+      </div>
+    );
+  }
+});
+
+module.exports = DragLayer(collect)(BoxDragLayer);
+```
+-------------------
+```js
+import React, { Component, PropTypes } from 'react';
+import { DragLayer } from 'react-dnd';
+import Box from './Box';
+
+const layerStyles = {
+  pointerEvents: 'none', // never receive hover/click events
+  zIndex: 100, // keep the preview visible all time
+  /* cover the whole page */
+  position: 'fixed',
+  left: 0,
+  top: 0,
+  width: '100%',
+  height: '100%'
+};
+
+function getItemStyles(props) {
+  const { currentOffset } = props;
+  if (!currentOffset) {
+    return {
+      display: 'none'
+    };
+  }
+
+  const { x, y } = currentOffset;
+  const width = 210, height = 45;
+  return {
+    position: 'absolute',
+    width: width,
+    height: height,
+    left: x - width / 2,
+    top: y - height + 5
+  };
+}
+
+class BoxDragLayer extends Component {
+  render() {
+    const { isDragging, isOverTargets } = this.props;
+    if (!isDragging) {
+      return null;
+    }
+
+    return (
+      <div style={layerStyles}>
+        <div style={getItemStyles(this.props)}>
+          <Box>
+            {isOverTargets ?
+              "I'm over the target :)" :
+              "I'm out of the target :("
+            }
+          </Box>
+        </div>
+      </div>
+    );
+  }
+}
+
+BoxDragLayer.propTypes = {
+  item: PropTypes.object,
+  currentOffset: React.PropTypes.shape({
+    x: React.PropTypes.number.isRequired,
+    y: React.PropTypes.number.isRequired
+  }),
+  isDragging: PropTypes.bool.isRequired,
+  isOverTargets: React.PropTypes.bool.isRequired
+};
+
+function collect(monitor) {
+  return {
+    item: monitor.getItem(),
+    currentOffset: monitor.getClientOffset(),
+    isDragging: monitor.isDragging(),
+    isOverTargets: (function () {
+      const targetIds = monitor.isDragging() ? monitor.getTargetIds() : [];
+
+      for (let i = targetIds.length - 1; i >= 0; i--) {
+        if (monitor.isOverTarget(targetIds[i])) {
+          return true;
+        }
+      }
+      return false;
+    })()
+  };
+}
+
+export default DragLayer(collect)(BoxDragLayer);
+```
+-------------------
+```js
+import React, { Component, PropTypes } from 'react';
+import { DragLayer } from 'react-dnd';
+import Box from './Box';
+
+const layerStyles = {
+  pointerEvents: 'none', // never receive hover/click events
+  zIndex: 100, // keep the preview visible all time
+  /* cover the whole page */
+  position: 'fixed',
+  left: 0,
+  top: 0,
+  width: '100%',
+  height: '100%'
+};
+
+function getItemStyles(props) {
+  const { currentOffset } = props;
+  if (!currentOffset) {
+    return {
+      display: 'none'
+    };
+  }
+
+  const { x, y } = currentOffset;
+  const width = 210, height = 45;
+  return {
+    position: 'absolute',
+    width: width,
+    height: height,
+    left: x - width / 2,
+    top: y - height + 5
+  };
+}
+
+@DragLayer(monitor => ({
+  item: monitor.getItem(),
+  currentOffset: monitor.getClientOffset(),
+  isDragging: monitor.isDragging(),
+  isOverTargets: (function () {
+    const targetIds = monitor.isDragging() ? monitor.getTargetIds() : [];
+
+    for (let i = targetIds.length - 1; i >= 0; i--) {
+      if (monitor.isOverTarget(targetIds[i])) {
+        return true;
+      }
+    }
+    return false;
+  })()
+}))
+export default class BoxDragLayer extends Component {
+  static propTypes = {
+    item: PropTypes.object,
+    currentOffset: React.PropTypes.shape({
+      x: React.PropTypes.number.isRequired,
+      y: React.PropTypes.number.isRequired
+    }),
+    isDragging: PropTypes.bool.isRequired,
+    isOverTargets: React.PropTypes.bool.isRequired
+  };
+
+  render() {
+    const { isDragging, isOverTargets } = this.props;
+    if (!isDragging) {
+      return null;
+    }
+
+    return (
+      <div style={layerStyles}>
+        <div style={getItemStyles(this.props)}>
+          <Box>
+            {isOverTargets ?
+              "I'm over the target :)" :
+              "I'm out of the target :("
+            }
+          </Box>
+        </div>
+      </div>
+    );
+  }
+}
+```
+-------------------
 
 ### How do I register a drag source or a drop target when the type depends on props?
 
