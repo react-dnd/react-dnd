@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 const style = {
   border: '1px dashed gray',
@@ -9,6 +9,9 @@ const style = {
 };
 
 export default class Box extends Component {
+  static propTypes = {
+    children: React.PropTypes.node
+  };
 
   render() {
     return (

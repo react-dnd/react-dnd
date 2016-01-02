@@ -22,7 +22,8 @@ function getItemStyles(props) {
   }
 
   const { x, y } = currentOffset;
-  const width = 210, height = 45;
+  const width = 210;
+  const height = 45;
   return {
     position: 'absolute',
     width: width,
@@ -36,7 +37,7 @@ function getItemStyles(props) {
   item: monitor.getItem(),
   currentOffset: monitor.getClientOffset(),
   isDragging: monitor.isDragging(),
-  isOverTargets: (function () {
+  isOverTargets: (() => {
     const targetIds = monitor.isDragging() ? monitor.getTargetIds() : [];
 
     for (let i = targetIds.length - 1; i >= 0; i--) {

@@ -5,15 +5,6 @@ import SourceBox from './SourceBox';
 import TargetBox from './TargetBox';
 import BoxDragLayer from './BoxDragLayer';
 
-const style = {
-  border: '1px dashed gray',
-  backgroundColor: 'white',
-  padding: '0.5rem 1rem',
-  marginRight: '1rem',
-  marginBottom: '1rem',
-  cursor: 'move'
-};
-
 @DragDropContext(HTML5Backend)
 export default class Container extends Component {
   render() {
