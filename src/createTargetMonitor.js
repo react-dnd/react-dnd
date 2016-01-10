@@ -26,6 +26,10 @@ class TargetMonitor {
     }
   }
 
+  isDragging() {
+    return this.internalMonitor.isDragging();
+  }
+
   isOver(options) {
     return this.internalMonitor.isOverTarget(this.targetId, options);
   }
