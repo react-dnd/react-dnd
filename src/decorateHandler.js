@@ -86,8 +86,7 @@ export default function decorateHandler({
     }
 
     receiveType(type) {
-      if (type === this.currentType || 
-          Array.isArray(type) && Array.isArray(this.currentType) && isEqual(type.slice().sort(), this.currentType.slice().sort())) {
+      if (type === this.currentType || Array.isArray(type) && Array.isArray(this.currentType) && isEqual(type.slice().sort(), this.currentType.slice().sort())) {
         return;
       }
 
