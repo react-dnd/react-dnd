@@ -72,7 +72,7 @@ export default function DragLayer(collect, options = {}) {
       }
 
       componentWillUnmount() {
-        this.unsubscribe();
+        this.unsubscribe;
       }
 
       handleChange() {
