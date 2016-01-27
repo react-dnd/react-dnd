@@ -78,7 +78,7 @@ Because [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-targe
 ```js
 var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
-var flow = require('lodash/function/flow');
+var flow = require('lodash/flow');
 
 var YourComponent = React.createClass({
   /* ... */
@@ -92,7 +92,7 @@ module.exports = flow(
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
-import flow from 'lodash/function/flow';
+import flow from 'lodash/flow';
 
 class YourComponent {
   /* ... */
