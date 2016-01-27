@@ -9,7 +9,7 @@ var path = require('path');
 var glob = require('glob');
 var Constants = require('../site/Constants');
 var renderPath = require('../__site_prerender__/renderPath');
-var flatten = require('lodash/array/flatten');
+var flatten = require('lodash/flatten');
 
 var sitePath = path.join(__dirname, '../__site__');
 if (!fs.existsSync(sitePath)) {
