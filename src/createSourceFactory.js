@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import isPlainObject from 'lodash/lang/isPlainObject';
+import isPlainObject from 'lodash/isPlainObject';
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'canDrag', 'isDragging', 'endDrag'];
 const REQUIRED_SPEC_METHODS = ['beginDrag'];
