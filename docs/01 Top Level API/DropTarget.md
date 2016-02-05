@@ -124,6 +124,7 @@ Check out [the tutorial](docs-tutorial.html) for more real examples!
 -------------------
 ```js
 var React = require('react');
+var findDOMNode = require('react-dom').findDOMNode;
 var DropTarget = require('react-dnd').DropTarget;
 
 // Drag sources and drop targets only interact
@@ -239,6 +240,7 @@ module.exports = DropTarget(Types.CHESSPIECE, chessSquareTarget, collect)(ChessS
 -------------------
 ```js
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import { DropTarget } from 'react-dnd';
 
 // Drag sources and drop targets only interact
@@ -352,6 +354,7 @@ export default DropTarget(Types.CHESSPIECE, chessSquareTarget, collect)(ChessSqu
 -------------------
 ```js
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import { DropTarget } from 'react-dnd';
 
 // Drag sources and drop targets only interact
