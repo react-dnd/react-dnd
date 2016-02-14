@@ -68,13 +68,23 @@ export default function DragLayer(collect, options = {}) {
 
       componentDidMount() {
         this.isCurrentlyMounted = true;
+
         const monitor = this.manager.getMonitor();
-        this.unsubscribe = monitor.subscribeToOffsetChange(this.handleChange);
+        this.unsubscribeFromOffsetChange = monitor.subscribeToOffsetChange(
+          this.handleChange
+        );
+        this.unsubscribeFromStateChange = monitor.subscribeToStateChange(
+          this.handleChange
+        );
+
+        this.handleChange();
       }
 
       componentWillUnmount() {
         this.isCurrentlyMounted = false;
-        this.unsubscribe();
+
+        this.unsubscribeFromOffsetChange();
+        this.unsubscribeFromStateChange();
       }
 
       handleChange() {
