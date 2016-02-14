@@ -77,7 +77,7 @@
     "postcss": "^4.0.2",
     "react": "^0.14.0",
     "react-dnd-html5-backend": "^2.1.2",
-    "react-dnd-test-backend": "^1.0.1",
+    "react-dnd-test-backend": "^1.0.2",
     "react-dom": "^0.14.0",
     "react-hot-loader": "^1.2.3",
     "react-router": "~0.13.2",
