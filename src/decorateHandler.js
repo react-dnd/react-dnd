@@ -68,6 +68,10 @@ export default function decorateHandler({
       this.state = this.getCurrentState();
     }
 
+    componentDidMount() {
+      this.isCurrentlyMounted = true;
+    }
+
     componentWillReceiveProps(nextProps) {
       if (!arePropsEqual(nextProps, this.props)) {
         this.receiveProps(nextProps);
@@ -77,6 +81,7 @@ export default function decorateHandler({
 
     componentWillUnmount() {
       this.disposable.dispose();
+      this.isCurrentlyMounted = false;
     }
 
     receiveProps(props) {
@@ -126,6 +131,10 @@ export default function decorateHandler({
     }
 
     handleChange() {
+      if (!this.isCurrentlyMounted) {
+        return;
+      }
+
       const nextState = this.getCurrentState();
       if (!shallowEqual(nextState, this.state)) {
         this.setState(nextState);
