@@ -56,7 +56,7 @@ npm install --save react-dnd-html5-backend
 
 The npm packages default to the CommonJS build. However they also include pre-minified UMD builds in the `dist` folders. The UMD builds export global `window.ReactDnD` and `window.ReactDnDHTML5Backend` respectively.
 
-If you’d rather not use npm, you can use [npmcdn](http://npmcdn.com/) to access the UMD builds directly: [ReactDnD.min.js](https://npmcdn.com/react-dnd@latest/dist/ReactDnD.min.js) and [ReactDnD.min.js](https://npmcdn.com/react-dnd-html5-backend@latest/dist/ReactDnDHTML5Backend.min.js). You may point your Bower config to them.
+If you’d rather not use npm, you can use [npmcdn](http://npmcdn.com/) to access the UMD builds directly: [ReactDnD.min.js](https://npmcdn.com/react-dnd@latest/dist/ReactDnD.min.js) and [ReactDnDHTML5Backend.min.js](https://npmcdn.com/react-dnd-html5-backend@latest/dist/ReactDnDHTML5Backend.min.js). You may point your Bower config to them.
 
 ### How do I test React DnD components and their interaction?
 
