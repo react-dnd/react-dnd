@@ -35,8 +35,7 @@ export default class Box extends Component {
   render() {
     const { name, isDropped, isDragging, connectDragSource } = this.props;
     const opacity = isDragging ? 0.4 : 1;
-
-    return connectDragSource(
+    const content = (
       <div style={{ ...style, opacity }}>
         {isDropped ?
           <s>{name}</s> :
@@ -44,5 +43,10 @@ export default class Box extends Component {
         }
       </div>
     );
+
+    if (connectDragSource) {
+      return connectDragSource(content);
+    }
+    return content;
   }
 }
