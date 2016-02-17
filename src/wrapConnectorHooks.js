@@ -34,10 +34,12 @@ function wrapHookToRecognizeElement(hook) {
     const element = elementOrNode;
     throwIfCompositeComponentElement(element);
 
-    return cloneWithRef(
-      element,
-      node => hook(node, options)
-    );
+    // When no options are passed, use the hook directly
+    const ref = options ?
+      node => hook(node, options) :
+      hook;
+
+    return cloneWithRef(element, ref);
   };
 }
 
@@ -46,7 +48,8 @@ export default function wrapConnectorHooks(hooks) {
 
   Object.keys(hooks).forEach(key => {
     const hook = hooks[key];
-    wrappedHooks[key] = () => wrapHookToRecognizeElement(hook);
+    const wrappedHook = wrapHookToRecognizeElement(hook);
+    wrappedHooks[key] = () => wrappedHook;
   });
 
   return wrappedHooks;
