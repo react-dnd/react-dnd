@@ -200,6 +200,10 @@ React DnD gives you a set of powerful primitives, but it does not contain any re
 Issues and potential improvements are discussed on [Github](https://github.com/gaearon/react-dnd/issues).  
 The [Gitter room](https://gitter.im/gaearon/react-dnd) is another good place to get support.
 
+## Thanks
+
+Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
+
 ## License
 
 React DnD is licensed as MIT. Use it as you will.
