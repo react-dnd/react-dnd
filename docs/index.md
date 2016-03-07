@@ -9,8 +9,6 @@ npm install --save react-dnd-html5-backend
 
 The second package instructs React DnD to use [the HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop) under the hood. You may choose to use a third-party backend instead, such as [the touch backend](https://github.com/yahoo/react-dnd-touch-backend).
 
-While we suggest you to use NPM, you can find the precompiled UMD build in the `dist` folder available on the [latest](https://github.com/gaearon/react-dnd/tree/latest/dist) branch as well as in every [tagged release](https://github.com/gaearon/react-dnd/releases). This is where you can point Bower if that’s what you use. The same instructions hold for [the HTML5 backend](https://github.com/gaearon/react-dnd-html5-backend#installation).
-
 ## What's It Look Like?
 
 -------------------
