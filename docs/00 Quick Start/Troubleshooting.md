@@ -28,7 +28,6 @@ If you have this error in a test, [read the testing guide](docs-testing.html) fo
 
 This problem may also appear if you have a duplicate React installation in your Browserify or Webpack build. [This article](https://medium.com/@dan_abramov/two-weird-tricks-that-fix-react-7cf9bbdef375) explains both the problem and the solution to it.
 
-<!-- Do not edit title. It is referenced from the code. -->
 ### React DnD does not provide a default export
 
 React DnD does not provide a [default export](http://www.2ality.com/2014/09/es6-modules-final.html).  
