@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import isPlainObject from 'lodash/lang/isPlainObject';
+import isPlainObject from 'lodash/isPlainObject';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 import decorateHandler from './decorateHandler';
 import registerTarget from './registerTarget';

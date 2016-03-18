@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
-import isPlainObject from 'lodash/lang/isPlainObject';
+import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
@@ -67,15 +67,31 @@ export default function DragLayer(collect, options = {}) {
       }
 
       componentDidMount() {
+        this.isCurrentlyMounted = true;
+
         const monitor = this.manager.getMonitor();
-        this.unsubscribe = monitor.subscribeToOffsetChange(this.handleChange);
+        this.unsubscribeFromOffsetChange = monitor.subscribeToOffsetChange(
+          this.handleChange
+        );
+        this.unsubscribeFromStateChange = monitor.subscribeToStateChange(
+          this.handleChange
+        );
+
+        this.handleChange();
       }
 
       componentWillUnmount() {
-        this.unsubscribe();
+        this.isCurrentlyMounted = false;
+
+        this.unsubscribeFromOffsetChange();
+        this.unsubscribeFromStateChange();
       }
 
       handleChange() {
+        if (!this.isCurrentlyMounted) {
+          return;
+        }
+
         const nextState = this.getCurrentState();
         if (!shallowEqual(nextState, this.state)) {
           this.setState(nextState);

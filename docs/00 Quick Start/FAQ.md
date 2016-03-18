@@ -47,11 +47,16 @@ export default class MyComponent {
 
 ### Where do I get the precompiled version?
 
-Grab it from the `dist` folders of [React DnD](https://github.com/gaearon/react-dnd/tree/latest/dist) and [the HTML5 backend](https://github.com/gaearon/react-dnd-html5-backend/tree/latest/dist)’s `latest` branch or tagged releases.
-They export `ReactDnD` (watch the casing!) and `ReactDnDHTML5Backend`, respectively.
+If you use [npm](http://npmjs.com):
 
-Note that the `dist` folders are **only** available on the `latest` branch and the tagged releases.
-There is no `dist` folder in the `master` branch of either repo.
+```
+npm install --save react-dnd
+npm install --save react-dnd-html5-backend
+```
+
+The npm packages default to the CommonJS build. However they also include pre-minified UMD builds in the `dist` folders. The UMD builds export global `window.ReactDnD` and `window.ReactDnDHTML5Backend` respectively.
+
+If you’d rather not use npm, you can use [npmcdn](http://npmcdn.com/) to access the UMD builds directly: [ReactDnD.min.js](https://npmcdn.com/react-dnd@latest/dist/ReactDnD.min.js) and [ReactDnDHTML5Backend.min.js](https://npmcdn.com/react-dnd-html5-backend@latest/dist/ReactDnDHTML5Backend.min.js). You may point your Bower config to them.
 
 ### How do I test React DnD components and their interaction?
 
@@ -361,7 +366,7 @@ Because [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-targe
 ```js
 var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
-var flow = require('lodash/function/flow');
+var flow = require('lodash/flow');
 
 var YourComponent = React.createClass({
   /* ... */
@@ -375,7 +380,7 @@ module.exports = flow(
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
-import flow from 'lodash/function/flow';
+import flow from 'lodash/flow';
 
 class YourComponent {
   /* ... */

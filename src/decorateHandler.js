@@ -2,9 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
-import isPlainObject from 'lodash/lang/isPlainObject';
+import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';
-import bindConnector from './bindConnector';
 
 export default function decorateHandler({
   DecoratedComponent,
@@ -61,11 +60,21 @@ export default function decorateHandler({
 
       this.manager = this.context.dragDropManager;
       this.handlerMonitor = createMonitor(this.manager);
+      this.handlerConnector = createConnector(this.manager.getBackend());
       this.handler = createHandler(this.handlerMonitor);
-      this.disposable = new SerialDisposable();
 
+      this.disposable = new SerialDisposable();
       this.receiveProps(props);
       this.state = this.getCurrentState();
+      this.dispose();
+    }
+
+    componentDidMount() {
+      this.isCurrentlyMounted = true;
+      this.disposable = new SerialDisposable();
+      this.currentType = null;
+      this.receiveProps(this.props);
+      this.handleChange();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -76,7 +85,8 @@ export default function decorateHandler({
     }
 
     componentWillUnmount() {
-      this.disposable.dispose();
+      this.dispose();
+      this.isCurrentlyMounted = false;
     }
 
     receiveProps(props) {
@@ -100,15 +110,9 @@ export default function decorateHandler({
         this.manager
       );
 
-      const connector = createConnector(this.manager.getBackend());
-      const {
-        handlerConnector,
-        disposable: connectorDisposable
-      } = bindConnector(connector, handlerId);
-
       this.handlerId = handlerId;
-      this.handlerConnector = handlerConnector;
       this.handlerMonitor.receiveHandlerId(handlerId);
+      this.handlerConnector.receiveHandlerId(handlerId);
 
       const globalMonitor = this.manager.getMonitor();
       const unsubscribe = globalMonitor.subscribeToStateChange(
@@ -119,17 +123,25 @@ export default function decorateHandler({
       this.disposable.setDisposable(
         new CompositeDisposable(
           new Disposable(unsubscribe),
-          new Disposable(unregister),
-          connectorDisposable
+          new Disposable(unregister)
         )
       );
     }
 
     handleChange() {
+      if (!this.isCurrentlyMounted) {
+        return;
+      }
+
       const nextState = this.getCurrentState();
       if (!shallowEqual(nextState, this.state)) {
         this.setState(nextState);
       }
+    }
+
+    dispose() {
+      this.disposable.dispose();
+      this.handlerConnector.receiveHandlerId(null);
     }
 
     handleChildRef(component) {
@@ -138,7 +150,11 @@ export default function decorateHandler({
     }
 
     getCurrentState() {
-      const nextState = collect(this.handlerConnector, this.handlerMonitor);
+      const nextState = collect(
+        this.handlerConnector.hooks,
+        this.handlerMonitor
+      );
+
       if (process.env.NODE_ENV !== 'production') {
         invariant(
           isPlainObject(nextState),
@@ -150,6 +166,7 @@ export default function decorateHandler({
           nextState
         );
       }
+
       return nextState;
     }
 

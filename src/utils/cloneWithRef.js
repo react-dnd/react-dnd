@@ -10,12 +10,19 @@ export default function cloneWithRef(element, newRef) {
     'Read more: https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute'
   );
 
+  if (!previousRef) {
+    // When there is no ref on the element, use the new ref directly
+    return cloneElement(element, {
+      ref: newRef
+    });
+  }
+
   return cloneElement(element, {
-    ref: (instance) => {
-      newRef(instance);
+    ref: (node) => {
+      newRef(node);
 
       if (previousRef) {
-        previousRef(instance);
+        previousRef(node);
       }
     }
   });

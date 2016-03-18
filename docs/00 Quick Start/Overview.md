@@ -174,7 +174,7 @@ Even if you don't plan to use ES7, the partial application can still be handy, b
 ```js
 var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
-var flow = require('lodash/function/flow');
+var flow = require('lodash/flow');
 
 var YourComponent = React.createClass({
   /* ... */
@@ -188,7 +188,7 @@ module.exports = flow(
 -------------------
 ```js
 import { DragSource } from 'react-dnd';
-import flow from 'lodash/function/flow';
+import flow from 'lodash/flow';
 
 class YourComponent {
   /* ... */
