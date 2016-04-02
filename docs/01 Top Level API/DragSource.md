@@ -49,7 +49,7 @@ export default class MyComponent {
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drag source reacts to the drag and drop events. See the drag source specification described in detail in the next section.
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `connect` and `monitor`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
