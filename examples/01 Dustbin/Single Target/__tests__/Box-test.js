@@ -19,7 +19,7 @@ describe('Box', () => {
                    isDragging={false} />
     );
     let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-    expect(div.props.style.opacity).toEqual(1);
+	expect(div.style.opacity).toEqual('1');
 
     // Render with another set of props and test
     root = TestUtils.renderIntoDocument(
@@ -28,7 +28,7 @@ describe('Box', () => {
                    isDragging />
     );
     div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-    expect(div.props.style.opacity).toEqual(0.4);
+    expect(div.style.opacity).toEqual('0.4');
   });
 
   it('can be tested with the testing backend', () => {
@@ -41,7 +41,7 @@ describe('Box', () => {
 
     // Check that the opacity is 1
     let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-    expect(div.props.style.opacity).toEqual(1);
+    expect(div.style.opacity).toEqual('1');
 
     // Find the drag source ID and use it to simulate the dragging state
     const box = TestUtils.findRenderedComponentWithType(root, Box);
@@ -49,6 +49,6 @@ describe('Box', () => {
 
     // Verify that the div changed its opacity
     div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-    expect(div.props.style.opacity).toEqual(0.4);
+    expect(div.style.opacity).toEqual('0.4');
   });
 });
