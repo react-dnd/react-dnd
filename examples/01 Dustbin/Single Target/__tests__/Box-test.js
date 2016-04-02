@@ -19,7 +19,7 @@ describe('Box', () => {
                    isDragging={false} />
     );
     let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-	expect(div.style.opacity).toEqual('1');
+    expect(div.style.opacity).toEqual('1');
 
     // Render with another set of props and test
     root = TestUtils.renderIntoDocument(
