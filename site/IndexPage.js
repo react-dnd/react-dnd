@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import APIPage from './pages/APIPage';
 import ExamplePage from './pages/ExamplePage';
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 const APIDocs = {
   OVERVIEW: require('../docs/00 Quick Start/Overview.md'),
@@ -47,7 +48,7 @@ export default class IndexPage extends Component {
 
   static renderToString(props) {
     return IndexPage.getDoctype() +
-           React.renderToString(<IndexPage {...props} />);
+           ReactDOMServer.renderToString(<IndexPage {...props} />);
   }
 
   constructor(props) {
