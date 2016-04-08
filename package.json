@@ -44,7 +44,7 @@
     "lodash": "^4.2.0"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0-0"
+    "react": "^0.14.0 || ^15.0.1"
   },
   "devDependencies": {
     "animation-frame": "^0.2.4",
@@ -75,10 +75,10 @@
     "mocha": "^2.2.5",
     "null-loader": "^0.1.0",
     "postcss": "^4.0.2",
-    "react": "^15.0.0-rc.2",
+    "react": "^15.0.1",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dnd-test-backend": "^1.0.2",
-    "react-dom": "^15.0.0-rc.2",
+    "react-dom": "^15.0.1",
     "react-hot-loader": "^1.2.3",
     "react-router": "~0.13.2",
     "request": "2.46.0",
