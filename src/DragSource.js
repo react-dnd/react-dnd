@@ -1,3 +1,4 @@
+import { isValidSourceType } from 'dnd-core';
 import invariant from 'invariant';
 import isPlainObject from 'lodash/isPlainObject';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
@@ -6,17 +7,16 @@ import registerSource from './registerSource';
 import createSourceFactory from './createSourceFactory';
 import createSourceMonitor from './createSourceMonitor';
 import createSourceConnector from './createSourceConnector';
-import isValidType from './utils/isValidType';
 
 export default function DragSource(type, spec, collect, options = {}) {
   checkDecoratorArguments('DragSource', 'type, spec, collect[, options]', ...arguments);
   let getType = type;
   if (typeof type !== 'function') {
     invariant(
-      isValidType(type),
+      isValidSourceType(type),
       'Expected "type" provided as the first argument to DragSource to be ' +
-      'a string, or a function that returns a string given the current props. ' +
-      'Instead, received %s. ' +
+      'a string, a symbol, or a function that returns a string or symbol ' +
+      ' given the current props. Instead, received %s. ' +
       'Read more: http://gaearon.github.io/react-dnd/docs-drag-source.html',
       type
     );

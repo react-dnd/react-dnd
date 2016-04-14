@@ -1,3 +1,4 @@
+import { isValidTargetType } from 'dnd-core';
 import invariant from 'invariant';
 import isPlainObject from 'lodash/isPlainObject';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
@@ -6,17 +7,16 @@ import registerTarget from './registerTarget';
 import createTargetFactory from './createTargetFactory';
 import createTargetMonitor from './createTargetMonitor';
 import createTargetConnector from './createTargetConnector';
-import isValidType from './utils/isValidType';
 
 export default function DropTarget(type, spec, collect, options = {}) {
   checkDecoratorArguments('DropTarget', 'type, spec, collect[, options]', ...arguments);
   let getType = type;
   if (typeof type !== 'function') {
     invariant(
-      isValidType(type, true),
+      isValidTargetType(type),
       'Expected "type" provided as the first argument to DropTarget to be ' +
-      'a string, an array of strings, or a function that returns either given ' +
-      'the current props. Instead, received %s. ' +
+      'a string, a symbol, a boolean, an array thereof, or a function that ' +
+      'returns one of the above given the current props. Instead, received %s. ' +
       'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
       type
     );
