@@ -44,7 +44,7 @@ export default class MyComponent {
 
 ### Parameters
 
-* **`types`**: Required. A string, an ES6 symbol, an array of either, or a function that returns either of those, given component's `props`. This drop target will only react to the items produced by the [drag sources](docs-drag-source.html) of the specified type or types. Read the [overview](docs-overview.html) to learn more about the items and types.
+* **`types`**: Required. A string, an ES6 symbol, a boolean, an array of the above, or a function that returns any of those, given component's `props`. This drop target will only react to the items produced by the [drag sources](docs-drag-source.html) matching the specified type or types. `true` matches all source types, and `false` matches none. Read the [overview](docs-overview.html) to learn more about the items and types. 
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drop target reacts to the drag and drop events. See the drop target specification described in detail in the next section.
 

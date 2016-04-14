@@ -24,7 +24,7 @@ What is an item? An *item* is a plain JavaScript object *describing* what's bein
 
 What is a type, then? A *type* is a string (or a [symbol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)) uniquely identifying *a whole class of items* in your application. In a Kanban board app, you might have a `'card'` type representing the draggable cards and a `'list'` type for the draggable lists of those cards. In Chess, you might only have a single `'piece'` type.
 
-Types are useful because, as your app grows, you might want to make more things draggable, but you don't necessarily want all the existing drop targets to suddenly start reacting to the new items. **The types let you specify which drag sources and drop targets are compatible.** You're probably going to have an enumeration of the type constants in your application, just like you may have an enumeration of the Flux action types.
+Types are useful because, as your app grows, you might want to make more things draggable, but you don't necessarily want all the existing drop targets to suddenly start reacting to the new items. **The types let you specify which drag sources and drop targets are compatible.** You're probably going to have an enumeration of the type constants in your application, just like you may have an enumeration of the Flux action types. If you want a target to match all sources, you can use the wildcard target type `true`.
 
 ### Monitors
 
