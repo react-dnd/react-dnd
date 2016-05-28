@@ -245,7 +245,6 @@ export default DragLayer(collect)(CustomDragLayer);
 import React, { PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
-import snapToGrid from './snapToGrid';
 import { DragLayer } from 'react-dnd';
 
 const layerStyles = {
