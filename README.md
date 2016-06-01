@@ -1,6 +1,9 @@
 React *DnD*
 =========
 
+> #### This project is looking for a new maintainer!
+> https://github.com/gaearon/react-dnd/issues/282
+
 Drag and Drop for React.
 
 See the docs, tutorials and examples on the website:
