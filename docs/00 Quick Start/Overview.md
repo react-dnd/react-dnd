@@ -195,7 +195,7 @@ class YourComponent {
 }
 
 export default flow(
-  DragSource(/* ... */)
+  DragSource(/* ... */),
   DropTarget(/* ... */)
 )(YourComponent);
 ```
