@@ -130,6 +130,10 @@ it('can be tested with the testing backend', function () {
   // Find the drag source ID and use it to simulate the dragging operation
   var box = TestUtils.findRenderedComponentWithType(root, Box);
   backend.simulateBeginDrag([box.getHandlerId()]);
+  
+  // Incase your component is acting both as a DragSource and DragTarget
+  // you'd need to go down one level deeper to get the correct Id
+  // backend.simulateBeginDrag([box.getDecoratedComponentInstance().getHandlerId()]);
 
   // Optionally you can pass in a clientOffset for testing operations that
   // depend on mouse movements.
