@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
+import hoistStatics from 'hoist-non-react-statics';
 
 export default function DragDropContext(backendOrModule) {
   checkDecoratorArguments('DragDropContext', 'backend', ...arguments);
@@ -30,7 +31,7 @@ export default function DragDropContext(backendOrModule) {
       DecoratedComponent.name ||
       'Component';
 
-    return class DragDropContextContainer extends Component {
+    class DragDropContextContainer extends Component {
       static DecoratedComponent = DecoratedComponent;
 
       static displayName = `DragDropContext(${displayName})`;
@@ -57,6 +58,8 @@ export default function DragDropContext(backendOrModule) {
                               ref='child' />
         );
       }
-    };
+    }
+
+    return hoistStatics(DragDropContextContainer, DecoratedComponent);
   };
 }
