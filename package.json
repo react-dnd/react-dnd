@@ -40,6 +40,7 @@
   "dependencies": {
     "disposables": "^1.0.1",
     "dnd-core": "^2.0.1",
+    "hoist-non-react-statics": "^1.2.0",
     "invariant": "^2.1.0",
     "lodash": "^4.2.0"
   },

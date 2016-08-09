@@ -4,6 +4,7 @@ import shallowEqualScalar from './utils/shallowEqualScalar';
 import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
+import hoistStatics from 'hoist-non-react-statics';
 
 export default function DragLayer(collect, options = {}) {
   checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments);
@@ -31,7 +32,7 @@ export default function DragLayer(collect, options = {}) {
       DecoratedComponent.name ||
       'Component';
 
-    return class DragLayerContainer extends Component {
+    class DragLayerContainer extends Component {
       static DecoratedComponent = DecoratedComponent;
 
       static displayName = `DragLayer(${displayName})`;
@@ -110,6 +111,8 @@ export default function DragLayer(collect, options = {}) {
                               ref='child' />
         );
       }
-    };
+    }
+
+    return hoistStatics(DragLayerContainer, DecoratedComponent);
   };
 }
