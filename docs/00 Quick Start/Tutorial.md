@@ -1,7 +1,7 @@
 Tutorial
 ===================
 
-Now that you've read [the overview](docs-overview.html), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/blog/2013/11/05/thinking-in-react.html) tutorial. Adding the drag and drop support is just the icing on the cake.
+Now that you've read [the overview](docs-overview.html), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/docs/thinking-in-react.html) tutorial. Adding the drag and drop support is just the icing on the cake.
 
 In this tutorial, we're going to build a Chess game with React and React DnD. Just kidding! Writing a full-blown Chess game is totally out of scope of this tutorial. **What we're going to build is a tiny app with a Chess board and a lonely Knight. The Knight will be draggable according to the Chess rules.**
 
