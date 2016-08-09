@@ -4,6 +4,7 @@ import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';
+import hoistStatics from 'hoist-non-react-statics';
 
 export default function decorateHandler({
   DecoratedComponent,
@@ -22,7 +23,7 @@ export default function decorateHandler({
     DecoratedComponent.name ||
     'Component';
 
-  return class DragDropContainer extends Component {
+  class DragDropContainer extends Component {
     static DecoratedComponent = DecoratedComponent;
 
     static displayName = `${containerDisplayName}(${displayName})`;
@@ -177,5 +178,7 @@ export default function decorateHandler({
                             ref={this.handleChildRef} />
       );
     }
-  };
+  }
+
+  return hoistStatics(DragDropContainer, DecoratedComponent);
 }
