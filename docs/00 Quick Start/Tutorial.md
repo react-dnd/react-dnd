@@ -1652,6 +1652,7 @@ var BoardSquare = React.createClass({
     var y = this.props.y;
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
+    var canDrop = this.props.canDrop;
     var black = (x + y) % 2 === 1;
 
     return connectDropTarget(
