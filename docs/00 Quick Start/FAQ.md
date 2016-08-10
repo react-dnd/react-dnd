@@ -79,6 +79,10 @@ Both [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.h
 
 Because [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html) use the partial application, you may compose them using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). In ES7, you can just stack the decorators to achieve the same effect.
 
+### Why is the `component` parameter always `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods?
+
+When using [stateless components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), the `component` parameter will always be `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods. This is because it is not possible to attach a ref to a stateless function component as explained in [the React docs](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
+
 -------------------
 ```js
 var DragSource = require('react-dnd').DragSource;
