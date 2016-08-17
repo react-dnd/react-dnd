@@ -214,8 +214,8 @@ var Square = React.createClass({
       <div style={{
         backgroundColor: fill,
         color: stroke,
-        width: '100%',
-        height: '100%'
+        minWidth: '12vw',
+        height: '12vw'
       }}>
         {this.props.children}
       </div>
@@ -239,8 +239,8 @@ export default class Square extends Component {
       <div style={{
         backgroundColor: fill,
         color: stroke,
-        width: '100%',
-        height: '100%'
+        minWidth: '12vw',
+        height: '12vw'
       }}>
         {this.props.children}
       </div>
@@ -270,8 +270,8 @@ export default class Square extends Component {
       <div style={{
         backgroundColor: fill,
         color: stroke,
-        width: '100%',
-        height: '100%'
+        minWidth: '12vw',
+        height: '12vw'
       }}>
         {this.props.children}
       </div>
