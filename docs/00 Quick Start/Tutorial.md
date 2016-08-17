@@ -47,7 +47,7 @@ var React = require('react');
 
 var Knight = React.createClass({
   render: function () {
-    return <span>♘</span>;
+    return <span> style={{fontSize: '12vw'}}♘</span>;
   }
 });
 
@@ -59,7 +59,7 @@ import React, { Component } from 'react';
 
 export default class Knight extends Component {
   render() {
-    return <span>♘</span>;
+    return <span style={{fontSize: '12vw'}}>♘</span>;
   }
 }
 ```
