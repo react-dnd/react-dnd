@@ -679,9 +679,9 @@ We want to make the `Knight` draggable. It's a noble goal, but we need to see pa
 
 Because setting up this state requires some thought, we won't try to implement dragging at the same time. Instead, we'll start with a simpler implementation. We will move the `Knight` when you click a particular `Square`, but only if this is allowed by the Chess rules. Implementing this logic should give us enough insight into managing the state, so we can replace clicking with the drag and drop once we've dealt with that.
 
-React is not opinionated about the state management or the data flow; you can use [Flux](https://facebook.github.io/flux/), [Rx](https://github.com/Reactive-Extensions/RxJS) or <s>even Backbone</s> nah, [avoid fat models and separate your reads from writes](http://martinfowler.com/bliki/CQRS.html).
+React is not opinionated about the state management or the data flow; you can use [Flux](https://facebook.github.io/flux/), [Redux](https://github.com/reactjs/react-redux), [Rx](https://github.com/Reactive-Extensions/RxJS) or <s>even Backbone</s> nah, [avoid fat models and separate your reads from writes](http://martinfowler.com/bliki/CQRS.html).
 
-I don't want to bother with installing or setting up Flux for this simple example, so I'm going to follow a simpler pattern. It won't scale as well as Flux, but I also don't need it to. I have not decided on the API for my state manager yet, but I'm going to call it `Game`, and it will definitely need to have some way of signaling data changes to my React code.
+I don't want to bother with installing or setting up Redux for this simple example, so I'm going to follow a simpler pattern. It won't scale as well as Redux, but I also don't need it to. I have not decided on the API for my state manager yet, but I'm going to call it `Game`, and it will definitely need to have some way of signaling data changes to my React code.
 
 Since I know this much, I can rewrite my `index.js` with a hypothetical `Game` that doesn't exist yet. Note that this time, I'm writing my code in blind, not being able to run it yet. This is because I'm still figuring out the API:
 
