@@ -1670,7 +1670,7 @@ var BoardSquare = React.createClass({
       </div>
     );
   }
-}
+});
 
 module.exports = DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
