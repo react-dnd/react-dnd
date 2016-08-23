@@ -42,7 +42,11 @@
     "dnd-core": "^2.0.1",
     "hoist-non-react-statics": "^1.2.0",
     "invariant": "^2.1.0",
-    "lodash": "^4.2.0"
+    "lodash": "^4.2.0",
+    "lodash.flatten": "^4.4.0",
+    "lodash.isarray": "^4.0.0",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.shuffle": "^4.2.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0-0"

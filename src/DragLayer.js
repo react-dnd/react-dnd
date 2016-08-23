@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
-import isPlainObject from 'lodash/isPlainObject';
+import isPlainObject from 'lodash.isPlainObject';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 import hoistStatics from 'hoist-non-react-statics';
