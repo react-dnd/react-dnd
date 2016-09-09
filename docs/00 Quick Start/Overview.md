@@ -103,7 +103,7 @@ render() {
 
 -------------------
 
-The `connectDropTarget` call tells React DnD that the root DOM node of our component is a valid drop target, and that its hover and drop events should be handled by the backend. Internally it works by attaching a [callback ref](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the React element you gave it. The function returned by the connector is memoized, so it doesn't break the `shouldComponentUpdate` optimizations.
+The `connectDropTarget` call tells React DnD that the root DOM node of our component is a valid drop target, and that its hover and drop events should be handled by the backend. Internally it works by attaching a [callback ref](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the React element you gave it. The function returned by the connector is memorized, so it doesn't break the `shouldComponentUpdate` optimizations.
 
 ### Drag Sources and Drop Targets
 
