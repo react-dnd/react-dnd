@@ -41,7 +41,7 @@ export default function DragDropContext(backendOrModule) {
       };
 
       getDecoratedComponentInstance() {
-        return this.refs.child;
+        return this.child;
       }
 
       getManager() {
@@ -55,7 +55,7 @@ export default function DragDropContext(backendOrModule) {
       render() {
         return (
           <DecoratedComponent {...this.props}
-                              ref='child' />
+                              ref={child => this.child = child} />
         );
       }
     }
