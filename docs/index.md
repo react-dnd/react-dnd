@@ -171,7 +171,7 @@ Instead of providing readymade widgets, React DnD wraps your components and inje
 
 ### It embraces unidirectional data flow
 
-React DnD fully embraces the declarative rendering paradigm of React and doesn't mutate the DOM. It is a great complement to Flux and other architectures with the unidirectional data flow. In fact it is built on Flux.
+React DnD fully embraces the declarative rendering paradigm of React and doesn't mutate the DOM. It is a great complement to Redux and other architectures with the unidirectional data flow. In fact it is built on Redux.
 
 ### It hides the platform quirks
 
