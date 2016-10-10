@@ -1,7 +1,7 @@
 import invariant from 'invariant';
 import isPlainObject from 'lodash/isPlainObject';
 
-const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'canDrag', 'isDragging', 'endDrag'];
+const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag'];
 const REQUIRED_SPEC_METHODS = ['beginDrag'];
 
 export default function createSourceFactory(spec) {
