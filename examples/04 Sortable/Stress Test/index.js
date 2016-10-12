@@ -29,8 +29,7 @@ export default class SortableStressTest extends Component {
           Luckily, React DnD is designed to work great with any virtual React data list components because it doesn't keep any state in the DOM.
         </p>
         <p>
-          This example does not scroll automatically but you can add the scrolling with a parent drop target that compares <code>component.getBoundingClientRect()</code> with <code>monitor.getClientOffset()</code> inside its <code>hover</code> handler.
-          In fact, you are welcome to contribute this functionality to this example!
+          The automatic scrolling in the example is achieved by adding a parent drop target that compares <code>window.innerHeight</code>, <code>component.getBoundingClientRect()</code> and <code>monitor.getClientOffset()</code> inside its <code>hover</code> handler.
         </p>
         {shouldRender && <Container />}
       </div>
