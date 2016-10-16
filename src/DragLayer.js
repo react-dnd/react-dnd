@@ -42,6 +42,11 @@ export default function DragLayer(collect, options = {}) {
       }
 
       getDecoratedComponentInstance() {
+        invariant(
+          this.child,
+          'In order to access an instance of the decorated component it can ' +
+          'not be a stateless component.'
+        );
         return this.child;
       }
 
