@@ -1,6 +1,7 @@
 node_modules
 dist
 lib
+es
 .DS_Store
 .idea
 __site__

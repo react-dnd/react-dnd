@@ -4,6 +4,7 @@ site
 scripts
 dist
 lib
+es
 **/node_modules
 **/webpack*.config.js
 tests.webpack.js
