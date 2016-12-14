@@ -26,7 +26,7 @@ export default function DragLayer(collect, options = {}) {
   );
 
   return function decorateLayer(DecoratedComponent) {
-    const { arePropsEqual = shallowEqualScalar } = options;
+    const { arePropsEqual = shallowEqualScalar, withRef = false } = options;
     const displayName =
       DecoratedComponent.displayName ||
       DecoratedComponent.name ||
@@ -43,9 +43,9 @@ export default function DragLayer(collect, options = {}) {
 
       getDecoratedComponentInstance() {
         invariant(
-          this.child,
-          'In order to access an instance of the decorated component it can ' +
-          'not be a stateless component.'
+          withRef,
+          'To access the wrapped instance, you need to specify { withRef: true } as the second ' +
+          'argument of the DragLayer() call. The decorated component can not be stateless.'
         );
         return this.child;
       }
@@ -110,10 +110,14 @@ export default function DragLayer(collect, options = {}) {
       }
 
       render() {
+        const additionalProps = {};
+        if (withRef) {
+          additionalProps.ref = child => (this.child = child);
+        }
         return (
           <DecoratedComponent {...this.props}
                               {...this.state}
-                              ref={child => this.child = child} />
+                              {...additionalProps} />
         );
       }
     }
