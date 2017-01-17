@@ -38,7 +38,7 @@ export class DragDropContextProvider extends Component {
   static displayName = 'DragDropContextProvider';
 
   static contextTypes = {
-    document: PropTypes.object,
+    window: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -47,18 +47,12 @@ export class DragDropContextProvider extends Component {
   }
 
   getChildContext() {
-    const { document } = this.context;
-    const window = document.defaultView || document.parentView;
+    const { window } = this.context;
     return createChildContext(this.backend, window);
   }
 
   render() {
     return Children.only(this.props.children);
-  }
-
-  getDocument() {
-    const domNode = ReactDOM.findDOMNode(this);
-    return domNode.ownerDocument || domNode.contentDocument;
   }
 }
 
