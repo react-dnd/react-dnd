@@ -1,5 +1,4 @@
 import React, { Component, PropTypes, Children } from 'react';
-import ReactDOM from 'react-dom';
 import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
