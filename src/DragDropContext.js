@@ -1,4 +1,5 @@
 import React, { Component, PropTypes, Children } from 'react';
+import ReactDOM from 'react-dom';
 import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
@@ -7,6 +8,10 @@ import hoistStatics from 'hoist-non-react-statics';
 const CHILD_CONTEXT_TYPES = {
   dragDropManager: PropTypes.object.isRequired
 };
+
+const createChildContext = (backend, window) => ({
+  dragDropManager: new DragDropManager(backend, window),
+});
 
 const unpackBackendForEs5Users = (backendOrModule) => {
   // Auto-detect ES6 default export for people still using ES5
@@ -24,7 +29,7 @@ const unpackBackendForEs5Users = (backendOrModule) => {
 
 export class DragDropContextProvider extends Component {
   static propTypes = {
-    backend: PropTypes.oneOf(PropTypes.func, PropTypes.object).isRequired,
+    backend: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
     children: PropTypes.element.isRequired
   };
 
@@ -32,17 +37,28 @@ export class DragDropContextProvider extends Component {
 
   static displayName = 'DragDropContextProvider';
 
+  static contextTypes = {
+    document: PropTypes.object,
+  };
+
   constructor(props, context) {
     super(props, context);
     this.backend = unpackBackendForEs5Users(props.backend);
   }
 
   getChildContext() {
-    return { backend: this.backend };
+    const { document } = this.context;
+    const window = document.defaultView || document.parentView;
+    return createChildContext(this.backend, window);
   }
 
   render() {
     return Children.only(this.props.children);
+  }
+
+  getDocument() {
+    const domNode = ReactDOM.findDOMNode(this);
+    return domNode.ownerDocument || domNode.contentDocument;
   }
 }
 
@@ -50,10 +66,7 @@ export default function DragDropContext(backendOrModule) {
   checkDecoratorArguments('DragDropContext', 'backend', ...arguments);
 
   const backend = unpackBackendForEs5Users(backendOrModule);
-
-  const childContext = {
-    dragDropManager: new DragDropManager(backend)
-  };
+  const childContext = createChildContext(backend, window);
 
   return function decorateContext(DecoratedComponent) {
     const displayName =
