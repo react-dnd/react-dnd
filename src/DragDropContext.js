@@ -8,8 +8,8 @@ const CHILD_CONTEXT_TYPES = {
   dragDropManager: PropTypes.object.isRequired
 };
 
-const createChildContext = (backend, window) => ({
-  dragDropManager: new DragDropManager(backend, window),
+const createChildContext = (backend, context) => ({
+  dragDropManager: new DragDropManager(backend, context),
 });
 
 const unpackBackendForEs5Users = (backendOrModule) => {
@@ -46,8 +46,7 @@ export class DragDropContextProvider extends Component {
   }
 
   getChildContext() {
-    const { window } = this.context;
-    return createChildContext(this.backend, window);
+    return createChildContext(this.backend, this.context.window);
   }
 
   render() {
