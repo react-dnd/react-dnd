@@ -176,8 +176,13 @@ var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
 var flow = require('lodash/flow');
 
+/* ... */
+
 var YourComponent = React.createClass({
-  /* ... */
+  const { connectDragSource, connectDropTarget } = this.props
+  return connectDragSource(connectDropTarget(
+    /* ... */
+  ))
 });
 
 module.exports = flow(
@@ -190,8 +195,13 @@ module.exports = flow(
 import { DragSource } from 'react-dnd';
 import flow from 'lodash/flow';
 
+/* ... */
+
 class YourComponent {
-  /* ... */
+  const { connectDragSource, connectDropTarget } = this.props
+  return connectDragSource(connectDropTarget(
+    /* ... */
+  ))
 }
 
 export default flow(
@@ -203,10 +213,15 @@ export default flow(
 ```js
 import { DragSource } from 'react-dnd';
 
+/* ... */
+
 @DragSource(/* ... */)
 @DropTarget(/* ... */)
 export default class YourComponent {
-  /* ... */
+  const { connectDragSource, connectDropTarget } = this.props
+  return connectDragSource(connectDropTarget(
+    /* ... */
+  ))
 }
 ```
 -------------------
