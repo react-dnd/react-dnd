@@ -179,8 +179,7 @@ var flow = require('lodash/flow');
 /* ... */
 
 var YourComponent = React.createClass({
-  const { connectDragSource, connectDropTarget } = this.props
-  return connectDragSource(connectDropTarget(
+  return this.props.connectDragSource(this.props.connectDropTarget(
     /* ... */
   ))
 });
