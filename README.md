@@ -1,9 +1,11 @@
 [![npm version](https://img.shields.io/npm/v/react-dnd.svg?style=flat-square)](https://www.npmjs.com/package/react-dnd)
 [![npm downloads](https://img.shields.io/npm/dm/react-dnd.svg?style=flat-square)](https://www.npmjs.com/package/react-dnd)
 [![Build Status](https://travis-ci.org/react-dnd/react-dnd.svg?branch=master)](https://travis-ci.org/react-dnd/react-dnd)
-[![dependencies Status](https://david-dm.org/react-dnd/react-dnd/status.svg)](https://david-dm.org/react-dnd/react-dnd)
-[![devDependencies Status](https://david-dm.org/react-dnd/react-dnd/dev-status.svg)](https://david-dm.org/react-dnd/react-dnd?type=dev)
-[![peerDependencies Status](https://david-dm.org/react-dnd/react-dnd/peer-status.svg)](https://david-dm.org/react-dnd/react-dnd?type=peer)
+[![bitHound Overall Score](https://www.bithound.io/github/react-dnd/react-dnd/badges/score.svg)](https://www.bithound.io/github/react-dnd/react-dnd)
+[![bitHound Code](https://www.bithound.io/github/react-dnd/react-dnd/badges/code.svg)](https://www.bithound.io/github/react-dnd/react-dnd)
+[![bitHound Dependencies](https://www.bithound.io/github/react-dnd/react-dnd/badges/dependencies.svg)](https://www.bithound.io/github/react-dnd/react-dnd/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/react-dnd/react-dnd/badges/devDependencies.svg)](https://www.bithound.io/github/react-dnd/react-dnd/master/dependencies/npm)
+
 
 React *DnD*
 =========
