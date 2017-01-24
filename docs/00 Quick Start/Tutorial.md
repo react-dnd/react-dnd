@@ -37,7 +37,7 @@ The good news is, it doesn't matter at this point. We're just going to write the
 
 ## Creating the Components
 
-I prefer to start bottom-up, because this way I'm always working with something that already exists. If I were to build the `Board` first, I wouldn't see my results until I'm done with the `Square`. On the other hand, I can build and see the `Square` right away without even thinking of the `Board`. I think that the immediate feedback loop is important (you can tell that by [another project I work on](https://gaearon.github.io/react-hot-loader)).
+I prefer to start bottom-up, because this way I'm always working with something that already exists. If I were to build the `Board` first, I wouldn't see my results until I'm done with the `Square`. On the other hand, I can build and see the `Square` right away without even thinking of the `Board`. I think that the immediate feedback loop is important (you can tell that by [another project I work on](https://react-dnd.github.io/react-hot-loader)).
 
 In fact I'm going to start with the `Knight`. It doesn't have any props at all, and it's the easiest one to build:
 

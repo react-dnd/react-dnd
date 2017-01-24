@@ -24,7 +24,7 @@ export default class DragAroundCustomDragLayer extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/02%20Drag%20Around/Custom%20Drag%20Layer'>Browse the Source</a></b>
+          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/02%20Drag%20Around/Custom%20Drag%20Layer'>Browse the Source</a></b>
         </p>
         <p>
           The browser APIs provide no way to change the drag preview or its behavior once drag has started.
