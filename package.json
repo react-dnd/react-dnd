@@ -8,10 +8,13 @@
     "start": "./scripts/startSiteDevServer.sh",
     "build-site": "./scripts/buildStaticSite.sh",
     "publish-site": "./scripts/publishStaticSite.sh",
-    "build": "./scripts/build.sh",
+    "bundle:unmin": "webpack --output-filename=dist/ReactDnD.js",
+    "bundle:min": "webpack --output-filename=dist/ReactDnD.min.js --optimize-minimize",
+    "babel": "babel src --out-dir lib",
+    "build": "npm-run-all --parallel bundle:* babel",
     "lint": "eslint .",
     "unit_test": "karma start",
-    "test": "npm-run-all clean lint build unit_test",
+    "test": "npm-run-all clean lint build",
     "prepublish": "npm test"
   },
   "repository": {
