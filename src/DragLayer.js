@@ -13,7 +13,7 @@ export default function DragLayer(collect, options = {}) {
     'Expected "collect" provided as the first argument to DragLayer ' +
     'to be a function that collects props to inject into the component. ',
     'Instead, received %s. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drag-layer.html',
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html',
     collect
   );
   invariant(
@@ -21,7 +21,7 @@ export default function DragLayer(collect, options = {}) {
     'Expected "options" provided as the second argument to DragLayer to be ' +
     'a plain object when specified. ' +
     'Instead, received %s. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drag-layer.html',
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html',
     options
   );
 
@@ -59,7 +59,7 @@ export default function DragLayer(collect, options = {}) {
           typeof this.manager === 'object',
           'Could not find the drag and drop manager in the context of %s. ' +
           'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-          'Read more: http://gaearon.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
+          'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
           displayName,
           displayName
         );

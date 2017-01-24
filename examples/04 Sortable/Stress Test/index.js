@@ -19,7 +19,7 @@ export default class SortableStressTest extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/04%20Sortable/Stress%20Test'>Browse the Source</a></b>
+          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/04%20Sortable/Stress%20Test'>Browse the Source</a></b>
         </p>
         <p>
           How many items can React DnD handle at the same time?
