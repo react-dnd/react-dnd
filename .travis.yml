@@ -1,8 +1,13 @@
 language: node_js
 node_js:
-  - "iojs-2"
-script:
-  - npm run lint
-  - npm run build
-before_install:
-  - npm install -g npm@3.x
+  - "4"
+  - "6"
+  - "node"
+cache:
+  yarn: true
+  directories:
+    - node_modules
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/892f1bce89afd33af303

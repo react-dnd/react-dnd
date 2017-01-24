@@ -9,12 +9,13 @@
     "publish-site": "./scripts/publishStaticSite.sh",
     "build": "./scripts/build.sh",
     "lint": "eslint .",
-    "test": "karma start",
-    "prepublish": "npm run lint && npm run build"
+    "unit_test": "karma start",
+    "test": "npm run lint && npm run build && npm run unit_test",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-dnd.git"
+    "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "keywords": [
     "react",
@@ -34,9 +35,9 @@
   "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaearon/react-dnd/issues"
+    "url": "https://github.com/react-dnd/react-dnd/issues"
   },
-  "homepage": "https://github.com/gaearon/react-dnd",
+  "homepage": "https://github.com/react-dnd/react-dnd",
   "dependencies": {
     "disposables": "^1.0.1",
     "dnd-core": "^2.0.1",
