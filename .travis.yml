@@ -7,7 +7,3 @@ cache:
   yarn: true
   directories:
     - node_modules
-notifications:
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/892f1bce89afd33af303
