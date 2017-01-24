@@ -37,6 +37,9 @@
     "hoc"
   ],
   "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "contributors": [
+    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/react-dnd/react-dnd/issues"
