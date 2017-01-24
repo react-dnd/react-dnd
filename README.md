@@ -1,6 +1,8 @@
 React *DnD*
 =========
 
+[![Join the chat at https://gitter.im/react-dnd/react-dnd](https://badges.gitter.im/react-dnd/react-dnd.svg)](https://gitter.im/react-dnd/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Drag and Drop for React.
 
 See the docs, tutorials and examples on the website:
