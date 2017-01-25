@@ -59,11 +59,13 @@ export default class Container extends Component {
     return (
       <div style={style}>
         {cards.map((card, i) => (
-          <Card key={card.id}
-                index={i}
-                id={card.id}
-                text={card.text}
-                moveCard={this.moveCard} />
+          <Card
+            key={card.id}
+            index={i}
+            id={card.id}
+            text={card.text}
+            moveCard={this.moveCard}
+          />
         ))}
       </div>
     );

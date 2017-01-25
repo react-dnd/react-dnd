@@ -33,12 +33,14 @@ export default class Knight extends Component {
   render() {
     const { connectDragSource, isDragging } = this.props;
     return connectDragSource(
-      <div style={{
-        fontSize: 40,
-        fontWeight: 'bold',
-        cursor: 'move',
-        opacity: isDragging ? 0.5 : 1
-      }}>
+      <div
+        style={{
+          fontSize: 40,
+          fontWeight: 'bold',
+          cursor: 'move',
+          opacity: isDragging ? 0.5 : 1
+        }}
+      >
         ♘
       </div>
     );

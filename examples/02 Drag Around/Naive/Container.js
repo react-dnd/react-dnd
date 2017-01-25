@@ -62,11 +62,13 @@ export default class Container extends Component {
         {Object.keys(boxes).map((key) => {
           const { left, top, title } = boxes[key];
           return (
-            <Box key={key}
-                 id={key}
-                 left={left}
-                 top={top}
-                 hideSourceOnDrag={hideSourceOnDrag}>
+            <Box
+              key={key}
+              id={key}
+              left={left}
+              top={top}
+              hideSourceOnDrag={hideSourceOnDrag}
+            >
               {title}
             </Box>
           );

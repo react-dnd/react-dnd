@@ -82,11 +82,13 @@ export default class Container extends Component {
     return connectDropTarget(
       <div style={style}>
         {cards.map(card => (
-          <Card key={card.id}
-                id={card.id}
-                text={card.text}
-                moveCard={this.moveCard}
-                findCard={this.findCard} />
+          <Card
+            key={card.id}
+            id={card.id}
+            text={card.text}
+            moveCard={this.moveCard}
+            findCard={this.findCard}
+          />
         ))}
       </div>
     );

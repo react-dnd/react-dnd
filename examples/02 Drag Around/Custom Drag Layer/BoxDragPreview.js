@@ -43,8 +43,7 @@ export default class BoxDragPreview extends Component {
 
     return (
       <div style={styles}>
-        <Box title={title}
-             yellow={tickTock} />
+        <Box title={title} yellow={tickTock} />
       </div>
     );
   }

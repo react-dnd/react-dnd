@@ -61,9 +61,7 @@ export default class Container extends Component {
 
   renderBox(item, key) {
     return (
-      <DraggableBox key={key}
-                    id={key}
-                    {...item} />
+      <DraggableBox key={key} id={key} {...item} />
     );
   }
 

@@ -35,16 +35,18 @@ export default class BoardSquare extends Component {
 
   renderOverlay(color) {
     return (
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        height: '100%',
-        width: '100%',
-        zIndex: 1,
-        opacity: 0.5,
-        backgroundColor: color,
-      }} />
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          height: '100%',
+          width: '100%',
+          zIndex: 1,
+          opacity: 0.5,
+          backgroundColor: color,
+        }}
+      />
     );
   }
 
@@ -53,11 +55,13 @@ export default class BoardSquare extends Component {
     const black = (x + y) % 2 === 1;
 
     return connectDropTarget(
-      <div style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%'
-      }}>
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '100%'
+        }}
+      >
         <Square black={black}>
           {children}
         </Square>

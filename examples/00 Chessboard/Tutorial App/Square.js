@@ -12,12 +12,14 @@ export default class Square extends Component {
     const color = black ? 'white' : 'black';
 
     return (
-      <div style={{
-        color,
-        backgroundColor,
-        width: '100%',
-        height: '100%'
-      }}>
+      <div
+        style={{
+          color,
+          backgroundColor,
+          width: '100%',
+          height: '100%'
+        }}
+      >
         {this.props.children}
       </div>
     );
