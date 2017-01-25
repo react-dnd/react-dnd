@@ -14,7 +14,7 @@ There are several ways this error might have happened:
 
 3. You are using a component in an isolated environment like a unit test. See the second point for instructions to stub it.
 
-4. The context is lost for some other reason. [Please file an issue](https://github.com/gaearon/react-dnd/issues/new) if you can reproduce it on a small project.
+4. The context is lost for some other reason. [Please file an issue](https://github.com/react-dnd/react-dnd/issues/new) if you can reproduce it on a small project.
 
 #### Wrap top-level component with a `DragDropContext`
 
@@ -30,7 +30,7 @@ This problem may also appear if you have a duplicate React installation in your 
 
 ### React DnD does not provide a default export
 
-React DnD does not provide a [default export](http://www.2ality.com/2014/09/es6-modules-final.html).  
+React DnD does not provide a [default export](http://www.2ality.com/2014/09/es6-modules-final.html).
 Mind the difference:
 
 -------------------

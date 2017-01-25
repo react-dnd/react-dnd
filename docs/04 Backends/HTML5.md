@@ -13,7 +13,7 @@ The HTML5 backend comes in a separate package:
 npm install --save react-dnd-html5-backend
 ```
 
-While we suggest you to use NPM, you can find the precompiled UMD build in the `dist` folder available on the [latest](https://github.com/gaearon/react-dnd-html5-backend/tree/latest/dist) branch as well as in every [tagged release](https://github.com/gaearon/react-dnd-html5-backend/releases). This is where you can point Bower if that’s what you use.
+While we suggest you to use NPM, you can find the precompiled UMD build in the `dist` folder available on the [latest](https://github.com/react-dnd/react-dnd-html5-backend/tree/latest/dist) branch as well as in every [tagged release](https://github.com/react-dnd/react-dnd-html5-backend/releases). This is where you can point Bower if that’s what you use.
 
 ### Extras
 
