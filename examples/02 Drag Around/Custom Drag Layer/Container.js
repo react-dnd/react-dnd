@@ -1,16 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import update from 'react/lib/update';
+import { DropTarget } from 'react-dnd';
+import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import DraggableBox from './DraggableBox';
 import snapToGrid from './snapToGrid';
-import { DropTarget } from 'react-dnd';
 
 const styles = {
   width: 300,
   height: 300,
   border: '1px solid black',
-  position: 'relative'
+  position: 'relative',
 };
 
 const boxTarget = {
@@ -25,16 +25,16 @@ const boxTarget = {
     }
 
     component.moveBox(item.id, left, top);
-  }
+  },
 };
 
 @DropTarget(ItemTypes.BOX, boxTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+  connectDropTarget: connect.dropTarget(),
 }))
 export default class Container extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
-    snapToGrid: PropTypes.bool.isRequired
+    snapToGrid: PropTypes.bool.isRequired,
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -43,9 +43,9 @@ export default class Container extends Component {
     super(props);
     this.state = {
       boxes: {
-        'a': { top: 20, left: 80, title: 'Drag me around' },
-        'b': { top: 180, left: 20, title: 'Drag me too' }
-      }
+        a: { top: 20, left: 80, title: 'Drag me around' },
+        b: { top: 180, left: 20, title: 'Drag me too' },
+      },
     };
   }
 
@@ -53,20 +53,15 @@ export default class Container extends Component {
     this.setState(update(this.state, {
       boxes: {
         [id]: {
-          $merge: {
-            left: left,
-            top: top
-          }
-        }
-      }
+          $merge: { left, top },
+        },
+      },
     }));
   }
 
   renderBox(item, key) {
     return (
-      <DraggableBox key={key}
-                    id={key}
-                    {...item} />
+      <DraggableBox key={key} id={key} {...item} />
     );
   }
 
@@ -80,7 +75,7 @@ export default class Container extends Component {
           .keys(boxes)
           .map(key => this.renderBox(boxes[key], key))
         }
-      </div>
+      </div>,
     );
   }
 }

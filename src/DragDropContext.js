@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
-import checkDecoratorArguments from './utils/checkDecoratorArguments';
 import hoistStatics from 'hoist-non-react-statics';
+import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
 export default function DragDropContext(backendOrModule) {
-  checkDecoratorArguments('DragDropContext', 'backend', ...arguments);
+  checkDecoratorArguments('DragDropContext', 'backend', ...arguments); // eslint-disable-line prefer-rest-params
 
   // Auto-detect ES6 default export for people still using ES5
   let backend;
@@ -18,11 +18,11 @@ export default function DragDropContext(backendOrModule) {
   invariant(
     typeof backend === 'function',
     'Expected the backend to be a function or an ES6 module exporting a default function. ' +
-    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html'
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html',
   );
 
   const childContext = {
-    dragDropManager: new DragDropManager(backend)
+    dragDropManager: new DragDropManager(backend),
   };
 
   return function decorateContext(DecoratedComponent) {
@@ -37,14 +37,14 @@ export default function DragDropContext(backendOrModule) {
       static displayName = `DragDropContext(${displayName})`;
 
       static childContextTypes = {
-        dragDropManager: PropTypes.object.isRequired
+        dragDropManager: PropTypes.object.isRequired,
       };
 
       getDecoratedComponentInstance() {
         invariant(
           this.child,
           'In order to access an instance of the decorated component it can ' +
-          'not be a stateless component.'
+          'not be a stateless component.',
         );
         return this.child;
       }
@@ -59,8 +59,10 @@ export default function DragDropContext(backendOrModule) {
 
       render() {
         return (
-          <DecoratedComponent {...this.props}
-                              ref={child => this.child = child} />
+          <DecoratedComponent
+            {...this.props}
+            ref={child => (this.child = child)}
+          />
         );
       }
     }
