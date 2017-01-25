@@ -58,7 +58,7 @@ export default class Container extends Component {
 
   render() {
     const { hideSourceOnDrag, connectDropTarget } = this.props;
-    const { boxes} = this.state;
+    const { boxes } = this.state;
 
     return connectDropTarget(
       <div style={styles}>
