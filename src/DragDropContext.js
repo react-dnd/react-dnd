@@ -4,8 +4,10 @@ import invariant from 'invariant';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
 import hoistStatics from 'hoist-non-react-statics';
 
-export default function DragDropContext(backendOrModule) {
+export default function DragDropContext(backendOrModule, options = {}) {
   checkDecoratorArguments('DragDropContext', 'backend', ...arguments);
+
+  const { withRef = false } = options;
 
   // Auto-detect ES6 default export for people still using ES5
   let backend;
@@ -42,9 +44,9 @@ export default function DragDropContext(backendOrModule) {
 
       getDecoratedComponentInstance() {
         invariant(
-          this.child,
-          'In order to access an instance of the decorated component it can ' +
-          'not be a stateless component.'
+          withRef,
+          'To access the wrapped instance, you need to specify { withRef: true } as the second ' +
+          'argument of the DragDropContext() call. The decorated component can not be stateless.'
         );
         return this.child;
       }
@@ -58,9 +60,12 @@ export default function DragDropContext(backendOrModule) {
       }
 
       render() {
+        const additionalProps = {};
+        if (withRef) {
+          additionalProps.ref = child => (this.child = child);
+        }
         return (
-          <DecoratedComponent {...this.props}
-                              ref={child => this.child = child} />
+          <DecoratedComponent {...this.props} {...additionalProps} />
         );
       }
     }
