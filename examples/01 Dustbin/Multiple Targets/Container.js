@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import update from 'react/lib/update';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
-import update from 'react/lib/update';
 
 @DragDropContext(HTML5Backend)
 export default class Container extends Component {

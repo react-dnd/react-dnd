@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import BoardSquare from './BoardSquare';
-import Knight from './Knight';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import BoardSquare from './BoardSquare';
+import Knight from './Knight';
 import './Board.less';
 
 @DragDropContext(HTML5Backend)

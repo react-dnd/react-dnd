@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
-import ItemTypes from './ItemTypes';
-import Box from './Box';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import ItemTypes from './ItemTypes';
+import Box from './Box';
 
 const styles = {
   width: 300,

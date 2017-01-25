@@ -1,7 +1,7 @@
 import React from 'react';
 import TestUtils from 'react/lib/ReactTestUtils';
-import wrapInTestContext from '../../../shared/wrapInTestContext';
 import expect from 'expect';
+import wrapInTestContext from '../../../shared/wrapInTestContext';
 import Box from '../Box';
 
 describe('Box', () => {
