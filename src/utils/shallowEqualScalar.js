@@ -17,7 +17,7 @@ export default function shallowEqualScalar(objA, objB) {
 
   // Test for A's keys different from B.
   const hasOwn = Object.prototype.hasOwnProperty;
-  for (let i = 0; i < keysA.length; i++) {
+  for (let i = 0; i < keysA.length; i += 1) {
     if (!hasOwn.call(objB, keysA[i])) {
       return false;
     }

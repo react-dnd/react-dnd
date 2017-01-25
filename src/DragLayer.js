@@ -1,20 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import shallowEqual from './utils/shallowEqual';
-import shallowEqualScalar from './utils/shallowEqualScalar';
+import hoistStatics from 'hoist-non-react-statics';
 import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';
+import shallowEqual from './utils/shallowEqual';
+import shallowEqualScalar from './utils/shallowEqualScalar';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
-import hoistStatics from 'hoist-non-react-statics';
 
 export default function DragLayer(collect, options = {}) {
-  checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments);
+  checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments); // eslint-disable-line prefer-rest-params
   invariant(
     typeof collect === 'function',
     'Expected "collect" provided as the first argument to DragLayer ' +
     'to be a function that collects props to inject into the component. ',
     'Instead, received %s. ' +
     'Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html',
-    collect
+    collect,
   );
   invariant(
     isPlainObject(options),
@@ -22,7 +22,7 @@ export default function DragLayer(collect, options = {}) {
     'a plain object when specified. ' +
     'Instead, received %s. ' +
     'Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html',
-    options
+    options,
   );
 
   return function decorateLayer(DecoratedComponent) {
@@ -38,21 +38,21 @@ export default function DragLayer(collect, options = {}) {
       static displayName = `DragLayer(${displayName})`;
 
       static contextTypes = {
-        dragDropManager: PropTypes.object.isRequired
+        dragDropManager: PropTypes.object.isRequired,
       }
 
       getDecoratedComponentInstance() {
         invariant(
           this.child,
           'In order to access an instance of the decorated component it can ' +
-          'not be a stateless component.'
+          'not be a stateless component.',
         );
         return this.child;
       }
 
       shouldComponentUpdate(nextProps, nextState) {
         return !arePropsEqual(nextProps, this.props) ||
-               !shallowEqual(nextState, this.state);
+          !shallowEqual(nextState, this.state);
       }
 
       constructor(props, context) {
@@ -66,7 +66,7 @@ export default function DragLayer(collect, options = {}) {
           'Make sure to wrap the top-level component of your app with DragDropContext. ' +
           'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
           displayName,
-          displayName
+          displayName,
         );
 
         this.state = this.getCurrentState();
@@ -77,10 +77,10 @@ export default function DragLayer(collect, options = {}) {
 
         const monitor = this.manager.getMonitor();
         this.unsubscribeFromOffsetChange = monitor.subscribeToOffsetChange(
-          this.handleChange
+          this.handleChange,
         );
         this.unsubscribeFromStateChange = monitor.subscribeToStateChange(
-          this.handleChange
+          this.handleChange,
         );
 
         this.handleChange();
@@ -111,9 +111,11 @@ export default function DragLayer(collect, options = {}) {
 
       render() {
         return (
-          <DecoratedComponent {...this.props}
-                              {...this.state}
-                              ref={child => this.child = child} />
+          <DecoratedComponent
+            {...this.props}
+            {...this.state}
+            ref={child => (this.child = child)}
+          />
         );
       }
     }
