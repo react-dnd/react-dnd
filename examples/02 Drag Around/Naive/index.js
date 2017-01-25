@@ -44,8 +44,9 @@ export default class DragAroundNaive extends Component {
         </p>
         <Container hideSourceOnDrag={hideSourceOnDrag} />
         <p>
-          <label>
-            <input type='checkbox'
+          <label htmlFor='hideSourceOnDrag'>
+            <input id='hideSourceOnDrag'
+                   type='checkbox'
                    checked={hideSourceOnDrag}
                    onChange={this.handleHideSourceClick} />
             <small>Hide the source item while dragging</small>
