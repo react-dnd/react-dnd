@@ -6,7 +6,7 @@ export default class NestingDropTargets extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/03%20Nesting/Drop%20Targets'>Browse the Source</a></b>
+          <b><a href="https://github.com/react-dnd/react-dnd/tree/master/examples/03%20Nesting/Drop%20Targets">Browse the Source</a></b>
         </p>
         <p>
           Drop targets can, too, be nested in one another.

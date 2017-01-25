@@ -22,7 +22,7 @@ export default class DragAroundNaive extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/02%20Drag%20Around/Naive'>Browse the Source</a></b>
+          <b><a href="https://github.com/react-dnd/react-dnd/tree/master/examples/02%20Drag%20Around/Naive">Browse the Source</a></b>
         </p>
         <p>
           This example naively relies on browser drag and drop implementation without much custom logic.
@@ -35,19 +35,19 @@ export default class DragAroundNaive extends Component {
         <p>
           While this approach works for simple cases, it flickers on drop.
           This happens because the browser removes the drag preview before we have a chance to make the dragged item visible.
-          This might not be a problem if you dim the original item instead of hiding it, but it's clearly visible otherwise.
+          This might not be a problem if you dim the original item instead of hiding it, but it&apos;s clearly visible otherwise.
         </p>
         <p>
           If we want to add custom logic such as snapping to grid or bounds checking, we can only do this on drop.
           There is no way for us to control what happens to dragged preview once the browser has drawn it.
-          Check out the <a href='examples-drag-around-custom-drag-layer.html'>custom rendering example</a> if you'd rather trade more control for some more work.
+          Check out the <a href="examples-drag-around-custom-drag-layer.html">custom rendering example</a> if you&apos;d rather trade more control for some more work.
         </p>
         <Container hideSourceOnDrag={hideSourceOnDrag} />
         <p>
-          <label htmlFor='hideSourceOnDrag'>
+          <label htmlFor="hideSourceOnDrag">
             <input
-              id='hideSourceOnDrag'
-              type='checkbox'
+              id="hideSourceOnDrag"
+              type="checkbox"
               checked={hideSourceOnDrag}
               onChange={this.handleHideSourceClick}
             />

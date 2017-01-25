@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
-import { ItemTypes } from './Constants';
+import ItemTypes from './ItemTypes';
 
 const squareTarget = {
   canDrop(props) {

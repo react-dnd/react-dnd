@@ -12,17 +12,11 @@
   },
   "rules": {
     "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "react/jsx-filename-extension": "off",
     "react/sort-comp": "off",
-    "react/no-multi-comp": "off",
     "class-methods-use-this": "off",
     "no-plusplus": "off",
-    "id-length": "off",
-    "new-cap": "off",
-    "eol-last": "off",
-    "jsx-quotes": "off",
     "consistent-return": "off"
   }
 }

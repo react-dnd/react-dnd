@@ -15,7 +15,7 @@ describe('Box', () => {
     // Render with one set of props and test
     let root = TestUtils.renderIntoDocument(
       <OriginalBox
-        name='test'
+        name="test"
         connectDragSource={identity}
         isDragging={false}
       />,
@@ -26,7 +26,7 @@ describe('Box', () => {
     // Render with another set of props and test
     root = TestUtils.renderIntoDocument(
       <OriginalBox
-        name='test'
+        name="test"
         connectDragSource={identity}
         isDragging
       />,
@@ -38,7 +38,7 @@ describe('Box', () => {
   it('can be tested with the testing backend', () => {
     // Render with the testing backend
     const BoxContext = wrapInTestContext(Box);
-    const root = TestUtils.renderIntoDocument(<BoxContext name='test' />);
+    const root = TestUtils.renderIntoDocument(<BoxContext name="test" />);
 
     // Obtain a reference to the backend
     const backend = root.getManager().getBackend();
