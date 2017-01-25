@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Container from './Container';
-import CustomDragLayer from './CustomDragLayer';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Container from './Container';
+import CustomDragLayer from './CustomDragLayer';
 
 @DragDropContext(HTML5Backend)
 export default class DragAroundCustomDragLayer extends Component {
@@ -14,7 +14,7 @@ export default class DragAroundCustomDragLayer extends Component {
 
     this.state = {
       snapToGridAfterDrop: false,
-      snapToGridWhileDragging: false
+      snapToGridWhileDragging: false,
     };
   }
 
@@ -24,7 +24,7 @@ export default class DragAroundCustomDragLayer extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/02%20Drag%20Around/Custom%20Drag%20Layer'>Browse the Source</a></b>
+          <b><a href="https://github.com/react-dnd/react-dnd/tree/master/examples/02%20Drag%20Around/Custom%20Drag%20Layer">Browse the Source</a></b>
         </p>
         <p>
           The browser APIs provide no way to change the drag preview or its behavior once drag has started.
@@ -33,10 +33,10 @@ export default class DragAroundCustomDragLayer extends Component {
         </p>
         <p>
           We can, however, customize behavior a great deal if we feed the browser an empty image as drag preview.
-          This library provides a <code>DragLayer</code> that you can use to implement a fixed layer on top of your app where you'd draw a custom drag preview component.
+          This library provides a <code>DragLayer</code> that you can use to implement a fixed layer on top of your app where you&apos;d draw a custom drag preview component.
         </p>
         <p>
-          Note that we can draw a completely different component on our drag layer if we wish so. It's not just a screenshot.
+          Note that we can draw a completely different component on our drag layer if we wish so. It&apos;s not just a screenshot.
         </p>
         <p>
           With this approach, we miss out on default “return” animation when dropping outside the container.
@@ -45,17 +45,23 @@ export default class DragAroundCustomDragLayer extends Component {
         <Container snapToGrid={snapToGridAfterDrop} />
         <CustomDragLayer snapToGrid={snapToGridWhileDragging} />
         <p>
-          <label>
-            <input type='checkbox'
-                   checked={snapToGridWhileDragging}
-                   onChange={this.handleSnapToGridWhileDraggingChange} />
+          <label htmlFor="snapToGridWhileDragging">
+            <input
+              id="snapToGridWhileDragging"
+              type="checkbox"
+              checked={snapToGridWhileDragging}
+              onChange={this.handleSnapToGridWhileDraggingChange}
+            />
             <small>Snap to grid while dragging</small>
           </label>
           <br />
-          <label>
-            <input type='checkbox'
-                   checked={snapToGridAfterDrop}
-                   onChange={this.handleSnapToGridAfterDropChange} />
+          <label htmlFor="snapToGridAfterDrop">
+            <input
+              id="snapToGridAfterDrop"
+              type="checkbox"
+              checked={snapToGridAfterDrop}
+              onChange={this.handleSnapToGridAfterDropChange}
+            />
             <small>Snap to grid after drop</small>
           </label>
         </p>
@@ -65,13 +71,13 @@ export default class DragAroundCustomDragLayer extends Component {
 
   handleSnapToGridAfterDropChange() {
     this.setState({
-      snapToGridAfterDrop: !this.state.snapToGridAfterDrop
+      snapToGridAfterDrop: !this.state.snapToGridAfterDrop,
     });
   }
 
   handleSnapToGridWhileDraggingChange() {
     this.setState({
-      snapToGridWhileDragging: !this.state.snapToGridWhileDragging
+      snapToGridWhileDragging: !this.state.snapToGridWhileDragging,
     });
   }
 }

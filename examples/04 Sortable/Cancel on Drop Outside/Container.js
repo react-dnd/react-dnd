@@ -1,26 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
-import Card from './Card';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Card from './Card';
 import ItemTypes from './ItemTypes';
 
 const style = {
-  width: 400
+  width: 400,
 };
 
 const cardTarget = {
   drop() {
-  }
+  },
 };
 
 @DragDropContext(HTML5Backend)
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+  connectDropTarget: connect.dropTarget(),
 }))
 export default class Container extends Component {
   static propTypes = {
-    connectDropTarget: PropTypes.func.isRequired
+    connectDropTarget: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -30,26 +30,26 @@ export default class Container extends Component {
     this.state = {
       cards: [{
         id: 1,
-        text: 'Write a cool JS library'
+        text: 'Write a cool JS library',
       }, {
         id: 2,
-        text: 'Make it generic enough'
+        text: 'Make it generic enough',
       }, {
         id: 3,
-        text: 'Write README'
+        text: 'Write README',
       }, {
         id: 4,
-        text: 'Create some examples'
+        text: 'Create some examples',
       }, {
         id: 5,
-        text: 'Spam in Twitter and IRC to promote it'
+        text: 'Spam in Twitter and IRC to promote it',
       }, {
         id: 6,
-        text: '???'
+        text: '???',
       }, {
         id: 7,
-        text: 'PROFIT'
-      }]
+        text: 'PROFIT',
+      }],
     };
   }
 
@@ -59,9 +59,9 @@ export default class Container extends Component {
       cards: {
         $splice: [
           [index, 1],
-          [atIndex, 0, card]
-        ]
-      }
+          [atIndex, 0, card],
+        ],
+      },
     }));
   }
 
@@ -71,7 +71,7 @@ export default class Container extends Component {
 
     return {
       card,
-      index: cards.indexOf(card)
+      index: cards.indexOf(card),
     };
   }
 
@@ -81,16 +81,16 @@ export default class Container extends Component {
 
     return connectDropTarget(
       <div style={style}>
-        {cards.map(card => {
-          return (
-            <Card key={card.id}
-                  id={card.id}
-                  text={card.text}
-                  moveCard={this.moveCard}
-                  findCard={this.findCard} />
-          );
-        })}
-      </div>
+        {cards.map(card => (
+          <Card
+            key={card.id}
+            id={card.id}
+            text={card.text}
+            moveCard={this.moveCard}
+            findCard={this.findCard}
+          />
+        ))}
+      </div>,
     );
   }
 }

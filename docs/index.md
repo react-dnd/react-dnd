@@ -195,8 +195,7 @@ React DnD gives you a set of powerful primitives, but it does not contain any re
 
 ## Support and Contributions
 
-Issues and potential improvements are discussed on [Github](https://github.com/gaearon/react-dnd/issues).  
-The [Gitter room](https://gitter.im/gaearon/react-dnd) is another good place to get support.
+Issues and potential improvements are discussed on [Github](https://github.com/react-dnd/react-dnd/issues).
 
 ## Thanks
 

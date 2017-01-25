@@ -4,24 +4,24 @@ import isPlainObject from 'lodash/isPlainObject';
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop'];
 
 export default function createTargetFactory(spec) {
-  Object.keys(spec).forEach(key => {
+  Object.keys(spec).forEach((key) => {
     invariant(
       ALLOWED_SPEC_METHODS.indexOf(key) > -1,
       'Expected the drop target specification to only have ' +
       'some of the following keys: %s. ' +
       'Instead received a specification with an unexpected "%s" key. ' +
-      'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
+      'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
       ALLOWED_SPEC_METHODS.join(', '),
-      key
+      key,
     );
     invariant(
       typeof spec[key] === 'function',
       'Expected %s in the drop target specification to be a function. ' +
       'Instead received a specification with %s: %s. ' +
-      'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
+      'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
       key,
       key,
-      spec[key]
+      spec[key],
     );
   });
 
@@ -62,7 +62,7 @@ export default function createTargetFactory(spec) {
 
     drop() {
       if (!spec.drop) {
-        return;
+        return undefined;
       }
 
       const dropResult = spec.drop(this.props, this.monitor, this.component);
@@ -72,8 +72,8 @@ export default function createTargetFactory(spec) {
           isPlainObject(dropResult),
           'drop() must either return undefined, or an object that represents the drop result. ' +
           'Instead received %s. ' +
-          'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
-          dropResult
+          'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+          dropResult,
         );
       }
       return dropResult;
