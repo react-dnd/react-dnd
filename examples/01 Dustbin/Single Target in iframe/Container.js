@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Frame from 'react-frame-component';
 import Dustbin from './Dustbin';
 import Box from './Box';
-import Frame from 'react-frame-component';
 
 // Don't use the decorator, embed the DnD context within the iframe
 export default class Container extends Component {
