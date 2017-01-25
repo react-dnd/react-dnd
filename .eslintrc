@@ -15,7 +15,6 @@
     "react/react-in-jsx-scope": 2,
     "react/jsx-filename-extension": "off",
     "react/sort-comp": "off",
-    "class-methods-use-this": "off",
-    "consistent-return": "off"
+    "class-methods-use-this": "off"
   }
 }

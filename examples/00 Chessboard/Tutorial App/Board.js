@@ -28,9 +28,8 @@ export default class Board extends Component {
 
   renderPiece(x, y) {
     const [knightX, knightY] = this.props.knightPosition;
-    if (x === knightX && y === knightY) {
-      return <Knight />;
-    }
+    const isKnightHere = x === knightX && y === knightY;
+    return isKnightHere ? <Knight /> : null;
   }
 
   render() {

@@ -25,7 +25,7 @@ function wrapHookToRecognizeElement(hook) {
     if (!isValidElement(elementOrNode)) {
       const node = elementOrNode;
       hook(node, options);
-      return;
+      return undefined;
     }
 
     // If passed a ReactElement, clone it and attach this function as a ref.
