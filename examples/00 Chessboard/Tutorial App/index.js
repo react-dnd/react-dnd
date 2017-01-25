@@ -29,7 +29,7 @@ export default class ChessboardTutorialApp extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/00%20Chessboard/Tutorial%20App'>Browse the Source</a></b>
+          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/00%20Chessboard/Tutorial%20App'>Browse the Source</a></b>
         </p>
         <p>
           This is a sample app you'll build as you work through the <a href='docs-tutorial.html'>tutorial</a>.
