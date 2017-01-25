@@ -22,7 +22,7 @@ export default function createSourceConnector(backend) {
       disconnectCurrentDragSource = backend.connectDragSource(
         currentHandlerId,
         currentDragSourceNode,
-        currentDragSourceOptions
+        currentDragSourceOptions,
       );
     }
   }
@@ -37,7 +37,7 @@ export default function createSourceConnector(backend) {
       disconnectCurrentDragPreview = backend.connectDragPreview(
         currentHandlerId,
         currentDragPreviewNode,
-        currentDragPreviewOptions
+        currentDragPreviewOptions,
       );
     }
   }
@@ -79,11 +79,11 @@ export default function createSourceConnector(backend) {
       currentDragPreviewOptions = options;
 
       reconnectDragPreview();
-    }
+    },
   });
 
   return {
     receiveHandlerId,
-    hooks
+    hooks,
   };
 }

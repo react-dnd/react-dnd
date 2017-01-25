@@ -6,7 +6,7 @@ export default class NestingDragSources extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/03%20Nesting/Drag%20Sources'>Browse the Source</a></b>
+          <b><a href="https://github.com/react-dnd/react-dnd/tree/master/examples/03%20Nesting/Drag%20Sources">Browse the Source</a></b>
         </p>
         <p>
           You can nest the drag sources in one another.

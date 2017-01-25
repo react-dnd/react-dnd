@@ -13,9 +13,9 @@ export default class Container extends Component {
           <Dustbin />
         </div>
         <div style={{ overflow: 'hidden', clear: 'both' }}>
-          <Box name='Glass' />
-          <Box name='Banana' />
-          <Box name='Paper' />
+          <Box name="Glass" />
+          <Box name="Banana" />
+          <Box name="Paper" />
         </div>
       </div>
     );
