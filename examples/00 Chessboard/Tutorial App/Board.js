@@ -40,7 +40,7 @@ export default class Board extends Component {
     }
 
     return (
-      <div className='Board'>
+      <div className="Board">
         {squares}
       </div>
     );
