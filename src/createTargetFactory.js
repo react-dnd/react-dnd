@@ -10,7 +10,7 @@ export default function createTargetFactory(spec) {
       'Expected the drop target specification to only have ' +
       'some of the following keys: %s. ' +
       'Instead received a specification with an unexpected "%s" key. ' +
-      'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
+      'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
       ALLOWED_SPEC_METHODS.join(', '),
       key
     );
@@ -18,7 +18,7 @@ export default function createTargetFactory(spec) {
       typeof spec[key] === 'function',
       'Expected %s in the drop target specification to be a function. ' +
       'Instead received a specification with %s: %s. ' +
-      'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
+      'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
       key,
       key,
       spec[key]
@@ -72,7 +72,7 @@ export default function createTargetFactory(spec) {
           isPlainObject(dropResult),
           'drop() must either return undefined, or an object that represents the drop result. ' +
           'Instead received %s. ' +
-          'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
+          'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
           dropResult
         );
       }

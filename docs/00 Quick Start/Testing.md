@@ -83,7 +83,7 @@ it('can be tested independently', () => {
 
 If you want to test the whole interaction, and not just the individual component rendering, you should use the [test backend](docs-test-backend.html). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) just fine.
 
-This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/gaearon/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/gaearon/dnd-core/tree/v1.1.0/src/__tests__).
+This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/react-dnd/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/react-dnd/dnd-core/tree/v1.1.0/src/__tests__).
 
 First, you need to install the test backend:
 
