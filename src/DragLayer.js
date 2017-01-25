@@ -45,7 +45,7 @@ export default function DragLayer(collect, options = {}) {
         invariant(
           this.child,
           'In order to access an instance of the decorated component it can ' +
-          'not be a stateless component.'
+          'not be a stateless component.',
         );
         return this.child;
       }
@@ -111,10 +111,10 @@ export default function DragLayer(collect, options = {}) {
 
       render() {
         return (
-          <DecoratedComponent 
+          <DecoratedComponent
             {...this.props}
             {...this.state}
-            ref={child => (this.child = child)} 
+            ref={child => (this.child = child)}
           />
         );
       }
