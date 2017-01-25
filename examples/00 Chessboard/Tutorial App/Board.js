@@ -35,7 +35,7 @@ export default class Board extends Component {
 
   render() {
     const squares = [];
-    for (let i = 0; i < 64; i++) {
+    for (let i = 0; i < 64; i += 1) {
       squares.push(this.renderSquare(i));
     }
 

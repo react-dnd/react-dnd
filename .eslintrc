@@ -16,7 +16,6 @@
     "react/jsx-filename-extension": "off",
     "react/sort-comp": "off",
     "class-methods-use-this": "off",
-    "no-plusplus": "off",
     "consistent-return": "off"
   }
 }
