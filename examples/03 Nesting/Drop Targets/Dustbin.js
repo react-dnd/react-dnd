@@ -68,7 +68,7 @@ export default class Dustbin extends Component {
     return connectDropTarget(
       <div style={getStyle(backgroundColor)}>
         {text}
-        <br/>
+        <br />
         {hasDropped &&
           <span>dropped {hasDroppedOnChild && ' on child'}</span>
         }
