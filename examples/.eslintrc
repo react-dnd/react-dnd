@@ -6,7 +6,6 @@
         "import/prefer-default-export": "off",
         "max-len": "off",
         "no-param-reassign": "off",
-        "object-curly-spacing": "off",
         "object-shorthand": "off",
         "prefer-template": "off",
         "quote-props": "off",

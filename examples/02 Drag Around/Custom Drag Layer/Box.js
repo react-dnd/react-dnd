@@ -20,7 +20,7 @@ export default class Box extends Component {
     const backgroundColor = yellow ? 'yellow' : 'white';
 
     return (
-      <div style={{...styles, backgroundColor }}>
+      <div style={{ ...styles, backgroundColor }}>
         {title}
       </div>
     );
