@@ -8,7 +8,7 @@ var fs = require('fs');
 var path = require('path');
 var glob = require('glob');
 var Constants = require('../site/Constants');
-var renderPath = require('../__site_prerender__/renderPath');
+var renderPath = require('../__site_prerender__/renderPath').default;
 var flatten = require('lodash/flatten');
 
 var sitePath = path.join(__dirname, '../__site__');
