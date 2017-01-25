@@ -5,8 +5,13 @@ import Dustbin from './Dustbin';
 import Box from './Box';
 import Frame from 'react-frame-component';
 
+// Don't use the decorator, embed the DnD context within the iframe
 export default class Container extends Component {
   render() {
+    // The react-frame-component will pass the iframe's 'window' global as a context value
+    // to the DragDropContext provider. You could also directly inject it in via a prop.
+    // If neither the prop or the context value for 'window' are present, the DragDropContextProvider
+    // will just use the global window.
     return (
       <Frame style={{ width: '100%', height: '100%' }}>
         <DragDropContextProvider backend={HTML5Backend}>

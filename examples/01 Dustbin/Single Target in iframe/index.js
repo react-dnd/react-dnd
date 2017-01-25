@@ -9,12 +9,14 @@ export default class DustbinSingleTargetIframe extends Component {
           <b><a href="https://github.com/react-dnd/react-dnd/tree/master/examples/01%20Dustbin/Single%20Target%20in%20iframe">Browse the Source</a></b>
         </p>
         <p>
-          This is the simplest example there is, but in an iframe.
+          This is the same simple example, but nested in an iframe.
         </p>
         <p>
-          Drag the boxes below and drop them into the dustbin.
-          Note that it has a neutral, an active and a hovered state.
-          The dragged item itself changes opacity while dragged.
+          When you are using the react-dnd-html5-backend, you are limited to drag-and-drop within a single iframe.
+        </p>
+        <p>
+          Using react-dnd inside of an iframe requires a slightly different
+          container configuration. Check out the source for more details.
         </p>
         <Container />
       </div>
