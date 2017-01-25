@@ -11,8 +11,6 @@
     "node": true
   },
   "rules": {
-    "react/jsx-uses-react": 2,
-    "react/react-in-jsx-scope": 2,
     "react/jsx-filename-extension": "off",
     "react/sort-comp": "off",
     "class-methods-use-this": "off"
