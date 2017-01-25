@@ -38,14 +38,14 @@ class TargetBox extends Component {
 
     let backgroundColor = '#fff';
     switch (draggingColor) {
-    case Colors.BLUE:
-      backgroundColor = 'lightblue';
-      break;
-    case Colors.YELLOW:
-      backgroundColor = 'lightgoldenrodyellow';
-      break;
-    default:
-      break;
+      case Colors.BLUE:
+        backgroundColor = 'lightblue';
+        break;
+      case Colors.YELLOW:
+        backgroundColor = 'lightgoldenrodyellow';
+        break;
+      default:
+        break;
     }
 
     return connectDropTarget(
@@ -70,8 +70,8 @@ export default class StatefulTargetBox extends Component {
   render() {
     return (
       <TargetBox {...this.props}
-                 lastDroppedColor={this.state.lastDroppedColor}
-                 onDrop={color => this.handleDrop(color)} />
+        lastDroppedColor={this.state.lastDroppedColor}
+        onDrop={color => this.handleDrop(color)} />
     );
   }
 

@@ -14,7 +14,7 @@ const ColorSource = {
   },
 
   beginDrag() {
-    return { };
+    return {};
   }
 };
 
@@ -38,14 +38,14 @@ class SourceBox extends Component {
 
     let backgroundColor;
     switch (color) {
-    case Colors.YELLOW:
-      backgroundColor = 'lightgoldenrodyellow';
-      break;
-    case Colors.BLUE:
-      backgroundColor = 'lightblue';
-      break;
-    default:
-      break;
+      case Colors.YELLOW:
+        backgroundColor = 'lightgoldenrodyellow';
+        break;
+      case Colors.BLUE:
+        backgroundColor = 'lightblue';
+        break;
+      default:
+        break;
     }
 
     return connectDragSource(
@@ -56,8 +56,8 @@ class SourceBox extends Component {
         cursor: forbidDrag ? 'default' : 'move'
       }}>
         <input type='checkbox'
-               checked={forbidDrag}
-               onChange={onToggleForbidDrag} />
+          checked={forbidDrag}
+          onChange={onToggleForbidDrag} />
         <small>Forbid drag</small>
 
         {children}
@@ -77,8 +77,8 @@ export default class StatefulSourceBox extends Component {
   render() {
     return (
       <SourceBox {...this.props}
-                 forbidDrag={this.state.forbidDrag}
-                 onToggleForbidDrag={() => this.handleToggleForbidDrag()} />
+        forbidDrag={this.state.forbidDrag}
+        onToggleForbidDrag={() => this.handleToggleForbidDrag()} />
     );
   }
 

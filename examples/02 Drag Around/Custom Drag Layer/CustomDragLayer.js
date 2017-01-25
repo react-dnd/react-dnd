@@ -64,12 +64,10 @@ export default class CustomDragLayer extends Component {
 
   renderItem(type, item) {
     switch (type) {
-    case ItemTypes.BOX:
-      return (
-        <BoxDragPreview title={item.title} />
-      );
-    default:
-      return null;
+      case ItemTypes.BOX:
+        return (<BoxDragPreview title={item.title} />);
+      default:
+        return null;
     }
   }
 
