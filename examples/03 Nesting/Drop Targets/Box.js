@@ -7,21 +7,21 @@ const style = {
   border: '1px dashed gray',
   padding: '0.5rem 1rem',
   backgroundColor: 'white',
-  cursor: 'move'
+  cursor: 'move',
 };
 
 const boxSource = {
   beginDrag() {
     return {};
-  }
+  },
 };
 
 @DragSource(ItemTypes.BOX, boxSource, connect => ({
-  connectDragSource: connect.dragSource()
+  connectDragSource: connect.dragSource(),
 }))
 export default class Box extends Component {
   static propTypes = {
-    connectDragSource: PropTypes.func.isRequired
+    connectDragSource: PropTypes.func.isRequired,
   }
 
   render() {
@@ -30,7 +30,7 @@ export default class Box extends Component {
     return connectDragSource(
       <div style={style}>
         Drag me
-      </div>
+      </div>,
     );
   }
 }

@@ -7,7 +7,7 @@ const style = {
   padding: '0.5rem 1rem',
   marginBottom: '.5rem',
   backgroundColor: 'white',
-  width: '20rem'
+  width: '20rem',
 };
 
 const handleStyle = {
@@ -16,25 +16,25 @@ const handleStyle = {
   height: '1rem',
   display: 'inline-block',
   marginRight: '0.75rem',
-  cursor: 'move'
+  cursor: 'move',
 };
 
 const boxSource = {
   beginDrag() {
     return {};
-  }
+  },
 };
 
 @DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   connectDragPreview: connect.dragPreview(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 export default class BoxWithHandle extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
-    isDragging: PropTypes.bool.isRequired
+    isDragging: PropTypes.bool.isRequired,
   };
 
   render() {
@@ -45,11 +45,11 @@ export default class BoxWithHandle extends Component {
       <div style={{ ...style, opacity }}>
 
         {connectDragSource(
-          <div style={handleStyle} />
+          <div style={handleStyle} />,
         )}
 
         Drag me by the handle
-      </div>
+      </div>,
     );
   }
 }

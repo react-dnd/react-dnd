@@ -9,7 +9,7 @@ const styles = {
   width: 300,
   height: 300,
   border: '1px solid black',
-  position: 'relative'
+  position: 'relative',
 };
 
 const boxTarget = {
@@ -20,17 +20,17 @@ const boxTarget = {
     const top = Math.round(item.top + delta.y);
 
     component.moveBox(item.id, left, top);
-  }
+  },
 };
 
 @DragDropContext(HTML5Backend)
 @DropTarget(ItemTypes.BOX, boxTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+  connectDropTarget: connect.dropTarget(),
 }))
 export default class Container extends Component {
   static propTypes = {
     hideSourceOnDrag: PropTypes.bool.isRequired,
-    connectDropTarget: PropTypes.func.isRequired
+    connectDropTarget: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -38,8 +38,8 @@ export default class Container extends Component {
     this.state = {
       boxes: {
         a: { top: 20, left: 80, title: 'Drag me around' },
-        b: { top: 180, left: 20, title: 'Drag me too' }
-      }
+        b: { top: 180, left: 20, title: 'Drag me too' },
+      },
     };
   }
 
@@ -47,9 +47,9 @@ export default class Container extends Component {
     this.setState(update(this.state, {
       boxes: {
         [id]: {
-          $merge: { left, top }
-        }
-      }
+          $merge: { left, top },
+        },
+      },
     }));
   }
 
@@ -73,7 +73,7 @@ export default class Container extends Component {
             </Box>
           );
         })}
-      </div>
+      </div>,
     );
   }
 }

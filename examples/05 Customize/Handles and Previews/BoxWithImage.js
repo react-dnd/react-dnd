@@ -8,25 +8,25 @@ const style = {
   marginBottom: '.5rem',
   backgroundColor: 'white',
   cursor: 'move',
-  width: '20rem'
+  width: '20rem',
 };
 
 const BoxSource = {
   beginDrag() {
     return {};
-  }
+  },
 };
 
 @DragSource(ItemTypes.BOX, BoxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   connectDragPreview: connect.dragPreview(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 export default class BoxWithImage extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
-    isDragging: PropTypes.bool.isRequired
+    isDragging: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -42,7 +42,7 @@ export default class BoxWithImage extends Component {
     return connectDragSource(
       <div style={{ ...style, opacity }}>
         Drag me to see an image
-      </div>
+      </div>,
     );
   }
 }

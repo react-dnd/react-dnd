@@ -15,14 +15,14 @@ export default class Container extends Component {
         { accepts: [ItemTypes.GLASS], lastDroppedItem: null },
         { accepts: [ItemTypes.FOOD], lastDroppedItem: null },
         { accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL], lastDroppedItem: null },
-        { accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null }
+        { accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null },
       ],
       boxes: [
         { name: 'Bottle', type: ItemTypes.GLASS },
         { name: 'Banana', type: ItemTypes.FOOD },
-        { name: 'Magazine', type: ItemTypes.PAPER }
+        { name: 'Magazine', type: ItemTypes.PAPER },
       ],
-      droppedBoxNames: []
+      droppedBoxNames: [],
     };
   }
 
@@ -42,7 +42,7 @@ export default class Container extends Component {
               lastDroppedItem={lastDroppedItem}
               onDrop={item => this.handleDrop(index, item)}
               key={index}
-            />
+            />,
           )}
         </div>
 
@@ -53,7 +53,7 @@ export default class Container extends Component {
               type={type}
               isDropped={this.isDropped(name)}
               key={index}
-            />
+            />,
           )}
         </div>
       </div>
@@ -67,13 +67,13 @@ export default class Container extends Component {
       dustbins: {
         [index]: {
           lastDroppedItem: {
-            $set: item
-          }
-        }
+            $set: item,
+          },
+        },
       },
       droppedBoxNames: name ? {
-        $push: [name]
-      } : {}
+        $push: [name],
+      } : {},
     }));
   }
 }

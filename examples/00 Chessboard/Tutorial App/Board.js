@@ -9,8 +9,8 @@ import './Board.less';
 export default class Board extends Component {
   static propTypes = {
     knightPosition: PropTypes.arrayOf(
-      PropTypes.number.isRequired
-    ).isRequired
+      PropTypes.number.isRequired,
+    ).isRequired,
   };
 
   renderSquare(i) {

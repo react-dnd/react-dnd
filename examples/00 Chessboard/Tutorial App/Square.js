@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 export default class Square extends Component {
   static propTypes = {
     black: PropTypes.bool,
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   render() {
@@ -17,7 +17,7 @@ export default class Square extends Component {
           color,
           backgroundColor,
           width: '100%',
-          height: '100%'
+          height: '100%',
         }}
       >
         {this.props.children}
