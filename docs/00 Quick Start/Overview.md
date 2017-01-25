@@ -51,7 +51,7 @@ It instructs React DnD to pass the up-to-date values of `highlighted` and `hover
 
 If the backend handles the DOM events, but the components use React to describe the DOM, how does the backend know which DOM nodes to listen to? Enter the *connectors*. **The connectors let you assign one of the predefined roles (a drag source, a drag preview, or a drop target) to the DOM nodes** in your `render` function.
 
-In fact, a connector is passed as a first argument to the *collecting function* we described above. Let's see how we can use it to specify the drop target:
+In fact, a connector is passed as the first argument to the *collecting function* we described above. Let's see how we can use it to specify the drop target:
 
 ```js
 function collect(connect, monitor) {
