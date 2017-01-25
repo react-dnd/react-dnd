@@ -14,7 +14,7 @@ export default class DragAroundCustomDragLayer extends Component {
 
     this.state = {
       snapToGridAfterDrop: false,
-      snapToGridWhileDragging: false
+      snapToGridWhileDragging: false,
     };
   }
 
@@ -71,13 +71,13 @@ export default class DragAroundCustomDragLayer extends Component {
 
   handleSnapToGridAfterDropChange() {
     this.setState({
-      snapToGridAfterDrop: !this.state.snapToGridAfterDrop
+      snapToGridAfterDrop: !this.state.snapToGridAfterDrop,
     });
   }
 
   handleSnapToGridWhileDraggingChange() {
     this.setState({
-      snapToGridWhileDragging: !this.state.snapToGridWhileDragging
+      snapToGridWhileDragging: !this.state.snapToGridWhileDragging,
     });
   }
 }

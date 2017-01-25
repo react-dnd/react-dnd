@@ -5,14 +5,14 @@ import { ItemTypes } from './Constants';
 const knightSource = {
   beginDrag() {
     return {};
-  }
+  },
 };
 
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
   };
 }
 
@@ -21,7 +21,7 @@ export default class Knight extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
-    isDragging: PropTypes.bool.isRequired
+    isDragging: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -38,11 +38,11 @@ export default class Knight extends Component {
           fontSize: 40,
           fontWeight: 'bold',
           cursor: 'move',
-          opacity: isDragging ? 0.5 : 1
+          opacity: isDragging ? 0.5 : 1,
         }}
       >
         ♘
-      </div>
+      </div>,
     );
   }
 }

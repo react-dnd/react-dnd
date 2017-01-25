@@ -41,7 +41,7 @@ export default class ChessboardTutorialApp extends Component {
           style={{
             width: 500,
             height: 500,
-            border: '1px solid gray'
+            border: '1px solid gray',
           }}
         >
           <Board knightPosition={knightPosition} />

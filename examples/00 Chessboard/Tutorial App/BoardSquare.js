@@ -11,14 +11,14 @@ const squareTarget = {
 
   drop(props) {
     moveKnight(props.x, props.y);
-  }
+  },
 };
 
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
+    canDrop: monitor.canDrop(),
   };
 }
 
@@ -30,7 +30,7 @@ export default class BoardSquare extends Component {
     isOver: PropTypes.bool.isRequired,
     canDrop: PropTypes.bool.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   renderOverlay(color) {
@@ -59,7 +59,7 @@ export default class BoardSquare extends Component {
         style={{
           position: 'relative',
           width: '100%',
-          height: '100%'
+          height: '100%',
         }}
       >
         <Square black={black}>
@@ -68,7 +68,7 @@ export default class BoardSquare extends Component {
         {isOver && !canDrop && this.renderOverlay('red')}
         {!isOver && canDrop && this.renderOverlay('yellow')}
         {isOver && canDrop && this.renderOverlay('green')}
-      </div>
+      </div>,
     );
   }
 }

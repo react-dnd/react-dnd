@@ -6,7 +6,7 @@ import { name } from 'faker';
 import Card from './Card';
 
 const style = {
-  width: 400
+  width: 400,
 };
 
 @DragDropContext(HTML5Backend)
@@ -28,7 +28,7 @@ export default class Container extends Component {
 
     this.state = {
       cardsById,
-      cardsByIndex
+      cardsByIndex,
     };
   }
 
@@ -45,9 +45,9 @@ export default class Container extends Component {
       cardsByIndex: {
         $splice: [
           [cardIndex, 1],
-          [afterIndex, 0, card]
-        ]
-      }
+          [afterIndex, 0, card],
+        ],
+      },
     });
   }
 

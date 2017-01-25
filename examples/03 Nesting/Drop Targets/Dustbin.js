@@ -14,7 +14,7 @@ function getStyle(backgroundColor) {
     margin: '1rem',
     textAlign: 'center',
     float: 'left',
-    fontSize: '1rem'
+    fontSize: '1rem',
   };
 }
 
@@ -27,15 +27,15 @@ const boxTarget = {
 
     component.setState({
       hasDropped: true,
-      hasDroppedOnChild
+      hasDroppedOnChild,
     });
-  }
+  },
 };
 
 @DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
-  isOverCurrent: monitor.isOver({ shallow: true })
+  isOverCurrent: monitor.isOver({ shallow: true }),
 }))
 export default class Dustbin extends Component {
   static propTypes = {
@@ -43,14 +43,14 @@ export default class Dustbin extends Component {
     isOver: PropTypes.bool.isRequired,
     isOverCurrent: PropTypes.bool.isRequired,
     greedy: PropTypes.bool,
-    children: PropTypes.node
+    children: PropTypes.node,
   }
 
   constructor(props) {
     super(props);
     this.state = {
       hasDropped: false,
-      hasDroppedOnChild: false
+      hasDroppedOnChild: false,
     };
   }
 
@@ -76,7 +76,7 @@ export default class Dustbin extends Component {
         <div>
           {children}
         </div>
-      </div>
+      </div>,
     );
   }
 }

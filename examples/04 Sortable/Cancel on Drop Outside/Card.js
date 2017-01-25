@@ -7,14 +7,14 @@ const style = {
   padding: '0.5rem 1rem',
   marginBottom: '.5rem',
   backgroundColor: 'white',
-  cursor: 'move'
+  cursor: 'move',
 };
 
 const cardSource = {
   beginDrag(props) {
     return {
       id: props.id,
-      originalIndex: props.findCard(props.id).index
+      originalIndex: props.findCard(props.id).index,
     };
   },
 
@@ -25,7 +25,7 @@ const cardSource = {
     if (!didDrop) {
       props.moveCard(droppedId, originalIndex);
     }
-  }
+  },
 };
 
 const cardTarget = {
@@ -41,15 +41,15 @@ const cardTarget = {
       const { index: overIndex } = props.findCard(overId);
       props.moveCard(draggedId, overIndex);
     }
-  }
+  },
 };
 
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+  connectDropTarget: connect.dropTarget(),
 }))
 @DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 export default class Card extends Component {
   static propTypes = {
@@ -59,7 +59,7 @@ export default class Card extends Component {
     id: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
     moveCard: PropTypes.func.isRequired,
-    findCard: PropTypes.func.isRequired
+    findCard: PropTypes.func.isRequired,
   };
 
   render() {
@@ -69,7 +69,7 @@ export default class Card extends Component {
     return connectDragSource(connectDropTarget(
       <div style={{ ...style, opacity }}>
         {text}
-      </div>
+      </div>,
     ));
   }
 }

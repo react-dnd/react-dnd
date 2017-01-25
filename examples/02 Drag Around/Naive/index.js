@@ -6,13 +6,13 @@ export default class DragAroundNaive extends Component {
     super(props);
     this.handleHideSourceClick = this.handleHideSourceClick.bind(this);
     this.state = {
-      hideSourceOnDrag: true
+      hideSourceOnDrag: true,
     };
   }
 
   handleHideSourceClick() {
     this.setState({
-      hideSourceOnDrag: !this.state.hideSourceOnDrag
+      hideSourceOnDrag: !this.state.hideSourceOnDrag,
     });
   }
 

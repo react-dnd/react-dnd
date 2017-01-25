@@ -10,7 +10,7 @@ const styles = {
   width: 300,
   height: 300,
   border: '1px solid black',
-  position: 'relative'
+  position: 'relative',
 };
 
 const boxTarget = {
@@ -25,16 +25,16 @@ const boxTarget = {
     }
 
     component.moveBox(item.id, left, top);
-  }
+  },
 };
 
 @DropTarget(ItemTypes.BOX, boxTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+  connectDropTarget: connect.dropTarget(),
 }))
 export default class Container extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
-    snapToGrid: PropTypes.bool.isRequired
+    snapToGrid: PropTypes.bool.isRequired,
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -44,8 +44,8 @@ export default class Container extends Component {
     this.state = {
       boxes: {
         a: { top: 20, left: 80, title: 'Drag me around' },
-        b: { top: 180, left: 20, title: 'Drag me too' }
-      }
+        b: { top: 180, left: 20, title: 'Drag me too' },
+      },
     };
   }
 
@@ -53,9 +53,9 @@ export default class Container extends Component {
     this.setState(update(this.state, {
       boxes: {
         [id]: {
-          $merge: { left, top }
-        }
-      }
+          $merge: { left, top },
+        },
+      },
     }));
   }
 
@@ -75,7 +75,7 @@ export default class Container extends Component {
           .keys(boxes)
           .map(key => this.renderBox(boxes[key], key))
         }
-      </div>
+      </div>,
     );
   }
 }

@@ -7,20 +7,20 @@ const style = {
   height: '15rem',
   width: '15rem',
   padding: '2rem',
-  textAlign: 'center'
+  textAlign: 'center',
 };
 
 const ColorTarget = {
   drop(props, monitor) {
     props.onDrop(monitor.getItemType());
-  }
+  },
 };
 
 @DropTarget([Colors.YELLOW, Colors.BLUE], ColorTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop(),
-  draggingColor: monitor.getItemType()
+  draggingColor: monitor.getItemType(),
 }))
 class TargetBox extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ class TargetBox extends Component {
     draggingColor: PropTypes.string,
     lastDroppedColor: PropTypes.string,
     connectDropTarget: PropTypes.func.isRequired,
-    onDrop: PropTypes.func.isRequired
+    onDrop: PropTypes.func.isRequired,
   };
 
   render() {
@@ -56,7 +56,7 @@ class TargetBox extends Component {
         {!canDrop && lastDroppedColor &&
           <p>Last dropped: {lastDroppedColor}</p>
         }
-      </div>
+      </div>,
     );
   }
 }
@@ -79,7 +79,7 @@ export default class StatefulTargetBox extends Component {
 
   handleDrop(color) {
     this.setState({
-      lastDroppedColor: color
+      lastDroppedColor: color,
     });
   }
 }

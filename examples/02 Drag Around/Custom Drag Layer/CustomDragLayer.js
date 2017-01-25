@@ -11,14 +11,14 @@ const layerStyles = {
   left: 0,
   top: 0,
   width: '100%',
-  height: '100%'
+  height: '100%',
 };
 
 function getItemStyles(props) {
   const { initialOffset, currentOffset } = props;
   if (!initialOffset || !currentOffset) {
     return {
-      display: 'none'
+      display: 'none',
     };
   }
 
@@ -35,7 +35,7 @@ function getItemStyles(props) {
   const transform = `translate(${x}px, ${y}px)`;
   return {
     transform,
-    WebkitTransform: transform
+    WebkitTransform: transform,
   };
 }
 
@@ -44,7 +44,7 @@ function getItemStyles(props) {
   itemType: monitor.getItemType(),
   initialOffset: monitor.getInitialSourceClientOffset(),
   currentOffset: monitor.getSourceClientOffset(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 export default class CustomDragLayer extends Component {
   static propTypes = {
@@ -52,14 +52,14 @@ export default class CustomDragLayer extends Component {
     itemType: PropTypes.string,
     initialOffset: PropTypes.shape({
       x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired
+      y: PropTypes.number.isRequired,
     }),
     currentOffset: PropTypes.shape({
       x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired
+      y: PropTypes.number.isRequired,
     }),
     isDragging: PropTypes.bool.isRequired,
-    snapToGrid: PropTypes.bool.isRequired
+    snapToGrid: PropTypes.bool.isRequired,
   };
 
   renderItem(type, item) {

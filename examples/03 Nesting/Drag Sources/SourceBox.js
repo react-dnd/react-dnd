@@ -15,12 +15,12 @@ const ColorSource = {
 
   beginDrag() {
     return {};
-  }
+  },
 };
 
 @DragSource(props => props.color, ColorSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 class SourceBox extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ class SourceBox extends Component {
     color: PropTypes.string.isRequired,
     forbidDrag: PropTypes.bool.isRequired,
     onToggleForbidDrag: PropTypes.func.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   render() {
@@ -54,7 +54,7 @@ class SourceBox extends Component {
           ...style,
           backgroundColor,
           opacity,
-          cursor: forbidDrag ? 'default' : 'move'
+          cursor: forbidDrag ? 'default' : 'move',
         }}
       >
         <input
@@ -64,7 +64,7 @@ class SourceBox extends Component {
         />
         <small>Forbid drag</small>
         {children}
-      </div>
+      </div>,
     );
   }
 }
@@ -73,7 +73,7 @@ export default class StatefulSourceBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      forbidDrag: false
+      forbidDrag: false,
     };
   }
 
@@ -89,7 +89,7 @@ export default class StatefulSourceBox extends Component {
 
   handleToggleForbidDrag() {
     this.setState({
-      forbidDrag: !this.state.forbidDrag
+      forbidDrag: !this.state.forbidDrag,
     });
   }
 }
