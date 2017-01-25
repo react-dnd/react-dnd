@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
-import isPlainObject from 'lodash/isPlainObject';
+import isPlainObject from 'lodash.isPlainObject';
 import invariant from 'invariant';
 import hoistStatics from 'hoist-non-react-statics';
 
