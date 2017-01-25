@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-require('babel-core/register');
+require('babel-register');
 
 // -*- mode: js -*-
 "use strict";

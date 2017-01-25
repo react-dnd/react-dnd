@@ -1,10 +1,13 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: './src/index',
+  resolve: { fallback: path.join(__dirname, "node_modules") },
+  resolveLoader: { fallback: path.join(__dirname, "node_modules") },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },
   externals: [{
