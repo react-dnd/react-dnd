@@ -8,6 +8,6 @@ export default function registerTarget(type, target, manager) {
 
   return {
     handlerId: targetId,
-    unregister: unregisterTarget
+    unregister: unregisterTarget,
   };
 }

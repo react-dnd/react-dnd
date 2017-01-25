@@ -8,6 +8,6 @@ export default function registerSource(type, source, manager) {
 
   return {
     handlerId: sourceId,
-    unregister: unregisterSource
+    unregister: unregisterSource,
   };
 }

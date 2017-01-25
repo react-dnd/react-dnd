@@ -18,7 +18,7 @@ export default function createTargetConnector(backend) {
       disconnectCurrentDropTarget = backend.connectDropTarget(
         currentHandlerId,
         currentDropTargetNode,
-        currentDropTargetOptions
+        currentDropTargetOptions,
       );
     }
   }
@@ -45,11 +45,11 @@ export default function createTargetConnector(backend) {
       currentDropTargetOptions = options;
 
       reconnectDropTarget();
-    }
+    },
   });
 
   return {
     receiveHandlerId,
-    hooks
+    hooks,
   };
 }

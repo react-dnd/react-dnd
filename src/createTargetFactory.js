@@ -12,7 +12,7 @@ export default function createTargetFactory(spec) {
       'Instead received a specification with an unexpected "%s" key. ' +
       'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
       ALLOWED_SPEC_METHODS.join(', '),
-      key
+      key,
     );
     invariant(
       typeof spec[key] === 'function',
@@ -21,7 +21,7 @@ export default function createTargetFactory(spec) {
       'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
       key,
       key,
-      spec[key]
+      spec[key],
     );
   });
 
@@ -73,7 +73,7 @@ export default function createTargetFactory(spec) {
           'drop() must either return undefined, or an object that represents the drop result. ' +
           'Instead received %s. ' +
           'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
-          dropResult
+          dropResult,
         );
       }
       return dropResult;
