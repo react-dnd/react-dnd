@@ -1,18 +1,18 @@
-import React, { Component, PropTypes, Children } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
-import checkDecoratorArguments from './utils/checkDecoratorArguments';
 import hoistStatics from 'hoist-non-react-statics';
+import checkDecoratorArguments from './utils/checkDecoratorArguments';
 
-const CHILD_CONTEXT_TYPES = {
-  dragDropManager: PropTypes.object.isRequired
+export const CHILD_CONTEXT_TYPES = {
+  dragDropManager: PropTypes.object.isRequired,
 };
 
-const createChildContext = (backend, context) => ({
+export const createChildContext = (backend, context) => ({
   dragDropManager: new DragDropManager(backend, context),
 });
 
-const unpackBackendForEs5Users = (backendOrModule) => {
+export const unpackBackendForEs5Users = (backendOrModule) => {
   // Auto-detect ES6 default export for people still using ES5
   let backend = backendOrModule;
   if (typeof backend === 'object' && typeof backend.default === 'function') {
@@ -21,41 +21,13 @@ const unpackBackendForEs5Users = (backendOrModule) => {
   invariant(
     typeof backend === 'function',
     'Expected the backend to be a function or an ES6 module exporting a default function. ' +
-    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html'
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html',
   );
   return backend;
 };
 
-export class DragDropContextProvider extends Component {
-  static propTypes = {
-    backend: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
-    children: PropTypes.element.isRequired
-  };
-
-  static childContextTypes = CHILD_CONTEXT_TYPES;
-
-  static displayName = 'DragDropContextProvider';
-
-  static contextTypes = {
-    window: PropTypes.object,
-  };
-
-  constructor(props, context) {
-    super(props, context);
-    this.backend = unpackBackendForEs5Users(props.backend);
-  }
-
-  getChildContext() {
-    return createChildContext(this.backend, this.context.window);
-  }
-
-  render() {
-    return Children.only(this.props.children);
-  }
-}
-
 export default function DragDropContext(backendOrModule) {
-  checkDecoratorArguments('DragDropContext', 'backend', ...arguments);
+  checkDecoratorArguments('DragDropContext', 'backend', ...arguments); // eslint-disable-line prefer-rest-params
 
   const backend = unpackBackendForEs5Users(backendOrModule);
   const childContext = createChildContext(backend, window);
@@ -74,7 +46,12 @@ export default function DragDropContext(backendOrModule) {
       static childContextTypes = CHILD_CONTEXT_TYPES;
 
       getDecoratedComponentInstance() {
-        return this.refs.child;
+        invariant(
+          this.child,
+          'In order to access an instance of the decorated component it can ' +
+          'not be a stateless component.',
+        );
+        return this.child;
       }
 
       getManager() {
@@ -87,8 +64,10 @@ export default function DragDropContext(backendOrModule) {
 
       render() {
         return (
-          <DecoratedComponent {...this.props}
-                              ref='child' />
+          <DecoratedComponent
+            {...this.props}
+            ref={child => (this.child = child)}
+          />
         );
       }
     }

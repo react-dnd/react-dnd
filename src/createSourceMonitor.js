@@ -16,7 +16,7 @@ class SourceMonitor {
     invariant(
       !isCallingCanDrag,
       'You may not call monitor.canDrag() inside your canDrag() implementation. ' +
-      'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source-monitor.html'
+      'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source-monitor.html',
     );
 
     try {
@@ -31,7 +31,7 @@ class SourceMonitor {
     invariant(
       !isCallingIsDragging,
       'You may not call monitor.isDragging() inside your isDragging() implementation. ' +
-      'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source-monitor.html'
+      'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source-monitor.html',
     );
 
     try {

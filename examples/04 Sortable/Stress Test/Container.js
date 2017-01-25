@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import update from 'react/lib/update';
-import { name } from 'faker';
-import Card from './Card';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import { name } from 'faker';
+import Card from './Card';
 
 const style = {
-  width: 400
+  width: 400,
 };
 
 @DragDropContext(HTML5Backend)
@@ -20,7 +20,7 @@ export default class Container extends Component {
     const cardsById = {};
     const cardsByIndex = [];
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i += 1) {
       const card = { id: i, text: name.findName() };
       cardsById[card.id] = card;
       cardsByIndex[i] = card;
@@ -28,7 +28,7 @@ export default class Container extends Component {
 
     this.state = {
       cardsById,
-      cardsByIndex
+      cardsByIndex,
     };
   }
 
@@ -45,9 +45,9 @@ export default class Container extends Component {
       cardsByIndex: {
         $splice: [
           [cardIndex, 1],
-          [afterIndex, 0, card]
-        ]
-      }
+          [afterIndex, 0, card],
+        ],
+      },
     });
   }
 
@@ -76,14 +76,14 @@ export default class Container extends Component {
 
     return (
       <div style={style}>
-        {cardsByIndex.map(card => {
-          return (
-            <Card key={card.id}
-                  id={card.id}
-                  text={card.text}
-                  moveCard={this.moveCard} />
-          );
-        })}
+        {cardsByIndex.map(card => (
+          <Card
+            key={card.id}
+            id={card.id}
+            text={card.text}
+            moveCard={this.moveCard}
+          />
+        ))}
       </div>
     );
   }
