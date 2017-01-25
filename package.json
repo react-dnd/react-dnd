@@ -4,17 +4,22 @@
   "description": "Drag and Drop for React",
   "main": "lib/index.js",
   "scripts": {
+    "clean": "rimraf lib && rimraf dist",
     "start": "./scripts/startSiteDevServer.sh",
     "build-site": "./scripts/buildStaticSite.sh",
     "publish-site": "./scripts/publishStaticSite.sh",
-    "build": "./scripts/build.sh",
+    "bundle:unmin": "webpack --output-filename=dist/ReactDnD.js",
+    "bundle:min": "webpack --output-filename=dist/ReactDnD.min.js --optimize-minimize",
+    "babel": "babel src --out-dir lib",
+    "build": "npm-run-all --parallel bundle:* babel",
     "lint": "eslint .",
-    "test": "karma start",
-    "prepublish": "npm run lint && npm run build"
+    "unit_test": "karma start",
+    "test": "npm-run-all clean lint build",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-dnd.git"
+    "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "keywords": [
     "react",
@@ -32,11 +37,14 @@
     "hoc"
   ],
   "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "contributors": [
+    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaearon/react-dnd/issues"
+    "url": "https://github.com/react-dnd/react-dnd/issues"
   },
-  "homepage": "https://github.com/gaearon/react-dnd",
+  "homepage": "https://github.com/react-dnd/react-dnd",
   "dependencies": {
     "disposables": "^1.0.1",
     "dnd-core": "^2.0.1",
@@ -74,6 +82,7 @@
     "less-loader": "^2.0.0",
     "marked": "^0.3.2",
     "mocha": "^2.2.5",
+    "npm-run-all": "^4.0.1",
     "null-loader": "^0.1.0",
     "postcss": "^4.0.2",
     "react": "^15.0.0-rc.2",
@@ -84,6 +93,7 @@
     "react-hot-loader": "^1.2.3",
     "react-router": "~0.13.2",
     "request": "2.46.0",
+    "rimraf": "^2.5.4",
     "style-loader": "^0.8.3",
     "url-loader": "^0.5.5",
     "webpack": "^1.8.11",

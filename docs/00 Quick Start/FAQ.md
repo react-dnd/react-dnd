@@ -11,7 +11,7 @@ First of all, you don't have to use ES6 or ES7 for React DnD. They make some of 
 
 When I say “ES7”, I mean ES6 + a few extensions that *might* make it into ES7 (also known as ES2016). What I mark as the ES7 code in the docs is actually ES6 code + [class properties](https://gist.github.com/jeffmo/054df782c05639da2adb) + [decorators](https://github.com/wycats/javascript-decorators). You can enable these features by putting `{ "stage": 0 }` into your [.babelrc](https://babeljs.io/docs/usage/babelrc/) file. You can also [enable them individually](https://babeljs.io/docs/usage/experimental/).
 
-The `@` syntax desugars into the simple function calls.  
+The `@` syntax desugars into the simple function calls.
 You can see that in every example on the website that uses it, such as:
 
 -------------------
@@ -64,7 +64,7 @@ See the [testing](docs-testing.html) tutorial for examples.
 
 ### How do I make the component draggable only by a small handle?
 
-Specify the container node as the `dragPreview`, but only make the drag handle a `dragSource()`.  
+Specify the container node as the `dragPreview`, but only make the drag handle a `dragSource()`.
 See the [custom drag handle example](examples-customize-handles-and-previews.html).
 
 ### How do I constrain the drag preview movement?
@@ -368,11 +368,11 @@ React DnD would not have reached the 1.0 release without the generous donations 
 
 ### How Do I Contribute?
 
-Contributing the documentation for the underlying [DnD Core](https://github.com/gaearon/dnd-core) library would be a huge help, as it is currently not documented at all, but its concepts leak in some advanced scenarios such as [writing tests](docs-testing.html).
+Contributing the documentation for the underlying [DnD Core](https://github.com/react-dnd/dnd-core) library would be a huge help, as it is currently not documented at all, but its concepts leak in some advanced scenarios such as [writing tests](docs-testing.html).
 
 Porting the library to other modern frameworks such as Cycle, Mercury, or Deku, is also appreciated. Such ports would be able to reuse DnD Core logic and the existing backends.
 
-Please let me know via the [issue tracker](https://github.com/gaearon/react-dnd/issues) if you create advanced examples such as a Kanban board application, or write a blog post or record a screencast about React DnD, so I can link to it.
+Please let me know via the [issue tracker](https://github.com/react-dnd/react-dnd/issues) if you create advanced examples such as a Kanban board application, or write a blog post or record a screencast about React DnD, so I can link to it.
 
 While DnD Core is fully tested, React DnD does not currently have any unit tests. Writing them is a great and eagerly desired contribution.
 

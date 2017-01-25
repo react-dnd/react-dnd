@@ -6,7 +6,7 @@ export default class SortableCancelOnDropOutside extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/04%20Sortable/Cancel%20on%20Drop%20Outside'>Browse the Source</a></b>
+          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/04%20Sortable/Cancel%20on%20Drop%20Outside'>Browse the Source</a></b>
         </p>
         <p>
           Because you write the logic instead of using the readymade components, you can tweak the behavior to the one your app needs.

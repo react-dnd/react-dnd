@@ -18,7 +18,7 @@ export default function DragDropContext(backendOrModule) {
   invariant(
     typeof backend === 'function',
     'Expected the backend to be a function or an ES6 module exporting a default function. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drag-drop-context.html'
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html'
   );
 
   const childContext = {

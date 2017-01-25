@@ -54,7 +54,7 @@ export default function decorateHandler({
         typeof this.context.dragDropManager === 'object',
         'Could not find the drag and drop manager in the context of %s. ' +
         'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-        'Read more: http://gaearon.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
+        'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
         displayName,
         displayName
       );

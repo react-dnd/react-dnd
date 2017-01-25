@@ -22,7 +22,7 @@ export default class DragAroundNaive extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/02%20Drag%20Around/Naive'>Browse the Source</a></b>
+          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/02%20Drag%20Around/Naive'>Browse the Source</a></b>
         </p>
         <p>
           This example naively relies on browser drag and drop implementation without much custom logic.
