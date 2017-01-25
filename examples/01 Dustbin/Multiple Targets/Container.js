@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import update from 'react/lib/update';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
-import update from 'react/lib/update';
 
 @DragDropContext(HTML5Backend)
 export default class Container extends Component {
@@ -15,14 +15,14 @@ export default class Container extends Component {
         { accepts: [ItemTypes.GLASS], lastDroppedItem: null },
         { accepts: [ItemTypes.FOOD], lastDroppedItem: null },
         { accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL], lastDroppedItem: null },
-        { accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null }
+        { accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null },
       ],
       boxes: [
         { name: 'Bottle', type: ItemTypes.GLASS },
         { name: 'Banana', type: ItemTypes.FOOD },
-        { name: 'Magazine', type: ItemTypes.PAPER }
+        { name: 'Magazine', type: ItemTypes.PAPER },
       ],
-      droppedBoxNames: []
+      droppedBoxNames: [],
     };
   }
 
@@ -37,19 +37,23 @@ export default class Container extends Component {
       <div>
         <div style={{ overflow: 'hidden', clear: 'both' }}>
           {dustbins.map(({ accepts, lastDroppedItem }, index) =>
-            <Dustbin accepts={accepts}
-                     lastDroppedItem={lastDroppedItem}
-                     onDrop={(item) => this.handleDrop(index, item)}
-                     key={index} />
+            <Dustbin
+              accepts={accepts}
+              lastDroppedItem={lastDroppedItem}
+              onDrop={item => this.handleDrop(index, item)}
+              key={index}
+            />,
           )}
         </div>
 
         <div style={{ overflow: 'hidden', clear: 'both' }}>
           {boxes.map(({ name, type }, index) =>
-            <Box name={name}
-                 type={type}
-                 isDropped={this.isDropped(name)}
-                 key={index} />
+            <Box
+              name={name}
+              type={type}
+              isDropped={this.isDropped(name)}
+              key={index}
+            />,
           )}
         </div>
       </div>
@@ -63,13 +67,13 @@ export default class Container extends Component {
       dustbins: {
         [index]: {
           lastDroppedItem: {
-            $set: item
-          }
-        }
+            $set: item,
+          },
+        },
       },
       droppedBoxNames: name ? {
-        $push: [name]
-      } : {}
+        $push: [name],
+      } : {},
     }));
   }
 }

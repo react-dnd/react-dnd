@@ -6,28 +6,28 @@ module.exports = (config) => {
     singleRun: true,
     frameworks: ['mocha'],
     files: [
-      'tests.webpack.js'
+      'tests.webpack.js',
     ],
     preprocessors: {
-      'tests.webpack.js': ['webpack', 'sourcemap']
+      'tests.webpack.js': ['webpack', 'sourcemap'],
     },
     reporters: ['dots'],
     webpack: {
       devtool: 'inline-source-map',
       module: {
         loaders: [
-          { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ }
-        ]
+          { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+        ],
       },
       resolve: {
         alias: {
           'react-dnd/modules': path.join(__dirname, './src'),
-          'react-dnd': path.join(__dirname, './src')
-        }
-      }
+          'react-dnd': path.join(__dirname, './src'),
+        },
+      },
     },
     webpackServer: {
-      noInfo: true
-    }
+      noInfo: true,
+    },
   });
 };
