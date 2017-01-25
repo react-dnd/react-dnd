@@ -62,7 +62,7 @@ export default function createTargetFactory(spec) {
 
     drop() {
       if (!spec.drop) {
-        return;
+        return undefined;
       }
 
       const dropResult = spec.drop(this.props, this.monitor, this.component);
