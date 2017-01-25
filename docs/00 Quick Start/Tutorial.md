@@ -1801,7 +1801,11 @@ export default class BoardSquare extends Component {
     const black = (x + y) % 2 === 1;
 
     return connectDropTarget(
-      <div style={{ position: 'relative' }}>
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
         <Square black={black}>
           {this.props.children}
         </Square>
