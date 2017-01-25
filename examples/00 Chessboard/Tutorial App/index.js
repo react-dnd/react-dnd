@@ -37,11 +37,13 @@ export default class ChessboardTutorialApp extends Component {
         <p>
           It illustrates creating the drag sources and the drop targets, using the monitors to query the current drag state, and customizing the drag previews.
         </p>
-        <div style={{
-          width: 500,
-          height: 500,
-          border: '1px solid gray'
-        }}>
+        <div
+          style={{
+            width: 500,
+            height: 500,
+            border: '1px solid gray'
+          }}
+        >
           <Board knightPosition={knightPosition} />
         </div>
         <p>

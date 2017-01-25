@@ -69,9 +69,11 @@ export default class StatefulTargetBox extends Component {
 
   render() {
     return (
-      <TargetBox {...this.props}
+      <TargetBox
+        {...this.props}
         lastDroppedColor={this.state.lastDroppedColor}
-        onDrop={color => this.handleDrop(color)} />
+        onDrop={color => this.handleDrop(color)}
+      />
     );
   }
 

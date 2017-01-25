@@ -37,19 +37,23 @@ export default class Container extends Component {
       <div>
         <div style={{ overflow: 'hidden', clear: 'both' }}>
           {dustbins.map(({ accepts, lastDroppedItem }, index) =>
-            <Dustbin accepts={accepts}
-                     lastDroppedItem={lastDroppedItem}
-                     onDrop={item => this.handleDrop(index, item)}
-                     key={index} />
+            <Dustbin
+              accepts={accepts}
+              lastDroppedItem={lastDroppedItem}
+              onDrop={item => this.handleDrop(index, item)}
+              key={index}
+            />
           )}
         </div>
 
         <div style={{ overflow: 'hidden', clear: 'both' }}>
           {boxes.map(({ name, type }, index) =>
-            <Box name={name}
-                 type={type}
-                 isDropped={this.isDropped(name)}
-                 key={index} />
+            <Box
+              name={name}
+              type={type}
+              isDropped={this.isDropped(name)}
+              key={index}
+            />
           )}
         </div>
       </div>
