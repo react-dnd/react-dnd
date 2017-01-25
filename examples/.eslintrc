@@ -1,0 +1,32 @@
+{
+    "rules": {
+        "arrow-parens": "off",
+        "import/extensions": "off",
+        "import/first": "off",
+        "import/no-extraneous-dependencies": "off",
+        "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "indent": "off",
+        "jsx-a11y/label-has-for": "off",
+        "max-len": "off",
+        "no-mixed-operators": "off",
+        "no-param-reassign": "off",
+        "object-curly-spacing": "off",
+        "object-shorthand": "off",
+        "prefer-template": "off",
+        "quote-props": "off",
+        "react/forbid-prop-types": "off",
+        "react/jsx-closing-bracket-location": "off",
+        "react/jsx-first-prop-new-line": "off",
+        "react/jsx-indent-props": "off",
+        "react/no-array-index-key": "off",
+        "react/no-find-dom-node": "off",
+        "react/no-unescaped-entities": "off",
+        "react/no-unused-prop-types": "off",
+        "react/prefer-stateless-function": "off",
+        "react/require-default-props": "off"
+    },
+    "env": {
+        "jest": true
+    }
+}

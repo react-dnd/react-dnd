@@ -9,7 +9,7 @@ import createSourceConnector from './createSourceConnector';
 import isValidType from './utils/isValidType';
 
 export default function DragSource(type, spec, collect, options = {}) {
-  checkDecoratorArguments('DragSource', 'type, spec, collect[, options]', ...arguments);
+  checkDecoratorArguments('DragSource', 'type, spec, collect[, options]', ...arguments); // eslint-disable-line prefer-rest-params
   let getType = type;
   if (typeof type !== 'function') {
     invariant(

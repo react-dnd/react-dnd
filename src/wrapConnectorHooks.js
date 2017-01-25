@@ -1,5 +1,5 @@
-import cloneWithRef from './utils/cloneWithRef';
 import { isValidElement } from 'react';
+import cloneWithRef from './utils/cloneWithRef';
 
 function throwIfCompositeComponentElement(element) {
   // Custom components can no longer be wrapped directly in React DnD 2.0
@@ -13,9 +13,9 @@ function throwIfCompositeComponentElement(element) {
     'the component';
 
   throw new Error(
-    `Only native element nodes can now be passed to React DnD connectors. ` +
+    'Only native element nodes can now be passed to React DnD connectors.' +
     `You can either wrap ${displayName} into a <div>, or turn it into a ` +
-    `drag source or a drop target itself.`
+    'drag source or a drop target itself.'
   );
 }
 
@@ -46,7 +46,7 @@ function wrapHookToRecognizeElement(hook) {
 export default function wrapConnectorHooks(hooks) {
   const wrappedHooks = {};
 
-  Object.keys(hooks).forEach(key => {
+  Object.keys(hooks).forEach((key) => {
     const hook = hooks[key];
     const wrappedHook = wrapHookToRecognizeElement(hook);
     wrappedHooks[key] = () => wrappedHook;

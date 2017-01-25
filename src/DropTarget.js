@@ -9,7 +9,7 @@ import createTargetConnector from './createTargetConnector';
 import isValidType from './utils/isValidType';
 
 export default function DropTarget(type, spec, collect, options = {}) {
-  checkDecoratorArguments('DropTarget', 'type, spec, collect[, options]', ...arguments);
+  checkDecoratorArguments('DropTarget', 'type, spec, collect[, options]', ...arguments); // eslint-disable-line prefer-rest-params
   let getType = type;
   if (typeof type !== 'function') {
     invariant(

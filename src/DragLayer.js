@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import shallowEqual from './utils/shallowEqual';
-import shallowEqualScalar from './utils/shallowEqualScalar';
+import hoistStatics from 'hoist-non-react-statics';
 import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';
+import shallowEqual from './utils/shallowEqual';
+import shallowEqualScalar from './utils/shallowEqualScalar';
 import checkDecoratorArguments from './utils/checkDecoratorArguments';
-import hoistStatics from 'hoist-non-react-statics';
 
 export default function DragLayer(collect, options = {}) {
-  checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments);
+  checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments); // eslint-disable-line prefer-rest-params
   invariant(
     typeof collect === 'function',
     'Expected "collect" provided as the first argument to DragLayer ' +
@@ -42,12 +42,12 @@ export default function DragLayer(collect, options = {}) {
       }
 
       getDecoratedComponentInstance() {
-        return this.refs.child;
+        return this.childRef;
       }
 
       shouldComponentUpdate(nextProps, nextState) {
         return !arePropsEqual(nextProps, this.props) ||
-               !shallowEqual(nextState, this.state);
+          !shallowEqual(nextState, this.state);
       }
 
       constructor(props, context) {
@@ -106,9 +106,11 @@ export default function DragLayer(collect, options = {}) {
 
       render() {
         return (
-          <DecoratedComponent {...this.props}
-                              {...this.state}
-                              ref='child' />
+          <DecoratedComponent
+            {...this.props}
+            {...this.state}
+            ref={e => (this.childRef = e)}
+          />
         );
       }
     }

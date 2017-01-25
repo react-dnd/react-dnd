@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
-import shallowEqual from './utils/shallowEqual';
-import shallowEqualScalar from './utils/shallowEqualScalar';
 import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';
 import hoistStatics from 'hoist-non-react-statics';
+import shallowEqual from './utils/shallowEqual';
+import shallowEqualScalar from './utils/shallowEqualScalar';
 
 export default function decorateHandler({
   DecoratedComponent,
@@ -173,9 +173,11 @@ export default function decorateHandler({
 
     render() {
       return (
-        <DecoratedComponent {...this.props}
-                            {...this.state}
-                            ref={this.handleChildRef} />
+        <DecoratedComponent
+          {...this.props}
+          {...this.state}
+          ref={this.handleChildRef}
+        />
       );
     }
   }

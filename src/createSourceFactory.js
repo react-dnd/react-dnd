@@ -5,7 +5,7 @@ const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag'];
 const REQUIRED_SPEC_METHODS = ['beginDrag'];
 
 export default function createSourceFactory(spec) {
-  Object.keys(spec).forEach(key => {
+  Object.keys(spec).forEach((key) => {
     invariant(
       ALLOWED_SPEC_METHODS.indexOf(key) > -1,
       'Expected the drag source specification to only have ' +
@@ -25,7 +25,7 @@ export default function createSourceFactory(spec) {
       spec[key]
     );
   });
-  REQUIRED_SPEC_METHODS.forEach(key => {
+  REQUIRED_SPEC_METHODS.forEach((key) => {
     invariant(
       typeof spec[key] === 'function',
       'Expected %s in the drag source specification to be a function. ' +
