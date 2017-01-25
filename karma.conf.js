@@ -1,6 +1,6 @@
-var path = require('path');
+const path = require('path');
 
-module.exports = function (config) {
+module.exports = (config) => {
   config.set({
     browsers: ['Chrome'],
     singleRun: true,
