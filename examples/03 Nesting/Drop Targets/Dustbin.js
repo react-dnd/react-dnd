@@ -61,7 +61,7 @@ export default class Dustbin extends Component {
     const text = greedy ? 'greedy' : 'not greedy';
     let backgroundColor = 'rgba(0, 0, 0, .5)';
 
-    if (isOverCurrent || isOver && greedy) {
+    if (isOverCurrent || (isOver && greedy)) {
       backgroundColor = 'darkgreen';
     }
 

@@ -7,7 +7,6 @@
         "indent": "off",
         "jsx-a11y/label-has-for": "off",
         "max-len": "off",
-        "no-mixed-operators": "off",
         "no-param-reassign": "off",
         "object-curly-spacing": "off",
         "object-shorthand": "off",
