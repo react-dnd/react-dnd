@@ -55,7 +55,7 @@ export default class Container extends Component {
           {dustbins.map(({ accepts, lastDroppedItem }, index) =>
             <Dustbin accepts={accepts}
                      lastDroppedItem={lastDroppedItem}
-                     onDrop={(item) => this.handleDrop(index, item)}
+                     onDrop={item => this.handleDrop(index, item)}
                      key={index} />
           )}
         </div>
