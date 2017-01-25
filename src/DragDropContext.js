@@ -18,7 +18,7 @@ export default function DragDropContext(backendOrModule) {
   invariant(
     typeof backend === 'function',
     'Expected the backend to be a function or an ES6 module exporting a default function. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drag-drop-context.html'
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html'
   );
 
   const childContext = {
@@ -41,7 +41,12 @@ export default function DragDropContext(backendOrModule) {
       };
 
       getDecoratedComponentInstance() {
-        return this.refs.child;
+        invariant(
+          this.child,
+          'In order to access an instance of the decorated component it can ' +
+          'not be a stateless component.'
+        );
+        return this.child;
       }
 
       getManager() {
@@ -55,7 +60,7 @@ export default function DragDropContext(backendOrModule) {
       render() {
         return (
           <DecoratedComponent {...this.props}
-                              ref='child' />
+                              ref={child => this.child = child} />
         );
       }
     }
