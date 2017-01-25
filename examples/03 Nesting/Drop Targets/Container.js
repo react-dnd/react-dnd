@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Dustbin from './Dustbin';
-import Box from './Box';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Dustbin from './Dustbin';
+import Box from './Box';
 
 @DragDropContext(HTML5Backend)
 export default class Container extends Component {

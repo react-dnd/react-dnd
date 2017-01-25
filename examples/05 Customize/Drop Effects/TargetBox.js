@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-import ItemTypes from './ItemTypes';
 import { DropTarget } from 'react-dnd';
+import ItemTypes from './ItemTypes';
 
 const style = {
   border: '1px solid gray',

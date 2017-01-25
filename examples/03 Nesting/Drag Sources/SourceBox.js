@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Colors from './Colors';
 import { DragSource } from 'react-dnd';
+import Colors from './Colors';
 
 const style = {
   border: '1px dashed gray',

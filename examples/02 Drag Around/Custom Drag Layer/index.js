@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Container from './Container';
-import CustomDragLayer from './CustomDragLayer';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Container from './Container';
+import CustomDragLayer from './CustomDragLayer';
 
 @DragDropContext(HTML5Backend)
 export default class DragAroundCustomDragLayer extends Component {

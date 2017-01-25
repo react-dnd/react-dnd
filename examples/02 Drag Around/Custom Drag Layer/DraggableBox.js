@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { DragSource } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
-import { DragSource } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
 
 const boxSource = {
   beginDrag(props) {

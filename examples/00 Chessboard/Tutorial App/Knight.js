@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { ItemTypes } from './Constants';
 import { DragSource } from 'react-dnd';
+import { ItemTypes } from './Constants';
 
 const knightSource = {
   beginDrag() {

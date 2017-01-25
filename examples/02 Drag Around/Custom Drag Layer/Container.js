@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import update from 'react/lib/update';
+import { DropTarget } from 'react-dnd';
+import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import DraggableBox from './DraggableBox';
 import snapToGrid from './snapToGrid';
-import { DropTarget } from 'react-dnd';
 
 const styles = {
   width: 300,

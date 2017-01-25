@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import ItemTypes from './ItemTypes';
 import { DropTarget } from 'react-dnd';
+import ItemTypes from './ItemTypes';
 
 function getStyle(backgroundColor) {
   return {
