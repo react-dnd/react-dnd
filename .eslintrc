@@ -19,7 +19,6 @@
     "react/no-multi-comp": "off",
     "class-methods-use-this": "off",
     "no-plusplus": "off",
-    "comma-dangle": "off",
     "id-length": "off",
     "new-cap": "off",
     "eol-last": "off",

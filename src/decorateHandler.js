@@ -15,7 +15,7 @@ export default function decorateHandler({
   containerDisplayName,
   getType,
   collect,
-  options
+  options,
 }) {
   const { arePropsEqual = shallowEqualScalar } = options;
   const displayName =
@@ -29,7 +29,7 @@ export default function decorateHandler({
     static displayName = `${containerDisplayName}(${displayName})`;
 
     static contextTypes = {
-      dragDropManager: PropTypes.object.isRequired
+      dragDropManager: PropTypes.object.isRequired,
     }
 
     getHandlerId() {
@@ -56,7 +56,7 @@ export default function decorateHandler({
         'Make sure to wrap the top-level component of your app with DragDropContext. ' +
         'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
         displayName,
-        displayName
+        displayName,
       );
 
       this.manager = this.context.dragDropManager;
@@ -104,11 +104,11 @@ export default function decorateHandler({
 
       const {
         handlerId,
-        unregister
+        unregister,
       } = registerHandler(
         type,
         this.handler,
-        this.manager
+        this.manager,
       );
 
       this.handlerId = handlerId;
@@ -118,14 +118,14 @@ export default function decorateHandler({
       const globalMonitor = this.manager.getMonitor();
       const unsubscribe = globalMonitor.subscribeToStateChange(
         this.handleChange,
-        { handlerIds: [handlerId] }
+        { handlerIds: [handlerId] },
       );
 
       this.disposable.setDisposable(
         new CompositeDisposable(
           new Disposable(unsubscribe),
-          new Disposable(unregister)
-        )
+          new Disposable(unregister),
+        ),
       );
     }
 
@@ -153,7 +153,7 @@ export default function decorateHandler({
     getCurrentState() {
       const nextState = collect(
         this.handlerConnector.hooks,
-        this.handlerMonitor
+        this.handlerMonitor,
       );
 
       if (process.env.NODE_ENV !== 'production') {
@@ -164,7 +164,7 @@ export default function decorateHandler({
           'Instead, received %s.',
           containerDisplayName,
           displayName,
-          nextState
+          nextState,
         );
       }
 

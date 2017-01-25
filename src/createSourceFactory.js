@@ -13,7 +13,7 @@ export default function createSourceFactory(spec) {
       'Instead received a specification with an unexpected "%s" key. ' +
       'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
       ALLOWED_SPEC_METHODS.join(', '),
-      key
+      key,
     );
     invariant(
       typeof spec[key] === 'function',
@@ -22,7 +22,7 @@ export default function createSourceFactory(spec) {
       'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
       key,
       key,
-      spec[key]
+      spec[key],
     );
   });
   REQUIRED_SPEC_METHODS.forEach((key) => {
@@ -33,7 +33,7 @@ export default function createSourceFactory(spec) {
       'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
       key,
       key,
-      spec[key]
+      spec[key],
     );
   });
 
@@ -76,7 +76,7 @@ export default function createSourceFactory(spec) {
           'beginDrag() must return a plain object that represents the dragged item. ' +
           'Instead received %s. ' +
           'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
-          item
+          item,
         );
       }
       return item;

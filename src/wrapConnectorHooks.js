@@ -15,7 +15,7 @@ function throwIfCompositeComponentElement(element) {
   throw new Error(
     'Only native element nodes can now be passed to React DnD connectors.' +
     `You can either wrap ${displayName} into a <div>, or turn it into a ` +
-    'drag source or a drop target itself.'
+    'drag source or a drop target itself.',
   );
 }
 
