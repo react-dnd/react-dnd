@@ -8,7 +8,7 @@ function getStyle(backgroundColor) {
     minHeight: '8rem',
     minWidth: '8rem',
     color: 'white',
-    backgroundColor: backgroundColor,
+    backgroundColor,
     padding: '2rem',
     paddingTop: '1rem',
     margin: '1rem',
@@ -27,7 +27,7 @@ const boxTarget = {
 
     component.setState({
       hasDropped: true,
-      hasDroppedOnChild: hasDroppedOnChild
+      hasDroppedOnChild
     });
   }
 };

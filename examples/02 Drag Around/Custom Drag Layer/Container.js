@@ -53,10 +53,7 @@ export default class Container extends Component {
     this.setState(update(this.state, {
       boxes: {
         [id]: {
-          $merge: {
-            left: left,
-            top: top
-          }
+          $merge: { left, top }
         }
       }
     }));

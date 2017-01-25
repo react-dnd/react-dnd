@@ -18,7 +18,7 @@ function getStyles(props) {
 
   return {
     position: 'absolute',
-    transform: transform,
+    transform,
     WebkitTransform: transform,
     // IE fallback: hide the real node using CSS when dragging
     // because IE will ignore our custom "empty image" drag preview.
