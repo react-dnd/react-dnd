@@ -16,7 +16,7 @@ const boxSource = {
   }
 };
 
-@DragSource(ItemTypes.BOX, boxSource, (connect) => ({
+@DragSource(ItemTypes.BOX, boxSource, connect => ({
   connectDragSource: connect.dragSource()
 }))
 export default class Box extends Component {

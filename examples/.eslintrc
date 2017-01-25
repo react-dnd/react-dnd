@@ -1,6 +1,5 @@
 {
     "rules": {
-        "arrow-parens": "off",
         "import/extensions": "off",
         "import/first": "off",
         "import/no-extraneous-dependencies": "off",
