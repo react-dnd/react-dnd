@@ -30,7 +30,7 @@ export default function DragDropContext(backendOrModule) {
   checkDecoratorArguments('DragDropContext', 'backend', ...arguments); // eslint-disable-line prefer-rest-params
 
   const backend = unpackBackendForEs5Users(backendOrModule);
-  const childContext = createChildContext(backend, window);
+  const childContext = createChildContext(backend);
 
   return function decorateContext(DecoratedComponent) {
     const displayName =

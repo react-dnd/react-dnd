@@ -106,6 +106,10 @@ export const ExamplePages = [{
       location: 'examples-dustbin-single-target.html',
       title: 'Single Target'
     },
+    DUSTBIN_IFRAME: {
+      location: 'examples-dustbin-single-target-in-iframe.html',
+      title: 'Within iframe'
+    },
     DUSTBIN_MULTIPLE_TARGETS: {
       location: 'examples-dustbin-multiple-targets.html',
       title: 'Multiple Targets'

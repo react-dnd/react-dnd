@@ -94,6 +94,7 @@
     "react-dnd-html5-backend": "^2.1.2",
     "react-dnd-test-backend": "^1.0.2",
     "react-dom": "^15.0.0-rc.2",
+    "react-frame-component": "^1.0.0",
     "react-hot-loader": "^1.2.3",
     "request": "^2.79.0",
     "rimraf": "^2.5.4",
