@@ -6,7 +6,7 @@ export default class CustomizeDropEffects extends Component {
     return (
       <div>
         <p>
-          <b><a href='https://github.com/gaearon/react-dnd/tree/master/examples/05%20Customize/Drop%20Effects'>Browse the Source</a></b>
+          <b><a href='https://github.com/react-dnd/react-dnd/tree/master/examples/05%20Customize/Drop%20Effects'>Browse the Source</a></b>
         </p>
         <p>
           Some browsers let you specify the “drop effects” for the draggable items.
