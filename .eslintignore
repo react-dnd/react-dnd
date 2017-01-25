@@ -4,7 +4,3 @@ site
 scripts
 dist
 lib
-**/node_modules
-**/webpack*.config.js
-tests.webpack.js
-karma.conf.js

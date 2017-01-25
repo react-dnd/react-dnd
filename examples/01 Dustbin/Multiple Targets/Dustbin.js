@@ -11,19 +11,19 @@ const style = {
   textAlign: 'center',
   fontSize: '1rem',
   lineHeight: 'normal',
-  float: 'left'
+  float: 'left',
 };
 
 const dustbinTarget = {
   drop(props, monitor) {
     props.onDrop(monitor.getItem());
-  }
+  },
 };
 
 @DropTarget(props => props.accepts, dustbinTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
-  canDrop: monitor.canDrop()
+  canDrop: monitor.canDrop(),
 }))
 export default class Dustbin extends Component {
   static propTypes = {
@@ -32,7 +32,7 @@ export default class Dustbin extends Component {
     canDrop: PropTypes.bool.isRequired,
     accepts: PropTypes.arrayOf(PropTypes.string).isRequired,
     lastDroppedItem: PropTypes.object,
-    onDrop: PropTypes.func.isRequired
+    onDrop: PropTypes.func.isRequired,
   };
 
   render() {
@@ -50,13 +50,13 @@ export default class Dustbin extends Component {
       <div style={{ ...style, backgroundColor }}>
         {isActive ?
           'Release to drop' :
-          'This dustbin accepts: ' + accepts.join(', ')
+          `This dustbin accepts: ${accepts.join(', ')}`
         }
 
         {lastDroppedItem &&
           <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
         }
-      </div>
+      </div>,
     );
   }
 }

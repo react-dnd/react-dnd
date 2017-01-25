@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import ItemTypes from './ItemTypes';
 import { DropTarget } from 'react-dnd';
+import ItemTypes from './ItemTypes';
 
 function getStyle(backgroundColor) {
   return {
@@ -8,13 +8,13 @@ function getStyle(backgroundColor) {
     minHeight: '8rem',
     minWidth: '8rem',
     color: 'white',
-    backgroundColor: backgroundColor,
+    backgroundColor,
     padding: '2rem',
     paddingTop: '1rem',
     margin: '1rem',
     textAlign: 'center',
     float: 'left',
-    fontSize: '1rem'
+    fontSize: '1rem',
   };
 }
 
@@ -27,15 +27,15 @@ const boxTarget = {
 
     component.setState({
       hasDropped: true,
-      hasDroppedOnChild: hasDroppedOnChild
+      hasDroppedOnChild,
     });
-  }
+  },
 };
 
 @DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
-  isOverCurrent: monitor.isOver({ shallow: true })
+  isOverCurrent: monitor.isOver({ shallow: true }),
 }))
 export default class Dustbin extends Component {
   static propTypes = {
@@ -43,14 +43,14 @@ export default class Dustbin extends Component {
     isOver: PropTypes.bool.isRequired,
     isOverCurrent: PropTypes.bool.isRequired,
     greedy: PropTypes.bool,
-    children: PropTypes.node
+    children: PropTypes.node,
   }
 
   constructor(props) {
     super(props);
     this.state = {
       hasDropped: false,
-      hasDroppedOnChild: false
+      hasDroppedOnChild: false,
     };
   }
 
@@ -61,14 +61,14 @@ export default class Dustbin extends Component {
     const text = greedy ? 'greedy' : 'not greedy';
     let backgroundColor = 'rgba(0, 0, 0, .5)';
 
-    if (isOverCurrent || isOver && greedy) {
+    if (isOverCurrent || (isOver && greedy)) {
       backgroundColor = 'darkgreen';
     }
 
     return connectDropTarget(
       <div style={getStyle(backgroundColor)}>
         {text}
-        <br/>
+        <br />
         {hasDropped &&
           <span>dropped {hasDroppedOnChild && ' on child'}</span>
         }
@@ -76,7 +76,7 @@ export default class Dustbin extends Component {
         <div>
           {children}
         </div>
-      </div>
+      </div>,
     );
   }
 }

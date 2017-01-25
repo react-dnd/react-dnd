@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Colors from './Colors';
 import { DragSource } from 'react-dnd';
+import Colors from './Colors';
 
 const style = {
   border: '1px dashed gray',
@@ -14,13 +14,13 @@ const ColorSource = {
   },
 
   beginDrag() {
-    return { };
-  }
+    return {};
+  },
 };
 
 @DragSource(props => props.color, ColorSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 class SourceBox extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ class SourceBox extends Component {
     color: PropTypes.string.isRequired,
     forbidDrag: PropTypes.bool.isRequired,
     onToggleForbidDrag: PropTypes.func.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   render() {
@@ -38,30 +38,33 @@ class SourceBox extends Component {
 
     let backgroundColor;
     switch (color) {
-    case Colors.YELLOW:
-      backgroundColor = 'lightgoldenrodyellow';
-      break;
-    case Colors.BLUE:
-      backgroundColor = 'lightblue';
-      break;
-    default:
-      break;
+      case Colors.YELLOW:
+        backgroundColor = 'lightgoldenrodyellow';
+        break;
+      case Colors.BLUE:
+        backgroundColor = 'lightblue';
+        break;
+      default:
+        break;
     }
 
     return connectDragSource(
-      <div style={{
-        ...style,
-        backgroundColor,
-        opacity,
-        cursor: forbidDrag ? 'default' : 'move'
-      }}>
-        <input type='checkbox'
-               checked={forbidDrag}
-               onChange={onToggleForbidDrag} />
+      <div
+        style={{
+          ...style,
+          backgroundColor,
+          opacity,
+          cursor: forbidDrag ? 'default' : 'move',
+        }}
+      >
+        <input
+          type="checkbox"
+          checked={forbidDrag}
+          onChange={onToggleForbidDrag}
+        />
         <small>Forbid drag</small>
-
         {children}
-      </div>
+      </div>,
     );
   }
 }
@@ -70,21 +73,23 @@ export default class StatefulSourceBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      forbidDrag: false
+      forbidDrag: false,
     };
   }
 
   render() {
     return (
-      <SourceBox {...this.props}
-                 forbidDrag={this.state.forbidDrag}
-                 onToggleForbidDrag={() => this.handleToggleForbidDrag()} />
+      <SourceBox
+        {...this.props}
+        forbidDrag={this.state.forbidDrag}
+        onToggleForbidDrag={() => this.handleToggleForbidDrag()}
+      />
     );
   }
 
   handleToggleForbidDrag() {
     this.setState({
-      forbidDrag: !this.state.forbidDrag
+      forbidDrag: !this.state.forbidDrag,
     });
   }
 }

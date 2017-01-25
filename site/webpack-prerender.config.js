@@ -15,6 +15,8 @@ module.exports = {
 
   target: 'node',
 
+  resolveLoader: { fallback: path.join(__dirname, '..', 'node_modules') },
+
   module: {
     loaders: [
       {

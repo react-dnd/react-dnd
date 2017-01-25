@@ -1,4 +1,4 @@
 {
-  "stage": 0,
-  "loose": ["es6.modules", "es6.classes"]
+  "presets": ["latest", "stage-2", "react"],
+  "plugins": ["transform-decorators-legacy"]
 }

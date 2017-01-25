@@ -9,7 +9,7 @@ import createTargetConnector from './createTargetConnector';
 import isValidType from './utils/isValidType';
 
 export default function DropTarget(type, spec, collect, options = {}) {
-  checkDecoratorArguments('DropTarget', 'type, spec, collect[, options]', ...arguments);
+  checkDecoratorArguments('DropTarget', 'type, spec, collect[, options]', ...arguments); // eslint-disable-line prefer-rest-params
   let getType = type;
   if (typeof type !== 'function') {
     invariant(
@@ -17,8 +17,8 @@ export default function DropTarget(type, spec, collect, options = {}) {
       'Expected "type" provided as the first argument to DropTarget to be ' +
       'a string, an array of strings, or a function that returns either given ' +
       'the current props. Instead, received %s. ' +
-      'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
-      type
+      'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+      type,
     );
     getType = () => type;
   }
@@ -26,8 +26,8 @@ export default function DropTarget(type, spec, collect, options = {}) {
     isPlainObject(spec),
     'Expected "spec" provided as the second argument to DropTarget to be ' +
     'a plain object. Instead, received %s. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
-    spec
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+    spec,
   );
   const createTarget = createTargetFactory(spec);
   invariant(
@@ -35,16 +35,16 @@ export default function DropTarget(type, spec, collect, options = {}) {
     'Expected "collect" provided as the third argument to DropTarget to be ' +
     'a function that returns a plain object of props to inject. ' +
     'Instead, received %s. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
-    collect
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+    collect,
   );
   invariant(
     isPlainObject(options),
     'Expected "options" provided as the fourth argument to DropTarget to be ' +
     'a plain object when specified. ' +
     'Instead, received %s. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drop-target.html',
-    collect
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+    collect,
   );
 
   return function decorateTarget(DecoratedComponent) {
@@ -58,7 +58,7 @@ export default function DropTarget(type, spec, collect, options = {}) {
       DecoratedComponent,
       getType,
       collect,
-      options
+      options,
     });
   };
 }
