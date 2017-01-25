@@ -41,7 +41,12 @@ export default function DragDropContext(backendOrModule) {
       };
 
       getDecoratedComponentInstance() {
-        return this.childRef;
+        invariant(
+          this.child,
+          'In order to access an instance of the decorated component it can ' +
+          'not be a stateless component.'
+        );
+        return this.child;
       }
 
       getManager() {
@@ -54,9 +59,9 @@ export default function DragDropContext(backendOrModule) {
 
       render() {
         return (
-          <DecoratedComponent
+          <DecoratedComponent 
             {...this.props}
-            ref={e => (this.childRef = e)}
+            ref={child => (this.child = child)} 
           />
         );
       }
