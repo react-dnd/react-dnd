@@ -43,8 +43,8 @@ export default class Container extends Component {
     super(props);
     this.state = {
       boxes: {
-        'a': { top: 20, left: 80, title: 'Drag me around' },
-        'b': { top: 180, left: 20, title: 'Drag me too' }
+        a: { top: 20, left: 80, title: 'Drag me around' },
+        b: { top: 180, left: 20, title: 'Drag me too' }
       }
     };
   }

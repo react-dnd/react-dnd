@@ -6,7 +6,6 @@
         "import/prefer-default-export": "off",
         "max-len": "off",
         "no-param-reassign": "off",
-        "quote-props": "off",
         "react/forbid-prop-types": "off",
         "react/jsx-closing-bracket-location": "off",
         "react/jsx-first-prop-new-line": "off",
