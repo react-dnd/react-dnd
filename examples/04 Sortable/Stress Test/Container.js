@@ -20,7 +20,7 @@ export default class Container extends Component {
     const cardsById = {};
     const cardsByIndex = [];
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i += 1) {
       const card = { id: i, text: name.findName() };
       cardsById[card.id] = card;
       cardsByIndex[i] = card;
