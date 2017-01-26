@@ -3,8 +3,8 @@ Overview
 
 React DnD is unlike most of the drag and drop libraries out there, and it can be intimidating if you've never used it before. However, once you get a taste of a few concepts at the heart of its design, it starts to make sense. I suggest you read about these concepts before the rest of the docs.
 
-Some of these concepts may seem to have a certain resemblance to the [Flux architecture](http://facebook.github.io/flux/).  
-This is not a coincidence, as React DnD uses Flux internally.
+Some of these concepts resemble the [Flux](http://facebook.github.io/flux/) and [Redux](https://github.com/reactjs/react-redux) architectures.  
+This is not a coincidence, as React DnD uses Redux internally.
 
 ### Backends
 
@@ -14,17 +14,17 @@ Unfortunately, the HTML5 drag and drop API also has some downsides. It does not 
 
 This is why **the HTML5 drag and drop support is implemented in a pluggable way** in React DnD. You don't have to use it. You can write a different implementation, based on touch events, mouse events, or something else entirely. Such pluggable implementations are called the *backends* in React DnD. Only the [HTML5 backend](docs-html5-backend.html) comes with the library, but more may be added in the future.
 
-The backends perform a similar role to that of React's synthetic event system: **they abstract away the browser differences and process the native DOM events.** Despite the similarities, React DnD backends do not have a dependency on React or its synthetic event system. Under the hood, all the backends do is translate the DOM events into the internal Flux actions that React DnD can process.
+The backends perform a similar role to that of React's synthetic event system: **they abstract away the browser differences and process the native DOM events.** Despite the similarities, React DnD backends do not have a dependency on React or its synthetic event system. Under the hood, all the backends do is translate the DOM events into the internal Redux actions that React DnD can process.
 
 ### Items and Types
 
-Like Flux, React DnD uses data, and not the views, as the source of truth. When you drag something across the screen, we don't say that a component, or a DOM node is being dragged. Instead, we say that an *item* of a certain *type* is being dragged.
+Like Flux (or Redux), React DnD uses data, and not the views, as the source of truth. When you drag something across the screen, we don't say that a component, or a DOM node is being dragged. Instead, we say that an *item* of a certain *type* is being dragged.
 
 What is an item? An *item* is a plain JavaScript object *describing* what's being dragged. For example, in a Kanban board application, when you drag a card, an item might look like `{ cardId: 42 }`. In a Chess game, when you pick up a piece, the item might look like `{ fromCell: 'C5', piece: 'queen' }`. **Describing the dragged data as a plain object helps you keep the components decoupled and unaware of each other.**
 
 What is a type, then? A *type* is a string (or a [symbol](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)) uniquely identifying *a whole class of items* in your application. In a Kanban board app, you might have a `'card'` type representing the draggable cards and a `'list'` type for the draggable lists of those cards. In Chess, you might only have a single `'piece'` type.
 
-Types are useful because, as your app grows, you might want to make more things draggable, but you don't necessarily want all the existing drop targets to suddenly start reacting to the new items. **The types let you specify which drag sources and drop targets are compatible.** You're probably going to have an enumeration of the type constants in your application, just like you may have an enumeration of the Flux action types.
+Types are useful because, as your app grows, you might want to make more things draggable, but you don't necessarily want all the existing drop targets to suddenly start reacting to the new items. **The types let you specify which drag sources and drop targets are compatible.** You're probably going to have an enumeration of the type constants in your application, just like you may have an enumeration of the Redux action types.
 
 ### Monitors
 
@@ -51,7 +51,7 @@ It instructs React DnD to pass the up-to-date values of `highlighted` and `hover
 
 If the backend handles the DOM events, but the components use React to describe the DOM, how does the backend know which DOM nodes to listen to? Enter the *connectors*. **The connectors let you assign one of the predefined roles (a drag source, a drag preview, or a drop target) to the DOM nodes** in your `render` function.
 
-In fact, a connector is passed as a second argument to the *collecting function* we described above. Let's see how we can use it to specify the drop target:
+In fact, a connector is passed as the first argument to the *collecting function* we described above. Let's see how we can use it to specify the drop target:
 
 ```js
 function collect(connect, monitor) {
@@ -177,7 +177,11 @@ var DropTarget = require('react-dnd').DropTarget;
 var flow = require('lodash/flow');
 
 var YourComponent = React.createClass({
-  /* ... */
+  render() {
+    return this.props.connectDragSource(this.props.connectDropTarget(
+      /* ... */
+    ))
+  }
 });
 
 module.exports = flow(
@@ -191,11 +195,16 @@ import { DragSource } from 'react-dnd';
 import flow from 'lodash/flow';
 
 class YourComponent {
-  /* ... */
+  render() {
+    const { connectDragSource, connectDropTarget } = this.props
+    return connectDragSource(connectDropTarget(
+      /* ... */
+    ))
+  }
 }
 
 export default flow(
-  DragSource(/* ... */)
+  DragSource(/* ... */),
   DropTarget(/* ... */)
 )(YourComponent);
 ```
@@ -206,7 +215,12 @@ import { DragSource } from 'react-dnd';
 @DragSource(/* ... */)
 @DropTarget(/* ... */)
 export default class YourComponent {
-  /* ... */
+  render() {
+    const { connectDragSource, connectDropTarget } = this.props
+    return connectDragSource(connectDropTarget(
+      /* ... */
+    ))
+  }
 }
 ```
 -------------------

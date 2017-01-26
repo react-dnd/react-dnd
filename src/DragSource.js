@@ -9,7 +9,7 @@ import createSourceConnector from './createSourceConnector';
 import isValidType from './utils/isValidType';
 
 export default function DragSource(type, spec, collect, options = {}) {
-  checkDecoratorArguments('DragSource', 'type, spec, collect[, options]', ...arguments);
+  checkDecoratorArguments('DragSource', 'type, spec, collect[, options]', ...arguments); // eslint-disable-line prefer-rest-params
   let getType = type;
   if (typeof type !== 'function') {
     invariant(
@@ -17,8 +17,8 @@ export default function DragSource(type, spec, collect, options = {}) {
       'Expected "type" provided as the first argument to DragSource to be ' +
       'a string, or a function that returns a string given the current props. ' +
       'Instead, received %s. ' +
-      'Read more: http://gaearon.github.io/react-dnd/docs-drag-source.html',
-      type
+      'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
+      type,
     );
     getType = () => type;
   }
@@ -26,8 +26,8 @@ export default function DragSource(type, spec, collect, options = {}) {
     isPlainObject(spec),
     'Expected "spec" provided as the second argument to DragSource to be ' +
     'a plain object. Instead, received %s. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drag-source.html',
-    spec
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
+    spec,
   );
   const createSource = createSourceFactory(spec);
   invariant(
@@ -35,16 +35,16 @@ export default function DragSource(type, spec, collect, options = {}) {
     'Expected "collect" provided as the third argument to DragSource to be ' +
     'a function that returns a plain object of props to inject. ' +
     'Instead, received %s. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drag-source.html',
-    collect
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
+    collect,
   );
   invariant(
     isPlainObject(options),
     'Expected "options" provided as the fourth argument to DragSource to be ' +
     'a plain object when specified. ' +
     'Instead, received %s. ' +
-    'Read more: http://gaearon.github.io/react-dnd/docs-drag-source.html',
-    collect
+    'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
+    collect,
   );
 
   return function decorateSource(DecoratedComponent) {
@@ -58,7 +58,7 @@ export default function DragSource(type, spec, collect, options = {}) {
       DecoratedComponent,
       getType,
       collect,
-      options
+      options,
     });
   };
 }

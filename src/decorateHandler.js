@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
-import shallowEqual from './utils/shallowEqual';
-import shallowEqualScalar from './utils/shallowEqualScalar';
 import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';
+import hoistStatics from 'hoist-non-react-statics';
+import shallowEqual from './utils/shallowEqual';
+import shallowEqualScalar from './utils/shallowEqualScalar';
 
 export default function decorateHandler({
   DecoratedComponent,
@@ -14,7 +15,7 @@ export default function decorateHandler({
   containerDisplayName,
   getType,
   collect,
-  options
+  options,
 }) {
   const { arePropsEqual = shallowEqualScalar } = options;
   const displayName =
@@ -22,13 +23,13 @@ export default function decorateHandler({
     DecoratedComponent.name ||
     'Component';
 
-  return class DragDropContainer extends Component {
+  class DragDropContainer extends Component {
     static DecoratedComponent = DecoratedComponent;
 
     static displayName = `${containerDisplayName}(${displayName})`;
 
     static contextTypes = {
-      dragDropManager: PropTypes.object.isRequired
+      dragDropManager: PropTypes.object.isRequired,
     }
 
     getHandlerId() {
@@ -53,9 +54,9 @@ export default function decorateHandler({
         typeof this.context.dragDropManager === 'object',
         'Could not find the drag and drop manager in the context of %s. ' +
         'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-        'Read more: http://gaearon.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
+        'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
         displayName,
-        displayName
+        displayName,
       );
 
       this.manager = this.context.dragDropManager;
@@ -103,11 +104,11 @@ export default function decorateHandler({
 
       const {
         handlerId,
-        unregister
+        unregister,
       } = registerHandler(
         type,
         this.handler,
-        this.manager
+        this.manager,
       );
 
       this.handlerId = handlerId;
@@ -117,14 +118,14 @@ export default function decorateHandler({
       const globalMonitor = this.manager.getMonitor();
       const unsubscribe = globalMonitor.subscribeToStateChange(
         this.handleChange,
-        { handlerIds: [handlerId] }
+        { handlerIds: [handlerId] },
       );
 
       this.disposable.setDisposable(
         new CompositeDisposable(
           new Disposable(unsubscribe),
-          new Disposable(unregister)
-        )
+          new Disposable(unregister),
+        ),
       );
     }
 
@@ -152,7 +153,7 @@ export default function decorateHandler({
     getCurrentState() {
       const nextState = collect(
         this.handlerConnector.hooks,
-        this.handlerMonitor
+        this.handlerMonitor,
       );
 
       if (process.env.NODE_ENV !== 'production') {
@@ -163,7 +164,7 @@ export default function decorateHandler({
           'Instead, received %s.',
           containerDisplayName,
           displayName,
-          nextState
+          nextState,
         );
       }
 
@@ -172,10 +173,14 @@ export default function decorateHandler({
 
     render() {
       return (
-        <DecoratedComponent {...this.props}
-                            {...this.state}
-                            ref={this.handleChildRef} />
+        <DecoratedComponent
+          {...this.props}
+          {...this.state}
+          ref={this.handleChildRef}
+        />
       );
     }
-  };
+  }
+
+  return hoistStatics(DragDropContainer, DecoratedComponent);
 }

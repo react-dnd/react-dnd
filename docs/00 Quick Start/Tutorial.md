@@ -1,7 +1,7 @@
 Tutorial
 ===================
 
-Now that you've read [the overview](docs-overview.html), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/blog/2013/11/05/thinking-in-react.html) tutorial. Adding the drag and drop support is just the icing on the cake.
+Now that you've read [the overview](docs-overview.html), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/docs/thinking-in-react.html) tutorial. Adding the drag and drop support is just the icing on the cake.
 
 In this tutorial, we're going to build a Chess game with React and React DnD. Just kidding! Writing a full-blown Chess game is totally out of scope of this tutorial. **What we're going to build is a tiny app with a Chess board and a lonely Knight. The Knight will be draggable according to the Chess rules.**
 
@@ -37,9 +37,9 @@ The good news is, it doesn't matter at this point. We're just going to write the
 
 ## Creating the Components
 
-I prefer to start bottom-up, because this way I'm always working with something that already exists. If I were to build the `Board` first, I wouldn't see my results until I'm done with the `Square`. On the other hand, I can build and see the `Square` right away without even thinking of the `Board`. I think that the immediate feedback loop is important (you can tell that by [another project I work on](https://gaearon.github.io/react-hot-loader)).
+I prefer to start bottom-up, because this way I'm always working with something that already exists. If I were to build the `Board` first, I wouldn't see my results until I'm done with the `Square`. On the other hand, I can build and see the `Square` right away without even thinking of the `Board`. I think that the immediate feedback loop is important (you can tell that by [another project I work on](https://react-dnd.github.io/react-hot-loader)).
 
-In fact I'm going to start with the `Knight`. It doesn't have any props at all, and it the easiest one to build:
+In fact I'm going to start with the `Knight`. It doesn't have any props at all, and it's the easiest one to build:
 
 -------------------
 ```js
@@ -679,9 +679,9 @@ We want to make the `Knight` draggable. It's a noble goal, but we need to see pa
 
 Because setting up this state requires some thought, we won't try to implement dragging at the same time. Instead, we'll start with a simpler implementation. We will move the `Knight` when you click a particular `Square`, but only if this is allowed by the Chess rules. Implementing this logic should give us enough insight into managing the state, so we can replace clicking with the drag and drop once we've dealt with that.
 
-React is not opinionated about the state management or the data flow; you can use [Flux](https://facebook.github.io/flux/), [Rx](https://github.com/Reactive-Extensions/RxJS) or <s>even Backbone</s> nah, [avoid fat models and separate your reads from writes](http://martinfowler.com/bliki/CQRS.html).
+React is not opinionated about the state management or the data flow; you can use [Flux](https://facebook.github.io/flux/), [Redux](https://github.com/reactjs/react-redux), [Rx](https://github.com/Reactive-Extensions/RxJS) or <s>even Backbone</s> nah, [avoid fat models and separate your reads from writes](http://martinfowler.com/bliki/CQRS.html).
 
-I don't want to bother with installing or setting up Flux for this simple example, so I'm going to follow a simpler pattern. It won't scale as well as Flux, but I also don't need it to. I have not decided on the API for my state manager yet, but I'm going to call it `Game`, and it will definitely need to have some way of signaling data changes to my React code.
+I don't want to bother with installing or setting up Redux for this simple example, so I'm going to follow a simpler pattern. It won't scale as well as Redux, but I also don't need it to. I have not decided on the API for my state manager yet, but I'm going to call it `Game`, and it will definitely need to have some way of signaling data changes to my React code.
 
 Since I know this much, I can rewrite my `index.js` with a hypothetical `Game` that doesn't exist yet. Note that this time, I'm writing my code in blind, not being able to run it yet. This is because I'm still figuring out the API:
 
@@ -1652,6 +1652,7 @@ var BoardSquare = React.createClass({
     var y = this.props.y;
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
+    var canDrop = this.props.canDrop;
     var black = (x + y) % 2 === 1;
 
     return connectDropTarget(
@@ -1669,7 +1670,7 @@ var BoardSquare = React.createClass({
       </div>
     );
   }
-}
+});
 
 module.exports = DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
@@ -1720,7 +1721,11 @@ class BoardSquare extends Component {
     const black = (x + y) % 2 === 1;
 
     return connectDropTarget(
-      <div style={{ position: 'relative' }}>
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
         <Square black={black}>
           {this.props.children}
         </Square>
@@ -1796,7 +1801,11 @@ export default class BoardSquare extends Component {
     const black = (x + y) % 2 === 1;
 
     return connectDropTarget(
-      <div style={{ position: 'relative' }}>
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
         <Square black={black}>
           {this.props.children}
         </Square>
