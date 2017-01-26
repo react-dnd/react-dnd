@@ -19,6 +19,7 @@ const APIDocs = {
   DROP_TARGET_CONNECTOR: require('../docs/02 Connecting to DOM/DropTargetConnector.md'),
   DROP_TARGET_MONITOR: require('../docs/03 Monitoring State/DropTargetMonitor.md'),
   DRAG_DROP_CONTEXT: require('../docs/01 Top Level API/DragDropContext.md'),
+  DRAG_DROP_CONTEXT_PROVIDER: require('../docs/01 Top Level API/DragDropContextProvider.md'),
   DRAG_LAYER: require('../docs/01 Top Level API/DragLayer.md'),
   DRAG_LAYER_MONITOR: require('../docs/03 Monitoring State/DragLayerMonitor.md'),
   HTML5_BACKEND: require('../docs/04 Backends/HTML5.md'),

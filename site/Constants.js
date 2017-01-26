@@ -47,6 +47,10 @@ export const APIPages = [{
     DRAG_DROP_CONTEXT: {
       location: 'docs-drag-drop-context.html',
       title: 'DragDropContext'
+    },
+    DRAG_DROP_CONTEXT_PROVIDER: {
+      location: 'docs-drag-drop-context-provider.html',
+      title: 'DragDropContextProvider'
     }
   }
 }, {
