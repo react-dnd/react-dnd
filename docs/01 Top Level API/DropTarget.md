@@ -62,7 +62,7 @@ The second `spec` parameter must be a plain object implementing the drop target 
 
 * **`hover(props, monitor, component)`**: Optional. Called when an item is hovered over the component. You can check `monitor.isOver({ shallow: true })` to test whether the hover happens over *just* the current target, or over a nested one. Unlike `drop()`, this method will be called even if `canDrop()` is defined and returns `false`. You can check `monitor.canDrop()` to test whether this is the case.
 
-* **`canDrop(props, monitor)`**: Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over `props` or `monitor.getItem()`. *Note: You may not call `monitor.canDrop()` inside this method.*
+* **`canDrop(props, monitor, component)`**: Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over `props`, `monitor.getItem()` or `component`. *Note: You may not call `monitor.canDrop()` inside this method.*
 
 **The spec offers no methods to handle enter or leave events by purpose.** Instead, return the result of `monitor.isOver()` call from your *collecting function*, so that you can use `componentWillReceiveProps` or `componentDidUpdate` React hooks to process the entering and the leaving events in your component. You may also check `monitor.isOver({ shallow: true })` if don't want the nested drop targets to count.
 
