@@ -1,24 +1,18 @@
 {
-  "extends": "airbnb",
+  "extends": "eslint-config-airbnb",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalDecorators": true
+    }
+  },
   "env": {
     "browser": true,
-    "mocha": true,
     "node": true
   },
   "rules": {
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2,
-    "react/sort-comp": 0,
-    "react/no-multi-comp": 0,
-    "comma-dangle": 0,
-    "id-length": 0,
-    "new-cap": 0,
-    "eol-last": 0,
-    "jsx-quotes": 0,
-    "consistent-return": 0
-  },
-  "plugins": [
-    "react"
-  ]
+    "react/jsx-filename-extension": "off",
+    "react/sort-comp": "off",
+    "class-methods-use-this": "off"
+  }
 }

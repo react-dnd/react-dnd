@@ -47,6 +47,10 @@ export const APIPages = [{
     DRAG_DROP_CONTEXT: {
       location: 'docs-drag-drop-context.html',
       title: 'DragDropContext'
+    },
+    DRAG_DROP_CONTEXT_PROVIDER: {
+      location: 'docs-drag-drop-context-provider.html',
+      title: 'DragDropContextProvider'
     }
   }
 }, {
@@ -105,6 +109,10 @@ export const ExamplePages = [{
     DUSTBIN_SINGLE_TARGET: {
       location: 'examples-dustbin-single-target.html',
       title: 'Single Target'
+    },
+    DUSTBIN_IFRAME: {
+      location: 'examples-dustbin-single-target-in-iframe.html',
+      title: 'Within iframe'
     },
     DUSTBIN_MULTIPLE_TARGETS: {
       location: 'examples-dustbin-multiple-targets.html',

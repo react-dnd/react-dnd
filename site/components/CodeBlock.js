@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import ReactUpdates from 'react/lib/ReactUpdates';
+import ReactUpdates from 'react-dom/lib/ReactUpdates';
 import StaticHTMLBlock from './StaticHTMLBlock';
 
 import './CodeBlock.less';

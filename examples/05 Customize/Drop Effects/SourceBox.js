@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import ItemTypes from './ItemTypes';
 import { DragSource } from 'react-dnd';
+import ItemTypes from './ItemTypes';
 
 const style = {
   border: '1px dashed gray',
@@ -8,24 +8,24 @@ const style = {
   padding: '0.5rem 1rem',
   marginRight: '1rem',
   marginBottom: '1rem',
-  cursor: 'move'
+  cursor: 'move',
 };
 
 const boxSource = {
   beginDrag() {
     return {};
-  }
+  },
 };
 
 @DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 export default class SourceBox extends Component {
   static propTypes = {
     isDragging: PropTypes.bool.isRequired,
     connectDragSource: PropTypes.func.isRequired,
-    showCopyIcon: PropTypes.bool
+    showCopyIcon: PropTypes.bool,
   };
 
   render() {
@@ -37,7 +37,7 @@ export default class SourceBox extends Component {
       <div style={{ ...style, opacity }}>
         When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
       </div>,
-      { dropEffect }
+      { dropEffect },
     );
   }
 }

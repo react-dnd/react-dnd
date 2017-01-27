@@ -8,20 +8,20 @@ const style = {
   marginRight: '1.5rem',
   marginBottom: '1.5rem',
   cursor: 'move',
-  float: 'left'
+  float: 'left',
 };
 
 const boxSource = {
   beginDrag(props) {
     return {
-      name: props.name
+      name: props.name,
     };
-  }
+  },
 };
 
 @DragSource(props => props.type, boxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 export default class Box extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ export default class Box extends Component {
     isDragging: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    isDropped: PropTypes.bool.isRequired
+    isDropped: PropTypes.bool.isRequired,
   };
 
   render() {
@@ -42,7 +42,7 @@ export default class Box extends Component {
           <s>{name}</s> :
           name
         }
-      </div>
+      </div>,
     );
   }
 }
