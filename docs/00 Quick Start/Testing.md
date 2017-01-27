@@ -18,6 +18,7 @@ If you are only interested in testing the *rendering* of your components in isol
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
+var Box = require('./components/Box');
 
 it('can be tested independently', function () {
   // Obtain the reference to the component before React DnD wrapping
@@ -49,6 +50,7 @@ it('can be tested independently', function () {
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import Box from './components/Box';
 
 it('can be tested independently', () => {
   // Obtain the reference to the component before React DnD wrapping
