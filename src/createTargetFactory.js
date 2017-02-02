@@ -49,7 +49,7 @@ export default function createTargetFactory(spec) {
         return true;
       }
 
-      return spec.canDrop(this.props, this.monitor);
+      return spec.canDrop(this.props, this.monitor, this.component);
     }
 
     hover() {
