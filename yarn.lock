@@ -1566,6 +1566,15 @@ dnd-core@^2.0.1:
     lodash "^4.2.0"
     redux "^3.2.0"
 
+dnd-core@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-2.1.0.tgz#edc79a5ac7d73553a03ddd3c61a9d0176d5ff182"
+  dependencies:
+    asap "^2.0.3"
+    invariant "^2.0.0"
+    lodash "^4.2.0"
+    redux "^3.2.0"
+
 doctrine@1.5.0, doctrine@^1.2.2:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
