@@ -1,5 +1,6 @@
 {
   "name": "dnd-core",
+  "version": "2.2.3",
   "description": "Drag and drop sans the GUI",
   "main": "lib/index.js",
   "scripts": {
@@ -8,8 +9,7 @@
     "test": "npm-run-all clean build",
     "prepublish": "npm run test"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "asap": "^2.0.3",
     "invariant": "^2.0.0",
