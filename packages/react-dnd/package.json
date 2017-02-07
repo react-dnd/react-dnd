@@ -17,34 +17,6 @@
     "test": "npm-run-all clean lint build",
     "prepublish": "npm test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/react-dnd/react-dnd.git"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "file",
-    "drag",
-    "drop",
-    "html5",
-    "draggable",
-    "droppable",
-    "drag-and-drop",
-    "dnd",
-    "javascript",
-    "react-component",
-    "hoc"
-  ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
-  "contributors": [
-    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/react-dnd/react-dnd/issues"
-  },
-  "homepage": "https://github.com/react-dnd/react-dnd",
   "dependencies": {
     "babel-eslint": "^7.1.1",
     "disposables": "^1.0.1",

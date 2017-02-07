@@ -14,19 +14,6 @@
     "test": "npm-run-all clean lint build unit_test:cov",
     "prepublish": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/react-dnd/dnd-core.git"
-  },
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
-  "contributors": [
-    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/react-dnd/dnd-core/issues"
-  },
-  "homepage": "https://github.com/react-dnd/dnd-core",
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-preset-latest": "^6.22.0",

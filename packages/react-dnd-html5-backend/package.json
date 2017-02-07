@@ -15,16 +15,6 @@
     "develop": "npm run unit_test:watch",
     "prepublish": "npm test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/react-dnd/react-dnd-html5-backend.git"
-  },
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/react-dnd/react-dnd-html5-backend/issues"
-  },
-  "homepage": "https://github.com/react-dnd/react-dnd-html5-backend",
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-eslint": "^7.1.1",

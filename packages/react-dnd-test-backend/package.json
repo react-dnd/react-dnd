@@ -11,16 +11,6 @@
     "prepublish": "npm run verify",
     "test": "npm run verify"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gaearon/react-dnd-test-backend.git"
-  },
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gaearon/react-dnd-test-backend/issues"
-  },
-  "homepage": "https://github.com/gaearon/react-dnd-test-backend",
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-eslint": "^4.1.3",
