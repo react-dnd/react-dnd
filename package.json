@@ -35,7 +35,12 @@
     "build-site": "./scripts/buildStaticSite.sh",
     "publish-site": "./scripts/publishStaticSite.sh",
     "postinstall": "lerna exec --concurrency=1 -- yarn && lerna exec --concurrency=99 -- linklocal",
-    "test": "env PATH=$PATH:./node_modules/.bin lerna run test"
+    "unit_test": "jest",
+    "jest:watch": "jest --watch",
+    "jest:cov": "jest --coverage",
+    "lint": "eslint .",
+    "test_modules": "env PATH=$PATH:./node_modules/.bin lerna run test",
+    "test": "npm-run-all lint jest:cov test_modules"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -68,6 +73,7 @@
     "null-loader": "^0.1.0",
     "postcss": "^5.2.12",
     "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-frame-component": "^1.0.0",
     "react-hot-loader": "^1.2.3",

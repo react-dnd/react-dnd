@@ -1,10 +1,8 @@
 src
-scripts
-examples
-site
-__site__
-__site_prerender__
 webpack.config.js
+tests.webpack.js
+karma.conf.js
 .babelrc
 .eslintrc
+.eslintignore
 bower.json

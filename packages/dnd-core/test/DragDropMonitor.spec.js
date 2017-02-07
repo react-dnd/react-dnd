@@ -1,4 +1,3 @@
-import expect from 'expect.js';
 import * as Types from './types';
 import { NormalSource, NonDraggableSource, NumberSource } from './sources';
 import { NormalTarget, NonDroppableTarget, TargetWithNoDropResult } from './targets';
@@ -19,19 +18,19 @@ describe('DragDropMonitor', () => {
 
   describe('state change subscription', () => {
     it('throws on bad listener', () => {
-      expect(() => monitor.subscribeToStateChange(() => { })).to.not.throwError();
+      expect(() => monitor.subscribeToStateChange(() => { })).not.toThrow();
 
-      expect(() => monitor.subscribeToStateChange()).to.throwError();
-      expect(() => monitor.subscribeToStateChange(42)).to.throwError();
-      expect(() => monitor.subscribeToStateChange('hi')).to.throwError();
-      expect(() => monitor.subscribeToStateChange({})).to.throwError();
+      expect(() => monitor.subscribeToStateChange()).toThrow();
+      expect(() => monitor.subscribeToStateChange(42)).toThrow();
+      expect(() => monitor.subscribeToStateChange('hi')).toThrow();
+      expect(() => monitor.subscribeToStateChange({})).toThrow();
     });
 
     it('throws on bad handlerIds', () => {
-      expect(() => monitor.subscribeToStateChange(() => { }, { handlerIds: [] })).to.not.throwError();
-      expect(() => monitor.subscribeToStateChange(() => { }, { handlerIds: ['hi'] })).to.not.throwError();
-      expect(() => monitor.subscribeToStateChange(() => { }, { handlerIds: {} })).to.throwError();
-      expect(() => monitor.subscribeToStateChange(() => { }, { handlerIds: () => { } })).to.throwError();
+      expect(() => monitor.subscribeToStateChange(() => { }, { handlerIds: [] })).not.toThrow();
+      expect(() => monitor.subscribeToStateChange(() => { }, { handlerIds: ['hi'] })).not.toThrow();
+      expect(() => monitor.subscribeToStateChange(() => { }, { handlerIds: {} })).toThrow();
+      expect(() => monitor.subscribeToStateChange(() => { }, { handlerIds: () => { } })).toThrow();
     });
 
     it('allows to unsubscribe', () => {
@@ -44,10 +43,10 @@ describe('DragDropMonitor', () => {
       });
 
       unsubscribe();
-      expect(unsubscribe).to.not.throwError();
+      expect(unsubscribe).not.toThrow();
 
       backend.simulateBeginDrag([sourceId]);
-      expect(raisedChange).to.equal(false);
+      expect(raisedChange).toEqual(false);
     });
 
     it('raises global change event on beginDrag()', (done) => {
@@ -112,10 +111,10 @@ describe('DragDropMonitor', () => {
       });
 
       backend.simulateBeginDrag([sourceAId]);
-      expect(raisedChangeForSourceA).to.equal(true);
-      expect(raisedChangeForSourceB).to.equal(true);
-      expect(raisedChangeForSourceAAndB).to.equal(true);
-      expect(raisedChangeForTargetA).to.equal(true);
+      expect(raisedChangeForSourceA).toEqual(true);
+      expect(raisedChangeForSourceB).toEqual(true);
+      expect(raisedChangeForSourceAAndB).toEqual(true);
+      expect(raisedChangeForTargetA).toEqual(true);
     });
 
     it('raises local change event on sources and targets in endDrag()', () => {
@@ -157,10 +156,10 @@ describe('DragDropMonitor', () => {
       });
 
       backend.simulateEndDrag();
-      expect(raisedChangeForSourceA).to.equal(true);
-      expect(raisedChangeForSourceB).to.equal(true);
-      expect(raisedChangeForSourceAAndB).to.equal(true);
-      expect(raisedChangeForTargetA).to.equal(true);
+      expect(raisedChangeForSourceA).toEqual(true);
+      expect(raisedChangeForSourceB).toEqual(true);
+      expect(raisedChangeForSourceAAndB).toEqual(true);
+      expect(raisedChangeForTargetA).toEqual(true);
     });
 
     it('raises local change event on sources and targets in drop()', () => {
@@ -203,10 +202,10 @@ describe('DragDropMonitor', () => {
       });
 
       backend.simulateDrop();
-      expect(raisedChangeForSourceA).to.equal(true);
-      expect(raisedChangeForSourceB).to.equal(true);
-      expect(raisedChangeForSourceAAndB).to.equal(true);
-      expect(raisedChangeForTargetA).to.equal(true);
+      expect(raisedChangeForSourceA).toEqual(true);
+      expect(raisedChangeForSourceB).toEqual(true);
+      expect(raisedChangeForSourceAAndB).toEqual(true);
+      expect(raisedChangeForTargetA).toEqual(true);
     });
 
     it('raises local change event only on previous and next targets in hover()', () => {
@@ -292,15 +291,15 @@ describe('DragDropMonitor', () => {
       });
 
       backend.simulateHover([targetDId, targetEId]);
-      expect(raisedChangeForSourceA).to.equal(false);
-      expect(raisedChangeForSourceB).to.equal(false);
-      expect(raisedChangeForTargetA).to.equal(true);
-      expect(raisedChangeForTargetB).to.equal(true);
-      expect(raisedChangeForTargetC).to.equal(false);
-      expect(raisedChangeForTargetD).to.equal(true);
-      expect(raisedChangeForTargetE).to.equal(true);
-      expect(raisedChangeForSourceBAndTargetC).to.equal(false);
-      expect(raisedChangeForSourceBAndTargetE).to.equal(true);
+      expect(raisedChangeForSourceA).toEqual(false);
+      expect(raisedChangeForSourceB).toEqual(false);
+      expect(raisedChangeForTargetA).toEqual(true);
+      expect(raisedChangeForTargetB).toEqual(true);
+      expect(raisedChangeForTargetC).toEqual(false);
+      expect(raisedChangeForTargetD).toEqual(true);
+      expect(raisedChangeForTargetE).toEqual(true);
+      expect(raisedChangeForSourceBAndTargetC).toEqual(false);
+      expect(raisedChangeForSourceBAndTargetE).toEqual(true);
     });
 
     it('raises local change event when target stops being or becomes innermost in hover()', () => {
@@ -347,40 +346,40 @@ describe('DragDropMonitor', () => {
       });
 
       backend.simulateHover([targetAId, targetBId, targetCId]);
-      expect(raisedChangeForTargetA).to.equal(false);
-      expect(raisedChangeForTargetB).to.equal(false);
-      expect(raisedChangeForTargetC).to.equal(true);
-      expect(raisedChangeForTargetD).to.equal(true);
+      expect(raisedChangeForTargetA).toEqual(false);
+      expect(raisedChangeForTargetB).toEqual(false);
+      expect(raisedChangeForTargetC).toEqual(true);
+      expect(raisedChangeForTargetD).toEqual(true);
 
       raisedChangeForTargetA = false;
       raisedChangeForTargetB = false;
       raisedChangeForTargetC = false;
       raisedChangeForTargetD = false;
       backend.simulateHover([targetAId, targetBId, targetCId, targetDId]);
-      expect(raisedChangeForTargetA).to.equal(false);
-      expect(raisedChangeForTargetB).to.equal(false);
-      expect(raisedChangeForTargetC).to.equal(true);
-      expect(raisedChangeForTargetD).to.equal(true);
+      expect(raisedChangeForTargetA).toEqual(false);
+      expect(raisedChangeForTargetB).toEqual(false);
+      expect(raisedChangeForTargetC).toEqual(true);
+      expect(raisedChangeForTargetD).toEqual(true);
 
       raisedChangeForTargetA = false;
       raisedChangeForTargetB = false;
       raisedChangeForTargetC = false;
       raisedChangeForTargetD = false;
       backend.simulateHover([targetAId]);
-      expect(raisedChangeForTargetA).to.equal(true);
-      expect(raisedChangeForTargetB).to.equal(true);
-      expect(raisedChangeForTargetC).to.equal(true);
-      expect(raisedChangeForTargetD).to.equal(true);
+      expect(raisedChangeForTargetA).toEqual(true);
+      expect(raisedChangeForTargetB).toEqual(true);
+      expect(raisedChangeForTargetC).toEqual(true);
+      expect(raisedChangeForTargetD).toEqual(true);
 
       raisedChangeForTargetA = false;
       raisedChangeForTargetB = false;
       raisedChangeForTargetC = false;
       raisedChangeForTargetD = false;
       backend.simulateHover([targetAId, targetBId]);
-      expect(raisedChangeForTargetA).to.equal(true);
-      expect(raisedChangeForTargetB).to.equal(true);
-      expect(raisedChangeForTargetC).to.equal(false);
-      expect(raisedChangeForTargetD).to.equal(false);
+      expect(raisedChangeForTargetA).toEqual(true);
+      expect(raisedChangeForTargetB).toEqual(true);
+      expect(raisedChangeForTargetC).toEqual(false);
+      expect(raisedChangeForTargetD).toEqual(false);
     });
 
     it('raises global change event on endDrag()', (done) => {
@@ -421,44 +420,44 @@ describe('DragDropMonitor', () => {
       });
 
       backend.simulateBeginDrag([sourceId]);
-      expect(raisedChange).to.equal(true);
+      expect(raisedChange).toEqual(true);
       raisedChange = false;
 
       backend.simulateHover([targetAId]);
-      expect(raisedChange).to.equal(true);
+      expect(raisedChange).toEqual(true);
       raisedChange = false;
 
       backend.simulateHover([targetBId]);
-      expect(raisedChange).to.equal(true);
+      expect(raisedChange).toEqual(true);
       raisedChange = false;
 
       backend.simulateHover([targetBId]);
-      expect(raisedChange).to.equal(false);
+      expect(raisedChange).toEqual(false);
 
       backend.simulateHover([targetBId, targetAId]);
-      expect(raisedChange).to.equal(true);
+      expect(raisedChange).toEqual(true);
       raisedChange = false;
 
       backend.simulateHover([targetBId, targetAId]);
-      expect(raisedChange).to.equal(false);
+      expect(raisedChange).toEqual(false);
 
       backend.simulateHover([targetAId, targetBId]);
-      expect(raisedChange).to.equal(true);
+      expect(raisedChange).toEqual(true);
       raisedChange = false;
 
       backend.simulateHover([targetAId, targetBId]);
-      expect(raisedChange).to.equal(false);
+      expect(raisedChange).toEqual(false);
     });
   });
 
   describe('offset change subscription', () => {
     it('throws on bad listener', () => {
-      expect(() => monitor.subscribeToOffsetChange(() => { })).to.not.throwError();
+      expect(() => monitor.subscribeToOffsetChange(() => { })).not.toThrow();
 
-      expect(() => monitor.subscribeToOffsetChange()).to.throwError();
-      expect(() => monitor.subscribeToOffsetChange(42)).to.throwError();
-      expect(() => monitor.subscribeToOffsetChange('hi')).to.throwError();
-      expect(() => monitor.subscribeToOffsetChange({})).to.throwError();
+      expect(() => monitor.subscribeToOffsetChange()).toThrow();
+      expect(() => monitor.subscribeToOffsetChange(42)).toThrow();
+      expect(() => monitor.subscribeToOffsetChange('hi')).toThrow();
+      expect(() => monitor.subscribeToOffsetChange({})).toThrow();
     });
 
     it('allows to unsubscribe', () => {
@@ -471,13 +470,13 @@ describe('DragDropMonitor', () => {
       });
 
       unsubscribe();
-      expect(unsubscribe).to.not.throwError();
+      expect(unsubscribe).not.toThrow();
 
       backend.simulateBeginDrag([sourceId], {
         clientOffset: { x: 0, y: 0 },
         getSourceClientOffset: () => ({ x: 0, y: 0 }),
       });
-      expect(raisedChange).to.equal(false);
+      expect(raisedChange).toEqual(false);
     });
 
     it('throws when passing clientOffset without getSourceClientOffset', () => {
@@ -486,17 +485,17 @@ describe('DragDropMonitor', () => {
 
       expect(() => backend.simulateBeginDrag([sourceId], {
         clientOffset: { x: 0, y: 0 },
-      })).to.throwError();
+      })).toThrow();
 
       expect(() => backend.simulateBeginDrag([sourceId], {
         clientOffset: { x: 0, y: 0 },
         getSourceClientOffset: { x: 0, y: 0 },
-      })).to.throwError();
+      })).toThrow();
 
       expect(() => backend.simulateBeginDrag([sourceId], {
         clientOffset: { x: 0, y: 0 },
         getSourceClientOffset: () => ({ x: 0, y: 0 }),
-      })).to.not.throwError();
+      })).not.toThrow();
     });
 
     it('sets source client offset from the innermost draggable source', () => {
@@ -516,7 +515,7 @@ describe('DragDropMonitor', () => {
         ),
       });
 
-      expect(monitor.getInitialSourceClientOffset()).to.eql({ x: 42, y: 0 });
+      expect(monitor.getInitialSourceClientOffset()).toEqual({ x: 42, y: 0 });
     });
 
     it('keeps track of offsets', () => {
@@ -525,70 +524,70 @@ describe('DragDropMonitor', () => {
       const target = new NormalTarget();
       const targetId = registry.addTarget(Types.FOO, target);
 
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateBeginDrag([sourceId], {
         clientOffset: { x: 50, y: 40 },
         getSourceClientOffset: () => ({ x: 20, y: 10 }),
       });
-      expect(monitor.getInitialSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getInitialClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getDifferenceFromInitialOffset()).to.eql({ x: 0, y: 0 });
+      expect(monitor.getInitialSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getInitialClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual({ x: 0, y: 0 });
 
       backend.simulateHover([targetId], {
         clientOffset: { x: 60, y: 70 },
       });
-      expect(monitor.getInitialSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getInitialClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getClientOffset()).to.eql({ x: 60, y: 70 });
-      expect(monitor.getSourceClientOffset()).to.eql({ x: 30, y: 40 });
-      expect(monitor.getDifferenceFromInitialOffset()).to.eql({ x: 10, y: 30 });
+      expect(monitor.getInitialSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getInitialClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getClientOffset()).toEqual({ x: 60, y: 70 });
+      expect(monitor.getSourceClientOffset()).toEqual({ x: 30, y: 40 });
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual({ x: 10, y: 30 });
 
       backend.simulateHover([targetId], {
         clientOffset: { x: 0, y: 0 },
       });
-      expect(monitor.getInitialSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getInitialClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getClientOffset()).to.eql({ x: 0, y: 0 });
-      expect(monitor.getSourceClientOffset()).to.eql({ x: -30, y: -30 });
-      expect(monitor.getDifferenceFromInitialOffset()).to.eql({ x: -50, y: -40 });
+      expect(monitor.getInitialSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getInitialClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getClientOffset()).toEqual({ x: 0, y: 0 });
+      expect(monitor.getSourceClientOffset()).toEqual({ x: -30, y: -30 });
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual({ x: -50, y: -40 });
 
       backend.simulateDrop();
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateEndDrag();
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateBeginDrag([sourceId], {
         clientOffset: { x: 50, y: 40 },
         getSourceClientOffset: () => ({ x: 20, y: 10 }),
       });
-      expect(monitor.getInitialSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getInitialClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getDifferenceFromInitialOffset()).to.eql({ x: 0, y: 0 });
+      expect(monitor.getInitialSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getInitialClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual({ x: 0, y: 0 });
 
       backend.simulateEndDrag();
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
     });
 
     it('keeps track of offsets when initial offset is not specified', () => {
@@ -597,57 +596,57 @@ describe('DragDropMonitor', () => {
       const target = new NormalTarget();
       const targetId = registry.addTarget(Types.FOO, target);
 
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateBeginDrag([sourceId]);
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateHover([targetId], {
         clientOffset: { x: 60, y: 70 },
       });
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.eql({ x: 60, y: 70 });
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual({ x: 60, y: 70 });
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateHover([targetId]);
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateHover([targetId], {
         clientOffset: { x: 60, y: 70 },
       });
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.eql({ x: 60, y: 70 });
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual({ x: 60, y: 70 });
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateDrop();
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateEndDrag();
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
     });
 
     it('keeps track of offsets when current offset is not specified', () => {
@@ -656,51 +655,51 @@ describe('DragDropMonitor', () => {
       const target = new NormalTarget();
       const targetId = registry.addTarget(Types.FOO, target);
 
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateBeginDrag([sourceId], {
         clientOffset: { x: 50, y: 40 },
         getSourceClientOffset: () => ({ x: 20, y: 10 }),
       });
-      expect(monitor.getInitialSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getInitialClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getDifferenceFromInitialOffset()).to.eql({ x: 0, y: 0 });
+      expect(monitor.getInitialSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getInitialClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual({ x: 0, y: 0 });
 
       backend.simulateHover([targetId]);
-      expect(monitor.getInitialSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getInitialClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getInitialClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateHover([targetId], {
         clientOffset: { x: 60, y: 70 },
       });
-      expect(monitor.getInitialSourceClientOffset()).to.eql({ x: 20, y: 10 });
-      expect(monitor.getInitialClientOffset()).to.eql({ x: 50, y: 40 });
-      expect(monitor.getClientOffset()).to.eql({ x: 60, y: 70 });
-      expect(monitor.getSourceClientOffset()).to.eql({ x: 30, y: 40 });
-      expect(monitor.getDifferenceFromInitialOffset()).to.eql({ x: 10, y: 30 });
+      expect(monitor.getInitialSourceClientOffset()).toEqual({ x: 20, y: 10 });
+      expect(monitor.getInitialClientOffset()).toEqual({ x: 50, y: 40 });
+      expect(monitor.getClientOffset()).toEqual({ x: 60, y: 70 });
+      expect(monitor.getSourceClientOffset()).toEqual({ x: 30, y: 40 });
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual({ x: 10, y: 30 });
 
       backend.simulateDrop();
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
 
       backend.simulateEndDrag();
-      expect(monitor.getInitialSourceClientOffset()).to.equal(null);
-      expect(monitor.getInitialClientOffset()).to.equal(null);
-      expect(monitor.getClientOffset()).to.equal(null);
-      expect(monitor.getSourceClientOffset()).to.equal(null);
-      expect(monitor.getDifferenceFromInitialOffset()).to.equal(null);
+      expect(monitor.getInitialSourceClientOffset()).toEqual(null);
+      expect(monitor.getInitialClientOffset()).toEqual(null);
+      expect(monitor.getClientOffset()).toEqual(null);
+      expect(monitor.getSourceClientOffset()).toEqual(null);
+      expect(monitor.getDifferenceFromInitialOffset()).toEqual(null);
     });
 
     it('raises offset change event on beginDrag()', (done) => {
@@ -745,7 +744,7 @@ describe('DragDropMonitor', () => {
       });
 
       backend.simulateHover([targetId]);
-      expect(raisedChange).to.equal(false);
+      expect(raisedChange).toEqual(false);
     });
 
     it('does not raise offset change event on hover() when clientOffset has not changed', () => {
@@ -767,15 +766,15 @@ describe('DragDropMonitor', () => {
       backend.simulateHover([targetId], {
         clientOffset: { x: 100, y: 200 },
       });
-      expect(raisedChange).to.equal(false);
+      expect(raisedChange).toEqual(false);
       backend.simulateHover([], {
         clientOffset: { x: 100, y: 200 },
       });
-      expect(raisedChange).to.equal(false);
+      expect(raisedChange).toEqual(false);
       backend.simulateHover([targetId], {
         clientOffset: { x: 101, y: 200 },
       });
-      expect(raisedChange).to.equal(true);
+      expect(raisedChange).toEqual(true);
     });
 
     it('raises offset change event on endDrag()', (done) => {
@@ -816,35 +815,35 @@ describe('DragDropMonitor', () => {
       const target = new NormalTarget();
       const targetId = registry.addTarget(Types.FOO, target);
 
-      expect(monitor.canDragSource(sourceAId)).to.equal(true);
-      expect(monitor.canDragSource(sourceBId)).to.equal(true);
-      expect(monitor.canDragSource(sourceCId)).to.equal(true);
-      expect(monitor.canDragSource(sourceDId)).to.equal(false);
+      expect(monitor.canDragSource(sourceAId)).toEqual(true);
+      expect(monitor.canDragSource(sourceBId)).toEqual(true);
+      expect(monitor.canDragSource(sourceCId)).toEqual(true);
+      expect(monitor.canDragSource(sourceDId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceAId]);
-      expect(monitor.canDragSource(sourceAId)).to.equal(false);
-      expect(monitor.canDragSource(sourceBId)).to.equal(false);
-      expect(monitor.canDragSource(sourceCId)).to.equal(false);
-      expect(monitor.canDragSource(sourceDId)).to.equal(false);
+      expect(monitor.canDragSource(sourceAId)).toEqual(false);
+      expect(monitor.canDragSource(sourceBId)).toEqual(false);
+      expect(monitor.canDragSource(sourceCId)).toEqual(false);
+      expect(monitor.canDragSource(sourceDId)).toEqual(false);
 
       backend.simulateHover([targetId]);
       backend.simulateDrop();
-      expect(monitor.canDragSource(sourceAId)).to.equal(false);
-      expect(monitor.canDragSource(sourceBId)).to.equal(false);
-      expect(monitor.canDragSource(sourceCId)).to.equal(false);
-      expect(monitor.canDragSource(sourceDId)).to.equal(false);
+      expect(monitor.canDragSource(sourceAId)).toEqual(false);
+      expect(monitor.canDragSource(sourceBId)).toEqual(false);
+      expect(monitor.canDragSource(sourceCId)).toEqual(false);
+      expect(monitor.canDragSource(sourceDId)).toEqual(false);
 
       backend.simulateEndDrag();
-      expect(monitor.canDragSource(sourceAId)).to.equal(true);
-      expect(monitor.canDragSource(sourceBId)).to.equal(true);
-      expect(monitor.canDragSource(sourceCId)).to.equal(true);
-      expect(monitor.canDragSource(sourceDId)).to.equal(false);
+      expect(monitor.canDragSource(sourceAId)).toEqual(true);
+      expect(monitor.canDragSource(sourceBId)).toEqual(true);
+      expect(monitor.canDragSource(sourceCId)).toEqual(true);
+      expect(monitor.canDragSource(sourceDId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceAId]);
-      expect(monitor.canDragSource(sourceAId)).to.equal(false);
-      expect(monitor.canDragSource(sourceBId)).to.equal(false);
-      expect(monitor.canDragSource(sourceCId)).to.equal(false);
-      expect(monitor.canDragSource(sourceDId)).to.equal(false);
+      expect(monitor.canDragSource(sourceAId)).toEqual(false);
+      expect(monitor.canDragSource(sourceBId)).toEqual(false);
+      expect(monitor.canDragSource(sourceCId)).toEqual(false);
+      expect(monitor.canDragSource(sourceDId)).toEqual(false);
     });
 
     it('returns true from canDrop if dragging and type matches, unless target opts out', () => {
@@ -859,35 +858,35 @@ describe('DragDropMonitor', () => {
       const targetD = new NonDroppableTarget();
       const targetDId = registry.addTarget(Types.FOO, targetD);
 
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceId]);
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
 
       backend.simulateHover([targetAId]);
       backend.simulateDrop();
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
 
       backend.simulateEndDrag();
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceId]);
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
     });
 
     it('treats symbol types just like string types', () => {
@@ -905,35 +904,35 @@ describe('DragDropMonitor', () => {
       const targetD = new NonDroppableTarget();
       const targetDId = registry.addTarget(FooType, targetD);
 
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceId]);
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
 
       backend.simulateHover([targetAId]);
       backend.simulateDrop();
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
 
       backend.simulateEndDrag();
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceId]);
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetDId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetDId)).toEqual(false);
     });
 
     it('returns true from isDragging only while dragging', () => {
@@ -944,30 +943,30 @@ describe('DragDropMonitor', () => {
       const target = new NormalTarget();
       const targetId = registry.addTarget(Types.FOO, target);
 
-      expect(monitor.isDragging()).to.equal(false);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
-      expect(monitor.isDraggingSource(otherId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(false);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
+      expect(monitor.isDraggingSource(otherId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceId]);
-      expect(monitor.isDragging()).to.equal(true);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(true);
-      expect(monitor.isDraggingSource(otherId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(true);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(true);
+      expect(monitor.isDraggingSource(otherId)).toEqual(false);
 
       backend.simulateHover([targetId]);
       backend.simulateDrop();
-      expect(monitor.isDragging()).to.equal(true);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(true);
-      expect(monitor.isDraggingSource(otherId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(true);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(true);
+      expect(monitor.isDraggingSource(otherId)).toEqual(false);
 
       backend.simulateEndDrag();
-      expect(monitor.isDragging()).to.equal(false);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
-      expect(monitor.isDraggingSource(otherId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(false);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
+      expect(monitor.isDraggingSource(otherId)).toEqual(false);
 
       backend.simulateBeginDrag([otherId]);
-      expect(monitor.isDragging()).to.equal(true);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
-      expect(monitor.isDraggingSource(otherId)).to.equal(true);
+      expect(monitor.isDragging()).toEqual(true);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
+      expect(monitor.isDraggingSource(otherId)).toEqual(true);
     });
 
     it('keeps track of dragged item, type and source handle', () => {
@@ -978,31 +977,31 @@ describe('DragDropMonitor', () => {
       const target = new NormalTarget();
       const targetId = registry.addTarget(Types.FOO, target);
 
-      expect(monitor.getItem()).to.equal(null);
-      expect(monitor.getItemType()).to.equal(null);
-      expect(monitor.getSourceId()).to.equal(null);
+      expect(monitor.getItem()).toEqual(null);
+      expect(monitor.getItemType()).toEqual(null);
+      expect(monitor.getSourceId()).toEqual(null);
 
       backend.simulateBeginDrag([sourceAId]);
-      expect(monitor.getItem().a).to.equal(123);
-      expect(monitor.getItemType()).to.equal(Types.FOO);
-      expect(monitor.getSourceId()).to.equal(sourceAId);
+      expect(monitor.getItem().a).toEqual(123);
+      expect(monitor.getItemType()).toEqual(Types.FOO);
+      expect(monitor.getSourceId()).toEqual(sourceAId);
 
       backend.simulateHover([targetId]);
       backend.simulateDrop();
-      expect(monitor.getItem().a).to.equal(123);
-      expect(monitor.getItemType()).to.equal(Types.FOO);
-      expect(monitor.getSourceId()).to.equal(sourceAId);
+      expect(monitor.getItem().a).toEqual(123);
+      expect(monitor.getItemType()).toEqual(Types.FOO);
+      expect(monitor.getSourceId()).toEqual(sourceAId);
 
       backend.simulateEndDrag();
-      expect(monitor.getItem()).to.equal(null);
-      expect(monitor.getItemType()).to.equal(null);
-      expect(monitor.getSourceId()).to.equal(null);
+      expect(monitor.getItem()).toEqual(null);
+      expect(monitor.getItemType()).toEqual(null);
+      expect(monitor.getSourceId()).toEqual(null);
 
       backend.simulateBeginDrag([sourceBId]);
       registry.removeSource(sourceBId);
-      expect(monitor.getItem().a).to.equal(456);
-      expect(monitor.getItemType()).to.equal(Types.BAR);
-      expect(monitor.getSourceId()).to.equal(sourceBId);
+      expect(monitor.getItem().a).toEqual(456);
+      expect(monitor.getItemType()).toEqual(Types.BAR);
+      expect(monitor.getSourceId()).toEqual(sourceBId);
     });
 
     it('keeps track of drop result and whether it occured', () => {
@@ -1013,34 +1012,34 @@ describe('DragDropMonitor', () => {
       const targetB = new TargetWithNoDropResult();
       const targetBId = registry.addTarget(Types.FOO, targetB);
 
-      expect(monitor.didDrop()).to.equal(false);
-      expect(monitor.getDropResult()).to.equal(null);
+      expect(monitor.didDrop()).toEqual(false);
+      expect(monitor.getDropResult()).toEqual(null);
 
       backend.simulateBeginDrag([sourceId]);
-      expect(monitor.didDrop()).to.equal(false);
-      expect(monitor.getDropResult()).to.equal(null);
+      expect(monitor.didDrop()).toEqual(false);
+      expect(monitor.getDropResult()).toEqual(null);
 
       backend.simulateHover([targetAId]);
       backend.simulateDrop();
-      expect(monitor.didDrop()).to.equal(true);
-      expect(monitor.getDropResult()).to.eql({ a: 123 });
+      expect(monitor.didDrop()).toEqual(true);
+      expect(monitor.getDropResult()).toEqual({ a: 123 });
 
       backend.simulateEndDrag();
-      expect(monitor.didDrop()).to.equal(false);
-      expect(monitor.getDropResult()).to.equal(null);
+      expect(monitor.didDrop()).toEqual(false);
+      expect(monitor.getDropResult()).toEqual(null);
 
       backend.simulateBeginDrag([sourceId]);
-      expect(monitor.didDrop()).to.equal(false);
-      expect(monitor.getDropResult()).to.equal(null);
+      expect(monitor.didDrop()).toEqual(false);
+      expect(monitor.getDropResult()).toEqual(null);
 
       backend.simulateHover([targetBId]);
       backend.simulateDrop();
-      expect(monitor.didDrop()).to.equal(true);
-      expect(monitor.getDropResult()).to.eql({});
+      expect(monitor.didDrop()).toEqual(true);
+      expect(monitor.getDropResult()).toEqual({});
 
       backend.simulateEndDrag();
-      expect(monitor.didDrop()).to.equal(false);
-      expect(monitor.getDropResult()).to.equal(null);
+      expect(monitor.didDrop()).toEqual(false);
+      expect(monitor.getDropResult()).toEqual(null);
     });
   });
 
@@ -1057,78 +1056,78 @@ describe('DragDropMonitor', () => {
       const targetC = new NormalTarget();
       const targetCId = registry.addTarget([Types.FOO, Types.BAR, Types.BAZ], targetC);
 
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceAId]);
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(true);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(true);
 
       backend.simulateHover([targetAId]);
       backend.simulateDrop();
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
 
       backend.simulateEndDrag();
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(false);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceBId]);
-      expect(monitor.canDropOnTarget(targetAId)).to.equal(false);
-      expect(monitor.canDropOnTarget(targetBId)).to.equal(true);
-      expect(monitor.canDropOnTarget(targetCId)).to.equal(true);
+      expect(monitor.canDropOnTarget(targetAId)).toEqual(false);
+      expect(monitor.canDropOnTarget(targetBId)).toEqual(true);
+      expect(monitor.canDropOnTarget(targetCId)).toEqual(true);
     });
 
     it('returns false from isDragging(sourceId) if source is not published', () => {
       const source = new NormalSource();
       const sourceId = registry.addSource(Types.FOO, source);
 
-      expect(monitor.isDragging()).to.equal(false);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(false);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceId], { publishSource: false });
-      expect(monitor.isDragging()).to.equal(true);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(true);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
 
       backend.simulatePublishDragSource();
-      expect(monitor.isDragging()).to.equal(true);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(true);
+      expect(monitor.isDragging()).toEqual(true);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(true);
 
       backend.simulateEndDrag();
-      expect(monitor.isDragging()).to.equal(false);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(false);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
     });
 
     it('ignores publishDragSource() outside dragging operation', () => {
       const source = new NormalSource();
       const sourceId = registry.addSource(Types.FOO, source);
 
-      expect(monitor.isDragging()).to.equal(false);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(false);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
 
       backend.simulatePublishDragSource();
-      expect(monitor.isDragging()).to.equal(false);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(false);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceId], { publishSource: false });
-      expect(monitor.isDragging()).to.equal(true);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(true);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
 
       backend.simulatePublishDragSource();
-      expect(monitor.isDragging()).to.equal(true);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(true);
+      expect(monitor.isDragging()).toEqual(true);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(true);
 
       backend.simulateEndDrag();
-      expect(monitor.isDragging()).to.equal(false);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(false);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
 
       backend.simulatePublishDragSource();
-      expect(monitor.isDragging()).to.equal(false);
-      expect(monitor.isDraggingSource(sourceId)).to.equal(false);
+      expect(monitor.isDragging()).toEqual(false);
+      expect(monitor.isDraggingSource(sourceId)).toEqual(false);
     });
   });
 
@@ -1141,14 +1140,14 @@ describe('DragDropMonitor', () => {
 
       backend.simulateBeginDrag([sourceId]);
       backend.simulateHover([targetId]);
-      expect(monitor.getTargetIds().length).to.be(1);
-      expect(monitor.isOverTarget(targetId)).to.equal(true);
-      expect(monitor.isOverTarget(targetId, { shallow: true })).to.equal(true);
+      expect(monitor.getTargetIds().length).toEqual(1);
+      expect(monitor.isOverTarget(targetId)).toEqual(true);
+      expect(monitor.isOverTarget(targetId, { shallow: true })).toEqual(true);
 
       registry.removeTarget(targetId);
-      expect(monitor.getTargetIds().length).to.be(0);
-      expect(monitor.isOverTarget(targetId)).to.equal(false);
-      expect(monitor.isOverTarget(targetId, { shallow: true })).to.equal(false);
+      expect(monitor.getTargetIds().length).toEqual(0);
+      expect(monitor.isOverTarget(targetId)).toEqual(false);
+      expect(monitor.isOverTarget(targetId, { shallow: true })).toEqual(false);
     });
 
     it('keeps track of target handles', () => {
@@ -1162,53 +1161,53 @@ describe('DragDropMonitor', () => {
       const targetCId = registry.addTarget(Types.FOO, targetC);
 
       let handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
+      expect(handles.length).toEqual(0);
 
       backend.simulateBeginDrag([sourceId]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
-      expect(monitor.isOverTarget(targetAId)).to.equal(false);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetBId)).to.equal(false);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
+      expect(handles.length).toEqual(0);
+      expect(monitor.isOverTarget(targetAId)).toEqual(false);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetBId)).toEqual(false);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
 
       backend.simulateHover([]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
-      expect(monitor.isOverTarget(targetAId)).to.equal(false);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetBId)).to.equal(false);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
+      expect(handles.length).toEqual(0);
+      expect(monitor.isOverTarget(targetAId)).toEqual(false);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetBId)).toEqual(false);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
 
       backend.simulateHover([targetAId, targetBId, targetCId]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(3);
-      expect(handles[0]).to.equal(targetAId);
-      expect(monitor.isOverTarget(targetAId)).to.equal(true);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(handles[1]).to.equal(targetBId);
-      expect(monitor.isOverTarget(targetBId)).to.equal(true);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(handles[2]).to.equal(targetCId);
-      expect(monitor.isOverTarget(targetCId)).to.equal(true);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(true);
+      expect(handles.length).toEqual(3);
+      expect(handles[0]).toEqual(targetAId);
+      expect(monitor.isOverTarget(targetAId)).toEqual(true);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(handles[1]).toEqual(targetBId);
+      expect(monitor.isOverTarget(targetBId)).toEqual(true);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(handles[2]).toEqual(targetCId);
+      expect(monitor.isOverTarget(targetCId)).toEqual(true);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(true);
 
       backend.simulateHover([targetCId, targetBId, targetAId]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(3);
-      expect(handles[0]).to.equal(targetCId);
-      expect(monitor.isOverTarget(targetCId)).to.equal(true);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
-      expect(handles[1]).to.equal(targetBId);
-      expect(monitor.isOverTarget(targetBId)).to.equal(true);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(handles[2]).to.equal(targetAId);
-      expect(monitor.isOverTarget(targetAId)).to.equal(true);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(true);
+      expect(handles.length).toEqual(3);
+      expect(handles[0]).toEqual(targetCId);
+      expect(monitor.isOverTarget(targetCId)).toEqual(true);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
+      expect(handles[1]).toEqual(targetBId);
+      expect(monitor.isOverTarget(targetBId)).toEqual(true);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(handles[2]).toEqual(targetAId);
+      expect(monitor.isOverTarget(targetAId)).toEqual(true);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(true);
     });
 
     it('resets target handles on drop', () => {
@@ -1218,18 +1217,18 @@ describe('DragDropMonitor', () => {
       const targetId = registry.addTarget(Types.FOO, target);
 
       let handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
+      expect(handles.length).toEqual(0);
 
       backend.simulateBeginDrag([sourceId]);
       backend.simulateHover([targetId]);
       backend.simulateDrop();
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
+      expect(handles.length).toEqual(0);
 
       backend.simulateEndDrag();
       backend.simulateBeginDrag([sourceId]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
+      expect(handles.length).toEqual(0);
     });
 
     it('resets target handles on endDrag', () => {
@@ -1239,17 +1238,17 @@ describe('DragDropMonitor', () => {
       const targetId = registry.addTarget(Types.FOO, target);
 
       let handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
+      expect(handles.length).toEqual(0);
 
       backend.simulateBeginDrag([sourceId]);
       backend.simulateHover([targetId]);
       backend.simulateEndDrag();
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
+      expect(handles.length).toEqual(0);
 
       backend.simulateBeginDrag([sourceId]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
+      expect(handles.length).toEqual(0);
     });
 
     it('counts non-droppable targets, but skips targets of another type', () => {
@@ -1263,79 +1262,79 @@ describe('DragDropMonitor', () => {
       const targetCId = registry.addTarget(Types.BAR, targetC);
 
       let handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
-      expect(monitor.isOverTarget(targetAId)).to.equal(false);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetBId)).to.equal(false);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
+      expect(handles.length).toEqual(0);
+      expect(monitor.isOverTarget(targetAId)).toEqual(false);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetBId)).toEqual(false);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
 
       backend.simulateBeginDrag([sourceId]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
-      expect(monitor.isOverTarget(targetAId)).to.equal(false);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetBId)).to.equal(false);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
+      expect(handles.length).toEqual(0);
+      expect(monitor.isOverTarget(targetAId)).toEqual(false);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetBId)).toEqual(false);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
 
       backend.simulateHover([]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(0);
-      expect(monitor.isOverTarget(targetAId)).to.equal(false);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetBId)).to.equal(false);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
+      expect(handles.length).toEqual(0);
+      expect(monitor.isOverTarget(targetAId)).toEqual(false);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetBId)).toEqual(false);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
 
       backend.simulateHover([targetAId, targetBId, targetCId]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(2);
-      expect(handles[0]).to.equal(targetAId);
-      expect(monitor.isOverTarget(targetAId)).to.equal(true);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(handles[1]).to.equal(targetBId);
-      expect(monitor.isOverTarget(targetBId)).to.equal(true);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(true);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
+      expect(handles.length).toEqual(2);
+      expect(handles[0]).toEqual(targetAId);
+      expect(monitor.isOverTarget(targetAId)).toEqual(true);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(handles[1]).toEqual(targetBId);
+      expect(monitor.isOverTarget(targetBId)).toEqual(true);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(true);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
 
       backend.simulateHover([targetCId, targetBId, targetAId]);
       handles = monitor.getTargetIds();
-      expect(handles.length).to.be(2);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
-      expect(handles[0]).to.equal(targetBId);
-      expect(monitor.isOverTarget(targetBId)).to.equal(true);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(handles[1]).to.equal(targetAId);
-      expect(monitor.isOverTarget(targetAId)).to.equal(true);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(true);
+      expect(handles.length).toEqual(2);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
+      expect(handles[0]).toEqual(targetBId);
+      expect(monitor.isOverTarget(targetBId)).toEqual(true);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(handles[1]).toEqual(targetAId);
+      expect(monitor.isOverTarget(targetAId)).toEqual(true);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(true);
 
       backend.simulateHover([targetBId]);
       backend.simulateDrop();
       handles = monitor.getTargetIds();
-      expect(handles[0]).to.equal(targetBId);
-      expect(handles.length).to.be(1);
-      expect(monitor.isOverTarget(targetAId)).to.equal(false);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetBId)).to.equal(true);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(true);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
+      expect(handles[0]).toEqual(targetBId);
+      expect(handles.length).toEqual(1);
+      expect(monitor.isOverTarget(targetAId)).toEqual(false);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetBId)).toEqual(true);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(true);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
 
       backend.simulateEndDrag();
-      expect(handles[0]).to.equal(targetBId);
-      expect(handles.length).to.be(1);
-      expect(monitor.isOverTarget(targetAId)).to.equal(false);
-      expect(monitor.isOverTarget(targetAId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetBId)).to.equal(false);
-      expect(monitor.isOverTarget(targetBId, { shallow: true })).to.equal(false);
-      expect(monitor.isOverTarget(targetCId)).to.equal(false);
-      expect(monitor.isOverTarget(targetCId, { shallow: true })).to.equal(false);
+      expect(handles[0]).toEqual(targetBId);
+      expect(handles.length).toEqual(1);
+      expect(monitor.isOverTarget(targetAId)).toEqual(false);
+      expect(monitor.isOverTarget(targetAId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetBId)).toEqual(false);
+      expect(monitor.isOverTarget(targetBId, { shallow: true })).toEqual(false);
+      expect(monitor.isOverTarget(targetCId)).toEqual(false);
+      expect(monitor.isOverTarget(targetCId, { shallow: true })).toEqual(false);
     });
 
     it('correctly handles isOverTarget() for multi-type targets', () => {
@@ -1350,20 +1349,20 @@ describe('DragDropMonitor', () => {
 
       backend.simulateBeginDrag([sourceAId]);
       backend.simulateHover([targetId]);
-      expect(monitor.isOverTarget(targetId)).to.equal(true);
-      expect(monitor.isOverTarget(targetId, { shallow: true })).to.equal(true);
+      expect(monitor.isOverTarget(targetId)).toEqual(true);
+      expect(monitor.isOverTarget(targetId, { shallow: true })).toEqual(true);
 
       backend.simulateEndDrag();
       backend.simulateBeginDrag([sourceBId]);
       backend.simulateHover([targetId]);
-      expect(monitor.isOverTarget(targetId)).to.equal(true);
-      expect(monitor.isOverTarget(targetId, { shallow: true })).to.equal(true);
+      expect(monitor.isOverTarget(targetId)).toEqual(true);
+      expect(monitor.isOverTarget(targetId, { shallow: true })).toEqual(true);
 
       backend.simulateEndDrag();
       backend.simulateBeginDrag([sourceCId]);
       backend.simulateHover([targetId]);
-      expect(monitor.isOverTarget(targetId)).to.equal(false);
-      expect(monitor.isOverTarget(targetId, { shallow: true })).to.equal(false);
+      expect(monitor.isOverTarget(targetId)).toEqual(false);
+      expect(monitor.isOverTarget(targetId, { shallow: true })).toEqual(false);
     });
 
     it('does not let array mutation corrupt internal state', () => {
@@ -1375,10 +1374,10 @@ describe('DragDropMonitor', () => {
 
       backend.simulateBeginDrag([sourceId]);
       backend.simulateHover(handles);
-      expect(monitor.getTargetIds().length).to.be(1);
+      expect(monitor.getTargetIds().length).toEqual(1);
 
       handles.push(targetId);
-      expect(monitor.getTargetIds().length).to.be(1);
+      expect(monitor.getTargetIds().length).toEqual(1);
     });
   });
 
@@ -1395,51 +1394,51 @@ describe('DragDropMonitor', () => {
       const target = new NormalTarget();
       const targetId = registry.addTarget(Types.FOO, target);
 
-      expect(monitor.isDraggingSource(sourceAId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceBId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceCId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceDId)).to.equal(false);
+      expect(monitor.isDraggingSource(sourceAId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceBId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceCId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceDId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceAId]);
-      expect(monitor.isDraggingSource(sourceAId)).to.equal(true);
-      expect(monitor.isDraggingSource(sourceBId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceCId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceDId)).to.equal(false);
+      expect(monitor.isDraggingSource(sourceAId)).toEqual(true);
+      expect(monitor.isDraggingSource(sourceBId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceCId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceDId)).toEqual(false);
 
       sourceA.number = 3;
       sourceB.number = 1;
       sourceC.number = 1;
       sourceD.number = 1;
-      expect(monitor.isDraggingSource(sourceAId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceBId)).to.equal(true);
-      expect(monitor.isDraggingSource(sourceCId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceDId)).to.equal(true);
+      expect(monitor.isDraggingSource(sourceAId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceBId)).toEqual(true);
+      expect(monitor.isDraggingSource(sourceCId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceDId)).toEqual(true);
 
       registry.removeSource(sourceDId);
       backend.simulateHover([targetId]);
       backend.simulateDrop();
-      expect(monitor.isDraggingSource(sourceAId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceBId)).to.equal(true);
-      expect(monitor.isDraggingSource(sourceCId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceDId)).to.equal(true);
+      expect(monitor.isDraggingSource(sourceAId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceBId)).toEqual(true);
+      expect(monitor.isDraggingSource(sourceCId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceDId)).toEqual(true);
 
       backend.simulateEndDrag();
-      expect(monitor.isDraggingSource(sourceAId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceBId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceCId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceDId)).to.equal(false);
+      expect(monitor.isDraggingSource(sourceAId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceBId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceCId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceDId)).toEqual(false);
 
       backend.simulateBeginDrag([sourceBId]);
-      expect(monitor.isDraggingSource(sourceAId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceBId)).to.equal(true);
-      expect(monitor.isDraggingSource(sourceCId)).to.equal(false);
-      expect(monitor.isDraggingSource(sourceDId)).to.equal(true);
+      expect(monitor.isDraggingSource(sourceAId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceBId)).toEqual(true);
+      expect(monitor.isDraggingSource(sourceCId)).toEqual(false);
+      expect(monitor.isDraggingSource(sourceDId)).toEqual(true);
 
       sourceA.number = 1;
-      expect(monitor.isDraggingSource(sourceAId)).to.equal(true);
+      expect(monitor.isDraggingSource(sourceAId)).toEqual(true);
 
       sourceB.number = 5;
-      expect(monitor.isDraggingSource(sourceBId)).to.equal(false);
+      expect(monitor.isDraggingSource(sourceBId)).toEqual(false);
     });
   });
 });

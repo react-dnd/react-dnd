@@ -1,6 +1,6 @@
 {
     "env": {
-        "mocha": true
+        "jest": true
     },
     "rules": {
         "max-len": ["error", 120]
