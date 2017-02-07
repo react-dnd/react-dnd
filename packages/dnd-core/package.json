@@ -1,0 +1,26 @@
+{
+  "name": "dnd-core",
+  "version": "2.1.0",
+  "description": "Drag and drop sans the GUI",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "lint": "eslint '{src,test}/**/*.js'",
+    "build": "babel src --out-dir lib",
+    "unit_test": "jest",
+    "unit_test:watch": "jest --watch",
+    "unit_test:cov": "jest --coverage",
+    "develop": "npm run unit_test:watch",
+    "test": "npm-run-all clean lint build unit_test:cov",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1"
+  },
+  "dependencies": {
+    "asap": "^2.0.3",
+    "invariant": "^2.0.0",
+    "lodash": "^4.2.0",
+    "redux": "^3.2.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "react-dnd-html5-backend",
+  "version": "2.2.0",
+  "description": "HTML5 backend for React DnD",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "build:lib": "babel src --out-dir lib",
+    "build:umd": "webpack",
+    "build": "npm-run-all --parallel build:*",
+    "lint": "eslint .",
+    "unit_test": "mocha --require babel-register --recursive",
+    "unit_test:watch": "npm run unit_test -- --watch",
+    "test": "npm-run-all clean --parallel lint build unit_test",
+    "develop": "npm run unit_test:watch",
+    "prepublish": "npm test"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^3.2.0",
+    "react-dnd": "^2.2.0"
+  },
+  "dependencies": {
+    "lodash": "^4.2.0"
+  },
+  "peerDependencies": {
+    "react-dnd": "^2.2.0"
+  }
+}
