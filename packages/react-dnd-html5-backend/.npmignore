@@ -1,2 +1,6 @@
 test
 .babelrc
+webpack.config.js
+.eslintignore
+.eslintrc
+.travis.yml
