@@ -9,9 +9,7 @@
     "bundle:min": "webpack --output-filename=dist/ReactDnD.min.js --optimize-minimize",
     "babel": "babel src --out-dir lib",
     "build": "npm-run-all --parallel bundle:* babel",
-    "lint": "eslint .",
-    "unit_test": "karma start",
-    "test": "npm-run-all clean lint build",
+    "test": "npm-run-all clean build",
     "prepublish": "npm test"
   },
   "dependencies": {
@@ -25,14 +23,5 @@
     "react": "^0.14.0 || ^15.0.0-0"
   },
   "devDependencies": {
-    "expect": "^1.6.0",
-    "glob": "^7.1.1",
-    "karma": "^1.4.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-mocha": "^1.3.0",
-    "karma-webpack": "^2.0.1",
-    "mocha": "^3.2.0",
-    "react-addons-test-utils": "^15.4.2",
-    "request": "^2.79.0"
   }
 }

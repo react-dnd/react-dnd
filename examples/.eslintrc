@@ -11,7 +11,10 @@
         "react/no-multi-comp": "off",
         "react/no-unused-prop-types": "off",
         "react/prefer-stateless-function": "off",
-        "react/require-default-props": "off"
+        "react/require-default-props": "off",
+        "react/jsx-filename-extension": "off",
+        "class-methods-use-this": "off",
+        "react/sort-comp": "off"
     },
     "env": {
         "jest": true

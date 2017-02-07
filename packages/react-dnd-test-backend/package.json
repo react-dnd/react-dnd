@@ -6,10 +6,8 @@
   "scripts": {
     "clean": "rimraf lib",
     "build": "babel src --out-dir lib",
-    "lint": "eslint .",
-    "verify": "npm run lint && npm run clean && npm run build",
-    "prepublish": "npm run verify",
-    "test": "npm run verify"
+    "test": "npm-run-all clean build",
+    "prepublish": "npm run test"
   },
   "devDependencies": {
   },

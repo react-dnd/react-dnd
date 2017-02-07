@@ -8,13 +8,7 @@
     "build:lib": "babel src --out-dir lib",
     "build:umd": "webpack",
     "build": "npm-run-all --parallel build:*",
-    "lint": "eslint .",
-    "unit_test": "jest",
-    "unit_test:coverage": "jest",
-    "unit_test:watch": "jest --watch",
-    "verify": "npm-run-all lint unit_test:coverage",
-    "test": "npm-run-all clean --parallel build verify",
-    "develop": "npm run unit_test:watch",
+    "test": "npm-run-all clean build",
     "prepublish": "npm test"
   },
   "devDependencies": {

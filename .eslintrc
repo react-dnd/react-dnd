@@ -1,0 +1,13 @@
+{
+  "extends": "eslint-config-airbnb",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalDecorators": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}

@@ -1,6 +1,5 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import expect from 'expect';
 import wrapInTestContext from '../../../shared/wrapInTestContext';
 import Box from '../Box';
 
