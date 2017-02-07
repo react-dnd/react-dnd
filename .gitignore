@@ -3,6 +3,4 @@ dist
 lib
 .DS_Store
 .idea
-__site__
-__site_prerender__
 *-debug.log
