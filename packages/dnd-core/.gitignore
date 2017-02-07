@@ -1,7 +1,0 @@
-node_modules
-.DS_Store
-coverage
-lib
-test-results.xml
-.nyc_output
-*-debug.log

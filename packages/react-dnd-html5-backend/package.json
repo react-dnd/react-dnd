@@ -16,23 +16,9 @@
     "prepublish": "npm test"
   },
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.2.10",
-    "babel-preset-latest": "^6.22.0",
-    "babel-preset-stage-2": "^6.22.0",
-    "babel-register": "^6.22.0",
-    "eslint": "^3.14.0",
-    "eslint-config-airbnb": "^14.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.9.0",
     "expect.js": "^0.3.1",
     "mocha": "^3.2.0",
-    "npm-run-all": "^4.0.1",
-    "react-dnd": "^2.2.0",
-    "rimraf": "^2.4.3",
-    "webpack": "^1.12.2"
+    "react-dnd": "^2.2.0"
   },
   "dependencies": {
     "lodash": "^4.2.0"

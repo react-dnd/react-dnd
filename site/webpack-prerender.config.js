@@ -49,8 +49,10 @@ module.exports = {
 
   resolve: {
     alias: {
-      'react-dnd/modules': path.join(__dirname, '../src'),
-      'react-dnd': path.join(__dirname, '../src')
+      'react-dnd/modules': path.join(__dirname, '../packages/react-dnd/src'),
+      'react-dnd': path.join(__dirname, '../packages/react-dnd/src'),
+      'react-dnd-html5-backend': path.join(__dirname, '../packages/react-dnd-html5-backend/src'),
+      'dnd-core': path.join(__dirname, '../packages/dnd-core/src'),
     }
   },
 
