@@ -1,5 +1,6 @@
 {
   "name": "react-dnd-master",
+  "version": "2.2.2",
   "description": "React-DnD Monorepo",
   "repository": {
     "type": "git",

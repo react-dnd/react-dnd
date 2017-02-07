@@ -1,6 +1,5 @@
 {
   "name": "react-dnd-test-backend",
-  "version": "1.0.2",
   "description": "A mock backend for testing React DnD apps",
   "main": "lib/index.js",
   "scripts": {
