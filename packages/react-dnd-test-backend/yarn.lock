@@ -6,9 +6,9 @@ asap@^2.0.3:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.5.tgz#522765b50c3510490e52d7dcfe085ef9ba96958f"
 
-dnd-core@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-2.1.0.tgz#edc79a5ac7d73553a03ddd3c61a9d0176d5ff182"
+dnd-core@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-2.2.3.tgz#91acba9e1a377be1e9a02e890dcd9907ac9eb829"
   dependencies:
     asap "^2.0.3"
     invariant "^2.0.0"

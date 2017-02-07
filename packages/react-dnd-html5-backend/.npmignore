@@ -4,3 +4,4 @@ webpack.config.js
 .eslintignore
 .eslintrc
 .travis.yml
+yarn.lock
