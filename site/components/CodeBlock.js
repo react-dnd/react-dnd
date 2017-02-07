@@ -5,7 +5,7 @@ import StaticHTMLBlock from './StaticHTMLBlock';
 
 import './CodeBlock.less';
 
-let preferredSyntax = 'es5';
+let preferredSyntax = 'es7';
 let observers = [];
 
 function subscribe(observer) {
@@ -37,9 +37,10 @@ export default class CodeBlock extends Component {
     super(props);
     this.state = {
       chosen: false,
-      syntax: this.props.es5.trim().length && 'es5' ||
+      syntax: this.props.es7.trim().length && 'es7' ||
               this.props.es6.trim().length && 'es6' ||
-              this.props.es7.trim().length && 'es7'
+              this.props.es5.trim().length && 'es5',
+
     };
   }
 
@@ -84,7 +85,7 @@ export default class CodeBlock extends Component {
     return (
       <div className="CodeBlock">
         <ul className="CodeBlock-tabs">
-          {['es5', 'es6', 'es7'].map(this.renderSyntaxLink, this)}
+          {['es7', 'es6', 'es5'].map(this.renderSyntaxLink, this)}
         </ul>
         <div className="CodeBlock-content">
           <StaticHTMLBlock html={this.props[this.state.syntax]} />
