@@ -36,11 +36,16 @@ export default class HTML5Backend {
   }
 
   get window() {
-    return (this.context && this.context.window) || window;
+    if (this.context && this.context.window) {
+      return this.context.window;
+    } else if (typeof window !== 'undefined') {
+      return window;
+    }
+    return undefined;
   }
 
   setup() {
-    if (typeof this.window === 'undefined') {
+    if (this.window === undefined) {
       return;
     }
 
@@ -52,7 +57,7 @@ export default class HTML5Backend {
   }
 
   teardown() {
-    if (typeof this.window === 'undefined') {
+    if (this.window === undefined) {
       return;
     }
 
