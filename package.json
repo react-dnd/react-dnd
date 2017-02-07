@@ -1,22 +1,6 @@
 {
-  "name": "react-dnd",
-  "version": "2.2.0",
-  "description": "Drag and Drop for React",
-  "main": "lib/index.js",
-  "scripts": {
-    "clean": "rimraf lib && rimraf dist",
-    "start": "./scripts/startSiteDevServer.sh",
-    "build-site": "./scripts/buildStaticSite.sh",
-    "publish-site": "./scripts/publishStaticSite.sh",
-    "bundle:unmin": "webpack --output-filename=dist/ReactDnD.js",
-    "bundle:min": "webpack --output-filename=dist/ReactDnD.min.js --optimize-minimize",
-    "babel": "babel src --out-dir lib",
-    "build": "npm-run-all --parallel bundle:* babel",
-    "lint": "eslint .",
-    "unit_test": "karma start",
-    "test": "npm-run-all clean lint build",
-    "prepublish": "npm test"
-  },
+  "name": "react-dnd-master",
+  "description": "React-DnD Monorepo",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git"
@@ -38,27 +22,25 @@
   ],
   "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
   "contributors": [
-    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)"
+    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)",
+    "Jordan Gensler (http://github.com/kesne"
   ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/react-dnd/react-dnd/issues"
   },
   "homepage": "https://github.com/react-dnd/react-dnd",
-  "dependencies": {
-    "babel-eslint": "^7.1.1",
-    "disposables": "^1.0.1",
-    "dnd-core": "^2.1.0",
-    "hoist-non-react-statics": "^1.2.0",
-    "invariant": "^2.1.0",
-    "lodash": "^4.2.0"
-  },
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0-0"
+  "scripts": {
+    "start": "./scripts/startSiteDevServer.sh",
+    "build-site": "./scripts/buildStaticSite.sh",
+    "publish-site": "./scripts/publishStaticSite.sh",
+    "postinstall": "lerna exec --concurrency=1 -- yarn && lerna exec --concurrency=99 -- linklocal",
+    "test": "env PATH=$PATH:./node_modules/.bin lerna run test"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.0",
+    "autoprefixer": "^6.7.2",
     "babel-cli": "^6.22.2",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-latest": "^6.22.0",
@@ -71,32 +53,24 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
-    "expect": "^1.6.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "faker": "^3.1.0",
     "file-loader": "^0.9.0",
-    "glob": "^7.1.1",
     "html-loader": "^0.4.4",
-    "karma": "^1.4.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-mocha": "^1.3.0",
+    "jest": "^18.1.0",
     "karma-sourcemap-loader": "^0.3.6",
-    "karma-webpack": "^2.0.1",
-    "less": "^2.2.0",
+    "lerna": "2.0.0-beta.36",
+    "less": "^2.7.2",
     "less-loader": "^2.0.0",
-    "marked": "^0.3.2",
-    "mocha": "^3.2.0",
+    "linklocal": "^2.8.0",
+    "marked": "^0.3.6",
     "npm-run-all": "^4.0.1",
     "null-loader": "^0.1.0",
-    "postcss": "^5.2.11",
-    "react": "^15.0.0-rc.2",
-    "react-addons-test-utils": "^15.4.2",
-    "react-dnd-html5-backend": "^2.1.2",
-    "react-dnd-test-backend": "^1.0.2",
-    "react-dom": "^15.0.0-rc.2",
+    "postcss": "^5.2.12",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-frame-component": "^1.0.0",
     "react-hot-loader": "^1.2.3",
-    "request": "^2.79.0",
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.5",
