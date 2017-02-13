@@ -17,6 +17,7 @@ module.exports = {
       commonjs: 'react',
       amd: 'react',
     },
+    'redux': 'redux'
   }],
   output: {
     filename: 'dist/ReactDnD.min.js',
