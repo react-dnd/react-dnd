@@ -144,7 +144,7 @@ export default class HTML5Backend {
     const sourceNodeOptions = this.sourceNodeOptions[sourceId];
 
     return defaults(sourceNodeOptions || {}, {
-      dropEffect: 'move',
+      dropEffect: this.altKeyPressed ? 'copy' : 'move',
     });
   }
 
@@ -397,6 +397,8 @@ export default class HTML5Backend {
       return;
     }
 
+    this.altKeyPressed = e.altKey;
+
     if (!isFirefox()) {
       // Don't emit hover in `dragenter` on Firefox due to an edge case.
       // If the target changes position as the result of `dragenter`, Firefox
@@ -437,6 +439,8 @@ export default class HTML5Backend {
       e.dataTransfer.dropEffect = 'none';
       return;
     }
+
+    this.altKeyPressed = e.altKey;
 
     this.actions.hover(dragOverTargetIds, {
       clientOffset: getEventClientOffset(e),
