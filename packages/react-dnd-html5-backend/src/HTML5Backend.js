@@ -504,7 +504,7 @@ export default class HTML5Backend {
     this.actions.hover(dropTargetIds, {
       clientOffset: getEventClientOffset(e),
     });
-    this.actions.drop();
+    this.actions.drop({ dropEffect: this.getCurrentDropEffect() });
 
     if (this.isDraggingNativeItem()) {
       this.endDragNativeItem();
