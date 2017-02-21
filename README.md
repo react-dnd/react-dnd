@@ -20,4 +20,8 @@ See the changelog on the Releases page:
 
 https://github.com/react-dnd/react-dnd/releases
 
+Questions? Find us on the Reactiflux Discord Server (**#general**)
+
+https://www.reactiflux.com/
+
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
