@@ -3,6 +3,7 @@
   "version": "2.2.3",
   "description": "HTML5 backend for React DnD",
   "main": "lib/index.js",
+  "license": "MIT",
   "scripts": {
     "clean": "rimraf lib",
     "build:lib": "babel src --out-dir lib",

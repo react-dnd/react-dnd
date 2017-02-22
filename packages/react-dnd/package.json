@@ -3,6 +3,7 @@
   "version": "2.2.3",
   "description": "Drag and Drop for React",
   "main": "lib/index.js",
+  "license": "MIT",
   "scripts": {
     "clean": "rimraf lib && rimraf dist",
     "bundle:unmin": "webpack --output-filename=dist/ReactDnD.js",
