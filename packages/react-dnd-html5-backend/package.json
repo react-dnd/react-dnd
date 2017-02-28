@@ -1,24 +1,24 @@
 {
   "name": "react-dnd-html5-backend",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "HTML5 backend for React DnD",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf lib",
-    "build:lib": "babel src --out-dir lib",
-    "build:umd": "webpack",
-    "build": "npm-run-all --parallel build:*",
-    "test": "npm-run-all clean build",
+    "clean": "../../node_modules/.bin/rimraf lib",
+    "build:lib": "../../node_modules/.bin/babel src --out-dir lib",
+    "build:umd": "../../node_modules/.bin/webpack",
+    "build": "../../node_modules/.bin/npm-run-all --parallel build:*",
+    "test": "../../node_modules/.bin/npm-run-all clean build",
     "prepublish": "npm test"
   },
   "devDependencies": {
-    "react-dnd": "^2.2.3"
+    "react-dnd": "^2.2.4"
   },
   "dependencies": {
     "lodash": "^4.2.0"
   },
   "peerDependencies": {
-    "react-dnd": "^2.2.3"
+    "react-dnd": "^2.2.4"
   }
 }

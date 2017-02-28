@@ -1,21 +1,21 @@
 {
   "name": "react-dnd",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Drag and Drop for React",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf lib && rimraf dist",
-    "bundle:unmin": "webpack --output-filename=dist/ReactDnD.js",
-    "bundle:min": "webpack --output-filename=dist/ReactDnD.min.js --optimize-minimize",
-    "babel": "babel src --out-dir lib",
-    "build": "npm-run-all --parallel bundle:* babel",
-    "test": "npm-run-all clean build",
+    "clean": "../../node_modules/.bin/rimraf lib dist",
+    "bundle:unmin": "../../node_modules/.bin/webpack --output-filename=dist/ReactDnD.js",
+    "bundle:min": "../../node_modules/.bin/webpack --output-filename=dist/ReactDnD.min.js --optimize-minimize",
+    "babel": "../../node_modules/.bin/babel src --out-dir lib",
+    "build": "../../node_modules/.bin/npm-run-all --parallel bundle:* babel",
+    "test": "../../node_modules/.bin/npm-run-all clean build",
     "prepublish": "npm test"
   },
   "dependencies": {
     "disposables": "^1.0.1",
-    "dnd-core": "^2.2.3",
+    "dnd-core": "^2.2.4",
     "hoist-non-react-statics": "^1.2.0",
     "invariant": "^2.1.0",
     "lodash": "^4.2.0"
