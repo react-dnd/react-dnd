@@ -40,7 +40,7 @@
     "jest:watch": "jest --watch",
     "jest:cov": "jest --coverage",
     "lint": "eslint .",
-    "test_modules": "env PATH=$PATH:./node_modules/.bin lerna run test",
+    "test_modules": "lerna run test",
     "test": "npm-run-all lint jest:cov test_modules"
   },
   "devDependencies": {
