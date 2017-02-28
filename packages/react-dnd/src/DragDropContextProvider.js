@@ -44,8 +44,10 @@ export default class DragDropContextProvider extends Component {
         return this.props.window;
       } else if (this.context && this.context.window) {
         return this.context.window;
+      } else if (typeof window !== 'undefined') {
+        return window;
       }
-      return window;
+      return undefined;
     };
 
     return createChildContext(this.backend, { window: getWindow() });
