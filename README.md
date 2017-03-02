@@ -17,3 +17,5 @@ https://github.com/gaearon/react-dnd/releases
 [![join chat](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/gaearon/react-dnd)  
 
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
+
+add Chinese document：http://www.highfe.com/index.php/category/react-dnd%E7%BF%BB%E8%AF%91/
