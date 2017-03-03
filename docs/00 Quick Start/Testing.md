@@ -7,7 +7,7 @@ React DnD is test-friendly. The whole drag and drop interaction, including the r
 
 There are several different approaches to testing React components. React DnD is not opinionated and lets you use either of them. **Neither of those approaches require the browser event system to be available.**
 
-A few test examples are included with the React DnD inside its `examples` folder. Run `npm install` and `npm test` inside the `react-dnd` root folder to start them.
+A few test examples are included with the React DnD inside its `examples` folder. Run `yarn install` and `yarn test` inside the `react-dnd` root folder to start them.
 
 ### Testing the Components in Isolation
 
@@ -18,6 +18,7 @@ If you are only interested in testing the *rendering* of your components in isol
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
+var Box = require('./components/Box');
 
 it('can be tested independently', function () {
   // Obtain the reference to the component before React DnD wrapping
@@ -49,6 +50,7 @@ it('can be tested independently', function () {
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import Box from './components/Box';
 
 it('can be tested independently', () => {
   // Obtain the reference to the component before React DnD wrapping
@@ -83,7 +85,7 @@ it('can be tested independently', () => {
 
 If you want to test the whole interaction, and not just the individual component rendering, you should use the [test backend](docs-test-backend.html). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) just fine.
 
-This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/gaearon/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/gaearon/dnd-core/tree/v1.1.0/src/__tests__).
+This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/react-dnd/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/react-dnd/dnd-core/tree/v1.1.0/src/__tests__).
 
 First, you need to install the test backend:
 

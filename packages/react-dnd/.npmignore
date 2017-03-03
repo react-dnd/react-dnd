@@ -1,0 +1,9 @@
+src
+webpack.config.js
+tests.webpack.js
+karma.conf.js
+.babelrc
+.eslintrc
+.eslintignore
+bower.json
+yarn.lock

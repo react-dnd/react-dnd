@@ -1,0 +1,20 @@
+{
+  "name": "dnd-core",
+  "version": "2.2.4",
+  "description": "Drag and drop sans the GUI",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "../../node_modules/.bin/rimraf lib",
+    "build": "../../node_modules/.bin/babel src --out-dir lib",
+    "test": "../../node_modules/.bin/npm-run-all clean build",
+    "prepublish": "npm run test"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "asap": "^2.0.3",
+    "invariant": "^2.0.0",
+    "lodash": "^4.2.0",
+    "redux": "^3.2.0"
+  }
+}

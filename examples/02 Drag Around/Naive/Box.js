@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import ItemTypes from './ItemTypes';
 import { DragSource } from 'react-dnd';
+import ItemTypes from './ItemTypes';
 
 const style = {
   position: 'absolute',
@@ -14,12 +14,12 @@ const boxSource = {
   beginDrag(props) {
     const { id, left, top } = props;
     return { id, left, top };
-  }
+  },
 };
 
 @DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 export default class Box extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ export default class Box extends Component {
     left: PropTypes.number.isRequired,
     top: PropTypes.number.isRequired,
     hideSourceOnDrag: PropTypes.bool.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   render() {
@@ -41,7 +41,7 @@ export default class Box extends Component {
     return connectDragSource(
       <div style={{ ...style, left, top }}>
         {children}
-      </div>
+      </div>,
     );
   }
 }
