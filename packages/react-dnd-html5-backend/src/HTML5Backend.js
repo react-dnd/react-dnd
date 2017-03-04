@@ -306,9 +306,22 @@ export default class HTML5Backend {
         dataTransfer.setDragImage(dragPreview, dragPreviewOffset.x, dragPreviewOffset.y);
       }
 
+      const { operateDataTransfer } = this.getCurrentSourceNodeOptions();
+      let setDataCalled = false;
+      if (typeof operateDataTransfer === 'function') {
+        const originSetData = dataTransfer.setData;
+        dataTransfer.setData = function (...args) {
+          originSetData.apply(this, args);
+          setDataCalled = true;
+        };
+        operateDataTransfer(dataTransfer);
+        dataTransfer.setData = originSetData;
+      }
       try {
-        // Firefox won't drag without setting data
-        dataTransfer.setData('application/json', {});
+        if (!setDataCalled) {
+          // Firefox won't drag without setting data
+          dataTransfer.setData('application/json', {});
+        }
       } catch (err) {
         // IE doesn't support MIME types in setData
       }
