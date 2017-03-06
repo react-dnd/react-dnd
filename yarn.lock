@@ -1554,7 +1554,7 @@ debug@2.2.0, debug@~2.2.0:
   dependencies:
     ms "0.7.1"
 
-debug@^2.1.1, debug@^2.2.0, debug@^2.3.3:
+debug@^2.1.1, debug@^2.2.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
   dependencies:
@@ -3219,16 +3219,6 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-linklocal@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/linklocal/-/linklocal-2.8.0.tgz#77b97af16fff13da34dbb9fd3b53784c3d5baceb"
-  dependencies:
-    commander "^2.9.0"
-    debug "^2.3.3"
-    map-limit "0.0.1"
-    mkdirp "^0.5.1"
-    rimraf "^2.5.4"
-
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -3387,12 +3377,6 @@ makeerror@1.0.x:
   resolved "https://registry.yarnpkg.com/makeerror/-/makeerror-1.0.11.tgz#e01a5c9109f2af79660e4e8b9587790184f5a96c"
   dependencies:
     tmpl "1.0.x"
-
-map-limit@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/map-limit/-/map-limit-0.0.1.tgz#eb7961031c0f0e8d001bf2d56fab685d58822f38"
-  dependencies:
-    once "~1.3.0"
 
 map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
@@ -3744,7 +3728,7 @@ on-headers@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/on-headers/-/on-headers-1.0.1.tgz#928f5d0f470d49342651ea6794b0857c100693f7"
 
-once@^1.3.0, once@~1.3.0, once@~1.3.3:
+once@^1.3.0, once@~1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/once/-/once-1.3.3.tgz#b2e261557ce4c314ec8304f3fa82663e4297ca20"
   dependencies:
@@ -4306,9 +4290,9 @@ react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-frame-component@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-frame-component/-/react-frame-component-1.0.0.tgz#856d7132c83a23fa30303df43acabc68f4b13376"
+react-frame-component@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-frame-component/-/react-frame-component-1.0.1.tgz#379a449a352e5e7d7fb1b32dc3156f8c2e9c10aa"
 
 react-hot-api@^0.4.5:
   version "0.4.7"

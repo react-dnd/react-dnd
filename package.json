@@ -75,7 +75,7 @@
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-frame-component": "^1.0.0",
+    "react-frame-component": "^1.0.1",
     "react-hot-loader": "^1.2.3",
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
