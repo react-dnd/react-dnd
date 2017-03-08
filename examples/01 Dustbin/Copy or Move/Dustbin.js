@@ -16,8 +16,11 @@ const style = {
 };
 
 const boxTarget = {
-  drop(props) {
-    return { name: `${props.dropEffect} Dustbin`, allowedDropEffect: props.dropEffect };
+  drop({ allowedDropEffect }) {
+    return {
+      name: `${allowedDropEffect} Dustbin`,
+      allowedDropEffect,
+    };
   },
 };
 
@@ -31,11 +34,11 @@ export default class Dustbin extends Component {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
     canDrop: PropTypes.bool.isRequired,
-    dropEffect: PropTypes.string.isRequired,
+    allowedDropEffect: PropTypes.string.isRequired,
   };
 
   render() {
-    const { canDrop, isOver, dropEffect, connectDropTarget } = this.props;
+    const { canDrop, isOver, allowedDropEffect, connectDropTarget } = this.props;
     const isActive = canDrop && isOver;
 
     let backgroundColor = '#222';
@@ -47,7 +50,7 @@ export default class Dustbin extends Component {
 
     return connectDropTarget(
       <div style={{ ...style, backgroundColor }}>
-        { `Works with ${dropEffect} drop effect` }<br /><br />
+        { `Works with ${allowedDropEffect} drop effect` }<br /><br />
         {isActive ?
           'Release to drop' :
           'Drag a box here'

@@ -10,9 +10,9 @@ export default class Container extends Component {
       <DragDropContextProvider backend={HTML5Backend}>
         <div>
           <div style={{ overflow: 'hidden', clear: 'both' }}>
-            <Dustbin dropEffect="any" />
-            <Dustbin dropEffect="copy" />
-            <Dustbin dropEffect="move" />
+            <Dustbin allowedDropEffect="any" />
+            <Dustbin allowedDropEffect="copy" />
+            <Dustbin allowedDropEffect="move" />
           </div>
           <div style={{ overflow: 'hidden', clear: 'both' }}>
             <Box name="Glass" />
