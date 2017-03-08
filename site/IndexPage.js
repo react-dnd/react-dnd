@@ -30,6 +30,7 @@ const Examples = {
   CHESSBOARD_TUTORIAL_APP: require('../examples/00 Chessboard/Tutorial App').default,
   DUSTBIN_SINGLE_TARGET: require('../examples/01 Dustbin/Single Target').default,
   DUSTBIN_IFRAME: require('../examples/01 Dustbin/Single Target in iframe').default,
+  DUSTBIN_COPY_OR_MOVE: require('../examples/01 Dustbin/Copy or Move').default,
   DUSTBIN_MULTIPLE_TARGETS: require('../examples/01 Dustbin/Multiple Targets').default,
   DUSTBIN_STRESS_TEST: require('../examples/01 Dustbin/Stress Test').default,
   DRAG_AROUND_NAIVE: require('../examples/02 Drag Around/Naive').default,

@@ -114,6 +114,10 @@ export const ExamplePages = [{
       location: 'examples-dustbin-single-target-in-iframe.html',
       title: 'Within iframe'
     },
+    DUSTBIN_COPY_OR_MOVE: {
+      location: 'examples-dustbin-copy-or-move.html',
+      title: 'Copy or Move'
+    },
     DUSTBIN_MULTIPLE_TARGETS: {
       location: 'examples-dustbin-multiple-targets.html',
       title: 'Multiple Targets'
