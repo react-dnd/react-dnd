@@ -1,27 +1,23 @@
-import React, {PropTypes, Component} from 'react'
+import React, { PropTypes, Component } from 'react';
 
 export default class FileList extends Component {
-    static propTypes = {
-        files: PropTypes.arrayOf(PropTypes.object)
-    };
+  static propTypes = {
+    files: PropTypes.arrayOf(PropTypes.object),
+  };
 
-    render() {
-        const {files} = this.props
+  list(files) {
+    return files.map(file => <li key={file.name}>{`'${file.name}'' of size '${file.size}' and type '${file.type}'`}</li>);
+  }
 
-        return (
-            <div>
-                <ul>
-                    {
-                        files.length
-                        ?
-                        files.map(file =>
-                            <li key={file.name}>{`'${file.name}'' of size '${file.size}' and type '${file.type}'`}</li>
-                        )
-                        :
-                        'Nothing to display'
-                    }
-                </ul>
-            </div>
-        )
+  render() {
+    const { files } = this.props;
+
+    if (files.length === 0) {
+      return <div>Nothing to display</div>;
     }
+
+    return (
+      <div>{ this.list(files) }</div>
+    );
+  }
 }
