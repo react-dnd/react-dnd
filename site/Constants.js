@@ -174,9 +174,13 @@ export const ExamplePages = [{
             location: 'examples-customize-drop-effects.html',
             title: 'Drop Effects'
         },
-        CUSTOMIZE_FILE_DND: {
-            location: 'examples-customize-file-dnd.html',
-            title: 'File DnD'
+    }
+}, {
+    title: 'Other Cases',
+    pages: {
+        OTHER_NATIVE_FILES: {
+            location: 'examples-other-native-files.html',
+            title: 'Native Files'
         }
     }
 }];

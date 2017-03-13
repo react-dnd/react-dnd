@@ -40,7 +40,7 @@ export default class TargetBox extends Component {
       <div style={style}>
         {isActive ?
           'Release to drop' :
-          'Drag item here'
+          'Drag file here'
         }
       </div>,
     );
