@@ -27,6 +27,7 @@ export default class HTML5Backend {
     this.currentDragSourceNode = null;
     this.currentDragSourceNodeOffset = null;
     this.currentDragSourceNodeOffsetChanged = false;
+    this.altKeyPressed = false;
 
     this.getSourceClientOffset = this.getSourceClientOffset.bind(this);
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
