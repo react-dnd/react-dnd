@@ -41,6 +41,7 @@ const Examples = {
   SORTABLE_STRESS_TEST: require('../examples/04 Sortable/Stress Test').default,
   CUSTOMIZE_HANDLES_AND_PREVIEWS: require('../examples/05 Customize/Handles and Previews').default,
   CUSTOMIZE_DROP_EFFECTS: require('../examples/05 Customize/Drop Effects').default,
+  OTHER_NATIVE_FILES: require('../examples/06 Other/Native Files').default
 };
 
 export default class IndexPage extends Component {
