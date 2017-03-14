@@ -131,7 +131,7 @@ export function hover(targetIdsArg, { clientOffset = null } = {}) {
   };
 }
 
-export function drop() {
+export function drop(options = {}) {
   const monitor = this.getMonitor();
   const registry = this.getRegistry();
   invariant(
@@ -164,7 +164,10 @@ export function drop() {
 
     this.store.dispatch({
       type: DROP,
-      dropResult,
+      dropResult: {
+        ...options,
+        ...dropResult,
+      },
     });
   });
 }

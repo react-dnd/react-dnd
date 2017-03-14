@@ -124,6 +124,30 @@ export const ExamplePages = [{
         }
     }
 }, {
+  title: 'Dustbin',
+  pages: {
+    DUSTBIN_SINGLE_TARGET: {
+      location: 'examples-dustbin-single-target.html',
+      title: 'Single Target'
+    },
+    DUSTBIN_IFRAME: {
+      location: 'examples-dustbin-single-target-in-iframe.html',
+      title: 'Within iframe'
+    },
+    DUSTBIN_COPY_OR_MOVE: {
+      location: 'examples-dustbin-copy-or-move.html',
+      title: 'Copy or Move'
+    },
+    DUSTBIN_MULTIPLE_TARGETS: {
+      location: 'examples-dustbin-multiple-targets.html',
+      title: 'Multiple Targets'
+    },
+    DUSTBIN_STRESS_TEST: {
+      location: 'examples-dustbin-stress-test.html',
+      title: 'Stress Test'
+    }
+  }
+}, {
     title: 'Drag Around',
     pages: {
         DRAG_AROUND_NAIVE: {
