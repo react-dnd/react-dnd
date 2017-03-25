@@ -7,3 +7,8 @@ cache:
   yarn: true
   directories:
     - node_modules
+deploy:
+  provider: script
+  script: scripts/publishStaticSite.sh
+  on:
+    branch: master
