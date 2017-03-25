@@ -21,7 +21,7 @@ See the changelog on the Releases page:
 
 https://github.com/react-dnd/react-dnd/releases
 
-Questions? Find us on the Reactiflux Discord Server (**#general**)
+Questions? Find us on the Reactiflux Discord Server (**#need-help**)
 
 https://www.reactiflux.com/
 
