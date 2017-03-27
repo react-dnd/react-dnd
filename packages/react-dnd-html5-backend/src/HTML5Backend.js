@@ -199,7 +199,7 @@ export default class HTML5Backend {
     this.currentNativeHandle = this.registry.addSource(type, this.currentNativeSource);
     this.actions.beginDrag([this.currentNativeHandle]);
 
-    // On Firefox, if mousemove fires, the drag is over but browser failed to tell us.
+    // On Firefox, if mouseover fires, the drag is over but browser failed to tell us.
     // See https://bugzilla.mozilla.org/show_bug.cgi?id=656164
     // This is not true for other browsers.
     if (isFirefox()) {
