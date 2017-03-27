@@ -7,7 +7,6 @@
 [![bitHound Dev Dependencies](https://www.bithound.io/github/react-dnd/react-dnd/badges/devDependencies.svg)](https://www.bithound.io/github/react-dnd/react-dnd/master/dependencies/npm)
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-dnd/dist/ReactDnD.min.js?compression=gzip)
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-dnd-html5-backend/dist/ReactDnDHTML5Backend.min.js?compression=gzip&label=HTML5%20backend%20gzip%20size)
-![gzip size](http://img.badgesize.io/https://npmcdn.com/react-dnd-touch-backend/dist/ReactDnDHTML5Backend.min.js?compression=gzip&label=touch%20backend%20gzip%20size)
 
 
 React *DnD*
