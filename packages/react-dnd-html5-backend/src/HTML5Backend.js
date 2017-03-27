@@ -208,7 +208,7 @@ export default class HTML5Backend {
   }
 
   asyncEndDragNativeItem() {
-    this.asyncEndDragTimeout = setTimeout(this.endDragNativeItem, 0);
+    this.asyncEndDragTimeout = setTimeout(this.endDragNativeItem, 100);
     if (isFirefox()) {
       this.window.removeEventListener('mouseover', this.asyncEndDragNativeItem, true);
       this.enterLeaveCounter.reset();
