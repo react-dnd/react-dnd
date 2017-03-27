@@ -75,7 +75,9 @@ export default class HTML5Backend {
     this.window.__isReactDndBackendSetUp = false; // eslint-disable-line no-underscore-dangle
     this.removeEventListeners(this.window);
     this.clearCurrentDragSourceNode();
-    clearTimeout(this.asyncEndDragTimeout);
+    if (this.asyncEndDragFrameId) {
+      this.window.cancelAnimationFrame(this.asyncEndDragFrameId);
+    }
   }
 
   addEventListeners(target) {
@@ -208,7 +210,7 @@ export default class HTML5Backend {
   }
 
   asyncEndDragNativeItem() {
-    this.asyncEndDragTimeout = setTimeout(this.endDragNativeItem, 100);
+    this.asyncEndDragFrameId = this.window.requestAnimationFrame(this.endDragNativeItem);
     if (isFirefox()) {
       this.window.removeEventListener('mouseover', this.asyncEndDragNativeItem, true);
       this.enterLeaveCounter.reset();
