@@ -43,6 +43,7 @@ export default class HTML5Backend {
     this.handleSelectStart = this.handleSelectStart.bind(this);
     this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
     this.endDragNativeItem = this.endDragNativeItem.bind(this);
+    this.asyncEndDragNativeItem = this.asyncEndDragNativeItem.bind(this);
   }
 
   get window() {
@@ -74,6 +75,7 @@ export default class HTML5Backend {
     this.window.__isReactDndBackendSetUp = false; // eslint-disable-line no-underscore-dangle
     this.removeEventListeners(this.window);
     this.clearCurrentDragSourceNode();
+    clearTimeout(this.asyncEndDragTimeout);
   }
 
   addEventListeners(target) {
@@ -198,19 +200,24 @@ export default class HTML5Backend {
     this.actions.beginDrag([this.currentNativeHandle]);
 
     // On Firefox, if mousemove fires, the drag is over but browser failed to tell us.
+    // See https://bugzilla.mozilla.org/show_bug.cgi?id=656164
     // This is not true for other browsers.
     if (isFirefox()) {
-      this.window.addEventListener('mousemove', this.endDragNativeItem, true);
+      this.window.addEventListener('mouseover', this.asyncEndDragNativeItem, true);
+    }
+  }
+
+  asyncEndDragNativeItem() {
+    this.asyncEndDragTimeout = setTimeout(this.endDragNativeItem, 0);
+    if (isFirefox()) {
+      this.window.removeEventListener('mouseover', this.asyncEndDragNativeItem, true);
+      this.enterLeaveCounter.reset();
     }
   }
 
   endDragNativeItem() {
     if (!this.isDraggingNativeItem()) {
       return;
-    }
-
-    if (isFirefox()) {
-      this.window.removeEventListener('mousemove', this.endDragNativeItem, true);
     }
 
     this.actions.endDrag();
