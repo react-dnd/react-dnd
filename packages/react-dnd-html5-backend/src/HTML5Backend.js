@@ -27,7 +27,7 @@ export default class HTML5Backend {
     this.currentDragSourceNode = null;
     this.currentDragSourceNodeOffset = null;
     this.currentDragSourceNodeOffsetChanged = false;
-    this.altKeyPressed = false;
+    this.copyKeyPressed = false;
 
     this.getSourceClientOffset = this.getSourceClientOffset.bind(this);
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
@@ -158,7 +158,7 @@ export default class HTML5Backend {
     const sourceNodeOptions = this.sourceNodeOptions[sourceId];
 
     return defaults(sourceNodeOptions || {}, {
-      dropEffect: this.altKeyPressed ? 'copy' : 'move',
+      dropEffect: this.copyKeyPressed ? 'copy' : 'move',
     });
   }
 
@@ -416,7 +416,7 @@ export default class HTML5Backend {
       return;
     }
 
-    this.altKeyPressed = e.altKey;
+    this.copyKeyPressed = e.altKey || e.ctrlKey;
 
     if (!isFirefox()) {
       // Don't emit hover in `dragenter` on Firefox due to an edge case.
@@ -459,7 +459,7 @@ export default class HTML5Backend {
       return;
     }
 
-    this.altKeyPressed = e.altKey;
+    this.copyKeyPressed = e.altKey || e.ctrlKey;
 
     this.actions.hover(dragOverTargetIds, {
       clientOffset: getEventClientOffset(e),
