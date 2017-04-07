@@ -349,7 +349,7 @@ function collect(connect, monitor) {
   };
 }
 
-class Card {
+class Card extends React.Component {
   render() {
     // Your component receives its own props as usual
     const { id } = this.props;
@@ -414,7 +414,7 @@ const cardSource = {
   // You can ask the monitor about the current drag state:
   isDragging: monitor.isDragging()
 }))
-export default class Card {
+export default class Card extends React.Component {
   render() {
     // Your component receives its own props as usual
     const { id } = this.props;
