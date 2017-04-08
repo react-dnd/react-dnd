@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
 import isPlainObject from 'lodash/isPlainObject';
 import invariant from 'invariant';

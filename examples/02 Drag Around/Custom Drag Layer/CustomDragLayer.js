@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DragLayer } from 'react-dnd';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';

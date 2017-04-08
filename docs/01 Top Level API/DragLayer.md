@@ -17,9 +17,10 @@ To use `DragLayer`, don't forget to wrap the top-level component of your app in 
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragLayer = require('react-dnd').DragLayer;
 
-var CustomDragLayer = React.createClass({
+var CustomDragLayer = createReactClass({
   /* ... */
 });
 
@@ -78,7 +79,8 @@ For easier [testing](docs-testing.html), it provides an API to reach into the in
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var ItemTypes = require('./ItemTypes');
 var BoxDragPreview = require('./BoxDragPreview');
 var DragLayer = require('react-dnd').DragLayer;
@@ -119,7 +121,7 @@ function collect(monitor) {
   };
 }
 
-var CustomDragLayer = React.createClass({
+var CustomDragLayer = createReactClass({
   propTypes: {
     item: PropTypes.object,
     itemType: PropTypes.string,
@@ -161,7 +163,8 @@ module.exports = DragLayer(collect)(CustomDragLayer);
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
 import snapToGrid from './snapToGrid';
@@ -242,7 +245,8 @@ export default DragLayer(collect)(CustomDragLayer);
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
 import { DragLayer } from 'react-dnd';

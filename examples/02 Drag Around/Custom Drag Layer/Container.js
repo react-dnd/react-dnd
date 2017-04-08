@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import update from 'react/lib/update';
 import { DropTarget } from 'react-dnd';
 import shouldPureComponentUpdate from './shouldPureComponentUpdate';

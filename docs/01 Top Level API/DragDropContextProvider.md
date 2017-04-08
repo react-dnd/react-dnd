@@ -11,10 +11,11 @@ injected with a backend via the `backend` prop, but it also can be injected with
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var HTML5Backend = require('react-dnd-html5-backend');
 var DragDropContextProvider = require('react-dnd').DragDropContextProvider;
 
-var YourApp = React.createClass(
+var YourApp = createReactClass(
   render() {
     return (
       <DragDropContextProvider backend={HTML5Backend}>

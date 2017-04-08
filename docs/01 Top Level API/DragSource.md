@@ -13,9 +13,10 @@ To use `DragSource`, don't forget to wrap the top-level component of your app in
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
-var MyComponent = React.createClass({
+var MyComponent = createReactClass({
   /* ... */
 });
 
@@ -121,6 +122,7 @@ Check out [the tutorial](docs-tutorial.html) for more real examples!
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
 // Drag sources and drop targets only interact
@@ -189,7 +191,7 @@ function collect(connect, monitor) {
   };
 }
 
-var Card = React.createClass({
+var Card = createReactClass({
   render: function () {
     // Your component receives its own props as usual
     var id = this.props.id;
