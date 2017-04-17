@@ -98,6 +98,7 @@ Here is an example to get you started:
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var Component = React.Component;
 var TestBackend = require('react-dnd-test-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
@@ -109,7 +110,7 @@ var expect = require('expect');
  */
 function wrapInTestContext(DecoratedComponent) {
   return DragDropContext(TestBackend)(
-    React.createClass({
+    createReactClass({
       render: function () {
         return <DecoratedComponent {...this.props} />;
       }

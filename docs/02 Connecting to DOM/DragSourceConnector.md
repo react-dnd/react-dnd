@@ -36,6 +36,7 @@ Check out [the tutorial](docs-tutorial.html) for more real examples!
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
 /* ... */
@@ -47,7 +48,7 @@ function collect(connect, monitor) {
   };
 }
 
-var ComponentWithCopyEffect = React.createClass({
+var ComponentWithCopyEffect = createReactClass({
   render: function () {
     var connectDragSource = this.props.connectDragSource;
 
@@ -61,7 +62,7 @@ var ComponentWithCopyEffect = React.createClass({
 });
 ComponentWithCopyEffect = DragSource(/* ... */)(ComponentWithCopyEffect);
 
-var ComponentWithHandle = React.createClass({
+var ComponentWithHandle = createReactClass({
   render: function () {
     var connectDragSource = this.props.connectDragSource;
     var connectDragPreview = this.props.connectDragPreview;
@@ -78,7 +79,7 @@ var ComponentWithHandle = React.createClass({
 });
 ComponentWithHandle = DragSource(/* ... */)(ComponentWithHandle);
 
-var ComponentWithImagePreview = React.createClass({
+var ComponentWithImagePreview = createReactClass({
   componentDidMount: function () {
     var connectDragPreview = this.props.connectDragPreview;
 

@@ -27,10 +27,11 @@ Aside from the default export, the HTML5 backend module also provides a few extr
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var HTML5Backend = require('react-dnd-html5-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
 
-var YourApp = React.createClass(
+var YourApp = createReactClass(
   /* ... */
 );
 
