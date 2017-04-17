@@ -127,9 +127,10 @@ One caveat of using them is that they require *two* function applications. For e
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
-var YourComponent = React.createClass({
+var YourComponent = createReactClass({
   /* ... */
 });
 
@@ -172,11 +173,12 @@ Even if you don't plan to use ES7, the partial application can still be handy, b
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
 var flow = require('lodash/flow');
 
-var YourComponent = React.createClass({
+var YourComponent = createReactClass({
   render() {
     return this.props.connectDragSource(this.props.connectDropTarget(
       /* ... */
@@ -232,6 +234,7 @@ Below is an example of wrapping an existing `Card` component into a drag source.
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
 // Drag sources and drop targets only interact
@@ -278,7 +281,7 @@ function collect(connect, monitor) {
   };
 }
 
-var Card = React.createClass({
+var Card = createReactClass({
   render: function () {
     // Your component receives its own props as usual
     var id = this.props.id;

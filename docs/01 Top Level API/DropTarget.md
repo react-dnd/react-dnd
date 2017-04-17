@@ -13,9 +13,10 @@ To use `DropTarget`, don't forget to wrap the top-level component of your app in
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DropTarget = require('react-dnd').DropTarget;
 
-var MyComponent = React.createClass({
+var MyComponent = createReactClass({
   /* ... */
 });
 
@@ -124,6 +125,7 @@ Check out [the tutorial](docs-tutorial.html) for more real examples!
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var findDOMNode = require('react-dom').findDOMNode;
 var DropTarget = require('react-dnd').DropTarget;
 
@@ -199,7 +201,7 @@ function collect(connect, monitor) {
   };
 }
 
-var ChessSquare = React.createClass({
+var ChessSquare = createReactClass({
   componentWillReceiveProps: function (nextProps) {
     if (!this.props.isOver && nextProps.isOver) {
       // You can use this as enter handler

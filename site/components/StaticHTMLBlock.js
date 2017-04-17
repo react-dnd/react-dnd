@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CodeBlock from './CodeBlock';
 
 export default class StaticHTMLBlock extends Component {
   static propTypes = {
-    html: React.PropTypes.string.isRequired
+    html: PropTypes.string.isRequired
   };
 
   render() {
