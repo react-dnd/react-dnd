@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './PageBody.less';
 
 export default class PageBody extends Component {
   static propTypes = {
-    hasSidebar: React.PropTypes.bool
+    hasSidebar: PropTypes.bool
   };
 
   render() {

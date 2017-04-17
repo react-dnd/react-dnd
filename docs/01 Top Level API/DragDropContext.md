@@ -10,10 +10,11 @@ This lets you specify the backend, and sets up the shared DnD state behind the s
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var HTML5Backend = require('react-dnd-html5-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
 
-var YourApp = React.createClass(
+var YourApp = createReactClass(
   /* ... */
 );
 

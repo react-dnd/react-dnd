@@ -73,6 +73,7 @@
     "npm-run-all": "^4.0.1",
     "null-loader": "^0.1.0",
     "postcss": "^5.2.12",
+    "prop-types": "^15.5.4",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",

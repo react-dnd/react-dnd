@@ -16,9 +16,10 @@ You can see that in every example on the website that uses it, such as:
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
-var MyComponent = React.createClass({
+var MyComponent = createReactClass({
   /* ... */
 });
 
@@ -85,11 +86,12 @@ When using [stateless components](https://facebook.github.io/react/docs/reusable
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
 var flow = require('lodash/flow');
 
-var YourComponent = React.createClass({
+var YourComponent = createReactClass({
   /* ... */
 });
 
@@ -131,6 +133,7 @@ If you are using the [HTML5 backend](docs-html5-backend.html), you can register 
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var NativeTypes = require('react-dnd-html5-backend').NativeTypes;
 var DropTarget = require('react-dnd').DropTarget;
 
@@ -140,7 +143,7 @@ var fileTarget = {
   }
 };
 
-var FileDropZone = React.createClass({
+var FileDropZone = createReactClass({
   render() {
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
@@ -241,7 +244,9 @@ Consider this example:
 
 -------------------
 ```javascript
-var Page = React.createClass({
+var createReactClass = require('create-react-class');
+
+var Page = createReactClass({
   statics: {
     willTransitionTo: function (transition, params) {
       /* ... */
@@ -288,7 +293,9 @@ It might surprise you that your route handler's `willTransitionTo` (or a similar
 
 -------------------
 ```javascript
-var Page = React.createClass({
+var createReactClass = require('create-react-class');
+
+var Page = createReactClass({
   render: function () {
     /* ... */
   }

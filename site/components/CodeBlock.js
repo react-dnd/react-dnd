@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import ReactUpdates from 'react-dom/lib/ReactUpdates';
 import StaticHTMLBlock from './StaticHTMLBlock';

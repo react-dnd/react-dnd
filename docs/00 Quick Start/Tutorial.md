@@ -44,8 +44,9 @@ In fact I'm going to start with the `Knight`. It doesn't have any props at all, 
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 
-var Knight = React.createClass({
+var Knight = createReactClass({
   render: function () {
     return <span>♘</span>;
   }
@@ -100,9 +101,10 @@ I see my `Knight` on the screen! Time to go ahead and implement the `Square` now
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 
-var Square = React.createClass({
+var Square = createReactClass({
   propTypes: {
     black: PropTypes.bool
   },
@@ -119,7 +121,8 @@ module.exports = Square;
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Square extends Component {
   render() {
@@ -136,7 +139,8 @@ Square.propTypes = {
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Square extends Component {
   static propTypes = {
@@ -198,9 +202,10 @@ Even after correcting these two mistakes, I still can't see my `Knight` when the
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 
-var Square = React.createClass({
+var Square = createReactClass({
   propTypes: {
     black: PropTypes.bool
   },
@@ -227,7 +232,8 @@ module.exports = Square;
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Square extends Component {
   render() {
@@ -254,7 +260,8 @@ Square.propTypes = {
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Square extends Component {
   static propTypes = {
@@ -288,11 +295,12 @@ Finally, time to get started with the `Board`! I'm going to start with an extrem
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var Square = require('./Square');
 var Knight = require('./Knight');
 
-var Board = React.createClass({
+var Board = createReactClass({
   propTypes: {
     knightPosition: PropTypes.arrayOf(
       PropTypes.number.isRequired
@@ -314,7 +322,8 @@ module.exports = Board;
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import Knight from './Knight';
 
@@ -338,7 +347,8 @@ Board.propTypes = {
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import Knight from './Knight';
 
@@ -478,11 +488,12 @@ At this point, I realize that I forgot to give my squares any layout. I'm going 
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var Square = require('./Square');
 var Knight = require('./Knight');
 
-var Board = React.createClass({
+var Board = createReactClass({
   propTypes: {
     knightPosition: PropTypes.arrayOf(
       PropTypes.number.isRequired
@@ -533,7 +544,8 @@ module.exports = Board;
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import Knight from './Knight';
 
@@ -585,7 +597,8 @@ Board.propTypes = {
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import Knight from './Knight';
 
@@ -815,7 +828,7 @@ The `Square` does not need to know its position to render. Therefore, it's best 
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var PropTypes = require('prop-types');
 var Square = require('./Square');
 var Knight = require('./Knight');
 var moveKnight = require('./Game').moveKnight;
@@ -850,7 +863,8 @@ handleSquareClick: function (toX, toY) {
 ```
 -------------------
 ```js
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import Knight from './Knight';
 import { moveKnight } from './Game';
@@ -984,10 +998,11 @@ Because the `Board` is the top-level component in our app, I'm going to put the 
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DragDropContext = require('react-dnd').DragDropContext;
 var HTML5Backend = require('react-dnd-html5-backend');
 
-var Board = React.createClass({
+var Board = createReactClass({
   /* ... */
 });
 
@@ -1081,7 +1096,8 @@ Let's take a look at the whole `Knight` component now, including the `DragSource
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var ItemTypes = require('./Constants').ItemTypes;
 var DragSource = require('react-dnd').DragSource;
 
@@ -1098,7 +1114,7 @@ function collect(connect, monitor) {
   }
 }
 
-var Knight = React.createClass({
+var Knight = createReactClass({
   propTypes: {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired
@@ -1125,7 +1141,8 @@ module.exports = DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ItemTypes } from './Constants';
 import { DragSource } from 'react-dnd';
 
@@ -1167,7 +1184,8 @@ export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ItemTypes } from './Constants';
 import { DragSource } from 'react-dnd';
 
@@ -1221,10 +1239,11 @@ Here is the `BoardSquare` I extracted:
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var Square = require('./Square');
 
-var BoardSquare = React.createClass({
+var BoardSquare = createReactClass({
   propTypes: {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
@@ -1247,7 +1266,8 @@ module.exports = BoardSquare;
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 
 export default class BoardSquare extends Component {
@@ -1270,7 +1290,8 @@ BoardSquare.propTypes = {
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 
 export default class BoardSquare extends Component {
@@ -1388,7 +1409,8 @@ After changing the `render` function to connect the drop target and show the hig
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var Square = require('./Square');
 var canMoveKnight = require('./Game').canMoveKnight;
 var moveKnight = require('./Game').moveKnight;
@@ -1408,7 +1430,7 @@ function collect(connect, monitor) {
   };
 }
 
-var BoardSquare = React.createClass({
+var BoardSquare = createReactClass({
   propTypes: {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
@@ -1452,7 +1474,8 @@ module.exports = DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
@@ -1512,7 +1535,8 @@ export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
@@ -1599,7 +1623,8 @@ I'm also adding `monitor.canDrop()` to my collecting function, as well as some o
 -------------------
 ```js
 var React = require('react');
-var PropTypes = React.PropTypes;
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var Square = require('./Square');
 var canMoveKnight = require('./Game').canMoveKnight;
 var moveKnight = require('./Game').moveKnight;
@@ -1624,7 +1649,7 @@ function collect(connect, monitor) {
   };
 }
 
-var BoardSquare = React.createClass({
+var BoardSquare = createReactClass({
   propTypes: {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
@@ -1676,7 +1701,8 @@ module.exports = DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
@@ -1748,7 +1774,8 @@ export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
 -------------------
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
