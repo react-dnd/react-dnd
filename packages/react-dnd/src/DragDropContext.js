@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DragDropManager } from 'dnd-core';
 import invariant from 'invariant';
 import hoistStatics from 'hoist-non-react-statics';

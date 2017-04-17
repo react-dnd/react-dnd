@@ -16,9 +16,10 @@ The second package instructs React DnD to use [the HTML5 drag and drop API](http
 // Let's make <Card text='Write the docs' /> draggable!
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 var ItemTypes = require('./Constants').ItemTypes;
-var PropTypes = React.PropTypes;
+var PropTypes = require('prop-types');
 
 /**
  * Implements the drag source contract.
@@ -41,7 +42,7 @@ function collect(connect, monitor) {
   };
 }
 
-var Card = React.createClass({
+var Card = createReactClass({
   propTypes: {
     text: PropTypes.string.isRequired,
 
@@ -70,7 +71,8 @@ module.exports = DragSource(ItemTypes.CARD, cardSource, collect)(Card);
 ```js
 // Let's make <Card text='Write the docs' /> draggable!
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from './Constants';
 
@@ -123,7 +125,8 @@ export default DragSource(ItemTypes.CARD, cardSource, collect)(Card);
 ```js
 // Let's make <Card text='Write the docs' /> draggable!
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from './Constants';
 
@@ -183,7 +186,7 @@ React DnD uses the HTML5 drag and drop under the hood, but it also lets you supp
 
 ### It is ready for the future
 
-React DnD does not export mixins, and works equally great with any components, whether they are created using ES6 classes, `createClass` or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.
+React DnD does not export mixins, and works equally great with any components, whether they are created using ES6 classes, `createReactClass` or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.
 
 ## Touch Support
 

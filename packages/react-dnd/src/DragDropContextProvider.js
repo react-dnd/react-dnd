@@ -1,4 +1,5 @@
-import { PropTypes, Component, Children } from 'react';
+import { Component, Children } from 'react';
+import PropTypes from 'prop-types';
 import {
   CHILD_CONTEXT_TYPES,
   createChildContext,
