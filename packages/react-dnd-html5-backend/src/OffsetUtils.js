@@ -51,9 +51,6 @@ export function getDragPreviewOffset(sourceNode, dragPreview, clientOffset, anch
   if (isSafari() && isImage) {
     dragPreviewHeight /= window.devicePixelRatio;
     dragPreviewWidth /= window.devicePixelRatio;
-  } else if (isFirefox() && !isImage) {
-    dragPreviewHeight *= window.devicePixelRatio;
-    dragPreviewWidth *= window.devicePixelRatio;
   }
 
   // Interpolate coordinates depending on anchor point
