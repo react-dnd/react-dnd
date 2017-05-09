@@ -663,7 +663,7 @@ var ReactDOM = require('react-dom');
 var Board = require('./Board');
 
 ReactDOM.render(
-  <Board knightPosition={[4, 7]} />,
+  <Board knightPosition={[7, 4]} />,
   document.getElementById('root')
 );
 ```
@@ -674,7 +674,7 @@ import ReactDOM from 'react-dom';
 import Board from './Board';
 
 ReactDOM.render(
-  <Board knightPosition={[4, 7]} />,
+  <Board knightPosition={[7, 4]} />,
   document.getElementById('root')
 );
 ```
