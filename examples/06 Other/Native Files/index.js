@@ -6,7 +6,7 @@ export default class NativeFiles extends Component {
     return (
       <div>
         <p>
-          <b><a href="https://github.com/react-dnd/react-dnd/tree/master/examples/05%20Customize/Native%20Files">Browse the Source</a></b>
+          <b><a href="https://github.com/react-dnd/react-dnd/tree/master/examples/06%20Other/Native%20Files">Browse the Source</a></b>
         </p>
         <p>
           Example demonstrating drag and drop of native files.
