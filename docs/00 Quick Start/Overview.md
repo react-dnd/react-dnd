@@ -193,7 +193,7 @@ module.exports = flow(
 ```
 -------------------
 ```js
-import { DragSource } from 'react-dnd';
+import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 
 class YourComponent {
@@ -212,7 +212,7 @@ export default flow(
 ```
 -------------------
 ```js
-import { DragSource } from 'react-dnd';
+import { DragSource, DropTarget } from 'react-dnd';
 
 @DragSource(/* ... */)
 @DropTarget(/* ... */)
