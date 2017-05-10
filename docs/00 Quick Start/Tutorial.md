@@ -48,7 +48,7 @@ var createReactClass = require('create-react-class');
 
 var Knight = createReactClass({
   render: function () {
-    return <span>♘</span>;
+    return <span> style={{fontSize: '12vw'}}♘</span>;
   }
 });
 
@@ -60,7 +60,7 @@ import React, { Component } from 'react';
 
 export default class Knight extends Component {
   render() {
-    return <span>♘</span>;
+    return <span style={{fontSize: '12vw'}}>♘</span>;
   }
 }
 ```
@@ -219,8 +219,8 @@ var Square = createReactClass({
       <div style={{
         backgroundColor: fill,
         color: stroke,
-        width: '100%',
-        height: '100%'
+        minWidth: '12vw',
+        height: '12vw'
       }}>
         {this.props.children}
       </div>
@@ -245,8 +245,8 @@ export default class Square extends Component {
       <div style={{
         backgroundColor: fill,
         color: stroke,
-        width: '100%',
-        height: '100%'
+        minWidth: '12vw',
+        height: '12vw'
       }}>
         {this.props.children}
       </div>
@@ -277,8 +277,8 @@ export default class Square extends Component {
       <div style={{
         backgroundColor: fill,
         color: stroke,
-        width: '100%',
-        height: '100%'
+        minWidth: '12vw',
+        height: '12vw'
       }}>
         {this.props.children}
       </div>
