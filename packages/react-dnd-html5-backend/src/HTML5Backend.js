@@ -324,7 +324,11 @@ export default class HTML5Backend {
         );
         const forceOffsetX = offsetX === 0 || offsetX;
         const forceOffsetY = offsetY === 0 || offsetY;
-        dataTransfer.setDragImage(dragPreview, forceOffsetX ? offsetX : dragPreviewOffset.x, forceOffsetY ? offsetY : dragPreviewOffset.y);
+        dataTransfer.setDragImage(
+          dragPreview,
+          forceOffsetX ? offsetX : dragPreviewOffset.x,
+          forceOffsetY ? offsetY : dragPreviewOffset.y,
+        );
       }
 
       try {
