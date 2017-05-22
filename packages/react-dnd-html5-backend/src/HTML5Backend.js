@@ -314,7 +314,7 @@ export default class HTML5Backend {
         const sourceId = this.monitor.getSourceId();
         const sourceNode = this.sourceNodes[sourceId];
         const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
-        const { anchorX, anchorY } = this.getCurrentSourcePreviewNodeOptions();
+        const { anchorX, anchorY, offsetX, offsetY } = this.getCurrentSourcePreviewNodeOptions();
         const anchorPoint = { anchorX, anchorY };
         const dragPreviewOffset = getDragPreviewOffset(
           sourceNode,
@@ -322,7 +322,7 @@ export default class HTML5Backend {
           clientOffset,
           anchorPoint,
         );
-        dataTransfer.setDragImage(dragPreview, dragPreviewOffset.x, dragPreviewOffset.y);
+        dataTransfer.setDragImage(dragPreview, offsetX || dragPreviewOffset.x, offsetY || dragPreviewOffset.y);
       }
 
       try {
