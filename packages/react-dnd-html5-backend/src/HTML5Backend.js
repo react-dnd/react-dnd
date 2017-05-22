@@ -322,7 +322,9 @@ export default class HTML5Backend {
           clientOffset,
           anchorPoint,
         );
-        dataTransfer.setDragImage(dragPreview, offsetX || dragPreviewOffset.x, offsetY || dragPreviewOffset.y);
+        const forceOffsetX = offsetX === 0 || offsetX;
+        const forceOffsetY = offsetY === 0 || offsetY;
+        dataTransfer.setDragImage(dragPreview, forceOffsetX ? offsetX : dragPreviewOffset.x, forceOffsetY ? offsetY : dragPreviewOffset.y);
       }
 
       try {
