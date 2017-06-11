@@ -9,7 +9,7 @@ DragSourceMonitor
 
 * **`canDrag()`**: Returns `true` if no drag operation is in progress, and the owner's `canDrag()` returns `true` or is not defined.
 
-* **`isDragging()`**: Returns `true` if there is a drag operation is in progress, and either the owner initiated the drag, or its `isDragging()` is defined and returns `true`.
+* **`isDragging()`**: Returns `true` if a drag operation is in progress, and either the owner initiated the drag, or its `isDragging()` is defined and returns `true`.
 
 * **`getItemType()`**: Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns `null` if no item is being dragged.
 
