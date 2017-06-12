@@ -316,18 +316,19 @@ export default class HTML5Backend {
         const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode;
         const { anchorX, anchorY, offsetX, offsetY } = this.getCurrentSourcePreviewNodeOptions();
         const anchorPoint = { anchorX, anchorY };
+        const offsetPoint = { offsetX, offsetY };
         const dragPreviewOffset = getDragPreviewOffset(
           sourceNode,
           dragPreview,
           clientOffset,
           anchorPoint,
+          offsetPoint,
         );
-        const forceOffsetX = offsetX === 0 || offsetX;
-        const forceOffsetY = offsetY === 0 || offsetY;
+
         dataTransfer.setDragImage(
           dragPreview,
-          forceOffsetX ? offsetX : dragPreviewOffset.x,
-          forceOffsetY ? offsetY : dragPreviewOffset.y,
+          dragPreviewOffset.x,
+          dragPreviewOffset.y,
         );
       }
 
