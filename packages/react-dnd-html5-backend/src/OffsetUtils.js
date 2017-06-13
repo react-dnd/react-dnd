@@ -40,15 +40,19 @@ export function getDragPreviewOffset(
     !document.documentElement.contains(dragPreview)
   );
   const dragPreviewNode = isImage ? sourceNode : dragPreview;
-
   const dragPreviewNodeOffsetFromClient = getNodeClientOffset(dragPreviewNode);
   const offsetFromDragPreview = {
     x: clientOffset.x - dragPreviewNodeOffsetFromClient.x,
     y: clientOffset.y - dragPreviewNodeOffsetFromClient.y,
   };
-
-  const { offsetWidth: sourceWidth, offsetHeight: sourceHeight } = sourceNode;
-  const { anchorX, anchorY } = anchorPoint;
+  const {
+    offsetWidth: sourceWidth,
+    offsetHeight: sourceHeight,
+  } = sourceNode;
+  const {
+    anchorX,
+    anchorY,
+  } = anchorPoint;
 
   let dragPreviewWidth = isImage ? dragPreview.width : sourceWidth;
   let dragPreviewHeight = isImage ? dragPreview.height : sourceHeight;
@@ -59,26 +63,31 @@ export function getDragPreviewOffset(
     dragPreviewWidth /= window.devicePixelRatio;
   }
 
-  // Interpolate coordinates depending on anchor point
-  // If you know a simpler way to do this, let me know
-  const interpolantX = new MonotonicInterpolant([0, 0.5, 1], [
-    // Dock to the left
-    offsetFromDragPreview.x,
-    // Align at the center
-    (offsetFromDragPreview.x / sourceWidth) * dragPreviewWidth,
-    // Dock to the right
-    offsetFromDragPreview.x + dragPreviewWidth - sourceWidth,
-  ]);
-  const interpolantY = new MonotonicInterpolant([0, 0.5, 1], [
-    // Dock to the top
-    offsetFromDragPreview.y,
-    // Align at the center
-    (offsetFromDragPreview.y / sourceHeight) * dragPreviewHeight,
-    // Dock to the bottom
-    offsetFromDragPreview.y + dragPreviewHeight - sourceHeight,
-  ]);
-  let x = interpolantX.interpolate(anchorX);
-  let y = interpolantY.interpolate(anchorY);
+  const calculateYOffset = () => {
+    const interpolantY = new MonotonicInterpolant([0, 0.5, 1], [
+      // Dock to the top
+      offsetFromDragPreview.y,
+      // Align at the center
+      (offsetFromDragPreview.y / sourceHeight) * dragPreviewHeight,
+      // Dock to the bottom
+      offsetFromDragPreview.y + dragPreviewHeight - sourceHeight,
+    ]);
+    return interpolantY.interpolate(anchorY);
+  };
+
+  const calculateXOffset = () => {
+    // Interpolate coordinates depending on anchor point
+    // If you know a simpler way to do this, let me know
+    const interpolantX = new MonotonicInterpolant([0, 0.5, 1], [
+      // Dock to the left
+      offsetFromDragPreview.x,
+      // Align at the center
+      (offsetFromDragPreview.x / sourceWidth) * dragPreviewWidth,
+      // Dock to the right
+      offsetFromDragPreview.x + dragPreviewWidth - sourceWidth,
+    ]);
+    return interpolantX.interpolate(anchorX);
+  };
 
   // Work around Safari 8 positioning bug
   if (isSafari() && isImage) {
@@ -88,10 +97,10 @@ export function getDragPreviewOffset(
 
   // Force offsets if specified in the options.
   const { offsetX, offsetY } = offsetPoint;
-  const forceOffsetX = offsetX === 0 || offsetX;
-  const forceOffsetY = offsetY === 0 || offsetY;
-  x = forceOffsetX ? offsetX : x;
-  y = forceOffsetY ? offsetY : y;
-
-  return { x, y };
+  const isManualOffsetX = offsetX === 0 || offsetX;
+  const isManualOffsetY = offsetY === 0 || offsetY;
+  return {
+    x: isManualOffsetX ? offsetX : calculateXOffset(),
+    y: isManualOffsetY ? offsetY : calculateYOffset(),
+  };
 }
