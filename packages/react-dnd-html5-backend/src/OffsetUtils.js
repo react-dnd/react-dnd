@@ -26,6 +26,25 @@ export function getEventClientOffset(e) {
   };
 }
 
+function isImageNode(node) {
+  return node.nodeName === 'IMG' && (
+    isFirefox() ||
+    !document.documentElement.contains(node)
+  );
+}
+
+function getDragPreviewSize(isImage, dragPreview, sourceWidth, sourceHeight) {
+  let dragPreviewWidth = isImage ? dragPreview.width : sourceWidth;
+  let dragPreviewHeight = isImage ? dragPreview.height : sourceHeight;
+
+  // Work around @2x coordinate discrepancies in browsers
+  if (isSafari() && isImage) {
+    dragPreviewHeight /= window.devicePixelRatio;
+    dragPreviewWidth /= window.devicePixelRatio;
+  }
+  return { dragPreviewWidth, dragPreviewHeight };
+}
+
 export function getDragPreviewOffset(
   sourceNode,
   dragPreview,
@@ -35,10 +54,7 @@ export function getDragPreviewOffset(
   ) {
   // The browsers will use the image intrinsic size under different conditions.
   // Firefox only cares if it's an image, but WebKit also wants it to be detached.
-  const isImage = dragPreview.nodeName === 'IMG' && (
-    isFirefox() ||
-    !document.documentElement.contains(dragPreview)
-  );
+  const isImage = isImageNode(dragPreview);
   const dragPreviewNode = isImage ? sourceNode : dragPreview;
   const dragPreviewNodeOffsetFromClient = getNodeClientOffset(dragPreviewNode);
   const offsetFromDragPreview = {
@@ -53,15 +69,10 @@ export function getDragPreviewOffset(
     anchorX,
     anchorY,
   } = anchorPoint;
-
-  let dragPreviewWidth = isImage ? dragPreview.width : sourceWidth;
-  let dragPreviewHeight = isImage ? dragPreview.height : sourceHeight;
-
-  // Work around @2x coordinate discrepancies in browsers
-  if (isSafari() && isImage) {
-    dragPreviewHeight /= window.devicePixelRatio;
-    dragPreviewWidth /= window.devicePixelRatio;
-  }
+  const {
+    dragPreviewWidth,
+    dragPreviewHeight,
+  } = getDragPreviewSize(isImage, dragPreview, sourceWidth, sourceHeight);
 
   const calculateYOffset = () => {
     const interpolantY = new MonotonicInterpolant([0, 0.5, 1], [
@@ -72,7 +83,13 @@ export function getDragPreviewOffset(
       // Dock to the bottom
       offsetFromDragPreview.y + dragPreviewHeight - sourceHeight,
     ]);
-    return interpolantY.interpolate(anchorY);
+    let y = interpolantY.interpolate(anchorY);
+    // Work around Safari 8 positioning bug
+    if (isSafari() && isImage) {
+      // We'll have to wait for @3x to see if this is entirely correct
+      y += (window.devicePixelRatio - 1) * dragPreviewHeight;
+    }
+    return y;
   };
 
   const calculateXOffset = () => {
@@ -88,12 +105,6 @@ export function getDragPreviewOffset(
     ]);
     return interpolantX.interpolate(anchorX);
   };
-
-  // Work around Safari 8 positioning bug
-  if (isSafari() && isImage) {
-    // We'll have to wait for @3x to see if this is entirely correct
-    y += (window.devicePixelRatio - 1) * dragPreviewHeight;
-  }
 
   // Force offsets if specified in the options.
   const { offsetX, offsetY } = offsetPoint;
