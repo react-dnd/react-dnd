@@ -71,7 +71,7 @@ module.exports = DragSource(ItemTypes.CARD, cardSource, collect)(Card);
 ```js
 // Let's make <Card text='Write the docs' /> draggable!
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from './Constants';
@@ -105,7 +105,7 @@ const propTypes = {
   connectDragSource: PropTypes.func.isRequired
 };
 
-class Card {
+class Card extends Component {
   render() {
     const { isDragging, connectDragSource, text } = this.props;
     return connectDragSource(
