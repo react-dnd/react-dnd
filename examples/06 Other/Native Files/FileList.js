@@ -7,7 +7,7 @@ export default class FileList extends Component {
   };
 
   list(files) {
-    return files.map(file => <li key={file.name}>{`'${file.name}'' of size '${file.size}' and type '${file.type}'`}</li>);
+    return files.map(file => <li key={file.name}>{`'${file.name}' of size '${file.size}' and type '${file.type}'`}</li>);
   }
 
   render() {

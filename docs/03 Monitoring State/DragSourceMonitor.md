@@ -9,7 +9,7 @@ DragSourceMonitor
 
 * **`canDrag()`**: Returns `true` if no drag operation is in progress, and the owner's `canDrag()` returns `true` or is not defined.
 
-* **`isDragging()`**: Returns `true` if there is a drag operation is in progress, and either the owner initiated the drag, or its `isDragging()` is defined and returns `true`.
+* **`isDragging()`**: Returns `true` if a drag operation is in progress, and either the owner initiated the drag, or its `isDragging()` is defined and returns `true`.
 
 * **`getItemType()`**: Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns `null` if no item is being dragged.
 
@@ -25,6 +25,6 @@ DragSourceMonitor
 
 * **`getClientOffset()`**: Returns the last recorded `{ x, y }` client offset of the pointer while a drag operation is in progress. Returns `null` if no item is being dragged.
 
-* **`getDifferenceFromInitialOffset()`**: Returns the `{ x, y }` difference between the last recorded client offset of the pointer and the client offset when current the drag operation has started. Returns `null` if no item is being dragged.
+* **`getDifferenceFromInitialOffset()`**: Returns the `{ x, y }` difference between the last recorded client offset of the pointer and the client offset when the current drag operation has started. Returns `null` if no item is being dragged.
 
 * **`getSourceClientOffset()`**: Returns the projected `{ x, y }` client offset of the drag source component's root DOM node, based on its position at the time when the current drag operation has started, and the movement difference. Returns `null` if no item is being dragged.
