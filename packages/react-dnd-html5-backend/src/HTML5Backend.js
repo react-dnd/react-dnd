@@ -81,6 +81,9 @@ export default class HTML5Backend {
   }
 
   addEventListeners(target) {
+    if (!target.addEventListener) {
+      return;
+    }
     target.addEventListener('dragstart', this.handleTopDragStart);
     target.addEventListener('dragstart', this.handleTopDragStartCapture, true);
     target.addEventListener('dragend', this.handleTopDragEndCapture, true);
@@ -94,6 +97,9 @@ export default class HTML5Backend {
   }
 
   removeEventListeners(target) {
+    if (!target.removeEventListener) {
+      return;
+    }
     target.removeEventListener('dragstart', this.handleTopDragStart);
     target.removeEventListener('dragstart', this.handleTopDragStartCapture, true);
     target.removeEventListener('dragend', this.handleTopDragEndCapture, true);
