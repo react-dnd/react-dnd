@@ -296,6 +296,11 @@ export default class HTML5Backend {
 
     const clientOffset = getEventClientOffset(e);
 
+    // Avoid crashing if we missed a drop event or our previous drag died
+    if (this.monitor.isDragging()) {
+      this.actions.endDrag();
+    }
+
     // Don't publish the source just yet (see why below)
     this.actions.beginDrag(dragStartSourceIds, {
       publishSource: false,
