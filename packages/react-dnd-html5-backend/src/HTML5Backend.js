@@ -32,7 +32,6 @@ export default class HTML5Backend {
     this.getSourceClientOffset = this.getSourceClientOffset.bind(this);
     this.handleTopDragStart = this.handleTopDragStart.bind(this);
     this.handleTopDragStartCapture = this.handleTopDragStartCapture.bind(this);
-    this.handleTopDragEndCapture = this.handleTopDragEndCapture.bind(this);
     this.handleTopDragEnter = this.handleTopDragEnter.bind(this);
     this.handleTopDragEnterCapture = this.handleTopDragEnterCapture.bind(this);
     this.handleTopDragLeaveCapture = this.handleTopDragLeaveCapture.bind(this);
@@ -41,7 +40,7 @@ export default class HTML5Backend {
     this.handleTopDrop = this.handleTopDrop.bind(this);
     this.handleTopDropCapture = this.handleTopDropCapture.bind(this);
     this.handleSelectStart = this.handleSelectStart.bind(this);
-    this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
+    this.endDrag = this.endDrag.bind(this);
     this.endDragNativeItem = this.endDragNativeItem.bind(this);
     this.asyncEndDragNativeItem = this.asyncEndDragNativeItem.bind(this);
   }
@@ -83,7 +82,6 @@ export default class HTML5Backend {
   addEventListeners(target) {
     target.addEventListener('dragstart', this.handleTopDragStart);
     target.addEventListener('dragstart', this.handleTopDragStartCapture, true);
-    target.addEventListener('dragend', this.handleTopDragEndCapture, true);
     target.addEventListener('dragenter', this.handleTopDragEnter);
     target.addEventListener('dragenter', this.handleTopDragEnterCapture, true);
     target.addEventListener('dragleave', this.handleTopDragLeaveCapture, true);
@@ -96,7 +94,6 @@ export default class HTML5Backend {
   removeEventListeners(target) {
     target.removeEventListener('dragstart', this.handleTopDragStart);
     target.removeEventListener('dragstart', this.handleTopDragStartCapture, true);
-    target.removeEventListener('dragend', this.handleTopDragEndCapture, true);
     target.removeEventListener('dragenter', this.handleTopDragEnter);
     target.removeEventListener('dragenter', this.handleTopDragEnterCapture, true);
     target.removeEventListener('dragleave', this.handleTopDragLeaveCapture, true);
@@ -228,12 +225,7 @@ export default class HTML5Backend {
     this.currentNativeSource = null;
   }
 
-  endDragIfSourceWasRemovedFromDOM() {
-    const node = this.currentDragSourceNode;
-    if (document.body.contains(node)) {
-      return;
-    }
-
+  endDrag() {
     if (this.clearCurrentDragSourceNode()) {
       this.actions.endDrag();
     }
@@ -247,8 +239,9 @@ export default class HTML5Backend {
 
     // Receiving a mouse event in the middle of a dragging operation
     // means it has ended and the drag source node disappeared from DOM,
-    // so the browser didn't dispatch the dragend event.
-    this.window.addEventListener('mousemove', this.endDragIfSourceWasRemovedFromDOM, true);
+    // so the browser didn't dispatch the dragend event or browser fail
+    // to trigger dragend (i.e: Chrome 59)
+    this.window.addEventListener('mousemove', this.endDrag, true);
   }
 
   clearCurrentDragSourceNode() {
@@ -256,7 +249,7 @@ export default class HTML5Backend {
       this.currentDragSourceNode = null;
       this.currentDragSourceNodeOffset = null;
       this.currentDragSourceNodeOffsetChanged = false;
-      this.window.removeEventListener('mousemove', this.endDragIfSourceWasRemovedFromDOM, true);
+      this.window.removeEventListener('mousemove', this.endDrag, true);
       return true;
     }
 
@@ -386,15 +379,6 @@ export default class HTML5Backend {
     } else {
       // If by this time no drag source reacted, tell browser not to drag.
       e.preventDefault();
-    }
-  }
-
-  handleTopDragEndCapture() {
-    if (this.clearCurrentDragSourceNode()) {
-      // Firefox can dispatch this event in an infinite loop
-      // if dragend handler does something like showing an alert.
-      // Only proceed if we have not handled it already.
-      this.actions.endDrag();
     }
   }
 
@@ -539,8 +523,6 @@ export default class HTML5Backend {
 
     if (this.isDraggingNativeItem()) {
       this.endDragNativeItem();
-    } else {
-      this.endDragIfSourceWasRemovedFromDOM();
     }
   }
 
