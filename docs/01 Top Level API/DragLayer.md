@@ -283,7 +283,7 @@ function getItemStyles(props) {
   currentOffset: monitor.getSourceClientOffset(),
   isDragging: monitor.isDragging()
 }))
-export default class CustomDragLayer {
+export default class CustomDragLayer extends React.Component {
   static propTypes = {
     item: PropTypes.object,
     itemType: PropTypes.string,
