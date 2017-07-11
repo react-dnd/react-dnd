@@ -45,14 +45,14 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract(
-          'style-loader',
-          [
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
             'css-loader',
             path.join(__dirname, '../scripts/cssTransformLoader'),
-            'less-loader'
-          ].join('!')
-        )
+            'less-loader',
+          ],
+        }),
       },
       {
         test: /\.png$/,
