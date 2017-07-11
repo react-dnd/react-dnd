@@ -9,7 +9,6 @@
     "test": "../../node_modules/.bin/npm-run-all clean build",
     "prepublish": "npm run test"
   },
-  "devDependencies": {},
   "dependencies": {
     "dnd-core": "^2.4.0"
   },
