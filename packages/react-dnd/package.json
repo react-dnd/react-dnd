@@ -16,10 +16,10 @@
   "dependencies": {
     "disposables": "^1.0.1",
     "dnd-core": "^2.4.0",
-    "hoist-non-react-statics": "^1.2.0",
+    "hoist-non-react-statics": "^2.1.0",
     "invariant": "^2.1.0",
     "lodash": "^4.2.0",
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0-0"
