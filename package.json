@@ -45,7 +45,7 @@
     "test": "npm-run-all lint jest:cov test_modules"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.2",
+    "autoprefixer": "^7.1.2",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
@@ -53,37 +53,44 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
-    "css-loader": "^0.26.1",
+    "css-loader": "^0.28.4",
     "eslint": "^3.14.0",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^2.0.0",
     "faker": "^3.1.0",
-    "file-loader": "^0.9.0",
-    "html-loader": "^0.4.4",
-    "jest": "^18.1.0",
+    "file-loader": "^0.11.2",
+    "html-loader": "^0.4.5",
+    "jest": "^20.0.4",
     "karma-sourcemap-loader": "^0.3.6",
     "lerna": "^2.0.0",
     "less": "^2.7.2",
-    "less-loader": "^2.0.0",
+    "less-loader": "^4.0.5",
     "marked": "^0.3.6",
-    "npm-run-all": "^4.0.1",
+    "npm-run-all": "^4.0.2",
     "null-loader": "^0.1.0",
-    "postcss": "^5.2.12",
+    "postcss": "^6.0.6",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-frame-component": "^1.1.0",
     "react-hot-loader": "^1.2.3",
-    "rimraf": "^2.5.4",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.5",
-    "webpack": "^1.8.11",
-    "webpack-dev-server": "^1.8.2"
+    "rimraf": "^2.6.1",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.1.0",
+    "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
     "babel-preset-env": "^1.6.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^react-dnd$": "<rootDir>/packages/react-dnd/src",
+      "react-dnd-html5-backend": "<rootDir>//packages/react-dnd-html5-backend/src",
+      "dnd-core": "<rootDir>//packages/dnd-core/src"
+    }
   }
 }
