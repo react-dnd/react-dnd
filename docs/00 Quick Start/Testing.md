@@ -16,7 +16,7 @@ If you are only interested in testing the *rendering* of your components in isol
 -------------------
 ```js
 var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+var TestUtils = require('react-dom/test-utils');
 var expect = require('expect');
 var Box = require('./components/Box');
 
@@ -48,7 +48,7 @@ it('can be tested independently', function () {
 -------------------
 ```js
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import expect from 'expect';
 import Box from './components/Box';
 
@@ -102,7 +102,7 @@ var createReactClass = require('create-react-class');
 var Component = React.Component;
 var TestBackend = require('react-dnd-test-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
-var TestUtils = require('react-addons-test-utils');
+var TestUtils = require('react-dom/test-utils');
 var expect = require('expect');
 
 /**
@@ -153,7 +153,7 @@ it('can be tested with the testing backend', function () {
 import React, { Component } from 'react';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import expect from 'expect';
 
 /**
@@ -197,7 +197,7 @@ it('can be tested with the testing backend', () => {
 import React, { Component } from 'react';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import expect from 'expect';
 
 /**
