@@ -80,6 +80,7 @@ export default class HTML5Backend {
   }
 
   addEventListeners(target) {
+    // SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
     if (!target.addEventListener) {
       return;
     }
@@ -95,6 +96,7 @@ export default class HTML5Backend {
   }
 
   removeEventListeners(target) {
+    // SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
     if (!target.removeEventListener) {
       return;
     }
