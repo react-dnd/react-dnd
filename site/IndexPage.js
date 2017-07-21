@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import APIPage from './pages/APIPage';
 import ExamplePage from './pages/ExamplePage';
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 const APIDocs = {
   OVERVIEW: require('../docs/00 Quick Start/Overview.md'),
@@ -18,6 +19,7 @@ const APIDocs = {
   DROP_TARGET_CONNECTOR: require('../docs/02 Connecting to DOM/DropTargetConnector.md'),
   DROP_TARGET_MONITOR: require('../docs/03 Monitoring State/DropTargetMonitor.md'),
   DRAG_DROP_CONTEXT: require('../docs/01 Top Level API/DragDropContext.md'),
+  DRAG_DROP_CONTEXT_PROVIDER: require('../docs/01 Top Level API/DragDropContextProvider.md'),
   DRAG_LAYER: require('../docs/01 Top Level API/DragLayer.md'),
   DRAG_LAYER_MONITOR: require('../docs/03 Monitoring State/DragLayerMonitor.md'),
   HTML5_BACKEND: require('../docs/04 Backends/HTML5.md'),
@@ -25,20 +27,23 @@ const APIDocs = {
 };
 
 const Examples = {
-  CHESSBOARD_TUTORIAL_APP: require('../examples/00 Chessboard/Tutorial App'),
-  DUSTBIN_SINGLE_TARGET: require('../examples/01 Dustbin/Single Target'),
-  DUSTBIN_MULTIPLE_TARGETS: require('../examples/01 Dustbin/Multiple Targets'),
-  DUSTBIN_STRESS_TEST: require('../examples/01 Dustbin/Stress Test'),
-  DRAG_AROUND_NAIVE: require('../examples/02 Drag Around/Naive'),
-  DRAG_AROUND_CUSTOM_DRAG_LAYER: require('../examples/02 Drag Around/Custom Drag Layer'),
+  CHESSBOARD_TUTORIAL_APP: require('../examples/00 Chessboard/Tutorial App').default,
+  DUSTBIN_SINGLE_TARGET: require('../examples/01 Dustbin/Single Target').default,
+  DUSTBIN_IFRAME: require('../examples/01 Dustbin/Single Target in iframe').default,
+  DUSTBIN_COPY_OR_MOVE: require('../examples/01 Dustbin/Copy or Move').default,
+  DUSTBIN_MULTIPLE_TARGETS: require('../examples/01 Dustbin/Multiple Targets').default,
+  DUSTBIN_STRESS_TEST: require('../examples/01 Dustbin/Stress Test').default,
+  DRAG_AROUND_NAIVE: require('../examples/02 Drag Around/Naive').default,
+  DRAG_AROUND_CUSTOM_DRAG_LAYER: require('../examples/02 Drag Around/Custom Drag Layer').default,
   DRAG_AROUND_CHECK_OVER_TARGET_OR_NOT: require('../examples/02 Drag Around/Check Over Target or Not'),
-  NESTING_DRAG_SOURCES: require('../examples/03 Nesting/Drag Sources'),
-  NESTING_DROP_TARGETS: require('../examples/03 Nesting/Drop Targets'),
-  SORTABLE_SIMPLE: require('../examples/04 Sortable/Simple'),
-  SORTABLE_CANCEL_ON_DROP_OUTSIDE: require('../examples/04 Sortable/Cancel on Drop Outside'),
-  SORTABLE_STRESS_TEST: require('../examples/04 Sortable/Stress Test'),
-  CUSTOMIZE_HANDLES_AND_PREVIEWS: require('../examples/05 Customize/Handles and Previews'),
-  CUSTOMIZE_DROP_EFFECTS: require('../examples/05 Customize/Drop Effects')
+  NESTING_DRAG_SOURCES: require('../examples/03 Nesting/Drag Sources').default,
+  NESTING_DROP_TARGETS: require('../examples/03 Nesting/Drop Targets').default,
+  SORTABLE_SIMPLE: require('../examples/04 Sortable/Simple').default,
+  SORTABLE_CANCEL_ON_DROP_OUTSIDE: require('../examples/04 Sortable/Cancel on Drop Outside').default,
+  SORTABLE_STRESS_TEST: require('../examples/04 Sortable/Stress Test').default,
+  CUSTOMIZE_HANDLES_AND_PREVIEWS: require('../examples/05 Customize/Handles and Previews').default,
+  CUSTOMIZE_DROP_EFFECTS: require('../examples/05 Customize/Drop Effects').default,
+  OTHER_NATIVE_FILES: require('../examples/06 Other/Native Files').default
 };
 
 export default class IndexPage extends Component {
@@ -48,7 +53,7 @@ export default class IndexPage extends Component {
 
   static renderToString(props) {
     return IndexPage.getDoctype() +
-           React.renderToString(<IndexPage {...props} />);
+           ReactDOMServer.renderToString(<IndexPage {...props} />);
   }
 
   constructor(props) {

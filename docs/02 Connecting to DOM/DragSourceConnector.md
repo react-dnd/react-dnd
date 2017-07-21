@@ -29,6 +29,10 @@ The functions returned by the connector methods also accept options. They need t
 
 * `anchorY`: Optional. A number betwen `0` and `1`. By default, `0.5`. Specifies how the offset relative to the drag source node is translated into the the vertical offset of the drag preview when their sizes don't match. `0` means “dock the preview to the top, `0.5` means “interpolate linearly” and `1` means “dock the preview to the bottom.
 
+* `offsetX`: Optional. A number or null if not needed. By default, null. Specifies the vertical offset between the cursor and the drag preview element. If offsetX has a value, anchorX won't be used.
+
+* `offsetY`: Optional. A number or null if not needed. By default, null. Specifies the vertical offset between the cursor and the drag preview element. If offsetY has a value, anchorY won't be used.
+
 ### Example
 
 Check out [the tutorial](docs-tutorial.html) for more real examples!
@@ -36,6 +40,7 @@ Check out [the tutorial](docs-tutorial.html) for more real examples!
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
 /* ... */
@@ -47,7 +52,7 @@ function collect(connect, monitor) {
   };
 }
 
-var ComponentWithCopyEffect = React.createClass({
+var ComponentWithCopyEffect = createReactClass({
   render: function () {
     var connectDragSource = this.props.connectDragSource;
 
@@ -61,7 +66,7 @@ var ComponentWithCopyEffect = React.createClass({
 });
 ComponentWithCopyEffect = DragSource(/* ... */)(ComponentWithCopyEffect);
 
-var ComponentWithHandle = React.createClass({
+var ComponentWithHandle = createReactClass({
   render: function () {
     var connectDragSource = this.props.connectDragSource;
     var connectDragPreview = this.props.connectDragPreview;
@@ -78,7 +83,7 @@ var ComponentWithHandle = React.createClass({
 });
 ComponentWithHandle = DragSource(/* ... */)(ComponentWithHandle);
 
-var ComponentWithImagePreview = React.createClass({
+var ComponentWithImagePreview = createReactClass({
   componentDidMount: function () {
     var connectDragPreview = this.props.connectDragPreview;
 

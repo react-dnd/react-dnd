@@ -16,9 +16,10 @@ The second package instructs React DnD to use [the HTML5 drag and drop API](http
 // Let's make <Card text='Write the docs' /> draggable!
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 var ItemTypes = require('./Constants').ItemTypes;
-var PropTypes = React.PropTypes;
+var PropTypes = require('prop-types');
 
 /**
  * Implements the drag source contract.
@@ -41,7 +42,7 @@ function collect(connect, monitor) {
   };
 }
 
-var Card = React.createClass({
+var Card = createReactClass({
   propTypes: {
     text: PropTypes.string.isRequired,
 
@@ -70,7 +71,8 @@ module.exports = DragSource(ItemTypes.CARD, cardSource, collect)(Card);
 ```js
 // Let's make <Card text='Write the docs' /> draggable!
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from './Constants';
 
@@ -103,7 +105,7 @@ const propTypes = {
   connectDragSource: PropTypes.func.isRequired
 };
 
-class Card {
+class Card extends Component {
   render() {
     const { isDragging, connectDragSource, text } = this.props;
     return connectDragSource(
@@ -123,7 +125,8 @@ export default DragSource(ItemTypes.CARD, cardSource, collect)(Card);
 ```js
 // Let's make <Card text='Write the docs' /> draggable!
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from './Constants';
 
@@ -171,7 +174,7 @@ Instead of providing readymade widgets, React DnD wraps your components and inje
 
 ### It embraces unidirectional data flow
 
-React DnD fully embraces the declarative rendering paradigm of React and doesn't mutate the DOM. It is a great complement to Flux and other architectures with the unidirectional data flow. In fact it is built on Flux.
+React DnD fully embraces the declarative rendering paradigm of React and doesn't mutate the DOM. It is a great complement to Redux and other architectures with the unidirectional data flow. In fact it is built on Redux.
 
 ### It hides the platform quirks
 
@@ -183,7 +186,7 @@ React DnD uses the HTML5 drag and drop under the hood, but it also lets you supp
 
 ### It is ready for the future
 
-React DnD does not export mixins, and works equally great with any components, whether they are created using ES6 classes, `createClass` or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.
+React DnD does not export mixins, and works equally great with any components, whether they are created using ES6 classes, `createReactClass` or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.
 
 ## Touch Support
 
@@ -195,8 +198,7 @@ React DnD gives you a set of powerful primitives, but it does not contain any re
 
 ## Support and Contributions
 
-Issues and potential improvements are discussed on [Github](https://github.com/gaearon/react-dnd/issues).  
-The [Gitter room](https://gitter.im/gaearon/react-dnd) is another good place to get support.
+Issues and potential improvements are discussed on [Github](https://github.com/react-dnd/react-dnd/issues).
 
 ## Thanks
 

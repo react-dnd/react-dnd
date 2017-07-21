@@ -1,20 +1,10 @@
 {
-  "name": "react-dnd",
-  "version": "2.1.3",
-  "description": "Drag and Drop for React",
-  "main": "lib/index.js",
-  "scripts": {
-    "start": "./scripts/startSiteDevServer.sh",
-    "build-site": "./scripts/buildStaticSite.sh",
-    "publish-site": "./scripts/publishStaticSite.sh",
-    "build": "./scripts/build.sh",
-    "lint": "eslint .",
-    "test": "karma start",
-    "prepublish": "npm run lint && npm run build"
-  },
+  "name": "react-dnd-master",
+  "private": true,
+  "description": "React-DnD Monorepo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-dnd.git"
+    "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "keywords": [
     "react",
@@ -32,59 +22,73 @@
     "hoc"
   ],
   "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "contributors": [
+    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)",
+    "Jordan Gensler (http://github.com/kesne)",
+    "Gagan (https://github.com/thetechie)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaearon/react-dnd/issues"
+    "url": "https://github.com/react-dnd/react-dnd/issues"
   },
-  "homepage": "https://github.com/gaearon/react-dnd",
-  "dependencies": {
-    "disposables": "^1.0.1",
-    "dnd-core": "^2.0.1",
-    "invariant": "^2.1.0",
-    "lodash": "^4.2.0"
-  },
-  "peerDependencies": {
-    "react": "^0.14.0"
+  "homepage": "https://github.com/react-dnd/react-dnd",
+  "scripts": {
+    "start": "./scripts/startSiteDevServer.sh",
+    "build-site": "./scripts/buildStaticSite.sh",
+    "publish-site": "./scripts/publishStaticSite.sh",
+    "postinstall": "lerna bootstrap",
+    "unit_test": "jest",
+    "jest:watch": "jest --watch",
+    "jest:cov": "jest --coverage",
+    "lint": "eslint .",
+    "test_modules": "lerna run test",
+    "test": "npm-run-all lint jest:cov test_modules"
   },
   "devDependencies": {
-    "animation-frame": "^0.2.4",
-    "autoprefixer": "^5.0.0",
-    "babel": "^5.8.23",
-    "babel-core": "^5.8.24",
-    "babel-eslint": "^4.1.3",
-    "babel-loader": "^5.0.0",
-    "css-loader": "^0.9.1",
-    "eslint": "^1.6.0",
-    "eslint-config-airbnb": "^0.1.0",
-    "eslint-plugin-react": "^3.5.1",
-    "expect": "^1.6.0",
-    "extract-text-webpack-plugin": "^0.3.8",
-    "faker": "^2.1.3",
-    "file-loader": "^0.8.1",
-    "glob": "^4.3.5",
-    "html-loader": "^0.2.3",
-    "karma": "^0.13.10",
-    "karma-chrome-launcher": "^0.2.1",
-    "karma-cli": "^0.1.1",
-    "karma-mocha": "^0.2.0",
+    "autoprefixer": "^7.1.2",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "extract-text-webpack-plugin": "^2.0.0",
+    "faker": "^3.1.0",
+    "file-loader": "^0.11.2",
+    "html-loader": "^0.4.5",
+    "jest": "^20.0.4",
     "karma-sourcemap-loader": "^0.3.6",
-    "karma-webpack": "^1.7.0",
-    "less": "^2.2.0",
-    "less-loader": "^2.0.0",
-    "marked": "^0.3.2",
-    "mocha": "^2.2.5",
+    "lerna": "^2.0.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "marked": "^0.3.6",
+    "npm-run-all": "^4.0.2",
     "null-loader": "^0.1.0",
-    "postcss": "^4.0.2",
-    "react": "^0.14.0",
-    "react-dnd-html5-backend": "^2.1.2",
-    "react-dnd-test-backend": "^1.0.2",
-    "react-dom": "^0.14.0",
+    "postcss": "^6.0.6",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-frame-component": "^1.1.0",
     "react-hot-loader": "^1.2.3",
-    "react-router": "~0.13.2",
-    "request": "2.46.0",
-    "style-loader": "^0.8.3",
-    "url-loader": "^0.5.5",
-    "webpack": "^1.8.11",
-    "webpack-dev-server": "^1.8.2"
+    "rimraf": "^2.6.1",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.1.0",
+    "webpack-dev-server": "^2.5.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^react-dnd$": "<rootDir>/packages/react-dnd/src",
+      "react-dnd-html5-backend": "<rootDir>//packages/react-dnd-html5-backend/src",
+      "dnd-core": "<rootDir>//packages/dnd-core/src"
+    }
   }
 }

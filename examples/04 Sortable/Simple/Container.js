@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import update from 'react/lib/update';
-import Card from './Card';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Card from './Card';
 
 const style = {
-  width: 400
+  width: 400,
 };
 
 @DragDropContext(HTML5Backend)
@@ -16,26 +16,26 @@ export default class Container extends Component {
     this.state = {
       cards: [{
         id: 1,
-        text: 'Write a cool JS library'
+        text: 'Write a cool JS library',
       }, {
         id: 2,
-        text: 'Make it generic enough'
+        text: 'Make it generic enough',
       }, {
         id: 3,
-        text: 'Write README'
+        text: 'Write README',
       }, {
         id: 4,
-        text: 'Create some examples'
+        text: 'Create some examples',
       }, {
         id: 5,
-        text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)'
+        text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
       }, {
         id: 6,
-        text: '???'
+        text: '???',
       }, {
         id: 7,
-        text: 'PROFIT'
-      }]
+        text: 'PROFIT',
+      }],
     };
   }
 
@@ -47,9 +47,9 @@ export default class Container extends Component {
       cards: {
         $splice: [
           [dragIndex, 1],
-          [hoverIndex, 0, dragCard]
-        ]
-      }
+          [hoverIndex, 0, dragCard],
+        ],
+      },
     }));
   }
 
@@ -58,15 +58,15 @@ export default class Container extends Component {
 
     return (
       <div style={style}>
-        {cards.map((card, i) => {
-          return (
-            <Card key={card.id}
-                  index={i}
-                  id={card.id}
-                  text={card.text}
-                  moveCard={this.moveCard} />
-          );
-        })}
+        {cards.map((card, i) => (
+          <Card
+            key={card.id}
+            index={i}
+            id={card.id}
+            text={card.text}
+            moveCard={this.moveCard}
+          />
+        ))}
       </div>
     );
   }

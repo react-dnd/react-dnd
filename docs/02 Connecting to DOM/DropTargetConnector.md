@@ -18,6 +18,7 @@ Check out [the tutorial](docs-tutorial.html) for more real examples!
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DropTarget = require('react-dnd').DropTarget;
 
 /* ... */
@@ -28,7 +29,7 @@ function collect(connect, monitor) {
   };
 }
 
-var DropZone = React.createClass({
+var DropZone = createReactClass({
   render: function () {
     var connectDropTarget = this.props.connectDropTarget;
 

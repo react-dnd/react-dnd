@@ -13,9 +13,10 @@ To use `DropTarget`, don't forget to wrap the top-level component of your app in
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DropTarget = require('react-dnd').DropTarget;
 
-var MyComponent = React.createClass({
+var MyComponent = createReactClass({
   /* ... */
 });
 
@@ -48,7 +49,7 @@ export default class MyComponent {
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drop target reacts to the drag and drop events. See the drop target specification described in detail in the next section.
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `connect` and `monitor`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
@@ -72,7 +73,7 @@ The second `spec` parameter must be a plain object implementing the drop target 
 
 * **`monitor`**: An instance of [`DropTargetMonitor`](docs-drop-target-monitor.html). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, whether it is over the current target, and whether it can be dropped. Read the [`DropTargetMonitor` documentation](docs-drop-target-monitor.html) for a complete list of `monitor` methods, or read the [overview](docs-overview.html) for an introduction to the monitors.
 
-* **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `canDrop` because the instance may not be available by the time it is called. If you want this method to depend on the component's state, consider lifting the state to the parent component, so that you can just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
+* **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `canDrop` because the instance may not be available by the time it is called. If you want this method to depend on the component's state, consider lifting the state to the parent component, so that you can just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible. Do note this is always `null` when hovering [stateless components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
 
 ### The Collecting Function
 
@@ -124,6 +125,7 @@ Check out [the tutorial](docs-tutorial.html) for more real examples!
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var findDOMNode = require('react-dom').findDOMNode;
 var DropTarget = require('react-dnd').DropTarget;
 
@@ -199,7 +201,7 @@ function collect(connect, monitor) {
   };
 }
 
-var ChessSquare = React.createClass({
+var ChessSquare = createReactClass({
   componentWillReceiveProps: function (nextProps) {
     if (!this.props.isOver && nextProps.isOver) {
       // You can use this as enter handler

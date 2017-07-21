@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Square extends Component {
   static propTypes = {
     black: PropTypes.bool,
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   render() {
@@ -12,12 +13,14 @@ export default class Square extends Component {
     const color = black ? 'white' : 'black';
 
     return (
-      <div style={{
-        color,
-        backgroundColor,
-        width: '100%',
-        height: '100%'
-      }}>
+      <div
+        style={{
+          color,
+          backgroundColor,
+          width: '100%',
+          height: '100%',
+        }}
+      >
         {this.props.children}
       </div>
     );

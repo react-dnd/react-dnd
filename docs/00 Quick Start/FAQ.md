@@ -16,9 +16,10 @@ You can see that in every example on the website that uses it, such as:
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
-var MyComponent = React.createClass({
+var MyComponent = createReactClass({
   /* ... */
 });
 
@@ -56,7 +57,7 @@ npm install --save react-dnd-html5-backend
 
 The npm packages default to the CommonJS build. However they also include pre-minified UMD builds in the `dist` folders. The UMD builds export global `window.ReactDnD` and `window.ReactDnDHTML5Backend` respectively.
 
-If you’d rather not use npm, you can use [npmcdn](http://npmcdn.com/) to access the UMD builds directly: [ReactDnD.min.js](https://npmcdn.com/react-dnd@latest/dist/ReactDnD.min.js) and [ReactDnDHTML5Backend.min.js](https://npmcdn.com/react-dnd-html5-backend@latest/dist/ReactDnDHTML5Backend.min.js). You may point your Bower config to them.
+If you’d rather not use npm, you can use [unpkg](http://unpkg.com/) to access the UMD builds directly: [ReactDnD.min.js](https://unpkg.com/react-dnd@latest/dist/ReactDnD.min.js) and [ReactDnDHTML5Backend.min.js](https://unpkg.com/react-dnd-html5-backend@latest/dist/ReactDnDHTML5Backend.min.js). You may point your Bower config to them.
 
 ### How do I test React DnD components and their interaction?
 
@@ -362,13 +363,18 @@ Both [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.h
 
 Because [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html) use the partial application, you may compose them using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). In ES7, you can just stack the decorators to achieve the same effect.
 
+### Why is the `component` parameter always `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods?
+
+When using [stateless components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), the `component` parameter will always be `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods. This is because it is not possible to attach a ref to a stateless function component as explained in [the React docs](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
+
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
 var flow = require('lodash/flow');
 
-var YourComponent = React.createClass({
+var YourComponent = createReactClass({
   /* ... */
 });
 
@@ -410,6 +416,7 @@ If you are using the [HTML5 backend](docs-html5-backend.html), you can register 
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var NativeTypes = require('react-dnd-html5-backend').NativeTypes;
 var DropTarget = require('react-dnd').DropTarget;
 
@@ -419,7 +426,7 @@ var fileTarget = {
   }
 };
 
-var FileDropZone = React.createClass({
+var FileDropZone = createReactClass({
   render() {
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
@@ -520,7 +527,9 @@ Consider this example:
 
 -------------------
 ```javascript
-var Page = React.createClass({
+var createReactClass = require('create-react-class');
+
+var Page = createReactClass({
   statics: {
     willTransitionTo: function (transition, params) {
       /* ... */
@@ -567,7 +576,9 @@ It might surprise you that your route handler's `willTransitionTo` (or a similar
 
 -------------------
 ```javascript
-var Page = React.createClass({
+var createReactClass = require('create-react-class');
+
+var Page = createReactClass({
   render: function () {
     /* ... */
   }
@@ -647,11 +658,11 @@ React DnD would not have reached the 1.0 release without the generous donations 
 
 ### How Do I Contribute?
 
-Contributing the documentation for the underlying [DnD Core](https://github.com/gaearon/dnd-core) library would be a huge help, as it is currently not documented at all, but its concepts leak in some advanced scenarios such as [writing tests](docs-testing.html).
+Contributing the documentation for the underlying [DnD Core](https://github.com/react-dnd/dnd-core) library would be a huge help, as it is currently not documented at all, but its concepts leak in some advanced scenarios such as [writing tests](docs-testing.html).
 
 Porting the library to other modern frameworks such as Cycle, Mercury, or Deku, is also appreciated. Such ports would be able to reuse DnD Core logic and the existing backends.
 
-Please let me know via the [issue tracker](https://github.com/gaearon/react-dnd/issues) if you create advanced examples such as a Kanban board application, or write a blog post or record a screencast about React DnD, so I can link to it.
+Please let me know via the [issue tracker](https://github.com/react-dnd/react-dnd/issues) if you create advanced examples such as a Kanban board application, or write a blog post or record a screencast about React DnD, so I can link to it.
 
 While DnD Core is fully tested, React DnD does not currently have any unit tests. Writing them is a great and eagerly desired contribution.
 

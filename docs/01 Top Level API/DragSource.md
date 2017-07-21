@@ -13,9 +13,10 @@ To use `DragSource`, don't forget to wrap the top-level component of your app in
 
 -------------------
 ```js
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
-var MyComponent = React.createClass({
+var MyComponent = createReactClass({
   /* ... */
 });
 
@@ -49,7 +50,7 @@ export default class MyComponent {
 
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drag source reacts to the drag and drop events. See the drag source specification described in detail in the next section.
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `monitor` and `connect`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `connect` and `monitor`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
@@ -121,6 +122,7 @@ Check out [the tutorial](docs-tutorial.html) for more real examples!
 -------------------
 ```js
 var React = require('react');
+var createReactClass = require('create-react-class');
 var DragSource = require('react-dnd').DragSource;
 
 // Drag sources and drop targets only interact
@@ -189,7 +191,7 @@ function collect(connect, monitor) {
   };
 }
 
-var Card = React.createClass({
+var Card = createReactClass({
   render: function () {
     // Your component receives its own props as usual
     var id = this.props.id;

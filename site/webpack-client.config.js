@@ -17,7 +17,7 @@ module.exports = {
   ] : []),
 
   output: {
-    path: '__site__/',
+    path: path.join(__dirname, '..', '__site__/'),
     filename: isDev ? '[name].js' : '[name]-[hash].js',
     publicPath: ''
   },
@@ -25,50 +25,66 @@ module.exports = {
   target: 'web',
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.md$/,
-        loader: [
-          'html?{"minimize":false}',
-          path.join(__dirname, '../scripts/markdownLoader')
-        ].join('!')
+        use: [
+          {
+            loader: "html-loader",
+            options: {
+              minimize: false,
+            },
+          },
+          path.join(__dirname, '../scripts/markdownLoader'),
+        ],
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: isDev ? ['react-hot-loader', 'babel-loader'] : ['babel-loader']
+        use: isDev ? ['react-hot-loader', 'babel-loader'] : ['babel-loader']
       },
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          [
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
             'css-loader',
             path.join(__dirname, '../scripts/cssTransformLoader'),
-            'less-loader'
-          ].join('!')
-        )
+            'less-loader',
+          ],
+        }),
       },
       {
         test: /\.png$/,
-        loader: 'file-loader',
-        query: { mimetype: 'image/png', name: 'images/[name]-[hash].[ext]' }
-      }
-    ]
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              query: { mimetype: 'image/png', name: 'images/[name]-[hash].[ext]' },
+            },
+          }
+        ],
+      },
+    ],
   },
-
   resolve: {
+    modules:[
+      path.join(__dirname, '..', 'node_modules'),
+      path.join(__dirname, '..', 'packages', 'dnd-core', 'node_modules'),
+      path.join(__dirname, '..', 'packages', 'react-dnd', 'node_modules'),
+      path.join(__dirname, '..', 'packages', 'react-dnd-html5-backend', 'node_modules'),
+    ],
     alias: {
-      'react-dnd/modules': path.join(__dirname, '../src'),
-      'react-dnd': path.join(__dirname, '../src')
+      'react-dnd/modules': path.join(__dirname, '../packages/react-dnd/src'),
+      'react-dnd': path.join(__dirname, '../packages/react-dnd/src'),
+      'react-dnd-html5-backend': path.join(__dirname, '../packages/react-dnd-html5-backend/src'),
+      'dnd-core': path.join(__dirname, '../packages/dnd-core/src'),
     }
   },
-
   plugins: [
     new ExtractTextPlugin(
       isDev ? '[name].css' : '[name]-[hash].css'
     ),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       '__DEV__': JSON.stringify(isDev || true)

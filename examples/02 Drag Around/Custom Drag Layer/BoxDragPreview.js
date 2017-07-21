@@ -1,16 +1,17 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import Box from './Box';
 
 const styles = {
   display: 'inline-block',
   transform: 'rotate(-7deg)',
-  WebkitTransform: 'rotate(-7deg)'
+  WebkitTransform: 'rotate(-7deg)',
 };
 
 export default class BoxDragPreview extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -19,7 +20,7 @@ export default class BoxDragPreview extends Component {
     super(props);
     this.tick = this.tick.bind(this);
     this.state = {
-      tickTock: false
+      tickTock: false,
     };
   }
 
@@ -33,7 +34,7 @@ export default class BoxDragPreview extends Component {
 
   tick() {
     this.setState({
-      tickTock: !this.state.tickTock
+      tickTock: !this.state.tickTock,
     });
   }
 
@@ -43,8 +44,7 @@ export default class BoxDragPreview extends Component {
 
     return (
       <div style={styles}>
-        <Box title={title}
-             yellow={tickTock} />
+        <Box title={title} yellow={tickTock} />
       </div>
     );
   }
