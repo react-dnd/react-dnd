@@ -3,6 +3,10 @@
   "version": "2.4.0",
   "description": "A mock backend for testing React DnD apps",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
   "scripts": {
     "clean": "../../node_modules/.bin/rimraf lib",
     "build": "../../node_modules/.bin/babel src --out-dir lib",
