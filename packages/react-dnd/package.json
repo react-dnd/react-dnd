@@ -3,6 +3,10 @@
   "version": "2.4.0",
   "description": "Drag and Drop for React",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
   "license": "MIT",
   "scripts": {
     "clean": "../../node_modules/.bin/rimraf lib dist",

@@ -4,6 +4,10 @@
   "description": "HTML5 backend for React DnD",
   "main": "lib/index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
   "scripts": {
     "clean": "../../node_modules/.bin/rimraf lib",
     "build:lib": "../../node_modules/.bin/babel src --out-dir lib",
