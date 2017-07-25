@@ -10,6 +10,10 @@
     "test": "../../node_modules/.bin/npm-run-all clean build",
     "prepublish": "npm run test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
   "dependencies": {
     "asap": "^2.0.6",
     "invariant": "^2.0.0",
