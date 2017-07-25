@@ -115,7 +115,7 @@ export default function DragLayer(collect, options = {}) {
           <DecoratedComponent
             {...this.props}
             {...this.state}
-            ref={child => (this.child = child)}
+            ref={(child) => { this.child = child; }}
           />
         );
       }

@@ -4,4 +4,3 @@ test
 .travis.yml
 coverage
 test-results.xml
-yarn.lock
