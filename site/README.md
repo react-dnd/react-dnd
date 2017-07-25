@@ -5,8 +5,8 @@ View it on the web: http://react-dnd.github.io/react-dnd
 Run it locally:
 
 ```
-yarn install
-yarn start
+npm install
+npm start
 ```
 
 After it builds the static site (might take about half a minute), open http://localhost:8080/.

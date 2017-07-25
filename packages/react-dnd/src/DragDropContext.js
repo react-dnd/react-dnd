@@ -67,7 +67,7 @@ export default function DragDropContext(backendOrModule) {
         return (
           <DecoratedComponent
             {...this.props}
-            ref={child => (this.child = child)}
+            ref={(child) => { this.child = child; }}
           />
         );
       }
