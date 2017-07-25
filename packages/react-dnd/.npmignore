@@ -6,4 +6,3 @@ karma.conf.js
 .eslintrc
 .eslintignore
 bower.json
-yarn.lock
