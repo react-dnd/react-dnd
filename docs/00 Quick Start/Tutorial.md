@@ -1434,6 +1434,7 @@ var BoardSquare = createReactClass({
   propTypes: {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired
   },
 
@@ -1528,6 +1529,7 @@ class BoardSquare extends Component {
 BoardSquare.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
+  connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired
 };
 
@@ -1560,6 +1562,7 @@ export default class BoardSquare extends Component {
   static propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired
   };
 
@@ -1653,6 +1656,7 @@ var BoardSquare = createReactClass({
   propTypes: {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
     canDrop: PropTypes.bool.isRequired
   },
@@ -1766,6 +1770,7 @@ class BoardSquare extends Component {
 BoardSquare.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
+  connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
   canDrop: PropTypes.bool.isRequired
 };
@@ -1804,6 +1809,7 @@ export default class BoardSquare extends Component {
   static propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
     canDrop: PropTypes.bool.isRequired
   };

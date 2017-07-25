@@ -125,7 +125,7 @@ export default DragSource(ItemTypes.CARD, cardSource, collect)(Card);
 ```js
 // Let's make <Card text='Write the docs' /> draggable!
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from './Constants';
@@ -145,7 +145,7 @@ const cardSource = {
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
 }))
-export default class Card {
+export default class Card extends Component {
   static propTypes = {
     text: PropTypes.string.isRequired,
 
