@@ -52,6 +52,12 @@ export default class DragDropContextProvider extends Component {
     this.childContext = createChildContext(this.backend, { window: getWindow() });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.backend !== this.props.backend || nextProps.window !== this.props.window) {
+      throw new Error('DragDropContextProvider backend and window props must not change.');
+    }
+  }
+
   getChildContext() {
     return this.childContext;
   }
