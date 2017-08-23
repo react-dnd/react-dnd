@@ -31,27 +31,29 @@ export default class DragDropContextProvider extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.backend = unpackBackendForEs5Users(props.backend);
-  }
 
-  getChildContext() {
     /**
      * This property determines which window global to use for creating the DragDropManager.
      * If a window has been injected explicitly via props, that is used first. If it is available
      * as a context value, then use that, otherwise use the browser global.
      */
     const getWindow = () => {
-      if (this.props && this.props.window) {
-        return this.props.window;
-      } else if (this.context && this.context.window) {
-        return this.context.window;
+      if (props && props.window) {
+        return props.window;
+      } else if (context && context.window) {
+        return context.window;
       } else if (typeof window !== 'undefined') {
         return window;
       }
       return undefined;
     };
 
-    return createChildContext(this.backend, { window: getWindow() });
+    this.backend = unpackBackendForEs5Users(props.backend);
+    this.childContext = createChildContext(this.backend, { window: getWindow() });
+  }
+
+  getChildContext() {
+    return this.childContext;
   }
 
   render() {
