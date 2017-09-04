@@ -229,10 +229,12 @@ export default class HTML5Backend {
   }
 
   endDragIfSourceWasRemovedFromDOM() {
-    const node = this.currentDragSourceNode;
-    if (document.body.contains(node)) {
-      return;
-    }
+    // const node = this.currentDragSourceNode;
+
+    // In our case we want to end the Drag anyway
+    // if (document.body.contains(node)) {
+      // return;
+    // }
 
     if (this.clearCurrentDragSourceNode()) {
       this.actions.endDrag();
