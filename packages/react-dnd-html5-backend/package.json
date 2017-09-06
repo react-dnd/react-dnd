@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-html5-backend",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "HTML5 backend for React DnD",
   "main": "lib/index.js",
   "license": "MIT",
@@ -17,12 +17,12 @@
     "prepublish": "npm test"
   },
   "devDependencies": {
-    "react-dnd": "^2.4.0"
+    "react-dnd": "^2.5.1"
   },
   "dependencies": {
     "lodash": "^4.2.0"
   },
   "peerDependencies": {
-    "react-dnd": "^2.4.0"
+    "react-dnd": "^2.5.1"
   }
 }
