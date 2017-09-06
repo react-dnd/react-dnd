@@ -44,6 +44,7 @@ export default class HTML5Backend {
     this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(this);
     this.endDragNativeItem = this.endDragNativeItem.bind(this);
     this.asyncEndDragNativeItem = this.asyncEndDragNativeItem.bind(this);
+    this.isNodeInDocument = this.isNodeInDocument.bind(this);
   }
 
   get window() {
@@ -236,9 +237,16 @@ export default class HTML5Backend {
     this.currentNativeSource = null;
   }
 
+  isNodeInDocument(node) {
+    // Check the node either in the main document or in the current context
+    return document.body.contains(node) || this.window
+      ? this.window.document.body.contains(node)
+      : false;
+  }
+
   endDragIfSourceWasRemovedFromDOM() {
     const node = this.currentDragSourceNode;
-    if (document.body.contains(node)) {
+    if (this.isNodeInDocument(node)) {
       return;
     }
 
