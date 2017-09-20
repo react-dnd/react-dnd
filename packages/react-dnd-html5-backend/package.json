@@ -21,8 +21,5 @@
   },
   "dependencies": {
     "lodash": "^4.2.0"
-  },
-  "peerDependencies": {
-    "react-dnd": "^2.5.1"
   }
 }
