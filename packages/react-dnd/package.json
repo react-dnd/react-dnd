@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "scripts": {
     "clean": "../../node_modules/.bin/rimraf lib dist",
     "bundle:unmin": "../../node_modules/.bin/webpack --output-filename=dist/ReactDnD.js",
@@ -25,7 +25,10 @@
     "lodash": "^4.2.0",
     "prop-types": "^15.5.10"
   },
+  "devDependencies": {
+    "react": "^16.0.0"
+  },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0"
+    "react": "*"
   }
 }

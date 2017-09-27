@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import update from 'react/lib/update';
+import update from 'immutability-helper';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Card from './Card';

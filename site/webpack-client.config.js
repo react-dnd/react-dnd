@@ -41,7 +41,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: isDev ? ['react-hot-loader', 'babel-loader'] : ['babel-loader']
+        use: isDev ? ['react-hot-loader/webpack', 'babel-loader'] : ['babel-loader']
       },
       {
         test: /\.less$/,

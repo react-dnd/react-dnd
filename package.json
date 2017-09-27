@@ -27,7 +27,7 @@
     "Jordan Gensler (http://github.com/kesne)",
     "Gagan (https://github.com/thetechie)"
   ],
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/react-dnd/react-dnd/issues"
   },
@@ -73,11 +73,11 @@
     "npm-run-all": "^4.0.2",
     "null-loader": "^0.1.0",
     "postcss": "^6.0.6",
-    "prop-types": "^15.5.10",
-    "react": "^16.0.0-rc.2",
-    "react-dom": "^16.0.0-rc.2",
+    "prop-types": "^15.6.0",
+    "react": "^16.x",
+    "react-dom": "^16.x",
     "react-frame-component": "^1.1.0",
-    "react-hot-loader": "^1.2.3",
+    "react-hot-loader": "3.0.0-beta.7",
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
