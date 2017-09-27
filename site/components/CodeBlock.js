@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import ReactUpdates from 'react-dom/lib/ReactUpdates';
 import StaticHTMLBlock from './StaticHTMLBlock';
 
 import './CodeBlock.less';
@@ -73,7 +72,6 @@ export default class CodeBlock extends Component {
 
     const scrollTopBefore = findDOMNode(this).getBoundingClientRect().top;
     setPreferredSyntax(syntax);
-    ReactUpdates.flushBatchedUpdates();
     const scrollTopAfter = findDOMNode(this).getBoundingClientRect().top;
 
     window.scroll(

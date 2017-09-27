@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import update from 'react/lib/update';
+import update from 'immutability-helper';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend';
 import shuffle from 'lodash/shuffle';
