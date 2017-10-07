@@ -1,44 +1,40 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { DropTarget } from 'react-dnd';
-import ItemTypes from './ItemTypes';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { DropTarget } from 'react-dnd'
+import ItemTypes from './ItemTypes'
 
 const style = {
-  border: '1px solid gray',
-  height: '15rem',
-  width: '15rem',
-  padding: '2rem',
-  textAlign: 'center',
-};
+	border: '1px solid gray',
+	height: '15rem',
+	width: '15rem',
+	padding: '2rem',
+	textAlign: 'center',
+}
 
 const boxTarget = {
-  drop() {
-  },
-};
+	drop() {},
+}
 
 @DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  canDrop: monitor.canDrop(),
+	connectDropTarget: connect.dropTarget(),
+	isOver: monitor.isOver(),
+	canDrop: monitor.canDrop(),
 }))
 export default class TargetBox extends Component {
-  static propTypes = {
-    connectDropTarget: PropTypes.func.isRequired,
-    isOver: PropTypes.bool.isRequired,
-    canDrop: PropTypes.bool.isRequired,
-  };
+	static propTypes = {
+		connectDropTarget: PropTypes.func.isRequired,
+		isOver: PropTypes.bool.isRequired,
+		canDrop: PropTypes.bool.isRequired,
+	}
 
-  render() {
-    const { canDrop, isOver, connectDropTarget } = this.props;
-    const isActive = canDrop && isOver;
+	render() {
+		const { canDrop, isOver, connectDropTarget } = this.props
+		const isActive = canDrop && isOver
 
-    return connectDropTarget(
-      <div style={style}>
-        {isActive ?
-          'Release to drop' :
-          'Drag item here'
-        }
-      </div>,
-    );
-  }
+		return connectDropTarget(
+			<div style={style}>
+				{isActive ? 'Release to drop' : 'Drag item here'}
+			</div>,
+		)
+	}
 }

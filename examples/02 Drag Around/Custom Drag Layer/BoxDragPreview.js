@@ -1,51 +1,51 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import shouldPureComponentUpdate from './shouldPureComponentUpdate';
-import Box from './Box';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import shouldPureComponentUpdate from './shouldPureComponentUpdate'
+import Box from './Box'
 
 const styles = {
-  display: 'inline-block',
-  transform: 'rotate(-7deg)',
-  WebkitTransform: 'rotate(-7deg)',
-};
+	display: 'inline-block',
+	transform: 'rotate(-7deg)',
+	WebkitTransform: 'rotate(-7deg)',
+}
 
 export default class BoxDragPreview extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-  };
+	static propTypes = {
+		title: PropTypes.string.isRequired,
+	}
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
+	shouldComponentUpdate = shouldPureComponentUpdate
 
-  constructor(props) {
-    super(props);
-    this.tick = this.tick.bind(this);
-    this.state = {
-      tickTock: false,
-    };
-  }
+	constructor(props) {
+		super(props)
+		this.tick = this.tick.bind(this)
+		this.state = {
+			tickTock: false,
+		}
+	}
 
-  componentDidMount() {
-    this.interval = setInterval(this.tick, 500);
-  }
+	componentDidMount() {
+		this.interval = setInterval(this.tick, 500)
+	}
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+	componentWillUnmount() {
+		clearInterval(this.interval)
+	}
 
-  tick() {
-    this.setState({
-      tickTock: !this.state.tickTock,
-    });
-  }
+	tick() {
+		this.setState({
+			tickTock: !this.state.tickTock,
+		})
+	}
 
-  render() {
-    const { title } = this.props;
-    const { tickTock } = this.state;
+	render() {
+		const { title } = this.props
+		const { tickTock } = this.state
 
-    return (
-      <div style={styles}>
-        <Box title={title} yellow={tickTock} />
-      </div>
-    );
-  }
+		return (
+			<div style={styles}>
+				<Box title={title} yellow={tickTock} />
+			</div>
+		)
+	}
 }

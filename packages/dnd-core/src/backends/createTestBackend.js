@@ -1,51 +1,51 @@
-import noop from 'lodash/noop';
+import noop from 'lodash/noop'
 
 class TestBackend {
-  constructor(manager) {
-    this.actions = manager.getActions();
-  }
+	constructor(manager) {
+		this.actions = manager.getActions()
+	}
 
-  setup() {
-    this.didCallSetup = true;
-  }
+	setup() {
+		this.didCallSetup = true
+	}
 
-  teardown() {
-    this.didCallTeardown = true;
-  }
+	teardown() {
+		this.didCallTeardown = true
+	}
 
-  connectDragSource() {
-    return noop;
-  }
+	connectDragSource() {
+		return noop
+	}
 
-  connectDragPreview() {
-    return noop;
-  }
+	connectDragPreview() {
+		return noop
+	}
 
-  connectDropTarget() {
-    return noop;
-  }
+	connectDropTarget() {
+		return noop
+	}
 
-  simulateBeginDrag(sourceIds, options) {
-    this.actions.beginDrag(sourceIds, options);
-  }
+	simulateBeginDrag(sourceIds, options) {
+		this.actions.beginDrag(sourceIds, options)
+	}
 
-  simulatePublishDragSource() {
-    this.actions.publishDragSource();
-  }
+	simulatePublishDragSource() {
+		this.actions.publishDragSource()
+	}
 
-  simulateHover(targetIds, options) {
-    this.actions.hover(targetIds, options);
-  }
+	simulateHover(targetIds, options) {
+		this.actions.hover(targetIds, options)
+	}
 
-  simulateDrop() {
-    this.actions.drop();
-  }
+	simulateDrop() {
+		this.actions.drop()
+	}
 
-  simulateEndDrag() {
-    this.actions.endDrag();
-  }
+	simulateEndDrag() {
+		this.actions.endDrag()
+	}
 }
 
 export default function createBackend(manager) {
-  return new TestBackend(manager);
+	return new TestBackend(manager)
 }

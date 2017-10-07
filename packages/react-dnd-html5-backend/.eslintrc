@@ -1,12 +1,2 @@
-{
-  "extends": "eslint-config-airbnb",
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "rules": {
-    "class-methods-use-this": "off",
-    "no-confusing-arrow": "off",
-    "no-param-reassign": "off"
-  }
-}
+rules:
+  no-param-reassign: off
