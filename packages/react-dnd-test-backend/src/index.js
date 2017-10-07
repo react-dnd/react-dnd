@@ -1,1 +1,1 @@
-export { createTestBackend as default } from 'dnd-core';
+export { createTestBackend as default } from 'dnd-core'

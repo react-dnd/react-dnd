@@ -1,8 +1,2 @@
-{
-    "env": {
-        "jest": true
-    },
-    "rules": {
-        "max-len": ["error", 120]
-    }
-}
+env:
+  jest: true

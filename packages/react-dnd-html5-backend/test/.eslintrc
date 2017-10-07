@@ -1,5 +1,2 @@
-{
-    "env": {
-        "jest": true
-    }
-}
+env:
+  jest: true

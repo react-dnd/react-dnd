@@ -1,5 +1,5 @@
-let nextUniqueId = 0;
+let nextUniqueId = 0
 
 export default function getNextUniqueId() {
-  return nextUniqueId++;
+	return nextUniqueId++
 }
