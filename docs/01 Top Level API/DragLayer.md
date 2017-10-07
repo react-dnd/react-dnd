@@ -196,7 +196,7 @@ function getItemStyles(props) {
   };
 }
 
-class CustomDragLayer {
+class CustomDragLayer extends React.Component {
   renderItem(type, item) {
     switch (type) {
     case ItemTypes.BOX:

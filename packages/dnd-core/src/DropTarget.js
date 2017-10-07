@@ -1,9 +1,9 @@
 export default class DropTarget {
-  canDrop() {
-    return true;
-  }
+	canDrop() {
+		return true
+	}
 
-  hover() { }
+	hover() {}
 
-  drop() { }
+	drop() {}
 }

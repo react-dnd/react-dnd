@@ -1,8 +1,8 @@
 {
   "name": "dnd-core",
-  "version": "2.4.0",
+  "version": "2.5.3",
   "description": "Drag and drop sans the GUI",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "scripts": {
     "clean": "../../node_modules/.bin/rimraf lib",
