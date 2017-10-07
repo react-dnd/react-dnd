@@ -1,13 +1,26 @@
-{
-  "extends": "eslint-config-airbnb",
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalDecorators": true
-    }
-  },
-  "env": {
-    "browser": true,
-    "node": true
-  }
-}
+extends: eslint-config-airbnb
+parser: babel-eslint
+parserOptions:
+  ecmaFeatures:
+      experimentalDecorators: true
+env:
+  browser: true
+  node: true
+
+rules:
+  # These rules are covered by prettier
+  semi: off
+  no-extra-semi: off
+  max-len: off
+  arrow-parens: off
+  comma-dangle: off
+  quotes: off
+  indent: off
+  no-tabs: off
+  react/jsx-indent: off
+  react/jsx-indent-props: off
+
+  # These rules are super annoying in this project
+  react/jsx-filename-extension: off
+  class-methods-use-this: off
+  no-confusing-arrow: off

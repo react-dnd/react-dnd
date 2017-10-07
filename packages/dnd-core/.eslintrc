@@ -1,14 +1,5 @@
-{
-  "extends": "eslint-config-airbnb",
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "rules": {
-    "no-plusplus": "off",
-    "consistent-return": "off",
-    "class-methods-use-this": "off",
-    "no-mixed-operators": "off",
-    "no-else-return": "off"
-  }
-}
+rules:
+  no-plusplus: off
+  consistent-return: off
+  no-mixed-operators: off
+  no-else-return: off
