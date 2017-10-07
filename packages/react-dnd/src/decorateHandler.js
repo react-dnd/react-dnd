@@ -7,6 +7,11 @@ import hoistStatics from 'hoist-non-react-statics';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
 
+const isClassComponent = Comp =>
+  Boolean(
+    Comp && Comp.prototype && typeof Comp.prototype.render === 'function',
+  );
+
 export default function decorateHandler({
   DecoratedComponent,
   createHandler,
@@ -173,13 +178,11 @@ export default function decorateHandler({
     }
 
     render() {
-      return (
-        <DecoratedComponent
-          {...this.props}
-          {...this.state}
-          ref={this.handleChildRef}
-        />
-      );
+      return React.createElement(DecoratedComponent, {
+        ...this.props,
+        ...this.state,
+        ref: isClassComponent(DecoratedComponent) ? this.handleChildRef : null,
+      });
     }
   }
 
