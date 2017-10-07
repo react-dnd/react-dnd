@@ -12,7 +12,7 @@ export default function DragSource(type, spec, collect, options = {}) {
 	checkDecoratorArguments(
 		'DragSource',
 		'type, spec, collect[, options]',
-		...arguments // eslint-disable-line prefer-rest-params
+		...arguments, // eslint-disable-line prefer-rest-params
 	)
 	let getType = type
 	if (typeof type !== 'function') {
@@ -22,7 +22,7 @@ export default function DragSource(type, spec, collect, options = {}) {
 				'a string, or a function that returns a string given the current props. ' +
 				'Instead, received %s. ' +
 				'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
-			type
+			type,
 		)
 		getType = () => type
 	}
@@ -31,7 +31,7 @@ export default function DragSource(type, spec, collect, options = {}) {
 		'Expected "spec" provided as the second argument to DragSource to be ' +
 			'a plain object. Instead, received %s. ' +
 			'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
-		spec
+		spec,
 	)
 	const createSource = createSourceFactory(spec)
 	invariant(
@@ -40,7 +40,7 @@ export default function DragSource(type, spec, collect, options = {}) {
 			'a function that returns a plain object of props to inject. ' +
 			'Instead, received %s. ' +
 			'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
-		collect
+		collect,
 	)
 	invariant(
 		isPlainObject(options),
@@ -48,7 +48,7 @@ export default function DragSource(type, spec, collect, options = {}) {
 			'a plain object when specified. ' +
 			'Instead, received %s. ' +
 			'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
-		collect
+		collect,
 	)
 
 	return function decorateSource(DecoratedComponent) {

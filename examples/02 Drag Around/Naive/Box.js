@@ -47,7 +47,7 @@ export default class Box extends Component {
 		}
 
 		return connectDragSource(
-			<div style={{ ...style, left, top }}>{children}</div>
+			<div style={{ ...style, left, top }}>{children}</div>,
 		)
 	}
 }

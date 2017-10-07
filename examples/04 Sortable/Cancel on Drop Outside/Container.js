@@ -68,7 +68,7 @@ export default class Container extends Component {
 				cards: {
 					$splice: [[index, 1], [atIndex, 0, card]],
 				},
-			})
+			}),
 		)
 	}
 
@@ -97,7 +97,7 @@ export default class Container extends Component {
 						findCard={this.findCard}
 					/>
 				))}
-			</div>
+			</div>,
 		)
 	}
 }

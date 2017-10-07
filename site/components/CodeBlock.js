@@ -77,7 +77,7 @@ export default class CodeBlock extends Component {
 		window.scroll(
 			window.pageXOffset || window.scrollX,
 			(window.pageYOffset || window.scrollY) -
-				(scrollTopBefore - scrollTopAfter)
+				(scrollTopBefore - scrollTopAfter),
 		)
 	}
 

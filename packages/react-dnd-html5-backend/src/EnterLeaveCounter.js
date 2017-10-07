@@ -23,7 +23,7 @@ export default class EnterLeaveCounter {
 
 		this.entered = without(
 			this.entered.filter(node => document.documentElement.contains(node)),
-			leavingNode
+			leavingNode,
 		)
 
 		return previousLength > 0 && this.entered.length === 0

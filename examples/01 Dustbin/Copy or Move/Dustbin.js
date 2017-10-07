@@ -55,7 +55,7 @@ export default class Dustbin extends Component {
 				<br />
 				<br />
 				{isActive ? 'Release to drop' : 'Drag a box here'}
-			</div>
+			</div>,
 		)
 	}
 }

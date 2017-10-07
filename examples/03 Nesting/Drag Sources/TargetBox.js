@@ -61,7 +61,7 @@ class TargetBox extends Component {
 
 				{!canDrop &&
 					lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
-			</div>
+			</div>,
 		)
 	}
 }

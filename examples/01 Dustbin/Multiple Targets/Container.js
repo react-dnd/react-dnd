@@ -77,7 +77,7 @@ export default class Container extends Component {
 					},
 				},
 				droppedBoxNames,
-			})
+			}),
 		)
 	}
 }

@@ -32,16 +32,16 @@ describe('DragDropMonitor', () => {
 
 		it('throws on bad handlerIds', () => {
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: [] })
+				monitor.subscribeToStateChange(() => {}, { handlerIds: [] }),
 			).not.toThrow()
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: ['hi'] })
+				monitor.subscribeToStateChange(() => {}, { handlerIds: ['hi'] }),
 			).not.toThrow()
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: {} })
+				monitor.subscribeToStateChange(() => {}, { handlerIds: {} }),
 			).toThrow()
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: () => {} })
+				monitor.subscribeToStateChange(() => {}, { handlerIds: () => {} }),
 			).toThrow()
 		})
 
@@ -101,7 +101,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceAId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceB = false
@@ -111,7 +111,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceBId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceAAndB = false
@@ -121,7 +121,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceAId, sourceBId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetA = false
@@ -131,7 +131,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetAId],
-				}
+				},
 			)
 
 			backend.simulateBeginDrag([sourceAId])
@@ -158,7 +158,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceAId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceB = false
@@ -168,7 +168,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceBId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceAAndB = false
@@ -178,7 +178,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceAId, sourceBId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetA = false
@@ -188,7 +188,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetAId],
-				}
+				},
 			)
 
 			backend.simulateEndDrag()
@@ -216,7 +216,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceAId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceB = false
@@ -226,7 +226,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceBId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceAAndB = false
@@ -236,7 +236,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceAId, sourceBId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetA = false
@@ -246,7 +246,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetAId],
-				}
+				},
 			)
 
 			backend.simulateDrop()
@@ -282,7 +282,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceAId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceB = false
@@ -292,7 +292,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceBId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetA = false
@@ -302,7 +302,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetAId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetB = false
@@ -312,7 +312,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetBId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetC = false
@@ -322,7 +322,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetCId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetD = false
@@ -332,7 +332,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetDId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetE = false
@@ -342,7 +342,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetEId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceBAndTargetC = false
@@ -352,7 +352,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceBId, targetCId],
-				}
+				},
 			)
 
 			let raisedChangeForSourceBAndTargetE = false
@@ -362,7 +362,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [sourceBId, targetEId],
-				}
+				},
 			)
 
 			backend.simulateHover([targetDId, targetEId])
@@ -399,7 +399,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetAId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetB = false
@@ -409,7 +409,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetBId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetC = false
@@ -419,7 +419,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetCId],
-				}
+				},
 			)
 
 			let raisedChangeForTargetD = false
@@ -429,7 +429,7 @@ describe('DragDropMonitor', () => {
 				},
 				{
 					handlerIds: [targetDId],
-				}
+				},
 			)
 
 			backend.simulateHover([targetAId, targetBId, targetCId])
@@ -573,21 +573,21 @@ describe('DragDropMonitor', () => {
 			expect(() =>
 				backend.simulateBeginDrag([sourceId], {
 					clientOffset: { x: 0, y: 0 },
-				})
+				}),
 			).toThrow()
 
 			expect(() =>
 				backend.simulateBeginDrag([sourceId], {
 					clientOffset: { x: 0, y: 0 },
 					getSourceClientOffset: { x: 0, y: 0 },
-				})
+				}),
 			).toThrow()
 
 			expect(() =>
 				backend.simulateBeginDrag([sourceId], {
 					clientOffset: { x: 0, y: 0 },
 					getSourceClientOffset: () => ({ x: 0, y: 0 }),
-				})
+				}),
 			).not.toThrow()
 		})
 
@@ -1151,7 +1151,7 @@ describe('DragDropMonitor', () => {
 			const targetC = new NormalTarget()
 			const targetCId = registry.addTarget(
 				[Types.FOO, Types.BAR, Types.BAZ],
-				targetC
+				targetC,
 			)
 
 			expect(monitor.canDropOnTarget(targetAId)).toEqual(false)

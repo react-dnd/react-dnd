@@ -52,7 +52,7 @@ export default class Container extends Component {
 						$merge: { left, top },
 					},
 				},
-			})
+			}),
 		)
 	}
 
@@ -76,7 +76,7 @@ export default class Container extends Component {
 						</Box>
 					)
 				})}
-			</div>
+			</div>,
 		)
 	}
 }

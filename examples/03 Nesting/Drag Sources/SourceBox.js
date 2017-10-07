@@ -72,7 +72,7 @@ class SourceBox extends Component {
 				/>
 				<small>Forbid drag</small>
 				{children}
-			</div>
+			</div>,
 		)
 	}
 }

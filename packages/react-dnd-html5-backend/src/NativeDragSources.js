@@ -3,7 +3,7 @@ import * as NativeTypes from './NativeTypes'
 function getDataFromDataTransfer(dataTransfer, typesToTry, defaultValue) {
 	const result = typesToTry.reduce(
 		(resultSoFar, typeToTry) => resultSoFar || dataTransfer.getData(typeToTry),
-		null
+		null,
 	)
 
 	return result != null // eslint-disable-line eqeqeq
@@ -40,7 +40,7 @@ export function createNativeDragSource(type) {
 				get [exposeProperty]() {
 					// eslint-disable-next-line no-console
 					console.warn(
-						`Browser doesn't allow reading "${exposeProperty}" until the drop event.`
+						`Browser doesn't allow reading "${exposeProperty}" until the drop event.`,
 					)
 					return null
 				},

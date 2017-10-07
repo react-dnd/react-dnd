@@ -96,7 +96,7 @@ export default class Container extends Component {
 							$push: [name],
 						}
 					: {},
-			})
+			}),
 		)
 	}
 }

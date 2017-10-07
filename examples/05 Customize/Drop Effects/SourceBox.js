@@ -38,7 +38,7 @@ export default class SourceBox extends Component {
 			<div style={{ ...style, opacity }}>
 				When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
 			</div>,
-			{ dropEffect }
+			{ dropEffect },
 		)
 	}
 }

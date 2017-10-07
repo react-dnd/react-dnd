@@ -42,7 +42,7 @@ export default class BoxWithImage extends Component {
 		const opacity = isDragging ? 0.4 : 1
 
 		return connectDragSource(
-			<div style={{ ...style, opacity }}>Drag me to see an image</div>
+			<div style={{ ...style, opacity }}>Drag me to see an image</div>,
 		)
 	}
 }

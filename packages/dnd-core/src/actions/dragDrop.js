@@ -11,7 +11,7 @@ export const END_DRAG = 'dnd-core/END_DRAG'
 
 export function beginDrag(
 	sourceIds,
-	options = { publishSource: true, clientOffset: null }
+	options = { publishSource: true, clientOffset: null },
 ) {
 	const { publishSource, clientOffset, getSourceClientOffset } = options
 	invariant(isArray(sourceIds), 'Expected sourceIds to be an array.')
@@ -23,7 +23,7 @@ export function beginDrag(
 	for (let i = 0; i < sourceIds.length; i++) {
 		invariant(
 			registry.getSource(sourceIds[i]),
-			'Expected sourceIds to be registered.'
+			'Expected sourceIds to be registered.',
 		)
 	}
 
@@ -42,7 +42,7 @@ export function beginDrag(
 	if (clientOffset) {
 		invariant(
 			typeof getSourceClientOffset === 'function',
-			'When clientOffset is provided, getSourceClientOffset must be a function.'
+			'When clientOffset is provided, getSourceClientOffset must be a function.',
 		)
 		sourceClientOffset = getSourceClientOffset(sourceId)
 	}
@@ -88,7 +88,7 @@ export function hover(targetIdsArg, { clientOffset = null } = {}) {
 		const targetId = targetIds[i]
 		invariant(
 			targetIds.lastIndexOf(targetId) === i,
-			'Expected targetIds to be unique in the passed array.'
+			'Expected targetIds to be unique in the passed array.',
 		)
 
 		const target = registry.getTarget(targetId)
@@ -128,7 +128,7 @@ export function drop(options = {}) {
 	invariant(monitor.isDragging(), 'Cannot call drop while not dragging.')
 	invariant(
 		!monitor.didDrop(),
-		'Cannot call drop twice during one drag operation.'
+		'Cannot call drop twice during one drag operation.',
 	)
 
 	const targetIds = monitor
@@ -142,7 +142,7 @@ export function drop(options = {}) {
 		let dropResult = target.drop(monitor, targetId)
 		invariant(
 			typeof dropResult === 'undefined' || isObject(dropResult),
-			'Drop result must either be an object or undefined.'
+			'Drop result must either be an object or undefined.',
 		)
 		if (typeof dropResult === 'undefined') {
 			dropResult = index === 0 ? {} : monitor.getDropResult()

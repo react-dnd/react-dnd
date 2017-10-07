@@ -18,7 +18,7 @@ export default function createTargetConnector(backend) {
 			disconnectCurrentDropTarget = backend.connectDropTarget(
 				currentHandlerId,
 				currentDropTargetNode,
-				currentDropTargetOptions
+				currentDropTargetOptions,
 			)
 		}
 	}

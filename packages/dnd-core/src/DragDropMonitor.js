@@ -19,7 +19,7 @@ export default class DragDropMonitor {
 		invariant(typeof listener === 'function', 'listener must be a function.')
 		invariant(
 			typeof handlerIds === 'undefined' || isArray(handlerIds),
-			'handlerIds, when specified, must be an array of strings.'
+			'handlerIds, when specified, must be an array of strings.',
 		)
 
 		let prevStateId = this.store.getState().stateId

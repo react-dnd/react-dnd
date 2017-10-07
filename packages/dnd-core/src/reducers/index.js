@@ -9,7 +9,7 @@ export default function reduce(state = {}, action) {
 		dirtyHandlerIds: dirtyHandlerIds(
 			state.dirtyHandlerIds,
 			action,
-			state.dragOperation
+			state.dragOperation,
 		),
 		dragOffset: dragOffset(state.dragOffset, action),
 		refCount: refCount(state.refCount, action),

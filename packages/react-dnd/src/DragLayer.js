@@ -13,13 +13,13 @@ export default function DragLayer(collect, options = {}) {
 		typeof collect === 'function',
 		'Expected "collect" provided as the first argument to DragLayer to be a function that collects props to inject into the component. ',
 		'Instead, received %s. Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html',
-		collect
+		collect,
 	)
 	invariant(
 		isPlainObject(options),
 		'Expected "options" provided as the second argument to DragLayer to be a plain object when specified. ' +
 			'Instead, received %s. Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html',
-		options
+		options,
 	)
 
 	return function decorateLayer(DecoratedComponent) {
@@ -39,7 +39,7 @@ export default function DragLayer(collect, options = {}) {
 			getDecoratedComponentInstance() {
 				invariant(
 					this.child,
-					'In order to access an instance of the decorated component it can not be a stateless component.'
+					'In order to access an instance of the decorated component it can not be a stateless component.',
 				)
 				return this.child
 			}
@@ -62,7 +62,7 @@ export default function DragLayer(collect, options = {}) {
 						'Make sure to wrap the top-level component of your app with DragDropContext. ' +
 						'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
 					displayName,
-					displayName
+					displayName,
 				)
 
 				this.state = this.getCurrentState()
@@ -73,10 +73,10 @@ export default function DragLayer(collect, options = {}) {
 
 				const monitor = this.manager.getMonitor()
 				this.unsubscribeFromOffsetChange = monitor.subscribeToOffsetChange(
-					this.handleChange
+					this.handleChange,
 				)
 				this.unsubscribeFromStateChange = monitor.subscribeToStateChange(
-					this.handleChange
+					this.handleChange,
 				)
 
 				this.handleChange()

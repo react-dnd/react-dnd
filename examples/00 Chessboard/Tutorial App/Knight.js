@@ -44,7 +44,7 @@ export default class Knight extends Component {
 				}}
 			>
 				♘
-			</div>
+			</div>,
 		)
 	}
 }

@@ -57,7 +57,7 @@ export default class Container extends Component {
 				cards: {
 					$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
 				},
-			})
+			}),
 		)
 	}
 

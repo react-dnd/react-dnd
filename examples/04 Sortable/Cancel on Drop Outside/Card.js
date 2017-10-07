@@ -73,7 +73,7 @@ export default class Card extends Component {
 		const opacity = isDragging ? 0 : 1
 
 		return connectDragSource(
-			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>)
+			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
 		)
 	}
 }

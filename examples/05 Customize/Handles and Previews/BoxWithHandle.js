@@ -46,7 +46,7 @@ export default class BoxWithHandle extends Component {
 			<div style={{ ...style, opacity }}>
 				{connectDragSource(<div style={handleStyle} />)}
 				Drag me by the handle
-			</div>
+			</div>,
 		)
 	}
 }

@@ -30,7 +30,7 @@ export default class StaticHTMLBlock extends Component {
 							key={i}
 							style={{ width: '100%' }}
 							dangerouslySetInnerHTML={{ __html: content }}
-						/>
+						/>,
 					)
 					break
 				case 1:
@@ -47,7 +47,7 @@ export default class StaticHTMLBlock extends Component {
 							es5={es5Content}
 							es6={es6Content}
 							es7={es7Content}
-						/>
+						/>,
 					)
 					break
 			}

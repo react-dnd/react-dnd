@@ -69,7 +69,7 @@ module.exports = {
 				'..',
 				'packages',
 				'react-dnd-html5-backend',
-				'node_modules'
+				'node_modules',
 			),
 		],
 		alias: {
@@ -77,7 +77,7 @@ module.exports = {
 			'react-dnd': path.join(__dirname, '../packages/react-dnd/src'),
 			'react-dnd-html5-backend': path.join(
 				__dirname,
-				'../packages/react-dnd-html5-backend/src'
+				'../packages/react-dnd-html5-backend/src',
 			),
 			'dnd-core': path.join(__dirname, '../packages/dnd-core/src'),
 		},

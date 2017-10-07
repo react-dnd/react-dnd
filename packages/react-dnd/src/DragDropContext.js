@@ -22,7 +22,7 @@ export const unpackBackendForEs5Users = backendOrModule => {
 	invariant(
 		typeof backend === 'function',
 		'Expected the backend to be a function or an ES6 module exporting a default function. ' +
-			'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html'
+			'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html',
 	)
 	return backend
 }
@@ -47,7 +47,7 @@ export default function DragDropContext(backendOrModule) {
 			getDecoratedComponentInstance() {
 				invariant(
 					this.child,
-					'In order to access an instance of the decorated component it can not be a stateless component.'
+					'In order to access an instance of the decorated component it can not be a stateless component.',
 				)
 				return this.child
 			}

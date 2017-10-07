@@ -45,7 +45,7 @@ export default class Box extends Component {
 		return connectDragSource(
 			<div style={{ ...style, opacity }}>
 				{isDropped ? <s>{name}</s> : name}
-			</div>
+			</div>,
 		)
 	}
 }

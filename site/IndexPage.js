@@ -146,7 +146,7 @@ export default class IndexPage extends Component {
 		}
 
 		throw new Error(
-			'Page of location ' + JSON.stringify(this.props.location) + ' not found.'
+			'Page of location ' + JSON.stringify(this.props.location) + ' not found.',
 		)
 	}
 

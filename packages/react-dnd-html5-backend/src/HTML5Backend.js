@@ -50,7 +50,7 @@ export default class HTML5Backend {
 		this.handleTopDropCapture = this.handleTopDropCapture.bind(this)
 		this.handleSelectStart = this.handleSelectStart.bind(this)
 		this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(
-			this
+			this,
 		)
 		this.endDragNativeItem = this.endDragNativeItem.bind(this)
 		this.asyncEndDragNativeItem = this.asyncEndDragNativeItem.bind(this)
@@ -117,19 +117,19 @@ export default class HTML5Backend {
 		target.removeEventListener(
 			'dragstart',
 			this.handleTopDragStartCapture,
-			true
+			true,
 		)
 		target.removeEventListener('dragend', this.handleTopDragEndCapture, true)
 		target.removeEventListener('dragenter', this.handleTopDragEnter)
 		target.removeEventListener(
 			'dragenter',
 			this.handleTopDragEnterCapture,
-			true
+			true,
 		)
 		target.removeEventListener(
 			'dragleave',
 			this.handleTopDragLeaveCapture,
-			true
+			true,
 		)
 		target.removeEventListener('dragover', this.handleTopDragOver)
 		target.removeEventListener('dragover', this.handleTopDragOverCapture, true)
@@ -229,7 +229,7 @@ export default class HTML5Backend {
 		this.currentNativeSource = new SourceType()
 		this.currentNativeHandle = this.registry.addSource(
 			type,
-			this.currentNativeSource
+			this.currentNativeSource,
 		)
 		this.actions.beginDrag([this.currentNativeHandle])
 
@@ -240,20 +240,20 @@ export default class HTML5Backend {
 			this.window.addEventListener(
 				'mouseover',
 				this.asyncEndDragNativeItem,
-				true
+				true,
 			)
 		}
 	}
 
 	asyncEndDragNativeItem() {
 		this.asyncEndDragFrameId = this.window.requestAnimationFrame(
-			this.endDragNativeItem
+			this.endDragNativeItem,
 		)
 		if (isFirefox()) {
 			this.window.removeEventListener(
 				'mouseover',
 				this.asyncEndDragNativeItem,
-				true
+				true,
 			)
 			this.enterLeaveCounter.reset()
 		}
@@ -300,7 +300,7 @@ export default class HTML5Backend {
 		this.window.addEventListener(
 			'mousemove',
 			this.endDragIfSourceWasRemovedFromDOM,
-			true
+			true,
 		)
 	}
 
@@ -312,7 +312,7 @@ export default class HTML5Backend {
 			this.window.removeEventListener(
 				'mousemove',
 				this.endDragIfSourceWasRemovedFromDOM,
-				true
+				true,
 			)
 			return true
 		}
@@ -332,7 +332,7 @@ export default class HTML5Backend {
 
 		this.currentDragSourceNodeOffsetChanged = !shallowEqual(
 			getNodeClientOffset(node),
-			this.currentDragSourceNodeOffset
+			this.currentDragSourceNodeOffset,
 		)
 
 		return this.currentDragSourceNodeOffsetChanged
@@ -389,13 +389,13 @@ export default class HTML5Backend {
 					dragPreview,
 					clientOffset,
 					anchorPoint,
-					offsetPoint
+					offsetPoint,
 				)
 
 				dataTransfer.setDragImage(
 					dragPreview,
 					dragPreviewOffset.x,
-					dragPreviewOffset.y
+					dragPreviewOffset.y,
 				)
 			}
 
@@ -501,7 +501,7 @@ export default class HTML5Backend {
 		}
 
 		const canDrop = dragEnterTargetIds.some(targetId =>
-			this.monitor.canDropOnTarget(targetId)
+			this.monitor.canDropOnTarget(targetId),
 		)
 
 		if (canDrop) {
@@ -538,7 +538,7 @@ export default class HTML5Backend {
 		})
 
 		const canDrop = dragOverTargetIds.some(targetId =>
-			this.monitor.canDropOnTarget(targetId)
+			this.monitor.canDropOnTarget(targetId),
 		)
 
 		if (canDrop) {

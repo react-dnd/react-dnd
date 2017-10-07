@@ -10,10 +10,10 @@ export default class DragAroundCustomDragLayer extends Component {
 		super(props)
 
 		this.handleSnapToGridAfterDropChange = this.handleSnapToGridAfterDropChange.bind(
-			this
+			this,
 		)
 		this.handleSnapToGridWhileDraggingChange = this.handleSnapToGridWhileDraggingChange.bind(
-			this
+			this,
 		)
 
 		this.state = {

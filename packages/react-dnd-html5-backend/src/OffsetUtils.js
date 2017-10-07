@@ -48,7 +48,7 @@ export function getDragPreviewOffset(
 	dragPreview,
 	clientOffset,
 	anchorPoint,
-	offsetPoint
+	offsetPoint,
 ) {
 	// The browsers will use the image intrinsic size under different conditions.
 	// Firefox only cares if it's an image, but WebKit also wants it to be detached.
@@ -65,7 +65,7 @@ export function getDragPreviewOffset(
 		isImage,
 		dragPreview,
 		sourceWidth,
-		sourceHeight
+		sourceHeight,
 	)
 
 	const calculateYOffset = () => {
@@ -78,7 +78,7 @@ export function getDragPreviewOffset(
 				offsetFromDragPreview.y / sourceHeight * dragPreviewHeight,
 				// Dock to the bottom
 				offsetFromDragPreview.y + dragPreviewHeight - sourceHeight,
-			]
+			],
 		)
 		let y = interpolantY.interpolate(anchorY)
 		// Work around Safari 8 positioning bug
@@ -101,7 +101,7 @@ export function getDragPreviewOffset(
 				offsetFromDragPreview.x / sourceWidth * dragPreviewWidth,
 				// Dock to the right
 				offsetFromDragPreview.x + dragPreviewWidth - sourceWidth,
-			]
+			],
 		)
 		return interpolantX.interpolate(anchorX)
 	}

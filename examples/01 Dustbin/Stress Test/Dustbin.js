@@ -62,7 +62,7 @@ export default class Dustbin extends Component {
 				{lastDroppedItem && (
 					<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
 				)}
-			</div>
+			</div>,
 		)
 	}
 }

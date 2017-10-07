@@ -12,7 +12,7 @@ export default function DropTarget(type, spec, collect, options = {}) {
 	checkDecoratorArguments(
 		'DropTarget',
 		'type, spec, collect[, options]',
-		...arguments // eslint-disable-line prefer-rest-params
+		...arguments, // eslint-disable-line prefer-rest-params
 	)
 	let getType = type
 	if (typeof type !== 'function') {
@@ -22,7 +22,7 @@ export default function DropTarget(type, spec, collect, options = {}) {
 				'a string, an array of strings, or a function that returns either given ' +
 				'the current props. Instead, received %s. ' +
 				'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
-			type
+			type,
 		)
 		getType = () => type
 	}
@@ -31,7 +31,7 @@ export default function DropTarget(type, spec, collect, options = {}) {
 		'Expected "spec" provided as the second argument to DropTarget to be ' +
 			'a plain object. Instead, received %s. ' +
 			'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
-		spec
+		spec,
 	)
 	const createTarget = createTargetFactory(spec)
 	invariant(
@@ -40,7 +40,7 @@ export default function DropTarget(type, spec, collect, options = {}) {
 			'a function that returns a plain object of props to inject. ' +
 			'Instead, received %s. ' +
 			'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
-		collect
+		collect,
 	)
 	invariant(
 		isPlainObject(options),
@@ -48,7 +48,7 @@ export default function DropTarget(type, spec, collect, options = {}) {
 			'a plain object when specified. ' +
 			'Instead, received %s. ' +
 			'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
-		collect
+		collect,
 	)
 
 	return function decorateTarget(DecoratedComponent) {

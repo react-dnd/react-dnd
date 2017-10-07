@@ -58,7 +58,7 @@ export default class Container extends Component {
 						$merge: { left, top },
 					},
 				},
-			})
+			}),
 		)
 	}
 
@@ -73,7 +73,7 @@ export default class Container extends Component {
 		return connectDropTarget(
 			<div style={styles}>
 				{Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
-			</div>
+			</div>,
 		)
 	}
 }

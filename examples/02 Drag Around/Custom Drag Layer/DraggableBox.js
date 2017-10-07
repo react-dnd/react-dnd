@@ -62,7 +62,7 @@ export default class DraggableBox extends Component {
 		return connectDragSource(
 			<div style={getStyles(this.props)}>
 				<Box title={title} />
-			</div>
+			</div>,
 		)
 	}
 }

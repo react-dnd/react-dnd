@@ -79,7 +79,7 @@ export default class Dustbin extends Component {
 				{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
 
 				<div>{children}</div>
-			</div>
+			</div>,
 		)
 	}
 }

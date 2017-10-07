@@ -83,7 +83,7 @@ describe('DragDropManager', () => {
 			expect(() => registry.addSource(Symbol('a'), source)).not.toThrow()
 			expect(() => registry.addTarget(Symbol('b'), target)).not.toThrow()
 			expect(() =>
-				registry.addTarget([Symbol('c'), Symbol('d')], target)
+				registry.addTarget([Symbol('c'), Symbol('d')], target),
 			).not.toThrow()
 		})
 
@@ -635,7 +635,7 @@ describe('DragDropManager', () => {
 
 				backend.simulateBeginDrag([sourceId])
 				expect(() =>
-					backend.simulateHover([targetAId, targetBId, targetAId])
+					backend.simulateHover([targetAId, targetBId, targetAId]),
 				).toThrow()
 			})
 
@@ -649,7 +649,7 @@ describe('DragDropManager', () => {
 
 				backend.simulateBeginDrag([sourceId])
 				expect(() =>
-					backend.simulateHover([targetAId, targetBId, targetAId])
+					backend.simulateHover([targetAId, targetBId, targetAId]),
 				).toThrow()
 			})
 
