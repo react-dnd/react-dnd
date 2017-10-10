@@ -112,9 +112,11 @@ export default function DragLayer(collect, options = {}) {
 				return React.createElement(DecoratedComponent, {
 					...this.props,
 					...this.state,
-					ref: isClassComponent(DecoratedComponent) ?
-						child => { this.child = child } :
-						null,
+					ref: isClassComponent(DecoratedComponent)
+						? child => {
+								this.child = child
+							}
+						: null,
 				})
 			}
 		}
