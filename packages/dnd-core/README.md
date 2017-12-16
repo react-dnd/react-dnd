@@ -33,6 +33,6 @@ As it turns out, these problems are much easier to solve when DOM is thrown out 
 
 ## What's the API like?
 
-[Tests](https://github.com/react-dnd/dnd-core/tree/master/test) should give you some idea. You register drag sources and drop targets, hook up a backend (you can use barebone `TestBackend` or implement a fancy real one yourself), and your drag sources and drop targets magically begin to interact.
+[Tests](https://github.com/react-dnd/dnd-core/tree/master/test) should give you some idea. You register drag sources and drop targets, hook up a backend (you can use barebones `TestBackend` or implement a fancy real one yourself), and your drag sources and drop targets magically begin to interact.
 
 ![](http://i.imgur.com/6l8CpxZ.png)
