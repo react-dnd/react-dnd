@@ -311,7 +311,7 @@ export default class HTML5Backend {
 					true,
 				)
 			},
-			0,
+			1000,
 			this,
 		)
 	}
