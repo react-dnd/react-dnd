@@ -49,7 +49,7 @@ export default class CustomDragLayer {
 
 ### Parameters
 
-* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives a single `monitor` parameter. Read the [overview](docs-overview.html) for an introduction to the monitors and the collecting function. See the collecting function described in detail in the next section.
+* **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters, `monitor` and `props`. Read the [overview](docs-overview.html) for an introduction to the monitors and the collecting function. See the collecting function described in detail in the next section.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
