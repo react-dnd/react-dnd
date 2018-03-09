@@ -1,12 +1,12 @@
 {
-  "name": "react-dnd-html5-backend",
+  "name": "@doist/react-dnd-html5-backend",
   "version": "2.5.4",
-  "description": "HTML5 backend for React DnD",
+  "description": "This is a fork of react-dnd-html5-backend with some issue patches",
   "main": "lib/index.js",
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-dnd/react-dnd.git"
+    "url": "https://github.com/Doist/react-dnd.git"
   },
   "scripts": {
     "clean": "../../node_modules/.bin/rimraf lib",
