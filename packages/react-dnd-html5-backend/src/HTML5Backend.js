@@ -232,31 +232,12 @@ export default class HTML5Backend {
 			this.currentNativeSource,
 		)
 		this.actions.beginDrag([this.currentNativeHandle])
-
-		// On Firefox, if mouseover fires, the drag is over but browser failed to tell us.
-		// See https://bugzilla.mozilla.org/show_bug.cgi?id=656164
-		// This is not true for other browsers.
-		if (isFirefox()) {
-			this.window.addEventListener(
-				'mouseover',
-				this.asyncEndDragNativeItem,
-				true,
-			)
-		}
 	}
 
 	asyncEndDragNativeItem() {
 		this.asyncEndDragFrameId = this.window.requestAnimationFrame(
 			this.endDragNativeItem,
 		)
-		if (isFirefox()) {
-			this.window.removeEventListener(
-				'mouseover',
-				this.asyncEndDragNativeItem,
-				true,
-			)
-			this.enterLeaveCounter.reset()
-		}
 	}
 
 	endDragNativeItem() {
