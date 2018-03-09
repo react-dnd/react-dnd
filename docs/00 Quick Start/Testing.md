@@ -104,6 +104,7 @@ var TestBackend = require('react-dnd-test-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
 var TestUtils = require('react-dom/test-utils');
 var expect = require('expect');
+var Box = require('./components/Box');
 
 /**
  * Wraps a component into a DragDropContext that uses the TestBackend.
@@ -143,7 +144,7 @@ it('can be tested with the testing backend', function () {
 
   // Verify that the div changed its opacity
   div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.props.style.opacity).toEqual(0.4);
+  expect(div.style.opacity).toEqual(0.4);
 
   // See other backend.simulate* methods for more!
 });
@@ -155,6 +156,7 @@ import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
 import TestUtils from 'react-dom/test-utils';
 import expect from 'expect';
+import Box from './components/Box';
 
 /**
  * Wraps a component into a DragDropContext that uses the TestBackend.
@@ -187,7 +189,7 @@ it('can be tested with the testing backend', () => {
 
   // Verify that the div changed its opacity
   div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.props.style.opacity).toEqual(0.4);
+  expect(div.style.opacity).toEqual(0.4);
 
   // See other backend.simulate* methods for more!
 });
@@ -199,6 +201,7 @@ import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
 import TestUtils from 'react-dom/test-utils';
 import expect from 'expect';
+import Box from './components/Box';
 
 /**
  * Wraps a component into a DragDropContext that uses the TestBackend.
@@ -232,7 +235,7 @@ it('can be tested with the testing backend', () => {
 
   // Verify that the div changed its opacity
   div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.props.style.opacity).toEqual(0.4);
+  expect(div.style.opacity).toEqual(0.4);
 
   // See other backend.simulate* methods for more!
 });
