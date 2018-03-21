@@ -8,5 +8,6 @@
 		"**/lib": true
 	},
 	"editor.formatOnSave": true,
-	"eslint.packageManager": "yarn"
+  "eslint.packageManager": "yarn",
+  "editor.tabSize": 2
 }
