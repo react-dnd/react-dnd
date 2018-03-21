@@ -4,9 +4,7 @@
 	"private": true,
 	"scripts": {
 		"start": "./scripts/startSiteDevServer.sh",
-		"build": "./scripts/buildStaticSite.sh",
-		"publish-site": "./scripts/publishStaticSite.sh",
-		"test": "yarn build"
+		"build_site": "./scripts/buildStaticSite.sh"
 	},
 	"devDependencies": {
 		"autoprefixer": "^7.1.2",

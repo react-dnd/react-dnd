@@ -6,8 +6,8 @@ SITE_DIRECTORY="$PROJECT_DIRECTORY-site"
 GITHUB_REPO="git@github.com:react-dnd/react-dnd.git"
 GH_PAGES_SITE="http://react-dnd.github.io/react-dnd/"
 
-# Move to parent dir
-cd ../
+# Move to project's parent dir
+cd ..
 
 # Setup repo if doesnt exist
 if [ ! -d "$SITE_DIRECTORY" ]; then
@@ -27,8 +27,8 @@ if [ ! -d "$SITE_DIRECTORY" ]; then
 fi
 
 cd "$PROJECT_DIRECTORY"
-npm run build-site
-open __site__/index.html
+lerna run --scope react-dnd-documentation build_site
+open packages/documentation/__site__/index.html
 cd ../
 
 echo
@@ -49,7 +49,7 @@ git fetch
 git rebase
 rm -Rf *
 echo "$PWD"
-cp -R ../$PROJECT_DIRECTORY/__site__/* .
+cp -R ../$PROJECT_DIRECTORY/packages/documentation/__site__/* .
 git add --all
 git commit -m "Update website"
 git push
