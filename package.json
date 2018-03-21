@@ -33,9 +33,6 @@
 	},
 	"homepage": "https://github.com/react-dnd/react-dnd",
 	"scripts": {
-		"start": "./scripts/startSiteDevServer.sh",
-		"build-site": "./scripts/buildStaticSite.sh",
-		"publish-site": "./scripts/publishStaticSite.sh",
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",
@@ -44,7 +41,8 @@
 		"test": "run-s lint jest:cov test_modules",
 		"prettify":
 			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
-		"precommit": "lint-staged"
+		"precommit": "lint-staged",
+		"start": "lerna run --stream start"
 	},
 	"devDependencies": {
 		"autoprefixer": "^7.1.2",
