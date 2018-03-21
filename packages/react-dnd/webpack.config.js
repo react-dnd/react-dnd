@@ -1,4 +1,4 @@
-const webpack = require('webpack') // eslint-disable-line import/no-extraneous-dependencies
+const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
