@@ -24,6 +24,7 @@
 		"null-loader": "^0.1.0",
 		"postcss": "^6.0.6",
 		"prop-types": "^15.6.0",
+		"react-dnd-test-backend": "^2.5.4",
 		"react-dom": "^16.2.0",
 		"react-frame-component": "^1.1.0",
 		"react-hot-loader": "3.0.0-beta.7",
