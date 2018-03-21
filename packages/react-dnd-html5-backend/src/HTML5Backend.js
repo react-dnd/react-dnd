@@ -36,7 +36,7 @@ export default class HTML5Backend {
 		this.currentDragSourceNodeOffset = null
 		this.currentDragSourceNodeOffsetChanged = false
 		this.altKeyPressed = false
-		this.mouseMoveTimeoutId = null
+		this.mouseMoveTimeoutTimer = null
 
 		this.getSourceClientOffset = this.getSourceClientOffset.bind(this)
 		this.handleTopDragStart = this.handleTopDragStart.bind(this)
@@ -276,25 +276,32 @@ export default class HTML5Backend {
 		this.currentDragSourceNodeOffset = getNodeClientOffset(node)
 		this.currentDragSourceNodeOffsetChanged = false
 
+		// A timeout of > 0 is necessary to resolve Firefox issue referenced
+		// See:
+		//   * https://github.com/react-dnd/react-dnd/pull/928
+		//   * https://github.com/react-dnd/react-dnd/issues/869
+		const MOUSE_MOVE_TIMEOUT = 1000
+
 		// Receiving a mouse event in the middle of a dragging operation
 		// means it has ended and the drag source node disappeared from DOM,
 		// so the browser didn't dispatch the dragend event.
 		//
-		// We need to wait an execution frame before we start listening for mousemove events.
+		// We need to wait before we start listening for mousemove events.
 		// This is needed because the drag preview needs to be drawn or else it fires an 'mousemove' event
 		// immediately in some browsers.
-		this.mouseMoveTimeoutId = setTimeout(
-			_ => {
-				_.mouseMoveTimeoutId = null
-				return _.window.addEventListener(
-					'mousemove',
-					_.endDragIfSourceWasRemovedFromDOM,
-					true,
-				)
-			},
-			1000,
-			this,
-		)
+		//
+		// See:
+		//   * https://github.com/react-dnd/react-dnd/pull/928
+		//   * https://github.com/react-dnd/react-dnd/issues/869
+		//
+		this.mouseMoveTimeoutTimer = setTimeout(() => {
+			this.mouseMoveTimeoutId = null
+			return this.window.addEventListener(
+				'mousemove',
+				this.endDragIfSourceWasRemovedFromDOM,
+				true,
+			)
+		}, MOUSE_MOVE_TIMEOUT)
 	}
 
 	clearCurrentDragSourceNode() {
@@ -302,13 +309,13 @@ export default class HTML5Backend {
 			this.currentDragSourceNode = null
 			this.currentDragSourceNodeOffset = null
 			this.currentDragSourceNodeOffsetChanged = false
-			this.window.clearTimeout(this.mouseMoveTimeoutId)
+			this.window.clearTimeout(this.mouseMoveTimeoutTimer)
 			this.window.removeEventListener(
 				'mousemove',
 				this.endDragIfSourceWasRemovedFromDOM,
 				true,
 			)
-			this.mouseMoveTimeoutId = null
+			this.mouseMoveTimeoutTimer = null
 			return true
 		}
 
