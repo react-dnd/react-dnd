@@ -1,112 +1,88 @@
 {
-  "name": "react-dnd-master",
-  "private": true,
-  "description": "React-DnD Monorepo",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/react-dnd/react-dnd.git"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "file",
-    "drag",
-    "drop",
-    "html5",
-    "draggable",
-    "droppable",
-    "drag-and-drop",
-    "dnd",
-    "javascript",
-    "react-component",
-    "hoc"
-  ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
-  "contributors": [
-    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)",
-    "Jordan Gensler (http://github.com/kesne)",
-    "Gagan (https://github.com/thetechie)"
-  ],
-  "license": "BSD-3-Clause",
-  "bugs": {
-    "url": "https://github.com/react-dnd/react-dnd/issues"
-  },
-  "homepage": "https://github.com/react-dnd/react-dnd",
-  "scripts": {
-    "start": "./scripts/startSiteDevServer.sh",
-    "build-site": "./scripts/buildStaticSite.sh",
-    "publish-site": "./scripts/publishStaticSite.sh",
-    "postinstall": "lerna bootstrap",
-    "unit_test": "jest",
-    "jest:watch": "jest --watch",
-    "jest:cov": "jest --coverage",
-    "lint": "eslint .",
-    "test_modules": "lerna run test --stream",
-    "test": "npm-run-all lint jest:cov test_modules",
-    "prettier": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js' --write",
-    "precommit": "lint-staged"
-  },
-  "devDependencies": {
-    "autoprefixer": "^7.1.2",
-    "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
-    "babel-loader": "^7.1.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "eslint": "^3.14.0",
-    "eslint-config-airbnb": "^14.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.9.0",
-    "extract-text-webpack-plugin": "^2.0.0",
-    "faker": "^3.1.0",
-    "file-loader": "^0.11.2",
-    "html-loader": "^0.4.5",
-    "husky": "^0.14.3",
-    "immutability-helper": "^2.4.0",
-    "jest": "^20.0.4",
-    "karma-sourcemap-loader": "^0.3.6",
-    "lerna": "^2.0.0",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.5",
-    "lint-staged": "^4.2.3",
-    "marked": "^0.3.6",
-    "npm-run-all": "^4.0.2",
-    "null-loader": "^0.1.0",
-    "postcss": "^6.0.6",
-    "prettier": "^1.7.4",
-    "prop-types": "^15.6.0",
-    "react": "^16.x",
-    "react-dom": "^16.x",
-    "react-frame-component": "^1.1.0",
-    "react-hot-loader": "3.0.0-beta.7",
-    "rimraf": "^2.6.1",
-    "style-loader": "^0.18.2",
-    "url-loader": "^0.5.9",
-    "webpack": "^3.1.0",
-    "webpack-dev-server": "^2.5.1"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^react-dnd$": "<rootDir>/packages/react-dnd/src",
-      "react-dnd-html5-backend": "<rootDir>//packages/react-dnd-html5-backend/src",
-      "dnd-core": "<rootDir>//packages/dnd-core/src"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "eslint"
-    ]
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "useTabs": true
-  }
+	"name": "react-dnd-master",
+	"private": true,
+	"description": "React-DnD Monorepo",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/react-dnd/react-dnd.git"
+	},
+	"keywords": [
+		"react",
+		"reactjs",
+		"file",
+		"drag",
+		"drop",
+		"html5",
+		"draggable",
+		"droppable",
+		"drag-and-drop",
+		"dnd",
+		"javascript",
+		"react-component",
+		"hoc"
+	],
+	"author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+	"contributors": [
+		"Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)",
+		"Jordan Gensler (http://github.com/kesne)",
+		"Gagan (https://github.com/thetechie)"
+	],
+	"license": "BSD-3-Clause",
+	"bugs": {
+		"url": "https://github.com/react-dnd/react-dnd/issues"
+	},
+	"homepage": "https://github.com/react-dnd/react-dnd",
+	"scripts": {
+		"unit_test": "jest",
+		"jest:watch": "jest --watch",
+		"jest:cov": "jest --coverage",
+		"lint": "eslint .",
+		"test_modules": "lerna run test --stream",
+		"test": "run-s lint jest:cov test_modules",
+		"prettify":
+			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
+		"precommit": "lint-staged",
+		"start": "lerna run --stream start"
+	},
+	"devDependencies": {
+		"babel-eslint": "^7.2.3",
+		"babel-plugin-transform-decorators-legacy": "^1.3.4",
+		"babel-preset-env": "^1.6.0",
+		"babel-preset-react": "^6.24.1",
+		"babel-preset-stage-2": "^6.24.1",
+		"eslint": "^3.14.0",
+		"eslint-config-airbnb": "^14.0.0",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-plugin-import": "^2.2.0",
+		"eslint-plugin-jsx-a11y": "^3.0.2",
+		"eslint-plugin-react": "^6.9.0",
+		"husky": "^0.14.3",
+		"jest": "^20.0.4",
+		"lerna": "^2.9.0",
+		"lint-staged": "^4.2.3",
+		"npm-run-all": "^4.1.2",
+		"prettier": "^1.11.1"
+	},
+	"jest": {
+		"moduleNameMapper": {
+			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
+			"react-dnd-html5-backend":
+				"<rootDir>//packages/react-dnd-html5-backend/src",
+			"react-dnd-test-backend":
+				"<rootDir>//packages/react-dnd-test-backend/src",
+			"dnd-core": "<rootDir>//packages/dnd-core/src"
+		}
+	},
+	"lint-staged": {
+		"*.js": ["eslint --fix", "prettier --write", "git add"]
+	},
+	"prettier": {
+		"semi": false,
+		"singleQuote": true,
+		"trailingComma": "all",
+		"useTabs": true
+	},
+	"workspaces": {
+		"packages": ["packages/*"]
+	}
 }

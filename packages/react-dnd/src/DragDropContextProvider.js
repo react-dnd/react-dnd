@@ -33,10 +33,10 @@ export default class DragDropContextProvider extends Component {
 		super(props, context)
 
 		/**
-     * This property determines which window global to use for creating the DragDropManager.
-     * If a window has been injected explicitly via props, that is used first. If it is available
-     * as a context value, then use that, otherwise use the browser global.
-     */
+		 * This property determines which window global to use for creating the DragDropManager.
+		 * If a window has been injected explicitly via props, that is used first. If it is available
+		 * as a context value, then use that, otherwise use the browser global.
+		 */
 		const getWindow = () => {
 			if (props && props.window) {
 				return props.window

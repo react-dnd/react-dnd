@@ -54,9 +54,7 @@ export default class ChessboardTutorialApp extends Component {
 					<Board knightPosition={knightPosition} />
 				</div>
 				<p>
-					Make sure to check out the <a href="docs-tutorial.html">
-						tutorial
-					</a>{' '}
+					Make sure to check out the <a href="docs-tutorial.html">tutorial</a>{' '}
 					for step-by-step instructions on building it!
 				</p>
 			</div>

@@ -4,6 +4,7 @@ var resolvers = require('../scripts/resolvers')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var isDev = process.env.NODE_ENV !== 'production'
+const root = path.join(__dirname, '..', '..', '..')
 
 module.exports = {
 	devtool: isDev ? 'cheap-eval-source-map' : 'source-map',
@@ -13,7 +14,7 @@ module.exports = {
 			? [
 					'webpack-dev-server/client?http://localhost:8080',
 					'webpack/hot/only-dev-server',
-				]
+			  ]
 			: [],
 	),
 
@@ -76,24 +77,19 @@ module.exports = {
 	resolve: {
 		modules: [
 			path.join(__dirname, '..', 'node_modules'),
-			path.join(__dirname, '..', 'packages', 'dnd-core', 'node_modules'),
-			path.join(__dirname, '..', 'packages', 'react-dnd', 'node_modules'),
-			path.join(
-				__dirname,
-				'..',
-				'packages',
-				'react-dnd-html5-backend',
-				'node_modules',
-			),
+			path.join(root, 'node_modules'),
+			path.join(root, 'packages', 'dnd-core', 'node_modules'),
+			path.join(root, 'packages', 'react-dnd', 'node_modules'),
+			path.join(root, 'packages', 'react-dnd-html5-backend', 'node_modules'),
 		],
 		alias: {
-			'react-dnd/modules': path.join(__dirname, '../packages/react-dnd/src'),
-			'react-dnd': path.join(__dirname, '../packages/react-dnd/src'),
+			'react-dnd/modules': path.join(root, 'packages/react-dnd/src'),
+			'react-dnd': path.join(root, 'packages/react-dnd/src'),
 			'react-dnd-html5-backend': path.join(
-				__dirname,
-				'../packages/react-dnd-html5-backend/src',
+				root,
+				'packages/react-dnd-html5-backend/src',
 			),
-			'dnd-core': path.join(__dirname, '../packages/dnd-core/src'),
+			'dnd-core': path.join(root, 'packages/dnd-core/src'),
 		},
 	},
 	plugins: [
