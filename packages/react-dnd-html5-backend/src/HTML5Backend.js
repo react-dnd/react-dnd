@@ -36,6 +36,7 @@ export default class HTML5Backend {
 		this.currentDragSourceNodeOffset = null
 		this.currentDragSourceNodeOffsetChanged = false
 		this.altKeyPressed = false
+		this.mouseMoveTimeoutId = null
 
 		this.getSourceClientOffset = this.getSourceClientOffset.bind(this)
 		this.handleTopDragStart = this.handleTopDragStart.bind(this)
@@ -278,10 +279,21 @@ export default class HTML5Backend {
 		// Receiving a mouse event in the middle of a dragging operation
 		// means it has ended and the drag source node disappeared from DOM,
 		// so the browser didn't dispatch the dragend event.
-		this.window.addEventListener(
-			'mousemove',
-			this.endDragIfSourceWasRemovedFromDOM,
-			true,
+		//
+		// We need to wait an execution frame before we start listening for mousemove events.
+		// This is needed because the drag preview needs to be drawn or else it fires an 'mousemove' event
+		// immediately in some browsers.
+		this.mouseMoveTimeoutId = setTimeout(
+			_ => {
+				_.mouseMoveTimeoutId = null
+				return _.window.addEventListener(
+					'mousemove',
+					_.endDragIfSourceWasRemovedFromDOM,
+					true,
+				)
+			},
+			1000,
+			this,
 		)
 	}
 
@@ -290,11 +302,13 @@ export default class HTML5Backend {
 			this.currentDragSourceNode = null
 			this.currentDragSourceNodeOffset = null
 			this.currentDragSourceNodeOffsetChanged = false
+			this.window.clearTimeout(this.mouseMoveTimeoutId)
 			this.window.removeEventListener(
 				'mousemove',
 				this.endDragIfSourceWasRemovedFromDOM,
 				true,
 			)
+			this.mouseMoveTimeoutId = null
 			return true
 		}
 
