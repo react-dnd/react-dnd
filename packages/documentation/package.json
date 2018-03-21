@@ -5,7 +5,8 @@
 	"scripts": {
 		"start": "./scripts/startSiteDevServer.sh",
 		"build": "./scripts/buildStaticSite.sh",
-		"prepublish": "./scripts/publishStaticSite.sh"
+    "publish-site": "./scripts/publishStaticSite.sh",
+    "test": "yarn build"
 	},
 	"devDependencies": {
 		"autoprefixer": "^7.1.2",
