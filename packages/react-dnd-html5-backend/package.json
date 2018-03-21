@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-html5-backend",
-	"version": "2.5.4",
+	"version": "2.6.0",
 	"description": "HTML5 backend for React DnD",
 	"main": "lib/index.js",
 	"license": "BSD-3-Clause",
@@ -20,7 +20,7 @@
 		"babel-cli": "^6.26.0",
 		"babel-loader": "^7.1.1",
 		"npm-run-all": "^4.1.2",
-		"react-dnd": "^2.5.4",
+		"react-dnd": "^2.6.0",
 		"rimraf": "^2.6.2",
 		"webpack": "^3.1.0"
 	},
