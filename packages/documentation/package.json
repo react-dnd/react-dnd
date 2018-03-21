@@ -1,12 +1,12 @@
 {
 	"name": "react-dnd-documentation",
-	"version": "2.5.4",
+	"version": "2.6.0",
 	"private": true,
 	"scripts": {
 		"start": "./scripts/startSiteDevServer.sh",
 		"build": "./scripts/buildStaticSite.sh",
-    "publish-site": "./scripts/publishStaticSite.sh",
-    "test": "yarn build"
+		"publish-site": "./scripts/publishStaticSite.sh",
+		"test": "yarn build"
 	},
 	"devDependencies": {
 		"autoprefixer": "^7.1.2",
@@ -19,20 +19,20 @@
 		"html-loader": "^0.4.5",
 		"immutability-helper": "^2.4.0",
 		"karma-sourcemap-loader": "^0.3.6",
-		"less-loader": "^4.0.5",
 		"less": "^2.7.2",
+		"less-loader": "^4.0.5",
 		"marked": "^0.3.6",
 		"null-loader": "^0.1.0",
 		"postcss": "^6.0.6",
 		"prop-types": "^15.6.0",
-		"react-dnd-test-backend": "^2.5.4",
+		"react": "^16.2.0",
+		"react-dnd-test-backend": "^2.6.0",
 		"react-dom": "^16.2.0",
 		"react-frame-component": "^1.1.0",
 		"react-hot-loader": "3.0.0-beta.7",
-		"react": "^16.2.0",
 		"style-loader": "^0.18.2",
 		"url-loader": "^0.5.9",
-		"webpack-dev-server": "^2.5.1",
-		"webpack": "^3.1.0"
+		"webpack": "^3.1.0",
+		"webpack-dev-server": "^2.5.1"
 	}
 }

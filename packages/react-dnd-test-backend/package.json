@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-test-backend",
-	"version": "2.5.4",
+	"version": "2.6.0",
 	"description": "A mock backend for testing React DnD apps",
 	"main": "lib/index.js",
 	"repository": {
@@ -14,14 +14,14 @@
 		"prepublish": "npm run test"
 	},
 	"dependencies": {
-		"dnd-core": "^2.5.4"
+		"dnd-core": "^2.6.0"
 	},
 	"peerDependencies": {
 		"react-dnd": "^2.2.0"
 	},
 	"devDependencies": {
-		"rimraf": "^2.6.2",
 		"babel-cli": "^6.26.0",
-		"npm-run-all": "^4.1.2"
+		"npm-run-all": "^4.1.2",
+		"rimraf": "^2.6.2"
 	}
 }
