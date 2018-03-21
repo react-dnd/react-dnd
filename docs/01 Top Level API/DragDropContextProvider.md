@@ -69,6 +69,6 @@ export default class YourApp {
 In order to support iframes, we need to be able to inject the window we're subscribing for events in into the HTML5 Backend. You can do this in a couple of ways.
 
 * Via the `window` prop. This has the highest precedent for determining the window to use.
-* Via the `window` context value. This has the next higest precedent.
+* Via the `window` context value. This has the next highest precedent.
 
 If neither of these arguments are present, then the global `window` variable is used.
