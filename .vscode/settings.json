@@ -1,5 +1,13 @@
 {
-  "files.associations": {
-    ".eslintrc": "yaml"
-  }
+	"files.associations": {
+		".eslintrc": "yaml"
+	},
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/bower_components": true,
+		"**/lib": true
+	},
+	"editor.formatOnSave": true,
+  "eslint.packageManager": "yarn",
+  "editor.tabSize": 2
 }

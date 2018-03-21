@@ -94,7 +94,7 @@ export default class Container extends Component {
 				droppedBoxNames: name
 					? {
 							$push: [name],
-						}
+					  }
 					: {},
 			}),
 		)
