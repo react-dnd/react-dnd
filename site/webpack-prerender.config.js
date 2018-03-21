@@ -96,7 +96,7 @@ module.exports = {
 							warnings: false,
 						},
 					}),
-				]
+			  ]
 			: []),
 	],
 }
