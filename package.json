@@ -37,7 +37,8 @@
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",
 		"lint": "eslint .",
-		"test_modules": "lerna run test --stream",
+    "test_modules": "lerna run test --stream",
+    "publish_site": "lerna run publish_site --scope react-dnd-documentation",
 		"test": "run-s lint jest:cov test_modules",
 		"prettify":
 			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
