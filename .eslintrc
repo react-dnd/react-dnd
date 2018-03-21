@@ -1,4 +1,7 @@
-extends: eslint-config-airbnb
+extends:
+  - eslint-config-airbnb
+  - eslint-config-prettier
+
 parser: babel-eslint
 parserOptions:
   ecmaFeatures:
@@ -9,14 +12,6 @@ env:
 
 rules:
   # These rules are covered by prettier
-  semi: off
-  no-extra-semi: off
-  max-len: off
-  arrow-parens: off
-  comma-dangle: off
-  quotes: off
-  indent: off
-  no-tabs: off
   react/jsx-indent: off
   react/jsx-indent-props: off
 
