@@ -41,7 +41,7 @@
 		"jest:cov": "jest --coverage",
 		"lint": "eslint .",
 		"test_modules": "lerna run test --stream",
-		"test": "npm-run-all lint jest:cov test_modules",
+		"test": "run-s lint jest:cov test_modules",
 		"prettify":
 			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged"
@@ -75,7 +75,7 @@
 		"less-loader": "^4.0.5",
 		"lint-staged": "^4.2.3",
 		"marked": "^0.3.6",
-		"npm-run-all": "^4.0.2",
+		"npm-run-all": "^4.1.2",
 		"null-loader": "^0.1.0",
 		"postcss": "^6.0.6",
 		"prettier": "^1.11.1",

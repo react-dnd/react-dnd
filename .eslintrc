@@ -11,6 +11,12 @@ env:
   node: true
 
 rules:
+  # Disabled due to conflicts with monorepo structure
+  # See: https://github.com/benmosher/eslint-plugin-import/issues/458
+  import/no-extraneous-dependencies: off
+  import/no-unresolved: off
+  import/extensions: off
+
   # These rules are covered by prettier
   react/jsx-indent: off
   react/jsx-indent-props: off
