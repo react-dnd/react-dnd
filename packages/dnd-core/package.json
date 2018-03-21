@@ -1,6 +1,6 @@
 {
 	"name": "dnd-core",
-	"version": "2.5.4",
+	"version": "2.6.0",
 	"description": "Drag and drop sans the GUI",
 	"license": "BSD-3-Clause",
 	"main": "lib/index.js",
@@ -21,8 +21,8 @@
 		"redux": "^3.7.1"
 	},
 	"devDependencies": {
-		"rimraf": "^2.6.1",
+		"babel-cli": "^6.26.0",
 		"npm-run-all": "^4.1.2",
-		"babel-cli": "^6.26.0"
+		"rimraf": "^2.6.1"
 	}
 }
