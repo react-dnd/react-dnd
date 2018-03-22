@@ -8,9 +8,7 @@
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-dnd/dist/ReactDnD.min.js?compression=gzip)
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-dnd-html5-backend/dist/ReactDnDHTML5Backend.min.js?compression=gzip&label=HTML5%20backend%20gzip%20size)
 
-
-React *DnD*
-===========
+# React _DnD_
 
 Drag and Drop for React.
 
