@@ -19,7 +19,7 @@ To give you a better idea:
 
 * There is no DOM here
 * We let you define drop target and drag source logic
-* We let you supply custom underlying implementations (console, DOM via jQuery, React, React Native, *whatever*)
+* We let you supply custom underlying implementations (console, DOM via jQuery, React, React Native, _whatever_)
 * We manage drag source and drop target interaction
 
 This was written to support some rather complicated scenarios that were too hard to implement in [React DnD](https://github.com/react-dnd/react-dnd) due to its current architecture:

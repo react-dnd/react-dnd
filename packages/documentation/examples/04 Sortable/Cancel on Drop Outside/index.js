@@ -7,7 +7,7 @@ export default class SortableCancelOnDropOutside extends Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/examples/04%20Sortable/Cancel%20on%20Drop%20Outside">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/examples/04%20Sortable/Cancel%20on%20Drop%20Outside">
 							Browse the Source
 						</a>
 					</b>

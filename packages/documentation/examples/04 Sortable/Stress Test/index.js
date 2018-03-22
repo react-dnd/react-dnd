@@ -20,7 +20,7 @@ export default class SortableStressTest extends Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/examples/04%20Sortable/Stress%20Test">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/examples/04%20Sortable/Stress%20Test">
 							Browse the Source
 						</a>
 					</b>
