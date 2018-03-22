@@ -6,9 +6,7 @@
 [![bitHound Dependencies](https://www.bithound.io/github/react-dnd/react-dnd/badges/dependencies.svg)](https://www.bithound.io/github/react-dnd/react-dnd/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/react-dnd/react-dnd/badges/devDependencies.svg)](https://www.bithound.io/github/react-dnd/react-dnd/master/dependencies/npm)
 
-
-React *DnD*
-=========
+# React _DnD_
 
 Drag and Drop for React.
 

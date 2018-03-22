@@ -7,7 +7,7 @@ export default class SortableSimple extends Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/examples/04%20Sortable/Simple">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/examples/04%20Sortable/Simple">
 							Browse the Source
 						</a>
 					</b>
