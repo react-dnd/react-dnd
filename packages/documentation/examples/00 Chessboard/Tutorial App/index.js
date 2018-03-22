@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import Board from './Board'
 import { observe } from './Game'
+
+const Example = styled.div`
+	width: 500px;
+	height: 500px;
+	border: 1px solid gray;
+`
 
 /**
  * Unlike the tutorial, export a component so it can be used on the website.
@@ -44,15 +51,9 @@ export default class ChessboardTutorialApp extends Component {
 					the monitors to query the current drag state, and customizing the drag
 					previews.
 				</p>
-				<div
-					style={{
-						width: 500,
-						height: 500,
-						border: '1px solid gray',
-					}}
-				>
+				<Example>
 					<Board knightPosition={knightPosition} />
-				</div>
+				</Example>
 				<p>
 					Make sure to check out the <a href="docs-tutorial.html">tutorial</a>{' '}
 					for step-by-step instructions on building it!
