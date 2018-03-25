@@ -93,7 +93,7 @@ First, you need to install the test backend:
 npm install --save-dev react-dnd-test-backend
 ```
 
-Here is an example to get you started:
+Here are some examples to get you started:
 
 -------------------
 ```js
@@ -147,6 +147,40 @@ it('can be tested with the testing backend', function () {
   expect(div.style.opacity).toEqual(0.4);
 
   // See other backend.simulate* methods for more!
+});
+
+it('can simulate a full drag and drop interaction', function() {
+  var DustbinWithBox = function() {
+    return (
+      <div>
+        <Dustbin />
+        <Box name="test" />
+      </div>
+    );
+  };
+  
+  // Render with the test context that uses the test backend
+  var DustbinWithBoxContext = wrapInTestContext(DustbinWithBox);
+  var root = TestUtils.renderIntoDocument(<DustbinWithBoxContext />);
+
+  // Obtain a reference to the backend
+  var backend = root.getManager().getBackend();
+
+  // Find the drag source ID and use it to simulate the dragging operation
+  var box = TestUtils.findRenderedComponentWithType(root, Box);
+  backend.simulateBeginDrag([box.getHandlerId()]);
+  
+  window.alert = jest.fn();
+
+  var dustbin = TestUtils.findRenderedComponentWithType(root, Dustbin);
+  
+  // simulate a hover first to set react-dnd's internal state for the drop and endDrag
+  backend.simulateHover([dustbin.getHandlerId()]);
+  // create a dropDesult that will get read during endDrag
+  backend.simulateDrop();
+  backend.simulateEndDrag();
+  
+  expect(window.alert).toHaveBeenCalledWith("You dropped test into Dustbin!");
 });
 ```
 -------------------
@@ -241,3 +275,19 @@ it('can be tested with the testing backend', () => {
 });
 ```
 -------------------
+
+### Testing with Enzyme
+
+[Enzyme](https://github.com/airbnb/enzyme) is a commonly-used tool for testing React components.
+To use it with react-dnd, you'll need to call `.instance()` on `mount`-ed nodes to access the react-dnd helper methods:
+```js
+var root = Enzyme.mount(<BoxContext name="test" />);
+
+// ...
+
+var backend = root.instance().getManager().getBackend();
+
+// ...
+
+backend.simulateHover([dustbin.instance().getHandlerId()]);
+```
