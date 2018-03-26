@@ -1,10 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { DragDropContext } from 'react-dnd'
+import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
 import BoardSquare from './BoardSquare'
 import Knight from './Knight'
-import './Board.less'
+
+const Container = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+`
+
+const SquareContainer = styled.div`
+	width: 12.5%;
+	height: 12.5%;
+`
 
 @DragDropContext(HTML5Backend)
 export default class Board extends Component {
@@ -17,11 +29,11 @@ export default class Board extends Component {
 		const y = Math.floor(i / 8)
 
 		return (
-			<div key={i} style={{ width: '12.5%', height: '12.5%' }}>
+			<SquareContainer key={i}>
 				<BoardSquare x={x} y={y}>
 					{this.renderPiece(x, y)}
 				</BoardSquare>
-			</div>
+			</SquareContainer>
 		)
 	}
 
@@ -37,6 +49,6 @@ export default class Board extends Component {
 			squares.push(this.renderSquare(i))
 		}
 
-		return <div className="Board">{squares}</div>
+		return <Container>{squares}</Container>
 	}
 }

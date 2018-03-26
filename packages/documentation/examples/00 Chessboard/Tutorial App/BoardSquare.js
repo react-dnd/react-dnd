@@ -1,9 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { DropTarget } from 'react-dnd'
+import styled from 'styled-components'
 import Square from './Square'
 import { canMoveKnight, moveKnight } from './Game'
 import ItemTypes from './ItemTypes'
+
+const Overlay = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	opacity: 0.5;
+	background-color: ${props => props.color};
+`
 
 const squareTarget = {
 	canDrop(props) {
@@ -35,20 +47,7 @@ export default class BoardSquare extends Component {
 	}
 
 	renderOverlay(color) {
-		return (
-			<div
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					height: '100%',
-					width: '100%',
-					zIndex: 1,
-					opacity: 0.5,
-					backgroundColor: color,
-				}}
-			/>
-		)
+		return <Overlay color={color} />
 	}
 
 	render() {
@@ -56,13 +55,7 @@ export default class BoardSquare extends Component {
 		const black = (x + y) % 2 === 1
 
 		return connectDropTarget(
-			<div
-				style={{
-					position: 'relative',
-					width: '100%',
-					height: '100%',
-				}}
-			>
+			<div style={{ position: 'relative', width: '100%', height: '100%' }}>
 				<Square black={black}>{children}</Square>
 				{isOver && !canDrop && this.renderOverlay('red')}
 				{!isOver && canDrop && this.renderOverlay('yellow')}
