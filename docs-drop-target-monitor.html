@@ -11,7 +11,7 @@
 </li>
 <li><p><strong><code>getDropResult()</code></strong>: Returns a plain object representing the last recorded drop result. The drop targets may optionally specify it by returning an object from their <code>drop()</code> methods. When a chain of <code>drop()</code> is dispatched for the nested targets, bottom up, any parent that explicitly returns its own result from <code>drop()</code> overrides the drop result previously set by the child. Returns <code>null</code> if called outside <code>drop()</code>.</p>
 </li>
-<li><p><strong><code>didDrop()</code></strong> Returns <code>true</code> if some drop target has handled the drop event, <code>false</code> otherwise. Even if a target did not return a drop result, <code>didDrop()</code> returns <code>true</code>. Use it inside <code>drop()</code> to test whether any nested drop target has already handled the drop. Returns <code>false</code> if called outside <code>drop()</code>.</p>
+<li><p><strong><code>didDrop()</code></strong>: Returns <code>true</code> if some drop target has handled the drop event, <code>false</code> otherwise. Even if a target did not return a drop result, <code>didDrop()</code> returns <code>true</code>. Use it inside <code>drop()</code> to test whether any nested drop target has already handled the drop. Returns <code>false</code> if called outside <code>drop()</code>.</p>
 </li>
 <li><p><strong><code>getInitialClientOffset()</code></strong>: Returns the <code>{ x, y }</code> client offset of the pointer at the time when the current drag operation has started. Returns <code>null</code> if no item is being dragged.</p>
 </li>
