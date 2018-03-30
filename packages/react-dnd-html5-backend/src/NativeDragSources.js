@@ -13,9 +13,12 @@ function getDataFromDataTransfer(dataTransfer, typesToTry, defaultValue) {
 
 const nativeTypesConfig = {
 	[NativeTypes.FILE]: {
-		exposeProperty: 'files',
+		exposeProperty: 'dataTransfer',
 		matchesTypes: ['Files'],
-		getData: dataTransfer => Array.prototype.slice.call(dataTransfer.files),
+		getData: dataTransfer => ({
+			files: Array.prototype.slice.call(dataTransfer.files),
+			items: Array.prototype.slice.call(dataTransfer.items),
+		}),
 	},
 	[NativeTypes.URL]: {
 		exposeProperty: 'urls',
