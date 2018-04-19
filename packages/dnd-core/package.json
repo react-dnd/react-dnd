@@ -18,7 +18,7 @@
 		"asap": "^2.0.6",
 		"invariant": "^2.0.0",
 		"lodash": "^4.2.0",
-		"redux": "^3.7.1"
+		"redux": "^4.0.0"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
