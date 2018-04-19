@@ -1,6 +1,12 @@
 import { BEGIN_DRAG, HOVER, END_DRAG, DROP } from '../actions/dragDrop'
 
-const initialState = {
+export interface State {
+	initialSourceClientOffset: number
+	initialClientOffset: number
+	clientOffset: number
+}
+
+const initialState: State = {
 	initialSourceClientOffset: null,
 	initialClientOffset: null,
 	clientOffset: null,
@@ -15,7 +21,7 @@ function areOffsetsEqual(offsetA, offsetB) {
 	)
 }
 
-export default function dragOffset(state = initialState, action) {
+export default function dragOffset(state: State = initialState, action) {
 	switch (action.type) {
 		case BEGIN_DRAG:
 			return {

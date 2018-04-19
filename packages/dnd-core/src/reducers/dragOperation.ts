@@ -1,4 +1,5 @@
 import without from 'lodash/without'
+import { Action } from 'redux-actions'
 import {
 	BEGIN_DRAG,
 	PUBLISH_DRAG_SOURCE,
@@ -8,7 +9,17 @@ import {
 } from '../actions/dragDrop'
 import { REMOVE_TARGET } from '../actions/registry'
 
-const initialState = {
+export interface State {
+	itemType: string
+	item: any
+	sourceId: string
+	targetIds: string[]
+	dropResult: any
+	didDrop: boolean
+	isSourcePublic: boolean
+}
+
+const initialState: State = {
 	itemType: null,
 	item: null,
 	sourceId: null,
@@ -18,7 +29,7 @@ const initialState = {
 	isSourcePublic: null,
 }
 
-export default function dragOperation(state = initialState, action) {
+export default function dragOperation(state: State = initialState, action) {
 	switch (action.type) {
 		case BEGIN_DRAG:
 			return {

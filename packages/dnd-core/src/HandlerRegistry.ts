@@ -1,3 +1,4 @@
+import { Store } from 'redux'
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
 import asap from 'asap'
@@ -8,62 +9,25 @@ import {
 	removeTarget,
 } from './actions/registry'
 import getNextUniqueId from './utils/getNextUniqueId'
+import { State } from './reducers'
+import { DragSource, DropTarget, ItemType } from './interfaces'
+import {
+	validateSourceContract,
+	validateTargetContract,
+	validateType,
+} from './contracts'
 
-const HandlerRoles = {
-	SOURCE: 'SOURCE',
-	TARGET: 'TARGET',
+enum HandlerRole {
+	SOURCE = 'SOURCE',
+	TARGET = 'TARGET',
 }
 
-function validateSourceContract(source) {
-	invariant(
-		typeof source.canDrag === 'function',
-		'Expected canDrag to be a function.',
-	)
-	invariant(
-		typeof source.beginDrag === 'function',
-		'Expected beginDrag to be a function.',
-	)
-	invariant(
-		typeof source.endDrag === 'function',
-		'Expected endDrag to be a function.',
-	)
-}
-
-function validateTargetContract(target) {
-	invariant(
-		typeof target.canDrop === 'function',
-		'Expected canDrop to be a function.',
-	)
-	invariant(
-		typeof target.hover === 'function',
-		'Expected hover to be a function.',
-	)
-	invariant(
-		typeof target.drop === 'function',
-		'Expected beginDrag to be a function.',
-	)
-}
-
-function validateType(type, allowArray) {
-	if (allowArray && isArray(type)) {
-		type.forEach(t => validateType(t, false))
-		return
-	}
-
-	invariant(
-		typeof type === 'string' || typeof type === 'symbol',
-		allowArray
-			? 'Type can only be a string, a symbol, or an array of either.'
-			: 'Type can only be a string or a symbol.',
-	)
-}
-
-function getNextHandlerId(role) {
+function getNextHandlerId(role: HandlerRole) {
 	const id = getNextUniqueId().toString()
 	switch (role) {
-		case HandlerRoles.SOURCE:
+		case HandlerRole.SOURCE:
 			return `S${id}`
-		case HandlerRoles.TARGET:
+		case HandlerRole.TARGET:
 			return `T${id}`
 		default:
 			invariant(false, `Unknown role: ${role}`)
@@ -73,18 +37,21 @@ function getNextHandlerId(role) {
 function parseRoleFromHandlerId(handlerId) {
 	switch (handlerId[0]) {
 		case 'S':
-			return HandlerRoles.SOURCE
+			return HandlerRole.SOURCE
 		case 'T':
-			return HandlerRoles.TARGET
+			return HandlerRole.TARGET
 		default:
 			invariant(false, `Cannot parse handler ID: ${handlerId}`)
 	}
 }
 
 export default class HandlerRegistry {
-	constructor(store) {
-		this.store = store
+	private types: { [id: string]: ItemType }
+	private handlers: { [id: string]: DragSource | DropTarget }
+	private pinnedSourceId: string
+	private pinnedSource: any
 
+	constructor(private store: Store<State>) {
 		this.types = {}
 		this.handlers = {}
 
@@ -92,39 +59,38 @@ export default class HandlerRegistry {
 		this.pinnedSource = null
 	}
 
-	addSource(type, source) {
+	public addSource(type: ItemType, source: DragSource) {
 		validateType(type)
 		validateSourceContract(source)
 
-		const sourceId = this.addHandler(HandlerRoles.SOURCE, type, source)
+		const sourceId = this.addHandler(HandlerRole.SOURCE, type, source)
 		this.store.dispatch(addSource(sourceId))
 		return sourceId
 	}
 
-	addTarget(type, target) {
+	public addTarget(type: ItemType, target: DropTarget) {
 		validateType(type, true)
 		validateTargetContract(target)
 
-		const targetId = this.addHandler(HandlerRoles.TARGET, type, target)
+		const targetId = this.addHandler(HandlerRole.TARGET, type, target)
 		this.store.dispatch(addTarget(targetId))
 		return targetId
 	}
 
-	addHandler(role, type, handler) {
+	private addHandler(role, type, handler) {
 		const id = getNextHandlerId(role)
 		this.types[id] = type
 		this.handlers[id] = handler
-
 		return id
 	}
 
-	containsHandler(handler) {
+	public containsHandler(handler) {
 		return Object.keys(this.handlers).some(
 			key => this.handlers[key] === handler,
 		)
 	}
 
-	getSource(sourceId, includePinned) {
+	public getSource(sourceId, includePinned = false): DragSource {
 		invariant(this.isSourceId(sourceId), 'Expected a valid source ID.')
 
 		const isPinned = includePinned && sourceId === this.pinnedSourceId
@@ -133,32 +99,32 @@ export default class HandlerRegistry {
 		return source
 	}
 
-	getTarget(targetId) {
+	public getTarget(targetId): DropTarget {
 		invariant(this.isTargetId(targetId), 'Expected a valid target ID.')
-		return this.handlers[targetId]
+		return this.handlers[targetId] as DropTarget
 	}
 
-	getSourceType(sourceId) {
+	public getSourceType(sourceId) {
 		invariant(this.isSourceId(sourceId), 'Expected a valid source ID.')
 		return this.types[sourceId]
 	}
 
-	getTargetType(targetId) {
+	public getTargetType(targetId) {
 		invariant(this.isTargetId(targetId), 'Expected a valid target ID.')
 		return this.types[targetId]
 	}
 
-	isSourceId(handlerId) {
+	public isSourceId(handlerId) {
 		const role = parseRoleFromHandlerId(handlerId)
-		return role === HandlerRoles.SOURCE
+		return role === HandlerRole.SOURCE
 	}
 
-	isTargetId(handlerId) {
+	public isTargetId(handlerId) {
 		const role = parseRoleFromHandlerId(handlerId)
-		return role === HandlerRoles.TARGET
+		return role === HandlerRole.TARGET
 	}
 
-	removeSource(sourceId) {
+	public removeSource(sourceId) {
 		invariant(this.getSource(sourceId), 'Expected an existing source.')
 		this.store.dispatch(removeSource(sourceId))
 
@@ -168,7 +134,7 @@ export default class HandlerRegistry {
 		})
 	}
 
-	removeTarget(targetId) {
+	public removeTarget(targetId) {
 		invariant(this.getTarget(targetId), 'Expected an existing target.')
 		this.store.dispatch(removeTarget(targetId))
 
@@ -178,15 +144,15 @@ export default class HandlerRegistry {
 		})
 	}
 
-	pinSource(sourceId) {
+	public pinSource(sourceId) {
 		const source = this.getSource(sourceId)
 		invariant(source, 'Expected an existing source.')
 
 		this.pinnedSourceId = sourceId
-		this.pinnedSource = source
+		this.pinnedSource = 1
 	}
 
-	unpinSource() {
+	public unpinSource() {
 		invariant(this.pinnedSource, 'No source is pinned at the time.')
 
 		this.pinnedSourceId = null

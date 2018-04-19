@@ -17,7 +17,13 @@ import {
 const NONE = []
 const ALL = []
 
-export default function dirtyHandlerIds(state = NONE, action, dragOperation) {
+export type State = string[]
+
+export default function dirtyHandlerIds(
+	state: State = NONE,
+	action,
+	dragOperation,
+) {
 	switch (action.type) {
 		case HOVER:
 			break

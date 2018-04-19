@@ -1,21 +1,35 @@
-import { createStore } from 'redux'
+import { createStore, Store } from 'redux'
 import reducer from './reducers'
 import * as dragDropActions from './actions/dragDrop'
 import DragDropMonitor from './DragDropMonitor'
+import {
+	Backend,
+	BackendFactory,
+	DragDropManager,
+	DragDropActions,
+} from './interfaces'
+import { State } from './reducers'
 
-export default class DragDropManager {
-	constructor(createBackend, context = {}) {
+export default class DragDropManagerImpl<Context>
+	implements DragDropManager<Context> {
+	private store: Store<State>
+	private monitor: DragDropMonitor
+	private backend: Backend
+	private isSetUp: boolean = false
+
+	constructor(
+		createBackend: BackendFactory,
+		private context: Context = {} as Context,
+	) {
 		const store = createStore(reducer)
-		this.context = context
 		this.store = store
 		this.monitor = new DragDropMonitor(store)
-		this.registry = this.monitor.registry
 		this.backend = createBackend(this)
 
 		store.subscribe(this.handleRefCountChange.bind(this))
 	}
 
-	handleRefCountChange() {
+	private handleRefCountChange() {
 		const shouldSetUp = this.store.getState().refCount > 0
 		if (shouldSetUp && !this.isSetUp) {
 			this.backend.setup()
@@ -26,23 +40,23 @@ export default class DragDropManager {
 		}
 	}
 
-	getContext() {
+	public getContext() {
 		return this.context
 	}
 
-	getMonitor() {
+	public getMonitor() {
 		return this.monitor
 	}
 
-	getBackend() {
+	public getBackend() {
 		return this.backend
 	}
 
-	getRegistry() {
-		return this.registry
+	public getRegistry() {
+		return this.monitor.registry
 	}
 
-	getActions() {
+	public getActions() {
 		const manager = this
 		const { dispatch } = this.store
 
@@ -61,6 +75,6 @@ export default class DragDropManager {
 				const action = dragDropActions[key]
 				boundActions[key] = bindActionCreator(action) // eslint-disable-line no-param-reassign
 				return boundActions
-			}, {})
+			}, {}) as DragDropActions
 	}
 }

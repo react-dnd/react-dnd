@@ -1,3 +1,4 @@
+import { Action } from 'redux-actions'
 import {
 	ADD_SOURCE,
 	ADD_TARGET,
@@ -5,7 +6,9 @@ import {
 	REMOVE_TARGET,
 } from '../actions/registry'
 
-export default function refCount(state = 0, action) {
+export type State = number
+
+export default function refCount(state: State = 0, action: Action<any>) {
 	switch (action.type) {
 		case ADD_SOURCE:
 		case ADD_TARGET:

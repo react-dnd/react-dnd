@@ -1,3 +1,4 @@
+import { Store } from 'redux'
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
 import matchesType from './utils/matchesType'
@@ -7,14 +8,16 @@ import {
 	getDifferenceFromInitialOffset,
 } from './reducers/dragOffset'
 import { areDirty } from './reducers/dirtyHandlerIds'
+import { State } from './reducers'
 
 export default class DragDropMonitor {
-	constructor(store) {
-		this.store = store
+	public registry: HandlerRegistry
+
+	constructor(private store: Store<State>) {
 		this.registry = new HandlerRegistry(store)
 	}
 
-	subscribeToStateChange(listener, options = {}) {
+	subscribeToStateChange(listener, options = { handlerIds: undefined }) {
 		const { handlerIds } = options
 		invariant(typeof listener === 'function', 'listener must be a function.')
 		invariant(

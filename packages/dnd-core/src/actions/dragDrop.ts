@@ -11,7 +11,11 @@ export const END_DRAG = 'dnd-core/END_DRAG'
 
 export function beginDrag(
 	sourceIds,
-	options = { publishSource: true, clientOffset: null },
+	options = {
+		publishSource: true,
+		clientOffset: null,
+		getSourceClientOffset: null,
+	},
 ) {
 	const { publishSource, clientOffset, getSourceClientOffset } = options
 	invariant(isArray(sourceIds), 'Expected sourceIds to be an array.')
