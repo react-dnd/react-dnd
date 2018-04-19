@@ -1,4 +1,4 @@
-import createStore from 'redux/lib/createStore'
+import { createStore } from 'redux'
 import reducer from './reducers'
 import * as dragDropActions from './actions/dragDrop'
 import DragDropMonitor from './DragDropMonitor'
