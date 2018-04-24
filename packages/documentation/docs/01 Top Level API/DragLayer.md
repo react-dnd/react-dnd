@@ -9,7 +9,7 @@ For the most use cases, the default rendering of the [HTML5 backend](docs-html5-
 
 Sometimes you might want to perform the custom rendering. This also becomes necessary if you're using a custom backend. `DragLayer` lets you perform the rendering of the drag preview yourself using just the React components. It is a higher-order component accepting one required parameter that is described below.
 
-To use `DragLayer`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](docs-drag-drop-context.html).
+To use `DragLayer`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](docs-drag-drop-context.html) and stop browser's default drag preview by using dragPreview() from [`DragSourceConnector`](docs-drag-source-connector.html)
 
 ### Signature
 
