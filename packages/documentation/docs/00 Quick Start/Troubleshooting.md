@@ -95,3 +95,40 @@ export default class YourComponent { }
 -------------------
 
 You may not use ES7 decorators today (linters don't understand them), but this API lets you switch to the decorators when they are more mature, and also has [nicer composition semantics](docs-faq.html#how-do-i-combine-several-drag-sources-and-drop-targets-in-a-single-component-) in ES5 or ES6.
+
+### I both see my customized DragLayer and browser's default drag preview 
+
+You probably added `<YourCustomizedDragLayer />` component inside [`DragDropContext`](docs-drag-drop-context.html) wrapped component. That is why you are seeing your custom drag preview. However you didn't stop browser from drawing default drag preview. To make this happen, use dragPreview() from [`DragSourceConnector`](docs-drag-source-connector.html). 
+
+Here is one example. At componentDidMount cycle, give an emptyImage and your custom drag layer will only be rendered. other way is to wrap node/element directly from render function. For more information, checkout [`DragSourceConnector`](docs-drag-source-connector.html) and the example https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/examples/02%20Drag%20Around/Custom%20Drag%20Layer
+
+```js
+import { DragSource } from 'react-dnd'
+import { getEmptyImage } from 'react-dnd-html5-backend'
+
+@DragSource(type, spec, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  // use dragPreview() here so that you can use it as props. From DragSource's collect function, you get DragSourceConnector and can access to dragPreview()
+  connectDragPreview: connect.dragPreview(),
+}))
+class DragLayerExample {
+  componentDidMount() {
+    // Use empty image as a drag preview so browsers don't draw it
+    // and we can draw whatever we want on the custom drag layer instead.
+    this.props.connectDragPreview(getEmptyImage(), {
+        // IE fallback: specify that we'd rather screenshot the node
+        // when it already knows it's being dragged so we can hide it with CSS.
+        captureDraggingState: true,
+    })
+  }
+  render() {
+    const { connectDragSource } = this.props;
+
+    return connectDragSource(
+      <div>
+        Your draggable component here 
+      </div>
+    );
+  }
+}
+```
