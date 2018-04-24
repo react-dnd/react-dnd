@@ -42,10 +42,12 @@ export default class DragAroundCustomDragLayer extends Component {
 					its limitations.
 				</p>
 				<p>
-					We can, however, customize behavior a great deal if we feed the
-					browser an empty image as drag preview. This library provides a{' '}
-					<code>DragLayer</code> that you can use to implement a fixed layer on
-					top of your app where you&apos;d draw a custom drag preview component.
+					We can, however, customize behavior a great deal <i>if we feed the
+					browser an empty image as drag preview.</i> This library provides 
+          <code>DragSourceConnector</code> that can stop browser's default 
+          drag preview and a{' '}	<code>DragLayer</code> that you can use to 
+          implement a fixed layer on top of your app where you&apos;d draw
+          a custom drag preview component.
 				</p>
 				<p>
 					Note that we can draw a completely different component on our drag
