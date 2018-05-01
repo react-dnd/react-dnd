@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import defaults from 'lodash/defaults'
-import shallowEqual from './shallowEqual'
+import shallowEqual from 'shallowequal'
 import EnterLeaveCounter from './EnterLeaveCounter'
 import { isFirefox } from './BrowserDetector'
 import {

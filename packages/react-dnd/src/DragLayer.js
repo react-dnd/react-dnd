@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import hoistStatics from 'hoist-non-react-statics'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
-import shallowEqual from './utils/shallowEqual'
-import shallowEqualScalar from './utils/shallowEqualScalar'
+import shallowEqual from 'shallowequal'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 
 export default function DragLayer(collect, options = {}) {
@@ -23,7 +22,7 @@ export default function DragLayer(collect, options = {}) {
 	)
 
 	return function decorateLayer(DecoratedComponent) {
-		const { arePropsEqual = shallowEqualScalar } = options
+		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 

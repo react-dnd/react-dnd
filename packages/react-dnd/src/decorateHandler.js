@@ -4,8 +4,7 @@ import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
-import shallowEqual from './utils/shallowEqual'
-import shallowEqualScalar from './utils/shallowEqualScalar'
+import shallowEqual from 'shallowequal'
 
 const isClassComponent = Comp =>
 	Boolean(Comp && Comp.prototype && typeof Comp.prototype.render === 'function')
@@ -21,7 +20,7 @@ export default function decorateHandler({
 	collect,
 	options,
 }) {
-	const { arePropsEqual = shallowEqualScalar } = options
+	const { arePropsEqual = shallowEqual } = options
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 

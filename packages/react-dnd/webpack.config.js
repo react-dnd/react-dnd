@@ -3,6 +3,7 @@ const path = require('path')
 
 module.exports = {
 	entry: './src/index',
+	mode: 'production',
 	resolve: {
 		modules: [
 			path.join(__dirname, 'node_modules'),

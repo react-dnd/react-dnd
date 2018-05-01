@@ -21,11 +21,12 @@
 		"babel-loader": "^7.1.4",
 		"npm-run-all": "^4.1.2",
 		"react-dnd": "^2.6.0",
+		"react-dnd-test-backend": "^2.6.0",
 		"rimraf": "^2.6.2",
-		"webpack": "^4.6.0",
-		"react-dnd-test-backend": "^2.6.0"
+		"webpack": "^4.6.0"
 	},
 	"dependencies": {
-		"lodash": "^4.2.0"
+		"lodash": "^4.2.0",
+		"shallowequal": "^1.0.2"
 	}
 }
