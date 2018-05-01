@@ -2,26 +2,27 @@ import { Store } from 'redux'
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
 import matchesType from './utils/matchesType'
-import HandlerRegistry from './HandlerRegistry'
 import {
 	getSourceClientOffset,
 	getDifferenceFromInitialOffset,
 } from './reducers/dragOffset'
 import { areDirty } from './reducers/dirtyHandlerIds'
 import { State } from './reducers'
-import { DragDropMonitor, Listener } from './interfaces'
+import {
+	IDragDropMonitor,
+	Listener,
+	Unsubscribe,
+	XYCoord,
+	IHandlerRegistry,
+} from './interfaces'
 
-export default class DragDropMonitorImpl implements DragDropMonitor {
-	public registry: HandlerRegistry
-
-	constructor(private store: Store<State>) {
-		this.registry = new HandlerRegistry(store)
-	}
+export default class DragDropMonitor implements IDragDropMonitor {
+	constructor(private store: Store<State>, public registry: IHandlerRegistry) {}
 
 	public subscribeToStateChange(
 		listener: Listener,
 		options: { handlerIds: string[] | undefined } = { handlerIds: undefined },
-	) {
+	): Unsubscribe {
 		const { handlerIds } = options
 		invariant(typeof listener === 'function', 'listener must be a function.')
 		invariant(
@@ -50,7 +51,7 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return this.store.subscribe(handleChange)
 	}
 
-	public subscribeToOffsetChange(listener: Listener) {
+	public subscribeToOffsetChange(listener: Listener): Unsubscribe {
 		invariant(typeof listener === 'function', 'listener must be a function.')
 
 		let previousState = this.store.getState().dragOffset
@@ -167,19 +168,19 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return this.store.getState().dragOperation.isSourcePublic
 	}
 
-	public getInitialClientOffset() {
+	public getInitialClientOffset(): XYCoord | null {
 		return this.store.getState().dragOffset.initialClientOffset
 	}
 
-	public getInitialSourceClientOffset() {
+	public getInitialSourceClientOffset(): XYCoord | null {
 		return this.store.getState().dragOffset.initialSourceClientOffset
 	}
 
-	public getClientOffset() {
+	public getClientOffset(): XYCoord | null {
 		return this.store.getState().dragOffset.clientOffset
 	}
 
-	public getSourceClientOffset() {
+	public getSourceClientOffset(): XYCoord | null {
 		return getSourceClientOffset(this.store.getState().dragOffset)
 	}
 

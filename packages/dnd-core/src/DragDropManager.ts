@@ -2,20 +2,22 @@ import { createStore, Store } from 'redux'
 import reducer from './reducers'
 import dragDropActions from './actions/dragDrop'
 import DragDropMonitor from './DragDropMonitor'
+import HandlerRegistry from './HandlerRegistry'
 import {
 	ActionCreator,
-	Backend,
+	IBackend,
 	BackendFactory,
-	DragDropManager,
-	DragDropActions,
+	IDragDropActions,
+	IDragDropManager,
+	IHandlerRegistry,
 } from './interfaces'
 import { State } from './reducers'
 
-export default class DragDropManagerImpl<Context>
-	implements DragDropManager<Context> {
+export default class DragDropManager<Context>
+	implements IDragDropManager<Context> {
 	private store: Store<State>
 	private monitor: DragDropMonitor
-	private backend: Backend
+	private backend: IBackend
 	private isSetUp: boolean = false
 
 	constructor(
@@ -24,7 +26,7 @@ export default class DragDropManagerImpl<Context>
 	) {
 		const store = createStore(reducer)
 		this.store = store
-		this.monitor = new DragDropMonitor(store)
+		this.monitor = new DragDropMonitor(store, new HandlerRegistry(store))
 		this.backend = createBackend(this)
 
 		store.subscribe(this.handleRefCountChange.bind(this))
@@ -53,11 +55,11 @@ export default class DragDropManagerImpl<Context>
 		return this.backend
 	}
 
-	public getRegistry() {
+	public getRegistry(): IHandlerRegistry {
 		return this.monitor.registry
 	}
 
-	public getActions(): DragDropActions {
+	public getActions(): IDragDropActions {
 		const manager = this
 		const { dispatch } = this.store
 
@@ -73,12 +75,12 @@ export default class DragDropManagerImpl<Context>
 		const actions = dragDropActions(this)
 
 		return Object.keys(actions).reduce(
-			(boundActions: DragDropActions, key: string) => {
+			(boundActions: IDragDropActions, key: string) => {
 				const action: ActionCreator = (actions as any)[key] as ActionCreator
 				;(boundActions as any)[key] = bindActionCreator(action) // eslint-disable-line no-param-reassign
 				return boundActions
 			},
-			{} as DragDropActions,
+			{} as IDragDropActions,
 		)
 	}
 

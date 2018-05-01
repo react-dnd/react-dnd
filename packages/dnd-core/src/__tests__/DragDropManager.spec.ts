@@ -1,4 +1,4 @@
-import createTestBackend from 'react-dnd-test-backend'
+import createTestBackend, { ITestBackend } from 'react-dnd-test-backend'
 import isString from 'lodash/isString'
 import * as Types from './types'
 import { NormalSource, NonDraggableSource, BadItemSource } from './sources'
@@ -9,16 +9,17 @@ import {
 	BadResultTarget,
 	TransformResultTarget,
 } from './targets'
-import { DragDropManager } from '../index'
+import DragDropManagerImpl from '../DragDropManager'
+import { IDragDropManager, IBackend, IHandlerRegistry } from '../interfaces'
 
 describe('DragDropManager', () => {
-	let manager
-	let backend
-	let registry
+	let manager: IDragDropManager<any>
+	let backend: ITestBackend
+	let registry: IHandlerRegistry
 
 	beforeEach(() => {
-		manager = new DragDropManager(createTestBackend as any)
-		backend = manager.getBackend()
+		manager = new DragDropManagerImpl(createTestBackend as any)
+		backend = (manager.getBackend() as any) as ITestBackend
 		registry = manager.getRegistry()
 	})
 
@@ -92,16 +93,16 @@ describe('DragDropManager', () => {
 			const source = new NormalSource()
 			const target = new NormalTarget()
 
-			expect(() => registry.addSource(null, source)).toThrow()
-			expect(() => registry.addSource(undefined, source)).toThrow()
-			expect(() => registry.addSource(23, source)).toThrow()
-			expect(() => registry.addSource(['yo'], source)).toThrow()
-			expect(() => registry.addTarget(null, target)).toThrow()
-			expect(() => registry.addTarget(undefined, target)).toThrow()
-			expect(() => registry.addTarget(23, target)).toThrow()
-			expect(() => registry.addTarget([23], target)).toThrow()
-			expect(() => registry.addTarget(['yo', null], target)).toThrow()
-			expect(() => registry.addTarget([['yo']], target)).toThrow()
+			expect(() => registry.addSource(null as any, source)).toThrow()
+			expect(() => registry.addSource(undefined as any, source)).toThrow()
+			expect(() => registry.addSource(23 as any, source)).toThrow()
+			expect(() => registry.addSource(['yo'] as any, source)).toThrow()
+			expect(() => registry.addTarget(null as any, target)).toThrow()
+			expect(() => registry.addTarget(undefined as any, target)).toThrow()
+			expect(() => registry.addTarget(23 as any, target)).toThrow()
+			expect(() => registry.addTarget([23] as any, target)).toThrow()
+			expect(() => registry.addTarget(['yo', null] as any, target)).toThrow()
+			expect(() => registry.addTarget([['yo']] as any, target)).toThrow()
 		})
 
 		it('calls setup() and teardown() on backend', () => {
@@ -159,12 +160,12 @@ describe('DragDropManager', () => {
 			expect(registry.isSourceId(sourceId)).toEqual(true)
 			expect(registry.isSourceId(targetId)).toEqual(false)
 			expect(() => registry.isSourceId('something else')).toThrow()
-			expect(() => registry.isSourceId(null)).toThrow()
+			expect(() => registry.isSourceId(null as any)).toThrow()
 
 			expect(registry.isTargetId(sourceId)).toEqual(false)
 			expect(registry.isTargetId(targetId)).toEqual(true)
 			expect(() => registry.isTargetId('something else')).toThrow()
-			expect(() => registry.isTargetId(null)).toThrow()
+			expect(() => registry.isTargetId(null as any)).toThrow()
 		})
 	})
 
@@ -207,9 +208,9 @@ describe('DragDropManager', () => {
 				const target = new NormalTarget()
 				const targetId = registry.addTarget(Types.FOO, target)
 
-				expect(() => backend.simulateBeginDrag('yo')).toThrow()
+				expect(() => (backend as any).simulateBeginDrag('yo')).toThrow()
 				expect(() => backend.simulateBeginDrag(null)).toThrow()
-				expect(() => backend.simulateBeginDrag(sourceId)).toThrow()
+				expect(() => (backend as any).simulateBeginDrag(sourceId)).toThrow()
 				expect(() => backend.simulateBeginDrag([null])).toThrow()
 				expect(() => backend.simulateBeginDrag(['yo'])).toThrow()
 				expect(() => backend.simulateBeginDrag([targetId])).toThrow()
@@ -246,7 +247,7 @@ describe('DragDropManager', () => {
 				const sourceId = registry.addSource(Types.FOO, source)
 
 				backend.simulateBeginDrag([sourceId])
-				backend.simulateEndDrag(sourceId)
+				backend.simulateEndDrag()
 
 				source.didCallBeginDrag = false
 				expect(() => backend.simulateBeginDrag([sourceId])).not.toThrow()
@@ -304,7 +305,7 @@ describe('DragDropManager', () => {
 			it('throws in endDrag() if it is called outside a drag operation', () => {
 				const source = new NormalSource()
 				const sourceId = registry.addSource(Types.FOO, source)
-				expect(() => backend.simulateEndDrag(sourceId)).toThrow()
+				expect(() => backend.simulateEndDrag()).toThrow()
 			})
 
 			it('ignores drop() if no drop targets entered', () => {
@@ -436,7 +437,7 @@ describe('DragDropManager', () => {
 					const targetAId = registry.addTarget(Types.FOO, targetA)
 					const targetB = new TargetWithNoDropResult()
 					const targetBId = registry.addTarget(Types.FOO, targetB)
-					const targetC = new NonDroppableTarget({ number: 16 })
+					const targetC = new NonDroppableTarget()
 					const targetCId = registry.addTarget(Types.BAR, targetC)
 
 					backend.simulateBeginDrag([sourceId])
@@ -454,19 +455,19 @@ describe('DragDropManager', () => {
 					const sourceId = registry.addSource(Types.FOO, source)
 					const targetA = new TargetWithNoDropResult()
 					const targetAId = registry.addTarget(Types.FOO, targetA)
-					const targetB = new TransformResultTarget(dropResult => ({
+					const targetB = new TransformResultTarget((dropResult: any) => ({
 						number: dropResult.number * 2,
 					}))
 					const targetBId = registry.addTarget(Types.FOO, targetB)
 					const targetC = new NonDroppableTarget()
 					const targetCId = registry.addTarget(Types.FOO, targetC)
-					const targetD = new TransformResultTarget(dropResult => ({
+					const targetD = new TransformResultTarget((dropResult: any) => ({
 						number: dropResult.number + 1,
 					}))
 					const targetDId = registry.addTarget(Types.FOO, targetD)
 					const targetE = new NormalTarget({ number: 42 })
 					const targetEId = registry.addTarget(Types.FOO, targetE)
-					const targetF = new TransformResultTarget(dropResult => ({
+					const targetF = new TransformResultTarget((dropResult: any) => ({
 						number: dropResult.number / 2,
 					}))
 					const targetFId = registry.addTarget(Types.BAR, targetF)
@@ -500,19 +501,19 @@ describe('DragDropManager', () => {
 					const sourceId = registry.addSource(Types.FOO, source)
 					const targetA = new NormalTarget({ number: 12345 })
 					const targetAId = registry.addTarget(Types.FOO, targetA)
-					const targetB = new TransformResultTarget(dropResult => ({
+					const targetB = new TransformResultTarget((dropResult: any) => ({
 						number: dropResult.number * 2,
 					}))
 					const targetBId = registry.addTarget(Types.FOO, targetB)
 					const targetC = new NonDroppableTarget()
 					const targetCId = registry.addTarget(Types.FOO, targetC)
-					const targetD = new TransformResultTarget(dropResult => ({
+					const targetD = new TransformResultTarget((dropResult: any) => ({
 						number: dropResult.number + 1,
 					}))
 					const targetDId = registry.addTarget(Types.FOO, targetD)
 					const targetE = new NormalTarget({ number: 42 })
 					const targetEId = registry.addTarget(Types.FOO, targetE)
-					const targetF = new TransformResultTarget(dropResult => ({
+					const targetF = new TransformResultTarget((dropResult: any) => ({
 						number: dropResult.number / 2,
 					}))
 					const targetFId = registry.addTarget(Types.BAR, targetF)
@@ -662,8 +663,8 @@ describe('DragDropManager', () => {
 
 				backend.simulateBeginDrag([sourceId])
 				expect(() => backend.simulateHover(null)).toThrow()
-				expect(() => backend.simulateHover('yo')).toThrow()
-				expect(() => backend.simulateHover(targetId)).toThrow()
+				expect(() => (backend as any).simulateHover('yo')).toThrow()
+				expect(() => (backend as any).simulateHover(targetId)).toThrow()
 			})
 
 			it('throws in hover() if it contains an invalid drop target', () => {

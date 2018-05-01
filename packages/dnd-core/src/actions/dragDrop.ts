@@ -1,4 +1,4 @@
-import { DragDropManager } from '../interfaces'
+import { IDragDropManager } from '../interfaces'
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
 import isObject from 'lodash/isObject'
@@ -11,7 +11,7 @@ export const DROP = 'dnd-core/DROP'
 export const END_DRAG = 'dnd-core/END_DRAG'
 
 export default function createDragDropActions<Context>(
-	manager: DragDropManager<Context>,
+	manager: IDragDropManager<Context>,
 ) {
 	return {
 		beginDrag(
@@ -173,9 +173,7 @@ export default function createDragDropActions<Context>(
 			const sourceId = monitor.getSourceId()
 			const source = registry.getSource(sourceId as string, true)
 			source.endDrag(monitor, sourceId as string)
-
 			registry.unpinSource()
-
 			return { type: END_DRAG }
 		},
 	}

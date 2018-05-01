@@ -11,11 +11,11 @@ import {
 import getNextUniqueId from './utils/getNextUniqueId'
 import { State } from './reducers'
 import {
-	DragSource,
-	DropTarget,
+	IDragSource,
+	IDropTarget,
 	ItemType,
 	HandlerRole,
-	HandlerRegistry,
+	IHandlerRegistry,
 } from './interfaces'
 import {
 	validateSourceContract,
@@ -46,21 +46,16 @@ function parseRoleFromHandlerId(handlerId: string) {
 	}
 }
 
-export default class HandlerRegistryImpl implements HandlerRegistry {
-	private types: { [id: string]: ItemType }
-	private handlers: { [id: string]: DragSource | DropTarget }
-	private pinnedSourceId: string | null
-	private pinnedSource: any
+export default class HandlerRegistry implements IHandlerRegistry {
+	private types: { [id: string]: ItemType } = {}
+	private dragSources: { [id: string]: IDragSource } = {}
+	private dropTargets: { [id: string]: IDropTarget } = {}
+	private pinnedSourceId: string | null = null
+	private pinnedSource: any = null
 
-	constructor(private store: Store<State>) {
-		this.types = {}
-		this.handlers = {}
+	constructor(private store: Store<State>) {}
 
-		this.pinnedSourceId = null
-		this.pinnedSource = null
-	}
-
-	public addSource(type: string, source: DragSource) {
+	public addSource(type: string, source: IDragSource) {
 		validateType(type)
 		validateSourceContract(source)
 
@@ -69,7 +64,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		return sourceId
 	}
 
-	public addTarget(type: string, target: DropTarget) {
+	public addTarget(type: string, target: IDropTarget) {
 		validateType(type, true)
 		validateTargetContract(target)
 
@@ -78,31 +73,44 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		return targetId
 	}
 
-	private addHandler(role: HandlerRole, type: string, handler: any): string {
+	private addHandler(
+		role: HandlerRole,
+		type: string,
+		handler: IDragSource | IDropTarget,
+	): string {
 		const id = getNextHandlerId(role)
 		this.types[id] = type
-		this.handlers[id] = handler
+		if (role === HandlerRole.SOURCE) {
+			this.dragSources[id] = handler as IDragSource
+		} else if (role === HandlerRole.TARGET) {
+			this.dropTargets[id] = handler as IDropTarget
+		}
 		return id
 	}
 
-	public containsHandler(handler: any) {
-		return Object.keys(this.handlers).some(
-			key => this.handlers[key] === handler,
+	public containsHandler(handler: IDragSource | IDropTarget) {
+		return (
+			Object.keys(this.dragSources).some(
+				key => this.dragSources[key] === handler,
+			) ||
+			Object.keys(this.dropTargets).some(
+				key => this.dropTargets[key] === handler,
+			)
 		)
 	}
 
-	public getSource(sourceId: string, includePinned = false): DragSource {
+	public getSource(sourceId: string, includePinned = false): IDragSource {
 		invariant(this.isSourceId(sourceId), 'Expected a valid source ID.')
 
 		const isPinned = includePinned && sourceId === this.pinnedSourceId
-		const source = isPinned ? this.pinnedSource : this.handlers[sourceId]
 
+		const source = isPinned ? this.pinnedSource : this.dragSources[sourceId]
 		return source
 	}
 
-	public getTarget(targetId: string): DropTarget {
+	public getTarget(targetId: string): IDropTarget {
 		invariant(this.isTargetId(targetId), 'Expected a valid target ID.')
-		return this.handlers[targetId] as DropTarget
+		return this.dropTargets[targetId] as IDropTarget
 	}
 
 	public getSourceType(sourceId: string): ItemType {
@@ -130,7 +138,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		this.store.dispatch(removeSource(sourceId))
 
 		asap(() => {
-			delete this.handlers[sourceId]
+			delete this.dragSources[sourceId]
 			delete this.types[sourceId]
 		})
 	}
@@ -140,7 +148,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		this.store.dispatch(removeTarget(targetId))
 
 		asap(() => {
-			delete this.handlers[targetId]
+			delete this.dropTargets[targetId]
 			delete this.types[targetId]
 		})
 	}
@@ -150,7 +158,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		invariant(source, 'Expected an existing source.')
 
 		this.pinnedSourceId = sourceId
-		this.pinnedSource = 1
+		this.pinnedSource = source
 	}
 
 	public unpinSource() {

@@ -3,7 +3,8 @@
 	"version": "2.6.0",
 	"description": "Drag and drop sans the GUI",
 	"license": "BSD-3-Clause",
-	"main": "lib/index.js",
+	"main": "./lib/index.js",
+	"types": "./lib/index.d.ts",
 	"scripts": {
 		"clean": "rimraf lib",
 		"build": "tsc",

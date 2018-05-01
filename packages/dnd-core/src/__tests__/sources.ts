@@ -1,10 +1,13 @@
 import { DragSource } from '..'
+import { DragDropMonitor } from '../interfaces'
 
 export class NormalSource extends DragSource {
-	constructor(item) {
+	public didCallBeginDrag = false
+	public recordedDropResult: any
+
+	constructor(public item?: any) {
 		super()
 		this.item = item || { baz: 42 }
-		this.didCallBeginDrag = false
 	}
 
 	beginDrag() {
@@ -12,16 +15,13 @@ export class NormalSource extends DragSource {
 		return this.item
 	}
 
-	endDrag(monitor) {
+	endDrag(monitor: DragDropMonitor) {
 		this.recordedDropResult = monitor.getDropResult()
 	}
 }
 
 export class NonDraggableSource extends DragSource {
-	constructor() {
-		super()
-		this.didCallBeginDrag = false
-	}
+	public didCallBeginDrag: boolean = false
 
 	canDrag() {
 		return false
@@ -40,10 +40,8 @@ export class BadItemSource extends DragSource {
 }
 
 export class NumberSource extends DragSource {
-	constructor(number, allowDrag) {
+	constructor(public number: number, public allowDrag: boolean) {
 		super()
-		this.number = number
-		this.allowDrag = allowDrag
 	}
 
 	canDrag() {

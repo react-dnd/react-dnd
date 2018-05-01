@@ -1,10 +1,13 @@
 import { DropTarget } from '..'
+import { DragDropMonitor } from '../interfaces'
 
 export class NormalTarget extends DropTarget {
-	constructor(dropResult) {
+	public didCallDrop: boolean = false
+	public didCallHover: boolean = false
+	public dropResult: any
+
+	constructor(dropResult?: any) {
 		super()
-		this.didCallDrop = false
-		this.didCallHover = false
 		this.dropResult = dropResult || { foo: 'bar' }
 	}
 
@@ -19,11 +22,8 @@ export class NormalTarget extends DropTarget {
 }
 
 export class NonDroppableTarget extends DropTarget {
-	constructor() {
-		super()
-		this.didCallDrop = false
-		this.didCallHover = false
-	}
+	public didCallDrop: boolean = false
+	public didCallHover: boolean = false
 
 	canDrop() {
 		return false
@@ -39,11 +39,8 @@ export class NonDroppableTarget extends DropTarget {
 }
 
 export class TargetWithNoDropResult extends DropTarget {
-	constructor() {
-		super()
-		this.didCallDrop = false
-		this.didCallHover = false
-	}
+	public didCallDrop: boolean = false
+	public didCallHover: boolean = false
 
 	hover() {
 		this.didCallHover = true
@@ -61,18 +58,18 @@ export class BadResultTarget extends DropTarget {
 }
 
 export class TransformResultTarget extends DropTarget {
-	constructor(transform) {
+	public didCallDrop: boolean = false
+	public didCallHover: boolean = false
+
+	constructor(public transform: any) {
 		super()
-		this.transform = transform
-		this.didCallDrop = false
-		this.didCallHover = false
 	}
 
 	hover() {
 		this.didCallHover = true
 	}
 
-	drop(monitor) {
+	drop(monitor: DragDropMonitor) {
 		this.didCallDrop = true
 		const dropResult = monitor.getDropResult()
 		return this.transform(dropResult)

@@ -1,8 +1,8 @@
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
-import { DragSource, DropTarget, ItemType } from './interfaces'
+import { IDragSource, IDropTarget, ItemType } from './interfaces'
 
-export function validateSourceContract(source: DragSource) {
+export function validateSourceContract(source: IDragSource) {
 	invariant(
 		typeof source.canDrag === 'function',
 		'Expected canDrag to be a function.',
@@ -17,7 +17,7 @@ export function validateSourceContract(source: DragSource) {
 	)
 }
 
-export function validateTargetContract(target: DropTarget) {
+export function validateTargetContract(target: IDropTarget) {
 	invariant(
 		typeof target.canDrop === 'function',
 		'Expected canDrop to be a function.',

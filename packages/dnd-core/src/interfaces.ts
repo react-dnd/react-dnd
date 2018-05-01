@@ -1,6 +1,6 @@
 import { Unsubscribe } from 'redux'
 
-export type Usubscribe = () => void
+export type Unsubscribe = () => void
 export type Listener = () => void
 
 export interface XYCoord {
@@ -13,7 +13,7 @@ export enum HandlerRole {
 	TARGET = 'TARGET',
 }
 
-export interface Backend {
+export interface IBackend {
 	setup(): void
 	teardown(): void
 	connectDragSource(): Unsubscribe
@@ -21,10 +21,10 @@ export interface Backend {
 	connectDropTarget(): Unsubscribe
 }
 
-export interface DragDropMonitor {
+export interface IDragDropMonitor {
 	subscribeToStateChange(
 		listener: Listener,
-		options: { handlerIds: string[] | undefined },
+		options?: { handlerIds: string[] | undefined },
 	): Unsubscribe
 
 	subscribeToOffsetChange(listener: Listener): Unsubscribe
@@ -37,7 +37,7 @@ export interface DragDropMonitor {
 
 	isDraggingSource(sourceId: string): boolean
 
-	isOverTarget(targetId: string, options: { shallow: boolean }): boolean
+	isOverTarget(targetId: string, options?: { shallow: boolean }): boolean
 
 	getItemType(): string | null
 
@@ -64,14 +64,14 @@ export interface DragDropMonitor {
 	getDifferenceFromInitialOffset(): XYCoord | null
 }
 
-export interface HandlerRegistry {
-	addSource(type: string, source: DragSource): string
-	addTarget(type: string, target: DropTarget): string
-	containsHandler(handler: any): boolean
-	getSource(sourceId: string, includePinned?: boolean): DragSource
+export interface IHandlerRegistry {
+	addSource(type: ItemType, source: IDragSource): string
+	addTarget(type: TargetType, target: IDropTarget): string
+	containsHandler(handler: IDragSource | IDropTarget): boolean
+	getSource(sourceId: string, includePinned?: boolean): IDragSource
 	getSourceType(sourceId: string): ItemType
 	getTargetType(targetId: string): ItemType
-	getTarget(targetId: string): DropTarget
+	getTarget(targetId: string): IDropTarget
 	isSourceId(handlerId: string): boolean
 	isTargetId(handlerId: string): boolean
 	removeSource(sourceId: string): void
@@ -86,37 +86,39 @@ export interface Action {
 
 export type ActionCreator = (args: any[]) => Action
 
-export interface DragDropActions {
+export interface IDragDropActions {
 	beginDrag(sourceIds: string[], options?: any): Action
 	publishDragSource(): Action
 	hover(targetIds: string[], options?: any): Action
-	drop(options: any): Action
+	drop(options?: any): Action
 	endDrag(): Action
 }
 
-export interface DragDropManager<Context> {
+export interface IDragDropManager<Context> {
 	getContext(): Context
-	getMonitor(): DragDropMonitor
-	getBackend(): Backend
-	getRegistry(): HandlerRegistry
-	getActions(): DragDropActions
+	getMonitor(): IDragDropMonitor
+	getBackend(): IBackend
+	getRegistry(): IHandlerRegistry
+	getActions(): IDragDropActions
 	dispatch(action: any): void
 }
 
-export type BackendFactory = (dragDropManager: DragDropManager<any>) => Backend
+export type BackendFactory = (
+	dragDropManager: IDragDropManager<any>,
+) => IBackend
 
-export interface DragSource {
-	canDrag(monitor: DragDropMonitor, targetId: string): boolean
-	isDragging(monitor: DragDropMonitor, targetId: string): boolean
-	beginDrag(monitor: DragDropMonitor, targetId: string): void
-	endDrag(monitor: DragDropMonitor, targetId: string): void
+export interface IDragSource {
+	canDrag(monitor: IDragDropMonitor, targetId: string): boolean
+	isDragging(monitor: IDragDropMonitor, targetId: string): boolean
+	beginDrag(monitor: IDragDropMonitor, targetId: string): void
+	endDrag(monitor: IDragDropMonitor, targetId: string): void
 }
 
-export interface DropTarget {
-	canDrop(monitor: DragDropMonitor, targetId: string): boolean
-	hover(monitor: DragDropMonitor, targetId: string): void
-	drop(monitor: DragDropMonitor, targetId: string): any
+export interface IDropTarget {
+	canDrop(monitor: IDragDropMonitor, targetId: string): boolean
+	hover(monitor: IDragDropMonitor, targetId: string): void
+	drop(monitor: IDragDropMonitor, targetId: string): any
 }
 
-export type ItemType = string | symbol
+export type ItemType = string | Symbol
 export type TargetType = ItemType | ItemType[]

@@ -1,4 +1,4 @@
-import createTestBackend from 'react-dnd-test-backend'
+import createTestBackend, { ITestBackend } from 'react-dnd-test-backend'
 import * as Types from './types'
 import { NormalSource, NonDraggableSource, NumberSource } from './sources'
 import {
@@ -6,13 +6,18 @@ import {
 	NonDroppableTarget,
 	TargetWithNoDropResult,
 } from './targets'
-import { DragDropManager } from '../index'
+import {
+	IDragDropManager,
+	IHandlerRegistry,
+	IDragDropMonitor,
+} from '../interfaces'
+import DragDropManager from '../DragDropManager'
 
-describe('DragDropMonitor', () => {
-	let manager
-	let backend
-	let registry
-	let monitor
+describe.only('DragDropMonitor', () => {
+	let manager: IDragDropManager<any>
+	let backend: ITestBackend
+	let registry: IHandlerRegistry
+	let monitor: IDragDropMonitor
 
 	beforeEach(() => {
 		manager = new DragDropManager(createTestBackend as any)
@@ -25,10 +30,10 @@ describe('DragDropMonitor', () => {
 		it('throws on bad listener', () => {
 			expect(() => monitor.subscribeToStateChange(() => {})).not.toThrow()
 
-			expect(() => monitor.subscribeToStateChange()).toThrow()
-			expect(() => monitor.subscribeToStateChange(42)).toThrow()
-			expect(() => monitor.subscribeToStateChange('hi')).toThrow()
-			expect(() => monitor.subscribeToStateChange({})).toThrow()
+			expect(() => (monitor as any).subscribeToStateChange()).toThrow()
+			expect(() => (monitor as any).subscribeToStateChange(42)).toThrow()
+			expect(() => (monitor as any).subscribeToStateChange('hi')).toThrow()
+			expect(() => (monitor as any).subscribeToStateChange({})).toThrow()
 		})
 
 		it('throws on bad handlerIds', () => {
@@ -39,10 +44,10 @@ describe('DragDropMonitor', () => {
 				monitor.subscribeToStateChange(() => {}, { handlerIds: ['hi'] }),
 			).not.toThrow()
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: {} }),
+				monitor.subscribeToStateChange(() => {}, { handlerIds: {} as any}),
 			).toThrow()
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: () => {} }),
+				monitor.subscribeToStateChange(() => {}, { handlerIds: (() => {}) as any }),
 			).toThrow()
 		})
 
@@ -541,11 +546,10 @@ describe('DragDropMonitor', () => {
 	describe('offset change subscription', () => {
 		it('throws on bad listener', () => {
 			expect(() => monitor.subscribeToOffsetChange(() => {})).not.toThrow()
-
-			expect(() => monitor.subscribeToOffsetChange()).toThrow()
-			expect(() => monitor.subscribeToOffsetChange(42)).toThrow()
-			expect(() => monitor.subscribeToOffsetChange('hi')).toThrow()
-			expect(() => monitor.subscribeToOffsetChange({})).toThrow()
+			expect(() => (monitor as any).subscribeToOffsetChange()).toThrow()
+			expect(() => (monitor as any).subscribeToOffsetChange(42)).toThrow()
+			expect(() => (monitor as any).subscribeToOffsetChange('hi')).toThrow()
+			expect(() => (monitor as any).subscribeToOffsetChange({})).toThrow()
 		})
 
 		it('allows to unsubscribe', () => {
@@ -604,7 +608,7 @@ describe('DragDropMonitor', () => {
 
 			backend.simulateBeginDrag([sourceAId, sourceBId, sourceCId, sourceDId], {
 				clientOffset: { x: 0, y: 0 },
-				getSourceClientOffset: sourceId =>
+				getSourceClientOffset: (sourceId: string) =>
 					sourceId === sourceCId ? { x: 42, y: 0 } : { x: 0, y: 0 },
 			})
 
