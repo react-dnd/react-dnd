@@ -1,21 +1,18 @@
 var path = require('path')
 var webpack = require('webpack')
-var resolvers = require('../scripts/resolvers')
 
 var isDev = process.env.NODE_ENV !== 'production'
 const root = path.join(__dirname, '..', '..', '..')
 
 module.exports = {
 	entry: path.join(__dirname, 'renderPath.js'),
-
+	mode: isDev ? 'development' : 'production',
 	output: {
 		path: path.join(__dirname, '..', '__site_prerender__'),
 		filename: 'renderPath.js',
 		libraryTarget: 'commonjs2',
 	},
-
 	target: 'node',
-
 	module: {
 		rules: [
 			{
@@ -90,7 +87,6 @@ module.exports = {
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			__DEV__: JSON.stringify(isDev || true),
 		}),
-		resolvers.resolveHasteDefines,
 		...(process.env.NODE_ENV === 'production'
 			? [
 					new webpack.optimize.UglifyJsPlugin({

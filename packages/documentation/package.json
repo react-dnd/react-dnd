@@ -11,7 +11,6 @@
 		"babel-loader": "^7.1.4",
 		"babel-register": "^6.24.1",
 		"css-loader": "^0.28.11",
-		"extract-text-webpack-plugin": "^2.0.0",
 		"faker": "^3.1.0",
 		"file-loader": "^1.1.11",
 		"html-loader": "^0.5.5",
@@ -32,6 +31,7 @@
 		"ts-loader": "^4.2.0",
 		"url-loader": "^1.0.1",
 		"webpack": "^4.6.0",
-		"webpack-dev-server": "^2.5.1"
+		"webpack-cli": "^2.1.2",
+		"webpack-dev-server": "^3.1.3"
 	}
 }

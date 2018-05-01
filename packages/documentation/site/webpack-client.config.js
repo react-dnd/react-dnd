@@ -1,12 +1,11 @@
 var path = require('path')
 var webpack = require('webpack')
-var resolvers = require('../scripts/resolvers')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var isDev = process.env.NODE_ENV !== 'production'
 const root = path.join(__dirname, '..', '..', '..')
 
 module.exports = {
+	mode: isDev ? 'development' : 'production',
 	devtool: isDev ? 'cheap-eval-source-map' : 'source-map',
 
 	entry: [path.join(__dirname, 'client.js')].concat(
@@ -44,24 +43,36 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: isDev
-					? ['react-hot-loader/webpack', 'babel-loader']
+					? [
+							{
+								loader: 'babel-loader',
+								options: {
+									babelrc: true,
+									plugins: ['react-hot-loader/babel'],
+								},
+							},
+					  ]
 					: ['babel-loader'],
 			},
 			{
 				test: /\.ts$/,
 				exclude: /node_modules/,
-				use: isDev ? ['react-hot-loader/webpack', 'ts-loader'] : ['ts-loader'],
+				use: isDev
+					? [
+							{
+								loader: 'babel-loader',
+								options: {
+									babelrc: true,
+									plugins: ['react-hot-loader/babel'],
+								},
+							},
+							'ts-loader',
+					  ]
+					: ['ts-loader'],
 			},
 			{
 				test: /\.less$/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: [
-						'css-loader',
-						path.join(__dirname, '../scripts/cssTransformLoader'),
-						'less-loader',
-					],
-				}),
+				use: ['style-loader', 'css-loader', 'less-loader'],
 			},
 			{
 				test: /\.png$/,
@@ -99,12 +110,10 @@ module.exports = {
 		},
 	},
 	plugins: [
-		new ExtractTextPlugin(isDev ? '[name].css' : '[name]-[hash].css'),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			__DEV__: JSON.stringify(isDev || true),
 		}),
-		resolvers.resolveHasteDefines,
 	],
 }
 
