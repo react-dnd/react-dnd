@@ -105,7 +105,7 @@ export default function DragLayer(collect, options = {}) {
 
 			getCurrentState() {
 				const monitor = this.manager.getMonitor()
-				return collect(monitor)
+				return collect(monitor, this.props)
 			}
 
 			render() {

@@ -3,9 +3,8 @@ dist
 lib
 .DS_Store
 .idea
-*-debug.log
 __site__
 __site_prerender__
 coverage
 test-results.xml
-*-debug.log
+*-*.log
