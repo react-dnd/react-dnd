@@ -1,3 +1,4 @@
+import createTestBackend from 'react-dnd-test-backend'
 import isString from 'lodash/isString'
 import * as Types from './types'
 import { NormalSource, NonDraggableSource, BadItemSource } from './sources'
@@ -8,7 +9,7 @@ import {
 	BadResultTarget,
 	TransformResultTarget,
 } from './targets'
-import { DragDropManager, createTestBackend } from '../src'
+import { DragDropManager } from '../index'
 
 describe('DragDropManager', () => {
 	let manager
@@ -16,7 +17,7 @@ describe('DragDropManager', () => {
 	let registry
 
 	beforeEach(() => {
-		manager = new DragDropManager(createTestBackend)
+		manager = new DragDropManager(createTestBackend as any)
 		backend = manager.getBackend()
 		registry = manager.getRegistry()
 	})

@@ -1,9 +1,10 @@
 import { BEGIN_DRAG, HOVER, END_DRAG, DROP } from '../actions/dragDrop'
+import { XYCoord } from '../interfaces'
 
 export interface State {
-	initialSourceClientOffset: number
-	initialClientOffset: number
-	clientOffset: number
+	initialSourceClientOffset: XYCoord | null
+	initialClientOffset: XYCoord | null
+	clientOffset: XYCoord | null
 }
 
 const initialState: State = {
@@ -12,7 +13,7 @@ const initialState: State = {
 	clientOffset: null,
 }
 
-function areOffsetsEqual(offsetA, offsetB) {
+function areOffsetsEqual(offsetA: XYCoord | null, offsetB: XYCoord | null) {
 	if (offsetA === offsetB) {
 		return true
 	}
@@ -21,7 +22,10 @@ function areOffsetsEqual(offsetA, offsetB) {
 	)
 }
 
-export default function dragOffset(state: State = initialState, action) {
+export default function dragOffset(
+	state: State = initialState,
+	action: { type: string; sourceClientOffset: XYCoord; clientOffset: XYCoord },
+) {
 	switch (action.type) {
 		case BEGIN_DRAG:
 			return {
@@ -45,7 +49,7 @@ export default function dragOffset(state: State = initialState, action) {
 	}
 }
 
-export function getSourceClientOffset(state) {
+export function getSourceClientOffset(state: State) {
 	const { clientOffset, initialClientOffset, initialSourceClientOffset } = state
 	if (!clientOffset || !initialClientOffset || !initialSourceClientOffset) {
 		return null
@@ -56,7 +60,7 @@ export function getSourceClientOffset(state) {
 	}
 }
 
-export function getDifferenceFromInitialOffset(state) {
+export function getDifferenceFromInitialOffset(state: State) {
 	const { clientOffset, initialClientOffset } = state
 	if (!clientOffset || !initialClientOffset) {
 		return null

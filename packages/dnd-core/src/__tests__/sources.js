@@ -1,4 +1,4 @@
-import { DragSource } from '../src'
+import { DragSource } from '..'
 
 export class NormalSource extends DragSource {
 	constructor(item) {

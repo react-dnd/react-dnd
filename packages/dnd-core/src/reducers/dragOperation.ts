@@ -10,13 +10,13 @@ import {
 import { REMOVE_TARGET } from '../actions/registry'
 
 export interface State {
-	itemType: string
+	itemType: string | null
 	item: any
-	sourceId: string
+	sourceId: string | null
 	targetIds: string[]
 	dropResult: any
 	didDrop: boolean
-	isSourcePublic: boolean
+	isSourcePublic: boolean | null
 }
 
 const initialState: State = {
@@ -29,7 +29,19 @@ const initialState: State = {
 	isSourcePublic: null,
 }
 
-export default function dragOperation(state: State = initialState, action) {
+export default function dragOperation(
+	state: State = initialState,
+	action: {
+		type: string
+		itemType: string
+		item: any
+		sourceId: string
+		targetId: string
+		targetIds: string[]
+		isSourcePublic: boolean
+		dropResult: any
+	},
+) {
 	switch (action.type) {
 		case BEGIN_DRAG:
 			return {

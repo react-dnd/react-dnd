@@ -9,15 +9,19 @@ import {
 } from './reducers/dragOffset'
 import { areDirty } from './reducers/dirtyHandlerIds'
 import { State } from './reducers'
+import { DragDropMonitor, Listener } from './interfaces'
 
-export default class DragDropMonitor {
+export default class DragDropMonitorImpl implements DragDropMonitor {
 	public registry: HandlerRegistry
 
 	constructor(private store: Store<State>) {
 		this.registry = new HandlerRegistry(store)
 	}
 
-	subscribeToStateChange(listener, options = { handlerIds: undefined }) {
+	public subscribeToStateChange(
+		listener: Listener,
+		options: { handlerIds: string[] | undefined } = { handlerIds: undefined },
+	) {
 		const { handlerIds } = options
 		invariant(typeof listener === 'function', 'listener must be a function.')
 		invariant(
@@ -46,7 +50,7 @@ export default class DragDropMonitor {
 		return this.store.subscribe(handleChange)
 	}
 
-	subscribeToOffsetChange(listener) {
+	public subscribeToOffsetChange(listener: Listener) {
 		invariant(typeof listener === 'function', 'listener must be a function.')
 
 		let previousState = this.store.getState().dragOffset
@@ -63,7 +67,7 @@ export default class DragDropMonitor {
 		return this.store.subscribe(handleChange)
 	}
 
-	canDragSource(sourceId) {
+	public canDragSource(sourceId: string): boolean {
 		const source = this.registry.getSource(sourceId)
 		invariant(source, 'Expected to find a valid source.')
 
@@ -74,7 +78,7 @@ export default class DragDropMonitor {
 		return source.canDrag(this, sourceId)
 	}
 
-	canDropOnTarget(targetId) {
+	public canDropOnTarget(targetId: string): boolean {
 		const target = this.registry.getTarget(targetId)
 		invariant(target, 'Expected to find a valid target.')
 
@@ -89,11 +93,11 @@ export default class DragDropMonitor {
 		)
 	}
 
-	isDragging() {
+	public isDragging() {
 		return Boolean(this.getItemType())
 	}
 
-	isDraggingSource(sourceId) {
+	public isDraggingSource(sourceId: string): boolean {
 		const source = this.registry.getSource(sourceId, true)
 		invariant(source, 'Expected to find a valid source.')
 
@@ -110,7 +114,7 @@ export default class DragDropMonitor {
 		return source.isDragging(this, sourceId)
 	}
 
-	isOverTarget(targetId, options = { shallow: false }) {
+	public isOverTarget(targetId: string, options = { shallow: false }) {
 		const { shallow } = options
 		if (!this.isDragging()) {
 			return false
@@ -118,7 +122,7 @@ export default class DragDropMonitor {
 
 		const targetType = this.registry.getTargetType(targetId)
 		const draggedItemType = this.getItemType()
-		if (!matchesType(targetType, draggedItemType)) {
+		if (draggedItemType && !matchesType(targetType, draggedItemType)) {
 			return false
 		}
 
@@ -135,51 +139,51 @@ export default class DragDropMonitor {
 		}
 	}
 
-	getItemType() {
+	public getItemType() {
 		return this.store.getState().dragOperation.itemType
 	}
 
-	getItem() {
+	public getItem() {
 		return this.store.getState().dragOperation.item
 	}
 
-	getSourceId() {
+	public getSourceId() {
 		return this.store.getState().dragOperation.sourceId
 	}
 
-	getTargetIds() {
+	public getTargetIds() {
 		return this.store.getState().dragOperation.targetIds
 	}
 
-	getDropResult() {
+	public getDropResult() {
 		return this.store.getState().dragOperation.dropResult
 	}
 
-	didDrop() {
+	public didDrop() {
 		return this.store.getState().dragOperation.didDrop
 	}
 
-	isSourcePublic() {
+	public isSourcePublic() {
 		return this.store.getState().dragOperation.isSourcePublic
 	}
 
-	getInitialClientOffset() {
+	public getInitialClientOffset() {
 		return this.store.getState().dragOffset.initialClientOffset
 	}
 
-	getInitialSourceClientOffset() {
+	public getInitialSourceClientOffset() {
 		return this.store.getState().dragOffset.initialSourceClientOffset
 	}
 
-	getClientOffset() {
+	public getClientOffset() {
 		return this.store.getState().dragOffset.clientOffset
 	}
 
-	getSourceClientOffset() {
+	public getSourceClientOffset() {
 		return getSourceClientOffset(this.store.getState().dragOffset)
 	}
 
-	getDifferenceFromInitialOffset() {
+	public getDifferenceFromInitialOffset() {
 		return getDifferenceFromInitialOffset(this.store.getState().dragOffset)
 	}
 }

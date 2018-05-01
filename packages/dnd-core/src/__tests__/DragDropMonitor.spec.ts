@@ -1,3 +1,4 @@
+import createTestBackend from 'react-dnd-test-backend'
 import * as Types from './types'
 import { NormalSource, NonDraggableSource, NumberSource } from './sources'
 import {
@@ -5,7 +6,7 @@ import {
 	NonDroppableTarget,
 	TargetWithNoDropResult,
 } from './targets'
-import { DragDropManager, createTestBackend } from '../src'
+import { DragDropManager } from '../index'
 
 describe('DragDropMonitor', () => {
 	let manager
@@ -14,7 +15,7 @@ describe('DragDropMonitor', () => {
 	let monitor
 
 	beforeEach(() => {
-		manager = new DragDropManager(createTestBackend)
+		manager = new DragDropManager(createTestBackend as any)
 		backend = manager.getBackend()
 		registry = manager.getRegistry()
 		monitor = manager.getMonitor()

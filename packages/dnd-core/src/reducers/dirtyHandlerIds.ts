@@ -14,15 +14,15 @@ import {
 	REMOVE_TARGET,
 } from '../actions/registry'
 
-const NONE = []
-const ALL = []
+const NONE: string[] = []
+const ALL: string[] = []
 
 export type State = string[]
 
 export default function dirtyHandlerIds(
 	state: State = NONE,
-	action,
-	dragOperation,
+	action: { type: string; targetIds: string[] },
+	dragOperation: { targetIds: string[] },
 ) {
 	switch (action.type) {
 		case HOVER:
@@ -75,7 +75,7 @@ export default function dirtyHandlerIds(
 	return result
 }
 
-export function areDirty(state, handlerIds) {
+export function areDirty(state: string[], handlerIds: string[] | undefined) {
 	if (state === NONE) {
 		return false
 	}

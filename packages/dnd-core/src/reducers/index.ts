@@ -7,14 +7,14 @@ import dirtyHandlerIds, {
 import stateId, { State as StateIdState } from './stateId'
 
 export interface State {
-	dirtyHandlerIds?: DirtyHandlerIdsState
-	dragOffset?: DragOffsetState
-	refCount?: RefCountState
-	dragOperation?: DragOperationState
-	stateId?: StateIdState
+	dirtyHandlerIds: DirtyHandlerIdsState
+	dragOffset: DragOffsetState
+	refCount: RefCountState
+	dragOperation: DragOperationState
+	stateId: StateIdState
 }
 
-export default function reduce(state: State = {}, action) {
+export default function reduce(state: State = {} as State, action: any) {
 	return {
 		dirtyHandlerIds: dirtyHandlerIds(
 			state.dirtyHandlerIds,

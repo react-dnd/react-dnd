@@ -14,7 +14,8 @@
 		"prepublish": "npm run test"
 	},
 	"dependencies": {
-		"dnd-core": "^2.6.0"
+		"dnd-core": "^2.6.0",
+		"lodash": "^4.17.10"
 	},
 	"peerDependencies": {
 		"react-dnd": "^2.2.0"

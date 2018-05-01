@@ -58,13 +58,25 @@
 		"eslint-plugin-jsx-a11y": "^3.0.2",
 		"eslint-plugin-react": "^6.9.0",
 		"husky": "^0.14.3",
-		"jest": "^20.0.4",
+		"jest": "^22.4.3",
+		"jest-environment-jsdom": "^22.4.3",
 		"lerna": "^2.9.0",
 		"lint-staged": "^4.2.3",
 		"npm-run-all": "^4.1.2",
-		"prettier": "^1.11.1"
+		"prettier": "^1.11.1",
+		"ts-jest": "^22.4.4"
 	},
 	"jest": {
+		"moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+		"collectCoverageFrom": ["packages/*/src/**/*.{ts,tsx}"],
+		"testMatch": [
+			"**/__tests__/**/?(*.)(spec|test).js(x|)",
+			"**/__tests__/**/?(*.)(spec|test).ts(x|)"
+		],
+		"transform": {
+			"^.+\\.(ts|tsx)$": "ts-jest",
+			"^.+\\.(js|jsx)$": "babel-jest"
+		},
 		"moduleNameMapper": {
 			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
 			"react-dnd-html5-backend":

@@ -1,8 +1,9 @@
 import { createStore, Store } from 'redux'
 import reducer from './reducers'
-import * as dragDropActions from './actions/dragDrop'
+import dragDropActions from './actions/dragDrop'
 import DragDropMonitor from './DragDropMonitor'
 import {
+	ActionCreator,
 	Backend,
 	BackendFactory,
 	DragDropManager,
@@ -44,7 +45,7 @@ export default class DragDropManagerImpl<Context>
 		return this.context
 	}
 
-	public getMonitor() {
+	public getMonitor(): DragDropMonitor {
 		return this.monitor
 	}
 
@@ -56,12 +57,12 @@ export default class DragDropManagerImpl<Context>
 		return this.monitor.registry
 	}
 
-	public getActions() {
+	public getActions(): DragDropActions {
 		const manager = this
 		const { dispatch } = this.store
 
-		function bindActionCreator(actionCreator) {
-			return (...args) => {
+		function bindActionCreator(actionCreator: ActionCreator) {
+			return (...args: any[]) => {
 				const action = actionCreator.apply(manager, args)
 				if (typeof action !== 'undefined') {
 					dispatch(action)
@@ -69,12 +70,19 @@ export default class DragDropManagerImpl<Context>
 			}
 		}
 
-		return Object.keys(dragDropActions)
-			.filter(key => typeof dragDropActions[key] === 'function')
-			.reduce((boundActions, key) => {
-				const action = dragDropActions[key]
-				boundActions[key] = bindActionCreator(action) // eslint-disable-line no-param-reassign
+		const actions = dragDropActions(this)
+
+		return Object.keys(actions).reduce(
+			(boundActions: DragDropActions, key: string) => {
+				const action: ActionCreator = (actions as any)[key] as ActionCreator
+				;(boundActions as any)[key] = bindActionCreator(action) // eslint-disable-line no-param-reassign
 				return boundActions
-			}, {}) as DragDropActions
+			},
+			{} as DragDropActions,
+		)
+	}
+
+	public dispatch(action: any) {
+		this.store.dispatch(action)
 	}
 }
