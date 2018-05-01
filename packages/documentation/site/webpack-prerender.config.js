@@ -36,6 +36,11 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
+				test: /\.ts$/,
+				use: 'ts-loader',
+				exclude: /node_modules/,
+			},
+			{
 				test: /\.css$/,
 				use: 'null-loader',
 			},
@@ -61,6 +66,7 @@ module.exports = {
 	},
 
 	resolve: {
+		extensions: ['.js', '.ts'],
 		modules: [
 			path.join(__dirname, '..', 'node_modules'),
 			path.join(root, 'node_modules'),

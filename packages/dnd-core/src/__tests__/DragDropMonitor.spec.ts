@@ -21,7 +21,7 @@ describe.only('DragDropMonitor', () => {
 
 	beforeEach(() => {
 		manager = new DragDropManager(createTestBackend as any)
-		backend = manager.getBackend()
+		backend = (manager.getBackend() as any) as ITestBackend
 		registry = manager.getRegistry()
 		monitor = manager.getMonitor()
 	})

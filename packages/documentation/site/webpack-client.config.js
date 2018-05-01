@@ -48,6 +48,11 @@ module.exports = {
 					: ['babel-loader'],
 			},
 			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				use: isDev ? ['react-hot-loader/webpack', 'ts-loader'] : ['ts-loader'],
+			},
+			{
 				test: /\.less$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
@@ -75,6 +80,7 @@ module.exports = {
 		],
 	},
 	resolve: {
+		extensions: ['.js', '.ts'],
 		modules: [
 			path.join(__dirname, '..', 'node_modules'),
 			path.join(root, 'node_modules'),

@@ -11,7 +11,8 @@
 	"scripts": {
 		"clean": "rimraf lib dist",
 		"bundle:unmin": "webpack --output-filename=dist/ReactDnD.js",
-		"bundle:min": "webpack --output-filename=dist/ReactDnD.min.js --optimize-minimize",
+		"bundle:min":
+			"webpack --output-filename=dist/ReactDnD.min.js --optimize-minimize",
 		"babel": "babel src --out-dir lib",
 		"build": "run-p bundle:* babel",
 		"test": "run-s clean build",
@@ -31,7 +32,7 @@
 		"npm-run-all": "^4.1.2",
 		"react": "^16.2.0",
 		"rimraf": "^2.6.2",
-		"webpack": "^3.1.0"
+		"webpack": "^4.6.0"
 	},
 	"peerDependencies": {
 		"react": "*"

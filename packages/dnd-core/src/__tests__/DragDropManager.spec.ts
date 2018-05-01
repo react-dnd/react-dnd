@@ -106,36 +106,36 @@ describe('DragDropManager', () => {
 		})
 
 		it('calls setup() and teardown() on backend', () => {
-			expect(backend.didCallSetup).toEqual(undefined)
-			expect(backend.didCallTeardown).toEqual(undefined)
+			expect(backend.didCallSetup).toEqual(false)
+			expect(backend.didCallTeardown).toEqual(false)
 
 			const sourceId = registry.addSource(Types.FOO, new NormalSource())
 			expect(backend.didCallSetup).toEqual(true)
-			expect(backend.didCallTeardown).toEqual(undefined)
-			backend.didCallSetup = undefined
-			backend.didCallTeardown = undefined
+			expect(backend.didCallTeardown).toEqual(false)
+			backend.didCallSetup = false
+			backend.didCallTeardown = false
 
 			const targetId = registry.addTarget(Types.FOO, new NormalTarget())
-			expect(backend.didCallSetup).toEqual(undefined)
-			expect(backend.didCallTeardown).toEqual(undefined)
-			backend.didCallSetup = undefined
-			backend.didCallTeardown = undefined
+			expect(backend.didCallSetup).toEqual(false)
+			expect(backend.didCallTeardown).toEqual(false)
+			backend.didCallSetup = false
+			backend.didCallTeardown = false
 
 			registry.removeSource(sourceId)
-			expect(backend.didCallSetup).toEqual(undefined)
-			expect(backend.didCallTeardown).toEqual(undefined)
-			backend.didCallSetup = undefined
-			backend.didCallTeardown = undefined
+			expect(backend.didCallSetup).toEqual(false)
+			expect(backend.didCallTeardown).toEqual(false)
+			backend.didCallSetup = false
+			backend.didCallTeardown = false
 
 			registry.removeTarget(targetId)
-			expect(backend.didCallSetup).toEqual(undefined)
+			expect(backend.didCallSetup).toEqual(false)
 			expect(backend.didCallTeardown).toEqual(true)
-			backend.didCallSetup = undefined
-			backend.didCallTeardown = undefined
+			backend.didCallSetup = false
+			backend.didCallTeardown = false
 
 			registry.addTarget(Types.BAR, new NormalTarget())
 			expect(backend.didCallSetup).toEqual(true)
-			expect(backend.didCallTeardown).toEqual(undefined)
+			expect(backend.didCallTeardown).toEqual(false)
 		})
 
 		it('returns string handles', () => {
@@ -209,12 +209,14 @@ describe('DragDropManager', () => {
 				const targetId = registry.addTarget(Types.FOO, target)
 
 				expect(() => (backend as any).simulateBeginDrag('yo')).toThrow()
-				expect(() => backend.simulateBeginDrag(null)).toThrow()
+				expect(() => (backend as any).simulateBeginDrag(null)).toThrow()
 				expect(() => (backend as any).simulateBeginDrag(sourceId)).toThrow()
-				expect(() => backend.simulateBeginDrag([null])).toThrow()
+				expect(() => (backend as any).simulateBeginDrag([null])).toThrow()
 				expect(() => backend.simulateBeginDrag(['yo'])).toThrow()
 				expect(() => backend.simulateBeginDrag([targetId])).toThrow()
-				expect(() => backend.simulateBeginDrag([null, sourceId])).toThrow()
+				expect(() =>
+					(backend as any).simulateBeginDrag([null, sourceId]),
+				).toThrow()
 				expect(() => backend.simulateBeginDrag([targetId, sourceId])).toThrow()
 
 				registry.removeSource(sourceId)
@@ -662,7 +664,7 @@ describe('DragDropManager', () => {
 				const targetId = registry.addTarget(Types.BAR, target)
 
 				backend.simulateBeginDrag([sourceId])
-				expect(() => backend.simulateHover(null)).toThrow()
+				expect(() => (backend as any).simulateHover(null)).toThrow()
 				expect(() => (backend as any).simulateHover('yo')).toThrow()
 				expect(() => (backend as any).simulateHover(targetId)).toThrow()
 			})
@@ -674,7 +676,7 @@ describe('DragDropManager', () => {
 				const targetId = registry.addTarget(Types.BAR, target)
 
 				backend.simulateBeginDrag([sourceId])
-				expect(() => backend.simulateHover([targetId, null])).toThrow()
+				expect(() => (backend as any).simulateHover([targetId, null])).toThrow()
 				expect(() => backend.simulateHover([targetId, 'yo'])).toThrow()
 				expect(() => backend.simulateHover([targetId, sourceId])).toThrow()
 			})
