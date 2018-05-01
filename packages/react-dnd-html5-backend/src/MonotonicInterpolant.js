@@ -4,7 +4,7 @@
 */
 export default class MonotonicInterpolant {
 	constructor(xs, ys) {
-		const length = xs.length
+		const { length } = xs
 
 		// Rearrange xs and ys so that xs is sorted
 		const indexes = []

@@ -7,11 +7,9 @@ export default class FileList extends Component {
 	}
 
 	list(files) {
-		return files.map(file => (
-			<li key={file.name}>{`'${file.name}' of size '${file.size}' and type '${
-				file.type
-			}'`}</li>
-		))
+		const label = file =>
+			`'${file.name}' of size '${file.size}' and type '${file.type}'`
+		return files.map(file => <li key={file.name}>{label(file)}</li>)
 	}
 
 	render() {
