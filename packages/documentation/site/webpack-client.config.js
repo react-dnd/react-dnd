@@ -7,7 +7,6 @@ const root = path.join(__dirname, '..', '..', '..')
 module.exports = {
 	mode: isDev ? 'development' : 'production',
 	devtool: isDev ? 'cheap-eval-source-map' : 'source-map',
-
 	entry: [path.join(__dirname, 'client.js')].concat(
 		isDev
 			? [
@@ -115,14 +114,4 @@ module.exports = {
 			__DEV__: JSON.stringify(isDev || true),
 		}),
 	],
-}
-
-if (process.env.NODE_ENV === 'production') {
-	module.exports.plugins.push(
-		new webpack.optimize.UglifyJsPlugin({
-			compressor: {
-				warnings: false,
-			},
-		}),
-	)
 }

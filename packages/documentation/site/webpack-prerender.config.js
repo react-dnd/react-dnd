@@ -87,14 +87,5 @@ module.exports = {
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			__DEV__: JSON.stringify(isDev || true),
 		}),
-		...(process.env.NODE_ENV === 'production'
-			? [
-					new webpack.optimize.UglifyJsPlugin({
-						compressor: {
-							warnings: false,
-						},
-					}),
-			  ]
-			: []),
 	],
 }
