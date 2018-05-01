@@ -7,6 +7,9 @@ import shallowEqual from './utils/shallowEqual'
 import shallowEqualScalar from './utils/shallowEqualScalar'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 
+const isClassComponent = Comp =>
+	Boolean(Comp && Comp.prototype && typeof Comp.prototype.render === 'function')
+
 export default function DragLayer(collect, options = {}) {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments) // eslint-disable-line prefer-rest-params
 	invariant(
@@ -106,15 +109,15 @@ export default function DragLayer(collect, options = {}) {
 			}
 
 			render() {
-				return (
-					<DecoratedComponent
-						{...this.props}
-						{...this.state}
-						ref={child => {
-							this.child = child
-						}}
-					/>
-				)
+				return React.createElement(DecoratedComponent, {
+					...this.props,
+					...this.state,
+					ref: isClassComponent(DecoratedComponent)
+						? child => {
+								this.child = child
+							}
+						: null,
+				})
 			}
 		}
 
