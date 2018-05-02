@@ -72,8 +72,7 @@
 		"moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
 		"collectCoverageFrom": ["packages/*/src/**/*.{ts,tsx}"],
 		"testMatch": [
-			"<rootDir>/packages/dnd-core/**/__tests__/**/?(*.)(spec|test).js(x|)",
-			"<rootDir>/packages/dnd-core/**/__tests__/**/?(*.)(spec|test).ts(x|)"
+			"<rootDir>/packages/**/__tests__/**/?(*.)(spec|test).(t|j)s(x|)"
 		],
 		"transform": {
 			"^.+\\.(ts|tsx)$": "ts-jest",

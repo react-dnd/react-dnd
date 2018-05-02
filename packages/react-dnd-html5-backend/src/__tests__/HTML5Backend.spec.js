@@ -1,4 +1,4 @@
-import HTML5Backend from '../src/HTML5Backend'
+import HTML5Backend from '../HTML5Backend'
 
 describe('The HTML5 Backend', () => {
 	describe('window injection', () => {
