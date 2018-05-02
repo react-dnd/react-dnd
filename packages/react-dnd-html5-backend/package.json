@@ -32,6 +32,7 @@
 		"webpack": "^4.6.0"
 	},
 	"dependencies": {
+		"dnd-core": "^2.6.0",
 		"autobind-decorator": "^2.1.0",
 		"lodash": "^4.2.0",
 		"shallowequal": "^1.0.2"
