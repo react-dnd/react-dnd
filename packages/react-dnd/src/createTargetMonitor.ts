@@ -6,7 +6,7 @@ import {
 	IXYCoord,
 } from 'dnd-core'
 import { IDropTargetMonitor } from './interfaces'
-import { IDropTarget } from '../../dnd-core/lib/interfaces'
+import { IDropTarget } from 'dnd-core'
 
 let isCallingCanDrop = false
 
