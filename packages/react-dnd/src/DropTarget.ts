@@ -1,5 +1,7 @@
+import React, { StatelessComponent, Component, ComponentClass } from 'react'
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
+import { IBackend } from 'dnd-core'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerTarget from './registerTarget'
@@ -8,11 +10,19 @@ import createTargetMonitor from './createTargetMonitor'
 import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
 
-export default function DropTarget(type, spec, collect, options = {}) {
+export default function DropTarget(
+	type: any,
+	spec: any,
+	collect: any,
+	options = {},
+) {
 	checkDecoratorArguments(
 		'DropTarget',
 		'type, spec, collect[, options]',
-		...arguments, // eslint-disable-line prefer-rest-params
+		type,
+		spec,
+		collect,
+		options, // eslint-disable-line prefer-rest-params
 	)
 	let getType = type
 	if (typeof type !== 'function') {
@@ -51,10 +61,11 @@ export default function DropTarget(type, spec, collect, options = {}) {
 		collect,
 	)
 
-	return function decorateTarget(DecoratedComponent) {
+	return function decorateTarget(DecoratedComponent: Component) {
 		return decorateHandler({
-			connectBackend: (backend, targetId) =>
-				backend.connectDropTarget(targetId),
+			connectBackend: (backend: IBackend, targetId: string) => {
+				backend.connectDropTarget(targetId)
+			},
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,

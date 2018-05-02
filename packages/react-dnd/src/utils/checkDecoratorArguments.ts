@@ -1,7 +1,7 @@
 export default function checkDecoratorArguments(
-	functionName,
-	signature,
-	...args
+	functionName: string,
+	signature: string,
+	...args: any[]
 ) {
 	if (process.env.NODE_ENV !== 'production') {
 		for (let i = 0; i < args.length; i += 1) {

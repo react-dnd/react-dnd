@@ -1,17 +1,21 @@
 import invariant from 'invariant'
+import { IDragDropManager, IDragDropMonitor, XYCoord } from 'dnd-core'
 
 let isCallingCanDrop = false
 
-class TargetMonitor {
-	constructor(manager) {
+export class TargetMonitor {
+	private internalMonitor: IDragDropMonitor
+	private targetId: string | undefined
+
+	constructor(manager: IDragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	receiveHandlerId(targetId) {
+	public receiveHandlerId(targetId: string) {
 		this.targetId = targetId
 	}
 
-	canDrop() {
+	public canDrop() {
 		invariant(
 			!isCallingCanDrop,
 			'You may not call monitor.canDrop() inside your canDrop() implementation. ' +
@@ -20,53 +24,53 @@ class TargetMonitor {
 
 		try {
 			isCallingCanDrop = true
-			return this.internalMonitor.canDropOnTarget(this.targetId)
+			return this.internalMonitor.canDropOnTarget(this.targetId as string)
 		} finally {
 			isCallingCanDrop = false
 		}
 	}
 
-	isOver(options) {
-		return this.internalMonitor.isOverTarget(this.targetId, options)
+	public isOver(options: any) {
+		return this.internalMonitor.isOverTarget(this.targetId as string, options)
 	}
 
-	getItemType() {
+	public getItemType() {
 		return this.internalMonitor.getItemType()
 	}
 
-	getItem() {
+	public getItem() {
 		return this.internalMonitor.getItem()
 	}
 
-	getDropResult() {
+	public getDropResult() {
 		return this.internalMonitor.getDropResult()
 	}
 
-	didDrop() {
+	public didDrop() {
 		return this.internalMonitor.didDrop()
 	}
 
-	getInitialClientOffset() {
+	public getInitialClientOffset() {
 		return this.internalMonitor.getInitialClientOffset()
 	}
 
-	getInitialSourceClientOffset() {
+	public getInitialSourceClientOffset() {
 		return this.internalMonitor.getInitialSourceClientOffset()
 	}
 
-	getSourceClientOffset() {
+	public getSourceClientOffset() {
 		return this.internalMonitor.getSourceClientOffset()
 	}
 
-	getClientOffset() {
+	public getClientOffset() {
 		return this.internalMonitor.getClientOffset()
 	}
 
-	getDifferenceFromInitialOffset() {
+	public getDifferenceFromInitialOffset() {
 		return this.internalMonitor.getDifferenceFromInitialOffset()
 	}
 }
 
-export default function createTargetMonitor(manager) {
+export default function createTargetMonitor(manager: IDragDropManager<any>) {
 	return new TargetMonitor(manager)
 }

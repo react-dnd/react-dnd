@@ -1,5 +1,6 @@
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
+import { IBackend, BackendFactory } from 'dnd-core'
 import {
 	CHILD_CONTEXT_TYPES,
 	createChildContext,
@@ -10,27 +11,36 @@ import {
  * This class is a React-Component based version of the DragDropContext.
  * This is an alternative to decorating an application component with an ES7 decorator.
  */
-export default class DragDropContextProvider extends Component {
+export interface DragDropContextProviderProps {
+	backend: BackendFactory
+	// TODO: Replace with generic context, see TODO below
+	window: any
+}
+
+export default class DragDropContextProvider extends Component<
+	DragDropContextProviderProps
+> {
 	static propTypes = {
 		backend: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
 		children: PropTypes.element.isRequired,
 		window: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 	}
-
 	static defaultProps = {
 		window: undefined,
 	}
-
 	static childContextTypes = CHILD_CONTEXT_TYPES
-
 	static displayName = 'DragDropContextProvider'
-
 	static contextTypes = {
 		window: PropTypes.object,
 	}
 
-	constructor(props, context) {
+	private backend: BackendFactory
+	private childContext: any
+
+	constructor(props: any, context: any) {
 		super(props, context)
+
+		// TODO: Remove 'window' here to allow for non-dom (e.g. React-Native) environments
 
 		/**
 		 * This property determines which window global to use for creating the DragDropManager.
@@ -54,7 +64,7 @@ export default class DragDropContextProvider extends Component {
 		})
 	}
 
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps(nextProps: any) {
 		if (
 			nextProps.backend !== this.props.backend ||
 			nextProps.window !== this.props.window
@@ -65,11 +75,11 @@ export default class DragDropContextProvider extends Component {
 		}
 	}
 
-	getChildContext() {
+	public getChildContext() {
 		return this.childContext
 	}
 
-	render() {
+	public render() {
 		return Children.only(this.props.children)
 	}
 }

@@ -1,7 +1,7 @@
 import { isValidElement } from 'react'
 import cloneWithRef from './utils/cloneWithRef'
 
-function throwIfCompositeComponentElement(element) {
+function throwIfCompositeComponentElement(element: React.ReactElement<any>) {
 	// Custom components can no longer be wrapped directly in React DnD 2.0
 	// so that we don't need to depend on findDOMNode() from react-dom.
 	if (typeof element.type === 'string') {
@@ -18,7 +18,7 @@ function throwIfCompositeComponentElement(element) {
 	)
 }
 
-function wrapHookToRecognizeElement(hook) {
+function wrapHookToRecognizeElement(hook: Function) {
 	return (elementOrNode = null, options = null) => {
 		// When passed a node, call the hook straight away.
 		if (!isValidElement(elementOrNode)) {
@@ -31,17 +31,16 @@ function wrapHookToRecognizeElement(hook) {
 		// This helps us achieve a neat API where user doesn't even know that refs
 		// are being used under the hood.
 		const element = elementOrNode
-		throwIfCompositeComponentElement(element)
+		throwIfCompositeComponentElement(element as any)
 
 		// When no options are passed, use the hook directly
-		const ref = options ? node => hook(node, options) : hook
-
+		const ref = options ? (node: any) => hook(node, options) : hook
 		return cloneWithRef(element, ref)
 	}
 }
 
-export default function wrapConnectorHooks(hooks) {
-	const wrappedHooks = {}
+export default function wrapConnectorHooks(hooks: any) {
+	const wrappedHooks: any = {}
 
 	Object.keys(hooks).forEach(key => {
 		const hook = hooks[key]

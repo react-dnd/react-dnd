@@ -16,9 +16,9 @@ export enum HandlerRole {
 export interface IBackend {
 	setup(): void
 	teardown(): void
-	connectDragSource(): Unsubscribe
-	connectDragPreview(): Unsubscribe
-	connectDropTarget(): Unsubscribe
+	connectDragSource(sourceId: any, node?: any, options?: any): Unsubscribe
+	connectDragPreview(sourceId: any, node?: any, options?: any): Unsubscribe
+	connectDropTarget(targetId: any, node?: any, options?: any): Unsubscribe
 }
 
 export interface IDragDropMonitor {
@@ -26,41 +26,23 @@ export interface IDragDropMonitor {
 		listener: Listener,
 		options?: { handlerIds: string[] | undefined },
 	): Unsubscribe
-
 	subscribeToOffsetChange(listener: Listener): Unsubscribe
-
 	canDragSource(sourceId: string): boolean
-
 	canDropOnTarget(targetId: string): boolean
-
 	isDragging(): boolean
-
 	isDraggingSource(sourceId: string): boolean
-
 	isOverTarget(targetId: string, options?: { shallow: boolean }): boolean
-
 	getItemType(): string | null
-
 	getItem(): any
-
 	getSourceId(): string | null
-
 	getTargetIds(): string[]
-
 	getDropResult(): any
-
 	didDrop(): boolean
-
 	isSourcePublic(): boolean | null
-
 	getInitialClientOffset(): XYCoord | null
-
 	getInitialSourceClientOffset(): XYCoord | null
-
 	getClientOffset(): XYCoord | null
-
 	getSourceClientOffset(): XYCoord | null
-
 	getDifferenceFromInitialOffset(): XYCoord | null
 }
 
@@ -120,5 +102,5 @@ export interface IDropTarget {
 	drop(monitor: IDragDropMonitor, targetId: string): any
 }
 
-export type ItemType = string | Symbol
+export type ItemType = string | symbol
 export type TargetType = ItemType | ItemType[]

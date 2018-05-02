@@ -1,10 +1,16 @@
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
+import { IDragSource, IDragDropMonitor } from 'dnd-core'
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']
 
-export default function createSourceFactory(spec) {
+export interface ISource extends IDragSource {
+	receiveProps(props: any): void
+	receiveComponent(component: any): void
+}
+
+export default function createSourceFactory(spec: any) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -37,22 +43,21 @@ export default function createSourceFactory(spec) {
 		)
 	})
 
-	class Source {
-		constructor(monitor) {
-			this.monitor = monitor
-			this.props = null
-			this.component = null
-		}
+	class Source implements ISource {
+		private props: any
+		private component: any
 
-		receiveProps(props) {
+		constructor(private monitor: IDragDropMonitor) {}
+
+		public receiveProps(props: any) {
 			this.props = props
 		}
 
-		receiveComponent(component) {
+		public receiveComponent(component: any) {
 			this.component = component
 		}
 
-		canDrag() {
+		public canDrag() {
 			if (!spec.canDrag) {
 				return true
 			}
@@ -60,7 +65,7 @@ export default function createSourceFactory(spec) {
 			return spec.canDrag(this.props, this.monitor)
 		}
 
-		isDragging(globalMonitor, sourceId) {
+		public isDragging(globalMonitor: IDragDropMonitor, sourceId: string) {
 			if (!spec.isDragging) {
 				return sourceId === globalMonitor.getSourceId()
 			}
@@ -68,7 +73,7 @@ export default function createSourceFactory(spec) {
 			return spec.isDragging(this.props, this.monitor)
 		}
 
-		beginDrag() {
+		public beginDrag() {
 			const item = spec.beginDrag(this.props, this.monitor, this.component)
 			if (process.env.NODE_ENV !== 'production') {
 				invariant(
@@ -82,7 +87,7 @@ export default function createSourceFactory(spec) {
 			return item
 		}
 
-		endDrag() {
+		public endDrag() {
 			if (!spec.endDrag) {
 				return
 			}
@@ -91,7 +96,7 @@ export default function createSourceFactory(spec) {
 		}
 	}
 
-	return function createSource(monitor) {
-		return new Source(monitor)
+	return function createSource(monitor: IDragDropMonitor) {
+		return new Source(monitor) as ISource
 	}
 }

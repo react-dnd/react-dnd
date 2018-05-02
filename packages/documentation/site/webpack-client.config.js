@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 
 var isDev = process.env.NODE_ENV !== 'production'
 const root = path.join(__dirname, '..', '..', '..')
@@ -54,7 +55,7 @@ module.exports = {
 					: ['babel-loader'],
 			},
 			{
-				test: /\.ts$/,
+				test: /\.ts(x|)$/,
 				exclude: /node_modules/,
 				use: isDev
 					? [
@@ -90,7 +91,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.js', '.ts'],
+		extensions: ['.js', '.ts', '.tsx'],
 		modules: [
 			path.join(__dirname, '..', 'node_modules'),
 			path.join(root, 'node_modules'),
@@ -112,6 +113,12 @@ module.exports = {
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			__DEV__: JSON.stringify(isDev || true),
+		}),
+		new CircularDependencyPlugin({
+			exclude: /node_modules/,
+			failOnError: false,
+			allowAsyncCycles: false,
+			cwd: process.cwd(),
 		}),
 	],
 }

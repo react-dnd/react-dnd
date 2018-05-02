@@ -1,5 +1,7 @@
+import React, { Component, ComponentClass, StatelessComponent } from 'react'
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
+import { IBackend } from 'dnd-core'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerSource from './registerSource'
@@ -8,13 +10,21 @@ import createSourceMonitor from './createSourceMonitor'
 import createSourceConnector from './createSourceConnector'
 import isValidType from './utils/isValidType'
 
-export default function DragSource(type, spec, collect, options = {}) {
+export default function DragSource(
+	type: string,
+	spec: any,
+	collect: any,
+	options = {},
+) {
 	checkDecoratorArguments(
 		'DragSource',
 		'type, spec, collect[, options]',
-		...arguments, // eslint-disable-line prefer-rest-params
+		type,
+		spec,
+		collect,
+		options, // eslint-disable-line prefer-rest-params
 	)
-	let getType = type
+	let getType: string | (() => string) = type
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type),
@@ -51,10 +61,11 @@ export default function DragSource(type, spec, collect, options = {}) {
 		collect,
 	)
 
-	return function decorateSource(DecoratedComponent) {
+	return function decorateSource(DecoratedComponent: React.Component) {
 		return decorateHandler({
-			connectBackend: (backend, sourceId) =>
-				backend.connectDragSource(sourceId),
+			connectBackend: (backend: IBackend, sourceId: string) => {
+				backend.connectDragSource(sourceId)
+			},
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,
 			registerHandler: registerSource,

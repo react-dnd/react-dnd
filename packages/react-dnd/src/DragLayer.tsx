@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, StatelessComponent, ComponentClass } from 'react'
 import PropTypes from 'prop-types'
 import hoistStatics from 'hoist-non-react-statics'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
-import shallowEqual from 'shallowequal'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
+import { IDragDropManager, Unsubscribe } from 'dnd-core'
+const shallowEqual = require('shallowequal')
 
-export default function DragLayer(collect, options = {}) {
-	checkDecoratorArguments('DragLayer', 'collect[, options]', ...arguments) // eslint-disable-line prefer-rest-params
+export default function DragLayer(collect: any, options: any = {}) {
+	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options) // eslint-disable-line prefer-rest-params
 	invariant(
 		typeof collect === 'function',
 		'Expected "collect" provided as the first argument to DragLayer to be a function that collects props to inject into the component. ',
@@ -21,19 +22,23 @@ export default function DragLayer(collect, options = {}) {
 		options,
 	)
 
-	return function decorateLayer(DecoratedComponent) {
+	return function decorateLayer(DecoratedComponent: ComponentClass) {
 		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-		class DragLayerContainer extends Component {
+		class DragLayerContainer extends React.Component<any> {
 			static DecoratedComponent = DecoratedComponent
-
 			static displayName = `DragLayer(${displayName})`
-
 			static contextTypes = {
 				dragDropManager: PropTypes.object.isRequired,
 			}
+
+			private manager: IDragDropManager<any>
+			private isCurrentlyMounted: boolean = false
+			private unsubscribeFromOffsetChange: Unsubscribe | undefined
+			private unsubscribeFromStateChange: Unsubscribe | undefined
+			private child: any
 
 			getDecoratedComponentInstance() {
 				invariant(
@@ -43,18 +48,18 @@ export default function DragLayer(collect, options = {}) {
 				return this.child
 			}
 
-			shouldComponentUpdate(nextProps, nextState) {
+			shouldComponentUpdate(nextProps: any, nextState: any) {
 				return (
 					!arePropsEqual(nextProps, this.props) ||
 					!shallowEqual(nextState, this.state)
 				)
 			}
 
-			constructor(props, context) {
+			constructor(props: any, context: any) {
 				super(props)
 				this.handleChange = this.handleChange.bind(this)
-
 				this.manager = context.dragDropManager
+
 				invariant(
 					typeof this.manager === 'object',
 					'Could not find the drag and drop manager in the context of %s. ' +
@@ -83,9 +88,14 @@ export default function DragLayer(collect, options = {}) {
 
 			componentWillUnmount() {
 				this.isCurrentlyMounted = false
-
-				this.unsubscribeFromOffsetChange()
-				this.unsubscribeFromStateChange()
+				if (this.unsubscribeFromOffsetChange) {
+					this.unsubscribeFromOffsetChange()
+					this.unsubscribeFromOffsetChange = undefined
+				}
+				if (this.unsubscribeFromStateChange) {
+					this.unsubscribeFromStateChange()
+					this.unsubscribeFromStateChange = undefined
+				}
 			}
 
 			handleChange() {

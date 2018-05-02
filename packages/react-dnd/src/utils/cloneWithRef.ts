@@ -1,7 +1,10 @@
 import invariant from 'invariant'
 import { cloneElement } from 'react'
 
-export default function cloneWithRef(element, newRef) {
+export default function cloneWithRef(
+	element: any,
+	newRef: any,
+): React.ReactElement<any> {
 	const previousRef = element.ref
 	invariant(
 		typeof previousRef !== 'string',
@@ -18,9 +21,8 @@ export default function cloneWithRef(element, newRef) {
 	}
 
 	return cloneElement(element, {
-		ref: node => {
+		ref: (node: any) => {
 			newRef(node)
-
 			if (previousRef) {
 				previousRef(node)
 			}

@@ -1,17 +1,18 @@
 import wrapConnectorHooks from './wrapConnectorHooks'
-import areOptionsEqual from './areOptionsEqual'
+import { IBackend, Unsubscribe } from 'dnd-core'
+const shallowEqual = require('shallowequal')
 
-export default function createTargetConnector(backend) {
-	let currentHandlerId
+export default function createTargetConnector(backend: IBackend) {
+	let currentHandlerId: string
 
-	let currentDropTargetNode
-	let currentDropTargetOptions
-	let disconnectCurrentDropTarget
+	let currentDropTargetNode: any
+	let currentDropTargetOptions: any
+	let disconnectCurrentDropTarget: Unsubscribe | undefined
 
 	function reconnectDropTarget() {
 		if (disconnectCurrentDropTarget) {
 			disconnectCurrentDropTarget()
-			disconnectCurrentDropTarget = null
+			disconnectCurrentDropTarget = undefined
 		}
 
 		if (currentHandlerId && currentDropTargetNode) {
@@ -23,7 +24,7 @@ export default function createTargetConnector(backend) {
 		}
 	}
 
-	function receiveHandlerId(handlerId) {
+	function receiveHandlerId(handlerId: string) {
 		if (handlerId === currentHandlerId) {
 			return
 		}
@@ -33,10 +34,10 @@ export default function createTargetConnector(backend) {
 	}
 
 	const hooks = wrapConnectorHooks({
-		dropTarget: function connectDropTarget(node, options) {
+		dropTarget: function connectDropTarget(node: any, options: any) {
 			if (
 				node === currentDropTargetNode &&
-				areOptionsEqual(options, currentDropTargetOptions)
+				shallowEqual(options, currentDropTargetOptions)
 			) {
 				return
 			}

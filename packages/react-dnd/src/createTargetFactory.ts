@@ -1,9 +1,17 @@
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
+import { IDragDropMonitor, IDropTarget } from 'dnd-core'
+import { MemoVoidArrayIterator } from 'lodash'
 
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 
-export default function createTargetFactory(spec) {
+export interface ITarget extends IDropTarget {
+	receiveProps(props: any): void
+	receiveMonitor(monitor: any): void
+	receiveComponent(component: any): void
+}
+
+export default function createTargetFactory(spec: any) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -25,26 +33,28 @@ export default function createTargetFactory(spec) {
 		)
 	})
 
-	class Target {
-		constructor(monitor) {
-			this.monitor = monitor
+	class Target implements ITarget {
+		private props: any
+		private component: any
+
+		constructor(private monitor: IDragDropMonitor) {
 			this.props = null
 			this.component = null
 		}
 
-		receiveProps(props) {
+		public receiveProps(props: any) {
 			this.props = props
 		}
 
-		receiveMonitor(monitor) {
+		public receiveMonitor(monitor: any) {
 			this.monitor = monitor
 		}
 
-		receiveComponent(component) {
+		public receiveComponent(component: any) {
 			this.component = component
 		}
 
-		canDrop() {
+		public canDrop(): boolean {
 			if (!spec.canDrop) {
 				return true
 			}
@@ -52,7 +62,7 @@ export default function createTargetFactory(spec) {
 			return spec.canDrop(this.props, this.monitor)
 		}
 
-		hover() {
+		public hover() {
 			if (!spec.hover) {
 				return
 			}
@@ -60,7 +70,7 @@ export default function createTargetFactory(spec) {
 			spec.hover(this.props, this.monitor, this.component)
 		}
 
-		drop() {
+		public drop() {
 			if (!spec.drop) {
 				return undefined
 			}
@@ -79,7 +89,7 @@ export default function createTargetFactory(spec) {
 		}
 	}
 
-	return function createTarget(monitor) {
+	return function createTarget(monitor: IDragDropMonitor): ITarget {
 		return new Target(monitor)
 	}
 }

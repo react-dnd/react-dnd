@@ -1,5 +1,5 @@
 import { DropTarget } from '..'
-import { DragDropMonitor } from '../interfaces'
+import { IDragDropMonitor } from '../interfaces'
 
 export class NormalTarget extends DropTarget {
 	public didCallDrop: boolean = false
@@ -69,7 +69,7 @@ export class TransformResultTarget extends DropTarget {
 		this.didCallHover = true
 	}
 
-	drop(monitor: DragDropMonitor) {
+	drop(monitor: IDragDropMonitor) {
 		this.didCallDrop = true
 		const dropResult = monitor.getDropResult()
 		return this.transform(dropResult)

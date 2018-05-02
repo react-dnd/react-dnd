@@ -5,6 +5,7 @@ module.exports = {
 	entry: './src/index',
 	mode: 'production',
 	resolve: {
+		extensions: ['.ts', '.tsx', '.js'],
 		modules: [
 			path.join(__dirname, 'node_modules'),
 			path.join(__dirname, '..', 'dnd-core', 'node_modules'),
@@ -12,7 +13,10 @@ module.exports = {
 		],
 	},
 	module: {
-		rules: [{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }],
+		rules: [
+			{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
+			{ test: /\.ts(x|)$/, use: 'ts-loader', exclude: /node_modules/ },
+		],
 	},
 	externals: [
 		{

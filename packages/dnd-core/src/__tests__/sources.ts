@@ -1,5 +1,5 @@
 import { DragSource } from '..'
-import { DragDropMonitor } from '../interfaces'
+import { IDragDropMonitor } from '../interfaces'
 
 export class NormalSource extends DragSource {
 	public didCallBeginDrag = false
@@ -15,7 +15,7 @@ export class NormalSource extends DragSource {
 		return this.item
 	}
 
-	endDrag(monitor: DragDropMonitor) {
+	endDrag(monitor: IDragDropMonitor) {
 		this.recordedDropResult = monitor.getDropResult()
 	}
 }
@@ -48,7 +48,7 @@ export class NumberSource extends DragSource {
 		return this.allowDrag
 	}
 
-	isDragging(monitor) {
+	isDragging(monitor: IDragDropMonitor) {
 		const item = monitor.getItem()
 		return item.number === this.number
 	}

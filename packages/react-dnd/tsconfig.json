@@ -4,7 +4,8 @@
 		"declaration": true,
 		"sourceMap": true,
 		"outDir": "./lib",
-		"baseUrl": "./src"
+		"baseUrl": "./src",
+		"lib": ["esnext", "dom"]
 	},
-	"include": ["src/index.ts"]
+	"include": ["./src/index.ts"]
 }

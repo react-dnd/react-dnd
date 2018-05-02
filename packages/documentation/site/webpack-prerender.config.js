@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 
 var isDev = process.env.NODE_ENV !== 'production'
 const root = path.join(__dirname, '..', '..', '..')
@@ -33,7 +34,7 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
-				test: /\.ts$/,
+				test: /\.ts(x|)$/,
 				use: 'ts-loader',
 				exclude: /node_modules/,
 			},
@@ -63,7 +64,7 @@ module.exports = {
 	},
 
 	resolve: {
-		extensions: ['.js', '.ts'],
+		extensions: ['.js', '.ts', '.tsx'],
 		modules: [
 			path.join(__dirname, '..', 'node_modules'),
 			path.join(root, 'node_modules'),
@@ -81,11 +82,16 @@ module.exports = {
 			'dnd-core': path.join(root, 'packages/dnd-core/src'),
 		},
 	},
-
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			__DEV__: JSON.stringify(isDev || true),
+		}),
+		new CircularDependencyPlugin({
+			exclude: /node_modules/,
+			failOnError: false,
+			allowAsyncCycles: false,
+			cwd: process.cwd(),
 		}),
 	],
 }

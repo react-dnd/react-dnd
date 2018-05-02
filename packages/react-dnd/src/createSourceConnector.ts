@@ -1,21 +1,23 @@
 import wrapConnectorHooks from './wrapConnectorHooks'
-import areOptionsEqual from './areOptionsEqual'
+import { IBackend, Unsubscribe } from 'dnd-core'
 
-export default function createSourceConnector(backend) {
-	let currentHandlerId
+const shallowEqual = require('shallowequal')
 
-	let currentDragSourceNode
-	let currentDragSourceOptions
-	let disconnectCurrentDragSource
+export default function createSourceConnector(backend: IBackend) {
+	let currentHandlerId: string
 
-	let currentDragPreviewNode
-	let currentDragPreviewOptions
-	let disconnectCurrentDragPreview
+	let currentDragSourceNode: any
+	let currentDragSourceOptions: any
+	let disconnectCurrentDragSource: Unsubscribe | undefined
+
+	let currentDragPreviewNode: any
+	let currentDragPreviewOptions: any
+	let disconnectCurrentDragPreview: Unsubscribe | undefined
 
 	function reconnectDragSource() {
 		if (disconnectCurrentDragSource) {
 			disconnectCurrentDragSource()
-			disconnectCurrentDragSource = null
+			disconnectCurrentDragSource = undefined
 		}
 
 		if (currentHandlerId && currentDragSourceNode) {
@@ -30,7 +32,7 @@ export default function createSourceConnector(backend) {
 	function reconnectDragPreview() {
 		if (disconnectCurrentDragPreview) {
 			disconnectCurrentDragPreview()
-			disconnectCurrentDragPreview = null
+			disconnectCurrentDragPreview = undefined
 		}
 
 		if (currentHandlerId && currentDragPreviewNode) {
@@ -42,7 +44,7 @@ export default function createSourceConnector(backend) {
 		}
 	}
 
-	function receiveHandlerId(handlerId) {
+	function receiveHandlerId(handlerId: string) {
 		if (handlerId === currentHandlerId) {
 			return
 		}
@@ -53,10 +55,10 @@ export default function createSourceConnector(backend) {
 	}
 
 	const hooks = wrapConnectorHooks({
-		dragSource: function connectDragSource(node, options) {
+		dragSource: function connectDragSource(node: any, options: any) {
 			if (
 				node === currentDragSourceNode &&
-				areOptionsEqual(options, currentDragSourceOptions)
+				shallowEqual(options, currentDragSourceOptions)
 			) {
 				return
 			}
@@ -67,10 +69,10 @@ export default function createSourceConnector(backend) {
 			reconnectDragSource()
 		},
 
-		dragPreview: function connectDragPreview(node, options) {
+		dragPreview: function connectDragPreview(node: any, options: any) {
 			if (
 				node === currentDragPreviewNode &&
-				areOptionsEqual(options, currentDragPreviewOptions)
+				shallowEqual(options, currentDragPreviewOptions)
 			) {
 				return
 			}

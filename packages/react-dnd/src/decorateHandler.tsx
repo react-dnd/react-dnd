@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
-import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
-import shallowEqual from 'shallowequal'
+import { IDragDropManager } from 'dnd-core'
+const shallowEqual = require('shallowequal')
+const {
+	Disposable,
+	CompositeDisposable,
+	SerialDisposable,
+} = require('disposables')
 
-const isClassComponent = Comp =>
-	Boolean(Comp && Comp.prototype && typeof Comp.prototype.render === 'function')
+const isClassComponent = (Comp: any) => {
+	return (
+		!!Comp && !!Comp.prototype && typeof Comp.prototype.render === 'function'
+	)
+}
 
 export default function decorateHandler({
 	DecoratedComponent,
@@ -19,36 +27,44 @@ export default function decorateHandler({
 	getType,
 	collect,
 	options,
-}) {
+}: any) {
 	const { arePropsEqual = shallowEqual } = options
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-	class DragDropContainer extends Component {
+	class DragDropContainer extends React.Component<any> {
 		static DecoratedComponent = DecoratedComponent
-
 		static displayName = `${containerDisplayName}(${displayName})`
-
 		static contextTypes = {
 			dragDropManager: PropTypes.object.isRequired,
 		}
 
-		getHandlerId() {
+		private handlerId: string | undefined
+		private decoratedComponentInstance: any
+		private manager: IDragDropManager<any>
+		private handlerMonitor: any
+		private handlerConnector: any
+		private handler: any
+		private disposable: any
+		private isCurrentlyMounted: boolean = false
+		private currentType: any
+
+		public getHandlerId() {
 			return this.handlerId
 		}
 
-		getDecoratedComponentInstance() {
+		public getDecoratedComponentInstance() {
 			return this.decoratedComponentInstance
 		}
 
-		shouldComponentUpdate(nextProps, nextState) {
+		public shouldComponentUpdate(nextProps: any, nextState: any) {
 			return (
 				!arePropsEqual(nextProps, this.props) ||
 				!shallowEqual(nextState, this.state)
 			)
 		}
 
-		constructor(props, context) {
+		constructor(props: any, context: any) {
 			super(props, context)
 			this.handleChange = this.handleChange.bind(this)
 			this.handleChildRef = this.handleChildRef.bind(this)
@@ -73,32 +89,32 @@ export default function decorateHandler({
 			this.dispose()
 		}
 
-		componentDidMount() {
+		public componentDidMount() {
 			this.isCurrentlyMounted = true
 			this.disposable = new SerialDisposable()
-			this.currentType = null
+			this.currentType = undefined
 			this.receiveProps(this.props)
 			this.handleChange()
 		}
 
-		componentWillReceiveProps(nextProps) {
+		public componentWillReceiveProps(nextProps: any) {
 			if (!arePropsEqual(nextProps, this.props)) {
 				this.receiveProps(nextProps)
 				this.handleChange()
 			}
 		}
 
-		componentWillUnmount() {
+		public componentWillUnmount() {
 			this.dispose()
 			this.isCurrentlyMounted = false
 		}
 
-		receiveProps(props) {
+		public receiveProps(props: any) {
 			this.handler.receiveProps(props)
 			this.receiveType(getType(props))
 		}
 
-		receiveType(type) {
+		public receiveType(type: any) {
 			if (type === this.currentType) {
 				return
 			}
@@ -129,7 +145,7 @@ export default function decorateHandler({
 			)
 		}
 
-		handleChange() {
+		public handleChange() {
 			if (!this.isCurrentlyMounted) {
 				return
 			}
@@ -140,17 +156,17 @@ export default function decorateHandler({
 			}
 		}
 
-		dispose() {
+		public dispose() {
 			this.disposable.dispose()
 			this.handlerConnector.receiveHandlerId(null)
 		}
 
-		handleChildRef(component) {
+		public handleChildRef(component: any) {
 			this.decoratedComponentInstance = component
 			this.handler.receiveComponent(component)
 		}
 
-		getCurrentState() {
+		public getCurrentState() {
 			const nextState = collect(
 				this.handlerConnector.hooks,
 				this.handlerMonitor,
@@ -171,7 +187,7 @@ export default function decorateHandler({
 			return nextState
 		}
 
-		render() {
+		public render() {
 			return (
 				<DecoratedComponent
 					{...this.props}
