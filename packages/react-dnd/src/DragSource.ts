@@ -4,7 +4,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import { IBackend, ItemType } from 'dnd-core'
 import {
 	IDragSourceSpecification,
-	Collector,
+	DragSourceCollector,
 	IDragSourceOptions,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
@@ -18,7 +18,7 @@ import isValidType from './utils/isValidType'
 export default function DragSource<TargetProps, CollectedProps, DragObject>(
 	type: ItemType,
 	spec: IDragSourceSpecification<TargetProps, DragObject>,
-	collect: Collector<CollectedProps>,
+	collect: DragSourceCollector<CollectedProps>,
 	options: IDragSourceOptions = {},
 ) {
 	checkDecoratorArguments(

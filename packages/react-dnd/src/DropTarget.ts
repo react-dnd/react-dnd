@@ -5,7 +5,7 @@ import { IBackend, TargetType, IDragDropMonitor } from 'dnd-core'
 import {
 	IDropTargetSpecification,
 	IDropTargetOptions,
-	Collector,
+	DropTargetCollector,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -18,7 +18,7 @@ import isValidType from './utils/isValidType'
 export default function DropTarget<TargetProps, CollectedProps>(
 	type: TargetType,
 	spec: IDropTargetSpecification<TargetProps>,
-	collect: Collector<CollectedProps>,
+	collect: DropTargetCollector<CollectedProps>,
 	options: IDropTargetOptions = {},
 ) {
 	checkDecoratorArguments(

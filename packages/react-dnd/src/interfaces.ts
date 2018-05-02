@@ -102,11 +102,108 @@ export type IDropTargetOptions = ICustomEqualityOptions
 export type IDragSourceOptions = ICustomEqualityOptions
 export type IDragLayerOptions = ICustomEqualityOptions
 
+export type JSXWrapperWithOptions<Options> = (
+	input: JSX.Element,
+	options?: Options,
+) => JSX.Element
+
+export type JsxWrapper = (input: JSX.Element) => JSX.Element
+
 /**
- * The collector function is used by the DragSource and DropTarget annotations
- * in react-dnd to generate props that are injected into the annotated components
+ * DragSourceConnector is an object passed to a collecting function of the DragSource.
+ * Its methods return functions that let you assign the roles to your component's DOM nodes.
  */
-export type Collector<P> = (connect: any, monitor: IDragDropMonitor) => P
+export interface IDragSourceConnector {
+	/**
+	 * Returns a function that must be used inside the component to assign the drag source role to a node. By
+	 * returning { connectDragSource: connect.dragSource() } from your collecting function, you can mark any React
+	 * element as the draggable node. To do that, replace any element with this.props.connectDragSource(element) inside
+	 * the render function.
+	 *
+	 * @param elementOrNode
+	 * @param options
+	 */
+	dragSource(): JSXWrapperWithOptions<{
+		/**
+		 * Optional. A string. By default, 'move'. In the browsers that support this feature, specifying 'copy'
+		 * shows a special “copying” cursor, while 'move' corresponds to the “move” cursor. You might want to use
+		 * this option to provide a hint to the user about whether an action is destructive.
+		 */
+		dropEffect?: string
+	}>
+
+	/**
+	 * Optional. Returns a function that may be used inside the component to assign the drag preview role to a node. By
+	 * returning { connectDragPreview: connect.dragPreview() } from your collecting function, you can mark any React element
+	 * as the drag preview node. To do that, replace any element with this.props.connectDragPreview(element) inside the render
+	 * function. The drag preview is the node that will be screenshotted by the HTML5 backend when the drag begins. For example,
+	 * if you want to make something draggable by a small custom handle, you can mark this handle as the dragSource(), but also
+	 * mark an outer, larger component node as the dragPreview(). Thus the larger drag preview appears on the screenshot, but
+	 * only the smaller drag source is actually draggable. Another possible customization is passing an Image instance to dragPreview
+	 * from a lifecycle method like componentDidMount. This lets you use the actual images for drag previews. (Note that IE does not
+	 * support this customization). See the example code below for the different usage examples.
+	 */
+	dragPreview(): JSXWrapperWithOptions<{
+		/**
+		 * Optional. A boolean. By default, false. If true, the component will learn that it is being dragged immediately as the drag
+		 * starts instead of the next tick. This means that the screenshotting would occur with monitor.isDragging() already being true,
+		 * and if you apply any styling like a decreased opacity to the dragged element, this styling will also be reflected on the
+		 * screenshot. This is rarely desirable, so false is a sensible default. However, you might want to set it to true in rare cases,
+		 * such as if you want to make the custom drag layers work in IE and you need to hide the original element without resorting to
+		 * an empty drag preview which IE doesn't support.
+		 */
+		captureDraggingState?: boolean
+
+		/**
+		 * Optional. A number between 0 and 1. By default, 0.5. Specifies how the offset relative to the drag source node is translated
+		 * into the horizontal offset of the drag preview when their sizes don't match. 0 means “dock the preview to the left”, 0.5 means
+		 * “interpolate linearly” and 1 means “dock the preview to the right”.
+		 */
+		anchorX?: number
+
+		/**
+		 * Optional. A number between 0 and 1. By default, 0.5. Specifies how the offset relative to the drag source node is translated into
+		 * the vertical offset of the drag preview when their sizes don't match. 0 means “dock the preview to the top, 0.5 means “interpolate
+		 * linearly” and 1 means “dock the preview to the bottom.
+		 */
+		anchorY?: number
+
+		/**
+		 * Optional. A number or null if not needed. By default, null. Specifies the vertical offset between the cursor and the drag preview
+		 * element. If offsetX has a value, anchorX won't be used.
+		 */
+		offsetX?: number
+
+		/**
+		 *  Optional. A number or null if not needed. By default, null. Specifies the vertical offset between the cursor and the drag
+		 *  preview element. If offsetY has a value, anchorY won't be used.
+		 */
+		offsetY?: number
+	}>
+}
+
+/**
+ * DropTargetConnector is an object passed to a collecting function of the DropTarget. Its only method dropTarget() returns a function
+ * that lets you assign the drop target role to one of your component's DOM nodes.
+ */
+export interface IDropTargetConnector {
+	/**
+	 * Returns a function that must be used inside the component to assign the drop target role to a node.
+	 * By returning { connectDropTarget: connect.dropTarget() } from your collecting function, you can mark any React element
+	 * as the droppable node. To do that, replace any element with this.props.connectDropTarget(element) inside the render function.
+	 */
+	dropTarget(): JsxWrapper
+}
+
+export type DragSourceCollector<TargetProps> = (
+	connect: IDragSourceConnector,
+	monitor: IDragDropMonitor,
+) => TargetProps
+
+export type DropTargetCollector<TargetProps> = (
+	connect: IDropTargetConnector,
+	monitor: IDragDropMonitor,
+) => TargetProps
 
 export type DragLayerCollector<TargetProps, P> = (
 	monitor: IDragDropMonitor,
