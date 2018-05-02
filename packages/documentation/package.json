@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-documentation",
-	"version": "2.6.0",
+	"version": "3.0.0",
 	"private": true,
 	"scripts": {
 		"start": "./scripts/startSiteDevServer.sh",
@@ -24,7 +24,7 @@
 		"postcss": "^6.0.6",
 		"prop-types": "^15.6.0",
 		"react": "^16.2.0",
-		"react-dnd-test-backend": "^2.6.0",
+		"react-dnd-test-backend": "^3.0.0",
 		"react-dom": "^16.2.0",
 		"react-frame-component": "^1.1.0",
 		"react-hot-loader": "^4.1.2",

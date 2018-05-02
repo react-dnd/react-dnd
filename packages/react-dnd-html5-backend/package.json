@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-html5-backend",
-	"version": "2.6.0",
+	"version": "3.0.0",
 	"description": "HTML5 backend for React DnD",
 	"main": "lib/index.js",
 	"license": "BSD-3-Clause",
@@ -11,10 +11,8 @@
 	"scripts": {
 		"clean": "rimraf lib",
 		"transpile": "tsc",
-		"bundle:unmin":
-			"webpack --mode development --output-filename=ReactDnDHTML5Backend.js",
-		"bundle:min":
-			"webpack --mode production --output-filename=ReactDnDHTML5Backend.min.js",
+		"bundle:unmin": "webpack --mode development --output-filename=ReactDnDHTML5Backend.js",
+		"bundle:min": "webpack --mode production --output-filename=ReactDnDHTML5Backend.min.js",
 		"build": "run-p bundle:* transpile",
 		"test": "run-s clean build"
 	},
@@ -24,16 +22,16 @@
 		"babel-cli": "^6.26.0",
 		"babel-loader": "^7.1.4",
 		"npm-run-all": "^4.1.2",
-		"react-dnd": "^2.6.0",
-		"react-dnd-test-backend": "^2.6.0",
+		"react-dnd": "^3.0.0",
+		"react-dnd-test-backend": "^3.0.0",
 		"rimraf": "^2.6.2",
 		"ts-loader": "^4.2.0",
 		"typescript": "^2.8.3",
 		"webpack": "^4.6.0"
 	},
 	"dependencies": {
-		"dnd-core": "^2.6.0",
 		"autobind-decorator": "^2.1.0",
+		"dnd-core": "^3.0.0",
 		"lodash": "^4.2.0",
 		"shallowequal": "^1.0.2"
 	}
