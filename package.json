@@ -43,7 +43,7 @@
 		"lint": "run-s lint:*",
 		"test_modules": "lerna run test --stream",
 		"publish_docs": "./scripts/publishDocumentation.sh",
-		"test": "run-s lint jest:cov test_modules",
+		"test": "run-s lint test_modules jest:cov",
 		"prettify":
 			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
