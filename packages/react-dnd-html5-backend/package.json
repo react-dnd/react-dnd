@@ -10,21 +10,31 @@
 	},
 	"scripts": {
 		"clean": "rimraf lib",
-		"build:lib": "babel src --out-dir lib",
-		"build:umd": "webpack",
-		"build": "run-p build:*",
-		"test": "run-s clean build",
-		"prepublish": "npm test"
+		"transpile": "tsc",
+		"bundle:unmin":
+			"webpack --mode development --output-filename=ReactDnDHTML5Backend.js",
+		"bundle:min":
+			"webpack --mode production --output-filename=ReactDnDHTML5Backend.min.js",
+		"build": "run-p bundle:* transpile",
+		"test": "run-s clean build"
 	},
 	"devDependencies": {
+		"@types/autobind-decorator": "^2.1.0",
+		"@types/lodash": "^4.14.108",
 		"babel-cli": "^6.26.0",
-		"babel-loader": "^7.1.1",
+		"babel-loader": "^7.1.4",
 		"npm-run-all": "^4.1.2",
 		"react-dnd": "^2.6.0",
+		"react-dnd-test-backend": "^2.6.0",
 		"rimraf": "^2.6.2",
-		"webpack": "^3.1.0"
+		"ts-loader": "^4.2.0",
+		"typescript": "^2.8.3",
+		"webpack": "^4.6.0"
 	},
 	"dependencies": {
-		"lodash": "^4.2.0"
+		"dnd-core": "^2.6.0",
+		"autobind-decorator": "^2.1.0",
+		"lodash": "^4.2.0",
+		"shallowequal": "^1.0.2"
 	}
 }

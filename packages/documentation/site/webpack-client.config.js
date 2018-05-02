@@ -1,14 +1,13 @@
 var path = require('path')
 var webpack = require('webpack')
-var resolvers = require('../scripts/resolvers')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 
 var isDev = process.env.NODE_ENV !== 'production'
 const root = path.join(__dirname, '..', '..', '..')
 
 module.exports = {
+	mode: isDev ? 'development' : 'production',
 	devtool: isDev ? 'cheap-eval-source-map' : 'source-map',
-
 	entry: [path.join(__dirname, 'client.js')].concat(
 		isDev
 			? [
@@ -44,19 +43,48 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: isDev
-					? ['react-hot-loader/webpack', 'babel-loader']
+					? [
+							{
+								loader: 'babel-loader',
+								options: {
+									babelrc: true,
+									plugins: ['react-hot-loader/babel'],
+								},
+							},
+					  ]
 					: ['babel-loader'],
 			},
 			{
+				test: /\.ts(x|)$/,
+				exclude: /node_modules/,
+				use: isDev
+					? [
+							{
+								loader: 'babel-loader',
+								options: {
+									babelrc: true,
+									plugins: ['react-hot-loader/babel'],
+								},
+							},
+							{
+								loader: 'ts-loader',
+								options: {
+									transpileOnly: true,
+								},
+							},
+					  ]
+					: [
+							{
+								loader: 'ts-loader',
+								options: {
+									transpileOnly: true,
+								},
+							},
+					  ],
+			},
+			{
 				test: /\.less$/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: [
-						'css-loader',
-						path.join(__dirname, '../scripts/cssTransformLoader'),
-						'less-loader',
-					],
-				}),
+				use: ['style-loader', 'css-loader', 'less-loader'],
 			},
 			{
 				test: /\.png$/,
@@ -75,6 +103,7 @@ module.exports = {
 		],
 	},
 	resolve: {
+		extensions: ['.js', '.ts', '.tsx'],
 		modules: [
 			path.join(__dirname, '..', 'node_modules'),
 			path.join(root, 'node_modules'),
@@ -93,21 +122,15 @@ module.exports = {
 		},
 	},
 	plugins: [
-		new ExtractTextPlugin(isDev ? '[name].css' : '[name]-[hash].css'),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			__DEV__: JSON.stringify(isDev || true),
 		}),
-		resolvers.resolveHasteDefines,
-	],
-}
-
-if (process.env.NODE_ENV === 'production') {
-	module.exports.plugins.push(
-		new webpack.optimize.UglifyJsPlugin({
-			compressor: {
-				warnings: false,
-			},
+		new CircularDependencyPlugin({
+			exclude: /node_modules/,
+			failOnError: false,
+			allowAsyncCycles: false,
+			cwd: process.cwd(),
 		}),
-	)
+	],
 }

@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"target": "es2015",
+		"module": "commonjs",
+		"lib": ["esnext", "dom"],
+		"strict": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"jsx": "react"
+	}
+}
