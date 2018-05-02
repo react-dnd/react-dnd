@@ -35,8 +35,15 @@ module.exports = {
 			},
 			{
 				test: /\.ts(x|)$/,
-				use: 'ts-loader',
 				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'ts-loader',
+						options: {
+							transpileOnly: true,
+						},
+					},
+				],
 			},
 			{
 				test: /\.css$/,

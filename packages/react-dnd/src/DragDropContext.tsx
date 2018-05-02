@@ -4,6 +4,7 @@ import { DragDropManager, IBackend, BackendFactory } from 'dnd-core'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
+import { IContextComponent } from './interfaces'
 
 export const CHILD_CONTEXT_TYPES = {
 	dragDropManager: PropTypes.object.isRequired,
@@ -18,18 +19,21 @@ export function createChildContext<Context>(
 	}
 }
 
-export default function DragDropContext<Context>(
+export default function DragDropContext(
 	backendFactory: BackendFactory,
-	context?: Context,
+	context?: any,
 ) {
 	checkDecoratorArguments('DragDropContext', 'backend', backendFactory) // eslint-disable-line prefer-rest-params
 	const childContext = createChildContext(backendFactory, context)
 
-	return function decorateContext(DecoratedComponent: ComponentClass) {
+	return function decorateContext<T extends React.ComponentClass<any>>(
+		DecoratedComponent: T,
+	): T & IContextComponent<any, any> {
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-		class DragDropContextContainer extends React.Component<any> {
+		class DragDropContextContainer extends React.Component<any>
+			implements IContextComponent<any, any> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
 			public static childContextTypes = CHILD_CONTEXT_TYPES
@@ -62,6 +66,6 @@ export default function DragDropContext<Context>(
 			}
 		}
 
-		return hoistStatics(DragDropContextContainer, DecoratedComponent)
+		return hoistStatics(DragDropContextContainer, DecoratedComponent) as any
 	}
 }

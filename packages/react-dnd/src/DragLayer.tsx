@@ -5,12 +5,16 @@ import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { IDragDropManager, Unsubscribe } from 'dnd-core'
-import { DragLayerCollector, IDragLayerOptions } from './interfaces'
+import {
+	DragLayerCollector,
+	IDragLayerOptions,
+	IDndComponentClass,
+} from './interfaces'
 
 const shallowEqual = require('shallowequal')
 
-export default function DragLayer<TargetProps, CollectedProps>(
-	collect: DragLayerCollector<TargetProps, CollectedProps>,
+export default function DragLayer(
+	collect: DragLayerCollector<any, any>,
 	options: IDragLayerOptions = {},
 ) {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options) // eslint-disable-line prefer-rest-params
@@ -27,18 +31,21 @@ export default function DragLayer<TargetProps, CollectedProps>(
 		options,
 	)
 
-	return function decorateLayer(
-		DecoratedComponent: ComponentClass<TargetProps>,
-	) {
+	return function decorateLayer<T extends React.ComponentClass<any>>(
+		DecoratedComponent: T,
+	): T & IDndComponentClass<any> {
 		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-		class DragLayerContainer extends React.Component<TargetProps> {
-			public static DecoratedComponent = DecoratedComponent
+		class DragLayerContainer extends React.Component<any> {
 			public static displayName = `DragLayer(${displayName})`
 			public static contextTypes = {
 				dragDropManager: PropTypes.object.isRequired,
+			}
+
+			public get DecoratedComponent() {
+				return DecoratedComponent
 			}
 
 			private manager: IDragDropManager<any>
@@ -110,7 +117,7 @@ export default function DragLayer<TargetProps, CollectedProps>(
 					<DecoratedComponent
 						{...this.props}
 						{...this.state}
-						ref={child => {
+						ref={(child: any) => {
 							this.child = child
 						}}
 					/>
@@ -133,6 +140,6 @@ export default function DragLayer<TargetProps, CollectedProps>(
 			}
 		}
 
-		return hoistStatics(DragLayerContainer, DecoratedComponent)
+		return hoistStatics(DragLayerContainer, DecoratedComponent) as any
 	}
 }

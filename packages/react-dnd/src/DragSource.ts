@@ -6,6 +6,7 @@ import {
 	IDragSourceSpecification,
 	DragSourceCollector,
 	IDragSourceOptions,
+	IDndComponentClass,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -15,10 +16,10 @@ import createSourceMonitor from './createSourceMonitor'
 import createSourceConnector from './createSourceConnector'
 import isValidType from './utils/isValidType'
 
-export default function DragSource<TargetProps, CollectedProps, DragObject>(
+export default function DragSource(
 	type: ItemType,
-	spec: IDragSourceSpecification<TargetProps, DragObject>,
-	collect: DragSourceCollector<CollectedProps>,
+	spec: IDragSourceSpecification<any, any>,
+	collect: DragSourceCollector<any>,
 	options: IDragSourceOptions = {},
 ) {
 	checkDecoratorArguments(
@@ -66,9 +67,10 @@ export default function DragSource<TargetProps, CollectedProps, DragObject>(
 		collect,
 	)
 
-	return function decorateSource(
-		DecoratedComponent: React.Component<TargetProps>,
-	) {
+	return function decorateSource<
+		Props,
+		T extends React.ComponentClass<Props> | React.StatelessComponent<Props>
+	>(DecoratedComponent: T): T & IDndComponentClass<Props> {
 		return decorateHandler({
 			connectBackend: (backend: IBackend, sourceId: string) => {
 				backend.connectDragSource(sourceId)
@@ -82,6 +84,6 @@ export default function DragSource<TargetProps, CollectedProps, DragObject>(
 			getType,
 			collect,
 			options,
-		})
+		}) as any
 	}
 }

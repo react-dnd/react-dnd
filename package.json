@@ -39,6 +39,7 @@
 		"lint:es": "eslint .",
 		"lint:ts":
 			"tslint \"packages/**/*.{ts,tsx}\" -e \"**/{lib,node_modules}/**\"",
+		"lint:tsc": "tsc",
 		"lint": "run-s lint:*",
 		"test_modules": "lerna run test --stream",
 		"publish_docs": "./scripts/publishDocumentation.sh",

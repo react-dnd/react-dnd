@@ -21,7 +21,7 @@ import {
 } from './NativeDragSources'
 import * as NativeTypes from './NativeTypes'
 import autobind from 'autobind-decorator'
-import { IContext } from './interfaces'
+import { IHTML5BackendContext } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 
@@ -36,7 +36,7 @@ export default class HTML5Backend implements IBackend {
 	private actions: IDragDropActions
 	private monitor: IDragDropMonitor
 	private registry: IHandlerRegistry
-	private context: IContext
+	private context: IHTML5BackendContext
 
 	private sourcePreviewNodes: any = {}
 	private sourcePreviewNodeOptions: any = {}
@@ -65,7 +65,8 @@ export default class HTML5Backend implements IBackend {
 		this.context = manager.getContext()
 	}
 
-	private get window() {
+	// public for test
+	public get window() {
 		if (this.context && this.context.window) {
 			return this.context.window
 		} else if (typeof window !== 'undefined') {

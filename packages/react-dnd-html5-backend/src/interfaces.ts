@@ -1,3 +1,3 @@
-export interface IContext {
+export interface IHTML5BackendContext {
 	window: Window
 }

@@ -1,30 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Board from './Board'
 import { observe } from './Game'
+
+export interface IChessboardTutorialAppState {
+	knightPosition: [number, number]
+}
 
 /**
  * Unlike the tutorial, export a component so it can be used on the website.
  */
-export default class ChessboardTutorialApp extends Component {
-	constructor(props) {
-		super(props)
-		this.unobserve = observe(this.handleChange.bind(this))
-	}
+export default class ChessboardTutorialApp extends React.Component<
+	{},
+	IChessboardTutorialAppState
+> {
+	private unobserve: () => void = observe(this.handleChange.bind(this))
 
-	handleChange(knightPosition) {
-		const nextState = { knightPosition }
-		if (this.state) {
-			this.setState(nextState)
-		} else {
-			this.state = nextState
-		}
-	}
-
-	componentWillUnmount() {
+	public componentWillUnmount() {
 		this.unobserve()
 	}
 
-	render() {
+	public render() {
 		const { knightPosition } = this.state
 		return (
 			<div>
@@ -59,5 +54,14 @@ export default class ChessboardTutorialApp extends Component {
 				</p>
 			</div>
 		)
+	}
+
+	private handleChange(knightPosition: [number, number]) {
+		const nextState = { knightPosition }
+		if (this.state) {
+			this.setState(nextState)
+		} else {
+			this.state = nextState
+		}
 	}
 }

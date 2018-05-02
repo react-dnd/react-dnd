@@ -1,11 +1,14 @@
-let knightPosition = [1, 7]
-let observer = null
+let knightPosition: [number, number] = [1, 7]
+export type PositionObserver = ((position: [number, number]) => void) | null
+let observer: PositionObserver = null
 
 function emitChange() {
-	observer(knightPosition)
+	if (observer) {
+		observer(knightPosition)
+	}
 }
 
-export function observe(o) {
+export function observe(o: PositionObserver) {
 	if (observer) {
 		throw new Error('Multiple observers not implemented.')
 	}
@@ -18,7 +21,7 @@ export function observe(o) {
 	}
 }
 
-export function canMoveKnight(toX, toY) {
+export function canMoveKnight(toX: number, toY: number) {
 	const [x, y] = knightPosition
 	const dx = toX - x
 	const dy = toY - y
@@ -29,7 +32,7 @@ export function canMoveKnight(toX, toY) {
 	)
 }
 
-export function moveKnight(toX, toY) {
+export function moveKnight(toX: number, toY: number) {
 	knightPosition = [toX, toY]
 	emitChange()
 }

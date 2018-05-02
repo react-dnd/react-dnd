@@ -66,9 +66,21 @@ module.exports = {
 									plugins: ['react-hot-loader/babel'],
 								},
 							},
-							'ts-loader',
+							{
+								loader: 'ts-loader',
+								options: {
+									transpileOnly: true,
+								},
+							},
 					  ]
-					: ['ts-loader'],
+					: [
+							{
+								loader: 'ts-loader',
+								options: {
+									transpileOnly: true,
+								},
+							},
+					  ],
 			},
 			{
 				test: /\.less$/,

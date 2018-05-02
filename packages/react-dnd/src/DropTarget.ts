@@ -6,6 +6,7 @@ import {
 	IDropTargetSpecification,
 	IDropTargetOptions,
 	DropTargetCollector,
+	IDndComponentClass,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -15,10 +16,10 @@ import createTargetMonitor from './createTargetMonitor'
 import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
 
-export default function DropTarget<TargetProps, CollectedProps>(
+export default function DropTarget(
 	type: TargetType,
-	spec: IDropTargetSpecification<TargetProps>,
-	collect: DropTargetCollector<CollectedProps>,
+	spec: IDropTargetSpecification<any>,
+	collect: DropTargetCollector<any>,
 	options: IDropTargetOptions = {},
 ) {
 	checkDecoratorArguments(
@@ -66,9 +67,9 @@ export default function DropTarget<TargetProps, CollectedProps>(
 		collect,
 	)
 
-	return function decorateTarget(
-		DecoratedComponent: React.Component<TargetProps>,
-	) {
+	return function decorateTarget<
+		T extends React.ComponentClass<any> | React.StatelessComponent<any>
+	>(DecoratedComponent: T): T & IDndComponentClass<any> {
 		return decorateHandler({
 			connectBackend: (backend: IBackend, targetId: string) => {
 				backend.connectDropTarget(targetId)
@@ -82,6 +83,6 @@ export default function DropTarget<TargetProps, CollectedProps>(
 			getType,
 			collect,
 			options,
-		})
+		}) as any
 	}
 }

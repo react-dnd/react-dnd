@@ -4,6 +4,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import { IDragDropManager } from 'dnd-core'
+import { IDndComponentClass, IDndComponent } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 const {
@@ -18,7 +19,7 @@ const isClassComponent = (Comp: any) => {
 	)
 }
 
-export default function decorateHandler({
+export default function decorateHandler<P>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,
@@ -28,12 +29,13 @@ export default function decorateHandler({
 	getType,
 	collect,
 	options,
-}: any) {
+}: any): IDndComponentClass<P> {
 	const { arePropsEqual = shallowEqual } = options
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-	class DragDropContainer extends React.Component<any> {
+	class DragDropContainer extends React.Component<P>
+		implements IDndComponent<P, any> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 		public static contextTypes = {
@@ -50,7 +52,7 @@ export default function decorateHandler({
 		private isCurrentlyMounted: boolean = false
 		private currentType: any
 
-		constructor(props: any, context: any) {
+		constructor(props: P, context: any) {
 			super(props, context)
 			this.handleChange = this.handleChange.bind(this)
 			this.handleChildRef = this.handleChildRef.bind(this)
@@ -76,7 +78,7 @@ export default function decorateHandler({
 		}
 
 		public getHandlerId() {
-			return this.handlerId
+			return this.handlerId as string
 		}
 
 		public getDecoratedComponentInstance() {
@@ -201,5 +203,5 @@ export default function decorateHandler({
 		}
 	}
 
-	return hoistStatics(DragDropContainer, DecoratedComponent)
+	return hoistStatics(DragDropContainer, DecoratedComponent) as any
 }
