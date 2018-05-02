@@ -5,10 +5,14 @@ import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { IDragDropManager, Unsubscribe } from 'dnd-core'
+import { DragLayerCollector, IDragLayerOptions } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 
-export default function DragLayer(collect: any, options: any = {}) {
+export default function DragLayer<TargetProps, CollectedProps>(
+	collect: DragLayerCollector<TargetProps, CollectedProps>,
+	options: IDragLayerOptions = {},
+) {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options) // eslint-disable-line prefer-rest-params
 	invariant(
 		typeof collect === 'function',
@@ -23,12 +27,14 @@ export default function DragLayer(collect: any, options: any = {}) {
 		options,
 	)
 
-	return function decorateLayer(DecoratedComponent: ComponentClass) {
+	return function decorateLayer(
+		DecoratedComponent: ComponentClass<TargetProps>,
+	) {
 		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-		class DragLayerContainer extends React.Component<any> {
+		class DragLayerContainer extends React.Component<TargetProps> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragLayer(${displayName})`
 			public static contextTypes = {

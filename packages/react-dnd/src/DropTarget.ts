@@ -1,7 +1,12 @@
 import React, { StatelessComponent, Component, ComponentClass } from 'react'
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
-import { IBackend } from 'dnd-core'
+import { IBackend, TargetType, IDragDropMonitor } from 'dnd-core'
+import {
+	IDropTargetSpecification,
+	IDropTargetOptions,
+	Collector,
+} from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerTarget from './registerTarget'
@@ -10,11 +15,11 @@ import createTargetMonitor from './createTargetMonitor'
 import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
 
-export default function DropTarget(
-	type: any,
-	spec: any,
-	collect: any,
-	options = {},
+export default function DropTarget<TargetProps, CollectedProps>(
+	type: TargetType,
+	spec: IDropTargetSpecification<TargetProps>,
+	collect: Collector<CollectedProps>,
+	options: IDropTargetOptions = {},
 ) {
 	checkDecoratorArguments(
 		'DropTarget',
@@ -24,7 +29,7 @@ export default function DropTarget(
 		collect,
 		options, // eslint-disable-line prefer-rest-params
 	)
-	let getType = type
+	let getType: any = type
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type, true),
@@ -61,7 +66,9 @@ export default function DropTarget(
 		collect,
 	)
 
-	return function decorateTarget(DecoratedComponent: Component) {
+	return function decorateTarget(
+		DecoratedComponent: React.Component<TargetProps>,
+	) {
 		return decorateHandler({
 			connectBackend: (backend: IBackend, targetId: string) => {
 				backend.connectDropTarget(targetId)

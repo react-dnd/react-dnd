@@ -90,10 +90,10 @@ export type BackendFactory = (
 ) => IBackend
 
 export interface IDragSource {
-	canDrag(monitor: IDragDropMonitor, targetId: string): boolean
-	isDragging(monitor: IDragDropMonitor, targetId: string): boolean
 	beginDrag(monitor: IDragDropMonitor, targetId: string): void
 	endDrag(monitor: IDragDropMonitor, targetId: string): void
+	canDrag(monitor: IDragDropMonitor, targetId: string): boolean
+	isDragging(monitor: IDragDropMonitor, targetId: string): boolean
 }
 
 export interface IDropTarget {

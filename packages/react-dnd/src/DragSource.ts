@@ -1,7 +1,12 @@
 import React, { Component, ComponentClass, StatelessComponent } from 'react'
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
-import { IBackend } from 'dnd-core'
+import { IBackend, ItemType } from 'dnd-core'
+import {
+	IDragSourceSpecification,
+	Collector,
+	IDragSourceOptions,
+} from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerSource from './registerSource'
@@ -10,11 +15,11 @@ import createSourceMonitor from './createSourceMonitor'
 import createSourceConnector from './createSourceConnector'
 import isValidType from './utils/isValidType'
 
-export default function DragSource(
-	type: string,
-	spec: any,
-	collect: any,
-	options = {},
+export default function DragSource<TargetProps, CollectedProps, DragObject>(
+	type: ItemType,
+	spec: IDragSourceSpecification<TargetProps, DragObject>,
+	collect: Collector<CollectedProps>,
+	options: IDragSourceOptions = {},
 ) {
 	checkDecoratorArguments(
 		'DragSource',
@@ -24,7 +29,7 @@ export default function DragSource(
 		collect,
 		options, // eslint-disable-line prefer-rest-params
 	)
-	let getType: string | (() => string) = type
+	let getType: any = type
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type),
@@ -61,7 +66,9 @@ export default function DragSource(
 		collect,
 	)
 
-	return function decorateSource(DecoratedComponent: React.Component) {
+	return function decorateSource(
+		DecoratedComponent: React.Component<TargetProps>,
+	) {
 		return decorateHandler({
 			connectBackend: (backend: IBackend, sourceId: string) => {
 				backend.connectDragSource(sourceId)

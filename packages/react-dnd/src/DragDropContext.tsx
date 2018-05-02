@@ -9,29 +9,21 @@ export const CHILD_CONTEXT_TYPES = {
 	dragDropManager: PropTypes.object.isRequired,
 }
 
-export const createChildContext = (backend: BackendFactory, context: any) => ({
-	dragDropManager: new DragDropManager(backend, context),
-})
-
-export const unpackBackendForEs5Users = (backendOrModule: any) => {
-	// Auto-detect ES6 default export for people still using ES5
-	let backend = backendOrModule
-	if (typeof backend === 'object' && typeof backend.default === 'function') {
-		backend = backend.default
+export function createChildContext<Context>(
+	backend: BackendFactory,
+	context: Context,
+) {
+	return {
+		dragDropManager: new DragDropManager(backend, context),
 	}
-	invariant(
-		typeof backend === 'function',
-		'Expected the backend to be a function or an ES6 module exporting a default function. ' +
-			'Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html',
-	)
-	return backend
 }
 
-export default function DragDropContext(backendOrModule: any) {
-	checkDecoratorArguments('DragDropContext', 'backend', backendOrModule) // eslint-disable-line prefer-rest-params
-
-	const backend: BackendFactory = unpackBackendForEs5Users(backendOrModule)
-	const childContext = createChildContext(backend, undefined)
+export default function DragDropContext<Context>(
+	backendFactory: BackendFactory,
+	context?: Context,
+) {
+	checkDecoratorArguments('DragDropContext', 'backend', backendFactory) // eslint-disable-line prefer-rest-params
+	const childContext = createChildContext(backendFactory, context)
 
 	return function decorateContext(DecoratedComponent: ComponentClass) {
 		const displayName =
