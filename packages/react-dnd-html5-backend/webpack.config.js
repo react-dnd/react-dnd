@@ -12,7 +12,7 @@ module.exports = {
 		],
 	},
 	module: {
-		rules: [{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }],
+		rules: [{ test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ }],
 	},
 	output: {
 		filename: 'dist/ReactDnDHTML5Backend.min.js',
