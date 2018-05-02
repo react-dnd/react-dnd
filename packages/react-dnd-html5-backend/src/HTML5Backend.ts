@@ -65,7 +65,7 @@ export default class HTML5Backend implements IBackend {
 		this.context = manager.getContext()
 	}
 
-	get window() {
+	private get window() {
 		if (this.context && this.context.window) {
 			return this.context.window
 		} else if (typeof window !== 'undefined') {
@@ -97,52 +97,6 @@ export default class HTML5Backend implements IBackend {
 		if (this.asyncEndDragFrameId) {
 			this.window.cancelAnimationFrame(this.asyncEndDragFrameId)
 		}
-	}
-
-	public addEventListeners(target: any) {
-		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
-		if (!target.addEventListener) {
-			return
-		}
-		target.addEventListener('dragstart', this.handleTopDragStart)
-		target.addEventListener('dragstart', this.handleTopDragStartCapture, true)
-		target.addEventListener('dragend', this.handleTopDragEndCapture, true)
-		target.addEventListener('dragenter', this.handleTopDragEnter)
-		target.addEventListener('dragenter', this.handleTopDragEnterCapture, true)
-		target.addEventListener('dragleave', this.handleTopDragLeaveCapture, true)
-		target.addEventListener('dragover', this.handleTopDragOver)
-		target.addEventListener('dragover', this.handleTopDragOverCapture, true)
-		target.addEventListener('drop', this.handleTopDrop)
-		target.addEventListener('drop', this.handleTopDropCapture, true)
-	}
-
-	public removeEventListeners(target: any) {
-		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
-		if (!target.removeEventListener) {
-			return
-		}
-		target.removeEventListener('dragstart', this.handleTopDragStart)
-		target.removeEventListener(
-			'dragstart',
-			this.handleTopDragStartCapture,
-			true,
-		)
-		target.removeEventListener('dragend', this.handleTopDragEndCapture, true)
-		target.removeEventListener('dragenter', this.handleTopDragEnter)
-		target.removeEventListener(
-			'dragenter',
-			this.handleTopDragEnterCapture,
-			true,
-		)
-		target.removeEventListener(
-			'dragleave',
-			this.handleTopDragLeaveCapture,
-			true,
-		)
-		target.removeEventListener('dragover', this.handleTopDragOver)
-		target.removeEventListener('dragover', this.handleTopDragOverCapture, true)
-		target.removeEventListener('drop', this.handleTopDrop)
-		target.removeEventListener('drop', this.handleTopDropCapture, true)
 	}
 
 	public connectDragPreview(sourceId: string, node: any, options: any) {
@@ -192,7 +146,53 @@ export default class HTML5Backend implements IBackend {
 		}
 	}
 
-	public getCurrentSourceNodeOptions() {
+	private addEventListeners(target: any) {
+		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
+		if (!target.addEventListener) {
+			return
+		}
+		target.addEventListener('dragstart', this.handleTopDragStart)
+		target.addEventListener('dragstart', this.handleTopDragStartCapture, true)
+		target.addEventListener('dragend', this.handleTopDragEndCapture, true)
+		target.addEventListener('dragenter', this.handleTopDragEnter)
+		target.addEventListener('dragenter', this.handleTopDragEnterCapture, true)
+		target.addEventListener('dragleave', this.handleTopDragLeaveCapture, true)
+		target.addEventListener('dragover', this.handleTopDragOver)
+		target.addEventListener('dragover', this.handleTopDragOverCapture, true)
+		target.addEventListener('drop', this.handleTopDrop)
+		target.addEventListener('drop', this.handleTopDropCapture, true)
+	}
+
+	private removeEventListeners(target: any) {
+		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
+		if (!target.removeEventListener) {
+			return
+		}
+		target.removeEventListener('dragstart', this.handleTopDragStart)
+		target.removeEventListener(
+			'dragstart',
+			this.handleTopDragStartCapture,
+			true,
+		)
+		target.removeEventListener('dragend', this.handleTopDragEndCapture, true)
+		target.removeEventListener('dragenter', this.handleTopDragEnter)
+		target.removeEventListener(
+			'dragenter',
+			this.handleTopDragEnterCapture,
+			true,
+		)
+		target.removeEventListener(
+			'dragleave',
+			this.handleTopDragLeaveCapture,
+			true,
+		)
+		target.removeEventListener('dragover', this.handleTopDragOver)
+		target.removeEventListener('dragover', this.handleTopDragOverCapture, true)
+		target.removeEventListener('drop', this.handleTopDrop)
+		target.removeEventListener('drop', this.handleTopDropCapture, true)
+	}
+
+	private getCurrentSourceNodeOptions() {
 		const sourceId = this.monitor.getSourceId()
 		const sourceNodeOptions = this.sourceNodeOptions[sourceId as string]
 
@@ -201,7 +201,7 @@ export default class HTML5Backend implements IBackend {
 		})
 	}
 
-	public getCurrentDropEffect() {
+	private getCurrentDropEffect() {
 		if (this.isDraggingNativeItem()) {
 			// It makes more sense to default to 'copy' for native resources
 			return 'copy'
@@ -210,7 +210,7 @@ export default class HTML5Backend implements IBackend {
 		return this.getCurrentSourceNodeOptions().dropEffect
 	}
 
-	public getCurrentSourcePreviewNodeOptions() {
+	private getCurrentSourcePreviewNodeOptions() {
 		const sourceId = this.monitor.getSourceId()
 		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[
 			sourceId as string
@@ -224,18 +224,18 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public getSourceClientOffset(sourceId: string) {
+	private getSourceClientOffset(sourceId: string) {
 		return getNodeClientOffset(this.sourceNodes[sourceId])
 	}
 
-	public isDraggingNativeItem() {
+	private isDraggingNativeItem() {
 		const itemType = this.monitor.getItemType()
 		return Object.keys(NativeTypes).some(
 			(key: string) => (NativeTypes as any)[key] === itemType,
 		)
 	}
 
-	public beginDragNativeItem(type: any) {
+	private beginDragNativeItem(type: any) {
 		this.clearCurrentDragSourceNode()
 
 		const SourceType = createNativeDragSource(type)
@@ -248,7 +248,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public asyncEndDragNativeItem() {
+	private asyncEndDragNativeItem() {
 		if (this.window) {
 			this.asyncEndDragFrameId = this.window.requestAnimationFrame(
 				this.endDragNativeItem,
@@ -257,7 +257,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public endDragNativeItem() {
+	private endDragNativeItem() {
 		if (!this.isDraggingNativeItem()) {
 			return
 		}
@@ -269,7 +269,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public isNodeInDocument(node: any) {
+	private isNodeInDocument(node: any) {
 		// Check the node either in the main document or in the current context
 		return (
 			(!!document && document.body.contains(node)) ||
@@ -278,7 +278,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public endDragIfSourceWasRemovedFromDOM() {
+	private endDragIfSourceWasRemovedFromDOM() {
 		const node = this.currentDragSourceNode
 		if (this.isNodeInDocument(node)) {
 			return
@@ -289,7 +289,7 @@ export default class HTML5Backend implements IBackend {
 		}
 	}
 
-	public setCurrentDragSourceNode(node: any) {
+	private setCurrentDragSourceNode(node: any) {
 		this.clearCurrentDragSourceNode()
 		this.currentDragSourceNode = node
 		this.currentDragSourceNodeOffset = getNodeClientOffset(node)
@@ -326,7 +326,7 @@ export default class HTML5Backend implements IBackend {
 		}, MOUSE_MOVE_TIMEOUT)
 	}
 
-	public clearCurrentDragSourceNode() {
+	private clearCurrentDragSourceNode() {
 		if (this.currentDragSourceNode) {
 			this.currentDragSourceNode = null
 			this.currentDragSourceNodeOffset = null
@@ -348,7 +348,7 @@ export default class HTML5Backend implements IBackend {
 		return false
 	}
 
-	public checkIfCurrentDragSourceRectChanged() {
+	private checkIfCurrentDragSourceRectChanged() {
 		const node = this.currentDragSourceNode
 		if (!node) {
 			return false
@@ -367,12 +367,12 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleTopDragStartCapture() {
+	private handleTopDragStartCapture() {
 		this.clearCurrentDragSourceNode()
 		this.dragStartSourceIds = []
 	}
 
-	public handleDragStart(e: any, sourceId: any) {
+	private handleDragStart(e: any, sourceId: any) {
 		if (!this.dragStartSourceIds) {
 			this.dragStartSourceIds = []
 		}
@@ -380,7 +380,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleTopDragStart(e: any) {
+	private handleTopDragStart(e: any) {
 		const { dragStartSourceIds } = this
 		this.dragStartSourceIds = null
 
@@ -483,7 +483,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleTopDragEndCapture() {
+	private handleTopDragEndCapture() {
 		if (this.clearCurrentDragSourceNode()) {
 			// Firefox can dispatch this event in an infinite loop
 			// if dragend handler does something like showing an alert.
@@ -493,7 +493,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleTopDragEnterCapture(e: any) {
+	private handleTopDragEnterCapture(e: any) {
 		this.dragEnterTargetIds = []
 
 		const isFirstEnter = this.enterLeaveCounter.enter(e.target)
@@ -510,12 +510,12 @@ export default class HTML5Backend implements IBackend {
 		}
 	}
 
-	public handleDragEnter(e: any, targetId: string) {
+	private handleDragEnter(e: any, targetId: string) {
 		this.dragEnterTargetIds.unshift(targetId)
 	}
 
 	@autobind
-	public handleTopDragEnter(e: any) {
+	private handleTopDragEnter(e: any) {
 		const { dragEnterTargetIds } = this
 		this.dragEnterTargetIds = []
 
@@ -548,11 +548,11 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleTopDragOverCapture() {
+	private handleTopDragOverCapture() {
 		this.dragOverTargetIds = []
 	}
 
-	public handleDragOver(e: any, targetId: string) {
+	private handleDragOver(e: any, targetId: string) {
 		if (this.dragOverTargetIds === null) {
 			this.dragOverTargetIds = []
 		}
@@ -560,7 +560,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleTopDragOver(e: any) {
+	private handleTopDragOver(e: any) {
 		const { dragOverTargetIds } = this
 		this.dragOverTargetIds = []
 
@@ -600,7 +600,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleTopDragLeaveCapture(e: any) {
+	private handleTopDragLeaveCapture(e: any) {
 		if (this.isDraggingNativeItem()) {
 			e.preventDefault()
 		}
@@ -616,7 +616,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleTopDropCapture(e: any) {
+	private handleTopDropCapture(e: any) {
 		this.dropTargetIds = []
 		e.preventDefault()
 
@@ -627,12 +627,12 @@ export default class HTML5Backend implements IBackend {
 		this.enterLeaveCounter.reset()
 	}
 
-	public handleDrop(e: any, targetId: string) {
+	private handleDrop(e: any, targetId: string) {
 		this.dropTargetIds.unshift(targetId)
 	}
 
 	@autobind
-	public handleTopDrop(e: any) {
+	private handleTopDrop(e: any) {
 		const { dropTargetIds } = this
 		this.dropTargetIds = []
 
@@ -649,7 +649,7 @@ export default class HTML5Backend implements IBackend {
 	}
 
 	@autobind
-	public handleSelectStart(e: any) {
+	private handleSelectStart(e: any) {
 		const { target } = e
 
 		// Only IE requires us to explicitly say
