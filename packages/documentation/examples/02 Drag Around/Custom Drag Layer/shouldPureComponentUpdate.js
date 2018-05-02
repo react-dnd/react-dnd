@@ -1,4 +1,4 @@
-import shallowEqual from './shallowEqual'
+import shallowEqual from 'shallowequal'
 
 export default function shouldPureComponentUpdate(nextProps, nextState) {
 	return (

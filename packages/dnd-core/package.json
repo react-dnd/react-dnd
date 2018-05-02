@@ -3,26 +3,32 @@
 	"version": "2.6.0",
 	"description": "Drag and drop sans the GUI",
 	"license": "BSD-3-Clause",
-	"main": "lib/index.js",
+	"main": "./lib/index.js",
+	"types": "./lib/index.d.ts",
 	"scripts": {
 		"clean": "rimraf lib",
-		"build": "babel src --out-dir lib",
-		"test": "npm-run-all clean build",
-		"prepublish": "npm run test"
+		"build": "tsc",
+		"test": "run-s clean build"
 	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/react-dnd/react-dnd.git"
 	},
 	"dependencies": {
+		"@types/invariant": "^2.2.29",
+		"@types/lodash": "^4.14.107",
+		"@types/node": "^8.10.11",
+		"@types/redux": "^3.6.0",
+		"@types/redux-actions": "^2.2.4",
 		"asap": "^2.0.6",
 		"invariant": "^2.0.0",
 		"lodash": "^4.2.0",
-		"redux": "^4.0.0"
+		"redux": "^4.0.0",
+		"redux-actions": "^2.3.0"
 	},
 	"devDependencies": {
-		"babel-cli": "^6.26.0",
 		"npm-run-all": "^4.1.2",
-		"rimraf": "^2.6.1"
+		"rimraf": "^2.6.1",
+		"typescript": "^2.8.1"
 	}
 }
