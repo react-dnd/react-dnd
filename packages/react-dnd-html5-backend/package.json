@@ -10,11 +10,13 @@
 	},
 	"scripts": {
 		"clean": "rimraf lib",
-		"build:lib": "tsc",
-		"build:umd": "webpack",
-		"build": "run-p build:*",
-		"test": "run-s clean build",
-		"prepublish": "npm test"
+		"transpile": "tsc",
+		"bundle:unmin":
+			"webpack --mode development --output-filename=ReactDnDHTML5Backend.js",
+		"bundle:min":
+			"webpack --mode production --output-filename=ReactDnDHTML5Backend.min.js",
+		"build": "run-p bundle:* transpile",
+		"test": "run-s clean build"
 	},
 	"devDependencies": {
 		"@types/autobind-decorator": "^2.1.0",

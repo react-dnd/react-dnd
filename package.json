@@ -46,7 +46,8 @@
 		"prettify":
 			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
-		"start": "lerna run --stream start"
+		"start": "lerna run --stream start",
+		"prepublish": "npm test"
 	},
 	"devDependencies": {
 		"@types/jest": "^22.2.3",

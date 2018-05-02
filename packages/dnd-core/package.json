@@ -8,8 +8,7 @@
 	"scripts": {
 		"clean": "rimraf lib",
 		"build": "tsc",
-		"test": "run-s clean build",
-		"prepublish": "npm run test"
+		"test": "run-s clean build"
 	},
 	"repository": {
 		"type": "git",

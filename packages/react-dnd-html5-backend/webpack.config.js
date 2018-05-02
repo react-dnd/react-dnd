@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = {
 	entry: './src/index',
-	mode: 'production',
+	mode: 'none',
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
 		modules: [
@@ -12,10 +12,18 @@ module.exports = {
 		],
 	},
 	module: {
-		rules: [{ test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ }],
+		rules: [
+			{
+				test: /\.ts(x|)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'ts-loader',
+					options: { transpileOnly: true },
+				},
+			},
+		],
 	},
 	output: {
-		filename: 'dist/ReactDnDHTML5Backend.min.js',
 		libraryTarget: 'umd',
 		library: 'ReactDnDHTML5Backend',
 	},

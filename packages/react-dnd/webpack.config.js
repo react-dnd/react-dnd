@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = {
 	entry: './src/index',
-	mode: 'production',
+	mode: 'none',
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
 		modules: [
@@ -15,7 +15,14 @@ module.exports = {
 	module: {
 		rules: [
 			{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
-			{ test: /\.ts(x|)$/, use: 'ts-loader', exclude: /node_modules/ },
+			{
+				test: /\.ts(x|)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'ts-loader',
+					options: { transpileOnly: true },
+				},
+			},
 		],
 	},
 	externals: [
@@ -29,7 +36,6 @@ module.exports = {
 		},
 	],
 	output: {
-		filename: 'dist/ReactDnD.min.js',
 		libraryTarget: 'umd',
 		library: 'ReactDnD',
 	},
