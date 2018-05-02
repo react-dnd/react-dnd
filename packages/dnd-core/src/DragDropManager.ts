@@ -52,7 +52,7 @@ export default class DragDropManager<Context>
 		const manager = this
 		const { dispatch } = this.store
 
-		function bindActionCreator(actionCreator: ActionCreator) {
+		function bindActionCreator(actionCreator: ActionCreator<any>) {
 			return (...args: any[]) => {
 				const action = actionCreator.apply(manager, args)
 				if (typeof action !== 'undefined') {
@@ -65,7 +65,9 @@ export default class DragDropManager<Context>
 
 		return Object.keys(actions).reduce(
 			(boundActions: IDragDropActions, key: string) => {
-				const action: ActionCreator = (actions as any)[key] as ActionCreator
+				const action: ActionCreator<any> = (actions as any)[
+					key
+				] as ActionCreator<any>
 				;(boundActions as any)[key] = bindActionCreator(action) // eslint-disable-line no-param-reassign
 				return boundActions
 			},

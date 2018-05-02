@@ -8,9 +8,15 @@ import {
 	DROP,
 } from '../actions/dragDrop'
 import { REMOVE_TARGET } from '../actions/registry'
+import {
+	ItemType,
+	IAction,
+	IBeginDragOptions,
+	ISentinelAction,
+} from '../interfaces'
 
 export interface IState {
-	itemType: string | null
+	itemType: ItemType | null
 	item: any
 	sourceId: string | null
 	targetIds: string[]
@@ -31,25 +37,25 @@ const initialState: IState = {
 
 export default function dragOperation(
 	state: IState = initialState,
-	action: {
-		type: string
-		itemType: string
+	action: IAction<{
+		itemType: ItemType
 		item: any
 		sourceId: string
 		targetId: string
 		targetIds: string[]
 		isSourcePublic: boolean
 		dropResult: any
-	},
+	}>,
 ) {
+	const { payload } = action
 	switch (action.type) {
 		case BEGIN_DRAG:
 			return {
 				...state,
-				itemType: action.itemType,
-				item: action.item,
-				sourceId: action.sourceId,
-				isSourcePublic: action.isSourcePublic,
+				itemType: payload.itemType,
+				item: payload.item,
+				sourceId: payload.sourceId,
+				isSourcePublic: payload.isSourcePublic,
 				dropResult: null,
 				didDrop: false,
 			}
@@ -61,20 +67,20 @@ export default function dragOperation(
 		case HOVER:
 			return {
 				...state,
-				targetIds: action.targetIds,
+				targetIds: payload.targetIds,
 			}
 		case REMOVE_TARGET:
-			if (state.targetIds.indexOf(action.targetId) === -1) {
+			if (state.targetIds.indexOf(payload.targetId) === -1) {
 				return state
 			}
 			return {
 				...state,
-				targetIds: without(state.targetIds, action.targetId),
+				targetIds: without(state.targetIds, payload.targetId),
 			}
 		case DROP:
 			return {
 				...state,
-				dropResult: action.dropResult,
+				dropResult: payload.dropResult,
 				didDrop: true,
 				targetIds: [],
 			}

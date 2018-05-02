@@ -117,18 +117,58 @@ export interface IHandlerRegistry {
 	unpinSource(): void
 }
 
-export interface IAction {
+export interface IAction<Payload> {
+	type: string
+	payload: Payload
+}
+export interface ISentinelAction {
 	type: string
 }
 
-export type ActionCreator = (args: any[]) => IAction
+export type ActionCreator<Payload> = (args: any[]) => IAction<Payload>
+
+export interface IBeginDragOptions {
+	publishSource?: boolean
+	clientOffset?: IXYCoord
+	getSourceClientOffset?: (sourceId: ItemType) => IXYCoord
+}
+
+export interface IBeginDragPayload {
+	itemType: ItemType
+	item: any
+	sourceId: ItemType
+	clientOffset: IXYCoord | null
+	sourceClientOffset: IXYCoord | null
+	isSourcePublic: boolean
+}
+
+export interface IHoverPayload {
+	targetIds: ItemType[]
+	clientOffset: IXYCoord | null
+}
+
+export interface IHoverOptions {
+	clientOffset?: IXYCoord
+}
+
+export interface IDropPayload {
+	dropResult: any
+}
+
+export interface ITargetIdPayload {
+	targetId: string
+}
+
+export interface ISourceIdPayload {
+	sourceId: string
+}
 
 export interface IDragDropActions {
-	beginDrag(sourceIds: string[], options?: any): IAction
-	publishDragSource(): IAction
-	hover(targetIds: string[], options?: any): IAction
-	drop(options?: any): IAction
-	endDrag(): IAction
+	beginDrag(sourceIds: string[], options?: any): IAction<IBeginDragPayload>
+	publishDragSource(): ISentinelAction
+	hover(targetIds: string[], options?: any): IAction<IHoverPayload>
+	drop(options?: any): void
+	endDrag(): ISentinelAction
 }
 
 export interface IDragDropManager<Context> {

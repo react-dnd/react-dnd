@@ -1,4 +1,15 @@
-import { IDragDropManager } from '../interfaces'
+import {
+	IAction,
+	IDragDropManager,
+	IXYCoord,
+	ItemType,
+	IBeginDragPayload,
+	IBeginDragOptions,
+	ISentinelAction,
+	IDropPayload,
+	IHoverPayload,
+	IHoverOptions,
+} from '../interfaces'
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
 import isObject from 'lodash/isObject'
@@ -16,14 +27,14 @@ export default function createDragDropActions<Context>(
 	return {
 		beginDrag(
 			sourceIds: string[] = [],
-			options = {
+			{
+				publishSource,
+				clientOffset,
+				getSourceClientOffset,
+			}: IBeginDragOptions = {
 				publishSource: true,
-				clientOffset: null,
-				getSourceClientOffset: null,
 			},
-		) {
-			const { publishSource, clientOffset, getSourceClientOffset } = options
-
+		): IAction<IBeginDragPayload> | undefined {
 			const monitor = manager.getMonitor()
 			const registry = manager.getRegistry()
 			invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
@@ -43,7 +54,7 @@ export default function createDragDropActions<Context>(
 				return
 			}
 
-			let sourceClientOffset = null
+			let sourceClientOffset: IXYCoord | null = null
 			if (clientOffset) {
 				invariant(
 					typeof getSourceClientOffset === 'function',
@@ -61,16 +72,18 @@ export default function createDragDropActions<Context>(
 			const itemType = registry.getSourceType(sourceId)
 			return {
 				type: BEGIN_DRAG,
-				itemType,
-				item,
-				sourceId,
-				clientOffset,
-				sourceClientOffset,
-				isSourcePublic: publishSource,
+				payload: {
+					itemType,
+					item,
+					sourceId,
+					clientOffset: clientOffset || null,
+					sourceClientOffset: sourceClientOffset || null,
+					isSourcePublic: !!publishSource,
+				},
 			}
 		},
 
-		publishDragSource() {
+		publishDragSource(): ISentinelAction | undefined {
 			const monitor = manager.getMonitor()
 			if (!monitor.isDragging()) {
 				return
@@ -78,7 +91,10 @@ export default function createDragDropActions<Context>(
 			return { type: PUBLISH_DRAG_SOURCE }
 		},
 
-		hover(targetIdsArg: string[], { clientOffset = null } = {}) {
+		hover(
+			targetIdsArg: string[],
+			{ clientOffset }: IHoverOptions = {},
+		): IAction<IHoverPayload> {
 			invariant(isArray(targetIdsArg), 'Expected targetIds to be an array.')
 			const targetIds = targetIdsArg.slice(0)
 
@@ -120,12 +136,14 @@ export default function createDragDropActions<Context>(
 
 			return {
 				type: HOVER,
-				targetIds,
-				clientOffset,
+				payload: {
+					targetIds,
+					clientOffset: clientOffset || null,
+				},
 			}
 		},
 
-		drop(options = {}) {
+		drop(options = {}): void {
 			const monitor = manager.getMonitor()
 			const registry = manager.getRegistry()
 			invariant(monitor.isDragging(), 'Cannot call drop while not dragging.')
@@ -139,6 +157,8 @@ export default function createDragDropActions<Context>(
 				.filter(monitor.canDropOnTarget, monitor)
 
 			targetIds.reverse()
+
+			// Multiple actions are dispatched here, which is why this doesn't return an action
 			targetIds.forEach((targetId, index) => {
 				const target = registry.getTarget(targetId)
 
@@ -151,17 +171,20 @@ export default function createDragDropActions<Context>(
 					dropResult = index === 0 ? {} : monitor.getDropResult()
 				}
 
-				manager.dispatch({
+				const action: IAction<IDropPayload> = {
 					type: DROP,
-					dropResult: {
-						...options,
-						...dropResult,
+					payload: {
+						dropResult: {
+							...options,
+							...dropResult,
+						},
 					},
-				})
+				}
+				manager.dispatch(action)
 			})
 		},
 
-		endDrag() {
+		endDrag(): ISentinelAction {
 			const monitor = manager.getMonitor()
 			const registry = manager.getRegistry()
 			invariant(monitor.isDragging(), 'Cannot call endDrag while not dragging.')

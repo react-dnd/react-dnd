@@ -13,6 +13,7 @@ import {
 	REMOVE_SOURCE,
 	REMOVE_TARGET,
 } from '../actions/registry'
+import { IAction } from '../interfaces'
 
 const NONE: string[] = []
 const ALL: string[] = []
@@ -21,7 +22,7 @@ export type State = string[]
 
 export default function dirtyHandlerIds(
 	state: State = NONE,
-	action: { type: string; targetIds: string[] },
+	action: IAction<{ targetIds: string[] }>,
 	dragOperation: { targetIds: string[] },
 ) {
 	switch (action.type) {
@@ -40,7 +41,7 @@ export default function dirtyHandlerIds(
 			return ALL
 	}
 
-	const { targetIds } = action
+	const { targetIds } = action.payload
 	const { targetIds: prevTargetIds } = dragOperation
 	const result = xor(targetIds, prevTargetIds)
 

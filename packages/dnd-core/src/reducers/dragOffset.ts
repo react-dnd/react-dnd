@@ -1,5 +1,5 @@
 import { BEGIN_DRAG, HOVER, END_DRAG, DROP } from '../actions/dragDrop'
-import { IXYCoord } from '../interfaces'
+import { IXYCoord, IAction } from '../interfaces'
 
 export interface IState {
 	initialSourceClientOffset: IXYCoord | null
@@ -24,26 +24,26 @@ function areOffsetsEqual(offsetA: IXYCoord | null, offsetB: IXYCoord | null) {
 
 export default function dragOffset(
 	state: IState = initialState,
-	action: {
-		type: string
+	action: IAction<{
 		sourceClientOffset: IXYCoord
 		clientOffset: IXYCoord
-	},
+	}>,
 ) {
+	const { payload } = action
 	switch (action.type) {
 		case BEGIN_DRAG:
 			return {
-				initialSourceClientOffset: action.sourceClientOffset,
-				initialClientOffset: action.clientOffset,
-				clientOffset: action.clientOffset,
+				initialSourceClientOffset: payload.sourceClientOffset,
+				initialClientOffset: payload.clientOffset,
+				clientOffset: payload.clientOffset,
 			}
 		case HOVER:
-			if (areOffsetsEqual(state.clientOffset, action.clientOffset)) {
+			if (areOffsetsEqual(state.clientOffset, payload.clientOffset)) {
 				return state
 			}
 			return {
 				...state,
-				clientOffset: action.clientOffset,
+				clientOffset: payload.clientOffset,
 			}
 		case END_DRAG:
 		case DROP:
