@@ -3,7 +3,9 @@ const path = require('path')
 
 module.exports = {
 	entry: './src/index',
+	mode: 'production',
 	resolve: {
+		extensions: ['.ts', '.tsx', '.js'],
 		modules: [
 			path.join(__dirname, 'node_modules'),
 			path.join(__dirname, '..', '..', 'node_modules'),

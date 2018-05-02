@@ -1,12 +1,11 @@
-/* eslint
-   no-mixed-operators: off
-*/
 import { isSafari, isFirefox } from './BrowserDetector'
 import MonotonicInterpolant from './MonotonicInterpolant'
+import { DOMElement, ReactNode } from 'react'
+import { XYCoord } from 'dnd-core'
 
 const ELEMENT_NODE = 1
 
-export function getNodeClientOffset(node) {
+export function getNodeClientOffset(node: any) {
 	const el = node.nodeType === ELEMENT_NODE ? node : node.parentElement
 
 	if (!el) {
@@ -17,21 +16,26 @@ export function getNodeClientOffset(node) {
 	return { x: left, y: top }
 }
 
-export function getEventClientOffset(e) {
+export function getEventClientOffset(e: any) {
 	return {
 		x: e.clientX,
 		y: e.clientY,
 	}
 }
 
-function isImageNode(node) {
+function isImageNode(node: any) {
 	return (
 		node.nodeName === 'IMG' &&
 		(isFirefox() || !document.documentElement.contains(node))
 	)
 }
 
-function getDragPreviewSize(isImage, dragPreview, sourceWidth, sourceHeight) {
+function getDragPreviewSize(
+	isImage: boolean,
+	dragPreview: any,
+	sourceWidth: number,
+	sourceHeight: number,
+) {
 	let dragPreviewWidth = isImage ? dragPreview.width : sourceWidth
 	let dragPreviewHeight = isImage ? dragPreview.height : sourceHeight
 
@@ -44,17 +48,19 @@ function getDragPreviewSize(isImage, dragPreview, sourceWidth, sourceHeight) {
 }
 
 export function getDragPreviewOffset(
-	sourceNode,
-	dragPreview,
-	clientOffset,
-	anchorPoint,
-	offsetPoint,
+	sourceNode: any,
+	dragPreview: any,
+	clientOffset: XYCoord,
+	anchorPoint: any,
+	offsetPoint: any,
 ) {
 	// The browsers will use the image intrinsic size under different conditions.
 	// Firefox only cares if it's an image, but WebKit also wants it to be detached.
 	const isImage = isImageNode(dragPreview)
 	const dragPreviewNode = isImage ? sourceNode : dragPreview
-	const dragPreviewNodeOffsetFromClient = getNodeClientOffset(dragPreviewNode)
+	const dragPreviewNodeOffsetFromClient = getNodeClientOffset(
+		dragPreviewNode,
+	) as XYCoord
 	const offsetFromDragPreview = {
 		x: clientOffset.x - dragPreviewNodeOffsetFromClient.x,
 		y: clientOffset.y - dragPreviewNodeOffsetFromClient.y,

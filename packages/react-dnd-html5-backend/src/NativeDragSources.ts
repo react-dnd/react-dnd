@@ -1,6 +1,12 @@
 import * as NativeTypes from './NativeTypes'
+import matchesType from 'dnd-core/lib/utils/matchesType'
+import { IDragDropMonitor } from 'dnd-core'
 
-function getDataFromDataTransfer(dataTransfer, typesToTry, defaultValue) {
+function getDataFromDataTransfer(
+	dataTransfer: any,
+	typesToTry: string[],
+	defaultValue: any,
+) {
 	const result = typesToTry.reduce(
 		(resultSoFar, typeToTry) => resultSoFar || dataTransfer.getData(typeToTry),
 		null,
@@ -11,30 +17,40 @@ function getDataFromDataTransfer(dataTransfer, typesToTry, defaultValue) {
 		: defaultValue
 }
 
-const nativeTypesConfig = {
+const nativeTypesConfig: {
+	[key: string]: {
+		exposeProperty: string
+		matchesType?: string
+		matchesTypes?: string[]
+		getData: Function
+	}
+} = {
 	[NativeTypes.FILE]: {
 		exposeProperty: 'files',
 		matchesTypes: ['Files'],
-		getData: dataTransfer => Array.prototype.slice.call(dataTransfer.files),
+		getData: (dataTransfer: any) =>
+			Array.prototype.slice.call(dataTransfer.files),
 	},
 	[NativeTypes.URL]: {
 		exposeProperty: 'urls',
 		matchesTypes: ['Url', 'text/uri-list'],
-		getData: (dataTransfer, matchesTypes) =>
+		getData: (dataTransfer: any, matchesTypes: any) =>
 			getDataFromDataTransfer(dataTransfer, matchesTypes, '').split('\n'),
 	},
 	[NativeTypes.TEXT]: {
 		exposeProperty: 'text',
 		matchesTypes: ['Text', 'text/plain'],
-		getData: (dataTransfer, matchesTypes) =>
+		getData: (dataTransfer: any, matchesTypes: any) =>
 			getDataFromDataTransfer(dataTransfer, matchesTypes, ''),
 	},
 }
 
-export function createNativeDragSource(type) {
+export function createNativeDragSource(type: any) {
 	const { exposeProperty, matchesTypes, getData } = nativeTypesConfig[type]
 
 	return class NativeDragSource {
+		public item: any
+
 		constructor() {
 			this.item = {
 				get [exposeProperty]() {
@@ -47,34 +63,36 @@ export function createNativeDragSource(type) {
 			}
 		}
 
-		mutateItemByReadingDataTransfer(dataTransfer) {
+		public mutateItemByReadingDataTransfer(dataTransfer: any) {
 			delete this.item[exposeProperty]
 			this.item[exposeProperty] = getData(dataTransfer, matchesTypes)
 		}
 
-		canDrag() {
+		public canDrag() {
 			return true
 		}
 
-		beginDrag() {
+		public beginDrag() {
 			return this.item
 		}
 
-		isDragging(monitor, handle) {
+		public isDragging(monitor: IDragDropMonitor, handle: string) {
 			return handle === monitor.getSourceId()
 		}
 
-		endDrag() {}
+		public endDrag() {}
 	}
 }
 
-export function matchNativeItemType(dataTransfer) {
+export function matchNativeItemType(dataTransfer: any) {
 	const dataTransferTypes = Array.prototype.slice.call(dataTransfer.types || [])
 
 	return (
 		Object.keys(nativeTypesConfig).filter(nativeItemType => {
 			const { matchesTypes } = nativeTypesConfig[nativeItemType]
-			return matchesTypes.some(t => dataTransferTypes.indexOf(t) > -1)
+			return (matchesTypes as string[]).some(
+				t => dataTransferTypes.indexOf(t) > -1,
+			)
 		})[0] || null
 	)
 }

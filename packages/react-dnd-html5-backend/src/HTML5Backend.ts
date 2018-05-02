@@ -1,6 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import defaults from 'lodash/defaults'
-import shallowEqual from 'shallowequal'
+import {
+	IBackend,
+	IDragDropManager,
+	IDragDropActions,
+	IDragDropMonitor,
+	IHandlerRegistry,
+	XYCoord,
+} from 'dnd-core'
 import EnterLeaveCounter from './EnterLeaveCounter'
 import { isFirefox } from './BrowserDetector'
 import {
@@ -13,49 +20,48 @@ import {
 	matchNativeItemType,
 } from './NativeDragSources'
 import * as NativeTypes from './NativeTypes'
+import autobind from 'autobind-decorator'
+import { Context } from './interfaces'
 
-export default class HTML5Backend {
-	constructor(manager) {
+const shallowEqual = require('shallowequal')
+
+declare global {
+	interface Window {
+		__isReactDndBackendSetUp: boolean | undefined
+	}
+}
+
+export default class HTML5Backend implements IBackend {
+	private actions: IDragDropActions
+	private monitor: IDragDropMonitor
+	private registry: IHandlerRegistry
+	private context: Context
+
+	private sourcePreviewNodes: any = {}
+	private sourcePreviewNodeOptions: any = {}
+	private sourceNodes: any = {}
+	private sourceNodeOptions: any = {}
+	private enterLeaveCounter: EnterLeaveCounter = new EnterLeaveCounter()
+
+	private dragStartSourceIds: string[] | null = null
+	private dropTargetIds: string[] = []
+	private dragEnterTargetIds: string[] = []
+	private currentNativeSource: any = null
+	private currentNativeHandle: any = null
+	private currentDragSourceNode: any = null
+	private currentDragSourceNodeOffset: XYCoord | null = null
+	private currentDragSourceNodeOffsetChanged: boolean = false
+	private altKeyPressed: boolean = false
+	private mouseMoveTimeoutTimer: any = null
+	private asyncEndDragFrameId: any = null
+	private dragOverTargetIds: string[] | null = null
+	private mouseMoveTimeoutId: any
+
+	constructor(manager: IDragDropManager<any>) {
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
 		this.context = manager.getContext()
-
-		this.sourcePreviewNodes = {}
-		this.sourcePreviewNodeOptions = {}
-		this.sourceNodes = {}
-		this.sourceNodeOptions = {}
-		this.enterLeaveCounter = new EnterLeaveCounter()
-
-		this.dragStartSourceIds = []
-		this.dropTargetIds = []
-		this.dragEnterTargetIds = []
-		this.currentNativeSource = null
-		this.currentNativeHandle = null
-		this.currentDragSourceNode = null
-		this.currentDragSourceNodeOffset = null
-		this.currentDragSourceNodeOffsetChanged = false
-		this.altKeyPressed = false
-		this.mouseMoveTimeoutTimer = null
-
-		this.getSourceClientOffset = this.getSourceClientOffset.bind(this)
-		this.handleTopDragStart = this.handleTopDragStart.bind(this)
-		this.handleTopDragStartCapture = this.handleTopDragStartCapture.bind(this)
-		this.handleTopDragEndCapture = this.handleTopDragEndCapture.bind(this)
-		this.handleTopDragEnter = this.handleTopDragEnter.bind(this)
-		this.handleTopDragEnterCapture = this.handleTopDragEnterCapture.bind(this)
-		this.handleTopDragLeaveCapture = this.handleTopDragLeaveCapture.bind(this)
-		this.handleTopDragOver = this.handleTopDragOver.bind(this)
-		this.handleTopDragOverCapture = this.handleTopDragOverCapture.bind(this)
-		this.handleTopDrop = this.handleTopDrop.bind(this)
-		this.handleTopDropCapture = this.handleTopDropCapture.bind(this)
-		this.handleSelectStart = this.handleSelectStart.bind(this)
-		this.endDragIfSourceWasRemovedFromDOM = this.endDragIfSourceWasRemovedFromDOM.bind(
-			this,
-		)
-		this.endDragNativeItem = this.endDragNativeItem.bind(this)
-		this.asyncEndDragNativeItem = this.asyncEndDragNativeItem.bind(this)
-		this.isNodeInDocument = this.isNodeInDocument.bind(this)
 	}
 
 	get window() {
@@ -67,7 +73,7 @@ export default class HTML5Backend {
 		return undefined
 	}
 
-	setup() {
+	public setup() {
 		if (this.window === undefined) {
 			return
 		}
@@ -79,7 +85,7 @@ export default class HTML5Backend {
 		this.addEventListeners(this.window)
 	}
 
-	teardown() {
+	public teardown() {
 		if (this.window === undefined) {
 			return
 		}
@@ -92,7 +98,7 @@ export default class HTML5Backend {
 		}
 	}
 
-	addEventListeners(target) {
+	public addEventListeners(target: any) {
 		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
 		if (!target.addEventListener) {
 			return
@@ -109,7 +115,7 @@ export default class HTML5Backend {
 		target.addEventListener('drop', this.handleTopDropCapture, true)
 	}
 
-	removeEventListeners(target) {
+	public removeEventListeners(target: any) {
 		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
 		if (!target.removeEventListener) {
 			return
@@ -138,7 +144,7 @@ export default class HTML5Backend {
 		target.removeEventListener('drop', this.handleTopDropCapture, true)
 	}
 
-	connectDragPreview(sourceId, node, options) {
+	public connectDragPreview(sourceId: string, node: any, options: any) {
 		this.sourcePreviewNodeOptions[sourceId] = options
 		this.sourcePreviewNodes[sourceId] = node
 
@@ -148,12 +154,12 @@ export default class HTML5Backend {
 		}
 	}
 
-	connectDragSource(sourceId, node, options) {
+	public connectDragSource(sourceId: string, node: any, options: any) {
 		this.sourceNodes[sourceId] = node
 		this.sourceNodeOptions[sourceId] = options
 
-		const handleDragStart = e => this.handleDragStart(e, sourceId)
-		const handleSelectStart = e => this.handleSelectStart(e, sourceId)
+		const handleDragStart = (e: any) => this.handleDragStart(e, sourceId)
+		const handleSelectStart = (e: any) => this.handleSelectStart(e)
 
 		node.setAttribute('draggable', true)
 		node.addEventListener('dragstart', handleDragStart)
@@ -169,10 +175,10 @@ export default class HTML5Backend {
 		}
 	}
 
-	connectDropTarget(targetId, node) {
-		const handleDragEnter = e => this.handleDragEnter(e, targetId)
-		const handleDragOver = e => this.handleDragOver(e, targetId)
-		const handleDrop = e => this.handleDrop(e, targetId)
+	connectDropTarget(targetId: string, node: any) {
+		const handleDragEnter = (e: any) => this.handleDragEnter(e, targetId)
+		const handleDragOver = (e: any) => this.handleDragOver(e, targetId)
+		const handleDrop = (e: any) => this.handleDrop(e, targetId)
 
 		node.addEventListener('dragenter', handleDragEnter)
 		node.addEventListener('dragover', handleDragOver)
@@ -187,7 +193,7 @@ export default class HTML5Backend {
 
 	getCurrentSourceNodeOptions() {
 		const sourceId = this.monitor.getSourceId()
-		const sourceNodeOptions = this.sourceNodeOptions[sourceId]
+		const sourceNodeOptions = this.sourceNodeOptions[sourceId as string]
 
 		return defaults(sourceNodeOptions || {}, {
 			dropEffect: this.altKeyPressed ? 'copy' : 'move',
@@ -205,7 +211,9 @@ export default class HTML5Backend {
 
 	getCurrentSourcePreviewNodeOptions() {
 		const sourceId = this.monitor.getSourceId()
-		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[sourceId]
+		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[
+			sourceId as string
+		]
 
 		return defaults(sourcePreviewNodeOptions || {}, {
 			anchorX: 0.5,
@@ -214,16 +222,19 @@ export default class HTML5Backend {
 		})
 	}
 
-	getSourceClientOffset(sourceId) {
+	@autobind
+	public getSourceClientOffset(sourceId: string) {
 		return getNodeClientOffset(this.sourceNodes[sourceId])
 	}
 
 	isDraggingNativeItem() {
 		const itemType = this.monitor.getItemType()
-		return Object.keys(NativeTypes).some(key => NativeTypes[key] === itemType)
+		return Object.keys(NativeTypes).some(
+			(key: string) => (NativeTypes as any)[key] === itemType,
+		)
 	}
 
-	beginDragNativeItem(type) {
+	beginDragNativeItem(type: any) {
 		this.clearCurrentDragSourceNode()
 
 		const SourceType = createNativeDragSource(type)
@@ -235,13 +246,17 @@ export default class HTML5Backend {
 		this.actions.beginDrag([this.currentNativeHandle])
 	}
 
-	asyncEndDragNativeItem() {
-		this.asyncEndDragFrameId = this.window.requestAnimationFrame(
-			this.endDragNativeItem,
-		)
+	@autobind
+	public asyncEndDragNativeItem() {
+		if (this.window) {
+			this.asyncEndDragFrameId = this.window.requestAnimationFrame(
+				this.endDragNativeItem,
+			)
+		}
 	}
 
-	endDragNativeItem() {
+	@autobind
+	public endDragNativeItem() {
 		if (!this.isDraggingNativeItem()) {
 			return
 		}
@@ -252,14 +267,17 @@ export default class HTML5Backend {
 		this.currentNativeSource = null
 	}
 
-	isNodeInDocument(node) {
+	@autobind
+	public isNodeInDocument(node: any) {
 		// Check the node either in the main document or in the current context
-		return document.body.contains(node) || this.window
-			? this.window.document.body.contains(node)
-			: false
+		return (
+			(!!document && document.body.contains(node)) ||
+			(!!this.window && this.window.document.body.contains(node))
+		)
 	}
 
-	endDragIfSourceWasRemovedFromDOM() {
+	@autobind
+	public endDragIfSourceWasRemovedFromDOM() {
 		const node = this.currentDragSourceNode
 		if (this.isNodeInDocument(node)) {
 			return
@@ -270,7 +288,7 @@ export default class HTML5Backend {
 		}
 	}
 
-	setCurrentDragSourceNode(node) {
+	setCurrentDragSourceNode(node: any) {
 		this.clearCurrentDragSourceNode()
 		this.currentDragSourceNode = node
 		this.currentDragSourceNodeOffset = getNodeClientOffset(node)
@@ -296,10 +314,13 @@ export default class HTML5Backend {
 		//
 		this.mouseMoveTimeoutTimer = setTimeout(() => {
 			this.mouseMoveTimeoutId = null
-			return this.window.addEventListener(
-				'mousemove',
-				this.endDragIfSourceWasRemovedFromDOM,
-				true,
+			return (
+				this.window &&
+				this.window.addEventListener(
+					'mousemove',
+					this.endDragIfSourceWasRemovedFromDOM,
+					true,
+				)
 			)
 		}, MOUSE_MOVE_TIMEOUT)
 	}
@@ -309,12 +330,16 @@ export default class HTML5Backend {
 			this.currentDragSourceNode = null
 			this.currentDragSourceNodeOffset = null
 			this.currentDragSourceNodeOffsetChanged = false
-			this.window.clearTimeout(this.mouseMoveTimeoutTimer)
-			this.window.removeEventListener(
-				'mousemove',
-				this.endDragIfSourceWasRemovedFromDOM,
-				true,
-			)
+
+			if (this.window) {
+				this.window.clearTimeout(this.mouseMoveTimeoutTimer)
+				this.window.removeEventListener(
+					'mousemove',
+					this.endDragIfSourceWasRemovedFromDOM,
+					true,
+				)
+			}
+
 			this.mouseMoveTimeoutTimer = null
 			return true
 		}
@@ -340,16 +365,21 @@ export default class HTML5Backend {
 		return this.currentDragSourceNodeOffsetChanged
 	}
 
-	handleTopDragStartCapture() {
+	@autobind
+	public handleTopDragStartCapture() {
 		this.clearCurrentDragSourceNode()
 		this.dragStartSourceIds = []
 	}
 
-	handleDragStart(e, sourceId) {
+	public handleDragStart(e: any, sourceId: any) {
+		if (!this.dragStartSourceIds) {
+			this.dragStartSourceIds = []
+		}
 		this.dragStartSourceIds.unshift(sourceId)
 	}
 
-	handleTopDragStart(e) {
+	@autobind
+	public handleTopDragStart(e: any) {
 		const { dragStartSourceIds } = this
 		this.dragStartSourceIds = null
 
@@ -361,7 +391,7 @@ export default class HTML5Backend {
 		}
 
 		// Don't publish the source just yet (see why below)
-		this.actions.beginDrag(dragStartSourceIds, {
+		this.actions.beginDrag(dragStartSourceIds || [], {
 			publishSource: false,
 			getSourceClientOffset: this.getSourceClientOffset,
 			clientOffset,
@@ -375,7 +405,7 @@ export default class HTML5Backend {
 				// Use custom drag image if user specifies it.
 				// If child drag source refuses drag but parent agrees,
 				// use parent's node as drag image. Neither works in IE though.
-				const sourceId = this.monitor.getSourceId()
+				const sourceId: string = this.monitor.getSourceId() as string
 				const sourceNode = this.sourceNodes[sourceId]
 				const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode
 				const {
@@ -420,7 +450,7 @@ export default class HTML5Backend {
 				//
 				// It also neatly avoids a situation where render() returns null
 				// in the same tick for the source element, and browser freaks out.
-				setTimeout(() => this.actions.publishDragSource())
+				setTimeout(() => this.actions.publishDragSource(), 0)
 			} else {
 				// In some cases the user may want to override this behavior, e.g.
 				// to work around IE not supporting custom drag previews.
@@ -451,7 +481,8 @@ export default class HTML5Backend {
 		}
 	}
 
-	handleTopDragEndCapture() {
+	@autobind
+	public handleTopDragEndCapture() {
 		if (this.clearCurrentDragSourceNode()) {
 			// Firefox can dispatch this event in an infinite loop
 			// if dragend handler does something like showing an alert.
@@ -460,7 +491,8 @@ export default class HTML5Backend {
 		}
 	}
 
-	handleTopDragEnterCapture(e) {
+	@autobind
+	public handleTopDragEnterCapture(e: any) {
 		this.dragEnterTargetIds = []
 
 		const isFirstEnter = this.enterLeaveCounter.enter(e.target)
@@ -477,11 +509,12 @@ export default class HTML5Backend {
 		}
 	}
 
-	handleDragEnter(e, targetId) {
+	handleDragEnter(e: any, targetId: string) {
 		this.dragEnterTargetIds.unshift(targetId)
 	}
 
-	handleTopDragEnter(e) {
+	@autobind
+	public handleTopDragEnter(e: any) {
 		const { dragEnterTargetIds } = this
 		this.dragEnterTargetIds = []
 
@@ -513,15 +546,20 @@ export default class HTML5Backend {
 		}
 	}
 
-	handleTopDragOverCapture() {
+	@autobind
+	public handleTopDragOverCapture() {
 		this.dragOverTargetIds = []
 	}
 
-	handleDragOver(e, targetId) {
+	handleDragOver(e: any, targetId: string) {
+		if (this.dragOverTargetIds === null) {
+			this.dragOverTargetIds = []
+		}
 		this.dragOverTargetIds.unshift(targetId)
 	}
 
-	handleTopDragOver(e) {
+	@autobind
+	public handleTopDragOver(e: any) {
 		const { dragOverTargetIds } = this
 		this.dragOverTargetIds = []
 
@@ -535,11 +573,11 @@ export default class HTML5Backend {
 
 		this.altKeyPressed = e.altKey
 
-		this.actions.hover(dragOverTargetIds, {
+		this.actions.hover(dragOverTargetIds || [], {
 			clientOffset: getEventClientOffset(e),
 		})
 
-		const canDrop = dragOverTargetIds.some(targetId =>
+		const canDrop = (dragOverTargetIds || []).some(targetId =>
 			this.monitor.canDropOnTarget(targetId),
 		)
 
@@ -560,7 +598,8 @@ export default class HTML5Backend {
 		}
 	}
 
-	handleTopDragLeaveCapture(e) {
+	@autobind
+	public handleTopDragLeaveCapture(e: any) {
 		if (this.isDraggingNativeItem()) {
 			e.preventDefault()
 		}
@@ -575,7 +614,8 @@ export default class HTML5Backend {
 		}
 	}
 
-	handleTopDropCapture(e) {
+	@autobind
+	public handleTopDropCapture(e: any) {
 		this.dropTargetIds = []
 		e.preventDefault()
 
@@ -586,11 +626,12 @@ export default class HTML5Backend {
 		this.enterLeaveCounter.reset()
 	}
 
-	handleDrop(e, targetId) {
+	handleDrop(e: any, targetId: string) {
 		this.dropTargetIds.unshift(targetId)
 	}
 
-	handleTopDrop(e) {
+	@autobind
+	public handleTopDrop(e: any) {
 		const { dropTargetIds } = this
 		this.dropTargetIds = []
 
@@ -606,7 +647,8 @@ export default class HTML5Backend {
 		}
 	}
 
-	handleSelectStart(e) {
+	@autobind
+	public handleSelectStart(e: any) {
 		const { target } = e
 
 		// Only IE requires us to explicitly say

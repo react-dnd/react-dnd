@@ -2,14 +2,12 @@ import union from 'lodash/union'
 import without from 'lodash/without'
 
 export default class EnterLeaveCounter {
-	constructor() {
-		this.entered = []
-	}
+	private entered: any[] = []
 
-	enter(enteringNode) {
+	public enter(enteringNode: any) {
 		const previousLength = this.entered.length
 
-		const isNodeEntered = node =>
+		const isNodeEntered = (node: any) =>
 			document.documentElement.contains(node) &&
 			(!node.contains || node.contains(enteringNode))
 
@@ -18,7 +16,7 @@ export default class EnterLeaveCounter {
 		return previousLength === 0 && this.entered.length > 0
 	}
 
-	leave(leavingNode) {
+	public leave(leavingNode: any) {
 		const previousLength = this.entered.length
 
 		this.entered = without(
@@ -29,7 +27,7 @@ export default class EnterLeaveCounter {
 		return previousLength > 0 && this.entered.length === 0
 	}
 
-	reset() {
+	public reset() {
 		this.entered = []
 	}
 }

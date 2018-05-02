@@ -3,7 +3,13 @@
    no-mixed-operators: off
 */
 export default class MonotonicInterpolant {
-	constructor(xs, ys) {
+	private xs: any
+	private ys: any
+	private c1s: any
+	private c2s: any
+	private c3s: any
+
+	constructor(xs: number[], ys: number[]) {
 		const { length } = xs
 
 		// Rearrange xs and ys so that xs is sorted
@@ -63,7 +69,7 @@ export default class MonotonicInterpolant {
 		this.c3s = c3s
 	}
 
-	interpolate(x) {
+	interpolate(x: number) {
 		const { xs, ys, c1s, c2s, c3s } = this
 
 		// The rightmost point in the dataset should give an exact result
