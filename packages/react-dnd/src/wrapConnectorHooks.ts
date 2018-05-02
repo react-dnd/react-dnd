@@ -18,7 +18,7 @@ function throwIfCompositeComponentElement(element: React.ReactElement<any>) {
 	)
 }
 
-function wrapHookToRecognizeElement(hook: Function) {
+function wrapHookToRecognizeElement(hook: (node: any, options: any) => void) {
 	return (elementOrNode = null, options = null) => {
 		// When passed a node, call the hook straight away.
 		if (!isValidElement(elementOrNode)) {

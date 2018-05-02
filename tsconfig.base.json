@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "es2015",
 		"module": "commonjs",
-		"lib": ["esnext"],
+		"lib": ["esnext", "dom"],
 		"strict": true,
 		"esModuleInterop": true,
 		"experimentalDecorators": true,

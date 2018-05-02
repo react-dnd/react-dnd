@@ -4,6 +4,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import { IDragDropManager } from 'dnd-core'
+
 const shallowEqual = require('shallowequal')
 const {
 	Disposable,
@@ -33,9 +34,9 @@ export default function decorateHandler({
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
 	class DragDropContainer extends React.Component<any> {
-		static DecoratedComponent = DecoratedComponent
-		static displayName = `${containerDisplayName}(${displayName})`
-		static contextTypes = {
+		public static DecoratedComponent = DecoratedComponent
+		public static displayName = `${containerDisplayName}(${displayName})`
+		public static contextTypes = {
 			dragDropManager: PropTypes.object.isRequired,
 		}
 
@@ -48,21 +49,6 @@ export default function decorateHandler({
 		private disposable: any
 		private isCurrentlyMounted: boolean = false
 		private currentType: any
-
-		public getHandlerId() {
-			return this.handlerId
-		}
-
-		public getDecoratedComponentInstance() {
-			return this.decoratedComponentInstance
-		}
-
-		public shouldComponentUpdate(nextProps: any, nextState: any) {
-			return (
-				!arePropsEqual(nextProps, this.props) ||
-				!shallowEqual(nextState, this.state)
-			)
-		}
 
 		constructor(props: any, context: any) {
 			super(props, context)
@@ -87,6 +73,21 @@ export default function decorateHandler({
 			this.receiveProps(props)
 			this.state = this.getCurrentState()
 			this.dispose()
+		}
+
+		public getHandlerId() {
+			return this.handlerId
+		}
+
+		public getDecoratedComponentInstance() {
+			return this.decoratedComponentInstance
+		}
+
+		public shouldComponentUpdate(nextProps: any, nextState: any) {
+			return (
+				!arePropsEqual(nextProps, this.props) ||
+				!shallowEqual(nextState, this.state)
+			)
 		}
 
 		public componentDidMount() {

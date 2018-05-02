@@ -1,3 +1,5 @@
+// tslint:disable max-classes-per-file
+
 import { DropTarget } from '..'
 import { IDragDropMonitor } from '../interfaces'
 
@@ -11,11 +13,11 @@ export class NormalTarget extends DropTarget {
 		this.dropResult = dropResult || { foo: 'bar' }
 	}
 
-	hover() {
+	public hover() {
 		this.didCallHover = true
 	}
 
-	drop() {
+	public drop() {
 		this.didCallDrop = true
 		return this.dropResult
 	}
@@ -25,15 +27,15 @@ export class NonDroppableTarget extends DropTarget {
 	public didCallDrop: boolean = false
 	public didCallHover: boolean = false
 
-	canDrop() {
+	public canDrop() {
 		return false
 	}
 
-	hover() {
+	public hover() {
 		this.didCallHover = true
 	}
 
-	drop() {
+	public drop() {
 		this.didCallDrop = true
 	}
 }
@@ -42,17 +44,17 @@ export class TargetWithNoDropResult extends DropTarget {
 	public didCallDrop: boolean = false
 	public didCallHover: boolean = false
 
-	hover() {
+	public hover() {
 		this.didCallHover = true
 	}
 
-	drop() {
+	public drop() {
 		this.didCallDrop = true
 	}
 }
 
 export class BadResultTarget extends DropTarget {
-	drop() {
+	public drop() {
 		return 42
 	}
 }
@@ -65,11 +67,11 @@ export class TransformResultTarget extends DropTarget {
 		super()
 	}
 
-	hover() {
+	public hover() {
 		this.didCallHover = true
 	}
 
-	drop(monitor: IDragDropMonitor) {
+	public drop(monitor: IDragDropMonitor) {
 		this.didCallDrop = true
 		const dropResult = monitor.getDropResult()
 		return this.transform(dropResult)

@@ -36,15 +36,15 @@ export default class MonotonicInterpolant {
 		// Get degree-1 coefficients
 		const c1s = [ms[0]]
 		for (let i = 0; i < dxs.length - 1; i++) {
-			const m = ms[i]
+			const m2 = ms[i]
 			const mNext = ms[i + 1]
-			if (m * mNext <= 0) {
+			if (m2 * mNext <= 0) {
 				c1s.push(0)
 			} else {
 				dx = dxs[i]
 				const dxNext = dxs[i + 1]
 				const common = dx + dxNext
-				c1s.push(3 * common / ((common + dxNext) / m + (common + dx) / mNext))
+				c1s.push(3 * common / ((common + dxNext) / m2 + (common + dx) / mNext))
 			}
 		}
 		c1s.push(ms[ms.length - 1])
@@ -69,7 +69,7 @@ export default class MonotonicInterpolant {
 		this.c3s = c3s
 	}
 
-	interpolate(x: number) {
+	public interpolate(x: number) {
 		const { xs, ys, c1s, c2s, c3s } = this
 
 		// The rightmost point in the dataset should give an exact result

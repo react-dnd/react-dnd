@@ -1,3 +1,3 @@
-export interface Context {
+export interface IContext {
 	window: Window
 }

@@ -6,7 +6,7 @@ import {
 	IDragDropActions,
 	IDragDropMonitor,
 	IHandlerRegistry,
-	XYCoord,
+	IXYCoord,
 } from 'dnd-core'
 import EnterLeaveCounter from './EnterLeaveCounter'
 import { isFirefox } from './BrowserDetector'
@@ -21,11 +21,12 @@ import {
 } from './NativeDragSources'
 import * as NativeTypes from './NativeTypes'
 import autobind from 'autobind-decorator'
-import { Context } from './interfaces'
+import { IContext } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 
 declare global {
+	// tslint:disable-next-line interface-name
 	interface Window {
 		__isReactDndBackendSetUp: boolean | undefined
 	}
@@ -35,7 +36,7 @@ export default class HTML5Backend implements IBackend {
 	private actions: IDragDropActions
 	private monitor: IDragDropMonitor
 	private registry: IHandlerRegistry
-	private context: Context
+	private context: IContext
 
 	private sourcePreviewNodes: any = {}
 	private sourcePreviewNodeOptions: any = {}
@@ -49,7 +50,7 @@ export default class HTML5Backend implements IBackend {
 	private currentNativeSource: any = null
 	private currentNativeHandle: any = null
 	private currentDragSourceNode: any = null
-	private currentDragSourceNodeOffset: XYCoord | null = null
+	private currentDragSourceNodeOffset: IXYCoord | null = null
 	private currentDragSourceNodeOffsetChanged: boolean = false
 	private altKeyPressed: boolean = false
 	private mouseMoveTimeoutTimer: any = null
@@ -175,7 +176,7 @@ export default class HTML5Backend implements IBackend {
 		}
 	}
 
-	connectDropTarget(targetId: string, node: any) {
+	public connectDropTarget(targetId: string, node: any) {
 		const handleDragEnter = (e: any) => this.handleDragEnter(e, targetId)
 		const handleDragOver = (e: any) => this.handleDragOver(e, targetId)
 		const handleDrop = (e: any) => this.handleDrop(e, targetId)
@@ -191,7 +192,7 @@ export default class HTML5Backend implements IBackend {
 		}
 	}
 
-	getCurrentSourceNodeOptions() {
+	public getCurrentSourceNodeOptions() {
 		const sourceId = this.monitor.getSourceId()
 		const sourceNodeOptions = this.sourceNodeOptions[sourceId as string]
 
@@ -200,7 +201,7 @@ export default class HTML5Backend implements IBackend {
 		})
 	}
 
-	getCurrentDropEffect() {
+	public getCurrentDropEffect() {
 		if (this.isDraggingNativeItem()) {
 			// It makes more sense to default to 'copy' for native resources
 			return 'copy'
@@ -209,7 +210,7 @@ export default class HTML5Backend implements IBackend {
 		return this.getCurrentSourceNodeOptions().dropEffect
 	}
 
-	getCurrentSourcePreviewNodeOptions() {
+	public getCurrentSourcePreviewNodeOptions() {
 		const sourceId = this.monitor.getSourceId()
 		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[
 			sourceId as string
@@ -227,14 +228,14 @@ export default class HTML5Backend implements IBackend {
 		return getNodeClientOffset(this.sourceNodes[sourceId])
 	}
 
-	isDraggingNativeItem() {
+	public isDraggingNativeItem() {
 		const itemType = this.monitor.getItemType()
 		return Object.keys(NativeTypes).some(
 			(key: string) => (NativeTypes as any)[key] === itemType,
 		)
 	}
 
-	beginDragNativeItem(type: any) {
+	public beginDragNativeItem(type: any) {
 		this.clearCurrentDragSourceNode()
 
 		const SourceType = createNativeDragSource(type)
@@ -288,7 +289,7 @@ export default class HTML5Backend implements IBackend {
 		}
 	}
 
-	setCurrentDragSourceNode(node: any) {
+	public setCurrentDragSourceNode(node: any) {
 		this.clearCurrentDragSourceNode()
 		this.currentDragSourceNode = node
 		this.currentDragSourceNodeOffset = getNodeClientOffset(node)
@@ -325,7 +326,7 @@ export default class HTML5Backend implements IBackend {
 		}, MOUSE_MOVE_TIMEOUT)
 	}
 
-	clearCurrentDragSourceNode() {
+	public clearCurrentDragSourceNode() {
 		if (this.currentDragSourceNode) {
 			this.currentDragSourceNode = null
 			this.currentDragSourceNodeOffset = null
@@ -347,7 +348,7 @@ export default class HTML5Backend implements IBackend {
 		return false
 	}
 
-	checkIfCurrentDragSourceRectChanged() {
+	public checkIfCurrentDragSourceRectChanged() {
 		const node = this.currentDragSourceNode
 		if (!node) {
 			return false
@@ -509,7 +510,7 @@ export default class HTML5Backend implements IBackend {
 		}
 	}
 
-	handleDragEnter(e: any, targetId: string) {
+	public handleDragEnter(e: any, targetId: string) {
 		this.dragEnterTargetIds.unshift(targetId)
 	}
 
@@ -551,7 +552,7 @@ export default class HTML5Backend implements IBackend {
 		this.dragOverTargetIds = []
 	}
 
-	handleDragOver(e: any, targetId: string) {
+	public handleDragOver(e: any, targetId: string) {
 		if (this.dragOverTargetIds === null) {
 			this.dragOverTargetIds = []
 		}
@@ -626,7 +627,7 @@ export default class HTML5Backend implements IBackend {
 		this.enterLeaveCounter.reset()
 	}
 
-	handleDrop(e: any, targetId: string) {
+	public handleDrop(e: any, targetId: string) {
 		this.dropTargetIds.unshift(targetId)
 	}
 

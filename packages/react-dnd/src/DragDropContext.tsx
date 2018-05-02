@@ -38,13 +38,13 @@ export default function DragDropContext(backendOrModule: any) {
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
 		class DragDropContextContainer extends React.Component<any> {
-			static DecoratedComponent = DecoratedComponent
-			static displayName = `DragDropContext(${displayName})`
-			static childContextTypes = CHILD_CONTEXT_TYPES
+			public static DecoratedComponent = DecoratedComponent
+			public static displayName = `DragDropContext(${displayName})`
+			public static childContextTypes = CHILD_CONTEXT_TYPES
 
 			private child: any
 
-			getDecoratedComponentInstance() {
+			public getDecoratedComponentInstance() {
 				invariant(
 					this.child,
 					'In order to access an instance of the decorated component it can not be a stateless component.',
@@ -52,15 +52,15 @@ export default function DragDropContext(backendOrModule: any) {
 				return this.child
 			}
 
-			getManager() {
+			public getManager() {
 				return childContext.dragDropManager
 			}
 
-			getChildContext() {
+			public getChildContext() {
 				return childContext
 			}
 
-			render() {
+			public render() {
 				return (
 					<DecoratedComponent
 						{...this.props}

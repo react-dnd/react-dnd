@@ -1,3 +1,5 @@
+// tslint:disable max-classes-per-file
+
 import { DragSource } from '..'
 import { IDragDropMonitor } from '../interfaces'
 
@@ -10,12 +12,12 @@ export class NormalSource extends DragSource {
 		this.item = item || { baz: 42 }
 	}
 
-	beginDrag() {
+	public beginDrag() {
 		this.didCallBeginDrag = true
 		return this.item
 	}
 
-	endDrag(monitor: IDragDropMonitor) {
+	public endDrag(monitor: IDragDropMonitor) {
 		this.recordedDropResult = monitor.getDropResult()
 	}
 }
@@ -23,37 +25,38 @@ export class NormalSource extends DragSource {
 export class NonDraggableSource extends DragSource {
 	public didCallBeginDrag: boolean = false
 
-	canDrag() {
+	public canDrag() {
 		return false
 	}
 
-	beginDrag() {
+	public beginDrag() {
 		this.didCallBeginDrag = true
 		return {}
 	}
 }
 
 export class BadItemSource extends DragSource {
-	beginDrag() {
+	public beginDrag() {
 		return 42
 	}
 }
 
 export class NumberSource extends DragSource {
+	// tslint:disable-next-line variable-name
 	constructor(public number: number, public allowDrag: boolean) {
 		super()
 	}
 
-	canDrag() {
+	public canDrag() {
 		return this.allowDrag
 	}
 
-	isDragging(monitor: IDragDropMonitor) {
+	public isDragging(monitor: IDragDropMonitor) {
 		const item = monitor.getItem()
 		return item.number === this.number
 	}
 
-	beginDrag() {
+	public beginDrag() {
 		return {
 			number: this.number,
 		}

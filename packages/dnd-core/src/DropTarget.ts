@@ -5,7 +5,11 @@ export default class DropTarget implements IDropTarget {
 		return true
 	}
 
-	public hover(monitor: IDragDropMonitor, targetId: string) {}
+	public hover(monitor: IDragDropMonitor, targetId: string) {
+		// empty on purpose
+	}
 
-	public drop(monitor: IDragDropMonitor, targetId: string) {}
+	public drop(monitor: IDragDropMonitor, targetId: string) {
+		// empty on purpose
+	}
 }

@@ -1,7 +1,7 @@
 import { isSafari, isFirefox } from './BrowserDetector'
 import MonotonicInterpolant from './MonotonicInterpolant'
 import { DOMElement, ReactNode } from 'react'
-import { XYCoord } from 'dnd-core'
+import { IXYCoord } from 'dnd-core'
 
 const ELEMENT_NODE = 1
 
@@ -50,7 +50,7 @@ function getDragPreviewSize(
 export function getDragPreviewOffset(
 	sourceNode: any,
 	dragPreview: any,
-	clientOffset: XYCoord,
+	clientOffset: IXYCoord,
 	anchorPoint: any,
 	offsetPoint: any,
 ) {
@@ -60,7 +60,7 @@ export function getDragPreviewOffset(
 	const dragPreviewNode = isImage ? sourceNode : dragPreview
 	const dragPreviewNodeOffsetFromClient = getNodeClientOffset(
 		dragPreviewNode,
-	) as XYCoord
+	) as IXYCoord
 	const offsetFromDragPreview = {
 		x: clientOffset.x - dragPreviewNodeOffsetFromClient.x,
 		y: clientOffset.y - dragPreviewNodeOffsetFromClient.y,

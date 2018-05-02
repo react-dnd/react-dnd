@@ -1,51 +1,54 @@
 import HTML5Backend from '../HTML5Backend'
+import { IDragDropManager } from 'dnd-core'
+import { IContext } from '../interfaces'
 
 describe('The HTML5 Backend', () => {
 	describe('window injection', () => {
 		it('uses an undefined window when no window is available', () => {
-			const mockManager = {
+			const mockManager: IDragDropManager<IContext> = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
 				getContext: () => ({}),
-			}
-			const mockWindow = global.window
+			} as any
+			const mockWindow = (global as any).window
 			try {
-				delete global.window
+				delete (global as any).window
 				const backend = new HTML5Backend(mockManager)
 				expect(backend).toBeDefined()
 				expect(backend.window).toBeUndefined()
 			} finally {
-				global.window = mockWindow
+				;(global as any).window = mockWindow
 			}
 		})
 
 		it('uses the ambient window global', () => {
-			const mockManager = {
+			const mockManager: IDragDropManager<IContext> = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
 				getContext: () => ({}),
-			}
+			} as any
 			const backend = new HTML5Backend(mockManager)
 			expect(backend).toBeDefined()
 			expect(backend.window).toBeDefined()
 		})
 
 		it('allows a window to be injected', () => {
-			const mockManager = {
+			const fakeWindow = {
+				x: 1,
+			}
+			const mockManager: IDragDropManager<IContext> = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
 				getContext: () => ({
-					window: {
-						x: 1,
-					},
+					window: fakeWindow,
 				}),
-			}
+			} as any
 			const backend = new HTML5Backend(mockManager)
 			expect(backend).toBeDefined()
-			expect(backend.window.x).toEqual(1)
+			expect(backend.window).toBe(fakeWindow)
 		})
 	})
 })

@@ -9,7 +9,7 @@ import {
 } from '../actions/dragDrop'
 import { REMOVE_TARGET } from '../actions/registry'
 
-export interface State {
+export interface IState {
 	itemType: string | null
 	item: any
 	sourceId: string | null
@@ -19,7 +19,7 @@ export interface State {
 	isSourcePublic: boolean | null
 }
 
-const initialState: State = {
+const initialState: IState = {
 	itemType: null,
 	item: null,
 	sourceId: null,
@@ -30,7 +30,7 @@ const initialState: State = {
 }
 
 export default function dragOperation(
-	state: State = initialState,
+	state: IState = initialState,
 	action: {
 		type: string
 		itemType: string

@@ -9,7 +9,7 @@ import {
 	removeTarget,
 } from './actions/registry'
 import getNextUniqueId from './utils/getNextUniqueId'
-import { State } from './reducers'
+import { IState } from './reducers'
 import {
 	IDragSource,
 	IDropTarget,
@@ -53,7 +53,7 @@ export default class HandlerRegistry implements IHandlerRegistry {
 	private pinnedSourceId: string | null = null
 	private pinnedSource: any = null
 
-	constructor(private store: Store<State>) {}
+	constructor(private store: Store<IState>) {}
 
 	public addSource(type: string, source: IDragSource) {
 		validateType(type)
@@ -71,21 +71,6 @@ export default class HandlerRegistry implements IHandlerRegistry {
 		const targetId = this.addHandler(HandlerRole.TARGET, type, target)
 		this.store.dispatch(addTarget(targetId))
 		return targetId
-	}
-
-	private addHandler(
-		role: HandlerRole,
-		type: string,
-		handler: IDragSource | IDropTarget,
-	): string {
-		const id = getNextHandlerId(role)
-		this.types[id] = type
-		if (role === HandlerRole.SOURCE) {
-			this.dragSources[id] = handler as IDragSource
-		} else if (role === HandlerRole.TARGET) {
-			this.dropTargets[id] = handler as IDropTarget
-		}
-		return id
 	}
 
 	public containsHandler(handler: IDragSource | IDropTarget) {
@@ -166,5 +151,20 @@ export default class HandlerRegistry implements IHandlerRegistry {
 
 		this.pinnedSourceId = null
 		this.pinnedSource = null
+	}
+
+	private addHandler(
+		role: HandlerRole,
+		type: string,
+		handler: IDragSource | IDropTarget,
+	): string {
+		const id = getNextHandlerId(role)
+		this.types[id] = type
+		if (role === HandlerRole.SOURCE) {
+			this.dragSources[id] = handler as IDragSource
+		} else if (role === HandlerRole.TARGET) {
+			this.dropTargets[id] = handler as IDropTarget
+		}
+		return id
 	}
 }

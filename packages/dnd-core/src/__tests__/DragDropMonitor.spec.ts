@@ -28,7 +28,7 @@ describe.only('DragDropMonitor', () => {
 
 	describe('state change subscription', () => {
 		it('throws on bad listener', () => {
-			expect(() => monitor.subscribeToStateChange(() => {})).not.toThrow()
+			expect(() => monitor.subscribeToStateChange(() => { /* empty */ })).not.toThrow()
 
 			expect(() => (monitor as any).subscribeToStateChange()).toThrow()
 			expect(() => (monitor as any).subscribeToStateChange(42)).toThrow()
@@ -38,16 +38,16 @@ describe.only('DragDropMonitor', () => {
 
 		it('throws on bad handlerIds', () => {
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: [] }),
+				monitor.subscribeToStateChange(() => {/* empty */}, { handlerIds: [] }),
 			).not.toThrow()
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: ['hi'] }),
+				monitor.subscribeToStateChange(() => {/* empty */}, { handlerIds: ['hi'] }),
 			).not.toThrow()
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: {} as any}),
+				monitor.subscribeToStateChange(() => {/* empty */}, { handlerIds: {} as any}),
 			).toThrow()
 			expect(() =>
-				monitor.subscribeToStateChange(() => {}, { handlerIds: (() => {}) as any }),
+				monitor.subscribeToStateChange(() => {/* empty */}, { handlerIds: (() => {/* empty */}) as any }),
 			).toThrow()
 		})
 
@@ -545,7 +545,7 @@ describe.only('DragDropMonitor', () => {
 
 	describe('offset change subscription', () => {
 		it('throws on bad listener', () => {
-			expect(() => monitor.subscribeToOffsetChange(() => {})).not.toThrow()
+			expect(() => monitor.subscribeToOffsetChange(() => {/* empty */})).not.toThrow()
 			expect(() => (monitor as any).subscribeToOffsetChange()).toThrow()
 			expect(() => (monitor as any).subscribeToOffsetChange(42)).toThrow()
 			expect(() => (monitor as any).subscribeToOffsetChange('hi')).toThrow()

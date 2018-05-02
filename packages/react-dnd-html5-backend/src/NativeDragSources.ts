@@ -22,7 +22,7 @@ const nativeTypesConfig: {
 		exposeProperty: string
 		matchesType?: string
 		matchesTypes?: string[]
-		getData: Function
+		getData: (dataTransfer: any, matchesTypes: any) => any
 	}
 } = {
 	[NativeTypes.FILE]: {
@@ -54,7 +54,7 @@ export function createNativeDragSource(type: any) {
 		constructor() {
 			this.item = {
 				get [exposeProperty]() {
-					// eslint-disable-next-line no-console
+					// tslint:disable-next-line no-console
 					console.warn(
 						`Browser doesn't allow reading "${exposeProperty}" until the drop event.`,
 					)
@@ -80,7 +80,9 @@ export function createNativeDragSource(type: any) {
 			return handle === monitor.getSourceId()
 		}
 
-		public endDrag() {}
+		public endDrag() {
+			// empty
+		}
 	}
 }
 

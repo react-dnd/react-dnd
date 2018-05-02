@@ -28,11 +28,8 @@ export default function createDragDropActions<Context>(
 			const registry = manager.getRegistry()
 			invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
 
-			for (let i = 0; i < sourceIds.length; i++) {
-				invariant(
-					registry.getSource(sourceIds[i]),
-					'Expected sourceIds to be registered.',
-				)
+			for (const s of sourceIds) {
+				invariant(registry.getSource(s), 'Expected sourceIds to be registered.')
 			}
 
 			let sourceId = null
@@ -116,8 +113,7 @@ export default function createDragDropActions<Context>(
 			}
 
 			// Finally call hover on all matching targets.
-			for (let i = 0; i < targetIds.length; i++) {
-				const targetId = targetIds[i]
+			for (const targetId of targetIds) {
 				const target = registry.getTarget(targetId)
 				target.hover(monitor, targetId)
 			}

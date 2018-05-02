@@ -11,26 +11,26 @@ import {
  * This class is a React-Component based version of the DragDropContext.
  * This is an alternative to decorating an application component with an ES7 decorator.
  */
-export interface DragDropContextProviderProps {
+export interface IDragDropContextProviderProps {
 	backend: BackendFactory
 	// TODO: Replace with generic context, see TODO below
 	window: any
 }
 
 export default class DragDropContextProvider extends Component<
-	DragDropContextProviderProps
+	IDragDropContextProviderProps
 > {
-	static propTypes = {
+	public static propTypes = {
 		backend: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
 		children: PropTypes.element.isRequired,
 		window: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 	}
-	static defaultProps = {
+	public static defaultProps = {
 		window: undefined,
 	}
-	static childContextTypes = CHILD_CONTEXT_TYPES
-	static displayName = 'DragDropContextProvider'
-	static contextTypes = {
+	public static childContextTypes = CHILD_CONTEXT_TYPES
+	public static displayName = 'DragDropContextProvider'
+	public static contextTypes = {
 		window: PropTypes.object,
 	}
 
@@ -64,7 +64,7 @@ export default class DragDropContextProvider extends Component<
 		})
 	}
 
-	componentWillReceiveProps(nextProps: any) {
+	public componentWillReceiveProps(nextProps: any) {
 		if (
 			nextProps.backend !== this.props.backend ||
 			nextProps.window !== this.props.window

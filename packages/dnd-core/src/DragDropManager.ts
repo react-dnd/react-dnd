@@ -11,11 +11,11 @@ import {
 	IDragDropManager,
 	IHandlerRegistry,
 } from './interfaces'
-import { State } from './reducers'
+import { IState } from './reducers'
 
 export default class DragDropManager<Context>
 	implements IDragDropManager<Context> {
-	private store: Store<State>
+	private store: Store<IState>
 	private monitor: DragDropMonitor
 	private backend: IBackend
 	private isSetUp: boolean = false
@@ -30,17 +30,6 @@ export default class DragDropManager<Context>
 		this.backend = createBackend(this)
 
 		store.subscribe(this.handleRefCountChange.bind(this))
-	}
-
-	private handleRefCountChange() {
-		const shouldSetUp = this.store.getState().refCount > 0
-		if (shouldSetUp && !this.isSetUp) {
-			this.backend.setup()
-			this.isSetUp = true
-		} else if (!shouldSetUp && this.isSetUp) {
-			this.backend.teardown()
-			this.isSetUp = false
-		}
 	}
 
 	public getContext() {
@@ -86,5 +75,16 @@ export default class DragDropManager<Context>
 
 	public dispatch(action: any) {
 		this.store.dispatch(action)
+	}
+
+	private handleRefCountChange() {
+		const shouldSetUp = this.store.getState().refCount > 0
+		if (shouldSetUp && !this.isSetUp) {
+			this.backend.setup()
+			this.isSetUp = true
+		} else if (!shouldSetUp && this.isSetUp) {
+			this.backend.teardown()
+			this.isSetUp = false
+		}
 	}
 }

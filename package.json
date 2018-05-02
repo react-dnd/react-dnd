@@ -36,7 +36,10 @@
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",
-		"lint": "eslint .",
+		"lint:es": "eslint .",
+		"lint:ts":
+			"tslint \"packages/**/*.{ts,tsx}\" -e \"**/{lib,node_modules}/**\"",
+		"lint": "run-s lint:*",
 		"test_modules": "lerna run test --stream",
 		"publish_docs": "./scripts/publishDocumentation.sh",
 		"test": "run-s lint jest:cov test_modules",
@@ -66,7 +69,10 @@
 		"lint-staged": "^4.2.3",
 		"npm-run-all": "^4.1.2",
 		"prettier": "^1.11.1",
-		"ts-jest": "^22.4.4"
+		"ts-jest": "^22.4.4",
+		"tslint": "^5.9.1",
+		"tslint-config-prettier": "^1.12.0",
+		"tslint-react": "^3.5.1"
 	},
 	"jest": {
 		"moduleFileExtensions": ["ts", "tsx", "js", "jsx"],

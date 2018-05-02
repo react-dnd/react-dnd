@@ -9,7 +9,11 @@ export default class DragSource implements IDragSource {
 		return handle === monitor.getSourceId()
 	}
 
-	public beginDrag(monitor: IDragDropMonitor, handle: string) {}
+	public beginDrag(monitor: IDragDropMonitor, handle: string) {
+		// empty on purpose
+	}
 
-	public endDrag(monitor: IDragDropMonitor, handle: string) {}
+	public endDrag(monitor: IDragDropMonitor, handle: string) {
+		// empty on purpose
+	}
 }

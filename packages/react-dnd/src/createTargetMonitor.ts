@@ -1,5 +1,5 @@
 import invariant from 'invariant'
-import { IDragDropManager, IDragDropMonitor, XYCoord } from 'dnd-core'
+import { IDragDropManager, IDragDropMonitor, IXYCoord } from 'dnd-core'
 
 let isCallingCanDrop = false
 

@@ -3,7 +3,7 @@ import { Unsubscribe } from 'redux'
 export type Unsubscribe = () => void
 export type Listener = () => void
 
-export interface XYCoord {
+export interface IXYCoord {
 	x: number
 	y: number
 }
@@ -39,11 +39,11 @@ export interface IDragDropMonitor {
 	getDropResult(): any
 	didDrop(): boolean
 	isSourcePublic(): boolean | null
-	getInitialClientOffset(): XYCoord | null
-	getInitialSourceClientOffset(): XYCoord | null
-	getClientOffset(): XYCoord | null
-	getSourceClientOffset(): XYCoord | null
-	getDifferenceFromInitialOffset(): XYCoord | null
+	getInitialClientOffset(): IXYCoord | null
+	getInitialSourceClientOffset(): IXYCoord | null
+	getClientOffset(): IXYCoord | null
+	getSourceClientOffset(): IXYCoord | null
+	getDifferenceFromInitialOffset(): IXYCoord | null
 }
 
 export interface IHandlerRegistry {
@@ -62,18 +62,18 @@ export interface IHandlerRegistry {
 	unpinSource(): void
 }
 
-export interface Action {
+export interface IAction {
 	type: string
 }
 
-export type ActionCreator = (args: any[]) => Action
+export type ActionCreator = (args: any[]) => IAction
 
 export interface IDragDropActions {
-	beginDrag(sourceIds: string[], options?: any): Action
-	publishDragSource(): Action
-	hover(targetIds: string[], options?: any): Action
-	drop(options?: any): Action
-	endDrag(): Action
+	beginDrag(sourceIds: string[], options?: any): IAction
+	publishDragSource(): IAction
+	hover(targetIds: string[], options?: any): IAction
+	drop(options?: any): IAction
+	endDrag(): IAction
 }
 
 export interface IDragDropManager<Context> {
