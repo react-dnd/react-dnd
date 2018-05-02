@@ -5,7 +5,7 @@
 		"sourceMap": true,
 		"outDir": "./lib",
 		"baseUrl": "./src",
-		"lib": ["esnext", "dom"]
+		"lib": ["esnext"]
 	},
 	"include": ["./src/index.ts"]
 }
