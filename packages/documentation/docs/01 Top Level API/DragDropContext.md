@@ -1,51 +1,57 @@
-*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
+_New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs._
 
-DragDropContext
-=========================
+# DragDropContext
 
 Wrap the root component of your application with `DragDropContext` to set up React DnD.  
 This lets you specify the backend, and sets up the shared DnD state behind the scenes.
 
 ### Usage
 
--------------------
+---
+
 ```js
-var createReactClass = require('create-react-class');
-var HTML5Backend = require('react-dnd-html5-backend');
-var DragDropContext = require('react-dnd').DragDropContext;
+var createReactClass = require('create-react-class')
+var HTML5Backend = require('react-dnd-html5-backend')
+var DragDropContext = require('react-dnd').DragDropContext
 
-var YourApp = createReactClass(
-  /* ... */
-);
+var YourApp = createReactClass()
+/* ... */
 
-module.exports = DragDropContext(HTML5Backend)(YourApp);
+module.exports = DragDropContext(HTML5Backend)(YourApp)
 ```
--------------------
+
+---
+
 ```js
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
 
 class YourApp {
-  /* ... */
+	/* ... */
 }
 
-export default DragDropContext(HTML5Backend)(YourApp);
+export default DragDropContext(HTML5Backend)(YourApp)
 ```
--------------------
+
+---
+
 ```js
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
 
-@DragDropContext(HTML5Backend)
+@DragDropContext(HTML5Backend, /* optional */ { window })
 export default class YourApp {
-  /* ... */
+	/* ... */
 }
 ```
--------------------
+
+---
 
 ### Parameters
 
 * **`backend`**: Required. A React DnD backend. Unless you're writing a custom one, you probably want to use the [HTML5 backend](docs-html5-backend.html) that ships with React DnD.
+
+* **`context`**: Backend-dependent. A context object used to customize the backend. For example the HTML5Backend may inject a custom window object for iframe scenarios.
 
 ### Return Value
 
