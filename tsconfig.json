@@ -1,0 +1,18 @@
+{
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+		"noEmit": true,
+		"baseUrl": ".",
+		"paths": {
+			"dnd-core": ["packages/dnd-core/src/index"],
+			"dnd-core/*": ["packages/dnd-core/src/*"],
+			"react-dnd": ["packages/react-dnd/src/index"],
+			"react-dnd/*": ["packages/react-dnd/src/*"],
+			"react-dnd-test-backend": ["packages/react-dnd-test-backend/src/index"],
+			"react-dnd-test-backend/*": ["packages/react-dnd-test-backend/src/*"],
+			"react-dnd-html5-backend": ["packages/react-dnd-html5-backend/src/index"],
+			"react-dnd-html5-backend/*": ["packages/react-dnd-html5-backend/src/*"]
+		}
+	},
+	"exclude": ["**/node_modules/**", "**/lib/**"]
+}

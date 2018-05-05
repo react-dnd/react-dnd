@@ -1,21 +1,19 @@
 var path = require('path')
 var webpack = require('webpack')
-var resolvers = require('../scripts/resolvers')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 
 var isDev = process.env.NODE_ENV !== 'production'
 const root = path.join(__dirname, '..', '..', '..')
 
 module.exports = {
 	entry: path.join(__dirname, 'renderPath.js'),
-
+	mode: isDev ? 'development' : 'production',
 	output: {
 		path: path.join(__dirname, '..', '__site_prerender__'),
 		filename: 'renderPath.js',
 		libraryTarget: 'commonjs2',
 	},
-
 	target: 'node',
-
 	module: {
 		rules: [
 			{
@@ -34,6 +32,18 @@ module.exports = {
 				test: /\.js$/,
 				use: 'babel-loader',
 				exclude: /node_modules/,
+			},
+			{
+				test: /\.ts(x|)$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'ts-loader',
+						options: {
+							transpileOnly: true,
+						},
+					},
+				],
 			},
 			{
 				test: /\.css$/,
@@ -61,6 +71,7 @@ module.exports = {
 	},
 
 	resolve: {
+		extensions: ['.js', '.ts', '.tsx'],
 		modules: [
 			path.join(__dirname, '..', 'node_modules'),
 			path.join(root, 'node_modules'),
@@ -78,21 +89,16 @@ module.exports = {
 			'dnd-core': path.join(root, 'packages/dnd-core/src'),
 		},
 	},
-
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			__DEV__: JSON.stringify(isDev || true),
 		}),
-		resolvers.resolveHasteDefines,
-		...(process.env.NODE_ENV === 'production'
-			? [
-					new webpack.optimize.UglifyJsPlugin({
-						compressor: {
-							warnings: false,
-						},
-					}),
-			  ]
-			: []),
+		new CircularDependencyPlugin({
+			exclude: /node_modules/,
+			failOnError: false,
+			allowAsyncCycles: false,
+			cwd: process.cwd(),
+		}),
 	],
 }

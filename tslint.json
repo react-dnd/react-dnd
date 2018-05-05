@@ -1,0 +1,15 @@
+{
+	"defaultSeverity": "error",
+	"extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+	"jsRules": {},
+	"rules": {
+		// There are some dependencies we have (e.g. shallowequal) that need to be var-required because
+		// the available typings aren't great
+		"no-var-requires": false,
+
+		// These rules are super annoying in this project
+		"object-literal-sort-keys": false,
+		"ordered-imports": false
+	},
+	"rulesDirectory": []
+}
