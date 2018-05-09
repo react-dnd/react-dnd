@@ -84,6 +84,8 @@ Because [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-targe
 
 When using [stateless components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), the `component` parameter will always be `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods. This is because it is not possible to attach a ref to a stateless function component as explained in [the React docs](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
 
+Also you may use class component in your source code, but it's compiled to functional component via Babel. This may happen if you use [babel-react-optimize](https://github.com/jamiebuilds/babel-react-optimize#transform-react-pure-class-to-function) preset or [babel-plugin-transform-react-pure-class-to-function](https://github.com/jamiebuilds/babel-react-optimize/tree/master/packages/babel-plugin-transform-react-pure-class-to-function) directly. Please check your Babel configuration.
+
 -------------------
 ```js
 var createReactClass = require('create-react-class');
