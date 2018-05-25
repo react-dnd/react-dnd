@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
-import { IDragDropManager } from 'dnd-core'
-import { IDndComponentClass, IDndComponent } from './interfaces'
+import { DragDropManager } from 'dnd-core'
+import { DndComponentClass, DndComponent } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 const {
@@ -29,13 +29,13 @@ export default function decorateHandler<P>({
 	getType,
 	collect,
 	options,
-}: any): IDndComponentClass<P> {
+}: any): DndComponentClass<P> {
 	const { arePropsEqual = shallowEqual } = options
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
 	class DragDropContainer extends React.Component<P>
-		implements IDndComponent<P, any> {
+		implements DndComponent<P, any> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 		public static contextTypes = {
@@ -44,7 +44,7 @@ export default function decorateHandler<P>({
 
 		private handlerId: string | undefined
 		private decoratedComponentInstance: any
-		private manager: IDragDropManager<any>
+		private manager: DragDropManager<any>
 		private handlerMonitor: any
 		private handlerConnector: any
 		private handler: any

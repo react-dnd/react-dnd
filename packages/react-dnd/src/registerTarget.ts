@@ -1,9 +1,9 @@
-import { IDragDropManager, IDropTarget, Unsubscribe } from 'dnd-core'
+import { DragDropManager, DropTarget, Unsubscribe } from 'dnd-core'
 
 export default function registerTarget(
 	type: string,
-	target: IDropTarget,
-	manager: IDragDropManager<any>,
+	target: DropTarget,
+	manager: DragDropManager<any>,
 ): { handlerId: string; unregister: Unsubscribe } {
 	const registry = manager.getRegistry()
 	const targetId = registry.addTarget(type, target)

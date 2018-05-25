@@ -1,11 +1,11 @@
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
-import { IDragDropMonitor, IDropTarget } from 'dnd-core'
+import { DragDropMonitor, DropTarget } from 'dnd-core'
 import { MemoVoidArrayIterator } from 'lodash'
 
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 
-export interface ITarget extends IDropTarget {
+export interface Target extends DropTarget {
 	receiveProps(props: any): void
 	receiveMonitor(monitor: any): void
 	receiveComponent(component: any): void
@@ -33,11 +33,11 @@ export default function createTargetFactory(spec: any) {
 		)
 	})
 
-	class Target implements ITarget {
+	class TargetImpl implements Target {
 		private props: any
 		private component: any
 
-		constructor(private monitor: IDragDropMonitor) {
+		constructor(private monitor: DragDropMonitor) {
 			this.props = null
 			this.component = null
 		}
@@ -89,7 +89,7 @@ export default function createTargetFactory(spec: any) {
 		}
 	}
 
-	return function createTarget(monitor: IDragDropMonitor): ITarget {
-		return new Target(monitor)
+	return function createTarget(monitor: DragDropMonitor): Target {
+		return new TargetImpl(monitor)
 	}
 }

@@ -5,22 +5,20 @@ import matchesType from './utils/matchesType'
 import {
 	getSourceClientOffset,
 	getDifferenceFromInitialOffset,
-} from './reducers/dragOffset'
-import { areDirty } from './reducers/dirtyHandlerIds'
-import { IState } from './reducers'
+} from './utils/coords'
+import { areDirty } from './utils/dirtiness'
+import { State } from './reducers'
 import {
-	IDragDropMonitor,
+	DragDropMonitor,
 	Listener,
 	Unsubscribe,
-	IXYCoord,
-	IHandlerRegistry,
+	XYCoord,
+	HandlerRegistry,
+	Identifier,
 } from './interfaces'
 
-export default class DragDropMonitor implements IDragDropMonitor {
-	constructor(
-		private store: Store<IState>,
-		public registry: IHandlerRegistry,
-	) {}
+export default class DragDropMonitorImpl implements DragDropMonitor {
+	constructor(private store: Store<State>, public registry: HandlerRegistry) {}
 
 	public subscribeToStateChange(
 		listener: Listener,
@@ -144,7 +142,7 @@ export default class DragDropMonitor implements IDragDropMonitor {
 	}
 
 	public getItemType() {
-		return this.store.getState().dragOperation.itemType
+		return this.store.getState().dragOperation.itemType as Identifier
 	}
 
 	public getItem() {
@@ -171,19 +169,19 @@ export default class DragDropMonitor implements IDragDropMonitor {
 		return this.store.getState().dragOperation.isSourcePublic
 	}
 
-	public getInitialClientOffset(): IXYCoord | null {
+	public getInitialClientOffset(): XYCoord | null {
 		return this.store.getState().dragOffset.initialClientOffset
 	}
 
-	public getInitialSourceClientOffset(): IXYCoord | null {
+	public getInitialSourceClientOffset(): XYCoord | null {
 		return this.store.getState().dragOffset.initialSourceClientOffset
 	}
 
-	public getClientOffset(): IXYCoord | null {
+	public getClientOffset(): XYCoord | null {
 		return this.store.getState().dragOffset.clientOffset
 	}
 
-	public getSourceClientOffset(): IXYCoord | null {
+	public getSourceClientOffset(): XYCoord | null {
 		return getSourceClientOffset(this.store.getState().dragOffset)
 	}
 

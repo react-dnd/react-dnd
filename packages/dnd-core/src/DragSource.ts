@@ -1,19 +1,19 @@
-import { IDragDropMonitor, IDragSource } from './interfaces'
+import { DragDropMonitor, DragSource } from './interfaces'
 
-export default class DragSource implements IDragSource {
-	public canDrag(monitor: IDragDropMonitor, handle: string) {
+export default class DragSourceImpl implements DragSource {
+	public canDrag(monitor: DragDropMonitor, handle: string) {
 		return true
 	}
 
-	public isDragging(monitor: IDragDropMonitor, handle: string) {
+	public isDragging(monitor: DragDropMonitor, handle: string) {
 		return handle === monitor.getSourceId()
 	}
 
-	public beginDrag(monitor: IDragDropMonitor, handle: string) {
+	public beginDrag(monitor: DragDropMonitor, handle: string) {
 		// empty on purpose
 	}
 
-	public endDrag(monitor: IDragDropMonitor, handle: string) {
+	public endDrag(monitor: DragDropMonitor, handle: string) {
 		// empty on purpose
 	}
 }

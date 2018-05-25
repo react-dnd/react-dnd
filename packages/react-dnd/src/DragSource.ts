@@ -1,12 +1,12 @@
 import React, { Component, ComponentClass, StatelessComponent } from 'react'
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
-import { IBackend, ItemType } from 'dnd-core'
+import { Backend, SourceType } from 'dnd-core'
 import {
-	IDragSourceSpecification,
+	DragSourceSpec,
 	DragSourceCollector,
-	IDragSourceOptions,
-	IDndComponentClass,
+	DndOptions,
+	DndComponentClass,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -16,11 +16,18 @@ import createSourceMonitor from './createSourceMonitor'
 import createSourceConnector from './createSourceConnector'
 import isValidType from './utils/isValidType'
 
-export default function DragSource(
-	type: ItemType,
-	spec: IDragSourceSpecification<any, any>,
+/**
+ * Decorates a component as a dragsource
+ * @param type The dragsource type
+ * @param spec The drag source specification
+ * @param collect The props collector function
+ * @param options DnD optinos
+ */
+export default function DragSource<Props, Target>(
+	type: SourceType | ((props: Props) => SourceType),
+	spec: DragSourceSpec<Props, Target>,
 	collect: DragSourceCollector<any>,
-	options: IDragSourceOptions = {},
+	options: DndOptions<Props> = {},
 ) {
 	checkDecoratorArguments(
 		'DragSource',
@@ -67,12 +74,11 @@ export default function DragSource(
 		collect,
 	)
 
-	return function decorateSource<
-		Props,
-		T extends React.ComponentClass<Props> | React.StatelessComponent<Props>
-	>(DecoratedComponent: T): T & IDndComponentClass<Props> {
+	return function decorateSource<T>(
+		DecoratedComponent: T,
+	): T & DndComponentClass<Props> {
 		return decorateHandler({
-			connectBackend: (backend: IBackend, sourceId: string) => {
+			connectBackend: (backend: Backend, sourceId: string) => {
 				backend.connectDragSource(sourceId)
 			},
 			containerDisplayName: 'DragSource',

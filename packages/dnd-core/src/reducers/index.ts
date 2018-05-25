@@ -1,12 +1,12 @@
-import dragOffset, { IState as DragOffsetState } from './dragOffset'
-import dragOperation, { IState as DragOperationState } from './dragOperation'
+import dragOffset, { State as DragOffsetState } from './dragOffset'
+import dragOperation, { State as DragOperationState } from './dragOperation'
 import refCount, { State as RefCountState } from './refCount'
 import dirtyHandlerIds, {
 	State as DirtyHandlerIdsState,
 } from './dirtyHandlerIds'
 import stateId, { State as StateIdState } from './stateId'
 
-export interface IState {
+export interface State {
 	dirtyHandlerIds: DirtyHandlerIdsState
 	dragOffset: DragOffsetState
 	refCount: RefCountState
@@ -14,13 +14,12 @@ export interface IState {
 	stateId: StateIdState
 }
 
-export default function reduce(state: IState = {} as IState, action: any) {
+export default function reduce(state: State = {} as State, action: any) {
 	return {
-		dirtyHandlerIds: dirtyHandlerIds(
-			state.dirtyHandlerIds,
-			action,
-			state.dragOperation,
-		),
+		dirtyHandlerIds: dirtyHandlerIds(state.dirtyHandlerIds, {
+			...action,
+			prevTargetIds: state.dragOperation,
+		}),
 		dragOffset: dragOffset(state.dragOffset, action),
 		refCount: refCount(state.refCount, action),
 		dragOperation: dragOperation(state.dragOperation, action),

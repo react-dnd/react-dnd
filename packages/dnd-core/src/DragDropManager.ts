@@ -1,23 +1,24 @@
 import { createStore, Store } from 'redux'
 import reducer from './reducers'
 import dragDropActions from './actions/dragDrop'
-import DragDropMonitor from './DragDropMonitor'
-import HandlerRegistry from './HandlerRegistry'
+import { default as DragDropMonitorImpl } from './DragDropMonitor'
+import { default as HandlerRegistryImpl } from './HandlerRegistry'
 import {
 	ActionCreator,
-	IBackend,
+	Backend,
 	BackendFactory,
-	IDragDropActions,
-	IDragDropManager,
-	IHandlerRegistry,
+	DragDropActions,
+	DragDropMonitor,
+	DragDropManager,
+	HandlerRegistry,
 } from './interfaces'
-import { IState } from './reducers'
+import { State } from './reducers'
 
-export default class DragDropManager<Context>
-	implements IDragDropManager<Context> {
-	private store: Store<IState>
+export default class DragDropManagerImpl<Context>
+	implements DragDropManager<Context> {
+	private store: Store<State>
 	private monitor: DragDropMonitor
-	private backend: IBackend
+	private backend: Backend
 	private isSetUp: boolean = false
 
 	constructor(
@@ -26,7 +27,10 @@ export default class DragDropManager<Context>
 	) {
 		const store = createStore(reducer)
 		this.store = store
-		this.monitor = new DragDropMonitor(store, new HandlerRegistry(store))
+		this.monitor = new DragDropMonitorImpl(
+			store,
+			new HandlerRegistryImpl(store),
+		)
 		this.backend = createBackend(this)
 
 		store.subscribe(this.handleRefCountChange.bind(this))
@@ -44,11 +48,11 @@ export default class DragDropManager<Context>
 		return this.backend
 	}
 
-	public getRegistry(): IHandlerRegistry {
-		return this.monitor.registry
+	public getRegistry(): HandlerRegistry {
+		return (this.monitor as DragDropMonitorImpl).registry
 	}
 
-	public getActions(): IDragDropActions {
+	public getActions(): DragDropActions {
 		const manager = this
 		const { dispatch } = this.store
 
@@ -64,14 +68,14 @@ export default class DragDropManager<Context>
 		const actions = dragDropActions(this)
 
 		return Object.keys(actions).reduce(
-			(boundActions: IDragDropActions, key: string) => {
+			(boundActions: DragDropActions, key: string) => {
 				const action: ActionCreator<any> = (actions as any)[
 					key
 				] as ActionCreator<any>
 				;(boundActions as any)[key] = bindActionCreator(action) // eslint-disable-line no-param-reassign
 				return boundActions
 			},
-			{} as IDragDropActions,
+			{} as DragDropActions,
 		)
 	}
 

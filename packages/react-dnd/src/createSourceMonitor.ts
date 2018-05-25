@@ -1,22 +1,22 @@
 import invariant from 'invariant'
 import {
-	IDragDropManager,
-	IDragDropMonitor,
+	DragDropManager,
+	DragDropMonitor,
 	Unsubscribe,
 	Listener,
-	IXYCoord,
+	XYCoord,
+	Identifier,
 } from 'dnd-core'
-import { ItemType } from 'dnd-core'
-import { IDragSourceMonitor } from './interfaces'
+import { DragSourceMonitor } from './interfaces'
 
 let isCallingCanDrag = false
 let isCallingIsDragging = false
 
-class SourceMonitor implements IDragSourceMonitor {
-	private internalMonitor: IDragDropMonitor
+class SourceMonitor implements DragSourceMonitor {
+	private internalMonitor: DragDropMonitor
 	private sourceId: string | undefined
 
-	constructor(manager: IDragDropManager<any>) {
+	constructor(manager: DragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
@@ -133,6 +133,6 @@ class SourceMonitor implements IDragSourceMonitor {
 	}
 }
 
-export default function createSourceMonitor(manager: IDragDropManager<any>) {
-	return new SourceMonitor(manager) as IDragSourceMonitor
+export default function createSourceMonitor(manager: DragDropManager<any>) {
+	return new SourceMonitor(manager) as DragSourceMonitor
 }

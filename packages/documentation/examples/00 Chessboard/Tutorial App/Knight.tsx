@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {
 	DragSource,
-	JsxWrapper,
-	IDragSourceConnector,
-	IDragSourceMonitor,
+	ConnectDragSource,
+	ConnectDragPreview,
+	DragSourceConnector,
+	DragSourceMonitor,
 	DragSourceCollector,
 } from 'react-dnd'
 import ItemTypes from './ItemTypes'
@@ -15,23 +16,23 @@ const knightSource = {
 	},
 }
 
-const collect: DragSourceCollector<IKnightProps> = (
-	connect: IDragSourceConnector,
-	monitor: IDragSourceMonitor,
+const collect: DragSourceCollector<KnightProps> = (
+	connect: DragSourceConnector,
+	monitor: DragSourceMonitor,
 ) => ({
 	connectDragSource: connect.dragSource(),
 	connectDragPreview: connect.dragPreview(),
 	isDragging: monitor.isDragging(),
 })
 
-export interface IKnightProps {
-	connectDragSource?: JsxWrapper
-	connectDragPreview?: JsxWrapper
+export interface KnightProps {
+	connectDragSource?: ConnectDragSource
+	connectDragPreview?: ConnectDragPreview
 	isDragging?: boolean
 }
 
 @DragSource(ItemTypes.KNIGHT, knightSource, collect)
-export default class Knight extends React.Component<IKnightProps> {
+export default class Knight extends React.Component<KnightProps> {
 	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDragPreview: PropTypes.func.isRequired,

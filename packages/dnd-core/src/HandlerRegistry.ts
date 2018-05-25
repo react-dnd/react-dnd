@@ -9,13 +9,15 @@ import {
 	removeTarget,
 } from './actions/registry'
 import getNextUniqueId from './utils/getNextUniqueId'
-import { IState } from './reducers'
+import { State } from './reducers'
 import {
-	IDragSource,
-	IDropTarget,
-	ItemType,
+	DragSource,
+	DropTarget,
+	SourceType,
+	TargetType,
+	Identifier,
 	HandlerRole,
-	IHandlerRegistry,
+	HandlerRegistry,
 } from './interfaces'
 import {
 	validateSourceContract,
@@ -46,16 +48,16 @@ function parseRoleFromHandlerId(handlerId: string) {
 	}
 }
 
-export default class HandlerRegistry implements IHandlerRegistry {
-	private types: { [id: string]: ItemType } = {}
-	private dragSources: { [id: string]: IDragSource } = {}
-	private dropTargets: { [id: string]: IDropTarget } = {}
+export default class HandlerRegistryImpl implements HandlerRegistry {
+	private types: { [id: string]: SourceType | TargetType } = {}
+	private dragSources: { [id: string]: DragSource } = {}
+	private dropTargets: { [id: string]: DropTarget } = {}
 	private pinnedSourceId: string | null = null
 	private pinnedSource: any = null
 
-	constructor(private store: Store<IState>) {}
+	constructor(private store: Store<State>) {}
 
-	public addSource(type: string, source: IDragSource) {
+	public addSource(type: SourceType, source: DragSource) {
 		validateType(type)
 		validateSourceContract(source)
 
@@ -64,7 +66,7 @@ export default class HandlerRegistry implements IHandlerRegistry {
 		return sourceId
 	}
 
-	public addTarget(type: string, target: IDropTarget) {
+	public addTarget(type: TargetType, target: DropTarget) {
 		validateType(type, true)
 		validateTargetContract(target)
 
@@ -73,7 +75,7 @@ export default class HandlerRegistry implements IHandlerRegistry {
 		return targetId
 	}
 
-	public containsHandler(handler: IDragSource | IDropTarget) {
+	public containsHandler(handler: DragSource | DropTarget) {
 		return (
 			Object.keys(this.dragSources).some(
 				key => this.dragSources[key] === handler,
@@ -84,7 +86,7 @@ export default class HandlerRegistry implements IHandlerRegistry {
 		)
 	}
 
-	public getSource(sourceId: string, includePinned = false): IDragSource {
+	public getSource(sourceId: string, includePinned = false): DragSource {
 		invariant(this.isSourceId(sourceId), 'Expected a valid source ID.')
 
 		const isPinned = includePinned && sourceId === this.pinnedSourceId
@@ -93,19 +95,19 @@ export default class HandlerRegistry implements IHandlerRegistry {
 		return source
 	}
 
-	public getTarget(targetId: string): IDropTarget {
+	public getTarget(targetId: string): DropTarget {
 		invariant(this.isTargetId(targetId), 'Expected a valid target ID.')
-		return this.dropTargets[targetId] as IDropTarget
+		return this.dropTargets[targetId] as DropTarget
 	}
 
-	public getSourceType(sourceId: string): ItemType {
+	public getSourceType(sourceId: string) {
 		invariant(this.isSourceId(sourceId), 'Expected a valid source ID.')
-		return this.types[sourceId]
+		return this.types[sourceId] as Identifier
 	}
 
-	public getTargetType(targetId: string) {
+	public getTargetType(targetId: string): Identifier | Identifier[] {
 		invariant(this.isTargetId(targetId), 'Expected a valid target ID.')
-		return this.types[targetId]
+		return this.types[targetId] as Identifier | Identifier[]
 	}
 
 	public isSourceId(handlerId: string) {
@@ -155,15 +157,15 @@ export default class HandlerRegistry implements IHandlerRegistry {
 
 	private addHandler(
 		role: HandlerRole,
-		type: string,
-		handler: IDragSource | IDropTarget,
+		type: SourceType | TargetType,
+		handler: DragSource | DropTarget,
 	): string {
 		const id = getNextHandlerId(role)
 		this.types[id] = type
 		if (role === HandlerRole.SOURCE) {
-			this.dragSources[id] = handler as IDragSource
+			this.dragSources[id] = handler as DragSource
 		} else if (role === HandlerRole.TARGET) {
-			this.dropTargets[id] = handler as IDropTarget
+			this.dropTargets[id] = handler as DropTarget
 		}
 		return id
 	}

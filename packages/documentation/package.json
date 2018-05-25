@@ -3,6 +3,7 @@
 	"version": "3.0.0",
 	"private": true,
 	"scripts": {
+		"clean": "rimraf __site__ __site_prerender__",
 		"start": "./scripts/startSiteDevServer.sh",
 		"build_site": "./scripts/buildStaticSite.sh"
 	},
@@ -28,6 +29,7 @@
 		"react-dom": "^16.2.0",
 		"react-frame-component": "^1.1.0",
 		"react-hot-loader": "^4.1.2",
+		"rimraf": "^2.6.2",
 		"style-loader": "^0.21.0",
 		"ts-loader": "^4.2.0",
 		"url-loader": "^1.0.1",

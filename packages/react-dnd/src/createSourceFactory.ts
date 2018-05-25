@@ -1,11 +1,11 @@
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
-import { IDragSource, IDragDropMonitor } from 'dnd-core'
+import { DragSource, DragDropMonitor } from 'dnd-core'
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']
 
-export interface ISource extends IDragSource {
+export interface Source extends DragSource {
 	receiveProps(props: any): void
 	receiveComponent(component: any): void
 }
@@ -43,11 +43,11 @@ export default function createSourceFactory(spec: any) {
 		)
 	})
 
-	class Source implements ISource {
+	class SourceImpl implements Source {
 		private props: any
 		private component: any
 
-		constructor(private monitor: IDragDropMonitor) {}
+		constructor(private monitor: DragDropMonitor) {}
 
 		public receiveProps(props: any) {
 			this.props = props
@@ -65,7 +65,7 @@ export default function createSourceFactory(spec: any) {
 			return spec.canDrag(this.props, this.monitor)
 		}
 
-		public isDragging(globalMonitor: IDragDropMonitor, sourceId: string) {
+		public isDragging(globalMonitor: DragDropMonitor, sourceId: string) {
 			if (!spec.isDragging) {
 				return sourceId === globalMonitor.getSourceId()
 			}
@@ -96,7 +96,7 @@ export default function createSourceFactory(spec: any) {
 		}
 	}
 
-	return function createSource(monitor: IDragDropMonitor) {
-		return new Source(monitor) as ISource
+	return function createSource(monitor: DragDropMonitor) {
+		return new SourceImpl(monitor) as Source
 	}
 }

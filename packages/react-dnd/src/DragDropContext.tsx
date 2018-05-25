@@ -1,10 +1,10 @@
 import React, { Component, ComponentClass } from 'react'
 import PropTypes from 'prop-types'
-import { DragDropManager, IBackend, BackendFactory } from 'dnd-core'
+import { DragDropManager, Backend, BackendFactory } from 'dnd-core'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
-import { IContextComponent } from './interfaces'
+import { ContextComponent } from './interfaces'
 
 export const CHILD_CONTEXT_TYPES = {
 	dragDropManager: PropTypes.object.isRequired,
@@ -28,12 +28,12 @@ export default function DragDropContext(
 
 	return function decorateContext<T extends React.ComponentClass<any>>(
 		DecoratedComponent: T,
-	): T & IContextComponent<any, any> {
+	): T & ContextComponent<any, any> {
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
 		class DragDropContextContainer extends React.Component<any>
-			implements IContextComponent<any, any> {
+			implements ContextComponent<any, any> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
 			public static childContextTypes = CHILD_CONTEXT_TYPES

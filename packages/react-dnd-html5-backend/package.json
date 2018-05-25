@@ -9,10 +9,12 @@
 		"url": "https://github.com/react-dnd/react-dnd.git"
 	},
 	"scripts": {
-		"clean": "rimraf lib",
+		"clean": "rimraf lib dist",
 		"transpile": "tsc",
-		"bundle:unmin": "webpack --mode development --output-filename=ReactDnDHTML5Backend.js",
-		"bundle:min": "webpack --mode production --output-filename=ReactDnDHTML5Backend.min.js",
+		"bundle:unmin":
+			"webpack --mode development --output-filename=ReactDnDHTML5Backend.js",
+		"bundle:min":
+			"webpack --mode production --output-filename=ReactDnDHTML5Backend.min.js",
 		"build": "run-p bundle:* transpile",
 		"test": "run-s clean build"
 	},

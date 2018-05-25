@@ -1,9 +1,9 @@
-import { IDragDropManager, IDragSource, Unsubscribe } from 'dnd-core'
+import { DragDropManager, DragSource, Unsubscribe } from 'dnd-core'
 
 export default function registerSource(
 	type: string,
-	source: IDragSource,
-	manager: IDragDropManager<any>,
+	source: DragSource,
+	manager: DragDropManager<any>,
 ): {
 	handlerId: string
 	unregister: Unsubscribe

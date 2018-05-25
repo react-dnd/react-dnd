@@ -1,7 +1,7 @@
 import noop from 'lodash/noop'
-import { IDragDropManager, IDragDropActions, IBackend } from 'dnd-core'
+import { DragDropManager, DragDropActions, Backend } from 'dnd-core'
 
-export interface ITestBackend {
+export interface TestBackend {
 	didCallSetup: boolean
 	didCallTeardown: boolean
 	simulateBeginDrag(sourceIds: string[], options?: any): void
@@ -11,12 +11,12 @@ export interface ITestBackend {
 	simulateEndDrag(): void
 }
 
-export default class TestBackend implements IBackend, ITestBackend {
+export default class TestBackendImpl implements Backend, TestBackend {
 	public didCallSetup: boolean = false
 	public didCallTeardown: boolean = false
-	private actions: IDragDropActions
+	private actions: DragDropActions
 
-	constructor(manager: IDragDropManager<any>) {
+	constructor(manager: DragDropManager<any>) {
 		this.actions = manager.getActions()
 	}
 

@@ -4,18 +4,14 @@ import hoistStatics from 'hoist-non-react-statics'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
-import { IDragDropManager, Unsubscribe } from 'dnd-core'
-import {
-	DragLayerCollector,
-	IDragLayerOptions,
-	IDndComponentClass,
-} from './interfaces'
+import { DragDropManager, Unsubscribe } from 'dnd-core'
+import { DragLayerCollector, DndOptions, DndComponentClass } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 
-export default function DragLayer(
+export default function DragLayer<P>(
 	collect: DragLayerCollector<any, any>,
-	options: IDragLayerOptions = {},
+	options: DndOptions<P> = {},
 ) {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options) // eslint-disable-line prefer-rest-params
 	invariant(
@@ -33,7 +29,7 @@ export default function DragLayer(
 
 	return function decorateLayer<T extends React.ComponentClass<any>>(
 		DecoratedComponent: T,
-	): T & IDndComponentClass<any> {
+	): T & DndComponentClass<any> {
 		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
@@ -48,7 +44,7 @@ export default function DragLayer(
 				return DecoratedComponent
 			}
 
-			private manager: IDragDropManager<any>
+			private manager: DragDropManager<any>
 			private isCurrentlyMounted: boolean = false
 			private unsubscribeFromOffsetChange: Unsubscribe | undefined
 			private unsubscribeFromStateChange: Unsubscribe | undefined

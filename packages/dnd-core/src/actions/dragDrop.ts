@@ -1,14 +1,13 @@
 import {
-	IAction,
-	IDragDropManager,
-	IXYCoord,
-	ItemType,
-	IBeginDragPayload,
-	IBeginDragOptions,
-	ISentinelAction,
-	IDropPayload,
-	IHoverPayload,
-	IHoverOptions,
+	Action,
+	DragDropManager,
+	XYCoord,
+	BeginDragPayload,
+	BeginDragOptions,
+	SentinelAction,
+	DropPayload,
+	HoverPayload,
+	HoverOptions,
 } from '../interfaces'
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
@@ -22,7 +21,7 @@ export const DROP = 'dnd-core/DROP'
 export const END_DRAG = 'dnd-core/END_DRAG'
 
 export default function createDragDropActions<Context>(
-	manager: IDragDropManager<Context>,
+	manager: DragDropManager<Context>,
 ) {
 	return {
 		beginDrag(
@@ -31,10 +30,10 @@ export default function createDragDropActions<Context>(
 				publishSource,
 				clientOffset,
 				getSourceClientOffset,
-			}: IBeginDragOptions = {
+			}: BeginDragOptions = {
 				publishSource: true,
 			},
-		): IAction<IBeginDragPayload> | undefined {
+		): Action<BeginDragPayload> | undefined {
 			const monitor = manager.getMonitor()
 			const registry = manager.getRegistry()
 			invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
@@ -54,7 +53,7 @@ export default function createDragDropActions<Context>(
 				return
 			}
 
-			let sourceClientOffset: IXYCoord | null = null
+			let sourceClientOffset: XYCoord | null = null
 			if (clientOffset) {
 				invariant(
 					typeof getSourceClientOffset === 'function',
@@ -83,7 +82,7 @@ export default function createDragDropActions<Context>(
 			}
 		},
 
-		publishDragSource(): ISentinelAction | undefined {
+		publishDragSource(): SentinelAction | undefined {
 			const monitor = manager.getMonitor()
 			if (!monitor.isDragging()) {
 				return
@@ -93,8 +92,8 @@ export default function createDragDropActions<Context>(
 
 		hover(
 			targetIdsArg: string[],
-			{ clientOffset }: IHoverOptions = {},
-		): IAction<IHoverPayload> {
+			{ clientOffset }: HoverOptions = {},
+		): Action<HoverPayload> {
 			invariant(isArray(targetIdsArg), 'Expected targetIds to be an array.')
 			const targetIds = targetIdsArg.slice(0)
 
@@ -171,7 +170,7 @@ export default function createDragDropActions<Context>(
 					dropResult = index === 0 ? {} : monitor.getDropResult()
 				}
 
-				const action: IAction<IDropPayload> = {
+				const action: Action<DropPayload> = {
 					type: DROP,
 					payload: {
 						dropResult: {
@@ -184,7 +183,7 @@ export default function createDragDropActions<Context>(
 			})
 		},
 
-		endDrag(): ISentinelAction {
+		endDrag(): SentinelAction {
 			const monitor = manager.getMonitor()
 			const registry = manager.getRegistry()
 			invariant(monitor.isDragging(), 'Cannot call endDrag while not dragging.')
