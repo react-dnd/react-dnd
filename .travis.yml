@@ -1,4 +1,7 @@
 language: node_js
+addons:
+    apt:
+      update: true
 node_js:
   - "node"
   - "lts/*"
