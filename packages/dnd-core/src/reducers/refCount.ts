@@ -1,10 +1,10 @@
-import { Action } from 'redux-actions'
 import {
 	ADD_SOURCE,
 	ADD_TARGET,
 	REMOVE_SOURCE,
 	REMOVE_TARGET,
 } from '../actions/registry'
+import { Action } from '../interfaces'
 
 export type State = number
 

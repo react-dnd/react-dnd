@@ -1,6 +1,11 @@
 import React, { Component, ComponentClass } from 'react'
 import PropTypes from 'prop-types'
-import { DragDropManager, Backend, BackendFactory } from 'dnd-core'
+import {
+	DragDropManager,
+	Backend,
+	BackendFactory,
+	createDragDropManager,
+} from 'dnd-core'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
@@ -15,7 +20,7 @@ export function createChildContext<Context>(
 	context: Context,
 ) {
 	return {
-		dragDropManager: new DragDropManager(backend, context),
+		dragDropManager: createDragDropManager(backend, context),
 	}
 }
 
