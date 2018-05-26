@@ -432,7 +432,3 @@ export type DragLayerCollector<TargetProps, CollectedProps> = (
 	monitor: DragLayerMonitor,
 	props: TargetProps,
 ) => CollectedProps
-
-//export type DropTargetOptions = CustomEqualityOptions
-//export type DragSourceOptions = CustomEqualityOptions
-//export type DragLayerOptions = CustomEqualityOptions
