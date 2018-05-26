@@ -9,7 +9,7 @@ import {
 	BadResultTarget,
 	TransformResultTarget,
 } from './targets'
-import DragDropManagerImpl from '../DragDropManager'
+import DragDropManagerImpl from '../DragDropManagerImpl'
 import { DragDropManager, Backend, HandlerRegistry } from '../interfaces'
 
 describe('DragDropManager', () => {

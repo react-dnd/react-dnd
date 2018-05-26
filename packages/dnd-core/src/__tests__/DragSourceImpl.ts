@@ -1,4 +1,4 @@
-import { DragDropMonitor, DragSource } from './interfaces'
+import { DragDropMonitor, DragSource } from '../interfaces'
 
 export default class DragSourceImpl implements DragSource {
 	public canDrag(monitor: DragDropMonitor, handle: string) {

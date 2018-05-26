@@ -1,6 +1,6 @@
 // tslint:disable max-classes-per-file
 
-import { DragSource } from '..'
+import DragSource from './DragSourceImpl'
 import { DragDropMonitor } from '../interfaces'
 
 export class NormalSource extends DragSource {

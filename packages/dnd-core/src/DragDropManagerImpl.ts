@@ -1,8 +1,8 @@
 import { createStore, Store } from 'redux'
 import reducer from './reducers'
 import dragDropActions from './actions/dragDrop'
-import { default as DragDropMonitorImpl } from './DragDropMonitor'
-import { default as HandlerRegistryImpl } from './HandlerRegistry'
+import DragDropMonitorImpl from './DragDropMonitorImpl'
+import HandlerRegistryImpl from './HandlerRegistryImpl'
 import {
 	ActionCreator,
 	Backend,

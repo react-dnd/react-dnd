@@ -11,7 +11,7 @@ import {
 	HandlerRegistry,
 	DragDropMonitor,
 } from '../interfaces'
-import DragDropManagerImpl from '../DragDropManager'
+import DragDropManagerImpl from '../DragDropManagerImpl'
 
 describe.only('DragDropMonitor', () => {
 	let manager: DragDropManager<any>
