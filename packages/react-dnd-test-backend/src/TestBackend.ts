@@ -1,5 +1,11 @@
 import noop from 'lodash/noop'
-import { DragDropManager, DragDropActions, Backend } from 'dnd-core'
+import {
+	DragDropManager,
+	DragDropActions,
+	Backend,
+	BeginDragOptions,
+	HoverOptions,
+} from 'dnd-core'
 
 export interface TestBackend {
 	didCallSetup: boolean
@@ -16,7 +22,7 @@ export default class TestBackendImpl implements Backend, TestBackend {
 	public didCallTeardown: boolean = false
 	private actions: DragDropActions
 
-	constructor(manager: DragDropManager<any>) {
+	constructor(manager: DragDropManager<{}>) {
 		this.actions = manager.getActions()
 	}
 
@@ -40,7 +46,7 @@ export default class TestBackendImpl implements Backend, TestBackend {
 		return noop
 	}
 
-	public simulateBeginDrag(sourceIds: string[], options: any) {
+	public simulateBeginDrag(sourceIds: string[], options: BeginDragOptions) {
 		this.actions.beginDrag(sourceIds, options)
 	}
 
@@ -48,7 +54,7 @@ export default class TestBackendImpl implements Backend, TestBackend {
 		this.actions.publishDragSource()
 	}
 
-	public simulateHover(targetIds: string[], options: any) {
+	public simulateHover(targetIds: string[], options: HoverOptions) {
 		this.actions.hover(targetIds, options)
 	}
 

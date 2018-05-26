@@ -1,3 +1,4 @@
+import get from 'lodash/get'
 import dragOffset, { State as DragOffsetState } from './dragOffset'
 import dragOperation, { State as DragOperationState } from './dragOperation'
 import refCount, { State as RefCountState } from './refCount'
@@ -17,8 +18,11 @@ export interface State {
 export default function reduce(state: State = {} as State, action: any) {
 	return {
 		dirtyHandlerIds: dirtyHandlerIds(state.dirtyHandlerIds, {
-			...action,
-			prevTargetIds: state.dragOperation,
+			type: action.type,
+			payload: {
+				...action.payload,
+				prevTargetIds: get(state, 'dragOperation.targetIds', []),
+			},
 		}),
 		dragOffset: dragOffset(state.dragOffset, action),
 		refCount: refCount(state.refCount, action),
