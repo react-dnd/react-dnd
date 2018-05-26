@@ -9,7 +9,7 @@ import { CHILD_CONTEXT_TYPES, createChildContext } from './DragDropContext'
  */
 export interface DragDropContextProviderProps<Context> {
 	backend: BackendFactory
-	context: Context
+	context?: Context
 }
 
 export default class DragDropContextProviderImpl extends Component<

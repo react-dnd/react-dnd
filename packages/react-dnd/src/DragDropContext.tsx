@@ -17,7 +17,7 @@ export const CHILD_CONTEXT_TYPES = {
 
 export function createChildContext<Context>(
 	backend: BackendFactory,
-	context: Context,
+	context?: Context,
 ) {
 	return {
 		dragDropManager: createDragDropManager(backend, context),
