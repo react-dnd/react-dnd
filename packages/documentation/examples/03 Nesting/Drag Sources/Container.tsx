@@ -7,7 +7,7 @@ import Colors from './Colors'
 
 @DragDropContext(HTML5Backend)
 export default class Container extends React.Component {
-	render() {
+	public render() {
 		return (
 			<div style={{ overflow: 'hidden', clear: 'both', margin: '-.5rem' }}>
 				<div style={{ float: 'left' }}>

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { DragSource } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
-import shouldPureComponentUpdate from './shouldPureComponentUpdate'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
 
@@ -33,8 +32,8 @@ function getStyles(props) {
 	connectDragPreview: connect.dragPreview(),
 	isDragging: monitor.isDragging(),
 }))
-export default class DraggableBox extends React.Component {
-	static propTypes = {
+export default class DraggableBox extends React.PureComponent {
+	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDragPreview: PropTypes.func.isRequired,
 		isDragging: PropTypes.bool.isRequired,
@@ -44,9 +43,7 @@ export default class DraggableBox extends React.Component {
 		top: PropTypes.number.isRequired,
 	}
 
-	shouldComponentUpdate = shouldPureComponentUpdate
-
-	componentDidMount() {
+	public componentDidMount() {
 		// Use empty image as a drag preview so browsers don't draw it
 		// and we can draw whatever we want on the custom drag layer instead.
 		this.props.connectDragPreview(getEmptyImage(), {
@@ -56,7 +53,7 @@ export default class DraggableBox extends React.Component {
 		})
 	}
 
-	render() {
+	public render() {
 		const { title, connectDragSource } = this.props
 
 		return connectDragSource(

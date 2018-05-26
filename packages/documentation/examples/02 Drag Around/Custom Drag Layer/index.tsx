@@ -4,9 +4,16 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import Container from './Container'
 import CustomDragLayer from './CustomDragLayer'
 
+export interface DragAroundCustomDragLayerState {
+	snapToGridAfterDrop: boolean
+	snapToGridWhileDragging: boolean
+}
 @DragDropContext(HTML5Backend)
-export default class DragAroundCustomDragLayer extends React.Component {
-	constructor(props) {
+export default class DragAroundCustomDragLayer extends React.Component<
+	{},
+	DragAroundCustomDragLayerState
+> {
+	constructor(props: {}) {
 		super(props)
 
 		this.handleSnapToGridAfterDropChange = this.handleSnapToGridAfterDropChange.bind(
@@ -22,7 +29,7 @@ export default class DragAroundCustomDragLayer extends React.Component {
 		}
 	}
 
-	render() {
+	public render() {
 		const { snapToGridAfterDrop, snapToGridWhileDragging } = this.state
 
 		return (
@@ -83,13 +90,13 @@ export default class DragAroundCustomDragLayer extends React.Component {
 		)
 	}
 
-	handleSnapToGridAfterDropChange() {
+	private handleSnapToGridAfterDropChange() {
 		this.setState({
 			snapToGridAfterDrop: !this.state.snapToGridAfterDrop,
 		})
 	}
 
-	handleSnapToGridWhileDraggingChange() {
+	private handleSnapToGridWhileDraggingChange() {
 		this.setState({
 			snapToGridWhileDragging: !this.state.snapToGridWhileDragging,
 		})

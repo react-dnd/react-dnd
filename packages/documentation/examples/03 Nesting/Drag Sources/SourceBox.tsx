@@ -1,16 +1,22 @@
+// tslint:disable max-classes-per-file jsx-no-lambda
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DragSource } from 'react-dnd'
+import {
+	DragSource,
+	ConnectDragSource,
+	DragSourceMonitor,
+	DragSourceConnector,
+} from 'react-dnd'
 import Colors from './Colors'
 
-const style = {
+const style: React.CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem',
 	margin: '0.5rem',
 }
 
 const ColorSource = {
-	canDrag(props) {
+	canDrag(props: SourceBoxProps) {
 		return !props.forbidDrag
 	},
 
@@ -19,12 +25,24 @@ const ColorSource = {
 	},
 }
 
-@DragSource(props => props.color, ColorSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	isDragging: monitor.isDragging(),
-}))
-class SourceBox extends React.Component {
-	static propTypes = {
+export interface SourceBoxProps {
+	connectDragSource?: ConnectDragSource
+	isDragging?: boolean
+	color?: string
+	forbidDrag?: boolean
+	onToggleForbidDrag?: () => void
+}
+
+@DragSource(
+	(props: SourceBoxProps) => props.color + '',
+	ColorSource,
+	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging(),
+	}),
+)
+class SourceBox extends React.Component<SourceBoxProps> {
+	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		isDragging: PropTypes.bool.isRequired,
 		color: PropTypes.string.isRequired,
@@ -33,7 +51,7 @@ class SourceBox extends React.Component {
 		children: PropTypes.node,
 	}
 
-	render() {
+	public render() {
 		const {
 			color,
 			children,
@@ -56,36 +74,49 @@ class SourceBox extends React.Component {
 				break
 		}
 
-		return connectDragSource(
-			<div
-				style={{
-					...style,
-					backgroundColor,
-					opacity,
-					cursor: forbidDrag ? 'default' : 'move',
-				}}
-			>
-				<input
-					type="checkbox"
-					checked={forbidDrag}
-					onChange={onToggleForbidDrag}
-				/>
-				<small>Forbid drag</small>
-				{children}
-			</div>,
+		return (
+			connectDragSource &&
+			connectDragSource(
+				<div
+					style={{
+						...style,
+						backgroundColor,
+						opacity,
+						cursor: forbidDrag ? 'default' : 'move',
+					}}
+				>
+					<input
+						type="checkbox"
+						checked={forbidDrag}
+						onChange={onToggleForbidDrag}
+					/>
+					<small>Forbid drag</small>
+					{children}
+				</div>,
+			)
 		)
 	}
 }
 
-export default class StatefulSourceBox extends React.Component {
-	constructor(props) {
+export interface StatefulSourceBoxProps {
+	color: string
+}
+
+export interface StatefulSourceBoxState {
+	forbidDrag: boolean
+}
+export default class StatefulSourceBox extends React.Component<
+	StatefulSourceBoxProps,
+	StatefulSourceBoxState
+> {
+	constructor(props: StatefulSourceBoxProps) {
 		super(props)
 		this.state = {
 			forbidDrag: false,
 		}
 	}
 
-	render() {
+	public render() {
 		return (
 			<SourceBox
 				{...this.props}
@@ -95,7 +126,7 @@ export default class StatefulSourceBox extends React.Component {
 		)
 	}
 
-	handleToggleForbidDrag() {
+	private handleToggleForbidDrag() {
 		this.setState({
 			forbidDrag: !this.state.forbidDrag,
 		})

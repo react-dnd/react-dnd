@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DragSource } from 'react-dnd'
+import { DragSource, ConnectDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
-const style = {
+const style: React.CSSProperties = {
 	position: 'absolute',
 	border: '1px dashed gray',
 	backgroundColor: 'white',
@@ -12,18 +12,27 @@ const style = {
 }
 
 const boxSource = {
-	beginDrag(props) {
+	beginDrag(props: BoxProps) {
 		const { id, left, top } = props
 		return { id, left, top }
 	},
+}
+
+export interface BoxProps {
+	connectDragSource?: ConnectDragSource
+	isDragging?: boolean
+	id?: any
+	left?: number
+	top?: number
+	hideSourceOnDrag?: any
 }
 
 @DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
 	connectDragSource: connect.dragSource(),
 	isDragging: monitor.isDragging(),
 }))
-export default class Box extends React.Component {
-	static propTypes = {
+export default class Box extends React.Component<BoxProps> {
+	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		isDragging: PropTypes.bool.isRequired,
 		id: PropTypes.any.isRequired,
@@ -33,7 +42,7 @@ export default class Box extends React.Component {
 		children: PropTypes.node,
 	}
 
-	render() {
+	public render() {
 		const {
 			hideSourceOnDrag,
 			left,
@@ -46,8 +55,9 @@ export default class Box extends React.Component {
 			return null
 		}
 
-		return connectDragSource(
-			<div style={{ ...style, left, top }}>{children}</div>,
+		return (
+			connectDragSource &&
+			connectDragSource(<div style={{ ...style, left, top }}>{children}</div>)
 		)
 	}
 }

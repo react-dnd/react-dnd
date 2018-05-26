@@ -1,3 +1,4 @@
+// tslint:disable jsx-no-lambda
 import React from 'react'
 import update from 'immutability-helper'
 import { DragDropContext } from 'react-dnd'
@@ -96,7 +97,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 		)
 	}
 
-	public handleDrop(index: string, item: { name: string }) {
+	public handleDrop(index: number, item: { name: string }) {
 		const { name } = item
 
 		this.setState(

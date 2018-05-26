@@ -16,11 +16,14 @@ import createTargetMonitor from './createTargetMonitor'
 import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
 
-export default function DropTarget<Props>(
-	type: TargetType | ((props: Props) => TargetType),
-	spec: DropTargetSpec<any>,
+export default function DropTarget<
+	TargetProps,
+	TargetComponent extends React.Component<TargetProps>
+>(
+	type: TargetType | ((props: TargetProps) => TargetType),
+	spec: DropTargetSpec<TargetProps, TargetComponent>,
 	collect: DropTargetCollector<any>,
-	options: DndOptions<Props> = {},
+	options: DndOptions<TargetProps> = {},
 ) {
 	checkDecoratorArguments(
 		'DropTarget',

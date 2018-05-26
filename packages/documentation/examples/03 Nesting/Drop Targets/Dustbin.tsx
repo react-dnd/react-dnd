@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DropTarget } from 'react-dnd'
+import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
-function getStyle(backgroundColor) {
+function getStyle(backgroundColor: string): React.CSSProperties {
 	return {
 		border: '1px solid rgba(0,0,0,0.2)',
 		minHeight: '8rem',
@@ -20,7 +20,11 @@ function getStyle(backgroundColor) {
 }
 
 const boxTarget = {
-	drop(props, monitor, component) {
+	drop(
+		props: DustbinProps,
+		monitor: DropTargetMonitor,
+		component: React.Component,
+	) {
 		const hasDroppedOnChild = monitor.didDrop()
 		if (hasDroppedOnChild && !props.greedy) {
 			return
@@ -33,13 +37,28 @@ const boxTarget = {
 	},
 }
 
+export interface DustbinProps {
+	isOver?: boolean
+	isOverCurrent?: boolean
+	greedy?: boolean
+	connectDropTarget?: ConnectDropTarget
+}
+
+export interface DustbinState {
+	hasDropped: boolean
+	hasDroppedOnChild: boolean
+}
+
 @DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
 	connectDropTarget: connect.dropTarget(),
 	isOver: monitor.isOver(),
 	isOverCurrent: monitor.isOver({ shallow: true }),
 }))
-export default class Dustbin extends React.Component {
-	static propTypes = {
+export default class Dustbin extends React.Component<
+	DustbinProps,
+	DustbinState
+> {
+	public static propTypes = {
 		connectDropTarget: PropTypes.func.isRequired,
 		isOver: PropTypes.bool.isRequired,
 		isOverCurrent: PropTypes.bool.isRequired,
@@ -47,7 +66,7 @@ export default class Dustbin extends React.Component {
 		children: PropTypes.node,
 	}
 
-	constructor(props) {
+	constructor(props: DustbinProps) {
 		super(props)
 		this.state = {
 			hasDropped: false,
@@ -55,7 +74,7 @@ export default class Dustbin extends React.Component {
 		}
 	}
 
-	render() {
+	public render() {
 		const {
 			greedy,
 			isOver,
@@ -72,14 +91,19 @@ export default class Dustbin extends React.Component {
 			backgroundColor = 'darkgreen'
 		}
 
-		return connectDropTarget(
-			<div style={getStyle(backgroundColor)}>
-				{text}
-				<br />
-				{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
+		return (
+			connectDropTarget &&
+			connectDropTarget(
+				<div style={getStyle(backgroundColor)}>
+					{text}
+					<br />
+					{hasDropped && (
+						<span>dropped {hasDroppedOnChild && ' on child'}</span>
+					)}
 
-				<div>{children}</div>
-			</div>,
+					<div>{children}</div>
+				</div>,
+			)
 		)
 	}
 }

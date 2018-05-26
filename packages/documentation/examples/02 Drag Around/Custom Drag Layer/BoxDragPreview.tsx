@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import shouldPureComponentUpdate from './shouldPureComponentUpdate'
 import Box from './Box'
 
 const styles = {
@@ -9,14 +8,25 @@ const styles = {
 	WebkitTransform: 'rotate(-7deg)',
 }
 
-export default class BoxDragPreview extends React.Component {
-	static propTypes = {
+export interface BoxDragPreviewProps {
+	title: string
+}
+
+export interface BoxDragPreviewState {
+	tickTock: any
+}
+
+export default class BoxDragPreview extends React.PureComponent<
+	BoxDragPreviewProps,
+	BoxDragPreviewState
+> {
+	public static propTypes = {
 		title: PropTypes.string.isRequired,
 	}
 
-	shouldComponentUpdate = shouldPureComponentUpdate
+	private interval: any
 
-	constructor(props) {
+	constructor(props: BoxDragPreviewProps) {
 		super(props)
 		this.tick = this.tick.bind(this)
 		this.state = {
@@ -24,21 +34,15 @@ export default class BoxDragPreview extends React.Component {
 		}
 	}
 
-	componentDidMount() {
+	public componentDidMount() {
 		this.interval = setInterval(this.tick, 500)
 	}
 
-	componentWillUnmount() {
+	public componentWillUnmount() {
 		clearInterval(this.interval)
 	}
 
-	tick() {
-		this.setState({
-			tickTock: !this.state.tickTock,
-		})
-	}
-
-	render() {
+	public render() {
 		const { title } = this.props
 		const { tickTock } = this.state
 
@@ -47,5 +51,11 @@ export default class BoxDragPreview extends React.Component {
 				<Box title={title} yellow={tickTock} />
 			</div>
 		)
+	}
+
+	private tick() {
+		this.setState({
+			tickTock: !this.state.tickTock,
+		})
 	}
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import Container from './Container'
 
 export default class DustbinMultipleTargets extends React.Component {
-	render() {
+	public render() {
 		return (
 			<div>
 				<p>

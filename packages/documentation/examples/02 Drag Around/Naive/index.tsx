@@ -1,8 +1,15 @@
 import React from 'react'
 import Container from './Container'
 
-export default class DragAroundNaive extends React.Component {
-	constructor(props) {
+export interface DragAroundNaiveState {
+	hideSourceOnDrag: boolean
+}
+
+export default class DragAroundNaive extends React.Component<
+	{},
+	DragAroundNaiveState
+> {
+	constructor(props: {}) {
 		super(props)
 		this.handleHideSourceClick = this.handleHideSourceClick.bind(this)
 		this.state = {
@@ -10,13 +17,7 @@ export default class DragAroundNaive extends React.Component {
 		}
 	}
 
-	handleHideSourceClick() {
-		this.setState({
-			hideSourceOnDrag: !this.state.hideSourceOnDrag,
-		})
-	}
-
-	render() {
+	public render() {
 		const { hideSourceOnDrag } = this.state
 
 		return (
@@ -70,5 +71,11 @@ export default class DragAroundNaive extends React.Component {
 				</p>
 			</div>
 		)
+	}
+
+	private handleHideSourceClick() {
+		this.setState({
+			hideSourceOnDrag: !this.state.hideSourceOnDrag,
+		})
 	}
 }

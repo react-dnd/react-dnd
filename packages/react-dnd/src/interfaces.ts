@@ -1,5 +1,7 @@
 import React from 'react'
-import { DragDropMonitor, XYCoord, Identifier, DragDropManager } from 'dnd-core'
+import { XYCoord, DragDropMonitor, Identifier, DragDropManager } from 'dnd-core'
+
+export { XYCoord }
 
 /**
  * The React Component that manages the DragDropContext for its children.
@@ -218,7 +220,10 @@ export interface DragLayerMonitor {
 /**
  * Interface for the DropTarget specification object
  */
-export interface DropTargetSpec<TargetProps> {
+export interface DropTargetSpec<
+	TargetProps,
+	TargetComponent extends React.Component<TargetProps>
+> {
 	/**
 	 * Optional.
 	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
@@ -232,7 +237,7 @@ export interface DropTargetSpec<TargetProps> {
 	drop?: (
 		props: TargetProps,
 		monitor: DropTargetMonitor,
-		component: React.Component<TargetProps>,
+		component: TargetComponent,
 	) => void
 
 	/**
@@ -244,7 +249,7 @@ export interface DropTargetSpec<TargetProps> {
 	hover?: (
 		props: TargetProps,
 		monitor: DropTargetMonitor,
-		component: React.Component<TargetProps>,
+		component: TargetComponent,
 	) => void
 
 	/**
@@ -255,7 +260,11 @@ export interface DropTargetSpec<TargetProps> {
 	canDrop?: (props: TargetProps, monitor: DropTargetMonitor) => boolean
 }
 
-export interface DragSourceSpec<TargetProps, DragObject> {
+export interface DragSourceSpec<
+	TargetProps,
+	TargetComponent extends React.Component<TargetProps>,
+	DragObject
+> {
 	/**
 	 * Required.
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
@@ -267,7 +276,7 @@ export interface DragSourceSpec<TargetProps, DragObject> {
 	beginDrag: (
 		props: TargetProps,
 		monitor: DragSourceMonitor,
-		component: React.Component<TargetProps>,
+		component: TargetProps,
 	) => DragObject
 
 	/**
@@ -281,7 +290,7 @@ export interface DragSourceSpec<TargetProps, DragObject> {
 	endDrag?: (
 		props: TargetProps,
 		monitor: DragSourceMonitor,
-		component: React.Component<TargetProps>,
+		component: TargetProps,
 	) => void
 
 	/**

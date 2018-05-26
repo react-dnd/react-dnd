@@ -6,13 +6,13 @@ import Box from './Box'
 
 @DragDropContext(HTML5Backend)
 export default class Container extends React.Component {
-	render() {
+	public render() {
 		return (
 			<div>
 				<div style={{ overflow: 'hidden', clear: 'both', margin: '-1rem' }}>
-					<Dustbin greedy>
-						<Dustbin greedy>
-							<Dustbin greedy />
+					<Dustbin greedy={true}>
+						<Dustbin greedy={true}>
+							<Dustbin greedy={true} />
 						</Dustbin>
 					</Dustbin>
 

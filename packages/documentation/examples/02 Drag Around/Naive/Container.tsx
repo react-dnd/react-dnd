@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import update from 'immutability-helper'
-import { DropTarget, DragDropContext } from 'react-dnd'
+import { DropTarget, DragDropContext, ConnectDropTarget } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
 
-const styles = {
+const styles: React.CSSProperties = {
 	width: 300,
 	height: 300,
 	border: '1px solid black',
@@ -24,17 +24,29 @@ const boxTarget = {
 	},
 }
 
+export interface ContainerProps {
+	hideSourceOnDrag: boolean
+	connectDropTarget?: ConnectDropTarget
+}
+
+export interface ContainerState {
+	boxes: { [key: string]: { top: number; left: number; title: string } }
+}
+
 @DragDropContext(HTML5Backend)
 @DropTarget(ItemTypes.BOX, boxTarget, connect => ({
 	connectDropTarget: connect.dropTarget(),
 }))
-export default class Container extends React.Component {
-	static propTypes = {
+export default class Container extends React.Component<
+	ContainerProps,
+	ContainerState
+> {
+	public static propTypes = {
 		hideSourceOnDrag: PropTypes.bool.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
 	}
 
-	constructor(props) {
+	constructor(props: ContainerProps) {
 		super(props)
 		this.state = {
 			boxes: {
@@ -44,19 +56,7 @@ export default class Container extends React.Component {
 		}
 	}
 
-	moveBox(id, left, top) {
-		this.setState(
-			update(this.state, {
-				boxes: {
-					[id]: {
-						$merge: { left, top },
-					},
-				},
-			}),
-		)
-	}
-
-	render() {
+	public render() {
 		const { hideSourceOnDrag, connectDropTarget } = this.props
 		const { boxes } = this.state
 
@@ -77,6 +77,18 @@ export default class Container extends React.Component {
 					)
 				})}
 			</div>,
+		)
+	}
+
+	private moveBox(id, left, top) {
+		this.setState(
+			update(this.state, {
+				boxes: {
+					[id]: {
+						$merge: { left, top },
+					},
+				},
+			}),
 		)
 	}
 }

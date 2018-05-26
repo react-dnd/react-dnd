@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import update from 'immutability-helper'
-import { DropTarget } from 'react-dnd'
-import shouldPureComponentUpdate from './shouldPureComponentUpdate'
+import {
+	DropTarget,
+	ConnectDropTarget,
+	DropTargetMonitor,
+	DropTargetConnector,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'
 
-const styles = {
+const styles: React.CSSProperties = {
 	width: 300,
 	height: 300,
 	border: '1px solid black',
@@ -15,8 +19,15 @@ const styles = {
 }
 
 const boxTarget = {
-	drop(props, monitor, component) {
-		const delta = monitor.getDifferenceFromInitialOffset()
+	drop(
+		props: ContainerProps,
+		monitor: DropTargetMonitor,
+		component: Container,
+	) {
+		const delta = monitor.getDifferenceFromInitialOffset() as {
+			x: number
+			y: number
+		}
 		const item = monitor.getItem()
 
 		let left = Math.round(item.left + delta.x)
@@ -29,18 +40,28 @@ const boxTarget = {
 	},
 }
 
-@DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+export interface ContainerProps {
+	snapToGrid: boolean
+	connectDropTarget?: ConnectDropTarget
+}
+
+export interface ContainerState {
+	boxes: { [key: string]: { top: number; left: number; title: string } }
+}
+
+@DropTarget(ItemTypes.BOX, boxTarget, (connect: DropTargetConnector) => ({
 	connectDropTarget: connect.dropTarget(),
 }))
-export default class Container extends React.Component {
-	static propTypes = {
+export default class Container extends React.PureComponent<
+	ContainerProps,
+	ContainerState
+> {
+	public static propTypes = {
 		connectDropTarget: PropTypes.func.isRequired,
 		snapToGrid: PropTypes.bool.isRequired,
 	}
 
-	shouldComponentUpdate = shouldPureComponentUpdate
-
-	constructor(props) {
+	constructor(props: ContainerProps) {
 		super(props)
 		this.state = {
 			boxes: {
@@ -50,7 +71,21 @@ export default class Container extends React.Component {
 		}
 	}
 
-	moveBox(id, left, top) {
+	public render() {
+		const { connectDropTarget } = this.props
+		const { boxes } = this.state
+
+		return (
+			connectDropTarget &&
+			connectDropTarget(
+				<div style={styles}>
+					{Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
+				</div>,
+			)
+		)
+	}
+
+	public moveBox(id: string, left: number, top: number) {
 		this.setState(
 			update(this.state, {
 				boxes: {
@@ -62,18 +97,7 @@ export default class Container extends React.Component {
 		)
 	}
 
-	renderBox(item, key) {
+	private renderBox(item: any, key: any) {
 		return <DraggableBox key={key} id={key} {...item} />
-	}
-
-	render() {
-		const { connectDropTarget } = this.props
-		const { boxes } = this.state
-
-		return connectDropTarget(
-			<div style={styles}>
-				{Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
-			</div>,
-		)
 	}
 }

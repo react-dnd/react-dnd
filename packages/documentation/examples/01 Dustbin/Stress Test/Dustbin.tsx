@@ -27,7 +27,7 @@ const dustbinTarget = {
 }
 
 export interface DustbinProps {
-	connectDropTarget: ConnectDropTarget
+	connectDropTarget?: ConnectDropTarget
 	isOver?: boolean
 	canDrop?: boolean
 	lastDroppedItem?: any
@@ -71,16 +71,19 @@ export default class Dustbin extends React.Component<DustbinProps> {
 			backgroundColor = 'darkkhaki'
 		}
 
-		return connectDropTarget(
-			<div style={{ ...style, backgroundColor }}>
-				{isActive
-					? 'Release to drop'
-					: `This dustbin accepts: ${accepts.join(', ')}`}
+		return (
+			connectDropTarget &&
+			connectDropTarget(
+				<div style={{ ...style, backgroundColor }}>
+					{isActive
+						? 'Release to drop'
+						: `This dustbin accepts: ${accepts.join(', ')}`}
 
-				{lastDroppedItem && (
-					<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
-				)}
-			</div>,
+					{lastDroppedItem && (
+						<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
+					)}
+				</div>,
+			)
 		)
 	}
 }

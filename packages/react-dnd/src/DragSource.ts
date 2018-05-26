@@ -23,11 +23,16 @@ import isValidType from './utils/isValidType'
  * @param collect The props collector function
  * @param options DnD optinos
  */
-export default function DragSource<Props, CollectedProps, Target>(
-	type: SourceType | ((props: Props) => SourceType),
-	spec: DragSourceSpec<Props, Target>,
+export default function DragSource<
+	TargetComponentProps,
+	TargetComponent extends React.Component<TargetComponentProps>,
+	CollectedProps,
+	Target
+>(
+	type: SourceType | ((props: TargetComponentProps) => SourceType),
+	spec: DragSourceSpec<TargetComponentProps, TargetComponent, Target>,
 	collect: DragSourceCollector<CollectedProps>,
-	options: DndOptions<Props> = {},
+	options: DndOptions<TargetComponentProps> = {},
 ) {
 	checkDecoratorArguments(
 		'DragSource',
@@ -76,7 +81,7 @@ export default function DragSource<Props, CollectedProps, Target>(
 
 	return function decorateSource<T>(
 		DecoratedComponent: T,
-	): T & DndComponentClass<Props> {
+	): T & DndComponentClass<TargetComponentProps> {
 		return decorateHandler({
 			connectBackend: (backend: Backend, sourceId: string) => {
 				backend.connectDragSource(sourceId)
