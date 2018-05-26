@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Container from './Container'
 
-export default class CustomizeDropEffects extends Component {
-	render() {
+export default class CustomizeDropEffects extends React.Component {
+	public render() {
 		return (
 			<div>
 				<p>

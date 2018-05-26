@@ -1,8 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
-import { DragSource, DropTarget } from 'react-dnd'
+import {
+	DragSource,
+	DropTarget,
+	ConnectDropTarget,
+	ConnectDragSource,
+	DropTargetMonitor,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
+import { XYCoord } from 'dnd-core'
 
 const style = {
 	border: '1px dashed gray',
@@ -13,7 +20,7 @@ const style = {
 }
 
 const cardSource = {
-	beginDrag(props) {
+	beginDrag(props: CardProps) {
 		return {
 			id: props.id,
 			index: props.index,
@@ -22,7 +29,11 @@ const cardSource = {
 }
 
 const cardTarget = {
-	hover(props, monitor, component) {
+	hover(
+		props: CardProps,
+		monitor: DropTargetMonitor,
+		component: React.ReactInstance,
+	) {
 		const dragIndex = monitor.getItem().index
 		const hoverIndex = props.index
 
@@ -32,7 +43,9 @@ const cardTarget = {
 		}
 
 		// Determine rectangle on screen
-		const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
+		const hoverBoundingRect = (findDOMNode(
+			component,
+		) as Element).getBoundingClientRect()
 
 		// Get vertical middle
 		const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
@@ -41,7 +54,7 @@ const cardTarget = {
 		const clientOffset = monitor.getClientOffset()
 
 		// Get pixels to the top
-		const hoverClientY = clientOffset.y - hoverBoundingRect.top
+		const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top
 
 		// Only perform the move when the mouse has crossed half of the items height
 		// When dragging downwards, only move when the cursor is below 50%
@@ -68,6 +81,16 @@ const cardTarget = {
 	},
 }
 
+export interface CardProps {
+	id: any
+	text: string
+	index: number
+	isDragging?: boolean
+	connectDragSource?: ConnectDragSource
+	connectDropTarget?: ConnectDropTarget
+	moveCard: (dragIndex: number, hoverIndex: number) => void
+}
+
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
 	connectDropTarget: connect.dropTarget(),
 }))
@@ -75,8 +98,8 @@ const cardTarget = {
 	connectDragSource: connect.dragSource(),
 	isDragging: monitor.isDragging(),
 }))
-export default class Card extends Component {
-	static propTypes = {
+export default class Card extends React.Component<CardProps> {
+	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
 		index: PropTypes.number.isRequired,
@@ -86,7 +109,7 @@ export default class Card extends Component {
 		moveCard: PropTypes.func.isRequired,
 	}
 
-	render() {
+	public render() {
 		const {
 			text,
 			isDragging,
@@ -95,8 +118,12 @@ export default class Card extends Component {
 		} = this.props
 		const opacity = isDragging ? 0 : 1
 
-		return connectDragSource(
-			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
+		return (
+			connectDragSource &&
+			connectDropTarget &&
+			connectDragSource(
+				connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
+			)
 		)
 	}
 }

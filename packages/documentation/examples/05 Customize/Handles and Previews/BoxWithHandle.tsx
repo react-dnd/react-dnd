@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { DragSource } from 'react-dnd'
+import { DragSource, ConnectDragPreview, ConnectDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
-const style = {
+const style: React.CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem 1rem',
 	marginBottom: '.5rem',
@@ -11,7 +11,7 @@ const style = {
 	width: '20rem',
 }
 
-const handleStyle = {
+const handleStyle: React.CSSProperties = {
 	backgroundColor: 'green',
 	width: '1rem',
 	height: '1rem',
@@ -26,27 +26,37 @@ const boxSource = {
 	},
 }
 
+export interface BoxWithHandleProps {
+	connectDragSource?: ConnectDragSource
+	connectDragPreview?: ConnectDragPreview
+	isDragging?: boolean
+}
+
 @DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
 	connectDragSource: connect.dragSource(),
 	connectDragPreview: connect.dragPreview(),
 	isDragging: monitor.isDragging(),
 }))
-export default class BoxWithHandle extends Component {
-	static propTypes = {
+export default class BoxWithHandle extends React.Component<BoxWithHandleProps> {
+	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDragPreview: PropTypes.func.isRequired,
 		isDragging: PropTypes.bool.isRequired,
 	}
 
-	render() {
+	public render() {
 		const { isDragging, connectDragSource, connectDragPreview } = this.props
 		const opacity = isDragging ? 0.4 : 1
 
-		return connectDragPreview(
-			<div style={{ ...style, opacity }}>
-				{connectDragSource(<div style={handleStyle} />)}
-				Drag me by the handle
-			</div>,
+		return (
+			connectDragPreview &&
+			connectDragSource &&
+			connectDragPreview(
+				<div style={{ ...style, opacity }}>
+					{connectDragSource(<div style={handleStyle} />)}
+					Drag me by the handle
+				</div>,
+			)
 		)
 	}
 }

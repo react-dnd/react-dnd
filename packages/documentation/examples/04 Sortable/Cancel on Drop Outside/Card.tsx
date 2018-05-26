@@ -1,6 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { DragSource, DropTarget } from 'react-dnd'
+import {
+	DragSource,
+	DropTarget,
+	ConnectDragSource,
+	ConnectDropTarget,
+	DragSourceMonitor,
+	DropTargetMonitor,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style = {
@@ -12,14 +19,14 @@ const style = {
 }
 
 const cardSource = {
-	beginDrag(props) {
+	beginDrag(props: CardProps) {
 		return {
 			id: props.id,
 			originalIndex: props.findCard(props.id).index,
 		}
 	},
 
-	endDrag(props, monitor) {
+	endDrag(props: CardProps, monitor: DragSourceMonitor) {
 		const { id: droppedId, originalIndex } = monitor.getItem()
 		const didDrop = monitor.didDrop()
 
@@ -34,7 +41,7 @@ const cardTarget = {
 		return false
 	},
 
-	hover(props, monitor) {
+	hover(props: CardProps, monitor: DropTargetMonitor) {
 		const { id: draggedId } = monitor.getItem()
 		const { id: overId } = props
 
@@ -45,6 +52,16 @@ const cardTarget = {
 	},
 }
 
+export interface CardProps {
+	id: string
+	text: string
+	connectDragSource?: ConnectDragSource
+	connectDropTarget?: ConnectDropTarget
+	isDragging?: boolean
+	moveCard: (id: string, to: number) => void
+	findCard: (id: string) => { index: number }
+}
+
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
 	connectDropTarget: connect.dropTarget(),
 }))
@@ -52,8 +69,8 @@ const cardTarget = {
 	connectDragSource: connect.dragSource(),
 	isDragging: monitor.isDragging(),
 }))
-export default class Card extends Component {
-	static propTypes = {
+export default class Card extends React.Component<CardProps> {
+	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
 		isDragging: PropTypes.bool.isRequired,
@@ -63,7 +80,7 @@ export default class Card extends Component {
 		findCard: PropTypes.func.isRequired,
 	}
 
-	render() {
+	public render() {
 		const {
 			text,
 			isDragging,
@@ -72,8 +89,12 @@ export default class Card extends Component {
 		} = this.props
 		const opacity = isDragging ? 0 : 1
 
-		return connectDragSource(
-			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
+		return (
+			connectDragSource &&
+			connectDropTarget &&
+			connectDragSource(
+				connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
+			)
 		)
 	}
 }

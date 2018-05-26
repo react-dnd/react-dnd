@@ -1,27 +1,26 @@
-import React, { Component } from 'react'
-import { DragDropContext, DragDropContextProvider } from 'react-dnd'
+import React from 'react'
+import {
+	DragDropContext,
+	DragDropContextProvider,
+	DragSourceMonitor,
+} from 'react-dnd'
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'
 import TargetBox from './TargetBox'
 import FileList from './FileList'
 
+export interface ContainerState {
+	droppedFiles: any[]
+}
+
 @DragDropContext(HTML5Backend)
-export default class Container extends Component {
-	constructor(props) {
+export default class Container extends React.Component<{}, ContainerState> {
+	constructor(props: {}) {
 		super(props)
-
 		this.handleFileDrop = this.handleFileDrop.bind(this)
-
 		this.state = { droppedFiles: [] }
 	}
 
-	handleFileDrop(item, monitor) {
-		if (monitor) {
-			const droppedFiles = monitor.getItem().files
-			this.setState({ droppedFiles })
-		}
-	}
-
-	render() {
+	public render() {
 		const { FILE } = NativeTypes
 		const { droppedFiles } = this.state
 
@@ -33,5 +32,12 @@ export default class Container extends Component {
 				</div>
 			</DragDropContextProvider>
 		)
+	}
+
+	private handleFileDrop(item: any, monitor: DragSourceMonitor) {
+		if (monitor) {
+			const droppedFiles = monitor.getItem().files
+			this.setState({ droppedFiles })
+		}
 	}
 }

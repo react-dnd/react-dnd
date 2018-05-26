@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { DropTarget } from 'react-dnd'
+import { DropTarget, ConnectDropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
-const style = {
+const style: React.CSSProperties = {
 	border: '1px solid gray',
 	height: '15rem',
 	width: '15rem',
@@ -12,7 +12,15 @@ const style = {
 }
 
 const boxTarget = {
-	drop() {},
+	drop() {
+		//
+	},
+}
+
+export interface TargetBoxProps {
+	connectDropTarget?: ConnectDropTarget
+	isOver?: boolean
+	canDrop?: boolean
 }
 
 @DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
@@ -20,21 +28,24 @@ const boxTarget = {
 	isOver: monitor.isOver(),
 	canDrop: monitor.canDrop(),
 }))
-export default class TargetBox extends Component {
-	static propTypes = {
+export default class TargetBox extends React.Component<TargetBoxProps> {
+	public static propTypes = {
 		connectDropTarget: PropTypes.func.isRequired,
 		isOver: PropTypes.bool.isRequired,
 		canDrop: PropTypes.bool.isRequired,
 	}
 
-	render() {
+	public render() {
 		const { canDrop, isOver, connectDropTarget } = this.props
 		const isActive = canDrop && isOver
 
-		return connectDropTarget(
-			<div style={style}>
-				{isActive ? 'Release to drop' : 'Drag item here'}
-			</div>,
+		return (
+			connectDropTarget &&
+			connectDropTarget(
+				<div style={style}>
+					{isActive ? 'Release to drop' : 'Drag item here'}
+				</div>,
+			)
 		)
 	}
 }

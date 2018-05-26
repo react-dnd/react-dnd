@@ -1,19 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Container from './Container'
 
-export default class SortableStressTest extends Component {
-	constructor(props) {
+export interface SortableStressTestState {
+	shouldRender: boolean
+}
+
+export default class SortableStressTest extends React.Component<
+	{},
+	SortableStressTestState
+> {
+	constructor(props: {}) {
 		super(props)
 		// Avoid rendering on server because the big data list is generated
 		this.state = { shouldRender: false }
 	}
 
-	componentDidMount() {
+	public componentDidMount() {
 		// Won't fire on server.
 		this.setState({ shouldRender: true }) // eslint-disable-line react/no-did-mount-set-state
 	}
 
-	render() {
+	public render() {
 		const { shouldRender } = this.state
 
 		return (

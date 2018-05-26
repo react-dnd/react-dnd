@@ -1,9 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { DragSource, DropTarget } from 'react-dnd'
+import {
+	DragSource,
+	DropTarget,
+	ConnectDragSource,
+	ConnectDropTarget,
+	DropTargetMonitor,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
-const style = {
+const style: React.CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem 1rem',
 	marginBottom: '.5rem',
@@ -12,19 +18,28 @@ const style = {
 }
 
 const cardSource = {
-	beginDrag(props) {
+	beginDrag(props: CardProps) {
 		return { id: props.id }
 	},
 }
 
 const cardTarget = {
-	hover(props, monitor) {
+	hover(props: CardProps, monitor: DropTargetMonitor) {
 		const draggedId = monitor.getItem().id
 
 		if (draggedId !== props.id) {
 			props.moveCard(draggedId, props.id)
 		}
 	},
+}
+
+export interface CardProps {
+	id: any
+	text: string
+	isDragging?: boolean
+	connectDragSource?: ConnectDragSource
+	connectDropTarget?: ConnectDropTarget
+	moveCard: (draggedId: string, id: string) => void
 }
 
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
@@ -34,8 +49,8 @@ const cardTarget = {
 	connectDragSource: connect.dragSource(),
 	isDragging: monitor.isDragging(),
 }))
-export default class Card extends Component {
-	static propTypes = {
+export default class Card extends React.Component<CardProps> {
+	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
 		isDragging: PropTypes.bool.isRequired,
@@ -44,7 +59,7 @@ export default class Card extends Component {
 		moveCard: PropTypes.func.isRequired,
 	}
 
-	render() {
+	public render() {
 		const {
 			text,
 			isDragging,
@@ -53,8 +68,12 @@ export default class Card extends Component {
 		} = this.props
 		const opacity = isDragging ? 0 : 1
 
-		return connectDragSource(
-			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
+		return (
+			connectDragSource &&
+			connectDropTarget &&
+			connectDragSource(
+				connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
+			)
 		)
 	}
 }
