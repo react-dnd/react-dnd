@@ -52,16 +52,14 @@ export interface DragSourceMonitor extends DragDropMonitor {
 	 * Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from its beginDrag() method.
 	 * Returns null if no item is being dragged.
 	 */
-	// tslint:disable-next-line ban-types
-	getItem(): Object
+	getItem(): any
 
 	/**
 	 * Returns a plain object representing the last recorded drop result. The drop targets may optionally specify it by returning an object from their
 	 * drop() methods. When a chain of drop() is dispatched for the nested targets, bottom up, any parent that explicitly returns its own result from drop()
 	 * overrides the child drop result previously set by the child. Returns null if called outside endDrag().
 	 */
-	// tslint:disable-next-line ban-types
-	getDropResult(): Object
+	getDropResult(): any
 
 	/**
 	 *  Returns true if some drop target has handled the drop event, false otherwise. Even if a target did not return a drop result, didDrop() returns true.
@@ -120,16 +118,14 @@ export interface DropTargetMonitor {
 	 * Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from
 	 * its beginDrag() method. Returns null if no item is being dragged.
 	 */
-	// tslint:disable-next-line ban-types
-	getItem(): Object
+	getItem(): any
 
 	/**
 	 * Returns a plain object representing the last recorded drop result. The drop targets may optionally specify it by returning an
 	 * object from their drop() methods. When a chain of drop() is dispatched for the nested targets, bottom up, any parent that explicitly
 	 * returns its own result from drop() overrides the drop result previously set by the child. Returns null if called outside drop().
 	 */
-	// tslint:disable-next-line ban-types
-	getDropResult(): Object
+	getDropResult(): any
 
 	/**
 	 *  Returns true if some drop target has handled the drop event, false otherwise. Even if a target did not return a drop result,
@@ -185,8 +181,7 @@ export interface DragLayerMonitor {
 	 * Every drag source must specify it by returning an object from its beginDrag() method.
 	 * Returns null if no item is being dragged.
 	 */
-	// tslint:disable-next-line ban-types
-	getItem(): Object
+	getItem(): any
 
 	/**
 	 * Returns the { x, y } client offset of the pointer at the time when the current drag operation has started.
@@ -236,7 +231,7 @@ export interface DropTargetSpec<TargetProps> {
 	 */
 	drop?: (
 		props: TargetProps,
-		monitor: DragDropMonitor,
+		monitor: DropTargetMonitor,
 		component: React.Component<TargetProps>,
 	) => void
 
@@ -248,7 +243,7 @@ export interface DropTargetSpec<TargetProps> {
 	 */
 	hover?: (
 		props: TargetProps,
-		monitor: DragDropMonitor,
+		monitor: DropTargetMonitor,
 		component: React.Component<TargetProps>,
 	) => void
 
@@ -257,7 +252,7 @@ export interface DropTargetSpec<TargetProps> {
 	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
-	canDrop?: (props: TargetProps, monitor: DragDropMonitor) => boolean
+	canDrop?: (props: TargetProps, monitor: DropTargetMonitor) => boolean
 }
 
 export interface DragSourceSpec<TargetProps, DragObject> {
@@ -271,7 +266,7 @@ export interface DragSourceSpec<TargetProps, DragObject> {
 	 */
 	beginDrag: (
 		props: TargetProps,
-		monitor: DragDropMonitor,
+		monitor: DragSourceMonitor,
 		component: React.Component<TargetProps>,
 	) => DragObject
 
@@ -285,7 +280,7 @@ export interface DragSourceSpec<TargetProps, DragObject> {
 	 */
 	endDrag?: (
 		props: TargetProps,
-		monitor: DragDropMonitor,
+		monitor: DragSourceMonitor,
 		component: React.Component<TargetProps>,
 	) => void
 
@@ -295,7 +290,7 @@ export interface DragSourceSpec<TargetProps, DragObject> {
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: (props: TargetProps, monitor: DragDropMonitor) => boolean
+	canDrag?: (props: TargetProps, monitor: DragSourceMonitor) => boolean
 
 	/**
 	 * Optional.
@@ -307,7 +302,7 @@ export interface DragSourceSpec<TargetProps, DragObject> {
 	 *
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
-	isDragging?: (props: TargetProps, monitor: DragDropMonitor) => boolean
+	isDragging?: (props: TargetProps, monitor: DragSourceMonitor) => boolean
 }
 
 /**

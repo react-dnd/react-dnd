@@ -23,10 +23,10 @@ import isValidType from './utils/isValidType'
  * @param collect The props collector function
  * @param options DnD optinos
  */
-export default function DragSource<Props, Target>(
+export default function DragSource<Props, CollectedProps, Target>(
 	type: SourceType | ((props: Props) => SourceType),
 	spec: DragSourceSpec<Props, Target>,
-	collect: DragSourceCollector<any>,
+	collect: DragSourceCollector<CollectedProps>,
 	options: DndOptions<Props> = {},
 ) {
 	checkDecoratorArguments(
