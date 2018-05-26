@@ -2,6 +2,7 @@ import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
 import { DragDropMonitor, DropTarget } from 'dnd-core'
 import { MemoVoidArrayIterator } from 'lodash'
+import { DropTargetSpec, DropTargetMonitor } from './interfaces'
 
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 
@@ -11,7 +12,11 @@ export interface Target extends DropTarget {
 	receiveComponent(component: any): void
 }
 
-export default function createTargetFactory(spec: any) {
+export default function createTargetFactory<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
+>(spec: DropTargetSpec<P, S, TargetComponent>) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -23,13 +28,13 @@ export default function createTargetFactory(spec: any) {
 			key,
 		)
 		invariant(
-			typeof spec[key] === 'function',
+			typeof (spec as any)[key] === 'function',
 			'Expected %s in the drop target specification to be a function. ' +
 				'Instead received a specification with %s: %s. ' +
 				'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
 			key,
 			key,
-			spec[key],
+			(spec as any)[key],
 		)
 	})
 
@@ -37,7 +42,7 @@ export default function createTargetFactory(spec: any) {
 		private props: any
 		private component: any
 
-		constructor(private monitor: DragDropMonitor) {
+		constructor(private monitor: DropTargetMonitor) {
 			this.props = null
 			this.component = null
 		}
@@ -89,7 +94,7 @@ export default function createTargetFactory(spec: any) {
 		}
 	}
 
-	return function createTarget(monitor: DragDropMonitor): Target {
+	return function createTarget(monitor: DropTargetMonitor): Target {
 		return new TargetImpl(monitor)
 	}
 }

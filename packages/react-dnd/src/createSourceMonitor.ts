@@ -6,6 +6,7 @@ import {
 	Listener,
 	XYCoord,
 	Identifier,
+	DragSource,
 } from 'dnd-core'
 import { DragSourceMonitor } from './interfaces'
 
@@ -133,6 +134,8 @@ class SourceMonitor implements DragSourceMonitor {
 	}
 }
 
-export default function createSourceMonitor(manager: DragDropManager<any>) {
+export default function createSourceMonitor<Context>(
+	manager: DragDropManager<Context>,
+): DragSourceMonitor {
 	return new SourceMonitor(manager) as DragSourceMonitor
 }

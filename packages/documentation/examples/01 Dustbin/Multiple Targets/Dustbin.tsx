@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DropTarget, ConnectDropTarget, DragDropMonitor } from 'react-dnd'
+import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 
 const style: React.CSSProperties = {
 	height: '12rem',
@@ -16,7 +16,7 @@ const style: React.CSSProperties = {
 }
 
 const dustbinTarget = {
-	drop(props: DustbinProps, monitor: DragDropMonitor) {
+	drop(props: DustbinProps, monitor: DropTargetMonitor) {
 		props.onDrop(monitor.getItem())
 	},
 }

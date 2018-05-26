@@ -1,12 +1,12 @@
 // tslint:disable jsx-no-lambda
 import React from 'react'
-import update from 'immutability-helper'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'
 import shuffle from 'lodash/shuffle'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
+const update = require('immutability-helper').default
 
 export interface SourceBox {
 	name: string

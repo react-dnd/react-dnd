@@ -7,6 +7,7 @@ import {
 	DragSourceCollector,
 	DndOptions,
 	DndComponentClass,
+	DragSourceMonitor,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -24,15 +25,16 @@ import isValidType from './utils/isValidType'
  * @param options DnD optinos
  */
 export default function DragSource<
-	TargetComponentProps,
-	TargetComponent extends React.Component<TargetComponentProps>,
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
 	CollectedProps,
-	Target
+	DragObject
 >(
-	type: SourceType | ((props: TargetComponentProps) => SourceType),
-	spec: DragSourceSpec<TargetComponentProps, TargetComponent, Target>,
+	type: SourceType | ((props: P) => SourceType),
+	spec: DragSourceSpec<P, S, TargetComponent, DragObject>,
 	collect: DragSourceCollector<CollectedProps>,
-	options: DndOptions<TargetComponentProps> = {},
+	options: DndOptions<P> = {},
 ) {
 	checkDecoratorArguments(
 		'DragSource',
@@ -79,13 +81,10 @@ export default function DragSource<
 		collect,
 	)
 
-	return function decorateSource<T>(
-		DecoratedComponent: T,
-	): T & DndComponentClass<TargetComponentProps> {
-		return decorateHandler({
-			connectBackend: (backend: Backend, sourceId: string) => {
-				backend.connectDragSource(sourceId)
-			},
+	return function decorateSource<TargetClass extends React.ComponentClass<P>>(
+		DecoratedComponent: TargetClass,
+	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
+		return decorateHandler<P, S, TargetComponent, TargetClass>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,
 			registerHandler: registerSource,
@@ -95,6 +94,6 @@ export default function DragSource<
 			getType,
 			collect,
 			options,
-		}) as any
+		})
 	}
 }

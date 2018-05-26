@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
-import { DragDropManager } from 'dnd-core'
+import { DragDropManager, Identifier } from 'dnd-core'
 import { DndComponentClass, DndComponent } from './interfaces'
 
 const shallowEqual = require('shallowequal')
@@ -19,7 +19,31 @@ const isClassComponent = (Comp: any) => {
 	)
 }
 
-export default function decorateHandler<P>({
+export interface DecorateHandlerArgs<
+	P,
+	ComponentClass extends React.ComponentClass<P>
+> {
+	DecoratedComponent: ComponentClass
+	createHandler: any
+	createMonitor: any
+	createConnector: any
+	registerHandler: any
+	containerDisplayName: string
+	getType: any
+	collect: any
+	options: any
+}
+
+interface HandlerReceiver {
+	receiveHandlerId: (handlerId: Identifier) => void
+}
+
+export default function decorateHandler<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	TargetClass extends React.ComponentClass<P>
+>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,
@@ -29,13 +53,14 @@ export default function decorateHandler<P>({
 	getType,
 	collect,
 	options,
-}: any): DndComponentClass<P> {
+}: DecorateHandlerArgs<P, TargetClass>): TargetClass &
+	DndComponentClass<P, S, TargetComponent, TargetClass> {
 	const { arePropsEqual = shallowEqual } = options
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-	class DragDropContainer extends React.Component<P>
-		implements DndComponent<P, any> {
+	class DragDropContainer extends React.Component<P, S>
+		implements DndComponent<P, S, TargetComponent> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 		public static contextTypes = {
@@ -45,7 +70,7 @@ export default function decorateHandler<P>({
 		private handlerId: string | undefined
 		private decoratedComponentInstance: any
 		private manager: DragDropManager<any>
-		private handlerMonitor: any
+		private handlerMonitor: HandlerReceiver
 		private handlerConnector: any
 		private handler: any
 		private disposable: any
@@ -203,5 +228,6 @@ export default function decorateHandler<P>({
 		}
 	}
 
-	return hoistStatics(DragDropContainer, DecoratedComponent) as any
+	return hoistStatics(DragDropContainer, DecoratedComponent) as TargetClass &
+		DndComponentClass<P, S, TargetComponent, TargetClass>
 }

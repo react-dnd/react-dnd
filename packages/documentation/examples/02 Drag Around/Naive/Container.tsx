@@ -1,10 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import update from 'immutability-helper'
-import { DropTarget, DragDropContext, ConnectDropTarget } from 'react-dnd'
+import {
+	DropTarget,
+	DragDropContext,
+	ConnectDropTarget,
+	DropTargetMonitor,
+	XYCoord,
+} from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
+const update = require('immutability-helper').default
 
 const styles: React.CSSProperties = {
 	width: 300,
@@ -14,9 +20,13 @@ const styles: React.CSSProperties = {
 }
 
 const boxTarget = {
-	drop(props, monitor, component) {
+	drop(
+		props: ContainerProps,
+		monitor: DropTargetMonitor,
+		component: Container,
+	) {
 		const item = monitor.getItem()
-		const delta = monitor.getDifferenceFromInitialOffset()
+		const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
 		const left = Math.round(item.left + delta.x)
 		const top = Math.round(item.top + delta.y)
 
@@ -33,8 +43,8 @@ export interface ContainerState {
 	boxes: { [key: string]: { top: number; left: number; title: string } }
 }
 
-@DragDropContext(HTML5Backend)
-@DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+@DragDropContext<ContainerProps, ContainerState, Container>(HTML5Backend)
+@DropTarget(ItemTypes.BOX, boxTarget, (connect: any) => ({
 	connectDropTarget: connect.dropTarget(),
 }))
 export default class Container extends React.Component<
@@ -60,27 +70,30 @@ export default class Container extends React.Component<
 		const { hideSourceOnDrag, connectDropTarget } = this.props
 		const { boxes } = this.state
 
-		return connectDropTarget(
-			<div style={styles}>
-				{Object.keys(boxes).map(key => {
-					const { left, top, title } = boxes[key]
-					return (
-						<Box
-							key={key}
-							id={key}
-							left={left}
-							top={top}
-							hideSourceOnDrag={hideSourceOnDrag}
-						>
-							{title}
-						</Box>
-					)
-				})}
-			</div>,
+		return (
+			connectDropTarget &&
+			connectDropTarget(
+				<div style={styles}>
+					{Object.keys(boxes).map(key => {
+						const { left, top, title } = boxes[key]
+						return (
+							<Box
+								key={key}
+								id={key}
+								left={left}
+								top={top}
+								hideSourceOnDrag={hideSourceOnDrag}
+							>
+								{title}
+							</Box>
+						)
+					})}
+				</div>,
+			)
 		)
 	}
 
-	private moveBox(id, left, top) {
+	public moveBox(id: string, left: number, top: number) {
 		this.setState(
 			update(this.state, {
 				boxes: {

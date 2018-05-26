@@ -58,10 +58,13 @@ export default class Box extends React.Component<BoxProps> {
 		const { name, isDropped, isDragging, connectDragSource } = this.props
 		const opacity = isDragging ? 0.4 : 1
 
-		return connectDragSource(
-			<div style={{ ...style, opacity }}>
-				{isDropped ? <s>{name}</s> : name}
-			</div>,
+		return (
+			connectDragSource &&
+			connectDragSource(
+				<div style={{ ...style, opacity }}>
+					{isDropped ? <s>{name}</s> : name}
+				</div>,
+			)
 		)
 	}
 }

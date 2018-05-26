@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import update from 'immutability-helper'
 import { DropTarget, DragDropContext, ConnectDropTarget } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Card from './Card'
 import ItemTypes from './ItemTypes'
+const update = require('immutability-helper').default
 
 const style = {
 	width: 400,

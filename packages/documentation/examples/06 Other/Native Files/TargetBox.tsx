@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
+import {
+	DropTarget,
+	DropTargetConnector,
+	ConnectDropTarget,
+	DropTargetMonitor,
+} from 'react-dnd'
 
 const style: React.CSSProperties = {
 	border: '1px solid gray',
@@ -29,7 +34,7 @@ export interface TargetBoxProps {
 @DropTarget(
 	(props: TargetBoxProps) => props.accepts,
 	boxTarget,
-	(connect, monitor) => ({
+	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),
 		canDrop: monitor.canDrop(),

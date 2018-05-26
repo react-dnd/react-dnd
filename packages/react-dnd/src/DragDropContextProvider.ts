@@ -12,8 +12,8 @@ export interface DragDropContextProviderProps<Context> {
 	context?: Context
 }
 
-export default class DragDropContextProviderImpl extends Component<
-	DragDropContextProviderProps<any>
+export default class DragDropContextProviderImpl<Context> extends Component<
+	DragDropContextProviderProps<Context>
 > {
 	public static propTypes = {
 		backend: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,

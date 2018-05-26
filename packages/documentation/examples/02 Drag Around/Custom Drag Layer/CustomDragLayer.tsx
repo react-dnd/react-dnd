@@ -46,10 +46,10 @@ export interface CustomDragLayerProps {
 	initialOffset?: XYCoord
 	currentOffset?: XYCoord
 	isDragging?: boolean
-	snopToGrid?: boolean
+	snapToGrid: boolean
 }
 
-@DragLayer(monitor => ({
+@DragLayer<CustomDragLayerProps, {}, CustomDragLayer, {}>(monitor => ({
 	item: monitor.getItem(),
 	itemType: monitor.getItemType(),
 	initialOffset: monitor.getInitialSourceClientOffset(),

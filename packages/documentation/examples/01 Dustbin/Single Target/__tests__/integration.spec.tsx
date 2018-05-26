@@ -17,18 +17,18 @@ describe('Integration', () => {
 
 		// Render with the test context that uses the test backend
 		const DustbinWithBoxContext = wrapInTestContext(DustbinWithBox)
-		const root = TestUtils.renderIntoDocument(<DustbinWithBoxContext />)
+		const root: any = TestUtils.renderIntoDocument(<DustbinWithBoxContext />)
 
 		// Obtain a reference to the backend
 		const backend = root.getManager().getBackend()
 
 		// Find the drag source ID and use it to simulate the dragging operation
-		const box = TestUtils.findRenderedComponentWithType(root, Box)
+		const box: any = TestUtils.findRenderedComponentWithType(root, Box as any)
 		backend.simulateBeginDrag([box.getHandlerId()])
 
 		window.alert = jest.fn()
 
-		const dustbin = TestUtils.findRenderedComponentWithType(root, Dustbin)
+		const dustbin: any = TestUtils.findRenderedComponentWithType(root, Dustbin)
 		backend.simulateHover([dustbin.getHandlerId()])
 		backend.simulateDrop()
 		backend.simulateEndDrag()

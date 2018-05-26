@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StatelessComponent } from 'react'
 import { XYCoord, DragDropMonitor, Identifier, DragDropManager } from 'dnd-core'
 
 export { XYCoord }
@@ -6,32 +6,50 @@ export { XYCoord }
 /**
  * The React Component that manages the DragDropContext for its children.
  */
-export interface ContextComponent<P, S> extends React.Component<P, S> {
-	getDecoratedComponentInstance(): React.Component<P, S>
+export interface ContextComponent<
+	P,
+	S,
+	C extends React.Component<P, S> | React.StatelessComponent<P>
+> extends React.Component<P, S> {
+	getDecoratedComponentInstance(): C
 	getManager(): DragDropManager<any>
 }
 
 /**
  * A DnD interactive component
  */
-export interface DndComponent<P, S> {
-	getDecoratedComponentInstance(): React.Component<P, S>
+export interface DndComponent<
+	P,
+	S,
+	C extends React.Component<P, S> | React.StatelessComponent<P>
+> extends React.Component<P, S> {
+	getDecoratedComponentInstance(): C
 	getHandlerId(): Identifier
 }
 
 /**
  * The class interface for a context component
  */
-export interface ContextComponentClass<P> extends React.ComponentClass<P> {
-	DecoratedComponent: React.ComponentClass<P>
-	new (props?: P, context?: any): ContextComponent<P, any>
+export interface ContextComponentClass<
+	P,
+	S,
+	C extends React.Component<P, S> | React.StatelessComponent<P>,
+	ComponentClass extends React.ComponentClass<P>
+> extends React.ComponentClass<P> {
+	DecoratedComponent: ComponentClass
+	new (props?: P, context?: any): ContextComponent<P, S, C>
 }
 /**
  * The class interface for a DnD component
  */
-export interface DndComponentClass<P> extends React.ComponentClass<P> {
-	DecoratedComponent: React.ComponentClass<P>
-	new (props?: P, context?: any): DndComponent<P, any>
+export interface DndComponentClass<
+	P,
+	S,
+	C extends React.Component<P, S> | React.StatelessComponent<P>,
+	ComponentClass extends React.ComponentClass<P>
+> extends React.ComponentClass<P> {
+	DecoratedComponent: ComponentClass
+	new (props?: P, context?: any): DndComponent<P, S, C>
 }
 
 export interface DragSourceMonitor extends DragDropMonitor {
@@ -221,8 +239,9 @@ export interface DragLayerMonitor {
  * Interface for the DropTarget specification object
  */
 export interface DropTargetSpec<
-	TargetProps,
-	TargetComponent extends React.Component<TargetProps>
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
 > {
 	/**
 	 * Optional.
@@ -235,10 +254,10 @@ export interface DropTargetSpec<
 	 * is defined and returns false.
 	 */
 	drop?: (
-		props: TargetProps,
+		props: P,
 		monitor: DropTargetMonitor,
 		component: TargetComponent,
-	) => void
+	) => any
 
 	/**
 	 * Optional.
@@ -247,7 +266,7 @@ export interface DropTargetSpec<
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
 	hover?: (
-		props: TargetProps,
+		props: P,
 		monitor: DropTargetMonitor,
 		component: TargetComponent,
 	) => void
@@ -257,12 +276,13 @@ export interface DropTargetSpec<
 	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
-	canDrop?: (props: TargetProps, monitor: DropTargetMonitor) => boolean
+	canDrop?: (props: P, monitor: DropTargetMonitor) => boolean
 }
 
 export interface DragSourceSpec<
-	TargetProps,
-	TargetComponent extends React.Component<TargetProps>,
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
 	DragObject
 > {
 	/**
@@ -274,9 +294,9 @@ export interface DragSourceSpec<
 	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
 	 */
 	beginDrag: (
-		props: TargetProps,
+		props: P,
 		monitor: DragSourceMonitor,
-		component: TargetProps,
+		component: TargetComponent,
 	) => DragObject
 
 	/**
@@ -288,9 +308,9 @@ export interface DragSourceSpec<
 	 * component parameter is set to be null.
 	 */
 	endDrag?: (
-		props: TargetProps,
+		props: P,
 		monitor: DragSourceMonitor,
-		component: TargetProps,
+		component: TargetComponent,
 	) => void
 
 	/**
@@ -299,7 +319,7 @@ export interface DragSourceSpec<
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: (props: TargetProps, monitor: DragSourceMonitor) => boolean
+	canDrag?: (props: P, monitor: DragSourceMonitor) => boolean
 
 	/**
 	 * Optional.
@@ -311,7 +331,7 @@ export interface DragSourceSpec<
 	 *
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
-	isDragging?: (props: TargetProps, monitor: DragSourceMonitor) => boolean
+	isDragging?: (props: P, monitor: DragSourceMonitor) => boolean
 }
 
 /**
@@ -436,3 +456,33 @@ export type DragLayerCollector<TargetProps, CollectedProps> = (
 	monitor: DragLayerMonitor,
 	props: TargetProps,
 ) => CollectedProps
+
+/**
+ * Top-Level API
+ */
+/*
+export type DropTargetDecorator<P> = (
+	types: Identifier | Identifier[] | ((props: P) => Identifier | Identifier[]),
+	spec: DropTargetSpec<P, any>,
+	collect: DropTargetCollector<any>,
+	options?: DndOptions<P>,
+) => (
+	componentClass: React.ComponentClass<P> | React.StatelessComponent<P>,
+) => DndComponentClass<P>
+
+export type DragSourceDecorator<P> = (
+	type: Identifier | ((props: P) => Identifier),
+	spec: DragSourceSpec<P, any, any>,
+	collect: DragSourceCollector<any>,
+	options?: DndOptions<P>,
+) => (
+	componentClass: React.ComponentClass<P> | React.StatelessComponent<P>,
+) => DndComponentClass<P>
+
+export type DragLayerDecorator<P> = (
+	collect: DragLayerCollector<P, any>,
+	options?: DndOptions<P>,
+) => (
+	componentClass: React.ComponentClass<P> | React.StatelessComponent<P>,
+) => DndComponentClass<P>
+*/

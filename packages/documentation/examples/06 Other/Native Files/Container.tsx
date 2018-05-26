@@ -3,6 +3,7 @@ import {
 	DragDropContext,
 	DragDropContextProvider,
 	DragSourceMonitor,
+	DropTargetMonitor,
 } from 'react-dnd'
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'
 import TargetBox from './TargetBox'
@@ -34,7 +35,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 		)
 	}
 
-	private handleFileDrop(item: any, monitor: DragSourceMonitor) {
+	private handleFileDrop(item: any, monitor: DropTargetMonitor) {
 		if (monitor) {
 			const droppedFiles = monitor.getItem().files
 			this.setState({ droppedFiles })

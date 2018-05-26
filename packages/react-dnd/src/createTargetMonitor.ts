@@ -78,6 +78,8 @@ export class TargetMonitor implements DropTargetMonitor {
 	}
 }
 
-export default function createTargetMonitor(manager: DragDropManager<any>) {
+export default function createTargetMonitor<Context>(
+	manager: DragDropManager<Context>,
+): DropTargetMonitor {
 	return new TargetMonitor(manager) as DropTargetMonitor
 }

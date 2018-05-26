@@ -7,6 +7,7 @@ import {
 	DndOptions,
 	DropTargetCollector,
 	DndComponentClass,
+	DropTargetMonitor,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -17,13 +18,15 @@ import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
 
 export default function DropTarget<
-	TargetProps,
-	TargetComponent extends React.Component<TargetProps>
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	CollectedProps
 >(
-	type: TargetType | ((props: TargetProps) => TargetType),
-	spec: DropTargetSpec<TargetProps, TargetComponent>,
-	collect: DropTargetCollector<any>,
-	options: DndOptions<TargetProps> = {},
+	type: TargetType | ((props: P) => TargetType),
+	spec: DropTargetSpec<P, S, TargetComponent>,
+	collect: DropTargetCollector<CollectedProps>,
+	options: DndOptions<P> = {},
 ) {
 	checkDecoratorArguments(
 		'DropTarget',
@@ -70,13 +73,10 @@ export default function DropTarget<
 		collect,
 	)
 
-	return function decorateTarget<
-		T extends React.ComponentClass<any> | React.StatelessComponent<any>
-	>(DecoratedComponent: T): T & DndComponentClass<any> {
-		return decorateHandler({
-			connectBackend: (backend: Backend, targetId: string) => {
-				backend.connectDropTarget(targetId)
-			},
+	return function decorateTarget<TargetClass extends React.ComponentClass<P>>(
+		DecoratedComponent: TargetClass,
+	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
+		return decorateHandler<P, S, TargetComponent, TargetClass>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,
@@ -86,6 +86,6 @@ export default function DropTarget<
 			getType,
 			collect,
 			options,
-		}) as any
+		})
 	}
 }

@@ -1,8 +1,8 @@
 import React from 'react'
-import update from 'immutability-helper'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Card from './Card'
+const update = require('immutability-helper').default
 
 const style = {
 	width: 400,
@@ -73,7 +73,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 		)
 	}
 
-	private moveCard(dragIndex, hoverIndex) {
+	private moveCard(dragIndex: number, hoverIndex: number) {
 		const { cards } = this.state
 		const dragCard = cards[dragIndex]
 

@@ -7,6 +7,9 @@ import {
 	ConnectDropTarget,
 	ConnectDragSource,
 	DropTargetMonitor,
+	DropTargetConnector,
+	DragSourceConnector,
+	DragSourceMonitor,
 } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
@@ -29,11 +32,7 @@ const cardSource = {
 }
 
 const cardTarget = {
-	hover(
-		props: CardProps,
-		monitor: DropTargetMonitor,
-		component: React.ReactInstance,
-	) {
+	hover(props: CardProps, monitor: DropTargetMonitor, component: Card) {
 		const dragIndex = monitor.getItem().index
 		const hoverIndex = props.index
 
@@ -91,13 +90,17 @@ export interface CardProps {
 	moveCard: (dragIndex: number, hoverIndex: number) => void
 }
 
-@DropTarget(ItemTypes.CARD, cardTarget, connect => ({
+@DropTarget(ItemTypes.CARD, cardTarget, (connect: DropTargetConnector) => ({
 	connectDropTarget: connect.dropTarget(),
 }))
-@DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	isDragging: monitor.isDragging(),
-}))
+@DragSource(
+	ItemTypes.CARD,
+	cardSource,
+	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging(),
+	}),
+)
 export default class Card extends React.Component<CardProps> {
 	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,

@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DragSource, ConnectDragSource } from 'react-dnd'
+import {
+	DragSource,
+	ConnectDragSource,
+	DragSourceConnector,
+	DragSourceMonitor,
+} from 'react-dnd'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -27,11 +32,14 @@ export interface BoxProps {
 	isDragging?: boolean
 	isDropped?: boolean
 }
-
-@DragSource(props => props.type, boxSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	isDragging: monitor.isDragging(),
-}))
+@DragSource(
+	(props: BoxProps) => props.type,
+	boxSource,
+	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging(),
+	}),
+)
 export default class Box extends React.Component<BoxProps> {
 	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,

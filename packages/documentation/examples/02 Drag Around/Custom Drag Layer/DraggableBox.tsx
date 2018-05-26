@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DragSource } from 'react-dnd'
+import { DragSource, ConnectDragSource, ConnectDragPreview } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
 
 const boxSource = {
-	beginDrag(props) {
+	beginDrag(props: DraggableBoxProps) {
 		const { id, title, left, top } = props
 		return { id, title, left, top }
 	},
 }
 
-function getStyles(props) {
+function getStyles(props: DraggableBoxProps): React.CSSProperties {
 	const { left, top, isDragging } = props
 	const transform = `translate3d(${left}px, ${top}px, 0)`
 
@@ -27,12 +27,24 @@ function getStyles(props) {
 	}
 }
 
+export interface DraggableBoxProps {
+	connectDragSource?: ConnectDragSource
+	connectDragPreview?: ConnectDragPreview
+	isDragging?: boolean
+	id: string
+	title: string
+	left: number
+	top: number
+}
+
 @DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
 	connectDragSource: connect.dragSource(),
 	connectDragPreview: connect.dragPreview(),
 	isDragging: monitor.isDragging(),
 }))
-export default class DraggableBox extends React.PureComponent {
+export default class DraggableBox extends React.PureComponent<
+	DraggableBoxProps
+> {
 	public static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDragPreview: PropTypes.func.isRequired,
@@ -44,22 +56,28 @@ export default class DraggableBox extends React.PureComponent {
 	}
 
 	public componentDidMount() {
-		// Use empty image as a drag preview so browsers don't draw it
-		// and we can draw whatever we want on the custom drag layer instead.
-		this.props.connectDragPreview(getEmptyImage(), {
-			// IE fallback: specify that we'd rather screenshot the node
-			// when it already knows it's being dragged so we can hide it with CSS.
-			captureDraggingState: true,
-		})
+		const { connectDragPreview } = this.props
+		if (connectDragPreview) {
+			// Use empty image as a drag preview so browsers don't draw it
+			// and we can draw whatever we want on the custom drag layer instead.
+			connectDragPreview(getEmptyImage(), {
+				// IE fallback: specify that we'd rather screenshot the node
+				// when it already knows it's being dragged so we can hide it with CSS.
+				captureDraggingState: true,
+			})
+		}
 	}
 
 	public render() {
 		const { title, connectDragSource } = this.props
 
-		return connectDragSource(
-			<div style={getStyles(this.props)}>
-				<Box title={title} />
-			</div>,
+		return (
+			connectDragSource &&
+			connectDragSource(
+				<div style={getStyles(this.props)}>
+					<Box title={title} />
+				</div>,
+			)
 		)
 	}
 }

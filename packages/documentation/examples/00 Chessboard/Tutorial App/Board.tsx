@@ -10,7 +10,7 @@ export interface BoardProps {
 	knightPosition: [number, number]
 }
 
-@DragDropContext(HTML5Backend)
+@DragDropContext<BoardProps, {}, Board>(HTML5Backend)
 export default class Board extends React.Component<BoardProps> {
 	public static propTypes = {
 		knightPosition: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,

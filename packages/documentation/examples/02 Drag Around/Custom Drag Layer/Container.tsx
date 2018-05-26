@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import update from 'immutability-helper'
 import {
 	DropTarget,
 	ConnectDropTarget,
@@ -10,6 +9,7 @@ import {
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'
+const update = require('immutability-helper').default
 
 const styles: React.CSSProperties = {
 	width: 300,

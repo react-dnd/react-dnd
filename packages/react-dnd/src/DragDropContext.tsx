@@ -10,6 +10,7 @@ import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { ContextComponent } from './interfaces'
+import { Target } from './createTargetFactory'
 
 export const CHILD_CONTEXT_TYPES = {
 	dragDropManager: PropTypes.object.isRequired,
@@ -24,21 +25,22 @@ export function createChildContext<Context>(
 	}
 }
 
-export default function DragDropContext(
-	backendFactory: BackendFactory,
-	context?: any,
-) {
+export default function DragDropContext<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
+>(backendFactory: BackendFactory, context?: any) {
 	checkDecoratorArguments('DragDropContext', 'backend', backendFactory) // eslint-disable-line prefer-rest-params
 	const childContext = createChildContext(backendFactory, context)
 
-	return function decorateContext<T extends React.ComponentClass<any>>(
-		DecoratedComponent: T,
-	): T & ContextComponent<any, any> {
+	return function decorateContext<TargetClass extends React.ComponentClass<P>>(
+		DecoratedComponent: TargetClass,
+	): TargetClass & ContextComponent<P, S, TargetComponent> {
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-		class DragDropContextContainer extends React.Component<any>
-			implements ContextComponent<any, any> {
+		class DragDropContextContainer extends React.Component<P, S>
+			implements ContextComponent<P, S, TargetComponent> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
 			public static childContextTypes = CHILD_CONTEXT_TYPES
@@ -71,6 +73,9 @@ export default function DragDropContext(
 			}
 		}
 
-		return hoistStatics(DragDropContextContainer, DecoratedComponent) as any
+		return hoistStatics(
+			DragDropContextContainer,
+			DecoratedComponent,
+		) as TargetClass & DragDropContextContainer
 	}
 }

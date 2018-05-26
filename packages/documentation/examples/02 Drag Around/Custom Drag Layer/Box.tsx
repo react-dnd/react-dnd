@@ -9,7 +9,7 @@ const styles: React.CSSProperties = {
 
 export interface BoxProps {
 	title: string
-	yellow: boolean
+	yellow?: boolean
 }
 
 export default class Box extends React.PureComponent<BoxProps> {

@@ -9,10 +9,12 @@ import { DragLayerCollector, DndOptions, DndComponentClass } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 
-export default function DragLayer<P>(
-	collect: DragLayerCollector<any, any>,
-	options: DndOptions<P> = {},
-) {
+export default function DragLayer<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	CollectedProps
+>(collect: DragLayerCollector<P, CollectedProps>, options: DndOptions<P> = {}) {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options) // eslint-disable-line prefer-rest-params
 	invariant(
 		typeof collect === 'function',
@@ -27,14 +29,14 @@ export default function DragLayer<P>(
 		options,
 	)
 
-	return function decorateLayer<T extends React.ComponentClass<any>>(
-		DecoratedComponent: T,
-	): T & DndComponentClass<any> {
+	return function decorateLayer<TargetClass extends React.ComponentClass<P>>(
+		DecoratedComponent: TargetClass,
+	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
 		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-		class DragLayerContainer extends React.Component<any> {
+		class DragLayerContainer extends React.Component<P> {
 			public static displayName = `DragLayer(${displayName})`
 			public static contextTypes = {
 				dragDropManager: PropTypes.object.isRequired,
@@ -136,6 +138,7 @@ export default function DragLayer<P>(
 			}
 		}
 
-		return hoistStatics(DragLayerContainer, DecoratedComponent) as any
+		return hoistStatics(DragLayerContainer, DecoratedComponent) as TargetClass &
+			DndComponentClass<P, S, TargetComponent, TargetClass>
 	}
 }
