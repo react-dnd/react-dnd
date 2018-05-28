@@ -6,7 +6,7 @@ import shuffle from 'lodash/shuffle'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
-const update = require('immutability-helper').default
+const update = require('immutability-helper')
 
 export interface SourceBox {
 	name: string

@@ -4,7 +4,7 @@ import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
-const update = require('immutability-helper').default
+const update = require('immutability-helper')
 
 export interface ContainerState {
 	droppedBoxNames: string[]

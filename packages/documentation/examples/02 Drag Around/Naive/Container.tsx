@@ -10,7 +10,7 @@ import {
 import HTML5Backend from 'react-dnd-html5-backend'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
-const update = require('immutability-helper').default
+const update = require('immutability-helper')
 
 const styles: React.CSSProperties = {
 	width: 300,
