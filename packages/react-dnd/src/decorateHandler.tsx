@@ -118,9 +118,9 @@ export default function decorateHandler<
 			this.handleChange()
 		}
 
-		public componentWillReceiveProps(nextProps: any) {
-			if (!arePropsEqual(nextProps, this.props)) {
-				this.receiveProps(nextProps)
+		public componentDidUpdate(prevProps: P) {
+			if (!arePropsEqual(this.props, prevProps)) {
+				this.receiveProps(this.props)
 				this.handleChange()
 			}
 		}
