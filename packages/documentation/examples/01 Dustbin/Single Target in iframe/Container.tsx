@@ -4,6 +4,8 @@ import { DragDropContextProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Dustbin from '../Single Target/Dustbin'
 import Box from '../Single Target/Box'
+
+// TODO: Update this example when react-frame-component uses the official context API
 const Frame = require('react-frame-component').default
 
 class FrameBindingContext extends React.Component {

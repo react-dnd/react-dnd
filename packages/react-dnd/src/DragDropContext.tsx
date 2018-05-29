@@ -1,4 +1,4 @@
-import React, { Component, ComponentClass } from 'react'
+import React, { Component, ComponentClass, Context } from 'react'
 import PropTypes from 'prop-types'
 import {
 	DragDropManager,
@@ -12,26 +12,62 @@ import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { ContextComponent } from './interfaces'
 import { Target } from './createTargetFactory'
 
-export const CHILD_CONTEXT_TYPES = {
-	dragDropManager: PropTypes.object.isRequired,
+/**
+ * The React context type
+ */
+export interface DragDropContext<BC> {
+	dragDropManager: DragDropManager<BC> | undefined
 }
 
-export function createChildContext<Context>(
+/**
+ * Create the React Context
+ */
+export const { Consumer, Provider } = React.createContext<DragDropContext<any>>(
+	{ dragDropManager: undefined },
+)
+
+/**
+ * Creates the context object we're providing
+ * @param backend
+ * @param context
+ */
+export function createChildContext<BackendContext>(
 	backend: BackendFactory,
-	context?: Context,
+	context?: BackendContext,
 ) {
 	return {
 		dragDropManager: createDragDropManager(backend, context),
 	}
 }
 
-export default function DragDropContext<
+export interface DragDropContextProviderProps<BackendContext> {
+	backend: BackendFactory
+	context?: BackendContext
+}
+
+/**
+ * A React component that provides the React-DnD context
+ */
+export const DragDropContextProvider: React.SFC<
+	DragDropContextProviderProps<any>
+> = ({ backend, context, children }) => {
+	const contextValue = createChildContext(backend, context)
+	return <Provider value={contextValue}>{children}</Provider>
+}
+
+/**
+ * Wrap the root component of your application with DragDropContext decorator to set up React DnD.
+ * This lets you specify the backend, and sets up the shared DnD state behind the scenes.
+ * @param backendFactory The DnD backend factory
+ * @param backendContext The backend context
+ */
+export function DragDropContext<
 	P,
 	S,
 	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
->(backendFactory: BackendFactory, context?: any) {
+>(backendFactory: BackendFactory, backendContext?: any) {
 	checkDecoratorArguments('DragDropContext', 'backend', backendFactory) // eslint-disable-line prefer-rest-params
-	const childContext = createChildContext(backendFactory, context)
+	const childContext = createChildContext(backendFactory, backendContext)
 
 	return function decorateContext<TargetClass extends React.ComponentClass<P>>(
 		DecoratedComponent: TargetClass,
@@ -43,7 +79,6 @@ export default function DragDropContext<
 			implements ContextComponent<P, S, TargetComponent> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
-			public static childContextTypes = CHILD_CONTEXT_TYPES
 
 			private child: any
 
@@ -59,16 +94,14 @@ export default function DragDropContext<
 				return childContext.dragDropManager
 			}
 
-			public getChildContext() {
-				return childContext
-			}
-
 			public render() {
 				return (
-					<DecoratedComponent
-						{...this.props}
-						ref={(child: any) => (this.child = child)}
-					/>
+					<Provider value={childContext}>
+						<DecoratedComponent
+							{...this.props}
+							ref={(child: any) => (this.child = child)}
+						/>
+					</Provider>
 				)
 			}
 		}
