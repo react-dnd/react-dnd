@@ -126,6 +126,9 @@ export default function DragLayer<
 			}
 
 			private receiveDragDropManager(dragDropManager: DragDropManager<any>) {
+				if (this.manager !== undefined) {
+					return
+				}
 				this.manager = dragDropManager
 				invariant(
 					typeof dragDropManager === 'object',
