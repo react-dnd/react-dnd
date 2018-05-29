@@ -1,7 +1,7 @@
 // tslint:disable max-classes-per-file
 
-import { DropTarget } from '..'
-import { IDragDropMonitor } from '../interfaces'
+import DropTarget from './DropTargetImpl'
+import { DragDropMonitor } from '../interfaces'
 
 export class NormalTarget extends DropTarget {
 	public didCallDrop: boolean = false
@@ -71,7 +71,7 @@ export class TransformResultTarget extends DropTarget {
 		this.didCallHover = true
 	}
 
-	public drop(monitor: IDragDropMonitor) {
+	public drop(monitor: DragDropMonitor) {
 		this.didCallDrop = true
 		const dropResult = monitor.getDropResult()
 		return this.transform(dropResult)

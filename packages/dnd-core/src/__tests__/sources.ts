@@ -1,7 +1,7 @@
 // tslint:disable max-classes-per-file
 
-import { DragSource } from '..'
-import { IDragDropMonitor } from '../interfaces'
+import DragSource from './DragSourceImpl'
+import { DragDropMonitor } from '../interfaces'
 
 export class NormalSource extends DragSource {
 	public didCallBeginDrag = false
@@ -17,7 +17,7 @@ export class NormalSource extends DragSource {
 		return this.item
 	}
 
-	public endDrag(monitor: IDragDropMonitor) {
+	public endDrag(monitor: DragDropMonitor) {
 		this.recordedDropResult = monitor.getDropResult()
 	}
 }
@@ -51,7 +51,7 @@ export class NumberSource extends DragSource {
 		return this.allowDrag
 	}
 
-	public isDragging(monitor: IDragDropMonitor) {
+	public isDragging(monitor: DragDropMonitor) {
 		const item = monitor.getItem()
 		return item.number === this.number
 	}

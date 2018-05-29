@@ -3,6 +3,9 @@
 	"extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
 	"jsRules": {},
 	"rules": {
+		// We handle this manually
+		"interface-name": [true, "never-prefix"],
+
 		// There are some dependencies we have (e.g. shallowequal) that need to be var-required because
 		// the available typings aren't great
 		"no-var-requires": false,

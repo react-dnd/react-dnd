@@ -7,7 +7,12 @@
 		"**/bower_components": true,
 		"**/lib": true
 	},
-	"editor.formatOnSave": true,
-  "eslint.packageManager": "yarn",
-  "editor.tabSize": 2
+	"eslint.packageManager": "yarn",
+	"editor.tabSize": 2,
+	"[typescript]": {
+		"editor.formatOnSave": true
+	},
+	"[typescriptreact]": {
+		"editor.formatOnSave": true
+	}
 }

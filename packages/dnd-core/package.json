@@ -19,16 +19,14 @@
 		"@types/lodash": "^4.14.107",
 		"@types/node": "^8.10.11",
 		"@types/redux": "^3.6.0",
-		"@types/redux-actions": "^2.2.4",
 		"asap": "^2.0.6",
 		"invariant": "^2.0.0",
 		"lodash": "^4.2.0",
-		"redux": "^4.0.0",
-		"redux-actions": "^2.3.0"
+		"redux": "^4.0.0"
 	},
 	"devDependencies": {
 		"npm-run-all": "^4.1.2",
-		"rimraf": "^2.6.1",
+		"rimraf": "^2.6.2",
 		"typescript": "^2.8.1"
 	}
 }

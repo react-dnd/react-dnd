@@ -1,16 +1,23 @@
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
-import { IDragSource, IDragDropMonitor } from 'dnd-core'
+import { DragSource, DragDropMonitor } from 'dnd-core'
+import { DragSourceSpec, DragSourceMonitor } from './interfaces'
+import { ComponentClass } from 'react'
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']
 
-export interface ISource extends IDragSource {
+export interface Source extends DragSource {
 	receiveProps(props: any): void
 	receiveComponent(component: any): void
 }
 
-export default function createSourceFactory(spec: any) {
+export default function createSourceFactory<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	DragObject
+>(spec: DragSourceSpec<P, S, TargetComponent, DragObject>) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -22,32 +29,32 @@ export default function createSourceFactory(spec: any) {
 			key,
 		)
 		invariant(
-			typeof spec[key] === 'function',
+			typeof (spec as any)[key] === 'function',
 			'Expected %s in the drag source specification to be a function. ' +
 				'Instead received a specification with %s: %s. ' +
 				'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
 			key,
 			key,
-			spec[key],
+			(spec as any)[key],
 		)
 	})
 	REQUIRED_SPEC_METHODS.forEach(key => {
 		invariant(
-			typeof spec[key] === 'function',
+			typeof (spec as any)[key] === 'function',
 			'Expected %s in the drag source specification to be a function. ' +
 				'Instead received a specification with %s: %s. ' +
 				'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
 			key,
 			key,
-			spec[key],
+			(spec as any)[key],
 		)
 	})
 
-	class Source implements ISource {
-		private props: any
-		private component: any
+	class SourceImpl implements Source {
+		private props: P | undefined
+		private component: TargetComponent | undefined
 
-		constructor(private monitor: IDragDropMonitor) {}
+		constructor(private monitor: DragSourceMonitor) {}
 
 		public receiveProps(props: any) {
 			this.props = props
@@ -58,6 +65,9 @@ export default function createSourceFactory(spec: any) {
 		}
 
 		public canDrag() {
+			if (!this.props) {
+				return false
+			}
 			if (!spec.canDrag) {
 				return true
 			}
@@ -65,7 +75,10 @@ export default function createSourceFactory(spec: any) {
 			return spec.canDrag(this.props, this.monitor)
 		}
 
-		public isDragging(globalMonitor: IDragDropMonitor, sourceId: string) {
+		public isDragging(globalMonitor: DragDropMonitor, sourceId: string) {
+			if (!this.props) {
+				return false
+			}
 			if (!spec.isDragging) {
 				return sourceId === globalMonitor.getSourceId()
 			}
@@ -74,6 +87,9 @@ export default function createSourceFactory(spec: any) {
 		}
 
 		public beginDrag() {
+			if (!this.props || !this.component) {
+				return
+			}
 			const item = spec.beginDrag(this.props, this.monitor, this.component)
 			if (process.env.NODE_ENV !== 'production') {
 				invariant(
@@ -88,6 +104,9 @@ export default function createSourceFactory(spec: any) {
 		}
 
 		public endDrag() {
+			if (!this.props || !this.component) {
+				return
+			}
 			if (!spec.endDrag) {
 				return
 			}
@@ -96,7 +115,7 @@ export default function createSourceFactory(spec: any) {
 		}
 	}
 
-	return function createSource(monitor: IDragDropMonitor) {
-		return new Source(monitor) as ISource
+	return function createSource(monitor: DragSourceMonitor) {
+		return new SourceImpl(monitor) as Source
 	}
 }

@@ -1,27 +1,58 @@
-import React from 'react'
-import {
-	IDragDropMonitor,
-	IXYCoord,
-	ItemType,
-	IDragDropManager,
-} from 'dnd-core'
+import React, { StatelessComponent } from 'react'
+import { XYCoord, DragDropMonitor, Identifier, DragDropManager } from 'dnd-core'
 
-export interface IContextComponent<P, S> extends React.Component<P, S> {
-	getDecoratedComponentInstance(): React.Component<P, S>
-	getManager(): IDragDropManager<any>
+export { XYCoord }
+
+/**
+ * The React Component that manages the DragDropContext for its children.
+ */
+export interface ContextComponent<
+	P,
+	S,
+	C extends React.Component<P, S> | React.StatelessComponent<P>
+> extends React.Component<P, S> {
+	getDecoratedComponentInstance(): C
+	getManager(): DragDropManager<any>
 }
 
-export interface IDndComponent<P, S> {
-	getDecoratedComponentInstance(): React.Component<P, S>
-	getHandlerId(): string
+/**
+ * A DnD interactive component
+ */
+export interface DndComponent<
+	P,
+	S,
+	C extends React.Component<P, S> | React.StatelessComponent<P>
+> extends React.Component<P, S> {
+	getDecoratedComponentInstance(): C
+	getHandlerId(): Identifier
 }
 
-export interface IDndComponentClass<P> extends React.ComponentClass<P> {
-	DecoratedComponent: React.ComponentClass<P>
-	new (props?: P, context?: any): IDndComponent<P, any>
+/**
+ * The class interface for a context component
+ */
+export interface ContextComponentClass<
+	P,
+	S,
+	C extends React.Component<P, S> | React.StatelessComponent<P>,
+	ComponentClass extends React.ComponentClass<P>
+> extends React.ComponentClass<P> {
+	DecoratedComponent: ComponentClass
+	new (props?: P, context?: any): ContextComponent<P, S, C>
+}
+/**
+ * The class interface for a DnD component
+ */
+export interface DndComponentClass<
+	P,
+	S,
+	C extends React.Component<P, S> | React.StatelessComponent<P>,
+	ComponentClass extends React.ComponentClass<P>
+> extends React.ComponentClass<P> {
+	DecoratedComponent: ComponentClass
+	new (props?: P, context?: any): DndComponent<P, S, C>
 }
 
-export interface IDragSourceMonitor extends IDragDropMonitor {
+export interface DragSourceMonitor extends DragDropMonitor {
 	/**
 	 * Returns true if no drag operation is in progress, and the owner's canDrag() returns true or is not defined.
 	 */
@@ -35,7 +66,7 @@ export interface IDragSourceMonitor extends IDragDropMonitor {
 	/**
 	 * Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns null if no item is being dragged.
 	 */
-	getItemType(): ItemType | null
+	getItemType(): Identifier | null
 
 	/**
 	 * Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from its beginDrag() method.
@@ -59,33 +90,33 @@ export interface IDragSourceMonitor extends IDragDropMonitor {
 	/**
 	 * Returns the { x, y } client offset of the pointer at the time when the current drag operation has started. Returns null if no item is being dragged.
 	 */
-	getInitialClientOffset(): IXYCoord | null
+	getInitialClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the { x, y } client offset of the drag source component's root DOM node at the time when the current drag operation has started.
 	 * Returns null if no item is being dragged.
 	 */
-	getInitialSourceClientOffset(): IXYCoord | null
+	getInitialSourceClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the last recorded { x, y } client offset of the pointer while a drag operation is in progress. Returns null if no item is being dragged.
 	 */
-	getClientOffset(): IXYCoord | null
+	getClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the { x, y } difference between the last recorded client offset of the pointer and the client offset when the current drag operation has started.
 	 * Returns null if no item is being dragged.
 	 */
-	getDifferenceFromInitialOffset(): IXYCoord | null
+	getDifferenceFromInitialOffset(): XYCoord | null
 
 	/**
 	 * Returns the projected { x, y } client offset of the drag source component's root DOM node, based on its position at the time when the current drag operation has
 	 * started, and the movement difference. Returns null if no item is being dragged.
 	 */
-	getSourceClientOffset(): IXYCoord | null
+	getSourceClientOffset(): XYCoord | null
 }
 
-export interface IDropTargetMonitor {
+export interface DropTargetMonitor {
 	/**
 	 * Returns true if there is a drag operation in progress, and the owner's canDrop() returns true or is not defined.
 	 */
@@ -101,7 +132,7 @@ export interface IDropTargetMonitor {
 	/**
 	 * Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns null if no item is being dragged.
 	 */
-	getItemType(): ItemType | null
+	getItemType(): Identifier | null
 
 	/**
 	 * Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from
@@ -127,33 +158,33 @@ export interface IDropTargetMonitor {
 	 * Returns the { x, y } client offset of the pointer at the time when the current drag operation has started. Returns null if no item
 	 * is being dragged.
 	 */
-	getInitialClientOffset(): IXYCoord | null
+	getInitialClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the { x, y } client offset of the drag source component's root DOM node at the time when the current drag operation has started.
 	 * Returns null if no item is being dragged.
 	 */
-	getInitialSourceClientOffset(): IXYCoord | null
+	getInitialSourceClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the last recorded { x, y } client offset of the pointer while a drag operation is in progress. Returns null if no item is being dragged.
 	 */
-	getClientOffset(): IXYCoord | null
+	getClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the { x, y } difference between the last recorded client offset of the pointer and the client offset when current the drag operation has
 	 * started. Returns null if no item is being dragged.
 	 */
-	getDifferenceFromInitialOffset(): IXYCoord | null
+	getDifferenceFromInitialOffset(): XYCoord | null
 
 	/**
 	 * Returns the projected { x, y } client offset of the drag source component's root DOM node, based on its position at the time when the current
 	 * drag operation has started, and the movement difference. Returns null if no item is being dragged.
 	 */
-	getSourceClientOffset(): IXYCoord | null
+	getSourceClientOffset(): XYCoord | null
 }
 
-export interface IDragLayerMonitor {
+export interface DragLayerMonitor {
 	/**
 	 * Returns true if a drag operation is in progress. Returns false otherwise.
 	 */
@@ -163,7 +194,7 @@ export interface IDragLayerMonitor {
 	 * Returns a string or an ES6 symbol identifying the type of the current dragged item.
 	 * Returns null if no item is being dragged.
 	 */
-	getItemType(): ItemType | null
+	getItemType(): Identifier | null
 
 	/**
 	 * Returns a plain object representing the currently dragged item.
@@ -176,38 +207,42 @@ export interface IDragLayerMonitor {
 	 * Returns the { x, y } client offset of the pointer at the time when the current drag operation has started.
 	 * Returns null if no item is being dragged.
 	 */
-	getInitialClientOffset(): IXYCoord | null
+	getInitialClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the { x, y } client offset of the drag source component's root DOM node at the time when the current
 	 * drag operation has started. Returns null if no item is being dragged.
 	 */
-	getInitialSourceClientOffset(): IXYCoord | null
+	getInitialSourceClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the last recorded { x, y } client offset of the pointer while a drag operation is in progress.
 	 * Returns null if no item is being dragged.
 	 */
-	getClientOffset(): IXYCoord | null
+	getClientOffset(): XYCoord | null
 
 	/**
 	 * Returns the { x, y } difference between the last recorded client offset of the pointer and the client
 	 * offset when current the drag operation has started. Returns null if no item is being dragged.
 	 */
-	getDifferenceFromInitialOffset(): IXYCoord | null
+	getDifferenceFromInitialOffset(): XYCoord | null
 
 	/**
 	 * Returns the projected { x, y } client offset of the drag source component's root DOM node, based on its
 	 * position at the time when the current drag operation has started, and the movement difference.
 	 * Returns null if no item is being dragged.
 	 */
-	getSourceClientOffset(): IXYCoord | null
+	getSourceClientOffset(): XYCoord | null
 }
 
 /**
  * Interface for the DropTarget specification object
  */
-export interface IDropTargetSpecification<TargetProps> {
+export interface DropTargetSpec<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
+> {
 	/**
 	 * Optional.
 	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
@@ -219,10 +254,10 @@ export interface IDropTargetSpecification<TargetProps> {
 	 * is defined and returns false.
 	 */
 	drop?: (
-		props: TargetProps,
-		monitor: IDragDropMonitor,
-		component: React.Component<TargetProps>,
-	) => void
+		props: P,
+		monitor: DropTargetMonitor,
+		component: TargetComponent,
+	) => any
 
 	/**
 	 * Optional.
@@ -231,9 +266,9 @@ export interface IDropTargetSpecification<TargetProps> {
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
 	hover?: (
-		props: TargetProps,
-		monitor: IDragDropMonitor,
-		component: React.Component<TargetProps>,
+		props: P,
+		monitor: DropTargetMonitor,
+		component: TargetComponent,
 	) => void
 
 	/**
@@ -241,10 +276,15 @@ export interface IDropTargetSpecification<TargetProps> {
 	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
-	canDrop?: (props: TargetProps, monitor: IDragDropMonitor) => boolean
+	canDrop?: (props: P, monitor: DropTargetMonitor) => boolean
 }
 
-export interface IDragSourceSpecification<TargetProps, DragObject> {
+export interface DragSourceSpec<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	DragObject
+> {
 	/**
 	 * Required.
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
@@ -254,9 +294,9 @@ export interface IDragSourceSpecification<TargetProps, DragObject> {
 	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
 	 */
 	beginDrag: (
-		props: TargetProps,
-		monitor: IDragDropMonitor,
-		component: React.Component<TargetProps>,
+		props: P,
+		monitor: DragSourceMonitor,
+		component: TargetComponent,
 	) => DragObject
 
 	/**
@@ -268,9 +308,9 @@ export interface IDragSourceSpecification<TargetProps, DragObject> {
 	 * component parameter is set to be null.
 	 */
 	endDrag?: (
-		props: TargetProps,
-		monitor: IDragDropMonitor,
-		component: React.Component<TargetProps>,
+		props: P,
+		monitor: DragSourceMonitor,
+		component: TargetComponent,
 	) => void
 
 	/**
@@ -279,7 +319,7 @@ export interface IDragSourceSpecification<TargetProps, DragObject> {
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: (props: TargetProps, monitor: IDragDropMonitor) => boolean
+	canDrag?: (props: P, monitor: DragSourceMonitor) => boolean
 
 	/**
 	 * Optional.
@@ -291,32 +331,75 @@ export interface IDragSourceSpecification<TargetProps, DragObject> {
 	 *
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
-	isDragging?: (props: TargetProps, monitor: IDragDropMonitor) => boolean
+	isDragging?: (props: P, monitor: DragSourceMonitor) => boolean
 }
 
 /**
- * Options for the DropTarget annotation
+ * Options for the Drag Sources, Drop Tragets, and Drag Layers annotation
  */
-export interface ICustomEqualityOptions {
-	arePropsEqual?: <P>(first: P, second: P) => boolean
+export interface DndOptions<P> {
+	arePropsEqual?: (first: P, second: P) => boolean
 }
 
-export type IDropTargetOptions = ICustomEqualityOptions
-export type IDragSourceOptions = ICustomEqualityOptions
-export type IDragLayerOptions = ICustomEqualityOptions
+export type DragElementWrapper<O> = <P>(
+	elementOrNode: React.ReactElement<P> | Element,
+	options?: O,
+) => React.ReactElement<P>
 
-export type JSXWrapperWithOptions<Options> = (
-	input: JSX.Element | HTMLElement,
-	options?: Options,
-) => JSX.Element
+export type ConnectDragSource = DragElementWrapper<DragSourceOptions>
+export type ConnectDragPreview = DragElementWrapper<DragPreviewOptions>
+export interface DragSourceOptions {
+	/**
+	 * Optional. A string. By default, 'move'. In the browsers that support this feature, specifying 'copy'
+	 * shows a special “copying” cursor, while 'move' corresponds to the “move” cursor. You might want to use
+	 * this option to provide a hint to the user about whether an action is destructive.
+	 */
+	dropEffect?: string
+}
 
-export type JsxWrapper = (input: JSX.Element | HTMLElement) => JSX.Element
+export interface DragPreviewOptions {
+	/**
+	 * Optional. A boolean. By default, false. If true, the component will learn that it is being dragged immediately as the drag
+	 * starts instead of the next tick. This means that the screenshotting would occur with monitor.isDragging() already being true,
+	 * and if you apply any styling like a decreased opacity to the dragged element, this styling will also be reflected on the
+	 * screenshot. This is rarely desirable, so false is a sensible default. However, you might want to set it to true in rare cases,
+	 * such as if you want to make the custom drag layers work in IE and you need to hide the original element without resorting to
+	 * an empty drag preview which IE doesn't support.
+	 */
+	captureDraggingState?: boolean
+
+	/**
+	 * Optional. A number between 0 and 1. By default, 0.5. Specifies how the offset relative to the drag source node is translated
+	 * into the horizontal offset of the drag preview when their sizes don't match. 0 means “dock the preview to the left”, 0.5 means
+	 * “interpolate linearly” and 1 means “dock the preview to the right”.
+	 */
+	anchorX?: number
+
+	/**
+	 * Optional. A number between 0 and 1. By default, 0.5. Specifies how the offset relative to the drag source node is translated into
+	 * the vertical offset of the drag preview when their sizes don't match. 0 means “dock the preview to the top, 0.5 means “interpolate
+	 * linearly” and 1 means “dock the preview to the bottom.
+	 */
+	anchorY?: number
+
+	/**
+	 * Optional. A number or null if not needed. By default, null. Specifies the vertical offset between the cursor and the drag preview
+	 * element. If offsetX has a value, anchorX won't be used.
+	 */
+	offsetX?: number
+
+	/**
+	 *  Optional. A number or null if not needed. By default, null. Specifies the vertical offset between the cursor and the drag
+	 *  preview element. If offsetY has a value, anchorY won't be used.
+	 */
+	offsetY?: number
+}
 
 /**
  * DragSourceConnector is an object passed to a collecting function of the DragSource.
  * Its methods return functions that let you assign the roles to your component's DOM nodes.
  */
-export interface IDragSourceConnector {
+export interface DragSourceConnector {
 	/**
 	 * Returns a function that must be used inside the component to assign the drag source role to a node. By
 	 * returning { connectDragSource: connect.dragSource() } from your collecting function, you can mark any React
@@ -326,14 +409,7 @@ export interface IDragSourceConnector {
 	 * @param elementOrNode
 	 * @param options
 	 */
-	dragSource(): JSXWrapperWithOptions<{
-		/**
-		 * Optional. A string. By default, 'move'. In the browsers that support this feature, specifying 'copy'
-		 * shows a special “copying” cursor, while 'move' corresponds to the “move” cursor. You might want to use
-		 * this option to provide a hint to the user about whether an action is destructive.
-		 */
-		dropEffect?: string
-	}>
+	dragSource(): ConnectDragSource
 
 	/**
 	 * Optional. Returns a function that may be used inside the component to assign the drag preview role to a node. By
@@ -346,69 +422,67 @@ export interface IDragSourceConnector {
 	 * from a lifecycle method like componentDidMount. This lets you use the actual images for drag previews. (Note that IE does not
 	 * support this customization). See the example code below for the different usage examples.
 	 */
-	dragPreview(): JSXWrapperWithOptions<{
-		/**
-		 * Optional. A boolean. By default, false. If true, the component will learn that it is being dragged immediately as the drag
-		 * starts instead of the next tick. This means that the screenshotting would occur with monitor.isDragging() already being true,
-		 * and if you apply any styling like a decreased opacity to the dragged element, this styling will also be reflected on the
-		 * screenshot. This is rarely desirable, so false is a sensible default. However, you might want to set it to true in rare cases,
-		 * such as if you want to make the custom drag layers work in IE and you need to hide the original element without resorting to
-		 * an empty drag preview which IE doesn't support.
-		 */
-		captureDraggingState?: boolean
-
-		/**
-		 * Optional. A number between 0 and 1. By default, 0.5. Specifies how the offset relative to the drag source node is translated
-		 * into the horizontal offset of the drag preview when their sizes don't match. 0 means “dock the preview to the left”, 0.5 means
-		 * “interpolate linearly” and 1 means “dock the preview to the right”.
-		 */
-		anchorX?: number
-
-		/**
-		 * Optional. A number between 0 and 1. By default, 0.5. Specifies how the offset relative to the drag source node is translated into
-		 * the vertical offset of the drag preview when their sizes don't match. 0 means “dock the preview to the top, 0.5 means “interpolate
-		 * linearly” and 1 means “dock the preview to the bottom.
-		 */
-		anchorY?: number
-
-		/**
-		 * Optional. A number or null if not needed. By default, null. Specifies the vertical offset between the cursor and the drag preview
-		 * element. If offsetX has a value, anchorX won't be used.
-		 */
-		offsetX?: number
-
-		/**
-		 *  Optional. A number or null if not needed. By default, null. Specifies the vertical offset between the cursor and the drag
-		 *  preview element. If offsetY has a value, anchorY won't be used.
-		 */
-		offsetY?: number
-	}>
+	dragPreview(): ConnectDragPreview
 }
 
 /**
  * DropTargetConnector is an object passed to a collecting function of the DropTarget. Its only method dropTarget() returns a function
  * that lets you assign the drop target role to one of your component's DOM nodes.
  */
-export interface IDropTargetConnector {
+export interface DropTargetConnector {
 	/**
 	 * Returns a function that must be used inside the component to assign the drop target role to a node.
 	 * By returning { connectDropTarget: connect.dropTarget() } from your collecting function, you can mark any React element
 	 * as the droppable node. To do that, replace any element with this.props.connectDropTarget(element) inside the render function.
 	 */
-	dropTarget(): JsxWrapper
+	dropTarget(): ConnectDropTarget
 }
 
+export type ConnectDropTarget = <P>(
+	elementOrNode: React.ReactElement<P>,
+) => React.ReactElement<P>
+
 export type DragSourceCollector<CollectedProps> = (
-	connect: IDragSourceConnector,
-	monitor: IDragSourceMonitor,
+	connect: DragSourceConnector,
+	monitor: DragSourceMonitor,
 ) => CollectedProps
 
 export type DropTargetCollector<CollectedProps> = (
-	connect: IDropTargetConnector,
-	monitor: IDropTargetMonitor,
+	connect: DropTargetConnector,
+	monitor: DropTargetMonitor,
 ) => CollectedProps
 
 export type DragLayerCollector<TargetProps, CollectedProps> = (
-	monitor: IDragLayerMonitor,
+	monitor: DragLayerMonitor,
 	props: TargetProps,
 ) => CollectedProps
+
+/**
+ * Top-Level API
+ */
+/*
+export type DropTargetDecorator<P> = (
+	types: Identifier | Identifier[] | ((props: P) => Identifier | Identifier[]),
+	spec: DropTargetSpec<P, any>,
+	collect: DropTargetCollector<any>,
+	options?: DndOptions<P>,
+) => (
+	componentClass: React.ComponentClass<P> | React.StatelessComponent<P>,
+) => DndComponentClass<P>
+
+export type DragSourceDecorator<P> = (
+	type: Identifier | ((props: P) => Identifier),
+	spec: DragSourceSpec<P, any, any>,
+	collect: DragSourceCollector<any>,
+	options?: DndOptions<P>,
+) => (
+	componentClass: React.ComponentClass<P> | React.StatelessComponent<P>,
+) => DndComponentClass<P>
+
+export type DragLayerDecorator<P> = (
+	collect: DragLayerCollector<P, any>,
+	options?: DndOptions<P>,
+) => (
+	componentClass: React.ComponentClass<P> | React.StatelessComponent<P>,
+) => DndComponentClass<P>
+*/

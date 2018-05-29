@@ -27,13 +27,14 @@
 		"shallowequal": "^1.0.2"
 	},
 	"devDependencies": {
-		"@types/lodash": "^4.14.108",
+    "@types/lodash": "^4.14.108",
+    "@types/react-dom": "^16.0.5",
 		"@types/prop-types": "^15.5.2",
-		"@types/react": "^16.3.13",
+		"@types/react": "^16.3.14",
 		"babel-cli": "^6.26.0",
 		"babel-loader": "^7.1.1",
 		"npm-run-all": "^4.1.2",
-		"react": "^16.2.0",
+		"react": "^16.4.0",
 		"rimraf": "^2.6.2",
 		"ts-loader": "^4.2.0",
 		"typescript": "^2.8.3",
