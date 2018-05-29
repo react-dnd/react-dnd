@@ -32,7 +32,7 @@ export default function DragLayer<
 
 	return function decorateLayer<TargetClass extends React.ComponentClass<P>>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
+	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
 		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
@@ -158,6 +158,6 @@ export default function DragLayer<
 		}
 
 		return hoistStatics(DragLayerContainer, DecoratedComponent) as TargetClass &
-			DndComponentClass<P, S, TargetComponent, TargetClass>
+			DndComponentClass<P, TargetComponent, TargetClass>
 	}
 }

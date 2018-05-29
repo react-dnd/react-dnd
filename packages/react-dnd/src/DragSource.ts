@@ -83,7 +83,7 @@ export default function DragSource<
 
 	return function decorateSource<TargetClass extends React.ComponentClass<P>>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
+	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
 		return decorateHandler<P, S, TargetComponent, TargetClass>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,

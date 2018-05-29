@@ -75,7 +75,7 @@ export default function DropTarget<
 
 	return function decorateTarget<TargetClass extends React.ComponentClass<P>>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
+	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
 		return decorateHandler<P, S, TargetComponent, TargetClass>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,

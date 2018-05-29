@@ -51,7 +51,7 @@ export default function decorateHandler<
 	collect,
 	options,
 }: DecorateHandlerArgs<P, TargetClass>): TargetClass &
-	DndComponentClass<P, S, TargetComponent, TargetClass> {
+	DndComponentClass<P, TargetComponent, TargetClass> {
 	const { arePropsEqual = shallowEqual } = options
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
@@ -69,7 +69,7 @@ export default function decorateHandler<
 	}
 
 	class DragDropContainer extends React.Component<P, S>
-		implements DndComponent<P, S, TargetComponent> {
+		implements DndComponent<P, TargetComponent> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 
@@ -271,5 +271,5 @@ export default function decorateHandler<
 	}
 
 	return hoistStatics(DragDropContainer, DecoratedComponent) as TargetClass &
-		DndComponentClass<P, S, TargetComponent, TargetClass>
+		DndComponentClass<P, TargetComponent, TargetClass>
 }
