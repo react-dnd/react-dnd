@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-documentation",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"private": true,
 	"scripts": {
 		"clean": "rimraf __site__ __site_prerender__",
@@ -25,7 +25,7 @@
 		"postcss": "^6.0.6",
 		"prop-types": "^15.6.0",
 		"react": "^16.4.0",
-		"react-dnd-test-backend": "^3.0.1",
+		"react-dnd-test-backend": "^3.0.2",
 		"react-dom": "^16.4.0",
 		"react-frame-component": "^3.0.0",
 		"react-hot-loader": "^4.1.2",
