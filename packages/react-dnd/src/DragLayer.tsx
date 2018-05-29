@@ -53,17 +53,6 @@ export default function DragLayer<
 			constructor(props: P) {
 				super(props)
 				this.handleChange = this.handleChange.bind(this)
-
-				invariant(
-					typeof this.manager === 'object',
-					'Could not find the drag and drop manager in the context of %s. ' +
-						'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-						'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
-					displayName,
-					displayName,
-				)
-
-				this.state = this.getCurrentState()
 			}
 
 			public getDecoratedComponentInstance() {
