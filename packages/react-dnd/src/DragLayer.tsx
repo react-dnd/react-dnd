@@ -6,6 +6,7 @@ import invariant from 'invariant'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { DragLayerCollector, DndOptions, DndComponentClass } from './interfaces'
+import { Consumer } from './DragDropContext'
 
 const shallowEqual = require('shallowequal')
 
@@ -31,42 +32,27 @@ export default function DragLayer<
 
 	return function decorateLayer<TargetClass extends React.ComponentClass<P>>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
+	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
 		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
 		class DragLayerContainer extends React.Component<P> {
 			public static displayName = `DragLayer(${displayName})`
-			public static contextTypes = {
-				dragDropManager: PropTypes.object.isRequired,
-			}
 
 			public get DecoratedComponent() {
 				return DecoratedComponent
 			}
 
-			private manager: DragDropManager<any>
+			private manager: DragDropManager<any> | undefined
 			private isCurrentlyMounted: boolean = false
 			private unsubscribeFromOffsetChange: Unsubscribe | undefined
 			private unsubscribeFromStateChange: Unsubscribe | undefined
 			private child: any
 
-			constructor(props: any, context: any) {
+			constructor(props: P) {
 				super(props)
 				this.handleChange = this.handleChange.bind(this)
-				this.manager = context.dragDropManager
-
-				invariant(
-					typeof this.manager === 'object',
-					'Could not find the drag and drop manager in the context of %s. ' +
-						'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-						'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
-					displayName,
-					displayName,
-				)
-
-				this.state = this.getCurrentState()
 			}
 
 			public getDecoratedComponentInstance() {
@@ -86,15 +72,6 @@ export default function DragLayer<
 
 			public componentDidMount() {
 				this.isCurrentlyMounted = true
-
-				const monitor = this.manager.getMonitor()
-				this.unsubscribeFromOffsetChange = monitor.subscribeToOffsetChange(
-					this.handleChange,
-				)
-				this.unsubscribeFromStateChange = monitor.subscribeToStateChange(
-					this.handleChange,
-				)
-
 				this.handleChange()
 			}
 
@@ -112,15 +89,54 @@ export default function DragLayer<
 
 			public render() {
 				return (
-					<DecoratedComponent
-						{...this.props}
-						{...this.state}
-						ref={(child: any) => {
-							this.child = child
+					<Consumer>
+						{({ dragDropManager }) => {
+							if (dragDropManager === undefined) {
+								return null
+							}
+							this.receiveDragDropManager(dragDropManager)
+							// Let componentDidMount fire to initialize the collected state
+							if (!this.isCurrentlyMounted) {
+								return null
+							}
+
+							return (
+								<DecoratedComponent
+									{...this.props}
+									{...this.state}
+									ref={(child: any) => {
+										this.child = child
+									}}
+								/>
+							)
 						}}
-					/>
+					</Consumer>
 				)
 			}
+
+			private receiveDragDropManager(dragDropManager: DragDropManager<any>) {
+				if (this.manager !== undefined) {
+					return
+				}
+				this.manager = dragDropManager
+				invariant(
+					typeof dragDropManager === 'object',
+					'Could not find the drag and drop manager in the context of %s. ' +
+						'Make sure to wrap the top-level component of your app with DragDropContext. ' +
+						'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
+					displayName,
+					displayName,
+				)
+
+				const monitor = this.manager.getMonitor()
+				this.unsubscribeFromOffsetChange = monitor.subscribeToOffsetChange(
+					this.handleChange,
+				)
+				this.unsubscribeFromStateChange = monitor.subscribeToStateChange(
+					this.handleChange,
+				)
+			}
+
 			private handleChange() {
 				if (!this.isCurrentlyMounted) {
 					return
@@ -133,12 +149,15 @@ export default function DragLayer<
 			}
 
 			private getCurrentState() {
+				if (!this.manager) {
+					return {}
+				}
 				const monitor = this.manager.getMonitor()
 				return collect(monitor, this.props)
 			}
 		}
 
 		return hoistStatics(DragLayerContainer, DecoratedComponent) as TargetClass &
-			DndComponentClass<P, S, TargetComponent, TargetClass>
+			DndComponentClass<P, TargetComponent, TargetClass>
 	}
 }

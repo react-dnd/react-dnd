@@ -36,7 +36,7 @@ export default function DropTarget<
 		collect,
 		options, // eslint-disable-line prefer-rest-params
 	)
-	let getType: any = type
+	let getType: ((props: P) => TargetType) = type as ((props: P) => TargetType)
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type, true),
@@ -75,8 +75,8 @@ export default function DropTarget<
 
 	return function decorateTarget<TargetClass extends React.ComponentClass<P>>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
-		return decorateHandler<P, S, TargetComponent, TargetClass>({
+	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
+		return decorateHandler<P, S, TargetComponent, TargetClass, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,

@@ -80,7 +80,10 @@
 	},
 	"jest": {
 		"moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
-		"collectCoverageFrom": ["packages/*/src/**/*.{ts,tsx}"],
+		"collectCoverageFrom": [
+			"packages/*/src/**/*.{ts,tsx}",
+			"!**/__tests__/**"
+		],
 		"testMatch": [
 			"<rootDir>/packages/**/__tests__/**/?(*.)(spec|test).(t|j)s(x|)"
 		],
