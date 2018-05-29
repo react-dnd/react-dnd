@@ -1,12 +1,13 @@
 import React, { StatelessComponent, Component, ComponentClass } from 'react'
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
-import { IBackend, TargetType, IDragDropMonitor } from 'dnd-core'
+import { Backend, Identifier, DragDropMonitor, TargetType } from 'dnd-core'
 import {
-	IDropTargetSpecification,
-	IDropTargetOptions,
+	DropTargetSpec,
+	DndOptions,
 	DropTargetCollector,
-	IDndComponentClass,
+	DndComponentClass,
+	DropTargetMonitor,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -16,11 +17,16 @@ import createTargetMonitor from './createTargetMonitor'
 import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
 
-export default function DropTarget(
-	type: TargetType,
-	spec: IDropTargetSpecification<any>,
-	collect: DropTargetCollector<any>,
-	options: IDropTargetOptions = {},
+export default function DropTarget<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	CollectedProps
+>(
+	type: TargetType | ((props: P) => TargetType),
+	spec: DropTargetSpec<P, S, TargetComponent>,
+	collect: DropTargetCollector<CollectedProps>,
+	options: DndOptions<P> = {},
 ) {
 	checkDecoratorArguments(
 		'DropTarget',
@@ -67,13 +73,10 @@ export default function DropTarget(
 		collect,
 	)
 
-	return function decorateTarget<
-		T extends React.ComponentClass<any> | React.StatelessComponent<any>
-	>(DecoratedComponent: T): T & IDndComponentClass<any> {
-		return decorateHandler({
-			connectBackend: (backend: IBackend, targetId: string) => {
-				backend.connectDropTarget(targetId)
-			},
+	return function decorateTarget<TargetClass extends React.ComponentClass<P>>(
+		DecoratedComponent: TargetClass,
+	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
+		return decorateHandler<P, S, TargetComponent, TargetClass>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,
@@ -83,6 +86,6 @@ export default function DropTarget(
 			getType,
 			collect,
 			options,
-		}) as any
+		})
 	}
 }

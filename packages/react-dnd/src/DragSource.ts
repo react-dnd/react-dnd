@@ -1,12 +1,13 @@
 import React, { Component, ComponentClass, StatelessComponent } from 'react'
 import invariant from 'invariant'
 import isPlainObject from 'lodash/isPlainObject'
-import { IBackend, ItemType } from 'dnd-core'
+import { Backend, SourceType } from 'dnd-core'
 import {
-	IDragSourceSpecification,
+	DragSourceSpec,
 	DragSourceCollector,
-	IDragSourceOptions,
-	IDndComponentClass,
+	DndOptions,
+	DndComponentClass,
+	DragSourceMonitor,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -16,11 +17,24 @@ import createSourceMonitor from './createSourceMonitor'
 import createSourceConnector from './createSourceConnector'
 import isValidType from './utils/isValidType'
 
-export default function DragSource(
-	type: ItemType,
-	spec: IDragSourceSpecification<any, any>,
-	collect: DragSourceCollector<any>,
-	options: IDragSourceOptions = {},
+/**
+ * Decorates a component as a dragsource
+ * @param type The dragsource type
+ * @param spec The drag source specification
+ * @param collect The props collector function
+ * @param options DnD optinos
+ */
+export default function DragSource<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	CollectedProps,
+	DragObject
+>(
+	type: SourceType | ((props: P) => SourceType),
+	spec: DragSourceSpec<P, S, TargetComponent, DragObject>,
+	collect: DragSourceCollector<CollectedProps>,
+	options: DndOptions<P> = {},
 ) {
 	checkDecoratorArguments(
 		'DragSource',
@@ -67,14 +81,10 @@ export default function DragSource(
 		collect,
 	)
 
-	return function decorateSource<
-		Props,
-		T extends React.ComponentClass<Props> | React.StatelessComponent<Props>
-	>(DecoratedComponent: T): T & IDndComponentClass<Props> {
-		return decorateHandler({
-			connectBackend: (backend: IBackend, sourceId: string) => {
-				backend.connectDragSource(sourceId)
-			},
+	return function decorateSource<TargetClass extends React.ComponentClass<P>>(
+		DecoratedComponent: TargetClass,
+	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
+		return decorateHandler<P, S, TargetComponent, TargetClass>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,
 			registerHandler: registerSource,
@@ -84,6 +94,6 @@ export default function DragSource(
 			getType,
 			collect,
 			options,
-		}) as any
+		})
 	}
 }

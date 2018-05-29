@@ -1,20 +1,20 @@
 import invariant from 'invariant'
 import {
-	ItemType,
-	IDragDropManager,
-	IDragDropMonitor,
-	IXYCoord,
+	Identifier,
+	DragDropManager,
+	DragDropMonitor,
+	XYCoord,
+	DropTarget,
 } from 'dnd-core'
-import { IDropTargetMonitor } from './interfaces'
-import { IDropTarget } from 'dnd-core'
+import { DropTargetMonitor } from './interfaces'
 
 let isCallingCanDrop = false
 
-export class TargetMonitor implements IDropTargetMonitor {
-	private internalMonitor: IDragDropMonitor
+export class TargetMonitor implements DropTargetMonitor {
+	private internalMonitor: DragDropMonitor
 	private targetId: string | undefined
 
-	constructor(manager: IDragDropManager<any>) {
+	constructor(manager: DragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
@@ -78,6 +78,8 @@ export class TargetMonitor implements IDropTargetMonitor {
 	}
 }
 
-export default function createTargetMonitor(manager: IDragDropManager<any>) {
-	return new TargetMonitor(manager) as IDropTargetMonitor
+export default function createTargetMonitor<Context>(
+	manager: DragDropManager<Context>,
+): DropTargetMonitor {
+	return new TargetMonitor(manager) as DropTargetMonitor
 }

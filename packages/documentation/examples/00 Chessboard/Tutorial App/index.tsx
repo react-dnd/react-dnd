@@ -2,7 +2,7 @@ import React from 'react'
 import Board from './Board'
 import { observe } from './Game'
 
-export interface IChessboardTutorialAppState {
+export interface ChessboardTutorialAppState {
 	knightPosition: [number, number]
 }
 
@@ -11,7 +11,7 @@ export interface IChessboardTutorialAppState {
  */
 export default class ChessboardTutorialApp extends React.Component<
 	{},
-	IChessboardTutorialAppState
+	ChessboardTutorialAppState
 > {
 	private unobserve: () => void = observe(this.handleChange.bind(this))
 

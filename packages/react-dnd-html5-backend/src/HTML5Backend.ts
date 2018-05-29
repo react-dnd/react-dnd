@@ -1,12 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import defaults from 'lodash/defaults'
 import {
-	IBackend,
-	IDragDropManager,
-	IDragDropActions,
-	IDragDropMonitor,
-	IHandlerRegistry,
-	IXYCoord,
+	Backend,
+	DragDropManager,
+	DragDropActions,
+	DragDropMonitor,
+	HandlerRegistry,
+	XYCoord,
 } from 'dnd-core'
 import EnterLeaveCounter from './EnterLeaveCounter'
 import { isFirefox } from './BrowserDetector'
@@ -21,7 +21,7 @@ import {
 } from './NativeDragSources'
 import * as NativeTypes from './NativeTypes'
 import autobind from 'autobind-decorator'
-import { IHTML5BackendContext } from './interfaces'
+import { HTML5BackendContext } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 
@@ -32,11 +32,11 @@ declare global {
 	}
 }
 
-export default class HTML5Backend implements IBackend {
-	private actions: IDragDropActions
-	private monitor: IDragDropMonitor
-	private registry: IHandlerRegistry
-	private context: IHTML5BackendContext
+export default class HTML5Backend implements Backend {
+	private actions: DragDropActions
+	private monitor: DragDropMonitor
+	private registry: HandlerRegistry
+	private context: HTML5BackendContext
 
 	private sourcePreviewNodes: any = {}
 	private sourcePreviewNodeOptions: any = {}
@@ -50,7 +50,7 @@ export default class HTML5Backend implements IBackend {
 	private currentNativeSource: any = null
 	private currentNativeHandle: any = null
 	private currentDragSourceNode: any = null
-	private currentDragSourceNodeOffset: IXYCoord | null = null
+	private currentDragSourceNodeOffset: XYCoord | null = null
 	private currentDragSourceNodeOffsetChanged: boolean = false
 	private altKeyPressed: boolean = false
 	private mouseMoveTimeoutTimer: any = null
@@ -58,7 +58,7 @@ export default class HTML5Backend implements IBackend {
 	private dragOverTargetIds: string[] | null = null
 	private mouseMoveTimeoutId: any
 
-	constructor(manager: IDragDropManager<any>) {
+	constructor(manager: DragDropManager<any>) {
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
