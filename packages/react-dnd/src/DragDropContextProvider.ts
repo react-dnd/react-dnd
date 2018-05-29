@@ -1,19 +1,19 @@
 import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
-import { IBackend, BackendFactory } from 'dnd-core'
+import { Backend, BackendFactory } from 'dnd-core'
 import { CHILD_CONTEXT_TYPES, createChildContext } from './DragDropContext'
 
 /**
  * This class is a React-Component based version of the DragDropContext.
  * This is an alternative to decorating an application component with an ES7 decorator.
  */
-export interface IDragDropContextProviderProps<Context> {
+export interface DragDropContextProviderProps<Context> {
 	backend: BackendFactory
-	context: Context
+	context?: Context
 }
 
-export default class DragDropContextProvider extends Component<
-	IDragDropContextProviderProps<any>
+export default class DragDropContextProviderImpl<Context> extends Component<
+	DragDropContextProviderProps<Context>
 > {
 	public static propTypes = {
 		backend: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,

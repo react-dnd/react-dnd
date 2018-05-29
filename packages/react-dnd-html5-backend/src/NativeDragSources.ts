@@ -1,6 +1,6 @@
 import * as NativeTypes from './NativeTypes'
 import matchesType from './matchesType'
-import { IDragDropMonitor } from 'dnd-core'
+import { DragDropMonitor } from 'dnd-core'
 
 function getDataFromDataTransfer(
 	dataTransfer: any,
@@ -76,7 +76,7 @@ export function createNativeDragSource(type: any) {
 			return this.item
 		}
 
-		public isDragging(monitor: IDragDropMonitor, handle: string) {
+		public isDragging(monitor: DragDropMonitor, handle: string) {
 			return handle === monitor.getSourceId()
 		}
 

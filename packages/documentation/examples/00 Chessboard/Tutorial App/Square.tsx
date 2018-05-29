@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export interface ISquareProps {
+export interface SquareProps {
 	black: boolean
 	children: JSX.Element
 }
 
-export default class Square extends React.Component<ISquareProps> {
+export default class Square extends React.Component<SquareProps> {
 	public static propTypes = {
 		black: PropTypes.bool,
 		children: PropTypes.node,

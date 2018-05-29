@@ -33,6 +33,8 @@
 	},
 	"homepage": "https://github.com/react-dnd/react-dnd",
 	"scripts": {
+		"clean": "lerna run clean",
+		"build": "lerna run build --stream",
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",

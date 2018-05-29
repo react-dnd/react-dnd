@@ -4,19 +4,17 @@ import hoistStatics from 'hoist-non-react-statics'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
-import { IDragDropManager, Unsubscribe } from 'dnd-core'
-import {
-	DragLayerCollector,
-	IDragLayerOptions,
-	IDndComponentClass,
-} from './interfaces'
+import { DragDropManager, Unsubscribe } from 'dnd-core'
+import { DragLayerCollector, DndOptions, DndComponentClass } from './interfaces'
 
 const shallowEqual = require('shallowequal')
 
-export default function DragLayer(
-	collect: DragLayerCollector<any, any>,
-	options: IDragLayerOptions = {},
-) {
+export default function DragLayer<
+	P,
+	S,
+	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	CollectedProps
+>(collect: DragLayerCollector<P, CollectedProps>, options: DndOptions<P> = {}) {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options) // eslint-disable-line prefer-rest-params
 	invariant(
 		typeof collect === 'function',
@@ -31,14 +29,14 @@ export default function DragLayer(
 		options,
 	)
 
-	return function decorateLayer<T extends React.ComponentClass<any>>(
-		DecoratedComponent: T,
-	): T & IDndComponentClass<any> {
+	return function decorateLayer<TargetClass extends React.ComponentClass<P>>(
+		DecoratedComponent: TargetClass,
+	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
 		const { arePropsEqual = shallowEqual } = options
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-		class DragLayerContainer extends React.Component<any> {
+		class DragLayerContainer extends React.Component<P> {
 			public static displayName = `DragLayer(${displayName})`
 			public static contextTypes = {
 				dragDropManager: PropTypes.object.isRequired,
@@ -48,7 +46,7 @@ export default function DragLayer(
 				return DecoratedComponent
 			}
 
-			private manager: IDragDropManager<any>
+			private manager: DragDropManager<any>
 			private isCurrentlyMounted: boolean = false
 			private unsubscribeFromOffsetChange: Unsubscribe | undefined
 			private unsubscribeFromStateChange: Unsubscribe | undefined
@@ -140,6 +138,7 @@ export default function DragLayer(
 			}
 		}
 
-		return hoistStatics(DragLayerContainer, DecoratedComponent) as any
+		return hoistStatics(DragLayerContainer, DecoratedComponent) as TargetClass &
+			DndComponentClass<P, S, TargetComponent, TargetClass>
 	}
 }

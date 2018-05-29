@@ -1,11 +1,11 @@
 import HTML5Backend from '../HTML5Backend'
-import { IDragDropManager } from 'dnd-core'
-import { IHTML5BackendContext } from '../interfaces'
+import { DragDropManager } from 'dnd-core'
+import { HTML5BackendContext } from '../interfaces'
 
 describe('The HTML5 Backend', () => {
 	describe('window injection', () => {
 		it('uses an undefined window when no window is available', () => {
-			const mockManager: IDragDropManager<IHTML5BackendContext> = {
+			const mockManager: DragDropManager<HTML5BackendContext> = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
@@ -23,7 +23,7 @@ describe('The HTML5 Backend', () => {
 		})
 
 		it('uses the ambient window global', () => {
-			const mockManager: IDragDropManager<IHTML5BackendContext> = {
+			const mockManager: DragDropManager<HTML5BackendContext> = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
@@ -38,7 +38,7 @@ describe('The HTML5 Backend', () => {
 			const fakeWindow = {
 				x: 1,
 			}
-			const mockManager: IDragDropManager<IHTML5BackendContext> = {
+			const mockManager: DragDropManager<HTML5BackendContext> = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
