@@ -65,7 +65,7 @@ The second `spec` parameter must be a plain object implementing the drop target 
 
 * **`canDrop(props, monitor)`**: Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over `props` or `monitor.getItem()`. *Note: You may not call `monitor.canDrop()` inside this method.*
 
-**The spec offers no methods to handle enter or leave events by purpose.** Instead, return the result of `monitor.isOver()` call from your *collecting function*, so that you can use `componentWillReceiveProps` or `componentDidUpdate` React hooks to process the entering and the leaving events in your component. You may also check `monitor.isOver({ shallow: true })` if don't want the nested drop targets to count.
+**The spec offers no methods to handle enter or leave events by purpose.** Instead, return the result of `monitor.isOver()` call from your *collecting function*, so that you can use the `componentDidUpdate` React hook to process the entering and the leaving events in your component. You may also check `monitor.isOver({ shallow: true })` if don't want the nested drop targets to count.
 
 #### Specification Method Parameters
 
@@ -152,7 +152,7 @@ var chessSquareTarget = {
     // This is fired very often and lets you perform side effects
     // in response to the hover. You can't handle enter and leave
     // here—if you need them, put monitor.isOver() into collect() so you
-    // can just use componentWillReceiveProps() to handle enter/leave.
+    // can just use componentDidUpdate() to handle enter/leave.
 
     // You can access the coordinates if you need them
     var clientOffset = monitor.getClientOffset();
@@ -202,16 +202,16 @@ function collect(connect, monitor) {
 }
 
 var ChessSquare = createReactClass({
-  componentWillReceiveProps: function (nextProps) {
-    if (!this.props.isOver && nextProps.isOver) {
+  componentDidUpdate: function (prevProps) {
+    if (!prevProps.isOver && this.props.isOver) {
       // You can use this as enter handler
     }
 
-    if (this.props.isOver && !nextProps.isOver) {
+    if (prevProps.isOver && !this.props.isOver) {
       // You can use this as leave handler
     }
 
-    if (this.props.isOverCurrent && !nextProps.isOverCurrent) {
+    if (prevProps.isOverCurrent && !this.props.isOverCurrent) {
       // You can be more specific and track enter/leave
       // shallowly, not including nested targets
     }
@@ -268,7 +268,7 @@ const chessSquareTarget = {
     // This is fired very often and lets you perform side effects
     // in response to the hover. You can't handle enter and leave
     // here—if you need them, put monitor.isOver() into collect() so you
-    // can just use componentWillReceiveProps() to handle enter/leave.
+    // can just use componentDidUpdate() to handle enter/leave.
 
     // You can access the coordinates if you need them
     const clientOffset = monitor.getClientOffset();
@@ -318,16 +318,16 @@ function collect(connect, monitor) {
 }
 
 class ChessSquare {
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.isOver && nextProps.isOver) {
+  componentDidUpdate(prevProps) {
+    if (!prevProps.isOver && this.props.isOver) {
       // You can use this as enter handler
     }
 
-    if (this.props.isOver && !nextProps.isOver) {
+    if (prevProps.isOver && !this.props.isOver) {
       // You can use this as leave handler
     }
 
-    if (this.props.isOverCurrent && !nextProps.isOverCurrent) {
+    if (prevProps.isOverCurrent && !this.props.isOverCurrent) {
       // You can be more specific and track enter/leave
       // shallowly, not including nested targets
     }
@@ -382,7 +382,7 @@ const chessSquareTarget = {
     // This is fired very often and lets you perform side effects
     // in response to the hover. You can't handle enter and leave
     // here—if you need them, put monitor.isOver() into collect() so you
-    // can just use componentWillReceiveProps() to handle enter/leave.
+    // can just use componentDidUpdate() to handle enter/leave.
 
     // You can access the coordinates if you need them
     const clientOffset = monitor.getClientOffset();
@@ -426,16 +426,16 @@ const chessSquareTarget = {
   itemType: monitor.getItemType()
 }))
 export default class ChessSquare {
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.isOver && nextProps.isOver) {
+  componentDidUpdate(prevProps) {
+    if (!prevProps.isOver && this.props.isOver) {
       // You can use this as enter handler
     }
 
-    if (this.props.isOver && !nextProps.isOver) {
+    if (prevProps.isOver && !this.props.isOver) {
       // You can use this as leave handler
     }
 
-    if (this.props.isOverCurrent && !nextProps.isOverCurrent) {
+    if (prevProps.isOverCurrent && !this.props.isOverCurrent) {
       // You can be more specific and track enter/leave
       // shallowly, not including nested targets
     }

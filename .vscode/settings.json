@@ -4,8 +4,7 @@
 	},
 	"search.exclude": {
 		"**/node_modules": true,
-		"**/bower_components": true,
-		"**/lib": true
+		"**/bower_components": true
 	},
 	"eslint.packageManager": "yarn",
 	"editor.tabSize": 2,

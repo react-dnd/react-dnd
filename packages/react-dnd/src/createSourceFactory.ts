@@ -54,13 +54,16 @@ export default function createSourceFactory<
 		private props: P | undefined
 		private component: TargetComponent | undefined
 
-		constructor(private monitor: DragSourceMonitor) {}
+		constructor(private monitor: DragSourceMonitor) {
+			this.receiveComponent = this.receiveComponent.bind(this)
+			this.beginDrag = this.beginDrag.bind(this)
+		}
 
 		public receiveProps(props: any) {
 			this.props = props
 		}
 
-		public receiveComponent(component: any) {
+		public receiveComponent(component: TargetComponent) {
 			this.component = component
 		}
 
