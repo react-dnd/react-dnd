@@ -17,7 +17,6 @@ if (!fs.existsSync(sitePath)) {
 }
 
 var files = {
-  'main.css': 'main.css',
   'main.js': 'main.js'
 };
 
