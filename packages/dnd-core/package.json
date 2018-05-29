@@ -1,6 +1,6 @@
 {
 	"name": "dnd-core",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Drag and drop sans the GUI",
 	"license": "BSD-3-Clause",
 	"main": "./lib/index.js",
