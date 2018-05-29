@@ -228,20 +228,7 @@ export default function decorateHandler<
 						if (dragDropManager === undefined) {
 							return null
 						}
-						this.manager = dragDropManager
-						invariant(
-							typeof dragDropManager === 'object',
-							'Could not find the drag and drop manager in the context of %s. ' +
-								'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-								'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
-							displayName,
-							displayName,
-						)
-						this.handlerMonitor = createMonitor(dragDropManager)
-						this.handlerConnector = createConnector(
-							dragDropManager.getBackend(),
-						)
-						this.handler = createHandler(this.handlerMonitor)
+						this.receiveDragDropManager(dragDropManager)
 
 						// Let componentDidMount fire to initialize the collected state
 						if (!this.isCurrentlyMounted) {
@@ -262,6 +249,21 @@ export default function decorateHandler<
 					}}
 				</Consumer>
 			)
+		}
+
+		private receiveDragDropManager(dragDropManager: DragDropManager<any>) {
+			this.manager = dragDropManager
+			invariant(
+				typeof dragDropManager === 'object',
+				'Could not find the drag and drop manager in the context of %s. ' +
+					'Make sure to wrap the top-level component of your app with DragDropContext. ' +
+					'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
+				displayName,
+				displayName,
+			)
+			this.handlerMonitor = createMonitor(dragDropManager)
+			this.handlerConnector = createConnector(dragDropManager.getBackend())
+			this.handler = createHandler(this.handlerMonitor)
 		}
 	}
 

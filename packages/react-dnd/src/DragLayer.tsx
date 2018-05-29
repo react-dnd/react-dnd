@@ -105,23 +105,7 @@ export default function DragLayer<
 							if (dragDropManager === undefined) {
 								return null
 							}
-							this.manager = dragDropManager
-							invariant(
-								typeof dragDropManager === 'object',
-								'Could not find the drag and drop manager in the context of %s. ' +
-									'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-									'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
-								displayName,
-								displayName,
-							)
-
-							const monitor = this.manager.getMonitor()
-							this.unsubscribeFromOffsetChange = monitor.subscribeToOffsetChange(
-								this.handleChange,
-							)
-							this.unsubscribeFromStateChange = monitor.subscribeToStateChange(
-								this.handleChange,
-							)
+							this.receiveDragDropManager(dragDropManager)
 							// Let componentDidMount fire to initialize the collected state
 							if (!this.isCurrentlyMounted) {
 								return null
@@ -140,6 +124,27 @@ export default function DragLayer<
 					</Consumer>
 				)
 			}
+
+			private receiveDragDropManager(dragDropManager: DragDropManager<any>) {
+				this.manager = dragDropManager
+				invariant(
+					typeof dragDropManager === 'object',
+					'Could not find the drag and drop manager in the context of %s. ' +
+						'Make sure to wrap the top-level component of your app with DragDropContext. ' +
+						'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
+					displayName,
+					displayName,
+				)
+
+				const monitor = this.manager.getMonitor()
+				this.unsubscribeFromOffsetChange = monitor.subscribeToOffsetChange(
+					this.handleChange,
+				)
+				this.unsubscribeFromStateChange = monitor.subscribeToStateChange(
+					this.handleChange,
+				)
+			}
+
 			private handleChange() {
 				if (!this.isCurrentlyMounted) {
 					return
