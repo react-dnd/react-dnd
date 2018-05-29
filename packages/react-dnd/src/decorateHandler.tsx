@@ -22,7 +22,8 @@ const isClassComponent = (Comp: any) => {
 
 export interface DecorateHandlerArgs<
 	P,
-	ComponentClass extends React.ComponentClass<P>
+	ComponentClass extends React.ComponentClass<P>,
+	ItemIdType
 > {
 	DecoratedComponent: ComponentClass
 	createHandler: any
@@ -30,7 +31,7 @@ export interface DecorateHandlerArgs<
 	createConnector: any
 	registerHandler: any
 	containerDisplayName: string
-	getType: any
+	getType: (props: P) => ItemIdType
 	collect: any
 	options: any
 }
@@ -39,7 +40,8 @@ export default function decorateHandler<
 	P,
 	S,
 	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
-	TargetClass extends React.ComponentClass<P>
+	TargetClass extends React.ComponentClass<P>,
+	ItemIdType
 >({
 	DecoratedComponent,
 	createHandler,
@@ -50,7 +52,7 @@ export default function decorateHandler<
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<P, TargetClass>): TargetClass &
+}: DecorateHandlerArgs<P, TargetClass, ItemIdType>): TargetClass &
 	DndComponentClass<P, TargetComponent, TargetClass> {
 	const { arePropsEqual = shallowEqual } = options
 	const displayName =
