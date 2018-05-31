@@ -20,4 +20,6 @@ Questions? Find us on the Reactiflux Discord Server (**#need-help**)
 
 https://www.reactiflux.com/
 
+### Shoutouts 🙏
+![BrowserStack Logo](/assets/browserstack-logo-600x315.prg?raw=true "BrowserStack Logo")
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
