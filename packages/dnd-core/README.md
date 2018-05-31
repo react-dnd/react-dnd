@@ -1,10 +1,6 @@
 [![npm package](https://img.shields.io/npm/v/dnd-core.svg?style=flat-square)](https://www.npmjs.org/package/dnd-core)
 [![Build Status](https://travis-ci.org/react-dnd/dnd-core.svg?branch=master)](https://travis-ci.org/react-dnd/dnd-core)
 [![Test Coverage](https://codeclimate.com/github/react-dnd/dnd-core/badges/coverage.svg)](https://codeclimate.com/github/react-dnd/dnd-core)
-[![bitHound Overall Score](https://www.bithound.io/github/react-dnd/dnd-core/badges/score.svg)](https://www.bithound.io/github/react-dnd/dnd-core)
-[![bitHound Code](https://www.bithound.io/github/react-dnd/dnd-core/badges/code.svg)](https://www.bithound.io/github/react-dnd/dnd-core)
-[![bitHound Dependencies](https://www.bithound.io/github/react-dnd/dnd-core/badges/dependencies.svg)](https://www.bithound.io/github/react-dnd/dnd-core/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/react-dnd/dnd-core/badges/devDependencies.svg)](https://www.bithound.io/github/react-dnd/dnd-core/master/dependencies/npm)
 
 # dnd-core
 
