@@ -36,10 +36,11 @@ export default class HTML5Backend implements Backend {
 	private registry: HandlerRegistry
 	private context: HTML5BackendContext
 
-	private sourcePreviewNodes: any = {}
-	private sourcePreviewNodeOptions: any = {}
-	private sourceNodes: any = {}
-	private sourceNodeOptions: any = {}
+	private sourcePreviewNodes: Map<string, Element> = new Map()
+	private sourcePreviewNodeOptions: Map<string, any> = new Map()
+	private sourceNodes: Map<string, Element> = new Map()
+	private sourceNodeOptions: Map<string, any> = new Map()
+
 	private enterLeaveCounter: EnterLeaveCounter = new EnterLeaveCounter()
 
 	private dragStartSourceIds: string[] | null = null
@@ -99,18 +100,18 @@ export default class HTML5Backend implements Backend {
 	}
 
 	public connectDragPreview(sourceId: string, node: any, options: any) {
-		this.sourcePreviewNodeOptions[sourceId] = options
-		this.sourcePreviewNodes[sourceId] = node
+		this.sourcePreviewNodeOptions.set(sourceId, options)
+		this.sourcePreviewNodes.set(sourceId, node)
 
 		return () => {
-			delete this.sourcePreviewNodes[sourceId]
-			delete this.sourcePreviewNodeOptions[sourceId]
+			this.sourcePreviewNodes.delete(sourceId)
+			this.sourcePreviewNodeOptions.delete(sourceId)
 		}
 	}
 
 	public connectDragSource(sourceId: string, node: any, options: any) {
-		this.sourceNodes[sourceId] = node
-		this.sourceNodeOptions[sourceId] = options
+		this.sourceNodes.set(sourceId, node)
+		this.sourceNodeOptions.set(sourceId, options)
 
 		const handleDragStart = (e: any) => this.handleDragStart(e, sourceId)
 		const handleSelectStart = (e: any) => this.handleSelectStart(e)
@@ -120,8 +121,8 @@ export default class HTML5Backend implements Backend {
 		node.addEventListener('selectstart', handleSelectStart)
 
 		return () => {
-			delete this.sourceNodes[sourceId]
-			delete this.sourceNodeOptions[sourceId]
+			this.sourceNodes.delete(sourceId)
+			this.sourceNodeOptions.delete(sourceId)
 
 			node.removeEventListener('dragstart', handleDragStart)
 			node.removeEventListener('selectstart', handleSelectStart)
@@ -192,8 +193,8 @@ export default class HTML5Backend implements Backend {
 	}
 
 	private getCurrentSourceNodeOptions() {
-		const sourceId = this.monitor.getSourceId()
-		const sourceNodeOptions = this.sourceNodeOptions[sourceId as string]
+		const sourceId = this.monitor.getSourceId() as string
+		const sourceNodeOptions = this.sourceNodeOptions.get(sourceId)
 
 		return defaults(sourceNodeOptions || {}, {
 			dropEffect: this.altKeyPressed ? 'copy' : 'move',
@@ -210,10 +211,8 @@ export default class HTML5Backend implements Backend {
 	}
 
 	private getCurrentSourcePreviewNodeOptions() {
-		const sourceId = this.monitor.getSourceId()
-		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[
-			sourceId as string
-		]
+		const sourceId = this.monitor.getSourceId() as string
+		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions.get(sourceId)
 
 		return defaults(sourcePreviewNodeOptions || {}, {
 			anchorX: 0.5,
@@ -224,7 +223,7 @@ export default class HTML5Backend implements Backend {
 
 	@autobind
 	private getSourceClientOffset(sourceId: string) {
-		return getNodeClientOffset(this.sourceNodes[sourceId])
+		return getNodeClientOffset(this.sourceNodes.get(sourceId))
 	}
 
 	private isDraggingNativeItem() {
@@ -406,8 +405,8 @@ export default class HTML5Backend implements Backend {
 				// If child drag source refuses drag but parent agrees,
 				// use parent's node as drag image. Neither works in IE though.
 				const sourceId: string = this.monitor.getSourceId() as string
-				const sourceNode = this.sourceNodes[sourceId]
-				const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode
+				const sourceNode = this.sourceNodes.get(sourceId)
+				const dragPreview = this.sourcePreviewNodes.get(sourceId) || sourceNode
 				const {
 					anchorX,
 					anchorY,
