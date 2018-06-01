@@ -15,7 +15,9 @@
 		"bundle:unmin": "webpack --mode development --output-filename=ReactDnDHTML5Backend.js",
 		"bundle:min": "webpack --mode production --output-filename=ReactDnDHTML5Backend.min.js",
 		"build": "run-p bundle:* transpile",
-		"test": "run-s clean build"
+    "test": "run-s clean build",
+    "watch": "tsc -w",
+    "start": "npm run watch"
 	},
 	"dependencies": {
 		"@types/lodash": "^4.14.109",

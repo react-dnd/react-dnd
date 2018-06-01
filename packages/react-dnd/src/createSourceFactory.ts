@@ -93,6 +93,7 @@ export default function createSourceFactory<
 			if (!this.props || !this.component) {
 				return
 			}
+
 			const item = spec.beginDrag(this.props, this.monitor, this.component)
 			if (process.env.NODE_ENV !== 'production') {
 				invariant(
