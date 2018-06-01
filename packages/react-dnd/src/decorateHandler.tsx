@@ -13,12 +13,6 @@ import {
 	SerialDisposable,
 } from './utils/disposables'
 
-const isClassComponent = (Comp: any) => {
-	return (
-		!!Comp && !!Comp.prototype && typeof Comp.prototype.render === 'function'
-	)
-}
-
 export interface DecorateHandlerArgs<
 	P,
 	ComponentClass extends React.ComponentClass<P>,
@@ -240,11 +234,7 @@ export default function decorateHandler<
 							<DecoratedComponent
 								{...this.props}
 								{...this.state}
-								ref={
-									isClassComponent(DecoratedComponent)
-										? this.handleChildRef
-										: null
-								}
+								ref={this.handleChildRef}
 							/>
 						)
 					}}

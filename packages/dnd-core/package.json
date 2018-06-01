@@ -7,7 +7,9 @@
 	"types": "./lib/index.d.ts",
 	"scripts": {
 		"clean": "rimraf lib",
-		"build": "tsc",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "npm run watch",
 		"test": "run-s clean build"
 	},
 	"repository": {
