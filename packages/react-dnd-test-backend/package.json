@@ -20,7 +20,7 @@
 		"lodash": "^4.17.10"
 	},
 	"peerDependencies": {
-		"react": ">= 16.4"
+		"react": ">= 16.3"
 	},
 	"devDependencies": {
 		"npm-run-all": "^4.1.2",
