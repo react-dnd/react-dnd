@@ -44,7 +44,7 @@ const boxSource = {
 					dropResult.name
 				}`
 			}
-			alert(alertMessage) // eslint-disable-line no-alert
+			alert(alertMessage)
 		}
 	},
 }

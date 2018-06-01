@@ -7,8 +7,7 @@ import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { DragLayerCollector, DndOptions, DndComponentClass } from './interfaces'
 import { Consumer } from './DragDropContext'
-
-const shallowEqual = require('shallowequal')
+import shallowEqual from 'shallowequal'
 
 export default function DragLayer<
 	P,
@@ -16,7 +15,7 @@ export default function DragLayer<
 	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
 	CollectedProps
 >(collect: DragLayerCollector<P, CollectedProps>, options: DndOptions<P> = {}) {
-	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options) // eslint-disable-line prefer-rest-params
+	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options)
 	invariant(
 		typeof collect === 'function',
 		'Expected "collect" provided as the first argument to DragLayer to be a function that collects props to inject into the component. ',

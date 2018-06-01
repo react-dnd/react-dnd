@@ -34,7 +34,7 @@ export default function DropTarget<
 		type,
 		spec,
 		collect,
-		options, // eslint-disable-line prefer-rest-params
+		options,
 	)
 	let getType: ((props: P) => TargetType) = type as ((props: P) => TargetType)
 	if (typeof type !== 'function') {

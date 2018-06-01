@@ -66,7 +66,7 @@ export function DragDropContext<
 	S,
 	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
 >(backendFactory: BackendFactory, backendContext?: any) {
-	checkDecoratorArguments('DragDropContext', 'backend', backendFactory) // eslint-disable-line prefer-rest-params
+	checkDecoratorArguments('DragDropContext', 'backend', backendFactory)
 	const childContext = createChildContext(backendFactory, backendContext)
 
 	return function decorateContext<TargetClass extends React.ComponentClass<P>>(

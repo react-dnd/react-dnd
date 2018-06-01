@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { DOCS_DEFAULT, EXAMPLES_DEFAULT } from '../Constants'
+import React from 'react'
 import './NavBar.less'
+const { DOCS_DEFAULT, EXAMPLES_DEFAULT } = require('../Constants')
 
 const GITHUB_URL = 'https://github.com/react-dnd/react-dnd'
 const DOCS_LOCATION = DOCS_DEFAULT.location
 const EXAMPLES_LOCATION = EXAMPLES_DEFAULT.location
 
-export default class NavBar extends Component {
-	render() {
+export default class NavBar extends React.Component {
+	public render() {
 		return (
 			<div className="NavBar">
 				<div className="NavBar-container">

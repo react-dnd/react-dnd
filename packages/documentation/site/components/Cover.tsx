@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Cover.less'
 
-export default class Cover extends Component {
-	render() {
+export default class Cover extends React.Component {
+	public render() {
 		return (
 			<div className="Cover">
 				<div className="Cover-header">

@@ -6,13 +6,12 @@ import hoistStatics from 'hoist-non-react-statics'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndComponentClass, DndComponent } from './interfaces'
 import { Consumer } from './DragDropContext'
-
-const shallowEqual = require('shallowequal')
-const {
+import shallowEqual from 'shallowequal'
+import {
 	Disposable,
 	CompositeDisposable,
 	SerialDisposable,
-} = require('disposables')
+} from './utils/disposables'
 
 const isClassComponent = (Comp: any) => {
 	return (

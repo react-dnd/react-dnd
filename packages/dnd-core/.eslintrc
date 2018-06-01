@@ -1,5 +1,0 @@
-rules:
-  no-plusplus: off
-  consistent-return: off
-  no-mixed-operators: off
-  no-else-return: off

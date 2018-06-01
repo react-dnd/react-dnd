@@ -1,8 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './SideBar.less'
+import { Page, PageGroup } from '../Constants'
 
-export default class SideBar extends Component {
-	render() {
+export interface SideBarProps {
+	groups: PageGroup[]
+	example: Page
+}
+
+export default class SideBar extends React.Component<SideBarProps> {
+	public render() {
 		return (
 			<div className="SideBar">
 				<div className="SideBar-content">
@@ -12,7 +18,7 @@ export default class SideBar extends Component {
 		)
 	}
 
-	renderGroup({ title, pages }, index) {
+	private renderGroup({ title, pages }: PageGroup, index: number) {
 		return (
 			<div className="SideBar-group" key={index}>
 				<h4 className="SideBar-groupTitle">{title}</h4>
@@ -21,7 +27,7 @@ export default class SideBar extends Component {
 		)
 	}
 
-	renderLink({ title, location }, key) {
+	private renderLink({ title, location }: Page, key: string) {
 		const arrow = <span className="arrowBullet" />
 
 		let linkClass = 'SideBar-item'
