@@ -36,7 +36,7 @@ const boxSource = {
 		const dropResult = monitor.getDropResult()
 
 		if (dropResult) {
-			alert(`You dropped ${item.name} into ${dropResult.name}!`) // eslint-disable-line no-alert
+			alert(`You dropped ${item.name} into ${dropResult.name}!`)
 		}
 	},
 }

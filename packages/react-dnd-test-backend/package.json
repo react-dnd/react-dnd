@@ -15,11 +15,12 @@
 		"prepublish": "npm run test"
 	},
 	"dependencies": {
+    "@types/lodash": "^4.14.109",
 		"dnd-core": "^3.0.2",
 		"lodash": "^4.17.10"
 	},
 	"peerDependencies": {
-		"react-dnd": "^2.2.0"
+		"react": ">= 16.4"
 	},
 	"devDependencies": {
 		"npm-run-all": "^4.1.2",

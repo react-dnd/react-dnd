@@ -1,11 +1,21 @@
-export const Pages = {
+export interface Page {
+	location: string
+	title: string
+}
+
+export interface PageGroup {
+	title: string
+	pages: { [key: string]: Page }
+}
+
+export const Pages: { [key: string]: Page } = {
 	HOME: {
 		location: 'index.html',
 		title: 'Home',
 	},
 }
 
-export const APIPages = [
+export const APIPages: PageGroup[] = [
 	{
 		title: 'Quick Start',
 		pages: {
@@ -101,7 +111,7 @@ export const APIPages = [
 	},
 ]
 
-export const ExamplePages = [
+export const ExamplePages: PageGroup[] = [
 	{
 		title: 'Chessboard',
 		pages: {
@@ -203,5 +213,6 @@ export const ExamplePages = [
 	},
 ]
 
-export const DOCS_DEFAULT = APIPages[0].pages.OVERVIEW
-export const EXAMPLES_DEFAULT = ExamplePages[0].pages.CHESSBOARD_TUTORIAL_APP
+export const DOCS_DEFAULT: Page = APIPages[0].pages.OVERVIEW
+export const EXAMPLES_DEFAULT: Page = ExamplePages[0].pages
+	.CHESSBOARD_TUTORIAL_APP as Page

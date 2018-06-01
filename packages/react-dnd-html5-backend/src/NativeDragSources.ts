@@ -12,9 +12,7 @@ function getDataFromDataTransfer(
 		null,
 	)
 
-	return result != null // eslint-disable-line eqeqeq
-		? result
-		: defaultValue
+	return result != null ? result : defaultValue
 }
 
 const nativeTypesConfig: {

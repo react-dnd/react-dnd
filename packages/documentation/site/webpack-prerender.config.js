@@ -6,7 +6,7 @@ var isDev = process.env.NODE_ENV !== 'production'
 const root = path.join(__dirname, '..', '..', '..')
 
 module.exports = {
-	entry: path.join(__dirname, 'renderPath.js'),
+	entry: path.join(__dirname, 'renderPath.ts'),
 	mode: isDev ? 'development' : 'production',
 	output: {
 		path: path.join(__dirname, '..', '__site_prerender__'),
@@ -27,11 +27,6 @@ module.exports = {
 					},
 					path.join(__dirname, '../scripts/markdownLoader'),
 				],
-			},
-			{
-				test: /\.js$/,
-				use: 'babel-loader',
-				exclude: /node_modules/,
 			},
 			{
 				test: /\.ts(x|)$/,
