@@ -5,15 +5,13 @@ import SideBar from '../components/SideBar'
 import StaticHTMLBlock from '../components/StaticHTMLBlock'
 import { APIPages } from '../Constants'
 
-export default class APIPage extends Component {
-	render() {
+export default class APIPage extends React.Component<any> {
+	public render() {
 		return (
 			<div>
 				<Header />
-
-				<PageBody hasSidebar>
+				<PageBody hasSidebar={true}>
 					<SideBar groups={APIPages} example={this.props.example} />
-
 					<StaticHTMLBlock html={this.props.html} />
 				</PageBody>
 			</div>

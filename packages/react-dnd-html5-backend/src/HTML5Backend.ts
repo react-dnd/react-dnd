@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import defaults from 'lodash/defaults'
 import {
 	Backend,
@@ -22,8 +21,7 @@ import {
 import * as NativeTypes from './NativeTypes'
 import autobind from 'autobind-decorator'
 import { HTML5BackendContext } from './interfaces'
-
-const shallowEqual = require('shallowequal')
+import shallowEqual from 'shallowequal'
 
 declare global {
 	// tslint:disable-next-line interface-name
@@ -476,7 +474,7 @@ export default class HTML5Backend implements Backend {
 			// Looks like a Safari bug: dataTransfer.types is null, but there was no draggable.
 			// Just let it drag. It's a native type (URL or text) and will be picked up in
 			// dragenter handler.
-			return // eslint-disable-line no-useless-return
+			return
 		} else {
 			// If by this time no drag source reacted, tell browser not to drag.
 			e.preventDefault()

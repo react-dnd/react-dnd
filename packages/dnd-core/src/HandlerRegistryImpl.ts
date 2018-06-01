@@ -1,7 +1,6 @@
 import { Store } from 'redux'
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
-const asap = require('asap')
 import {
 	addSource,
 	addTarget,
@@ -48,10 +47,23 @@ function parseRoleFromHandlerId(handlerId: string) {
 	}
 }
 
+function mapContainsValue<T>(map: Map<string, T>, searchValue: T) {
+	const entries = map.entries()
+	let isDone = false
+	do {
+		const { done, value: [key, value] } = entries.next()
+		if (value === searchValue) {
+			return true
+		}
+		isDone = done
+	} while (!isDone)
+	return false
+}
+
 export default class HandlerRegistryImpl implements HandlerRegistry {
-	private types: { [id: string]: SourceType | TargetType } = {}
-	private dragSources: { [id: string]: DragSource } = {}
-	private dropTargets: { [id: string]: DropTarget } = {}
+	private types: Map<string, SourceType | TargetType> = new Map()
+	private dragSources: Map<string, DragSource> = new Map()
+	private dropTargets: Map<string, DropTarget> = new Map()
 	private pinnedSourceId: string | null = null
 	private pinnedSource: any = null
 
@@ -77,37 +89,31 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 
 	public containsHandler(handler: DragSource | DropTarget) {
 		return (
-			Object.keys(this.dragSources).some(
-				key => this.dragSources[key] === handler,
-			) ||
-			Object.keys(this.dropTargets).some(
-				key => this.dropTargets[key] === handler,
-			)
+			mapContainsValue(this.dragSources, handler) ||
+			mapContainsValue(this.dropTargets, handler)
 		)
 	}
 
 	public getSource(sourceId: string, includePinned = false): DragSource {
 		invariant(this.isSourceId(sourceId), 'Expected a valid source ID.')
-
 		const isPinned = includePinned && sourceId === this.pinnedSourceId
-
-		const source = isPinned ? this.pinnedSource : this.dragSources[sourceId]
+		const source = isPinned ? this.pinnedSource : this.dragSources.get(sourceId)
 		return source
 	}
 
 	public getTarget(targetId: string): DropTarget {
 		invariant(this.isTargetId(targetId), 'Expected a valid target ID.')
-		return this.dropTargets[targetId] as DropTarget
+		return this.dropTargets.get(targetId) as DropTarget
 	}
 
 	public getSourceType(sourceId: string) {
 		invariant(this.isSourceId(sourceId), 'Expected a valid source ID.')
-		return this.types[sourceId] as Identifier
+		return this.types.get(sourceId) as Identifier
 	}
 
 	public getTargetType(targetId: string): Identifier | Identifier[] {
 		invariant(this.isTargetId(targetId), 'Expected a valid target ID.')
-		return this.types[targetId] as Identifier | Identifier[]
+		return this.types.get(targetId) as Identifier | Identifier[]
 	}
 
 	public isSourceId(handlerId: string) {
@@ -123,21 +129,17 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 	public removeSource(sourceId: string) {
 		invariant(this.getSource(sourceId), 'Expected an existing source.')
 		this.store.dispatch(removeSource(sourceId))
-
-		asap(() => {
-			delete this.dragSources[sourceId]
-			delete this.types[sourceId]
+		setImmediate(() => {
+			this.dragSources.delete(sourceId)
+			this.types.delete(sourceId)
 		})
 	}
 
 	public removeTarget(targetId: string) {
 		invariant(this.getTarget(targetId), 'Expected an existing target.')
 		this.store.dispatch(removeTarget(targetId))
-
-		asap(() => {
-			delete this.dropTargets[targetId]
-			delete this.types[targetId]
-		})
+		this.dropTargets.delete(targetId)
+		this.types.delete(targetId)
 	}
 
 	public pinSource(sourceId: string) {
@@ -161,11 +163,11 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		handler: DragSource | DropTarget,
 	): string {
 		const id = getNextHandlerId(role)
-		this.types[id] = type
+		this.types.set(id, type)
 		if (role === HandlerRole.SOURCE) {
-			this.dragSources[id] = handler as DragSource
+			this.dragSources.set(id, handler as DragSource)
 		} else if (role === HandlerRole.TARGET) {
-			this.dropTargets[id] = handler as DropTarget
+			this.dropTargets.set(id, handler as DropTarget)
 		}
 		return id
 	}

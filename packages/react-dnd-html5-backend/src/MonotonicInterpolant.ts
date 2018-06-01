@@ -1,7 +1,3 @@
-/* eslint
-   no-plusplus: off,
-   no-mixed-operators: off
-*/
 export default class MonotonicInterpolant {
 	private xs: any
 	private ys: any

@@ -1,12 +1,8 @@
 {
-	"files.associations": {
-		".eslintrc": "yaml"
-	},
 	"search.exclude": {
 		"**/node_modules": true,
 		"**/bower_components": true
 	},
-	"eslint.packageManager": "yarn",
 	"editor.tabSize": 2,
 	"[typescript]": {
 		"editor.formatOnSave": true
