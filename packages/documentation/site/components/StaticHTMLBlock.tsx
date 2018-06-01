@@ -1,13 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import CodeBlock from './CodeBlock'
 
-export default class StaticHTMLBlock extends Component {
-	static propTypes = {
+export interface StaticHTMLBlockProps {
+	html: string
+}
+
+export default class StaticHTMLBlock extends React.Component<
+	StaticHTMLBlockProps
+> {
+	public static propTypes = {
 		html: PropTypes.string.isRequired,
 	}
 
-	render() {
+	public render() {
 		const { html } = this.props
 
 		// Here goes a really hack-ish way to convert
@@ -44,9 +50,9 @@ export default class StaticHTMLBlock extends Component {
 					elements.push(
 						<CodeBlock
 							key={i}
-							es5={es5Content}
-							es6={es6Content}
-							es7={es7Content}
+							es5={es5Content || ''}
+							es6={es6Content || ''}
+							es7={es7Content || ''}
 						/>,
 					)
 					break

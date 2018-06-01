@@ -8,7 +8,7 @@ const root = path.join(__dirname, '..', '..', '..')
 module.exports = {
 	mode: isDev ? 'development' : 'production',
 	devtool: isDev ? 'cheap-eval-source-map' : 'source-map',
-	entry: [path.join(__dirname, 'client.js')].concat(
+	entry: [path.join(__dirname, 'client.tsx')].concat(
 		isDev
 			? [
 					'webpack-dev-server/client?http://localhost:8080',
@@ -38,21 +38,6 @@ module.exports = {
 					},
 					path.join(__dirname, '../scripts/markdownLoader'),
 				],
-			},
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				use: isDev
-					? [
-							{
-								loader: 'babel-loader',
-								options: {
-									babelrc: true,
-									plugins: ['react-hot-loader/babel'],
-								},
-							},
-					  ]
-					: ['babel-loader'],
 			},
 			{
 				test: /\.ts(x|)$/,

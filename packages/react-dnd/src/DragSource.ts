@@ -42,7 +42,7 @@ export default function DragSource<
 		type,
 		spec,
 		collect,
-		options, // eslint-disable-line prefer-rest-params
+		options,
 	)
 	let getType: ((props: P) => SourceType) = type as ((props: P) => SourceType)
 	if (typeof type !== 'function') {

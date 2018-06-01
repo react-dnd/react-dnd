@@ -17,11 +17,18 @@
 		"build": "run-p bundle:* transpile",
 		"test": "run-s clean build"
 	},
+	"dependencies": {
+		"@types/lodash": "^4.14.109",
+		"@types/react": "^16.3.16",
+		"@types/shallowequal": "^0.2.2",
+		"autobind-decorator": "^2.1.0",
+		"dnd-core": "^3.0.2",
+		"lodash": "^4.17.10",
+		"react": "^16.4.0",
+		"shallowequal": "^1.0.2"
+	},
 	"devDependencies": {
-		"@types/autobind-decorator": "^2.1.0",
-		"@types/lodash": "^4.14.108",
-		"babel-cli": "^6.26.0",
-		"babel-loader": "^7.1.4",
+		"@types/node": "^10.3.0",
 		"npm-run-all": "^4.1.2",
 		"react-dnd": "^3.0.2",
 		"react-dnd-test-backend": "^3.0.2",
@@ -30,10 +37,7 @@
 		"typescript": "^2.8.3",
 		"webpack": "^4.6.0"
 	},
-	"dependencies": {
-		"autobind-decorator": "^2.1.0",
-		"dnd-core": "^3.0.2",
-		"lodash": "^4.2.0",
-		"shallowequal": "^1.0.2"
+	"peerDependencies": {
+		"react": ">= 16.4"
 	}
 }

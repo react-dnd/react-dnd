@@ -1,12 +1,12 @@
 import './base.less'
-import Constants, { APIPages, ExamplePages, Pages } from './Constants'
+import { APIPages, ExamplePages, Pages } from './Constants'
 import HomePage from './pages/HomePage'
 import APIPage from './pages/APIPage'
 import ExamplePage from './pages/ExamplePage'
-import React, { Component } from 'react'
+import * as React from 'react'
 import ReactDOMServer from 'react-dom/server'
 
-const APIDocs = {
+const APIDocs: { [key: string]: any } = {
 	OVERVIEW: require('../docs/00 Quick Start/Overview.md'),
 	TUTORIAL: require('../docs/00 Quick Start/Tutorial.md'),
 	TESTING: require('../docs/00 Quick Start/Testing.md'),
@@ -26,7 +26,7 @@ const APIDocs = {
 	TEST_BACKEND: require('../docs/04 Backends/Test.md'),
 }
 
-const Examples = {
+const Examples: { [key: string]: any } = {
 	CHESSBOARD_TUTORIAL_APP: require('../examples/00 Chessboard/Tutorial App')
 		.default,
 	DUSTBIN_SINGLE_TARGET: require('../examples/01 Dustbin/Single Target')
@@ -53,26 +53,47 @@ const Examples = {
 	OTHER_NATIVE_FILES: require('../examples/06 Other/Native Files').default,
 }
 
-export default class IndexPage extends Component {
-	static getDoctype() {
+export interface IndexPageProps {
+	devMode?: boolean
+	files: any
+	location: string
+}
+
+export interface IndexPageState {
+	renderPage?: boolean
+}
+
+export default class IndexPage extends React.Component<
+	IndexPageProps,
+	IndexPageState
+> {
+	public static getDoctype() {
 		return '<!doctype html>'
 	}
 
-	static renderToString(props) {
+	public static renderToString(props: IndexPageProps) {
 		return (
 			IndexPage.getDoctype() +
 			ReactDOMServer.renderToString(<IndexPage {...props} />)
 		)
 	}
 
-	constructor(props) {
+	constructor(props: IndexPageProps) {
 		super(props)
 		this.state = {
 			renderPage: !this.props.devMode,
 		}
 	}
 
-	render() {
+	public componentDidMount() {
+		if (!this.state.renderPage) {
+			this.setState({
+				renderPage: true,
+			})
+		}
+	}
+
+	public render() {
 		// Dump out our current props to a global object via a script tag so
 		// when initialising the browser environment we can bootstrap from the
 		// same props as what each page was rendered with.
@@ -101,41 +122,46 @@ export default class IndexPage extends Component {
 		)
 	}
 
-	renderPage() {
+	private renderPage() {
 		switch (this.props.location) {
 			case Pages.HOME.location:
 				return <HomePage />
 		}
 
-		for (let groupIndex in APIPages) {
-			const group = APIPages[groupIndex]
-			const pageKeys = Object.keys(group.pages)
+		for (const groupIndex in APIPages) {
+			if (groupIndex !== undefined) {
+				const group = APIPages[groupIndex]
+				const pageKeys = Object.keys(group.pages)
 
-			for (let i = 0; i < pageKeys.length; i++) {
-				const key = pageKeys[i]
-				const page = group.pages[key]
-
-				if (this.props.location === page.location) {
-					return <APIPage example={page} html={APIDocs[key]} />
+				for (const key of pageKeys) {
+					if (key) {
+						const page = group.pages[key]
+						if (this.props.location === page.location) {
+							return <APIPage example={page} html={APIDocs[key]} />
+						}
+					}
 				}
 			}
 		}
 
-		for (let groupIndex in ExamplePages) {
-			const group = ExamplePages[groupIndex]
-			const pageKeys = Object.keys(group.pages)
+		for (const groupIndex in ExamplePages) {
+			if (groupIndex !== undefined) {
+				const group = ExamplePages[groupIndex]
+				const pageKeys = Object.keys(group.pages)
 
-			for (let i = 0; i < pageKeys.length; i++) {
-				const key = pageKeys[i]
-				const page = group.pages[key]
-				const Component = Examples[key]
+				for (const key of pageKeys) {
+					if (key) {
+						const page = group.pages[key]
+						const ExamplComponent = Examples[key]
 
-				if (this.props.location === page.location) {
-					return (
-						<ExamplePage example={page}>
-							<Component />
-						</ExamplePage>
-					)
+						if (this.props.location === page.location) {
+							return (
+								<ExamplePage example={page}>
+									<ExamplComponent />
+								</ExamplePage>
+							)
+						}
+					}
 				}
 			}
 		}
@@ -143,13 +169,5 @@ export default class IndexPage extends Component {
 		throw new Error(
 			'Page of location ' + JSON.stringify(this.props.location) + ' not found.',
 		)
-	}
-
-	componentDidMount() {
-		if (!this.state.renderPage) {
-			this.setState({
-				renderPage: true,
-			})
-		}
 	}
 }
