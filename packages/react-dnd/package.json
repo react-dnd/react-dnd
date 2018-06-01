@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd",
-	"version": "3.0.2",
+	"version": "4.0.0",
 	"description": "Drag and Drop for React",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -15,9 +15,9 @@
 		"bundle:min": "webpack --mode production --output-filename=ReactDnD.min.js",
 		"transpile": "tsc",
 		"build": "run-p bundle:* transpile",
-    "test": "run-s clean build",
-    "watch": "tsc -w",
-    "start": "npm run watch"
+		"test": "run-s clean build",
+		"watch": "tsc -w",
+		"start": "npm run watch"
 	},
 	"dependencies": {
 		"@types/invariant": "^2.2.29",
@@ -27,7 +27,7 @@
 		"@types/react": "^16.3.14",
 		"@types/react-dom": "^16.0.5",
 		"@types/shallowequal": "^0.2.2",
-		"dnd-core": "^3.0.2",
+		"dnd-core": "^4.0.0",
 		"hoist-non-react-statics": "^2.5.0",
 		"invariant": "^2.1.0",
 		"lodash": "^4.17.10",
