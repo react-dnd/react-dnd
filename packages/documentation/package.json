@@ -1,15 +1,15 @@
 {
 	"name": "react-dnd-documentation",
-	"version": "3.0.2",
+	"version": "4.0.0",
 	"private": true,
 	"scripts": {
-    "clean": "rimraf __site__ __site_prerender__",
-    "serve": "webpack-dev-server --config site/webpack-client.config.js --hot --content-base __site__",
-    "start": "run-s clean prerender build:index_page serve",
-    "prerender": "./node_modules/.bin/webpack --config site/webpack-prerender.config.js",
-    "build": "tsc",
-    "build:index_page": "ts-node ./scripts/buildSiteIndexPages.ts",
-    "build_site": "./scripts/buildStaticSite.sh"
+		"clean": "rimraf __site__ __site_prerender__",
+		"serve": "webpack-dev-server --config site/webpack-client.config.js --hot --content-base __site__",
+		"start": "run-s clean prerender build:index_page serve",
+		"prerender": "./node_modules/.bin/webpack --config site/webpack-prerender.config.js",
+		"build": "tsc",
+		"build:index_page": "ts-node ./scripts/buildSiteIndexPages.ts",
+		"build_site": "./scripts/buildStaticSite.sh"
 	},
 	"devDependencies": {
 		"autoprefixer": "^7.1.2",
@@ -48,7 +48,7 @@
 		"lodash": "^4.17.10",
 		"prop-types": "^15.6.1",
 		"react": "^16.4.0",
-		"react-dnd-test-backend": "^3.0.2",
+		"react-dnd-test-backend": "^4.0.0",
 		"react-dom": "^16.4.0",
 		"react-frame-component": "^3.0.0",
 		"shallowequal": "^1.0.2"

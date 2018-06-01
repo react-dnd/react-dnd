@@ -1,15 +1,15 @@
 {
 	"name": "dnd-core",
-	"version": "3.0.2",
+	"version": "4.0.0",
 	"description": "Drag and drop sans the GUI",
 	"license": "BSD-3-Clause",
 	"main": "./lib/index.js",
 	"types": "./lib/index.d.ts",
 	"scripts": {
 		"clean": "rimraf lib",
-    "build": "tsc",
-    "watch": "tsc -w",
-    "start": "npm run watch",
+		"build": "tsc",
+		"watch": "tsc -w",
+		"start": "npm run watch",
 		"test": "run-s clean build"
 	},
 	"repository": {
