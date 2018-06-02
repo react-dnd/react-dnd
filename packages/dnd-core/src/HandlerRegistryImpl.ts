@@ -23,6 +23,8 @@ import {
 	validateTargetContract,
 	validateType,
 } from './contracts'
+// @ts-ignore
+import asap from 'asap'
 
 function getNextHandlerId(role: HandlerRole): string {
 	const id = getNextUniqueId().toString()
@@ -129,7 +131,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 	public removeSource(sourceId: string) {
 		invariant(this.getSource(sourceId), 'Expected an existing source.')
 		this.store.dispatch(removeSource(sourceId))
-		setImmediate(() => {
+		asap(() => {
 			this.dragSources.delete(sourceId)
 			this.types.delete(sourceId)
 		})
