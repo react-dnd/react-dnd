@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-test-backend",
-	"version": "4.0.0",
+	"version": "4.0.2",
 	"description": "A mock backend for testing React DnD apps",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@types/lodash": "^4.14.109",
-		"dnd-core": "^4.0.0",
+		"dnd-core": "^4.0.2",
 		"lodash": "^4.17.10"
 	},
 	"peerDependencies": {
