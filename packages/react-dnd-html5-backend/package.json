@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-html5-backend",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"description": "HTML5 backend for React DnD",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -24,7 +24,7 @@
 		"@types/react": "^16.3.16",
 		"@types/shallowequal": "^0.2.2",
 		"autobind-decorator": "^2.1.0",
-		"dnd-core": "^4.0.0",
+		"dnd-core": "^4.0.2",
 		"lodash": "^4.17.10",
 		"shallowequal": "^1.0.2"
 	},
@@ -32,8 +32,8 @@
 		"@types/node": "^10.3.0",
 		"npm-run-all": "^4.1.2",
 		"react": "^16.4.0",
-		"react-dnd": "^4.0.0",
-		"react-dnd-test-backend": "^4.0.0",
+		"react-dnd": "^4.0.2",
+		"react-dnd-test-backend": "^4.0.2",
 		"rimraf": "^2.6.2",
 		"ts-loader": "^4.2.0",
 		"typescript": "^2.8.3",
