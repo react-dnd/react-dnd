@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-documentation",
-	"version": "4.0.2",
+	"version": "4.0.3",
 	"private": true,
 	"scripts": {
 		"clean": "rimraf __site__ __site_prerender__",
@@ -48,7 +48,7 @@
 		"lodash": "^4.17.10",
 		"prop-types": "^15.6.1",
 		"react": "^16.4.0",
-		"react-dnd-test-backend": "^4.0.2",
+		"react-dnd-test-backend": "^4.0.3",
 		"react-dom": "^16.4.0",
 		"react-frame-component": "^3.0.0",
 		"shallowequal": "^1.0.2"
