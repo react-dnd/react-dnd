@@ -16,7 +16,7 @@
 		"bundle:min": "webpack --mode production --output-filename=ReactDnDHTML5Backend.min.js",
 		"build": "run-p bundle:* transpile",
 		"test": "run-s clean build",
-		"watch": "tsc -w",
+		"watch": "tsc -w --preserveWatchOutput",
 		"start": "npm run watch"
 	},
 	"dependencies": {
@@ -36,7 +36,7 @@
 		"react-dnd-test-backend": "^4.0.3",
 		"rimraf": "^2.6.2",
 		"ts-loader": "^4.2.0",
-		"typescript": "^2.8.3",
+		"typescript": "^2.9.1",
 		"webpack": "^4.6.0"
 	},
 	"peerDependencies": {
