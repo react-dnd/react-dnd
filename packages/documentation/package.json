@@ -48,6 +48,8 @@
 		"lodash": "^4.17.10",
 		"prop-types": "^15.6.1",
 		"react": "^16.4.0",
+		"react-dnd": "^4.0.3",
+		"react-dnd-html5-backend": "^4.0.3",
 		"react-dnd-test-backend": "^4.0.3",
 		"react-dom": "^16.4.0",
 		"react-frame-component": "^3.0.0",
