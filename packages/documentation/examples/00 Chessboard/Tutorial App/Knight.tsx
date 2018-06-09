@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	DragSource,
 	ConnectDragSource,
@@ -33,12 +32,6 @@ export interface KnightProps {
 
 @DragSource(ItemTypes.KNIGHT, knightSource, collect)
 export default class Knight extends React.Component<KnightProps> {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		connectDragPreview: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-	}
-
 	public componentDidMount() {
 		const img = new Image()
 		img.src =

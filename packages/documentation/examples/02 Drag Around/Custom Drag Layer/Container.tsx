@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	DropTarget,
 	ConnectDropTarget,
@@ -56,11 +55,6 @@ export default class Container extends React.PureComponent<
 	ContainerProps,
 	ContainerState
 > {
-	public static propTypes = {
-		connectDropTarget: PropTypes.func.isRequired,
-		snapToGrid: PropTypes.bool.isRequired,
-	}
-
 	constructor(props: ContainerProps) {
 		super(props)
 		this.state = {

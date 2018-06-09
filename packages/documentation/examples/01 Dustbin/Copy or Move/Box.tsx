@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	DragSource,
 	ConnectDragSource,
@@ -7,7 +6,6 @@ import {
 	DragSourceMonitor,
 } from 'react-dnd'
 import ItemTypes from '../Single Target/ItemTypes'
-import { DragDropManager } from 'dnd-core'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -64,12 +62,6 @@ export interface BoxProps {
 	}),
 )
 export default class Box extends React.Component<BoxProps> {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-		name: PropTypes.string.isRequired,
-	}
-
 	public render() {
 		const { isDragging, connectDragSource } = this.props
 		const { name } = this.props

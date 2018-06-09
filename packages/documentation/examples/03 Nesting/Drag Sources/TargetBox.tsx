@@ -1,6 +1,5 @@
 // tslint:disable max-classes-per-file
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import Colors from './Colors'
 
@@ -34,15 +33,6 @@ export interface TargetBoxProps {
 	draggingColor: monitor.getItemType(),
 }))
 class TargetBox extends React.Component<TargetBoxProps> {
-	public static propTypes = {
-		isOver: PropTypes.bool.isRequired,
-		canDrop: PropTypes.bool.isRequired,
-		draggingColor: PropTypes.string,
-		lastDroppedColor: PropTypes.string,
-		connectDropTarget: PropTypes.func.isRequired,
-		onDrop: PropTypes.func.isRequired,
-	}
-
 	public render() {
 		const {
 			canDrop,

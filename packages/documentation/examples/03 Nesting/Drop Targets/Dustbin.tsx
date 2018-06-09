@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
@@ -58,14 +57,6 @@ export default class Dustbin extends React.Component<
 	DustbinProps,
 	DustbinState
 > {
-	public static propTypes = {
-		connectDropTarget: PropTypes.func.isRequired,
-		isOver: PropTypes.bool.isRequired,
-		isOverCurrent: PropTypes.bool.isRequired,
-		greedy: PropTypes.bool,
-		children: PropTypes.node,
-	}
-
 	constructor(props: DustbinProps) {
 		super(props)
 		this.state = {
