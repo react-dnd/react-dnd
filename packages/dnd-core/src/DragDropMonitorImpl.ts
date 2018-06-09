@@ -1,6 +1,5 @@
 import { Store } from 'redux'
 import invariant from 'invariant'
-import isArray from 'lodash/isArray'
 import matchesType from './utils/matchesType'
 import {
 	getSourceClientOffset,
@@ -27,7 +26,7 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		const { handlerIds } = options
 		invariant(typeof listener === 'function', 'listener must be a function.')
 		invariant(
-			typeof handlerIds === 'undefined' || isArray(handlerIds),
+			typeof handlerIds === 'undefined' || Array.isArray(handlerIds),
 			'handlerIds, when specified, must be an array of strings.',
 		)
 
