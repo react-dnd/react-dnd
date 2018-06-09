@@ -10,7 +10,6 @@ import {
 	HoverOptions,
 } from '../interfaces'
 import invariant from 'invariant'
-import isArray from 'lodash/isArray'
 import isObject from 'lodash/isObject'
 import matchesType from '../utils/matchesType'
 
@@ -94,7 +93,10 @@ export default function createDragDropActions<Context>(
 			targetIdsArg: string[],
 			{ clientOffset }: HoverOptions = {},
 		): Action<HoverPayload> {
-			invariant(isArray(targetIdsArg), 'Expected targetIds to be an array.')
+			invariant(
+				Array.isArray(targetIdsArg),
+				'Expected targetIds to be an array.',
+			)
 			const targetIds = targetIdsArg.slice(0)
 
 			const monitor = manager.getMonitor()
