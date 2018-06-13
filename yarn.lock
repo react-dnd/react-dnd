@@ -6986,9 +6986,9 @@ react-dom@^16.4.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-frame-component@^4.0.0:
+"react-frame-component@git://github.com/ryanseddon/react-frame-component.git#bcc0af0a4fc43c8e50908f478133cf8ee528238c":
   version "4.0.0"
-  resolved "https://registry.yarnpkg.com/react-frame-component/-/react-frame-component-4.0.0.tgz#57d51cdb2da3b204cc34577349f9f5bb84a76aac"
+  resolved "git://github.com/ryanseddon/react-frame-component.git#bcc0af0a4fc43c8e50908f478133cf8ee528238c"
 
 react-hot-loader@^4.1.2:
   version "4.1.2"

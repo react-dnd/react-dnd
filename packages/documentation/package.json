@@ -50,7 +50,7 @@
 		"react-dnd-html5-backend": "^4.0.4",
 		"react-dnd-test-backend": "^4.0.4",
 		"react-dom": "^16.4.0",
-		"react-frame-component": "^4.0.0",
+		"react-frame-component": "git://github.com/ryanseddon/react-frame-component.git#bcc0af0a4fc43c8e50908f478133cf8ee528238c",
 		"shallowequal": "^1.0.2"
 	}
 }
