@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DragSource, ConnectDragPreview, ConnectDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
@@ -30,12 +29,6 @@ export interface BoxWithImageProps {
 	isDragging: monitor.isDragging(),
 }))
 export default class BoxWithImage extends React.Component<BoxWithImageProps> {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		connectDragPreview: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-	}
-
 	public componentDidMount() {
 		const img = new Image()
 		img.onload = () =>

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DragSource, ConnectDragSource, ConnectDragPreview } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import ItemTypes from './ItemTypes'
@@ -45,16 +44,6 @@ export interface DraggableBoxProps {
 export default class DraggableBox extends React.PureComponent<
 	DraggableBoxProps
 > {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		connectDragPreview: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-		id: PropTypes.any.isRequired,
-		title: PropTypes.string.isRequired,
-		left: PropTypes.number.isRequired,
-		top: PropTypes.number.isRequired,
-	}
-
 	public componentDidMount() {
 		const { connectDragPreview } = this.props
 		if (connectDragPreview) {

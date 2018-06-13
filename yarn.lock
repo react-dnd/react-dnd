@@ -57,10 +57,6 @@
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.0.tgz#078516315a84d56216b5d4fed8f75d59d3b16cac"
 
-"@types/prop-types@^15.5.3":
-  version "15.5.3"
-  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.3.tgz#bef071852dca2a2dbb65fecdb7bfb30cedae2de2"
-
 "@types/react-dom@^16.0.5":
   version "16.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.5.tgz#a757457662e3819409229e8f86795ff37b371f96"
@@ -6990,9 +6986,9 @@ react-dom@^16.4.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-frame-component@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-frame-component/-/react-frame-component-3.0.0.tgz#8e01ada1e1aecd2962bea751087c0420bc52b0c3"
+"react-frame-component@git://github.com/ryanseddon/react-frame-component.git#bcc0af0a4fc43c8e50908f478133cf8ee528238c":
+  version "4.0.0"
+  resolved "git://github.com/ryanseddon/react-frame-component.git#bcc0af0a4fc43c8e50908f478133cf8ee528238c"
 
 react-hot-loader@^4.1.2:
   version "4.1.2"

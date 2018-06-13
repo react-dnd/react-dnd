@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	DropTarget,
 	DropTargetConnector,
@@ -41,14 +40,6 @@ export interface TargetBoxProps {
 	}),
 )
 export default class TargetBox extends React.Component<TargetBoxProps> {
-	public static propTypes = {
-		connectDropTarget: PropTypes.func.isRequired,
-		isOver: PropTypes.bool.isRequired,
-		canDrop: PropTypes.bool.isRequired,
-		accepts: PropTypes.arrayOf(PropTypes.string).isRequired,
-		onDrop: PropTypes.func,
-	}
-
 	public render() {
 		const { canDrop, isOver, connectDropTarget } = this.props
 		const isActive = canDrop && isOver

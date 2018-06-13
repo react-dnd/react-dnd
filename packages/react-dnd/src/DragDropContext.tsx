@@ -1,8 +1,6 @@
 import React, { Component, ComponentClass, Context } from 'react'
-import PropTypes from 'prop-types'
 import {
 	DragDropManager,
-	Backend,
 	BackendFactory,
 	createDragDropManager,
 } from 'dnd-core'
@@ -10,7 +8,6 @@ import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { ContextComponent } from './interfaces'
-import { Target } from './createTargetFactory'
 
 /**
  * The React context type

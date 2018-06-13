@@ -1,5 +1,4 @@
 import React, { Component, StatelessComponent, ComponentClass } from 'react'
-import PropTypes from 'prop-types'
 import hoistStatics from 'hoist-non-react-statics'
 import isPlainObject from 'lodash/isPlainObject'
 import invariant from 'invariant'

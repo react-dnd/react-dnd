@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	DropTarget,
 	DragDropContext,
@@ -51,11 +50,6 @@ export default class Container extends React.Component<
 	ContainerProps,
 	ContainerState
 > {
-	public static propTypes = {
-		hideSourceOnDrag: PropTypes.bool.isRequired,
-		connectDropTarget: PropTypes.func.isRequired,
-	}
-
 	constructor(props: ContainerProps) {
 		super(props)
 		this.state = {
