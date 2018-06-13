@@ -2,11 +2,11 @@
 import * as React from 'react'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'
-import shuffle from 'lodash/shuffle'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
 const update = require('immutability-helper')
+const shuffle = require('lodash/shuffle')
 
 export interface SourceBox {
 	name: string

@@ -42,7 +42,7 @@
 			"tslint \"packages/**/*.{ts,tsx}\" -e \"**/{lib,node_modules}/**\"",
 		"test_modules": "lerna run test --stream",
 		"publish_docs": "./scripts/publishDocumentation.sh",
-		"test": "run-s lint test_modules jest:cov",
+		"test": "run-s lint build test_modules jest:cov",
 		"prettify":
 			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
