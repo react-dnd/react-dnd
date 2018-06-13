@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-documentation",
-	"version": "4.0.4",
+	"version": "4.0.5",
 	"private": true,
 	"scripts": {
 		"clean": "rimraf __site__ __site_prerender__",
@@ -45,9 +45,9 @@
 		"immutability-helper": "^2.4.0",
 		"lodash": "^4.17.10",
 		"react": "^16.4.0",
-		"react-dnd": "^4.0.4",
-		"react-dnd-html5-backend": "^4.0.4",
-		"react-dnd-test-backend": "^4.0.4",
+		"react-dnd": "^4.0.5",
+		"react-dnd-html5-backend": "^4.0.5",
+		"react-dnd-test-backend": "^4.0.5",
 		"react-dom": "^16.4.0",
 		"react-frame-component": "git://github.com/ryanseddon/react-frame-component.git#bcc0af0a4fc43c8e50908f478133cf8ee528238c",
 		"shallowequal": "^1.0.2"
