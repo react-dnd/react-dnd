@@ -7,7 +7,7 @@ export interface PageBodyProps {
 }
 export default class PageBody extends React.Component<PageBodyProps> {
 	public render() {
-		const { hasSidebar, html, ...props } = this.props
+		const { hasSidebar } = this.props
 		return (
 			<div className={`PageBody ${hasSidebar ? 'PageBody--hasSidebar' : ''}`}>
 				<div className="PageBody-container">{this.props.children}</div>
