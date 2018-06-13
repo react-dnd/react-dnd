@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Container from './Container'
 
 export default class CustomizeDropEffects extends React.Component {

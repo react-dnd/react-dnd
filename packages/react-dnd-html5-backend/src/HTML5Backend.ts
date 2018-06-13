@@ -1,4 +1,3 @@
-import defaults from 'lodash/defaults'
 import {
 	Backend,
 	DragDropManager,
@@ -21,7 +20,8 @@ import {
 import * as NativeTypes from './NativeTypes'
 import autobind from 'autobind-decorator'
 import { HTML5BackendContext } from './interfaces'
-import shallowEqual from 'shallowequal'
+const defaults = require('lodash/defaults')
+const shallowEqual = require('shallowequal')
 
 declare global {
 	// tslint:disable-next-line interface-name
@@ -55,7 +55,6 @@ export default class HTML5Backend implements Backend {
 	private mouseMoveTimeoutTimer: any = null
 	private asyncEndDragFrameId: any = null
 	private dragOverTargetIds: string[] | null = null
-	private mouseMoveTimeoutId: any
 
 	constructor(manager: DragDropManager<any>) {
 		this.actions = manager.getActions()
@@ -246,15 +245,6 @@ export default class HTML5Backend implements Backend {
 	}
 
 	@autobind
-	private asyncEndDragNativeItem() {
-		if (this.window) {
-			this.asyncEndDragFrameId = this.window.requestAnimationFrame(
-				this.endDragNativeItem,
-			)
-		}
-	}
-
-	@autobind
 	private endDragNativeItem() {
 		if (!this.isDraggingNativeItem()) {
 			return
@@ -312,7 +302,6 @@ export default class HTML5Backend implements Backend {
 		//   * https://github.com/react-dnd/react-dnd/issues/869
 		//
 		this.mouseMoveTimeoutTimer = setTimeout(() => {
-			this.mouseMoveTimeoutId = null
 			return (
 				this.window &&
 				this.window.addEventListener(

@@ -1,4 +1,3 @@
-import xor from 'lodash/xor'
 import {
 	BEGIN_DRAG,
 	PUBLISH_DRAG_SOURCE,
@@ -15,6 +14,7 @@ import {
 import { Action } from '../interfaces'
 import { areArraysEqual } from '../utils/equality'
 import { NONE, ALL } from '../utils/dirtiness'
+const xor = require('lodash/xor')
 
 export type State = string[]
 

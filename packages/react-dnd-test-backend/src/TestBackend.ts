@@ -1,4 +1,3 @@
-import noop from 'lodash/noop'
 import {
 	DragDropManager,
 	DragDropActions,
@@ -6,6 +5,7 @@ import {
 	BeginDragOptions,
 	HoverOptions,
 } from 'dnd-core'
+const noop = require('lodash/noop')
 
 export interface TestBackend {
 	didCallSetup: boolean

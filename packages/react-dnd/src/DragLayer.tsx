@@ -1,12 +1,12 @@
-import React, { Component, StatelessComponent, ComponentClass } from 'react'
-import hoistStatics from 'hoist-non-react-statics'
-import isPlainObject from 'lodash/isPlainObject'
-import invariant from 'invariant'
+import * as React from 'react'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { DragLayerCollector, DndOptions, DndComponentClass } from './interfaces'
 import { Consumer } from './DragDropContext'
-import shallowEqual from 'shallowequal'
+const hoistStatics = require('hoist-non-react-statics')
+const isPlainObject = require('lodash/isPlainObject')
+const invariant = require('invariant')
+const shallowEqual = require('shallowequal')
 
 export default function DragLayer<
 	P,

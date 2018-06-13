@@ -1,4 +1,4 @@
-import intersection from 'lodash/intersection'
+const intersection = require('lodash/intersection')
 
 export const NONE: string[] = []
 export const ALL: string[] = []

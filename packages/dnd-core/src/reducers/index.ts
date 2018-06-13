@@ -1,4 +1,3 @@
-import get from 'lodash/get'
 import dragOffset, { State as DragOffsetState } from './dragOffset'
 import dragOperation, { State as DragOperationState } from './dragOperation'
 import refCount, { State as RefCountState } from './refCount'
@@ -6,6 +5,7 @@ import dirtyHandlerIds, {
 	State as DirtyHandlerIdsState,
 } from './dirtyHandlerIds'
 import stateId, { State as StateIdState } from './stateId'
+const get = require('lodash/get')
 
 export interface State {
 	dirtyHandlerIds: DirtyHandlerIdsState

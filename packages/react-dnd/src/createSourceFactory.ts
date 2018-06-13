@@ -1,8 +1,7 @@
-import invariant from 'invariant'
-import isPlainObject from 'lodash/isPlainObject'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
-import { ComponentClass } from 'react'
+const invariant = require('invariant')
+const isPlainObject = require('lodash/isPlainObject')
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']
