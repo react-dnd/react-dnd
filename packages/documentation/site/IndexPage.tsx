@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage'
 import APIPage from './pages/APIPage'
 import ExamplePage from './pages/ExamplePage'
 import * as React from 'react'
-import ReactDOMServer from 'react-dom/server'
+import * as ReactDOMServer from 'react-dom/server'
 
 const APIDocs: { [key: string]: any } = {
 	OVERVIEW: require('../docs/00 Quick Start/Overview.md'),
