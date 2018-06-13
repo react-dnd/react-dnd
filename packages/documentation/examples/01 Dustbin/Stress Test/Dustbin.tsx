@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	ConnectDropTarget,
 	DropTarget,
@@ -45,15 +44,6 @@ export interface DustbinProps {
 	}),
 )
 export default class Dustbin extends React.Component<DustbinProps> {
-	public static propTypes = {
-		connectDropTarget: PropTypes.func.isRequired,
-		isOver: PropTypes.bool.isRequired,
-		canDrop: PropTypes.bool.isRequired,
-		accepts: PropTypes.arrayOf(PropTypes.string).isRequired,
-		lastDroppedItem: PropTypes.object,
-		onDrop: PropTypes.func.isRequired,
-	}
-
 	public render() {
 		const {
 			accepts,

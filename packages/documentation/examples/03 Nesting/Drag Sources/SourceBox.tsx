@@ -1,6 +1,5 @@
 // tslint:disable max-classes-per-file jsx-no-lambda
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	DragSource,
 	ConnectDragSource,
@@ -42,15 +41,6 @@ export interface SourceBoxProps {
 	}),
 )
 class SourceBox extends React.Component<SourceBoxProps> {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-		color: PropTypes.string.isRequired,
-		forbidDrag: PropTypes.bool.isRequired,
-		onToggleForbidDrag: PropTypes.func.isRequired,
-		children: PropTypes.node,
-	}
-
 	public render() {
 		const {
 			color,

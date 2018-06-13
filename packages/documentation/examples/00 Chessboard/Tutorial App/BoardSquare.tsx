@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	DropTarget,
 	DropTargetMonitor,
@@ -45,15 +44,6 @@ const collect: DropTargetCollector<CollectedProps> = (
 
 @DropTarget(ItemTypes.KNIGHT, squareTarget, collect)
 export default class BoardSquare extends React.Component<BoardSquareProps> {
-	public static propTypes = {
-		x: PropTypes.number.isRequired,
-		y: PropTypes.number.isRequired,
-		isOver: PropTypes.bool.isRequired,
-		canDrop: PropTypes.bool.isRequired,
-		connectDropTarget: PropTypes.func.isRequired,
-		children: PropTypes.node,
-	}
-
 	public render() {
 		const { x, y, connectDropTarget, isOver, canDrop, children } = this.props
 		const black = (x + y) % 2 === 1

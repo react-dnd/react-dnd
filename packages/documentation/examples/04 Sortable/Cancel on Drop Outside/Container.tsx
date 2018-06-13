@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DropTarget, DragDropContext, ConnectDropTarget } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Card from './Card'
@@ -32,10 +31,6 @@ export default class Container extends React.Component<
 	ContainerProps,
 	ContainerState
 > {
-	public static propTypes = {
-		connectDropTarget: PropTypes.func.isRequired,
-	}
-
 	constructor(props: ContainerProps) {
 		super(props)
 		this.moveCard = this.moveCard.bind(this)
