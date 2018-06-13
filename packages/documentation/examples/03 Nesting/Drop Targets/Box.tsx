@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DragSource, ConnectDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
@@ -25,10 +24,6 @@ export interface BoxProps {
 	connectDragSource: connect.dragSource(),
 }))
 export default class Box extends React.Component<BoxProps> {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-	}
-
 	public render() {
 		const { connectDragSource } = this.props
 

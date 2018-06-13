@@ -1,6 +1,5 @@
 import { Store } from 'redux'
 import invariant from 'invariant'
-import isArray from 'lodash/isArray'
 import {
 	addSource,
 	addTarget,

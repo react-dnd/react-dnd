@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DragLayer, XYCoord } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'
@@ -59,21 +58,6 @@ export interface CustomDragLayerProps {
 export default class CustomDragLayer extends React.Component<
 	CustomDragLayerProps
 > {
-	public static propTypes = {
-		item: PropTypes.object,
-		itemType: PropTypes.string,
-		initialOffset: PropTypes.shape({
-			x: PropTypes.number.isRequired,
-			y: PropTypes.number.isRequired,
-		}),
-		currentOffset: PropTypes.shape({
-			x: PropTypes.number.isRequired,
-			y: PropTypes.number.isRequired,
-		}),
-		isDragging: PropTypes.bool.isRequired,
-		snapToGrid: PropTypes.bool.isRequired,
-	}
-
 	public renderItem(type: any, item: any) {
 		switch (type) {
 			case ItemTypes.BOX:

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 const styles: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -13,11 +12,6 @@ export interface BoxProps {
 }
 
 export default class Box extends React.PureComponent<BoxProps> {
-	public static propTypes = {
-		title: PropTypes.string.isRequired,
-		yellow: PropTypes.bool,
-	}
-
 	public render() {
 		const { title, yellow } = this.props
 		const backgroundColor = yellow ? 'yellow' : 'white'

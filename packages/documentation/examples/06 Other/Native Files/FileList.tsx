@@ -1,15 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 export interface FileListProps {
 	files: any[]
 }
 
 export default class FileList extends React.Component<FileListProps> {
-	public static propTypes = {
-		files: PropTypes.arrayOf(PropTypes.object),
-	}
-
 	public render() {
 		const { files } = this.props
 		if (files.length === 0) {

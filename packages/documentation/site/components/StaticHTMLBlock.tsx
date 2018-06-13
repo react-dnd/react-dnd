@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import CodeBlock from './CodeBlock'
 
 export interface StaticHTMLBlockProps {
@@ -9,10 +8,6 @@ export interface StaticHTMLBlockProps {
 export default class StaticHTMLBlock extends React.Component<
 	StaticHTMLBlockProps
 > {
-	public static propTypes = {
-		html: PropTypes.string.isRequired,
-	}
-
 	public render() {
 		const { html } = this.props
 

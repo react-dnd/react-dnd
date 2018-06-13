@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DragSource, ConnectDragPreview, ConnectDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
@@ -38,12 +37,6 @@ export interface BoxWithHandleProps {
 	isDragging: monitor.isDragging(),
 }))
 export default class BoxWithHandle extends React.Component<BoxWithHandleProps> {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		connectDragPreview: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-	}
-
 	public render() {
 		const { isDragging, connectDragSource, connectDragPreview } = this.props
 		const opacity = isDragging ? 0.4 : 1
