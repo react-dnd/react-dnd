@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DropTarget, ConnectDropTarget } from 'react-dnd'
 import ItemTypes from '../Single Target/ItemTypes'
 
@@ -38,13 +37,6 @@ export interface DustbinProps {
 	canDrop: monitor.canDrop(),
 }))
 export default class Dustbin extends React.Component<DustbinProps> {
-	public static propTypes = {
-		connectDropTarget: PropTypes.func.isRequired,
-		isOver: PropTypes.bool.isRequired,
-		canDrop: PropTypes.bool.isRequired,
-		allowedDropEffect: PropTypes.string.isRequired,
-	}
-
 	public render() {
 		const { canDrop, isOver, allowedDropEffect, connectDropTarget } = this.props
 		const isActive = canDrop && isOver

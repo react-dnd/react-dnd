@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import StaticHTMLBlock from './StaticHTMLBlock'
 
@@ -40,12 +39,6 @@ export default class CodeBlock extends React.Component<
 	CodeBlockProps,
 	CodeBlockState
 > {
-	public static propTypes = {
-		es5: PropTypes.string,
-		es6: PropTypes.string,
-		es7: PropTypes.string,
-	}
-
 	public static defaultProps = {
 		es5: '',
 		es6: '',

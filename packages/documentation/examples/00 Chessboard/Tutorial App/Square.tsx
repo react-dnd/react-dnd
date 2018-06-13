@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 export interface SquareProps {
 	black: boolean
@@ -7,11 +6,6 @@ export interface SquareProps {
 }
 
 export default class Square extends React.Component<SquareProps> {
-	public static propTypes = {
-		black: PropTypes.bool,
-		children: PropTypes.node,
-	}
-
 	public render() {
 		const { black } = this.props
 		const backgroundColor = black ? 'black' : 'white'

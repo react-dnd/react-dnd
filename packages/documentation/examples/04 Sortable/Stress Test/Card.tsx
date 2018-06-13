@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
 	DragSource,
 	DropTarget,
@@ -50,15 +49,6 @@ export interface CardProps {
 	isDragging: monitor.isDragging(),
 }))
 export default class Card extends React.Component<CardProps> {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		connectDropTarget: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-		id: PropTypes.any.isRequired,
-		text: PropTypes.string.isRequired,
-		moveCard: PropTypes.func.isRequired,
-	}
-
 	public render() {
 		const {
 			text,

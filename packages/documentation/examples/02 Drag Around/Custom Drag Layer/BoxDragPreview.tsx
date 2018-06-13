@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Box from './Box'
 
 const styles = {
@@ -20,10 +19,6 @@ export default class BoxDragPreview extends React.PureComponent<
 	BoxDragPreviewProps,
 	BoxDragPreviewState
 > {
-	public static propTypes = {
-		title: PropTypes.string.isRequired,
-	}
-
 	private interval: any
 
 	constructor(props: BoxDragPreviewProps) {

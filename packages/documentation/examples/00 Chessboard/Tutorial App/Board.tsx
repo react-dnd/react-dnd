@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend, { HTML5BackendContext } from 'react-dnd-html5-backend'
 import BoardSquare from './BoardSquare'
@@ -12,10 +11,6 @@ export interface BoardProps {
 
 @DragDropContext<BoardProps, {}, Board>(HTML5Backend)
 export default class Board extends React.Component<BoardProps> {
-	public static propTypes = {
-		knightPosition: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-	}
-
 	public render() {
 		const squares = []
 		for (let i = 0; i < 64; i += 1) {
