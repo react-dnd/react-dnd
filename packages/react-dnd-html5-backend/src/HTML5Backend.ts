@@ -431,8 +431,15 @@ export default class HTML5Backend implements Backend {
 			}
 
 			try {
-				// Firefox won't drag without setting data
-				dataTransfer.setData('application/json', {})
+				const { dataItems } = this.monitor.getItem()
+				if (dataItems && typeof dataItems === 'object') {
+					Object.keys(dataItems).forEach(k =>
+						dataTransfer.setData(k, dataItems[k]),
+					)
+				} else {
+					// Firefox won't drag without setting data
+					dataTransfer.setData('application/json', {})
+				}
 			} catch (err) {
 				// IE doesn't support MIME types in setData
 			}
