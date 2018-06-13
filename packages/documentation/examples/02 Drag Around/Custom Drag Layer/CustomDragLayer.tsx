@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { DragLayer, XYCoord } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'

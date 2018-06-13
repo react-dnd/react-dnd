@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import Header from '../components/Header'
 import PageBody from '../components/PageBody'
 import SideBar from '../components/SideBar'

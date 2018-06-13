@@ -1,5 +1,5 @@
-import invariant from 'invariant'
 import { cloneElement } from 'react'
+const invariant = require('invariant')
 
 export default function cloneWithRef(
 	element: any,

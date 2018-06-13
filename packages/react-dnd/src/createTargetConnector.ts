@@ -1,6 +1,6 @@
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe } from 'dnd-core'
-import shallowEqual from 'shallowequal'
+const shallowEqual = require('shallowequal')
 
 export default function createTargetConnector(backend: Backend) {
 	let currentHandlerId: string

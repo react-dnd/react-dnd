@@ -1,6 +1,5 @@
-// tslint:disable max-classes-per-file
-import isFunction from 'lodash/isFunction'
-import noop from 'lodash/noop'
+const isFunction = require('lodash/isFunction')
+const noop = require('lodash/noop')
 
 /**
  * Provides a set of static methods for creating Disposables.

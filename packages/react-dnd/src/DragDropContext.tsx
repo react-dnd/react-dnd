@@ -1,13 +1,13 @@
-import React, { Component, ComponentClass, Context } from 'react'
+import * as React from 'react'
 import {
 	DragDropManager,
 	BackendFactory,
 	createDragDropManager,
 } from 'dnd-core'
-import invariant from 'invariant'
-import hoistStatics from 'hoist-non-react-statics'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { ContextComponent } from './interfaces'
+const invariant = require('invariant')
+const hoistStatics = require('hoist-non-react-statics')
 
 /**
  * The React context type

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'

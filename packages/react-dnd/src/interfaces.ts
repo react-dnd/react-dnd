@@ -1,4 +1,4 @@
-import React, { StatelessComponent } from 'react'
+import * as React from 'react'
 import { XYCoord, DragDropMonitor, Identifier, DragDropManager } from 'dnd-core'
 
 export { XYCoord }

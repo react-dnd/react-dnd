@@ -9,9 +9,9 @@ import {
 	HoverPayload,
 	HoverOptions,
 } from '../interfaces'
-import invariant from 'invariant'
-import isObject from 'lodash/isObject'
 import matchesType from '../utils/matchesType'
+const invariant = require('invariant')
+const isObject = require('lodash/isObject')
 
 export const BEGIN_DRAG = 'dnd-core/BEGIN_DRAG'
 export const PUBLISH_DRAG_SOURCE = 'dnd-core/PUBLISH_DRAG_SOURCE'

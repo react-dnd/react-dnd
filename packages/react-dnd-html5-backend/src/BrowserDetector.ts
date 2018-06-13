@@ -1,4 +1,4 @@
-import memoize from 'lodash/memoize'
+const memoize = require('lodash/memoize')
 
 declare global {
 	// tslint:disable-next-line interface-name

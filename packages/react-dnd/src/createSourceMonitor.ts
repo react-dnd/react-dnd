@@ -1,14 +1,11 @@
-import invariant from 'invariant'
 import {
 	DragDropManager,
 	DragDropMonitor,
 	Unsubscribe,
 	Listener,
-	XYCoord,
-	Identifier,
-	DragSource,
 } from 'dnd-core'
 import { DragSourceMonitor } from './interfaces'
+const invariant = require('invariant')
 
 let isCallingCanDrag = false
 let isCallingIsDragging = false
