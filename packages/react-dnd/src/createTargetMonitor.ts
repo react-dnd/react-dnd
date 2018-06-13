@@ -1,12 +1,6 @@
-import invariant from 'invariant'
-import {
-	Identifier,
-	DragDropManager,
-	DragDropMonitor,
-	XYCoord,
-	DropTarget,
-} from 'dnd-core'
+import { DragDropManager, DragDropMonitor } from 'dnd-core'
 import { DropTargetMonitor } from './interfaces'
+const invariant = require('invariant')
 
 let isCallingCanDrop = false
 

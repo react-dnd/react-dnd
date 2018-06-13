@@ -1,5 +1,4 @@
 import { Store } from 'redux'
-import invariant from 'invariant'
 import {
 	addSource,
 	addTarget,
@@ -22,8 +21,8 @@ import {
 	validateTargetContract,
 	validateType,
 } from './contracts'
-// @ts-ignore
-import asap from 'asap'
+const invariant = require('invariant')
+const asap = require('asap')
 
 function getNextHandlerId(role: HandlerRole): string {
 	const id = getNextUniqueId().toString()
@@ -52,7 +51,7 @@ function mapContainsValue<T>(map: Map<string, T>, searchValue: T) {
 	const entries = map.entries()
 	let isDone = false
 	do {
-		const { done, value: [key, value] } = entries.next()
+		const { done, value: [, value] } = entries.next()
 		if (value === searchValue) {
 			return true
 		}

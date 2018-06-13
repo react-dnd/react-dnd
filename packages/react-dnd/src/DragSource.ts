@@ -1,13 +1,10 @@
-import React, { Component, ComponentClass, StatelessComponent } from 'react'
-import invariant from 'invariant'
-import isPlainObject from 'lodash/isPlainObject'
-import { Backend, SourceType } from 'dnd-core'
+import * as React from 'react'
+import { SourceType } from 'dnd-core'
 import {
 	DragSourceSpec,
 	DragSourceCollector,
 	DndOptions,
 	DndComponentClass,
-	DragSourceMonitor,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -16,6 +13,8 @@ import createSourceFactory from './createSourceFactory'
 import createSourceMonitor from './createSourceMonitor'
 import createSourceConnector from './createSourceConnector'
 import isValidType from './utils/isValidType'
+const invariant = require('invariant')
+const isPlainObject = require('lodash/isPlainObject')
 
 /**
  * Decorates a component as a dragsource

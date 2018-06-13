@@ -1,4 +1,3 @@
-import without from 'lodash/without'
 import {
 	BEGIN_DRAG,
 	PUBLISH_DRAG_SOURCE,
@@ -7,12 +6,8 @@ import {
 	DROP,
 } from '../actions/dragDrop'
 import { REMOVE_TARGET } from '../actions/registry'
-import {
-	Identifier,
-	Action,
-	BeginDragOptions,
-	SentinelAction,
-} from '../interfaces'
+import { Identifier, Action } from '../interfaces'
+const without = require('lodash/without')
 
 export interface State {
 	itemType: Identifier | Identifier[] | null

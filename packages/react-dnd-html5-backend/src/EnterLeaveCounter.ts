@@ -1,5 +1,5 @@
-import union from 'lodash/union'
-import without from 'lodash/without'
+const union = require('lodash/union')
+const without = require('lodash/without')
 
 export default class EnterLeaveCounter {
 	private entered: any[] = []

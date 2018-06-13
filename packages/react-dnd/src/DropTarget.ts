@@ -1,13 +1,10 @@
-import React, { StatelessComponent, Component, ComponentClass } from 'react'
-import invariant from 'invariant'
-import isPlainObject from 'lodash/isPlainObject'
-import { Backend, Identifier, DragDropMonitor, TargetType } from 'dnd-core'
+import * as React from 'react'
+import { TargetType } from 'dnd-core'
 import {
 	DropTargetSpec,
 	DndOptions,
 	DropTargetCollector,
 	DndComponentClass,
-	DropTargetMonitor,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -16,6 +13,8 @@ import createTargetFactory from './createTargetFactory'
 import createTargetMonitor from './createTargetMonitor'
 import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
+const invariant = require('invariant')
+const isPlainObject = require('lodash/isPlainObject')
 
 export default function DropTarget<
 	P,

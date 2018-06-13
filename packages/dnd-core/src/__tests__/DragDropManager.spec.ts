@@ -1,5 +1,4 @@
 import createTestBackend, { TestBackend } from 'react-dnd-test-backend'
-import isString from 'lodash/isString'
 import * as Types from './types'
 import { NormalSource, NonDraggableSource, BadItemSource } from './sources'
 import {
@@ -11,6 +10,7 @@ import {
 } from './targets'
 import DragDropManagerImpl from '../DragDropManagerImpl'
 import { DragDropManager, Backend, HandlerRegistry } from '../interfaces'
+const isString = require('lodash/isString')
 
 describe('DragDropManager', () => {
 	let manager: DragDropManager<any>
