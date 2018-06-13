@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { DragDropContext } from 'react-dnd'
-import HTML5Backend, { HTML5BackendContext } from 'react-dnd-html5-backend'
+import HTML5Backend from 'react-dnd-html5-backend'
 import BoardSquare from './BoardSquare'
 import Knight from './Knight'
 import './Board.less'
