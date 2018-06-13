@@ -1,5 +1,4 @@
 import * as NativeTypes from './NativeTypes'
-import matchesType from './matchesType'
 import { DragDropMonitor } from 'dnd-core'
 
 function getDataFromDataTransfer(

@@ -1,16 +1,16 @@
 import * as React from 'react'
-import isPlainObject from 'lodash/isPlainObject'
-import invariant from 'invariant'
-import hoistStatics from 'hoist-non-react-statics'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndComponentClass, DndComponent } from './interfaces'
 import { Consumer } from './DragDropContext'
-import shallowEqual from 'shallowequal'
 import {
 	Disposable,
 	CompositeDisposable,
 	SerialDisposable,
 } from './utils/disposables'
+const isPlainObject = require('lodash/isPlainObject')
+const invariant = require('invariant')
+const hoistStatics = require('hoist-non-react-statics')
+const shallowEqual = require('shallowequal')
 
 export interface DecorateHandlerArgs<
 	P,

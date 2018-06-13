@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import './NavBar.less'
 const { DOCS_DEFAULT, EXAMPLES_DEFAULT } = require('../Constants')
 

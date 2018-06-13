@@ -1,8 +1,7 @@
-import invariant from 'invariant'
-import isPlainObject from 'lodash/isPlainObject'
-import { DragDropMonitor, DropTarget } from 'dnd-core'
-import { MemoVoidArrayIterator } from 'lodash'
+import { DropTarget } from 'dnd-core'
 import { DropTargetSpec, DropTargetMonitor } from './interfaces'
+const invariant = require('invariant')
+const isPlainObject = require('lodash/isPlainObject')
 
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 

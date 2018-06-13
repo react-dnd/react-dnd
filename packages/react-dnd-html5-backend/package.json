@@ -20,16 +20,15 @@
 		"start": "npm run watch"
 	},
 	"dependencies": {
-		"@types/lodash": "^4.14.109",
-		"@types/react": "^16.3.16",
-		"@types/shallowequal": "^0.2.2",
 		"autobind-decorator": "^2.1.0",
 		"dnd-core": "^4.0.4",
 		"lodash": "^4.17.10",
 		"shallowequal": "^1.0.2"
 	},
 	"devDependencies": {
-		"@types/node": "^10.3.0",
+		"@types/react": "^16.3.16",
+		"@types/shallowequal": "^0.2.2",
+		"@types/node": "10.3.2",
 		"npm-run-all": "^4.1.2",
 		"react": "^16.4.0",
 		"react-dnd": "^4.0.4",

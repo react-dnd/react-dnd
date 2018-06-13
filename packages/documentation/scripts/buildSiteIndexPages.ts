@@ -1,7 +1,7 @@
-import fs from 'fs'
-import path from 'path'
 import * as Constants from '../site/Constants'
-import flatten from 'lodash/flatten'
+const fs = require('fs')
+const path = require('path')
+const flatten = require('lodash/flatten')
 
 const glob = require('glob')
 const renderPath = require('../__site_prerender__/renderPath').default

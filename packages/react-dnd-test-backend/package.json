@@ -15,7 +15,6 @@
 		"prepublish": "npm run test"
 	},
 	"dependencies": {
-		"@types/lodash": "^4.14.109",
 		"dnd-core": "^4.0.4",
 		"lodash": "^4.17.10"
 	},
@@ -23,6 +22,7 @@
 		"react": ">= 16.3"
 	},
 	"devDependencies": {
+		"@types/node": "10.3.2",
 		"npm-run-all": "^4.1.2",
 		"rimraf": "^2.6.2",
 		"typescript": "^2.9.1"
