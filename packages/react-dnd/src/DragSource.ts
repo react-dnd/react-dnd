@@ -1,13 +1,10 @@
-import React, { Component, ComponentClass, StatelessComponent } from 'react'
-import invariant from 'invariant'
-import isPlainObject from 'lodash/isPlainObject'
-import { Backend, SourceType } from 'dnd-core'
+import * as React from 'react'
+import { SourceType } from 'dnd-core'
 import {
 	DragSourceSpec,
 	DragSourceCollector,
 	DndOptions,
 	DndComponentClass,
-	DragSourceMonitor,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -16,6 +13,8 @@ import createSourceFactory from './createSourceFactory'
 import createSourceMonitor from './createSourceMonitor'
 import createSourceConnector from './createSourceConnector'
 import isValidType from './utils/isValidType'
+const invariant = require('invariant')
+const isPlainObject = require('lodash/isPlainObject')
 
 /**
  * Decorates a component as a dragsource
@@ -42,9 +41,9 @@ export default function DragSource<
 		type,
 		spec,
 		collect,
-		options, // eslint-disable-line prefer-rest-params
+		options,
 	)
-	let getType: any = type
+	let getType: ((props: P) => SourceType) = type as ((props: P) => SourceType)
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type),
@@ -83,8 +82,8 @@ export default function DragSource<
 
 	return function decorateSource<TargetClass extends React.ComponentClass<P>>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
-		return decorateHandler<P, S, TargetComponent, TargetClass>({
+	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
+		return decorateHandler<P, S, TargetComponent, TargetClass, SourceType>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,
 			registerHandler: registerSource,

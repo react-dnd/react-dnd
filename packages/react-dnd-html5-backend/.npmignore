@@ -1,6 +1,3 @@
-test
-.babelrc
+src
 webpack.config.js
-.eslintignore
-.eslintrc
-.travis.yml
+tsconfig.json

@@ -1,6 +1,5 @@
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe } from 'dnd-core'
-
 const shallowEqual = require('shallowequal')
 
 export default function createSourceConnector(backend: Backend) {

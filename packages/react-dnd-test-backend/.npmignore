@@ -1,3 +1,2 @@
-.babelrc
-.eslintrc
-.eslintignore
+src
+tsconfig.json

@@ -1,8 +1,7 @@
-import invariant from 'invariant'
-import isPlainObject from 'lodash/isPlainObject'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
-import { ComponentClass } from 'react'
+const invariant = require('invariant')
+const isPlainObject = require('lodash/isPlainObject')
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']
@@ -54,13 +53,16 @@ export default function createSourceFactory<
 		private props: P | undefined
 		private component: TargetComponent | undefined
 
-		constructor(private monitor: DragSourceMonitor) {}
+		constructor(private monitor: DragSourceMonitor) {
+			this.receiveComponent = this.receiveComponent.bind(this)
+			this.beginDrag = this.beginDrag.bind(this)
+		}
 
 		public receiveProps(props: any) {
 			this.props = props
 		}
 
-		public receiveComponent(component: any) {
+		public receiveComponent(component: TargetComponent) {
 			this.component = component
 		}
 
@@ -90,6 +92,7 @@ export default function createSourceFactory<
 			if (!this.props || !this.component) {
 				return
 			}
+
 			const item = spec.beginDrag(this.props, this.monitor, this.component)
 			if (process.env.NODE_ENV !== 'production') {
 				invariant(

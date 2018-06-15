@@ -1,33 +1,23 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 import { DragDropContextProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Dustbin from '../Single Target/Dustbin'
 import Box from '../Single Target/Box'
-const Frame = require('react-frame-component').default
+const {
+	default: Frame,
+	FrameContextConsumer,
+} = require('react-frame-component')
 
 class FrameBindingContext extends React.Component {
-	public static contextTypes = {
-		window: PropTypes.object,
-	}
-	public static propTypes = {
-		children: PropTypes.node,
-	}
-
-	get dragDropContext() {
-		return {
-			window: this.context.window,
-		}
-	}
-
 	public render() {
 		return (
-			<DragDropContextProvider
-				backend={HTML5Backend}
-				context={this.dragDropContext}
-			>
-				{this.props.children}
-			</DragDropContextProvider>
+			<FrameContextConsumer>
+				{({ window }: any) => (
+					<DragDropContextProvider backend={HTML5Backend} context={window}>
+						{this.props.children}
+					</DragDropContextProvider>
+				)}
+			</FrameContextConsumer>
 		)
 	}
 }

@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-import defaults from 'lodash/defaults'
 import {
 	Backend,
 	DragDropManager,
@@ -22,7 +20,7 @@ import {
 import * as NativeTypes from './NativeTypes'
 import autobind from 'autobind-decorator'
 import { HTML5BackendContext } from './interfaces'
-
+const defaults = require('lodash/defaults')
 const shallowEqual = require('shallowequal')
 
 declare global {
@@ -38,10 +36,11 @@ export default class HTML5Backend implements Backend {
 	private registry: HandlerRegistry
 	private context: HTML5BackendContext
 
-	private sourcePreviewNodes: any = {}
-	private sourcePreviewNodeOptions: any = {}
-	private sourceNodes: any = {}
-	private sourceNodeOptions: any = {}
+	private sourcePreviewNodes: Map<string, Element> = new Map()
+	private sourcePreviewNodeOptions: Map<string, any> = new Map()
+	private sourceNodes: Map<string, Element> = new Map()
+	private sourceNodeOptions: Map<string, any> = new Map()
+
 	private enterLeaveCounter: EnterLeaveCounter = new EnterLeaveCounter()
 
 	private dragStartSourceIds: string[] | null = null
@@ -56,7 +55,6 @@ export default class HTML5Backend implements Backend {
 	private mouseMoveTimeoutTimer: any = null
 	private asyncEndDragFrameId: any = null
 	private dragOverTargetIds: string[] | null = null
-	private mouseMoveTimeoutId: any
 
 	constructor(manager: DragDropManager<any>) {
 		this.actions = manager.getActions()
@@ -101,18 +99,18 @@ export default class HTML5Backend implements Backend {
 	}
 
 	public connectDragPreview(sourceId: string, node: any, options: any) {
-		this.sourcePreviewNodeOptions[sourceId] = options
-		this.sourcePreviewNodes[sourceId] = node
+		this.sourcePreviewNodeOptions.set(sourceId, options)
+		this.sourcePreviewNodes.set(sourceId, node)
 
 		return () => {
-			delete this.sourcePreviewNodes[sourceId]
-			delete this.sourcePreviewNodeOptions[sourceId]
+			this.sourcePreviewNodes.delete(sourceId)
+			this.sourcePreviewNodeOptions.delete(sourceId)
 		}
 	}
 
 	public connectDragSource(sourceId: string, node: any, options: any) {
-		this.sourceNodes[sourceId] = node
-		this.sourceNodeOptions[sourceId] = options
+		this.sourceNodes.set(sourceId, node)
+		this.sourceNodeOptions.set(sourceId, options)
 
 		const handleDragStart = (e: any) => this.handleDragStart(e, sourceId)
 		const handleSelectStart = (e: any) => this.handleSelectStart(e)
@@ -122,8 +120,8 @@ export default class HTML5Backend implements Backend {
 		node.addEventListener('selectstart', handleSelectStart)
 
 		return () => {
-			delete this.sourceNodes[sourceId]
-			delete this.sourceNodeOptions[sourceId]
+			this.sourceNodes.delete(sourceId)
+			this.sourceNodeOptions.delete(sourceId)
 
 			node.removeEventListener('dragstart', handleDragStart)
 			node.removeEventListener('selectstart', handleSelectStart)
@@ -194,8 +192,8 @@ export default class HTML5Backend implements Backend {
 	}
 
 	private getCurrentSourceNodeOptions() {
-		const sourceId = this.monitor.getSourceId()
-		const sourceNodeOptions = this.sourceNodeOptions[sourceId as string]
+		const sourceId = this.monitor.getSourceId() as string
+		const sourceNodeOptions = this.sourceNodeOptions.get(sourceId)
 
 		return defaults(sourceNodeOptions || {}, {
 			dropEffect: this.altKeyPressed ? 'copy' : 'move',
@@ -212,10 +210,8 @@ export default class HTML5Backend implements Backend {
 	}
 
 	private getCurrentSourcePreviewNodeOptions() {
-		const sourceId = this.monitor.getSourceId()
-		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions[
-			sourceId as string
-		]
+		const sourceId = this.monitor.getSourceId() as string
+		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions.get(sourceId)
 
 		return defaults(sourcePreviewNodeOptions || {}, {
 			anchorX: 0.5,
@@ -226,7 +222,7 @@ export default class HTML5Backend implements Backend {
 
 	@autobind
 	private getSourceClientOffset(sourceId: string) {
-		return getNodeClientOffset(this.sourceNodes[sourceId])
+		return getNodeClientOffset(this.sourceNodes.get(sourceId))
 	}
 
 	private isDraggingNativeItem() {
@@ -246,15 +242,6 @@ export default class HTML5Backend implements Backend {
 			this.currentNativeSource,
 		)
 		this.actions.beginDrag([this.currentNativeHandle])
-	}
-
-	@autobind
-	private asyncEndDragNativeItem() {
-		if (this.window) {
-			this.asyncEndDragFrameId = this.window.requestAnimationFrame(
-				this.endDragNativeItem,
-			)
-		}
 	}
 
 	@autobind
@@ -315,7 +302,6 @@ export default class HTML5Backend implements Backend {
 		//   * https://github.com/react-dnd/react-dnd/issues/869
 		//
 		this.mouseMoveTimeoutTimer = setTimeout(() => {
-			this.mouseMoveTimeoutId = null
 			return (
 				this.window &&
 				this.window.addEventListener(
@@ -413,8 +399,8 @@ export default class HTML5Backend implements Backend {
 				// If child drag source refuses drag but parent agrees,
 				// use parent's node as drag image. Neither works in IE though.
 				const sourceId: string = this.monitor.getSourceId() as string
-				const sourceNode = this.sourceNodes[sourceId]
-				const dragPreview = this.sourcePreviewNodes[sourceId] || sourceNode
+				const sourceNode = this.sourceNodes.get(sourceId)
+				const dragPreview = this.sourcePreviewNodes.get(sourceId) || sourceNode
 				const {
 					anchorX,
 					anchorY,
@@ -481,7 +467,7 @@ export default class HTML5Backend implements Backend {
 			// Looks like a Safari bug: dataTransfer.types is null, but there was no draggable.
 			// Just let it drag. It's a native type (URL or text) and will be picked up in
 			// dragenter handler.
-			return // eslint-disable-line no-useless-return
+			return
 		} else {
 			// If by this time no drag source reacted, tell browser not to drag.
 			e.preventDefault()

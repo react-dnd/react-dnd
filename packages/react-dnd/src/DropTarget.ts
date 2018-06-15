@@ -1,13 +1,10 @@
-import React, { StatelessComponent, Component, ComponentClass } from 'react'
-import invariant from 'invariant'
-import isPlainObject from 'lodash/isPlainObject'
-import { Backend, Identifier, DragDropMonitor, TargetType } from 'dnd-core'
+import * as React from 'react'
+import { TargetType } from 'dnd-core'
 import {
 	DropTargetSpec,
 	DndOptions,
 	DropTargetCollector,
 	DndComponentClass,
-	DropTargetMonitor,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -16,6 +13,8 @@ import createTargetFactory from './createTargetFactory'
 import createTargetMonitor from './createTargetMonitor'
 import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
+const invariant = require('invariant')
+const isPlainObject = require('lodash/isPlainObject')
 
 export default function DropTarget<
 	P,
@@ -34,9 +33,9 @@ export default function DropTarget<
 		type,
 		spec,
 		collect,
-		options, // eslint-disable-line prefer-rest-params
+		options,
 	)
-	let getType: any = type
+	let getType: ((props: P) => TargetType) = type as ((props: P) => TargetType)
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type, true),
@@ -75,8 +74,8 @@ export default function DropTarget<
 
 	return function decorateTarget<TargetClass extends React.ComponentClass<P>>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, S, TargetComponent, TargetClass> {
-		return decorateHandler<P, S, TargetComponent, TargetClass>({
+	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
+		return decorateHandler<P, S, TargetComponent, TargetClass, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,

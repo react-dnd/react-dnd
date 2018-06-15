@@ -1,27 +1,21 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
-import isPlainObject from 'lodash/isPlainObject'
-import invariant from 'invariant'
-import hoistStatics from 'hoist-non-react-statics'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndComponentClass, DndComponent } from './interfaces'
-
-const shallowEqual = require('shallowequal')
-const {
+import { Consumer } from './DragDropContext'
+import {
 	Disposable,
 	CompositeDisposable,
 	SerialDisposable,
-} = require('disposables')
-
-const isClassComponent = (Comp: any) => {
-	return (
-		!!Comp && !!Comp.prototype && typeof Comp.prototype.render === 'function'
-	)
-}
+} from './utils/disposables'
+const isPlainObject = require('lodash/isPlainObject')
+const invariant = require('invariant')
+const hoistStatics = require('hoist-non-react-statics')
+const shallowEqual = require('shallowequal')
 
 export interface DecorateHandlerArgs<
 	P,
-	ComponentClass extends React.ComponentClass<P>
+	ComponentClass extends React.ComponentClass<P>,
+	ItemIdType
 > {
 	DecoratedComponent: ComponentClass
 	createHandler: any
@@ -29,20 +23,17 @@ export interface DecorateHandlerArgs<
 	createConnector: any
 	registerHandler: any
 	containerDisplayName: string
-	getType: any
+	getType: (props: P) => ItemIdType
 	collect: any
 	options: any
-}
-
-interface HandlerReceiver {
-	receiveHandlerId: (handlerId: Identifier) => void
 }
 
 export default function decorateHandler<
 	P,
 	S,
 	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
-	TargetClass extends React.ComponentClass<P>
+	TargetClass extends React.ComponentClass<P>,
+	ItemIdType
 >({
 	DecoratedComponent,
 	createHandler,
@@ -53,52 +44,46 @@ export default function decorateHandler<
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<P, TargetClass>): TargetClass &
-	DndComponentClass<P, S, TargetComponent, TargetClass> {
+}: DecorateHandlerArgs<P, TargetClass, ItemIdType>): TargetClass &
+	DndComponentClass<P, TargetComponent, TargetClass> {
 	const { arePropsEqual = shallowEqual } = options
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
+	interface HandlerReceiver {
+		receiveHandlerId: (handlerId: Identifier | null) => void
+	}
+	interface Handler {
+		receiveProps(props: P): void
+		receiveComponent(props: P): void
+	}
+
+	interface HandlerConnector extends HandlerReceiver {
+		hooks: any[]
+	}
+
 	class DragDropContainer extends React.Component<P, S>
-		implements DndComponent<P, S, TargetComponent> {
+		implements DndComponent<P, TargetComponent> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
-		public static contextTypes = {
-			dragDropManager: PropTypes.object.isRequired,
-		}
 
 		private handlerId: string | undefined
 		private decoratedComponentInstance: any
-		private manager: DragDropManager<any>
-		private handlerMonitor: HandlerReceiver
-		private handlerConnector: any
-		private handler: any
+		private manager: DragDropManager<any> | undefined
+		private handlerMonitor: HandlerReceiver | undefined
+		private handlerConnector: HandlerConnector | undefined
+		private handler: Handler | undefined
 		private disposable: any
 		private isCurrentlyMounted: boolean = false
 		private currentType: any
 
-		constructor(props: P, context: any) {
-			super(props, context)
+		constructor(props: P) {
+			super(props)
 			this.handleChange = this.handleChange.bind(this)
 			this.handleChildRef = this.handleChildRef.bind(this)
 
-			invariant(
-				typeof this.context.dragDropManager === 'object',
-				'Could not find the drag and drop manager in the context of %s. ' +
-					'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-					'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
-				displayName,
-				displayName,
-			)
-
-			this.manager = this.context.dragDropManager
-			this.handlerMonitor = createMonitor(this.manager)
-			this.handlerConnector = createConnector(this.manager.getBackend())
-			this.handler = createHandler(this.handlerMonitor)
-
 			this.disposable = new SerialDisposable()
 			this.receiveProps(props)
-			this.state = this.getCurrentState()
 			this.dispose()
 		}
 
@@ -125,9 +110,9 @@ export default function decorateHandler<
 			this.handleChange()
 		}
 
-		public componentWillReceiveProps(nextProps: any) {
-			if (!arePropsEqual(nextProps, this.props)) {
-				this.receiveProps(nextProps)
+		public componentDidUpdate(prevProps: P) {
+			if (!arePropsEqual(this.props, prevProps)) {
+				this.receiveProps(this.props)
 				this.handleChange()
 			}
 		}
@@ -138,11 +123,18 @@ export default function decorateHandler<
 		}
 
 		public receiveProps(props: any) {
+			if (!this.handler) {
+				return
+			}
 			this.handler.receiveProps(props)
 			this.receiveType(getType(props))
 		}
 
 		public receiveType(type: any) {
+			if (!this.handlerMonitor || !this.manager || !this.handlerConnector) {
+				return
+			}
+
 			if (type === this.currentType) {
 				return
 			}
@@ -186,15 +178,23 @@ export default function decorateHandler<
 
 		public dispose() {
 			this.disposable.dispose()
-			this.handlerConnector.receiveHandlerId(null)
+			if (this.handlerConnector) {
+				this.handlerConnector.receiveHandlerId(null)
+			}
 		}
 
 		public handleChildRef(component: any) {
+			if (!this.handler) {
+				return
+			}
 			this.decoratedComponentInstance = component
 			this.handler.receiveComponent(component)
 		}
 
 		public getCurrentState() {
+			if (!this.handlerConnector) {
+				return {}
+			}
 			const nextState = collect(
 				this.handlerConnector.hooks,
 				this.handlerMonitor,
@@ -217,17 +217,49 @@ export default function decorateHandler<
 
 		public render() {
 			return (
-				<DecoratedComponent
-					{...this.props}
-					{...this.state}
-					ref={
-						isClassComponent(DecoratedComponent) ? this.handleChildRef : null
-					}
-				/>
+				<Consumer>
+					{({ dragDropManager }) => {
+						if (dragDropManager === undefined) {
+							return null
+						}
+						this.receiveDragDropManager(dragDropManager)
+
+						// Let componentDidMount fire to initialize the collected state
+						if (!this.isCurrentlyMounted) {
+							return null
+						}
+
+						return (
+							<DecoratedComponent
+								{...this.props}
+								{...this.state}
+								ref={this.handleChildRef}
+							/>
+						)
+					}}
+				</Consumer>
 			)
+		}
+
+		private receiveDragDropManager(dragDropManager: DragDropManager<any>) {
+			if (this.manager !== undefined) {
+				return
+			}
+			this.manager = dragDropManager
+			invariant(
+				typeof dragDropManager === 'object',
+				'Could not find the drag and drop manager in the context of %s. ' +
+					'Make sure to wrap the top-level component of your app with DragDropContext. ' +
+					'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
+				displayName,
+				displayName,
+			)
+			this.handlerMonitor = createMonitor(dragDropManager)
+			this.handlerConnector = createConnector(dragDropManager.getBackend())
+			this.handler = createHandler(this.handlerMonitor)
 		}
 	}
 
 	return hoistStatics(DragDropContainer, DecoratedComponent) as TargetClass &
-		DndComponentClass<P, S, TargetComponent, TargetClass>
+		DndComponentClass<P, TargetComponent, TargetClass>
 }

@@ -1,4 +1,4 @@
-import React, { StatelessComponent } from 'react'
+import * as React from 'react'
 import { XYCoord, DragDropMonitor, Identifier, DragDropManager } from 'dnd-core'
 
 export { XYCoord }
@@ -20,9 +20,8 @@ export interface ContextComponent<
  */
 export interface DndComponent<
 	P,
-	S,
-	C extends React.Component<P, S> | React.StatelessComponent<P>
-> extends React.Component<P, S> {
+	C extends React.Component<P, any> | React.StatelessComponent<P>
+> extends React.Component<P> {
 	getDecoratedComponentInstance(): C
 	getHandlerId(): Identifier
 }
@@ -44,12 +43,11 @@ export interface ContextComponentClass<
  */
 export interface DndComponentClass<
 	P,
-	S,
-	C extends React.Component<P, S> | React.StatelessComponent<P>,
+	C extends React.Component<P, any> | React.StatelessComponent<P>,
 	ComponentClass extends React.ComponentClass<P>
 > extends React.ComponentClass<P> {
 	DecoratedComponent: ComponentClass
-	new (props?: P, context?: any): DndComponent<P, S, C>
+	new (props?: P, context?: any): DndComponent<P, C>
 }
 
 export interface DragSourceMonitor extends DragDropMonitor {

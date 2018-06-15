@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Container from './Container'
 
 export interface SortableStressTestState {
@@ -17,7 +17,7 @@ export default class SortableStressTest extends React.Component<
 
 	public componentDidMount() {
 		// Won't fire on server.
-		this.setState({ shouldRender: true }) // eslint-disable-line react/no-did-mount-set-state
+		this.setState({ shouldRender: true })
 	}
 
 	public render() {

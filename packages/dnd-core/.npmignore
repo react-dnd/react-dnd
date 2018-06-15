@@ -1,6 +1,2 @@
-test
-.babelrc
-.eslintrc
-.travis.yml
-coverage
-test-results.xml
+src
+tsconfig.json

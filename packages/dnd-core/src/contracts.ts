@@ -1,6 +1,5 @@
-import invariant from 'invariant'
-import isArray from 'lodash/isArray'
 import { DragSource, DropTarget, Identifier } from './interfaces'
+const invariant = require('invariant')
 
 export function validateSourceContract(source: DragSource) {
 	invariant(
@@ -36,7 +35,7 @@ export function validateType(
 	type: Identifier | Identifier[],
 	allowArray?: boolean,
 ) {
-	if (allowArray && isArray(type)) {
+	if (allowArray && Array.isArray(type)) {
 		type.forEach(t => validateType(t, false))
 		return
 	}

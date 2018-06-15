@@ -1,5 +1,5 @@
 import TestBackend from './TestBackend'
-import { DragDropManager, DragDropActions } from 'dnd-core'
+import { DragDropManager } from 'dnd-core'
 export { TestBackend } from './TestBackend'
 
 export default function createBackend(manager: DragDropManager<any>) {

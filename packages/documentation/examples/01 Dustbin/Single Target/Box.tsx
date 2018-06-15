@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 import {
 	ConnectDragSource,
 	DragSource,
@@ -36,7 +35,7 @@ const boxSource = {
 		const dropResult = monitor.getDropResult()
 
 		if (dropResult) {
-			alert(`You dropped ${item.name} into ${dropResult.name}!`) // eslint-disable-line no-alert
+			alert(`You dropped ${item.name} into ${dropResult.name}!`)
 		}
 	},
 }
@@ -50,12 +49,6 @@ const boxSource = {
 	}),
 )
 export default class Box extends React.Component<BoxProps> {
-	public static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-		name: PropTypes.string.isRequired,
-	}
-
 	public render() {
 		const { isDragging, connectDragSource } = this.props
 		const { name } = this.props

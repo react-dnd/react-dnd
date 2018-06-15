@@ -1,8 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import {
 	DragDropContext,
 	DragDropContextProvider,
-	DragSourceMonitor,
 	DropTargetMonitor,
 } from 'react-dnd'
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'

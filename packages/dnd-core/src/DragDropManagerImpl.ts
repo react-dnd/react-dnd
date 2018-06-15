@@ -72,7 +72,7 @@ export default class DragDropManagerImpl<Context>
 				const action: ActionCreator<any> = (actions as any)[
 					key
 				] as ActionCreator<any>
-				;(boundActions as any)[key] = bindActionCreator(action) // eslint-disable-line no-param-reassign
+				;(boundActions as any)[key] = bindActionCreator(action)
 				return boundActions
 			},
 			{} as DragDropActions,
