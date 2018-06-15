@@ -392,7 +392,12 @@ export default class HTML5Backend implements Backend {
 			this.actions.endDrag()
 		}
 
-		// Don't publish the source just yet (see why below)
+    this.actions.initCoords(dragStartSourceIds || [], {
+      getSourceClientOffset: this.getSourceClientOffset,
+      clientOffset,
+    })
+
+    // Don't publish the source just yet (see why below)
 		this.actions.beginDrag(dragStartSourceIds || [], {
 			publishSource: false,
 			getSourceClientOffset: this.getSourceClientOffset,

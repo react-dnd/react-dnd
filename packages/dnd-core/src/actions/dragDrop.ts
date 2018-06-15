@@ -1,19 +1,20 @@
 import {
-	Action,
-	DragDropManager,
-	XYCoord,
-	BeginDragPayload,
-	BeginDragOptions,
-	SentinelAction,
-	DropPayload,
-	HoverPayload,
-	HoverOptions,
+  Action,
+  DragDropManager,
+  XYCoord,
+  BeginDragPayload,
+  BeginDragOptions,
+  SentinelAction,
+  DropPayload,
+  HoverPayload,
+  HoverOptions, InitCoordsOptions, InitCoordsPayload,
 } from '../interfaces'
 import invariant from 'invariant'
 import isArray from 'lodash/isArray'
 import isObject from 'lodash/isObject'
 import matchesType from '../utils/matchesType'
 
+export const INIT_COORDS = 'dnd-core/INIT_COORDS'
 export const BEGIN_DRAG = 'dnd-core/BEGIN_DRAG'
 export const PUBLISH_DRAG_SOURCE = 'dnd-core/PUBLISH_DRAG_SOURCE'
 export const HOVER = 'dnd-core/HOVER'
@@ -24,6 +25,47 @@ export default function createDragDropActions<Context>(
 	manager: DragDropManager<Context>,
 ) {
 	return {
+	  initCoords(
+	    sourceIds: string[] = [],
+      {
+        clientOffset,
+        getSourceClientOffset
+      }: InitCoordsOptions
+    ): Action<InitCoordsPayload> | undefined {
+      const monitor = manager.getMonitor()
+      const registry = manager.getRegistry()
+      invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
+
+      for (const s of sourceIds) {
+        invariant(registry.getSource(s), 'Expected sourceIds to be registered.')
+      }
+      let sourceId = null
+      for (let i = sourceIds.length - 1; i >= 0; i--) {
+        if (monitor.canDragSource(sourceIds[i])) {
+          sourceId = sourceIds[i]
+          break
+        }
+      }
+      if (sourceId === null) {
+        return
+      }
+
+      let sourceClientOffset: XYCoord | null = null
+      if (clientOffset) {
+        invariant(
+          typeof getSourceClientOffset === 'function',
+          'When clientOffset is provided, getSourceClientOffset must be a function.',
+        )
+        sourceClientOffset = (getSourceClientOffset as any)(sourceId)
+      }
+      return {
+        type: INIT_COORDS,
+        payload: {
+          clientOffset: clientOffset || null,
+          sourceClientOffset: sourceClientOffset || null,
+        },
+      }
+    },
 		beginDrag(
 			sourceIds: string[] = [],
 			{
