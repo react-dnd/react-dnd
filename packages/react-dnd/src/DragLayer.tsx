@@ -7,6 +7,7 @@ const hoistStatics = require('hoist-non-react-statics')
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const shallowEqual = require('shallowequal')
+const isClassComponent = require('recompose/isClassComponent').default
 
 export default function DragLayer<Props, CollectedProps = {}>(
 	collect: DragLayerCollector<Props, CollectedProps>,
@@ -46,7 +47,7 @@ export default function DragLayer<Props, CollectedProps = {}>(
 			private isCurrentlyMounted: boolean = false
 			private unsubscribeFromOffsetChange: Unsubscribe | undefined
 			private unsubscribeFromStateChange: Unsubscribe | undefined
-			private child: any
+			private ref: React.RefObject<any> = React.createRef()
 
 			constructor(props: Props) {
 				super(props)
@@ -55,10 +56,10 @@ export default function DragLayer<Props, CollectedProps = {}>(
 
 			public getDecoratedComponentInstance() {
 				invariant(
-					this.child,
+					this.ref.current,
 					'In order to access an instance of the decorated component it can not be a stateless component.',
 				)
-				return this.child
+				return this.ref.current
 			}
 
 			public shouldComponentUpdate(nextProps: any, nextState: any) {
@@ -102,9 +103,7 @@ export default function DragLayer<Props, CollectedProps = {}>(
 								<Decorated
 									{...this.props}
 									{...this.state}
-									ref={(child: any) => {
-										this.child = child
-									}}
+									ref={isClassComponent(Decorated) ? this.ref : undefined}
 								/>
 							)
 						}}

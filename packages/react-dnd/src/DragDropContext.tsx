@@ -8,6 +8,7 @@ import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { ContextComponent } from './interfaces'
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
+const isClassComponent = require('recompose/isClassComponent').default
 
 /**
  * The React context type
@@ -70,22 +71,22 @@ export function DragDropContext<Props>(
 			| React.ComponentClass<Props>
 			| React.StatelessComponent<Props>
 	>(DecoratedComponent: TargetClass): TargetClass & ContextComponent<Props> {
-		const displayName =
-			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
+		const Decorated = DecoratedComponent as any
+		const displayName = Decorated.displayName || Decorated.name || 'Component'
 
 		class DragDropContextContainer extends React.Component<Props>
 			implements ContextComponent<Props> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
 
-			private child: any
+			private ref: React.RefObject<any> = React.createRef()
 
 			public getDecoratedComponentInstance() {
 				invariant(
-					this.child,
+					this.ref.current,
 					'In order to access an instance of the decorated component it can not be a stateless component.',
 				)
-				return this.child
+				return this.ref.current
 			}
 
 			public getManager() {
@@ -95,9 +96,9 @@ export function DragDropContext<Props>(
 			public render() {
 				return (
 					<Provider value={childContext}>
-						<DecoratedComponent
+						<Decorated
 							{...this.props}
-							ref={(child: any) => (this.child = child)}
+							ref={isClassComponent(Decorated) ? this.ref : undefined}
 						/>
 					</Provider>
 				)

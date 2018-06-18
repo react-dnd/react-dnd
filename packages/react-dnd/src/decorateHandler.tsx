@@ -217,11 +217,6 @@ export default function decorateHandler<Props, TargetClass, ItemIdType>({
 							return null
 						}
 
-						const props: any = Object.assign({}, this.props)
-						if (this.handler && isClassComponent(Decorated)) {
-							props.ref = this.handler.ref
-						}
-
 						return (
 							<Decorated
 								{...this.props}
