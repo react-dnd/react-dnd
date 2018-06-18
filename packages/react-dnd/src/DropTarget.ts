@@ -16,15 +16,9 @@ import isValidType from './utils/isValidType'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
-export default function DropTarget<
-	Props,
-	TargetComponent extends
-		| React.Component<Props>
-		| React.StatelessComponent<Props>,
-	CollectedProps
->(
+export default function DropTarget<Props, CollectedProps = {}>(
 	type: TargetType | ((props: Props) => TargetType),
-	spec: DropTargetSpec<Props, TargetComponent>,
+	spec: DropTargetSpec<Props>,
 	collect: DropTargetCollector<CollectedProps>,
 	options: DndOptions<Props> = {},
 ) {
@@ -79,10 +73,8 @@ export default function DropTarget<
 		TargetClass extends
 			| React.ComponentClass<Props>
 			| React.StatelessComponent<Props>
-	>(
-		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<Props, TargetComponent, TargetClass> {
-		return decorateHandler<Props, TargetComponent, TargetClass, TargetType>({
+	>(DecoratedComponent: TargetClass): TargetClass & DndComponentClass<Props> {
+		return decorateHandler<Props, TargetClass, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,

@@ -6,54 +6,37 @@ export { XYCoord }
 /**
  * The React Component that manages the DragDropContext for its children.
  */
-export interface ContextComponent<
-	Props,
-	Component extends React.Component<Props> | React.StatelessComponent<Props>
-> extends React.Component<Props> {
-	getDecoratedComponentInstance(): Component
+export interface ContextComponent<Props> extends React.Component<Props> {
+	getDecoratedComponentInstance(): React.Component<Props>
 	getManager(): DragDropManager<any>
 }
 
 /**
  * A DnD interactive component
  */
-export interface DndComponent<
-	Props,
-	Component extends
-		| React.Component<Props, any>
-		| React.StatelessComponent<Props>
-> extends React.Component<Props> {
-	getDecoratedComponentInstance(): Component | null
+export interface DndComponent<Props> extends React.Component<Props> {
+	getDecoratedComponentInstance(): React.Component<Props> | null
 	getHandlerId(): Identifier
 }
 
 /**
  * The class interface for a context component
  */
-export interface ContextComponentClass<
-	Props,
-	Component extends React.Component<Props> | React.StatelessComponent<Props>,
-	ComponentClass extends
+export interface ContextComponentClass<Props>
+	extends React.ComponentClass<Props> {
+	DecoratedComponent:
 		| React.ComponentClass<Props>
 		| React.StatelessComponent<Props>
-> extends React.ComponentClass<Props> {
-	DecoratedComponent: ComponentClass
-	new (props?: Props, context?: any): ContextComponent<Props, Component>
+	new (props?: Props, context?: any): ContextComponent<Props>
 }
 /**
  * The class interface for a DnD component
  */
-export interface DndComponentClass<
-	Props,
-	Component extends
-		| React.Component<Props, any>
-		| React.StatelessComponent<Props>,
-	ComponentClass extends
+export interface DndComponentClass<Props> extends React.ComponentClass<Props> {
+	DecoratedComponent:
 		| React.ComponentClass<Props>
 		| React.StatelessComponent<Props>
-> extends React.ComponentClass<Props> {
-	DecoratedComponent: ComponentClass
-	new (props?: Props, context?: any): DndComponent<Props, Component>
+	new (props?: Props, context?: any): DndComponent<Props>
 }
 
 export interface DragSourceMonitor extends DragDropMonitor {
@@ -242,12 +225,7 @@ export interface DragLayerMonitor {
 /**
  * Interface for the DropTarget specification object
  */
-export interface DropTargetSpec<
-	Props,
-	TargetComponent extends
-		| React.Component<Props>
-		| React.StatelessComponent<Props>
-> {
+export interface DropTargetSpec<Props> {
 	/**
 	 * Optional.
 	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
@@ -258,11 +236,7 @@ export interface DropTargetSpec<
 	 * the source's endDrag method are good places to fire Flux actions. This method will not be called if canDrop()
 	 * is defined and returns false.
 	 */
-	drop?: (
-		props: Props,
-		monitor: DropTargetMonitor,
-		component: TargetComponent | null,
-	) => any
+	drop?: (props: Props, monitor: DropTargetMonitor, component: any) => any
 
 	/**
 	 * Optional.
@@ -270,11 +244,7 @@ export interface DropTargetSpec<
 	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
-	hover?: (
-		props: Props,
-		monitor: DropTargetMonitor,
-		component: TargetComponent | null,
-	) => void
+	hover?: (props: Props, monitor: DropTargetMonitor, component: any) => void
 
 	/**
 	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
@@ -284,13 +254,7 @@ export interface DropTargetSpec<
 	canDrop?: (props: Props, monitor: DropTargetMonitor) => boolean
 }
 
-export interface DragSourceSpec<
-	Props,
-	TargetComponent extends
-		| React.Component<Props>
-		| React.StatelessComponent<Props>,
-	DragObject
-> {
+export interface DragSourceSpec<Props, DragObject> {
 	/**
 	 * Required.
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
@@ -302,7 +266,7 @@ export interface DragSourceSpec<
 	beginDrag: (
 		props: Props,
 		monitor: DragSourceMonitor,
-		component: TargetComponent | null,
+		component: any,
 	) => DragObject
 
 	/**
@@ -313,11 +277,7 @@ export interface DragSourceSpec<
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	endDrag?: (
-		props: Props,
-		monitor: DragSourceMonitor,
-		component: TargetComponent | null,
-	) => void
+	endDrag?: (props: Props, monitor: DragSourceMonitor, component: any) => void
 
 	/**
 	 * Optional.

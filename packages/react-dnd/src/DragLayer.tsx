@@ -8,13 +8,7 @@ const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const shallowEqual = require('shallowequal')
 
-export default function DragLayer<
-	Props,
-	TargetComponent extends
-		| React.Component<Props>
-		| React.StatelessComponent<Props> = React.StatelessComponent<Props>,
-	CollectedProps = {}
->(
+export default function DragLayer<Props, CollectedProps = {}>(
 	collect: DragLayerCollector<Props, CollectedProps>,
 	options: DndOptions<Props> = {},
 ) {
@@ -36,9 +30,7 @@ export default function DragLayer<
 		TargetClass extends
 			| React.ComponentClass<Props>
 			| React.StatelessComponent<Props>
-	>(
-		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<Props, TargetComponent, TargetClass> {
+	>(DecoratedComponent: TargetClass): TargetClass & DndComponentClass<Props> {
 		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
 		const displayName = Decorated.displayName || Decorated.name || 'Component'
@@ -164,6 +156,6 @@ export default function DragLayer<
 		}
 
 		return hoistStatics(DragLayerContainer, DecoratedComponent) as TargetClass &
-			DndComponentClass<Props, TargetComponent, TargetClass>
+			DndComponentClass<Props>
 	}
 }

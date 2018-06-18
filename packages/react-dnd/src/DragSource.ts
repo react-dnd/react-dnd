@@ -23,16 +23,9 @@ const isPlainObject = require('lodash/isPlainObject')
  * @param collect The props collector function
  * @param options DnD optinos
  */
-export default function DragSource<
-	Props,
-	TargetComponent extends
-		| React.Component<Props>
-		| React.StatelessComponent<Props>,
-	CollectedProps,
-	DragObject
->(
+export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 	type: SourceType | ((props: Props) => SourceType),
-	spec: DragSourceSpec<Props, TargetComponent, DragObject>,
+	spec: DragSourceSpec<Props, DragObject>,
 	collect: DragSourceCollector<CollectedProps>,
 	options: DndOptions<Props> = {},
 ) {
@@ -87,10 +80,8 @@ export default function DragSource<
 		TargetClass extends
 			| React.ComponentClass<Props>
 			| React.StatelessComponent<Props>
-	>(
-		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<Props, TargetComponent, TargetClass> {
-		return decorateHandler<Props, TargetComponent, TargetClass, SourceType>({
+	>(DecoratedComponent: TargetClass): TargetClass & DndComponentClass<Props> {
+		return decorateHandler<Props, TargetClass, SourceType>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,
 			registerHandler: registerSource,

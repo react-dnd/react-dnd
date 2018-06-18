@@ -11,12 +11,9 @@ export interface Target extends DropTarget {
 	receiveMonitor(monitor: any): void
 }
 
-export default function createTargetFactory<
-	Props,
-	TargetComponent extends
-		| React.Component<Props>
-		| React.StatelessComponent<Props>
->(spec: DropTargetSpec<Props, TargetComponent>) {
+export default function createTargetFactory<Props>(
+	spec: DropTargetSpec<Props>,
+) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -40,7 +37,7 @@ export default function createTargetFactory<
 
 	class TargetImpl implements Target {
 		private props: Props | null = null
-		private ref: React.RefObject<TargetComponent> = createRef()
+		private ref: React.RefObject<any> = createRef()
 
 		constructor(private monitor: DropTargetMonitor) {}
 

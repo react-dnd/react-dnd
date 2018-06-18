@@ -13,14 +13,10 @@ const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')
 
-export interface DecorateHandlerArgs<
-	Props,
-	ComponentClass extends
+export interface DecorateHandlerArgs<Props, ItemIdType> {
+	DecoratedComponent:
 		| React.ComponentClass<Props>
-		| React.StatelessComponent<Props>,
-	ItemIdType
-> {
-	DecoratedComponent: ComponentClass
+		| React.StatelessComponent<Props>
 	createHandler: any
 	createMonitor: any
 	createConnector: any
@@ -31,16 +27,7 @@ export interface DecorateHandlerArgs<
 	options: any
 }
 
-export default function decorateHandler<
-	Props,
-	TargetComponent extends
-		| React.Component<Props>
-		| React.StatelessComponent<Props>,
-	TargetClass extends
-		| React.ComponentClass<Props>
-		| React.StatelessComponent<Props>,
-	ItemIdType
->({
+export default function decorateHandler<Props, TargetClass, ItemIdType>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,
@@ -50,8 +37,8 @@ export default function decorateHandler<
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<Props, TargetClass, ItemIdType>): TargetClass &
-	DndComponentClass<Props, TargetComponent, TargetClass> {
+}: DecorateHandlerArgs<Props, ItemIdType>): TargetClass &
+	DndComponentClass<Props> {
 	const { arePropsEqual = shallowEqual } = options
 	const Decorated: any = DecoratedComponent
 
@@ -62,7 +49,7 @@ export default function decorateHandler<
 		receiveHandlerId: (handlerId: Identifier | null) => void
 	}
 	interface Handler {
-		ref: React.RefObject<TargetComponent>
+		ref: React.RefObject<any>
 		receiveProps(props: Props): void
 	}
 
@@ -71,7 +58,7 @@ export default function decorateHandler<
 	}
 
 	class DragDropContainer extends React.Component<Props>
-		implements DndComponent<Props, TargetComponent> {
+		implements DndComponent<Props> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 
@@ -101,7 +88,7 @@ export default function decorateHandler<
 			if (!this.handler) {
 				return null
 			}
-			return this.handler.ref.current
+			return this.handler.ref.current as any
 		}
 
 		public shouldComponentUpdate(nextProps: any, nextState: any) {
@@ -271,5 +258,5 @@ export default function decorateHandler<
 	}
 
 	return hoistStatics(DragDropContainer, DecoratedComponent) as TargetClass &
-		DndComponentClass<Props, TargetComponent, TargetClass>
+		DndComponentClass<Props>
 }

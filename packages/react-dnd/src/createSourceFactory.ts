@@ -11,13 +11,9 @@ export interface Source extends DragSource {
 	receiveProps(props: any): void
 }
 
-export default function createSourceFactory<
-	Props,
-	TargetComponent extends
-		| React.Component<Props>
-		| React.StatelessComponent<Props>,
-	DragObject
->(spec: DragSourceSpec<Props, TargetComponent, DragObject>) {
+export default function createSourceFactory<Props, DragObject = {}>(
+	spec: DragSourceSpec<Props, DragObject>,
+) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -52,7 +48,7 @@ export default function createSourceFactory<
 
 	class SourceImpl implements Source {
 		private props: Props | null = null
-		private ref: React.RefObject<TargetComponent> = createRef()
+		private ref: React.RefObject<any> = createRef()
 
 		constructor(private monitor: DragSourceMonitor) {
 			this.beginDrag = this.beginDrag.bind(this)
