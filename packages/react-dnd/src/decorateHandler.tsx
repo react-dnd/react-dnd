@@ -54,8 +54,8 @@ export default function decorateHandler<
 		receiveHandlerId: (handlerId: Identifier | null) => void
 	}
 	interface Handler {
+		ref: React.RefObject<TargetComponent>
 		receiveProps(props: P): void
-		receiveComponent(props: P): void
 	}
 
 	interface HandlerConnector extends HandlerReceiver {
@@ -68,7 +68,6 @@ export default function decorateHandler<
 		public static displayName = `${containerDisplayName}(${displayName})`
 
 		private handlerId: string | undefined
-		private decoratedComponentInstance: any
 		private manager: DragDropManager<any> | undefined
 		private handlerMonitor: HandlerReceiver | undefined
 		private handlerConnector: HandlerConnector | undefined
@@ -80,7 +79,6 @@ export default function decorateHandler<
 		constructor(props: P) {
 			super(props)
 			this.handleChange = this.handleChange.bind(this)
-			this.handleChildRef = this.handleChildRef.bind(this)
 
 			this.disposable = new SerialDisposable()
 			this.receiveProps(props)
@@ -92,7 +90,10 @@ export default function decorateHandler<
 		}
 
 		public getDecoratedComponentInstance() {
-			return this.decoratedComponentInstance
+			if (!this.handler) {
+				return null
+			}
+			return this.handler.ref.current
 		}
 
 		public shouldComponentUpdate(nextProps: any, nextState: any) {
@@ -183,14 +184,6 @@ export default function decorateHandler<
 			}
 		}
 
-		public handleChildRef(component: any) {
-			if (!this.handler) {
-				return
-			}
-			this.decoratedComponentInstance = component
-			this.handler.receiveComponent(component)
-		}
-
 		public getCurrentState() {
 			if (!this.handlerConnector) {
 				return {}
@@ -233,7 +226,7 @@ export default function decorateHandler<
 							<DecoratedComponent
 								{...this.props}
 								{...this.state}
-								ref={this.handleChildRef}
+								ref={this.handler && this.handler.ref}
 							/>
 						)
 					}}

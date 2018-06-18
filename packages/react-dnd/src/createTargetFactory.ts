@@ -1,3 +1,4 @@
+import { createRef } from 'react'
 import { DropTarget } from 'dnd-core'
 import { DropTargetSpec, DropTargetMonitor } from './interfaces'
 const invariant = require('invariant')
@@ -8,7 +9,6 @@ const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 export interface Target extends DropTarget {
 	receiveProps(props: any): void
 	receiveMonitor(monitor: any): void
-	receiveComponent(component: any): void
 }
 
 export default function createTargetFactory<
@@ -38,13 +38,10 @@ export default function createTargetFactory<
 	})
 
 	class TargetImpl implements Target {
-		private props: any
-		private component: any
+		private props: P | null = null
+		private ref: React.RefObject<TargetComponent> = createRef()
 
-		constructor(private monitor: DropTargetMonitor) {
-			this.props = null
-			this.component = null
-		}
+		constructor(private monitor: DropTargetMonitor) {}
 
 		public receiveProps(props: any) {
 			this.props = props
@@ -54,16 +51,12 @@ export default function createTargetFactory<
 			this.monitor = monitor
 		}
 
-		public receiveComponent(component: any) {
-			this.component = component
-		}
-
 		public canDrop(): boolean {
 			if (!spec.canDrop) {
 				return true
 			}
 
-			return spec.canDrop(this.props, this.monitor)
+			return spec.canDrop(this.props as P, this.monitor)
 		}
 
 		public hover() {
@@ -71,7 +64,7 @@ export default function createTargetFactory<
 				return
 			}
 
-			spec.hover(this.props, this.monitor, this.component)
+			spec.hover(this.props as P, this.monitor, this.ref.current)
 		}
 
 		public drop() {
@@ -79,7 +72,11 @@ export default function createTargetFactory<
 				return undefined
 			}
 
-			const dropResult = spec.drop(this.props, this.monitor, this.component)
+			const dropResult = spec.drop(
+				this.props as P,
+				this.monitor,
+				this.ref.current,
+			)
 			if (process.env.NODE_ENV !== 'production') {
 				invariant(
 					typeof dropResult === 'undefined' || isPlainObject(dropResult),

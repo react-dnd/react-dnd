@@ -22,8 +22,11 @@ const boxTarget = {
 	drop(
 		props: ContainerProps,
 		monitor: DropTargetMonitor,
-		component: Container,
+		component: Container | null,
 	) {
+		if (!component) {
+			return
+		}
 		const item = monitor.getItem()
 		const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
 		const left = Math.round(item.left + delta.x)

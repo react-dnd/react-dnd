@@ -22,8 +22,11 @@ const boxTarget = {
 	drop(
 		props: DustbinProps,
 		monitor: DropTargetMonitor,
-		component: React.Component,
+		component: React.Component | null,
 	) {
+		if (!component) {
+			return
+		}
 		const hasDroppedOnChild = monitor.didDrop()
 		if (hasDroppedOnChild && !props.greedy) {
 			return
