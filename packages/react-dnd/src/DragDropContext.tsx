@@ -66,7 +66,9 @@ export function DragDropContext<Props>(
 	const childContext = createChildContext(backendFactory, backendContext)
 
 	return function decorateContext<
-		TargetClass extends React.ComponentClass<Props>
+		TargetClass extends
+			| React.ComponentClass<Props>
+			| React.StatelessComponent<Props>
 	>(DecoratedComponent: TargetClass): TargetClass & ContextComponent<Props> {
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'

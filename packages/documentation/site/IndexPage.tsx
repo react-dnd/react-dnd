@@ -33,8 +33,6 @@ const Examples: { [key: string]: any } = {
 		.default,
 	DUSTBIN_IFRAME: require('../examples/01 Dustbin/Single Target in iframe')
 		.default,
-	DUSTBIN_SFC: require('../examples/01 Dustbin/Single Target using SFCs')
-		.default,
 	DUSTBIN_COPY_OR_MOVE: require('../examples/01 Dustbin/Copy or Move').default,
 	DUSTBIN_MULTIPLE_TARGETS: require('../examples/01 Dustbin/Multiple Targets')
 		.default,
