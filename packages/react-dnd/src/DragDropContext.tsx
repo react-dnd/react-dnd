@@ -59,21 +59,24 @@ export const DragDropContextProvider: React.SFC<
  * @param backendContext The backend context
  */
 export function DragDropContext<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
+	Props,
+	TargetComponent extends
+		| React.Component<Props>
+		| React.StatelessComponent<Props>
 >(backendFactory: BackendFactory, backendContext?: any) {
 	checkDecoratorArguments('DragDropContext', 'backend', backendFactory)
 	const childContext = createChildContext(backendFactory, backendContext)
 
-	return function decorateContext<TargetClass extends React.ComponentClass<P>>(
+	return function decorateContext<
+		TargetClass extends React.ComponentClass<Props>
+	>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & ContextComponent<P, S, TargetComponent> {
+	): TargetClass & ContextComponent<Props, TargetComponent> {
 		const displayName =
 			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-		class DragDropContextContainer extends React.Component<P, S>
-			implements ContextComponent<P, S, TargetComponent> {
+		class DragDropContextContainer extends React.Component<Props>
+			implements ContextComponent<Props, TargetComponent> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
 

@@ -13,10 +13,9 @@ export interface Source extends DragSource {
 
 export default function createSourceFactory<
 	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	TargetComponent extends React.Component<P> | React.StatelessComponent<P>,
 	DragObject
->(spec: DragSourceSpec<P, S, TargetComponent, DragObject>) {
+>(spec: DragSourceSpec<P, TargetComponent, DragObject>) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,

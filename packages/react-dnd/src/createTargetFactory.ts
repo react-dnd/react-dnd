@@ -12,10 +12,11 @@ export interface Target extends DropTarget {
 }
 
 export default function createTargetFactory<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
->(spec: DropTargetSpec<P, S, TargetComponent>) {
+	Props,
+	TargetComponent extends
+		| React.Component<Props>
+		| React.StatelessComponent<Props>
+>(spec: DropTargetSpec<Props, TargetComponent>) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -38,7 +39,7 @@ export default function createTargetFactory<
 	})
 
 	class TargetImpl implements Target {
-		private props: P | null = null
+		private props: Props | null = null
 		private ref: React.RefObject<TargetComponent> = createRef()
 
 		constructor(private monitor: DropTargetMonitor) {}
@@ -56,7 +57,7 @@ export default function createTargetFactory<
 				return true
 			}
 
-			return spec.canDrop(this.props as P, this.monitor)
+			return spec.canDrop(this.props as Props, this.monitor)
 		}
 
 		public hover() {
@@ -64,7 +65,7 @@ export default function createTargetFactory<
 				return
 			}
 
-			spec.hover(this.props as P, this.monitor, this.ref.current)
+			spec.hover(this.props as Props, this.monitor, this.ref.current)
 		}
 
 		public drop() {
@@ -73,7 +74,7 @@ export default function createTargetFactory<
 			}
 
 			const dropResult = spec.drop(
-				this.props as P,
+				this.props as Props,
 				this.monitor,
 				this.ref.current,
 			)

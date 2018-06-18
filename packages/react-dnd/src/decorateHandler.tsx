@@ -13,8 +13,8 @@ const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')
 
 export interface DecorateHandlerArgs<
-	P,
-	ComponentClass extends React.ComponentClass<P>,
+	Props,
+	ComponentClass extends React.ComponentClass<Props>,
 	ItemIdType
 > {
 	DecoratedComponent: ComponentClass
@@ -23,16 +23,17 @@ export interface DecorateHandlerArgs<
 	createConnector: any
 	registerHandler: any
 	containerDisplayName: string
-	getType: (props: P) => ItemIdType
+	getType: (props: Props) => ItemIdType
 	collect: any
 	options: any
 }
 
 export default function decorateHandler<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
-	TargetClass extends React.ComponentClass<P>,
+	Props,
+	TargetComponent extends
+		| React.Component<Props>
+		| React.StatelessComponent<Props>,
+	TargetClass extends React.ComponentClass<Props>,
 	ItemIdType
 >({
 	DecoratedComponent,
@@ -44,8 +45,8 @@ export default function decorateHandler<
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<P, TargetClass, ItemIdType>): TargetClass &
-	DndComponentClass<P, TargetComponent, TargetClass> {
+}: DecorateHandlerArgs<Props, TargetClass, ItemIdType>): TargetClass &
+	DndComponentClass<Props, TargetComponent, TargetClass> {
 	const { arePropsEqual = shallowEqual } = options
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
@@ -55,15 +56,15 @@ export default function decorateHandler<
 	}
 	interface Handler {
 		ref: React.RefObject<TargetComponent>
-		receiveProps(props: P): void
+		receiveProps(props: Props): void
 	}
 
 	interface HandlerConnector extends HandlerReceiver {
 		hooks: any[]
 	}
 
-	class DragDropContainer extends React.Component<P, S>
-		implements DndComponent<P, TargetComponent> {
+	class DragDropContainer extends React.Component<Props>
+		implements DndComponent<Props, TargetComponent> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 
@@ -76,7 +77,7 @@ export default function decorateHandler<
 		private isCurrentlyMounted: boolean = false
 		private currentType: any
 
-		constructor(props: P) {
+		constructor(props: Props) {
 			super(props)
 			this.handleChange = this.handleChange.bind(this)
 
@@ -111,7 +112,7 @@ export default function decorateHandler<
 			this.handleChange()
 		}
 
-		public componentDidUpdate(prevProps: P) {
+		public componentDidUpdate(prevProps: Props) {
 			if (!arePropsEqual(this.props, prevProps)) {
 				this.receiveProps(this.props)
 				this.handleChange()
@@ -254,5 +255,5 @@ export default function decorateHandler<
 	}
 
 	return hoistStatics(DragDropContainer, DecoratedComponent) as TargetClass &
-		DndComponentClass<P, TargetComponent, TargetClass>
+		DndComponentClass<Props, TargetComponent, TargetClass>
 }

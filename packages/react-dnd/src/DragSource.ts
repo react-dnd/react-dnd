@@ -24,16 +24,17 @@ const isPlainObject = require('lodash/isPlainObject')
  * @param options DnD optinos
  */
 export default function DragSource<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
+	Props,
+	TargetComponent extends
+		| React.Component<Props>
+		| React.StatelessComponent<Props>,
 	CollectedProps,
 	DragObject
 >(
-	type: SourceType | ((props: P) => SourceType),
-	spec: DragSourceSpec<P, S, TargetComponent, DragObject>,
+	type: SourceType | ((props: Props) => SourceType),
+	spec: DragSourceSpec<Props, TargetComponent, DragObject>,
 	collect: DragSourceCollector<CollectedProps>,
-	options: DndOptions<P> = {},
+	options: DndOptions<Props> = {},
 ) {
 	checkDecoratorArguments(
 		'DragSource',
@@ -43,7 +44,9 @@ export default function DragSource<
 		collect,
 		options,
 	)
-	let getType: ((props: P) => SourceType) = type as ((props: P) => SourceType)
+	let getType: ((props: Props) => SourceType) = type as ((
+		props: Props,
+	) => SourceType)
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type),
@@ -80,10 +83,12 @@ export default function DragSource<
 		collect,
 	)
 
-	return function decorateSource<TargetClass extends React.ComponentClass<P>>(
+	return function decorateSource<
+		TargetClass extends React.ComponentClass<Props>
+	>(
 		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
-		return decorateHandler<P, S, TargetComponent, TargetClass, SourceType>({
+	): TargetClass & DndComponentClass<Props, TargetComponent, TargetClass> {
+		return decorateHandler<Props, TargetComponent, TargetClass, SourceType>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,
 			registerHandler: registerSource,

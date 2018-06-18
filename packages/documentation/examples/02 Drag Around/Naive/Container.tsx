@@ -45,7 +45,7 @@ export interface ContainerState {
 	boxes: { [key: string]: { top: number; left: number; title: string } }
 }
 
-@DragDropContext<ContainerProps, ContainerState, Container>(HTML5Backend)
+@DragDropContext<ContainerProps, Container>(HTML5Backend)
 @DropTarget(ItemTypes.BOX, boxTarget, (connect: any) => ({
 	connectDropTarget: connect.dropTarget(),
 }))
