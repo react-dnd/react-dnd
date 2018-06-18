@@ -254,7 +254,7 @@ export interface DropTargetSpec<
 	drop?: (
 		props: P,
 		monitor: DropTargetMonitor,
-		component: TargetComponent,
+		component: TargetComponent | null,
 	) => any
 
 	/**
@@ -266,7 +266,7 @@ export interface DropTargetSpec<
 	hover?: (
 		props: P,
 		monitor: DropTargetMonitor,
-		component: TargetComponent,
+		component: TargetComponent | null,
 	) => void
 
 	/**
@@ -294,7 +294,7 @@ export interface DragSourceSpec<
 	beginDrag: (
 		props: P,
 		monitor: DragSourceMonitor,
-		component: TargetComponent,
+		component: TargetComponent | null,
 	) => DragObject
 
 	/**
@@ -308,7 +308,7 @@ export interface DragSourceSpec<
 	endDrag?: (
 		props: P,
 		monitor: DragSourceMonitor,
-		component: TargetComponent,
+		component: TargetComponent | null,
 	) => void
 
 	/**

@@ -51,7 +51,7 @@ export default function createSourceFactory<
 
 	class SourceImpl implements Source {
 		private props: P | undefined
-		private component: TargetComponent | undefined
+		private component: TargetComponent | null = null
 
 		constructor(private monitor: DragSourceMonitor) {
 			this.receiveComponent = this.receiveComponent.bind(this)
@@ -89,7 +89,7 @@ export default function createSourceFactory<
 		}
 
 		public beginDrag() {
-			if (!this.props || !this.component) {
+			if (!this.props) {
 				return
 			}
 
@@ -107,14 +107,9 @@ export default function createSourceFactory<
 		}
 
 		public endDrag() {
-			if (!this.props || !this.component) {
-				return
+			if (this.props && spec.endDrag) {
+				spec.endDrag(this.props, this.monitor, this.component)
 			}
-			if (!spec.endDrag) {
-				return
-			}
-
-			spec.endDrag(this.props, this.monitor, this.component)
 		}
 	}
 

@@ -39,7 +39,7 @@ export default function createTargetFactory<
 
 	class TargetImpl implements Target {
 		private props: any
-		private component: any
+		private component: TargetComponent | null
 
 		constructor(private monitor: DropTargetMonitor) {
 			this.props = null

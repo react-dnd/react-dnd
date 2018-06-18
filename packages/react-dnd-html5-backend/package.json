@@ -37,8 +37,5 @@
 		"ts-loader": "^4.2.0",
 		"typescript": "^2.9.1",
 		"webpack": "^4.6.0"
-	},
-	"peerDependencies": {
-		"react": ">= 16.3"
 	}
 }
