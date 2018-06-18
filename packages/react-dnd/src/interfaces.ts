@@ -8,9 +8,9 @@ export { XYCoord }
  */
 export interface ContextComponent<
 	Props,
-	C extends React.Component<Props> | React.StatelessComponent<Props>
+	Component extends React.Component<Props> | React.StatelessComponent<Props>
 > extends React.Component<Props> {
-	getDecoratedComponentInstance(): C
+	getDecoratedComponentInstance(): Component
 	getManager(): DragDropManager<any>
 }
 
@@ -33,7 +33,9 @@ export interface DndComponent<
 export interface ContextComponentClass<
 	Props,
 	Component extends React.Component<Props> | React.StatelessComponent<Props>,
-	ComponentClass extends React.ComponentClass<Props>
+	ComponentClass extends
+		| React.ComponentClass<Props>
+		| React.StatelessComponent<Props>
 > extends React.ComponentClass<Props> {
 	DecoratedComponent: ComponentClass
 	new (props?: Props, context?: any): ContextComponent<Props, Component>
@@ -42,12 +44,16 @@ export interface ContextComponentClass<
  * The class interface for a DnD component
  */
 export interface DndComponentClass<
-	P,
-	C extends React.Component<P, any> | React.StatelessComponent<P>,
-	ComponentClass extends React.ComponentClass<P>
-> extends React.ComponentClass<P> {
+	Props,
+	Component extends
+		| React.Component<Props, any>
+		| React.StatelessComponent<Props>,
+	ComponentClass extends
+		| React.ComponentClass<Props>
+		| React.StatelessComponent<Props>
+> extends React.ComponentClass<Props> {
 	DecoratedComponent: ComponentClass
-	new (props?: P, context?: any): DndComponent<P, C>
+	new (props?: Props, context?: any): DndComponent<Props, Component>
 }
 
 export interface DragSourceMonitor extends DragDropMonitor {

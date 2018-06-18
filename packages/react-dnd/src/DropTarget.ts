@@ -76,7 +76,9 @@ export default function DropTarget<
 	)
 
 	return function decorateTarget<
-		TargetClass extends React.ComponentClass<Props>
+		TargetClass extends
+			| React.ComponentClass<Props>
+			| React.StatelessComponent<Props>
 	>(
 		DecoratedComponent: TargetClass,
 	): TargetClass & DndComponentClass<Props, TargetComponent, TargetClass> {

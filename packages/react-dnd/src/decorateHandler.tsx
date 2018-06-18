@@ -7,6 +7,7 @@ import {
 	CompositeDisposable,
 	SerialDisposable,
 } from './utils/disposables'
+const isClassComponent = require('recompose/isClassComponent').default
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
@@ -14,7 +15,9 @@ const shallowEqual = require('shallowequal')
 
 export interface DecorateHandlerArgs<
 	Props,
-	ComponentClass extends React.ComponentClass<Props>,
+	ComponentClass extends
+		| React.ComponentClass<Props>
+		| React.StatelessComponent<Props>,
 	ItemIdType
 > {
 	DecoratedComponent: ComponentClass
@@ -33,7 +36,9 @@ export default function decorateHandler<
 	TargetComponent extends
 		| React.Component<Props>
 		| React.StatelessComponent<Props>,
-	TargetClass extends React.ComponentClass<Props>,
+	TargetClass extends
+		| React.ComponentClass<Props>
+		| React.StatelessComponent<Props>,
 	ItemIdType
 >({
 	DecoratedComponent,
@@ -48,6 +53,8 @@ export default function decorateHandler<
 }: DecorateHandlerArgs<Props, TargetClass, ItemIdType>): TargetClass &
 	DndComponentClass<Props, TargetComponent, TargetClass> {
 	const { arePropsEqual = shallowEqual } = options
+	const Decorated: any = DecoratedComponent
+
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
@@ -223,11 +230,20 @@ export default function decorateHandler<
 							return null
 						}
 
+						const props: any = Object.assign({}, this.props)
+						if (this.handler && isClassComponent(Decorated)) {
+							props.ref = this.handler.ref
+						}
+
 						return (
-							<DecoratedComponent
+							<Decorated
 								{...this.props}
 								{...this.state}
-								ref={this.handler && this.handler.ref}
+								ref={
+									this.handler && isClassComponent(Decorated)
+										? this.handler.ref
+										: undefined
+								}
 							/>
 						)
 					}}

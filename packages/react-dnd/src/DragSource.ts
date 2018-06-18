@@ -84,7 +84,9 @@ export default function DragSource<
 	)
 
 	return function decorateSource<
-		TargetClass extends React.ComponentClass<Props>
+		TargetClass extends
+			| React.ComponentClass<Props>
+			| React.StatelessComponent<Props>
 	>(
 		DecoratedComponent: TargetClass,
 	): TargetClass & DndComponentClass<Props, TargetComponent, TargetClass> {
