@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-html5-backend",
-	"version": "4.0.6",
+	"version": "5.0.0",
 	"description": "HTML5 backend for React DnD",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -31,7 +31,7 @@
 		"@types/shallowequal": "^0.2.2",
 		"npm-run-all": "^4.1.2",
 		"react": "^16.4.0",
-		"react-dnd": "^4.0.5",
+		"react-dnd": "^5.0.0",
 		"react-dnd-test-backend": "^4.0.5",
 		"rimraf": "^2.6.2",
 		"ts-loader": "^4.2.0",
