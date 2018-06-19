@@ -7,13 +7,12 @@ const hoistStatics = require('hoist-non-react-statics')
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const shallowEqual = require('shallowequal')
+const isClassComponent = require('recompose/isClassComponent').default
 
-export default function DragLayer<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
-	CollectedProps
->(collect: DragLayerCollector<P, CollectedProps>, options: DndOptions<P> = {}) {
+export default function DragLayer<Props, CollectedProps = {}>(
+	collect: DragLayerCollector<Props, CollectedProps>,
+	options: DndOptions<Props> = {},
+) {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options)
 	invariant(
 		typeof collect === 'function',
@@ -28,14 +27,16 @@ export default function DragLayer<
 		options,
 	)
 
-	return function decorateLayer<TargetClass extends React.ComponentClass<P>>(
-		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
+	return function decorateLayer<
+		TargetClass extends
+			| React.ComponentClass<Props>
+			| React.StatelessComponent<Props>
+	>(DecoratedComponent: TargetClass): TargetClass & DndComponentClass<Props> {
+		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
-		const displayName =
-			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
+		const displayName = Decorated.displayName || Decorated.name || 'Component'
 
-		class DragLayerContainer extends React.Component<P> {
+		class DragLayerContainer extends React.Component<Props> {
 			public static displayName = `DragLayer(${displayName})`
 
 			public get DecoratedComponent() {
@@ -46,19 +47,19 @@ export default function DragLayer<
 			private isCurrentlyMounted: boolean = false
 			private unsubscribeFromOffsetChange: Unsubscribe | undefined
 			private unsubscribeFromStateChange: Unsubscribe | undefined
-			private child: any
+			private ref: React.RefObject<any> = React.createRef()
 
-			constructor(props: P) {
+			constructor(props: Props) {
 				super(props)
 				this.handleChange = this.handleChange.bind(this)
 			}
 
 			public getDecoratedComponentInstance() {
 				invariant(
-					this.child,
+					this.ref.current,
 					'In order to access an instance of the decorated component it can not be a stateless component.',
 				)
-				return this.child
+				return this.ref.current
 			}
 
 			public shouldComponentUpdate(nextProps: any, nextState: any) {
@@ -99,12 +100,10 @@ export default function DragLayer<
 							}
 
 							return (
-								<DecoratedComponent
+								<Decorated
 									{...this.props}
 									{...this.state}
-									ref={(child: any) => {
-										this.child = child
-									}}
+									ref={isClassComponent(Decorated) ? this.ref : undefined}
 								/>
 							)
 						}}
@@ -156,6 +155,6 @@ export default function DragLayer<
 		}
 
 		return hoistStatics(DragLayerContainer, DecoratedComponent) as TargetClass &
-			DndComponentClass<P, TargetComponent, TargetClass>
+			DndComponentClass<Props>
 	}
 }
