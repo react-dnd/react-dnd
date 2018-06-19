@@ -22,8 +22,11 @@ const boxTarget = {
 	drop(
 		props: ContainerProps,
 		monitor: DropTargetMonitor,
-		component: Container,
+		component: Container | null,
 	) {
+		if (!component) {
+			return
+		}
 		const item = monitor.getItem()
 		const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
 		const left = Math.round(item.left + delta.x)
@@ -42,7 +45,7 @@ export interface ContainerState {
 	boxes: { [key: string]: { top: number; left: number; title: string } }
 }
 
-@DragDropContext<ContainerProps, ContainerState, Container>(HTML5Backend)
+@DragDropContext(HTML5Backend)
 @DropTarget(ItemTypes.BOX, boxTarget, (connect: any) => ({
 	connectDropTarget: connect.dropTarget(),
 }))

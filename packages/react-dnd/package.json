@@ -24,6 +24,7 @@
 		"hoist-non-react-statics": "^2.5.0",
 		"invariant": "^2.1.0",
 		"lodash": "^4.17.10",
+		"recompose": "^0.27.1",
 		"shallowequal": "^1.0.2"
 	},
 	"devDependencies": {

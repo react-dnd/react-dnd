@@ -6,48 +6,37 @@ export { XYCoord }
 /**
  * The React Component that manages the DragDropContext for its children.
  */
-export interface ContextComponent<
-	P,
-	S,
-	C extends React.Component<P, S> | React.StatelessComponent<P>
-> extends React.Component<P, S> {
-	getDecoratedComponentInstance(): C
+export interface ContextComponent<Props> extends React.Component<Props> {
+	getDecoratedComponentInstance(): React.Component<Props>
 	getManager(): DragDropManager<any>
 }
 
 /**
  * A DnD interactive component
  */
-export interface DndComponent<
-	P,
-	C extends React.Component<P, any> | React.StatelessComponent<P>
-> extends React.Component<P> {
-	getDecoratedComponentInstance(): C
+export interface DndComponent<Props> extends React.Component<Props> {
+	getDecoratedComponentInstance(): React.Component<Props> | null
 	getHandlerId(): Identifier
 }
 
 /**
  * The class interface for a context component
  */
-export interface ContextComponentClass<
-	P,
-	S,
-	C extends React.Component<P, S> | React.StatelessComponent<P>,
-	ComponentClass extends React.ComponentClass<P>
-> extends React.ComponentClass<P> {
-	DecoratedComponent: ComponentClass
-	new (props?: P, context?: any): ContextComponent<P, S, C>
+export interface ContextComponentClass<Props>
+	extends React.ComponentClass<Props> {
+	DecoratedComponent:
+		| React.ComponentClass<Props>
+		| React.StatelessComponent<Props>
+	new (props?: Props, context?: any): ContextComponent<Props>
 }
 /**
  * The class interface for a DnD component
  */
-export interface DndComponentClass<
-	P,
-	C extends React.Component<P, any> | React.StatelessComponent<P>,
-	ComponentClass extends React.ComponentClass<P>
-> extends React.ComponentClass<P> {
-	DecoratedComponent: ComponentClass
-	new (props?: P, context?: any): DndComponent<P, C>
+export interface DndComponentClass<Props> extends React.ComponentClass<Props> {
+	DecoratedComponent:
+		| React.ComponentClass<Props>
+		| React.StatelessComponent<Props>
+	new (props?: Props, context?: any): DndComponent<Props>
 }
 
 export interface DragSourceMonitor extends DragDropMonitor {
@@ -236,11 +225,7 @@ export interface DragLayerMonitor {
 /**
  * Interface for the DropTarget specification object
  */
-export interface DropTargetSpec<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
-> {
+export interface DropTargetSpec<Props> {
 	/**
 	 * Optional.
 	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
@@ -251,11 +236,7 @@ export interface DropTargetSpec<
 	 * the source's endDrag method are good places to fire Flux actions. This method will not be called if canDrop()
 	 * is defined and returns false.
 	 */
-	drop?: (
-		props: P,
-		monitor: DropTargetMonitor,
-		component: TargetComponent,
-	) => any
+	drop?: (props: Props, monitor: DropTargetMonitor, component: any) => any
 
 	/**
 	 * Optional.
@@ -263,26 +244,17 @@ export interface DropTargetSpec<
 	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
-	hover?: (
-		props: P,
-		monitor: DropTargetMonitor,
-		component: TargetComponent,
-	) => void
+	hover?: (props: Props, monitor: DropTargetMonitor, component: any) => void
 
 	/**
 	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
 	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
-	canDrop?: (props: P, monitor: DropTargetMonitor) => boolean
+	canDrop?: (props: Props, monitor: DropTargetMonitor) => boolean
 }
 
-export interface DragSourceSpec<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
-	DragObject
-> {
+export interface DragSourceSpec<Props, DragObject> {
 	/**
 	 * Required.
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
@@ -292,9 +264,9 @@ export interface DragSourceSpec<
 	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
 	 */
 	beginDrag: (
-		props: P,
+		props: Props,
 		monitor: DragSourceMonitor,
-		component: TargetComponent,
+		component: any,
 	) => DragObject
 
 	/**
@@ -305,11 +277,7 @@ export interface DragSourceSpec<
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	endDrag?: (
-		props: P,
-		monitor: DragSourceMonitor,
-		component: TargetComponent,
-	) => void
+	endDrag?: (props: Props, monitor: DragSourceMonitor, component: any) => void
 
 	/**
 	 * Optional.
@@ -317,7 +285,7 @@ export interface DragSourceSpec<
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: (props: P, monitor: DragSourceMonitor) => boolean
+	canDrag?: (props: Props, monitor: DragSourceMonitor) => boolean
 
 	/**
 	 * Optional.
@@ -329,20 +297,20 @@ export interface DragSourceSpec<
 	 *
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
-	isDragging?: (props: P, monitor: DragSourceMonitor) => boolean
+	isDragging?: (props: Props, monitor: DragSourceMonitor) => boolean
 }
 
 /**
  * Options for the Drag Sources, Drop Tragets, and Drag Layers annotation
  */
-export interface DndOptions<P> {
-	arePropsEqual?: (first: P, second: P) => boolean
+export interface DndOptions<Props> {
+	arePropsEqual?: (first: Props, second: Props) => boolean
 }
 
-export type DragElementWrapper<O> = <P>(
-	elementOrNode: React.ReactElement<P> | Element,
-	options?: O,
-) => React.ReactElement<P>
+export type DragElementWrapper<Options> = <Props>(
+	elementOrNode: React.ReactElement<Props> | Element,
+	options?: Options,
+) => React.ReactElement<Props>
 
 export type ConnectDragSource = DragElementWrapper<DragSourceOptions>
 export type ConnectDragPreview = DragElementWrapper<DragPreviewOptions>
@@ -436,9 +404,9 @@ export interface DropTargetConnector {
 	dropTarget(): ConnectDropTarget
 }
 
-export type ConnectDropTarget = <P>(
-	elementOrNode: React.ReactElement<P>,
-) => React.ReactElement<P>
+export type ConnectDropTarget = <Props>(
+	elementOrNode: React.ReactElement<Props>,
+) => React.ReactElement<Props>
 
 export type DragSourceCollector<CollectedProps> = (
 	connect: DragSourceConnector,

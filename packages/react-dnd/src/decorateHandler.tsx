@@ -7,34 +7,27 @@ import {
 	CompositeDisposable,
 	SerialDisposable,
 } from './utils/disposables'
+const isClassComponent = require('recompose/isClassComponent').default
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')
 
-export interface DecorateHandlerArgs<
-	P,
-	ComponentClass extends React.ComponentClass<P>,
-	ItemIdType
-> {
-	DecoratedComponent: ComponentClass
+export interface DecorateHandlerArgs<Props, ItemIdType> {
+	DecoratedComponent:
+		| React.ComponentClass<Props>
+		| React.StatelessComponent<Props>
 	createHandler: any
 	createMonitor: any
 	createConnector: any
 	registerHandler: any
 	containerDisplayName: string
-	getType: (props: P) => ItemIdType
+	getType: (props: Props) => ItemIdType
 	collect: any
 	options: any
 }
 
-export default function decorateHandler<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
-	TargetClass extends React.ComponentClass<P>,
-	ItemIdType
->({
+export default function decorateHandler<Props, TargetClass, ItemIdType>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,
@@ -44,9 +37,11 @@ export default function decorateHandler<
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<P, TargetClass, ItemIdType>): TargetClass &
-	DndComponentClass<P, TargetComponent, TargetClass> {
+}: DecorateHandlerArgs<Props, ItemIdType>): TargetClass &
+	DndComponentClass<Props> {
 	const { arePropsEqual = shallowEqual } = options
+	const Decorated: any = DecoratedComponent
+
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
@@ -54,21 +49,20 @@ export default function decorateHandler<
 		receiveHandlerId: (handlerId: Identifier | null) => void
 	}
 	interface Handler {
-		receiveProps(props: P): void
-		receiveComponent(props: P): void
+		ref: React.RefObject<any>
+		receiveProps(props: Props): void
 	}
 
 	interface HandlerConnector extends HandlerReceiver {
 		hooks: any[]
 	}
 
-	class DragDropContainer extends React.Component<P, S>
-		implements DndComponent<P, TargetComponent> {
+	class DragDropContainer extends React.Component<Props>
+		implements DndComponent<Props> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 
 		private handlerId: string | undefined
-		private decoratedComponentInstance: any
 		private manager: DragDropManager<any> | undefined
 		private handlerMonitor: HandlerReceiver | undefined
 		private handlerConnector: HandlerConnector | undefined
@@ -77,10 +71,9 @@ export default function decorateHandler<
 		private isCurrentlyMounted: boolean = false
 		private currentType: any
 
-		constructor(props: P) {
+		constructor(props: Props) {
 			super(props)
 			this.handleChange = this.handleChange.bind(this)
-			this.handleChildRef = this.handleChildRef.bind(this)
 
 			this.disposable = new SerialDisposable()
 			this.receiveProps(props)
@@ -92,7 +85,10 @@ export default function decorateHandler<
 		}
 
 		public getDecoratedComponentInstance() {
-			return this.decoratedComponentInstance
+			if (!this.handler) {
+				return null
+			}
+			return this.handler.ref.current as any
 		}
 
 		public shouldComponentUpdate(nextProps: any, nextState: any) {
@@ -110,7 +106,7 @@ export default function decorateHandler<
 			this.handleChange()
 		}
 
-		public componentDidUpdate(prevProps: P) {
+		public componentDidUpdate(prevProps: Props) {
 			if (!arePropsEqual(this.props, prevProps)) {
 				this.receiveProps(this.props)
 				this.handleChange()
@@ -183,14 +179,6 @@ export default function decorateHandler<
 			}
 		}
 
-		public handleChildRef(component: any) {
-			if (!this.handler) {
-				return
-			}
-			this.decoratedComponentInstance = component
-			this.handler.receiveComponent(component)
-		}
-
 		public getCurrentState() {
 			if (!this.handlerConnector) {
 				return {}
@@ -230,10 +218,14 @@ export default function decorateHandler<
 						}
 
 						return (
-							<DecoratedComponent
+							<Decorated
 								{...this.props}
 								{...this.state}
-								ref={this.handleChildRef}
+								ref={
+									this.handler && isClassComponent(Decorated)
+										? this.handler.ref
+										: undefined
+								}
 							/>
 						)
 					}}
@@ -261,5 +253,5 @@ export default function decorateHandler<
 	}
 
 	return hoistStatics(DragDropContainer, DecoratedComponent) as TargetClass &
-		DndComponentClass<P, TargetComponent, TargetClass>
+		DndComponentClass<Props>
 }
