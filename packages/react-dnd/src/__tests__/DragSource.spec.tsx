@@ -30,4 +30,16 @@ describe('DragSource', () => {
 
 		expect(DecoratedComponent).toBeDefined()
 	})
+
+	it('can apply to a ref-forwarded component', () => {
+		const RefForwarded: React.RefForwardingComponent<any, {}> = (props, ref) =>
+			null
+		const DecoratedComponent = DragSource(
+			'abc',
+			{ beginDrag: () => null },
+			() => ({}),
+		)(RefForwarded)
+
+		expect(DecoratedComponent).toBeDefined()
+	})
 })
