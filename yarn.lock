@@ -68,12 +68,6 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/recompose@^0.26.1":
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/@types/recompose/-/recompose-0.26.1.tgz#a21c5728dea223551882b763335cb1bc641bf1d0"
-  dependencies:
-    "@types/react" "*"
-
 "@types/shallowequal@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@types/shallowequal/-/shallowequal-0.2.2.tgz#71918d93f1e9c242790c31b456969ff9f6028005"
