@@ -20,12 +20,6 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-const boxTarget = {
-	drop() {
-		return { name: 'Dustbin' }
-	},
-}
-
 export interface DustbinProps {
 	canDrop?: boolean
 	isOver?: boolean
@@ -57,7 +51,11 @@ const Dustbin: React.SFC<DustbinProps> = ({
 
 export default DropTarget(
 	ItemTypes.BOX,
-	boxTarget,
+	{
+		drop() {
+			return { name: 'Dustbin' }
+		},
+	},
 	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),

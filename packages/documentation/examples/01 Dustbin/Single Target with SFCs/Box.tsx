@@ -23,23 +23,6 @@ export interface BoxProps {
 	connectDragSource?: ConnectDragSource
 }
 
-const boxSource = {
-	beginDrag(props: BoxProps) {
-		return {
-			name: props.name,
-		}
-	},
-
-	endDrag(props: BoxProps, monitor: DragSourceMonitor) {
-		const item = monitor.getItem()
-		const dropResult = monitor.getDropResult()
-
-		if (dropResult) {
-			alert(`You dropped ${item.name} into ${dropResult.name}!`)
-		}
-	},
-}
-
 const Box: React.SFC<BoxProps> = ({ isDragging, connectDragSource, name }) => {
 	const opacity = isDragging ? 0.4 : 1
 	return connectDragSource
@@ -49,7 +32,21 @@ const Box: React.SFC<BoxProps> = ({ isDragging, connectDragSource, name }) => {
 
 export default DragSource(
 	ItemTypes.BOX,
-	boxSource,
+	{
+		beginDrag(props: BoxProps) {
+			return {
+				name: props.name,
+			}
+		},
+		endDrag(props: BoxProps, monitor: DragSourceMonitor) {
+			const item = monitor.getItem()
+			const dropResult = monitor.getDropResult()
+
+			if (dropResult) {
+				alert(`You dropped ${item.name} into ${dropResult.name}!`)
+			}
+		},
+	},
 	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
 		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),
