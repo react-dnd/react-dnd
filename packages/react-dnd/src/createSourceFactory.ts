@@ -1,3 +1,4 @@
+import { createRef } from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
 const invariant = require('invariant')
@@ -8,15 +9,11 @@ const REQUIRED_SPEC_METHODS = ['beginDrag']
 
 export interface Source extends DragSource {
 	receiveProps(props: any): void
-	receiveComponent(component: any): void
 }
 
-export default function createSourceFactory<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
-	DragObject
->(spec: DragSourceSpec<P, S, TargetComponent, DragObject>) {
+export default function createSourceFactory<Props, DragObject = {}>(
+	spec: DragSourceSpec<Props, DragObject>,
+) {
 	Object.keys(spec).forEach(key => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -50,20 +47,15 @@ export default function createSourceFactory<
 	})
 
 	class SourceImpl implements Source {
-		private props: P | undefined
-		private component: TargetComponent | undefined
+		private props: Props | null = null
+		private ref: React.RefObject<any> = createRef()
 
 		constructor(private monitor: DragSourceMonitor) {
-			this.receiveComponent = this.receiveComponent.bind(this)
 			this.beginDrag = this.beginDrag.bind(this)
 		}
 
 		public receiveProps(props: any) {
 			this.props = props
-		}
-
-		public receiveComponent(component: TargetComponent) {
-			this.component = component
 		}
 
 		public canDrag() {
@@ -89,11 +81,11 @@ export default function createSourceFactory<
 		}
 
 		public beginDrag() {
-			if (!this.props || !this.component) {
+			if (!this.props) {
 				return
 			}
 
-			const item = spec.beginDrag(this.props, this.monitor, this.component)
+			const item = spec.beginDrag(this.props, this.monitor, this.ref.current)
 			if (process.env.NODE_ENV !== 'production') {
 				invariant(
 					isPlainObject(item),
@@ -107,14 +99,14 @@ export default function createSourceFactory<
 		}
 
 		public endDrag() {
-			if (!this.props || !this.component) {
+			if (!this.props) {
 				return
 			}
 			if (!spec.endDrag) {
 				return
 			}
 
-			spec.endDrag(this.props, this.monitor, this.component)
+			spec.endDrag(this.props, this.monitor, this.ref.current)
 		}
 	}
 

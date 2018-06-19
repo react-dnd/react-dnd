@@ -31,7 +31,10 @@ const cardSource = {
 }
 
 const cardTarget = {
-	hover(props: CardProps, monitor: DropTargetMonitor, component: Card) {
+	hover(props: CardProps, monitor: DropTargetMonitor, component: Card | null) {
+		if (!component) {
+			return null
+		}
 		const dragIndex = monitor.getItem().index
 		const hoverIndex = props.index
 

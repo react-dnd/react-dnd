@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"declaration": true,
 		"outDir": "./lib",
-		"baseUrl": "./"
+		"baseUrl": "./",
+		"experimentalDecorators": true
 	},
 	"include": ["./src/index.ts"]
 }

@@ -48,18 +48,11 @@ export interface CustomDragLayerProps {
 	snapToGrid: boolean
 }
 
-@DragLayer<CustomDragLayerProps, {}, CustomDragLayer, {}>(monitor => ({
-	item: monitor.getItem(),
-	itemType: monitor.getItemType(),
-	initialOffset: monitor.getInitialSourceClientOffset(),
-	currentOffset: monitor.getSourceClientOffset(),
-	isDragging: monitor.isDragging(),
-}))
-export default class CustomDragLayer extends React.Component<
-	CustomDragLayerProps
-> {
-	public renderItem(type: any, item: any) {
-		switch (type) {
+const CustomDragLayer: React.SFC<CustomDragLayerProps> = props => {
+	const { item, itemType, isDragging } = props
+
+	function renderItem() {
+		switch (itemType) {
 			case ItemTypes.BOX:
 				return <BoxDragPreview title={item.title} />
 			default:
@@ -67,19 +60,20 @@ export default class CustomDragLayer extends React.Component<
 		}
 	}
 
-	public render() {
-		const { item, itemType, isDragging } = this.props
-
-		if (!isDragging) {
-			return null
-		}
-
-		return (
-			<div style={layerStyles}>
-				<div style={getItemStyles(this.props)}>
-					{this.renderItem(itemType, item)}
-				</div>
-			</div>
-		)
+	if (!isDragging) {
+		return null
 	}
+	return (
+		<div style={layerStyles}>
+			<div style={getItemStyles(props)}>{renderItem()}</div>
+		</div>
+	)
 }
+
+export default DragLayer<CustomDragLayerProps>(monitor => ({
+	item: monitor.getItem(),
+	itemType: monitor.getItemType(),
+	initialOffset: monitor.getInitialSourceClientOffset(),
+	currentOffset: monitor.getSourceClientOffset(),
+	isDragging: monitor.isDragging(),
+}))(CustomDragLayer)

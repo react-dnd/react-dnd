@@ -16,16 +16,11 @@ import isValidType from './utils/isValidType'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
-export default function DropTarget<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>,
-	CollectedProps
->(
-	type: TargetType | ((props: P) => TargetType),
-	spec: DropTargetSpec<P, S, TargetComponent>,
+export default function DropTarget<Props, CollectedProps = {}>(
+	type: TargetType | ((props: Props) => TargetType),
+	spec: DropTargetSpec<Props>,
 	collect: DropTargetCollector<CollectedProps>,
-	options: DndOptions<P> = {},
+	options: DndOptions<Props> = {},
 ) {
 	checkDecoratorArguments(
 		'DropTarget',
@@ -35,7 +30,9 @@ export default function DropTarget<
 		collect,
 		options,
 	)
-	let getType: ((props: P) => TargetType) = type as ((props: P) => TargetType)
+	let getType: ((props: Props) => TargetType) = type as ((
+		props: Props,
+	) => TargetType)
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type, true),
@@ -72,10 +69,12 @@ export default function DropTarget<
 		collect,
 	)
 
-	return function decorateTarget<TargetClass extends React.ComponentClass<P>>(
-		DecoratedComponent: TargetClass,
-	): TargetClass & DndComponentClass<P, TargetComponent, TargetClass> {
-		return decorateHandler<P, S, TargetComponent, TargetClass, TargetType>({
+	return function decorateTarget<
+		TargetClass extends
+			| React.ComponentClass<Props>
+			| React.StatelessComponent<Props>
+	>(DecoratedComponent: TargetClass): TargetClass & DndComponentClass<Props> {
+		return decorateHandler<Props, TargetClass, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,
