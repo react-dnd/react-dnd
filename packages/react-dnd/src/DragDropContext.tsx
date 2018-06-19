@@ -8,6 +8,7 @@ import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { ContextComponent } from './interfaces'
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
+const isClassComponent = require('recompose/isClassComponent').default
 
 /**
  * The React context type
@@ -58,33 +59,34 @@ export const DragDropContextProvider: React.SFC<
  * @param backendFactory The DnD backend factory
  * @param backendContext The backend context
  */
-export function DragDropContext<
-	P,
-	S,
-	TargetComponent extends React.Component<P, S> | React.StatelessComponent<P>
->(backendFactory: BackendFactory, backendContext?: any) {
+export function DragDropContext(
+	backendFactory: BackendFactory,
+	backendContext?: any,
+) {
 	checkDecoratorArguments('DragDropContext', 'backend', backendFactory)
 	const childContext = createChildContext(backendFactory, backendContext)
 
-	return function decorateContext<TargetClass extends React.ComponentClass<P>>(
-		DecoratedComponent: TargetClass,
-	): TargetClass & ContextComponent<P, S, TargetComponent> {
-		const displayName =
-			DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
+	return function decorateContext<
+		TargetClass extends
+			| React.ComponentClass<any>
+			| React.StatelessComponent<any>
+	>(DecoratedComponent: TargetClass): TargetClass & ContextComponent<any> {
+		const Decorated = DecoratedComponent as any
+		const displayName = Decorated.displayName || Decorated.name || 'Component'
 
-		class DragDropContextContainer extends React.Component<P, S>
-			implements ContextComponent<P, S, TargetComponent> {
+		class DragDropContextContainer extends React.Component<any>
+			implements ContextComponent<any> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
 
-			private child: any
+			private ref: React.RefObject<any> = React.createRef()
 
 			public getDecoratedComponentInstance() {
 				invariant(
-					this.child,
+					this.ref.current,
 					'In order to access an instance of the decorated component it can not be a stateless component.',
 				)
-				return this.child
+				return this.ref.current
 			}
 
 			public getManager() {
@@ -94,9 +96,9 @@ export function DragDropContext<
 			public render() {
 				return (
 					<Provider value={childContext}>
-						<DecoratedComponent
+						<Decorated
 							{...this.props}
-							ref={(child: any) => (this.child = child)}
+							ref={isClassComponent(Decorated) ? this.ref : undefined}
 						/>
 					</Provider>
 				)

@@ -21,8 +21,11 @@ const boxTarget = {
 	drop(
 		props: ContainerProps,
 		monitor: DropTargetMonitor,
-		component: Container,
+		component: Container | null,
 	) {
+		if (!component) {
+			return
+		}
 		const delta = monitor.getDifferenceFromInitialOffset() as {
 			x: number
 			y: number
