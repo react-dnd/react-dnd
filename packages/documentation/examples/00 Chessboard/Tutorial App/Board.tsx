@@ -9,7 +9,7 @@ export interface BoardProps {
 	knightPosition: [number, number]
 }
 
-@DragDropContext<BoardProps>(HTML5Backend)
+@DragDropContext(HTML5Backend)
 export default class Board extends React.Component<BoardProps> {
 	public render() {
 		const squares = []

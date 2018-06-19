@@ -59,7 +59,7 @@ export const DragDropContextProvider: React.SFC<
  * @param backendFactory The DnD backend factory
  * @param backendContext The backend context
  */
-export function DragDropContext<Props>(
+export function DragDropContext(
 	backendFactory: BackendFactory,
 	backendContext?: any,
 ) {
@@ -68,14 +68,14 @@ export function DragDropContext<Props>(
 
 	return function decorateContext<
 		TargetClass extends
-			| React.ComponentClass<Props>
-			| React.StatelessComponent<Props>
-	>(DecoratedComponent: TargetClass): TargetClass & ContextComponent<Props> {
+			| React.ComponentClass<any>
+			| React.StatelessComponent<any>
+	>(DecoratedComponent: TargetClass): TargetClass & ContextComponent<any> {
 		const Decorated = DecoratedComponent as any
 		const displayName = Decorated.displayName || Decorated.name || 'Component'
 
-		class DragDropContextContainer extends React.Component<Props>
-			implements ContextComponent<Props> {
+		class DragDropContextContainer extends React.Component<any>
+			implements ContextComponent<any> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
 
