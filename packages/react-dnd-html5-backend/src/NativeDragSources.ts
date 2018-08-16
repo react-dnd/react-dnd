@@ -22,6 +22,11 @@ const nativeTypesConfig: {
 		getData: (dataTransfer: any, matchesTypes: any) => any
 	}
 } = {
+	[NativeTypes.DATA_TRANSFER]: {
+		exposeProperty: 'dataTransfer',
+		matchesTypes: ['Files', 'Url', 'text/uri-list', 'Text', 'text/plain'],
+		getData: (dataTransfer: any) => dataTransfer,
+	},
 	[NativeTypes.FILE]: {
 		exposeProperty: 'files',
 		matchesTypes: ['Files'],
