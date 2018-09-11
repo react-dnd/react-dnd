@@ -578,11 +578,9 @@ export default class HTML5Backend implements Backend {
 			// "drop and blow away the whole document" action.
 			e.preventDefault()
 			e.dataTransfer.dropEffect = 'none'
-		} else if (this.checkIfCurrentDragSourceRectChanged()) {
-			// Prevent animating to incorrect position.
-			// Drop effect must be other than 'none' to prevent animation.
+		} else {
 			e.preventDefault()
-			e.dataTransfer.dropEffect = 'move'
+			e.dataTransfer.dropEffect = 'none'
 		}
 	}
 
