@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-html5-backend",
-	"version": "5.0.1",
+	"version": "5.0.1-spotware-patch-1",
 	"description": "HTML5 backend for React DnD",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
