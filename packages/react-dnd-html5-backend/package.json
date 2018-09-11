@@ -22,13 +22,11 @@
 	"dependencies": {
 		"autobind-decorator": "^2.1.0",
 		"dnd-core": "^4.0.5",
-		"lodash": "^4.17.10",
-		"shallowequal": "^1.0.2"
+		"lodash": "^4.17.10"
 	},
 	"devDependencies": {
 		"@types/node": "10.3.2",
 		"@types/react": "^16.3.16",
-		"@types/shallowequal": "^0.2.2",
 		"npm-run-all": "^4.1.2",
 		"react": "^16.4.0",
 		"react-dnd-test-backend": "^5.0.1",
