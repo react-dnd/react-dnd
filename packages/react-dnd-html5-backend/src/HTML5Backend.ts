@@ -36,12 +36,12 @@ export default class HTML5Backend implements Backend {
 	private registry: HandlerRegistry
 	private context: HTML5BackendContext
 
+	private enterLeaveCounter: EnterLeaveCounter
+
 	private sourcePreviewNodes: Map<string, Element> = new Map()
 	private sourcePreviewNodeOptions: Map<string, any> = new Map()
 	private sourceNodes: Map<string, Element> = new Map()
 	private sourceNodeOptions: Map<string, any> = new Map()
-
-	private enterLeaveCounter: EnterLeaveCounter = new EnterLeaveCounter()
 
 	private dragStartSourceIds: string[] | null = null
 	private dropTargetIds: string[] = []
@@ -61,6 +61,8 @@ export default class HTML5Backend implements Backend {
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
 		this.context = manager.getContext()
+
+		this.enterLeaveCounter = new EnterLeaveCounter(node => this.isNodeInDocument(node));
 	}
 
 	// public for test
