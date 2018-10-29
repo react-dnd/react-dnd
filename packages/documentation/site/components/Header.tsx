@@ -1,13 +1,17 @@
 import * as React from 'react'
+import styled from 'styled-components'
 import NavBar from './NavBar'
-import './Header.less'
 
 export default class Header extends React.Component {
 	public render() {
 		return (
-			<header className="Header">
+			<Container>
 				<NavBar />
-			</header>
+			</Container>
 		)
 	}
 }
+
+const Container = styled.header`
+	overflow: hidden;
+`

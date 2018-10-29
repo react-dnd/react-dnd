@@ -41,7 +41,7 @@
 		"lint":
 			"tslint \"packages/**/*.{ts,tsx}\" -e \"**/{lib,node_modules}/**\"",
 		"test_modules": "lerna run test --stream",
-		"publish_docs": "./scripts/publishDocumentation.sh",
+		"publish_docs": "lerna run publish --scope react-dnd-documentation",
 		"test": "run-s lint build test_modules jest:cov",
 		"prettify":
 			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
@@ -50,19 +50,28 @@
 		"start": "lerna run --parallel --stream start",
     "watch": "lerna run --parallel --stream watch"
 	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"pre-publish": "npm test",
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
+	},
 	"devDependencies": {
-		"@types/jest": "^22.2.3",
-		"husky": "^0.14.3",
-		"jest": "^23.0.0-beta.3r",
-		"jest-environment-jsdom": "^22.4.3",
-		"lerna": "^2.9.0",
-		"lint-staged": "^4.2.3",
-		"npm-run-all": "^4.1.2",
-		"prettier": "^1.11.1",
-		"ts-jest": "^22.4.4",
-		"tslint": "^5.9.1",
-		"tslint-config-prettier": "^1.12.0",
-		"tslint-react": "^3.5.1"
+		"@commitlint/cli": "^7.2.1",
+		"@commitlint/config-conventional": "^7.1.2",
+		"@types/jest": "^23.3.8",
+		"husky": "^1.1.2",
+		"jest": "^23.6.0",
+		"jest-environment-jsdom": "^23.4.0",
+		"lerna": "^3.4.3",
+		"lint-staged": "^7.3.0",
+		"npm-run-all": "^4.1.3",
+		"prettier": "^1.14.3",
+		"ts-jest": "^23.10.4",
+		"tslint": "^5.11.0",
+		"tslint-config-prettier": "^1.15.0",
+		"tslint-react": "~3.6.0"
 	},
 	"jest": {
 		"moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
@@ -100,7 +109,6 @@
     "nohoist": [
       "**/@types/*",
       "**/hoist-non-react-statics",
-      "**/autobind-decorator",
       "**/redux"
     ]
 	}

@@ -1,3 +1,5 @@
+declare var require: any
+
 const union = require('lodash/union')
 const without = require('lodash/without')
 
