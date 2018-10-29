@@ -1,3 +1,5 @@
+declare var require: any
+
 const memoize = require('lodash/memoize')
 
 declare global {

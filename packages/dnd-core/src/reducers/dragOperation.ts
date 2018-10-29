@@ -1,3 +1,5 @@
+declare var require: any
+
 import {
 	BEGIN_DRAG,
 	PUBLISH_DRAG_SOURCE,
