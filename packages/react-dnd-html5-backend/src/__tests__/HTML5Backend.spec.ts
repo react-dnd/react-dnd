@@ -1,3 +1,5 @@
+declare var global: any
+
 import HTML5Backend from '../HTML5Backend'
 import { DragDropManager } from 'dnd-core'
 import { HTML5BackendContext } from '../interfaces'
@@ -11,14 +13,14 @@ describe('The HTML5 Backend', () => {
 				getRegistry: () => null,
 				getContext: () => ({}),
 			} as any
-			const mockWindow = (global as any).window
+			const mockWindow = global.window
 			try {
-				delete (global as any).window
+				delete global.window
 				const backend = new HTML5Backend(mockManager)
 				expect(backend).toBeDefined()
 				expect(backend.window).toBeUndefined()
 			} finally {
-				;(global as any).window = mockWindow
+				global.window = mockWindow
 			}
 		})
 

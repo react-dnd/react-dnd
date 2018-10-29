@@ -1,3 +1,5 @@
+declare var require: any
+
 import dragOffset, { State as DragOffsetState } from './dragOffset'
 import dragOperation, { State as DragOperationState } from './dragOperation'
 import refCount, { State as RefCountState } from './refCount'
