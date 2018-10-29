@@ -13,7 +13,6 @@
 	},
 	"devDependencies": {
 		"@babel/register": "^7.0.0",
-		"autoprefixer": "^7.1.2",
 		"babel-loader": "^8.0.4",
 		"circular-dependency-plugin": "^5.0.2",
 		"file-loader": "^2.0.0",
