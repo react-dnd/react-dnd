@@ -25,7 +25,7 @@ export function getEventClientOffset(e: any) {
 function isImageNode(node: any) {
 	return (
 		node.nodeName === 'IMG' &&
-		(isFirefox() || !document.documentElement.contains(node))
+		(isFirefox() || !document.documentElement!.contains(node))
 	)
 }
 
@@ -80,7 +80,7 @@ export function getDragPreviewOffset(
 				// Dock to the top
 				offsetFromDragPreview.y,
 				// Align at the center
-				offsetFromDragPreview.y / sourceHeight * dragPreviewHeight,
+				(offsetFromDragPreview.y / sourceHeight) * dragPreviewHeight,
 				// Dock to the bottom
 				offsetFromDragPreview.y + dragPreviewHeight - sourceHeight,
 			],
@@ -103,7 +103,7 @@ export function getDragPreviewOffset(
 				// Dock to the left
 				offsetFromDragPreview.x,
 				// Align at the center
-				offsetFromDragPreview.x / sourceWidth * dragPreviewWidth,
+				(offsetFromDragPreview.x / sourceWidth) * dragPreviewWidth,
 				// Dock to the right
 				offsetFromDragPreview.x + dragPreviewWidth - sourceWidth,
 			],
