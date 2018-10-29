@@ -25,7 +25,7 @@
 		"invariant": "^2.1.0",
 		"lodash": "^4.17.11",
 		"recompose": "^0.27.1",
-		"shallowequal": "^1.0.2"
+		"shallowequal": "^1.1.0"
 	},
 	"devDependencies": {
 		"@types/react": "^16.3.14",
