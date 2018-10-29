@@ -109,7 +109,6 @@
     "nohoist": [
       "**/@types/*",
       "**/hoist-non-react-statics",
-      "**/autobind-decorator",
       "**/redux"
     ]
 	}

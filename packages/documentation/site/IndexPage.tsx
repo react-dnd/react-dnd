@@ -116,7 +116,6 @@ export default class IndexPage extends React.Component<
 				</head>
 				<body>
 					{this.state.renderPage && this.renderPage()}
-
 					<script dangerouslySetInnerHTML={browserInitScriptObj} />
 					<script src={this.props.files['main.js']} />
 				</body>

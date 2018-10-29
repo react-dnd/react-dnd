@@ -22,9 +22,7 @@ module.exports = {
 		filename: isDev ? '[name].js' : '[name]-[hash].js',
 		publicPath: '',
 	},
-
 	target: 'web',
-
 	module: {
 		rules: [
 			{

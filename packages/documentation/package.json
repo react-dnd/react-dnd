@@ -40,6 +40,7 @@
 		"@types/immutability-helper": "^2.6.3",
 		"@types/react": "^16.3.14",
 		"@types/react-dom": "^16.0.5",
+		"@types/styled-components": "^4.0.3",
 		"faker": "^3.1.0",
 		"immutability-helper": "^2.4.0",
 		"lodash": "^4.17.11",
@@ -49,6 +50,7 @@
 		"react-dnd-test-backend": "^5.0.1",
 		"react-dom": "^16.6.0",
 		"react-frame-component": "^4.0.2",
-		"shallowequal": "^1.1.0"
+		"shallowequal": "^1.1.0",
+		"styled-components": "^4.0.2"
 	}
 }
