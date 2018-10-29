@@ -113,11 +113,9 @@ export default class IndexPage extends React.Component<
 
 						if (this.props.location === page.location) {
 							return (
-								<Suspense fallback={<div />}>
-									<ExamplePage example={page}>
-										<Example />
-									</ExamplePage>
-								</Suspense>
+								<ExamplePage example={page}>
+									<Example />
+								</ExamplePage>
 							)
 						}
 					}
