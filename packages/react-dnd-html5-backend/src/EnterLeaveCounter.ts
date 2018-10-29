@@ -29,7 +29,7 @@ export default class EnterLeaveCounter {
 		const previousLength = this.entered.length
 
 		this.entered = without(
-			this.entered.filter(node => this.isNodeInDocument(node)),
+			this.entered.filter(this.isNodeInDocument),
 			leavingNode,
 		)
 
