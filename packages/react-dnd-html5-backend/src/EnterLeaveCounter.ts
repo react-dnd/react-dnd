@@ -3,14 +3,21 @@ declare var require: any
 const union = require('lodash/union')
 const without = require('lodash/without')
 
+type NodePredicate = (node: any) => boolean;
+
 export default class EnterLeaveCounter {
 	private entered: any[] = []
+	private isNodeInDocument: NodePredicate
+
+	constructor(isNodeInDocument: NodePredicate) {
+		this.isNodeInDocument = isNodeInDocument;
+	}
 
 	public enter(enteringNode: any) {
 		const previousLength = this.entered.length
 
 		const isNodeEntered = (node: any) =>
-			document.documentElement!.contains(node) &&
+			this.isNodeInDocument(node) &&
 			(!node.contains || node.contains(enteringNode))
 
 		this.entered = union(this.entered.filter(isNodeEntered), [enteringNode])
@@ -22,7 +29,7 @@ export default class EnterLeaveCounter {
 		const previousLength = this.entered.length
 
 		this.entered = without(
-			this.entered.filter(node => document.documentElement!.contains(node)),
+			this.entered.filter(this.isNodeInDocument),
 			leavingNode,
 		)
 
