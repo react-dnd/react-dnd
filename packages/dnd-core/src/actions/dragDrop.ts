@@ -1,3 +1,5 @@
+declare var require: any
+
 import {
 	Action,
 	DragDropManager,
