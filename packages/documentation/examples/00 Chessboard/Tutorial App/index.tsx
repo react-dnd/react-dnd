@@ -1,3 +1,4 @@
+// tslint:disable member-ordering
 import * as React from 'react'
 import Board from './Board'
 import { observe } from './Game'
@@ -13,10 +14,16 @@ export default class ChessboardTutorialApp extends React.Component<
 	{},
 	ChessboardTutorialAppState
 > {
-	private unobserve: () => void = observe(this.handleChange.bind(this))
+	public state: ChessboardTutorialAppState = { knightPosition: [1, 7] }
+	private unobserve?: (() => void)
 
+	public componentDidMount() {
+		this.unobserve = observe(this.handleChange)
+	}
 	public componentWillUnmount() {
-		this.unobserve()
+		if (this.unobserve) {
+			this.unobserve()
+		}
 	}
 
 	public render() {
@@ -56,7 +63,7 @@ export default class ChessboardTutorialApp extends React.Component<
 		)
 	}
 
-	private handleChange(knightPosition: [number, number]) {
+	private handleChange = (knightPosition: [number, number]) => {
 		const nextState = { knightPosition }
 		if (this.state) {
 			this.setState(nextState)

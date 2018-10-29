@@ -1,3 +1,5 @@
+declare var require: any
+
 import {
 	Backend,
 	DragDropManager,
@@ -18,7 +20,6 @@ import {
 	matchNativeItemType,
 } from './NativeDragSources'
 import * as NativeTypes from './NativeTypes'
-import autobind from 'autobind-decorator'
 import { HTML5BackendContext } from './interfaces'
 const defaults = require('lodash/defaults')
 const shallowEqual = require('shallowequal')
@@ -220,8 +221,7 @@ export default class HTML5Backend implements Backend {
 		})
 	}
 
-	@autobind
-	private getSourceClientOffset(sourceId: string) {
+	private getSourceClientOffset = (sourceId: string) => {
 		return getNodeClientOffset(this.sourceNodes.get(sourceId))
 	}
 
@@ -244,8 +244,7 @@ export default class HTML5Backend implements Backend {
 		this.actions.beginDrag([this.currentNativeHandle])
 	}
 
-	@autobind
-	private endDragNativeItem() {
+	private endDragNativeItem = () => {
 		if (!this.isDraggingNativeItem()) {
 			return
 		}
@@ -256,8 +255,7 @@ export default class HTML5Backend implements Backend {
 		this.currentNativeSource = null
 	}
 
-	@autobind
-	private isNodeInDocument(node: any) {
+	private isNodeInDocument = (node: any) => {
 		// Check the node either in the main document or in the current context
 		return (
 			(!!document && document.body.contains(node)) ||
@@ -265,8 +263,7 @@ export default class HTML5Backend implements Backend {
 		)
 	}
 
-	@autobind
-	private endDragIfSourceWasRemovedFromDOM() {
+	private endDragIfSourceWasRemovedFromDOM = () => {
 		const node = this.currentDragSourceNode
 		if (this.isNodeInDocument(node)) {
 			return
@@ -353,8 +350,7 @@ export default class HTML5Backend implements Backend {
 		return this.currentDragSourceNodeOffsetChanged
 	}
 
-	@autobind
-	private handleTopDragStartCapture() {
+	private handleTopDragStartCapture = () => {
 		this.clearCurrentDragSourceNode()
 		this.dragStartSourceIds = []
 	}
@@ -366,8 +362,7 @@ export default class HTML5Backend implements Backend {
 		this.dragStartSourceIds.unshift(sourceId)
 	}
 
-	@autobind
-	private handleTopDragStart(e: any) {
+	private handleTopDragStart = (e: any) => {
 		const { dragStartSourceIds } = this
 		this.dragStartSourceIds = null
 
@@ -469,8 +464,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	@autobind
-	private handleTopDragEndCapture() {
+	private handleTopDragEndCapture = () => {
 		if (this.clearCurrentDragSourceNode()) {
 			// Firefox can dispatch this event in an infinite loop
 			// if dragend handler does something like showing an alert.
@@ -479,8 +473,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	@autobind
-	private handleTopDragEnterCapture(e: any) {
+	private handleTopDragEnterCapture = (e: any) => {
 		this.dragEnterTargetIds = []
 
 		const isFirstEnter = this.enterLeaveCounter.enter(e.target)
@@ -501,8 +494,7 @@ export default class HTML5Backend implements Backend {
 		this.dragEnterTargetIds.unshift(targetId)
 	}
 
-	@autobind
-	private handleTopDragEnter(e: any) {
+	private handleTopDragEnter = (e: any) => {
 		const { dragEnterTargetIds } = this
 		this.dragEnterTargetIds = []
 
@@ -534,8 +526,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	@autobind
-	private handleTopDragOverCapture() {
+	private handleTopDragOverCapture = () => {
 		this.dragOverTargetIds = []
 	}
 
@@ -546,8 +537,7 @@ export default class HTML5Backend implements Backend {
 		this.dragOverTargetIds.unshift(targetId)
 	}
 
-	@autobind
-	private handleTopDragOver(e: any) {
+	private handleTopDragOver = (e: any) => {
 		const { dragOverTargetIds } = this
 		this.dragOverTargetIds = []
 
@@ -586,8 +576,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	@autobind
-	private handleTopDragLeaveCapture(e: any) {
+	private handleTopDragLeaveCapture = (e: any) => {
 		if (this.isDraggingNativeItem()) {
 			e.preventDefault()
 		}
@@ -602,8 +591,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	@autobind
-	private handleTopDropCapture(e: any) {
+	private handleTopDropCapture = (e: any) => {
 		this.dropTargetIds = []
 		e.preventDefault()
 
@@ -618,8 +606,7 @@ export default class HTML5Backend implements Backend {
 		this.dropTargetIds.unshift(targetId)
 	}
 
-	@autobind
-	private handleTopDrop(e: any) {
+	private handleTopDrop = (e: any) => {
 		const { dropTargetIds } = this
 		this.dropTargetIds = []
 
@@ -635,8 +622,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	@autobind
-	private handleSelectStart(e: any) {
+	private handleSelectStart = (e: any) => {
 		const { target } = e
 
 		// Only IE requires us to explicitly say

@@ -1,7 +1,8 @@
 import * as React from 'react'
-import './NavBar.less'
-const { DOCS_DEFAULT, EXAMPLES_DEFAULT } = require('../Constants')
+import styled from 'styled-components'
+import theme from '../theme'
 
+const { DOCS_DEFAULT, EXAMPLES_DEFAULT } = require('../Constants')
 const GITHUB_URL = 'https://github.com/react-dnd/react-dnd'
 const DOCS_LOCATION = DOCS_DEFAULT.location
 const EXAMPLES_LOCATION = EXAMPLES_DEFAULT.location
@@ -9,28 +10,65 @@ const EXAMPLES_LOCATION = EXAMPLES_DEFAULT.location
 export default class NavBar extends React.Component {
 	public render() {
 		return (
-			<div className="NavBar">
-				<div className="NavBar-container">
-					<div className="NavBar-logo">
-						<a href="./" target="_self" className="NavBar-logoTitle">
+			<Container>
+				<ContentContainer>
+					<LogoContainer>
+						<LogoTitle href="./" target="_self">
 							React <i>DnD</i>
-						</a>
-						<p className="NavBar-logoDescription">Drag and Drop for React</p>
-					</div>
+						</LogoTitle>
+						<LogoDescription>Drag and Drop for React</LogoDescription>
+					</LogoContainer>
 
-					<div className="NavBar-item">
-						<a className="NavBar-link" href={DOCS_LOCATION} target="_self">
+					<div>
+						<Link href={DOCS_LOCATION} target="_self">
 							Docs
-						</a>
-						<a className="NavBar-link" href={EXAMPLES_LOCATION} target="_self">
+						</Link>
+						<Link href={EXAMPLES_LOCATION} target="_self">
 							Examples
-						</a>
-						<a className="NavBar-link" href={GITHUB_URL}>
-							GitHub
-						</a>
+						</Link>
+						<Link href={GITHUB_URL}>GitHub</Link>
 					</div>
-				</div>
-			</div>
+				</ContentContainer>
+			</Container>
 		)
 	}
 }
+
+const Container = styled.div`
+	z-index: 3;
+	top: 0;
+	position: fixed;
+	width: 100%;
+	padding: 0 ${theme.dimensions.content.padding};
+	background-color: rgb(255, 255, 255, 0.9);
+`
+
+const ContentContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+	height: ${theme.dimensions.navbar.height};
+	padding: 0.75em 0;
+	border-bottom: 2px solid rgb(${theme.color.accentRGB.join(',')}, 0.1);
+`
+
+const Link = styled.a`
+	color: ${theme.color.accent};
+	margin-left: 1em;
+`
+
+const LogoTitle = styled.a`
+	font-weight: bold;
+	font-size: 1.125em;
+`
+
+const LogoDescription = styled.p`
+	margin: 0;
+	font-size: 0.875em;
+`
+
+const LogoContainer = styled.div`
+	color: ${theme.color.accent};
+	line-height: 1.4;
+`
