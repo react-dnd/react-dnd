@@ -1,3 +1,5 @@
+declare var require: any
+
 const intersection = require('lodash/intersection')
 
 export const NONE: string[] = []

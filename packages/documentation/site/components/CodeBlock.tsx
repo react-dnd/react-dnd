@@ -1,13 +1,12 @@
 import * as React from 'react'
 import { findDOMNode } from 'react-dom'
+import styled from 'styled-components'
 import StaticHTMLBlock from './StaticHTMLBlock'
-
-import './CodeBlock.less'
+import theme from '../theme'
 
 let preferredSyntax = 'es7'
 type Observer = (value: string) => void
 const observers: Observer[] = []
-
 const SYNTAXES: Syntax[] = ['es7', 'es6', 'es5']
 
 function subscribe(observer: Observer) {
@@ -72,9 +71,9 @@ export default class CodeBlock extends React.Component<
 	public render(): React.ReactNode {
 		return (
 			<div className="CodeBlock">
-				<ul className="CodeBlock-tabs">
+				<CodeblockTabs>
 					{SYNTAXES.map(this.renderSyntaxLink, this)}
-				</ul>
+				</CodeblockTabs>
 				<div className="CodeBlock-content">
 					<StaticHTMLBlock html={this.props[this.state.syntax]} />
 				</div>
@@ -131,14 +130,31 @@ export default class CodeBlock extends React.Component<
 
 		const active = this.state.syntax === syntax
 		return (
-			<li
-				className={`CodeBlock-tab ${active ? 'CodeBlock-activeTab' : ''}`}
-				key={syntax}
-			>
-				<a onClick={this.handleSyntaxClick.bind(this, syntax)}>
+			<CodeblockTab key={syntax}>
+				<TabLink
+					active={active}
+					onClick={this.handleSyntaxClick.bind(this, syntax)}
+				>
 					{syntax.toUpperCase()}
-				</a>
-			</li>
+				</TabLink>
+			</CodeblockTab>
 		)
 	}
 }
+
+const CodeblockTabs = styled.ul`
+	padding: 0;
+`
+
+const CodeblockTab = styled.li`
+	display: inline-block;
+	margin-right: 10px;
+`
+
+interface TabLinkProps {
+	active?: boolean
+}
+const TabLink = styled.a`
+	cursor: pointer;
+	color: ${(props: TabLinkProps) => (props.active ? theme.color.accent : '')};
+`
