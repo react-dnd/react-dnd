@@ -71,7 +71,7 @@ export default function DropTarget<Props, CollectedProps = {}>(
 
 	return function decorateTarget<
 		TargetClass extends React.ComponentType<Props & CollectedProps>
-	>(DecoratedComponent: TargetClass): DndComponentClass<Props> {
+	>(DecoratedComponent: TargetClass): TargetClass & DndComponentClass<Props> {
 		return decorateHandler<Props, TargetClass, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,

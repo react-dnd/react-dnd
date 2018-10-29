@@ -35,7 +35,8 @@ export default function decorateHandler<Props, TargetClass, ItemIdType>({
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<Props, ItemIdType>): DndComponentClass<Props> {
+}: DecorateHandlerArgs<Props, ItemIdType>): TargetClass &
+	DndComponentClass<Props> {
 	const { arePropsEqual = shallowEqual } = options
 	const Decorated: any = DecoratedComponent
 
