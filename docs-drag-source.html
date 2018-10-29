@@ -1,15 +1,27 @@
-<!doctype html><html data-reactroot=""><head><meta charSet="utf-8"/><title>React DnD</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/><base target="_blank"/></head><body><div><header class="Header"><div class="NavBar"><div class="NavBar-container"><div class="NavBar-logo"><a href="./" target="_self" class="NavBar-logoTitle">React <i>DnD</i></a><p class="NavBar-logoDescription">Drag and Drop for React</p></div><div class="NavBar-item"><a class="NavBar-link" href="docs-overview.html" target="_self">Docs</a><a class="NavBar-link" href="examples-chessboard-tutorial-app.html" target="_self">Examples</a><a class="NavBar-link" href="https://github.com/react-dnd/react-dnd">GitHub</a></div></div></div></header><div class="PageBody PageBody--hasSidebar"><div class="PageBody-container"><div class="SideBar"><div class="SideBar-content"><div class="SideBar-group"><h4 class="SideBar-groupTitle">Quick Start</h4><a href="docs-overview.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Overview</span><span class="arrowBullet"></span></a><a href="docs-tutorial.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Tutorial</span><span class="arrowBullet"></span></a><a href="docs-testing.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Testing</span><span class="arrowBullet"></span></a><a href="docs-faq.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">FAQ</span><span class="arrowBullet"></span></a><a href="docs-troubleshooting.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Troubleshooting</span><span class="arrowBullet"></span></a></div><div class="SideBar-group"><h4 class="SideBar-groupTitle">Top-Level API</h4><a href="docs-drag-source.html" target="_self" class="SideBar-item SideBar-item--selected"><span class="SideBar-itemText">DragSource</span><span class="arrowBullet"></span></a><a href="docs-drop-target.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DropTarget</span><span class="arrowBullet"></span></a><a href="docs-drag-layer.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragLayer</span><span class="arrowBullet"></span></a><a href="docs-drag-drop-context.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragDropContext</span><span class="arrowBullet"></span></a><a href="docs-drag-drop-context-provider.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragDropContextProvider</span><span class="arrowBullet"></span></a></div><div class="SideBar-group"><h4 class="SideBar-groupTitle">Connecting to DOM</h4><a href="docs-drag-source-connector.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragSourceConnector</span><span class="arrowBullet"></span></a><a href="docs-drop-target-connector.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DropTargetConnector</span><span class="arrowBullet"></span></a></div><div class="SideBar-group"><h4 class="SideBar-groupTitle">Monitoring State</h4><a href="docs-drag-source-monitor.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragSourceMonitor</span><span class="arrowBullet"></span></a><a href="docs-drop-target-monitor.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DropTargetMonitor</span><span class="arrowBullet"></span></a><a href="docs-drag-layer-monitor.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragLayerMonitor</span><span class="arrowBullet"></span></a></div><div class="SideBar-group"><h4 class="SideBar-groupTitle">Backends</h4><a href="docs-html5-backend.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">HTML5</span><span class="arrowBullet"></span></a><a href="docs-test-backend.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Test</span><span class="arrowBullet"></span></a></div></div></div><div style="width:100%"><div style="width:100%"><p><em>New to React DnD? <a href="docs-overview.html">Read the overview</a> before jumping into the docs.</em></p>
-<h1>DragSource<a id="dragsource">&nbsp;</a></h1><p>Wrap your component with <code>DragSource</code> to make it draggable. <code>DragSource</code> is a higher-order component accepting three required parameters. They are described in detail below.</p>
+<!doctype html><html data-reactroot=""><head><meta charSet="utf-8"/><title>React DnD</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/><base target="_blank"/></head><body><div><header class="sc-bZQynM hEnfJi"><div class="sc-bdVaJa fUZxRL"><div class="sc-bwzfXH gkjaqr"><div class="sc-EHOje cNUHjk"><a href="./" target="_self" class="sc-bxivhb foBabv">React <i>DnD</i></a><p class="sc-ifAKCX fLBAPQ">Drag and Drop for React</p></div><div><a href="docs-overview.html" target="_self" class="sc-htpNat bZFDsv">Docs</a><a href="examples-chessboard-tutorial-app.html" target="_self" class="sc-htpNat bZFDsv">Examples</a><a href="https://github.com/react-dnd/react-dnd" class="sc-htpNat bZFDsv">GitHub</a></div></div></div></header><div class="sc-gzVnrw kEiiFQ"><div class="sc-dnqmqq cfpgWY"><div class="sc-VigVT iPWaGO"><div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Quick Start</h4><a href="docs-overview.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Overview</span><span class="arrowBullet"></span></a><a href="docs-tutorial.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Tutorial</span><span class="arrowBullet"></span></a><a href="docs-testing.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Testing</span><span class="arrowBullet"></span></a><a href="docs-faq.html" target="_self" class="sc-jzJRlG kwXAcU"><span>FAQ</span><span class="arrowBullet"></span></a><a href="docs-troubleshooting.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Troubleshooting</span><span class="arrowBullet"></span></a></div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Top-Level API</h4><a href="docs-drag-source.html" target="_self" class="sc-cSHVUG hsTeSa"><span>DragSource</span><span class="arrowBullet"></span></a><a href="docs-drop-target.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DropTarget</span><span class="arrowBullet"></span></a><a href="docs-drag-layer.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragLayer</span><span class="arrowBullet"></span></a><a href="docs-drag-drop-context.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragDropContext</span><span class="arrowBullet"></span></a><a href="docs-drag-drop-context-provider.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragDropContextProvider</span><span class="arrowBullet"></span></a></div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Connecting to DOM</h4><a href="docs-drag-source-connector.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragSourceConnector</span><span class="arrowBullet"></span></a><a href="docs-drop-target-connector.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DropTargetConnector</span><span class="arrowBullet"></span></a></div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Monitoring State</h4><a href="docs-drag-source-monitor.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragSourceMonitor</span><span class="arrowBullet"></span></a><a href="docs-drop-target-monitor.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DropTargetMonitor</span><span class="arrowBullet"></span></a><a href="docs-drag-layer-monitor.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragLayerMonitor</span><span class="arrowBullet"></span></a></div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Backends</h4><a href="docs-html5-backend.html" target="_self" class="sc-jzJRlG kwXAcU"><span>HTML5</span><span class="arrowBullet"></span></a><a href="docs-test-backend.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Test</span><span class="arrowBullet"></span></a></div></div></div><div style="width:100%"><div style="width:100%"><p><em>New to React DnD? <a href="docs-overview.html">Read the overview</a> before jumping into the docs.</em></p>
+
+		<h1>
+		  DragSource<a id="dragsource">&nbsp;</a>
+		</h1>
+	<p>Wrap your component with <code>DragSource</code> to make it draggable. <code>DragSource</code> is a higher-order component accepting three required parameters. They are described in detail below.</p>
 <p>To use <code>DragSource</code>, don&#39;t forget to wrap the top-level component of your app in a <a href="docs-drag-drop-context.html"><code>DragDropContext</code></a>.</p>
-<h3>Signature<a id="signature">&nbsp;</a></h3><p><code>DragSource</code> uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes <code>DragSource</code> usable as an ES7 decorator. Read the <a href="docs-overview.html">overview</a> for a more detailed explanation of the decorators and the higher-order components.</p>
-</div><div class="CodeBlock"><ul class="CodeBlock-tabs"><li class="CodeBlock-tab CodeBlock-activeTab"><a>ES7</a></li><li class="CodeBlock-tab "><a>ES6</a></li><li class="CodeBlock-tab "><a>ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
+
+		<h3>
+		  Signature<a id="signature">&nbsp;</a>
+		</h3>
+	<p><code>DragSource</code> uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes <code>DragSource</code> usable as an ES7 decorator. Read the <a href="docs-overview.html">overview</a> for a more detailed explanation of the decorators and the higher-order components.</p>
+</div><div class="CodeBlock"><ul class="sc-iwsKbI bVpgNx"><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gsjMFF">ES7</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES6</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
 <code class="codeBlock"><span class="token keyword" >import</span> <span class="token punctuation" >{</span> <span class="token qualifier" >Drag</span><span class="token qualifier" >Source</span> <span class="token punctuation" >}</span> from <span class="token string" >'react-dnd'</span><span class="token punctuation" >;</span>
 
 @<span class="token function" >DragSource<span class="token punctuation" >(</span></span>type<span class="token punctuation" >,</span> spec<span class="token punctuation" >,</span> collect<span class="token punctuation" >)</span>
 <span class="token keyword" >export</span> <span class="token keyword" >default</span> <span class="token keyword" >class</span> <span class="token class-name" >MyComponent</span> <span class="token punctuation" >{</span>
   <span class="token comment" spellcheck="true">/* ... */</span>
 <span class="token punctuation" >}</span></code></div></div></div></div><div style="width:100%">
-<h3>Parameters<a id="parameters">&nbsp;</a></h3><ul>
+
+		<h3>
+		  Parameters<a id="parameters">&nbsp;</a>
+		</h3>
+	<ul>
 <li><p><strong><code>type</code></strong>: Required. Either a string, an ES6 symbol, or a function that returns either given the component&#39;s <code>props</code>. Only the <a href="docs-drop-target.html">drop targets</a> registered for the same type will react to the items produced by this drag source. Read the <a href="docs-overview.html">overview</a> to learn more about the items and types.</p>
 </li>
 <li><p><strong><code>spec</code></strong>: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drag source reacts to the drag and drop events. See the drag source specification described in detail in the next section.</p>
@@ -19,8 +31,16 @@
 <li><p><strong><code>options</code></strong>: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom <code>arePropsEqual(props, otherProps)</code> function inside the <code>options</code> object can improve the performance. Unless you have performance problems, don&#39;t worry about it.</p>
 </li>
 </ul>
-<h3>Drag Source Specification<a id="drag-source-specification">&nbsp;</a></h3><p>The second <code>spec</code> parameter must be a plain object implementing the drag source specification. Below is the list of all methods that it may have.</p>
-<h4>Specification Methods<a id="specification-methods">&nbsp;</a></h4><ul>
+
+		<h3>
+		  Drag Source Specification<a id="drag-source-specification">&nbsp;</a>
+		</h3>
+	<p>The second <code>spec</code> parameter must be a plain object implementing the drag source specification. Below is the list of all methods that it may have.</p>
+
+		<h4>
+		  Specification Methods<a id="specification-methods">&nbsp;</a>
+		</h4>
+	<ul>
 <li><p><strong><code>beginDrag(props, monitor, component)</code></strong>: Required. When the dragging starts, <code>beginDrag</code> is called. You must return a plain JavaScript object describing the data being dragged. What you return is the <em>only</em> information available to the drop targets about the drag source so it&#39;s important to pick the <em>minimal</em> data they need to know. You may be tempted to put a reference to the <code>component</code> into it, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It&#39;s a good idea to return something like <code>{ id: props.id }</code> from this method.</p>
 </li>
 <li><p><strong><code>endDrag(props, monitor, component)</code></strong>: Optional. When the dragging stops, <code>endDrag</code> is called. For every <code>beginDrag</code> call, a corresponding <code>endDrag</code> call is guaranteed. You may call <code>monitor.didDrop()</code> to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a <em>drop result</em> by returning a plain object from its <code>drop()</code> method, it will be available as <code>monitor.getDropResult()</code>. This method is a good place to fire a Flux action. <em>Note: If the component is unmounted while dragging, <code>component</code> parameter is set to be <code>null</code>.</em></p>
@@ -30,7 +50,11 @@
 <li><p><strong><code>isDragging(props, monitor)</code></strong>: Optional. By default, only the drag source that initiated the drag operation is considered to be dragging. You can override this behavior by defining a custom <code>isDragging</code> method. It might return something like <code>props.id === monitor.getItem().id</code>. Do this if the original component may be unmounted during the dragging and later “resurrected” with a different parent. For example, when moving a card across the lists in a Kanban board, you want it to retain the dragged appearance—even though technically, the component gets unmounted and a different one gets mounted every time you move it to another list. <em>Note: You may not call <code>monitor.isDragging()</code> inside this method.</em></p>
 </li>
 </ul>
-<h4>Specification Method Parameters<a id="specification-method-parameters">&nbsp;</a></h4><ul>
+
+		<h4>
+		  Specification Method Parameters<a id="specification-method-parameters">&nbsp;</a>
+		</h4>
+	<ul>
 <li><p><strong><code>props</code></strong>: Your component&#39;s current props.</p>
 </li>
 <li><p><strong><code>monitor</code></strong>: An instance of <a href="docs-drag-source-monitor.html"><code>DragSourceMonitor</code></a>. Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Read the <a href="docs-drag-source-monitor.html"><code>DragSourceMonitor</code> documentation</a> for a complete list of <code>monitor</code> methods, or read the <a href="docs-overview.html">overview</a> for an introduction to the monitors.</p>
@@ -38,7 +62,11 @@
 <li><p><strong><code>component</code></strong>: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call <code>setState</code>, and other component methods. It is purposefully missing from <code>isDragging</code> and <code>canDrag</code> because the instance may not be available by the time they are called. If you want these methods to depend on the component&#39;s state, consider lifting the state to the parent component, so that you can just use <code>props</code>. Generally your code will be cleaner if you rely on <code>props</code> instead whenever possible.</p>
 </li>
 </ul>
-<h3>The Collecting Function<a id="the-collecting-function">&nbsp;</a></h3><p>Just specifying the drag source <code>type</code> and <code>spec</code> is not quite enough.<br/>There&#39;s still a few more things we need to take care of:</p>
+
+		<h3>
+		  The Collecting Function<a id="the-collecting-function">&nbsp;</a>
+		</h3>
+	<p>Just specifying the drag source <code>type</code> and <code>spec</code> is not quite enough.<br/>There&#39;s still a few more things we need to take care of:</p>
 <ul>
 <li>connect the React DnD event handlers to some node in the component;</li>
 <li>pass some knowledge about the dragging state to our component.</li>
@@ -46,25 +74,49 @@
 <p>All communication between the React components happens via props, so it makes sense that React DnD injects special props into your component. However it gives you the freedom to name them and decide what props your component will receive.</p>
 <p>Your <em>collecting function</em> will be called by React DnD with a <em>connector</em> that lets you connect nodes to the DnD backend, and a <em>monitor</em> to query information about the drag state. It should return a plain object of props to inject into your component.</p>
 <p>If you&#39;re new to these concepts, the <a href="docs-overview.html">overview</a> should give you a good idea about them.</p>
-<h4>Parameters<a id="parameters">&nbsp;</a></h4><ul>
+
+		<h4>
+		  Parameters<a id="parameters">&nbsp;</a>
+		</h4>
+	<ul>
 <li><p><strong><code>connect</code></strong>: An instance of <a href="docs-drag-source-connector.html"><code>DragSourceConnector</code></a>. It has two methods: <code>dragPreview()</code> and <code>dragSource()</code>. Of them, <code>dragSource()</code> is the one you&#39;ll use the most. It returns a function you need to pass down to your component to connect the source DOM node to the React DnD backend. If you return something like <code>{ connectDragSource: connect.dragSource() }</code> from your <code>collect</code> function, the component will receive <code>connectDragSource</code> as a prop so you can mark the relevant node inside its <code>render()</code> as draggable: <code>return this.props.connectDragSource(&lt;div&gt;...&lt;/div&gt;)</code>. You can see this pattern in action in the example at the end of this file. Read the <a href="docs-drag-source-connector.html"><code>DragSourceConnector</code> documentation</a> for a complete list of <code>connect</code> methods, or read the <a href="docs-overview.html">overview</a> for an introduction to the connectors.</p>
 </li>
 <li><p><strong><code>monitor</code></strong>: An instance of <a href="docs-drag-source-monitor.html"><code>DragSourceMonitor</code></a>. It is precisely the same <code>monitor</code> you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Read the <a href="docs-drag-source-monitor.html"><code>DragSourceMonitor</code> documentation</a> for a complete list of <code>monitor</code> methods, or read the <a href="docs-overview.html">overview</a> for an introduction to the monitors.</p>
 </li>
 </ul>
-<h3>Return Value<a id="return-value">&nbsp;</a></h3><p><code>DragSource</code> wraps your component and returns another React component.<br/>For easier <a href="docs-testing.html">testing</a>, it provides an API to reach into the internals:</p>
-<h4>Static Properties<a id="static-properties">&nbsp;</a></h4><ul>
+
+		<h3>
+		  Return Value<a id="return-value">&nbsp;</a>
+		</h3>
+	<p><code>DragSource</code> wraps your component and returns another React component.<br/>For easier <a href="docs-testing.html">testing</a>, it provides an API to reach into the internals:</p>
+
+		<h4>
+		  Static Properties<a id="static-properties">&nbsp;</a>
+		</h4>
+	<ul>
 <li><strong><code>DecoratedComponent</code></strong>: Returns the wrapped component type.</li>
 </ul>
-<h4>Instance Methods<a id="instance-methods">&nbsp;</a></h4><ul>
+
+		<h4>
+		  Instance Methods<a id="instance-methods">&nbsp;</a>
+		</h4>
+	<ul>
 <li><p><strong><code>getDecoratedComponentInstance()</code></strong>: Returns the wrapped component instance.</p>
 </li>
 <li><p><strong><code>getHandlerId()</code></strong>: Returns the drag source ID that can be used to simulate the drag and drop events with the testing backend. Refer to the <a href="docs-testing.html">testing</a> tutorial for a usage example.</p>
 </li>
 </ul>
-<h3>Nesting Behavior<a id="nesting-behavior">&nbsp;</a></h3><p>If a drag source is nested in another drag source, the innermost drag source of the compatible type wins. Drag sources that return <code>false</code> from <code>canDrag</code> are skipped. The chosen drag source is the only one that will receive <code>beginDrag</code> and, subsequently, <code>endDrag</code>. There is no propagation once the drag source is determined.</p>
-<h3>Example<a id="example">&nbsp;</a></h3><p>Check out <a href="docs-tutorial.html">the tutorial</a> for more real examples!</p>
-</div><div class="CodeBlock"><ul class="CodeBlock-tabs"><li class="CodeBlock-tab CodeBlock-activeTab"><a>ES7</a></li><li class="CodeBlock-tab "><a>ES6</a></li><li class="CodeBlock-tab "><a>ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
+
+		<h3>
+		  Nesting Behavior<a id="nesting-behavior">&nbsp;</a>
+		</h3>
+	<p>If a drag source is nested in another drag source, the innermost drag source of the compatible type wins. Drag sources that return <code>false</code> from <code>canDrag</code> are skipped. The chosen drag source is the only one that will receive <code>beginDrag</code> and, subsequently, <code>endDrag</code>. There is no propagation once the drag source is determined.</p>
+
+		<h3>
+		  Example<a id="example">&nbsp;</a>
+		</h3>
+	<p>Check out <a href="docs-tutorial.html">the tutorial</a> for more real examples!</p>
+</div><div class="CodeBlock"><ul class="sc-iwsKbI bVpgNx"><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gsjMFF">ES7</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES6</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
 <code class="codeBlock"><span class="token keyword" >import</span> <span class="token qualifier" >React</span> from <span class="token string" >'react'</span><span class="token punctuation" >;</span>
 <span class="token keyword" >import</span> <span class="token punctuation" >{</span> <span class="token qualifier" >Drag</span><span class="token qualifier" >Source</span> <span class="token punctuation" >}</span> from <span class="token string" >'react-dnd'</span><span class="token punctuation" >;</span>
 
@@ -145,7 +197,11 @@
     <span class="token punctuation" >)</span><span class="token punctuation" >;</span>
   <span class="token punctuation" >}</span>
 <span class="token punctuation" >}</span></code></div></div></div></div><div style="width:100%">
-<h2>Type Definitions<a id="type-definitions">&nbsp;</a></h2><code class="codeBlock">type <span class="token qualifier" >React</span><span class="token qualifier" >Props</span> <span class="token operator" >=</span> <span class="token qualifier" >Object</span><span class="token punctuation" >;</span>
+
+		<h2>
+		  Type Definitions<a id="type-definitions">&nbsp;</a>
+		</h2>
+	<code class="codeBlock">type <span class="token qualifier" >React</span><span class="token qualifier" >Props</span> <span class="token operator" >=</span> <span class="token qualifier" >Object</span><span class="token punctuation" >;</span>
 
 type <span class="token qualifier" >Drag</span><span class="token qualifier" >Source</span><span class="token qualifier" >Type</span> <span class="token operator" >=</span>
   string <span class="token operator" >|</span>
@@ -190,5 +246,5 @@ type <span class="token qualifier" >Drag</span><span class="token qualifier" >So
   options<span class="token punctuation" >:</span> <span class="token operator" >?</span><span class="token qualifier" >Drag</span><span class="token qualifier" >Source</span><span class="token qualifier" >Options</span>
 <span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token punctuation" >(</span>
   component<span class="token punctuation" >:</span> <span class="token qualifier" >Your</span><span class="token qualifier" >React</span><span class="token qualifier" >Class</span>
-<span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token qualifier" >React</span><span class="token qualifier" >Class</span></code></div></div></div></div></div><script>window.INITIAL_PROPS = {"location":"docs-drag-source.html","devMode":false,"files":{"main.js":"main-3079f62ae5d91ce9fc84.js"}};
-</script><script src="main-3079f62ae5d91ce9fc84.js"></script></body></html>
+<span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token qualifier" >React</span><span class="token qualifier" >Class</span></code></div></div></div></div></div><script>window.INITIAL_PROPS = {"location":"docs-drag-source.html","devMode":false,"files":{"main.js":"main-81ff2558ef4395a9539e.js"}};
+</script><script src="main-81ff2558ef4395a9539e.js"></script></body></html>

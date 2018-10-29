@@ -1,7 +1,15 @@
-<!doctype html><html data-reactroot=""><head><meta charSet="utf-8"/><title>React DnD</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/><base target="_blank"/></head><body><div><header class="Header"><div class="NavBar"><div class="NavBar-container"><div class="NavBar-logo"><a href="./" target="_self" class="NavBar-logoTitle">React <i>DnD</i></a><p class="NavBar-logoDescription">Drag and Drop for React</p></div><div class="NavBar-item"><a class="NavBar-link" href="docs-overview.html" target="_self">Docs</a><a class="NavBar-link" href="examples-chessboard-tutorial-app.html" target="_self">Examples</a><a class="NavBar-link" href="https://github.com/react-dnd/react-dnd">GitHub</a></div></div></div></header><div class="PageBody "><div class="PageBody-container"><div style="width:100%"><div style="width:100%"><p>React DnD is a set of React <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">higher-order</a> components to help you build complex drag and drop interfaces while keeping your components decoupled. It is a perfect fit for apps like Trello and Storify, where dragging transfers data between different parts of the application, and the components change their appearance and the application state in response to the drag and drop events.</p>
-<h2>Installation<a id="installation">&nbsp;</a></h2><code class="codeBlock">npm install <span class="token operator" >--</span>save react<span class="token operator" >-</span>dnd
+<!doctype html><html data-reactroot=""><head><meta charSet="utf-8"/><title>React DnD</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/><base target="_blank"/></head><body><div><header class="sc-bZQynM hEnfJi"><div class="sc-bdVaJa fUZxRL"><div class="sc-bwzfXH gkjaqr"><div class="sc-EHOje cNUHjk"><a href="./" target="_self" class="sc-bxivhb foBabv">React <i>DnD</i></a><p class="sc-ifAKCX fLBAPQ">Drag and Drop for React</p></div><div><a href="docs-overview.html" target="_self" class="sc-htpNat bZFDsv">Docs</a><a href="examples-chessboard-tutorial-app.html" target="_self" class="sc-htpNat bZFDsv">Examples</a><a href="https://github.com/react-dnd/react-dnd" class="sc-htpNat bZFDsv">GitHub</a></div></div></div></header><div class="sc-gzVnrw kEiiFQ"><div class="sc-htoDjs hujRbY"><div style="width:100%"><div style="width:100%"><p>React DnD is a set of React <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">higher-order</a> components to help you build complex drag and drop interfaces while keeping your components decoupled. It is a perfect fit for apps like Trello and Storify, where dragging transfers data between different parts of the application, and the components change their appearance and the application state in response to the drag and drop events.</p>
+
+		<h2>
+		  Installation<a id="installation">&nbsp;</a>
+		</h2>
+	<code class="codeBlock">npm install <span class="token operator" >--</span>save react<span class="token operator" >-</span>dnd
 npm install <span class="token operator" >--</span>save react<span class="token operator" >-</span>dnd<span class="token operator" >-</span>html5<span class="token operator" >-</span>backend</code><p>The second package instructs React DnD to use <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop">the HTML5 drag and drop API</a> under the hood. You may choose to use a third-party backend instead, such as <a href="https://github.com/yahoo/react-dnd-touch-backend">the touch backend</a>.</p>
-<h2>What&#39;s It Look Like?<a id="what-39-s-it-look-like-">&nbsp;</a></h2></div><div class="CodeBlock"><ul class="CodeBlock-tabs"><li class="CodeBlock-tab CodeBlock-activeTab"><a>ES7</a></li><li class="CodeBlock-tab "><a>ES6</a></li><li class="CodeBlock-tab "><a>ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
+
+		<h2>
+		  What&#39;s It Look Like?<a id="what-39-s-it-look-like-">&nbsp;</a>
+		</h2>
+	</div><div class="CodeBlock"><ul class="sc-iwsKbI bVpgNx"><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gsjMFF">ES7</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES6</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
 <code class="codeBlock"><span class="token comment" spellcheck="true">// Let's make &lt;Card text='Write the docs' /> draggable!
 </span>
 <span class="token keyword" >import</span> <span class="token qualifier" >React</span><span class="token punctuation" >,</span> <span class="token punctuation" >{</span> <span class="token qualifier" >Component</span> <span class="token punctuation" >}</span> from <span class="token string" >'react'</span><span class="token punctuation" >;</span>
@@ -42,15 +50,59 @@ npm install <span class="token operator" >--</span>save react<span class="token 
     <span class="token punctuation" >)</span><span class="token punctuation" >;</span>
   <span class="token punctuation" >}</span>
 <span class="token punctuation" >}</span></code></div></div></div></div><div style="width:100%">
-<h2>Features<a id="features">&nbsp;</a></h2><h3>It works with your components<a id="it-works-with-your-components">&nbsp;</a></h3><p>Instead of providing readymade widgets, React DnD wraps your components and injects props into them. If you use React Router or Flummox, you already know this pattern.</p>
-<h3>It embraces unidirectional data flow<a id="it-embraces-unidirectional-data-flow">&nbsp;</a></h3><p>React DnD fully embraces the declarative rendering paradigm of React and doesn&#39;t mutate the DOM. It is a great complement to Redux and other architectures with the unidirectional data flow. In fact it is built on Redux.</p>
-<h3>It hides the platform quirks<a id="it-hides-the-platform-quirks">&nbsp;</a></h3><p>HTML5 drag and drop has an awkward API full of pitfalls and browser inconsistencies. React DnD handles them internally for you, so you can focus on developing your application instead of working around the browser bugs.</p>
-<h3>It is extensible and testable<a id="it-is-extensible-and-testable">&nbsp;</a></h3><p>React DnD uses the HTML5 drag and drop under the hood, but it also lets you supply a custom “backend”. You can create a custom DnD backend based on the touch events, the mouse events, or something else entirely. For example, a built-in simulation backend lets you test drag and drop interaction of your components in a Node environment.</p>
-<h3>It is ready for the future<a id="it-is-ready-for-the-future">&nbsp;</a></h3><p>React DnD does not export mixins, and works equally great with any components, whether they are created using ES6 classes, <code>createReactClass</code> or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.</p>
-<h2>Touch Support<a id="touch-support">&nbsp;</a></h2><p>For touch support, use React DnD with <a href="https://github.com/yahoo/react-dnd-touch-backend">the touch backend</a> instead of the HTML5 backend.</p>
-<h2>Non-Goals<a id="non-goals">&nbsp;</a></h2><p>React DnD gives you a set of powerful primitives, but it does not contain any readymade components. It&#39;s lower level than <a href="https://jqueryui.com/">jQuery UI</a> or <a href="http://interactjs.io/">interact.js</a> and is focused on getting the drag and drop interaction right, leaving its visual aspects such as axis constraints or snapping to you. For example, React DnD doesn&#39;t plan to provide a <code>Sortable</code> component. Instead it makes it easy for you to build your own, with any rendering customizations that you need.</p>
-<h2>Support and Contributions<a id="support-and-contributions">&nbsp;</a></h2><p>Issues and potential improvements are discussed on <a href="https://github.com/react-dnd/react-dnd/issues">Github</a>.</p>
-<h2>Thanks<a id="thanks">&nbsp;</a></h2><p>Big thanks to <a href="https://www.browserstack.com">BrowserStack</a> for letting the maintainers use their service to debug browser issues.</p>
-<h2>License<a id="license">&nbsp;</a></h2><p>React DnD is licensed as MIT. Use it as you will.</p>
-</div></div></div></div></div><script>window.INITIAL_PROPS = {"location":"index.html","devMode":false,"files":{"main.js":"main-3079f62ae5d91ce9fc84.js"}};
-</script><script src="main-3079f62ae5d91ce9fc84.js"></script></body></html>
+
+		<h2>
+		  Features<a id="features">&nbsp;</a>
+		</h2>
+	
+		<h3>
+		  It works with your components<a id="it-works-with-your-components">&nbsp;</a>
+		</h3>
+	<p>Instead of providing readymade widgets, React DnD wraps your components and injects props into them. If you use React Router or Flummox, you already know this pattern.</p>
+
+		<h3>
+		  It embraces unidirectional data flow<a id="it-embraces-unidirectional-data-flow">&nbsp;</a>
+		</h3>
+	<p>React DnD fully embraces the declarative rendering paradigm of React and doesn&#39;t mutate the DOM. It is a great complement to Redux and other architectures with the unidirectional data flow. In fact it is built on Redux.</p>
+
+		<h3>
+		  It hides the platform quirks<a id="it-hides-the-platform-quirks">&nbsp;</a>
+		</h3>
+	<p>HTML5 drag and drop has an awkward API full of pitfalls and browser inconsistencies. React DnD handles them internally for you, so you can focus on developing your application instead of working around the browser bugs.</p>
+
+		<h3>
+		  It is extensible and testable<a id="it-is-extensible-and-testable">&nbsp;</a>
+		</h3>
+	<p>React DnD uses the HTML5 drag and drop under the hood, but it also lets you supply a custom “backend”. You can create a custom DnD backend based on the touch events, the mouse events, or something else entirely. For example, a built-in simulation backend lets you test drag and drop interaction of your components in a Node environment.</p>
+
+		<h3>
+		  It is ready for the future<a id="it-is-ready-for-the-future">&nbsp;</a>
+		</h3>
+	<p>React DnD does not export mixins, and works equally great with any components, whether they are created using ES6 classes, <code>createReactClass</code> or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.</p>
+
+		<h2>
+		  Touch Support<a id="touch-support">&nbsp;</a>
+		</h2>
+	<p>For touch support, use React DnD with <a href="https://github.com/yahoo/react-dnd-touch-backend">the touch backend</a> instead of the HTML5 backend.</p>
+
+		<h2>
+		  Non-Goals<a id="non-goals">&nbsp;</a>
+		</h2>
+	<p>React DnD gives you a set of powerful primitives, but it does not contain any readymade components. It&#39;s lower level than <a href="https://jqueryui.com/">jQuery UI</a> or <a href="http://interactjs.io/">interact.js</a> and is focused on getting the drag and drop interaction right, leaving its visual aspects such as axis constraints or snapping to you. For example, React DnD doesn&#39;t plan to provide a <code>Sortable</code> component. Instead it makes it easy for you to build your own, with any rendering customizations that you need.</p>
+
+		<h2>
+		  Support and Contributions<a id="support-and-contributions">&nbsp;</a>
+		</h2>
+	<p>Issues and potential improvements are discussed on <a href="https://github.com/react-dnd/react-dnd/issues">Github</a>.</p>
+
+		<h2>
+		  Thanks<a id="thanks">&nbsp;</a>
+		</h2>
+	<p>Big thanks to <a href="https://www.browserstack.com">BrowserStack</a> for letting the maintainers use their service to debug browser issues.</p>
+
+		<h2>
+		  License<a id="license">&nbsp;</a>
+		</h2>
+	<p>React DnD is licensed as MIT. Use it as you will.</p>
+</div></div></div></div></div><script>window.INITIAL_PROPS = {"location":"index.html","devMode":false,"files":{"main.js":"main-81ff2558ef4395a9539e.js"}};
+</script><script src="main-81ff2558ef4395a9539e.js"></script></body></html>

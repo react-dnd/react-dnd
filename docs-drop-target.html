@@ -1,15 +1,27 @@
-<!doctype html><html data-reactroot=""><head><meta charSet="utf-8"/><title>React DnD</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/><base target="_blank"/></head><body><div><header class="Header"><div class="NavBar"><div class="NavBar-container"><div class="NavBar-logo"><a href="./" target="_self" class="NavBar-logoTitle">React <i>DnD</i></a><p class="NavBar-logoDescription">Drag and Drop for React</p></div><div class="NavBar-item"><a class="NavBar-link" href="docs-overview.html" target="_self">Docs</a><a class="NavBar-link" href="examples-chessboard-tutorial-app.html" target="_self">Examples</a><a class="NavBar-link" href="https://github.com/react-dnd/react-dnd">GitHub</a></div></div></div></header><div class="PageBody PageBody--hasSidebar"><div class="PageBody-container"><div class="SideBar"><div class="SideBar-content"><div class="SideBar-group"><h4 class="SideBar-groupTitle">Quick Start</h4><a href="docs-overview.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Overview</span><span class="arrowBullet"></span></a><a href="docs-tutorial.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Tutorial</span><span class="arrowBullet"></span></a><a href="docs-testing.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Testing</span><span class="arrowBullet"></span></a><a href="docs-faq.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">FAQ</span><span class="arrowBullet"></span></a><a href="docs-troubleshooting.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Troubleshooting</span><span class="arrowBullet"></span></a></div><div class="SideBar-group"><h4 class="SideBar-groupTitle">Top-Level API</h4><a href="docs-drag-source.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragSource</span><span class="arrowBullet"></span></a><a href="docs-drop-target.html" target="_self" class="SideBar-item SideBar-item--selected"><span class="SideBar-itemText">DropTarget</span><span class="arrowBullet"></span></a><a href="docs-drag-layer.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragLayer</span><span class="arrowBullet"></span></a><a href="docs-drag-drop-context.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragDropContext</span><span class="arrowBullet"></span></a><a href="docs-drag-drop-context-provider.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragDropContextProvider</span><span class="arrowBullet"></span></a></div><div class="SideBar-group"><h4 class="SideBar-groupTitle">Connecting to DOM</h4><a href="docs-drag-source-connector.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragSourceConnector</span><span class="arrowBullet"></span></a><a href="docs-drop-target-connector.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DropTargetConnector</span><span class="arrowBullet"></span></a></div><div class="SideBar-group"><h4 class="SideBar-groupTitle">Monitoring State</h4><a href="docs-drag-source-monitor.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragSourceMonitor</span><span class="arrowBullet"></span></a><a href="docs-drop-target-monitor.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DropTargetMonitor</span><span class="arrowBullet"></span></a><a href="docs-drag-layer-monitor.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">DragLayerMonitor</span><span class="arrowBullet"></span></a></div><div class="SideBar-group"><h4 class="SideBar-groupTitle">Backends</h4><a href="docs-html5-backend.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">HTML5</span><span class="arrowBullet"></span></a><a href="docs-test-backend.html" target="_self" class="SideBar-item"><span class="SideBar-itemText">Test</span><span class="arrowBullet"></span></a></div></div></div><div style="width:100%"><div style="width:100%"><p><em>New to React DnD? <a href="docs-overview.html">Read the overview</a> before jumping into the docs.</em></p>
-<h1>DropTarget<a id="droptarget">&nbsp;</a></h1><p>Wrap your component with <code>DropTarget</code> to make it react to the compatible items being dragged, hovered, or dropped on it. <code>DropTarget</code> is a higher-order component.</p>
+<!doctype html><html data-reactroot=""><head><meta charSet="utf-8"/><title>React DnD</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/><base target="_blank"/></head><body><div><header class="sc-bZQynM hEnfJi"><div class="sc-bdVaJa fUZxRL"><div class="sc-bwzfXH gkjaqr"><div class="sc-EHOje cNUHjk"><a href="./" target="_self" class="sc-bxivhb foBabv">React <i>DnD</i></a><p class="sc-ifAKCX fLBAPQ">Drag and Drop for React</p></div><div><a href="docs-overview.html" target="_self" class="sc-htpNat bZFDsv">Docs</a><a href="examples-chessboard-tutorial-app.html" target="_self" class="sc-htpNat bZFDsv">Examples</a><a href="https://github.com/react-dnd/react-dnd" class="sc-htpNat bZFDsv">GitHub</a></div></div></div></header><div class="sc-gzVnrw kEiiFQ"><div class="sc-dnqmqq cfpgWY"><div class="sc-VigVT iPWaGO"><div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Quick Start</h4><a href="docs-overview.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Overview</span><span class="arrowBullet"></span></a><a href="docs-tutorial.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Tutorial</span><span class="arrowBullet"></span></a><a href="docs-testing.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Testing</span><span class="arrowBullet"></span></a><a href="docs-faq.html" target="_self" class="sc-jzJRlG kwXAcU"><span>FAQ</span><span class="arrowBullet"></span></a><a href="docs-troubleshooting.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Troubleshooting</span><span class="arrowBullet"></span></a></div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Top-Level API</h4><a href="docs-drag-source.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragSource</span><span class="arrowBullet"></span></a><a href="docs-drop-target.html" target="_self" class="sc-cSHVUG hsTeSa"><span>DropTarget</span><span class="arrowBullet"></span></a><a href="docs-drag-layer.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragLayer</span><span class="arrowBullet"></span></a><a href="docs-drag-drop-context.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragDropContext</span><span class="arrowBullet"></span></a><a href="docs-drag-drop-context-provider.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragDropContextProvider</span><span class="arrowBullet"></span></a></div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Connecting to DOM</h4><a href="docs-drag-source-connector.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragSourceConnector</span><span class="arrowBullet"></span></a><a href="docs-drop-target-connector.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DropTargetConnector</span><span class="arrowBullet"></span></a></div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Monitoring State</h4><a href="docs-drag-source-monitor.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragSourceMonitor</span><span class="arrowBullet"></span></a><a href="docs-drop-target-monitor.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DropTargetMonitor</span><span class="arrowBullet"></span></a><a href="docs-drag-layer-monitor.html" target="_self" class="sc-jzJRlG kwXAcU"><span>DragLayerMonitor</span><span class="arrowBullet"></span></a></div><div class="sc-jTzLTM cGLtBC"><h4 class="sc-fjdhpX kDNhPO">Backends</h4><a href="docs-html5-backend.html" target="_self" class="sc-jzJRlG kwXAcU"><span>HTML5</span><span class="arrowBullet"></span></a><a href="docs-test-backend.html" target="_self" class="sc-jzJRlG kwXAcU"><span>Test</span><span class="arrowBullet"></span></a></div></div></div><div style="width:100%"><div style="width:100%"><p><em>New to React DnD? <a href="docs-overview.html">Read the overview</a> before jumping into the docs.</em></p>
+
+		<h1>
+		  DropTarget<a id="droptarget">&nbsp;</a>
+		</h1>
+	<p>Wrap your component with <code>DropTarget</code> to make it react to the compatible items being dragged, hovered, or dropped on it. <code>DropTarget</code> is a higher-order component.</p>
 <p>To use <code>DropTarget</code>, don&#39;t forget to wrap the top-level component of your app in a <a href="docs-drag-drop-context.html"><code>DragDropContext</code></a>.</p>
-<h3>Signature<a id="signature">&nbsp;</a></h3><p><code>DropTarget</code> uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes <code>DropTarget</code> usable as an ES7 decorator. Read the <a href="docs-overview.html">overview</a> for a more detailed explanation of the decorators and the higher-order components.</p>
-</div><div class="CodeBlock"><ul class="CodeBlock-tabs"><li class="CodeBlock-tab CodeBlock-activeTab"><a>ES7</a></li><li class="CodeBlock-tab "><a>ES6</a></li><li class="CodeBlock-tab "><a>ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
+
+		<h3>
+		  Signature<a id="signature">&nbsp;</a>
+		</h3>
+	<p><code>DropTarget</code> uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes <code>DropTarget</code> usable as an ES7 decorator. Read the <a href="docs-overview.html">overview</a> for a more detailed explanation of the decorators and the higher-order components.</p>
+</div><div class="CodeBlock"><ul class="sc-iwsKbI bVpgNx"><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gsjMFF">ES7</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES6</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
 <code class="codeBlock"><span class="token keyword" >import</span> <span class="token punctuation" >{</span> <span class="token qualifier" >Drop</span><span class="token qualifier" >Target</span> <span class="token punctuation" >}</span> from <span class="token string" >'react-dnd'</span><span class="token punctuation" >;</span>
 
 @<span class="token function" >DropTarget<span class="token punctuation" >(</span></span>types<span class="token punctuation" >,</span> spec<span class="token punctuation" >,</span> collect<span class="token punctuation" >)</span>
 <span class="token keyword" >export</span> <span class="token keyword" >default</span> <span class="token keyword" >class</span> <span class="token class-name" >MyComponent</span> <span class="token punctuation" >{</span>
   <span class="token comment" spellcheck="true">/* ... */</span>
 <span class="token punctuation" >}</span></code></div></div></div></div><div style="width:100%">
-<h3>Parameters<a id="parameters">&nbsp;</a></h3><ul>
+
+		<h3>
+		  Parameters<a id="parameters">&nbsp;</a>
+		</h3>
+	<ul>
 <li><p><strong><code>types</code></strong>: Required. A string, an ES6 symbol, an array of either, or a function that returns either of those, given component&#39;s <code>props</code>. This drop target will only react to the items produced by the <a href="docs-drag-source.html">drag sources</a> of the specified type or types. Read the <a href="docs-overview.html">overview</a> to learn more about the items and types.</p>
 </li>
 <li><p><strong><code>spec</code></strong>: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drop target reacts to the drag and drop events. See the drop target specification described in detail in the next section.</p>
@@ -19,8 +31,16 @@
 <li><p><strong><code>options</code></strong>: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom <code>arePropsEqual(props, otherProps)</code> function inside the <code>options</code> object can improve the performance. Unless you have performance problems, don&#39;t worry about it.</p>
 </li>
 </ul>
-<h3>Drop Target Specification<a id="drop-target-specification">&nbsp;</a></h3><p>The second <code>spec</code> parameter must be a plain object implementing the drop target specification. Below is the list of all methods that it may have.</p>
-<h4>Specification Methods<a id="specification-methods">&nbsp;</a></h4><ul>
+
+		<h3>
+		  Drop Target Specification<a id="drop-target-specification">&nbsp;</a>
+		</h3>
+	<p>The second <code>spec</code> parameter must be a plain object implementing the drop target specification. Below is the list of all methods that it may have.</p>
+
+		<h4>
+		  Specification Methods<a id="specification-methods">&nbsp;</a>
+		</h4>
+	<ul>
 <li><p><strong><code>drop(props, monitor, component)</code></strong>: Optional. Called when a compatible item is dropped on the target. You may either return undefined, or a plain object. If you return an object, it is going to become <em>the drop result</em> and will be available to the drag source in its <code>endDrag</code> method as <code>monitor.getDropResult()</code>. This is useful in case you want to perform different actions depending on which target received the drop. If you have nested drop targets, you can test whether a nested target has already handled <code>drop</code> by checking <code>monitor.didDrop()</code> and <code>monitor.getDropResult()</code>. Both this method and the source&#39;s <code>endDrag</code> method are good places to fire Flux actions. This method will not be called if <code>canDrop()</code> is defined and returns <code>false</code>.</p>
 </li>
 <li><p><strong><code>hover(props, monitor, component)</code></strong>: Optional. Called when an item is hovered over the component. You can check <code>monitor.isOver({ shallow: true })</code> to test whether the hover happens over <em>just</em> the current target, or over a nested one. Unlike <code>drop()</code>, this method will be called even if <code>canDrop()</code> is defined and returns <code>false</code>. You can check <code>monitor.canDrop()</code> to test whether this is the case.</p>
@@ -28,8 +48,12 @@
 <li><p><strong><code>canDrop(props, monitor)</code></strong>: Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just omit this method. Specifying it is handy if you&#39;d like to disable dropping based on some predicate over <code>props</code> or <code>monitor.getItem()</code>. <em>Note: You may not call <code>monitor.canDrop()</code> inside this method.</em></p>
 </li>
 </ul>
-<p><strong>The spec offers no methods to handle enter or leave events by purpose.</strong> Instead, return the result of <code>monitor.isOver()</code> call from your <em>collecting function</em>, so that you can use <code>componentWillReceiveProps</code> or <code>componentDidUpdate</code> React hooks to process the entering and the leaving events in your component. You may also check <code>monitor.isOver({ shallow: true })</code> if don&#39;t want the nested drop targets to count.</p>
-<h4>Specification Method Parameters<a id="specification-method-parameters">&nbsp;</a></h4><ul>
+<p><strong>The spec offers no methods to handle enter or leave events by purpose.</strong> Instead, return the result of <code>monitor.isOver()</code> call from your <em>collecting function</em>, so that you can use the <code>componentDidUpdate</code> React hook to process the entering and the leaving events in your component. You may also check <code>monitor.isOver({ shallow: true })</code> if don&#39;t want the nested drop targets to count.</p>
+
+		<h4>
+		  Specification Method Parameters<a id="specification-method-parameters">&nbsp;</a>
+		</h4>
+	<ul>
 <li><p><strong><code>props</code></strong>: Your component&#39;s current props.</p>
 </li>
 <li><p><strong><code>monitor</code></strong>: An instance of <a href="docs-drop-target-monitor.html"><code>DropTargetMonitor</code></a>. Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, whether it is over the current target, and whether it can be dropped. Read the <a href="docs-drop-target-monitor.html"><code>DropTargetMonitor</code> documentation</a> for a complete list of <code>monitor</code> methods, or read the <a href="docs-overview.html">overview</a> for an introduction to the monitors.</p>
@@ -37,7 +61,11 @@
 <li><p><strong><code>component</code></strong>: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call <code>setState</code>, and other component methods. It is purposefully missing from <code>canDrop</code> because the instance may not be available by the time it is called. If you want this method to depend on the component&#39;s state, consider lifting the state to the parent component, so that you can just use <code>props</code>. Generally your code will be cleaner if you rely on <code>props</code> instead whenever possible. Do note this is always <code>null</code> when hovering <a href="https://facebook.github.io/react/docs/reusable-components.html#stateless-functions">stateless components</a>.</p>
 </li>
 </ul>
-<h3>The Collecting Function<a id="the-collecting-function">&nbsp;</a></h3><p>Just specifying the drop target <code>types</code> and <code>spec</code> is not quite enough.<br/>There&#39;s still a few more things we need to take care of:</p>
+
+		<h3>
+		  The Collecting Function<a id="the-collecting-function">&nbsp;</a>
+		</h3>
+	<p>Just specifying the drop target <code>types</code> and <code>spec</code> is not quite enough.<br/>There&#39;s still a few more things we need to take care of:</p>
 <ul>
 <li>connect the React DnD event handlers to some node in the component;</li>
 <li>pass some knowledge about the dragging state to our component.</li>
@@ -45,26 +73,54 @@
 <p>All communication between the React components happens via props, so it makes sense that React DnD injects special props into your component. However it gives you the freedom to name them and decide what props your component will receive.</p>
 <p>Your <em>collecting function</em> will be called by React DnD with a <em>connector</em> that lets you connect nodes to the DnD backend, and a <em>monitor</em> to query information about the drag state. It should return a plain object of props to inject into your component.</p>
 <p>If you&#39;re new to these concepts, the <a href="docs-overview.html">overview</a> should give you a good idea about them.</p>
-<h4>Parameters<a id="parameters">&nbsp;</a></h4><ul>
+
+		<h4>
+		  Parameters<a id="parameters">&nbsp;</a>
+		</h4>
+	<ul>
 <li><p><strong><code>connect</code></strong>: An instance of <a href="docs-drop-target-connector.html"><code>DropTargetConnector</code></a>. It only has a single <code>dropTarget()</code> method. It returns a function you need to pass down to your component to connect the target DOM node to the React DnD backend. If you return something like <code>{ connectDropTarget: connect.dropTarget() }</code> from your <code>collect</code> function, the component will receive <code>connectDropTarget</code> as a prop so you can mark the relevant node inside its <code>render()</code> as droppable: <code>return this.props.connectDropTarget(&lt;div&gt;...&lt;/div&gt;)</code>. You can see this pattern in action in the example at the end of this file. Read the <a href="docs-drop-target-connector.html"><code>DropTargetConnector</code> documentation</a> for a complete list of <code>connect</code> methods, or read the <a href="docs-overview.html">overview</a> for an introduction to the connectors.</p>
 </li>
 <li><p><strong><code>monitor</code></strong>: An instance of <a href="docs-drop-target-monitor.html"><code>DropTargetMonitor</code></a>. It is precisely the same <code>monitor</code> you receive in the drop target specification methods, and you can use it to query the information about the current drag state. Read the <a href="docs-drop-target-monitor.html"><code>DropTargetMonitor</code> documentation</a> for a complete list of <code>monitor</code> methods, or read the <a href="docs-overview.html">overview</a> for an introduction to the monitors.</p>
 </li>
 </ul>
-<h3>Return Value<a id="return-value">&nbsp;</a></h3><p><code>DropTarget</code> wraps your component and returns another React component.<br/>For easier <a href="docs-testing.html">testing</a>, it provides an API to reach into the internals:</p>
-<h4>Static Properties<a id="static-properties">&nbsp;</a></h4><ul>
+
+		<h3>
+		  Return Value<a id="return-value">&nbsp;</a>
+		</h3>
+	<p><code>DropTarget</code> wraps your component and returns another React component.<br/>For easier <a href="docs-testing.html">testing</a>, it provides an API to reach into the internals:</p>
+
+		<h4>
+		  Static Properties<a id="static-properties">&nbsp;</a>
+		</h4>
+	<ul>
 <li><strong><code>DecoratedComponent</code></strong>: Returns the wrapped component type.</li>
 </ul>
-<h4>Instance Methods<a id="instance-methods">&nbsp;</a></h4><ul>
+
+		<h4>
+		  Instance Methods<a id="instance-methods">&nbsp;</a>
+		</h4>
+	<ul>
 <li><p><strong><code>getDecoratedComponentInstance()</code></strong>: Returns the wrapped component instance.</p>
 </li>
 <li><p><strong><code>getHandlerId()</code></strong>: Returns the drag source ID that can be used to simulate the drag and drop events with the testing backend. Refer to the <a href="docs-testing.html">testing</a> tutorial for a usage example.</p>
 </li>
 </ul>
-<h3>Nesting Behavior<a id="nesting-behavior">&nbsp;</a></h3><p>If a drop target is nested in another drop target, both <code>hover()</code> and <code>drop()</code> bubble from the innermost target up the chain. There is no way to cancel the propagation by design. Instead, any drop target may compare <code>monitor.isOver()</code> and <code>monitor.isOver({ shallow: true })</code> to verify whether a child, or just the current drop target is being hovered. When dropping, any drop target in the chain may check whether it is the first in chain by testing if <code>monitor.didDrop()</code> returns <code>false</code>. Any parent drop target may override the drop result specified by the child drop target by explicitly returning another drop result from <code>drop()</code>. If a parent target returns <code>undefined</code> from its <code>drop()</code> handler, it does not change the existing drop result that may have been specified by a nested drop target. The drop targets that return <code>false</code> from <code>canDrop()</code> are excluded from the <code>drop()</code> dispatch.</p>
-<h3>Handling Files and URLs<a id="handling-files-and-urls">&nbsp;</a></h3><p>When using the <a href="docs-html5-backend.html">HTML5 backend</a>, you can handle the file drops just by registering a drop target for <code>HTML5Backend.NativeTypes.FILE</code> or <code>HTML5Backend.NativeTypes.URL</code> built-in types. Due to the browser security restrictions, <code>monitor.getItem()</code> does not provide any information about the files or the URLs until they are dropped.</p>
-<h3>Example<a id="example">&nbsp;</a></h3><p>Check out <a href="docs-tutorial.html">the tutorial</a> for more real examples!</p>
-</div><div class="CodeBlock"><ul class="CodeBlock-tabs"><li class="CodeBlock-tab CodeBlock-activeTab"><a>ES7</a></li><li class="CodeBlock-tab "><a>ES6</a></li><li class="CodeBlock-tab "><a>ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
+
+		<h3>
+		  Nesting Behavior<a id="nesting-behavior">&nbsp;</a>
+		</h3>
+	<p>If a drop target is nested in another drop target, both <code>hover()</code> and <code>drop()</code> bubble from the innermost target up the chain. There is no way to cancel the propagation by design. Instead, any drop target may compare <code>monitor.isOver()</code> and <code>monitor.isOver({ shallow: true })</code> to verify whether a child, or just the current drop target is being hovered. When dropping, any drop target in the chain may check whether it is the first in chain by testing if <code>monitor.didDrop()</code> returns <code>false</code>. Any parent drop target may override the drop result specified by the child drop target by explicitly returning another drop result from <code>drop()</code>. If a parent target returns <code>undefined</code> from its <code>drop()</code> handler, it does not change the existing drop result that may have been specified by a nested drop target. The drop targets that return <code>false</code> from <code>canDrop()</code> are excluded from the <code>drop()</code> dispatch.</p>
+
+		<h3>
+		  Handling Files and URLs<a id="handling-files-and-urls">&nbsp;</a>
+		</h3>
+	<p>When using the <a href="docs-html5-backend.html">HTML5 backend</a>, you can handle the file drops just by registering a drop target for <code>HTML5Backend.NativeTypes.FILE</code> or <code>HTML5Backend.NativeTypes.URL</code> built-in types. Due to the browser security restrictions, <code>monitor.getItem()</code> does not provide any information about the files or the URLs until they are dropped.</p>
+
+		<h3>
+		  Example<a id="example">&nbsp;</a>
+		</h3>
+	<p>Check out <a href="docs-tutorial.html">the tutorial</a> for more real examples!</p>
+</div><div class="CodeBlock"><ul class="sc-iwsKbI bVpgNx"><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gsjMFF">ES7</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES6</a></li><li class="sc-gZMcBi lkpbro"><a class="sc-gqjmRU gUsOMp">ES5</a></li></ul><div class="CodeBlock-content"><div style="width:100%"><div style="width:100%">
 <code class="codeBlock"><span class="token keyword" >import</span> <span class="token qualifier" >React</span> from <span class="token string" >'react'</span><span class="token punctuation" >;</span>
 <span class="token keyword" >import</span> <span class="token punctuation" >{</span> findDOMNode <span class="token punctuation" >}</span> from <span class="token string" >'react-dom'</span><span class="token punctuation" >;</span>
 <span class="token keyword" >import</span> <span class="token punctuation" >{</span> <span class="token qualifier" >Drop</span><span class="token qualifier" >Target</span> <span class="token punctuation" >}</span> from <span class="token string" >'react-dnd'</span><span class="token punctuation" >;</span>
@@ -92,7 +148,7 @@
     <span class="token comment" spellcheck="true">// This is fired very often and lets you perform side effects
 </span>    <span class="token comment" spellcheck="true">// in response to the hover. You can't handle enter and leave
 </span>    <span class="token comment" spellcheck="true">// here—if you need them, put monitor.isOver() into collect() so you
-</span>    <span class="token comment" spellcheck="true">// can just use componentWillReceiveProps() to handle enter/leave.
+</span>    <span class="token comment" spellcheck="true">// can just use componentDidUpdate() to handle enter/leave.
 </span>
     <span class="token comment" spellcheck="true">// You can access the coordinates if you need them
 </span>    <span class="token keyword" >const</span> clientOffset <span class="token operator" >=</span> monitor<span class="token punctuation" >.</span><span class="token function" >getClientOffset<span class="token punctuation" >(</span></span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
@@ -136,16 +192,16 @@
   itemType<span class="token punctuation" >:</span> monitor<span class="token punctuation" >.</span><span class="token function" >getItemType<span class="token punctuation" >(</span></span><span class="token punctuation" >)</span>
 <span class="token punctuation" >}</span><span class="token punctuation" >)</span><span class="token punctuation" >)</span>
 <span class="token keyword" >export</span> <span class="token keyword" >default</span> <span class="token keyword" >class</span> <span class="token class-name" >ChessSquare</span> <span class="token punctuation" >{</span>
-  <span class="token function" >componentWillReceiveProps<span class="token punctuation" >(</span></span>nextProps<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
-    <span class="token block-keyword" >if</span> <span class="token punctuation" >(</span><span class="token operator" >!</span><span class="token var" >this</span><span class="token punctuation" >.</span>props<span class="token punctuation" >.</span>isOver <span class="token operator" >&amp;&amp;</span> nextProps<span class="token punctuation" >.</span>isOver<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+  <span class="token function" >componentDidUpdate<span class="token punctuation" >(</span></span>prevProps<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+    <span class="token block-keyword" >if</span> <span class="token punctuation" >(</span><span class="token operator" >!</span>prevProps<span class="token punctuation" >.</span>isOver <span class="token operator" >&amp;&amp;</span> <span class="token var" >this</span><span class="token punctuation" >.</span>props<span class="token punctuation" >.</span>isOver<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
       <span class="token comment" spellcheck="true">// You can use this as enter handler
 </span>    <span class="token punctuation" >}</span>
 
-    <span class="token block-keyword" >if</span> <span class="token punctuation" >(</span><span class="token var" >this</span><span class="token punctuation" >.</span>props<span class="token punctuation" >.</span>isOver <span class="token operator" >&amp;&amp;</span> <span class="token operator" >!</span>nextProps<span class="token punctuation" >.</span>isOver<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+    <span class="token block-keyword" >if</span> <span class="token punctuation" >(</span>prevProps<span class="token punctuation" >.</span>isOver <span class="token operator" >&amp;&amp;</span> <span class="token operator" >!</span><span class="token var" >this</span><span class="token punctuation" >.</span>props<span class="token punctuation" >.</span>isOver<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
       <span class="token comment" spellcheck="true">// You can use this as leave handler
 </span>    <span class="token punctuation" >}</span>
 
-    <span class="token block-keyword" >if</span> <span class="token punctuation" >(</span><span class="token var" >this</span><span class="token punctuation" >.</span>props<span class="token punctuation" >.</span>isOverCurrent <span class="token operator" >&amp;&amp;</span> <span class="token operator" >!</span>nextProps<span class="token punctuation" >.</span>isOverCurrent<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+    <span class="token block-keyword" >if</span> <span class="token punctuation" >(</span>prevProps<span class="token punctuation" >.</span>isOverCurrent <span class="token operator" >&amp;&amp;</span> <span class="token operator" >!</span><span class="token var" >this</span><span class="token punctuation" >.</span>props<span class="token punctuation" >.</span>isOverCurrent<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
       <span class="token comment" spellcheck="true">// You can be more specific and track enter/leave
 </span>      <span class="token comment" spellcheck="true">// shallowly, not including nested targets
 </span>    <span class="token punctuation" >}</span>
@@ -168,7 +224,11 @@
     <span class="token punctuation" >)</span><span class="token punctuation" >;</span>
   <span class="token punctuation" >}</span>
 <span class="token punctuation" >}</span></code></div></div></div></div><div style="width:100%">
-<h2>Type Definitions<a id="type-definitions">&nbsp;</a></h2><code class="codeBlock">type <span class="token qualifier" >React</span><span class="token qualifier" >Props</span> <span class="token operator" >=</span> <span class="token qualifier" >Object</span><span class="token punctuation" >;</span>
+
+		<h2>
+		  Type Definitions<a id="type-definitions">&nbsp;</a>
+		</h2>
+	<code class="codeBlock">type <span class="token qualifier" >React</span><span class="token qualifier" >Props</span> <span class="token operator" >=</span> <span class="token qualifier" >Object</span><span class="token punctuation" >;</span>
 
 type <span class="token qualifier" >Drop</span><span class="token qualifier" >Target</span><span class="token qualifier" >Types</span> <span class="token operator" >=</span>
   string <span class="token operator" >|</span>
@@ -209,5 +269,5 @@ type <span class="token qualifier" >Drop</span><span class="token qualifier" >Ta
   options<span class="token punctuation" >:</span> <span class="token operator" >?</span><span class="token qualifier" >Drop</span><span class="token qualifier" >Target</span><span class="token qualifier" >Options</span>
 <span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token punctuation" >(</span>
   component<span class="token punctuation" >:</span> <span class="token qualifier" >Your</span><span class="token qualifier" >React</span><span class="token qualifier" >Class</span>
-<span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token qualifier" >React</span><span class="token qualifier" >Class</span></code></div></div></div></div></div><script>window.INITIAL_PROPS = {"location":"docs-drop-target.html","devMode":false,"files":{"main.js":"main-3079f62ae5d91ce9fc84.js"}};
-</script><script src="main-3079f62ae5d91ce9fc84.js"></script></body></html>
+<span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token qualifier" >React</span><span class="token qualifier" >Class</span></code></div></div></div></div></div><script>window.INITIAL_PROPS = {"location":"docs-drop-target.html","devMode":false,"files":{"main.js":"main-81ff2558ef4395a9539e.js"}};
+</script><script src="main-81ff2558ef4395a9539e.js"></script></body></html>
