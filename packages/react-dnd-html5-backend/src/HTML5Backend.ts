@@ -63,7 +63,7 @@ export default class HTML5Backend implements Backend {
 		this.registry = manager.getRegistry()
 		this.context = manager.getContext()
 
-		this.enterLeaveCounter = new EnterLeaveCounter(node => this.isNodeInDocument(node));
+		this.enterLeaveCounter = new EnterLeaveCounter(this.isNodeInDocument);
 	}
 
 	// public for test
