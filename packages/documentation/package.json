@@ -5,16 +5,20 @@
 	"scripts": {
 		"clean": "rimraf __site__ __site_prerender__",
 		"serve": "webpack-dev-server --mode development --config site/webpack-client.config.js --hot --content-base __site__",
-		"start": "run-s clean prerender build:index_page serve",
+		"start": "run-s clean prerender build_index serve",
 		"prerender": "./node_modules/.bin/webpack --config site/webpack-prerender.config.js",
 		"build": "tsc",
-		"build:index_page": "ts-node ./scripts/buildSiteIndexPages.ts",
-		"build_site": "./scripts/buildStaticSite.sh"
+		"build_index": "ts-node ./scripts/buildSiteIndexPages.ts",
+		"build_site": "./scripts/buildStaticSite.sh",
+		"publish_gh_pages": "NODE_DEBUG=gh-pages gh-pages -d __site__ -t",
+		"nojekyll": "touch __site__/.nojekyll",
+		"publish": "run-s clean build_site nojekyll publish_gh_pages"
 	},
 	"devDependencies": {
 		"@babel/register": "^7.0.0",
 		"babel-loader": "^8.0.4",
 		"file-loader": "^2.0.0",
+		"gh-pages": "^2.0.1",
 		"html-loader": "^0.5.5",
 		"karma-sourcemap-loader": "^0.3.7",
 		"marked": "^0.5.1",
@@ -30,7 +34,7 @@
 	},
 	"dependencies": {
 		"@types/faker": "^4.1.2",
-		"@types/immutability-helper": "^2.6.3",		
+		"@types/immutability-helper": "^2.6.3",
 		"@types/react": "16.3.14",
 		"@types/react-dom": "16.0.9",
 		"@types/styled-components": "^4.0.3",

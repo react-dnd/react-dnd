@@ -41,7 +41,7 @@
 		"lint":
 			"tslint \"packages/**/*.{ts,tsx}\" -e \"**/{lib,node_modules}/**\"",
 		"test_modules": "lerna run test --stream",
-		"publish_docs": "./scripts/publishDocumentation.sh",
+		"publish_docs": "lerna run publish --scope react-dnd-documentation",
 		"test": "run-s lint build test_modules jest:cov",
 		"prettify":
 			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",

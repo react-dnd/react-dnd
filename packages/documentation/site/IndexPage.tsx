@@ -8,8 +8,6 @@ import ApiDocs from './ApiDocs'
 import Examples from './Examples'
 import IndexStyle from './IndexStyle'
 
-const Suspense = (React as any).Suspense
-
 export interface IndexPageProps {
 	devMode?: boolean
 	files: any
