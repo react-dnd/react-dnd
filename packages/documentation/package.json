@@ -31,9 +31,9 @@
 		"ts-loader": "^4.2.0",
 		"ts-node": "^6.0.5",
 		"url-loader": "^1.0.1",
-		"webpack": "^4.6.0",
-		"webpack-cli": "^2.1.2",
-		"webpack-dev-server": "^3.1.3"
+		"webpack": "^4.23.1",
+		"webpack-cli": "^3.1.2",
+		"webpack-dev-server": "^3.1.10"
 	},
 	"dependencies": {
 		"@types/faker": "^4.1.2",
@@ -48,7 +48,7 @@
 		"react-dnd-html5-backend": "^5.0.1",
 		"react-dnd-test-backend": "^5.0.1",
 		"react-dom": "^16.4.0",
-		"react-frame-component": "git://github.com/ryanseddon/react-frame-component.git#bcc0af0a4fc43c8e50908f478133cf8ee528238c",
+		"react-frame-component": "^4.0.2",
 		"shallowequal": "^1.0.2"
 	}
 }
