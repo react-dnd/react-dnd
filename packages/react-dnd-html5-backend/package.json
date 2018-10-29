@@ -31,7 +31,7 @@
 		"react": "^16.4.0",
 		"react-dnd-test-backend": "^5.0.1",
 		"rimraf": "^2.6.2",
-		"ts-loader": "^4.2.0",
+		"ts-loader": "^5.2.2",
 		"typescript": "^2.9.1",
 		"webpack": "^4.23.1"
 	}
