@@ -1,23 +1,17 @@
 let knightPosition: [number, number] = [1, 7]
+let observers: PositionObserver[] = []
 export type PositionObserver = ((position: [number, number]) => void) | null
-let observer: PositionObserver = null
 
 function emitChange() {
-	if (observer) {
-		observer(knightPosition)
-	}
+	observers.forEach(o => o && o(knightPosition))
 }
 
 export function observe(o: PositionObserver) {
-	if (observer) {
-		throw new Error('Multiple observers not implemented.')
-	}
-
-	observer = o
+	observers.push(o)
 	emitChange()
 
 	return () => {
-		observer = null
+		observers = observers.filter(t => t !== o)
 	}
 }
 
