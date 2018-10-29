@@ -217,11 +217,6 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/shallowequal@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@types/shallowequal/-/shallowequal-0.2.2.tgz#71918d93f1e9c242790c31b456969ff9f6028005"
-  integrity sha512-cXsrmXxB3ncbQ37Z51vgYdGyJFUMErUUo8LmzQoMiAj2JLi97OzEPtiQyIrMmQm/BatUR9L6y+b+F2dMugTNiA==
-
 "@webassemblyjs/ast@1.7.10":
   version "1.7.10"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.7.10.tgz#0cfc61d61286240b72fc522cb755613699eea40a"
