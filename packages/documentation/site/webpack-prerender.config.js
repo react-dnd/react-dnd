@@ -45,10 +45,6 @@ module.exports = {
 				use: 'null-loader',
 			},
 			{
-				test: /\.less$/,
-				use: 'null-loader',
-			},
-			{
 				test: /\.png$/,
 				use: [
 					{

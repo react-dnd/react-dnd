@@ -1,4 +1,3 @@
-import './base.less'
 import { APIPages, ExamplePages, Pages } from './Constants'
 import HomePage from './pages/HomePage'
 import APIPage from './pages/APIPage'
@@ -7,6 +6,7 @@ import * as React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
 import ApiDocs from './ApiDocs'
 import Examples from './Examples'
+import IndexStyle from './IndexStyle'
 
 const Suspense = (React as any).Suspense
 
@@ -68,6 +68,7 @@ export default class IndexPage extends React.Component<
 						content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 					/>
 					<base target="_blank" />
+					<IndexStyle />
 				</head>
 				<body>
 					{this.state.renderPage && this.renderPage()}
