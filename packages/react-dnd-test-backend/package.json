@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"dnd-core": "^4.0.5",
-		"lodash": "^4.17.10"
+		"lodash": "^4.17.11"
 	},
 	"devDependencies": {
 		"npm-run-all": "^4.1.3",
