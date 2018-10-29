@@ -37,9 +37,9 @@
 	},
 	"dependencies": {
 		"@types/faker": "^4.1.2",
-		"@types/immutability-helper": "^2.6.3",
-		"@types/react": "^16.4.18",
-		"@types/react-dom": "^16.0.9",
+		"@types/immutability-helper": "^2.6.3",		
+		"@types/react": "16.3.14",
+		"@types/react-dom": "^16.0.5",
 		"@types/styled-components": "^4.0.3",
 		"faker": "^3.1.0",
 		"immutability-helper": "^2.4.0",
@@ -52,8 +52,5 @@
 		"react-frame-component": "^4.0.2",
 		"shallowequal": "^1.1.0",
 		"styled-components": "^4.0.2"
-	},
-	"resolutions": {
-		"@types/react": "^16.4.18"
 	}
 }
