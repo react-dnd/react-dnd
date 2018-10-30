@@ -24,10 +24,10 @@ export default class Container extends React.Component<{}, ContainerState> {
 		const { droppedFiles } = this.state
 
 		return (
-			<React.Fragment>
+			<>
 				<TargetBox accepts={[FILE]} onDrop={this.handleFileDrop} />
 				<FileList files={droppedFiles} />
-			</React.Fragment>
+			</>
 		)
 	}
 
