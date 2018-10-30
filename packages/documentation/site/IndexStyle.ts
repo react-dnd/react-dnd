@@ -1,5 +1,7 @@
-@import './constants.less';
+import { createGlobalStyle } from 'styled-components'
+import theme from './theme'
 
+export default createGlobalStyle`
 * { box-sizing: border-box; }
 
 html, body {
@@ -10,24 +12,24 @@ html, body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  color: @body-color;
+  color: ${theme.color.body};
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.625;
 }
 
-@media only screen and (min-width: @screen-tablet) {
+@media only screen and (min-width: ${theme.dimensions.screen.tablet}) {
   body {
     font-size: 18px;
   }
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: @header-color;
+  color: ${theme.color.header};
 }
 
 a[href] {
-  color: @link-color;
+  color: ${theme.color.link};
   text-decoration: none;
 }
 
@@ -35,15 +37,13 @@ a[id]:not([href]) {
   // This is quite a badass hack.
   // We really those anchors despite the navbar!
   position: relative;
-  top: -@navbar-height;
+  top: -${theme.dimensions.navbar.height};
 }
 
 pre, code {
   font-family: Consolas, 'Source Code Pro', Menlo, monospace;
   background: #F9F8F7;
   color: #484A4C;
-  // font-size: 1em;
-  // letter-spacing: -0.015em;
 }
 
 a code {
@@ -72,13 +72,11 @@ blockquote > :last-child {
 
 hr {
   border: 1px solid;
-  color: @body-color;
+  color: ${theme.color.body};
   opacity: 0.1;
 }
 
-
 // Markdown
-
 .codeBlock {
   -webkit-overflow-scrolling: touch;
   background: #FCFBFA;
@@ -97,7 +95,6 @@ hr {
 }
 
 // TODO: not random colors
-
 .token.punctuation,
 .token.ignore,
 .t.interfaceDef,
@@ -156,3 +153,4 @@ hr {
   color: #998;
   font-style: italic;
 }
+`

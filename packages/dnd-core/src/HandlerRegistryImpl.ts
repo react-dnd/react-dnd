@@ -1,3 +1,5 @@
+declare var require: any
+
 import { Store } from 'redux'
 import {
 	addSource,
@@ -51,7 +53,10 @@ function mapContainsValue<T>(map: Map<string, T>, searchValue: T) {
 	const entries = map.entries()
 	let isDone = false
 	do {
-		const { done, value: [, value] } = entries.next()
+		const {
+			done,
+			value: [, value],
+		} = entries.next()
 		if (value === searchValue) {
 			return true
 		}
