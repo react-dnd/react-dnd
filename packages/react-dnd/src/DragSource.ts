@@ -21,7 +21,7 @@ const isPlainObject = require('lodash/isPlainObject')
  * @param type The dragsource type
  * @param spec The drag source specification
  * @param collect The props collector function
- * @param options DnD optinos
+ * @param options DnD options
  */
 export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 	type: SourceType | ((props: Props) => SourceType),
