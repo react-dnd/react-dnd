@@ -1,13 +1,9 @@
 var path = require('path')
-var webpack = require('webpack')
-const CircularDependencyPlugin = require('circular-dependency-plugin')
-
-var isDev = process.env.NODE_ENV !== 'production'
 const root = path.join(__dirname, '..', '..', '..')
 
 module.exports = {
+	mode: 'development',
 	entry: path.join(__dirname, 'renderPath.ts'),
-	mode: isDev ? 'development' : 'production',
 	output: {
 		path: path.join(__dirname, '..', '__site_prerender__'),
 		filename: 'renderPath.js',
@@ -39,14 +35,6 @@ module.exports = {
 						},
 					},
 				],
-			},
-			{
-				test: /\.css$/,
-				use: 'null-loader',
-			},
-			{
-				test: /\.less$/,
-				use: 'null-loader',
 			},
 			{
 				test: /\.png$/,
@@ -84,16 +72,4 @@ module.exports = {
 			'dnd-core': path.join(root, 'packages/dnd-core/src'),
 		},
 	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-			__DEV__: JSON.stringify(isDev || true),
-		}),
-		new CircularDependencyPlugin({
-			exclude: /node_modules/,
-			failOnError: false,
-			allowAsyncCycles: false,
-			cwd: process.cwd(),
-		}),
-	],
 }

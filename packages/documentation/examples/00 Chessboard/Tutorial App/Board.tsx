@@ -1,13 +1,20 @@
 import * as React from 'react'
 import { DragDropContext } from 'react-dnd'
+import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
 import BoardSquare from './BoardSquare'
 import Knight from './Knight'
-import './Board.less'
 
 export interface BoardProps {
 	knightPosition: [number, number]
 }
+
+const Container = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+`
 
 @DragDropContext(HTML5Backend)
 export default class Board extends React.Component<BoardProps> {
@@ -17,7 +24,7 @@ export default class Board extends React.Component<BoardProps> {
 			squares.push(this.renderSquare(i))
 		}
 
-		return <div className="Board">{squares}</div>
+		return <Container>{squares}</Container>
 	}
 
 	private renderSquare(i: number) {
