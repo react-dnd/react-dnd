@@ -1,3 +1,5 @@
+declare var require: any
+
 import { Store } from 'redux'
 import matchesType from './utils/matchesType'
 import {

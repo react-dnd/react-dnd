@@ -1,6 +1,7 @@
 import * as React from 'react'
-import './SideBar.less'
+import styled from 'styled-components'
 import { Page, PageGroup } from '../Constants'
+import theme from '../theme'
 
 export interface SideBarProps {
 	groups: PageGroup[]
@@ -10,36 +11,73 @@ export interface SideBarProps {
 export default class SideBar extends React.Component<SideBarProps> {
 	public render() {
 		return (
-			<div className="SideBar">
-				<div className="SideBar-content">
-					{this.props.groups.map(this.renderGroup, this)}
-				</div>
-			</div>
+			<Container>
+				<div>{this.props.groups.map(this.renderGroup, this)}</div>
+			</Container>
 		)
 	}
 
 	private renderGroup({ title, pages }: PageGroup, index: number) {
 		return (
-			<div className="SideBar-group" key={index}>
-				<h4 className="SideBar-groupTitle">{title}</h4>
+			<Group key={index}>
+				<GroupTitle>{title}</GroupTitle>
 				{Object.keys(pages).map(key => this.renderLink(pages[key], key))}
-			</div>
+			</Group>
 		)
 	}
 
 	private renderLink({ title, location }: Page, key: string) {
+		const isSelected = this.props.example.location === location
 		const arrow = <span className="arrowBullet" />
-
-		let linkClass = 'SideBar-item'
-		if (this.props.example.location === location) {
-			linkClass += ' SideBar-item--selected'
-		}
+		const Link = isSelected ? SelectedSidebarItem : SidebarItem
 
 		return (
-			<a key={key} href={location} target="_self" className={linkClass}>
-				<span className="SideBar-itemText">{title}</span>
+			<Link key={key} href={location} target="_self">
+				<span>{title}</span>
 				{arrow}
-			</a>
+			</Link>
 		)
 	}
 }
+
+const Container = styled.div`
+	flex-shrink: 0;
+
+	@media only screen and (min-width: ${theme.dimensions.screen.tablet}) {
+		position: fixed;
+		left: ${theme.dimensions.content.padding};
+		top: ${theme.dimensions.navbar.height};
+		bottom: 0;
+		width: ${theme.dimensions.sidebar.width};
+		overflow: scroll;
+		padding: 3em 0;
+	}
+`
+
+const Group = styled.div`
+	margin-bottom: ${theme.dimensions.content.padding};
+`
+
+const GroupTitle = styled.h4`
+	border-bottom: 2px solid fade(${theme.color.accent}, 10%);
+	padding-bottom: 0.5em;
+	margin: 0 0 0.5em 0;
+`
+
+const SidebarItem = styled.a`
+	display: block;
+	color: ${theme.color.body};
+`
+
+const SelectedSidebarItem = styled(SidebarItem)`
+	color: ${theme.color.accent};
+	position: relative;
+
+	&:after {
+		content: '·';
+		position: absolute;
+		left: -0.5em;
+		top: 0;
+		bottom: 0;
+	}
+`
