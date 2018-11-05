@@ -28,7 +28,7 @@ describe('DropTarget', () => {
 		expect(DecoratedClass).toBeDefined()
 	})
 
-	it('can apply to an SFC', () => {
+	it('can apply to an function component', () => {
 		const Component: React.SFC<{}> = () => null
 		const DecoratedComponent = DropTarget(
 			'abc',
