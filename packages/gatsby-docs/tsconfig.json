@@ -1,0 +1,10 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"declaration": true,
+		"outDir": "./lib",
+		"baseUrl": "./",
+		"experimentalDecorators": true
+	},
+	"include": ["./src/index.ts"]
+}
