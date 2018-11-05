@@ -21,7 +21,7 @@
 	},
 	"dependencies": {
 		"dnd-core": "^4.0.5",
-		"lodash": "^4.17.10"
+		"lodash": "^4.17.11"
 	},
 	"devDependencies": {
 		"@types/react": "16.3.14",
