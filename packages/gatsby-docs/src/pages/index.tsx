@@ -1,19 +1,23 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
-
+import { DragDropContextProvider } from 'react-dnd'
+import styled from 'styled-components'
 import Layout from '../components/layout'
-import Image from '../components/image'
+import Backend from 'react-dnd-html5-backend'
 
 const IndexPage: React.SFC = () => (
-  <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+	<Layout sidebar={<></>}>
+		<Container>
+			<DragDropContextProvider backend={Backend}>
+				<div>React DnD</div>
+			</DragDropContextProvider>
+		</Container>
+	</Layout>
 )
+
+const Container = styled.div`
+	flex: 1;
+	display: 'flex';
+	margintop: '5rem';
+`
 
 export default IndexPage

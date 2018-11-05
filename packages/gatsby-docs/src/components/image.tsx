@@ -1,7 +1,7 @@
 // tslint:disable jsx-no-lambda
 import * as React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-import Img from 'gatsby-image'
+const Img = require('gatsby-image').default
+const { StaticQuery, graphql } = require('gatsby')
 
 /*
  * This component is built using `gatsby-image` to automatically serve optimized
@@ -14,7 +14,7 @@ import Img from 'gatsby-image'
  * - `StaticQuery`: https://gatsby.app/staticquery
  */
 
-const Image = () => (
+const Image: React.SFC = () => (
 	<StaticQuery
 		query={graphql`
 			query {

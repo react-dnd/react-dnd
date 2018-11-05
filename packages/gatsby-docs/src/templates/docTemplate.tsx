@@ -4,7 +4,7 @@
  */
 
 import * as React from 'react'
-import { graphql } from 'gatsby'
+const { graphql } = require('gatsby')
 import Doc from '../components/doc'
 import Layout from '../components/layout'
 import Sidebar from '../components/sidebar'
@@ -13,40 +13,37 @@ import Sidebar from '../components/sidebar'
 require('prismjs/themes/prism.css')
 
 export default function Template(arg: any) {
-  const { currentPage, toc } = arg.data
+	const { currentPage } = arg.data
 
-  return (
-    <Layout
-      title={currentPage.frontmatter.title}
-      sidebar={<Sidebar activePath={arg.location.pathname} />}
-    >
-      <Doc docPage={currentPage} />
-    </Layout>
-  )
+	return (
+		<Layout sidebar={<Sidebar activePath={arg.location.pathname} />}>
+			<Doc docPage={currentPage} />
+		</Layout>
+	)
 }
 
 export const pageQuery = graphql`
-  query($path: String!) {
-    currentPage: markdownRemark(frontmatter: { path: { eq: $path } }) {
-      html
-      htmlAst
-      frontmatter {
-        path
-        title
-      }
-    }
+	query($path: String!) {
+		currentPage: markdownRemark(frontmatter: { path: { eq: $path } }) {
+			html
+			htmlAst
+			frontmatter {
+				path
+				title
+			}
+		}
 
-    toc: allMarkdownRemark(
-      filter: { frontmatter: { path: { regex: "/^/docs/.*/" } } }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            title
-            path
-          }
-        }
-      }
-    }
-  }
+		toc: allMarkdownRemark(
+			filter: { frontmatter: { path: { regex: "/^/docs/.*/" } } }
+		) {
+			edges {
+				node {
+					frontmatter {
+						title
+						path
+					}
+				}
+			}
+		}
+	}
 `
