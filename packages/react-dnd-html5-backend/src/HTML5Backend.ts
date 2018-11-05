@@ -6,7 +6,6 @@ import {
 	DragDropActions,
 	DragDropMonitor,
 	HandlerRegistry,
-	XYCoord,
 } from 'dnd-core'
 import EnterLeaveCounter from './EnterLeaveCounter'
 import { isFirefox } from './BrowserDetector'
@@ -22,7 +21,6 @@ import {
 import * as NativeTypes from './NativeTypes'
 import { HTML5BackendContext } from './interfaces'
 const defaults = require('lodash/defaults')
-const shallowEqual = require('shallowequal')
 
 declare global {
 	// tslint:disable-next-line interface-name
@@ -50,8 +48,6 @@ export default class HTML5Backend implements Backend {
 	private currentNativeSource: any = null
 	private currentNativeHandle: any = null
 	private currentDragSourceNode: any = null
-	private currentDragSourceNodeOffset: XYCoord | null = null
-	private currentDragSourceNodeOffsetChanged: boolean = false
 	private altKeyPressed: boolean = false
 	private mouseMoveTimeoutTimer: any = null
 	private asyncEndDragFrameId: any = null
@@ -279,8 +275,6 @@ export default class HTML5Backend implements Backend {
 	private setCurrentDragSourceNode(node: any) {
 		this.clearCurrentDragSourceNode()
 		this.currentDragSourceNode = node
-		this.currentDragSourceNodeOffset = getNodeClientOffset(node)
-		this.currentDragSourceNodeOffsetChanged = false
 
 		// A timeout of > 0 is necessary to resolve Firefox issue referenced
 		// See:
@@ -315,8 +309,6 @@ export default class HTML5Backend implements Backend {
 	private clearCurrentDragSourceNode() {
 		if (this.currentDragSourceNode) {
 			this.currentDragSourceNode = null
-			this.currentDragSourceNodeOffset = null
-			this.currentDragSourceNodeOffsetChanged = false
 
 			if (this.window) {
 				this.window.clearTimeout(this.mouseMoveTimeoutTimer)
@@ -332,24 +324,6 @@ export default class HTML5Backend implements Backend {
 		}
 
 		return false
-	}
-
-	private checkIfCurrentDragSourceRectChanged() {
-		const node = this.currentDragSourceNode
-		if (!node) {
-			return false
-		}
-
-		if (this.currentDragSourceNodeOffsetChanged) {
-			return true
-		}
-
-		this.currentDragSourceNodeOffsetChanged = !shallowEqual(
-			getNodeClientOffset(node),
-			this.currentDragSourceNodeOffset,
-		)
-
-		return this.currentDragSourceNodeOffsetChanged
 	}
 
 	private handleTopDragStartCapture = () => {
@@ -570,11 +544,9 @@ export default class HTML5Backend implements Backend {
 			// "drop and blow away the whole document" action.
 			e.preventDefault()
 			e.dataTransfer.dropEffect = 'none'
-		} else if (this.checkIfCurrentDragSourceRectChanged()) {
-			// Prevent animating to incorrect position.
-			// Drop effect must be other than 'none' to prevent animation.
+		} else {
 			e.preventDefault()
-			e.dataTransfer.dropEffect = 'move'
+			e.dataTransfer.dropEffect = 'none'
 		}
 	}
 
