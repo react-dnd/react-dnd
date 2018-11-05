@@ -186,6 +186,7 @@ html {
   font: 112.5%/1.45em georgia, serif;
   box-sizing: border-box;
   overflow-y: scroll;
+  height: 100%;
 }
 * {
   box-sizing: inherit;
@@ -197,6 +198,7 @@ html {
   box-sizing: inherit;
 }
 body {
+  height: 100%;
   color: hsla(0, 0%, 0%, 0.8);
   font-family: georgia, serif;
   font-weight: normal;
@@ -207,6 +209,11 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
+
+#___gatsby {
+  height: 100%;
+}
+
 img {
   max-width: 100%;
   margin-left: 0;
