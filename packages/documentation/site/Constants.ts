@@ -132,9 +132,9 @@ export const ExamplePages: PageGroup[] = [
 				location: 'examples-dustbin-single-target-in-iframe.html',
 				title: 'Within an iframe',
 			},
-			DUSTBIN_SFC: {
-				location: 'examples-dustbin-single-target-with-sfc.html',
-				title: 'Using SFCs',
+			DUSTBIN_FC: {
+				location: 'examples-dustbin-single-target-with-fc.html',
+				title: 'Using FCs',
 			},
 			DUSTBIN_COPY_OR_MOVE: {
 				location: 'examples-dustbin-copy-or-move.html',
