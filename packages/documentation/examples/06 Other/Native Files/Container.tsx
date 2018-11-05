@@ -1,7 +1,6 @@
 import * as React from 'react'
 import {
 	DragDropContext,
-	DragDropContextProvider,
 	DropTargetMonitor,
 } from 'react-dnd'
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'
@@ -25,12 +24,10 @@ export default class Container extends React.Component<{}, ContainerState> {
 		const { droppedFiles } = this.state
 
 		return (
-			<DragDropContextProvider backend={HTML5Backend}>
-				<div>
-					<TargetBox accepts={[FILE]} onDrop={this.handleFileDrop} />
-					<FileList files={droppedFiles} />
-				</div>
-			</DragDropContextProvider>
+			<>
+				<TargetBox accepts={[FILE]} onDrop={this.handleFileDrop} />
+				<FileList files={droppedFiles} />
+			</>
 		)
 	}
 
