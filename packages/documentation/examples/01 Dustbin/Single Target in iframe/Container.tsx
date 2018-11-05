@@ -31,7 +31,7 @@ export default class Container extends React.Component {
 		// If neither the prop or the context value for 'window' are present, the DragDropContextProvider
 		// will just use the global window.
 		return (
-			<Frame style={{ width: '100%', height: '100%' }}>
+			<Frame style={{ width: '100%', height: 400 }}>
 				<FrameBindingContext>
 					<div>
 						<div style={{ overflow: 'hidden', clear: 'both' }}>
