@@ -51,7 +51,6 @@
     "start": "npm run develop",
     "build_static_site": "gatsby build --prefix-paths",
     "publish_gh_pages": "NODE_DEBUG=gh-pages gh-pages -d public -t",
-    "clean_release": "run-s clean build release",
-    "release": "run-s build_static_site publish_gh_pages"
+    "release": "run-s clean build_static_site publish_gh_pages"
   }
 }
