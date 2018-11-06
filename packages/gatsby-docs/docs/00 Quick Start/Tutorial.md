@@ -169,8 +169,8 @@ My first attempt at `renderSquare` looks like this:
 ```js
 function renderSquare(x, y, [knightX, knightY]) {
   const black = (x + y) % 2 === 1;
-  const isKNight = knightX === x && knightY === y
-  const piece = isKnight ? <Knight /> : null;
+  const isKnightHere = knightX === x && knightY === y
+  const piece = isKnightHere ? <Knight /> : null;
 
   return (
     <Square black={black}>
@@ -199,7 +199,7 @@ export default function Board({ knightPosition }) {
 
 <img src='http://i.imgur.com/Br30DLg.png' width='512' height='384' alt='Screenshot'>
 
-At this point, I realize that I forgot to give my squares any layout. I'm going to try [Flexbox](https://developer.mozilla.org/en/CSS/Using_CSS_flexible_boxes) because why not. I added some styles to the root `div`, and also wrapped the `Square`s into `div`s so I could lay them out. Generally it's a good idea to keep components encapsulated and ignorant of how they're being laid out, even if this means adding wrapper `div`s.
+At this point, I realize that I forgot to give my squares any layout. I'm going to use [Flexbox](https://developer.mozilla.org/en/CSS/Using_CSS_flexible_boxes). I added some styles to the root `div`, and also wrapped the `Square`s into `div`s so I could lay them out. Generally it's a good idea to keep components encapsulated and ignorant of how they're being laid out, even if this means adding wrapper `div`s.
 
 
 ```js
@@ -208,14 +208,12 @@ import PropTypes from 'prop-types';
 import Square from './Square';
 import Knight from './Knight';
 
-function renderSquare(i, knightPosition) {
+function renderSquare(i, [knightX, knightY]) {
   const x = i % 8;
   const y = Math.floor(i / 8);
+  const isKnightHere = (x === knightX && y === knightY)
   const black = (x + y) % 2 === 1;
-  const [knightX, knightY] = knightPosition;
-  const piece = (x === knightX && y === knightY) ?
-    <Knight /> :
-    null;
+  const piece = isKnightHere ? <Knight /> : null;
 
   return (
     <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
@@ -226,10 +224,10 @@ function renderSquare(i, knightPosition) {
   );
 }
 
-export default function Board({}) {
+export default function Board({knightPosition}) {
   const squares = [];
   for (let i = 0; i < 64; i++) {
-    squares.push(this.renderSquare(i));
+    squares.push(this.renderSquare(i, knightPosition));
   }
 
   return (
@@ -265,11 +263,11 @@ ReactDOM.render(
 
 <img src='http://i.imgur.com/0fNBn5a.png' width='512' height='384' alt='Screenshot'>
 
-Declarative much? That's why people love working with React.
+The declarativeness is fantastic! That's why people love working with React.
 
 ## Adding the State
 
-We want to make the `Knight` draggable. It's a noble goal, but we need to see past it. What we really mean is that we want to keep the current `knightPosition` in some kind of state storage, and have some way to change it.
+We want to make the `Knight` draggable. What we need in order to pull this off is to keep the current `knightPosition` in some kind of state storage, and have some way to change it.
 
 Because setting up this state requires some thought, we won't try to implement dragging at the same time. Instead, we'll start with a simpler implementation. We will move the `Knight` when you click a particular `Square`, but only if this is allowed by the Chess rules. Implementing this logic should give us enough insight into managing the state, so we can replace clicking with the drag and drop once we've dealt with that.
 
@@ -285,12 +283,12 @@ import ReactDOM from 'react-dom';
 import Board from './Board';
 import { observe } from './Game';
 
-const rootEl = document.getElementById('root');
+const root = document.getElementById('root');
 
 observe(knightPosition =>
   ReactDOM.render(
     <Board knightPosition={knightPosition} />,
-    rootEl
+    root
   )
 );
 ```
@@ -308,7 +306,7 @@ export function observe(receive) {
 }
 ```
 
-Nothing feels as good as being back into the rendering game!
+It feels so good to be back in the rendering game!
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/1K0s0n0r0C0e2P2N2D1d/Screen%20Recording%202015-05-15%20at%2012.06%20pm.gif' width='404' height='445' alt='Screenshot'>
 
@@ -353,22 +351,10 @@ import { moveKnight } from './Game';
 /* ... */
 
 renderSquare(i, knightPosition) {
-  const x = i % 8;
-  const y = Math.floor(i / 8);
-  const black = (x + y) % 2 === 1;
-
-  const [knightX, knightY] = knightPosition;
-  const piece = (x === knightX && y === knightY) ?
-    <Knight /> :
-    null;
-
+  /* ... */
   return (
-    <div key={i}
-         style={{ width: '12.5%', height: '12.5%' }}
-         onClick={() => this.handleSquareClick(x, y)}>
-      <Square black={black}>
-        {piece}
-      </Square>
+    <div onClick={() => this.handleSquareClick(x, y)}>
+      {/* ... */}
     </div>
   );
 }
@@ -425,25 +411,30 @@ This part assumes you are at least somewhat familiar with the concepts presented
 We're going to start by installing React DnD and the HTML5 backend for it:
 
 ```
-npm install --save react-dnd react-dnd-html5-backend
+yarn add react-dnd react-dnd-html5-backend
 ```
 
 In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://github.com/yahoo/react-dnd-touch-backend), but this is out of scope of this tutorial.
 
 The first thing we need to set up in our app is the [`DragDropContext`](/docs/api/drag-drop-context). We need it to specify that we're going to use the [`HTML5` backend](/docs/backends/html5) in our app.
 
-Because the `Board` is the top-level component in our app, I'm going to put the [`DragDropContext`](/docs/api/drag-drop-context) on it:
+Because the `Board` is the top-level component in our app, I'm going to supply a  [`DragDropContextProvider`](/docs/api/drag-drop-context-provider) for its children:
 
 ```js
 import React, { Component } from 'react';
-import { DragDropContext } from 'react-dnd';
+import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-class Board extends Component {
+export default class Board extends Component {
   /* ... */
+  render() {
+    return (
+      <DragDropContextProvider backend={HTML5Backend}>
+      {/* ... */}
+      </DragDropContextProvider>
+    )
+  }
 }
-
-export default DragDropContext(HTML5Backend)(Board);
 ```
 
 Next, I'm going to create the constants for the draggable item types. We're only going to have a single item type in our game, a `KNIGHT`. I'm creating a `Constants` module that exports it:
@@ -537,33 +528,23 @@ I'm going to introduce a new component called the `BoardSquare`. It renders the 
 Here is the `BoardSquare` I extracted:
 
 ```js
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import Square from './Square';
 
-export default class BoardSquare extends Component {
-  render() {
-    const { x, y } = this.props;
-    const black = (x + y) % 2 === 1;
-
-    return (
-      <Square black={black}>
-        {this.props.children}
-      </Square>
-    );
-  }
+export default function BoardSquare({x, y, children}) {
+  const black = (x + y) % 2 === 1;
+  return (
+    <Square black={black}>
+      {children}
+    </Square>
+  );
 }
-
-BoardSquare.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired
-};
 ```
 
 I also changed the `Board` to use it:
 
 ```js
-renderSquare(i) {
+renderSquare(i, knightPosition) {
   const x = i % 8;
   const y = Math.floor(i / 8);
   return (
@@ -571,15 +552,14 @@ renderSquare(i) {
          style={{ width: '12.5%', height: '12.5%' }}>
       <BoardSquare x={x}
                    y={y}>
-        {this.renderPiece(x, y)}
+        {renderPiece(x, y, knightPosition)}
       </BoardSquare>
     </div>
   );
 }
 
-renderPiece(x, y) {
-  const [knightX, knightY] = this.props.knightPosition;
-  if (x === knightX && y === knightY) {
+renderPiece(x, y, [knightX, knightY]) {
+    if (x === knightX && y === knightY) {
     return <Knight />;
   }
 }
@@ -611,8 +591,7 @@ function collect(connect, monitor) {
 After changing the `render` function to connect the drop target and show the highlight overlay, here is what `BoardSquare` came to be:
 
 ```js
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
@@ -631,43 +610,33 @@ function collect(connect, monitor) {
   };
 }
 
-class BoardSquare extends Component {
-  render() {
-    const { x, y, connectDropTarget, isOver } = this.props;
-    const black = (x + y) % 2 === 1;
+function BoardSquare({ x, y, connectDropTarget, isOver, cdhildren }) {
+  const black = (x + y) % 2 === 1;
 
-    return connectDropTarget(
-      <div style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%'
-      }}>
-        <Square black={black}>
-          {this.props.children}
-        </Square>
-        {isOver &&
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            height: '100%',
-            width: '100%',
-            zIndex: 1,
-            opacity: 0.5,
-            backgroundColor: 'yellow',
-          }} />
-        }
-      </div>
-    );
-  }
+  return connectDropTarget(
+    <div style={{
+      position: 'relative',
+      width: '100%',
+      height: '100%'
+    }}>
+      <Square black={black}>
+        {children}
+      </Square>
+      {isOver &&
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          height: '100%',
+          width: '100%',
+          zIndex: 1,
+          opacity: 0.5,
+          backgroundColor: 'yellow',
+        }} />
+      }
+    </div>
+  );
 }
-
-BoardSquare.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  connectDropTarget: PropTypes.func.isRequired,
-  isOver: PropTypes.bool.isRequired
-};
 
 export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
@@ -712,8 +681,10 @@ function collect(connect, monitor) {
   };
 }
 
-class BoardSquare extends Component {
-  renderOverlay(color) {
+function BoardSquare({ x, y, connectDropTarget, isOver, canDrop, children }) {
+  const black = (x + y) % 2 === 1;
+
+  function renderOverlay(color) {
     return (
       <div style={{
         position: 'absolute',
@@ -728,34 +699,21 @@ class BoardSquare extends Component {
     );
   }
 
-  render() {
-    const { x, y, connectDropTarget, isOver, canDrop } = this.props;
-    const black = (x + y) % 2 === 1;
-
-    return connectDropTarget(
-      <div style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%'
-      }}>
-        <Square black={black}>
-          {this.props.children}
-        </Square>
-        {isOver && !canDrop && this.renderOverlay('red')}
-        {!isOver && canDrop && this.renderOverlay('yellow')}
-        {isOver && canDrop && this.renderOverlay('green')}
-      </div>
-    );
-  }
+  return connectDropTarget(
+    <div style={{
+      position: 'relative',
+      width: '100%',
+      height: '100%'
+    }}>
+      <Square black={black}>
+        {children}
+      </Square>
+      {isOver && !canDrop && this.renderOverlay('red')}
+      {!isOver && canDrop && this.renderOverlay('yellow')}
+      {isOver && canDrop && this.renderOverlay('green')}
+    </div>
+  );
 }
-
-BoardSquare.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  connectDropTarget: PropTypes.func.isRequired,
-  isOver: PropTypes.bool.isRequired,
-  canDrop: PropTypes.bool.isRequired
-};
 
 export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
 ```
@@ -794,4 +752,4 @@ Happy dragging and dropping.
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/1F2g2F0D470X0d0k2A1U/Screen%20Recording%202015-05-15%20at%2002.22%20pm.gif' width='404' height='445' alt='Screenshot'>
 
-Now go and [play with it](examples-chessboard-tutorial-app.html)!
+Now go and [play with it](/examples/tutorial)!
