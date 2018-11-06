@@ -1,4 +1,8 @@
-*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
+---
+path: "/docs/backends/html5"
+title: "HTML5 Backend"
+---
+*New to React DnD? [Read the overview](/docs/overview) before jumping into the docs.*
 
 HTML5
 ===================
@@ -19,25 +23,12 @@ While we suggest you to use NPM, you can find the precompiled UMD build in the `
 
 Aside from the default export, the HTML5 backend module also provides a few extras:
 
-* **`getEmptyImage()`**: a function returning a transparent empty [`Image`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image). Use `connect.dragPreview()` of the [DragSourceConnector](docs-drag-source-connector.html) to hide the browser-drawn drag preview completely. Handy for drawing the [custom drag layers with `DragLayer`](docs-drag-layer.html). Note that the custom drag previews don't work in IE.
+* **`getEmptyImage()`**: a function returning a transparent empty [`Image`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image). Use `connect.dragPreview()` of the [DragSourceConnector](/docs/api/drag-source-connector) to hide the browser-drawn drag preview completely. Handy for drawing the [custom drag layers with `DragLayer`](/docs/api/drag-layer). Note that the custom drag previews don't work in IE.
 
-* **`NativeTypes`**: an enumeration of three constants, `NativeTypes.FILE`, `NativeTypes.URL` and `NativeTypes.TEXT`. You may register the [drop targets](docs-drop-target.html) for these types to handle the drop of the native files, URLs, or the regular page text.
+* **`NativeTypes`**: an enumeration of three constants, `NativeTypes.FILE`, `NativeTypes.URL` and `NativeTypes.TEXT`. You may register the [drop targets](/docs/api/drop-target) for these types to handle the drop of the native files, URLs, or the regular page text.
 
 ### Usage
 
--------------------
-```js
-var createReactClass = require('create-react-class');
-var HTML5Backend = require('react-dnd-html5-backend');
-var DragDropContext = require('react-dnd').DragDropContext;
-
-var YourApp = createReactClass(
-  /* ... */
-);
-
-module.exports = DragDropContext(HTML5Backend)(YourApp);
-```
--------------------
 ```js
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
@@ -48,15 +39,3 @@ class YourApp {
 
 export default DragDropContext(HTML5Backend)(YourApp);
 ```
--------------------
-```js
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
-
-@DragDropContext(HTML5Backend)
-export default class YourApp {
-  /* ... */
-}
-```
--------------------
-

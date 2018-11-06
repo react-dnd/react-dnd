@@ -1,9 +1,13 @@
-*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
+---
+path: "/docs/api/drag-source-monitor"
+title: "DragSourceMonitor"
+---
+*New to React DnD? [Read the overview](/docs/overview) before jumping into the docs.*
 
 DragSourceMonitor
 ===================
 
-`DragSourceMonitor` is an object passed to a collecting function of the [`DragSource`](docs-drag-source.html). Its methods let you get information about the drag state of a specific drag source. The specific drag source bound to that monitor is called the monitor's *owner* below.
+`DragSourceMonitor` is an object passed to a collecting function of the [`DragSource`](/docs/api/drag-source). Its methods let you get information about the drag state of a specific drag source. The specific drag source bound to that monitor is called the monitor's *owner* below.
 
 ### Methods
 

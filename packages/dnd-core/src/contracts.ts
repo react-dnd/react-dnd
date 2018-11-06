@@ -1,3 +1,5 @@
+declare var require: any
+
 import { DragSource, DropTarget, Identifier } from './interfaces'
 const invariant = require('invariant')
 

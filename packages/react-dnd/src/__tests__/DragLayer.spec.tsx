@@ -16,7 +16,7 @@ describe('DragLayer', () => {
 		expect(DecoratedClass).toBeDefined()
 	})
 
-	it('can apply to an SFC', () => {
+	it('can apply to a function component', () => {
 		const Component: React.SFC<{}> = () => null
 		const DecoratedComponent = DragLayer(() => ({}))(Component)
 
