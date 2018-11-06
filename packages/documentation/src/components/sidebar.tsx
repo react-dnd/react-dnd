@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import { Page, PageGroup } from '../constants'
 import theme from '../theme'
@@ -24,7 +25,7 @@ const SideBar: React.SFC<SideBarProps> = ({ groups, location }) => {
 		const Link = isSelected ? SelectedSidebarItem : SidebarItem
 
 		return (
-			<Link key={key} href={pageLocation} target="_self">
+			<Link key={key} to={pageLocation}>
 				<span>{title}</span>
 				{arrow}
 			</Link>
@@ -60,7 +61,7 @@ const GroupTitle = styled.h4`
 	margin: 0 0 0.5em 0;
 `
 
-const SidebarItem = styled.a`
+const SidebarItem = styled(GatsbyLink)`
 	display: block;
 	color: ${theme.color.body};
 `

@@ -1,5 +1,6 @@
 // tslint:disable jsx-no-lambda
 import * as React from 'react'
+import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import theme from '../theme'
 
@@ -7,19 +8,17 @@ const NavBar: React.SFC = () => (
 	<Container>
 		<ContentContainer>
 			<LogoContainer>
-				<LogoTitle href="/" target="_self">
+				<LogoTitle to="/">
 					React <i>DnD</i>
 				</LogoTitle>
 				<LogoDescription>Drag and Drop for React</LogoDescription>
 			</LogoContainer>
 			<div>
-				<Link href={'/docs/overview'} target="_self">
-					Docs
-				</Link>
-				<Link href={'/examples'} target="_self">
-					Examples
-				</Link>
-				<Link href={'https://github.com/react-dnd/react-dnd/'}>GitHub</Link>
+				<StyledGatsbyLink to={'/docs/overview'}>Docs</StyledGatsbyLink>
+				<StyledGatsbyLink to={'/examples'}>Examples</StyledGatsbyLink>
+				<StyledWebLink href={'https://github.com/react-dnd/react-dnd/'}>
+					GitHub
+				</StyledWebLink>
 			</div>
 		</ContentContainer>
 	</Container>
@@ -45,12 +44,17 @@ const ContentContainer = styled.div`
 	border-bottom: 2px solid rgb(${theme.color.accentRGB.join(',')}, 0.1);
 `
 
-const Link = styled.a`
+const StyledWebLink = styled.a`
 	color: ${theme.color.accent};
 	margin-left: 1em;
 `
 
-const LogoTitle = styled.a`
+const StyledGatsbyLink = styled(GatsbyLink)`
+	color: ${theme.color.accent};
+	margin-left: 1em;
+`
+
+const LogoTitle = styled(GatsbyLink)`
 	font-weight: bold;
 	font-size: 1.125em;
 `
