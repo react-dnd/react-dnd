@@ -60,7 +60,6 @@ For easier [testing](/docs/testing), it provides an API to reach into the intern
 
 ```js
 import React from 'react';
-import PropTypes from 'prop-types';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
 import snapToGrid from './snapToGrid';

@@ -204,7 +204,6 @@ At this point, I realize that I forgot to give my squares any layout. I'm going 
 
 ```js
 import React from 'react';
-import PropTypes from 'prop-types';
 import Square from './Square';
 import Knight from './Knight';
 
@@ -473,7 +472,6 @@ Let's take a look at the whole `Knight` component now, including the `DragSource
 
 ```js
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ItemTypes } from './Constants';
 import { DragSource } from 'react-dnd';
 
@@ -646,7 +644,6 @@ I'm also adding `monitor.canDrop()` to my collecting function, as well as some o
 
 ```js
 import React from 'react';
-import PropTypes from 'prop-types';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';
 import { ItemTypes } from './Constants';
