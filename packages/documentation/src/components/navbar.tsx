@@ -2,48 +2,27 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import theme from '../theme'
-const { StaticQuery, graphql } = require('gatsby')
 
 const NavBar: React.SFC = () => (
-	<StaticQuery
-		query={graphql`
-			query {
-				site {
-					siteMetadata {
-						description
-						githubUrl
-					}
-				}
-			}
-		`}
-		render={({
-			site: {
-				siteMetadata: { description, githubUrl },
-			},
-		}: any) => {
-			return (
-				<Container>
-					<ContentContainer>
-						<LogoContainer>
-							<LogoTitle href="/" target="_self">
-								React <i>DnD</i>
-							</LogoTitle>
-							<LogoDescription>{description}</LogoDescription>
-						</LogoContainer>
-						<div>
-							<Link href={'/docs/overview'} target="_self">
-								Docs
-							</Link>
-							<Link href={'/examples'} target="_self">
-								Examples
-							</Link>
-							<Link href={githubUrl}>GitHub</Link>
-						</div>
-					</ContentContainer>
-				</Container>
-			)
-		}}
-	/>
+	<Container>
+		<ContentContainer>
+			<LogoContainer>
+				<LogoTitle href="/" target="_self">
+					React <i>DnD</i>
+				</LogoTitle>
+				<LogoDescription>Drag and Drop for React</LogoDescription>
+			</LogoContainer>
+			<div>
+				<Link href={'/docs/overview'} target="_self">
+					Docs
+				</Link>
+				<Link href={'/examples'} target="_self">
+					Examples
+				</Link>
+				<Link href={'https://github.com/react-dnd/react-dnd/'}>GitHub</Link>
+			</div>
+		</ContentContainer>
+	</Container>
 )
 export default NavBar
 

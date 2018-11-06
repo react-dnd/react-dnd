@@ -11,7 +11,6 @@ import { APIPages, ExamplePages } from '../constants'
 import Header from './header'
 import './layout.css'
 require('prismjs/themes/prism.css')
-const { StaticQuery, graphql } = require('gatsby')
 // tslint:disable-next-line
 
 export interface LayoutProps {
@@ -26,46 +25,33 @@ const Layout: React.SFC<LayoutProps> = props => {
 	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
 	const hideSidebar = props.hideSidebar || sitepath === '/about'
 	return (
-		<StaticQuery
-			query={graphql`
-				query SiteTitleQuery {
-					site {
-						siteMetadata {
-							title
-						}
-					}
-				}
-			`}
-			render={(data: any) => (
-				<>
-					<Helmet
-						title={data.site.siteMetadata.title}
-						meta={[
-							{ name: 'description', content: 'Sample' },
-							{ name: 'keywords', content: 'sample, something' },
-						]}
-					>
-						<html lang="en" />
-					</Helmet>
-					<Header />
-					<DragDropContextProvider backend={HTML5Backend}>
-						<ContentContainer>
-							<PageBody hasSidebar={sitepath !== '/about'}>
-								{hideSidebar ? null : (
-									<SidebarContainer>
-										<Sidebar
-											groups={sidebarItems}
-											location={location && location.pathname}
-										/>
-									</SidebarContainer>
-								)}
-								<ChildrenContainer>{children}</ChildrenContainer>
-							</PageBody>
-						</ContentContainer>
-					</DragDropContextProvider>
-				</>
-			)}
-		/>
+		<>
+			<Helmet
+				title="React DnD"
+				meta={[
+					{ name: 'description', content: 'Sample' },
+					{ name: 'keywords', content: 'sample, something' },
+				]}
+			>
+				<html lang="en" />
+			</Helmet>
+			<Header />
+			<DragDropContextProvider backend={HTML5Backend}>
+				<ContentContainer>
+					<PageBody hasSidebar={sitepath !== '/about'}>
+						{hideSidebar ? null : (
+							<SidebarContainer>
+								<Sidebar
+									groups={sidebarItems}
+									location={location && location.pathname}
+								/>
+							</SidebarContainer>
+						)}
+						<ChildrenContainer>{children}</ChildrenContainer>
+					</PageBody>
+				</ContentContainer>
+			</DragDropContextProvider>
+		</>
 	)
 }
 
