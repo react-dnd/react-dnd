@@ -46,7 +46,7 @@ const Layout: React.SFC<LayoutProps> = props => {
 							<SidebarContainer>
 								<Sidebar
 									groups={sidebarItems}
-									location={location && location.pathname}
+									location={location ? location.pathname : '/'}
 								/>
 							</SidebarContainer>
 						)}
