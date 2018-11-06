@@ -21,7 +21,9 @@ export interface LayoutProps {
 const Layout: React.SFC<LayoutProps> = props => {
 	const { children, location } = props
 	const sitepath = location && location.pathname
-	const isExampleUrl = (sitepath || '').startsWith('/examples')
+	const isExampleUrl = (sitepath || '')
+		.replace('/react-dnd', '')
+		.startsWith('/examples')
 	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
 	const hideSidebar = props.hideSidebar || sitepath === '/about'
 	return (
