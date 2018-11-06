@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "name": "react-dnd-documentation",
+  "description": null,
+  "icons": {
+    "60": "//react-dnd/icons-b4e3a877490f33e678d9e30b115e75c3/firefox_app_60x60.png",
+    "128": "//react-dnd/icons-b4e3a877490f33e678d9e30b115e75c3/firefox_app_128x128.png",
+    "512": "//react-dnd/icons-b4e3a877490f33e678d9e30b115e75c3/firefox_app_512x512.png"
+  },
+  "developer": {
+    "name": null,
+    "url": null
+  }
+}
