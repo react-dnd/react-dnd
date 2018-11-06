@@ -7,7 +7,7 @@ export default class NativeFiles extends React.Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/examples/06%20Other/Native%20Files">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/06%20Other/Native%20Files">
 							Browse the Source
 						</a>
 					</b>

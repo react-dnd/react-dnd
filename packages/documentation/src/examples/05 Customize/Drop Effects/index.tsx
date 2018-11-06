@@ -7,7 +7,7 @@ export default class CustomizeDropEffects extends React.Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/examples/05%20Customize/Drop%20Effects">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/05%20Customize/Drop%20Effects">
 							Browse the Source
 						</a>
 					</b>

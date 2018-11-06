@@ -7,7 +7,7 @@ export default class DustbinMultipleTargets extends React.Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/examples/01%20Dustbin/Multiple%20Targets">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Multiple%20Targets">
 							Browse the Source
 						</a>
 					</b>

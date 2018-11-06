@@ -33,7 +33,7 @@ export default class DragAroundCustomDragLayer extends React.Component<
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/examples/02%20Drag%20Around/Custom%20Drag%20Layer">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/02%20Drag%20Around/Custom%20Drag%20Layer">
 							Browse the Source
 						</a>
 					</b>
