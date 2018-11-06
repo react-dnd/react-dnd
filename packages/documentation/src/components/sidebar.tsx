@@ -20,9 +20,7 @@ const SideBar: React.SFC<SideBarProps> = ({ groups, location }) => {
 	}
 
 	function renderLink({ title, location: pageLocation }: Page, key: string) {
-		const isSelected =
-			pageLocation === location ||
-			pageLocation === location.replace('/react-dnd', '')
+		const isSelected = pageLocation === location.replace('/react-dnd', '')
 		const arrow = <span className="arrowBullet" />
 		const Link = isSelected ? SelectedSidebarItem : SidebarItem
 
