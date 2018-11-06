@@ -53,7 +53,7 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 * **`props`**: Your component's current props.
 
-* **`monitor`**: An instance of [`DragSourceMonitor`](docs/api/drag-source-monitor). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Read the [`DragSourceMonitor` documentation](docs/api/drag-source-monitor) for a complete list of `monitor` methods, or read the [overview](/docs/overview) for an introduction to the monitors.
+* **`monitor`**: An instance of [`DragSourceMonitor`](/docs/api/drag-source-monitor). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Read the [`DragSourceMonitor` documentation](/docs/api/drag-source-monitor) for a complete list of `monitor` methods, or read the [overview](/docs/overview) for an introduction to the monitors.
 
 * **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `isDragging` and `canDrag` because the instance may not be available by the time they are called. If you want these methods to depend on the component's state, consider lifting the state to the parent component, so that you can just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
 
@@ -75,7 +75,7 @@ If you're new to these concepts, the [overview](/docs/overview) should give you 
 
 * **`connect`**: An instance of [`DragSourceConnector`](/docs/api/drag-source-connector). It has two methods: `dragPreview()` and `dragSource()`. Of them, `dragSource()` is the one you'll use the most. It returns a function you need to pass down to your component to connect the source DOM node to the React DnD backend. If you return something like `{ connectDragSource: connect.dragSource() }` from your `collect` function, the component will receive `connectDragSource` as a prop so you can mark the relevant node inside its `render()` as draggable: `return this.props.connectDragSource(<div>...</div>)`. You can see this pattern in action in the example at the end of this file. Read the [`DragSourceConnector` documentation](/docs/api/drag-source-connector) for a complete list of `connect` methods, or read the [overview](/docs/overview) for an introduction to the connectors.
 
-* **`monitor`**: An instance of [`DragSourceMonitor`](docs/api/drag-source-monitor). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Read the [`DragSourceMonitor` documentation](docs/api/drag-source-monitor) for a complete list of `monitor` methods, or read the [overview](/docs/overview) for an introduction to the monitors.
+* **`monitor`**: An instance of [`DragSourceMonitor`](/docs/api/drag-source-monitor). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Read the [`DragSourceMonitor` documentation](/docs/api/drag-source-monitor) for a complete list of `monitor` methods, or read the [overview](/docs/overview) for an introduction to the monitors.
 
 ### Return Value
 

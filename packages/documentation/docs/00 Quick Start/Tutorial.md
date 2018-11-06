@@ -19,7 +19,7 @@ Enough talk! It's time to set up a build workflow for our little project. I use 
 In this tutorial, the code examples are use function-components and modern JavaScript syntax. It's recommended to use a build-step to transpile these features into your target environment. We recommend using [create-react-app](https://github.com/facebook/create-react-app).
 
 
-The app we're going to build is [available as an example on this website](examples-chessboard-tutorial-app.html).
+The app we're going to build is [available as an example on this website](/examples/tutorial).
 
 ## Identifying the Components
 
