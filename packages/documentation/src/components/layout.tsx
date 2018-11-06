@@ -11,7 +11,7 @@ import { APIPages, ExamplePages } from '../constants'
 import Header from './header'
 import './layout.css'
 require('prismjs/themes/prism.css')
-// tslint:disable-next-line
+const favicon = require('../favicon.png')
 
 export interface LayoutProps {
 	location?: { pathname: string }
@@ -32,6 +32,7 @@ const Layout: React.SFC<LayoutProps> = props => {
 					{ name: 'description', content: 'Sample' },
 					{ name: 'keywords', content: 'sample, something' },
 				]}
+				link={[{ rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }]}
 			>
 				<html lang="en" />
 			</Helmet>
