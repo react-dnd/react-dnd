@@ -1,10 +1,5 @@
-/*!
- * Copyright (c) Microsoft. All rights reserved.
- * Licensed under the MIT license. See LICENSE file in the project.
- */
-
-import * as React from 'react'
 const { graphql } = require('gatsby')
+import * as React from 'react'
 import Doc from '../components/doc'
 import Layout from '../components/layout'
 
