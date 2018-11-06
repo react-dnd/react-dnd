@@ -20,7 +20,9 @@ const SideBar: React.SFC<SideBarProps> = ({ groups, location }) => {
 	}
 
 	function renderLink({ title, location: pageLocation }: Page, key: string) {
-		const isSelected = pageLocation === location
+		const isSelected =
+			pageLocation === location ||
+			pageLocation === location.replace('/react-dnd', '')
 		const arrow = <span className="arrowBullet" />
 		const Link = isSelected ? SelectedSidebarItem : SidebarItem
 
@@ -63,11 +65,11 @@ const GroupTitle = styled.h4`
 
 const SidebarItem = styled(GatsbyLink)`
 	display: block;
-	color: ${theme.color.body};
+	color: ${theme.color.accent};
 `
 
 const SelectedSidebarItem = styled(SidebarItem)`
-	color: ${theme.color.accent};
+	font-weight: bold;
 	position: relative;
 
 	&:after {
