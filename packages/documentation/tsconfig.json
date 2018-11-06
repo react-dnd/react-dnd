@@ -1,7 +1,10 @@
 {
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
-    "sourceMap": true,
-    "outDir": "lib"
-  },
+		"declaration": true,
+		"outDir": "./lib",
+		"baseUrl": "./",
+		"experimentalDecorators": true
+	},
+	"include": ["./src/index.ts"]
 }
