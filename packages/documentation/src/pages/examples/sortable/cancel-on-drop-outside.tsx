@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Example from '../../../examples/04 Sortable/Cancel on Drop Outside'
+import { sortableCancelOnDropOutside as Example } from 'react-dnd-documentation-examples'
 import Layout from '../../../components/layout'
 
 export default (props: any) => (
