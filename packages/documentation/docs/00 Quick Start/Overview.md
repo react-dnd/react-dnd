@@ -1,3 +1,7 @@
+---
+path: "/docs/overview"
+title: "Overview"
+---
 Overview
 ===================
 
@@ -12,7 +16,7 @@ React DnD is built on top of the [HTML5 drag and drop API](https://developer.moz
 
 Unfortunately, the HTML5 drag and drop API also has some downsides. It does not work on touch screens, and it provides less customization opportunities on IE than in other browsers.
 
-This is why **the HTML5 drag and drop support is implemented in a pluggable way** in React DnD. You don't have to use it. You can write a different implementation, based on touch events, mouse events, or something else entirely. Such pluggable implementations are called the *backends* in React DnD. Only the [HTML5 backend](docs-html5-backend.html) comes with the library, but more may be added in the future.
+This is why **the HTML5 drag and drop support is implemented in a pluggable way** in React DnD. You don't have to use it. You can write a different implementation, based on touch events, mouse events, or something else entirely. Such pluggable implementations are called the *backends* in React DnD. Only the [HTML5 backend](/docs/backends/html5) comes with the library, but more may be added in the future.
 
 The backends perform a similar role to that of React's synthetic event system: **they abstract away the browser differences and process the native DOM events.** Despite the similarities, React DnD backends do not have a dependency on React or its synthetic event system. Under the hood, all the backends do is translate the DOM events into the internal Redux actions that React DnD can process.
 
@@ -65,25 +69,6 @@ function collect(connect, monitor) {
 
 In the component's `render` method, we are then able to access both the data obtained from the monitor, and the function obtained from the connector:
 
--------------------
-```js
-render: function () {
-  var highlighted = this.props.highlighted;
-  var hovered = this.props.hovered;
-  var connectDropTarget = this.props.connectDropTarget;
-
-  return connectDropTarget(
-    <div className={classSet({
-      'Cell': true,
-      'Cell--highlighted': highlighted,
-      'Cell--hovered': hovered
-    })}>
-      {this.props.children}
-    </div>
-  );
-}
-```
--------------------
 ```js
 render() {
   const { highlighted, hovered, connectDropTarget } = this.props;
@@ -99,9 +84,6 @@ render() {
   );
 }
 ```
--------------------
-
--------------------
 
 The `connectDropTarget` call tells React DnD that the root DOM node of our component is a valid drop target, and that its hover and drop events should be handled by the backend. Internally it works by attaching a [callback ref](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the React element you gave it. The function returned by the connector is memoized, so it doesn't break the `shouldComponentUpdate` optimizations.
 
@@ -115,28 +97,16 @@ Whenever you want to make a component or some part of it draggable, you need to 
 
 The *drop targets* are very similar to the drag sources. The only difference is that a single drop target may register for several item types at once, and instead of producing an item, it may handle its hover or drop.
 
-### Higher-Order Components and ES7 decorators
+### Higher-Order Components and Decorators
 
 How do you wrap your components? What does wrapping even mean? If you have not worked with higher-order components before, go ahead and read [this article](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750), as it explains the concept in detail.
 
 **A higher-order component is just a function that takes a React component class, and returns another React component class.** The wrapping component provided by the library renders *your* component in its `render` method and forwards the props to it, but also adds some useful behavior.
 
-In React DnD, [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html), as well as a few other top-level exported functions, are in fact higher-order components. They breathe the drag and drop magic into your components.
+In React DnD, [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-target), as well as a few other top-level exported functions, are in fact higher-order components. They breathe the drag and drop magic into your components.
 
-One caveat of using them is that they require *two* function applications. For example, here's how to wrap `YourComponent` in a [`DragSource`](docs-drag-source.html):
+One caveat of using them is that they require *two* function applications. For example, here's how to wrap `YourComponent` in a [`DragSource`](/docs/api/drag-source):
 
--------------------
-```js
-var createReactClass = require('create-react-class');
-var DragSource = require('react-dnd').DragSource;
-
-var YourComponent = createReactClass({
-  /* ... */
-});
-
-module.exports = DragSource(/* ... */)(YourComponent);
-```
--------------------
 ```js
 import { DragSource } from 'react-dnd';
 
@@ -146,17 +116,9 @@ class YourComponent {
 
 export default DragSource(/* ... */)(YourComponent);
 ```
--------------------
 
--------------------
+Notice how, after specifying the [`DragSource`](/docs/api/drag-source) parameters in the first function call, there is a *second* function call, where you finally pass your class. This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [decorator syntax](http://github.com/wycats/javascript-decorators) to work out of the box:
 
-Notice how, after specifying the [`DragSource`](docs-drag-source.html) parameters in the first function call, there is a *second* function call, where you finally pass your class. This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [ES7 decorator syntax](http://github.com/wycats/javascript-decorators) to work out of the box:
-
--------------------
-
--------------------
-
--------------------
 ```js
 import { DragSource } from 'react-dnd';
 
@@ -165,33 +127,11 @@ export default class YourComponent {
   /* ... */
 }
 ```
--------------------
 
 You don't have to use this syntax, but if you like it, you can enable it by transpiling your code with [Babel](http://babeljs.io), and putting `{ "stage": 1 }` into your [.babelrc file](https://babeljs.io/docs/usage/babelrc/).
 
-Even if you don't plan to use ES7, the partial application can still be handy, because you can combine several [`DragSource`](docs-drag-source.html) and [`DropTarget`](docs-drop-target.html) declarations in ES5 or ES6 using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). In ES7, you can just stack the decorators to achieve the same effect.
+Even if you don't plan to use decorators, the partial application can still be handy, because you can combine several [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-target) declarations in JavaScript using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). With decorators, you can just stack the decorators to achieve the same effect.
 
--------------------
-```js
-var createReactClass = require('create-react-class');
-var DragSource = require('react-dnd').DragSource;
-var DropTarget = require('react-dnd').DropTarget;
-var flow = require('lodash/flow');
-
-var YourComponent = createReactClass({
-  render() {
-    return this.props.connectDragSource(this.props.connectDropTarget(
-      /* ... */
-    ))
-  }
-});
-
-module.exports = flow(
-  DragSource(/* ... */),
-  DropTarget(/* ... */)
-)(YourComponent);
-```
--------------------
 ```js
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
@@ -210,100 +150,11 @@ export default flow(
   DropTarget(/* ... */)
 )(YourComponent);
 ```
--------------------
-```js
-import { DragSource, DropTarget } from 'react-dnd';
-
-@DragSource(/* ... */)
-@DropTarget(/* ... */)
-export default class YourComponent {
-  render() {
-    const { connectDragSource, connectDropTarget } = this.props
-    return connectDragSource(connectDropTarget(
-      /* ... */
-    ))
-  }
-}
-```
--------------------
 
 ### Putting It All Together
 
 Below is an example of wrapping an existing `Card` component into a drag source.
 
--------------------
-```js
-var React = require('react');
-var createReactClass = require('create-react-class');
-var DragSource = require('react-dnd').DragSource;
-
-// Drag sources and drop targets only interact
-// if they have the same string type.
-// You want to keep types in a separate file with
-// the rest of your app's constants.
-var Types = {
-  CARD: 'card'
-};
-
-/**
- * Specifies the drag source contract.
- * Only `beginDrag` function is required.
- */
-var cardSource = {
-  beginDrag: function (props) {
-    // Return the data describing the dragged item
-    var item = { id: props.id };
-    return item;
-  },
-
-  endDrag: function (props, monitor, component) {
-    if (!monitor.didDrop()) {
-      return;
-    }
-
-    // When dropped on a compatible target, do something
-    var item = monitor.getItem();
-    var dropResult = monitor.getDropResult();
-    CardActions.moveCardToList(item.id, dropResult.listId);
-  }
-};
-
-/**
- * Specifies which props to inject into your component.
- */
-function collect(connect, monitor) {
-  return {
-    // Call this function inside render()
-    // to let React DnD handle the drag events:
-    connectDragSource: connect.dragSource(),
-    // You can ask the monitor about the current drag state:
-    isDragging: monitor.isDragging()
-  };
-}
-
-var Card = createReactClass({
-  render: function () {
-    // Your component receives its own props as usual
-    var id = this.props.id;
-
-    // These two props are injected by React DnD,
-    // as defined by your `collect` function above:
-    var isDragging = this.props.isDragging;
-    var connectDragSource = this.props.connectDragSource;
-
-    return connectDragSource(
-      <div>
-        I am a draggable card number {id}
-        {isDragging && ' (and I am being dragged now)'}
-      </div>
-    );
-  }
-});
-
-// Export the wrapped version
-module.exports = DragSource(Types.CARD, cardSource, collect)(Card);
-```
--------------------
 ```js
 import React from 'react';
 import { DragSource } from 'react-dnd';
@@ -352,90 +203,25 @@ function collect(connect, monitor) {
   };
 }
 
-class Card extends React.Component {
-  render() {
-    // Your component receives its own props as usual
-    const { id } = this.props;
+function Card(props) {
+  // Your component receives its own props as usual
+  const { id } = props;
 
-    // These two props are injected by React DnD,
-    // as defined by your `collect` function above:
-    const { isDragging, connectDragSource } = this.props;
+  // These two props are injected by React DnD,
+  // as defined by your `collect` function above:
+  const { isDragging, connectDragSource } = props;
 
-    return connectDragSource(
-      <div>
-        I am a draggable card number {id}
-        {isDragging && ' (and I am being dragged now)'}
-      </div>
-    );
-  }
+  return connectDragSource(
+    <div>
+      I am a draggable card number {id}
+      {isDragging && ' (and I am being dragged now)'}
+    </div>
+  );
 }
 
 // Export the wrapped version
 export default DragSource(Types.CARD, cardSource, collect)(Card);
 ```
--------------------
-```js
-import React from 'react';
-import { DragSource } from 'react-dnd';
-
-// Drag sources and drop targets only interact
-// if they have the same string type.
-// You want to keep types in a separate file with
-// the rest of your app's constants.
-const Types = {
-  CARD: 'card'
-};
-
-/**
- * Specifies the drag source contract.
- * Only `beginDrag` function is required.
- */
-const cardSource = {
-  beginDrag(props) {
-    // Return the data describing the dragged item
-    const item = { id: props.id };
-    return item;
-  },
-
-  endDrag(props, monitor, component) {
-    if (!monitor.didDrop()) {
-      return;
-    }
-
-    // When dropped on a compatible target, do something
-    const item = monitor.getItem();
-    const dropResult = monitor.getDropResult();
-    CardActions.moveCardToList(item.id, dropResult.listId);
-  }
-};
-
-// Use the decorator syntax
-@DragSource(Types.CARD, cardSource, (connect, monitor) => ({
-  // Call this function inside render()
-  // to let React DnD handle the drag events:
-  connectDragSource: connect.dragSource(),
-  // You can ask the monitor about the current drag state:
-  isDragging: monitor.isDragging()
-}))
-export default class Card extends React.Component {
-  render() {
-    // Your component receives its own props as usual
-    const { id } = this.props;
-
-    // These two props are injected by React DnD,
-    // as defined by your `collect` function above:
-    const { isDragging, connectDragSource } = this.props;
-
-    return connectDragSource(
-      <div>
-        I am a draggable card number {id}
-        {isDragging && ' (and I am being dragged now)'}
-      </div>
-    );
-  }
-}
-```
--------------------
 
 Now you know enough about React DnD to explore the rest of the documentation!  
-The [tutorial](docs-tutorial.html) is a great place to start.
+The [tutorial](/docs/tutorial) is a great place to start.

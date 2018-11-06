@@ -1,0 +1,10 @@
+import * as React from 'react'
+import Layout from '../components/layout'
+import { navigate } from 'gatsby'
+
+const IndexPage: React.SFC = () => {
+	navigate('/about')
+	return <Layout hideSidebar={true}>{null}</Layout>
+}
+
+export default IndexPage
