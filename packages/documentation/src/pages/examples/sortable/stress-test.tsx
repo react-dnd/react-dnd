@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Example from '../../../examples/04 Sortable/Stress Test'
+import { sortableStressTest as Example } from 'react-dnd-documentation-examples'
 import Layout from '../../../components/layout'
 
 export default (props: any) => (
