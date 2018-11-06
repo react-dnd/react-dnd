@@ -29,8 +29,8 @@ const Layout: React.SFC<LayoutProps> = props => {
 			<Helmet
 				title="React DnD"
 				meta={[
-					{ name: 'description', content: 'Sample' },
-					{ name: 'keywords', content: 'sample, something' },
+					{ name: 'description', content: 'Drag and Drop for React' },
+					{ name: 'keywords', content: 'react, drag drop, html5' },
 				]}
 				link={[{ rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }]}
 			>
