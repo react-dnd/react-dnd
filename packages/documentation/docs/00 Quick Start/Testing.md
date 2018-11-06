@@ -1,4 +1,8 @@
-*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
+---
+path: "/docs/testing"
+title: "Testing"
+---
+*New to React DnD? [Read the overview](/docs/overview) before jumping into the docs.*
 
 Testing
 ===================
@@ -13,39 +17,6 @@ A few test examples are included with the React DnD inside its `examples` folder
 
 If you are only interested in testing the *rendering* of your components in isolation, and not their interaction, you may use the `DecoratedComponent` static property available on any class wrapped with React DnD to access the original class. You may then test it with the different props without any dependency on React DnD, supplying an identity function to stub the connector methods.
 
--------------------
-```js
-var React = require('react');
-var TestUtils = require('react-dom/test-utils');
-var expect = require('expect');
-var Box = require('./components/Box');
-
-it('can be tested independently', function () {
-  // Obtain the reference to the component before React DnD wrapping
-  var OriginalBox = Box.DecoratedComponent;
-
-  // Stub the React DnD connector functions with an identity function
-  var identity = function (el) { return el; };
-
-  // Render with one set of props and test
-  var root = TestUtils.renderIntoDocument(
-    <OriginalBox name='test'
-                 connectDragSource={identity} />
-  );
-  var div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.props.style.opacity).toEqual(1);
-
-  // Render with another set of props and test
-  root = TestUtils.renderIntoDocument(
-    <OriginalBox name='test'
-                 connectDragSource={identity}
-                 isDragging />
-  );
-  div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.props.style.opacity).toEqual(0.4);
-});
-```
--------------------
 ```js
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
@@ -77,13 +48,10 @@ it('can be tested independently', () => {
   expect(div.props.style.opacity).toEqual(0.4);
 });
 ```
--------------------
-
--------------------
 
 ### Testing the Drag and Drop Interaction
 
-If you want to test the whole interaction, and not just the individual component rendering, you should use the [test backend](docs-test-backend.html). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) just fine.
+If you want to test the whole interaction, and not just the individual component rendering, you should use the [test backend](/docs/backends/test). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) just fine.
 
 This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/react-dnd/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/react-dnd/dnd-core/tree/v1.1.0/src/__tests__).
 
@@ -95,97 +63,8 @@ npm install --save-dev react-dnd-test-backend
 
 Here are some examples to get you started:
 
--------------------
 ```js
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Component = React.Component;
-var TestBackend = require('react-dnd-test-backend');
-var DragDropContext = require('react-dnd').DragDropContext;
-var TestUtils = require('react-dom/test-utils');
-var expect = require('expect');
-var Box = require('./components/Box');
-
-/**
- * Wraps a component into a DragDropContext that uses the TestBackend.
- */
-function wrapInTestContext(DecoratedComponent) {
-  return DragDropContext(TestBackend)(
-    createReactClass({
-      render: function () {
-        return <DecoratedComponent {...this.props} />;
-      }
-    })
-  );
-}
-
-it('can be tested with the testing backend', function () {
-  // Render with the test context that uses the test backend
-  var BoxContext = wrapInTestContext(Box);
-  var root = TestUtils.renderIntoDocument(<BoxContext name='test' />);
-
-  // Obtain a reference to the backend
-  var backend = root.getManager().getBackend();
-
-  // Test that the opacity is 1
-  let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.props.style.opacity).toEqual(1);
-
-  // Find the drag source ID and use it to simulate the dragging operation
-  var box = TestUtils.findRenderedComponentWithType(root, Box);
-  backend.simulateBeginDrag([box.getHandlerId()]);
-
-  // Optionally you can pass in a clientOffset for testing operations that
-  // depend on mouse movements.
-  // backend.simulateBeginDrag([box.getHandlerId()], {
-  //   clientOffset: { x: 0, y: 0 },
-  //   getSourceClientOffset: () => ({ x: 0, y: 0 }),
-  // });
-
-  // Verify that the div changed its opacity
-  div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.style.opacity).toEqual(0.4);
-
-  // See other backend.simulate* methods for more!
-});
-
-it('can simulate a full drag and drop interaction', function() {
-  var DustbinWithBox = function() {
-    return (
-      <div>
-        <Dustbin />
-        <Box name="test" />
-      </div>
-    );
-  };
-  
-  // Render with the test context that uses the test backend
-  var DustbinWithBoxContext = wrapInTestContext(DustbinWithBox);
-  var root = TestUtils.renderIntoDocument(<DustbinWithBoxContext />);
-
-  // Obtain a reference to the backend
-  var backend = root.getManager().getBackend();
-
-  // Find the drag source ID and use it to simulate the dragging operation
-  var box = TestUtils.findRenderedComponentWithType(root, Box);
-  backend.simulateBeginDrag([box.getHandlerId()]);
-  
-  window.alert = jest.fn();
-
-  var dustbin = TestUtils.findRenderedComponentWithType(root, Dustbin);
-  
-  // simulate a hover first to set react-dnd's internal state for the drop and endDrag
-  backend.simulateHover([dustbin.getHandlerId()]);
-  // create a dropDesult that will get read during endDrag
-  backend.simulateDrop();
-  backend.simulateEndDrag();
-  
-  expect(window.alert).toHaveBeenCalledWith("You dropped test into Dustbin!");
-});
-```
--------------------
-```js
-import React, { Component } from 'react';
+import React from 'react';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
 import TestUtils from 'react-dom/test-utils';
@@ -197,11 +76,7 @@ import Box from './components/Box';
  */
 function wrapInTestContext(DecoratedComponent) {
   return DragDropContext(TestBackend)(
-    class TestContextContainer extends Component {
-      render() {
-        return <DecoratedComponent {...this.props} />;
-      }
-    }
+    () => <DecoratedComponent {...this.props} />
   );
 }
 
@@ -228,53 +103,6 @@ it('can be tested with the testing backend', () => {
   // See other backend.simulate* methods for more!
 });
 ```
--------------------
-```js
-import React, { Component } from 'react';
-import TestBackend from 'react-dnd-test-backend';
-import { DragDropContext } from 'react-dnd';
-import TestUtils from 'react-dom/test-utils';
-import expect from 'expect';
-import Box from './components/Box';
-
-/**
- * Wraps a component into a DragDropContext that uses the TestBackend.
- */
-function wrapInTestContext(DecoratedComponent) {
-  @DragDropContext(TestBackend)
-  class TestContextContainer extends Component {
-    render() {
-      return <DecoratedComponent {...this.props} />;
-    }
-  }
-
-  return TestContextContainer;
-}
-
-it('can be tested with the testing backend', () => {
-  // Render with the test context that uses the test backend
-  const BoxContext = wrapInTestContext(Box);
-  const root = TestUtils.renderIntoDocument(<BoxContext name='test' />);
-
-  // Obtain a reference to the backend
-  const backend = root.getManager().getBackend();
-
-  // Test that the opacity is 1
-  let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.props.style.opacity).toEqual(1);
-
-  // Find the drag source ID and use it to simulate the dragging operation
-  const box = TestUtils.findRenderedComponentWithType(root, Box);
-  backend.simulateBeginDrag([box.getHandlerId()]);
-
-  // Verify that the div changed its opacity
-  div = TestUtils.findRenderedDOMComponentWithTag(root, 'div');
-  expect(div.style.opacity).toEqual(0.4);
-
-  // See other backend.simulate* methods for more!
-});
-```
--------------------
 
 ### Testing with Enzyme
 
