@@ -4,6 +4,7 @@ title: "DragLayer"
 ---
 
 *New to React DnD? [Read the overview](/docs/overview) before jumping into the docs.*
+
 DragLayer
 ===================
 
