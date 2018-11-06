@@ -3,7 +3,9 @@ import Layout from '../components/layout'
 import { navigate } from 'gatsby'
 
 const IndexPage: React.SFC = props => {
-	navigate('/about')
+	if (typeof window !== 'undefined') {
+		navigate('/about')
+	}
 	return (
 		<Layout {...props} hideSidebar={true}>
 			{null}
