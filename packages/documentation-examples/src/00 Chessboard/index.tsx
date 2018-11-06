@@ -1,6 +1,5 @@
 // tslint:disable member-ordering
 import * as React from 'react'
-import { Link } from 'gatsby'
 import Board from './Board'
 import { observe } from './Game'
 
@@ -40,7 +39,7 @@ export default class ChessboardTutorialApp extends React.Component<
 				</p>
 				<p>
 					This is a sample app you&apos;ll build as you work through the{' '}
-					<Link to="/docs/tutorial">tutorial</Link>.
+					<a href="/docs/tutorial">tutorial</a>.
 				</p>
 				<p>
 					It illustrates creating the drag sources and the drop targets, using
@@ -57,8 +56,8 @@ export default class ChessboardTutorialApp extends React.Component<
 					<Board knightPosition={knightPosition} />
 				</div>
 				<p>
-					Make sure to check out the <Link to="docs/tutorial">tutorial</Link>{' '}
-					for step-by-step instructions on building it!
+					Make sure to check out the <a href="/docs/tutorial">tutorial</a> for
+					step-by-step instructions on building it!
 				</p>
 			</div>
 		)

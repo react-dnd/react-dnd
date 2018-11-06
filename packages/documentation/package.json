@@ -20,7 +20,7 @@
     "gatsby-plugin-typography": "^2.2.1",
     "gatsby-remark-copy-linked-files": "^2.0.6",
     "gatsby-remark-embed-snippet": "^3.0.3",
-    "gatsby-remark-images": "^2.0.5",
+    "gatsby-remark-images": "^2.0.6",
     "gatsby-remark-prismjs": "^3.0.3",
     "gatsby-source-filesystem": "^2.0.7",
     "gatsby-transformer-remark": "^2.1.11",
