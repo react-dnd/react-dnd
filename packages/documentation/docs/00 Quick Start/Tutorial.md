@@ -41,32 +41,12 @@ I prefer to start bottom-up, because this way I'm always working with something 
 
 In fact I'm going to start with the `Knight`. It doesn't have any props at all, and it's the easiest one to build:
 
--------------------
-```js
-var React = require('react');
-var createReactClass = require('create-react-class');
-
-var Knight = createReactClass({
-  render: function () {
-    return <span>♘</span>;
-  }
-});
-
-module.exports = Knight;
-```
--------------------
 ```js
 import React, { Component } from 'react';
 
-export default class Knight extends Component {
-  render() {
-    return <span>♘</span>;
-  }
-}
+const Knight = () => <span>♘</span>;
+export default Knight;
 ```
--------------------
-
--------------------
 
 Yes, ♘ is the Unicode knight! It's gorgeous. We could've made its color a prop, but in our example we're not going to have any black knights, so there is no need for that.
 

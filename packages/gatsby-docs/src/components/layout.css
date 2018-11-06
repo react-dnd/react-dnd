@@ -200,7 +200,9 @@ html {
 body {
   height: 100%;
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.625;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;

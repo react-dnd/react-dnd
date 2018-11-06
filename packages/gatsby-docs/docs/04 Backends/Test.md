@@ -2,7 +2,7 @@
 path: "/docs/backends/test"
 title: "Test Backend"
 ---
-*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
+*New to React DnD? [Read the overview](/docs/overview) before jumping into the docs.*
 
 Test
 ===================
@@ -19,4 +19,4 @@ npm install --save-dev react-dnd-test-backend
 
 ### Usage
 
-See the second example in the [testing](docs-testing.html) tutorial.
+See the second example in the [testing](/docs/testing) tutorial.

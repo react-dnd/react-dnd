@@ -2,7 +2,7 @@
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
-
+import PageBody from './pagebody'
 const { StaticQuery, graphql } = require('gatsby')
 
 import Header from './header'
@@ -35,7 +35,12 @@ const Layout: React.SFC<LayoutProps> = ({ children, sidebar }) => (
 					<html lang="en" />
 				</Helmet>
 				<Header />
-				<ChildrenContainer>{children}</ChildrenContainer>
+				<ChildrenContainer>
+					<PageBody hasSidebar={true}>
+						{sidebar}
+						{children}
+					</PageBody>
+				</ChildrenContainer>
 			</>
 		)}
 	/>
@@ -43,9 +48,10 @@ const Layout: React.SFC<LayoutProps> = ({ children, sidebar }) => (
 
 const ChildrenContainer = styled.div`
 	margin: 0 auto;
-	max-width: 960px;
-	padding: 0 1.0875rem 1.45rem 0;
 	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
 `
 
 export default Layout
