@@ -1,9 +1,13 @@
-*New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
+---
+path: "/docs/api/drop-target-connector"
+title: "DropTargetConnector"
+---
+*New to React DnD? [Read the overview](/docs/overview) before jumping into the docs.*
 
 DropTargetConnector
 ===================
 
-`DropTargetConnector` is an object passed to a collecting function of the [`DropTarget`](docs-drop-target.html). Its only method `dropTarget()` returns a function that lets you assign the drop target role to one of your component's DOM nodes.
+`DropTargetConnector` is an object passed to a collecting function of the [`DropTarget`](/docs/api/drop-target). Its only method `dropTarget()` returns a function that lets you assign the drop target role to one of your component's DOM nodes.
 
 ### Methods
 
@@ -13,37 +17,8 @@ Call the `DropTargetConnector`'s `dropTarget()` method inside your *collecting f
 
 ### Example
 
-Check out [the tutorial](docs-tutorial.html) for more real examples!
+Check out [the tutorial](/docs/tutorial) for more real examples!
 
--------------------
-```js
-var React = require('react');
-var createReactClass = require('create-react-class');
-var DropTarget = require('react-dnd').DropTarget;
-
-/* ... */
-
-function collect(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget()
-  };
-}
-
-var DropZone = createReactClass({
-  render: function () {
-    var connectDropTarget = this.props.connectDropTarget;
-
-    return connectDropTarget(
-      <div>
-        You can drop here!
-      </div>
-    );
-  }
-});
-
-module.exports = DropTarget(/* ... */)(DropZone);
-```
--------------------
 ```js
 import React from 'react';
 import { DropTarget } from 'react-dnd';
@@ -70,31 +45,3 @@ class DropZone {
 
 export default DropTarget(/* ... */)(DropZone);
 ```
--------------------
-```js
-import React from 'react';
-import { DropTarget } from 'react-dnd';
-
-/* ... */
-
-function collect(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget()
-  };
-}
-
-@DropTarget(/* ... */)
-export default class DropZone {
-  render() {
-    const { connectDropTarget } = this.props;
-
-    return connectDropTarget(
-      <div>
-        You can drop here!
-      </div>
-    );
-  }
-}
-```
--------------------
-

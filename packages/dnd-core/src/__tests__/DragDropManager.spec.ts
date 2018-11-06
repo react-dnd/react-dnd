@@ -1,3 +1,5 @@
+declare var require: any
+
 import createTestBackend, { TestBackend } from 'react-dnd-test-backend'
 import * as Types from './types'
 import { NormalSource, NonDraggableSource, BadItemSource } from './sources'
@@ -9,7 +11,7 @@ import {
 	TransformResultTarget,
 } from './targets'
 import DragDropManagerImpl from '../DragDropManagerImpl'
-import { DragDropManager, Backend, HandlerRegistry } from '../interfaces'
+import { DragDropManager, HandlerRegistry } from '../interfaces'
 const isString = require('lodash/isString')
 
 describe('DragDropManager', () => {
@@ -306,7 +308,7 @@ describe('DragDropManager', () => {
 
 			it('throws in endDrag() if it is called outside a drag operation', () => {
 				const source = new NormalSource()
-				const sourceId = registry.addSource(Types.FOO, source)
+				registry.addSource(Types.FOO, source)
 				expect(() => backend.simulateEndDrag()).toThrow()
 			})
 
