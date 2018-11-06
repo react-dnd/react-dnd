@@ -8,35 +8,32 @@ export interface SideBarProps {
 	location: string
 }
 
-export default class SideBar extends React.Component<SideBarProps> {
-	public render() {
-		return (
-			<Container>{this.props.groups.map(this.renderGroup, this)}</Container>
-		)
-	}
-
-	private renderGroup({ title, pages }: PageGroup, index: number) {
+const SideBar: React.SFC<SideBarProps> = ({ groups, location }) => {
+	function renderGroup({ title, pages }: PageGroup, index: number) {
 		return (
 			<Group key={index}>
 				<GroupTitle>{title}</GroupTitle>
-				{Object.keys(pages).map(key => this.renderLink(pages[key], key))}
+				{Object.keys(pages).map(key => renderLink(pages[key], key))}
 			</Group>
 		)
 	}
 
-	private renderLink({ title, location }: Page, key: string) {
-		const isSelected = this.props.location === location
+	function renderLink({ title, location: pageLocation }: Page, key: string) {
+		const isSelected = pageLocation === location
 		const arrow = <span className="arrowBullet" />
 		const Link = isSelected ? SelectedSidebarItem : SidebarItem
 
 		return (
-			<Link key={key} href={location} target="_self">
+			<Link key={key} href={pageLocation} target="_self">
 				<span>{title}</span>
 				{arrow}
 			</Link>
 		)
 	}
+
+	return <Container>{groups.map(renderGroup)}</Container>
 }
+export default SideBar
 
 const Container = styled.div`
 	flex-shrink: 0;

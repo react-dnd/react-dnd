@@ -3,8 +3,8 @@ import Layout from '../components/layout'
 import { navigate } from 'gatsby'
 
 const IndexPage: React.SFC = () => {
-	navigate('/docs/overview')
-	return <Layout sidebar={<></>}>{<></>}</Layout>
+	navigate('/about')
+	return <Layout>{<></>}</Layout>
 }
 
 export default IndexPage

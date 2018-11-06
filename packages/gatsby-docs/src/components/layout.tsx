@@ -2,50 +2,64 @@
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContextProvider } from 'react-dnd'
 import PageBody from './pagebody'
-const { StaticQuery, graphql } = require('gatsby')
-
+import Sidebar from './sidebar'
+import { PageGroup } from '../constants'
+import { APIPages, ExamplePages } from '../constants'
 import Header from './header'
 import './layout.css'
+const { StaticQuery, graphql } = require('gatsby')
 
 export interface LayoutProps {
-	sidebar: JSX.Element
+	location?: { pathname: string }
 }
 
-const Layout: React.SFC<LayoutProps> = ({ children, sidebar }) => (
-	<StaticQuery
-		query={graphql`
-			query SiteTitleQuery {
-				site {
-					siteMetadata {
-						title
+const Layout: React.SFC<LayoutProps> = props => {
+	const { children, location } = props
+	const sitepath = location.pathname
+	const isExampleUrl = sitepath.startsWith('/examples')
+	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
+
+	return (
+		<StaticQuery
+			query={graphql`
+				query SiteTitleQuery {
+					site {
+						siteMetadata {
+							title
+						}
 					}
 				}
-			}
-		`}
-		render={(data: any) => (
-			<>
-				<Helmet
-					title={data.site.siteMetadata.title}
-					meta={[
-						{ name: 'description', content: 'Sample' },
-						{ name: 'keywords', content: 'sample, something' },
-					]}
-				>
-					<html lang="en" />
-				</Helmet>
-				<Header />
-				<ChildrenContainer>
-					<PageBody hasSidebar={true}>
-						{sidebar}
-						{children}
-					</PageBody>
-				</ChildrenContainer>
-			</>
-		)}
-	/>
-)
-
+			`}
+			render={(data: any) => (
+				<>
+					<Helmet
+						title={data.site.siteMetadata.title}
+						meta={[
+							{ name: 'description', content: 'Sample' },
+							{ name: 'keywords', content: 'sample, something' },
+						]}
+					>
+						<html lang="en" />
+					</Helmet>
+					<Header />
+					<DragDropContextProvider backend={HTML5Backend}>
+						<ChildrenContainer>
+							<PageBody hasSidebar={sitepath !== '/about'}>
+								{sitepath === '/about' ? null : (
+									<Sidebar groups={sidebarItems} location={location.pathname} />
+								)}
+								{children}
+							</PageBody>
+						</ChildrenContainer>
+					</DragDropContextProvider>
+				</>
+			)}
+		/>
+	)
+}
 const ChildrenContainer = styled.div`
 	margin: 0 auto;
 	height: 100%;

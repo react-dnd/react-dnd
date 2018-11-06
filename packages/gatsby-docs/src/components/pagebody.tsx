@@ -4,18 +4,15 @@ import theme from '../theme'
 
 export interface PageBodyProps {
 	hasSidebar: boolean
-	html?: any
 }
-export default class PageBody extends React.Component<PageBodyProps> {
-	public render() {
-		const { hasSidebar, children } = this.props
-		const Content = hasSidebar ? SidebarContent : PlainContent
-		return (
-			<Container>
-				<Content>{children}</Content>
-			</Container>
-		)
-	}
+const PageBody: React.SFC<PageBodyProps> = props => {
+	const { hasSidebar, children } = props
+	const Content = hasSidebar ? SidebarContent : PlainContent
+	return (
+		<Container>
+			<Content>{children}</Content>
+		</Container>
+	)
 }
 
 const Container = styled.div`
@@ -39,3 +36,4 @@ const SidebarContent = styled.div`
 		margin-left: 15em;
 	}
 `
+export default PageBody

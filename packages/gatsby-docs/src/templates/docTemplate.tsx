@@ -7,21 +7,15 @@ import * as React from 'react'
 const { graphql } = require('gatsby')
 import Doc from '../components/doc'
 import Layout from '../components/layout'
-import Sidebar from '../components/sidebar'
-import { APIPages } from '../constants'
 
 // tslint:disable-next-line
 require('prismjs/themes/prism.css')
 
-export default function Template(arg: any) {
-	const { currentPage } = arg.data
+export default function Template(props: any) {
+	const { currentPage } = props.data
 
 	return (
-		<Layout
-			sidebar={
-				<Sidebar groups={APIPages} location={currentPage.frontmatter.path} />
-			}
-		>
+		<Layout {...props}>
 			<Doc docPage={currentPage} />
 		</Layout>
 	)

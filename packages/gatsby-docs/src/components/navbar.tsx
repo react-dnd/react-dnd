@@ -31,7 +31,7 @@ const NavBar: React.SFC = () => (
 							<LogoDescription>{description}</LogoDescription>
 						</LogoContainer>
 						<div>
-							<Link href={'/'} target="_self">
+							<Link href={'/docs/overview'} target="_self">
 								Docs
 							</Link>
 							<Link href={'/examples'} target="_self">

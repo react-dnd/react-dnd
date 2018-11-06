@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import StaticHtmlBlock from './statichtmlblock'
 
 export interface DocProps {
 	docPage: {
@@ -13,7 +12,7 @@ const Doc: React.SFC<DocProps> = ({ docPage }) => {
 	return (
 		<Container>
 			<Gutter />
-			<StaticHtmlBlock html={docPage.html} />
+			<div dangerouslySetInnerHTML={{ __html: docPage.html }} />
 			<Gutter />
 		</Container>
 	)

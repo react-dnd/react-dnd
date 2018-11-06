@@ -116,7 +116,7 @@ export const ExamplePages: PageGroup[] = [
 		title: 'Chessboard',
 		pages: {
 			CHESSBOARD_TUTORIAL_APP: {
-				location: 'examples-chessboard-tutorial-app.html',
+				location: '/examples/tutorial',
 				title: 'Tutorial App',
 			},
 		},
@@ -125,27 +125,27 @@ export const ExamplePages: PageGroup[] = [
 		title: 'Dustbin',
 		pages: {
 			DUSTBIN_SINGLE_TARGET: {
-				location: 'examples-dustbin-single-target.html',
+				location: '/examples/dustbin/single-target',
 				title: 'Single Target',
 			},
 			DUSTBIN_IFRAME: {
-				location: 'examples-dustbin-single-target-in-iframe.html',
+				location: '/examples/dustbin/iframe',
 				title: 'Within an iframe',
 			},
 			DUSTBIN_FC: {
-				location: 'examples-dustbin-single-target-with-fc.html',
+				location: '/examples/dustbin/using-fcs',
 				title: 'Using FCs',
 			},
 			DUSTBIN_COPY_OR_MOVE: {
-				location: 'examples-dustbin-copy-or-move.html',
+				location: '/examples/dustbin/copy-or-move',
 				title: 'Copy or Move',
 			},
 			DUSTBIN_MULTIPLE_TARGETS: {
-				location: 'examples-dustbin-multiple-targets.html',
+				location: '/examples/dustbin/multiple-targets',
 				title: 'Multiple Targets',
 			},
 			DUSTBIN_STRESS_TEST: {
-				location: 'examples-dustbin-stress-test.html',
+				location: '/examples/dustbin/stress-test',
 				title: 'Stress Test',
 			},
 		},
@@ -154,11 +154,11 @@ export const ExamplePages: PageGroup[] = [
 		title: 'Drag Around',
 		pages: {
 			DRAG_AROUND_NAIVE: {
-				location: 'examples-drag-around-naive.html',
+				location: '/examples/drag-around/naive',
 				title: 'Naive',
 			},
 			DRAG_AROUND_CUSTOM_DRAG_LAYER: {
-				location: 'examples-drag-around-custom-drag-layer.html',
+				location: '/examples/drag-around/custom-drag-layer',
 				title: 'Custom Drag Layer',
 			},
 		},
@@ -167,11 +167,11 @@ export const ExamplePages: PageGroup[] = [
 		title: 'Nesting',
 		pages: {
 			NESTING_DRAG_SOURCES: {
-				location: 'examples-nesting-drag-sources.html',
+				location: '/examples/nesting/drag-sources',
 				title: 'Drag Sources',
 			},
 			NESTING_DROP_TARGETS: {
-				location: 'examples-nesting-drop-targets.html',
+				location: '/examples/nesting/drop-targets',
 				title: 'Drop Targets',
 			},
 		},
@@ -180,15 +180,15 @@ export const ExamplePages: PageGroup[] = [
 		title: 'Sortable',
 		pages: {
 			SORTABLE_SIMPLE: {
-				location: 'examples-sortable-simple.html',
+				location: '/examples/sortable/simple',
 				title: 'Simple',
 			},
 			SORTABLE_CANCEL_ON_DROP_OUTSIDE: {
-				location: 'examples-sortable-cancel-on-drop-outside.html',
+				location: '/examples/sortable/cancel-on-drop-outside',
 				title: 'Cancel on Drop Outside',
 			},
 			SORTABLE_STRESS_TEST: {
-				location: 'examples-sortable-stress.html',
+				location: '/examples/sortable/stress-test',
 				title: 'Stress Test',
 			},
 		},
@@ -197,11 +197,11 @@ export const ExamplePages: PageGroup[] = [
 		title: 'Customize',
 		pages: {
 			CUSTOMIZE_HANDLES_AND_PREVIEWS: {
-				location: 'examples-customize-handles-and-previews.html',
+				location: '/examples/customize/handles-and-previews',
 				title: 'Handles and Previews',
 			},
 			CUSTOMIZE_DROP_EFFECTS: {
-				location: 'examples-customize-drop-effects.html',
+				location: '/examples/customize/drop-effects',
 				title: 'Drop Effects',
 			},
 		},
@@ -210,7 +210,7 @@ export const ExamplePages: PageGroup[] = [
 		title: 'Other Cases',
 		pages: {
 			OTHER_NATIVE_FILES: {
-				location: 'examples-other-native-files.html',
+				location: '/examples/other/native-files',
 				title: 'Native Files',
 			},
 		},
