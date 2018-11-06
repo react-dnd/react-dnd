@@ -18,6 +18,8 @@ const PageBody: React.SFC<PageBodyProps> = props => {
 const Container = styled.div`
 	padding: 6em 1.5em;
 	background-color: #fff;
+	flex: 1;
+	max-width: 100%;
 `
 
 const PlainContent = styled.div`

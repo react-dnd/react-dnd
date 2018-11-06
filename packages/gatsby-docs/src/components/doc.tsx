@@ -12,11 +12,15 @@ const Doc: React.SFC<DocProps> = ({ docPage }) => {
 	return (
 		<Container>
 			<Gutter />
-			<div dangerouslySetInnerHTML={{ __html: docPage.html }} />
+			<HtmlContainer dangerouslySetInnerHTML={{ __html: docPage.html }} />
 			<Gutter />
 		</Container>
 	)
 }
+
+const HtmlContainer = styled.div`
+	max-width: 100%;
+`
 
 const Container = styled.div`
 	flex: 1;

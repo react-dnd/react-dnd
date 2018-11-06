@@ -8,9 +8,6 @@ const { graphql } = require('gatsby')
 import Doc from '../components/doc'
 import Layout from '../components/layout'
 
-// tslint:disable-next-line
-require('prismjs/themes/prism.css')
-
 export default function Template(props: any) {
 	const { currentPage } = props.data
 

@@ -10,7 +10,9 @@ import { PageGroup } from '../constants'
 import { APIPages, ExamplePages } from '../constants'
 import Header from './header'
 import './layout.css'
+require('prismjs/themes/prism.css')
 const { StaticQuery, graphql } = require('gatsby')
+// tslint:disable-next-line
 
 export interface LayoutProps {
 	location?: { pathname: string }
@@ -46,24 +48,43 @@ const Layout: React.SFC<LayoutProps> = props => {
 					</Helmet>
 					<Header />
 					<DragDropContextProvider backend={HTML5Backend}>
-						<ChildrenContainer>
+						<ContentContainer>
 							<PageBody hasSidebar={sitepath !== '/about'}>
 								{sitepath === '/about' ? null : (
-									<Sidebar groups={sidebarItems} location={location.pathname} />
+									<SidebarContainer>
+										<Sidebar
+											groups={sidebarItems}
+											location={location.pathname}
+										/>
+									</SidebarContainer>
 								)}
-								{children}
+								<ChildrenContainer>{children}</ChildrenContainer>
 							</PageBody>
-						</ChildrenContainer>
+						</ContentContainer>
 					</DragDropContextProvider>
 				</>
 			)}
 		/>
 	)
 }
+
+const SidebarContainer = styled.div`
+	flex: 1;
+`
 const ChildrenContainer = styled.div`
-	margin: 0 auto;
+	flex: 4;
+`
+
+const Gutter = styled.div`
+	flex: 1;
+`
+
+const ContentContainer = styled.div`
+	margin: 0;
 	height: 100%;
 	width: 100%;
+	max-height: 100%;
+	max-width: 100%;
 	display: flex;
 	flex-direction: row;
 `
