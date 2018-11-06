@@ -21,8 +21,8 @@ export interface LayoutProps {
 
 const Layout: React.SFC<LayoutProps> = props => {
 	const { children, location } = props
-	const sitepath = location!.pathname
-	const isExampleUrl = sitepath.startsWith('/examples')
+	const sitepath = location && location.pathname
+	const isExampleUrl = (sitepath || '').startsWith('/examples')
 	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
 	const hideSidebar = props.hideSidebar || sitepath === '/about'
 	return (
@@ -55,7 +55,7 @@ const Layout: React.SFC<LayoutProps> = props => {
 									<SidebarContainer>
 										<Sidebar
 											groups={sidebarItems}
-											location={location!.pathname}
+											location={location && location.pathname}
 										/>
 									</SidebarContainer>
 								)}
