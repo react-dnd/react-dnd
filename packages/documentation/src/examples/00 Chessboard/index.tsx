@@ -39,7 +39,7 @@ export default class ChessboardTutorialApp extends React.Component<
 				</p>
 				<p>
 					This is a sample app you&apos;ll build as you work through the{' '}
-					<a href="docs-tutorial.html">tutorial</a>.
+					<a href="/docs/tutorial">tutorial</a>.
 				</p>
 				<p>
 					It illustrates creating the drag sources and the drop targets, using
