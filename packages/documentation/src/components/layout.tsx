@@ -16,14 +16,15 @@ const { StaticQuery, graphql } = require('gatsby')
 
 export interface LayoutProps {
 	location?: { pathname: string }
+	hideSidebar?: boolean
 }
 
 const Layout: React.SFC<LayoutProps> = props => {
 	const { children, location } = props
-	const sitepath = location.pathname
+	const sitepath = location!.pathname
 	const isExampleUrl = sitepath.startsWith('/examples')
 	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
-
+	const hideSidebar = props.hideSidebar || sitepath === '/about'
 	return (
 		<StaticQuery
 			query={graphql`
@@ -50,11 +51,11 @@ const Layout: React.SFC<LayoutProps> = props => {
 					<DragDropContextProvider backend={HTML5Backend}>
 						<ContentContainer>
 							<PageBody hasSidebar={sitepath !== '/about'}>
-								{sitepath === '/about' ? null : (
+								{hideSidebar ? null : (
 									<SidebarContainer>
 										<Sidebar
 											groups={sidebarItems}
-											location={location.pathname}
+											location={location!.pathname}
 										/>
 									</SidebarContainer>
 								)}
@@ -73,10 +74,6 @@ const SidebarContainer = styled.div`
 `
 const ChildrenContainer = styled.div`
 	flex: 4;
-`
-
-const Gutter = styled.div`
-	flex: 1;
 `
 
 const ContentContainer = styled.div`

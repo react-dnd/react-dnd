@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { DropTarget, DragDropContext, ConnectDropTarget } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+import { DropTarget, ConnectDropTarget } from 'react-dnd'
 import Card from './Card'
 import ItemTypes from './ItemTypes'
 const update = require('immutability-helper')

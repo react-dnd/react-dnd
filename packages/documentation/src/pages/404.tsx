@@ -4,7 +4,7 @@ import { DragDropContextProvider } from 'react-dnd'
 import Backend from 'react-dnd-html5-backend'
 
 const NotFoundPage: React.SFC = () => (
-	<Layout sidebar={<></>}>
+	<Layout hideSidebar={true}>
 		<DragDropContextProvider backend={Backend}>
 			<h1>NOT FOUND</h1>
 			<p>You just hit a route that doesn&#39;t exist... the sadness.</p>

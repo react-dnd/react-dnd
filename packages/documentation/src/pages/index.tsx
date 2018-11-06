@@ -4,7 +4,11 @@ import { navigate } from 'gatsby'
 
 const IndexPage: React.SFC = props => {
 	navigate('/about')
-	return <Layout {...props}>{<></>}</Layout>
+	return (
+		<Layout {...props} hideSidebar={true}>
+			{null}
+		</Layout>
+	)
 }
 
 export default IndexPage

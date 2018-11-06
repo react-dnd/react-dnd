@@ -1,7 +1,6 @@
 // tslint:disable jsx-no-lambda
 import * as React from 'react'
-import { DragDropContext } from 'react-dnd'
-import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'
+import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
