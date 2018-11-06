@@ -27,11 +27,11 @@ See the [testing](/docs/testing) tutorial for examples.
 ### How do I make the component draggable only by a small handle?
 
 Specify the container node as the `dragPreview`, but only make the drag handle a `dragSource()`.
-See the [custom drag handle example](examples-customize-handles-and-previews.html).
+See the [custom drag handle example](/examples/customize/handles-and-previews).
 
 ### How do I constrain the drag preview movement?
 
-By default, you can't constrain the drag preview movement because the drag preview is drawn by the browser. You can, however, use a [custom drag layer](examples-drag-around-custom-drag-layer.html) where you're free to rendering anything, with any snapping or constraints.
+By default, you can't constrain the drag preview movement because the drag preview is drawn by the browser. You can, however, use a [custom drag layer](/examples/drag-around/custom-drag-layer) where you're free to rendering anything, with any snapping or constraints.
 
 ### How do I register a drag source or a drop target when the type depends on props?
 
