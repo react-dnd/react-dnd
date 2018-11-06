@@ -203,22 +203,20 @@ function collect(connect, monitor) {
   };
 }
 
-class Card extends React.Component {
-  render() {
-    // Your component receives its own props as usual
-    const { id } = this.props;
+function Card(props) {
+  // Your component receives its own props as usual
+  const { id } = props;
 
-    // These two props are injected by React DnD,
-    // as defined by your `collect` function above:
-    const { isDragging, connectDragSource } = this.props;
+  // These two props are injected by React DnD,
+  // as defined by your `collect` function above:
+  const { isDragging, connectDragSource } = props;
 
-    return connectDragSource(
-      <div>
-        I am a draggable card number {id}
-        {isDragging && ' (and I am being dragged now)'}
-      </div>
-    );
-  }
+  return connectDragSource(
+    <div>
+      I am a draggable card number {id}
+      {isDragging && ' (and I am being dragged now)'}
+    </div>
+  );
 }
 
 // Export the wrapped version

@@ -92,8 +92,12 @@ function getItemStyles(props) {
   };
 }
 
-class CustomDragLayer extends React.Component {
-  renderItem(type, item) {
+function CustomDragLayer({ item, itemType, isDragging }) {
+  if (!isDragging) {
+    return null;
+  }
+
+  function renderItem(type, item) {
     switch (type) {
     case ItemTypes.BOX:
       return (
@@ -102,31 +106,14 @@ class CustomDragLayer extends React.Component {
     }
   }
 
-  render() {
-    const { item, itemType, isDragging } = this.props;
-    if (!isDragging) {
-      return null;
-    }
-
-    return (
-      <div style={layerStyles}>
-        <div style={getItemStyles(this.props)}>
-          {this.renderItem(itemType, item)}
-        </div>
+  return (
+    <div style={layerStyles}>
+      <div style={getItemStyles(props)}>
+        {renderItem(itemType, item)}
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-CustomDragLayer.propTypes = {
-  item: PropTypes.object,
-  itemType: PropTypes.string,
-  currentOffset: PropTypes.shape({
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired
-  }),
-  isDragging: PropTypes.bool.isRequired
-};
 
 function collect(monitor) {
   return {

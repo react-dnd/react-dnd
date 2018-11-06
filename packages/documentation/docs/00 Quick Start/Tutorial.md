@@ -74,7 +74,7 @@ I'm going to do this every time I work on another component, so that I always ha
 I see my `Knight` on the screen! Time to go ahead and implement the `Square` now. Here is my first stab:
 
 ```js
-import React, { Component } from 'react';
+import React from 'react';
 
 export default function Square({black}) {
   const fill = black ? 'black' : 'white';
@@ -108,7 +108,7 @@ Even after correcting these two mistakes, I still can't see my `Knight` when the
 
 
 ```js
-import React, { Component } from 'react';
+import React from 'react';
 
 export default function Square({black, children}) {
   const fill = black ? 'black' : 'white';
@@ -421,19 +421,16 @@ The first thing we need to set up in our app is the [`DragDropContext`](/docs/ap
 Because the `Board` is the top-level component in our app, I'm going to supply a  [`DragDropContextProvider`](/docs/api/drag-drop-context-provider) for its children:
 
 ```js
-import React, { Component } from 'react';
+import React from 'react';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-export default class Board extends Component {
-  /* ... */
-  render() {
-    return (
-      <DragDropContextProvider backend={HTML5Backend}>
-      {/* ... */}
-      </DragDropContextProvider>
-    )
-  }
+export default function Board() {
+  return (
+    <DragDropContextProvider backend={HTML5Backend}>
+    {/* ... */}
+    </DragDropContextProvider>
+  )
 }
 ```
 
@@ -475,7 +472,7 @@ function collect(connect, monitor) {
 Let's take a look at the whole `Knight` component now, including the `DragSource` call and the updated `render` function:
 
 ```js
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ItemTypes } from './Constants';
 import { DragSource } from 'react-dnd';
@@ -493,26 +490,18 @@ function collect(connect, monitor) {
   }
 }
 
-class Knight extends Component {
-  render() {
-    const { connectDragSource, isDragging } = this.props;
-    return connectDragSource(
-      <div style={{
-        opacity: isDragging ? 0.5 : 1,
-        fontSize: 25,
-        fontWeight: 'bold',
-        cursor: 'move'
-      }}>
-        ♘
-      </div>
-    );
-  }
+function Knight({ connectDragSource, isDragging }) {
+  return connectDragSource(
+    <div style={{
+      opacity: isDragging ? 0.5 : 1,
+      fontSize: 25,
+      fontWeight: 'bold',
+      cursor: 'move'
+    }}>
+      ♘
+    </div>
+  );
 }
-
-Knight.propTypes = {
-  connectDragSource: PropTypes.func.isRequired,
-  isDragging: PropTypes.bool.isRequired
-};
 
 export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
 ```
@@ -656,7 +645,7 @@ canDrop(props) {
 I'm also adding `monitor.canDrop()` to my collecting function, as well as some overlay rendering code to the component:
 
 ```js
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Square from './Square';
 import { canMoveKnight, moveKnight } from './Game';

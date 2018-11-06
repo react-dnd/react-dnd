@@ -19,8 +19,7 @@ The second package instructs React DnD to use [the HTML5 drag and drop API](http
 ```js
 // Let's make <Card text='Write the docs' /> draggable!
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from './Constants';
 
@@ -45,26 +44,13 @@ function collect(connect, monitor) {
   };
 }
 
-const propTypes = {
-  text: PropTypes.string.isRequired,
-
-  // Injected by React DnD:
-  isDragging: PropTypes.bool.isRequired,
-  connectDragSource: PropTypes.func.isRequired
-};
-
-class Card extends Component {
-  render() {
-    const { isDragging, connectDragSource, text } = this.props;
-    return connectDragSource(
-      <div style={{ opacity: isDragging ? 0.5 : 1 }}>
-        {text}
-      </div>
-    );
-  }
+function Card({ isDragging, connectDragSource, text }) {
+  return connectDragSource(
+    <div style={{ opacity: isDragging ? 0.5 : 1 }}>
+      {text}
+    </div>
+  );
 }
-
-Card.propTypes = propTypes;
 
 // Export the wrapped component:
 export default DragSource(ItemTypes.CARD, cardSource, collect)(Card);
