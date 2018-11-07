@@ -1,15 +1,17 @@
 declare var require: any
 
 import {
-  Action,
-  DragDropManager,
-  XYCoord,
-  BeginDragPayload,
-  BeginDragOptions,
-  SentinelAction,
-  DropPayload,
-  HoverPayload,
-  HoverOptions, InitCoordsOptions, InitCoordsPayload,
+	Action,
+	DragDropManager,
+	XYCoord,
+	BeginDragPayload,
+	BeginDragOptions,
+	SentinelAction,
+	DropPayload,
+	HoverPayload,
+	HoverOptions,
+	InitCoordsOptions,
+	InitCoordsPayload,
 } from '../interfaces'
 import matchesType from '../utils/matchesType'
 const invariant = require('invariant')
@@ -26,47 +28,44 @@ export default function createDragDropActions<Context>(
 	manager: DragDropManager<Context>,
 ) {
 	return {
-	  initCoords(
-	    sourceIds: string[] = [],
-      {
-        clientOffset,
-        getSourceClientOffset
-      }: InitCoordsOptions
-    ): Action<InitCoordsPayload> | undefined {
-      const monitor = manager.getMonitor()
-      const registry = manager.getRegistry()
-      invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
+		initCoords(
+			sourceIds: string[] = [],
+			{ clientOffset, getSourceClientOffset }: InitCoordsOptions,
+		): Action<InitCoordsPayload> | undefined {
+			const monitor = manager.getMonitor()
+			const registry = manager.getRegistry()
+			invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
 
-      for (const s of sourceIds) {
-        invariant(registry.getSource(s), 'Expected sourceIds to be registered.')
-      }
-      let sourceId = null
-      for (let i = sourceIds.length - 1; i >= 0; i--) {
-        if (monitor.canDragSource(sourceIds[i])) {
-          sourceId = sourceIds[i]
-          break
-        }
-      }
-      if (sourceId === null) {
-        return
-      }
+			for (const s of sourceIds) {
+				invariant(registry.getSource(s), 'Expected sourceIds to be registered.')
+			}
+			let sourceId = null
+			for (let i = sourceIds.length - 1; i >= 0; i--) {
+				if (monitor.canDragSource(sourceIds[i])) {
+					sourceId = sourceIds[i]
+					break
+				}
+			}
+			if (sourceId === null) {
+				return
+			}
 
-      let sourceClientOffset: XYCoord | null = null
-      if (clientOffset) {
-        invariant(
-          typeof getSourceClientOffset === 'function',
-          'When clientOffset is provided, getSourceClientOffset must be a function.',
-        )
-        sourceClientOffset = (getSourceClientOffset as any)(sourceId)
-      }
-      return {
-        type: INIT_COORDS,
-        payload: {
-          clientOffset: clientOffset || null,
-          sourceClientOffset: sourceClientOffset || null,
-        },
-      }
-    },
+			let sourceClientOffset: XYCoord | null = null
+			if (clientOffset) {
+				invariant(
+					typeof getSourceClientOffset === 'function',
+					'When clientOffset is provided, getSourceClientOffset must be a function.',
+				)
+				sourceClientOffset = (getSourceClientOffset as any)(sourceId)
+			}
+			return {
+				type: INIT_COORDS,
+				payload: {
+					clientOffset: clientOffset || null,
+					sourceClientOffset: sourceClientOffset || null,
+				},
+			}
+		},
 		beginDrag(
 			sourceIds: string[] = [],
 			{

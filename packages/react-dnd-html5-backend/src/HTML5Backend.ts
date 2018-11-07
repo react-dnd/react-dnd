@@ -59,7 +59,7 @@ export default class HTML5Backend implements Backend {
 		this.registry = manager.getRegistry()
 		this.context = manager.getContext()
 
-		this.enterLeaveCounter = new EnterLeaveCounter(this.isNodeInDocument);
+		this.enterLeaveCounter = new EnterLeaveCounter(this.isNodeInDocument)
 	}
 
 	// public for test
@@ -349,12 +349,13 @@ export default class HTML5Backend implements Backend {
 			this.actions.endDrag()
 		}
 
-    this.actions.initCoords(dragStartSourceIds || [], {
-      getSourceClientOffset: this.getSourceClientOffset,
-      clientOffset,
-    })
+		// Fire off the initial coordinates
+		this.actions.initCoords(dragStartSourceIds || [], {
+			getSourceClientOffset: this.getSourceClientOffset,
+			clientOffset,
+		})
 
-    // Don't publish the source just yet (see why below)
+		// Don't publish the source just yet (see why below)
 		this.actions.beginDrag(dragStartSourceIds || [], {
 			publishSource: false,
 			getSourceClientOffset: this.getSourceClientOffset,
