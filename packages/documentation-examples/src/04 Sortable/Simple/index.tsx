@@ -1,24 +1,85 @@
 import * as React from 'react'
-import Container from './Container'
+import Card from './Card'
+const update = require('immutability-helper')
 
-export default class SortableSimple extends React.Component {
+const style = {
+	width: 400,
+}
+
+export interface ContainerState {
+	cards: Array<{
+		id: number
+		text: string
+	}>
+}
+
+export default class Container extends React.Component<{}, ContainerState> {
+	constructor(props: {}) {
+		super(props)
+		this.moveCard = this.moveCard.bind(this)
+		this.state = {
+			cards: [
+				{
+					id: 1,
+					text: 'Write a cool JS library',
+				},
+				{
+					id: 2,
+					text: 'Make it generic enough',
+				},
+				{
+					id: 3,
+					text: 'Write README',
+				},
+				{
+					id: 4,
+					text: 'Create some examples',
+				},
+				{
+					id: 5,
+					text:
+						'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
+				},
+				{
+					id: 6,
+					text: '???',
+				},
+				{
+					id: 7,
+					text: 'PROFIT',
+				},
+			],
+		}
+	}
+
 	public render() {
+		const { cards } = this.state
+
 		return (
-			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/04%20Sortable/Simple">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>
-					It is easy to implement a sortable interface with React DnD. Just make
-					the same component both a drag source and a drop target, and reorder
-					the data in the <code>hover</code> handler.
-				</p>
-				<Container />
+			<div style={style}>
+				{cards.map((card, i) => (
+					<Card
+						key={card.id}
+						index={i}
+						id={card.id}
+						text={card.text}
+						moveCard={this.moveCard}
+					/>
+				))}
 			</div>
+		)
+	}
+
+	private moveCard(dragIndex: number, hoverIndex: number) {
+		const { cards } = this.state
+		const dragCard = cards[dragIndex]
+
+		this.setState(
+			update(this.state, {
+				cards: {
+					$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+				},
+			}),
 		)
 	}
 }

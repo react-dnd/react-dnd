@@ -1,28 +1,107 @@
 import * as React from 'react'
-import Container from './Container'
+import { DropTarget, ConnectDropTarget } from 'react-dnd'
+import Card from './Card'
+import ItemTypes from './ItemTypes'
+const update = require('immutability-helper')
 
-export default class SortableCancelOnDropOutside extends React.Component {
+const style = {
+	width: 400,
+}
+
+const cardTarget = {
+	drop() {
+		//
+	},
+}
+
+export interface ContainerProps {
+	connectDropTarget: ConnectDropTarget
+}
+
+export interface ContainerState {
+	cards: any[]
+}
+
+class Container extends React.Component<ContainerProps, ContainerState> {
+	constructor(props: ContainerProps) {
+		super(props)
+		this.moveCard = this.moveCard.bind(this)
+		this.findCard = this.findCard.bind(this)
+		this.state = {
+			cards: [
+				{
+					id: 1,
+					text: 'Write a cool JS library',
+				},
+				{
+					id: 2,
+					text: 'Make it generic enough',
+				},
+				{
+					id: 3,
+					text: 'Write README',
+				},
+				{
+					id: 4,
+					text: 'Create some examples',
+				},
+				{
+					id: 5,
+					text: 'Spam in Twitter and IRC to promote it',
+				},
+				{
+					id: 6,
+					text: '???',
+				},
+				{
+					id: 7,
+					text: 'PROFIT',
+				},
+			],
+		}
+	}
+
 	public render() {
-		return (
-			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/04%20Sortable/Cancel%20on%20Drop%20Outside">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>
-					Because you write the logic instead of using the readymade components,
-					you can tweak the behavior to the one your app needs. In this example,
-					instead of moving the card inside the drop target&apos;s{' '}
-					<code>drop()</code> handler, we do it inside the drag source&apos;s{' '}
-					<code>endDrag()</code> handler. This let us check{' '}
-					<code>monitor.didDrop()</code> and revert the drag operation if the
-					card was dropped outside its container.
-				</p>
-				<Container />
-			</div>
+		const { connectDropTarget } = this.props
+		const { cards } = this.state
+
+		return connectDropTarget(
+			<div style={style}>
+				{cards.map(card => (
+					<Card
+						key={card.id}
+						id={card.id}
+						text={card.text}
+						moveCard={this.moveCard}
+						findCard={this.findCard}
+					/>
+				))}
+			</div>,
 		)
 	}
+
+	private moveCard(id: string, atIndex: number) {
+		const { card, index } = this.findCard(id)
+		this.setState(
+			update(this.state, {
+				cards: {
+					$splice: [[index, 1], [atIndex, 0, card]],
+				},
+			}),
+		)
+	}
+
+	private findCard(id: string) {
+		const { cards } = this.state
+		const card = cards.filter(c => c.id === id)[0]
+
+		return {
+			card,
+			index: cards.indexOf(card),
+		}
+	}
 }
+
+export default DropTarget(ItemTypes.CARD, cardTarget, connect => ({
+	connectDropTarget: connect.dropTarget(),
+}))(Container)
