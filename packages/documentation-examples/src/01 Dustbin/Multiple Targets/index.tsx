@@ -1,26 +1,93 @@
 import * as React from 'react'
-import Container from './Container'
+import { NativeTypes } from 'react-dnd-html5-backend'
+import Dustbin from './Dustbin'
+import Box from './Box'
+import ItemTypes from './ItemTypes'
+const update = require('immutability-helper')
 
-export default class DustbinMultipleTargets extends React.Component {
+export interface ContainerState {
+	droppedBoxNames: string[]
+	dustbins: Array<{
+		accepts: string[]
+		lastDroppedItem: any
+	}>
+	boxes: Array<{
+		name: string
+		type: string
+	}>
+}
+export default class Container extends React.Component<{}, ContainerState> {
+	constructor(props: {}) {
+		super(props)
+		this.state = {
+			dustbins: [
+				{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
+				{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
+				{
+					accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL],
+					lastDroppedItem: null,
+				},
+				{ accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null },
+			],
+			boxes: [
+				{ name: 'Bottle', type: ItemTypes.GLASS },
+				{ name: 'Banana', type: ItemTypes.FOOD },
+				{ name: 'Magazine', type: ItemTypes.PAPER },
+			],
+			droppedBoxNames: [],
+		}
+	}
+
+	public isDropped(boxName: string) {
+		return this.state.droppedBoxNames.indexOf(boxName) > -1
+	}
+
 	public render() {
+		const { boxes, dustbins } = this.state
+
 		return (
 			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Multiple%20Targets">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>This is a slightly more interesting example.</p>
-				<p>
-					It demonstrates how a single drop target may accept multiple types,
-					and how those types may be derived from props. It also demonstrates
-					the handling of native files and URLs (try dropping them onto the last
-					two dustbins).
-				</p>
-				<Container />
+				<div style={{ overflow: 'hidden', clear: 'both' }}>
+					{dustbins.map(({ accepts, lastDroppedItem }, index) => (
+						<Dustbin
+							accepts={accepts}
+							lastDroppedItem={lastDroppedItem}
+							// tslint:disable-next-line jsx-no-lambda
+							onDrop={item => this.handleDrop(index, item)}
+							key={index}
+						/>
+					))}
+				</div>
+
+				<div style={{ overflow: 'hidden', clear: 'both' }}>
+					{boxes.map(({ name, type }, index) => (
+						<Box
+							name={name}
+							type={type}
+							isDropped={this.isDropped(name)}
+							key={index}
+						/>
+					))}
+				</div>
 			</div>
+		)
+	}
+
+	private handleDrop(index: number, item: { name: string }) {
+		const { name } = item
+		const droppedBoxNames = name ? { $push: [name] } : {}
+
+		this.setState(
+			update(this.state, {
+				dustbins: {
+					[index]: {
+						lastDroppedItem: {
+							$set: item,
+						},
+					},
+				},
+				droppedBoxNames,
+			}),
 		)
 	}
 }

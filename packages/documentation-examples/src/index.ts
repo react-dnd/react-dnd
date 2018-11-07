@@ -8,7 +8,7 @@ export {
 	default as dustbinSingleTargetInIframe,
 } from './01 Dustbin/Single Target in iframe'
 export {
-	default as dustbinSingleTargeWithFCs,
+	default as dustbinSingleTargetWithFCs,
 } from './01 Dustbin/Single Target with FCs'
 export { default as dustbinStressTest } from './01 Dustbin/Stress Test'
 export {

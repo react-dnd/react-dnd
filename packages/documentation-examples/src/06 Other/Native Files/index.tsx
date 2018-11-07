@@ -1,20 +1,36 @@
 import * as React from 'react'
-import Container from './Container'
+import { DropTargetMonitor } from 'react-dnd'
+import { NativeTypes } from 'react-dnd-html5-backend'
+import TargetBox from './TargetBox'
+import FileList from './FileList'
 
-export default class NativeFiles extends React.Component {
+export interface ContainerState {
+	droppedFiles: any[]
+}
+
+export default class Container extends React.Component<{}, ContainerState> {
+	constructor(props: {}) {
+		super(props)
+		this.handleFileDrop = this.handleFileDrop.bind(this)
+		this.state = { droppedFiles: [] }
+	}
+
 	public render() {
+		const { FILE } = NativeTypes
+		const { droppedFiles } = this.state
+
 		return (
-			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/06%20Other/Native%20Files">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>Example demonstrating drag and drop of native files.</p>
-				<Container />
-			</div>
+			<>
+				<TargetBox accepts={[FILE]} onDrop={this.handleFileDrop} />
+				<FileList files={droppedFiles} />
+			</>
 		)
+	}
+
+	private handleFileDrop(item: any, monitor: DropTargetMonitor) {
+		if (monitor) {
+			const droppedFiles = monitor.getItem().files
+			this.setState({ droppedFiles })
+		}
 	}
 }
