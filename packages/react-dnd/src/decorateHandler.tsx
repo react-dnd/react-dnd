@@ -13,8 +13,8 @@ const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')
 
-export interface DecorateHandlerArgs<Props, TargetClass, ItemIdType> {
-	DecoratedComponent: TargetClass
+export interface DecorateHandlerArgs<Props, ItemIdType> {
+	DecoratedComponent: any
 	createHandler: any
 	createMonitor: any
 	createConnector: any
@@ -25,11 +25,7 @@ export interface DecorateHandlerArgs<Props, TargetClass, ItemIdType> {
 	options: any
 }
 
-export default function decorateHandler<
-	Props,
-	TargetClass extends React.ComponentType<any>,
-	ItemIdType
->({
+export default function decorateHandler<Props, ItemIdType>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,
@@ -39,9 +35,7 @@ export default function decorateHandler<
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<Props, TargetClass, ItemIdType>): DndComponentClass<
-	Props
-> {
+}: DecorateHandlerArgs<Props, ItemIdType>): DndComponentClass<Props> {
 	const { arePropsEqual = shallowEqual } = options
 	const Decorated: any = DecoratedComponent
 
@@ -255,6 +249,8 @@ export default function decorateHandler<
 		}
 	}
 
-	return hoistStatics(DragDropContainer, DecoratedComponent) as TargetClass &
-		DndComponentClass<Props>
+	return hoistStatics(
+		DragDropContainer,
+		DecoratedComponent,
+	) as DndComponentClass<Props>
 }

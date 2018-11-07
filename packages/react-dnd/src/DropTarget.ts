@@ -1,11 +1,6 @@
 import * as React from 'react'
 import { TargetType } from 'dnd-core'
-import {
-	DropTargetSpec,
-	DndOptions,
-	DropTargetCollector,
-	DndComponentClass,
-} from './interfaces'
+import { DropTargetSpec, DndOptions, DropTargetCollector } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerTarget from './registerTarget'
@@ -69,10 +64,10 @@ export default function DropTarget<Props, CollectedProps = {}>(
 		collect,
 	)
 
-	return function decorateTarget<
-		TargetClass extends React.ComponentType<Props & CollectedProps>
-	>(DecoratedComponent: TargetClass): DndComponentClass<Props> {
-		return decorateHandler<Props, TargetClass, TargetType>({
+	return function decorateTarget<TargetClass extends React.ComponentType<any>>(
+		DecoratedComponent: TargetClass,
+	): React.ComponentType<Props> {
+		return decorateHandler<Props, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,
