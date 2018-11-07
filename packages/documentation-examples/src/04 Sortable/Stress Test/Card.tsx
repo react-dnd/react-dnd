@@ -44,7 +44,7 @@ interface CardSourceCollectedProps {
 }
 
 interface CardTargetCollectedProps {
-	connectDropTarget?: ConnectDropTarget
+	connectDropTarget: ConnectDropTarget
 }
 
 class Card extends React.Component<
@@ -60,7 +60,7 @@ class Card extends React.Component<
 		const opacity = isDragging ? 0 : 1
 
 		return connectDragSource(
-			connectDropTarget!(<div style={{ ...style, opacity }}>{text}</div>),
+			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
 		)
 	}
 }

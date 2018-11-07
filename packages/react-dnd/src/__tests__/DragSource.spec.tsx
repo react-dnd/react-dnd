@@ -3,13 +3,6 @@ import * as React from 'react'
 import { DragSource } from '../index'
 
 describe('DragSource', () => {
-	it('can apply to a class via decorator-fashion', () => {
-		@DragSource('abc', { beginDrag: () => null }, () => ({}))
-		class DecoratedClass extends React.Component {}
-
-		expect(DecoratedClass).toBeDefined()
-	})
-
 	it('can apply via composition', () => {
 		class ContextClass extends React.Component {}
 		const DecoratedClass = DragSource(
@@ -32,10 +25,17 @@ describe('DragSource', () => {
 	})
 
 	it('can apply to a ref-forwarded component', () => {
-		const RefForwarded: React.RefForwardingComponent<any, {}> = (props, ref) =>
-			null
+		interface RFProps {
+			children?: React.ReactNode
+		}
+
+		const RefForwarded: React.RefForwardingComponent<
+			HTMLDivElement,
+			RFProps
+		> = () => null
+
 		const DecoratedComponent = DragSource(
-			'abc',
+			'test_id',
 			{ beginDrag: () => null },
 			() => ({}),
 		)(RefForwarded)
