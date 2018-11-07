@@ -107,8 +107,7 @@
 	},
 	"workspaces": {
     "packages": ["packages/*"],
-    "nohoist": [
-      
+    "nohoist": [      
       "**/@types/*",
       "**/hoist-non-react-statics",
 			"**/redux"
