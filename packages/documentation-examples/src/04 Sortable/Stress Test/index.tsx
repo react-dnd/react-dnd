@@ -9,11 +9,8 @@ export default class SortableStressTest extends React.Component<
 	{},
 	SortableStressTestState
 > {
-	constructor(props: {}) {
-		super(props)
-		// Avoid rendering on server because the big data list is generated
-		this.state = { shouldRender: false }
-	}
+	// Avoid rendering on server because the big data list is generated
+	public state = { shouldRender: false }
 
 	public componentDidMount() {
 		// Won't fire on server.
@@ -22,39 +19,6 @@ export default class SortableStressTest extends React.Component<
 
 	public render() {
 		const { shouldRender } = this.state
-
-		return (
-			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/04%20Sortable/Stress%20Test">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>
-					How many items can React DnD handle at the same time? There are a
-					thousand items in this list. With some optimizations like updating the
-					state inside a <code>requestAnimationFrame</code> callback, it can
-					handle a few thousand items without lagging. After that, you&apos;re
-					better off using virtual lists like{' '}
-					<a href="https://github.com/facebook/fixed-data-table">
-						fixed-data-table
-					</a>
-					. Luckily, React DnD is designed to work great with any virtual React
-					data list components because it doesn&apos;t keep any state in the
-					DOM.
-				</p>
-				<p>
-					This example does not scroll automatically but you can add the
-					scrolling with a parent drop target that compares{' '}
-					<code>component.getBoundingClientRect()</code> with{' '}
-					<code>monitor.getClientOffset()</code> inside its <code>hover</code>{' '}
-					handler. In fact, you are welcome to contribute this functionality to
-					this example!
-				</p>
-				{shouldRender && <Container />}
-			</div>
-		)
+		return <>{shouldRender && <Container />}</>
 	}
 }

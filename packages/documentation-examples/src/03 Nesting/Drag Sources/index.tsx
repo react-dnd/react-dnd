@@ -1,25 +1,27 @@
 import * as React from 'react'
-import Container from './Container'
+import SourceBox from './SourceBox'
+import TargetBox from './TargetBox'
+import Colors from './Colors'
 
-export default class NestingDragSources extends React.Component {
+export default class Container extends React.Component {
 	public render() {
 		return (
-			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/03%20Nesting/Drag%20Sources">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>
-					You can nest the drag sources in one another. If a nested drag source
-					returns <code>false</code> from <code>canDrag</code>, its parent will
-					be asked, until a draggable source is found and activated. Only the
-					activated drag source will have its <code>beginDrag()</code> and{' '}
-					<code>endDrag()</code> called.
-				</p>
-				<Container />
+			<div style={{ overflow: 'hidden', clear: 'both', margin: '-.5rem' }}>
+				<div style={{ float: 'left' }}>
+					<SourceBox color={Colors.BLUE}>
+						<SourceBox color={Colors.YELLOW}>
+							<SourceBox color={Colors.YELLOW} />
+							<SourceBox color={Colors.BLUE} />
+						</SourceBox>
+						<SourceBox color={Colors.BLUE}>
+							<SourceBox color={Colors.YELLOW} />
+						</SourceBox>
+					</SourceBox>
+				</div>
+
+				<div style={{ float: 'left', marginLeft: '5rem', marginTop: '.5rem' }}>
+					<TargetBox />
+				</div>
 			</div>
 		)
 	}

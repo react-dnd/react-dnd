@@ -1,21 +1,20 @@
 import * as React from 'react'
-import Container from './Container'
+import Dustbin from './Dustbin'
+import Box from './Box'
 
-export default (React as any).memo(() => (
-	<div>
-		<p>
-			<b>
-				<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Single%20Target">
-					Browse the Source
-				</a>
-			</b>
-		</p>
-		<p>This is the simplest example there is.</p>
-		<p>
-			Drag the boxes below and drop them into the dustbin. Note that it has a
-			neutral, an active and a hovered state. The dragged item itself changes
-			opacity while dragged.
-		</p>
-		<Container />
-	</div>
-))
+export default class Container extends React.Component {
+	public render() {
+		return (
+			<div>
+				<div style={{ overflow: 'hidden', clear: 'both' }}>
+					<Dustbin />
+				</div>
+				<div style={{ overflow: 'hidden', clear: 'both' }}>
+					<Box name="Glass" />
+					<Box name="Banana" />
+					<Box name="Paper" />
+				</div>
+			</div>
+		)
+	}
+}
