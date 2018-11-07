@@ -1,28 +1,50 @@
 import * as React from 'react'
-import Container from './Container'
+import { DragDropContextProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
+import Dustbin from '../Single Target/Dustbin'
+import Box from '../Single Target/Box'
+const {
+	default: Frame,
+	FrameContextConsumer,
+} = require('react-frame-component')
 
-export default class DustbinSingleTargetIframe extends React.Component {
+class FrameBindingContext extends React.Component {
 	public render() {
 		return (
-			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Single%20Target%20in%20iframe">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>This is the same simple example, but nested in an iframe.</p>
-				<p>
-					When you are using the react-dnd-html5-backend, you are limited to
-					drag-and-drop within a single iframe.
-				</p>
-				<p>
-					Using react-dnd inside of an iframe requires a slightly different
-					container configuration. Check out the source for more details.
-				</p>
-				<Container />
-			</div>
+			<FrameContextConsumer>
+				{({ window }: any) => (
+					<DragDropContextProvider backend={HTML5Backend} context={window}>
+						{this.props.children}
+					</DragDropContextProvider>
+				)}
+			</FrameContextConsumer>
+		)
+	}
+}
+
+// Don't use the decorator, embed the DnD context within the iframe
+// tslint:disable-next-line max-classes-per-file
+export default class Container extends React.Component {
+	public render() {
+		// The react-frame-component will pass the iframe's 'window' global as a context value
+		// to the DragDropContext provider. You could also directly inject it in via a prop.
+		// If neither the prop or the context value for 'window' are present, the DragDropContextProvider
+		// will just use the global window.
+		return (
+			<Frame style={{ width: '100%', height: 400 }}>
+				<FrameBindingContext>
+					<div>
+						<div style={{ overflow: 'hidden', clear: 'both' }}>
+							<Dustbin />
+						</div>
+						<div style={{ overflow: 'hidden', clear: 'both' }}>
+							<Box name="Glass" />
+							<Box name="Banana" />
+							<Box name="Paper" />
+						</div>
+					</div>
+				</FrameBindingContext>
+			</Frame>
 		)
 	}
 }
