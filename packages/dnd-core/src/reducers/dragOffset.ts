@@ -1,4 +1,10 @@
-import { BEGIN_DRAG, HOVER, END_DRAG, DROP } from '../actions/dragDrop'
+import {
+	INIT_COORDS,
+	BEGIN_DRAG,
+	HOVER,
+	END_DRAG,
+	DROP,
+} from '../actions/dragDrop'
 import { XYCoord, Action } from '../interfaces'
 import { areCoordsEqual } from '../utils/equality'
 
@@ -23,6 +29,7 @@ export default function dragOffset(
 ) {
 	const { payload } = action
 	switch (action.type) {
+		case INIT_COORDS:
 		case BEGIN_DRAG:
 			return {
 				initialSourceClientOffset: payload.sourceClientOffset,

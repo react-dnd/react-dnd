@@ -10,11 +10,14 @@ import {
 	DropPayload,
 	HoverPayload,
 	HoverOptions,
+	InitCoordsOptions,
+	InitCoordsPayload,
 } from '../interfaces'
 import matchesType from '../utils/matchesType'
 const invariant = require('invariant')
 const isObject = require('lodash/isObject')
 
+export const INIT_COORDS = 'dnd-core/INIT_COORDS'
 export const BEGIN_DRAG = 'dnd-core/BEGIN_DRAG'
 export const PUBLISH_DRAG_SOURCE = 'dnd-core/PUBLISH_DRAG_SOURCE'
 export const HOVER = 'dnd-core/HOVER'
@@ -25,6 +28,44 @@ export default function createDragDropActions<Context>(
 	manager: DragDropManager<Context>,
 ) {
 	return {
+		initCoords(
+			sourceIds: string[] = [],
+			{ clientOffset, getSourceClientOffset }: InitCoordsOptions,
+		): Action<InitCoordsPayload> | undefined {
+			const monitor = manager.getMonitor()
+			const registry = manager.getRegistry()
+			invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
+
+			for (const s of sourceIds) {
+				invariant(registry.getSource(s), 'Expected sourceIds to be registered.')
+			}
+			let sourceId = null
+			for (let i = sourceIds.length - 1; i >= 0; i--) {
+				if (monitor.canDragSource(sourceIds[i])) {
+					sourceId = sourceIds[i]
+					break
+				}
+			}
+			if (sourceId === null) {
+				return
+			}
+
+			let sourceClientOffset: XYCoord | null = null
+			if (clientOffset) {
+				invariant(
+					typeof getSourceClientOffset === 'function',
+					'When clientOffset is provided, getSourceClientOffset must be a function.',
+				)
+				sourceClientOffset = getSourceClientOffset(sourceId)
+			}
+			return {
+				type: INIT_COORDS,
+				payload: {
+					clientOffset: clientOffset || null,
+					sourceClientOffset: sourceClientOffset || null,
+				},
+			}
+		},
 		beginDrag(
 			sourceIds: string[] = [],
 			{
@@ -60,7 +101,7 @@ export default function createDragDropActions<Context>(
 					typeof getSourceClientOffset === 'function',
 					'When clientOffset is provided, getSourceClientOffset must be a function.',
 				)
-				sourceClientOffset = (getSourceClientOffset as any)(sourceId)
+				sourceClientOffset = getSourceClientOffset(sourceId)
 			}
 
 			const source = registry.getSource(sourceId)
@@ -193,8 +234,8 @@ export default function createDragDropActions<Context>(
 			invariant(monitor.isDragging(), 'Cannot call endDrag while not dragging.')
 
 			const sourceId = monitor.getSourceId()
-			const source = registry.getSource(sourceId as string, true)
-			source.endDrag(monitor, sourceId as string)
+			const source = registry.getSource(sourceId, true)
+			source.endDrag(monitor, sourceId)
 			registry.unpinSource()
 			return { type: END_DRAG }
 		},
