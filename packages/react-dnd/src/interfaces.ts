@@ -24,18 +24,14 @@ export interface DndComponent<Props> extends React.Component<Props> {
  */
 export interface ContextComponentClass<Props>
 	extends React.ComponentClass<Props> {
-	DecoratedComponent:
-		| React.ComponentClass<Props>
-		| React.StatelessComponent<Props>
+	DecoratedComponent: React.ComponentType<Props>
 	new (props?: Props, context?: any): ContextComponent<Props>
 }
 /**
  * The class interface for a DnD component
  */
 export interface DndComponentClass<Props> extends React.ComponentClass<Props> {
-	DecoratedComponent:
-		| React.ComponentClass<Props>
-		| React.StatelessComponent<Props>
+	DecoratedComponent: React.ComponentType<Props>
 	new (props?: Props, context?: any): DndComponent<Props>
 }
 
