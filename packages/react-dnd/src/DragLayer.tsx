@@ -1,7 +1,7 @@
 import * as React from 'react'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
-import { DragLayerCollector, DndOptions } from './interfaces'
+import { DragLayerCollector, DndOptions, DndComponentClass } from './interfaces'
 import { Consumer } from './DragDropContext'
 const hoistStatics = require('hoist-non-react-statics')
 const isPlainObject = require('lodash/isPlainObject')
@@ -152,6 +152,9 @@ export default function DragLayer<Props, CollectedProps = {}>(
 			}
 		}
 
-		return hoistStatics(DragLayerContainer, DecoratedComponent)
+		return hoistStatics(
+			DragLayerContainer,
+			DecoratedComponent,
+		) as DndComponentClass<Props>
 	}
 }

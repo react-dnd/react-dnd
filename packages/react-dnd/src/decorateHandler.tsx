@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
-import { DndComponent } from './interfaces'
+import { DndComponentClass, DndComponent } from './interfaces'
 import { Consumer } from './DragDropContext'
 import {
 	Disposable,
@@ -35,7 +35,7 @@ export default function decorateHandler<Props, ItemIdType>({
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<Props, ItemIdType>): React.ComponentType<Props> {
+}: DecorateHandlerArgs<Props, ItemIdType>): DndComponentClass<Props> {
 	const { arePropsEqual = shallowEqual } = options
 	const Decorated: any = DecoratedComponent
 
@@ -249,5 +249,8 @@ export default function decorateHandler<Props, ItemIdType>({
 		}
 	}
 
-	return hoistStatics(DragDropContainer, DecoratedComponent)
+	return hoistStatics(
+		DragDropContainer,
+		DecoratedComponent,
+	) as DndComponentClass<Props>
 }
