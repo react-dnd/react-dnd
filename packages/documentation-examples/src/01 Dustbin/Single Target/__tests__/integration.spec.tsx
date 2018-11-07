@@ -28,7 +28,10 @@ describe('Integration', () => {
 
 		window.alert = jest.fn()
 
-		const dustbin: any = TestUtils.findRenderedComponentWithType(root, Dustbin)
+		const dustbin: any = TestUtils.findRenderedComponentWithType(
+			root,
+			Dustbin as any,
+		)
 		backend.simulateHover([dustbin.getHandlerId()])
 		backend.simulateDrop()
 		backend.simulateEndDrag()

@@ -56,7 +56,7 @@ export default function createDragDropActions<Context>(
 					typeof getSourceClientOffset === 'function',
 					'When clientOffset is provided, getSourceClientOffset must be a function.',
 				)
-				sourceClientOffset = getSourceClientOffset(sourceId)
+				sourceClientOffset = getSourceClientOffset!(sourceId)
 			}
 			return {
 				type: INIT_COORDS,
@@ -101,7 +101,7 @@ export default function createDragDropActions<Context>(
 					typeof getSourceClientOffset === 'function',
 					'When clientOffset is provided, getSourceClientOffset must be a function.',
 				)
-				sourceClientOffset = getSourceClientOffset(sourceId)
+				sourceClientOffset = getSourceClientOffset!(sourceId)
 			}
 
 			const source = registry.getSource(sourceId)
@@ -234,8 +234,8 @@ export default function createDragDropActions<Context>(
 			invariant(monitor.isDragging(), 'Cannot call endDrag while not dragging.')
 
 			const sourceId = monitor.getSourceId()
-			const source = registry.getSource(sourceId, true)
-			source.endDrag(monitor, sourceId)
+			const source = registry.getSource(sourceId!, true)
+			source.endDrag(monitor, sourceId!)
 			registry.unpinSource()
 			return { type: END_DRAG }
 		},
