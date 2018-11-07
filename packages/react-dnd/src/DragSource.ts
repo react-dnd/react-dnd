@@ -1,6 +1,11 @@
 import * as React from 'react'
 import { SourceType } from 'dnd-core'
-import { DragSourceSpec, DragSourceCollector, DndOptions } from './interfaces'
+import {
+	DragSourceSpec,
+	DragSourceCollector,
+	DndOptions,
+	DndComponentClass,
+} from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerSource from './registerSource'
@@ -71,9 +76,9 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 		collect,
 	)
 
-	return function decorateSource(
-		DecoratedComponent: React.ComponentType<any>,
-	): React.ComponentType<Props> {
+	return function decorateSource<T>(
+		DecoratedComponent: React.ComponentType<T>,
+	): DndComponentClass<Props> {
 		return decorateHandler<Props, SourceType>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,

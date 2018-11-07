@@ -27,9 +27,9 @@ export default function DragLayer<Props, CollectedProps = {}>(
 		options,
 	)
 
-	return function decorateLayer(
-		DecoratedComponent: React.ComponentType<any>,
-	): React.ComponentType<Props> {
+	return function decorateLayer<T>(
+		DecoratedComponent: React.ComponentType<T>,
+	): DndComponentClass<Props> {
 		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
 		const displayName = Decorated.displayName || Decorated.name || 'Component'
