@@ -6,7 +6,7 @@ title: "Stress Test"
 
 How many items can React DnD handle at the same time? There are a
 thousand items in this list. With some optimizations like updating the
-state inside a <code>requestAnimationFrame</code> callback, it can
+state inside a `requestAnimationFrame` callback, it can
 handle a few thousand items without lagging. After that, you're
 better off using virtual lists like
 [fixed-data-table](https://github.com/facebook/fixed-data-table).
@@ -17,10 +17,10 @@ DOM.
 
 This example does not scroll automatically but you can add the
 scrolling with a parent drop target that compares
-<code>component.getBoundingClientRect()</code> with
-<code>monitor.getClientOffset()</code> inside its <code>hover</code>
+`component.getBoundingClientRect()` with
+`monitor.getClientOffset()` inside its `hover`
 handler. In fact, you are welcome to contribute this functionality to
 this example!
 
 
-<sortableStressTest></sortableStressTest>
+<sortable-stress-test></sortable-stress-test>

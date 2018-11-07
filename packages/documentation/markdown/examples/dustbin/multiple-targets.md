@@ -12,4 +12,4 @@ and how those types may be derived from props. It also demonstrates
 the handling of native files and URLs (try dropping them onto the last
 two dustbins).
 
-<dustbinMultipleTargets></dustbinMultipleTargets>
+<dustbin-multiple-targets></dustbin-multiple-targets>

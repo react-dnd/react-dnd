@@ -6,4 +6,4 @@ title: "Native Files"
 
 Example demonstrating drag and drop of native files.
 
-<otherNativeFiles></otherNativeFiles>
+<other-native-files></other-native-files>

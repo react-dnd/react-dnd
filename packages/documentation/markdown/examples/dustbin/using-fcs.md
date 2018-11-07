@@ -7,4 +7,4 @@ title: "Using FCs"
 
 This is the same simple example, but written using React Function Components.
 
-<dustbinSingleTargetWithFCs></dustbinSingleTargetWithFCs>
+<dustbin-single-target-with-fcs></dustbin-single-target-with-fcs>

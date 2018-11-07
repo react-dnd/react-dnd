@@ -9,7 +9,7 @@ This example naively relies on browser drag and drop implementation
 without much custom logic.
 
 When the box is dragged, we remove its original DOM node by returning
-<code>null</code> from <code>render()</code> and let browser draw the
+`null` from `render()` and let browser draw the
 drag preview. When the is released, we draw it at the new coordinates.
 If you try to drag the box outside the container, the browser will
 animate its return.
@@ -26,4 +26,4 @@ control what happens to dragged preview once the browser has drawn it.
 Check out the [csutom rendering example](/examples/drag-around/custom-drag-layer)  
 if you'd rather trade more control for some more work.
 
-<dragAroundNaive></dragAroundNaive>
+<drag-around-naive></drag-around-naive>

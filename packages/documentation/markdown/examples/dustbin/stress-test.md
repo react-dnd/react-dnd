@@ -12,4 +12,4 @@ receives the new props, React DnD recalculates the drag and drop
 state. It also shows how a custom `isDragging` implementation can make the drag source appear as dragged, even if the component that initiated the drag has received new props.
 				
 
-<dustbinStressTest></dustbinStressTest>
+<dustbin-stress-test></dustbin-stress-test>

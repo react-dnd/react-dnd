@@ -11,4 +11,4 @@ drag-and-drop within a single HTML document.
 
 Using react-dnd inside of an iframe requires using a [DragDropContextProvider](/docs/api/drag-drop-context-provider) within the iframe.
 
-<dustbinSingleTargetInIframe></dustbinSingleTargetInIframe>
+<dustbin-single-target-in-iframe></dustbin-single-target-in-iframe>
