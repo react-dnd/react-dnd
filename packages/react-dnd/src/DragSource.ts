@@ -71,8 +71,8 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 		collect,
 	)
 
-	return function decorateSource<TargetClass extends React.ComponentType<any>>(
-		DecoratedComponent: TargetClass,
+	return function decorateSource(
+		DecoratedComponent: React.ComponentType<any>,
 	): React.ComponentType<Props> {
 		return decorateHandler<Props, SourceType>({
 			containerDisplayName: 'DragSource',

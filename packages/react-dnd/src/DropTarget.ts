@@ -64,8 +64,8 @@ export default function DropTarget<Props, CollectedProps = {}>(
 		collect,
 	)
 
-	return function decorateTarget<TargetClass extends React.ComponentType<any>>(
-		DecoratedComponent: TargetClass,
+	return function decorateTarget(
+		DecoratedComponent: React.ComponentType<any>,
 	): React.ComponentType<Props> {
 		return decorateHandler<Props, TargetType>({
 			containerDisplayName: 'DropTarget',

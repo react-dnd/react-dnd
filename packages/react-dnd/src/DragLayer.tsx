@@ -27,8 +27,8 @@ export default function DragLayer<Props, CollectedProps = {}>(
 		options,
 	)
 
-	return function decorateLayer<TargetClass extends React.ComponentType<any>>(
-		DecoratedComponent: TargetClass,
+	return function decorateLayer(
+		DecoratedComponent: React.ComponentType<any>,
 	): React.ComponentType<Props> {
 		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
