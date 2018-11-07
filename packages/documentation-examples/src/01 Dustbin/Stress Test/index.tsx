@@ -7,7 +7,7 @@ export default class DustbinStressTest extends React.Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Stress%20Test">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Stress%20Test">
 							Browse the Source
 						</a>
 					</b>

@@ -7,7 +7,7 @@ export default class CustomizeHandlesAndPreviews extends React.Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/05%20Customize/Handles%20and%20Previews">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/05%20Customize/Handles%20and%20Previews">
 							Browse the Source
 						</a>
 					</b>

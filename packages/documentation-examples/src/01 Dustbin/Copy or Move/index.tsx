@@ -7,7 +7,7 @@ export default class DustbinCopyOrMove extends React.Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Copy%20or%20Move">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Copy%20or%20Move">
 							Browse the Source
 						</a>
 					</b>

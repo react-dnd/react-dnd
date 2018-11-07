@@ -7,7 +7,7 @@ export default class DustbinFC extends React.PureComponent {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Single%20Target%20with%20SCs">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Single%20Target%20with%20FCs">
 							Browse the Source
 						</a>
 					</b>

@@ -7,7 +7,7 @@ export default class NestingDropTargets extends React.Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/03%20Nesting/Drop%20Targets">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/03%20Nesting/Drop%20Targets">
 							Browse the Source
 						</a>
 					</b>

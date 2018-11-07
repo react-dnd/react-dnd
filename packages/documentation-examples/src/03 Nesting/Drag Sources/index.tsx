@@ -7,7 +7,7 @@ export default class NestingDragSources extends React.Component {
 			<div>
 				<p>
 					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/03%20Nesting/Drag%20Sources">
+						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/03%20Nesting/Drag%20Sources">
 							Browse the Source
 						</a>
 					</b>

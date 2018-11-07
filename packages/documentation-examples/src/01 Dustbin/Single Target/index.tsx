@@ -5,7 +5,7 @@ export default (React as any).memo(() => (
 	<div>
 		<p>
 			<b>
-				<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Single%20Target">
+				<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Single%20Target">
 					Browse the Source
 				</a>
 			</b>
