@@ -27,11 +27,9 @@ export default function DragLayer<Props, CollectedProps = {}>(
 		options,
 	)
 
-	return function decorateLayer<
-		TargetClass extends
-			| React.ComponentClass<Props>
-			| React.StatelessComponent<Props>
-	>(DecoratedComponent: TargetClass): TargetClass & DndComponentClass<Props> {
+	return function decorateLayer<T>(
+		DecoratedComponent: React.ComponentType<T>,
+	): DndComponentClass<Props> {
 		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
 		const displayName = Decorated.displayName || Decorated.name || 'Component'
@@ -154,7 +152,9 @@ export default function DragLayer<Props, CollectedProps = {}>(
 			}
 		}
 
-		return hoistStatics(DragLayerContainer, DecoratedComponent) as TargetClass &
-			DndComponentClass<Props>
+		return hoistStatics(
+			DragLayerContainer,
+			DecoratedComponent,
+		) as DndComponentClass<Props>
 	}
 }

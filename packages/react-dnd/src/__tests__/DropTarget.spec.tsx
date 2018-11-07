@@ -3,19 +3,6 @@ import * as React from 'react'
 import { DropTarget } from '../index'
 
 describe('DropTarget', () => {
-	it('can apply to a class via decorator-fashion', () => {
-		@DropTarget(
-			'abc',
-			{
-				drop: () => ({}),
-			},
-			() => ({}),
-		)
-		class DecoratedClass extends React.Component {}
-
-		expect(DecoratedClass).toBeDefined()
-	})
-
 	it('can apply via composition', () => {
 		class ContextClass extends React.Component {}
 		const DecoratedClass = DropTarget(
