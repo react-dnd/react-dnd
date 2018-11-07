@@ -1,23 +1,18 @@
 import * as React from 'react'
-import Container from './Container'
+import SourceBox from './SourceBox'
+import TargetBox from './TargetBox'
 
-export default class CustomizeDropEffects extends React.Component {
+export default class Container extends React.Component {
 	public render() {
 		return (
-			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/05%20Customize/Drop%20Effects">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>
-					Some browsers let you specify the “drop effects” for the draggable
-					items. In the compatible browsers, you will see a “copy” icon when you
-					drag the first box over the drop zone.
-				</p>
-				<Container />
+			<div style={{ overflow: 'hidden', clear: 'both', marginTop: '1.5rem' }}>
+				<div style={{ float: 'left' }}>
+					<SourceBox showCopyIcon={true} />
+					<SourceBox />
+				</div>
+				<div style={{ float: 'left' }}>
+					<TargetBox />
+				</div>
 			</div>
 		)
 	}

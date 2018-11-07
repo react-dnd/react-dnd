@@ -1,29 +1,37 @@
-export { default as chessboard } from './00 Chessboard'
-export { default as dustbinCopyOrMove } from './01 Dustbin/Copy or Move'
-export {
-	default as dustbinMultipleTargets,
-} from './01 Dustbin/Multiple Targets'
-export { default as dustbinSingleTarget } from './01 Dustbin/Single Target'
-export {
-	default as dustbinSingleTargetInIframe,
-} from './01 Dustbin/Single Target in iframe'
-export {
-	default as dustbinSingleTargeWithFCs,
-} from './01 Dustbin/Single Target with FCs'
-export { default as dustbinStressTest } from './01 Dustbin/Stress Test'
-export {
-	default as dragAroundCustomDragLayer,
-} from './02 Drag Around/Custom Drag Layer'
-export { default as dragAroundNaive } from './02 Drag Around/Naive'
-export { default as nestingDragSources } from './03 Nesting/Drag Sources'
-export { default as nestingDropTargets } from './03 Nesting/Drop Targets'
-export {
-	default as sortableCancelOnDropOutside,
-} from './04 Sortable/Cancel on Drop Outside'
-export { default as sortableSimple } from './04 Sortable/Simple'
-export { default as sortableStressTest } from './04 Sortable/Stress Test'
-export { default as customizeDropEffects } from './05 Customize/Drop Effects'
-export {
-	default as customizeHandlesAndPreviews,
-} from './05 Customize/Handles and Previews'
-export { default as otherNativeFiles } from './06 Other/Native Files'
+import chessboard from './00 Chessboard'
+import dustbinCopyOrMove from './01 Dustbin/Copy or Move'
+import dustbinMultipleTargets from './01 Dustbin/Multiple Targets'
+import dustbinSingleTarget from './01 Dustbin/Single Target'
+import dustbinSingleTargetInIframe from './01 Dustbin/Single Target in iframe'
+import dustbinSingleTargetWithFCs from './01 Dustbin/Single Target with FCs'
+import dustbinStressTest from './01 Dustbin/Stress Test'
+import dragAroundCustomDragLayer from './02 Drag Around/Custom Drag Layer'
+import dragAroundNaive from './02 Drag Around/Naive'
+import nestingDragSources from './03 Nesting/Drag Sources'
+import nestingDropTargets from './03 Nesting/Drop Targets'
+import sortableCancelOnDropOutside from './04 Sortable/Cancel on Drop Outside'
+import sortableSimple from './04 Sortable/Simple'
+import sortableStressTest from './04 Sortable/Stress Test'
+import customizeDropEffects from './05 Customize/Drop Effects'
+import customizeHandlesAndPreviews from './05 Customize/Handles and Previews'
+import otherNativeFiles from './06 Other/Native Files'
+
+export const componentIndex = {
+	chessboard,
+	'dustbin-single-target': dustbinSingleTarget,
+	'dustbin-multiple-targets': dustbinMultipleTargets,
+	'dustbin-copy-or-move': dustbinCopyOrMove,
+	'dustbin-single-target-in-iframe': dustbinSingleTargetInIframe,
+	'dustbin-single-target-with-fcs': dustbinSingleTargetWithFCs,
+	'dustbin-stress-test': dustbinStressTest,
+	'drag-around-custom-drag-layer': dragAroundCustomDragLayer,
+	'drag-around-naive': dragAroundNaive,
+	'nesting-drag-sources': nestingDragSources,
+	'nesting-drop-targets': nestingDropTargets,
+	'sortable-cancel-on-drop-outside': sortableCancelOnDropOutside,
+	'sortable-simple': sortableSimple,
+	'sortable-stress-test': sortableStressTest,
+	'customize-drop-effects': customizeDropEffects,
+	'customize-handles-and-previews': customizeHandlesAndPreviews,
+	'other-native-files': otherNativeFiles,
+}

@@ -93,7 +93,7 @@ class Container extends React.PureComponent<
 	}
 }
 
-export default DropTarget(
+export default DropTarget<ContainerProps, ContainerCollectedProps>(
 	ItemTypes.BOX,
 	boxTarget,
 	(connect: DropTargetConnector) => ({

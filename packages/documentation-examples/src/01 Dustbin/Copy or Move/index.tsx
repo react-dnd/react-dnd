@@ -1,29 +1,21 @@
 import * as React from 'react'
-import Container from './Container'
+import Dustbin from './Dustbin'
+import Box from './Box'
 
-export default class DustbinCopyOrMove extends React.Component {
+export default class Container extends React.Component {
 	public render() {
 		return (
 			<div>
-				<p>
-					<b>
-						<a href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation/src/examples/01%20Dustbin/Copy%20or%20Move">
-							Browse the Source
-						</a>
-					</b>
-				</p>
-				<p>
-					This example demonstrates drop targets that can accept copy and move
-					drop effects, which users can switch between by holding down or
-					releasing the alt key as they drag.
-				</p>
-				<p>
-					In a todo list app, for example, the default drag and drop operation
-					could be used to sort the list, while holding down the alt key while
-					dragging and dropping could copy the todo item to the drop target
-					instead of moving it.
-				</p>
-				<Container />
+				<div style={{ overflow: 'hidden', clear: 'both' }}>
+					<Dustbin allowedDropEffect="any" />
+					<Dustbin allowedDropEffect="copy" />
+					<Dustbin allowedDropEffect="move" />
+				</div>
+				<div style={{ overflow: 'hidden', clear: 'both' }}>
+					<Box name="Glass" />
+					<Box name="Banana" />
+					<Box name="Paper" />
+				</div>
 			</div>
 		)
 	}

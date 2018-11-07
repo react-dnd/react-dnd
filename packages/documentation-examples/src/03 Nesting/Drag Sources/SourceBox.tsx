@@ -7,7 +7,7 @@ import {
 	DragSourceConnector,
 } from 'react-dnd'
 import Colors from './Colors'
-import { SourceBox } from '../../01 Dustbin/Stress Test/Container'
+import { SourceBox } from '../../01 Dustbin/Stress Test'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',

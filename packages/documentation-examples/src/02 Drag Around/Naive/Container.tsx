@@ -94,6 +94,10 @@ class Container extends React.Component<
 	}
 }
 
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect: any) => ({
-	connectDropTarget: connect.dropTarget(),
-}))(Container)
+export default DropTarget<ContainerProps, ContainerCollectedProps>(
+	ItemTypes.BOX,
+	boxTarget,
+	(connect: any) => ({
+		connectDropTarget: connect.dropTarget(),
+	}),
+)(Container)
