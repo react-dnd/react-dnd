@@ -19,15 +19,10 @@ export default class BoxDragPreview extends React.PureComponent<
 	BoxDragPreviewProps,
 	BoxDragPreviewState
 > {
-	private interval: any
-
-	constructor(props: BoxDragPreviewProps) {
-		super(props)
-		this.tick = this.tick.bind(this)
-		this.state = {
-			tickTock: false,
-		}
+	public state = {
+		tickTock: false,
 	}
+	private interval: any
 
 	public componentDidMount() {
 		this.interval = setInterval(this.tick, 500)
@@ -48,7 +43,7 @@ export default class BoxDragPreview extends React.PureComponent<
 		)
 	}
 
-	private tick() {
+	private tick = () => {
 		this.setState({
 			tickTock: !this.state.tickTock,
 		})

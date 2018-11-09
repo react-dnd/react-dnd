@@ -33,7 +33,7 @@ export default class DragDropManagerImpl<Context>
 		)
 		this.backend = createBackend(this)
 
-		store.subscribe(this.handleRefCountChange.bind(this))
+		store.subscribe(this.handleRefCountChange)
 	}
 
 	public getContext() {
@@ -83,7 +83,7 @@ export default class DragDropManagerImpl<Context>
 		this.store.dispatch(action)
 	}
 
-	private handleRefCountChange() {
+	private handleRefCountChange = () => {
 		const shouldSetUp = this.store.getState().refCount > 0
 		if (shouldSetUp && !this.isSetUp) {
 			this.backend.setup()
