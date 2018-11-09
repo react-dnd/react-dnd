@@ -2,7 +2,7 @@
 path: "/examples/dustbin/iframe"
 title: "iframe"
 ---
-[Browse the Source](href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Single%20Target%20in%20iframe)
+[Browse the Source](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Single%20Target%20in%20iframe)
 
 This is the same simple example, but nested in an iframe.
 

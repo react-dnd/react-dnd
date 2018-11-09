@@ -2,7 +2,7 @@
 path: "/examples/dustbin/multiple-targets"
 title: "Multiple Targets"
 ---
-[Browse the Source](href="https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Multiple%20Targets)
+[Browse the Source](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Multiple%20Targets)
 							
 
 This is a slightly more interesting example.
