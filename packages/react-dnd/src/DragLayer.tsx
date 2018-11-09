@@ -47,11 +47,6 @@ export default function DragLayer<Props, CollectedProps = {}>(
 			private unsubscribeFromStateChange: Unsubscribe | undefined
 			private ref: React.RefObject<any> = React.createRef()
 
-			constructor(props: Props) {
-				super(props)
-				this.handleChange = this.handleChange.bind(this)
-			}
-
 			public getDecoratedComponentInstance() {
 				invariant(
 					this.ref.current,
@@ -132,7 +127,7 @@ export default function DragLayer<Props, CollectedProps = {}>(
 				)
 			}
 
-			private handleChange() {
+			private handleChange = () => {
 				if (!this.isCurrentlyMounted) {
 					return
 				}

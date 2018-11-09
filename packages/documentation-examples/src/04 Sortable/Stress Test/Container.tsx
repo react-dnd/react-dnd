@@ -20,9 +20,6 @@ export default class Container extends React.Component<{}, ContainerState> {
 	constructor(props: {}) {
 		super(props)
 
-		this.moveCard = this.moveCard.bind(this)
-		this.drawFrame = this.drawFrame.bind(this)
-
 		const cardsById: { [key: string]: any } = {}
 		const cardsByIndex = []
 
@@ -70,7 +67,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 		}
 	}
 
-	private drawFrame() {
+	private drawFrame = () => {
 		const nextState = update(this.state, this.pendingUpdateFn)
 		this.setState(nextState)
 
@@ -78,7 +75,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 		this.requestedFrame = undefined
 	}
 
-	private moveCard(id: string, afterId: string) {
+	private moveCard = (id: string, afterId: string) => {
 		const { cardsById, cardsByIndex } = this.state
 
 		const card = cardsById[id]
