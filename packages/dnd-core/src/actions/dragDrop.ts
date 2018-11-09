@@ -69,7 +69,7 @@ export default function createDragDropActions<Context>(
 		beginDrag(
 			sourceIds: string[] = [],
 			{
-				publishSource,
+				publishSource = true,
 				clientOffset,
 				getSourceClientOffset,
 			}: BeginDragOptions = {
