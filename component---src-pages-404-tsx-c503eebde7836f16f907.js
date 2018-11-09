@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{137:function(e,t,n){"use strict";n.r(t);var a=n(0),r=n(164),o=n(143),s=n(148),u=n.n(s);t.default=function(){return a.createElement(r.a,{hideSidebar:!0},a.createElement(o.DragDropContextProvider,{backend:u.a},a.createElement("h1",null,"NOT FOUND"),a.createElement("p",null,"You just hit a route that doesn't exist... the sadness.")))}}}]);
+//# sourceMappingURL=component---src-pages-404-tsx-c503eebde7836f16f907.js.map
