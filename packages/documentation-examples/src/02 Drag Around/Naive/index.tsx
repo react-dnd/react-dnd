@@ -9,12 +9,8 @@ export default class DragAroundNaive extends React.Component<
 	{},
 	DragAroundNaiveState
 > {
-	constructor(props: {}) {
-		super(props)
-		this.handleHideSourceClick = this.handleHideSourceClick.bind(this)
-		this.state = {
-			hideSourceOnDrag: true,
-		}
+	public state = {
+		hideSourceOnDrag: true,
 	}
 
 	public render() {
@@ -38,7 +34,7 @@ export default class DragAroundNaive extends React.Component<
 		)
 	}
 
-	private handleHideSourceClick() {
+	private handleHideSourceClick = () => {
 		this.setState({
 			hideSourceOnDrag: !this.state.hideSourceOnDrag,
 		})

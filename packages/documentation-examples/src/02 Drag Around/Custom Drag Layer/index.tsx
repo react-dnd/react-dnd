@@ -10,20 +10,9 @@ export default class DragAroundCustomDragLayer extends React.Component<
 	{},
 	DragAroundCustomDragLayerState
 > {
-	constructor(props: {}) {
-		super(props)
-
-		this.handleSnapToGridAfterDropChange = this.handleSnapToGridAfterDropChange.bind(
-			this,
-		)
-		this.handleSnapToGridWhileDraggingChange = this.handleSnapToGridWhileDraggingChange.bind(
-			this,
-		)
-
-		this.state = {
-			snapToGridAfterDrop: false,
-			snapToGridWhileDragging: false,
-		}
+	public state = {
+		snapToGridAfterDrop: false,
+		snapToGridWhileDragging: false,
 	}
 
 	public render() {
@@ -58,13 +47,13 @@ export default class DragAroundCustomDragLayer extends React.Component<
 		)
 	}
 
-	private handleSnapToGridAfterDropChange() {
+	private handleSnapToGridAfterDropChange = () => {
 		this.setState({
 			snapToGridAfterDrop: !this.state.snapToGridAfterDrop,
 		})
 	}
 
-	private handleSnapToGridWhileDraggingChange() {
+	private handleSnapToGridWhileDraggingChange = () => {
 		this.setState({
 			snapToGridWhileDragging: !this.state.snapToGridWhileDragging,
 		})

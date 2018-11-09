@@ -70,8 +70,6 @@ export default function decorateHandler<Props, ItemIdType>({
 
 		constructor(props: Props) {
 			super(props)
-			this.handleChange = this.handleChange.bind(this)
-
 			this.disposable = new SerialDisposable()
 			this.receiveProps(props)
 			this.dispose()
@@ -158,7 +156,7 @@ export default function decorateHandler<Props, ItemIdType>({
 			)
 		}
 
-		public handleChange() {
+		public handleChange = () => {
 			if (!this.isCurrentlyMounted) {
 				return
 			}

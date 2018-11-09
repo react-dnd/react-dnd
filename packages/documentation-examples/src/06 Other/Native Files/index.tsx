@@ -9,11 +9,7 @@ export interface ContainerState {
 }
 
 export default class Container extends React.Component<{}, ContainerState> {
-	constructor(props: {}) {
-		super(props)
-		this.handleFileDrop = this.handleFileDrop.bind(this)
-		this.state = { droppedFiles: [] }
-	}
+	public state = { droppedFiles: [] }
 
 	public render() {
 		const { FILE } = NativeTypes
@@ -27,7 +23,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 		)
 	}
 
-	private handleFileDrop(item: any, monitor: DropTargetMonitor) {
+	private handleFileDrop = (item: any, monitor: DropTargetMonitor) => {
 		if (monitor) {
 			const droppedFiles = monitor.getItem().files
 			this.setState({ droppedFiles })
