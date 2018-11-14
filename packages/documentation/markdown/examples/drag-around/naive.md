@@ -23,7 +23,7 @@ clearly visible otherwise.
 If we want to add custom logic such as snapping to grid or bounds
 checking, we can only do this on drop. There is no way for us to
 control what happens to dragged preview once the browser has drawn it.
-Check out the [csutom rendering example](/examples/drag-around/custom-drag-layer)  
+Check out the [custom rendering example](/examples/drag-around/custom-drag-layer)  
 if you'd rather trade more control for some more work.
 
 <drag-around-naive></drag-around-naive>
