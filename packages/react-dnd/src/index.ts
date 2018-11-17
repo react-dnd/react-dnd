@@ -6,4 +6,5 @@ export {
 export { default as DragLayer } from './DragLayer'
 export { default as DragSource } from './DragSource'
 export { default as DropTarget } from './DropTarget'
+export * from './hooks'
 export * from './interfaces'
