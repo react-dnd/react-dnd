@@ -1,68 +1,41 @@
 import * as React from 'react'
-import {
-	DropTarget,
-	DropTargetMonitor,
-	DropTargetConnector,
-	DropTargetCollector,
-	ConnectDropTarget,
-} from 'react-dnd'
+import { useDropTarget, useMonitorOutput } from 'react-dnd'
 import Square from './Square'
 import { canMoveKnight, moveKnight } from './Game'
 import ItemTypes from './ItemTypes'
 import Overlay from './Overlay'
 
-interface CollectedProps {
-	isOver: boolean
-	canDrop: boolean
-	connectDropTarget: ConnectDropTarget
-}
 export interface BoardSquareProps {
 	x: number
 	y: number
 	children: any
 }
 
-const squareTarget = {
-	canDrop(props: BoardSquareProps) {
-		return canMoveKnight(props.x, props.y)
-	},
+export default (props: BoardSquareProps) => {
+	const ref = React.useRef(null)
+	const dropTargetMonitor = useDropTarget(ref, ItemTypes.KNIGHT, {
+		canDrop: () => canMoveKnight(props.x, props.y),
+		drop: () => moveKnight(props.x, props.y),
+	})
+	const { isOver, canDrop } = useMonitorOutput(dropTargetMonitor, () => ({
+		isOver: !!dropTargetMonitor.isOver(),
+		canDrop: !!dropTargetMonitor.canDrop(),
+	}))
+	const black = (props.x + props.y) % 2 === 1
 
-	drop(props: BoardSquareProps) {
-		moveKnight(props.x, props.y)
-	},
+	return (
+		<div
+			ref={ref}
+			style={{
+				position: 'relative',
+				width: '100%',
+				height: '100%',
+			}}
+		>
+			<Square black={black}>{props.children}</Square>
+			{isOver && !canDrop && <Overlay color="red" />}
+			{!isOver && canDrop && <Overlay color="yellow" />}
+			{isOver && canDrop && <Overlay color="green" />}
+		</div>
+	)
 }
-
-const collect: DropTargetCollector<CollectedProps> = (
-	connect: DropTargetConnector,
-	monitor: DropTargetMonitor,
-) => {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: !!monitor.isOver(),
-		canDrop: !!monitor.canDrop(),
-	}
-}
-
-class BoardSquare extends React.Component<BoardSquareProps & CollectedProps> {
-	public render() {
-		const { x, y, connectDropTarget, isOver, canDrop, children } = this.props
-		const black = (x + y) % 2 === 1
-
-		return connectDropTarget(
-			<div
-				style={{
-					position: 'relative',
-					width: '100%',
-					height: '100%',
-				}}
-			>
-				<Square black={black}>{children}</Square>
-				{isOver && !canDrop && <Overlay color="red" />}
-				{!isOver && canDrop && <Overlay color="yellow" />}
-				{isOver && canDrop && <Overlay color="green" />}
-			</div>,
-		)
-	}
-}
-
-export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare)

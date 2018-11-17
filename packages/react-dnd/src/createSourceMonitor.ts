@@ -22,6 +22,10 @@ class SourceMonitor implements DragSourceMonitor {
 		this.sourceId = sourceId
 	}
 
+	public getHandlerId(): string | undefined {
+		return this.sourceId
+	}
+
 	public canDrag() {
 		invariant(
 			!isCallingCanDrag,

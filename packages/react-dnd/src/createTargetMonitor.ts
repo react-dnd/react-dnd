@@ -1,4 +1,9 @@
-import { DragDropManager, DragDropMonitor } from 'dnd-core'
+import {
+	DragDropManager,
+	DragDropMonitor,
+	Unsubscribe,
+	Listener,
+} from 'dnd-core'
 import { DropTargetMonitor } from './interfaces'
 const invariant = require('invariant')
 
@@ -14,6 +19,17 @@ export class TargetMonitor implements DropTargetMonitor {
 
 	public receiveHandlerId(targetId: string) {
 		this.targetId = targetId
+	}
+
+	public getHandlerId(): string | undefined {
+		return this.targetId
+	}
+
+	public subscribeToStateChange(
+		listener: Listener,
+		options?: { handlerIds: string[] | undefined },
+	): Unsubscribe {
+		return this.internalMonitor.subscribeToStateChange(listener, options)
 	}
 
 	public canDrop() {
