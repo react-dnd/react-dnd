@@ -15,18 +15,18 @@ import {
 import { State } from './reducers'
 
 function makeStoreInstance(debugMode: boolean) {
-	if (debugMode) {
-		return createStore(
-			reducer,
-			(window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-				(window as any).__REDUX_DEVTOOLS_EXTENSION__({
-					name: 'dnd-core',
-					instanceId: 'dnd-core',
-				}),
-		)
-	} else {
-		return createStore(reducer)
-	}
+	// TODO: if we ever make a react-native version of this,
+	// we'll need to consider how to pull off dev-tooling
+	const reduxDevTools = window && (window as any).__REDUX_DEVTOOLS_EXTENSION__
+	return createStore(
+		reducer,
+		debugMode &&
+			reduxDevTools &&
+			reduxDevTools({
+				name: 'dnd-core',
+				instanceId: 'dnd-core',
+			}),
+	)
 }
 
 export default class DragDropManagerImpl<Context>
