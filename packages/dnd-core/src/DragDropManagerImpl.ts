@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, Store } from 'redux'
+import { createStore, Store } from 'redux'
 import reducer from './reducers'
 import dragDropActions from './actions/dragDrop'
 import DragDropMonitorImpl from './DragDropMonitorImpl'
@@ -13,11 +13,17 @@ import {
 	HandlerRegistry,
 } from './interfaces'
 import { State } from './reducers'
-import logger from 'redux-logger'
 
 function makeStoreInstance(debugMode: boolean) {
 	if (debugMode) {
-		return createStore(reducer, applyMiddleware(logger))
+		return createStore(
+			reducer,
+			(window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+				(window as any).__REDUX_DEVTOOLS_EXTENSION__({
+					name: 'dnd-core',
+					instanceId: 'dnd-core',
+				}),
+		)
 	} else {
 		return createStore(reducer)
 	}
