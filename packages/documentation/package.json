@@ -1,7 +1,7 @@
 {
   "name": "react-dnd-documentation",
   "description": "React DnD Docsite",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "private": true,
   "dependencies": {
     "@types/query-string": "^6.1.1",
@@ -29,10 +29,10 @@
     "prismjs": "^1.15.0",
     "query-string": "^6.2.0",
     "react": "^16.6.1",
-    "react-dnd": "^6.0.0",
-    "react-dnd-documentation-examples": "^6.0.0",
-    "react-dnd-html5-backend": "^6.0.0",
-    "react-dnd-test-backend": "^6.0.0",
+    "react-dnd": "^7.0.0",
+    "react-dnd-documentation-examples": "^7.0.0",
+    "react-dnd-html5-backend": "^7.0.0",
+    "react-dnd-test-backend": "^7.0.0",
     "react-dom": "^16.6.1",
     "react-frame-component": "^4.0.2",
     "react-helmet": "^5.2.0",

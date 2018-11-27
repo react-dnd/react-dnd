@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-test-backend",
-	"version": "6.0.0",
+	"version": "7.0.0",
 	"description": "A mock backend for testing React DnD apps",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -15,7 +15,7 @@
 		"prepublish": "npm run test"
 	},
 	"dependencies": {
-		"dnd-core": "^6.0.0",
+		"dnd-core": "^7.0.0",
 		"lodash": "^4.17.11"
 	},
 	"devDependencies": {
