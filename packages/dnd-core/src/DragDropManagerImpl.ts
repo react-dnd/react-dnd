@@ -1,4 +1,4 @@
-import { createStore, Store } from 'redux'
+import { createStore, applyMiddleware, Store } from 'redux'
 import reducer from './reducers'
 import dragDropActions from './actions/dragDrop'
 import DragDropMonitorImpl from './DragDropMonitorImpl'
@@ -13,6 +13,15 @@ import {
 	HandlerRegistry,
 } from './interfaces'
 import { State } from './reducers'
+import logger from 'redux-logger'
+
+function makeStoreInstance(debugMode: boolean) {
+	if (debugMode) {
+		return createStore(reducer, applyMiddleware(logger))
+	} else {
+		return createStore(reducer)
+	}
+}
 
 export default class DragDropManagerImpl<Context>
 	implements DragDropManager<Context> {
@@ -24,8 +33,9 @@ export default class DragDropManagerImpl<Context>
 	constructor(
 		createBackend: BackendFactory,
 		private context: Context = {} as Context,
+		debugMode = false,
 	) {
-		const store = createStore(reducer)
+		const store = makeStoreInstance(debugMode)
 		this.store = store
 		this.monitor = new DragDropMonitorImpl(
 			store,

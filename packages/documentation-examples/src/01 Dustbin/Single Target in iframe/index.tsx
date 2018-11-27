@@ -3,6 +3,8 @@ import { DragDropContextProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Dustbin from '../Single Target/Dustbin'
 import Box from '../Single Target/Box'
+import { isDebugMode } from '../../isDebugMode'
+
 const {
 	default: Frame,
 	FrameContextConsumer,
@@ -13,7 +15,11 @@ class FrameBindingContext extends React.Component {
 		return (
 			<FrameContextConsumer>
 				{({ window }: any) => (
-					<DragDropContextProvider backend={HTML5Backend} context={window}>
+					<DragDropContextProvider
+						backend={HTML5Backend}
+						context={window}
+						debugMode={isDebugMode()}
+					>
 						{this.props.children}
 					</DragDropContextProvider>
 				)}
