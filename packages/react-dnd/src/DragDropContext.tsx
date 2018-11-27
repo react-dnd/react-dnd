@@ -32,15 +32,17 @@ export const { Consumer, Provider } = React.createContext<DragDropContext<any>>(
 export function createChildContext<BackendContext>(
 	backend: BackendFactory,
 	context?: BackendContext,
+	debugMode?: boolean,
 ) {
 	return {
-		dragDropManager: createDragDropManager(backend, context),
+		dragDropManager: createDragDropManager(backend, context, debugMode),
 	}
 }
 
 export interface DragDropContextProviderProps<BackendContext> {
 	backend: BackendFactory
 	context?: BackendContext
+	debugMode?: boolean
 }
 
 /**
@@ -48,8 +50,8 @@ export interface DragDropContextProviderProps<BackendContext> {
  */
 export const DragDropContextProvider: React.SFC<
 	DragDropContextProviderProps<any>
-> = ({ backend, context, children }) => {
-	const contextValue = createChildContext(backend, context)
+> = ({ backend, context, debugMode, children }) => {
+	const contextValue = createChildContext(backend, context, debugMode)
 	return <Provider value={contextValue}>{children}</Provider>
 }
 
@@ -62,9 +64,14 @@ export const DragDropContextProvider: React.SFC<
 export function DragDropContext(
 	backendFactory: BackendFactory,
 	backendContext?: any,
+	debugMode?: boolean,
 ) {
 	checkDecoratorArguments('DragDropContext', 'backend', backendFactory)
-	const childContext = createChildContext(backendFactory, backendContext)
+	const childContext = createChildContext(
+		backendFactory,
+		backendContext,
+		debugMode,
+	)
 
 	return function decorateContext<
 		TargetClass extends
@@ -89,9 +96,7 @@ export function DragDropContext(
 				return this.ref.current
 			}
 
-			public getManager() {
-				return childContext.dragDropManager
-			}
+			public getManager = () => childContext.dragDropManager
 
 			public render() {
 				return (
