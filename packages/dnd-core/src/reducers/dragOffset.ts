@@ -4,6 +4,7 @@ import {
 	HOVER,
 	END_DRAG,
 	DROP,
+	INIT_CLIENT_OFFSET,
 } from '../actions/dragDrop'
 import { XYCoord, Action } from '../interfaces'
 import { areCoordsEqual } from '../utils/equality'
@@ -29,6 +30,12 @@ export default function dragOffset(
 ) {
 	const { payload } = action
 	switch (action.type) {
+		case INIT_CLIENT_OFFSET:
+			return {
+				...state,
+				clientOffset: payload.clientOffset,
+				initialClientOffset: payload.clientOffset,
+			}
 		case INIT_COORDS:
 		case BEGIN_DRAG:
 			return {
