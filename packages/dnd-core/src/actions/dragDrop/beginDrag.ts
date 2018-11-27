@@ -9,11 +9,19 @@ import {
 	DragDropMonitor,
 	HandlerRegistry,
 } from '../../interfaces'
-import { initCoords } from './local/initCoords'
+import { setClientOffset } from './local/setClientOffset'
 const invariant = require('invariant')
 const isObject = require('lodash/isObject')
 
-import { BEGIN_DRAG } from './types'
+import { BEGIN_DRAG, INIT_COORDS } from './types'
+
+const ResetCoordinatesAction = {
+	type: INIT_COORDS,
+	payload: {
+		clientOffset: null,
+		sourceClientOffset: null,
+	},
+}
 
 export default function createBeginDrag<Context>(
 	manager: DragDropManager<Context>,
@@ -32,21 +40,27 @@ export default function createBeginDrag<Context>(
 		const monitor = manager.getMonitor()
 		const registry = manager.getRegistry()
 
-		// Initialize the offset before proceeding
-		manager.dispatch(initCoords(manager, sourceIds, options))
+		// Initialize the client offset
+		manager.dispatch(setClientOffset(clientOffset))
 
 		verifyInvariants(sourceIds, monitor, registry)
 
+		// Get the draggable source
 		const sourceId = getDraggableSource(sourceIds, monitor)
 		if (sourceId === null) {
+			manager.dispatch(ResetCoordinatesAction)
 			return
 		}
 
+		// Initialize the offset of the draggable source
 		let sourceClientOffset: XYCoord | null = null
 		if (clientOffset) {
 			verifyGetSourceClientOffsetIsFunction(getSourceClientOffset)
 			sourceClientOffset = getSourceClientOffset!(sourceId)
 		}
+
+		// Initialize the coordinates using the client offset and source client offset
+		manager.dispatch(setClientOffset(clientOffset, sourceClientOffset))
 
 		const source = registry.getSource(sourceId)
 		const item = source.beginDrag(monitor, sourceId)
