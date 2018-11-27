@@ -3,6 +3,8 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
+import { isDebugMode } from 'react-dnd-documentation-examples'
+
 import { DragDropContextProvider } from 'react-dnd'
 import PageBody from './pagebody'
 import Sidebar from './sidebar'
@@ -26,6 +28,7 @@ const Layout: React.SFC<LayoutProps> = props => {
 		.startsWith('/examples')
 	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
 	const hideSidebar = props.hideSidebar || sitepath === '/about'
+	const debugMode = isDebugMode()
 	return (
 		<>
 			<Helmet
@@ -37,9 +40,13 @@ const Layout: React.SFC<LayoutProps> = props => {
 				link={[{ rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }]}
 			>
 				<html lang="en" />
+				<link
+					rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css"
+				/>
 			</Helmet>
-			<Header />
-			<DragDropContextProvider backend={HTML5Backend}>
+			<Header debugMode={debugMode} />
+			<DragDropContextProvider backend={HTML5Backend} debugMode={debugMode}>
 				<ContentContainer>
 					<PageBody hasSidebar={sitepath !== '/about'}>
 						{hideSidebar ? null : (
