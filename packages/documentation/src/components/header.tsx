@@ -6,17 +6,15 @@ export interface HeaderProps {
 	debugMode?: boolean
 }
 
+const DebugModeFlag = () => (
+	<a className="github-fork-ribbon" data-ribbon="Debug Mode" title="Debug Mode">
+		Debug Mode
+	</a>
+)
+
 const Header: React.SFC<HeaderProps> = ({ debugMode }) => (
 	<Container>
-		{debugMode ? (
-			<a
-				className="github-fork-ribbon"
-				data-ribbon="Debug Mode"
-				title="Debug Mode"
-			>
-				Fork me on GitHub
-			</a>
-		) : null}
+		{debugMode ? <DebugModeFlag /> : null}
 		<NavBar />
 	</Container>
 )
