@@ -16,6 +16,7 @@ import customizeDropEffects from './05 Customize/Drop Effects'
 import customizeHandlesAndPreviews from './05 Customize/Handles and Previews'
 import otherNativeFiles from './06 Other/Native Files'
 
+export * from './isDebugMode'
 export const componentIndex = {
 	chessboard,
 	'dustbin-single-target': dustbinSingleTarget,
