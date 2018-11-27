@@ -24,7 +24,14 @@ export default function createInitCoords<Context>(
 		verifyInvariants(sourceIds, monitor, registry)
 		const sourceId = getDragSourceId(sourceIds, monitor)
 		if (sourceId === null) {
-			return
+			// reset coordinates that might have been set in an "INIT_CLIENT_OFFSET" as no drag is happening
+			return {
+				type: INIT_COORDS,
+				payload: {
+					clientOffset: null,
+					sourceClientOffset: null,
+				},
+			}
 		}
 		const sourceClientOffset: XYCoord | null = determineSourceClientOffset(
 			sourceId,
@@ -46,7 +53,7 @@ function verifyInvariants(
 	monitor: DragDropMonitor,
 	registry: HandlerRegistry,
 ) {
-	invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
+	invariant(!monitor.isDragging(), 'Cannot call initCoords while dragging.')
 	for (const s of sourceIds) {
 		invariant(registry.getSource(s), 'Expected sourceIds to be registered.')
 	}
