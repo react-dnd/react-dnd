@@ -36,10 +36,7 @@ export default function DragLayer<Props, CollectedProps = {}>(
 
 		class DragLayerContainer extends React.Component<Props> {
 			public static displayName = `DragLayer(${displayName})`
-
-			public get DecoratedComponent() {
-				return DecoratedComponent
-			}
+			public static DecoratedComponent = DecoratedComponent
 
 			private manager: DragDropManager<any> | undefined
 			private isCurrentlyMounted: boolean = false
