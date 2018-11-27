@@ -40,7 +40,7 @@ export default function createBeginDrag<Context>(
 		const monitor = manager.getMonitor()
 		const registry = manager.getRegistry()
 
-		// Initialize the client offset
+		// Initialize the coordinates using the client offset
 		manager.dispatch(setClientOffset(clientOffset))
 
 		verifyInvariants(sourceIds, monitor, registry)
@@ -52,14 +52,14 @@ export default function createBeginDrag<Context>(
 			return
 		}
 
-		// Initialize the offset of the draggable source
+		// Get the source client offset
 		let sourceClientOffset: XYCoord | null = null
 		if (clientOffset) {
 			verifyGetSourceClientOffsetIsFunction(getSourceClientOffset)
 			sourceClientOffset = getSourceClientOffset!(sourceId)
 		}
 
-		// Initialize the coordinates using the client offset and source client offset
+		// Initialize the full coordinates
 		manager.dispatch(setClientOffset(clientOffset, sourceClientOffset))
 
 		const source = registry.getSource(sourceId)
