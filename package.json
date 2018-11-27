@@ -38,17 +38,15 @@
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",
-		"lint":
-			"tslint \"packages/**/*.{ts,tsx}\" -e \"**/{lib,node_modules}/**\"",
+		"lint": "tslint \"packages/**/*.{ts,tsx}\" -e \"**/{lib,node_modules}/**\"",
 		"test_modules": "lerna run test --stream",
 		"publish_docs": "lerna run publish --scope react-dnd-documentation",
 		"test": "run-s lint build test_modules jest:cov",
-		"prettify":
-			"prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
+		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
-    "prepublish": "npm test",
+		"prepublish": "npm test",
 		"start": "lerna run --parallel --stream start",
-    "watch": "lerna run --parallel --stream watch"
+		"watch": "lerna run --parallel --stream watch"
 	},
 	"husky": {
 		"hooks": {
@@ -66,16 +64,21 @@
 		"jest-environment-jsdom": "^23.4.0",
 		"lerna": "^3.4.3",
 		"lint-staged": "^8.0.4",
-		"npm-run-all": "^4.1.3",
+		"npm-run-all": "^4.1.5",
 		"prettier": "^1.14.3",
 		"ts-jest": "^23.10.4",
-		"typescript": "^3.1.6",
 		"tslint": "^5.11.0",
 		"tslint-config-prettier": "^1.15.0",
-		"tslint-react": "~3.6.0"
+		"tslint-react": "~3.6.0",
+		"typescript": "^3.1.6"
 	},
 	"jest": {
-		"moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx"
+		],
 		"collectCoverageFrom": [
 			"packages/*/src/**/*.{ts,tsx}",
 			"!**/__tests__/**"
@@ -88,16 +91,21 @@
 		},
 		"moduleNameMapper": {
 			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
-			"react-dnd-html5-backend":
-				"<rootDir>//packages/react-dnd-html5-backend/src",
-			"react-dnd-test-backend":
-				"<rootDir>//packages/react-dnd-test-backend/src",
+			"react-dnd-html5-backend": "<rootDir>//packages/react-dnd-html5-backend/src",
+			"react-dnd-test-backend": "<rootDir>//packages/react-dnd-test-backend/src",
 			"dnd-core": "<rootDir>//packages/dnd-core/src"
 		}
 	},
 	"lint-staged": {
-    "*.{js,jsx}": ["prettier --write", "git add"],
-    "*.{ts,tsx}": ["tslint --fix", "prettier --write", "git add"]
+		"*.{js,jsx}": [
+			"prettier --write",
+			"git add"
+		],
+		"*.{ts,tsx}": [
+			"tslint --fix",
+			"prettier --write",
+			"git add"
+		]
 	},
 	"prettier": {
 		"semi": false,
@@ -106,11 +114,13 @@
 		"useTabs": true
 	},
 	"workspaces": {
-    "packages": ["packages/*"],
-    "nohoist": [      
-      "**/@types/*",
-      "**/hoist-non-react-statics",
+		"packages": [
+			"packages/*"
+		],
+		"nohoist": [
+			"**/@types/*",
+			"**/hoist-non-react-statics",
 			"**/redux"
-    ]
+		]
 	}
 }
