@@ -21,6 +21,16 @@ export default function createInitCoords<Context>(
 	): Action<InitCoordsPayload> | undefined {
 		const monitor = manager.getMonitor()
 		const registry = manager.getRegistry()
+
+		// Initialize the client offset before canDrag is invoked
+		manager.dispatch({
+			type: INIT_COORDS,
+			payload: {
+				sourceClientOffset: null,
+				clientOffset: clientOffset || null,
+			},
+		})
+
 		verifyInvariants(sourceIds, monitor, registry)
 		const sourceId = getDragSourceId(sourceIds, monitor)
 		if (sourceId === null) {
