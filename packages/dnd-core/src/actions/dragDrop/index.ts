@@ -1,6 +1,4 @@
 import { DragDropManager } from '../../interfaces'
-import createInitClientOffset from './initClientOffset'
-import createInitCoords from './initCoords'
 import createBeginDrag from './beginDrag'
 import createPublishDragSource from './publishDragSource'
 import createHover from './hover'
@@ -13,8 +11,6 @@ export default function createDragDropActions<Context>(
 	manager: DragDropManager<Context>,
 ) {
 	return {
-		initClientOffset: createInitClientOffset(),
-		initCoords: createInitCoords(manager),
 		beginDrag: createBeginDrag(manager),
 		publishDragSource: createPublishDragSource(manager),
 		hover: createHover(manager),
