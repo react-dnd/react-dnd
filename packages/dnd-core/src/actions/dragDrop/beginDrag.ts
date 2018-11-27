@@ -9,6 +9,7 @@ import {
 	DragDropMonitor,
 	HandlerRegistry,
 } from '../../interfaces'
+import { initCoords } from './local/initCoords'
 const invariant = require('invariant')
 const isObject = require('lodash/isObject')
 
@@ -19,16 +20,21 @@ export default function createBeginDrag<Context>(
 ) {
 	return function beginDrag(
 		sourceIds: string[] = [],
-		{
-			publishSource = true,
-			clientOffset,
-			getSourceClientOffset,
-		}: BeginDragOptions = {
+		options: BeginDragOptions = {
 			publishSource: true,
 		},
 	): Action<BeginDragPayload> | undefined {
+		const {
+			publishSource = true,
+			clientOffset,
+			getSourceClientOffset,
+		}: BeginDragOptions = options
 		const monitor = manager.getMonitor()
 		const registry = manager.getRegistry()
+
+		// Initialize the offset before proceeding
+		manager.dispatch(initCoords(manager, sourceIds, options))
+
 		verifyInvariants(sourceIds, monitor, registry)
 
 		const sourceId = getDraggableSource(sourceIds, monitor)

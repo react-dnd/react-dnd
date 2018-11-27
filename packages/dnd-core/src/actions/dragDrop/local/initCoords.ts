@@ -7,54 +7,54 @@ import {
 	HandlerRegistry,
 	DragDropMonitor,
 	Identifier,
-} from '../../interfaces'
+} from '../../../interfaces'
 declare var require: any
 const invariant = require('invariant')
-import { INIT_COORDS } from './types'
+import { INIT_COORDS } from '../types'
 
-export default function createInitCoords<Context>(
+const ResetCoordinatesAction = {
+	type: INIT_COORDS,
+	payload: {
+		clientOffset: null,
+		sourceClientOffset: null,
+	},
+}
+
+export function initCoords<Context>(
 	manager: DragDropManager<Context>,
-) {
-	return function initCoords(
-		sourceIds: string[] = [],
-		{ clientOffset, getSourceClientOffset }: InitCoordsOptions,
-	): Action<InitCoordsPayload> | undefined {
-		const monitor = manager.getMonitor()
-		const registry = manager.getRegistry()
+	sourceIds: string[] = [],
+	{ clientOffset, getSourceClientOffset }: InitCoordsOptions,
+): Action<InitCoordsPayload> | undefined {
+	const monitor = manager.getMonitor()
+	const registry = manager.getRegistry()
 
-		// Initialize the client offset before canDrag is invoked
-		manager.dispatch({
-			type: INIT_COORDS,
-			payload: {
-				sourceClientOffset: null,
-				clientOffset: clientOffset || null,
-			},
-		})
+	// Initialize the client offset before canDrag is invoked
+	manager.dispatch({
+		type: INIT_COORDS,
+		payload: {
+			sourceClientOffset: null,
+			clientOffset: clientOffset || null,
+		},
+	})
 
-		verifyInvariants(sourceIds, monitor, registry)
-		const sourceId = getDragSourceId(sourceIds, monitor)
-		if (sourceId === null) {
-			// reset coordinates that might have been set in an "INIT_CLIENT_OFFSET" as no drag is happening
-			return {
-				type: INIT_COORDS,
-				payload: {
-					clientOffset: null,
-					sourceClientOffset: null,
-				},
-			}
-		}
-		const sourceClientOffset: XYCoord | null = determineSourceClientOffset(
-			sourceId,
-			clientOffset,
-			getSourceClientOffset,
-		)
-		return {
-			type: INIT_COORDS,
-			payload: {
-				clientOffset: clientOffset || null,
-				sourceClientOffset: sourceClientOffset || null,
-			},
-		}
+	verifyInvariants(sourceIds, monitor, registry)
+
+	const sourceId = getDragSourceId(sourceIds, monitor)
+	if (sourceId === null) {
+		// reset coordinates that might have been set in an "INIT_CLIENT_OFFSET" as no drag is happening
+		return ResetCoordinatesAction
+	}
+	const sourceClientOffset: XYCoord | null = determineSourceClientOffset(
+		sourceId,
+		clientOffset,
+		getSourceClientOffset,
+	)
+	return {
+		type: INIT_COORDS,
+		payload: {
+			clientOffset: clientOffset || null,
+			sourceClientOffset: sourceClientOffset || null,
+		},
 	}
 }
 

@@ -177,7 +177,6 @@ export interface SourceIdPayload {
 }
 
 export interface DragDropActions {
-	initCoords(sourceIds: string[], options?: any): Action<InitCoordsPayload>
 	beginDrag(sourceIds: string[], options?: any): Action<BeginDragPayload>
 	publishDragSource(): SentinelAction
 	hover(targetIds: string[], options?: any): Action<HoverPayload>
