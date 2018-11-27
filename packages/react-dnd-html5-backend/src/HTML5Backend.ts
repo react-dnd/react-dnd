@@ -349,17 +349,6 @@ export default class HTML5Backend implements Backend {
 			this.actions.endDrag()
 		}
 
-		// initialize the client offset before any "canDrag" is called
-		this.actions.initClientOffset({
-			clientOffset,
-		})
-
-		// Fire off the initial coordinates
-		this.actions.initCoords(dragStartSourceIds || [], {
-			getSourceClientOffset: this.getSourceClientOffset,
-			clientOffset,
-		})
-
 		// Don't publish the source just yet (see why below)
 		this.actions.beginDrag(dragStartSourceIds || [], {
 			publishSource: false,
