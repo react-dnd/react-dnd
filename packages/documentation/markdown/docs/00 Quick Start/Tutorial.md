@@ -597,7 +597,7 @@ function collect(connect, monitor) {
   };
 }
 
-function BoardSquare({ x, y, connectDropTarget, isOver, cdhildren }) {
+function BoardSquare({ x, y, connectDropTarget, isOver, children }) {
   const black = (x + y) % 2 === 1;
 
   return connectDropTarget(
