@@ -17,7 +17,9 @@ import { State } from './reducers'
 function makeStoreInstance(debugMode: boolean) {
 	// TODO: if we ever make a react-native version of this,
 	// we'll need to consider how to pull off dev-tooling
-	const reduxDevTools = window && (window as any).__REDUX_DEVTOOLS_EXTENSION__
+	const reduxDevTools =
+		typeof window !== 'undefined' &&
+		(window as any).__REDUX_DEVTOOLS_EXTENSION__
 	return createStore(
 		reducer,
 		debugMode &&
