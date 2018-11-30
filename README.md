@@ -20,9 +20,6 @@ Questions? Find us on the Reactiflux Discord Server (**#need-help**)
 
 https://www.reactiflux.com/
 
-# Looking for Active Maintainer
-Hey everyone, I'm not using this project actively at the moment, and I'm only maintaining it in my spare time. I'd like to hand it off to someone who is an avid user of React-Dnd. If you're interested, hit me up @darthtrevino.
-
 ### Shoutouts 🙏
 <img src="/assets/browserstack-logo-600x315.png" height="80" title="BrowserStack Logo" alt="BrowserStack Logo" /> 
 
