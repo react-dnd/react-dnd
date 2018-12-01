@@ -4,7 +4,7 @@
 	"description": "HTML5 backend for React DnD",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
-	"license": "BSD-3-Clause",
+	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/react-dnd/react-dnd.git"
