@@ -107,6 +107,10 @@ export const APIPages: PageGroup[] = [
 				location: '/docs/backends/test',
 				title: 'Test',
 			},
+			TOUCH_BACKEND: {
+				location: '/docs/backends/touch-backend',
+				title: 'Touch backend',
+			},
 		},
 	},
 ]
