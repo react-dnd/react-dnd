@@ -27,7 +27,7 @@
 		"Jordan Gensler (http://github.com/kesne)",
 		"Gagan (https://github.com/thetechie)"
 	],
-	"license": "BSD-3-Clause",
+	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/react-dnd/react-dnd/issues"
 	},
