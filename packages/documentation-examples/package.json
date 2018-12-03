@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-documentation-examples",
-	"version": "7.0.1",
+	"version": "7.0.2",
 	"private": true,
 	"description": "Drag and Drop for React",
 	"main": "lib/index.js",
@@ -20,13 +20,13 @@
 		"@types/faker": "^4.1.4",
 		"@types/query-string": "^6.1.1",
 		"@types/styled-components": "^4.0.3",
-		"dnd-core": "^7.0.1",
+		"dnd-core": "^7.0.2",
 		"faker": "^4.1.0",
 		"immutability-helper": "^2.8.1",
 		"lodash": "^4.17.11",
 		"query-string": "^6.2.0",
-		"react-dnd": "^7.0.1",
-		"react-dnd-html5-backend": "^7.0.1",
+		"react-dnd": "^7.0.2",
+		"react-dnd-html5-backend": "^7.0.2",
 		"styled-components": "^4.0.3"
 	},
 	"devDependencies": {
