@@ -1,12 +1,10 @@
 {
 	"compilerOptions": {
-		"target": "es2015",
-		"module": "esnext",
-		"moduleResolution": "node",
 		"lib": ["esnext", "dom"],
 		"strict": true,
 		"experimentalDecorators": true,
 		"noUnusedLocals": true ,
-		"jsx": "react"
+		"jsx": "react",
+		"declaration": true
 	}
 }
