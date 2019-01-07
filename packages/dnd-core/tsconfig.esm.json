@@ -2,7 +2,7 @@
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
 		"declaration": true,
-		"outDir": "./lib",
+    "outDir": "./lib/esm",
 		"baseUrl": "./src"
 	},
 	"include": ["src/index.ts"]

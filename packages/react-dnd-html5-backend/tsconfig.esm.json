@@ -2,9 +2,8 @@
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
 		"declaration": true,
-		"outDir": "./lib",
-		"baseUrl": "./",
-		"experimentalDecorators": true
+		"outDir": "./lib/esm",
+		"baseUrl": "./src"
 	},
 	"include": ["./src/index.ts"]
 }

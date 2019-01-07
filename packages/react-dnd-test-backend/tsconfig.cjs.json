@@ -1,0 +1,9 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"declaration": true,
+		"outDir": "./lib/cjs",
+		"baseUrl": "./src"
+	},
+	"include": ["src/index.ts"]
+}

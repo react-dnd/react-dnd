@@ -1,0 +1,11 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"module": "commonjs",
+		"declaration": true,
+		"outDir": "./lib/cjs",
+		"baseUrl": "./",
+		"experimentalDecorators": true
+	},
+	"include": ["./src/index.ts"]
+}
