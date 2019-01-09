@@ -1,13 +1,13 @@
 {
-	"name": "react-dnd-html5-backend",
-	"version": "7.0.2",
-	"description": "HTML5 backend for React DnD",
+	"name": "@silvain-sayduck/react-dnd-html5-backend",
+	"version": "7.0.2-1",
+	"description": "HTML5 backend for React DnD - fixes interference with drop events of native drag-n-drop (for example for file uploads with Dropzone)",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/react-dnd/react-dnd.git"
+		"url": "https://github.com/silvainSayduck/react-dnd.git/tree/master/packages/react-dnd-html5-backend"
 	},
 	"scripts": {
 		"clean": "rimraf lib dist",
