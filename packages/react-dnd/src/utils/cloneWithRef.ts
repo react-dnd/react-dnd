@@ -24,7 +24,11 @@ export default function cloneWithRef(
 		ref: (node: any) => {
 			newRef(node)
 			if (previousRef) {
-				previousRef(node)
+				if (typeof previousRef === 'function') {
+					previousRef(node)
+				} else {
+					previousRef.current = node
+				}
 			}
 		},
 	})
