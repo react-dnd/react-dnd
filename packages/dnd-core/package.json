@@ -3,11 +3,13 @@
 	"version": "7.0.2",
 	"description": "Drag and drop sans the GUI",
 	"license": "MIT",
-	"main": "./lib/index.js",
-	"types": "./lib/index.d.ts",
+	"main": "./lib/cjs/index.js",
+	"types": "./lib/cjs/index.d.ts",
 	"scripts": {
+		"build:esm": "tsc -b tsconfig.esm.json",
+		"build:cjs": "tsc -b tsconfig.cjs.json",
+		"build": "run-p build:*" ,
 		"clean": "rimraf lib",
-		"build": "tsc",
 		"watch": "tsc -w --preserveWatchOutput",
 		"start": "npm run watch",
 		"test": "run-s clean build"
