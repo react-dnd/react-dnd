@@ -7,7 +7,7 @@
 # React DnD HTML5 Backend
 
 The officially supported HTML5 backend for [React DnD](http://react-dnd.github.io/react-dnd/).
-See [the docs](http://react-dnd.github.io/react-dnd/docs-html5-backend.html) for usage information.
+See [the docs](http://react-dnd.github.io/react-dnd/docs/backends/html5) for usage information.
 
 ## Installation
 
