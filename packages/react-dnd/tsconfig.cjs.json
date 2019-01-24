@@ -1,7 +1,7 @@
 {
-	"extends": "../../tsconfig.esm.base.json",
+	"extends": "../../tsconfig.cjs.base.json",
 	"compilerOptions": {
-		"outDir": "./lib",
+		"outDir": "./lib/cjs",
 		"baseUrl": "./",
 	},
 	"include": ["./src/index.ts"]

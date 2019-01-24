@@ -2,8 +2,8 @@
 	"name": "react-dnd-test-backend",
 	"version": "7.0.2",
 	"description": "A mock backend for testing React DnD apps",
-	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
+	"main": "lib/cjs/index.js",
+	"types": "lib/cjs/index.d.ts",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -11,7 +11,9 @@
 	},
 	"scripts": {
 		"clean": "rimraf lib",
-		"build": "tsc",
+		"build:cjs": "tsc -b tsconfig.cjs.json",
+		"build:esm": "tsc -b tsconfig.esm.json",
+		"build": "run-p build:*",
 		"test": "run-s clean build",
 		"prepublish": "npm run test"
 	},
