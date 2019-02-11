@@ -417,20 +417,18 @@ In the future, you might want to explore alternative third-party backends, such 
 
 The first thing we need to set up in our app is the [`DragDropContext`](/docs/api/drag-drop-context). We need it to specify that we're going to use the [`HTML5` backend](/docs/backends/html5) in our app.
 
-Because the `Board` is the top-level component in our app, I'm going to supply a  [`DragDropContextProvider`](/docs/api/drag-drop-context-provider) for its children:
+Because the `Board` is the top-level component in our app, I'm going to wrap it with `DragDropContext` higher-order component providing `HTML5Backend` as a backend. Other approach would be to supply [`DragDropContextProvider`](/docs/api/drag-drop-context-provider) component for `Board` children.
 
 ```js
 import React from 'react';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-export default function Board() {
-  return (
-    <DragDropContextProvider backend={HTML5Backend}>
-    {/* ... */}
-    </DragDropContextProvider>
-  )
+function Board() {
+  /* ... */
 }
+
+export default DragDropContext(HTML5Backend)(Board)
 ```
 
 Next, I'm going to create the constants for the draggable item types. We're only going to have a single item type in our game, a `KNIGHT`. I'm creating a `Constants` module that exports it:
