@@ -348,9 +348,6 @@ import Knight from './Knight';
 import { moveKnight } from './Game';
 
 /* ... */
-function handleSquareClick(toX, toY) {
-  moveKnight(toX, toY);
-}
 
 function renderSquare(i, knightPosition) {
   /* ... */
@@ -359,6 +356,10 @@ function renderSquare(i, knightPosition) {
       {/* ... */}
     </div>
   );
+}
+
+function handleSquareClick(toX, toY) {
+  moveKnight(toX, toY);
 }
 ```
 
@@ -530,7 +531,10 @@ export default function BoardSquare({x, y, children}) {
 I also changed the `Board` to use it:
 
 ```js
-renderSquare(i, knightPosition) {
+/* ... */
+import BoardSquare from './BoardSquare';
+
+function renderSquare(i, knightPosition) {
   const x = i % 8;
   const y = Math.floor(i / 8);
   return (
@@ -544,7 +548,7 @@ renderSquare(i, knightPosition) {
   );
 }
 
-renderPiece(x, y, [knightX, knightY]) {
+function renderPiece(x, y, [knightX, knightY]) {
     if (x === knightX && y === knightY) {
     return <Knight />;
   }
