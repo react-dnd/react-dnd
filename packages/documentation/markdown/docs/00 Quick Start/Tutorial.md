@@ -668,23 +668,23 @@ function collect(connect, monitor) {
   };
 }
 
+function renderOverlay(color) {
+  return (
+    <div style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      height: '100%',
+      width: '100%',
+      zIndex: 1,
+      opacity: 0.5,
+      backgroundColor: color,
+    }} />
+  );
+}
+
 function BoardSquare({ x, y, connectDropTarget, isOver, canDrop, children }) {
   const black = (x + y) % 2 === 1;
-
-  function renderOverlay(color) {
-    return (
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        height: '100%',
-        width: '100%',
-        zIndex: 1,
-        opacity: 0.5,
-        backgroundColor: color,
-      }} />
-    );
-  }
 
   return connectDropTarget(
     <div style={{
@@ -695,9 +695,9 @@ function BoardSquare({ x, y, connectDropTarget, isOver, canDrop, children }) {
       <Square black={black}>
         {children}
       </Square>
-      {isOver && !canDrop && this.renderOverlay('red')}
-      {!isOver && canDrop && this.renderOverlay('yellow')}
-      {isOver && canDrop && this.renderOverlay('green')}
+      {isOver && !canDrop && renderOverlay('red')}
+      {!isOver && canDrop && renderOverlay('yellow')}
+      {isOver && canDrop && renderOverlay('green')}
     </div>
   );
 }
