@@ -348,18 +348,17 @@ import Knight from './Knight';
 import { moveKnight } from './Game';
 
 /* ... */
+function handleSquareClick(toX, toY) {
+  moveKnight(toX, toY);
+}
 
-renderSquare(i, knightPosition) {
+function renderSquare(i, knightPosition) {
   /* ... */
   return (
-    <div onClick={() => this.handleSquareClick(x, y)}>
+    <div onClick={() => handleSquareClick(x, y)}>
       {/* ... */}
     </div>
   );
-}
-
-handleSquareClick(toX, toY) {
-  moveKnight(toX, toY);
 }
 ```
 
