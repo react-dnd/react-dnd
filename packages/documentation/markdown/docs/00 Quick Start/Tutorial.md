@@ -389,7 +389,7 @@ import { canMoveKnight, moveKnight } from './Game';
 
 /* ... */
 
-handleSquareClick(toX, toY) {
+function handleSquareClick(toX, toY) {
   if (canMoveKnight(toX, toY)) {
     moveKnight(toX, toY);
   }
