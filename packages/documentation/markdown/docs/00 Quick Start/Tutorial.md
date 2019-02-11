@@ -226,7 +226,7 @@ function renderSquare(i, [knightX, knightY]) {
 export default function Board({knightPosition}) {
   const squares = [];
   for (let i = 0; i < 64; i++) {
-    squares.push(this.renderSquare(i, knightPosition));
+    squares.push(renderSquare(i, knightPosition));
   }
 
   return (
