@@ -16,53 +16,66 @@ function getDataFromDataTransfer(
 
 const nativeTypesConfig: {
 	[key: string]: {
-		exposeProperty: string
+		exposeProperties: {
+			[property: string]: (dataTransfer: any, matchesTypes: any) => any
+		}
 		matchesType?: string
 		matchesTypes?: string[]
-		getData: (dataTransfer: any, matchesTypes: any) => any
 	}
 } = {
 	[NativeTypes.FILE]: {
-		exposeProperty: 'files',
+		exposeProperties: {
+			files: (dataTransfer: any) =>
+				Array.prototype.slice.call(dataTransfer.files),
+			items: (dataTransfer: any) => dataTransfer.items,
+		},
 		matchesTypes: ['Files'],
-		getData: (dataTransfer: any) =>
-			Array.prototype.slice.call(dataTransfer.files),
 	},
 	[NativeTypes.URL]: {
-		exposeProperty: 'urls',
+		exposeProperties: {
+			urls: (dataTransfer: any, matchesTypes: any) =>
+				getDataFromDataTransfer(dataTransfer, matchesTypes, '').split('\n'),
+		},
 		matchesTypes: ['Url', 'text/uri-list'],
-		getData: (dataTransfer: any, matchesTypes: any) =>
-			getDataFromDataTransfer(dataTransfer, matchesTypes, '').split('\n'),
 	},
 	[NativeTypes.TEXT]: {
-		exposeProperty: 'text',
+		exposeProperties: {
+			text: (dataTransfer: any, matchesTypes: any) =>
+				getDataFromDataTransfer(dataTransfer, matchesTypes, ''),
+		},
 		matchesTypes: ['Text', 'text/plain'],
-		getData: (dataTransfer: any, matchesTypes: any) =>
-			getDataFromDataTransfer(dataTransfer, matchesTypes, ''),
 	},
 }
 
 export function createNativeDragSource(type: any) {
-	const { exposeProperty, matchesTypes, getData } = nativeTypesConfig[type]
+	const { exposeProperties, matchesTypes } = nativeTypesConfig[type]
 
 	return class NativeDragSource {
 		public item: any
 
 		constructor() {
-			this.item = {
-				get [exposeProperty]() {
-					// tslint:disable-next-line no-console
-					console.warn(
-						`Browser doesn't allow reading "${exposeProperty}" until the drop event.`,
-					)
-					return null
-				},
-			}
+			this.item = Object.create(
+				Object.keys(exposeProperties).map(property => ({
+					configurable: true, // This is needed to allow redefining it later
+					get() {
+						// tslint:disable-next-line no-console
+						console.warn(
+							`Browser doesn't allow reading "${property}" until the drop event.`,
+						)
+						return null
+					},
+				})),
+			)
 		}
 
 		public mutateItemByReadingDataTransfer(dataTransfer: any) {
-			delete this.item[exposeProperty]
-			this.item[exposeProperty] = getData(dataTransfer, matchesTypes)
+			const newProperties: PropertyDescriptorMap = {}
+			Object.keys(exposeProperties).forEach(property => {
+				newProperties[property] = {
+					value: exposeProperties[property](dataTransfer, matchesTypes),
+				}
+			})
+			Object.defineProperties(this.item, newProperties)
 		}
 
 		public canDrag() {
