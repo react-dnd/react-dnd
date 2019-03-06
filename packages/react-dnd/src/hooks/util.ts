@@ -1,3 +1,5 @@
+declare var require: any
+
 import * as React from 'react'
 import { DragDropManager, SourceType, TargetType, Identifier } from 'dnd-core'
 import { context } from '../DragDropContext'
