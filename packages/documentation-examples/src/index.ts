@@ -1,4 +1,4 @@
-import * as React from 'React'
+import * as React from 'react'
 import chessboard from './00 Chessboard'
 import dustbinCopyOrMove from './01 Dustbin/Copy or Move'
 import dustbinMultipleTargets from './01 Dustbin/Multiple Targets'
