@@ -1,3 +1,4 @@
+declare var require: any
 import { cloneElement } from 'react'
 const invariant = require('invariant')
 

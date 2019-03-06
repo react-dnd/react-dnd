@@ -1,3 +1,4 @@
+declare var require: any
 import * as React from 'react'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { DragDropManager, Unsubscribe } from 'dnd-core'

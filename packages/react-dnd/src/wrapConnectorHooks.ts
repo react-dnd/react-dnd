@@ -9,7 +9,7 @@ function throwIfCompositeComponentElement(element: React.ReactElement<any>) {
 	}
 
 	const displayName =
-		element.type.displayName || element.type.name || 'the component'
+		(element.type as any).displayName || element.type.name || 'the component'
 
 	throw new Error(
 		'Only native element nodes can now be passed to React DnD connectors.' +

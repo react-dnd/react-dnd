@@ -1,3 +1,6 @@
+declare var require: any
+declare var process: any
+
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndComponentClass, DndComponent } from './interfaces'

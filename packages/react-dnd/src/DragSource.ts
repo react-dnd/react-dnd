@@ -1,3 +1,4 @@
+declare var require: any
 import * as React from 'react'
 import { SourceType } from 'dnd-core'
 import {
@@ -37,7 +38,7 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 		collect,
 		options,
 	)
-	let getType: ((props: Props) => SourceType) = type as ((
+	let getType: (props: Props) => SourceType = type as ((
 		props: Props,
 	) => SourceType)
 	if (typeof type !== 'function') {

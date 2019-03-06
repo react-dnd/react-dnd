@@ -1,10 +1,11 @@
 // tslint:disable jsx-no-lambda
+declare var require: any
 import * as React from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
-const update = require('immutability-helper')
+import update from 'immutability-helper'
 const shuffle = require('lodash/shuffle')
 
 export interface SourceBox {
