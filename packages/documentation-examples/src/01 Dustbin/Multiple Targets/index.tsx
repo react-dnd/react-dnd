@@ -75,17 +75,18 @@ export default class Container extends React.Component<{}, ContainerState> {
 
 	private handleDrop(index: number, item: { name: string }) {
 		const { name } = item
-		const droppedBoxNames = name ? { $push: [name] } : {}
+		const droppedBoxNames = name ? { $push: [name] } : { $push: [] }
+		const dustbins = {
+			[index]: {
+				lastDroppedItem: {
+					$set: item,
+				},
+			},
+		}
 
 		this.setState(
 			update(this.state, {
-				dustbins: {
-					[index]: {
-						lastDroppedItem: {
-							$set: item,
-						},
-					},
-				},
+				dustbins,
 				droppedBoxNames,
 			}),
 		)

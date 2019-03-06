@@ -1,3 +1,4 @@
+declare var require: any
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe } from 'dnd-core'
 const shallowEqual = require('shallowequal')
