@@ -1,3 +1,4 @@
+declare var require: any
 const isFunction = require('lodash/isFunction')
 const noop = require('lodash/noop')
 
