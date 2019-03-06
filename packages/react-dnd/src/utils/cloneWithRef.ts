@@ -1,6 +1,14 @@
 import { cloneElement } from 'react'
 const invariant = require('invariant')
 
+const setRef = (ref: any, node: any) => {
+	if (typeof ref === 'function') {
+		ref(node)
+	} else {
+		ref.current = node
+	}
+}
+
 export default function cloneWithRef(
 	element: any,
 	newRef: any,
@@ -22,13 +30,9 @@ export default function cloneWithRef(
 
 	return cloneElement(element, {
 		ref: (node: any) => {
-			newRef(node)
+			setRef(newRef, node)
 			if (previousRef) {
-				if (typeof previousRef === 'function') {
-					previousRef(node)
-				} else {
-					previousRef.current = node
-				}
+				setRef(previousRef, node)
 			}
 		},
 	})
