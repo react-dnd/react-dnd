@@ -1,4 +1,6 @@
 // tslint:disable jsx-no-lambda
+declare var require: any
+
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'

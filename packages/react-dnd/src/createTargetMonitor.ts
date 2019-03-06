@@ -1,3 +1,4 @@
+declare var require: any
 import { DragDropManager, DragDropMonitor } from 'dnd-core'
 import { DropTargetMonitor } from './interfaces'
 const invariant = require('invariant')
