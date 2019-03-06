@@ -17,7 +17,9 @@ import customizeHandlesAndPreviews from './05 Customize/Handles and Previews'
 import otherNativeFiles from './06 Other/Native Files'
 
 export * from './isDebugMode'
-export const componentIndex = {
+export const componentIndex: {
+	[key: string]: React.ComponentClass | React.FunctionComponent
+} = {
 	chessboard,
 	'dustbin-single-target': dustbinSingleTarget,
 	'dustbin-multiple-targets': dustbinMultipleTargets,
