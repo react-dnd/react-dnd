@@ -1,6 +1,10 @@
+declare var require: any
+declare var process: any
+
 import { createRef } from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
+
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 

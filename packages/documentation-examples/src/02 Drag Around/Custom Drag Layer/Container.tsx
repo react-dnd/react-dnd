@@ -8,7 +8,7 @@ import {
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'
-const update = require('immutability-helper')
+import update from 'immutability-helper'
 
 const styles: React.CSSProperties = {
 	width: 300,

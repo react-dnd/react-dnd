@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { name } from 'faker'
 import Card from './Card'
-const update = require('immutability-helper')
+import update from 'immutability-helper'
 
 const style = {
 	width: 400,

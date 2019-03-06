@@ -1,3 +1,4 @@
+declare var require: any
 import * as React from 'react'
 import { TargetType } from 'dnd-core'
 import {
@@ -30,7 +31,7 @@ export default function DropTarget<Props, CollectedProps = {}>(
 		collect,
 		options,
 	)
-	let getType: ((props: Props) => TargetType) = type as ((
+	let getType: (props: Props) => TargetType = type as ((
 		props: Props,
 	) => TargetType)
 	if (typeof type !== 'function') {
