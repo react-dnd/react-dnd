@@ -2,18 +2,17 @@ import * as React from 'react'
 import { DragDropMonitor, SourceType } from 'dnd-core'
 import registerSource from '../registerSource'
 import createSourceMonitor from '../createSourceMonitor'
-import { DragSourceMonitor, DragSourceSpec } from '../interfaces'
 import {
-	Ref,
-	NoArgs,
-	HandlerManager,
-	isRef,
-	useDragDropManager,
-	useMonitorSubscription,
-} from './util'
+	DragSourceMonitor,
+	DragPreviewOptions,
+	DragSourceHookSpec,
+} from '../interfaces'
+import { useDragDropManager } from './useDragDropManager'
+import { useMonitorSubscription } from './useMonitorSubscription'
+import { Ref, HandlerManager, isRef } from './util'
 
 function useDragSourceHandler<DragObject>(
-	sourceSpec: DragSourceSpec<void, DragObject>,
+	sourceSpec: DragSourceHookSpec<DragObject>,
 ) {
 	const sourceSpecRef = React.useRef(sourceSpec)
 
@@ -26,21 +25,24 @@ function useDragSourceHandler<DragObject>(
 		() => ({
 			canDrag() {
 				const { canDrag } = sourceSpecRef.current
-				return canDrag != null ? (canDrag as NoArgs<boolean>)() : true
+				return canDrag ? canDrag() : true
 			},
 			isDragging(globalMonitor: DragDropMonitor, sourceId: string) {
 				const { isDragging } = sourceSpecRef.current
-				return isDragging != null
-					? (isDragging as NoArgs<boolean>)()
+				return isDragging
+					? isDragging()
 					: sourceId === globalMonitor.getSourceId()
 			},
 			beginDrag() {
-				return (sourceSpecRef.current.beginDrag as NoArgs<DragObject>)()
+				const { beginDrag } = sourceSpecRef.current
+				if (beginDrag) {
+					beginDrag()
+				}
 			},
 			endDrag() {
 				const { endDrag } = sourceSpecRef.current
-				if (endDrag != null) {
-					;(endDrag as NoArgs<void>)()
+				if (endDrag) {
+					endDrag()
 				}
 			},
 		}),
@@ -50,13 +52,19 @@ function useDragSourceHandler<DragObject>(
 	return handler
 }
 
+/**
+ *
+ * @param ref The drag source element
+ * @param type The drag source type
+ * @param sourceSpec The drag source specification
+ */
 export function useDragSource<DragObject = {}>(
 	ref: Ref,
 	type: SourceType,
-	sourceSpec: DragSourceSpec<void, DragObject> & {
+	sourceSpec: DragSourceHookSpec<DragObject> & {
 		dragSourceOptions?: {}
-		dragPreview?: any
-		dragPreviewOptions?: {}
+		dragPreview?: Ref | Element
+		dragPreviewOptions?: DragPreviewOptions
 	},
 ): DragSourceMonitor & HandlerManager {
 	const dragDropManager = useDragDropManager()
@@ -76,10 +84,9 @@ export function useDragSource<DragObject = {}>(
 		sourceMonitor,
 	)
 
-	React.useEffect(() => {
+	React.useEffect(function connectDragSourceToBackend() {
 		const dragSourceNode = ref.current
 		const dragSourceOptions = sourceSpec.dragSourceOptions
-
 		const disconnectDragSource = backend.connectDragSource(
 			sourceMonitor.getHandlerId(),
 			dragSourceNode,
@@ -89,17 +96,16 @@ export function useDragSource<DragObject = {}>(
 		return disconnectDragSource
 	}, [])
 
-	React.useEffect(() => {
+	React.useEffect(function connectDragPreviewToBackend() {
 		if (sourceSpec.dragPreview == null) {
 			return undefined
 		}
 
 		// Accept ref or dom node
 		const dragPreviewNode = isRef(sourceSpec.dragPreview)
-			? sourceSpec.dragPreview.current
+			? (sourceSpec.dragPreview as Ref).current
 			: sourceSpec.dragPreview
 		const dragPreviewOptions = sourceSpec.dragPreviewOptions
-
 		const disconnectDragPreview = backend.connectDragPreview(
 			sourceMonitor.getHandlerId(),
 			dragPreviewNode,
