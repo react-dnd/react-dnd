@@ -1,3 +1,5 @@
+declare var process: any
+
 export default function checkDecoratorArguments(
 	functionName: string,
 	signature: string,

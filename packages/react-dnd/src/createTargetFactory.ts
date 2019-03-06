@@ -1,3 +1,6 @@
+declare var require: any
+declare var process: any
+
 import { createRef } from 'react'
 import { DropTarget } from 'dnd-core'
 import { DropTargetSpec, DropTargetMonitor } from './interfaces'
