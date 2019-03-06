@@ -543,7 +543,6 @@ export default class HTML5Backend implements Backend {
 			// Don't show a nice cursor but still prevent default
 			// "drop and blow away the whole document" action.
 			e.preventDefault()
-			e.dataTransfer.dropEffect = 'none'
 		} else {
 			e.preventDefault()
 			e.dataTransfer.dropEffect = 'none'
