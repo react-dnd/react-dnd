@@ -4,7 +4,7 @@ const memoize = require('lodash/memoize')
 
 declare global {
 	// tslint:disable-next-line interface-name
-	interface Window {
+	interface Window extends HTMLElement {
 		safari: any
 	}
 }
