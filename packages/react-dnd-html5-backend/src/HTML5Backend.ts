@@ -20,6 +20,7 @@ import {
 } from './NativeDragSources'
 import * as NativeTypes from './NativeTypes'
 import { HTML5BackendContext } from './interfaces'
+import { NativeDragSource } from './NativeDragSources/NativeDragSource'
 const defaults = require('lodash/defaults')
 
 declare global {
@@ -45,12 +46,12 @@ export default class HTML5Backend implements Backend {
 	private dragStartSourceIds: string[] | null = null
 	private dropTargetIds: string[] = []
 	private dragEnterTargetIds: string[] = []
-	private currentNativeSource: any = null
-	private currentNativeHandle: any = null
-	private currentDragSourceNode: any = null
+	private currentNativeSource: NativeDragSource | null = null
+	private currentNativeHandle: string | null = null
+	private currentDragSourceNode: Element | null = null
 	private altKeyPressed: boolean = false
-	private mouseMoveTimeoutTimer: any = null
-	private asyncEndDragFrameId: any = null
+	private mouseMoveTimeoutTimer: number | null = null
+	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
 
 	constructor(manager: DragDropManager<any>) {
@@ -81,7 +82,7 @@ export default class HTML5Backend implements Backend {
 			throw new Error('Cannot have two HTML5 backends at the same time.')
 		}
 		this.window.__isReactDndBackendSetUp = true
-		this.addEventListeners(this.window)
+		this.addEventListeners(this.window as Element)
 	}
 
 	public teardown() {
@@ -90,14 +91,14 @@ export default class HTML5Backend implements Backend {
 		}
 
 		this.window.__isReactDndBackendSetUp = false
-		this.removeEventListeners(this.window)
+		this.removeEventListeners(this.window as Element)
 		this.clearCurrentDragSourceNode()
 		if (this.asyncEndDragFrameId) {
 			this.window.cancelAnimationFrame(this.asyncEndDragFrameId)
 		}
 	}
 
-	public connectDragPreview(sourceId: string, node: any, options: any) {
+	public connectDragPreview(sourceId: string, node: Element, options: any) {
 		this.sourcePreviewNodeOptions.set(sourceId, options)
 		this.sourcePreviewNodes.set(sourceId, node)
 
@@ -107,14 +108,14 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	public connectDragSource(sourceId: string, node: any, options: any) {
+	public connectDragSource(sourceId: string, node: Element, options: any) {
 		this.sourceNodes.set(sourceId, node)
 		this.sourceNodeOptions.set(sourceId, options)
 
 		const handleDragStart = (e: any) => this.handleDragStart(e, sourceId)
 		const handleSelectStart = (e: any) => this.handleSelectStart(e)
 
-		node.setAttribute('draggable', true)
+		node.setAttribute('draggable', 'true')
 		node.addEventListener('dragstart', handleDragStart)
 		node.addEventListener('selectstart', handleSelectStart)
 
@@ -124,14 +125,14 @@ export default class HTML5Backend implements Backend {
 
 			node.removeEventListener('dragstart', handleDragStart)
 			node.removeEventListener('selectstart', handleSelectStart)
-			node.setAttribute('draggable', false)
+			node.setAttribute('draggable', 'false')
 		}
 	}
 
-	public connectDropTarget(targetId: string, node: any) {
-		const handleDragEnter = (e: any) => this.handleDragEnter(e, targetId)
-		const handleDragOver = (e: any) => this.handleDragOver(e, targetId)
-		const handleDrop = (e: any) => this.handleDrop(e, targetId)
+	public connectDropTarget(targetId: string, node: HTMLElement) {
+		const handleDragEnter = (e: DragEvent) => this.handleDragEnter(e, targetId)
+		const handleDragOver = (e: DragEvent) => this.handleDragOver(e, targetId)
+		const handleDrop = (e: DragEvent) => this.handleDrop(e, targetId)
 
 		node.addEventListener('dragenter', handleDragEnter)
 		node.addEventListener('dragover', handleDragOver)
@@ -144,50 +145,70 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private addEventListeners(target: any) {
+	private addEventListeners(target: Node) {
 		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
 		if (!target.addEventListener) {
 			return
 		}
-		target.addEventListener('dragstart', this.handleTopDragStart)
+		target.addEventListener('dragstart', this
+			.handleTopDragStart as EventListener)
 		target.addEventListener('dragstart', this.handleTopDragStartCapture, true)
 		target.addEventListener('dragend', this.handleTopDragEndCapture, true)
-		target.addEventListener('dragenter', this.handleTopDragEnter)
-		target.addEventListener('dragenter', this.handleTopDragEnterCapture, true)
-		target.addEventListener('dragleave', this.handleTopDragLeaveCapture, true)
-		target.addEventListener('dragover', this.handleTopDragOver)
+		target.addEventListener('dragenter', this
+			.handleTopDragEnter as EventListener)
+		target.addEventListener(
+			'dragenter',
+			this.handleTopDragEnterCapture as EventListener,
+			true,
+		)
+		target.addEventListener(
+			'dragleave',
+			this.handleTopDragLeaveCapture as EventListener,
+			true,
+		)
+		target.addEventListener('dragover', this.handleTopDragOver as EventListener)
 		target.addEventListener('dragover', this.handleTopDragOverCapture, true)
-		target.addEventListener('drop', this.handleTopDrop)
-		target.addEventListener('drop', this.handleTopDropCapture, true)
+		target.addEventListener('drop', this.handleTopDrop as EventListener)
+		target.addEventListener(
+			'drop',
+			this.handleTopDropCapture as EventListener,
+			true,
+		)
 	}
 
-	private removeEventListeners(target: any) {
+	private removeEventListeners(target: Node) {
 		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
 		if (!target.removeEventListener) {
 			return
 		}
-		target.removeEventListener('dragstart', this.handleTopDragStart)
+		target.removeEventListener('dragstart', this.handleTopDragStart as any)
 		target.removeEventListener(
 			'dragstart',
 			this.handleTopDragStartCapture,
 			true,
 		)
 		target.removeEventListener('dragend', this.handleTopDragEndCapture, true)
-		target.removeEventListener('dragenter', this.handleTopDragEnter)
+		target.removeEventListener('dragenter', this
+			.handleTopDragEnter as EventListener)
 		target.removeEventListener(
 			'dragenter',
-			this.handleTopDragEnterCapture,
+			this.handleTopDragEnterCapture as EventListener,
 			true,
 		)
 		target.removeEventListener(
 			'dragleave',
-			this.handleTopDragLeaveCapture,
+			this.handleTopDragLeaveCapture as EventListener,
 			true,
 		)
-		target.removeEventListener('dragover', this.handleTopDragOver)
+		target.removeEventListener('dragover', this
+			.handleTopDragOver as EventListener)
 		target.removeEventListener('dragover', this.handleTopDragOverCapture, true)
-		target.removeEventListener('drop', this.handleTopDrop)
-		target.removeEventListener('drop', this.handleTopDropCapture, true)
+		target.removeEventListener('drop', this.handleTopDrop as EventListener)
+		target.removeEventListener(
+			'drop',
+			this.handleTopDropCapture as EventListener,
+			true,
+		)
 	}
 
 	private getCurrentSourceNodeOptions() {
@@ -230,11 +251,10 @@ export default class HTML5Backend implements Backend {
 		)
 	}
 
-	private beginDragNativeItem(type: any) {
+	private beginDragNativeItem(type: string) {
 		this.clearCurrentDragSourceNode()
 
-		const SourceType = createNativeDragSource(type)
-		this.currentNativeSource = new SourceType()
+		this.currentNativeSource = createNativeDragSource(type)
 		this.currentNativeHandle = this.registry.addSource(
 			type,
 			this.currentNativeSource,
@@ -248,12 +268,12 @@ export default class HTML5Backend implements Backend {
 		}
 
 		this.actions.endDrag()
-		this.registry.removeSource(this.currentNativeHandle)
+		this.registry.removeSource(this.currentNativeHandle!)
 		this.currentNativeHandle = null
 		this.currentNativeSource = null
 	}
 
-	private isNodeInDocument = (node: any) => {
+	private isNodeInDocument = (node: Node | null) => {
 		// Check the node either in the main document or in the current context
 		return (
 			(!!document && document.body.contains(node)) ||
@@ -272,7 +292,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private setCurrentDragSourceNode(node: any) {
+	private setCurrentDragSourceNode(node: Element | null) {
 		this.clearCurrentDragSourceNode()
 		this.currentDragSourceNode = node
 
@@ -294,7 +314,7 @@ export default class HTML5Backend implements Backend {
 		//   * https://github.com/react-dnd/react-dnd/pull/928
 		//   * https://github.com/react-dnd/react-dnd/issues/869
 		//
-		this.mouseMoveTimeoutTimer = setTimeout(() => {
+		this.mouseMoveTimeoutTimer = (setTimeout(() => {
 			return (
 				this.window &&
 				this.window.addEventListener(
@@ -303,7 +323,7 @@ export default class HTML5Backend implements Backend {
 					true,
 				)
 			)
-		}, MOUSE_MOVE_TIMEOUT)
+		}, MOUSE_MOVE_TIMEOUT) as any) as number
 	}
 
 	private clearCurrentDragSourceNode() {
@@ -311,7 +331,7 @@ export default class HTML5Backend implements Backend {
 			this.currentDragSourceNode = null
 
 			if (this.window) {
-				this.window.clearTimeout(this.mouseMoveTimeoutTimer)
+				this.window.clearTimeout(this.mouseMoveTimeoutTimer || undefined)
 				this.window.removeEventListener(
 					'mousemove',
 					this.endDragIfSourceWasRemovedFromDOM,
@@ -331,14 +351,14 @@ export default class HTML5Backend implements Backend {
 		this.dragStartSourceIds = []
 	}
 
-	private handleDragStart(e: any, sourceId: any) {
+	private handleDragStart(e: DragEvent, sourceId: string) {
 		if (!this.dragStartSourceIds) {
 			this.dragStartSourceIds = []
 		}
 		this.dragStartSourceIds.unshift(sourceId)
 	}
 
-	private handleTopDragStart = (e: any) => {
+	private handleTopDragStart = (e: DragEvent) => {
 		const { dragStartSourceIds } = this
 		this.dragStartSourceIds = null
 
@@ -360,46 +380,49 @@ export default class HTML5Backend implements Backend {
 		const nativeType = matchNativeItemType(dataTransfer)
 
 		if (this.monitor.isDragging()) {
-			if (typeof dataTransfer.setDragImage === 'function') {
+			if (dataTransfer && typeof dataTransfer.setDragImage === 'function') {
 				// Use custom drag image if user specifies it.
 				// If child drag source refuses drag but parent agrees,
 				// use parent's node as drag image. Neither works in IE though.
 				const sourceId: string = this.monitor.getSourceId() as string
 				const sourceNode = this.sourceNodes.get(sourceId)
 				const dragPreview = this.sourcePreviewNodes.get(sourceId) || sourceNode
-				const {
-					anchorX,
-					anchorY,
-					offsetX,
-					offsetY,
-				} = this.getCurrentSourcePreviewNodeOptions()
-				const anchorPoint = { anchorX, anchorY }
-				const offsetPoint = { offsetX, offsetY }
-				const dragPreviewOffset = getDragPreviewOffset(
-					sourceNode,
-					dragPreview,
-					clientOffset,
-					anchorPoint,
-					offsetPoint,
-				)
 
-				dataTransfer.setDragImage(
-					dragPreview,
-					dragPreviewOffset.x,
-					dragPreviewOffset.y,
-				)
+				if (dragPreview) {
+					const {
+						anchorX,
+						anchorY,
+						offsetX,
+						offsetY,
+					} = this.getCurrentSourcePreviewNodeOptions()
+					const anchorPoint = { anchorX, anchorY }
+					const offsetPoint = { offsetX, offsetY }
+					const dragPreviewOffset = getDragPreviewOffset(
+						sourceNode,
+						dragPreview,
+						clientOffset,
+						anchorPoint,
+						offsetPoint,
+					)
+
+					dataTransfer.setDragImage(
+						dragPreview,
+						dragPreviewOffset.x,
+						dragPreviewOffset.y,
+					)
+				}
 			}
 
 			try {
 				// Firefox won't drag without setting data
-				dataTransfer.setData('application/json', {})
+				dataTransfer!.setData('application/json', {} as any)
 			} catch (err) {
 				// IE doesn't support MIME types in setData
 			}
 
 			// Store drag source node so we can check whether
 			// it is removed from DOM and trigger endDrag manually.
-			this.setCurrentDragSourceNode(e.target)
+			this.setCurrentDragSourceNode(e.target as Element)
 
 			// Now we are ready to publish the drag source.. or are we not?
 			const { captureDraggingState } = this.getCurrentSourcePreviewNodeOptions()
@@ -427,8 +450,10 @@ export default class HTML5Backend implements Backend {
 			// A native item (such as URL) dragged from inside the document
 			this.beginDragNativeItem(nativeType)
 		} else if (
+			dataTransfer &&
 			!dataTransfer.types &&
-			(!e.target.hasAttribute || !e.target.hasAttribute('draggable'))
+			((e.target && !(e.target as Element).hasAttribute) ||
+				!(e.target as Element).hasAttribute('draggable'))
 		) {
 			// Looks like a Safari bug: dataTransfer.types is null, but there was no draggable.
 			// Just let it drag. It's a native type (URL or text) and will be picked up in
@@ -449,7 +474,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleTopDragEnterCapture = (e: any) => {
+	private handleTopDragEnterCapture = (e: DragEvent) => {
 		this.dragEnterTargetIds = []
 
 		const isFirstEnter = this.enterLeaveCounter.enter(e.target)
@@ -466,11 +491,11 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleDragEnter(e: any, targetId: string) {
+	private handleDragEnter(e: DragEvent, targetId: string) {
 		this.dragEnterTargetIds.unshift(targetId)
 	}
 
-	private handleTopDragEnter = (e: any) => {
+	private handleTopDragEnter = (e: DragEvent) => {
 		const { dragEnterTargetIds } = this
 		this.dragEnterTargetIds = []
 
@@ -498,7 +523,9 @@ export default class HTML5Backend implements Backend {
 		if (canDrop) {
 			// IE requires this to fire dragover events
 			e.preventDefault()
-			e.dataTransfer.dropEffect = this.getCurrentDropEffect()
+			if (e.dataTransfer) {
+				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
+			}
 		}
 	}
 
@@ -506,14 +533,14 @@ export default class HTML5Backend implements Backend {
 		this.dragOverTargetIds = []
 	}
 
-	private handleDragOver(e: any, targetId: string) {
+	private handleDragOver(e: DragEvent, targetId: string) {
 		if (this.dragOverTargetIds === null) {
 			this.dragOverTargetIds = []
 		}
 		this.dragOverTargetIds.unshift(targetId)
 	}
 
-	private handleTopDragOver = (e: any) => {
+	private handleTopDragOver = (e: DragEvent) => {
 		const { dragOverTargetIds } = this
 		this.dragOverTargetIds = []
 
@@ -521,7 +548,9 @@ export default class HTML5Backend implements Backend {
 			// This is probably a native item type we don't understand.
 			// Prevent default "drop and blow away the whole document" action.
 			e.preventDefault()
-			e.dataTransfer.dropEffect = 'none'
+			if (e.dataTransfer) {
+				e.dataTransfer.dropEffect = 'none'
+			}
 			return
 		}
 
@@ -538,18 +567,22 @@ export default class HTML5Backend implements Backend {
 		if (canDrop) {
 			// Show user-specified drop effect.
 			e.preventDefault()
-			e.dataTransfer.dropEffect = this.getCurrentDropEffect()
+			if (e.dataTransfer) {
+				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
+			}
 		} else if (this.isDraggingNativeItem()) {
 			// Don't show a nice cursor but still prevent default
 			// "drop and blow away the whole document" action.
 			e.preventDefault()
 		} else {
 			e.preventDefault()
-			e.dataTransfer.dropEffect = 'none'
+			if (e.dataTransfer) {
+				e.dataTransfer.dropEffect = 'none'
+			}
 		}
 	}
 
-	private handleTopDragLeaveCapture = (e: any) => {
+	private handleTopDragLeaveCapture = (e: DragEvent) => {
 		if (this.isDraggingNativeItem()) {
 			e.preventDefault()
 		}
@@ -564,22 +597,22 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleTopDropCapture = (e: any) => {
+	private handleTopDropCapture = (e: DragEvent) => {
 		this.dropTargetIds = []
 		e.preventDefault()
 
 		if (this.isDraggingNativeItem()) {
-			this.currentNativeSource.mutateItemByReadingDataTransfer(e.dataTransfer)
+			this.currentNativeSource!.mutateItemByReadingDataTransfer(e.dataTransfer)
 		}
 
 		this.enterLeaveCounter.reset()
 	}
 
-	private handleDrop(e: any, targetId: string) {
+	private handleDrop(e: DragEvent, targetId: string) {
 		this.dropTargetIds.unshift(targetId)
 	}
 
-	private handleTopDrop = (e: any) => {
+	private handleTopDrop = (e: DragEvent) => {
 		const { dropTargetIds } = this
 		this.dropTargetIds = []
 
@@ -595,8 +628,8 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleSelectStart = (e: any) => {
-		const { target } = e
+	private handleSelectStart = (e: DragEvent) => {
+		const target = e.target as HTMLElement & { dragDrop: () => void }
 
 		// Only IE requires us to explicitly say
 		// we want drag drop operation to start
