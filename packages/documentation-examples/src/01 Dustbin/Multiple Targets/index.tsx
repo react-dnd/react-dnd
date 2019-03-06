@@ -3,7 +3,7 @@ import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
-const update = require('immutability-helper')
+import update from 'immutability-helper'
 
 export interface ContainerState {
 	droppedBoxNames: string[]
@@ -75,17 +75,18 @@ export default class Container extends React.Component<{}, ContainerState> {
 
 	private handleDrop(index: number, item: { name: string }) {
 		const { name } = item
-		const droppedBoxNames = name ? { $push: [name] } : {}
+		const droppedBoxNames = name ? { $push: [name] } : { $push: [] }
+		const dustbins = {
+			[index]: {
+				lastDroppedItem: {
+					$set: item,
+				},
+			},
+		}
 
 		this.setState(
 			update(this.state, {
-				dustbins: {
-					[index]: {
-						lastDroppedItem: {
-							$set: item,
-						},
-					},
-				},
+				dustbins,
 				droppedBoxNames,
 			}),
 		)

@@ -14,6 +14,23 @@ import {
 } from './interfaces'
 import { State } from './reducers'
 
+function makeStoreInstance(debugMode: boolean) {
+	// TODO: if we ever make a react-native version of this,
+	// we'll need to consider how to pull off dev-tooling
+	const reduxDevTools =
+		typeof window !== 'undefined' &&
+		(window as any).__REDUX_DEVTOOLS_EXTENSION__
+	return createStore(
+		reducer,
+		debugMode &&
+			reduxDevTools &&
+			reduxDevTools({
+				name: 'dnd-core',
+				instanceId: 'dnd-core',
+			}),
+	)
+}
+
 export default class DragDropManagerImpl<Context>
 	implements DragDropManager<Context> {
 	private store: Store<State>
@@ -24,8 +41,9 @@ export default class DragDropManagerImpl<Context>
 	constructor(
 		createBackend: BackendFactory,
 		private context: Context = {} as Context,
+		debugMode = false,
 	) {
-		const store = createStore(reducer)
+		const store = makeStoreInstance(debugMode)
 		this.store = store
 		this.monitor = new DragDropMonitorImpl(
 			store,
@@ -58,7 +76,7 @@ export default class DragDropManagerImpl<Context>
 
 		function bindActionCreator(actionCreator: ActionCreator<any>) {
 			return (...args: any[]) => {
-				const action = actionCreator.apply(manager, args)
+				const action = actionCreator.apply(manager, args as any)
 				if (typeof action !== 'undefined') {
 					dispatch(action)
 				}

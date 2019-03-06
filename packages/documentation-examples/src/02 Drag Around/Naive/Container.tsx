@@ -7,7 +7,7 @@ import {
 } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
-const update = require('immutability-helper')
+import update from 'immutability-helper'
 
 const styles: React.CSSProperties = {
 	width: 300,

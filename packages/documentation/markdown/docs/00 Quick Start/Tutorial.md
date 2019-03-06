@@ -226,7 +226,7 @@ function renderSquare(i, [knightX, knightY]) {
 export default function Board({knightPosition}) {
   const squares = [];
   for (let i = 0; i < 64; i++) {
-    squares.push(this.renderSquare(i, knightPosition));
+    squares.push(renderSquare(i, knightPosition));
   }
 
   return (
@@ -349,16 +349,16 @@ import { moveKnight } from './Game';
 
 /* ... */
 
-renderSquare(i, knightPosition) {
+function renderSquare(i, knightPosition) {
   /* ... */
   return (
-    <div onClick={() => this.handleSquareClick(x, y)}>
+    <div onClick={() => handleSquareClick(x, y)}>
       {/* ... */}
     </div>
   );
 }
 
-handleSquareClick(toX, toY) {
+function handleSquareClick(toX, toY) {
   moveKnight(toX, toY);
 }
 ```
@@ -390,7 +390,7 @@ import { canMoveKnight, moveKnight } from './Game';
 
 /* ... */
 
-handleSquareClick(toX, toY) {
+function handleSquareClick(toX, toY) {
   if (canMoveKnight(toX, toY)) {
     moveKnight(toX, toY);
   }
@@ -417,20 +417,18 @@ In the future, you might want to explore alternative third-party backends, such 
 
 The first thing we need to set up in our app is the [`DragDropContext`](/docs/api/drag-drop-context). We need it to specify that we're going to use the [`HTML5` backend](/docs/backends/html5) in our app.
 
-Because the `Board` is the top-level component in our app, I'm going to supply a  [`DragDropContextProvider`](/docs/api/drag-drop-context-provider) for its children:
+Because the `Board` is the top-level component in our app, I'm going to wrap it with `DragDropContext` higher-order component providing `HTML5Backend` as a backend. Other approach would be to supply [`DragDropContextProvider`](/docs/api/drag-drop-context-provider) component for `Board` children.
 
 ```js
 import React from 'react';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-export default function Board() {
-  return (
-    <DragDropContextProvider backend={HTML5Backend}>
-    {/* ... */}
-    </DragDropContextProvider>
-  )
+function Board() {
+  /* ... */
 }
+
+export default DragDropContext(HTML5Backend)(Board)
 ```
 
 Next, I'm going to create the constants for the draggable item types. We're only going to have a single item type in our game, a `KNIGHT`. I'm creating a `Constants` module that exports it:
@@ -531,7 +529,10 @@ export default function BoardSquare({x, y, children}) {
 I also changed the `Board` to use it:
 
 ```js
-renderSquare(i, knightPosition) {
+/* ... */
+import BoardSquare from './BoardSquare';
+
+function renderSquare(i, knightPosition) {
   const x = i % 8;
   const y = Math.floor(i / 8);
   return (
@@ -545,7 +546,7 @@ renderSquare(i, knightPosition) {
   );
 }
 
-renderPiece(x, y, [knightX, knightY]) {
+function renderPiece(x, y, [knightX, knightY]) {
     if (x === knightX && y === knightY) {
     return <Knight />;
   }
@@ -597,7 +598,7 @@ function collect(connect, monitor) {
   };
 }
 
-function BoardSquare({ x, y, connectDropTarget, isOver, cdhildren }) {
+function BoardSquare({ x, y, connectDropTarget, isOver, children }) {
   const black = (x + y) % 2 === 1;
 
   return connectDropTarget(
@@ -667,23 +668,23 @@ function collect(connect, monitor) {
   };
 }
 
+function renderOverlay(color) {
+  return (
+    <div style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      height: '100%',
+      width: '100%',
+      zIndex: 1,
+      opacity: 0.5,
+      backgroundColor: color,
+    }} />
+  );
+}
+
 function BoardSquare({ x, y, connectDropTarget, isOver, canDrop, children }) {
   const black = (x + y) % 2 === 1;
-
-  function renderOverlay(color) {
-    return (
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        height: '100%',
-        width: '100%',
-        zIndex: 1,
-        opacity: 0.5,
-        backgroundColor: color,
-      }} />
-    );
-  }
 
   return connectDropTarget(
     <div style={{
@@ -694,9 +695,9 @@ function BoardSquare({ x, y, connectDropTarget, isOver, canDrop, children }) {
       <Square black={black}>
         {children}
       </Square>
-      {isOver && !canDrop && this.renderOverlay('red')}
-      {!isOver && canDrop && this.renderOverlay('yellow')}
-      {isOver && canDrop && this.renderOverlay('green')}
+      {isOver && !canDrop && renderOverlay('red')}
+      {!isOver && canDrop && renderOverlay('yellow')}
+      {isOver && canDrop && renderOverlay('green')}
     </div>
   );
 }

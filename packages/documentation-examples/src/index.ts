@@ -1,3 +1,4 @@
+import * as React from 'react'
 import chessboard from './00 Chessboard'
 import dustbinCopyOrMove from './01 Dustbin/Copy or Move'
 import dustbinMultipleTargets from './01 Dustbin/Multiple Targets'
@@ -16,7 +17,10 @@ import customizeDropEffects from './05 Customize/Drop Effects'
 import customizeHandlesAndPreviews from './05 Customize/Handles and Previews'
 import otherNativeFiles from './06 Other/Native Files'
 
-export const componentIndex = {
+export * from './isDebugMode'
+export const componentIndex: {
+	[key: string]: React.ComponentClass | React.FunctionComponent
+} = {
 	chessboard,
 	'dustbin-single-target': dustbinSingleTarget,
 	'dustbin-multiple-targets': dustbinMultipleTargets,

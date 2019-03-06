@@ -1,9 +1,5 @@
-import {
-	DragDropManager,
-	DragDropMonitor,
-	Unsubscribe,
-	Listener,
-} from 'dnd-core'
+declare var require: any
+import { DragDropManager, DragDropMonitor, Unsubscribe, Listener } from 'dnd-core'
 import { DropTargetMonitor } from './interfaces'
 const invariant = require('invariant')
 

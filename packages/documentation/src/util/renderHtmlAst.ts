@@ -1,3 +1,4 @@
+declare var require: any
 import { createElement } from 'react'
 import { componentIndex } from 'react-dnd-documentation-examples'
 import processImages from './processImagesInMarkdownAst'

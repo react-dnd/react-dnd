@@ -130,11 +130,6 @@ export interface SentinelAction {
 
 export type ActionCreator<Payload> = (args: any[]) => Action<Payload>
 
-export interface InitCoordsOptions {
-	clientOffset?: XYCoord
-	getSourceClientOffset?: (sourceId: Identifier) => XYCoord
-}
-
 export interface BeginDragOptions {
 	publishSource?: boolean
 	clientOffset?: XYCoord
@@ -145,6 +140,7 @@ export interface InitCoordsPayload {
 	clientOffset: XYCoord | null
 	sourceClientOffset: XYCoord | null
 }
+
 export interface BeginDragPayload {
 	itemType: Identifier
 	item: any
@@ -176,7 +172,6 @@ export interface SourceIdPayload {
 }
 
 export interface DragDropActions {
-	initCoords(sourceIds: string[], options?: any): Action<InitCoordsPayload>
 	beginDrag(sourceIds: string[], options?: any): Action<BeginDragPayload>
 	publishDragSource(): SentinelAction
 	hover(targetIds: string[], options?: any): Action<HoverPayload>

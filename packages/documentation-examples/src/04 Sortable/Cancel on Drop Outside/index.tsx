@@ -2,7 +2,7 @@ import * as React from 'react'
 import { DropTarget, ConnectDropTarget } from 'react-dnd'
 import Card from './Card'
 import ItemTypes from './ItemTypes'
-const update = require('immutability-helper')
+import update from 'immutability-helper'
 
 const style = {
 	width: 400,

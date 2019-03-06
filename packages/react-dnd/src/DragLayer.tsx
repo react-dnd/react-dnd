@@ -1,3 +1,4 @@
+declare var require: any
 import * as React from 'react'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
@@ -36,10 +37,7 @@ export default function DragLayer<Props, CollectedProps = {}>(
 
 		class DragLayerContainer extends React.Component<Props> {
 			public static displayName = `DragLayer(${displayName})`
-
-			public get DecoratedComponent() {
-				return DecoratedComponent
-			}
+			public static DecoratedComponent = DecoratedComponent
 
 			private manager: DragDropManager<any> | undefined
 			private isCurrentlyMounted: boolean = false

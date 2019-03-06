@@ -1,3 +1,6 @@
+declare var require: any
+declare var process: any
+
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndComponentClass, DndComponent } from './interfaces'
@@ -65,7 +68,6 @@ export default function decorateHandler<Props, ItemIdType>({
 		private handlerConnector: HandlerConnector | undefined
 		private handler: Handler | undefined
 		private disposable: any
-		private isCurrentlyMounted: boolean = false
 		private currentType: any
 
 		constructor(props: Props) {
@@ -94,7 +96,6 @@ export default function decorateHandler<Props, ItemIdType>({
 		}
 
 		public componentDidMount() {
-			this.isCurrentlyMounted = true
 			this.disposable = new SerialDisposable()
 			this.currentType = undefined
 			this.receiveProps(this.props)
@@ -110,7 +111,6 @@ export default function decorateHandler<Props, ItemIdType>({
 
 		public componentWillUnmount() {
 			this.dispose()
-			this.isCurrentlyMounted = false
 		}
 
 		public receiveProps(props: any) {
@@ -157,10 +157,6 @@ export default function decorateHandler<Props, ItemIdType>({
 		}
 
 		public handleChange = () => {
-			if (!this.isCurrentlyMounted) {
-				return
-			}
-
 			const nextState = this.getCurrentState()
 			if (!shallowEqual(nextState, this.state)) {
 				this.setState(nextState)
@@ -207,15 +203,10 @@ export default function decorateHandler<Props, ItemIdType>({
 						}
 						this.receiveDragDropManager(dragDropManager)
 
-						// Let componentDidMount fire to initialize the collected state
-						if (!this.isCurrentlyMounted) {
-							return null
-						}
-
 						return (
 							<Decorated
 								{...this.props}
-								{...this.state}
+								{...this.getCurrentState()}
 								ref={
 									this.handler && isClassComponent(Decorated)
 										? this.handler.ref
