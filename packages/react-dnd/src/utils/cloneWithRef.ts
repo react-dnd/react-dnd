@@ -2,7 +2,7 @@ declare var require: any
 import { cloneElement } from 'react'
 const invariant = require('invariant')
 
-const setRef = (ref: any, node: any) => {
+function setRef(ref: any, node: any) {
 	if (typeof ref === 'function') {
 		ref(node)
 	} else {
