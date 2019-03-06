@@ -32,8 +32,13 @@ const Box: React.SFC<BoxProps & BoxCollectedProps> = ({
 	name,
 }) => {
 	const opacity = isDragging ? 0.4 : 1
+	const ref = React.createRef()
 	return connectDragSource
-		? connectDragSource(<div style={{ ...style, opacity }}>{name}</div>)
+		? connectDragSource(
+				<div ref={ref as any} style={{ ...style, opacity }}>
+					{name}
+				</div>,
+		  )
 		: null
 }
 
