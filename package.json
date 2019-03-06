@@ -118,9 +118,7 @@
 			"packages/*"
 		],
 		"nohoist": [
-			"**/@types/*",
-			"**/hoist-non-react-statics",
-			"**/redux"
+			"**"
 		]
 	}
 }
