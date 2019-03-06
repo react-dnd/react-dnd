@@ -21,16 +21,16 @@ function useDropTargetHandler(targetSpec: DropTargetHookSpec) {
 				const { canDrop } = targetSpecRef.current
 				return canDrop ? canDrop() : true
 			},
-			hover() {
+			hover(component: any) {
 				const { hover } = targetSpecRef.current
 				if (hover) {
-					hover()
+					hover(component)
 				}
 			},
-			drop() {
+			drop(component: any) {
 				const { drop } = targetSpecRef.current
 				if (drop) {
-					drop()
+					drop(component)
 				}
 			},
 		}),
@@ -47,7 +47,7 @@ function useDropTargetHandler(targetSpec: DropTargetHookSpec) {
  * @param targetSpec The drop target specification
  */
 export function useDropTarget(
-	ref: Ref,
+	ref: Ref<any>,
 	type: TargetType,
 	targetSpec: DropTargetHookSpec & {
 		dropTargetOptions?: {}
@@ -59,7 +59,6 @@ export function useDropTarget(
 		() => createTargetMonitor(dragDropManager),
 		[dragDropManager],
 	) as DropTargetMonitor & HandlerManager
-
 	const handler = useDropTargetHandler(targetSpec)
 
 	useMonitorSubscription(

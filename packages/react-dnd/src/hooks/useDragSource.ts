@@ -33,16 +33,16 @@ function useDragSourceHandler<DragObject>(
 					? isDragging()
 					: sourceId === globalMonitor.getSourceId()
 			},
-			beginDrag() {
+			beginDrag(component: any) {
 				const { beginDrag } = sourceSpecRef.current
 				if (beginDrag) {
-					beginDrag()
+					beginDrag(component)
 				}
 			},
-			endDrag() {
+			endDrag(component: any) {
 				const { endDrag } = sourceSpecRef.current
 				if (endDrag) {
-					endDrag()
+					endDrag(component)
 				}
 			},
 		}),
@@ -59,11 +59,11 @@ function useDragSourceHandler<DragObject>(
  * @param sourceSpec The drag source specification
  */
 export function useDragSource<DragObject = {}>(
-	ref: Ref,
+	ref: Ref<any>,
 	type: SourceType,
 	sourceSpec: DragSourceHookSpec<DragObject> & {
 		dragSourceOptions?: {}
-		dragPreview?: Ref | Element
+		dragPreview?: Ref<any> | Element
 		dragPreviewOptions?: DragPreviewOptions
 	},
 ): DragSourceMonitor & HandlerManager {
@@ -103,7 +103,7 @@ export function useDragSource<DragObject = {}>(
 
 		// Accept ref or dom node
 		const dragPreviewNode = isRef(sourceSpec.dragPreview)
-			? (sourceSpec.dragPreview as Ref).current
+			? (sourceSpec.dragPreview as Ref<any>).current
 			: sourceSpec.dragPreview
 		const dragPreviewOptions = sourceSpec.dragPreviewOptions
 		const disconnectDragPreview = backend.connectDragPreview(
