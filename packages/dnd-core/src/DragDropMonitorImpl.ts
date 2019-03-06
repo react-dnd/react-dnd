@@ -81,7 +81,11 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return source.canDrag(this, sourceId)
 	}
 
-	public canDropOnTarget(targetId: string): boolean {
+	public canDropOnTarget(targetId: string | undefined): boolean {
+		// undefined on initial render
+		if (!targetId) {
+			return false
+		}
 		const target = this.registry.getTarget(targetId)
 		invariant(target, 'Expected to find a valid target.')
 
@@ -100,7 +104,11 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return Boolean(this.getItemType())
 	}
 
-	public isDraggingSource(sourceId: string): boolean {
+	public isDraggingSource(sourceId: string | undefined): boolean {
+		// undefined on initial render
+		if (!sourceId) {
+			return false
+		}
 		const source = this.registry.getSource(sourceId, true)
 		invariant(source, 'Expected to find a valid source.')
 
