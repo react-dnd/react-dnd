@@ -76,7 +76,7 @@ export default class DragDropManagerImpl<Context>
 
 		function bindActionCreator(actionCreator: ActionCreator<any>) {
 			return (...args: any[]) => {
-				const action = actionCreator.apply(manager, args)
+				const action = actionCreator.apply(manager, args as any)
 				if (typeof action !== 'undefined') {
 					dispatch(action)
 				}

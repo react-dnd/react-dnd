@@ -1,4 +1,4 @@
-const { graphql } = require('gatsby')
+import { graphql } from 'gatsby'
 import * as React from 'react'
 import Doc from '../components/doc'
 import Layout from '../components/layout'

@@ -1,4 +1,5 @@
 declare var require: any
+declare var setImmediate: any
 
 import createTestBackend, { TestBackend } from 'react-dnd-test-backend'
 import * as Types from './types'
