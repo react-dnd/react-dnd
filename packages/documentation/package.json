@@ -35,7 +35,6 @@
 		"react-dnd-html5-backend": "^7.0.2",
 		"react-dnd-test-backend": "^7.0.2",
 		"react-dom": "^16.8.4",
-		"react-frame-component": "^4.1.0",
 		"react-helmet": "^5.2.0",
 		"react-typography": "^0.16.18",
 		"rehype-react": "^3.1.0",
