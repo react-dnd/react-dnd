@@ -1,19 +1,21 @@
-import * as React from 'react';
-import Dustbin from './Dustbin';
-import Box from './Box';
+import * as React from 'react'
+import Dustbin from './Dustbin'
+import Box from './Box'
 export default class Container extends React.Component {
-    render() {
-        return (<div>
+	render() {
+		return (
+			<div>
 				<div style={{ overflow: 'hidden', clear: 'both' }}>
-					<Dustbin allowedDropEffect="any"/>
-					<Dustbin allowedDropEffect="copy"/>
-					<Dustbin allowedDropEffect="move"/>
+					<Dustbin allowedDropEffect="any" />
+					<Dustbin allowedDropEffect="copy" />
+					<Dustbin allowedDropEffect="move" />
 				</div>
 				<div style={{ overflow: 'hidden', clear: 'both' }}>
-					<Box name="Glass"/>
-					<Box name="Banana"/>
-					<Box name="Paper"/>
+					<Box name="Glass" />
+					<Box name="Banana" />
+					<Box name="Paper" />
 				</div>
-			</div>);
-    }
+			</div>
+		)
+	}
 }

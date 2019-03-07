@@ -1,13 +1,14 @@
-import * as React from 'react';
-import Dustbin from './Dustbin';
-import Box from './Box';
+import * as React from 'react'
+import Dustbin from './Dustbin'
+import Box from './Box'
 export default class Container extends React.Component {
-    render() {
-        return (<div>
+	render() {
+		return (
+			<div>
 				<div style={{ overflow: 'hidden', clear: 'both', margin: '-1rem' }}>
 					<Dustbin greedy={true}>
 						<Dustbin greedy={true}>
-							<Dustbin greedy={true}/>
+							<Dustbin greedy={true} />
 						</Dustbin>
 					</Dustbin>
 					<Dustbin>
@@ -20,6 +21,7 @@ export default class Container extends React.Component {
 				<div style={{ overflow: 'hidden', clear: 'both', marginTop: '1.5rem' }}>
 					<Box />
 				</div>
-			</div>);
-    }
+			</div>
+		)
+	}
 }

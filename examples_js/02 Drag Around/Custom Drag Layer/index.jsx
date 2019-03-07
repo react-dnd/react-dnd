@@ -1,40 +1,52 @@
-import * as React from 'react';
-import Container from './Container';
-import CustomDragLayer from './CustomDragLayer';
+import * as React from 'react'
+import Container from './Container'
+import CustomDragLayer from './CustomDragLayer'
 export default class DragAroundCustomDragLayer extends React.Component {
-    constructor() {
-        super(...arguments);
-        this.state = {
-            snapToGridAfterDrop: false,
-            snapToGridWhileDragging: false,
-        };
-        this.handleSnapToGridAfterDropChange = () => {
-            this.setState({
-                snapToGridAfterDrop: !this.state.snapToGridAfterDrop,
-            });
-        };
-        this.handleSnapToGridWhileDraggingChange = () => {
-            this.setState({
-                snapToGridWhileDragging: !this.state.snapToGridWhileDragging,
-            });
-        };
-    }
-    render() {
-        const { snapToGridAfterDrop, snapToGridWhileDragging } = this.state;
-        return (<div>
-				<Container snapToGrid={snapToGridAfterDrop}/>
-				<CustomDragLayer snapToGrid={snapToGridWhileDragging}/>
+	constructor() {
+		super(...arguments)
+		this.state = {
+			snapToGridAfterDrop: false,
+			snapToGridWhileDragging: false,
+		}
+		this.handleSnapToGridAfterDropChange = () => {
+			this.setState({
+				snapToGridAfterDrop: !this.state.snapToGridAfterDrop,
+			})
+		}
+		this.handleSnapToGridWhileDraggingChange = () => {
+			this.setState({
+				snapToGridWhileDragging: !this.state.snapToGridWhileDragging,
+			})
+		}
+	}
+	render() {
+		const { snapToGridAfterDrop, snapToGridWhileDragging } = this.state
+		return (
+			<div>
+				<Container snapToGrid={snapToGridAfterDrop} />
+				<CustomDragLayer snapToGrid={snapToGridWhileDragging} />
 				<p>
 					<label htmlFor="snapToGridWhileDragging">
-						<input id="snapToGridWhileDragging" type="checkbox" checked={snapToGridWhileDragging} onChange={this.handleSnapToGridWhileDraggingChange}/>
+						<input
+							id="snapToGridWhileDragging"
+							type="checkbox"
+							checked={snapToGridWhileDragging}
+							onChange={this.handleSnapToGridWhileDraggingChange}
+						/>
 						<small>Snap to grid while dragging</small>
 					</label>
 					<br />
 					<label htmlFor="snapToGridAfterDrop">
-						<input id="snapToGridAfterDrop" type="checkbox" checked={snapToGridAfterDrop} onChange={this.handleSnapToGridAfterDropChange}/>
+						<input
+							id="snapToGridAfterDrop"
+							type="checkbox"
+							checked={snapToGridAfterDrop}
+							onChange={this.handleSnapToGridAfterDropChange}
+						/>
 						<small>Snap to grid after drop</small>
 					</label>
 				</p>
-			</div>);
-    }
+			</div>
+		)
+	}
 }
