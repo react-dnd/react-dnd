@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DragSource } from 'react-dnd'
 const style = {
   border: '1px dashed gray',

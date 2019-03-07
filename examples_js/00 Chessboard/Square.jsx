@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 const squareStyle = {
   width: '100%',
   height: '100%',

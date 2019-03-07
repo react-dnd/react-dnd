@@ -1,5 +1,5 @@
 // tslint:disable max-classes-per-file
-import * as React from 'react'
+import React from 'react'
 import { DropTarget } from 'react-dnd'
 import Colors from './Colors'
 const style = {

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Card from './Card'
 import update from 'immutability-helper'
 const style = {

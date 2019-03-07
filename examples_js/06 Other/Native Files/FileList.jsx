@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 export default class FileList extends React.Component {
   render() {
     const { files } = this.props

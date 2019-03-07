@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import TargetBox from './TargetBox'
 import FileList from './FileList'

@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React, { useRef } from 'react'
 import { useDropTarget } from 'react-dnd'
 import { Square } from './Square'
 import { canMoveKnight, moveKnight } from './Game'
 import ItemTypes from './ItemTypes'
 import Overlay from './Overlay'
 export const BoardSquare = props => {
-  const ref = React.useRef(null)
+  const ref = useRef(null)
   const { isOver, canDrop } = useDropTarget(ref, ItemTypes.KNIGHT, {
     canDrop: () => canMoveKnight(props.x, props.y),
     drop: () => moveKnight(props.x, props.y),

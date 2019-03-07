@@ -1,21 +1,20 @@
-// tslint:disable member-ordering
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import Board from './Board'
 import { observe } from './Game'
+const containerStyle = {
+  width: 500,
+  height: 500,
+  border: '1px solid gray',
+}
 /**
- * Unlike the tutorial, export a component so it can be used on the website.
+ * The Chessboard Tutorial Application
  */
 const ChessboardTutorialApp = () => {
-  const [knightPos, setKnightPos] = React.useState([1, 7])
-  React.useEffect(() => observe(newPos => setKnightPos(newPos)))
+  const [knightPos, setKnightPos] = useState([1, 7])
+  // the observe function will return an unsubscribe callback
+  useEffect(() => observe(newPos => setKnightPos(newPos)))
   return (
-    <div
-      style={{
-        width: 500,
-        height: 500,
-        border: '1px solid gray',
-      }}
-    >
+    <div style={containerStyle}>
       <Board knightPosition={knightPos} />
     </div>
   )

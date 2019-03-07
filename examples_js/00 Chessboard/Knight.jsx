@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useRef, useMemo } from 'react'
 import { useDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
@@ -16,8 +16,8 @@ function createKnightImage() {
   return img
 }
 export const Knight = () => {
-  const ref = React.useRef(null)
-  const dragPreview = React.useMemo(createKnightImage, [])
+  const ref = useRef(null)
+  const dragPreview = useMemo(createKnightImage, [])
   const { isDragging } = useDragSource(ref, ItemTypes.KNIGHT, {
     beginDrag: () => ({}),
     dragPreview,

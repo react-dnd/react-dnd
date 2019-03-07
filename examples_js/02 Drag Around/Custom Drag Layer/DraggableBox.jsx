@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DragSource } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import ItemTypes from './ItemTypes'

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import SourceBox from './SourceBox'
 import TargetBox from './TargetBox'
 export default class Container extends React.Component {

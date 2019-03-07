@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
