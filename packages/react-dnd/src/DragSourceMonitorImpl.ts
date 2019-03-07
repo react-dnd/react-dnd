@@ -8,13 +8,12 @@ import {
 	Identifier,
 } from 'dnd-core'
 import { DragSourceMonitor } from './interfaces'
-import { HandlerManager } from './hooks/util'
 const invariant = require('invariant')
 
 let isCallingCanDrag = false
 let isCallingIsDragging = false
 
-class SourceMonitor implements DragSourceMonitor, HandlerManager {
+export default class DragSourceMonitorImpl implements DragSourceMonitor {
 	private internalMonitor: DragDropMonitor
 	private sourceId: Identifier | null = null
 
@@ -137,10 +136,4 @@ class SourceMonitor implements DragSourceMonitor, HandlerManager {
 	public getDifferenceFromInitialOffset() {
 		return this.internalMonitor.getDifferenceFromInitialOffset()
 	}
-}
-
-export default function createSourceMonitor<Context>(
-	manager: DragDropManager<Context>,
-): DragSourceMonitor {
-	return new SourceMonitor(manager) as DragSourceMonitor
 }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useCollector } from './useCollector'
-import { HandlerManager } from './util'
+import { HandlerManager } from '../interfaces'
 import { DragDropMonitor } from 'dnd-core'
 
 export function useMonitorOutput<
@@ -16,10 +16,9 @@ export function useMonitorOutput<
 		if (handlerId == null) {
 			return undefined
 		}
-		return (monitor as DragDropMonitor).subscribeToStateChange(
-			updateCollected,
-			{ handlerIds: [handlerId] },
-		)
+		return monitor.subscribeToStateChange(updateCollected, {
+			handlerIds: [handlerId],
+		})
 	})
 
 	return collected

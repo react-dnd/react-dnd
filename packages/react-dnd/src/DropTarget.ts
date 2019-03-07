@@ -1,6 +1,6 @@
 declare var require: any
 import * as React from 'react'
-import { TargetType } from 'dnd-core'
+import { TargetType, DragDropManager } from 'dnd-core'
 import {
 	DropTargetSpec,
 	DndOptions,
@@ -11,9 +11,9 @@ import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerTarget from './registerTarget'
 import createTargetFactory from './createTargetFactory'
-import createTargetMonitor from './createTargetMonitor'
 import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
+import DropTargetMonitorImpl from './DropTargetMonitorImpl'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
@@ -77,7 +77,8 @@ export default function DropTarget<Props, CollectedProps = {}>(
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget,
 			registerHandler: registerTarget,
-			createMonitor: createTargetMonitor,
+			createMonitor: (manager: DragDropManager<any>) =>
+				new DropTargetMonitorImpl(manager),
 			createConnector: createTargetConnector,
 			DecoratedComponent,
 			getType,
