@@ -13,19 +13,19 @@ const invariant = require('invariant')
 let isCallingCanDrag = false
 let isCallingIsDragging = false
 
-class SourceMonitor implements DragSourceMonitor {
+export default class DragSourceMonitorImpl implements DragSourceMonitor {
 	private internalMonitor: DragDropMonitor
-	private sourceId: Identifier | undefined
+	private sourceId: Identifier | null = null
 
 	constructor(manager: DragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	public receiveHandlerId(sourceId: Identifier) {
+	public receiveHandlerId(sourceId: Identifier | null) {
 		this.sourceId = sourceId
 	}
 
-	public getHandlerId(): Identifier | undefined {
+	public getHandlerId(): Identifier | null {
 		return this.sourceId
 	}
 
@@ -136,10 +136,4 @@ class SourceMonitor implements DragSourceMonitor {
 	public getDifferenceFromInitialOffset() {
 		return this.internalMonitor.getDifferenceFromInitialOffset()
 	}
-}
-
-export default function createSourceMonitor<Context>(
-	manager: DragDropManager<Context>,
-): DragSourceMonitor {
-	return new SourceMonitor(manager) as DragSourceMonitor
 }

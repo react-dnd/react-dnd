@@ -1,17 +1,11 @@
-import { useMemo, useEffect } from 'react'
+import { useEffect } from 'react'
 import { SourceType } from 'dnd-core'
-import registerSource from '../registerSource'
-import createSourceMonitor from '../createSourceMonitor'
-import {
-	DragSourceMonitor,
-	DragPreviewOptions,
-	DragSourceHookSpec,
-} from '../interfaces'
+import { DragPreviewOptions, DragSourceHookSpec } from '../interfaces'
 import { useDragSourceHandler } from './useDragSourceHandler'
 import { useDragDropManager } from './useDragDropManager'
-import { useMonitorSubscription } from './useMonitorSubscription'
-import { Ref, HandlerManager, isRef } from './util'
+import { Ref, isRef } from './util'
 import { useMonitorOutput } from './useMonitorOutput'
+import { useDragSourceMonitor } from './useDragSourceMonitor'
 
 /**
  * useDragSource hook (This API is experimental and subject to breaking changes in non-major versions)
@@ -28,23 +22,15 @@ export function useDragSource<DragObject, CustomProps>(
 		dragPreviewOptions?: DragPreviewOptions
 	},
 ): CustomProps {
-	const dragDropManager = useDragDropManager()
-	const backend = dragDropManager.getBackend()
-	const sourceMonitor = useMemo(() => createSourceMonitor(dragDropManager), [
-		dragDropManager,
-	]) as DragSourceMonitor & HandlerManager
-
+	const manager = useDragDropManager()
+	const backend = manager.getBackend()
 	const handler = useDragSourceHandler<DragObject, CustomProps>(sourceSpec)
+	const sourceMonitor = useDragSourceMonitor(type, handler, manager)
 
-	useMonitorSubscription(
-		registerSource,
-		type,
-		handler,
-		dragDropManager,
-		sourceMonitor,
-	)
-
-	useEffect(function connectDragSourceToBackend() {
+	/*
+	 * Connect the Drag Source Element to the Backend
+	 */
+	useEffect(function connectDragSource() {
 		const dragSourceNode = ref.current
 		const dragSourceOptions = sourceSpec.dragSourceOptions
 		return backend.connectDragSource(
@@ -54,17 +40,17 @@ export function useDragSource<DragObject, CustomProps>(
 		)
 	}, [])
 
-	useEffect(function connectDragPreviewToBackend() {
+	/*
+	 * Connect the Drag Previem Element to the Backend
+	 */
+	useEffect(function connectDragPreview() {
 		if (sourceSpec.dragPreview == null) {
 			return undefined
 		}
-
-		// Accept ref or dom node
 		const dragPreviewNode = isRef(sourceSpec.dragPreview)
 			? (sourceSpec.dragPreview as Ref<any>).current
 			: sourceSpec.dragPreview
-
-		const dragPreviewOptions = sourceSpec.dragPreviewOptions
+		const { dragPreviewOptions } = sourceSpec
 		return backend.connectDragPreview(
 			sourceMonitor.getHandlerId(),
 			dragPreviewNode,

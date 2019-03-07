@@ -1,26 +1,34 @@
 import { useMemo, useEffect } from 'react'
-import { DragDropManager, SourceType, TargetType } from 'dnd-core'
+import {
+	DragDropManager,
+	SourceType,
+	TargetType,
+	DragSource,
+	DropTarget,
+	Identifier,
+} from 'dnd-core'
 import { DragSourceMonitor, DropTargetMonitor } from '../interfaces'
 import { HandlerManager } from './util'
 
 export function useMonitorSubscription<
+	Context,
 	Type = SourceType | TargetType,
-	Handler = any,
+	Handler = DragSource | DropTarget,
 	Monitor = DragSourceMonitor | DropTargetMonitor,
-	Manager = DragDropManager<any>
+	Manager = DragDropManager<Context>
 >(
 	register: (
-		type: any,
-		handler: any,
-		dragDropManager: any,
-	) => { handlerId: any; unregister: () => void },
+		type: Type,
+		handler: Handler,
+		dragDropManager: Manager,
+	) => { handlerId: Identifier; unregister: () => void },
 	type: Type,
 	handler: Handler,
-	dragDropManager: Manager,
+	manager: Manager,
 	monitor: Monitor & HandlerManager,
 ) {
 	const unregisterHandler = useMemo(() => {
-		const { handlerId, unregister } = register(type, handler, dragDropManager)
+		const { handlerId, unregister } = register(type, handler, manager)
 		monitor.receiveHandlerId(handlerId)
 		return unregister
 	}, [])

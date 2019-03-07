@@ -1,7 +1,13 @@
-import { DragDropManager, DragSource, Unsubscribe, Identifier } from 'dnd-core'
+import {
+	DragDropManager,
+	DragSource,
+	Unsubscribe,
+	Identifier,
+	SourceType,
+} from 'dnd-core'
 
 export default function registerSource<Context>(
-	type: string,
+	type: SourceType,
 	source: DragSource,
 	manager: DragDropManager<Context>,
 ): {
@@ -11,12 +17,8 @@ export default function registerSource<Context>(
 	const registry = manager.getRegistry()
 	const sourceId = registry.addSource(type, source)
 
-	function unregisterSource() {
-		registry.removeSource(sourceId)
-	}
-
 	return {
 		handlerId: sourceId,
-		unregister: unregisterSource,
+		unregister: () => registry.removeSource(sourceId),
 	}
 }

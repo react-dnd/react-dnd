@@ -11,7 +11,6 @@ import { ContextComponent } from './interfaces'
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const isClassComponent = require('recompose/isClassComponent').default
-
 /**
  * The React context type
  */
@@ -55,6 +54,12 @@ export const DragDropContextProvider: React.FC<
 	DragDropContextProviderProps<any>
 > = ({ backend, context, debugMode, children }) => {
 	const contextValue = createChildContext(backend, context, debugMode)
+	React.useEffect(() => {
+		return () =>
+			contextValue.dragDropManager.dispatch({
+				type: 'DragDropContextProvider::Exiting',
+			})
+	})
 	return <Provider value={contextValue}>{children}</Provider>
 }
 

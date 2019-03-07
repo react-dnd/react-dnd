@@ -1,13 +1,11 @@
-import { useMemo, useEffect } from 'react'
+import { useEffect } from 'react'
 import { TargetType } from 'dnd-core'
-import registerTarget from '../registerTarget'
-import createTargetMonitor from '../createTargetMonitor'
-import { DropTargetMonitor, DropTargetHookSpec } from '../interfaces'
+import { DropTargetHookSpec } from '../interfaces'
 import { useDragDropManager } from './useDragDropManager'
-import { useMonitorSubscription } from './useMonitorSubscription'
-import { Ref, HandlerManager } from './util'
+import { Ref } from './util'
 import { useDropTargetHandler } from './useDropTargetHandler'
 import { useMonitorOutput } from './useMonitorOutput'
+import { useDropTargetMonitor } from './useDropTargetMonitor'
 
 /**
  * useDropTarget Hook (This API is experimental and subject to breaking changes in non-breaking versions)
@@ -22,21 +20,14 @@ export function useDropTarget<CustomProps>(
 		dropTargetOptions?: {}
 	},
 ): CustomProps {
-	const dragDropManager = useDragDropManager()
-	const backend = dragDropManager.getBackend()
-	const targetMonitor = useMemo(() => createTargetMonitor(dragDropManager), [
-		dragDropManager,
-	]) as DropTargetMonitor & HandlerManager
+	const manager = useDragDropManager()
+	const backend = manager.getBackend()
 	const handler = useDropTargetHandler<CustomProps>(targetSpec)
+	const targetMonitor = useDropTargetMonitor(type, handler, manager)
 
-	useMonitorSubscription(
-		registerTarget,
-		type,
-		handler,
-		dragDropManager,
-		targetMonitor,
-	)
-
+	/*
+	 * Connect the Drop Target Element to the Backend
+	 */
 	useEffect(function connectDropTarget() {
 		const dropTargetNode = ref.current
 		if (dropTargetNode) {
