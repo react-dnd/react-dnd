@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { DragLayer, XYCoord } from 'react-dnd'
+import { XYCoord, useDragLayer } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'
 import snapToGrid from './snapToGrid'
@@ -14,8 +14,11 @@ const layerStyles: React.CSSProperties = {
 	height: '100%',
 }
 
-function getItemStyles(props: CustomDragLayerProps) {
-	const { initialOffset, currentOffset } = props
+function getItemStyles(
+	initialOffset: XYCoord | null,
+	currentOffset: XYCoord | null,
+	isSnapToGrid: boolean,
+) {
 	if (!initialOffset || !currentOffset) {
 		return {
 			display: 'none',
@@ -24,7 +27,7 @@ function getItemStyles(props: CustomDragLayerProps) {
 
 	let { x, y } = currentOffset
 
-	if (props.snapToGrid) {
+	if (isSnapToGrid) {
 		x -= initialOffset.x
 		y -= initialOffset.y
 		;[x, y] = snapToGrid(x, y)
@@ -40,40 +43,42 @@ function getItemStyles(props: CustomDragLayerProps) {
 }
 
 export interface CustomDragLayerProps {
-	item?: any
-	itemType?: string
-	initialOffset?: XYCoord
-	currentOffset?: XYCoord
-	isDragging?: boolean
 	snapToGrid: boolean
 }
 
 const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
-	const { item, itemType, isDragging } = props
+	const dragLayerProps = useDragLayer(monitor => ({
+		item: monitor.getItem(),
+		itemType: monitor.getItemType(),
+		initialOffset: monitor.getInitialSourceClientOffset(),
+		currentOffset: monitor.getSourceClientOffset(),
+		isDragging: monitor.isDragging(),
+	}))
 
 	function renderItem() {
-		switch (itemType) {
+		switch (dragLayerProps.itemType) {
 			case ItemTypes.BOX:
-				return <BoxDragPreview title={item.title} />
+				return <BoxDragPreview title={dragLayerProps.item.title} />
 			default:
 				return null
 		}
 	}
 
-	if (!isDragging) {
+	if (!dragLayerProps.isDragging) {
 		return null
 	}
 	return (
 		<div style={layerStyles}>
-			<div style={getItemStyles(props)}>{renderItem()}</div>
+			<div
+				style={getItemStyles(
+					dragLayerProps.initialOffset,
+					dragLayerProps.currentOffset,
+					props.snapToGrid,
+				)}
+			>
+				{renderItem()}
+			</div>
 		</div>
 	)
 }
-
-export default DragLayer<CustomDragLayerProps>(monitor => ({
-	item: monitor.getItem(),
-	itemType: monitor.getItemType(),
-	initialOffset: monitor.getInitialSourceClientOffset(),
-	currentOffset: monitor.getSourceClientOffset(),
-	isDragging: monitor.isDragging(),
-}))(CustomDragLayer)
+export default CustomDragLayer

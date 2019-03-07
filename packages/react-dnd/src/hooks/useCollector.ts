@@ -6,23 +6,15 @@ export function useCollector<T, S>(
 	monitor: T,
 	collect: (monitor: T) => S,
 ): [S, () => void] {
-	let isFirstRender = false
-	const [value, setValue] = useState(() => {
-		isFirstRender = true
-		return collect(monitor)
-	})
+	const [collected, setCollected] = useState(() => collect(monitor))
 
-	const updateIfNeeded = () => {
+	const updateCollected = () => {
 		const nextValue = collect(monitor)
 		// Not async-safe, but we need a way to opt-out of state updates
-		if (!shallowEqual(value, nextValue)) {
-			setValue(nextValue)
+		if (!shallowEqual(collected, nextValue)) {
+			setCollected(nextValue)
 		}
 	}
 
-	if (!isFirstRender) {
-		updateIfNeeded()
-	}
-
-	return [value, updateIfNeeded]
+	return [collected, updateCollected]
 }

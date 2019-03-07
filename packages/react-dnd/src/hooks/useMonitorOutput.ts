@@ -5,9 +5,9 @@ import { DragDropMonitor } from 'dnd-core'
 
 export function useMonitorOutput<
 	Monitor extends DragDropMonitor & HandlerManager,
-	Output = {}
->(monitor: Monitor, collect: (monitor: Monitor) => Output): Output {
-	const [value, updateIfNeeded] = useCollector(monitor, collect)
+	Collected
+>(monitor: Monitor, collect: (monitor: Monitor) => Collected): Collected {
+	const [collected, updateCollected] = useCollector(monitor, collect)
 
 	// This runs on every render. There will be ways to optimise this, but for
 	// now, this is the most correct thing to do.
@@ -16,12 +16,11 @@ export function useMonitorOutput<
 		if (handlerId == null) {
 			return undefined
 		}
-		const options = { handlerIds: [handlerId] }
 		return (monitor as DragDropMonitor).subscribeToStateChange(
-			updateIfNeeded,
-			options,
+			updateCollected,
+			{ handlerIds: [handlerId] },
 		)
 	})
 
-	return value
+	return collected
 }

@@ -11,11 +11,9 @@ export interface BoxProps {
 	yellow?: boolean
 }
 
-export default class Box extends React.PureComponent<BoxProps> {
-	public render() {
-		const { title, yellow } = this.props
-		const backgroundColor = yellow ? 'yellow' : 'white'
-
-		return <div style={{ ...styles, backgroundColor }}>{title}</div>
-	}
+const Box: React.FC<BoxProps> = ({ title, yellow }) => {
+	const backgroundColor = yellow ? 'yellow' : 'white'
+	return <div style={{ ...styles, backgroundColor }}>{title}</div>
 }
+
+export default Box

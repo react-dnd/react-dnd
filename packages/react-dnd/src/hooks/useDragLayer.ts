@@ -8,9 +8,9 @@ export function useDragLayer<CollectedProps>(
 ): CollectedProps {
 	const dragDropManager = useDragDropManager()
 	const monitor = dragDropManager.getMonitor()
-	const [value, updateIfNeeded] = useCollector(monitor, collect)
+	const [collected, updateCollected] = useCollector(monitor, collect)
 
-	useEffect(() => monitor.subscribeToOffsetChange(updateIfNeeded))
-	useEffect(() => monitor.subscribeToStateChange(updateIfNeeded))
-	return value
+	useEffect(() => monitor.subscribeToOffsetChange(updateCollected))
+	useEffect(() => monitor.subscribeToStateChange(updateCollected))
+	return collected
 }
