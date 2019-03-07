@@ -6,15 +6,16 @@ import {
 	Backend,
 	BeginDragOptions,
 	HoverOptions,
+	Identifier,
 } from 'dnd-core'
 const noop = require('lodash/noop')
 
 export interface TestBackend {
 	didCallSetup: boolean
 	didCallTeardown: boolean
-	simulateBeginDrag(sourceIds: string[], options?: any): void
+	simulateBeginDrag(sourceIds: Identifier[], options?: any): void
 	simulatePublishDragSource(): void
-	simulateHover(targetIds: string[], options?: any): void
+	simulateHover(targetIds: Identifier[], options?: any): void
 	simulateDrop(): void
 	simulateEndDrag(): void
 }
@@ -48,7 +49,7 @@ export default class TestBackendImpl implements Backend, TestBackend {
 		return noop
 	}
 
-	public simulateBeginDrag(sourceIds: string[], options: BeginDragOptions) {
+	public simulateBeginDrag(sourceIds: Identifier[], options: BeginDragOptions) {
 		this.actions.beginDrag(sourceIds, options)
 	}
 
@@ -56,7 +57,7 @@ export default class TestBackendImpl implements Backend, TestBackend {
 		this.actions.publishDragSource()
 	}
 
-	public simulateHover(targetIds: string[], options: HoverOptions) {
+	public simulateHover(targetIds: Identifier[], options: HoverOptions) {
 		this.actions.hover(targetIds, options)
 	}
 
