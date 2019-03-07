@@ -39,6 +39,10 @@ export const APIPages: PageGroup[] = [
 				location: '/docs/troubleshooting',
 				title: 'Troubleshooting',
 			},
+			EXAMPLES: {
+				location: '/examples',
+				title: 'Examples',
+			},
 		},
 	},
 	{
