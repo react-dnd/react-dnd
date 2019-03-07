@@ -11,19 +11,19 @@ const invariant = require('invariant')
 
 let isCallingCanDrop = false
 
-export class TargetMonitor implements DropTargetMonitor {
+export default class DropTargetMonitorImpl implements DropTargetMonitor {
 	private internalMonitor: DragDropMonitor
-	private targetId: Identifier | undefined
+	private targetId: Identifier | null = null
 
 	constructor(manager: DragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	public receiveHandlerId(targetId: Identifier) {
+	public receiveHandlerId(targetId: Identifier | null) {
 		this.targetId = targetId
 	}
 
-	public getHandlerId(): Identifier | undefined {
+	public getHandlerId(): Identifier | null {
 		return this.targetId
 	}
 
@@ -88,10 +88,4 @@ export class TargetMonitor implements DropTargetMonitor {
 	public getDifferenceFromInitialOffset() {
 		return this.internalMonitor.getDifferenceFromInitialOffset()
 	}
-}
-
-export default function createTargetMonitor<Context>(
-	manager: DragDropManager<Context>,
-): DropTargetMonitor {
-	return new TargetMonitor(manager) as DropTargetMonitor
 }

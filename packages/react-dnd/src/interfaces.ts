@@ -1,7 +1,11 @@
 import * as React from 'react'
-import { XYCoord, DragDropMonitor, Identifier, DragDropManager } from 'dnd-core'
-
+import { XYCoord, Identifier, DragDropManager } from 'dnd-core'
 export { XYCoord }
+
+export interface HandlerManager {
+	receiveHandlerId: (handlerId: Identifier | null) => void
+	getHandlerId: () => Identifier | null
+}
 
 /**
  * The React Component that manages the DragDropContext for its children.
@@ -35,7 +39,7 @@ export interface DndComponentClass<Props> extends React.ComponentClass<Props> {
 	new (props?: Props, context?: any): DndComponent<Props>
 }
 
-export interface DragSourceMonitor extends DragDropMonitor {
+export interface DragSourceMonitor extends HandlerManager {
 	/**
 	 * Returns true if no drag operation is in progress, and the owner's canDrag() returns true or is not defined.
 	 */
@@ -99,7 +103,7 @@ export interface DragSourceMonitor extends DragDropMonitor {
 	getSourceClientOffset(): XYCoord | null
 }
 
-export interface DropTargetMonitor {
+export interface DropTargetMonitor extends HandlerManager {
 	/**
 	 * Returns true if there is a drag operation in progress, and the owner's canDrop() returns true or is not defined.
 	 */

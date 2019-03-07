@@ -10,43 +10,23 @@ export interface ChessboardTutorialAppState {
 /**
  * Unlike the tutorial, export a component so it can be used on the website.
  */
-export default class ChessboardTutorialApp extends React.Component<
-	{},
-	ChessboardTutorialAppState
-> {
-	public state: ChessboardTutorialAppState = { knightPosition: [1, 7] }
-	private unobserve?: (() => void)
+const ChessboardTutorialApp: React.FC = () => {
+	const [knightPos, setKnightPos] = React.useState<[number, number]>([1, 7])
 
-	public componentDidMount() {
-		this.unobserve = observe(this.handleChange)
-	}
-	public componentWillUnmount() {
-		if (this.unobserve) {
-			this.unobserve()
-		}
-	}
-
-	public render() {
-		const { knightPosition } = this.state
-		return (
-			<div
-				style={{
-					width: 500,
-					height: 500,
-					border: '1px solid gray',
-				}}
-			>
-				<Board knightPosition={knightPosition} />
-			</div>
-		)
-	}
-
-	private handleChange = (knightPosition: [number, number]) => {
-		const nextState = { knightPosition }
-		if (this.state) {
-			this.setState(nextState)
-		} else {
-			this.state = nextState
-		}
-	}
+	React.useEffect(() =>
+		observe((newPos: [number, number]) => setKnightPos(newPos)),
+	)
+	return (
+		<div
+			style={{
+				width: 500,
+				height: 500,
+				border: '1px solid gray',
+			}}
+		>
+			<Board knightPosition={knightPos} />
+		</div>
+	)
 }
+
+export default ChessboardTutorialApp

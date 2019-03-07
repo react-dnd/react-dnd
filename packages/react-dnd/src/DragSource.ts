@@ -1,6 +1,6 @@
 declare var require: any
 import * as React from 'react'
-import { SourceType } from 'dnd-core'
+import { SourceType, DragDropManager } from 'dnd-core'
 import {
 	DragSourceSpec,
 	DragSourceCollector,
@@ -11,7 +11,7 @@ import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerSource from './registerSource'
 import createSourceFactory from './createSourceFactory'
-import createSourceMonitor from './createSourceMonitor'
+import DragSourceMonitorImpl from './DragSourceMonitorImpl'
 import createSourceConnector from './createSourceConnector'
 import isValidType from './utils/isValidType'
 const invariant = require('invariant')
@@ -84,7 +84,8 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 			containerDisplayName: 'DragSource',
 			createHandler: createSource,
 			registerHandler: registerSource,
-			createMonitor: createSourceMonitor,
+			createMonitor: (manager: DragDropManager<any>) =>
+				new DragSourceMonitorImpl(manager),
 			createConnector: createSourceConnector,
 			DecoratedComponent,
 			getType,
