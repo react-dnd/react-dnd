@@ -6,6 +6,7 @@ import {
 	DragDropActions,
 	DragDropMonitor,
 	HandlerRegistry,
+	Identifier,
 } from 'dnd-core'
 import EnterLeaveCounter from './EnterLeaveCounter'
 import { isFirefox } from './BrowserDetector'
@@ -47,7 +48,7 @@ export default class HTML5Backend implements Backend {
 	private dropTargetIds: string[] = []
 	private dragEnterTargetIds: string[] = []
 	private currentNativeSource: NativeDragSource | null = null
-	private currentNativeHandle: string | null = null
+	private currentNativeHandle: Identifier | null = null
 	private currentDragSourceNode: Element | null = null
 	private altKeyPressed: boolean = false
 	private mouseMoveTimeoutTimer: number | null = null

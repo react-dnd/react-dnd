@@ -28,7 +28,8 @@
 	"devDependencies": {
 		"@types/react": "^16.8.7",
 		"npm-run-all": "^4.1.5",
-		"react": "^16.8.4",
+		"react": "link:../react-dnd/node_modules/react",
+		"react-dom": "link:../react-dnd/node_modules/react-dom",
 		"react-dnd-test-backend": "^7.1.0",
 		"rimraf": "^2.6.3",
 		"ts-loader": "^5.3.3",

@@ -5,7 +5,7 @@ import theme from '../theme'
 export interface PageBodyProps {
 	hasSidebar: boolean
 }
-const PageBody: React.SFC<PageBodyProps> = props => {
+const PageBody: React.FC<PageBodyProps> = props => {
 	const { hasSidebar, children } = props
 	const Content = hasSidebar ? SidebarContent : PlainContent
 	return (

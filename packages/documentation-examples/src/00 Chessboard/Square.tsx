@@ -10,7 +10,7 @@ const squareStyle = {
 	height: '100%',
 }
 
-const Square: React.SFC<SquareProps> = ({ black, children }) => {
+export const Square: React.FC<SquareProps> = ({ black, children }) => {
 	const backgroundColor = black ? 'black' : 'white'
 	const color = black ? 'white' : 'black'
 	return (
@@ -25,5 +25,3 @@ const Square: React.SFC<SquareProps> = ({ black, children }) => {
 		</div>
 	)
 }
-
-export default Square
