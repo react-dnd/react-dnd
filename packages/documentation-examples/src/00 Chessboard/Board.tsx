@@ -6,6 +6,10 @@ export interface BoardProps {
 	knightPosition: [number, number]
 }
 
+/**
+ * The chessboard copmonent
+ * @param props The react props
+ */
 const Board: React.FC<BoardProps> = ({
 	knightPosition: [knightX, knightY],
 }) => {

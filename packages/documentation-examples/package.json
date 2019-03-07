@@ -14,6 +14,7 @@
 		"clean": "rimraf lib",
 		"build:cjs": "tsc -b tsconfig.cjs.json",
 		"build:esm": "tsc -b tsconfig.esm.json",
+		"build:docs": "tsc -b tsconfig.docs.json",
 		"build": "run-p build:*",
 		"test": "run-s clean build",
 		"start": "tsc -w --preserveWatchOutput"
