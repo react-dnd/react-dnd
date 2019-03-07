@@ -3,6 +3,8 @@
 	"compilerOptions": {
 		"outDir": "./lib",
 		"baseUrl": "./",
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true
 	},
 	"include": ["./src/index.ts"]
 }

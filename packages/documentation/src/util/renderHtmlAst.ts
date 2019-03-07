@@ -1,6 +1,6 @@
 declare var require: any
 import { createElement } from 'react'
-import { componentIndex } from 'react-dnd-documentation-examples'
+import { componentIndex } from 'react-dnd-documentation-examples/lib/esm/index'
 import processImages from './processImagesInMarkdownAst'
 const log = require('debug')('site:renderHtmlAst')
 const rehypeReact = require('rehype-react')

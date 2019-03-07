@@ -89,6 +89,11 @@
 		"transform": {
 			"^.+\\.(ts|tsx)$": "ts-jest"
 		},
+		"globals": {
+			"ts-jest": {
+				"tsConfig": "tsconfig.jest.json"
+			}
+		},
 		"moduleNameMapper": {
 			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
 			"react-dnd-html5-backend": "<rootDir>//packages/react-dnd-html5-backend/src",

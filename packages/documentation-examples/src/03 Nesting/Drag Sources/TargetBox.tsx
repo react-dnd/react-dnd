@@ -1,5 +1,5 @@
 // tslint:disable max-classes-per-file
-import * as React from 'react'
+import React from 'react'
 import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import Colors from './Colors'
 
@@ -58,8 +58,9 @@ class TargetBoxRaw extends React.Component<
 			<div style={{ ...style, backgroundColor, opacity }}>
 				<p>Drop here.</p>
 
-				{!canDrop &&
-					lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
+				{!canDrop && lastDroppedColor && (
+					<p>Last dropped: {lastDroppedColor}</p>
+				)}
 			</div>,
 		)
 	}

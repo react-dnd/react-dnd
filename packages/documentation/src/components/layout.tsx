@@ -5,7 +5,7 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
-import { isDebugMode } from 'react-dnd-documentation-examples'
+import { isDebugMode } from 'react-dnd-documentation-examples/lib/esm/index'
 
 import { DragDropContextProvider } from 'react-dnd'
 import PageBody from './pagebody'
