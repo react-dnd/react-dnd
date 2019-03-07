@@ -14,10 +14,10 @@ import { Ref, HandlerManager, isRef } from './util'
 import { useMonitorOutput } from './useMonitorOutput'
 
 /**
- * useDragSource hook
+ * useDragSource hook (This API is experimental and subject to breaking changes in non-major versions)
  * @param ref The drag source element
  * @param type The drag source type
- * @param sourceSpec The drag source specification
+ * @param sourceSpec The drag source specification *
  */
 export function useDragSource<DragObject, CustomProps>(
 	ref: Ref<any>,
