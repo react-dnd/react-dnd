@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import * as TestUtils from 'react-dom/test-utils'
 import wrapInTestContext from '../../../shared/wrapInTestContext'
 import Box from '../Box'

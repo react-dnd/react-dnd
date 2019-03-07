@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import BoxWithImage from './BoxWithImage'
 import BoxWithHandle from './BoxWithHandle'
 

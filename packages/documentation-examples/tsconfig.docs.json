@@ -1,6 +1,7 @@
 {
 	"extends": "./tsconfig.esm.json",
 	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
 		"jsx": "preserve",
 		"outDir": "./lib/docs",
 		"baseUrl": "./",

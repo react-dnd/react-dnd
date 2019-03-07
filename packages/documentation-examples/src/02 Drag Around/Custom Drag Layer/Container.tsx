@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useRef } from 'react'
 import { useDropTarget, DropTargetMonitor } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
@@ -25,7 +25,7 @@ function renderBox(item: any, key: any) {
 }
 
 const Container: React.FC<ContainerProps> = props => {
-	const [boxes, setBoxes] = React.useState<BoxMap>({
+	const [boxes, setBoxes] = useState<BoxMap>({
 		a: { top: 20, left: 80, title: 'Drag me around' },
 		b: { top: 180, left: 20, title: 'Drag me too' },
 	})
@@ -40,7 +40,7 @@ const Container: React.FC<ContainerProps> = props => {
 		)
 	}
 
-	const ref = React.useRef(null)
+	const ref = useRef(null)
 	useDropTarget(ref, ItemTypes.BOX, {
 		drop(monitor: DropTargetMonitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as {
