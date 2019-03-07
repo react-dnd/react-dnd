@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useRef } from 'react'
 import { DragSource } from 'dnd-core'
-import { DragSourceHookSpec } from '../interfaces'
+import { DragSourceHookSpec, DragSourceMonitor } from '../interfaces'
 
 export function useDragSourceHandler<DragObject, CustomProps>(
 	sourceSpec: DragSourceHookSpec<DragObject, CustomProps>,
@@ -17,20 +17,22 @@ export function useDragSourceHandler<DragObject, CustomProps>(
 			({
 				beginDrag(monitor, target) {
 					const { beginDrag } = sourceSpecRef.current
-					return beginDrag()
+					return beginDrag((monitor as any) as DragSourceMonitor)
 				},
 				canDrag(monitor, target) {
 					const { canDrag } = sourceSpecRef.current
-					return canDrag ? canDrag() : true
+					return canDrag ? canDrag((monitor as any) as DragSourceMonitor) : true
 				},
 				isDragging(monitor, target) {
 					const { isDragging } = sourceSpecRef.current
-					return isDragging ? isDragging() : target === monitor.getSourceId()
+					return isDragging
+						? isDragging((monitor as any) as DragSourceMonitor)
+						: target === monitor.getSourceId()
 				},
 				endDrag(monitor, target) {
 					const { endDrag } = sourceSpecRef.current
 					if (endDrag) {
-						endDrag()
+						endDrag((monitor as any) as DragSourceMonitor)
 					}
 				},
 			} as DragSource),

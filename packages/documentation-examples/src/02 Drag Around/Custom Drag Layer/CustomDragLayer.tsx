@@ -47,7 +47,13 @@ export interface CustomDragLayerProps {
 }
 
 const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
-	const dragLayerProps = useDragLayer(monitor => ({
+	const {
+		itemType,
+		isDragging,
+		item,
+		initialOffset,
+		currentOffset,
+	} = useDragLayer(monitor => ({
 		item: monitor.getItem(),
 		itemType: monitor.getItemType(),
 		initialOffset: monitor.getInitialSourceClientOffset(),
@@ -56,25 +62,21 @@ const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
 	}))
 
 	function renderItem() {
-		switch (dragLayerProps.itemType) {
+		switch (itemType) {
 			case ItemTypes.BOX:
-				return <BoxDragPreview title={dragLayerProps.item.title} />
+				return <BoxDragPreview title={item.title} />
 			default:
 				return null
 		}
 	}
 
-	if (!dragLayerProps.isDragging) {
+	if (!isDragging) {
 		return null
 	}
 	return (
 		<div style={layerStyles}>
 			<div
-				style={getItemStyles(
-					dragLayerProps.initialOffset,
-					dragLayerProps.currentOffset,
-					props.snapToGrid,
-				)}
+				style={getItemStyles(initialOffset, currentOffset, props.snapToGrid)}
 			>
 				{renderItem()}
 			</div>

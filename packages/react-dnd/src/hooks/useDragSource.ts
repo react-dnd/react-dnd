@@ -72,5 +72,6 @@ export function useDragSource<DragObject, CustomProps>(
 		)
 	}, [])
 
-	return useMonitorOutput(sourceMonitor as any, sourceSpec.collect as any)
+	const collector = sourceSpec.collect || (() => ({}))
+	return useMonitorOutput(sourceMonitor as any, collector as any)
 }

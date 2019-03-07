@@ -49,5 +49,6 @@ export function useDropTarget<CustomProps>(
 		}
 	}, [])
 
-	return useMonitorOutput(targetMonitor as any, targetSpec.collect as any)
+	const collector = targetSpec.collect || (() => ({}))
+	return useMonitorOutput(targetMonitor as any, collector as any)
 }

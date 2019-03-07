@@ -264,7 +264,7 @@ export interface DropTargetHookSpec<CollectedProps> {
 	 * the source's endDrag method are good places to fire Flux actions. This method will not be called if canDrop()
 	 * is defined and returns false.
 	 */
-	drop?: () => any
+	drop?: (monitor: DropTargetMonitor) => any
 
 	/**
 	 * Optional.
@@ -272,19 +272,19 @@ export interface DropTargetHookSpec<CollectedProps> {
 	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
-	hover?: () => void
+	hover?: (monitor: DropTargetMonitor) => void
 
 	/**
 	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
 	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
-	canDrop?: () => boolean
+	canDrop?: (monitor: DropTargetMonitor) => boolean
 
 	/**
 	 * A function to collect rendering properties
 	 */
-	collect: (monitor: DropTargetMonitor) => CollectedProps
+	collect?: (monitor: DropTargetMonitor) => CollectedProps
 }
 
 export interface DragSourceSpec<Props, DragObject> {
@@ -342,7 +342,7 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	 * to the component into it, but you should try very hard to avoid doing this because it couples the drag
 	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
 	 */
-	beginDrag: () => DragObject
+	beginDrag: (monitor: DragSourceMonitor) => DragObject
 
 	/**
 	 * Optional.
@@ -352,7 +352,7 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	endDrag?: () => void
+	endDrag?: (monitor: DragSourceMonitor) => void
 
 	/**
 	 * Optional.
@@ -360,7 +360,7 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: () => boolean
+	canDrag?: (monitor: DragSourceMonitor) => boolean
 
 	/**
 	 * Optional.
@@ -372,12 +372,12 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	 *
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
-	isDragging?: () => boolean
+	isDragging?: (monitor: DragSourceMonitor) => boolean
 
 	/**
 	 * A function to collect rendering properties
 	 */
-	collect: (monitor: DragSourceMonitor) => CollectedProps
+	collect?: (monitor: DragSourceMonitor) => CollectedProps
 }
 
 /**

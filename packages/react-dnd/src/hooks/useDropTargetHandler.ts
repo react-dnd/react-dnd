@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { DropTargetHookSpec } from '../interfaces'
+import { DropTargetHookSpec, DropTargetMonitor } from '../interfaces'
 import { DropTarget } from 'dnd-core'
 
 export function useDropTargetHandler<CustomProps>(
@@ -17,18 +17,18 @@ export function useDropTargetHandler<CustomProps>(
 			({
 				canDrop(monitor, targetId) {
 					const { canDrop } = targetSpecRef.current
-					return canDrop ? canDrop() : true
+					return canDrop ? canDrop((monitor as any) as DropTargetMonitor) : true
 				},
 				hover(monitor, targetId) {
 					const { hover } = targetSpecRef.current
 					if (hover) {
-						hover()
+						hover((monitor as any) as DropTargetMonitor)
 					}
 				},
 				drop(monitor, targetId) {
 					const { drop } = targetSpecRef.current
 					if (drop) {
-						drop()
+						drop((monitor as any) as DropTargetMonitor)
 					}
 				},
 			} as DropTarget),
