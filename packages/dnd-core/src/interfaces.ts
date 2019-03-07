@@ -32,8 +32,8 @@ export interface DragDropMonitor {
 		},
 	): Unsubscribe
 	subscribeToOffsetChange(listener: Listener): Unsubscribe
-	canDragSource(sourceId: string): boolean
-	canDropOnTarget(targetId: string): boolean
+	canDragSource(sourceId: string | undefined): boolean
+	canDropOnTarget(targetId: string | undefined): boolean
 
 	/**
 	 * Returns true if a drag operation is in progress, and either the owner initiated the drag, or its isDragging()

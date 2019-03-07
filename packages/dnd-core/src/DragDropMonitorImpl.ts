@@ -70,7 +70,10 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return this.store.subscribe(handleChange)
 	}
 
-	public canDragSource(sourceId: string): boolean {
+	public canDragSource(sourceId: string | undefined): boolean {
+		if (!sourceId) {
+			return false
+		}
 		const source = this.registry.getSource(sourceId)
 		invariant(source, 'Expected to find a valid source.')
 
