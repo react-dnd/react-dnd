@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from './Card'
 import update from 'immutability-helper'
+import { ContainerProps } from '../../02 Drag Around/Naive/Container'
 
 const style = {
 	width: 400,
@@ -13,9 +14,9 @@ export interface ContainerState {
 	}>
 }
 
-export default class Container extends React.Component<{}, ContainerState> {
-	public state = {
-		cards: [
+const Container: React.FC<ContainerProps> = ({}) => {
+	{
+		const [cards, setCards] = useState([
 			{
 				id: 1,
 				text: 'Write a cool JS library',
@@ -45,11 +46,16 @@ export default class Container extends React.Component<{}, ContainerState> {
 				id: 7,
 				text: 'PROFIT',
 			},
-		],
-	}
+		])
 
-	public render() {
-		const { cards } = this.state
+		const moveCard = (dragIndex: number, hoverIndex: number) => {
+			const dragCard = cards[dragIndex]
+			setCards(
+				update(cards, {
+					$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+				}),
+			)
+		}
 
 		return (
 			<div style={style}>
@@ -59,23 +65,12 @@ export default class Container extends React.Component<{}, ContainerState> {
 						index={i}
 						id={card.id}
 						text={card.text}
-						moveCard={this.moveCard}
+						moveCard={moveCard}
 					/>
 				))}
 			</div>
 		)
 	}
-
-	private moveCard = (dragIndex: number, hoverIndex: number) => {
-		const { cards } = this.state
-		const dragCard = cards[dragIndex]
-
-		this.setState(
-			update(this.state, {
-				cards: {
-					$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
-				},
-			}),
-		)
-	}
 }
+
+export default Container

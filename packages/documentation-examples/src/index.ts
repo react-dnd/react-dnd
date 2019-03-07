@@ -19,7 +19,7 @@ import otherNativeFiles from './06 Other/Native Files'
 
 export * from './isDebugMode'
 export const componentIndex: {
-	[key: string]: React.ComponentClass | React.FunctionComponent
+	[key: string]: React.ComponentClass<any> | React.FunctionComponent<any>
 } = {
 	chessboard,
 	'dustbin-single-target': dustbinSingleTarget,
