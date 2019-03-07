@@ -125,7 +125,15 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return source.isDragging(this, sourceId)
 	}
 
-	public isOverTarget(targetId: string, options = { shallow: false }) {
+	public isOverTarget(
+		targetId: string | undefined,
+		options = { shallow: false },
+	) {
+		// undefined on initial render
+		if (!targetId) {
+			return false
+		}
+
 		const { shallow } = options
 		if (!this.isDragging()) {
 			return false
