@@ -1,5 +1,11 @@
 declare var require: any
-import { DragDropManager, DragDropMonitor, Unsubscribe, Listener } from 'dnd-core'
+import {
+	DragDropManager,
+	DragDropMonitor,
+	Unsubscribe,
+	Listener,
+	Identifier,
+} from 'dnd-core'
 import { DropTargetMonitor } from './interfaces'
 const invariant = require('invariant')
 
@@ -7,23 +13,23 @@ let isCallingCanDrop = false
 
 export class TargetMonitor implements DropTargetMonitor {
 	private internalMonitor: DragDropMonitor
-	private targetId: string | undefined
+	private targetId: Identifier | undefined
 
 	constructor(manager: DragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	public receiveHandlerId(targetId: string) {
+	public receiveHandlerId(targetId: Identifier) {
 		this.targetId = targetId
 	}
 
-	public getHandlerId(): string | undefined {
+	public getHandlerId(): Identifier | undefined {
 		return this.targetId
 	}
 
 	public subscribeToStateChange(
 		listener: Listener,
-		options?: { handlerIds: string[] | undefined },
+		options?: { handlerIds: Identifier[] | undefined },
 	): Unsubscribe {
 		return this.internalMonitor.subscribeToStateChange(listener, options)
 	}
@@ -37,14 +43,14 @@ export class TargetMonitor implements DropTargetMonitor {
 
 		try {
 			isCallingCanDrop = true
-			return this.internalMonitor.canDropOnTarget(this.targetId as string)
+			return this.internalMonitor.canDropOnTarget(this.targetId!)
 		} finally {
 			isCallingCanDrop = false
 		}
 	}
 
 	public isOver(options: { shallow?: boolean }) {
-		return this.internalMonitor.isOverTarget(this.targetId as string, options)
+		return this.internalMonitor.isOverTarget(this.targetId!, options)
 	}
 
 	public getItemType() {

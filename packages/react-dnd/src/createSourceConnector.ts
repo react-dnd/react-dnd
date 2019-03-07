@@ -1,11 +1,11 @@
 declare var require: any
 
 import wrapConnectorHooks from './wrapConnectorHooks'
-import { Backend, Unsubscribe } from 'dnd-core'
+import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 const shallowEqual = require('shallowequal')
 
 export default function createSourceConnector(backend: Backend) {
-	let currentHandlerId: string
+	let currentHandlerId: Identifier
 
 	let currentDragSourceNode: any
 	let currentDragSourceOptions: any
@@ -45,7 +45,7 @@ export default function createSourceConnector(backend: Backend) {
 		}
 	}
 
-	function receiveHandlerId(handlerId: string) {
+	function receiveHandlerId(handlerId: Identifier) {
 		if (handlerId === currentHandlerId) {
 			return
 		}
