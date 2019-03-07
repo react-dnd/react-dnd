@@ -7,6 +7,7 @@ import { useDragDropManager } from './useDragDropManager'
 import { useMonitorSubscription } from './useMonitorSubscription'
 import { Ref, HandlerManager } from './util'
 import { useDropTargetHandler } from './useDropTargetHandler'
+import { useMonitorOutput } from './useMonitorOutput'
 
 /**
  * useDropTarget Hook
@@ -14,19 +15,19 @@ import { useDropTargetHandler } from './useDropTargetHandler'
  * @param type The drop target type
  * @param targetSpec The drop target specification
  */
-export function useDropTarget(
+export function useDropTarget<CustomProps>(
 	ref: Ref<any>,
 	type: TargetType,
-	targetSpec: DropTargetHookSpec & {
+	targetSpec: DropTargetHookSpec<CustomProps> & {
 		dropTargetOptions?: {}
 	},
-): DropTargetMonitor & HandlerManager {
+): CustomProps {
 	const dragDropManager = useDragDropManager()
 	const backend = dragDropManager.getBackend()
 	const targetMonitor = useMemo(() => createTargetMonitor(dragDropManager), [
 		dragDropManager,
 	]) as DropTargetMonitor & HandlerManager
-	const handler = useDropTargetHandler(targetSpec)
+	const handler = useDropTargetHandler<CustomProps>(targetSpec)
 
 	useMonitorSubscription(
 		registerTarget,
@@ -48,5 +49,5 @@ export function useDropTarget(
 		}
 	}, [])
 
-	return targetMonitor
+	return useMonitorOutput(targetMonitor as any, targetSpec.collect as any)
 }

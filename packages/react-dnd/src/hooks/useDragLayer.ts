@@ -3,9 +3,9 @@ import { DragLayerMonitor } from '../interfaces'
 import { useDragDropManager } from './useDragDropManager'
 import { useCollector } from './useCollector'
 
-export function useDragLayerOutput<Output = {}>(
-	collect: (monitor: DragLayerMonitor) => Output,
-): Output {
+export function useDragLayer<CollectedProps>(
+	collect: (monitor: DragLayerMonitor) => CollectedProps,
+): CollectedProps {
 	const dragDropManager = useDragDropManager()
 	const monitor = dragDropManager.getMonitor()
 	const [value, updateIfNeeded] = useCollector(monitor, collect)

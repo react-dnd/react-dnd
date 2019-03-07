@@ -2,12 +2,11 @@ import { useEffect } from 'react'
 import { useCollector } from './useCollector'
 import { HandlerManager } from './util'
 import { DragDropMonitor } from 'dnd-core'
-import { DropTargetMonitor, DragSourceMonitor } from '../interfaces'
 
-export function useMonitorOutput<Output = {}>(
-	monitor: HandlerManager & (DropTargetMonitor | DragSourceMonitor),
-	collect: (monitor: any) => Output,
-): Output {
+export function useMonitorOutput<
+	Monitor extends DragDropMonitor & HandlerManager,
+	Output = {}
+>(monitor: Monitor, collect: (monitor: Monitor) => Output): Output {
 	const [value, updateIfNeeded] = useCollector(monitor, collect)
 
 	// This runs on every render. There will be ways to optimise this, but for

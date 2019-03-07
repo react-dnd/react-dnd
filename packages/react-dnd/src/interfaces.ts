@@ -253,7 +253,7 @@ export interface DropTargetSpec<Props> {
 /**
  * Interface for the DropTarget specification object
  */
-export interface DropTargetHookSpec {
+export interface DropTargetHookSpec<CollectedProps> {
 	/**
 	 * Optional.
 	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
@@ -280,6 +280,11 @@ export interface DropTargetHookSpec {
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
 	canDrop?: () => boolean
+
+	/**
+	 * A function to collect rendering properties
+	 */
+	collect: (monitor: DropTargetMonitor) => CollectedProps
 }
 
 export interface DragSourceSpec<Props, DragObject> {
@@ -328,7 +333,7 @@ export interface DragSourceSpec<Props, DragObject> {
 	isDragging?: (props: Props, monitor: DragSourceMonitor) => boolean
 }
 
-export interface DragSourceHookSpec<DragObject> {
+export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	/**
 	 * Required.
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
@@ -368,6 +373,11 @@ export interface DragSourceHookSpec<DragObject> {
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
 	isDragging?: () => boolean
+
+	/**
+	 * A function to collect rendering properties
+	 */
+	collect: (monitor: DragSourceMonitor) => CollectedProps
 }
 
 /**

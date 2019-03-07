@@ -2,7 +2,9 @@ import * as React from 'react'
 import { DropTargetHookSpec } from '../interfaces'
 import { DropTarget } from 'dnd-core'
 
-export function useDropTargetHandler(targetSpec: DropTargetHookSpec) {
+export function useDropTargetHandler<CustomProps>(
+	targetSpec: DropTargetHookSpec<CustomProps>,
+) {
 	const targetSpecRef = React.useRef(targetSpec)
 
 	React.useEffect(function updateDropTargetSpec() {

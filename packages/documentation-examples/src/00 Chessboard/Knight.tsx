@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useDragSource, useMonitorOutput } from 'react-dnd'
+import { useDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
 
@@ -21,13 +21,13 @@ function createKnightImage() {
 export const Knight: React.FC = () => {
 	const ref = React.useRef(null)
 	const dragPreview = React.useMemo(createKnightImage, [])
-	const dragSourceMonitor = useDragSource(ref, ItemTypes.KNIGHT, {
+	const { isDragging } = useDragSource(ref, ItemTypes.KNIGHT, {
 		beginDrag: () => ({}),
 		dragPreview,
+		collect: mon => ({
+			isDragging: !!mon.isDragging(),
+		}),
 	})
-	const { isDragging } = useMonitorOutput(dragSourceMonitor, () => ({
-		isDragging: !!dragSourceMonitor.isDragging(),
-	}))
 
 	return (
 		<div

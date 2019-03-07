@@ -11,6 +11,7 @@ import { useDragSourceHandler } from './useDragSourceHandler'
 import { useDragDropManager } from './useDragDropManager'
 import { useMonitorSubscription } from './useMonitorSubscription'
 import { Ref, HandlerManager, isRef } from './util'
+import { useMonitorOutput } from './useMonitorOutput'
 
 /**
  * useDragSource hook
@@ -18,22 +19,22 @@ import { Ref, HandlerManager, isRef } from './util'
  * @param type The drag source type
  * @param sourceSpec The drag source specification
  */
-export function useDragSource<DragObject = {}>(
+export function useDragSource<DragObject, CustomProps>(
 	ref: Ref<any>,
 	type: SourceType,
-	sourceSpec: DragSourceHookSpec<DragObject> & {
+	sourceSpec: DragSourceHookSpec<DragObject, CustomProps> & {
 		dragSourceOptions?: {}
 		dragPreview?: Ref<any> | Element
 		dragPreviewOptions?: DragPreviewOptions
 	},
-): DragSourceMonitor & HandlerManager {
+): CustomProps {
 	const dragDropManager = useDragDropManager()
 	const backend = dragDropManager.getBackend()
 	const sourceMonitor = useMemo(() => createSourceMonitor(dragDropManager), [
 		dragDropManager,
 	]) as DragSourceMonitor & HandlerManager
 
-	const handler = useDragSourceHandler<DragObject>(sourceSpec)
+	const handler = useDragSourceHandler<DragObject, CustomProps>(sourceSpec)
 
 	useMonitorSubscription(
 		registerSource,
@@ -62,6 +63,7 @@ export function useDragSource<DragObject = {}>(
 		const dragPreviewNode = isRef(sourceSpec.dragPreview)
 			? (sourceSpec.dragPreview as Ref<any>).current
 			: sourceSpec.dragPreview
+
 		const dragPreviewOptions = sourceSpec.dragPreviewOptions
 		return backend.connectDragPreview(
 			sourceMonitor.getHandlerId(),
@@ -70,5 +72,5 @@ export function useDragSource<DragObject = {}>(
 		)
 	}, [])
 
-	return sourceMonitor
+	return useMonitorOutput(sourceMonitor as any, sourceSpec.collect as any)
 }
