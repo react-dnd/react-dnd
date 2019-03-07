@@ -19,7 +19,7 @@ describe('DragDropContext', () => {
 	})
 
 	it('can apply to an SFC', () => {
-		const ContextComponent: React.SFC<{}> = () => null
+		const ContextComponent: React.FC<{}> = () => null
 		const Context = DragDropContext(TestBackend)(ContextComponent)
 
 		expect(Context).toBeDefined()

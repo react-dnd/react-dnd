@@ -26,7 +26,7 @@ interface BoxCollectedProps {
 	connectDragSource?: ConnectDragSource
 }
 
-const Box: React.SFC<BoxProps & BoxCollectedProps> = ({
+const Box: React.FC<BoxProps & BoxCollectedProps> = ({
 	isDragging,
 	connectDragSource,
 	name,
