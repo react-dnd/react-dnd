@@ -1,5 +1,5 @@
 // tslint:disable max-classes-per-file jsx-no-lambda
-import * as React from 'react'
+import React from 'react'
 import {
 	DragSource,
 	ConnectDragSource,

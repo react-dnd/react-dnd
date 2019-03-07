@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DragSource, ConnectDragPreview, ConnectDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import boxImage from './boxImage'

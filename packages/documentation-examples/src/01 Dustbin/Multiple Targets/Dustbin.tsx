@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 
 const style: React.CSSProperties = {
