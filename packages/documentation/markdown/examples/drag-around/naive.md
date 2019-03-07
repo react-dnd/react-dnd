@@ -1,9 +1,10 @@
 ---
-path: "/examples/drag-around/naive"
-title: "Naive"
+path: '/examples/drag-around/naive'
+title: 'Naive'
 ---
 
-[Browse the Source](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/02%20Drag%20Around/Naive)
+[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/02%20Drag%20Around/Naive)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/02%20Drag%20Around/Naive)
 
 This example naively relies on browser drag and drop implementation
 without much custom logic.
