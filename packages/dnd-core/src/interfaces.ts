@@ -28,21 +28,21 @@ export interface DragDropMonitor {
 	subscribeToStateChange(
 		listener: Listener,
 		options?: {
-			handlerIds: Array<string | symbol> | undefined
+			handlerIds: Identifier[] | undefined
 		},
 	): Unsubscribe
 	subscribeToOffsetChange(listener: Listener): Unsubscribe
-	canDragSource(sourceId: string): boolean
-	canDropOnTarget(targetId: string): boolean
+	canDragSource(sourceId: Identifier | undefined): boolean
+	canDropOnTarget(targetId: Identifier | undefined): boolean
 
 	/**
 	 * Returns true if a drag operation is in progress, and either the owner initiated the drag, or its isDragging()
 	 * is defined and returns true.
 	 */
 	isDragging(): boolean
-	isDraggingSource(sourceId: string): boolean
+	isDraggingSource(sourceId: Identifier | undefined): boolean
 	isOverTarget(
-		targetId: string,
+		targetId: Identifier | undefined,
 		options?: {
 			shallow?: boolean
 		},
@@ -105,27 +105,27 @@ export interface DragDropMonitor {
 }
 
 export interface HandlerRegistry {
-	addSource(type: SourceType, source: DragSource): string
-	addTarget(type: TargetType, target: DropTarget): string
+	addSource(type: SourceType, source: DragSource): Identifier
+	addTarget(type: TargetType, target: DropTarget): Identifier
 	containsHandler(handler: DragSource | DropTarget): boolean
-	getSource(sourceId: string, includePinned?: boolean): DragSource
-	getSourceType(sourceId: string): SourceType
-	getTargetType(targetId: string): TargetType
-	getTarget(targetId: string): DropTarget
-	isSourceId(handlerId: string): boolean
-	isTargetId(handlerId: string): boolean
-	removeSource(sourceId: string): void
-	removeTarget(targetId: string): void
-	pinSource(sourceId: string): void
+	getSource(sourceId: Identifier, includePinned?: boolean): DragSource
+	getSourceType(sourceId: Identifier): SourceType
+	getTargetType(targetId: Identifier): TargetType
+	getTarget(targetId: Identifier): DropTarget
+	isSourceId(handlerId: Identifier): boolean
+	isTargetId(handlerId: Identifier): boolean
+	removeSource(sourceId: Identifier): void
+	removeTarget(targetId: Identifier): void
+	pinSource(sourceId: Identifier): void
 	unpinSource(): void
 }
 
 export interface Action<Payload> {
-	type: string
+	type: Identifier
 	payload: Payload
 }
 export interface SentinelAction {
-	type: string
+	type: Identifier
 }
 
 export type ActionCreator<Payload> = (args: any[]) => Action<Payload>
@@ -164,17 +164,17 @@ export interface DropPayload {
 }
 
 export interface TargetIdPayload {
-	targetId: string
+	targetId: Identifier
 }
 
 export interface SourceIdPayload {
-	sourceId: string
+	sourceId: Identifier
 }
 
 export interface DragDropActions {
-	beginDrag(sourceIds: string[], options?: any): Action<BeginDragPayload>
+	beginDrag(sourceIds: Identifier[], options?: any): Action<BeginDragPayload>
 	publishDragSource(): SentinelAction
-	hover(targetIds: string[], options?: any): Action<HoverPayload>
+	hover(targetIds: Identifier[], options?: any): Action<HoverPayload>
 	drop(options?: any): void
 	endDrag(): SentinelAction
 }
