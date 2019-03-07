@@ -3,6 +3,10 @@ import { DragLayerMonitor } from '../interfaces'
 import { useDragDropManager } from './useDragDropManager'
 import { useCollector } from './useCollector'
 
+/**
+ * useDragLayer Hook  (This API is experimental and subject to breaking changes in non-breaking versions)
+ * @param collector The property collector
+ */
 export function useDragLayer<CollectedProps>(
 	collect: (monitor: DragLayerMonitor) => CollectedProps,
 ): CollectedProps {
