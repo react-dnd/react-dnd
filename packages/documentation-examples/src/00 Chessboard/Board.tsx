@@ -1,18 +1,10 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import BoardSquare from './BoardSquare'
 import Knight from './Knight'
 
 export interface BoardProps {
 	knightPosition: [number, number]
 }
-
-const Container = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-wrap: wrap;
-`
 
 export default class Board extends React.Component<BoardProps> {
 	public render() {
@@ -21,7 +13,18 @@ export default class Board extends React.Component<BoardProps> {
 			squares.push(this.renderSquare(i))
 		}
 
-		return <Container>{squares}</Container>
+		return (
+			<div
+				style={{
+					width: '100%',
+					height: '100%',
+					display: 'flex',
+					flexWrap: 'wrap',
+				}}
+			>
+				{squares}
+			</div>
+		)
 	}
 
 	private renderSquare(i: number) {

@@ -21,7 +21,6 @@
 	"dependencies": {
 		"@types/faker": "^4.1.5",
 		"@types/query-string": "^6.2.0",
-		"@types/styled-components": "^4.1.12",
 		"dnd-core": "^7.1.0",
 		"faker": "^4.1.0",
 		"immutability-helper": "^3.0.0",
@@ -29,8 +28,7 @@
 		"query-string": "^6.3.0",
 		"react-dnd": "^7.1.0",
 		"react-dnd-html5-backend": "^7.1.0",
-		"react-frame-component": "^4.1.0",
-		"styled-components": "^4.1.3"
+		"react-frame-component": "^4.1.0"
 	},
 	"devDependencies": {
 		"@types/react": "^16.8.7",
