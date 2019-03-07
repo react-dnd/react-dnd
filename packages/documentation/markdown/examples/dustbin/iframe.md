@@ -1,8 +1,10 @@
 ---
-path: "/examples/dustbin/iframe"
-title: "iframe"
+path: '/examples/dustbin/iframe'
+title: 'iframe'
 ---
-[Browse the Source](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Single%20Target%20in%20iframe)
+
+[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/01%20Dustbin/Single%20Target%20in%20iframe)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Single%20Target%20in%20iframe)
 
 This is the same simple example, but nested in an iframe.
 
