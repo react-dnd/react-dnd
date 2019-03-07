@@ -8,24 +8,25 @@ import {
 	Identifier,
 } from 'dnd-core'
 import { DragSourceMonitor } from './interfaces'
+import { HandlerManager } from './hooks/util'
 const invariant = require('invariant')
 
 let isCallingCanDrag = false
 let isCallingIsDragging = false
 
-class SourceMonitor implements DragSourceMonitor {
+class SourceMonitor implements DragSourceMonitor, HandlerManager {
 	private internalMonitor: DragDropMonitor
-	private sourceId: Identifier | undefined
+	private sourceId: Identifier | null = null
 
 	constructor(manager: DragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	public receiveHandlerId(sourceId: Identifier) {
+	public receiveHandlerId(sourceId: Identifier | null) {
 		this.sourceId = sourceId
 	}
 
-	public getHandlerId(): Identifier | undefined {
+	public getHandlerId(): Identifier | null {
 		return this.sourceId
 	}
 

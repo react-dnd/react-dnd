@@ -7,23 +7,24 @@ import {
 	Identifier,
 } from 'dnd-core'
 import { DropTargetMonitor } from './interfaces'
+import { HandlerManager } from './hooks/util'
 const invariant = require('invariant')
 
 let isCallingCanDrop = false
 
-export class TargetMonitor implements DropTargetMonitor {
+export class TargetMonitor implements DropTargetMonitor, HandlerManager {
 	private internalMonitor: DragDropMonitor
-	private targetId: Identifier | undefined
+	private targetId: Identifier | null = null
 
 	constructor(manager: DragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	public receiveHandlerId(targetId: Identifier) {
+	public receiveHandlerId(targetId: Identifier | null) {
 		this.targetId = targetId
 	}
 
-	public getHandlerId(): Identifier | undefined {
+	public getHandlerId(): Identifier | null {
 		return this.targetId
 	}
 

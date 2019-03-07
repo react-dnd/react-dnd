@@ -2,7 +2,7 @@ import { Identifier } from 'dnd-core'
 
 export interface HandlerManager {
 	receiveHandlerId: (handlerId: Identifier | null) => void
-	getHandlerId: () => Identifier | undefined
+	getHandlerId: () => Identifier | null
 }
 
 export interface Ref<T> {
