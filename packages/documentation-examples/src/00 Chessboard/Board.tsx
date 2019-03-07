@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { BoardSquare } from './BoardSquare'
 import { Knight } from './Knight'
-
 export interface BoardProps {
 	knightPosition: [number, number]
 }

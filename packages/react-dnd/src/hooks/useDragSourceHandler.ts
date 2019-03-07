@@ -26,9 +26,7 @@ export function useDragSourceHandler<DragObject>(
 			},
 			beginDrag() {
 				const { beginDrag } = sourceSpecRef.current
-				if (beginDrag) {
-					;(beginDrag as any)()
-				}
+				return (beginDrag as any)()
 			},
 			endDrag() {
 				const { endDrag } = sourceSpecRef.current
