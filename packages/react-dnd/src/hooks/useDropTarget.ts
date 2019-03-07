@@ -10,7 +10,7 @@ import { useDropTargetHandler } from './useDropTargetHandler'
 import { useMonitorOutput } from './useMonitorOutput'
 
 /**
- * useDropTarget Hook
+ * useDropTarget Hook (This API is experimental and subject to breaking changes in non-breaking versions)
  * @param ref The drop target's ref
  * @param type The drop target type
  * @param targetSpec The drop target specification
