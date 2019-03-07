@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DropTarget, ConnectDropTarget } from 'react-dnd'
 import ItemTypes from '../Single Target/ItemTypes'
 

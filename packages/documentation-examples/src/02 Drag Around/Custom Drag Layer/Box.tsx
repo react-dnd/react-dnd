@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 const styles: React.CSSProperties = {
 	border: '1px dashed gray',

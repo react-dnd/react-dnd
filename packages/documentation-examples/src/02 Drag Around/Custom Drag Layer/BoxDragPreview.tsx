@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from './Box'
 
 const styles = {
@@ -16,9 +16,9 @@ export interface BoxDragPreviewState {
 }
 
 const BoxDragPreview: React.FC<BoxDragPreviewProps> = ({ title }) => {
-	const [tickTock, setTickTock] = React.useState(false)
+	const [tickTock, setTickTock] = useState(false)
 
-	React.useEffect(function subscribeToIntervalTick() {
+	useEffect(function subscribeToIntervalTick() {
 		const interval = setInterval(() => setTickTock(!tickTock), 500)
 		return () => clearInterval(interval)
 	})
