@@ -9,7 +9,7 @@ export interface DocProps {
 	}
 }
 
-const Doc: React.SFC<DocProps> = ({ docPage }) => {
+const Doc: React.FC<DocProps> = ({ docPage }) => {
 	return (
 		<Container>
 			<Gutter />

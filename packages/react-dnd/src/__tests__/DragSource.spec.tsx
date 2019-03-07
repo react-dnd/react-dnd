@@ -14,7 +14,7 @@ describe('DragSource', () => {
 	})
 
 	it('can apply to an SFC', () => {
-		const Component: React.SFC<{}> = () => null
+		const Component: React.FC<{}> = () => null
 		const DecoratedComponent = DragSource(
 			'abc',
 			{ beginDrag: () => null },

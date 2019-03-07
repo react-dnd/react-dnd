@@ -4,7 +4,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import theme from '../theme'
 
-const NavBar: React.SFC = () => (
+const NavBar: React.FC = () => (
 	<Container>
 		<ContentContainer>
 			<LogoContainer>

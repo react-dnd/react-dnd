@@ -15,37 +15,19 @@ export interface BoxDragPreviewState {
 	tickTock: any
 }
 
-export default class BoxDragPreview extends React.PureComponent<
-	BoxDragPreviewProps,
-	BoxDragPreviewState
-> {
-	public state = {
-		tickTock: false,
-	}
-	private interval: any
+const BoxDragPreview: React.FC<BoxDragPreviewProps> = ({ title }) => {
+	const [tickTock, setTickTock] = React.useState(false)
 
-	public componentDidMount() {
-		this.interval = setInterval(this.tick, 500)
-	}
+	React.useEffect(function subscribeToIntervalTick() {
+		const interval = setInterval(() => setTickTock(!tickTock), 500)
+		return () => clearInterval(interval)
+	})
 
-	public componentWillUnmount() {
-		clearInterval(this.interval)
-	}
-
-	public render() {
-		const { title } = this.props
-		const { tickTock } = this.state
-
-		return (
-			<div style={styles}>
-				<Box title={title} yellow={tickTock} />
-			</div>
-		)
-	}
-
-	private tick = () => {
-		this.setState({
-			tickTock: !this.state.tickTock,
-		})
-	}
+	return (
+		<div style={styles}>
+			<Box title={title} yellow={tickTock} />
+		</div>
+	)
 }
+
+export default BoxDragPreview
