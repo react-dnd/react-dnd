@@ -1,9 +1,10 @@
 ---
-path: "/examples/dustbin/single-target"
-title: "Single Target"
+path: '/examples/dustbin/single-target'
+title: 'Single Target'
 ---
 
-[Browse the Source](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Single%20Target)
+[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/01%20Dustbin/Single%20Target)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Single%20Target)
 
 This is the simplest example of drag and drop.
 
