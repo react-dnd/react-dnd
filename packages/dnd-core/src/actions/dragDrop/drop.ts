@@ -4,6 +4,7 @@ import {
 	DropPayload,
 	DragDropMonitor,
 	HandlerRegistry,
+	Identifier,
 } from '../../interfaces'
 import { DROP } from './types'
 
@@ -44,7 +45,7 @@ function verifyInvariants(monitor: DragDropMonitor) {
 }
 
 function determineDropResult(
-	targetId: string,
+	targetId: Identifier,
 	index: number,
 	registry: HandlerRegistry,
 	monitor: DragDropMonitor,

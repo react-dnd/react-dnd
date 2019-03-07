@@ -2,8 +2,7 @@
 	"extends": "../../tsconfig.esm.base.json",
 	"compilerOptions": {
 		"outDir": "./lib/esm",
-		"baseUrl": "./",
-		"skipLibCheck": true
+		"baseUrl": "./"
 	},
 	"include": ["./src/index.ts"]
 }

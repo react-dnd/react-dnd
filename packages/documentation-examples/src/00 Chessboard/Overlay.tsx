@@ -4,7 +4,7 @@ export interface OverlayProps {
 	color: string
 }
 
-const Overlay: React.SFC<OverlayProps> = ({ color }) => {
+const Overlay: React.FC<OverlayProps> = ({ color }) => {
 	return (
 		<div
 			style={{

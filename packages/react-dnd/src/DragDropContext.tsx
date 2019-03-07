@@ -1,3 +1,4 @@
+/* tslint:disable no-shadowed-variable */
 declare var require: any
 import * as React from 'react'
 import {
@@ -21,9 +22,10 @@ export interface DragDropContext<BC> {
 /**
  * Create the React Context
  */
-export const { Consumer, Provider } = React.createContext<DragDropContext<any>>(
-	{ dragDropManager: undefined },
-)
+export const context = React.createContext<DragDropContext<any>>({
+	dragDropManager: undefined,
+})
+export const { Consumer, Provider } = context
 
 /**
  * Creates the context object we're providing
@@ -49,7 +51,7 @@ export interface DragDropContextProviderProps<BackendContext> {
 /**
  * A React component that provides the React-DnD context
  */
-export const DragDropContextProvider: React.SFC<
+export const DragDropContextProvider: React.FC<
 	DragDropContextProviderProps<any>
 > = ({ backend, context, debugMode, children }) => {
 	const contextValue = createChildContext(backend, context, debugMode)

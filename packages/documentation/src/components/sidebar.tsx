@@ -9,7 +9,7 @@ export interface SideBarProps {
 	location: string
 }
 
-const SideBar: React.SFC<SideBarProps> = ({ groups, location }) => {
+const SideBar: React.FC<SideBarProps> = ({ groups, location }) => {
 	function renderGroup({ title, pages }: PageGroup, index: number) {
 		return (
 			<Group key={index}>

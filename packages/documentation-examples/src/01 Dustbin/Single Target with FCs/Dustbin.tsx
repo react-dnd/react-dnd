@@ -26,7 +26,7 @@ interface DustbinCollectedProps {
 	connectDropTarget?: ConnectDropTarget
 }
 
-const Dustbin: React.SFC<DustbinCollectedProps> = ({
+const Dustbin: React.FC<DustbinCollectedProps> = ({
 	canDrop,
 	isOver,
 	connectDropTarget,

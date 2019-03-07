@@ -22,7 +22,6 @@ module.exports = {
 	pathPrefix: '/react-dnd',
 	plugins: [
 		'gatsby-plugin-typescript',
-		'gatsby-plugin-favicon',
 		'gatsby-plugin-react-helmet',
 		'gatsby-plugin-styled-components',
 

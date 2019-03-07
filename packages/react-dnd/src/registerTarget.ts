@@ -1,10 +1,10 @@
-import { DragDropManager, DropTarget, Unsubscribe } from 'dnd-core'
+import { DragDropManager, DropTarget, Unsubscribe, Identifier } from 'dnd-core'
 
 export default function registerTarget<Context>(
 	type: string,
 	target: DropTarget,
 	manager: DragDropManager<Context>,
-): { handlerId: string; unregister: Unsubscribe } {
+): { handlerId: Identifier; unregister: Unsubscribe } {
 	const registry = manager.getRegistry()
 	const targetId = registry.addTarget(type, target)
 

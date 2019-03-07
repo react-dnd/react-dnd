@@ -12,7 +12,7 @@ const DebugModeFlag = () => (
 	</a>
 )
 
-const Header: React.SFC<HeaderProps> = ({ debugMode }) => (
+const Header: React.FC<HeaderProps> = ({ debugMode }) => (
 	<Container>
 		{debugMode ? <DebugModeFlag /> : null}
 		<NavBar />

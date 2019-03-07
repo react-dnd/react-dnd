@@ -22,7 +22,7 @@ export interface LayoutProps {
 	hideSidebar?: boolean
 }
 
-const Layout: React.SFC<LayoutProps> = props => {
+const Layout: React.FC<LayoutProps> = props => {
 	const { children, location } = props
 	const sitepath = location && location.pathname
 	const isExampleUrl = (sitepath || '')
