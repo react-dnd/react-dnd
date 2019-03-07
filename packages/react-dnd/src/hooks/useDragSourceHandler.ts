@@ -1,18 +1,18 @@
-import * as React from 'react'
+import { useMemo, useEffect, useRef } from 'react'
 import { DragDropMonitor } from 'dnd-core'
 import { DragSourceHookSpec } from '../interfaces'
 
 export function useDragSourceHandler<DragObject>(
 	sourceSpec: DragSourceHookSpec<DragObject>,
 ) {
-	const sourceSpecRef = React.useRef(sourceSpec)
+	const sourceSpecRef = useRef(sourceSpec)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		sourceSpecRef.current = sourceSpec
 	})
 
 	// Can't use createSourceFactory, as semantics are different
-	const handler = React.useMemo(
+	const handler = useMemo(
 		() => ({
 			canDrag() {
 				const { canDrag } = sourceSpecRef.current
@@ -24,16 +24,16 @@ export function useDragSourceHandler<DragObject>(
 					? isDragging()
 					: sourceId === globalMonitor.getSourceId()
 			},
-			beginDrag(component: any) {
+			beginDrag() {
 				const { beginDrag } = sourceSpecRef.current
 				if (beginDrag) {
-					beginDrag(component)
+					;(beginDrag as any)()
 				}
 			},
-			endDrag(component: any) {
+			endDrag() {
 				const { endDrag } = sourceSpecRef.current
 				if (endDrag) {
-					endDrag(component)
+					;(endDrag as any)()
 				}
 			},
 		}),

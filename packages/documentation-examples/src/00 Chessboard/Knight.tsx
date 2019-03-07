@@ -18,7 +18,7 @@ function createKnightImage() {
 	return img
 }
 
-export default () => {
+export const Knight: React.FC = () => {
 	const ref = React.useRef(null)
 	const dragPreview = React.useMemo(createKnightImage, [])
 	const dragSourceMonitor = useDragSource(ref, ItemTypes.KNIGHT, {

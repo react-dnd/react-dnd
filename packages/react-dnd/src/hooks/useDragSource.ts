@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useMemo, useEffect } from 'react'
 import { SourceType } from 'dnd-core'
 import registerSource from '../registerSource'
 import createSourceMonitor from '../createSourceMonitor'
@@ -29,10 +29,9 @@ export function useDragSource<DragObject = {}>(
 ): DragSourceMonitor & HandlerManager {
 	const dragDropManager = useDragDropManager()
 	const backend = dragDropManager.getBackend()
-	const sourceMonitor = React.useMemo(
-		() => createSourceMonitor(dragDropManager),
-		[dragDropManager],
-	) as DragSourceMonitor & HandlerManager
+	const sourceMonitor = useMemo(() => createSourceMonitor(dragDropManager), [
+		dragDropManager,
+	]) as DragSourceMonitor & HandlerManager
 
 	const handler = useDragSourceHandler<DragObject>(sourceSpec)
 
@@ -44,7 +43,7 @@ export function useDragSource<DragObject = {}>(
 		sourceMonitor,
 	)
 
-	React.useEffect(function connectDragSourceToBackend() {
+	useEffect(function connectDragSourceToBackend() {
 		const dragSourceNode = ref.current
 		const dragSourceOptions = sourceSpec.dragSourceOptions
 		return backend.connectDragSource(
@@ -54,7 +53,7 @@ export function useDragSource<DragObject = {}>(
 		)
 	}, [])
 
-	React.useEffect(function connectDragPreviewToBackend() {
+	useEffect(function connectDragPreviewToBackend() {
 		if (sourceSpec.dragPreview == null) {
 			return undefined
 		}

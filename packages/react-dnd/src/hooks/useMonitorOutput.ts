@@ -1,6 +1,7 @@
-import * as React from 'react'
+import { useEffect } from 'react'
 import { useCollector } from './useCollector'
 import { HandlerManager } from './util'
+import { DragDropMonitor } from 'dnd-core'
 import { DropTargetMonitor, DragSourceMonitor } from '../interfaces'
 
 export function useMonitorOutput<Output = {}>(
@@ -11,13 +12,16 @@ export function useMonitorOutput<Output = {}>(
 
 	// This runs on every render. There will be ways to optimise this, but for
 	// now, this is the most correct thing to do.
-	React.useEffect(function subscribeToMonitorStateChange() {
+	useEffect(function subscribeToMonitorStateChange() {
 		const handlerId = monitor.getHandlerId()
 		if (handlerId == null) {
 			return undefined
 		}
 		const options = { handlerIds: [handlerId] }
-		return (monitor as any).subscribeToStateChange(updateIfNeeded, options)
+		return (monitor as DragDropMonitor).subscribeToStateChange(
+			updateIfNeeded,
+			options,
+		)
 	})
 
 	return value

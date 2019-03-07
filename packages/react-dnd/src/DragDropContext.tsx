@@ -51,7 +51,7 @@ export interface DragDropContextProviderProps<BackendContext> {
 /**
  * A React component that provides the React-DnD context
  */
-export const DragDropContextProvider: React.SFC<
+export const DragDropContextProvider: React.FC<
 	DragDropContextProviderProps<any>
 > = ({ backend, context, debugMode, children }) => {
 	const contextValue = createChildContext(backend, context, debugMode)

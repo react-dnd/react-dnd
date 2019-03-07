@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useDropTarget, useMonitorOutput } from 'react-dnd'
-import Square from './Square'
+import { Square } from './Square'
 import { canMoveKnight, moveKnight } from './Game'
 import ItemTypes from './ItemTypes'
 import Overlay from './Overlay'
@@ -11,7 +11,9 @@ export interface BoardSquareProps {
 	children: any
 }
 
-export default (props: BoardSquareProps) => {
+export const BoardSquare: React.FC<BoardSquareProps> = (
+	props: BoardSquareProps,
+) => {
 	const ref = React.useRef(null)
 	const dropTargetMonitor = useDropTarget(ref, ItemTypes.KNIGHT, {
 		canDrop: () => canMoveKnight(props.x, props.y),

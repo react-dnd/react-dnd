@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useMemo, useEffect } from 'react'
 import { TargetType } from 'dnd-core'
 import registerTarget from '../registerTarget'
 import createTargetMonitor from '../createTargetMonitor'
@@ -23,10 +23,9 @@ export function useDropTarget(
 ): DropTargetMonitor & HandlerManager {
 	const dragDropManager = useDragDropManager()
 	const backend = dragDropManager.getBackend()
-	const targetMonitor = React.useMemo(
-		() => createTargetMonitor(dragDropManager),
-		[dragDropManager],
-	) as DropTargetMonitor & HandlerManager
+	const targetMonitor = useMemo(() => createTargetMonitor(dragDropManager), [
+		dragDropManager,
+	]) as DropTargetMonitor & HandlerManager
 	const handler = useDropTargetHandler(targetSpec)
 
 	useMonitorSubscription(
@@ -37,7 +36,7 @@ export function useDropTarget(
 		targetMonitor,
 	)
 
-	React.useEffect(function connectDropTarget() {
+	useEffect(function connectDropTarget() {
 		const dropTargetNode = ref.current
 		if (dropTargetNode) {
 			const dropTargetOptions = targetSpec.dropTargetOptions

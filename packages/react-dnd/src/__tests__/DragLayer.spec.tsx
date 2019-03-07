@@ -10,7 +10,7 @@ describe('DragLayer', () => {
 	})
 
 	it('can apply to a function component', () => {
-		const Component: React.SFC<{}> = () => null
+		const Component: React.FC<{}> = () => null
 		const DecoratedComponent = DragLayer(() => ({}))(Component)
 
 		expect(DecoratedComponent).toBeDefined()

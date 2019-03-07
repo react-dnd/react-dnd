@@ -15,16 +15,18 @@ export function useDropTargetHandler(targetSpec: DropTargetHookSpec) {
 				const { canDrop } = targetSpecRef.current
 				return canDrop ? canDrop() : true
 			},
-			hover(component: any) {
+			hover() {
+				// tslint:disable-next-line
+				console.log('HOVER ARGS', arguments)
 				const { hover } = targetSpecRef.current
 				if (hover) {
-					hover(component)
+					;(hover as any)()
 				}
 			},
-			drop(component: any) {
+			drop() {
 				const { drop } = targetSpecRef.current
 				if (drop) {
-					drop(component)
+					;(drop as any)()
 				}
 			},
 		}),

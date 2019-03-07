@@ -16,7 +16,7 @@ describe('DropTarget', () => {
 	})
 
 	it('can apply to an function component', () => {
-		const Component: React.SFC<{}> = () => null
+		const Component: React.FC<{}> = () => null
 		const DecoratedComponent = DropTarget(
 			'abc',
 			{
