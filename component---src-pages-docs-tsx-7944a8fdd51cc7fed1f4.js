@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{138:function(e,n,t){"use strict";t.r(n);var a=t(0),i=t(164),o=t(156);n.default=function(){return"undefined"!=typeof window&&Object(o.navigate)("/about"),a.createElement(i.a,{hideSidebar:!0},null)}}}]);
-//# sourceMappingURL=component---src-pages-docs-tsx-7944a8fdd51cc7fed1f4.js.map
