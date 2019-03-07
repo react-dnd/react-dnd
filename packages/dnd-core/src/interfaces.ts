@@ -191,14 +191,14 @@ export interface DragDropManager<Context> {
 export type BackendFactory = (dragDropManager: DragDropManager<any>) => Backend
 
 export interface DragSource {
-	beginDrag(monitor: DragDropMonitor, targetId: string): void
-	endDrag(monitor: DragDropMonitor, targetId: string): void
-	canDrag(monitor: DragDropMonitor, targetId: string): boolean
-	isDragging(monitor: DragDropMonitor, targetId: string): boolean
+	beginDrag(monitor: DragDropMonitor, targetId: Identifier): void
+	endDrag(monitor: DragDropMonitor, targetId: Identifier): void
+	canDrag(monitor: DragDropMonitor, targetId: Identifier): boolean
+	isDragging(monitor: DragDropMonitor, targetId: Identifier): boolean
 }
 
 export interface DropTarget {
-	canDrop(monitor: DragDropMonitor, targetId: string): boolean
-	hover(monitor: DragDropMonitor, targetId: string): void
-	drop(monitor: DragDropMonitor, targetId: string): any
+	canDrop(monitor: DragDropMonitor, targetId: Identifier): boolean
+	hover(monitor: DragDropMonitor, targetId: Identifier): void
+	drop(monitor: DragDropMonitor, targetId: Identifier): any
 }

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { DropTargetHookSpec } from '../interfaces'
+import { DropTarget } from 'dnd-core'
 
 export function useDropTargetHandler(targetSpec: DropTargetHookSpec) {
 	const targetSpecRef = React.useRef(targetSpec)
@@ -10,26 +11,25 @@ export function useDropTargetHandler(targetSpec: DropTargetHookSpec) {
 
 	// Can't use createSourceFactory, as semantics are different
 	const handler = React.useMemo(
-		() => ({
-			canDrop() {
-				const { canDrop } = targetSpecRef.current
-				return canDrop ? canDrop() : true
-			},
-			hover() {
-				// tslint:disable-next-line
-				console.log('HOVER ARGS', arguments)
-				const { hover } = targetSpecRef.current
-				if (hover) {
-					;(hover as any)()
-				}
-			},
-			drop() {
-				const { drop } = targetSpecRef.current
-				if (drop) {
-					;(drop as any)()
-				}
-			},
-		}),
+		() =>
+			({
+				canDrop(monitor, targetId) {
+					const { canDrop } = targetSpecRef.current
+					return canDrop ? canDrop() : true
+				},
+				hover(monitor, targetId) {
+					const { hover } = targetSpecRef.current
+					if (hover) {
+						hover()
+					}
+				},
+				drop(monitor, targetId) {
+					const { drop } = targetSpecRef.current
+					if (drop) {
+						drop()
+					}
+				},
+			} as DropTarget),
 		[],
 	)
 

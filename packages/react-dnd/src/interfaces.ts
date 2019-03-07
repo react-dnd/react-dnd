@@ -264,7 +264,7 @@ export interface DropTargetHookSpec {
 	 * the source's endDrag method are good places to fire Flux actions. This method will not be called if canDrop()
 	 * is defined and returns false.
 	 */
-	drop?: (component: any) => any
+	drop?: () => any
 
 	/**
 	 * Optional.
@@ -272,7 +272,7 @@ export interface DropTargetHookSpec {
 	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
-	hover?: (component: any) => void
+	hover?: () => void
 
 	/**
 	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
@@ -337,7 +337,7 @@ export interface DragSourceHookSpec<DragObject> {
 	 * to the component into it, but you should try very hard to avoid doing this because it couples the drag
 	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
 	 */
-	beginDrag: (component: any) => DragObject
+	beginDrag: () => DragObject
 
 	/**
 	 * Optional.
@@ -347,7 +347,7 @@ export interface DragSourceHookSpec<DragObject> {
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	endDrag?: (component: any) => void
+	endDrag?: () => void
 
 	/**
 	 * Optional.
