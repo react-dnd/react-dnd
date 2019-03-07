@@ -40,6 +40,7 @@
 		"typescript": "^3.3.3333"
 	},
 	"peerDependencies": {
-		"react": ">= 16.3"
+		"react": ">= 16.8.4",
+		"react-dom": ">= 16.8.4"
 	}
 }
