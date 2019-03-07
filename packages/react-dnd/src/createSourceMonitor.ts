@@ -15,17 +15,17 @@ let isCallingIsDragging = false
 
 class SourceMonitor implements DragSourceMonitor {
 	private internalMonitor: DragDropMonitor
-	private sourceId: string | undefined
+	private sourceId: Identifier | undefined
 
 	constructor(manager: DragDropManager<any>) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	public receiveHandlerId(sourceId: string) {
+	public receiveHandlerId(sourceId: Identifier) {
 		this.sourceId = sourceId
 	}
 
-	public getHandlerId(): string | undefined {
+	public getHandlerId(): Identifier | undefined {
 		return this.sourceId
 	}
 
@@ -38,7 +38,7 @@ class SourceMonitor implements DragSourceMonitor {
 
 		try {
 			isCallingCanDrag = true
-			return this.internalMonitor.canDragSource(this.sourceId as string)
+			return this.internalMonitor.canDragSource(this.sourceId as Identifier)
 		} finally {
 			isCallingCanDrag = false
 		}
@@ -53,7 +53,7 @@ class SourceMonitor implements DragSourceMonitor {
 
 		try {
 			isCallingIsDragging = true
-			return this.internalMonitor.isDraggingSource(this.sourceId as string)
+			return this.internalMonitor.isDraggingSource(this.sourceId!)
 		} finally {
 			isCallingIsDragging = false
 		}
@@ -61,17 +61,17 @@ class SourceMonitor implements DragSourceMonitor {
 
 	public subscribeToStateChange(
 		listener: Listener,
-		options?: { handlerIds: string[] | undefined },
+		options?: { handlerIds: Identifier[] | undefined },
 	): Unsubscribe {
 		return this.internalMonitor.subscribeToStateChange(listener, options)
 	}
 
-	public isDraggingSource(sourceId: string): boolean {
+	public isDraggingSource(sourceId: Identifier): boolean {
 		return this.internalMonitor.isDraggingSource(sourceId)
 	}
 
 	public isOverTarget(
-		targetId: string,
+		targetId: Identifier,
 		options?: { shallow: boolean },
 	): boolean {
 		return this.internalMonitor.isOverTarget(targetId, options)
@@ -93,11 +93,11 @@ class SourceMonitor implements DragSourceMonitor {
 		return this.internalMonitor.subscribeToOffsetChange(listener)
 	}
 
-	public canDragSource(sourceId: string): boolean {
+	public canDragSource(sourceId: Identifier): boolean {
 		return this.internalMonitor.canDragSource(sourceId)
 	}
 
-	public canDropOnTarget(targetId: string): boolean {
+	public canDropOnTarget(targetId: Identifier): boolean {
 		return this.internalMonitor.canDropOnTarget(targetId)
 	}
 

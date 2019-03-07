@@ -1,11 +1,10 @@
 declare var require: any
 import wrapConnectorHooks from './wrapConnectorHooks'
-import { Backend, Unsubscribe } from 'dnd-core'
+import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 const shallowEqual = require('shallowequal')
 
 export default function createTargetConnector(backend: Backend) {
-	let currentHandlerId: string
-
+	let currentHandlerId: Identifier
 	let currentDropTargetNode: any
 	let currentDropTargetOptions: any
 	let disconnectCurrentDropTarget: Unsubscribe | undefined
@@ -25,7 +24,7 @@ export default function createTargetConnector(backend: Backend) {
 		}
 	}
 
-	function receiveHandlerId(handlerId: string) {
+	function receiveHandlerId(handlerId: Identifier) {
 		if (handlerId === currentHandlerId) {
 			return
 		}
