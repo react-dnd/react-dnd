@@ -70,7 +70,10 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return this.store.subscribe(handleChange)
 	}
 
-	public canDragSource(sourceId: string): boolean {
+	public canDragSource(sourceId: string | undefined): boolean {
+		if (!sourceId) {
+			return false
+		}
 		const source = this.registry.getSource(sourceId)
 		invariant(source, 'Expected to find a valid source.')
 
@@ -125,7 +128,15 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return source.isDragging(this, sourceId)
 	}
 
-	public isOverTarget(targetId: string, options = { shallow: false }) {
+	public isOverTarget(
+		targetId: string | undefined,
+		options = { shallow: false },
+	) {
+		// undefined on initial render
+		if (!targetId) {
+			return false
+		}
+
 		const { shallow } = options
 		if (!this.isDragging()) {
 			return false

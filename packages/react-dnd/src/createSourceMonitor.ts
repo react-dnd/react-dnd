@@ -5,6 +5,7 @@ import {
 	DragDropMonitor,
 	Unsubscribe,
 	Listener,
+	Identifier,
 } from 'dnd-core'
 import { DragSourceMonitor } from './interfaces'
 const invariant = require('invariant')
@@ -76,7 +77,7 @@ class SourceMonitor implements DragSourceMonitor {
 		return this.internalMonitor.isOverTarget(targetId, options)
 	}
 
-	public getTargetIds(): string[] {
+	public getTargetIds(): Identifier[] {
 		return this.internalMonitor.getTargetIds()
 	}
 
@@ -84,7 +85,7 @@ class SourceMonitor implements DragSourceMonitor {
 		return this.internalMonitor.isSourcePublic()
 	}
 
-	public getSourceId(): string | null {
+	public getSourceId(): Identifier | null {
 		return this.internalMonitor.getSourceId()
 	}
 

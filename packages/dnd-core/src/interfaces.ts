@@ -58,8 +58,8 @@ export interface DragDropMonitor {
 	 * from its beginDrag() method. Returns null if no item is being dragged.
 	 */
 	getItem(): any
-	getSourceId(): string | null
-	getTargetIds(): string[]
+	getSourceId(): Identifier | null
+	getTargetIds(): Identifier[]
 	/**
 	 * Returns a plain object representing the last recorded drop result. The drop targets may optionally specify it by returning an
 	 * object from their drop() methods. When a chain of drop() is dispatched for the nested targets, bottom up, any parent that
