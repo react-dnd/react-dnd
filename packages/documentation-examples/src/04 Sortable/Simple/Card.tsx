@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useDropTarget, useDragSource } from 'react-dnd'
+import { useDropTarget, useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
 
@@ -72,7 +72,7 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 		},
 	})
 
-	const { isDragging } = useDragSource(ref, ItemTypes.CARD, {
+	const { isDragging } = useDrag(ref, ItemTypes.CARD, {
 		beginDrag: () => ({ id, index }),
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),

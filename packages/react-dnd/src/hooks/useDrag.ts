@@ -13,7 +13,7 @@ import { useDragSourceMonitor } from './useDragSourceMonitor'
  * @param type The drag source type
  * @param sourceSpec The drag source specification *
  */
-export function useDragSource<DragObject, CustomProps>(
+export function useDrag<DragObject, CustomProps>(
 	ref: Ref<any>,
 	type: SourceType,
 	sourceSpec: DragSourceHookSpec<DragObject, CustomProps> & {
