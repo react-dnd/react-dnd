@@ -31,6 +31,7 @@
 		"react": "link:../react-dnd/node_modules/react",
 		"react-dnd": "^7.2.1",
 		"react-dnd-documentation-examples": "^7.2.1",
+		"react-dnd-documentation-examples-hooks": "^7.2.1",
 		"react-dnd-html5-backend": "^7.2.0",
 		"react-dnd-test-backend": "^7.2.0",
 		"react-dom": "link:../react-dnd/node_modules/react-dom",
