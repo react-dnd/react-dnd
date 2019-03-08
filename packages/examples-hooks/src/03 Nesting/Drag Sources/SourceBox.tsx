@@ -1,28 +1,15 @@
 // tslint:disable max-classes-per-file jsx-no-lambda
-import React from 'react'
-import {
-	DragSource,
-	ConnectDragSource,
-	DragSourceMonitor,
-	DragSourceConnector,
-} from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import Colors from './Colors'
-import { SourceBox } from '../../01 Dustbin/Stress Test'
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem',
 	margin: '0.5rem',
-}
-
-const ColorSource = {
-	canDrag(props: SourceBoxProps) {
-		return !props.forbidDrag
-	},
-
-	beginDrag() {
-		return {}
-	},
 }
 
 export interface SourceBoxProps {
@@ -31,66 +18,55 @@ export interface SourceBoxProps {
 	onToggleForbidDrag?: () => void
 }
 
-interface SourceBoxCollectedProps {
-	connectDragSource: ConnectDragSource
-	isDragging: boolean
-}
+const SourceBox: React.FC<SourceBoxProps> = ({
+	color,
+	forbidDrag,
+	onToggleForbidDrag,
+	children,
+}) => {
+	const ref = React.useRef(null)
+	const { isDragging } = useDrag({
+		ref,
+		type: `${color}`,
+		canDrag: () => !forbidDrag,
+		collect: monitor => ({
+			isDragging: monitor.isDragging(),
+		}),
+	})
+	const opacity = isDragging ? 0.4 : 1
 
-class SourceBoxRaw extends React.Component<
-	SourceBoxProps & SourceBoxCollectedProps
-> {
-	public render() {
-		const {
-			color,
-			children,
-			isDragging,
-			connectDragSource,
-			forbidDrag,
-			onToggleForbidDrag,
-		} = this.props
-		const opacity = isDragging ? 0.4 : 1
-
-		let backgroundColor
-		switch (color) {
-			case Colors.YELLOW:
-				backgroundColor = 'lightgoldenrodyellow'
-				break
-			case Colors.BLUE:
-				backgroundColor = 'lightblue'
-				break
-			default:
-				break
-		}
-
-		return connectDragSource(
-			<div
-				style={{
-					...style,
-					backgroundColor,
-					opacity,
-					cursor: forbidDrag ? 'default' : 'move',
-				}}
-			>
-				<input
-					type="checkbox"
-					checked={forbidDrag}
-					onChange={onToggleForbidDrag}
-				/>
-				<small>Forbid drag</small>
-				{children}
-			</div>,
-		)
+	let backgroundColor
+	switch (color) {
+		case Colors.YELLOW:
+			backgroundColor = 'lightgoldenrodyellow'
+			break
+		case Colors.BLUE:
+			backgroundColor = 'lightblue'
+			break
+		default:
+			break
 	}
-}
 
-const SourceBox = DragSource(
-	(props: SourceBoxProps) => props.color + '',
-	ColorSource,
-	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}),
-)(SourceBoxRaw)
+	return (
+		<div
+			ref={ref}
+			style={{
+				...style,
+				backgroundColor,
+				opacity,
+				cursor: forbidDrag ? 'default' : 'move',
+			}}
+		>
+			<input
+				type="checkbox"
+				checked={forbidDrag}
+				onChange={onToggleForbidDrag}
+			/>
+			<small>Forbid drag</small>
+			{children}
+		</div>
+	)
+}
 
 export interface StatefulSourceBoxProps {
 	color: string

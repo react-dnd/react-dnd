@@ -1,6 +1,10 @@
-import React from 'react'
-import { DragSource, ConnectDragSource } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -11,43 +15,27 @@ const style: React.CSSProperties = {
 	cursor: 'move',
 }
 
-const boxSource = {
-	beginDrag() {
-		return {}
-	},
-}
-
 export interface SourceBoxProps {
 	showCopyIcon?: boolean
 }
 
-interface SourceBoxCollectedProps {
-	isDragging: boolean
-	connectDragSource: ConnectDragSource
+const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
+	const ref = React.useRef(null)
+	const { opacity } = useDrag({
+		ref,
+		type: ItemTypes.BOX,
+		options: {
+			dropEffect: showCopyIcon ? 'copy' : 'move',
+		},
+		collect: monitor => ({
+			opacity: monitor.isDragging() ? 0.4 : 1,
+		}),
+	})
+
+	return (
+		<div ref={ref} style={{ ...style, opacity }}>
+			When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
+		</div>
+	)
 }
-
-class SourceBox extends React.Component<
-	SourceBoxProps & SourceBoxCollectedProps
-> {
-	public render() {
-		const { isDragging, connectDragSource, showCopyIcon } = this.props
-		const opacity = isDragging ? 0.4 : 1
-		const dropEffect = showCopyIcon ? 'copy' : 'move'
-
-		return connectDragSource(
-			<div style={{ ...style, opacity }}>
-				When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
-			</div>,
-			{ dropEffect },
-		)
-	}
-}
-
-export default DragSource<SourceBoxProps, SourceBoxCollectedProps>(
-	ItemTypes.BOX,
-	boxSource,
-	(connect, monitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}),
-)(SourceBox)
+export default SourceBox

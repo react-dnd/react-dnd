@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { name } from 'faker'
 import Card from './Card'
 import update from 'immutability-helper'
@@ -45,16 +45,19 @@ export default class Container extends React.Component<{}, ContainerState> {
 		const { cardsByIndex } = this.state
 
 		return (
-			<div style={style}>
-				{cardsByIndex.map(card => (
-					<Card
-						key={card.id}
-						id={card.id}
-						text={card.text}
-						moveCard={this.moveCard}
-					/>
-				))}
-			</div>
+			<>
+				<h1>EXPERIMENTAL API</h1>
+				<div style={style}>
+					{cardsByIndex.map(card => (
+						<Card
+							key={card.id}
+							id={card.id}
+							text={card.text}
+							moveCard={this.moveCard}
+						/>
+					))}
+				</div>
+			</>
 		)
 	}
 

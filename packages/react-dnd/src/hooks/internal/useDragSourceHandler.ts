@@ -17,7 +17,11 @@ export function useDragSourceHandler<DragObject, CustomProps>(
 			({
 				beginDrag(monitor, target) {
 					const { begin } = sourceSpecRef.current
-					return begin((monitor as any) as DragSourceMonitor)
+					if (begin) {
+						return begin((monitor as any) as DragSourceMonitor)
+					} else {
+						return {}
+					}
 				},
 				canDrag(monitor, target) {
 					const { canDrag } = sourceSpecRef.current

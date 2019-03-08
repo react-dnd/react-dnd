@@ -28,7 +28,7 @@ export function useDropTargetHandler<CustomProps>(
 				drop(monitor, targetId) {
 					const { drop } = targetSpecRef.current
 					if (drop) {
-						drop((monitor as any) as DropTargetMonitor)
+						return drop((monitor as any) as DropTargetMonitor)
 					}
 				},
 			} as DropTarget),

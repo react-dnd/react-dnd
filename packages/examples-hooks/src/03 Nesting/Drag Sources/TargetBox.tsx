@@ -1,7 +1,11 @@
 // tslint:disable max-classes-per-file
-import React from 'react'
-import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import Colors from './Colors'
+
+const {
+	useDrop,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px solid gray',
@@ -11,71 +15,47 @@ const style: React.CSSProperties = {
 	textAlign: 'center',
 }
 
-const ColorTarget = {
-	drop(props: TargetBoxProps, monitor: DropTargetMonitor) {
-		props.onDrop(monitor.getItemType())
-	},
-}
-
 export interface TargetBoxProps {
 	onDrop: (item: any) => void
 	lastDroppedColor?: string
 }
 
-interface TargetBoxCollectedProps {
-	isOver: boolean
-	canDrop: boolean
-	draggingColor: string
-	connectDropTarget: ConnectDropTarget
-}
+const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
+	const ref = React.useRef(null)
+	const { isOver, draggingColor, canDrop } = useDrop({
+		ref,
+		type: [Colors.YELLOW, Colors.BLUE],
+		drop(monitor) {
+			onDrop(monitor.getItemType())
+		},
+		collect: monitor => ({
+			isOver: monitor.isOver(),
+			canDrop: monitor.canDrop(),
+			draggingColor: monitor.getItemType() as string,
+		}),
+	})
 
-class TargetBoxRaw extends React.Component<
-	TargetBoxProps & TargetBoxCollectedProps
-> {
-	public render() {
-		const {
-			canDrop,
-			isOver,
-			draggingColor,
-			lastDroppedColor,
-			connectDropTarget,
-		} = this.props
-		const opacity = isOver ? 1 : 0.7
-
-		let backgroundColor = '#fff'
-		switch (draggingColor) {
-			case Colors.BLUE:
-				backgroundColor = 'lightblue'
-				break
-			case Colors.YELLOW:
-				backgroundColor = 'lightgoldenrodyellow'
-				break
-			default:
-				break
-		}
-
-		return connectDropTarget(
-			<div style={{ ...style, backgroundColor, opacity }}>
-				<p>Drop here.</p>
-
-				{!canDrop && lastDroppedColor && (
-					<p>Last dropped: {lastDroppedColor}</p>
-				)}
-			</div>,
-		)
+	const opacity = isOver ? 1 : 0.7
+	let backgroundColor = '#fff'
+	switch (draggingColor) {
+		case Colors.BLUE:
+			backgroundColor = 'lightblue'
+			break
+		case Colors.YELLOW:
+			backgroundColor = 'lightgoldenrodyellow'
+			break
+		default:
+			break
 	}
-}
 
-const TargetBox = DropTarget<TargetBoxProps, TargetBoxCollectedProps>(
-	[Colors.YELLOW, Colors.BLUE],
-	ColorTarget,
-	(connect, monitor) => ({
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver(),
-		canDrop: monitor.canDrop(),
-		draggingColor: monitor.getItemType() as string,
-	}),
-)(TargetBoxRaw)
+	return (
+		<div ref={ref} style={{ ...style, backgroundColor, opacity }}>
+			<p>Drop here.</p>
+
+			{!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
+		</div>
+	)
+}
 
 export interface StatefulTargetBoxState {
 	lastDroppedColor: string | null

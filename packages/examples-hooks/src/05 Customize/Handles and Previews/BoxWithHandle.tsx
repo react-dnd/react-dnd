@@ -1,6 +1,9 @@
-import React from 'react'
-import { DragSource, ConnectDragPreview, ConnectDragSource } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -19,34 +22,23 @@ const handleStyle: React.CSSProperties = {
 	cursor: 'move',
 }
 
-const boxSource = {
-	beginDrag() {
-		return {}
-	},
+const BoxWithHandle: React.FC = () => {
+	const ref = React.useRef(null)
+	const preview = React.useRef(null)
+	const { opacity } = useDrag({
+		ref,
+		type: ItemTypes.BOX,
+		preview,
+		collect: monitor => ({
+			opacity: monitor.isDragging() ? 0.4 : 1,
+		}),
+	})
+
+	return (
+		<div ref={preview} style={{ ...style, opacity }}>
+			<div ref={ref} style={handleStyle} />
+			Drag me by the handle
+		</div>
+	)
 }
-
-export interface BoxWithHandleProps {
-	connectDragSource: ConnectDragSource
-	connectDragPreview: ConnectDragPreview
-	isDragging: boolean
-}
-
-class BoxWithHandle extends React.Component<BoxWithHandleProps> {
-	public render() {
-		const { isDragging, connectDragSource, connectDragPreview } = this.props
-		const opacity = isDragging ? 0.4 : 1
-
-		return connectDragPreview(
-			<div style={{ ...style, opacity }}>
-				{connectDragSource(<div style={handleStyle} />)}
-				Drag me by the handle
-			</div>,
-		)
-	}
-}
-
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	connectDragPreview: connect.dragPreview(),
-	isDragging: monitor.isDragging(),
-}))(BoxWithHandle)
+export default BoxWithHandle
