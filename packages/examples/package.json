@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-documentation-examples",
-	"version": "7.2.0",
+	"version": "7.2.1",
 	"private": true,
 	"description": "Drag and Drop for React",
 	"main": "lib/cjs/index.js",
@@ -27,7 +27,7 @@
 		"immutability-helper": "^3.0.0",
 		"lodash": "^4.17.11",
 		"query-string": "^6.3.0",
-		"react-dnd": "^7.2.0",
+		"react-dnd": "^7.2.1",
 		"react-dnd-html5-backend": "^7.2.0",
 		"react-frame-component": "^4.1.0"
 	},
