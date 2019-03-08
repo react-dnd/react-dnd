@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { DragLayerMonitor } from '../interfaces'
-import { useDragDropManager } from './useDragDropManager'
-import { useCollector } from './useCollector'
+import { useDragDropManager } from './internal/useDragDropManager'
+import { useCollector } from './internal/useCollector'
 
 /**
  * useDragLayer Hook  (This API is experimental and subject to breaking changes in non-breaking versions)
