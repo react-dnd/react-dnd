@@ -1,7 +1,11 @@
 import React, { useRef, useMemo } from 'react'
-import { useDrag } from 'react-dnd'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
+
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const knightStyle: React.CSSProperties = {
 	fontSize: 40,

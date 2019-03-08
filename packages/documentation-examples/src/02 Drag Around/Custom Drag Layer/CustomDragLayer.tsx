@@ -1,8 +1,14 @@
 import React from 'react'
-import { XYCoord, useDragLayer } from 'react-dnd'
+import {
+	XYCoord,
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'
 import snapToGrid from './snapToGrid'
+const {
+	useDragLayer,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const layerStyles: React.CSSProperties = {
 	position: 'fixed',

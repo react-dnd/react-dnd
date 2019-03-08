@@ -1,7 +1,12 @@
 import React, { useRef } from 'react'
-import { useDrop, useDrag } from 'react-dnd'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
+
+const {
+	useDrop,
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
 	border: '1px dashed gray',

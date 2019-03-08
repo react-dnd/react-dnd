@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react'
-import { useDrop } from 'react-dnd'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'
 import update from 'immutability-helper'
+const {
+	useDrop,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const styles: React.CSSProperties = {
 	width: 300,
