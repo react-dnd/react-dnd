@@ -77,7 +77,7 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 	const { isDragging } = useDrag({
 		ref,
 		type: ItemTypes.CARD,
-		beginDrag: () => ({ id, index }),
+		begin: () => ({ id, index }),
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
 		}),

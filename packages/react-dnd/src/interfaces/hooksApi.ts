@@ -59,7 +59,7 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	 * to the component into it, but you should try very hard to avoid doing this because it couples the drag
 	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
 	 */
-	beginDrag: (monitor: DragSourceMonitor) => DragObject
+	begin: (monitor: DragSourceMonitor) => DragObject
 
 	/**
 	 * Optional.
@@ -69,7 +69,7 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	endDrag?: (monitor: DragSourceMonitor) => void
+	end?: (monitor: DragSourceMonitor) => void
 
 	/**
 	 * Optional.
