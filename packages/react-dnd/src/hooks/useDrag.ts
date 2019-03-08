@@ -16,9 +16,9 @@ export function useDrag<DragObject, CustomProps>(
 	const {
 		ref,
 		type,
-		dragSourceOptions,
-		dragPreview,
-		dragPreviewOptions,
+		options: dragSourceOptions,
+		preview: dragPreview,
+		previewOptions: dragPreviewOptions,
 		collect,
 	} = spec
 	const manager = useDragDropManager()

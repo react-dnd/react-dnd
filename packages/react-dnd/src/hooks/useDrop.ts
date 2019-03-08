@@ -12,7 +12,7 @@ import { useDropTargetMonitor } from './internal/useDropTargetMonitor'
 export function useDrop<CustomProps>(
 	spec: DropTargetHookSpec<CustomProps>,
 ): CustomProps {
-	const { ref, type, dropTargetOptions, collect } = spec
+	const { ref, type, options: dropTargetOptions, collect } = spec
 	const manager = useDragDropManager()
 	const backend = manager.getBackend()
 	const handler = useDropTargetHandler<CustomProps>(spec)

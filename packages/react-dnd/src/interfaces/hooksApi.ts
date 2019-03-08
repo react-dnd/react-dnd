@@ -9,7 +9,7 @@ import { DragSourceOptions, DragPreviewOptions } from './options'
 export interface DropTargetHookSpec<CollectedProps> {
 	ref: RefObject<any>
 	type: TargetType
-	dropTargetOptions?: any
+	options?: any
 
 	/**
 	 * Optional.
@@ -47,9 +47,9 @@ export interface DropTargetHookSpec<CollectedProps> {
 export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	ref: RefObject<any>
 	type: SourceType
-	dragSourceOptions?: DragSourceOptions
-	dragPreview?: React.Ref<any> | Element
-	dragPreviewOptions?: DragPreviewOptions
+	options?: DragSourceOptions
+	preview?: React.Ref<any> | Element
+	previewOptions?: DragPreviewOptions
 
 	/**
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
