@@ -1,6 +1,9 @@
-import React from 'react'
-import { DragSource, ConnectDragSource } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
 	display: 'inline-block',
@@ -10,23 +13,13 @@ const style = {
 	cursor: 'move',
 }
 
-const boxSource = {
-	beginDrag() {
-		return {}
-	},
+const Box: React.FC = () => {
+	const ref = React.useRef(null)
+	useDrag({ ref, type: ItemTypes.BOX })
+	return (
+		<div ref={ref} style={style}>
+			Drag me
+		</div>
+	)
 }
-
-export interface BoxProps {
-	connectDragSource: ConnectDragSource
-}
-
-class Box extends React.Component<BoxProps> {
-	public render() {
-		const { connectDragSource } = this.props
-
-		return connectDragSource(<div style={style}>Drag me</div>)
-	}
-}
-export default DragSource(ItemTypes.BOX, boxSource, connect => ({
-	connectDragSource: connect.dragSource(),
-}))(Box)
+export default Box

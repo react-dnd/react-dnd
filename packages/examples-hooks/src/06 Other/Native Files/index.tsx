@@ -1,32 +1,31 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { DropTargetMonitor } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import TargetBox from './TargetBox'
 import FileList from './FileList'
-
 export interface ContainerState {
 	droppedFiles: any[]
 }
+const Container: React.FC = () => {
+	const [droppedFiles, setDroppedFiles] = useState([])
+	const { FILE } = NativeTypes
 
-export default class Container extends React.Component<{}, ContainerState> {
-	public state = { droppedFiles: [] }
+	const handleFileDrop = useCallback(
+		(item: any, monitor: DropTargetMonitor) => {
+			if (monitor) {
+				const files = monitor.getItem().files
+				setDroppedFiles(files)
+			}
+		},
+		[],
+	)
 
-	public render() {
-		const { FILE } = NativeTypes
-		const { droppedFiles } = this.state
-
-		return (
-			<>
-				<TargetBox accepts={[FILE]} onDrop={this.handleFileDrop} />
-				<FileList files={droppedFiles} />
-			</>
-		)
-	}
-
-	private handleFileDrop = (item: any, monitor: DropTargetMonitor) => {
-		if (monitor) {
-			const droppedFiles = monitor.getItem().files
-			this.setState({ droppedFiles })
-		}
-	}
+	return (
+		<>
+			<h1>EXPERIMENTAL API</h1>
+			<TargetBox accepts={[FILE]} onDrop={handleFileDrop} />
+			<FileList files={droppedFiles} />
+		</>
+	)
 }
+export default Container

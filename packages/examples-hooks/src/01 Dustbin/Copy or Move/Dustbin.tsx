@@ -1,6 +1,9 @@
-import React from 'react'
-import { DropTarget, ConnectDropTarget } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from '../Single Target/ItemTypes'
+const {
+	useDrop,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	height: '12rem',
@@ -15,50 +18,43 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-const boxTarget = {
-	drop({ allowedDropEffect }: DustbinProps) {
-		return {
-			name: `${allowedDropEffect} Dustbin`,
-			allowedDropEffect,
-		}
-	},
-}
-
 export interface DustbinProps {
 	allowedDropEffect: string
 }
 
-interface DustbinCollectedProps {
-	connectDropTarget: ConnectDropTarget
-	canDrop: boolean
-	isOver: boolean
-}
-
-class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
-	public render() {
-		const { canDrop, isOver, allowedDropEffect, connectDropTarget } = this.props
-		const isActive = canDrop && isOver
-
-		let backgroundColor = '#222'
-		if (isActive) {
-			backgroundColor = 'darkgreen'
-		} else if (canDrop) {
-			backgroundColor = 'darkkhaki'
-		}
-
-		return connectDropTarget(
-			<div style={{ ...style, backgroundColor }}>
-				{`Works with ${allowedDropEffect} drop effect`}
-				<br />
-				<br />
-				{isActive ? 'Release to drop' : 'Drag a box here'}
-			</div>,
-		)
+function selectBackgroundColor(isActive: boolean, canDrop: boolean) {
+	if (isActive) {
+		return 'darkgreen'
+	} else if (canDrop) {
+		return 'darkkhaki'
+	} else {
+		return '#222'
 	}
 }
 
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	canDrop: monitor.canDrop(),
-}))(Dustbin)
+const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
+	const ref = React.useRef(null)
+	const { canDrop, isOver } = useDrop({
+		ref,
+		type: ItemTypes.BOX,
+		drop: () => ({
+			name: `${allowedDropEffect} Dustbin`,
+			allowedDropEffect,
+		}),
+		collect: monitor => ({
+			isOver: monitor.isOver(),
+			canDrop: monitor.canDrop(),
+		}),
+	})
+	const isActive = canDrop && isOver
+	const backgroundColor = selectBackgroundColor(isActive, canDrop)
+	return (
+		<div ref={ref} style={{ ...style, backgroundColor }}>
+			{`Works with ${allowedDropEffect} drop effect`}
+			<br />
+			<br />
+			{isActive ? 'Release to drop' : 'Drag a box here'}
+		</div>
+	)
+}
+export default Dustbin

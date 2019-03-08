@@ -1,6 +1,6 @@
 // tslint:disable jsx-no-lambda
 declare var require: any
-import React from 'react'
+import * as React from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
@@ -71,12 +71,13 @@ export default class Container extends React.Component<{}, ContainerState> {
 
 		return (
 			<div>
+				<h1>EXPERIMENTAL API</h1>
 				<div style={{ overflow: 'hidden', clear: 'both' }}>
 					{dustbins.map(({ accepts, lastDroppedItem }, index) => (
 						<Dustbin
 							accepts={accepts}
 							lastDroppedItem={lastDroppedItem}
-							onDrop={item => this.handleDrop(index, item)}
+							onDrop={(item: { name: string }) => this.handleDrop(index, item)}
 							key={index}
 						/>
 					))}

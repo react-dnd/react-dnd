@@ -1,10 +1,9 @@
-import React from 'react'
-import {
-	DragSource,
-	DragSourceConnector,
-	DragSourceMonitor,
-	ConnectDragSource,
-} from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -16,47 +15,34 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-const boxSource = {
-	beginDrag(props: BoxProps) {
-		return {
-			name: props.name,
-		}
-	},
-
-	isDragging(props: BoxProps, monitor: DragSourceMonitor) {
-		const item = monitor.getItem()
-		return props.name === item.name
-	},
-}
-
 export interface BoxProps {
 	name: string
 	type: string
 	isDropped: boolean
 }
 
-interface BoxCollectedProps {
-	isDragging: boolean
-	connectDragSource: ConnectDragSource
-}
-class Box extends React.Component<BoxProps & BoxCollectedProps> {
-	public render() {
-		const { name, isDropped, isDragging, connectDragSource } = this.props
-		const opacity = isDragging ? 0.4 : 1
+const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
+	const ref = React.useRef(null)
+	const { isDragging } = useDrag({
+		ref,
+		type,
+		begin: () => ({ name }),
+		isDragging(monitor) {
+			const item = monitor.getItem()
+			return name === item.name
+		},
+		collect: monitor => ({
+			isDragging: monitor.isDragging(),
+		}),
+	})
 
-		return connectDragSource(
-			<div style={{ ...style, opacity }}>
-				{isDropped ? <s>{name}</s> : name}
-			</div>,
-		)
-	}
+	const opacity = isDragging ? 0.4 : 1
+
+	return (
+		<div ref={ref} style={{ ...style, opacity }}>
+			{isDropped ? <s>{name}</s> : name}
+		</div>
+	)
 }
 
-export default DragSource<BoxProps, BoxCollectedProps>(
-	(props: BoxProps) => props.type,
-	boxSource,
-	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}),
-)(Box)
+export default Box

@@ -1,6 +1,10 @@
-import React from 'react'
-import { DragSource, ConnectDragSource } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	position: 'absolute',
@@ -10,13 +14,6 @@ const style: React.CSSProperties = {
 	cursor: 'move',
 }
 
-const boxSource = {
-	beginDrag(props: BoxProps) {
-		const { id, left, top } = props
-		return { id, left, top }
-	},
-}
-
 export interface BoxProps {
 	id: any
 	left: number
@@ -24,36 +21,31 @@ export interface BoxProps {
 	hideSourceOnDrag?: boolean
 }
 
-interface BoxCollectedProps {
-	connectDragSource: ConnectDragSource
-	isDragging?: boolean
-}
+const Box: React.FC<BoxProps> = ({
+	id,
+	left,
+	top,
+	hideSourceOnDrag,
+	children,
+}) => {
+	const ref = React.useRef(null)
+	const { isDragging } = useDrag({
+		ref,
+		type: ItemTypes.BOX,
+		begin: () => ({ id, left, top }),
+		collect: monitor => ({
+			isDragging: monitor.isDragging(),
+		}),
+	})
 
-class Box extends React.Component<BoxProps & BoxCollectedProps> {
-	public render() {
-		const {
-			hideSourceOnDrag,
-			left,
-			top,
-			connectDragSource,
-			isDragging,
-			children,
-		} = this.props
-		if (isDragging && hideSourceOnDrag) {
-			return null
-		}
-
-		return connectDragSource(
-			<div style={{ ...style, left, top }}>{children}</div>,
-		)
+	if (isDragging && hideSourceOnDrag) {
+		return <div ref={ref} />
 	}
+	return (
+		<div ref={ref} style={{ ...style, left, top }}>
+			{children}
+		</div>
+	)
 }
 
-export default DragSource<BoxProps, BoxCollectedProps>(
-	ItemTypes.BOX,
-	boxSource,
-	(connect, monitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}),
-)(Box)
+export default Box
