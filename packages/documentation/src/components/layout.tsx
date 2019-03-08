@@ -14,6 +14,7 @@ import { PageGroup } from '../constants'
 import { APIPages, ExamplePages } from '../constants'
 import Header from './header'
 import './layout.css'
+import { isExperimentalApiMode } from '../util/renderHtmlAst'
 require('prismjs/themes/prism.css')
 const favicon = require('../favicon.png')
 
@@ -31,6 +32,7 @@ const Layout: React.FC<LayoutProps> = props => {
 	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
 	const hideSidebar = props.hideSidebar || sitepath === '/about'
 	const debugMode = isDebugMode()
+	const experimentalMode = isExperimentalApiMode()
 	return (
 		<>
 			<Helmet
@@ -47,7 +49,7 @@ const Layout: React.FC<LayoutProps> = props => {
 					href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css"
 				/>
 			</Helmet>
-			<Header debugMode={debugMode} />
+			<Header debugMode={debugMode} experimentalMode={experimentalMode} />
 			<DragDropContextProvider backend={HTML5Backend} debugMode={debugMode}>
 				<ContentContainer>
 					<PageBody hasSidebar={sitepath !== '/about'}>
