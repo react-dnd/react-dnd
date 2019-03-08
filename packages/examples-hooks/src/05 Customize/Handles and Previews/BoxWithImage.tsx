@@ -1,7 +1,11 @@
-import React from 'react'
-import { DragSource, ConnectDragPreview, ConnectDragSource } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import boxImage from './boxImage'
+
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
 	border: '1px dashed gray',
@@ -12,37 +16,31 @@ const style = {
 	width: '20rem',
 }
 
-const BoxSource = {
-	beginDrag() {
-		return {}
-	},
-}
+const BoxWithImage: React.FC = () => {
+	const ref = React.useRef(null)
+	const dragPreview = React.useRef<HTMLImageElement>(null)
 
-export interface BoxWithImageProps {
-	connectDragSource: ConnectDragSource
-	connectDragPreview: ConnectDragPreview
-	isDragging: boolean
-}
-
-class BoxWithImage extends React.Component<BoxWithImageProps> {
-	public componentDidMount() {
+	React.useEffect(() => {
 		const img = new Image()
-		img.onload = () =>
-			this.props.connectDragPreview && this.props.connectDragPreview(img)
+		img.onload = () => {
+			;(dragPreview as any).current = img
+		}
 		img.src = boxImage
-	}
+	})
+	const { opacity } = useDrag({
+		ref,
+		type: ItemTypes.BOX,
+		dragPreview: dragPreview.current,
+		begin: () => ({}),
+		collect: monitor => ({
+			opacity: monitor.isDragging ? 0.4 : 1,
+		}),
+	})
 
-	public render() {
-		const { isDragging, connectDragSource } = this.props
-		const opacity = isDragging ? 0.4 : 1
-
-		return connectDragSource(
-			<div style={{ ...style, opacity }}>Drag me to see an image</div>,
-		)
-	}
+	return (
+		<div ref={ref} style={{ ...style, opacity }}>
+			Drag me to see an image
+		</div>
+	)
 }
-export default DragSource(ItemTypes.BOX, BoxSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	connectDragPreview: connect.dragPreview(),
-	isDragging: monitor.isDragging(),
-}))(BoxWithImage)
+export default BoxWithImage

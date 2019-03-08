@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
-	DropTarget,
-	DropTargetConnector,
-	ConnectDropTarget,
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
 	DropTargetMonitor,
 } from 'react-dnd'
+const {
+	useDrop,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px solid gray',
@@ -14,46 +15,33 @@ const style: React.CSSProperties = {
 	textAlign: 'center',
 }
 
-const boxTarget = {
-	drop(props: TargetBoxProps, monitor: DropTargetMonitor) {
-		if (props.onDrop) {
-			props.onDrop(props, monitor)
-		}
-	},
-}
-
 export interface TargetBoxProps {
 	accepts: string[]
 	onDrop: (props: TargetBoxProps, monitor: DropTargetMonitor) => void
 }
 
-interface TargetBoxCollectedProps {
-	isOver: boolean
-	canDrop: boolean
-	connectDropTarget: ConnectDropTarget
+const TargetBox: React.FC<TargetBoxProps> = props => {
+	const { accepts, onDrop } = props
+	const ref = useRef(null)
+	const { canDrop, isOver } = useDrop({
+		ref,
+		type: accepts,
+		drop(monitor) {
+			if (onDrop) {
+				onDrop(props, monitor)
+			}
+		},
+		collect: monitor => ({
+			isOver: monitor.isOver,
+			canDrop: monitor.canDrop,
+		}),
+	})
+	const isActive = canDrop && isOver
+	return (
+		<div ref={ref} style={style}>
+			{isActive ? 'Release to drop' : 'Drag file here'}
+		</div>
+	)
 }
 
-class TargetBox extends React.Component<
-	TargetBoxProps & TargetBoxCollectedProps
-> {
-	public render() {
-		const { canDrop, isOver, connectDropTarget } = this.props
-		const isActive = canDrop && isOver
-
-		return connectDropTarget(
-			<div style={style}>
-				{isActive ? 'Release to drop' : 'Drag file here'}
-			</div>,
-		)
-	}
-}
-
-export default DropTarget<TargetBoxProps, TargetBoxCollectedProps>(
-	(props: TargetBoxProps) => props.accepts,
-	boxTarget,
-	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver(),
-		canDrop: monitor.canDrop(),
-	}),
-)(TargetBox)
+export default TargetBox

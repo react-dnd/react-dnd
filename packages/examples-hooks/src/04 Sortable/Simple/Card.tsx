@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import * as React from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
@@ -24,7 +24,7 @@ export interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
-	const ref = useRef<HTMLDivElement>(null)
+	const ref = React.useRef<HTMLDivElement>(null)
 
 	useDrop({
 		ref,

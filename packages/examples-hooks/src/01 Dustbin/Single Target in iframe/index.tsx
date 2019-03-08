@@ -1,7 +1,7 @@
 declare var require: any
 
-import React from 'react'
-import { DragDropContextProvider } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Dustbin from '../Single Target/Dustbin'
 import Box from '../Single Target/Box'

@@ -1,10 +1,5 @@
-import React from 'react'
-import {
-	DragSource,
-	DragSourceConnector,
-	DragSourceMonitor,
-	ConnectDragSource,
-} from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',

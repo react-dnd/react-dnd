@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import * as React from 'react'
 import Card from './Card'
 import update from 'immutability-helper'
 import { ContainerProps } from '../../02 Drag Around/Naive/Container'
@@ -16,7 +16,7 @@ export interface ContainerState {
 
 const Container: React.FC<ContainerProps> = ({}) => {
 	{
-		const [cards, setCards] = useState([
+		const [cards, setCards] = React.useState([
 			{
 				id: 1,
 				text: 'Write a cool JS library',

@@ -1,13 +1,15 @@
-import React from 'react'
+import * as React from 'react'
 import {
-	DropTarget,
-	ConnectDropTarget,
-	DropTargetMonitor,
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
 	XYCoord,
 } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
 import update from 'immutability-helper'
+
+const {
+	useDrop,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const styles: React.CSSProperties = {
 	width: 300,
@@ -16,88 +18,66 @@ const styles: React.CSSProperties = {
 	position: 'relative',
 }
 
-const boxTarget = {
-	drop(
-		props: ContainerProps,
-		monitor: DropTargetMonitor,
-		component: Container | null,
-	) {
-		if (!component) {
-			return
-		}
-		const item = monitor.getItem()
-		const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
-		const left = Math.round(item.left + delta.x)
-		const top = Math.round(item.top + delta.y)
-
-		component.moveBox(item.id, left, top)
-	},
-}
-
 export interface ContainerProps {
 	hideSourceOnDrag: boolean
-}
-
-interface ContainerCollectedProps {
-	connectDropTarget: ConnectDropTarget
 }
 
 export interface ContainerState {
 	boxes: { [key: string]: { top: number; left: number; title: string } }
 }
 
-class Container extends React.Component<
-	ContainerProps & ContainerCollectedProps,
-	ContainerState
-> {
-	public state: ContainerState = {
-		boxes: {
-			a: { top: 20, left: 80, title: 'Drag me around' },
-			b: { top: 180, left: 20, title: 'Drag me too' },
+const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
+	const [boxes, setBoxes] = React.useState<{
+		[key: string]: {
+			top: number
+			left: number
+			title: string
+		}
+	}>({
+		a: { top: 20, left: 80, title: 'Drag me around' },
+		b: { top: 180, left: 20, title: 'Drag me too' },
+	})
+
+	const ref = React.useRef(null)
+	useDrop({
+		ref,
+		type: ItemTypes.BOX,
+		drop(monitor) {
+			const item = monitor.getItem()
+			const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
+			const left = Math.round(item.left + delta.x)
+			const top = Math.round(item.top + delta.y)
+			moveBox(item.id, left, top)
 		},
-	}
+	})
 
-	public render() {
-		const { hideSourceOnDrag, connectDropTarget } = this.props
-		const { boxes } = this.state
-
-		return connectDropTarget(
-			<div style={styles}>
-				{Object.keys(boxes).map(key => {
-					const { left, top, title } = boxes[key]
-					return (
-						<Box
-							key={key}
-							id={key}
-							left={left}
-							top={top}
-							hideSourceOnDrag={hideSourceOnDrag}
-						>
-							{title}
-						</Box>
-					)
-				})}
-			</div>,
-		)
-	}
-
-	public moveBox(id: string, left: number, top: number) {
-		this.setState(
-			update(this.state, {
-				boxes: {
-					[id]: {
-						$merge: { left, top },
-					},
+	const moveBox = (id: string, left: number, top: number) => {
+		setBoxes(
+			update(boxes, {
+				[id]: {
+					$merge: { left, top },
 				},
 			}),
 		)
 	}
-}
 
-export default DropTarget<ContainerProps, ContainerCollectedProps>(
-	ItemTypes.BOX,
-	boxTarget,
-	(connect: any) => ({
-		connectDropTarget: connect.dropTarget(),
-	}),
-)(Container)
+	return (
+		<div ref={ref} style={styles}>
+			{Object.keys(boxes).map(key => {
+				const { left, top, title } = boxes[key]
+				return (
+					<Box
+						key={key}
+						id={key}
+						left={left}
+						top={top}
+						hideSourceOnDrag={hideSourceOnDrag}
+					>
+						{title}
+					</Box>
+				)
+			})}
+		</div>
+	)
+}
+export default Container

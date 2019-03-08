@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import * as React from 'react'
 import ItemTypes from '../Single Target/ItemTypes'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 const {
@@ -19,7 +19,7 @@ export interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ name }) => {
-	const ref = useRef(null)
+	const ref = React.useRef(null)
 	const { opacity } = useDrag({
 		ref,
 		type: ItemTypes.BOX,

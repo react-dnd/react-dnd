@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import * as React from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import { Square } from './Square'
 import { canMoveKnight, moveKnight } from './Game'
@@ -17,7 +17,7 @@ export interface BoardSquareProps {
 export const BoardSquare: React.FC<BoardSquareProps> = (
 	props: BoardSquareProps,
 ) => {
-	const ref = useRef(null)
+	const ref = React.useRef(null)
 	const { isOver, canDrop } = useDrop({
 		ref,
 		type: ItemTypes.KNIGHT,

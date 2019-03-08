@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import * as React from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
@@ -28,7 +28,7 @@ function renderBox(item: any, key: any) {
 }
 
 const Container: React.FC<ContainerProps> = props => {
-	const [boxes, setBoxes] = useState<BoxMap>({
+	const [boxes, setBoxes] = React.useState<BoxMap>({
 		a: { top: 20, left: 80, title: 'Drag me around' },
 		b: { top: 180, left: 20, title: 'Drag me too' },
 	})
@@ -43,7 +43,7 @@ const Container: React.FC<ContainerProps> = props => {
 		)
 	}
 
-	const ref = useRef(null)
+	const ref = React.useRef(null)
 	useDrop({
 		ref,
 		type: ItemTypes.BOX,
