@@ -1,3 +1,3 @@
-export * from './useDragSource'
-export * from './useDropTarget'
+export * from './useDrag'
+export * from './useDrop'
 export * from './useDragLayer'
