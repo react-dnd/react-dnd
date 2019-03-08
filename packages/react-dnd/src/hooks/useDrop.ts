@@ -2,9 +2,8 @@ declare var require: any
 import { useEffect } from 'react'
 import { DropTargetHookSpec } from '../interfaces'
 import { useDragDropManager } from './internal/useDragDropManager'
-import { useDropTargetHandler } from './internal/useDropTargetHandler'
-import { useMonitorOutput } from './internal/useMonitorOutput'
 import { useDropTargetMonitor } from './internal/useDropTargetMonitor'
+import { useMonitorOutput } from './internal/useMonitorOutput'
 const invariant = require('invariant')
 
 /**
@@ -21,8 +20,7 @@ export function useDrop<CustomProps>(
 
 	const manager = useDragDropManager()
 	const backend = manager.getBackend()
-	const handler = useDropTargetHandler<CustomProps>(spec)
-	const targetMonitor = useDropTargetMonitor(type, handler, manager)
+	const monitor = useDropTargetMonitor(manager, spec)
 
 	/*
 	 * Connect the Drop Target Element to the Backend
@@ -31,17 +29,13 @@ export function useDrop<CustomProps>(
 		if (ref.current) {
 			const node = ref.current
 			if (node) {
-				return backend.connectDropTarget(
-					targetMonitor.getHandlerId(),
-					node,
-					options,
-				)
+				return backend.connectDropTarget(monitor.getHandlerId(), node, options)
 			}
 		}
 	})
 
 	if (collect) {
-		return useMonitorOutput(targetMonitor as any, collect as any)
+		return useMonitorOutput(monitor as any, collect as any)
 	} else {
 		return {} as CustomProps
 	}

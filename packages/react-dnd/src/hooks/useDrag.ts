@@ -1,11 +1,10 @@
 declare var require: any
 import { useEffect } from 'react'
 import { DragSourceHookSpec } from '../interfaces'
-import { useDragSourceHandler } from './internal/useDragSourceHandler'
+import { useDragSourceMonitor } from './internal/useDragSourceMonitor'
 import { useDragDropManager } from './internal/useDragDropManager'
 import { Ref, isRef } from './util'
 import { useMonitorOutput } from './internal/useMonitorOutput'
-import { useDragSourceMonitor } from './internal/useDragSourceMonitor'
 const invariant = require('invariant')
 
 /**
@@ -21,19 +20,14 @@ export function useDrag<DragObject, CustomProps>(
 	invariant(type != null, 'type must be defined')
 	const manager = useDragDropManager()
 	const backend = manager.getBackend()
-	const handler = useDragSourceHandler<DragObject, CustomProps>(spec)
-	const sourceMonitor = useDragSourceMonitor(type, handler, manager)
+	const monitor = useDragSourceMonitor<DragObject, CustomProps>(manager, spec)
 
 	/*
 	 * Connect the Drag Source Element to the Backend
 	 */
 	useEffect(function connectDragSource() {
 		const node = ref.current
-		return backend.connectDragSource(
-			sourceMonitor.getHandlerId(),
-			node,
-			options,
-		)
+		return backend.connectDragSource(monitor.getHandlerId(), node, options)
 	}, [])
 
 	/*
@@ -44,7 +38,7 @@ export function useDrag<DragObject, CustomProps>(
 			const connectPreview = (p: any) => {
 				const previewNode = isRef(p) ? (p as Ref<any>).current : p
 				return backend.connectDragPreview(
-					sourceMonitor.getHandlerId(),
+					monitor.getHandlerId(),
 					previewNode,
 					previewOptions,
 				)
@@ -63,7 +57,7 @@ export function useDrag<DragObject, CustomProps>(
 	)
 
 	if (collect) {
-		return useMonitorOutput(sourceMonitor as any, collect as any)
+		return useMonitorOutput(monitor as any, collect as any)
 	} else {
 		return {} as CustomProps
 	}
