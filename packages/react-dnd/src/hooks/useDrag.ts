@@ -39,7 +39,7 @@ export function useDrag<DragObject, CustomProps>(
 	}, [])
 
 	/*
-	 * Connect the Drag Previem Element to the Backend
+	 * Connect the Drag Preview Element to the Backend
 	 */
 	useEffect(function connectDragPreview() {
 		if (dragPreview == null) {
