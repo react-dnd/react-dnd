@@ -1,7 +1,12 @@
 import * as React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import {
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
+	DragSourceMonitor,
+} from 'react-dnd'
 import ItemTypes from '../Single Target/ItemTypes'
-import { useDrag } from 'react-dnd/hooks'
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -23,14 +28,14 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 		ref,
 		type: ItemTypes.BOX,
 		begin: () => ({ name }),
-		end: monitor => {
+		end: (monitor: DragSourceMonitor) => {
 			const item = monitor.getItem()
 			const dropResult = monitor.getDropResult()
 			if (dropResult) {
 				alert(`You dropped ${item.name} into ${dropResult.name}!`)
 			}
 		},
-		collect: monitor => ({
+		collect: (monitor: DragSourceMonitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
