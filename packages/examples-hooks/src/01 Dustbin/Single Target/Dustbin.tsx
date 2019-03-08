@@ -40,7 +40,7 @@ const Dustbin: React.FC = () => {
 	}
 
 	return (
-		<div style={{ ...style, backgroundColor }}>
+		<div ref={ref} style={{ ...style, backgroundColor }}>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>
 	)

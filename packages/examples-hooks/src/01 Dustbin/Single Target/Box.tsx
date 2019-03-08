@@ -28,7 +28,6 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 		end: monitor => {
 			const item = monitor.getItem()
 			const dropResult = monitor.getDropResult()
-
 			if (dropResult) {
 				alert(`You dropped ${item.name} into ${dropResult.name}!`)
 			}
