@@ -39,7 +39,7 @@ const Box: React.FC<BoxProps> = ({
 	})
 
 	if (isDragging && hideSourceOnDrag) {
-		return null
+		return <div ref={ref} />
 	}
 	return (
 		<div ref={ref} style={{ ...style, left, top }}>
