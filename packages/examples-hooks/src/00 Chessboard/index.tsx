@@ -21,8 +21,11 @@ const ChessboardTutorialApp: React.FC = () => {
 	// the observe function will return an unsubscribe callback
 	useEffect(() => observe((newPos: [number, number]) => setKnightPos(newPos)))
 	return (
-		<div style={containerStyle}>
-			<Board knightPosition={knightPos} />
+		<div>
+			<h1>EXPERIMENTAL API</h1>
+			<div style={containerStyle}>
+				<Board knightPosition={knightPos} />
+			</div>
 		</div>
 	)
 }
