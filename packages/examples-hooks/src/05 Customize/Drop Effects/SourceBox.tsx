@@ -21,10 +21,12 @@ export interface SourceBoxProps {
 
 const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
 	const ref = React.useRef(null)
-	// const dropEffect = showCopyIcon ? 'copy' : 'move'
 	const { opacity } = useDrag({
 		ref,
 		type: ItemTypes.BOX,
+		options: {
+			dropEffect: showCopyIcon ? 'copy' : 'move',
+		},
 		collect: monitor => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
@@ -35,6 +37,5 @@ const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
 			When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
 		</div>
 	)
-	// TODO - this was passed to connectDragSource, { dropEffect }
 }
 export default SourceBox

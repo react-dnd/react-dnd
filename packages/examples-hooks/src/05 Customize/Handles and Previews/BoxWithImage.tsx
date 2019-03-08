@@ -18,21 +18,23 @@ const style = {
 
 const BoxWithImage: React.FC = () => {
 	const ref = React.useRef(null)
-	const dragPreview = React.useRef<HTMLImageElement>(null)
+	const preview = React.useRef<HTMLImageElement>(null)
 
 	React.useEffect(() => {
 		const img = new Image()
 		img.onload = () => {
-			;(dragPreview as any).current = img
+			;(preview as any).current = img
 		}
 		img.src = boxImage
 	})
+
+	// TODO: Image not showing up
 	const { opacity } = useDrag({
 		ref,
 		type: ItemTypes.BOX,
-		preview: dragPreview.current,
+		preview,
 		collect: monitor => ({
-			opacity: monitor.isDragging ? 0.4 : 1,
+			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
 	})
 
