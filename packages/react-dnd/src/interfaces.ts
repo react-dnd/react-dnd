@@ -1,5 +1,11 @@
 import * as React from 'react'
-import { XYCoord, Identifier, DragDropManager } from 'dnd-core'
+import {
+	XYCoord,
+	Identifier,
+	DragDropManager,
+	TargetType,
+	SourceType,
+} from 'dnd-core'
 export { XYCoord }
 
 export interface HandlerManager {
@@ -258,6 +264,10 @@ export interface DropTargetSpec<Props> {
  * Interface for the DropTarget specification object
  */
 export interface DropTargetHookSpec<CollectedProps> {
+	ref: React.RefObject<any>
+	type: TargetType
+	dropTargetOptions?: any
+
 	/**
 	 * Optional.
 	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
@@ -338,6 +348,12 @@ export interface DragSourceSpec<Props, DragObject> {
 }
 
 export interface DragSourceHookSpec<DragObject, CollectedProps> {
+	ref: React.RefObject<any>
+	type: SourceType
+	dragSourceOptions?: DragSourceOptions
+	dragPreview?: React.Ref<any> | Element
+	dragPreviewOptions?: DragPreviewOptions
+
 	/**
 	 * Required.
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the

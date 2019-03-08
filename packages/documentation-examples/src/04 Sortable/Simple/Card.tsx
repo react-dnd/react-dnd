@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useDropTarget, useDrag } from 'react-dnd'
+import { useDrop, useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
 
@@ -21,7 +21,9 @@ export interface CardProps {
 const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 	const ref = useRef<HTMLDivElement>(null)
 
-	useDropTarget(ref, ItemTypes.CARD, {
+	useDrop({
+		ref,
+		type: ItemTypes.CARD,
 		hover(monitor) {
 			if (!ref.current) {
 				return
@@ -72,7 +74,9 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 		},
 	})
 
-	const { isDragging } = useDrag(ref, ItemTypes.CARD, {
+	const { isDragging } = useDrag({
+		ref,
+		type: ItemTypes.CARD,
 		beginDrag: () => ({ id, index }),
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),

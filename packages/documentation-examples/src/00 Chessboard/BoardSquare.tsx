@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useDropTarget } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import { Square } from './Square'
 import { canMoveKnight, moveKnight } from './Game'
 import ItemTypes from './ItemTypes'
@@ -15,7 +15,9 @@ export const BoardSquare: React.FC<BoardSquareProps> = (
 	props: BoardSquareProps,
 ) => {
 	const ref = useRef(null)
-	const { isOver, canDrop } = useDropTarget(ref, ItemTypes.KNIGHT, {
+	const { isOver, canDrop } = useDrop({
+		ref,
+		type: ItemTypes.KNIGHT,
 		canDrop: () => canMoveKnight(props.x, props.y),
 		drop: () => moveKnight(props.x, props.y),
 		collect: mon => ({

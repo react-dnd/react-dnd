@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useDropTarget, DropTargetMonitor } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'
@@ -41,8 +41,10 @@ const Container: React.FC<ContainerProps> = props => {
 	}
 
 	const ref = useRef(null)
-	useDropTarget(ref, ItemTypes.BOX, {
-		drop(monitor: DropTargetMonitor) {
+	useDrop({
+		ref,
+		type: ItemTypes.BOX,
+		drop(monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as {
 				x: number
 				y: number

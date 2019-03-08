@@ -21,7 +21,9 @@ function createKnightImage() {
 export const Knight: React.FC = () => {
 	const ref = useRef(null)
 	const dragPreview = useMemo(createKnightImage, [])
-	const { isDragging } = useDrag(ref, ItemTypes.KNIGHT, {
+	const { isDragging } = useDrag({
+		ref,
+		type: ItemTypes.KNIGHT,
 		beginDrag: () => ({}),
 		dragPreview,
 		collect: mon => ({
