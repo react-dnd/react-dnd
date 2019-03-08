@@ -28,10 +28,10 @@ export function useDrag<DragObject, CustomProps>(
 	 * Connect the Drag Source Element to the Backend
 	 */
 	useEffect(function connectDragSource() {
-		const dragSourceNode = ref.current
+		const node = ref.current
 		return backend.connectDragSource(
 			sourceMonitor.getHandlerId(),
-			dragSourceNode,
+			node,
 			options,
 		)
 	}, [])
@@ -39,17 +39,28 @@ export function useDrag<DragObject, CustomProps>(
 	/*
 	 * Connect the Drag Preview Element to the Backend
 	 */
-	useEffect(function connectDragPreview() {
-		if (preview == null) {
-			return undefined
-		}
-		const previewNode = isRef(preview) ? (preview as Ref<any>).current : preview
-		return backend.connectDragPreview(
-			sourceMonitor.getHandlerId(),
-			previewNode,
-			previewOptions,
-		)
-	}, [])
+	useEffect(
+		function connectDragPreview() {
+			const connectPreview = (p: any) => {
+				const previewNode = isRef(p) ? (p as Ref<any>).current : p
+				return backend.connectDragPreview(
+					sourceMonitor.getHandlerId(),
+					previewNode,
+					previewOptions,
+				)
+			}
+
+			if (preview == null) {
+				return
+			}
+			if (typeof (preview as any).then === 'function') {
+				;(preview as any).then((p: any) => connectPreview(p))
+			} else {
+				connectPreview(preview)
+			}
+		},
+		[preview && (preview as Ref<any>).current],
+	)
 
 	if (collect) {
 		return useMonitorOutput(sourceMonitor as any, collect as any)

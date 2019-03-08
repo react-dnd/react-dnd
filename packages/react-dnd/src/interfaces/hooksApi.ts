@@ -48,7 +48,7 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	ref: RefObject<any>
 	type: SourceType
 	options?: DragSourceOptions
-	preview?: React.Ref<any> | Element
+	preview?: React.Ref<any> | Element | Promise<React.Ref<any> | Element>
 	previewOptions?: DragPreviewOptions
 
 	/**
