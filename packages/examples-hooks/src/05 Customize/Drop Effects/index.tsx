@@ -1,10 +1,11 @@
-import React from 'react'
+import * as React from 'react'
 import SourceBox from './SourceBox'
 import TargetBox from './TargetBox'
 
-export default class Container extends React.Component {
-	public render() {
-		return (
+export default function Container() {
+	return (
+		<>
+			<h1>EXPERIMENTAL API</h1>
 			<div style={{ overflow: 'hidden', clear: 'both', marginTop: '1.5rem' }}>
 				<div style={{ float: 'left' }}>
 					<SourceBox showCopyIcon={true} />
@@ -14,6 +15,6 @@ export default class Container extends React.Component {
 					<TargetBox />
 				</div>
 			</div>
-		)
-	}
+		</>
+	)
 }

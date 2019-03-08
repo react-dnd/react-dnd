@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { BoardSquare } from './BoardSquare'
 import { Knight } from './Knight'
 

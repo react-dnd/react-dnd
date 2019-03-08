@@ -1,13 +1,10 @@
-import React from 'react'
-import {
-	DragSource,
-	DropTarget,
-	ConnectDragSource,
-	ConnectDropTarget,
-	DragSourceMonitor,
-	DropTargetMonitor,
-} from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+const {
+	useDrag,
+	useDrop,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
 	border: '1px dashed gray',
@@ -17,40 +14,6 @@ const style = {
 	cursor: 'move',
 }
 
-const cardSource = {
-	beginDrag(props: CardProps) {
-		return {
-			id: props.id,
-			originalIndex: props.findCard(props.id).index,
-		}
-	},
-
-	endDrag(props: CardProps, monitor: DragSourceMonitor) {
-		const { id: droppedId, originalIndex } = monitor.getItem()
-		const didDrop = monitor.didDrop()
-
-		if (!didDrop) {
-			props.moveCard(droppedId, originalIndex)
-		}
-	},
-}
-
-const cardTarget = {
-	canDrop() {
-		return false
-	},
-
-	hover(props: CardProps, monitor: DropTargetMonitor) {
-		const { id: draggedId } = monitor.getItem()
-		const { id: overId } = props
-
-		if (draggedId !== overId) {
-			const { index: overIndex } = props.findCard(overId)
-			props.moveCard(draggedId, overIndex)
-		}
-	},
-}
-
 export interface CardProps {
 	id: string
 	text: string
@@ -58,46 +21,37 @@ export interface CardProps {
 	findCard: (id: string) => { index: number }
 }
 
-interface CardSourceCollectedProps {
-	connectDragSource: ConnectDragSource
-	isDragging: boolean
-}
+const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
+	const ref = React.useRef(null)
 
-interface CardTargetCollectedProps {
-	connectDropTarget: ConnectDropTarget
-}
-
-class Card extends React.Component<
-	CardProps & CardSourceCollectedProps & CardTargetCollectedProps
-> {
-	public render() {
-		const {
-			text,
-			isDragging,
-			connectDragSource,
-			connectDropTarget,
-		} = this.props
-		const opacity = isDragging ? 0 : 1
-
-		return connectDragSource(
-			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
-		)
-	}
-}
-
-export default DropTarget<CardProps, CardTargetCollectedProps>(
-	ItemTypes.CARD,
-	cardTarget,
-	connect => ({
-		connectDropTarget: connect.dropTarget(),
-	}),
-)(
-	DragSource<CardProps, CardSourceCollectedProps>(
-		ItemTypes.CARD,
-		cardSource,
-		(connect, monitor) => ({
-			connectDragSource: connect.dragSource(),
+	const { isDragging } = useDrag({
+		ref,
+		type: ItemTypes.CARD,
+		begin: () => ({ id, originalIndex: findCard(id).index }),
+		collect: monitor => ({
 			isDragging: monitor.isDragging(),
 		}),
-	)(Card),
-)
+	})
+
+	useDrop({
+		ref,
+		type: ItemTypes.CARD,
+		canDrop: () => false,
+		hover(monitor) {
+			const { id: draggedId } = monitor.getItem()
+			if (draggedId !== id) {
+				const { index: overIndex } = findCard(id)
+				moveCard(draggedId, overIndex)
+			}
+		},
+	})
+
+	const opacity = isDragging ? 0 : 1
+	return (
+		<div ref={ref} style={{ ...style, opacity }}>
+			{text}
+		</div>
+	)
+}
+
+export default Card

@@ -1,6 +1,9 @@
-import React from 'react'
-import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+const {
+	useDrop,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 function getStyle(backgroundColor: string): React.CSSProperties {
 	return {
@@ -18,35 +21,8 @@ function getStyle(backgroundColor: string): React.CSSProperties {
 	}
 }
 
-const boxTarget = {
-	drop(
-		props: DustbinProps,
-		monitor: DropTargetMonitor,
-		component: React.Component | null,
-	) {
-		if (!component) {
-			return
-		}
-		const hasDroppedOnChild = monitor.didDrop()
-		if (hasDroppedOnChild && !props.greedy) {
-			return
-		}
-
-		component.setState({
-			hasDropped: true,
-			hasDroppedOnChild,
-		})
-	},
-}
-
 export interface DustbinProps {
 	greedy?: boolean
-}
-
-interface DustbinCollectedProps {
-	isOver: boolean
-	isOverCurrent: boolean
-	connectDropTarget: ConnectDropTarget
 }
 
 export interface DustbinState {
@@ -54,45 +30,44 @@ export interface DustbinState {
 	hasDroppedOnChild: boolean
 }
 
-class Dustbin extends React.Component<
-	DustbinProps & DustbinCollectedProps,
-	DustbinState
-> {
-	public state: DustbinState = {
-		hasDropped: false,
-		hasDroppedOnChild: false,
+const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
+	const [hasDropped, setHasDropped] = React.useState(false)
+	const [hasDroppedOnChild, setHasDroppedOnChild] = React.useState(false)
+
+	const ref = React.useRef(null)
+	const { isOver, isOverCurrent } = useDrop({
+		ref,
+		type: ItemTypes.BOX,
+		drop(monitor) {
+			const didDrop = monitor.didDrop()
+			if (didDrop && !greedy) {
+				return
+			}
+			setHasDropped(true)
+			setHasDroppedOnChild(didDrop)
+		},
+		collect: monitor => ({
+			isOver: monitor.isOver(),
+			isOverCurrent: monitor.isOver({ shallow: true }),
+		}),
+	})
+
+	const text = greedy ? 'greedy' : 'not greedy'
+	let backgroundColor = 'rgba(0, 0, 0, .5)'
+
+	if (isOverCurrent || (isOver && greedy)) {
+		backgroundColor = 'darkgreen'
 	}
 
-	public render() {
-		const {
-			greedy,
-			isOver,
-			isOverCurrent,
-			connectDropTarget,
-			children,
-		} = this.props
-		const { hasDropped, hasDroppedOnChild } = this.state
+	return (
+		<div ref={ref} style={getStyle(backgroundColor)}>
+			{text}
+			<br />
+			{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
 
-		const text = greedy ? 'greedy' : 'not greedy'
-		let backgroundColor = 'rgba(0, 0, 0, .5)'
-
-		if (isOverCurrent || (isOver && greedy)) {
-			backgroundColor = 'darkgreen'
-		}
-
-		return connectDropTarget(
-			<div style={getStyle(backgroundColor)}>
-				{text}
-				<br />
-				{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
-
-				<div>{children}</div>
-			</div>,
-		)
-	}
+			<div>{children}</div>
+		</div>
+	)
 }
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	isOverCurrent: monitor.isOver({ shallow: true }),
-}))(Dustbin)
+
+export default Dustbin

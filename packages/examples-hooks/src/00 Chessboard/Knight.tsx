@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react'
+import * as React from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
@@ -23,13 +23,12 @@ function createKnightImage() {
 }
 
 export const Knight: React.FC = () => {
-	const ref = useRef(null)
-	const dragPreview = useMemo(createKnightImage, [])
+	const ref = React.useRef(null)
+	const dragPreview = React.useMemo(createKnightImage, [])
 	const { isDragging } = useDrag({
 		ref,
 		type: ItemTypes.KNIGHT,
-		begin: () => ({}),
-		dragPreview,
+		preview: dragPreview,
 		collect: mon => ({
 			isDragging: !!mon.isDragging(),
 		}),

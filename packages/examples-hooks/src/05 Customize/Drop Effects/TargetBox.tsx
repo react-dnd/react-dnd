@@ -1,6 +1,10 @@
-import React from 'react'
-import { DropTarget, ConnectDropTarget } from 'react-dnd'
+import * as React from 'react'
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+
+const {
+	useDrop,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px solid gray',
@@ -10,33 +14,23 @@ const style: React.CSSProperties = {
 	textAlign: 'center',
 }
 
-const boxTarget = {
-	drop() {
-		//
-	},
+const TargetBox: React.FC = () => {
+	const ref = React.useRef(null)
+	const { canDrop, isOver } = useDrop({
+		ref,
+		type: ItemTypes.BOX,
+		collect: monitor => ({
+			canDrop: monitor.canDrop(),
+			isOver: monitor.isOver(),
+		}),
+	})
+	const isActive = canDrop && isOver
+
+	return (
+		<div ref={ref} style={style}>
+			{isActive ? 'Release to drop' : 'Drag item here'}
+		</div>
+	)
 }
 
-export interface TargetBoxProps {
-	connectDropTarget: ConnectDropTarget
-	isOver: boolean
-	canDrop: boolean
-}
-
-class TargetBox extends React.Component<TargetBoxProps> {
-	public render() {
-		const { canDrop, isOver, connectDropTarget } = this.props
-		const isActive = canDrop && isOver
-
-		return connectDropTarget(
-			<div style={style}>
-				{isActive ? 'Release to drop' : 'Drag item here'}
-			</div>,
-		)
-	}
-}
-
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	canDrop: monitor.canDrop(),
-}))(TargetBox)
+export default TargetBox
