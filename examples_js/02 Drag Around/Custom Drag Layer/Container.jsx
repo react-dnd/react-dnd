@@ -1,49 +1,64 @@
-import React, { useState, useRef } from 'react'
-import { useDropTarget } from 'react-dnd'
+import * as React from 'react'
+import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'
-import update from 'immutability-helper'
+const update = require('immutability-helper')
 const styles = {
   width: 300,
   height: 300,
   border: '1px solid black',
   position: 'relative',
 }
-function renderBox(item, key) {
-  return <DraggableBox key={key} id={key} {...item} />
+const boxTarget = {
+  drop(props, monitor, component) {
+    if (!component) {
+      return
+    }
+    const delta = monitor.getDifferenceFromInitialOffset()
+    const item = monitor.getItem()
+    let left = Math.round(item.left + delta.x)
+    let top = Math.round(item.top + delta.y)
+    if (props.snapToGrid) {
+      ;[left, top] = snapToGrid(left, top)
+    }
+    component.moveBox(item.id, left, top)
+  },
 }
-const Container = props => {
-  const [boxes, setBoxes] = useState({
-    a: { top: 20, left: 80, title: 'Drag me around' },
-    b: { top: 180, left: 20, title: 'Drag me too' },
-  })
-  function moveBox(id, left, top) {
-    setBoxes(
-      update(boxes, {
-        [id]: {
-          $merge: { left, top },
+class Container extends React.PureComponent {
+  constructor() {
+    super(...arguments)
+    this.state = {
+      boxes: {
+        a: { top: 20, left: 80, title: 'Drag me around' },
+        b: { top: 180, left: 20, title: 'Drag me too' },
+      },
+    }
+  }
+  render() {
+    const { connectDropTarget } = this.props
+    const { boxes } = this.state
+    return connectDropTarget(
+      <div style={styles}>
+        {Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
+      </div>,
+    )
+  }
+  moveBox(id, left, top) {
+    this.setState(
+      update(this.state, {
+        boxes: {
+          [id]: {
+            $merge: { left, top },
+          },
         },
       }),
     )
   }
-  const ref = useRef(null)
-  useDropTarget(ref, ItemTypes.BOX, {
-    drop(monitor) {
-      const delta = monitor.getDifferenceFromInitialOffset()
-      const item = monitor.getItem()
-      let left = Math.round(item.left + delta.x)
-      let top = Math.round(item.top + delta.y)
-      if (props.snapToGrid) {
-        ;[left, top] = snapToGrid(left, top)
-      }
-      moveBox(item.id, left, top)
-    },
-  })
-  return (
-    <div ref={ref} style={styles}>
-      {Object.keys(boxes).map(key => renderBox(boxes[key], key))}
-    </div>
-  )
+  renderBox(item, key) {
+    return <DraggableBox key={key} id={key} {...item} />
+  }
 }
-export default Container
+export default DropTarget(ItemTypes.BOX, boxTarget, connect => ({
+  connectDropTarget: connect.dropTarget(),
+}))(Container)

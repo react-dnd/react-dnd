@@ -1,36 +1,40 @@
-import React, { useRef, useMemo } from 'react'
-import { useDragSource } from 'react-dnd'
+import * as React from 'react'
+import { DragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
+const knightSource = {
+  beginDrag() {
+    return {}
+  },
+}
 const knightStyle = {
   fontSize: 40,
   fontWeight: 'bold',
   cursor: 'move',
 }
-function createKnightImage() {
-  if (typeof Image === 'undefined') {
-    return undefined
+const collect = (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  connectDragPreview: connect.dragPreview(),
+  isDragging: monitor.isDragging(),
+})
+class Knight extends React.Component {
+  componentDidMount() {
+    const img = new Image()
+    img.src = knightImage
+    img.onload = () =>
+      this.props.connectDragPreview && this.props.connectDragPreview(img)
   }
-  const img = new Image()
-  img.src = knightImage
-  return img
+  render() {
+    const { connectDragSource, isDragging } = this.props
+    return connectDragSource(
+      <div
+        style={Object.assign({}, knightStyle, {
+          opacity: isDragging ? 0.5 : 1,
+        })}
+      >
+        ♘
+      </div>,
+    )
+  }
 }
-export const Knight = () => {
-  const ref = useRef(null)
-  const dragPreview = useMemo(createKnightImage, [])
-  const { isDragging } = useDragSource(ref, ItemTypes.KNIGHT, {
-    beginDrag: () => ({}),
-    dragPreview,
-    collect: mon => ({
-      isDragging: !!mon.isDragging(),
-    }),
-  })
-  return (
-    <div
-      ref={ref}
-      style={Object.assign({}, knightStyle, { opacity: isDragging ? 0.5 : 1 })}
-    >
-      ♘
-    </div>
-  )
-}
+export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight)
