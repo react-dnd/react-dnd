@@ -1,6 +1,7 @@
 export {
 	DragDropContext,
 	DragDropContextProvider,
+	Consumer as DragDropContextConsumer,
 	DragDropContextProviderProps,
 } from './DragDropContext'
 export { default as DragLayer } from './DragLayer'
