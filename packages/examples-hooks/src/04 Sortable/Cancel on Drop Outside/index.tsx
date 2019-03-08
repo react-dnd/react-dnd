@@ -70,17 +70,20 @@ const Container: React.FC = () => {
 
 	useDrop({ ref, type: ItemTypes.CARD })
 	return (
-		<div ref={ref} style={style}>
-			{cards.map(card => (
-				<Card
-					key={card.id}
-					id={`${card.id}`}
-					text={card.text}
-					moveCard={moveCard}
-					findCard={findCard}
-				/>
-			))}
-		</div>
+		<>
+			<h1>EXPERIMENTAL API</h1>
+			<div ref={ref} style={style}>
+				{cards.map(card => (
+					<Card
+						key={card.id}
+						id={`${card.id}`}
+						text={card.text}
+						moveCard={moveCard}
+						findCard={findCard}
+					/>
+				))}
+			</div>
+		</>
 	)
 }
 export default Container

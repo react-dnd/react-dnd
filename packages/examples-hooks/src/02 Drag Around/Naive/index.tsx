@@ -18,6 +18,7 @@ export default class DragAroundNaive extends React.Component<
 
 		return (
 			<div>
+				<h1>EXPERIMENTAL API</h1>
 				<Container hideSourceOnDrag={hideSourceOnDrag} />
 				<p>
 					<label htmlFor="hideSourceOnDrag">

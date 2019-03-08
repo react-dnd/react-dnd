@@ -20,6 +20,7 @@ export default class DragAroundCustomDragLayer extends React.Component<
 
 		return (
 			<div>
+				<h1>EXPERIMENTAL API</h1>
 				<Container snapToGrid={snapToGridAfterDrop} />
 				<CustomDragLayer snapToGrid={snapToGridWhileDragging} />
 				<p>

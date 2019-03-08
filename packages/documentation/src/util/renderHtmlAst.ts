@@ -20,7 +20,7 @@ export function isExperimentalApiMode() {
 const renderAst = new rehypeReact({
 	createElement,
 	components: {
-		...(isExperimentalApiMode ? hookComponentIndex : componentIndex),
+		...(isExperimentalApiMode() ? hookComponentIndex : componentIndex),
 	},
 }).Compiler
 

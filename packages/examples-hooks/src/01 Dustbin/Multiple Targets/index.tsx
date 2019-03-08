@@ -47,6 +47,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 
 		return (
 			<div>
+				<h1>EXPERIMENTAL API</h1>
 				<div style={{ overflow: 'hidden', clear: 'both' }}>
 					{dustbins.map(({ accepts, lastDroppedItem }, index) => (
 						<Dustbin

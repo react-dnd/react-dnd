@@ -22,6 +22,7 @@ const Container: React.FC = () => {
 
 	return (
 		<>
+			<h1>EXPERIMENTAL API</h1>
 			<TargetBox accepts={[FILE]} onDrop={handleFileDrop} />
 			<FileList files={droppedFiles} />
 		</>
