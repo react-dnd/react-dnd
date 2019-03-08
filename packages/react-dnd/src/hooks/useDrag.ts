@@ -55,6 +55,9 @@ export function useDrag<DragObject, CustomProps>(
 		)
 	}, [])
 
-	const collector = collect || (() => ({}))
-	return useMonitorOutput(sourceMonitor as any, collector as any)
+	if (collect) {
+		return useMonitorOutput(sourceMonitor as any, collect as any)
+	} else {
+		return {} as CustomProps
+	}
 }

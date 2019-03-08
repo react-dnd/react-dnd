@@ -10,7 +10,6 @@ export function useCollector<T, S>(
 
 	const updateCollected = () => {
 		const nextValue = collect(monitor)
-		// Not async-safe, but we need a way to opt-out of state updates
 		if (!shallowEqual(collected, nextValue)) {
 			setCollected(nextValue)
 		}

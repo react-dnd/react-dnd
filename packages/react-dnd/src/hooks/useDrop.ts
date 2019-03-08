@@ -32,8 +32,11 @@ export function useDrop<CustomProps>(
 				)
 			}
 		}
-	}, [])
+	})
 
-	const collector = collect || (() => ({}))
-	return useMonitorOutput(targetMonitor as any, collector as any)
+	if (collect) {
+		return useMonitorOutput(targetMonitor as any, collect as any)
+	} else {
+		return {} as CustomProps
+	}
 }
