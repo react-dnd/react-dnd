@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useRef } from 'react'
 import { DragSource } from 'dnd-core'
-import { DragSourceHookSpec, DragSourceMonitor } from '../interfaces'
+import { DragSourceHookSpec, DragSourceMonitor } from '../../interfaces'
 
 export function useDragSourceHandler<DragObject, CustomProps>(
 	sourceSpec: DragSourceHookSpec<DragObject, CustomProps>,

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { DropTargetHookSpec, DropTargetMonitor } from '../interfaces'
+import { DropTargetHookSpec, DropTargetMonitor } from '../../interfaces'
 import { DropTarget } from 'dnd-core'
 
 export function useDropTargetHandler<CustomProps>(

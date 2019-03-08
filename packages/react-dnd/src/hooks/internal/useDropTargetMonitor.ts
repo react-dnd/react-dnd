@@ -1,8 +1,8 @@
 import { useMemo, useEffect } from 'react'
-import registerTarget from '../registerTarget'
+import registerTarget from '../../registerTarget'
 import { DragDropManager, TargetType, DropTarget } from 'dnd-core'
-import DropTargetMonitorImpl from '../DropTargetMonitorImpl'
-import { DropTargetMonitor } from '../interfaces'
+import DropTargetMonitorImpl from '../../DropTargetMonitorImpl'
+import { DropTargetMonitor } from '../../interfaces'
 
 export function useDropTargetMonitor<Context>(
 	type: TargetType,

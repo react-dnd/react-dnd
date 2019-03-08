@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useCollector } from './useCollector'
-import { HandlerManager } from '../interfaces'
+import { HandlerManager } from '../../interfaces'
 import { DragDropMonitor } from 'dnd-core'
 
 export function useMonitorOutput<

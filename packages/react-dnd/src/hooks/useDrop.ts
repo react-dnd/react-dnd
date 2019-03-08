@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { DropTargetHookSpec } from '../interfaces'
-import { useDragDropManager } from './useDragDropManager'
-import { useDropTargetHandler } from './useDropTargetHandler'
-import { useMonitorOutput } from './useMonitorOutput'
-import { useDropTargetMonitor } from './useDropTargetMonitor'
+import { useDragDropManager } from './internal/useDragDropManager'
+import { useDropTargetHandler } from './internal/useDropTargetHandler'
+import { useMonitorOutput } from './internal/useMonitorOutput'
+import { useDropTargetMonitor } from './internal/useDropTargetMonitor'
 
 /**
  * useDropTarget Hook (This API is experimental and subject to breaking changes in non-breaking versions)

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { DragSourceHookSpec } from '../interfaces'
-import { useDragSourceHandler } from './useDragSourceHandler'
-import { useDragDropManager } from './useDragDropManager'
+import { useDragSourceHandler } from './internal/useDragSourceHandler'
+import { useDragDropManager } from './internal/useDragDropManager'
 import { Ref, isRef } from './util'
-import { useMonitorOutput } from './useMonitorOutput'
-import { useDragSourceMonitor } from './useDragSourceMonitor'
+import { useMonitorOutput } from './internal/useMonitorOutput'
+import { useDragSourceMonitor } from './internal/useDragSourceMonitor'
 
 /**
  * useDragSource hook (This API is experimental and subject to breaking changes in non-major versions)

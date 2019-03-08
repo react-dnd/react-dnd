@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from 'react'
-import registerSource from '../registerSource'
+import registerSource from '../../registerSource'
 import { DragDropManager, SourceType, DragSource } from 'dnd-core'
-import DragSourceMonitorImpl from '../DragSourceMonitorImpl'
+import DragSourceMonitorImpl from '../../DragSourceMonitorImpl'
 
 export function useDragSourceMonitor<Context>(
 	type: SourceType,
