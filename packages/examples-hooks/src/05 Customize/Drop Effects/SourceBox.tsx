@@ -25,7 +25,6 @@ const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
 	const { opacity } = useDrag({
 		ref,
 		type: ItemTypes.BOX,
-		begin: () => ({}),
 		collect: monitor => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),

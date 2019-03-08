@@ -52,14 +52,13 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	dragPreviewOptions?: DragPreviewOptions
 
 	/**
-	 * Required.
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
 	 * data being dragged. What you return is the only information available to the drop targets about the drag
 	 * source so it's important to pick the minimal data they need to know. You may be tempted to put a reference
 	 * to the component into it, but you should try very hard to avoid doing this because it couples the drag
 	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
 	 */
-	begin: (monitor: DragSourceMonitor) => DragObject
+	begin?: (monitor: DragSourceMonitor) => DragObject
 
 	/**
 	 * Optional.

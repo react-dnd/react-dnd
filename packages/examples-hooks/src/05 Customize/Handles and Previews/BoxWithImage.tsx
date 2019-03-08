@@ -31,7 +31,6 @@ const BoxWithImage: React.FC = () => {
 		ref,
 		type: ItemTypes.BOX,
 		dragPreview: dragPreview.current,
-		begin: () => ({}),
 		collect: monitor => ({
 			opacity: monitor.isDragging ? 0.4 : 1,
 		}),

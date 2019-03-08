@@ -28,7 +28,6 @@ export const Knight: React.FC = () => {
 	const { isDragging } = useDrag({
 		ref,
 		type: ItemTypes.KNIGHT,
-		begin: () => ({}),
 		dragPreview,
 		collect: mon => ({
 			isDragging: !!mon.isDragging(),

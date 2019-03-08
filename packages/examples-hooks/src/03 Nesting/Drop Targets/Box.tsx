@@ -15,11 +15,7 @@ const style = {
 
 const Box: React.FC = () => {
 	const ref = React.useRef(null)
-	useDrag({
-		ref,
-		type: ItemTypes.BOX,
-		begin: () => ({}),
-	})
+	useDrag({ ref, type: ItemTypes.BOX })
 	return (
 		<div ref={ref} style={style}>
 			Drag me
