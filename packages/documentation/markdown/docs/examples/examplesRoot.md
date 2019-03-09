@@ -20,6 +20,8 @@ For these examples, the following flags are available. To enable them add them t
 - `?debug` - Enables **debug mode** of `dnd-core`. This registers `dnd-core` with the [Redux Devtools Chrome extension](https://github.com/zalmoxisus/redux-devtools-extension).
 - `?experimental` - Enables **experimental mode** examples using react-dnd hooks. This feature is in development, and this flag will go away when they are considered stable.
 
+  The source code for the experimental examples are in the [examples-hooks package](https://github.com/react-dnd/react-dnd/tree/master/packages/examples-hooks/src) on GitHub.
+
 ## Running Locally
 
 To run these examples locally, clone the `react-dnd` repository, and run
