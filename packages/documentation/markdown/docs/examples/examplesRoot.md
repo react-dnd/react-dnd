@@ -3,6 +3,30 @@ path: '/examples'
 title: 'Examples'
 ---
 
-The examples are written using TypeScript. You don't have to use TypeScript for React DnD, it is completely optional. [The tutorial](/docs/tutorial) should give you a good idea about using React-DnD in JavaScript.
+## About
 
-Check out the [hosted versions of this example](http://react-dnd.github.io/react-dnd/examples/tutorial). To run them locally, clone the repo, and run `yarn install && yarn start`. It will take a while to start, but after the site is built, you can access the examples by opening [http://localhost:8080/](http://localhost:8080/) and clicking “Examples” in the navigation bar.
+The examples here perform a lot of jobs:
+
+- They are instructive about common patterns to use with React-DnD.
+- They showcase various aspects of the API to demonstrate the flexibility of the library.
+- They act as a set of integration test cases.
+
+If you use a pattern that is not covered here, please submit a Pull Request to add it to this list.
+
+## Flags
+
+For these examples, the following flags are available. To enable them add them to the end of your URL.
+
+- `?debug` - Enables **debug mode** of `dnd-core`. This registers `dnd-core` with the [Redux Devtools Chrome extension](https://github.com/zalmoxisus/redux-devtools-extension).
+- `?experimental` - Enables **experimental mode** examples using react-dnd hooks. This feature is in development, and this flag will go away when they are considered stable.
+
+## Running Locally
+
+To run these examples locally, clone the `react-dnd` repository, and run
+
+```
+> yarn install
+> yarn start
+```
+
+It will take a while to start, but after the site is built, you can access the examples by opening [http://localhost:8000/](http://localhost:8000/) and clicking “Examples” in the navigation bar.
