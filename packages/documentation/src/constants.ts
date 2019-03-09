@@ -121,11 +121,15 @@ export const APIPages: PageGroup[] = [
 
 export const ExamplePages: PageGroup[] = [
 	{
-		title: 'Chessboard',
+		title: 'Examples',
 		pages: {
+			ABOUT: {
+				location: '/examples',
+				title: 'About',
+			},
 			CHESSBOARD_TUTORIAL_APP: {
 				location: '/examples/tutorial',
-				title: 'Tutorial App',
+				title: 'Chessboard Tutorial',
 			},
 		},
 	},
