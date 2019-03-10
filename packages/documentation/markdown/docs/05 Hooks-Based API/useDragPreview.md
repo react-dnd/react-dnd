@@ -33,13 +33,11 @@ function myDragLayer(props) {
 }
 ```
 
-### useDragPreview Parameters
+#### Parameters
 
 - **`dragPreview`** A refForwarding component that will render the drag preview.
 
-### Return Value
+#### Return Value Array
 
-useDragPreview returns an array of two items:
-
-0. The drag preview ref object. This should be passed into useDrag's specification
-1. A component to render the dragPreview in your render method.
+- **`Index 0`**: The drag preview ref object. This should be passed into useDrag's specification
+- **`Index 1`**: A component to render the dragPreview in your render method.
