@@ -22,6 +22,14 @@ function myDropTarget(props) {
 }
 ```
 
+### useDrop Parameters
+
+- **`spec`** Specification object, see below for details on how to construct this
+
+### Return Value
+
+useDrop returns an object of collected properties from the collect function. If this is not set, an empty object is returned.
+
 ### Specification Object Members
 
 - **`ref`**: Required. A ref object to use to attach to the draggable element.

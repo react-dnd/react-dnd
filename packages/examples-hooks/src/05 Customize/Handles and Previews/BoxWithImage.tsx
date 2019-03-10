@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { createPortal } from 'react-dom'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import boxImage from './boxImage'
 
 const {
 	useDrag,
+	useDragPreview,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
@@ -24,21 +24,13 @@ const BoxImage = React.forwardRef((props, ref: React.Ref<HTMLImageElement>) => {
 	return <img ref={ref} src={boxImage} />
 })
 
-const BoxImageWrapper: React.FC<any> = React.forwardRef(
-	({ root }, ref: React.Ref<HTMLImageElement>) => {
-		return createPortal(<BoxImage ref={ref} />, root)
-	},
-)
-
 const BoxWithImage: React.FC = () => {
 	const ref = React.useRef(null)
-	const preview = React.useRef(null)
-	const dragPreviewRoot = document.createElement('div')
-
+	const [preview, DragPreview] = useDragPreview(BoxImage)
 	const { opacity } = useDrag({
 		ref,
 		item: { type: ItemTypes.BOX },
-		preview: preview as any,
+		preview,
 		collect: monitor => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
@@ -46,7 +38,7 @@ const BoxWithImage: React.FC = () => {
 
 	return (
 		<>
-			<BoxImageWrapper ref={preview} root={dragPreviewRoot} />
+			<DragPreview />
 			<div ref={ref} style={{ ...style, opacity }}>
 				Drag me to see an image
 			</div>

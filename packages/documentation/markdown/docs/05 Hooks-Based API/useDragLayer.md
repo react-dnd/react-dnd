@@ -23,6 +23,10 @@ function myDragLayer(props) {
 }
 ```
 
-### Specification Object Members
+### useDragLayer Parameters
 
 - **`collect`**: Required. The collecting function. It should return a plain object of the props to return for injection into your component. It receives two parameters, `monitor` and `props`. Read the [overview](/docs/overview) for an introduction to the monitors and the collecting function. See the collecting function described in detail in the next section.
+
+### Return Value
+
+useDragLayer returns an object of collected properties from the collect function.

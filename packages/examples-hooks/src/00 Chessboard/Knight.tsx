@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { createPortal } from 'react-dom'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
 
 const {
 	useDrag,
+	useDragPreview,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const knightStyle: React.CSSProperties = {
@@ -23,20 +23,13 @@ const KnightDragPreview = React.forwardRef(
 	},
 )
 
-const KnightDragPreviewWrapper: React.FC<any> = React.forwardRef(
-	({ root }, ref: React.Ref<HTMLImageElement>) => {
-		return createPortal(<KnightDragPreview ref={ref} />, root)
-	},
-)
-
 export const Knight: React.FC = () => {
 	const ref = React.useRef(null)
-	const preview = React.useRef(null)
-	const dragPreviewRoot = document.createElement('div')
-
+	const item = { type: ItemTypes.KNIGHT }
+	const [preview, DragPreview] = useDragPreview(KnightDragPreview)
 	const { isDragging } = useDrag({
 		ref,
-		item: { type: ItemTypes.KNIGHT },
+		item,
 		preview,
 		collect: mon => ({
 			isDragging: !!mon.isDragging(),
@@ -45,7 +38,7 @@ export const Knight: React.FC = () => {
 
 	return (
 		<>
-			<KnightDragPreviewWrapper ref={preview} root={dragPreviewRoot} />
+			<DragPreview />
 			<div
 				ref={ref}
 				style={{
