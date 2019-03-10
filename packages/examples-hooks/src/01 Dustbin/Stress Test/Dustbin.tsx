@@ -26,18 +26,16 @@ export interface DustbinProps {
 
 const Dustbin: React.FC<DustbinProps> = ({
 	lastDroppedItem,
-	accepts,
+	accepts: accept,
 	onDrop,
 }) => {
-	const ref = React.useRef(null)
-	const { isOver, canDrop } = useDrop({
-		ref,
-		type: accepts,
+	const [{ isOver, canDrop }, ref] = useDrop({
+		accept,
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
 		}),
-		drop: monitor => onDrop(monitor.getItem()),
+		drop: item => onDrop(item),
 	})
 
 	const isActive = isOver && canDrop
@@ -52,7 +50,7 @@ const Dustbin: React.FC<DustbinProps> = ({
 		<div ref={ref} style={{ ...style, backgroundColor }}>
 			{isActive
 				? 'Release to drop'
-				: `This dustbin accepts: ${accepts.join(', ')}`}
+				: `This dustbin accepts: ${accept.join(', ')}`}
 
 			{lastDroppedItem && (
 				<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>

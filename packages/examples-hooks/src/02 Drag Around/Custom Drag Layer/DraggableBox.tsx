@@ -35,11 +35,9 @@ export interface DraggableBoxProps {
 
 const DraggableBox: React.FC<DraggableBoxProps> = props => {
 	const { id, title, left, top } = props
-	const ref = React.useRef(null)
-
-	const { isDragging } = useDrag({
-		ref,
-		type: ItemTypes.BOX,
+	const item = { type: ItemTypes.BOX, id, title, left, top }
+	const [{ isDragging }, ref] = useDrag({
+		item,
 		// Use empty image as a drag preview so browsers don't draw it
 		// and we can draw whatever we want on the custom drag layer instead.
 		preview: getEmptyImage(),
@@ -48,7 +46,6 @@ const DraggableBox: React.FC<DraggableBoxProps> = props => {
 			// when it already knows it's being dragged so we can hide it with CSS.
 			captureDraggingState: true,
 		},
-		begin: () => ({ id, title, left, top }),
 		collect: (monitor: DragSourceMonitor) => ({
 			isDragging: monitor.isDragging(),
 		}),

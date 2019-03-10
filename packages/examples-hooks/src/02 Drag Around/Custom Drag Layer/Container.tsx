@@ -4,6 +4,7 @@ import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'
 import update from 'immutability-helper'
+import { DragItem } from './interfaces'
 const {
 	useDrop,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
@@ -46,13 +47,12 @@ const Container: React.FC<ContainerProps> = props => {
 	const ref = React.useRef(null)
 	useDrop({
 		ref,
-		type: ItemTypes.BOX,
-		drop(monitor) {
+		accept: ItemTypes.BOX,
+		drop(item: DragItem, monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as {
 				x: number
 				y: number
 			}
-			const item = monitor.getItem()
 
 			let left = Math.round(item.left + delta.x)
 			let top = Math.round(item.top + delta.y)
@@ -61,6 +61,7 @@ const Container: React.FC<ContainerProps> = props => {
 			}
 
 			moveBox(item.id, left, top)
+			return undefined
 		},
 	})
 

@@ -20,10 +20,8 @@ export interface SourceBoxProps {
 }
 
 const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
-	const ref = React.useRef(null)
-	const { opacity } = useDrag({
-		ref,
-		type: ItemTypes.BOX,
+	const [{ opacity }, ref] = useDrag({
+		item: { type: ItemTypes.BOX },
 		options: {
 			dropEffect: showCopyIcon ? 'copy' : 'move',
 		},
