@@ -29,10 +29,11 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 	useDrop({
 		ref,
 		accept: ItemTypes.CARD,
-		hover({ index: dragIndex }: { index: number }, monitor) {
+		hover(item: { index: number }, monitor) {
 			if (!ref.current) {
 				return
 			}
+			const dragIndex = item.index
 			const hoverIndex = index
 
 			// Don't replace items with themselves
@@ -74,14 +75,13 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 			// Generally it's better to avoid mutations,
 			// but it's good here for the sake of performance
 			// to avoid expensive index searches.
-			monitor.getItem().index = hoverIndex
+			item.index = hoverIndex
 		},
 	})
 
 	const { isDragging } = useDrag({
 		ref,
-		item: { type: ItemTypes.CARD },
-		begin: () => ({ id, index }),
+		item: { type: ItemTypes.CARD, id, index },
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
 		}),

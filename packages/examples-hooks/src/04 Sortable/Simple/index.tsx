@@ -57,20 +57,22 @@ const Container: React.FC<ContainerProps> = ({}) => {
 			)
 		}
 
+		const renderCard = (card: { id: number; text: string }, index: number) => {
+			return (
+				<Card
+					key={card.id}
+					index={index}
+					id={card.id}
+					text={card.text}
+					moveCard={moveCard}
+				/>
+			)
+		}
+
 		return (
 			<>
 				<h1>EXPERIMENTAL API</h1>
-				<div style={style}>
-					{cards.map((card, i) => (
-						<Card
-							key={card.id}
-							index={i}
-							id={card.id}
-							text={card.text}
-							moveCard={moveCard}
-						/>
-					))}
-				</div>
+				<div style={style}>{cards.map((card, i) => renderCard(card, i))}</div>
 			</>
 		)
 	}
