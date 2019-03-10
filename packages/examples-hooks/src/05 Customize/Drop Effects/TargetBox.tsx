@@ -18,7 +18,7 @@ const TargetBox: React.FC = () => {
 	const ref = React.useRef(null)
 	const { canDrop, isOver } = useDrop({
 		ref,
-		type: ItemTypes.BOX,
+		accept: ItemTypes.BOX,
 		collect: monitor => ({
 			canDrop: monitor.canDrop(),
 			isOver: monitor.isOver(),

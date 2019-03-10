@@ -22,7 +22,7 @@ const Dustbin: React.FC = () => {
 	const ref = React.useRef(null)
 	const { isOver, canDrop } = useDrop({
 		ref,
-		type: ItemTypes.BOX,
+		accept: ItemTypes.BOX,
 		drop: () => ({ name: 'Dustbin' }),
 		collect: monitor => ({
 			isOver: monitor.isOver(),

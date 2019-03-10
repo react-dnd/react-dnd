@@ -13,10 +13,10 @@ const invariant = require('invariant')
 export function useDrop<DragObject, DropResult, CustomProps>(
 	spec: DropTargetHookSpec<DragObject, DropResult, CustomProps>,
 ): CustomProps {
-	const { ref, type, options, collect } = spec
+	const { ref, accept, options, collect } = spec
 	invariant(ref != null, 'ref instance must be defined')
 	invariant(typeof ref === 'object', 'ref must be a ref object')
-	invariant(type != null, 'type must be defined')
+	invariant(accept != null, 'accept must be defined')
 
 	const manager = useDragDropManager()
 	const backend = manager.getBackend()

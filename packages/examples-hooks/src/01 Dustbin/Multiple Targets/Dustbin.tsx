@@ -18,20 +18,20 @@ const style: React.CSSProperties = {
 }
 
 export interface DustbinProps {
-	accepts: string[]
+	accept: string[]
 	lastDroppedItem?: any
 	onDrop: (item: any) => void
 }
 
 const Dustbin: React.FC<DustbinProps> = ({
-	accepts,
+	accept,
 	lastDroppedItem,
 	onDrop,
 }) => {
 	const ref = React.useRef(null)
 	const { isOver, canDrop } = useDrop({
 		ref,
-		type: accepts,
+		accept,
 		drop: item => onDrop(item),
 		collect: monitor => ({
 			isOver: monitor.isOver(),
@@ -51,7 +51,7 @@ const Dustbin: React.FC<DustbinProps> = ({
 		<div ref={ref} style={{ ...style, backgroundColor }}>
 			{isActive
 				? 'Release to drop'
-				: `This dustbin accepts: ${accepts.join(', ')}`}
+				: `This dustbin accepts: ${accept.join(', ')}`}
 
 			{lastDroppedItem && (
 				<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>

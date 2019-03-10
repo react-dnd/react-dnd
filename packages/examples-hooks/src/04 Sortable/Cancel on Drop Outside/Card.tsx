@@ -34,7 +34,7 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 
 	useDrop({
 		ref,
-		type: ItemTypes.CARD,
+		accept: ItemTypes.CARD,
 		canDrop: () => false,
 		hover({ id: draggedId }: { id: string }) {
 			if (draggedId !== id) {

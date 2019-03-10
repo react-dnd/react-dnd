@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 
 	useDrop({
 		ref,
-		type: ItemTypes.CARD,
+		accept: ItemTypes.CARD,
 		hover({ id: draggedId }: { id: string }) {
 			if (draggedId !== id) {
 				moveCard(draggedId, id)

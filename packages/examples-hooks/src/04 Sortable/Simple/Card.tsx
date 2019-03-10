@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 
 	useDrop({
 		ref,
-		type: ItemTypes.CARD,
+		accept: ItemTypes.CARD,
 		hover({ index: dragIndex }: { index: number }, monitor) {
 			if (!ref.current) {
 				return

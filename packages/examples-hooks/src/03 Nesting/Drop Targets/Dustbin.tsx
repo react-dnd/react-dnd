@@ -37,7 +37,7 @@ const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
 	const ref = React.useRef(null)
 	const { isOver, isOverCurrent } = useDrop({
 		ref,
-		type: ItemTypes.BOX,
+		accept: ItemTypes.BOX,
 		drop(item, monitor) {
 			const didDrop = monitor.didDrop()
 			if (didDrop && !greedy) {

@@ -29,7 +29,7 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 		{ isOver: boolean; draggingColor: string; canDrop: boolean }
 	>({
 		ref,
-		type: [Colors.YELLOW, Colors.BLUE],
+		accept: [Colors.YELLOW, Colors.BLUE],
 		drop(item) {
 			onDrop(item.type)
 			return undefined

@@ -20,7 +20,7 @@ export const BoardSquare: React.FC<BoardSquareProps> = (
 	const ref = React.useRef(null)
 	const { isOver, canDrop } = useDrop({
 		ref,
-		type: ItemTypes.KNIGHT,
+		accept: ItemTypes.KNIGHT,
 		canDrop: () => canMoveKnight(props.x, props.y),
 		drop: () => moveKnight(props.x, props.y),
 		collect: mon => ({

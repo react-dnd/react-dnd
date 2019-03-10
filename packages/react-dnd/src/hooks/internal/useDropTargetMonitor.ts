@@ -20,7 +20,7 @@ export function useDropTargetMonitor<CustomProps, DragItem, DropResult>(
 	React.useEffect(
 		function registerTargetWithMonitor() {
 			const { handlerId, unregister } = registerTarget(
-				targetSpec.type,
+				targetSpec.accept,
 				handler,
 				manager,
 			)

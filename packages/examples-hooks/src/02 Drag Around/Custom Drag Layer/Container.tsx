@@ -47,7 +47,7 @@ const Container: React.FC<ContainerProps> = props => {
 	const ref = React.useRef(null)
 	useDrop<DragItem, {}, {}>({
 		ref,
-		type: ItemTypes.BOX,
+		accept: ItemTypes.BOX,
 		drop(item, monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as {
 				x: number

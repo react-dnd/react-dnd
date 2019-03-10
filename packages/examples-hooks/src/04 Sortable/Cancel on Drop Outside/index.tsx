@@ -68,7 +68,7 @@ const Container: React.FC = () => {
 		}
 	}
 
-	useDrop({ ref, type: ItemTypes.CARD })
+	useDrop({ ref, accept: ItemTypes.CARD })
 	return (
 		<>
 			<h1>EXPERIMENTAL API</h1>
