@@ -12,13 +12,13 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 A hook to use the current component as a drop target.
 
 ```js
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
-const {
-	useDrop,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd'
+const { useDrop } = dnd
 
 function myDropTarget(props) {
-	const collectedProps = useDrop(spec)
+	const [collectedProps, ref] = useDrop({ accept })
+
+	return <div ref={ref}>Drop Target</div>
 }
 ```
 

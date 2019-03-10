@@ -12,14 +12,12 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 A hook to use the current component as a drag-layer.
 
 ```js
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
-const {
-	useDragLayer,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd'
+const { useDragLayer } = dnd
 
-function myDragLayer(props) {
-  const collectedProps = useDragLayer(spec)
-  ...
+function DragLayerComponent(props) {
+	const collectedProps = useDragLayer(spec)
+	return <div>...</div>
 }
 ```
 
