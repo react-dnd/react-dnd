@@ -28,7 +28,10 @@ function myDraggable(props) {
 
 ### Return Value
 
-useDrag returns an object of collected properties from the collect function. If this is not set, an empty object is returned.
+useDrag returns an array:
+
+0. An object containing collected properties from the collect function. If this is not set, an empty object is returned.
+1. The React ref to use. This is automatically created if no `ref` field is passed into the specification object.
 
 ### Specification Object Members
 
