@@ -22,15 +22,9 @@ export interface TargetBoxProps {
 }
 
 const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
-	const ref = React.useRef(null)
-	const { isOver, draggingColor, canDrop } = useDrop<
-		DragItem,
-		void,
-		{ isOver: boolean; draggingColor: string; canDrop: boolean }
-	>({
-		ref,
+	const { ref, isOver, draggingColor, canDrop } = useDrop({
 		accept: [Colors.YELLOW, Colors.BLUE],
-		drop(item) {
+		drop(item: DragItem) {
 			onDrop(item.type)
 			return undefined
 		},

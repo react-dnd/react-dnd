@@ -22,8 +22,7 @@ export interface TargetBoxProps {
 
 const TargetBox: React.FC<TargetBoxProps> = props => {
 	const { accepts: accept, onDrop } = props
-	const ref = React.useRef(null)
-	const { canDrop, isOver } = useDrop({
+	const { ref, canDrop, isOver } = useDrop({
 		ref,
 		accept,
 		drop(item, monitor) {

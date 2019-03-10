@@ -19,9 +19,7 @@ const style: React.CSSProperties = {
 }
 
 const Dustbin: React.FC = () => {
-	const ref = React.useRef(null)
-	const { isOver, canDrop } = useDrop({
-		ref,
+	const { ref, isOver, canDrop } = useDrop({
 		accept: ItemTypes.BOX,
 		drop: () => ({ name: 'Dustbin' }),
 		collect: monitor => ({

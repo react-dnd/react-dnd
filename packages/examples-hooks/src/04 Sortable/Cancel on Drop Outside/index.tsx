@@ -49,8 +49,6 @@ const ITEMS = [
 
 const Container: React.FC = () => {
 	const [cards, setCards] = React.useState(ITEMS)
-	const ref = React.useRef(null)
-
 	const moveCard = (id: string, atIndex: number) => {
 		const { card, index } = findCard(id)
 		setCards(
@@ -68,7 +66,7 @@ const Container: React.FC = () => {
 		}
 	}
 
-	useDrop({ ref, accept: ItemTypes.CARD })
+	const { ref } = useDrop({ accept: ItemTypes.CARD })
 	return (
 		<>
 			<h1>EXPERIMENTAL API</h1>

@@ -23,10 +23,8 @@ const handleStyle: React.CSSProperties = {
 }
 
 const BoxWithHandle: React.FC = () => {
-	const ref = React.useRef(null)
 	const preview = React.useRef(null)
-	const { opacity } = useDrag({
-		ref,
+	const { ref, opacity } = useDrag({
 		item: { type: ItemTypes.BOX },
 		preview,
 		collect: monitor => ({

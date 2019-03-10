@@ -24,10 +24,7 @@ export interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
-	const ref = React.useRef<HTMLDivElement>(null)
-
-	useDrop({
-		ref,
+	const { ref } = useDrop({
 		accept: ItemTypes.CARD,
 		hover(item: { index: number }, monitor) {
 			if (!ref.current) {

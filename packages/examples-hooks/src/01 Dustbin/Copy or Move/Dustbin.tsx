@@ -33,9 +33,7 @@ function selectBackgroundColor(isActive: boolean, canDrop: boolean) {
 }
 
 const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
-	const ref = React.useRef(null)
-	const { canDrop, isOver } = useDrop({
-		ref,
+	const { ref, canDrop, isOver } = useDrop({
 		accept: ItemTypes.BOX,
 		drop: () => ({
 			name: `${allowedDropEffect} Dustbin`,

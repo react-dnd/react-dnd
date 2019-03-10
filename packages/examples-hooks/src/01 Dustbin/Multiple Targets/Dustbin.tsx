@@ -28,9 +28,7 @@ const Dustbin: React.FC<DustbinProps> = ({
 	lastDroppedItem,
 	onDrop,
 }) => {
-	const ref = React.useRef(null)
-	const { isOver, canDrop } = useDrop({
-		ref,
+	const { ref, isOver, canDrop } = useDrop({
 		accept,
 		drop: item => onDrop(item),
 		collect: monitor => ({

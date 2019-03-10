@@ -20,11 +20,9 @@ interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ name }) => {
-	const ref = React.useRef(null)
 	const item = { name, type: ItemTypes.BOX }
 
-	const { isDragging } = useDrag({
-		ref,
+	const { ref, isDragging } = useDrag({
 		item,
 		end: (dropResult?: { name: string }) => {
 			if (dropResult) {

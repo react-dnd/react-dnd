@@ -1,5 +1,5 @@
 declare var require: any
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { DropTargetHookSpec } from '../interfaces'
 import { useDragDropManager } from './internal/useDragDropManager'
 import { useDropTargetMonitor } from './internal/useDropTargetMonitor'
@@ -10,13 +10,20 @@ const invariant = require('invariant')
  * useDropTarget Hook (This API is experimental and subject to breaking changes in non-breaking versions)
  * @param spec The drop target specification
  */
-export function useDrop<DragObject, DropResult, CustomProps>(
-	spec: DropTargetHookSpec<DragObject, DropResult, CustomProps>,
-): CustomProps {
-	const { ref, accept, options, collect } = spec
-	invariant(ref != null, 'ref instance must be defined')
-	invariant(typeof ref === 'object', 'ref must be a ref object')
+export function useDrop<
+	DragObject,
+	DropResult,
+	CollectedProps,
+	ElementType extends Element
+>(
+	spec: DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
+): CollectedProps & { ref: React.RefObject<ElementType> } {
+	const { accept, options, collect } = spec
 	invariant(accept != null, 'accept must be defined')
+	let { ref } = spec
+	if (!ref) {
+		ref = useRef(null)
+	}
 
 	const manager = useDragDropManager()
 	const backend = manager.getBackend()
@@ -26,17 +33,17 @@ export function useDrop<DragObject, DropResult, CustomProps>(
 	 * Connect the Drop Target Element to the Backend
 	 */
 	useEffect(function connectDropTarget() {
-		if (ref.current) {
-			const node = ref.current
+		if (ref!.current) {
+			const node = ref!.current
 			if (node) {
 				return backend.connectDropTarget(monitor.getHandlerId(), node, options)
 			}
 		}
 	})
 
-	if (collect) {
-		return useMonitorOutput(monitor as any, collect as any)
-	} else {
-		return {} as CustomProps
-	}
+	const result: CollectedProps & { ref: React.RefObject<Element> } = collect
+		? (useMonitorOutput(monitor as any, collect as any) as any)
+		: (({} as CollectedProps) as any)
+	result.ref = ref!
+	return result as any
 }

@@ -39,11 +39,9 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 		b: { top: 180, left: 20, title: 'Drag me too' },
 	})
 
-	const ref = React.useRef(null)
-	useDrop<DragItem, {}, {}>({
-		ref,
+	const { ref } = useDrop({
 		accept: ItemTypes.BOX,
-		drop(item, monitor) {
+		drop(item: DragItem, monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
 			const left = Math.round(item.left + delta.x)
 			const top = Math.round(item.top + delta.y)

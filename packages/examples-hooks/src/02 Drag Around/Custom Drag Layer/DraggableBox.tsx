@@ -35,10 +35,8 @@ export interface DraggableBoxProps {
 
 const DraggableBox: React.FC<DraggableBoxProps> = props => {
 	const { id, title, left, top } = props
-	const ref = React.useRef(null)
 	const item = { type: ItemTypes.BOX, id, title, left, top }
-	const { isDragging } = useDrag({
-		ref,
+	const { ref, isDragging } = useDrag({
 		item,
 		// Use empty image as a drag preview so browsers don't draw it
 		// and we can draw whatever we want on the custom drag layer instead.

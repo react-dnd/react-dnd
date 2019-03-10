@@ -8,7 +8,11 @@ export interface DragSourceHookSpec<
 	DropResult,
 	CollectedProps
 > {
-	ref: RefObject<any>
+	/**
+	 * The ref object to associated with this dragged itom. If this is not specified it will be
+	 * returned in the `ref` field of the result object.
+	 */
+	ref?: RefObject<any>
 
 	/**
 	 * A plain javascript item describing the data being dragged.
@@ -83,8 +87,20 @@ export interface DragSourceHookSpec<
  * Interface for the DropTarget specification object
  */
 export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
-	ref: RefObject<any>
+	/**
+	 * The ref object to associated with this dragged itom. If this is not specified it will be
+	 * returned in the `ref` field of the result object.
+	 */
+	ref?: RefObject<any>
+
+	/**
+	 * The kinds of dragItems this dropTarget accepts
+	 */
 	accept: TargetType
+
+	/**
+	 * The drop target optinos
+	 */
 	options?: any
 
 	/**

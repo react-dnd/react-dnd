@@ -15,9 +15,7 @@ const style: React.CSSProperties = {
 }
 
 const TargetBox: React.FC = () => {
-	const ref = React.useRef(null)
-	const { canDrop, isOver } = useDrop({
-		ref,
+	const { ref, canDrop, isOver } = useDrop({
 		accept: ItemTypes.BOX,
 		collect: monitor => ({
 			canDrop: monitor.canDrop(),

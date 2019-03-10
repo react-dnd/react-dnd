@@ -28,9 +28,7 @@ const Box: React.FC<BoxProps> = ({
 	hideSourceOnDrag,
 	children,
 }) => {
-	const ref = React.useRef(null)
-	const { isDragging } = useDrag({
-		ref,
+	const { ref, isDragging } = useDrag({
 		item: { id, left, top, type: ItemTypes.BOX },
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
