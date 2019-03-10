@@ -22,7 +22,7 @@ export interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
-	const { ref, isDragging } = useDrag({
+	const [{ isDragging }, ref] = useDrag({
 		item: { name, type },
 		isDragging(monitor) {
 			const item = monitor.getItem()

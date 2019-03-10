@@ -23,10 +23,8 @@ export interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ name }) => {
-	const ref = React.createRef()
 	const item = { name, type: ItemTypes.BOX }
-	const { isDragging } = useDrag({
-		ref,
+	const [{ opacity }, ref] = useDrag({
 		item,
 		end: (dropResult?: { name: string }) => {
 			if (dropResult) {
@@ -34,10 +32,9 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 			}
 		},
 		collect: (monitor: DragSourceMonitor) => ({
-			isDragging: monitor.isDragging(),
+			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
 	})
-	const opacity = isDragging ? 0.4 : 1
 
 	return (
 		<div ref={ref as any} style={{ ...style, opacity }}>

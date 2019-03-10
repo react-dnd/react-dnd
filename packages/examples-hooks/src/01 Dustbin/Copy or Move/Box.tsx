@@ -27,7 +27,7 @@ interface DropResult {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
-	const { ref, opacity } = useDrag({
+	const [{ opacity }, ref] = useDrag({
 		item,
 		end(dropResult?: DropResult) {
 			if (dropResult) {

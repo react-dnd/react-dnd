@@ -10,14 +10,9 @@ const invariant = require('invariant')
  * useDropTarget Hook (This API is experimental and subject to breaking changes in non-breaking versions)
  * @param spec The drop target specification
  */
-export function useDrop<
-	DragObject,
-	DropResult,
-	CollectedProps,
-	ElementType extends Element
->(
+export function useDrop<DragObject, DropResult, CollectedProps>(
 	spec: DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
-): CollectedProps & { ref: React.RefObject<ElementType> } {
+): [CollectedProps, React.RefObject<any>] {
 	const { accept, options, collect } = spec
 	invariant(accept != null, 'accept must be defined')
 	let { ref } = spec
@@ -44,6 +39,5 @@ export function useDrop<
 	const result: CollectedProps & { ref: React.RefObject<Element> } = collect
 		? (useMonitorOutput(monitor as any, collect as any) as any)
 		: (({} as CollectedProps) as any)
-	result.ref = ref!
-	return result as any
+	return [result, ref]
 }

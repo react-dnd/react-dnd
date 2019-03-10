@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom'
  */
 export function useDragPreview<Props>(
 	DragPreview: React.RefForwardingComponent<Element, Props>,
-): [React.RefObject<Element>, React.FC<Props>] {
+): [React.FC<Props>, React.RefObject<Element>] {
 	// drag previews won't have layered functionality, so we can create the ref for them
 	// here
 	const ref = React.useRef(null)
@@ -22,5 +22,5 @@ export function useDragPreview<Props>(
 		)
 	}
 
-	return [ref, portaledComponent]
+	return [portaledComponent, ref]
 }

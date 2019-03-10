@@ -14,11 +14,10 @@ const invariant = require('invariant')
 export function useDrag<
 	DragObject extends DragObjectWithType,
 	DropResult,
-	CollectedProps,
-	ElementType extends Element
+	CollectedProps
 >(
 	spec: DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
-): CollectedProps & { ref: React.RefObject<ElementType> } {
+): [CollectedProps, React.RefObject<any>] {
 	const { item, options, preview, previewOptions, collect } = spec
 	let { ref } = spec
 	invariant(item != null, 'item must be defined')
@@ -63,6 +62,5 @@ export function useDrag<
 	const result: CollectedProps & { ref: React.RefObject<Element> } = collect
 		? (useMonitorOutput(monitor as any, collect as any) as any)
 		: (({} as CollectedProps) as any)
-	result.ref = ref!
-	return result as any
+	return [result, ref]
 }

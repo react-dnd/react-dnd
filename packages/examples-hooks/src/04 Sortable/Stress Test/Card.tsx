@@ -21,7 +21,7 @@ export interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
-	const { ref, isDragging } = useDrag({
+	const [{ isDragging }, ref] = useDrag({
 		item: { id, type: ItemTypes.CARD },
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
