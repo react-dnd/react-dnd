@@ -33,6 +33,7 @@ export const Knight: React.FC = () => {
 	const ref = React.useRef(null)
 	const preview = React.useRef(null)
 	const dragPreviewRoot = document.createElement('div')
+
 	const { isDragging } = useDrag({
 		ref,
 		item: { type: ItemTypes.KNIGHT },

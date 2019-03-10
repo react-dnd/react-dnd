@@ -26,7 +26,7 @@ function myDraggable(props) {
 
 - **`ref`**: Required. A ref object to use to attach to the draggable element.
 
-- **`preview`**: Optional. A ref object to use to attach to the dragPreview element.
+- **`preview`**: Optional. An HTML Element or a ref object attached to the dragPreview element.
 
 - **`previewOptions`**: Optional. A plain JavaScript object describing drag preview options.
 

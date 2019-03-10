@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { createPortal } from 'react-dom'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import boxImage from './boxImage'
@@ -16,13 +17,23 @@ const style = {
 	width: '20rem',
 }
 
+const BoxImage = React.forwardRef((props, ref: React.Ref<HTMLImageElement>) => {
+	if (typeof Image === 'undefined') {
+		return null
+	}
+	return <img ref={ref} src={boxImage} />
+})
+
+const BoxImageWrapper: React.FC<any> = React.forwardRef(
+	({ root }, ref: React.Ref<HTMLImageElement>) => {
+		return createPortal(<BoxImage ref={ref} />, root)
+	},
+)
+
 const BoxWithImage: React.FC = () => {
 	const ref = React.useRef(null)
-	const preview = new Promise(resolve => {
-		const img = new Image()
-		img.onload = () => resolve(img)
-		img.src = boxImage
-	})
+	const preview = React.useRef(null)
+	const dragPreviewRoot = document.createElement('div')
 
 	const { opacity } = useDrag({
 		ref,
@@ -34,9 +45,12 @@ const BoxWithImage: React.FC = () => {
 	})
 
 	return (
-		<div ref={ref} style={{ ...style, opacity }}>
-			Drag me to see an image
-		</div>
+		<>
+			<BoxImageWrapper ref={preview} root={dragPreviewRoot} />
+			<div ref={ref} style={{ ...style, opacity }}>
+				Drag me to see an image
+			</div>
+		</>
 	)
 }
 export default BoxWithImage
