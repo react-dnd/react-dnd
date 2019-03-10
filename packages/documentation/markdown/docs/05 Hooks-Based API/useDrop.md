@@ -30,8 +30,8 @@ function myDropTarget(props) {
 
 useDrop returns an array:
 
-0. An object containing collected properties from the collect function. If this is not set, an empty object is returned.
-1. The React ref to use. This is automatically created if no `ref` field is passed into the specification object.
+0. An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
+1. The React ref to use. This is automatically created if no `ref` field is defined on the specification object.
 
 ### Specification Object Members
 
