@@ -11,9 +11,11 @@ const invariant = require('invariant')
  * useDragSource hook (This API is experimental and subject to breaking changes in non-major versions)
  * @param sourceSpec The drag source specification *
  */
-export function useDrag<DragObject extends DragObjectWithType, CustomProps>(
-	spec: DragSourceHookSpec<DragObject, CustomProps>,
-): CustomProps {
+export function useDrag<
+	DragObject extends DragObjectWithType,
+	DropResult,
+	CustomProps
+>(spec: DragSourceHookSpec<DragObject, DropResult, CustomProps>): CustomProps {
 	const { ref, item, options, preview, previewOptions, collect } = spec
 	invariant(ref != null, 'ref instance must be defined')
 	invariant(typeof ref === 'object', 'ref must be a ref object')
@@ -21,7 +23,10 @@ export function useDrag<DragObject extends DragObjectWithType, CustomProps>(
 	invariant(item.type != null, 'item type must be defined')
 	const manager = useDragDropManager()
 	const backend = manager.getBackend()
-	const monitor = useDragSourceMonitor<DragObject, CustomProps>(manager, spec)
+	const monitor = useDragSourceMonitor<DragObject, DropResult, CustomProps>(
+		manager,
+		spec,
+	)
 
 	/*
 	 * Connect the Drag Source Element to the Backend

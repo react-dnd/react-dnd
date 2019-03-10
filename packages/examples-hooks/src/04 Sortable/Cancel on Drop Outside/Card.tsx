@@ -36,8 +36,7 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 		ref,
 		type: ItemTypes.CARD,
 		canDrop: () => false,
-		hover(monitor) {
-			const { id: draggedId } = monitor.getItem()
+		hover({ id: draggedId }: { id: string }) {
 			if (draggedId !== id) {
 				const { index: overIndex } = findCard(id)
 				moveCard(draggedId, overIndex)

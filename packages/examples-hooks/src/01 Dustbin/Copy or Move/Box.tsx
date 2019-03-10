@@ -1,5 +1,7 @@
 import * as React from 'react'
 import ItemTypes from '../Single Target/ItemTypes'
+import { DragItem, DropResult } from './interfaces'
+
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 const {
 	useDrag,
@@ -20,13 +22,11 @@ export interface BoxProps {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const ref = React.useRef(null)
-	const { opacity } = useDrag({
+	const item = { name, type: ItemTypes.BOX }
+	const { opacity } = useDrag<DragItem, DropResult, { opacity: number }>({
 		ref,
-		item: { name, type: ItemTypes.BOX },
-		end(monitor) {
-			const item = monitor.getItem()
-			const dropResult = monitor.getDropResult()
-
+		item,
+		end(dropResult, monitor) {
 			if (dropResult) {
 				let alertMessage = ''
 				const isDropAllowed =

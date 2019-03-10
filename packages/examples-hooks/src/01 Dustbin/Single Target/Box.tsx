@@ -21,13 +21,12 @@ interface BoxProps {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const ref = React.useRef(null)
+	const item = { name, type: ItemTypes.BOX }
+
 	const { isDragging } = useDrag({
 		ref,
-
-		item: { name, type: ItemTypes.BOX },
-		end: monitor => {
-			const item = monitor.getItem()
-			const dropResult = monitor.getDropResult()
+		item,
+		end: (dropResult?: { name: string }) => {
 			if (dropResult) {
 				alert(`You dropped ${item.name} into ${dropResult.name}!`)
 			}

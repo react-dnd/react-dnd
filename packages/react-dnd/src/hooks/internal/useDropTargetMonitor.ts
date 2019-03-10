@@ -4,9 +4,9 @@ import { DropTarget, DragDropManager } from 'dnd-core'
 import DropTargetMonitorImpl from '../../DropTargetMonitorImpl'
 import registerTarget from '../../registerTarget'
 
-export function useDropTargetMonitor<CustomProps>(
+export function useDropTargetMonitor<CustomProps, DragItem, DropResult>(
 	manager: DragDropManager<any>,
-	targetSpec: DropTargetHookSpec<CustomProps>,
+	targetSpec: DropTargetHookSpec<CustomProps, DragItem, DropResult>,
 ): DropTargetMonitor {
 	const targetSpecRef = React.useRef(targetSpec)
 
@@ -36,18 +36,18 @@ export function useDropTargetMonitor<CustomProps>(
 			({
 				canDrop() {
 					const { canDrop } = targetSpecRef.current
-					return canDrop ? canDrop(monitor) : true
+					return canDrop ? canDrop(monitor.getItem(), monitor) : true
 				},
 				hover() {
 					const { hover } = targetSpecRef.current
 					if (hover) {
-						hover(monitor)
+						hover(monitor.getItem(), monitor)
 					}
 				},
 				drop() {
 					const { drop } = targetSpecRef.current
 					if (drop) {
-						return drop(monitor)
+						return drop(monitor.getItem(), monitor)
 					}
 				},
 			} as DropTarget),

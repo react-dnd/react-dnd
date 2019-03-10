@@ -37,7 +37,7 @@ const Dustbin: React.FC<DustbinProps> = ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
 		}),
-		drop: monitor => onDrop(monitor.getItem()),
+		drop: item => onDrop(item),
 	})
 
 	const isActive = isOver && canDrop

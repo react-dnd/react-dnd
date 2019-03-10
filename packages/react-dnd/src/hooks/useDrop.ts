@@ -10,8 +10,8 @@ const invariant = require('invariant')
  * useDropTarget Hook (This API is experimental and subject to breaking changes in non-breaking versions)
  * @param spec The drop target specification
  */
-export function useDrop<CustomProps>(
-	spec: DropTargetHookSpec<CustomProps>,
+export function useDrop<DragObject, DropResult, CustomProps>(
+	spec: DropTargetHookSpec<DragObject, DropResult, CustomProps>,
 ): CustomProps {
 	const { ref, type, options, collect } = spec
 	invariant(ref != null, 'ref instance must be defined')

@@ -2,6 +2,7 @@
 import * as React from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import Colors from './Colors'
+import { DragItem } from './interfaces'
 
 const {
 	useDrop,
@@ -22,11 +23,16 @@ export interface TargetBoxProps {
 
 const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 	const ref = React.useRef(null)
-	const { isOver, draggingColor, canDrop } = useDrop({
+	const { isOver, draggingColor, canDrop } = useDrop<
+		DragItem,
+		void,
+		{ isOver: boolean; draggingColor: string; canDrop: boolean }
+	>({
 		ref,
 		type: [Colors.YELLOW, Colors.BLUE],
-		drop(monitor) {
-			onDrop(monitor.getItemType())
+		drop(item) {
+			onDrop(item.type)
+			return undefined
 		},
 		collect: monitor => ({
 			isOver: monitor.isOver(),

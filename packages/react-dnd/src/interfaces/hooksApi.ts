@@ -6,7 +6,7 @@ import { DragSourceOptions, DragPreviewOptions } from './options'
 /**
  * Interface for the DropTarget specification object
  */
-export interface DropTargetHookSpec<CollectedProps> {
+export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 	ref: RefObject<any>
 	type: TargetType
 	options?: any
@@ -21,7 +21,10 @@ export interface DropTargetHookSpec<CollectedProps> {
 	 * the source's endDrag method are good places to fire Flux actions. This method will not be called if canDrop()
 	 * is defined and returns false.
 	 */
-	drop?: (monitor: DropTargetMonitor) => any
+	drop?: (
+		item: DragObject,
+		monitor: DropTargetMonitor,
+	) => DropResult | undefined
 
 	/**
 	 * Optional.
@@ -29,14 +32,14 @@ export interface DropTargetHookSpec<CollectedProps> {
 	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
-	hover?: (monitor: DropTargetMonitor) => void
+	hover?: (item: DragObject, monitor: DropTargetMonitor) => void
 
 	/**
 	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
 	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
-	canDrop?: (monitor: DropTargetMonitor) => boolean
+	canDrop?: (item: DragObject, monitor: DropTargetMonitor) => boolean
 
 	/**
 	 * A function to collect rendering properties
@@ -50,6 +53,7 @@ export interface DragObjectWithType {
 
 export interface DragSourceHookSpec<
 	DragObject extends DragObjectWithType,
+	DropResult,
 	CollectedProps
 > {
 	ref: RefObject<any>
@@ -67,6 +71,9 @@ export interface DragSourceHookSpec<
 	 */
 	item: DragObject
 
+	/**
+	 * The drag source options
+	 */
 	options?: DragSourceOptions
 
 	/**
@@ -92,7 +99,7 @@ export interface DragSourceHookSpec<
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	end?: (monitor: DragSourceMonitor) => void
+	end?: (dropResult: DropResult | undefined, monitor: DragSourceMonitor) => void
 
 	/**
 	 * Optional.

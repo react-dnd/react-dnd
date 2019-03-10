@@ -32,7 +32,7 @@ const Dustbin: React.FC<DustbinProps> = ({
 	const { isOver, canDrop } = useDrop({
 		ref,
 		type: accepts,
-		drop: monitor => onDrop(monitor.getItem()),
+		drop: item => onDrop(item),
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),

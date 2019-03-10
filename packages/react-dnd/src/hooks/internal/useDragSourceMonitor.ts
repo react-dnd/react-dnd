@@ -10,10 +10,11 @@ import registerSource from '../../registerSource'
 
 export function useDragSourceMonitor<
 	DragObject extends DragObjectWithType,
+	DropResult,
 	CustomProps
 >(
 	manager: DragDropManager<any>,
-	sourceSpec: DragSourceHookSpec<DragObject, CustomProps>,
+	sourceSpec: DragSourceHookSpec<DragObject, DropResult, CustomProps>,
 ): DragSourceMonitor {
 	const sourceSpecRef = useRef(sourceSpec)
 
@@ -59,7 +60,7 @@ export function useDragSourceMonitor<
 				endDrag() {
 					const { end } = sourceSpecRef.current
 					if (end) {
-						end(monitor)
+						end(monitor.getItem(), monitor)
 					}
 				},
 			} as DragSource),
