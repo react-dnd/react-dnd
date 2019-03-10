@@ -12,13 +12,14 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 A hook to use the current component as a drag-source.
 
 ```js
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
-const {
-	useDrag,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd'
+const { useDrag } = dnd
 
-function myDraggable(props) {
-	const collectedProps = useDrag(spec)
+function DraggableComponent(props) {
+	const [collectedProps, ref] = useDrag({
+		item: { id, type },
+	})
+	return <div ref={ref}>...</div>
 }
 ```
 
