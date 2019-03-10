@@ -41,17 +41,15 @@ export function useDrag<
 	 */
 	useEffect(
 		function connectDragPreview() {
-			const connectPreview = (p: any) => {
-				const previewNode = isRef(p) ? (p as Ref<any>).current : p
+			if (preview) {
+				const previewNode = isRef(preview)
+					? (preview as Ref<any>).current
+					: preview
 				return backend.connectDragPreview(
 					monitor.getHandlerId(),
 					previewNode,
 					previewOptions,
 				)
-			}
-
-			if (preview) {
-				connectPreview(preview)
 			}
 		},
 		[preview && (preview as Ref<any>).current],
