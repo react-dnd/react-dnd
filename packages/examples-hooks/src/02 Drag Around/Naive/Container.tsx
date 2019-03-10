@@ -6,6 +6,7 @@ import {
 import ItemTypes from './ItemTypes'
 import Box from './Box'
 import update from 'immutability-helper'
+import { DragItem } from './interfaces'
 
 const {
 	useDrop,
@@ -41,13 +42,13 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 	const ref = React.useRef(null)
 	useDrop({
 		ref,
-		type: ItemTypes.BOX,
-		drop(monitor) {
-			const item = monitor.getItem()
+		accept: ItemTypes.BOX,
+		drop(item: DragItem, monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
 			const left = Math.round(item.left + delta.x)
 			const top = Math.round(item.top + delta.y)
 			moveBox(item.id, left, top)
+			return undefined
 		},
 	})
 

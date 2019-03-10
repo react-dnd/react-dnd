@@ -5,6 +5,7 @@ import boxImage from './boxImage'
 
 const {
 	useDrag,
+	useDragPreview,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
@@ -16,27 +17,30 @@ const style = {
 	width: '20rem',
 }
 
-const BoxWithImage: React.FC = () => {
-	const ref = React.useRef(null)
-	const preview = new Promise(resolve => {
-		const img = new Image()
-		img.onload = () => resolve(img)
-		img.src = boxImage
-	})
+const BoxImage = React.forwardRef((props, ref: React.Ref<HTMLImageElement>) => {
+	if (typeof Image === 'undefined') {
+		return null
+	}
+	return <img ref={ref} src={boxImage} />
+})
 
-	const { opacity } = useDrag({
-		ref,
-		type: ItemTypes.BOX,
-		preview: preview as any,
+const BoxWithImage: React.FC = () => {
+	const [DragPreview, preview] = useDragPreview(BoxImage)
+	const [{ opacity }, ref] = useDrag({
+		item: { type: ItemTypes.BOX },
+		preview,
 		collect: monitor => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
 	})
 
 	return (
-		<div ref={ref} style={{ ...style, opacity }}>
-			Drag me to see an image
-		</div>
+		<>
+			<DragPreview />
+			<div ref={ref} style={{ ...style, opacity }}>
+				Drag me to see an image
+			</div>
+		</>
 	)
 }
 export default BoxWithImage

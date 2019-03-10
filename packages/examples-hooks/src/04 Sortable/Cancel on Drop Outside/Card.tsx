@@ -22,12 +22,8 @@ export interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
-	const ref = React.useRef(null)
-
-	const { isDragging } = useDrag({
-		ref,
-		type: ItemTypes.CARD,
-		begin: () => ({ id, originalIndex: findCard(id).index }),
+	const [{ isDragging }, ref] = useDrag({
+		item: { type: ItemTypes.CARD, id, originalIndex: findCard(id).index },
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
 		}),
@@ -35,10 +31,9 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 
 	useDrop({
 		ref,
-		type: ItemTypes.CARD,
+		accept: ItemTypes.CARD,
 		canDrop: () => false,
-		hover(monitor) {
-			const { id: draggedId } = monitor.getItem()
+		hover({ id: draggedId }: { id: string }) {
 			if (draggedId !== id) {
 				const { index: overIndex } = findCard(id)
 				moveCard(draggedId, overIndex)
