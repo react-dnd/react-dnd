@@ -22,37 +22,35 @@ function myDraggable(props) {
 }
 ```
 
-### useDrag Parameters
+#### Parameters
 
 - **`spec`** Specification object, see below for details on how to construct this
 
-### Return Value
+#### Return Value Array
 
-useDrag returns an array:
-
-0. An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
-1. The React ref to use. This is automatically created if no `ref` field is defined on the specification object.
+- **`Index 0`**: An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
+- **`Index 1`**: The React ref to use. This is automatically created if no `ref` field is defined on the specification object. The ref must be attached to the draggable portion of the DOM.
 
 ### Specification Object Members
 
-- **`ref`**: Required. A ref object to use to attach to the draggable element.
+- **`item`**: Required. A plain JavaScript object describing the data being dragged. This is the _only_ information available to the drop targets about the drag source so it's important to pick the _minimal_ data they need to know. You may be tempted to put a complex reference here, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ type, id }` from this method.
 
-- **`preview`**: Optional. An HTML Element or a ref object attached to the dragPreview element.
+  `item.type` **must be set**, and it must be either a string, an ES6 symbol`. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to this item. Read the [overview](/docs/overview) to learn more about the items and types.
+
+- **`ref`**: Optional. A ref object to use to attach to the draggable element. If this is unset, one will be created ad returned.
+
+- **`preview`**: Optional. An HTML Element or a ref object attached to the dragPreview element. Consider using the `useDragPreview` hook to create this for you.
 
 - **`previewOptions`**: Optional. A plain JavaScript object describing drag preview options.
 
-- **`item`**: Required. A plain JavaScript object describing the data being dragged. This is the _only_ information available to the drop targets about the drag source so it's important to pick the _minimal_ data they need to know. You may be tempted to put a complex reference here, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ type, id }` from this method.
+* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom`arePropsEqual(props, otherProps)`function inside the`options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
-- **`item.type`**: Required. Either a string, an ES6 symbol`. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to the items produced by this drag source. Read the [overview](/docs/overview) to learn more about the items and types.
+* **`begin(monitor)`**: Optionaln. Fired when a drag operation begins.
 
-- **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom`arePropsEqual(props, otherProps)`function inside the`options` object can improve the performance. Unless you have performance problems, don't worry about it.
+* **`end(monitor)`**: Optional. When the dragging stops, `end` is called. For every `begin` call, a corresponding `end` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a _drop result_ by returning a plain object from its `drop()` method, it will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. _Note: If the component is unmounted while dragging, `component` parameter is set to be `null`._
 
-- **`begin(monitor)`**: Optionaln. Fired when a drag operation begins.
+* **`canDrag(monitor)`**: Optional. Use it to specify whether the dragging is currently allowed. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dragging based on some predicate over `props`. _Note: You may not call `monitor.canDrag()` inside this method._
 
-- **`end(monitor)`**: Optional. When the dragging stops, `end` is called. For every `begin` call, a corresponding `end` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a _drop result_ by returning a plain object from its `drop()` method, it will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. _Note: If the component is unmounted while dragging, `component` parameter is set to be `null`._
+* **`isDragging(monitor)`**: Optional. By default, only the drag source that initiated the drag operation is considered to be dragging. You can override this behavior by defining a custom `isDragging` method. It might return something like `props.id === monitor.getItem().id`. Do this if the original component may be unmounted during the dragging and later “resurrected” with a different parent. For example, when moving a card across the lists in a Kanban board, you want it to retain the dragged appearance—even though technically, the component gets unmounted and a different one gets mounted every time you move it to another list. _Note: You may not call `monitor.isDragging()` inside this method._
 
-- **`canDrag(monitor)`**: Optional. Use it to specify whether the dragging is currently allowed. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dragging based on some predicate over `props`. _Note: You may not call `monitor.canDrag()` inside this method._
-
-- **`isDragging(monitor)`**: Optional. By default, only the drag source that initiated the drag operation is considered to be dragging. You can override this behavior by defining a custom `isDragging` method. It might return something like `props.id === monitor.getItem().id`. Do this if the original component may be unmounted during the dragging and later “resurrected” with a different parent. For example, when moving a card across the lists in a Kanban board, you want it to retain the dragged appearance—even though technically, the component gets unmounted and a different one gets mounted every time you move it to another list. _Note: You may not call `monitor.isDragging()` inside this method._
-
-* **`collect`**: Optional. The collecting function. It should return a plain object of the props to return for injection into your component. It receives two parameters, `monitor` and `props`. Read the [overview](/docs/overview) for an introduction to the monitors and the collecting function. See the collecting function described in detail in the next section.
+- **`collect`**: Optional. The collecting function. It should return a plain object of the props to return for injection into your component. It receives two parameters, `monitor` and `props`. Read the [overview](/docs/overview) for an introduction to the monitors and the collecting function. See the collecting function described in detail in the next section.
