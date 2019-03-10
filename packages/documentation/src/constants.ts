@@ -71,6 +71,23 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
+		title: 'Hooks-Based API',
+		pages: {
+			USE_DRAG: {
+				location: '/docs/api/use-drag',
+				title: 'useDrag',
+			},
+			USE_DRAG_LAYER: {
+				location: '/docs/api/use-drag-layer',
+				title: 'useDragLayer',
+			},
+			USE_DROP: {
+				location: '/docs/api/use-drop',
+				title: 'useDrop',
+			},
+		},
+	},
+	{
 		title: 'Connecting to DOM',
 		pages: {
 			DRAG_SOURCE_CONNECTOR: {
