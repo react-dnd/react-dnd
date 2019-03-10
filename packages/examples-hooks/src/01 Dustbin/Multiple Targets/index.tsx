@@ -51,7 +51,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 				<div style={{ overflow: 'hidden', clear: 'both' }}>
 					{dustbins.map(({ accepts, lastDroppedItem }, index) => (
 						<Dustbin
-							accepts={accepts}
+							accept={accepts}
 							lastDroppedItem={lastDroppedItem}
 							// tslint:disable-next-line jsx-no-lambda
 							onDrop={item => this.handleDrop(index, item)}

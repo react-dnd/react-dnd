@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import * as React from 'react'
 import {
 	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
 	DropTargetMonitor,
@@ -21,12 +21,10 @@ export interface TargetBoxProps {
 }
 
 const TargetBox: React.FC<TargetBoxProps> = props => {
-	const { accepts, onDrop } = props
-	const ref = useRef(null)
-	const { canDrop, isOver } = useDrop({
-		ref,
-		type: accepts,
-		drop(monitor) {
+	const { accepts: accept, onDrop } = props
+	const [{ canDrop, isOver }, ref] = useDrop({
+		accept,
+		drop(item, monitor) {
 			if (onDrop) {
 				onDrop(props, monitor)
 			}

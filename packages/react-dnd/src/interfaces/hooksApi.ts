@@ -3,62 +3,49 @@ import { DropTargetMonitor, DragSourceMonitor } from './monitors'
 import { RefObject } from 'react'
 import { DragSourceOptions, DragPreviewOptions } from './options'
 
-/**
- * Interface for the DropTarget specification object
- */
-export interface DropTargetHookSpec<CollectedProps> {
-	ref: RefObject<any>
-	type: TargetType
-	options?: any
+export interface DragSourceHookSpec<
+	DragObject extends DragObjectWithType,
+	DropResult,
+	CollectedProps
+> {
+	/**
+	 * The ref object to associated with this dragged itom. If this is not specified it will be
+	 * returned in the `ref` field of the result object.
+	 */
+	ref?: RefObject<any>
 
 	/**
-	 * Optional.
-	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
-	 * If you return an object, it is going to become the drop result and will be available to the drag source in its
-	 * endDrag method as monitor.getDropResult(). This is useful in case you want to perform different actions
-	 * depending on which target received the drop. If you have nested drop targets, you can test whether a nested
-	 * target has already handled drop by checking monitor.didDrop() and monitor.getDropResult(). Both this method and
-	 * the source's endDrag method are good places to fire Flux actions. This method will not be called if canDrop()
-	 * is defined and returns false.
+	 * A plain javascript item describing the data being dragged.
+	 * This is the only information available to the drop targets about the drag
+	 * source so it's important to pick the minimal data they need to know.
+	 *
+	 * You may be tempted to put a reference to the component or complex object here,
+	 * but you shouldx try very hard to avoid doing this because it couples the
+	 * drag sources and drop targets. It's a good idea to use something like
+	 * { id: props.id }
+	 *
 	 */
-	drop?: (monitor: DropTargetMonitor) => any
+	item: DragObject
 
 	/**
-	 * Optional.
-	 * Called when an item is hovered over the component. You can check monitor.isOver({ shallow: true }) to test whether
-	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
-	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
+	 * The drag source options
 	 */
-	hover?: (monitor: DropTargetMonitor) => void
-
-	/**
-	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
-	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
-	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
-	 */
-	canDrop?: (monitor: DropTargetMonitor) => boolean
-
-	/**
-	 * A function to collect rendering properties
-	 */
-	collect?: (monitor: DropTargetMonitor) => CollectedProps
-}
-
-export interface DragSourceHookSpec<DragObject, CollectedProps> {
-	ref: RefObject<any>
-	type: SourceType
 	options?: DragSourceOptions
-	preview?: React.Ref<any> | Element | Promise<React.Ref<any> | Element>
+
+	/**
+	 * An optional dragPreview
+	 */
+	preview?: RefObject<any> | Element
+
+	/**
+	 * DragPreview options
+	 */
 	previewOptions?: DragPreviewOptions
 
 	/**
-	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
-	 * data being dragged. What you return is the only information available to the drop targets about the drag
-	 * source so it's important to pick the minimal data they need to know. You may be tempted to put a reference
-	 * to the component into it, but you should try very hard to avoid doing this because it couples the drag
-	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
+	 * When the dragging starts, beginDrag is called.
 	 */
-	begin?: (monitor: DragSourceMonitor) => DragObject
+	begin?: (monitor: DragSourceMonitor) => void
 
 	/**
 	 * Optional.
@@ -68,7 +55,7 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	end?: (monitor: DragSourceMonitor) => void
+	end?: (dropResult: DropResult | undefined, monitor: DragSourceMonitor) => void
 
 	/**
 	 * Optional.
@@ -94,4 +81,64 @@ export interface DragSourceHookSpec<DragObject, CollectedProps> {
 	 * A function to collect rendering properties
 	 */
 	collect?: (monitor: DragSourceMonitor) => CollectedProps
+}
+
+/**
+ * Interface for the DropTarget specification object
+ */
+export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
+	/**
+	 * The ref object to associated with this dragged itom. If this is not specified it will be
+	 * returned in the `ref` field of the result object.
+	 */
+	ref?: RefObject<any>
+
+	/**
+	 * The kinds of dragItems this dropTarget accepts
+	 */
+	accept: TargetType
+
+	/**
+	 * The drop target optinos
+	 */
+	options?: any
+
+	/**
+	 * Optional.
+	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
+	 * If you return an object, it is going to become the drop result and will be available to the drag source in its
+	 * endDrag method as monitor.getDropResult(). This is useful in case you want to perform different actions
+	 * depending on which target received the drop. If you have nested drop targets, you can test whether a nested
+	 * target has already handled drop by checking monitor.didDrop() and monitor.getDropResult(). Both this method and
+	 * the source's endDrag method are good places to fire Flux actions. This method will not be called if canDrop()
+	 * is defined and returns false.
+	 */
+	drop?: (
+		item: DragObject,
+		monitor: DropTargetMonitor,
+	) => DropResult | undefined
+
+	/**
+	 * Optional.
+	 * Called when an item is hovered over the component. You can check monitor.isOver({ shallow: true }) to test whether
+	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
+	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
+	 */
+	hover?: (item: DragObject, monitor: DropTargetMonitor) => void
+
+	/**
+	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
+	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
+	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
+	 */
+	canDrop?: (item: DragObject, monitor: DropTargetMonitor) => boolean
+
+	/**
+	 * A function to collect rendering properties
+	 */
+	collect?: (monitor: DropTargetMonitor) => CollectedProps
+}
+
+export interface DragObjectWithType {
+	type: SourceType
 }
