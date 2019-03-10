@@ -50,12 +50,7 @@ export function useDrag<
 				)
 			}
 
-			if (preview == null) {
-				return
-			}
-			if (typeof (preview as any).then === 'function') {
-				;(preview as any).then((p: any) => connectPreview(p))
-			} else {
+			if (preview) {
 				connectPreview(preview)
 			}
 		},

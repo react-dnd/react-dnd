@@ -31,7 +31,7 @@ export interface DragSourceHookSpec<
 	/**
 	 * An optional dragPreview
 	 */
-	preview?: React.Ref<any> | Element | Promise<React.Ref<any> | Element>
+	preview?: RefObject<any> | Element
 
 	/**
 	 * DragPreview options
