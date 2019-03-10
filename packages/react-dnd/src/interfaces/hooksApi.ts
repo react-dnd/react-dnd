@@ -44,21 +44,45 @@ export interface DropTargetHookSpec<CollectedProps> {
 	collect?: (monitor: DropTargetMonitor) => CollectedProps
 }
 
-export interface DragSourceHookSpec<DragObject, CollectedProps> {
-	ref: RefObject<any>
+export interface DragObjectWithType {
 	type: SourceType
+}
+
+export interface DragSourceHookSpec<
+	DragObject extends DragObjectWithType,
+	CollectedProps
+> {
+	ref: RefObject<any>
+
+	/**
+	 * A plain javascript item describing the data being dragged.
+	 * This is the only information available to the drop targets about the drag
+	 * source so it's important to pick the minimal data they need to know.
+	 *
+	 * You may be tempted to put a reference to the component or complex object here,
+	 * but you shouldx try very hard to avoid doing this because it couples the
+	 * drag sources and drop targets. It's a good idea to use something like
+	 * { id: props.id }
+	 *
+	 */
+	item: DragObject
+
 	options?: DragSourceOptions
+
+	/**
+	 * An optional dragPreview
+	 */
 	preview?: React.Ref<any> | Element | Promise<React.Ref<any> | Element>
+
+	/**
+	 * DragPreview options
+	 */
 	previewOptions?: DragPreviewOptions
 
 	/**
-	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
-	 * data being dragged. What you return is the only information available to the drop targets about the drag
-	 * source so it's important to pick the minimal data they need to know. You may be tempted to put a reference
-	 * to the component into it, but you should try very hard to avoid doing this because it couples the drag
-	 * sources and drop targets. It's a good idea to return something like { id: props.id } from this method.
+	 * When the dragging starts, beginDrag is called.
 	 */
-	begin?: (monitor: DragSourceMonitor) => DragObject
+	begin?: (monitor: DragSourceMonitor) => void
 
 	/**
 	 * Optional.

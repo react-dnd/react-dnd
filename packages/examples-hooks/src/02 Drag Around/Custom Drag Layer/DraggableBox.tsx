@@ -39,7 +39,7 @@ const DraggableBox: React.FC<DraggableBoxProps> = props => {
 
 	const { isDragging } = useDrag({
 		ref,
-		type: ItemTypes.BOX,
+		item: { type: ItemTypes.BOX },
 		// Use empty image as a drag preview so browsers don't draw it
 		// and we can draw whatever we want on the custom drag layer instead.
 		preview: getEmptyImage(),

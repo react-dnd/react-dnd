@@ -1,6 +1,6 @@
 declare var require: any
 import { useEffect } from 'react'
-import { DragSourceHookSpec } from '../interfaces'
+import { DragSourceHookSpec, DragObjectWithType } from '../interfaces'
 import { useDragSourceMonitor } from './internal/useDragSourceMonitor'
 import { useDragDropManager } from './internal/useDragDropManager'
 import { Ref, isRef } from './util'
@@ -11,13 +11,14 @@ const invariant = require('invariant')
  * useDragSource hook (This API is experimental and subject to breaking changes in non-major versions)
  * @param sourceSpec The drag source specification *
  */
-export function useDrag<DragObject, CustomProps>(
+export function useDrag<DragObject extends DragObjectWithType, CustomProps>(
 	spec: DragSourceHookSpec<DragObject, CustomProps>,
 ): CustomProps {
-	const { ref, type, options, preview, previewOptions, collect } = spec
+	const { ref, item, options, preview, previewOptions, collect } = spec
 	invariant(ref != null, 'ref instance must be defined')
 	invariant(typeof ref === 'object', 'ref must be a ref object')
-	invariant(type != null, 'type must be defined')
+	invariant(item != null, 'item must be defined')
+	invariant(item.type != null, 'item type must be defined')
 	const manager = useDragDropManager()
 	const backend = manager.getBackend()
 	const monitor = useDragSourceMonitor<DragObject, CustomProps>(manager, spec)

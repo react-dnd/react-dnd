@@ -1,10 +1,17 @@
 import { useMemo, useEffect, useRef } from 'react'
 import { DragSource, DragDropManager } from 'dnd-core'
-import { DragSourceHookSpec, DragSourceMonitor } from '../../interfaces'
+import {
+	DragSourceHookSpec,
+	DragSourceMonitor,
+	DragObjectWithType,
+} from '../../interfaces'
 import DragSourceMonitorImpl from '../../DragSourceMonitorImpl'
 import registerSource from '../../registerSource'
 
-export function useDragSourceMonitor<DragObject, CustomProps>(
+export function useDragSourceMonitor<
+	DragObject extends DragObjectWithType,
+	CustomProps
+>(
 	manager: DragDropManager<any>,
 	sourceSpec: DragSourceHookSpec<DragObject, CustomProps>,
 ): DragSourceMonitor {
@@ -18,7 +25,7 @@ export function useDragSourceMonitor<DragObject, CustomProps>(
 	useEffect(
 		function registerSourceWithMonitor() {
 			const { handlerId, unregister } = registerSource(
-				sourceSpec.type,
+				sourceSpec.item.type,
 				handler,
 				manager,
 			)
@@ -33,12 +40,11 @@ export function useDragSourceMonitor<DragObject, CustomProps>(
 		() =>
 			({
 				beginDrag() {
-					const { begin } = sourceSpecRef.current
+					const { begin, item } = sourceSpecRef.current
 					if (begin) {
-						return begin(monitor)
-					} else {
-						return {}
+						begin(monitor)
 					}
+					return item || {}
 				},
 				canDrag() {
 					const { canDrag } = sourceSpecRef.current

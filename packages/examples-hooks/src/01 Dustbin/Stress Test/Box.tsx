@@ -25,8 +25,7 @@ const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
 	const ref = React.useRef(null)
 	const { isDragging } = useDrag({
 		ref,
-		type,
-		begin: () => ({ name }),
+		item: { name, type },
 		isDragging(monitor) {
 			const item = monitor.getItem()
 			return name === item.name

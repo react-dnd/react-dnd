@@ -27,7 +27,7 @@ const BoxWithHandle: React.FC = () => {
 	const preview = React.useRef(null)
 	const { opacity } = useDrag({
 		ref,
-		type: ItemTypes.BOX,
+		item: { type: ItemTypes.BOX },
 		preview,
 		collect: monitor => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,

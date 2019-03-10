@@ -27,7 +27,7 @@ const SourceBox: React.FC<SourceBoxProps> = ({
 	const ref = React.useRef(null)
 	const { isDragging } = useDrag({
 		ref,
-		type: `${color}`,
+		item: { type: `${color}` },
 		canDrag: () => !forbidDrag,
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),

@@ -27,7 +27,7 @@ export const Knight: React.FC = () => {
 	const dragPreview = React.useMemo(createKnightImage, [])
 	const { isDragging } = useDrag({
 		ref,
-		type: ItemTypes.KNIGHT,
+		item: { type: ItemTypes.KNIGHT },
 		preview: dragPreview,
 		collect: mon => ({
 			isDragging: !!mon.isDragging(),

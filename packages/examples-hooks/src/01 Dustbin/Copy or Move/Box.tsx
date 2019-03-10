@@ -22,8 +22,7 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 	const ref = React.useRef(null)
 	const { opacity } = useDrag({
 		ref,
-		type: ItemTypes.BOX,
-		begin: () => ({ name }),
+		item: { name, type: ItemTypes.BOX },
 		end(monitor) {
 			const item = monitor.getItem()
 			const dropResult = monitor.getDropResult()
