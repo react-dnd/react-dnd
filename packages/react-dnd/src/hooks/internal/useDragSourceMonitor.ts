@@ -43,7 +43,8 @@ export function useDragSourceMonitor<
 				beginDrag() {
 					const { begin, item } = sourceSpecRef.current
 					if (begin) {
-						begin(monitor)
+						const beginResult = begin(monitor)
+						return beginResult || item || {}
 					}
 					return item || {}
 				},
