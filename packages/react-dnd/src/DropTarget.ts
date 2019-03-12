@@ -75,7 +75,7 @@ export default function DropTarget<Props, CollectedProps = {}>(
 	): DndComponentClass<Props> {
 		return decorateHandler<Props, TargetType>({
 			containerDisplayName: 'DropTarget',
-			createHandler: createTarget,
+			createHandler: createTarget as any,
 			registerHandler: registerTarget,
 			createMonitor: (manager: DragDropManager<any>) =>
 				new DropTargetMonitorImpl(manager),
