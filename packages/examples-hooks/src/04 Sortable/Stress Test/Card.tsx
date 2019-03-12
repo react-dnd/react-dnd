@@ -20,10 +20,10 @@ export interface CardProps {
 	moveCard: (draggedId: string, id: string) => void
 }
 
-const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
+const Card: React.FC<CardProps> = React.memo(({ id, text, moveCard }) => {
 	const [{ isDragging }, ref] = useDrag({
 		item: { id, type: ItemTypes.CARD },
-		collect: monitor => ({
+		collect: (monitor: any) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
@@ -39,11 +39,13 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 	})
 
 	const opacity = isDragging ? 0 : 1
+	const containerStyle = React.useMemo(() => ({ ...style, opacity }), [opacity])
+
 	return (
-		<div ref={ref} style={{ ...style, opacity }}>
+		<div ref={ref} style={containerStyle}>
 			{text}
 		</div>
 	)
-}
+})
 
 export default Card
