@@ -18,14 +18,29 @@ const shallowEqual = require('shallowequal')
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any
-	createHandler: any
-	createMonitor: any
+	createMonitor: (manager: DragDropManager<any>) => HandlerReceiver
+	createHandler: (
+		monitor: HandlerReceiver,
+		ref: React.RefObject<any>,
+	) => Handler<Props>
 	createConnector: any
 	registerHandler: any
 	containerDisplayName: string
 	getType: (props: Props) => ItemIdType
 	collect: any
 	options: any
+}
+
+interface HandlerReceiver {
+	receiveHandlerId: (handlerId: Identifier | null) => void
+}
+interface Handler<Props> {
+	ref: React.RefObject<any>
+	receiveProps(props: Props): void
+}
+
+interface HandlerConnector extends HandlerReceiver {
+	hooks: any[]
 }
 
 export default function decorateHandler<Props, ItemIdType>({
@@ -45,18 +60,6 @@ export default function decorateHandler<Props, ItemIdType>({
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-	interface HandlerReceiver {
-		receiveHandlerId: (handlerId: Identifier | null) => void
-	}
-	interface Handler {
-		ref: React.RefObject<any>
-		receiveProps(props: Props): void
-	}
-
-	interface HandlerConnector extends HandlerReceiver {
-		hooks: any[]
-	}
-
 	class DragDropContainer extends React.Component<Props>
 		implements DndComponent<Props> {
 		public static DecoratedComponent = DecoratedComponent
@@ -66,7 +69,7 @@ export default function decorateHandler<Props, ItemIdType>({
 		private manager: DragDropManager<any> | undefined
 		private handlerMonitor: HandlerReceiver | undefined
 		private handlerConnector: HandlerConnector | undefined
-		private handler: Handler | undefined
+		private handler: Handler<Props> | undefined
 		private disposable: any
 		private currentType: any
 
@@ -232,9 +235,10 @@ export default function decorateHandler<Props, ItemIdType>({
 				displayName,
 				displayName,
 			)
+			const itemRef = React.createRef<any>()
 			this.handlerMonitor = createMonitor(dragDropManager)
 			this.handlerConnector = createConnector(dragDropManager.getBackend())
-			this.handler = createHandler(this.handlerMonitor)
+			this.handler = createHandler(this.handlerMonitor, itemRef)
 		}
 	}
 
