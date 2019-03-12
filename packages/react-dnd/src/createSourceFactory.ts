@@ -15,6 +15,71 @@ export interface Source extends DragSource {
 	receiveProps(props: any): void
 }
 
+class SourceImpl<Props> implements Source {
+	private props: Props | null = null
+	private ref: React.RefObject<any> = createRef()
+
+	constructor(
+		private spec: DragSourceSpec<Props, any>,
+		private monitor: DragSourceMonitor,
+	) {}
+
+	public receiveProps(props: any) {
+		this.props = props
+	}
+
+	public canDrag() {
+		if (!this.props) {
+			return false
+		}
+		if (!this.spec.canDrag) {
+			return true
+		}
+
+		return this.spec.canDrag(this.props, this.monitor)
+	}
+
+	public isDragging(globalMonitor: DragDropMonitor, sourceId: string) {
+		if (!this.props) {
+			return false
+		}
+		if (!this.spec.isDragging) {
+			return sourceId === globalMonitor.getSourceId()
+		}
+
+		return this.spec.isDragging(this.props, this.monitor)
+	}
+
+	public beginDrag = () => {
+		if (!this.props) {
+			return
+		}
+
+		const item = this.spec.beginDrag(this.props, this.monitor, this.ref.current)
+		if (process.env.NODE_ENV !== 'production') {
+			invariant(
+				isPlainObject(item),
+				'beginDrag() must return a plain object that represents the dragged item. ' +
+					'Instead received %s. ' +
+					'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
+				item,
+			)
+		}
+		return item
+	}
+
+	public endDrag() {
+		if (!this.props) {
+			return
+		}
+		if (!this.spec.endDrag) {
+			return
+		}
+
+		this.spec.endDrag(this.props, this.monitor, this.ref.current)
+	}
+}
+
 export default function createSourceFactory<Props, DragObject = {}>(
 	spec: DragSourceSpec<Props, DragObject>,
 ) {
@@ -50,69 +115,7 @@ export default function createSourceFactory<Props, DragObject = {}>(
 		)
 	})
 
-	class SourceImpl implements Source {
-		private props: Props | null = null
-		private ref: React.RefObject<any> = createRef()
-
-		constructor(private monitor: DragSourceMonitor) {}
-
-		public receiveProps(props: any) {
-			this.props = props
-		}
-
-		public canDrag() {
-			if (!this.props) {
-				return false
-			}
-			if (!spec.canDrag) {
-				return true
-			}
-
-			return spec.canDrag(this.props, this.monitor)
-		}
-
-		public isDragging(globalMonitor: DragDropMonitor, sourceId: string) {
-			if (!this.props) {
-				return false
-			}
-			if (!spec.isDragging) {
-				return sourceId === globalMonitor.getSourceId()
-			}
-
-			return spec.isDragging(this.props, this.monitor)
-		}
-
-		public beginDrag = () => {
-			if (!this.props) {
-				return
-			}
-
-			const item = spec.beginDrag(this.props, this.monitor, this.ref.current)
-			if (process.env.NODE_ENV !== 'production') {
-				invariant(
-					isPlainObject(item),
-					'beginDrag() must return a plain object that represents the dragged item. ' +
-						'Instead received %s. ' +
-						'Read more: http://react-dnd.github.io/react-dnd/docs-drag-source.html',
-					item,
-				)
-			}
-			return item
-		}
-
-		public endDrag() {
-			if (!this.props) {
-				return
-			}
-			if (!spec.endDrag) {
-				return
-			}
-
-			spec.endDrag(this.props, this.monitor, this.ref.current)
-		}
-	}
-
 	return function createSource(monitor: DragSourceMonitor) {
-		return new SourceImpl(monitor) as Source
+		return new SourceImpl(spec, monitor) as Source
 	}
 }
