@@ -39,8 +39,10 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 	})
 
 	const opacity = isDragging ? 0 : 1
+	const containerStyle = React.useMemo(() => ({ ...style, opacity }), [opacity])
+
 	return (
-		<div ref={ref} style={{ ...style, opacity }}>
+		<div ref={ref} style={containerStyle}>
 			{text}
 		</div>
 	)
