@@ -1,7 +1,7 @@
 declare var require: any
 declare var process: any
 
-import { createRef } from 'react'
+import * as React from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
 
@@ -17,11 +17,11 @@ export interface Source extends DragSource {
 
 class SourceImpl<Props> implements Source {
 	private props: Props | null = null
-	private ref: React.RefObject<any> = createRef()
 
 	constructor(
 		private spec: DragSourceSpec<Props, any>,
 		private monitor: DragSourceMonitor,
+		private ref: React.RefObject<any>,
 	) {}
 
 	public receiveProps(props: any) {
@@ -115,7 +115,10 @@ export default function createSourceFactory<Props, DragObject = {}>(
 		)
 	})
 
-	return function createSource(monitor: DragSourceMonitor) {
-		return new SourceImpl(spec, monitor) as Source
+	return function createSource(
+		monitor: DragSourceMonitor,
+		ref: React.RefObject<any>,
+	) {
+		return new SourceImpl(spec, monitor, ref) as Source
 	}
 }

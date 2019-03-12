@@ -82,7 +82,7 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 	): DndComponentClass<Props> {
 		return decorateHandler<Props, SourceType>({
 			containerDisplayName: 'DragSource',
-			createHandler: createSource,
+			createHandler: createSource as any,
 			registerHandler: registerSource,
 			createMonitor: (manager: DragDropManager<any>) =>
 				new DragSourceMonitorImpl(manager),

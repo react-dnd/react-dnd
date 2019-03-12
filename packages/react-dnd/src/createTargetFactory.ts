@@ -1,7 +1,7 @@
 declare var require: any
 declare var process: any
 
-import { createRef } from 'react'
+import * as React from 'react'
 import { DropTarget } from 'dnd-core'
 import { DropTargetSpec, DropTargetMonitor } from './interfaces'
 const invariant = require('invariant')
@@ -16,11 +16,11 @@ export interface Target extends DropTarget {
 
 class TargetImpl<Props> implements Target {
 	private props: Props | null = null
-	private ref: React.RefObject<any> = createRef()
 
 	constructor(
 		private spec: DropTargetSpec<Props>,
 		private monitor: DropTargetMonitor,
+		private ref: React.RefObject<any>,
 	) {}
 
 	public receiveProps(props: any) {
@@ -94,7 +94,10 @@ export default function createTargetFactory<Props>(
 		)
 	})
 
-	return function createTarget(monitor: DropTargetMonitor): Target {
-		return new TargetImpl(spec, monitor)
+	return function createTarget(
+		monitor: DropTargetMonitor,
+		ref: React.RefObject<any>,
+	): Target {
+		return new TargetImpl(spec, monitor, ref)
 	}
 }
