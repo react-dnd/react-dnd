@@ -1,7 +1,7 @@
 declare var require: any
 declare var process: any
 
-import { createRef } from 'react'
+import * as React from 'react'
 import { DropTarget } from 'dnd-core'
 import { DropTargetSpec, DropTargetMonitor } from './interfaces'
 const invariant = require('invariant')
@@ -12,6 +12,62 @@ const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 export interface Target extends DropTarget {
 	receiveProps(props: any): void
 	receiveMonitor(monitor: any): void
+}
+
+class TargetImpl<Props> implements Target {
+	private props: Props | null = null
+
+	constructor(
+		private spec: DropTargetSpec<Props>,
+		private monitor: DropTargetMonitor,
+		private ref: React.RefObject<any>,
+	) {}
+
+	public receiveProps(props: any) {
+		this.props = props
+	}
+
+	public receiveMonitor(monitor: any) {
+		this.monitor = monitor
+	}
+
+	public canDrop(): boolean {
+		if (!this.spec.canDrop) {
+			return true
+		}
+
+		return this.spec.canDrop(this.props as Props, this.monitor)
+	}
+
+	public hover() {
+		if (!this.spec.hover) {
+			return
+		}
+
+		this.spec.hover(this.props as Props, this.monitor, this.ref.current)
+	}
+
+	public drop() {
+		if (!this.spec.drop) {
+			return undefined
+		}
+
+		const dropResult = this.spec.drop(
+			this.props as Props,
+			this.monitor,
+			this.ref.current,
+		)
+		if (process.env.NODE_ENV !== 'production') {
+			invariant(
+				typeof dropResult === 'undefined' || isPlainObject(dropResult),
+				'drop() must either return undefined, or an object that represents the drop result. ' +
+					'Instead received %s. ' +
+					'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+				dropResult,
+			)
+		}
+		return dropResult
+	}
 }
 
 export default function createTargetFactory<Props>(
@@ -38,60 +94,10 @@ export default function createTargetFactory<Props>(
 		)
 	})
 
-	class TargetImpl implements Target {
-		private props: Props | null = null
-		private ref: React.RefObject<any> = createRef()
-
-		constructor(private monitor: DropTargetMonitor) {}
-
-		public receiveProps(props: any) {
-			this.props = props
-		}
-
-		public receiveMonitor(monitor: any) {
-			this.monitor = monitor
-		}
-
-		public canDrop(): boolean {
-			if (!spec.canDrop) {
-				return true
-			}
-
-			return spec.canDrop(this.props as Props, this.monitor)
-		}
-
-		public hover() {
-			if (!spec.hover) {
-				return
-			}
-
-			spec.hover(this.props as Props, this.monitor, this.ref.current)
-		}
-
-		public drop() {
-			if (!spec.drop) {
-				return undefined
-			}
-
-			const dropResult = spec.drop(
-				this.props as Props,
-				this.monitor,
-				this.ref.current,
-			)
-			if (process.env.NODE_ENV !== 'production') {
-				invariant(
-					typeof dropResult === 'undefined' || isPlainObject(dropResult),
-					'drop() must either return undefined, or an object that represents the drop result. ' +
-						'Instead received %s. ' +
-						'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
-					dropResult,
-				)
-			}
-			return dropResult
-		}
-	}
-
-	return function createTarget(monitor: DropTargetMonitor): Target {
-		return new TargetImpl(monitor)
+	return function createTarget(
+		monitor: DropTargetMonitor,
+		ref: React.RefObject<any>,
+	): Target {
+		return new TargetImpl(spec, monitor, ref)
 	}
 }
