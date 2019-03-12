@@ -116,8 +116,9 @@ export interface DragSourceSpec<Props, DragObject> {
 	isDragging?: (props: Props, monitor: DragSourceMonitor) => boolean
 }
 
+export type ConnectedElement = React.ReactElement | Element | null
 export type DragElementWrapper<Options> = <Props>(
-	elementOrNode: React.ReactElement<Props> | Element,
+	elementOrNode: ConnectedElement,
 	options?: Options,
 ) => React.ReactElement<Props>
 
@@ -168,7 +169,7 @@ export interface DropTargetConnector {
 }
 
 export type ConnectDropTarget = <Props>(
-	elementOrNode: React.ReactElement<Props>,
+	elementOrNode: ConnectedElement,
 ) => React.ReactElement<Props>
 
 export type DragSourceCollector<CollectedProps> = (
