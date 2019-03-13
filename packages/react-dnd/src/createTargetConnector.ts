@@ -1,7 +1,9 @@
+declare var require: any
 import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from './hooks/util'
+const shallowEqual = require('shallowequal')
 
 export default function createTargetConnector(backend: Backend) {
 	let handlerId: Identifier
@@ -11,14 +13,29 @@ export default function createTargetConnector(backend: Backend) {
 	let dropTargetOptions: any
 	let disconnectDropTarget: Unsubscribe | undefined
 
-	function reconnectDropTarget() {
-		if (disconnectDropTarget) {
-			disconnectDropTarget()
-			disconnectDropTarget = undefined
-		}
+	let lastConnectedHandlerId: Identifier | null = null
+	let lastConnectedDropTarget: any = null
+	let lastConnectedDropTargetOptions: any = null
 
+	function reconnectDropTarget() {
 		const dropTarget = dropTargetNode || dropTargetRef.current
-		if (handlerId && dropTarget) {
+		if (!handlerId || !dropTarget) {
+			return
+		}
+		// if nothing has changed then don't resubscribe
+		if (
+			lastConnectedHandlerId !== handlerId ||
+			lastConnectedDropTarget !== dropTarget ||
+			!shallowEqual(lastConnectedDropTargetOptions, dropTargetOptions)
+		) {
+			if (disconnectDropTarget) {
+				disconnectDropTarget()
+				disconnectDropTarget = undefined
+			}
+			lastConnectedHandlerId = handlerId
+			lastConnectedDropTarget = dropTarget
+			lastConnectedDropTargetOptions = dropTargetOptions
+
 			disconnectDropTarget = backend.connectDropTarget(
 				handlerId,
 				dropTarget,
