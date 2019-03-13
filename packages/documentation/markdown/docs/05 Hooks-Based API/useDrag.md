@@ -46,7 +46,7 @@ function DraggableComponent(props) {
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom`arePropsEqual(props, otherProps)`function inside the`options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
-* **`begin(monitor)`**: Optionaln. Fired when a drag operation begins.
+* **`begin(monitor)`**: Optional. Fired when a drag operation begins. Nothing needs to be returned, but if an object is returned it will override the default `item` property of the spec.
 
 * **`end(monitor)`**: Optional. When the dragging stops, `end` is called. For every `begin` call, a corresponding `end` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a _drop result_ by returning a plain object from its `drop()` method, it will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. _Note: If the component is unmounted while dragging, `component` parameter is set to be `null`._
 
