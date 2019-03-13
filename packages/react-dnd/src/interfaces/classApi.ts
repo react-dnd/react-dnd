@@ -116,7 +116,11 @@ export interface DragSourceSpec<Props, DragObject> {
 	isDragging?: (props: Props, monitor: DragSourceMonitor) => boolean
 }
 
-export type ConnectedElement = React.ReactElement | Element | null
+export type ConnectedElement =
+	| React.RefObject<any>
+	| React.ReactElement
+	| Element
+	| null
 export type DragElementWrapper<Options> = <Props>(
 	elementOrNode: ConnectedElement,
 	options?: Options,

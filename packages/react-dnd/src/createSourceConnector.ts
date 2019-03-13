@@ -2,19 +2,20 @@ declare var require: any
 import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
+import { isRef } from './hooks/util'
 const shallowEqual = require('shallowequal')
 
 export default function createSourceConnector(backend: Backend) {
 	let currentHandlerId: Identifier
 
 	// The drop target may either be attached via ref or connect function
-	const dragSourceRef = React.createRef<any>()
+	let dragSourceRef = React.createRef<any>()
 	let dragSourceNode: any
 	let dragSourceOptions: any
 	let disconnectDragSource: Unsubscribe | undefined
 
 	// The drag preview may either be attached via ref or connect function
-	const dragPreviewRef = React.createRef<any>()
+	let dragPreviewRef = React.createRef<any>()
 	let dragPreviewNode: any
 	let dragPreviewOptions: any
 	let disconnectDragPreview: Unsubscribe | undefined
@@ -65,7 +66,13 @@ export default function createSourceConnector(backend: Backend) {
 		dragSourceRef,
 		dragPreviewRef,
 
-		dragSource: function connectDragSource(node: any, options: any) {
+		dragSource: function connectDragSource(node: any, options?: any) {
+			// check for a ref object being passed in
+			if (isRef(node)) {
+				dragSourceRef = node
+				return
+			}
+
 			if (node === dragSourceNode && shallowEqual(options, dragSourceOptions)) {
 				return
 			}
@@ -74,7 +81,12 @@ export default function createSourceConnector(backend: Backend) {
 			dragSourceOptions = options
 		},
 
-		dragPreview: function connectDragPreview(node: any, options: any) {
+		dragPreview: function connectDragPreview(node: any, options?: any) {
+			// check for a ref object being passed in
+			if (isRef(node)) {
+				dragPreviewRef = node
+				return
+			}
 			if (
 				node === dragPreviewNode &&
 				shallowEqual(options, dragPreviewOptions)
