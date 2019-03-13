@@ -1,3 +1,4 @@
+declare var require: any
 import { useMemo, useEffect, useRef } from 'react'
 import { DragSource, DragDropManager } from 'dnd-core'
 import {
@@ -7,6 +8,7 @@ import {
 } from '../../interfaces'
 import DragSourceMonitorImpl from '../../DragSourceMonitorImpl'
 import registerSource from '../../registerSource'
+const invariant = require('invariant')
 
 export function useDragSourceMonitor<
 	DragObject extends DragObjectWithType,
@@ -44,6 +46,10 @@ export function useDragSourceMonitor<
 					const { begin, item } = sourceSpecRef.current
 					if (begin) {
 						const beginResult = begin(monitor)
+						invariant(
+							beginResult == null || typeof beginResult === 'object',
+							'dragSpec.begin() must either return an object, undefined, or null',
+						)
 						return beginResult || item || {}
 					}
 					return item || {}
