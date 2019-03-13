@@ -1,56 +1,57 @@
 declare var require: any
+import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 const shallowEqual = require('shallowequal')
 
 export default function createTargetConnector(backend: Backend) {
-	let currentHandlerId: Identifier
-	let currentDropTargetNode: any
-	let currentDropTargetOptions: any
-	let disconnectCurrentDropTarget: Unsubscribe | undefined
+	let handlerId: Identifier
+	// The drop target may either be attached via ref or connect function
+	const dropTargetRef = React.createRef<any>()
+	let dropTargetNode: any
+	let dropTargetOptions: any
+	let disconnectDropTarget: Unsubscribe | undefined
 
 	function reconnectDropTarget() {
-		if (disconnectCurrentDropTarget) {
-			disconnectCurrentDropTarget()
-			disconnectCurrentDropTarget = undefined
+		if (disconnectDropTarget) {
+			disconnectDropTarget()
+			disconnectDropTarget = undefined
 		}
 
-		if (currentHandlerId && currentDropTargetNode) {
-			disconnectCurrentDropTarget = backend.connectDropTarget(
-				currentHandlerId,
-				currentDropTargetNode,
-				currentDropTargetOptions,
+		const dropTarget = dropTargetNode || dropTargetRef.current
+		if (handlerId && dropTarget) {
+			disconnectDropTarget = backend.connectDropTarget(
+				handlerId,
+				dropTarget,
+				dropTargetOptions,
 			)
 		}
 	}
 
-	function receiveHandlerId(handlerId: Identifier) {
-		if (handlerId === currentHandlerId) {
+	function receiveHandlerId(newHandlerId: Identifier) {
+		if (newHandlerId === handlerId) {
 			return
 		}
 
-		currentHandlerId = handlerId
+		handlerId = newHandlerId
 		reconnectDropTarget()
 	}
 
 	const hooks = wrapConnectorHooks({
+		dropTargetRef,
 		dropTarget: function connectDropTarget(node: any, options: any) {
-			if (
-				node === currentDropTargetNode &&
-				shallowEqual(options, currentDropTargetOptions)
-			) {
+			if (node === dropTargetNode && shallowEqual(options, dropTargetOptions)) {
 				return
 			}
 
-			currentDropTargetNode = node
-			currentDropTargetOptions = options
-
-			reconnectDropTarget()
+			dropTargetNode = node
+			dropTargetOptions = options
 		},
 	})
 
 	return {
 		receiveHandlerId,
 		hooks,
+		reconnect: reconnectDropTarget,
 	}
 }
