@@ -1,9 +1,7 @@
-declare var require: any
 import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from './hooks/util'
-const shallowEqual = require('shallowequal')
 
 export default function createTargetConnector(backend: Backend) {
 	let handlerId: Identifier
@@ -38,27 +36,19 @@ export default function createTargetConnector(backend: Backend) {
 		reconnectDropTarget()
 	}
 
-	const hooks = wrapConnectorHooks({
-		dropTargetRef,
-		dropTarget: function connectDropTarget(node: any, options: any) {
-			// check for a ref object being passed in
-			if (isRef(node)) {
-				dropTargetRef = node
-				return
-			}
-
-			if (node === dropTargetNode && shallowEqual(options, dropTargetOptions)) {
-				return
-			}
-
-			dropTargetNode = node
-			dropTargetOptions = options
-		},
-	})
-
 	return {
 		receiveHandlerId,
-		hooks,
+		hooks: wrapConnectorHooks({
+			dropTargetRef,
+			dropTarget: function connectDropTarget(node: any, options: any) {
+				dropTargetOptions = options
+				if (isRef(node)) {
+					dropTargetRef = node
+				} else {
+					dropTargetNode = node
+				}
+			},
+		}),
 		reconnect: reconnectDropTarget,
 	}
 }

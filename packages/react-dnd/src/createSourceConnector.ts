@@ -1,9 +1,7 @@
-declare var require: any
 import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from './hooks/util'
-const shallowEqual = require('shallowequal')
 
 export default function createSourceConnector(backend: Backend) {
 	let currentHandlerId: Identifier
@@ -62,46 +60,29 @@ export default function createSourceConnector(backend: Backend) {
 		reconnectDragPreview()
 	}
 
-	const hooks = wrapConnectorHooks({
-		dragSourceRef,
-		dragPreviewRef,
-
-		dragSource: function connectDragSource(node: any, options?: any) {
-			// check for a ref object being passed in
-			if (isRef(node)) {
-				dragSourceRef = node
-				return
-			}
-
-			if (node === dragSourceNode && shallowEqual(options, dragSourceOptions)) {
-				return
-			}
-
-			dragSourceNode = node
-			dragSourceOptions = options
-		},
-
-		dragPreview: function connectDragPreview(node: any, options?: any) {
-			// check for a ref object being passed in
-			if (isRef(node)) {
-				dragPreviewRef = node
-				return
-			}
-			if (
-				node === dragPreviewNode &&
-				shallowEqual(options, dragPreviewOptions)
-			) {
-				return
-			}
-
-			dragPreviewNode = node
-			dragPreviewOptions = options
-		},
-	})
-
 	return {
 		receiveHandlerId,
-		hooks,
+		hooks: wrapConnectorHooks({
+			dragSourceRef,
+			dragPreviewRef,
+			dragSource: function connectDragSource(node: any, options?: any) {
+				dragSourceOptions = options
+				if (isRef(node)) {
+					dragSourceRef = node
+				} else {
+					dragSourceNode = node
+				}
+			},
+
+			dragPreview: function connectDragPreview(node: any, options?: any) {
+				dragPreviewOptions = options
+				if (isRef(node)) {
+					dragPreviewRef = node
+				} else {
+					dragPreviewNode = node
+				}
+			},
+		}),
 		reconnect: () => {
 			reconnectDragSource()
 			reconnectDragPreview()
