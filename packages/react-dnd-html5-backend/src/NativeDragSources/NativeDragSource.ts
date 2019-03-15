@@ -5,8 +5,9 @@ export class NativeDragSource {
 	public item: any
 
 	constructor(private config: NativeItemConfig) {
-		this.item = Object.create(
-			Object.keys(this.config.exposeProperties).map(property => ({
+		this.item = {}
+		Object.keys(this.config.exposeProperties).forEach(property => {
+			Object.defineProperty(this.item, property, {
 				configurable: true, // This is needed to allow redefining it later
 				get() {
 					// tslint:disable-next-line no-console
@@ -15,8 +16,8 @@ export class NativeDragSource {
 					)
 					return null
 				},
-			})),
-		)
+			})
+		})
 	}
 
 	public mutateItemByReadingDataTransfer(dataTransfer: DataTransfer | null) {
