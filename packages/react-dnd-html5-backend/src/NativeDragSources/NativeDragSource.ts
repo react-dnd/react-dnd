@@ -9,6 +9,7 @@ export class NativeDragSource {
 		Object.keys(this.config.exposeProperties).forEach(property => {
 			Object.defineProperty(this.item, property, {
 				configurable: true, // This is needed to allow redefining it later
+				enumerable: true,
 				get() {
 					// tslint:disable-next-line no-console
 					console.warn(
