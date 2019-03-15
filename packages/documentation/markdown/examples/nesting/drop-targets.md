@@ -4,7 +4,7 @@ title: 'Drop Targets'
 ---
 
 [JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/03%20Nesting/Drop%20Targets)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/03%20Nesting/Drop%20Targets)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/03%20Nesting/Drop%20Targets)
 
 Drop targets can, too, be nested in one another. Unlike the drag
 sources, several drop targets may react to the same item being
