@@ -4,7 +4,7 @@ title: 'Copy or Move'
 ---
 
 [JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/01%20Dustbin/Copy%20or%20Move)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/01%20Dustbin/Copy%20or%20Move)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/01%20Dustbin/Copy%20or%20Move)
 
 This example demonstrates drop targets that can accept copy and move
 drop effects, which users can switch between by holding down or
