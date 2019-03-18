@@ -11,13 +11,17 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 ## Properties
 
-- **`dragSourceRef(options?) => Ref`**: A function that returns a new [ref](https://reactjs.org/docs/refs-and-the-dom.html) that may be used to attach to your Drag Source element. This may be used in lieu of the `dragSource()`function described below.
-
-- **`dragPreviewRef(options?) => Ref`**_(optional)_: A function that returns a new [ref](https://reactjs.org/docs/refs-and-the-dom.html) that may be used to attach to your Drag Preview element. This may be used in lieu of the `dragPreview()` function described below.
-
 - **`dragSource() => (Element | Node | Ref, options?)`**: Returns a function that should be prop-injected into your component and used in that component's `render()` method. You may pass this function a react component, an DOM element, or a ref object to this method.
 
 - **`dragPreview() => (Element | Node | Ref, options?)`**_(optional)_: Returns a function that may be used inside the component to assign the drag preview role to a node. By returning `{ connectDragPreview: connect.dragPreview() }` from your collecting function, you can mark any React element as the drag preview node. To do that, replace any `element` with `this.props.connectDragPreview(element)` inside the `render` function. The drag preview is the node that will be screenshotted by the [HTML5 backend](/docs/backends/html5) when the drag begins. For example, if you want to make something draggable by a small custom handle, you can mark this handle as the `dragSource()`, but also mark an outer, larger component node as the `dragPreview()`. Thus the larger drag preview appears on the screenshot, but only the smaller drag source is actually draggable. Another possible customization is passing an [`Image`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image) instance to `dragPreview` from a lifecycle method like `componentDidMount`. This lets you use the actual images for drag previews. (Note that IE does not support this customization). See the example code below for the different usage examples.
+
+* **`dragSourceRef`**: A [ref](https://reactjs.org/docs/refs-and-the-dom.html) that may be used to attach to your Drag Source element. This may be used in lieu of the `dragSource()`function described above.
+
+* **`dragPreviewRef`**_(optional)_: A [ref](https://reactjs.org/docs/refs-and-the-dom.html) that may be used to attach to your Drag Preview element. This may be used in lieu of the `dragPreview()` function described above.
+
+* **`dragSourceOptions(options?)`**_(optional)_: Returns a function that may be used inside the component to configure the drag source. This is used in tandem with the `dragSourceRef` property.
+
+* **`dragPreviewOptions(options?)`**_(optional)_: Returns a function that may be used inside the component to configure the drag preview. This is used in tandem with the `dragPreviewRef` property.
 
 ### Method Options
 
@@ -119,15 +123,30 @@ import { DragSource } from 'react-dnd';
 function collect(connect, monitor) {
   return {
     dragSource: connect.dragSourceRef(),
-    dragPreview: connect.dragPreviewRef()
+    dragPreview: connect.dragPreviewRef(),
+    setDragSourceOptions: connect.dragSourceOptions()
+    setDragPreviewOPtions: connect.dragPreviewOptions()
   };
 }
+
+class ComponentWithCopyEffect {
+  render() {
+    const { dragSource, setDragSourceOptions } = this.props;
+
+    setDragSourceOptions({dropEffect: 'copy'})
+    return (
+      <div ref={dragSource}>
+        This div shows a plus icon in some browsers.
+      </div>
+    );
+  }
+});
+ComponentWithCopyEffect = DragSource(type, {/* ... */}, collect)(ComponentWithCopyEffect);
 
 class ComponentWithHandle {
   render() {
     const { dragSource, dragPreview } = this.props;
-
-    return
+    return connectDragPreview(
       <div ref={dragPreview}>
         This div is draggable by a handle!
         <div ref={dragSource}>drag me</div>
@@ -136,6 +155,26 @@ class ComponentWithHandle {
   }
 }
 ComponentWithHandle = DragSource(type, {/* ... */}, collect)(ComponentWithHandle);
+
+class ComponentWithImagePreview {
+  componentDidMount() {
+    const { connectDragPreview } = this.props;
+
+    const img = new Image();
+    img.src = 'http://mysite.com/image.jpg';
+    img.onload = () => connectDragPreview(img);
+  }
+
+  render() {
+    const { dragSource } = this.props;
+    return dragSource(
+      <div ref={dragSource}>
+        This div shows an image when dragged!
+      </div>
+    );
+  }
+}
+ComponentWithImagePreview = DragSource(type, {/* ... */}, collect)(ComponentWithImagePreview);
 ```
 
 ### Example

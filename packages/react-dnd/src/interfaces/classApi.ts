@@ -121,6 +121,7 @@ export type ConnectedElement =
 	| React.ReactElement
 	| Element
 	| null
+
 export type DragElementWrapper<Options> = <Props>(
 	elementOrNode: ConnectedElement,
 	options?: Options,
@@ -129,31 +130,30 @@ export type DragElementWrapper<Options> = <Props>(
 export type ConnectDragSource = DragElementWrapper<DragSourceOptions>
 export type ConnectDragPreview = DragElementWrapper<DragPreviewOptions>
 
+export type ConnectOptions<T> = (options: T) => void
+
 /**
  * DragSourceConnector is an object passed to a collecting function of the DragSource.
  * Its methods return functions that let you assign the roles to your component's DOM nodes.
  */
 export interface DragSourceConnector {
 	/**
-	 * A React ref object to attach to the drag source. This replaces the dragSource() function described below.
+	 * A React ref object to attach to the drag source. This may be used in lieu of the dragSource() function described below.
 	 */
-	dragSourceRef(options?: DragSourceOptions): React.RefObject<any>
+	dragSourceRef: React.RefObject<any>
 
 	/**
-	 * A React ref object to attach to the drag preview. This replaces the dragPreview() function described below.
+	 * A React ref object to attach to the drag preview. This may be used in lieu of the dragPreview() function described below.
 	 */
-	dragPreviewRef(options?: DragPreviewOptions): React.RefObject<any>
+	dragPreviewRef: React.RefObject<any>
 
 	/**
 	 * Returns a function that must be used inside the component to assign the drag source role to a node. By
 	 * returning { connectDragSource: connect.dragSource() } from your collecting function, you can mark any React
 	 * element as the draggable node. To do that, replace any element with this.props.connectDragSource(element) inside
 	 * the render function.
-	 *
-	 * @param elementOrNode
-	 * @param options
 	 */
-	dragSource(options?: DragSourceOptions): ConnectDragSource
+	dragSource(): ConnectDragSource
 
 	/**
 	 * Optional. Returns a function that may be used inside the component to assign the drag preview role to a node. By
@@ -166,7 +166,10 @@ export interface DragSourceConnector {
 	 * from a lifecycle method like componentDidMount. This lets you use the actual images for drag previews. (Note that IE does not
 	 * support this customization). See the example code below for the different usage examples.
 	 */
-	dragPreview(options?: DragPreviewOptions): ConnectDragPreview
+	dragPreview(): ConnectDragPreview
+
+	dragSourceOptions(): ConnectOptions<DragSourceOptions>
+	dragPreviewOptions(): ConnectOptions<DragPreviewOptions>
 }
 
 /**
@@ -175,16 +178,18 @@ export interface DragSourceConnector {
  */
 export interface DropTargetConnector {
 	/**
-	 * A React ref object to attach to the drop target. This replaces the dropTarget() function described below.
+	 * A React ref object to attach to the drop target. This may be used in lieu of the dropTarget() function described below.
 	 */
-	dropTargetRef(options?: any): React.RefObject<any>
+	dropTargetRef: React.RefObject<any>
 
 	/**
 	 * Returns a function that must be used inside the component to assign the drop target role to a node.
 	 * By returning { connectDropTarget: connect.dropTarget() } from your collecting function, you can mark any React element
 	 * as the droppable node. To do that, replace any element with this.props.connectDropTarget(element) inside the render function.
 	 */
-	dropTarget(options?: any): ConnectDropTarget
+	dropTarget(): ConnectDropTarget
+
+	dropTargetOptions(): ConnectOptions<any>
 }
 
 export type ConnectDropTarget = <Props>(

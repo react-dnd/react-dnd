@@ -11,8 +11,8 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 ## Properties
 
-- **`dropTargetRef() => Ref`**: A function that returns a new [ref](https://reactjs.org/docs/refs-and-the-dom.html) that may be used to attach to your Drop Target element. This may be used in lieu of the `dropTarget()` function described below.
 - **`dropTarget() => (Element | Node | Ref)`**: Returns a function that should be prop-injected into your component and used in that component's `render()` method. You may pass this function a react component, an DOM element, or a ref object to this method.
+- **`dropTargetRef`**: A [ref](https://reactjs.org/docs/refs-and-the-dom.html) that may be used to attach to your Drop Target element. This may be used in lieu of the `dropTarget()` function described above.
 
 ## Usage Patterns
 

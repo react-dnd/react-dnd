@@ -97,10 +97,17 @@ export default function createSourceConnector(backend: Backend) {
 	return {
 		receiveHandlerId,
 		hooks: wrapConnectorHooks({
-			dragSourceRef: (options?: DragSourceOptions) => {
-				dragSourceOptions = options
-				dragSourceRef = React.createRef()
+			get dragSourceRef() {
+				if (dragSourceRef == null) {
+					dragSourceRef = React.createRef()
+				}
 				return dragSourceRef
+			},
+			get dragPreviewRef() {
+				if (dragPreviewRef == null) {
+					dragPreviewRef = React.createRef()
+				}
+				return dragPreviewRef
 			},
 			dragSource: (
 				node: Element | React.ReactElement | React.Ref<any>,
@@ -113,11 +120,6 @@ export default function createSourceConnector(backend: Backend) {
 					dragSourceNode = node
 				}
 			},
-			dragPreviewRef: (options?: DragPreviewOptions) => {
-				dragPreviewOptions = options
-				dragPreviewRef = React.createRef()
-				return dragPreviewRef
-			},
 			dragPreview: (node: any, options?: DragPreviewOptions) => {
 				dragPreviewOptions = options
 				if (isRef(node)) {
@@ -126,6 +128,10 @@ export default function createSourceConnector(backend: Backend) {
 					dragPreviewNode = node
 				}
 			},
+			dragSourceOptions: (options?: DragSourceOptions) =>
+				(dragSourceOptions = options),
+			dragPreviewOptions: (options?: DragPreviewOptions) =>
+				(dragPreviewOptions = options),
 		}),
 		reconnect: () => {
 			reconnectDragSource()
