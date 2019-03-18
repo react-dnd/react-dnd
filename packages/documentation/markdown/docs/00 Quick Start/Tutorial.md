@@ -1,10 +1,9 @@
 ---
-path: "/docs/tutorial"
-title: "Tutorial"
+path: '/docs/tutorial'
+title: 'Tutorial'
 ---
 
-Tutorial
-===================
+# Tutorial
 
 Now that you've read [the overview](/docs/overview), it's the adventure time! Even if you have not, you can skip it for now, because ⅔ of our time we'll be busy identifying and building normal React components, just like in the classic [Thinking in React](https://facebook.github.io/react/docs/thinking-in-react.html) tutorial. Adding the drag and drop support is just the icing on the cake.
 
@@ -18,28 +17,27 @@ Enough talk! It's time to set up a build workflow for our little project. I use 
 
 In this tutorial, the code examples are use function-components and modern JavaScript syntax. It's recommended to use a build-step to transpile these features into your target environment. We recommend using [create-react-app](https://github.com/facebook/create-react-app).
 
-
 The app we're going to build is [available as an example on this website](/examples/tutorial).
 
 ## Identifying the Components
 
 We're going to start by creating some React components first, with no thoughts of the drag and drop interaction. Which components is our Lonely Knight app going to be made of? I can think of a few:
 
-* `Knight`, our lonely knight piece;
-* `Square`, a single square on the board;
-* `Board`, the whole board with 64 squares.
+- `Knight`, our lonely knight piece;
+- `Square`, a single square on the board;
+- `Board`, the whole board with 64 squares.
 
 Let's consider their props.
 
-* `Knight` probably needs no props. It has a position, but there's no reason for the `Knight` to know it, because it can be positioned by being placed into a `Square` as a child.
+- `Knight` probably needs no props. It has a position, but there's no reason for the `Knight` to know it, because it can be positioned by being placed into a `Square` as a child.
 
-* It is tempting to give `Square` its position via props, but this, again, is not necessary, because the only information it really needs for the rendering is the color. I'm going to make `Square` white by default, and add a `black` boolean prop. And of course `Square` may accept a single child: the chess piece that is currently on it. I chose white as the default background color to match the browser defaults.
+- It is tempting to give `Square` its position via props, but this, again, is not necessary, because the only information it really needs for the rendering is the color. I'm going to make `Square` white by default, and add a `black` boolean prop. And of course `Square` may accept a single child: the chess piece that is currently on it. I chose white as the default background color to match the browser defaults.
 
-* The `Board` is tricky. It makes no sense to pass `Square`s as children to it, because what else could a board contain? Therefore it probably owns the `Square`s. But then, it also needs to own the `Knight` because this guy needs to be placed inside one of those `Square`s. This means that the `Board` needs to know the knight's current position. In a real Chess game, the `Board` would accept a data structure describing all the pieces, their colors and positions, but for us, a `knightPosition` prop will suffice. We will use two-item arrays as coordinates, with `[0, 0]` referring to the A8 square. Why A8 instead of A1? To match the browser coordinate orientation. I tried it another way and it just messed with my head too much.
+- The `Board` is tricky. It makes no sense to pass `Square`s as children to it, because what else could a board contain? Therefore it probably owns the `Square`s. But then, it also needs to own the `Knight` because this guy needs to be placed inside one of those `Square`s. This means that the `Board` needs to know the knight's current position. In a real Chess game, the `Board` would accept a data structure describing all the pieces, their colors and positions, but for us, a `knightPosition` prop will suffice. We will use two-item arrays as coordinates, with `[0, 0]` referring to the A8 square. Why A8 instead of A1? To match the browser coordinate orientation. I tried it another way and it just messed with my head too much.
 
 Where will the current state live? I really don't want to put it into the `Board` component. It's a good idea to have as little state in your components as possible, and because the `Board` will already have some layout logic, I don't want to also burden it with managing the state.
 
-The good news is, it doesn't matter at this point. We're just going to write the components as if the state existed *somewhere*, and make sure that they render correctly when they receive it via props, and think about managing the state afterwards!
+The good news is, it doesn't matter at this point. We're just going to write the components as if the state existed _somewhere_, and make sure that they render correctly when they receive it via props, and think about managing the state afterwards!
 
 ## Creating the Components
 
@@ -48,10 +46,10 @@ I prefer to start bottom-up, because this way I'm always working with something 
 In fact I'm going to start with the `Knight`. It doesn't have any props at all, and it's the easiest one to build:
 
 ```js
-import React from 'react';
+import React from 'react'
 
 export default function Knight() {
-  return <span>♘</span>;
+  return <span>♘</span>
 }
 ```
 
@@ -60,11 +58,11 @@ Yes, ♘ is the Unicode knight! It's gorgeous. We could've made its color a prop
 It seems to render fine, but just to be sure, I immediately changed my entry point to test it:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Knight from './Knight';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Knight from './Knight'
 
-ReactDOM.render(<Knight />, document.getElementById('root'));
+ReactDOM.render(<Knight />, document.getElementById('root'))
 ```
 
 <img src='http://i.imgur.com/NktjTMn.png' width='512' height='384' alt='Screenshot'>
@@ -74,56 +72,57 @@ I'm going to do this every time I work on another component, so that I always ha
 I see my `Knight` on the screen! Time to go ahead and implement the `Square` now. Here is my first stab:
 
 ```js
-import React from 'react';
+import React from 'react'
 
-export default function Square({black}) {
-  const fill = black ? 'black' : 'white';
-  return <div style={{ backgroundColor: fill }} />;
+export default function Square({ black }) {
+  const fill = black ? 'black' : 'white'
+  return <div style={{ backgroundColor: fill }} />
 }
 ```
 
 Now I change the entry point code to see how the `Knight` looks inside a `Square`:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Knight from './Knight';
-import Square from './Square';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Knight from './Knight'
+import Square from './Square'
 
 ReactDOM.render(
   <Square black>
     <Knight />
   </Square>,
-  document.getElementById('root')
-);
+  document.getElementById('root'),
+)
 ```
 
 Sadly, the screen is empty. I made a few mistakes:
 
-* I forgot to give `Square` any dimensions so it just collapses. I don't want it to have any fixed size, so I'll give it `width: '100%'` and `height: '100%'` to fill the container.
+- I forgot to give `Square` any dimensions so it just collapses. I don't want it to have any fixed size, so I'll give it `width: '100%'` and `height: '100%'` to fill the container.
 
-* I forgot to put `{children}` inside the `div` returned by the `Square`, so it ignores the `Knight` passed to it.
+- I forgot to put `{children}` inside the `div` returned by the `Square`, so it ignores the `Knight` passed to it.
 
 Even after correcting these two mistakes, I still can't see my `Knight` when the `Square` is `black`. That's because the default page body text color is black, so it is not visible on the black `Square`. I could have fixed this by giving `Knight` a color prop, but a much simpler fix is to set a corresponding `color` style in the same place where I set `backgroundColor`. This version of `Square` corrects the mistakes and works equally great with both colors:
 
-
 ```js
-import React from 'react';
+import React from 'react'
 
-export default function Square({black, children}) {
-  const fill = black ? 'black' : 'white';
-  const stroke = black ? 'white' : 'black';
+export default function Square({ black, children }) {
+  const fill = black ? 'black' : 'white'
+  const stroke = black ? 'white' : 'black'
 
   return (
-    <div style={{
-      backgroundColor: fill,
-      color: stroke,
-      width: '100%',
-      height: '100%'
-    }}>
+    <div
+      style={{
+        backgroundColor: fill,
+        color: stroke,
+        width: '100%',
+        height: '100%',
+      }}
+    >
       {children}
     </div>
-  );
+  )
 }
 ```
 
@@ -132,9 +131,9 @@ export default function Square({black, children}) {
 Finally, time to get started with the `Board`! I'm going to start with an extremely naïve version that just draws the same single square:
 
 ```js
-import React from 'react';
-import Square from './Square';
-import Knight from './Knight';
+import React from 'react'
+import Square from './Square'
+import Knight from './Knight'
 
 export default function Board() {
   return (
@@ -143,21 +142,21 @@ export default function Board() {
         <Knight />
       </Square>
     </div>
-  );
+  )
 }
 ```
 
 My only intention so far is to make it render, so that I can start tweaking it:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Board from './Board';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Board from './Board'
 
 ReactDOM.render(
   <Board knightPosition={[0, 0]} />,
-  document.getElementById('root')
-);
+  document.getElementById('root'),
+)
 ```
 
 Indeed, I can see the same single square. I'm now going to add a whole bunch of them! But I don't know where to start. What do I put in `render`? Some kind of a `for` loop? A `map` over some array?
@@ -168,15 +167,11 @@ My first attempt at `renderSquare` looks like this:
 
 ```js
 function renderSquare(x, y, [knightX, knightY]) {
-  const black = (x + y) % 2 === 1;
+  const black = (x + y) % 2 === 1
   const isKnightHere = knightX === x && knightY === y
-  const piece = isKnightHere ? <Knight /> : null;
+  const piece = isKnightHere ? <Knight /> : null
 
-  return (
-    <Square black={black}>
-      {piece}
-    </Square>
-  );
+  return <Square black={black}>{piece}</Square>
 }
 ```
 
@@ -185,15 +180,17 @@ I can already give it a whirl by changing the Board's rendering to be
 ```js
 export default function Board({ knightPosition }) {
   return (
-    <div style={{
-      width: '100%',
-      height: '100%'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
       {renderSquare(0, 0, knightPosition)}
       {renderSquare(1, 0, knightPosition)}
       {renderSquare(2, 0, knightPosition)}
     </div>
-  );
+  )
 }
 ```
 
@@ -201,46 +198,44 @@ export default function Board({ knightPosition }) {
 
 At this point, I realize that I forgot to give my squares any layout. I'm going to use [Flexbox](https://developer.mozilla.org/en/CSS/Using_CSS_flexible_boxes). I added some styles to the root `div`, and also wrapped the `Square`s into `div`s so I could lay them out. Generally it's a good idea to keep components encapsulated and ignorant of how they're being laid out, even if this means adding wrapper `div`s.
 
-
 ```js
-import React from 'react';
-import Square from './Square';
-import Knight from './Knight';
+import React from 'react'
+import Square from './Square'
+import Knight from './Knight'
 
 function renderSquare(i, [knightX, knightY]) {
-  const x = i % 8;
-  const y = Math.floor(i / 8);
-  const isKnightHere = (x === knightX && y === knightY)
-  const black = (x + y) % 2 === 1;
-  const piece = isKnightHere ? <Knight /> : null;
+  const x = i % 8
+  const y = Math.floor(i / 8)
+  const isKnightHere = x === knightX && y === knightY
+  const black = (x + y) % 2 === 1
+  const piece = isKnightHere ? <Knight /> : null
 
   return (
     <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
-      <Square black={black}>
-        {piece}
-      </Square>
+      <Square black={black}>{piece}</Square>
     </div>
-  );
+  )
 }
 
-export default function Board({knightPosition}) {
-  const squares = [];
+export default function Board({ knightPosition }) {
+  const squares = []
   for (let i = 0; i < 64; i++) {
-    squares.push(renderSquare(i, knightPosition));
+    squares.push(renderSquare(i, knightPosition))
   }
 
   return (
-    <div style={{
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      flexWrap: 'wrap'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
+      }}
+    >
       {squares}
     </div>
-  );
+  )
 }
-
 ```
 
 <img src='http://i.imgur.com/RsQDI4Y.png' width='512' height='384' alt='Screenshot'>
@@ -250,14 +245,14 @@ It looks pretty awesome! I don't know how to constrain the `Board` to maintain a
 Think about it for a moment. We just went from nothing to being able to move the `Knight` on a beautiful `Board` by changing the `knightPosition`:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Board from './Board';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Board from './Board'
 
 ReactDOM.render(
   <Board knightPosition={[7, 4]} />,
-  document.getElementById('root')
-);
+  document.getElementById('root'),
+)
 ```
 
 <img src='http://i.imgur.com/0fNBn5a.png' width='512' height='384' alt='Screenshot'>
@@ -277,31 +272,29 @@ I don't want to bother with installing or setting up Redux for this simple examp
 Since I know this much, I can rewrite my `index.js` with a hypothetical `Game` that doesn't exist yet. Note that this time, I'm writing my code in blind, not being able to run it yet. This is because I'm still figuring out the API:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Board from './Board';
-import { observe } from './Game';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Board from './Board'
+import { observe } from './Game'
 
-const root = document.getElementById('root');
+const root = document.getElementById('root')
 
 observe(knightPosition =>
-  ReactDOM.render(
-    <Board knightPosition={knightPosition} />,
-    root
-  )
-);
+  ReactDOM.render(<Board knightPosition={knightPosition} />, root),
+)
 ```
 
-What is this `observe` function I import? It's just the most minimal way I can think of to subscribe to a changing state. I could've made it an `EventEmitter` but why on Earth even *go there* when all I need is a single change event? I could have made `Game` an object model, but why do that, when all I need is a stream of values?
+What is this `observe` function I import? It's just the most minimal way I can think of to subscribe to a changing state. I could've made it an `EventEmitter` but why on Earth even _go there_ when all I need is a single change event? I could have made `Game` an object model, but why do that, when all I need is a stream of values?
 
 Just to verify that this subscription API makes some sense, I'm going to write a fake `Game` that emits random positions:
 
 ```js
 export function observe(receive) {
-  setInterval(() => receive([
-    Math.floor(Math.random() * 8),
-    Math.floor(Math.random() * 8)
-  ]), 500);
+  setInterval(
+    () =>
+      receive([Math.floor(Math.random() * 8), Math.floor(Math.random() * 8)]),
+    500,
+  )
 }
 ```
 
@@ -311,88 +304,84 @@ It feels so good to be back in the rendering game!
 
 This is obviously not very useful. If we want some interactivity, we're going to need a way to modify the `Game` state from our components. For now, I'm going to keep it simple and expose a `moveKnight` function that directly modifies the internal state. This is not going to fare well in a moderately complex app where different state storages may be interested in updating their state in response to a single user action, but in our case this will suffice:
 
-
 ```js
-let knightPosition = [0, 0];
-let observer = null;
+let knightPosition = [0, 0]
+let observer = null
 
 function emitChange() {
-  observer(knightPosition);
+  observer(knightPosition)
 }
 
 export function observe(o) {
   if (observer) {
-    throw new Error('Multiple observers not implemented.');
+    throw new Error('Multiple observers not implemented.')
   }
 
-  observer = o;
-  emitChange();
+  observer = o
+  emitChange()
 }
 
 export function moveKnight(toX, toY) {
-  knightPosition = [toX, toY];
-  emitChange();
+  knightPosition = [toX, toY]
+  emitChange()
 }
 ```
 
 Now, let's go back to our components. Our goal at this point is to move the `Knight` to a `Square` that was clicked. One way to do that is to call `moveKnight` from the `Square` itself. However, this would require us to pass the `Square` its position. Here is a good rule of thumb:
 
->If a component doesn't need some data for rendering, it doesn't need that data at all.
+> If a component doesn't need some data for rendering, it doesn't need that data at all.
 
 The `Square` does not need to know its position to render. Therefore, it's best to avoid coupling it to the `moveKnight` method at this point. Instead, we are going to add an `onClick` handler to the `div` that wraps the `Square` inside the `Board`:
 
 ```js
-import React from 'react';
-import Square from './Square';
-import Knight from './Knight';
-import { moveKnight } from './Game';
+import React from 'react'
+import Square from './Square'
+import Knight from './Knight'
+import { moveKnight } from './Game'
 
 /* ... */
 
 function renderSquare(i, knightPosition) {
   /* ... */
-  return (
-    <div onClick={() => handleSquareClick(x, y)}>
-      {/* ... */}
-    </div>
-  );
+  return <div onClick={() => handleSquareClick(x, y)}>{/* ... */}</div>
 }
 
 function handleSquareClick(toX, toY) {
-  moveKnight(toX, toY);
+  moveKnight(toX, toY)
 }
 ```
-
 
 We could have also added an `onClick` prop to `Square` and used it instead, but since we're going to remove the click handler in favor of the drag and drop interface later anyway, why bother.
 
 The last missing piece right now is the Chess rule check. The `Knight` can't just move to an arbitrary square, it is only allowed to make [L-shaped moves](http://en.wikipedia.org/wiki/Knight_%28chess%29#Movement). I'm adding a `canMoveKnight(toX, toY)` function to the `Game` and changing the initial position to A2 to match the Chess rules:
 
 ```js
-let knightPosition = [1, 7];
+let knightPosition = [1, 7]
 
 /* ... */
 
 export function canMoveKnight(toX, toY) {
-  const [x, y] = knightPosition;
-  const dx = toX - x;
-  const dy = toY - y;
+  const [x, y] = knightPosition
+  const dx = toX - x
+  const dy = toY - y
 
-  return (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
-         (Math.abs(dx) === 1 && Math.abs(dy) === 2);
+  return (
+    (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
+    (Math.abs(dx) === 1 && Math.abs(dy) === 2)
+  )
 }
 ```
 
 Finally, I'm adding a `canMoveKnight` check to the `handleSquareClick` method:
 
 ```js
-import { canMoveKnight, moveKnight } from './Game';
+import { canMoveKnight, moveKnight } from './Game'
 
 /* ... */
 
 function handleSquareClick(toX, toY) {
   if (canMoveKnight(toX, toY)) {
-    moveKnight(toX, toY);
+    moveKnight(toX, toY)
   }
 }
 ```
@@ -415,28 +404,29 @@ yarn add react-dnd react-dnd-html5-backend
 
 In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://github.com/yahoo/react-dnd-touch-backend), but this is out of scope of this tutorial.
 
-The first thing we need to set up in our app is the [`DragDropContext`](/docs/api/drag-drop-context). We need it to specify that we're going to use the [`HTML5` backend](/docs/backends/html5) in our app.
-
-Because the `Board` is the top-level component in our app, I'm going to wrap it with `DragDropContext` higher-order component providing `HTML5Backend` as a backend. Other approach would be to supply [`DragDropContextProvider`](/docs/api/drag-drop-context-provider) component for `Board` children.
+The first thing we need to set up in our app is the [`DragDropContextProvider`](/docs/api/drag-drop-context-provider). We need it to specify that we're going to use the [`HTML5` backend](/docs/backends/html5) in our app.
 
 ```js
-import React from 'react';
-import { DragDropContextProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import React from 'react'
+import { DragDropContextProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 function Board() {
   /* ... */
+  return (
+    <DragDropContextProvider backend={html5Backend}>
+      ...
+    </DragDropContextProvider>
+  )
 }
-
-export default DragDropContext(HTML5Backend)(Board)
 ```
 
 Next, I'm going to create the constants for the draggable item types. We're only going to have a single item type in our game, a `KNIGHT`. I'm creating a `Constants` module that exports it:
 
 ```js
 export const ItemTypes = {
-  KNIGHT: 'knight'
-};
+  KNIGHT: 'knight',
+}
 ```
 
 The preparation work is done now. Let's make the `Knight` draggable!
@@ -446,9 +436,9 @@ The [`DragSource`](/docs/api/drag-source) higher-order component accepts three p
 ```js
 const knightSource = {
   beginDrag(props) {
-    return {};
-  }
-};
+    return {}
+  },
+}
 ```
 
 This is because there is nothing to describe: there is literally a single draggable object in the whole application! If we had a bunch of chess pieces, it might be a good idea to use the `props` parameter and return something like `{ pieceId: props.id }`. In our case, an empty object will suffice.
@@ -461,7 +451,7 @@ Here is the collecting function I wrote for it:
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
   }
 }
 ```
@@ -469,37 +459,39 @@ function collect(connect, monitor) {
 Let's take a look at the whole `Knight` component now, including the `DragSource` call and the updated `render` function:
 
 ```js
-import React from 'react';
-import { ItemTypes } from './Constants';
-import { DragSource } from 'react-dnd';
+import React from 'react'
+import { ItemTypes } from './Constants'
+import { DragSource } from 'react-dnd'
 
 const knightSource = {
   beginDrag(props) {
-    return {};
-  }
-};
+    return {}
+  },
+}
 
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
   }
 }
 
 function Knight({ connectDragSource, isDragging }) {
   return connectDragSource(
-    <div style={{
-      opacity: isDragging ? 0.5 : 1,
-      fontSize: 25,
-      fontWeight: 'bold',
-      cursor: 'move'
-    }}>
+    <div
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        fontSize: 25,
+        fontWeight: 'bold',
+        cursor: 'move',
+      }}
+    >
       ♘
-    </div>
-  );
+    </div>,
+  )
 }
 
-export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
+export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight)
 ```
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/3L1d0C203C0s1r1H2H0m/Screen%20Recording%202015-05-15%20at%2001.11%20pm.gif' width='404' height='445' alt='Screenshot'>
@@ -513,16 +505,12 @@ I'm going to introduce a new component called the `BoardSquare`. It renders the 
 Here is the `BoardSquare` I extracted:
 
 ```js
-import React from 'react';
-import Square from './Square';
+import React from 'react'
+import Square from './Square'
 
-export default function BoardSquare({x, y, children}) {
-  const black = (x + y) % 2 === 1;
-  return (
-    <Square black={black}>
-      {children}
-    </Square>
-  );
+export default function BoardSquare({ x, y, children }) {
+  const black = (x + y) % 2 === 1
+  return <Square black={black}>{children}</Square>
 }
 ```
 
@@ -530,25 +518,23 @@ I also changed the `Board` to use it:
 
 ```js
 /* ... */
-import BoardSquare from './BoardSquare';
+import BoardSquare from './BoardSquare'
 
 function renderSquare(i, knightPosition) {
-  const x = i % 8;
-  const y = Math.floor(i / 8);
+  const x = i % 8
+  const y = Math.floor(i / 8)
   return (
-    <div key={i}
-         style={{ width: '12.5%', height: '12.5%' }}>
-      <BoardSquare x={x}
-                   y={y}>
+    <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
+      <BoardSquare x={x} y={y}>
         {renderPiece(x, y, knightPosition)}
       </BoardSquare>
     </div>
-  );
+  )
 }
 
 function renderPiece(x, y, [knightX, knightY]) {
-    if (x === knightX && y === knightY) {
-    return <Knight />;
+  if (x === knightX && y === knightY) {
+    return <Knight />
   }
 }
 ```
@@ -558,12 +544,12 @@ Let's now wrap the `BoardSquare` with a [`DropTarget`](/docs/api/drop-target). I
 ```js
 const squareTarget = {
   drop(props, monitor) {
-    moveKnight(props.x, props.y);
-  }
-};
+    moveKnight(props.x, props.y)
+  },
+}
 ```
 
-See? The `drop` method receives the `props` of the `BoardSquare` so it knows *where* to move the knight when it drops. In a real app, I might also use `monitor.getItem()` to retrieve *the dragged item* that the drag source returned from `beginDrag`, but since we only have a single draggable thing in the whole application, I don't need it.
+See? The `drop` method receives the `props` of the `BoardSquare` so it knows _where_ to move the knight when it drops. In a real app, I might also use `monitor.getItem()` to retrieve _the dragged item_ that the drag source returned from `beginDrag`, but since we only have a single draggable thing in the whole application, I don't need it.
 
 In my collecting function, I'm going to obtain the function to connect my drop target node, and I'm also going to ask the monitor whether the pointer is currently over the `BoardSquare` so I can highlight it:
 
@@ -571,62 +557,64 @@ In my collecting function, I'm going to obtain the function to connect my drop t
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
-  };
+    isOver: monitor.isOver(),
+  }
 }
 ```
 
 After changing the `render` function to connect the drop target and show the highlight overlay, here is what `BoardSquare` came to be:
 
 ```js
-import React from 'react';
-import Square from './Square';
-import { canMoveKnight, moveKnight } from './Game';
-import { ItemTypes } from './Constants';
-import { DropTarget } from 'react-dnd';
+import React from 'react'
+import Square from './Square'
+import { canMoveKnight, moveKnight } from './Game'
+import { ItemTypes } from './Constants'
+import { DropTarget } from 'react-dnd'
 
 const squareTarget = {
   drop(props) {
-    moveKnight(props.x, props.y);
-  }
-};
+    moveKnight(props.x, props.y)
+  },
+}
 
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
-  };
+    isOver: monitor.isOver(),
+  }
 }
 
 function BoardSquare({ x, y, connectDropTarget, isOver, children }) {
-  const black = (x + y) % 2 === 1;
+  const black = (x + y) % 2 === 1
 
   return connectDropTarget(
-    <div style={{
-      position: 'relative',
-      width: '100%',
-      height: '100%'
-    }}>
-      <Square black={black}>
-        {children}
-      </Square>
-      {isOver &&
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          height: '100%',
-          width: '100%',
-          zIndex: 1,
-          opacity: 0.5,
-          backgroundColor: 'yellow',
-        }} />
-      }
-    </div>
-  );
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <Square black={black}>{children}</Square>
+      {isOver && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '100%',
+            zIndex: 1,
+            opacity: 0.5,
+            backgroundColor: 'yellow',
+          }}
+        />
+      )}
+    </div>,
+  )
 }
 
-export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
+export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare)
 ```
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/2U43301g421U3I2X2p0P/Screen%20Recording%202015-05-15%20at%2001.55%20pm.gif' width='404' height='445' alt='Screenshot'>
@@ -644,65 +632,67 @@ canDrop(props) {
 I'm also adding `monitor.canDrop()` to my collecting function, as well as some overlay rendering code to the component:
 
 ```js
-import React from 'react';
-import Square from './Square';
-import { canMoveKnight, moveKnight } from './Game';
-import { ItemTypes } from './Constants';
-import { DropTarget } from 'react-dnd';
+import React from 'react'
+import Square from './Square'
+import { canMoveKnight, moveKnight } from './Game'
+import { ItemTypes } from './Constants'
+import { DropTarget } from 'react-dnd'
 
 const squareTarget = {
   canDrop(props) {
-    return canMoveKnight(props.x, props.y);
+    return canMoveKnight(props.x, props.y)
   },
 
   drop(props) {
-    moveKnight(props.x, props.y);
-  }
-};
+    moveKnight(props.x, props.y)
+  },
+}
 
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
-  };
+    canDrop: monitor.canDrop(),
+  }
 }
 
 function renderOverlay(color) {
   return (
-    <div style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      height: '100%',
-      width: '100%',
-      zIndex: 1,
-      opacity: 0.5,
-      backgroundColor: color,
-    }} />
-  );
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        zIndex: 1,
+        opacity: 0.5,
+        backgroundColor: color,
+      }}
+    />
+  )
 }
 
 function BoardSquare({ x, y, connectDropTarget, isOver, canDrop, children }) {
-  const black = (x + y) % 2 === 1;
+  const black = (x + y) % 2 === 1
 
   return connectDropTarget(
-    <div style={{
-      position: 'relative',
-      width: '100%',
-      height: '100%'
-    }}>
-      <Square black={black}>
-        {children}
-      </Square>
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <Square black={black}>{children}</Square>
       {isOver && !canDrop && renderOverlay('red')}
       {!isOver && canDrop && renderOverlay('yellow')}
       {isOver && canDrop && renderOverlay('green')}
-    </div>
-  );
+    </div>,
+  )
 }
 
-export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);
+export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare)
 ```
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/0X3c342g0i3u100p1o18/Screen%20Recording%202015-05-15%20at%2002.05%20pm.gif' width='404' height='445' alt='Screenshot'>
@@ -720,7 +710,7 @@ function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
   }
 }
 ```
