@@ -16,18 +16,18 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDragPreview } = dnd
 
 function DragLayerPreview(props) {
-	const [DragPreview, preview] = useDragPreview(spec)
-	const [collectedProps, ref] = useDrag({
-		item: { id, type },
-		preview,
-	})
+  const [DragPreview, preview] = useDragPreview(spec)
+  const [collectedProps, ref] = useDrag({
+    item: { id, type },
+    preview,
+  })
 
-	return (
-		<>
-			<DragPreview />
-			<div ref={ref}>...drag item...</div>
-		</>
-	)
+  return (
+    <>
+      <DragPreview />
+      <div ref={ref}>...drag item...</div>
+    </>
+  )
 }
 ```
 

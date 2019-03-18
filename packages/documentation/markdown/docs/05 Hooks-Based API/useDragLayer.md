@@ -16,8 +16,8 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDragLayer } = dnd
 
 function DragLayerComponent(props) {
-	const collectedProps = useDragLayer(spec)
-	return <div>...</div>
+  const collectedProps = useDragLayer(spec)
+  return <div>...</div>
 }
 ```
 

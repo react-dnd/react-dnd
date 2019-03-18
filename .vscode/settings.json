@@ -4,6 +4,9 @@
 		"**/bower_components": true
 	},
 	"editor.tabSize": 2,
+	"[markdown]": {
+		"editor.formatOnSave": true
+	},
 	"[typescript]": {
 		"editor.formatOnSave": true
 	},

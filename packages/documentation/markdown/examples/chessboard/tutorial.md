@@ -4,7 +4,7 @@ title: 'Tutorial'
 ---
 
 [JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/00%20Chessboard/)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/00%20Chessboard/)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/00%20Chessboard/)
 
 This is a sample app you'll build as you work through the [tutorial](/docs/tutorial)
 
