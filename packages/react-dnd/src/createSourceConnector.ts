@@ -1,92 +1,122 @@
 declare var require: any
-
+import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
+import { isRef } from './hooks/util'
 const shallowEqual = require('shallowequal')
 
 export default function createSourceConnector(backend: Backend) {
-	let currentHandlerId: Identifier
+	let handlerId: Identifier
 
-	let currentDragSourceNode: any
-	let currentDragSourceOptions: any
-	let disconnectCurrentDragSource: Unsubscribe | undefined
+	// The drop target may either be attached via ref or connect function
+	let dragSourceRef = React.createRef<any>()
+	let dragSourceNode: any
+	let dragSourceOptions: any
+	let disconnectDragSource: Unsubscribe | undefined
 
-	let currentDragPreviewNode: any
-	let currentDragPreviewOptions: any
-	let disconnectCurrentDragPreview: Unsubscribe | undefined
+	// The drag preview may either be attached via ref or connect function
+	let dragPreviewRef = React.createRef<any>()
+	let dragPreviewNode: any
+	let dragPreviewOptions: any
+	let disconnectDragPreview: Unsubscribe | undefined
+
+	let lastConnectedHandlerId: Identifier | null = null
+	let lastConnectedDragSource: any = null
+	let lastConnectedDragSourceOptions: any = null
+	let lastConnectedDragPreview: any = null
+	let lastConnectedDragPreviewOptions: any = null
 
 	function reconnectDragSource() {
-		if (disconnectCurrentDragSource) {
-			disconnectCurrentDragSource()
-			disconnectCurrentDragSource = undefined
+		const dragSource = dragSourceNode || dragSourceRef.current
+		if (!handlerId || !dragSource) {
+			return
 		}
 
-		if (currentHandlerId && currentDragSourceNode) {
-			disconnectCurrentDragSource = backend.connectDragSource(
-				currentHandlerId,
-				currentDragSourceNode,
-				currentDragSourceOptions,
+		// if nothing has changed then don't resubscribe
+		if (
+			lastConnectedHandlerId !== handlerId ||
+			lastConnectedDragSource !== dragSource ||
+			!shallowEqual(lastConnectedDragSourceOptions, dragSourceOptions)
+		) {
+			if (disconnectDragSource) {
+				disconnectDragSource()
+				disconnectDragSource = undefined
+			}
+
+			lastConnectedHandlerId = handlerId
+			lastConnectedDragSource = dragSource
+			lastConnectedDragSourceOptions = dragSourceOptions
+			disconnectDragSource = backend.connectDragSource(
+				handlerId,
+				dragSource,
+				dragSourceOptions,
 			)
 		}
 	}
 
 	function reconnectDragPreview() {
-		if (disconnectCurrentDragPreview) {
-			disconnectCurrentDragPreview()
-			disconnectCurrentDragPreview = undefined
+		const dragPreview = dragPreviewNode || dragPreviewRef.current
+		if (!handlerId || !dragPreview) {
+			return
 		}
 
-		if (currentHandlerId && currentDragPreviewNode) {
-			disconnectCurrentDragPreview = backend.connectDragPreview(
-				currentHandlerId,
-				currentDragPreviewNode,
-				currentDragPreviewOptions,
+		// if nothing has changed then don't resubscribe
+		if (
+			lastConnectedHandlerId !== handlerId ||
+			lastConnectedDragPreview !== dragPreview ||
+			!shallowEqual(lastConnectedDragPreviewOptions, dragPreviewOptions)
+		) {
+			if (disconnectDragPreview) {
+				disconnectDragPreview()
+				disconnectDragPreview = undefined
+			}
+			lastConnectedHandlerId = handlerId
+			lastConnectedDragPreview = dragPreview
+			lastConnectedDragPreviewOptions = dragPreviewOptions
+			disconnectDragPreview = backend.connectDragPreview(
+				handlerId,
+				dragPreview,
+				dragPreviewOptions,
 			)
 		}
 	}
 
-	function receiveHandlerId(handlerId: Identifier) {
-		if (handlerId === currentHandlerId) {
+	function receiveHandlerId(newHandlerId: Identifier) {
+		if (handlerId === newHandlerId) {
 			return
 		}
 
-		currentHandlerId = handlerId
+		handlerId = newHandlerId
 		reconnectDragSource()
 		reconnectDragPreview()
 	}
 
-	const hooks = wrapConnectorHooks({
-		dragSource: function connectDragSource(node: any, options: any) {
-			if (
-				node === currentDragSourceNode &&
-				shallowEqual(options, currentDragSourceOptions)
-			) {
-				return
-			}
-
-			currentDragSourceNode = node
-			currentDragSourceOptions = options
-
-			reconnectDragSource()
-		},
-
-		dragPreview: function connectDragPreview(node: any, options: any) {
-			if (
-				node === currentDragPreviewNode &&
-				shallowEqual(options, currentDragPreviewOptions)
-			) {
-				return
-			}
-
-			currentDragPreviewNode = node
-			currentDragPreviewOptions = options
-
-			reconnectDragPreview()
-		},
-	})
-
 	return {
 		receiveHandlerId,
-		hooks,
+		hooks: wrapConnectorHooks({
+			dragSourceRef,
+			dragPreviewRef,
+			dragSource: function connectDragSource(node: any, options?: any) {
+				dragSourceOptions = options
+				if (isRef(node)) {
+					dragSourceRef = node
+				} else {
+					dragSourceNode = node
+				}
+			},
+
+			dragPreview: function connectDragPreview(node: any, options?: any) {
+				dragPreviewOptions = options
+				if (isRef(node)) {
+					dragPreviewRef = node
+				} else {
+					dragPreviewNode = node
+				}
+			},
+		}),
+		reconnect: () => {
+			reconnectDragSource()
+			reconnectDragPreview()
+		},
 	}
 }

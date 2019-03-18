@@ -44,8 +44,14 @@ export default function wrapConnectorHooks(hooks: any) {
 
 	Object.keys(hooks).forEach(key => {
 		const hook = hooks[key]
-		const wrappedHook = wrapHookToRecognizeElement(hook)
-		wrappedHooks[key] = () => wrappedHook
+
+		// ref objects should be passed straight through without wrapping
+		if (key.endsWith('Ref')) {
+			wrappedHooks[key] = hooks[key]
+		} else {
+			const wrappedHook = wrapHookToRecognizeElement(hook)
+			wrappedHooks[key] = () => wrappedHook
+		}
 	})
 
 	return wrappedHooks

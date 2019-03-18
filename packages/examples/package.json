@@ -17,7 +17,7 @@
 		"build:docs": "tsc -b tsconfig.docs.json",
 		"build": "run-p build:*",
 		"test": "run-s clean build",
-		"start": "tsc -w --preserveWatchOutput"
+		"start": "tsc -b tsconfig.cjs.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
 		"@types/faker": "^4.1.5",

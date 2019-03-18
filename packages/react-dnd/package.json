@@ -18,8 +18,7 @@
 		"transpile": "run-p transpile:*",
 		"build": "run-p bundle:* transpile",
 		"test": "run-s clean build",
-		"watch": "tsc -w --preserveWatchOutput",
-		"start": "npm run watch"
+		"start": "tsc -b tsconfig.cjs.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
 		"dnd-core": "^7.2.0",

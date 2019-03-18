@@ -10,8 +10,7 @@
 		"build:cjs": "tsc -b tsconfig.cjs.json",
 		"build": "run-p build:*",
 		"clean": "rimraf lib",
-		"watch": "tsc -w --preserveWatchOutput",
-		"start": "npm run watch",
+		"start": "tsc -b tsconfig.cjs.json -w --preserveWatchOutput",
 		"test": "run-s clean build"
 	},
 	"repository": {
