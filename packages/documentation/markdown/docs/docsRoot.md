@@ -1,6 +1,6 @@
 ---
-path: "/about"
-title: "React DnD"
+path: '/about'
+title: 'React DnD'
 ---
 
 React DnD is a set of React [higher-order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) components to help you build complex drag and drop interfaces while keeping your components decoupled. It is a perfect fit for apps like Trello and Storify, where dragging transfers data between different parts of the application, and the components change their appearance and the application state in response to the drag and drop events.
@@ -19,41 +19,39 @@ The second package instructs React DnD to use [the HTML5 drag and drop API](http
 ```js
 // Let's make <Card text='Write the docs' /> draggable!
 
-import React from 'react';
-import { DragSource } from 'react-dnd';
-import { ItemTypes } from './Constants';
+import React from 'react'
+import { DragSource } from 'react-dnd'
+import { ItemTypes } from './Constants'
 
 /**
  * Implements the drag source contract.
  */
 const cardSource = {
-  beginDrag(props) {
-    return {
-      text: props.text
-    };
-  }
-};
+	beginDrag(props) {
+		return {
+			text: props.text,
+		}
+	},
+}
 
 /**
  * Specifies the props to inject into your component.
  */
 function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  };
+	return {
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging(),
+	}
 }
 
 function Card({ isDragging, connectDragSource, text }) {
-  return connectDragSource(
-    <div style={{ opacity: isDragging ? 0.5 : 1 }}>
-      {text}
-    </div>
-  );
+	return connectDragSource(
+		<div style={{ opacity: isDragging ? 0.5 : 1 }}>{text}</div>,
+	)
 }
 
 // Export the wrapped component:
-export default DragSource(ItemTypes.CARD, cardSource, collect)(Card);
+export default DragSource(ItemTypes.CARD, cardSource, collect)(Card)
 ```
 
 ## Features

@@ -1,7 +1,8 @@
 ---
-path: "/docs/api/drag-drop-context-provider"
-title: "DragDropContextProvider"
+path: '/docs/api/drag-drop-context-provider'
+title: 'DragDropContextProvider'
 ---
+
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
 # DragDropContextProvider
@@ -29,5 +30,5 @@ export default class YourApp {
 
 ### Props
 
-* **`backend`**: Required. A React DnD backend. Unless you're writing a custom one, you probably want to use the [HTML5 backend](/docs/backends/html5) that ships with React DnD.
-* **`context`**: Optional. The backend context used to configure the backend. This is dependent on the backend implementation.
+- **`backend`**: Required. A React DnD backend. Unless you're writing a custom one, you probably want to use the [HTML5 backend](/docs/backends/html5) that ships with React DnD.
+- **`context`**: Optional. The backend context used to configure the backend. This is dependent on the backend implementation.

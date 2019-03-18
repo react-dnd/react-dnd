@@ -1,11 +1,11 @@
 ---
-path: "/docs/faq"
-title: "FAQ"
+path: '/docs/faq'
+title: 'FAQ'
 ---
-*New to React DnD? [Read the overview](/docs/overview) before jumping into the docs.*
 
-FAQ
-===================
+_New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
+
+# FAQ
 
 ## Usage
 
@@ -45,19 +45,18 @@ Because [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-
 
 When using [function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), the `component` parameter will always be `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods. This is because it is not possible to attach a ref to a stateless function component as explained in [the React docs](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
 
-
 ```js
-import { DragSource } from 'react-dnd';
-import flow from 'lodash/flow';
+import { DragSource } from 'react-dnd'
+import flow from 'lodash/flow'
 
 class YourComponent {
-  /* ... */
+	/* ... */
 }
 
 export default flow(
-  DragSource(/* ... */)
-  DropTarget(/* ... */)
-)(YourComponent);
+	DragSource(/* ... */),
+	DropTarget(/* ... */),
+)(YourComponent)
 ```
 
 ### How do I register a drop target for the native files?
@@ -65,35 +64,31 @@ export default flow(
 If you are using the [HTML5 backend](/docs//backends/html5), you can register a drop target for one of the `NativeTypes` it exports:
 
 ```js
-import React from 'react';
-import { NativeTypes } from 'react-dnd-html5-backend';
-import { DropTarget } from 'react-dnd';
+import React from 'react'
+import { NativeTypes } from 'react-dnd-html5-backend'
+import { DropTarget } from 'react-dnd'
 
 const fileTarget = {
-  drop(props, monitor) {
-    console.log(monitor.getItem().files);
-  }
-};
-
-function FileDropZone({ connectDropTarget, isOver, canDrop }) {
-  return connectDropTarget(
-    <div>
-      {!isOver && !canDrop && 'Drag files from the hard drive'}
-      {!isOver && canDrop && 'Drag the files here'}
-      {isOver && 'Drop the files'}
-    </div>
-  );
+	drop(props, monitor) {
+		console.log(monitor.getItem().files)
+	},
 }
 
-export default DropTarget(
-    NativeTypes.FILE, 
-    fileTarget, 
-    (connect, monitor) => ({
-      connectDropTarget: connect.dropTarget(),
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop()
-    })
-)(FileDropZone);
+function FileDropZone({ connectDropTarget, isOver, canDrop }) {
+	return connectDropTarget(
+		<div>
+			{!isOver && !canDrop && 'Drag files from the hard drive'}
+			{!isOver && canDrop && 'Drag the files here'}
+			{isOver && 'Drop the files'}
+		</div>,
+	)
+}
+
+export default DropTarget(NativeTypes.FILE, fileTarget, (connect, monitor) => ({
+	connectDropTarget: connect.dropTarget(),
+	isOver: monitor.isOver(),
+	canDrop: monitor.canDrop(),
+}))(FileDropZone)
 ```
 
 ### How do I write a custom backend?
@@ -110,33 +105,33 @@ Consider this example:
 
 ```javascript
 class Page {
-  static willTransitionTo(transition, params) {
-    /* ... */
-  }
+	static willTransitionTo(transition, params) {
+		/* ... */
+	}
 
-  render() {
-    /* ... */
-  }
+	render() {
+		/* ... */
+	}
 }
 
-export default DragDropContext(HTML5Backend)(Page);
+export default DragDropContext(HTML5Backend)(Page)
 ```
 
 It might surprise you that your route handler's `willTransitionTo` (or a similar method) won't get triggered in this case! React DnD doesn't proxy your components' static methods and properties. This is too fragile and full of edge cases, so you must do it yourself. It's not hard! Just put your statics onto the components returned by React DnD instead:
 
 ```javascript
 class Page {
-  render() {
-    /* ... */
-  }
+	render() {
+		/* ... */
+	}
 }
 
-Page = DragDropContext(HTML5Backend)(Page);
-Page.willTransitionTo = function (transition, params) {
-  /* ... */
+Page = DragDropContext(HTML5Backend)(Page)
+Page.willTransitionTo = function(transition, params) {
+	/* ... */
 }
 
-export default Page;
+export default Page
 ```
 
 ## Meta
@@ -163,8 +158,8 @@ It is loosely based on the pre-React code written at Stampsy by [Andrew Kuznetso
 
 React DnD would not have reached the 1.0 release without the generous donations from:
 
-* [Macropod](https://macropod.com/), a company developing team productivity software;
-* [Webflow](https://webflow.com/), a company creating a professional responsive website builder.
+- [Macropod](https://macropod.com/), a company developing team productivity software;
+- [Webflow](https://webflow.com/), a company creating a professional responsive website builder.
 
 [Gadzhi Kharkharov](http://kkga.me/) styled the website, and the [fixed-data-table](https://github.com/facebook/fixed-data-table) project provided the website template.
 
