@@ -137,12 +137,12 @@ export interface DragSourceConnector {
 	/**
 	 * A React ref object to attach to the drag source. This replaces the dragSource() function described below.
 	 */
-	dragSourceRef: () => React.RefObject<any>
+	dragSourceRef(options?: DragSourceOptions): React.RefObject<any>
 
 	/**
 	 * A React ref object to attach to the drag preview. This replaces the dragPreview() function described below.
 	 */
-	dragPreviewRef: () => React.RefObject<any>
+	dragPreviewRef(options?: DragPreviewOptions): React.RefObject<any>
 
 	/**
 	 * Returns a function that must be used inside the component to assign the drag source role to a node. By
@@ -153,7 +153,7 @@ export interface DragSourceConnector {
 	 * @param elementOrNode
 	 * @param options
 	 */
-	dragSource(): ConnectDragSource
+	dragSource(options?: DragSourceOptions): ConnectDragSource
 
 	/**
 	 * Optional. Returns a function that may be used inside the component to assign the drag preview role to a node. By
@@ -166,7 +166,7 @@ export interface DragSourceConnector {
 	 * from a lifecycle method like componentDidMount. This lets you use the actual images for drag previews. (Note that IE does not
 	 * support this customization). See the example code below for the different usage examples.
 	 */
-	dragPreview(): ConnectDragPreview
+	dragPreview(options?: DragPreviewOptions): ConnectDragPreview
 }
 
 /**
@@ -177,14 +177,14 @@ export interface DropTargetConnector {
 	/**
 	 * A React ref object to attach to the drop target. This replaces the dropTarget() function described below.
 	 */
-	dropTargetRef: () => React.RefObject<any>
+	dropTargetRef(options?: any): React.RefObject<any>
 
 	/**
 	 * Returns a function that must be used inside the component to assign the drop target role to a node.
 	 * By returning { connectDropTarget: connect.dropTarget() } from your collecting function, you can mark any React element
 	 * as the droppable node. To do that, replace any element with this.props.connectDropTarget(element) inside the render function.
 	 */
-	dropTarget(): ConnectDropTarget
+	dropTarget(options?: any): ConnectDropTarget
 }
 
 export type ConnectDropTarget = <Props>(

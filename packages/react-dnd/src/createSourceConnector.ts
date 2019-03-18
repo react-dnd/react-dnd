@@ -3,6 +3,7 @@ import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from './hooks/util'
+import { DragSourceOptions, DragPreviewOptions } from './interfaces'
 const shallowEqual = require('shallowequal')
 
 export default function createSourceConnector(backend: Backend) {
@@ -96,18 +97,20 @@ export default function createSourceConnector(backend: Backend) {
 	return {
 		receiveHandlerId,
 		hooks: wrapConnectorHooks({
-			dragSourceRef: () => {
+			dragSourceRef: (options?: DragSourceOptions) => {
+				dragSourceOptions = options
 				dragSourceRef = React.createRef()
 				return dragSourceRef
 			},
-			dragPreviewRef: () => {
+			dragPreviewRef: (options?: DragPreviewOptions) => {
+				dragPreviewOptions = options
 				dragPreviewRef = React.createRef()
 				return dragPreviewRef
 			},
-			dragSource: function connectDragSource(
+			dragSource: (
 				node: Element | React.ReactElement | React.Ref<any>,
-				options?: any,
-			) {
+				options?: DragSourceOptions,
+			) => {
 				dragSourceOptions = options
 				if (isRef(node)) {
 					dragSourceRef = node as React.RefObject<any>
@@ -116,7 +119,7 @@ export default function createSourceConnector(backend: Backend) {
 				}
 			},
 
-			dragPreview: function connectDragPreview(node: any, options?: any) {
+			dragPreview: (node: any, options?: DragPreviewOptions) => {
 				dragPreviewOptions = options
 				if (isRef(node)) {
 					dragPreviewRef = node
