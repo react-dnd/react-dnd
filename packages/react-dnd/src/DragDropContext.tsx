@@ -54,12 +54,6 @@ export const DragDropContextProvider: React.FC<
 	DragDropContextProviderProps<any>
 > = ({ backend, context, debugMode, children }) => {
 	const contextValue = createChildContext(backend, context, debugMode)
-	React.useEffect(() => {
-		return () =>
-			contextValue.dragDropManager.dispatch({
-				type: 'DragDropContextProvider::Exiting',
-			})
-	})
 	return <Provider value={contextValue}>{children}</Provider>
 }
 
