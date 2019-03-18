@@ -49,7 +49,7 @@ In fact I'm going to start with the `Knight`. It doesn't have any props at all, 
 import React from 'react'
 
 export default function Knight() {
-	return <span>♘</span>
+  return <span>♘</span>
 }
 ```
 
@@ -75,8 +75,8 @@ I see my `Knight` on the screen! Time to go ahead and implement the `Square` now
 import React from 'react'
 
 export default function Square({ black }) {
-	const fill = black ? 'black' : 'white'
-	return <div style={{ backgroundColor: fill }} />
+  const fill = black ? 'black' : 'white'
+  return <div style={{ backgroundColor: fill }} />
 }
 ```
 
@@ -89,10 +89,10 @@ import Knight from './Knight'
 import Square from './Square'
 
 ReactDOM.render(
-	<Square black>
-		<Knight />
-	</Square>,
-	document.getElementById('root'),
+  <Square black>
+    <Knight />
+  </Square>,
+  document.getElementById('root'),
 )
 ```
 
@@ -108,21 +108,21 @@ Even after correcting these two mistakes, I still can't see my `Knight` when the
 import React from 'react'
 
 export default function Square({ black, children }) {
-	const fill = black ? 'black' : 'white'
-	const stroke = black ? 'white' : 'black'
+  const fill = black ? 'black' : 'white'
+  const stroke = black ? 'white' : 'black'
 
-	return (
-		<div
-			style={{
-				backgroundColor: fill,
-				color: stroke,
-				width: '100%',
-				height: '100%',
-			}}
-		>
-			{children}
-		</div>
-	)
+  return (
+    <div
+      style={{
+        backgroundColor: fill,
+        color: stroke,
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      {children}
+    </div>
+  )
 }
 ```
 
@@ -136,13 +136,13 @@ import Square from './Square'
 import Knight from './Knight'
 
 export default function Board() {
-	return (
-		<div>
-			<Square black>
-				<Knight />
-			</Square>
-		</div>
-	)
+  return (
+    <div>
+      <Square black>
+        <Knight />
+      </Square>
+    </div>
+  )
 }
 ```
 
@@ -154,8 +154,8 @@ import ReactDOM from 'react-dom'
 import Board from './Board'
 
 ReactDOM.render(
-	<Board knightPosition={[0, 0]} />,
-	document.getElementById('root'),
+  <Board knightPosition={[0, 0]} />,
+  document.getElementById('root'),
 )
 ```
 
@@ -167,11 +167,11 @@ My first attempt at `renderSquare` looks like this:
 
 ```js
 function renderSquare(x, y, [knightX, knightY]) {
-	const black = (x + y) % 2 === 1
-	const isKnightHere = knightX === x && knightY === y
-	const piece = isKnightHere ? <Knight /> : null
+  const black = (x + y) % 2 === 1
+  const isKnightHere = knightX === x && knightY === y
+  const piece = isKnightHere ? <Knight /> : null
 
-	return <Square black={black}>{piece}</Square>
+  return <Square black={black}>{piece}</Square>
 }
 ```
 
@@ -179,18 +179,18 @@ I can already give it a whirl by changing the Board's rendering to be
 
 ```js
 export default function Board({ knightPosition }) {
-	return (
-		<div
-			style={{
-				width: '100%',
-				height: '100%',
-			}}
-		>
-			{renderSquare(0, 0, knightPosition)}
-			{renderSquare(1, 0, knightPosition)}
-			{renderSquare(2, 0, knightPosition)}
-		</div>
-	)
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      {renderSquare(0, 0, knightPosition)}
+      {renderSquare(1, 0, knightPosition)}
+      {renderSquare(2, 0, knightPosition)}
+    </div>
+  )
 }
 ```
 
@@ -204,37 +204,37 @@ import Square from './Square'
 import Knight from './Knight'
 
 function renderSquare(i, [knightX, knightY]) {
-	const x = i % 8
-	const y = Math.floor(i / 8)
-	const isKnightHere = x === knightX && y === knightY
-	const black = (x + y) % 2 === 1
-	const piece = isKnightHere ? <Knight /> : null
+  const x = i % 8
+  const y = Math.floor(i / 8)
+  const isKnightHere = x === knightX && y === knightY
+  const black = (x + y) % 2 === 1
+  const piece = isKnightHere ? <Knight /> : null
 
-	return (
-		<div key={i} style={{ width: '12.5%', height: '12.5%' }}>
-			<Square black={black}>{piece}</Square>
-		</div>
-	)
+  return (
+    <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
+      <Square black={black}>{piece}</Square>
+    </div>
+  )
 }
 
 export default function Board({ knightPosition }) {
-	const squares = []
-	for (let i = 0; i < 64; i++) {
-		squares.push(renderSquare(i, knightPosition))
-	}
+  const squares = []
+  for (let i = 0; i < 64; i++) {
+    squares.push(renderSquare(i, knightPosition))
+  }
 
-	return (
-		<div
-			style={{
-				width: '100%',
-				height: '100%',
-				display: 'flex',
-				flexWrap: 'wrap',
-			}}
-		>
-			{squares}
-		</div>
-	)
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
+      }}
+    >
+      {squares}
+    </div>
+  )
 }
 ```
 
@@ -250,8 +250,8 @@ import ReactDOM from 'react-dom'
 import Board from './Board'
 
 ReactDOM.render(
-	<Board knightPosition={[7, 4]} />,
-	document.getElementById('root'),
+  <Board knightPosition={[7, 4]} />,
+  document.getElementById('root'),
 )
 ```
 
@@ -280,7 +280,7 @@ import { observe } from './Game'
 const root = document.getElementById('root')
 
 observe(knightPosition =>
-	ReactDOM.render(<Board knightPosition={knightPosition} />, root),
+  ReactDOM.render(<Board knightPosition={knightPosition} />, root),
 )
 ```
 
@@ -290,11 +290,11 @@ Just to verify that this subscription API makes some sense, I'm going to write a
 
 ```js
 export function observe(receive) {
-	setInterval(
-		() =>
-			receive([Math.floor(Math.random() * 8), Math.floor(Math.random() * 8)]),
-		500,
-	)
+  setInterval(
+    () =>
+      receive([Math.floor(Math.random() * 8), Math.floor(Math.random() * 8)]),
+    500,
+  )
 }
 ```
 
@@ -309,21 +309,21 @@ let knightPosition = [0, 0]
 let observer = null
 
 function emitChange() {
-	observer(knightPosition)
+  observer(knightPosition)
 }
 
 export function observe(o) {
-	if (observer) {
-		throw new Error('Multiple observers not implemented.')
-	}
+  if (observer) {
+    throw new Error('Multiple observers not implemented.')
+  }
 
-	observer = o
-	emitChange()
+  observer = o
+  emitChange()
 }
 
 export function moveKnight(toX, toY) {
-	knightPosition = [toX, toY]
-	emitChange()
+  knightPosition = [toX, toY]
+  emitChange()
 }
 ```
 
@@ -342,12 +342,12 @@ import { moveKnight } from './Game'
 /* ... */
 
 function renderSquare(i, knightPosition) {
-	/* ... */
-	return <div onClick={() => handleSquareClick(x, y)}>{/* ... */}</div>
+  /* ... */
+  return <div onClick={() => handleSquareClick(x, y)}>{/* ... */}</div>
 }
 
 function handleSquareClick(toX, toY) {
-	moveKnight(toX, toY)
+  moveKnight(toX, toY)
 }
 ```
 
@@ -361,14 +361,14 @@ let knightPosition = [1, 7]
 /* ... */
 
 export function canMoveKnight(toX, toY) {
-	const [x, y] = knightPosition
-	const dx = toX - x
-	const dy = toY - y
+  const [x, y] = knightPosition
+  const dx = toX - x
+  const dy = toY - y
 
-	return (
-		(Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
-		(Math.abs(dx) === 1 && Math.abs(dy) === 2)
-	)
+  return (
+    (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
+    (Math.abs(dx) === 1 && Math.abs(dy) === 2)
+  )
 }
 ```
 
@@ -380,9 +380,9 @@ import { canMoveKnight, moveKnight } from './Game'
 /* ... */
 
 function handleSquareClick(toX, toY) {
-	if (canMoveKnight(toX, toY)) {
-		moveKnight(toX, toY)
-	}
+  if (canMoveKnight(toX, toY)) {
+    moveKnight(toX, toY)
+  }
 }
 ```
 
@@ -412,12 +412,12 @@ import { DragDropContextProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 function Board() {
-	/* ... */
-	return (
-		<DragDropContextProvider backend={html5Backend}>
-			...
-		</DragDropContextProvider>
-	)
+  /* ... */
+  return (
+    <DragDropContextProvider backend={html5Backend}>
+      ...
+    </DragDropContextProvider>
+  )
 }
 ```
 
@@ -425,7 +425,7 @@ Next, I'm going to create the constants for the draggable item types. We're only
 
 ```js
 export const ItemTypes = {
-	KNIGHT: 'knight',
+  KNIGHT: 'knight',
 }
 ```
 
@@ -435,9 +435,9 @@ The [`DragSource`](/docs/api/drag-source) higher-order component accepts three p
 
 ```js
 const knightSource = {
-	beginDrag(props) {
-		return {}
-	},
+  beginDrag(props) {
+    return {}
+  },
 }
 ```
 
@@ -449,10 +449,10 @@ Here is the collecting function I wrote for it:
 
 ```js
 function collect(connect, monitor) {
-	return {
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }
 }
 ```
 
@@ -464,31 +464,31 @@ import { ItemTypes } from './Constants'
 import { DragSource } from 'react-dnd'
 
 const knightSource = {
-	beginDrag(props) {
-		return {}
-	},
+  beginDrag(props) {
+    return {}
+  },
 }
 
 function collect(connect, monitor) {
-	return {
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }
 }
 
 function Knight({ connectDragSource, isDragging }) {
-	return connectDragSource(
-		<div
-			style={{
-				opacity: isDragging ? 0.5 : 1,
-				fontSize: 25,
-				fontWeight: 'bold',
-				cursor: 'move',
-			}}
-		>
-			♘
-		</div>,
-	)
+  return connectDragSource(
+    <div
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        fontSize: 25,
+        fontWeight: 'bold',
+        cursor: 'move',
+      }}
+    >
+      ♘
+    </div>,
+  )
 }
 
 export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight)
@@ -509,8 +509,8 @@ import React from 'react'
 import Square from './Square'
 
 export default function BoardSquare({ x, y, children }) {
-	const black = (x + y) % 2 === 1
-	return <Square black={black}>{children}</Square>
+  const black = (x + y) % 2 === 1
+  return <Square black={black}>{children}</Square>
 }
 ```
 
@@ -521,21 +521,21 @@ I also changed the `Board` to use it:
 import BoardSquare from './BoardSquare'
 
 function renderSquare(i, knightPosition) {
-	const x = i % 8
-	const y = Math.floor(i / 8)
-	return (
-		<div key={i} style={{ width: '12.5%', height: '12.5%' }}>
-			<BoardSquare x={x} y={y}>
-				{renderPiece(x, y, knightPosition)}
-			</BoardSquare>
-		</div>
-	)
+  const x = i % 8
+  const y = Math.floor(i / 8)
+  return (
+    <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
+      <BoardSquare x={x} y={y}>
+        {renderPiece(x, y, knightPosition)}
+      </BoardSquare>
+    </div>
+  )
 }
 
 function renderPiece(x, y, [knightX, knightY]) {
-	if (x === knightX && y === knightY) {
-		return <Knight />
-	}
+  if (x === knightX && y === knightY) {
+    return <Knight />
+  }
 }
 ```
 
@@ -543,9 +543,9 @@ Let's now wrap the `BoardSquare` with a [`DropTarget`](/docs/api/drop-target). I
 
 ```js
 const squareTarget = {
-	drop(props, monitor) {
-		moveKnight(props.x, props.y)
-	},
+  drop(props, monitor) {
+    moveKnight(props.x, props.y)
+  },
 }
 ```
 
@@ -555,10 +555,10 @@ In my collecting function, I'm going to obtain the function to connect my drop t
 
 ```js
 function collect(connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver(),
-	}
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+  }
 }
 ```
 
@@ -572,46 +572,46 @@ import { ItemTypes } from './Constants'
 import { DropTarget } from 'react-dnd'
 
 const squareTarget = {
-	drop(props) {
-		moveKnight(props.x, props.y)
-	},
+  drop(props) {
+    moveKnight(props.x, props.y)
+  },
 }
 
 function collect(connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver(),
-	}
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+  }
 }
 
 function BoardSquare({ x, y, connectDropTarget, isOver, children }) {
-	const black = (x + y) % 2 === 1
+  const black = (x + y) % 2 === 1
 
-	return connectDropTarget(
-		<div
-			style={{
-				position: 'relative',
-				width: '100%',
-				height: '100%',
-			}}
-		>
-			<Square black={black}>{children}</Square>
-			{isOver && (
-				<div
-					style={{
-						position: 'absolute',
-						top: 0,
-						left: 0,
-						height: '100%',
-						width: '100%',
-						zIndex: 1,
-						opacity: 0.5,
-						backgroundColor: 'yellow',
-					}}
-				/>
-			)}
-		</div>,
-	)
+  return connectDropTarget(
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <Square black={black}>{children}</Square>
+      {isOver && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '100%',
+            zIndex: 1,
+            opacity: 0.5,
+            backgroundColor: 'yellow',
+          }}
+        />
+      )}
+    </div>,
+  )
 }
 
 export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare)
@@ -639,57 +639,57 @@ import { ItemTypes } from './Constants'
 import { DropTarget } from 'react-dnd'
 
 const squareTarget = {
-	canDrop(props) {
-		return canMoveKnight(props.x, props.y)
-	},
+  canDrop(props) {
+    return canMoveKnight(props.x, props.y)
+  },
 
-	drop(props) {
-		moveKnight(props.x, props.y)
-	},
+  drop(props) {
+    moveKnight(props.x, props.y)
+  },
 }
 
 function collect(connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver(),
-		canDrop: monitor.canDrop(),
-	}
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  }
 }
 
 function renderOverlay(color) {
-	return (
-		<div
-			style={{
-				position: 'absolute',
-				top: 0,
-				left: 0,
-				height: '100%',
-				width: '100%',
-				zIndex: 1,
-				opacity: 0.5,
-				backgroundColor: color,
-			}}
-		/>
-	)
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        zIndex: 1,
+        opacity: 0.5,
+        backgroundColor: color,
+      }}
+    />
+  )
 }
 
 function BoardSquare({ x, y, connectDropTarget, isOver, canDrop, children }) {
-	const black = (x + y) % 2 === 1
+  const black = (x + y) % 2 === 1
 
-	return connectDropTarget(
-		<div
-			style={{
-				position: 'relative',
-				width: '100%',
-				height: '100%',
-			}}
-		>
-			<Square black={black}>{children}</Square>
-			{isOver && !canDrop && renderOverlay('red')}
-			{!isOver && canDrop && renderOverlay('yellow')}
-			{isOver && canDrop && renderOverlay('green')}
-		</div>,
-	)
+  return connectDropTarget(
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <Square black={black}>{children}</Square>
+      {isOver && !canDrop && renderOverlay('red')}
+      {!isOver && canDrop && renderOverlay('yellow')}
+      {isOver && canDrop && renderOverlay('green')}
+    </div>,
+  )
 }
 
 export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare)
@@ -707,11 +707,11 @@ We are lucky again, because it is easy to do with React DnD. We just need to add
 
 ```js
 function collect(connect, monitor) {
-	return {
-		connectDragSource: connect.dragSource(),
-		connectDragPreview: connect.dragPreview(),
-		isDragging: monitor.isDragging(),
-	}
+  return {
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging(),
+  }
 }
 ```
 

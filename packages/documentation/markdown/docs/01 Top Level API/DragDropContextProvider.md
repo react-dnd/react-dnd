@@ -18,13 +18,13 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContextProvider } from 'react-dnd'
 
 export default class YourApp {
-	render() {
-		return (
-			<DragDropContextProvider backend={HTML5Backend}>
-				/* ... */
-			</DragDropContextProvider>
-		)
-	}
+  render() {
+    return (
+      <DragDropContextProvider backend={HTML5Backend}>
+        /* ... */
+      </DragDropContextProvider>
+    )
+  }
 }
 ```
 

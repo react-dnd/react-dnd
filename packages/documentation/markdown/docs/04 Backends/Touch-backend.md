@@ -26,7 +26,7 @@ import TouchBackend from 'react-dnd-touch-backend'
 import { DragDropContext } from 'react-dnd'
 
 class YourApp {
-	/* ... */
+  /* ... */
 }
 
 export default DragDropContext(TouchBackend)(YourApp)

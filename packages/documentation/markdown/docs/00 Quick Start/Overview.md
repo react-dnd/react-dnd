@@ -42,10 +42,10 @@ Let's say you want to highlight the Chess cells when a piece is being dragged. A
 
 ```js
 function collect(monitor) {
-	return {
-		highlighted: monitor.canDrop(),
-		hovered: monitor.isOver(),
-	}
+  return {
+    highlighted: monitor.canDrop(),
+    hovered: monitor.isOver(),
+  }
 }
 ```
 
@@ -59,11 +59,11 @@ In fact, a connector is passed as the first argument to the _collecting function
 
 ```js
 function collect(connect, monitor) {
-	return {
-		highlighted: monitor.canDrop(),
-		hovered: monitor.isOver(),
-		connectDropTarget: connect.dropTarget(),
-	}
+  return {
+    highlighted: monitor.canDrop(),
+    hovered: monitor.isOver(),
+    connectDropTarget: connect.dropTarget(),
+  }
 }
 ```
 
@@ -111,7 +111,7 @@ One caveat of using them is that they require _two_ function applications. For e
 import { DragSource } from 'react-dnd'
 
 class YourComponent {
-	/* ... */
+  /* ... */
 }
 
 export default DragSource(/* ... */)(YourComponent)
@@ -124,7 +124,7 @@ import { DragSource } from 'react-dnd'
 
 @DragSource(/* ... */)
 export default class YourComponent {
-	/* ... */
+  /* ... */
 }
 ```
 
@@ -137,18 +137,18 @@ import { DragSource, DropTarget } from 'react-dnd'
 import flow from 'lodash/flow'
 
 class YourComponent {
-	render() {
-		const { connectDragSource, connectDropTarget } = this.props
-		return connectDragSource(
-			connectDropTarget(),
-			/* ... */
-		)
-	}
+  render() {
+    const { connectDragSource, connectDropTarget } = this.props
+    return connectDragSource(
+      connectDropTarget(),
+      /* ... */
+    )
+  }
 }
 
 export default flow(
-	DragSource(/* ... */),
-	DropTarget(/* ... */),
+  DragSource(/* ... */),
+  DropTarget(/* ... */),
 )(YourComponent)
 ```
 
@@ -165,7 +165,7 @@ import { DragSource } from 'react-dnd'
 // You want to keep types in a separate file with
 // the rest of your app's constants.
 const Types = {
-	CARD: 'card',
+  CARD: 'card',
 }
 
 /**
@@ -173,51 +173,51 @@ const Types = {
  * Only `beginDrag` function is required.
  */
 const cardSource = {
-	beginDrag(props) {
-		// Return the data describing the dragged item
-		const item = { id: props.id }
-		return item
-	},
+  beginDrag(props) {
+    // Return the data describing the dragged item
+    const item = { id: props.id }
+    return item
+  },
 
-	endDrag(props, monitor, component) {
-		if (!monitor.didDrop()) {
-			return
-		}
+  endDrag(props, monitor, component) {
+    if (!monitor.didDrop()) {
+      return
+    }
 
-		// When dropped on a compatible target, do something
-		const item = monitor.getItem()
-		const dropResult = monitor.getDropResult()
-		CardActions.moveCardToList(item.id, dropResult.listId)
-	},
+    // When dropped on a compatible target, do something
+    const item = monitor.getItem()
+    const dropResult = monitor.getDropResult()
+    CardActions.moveCardToList(item.id, dropResult.listId)
+  },
 }
 
 /**
  * Specifies which props to inject into your component.
  */
 function collect(connect, monitor) {
-	return {
-		// Call this function inside render()
-		// to let React DnD handle the drag events:
-		connectDragSource: connect.dragSource(),
-		// You can ask the monitor about the current drag state:
-		isDragging: monitor.isDragging(),
-	}
+  return {
+    // Call this function inside render()
+    // to let React DnD handle the drag events:
+    connectDragSource: connect.dragSource(),
+    // You can ask the monitor about the current drag state:
+    isDragging: monitor.isDragging(),
+  }
 }
 
 function Card(props) {
-	// Your component receives its own props as usual
-	const { id } = props
+  // Your component receives its own props as usual
+  const { id } = props
 
-	// These two props are injected by React DnD,
-	// as defined by your `collect` function above:
-	const { isDragging, connectDragSource } = props
+  // These two props are injected by React DnD,
+  // as defined by your `collect` function above:
+  const { isDragging, connectDragSource } = props
 
-	return connectDragSource(
-		<div>
-			I am a draggable card number {id}
-			{isDragging && ' (and I am being dragged now)'}
-		</div>,
-	)
+  return connectDragSource(
+    <div>
+      I am a draggable card number {id}
+      {isDragging && ' (and I am being dragged now)'}
+    </div>,
+  )
 }
 
 // Export the wrapped version

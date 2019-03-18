@@ -50,12 +50,12 @@ import { DragSource } from 'react-dnd'
 import flow from 'lodash/flow'
 
 class YourComponent {
-	/* ... */
+  /* ... */
 }
 
 export default flow(
-	DragSource(/* ... */),
-	DropTarget(/* ... */),
+  DragSource(/* ... */),
+  DropTarget(/* ... */),
 )(YourComponent)
 ```
 
@@ -69,25 +69,25 @@ import { NativeTypes } from 'react-dnd-html5-backend'
 import { DropTarget } from 'react-dnd'
 
 const fileTarget = {
-	drop(props, monitor) {
-		console.log(monitor.getItem().files)
-	},
+  drop(props, monitor) {
+    console.log(monitor.getItem().files)
+  },
 }
 
 function FileDropZone({ connectDropTarget, isOver, canDrop }) {
-	return connectDropTarget(
-		<div>
-			{!isOver && !canDrop && 'Drag files from the hard drive'}
-			{!isOver && canDrop && 'Drag the files here'}
-			{isOver && 'Drop the files'}
-		</div>,
-	)
+  return connectDropTarget(
+    <div>
+      {!isOver && !canDrop && 'Drag files from the hard drive'}
+      {!isOver && canDrop && 'Drag the files here'}
+      {isOver && 'Drop the files'}
+    </div>,
+  )
 }
 
 export default DropTarget(NativeTypes.FILE, fileTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	canDrop: monitor.canDrop(),
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop(),
 }))(FileDropZone)
 ```
 
@@ -105,13 +105,13 @@ Consider this example:
 
 ```javascript
 class Page {
-	static willTransitionTo(transition, params) {
-		/* ... */
-	}
+  static willTransitionTo(transition, params) {
+    /* ... */
+  }
 
-	render() {
-		/* ... */
-	}
+  render() {
+    /* ... */
+  }
 }
 
 export default DragDropContext(HTML5Backend)(Page)
@@ -121,14 +121,14 @@ It might surprise you that your route handler's `willTransitionTo` (or a similar
 
 ```javascript
 class Page {
-	render() {
-		/* ... */
-	}
+  render() {
+    /* ... */
+  }
 }
 
 Page = DragDropContext(HTML5Backend)(Page)
 Page.willTransitionTo = function(transition, params) {
-	/* ... */
+  /* ... */
 }
 
 export default Page

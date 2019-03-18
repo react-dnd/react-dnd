@@ -26,17 +26,17 @@ import { DropTarget } from 'react-dnd'
 /* ... */
 
 function collect(connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget(),
-	}
+  return {
+    connectDropTarget: connect.dropTarget(),
+  }
 }
 
 class DropZone {
-	render() {
-		const { connectDropTarget } = this.props
+  render() {
+    const { connectDropTarget } = this.props
 
-		return connectDropTarget(<div>You can drop here!</div>)
-	}
+    return connectDropTarget(<div>You can drop here!</div>)
+  }
 }
 
 export default DropTarget(/* ... */)(DropZone)

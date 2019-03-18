@@ -24,25 +24,25 @@ import expect from 'expect'
 import Box from './components/Box'
 
 it('can be tested independently', () => {
-	// Obtain the reference to the component before React DnD wrapping
-	const OriginalBox = Box.DecoratedComponent
+  // Obtain the reference to the component before React DnD wrapping
+  const OriginalBox = Box.DecoratedComponent
 
-	// Stub the React DnD connector functions with an identity function
-	const identity = el => el
+  // Stub the React DnD connector functions with an identity function
+  const identity = el => el
 
-	// Render with one set of props and test
-	let root = TestUtils.renderIntoDocument(
-		<OriginalBox name="test" connectDragSource={identity} />,
-	)
-	let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
-	expect(div.props.style.opacity).toEqual(1)
+  // Render with one set of props and test
+  let root = TestUtils.renderIntoDocument(
+    <OriginalBox name="test" connectDragSource={identity} />,
+  )
+  let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
+  expect(div.props.style.opacity).toEqual(1)
 
-	// Render with another set of props and test
-	root = TestUtils.renderIntoDocument(
-		<OriginalBox name="test" connectDragSource={identity} isDragging />,
-	)
-	div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
-	expect(div.props.style.opacity).toEqual(0.4)
+  // Render with another set of props and test
+  root = TestUtils.renderIntoDocument(
+    <OriginalBox name="test" connectDragSource={identity} isDragging />,
+  )
+  div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
+  expect(div.props.style.opacity).toEqual(0.4)
 })
 ```
 
@@ -72,32 +72,32 @@ import Box from './components/Box'
  * Wraps a component into a DragDropContext that uses the TestBackend.
  */
 function wrapInTestContext(DecoratedComponent) {
-	return DragDropContext(TestBackend)(() => (
-		<DecoratedComponent {...this.props} />
-	))
+  return DragDropContext(TestBackend)(() => (
+    <DecoratedComponent {...this.props} />
+  ))
 }
 
 it('can be tested with the testing backend', () => {
-	// Render with the test context that uses the test backend
-	const BoxContext = wrapInTestContext(Box)
-	const root = TestUtils.renderIntoDocument(<BoxContext name="test" />)
+  // Render with the test context that uses the test backend
+  const BoxContext = wrapInTestContext(Box)
+  const root = TestUtils.renderIntoDocument(<BoxContext name="test" />)
 
-	// Obtain a reference to the backend
-	const backend = root.getManager().getBackend()
+  // Obtain a reference to the backend
+  const backend = root.getManager().getBackend()
 
-	// Test that the opacity is 1
-	let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
-	expect(div.props.style.opacity).toEqual(1)
+  // Test that the opacity is 1
+  let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
+  expect(div.props.style.opacity).toEqual(1)
 
-	// Find the drag source ID and use it to simulate the dragging operation
-	const box = TestUtils.findRenderedComponentWithType(root, Box)
-	backend.simulateBeginDrag([box.getHandlerId()])
+  // Find the drag source ID and use it to simulate the dragging operation
+  const box = TestUtils.findRenderedComponentWithType(root, Box)
+  backend.simulateBeginDrag([box.getHandlerId()])
 
-	// Verify that the div changed its opacity
-	div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
-	expect(div.style.opacity).toEqual(0.4)
+  // Verify that the div changed its opacity
+  div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
+  expect(div.style.opacity).toEqual(0.4)
 
-	// See other backend.simulate* methods for more!
+  // See other backend.simulate* methods for more!
 })
 ```
 
@@ -112,9 +112,9 @@ var root = Enzyme.mount(<BoxContext name="test" />)
 // ...
 
 var backend = root
-	.instance()
-	.getManager()
-	.getBackend()
+  .instance()
+  .getManager()
+  .getBackend()
 
 // ...
 
