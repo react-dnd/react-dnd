@@ -49,7 +49,7 @@ export default DropTarget(
 	ItemTypes.BOX,
 	boxTarget,
 	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
-		dropTarget: connect.dropTargetRef,
+		dropTarget: connect.dropTargetRef(),
 		isOver: monitor.isOver(),
 		canDrop: monitor.canDrop(),
 	}),

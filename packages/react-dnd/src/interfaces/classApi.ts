@@ -137,12 +137,12 @@ export interface DragSourceConnector {
 	/**
 	 * A React ref object to attach to the drag source. This replaces the dragSource() function described below.
 	 */
-	dragSourceRef: React.RefObject<any>
+	dragSourceRef: () => React.RefObject<any>
 
 	/**
 	 * A React ref object to attach to the drag preview. This replaces the dragPreview() function described below.
 	 */
-	dragPreviewRef: React.RefObject<any>
+	dragPreviewRef: () => React.RefObject<any>
 
 	/**
 	 * Returns a function that must be used inside the component to assign the drag source role to a node. By
@@ -177,7 +177,7 @@ export interface DropTargetConnector {
 	/**
 	 * A React ref object to attach to the drop target. This replaces the dropTarget() function described below.
 	 */
-	dropTargetRef: React.RefObject<any>
+	dropTargetRef: () => React.RefObject<any>
 
 	/**
 	 * Returns a function that must be used inside the component to assign the drop target role to a node.

@@ -8,7 +8,7 @@ const shallowEqual = require('shallowequal')
 export default function createTargetConnector(backend: Backend) {
 	let handlerId: Identifier
 	// The drop target may either be attached via ref or connect function
-	let dropTargetRef = React.createRef<any>()
+	let dropTargetRef: React.RefObject<any> | null = null
 	let dropTargetNode: any
 	let dropTargetOptions: any
 	let disconnectDropTarget: Unsubscribe | undefined
@@ -18,7 +18,8 @@ export default function createTargetConnector(backend: Backend) {
 	let lastConnectedDropTargetOptions: any = null
 
 	function reconnectDropTarget() {
-		const dropTarget = dropTargetNode || dropTargetRef.current
+		const dropTarget =
+			dropTargetNode || (dropTargetRef && dropTargetRef.current)
 		if (!handlerId || !dropTarget) {
 			return
 		}
@@ -56,7 +57,10 @@ export default function createTargetConnector(backend: Backend) {
 	return {
 		receiveHandlerId,
 		hooks: wrapConnectorHooks({
-			dropTargetRef,
+			dropTargetRef: () => {
+				dropTargetRef = React.createRef()
+				return dropTargetRef
+			},
 			dropTarget: function connectDropTarget(node: any, options: any) {
 				dropTargetOptions = options
 				if (isRef(node)) {
