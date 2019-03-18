@@ -49,8 +49,7 @@
 	},
 	"scripts": {
 		"clean": "rimraf .cache public apidocs static/examples_js",
-		"develop": "gatsby develop",
-		"start": "npm run develop",
+		"start": "gatsby develop",
 		"copy_example_source": "cp -r ../examples/lib/docs static/examples_js",
 		"format_example_source": "prettier 'static/examples_js/**/*.js*' --use-tabs=false --write",
 		"build_static_site": "gatsby build --prefix-paths",

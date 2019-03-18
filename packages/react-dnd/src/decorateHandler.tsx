@@ -41,6 +41,8 @@ interface Handler<Props> {
 
 interface HandlerConnector extends HandlerReceiver {
 	hooks: any[]
+	receiveHandlerId: (handleId: any) => void
+	reconnect: () => void
 }
 
 export default function decorateHandler<Props, ItemIdType>({
@@ -205,6 +207,7 @@ export default function decorateHandler<Props, ItemIdType>({
 							return null
 						}
 						this.receiveDragDropManager(dragDropManager)
+						requestAnimationFrame(() => this.handlerConnector!.reconnect())
 
 						return (
 							<Decorated
