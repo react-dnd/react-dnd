@@ -16,10 +16,10 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDrag } = dnd
 
 function DraggableComponent(props) {
-	const [collectedProps, ref] = useDrag({
-		item: { id, type },
-	})
-	return <div ref={ref}>...</div>
+  const [collectedProps, ref] = useDrag({
+    item: { id, type },
+  })
+  return <div ref={ref}>...</div>
 }
 ```
 

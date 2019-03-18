@@ -4,7 +4,7 @@ title: 'Cancel on Drop Outside'
 ---
 
 [JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/04%20Sortable/Cancel%20on%20Drop%20Outside)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/04%20Sortable/Cancel%20on%20Drop%20Outside)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/04%20Sortable/Cancel%20on%20Drop%20Outside)
 
 Because you write the logic instead of using the ready-made components,
 you can tweak the behavior to the one your app needs.

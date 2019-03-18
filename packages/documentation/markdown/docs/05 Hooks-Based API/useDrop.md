@@ -16,9 +16,9 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDrop } = dnd
 
 function myDropTarget(props) {
-	const [collectedProps, ref] = useDrop({ accept })
+  const [collectedProps, ref] = useDrop({ accept })
 
-	return <div ref={ref}>Drop Target</div>
+  return <div ref={ref}>Drop Target</div>
 }
 ```
 
