@@ -4,7 +4,7 @@ title: 'Drag Sources'
 ---
 
 [JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/03%20Nesting/Drag%20Sources)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/03%20Nesting/Drag%20Sources)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/03%20Nesting/Drag%20Sources)
 
 You can nest the drag sources in one another. If a nested drag source
 returns `false` from `canDrag`, its parent will
