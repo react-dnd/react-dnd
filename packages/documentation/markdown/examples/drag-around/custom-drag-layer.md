@@ -4,7 +4,7 @@ title: 'Custom Drag Layer'
 ---
 
 [JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/02%20Drag%20Around/Custom%20Drag%20Layer)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/documentation-examples/src/02%20Drag%20Around/Custom%20Drag%20Layer)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/02%20Drag%20Around/Custom%20Drag%20Layer)
 
 The browser APIs provide no way to change the drag preview or its
 behavior once drag has started. Libraries such as jQuery UI implement
