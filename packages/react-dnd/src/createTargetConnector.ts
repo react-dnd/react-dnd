@@ -1,56 +1,71 @@
 declare var require: any
+import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
+import { isRef } from './hooks/util'
 const shallowEqual = require('shallowequal')
 
 export default function createTargetConnector(backend: Backend) {
-	let currentHandlerId: Identifier
-	let currentDropTargetNode: any
-	let currentDropTargetOptions: any
-	let disconnectCurrentDropTarget: Unsubscribe | undefined
+	let handlerId: Identifier
+	// The drop target may either be attached via ref or connect function
+	let dropTargetRef = React.createRef<any>()
+	let dropTargetNode: any
+	let dropTargetOptions: any
+	let disconnectDropTarget: Unsubscribe | undefined
+
+	let lastConnectedHandlerId: Identifier | null = null
+	let lastConnectedDropTarget: any = null
+	let lastConnectedDropTargetOptions: any = null
 
 	function reconnectDropTarget() {
-		if (disconnectCurrentDropTarget) {
-			disconnectCurrentDropTarget()
-			disconnectCurrentDropTarget = undefined
+		const dropTarget = dropTargetNode || dropTargetRef.current
+		if (!handlerId || !dropTarget) {
+			return
 		}
+		// if nothing has changed then don't resubscribe
+		if (
+			lastConnectedHandlerId !== handlerId ||
+			lastConnectedDropTarget !== dropTarget ||
+			!shallowEqual(lastConnectedDropTargetOptions, dropTargetOptions)
+		) {
+			if (disconnectDropTarget) {
+				disconnectDropTarget()
+				disconnectDropTarget = undefined
+			}
+			lastConnectedHandlerId = handlerId
+			lastConnectedDropTarget = dropTarget
+			lastConnectedDropTargetOptions = dropTargetOptions
 
-		if (currentHandlerId && currentDropTargetNode) {
-			disconnectCurrentDropTarget = backend.connectDropTarget(
-				currentHandlerId,
-				currentDropTargetNode,
-				currentDropTargetOptions,
+			disconnectDropTarget = backend.connectDropTarget(
+				handlerId,
+				dropTarget,
+				dropTargetOptions,
 			)
 		}
 	}
 
-	function receiveHandlerId(handlerId: Identifier) {
-		if (handlerId === currentHandlerId) {
+	function receiveHandlerId(newHandlerId: Identifier) {
+		if (newHandlerId === handlerId) {
 			return
 		}
 
-		currentHandlerId = handlerId
+		handlerId = newHandlerId
 		reconnectDropTarget()
 	}
 
-	const hooks = wrapConnectorHooks({
-		dropTarget: function connectDropTarget(node: any, options: any) {
-			if (
-				node === currentDropTargetNode &&
-				shallowEqual(options, currentDropTargetOptions)
-			) {
-				return
-			}
-
-			currentDropTargetNode = node
-			currentDropTargetOptions = options
-
-			reconnectDropTarget()
-		},
-	})
-
 	return {
 		receiveHandlerId,
-		hooks,
+		hooks: wrapConnectorHooks({
+			dropTargetRef,
+			dropTarget: function connectDropTarget(node: any, options: any) {
+				dropTargetOptions = options
+				if (isRef(node)) {
+					dropTargetRef = node
+				} else {
+					dropTargetNode = node
+				}
+			},
+		}),
+		reconnect: reconnectDropTarget,
 	}
 }

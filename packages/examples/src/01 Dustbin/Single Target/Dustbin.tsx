@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-	DropTarget,
-	DropTargetConnector,
-	DropTargetMonitor,
-	ConnectDropTarget,
-} from 'react-dnd'
+import { DropTarget, DropTargetConnector, DropTargetMonitor } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -21,20 +16,18 @@ const style: React.CSSProperties = {
 }
 
 const boxTarget = {
-	drop() {
-		return { name: 'Dustbin' }
-	},
+	drop: () => ({ name: 'Dustbin' }),
 }
 
 export interface DustbinProps {
 	canDrop: boolean
 	isOver: boolean
-	connectDropTarget: ConnectDropTarget
+	dropTarget: React.RefObject<any>
 }
 
 class Dustbin extends React.Component<DustbinProps> {
 	public render() {
-		const { canDrop, isOver, connectDropTarget } = this.props
+		const { canDrop, isOver, dropTarget } = this.props
 		const isActive = canDrop && isOver
 
 		let backgroundColor = '#222'
@@ -44,10 +37,10 @@ class Dustbin extends React.Component<DustbinProps> {
 			backgroundColor = 'darkkhaki'
 		}
 
-		return connectDropTarget(
-			<div style={{ ...style, backgroundColor }}>
+		return (
+			<div ref={dropTarget} style={{ ...style, backgroundColor }}>
 				{isActive ? 'Release to drop' : 'Drag a box here'}
-			</div>,
+			</div>
 		)
 	}
 }
@@ -56,7 +49,7 @@ export default DropTarget(
 	ItemTypes.BOX,
 	boxTarget,
 	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
-		connectDropTarget: connect.dropTarget(),
+		dropTarget: connect.dropTargetRef,
 		isOver: monitor.isOver(),
 		canDrop: monitor.canDrop(),
 	}),
