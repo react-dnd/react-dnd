@@ -63,7 +63,7 @@ export default DragSource(
 	ItemTypes.BOX,
 	boxSource,
 	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-		dragSource: connect.dragSource(),
+		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),
 	}),
 )(Box)
