@@ -121,6 +121,7 @@ export type ConnectedElement =
 	| React.ReactElement
 	| Element
 	| null
+
 export type DragElementWrapper<Options> = <Props>(
 	elementOrNode: ConnectedElement,
 	options?: Options,
@@ -135,23 +136,10 @@ export type ConnectDragPreview = DragElementWrapper<DragPreviewOptions>
  */
 export interface DragSourceConnector {
 	/**
-	 * A React ref object to attach to the drag source. This replaces the dragSource() function described below.
-	 */
-	dragSourceRef: React.RefObject<any>
-
-	/**
-	 * A React ref object to attach to the drag preview. This replaces the dragPreview() function described below.
-	 */
-	dragPreviewRef: React.RefObject<any>
-
-	/**
 	 * Returns a function that must be used inside the component to assign the drag source role to a node. By
 	 * returning { connectDragSource: connect.dragSource() } from your collecting function, you can mark any React
 	 * element as the draggable node. To do that, replace any element with this.props.connectDragSource(element) inside
 	 * the render function.
-	 *
-	 * @param elementOrNode
-	 * @param options
 	 */
 	dragSource(): ConnectDragSource
 
@@ -174,11 +162,6 @@ export interface DragSourceConnector {
  * that lets you assign the drop target role to one of your component's DOM nodes.
  */
 export interface DropTargetConnector {
-	/**
-	 * A React ref object to attach to the drop target. This replaces the dropTarget() function described below.
-	 */
-	dropTargetRef: React.RefObject<any>
-
 	/**
 	 * Returns a function that must be used inside the component to assign the drop target role to a node.
 	 * By returning { connectDropTarget: connect.dropTarget() } from your collecting function, you can mark any React element

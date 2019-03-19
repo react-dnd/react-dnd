@@ -3,19 +3,20 @@ import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from './hooks/util'
+import { DragSourceOptions, DragPreviewOptions } from './interfaces'
 const shallowEqual = require('shallowequal')
 
 export default function createSourceConnector(backend: Backend) {
 	let handlerId: Identifier
 
 	// The drop target may either be attached via ref or connect function
-	let dragSourceRef = React.createRef<any>()
+	let dragSourceRef: React.RefObject<any> | null = null
 	let dragSourceNode: any
 	let dragSourceOptions: any
 	let disconnectDragSource: Unsubscribe | undefined
 
 	// The drag preview may either be attached via ref or connect function
-	let dragPreviewRef = React.createRef<any>()
+	let dragPreviewRef: React.RefObject<any> | null = null
 	let dragPreviewNode: any
 	let dragPreviewOptions: any
 	let disconnectDragPreview: Unsubscribe | undefined
@@ -27,7 +28,8 @@ export default function createSourceConnector(backend: Backend) {
 	let lastConnectedDragPreviewOptions: any = null
 
 	function reconnectDragSource() {
-		const dragSource = dragSourceNode || dragSourceRef.current
+		const dragSource =
+			dragSourceNode || (dragSourceRef && dragSourceRef.current)
 		if (!handlerId || !dragSource) {
 			return
 		}
@@ -55,7 +57,8 @@ export default function createSourceConnector(backend: Backend) {
 	}
 
 	function reconnectDragPreview() {
-		const dragPreview = dragPreviewNode || dragPreviewRef.current
+		const dragPreview =
+			dragPreviewNode || (dragPreviewRef && dragPreviewRef.current)
 		if (!handlerId || !dragPreview) {
 			return
 		}
@@ -94,18 +97,18 @@ export default function createSourceConnector(backend: Backend) {
 	return {
 		receiveHandlerId,
 		hooks: wrapConnectorHooks({
-			dragSourceRef,
-			dragPreviewRef,
-			dragSource: function connectDragSource(node: any, options?: any) {
+			dragSource: (
+				node: Element | React.ReactElement | React.Ref<any>,
+				options?: DragSourceOptions,
+			) => {
 				dragSourceOptions = options
 				if (isRef(node)) {
-					dragSourceRef = node
+					dragSourceRef = node as React.RefObject<any>
 				} else {
 					dragSourceNode = node
 				}
 			},
-
-			dragPreview: function connectDragPreview(node: any, options?: any) {
+			dragPreview: (node: any, options?: DragPreviewOptions) => {
 				dragPreviewOptions = options
 				if (isRef(node)) {
 					dragPreviewRef = node

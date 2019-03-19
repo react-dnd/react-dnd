@@ -1,5 +1,10 @@
 import React from 'react'
-import { DragSource, DragSourceConnector, DragSourceMonitor } from 'react-dnd'
+import {
+	DragSource,
+	DragSourceMonitor,
+	ConnectDragSource,
+	DragSourceConnector,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -18,7 +23,7 @@ interface BoxProps {
 
 interface BoxCollectedProps {
 	isDragging: boolean
-	dragSource: React.RefObject<any>
+	connectDragSource: ConnectDragSource
 }
 
 const boxSource = {
@@ -39,13 +44,15 @@ const boxSource = {
 }
 
 class Box extends React.Component<BoxProps & BoxCollectedProps> {
+	private dragSource: React.RefObject<HTMLDivElement> = React.createRef()
+
 	public render() {
-		const { isDragging, dragSource } = this.props
-		const { name } = this.props
+		const { name, isDragging, connectDragSource } = this.props
 		const opacity = isDragging ? 0.4 : 1
+		connectDragSource(this.dragSource)
 
 		return (
-			<div ref={dragSource} style={{ ...style, opacity }}>
+			<div ref={this.dragSource} style={{ ...style, opacity }}>
 				{name}
 			</div>
 		)
@@ -56,7 +63,7 @@ export default DragSource(
 	ItemTypes.BOX,
 	boxSource,
 	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-		dragSource: connect.dragSourceRef,
+		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),
 	}),
 )(Box)
