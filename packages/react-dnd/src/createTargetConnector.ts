@@ -57,12 +57,6 @@ export default function createTargetConnector(backend: Backend) {
 	return {
 		receiveHandlerId,
 		hooks: wrapConnectorHooks({
-			get dropTargetRef() {
-				if (dropTargetRef == null) {
-					dropTargetRef = React.createRef()
-				}
-				return dropTargetRef
-			},
 			dropTarget: (node: any, options: any) => {
 				dropTargetOptions = options
 				if (isRef(node)) {
@@ -71,7 +65,6 @@ export default function createTargetConnector(backend: Backend) {
 					dropTargetNode = node
 				}
 			},
-			dropTargetOptions: (options?: any) => (dropTargetOptions = options),
 		}),
 		reconnect: reconnectDropTarget,
 	}

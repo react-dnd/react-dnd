@@ -7,16 +7,13 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # DropTargetConnector
 
-`DropTargetConnector` is an object passed to the _collecting function_ of the [`DropTarget`](/docs/api/drop-target). It provides the ability to bind your React component to the Drop Target role. You **must** use one of the binding mechanisms provided by the connector for your component to be recognized as a Drop Target in React-DnD.
+`DropTargetConnector` is an object passed to the _collecting function_ of the [`DropTarget`](/docs/api/drop-target). It provides the ability to bind your React component to the Drop Target role.
 
 ## Properties
 
-- **`dropTarget() => (Element | Node | Ref)`**: Returns a function that should be prop-injected into your component and used in that component's `render()` method. You may pass this function a react component, an DOM element, or a ref object to this method.
-- **`dropTargetRef`**: A [ref](https://reactjs.org/docs/refs-and-the-dom.html) that may be used to attach to your Drop Target element. This may be used in lieu of the `dropTarget()` function described above.
+- **`dropTarget() => (Element | Node | Ref)`**: Returns a function that must be prop-injected into your component and used in that component's `render()` method. You may pass this function a react component, an DOM element, or a ref object to this method.
 
-## Usage Patterns
-
-### Pattern 1: Connector Function
+## Usage
 
 ```js
 import React from 'react'
@@ -40,30 +37,6 @@ export default DropTarget(
 )(DropZone)
 ```
 
-### Pattern 2: Provided Ref
-
-```js
-import React from 'react'
-import { DropTarget } from 'react-dnd'
-
-class DropZone {
-  render() {
-    const { dropTarget } = this.props
-    return <div ref={dropTarget}>You can drop here!</div>)
-  }
-}
-
-export default DropTarget(
-  ItemTypes.Item,
-  {
-    /*...*/
-  },
-  (connect, monitor) => ({
-    dropTarget: connect.dropTargetRef(),
-  }),
-)(DropZone)
-```
-
-### Example
+### Examples
 
 Check out [the tutorial](/docs/tutorial) for more real examples!

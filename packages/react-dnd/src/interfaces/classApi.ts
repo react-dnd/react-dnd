@@ -130,23 +130,11 @@ export type DragElementWrapper<Options> = <Props>(
 export type ConnectDragSource = DragElementWrapper<DragSourceOptions>
 export type ConnectDragPreview = DragElementWrapper<DragPreviewOptions>
 
-export type ConnectOptions<T> = (options: T) => void
-
 /**
  * DragSourceConnector is an object passed to a collecting function of the DragSource.
  * Its methods return functions that let you assign the roles to your component's DOM nodes.
  */
 export interface DragSourceConnector {
-	/**
-	 * A React ref object to attach to the drag source. This may be used in lieu of the dragSource() function described below.
-	 */
-	dragSourceRef: React.RefObject<any>
-
-	/**
-	 * A React ref object to attach to the drag preview. This may be used in lieu of the dragPreview() function described below.
-	 */
-	dragPreviewRef: React.RefObject<any>
-
 	/**
 	 * Returns a function that must be used inside the component to assign the drag source role to a node. By
 	 * returning { connectDragSource: connect.dragSource() } from your collecting function, you can mark any React
@@ -167,9 +155,6 @@ export interface DragSourceConnector {
 	 * support this customization). See the example code below for the different usage examples.
 	 */
 	dragPreview(): ConnectDragPreview
-
-	dragSourceOptions(): ConnectOptions<DragSourceOptions>
-	dragPreviewOptions(): ConnectOptions<DragPreviewOptions>
 }
 
 /**
@@ -178,18 +163,11 @@ export interface DragSourceConnector {
  */
 export interface DropTargetConnector {
 	/**
-	 * A React ref object to attach to the drop target. This may be used in lieu of the dropTarget() function described below.
-	 */
-	dropTargetRef: React.RefObject<any>
-
-	/**
 	 * Returns a function that must be used inside the component to assign the drop target role to a node.
 	 * By returning { connectDropTarget: connect.dropTarget() } from your collecting function, you can mark any React element
 	 * as the droppable node. To do that, replace any element with this.props.connectDropTarget(element) inside the render function.
 	 */
 	dropTarget(): ConnectDropTarget
-
-	dropTargetOptions(): ConnectOptions<any>
 }
 
 export type ConnectDropTarget = <Props>(
