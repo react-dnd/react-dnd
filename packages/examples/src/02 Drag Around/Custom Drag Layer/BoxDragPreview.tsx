@@ -11,10 +11,6 @@ export interface BoxDragPreviewProps {
 	title: string
 }
 
-export interface BoxDragPreviewState {
-	tickTock: any
-}
-
 const BoxDragPreview: React.FC<BoxDragPreviewProps> = ({ title }) => {
 	const [tickTock, setTickTock] = useState(false)
 
