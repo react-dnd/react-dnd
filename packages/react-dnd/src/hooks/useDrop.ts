@@ -6,8 +6,8 @@ import {
 } from '../interfaces'
 import { useMonitorOutput } from './internal/useMonitorOutput'
 import { useRefObject } from './internal/useRefObject'
-import { useDropTargetMonitor } from './internal/useDropTargetMonitor'
-import { useDropHandler } from './internal/useDropHandler'
+import { useDropHandler, useDropTargetMonitor } from './internal/drop'
+import { useMemo } from 'react'
 const invariant = require('invariant')
 
 /**
@@ -23,17 +23,14 @@ export function useDrop<
 ): [CollectedProps, ConnectDropTarget] {
 	invariant(targetSpec.accept != null, 'accept must be defined')
 	const spec = useRefObject(targetSpec)
+	const collect = useMemo(() => spec.current!.collect, [spec.current])
 	const [monitor, connector] = useDropTargetMonitor()
 	useDropHandler(spec, monitor, connector)
 
 	const result: CollectedProps & {
 		ref: React.RefObject<Element>
-	} = targetSpec.collect
-		? (useMonitorOutput(
-				monitor as any,
-				connector,
-				targetSpec.collect as any,
-		  ) as any)
+	} = collect
+		? (useMonitorOutput(monitor as any, connector, collect as any) as any)
 		: (({} as CollectedProps) as any)
 
 	return [result, (connector as any).hooks.dropTarget()]
