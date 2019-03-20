@@ -5,7 +5,7 @@ import boxImage from './boxImage'
 
 const {
 	useDrag,
-	useDetachedComponent,
+	useDetachedPreview,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
@@ -25,7 +25,7 @@ const BoxImage = React.forwardRef((props, ref: React.Ref<HTMLImageElement>) => {
 })
 
 const BoxWithImage: React.FC = () => {
-	const DragPreview = useDetachedComponent(BoxImage)
+	const DragPreview = useDetachedPreview(BoxImage)
 	const [{ opacity }, drag, preview] = useDrag(() => ({
 		item: { type: ItemTypes.BOX },
 		collect: monitor => ({
@@ -35,7 +35,7 @@ const BoxWithImage: React.FC = () => {
 
 	return (
 		<>
-			<DragPreview ref={preview} />
+			<DragPreview previewRef={preview} />
 			<div ref={drag} style={{ ...style, opacity }}>
 				Drag me to see an image
 			</div>

@@ -1,5 +1,5 @@
 ---
-path: '/docs/api/use-detached-component'
+path: '/docs/api/use-detached-preview'
 title: 'useDragPreview'
 ---
 
@@ -7,16 +7,16 @@ title: 'useDragPreview'
 
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
-# useDragPreview
+# useDetachedPreview
 
-A hook to use the current component as a drag-layer.
+A hook to use a component as a detached drag preview
 
 ```js
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd'
-const { useDragPreview } = dnd
+const { useDetachedPreview } = dnd
 
 function DragLayerPreview(props) {
-  const DragPreview = useDetachedComponent(MyRefForwardingComponent)
+  const DragPreview = useDetachedPreview(MyRefForwardingComponent)
   const [, drag, preview] = useDrag({
     item: { id, type },
     preview,
@@ -24,7 +24,7 @@ function DragLayerPreview(props) {
 
   return (
     <>
-      <DragPreview ref={preview} />
+      <DragPreview previewRef={preview} />
       <div ref={drag}>...</div>
     </>
   )

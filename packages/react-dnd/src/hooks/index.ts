@@ -1,4 +1,4 @@
 export * from './useDrag'
 export * from './useDrop'
 export * from './useDragLayer'
-export * from './useDetachedComponent'
+export * from './useDetachedPreview'
