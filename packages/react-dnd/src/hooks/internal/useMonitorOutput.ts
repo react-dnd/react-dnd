@@ -1,14 +1,10 @@
 import { useEffect } from 'react'
 import { useCollector } from './useCollector'
-import { HandlerManager } from '../../interfaces'
-import { DragDropMonitor } from 'dnd-core'
+import { HandlerManager, MonitorEventEmitter } from '../../interfaces'
 import { Connector } from 'react-dnd/SourceConnector'
 
-export function useMonitorOutput<
-	Monitor extends DragDropMonitor & HandlerManager,
-	Collected
->(
-	monitor: Monitor,
+export function useMonitorOutput<Monitor extends HandlerManager, Collected>(
+	monitor: Monitor & MonitorEventEmitter,
 	connector: Connector,
 	collect: (monitor: Monitor) => Collected,
 ): Collected {
