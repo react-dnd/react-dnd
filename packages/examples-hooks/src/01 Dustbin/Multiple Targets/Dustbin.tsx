@@ -28,14 +28,17 @@ const Dustbin: React.FC<DustbinProps> = ({
 	lastDroppedItem,
 	onDrop,
 }) => {
-	const [{ isOver, canDrop }, drop] = useDrop({
-		accept,
-		drop: item => onDrop(item),
-		collect: monitor => ({
-			isOver: monitor.isOver(),
-			canDrop: monitor.canDrop(),
+	const [{ isOver, canDrop }, drop] = useDrop(
+		() => ({
+			accept,
+			drop: onDrop,
+			collect: monitor => ({
+				isOver: monitor.isOver(),
+				canDrop: monitor.canDrop(),
+			}),
 		}),
-	})
+		[onDrop],
+	)
 
 	const isActive = isOver && canDrop
 	let backgroundColor = '#222'

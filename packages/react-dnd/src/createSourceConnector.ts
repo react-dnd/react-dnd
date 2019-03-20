@@ -96,6 +96,12 @@ export default function createSourceConnector(backend: Backend) {
 
 	return {
 		receiveHandlerId,
+		setDragSourceOptions(options: DragSourceOptions | null) {
+			dragSourceOptions = options
+		},
+		setDragPreviewOptions(options: DragPreviewOptions | null) {
+			dragPreviewOptions = options
+		},
 		hooks: wrapConnectorHooks({
 			dragSource: (
 				node: Element | React.ReactElement | React.Ref<any>,

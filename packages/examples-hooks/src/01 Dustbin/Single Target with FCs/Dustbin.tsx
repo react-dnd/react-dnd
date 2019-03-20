@@ -19,14 +19,17 @@ const style: React.CSSProperties = {
 }
 
 const Dustbin: React.FC = () => {
-	const [{ isOver, canDrop }, drop] = useDrop({
-		accept: ItemTypes.BOX,
-		drop: () => ({ name: 'Dustbin' }),
-		collect: monitor => ({
-			isOver: monitor.isOver(),
-			canDrop: monitor.canDrop(),
+	const [{ isOver, canDrop }, drop] = useDrop(
+		() => ({
+			accept: ItemTypes.BOX,
+			drop: () => ({ name: 'Dustbin' }),
+			collect: monitor => ({
+				isOver: monitor.isOver(),
+				canDrop: monitor.canDrop(),
+			}),
 		}),
-	})
+		[],
+	)
 	const isActive = canDrop && isOver
 
 	let backgroundColor = '#222'

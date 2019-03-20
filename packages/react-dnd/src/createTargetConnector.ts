@@ -56,6 +56,9 @@ export default function createTargetConnector(backend: Backend) {
 
 	return {
 		receiveHandlerId,
+		setDropTargetOptions(options: any) {
+			dropTargetOptions = options
+		},
 		hooks: wrapConnectorHooks({
 			dropTarget: (node: any, options: any) => {
 				dropTargetOptions = options

@@ -24,13 +24,16 @@ const SourceBox: React.FC<SourceBoxProps> = ({
 	onToggleForbidDrag,
 	children,
 }) => {
-	const [{ isDragging }, drag] = useDrag({
-		item: { type: `${color}` },
-		canDrag: () => !forbidDrag,
-		collect: monitor => ({
-			isDragging: monitor.isDragging(),
+	const [{ isDragging }, drag] = useDrag(
+		() => ({
+			item: { type: `${color}` },
+			canDrag: () => !forbidDrag,
+			collect: monitor => ({
+				isDragging: monitor.isDragging(),
+			}),
 		}),
-	})
+		[color],
+	)
 	const opacity = isDragging ? 0.4 : 1
 
 	let backgroundColor

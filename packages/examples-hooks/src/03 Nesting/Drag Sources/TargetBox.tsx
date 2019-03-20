@@ -22,7 +22,7 @@ export interface TargetBoxProps {
 }
 
 const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
-	const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
+	const [{ isOver, draggingColor, canDrop }, drop] = useDrop(() => ({
 		accept: [Colors.YELLOW, Colors.BLUE],
 		drop(item: DragItem) {
 			onDrop(item.type)
@@ -33,7 +33,7 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 			canDrop: monitor.canDrop(),
 			draggingColor: monitor.getItemType() as string,
 		}),
-	})
+	}))
 
 	const opacity = isOver ? 1 : 0.7
 	let backgroundColor = '#fff'

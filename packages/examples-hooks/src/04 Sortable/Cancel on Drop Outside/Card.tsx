@@ -28,14 +28,18 @@ interface Item {
 }
 
 const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
-	const [{ isDragging }, drag] = useDrag({
-		item: { type: ItemTypes.CARD, id, originalIndex: findCard(id).index },
-		collect: monitor => ({
-			isDragging: monitor.isDragging(),
+	const originalIndex = findCard(id).index
+	const [{ isDragging }, drag] = useDrag(
+		() => ({
+			item: { type: ItemTypes.CARD, id, originalIndex },
+			collect: monitor => ({
+				isDragging: monitor.isDragging(),
+			}),
 		}),
-	})
+		[id, originalIndex],
+	)
 
-	const [, drop] = useDrop({
+	const [, drop] = useDrop(() => ({
 		accept: ItemTypes.CARD,
 		canDrop: () => false,
 		hover({ id: draggedId }: Item) {
@@ -44,7 +48,7 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 				moveCard(draggedId, overIndex)
 			}
 		},
-	})
+	}))
 
 	const opacity = isDragging ? 0 : 1
 	return (

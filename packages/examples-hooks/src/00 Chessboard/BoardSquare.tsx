@@ -14,19 +14,24 @@ export interface BoardSquareProps {
 	children: any
 }
 
-export const BoardSquare: React.FC<BoardSquareProps> = (
-	props: BoardSquareProps,
-) => {
-	const [{ isOver, canDrop }, drop] = useDrop({
-		accept: ItemTypes.KNIGHT,
-		canDrop: () => canMoveKnight(props.x, props.y),
-		drop: () => moveKnight(props.x, props.y),
-		collect: mon => ({
-			isOver: !!mon.isOver(),
-			canDrop: !!mon.canDrop(),
+export const BoardSquare: React.FC<BoardSquareProps> = ({
+	x,
+	y,
+	children,
+}: BoardSquareProps) => {
+	const [{ isOver, canDrop }, drop] = useDrop(
+		() => ({
+			accept: ItemTypes.KNIGHT,
+			canDrop: () => canMoveKnight(x, y),
+			drop: () => moveKnight(x, y),
+			collect: mon => ({
+				isOver: !!mon.isOver(),
+				canDrop: !!mon.canDrop(),
+			}),
 		}),
-	})
-	const black = (props.x + props.y) % 2 === 1
+		[x, y],
+	)
+	const black = (x + y) % 2 === 1
 
 	return (
 		<div
@@ -37,7 +42,7 @@ export const BoardSquare: React.FC<BoardSquareProps> = (
 				height: '100%',
 			}}
 		>
-			<Square black={black}>{props.children}</Square>
+			<Square black={black}>{children}</Square>
 			{isOver && !canDrop && <Overlay color="red" />}
 			{!isOver && canDrop && <Overlay color="yellow" />}
 			{isOver && canDrop && <Overlay color="green" />}

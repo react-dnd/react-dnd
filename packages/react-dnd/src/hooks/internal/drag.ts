@@ -1,5 +1,5 @@
 declare var require: any
-import { RefObject, useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import {
 	DragSourceHookSpec,
 	DragObjectWithType,
@@ -26,7 +26,7 @@ export function useDragHandler<
 	DropResult,
 	CustomProps
 >(
-	spec: RefObject<DragSourceHookSpec<DragObject, DropResult, CustomProps>>,
+	spec: DragSourceHookSpec<DragObject, DropResult, CustomProps>,
 	monitor: DragSourceMonitor,
 	connector: any,
 ) {
@@ -37,7 +37,7 @@ export function useDragHandler<
 		// console.log('create handler')
 		return {
 			beginDrag() {
-				const { begin, item } = spec.current!
+				const { begin, item } = spec
 				if (begin) {
 					const beginResult = begin(monitor)
 					invariant(
@@ -49,17 +49,17 @@ export function useDragHandler<
 				return item || {}
 			},
 			canDrag() {
-				const { canDrag } = spec.current!
+				const { canDrag } = spec
 				return canDrag ? canDrag(monitor) : true
 			},
 			isDragging(globalMonitor: DragDropMonitor, target) {
-				const { isDragging } = spec.current!
+				const { isDragging } = spec
 				return isDragging
 					? isDragging(monitor)
 					: target === globalMonitor.getSourceId()
 			},
 			endDrag() {
-				const { end } = spec.current!
+				const { end } = spec
 				if (end) {
 					end(monitor.getItem(), monitor)
 				}
@@ -71,7 +71,7 @@ export function useDragHandler<
 	useEffect(function registerHandler() {
 		// console.log('Register Handler')
 		const [handlerId, unregister] = registerSource(
-			spec.current!.item.type,
+			spec.item.type,
 			handler,
 			manager,
 		)

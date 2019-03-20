@@ -26,13 +26,13 @@ const BoxImage = React.forwardRef((props, ref: React.Ref<HTMLImageElement>) => {
 
 const BoxWithImage: React.FC = () => {
 	const [DragPreview, preview] = useDragPreview(BoxImage)
-	const [{ opacity }, drag] = useDrag({
+	const [{ opacity }, drag] = useDrag(() => ({
 		item: { type: ItemTypes.BOX },
 		preview,
 		collect: monitor => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
-	})
+	}))
 
 	return (
 		<>

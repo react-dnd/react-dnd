@@ -9,12 +9,12 @@ const {
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const Parent: React.FC = () => {
-	const [{ isDragging }, drag] = useDrag({
+	const [{ isDragging }, drag] = useDrag(() => ({
 		item: { type: 'KNIGHT' },
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
 		}),
-	})
+	}))
 
 	return <Child drag={drag}>{isDragging ? 'Dragging' : 'Drag me'}</Child>
 }

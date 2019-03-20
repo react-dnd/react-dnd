@@ -20,19 +20,20 @@ interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ name }) => {
-	const item = { name, type: ItemTypes.BOX }
-
-	const [{ isDragging }, drag] = useDrag({
-		item,
-		end: (dropResult?: { name: string }) => {
-			if (dropResult) {
-				alert(`You dropped ${item.name} into ${dropResult.name}!`)
-			}
-		},
-		collect: monitor => ({
-			isDragging: monitor.isDragging(),
+	const [{ isDragging }, drag] = useDrag(
+		() => ({
+			item: { name, type: ItemTypes.BOX },
+			end: (dropResult?: { name: string }) => {
+				if (dropResult) {
+					alert(`You dropped ${name} into ${dropResult.name}!`)
+				}
+			},
+			collect: monitor => ({
+				isDragging: monitor.isDragging(),
+			}),
 		}),
-	})
+		[name],
+	)
 	const opacity = isDragging ? 0.4 : 1
 
 	return (

@@ -66,11 +66,11 @@ const Container: React.FC = () => {
 		}
 	}
 
-	const [, connect] = useDrop({ accept: ItemTypes.CARD })
+	const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }))
 	return (
 		<>
 			<h1>EXPERIMENTAL API</h1>
-			<div ref={node => connect(node)} style={style}>
+			<div ref={drop} style={style}>
 				{cards.map(card => (
 					<Card
 						key={card.id}

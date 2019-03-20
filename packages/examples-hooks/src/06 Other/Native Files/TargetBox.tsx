@@ -22,18 +22,21 @@ export interface TargetBoxProps {
 
 const TargetBox: React.FC<TargetBoxProps> = props => {
 	const { onDrop } = props
-	const [{ canDrop, isOver }, drop] = useDrop({
-		accept: [NativeTypes.FILE],
-		drop(item, monitor) {
-			if (onDrop) {
-				onDrop(props, monitor)
-			}
-		},
-		collect: monitor => ({
-			isOver: monitor.isOver,
-			canDrop: monitor.canDrop,
+	const [{ canDrop, isOver }, drop] = useDrop(
+		() => ({
+			accept: [NativeTypes.FILE],
+			drop(item, monitor) {
+				if (onDrop) {
+					onDrop(props, monitor)
+				}
+			},
+			collect: monitor => ({
+				isOver: monitor.isOver,
+				canDrop: monitor.canDrop,
+			}),
 		}),
-	})
+		[],
+	)
 	const isActive = canDrop && isOver
 	return (
 		<div ref={drop} style={style}>

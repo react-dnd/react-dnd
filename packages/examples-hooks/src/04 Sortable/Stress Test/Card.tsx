@@ -22,7 +22,7 @@ export interface CardProps {
 
 const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 	const ref = React.useRef(null)
-	const dragSource = React.useMemo(
+	const [{ isDragging }, connectDrag] = useDrag(
 		() => ({
 			item: { id, type: ItemTypes.CARD },
 			collect: (monitor: any) => ({
@@ -32,9 +32,7 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 		[id],
 	)
 
-	const [{ isDragging }, connectDrag] = useDrag(dragSource)
-
-	const dropTarget = React.useMemo(
+	const [, connectDrop] = useDrop(
 		() => ({
 			accept: ItemTypes.CARD,
 			hover({ id: draggedId }: { id: string; type: string }) {
@@ -45,8 +43,6 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 		}),
 		[id],
 	)
-
-	const [, connectDrop] = useDrop(dropTarget)
 
 	connectDrag(ref)
 	connectDrop(ref)
