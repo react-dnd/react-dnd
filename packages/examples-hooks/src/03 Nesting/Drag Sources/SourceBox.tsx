@@ -24,7 +24,7 @@ const SourceBox: React.FC<SourceBoxProps> = ({
 	onToggleForbidDrag,
 	children,
 }) => {
-	const [{ isDragging }, connect] = useDrag({
+	const [{ isDragging }, drag] = useDrag({
 		item: { type: `${color}` },
 		canDrag: () => !forbidDrag,
 		collect: monitor => ({
@@ -47,7 +47,7 @@ const SourceBox: React.FC<SourceBoxProps> = ({
 
 	return (
 		<div
-			ref={node => connect(node)}
+			ref={drag}
 			style={{
 				...style,
 				backgroundColor,

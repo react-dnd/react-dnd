@@ -17,7 +17,7 @@ export interface BoardSquareProps {
 export const BoardSquare: React.FC<BoardSquareProps> = (
 	props: BoardSquareProps,
 ) => {
-	const [{ isOver, canDrop }, connect] = useDrop({
+	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: ItemTypes.KNIGHT,
 		canDrop: () => canMoveKnight(props.x, props.y),
 		drop: () => moveKnight(props.x, props.y),
@@ -30,7 +30,7 @@ export const BoardSquare: React.FC<BoardSquareProps> = (
 
 	return (
 		<div
-			ref={node => connect(node)}
+			ref={drop}
 			style={{
 				position: 'relative',
 				width: '100%',

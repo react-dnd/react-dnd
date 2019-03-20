@@ -1,5 +1,8 @@
-import * as React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import React, { useRef } from 'react'
+import {
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
+	DropTargetMonitor,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
 
@@ -23,12 +26,17 @@ export interface CardProps {
 	moveCard: (dragIndex: number, hoverIndex: number) => void
 }
 
+interface DragItem {
+	index: number
+	id: string
+	type: string
+}
 const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
-	const ref = React.useRef<HTMLDivElement>(null)
+	const ref = useRef<HTMLDivElement>(null)
 	const dropSpec = React.useMemo(() => {
 		return {
 			accept: ItemTypes.CARD,
-			hover(item: { index: number }, monitor: any) {
+			hover(item: DragItem, monitor: DropTargetMonitor) {
 				if (!ref.current) {
 					return
 				}
@@ -78,8 +86,7 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 			},
 		}
 	}, [])
-	const [, connectDrop] = useDrop(dropSpec)
-	connectDrop(ref)
+	const [, drop] = useDrop(dropSpec)
 
 	const dragSpec = React.useMemo(() => {
 		return {
@@ -89,10 +96,10 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 			}),
 		}
 	}, [index])
-	const [{ isDragging }, connectDrag] = useDrag(dragSpec)
-	connectDrag(ref)
+	const [{ isDragging }, drag] = useDrag(dragSpec)
 
 	const opacity = isDragging ? 0 : 1
+	drag(drop(ref))
 	return (
 		<div ref={ref} style={{ ...style, opacity }}>
 			{text}

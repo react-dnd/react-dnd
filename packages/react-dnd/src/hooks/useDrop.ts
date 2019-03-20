@@ -27,11 +27,13 @@ export function useDrop<
 	const [monitor, connector] = useDropTargetMonitor()
 	useDropHandler(spec, monitor, connector)
 
-	const result: CollectedProps & {
-		ref: React.RefObject<Element>
-	} = collect
+	const result: CollectedProps = collect
 		? (useMonitorOutput(monitor as any, connector, collect as any) as any)
-		: (({} as CollectedProps) as any)
+		: ({} as CollectedProps)
 
-	return [result, (connector as any).hooks.dropTarget()]
+	const connectDropTarget = useMemo(() => connector.hooks.dropTarget(), [
+		connector,
+	])
+
+	return [result, connectDropTarget]
 }

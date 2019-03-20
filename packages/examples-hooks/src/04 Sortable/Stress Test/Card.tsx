@@ -37,7 +37,7 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 	const dropTarget = React.useMemo(
 		() => ({
 			accept: ItemTypes.CARD,
-			hover({ id: draggedId }: { id: string }) {
+			hover({ id: draggedId }: { id: string; type: string }) {
 				if (draggedId !== id) {
 					moveCard(draggedId, id)
 				}

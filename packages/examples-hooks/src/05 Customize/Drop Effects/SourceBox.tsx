@@ -20,7 +20,7 @@ export interface SourceBoxProps {
 }
 
 const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
-	const [{ opacity }, connect] = useDrag({
+	const [{ opacity }, drag] = useDrag({
 		item: { type: ItemTypes.BOX },
 		options: {
 			dropEffect: showCopyIcon ? 'copy' : 'move',
@@ -31,7 +31,7 @@ const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
 	})
 
 	return (
-		<div ref={node => connect(node)} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }}>
 			When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
 		</div>
 	)

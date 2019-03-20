@@ -23,7 +23,7 @@ const handleStyle: React.CSSProperties = {
 }
 
 const BoxWithHandle: React.FC = () => {
-	const [{ opacity }, connectDragSource, connectDragPreview] = useDrag({
+	const [{ opacity }, drag, preview] = useDrag({
 		item: { type: ItemTypes.BOX },
 		collect: monitor => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
@@ -31,8 +31,8 @@ const BoxWithHandle: React.FC = () => {
 	})
 
 	return (
-		<div ref={node => connectDragPreview(node)} style={{ ...style, opacity }}>
-			<div ref={node => connectDragSource(node)} style={handleStyle} />
+		<div ref={preview} style={{ ...style, opacity }}>
+			<div ref={drag} style={handleStyle} />
 			Drag me by the handle
 		</div>
 	)

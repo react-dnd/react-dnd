@@ -22,7 +22,7 @@ interface BoxProps {
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
 
-	const [{ isDragging }, connect] = useDrag({
+	const [{ isDragging }, drag] = useDrag({
 		item,
 		end: (dropResult?: { name: string }) => {
 			if (dropResult) {
@@ -36,7 +36,7 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 	const opacity = isDragging ? 0.4 : 1
 
 	return (
-		<div ref={node => connect(node)} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }}>
 			{name}
 		</div>
 	)

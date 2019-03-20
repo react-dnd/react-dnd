@@ -22,7 +22,7 @@ export interface TargetBoxProps {
 
 const TargetBox: React.FC<TargetBoxProps> = props => {
 	const { onDrop } = props
-	const [{ canDrop, isOver }, connect] = useDrop({
+	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: [NativeTypes.FILE],
 		drop(item, monitor) {
 			if (onDrop) {
@@ -36,7 +36,7 @@ const TargetBox: React.FC<TargetBoxProps> = props => {
 	})
 	const isActive = canDrop && isOver
 	return (
-		<div ref={node => connect(node)} style={style}>
+		<div ref={drop} style={style}>
 			{isActive ? 'Release to drop' : 'Drag file here'}
 		</div>
 	)

@@ -29,7 +29,7 @@ const Dustbin: React.FC<DustbinProps> = ({
 	accepts: accept,
 	onDrop,
 }) => {
-	const [{ isOver, canDrop }, connect] = useDrop({
+	const [{ isOver, canDrop }, drop] = useDrop({
 		accept,
 		collect: monitor => ({
 			isOver: monitor.isOver(),
@@ -47,7 +47,7 @@ const Dustbin: React.FC<DustbinProps> = ({
 	}
 
 	return (
-		<div ref={node => connect(node)} style={{ ...style, backgroundColor }}>
+		<div ref={drop} style={{ ...style, backgroundColor }}>
 			{isActive
 				? 'Release to drop'
 				: `This dustbin accepts: ${accept.join(', ')}`}

@@ -22,7 +22,7 @@ export interface TargetBoxProps {
 }
 
 const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
-	const [{ isOver, draggingColor, canDrop }, connect] = useDrop({
+	const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
 		accept: [Colors.YELLOW, Colors.BLUE],
 		drop(item: DragItem) {
 			onDrop(item.type)
@@ -49,10 +49,7 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 	}
 
 	return (
-		<div
-			ref={node => connect(node)}
-			style={{ ...style, backgroundColor, opacity }}
-		>
+		<div ref={drop} style={{ ...style, backgroundColor, opacity }}>
 			<p>Drop here.</p>
 
 			{!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}

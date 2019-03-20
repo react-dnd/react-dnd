@@ -1,4 +1,4 @@
-import { isValidElement } from 'react'
+import { isValidElement, ReactElement } from 'react'
 import cloneWithRef from './utils/cloneWithRef'
 
 function throwIfCompositeComponentElement(element: React.ReactElement<any>) {
@@ -24,17 +24,17 @@ function wrapHookToRecognizeElement(hook: (node: any, options: any) => void) {
 		if (!isValidElement(elementOrNode)) {
 			const node = elementOrNode
 			hook(node, options)
-			return undefined
+			return node
 		}
 
 		// If passed a ReactElement, clone it and attach this function as a ref.
 		// This helps us achieve a neat API where user doesn't even know that refs
 		// are being used under the hood.
-		const element = elementOrNode
+		const element: ReactElement | null = elementOrNode
 		throwIfCompositeComponentElement(element as any)
 
 		// When no options are passed, use the hook directly
-		const ref = options ? (node: any) => hook(node, options) : hook
+		const ref = options ? (node: Element) => hook(node, options) : hook
 		return cloneWithRef(element, ref)
 	}
 }

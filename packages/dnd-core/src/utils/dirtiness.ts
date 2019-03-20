@@ -2,8 +2,11 @@ declare var require: any
 
 const intersection = require('lodash/intersection')
 
-export const NONE: string[] = ['__NONE__']
-export const ALL: string[] = ['__ALL__']
+export const NONE: string[] = []
+export const ALL: string[] = []
+	// Add these flags for debug
+;(NONE as any).__IS_NONE__ = true
+;(ALL as any).__IS_ALL__ = true
 
 /**
  * Determines if the given handler IDs are dirty or not.

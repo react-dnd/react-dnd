@@ -15,7 +15,7 @@ const style: React.CSSProperties = {
 }
 
 const TargetBox: React.FC = () => {
-	const [{ canDrop, isOver }, connect] = useDrop({
+	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		collect: monitor => ({
 			canDrop: monitor.canDrop(),
@@ -25,7 +25,7 @@ const TargetBox: React.FC = () => {
 	const isActive = canDrop && isOver
 
 	return (
-		<div ref={node => connect(node)} style={style}>
+		<div ref={drop} style={style}>
 			{isActive ? 'Release to drop' : 'Drag item here'}
 		</div>
 	)

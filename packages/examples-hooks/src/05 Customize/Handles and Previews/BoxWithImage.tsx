@@ -26,7 +26,7 @@ const BoxImage = React.forwardRef((props, ref: React.Ref<HTMLImageElement>) => {
 
 const BoxWithImage: React.FC = () => {
 	const [DragPreview, preview] = useDragPreview(BoxImage)
-	const [{ opacity }, ref] = useDrag({
+	const [{ opacity }, drag] = useDrag({
 		item: { type: ItemTypes.BOX },
 		preview,
 		collect: monitor => ({
@@ -37,7 +37,7 @@ const BoxWithImage: React.FC = () => {
 	return (
 		<>
 			<DragPreview />
-			<div ref={ref} style={{ ...style, opacity }}>
+			<div ref={drag} style={{ ...style, opacity }}>
 				Drag me to see an image
 			</div>
 		</>

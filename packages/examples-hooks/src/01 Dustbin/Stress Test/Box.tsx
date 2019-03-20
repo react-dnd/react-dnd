@@ -22,7 +22,7 @@ export interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
-	const [{ isDragging }, connect] = useDrag({
+	const [{ isDragging }, drag] = useDrag({
 		item: { name, type },
 		isDragging(monitor) {
 			const item = monitor.getItem()
@@ -36,7 +36,7 @@ const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
 	const opacity = isDragging ? 0.4 : 1
 
 	return (
-		<div ref={node => connect(node)} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }}>
 			{isDropped ? <s>{name}</s> : name}
 		</div>
 	)

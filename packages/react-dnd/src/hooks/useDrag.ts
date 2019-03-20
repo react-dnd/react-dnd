@@ -34,11 +34,13 @@ export function useDrag<
 
 	const result: CollectedProps = collect
 		? (useMonitorOutput(monitor as any, connector, collect as any) as any)
-		: (({} as CollectedProps) as any)
+		: ({} as CollectedProps)
 
-	return [
-		result,
-		(connector as any).hooks.dragSource(),
-		(connector as any).hooks.dragPreview(),
-	]
+	const connectDragSource = useMemo(() => connector.hooks.dragSource(), [
+		connector,
+	])
+	const connectDragPreview = useMemo(() => connector.hooks.dragPreview(), [
+		connector,
+	])
+	return [result, connectDragSource, connectDragPreview]
 }

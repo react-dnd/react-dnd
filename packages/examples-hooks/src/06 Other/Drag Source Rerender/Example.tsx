@@ -9,22 +9,22 @@ const {
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const Parent: React.FC = () => {
-	const [{ isDragging }, connect] = useDrag({
+	const [{ isDragging }, drag] = useDrag({
 		item: { type: 'KNIGHT' },
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
 
-	return <Child connect={connect}>{isDragging ? 'Dragging' : 'Drag me'}</Child>
+	return <Child drag={drag}>{isDragging ? 'Dragging' : 'Drag me'}</Child>
 }
 
 export default Parent
 
 interface ChildProps {
-	connect: ConnectDragSource
+	drag: ConnectDragSource
 }
-const Child: React.FC<ChildProps> = ({ connect, children }) => {
+const Child: React.FC<ChildProps> = ({ drag, children }) => {
 	const [open, setOpen] = React.useState(true)
 	const toggle = React.useCallback(() => setOpen(!open), [open])
 
@@ -38,7 +38,7 @@ const Child: React.FC<ChildProps> = ({ connect, children }) => {
 			<button onClick={toggle}>{open ? 'Hide' : 'Show'}</button>
 			{open ? (
 				<div
-					ref={node => connect(node)}
+					ref={drag}
 					style={{
 						padding: 32,
 						marginTop: 16,

@@ -56,10 +56,10 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 			}),
 		}
 	}, [name])
-	const [{ opacity }, connect] = useDrag(spec)
+	const [{ opacity }, drag] = useDrag(spec)
 
 	return (
-		<div ref={node => connect(node)} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }}>
 			{name}
 		</div>
 	)

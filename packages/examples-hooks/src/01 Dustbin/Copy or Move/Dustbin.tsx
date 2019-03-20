@@ -47,11 +47,11 @@ const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
 		}),
 		[allowedDropEffect],
 	)
-	const [{ canDrop, isOver }, connect] = useDrop(spec)
+	const [{ canDrop, isOver }, drop] = useDrop(spec)
 	const isActive = canDrop && isOver
 	const backgroundColor = selectBackgroundColor(isActive, canDrop)
 	return (
-		<div ref={node => connect(node)} style={{ ...style, backgroundColor }}>
+		<div ref={drop} style={{ ...style, backgroundColor }}>
 			{`Works with ${allowedDropEffect} drop effect`}
 			<br />
 			<br />
