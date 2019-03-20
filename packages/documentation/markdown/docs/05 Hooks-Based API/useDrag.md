@@ -16,31 +16,29 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDrag } = dnd
 
 function DraggableComponent(props) {
-  const [collectedProps, ref] = useDrag({
+  const [collectedProps, drag] = useDrag(() => {
     item: { id, type },
   })
-  return <div ref={ref}>...</div>
+  return <div ref={drag}>...</div>
 }
 ```
 
 #### Parameters
 
-- **`spec`** Specification object, see below for details on how to construct this
+- **`spec`** A function returning a specification object, see below for details on how to construct this
+- **`memoization parameters`** - values to use when rebuilding the memoized specification
 
 #### Return Value Array
 
 - **`Index 0`**: An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
-- **`Index 1`**: The React ref to use. This is automatically created if no `ref` field is defined on the specification object. The ref must be attached to the draggable portion of the DOM.
+- **`Index 1`**: A connector function for the drag source. This must be attached to the draggable portion of the DOM.
+- **`Index 2`**: A connector function for the drag preview. This may be attached to the preview portion of the DOM.
 
 ### Specification Object Members
 
 - **`item`**: Required. A plain JavaScript object describing the data being dragged. This is the _only_ information available to the drop targets about the drag source so it's important to pick the _minimal_ data they need to know. You may be tempted to put a complex reference here, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ type, id }` from this method.
 
   `item.type` **must be set**, and it must be either a string, an ES6 symbol`. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to this item. Read the [overview](/docs/overview) to learn more about the items and types.
-
-- **`ref`**: Optional. A ref object to use to attach to the draggable element. If this is unset, one will be created ad returned.
-
-- **`preview`**: Optional. An HTML Element or a ref object attached to the dragPreview element. Consider using the `useDragPreview` hook to create this for you.
 
 - **`previewOptions`**: Optional. A plain JavaScript object describing drag preview options.
 

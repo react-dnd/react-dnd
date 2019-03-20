@@ -1,5 +1,5 @@
 ---
-path: '/docs/api/use-drag-preview'
+path: '/docs/api/use-detached-component'
 title: 'useDragPreview'
 ---
 
@@ -16,16 +16,16 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDragPreview } = dnd
 
 function DragLayerPreview(props) {
-  const [DragPreview, preview] = useDragPreview(spec)
-  const [collectedProps, ref] = useDrag({
+  const DragPreview = useDetachedComponent(spec)
+  const [, drag, preview] = useDrag({
     item: { id, type },
     preview,
   })
 
   return (
     <>
-      <DragPreview />
-      <div ref={ref}>...drag item...</div>
+      <DragPreview ref={preview} />
+      <div ref={drag}>...</div>
     </>
   )
 }
@@ -35,7 +35,6 @@ function DragLayerPreview(props) {
 
 - **`dragPreview`** A refForwarding component that will render the drag preview.
 
-#### Return Value Array
+#### Return Value
 
-- **`Index 0`**: A component to render the dragPreview in your render method.
-- **`Index 1`**: The drag preview ref object. This should be passed into useDrag's specification
+This hook returns a component that will render into a detached DOM node via a React Portal. This is useful for rendering disconnected Drag Previews.

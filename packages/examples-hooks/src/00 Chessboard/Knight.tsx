@@ -5,7 +5,7 @@ import knightImage from './knightImage'
 
 const {
 	useDrag,
-	useDragPreview,
+	useDetachedComponent,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const knightStyle: React.CSSProperties = {
@@ -24,18 +24,17 @@ const KnightDragPreview = React.forwardRef(
 )
 
 export const Knight: React.FC = () => {
-	const [DragPreview, previewRef] = useDragPreview(KnightDragPreview)
+	const DragPreview = useDetachedComponent(KnightDragPreview)
 	const [{ isDragging }, drag, preview] = useDrag(() => ({
 		item: { type: ItemTypes.KNIGHT },
 		collect: mon => ({
 			isDragging: !!mon.isDragging(),
 		}),
 	}))
-	preview(previewRef)
 
 	return (
 		<>
-			<DragPreview />
+			<DragPreview ref={preview} />
 			<div
 				ref={drag}
 				style={{

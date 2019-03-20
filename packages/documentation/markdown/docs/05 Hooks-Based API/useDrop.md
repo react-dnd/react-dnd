@@ -16,26 +16,27 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDrop } = dnd
 
 function myDropTarget(props) {
-  const [collectedProps, ref] = useDrop({ accept })
+  const [collectedProps, drop] = useDrop(() => {
+    accept
+  })
 
-  return <div ref={ref}>Drop Target</div>
+  return <div ref={drop}>Drop Target</div>
 }
 ```
 
 #### Parameters
 
-- **`spec`** Specification object, see below for details on how to construct this
+- **`spec`** A function returning a specification object, see below for details on how to construct this
+- **`memoization parameters`** - values to use when rebuilding the memoized specification
 
 #### Return Value Array
 
 - **`Index 0`**: An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
-- **`Index 1`**: The React ref to use. This is automatically created if no `ref` field is defined on the specification object. The ref must be attached to the droppable area of the DOM.
+- **`Index 1`**: A connector function for the drop target. This must be attached to the drop-target portion of the DOM.
 
 ### Specification Object Members
 
 - **`accept`**: Required. A string, an ES6 symbol, an array of either, or a function that returns either of those, given component's `props`. This drop target will only react to the items produced by the [drag sources](/docs/api/drag-source) of the specified type or types. Read the [overview](/docs/overview) to learn more about the items and types.
-
-* **`ref`**: Optional. A ref object to use to attach to the draggable element. If this is unset, one will be created ad returned.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
