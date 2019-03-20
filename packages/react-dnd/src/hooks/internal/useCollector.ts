@@ -1,22 +1,31 @@
+// declare var require: any
+// const shallowEqual = require('shallowequal')
 import { useState } from 'react'
-import { Connector } from '../../SourceConnector'
 
+/**
+ *
+ * @param monitor The monitor to colelct state from
+ * @param collect The collecting function
+ * @param onUpdate A method to invoke when updates occur
+ */
 export function useCollector<T, S>(
 	monitor: T,
 	collect: (monitor: T) => S,
-	connector?: Connector,
+	onUpdate?: () => void,
 ): [S, () => void] {
 	const [collected, setCollected] = useState(() => collect(monitor))
 
 	const updateCollected = () => {
 		const nextValue = collect(monitor)
-		setCollected(nextValue)
-		if (connector) {
-			connector.reconnect()
-		}
-		// if (!shallowEqual(collected, nextValue)) {
-		// 	console.log('collected props changed')
+		// TODO: we need this shallowequal check to work
+		// so that we can operate performantly, but the examples
+		// are broken with it in currently
 
+		// if (!shallowEqual(collected, nextValue)) {
+		setCollected(nextValue)
+		if (onUpdate) {
+			onUpdate()
+		}
 		// }
 	}
 

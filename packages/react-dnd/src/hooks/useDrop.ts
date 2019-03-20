@@ -28,7 +28,7 @@ export function useDrop<
 	useDropHandler(spec, monitor, connector)
 
 	const result: CollectedProps = collect
-		? useMonitorOutput(monitor, connector, collect)
+		? useMonitorOutput(monitor, collect, () => connector.reconnect())
 		: ({} as CollectedProps)
 
 	const connectDropTarget = useMemo(() => connector.hooks.dropTarget(), [

@@ -33,7 +33,7 @@ export function useDrag<
 	useDragHandler(spec, monitor, connector)
 
 	const result: CollectedProps = collect
-		? useMonitorOutput(monitor, connector, collect)
+		? useMonitorOutput(monitor, collect, () => connector.reconnect())
 		: ({} as CollectedProps)
 
 	const connectDragSource = useMemo(() => connector.hooks.dragSource(), [
