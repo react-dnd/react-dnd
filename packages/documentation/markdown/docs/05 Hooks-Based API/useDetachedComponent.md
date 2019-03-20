@@ -16,7 +16,7 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDragPreview } = dnd
 
 function DragLayerPreview(props) {
-  const DragPreview = useDetachedComponent(spec)
+  const DragPreview = useDetachedComponent(MyRefForwardingComponent)
   const [, drag, preview] = useDrag({
     item: { id, type },
     preview,
