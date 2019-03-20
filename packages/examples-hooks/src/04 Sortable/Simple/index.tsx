@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useCallback } from 'react'
 import Card from './Card'
 import update from 'immutability-helper'
 import { ContainerProps } from '../../02 Drag Around/Naive/Container'
@@ -16,7 +16,7 @@ export interface ContainerState {
 
 const Container: React.FC<ContainerProps> = ({}) => {
 	{
-		const [cards, setCards] = React.useState([
+		const [cards, setCards] = useState([
 			{
 				id: 1,
 				text: 'Write a cool JS library',
@@ -48,14 +48,17 @@ const Container: React.FC<ContainerProps> = ({}) => {
 			},
 		])
 
-		const moveCard = (dragIndex: number, hoverIndex: number) => {
-			const dragCard = cards[dragIndex]
-			setCards(
-				update(cards, {
-					$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
-				}),
-			)
-		}
+		const moveCard = useCallback(
+			(dragIndex: number, hoverIndex: number) => {
+				const dragCard = cards[dragIndex]
+				setCards(
+					update(cards, {
+						$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+					}),
+				)
+			},
+			[cards],
+		)
 
 		const renderCard = (card: { id: number; text: string }, index: number) => {
 			return (

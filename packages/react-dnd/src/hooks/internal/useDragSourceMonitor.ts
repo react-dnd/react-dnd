@@ -18,64 +18,67 @@ export function useDragSourceMonitor<
 	// Ref out the spec object
 	const sourceSpecRef = useRef(sourceSpec)
 	useEffect(() => {
+		// console.log('set drag source spec')
 		sourceSpecRef.current = sourceSpec
-	})
+	}, [sourceSpec])
 
 	// Create the monitor and connector
-	const monitor = useMemo(() => new DragSourceMonitorImpl(manager), [manager])
-	const connector = useMemo(() => createSourceConnector(manager.getBackend()), [
-		manager,
-	])
+	const monitor = useMemo(() => {
+		// console.log('create monitor')
+		return new DragSourceMonitorImpl(manager)
+	}, [])
+	const connector = useMemo(() => {
+		// console.log('create connector')
+		return createSourceConnector(manager.getBackend())
+	}, [])
 
 	// Can't use createSourceFactory, as semantics are different
-	const handler = useMemo(
-		() =>
-			({
-				beginDrag() {
-					const { begin, item } = sourceSpecRef.current
-					if (begin) {
-						const beginResult = begin(monitor)
-						invariant(
-							beginResult == null || typeof beginResult === 'object',
-							'dragSpec.begin() must either return an object, undefined, or null',
-						)
-						return beginResult || item || {}
-					}
-					return item || {}
-				},
-				canDrag() {
-					const { canDrag } = sourceSpecRef.current
-					return canDrag ? canDrag(monitor) : true
-				},
-				isDragging(globalMonitor, target) {
-					const { isDragging } = sourceSpecRef.current
-					return isDragging
-						? isDragging(monitor)
-						: target === globalMonitor.getSourceId()
-				},
-				endDrag() {
-					const { end } = sourceSpecRef.current
-					if (end) {
-						end(monitor.getItem(), monitor)
-					}
-				},
-			} as DragSource),
-		[],
-	)
+	const handler = useMemo(() => {
+		// console.log('create handler')
+		return {
+			beginDrag() {
+				const { begin, item } = sourceSpecRef.current
+				if (begin) {
+					const beginResult = begin(monitor)
+					invariant(
+						beginResult == null || typeof beginResult === 'object',
+						'dragSpec.begin() must either return an object, undefined, or null',
+					)
+					return beginResult || item || {}
+				}
+				return item || {}
+			},
+			canDrag() {
+				const { canDrag } = sourceSpecRef.current
+				return canDrag ? canDrag(monitor) : true
+			},
+			isDragging(globalMonitor, target) {
+				const { isDragging } = sourceSpecRef.current
+				return isDragging
+					? isDragging(monitor)
+					: target === globalMonitor.getSourceId()
+			},
+			endDrag() {
+				const { end } = sourceSpecRef.current
+				if (end) {
+					end(monitor.getItem(), monitor)
+				}
+				connector.reconnect()
+			},
+		} as DragSource
+	}, [])
 
-	useEffect(
-		function registerSourceWithMonitor() {
-			const { handlerId, unregister } = registerSource(
-				sourceSpec.item.type,
-				handler,
-				manager,
-			)
-			monitor.receiveHandlerId(handlerId)
-			connector.receiveHandlerId(handlerId)
-			return unregister
-		},
-		[monitor, connector],
-	)
+	useEffect(function registerHandler() {
+		// console.log('Register Handler')
+		const [handlerId, unregister] = registerSource(
+			sourceSpec.item.type,
+			handler,
+			manager,
+		)
+		monitor.receiveHandlerId(handlerId)
+		connector.receiveHandlerId(handlerId)
+		return unregister
+	}, [])
 
 	return [monitor, connector]
 }

@@ -33,17 +33,21 @@ function selectBackgroundColor(isActive: boolean, canDrop: boolean) {
 }
 
 const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
-	const [{ canDrop, isOver }, connect] = useDrop({
-		accept: ItemTypes.BOX,
-		drop: () => ({
-			name: `${allowedDropEffect} Dustbin`,
-			allowedDropEffect,
+	const spec = React.useMemo(
+		() => ({
+			accept: ItemTypes.BOX,
+			drop: () => ({
+				name: `${allowedDropEffect} Dustbin`,
+				allowedDropEffect,
+			}),
+			collect: (monitor: any) => ({
+				isOver: monitor.isOver(),
+				canDrop: monitor.canDrop(),
+			}),
 		}),
-		collect: monitor => ({
-			isOver: monitor.isOver(),
-			canDrop: monitor.canDrop(),
-		}),
-	})
+		[allowedDropEffect],
+	)
+	const [{ canDrop, isOver }, connect] = useDrop(spec)
 	const isActive = canDrop && isOver
 	const backgroundColor = selectBackgroundColor(isActive, canDrop)
 	return (

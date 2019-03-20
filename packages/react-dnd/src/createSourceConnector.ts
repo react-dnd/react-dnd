@@ -118,6 +118,7 @@ export default function createSourceConnector(backend: Backend) {
 			},
 		}),
 		reconnect: () => {
+			// console.log('reconnect source')
 			reconnectDragSource()
 			reconnectDragPreview()
 		},

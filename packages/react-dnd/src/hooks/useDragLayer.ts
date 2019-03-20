@@ -12,7 +12,7 @@ export function useDragLayer<CollectedProps>(
 ): CollectedProps {
 	const dragDropManager = useDragDropManager()
 	const monitor = dragDropManager.getMonitor()
-	const [collected, updateCollected] = useCollector(monitor, collect)
+	const [collected, updateCollected] = useCollector(monitor, null, collect)
 
 	useEffect(() => monitor.subscribeToOffsetChange(updateCollected))
 	useEffect(() => monitor.subscribeToStateChange(updateCollected))

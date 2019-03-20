@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useMemo } from 'react'
 import ItemTypes from '../Single Target/ItemTypes'
 
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
@@ -27,33 +27,36 @@ interface DropResult {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
-	const [{ opacity }, connect] = useDrag({
-		item,
-		end(dropResult?: DropResult) {
-			if (dropResult) {
-				let alertMessage = ''
-				const isDropAllowed =
-					dropResult.allowedDropEffect === 'any' ||
-					dropResult.allowedDropEffect === dropResult.dropEffect
+	const spec = useMemo(() => {
+		return {
+			item,
+			end(dropResult?: DropResult) {
+				if (dropResult) {
+					let alertMessage = ''
+					const isDropAllowed =
+						dropResult.allowedDropEffect === 'any' ||
+						dropResult.allowedDropEffect === dropResult.dropEffect
 
-				if (isDropAllowed) {
-					const isCopyAction = dropResult.dropEffect === 'copy'
-					const actionName = isCopyAction ? 'copied' : 'moved'
-					alertMessage = `You ${actionName} ${item.name} into ${
-						dropResult.name
-					}!`
-				} else {
-					alertMessage = `You cannot ${
-						dropResult.dropEffect
-					} an item into the ${dropResult.name}`
+					if (isDropAllowed) {
+						const isCopyAction = dropResult.dropEffect === 'copy'
+						const actionName = isCopyAction ? 'copied' : 'moved'
+						alertMessage = `You ${actionName} ${item.name} into ${
+							dropResult.name
+						}!`
+					} else {
+						alertMessage = `You cannot ${
+							dropResult.dropEffect
+						} an item into the ${dropResult.name}`
+					}
+					alert(alertMessage)
 				}
-				alert(alertMessage)
-			}
-		},
-		collect: monitor => ({
-			opacity: monitor.isDragging() ? 0.4 : 1,
-		}),
-	})
+			},
+			collect: (monitor: any) => ({
+				opacity: monitor.isDragging() ? 0.4 : 1,
+			}),
+		}
+	}, [name])
+	const [{ opacity }, connect] = useDrag(spec)
 
 	return (
 		<div ref={node => connect(node)} style={{ ...style, opacity }}>

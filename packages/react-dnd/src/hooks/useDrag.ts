@@ -1,4 +1,5 @@
 declare var require: any
+import { useMemo } from 'react'
 import {
 	DragSourceHookSpec,
 	DragObjectWithType,
@@ -21,7 +22,8 @@ export function useDrag<
 	spec: DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
 	// TODO: wire options into createSourceConnector
-	const { item, collect } = spec
+	const item = useMemo(() => spec.item, [spec])
+	const collect = useMemo(() => spec.collect, [spec])
 	invariant(item != null, 'item must be defined')
 	invariant(item.type != null, 'item type must be defined')
 	const [monitor, connector] = useDragSourceMonitor<
@@ -30,9 +32,10 @@ export function useDrag<
 		CollectedProps
 	>(spec)
 
-	const result: CollectedProps & { ref: React.RefObject<Element> } = collect
-		? (useMonitorOutput(monitor as any, collect as any) as any)
+	const result: CollectedProps = collect
+		? (useMonitorOutput(monitor as any, connector, collect as any) as any)
 		: (({} as CollectedProps) as any)
+
 	return [
 		result,
 		(connector as any).hooks.dragSource(),

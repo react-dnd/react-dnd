@@ -66,6 +66,9 @@ export default function createTargetConnector(backend: Backend) {
 				}
 			},
 		}),
-		reconnect: reconnectDropTarget,
+		reconnect: () => {
+			// console.log('reconnect drop target')
+			reconnectDropTarget()
+		},
 	}
 }

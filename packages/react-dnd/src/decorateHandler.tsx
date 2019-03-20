@@ -137,7 +137,7 @@ export default function decorateHandler<Props, ItemIdType>({
 
 			this.currentType = type
 
-			const { handlerId, unregister } = registerHandler(
+			const [handlerId, unregister] = registerHandler(
 				type,
 				this.handler,
 				this.manager,
