@@ -39,10 +39,10 @@ export interface KnightProps {
 
 class Knight extends React.Component<KnightProps> {
 	public componentDidMount() {
+		const { connectDragPreview } = this.props
 		const img = new Image()
 		img.src = knightImage
-		img.onload = () =>
-			this.props.connectDragPreview && this.props.connectDragPreview(img)
+		img.onload = () => connectDragPreview(img)
 	}
 
 	public render() {
