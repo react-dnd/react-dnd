@@ -10,7 +10,7 @@ import { useDragDropManager } from './useDragDropManager'
 import TargetConnector from '../../TargetConnector'
 import DropTargetMonitorImpl from '../../DropTargetMonitorImpl'
 
-export function useDropTargetMonitor(): [DropTargetMonitor, any] {
+export function useDropTargetMonitor(): [DropTargetMonitor, TargetConnector] {
 	const manager = useDragDropManager()
 	const monitor = useMemo(() => new DropTargetMonitorImpl(manager), [manager])
 	const connector = useMemo(() => new TargetConnector(manager.getBackend()), [

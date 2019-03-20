@@ -35,6 +35,8 @@ export function useDrop<
 		connector,
 	])
 
-	useEffect(() => connector.setDropTargetOptions(spec.options), [spec.options])
+	useEffect(() => {
+		connector.dropTargetOptions = spec.options || null
+	}, [spec.options])
 	return [result, connectDropTarget]
 }

@@ -74,10 +74,10 @@ export default class TargetConnector implements Connector {
 		this.reconnect()
 	}
 
-	private get dropTargetOptions() {
+	public get dropTargetOptions() {
 		return this.dropTargetOptionsInternal
 	}
-	private set dropTargetOptions(options: any) {
+	public set dropTargetOptions(options: any) {
 		this.dropTargetOptionsInternal = options
 	}
 

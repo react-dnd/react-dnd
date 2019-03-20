@@ -12,7 +12,7 @@ import DragSourceMonitorImpl from '../../DragSourceMonitorImpl'
 import SourceConnector from '../../SourceConnector'
 const invariant = require('invariant')
 
-export function useDragSourceMonitor(): [DragSourceMonitor, any] {
+export function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {
 	const manager = useDragDropManager()
 	const monitor = useMemo(() => new DragSourceMonitorImpl(manager), [manager])
 	const connector = useMemo(() => new SourceConnector(manager.getBackend()), [
