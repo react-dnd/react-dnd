@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { NativeTypes } from 'react-dnd-html5-backend'
 import {
 	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
 	DropTargetMonitor,
@@ -16,14 +17,13 @@ const style: React.CSSProperties = {
 }
 
 export interface TargetBoxProps {
-	accepts: string[]
 	onDrop: (props: TargetBoxProps, monitor: DropTargetMonitor) => void
 }
 
 const TargetBox: React.FC<TargetBoxProps> = props => {
-	const { accepts: accept, onDrop } = props
+	const { onDrop } = props
 	const [{ canDrop, isOver }, ref] = useDrop({
-		accept,
+		accept: [NativeTypes.FILE],
 		drop(item, monitor) {
 			if (onDrop) {
 				onDrop(props, monitor)
