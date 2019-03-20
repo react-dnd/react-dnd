@@ -45,9 +45,11 @@ export function useDrag<
 
 	useEffect(() => {
 		connector.dragSourceOptions = spec.options || null
+		connector.reconnect()
 	}, [spec.options])
 	useEffect(() => {
 		connector.dragPreviewOptions = spec.previewOptions || null
+		connector.reconnect()
 	}, [spec.previewOptions])
 	return [result, connectDragSource, connectDragPreview]
 }

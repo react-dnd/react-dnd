@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useCollector } from './useCollector'
 import { HandlerManager, MonitorEventEmitter } from '../../interfaces'
-import { Connector } from 'react-dnd/SourceConnector'
+import { Connector } from '../../SourceConnector'
 
 export function useMonitorOutput<Monitor extends HandlerManager, Collected>(
 	monitor: Monitor & MonitorEventEmitter,

@@ -1,7 +1,5 @@
-declare var require: any
 import { useState } from 'react'
-import { Connector } from 'react-dnd/SourceConnector'
-const shallowEqual = require('shallowequal')
+import { Connector } from '../../SourceConnector'
 
 export function useCollector<T, S>(
 	monitor: T,
@@ -12,12 +10,14 @@ export function useCollector<T, S>(
 
 	const updateCollected = () => {
 		const nextValue = collect(monitor)
-		if (!shallowEqual(collected, nextValue)) {
-			setCollected(nextValue)
-			if (connector) {
-				connector.reconnect()
-			}
+		setCollected(nextValue)
+		if (connector) {
+			connector.reconnect()
 		}
+		// if (!shallowEqual(collected, nextValue)) {
+		// 	console.log('collected props changed')
+
+		// }
 	}
 
 	return [collected, updateCollected]
