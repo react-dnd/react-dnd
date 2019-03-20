@@ -1,13 +1,14 @@
 declare var require: any
-import { useMemo } from 'react'
 import {
 	DragSourceHookSpec,
 	DragObjectWithType,
 	ConnectDragSource,
 	ConnectDragPreview,
 } from '../interfaces'
-import { useDragSourceMonitor } from './internal/useDragSourceMonitor'
 import { useMonitorOutput } from './internal/useMonitorOutput'
+import { useRefObject } from './internal/useRefObject'
+import { useDragSourceMonitor } from './internal/useDragSourceMonitor'
+import { useDragHandler } from './internal/useDragHandler'
 const invariant = require('invariant')
 
 /**
@@ -19,21 +20,23 @@ export function useDrag<
 	DropResult,
 	CollectedProps
 >(
-	spec: DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
+	sourceSpec: DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
-	// TODO: wire options into createSourceConnector
-	const item = useMemo(() => spec.item, [spec])
-	const collect = useMemo(() => spec.collect, [spec])
-	invariant(item != null, 'item must be defined')
-	invariant(item.type != null, 'item type must be defined')
-	const [monitor, connector] = useDragSourceMonitor<
-		DragObject,
-		DropResult,
-		CollectedProps
-	>(spec)
+	const spec = useRefObject(sourceSpec)
 
-	const result: CollectedProps = collect
-		? (useMonitorOutput(monitor as any, connector, collect as any) as any)
+	// TODO: wire options into createSourceConnector
+	invariant(sourceSpec.item != null, 'item must be defined')
+	invariant(sourceSpec.item.type != null, 'item type must be defined')
+
+	const [monitor, connector] = useDragSourceMonitor()
+	useDragHandler(spec, monitor, connector)
+
+	const result: CollectedProps = sourceSpec.collect
+		? (useMonitorOutput(
+				monitor as any,
+				connector,
+				sourceSpec.collect as any,
+		  ) as any)
 		: (({} as CollectedProps) as any)
 
 	return [
