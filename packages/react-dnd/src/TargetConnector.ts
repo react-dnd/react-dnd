@@ -8,6 +8,17 @@ const shallowEqual = require('shallowequal')
 import { Connector } from './SourceConnector'
 
 export default class TargetConnector implements Connector {
+	public hooks = wrapConnectorHooks({
+		dropTarget: (node: any, options: any) => {
+			this.dropTargetOptions = options
+			if (isRef(node)) {
+				this.dropTargetRef = node
+			} else {
+				this.dropTargetNode = node
+			}
+		},
+	})
+
 	private handlerId: Identifier | null = null
 	// The drop target may either be attached via ref or connect function
 	private dropTargetRef: React.RefObject<any> | null = null
@@ -20,19 +31,6 @@ export default class TargetConnector implements Connector {
 	private lastConnectedDropTargetOptions: any = null
 
 	constructor(private backend: Backend) {}
-
-	public get hooks() {
-		return wrapConnectorHooks({
-			dropTarget: (node: any, options: any) => {
-				this.dropTargetOptions = options
-				if (isRef(node)) {
-					this.dropTargetRef = node
-				} else {
-					this.dropTargetNode = node
-				}
-			},
-		})
-	}
 
 	public get connectTarget() {
 		return this.dropTarget

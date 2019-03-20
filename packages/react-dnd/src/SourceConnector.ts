@@ -14,6 +14,27 @@ export interface Connector {
 }
 
 export default class SourceConnector implements Connector {
+	public hooks = wrapConnectorHooks({
+		dragSource: (
+			node: Element | React.ReactElement | React.Ref<any>,
+			options?: DragSourceOptions,
+		) => {
+			this.dragSourceOptions = options || null
+			if (isRef(node)) {
+				this.dragSourceRef = node as React.RefObject<any>
+			} else {
+				this.dragSourceNode = node
+			}
+		},
+		dragPreview: (node: any, options?: DragPreviewOptions) => {
+			this.dragPreviewOptions = options || null
+			if (isRef(node)) {
+				this.dragPreviewRef = node
+			} else {
+				this.dragPreviewNode = node
+			}
+		},
+	})
 	private handlerId: Identifier | null = null
 
 	// The drop target may either be attached via ref or connect function
@@ -49,30 +70,6 @@ export default class SourceConnector implements Connector {
 		return this.dragSource
 	}
 
-	public get hooks() {
-		return wrapConnectorHooks({
-			dragSource: (
-				node: Element | React.ReactElement | React.Ref<any>,
-				options?: DragSourceOptions,
-			) => {
-				this.dragSourceOptions = options || null
-				if (isRef(node)) {
-					this.dragSourceRef = node as React.RefObject<any>
-				} else {
-					this.dragSourceNode = node
-				}
-			},
-			dragPreview: (node: any, options?: DragPreviewOptions) => {
-				this.dragPreviewOptions = options || null
-				if (isRef(node)) {
-					this.dragPreviewRef = node
-				} else {
-					this.dragPreviewNode = node
-				}
-			},
-		})
-	}
-
 	public get dragSourceOptions() {
 		return this.dragSourceOptionsInternal
 	}
@@ -89,7 +86,6 @@ export default class SourceConnector implements Connector {
 	}
 
 	public reconnect() {
-		// console.log('reconnect source')
 		this.reconnectDragSource()
 		this.reconnectDragPreview()
 	}
