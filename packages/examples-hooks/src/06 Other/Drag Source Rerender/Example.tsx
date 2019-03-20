@@ -1,25 +1,28 @@
 import * as React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import {
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
+	ConnectDragSource,
+} from 'react-dnd'
 
 const {
 	useDrag,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const Parent: React.FC = () => {
-	const [{ isDragging }, ref] = useDrag({
+	const [{ isDragging }, connect] = useDrag({
 		item: { type: 'KNIGHT' },
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
 
-	return <Child connect={ref}>{isDragging ? 'Dragging' : 'Drag me'}</Child>
+	return <Child connect={connect}>{isDragging ? 'Dragging' : 'Drag me'}</Child>
 }
 
 export default Parent
 
 interface ChildProps {
-	connect: React.RefObject<HTMLDivElement>
+	connect: ConnectDragSource
 }
 const Child: React.FC<ChildProps> = ({ connect, children }) => {
 	const [open, setOpen] = React.useState(true)
@@ -35,7 +38,7 @@ const Child: React.FC<ChildProps> = ({ connect, children }) => {
 			<button onClick={toggle}>{open ? 'Hide' : 'Show'}</button>
 			{open ? (
 				<div
-					ref={connect}
+					ref={node => connect(node)}
 					style={{
 						padding: 32,
 						marginTop: 16,

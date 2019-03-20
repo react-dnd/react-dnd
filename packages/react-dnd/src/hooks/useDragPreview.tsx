@@ -7,19 +7,12 @@ import { createPortal } from 'react-dom'
  */
 export function useDragPreview<Props>(
 	DragPreview: React.RefForwardingComponent<Element, Props>,
-): [React.FC<Props>, React.RefObject<Element>] {
-	// drag previews won't have layered functionality, so we can create the ref for them
-	// here
+): [React.FC<Props>, React.RefObject<any>] {
 	const ref = React.useRef(null)
-
 	// render the dragPreview into a detached element to prevent it from appearing too early
 	const dragPreviewRoot = document.createElement('div')
 	const portaledComponent = (props: Props) => {
-		const sendProps = { ...props, ref }
-		return createPortal(
-			React.createElement(DragPreview, sendProps),
-			dragPreviewRoot,
-		)
+		return createPortal(<DragPreview ref={ref} {...props} />, dragPreviewRoot)
 	}
 
 	return [portaledComponent, ref]

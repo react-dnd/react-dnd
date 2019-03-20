@@ -34,7 +34,7 @@ const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
 	const [hasDropped, setHasDropped] = React.useState(false)
 	const [hasDroppedOnChild, setHasDroppedOnChild] = React.useState(false)
 
-	const [{ isOver, isOverCurrent }, ref] = useDrop({
+	const [{ isOver, isOverCurrent }, connect] = useDrop({
 		accept: ItemTypes.BOX,
 		drop(item, monitor) {
 			const didDrop = monitor.didDrop()
@@ -58,7 +58,7 @@ const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
 	}
 
 	return (
-		<div ref={ref} style={getStyle(backgroundColor)}>
+		<div ref={node => connect(node)} style={getStyle(backgroundColor)}>
 			{text}
 			<br />
 			{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}

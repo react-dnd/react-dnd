@@ -27,7 +27,7 @@ interface DropResult {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
-	const [{ opacity }, ref] = useDrag({
+	const [{ opacity }, connect] = useDrag({
 		item,
 		end(dropResult?: DropResult) {
 			if (dropResult) {
@@ -56,7 +56,7 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 	})
 
 	return (
-		<div ref={ref} style={{ ...style, opacity }}>
+		<div ref={node => connect(node)} style={{ ...style, opacity }}>
 			{name}
 		</div>
 	)

@@ -1,42 +1,31 @@
 declare var require: any
 import { useMemo, useEffect, useRef } from 'react'
-import { DragSource, DragDropManager } from 'dnd-core'
-import {
-	DragSourceHookSpec,
-	DragSourceMonitor,
-	DragObjectWithType,
-} from '../../interfaces'
+import { DragSource } from 'dnd-core'
+import { DragSourceHookSpec, DragObjectWithType } from '../../interfaces'
 import DragSourceMonitorImpl from '../../DragSourceMonitorImpl'
 import registerSource from '../../registerSource'
+import { useDragDropManager } from './useDragDropManager'
+import createSourceConnector from '../../createSourceConnector'
 const invariant = require('invariant')
 
 export function useDragSourceMonitor<
 	DragObject extends DragObjectWithType,
 	DropResult,
 	CustomProps
->(
-	manager: DragDropManager<any>,
-	sourceSpec: DragSourceHookSpec<DragObject, DropResult, CustomProps>,
-): DragSourceMonitor {
-	const sourceSpecRef = useRef(sourceSpec)
+>(sourceSpec: DragSourceHookSpec<DragObject, DropResult, CustomProps>) {
+	const manager = useDragDropManager()
 
+	// Ref out the spec object
+	const sourceSpecRef = useRef(sourceSpec)
 	useEffect(() => {
 		sourceSpecRef.current = sourceSpec
 	})
 
+	// Create the monitor and connector
 	const monitor = useMemo(() => new DragSourceMonitorImpl(manager), [manager])
-	useEffect(
-		function registerSourceWithMonitor() {
-			const { handlerId, unregister } = registerSource(
-				sourceSpec.item.type,
-				handler,
-				manager,
-			)
-			monitor.receiveHandlerId(handlerId)
-			return unregister
-		},
-		[monitor],
-	)
+	const connector = useMemo(() => createSourceConnector(manager.getBackend()), [
+		manager,
+	])
 
 	// Can't use createSourceFactory, as semantics are different
 	const handler = useMemo(
@@ -74,5 +63,19 @@ export function useDragSourceMonitor<
 		[],
 	)
 
-	return monitor
+	useEffect(
+		function registerSourceWithMonitor() {
+			const { handlerId, unregister } = registerSource(
+				sourceSpec.item.type,
+				handler,
+				manager,
+			)
+			monitor.receiveHandlerId(handlerId)
+			connector.receiveHandlerId(handlerId)
+			return unregister
+		},
+		[monitor, connector],
+	)
+
+	return [monitor, connector]
 }

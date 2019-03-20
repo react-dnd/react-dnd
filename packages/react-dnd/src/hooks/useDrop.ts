@@ -1,7 +1,5 @@
 declare var require: any
-import { useEffect, useRef } from 'react'
-import { DropTargetHookSpec } from '../interfaces'
-import { useDragDropManager } from './internal/useDragDropManager'
+import { DropTargetHookSpec, ConnectDropTarget } from '../interfaces'
 import { useDropTargetMonitor } from './internal/useDropTargetMonitor'
 import { useMonitorOutput } from './internal/useMonitorOutput'
 const invariant = require('invariant')
@@ -12,32 +10,12 @@ const invariant = require('invariant')
  */
 export function useDrop<DragObject, DropResult, CollectedProps>(
 	spec: DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
-): [CollectedProps, React.RefObject<any>] {
-	const { accept, options, collect } = spec
+): [CollectedProps, ConnectDropTarget] {
+	const { accept, collect } = spec
 	invariant(accept != null, 'accept must be defined')
-	let { ref } = spec
-	if (!ref) {
-		ref = useRef(null)
-	}
-
-	const manager = useDragDropManager()
-	const backend = manager.getBackend()
-	const monitor = useDropTargetMonitor(manager, spec)
-
-	/*
-	 * Connect the Drop Target Element to the Backend
-	 */
-	useEffect(function connectDropTarget() {
-		if (ref!.current) {
-			const node = ref!.current
-			if (node) {
-				return backend.connectDropTarget(monitor.getHandlerId(), node, options)
-			}
-		}
-	})
-
+	const [monitor, connector] = useDropTargetMonitor(spec)
 	const result: CollectedProps & { ref: React.RefObject<Element> } = collect
 		? (useMonitorOutput(monitor as any, collect as any) as any)
 		: (({} as CollectedProps) as any)
-	return [result, ref]
+	return [result, (connector as any).hooks.dropTarget()]
 }

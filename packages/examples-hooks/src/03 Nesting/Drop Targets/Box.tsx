@@ -14,10 +14,9 @@ const style = {
 }
 
 const Box: React.FC = () => {
-	const ref = React.useRef(null)
-	useDrag({ ref, item: { type: ItemTypes.BOX } })
+	const [, connect] = useDrag({ item: { type: ItemTypes.BOX } })
 	return (
-		<div ref={ref} style={style}>
+		<div ref={node => connect(node)} style={style}>
 			Drag me
 		</div>
 	)

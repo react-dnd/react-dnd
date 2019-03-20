@@ -36,7 +36,7 @@ export interface DraggableBoxProps {
 const DraggableBox: React.FC<DraggableBoxProps> = props => {
 	const { id, title, left, top } = props
 	const item = { type: ItemTypes.BOX, id, title, left, top }
-	const [{ isDragging }, ref] = useDrag({
+	const [{ isDragging }, connect] = useDrag({
 		item,
 		// Use empty image as a drag preview so browsers don't draw it
 		// and we can draw whatever we want on the custom drag layer instead.
@@ -52,7 +52,7 @@ const DraggableBox: React.FC<DraggableBoxProps> = props => {
 	})
 
 	return (
-		<div ref={ref} style={getStyles(props, isDragging)}>
+		<div ref={node => connect(node)} style={getStyles(props, isDragging)}>
 			<Box title={title} />
 		</div>
 	)

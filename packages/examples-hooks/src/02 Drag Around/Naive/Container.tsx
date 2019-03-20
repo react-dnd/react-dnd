@@ -39,9 +39,7 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 		b: { top: 180, left: 20, title: 'Drag me too' },
 	})
 
-	const ref = React.useRef(null)
-	useDrop({
-		ref,
+	const [, connect] = useDrop({
 		accept: ItemTypes.BOX,
 		drop(item: DragItem, monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
@@ -63,7 +61,7 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 	}
 
 	return (
-		<div ref={ref} style={styles}>
+		<div ref={node => connect(node)} style={styles}>
 			{Object.keys(boxes).map(key => {
 				const { left, top, title } = boxes[key]
 				return (
