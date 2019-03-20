@@ -16,6 +16,7 @@ export default class TargetConnector implements Connector {
 			} else {
 				this.dropTargetNode = node
 			}
+			this.reconnect()
 		},
 	})
 
@@ -24,7 +25,7 @@ export default class TargetConnector implements Connector {
 	private dropTargetRef: React.RefObject<any> | null = null
 	private dropTargetNode: any
 	private dropTargetOptionsInternal: any = null
-	private disconnectDropTarget: Unsubscribe | undefined
+	private unsubscribeDropTarget: Unsubscribe | undefined
 
 	private lastConnectedHandlerId: Identifier | null = null
 	private lastConnectedDropTarget: any = null
@@ -43,19 +44,16 @@ export default class TargetConnector implements Connector {
 		}
 		// if nothing has changed then don't resubscribe
 		if (
-			this.lastConnectedHandlerId !== this.handlerId ||
-			this.lastConnectedDropTarget !== dropTarget ||
-			!shallowEqual(this.lastConnectedDropTargetOptions, this.dropTargetOptions)
+			this.didHandlerIdChange() ||
+			this.didDropTargetChange() ||
+			this.didOptionsChange()
 		) {
-			if (this.disconnectDropTarget) {
-				this.disconnectDropTarget()
-				this.disconnectDropTarget = undefined
-			}
+			this.disconnectDropTarget()
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDropTarget = dropTarget
 			this.lastConnectedDropTargetOptions = this.dropTargetOptions
 
-			this.disconnectDropTarget = this.backend.connectDropTarget(
+			this.unsubscribeDropTarget = this.backend.connectDropTarget(
 				this.handlerId,
 				dropTarget,
 				this.dropTargetOptions,
@@ -77,6 +75,28 @@ export default class TargetConnector implements Connector {
 	}
 	public set dropTargetOptions(options: any) {
 		this.dropTargetOptionsInternal = options
+	}
+
+	private didHandlerIdChange(): boolean {
+		return this.lastConnectedHandlerId !== this.handlerId
+	}
+
+	private didDropTargetChange(): boolean {
+		return this.lastConnectedDropTarget !== this.dropTarget
+	}
+
+	private didOptionsChange(): boolean {
+		return !shallowEqual(
+			this.lastConnectedDropTargetOptions,
+			this.dropTargetOptions,
+		)
+	}
+
+	private disconnectDropTarget() {
+		if (this.unsubscribeDropTarget) {
+			this.unsubscribeDropTarget()
+			this.unsubscribeDropTarget = undefined
+		}
 	}
 
 	private get dropTarget() {

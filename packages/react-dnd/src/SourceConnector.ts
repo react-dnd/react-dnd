@@ -25,6 +25,7 @@ export default class SourceConnector implements Connector {
 			} else {
 				this.dragSourceNode = node
 			}
+			this.reconnectDragSource()
 		},
 		dragPreview: (node: any, options?: DragPreviewOptions) => {
 			this.dragPreviewOptions = options || null
@@ -33,6 +34,7 @@ export default class SourceConnector implements Connector {
 			} else {
 				this.dragPreviewNode = node
 			}
+			this.reconnectDragPreview()
 		},
 	})
 	private handlerId: Identifier | null = null
@@ -41,13 +43,13 @@ export default class SourceConnector implements Connector {
 	private dragSourceRef: React.RefObject<any> | null = null
 	private dragSourceNode: any
 	private dragSourceOptionsInternal: DragSourceOptions | null = null
-	private disconnectDragSource: Unsubscribe | undefined
+	private dragSourceUnsubscribe: Unsubscribe | undefined
 
 	// The drag preview may either be attached via ref or connect function
 	private dragPreviewRef: React.RefObject<any> | null = null
 	private dragPreviewNode: any
 	private dragPreviewOptionsInternal: DragPreviewOptions | null = null
-	private disconnectDragPreview: Unsubscribe | undefined
+	private dragPreviewUnsubscribe: Unsubscribe | undefined
 
 	private lastConnectedHandlerId: Identifier | null = null
 	private lastConnectedDragSource: any = null
@@ -98,19 +100,15 @@ export default class SourceConnector implements Connector {
 
 		// if nothing has changed then don't resubscribe
 		if (
-			this.lastConnectedHandlerId !== this.handlerId ||
-			this.lastConnectedDragSource !== dragSource ||
-			!shallowEqual(this.lastConnectedDragSourceOptions, this.dragSourceOptions)
+			this.didHandlerIdChange() ||
+			this.didConnectedDragSourceChange() ||
+			this.didDragSourceOptionsChange()
 		) {
-			if (this.disconnectDragSource) {
-				this.disconnectDragSource()
-				this.disconnectDragSource = undefined
-			}
-
+			this.disconnectDragSource()
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDragSource = dragSource
 			this.lastConnectedDragSourceOptions = this.dragSourceOptions
-			this.disconnectDragSource = this.backend.connectDragSource(
+			this.dragSourceUnsubscribe = this.backend.connectDragSource(
 				this.handlerId,
 				dragSource,
 				this.dragSourceOptions,
@@ -126,25 +124,63 @@ export default class SourceConnector implements Connector {
 
 		// if nothing has changed then don't resubscribe
 		if (
-			this.lastConnectedHandlerId !== this.handlerId ||
-			this.lastConnectedDragPreview !== dragPreview ||
-			!shallowEqual(
-				this.lastConnectedDragPreviewOptions,
-				this.dragPreviewOptions,
-			)
+			this.didHandlerIdChange() ||
+			this.didConnectedDragPreviewChange() ||
+			this.didDragPreviewOptionsChange()
 		) {
-			if (this.disconnectDragPreview) {
-				this.disconnectDragPreview()
-				this.disconnectDragPreview = undefined
-			}
+			this.disconnectDragPreview()
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDragPreview = dragPreview
 			this.lastConnectedDragPreviewOptions = this.dragPreviewOptions
-			this.disconnectDragPreview = this.backend.connectDragPreview(
+			this.dragPreviewUnsubscribe = this.backend.connectDragPreview(
 				this.handlerId,
 				dragPreview,
 				this.dragPreviewOptions,
 			)
+		}
+	}
+
+	private didHandlerIdChange(): boolean {
+		return this.lastConnectedHandlerId !== this.handlerId
+	}
+
+	private didConnectedDragSourceChange(): boolean {
+		return this.lastConnectedDragSource !== this.dragSource
+	}
+
+	private didConnectedDragPreviewChange(): boolean {
+		return this.lastConnectedDragPreview !== this.dragPreview
+	}
+
+	private didDragSourceOptionsChange(): boolean {
+		return !shallowEqual(
+			this.lastConnectedDragSourceOptions,
+			this.dragSourceOptions,
+		)
+	}
+
+	private didDragPreviewOptionsChange(): boolean {
+		return !shallowEqual(
+			this.lastConnectedDragPreviewOptions,
+			this.dragPreviewOptions,
+		)
+	}
+
+	private disconnectDragSource() {
+		if (this.dragSourceUnsubscribe) {
+			this.dragSourceUnsubscribe()
+			this.dragSourceUnsubscribe = undefined
+			this.dragPreviewNode = null
+			this.dragPreviewRef = null
+		}
+	}
+
+	private disconnectDragPreview() {
+		if (this.dragPreviewUnsubscribe) {
+			this.dragPreviewUnsubscribe()
+			this.dragPreviewUnsubscribe = undefined
+			this.dragPreviewNode = null
+			this.dragPreviewRef = null
 		}
 	}
 
