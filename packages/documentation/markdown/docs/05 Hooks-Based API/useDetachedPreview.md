@@ -19,7 +19,6 @@ function DragLayerPreview(props) {
   const DragPreview = useDetachedPreview(MyRefForwardingComponent)
   const [, drag, preview] = useDrag({
     item: { id, type },
-    preview,
   })
 
   return (
