@@ -9,13 +9,13 @@ import { DragDropMonitor, DragSource } from 'dnd-core'
 import registerSource from '../../registerSource'
 import { useDragDropManager } from './useDragDropManager'
 import DragSourceMonitorImpl from '../../DragSourceMonitorImpl'
-import createSourceConnector from '../../createSourceConnector'
+import SourceConnector from '../../SourceConnector'
 const invariant = require('invariant')
 
 export function useDragSourceMonitor(): [DragSourceMonitor, any] {
 	const manager = useDragDropManager()
 	const monitor = useMemo(() => new DragSourceMonitorImpl(manager), [manager])
-	const connector = useMemo(() => createSourceConnector(manager.getBackend()), [
+	const connector = useMemo(() => new SourceConnector(manager.getBackend()), [
 		manager,
 	])
 	return [monitor, connector]

@@ -1,9 +1,12 @@
 declare var require: any
 declare var process: any
 
-import * as React from 'react'
 import { DropTarget } from 'dnd-core'
-import { DropTargetSpec, DropTargetMonitor } from './interfaces'
+import {
+	DropTargetSpec,
+	DropTargetMonitor,
+	DropTargetConnector,
+} from './interfaces'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
@@ -20,7 +23,7 @@ class TargetImpl<Props> implements Target {
 	constructor(
 		private spec: DropTargetSpec<Props>,
 		private monitor: DropTargetMonitor,
-		private ref: React.RefObject<any>,
+		private connector: DropTargetConnector,
 	) {}
 
 	public receiveProps(props: any) {
@@ -44,7 +47,11 @@ class TargetImpl<Props> implements Target {
 			return
 		}
 
-		this.spec.hover(this.props as Props, this.monitor, this.ref.current)
+		this.spec.hover(
+			this.props as Props,
+			this.monitor,
+			this.connector.dropTarget,
+		)
 	}
 
 	public drop() {
@@ -55,7 +62,7 @@ class TargetImpl<Props> implements Target {
 		const dropResult = this.spec.drop(
 			this.props as Props,
 			this.monitor,
-			this.ref.current,
+			this.connector.dropTarget,
 		)
 		if (process.env.NODE_ENV !== 'production') {
 			invariant(
@@ -96,8 +103,8 @@ export default function createTargetFactory<Props>(
 
 	return function createTarget(
 		monitor: DropTargetMonitor,
-		ref: React.RefObject<any>,
+		connector: DropTargetConnector,
 	): Target {
-		return new TargetImpl(spec, monitor, ref)
+		return new TargetImpl(spec, monitor, connector)
 	}
 }

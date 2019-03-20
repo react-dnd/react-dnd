@@ -7,13 +7,13 @@ import { useEffect, useMemo } from 'react'
 import { DropTarget } from 'dnd-core'
 import registerTarget from '../../registerTarget'
 import { useDragDropManager } from './useDragDropManager'
-import createTargetConnector from '../../createTargetConnector'
+import TargetConnector from '../../TargetConnector'
 import DropTargetMonitorImpl from '../../DropTargetMonitorImpl'
 
 export function useDropTargetMonitor(): [DropTargetMonitor, any] {
 	const manager = useDragDropManager()
 	const monitor = useMemo(() => new DropTargetMonitorImpl(manager), [manager])
-	const connector = useMemo(() => createTargetConnector(manager.getBackend()), [
+	const connector = useMemo(() => new TargetConnector(manager.getBackend()), [
 		manager,
 	])
 	return [monitor, connector]

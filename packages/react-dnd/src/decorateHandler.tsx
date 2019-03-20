@@ -10,6 +10,7 @@ import {
 	CompositeDisposable,
 	SerialDisposable,
 } from './utils/disposables'
+import { Connector } from './SourceConnector'
 const isClassComponent = require('recompose/isClassComponent').default
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
@@ -21,7 +22,7 @@ export interface DecorateHandlerArgs<Props, ItemIdType> {
 	createMonitor: (manager: DragDropManager<any>) => HandlerReceiver
 	createHandler: (
 		monitor: HandlerReceiver,
-		ref: React.RefObject<any>,
+		connector: Connector,
 	) => Handler<Props>
 	createConnector: any
 	registerHandler: any
@@ -37,12 +38,6 @@ interface HandlerReceiver {
 interface Handler<Props> {
 	ref: React.RefObject<any>
 	receiveProps(props: Props): void
-}
-
-interface HandlerConnector extends HandlerReceiver {
-	hooks: any[]
-	receiveHandlerId: (handleId: any) => void
-	reconnect: () => void
 }
 
 export default function decorateHandler<Props, ItemIdType>({
@@ -70,7 +65,7 @@ export default function decorateHandler<Props, ItemIdType>({
 		private handlerId: string | undefined
 		private manager: DragDropManager<any> | undefined
 		private handlerMonitor: HandlerReceiver | undefined
-		private handlerConnector: HandlerConnector | undefined
+		private handlerConnector: Connector | undefined
 		private handler: Handler<Props> | undefined
 		private disposable: any
 		private currentType: any
@@ -238,10 +233,9 @@ export default function decorateHandler<Props, ItemIdType>({
 				displayName,
 				displayName,
 			)
-			const itemRef = React.createRef<any>()
 			this.handlerMonitor = createMonitor(dragDropManager)
 			this.handlerConnector = createConnector(dragDropManager.getBackend())
-			this.handler = createHandler(this.handlerMonitor, itemRef)
+			this.handler = createHandler(this.handlerMonitor, this.handlerConnector!)
 		}
 	}
 
