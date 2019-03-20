@@ -242,6 +242,10 @@ export const ExamplePages: PageGroup[] = [
 	{
 		title: 'Other Cases',
 		pages: {
+			OTHER_DRAG_SOURCE_RERENDER: {
+				location: '/examples/other/drag-source-rerender',
+				title: 'Drag Source Rerender',
+			},
 			OTHER_NATIVE_FILES: {
 				location: '/examples/other/native-files',
 				title: 'Native Files',

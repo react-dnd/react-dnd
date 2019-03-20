@@ -45,7 +45,7 @@ export interface DragSourceHookSpec<
 	/**
 	 * When the dragging starts, beginDrag is called. If an object is returned from this function it will overide the default dragItem
 	 */
-	begin?: (monitor: DragSourceMonitor) => DragObject | undefined
+	begin?: (monitor: DragSourceMonitor) => DragObject | undefined | void
 
 	/**
 	 * Optional.
