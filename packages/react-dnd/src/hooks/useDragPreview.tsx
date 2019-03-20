@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useMemo, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 /**
@@ -8,12 +9,17 @@ import { createPortal } from 'react-dom'
 export function useDragPreview<Props>(
 	DragPreview: React.RefForwardingComponent<Element, Props>,
 ): [React.FC<Props>, React.RefObject<any>] {
-	const ref = React.useRef(null)
+	const ref = useRef(null)
 	// render the dragPreview into a detached element to prevent it from appearing too early
-	const dragPreviewRoot = document.createElement('div')
-	const portaledComponent = (props: Props) => {
-		return createPortal(<DragPreview ref={ref} {...props} />, dragPreviewRoot)
-	}
+	const dragPreviewRoot = useMemo(() => document.createElement('div'), [
+		DragPreview,
+	])
+	const portaledComponent = useMemo(
+		() => (props: Props) => {
+			return createPortal(<DragPreview ref={ref} {...props} />, dragPreviewRoot)
+		},
+		[DragPreview, ref],
+	)
 
 	return [portaledComponent, ref]
 }

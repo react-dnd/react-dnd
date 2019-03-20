@@ -24,17 +24,14 @@ const KnightDragPreview = React.forwardRef(
 )
 
 export const Knight: React.FC = () => {
-	const [DragPreview, preview] = useDragPreview(KnightDragPreview)
-	const [{ isDragging }, drag] = useDrag(
-		() => ({
-			item: { type: ItemTypes.KNIGHT },
-			preview,
-			collect: mon => ({
-				isDragging: !!mon.isDragging(),
-			}),
+	const [DragPreview, previewRef] = useDragPreview(KnightDragPreview)
+	const [{ isDragging }, drag, preview] = useDrag(() => ({
+		item: { type: ItemTypes.KNIGHT },
+		collect: mon => ({
+			isDragging: !!mon.isDragging(),
 		}),
-		[preview],
-	)
+	}))
+	preview(previewRef)
 
 	return (
 		<>
