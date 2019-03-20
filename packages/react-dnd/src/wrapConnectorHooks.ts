@@ -24,6 +24,8 @@ function wrapHookToRecognizeElement(hook: (node: any, options: any) => void) {
 		if (!isValidElement(elementOrNode)) {
 			const node = elementOrNode
 			hook(node, options)
+			// return the node so it can be chained (e.g. when within callback refs
+			// <div ref={node => connectDragSource(connectDropTarget(node))}/>
 			return node
 		}
 

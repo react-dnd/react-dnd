@@ -125,7 +125,7 @@ export type ConnectableElement =
 export type DragElementWrapper<Options> = (
 	elementOrNode: ConnectableElement,
 	options?: Options,
-) => ConnectableElement
+) => React.ReactElement | null
 
 export type ConnectDragSource = DragElementWrapper<DragSourceOptions>
 export type ConnectDragPreview = DragElementWrapper<DragPreviewOptions>
