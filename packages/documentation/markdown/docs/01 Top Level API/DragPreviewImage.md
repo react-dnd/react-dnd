@@ -7,9 +7,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # DragPreviewImage
 
-A Component to render an HTML `img` tag as a disconnected drag preview.
-
-Under the hood this renders an image into a detached dom node using a React portal.
+A Component to render an HTML Image element as a disconnected drag preview.
 
 ### Usage
 

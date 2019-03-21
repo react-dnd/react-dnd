@@ -1,24 +1,20 @@
 import * as React from 'react'
-import { createPortal } from 'react-dom'
 import { ConnectDragPreview } from './interfaces'
 
-interface DragPreviewImageProps
-	extends React.DetailedHTMLProps<
-		React.ImgHTMLAttributes<HTMLImageElement>,
-		HTMLImageElement
-	> {
+interface DragPreviewImageProps {
 	connect: ConnectDragPreview
+	src: string
 }
 /*
- * A utility for rendering a component into a detached portal.
- * NOTE: Drag previews should just be image elements
+ * A utility for rendering a drag preview image
  */
-const DragPreviewImage: React.FC<DragPreviewImageProps> = ({
-	connect,
-	...props
-}) => {
-	const root = document.createElement('div')
-	return createPortal(<img ref={connect} {...props} />, root)
-}
+const DragPreviewImage: React.FC<DragPreviewImageProps> = React.memo(
+	({ connect, src }) => {
+		const img = new Image()
+		img.src = src
+		img.onload = () => connect(img)
+		return null
+	},
+)
 
 export default DragPreviewImage
