@@ -1,5 +1,8 @@
-import * as React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import React, { useRef } from 'react'
+import {
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
+	DropTargetMonitor,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
 
@@ -23,12 +26,16 @@ export interface CardProps {
 	moveCard: (dragIndex: number, hoverIndex: number) => void
 }
 
+interface DragItem {
+	index: number
+	id: string
+	type: string
+}
 const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
-	const ref = React.useRef<HTMLDivElement>(null)
-	useDrop({
-		ref,
+	const ref = useRef<HTMLDivElement>(null)
+	const [, drop] = useDrop({
 		accept: ItemTypes.CARD,
-		hover(item: { index: number }, monitor) {
+		hover(item: DragItem, monitor: DropTargetMonitor) {
 			if (!ref.current) {
 				return
 			}
@@ -78,15 +85,15 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 		},
 	})
 
-	const [{ isDragging }] = useDrag({
-		ref,
+	const [{ isDragging }, drag] = useDrag({
 		item: { type: ItemTypes.CARD, id, index },
-		collect: monitor => ({
+		collect: (monitor: any) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
 
 	const opacity = isDragging ? 0 : 1
+	drag(drop(ref))
 	return (
 		<div ref={ref} style={{ ...style, opacity }}>
 			{text}

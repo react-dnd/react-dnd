@@ -19,7 +19,7 @@ const style: React.CSSProperties = {
 }
 
 const Dustbin: React.FC = () => {
-	const [{ isOver, canDrop }, ref] = useDrop({
+	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop: () => ({ name: 'Dustbin' }),
 		collect: monitor => ({
@@ -37,7 +37,7 @@ const Dustbin: React.FC = () => {
 	}
 
 	return (
-		<div ref={ref} style={{ ...style, backgroundColor }}>
+		<div ref={drop} style={{ ...style, backgroundColor }}>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>
 	)

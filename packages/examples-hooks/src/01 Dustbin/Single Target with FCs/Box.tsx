@@ -24,7 +24,7 @@ export interface BoxProps {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
-	const [{ opacity }, ref] = useDrag({
+	const [{ opacity }, drag] = useDrag({
 		item,
 		end: (dropResult?: { name: string }) => {
 			if (dropResult) {
@@ -37,7 +37,7 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 	})
 
 	return (
-		<div ref={ref as any} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }}>
 			{name}
 		</div>
 	)

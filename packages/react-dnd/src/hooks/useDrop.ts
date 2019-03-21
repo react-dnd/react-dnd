@@ -1,43 +1,44 @@
 declare var require: any
-import { useEffect, useRef } from 'react'
-import { DropTargetHookSpec } from '../interfaces'
-import { useDragDropManager } from './internal/useDragDropManager'
-import { useDropTargetMonitor } from './internal/useDropTargetMonitor'
+import {
+	DropTargetHookSpec,
+	ConnectDropTarget,
+	DragObjectWithType,
+} from '../interfaces'
 import { useMonitorOutput } from './internal/useMonitorOutput'
+import { useDropHandler, useDropTargetMonitor } from './internal/drop'
+import { useEffect, useRef, useMemo } from 'react'
 const invariant = require('invariant')
 
 /**
  * useDropTarget Hook (This API is experimental and subject to breaking changes in non-breaking versions)
  * @param spec The drop target specification
  */
-export function useDrop<DragObject, DropResult, CollectedProps>(
+export function useDrop<
+	DragObject extends DragObjectWithType,
+	DropResult,
+	CollectedProps
+>(
 	spec: DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
-): [CollectedProps, React.RefObject<any>] {
-	const { accept, options, collect } = spec
-	invariant(accept != null, 'accept must be defined')
-	let { ref } = spec
-	if (!ref) {
-		ref = useRef(null)
-	}
+): [CollectedProps, ConnectDropTarget] {
+	const specRef = useRef(spec)
+	invariant(spec.accept != null, 'accept must be defined')
 
-	const manager = useDragDropManager()
-	const backend = manager.getBackend()
-	const monitor = useDropTargetMonitor(manager, spec)
+	const [monitor, connector] = useDropTargetMonitor()
+	useDropHandler(specRef, monitor, connector)
 
-	/*
-	 * Connect the Drop Target Element to the Backend
-	 */
-	useEffect(function connectDropTarget() {
-		if (ref!.current) {
-			const node = ref!.current
-			if (node) {
-				return backend.connectDropTarget(monitor.getHandlerId(), node, options)
-			}
-		}
-	})
+	const result: CollectedProps = useMonitorOutput(
+		monitor,
+		specRef.current.collect || (() => ({} as CollectedProps)),
+		() => connector.reconnect(),
+	)
 
-	const result: CollectedProps & { ref: React.RefObject<Element> } = collect
-		? (useMonitorOutput(monitor as any, collect as any) as any)
-		: (({} as CollectedProps) as any)
-	return [result, ref]
+	const connectDropTarget = useMemo(() => connector.hooks.dropTarget(), [
+		connector,
+	])
+
+	useEffect(() => {
+		connector.dropTargetOptions = spec.options || null
+		connector.reconnect()
+	}, [spec.options])
+	return [result, connectDropTarget]
 }

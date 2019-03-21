@@ -66,12 +66,11 @@ const Container: React.FC = () => {
 		}
 	}
 
-	const ref = React.useRef(null)
-	useDrop({ ref, accept: ItemTypes.CARD })
+	const [, drop] = useDrop({ accept: ItemTypes.CARD })
 	return (
 		<>
 			<h1>EXPERIMENTAL API</h1>
-			<div ref={ref} style={style}>
+			<div ref={drop} style={style}>
 				{cards.map(card => (
 					<Card
 						key={card.id}

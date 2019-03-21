@@ -1,6 +1,5 @@
 import { TargetType, SourceType } from 'dnd-core'
 import { DropTargetMonitor, DragSourceMonitor } from './monitors'
-import { RefObject } from 'react'
 import { DragSourceOptions, DragPreviewOptions } from './options'
 
 export interface DragSourceHookSpec<
@@ -8,12 +7,6 @@ export interface DragSourceHookSpec<
 	DropResult,
 	CollectedProps
 > {
-	/**
-	 * The ref object to associated with this dragged itom. If this is not specified it will be
-	 * returned in the `ref` field of the result object.
-	 */
-	ref?: RefObject<any>
-
 	/**
 	 * A plain javascript item describing the data being dragged.
 	 * This is the only information available to the drop targets about the drag
@@ -33,11 +26,6 @@ export interface DragSourceHookSpec<
 	options?: DragSourceOptions
 
 	/**
-	 * An optional dragPreview
-	 */
-	preview?: RefObject<any> | Element
-
-	/**
 	 * DragPreview options
 	 */
 	previewOptions?: DragPreviewOptions
@@ -45,7 +33,7 @@ export interface DragSourceHookSpec<
 	/**
 	 * When the dragging starts, beginDrag is called. If an object is returned from this function it will overide the default dragItem
 	 */
-	begin?: (monitor: DragSourceMonitor) => DragObject | undefined
+	begin?: (monitor: DragSourceMonitor) => DragObject | undefined | void
 
 	/**
 	 * Optional.
@@ -87,12 +75,6 @@ export interface DragSourceHookSpec<
  * Interface for the DropTarget specification object
  */
 export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
-	/**
-	 * The ref object to associated with this dragged itom. If this is not specified it will be
-	 * returned in the `ref` field of the result object.
-	 */
-	ref?: RefObject<any>
-
 	/**
 	 * The kinds of dragItems this dropTarget accepts
 	 */

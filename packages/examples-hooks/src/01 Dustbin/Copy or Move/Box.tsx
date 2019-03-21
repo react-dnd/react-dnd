@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import ItemTypes from '../Single Target/ItemTypes'
 
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
@@ -27,7 +27,7 @@ interface DropResult {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
-	const [{ opacity }, ref] = useDrag({
+	const [{ opacity }, drag] = useDrag({
 		item,
 		end(dropResult?: DropResult) {
 			if (dropResult) {
@@ -50,13 +50,13 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 				alert(alertMessage)
 			}
 		},
-		collect: monitor => ({
+		collect: (monitor: any) => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
 	})
 
 	return (
-		<div ref={ref} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }}>
 			{name}
 		</div>
 	)
