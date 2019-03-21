@@ -116,19 +116,20 @@ export interface DragSourceSpec<Props, DragObject> {
 	isDragging?: (props: Props, monitor: DragSourceMonitor) => boolean
 }
 
-export type ConnectedElement =
+export type ConnectableElement =
 	| React.RefObject<any>
 	| React.ReactElement
 	| Element
 	| null
 
-export type DragElementWrapper<Options> = <Props>(
-	elementOrNode: ConnectedElement,
+export type DragElementWrapper<Options> = (
+	elementOrNode: ConnectableElement,
 	options?: Options,
-) => React.ReactElement<Props>
+) => React.ReactElement | null
 
 export type ConnectDragSource = DragElementWrapper<DragSourceOptions>
 export type ConnectDragPreview = DragElementWrapper<DragPreviewOptions>
+export type ConnectDropTarget = DragElementWrapper<any>
 
 /**
  * DragSourceConnector is an object passed to a collecting function of the DragSource.
@@ -169,10 +170,6 @@ export interface DropTargetConnector {
 	 */
 	dropTarget(): ConnectDropTarget
 }
-
-export type ConnectDropTarget = <Props>(
-	elementOrNode: ConnectedElement,
-) => React.ReactElement<Props>
 
 export type DragSourceCollector<CollectedProps> = (
 	connect: DragSourceConnector,

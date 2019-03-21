@@ -44,9 +44,7 @@ const Container: React.FC<ContainerProps> = props => {
 		)
 	}
 
-	const ref = React.useRef(null)
-	useDrop({
-		ref,
+	const [, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop(item: DragItem, monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as {
@@ -66,7 +64,7 @@ const Container: React.FC<ContainerProps> = props => {
 	})
 
 	return (
-		<div ref={ref} style={styles}>
+		<div ref={drop} style={styles}>
 			{Object.keys(boxes).map(key => renderBox(boxes[key], key))}
 		</div>
 	)

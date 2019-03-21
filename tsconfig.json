@@ -3,6 +3,7 @@
 	"compilerOptions": {
 		"noEmit": true,
 		"baseUrl": ".",
+		"allowSyntheticDefaultImports": true,
 		"paths": {
 			"dnd-core": ["packages/dnd-core/src/index"],
 			"dnd-core/*": ["packages/dnd-core/src/*"],

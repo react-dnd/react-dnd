@@ -60,6 +60,10 @@ export const APIPages: PageGroup[] = [
 				location: '/docs/api/drag-layer',
 				title: 'DragLayer',
 			},
+			DRAG_PREVIEW_IMAGE: {
+				location: '/docs/api/drag-preview-image',
+				title: 'DragPreviewImage',
+			},
 			DRAG_DROP_CONTEXT: {
 				location: '/docs/api/drag-drop-context',
 				title: 'DragDropContext',
@@ -242,6 +246,10 @@ export const ExamplePages: PageGroup[] = [
 	{
 		title: 'Other Cases',
 		pages: {
+			OTHER_DRAG_SOURCE_RERENDER: {
+				location: '/examples/other/drag-source-rerender',
+				title: 'Drag Source Rerender',
+			},
 			OTHER_NATIVE_FILES: {
 				location: '/examples/other/native-files',
 				title: 'Native Files',

@@ -4,6 +4,9 @@ const intersection = require('lodash/intersection')
 
 export const NONE: string[] = []
 export const ALL: string[] = []
+	// Add these flags for debug
+;(NONE as any).__IS_NONE__ = true
+;(ALL as any).__IS_ALL__ = true
 
 /**
  * Determines if the given handler IDs are dirty or not.
@@ -23,5 +26,6 @@ export function areDirty(
 		return true
 	}
 
-	return intersection(handlerIds, dirtyIds).length > 0
+	const commonIds = intersection(handlerIds, dirtyIds)
+	return commonIds.length > 0
 }
