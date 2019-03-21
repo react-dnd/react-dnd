@@ -1,11 +1,13 @@
 import * as React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import {
+	DragPreviewImage,
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import boxImage from './boxImage'
 
 const {
 	useDrag,
-	useDetachedPreview,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
@@ -17,15 +19,7 @@ const style = {
 	width: '20rem',
 }
 
-const BoxImage = React.forwardRef((props, ref: React.Ref<HTMLImageElement>) => {
-	if (typeof Image === 'undefined') {
-		return null
-	}
-	return <img ref={ref} src={boxImage} />
-})
-
 const BoxWithImage: React.FC = () => {
-	const DragPreview = useDetachedPreview(BoxImage)
 	const [{ opacity }, drag, preview] = useDrag({
 		item: { type: ItemTypes.BOX },
 		collect: monitor => ({
@@ -35,7 +29,7 @@ const BoxWithImage: React.FC = () => {
 
 	return (
 		<>
-			<DragPreview previewRef={preview} />
+			<DragPreviewImage connect={preview} src={boxImage} />
 			<div ref={drag} style={{ ...style, opacity }}>
 				Drag me to see an image
 			</div>
