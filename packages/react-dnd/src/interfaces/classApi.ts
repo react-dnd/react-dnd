@@ -171,14 +171,16 @@ export interface DropTargetConnector {
 	dropTarget(): ConnectDropTarget
 }
 
-export type DragSourceCollector<CollectedProps> = (
+export type DragSourceCollector<CollectedProps, TargetProps> = (
 	connect: DragSourceConnector,
 	monitor: DragSourceMonitor,
+	props: TargetProps,
 ) => CollectedProps
 
-export type DropTargetCollector<CollectedProps> = (
+export type DropTargetCollector<CollectedProps, TargetProps> = (
 	connect: DropTargetConnector,
 	monitor: DropTargetMonitor,
+	props: TargetProps,
 ) => CollectedProps
 
 export type DragLayerCollector<TargetProps, CollectedProps> = (
