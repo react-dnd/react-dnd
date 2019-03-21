@@ -10,7 +10,6 @@ import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { ContextComponent } from './interfaces'
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
-const isClassComponent = require('recompose/isClassComponent').default
 /**
  * The React context type
  */
@@ -103,10 +102,8 @@ export function DragDropContext(
 			public render() {
 				return (
 					<Provider value={childContext}>
-						<Decorated
-							{...this.props}
-							ref={isClassComponent(Decorated) ? this.ref : undefined}
-						/>
+						{/* If decorated is an FC, then the reff will be blank */}
+						<Decorated {...this.props} ref={this.ref} />
 					</Provider>
 				)
 			}

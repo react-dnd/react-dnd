@@ -11,7 +11,6 @@ import {
 	SerialDisposable,
 } from './utils/disposables'
 import { Connector } from './SourceConnector'
-const isClassComponent = require('recompose/isClassComponent').default
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
@@ -22,7 +21,7 @@ export interface DecorateHandlerArgs<Props, ItemIdType> {
 	createMonitor: (manager: DragDropManager<any>) => HandlerReceiver
 	createHandler: (
 		monitor: HandlerReceiver,
-		connector: Connector,
+		ref: React.RefObject<any>,
 	) => Handler<Props>
 	createConnector: any
 	registerHandler: any
@@ -62,6 +61,7 @@ export default function decorateHandler<Props, ItemIdType>({
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 
+		private decoratedRef = React.createRef()
 		private handlerId: string | undefined
 		private manager: DragDropManager<any> | undefined
 		private handlerMonitor: HandlerReceiver | undefined
@@ -82,10 +82,11 @@ export default function decorateHandler<Props, ItemIdType>({
 		}
 
 		public getDecoratedComponentInstance() {
-			if (!this.handler) {
-				return null
-			}
-			return this.handler.ref.current as any
+			invariant(
+				this.decoratedRef.current,
+				'In order to access an instance of the decorated component it can not be a stateless component.',
+			)
+			return this.decoratedRef.current as any
 		}
 
 		public shouldComponentUpdate(nextProps: any, nextState: any) {
@@ -203,16 +204,12 @@ export default function decorateHandler<Props, ItemIdType>({
 						}
 						this.receiveDragDropManager(dragDropManager)
 						requestAnimationFrame(() => this.handlerConnector!.reconnect())
-
 						return (
 							<Decorated
 								{...this.props}
 								{...this.getCurrentState()}
-								ref={
-									this.handler && isClassComponent(Decorated)
-										? this.handler.ref
-										: undefined
-								}
+								// NOTE: if Decorated is a Function Component, decoratedRef will not be populated unless it's a refforwarding component.
+								ref={this.decoratedRef}
 							/>
 						)
 					}}
@@ -235,7 +232,7 @@ export default function decorateHandler<Props, ItemIdType>({
 			)
 			this.handlerMonitor = createMonitor(dragDropManager)
 			this.handlerConnector = createConnector(dragDropManager.getBackend())
-			this.handler = createHandler(this.handlerMonitor, this.handlerConnector!)
+			this.handler = createHandler(this.handlerMonitor, this.decoratedRef)
 		}
 	}
 

@@ -1,9 +1,8 @@
 declare var require: any
 declare var process: any
-
+import * as React from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
-import SourceConnector from './SourceConnector'
 
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
@@ -21,10 +20,10 @@ class SourceImpl<Props> implements Source {
 	constructor(
 		private spec: DragSourceSpec<Props, any>,
 		private monitor: DragSourceMonitor,
-		private connector: SourceConnector,
+		private ref: React.RefObject<any>,
 	) {}
 
-	public receiveProps(props: any) {
+	public receiveProps(props: Props) {
 		this.props = props
 	}
 
@@ -55,11 +54,7 @@ class SourceImpl<Props> implements Source {
 			return
 		}
 
-		const item = this.spec.beginDrag(
-			this.props,
-			this.monitor,
-			this.connector.connectTarget,
-		)
+		const item = this.spec.beginDrag(this.props, this.monitor, this.ref.current)
 		if (process.env.NODE_ENV !== 'production') {
 			invariant(
 				isPlainObject(item),
@@ -80,7 +75,7 @@ class SourceImpl<Props> implements Source {
 			return
 		}
 
-		this.spec.endDrag(this.props, this.monitor, this.connector.connectTarget)
+		this.spec.endDrag(this.props, this.monitor, this.ref.current)
 	}
 }
 
@@ -121,8 +116,8 @@ export default function createSourceFactory<Props, DragObject = {}>(
 
 	return function createSource(
 		monitor: DragSourceMonitor,
-		connector: SourceConnector,
+		ref: React.RefObject<any>,
 	) {
-		return new SourceImpl(spec, monitor, connector) as Source
+		return new SourceImpl(spec, monitor, ref) as Source
 	}
 }
