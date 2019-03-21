@@ -27,7 +27,7 @@ const isPlainObject = require('lodash/isPlainObject')
 export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 	type: SourceType | ((props: Props) => SourceType),
 	spec: DragSourceSpec<Props, DragObject>,
-	collect: DragSourceCollector<CollectedProps>,
+	collect: DragSourceCollector<CollectedProps, Props>,
 	options: DndOptions<Props> = {},
 ) {
 	checkDecoratorArguments(

@@ -178,6 +178,7 @@ export default function decorateHandler<Props, ItemIdType>({
 			const nextState = collect(
 				this.handlerConnector.hooks,
 				this.handlerMonitor,
+				this.props,
 			)
 
 			if (process.env.NODE_ENV !== 'production') {

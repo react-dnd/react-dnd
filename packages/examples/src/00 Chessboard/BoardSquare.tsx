@@ -32,7 +32,7 @@ const squareTarget = {
 	},
 }
 
-const collect: DropTargetCollector<CollectedProps> = (
+const collect: DropTargetCollector<CollectedProps, BoardSquareProps> = (
 	connect: DropTargetConnector,
 	monitor: DropTargetMonitor,
 ) => {

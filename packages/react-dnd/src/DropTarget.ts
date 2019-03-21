@@ -20,7 +20,7 @@ const isPlainObject = require('lodash/isPlainObject')
 export default function DropTarget<Props, CollectedProps = {}>(
 	type: TargetType | ((props: Props) => TargetType),
 	spec: DropTargetSpec<Props>,
-	collect: DropTargetCollector<CollectedProps>,
+	collect: DropTargetCollector<CollectedProps, Props>,
 	options: DndOptions<Props> = {},
 ) {
 	checkDecoratorArguments(
