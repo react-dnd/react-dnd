@@ -8,7 +8,6 @@ const hoistStatics = require('hoist-non-react-statics')
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const shallowEqual = require('shallowequal')
-const isClassComponent = require('recompose/isClassComponent').default
 
 export default function DragLayer<Props, CollectedProps = {}>(
 	collect: DragLayerCollector<Props, CollectedProps>,
@@ -91,11 +90,7 @@ export default function DragLayer<Props, CollectedProps = {}>(
 							}
 
 							return (
-								<Decorated
-									{...this.props}
-									{...this.state}
-									ref={isClassComponent(Decorated) ? this.ref : undefined}
-								/>
+								<Decorated {...this.props} {...this.state} ref={this.ref} />
 							)
 						}}
 					</Consumer>

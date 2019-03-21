@@ -12,7 +12,7 @@ import decorateHandler from './decorateHandler'
 import registerSource from './registerSource'
 import createSourceFactory from './createSourceFactory'
 import DragSourceMonitorImpl from './DragSourceMonitorImpl'
-import createSourceConnector from './createSourceConnector'
+import SourceConnector from './SourceConnector'
 import isValidType from './utils/isValidType'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
@@ -84,9 +84,9 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 			containerDisplayName: 'DragSource',
 			createHandler: createSource as any,
 			registerHandler: registerSource,
+			createConnector: (backend: any) => new SourceConnector(backend),
 			createMonitor: (manager: DragDropManager<any>) =>
 				new DragSourceMonitorImpl(manager),
-			createConnector: createSourceConnector,
 			DecoratedComponent,
 			getType,
 			collect,

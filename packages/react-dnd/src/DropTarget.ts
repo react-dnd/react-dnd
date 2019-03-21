@@ -11,9 +11,9 @@ import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
 import registerTarget from './registerTarget'
 import createTargetFactory from './createTargetFactory'
-import createTargetConnector from './createTargetConnector'
 import isValidType from './utils/isValidType'
 import DropTargetMonitorImpl from './DropTargetMonitorImpl'
+import TargetConnector from './TargetConnector'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
@@ -79,7 +79,7 @@ export default function DropTarget<Props, CollectedProps = {}>(
 			registerHandler: registerTarget,
 			createMonitor: (manager: DragDropManager<any>) =>
 				new DropTargetMonitorImpl(manager),
-			createConnector: createTargetConnector,
+			createConnector: (backend: any) => new TargetConnector(backend),
 			DecoratedComponent,
 			getType,
 			collect,

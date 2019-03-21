@@ -1,11 +1,11 @@
-import { Identifier, XYCoord } from 'dnd-core'
+import { Identifier, XYCoord, Unsubscribe } from 'dnd-core'
 
 export interface HandlerManager {
 	receiveHandlerId: (handlerId: Identifier | null) => void
 	getHandlerId: () => Identifier | null
 }
 
-export interface DragSourceMonitor extends HandlerManager {
+export interface DragSourceMonitor extends HandlerManager, MonitorEventEmitter {
 	/**
 	 * Returns true if no drag operation is in progress, and the owner's canDrag() returns true or is not defined.
 	 */
@@ -69,7 +69,14 @@ export interface DragSourceMonitor extends HandlerManager {
 	getSourceClientOffset(): XYCoord | null
 }
 
-export interface DropTargetMonitor extends HandlerManager {
+export interface MonitorEventEmitter {
+	subscribeToStateChange(
+		fn: () => void,
+		options?: { handlerIds?: Identifier[] },
+	): Unsubscribe
+}
+
+export interface DropTargetMonitor extends HandlerManager, MonitorEventEmitter {
 	/**
 	 * Returns true if there is a drag operation in progress, and the owner's canDrop() returns true or is not defined.
 	 */

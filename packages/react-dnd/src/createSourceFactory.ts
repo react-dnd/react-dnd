@@ -1,6 +1,5 @@
 declare var require: any
 declare var process: any
-
 import * as React from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
@@ -24,7 +23,7 @@ class SourceImpl<Props> implements Source {
 		private ref: React.RefObject<any>,
 	) {}
 
-	public receiveProps(props: any) {
+	public receiveProps(props: Props) {
 		this.props = props
 	}
 

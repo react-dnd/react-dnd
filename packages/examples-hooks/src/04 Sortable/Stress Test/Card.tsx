@@ -21,26 +21,27 @@ export interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
-	const [{ isDragging }, ref] = useDrag({
+	const ref = React.useRef(null)
+	const [{ isDragging }, connectDrag] = useDrag({
 		item: { id, type: ItemTypes.CARD },
-		collect: monitor => ({
+		collect: (monitor: any) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
 
-	useDrop({
-		ref,
+	const [, connectDrop] = useDrop({
 		accept: ItemTypes.CARD,
-		hover({ id: draggedId }: { id: string }) {
+		hover({ id: draggedId }: { id: string; type: string }) {
 			if (draggedId !== id) {
 				moveCard(draggedId, id)
 			}
 		},
 	})
 
+	connectDrag(ref)
+	connectDrop(ref)
 	const opacity = isDragging ? 0 : 1
 	const containerStyle = React.useMemo(() => ({ ...style, opacity }), [opacity])
-
 	return (
 		<div ref={ref} style={containerStyle}>
 			{text}

@@ -23,11 +23,11 @@ class TargetImpl<Props> implements Target {
 		private ref: React.RefObject<any>,
 	) {}
 
-	public receiveProps(props: any) {
+	public receiveProps(props: Props) {
 		this.props = props
 	}
 
-	public receiveMonitor(monitor: any) {
+	public receiveMonitor(monitor: DropTargetMonitor) {
 		this.monitor = monitor
 	}
 
