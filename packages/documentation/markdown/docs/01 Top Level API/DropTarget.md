@@ -77,6 +77,8 @@ If you're new to these concepts, the [overview](/docs/overview) should give you 
 
 - **`monitor`**: An instance of [`DropTargetMonitor`](/docs/api/drop-target-monitor). It is precisely the same `monitor` you receive in the drop target specification methods, and you can use it to query the information about the current drag state. Read the [`DropTargetMonitor` documentation](/docs/api/drop-target-monitor) for a complete list of `monitor` methods, or read the [overview](/docs/overview) for an introduction to the monitors.
 
+-**`props`**: The component's current props
+
 ### Return Value
 
 `DropTarget` wraps your component and returns another React component.  
