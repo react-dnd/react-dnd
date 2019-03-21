@@ -44,7 +44,7 @@ const Container: React.FC<ContainerProps> = props => {
 		)
 	}
 
-	const [, drop] = useDrop(() => ({
+	const [, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop(item: DragItem, monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as {
@@ -61,7 +61,7 @@ const Container: React.FC<ContainerProps> = props => {
 			moveBox(item.id, left, top)
 			return undefined
 		},
-	}))
+	})
 
 	return (
 		<div ref={drop} style={styles}>

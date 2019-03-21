@@ -33,7 +33,7 @@ interface DragItem {
 }
 const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 	const ref = useRef<HTMLDivElement>(null)
-	const [, drop] = useDrop(() => ({
+	const [, drop] = useDrop({
 		accept: ItemTypes.CARD,
 		hover(item: DragItem, monitor: DropTargetMonitor) {
 			if (!ref.current) {
@@ -83,17 +83,14 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 			// to avoid expensive index searches.
 			item.index = hoverIndex
 		},
-	}))
+	})
 
-	const [{ isDragging }, drag] = useDrag(
-		() => ({
-			item: { type: ItemTypes.CARD, id, index },
-			collect: (monitor: any) => ({
-				isDragging: monitor.isDragging(),
-			}),
+	const [{ isDragging }, drag] = useDrag({
+		item: { type: ItemTypes.CARD, id, index },
+		collect: (monitor: any) => ({
+			isDragging: monitor.isDragging(),
 		}),
-		[index],
-	)
+	})
 
 	const opacity = isDragging ? 0 : 1
 	drag(drop(ref))

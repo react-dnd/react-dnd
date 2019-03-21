@@ -11,7 +11,8 @@ const {
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 function getStyles(
-	{ left, top }: DraggableBoxProps,
+	left: number,
+	top: number,
 	isDragging: boolean,
 ): React.CSSProperties {
 	const transform = `translate3d(${left}px, ${top}px, 0)`
@@ -35,26 +36,21 @@ export interface DraggableBoxProps {
 
 const DraggableBox: React.FC<DraggableBoxProps> = props => {
 	const { id, title, left, top } = props
-	const [{ isDragging }, drag] = useDrag(
-		() => ({
-			item: { type: ItemTypes.BOX, id, title, left, top },
-			// Use empty image as a drag preview so browsers don't draw it
-			// and we can draw whatever we want on the custom drag layer instead.
-			preview: getEmptyImage(),
-			previewOptions: {
-				// IE fallback: specify that we'd rather screenshot the node
-				// when it already knows it's being dragged so we can hide it with CSS.
-				captureDraggingState: true,
-			},
-			collect: (monitor: DragSourceMonitor) => ({
-				isDragging: monitor.isDragging(),
-			}),
+	const [{ isDragging }, drag, preview] = useDrag({
+		item: { type: ItemTypes.BOX, id },
+		previewOptions: {
+			// IE fallback: specify that we'd rather screenshot the node
+			// when it already knows it's being dragged so we can hide it with CSS.
+			captureDraggingState: true,
+		},
+		collect: (monitor: DragSourceMonitor) => ({
+			isDragging: monitor.isDragging(),
 		}),
-		[id, title, left, top],
-	)
+	})
 
+	preview(getEmptyImage())
 	return (
-		<div ref={drag} style={getStyles(props, isDragging)}>
+		<div ref={drag} style={getStyles(left, top, isDragging)}>
 			<Box title={title} />
 		</div>
 	)

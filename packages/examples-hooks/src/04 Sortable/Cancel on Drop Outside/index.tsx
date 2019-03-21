@@ -66,7 +66,7 @@ const Container: React.FC = () => {
 		}
 	}
 
-	const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }))
+	const [, drop] = useDrop({ accept: ItemTypes.CARD })
 	return (
 		<>
 			<h1>EXPERIMENTAL API</h1>

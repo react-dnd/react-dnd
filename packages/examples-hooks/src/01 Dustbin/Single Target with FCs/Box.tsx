@@ -24,20 +24,17 @@ export interface BoxProps {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
-	const [{ opacity }, drag] = useDrag(
-		() => ({
-			item,
-			end: (dropResult?: { name: string }) => {
-				if (dropResult) {
-					alert(`You dropped ${item.name} into ${dropResult.name}!`)
-				}
-			},
-			collect: (monitor: DragSourceMonitor) => ({
-				opacity: monitor.isDragging() ? 0.4 : 1,
-			}),
+	const [{ opacity }, drag] = useDrag({
+		item,
+		end: (dropResult?: { name: string }) => {
+			if (dropResult) {
+				alert(`You dropped ${item.name} into ${dropResult.name}!`)
+			}
+		},
+		collect: (monitor: DragSourceMonitor) => ({
+			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
-		[],
-	)
+	})
 
 	return (
 		<div ref={drag} style={{ ...style, opacity }}>

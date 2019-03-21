@@ -16,8 +16,8 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDrop } = dnd
 
 function myDropTarget(props) {
-  const [collectedProps, drop] = useDrop(() => {
-    accept
+  const [collectedProps, drop] = useDrop({
+    accept,
   })
 
   return <div ref={drop}>Drop Target</div>
@@ -26,7 +26,7 @@ function myDropTarget(props) {
 
 #### Parameters
 
-- **`spec`** A function returning a specification object, see below for details on how to construct this
+- **`spec`** A specification object, see below for details on how to construct this
 - **`memoization parameters`** - values to use when rebuilding the memoized specification
 
 #### Return Value Array

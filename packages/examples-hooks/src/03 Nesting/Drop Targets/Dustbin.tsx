@@ -34,7 +34,7 @@ const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
 	const [hasDropped, setHasDropped] = React.useState(false)
 	const [hasDroppedOnChild, setHasDroppedOnChild] = React.useState(false)
 
-	const [{ isOver, isOverCurrent }, drop] = useDrop(() => ({
+	const [{ isOver, isOverCurrent }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop(item, monitor) {
 			const didDrop = monitor.didDrop()
@@ -48,7 +48,7 @@ const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
 			isOver: monitor.isOver(),
 			isOverCurrent: monitor.isOver({ shallow: true }),
 		}),
-	}))
+	})
 
 	const text = greedy ? 'greedy' : 'not greedy'
 	let backgroundColor = 'rgba(0, 0, 0, .5)'

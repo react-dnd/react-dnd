@@ -1,5 +1,5 @@
 declare var require: any
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, MutableRefObject } from 'react'
 import {
 	DragSourceHookSpec,
 	DragObjectWithType,
@@ -26,7 +26,9 @@ export function useDragHandler<
 	DropResult,
 	CustomProps
 >(
-	spec: DragSourceHookSpec<DragObject, DropResult, CustomProps>,
+	spec: MutableRefObject<
+		DragSourceHookSpec<DragObject, DropResult, CustomProps>
+	>,
 	monitor: DragSourceMonitor,
 	connector: any,
 ) {
@@ -34,10 +36,9 @@ export function useDragHandler<
 
 	// Can't use createSourceFactory, as semantics are different
 	const handler = useMemo(() => {
-		// console.log('create handler')
 		return {
 			beginDrag() {
-				const { begin, item } = spec
+				const { begin, item } = spec.current
 				if (begin) {
 					const beginResult = begin(monitor)
 					invariant(
@@ -49,17 +50,17 @@ export function useDragHandler<
 				return item || {}
 			},
 			canDrag() {
-				const { canDrag } = spec
+				const { canDrag } = spec.current
 				return canDrag ? canDrag(monitor) : true
 			},
 			isDragging(globalMonitor: DragDropMonitor, target) {
-				const { isDragging } = spec
+				const { isDragging } = spec.current
 				return isDragging
 					? isDragging(monitor)
 					: target === globalMonitor.getSourceId()
 			},
 			endDrag() {
-				const { end } = spec
+				const { end } = spec.current
 				if (end) {
 					end(monitor.getItem(), monitor)
 				}
@@ -71,7 +72,7 @@ export function useDragHandler<
 	useEffect(function registerHandler() {
 		// console.log('Register Handler')
 		const [handlerId, unregister] = registerSource(
-			spec.item.type,
+			spec.current.item.type,
 			handler,
 			manager,
 		)

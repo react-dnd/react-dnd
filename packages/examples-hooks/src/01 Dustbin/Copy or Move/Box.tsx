@@ -27,36 +27,33 @@ interface DropResult {
 
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
-	const [{ opacity }, drag] = useDrag(
-		() => ({
-			item,
-			end(dropResult?: DropResult) {
-				if (dropResult) {
-					let alertMessage = ''
-					const isDropAllowed =
-						dropResult.allowedDropEffect === 'any' ||
-						dropResult.allowedDropEffect === dropResult.dropEffect
+	const [{ opacity }, drag] = useDrag({
+		item,
+		end(dropResult?: DropResult) {
+			if (dropResult) {
+				let alertMessage = ''
+				const isDropAllowed =
+					dropResult.allowedDropEffect === 'any' ||
+					dropResult.allowedDropEffect === dropResult.dropEffect
 
-					if (isDropAllowed) {
-						const isCopyAction = dropResult.dropEffect === 'copy'
-						const actionName = isCopyAction ? 'copied' : 'moved'
-						alertMessage = `You ${actionName} ${item.name} into ${
-							dropResult.name
-						}!`
-					} else {
-						alertMessage = `You cannot ${
-							dropResult.dropEffect
-						} an item into the ${dropResult.name}`
-					}
-					alert(alertMessage)
+				if (isDropAllowed) {
+					const isCopyAction = dropResult.dropEffect === 'copy'
+					const actionName = isCopyAction ? 'copied' : 'moved'
+					alertMessage = `You ${actionName} ${item.name} into ${
+						dropResult.name
+					}!`
+				} else {
+					alertMessage = `You cannot ${
+						dropResult.dropEffect
+					} an item into the ${dropResult.name}`
 				}
-			},
-			collect: (monitor: any) => ({
-				opacity: monitor.isDragging() ? 0.4 : 1,
-			}),
+				alert(alertMessage)
+			}
+		},
+		collect: (monitor: any) => ({
+			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
-		[name],
-	)
+	})
 
 	return (
 		<div ref={drag} style={{ ...style, opacity }}>

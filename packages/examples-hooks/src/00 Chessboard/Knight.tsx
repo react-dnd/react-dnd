@@ -25,12 +25,12 @@ const KnightDragPreview = React.forwardRef(
 
 export const Knight: React.FC = () => {
 	const DragPreview = useDetachedPreview(KnightDragPreview)
-	const [{ isDragging }, drag, preview] = useDrag(() => ({
+	const [{ isDragging }, drag, preview] = useDrag({
 		item: { type: ItemTypes.KNIGHT },
 		collect: mon => ({
 			isDragging: !!mon.isDragging(),
 		}),
-	}))
+	})
 
 	return (
 		<>

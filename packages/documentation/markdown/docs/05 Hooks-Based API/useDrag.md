@@ -16,7 +16,7 @@ import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } 
 const { useDrag } = dnd
 
 function DraggableComponent(props) {
-  const [collectedProps, drag] = useDrag(() => {
+  const [collectedProps, drag] = useDrag({
     item: { id, type },
   })
   return <div ref={drag}>...</div>
@@ -25,7 +25,7 @@ function DraggableComponent(props) {
 
 #### Parameters
 
-- **`spec`** A function returning a specification object, see below for details on how to construct this
+- **`spec`** A specification object, see below for details on how to construct this
 - **`memoization parameters`** - values to use when rebuilding the memoized specification
 
 #### Return Value Array

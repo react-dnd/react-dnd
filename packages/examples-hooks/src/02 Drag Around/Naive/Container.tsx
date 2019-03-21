@@ -39,7 +39,7 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 		b: { top: 180, left: 20, title: 'Drag me too' },
 	})
 
-	const [, drop] = useDrop(() => ({
+	const [, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop(item: DragItem, monitor) {
 			const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
@@ -48,7 +48,7 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 			moveBox(item.id, left, top)
 			return undefined
 		},
-	}))
+	})
 
 	const moveBox = (id: string, left: number, top: number) => {
 		setBoxes(

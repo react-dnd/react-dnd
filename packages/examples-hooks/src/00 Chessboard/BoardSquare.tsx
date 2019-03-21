@@ -19,18 +19,15 @@ export const BoardSquare: React.FC<BoardSquareProps> = ({
 	y,
 	children,
 }: BoardSquareProps) => {
-	const [{ isOver, canDrop }, drop] = useDrop(
-		() => ({
-			accept: ItemTypes.KNIGHT,
-			canDrop: () => canMoveKnight(x, y),
-			drop: () => moveKnight(x, y),
-			collect: mon => ({
-				isOver: !!mon.isOver(),
-				canDrop: !!mon.canDrop(),
-			}),
+	const [{ isOver, canDrop }, drop] = useDrop({
+		accept: ItemTypes.KNIGHT,
+		canDrop: () => canMoveKnight(x, y),
+		drop: () => moveKnight(x, y),
+		collect: mon => ({
+			isOver: !!mon.isOver(),
+			canDrop: !!mon.canDrop(),
 		}),
-		[x, y],
-	)
+	})
 	const black = (x + y) % 2 === 1
 
 	return (
