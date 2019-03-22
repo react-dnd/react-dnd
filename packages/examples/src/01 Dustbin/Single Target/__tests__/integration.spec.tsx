@@ -2,9 +2,7 @@ import * as React from 'react'
 import * as TestUtils from 'react-dom/test-utils'
 import Box from '../Box'
 import Dustbin from '../Dustbin'
-import { DragDropContextProvider } from 'react-dnd'
-import TestBackend from 'react-dnd-test-backend'
-import { WrapInTestContext } from 'react-dnd-test-utils'
+import { wrapInTestContext } from 'react-dnd-test-utils'
 
 describe('Integration: Dustbin Single Target', () => {
 	it('can simulate a full drag and drop interaction', () => {

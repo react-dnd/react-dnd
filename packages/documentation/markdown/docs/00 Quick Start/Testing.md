@@ -71,7 +71,7 @@ import Box from './components/Box'
 /**
  * Wraps a component into a DragDropContext that uses the TestBackend.
  */
-export default function wrapInTestContext(DecoratedComponent) {
+function wrapInTestContext(DecoratedComponent) {
   const TestStub = props => <DecoratedComponent {...props} />
   return DragDropContext(TestBackend)(TestStub)
 }
