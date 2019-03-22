@@ -4,22 +4,22 @@ import Box from '../Box'
 import Dustbin from '../Dustbin'
 import { DragDropContextProvider } from 'react-dnd'
 import TestBackend from 'react-dnd-test-backend'
+import { WrapInTestContext } from 'react-dnd-test-utils'
 
 describe('Integration: Dustbin Single Target', () => {
 	it('can simulate a full drag and drop interaction', () => {
-		function DustbinWithBox() {
+		function TestCase() {
 			return (
-				<DragDropContextProvider backend={TestBackend}>
-					<div>
-						<Dustbin />
-						<Box name="test" />
-					</div>
-				</DragDropContextProvider>
+				<div>
+					<Dustbin />
+					<Box name="test" />
+				</div>
 			)
 		}
+		const WrappedTestCase = wrapInTestContext(TestCase)
 
 		// Render with the test context that uses the test backend
-		const root: any = TestUtils.renderIntoDocument(<DustbinWithBox />)
+		const root: any = TestUtils.renderIntoDocument(<WrappedTestCase />)
 
 		// Obtain a reference to the backend
 		const backend = root.getManager().getBackend()

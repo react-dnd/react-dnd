@@ -1,11 +1,8 @@
 import * as React from 'react'
-import { DragDropContextProvider } from 'react-dnd'
 import TestBackend from 'react-dnd-test-backend'
+import { DragDropContext } from 'react-dnd'
 
-export function wrapInTestContext(DecoratedComponent: any): any {
-	return (props: any) => (
-		<DragDropContextProvider backend={TestBackend}>
-			<DecoratedComponent {...props} />
-		</DragDropContextProvider>
-	)
+export default function wrapInTestContext(DecoratedComponent: any): any {
+	const TestStub = (props: any) => <DecoratedComponent {...props} />
+	return DragDropContext(TestBackend)(TestStub)
 }
