@@ -1,37 +1,36 @@
 import * as React from 'react'
 import * as TestUtils from 'react-dom/test-utils'
-import wrapInTestContext from '../../../shared/wrapInTestContext'
 import Box from '../Box'
 import Dustbin from '../Dustbin'
+import { DragDropContextProvider } from 'react-dnd'
+import TestBackend from 'react-dnd-test-backend'
 
-describe('Integration', () => {
+describe('Integration: Dustbin Single Target', () => {
 	it('can simulate a full drag and drop interaction', () => {
 		function DustbinWithBox() {
 			return (
-				<div>
-					<Dustbin />
-					<Box name="test" />
-				</div>
+				<DragDropContextProvider backend={TestBackend}>
+					<div>
+						<Dustbin />
+						<Box name="test" />
+					</div>
+				</DragDropContextProvider>
 			)
 		}
 
 		// Render with the test context that uses the test backend
-		const DustbinWithBoxContext = wrapInTestContext(DustbinWithBox)
-		const root: any = TestUtils.renderIntoDocument(<DustbinWithBoxContext />)
+		const root: any = TestUtils.renderIntoDocument(<DustbinWithBox />)
 
 		// Obtain a reference to the backend
 		const backend = root.getManager().getBackend()
 
 		// Find the drag source ID and use it to simulate the dragging operation
-		const box: any = TestUtils.findRenderedComponentWithType(root, Box as any)
+		const box: any = TestUtils.findRenderedComponentWithType(root, Box)
 		backend.simulateBeginDrag([box.getHandlerId()])
 
 		window.alert = jest.fn()
 
-		const dustbin: any = TestUtils.findRenderedComponentWithType(
-			root,
-			Dustbin as any,
-		)
+		const dustbin: any = TestUtils.findRenderedComponentWithType(root, Dustbin)
 		backend.simulateHover([dustbin.getHandlerId()])
 		backend.simulateDrop()
 		backend.simulateEndDrag()
