@@ -27,8 +27,8 @@
 		"immutability-helper": "^3.0.0",
 		"lodash": "^4.17.11",
 		"query-string": "^6.3.0",
-		"react-dnd": "^7.3.2",
-		"react-dnd-html5-backend": "^7.2.0",
+		"react-dnd": "link:../react-dnd",
+		"react-dnd-html5-backend": "link:../react-dnd-html5-backend",
 		"react-frame-component": "^4.1.0"
 	},
 	"devDependencies": {
@@ -37,7 +37,7 @@
 		"npm-run-all": "^4.1.5",
 		"react": "link:../react-dnd/node_modules/react",
 		"react-dom": "link:../react-dnd/node_modules/react-dom",
-		"react-dnd-test-utils": "^0.0.0",
+		"react-dnd-test-utils": "link:../react-dnd-test-utils",
 		"rimraf": "^2.6.3",
 		"typescript": "^3.3.3333"
 	},
