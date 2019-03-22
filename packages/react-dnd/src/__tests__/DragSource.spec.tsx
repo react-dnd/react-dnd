@@ -1,5 +1,6 @@
 // tslint:disable max-classes-per-file
 import * as React from 'react'
+import * as TestUtils from 'react-dom/test-utils'
 import { DragSource } from '../index'
 
 describe('DragSource', () => {
@@ -41,5 +42,18 @@ describe('DragSource', () => {
 		)(RefForwarded)
 
 		expect(DecoratedComponent).toBeDefined()
+	})
+
+	it('throws an error if rendered outside a DragDropContext', () => {
+		const Component: React.FC<{}> = () => null
+		const DecoratedComponent = DragSource(
+			'abc',
+			{ beginDrag: () => null },
+			() => ({}),
+		)(Component)
+
+		expect(() => {
+			TestUtils.renderIntoDocument(<DecoratedComponent />)
+		}).toThrow(/Could not find the drag and drop manager in the context/)
 	})
 })
