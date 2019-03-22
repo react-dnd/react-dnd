@@ -200,9 +200,6 @@ export default function decorateHandler<Props, ItemIdType>({
 			return (
 				<Consumer>
 					{({ dragDropManager }) => {
-						if (dragDropManager === undefined) {
-							return null
-						}
 						this.receiveDragDropManager(dragDropManager)
 						requestAnimationFrame(() => this.handlerConnector!.reconnect())
 						return (
@@ -218,19 +215,24 @@ export default function decorateHandler<Props, ItemIdType>({
 			)
 		}
 
-		private receiveDragDropManager(dragDropManager: DragDropManager<any>) {
+		private receiveDragDropManager(dragDropManager?: DragDropManager<any>) {
 			if (this.manager !== undefined) {
 				return
 			}
-			this.manager = dragDropManager
+
 			invariant(
-				typeof dragDropManager === 'object',
+				dragDropManager !== undefined,
 				'Could not find the drag and drop manager in the context of %s. ' +
 					'Make sure to wrap the top-level component of your app with DragDropContext. ' +
 					'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
 				displayName,
 				displayName,
 			)
+			if (dragDropManager === undefined) {
+				return
+			}
+
+			this.manager = dragDropManager
 			this.handlerMonitor = createMonitor(dragDropManager)
 			this.handlerConnector = createConnector(dragDropManager.getBackend())
 			this.handler = createHandler(this.handlerMonitor, this.decoratedRef)
