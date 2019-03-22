@@ -24,6 +24,7 @@
 		"dnd-core": "^7.2.0",
 		"hoist-non-react-statics": "^3.3.0",
 		"invariant": "^2.1.0",
+		"recompose": "^0.30.0",
 		"lodash": "^4.17.11",
 		"shallowequal": "^1.1.0"
 	},
