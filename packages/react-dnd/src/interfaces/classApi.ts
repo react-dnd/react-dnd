@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
 import {
 	DropTargetMonitor,
@@ -5,6 +6,7 @@ import {
 	DragLayerMonitor,
 } from './monitors'
 import { DragSourceOptions, DragPreviewOptions } from './options'
+import { NonReactStatics } from 'hoist-non-react-statics'
 
 /**
  * The React Component that manages the DragDropContext for its children.
@@ -29,13 +31,6 @@ export interface ContextComponentClass<Props>
 	extends React.ComponentClass<Props> {
 	DecoratedComponent: React.ComponentType<Props>
 	new (props?: Props, context?: any): ContextComponent<Props>
-}
-/**
- * The class interface for a DnD component
- */
-export interface DndComponentClass<Props> extends React.ComponentClass<Props> {
-	DecoratedComponent: React.ComponentType<Props>
-	new (props?: Props, context?: any): DndComponent<Props>
 }
 
 /**
@@ -187,3 +182,72 @@ export type DragLayerCollector<TargetProps, CollectedProps> = (
 	monitor: DragLayerMonitor,
 	props: TargetProps,
 ) => CollectedProps
+
+// Borrowing typings from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-redux/index.d.ts
+
+// Omit taken from https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+/**
+ * A property P will be present if:
+ * - it is present in DecorationTargetProps
+ *
+ * Its value will be dependent on the following conditions
+ * - if property P is present in InjectedProps and its definition extends the definition
+ *   in DecorationTargetProps, then its definition will be that of DecorationTargetProps[P]
+ * - if property P is not present in InjectedProps then its definition will be that of
+ *   DecorationTargetProps[P]
+ * - if property P is present in InjectedProps but does not extend the
+ *   DecorationTargetProps[P] definition, its definition will be that of InjectedProps[P]
+ */
+export type Matching<InjectedProps, DecorationTargetProps> = {
+	[P in keyof DecorationTargetProps]: P extends keyof InjectedProps
+		? InjectedProps[P] extends DecorationTargetProps[P]
+			? DecorationTargetProps[P]
+			: InjectedProps[P]
+		: DecorationTargetProps[P]
+}
+
+/**
+ * a property P will be present if :
+ * - it is present in both DecorationTargetProps and InjectedProps
+ * - InjectedProps[P] can satisfy DecorationTargetProps[P]
+ * ie: decorated component can accept more types than decorator is injecting
+ *
+ * For decoration, inject props or ownProps are all optionally
+ * required by the decorated (right hand side) component.
+ * But any property required by the decorated component must be satisfied by the injected property.
+ */
+export type Shared<
+	InjectedProps,
+	DecorationTargetProps extends Shared<InjectedProps, DecorationTargetProps>
+> = {
+	[P in Extract<
+		keyof InjectedProps,
+		keyof DecorationTargetProps
+	>]?: InjectedProps[P] extends DecorationTargetProps[P]
+		? DecorationTargetProps[P]
+		: never
+}
+
+/**
+ * Gets the props interface of a component using inference
+ */
+export type GetProps<C> = C extends React.ComponentType<infer P> ? P : never
+
+export type DndComponentEnhancer<CollectedProps> = <
+	C extends React.ComponentType<Matching<CollectedProps, GetProps<C>>>
+>(
+	component: C,
+) => DndComponentClass<
+	C,
+	Omit<GetProps<C>, keyof Shared<CollectedProps, GetProps<C>>>
+>
+
+// Applies LibraryManagedAttributes (proper handling of defaultProps
+// and propTypes), as well as defines WrappedComponent.
+export type DndComponentClass<
+	C extends React.ComponentType<any>,
+	P
+> = React.ComponentClass<JSX.LibraryManagedAttributes<C, P>> &
+	NonReactStatics<C> & { DecoratedComponent: C }

@@ -49,11 +49,7 @@ class Box extends React.Component<BoxProps & BoxCollectedProps> {
 	}
 }
 
-export default DragSource<BoxProps, BoxCollectedProps>(
-	ItemTypes.BOX,
-	boxSource,
-	(connect, monitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}),
-)(Box)
+export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
+	connectDragSource: connect.dragSource(),
+	isDragging: monitor.isDragging(),
+}))(Box)

@@ -116,14 +116,14 @@ class Card extends React.Component<
 	}
 }
 
-export default DropTarget<CardProps, CardTargetCollectedProps>(
+export default DropTarget(
 	ItemTypes.CARD,
 	cardTarget,
 	(connect: DropTargetConnector) => ({
 		connectDropTarget: connect.dropTarget(),
 	}),
 )(
-	DragSource<CardProps, CardSourceCollectedProps>(
+	DragSource(
 		ItemTypes.CARD,
 		cardSource,
 		(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
