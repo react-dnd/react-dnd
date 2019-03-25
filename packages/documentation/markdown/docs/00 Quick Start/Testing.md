@@ -62,19 +62,11 @@ Here are some examples to get you started:
 
 ```js
 import React from 'react'
-import TestBackend from 'react-dnd-test-backend'
+import { wrapInTestContext } from 'react-dnd-test-utils'
 import { DragDropContext } from 'react-dnd'
 import TestUtils from 'react-dom/test-utils'
 import expect from 'expect'
 import Box from './components/Box'
-
-/**
- * Wraps a component into a DragDropContext that uses the TestBackend.
- */
-function wrapInTestContext(DecoratedComponent) {
-  const TestStub = props => <DecoratedComponent {...props} />
-  return DragDropContext(TestBackend)(TestStub)
-}
 
 it('can be tested with the testing backend', () => {
   // Render with the test context that uses the test backend
