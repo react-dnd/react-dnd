@@ -5,7 +5,7 @@ import {
 	DropTargetSpec,
 	DndOptions,
 	DropTargetCollector,
-	DndComponentClass,
+	DndDecoratedComponent,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -70,9 +70,11 @@ export default function DropTarget<Props, CollectedProps = {}>(
 		collect,
 	)
 
-	return function decorateTarget<T>(
-		DecoratedComponent: React.ComponentType<T>,
-	): DndComponentClass<Props> {
+	return function decorateTarget<
+		ComponentType extends React.ComponentType<Props & CollectedProps>
+	>(
+		DecoratedComponent: ComponentType,
+	): DndDecoratedComponent<Props, CollectedProps, ComponentType> {
 		return decorateHandler<Props, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget as any,
@@ -84,6 +86,6 @@ export default function DropTarget<Props, CollectedProps = {}>(
 			getType,
 			collect,
 			options,
-		})
+		}) as any
 	}
 }

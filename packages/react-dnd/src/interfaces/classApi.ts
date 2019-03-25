@@ -187,3 +187,12 @@ export type DragLayerCollector<TargetProps, CollectedProps> = (
 	monitor: DragLayerMonitor,
 	props: TargetProps,
 ) => CollectedProps
+
+export type Diff<T, U> = T extends U ? never : T
+
+export type DndDecoratedComponent<
+	Props,
+	CollectedProps,
+	ComponentType extends React.ComponentType<Props & CollectedProps>
+> = Diff<ComponentType, React.ComponentType<Props & CollectedProps>> &
+	DndComponentClass<Props>
