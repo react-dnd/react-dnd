@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as TestUtils from 'react-dom/test-utils'
-import wrapInTestContext from '../../../shared/wrapInTestContext'
+import { wrapInTestContext } from 'react-dnd-test-utils'
 import Box from '../Box'
 
 describe('Box', () => {
@@ -19,7 +19,10 @@ describe('Box', () => {
 				isDragging={false}
 			/>,
 		)
-		let div: any = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
+		let div: HTMLDivElement = TestUtils.findRenderedDOMComponentWithTag(
+			root,
+			'div',
+		) as HTMLDivElement
 		expect(div.style.opacity).toEqual('1')
 
 		// Render with another set of props and test
@@ -30,7 +33,10 @@ describe('Box', () => {
 				isDragging={true}
 			/>,
 		)
-		div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
+		div = TestUtils.findRenderedDOMComponentWithTag(
+			root,
+			'div',
+		) as HTMLDivElement
 		expect(div.style.opacity).toEqual('0.4')
 	})
 
