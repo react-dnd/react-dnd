@@ -11,6 +11,7 @@ import {
 	SerialDisposable,
 } from './utils/disposables'
 import { Connector } from './SourceConnector'
+const isClassComponent = require('recompose/isClassComponent').default
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
@@ -178,6 +179,7 @@ export default function decorateHandler<Props, ItemIdType>({
 			const nextState = collect(
 				this.handlerConnector.hooks,
 				this.handlerMonitor,
+				this.props,
 			)
 
 			if (process.env.NODE_ENV !== 'production') {
@@ -206,7 +208,7 @@ export default function decorateHandler<Props, ItemIdType>({
 								{...this.props}
 								{...this.getCurrentState()}
 								// NOTE: if Decorated is a Function Component, decoratedRef will not be populated unless it's a refforwarding component.
-								ref={this.decoratedRef}
+								ref={isClassComponent(Decorated) ? this.decoratedRef : null}
 							/>
 						)
 					}}
