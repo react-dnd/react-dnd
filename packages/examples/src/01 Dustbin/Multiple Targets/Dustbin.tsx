@@ -64,7 +64,7 @@ class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
 	}
 }
 
-export default DropTarget<DustbinProps, DustbinCollectedProps>(
+export default DropTarget(
 	(props: DustbinProps) => props.accepts,
 	dustbinTarget,
 	(connect, monitor) => ({

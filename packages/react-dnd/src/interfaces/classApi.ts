@@ -219,13 +219,13 @@ export type Matching<InjectedProps, DecorationTargetProps> = {
  * But any property required by the decorated component must be satisfied by the injected property.
  */
 export type Shared<
-	CollectedProps,
-	DecorationTargetProps extends Shared<CollectedProps, DecorationTargetProps>
+	InjectedProps,
+	DecorationTargetProps extends Shared<InjectedProps, DecorationTargetProps>
 > = {
 	[P in Extract<
-		keyof CollectedProps,
+		keyof InjectedProps,
 		keyof DecorationTargetProps
-	>]?: CollectedProps[P] extends DecorationTargetProps[P]
+	>]?: InjectedProps[P] extends DecorationTargetProps[P]
 		? DecorationTargetProps[P]
 		: never
 }
@@ -235,13 +235,13 @@ export type Shared<
  */
 export type GetProps<C> = C extends React.ComponentType<infer P> ? P : never
 
-export type DndComponentEnhancer<NeedsProps, CollectedProps> = <
+export type DndComponentEnhancer<CollectedProps> = <
 	C extends React.ComponentType<Matching<CollectedProps, GetProps<C>>>
 >(
 	component: C,
 ) => DndComponentClass<
 	C,
-	Omit<GetProps<C>, keyof Shared<CollectedProps, GetProps<C>>> & NeedsProps
+	Omit<GetProps<C>, keyof Shared<CollectedProps, GetProps<C>>>
 >
 
 // Applies LibraryManagedAttributes (proper handling of defaultProps

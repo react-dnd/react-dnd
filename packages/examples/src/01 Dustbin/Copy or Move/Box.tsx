@@ -35,7 +35,7 @@ class Box extends React.Component<BoxProps & BoxCollectedProps> {
 	}
 }
 
-export default DragSource<BoxProps, BoxCollectedProps>(
+export default DragSource(
 	ItemTypes.BOX,
 	{
 		beginDrag(props: BoxProps) {

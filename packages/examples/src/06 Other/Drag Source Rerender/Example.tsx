@@ -13,7 +13,7 @@ const Parent: React.FC<ParentProps> = ({ isDragging, connectDragSource }) => {
 	)
 }
 
-const Example = DragSource<{}, ParentProps>(
+const Example = DragSource(
 	'KNIGHT',
 	{
 		beginDrag: () => ({}),

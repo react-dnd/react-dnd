@@ -57,12 +57,8 @@ class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
 	}
 }
 
-export default DropTarget<DustbinProps, DustbinCollectedProps>(
-	ItemTypes.BOX,
-	boxTarget,
-	(connect, monitor) => ({
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver(),
-		canDrop: monitor.canDrop(),
-	}),
-)(Dustbin)
+export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
+	connectDropTarget: connect.dropTarget(),
+	isOver: monitor.isOver(),
+	canDrop: monitor.canDrop(),
+}))(Dustbin)

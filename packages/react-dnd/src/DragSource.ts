@@ -29,7 +29,7 @@ export default function DragSource<
 	spec: DragSourceSpec<RequiredProps, DragObject>,
 	collect: DragSourceCollector<CollectedProps, RequiredProps>,
 	options: DndOptions<RequiredProps> = {},
-) {
+): DndComponentEnhancer<CollectedProps> {
 	checkDecoratorArguments(
 		'DragSource',
 		'type, spec, collect[, options]',
@@ -77,11 +77,9 @@ export default function DragSource<
 		collect,
 	)
 
-	return function decorateSource<
+	return (function decorateSource<
 		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
-	>(
-		DecoratedComponent: ComponentType,
-	): DndComponentEnhancer<RequiredProps, CollectedProps> {
+	>(DecoratedComponent: ComponentType) {
 		return decorateHandler<RequiredProps, CollectedProps, SourceType>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource as any,
@@ -94,5 +92,5 @@ export default function DragSource<
 			collect,
 			options,
 		})
-	}
+	} as any) as DndComponentEnhancer<CollectedProps>
 }

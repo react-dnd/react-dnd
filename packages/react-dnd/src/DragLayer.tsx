@@ -16,7 +16,7 @@ const shallowEqual = require('shallowequal')
 export default function DragLayer<RequiredProps, CollectedProps = {}>(
 	collect: DragLayerCollector<RequiredProps, CollectedProps>,
 	options: DndOptions<RequiredProps> = {},
-) {
+): DndComponentEnhancer<CollectedProps> {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options)
 	invariant(
 		typeof collect === 'function',
@@ -31,11 +31,9 @@ export default function DragLayer<RequiredProps, CollectedProps = {}>(
 		options,
 	)
 
-	return function decorateLayer<
+	return (function decorateLayer<
 		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
-	>(
-		DecoratedComponent: ComponentType,
-	): DndComponentEnhancer<RequiredProps, CollectedProps> {
+	>(DecoratedComponent: ComponentType): DndComponentEnhancer<CollectedProps> {
 		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
 		const displayName = Decorated.displayName || Decorated.name || 'Component'
@@ -146,9 +144,6 @@ export default function DragLayer<RequiredProps, CollectedProps = {}>(
 			}
 		}
 
-		return hoistStatics(
-			DragLayerContainer,
-			DecoratedComponent,
-		) as DndComponentEnhancer<RequiredProps, CollectedProps>
-	}
+		return hoistStatics(DragLayerContainer, DecoratedComponent)
+	} as any) as DndComponentEnhancer<CollectedProps>
 }

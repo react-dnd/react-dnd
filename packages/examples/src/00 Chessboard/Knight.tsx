@@ -43,7 +43,7 @@ const Knight: React.FC<CollectedKnightProps> = ({
 	)
 }
 
-export default DragSource<{}, CollectedKnightProps>(
+export default DragSource(
 	ItemTypes.KNIGHT,
 	{
 		beginDrag: () => ({}),

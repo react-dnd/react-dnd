@@ -43,11 +43,7 @@ class SourceBox extends React.Component<
 	}
 }
 
-export default DragSource<SourceBoxProps, SourceBoxCollectedProps>(
-	ItemTypes.BOX,
-	boxSource,
-	(connect, monitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}),
-)(SourceBox)
+export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
+	connectDragSource: connect.dragSource(),
+	isDragging: monitor.isDragging(),
+}))(SourceBox)

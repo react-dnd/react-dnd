@@ -6,6 +6,7 @@ import {
 	DndOptions,
 	DropTargetCollector,
 	DndComponentEnhancer,
+	DndComponent,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -22,7 +23,7 @@ export default function DropTarget<RequiredProps, CollectedProps = {}>(
 	spec: DropTargetSpec<RequiredProps>,
 	collect: DropTargetCollector<CollectedProps, RequiredProps>,
 	options: DndOptions<RequiredProps> = {},
-) {
+): DndComponentEnhancer<CollectedProps> {
 	checkDecoratorArguments(
 		'DropTarget',
 		'type, spec, collect[, options]',
@@ -70,11 +71,9 @@ export default function DropTarget<RequiredProps, CollectedProps = {}>(
 		collect,
 	)
 
-	return function decorateTarget<
+	return (function decorateTarget<
 		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
-	>(
-		DecoratedComponent: ComponentType,
-	): DndComponentEnhancer<RequiredProps, CollectedProps> {
+	>(DecoratedComponent: ComponentType): DndComponent<RequiredProps> {
 		return decorateHandler<RequiredProps, CollectedProps, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget as any,
@@ -87,5 +86,5 @@ export default function DropTarget<RequiredProps, CollectedProps = {}>(
 			collect,
 			options,
 		})
-	}
+	} as any) as DndComponentEnhancer<CollectedProps>
 }
