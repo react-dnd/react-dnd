@@ -77,6 +77,8 @@ If you're new to these concepts, the [overview](/docs/overview) should give you 
 
 - **`monitor`**: An instance of [`DragSourceMonitor`](/docs/api/drag-source-monitor). It is precisely the same `monitor` you receive in the drag source specification methods, and you can use it to query the information about the current drag state. Read the [`DragSourceMonitor` documentation](/docs/api/drag-source-monitor) for a complete list of `monitor` methods, or read the [overview](/docs/overview) for an introduction to the monitors.
 
+-**`props`**: The component's current props
+
 ### Return Value
 
 `DragSource` wraps your component and returns another React component.  
