@@ -5,7 +5,8 @@ import {
 	DropTargetSpec,
 	DndOptions,
 	DropTargetCollector,
-	DndComponentClass,
+	DndComponentEnhancer,
+	DndComponent,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -17,12 +18,12 @@ import TargetConnector from './TargetConnector'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
-export default function DropTarget<Props, CollectedProps = {}>(
-	type: TargetType | ((props: Props) => TargetType),
-	spec: DropTargetSpec<Props>,
-	collect: DropTargetCollector<CollectedProps, Props>,
-	options: DndOptions<Props> = {},
-) {
+export default function DropTarget<RequiredProps, CollectedProps = {}>(
+	type: TargetType | ((props: RequiredProps) => TargetType),
+	spec: DropTargetSpec<RequiredProps>,
+	collect: DropTargetCollector<CollectedProps, RequiredProps>,
+	options: DndOptions<RequiredProps> = {},
+): DndComponentEnhancer<CollectedProps> {
 	checkDecoratorArguments(
 		'DropTarget',
 		'type, spec, collect[, options]',
@@ -31,8 +32,8 @@ export default function DropTarget<Props, CollectedProps = {}>(
 		collect,
 		options,
 	)
-	let getType: (props: Props) => TargetType = type as ((
-		props: Props,
+	let getType: (props: RequiredProps) => TargetType = type as ((
+		props: RequiredProps,
 	) => TargetType)
 	if (typeof type !== 'function') {
 		invariant(
@@ -70,10 +71,10 @@ export default function DropTarget<Props, CollectedProps = {}>(
 		collect,
 	)
 
-	return function decorateTarget<T>(
-		DecoratedComponent: React.ComponentType<T>,
-	): DndComponentClass<Props> {
-		return decorateHandler<Props, TargetType>({
+	return (function decorateTarget<
+		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
+	>(DecoratedComponent: ComponentType): DndComponent<RequiredProps> {
+		return decorateHandler<RequiredProps, CollectedProps, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget as any,
 			registerHandler: registerTarget,
@@ -85,5 +86,5 @@ export default function DropTarget<Props, CollectedProps = {}>(
 			collect,
 			options,
 		})
-	}
+	} as any) as DndComponentEnhancer<CollectedProps>
 }

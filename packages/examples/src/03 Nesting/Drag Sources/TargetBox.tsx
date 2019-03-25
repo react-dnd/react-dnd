@@ -66,7 +66,7 @@ class TargetBoxRaw extends React.Component<
 	}
 }
 
-const TargetBox = DropTarget<TargetBoxProps, TargetBoxCollectedProps>(
+const TargetBox = DropTarget(
 	[Colors.YELLOW, Colors.BLUE],
 	ColorTarget,
 	(connect, monitor) => ({

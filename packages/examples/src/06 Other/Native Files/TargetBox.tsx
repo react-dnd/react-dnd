@@ -14,14 +14,6 @@ const style: React.CSSProperties = {
 	textAlign: 'center',
 }
 
-const boxTarget = {
-	drop(props: TargetBoxProps, monitor: DropTargetMonitor) {
-		if (props.onDrop) {
-			props.onDrop(props, monitor)
-		}
-	},
-}
-
 export interface TargetBoxProps {
 	accepts: string[]
 	onDrop: (props: TargetBoxProps, monitor: DropTargetMonitor) => void
@@ -48,9 +40,15 @@ class TargetBox extends React.Component<
 	}
 }
 
-export default DropTarget<TargetBoxProps, TargetBoxCollectedProps>(
+export default DropTarget(
 	(props: TargetBoxProps) => props.accepts,
-	boxTarget,
+	{
+		drop(props: TargetBoxProps, monitor: DropTargetMonitor) {
+			if (props.onDrop) {
+				props.onDrop(props, monitor)
+			}
+		},
+	},
 	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),

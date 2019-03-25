@@ -42,7 +42,7 @@ const Box: React.FC<BoxProps & BoxCollectedProps> = ({
 		: null
 }
 
-export default DragSource<BoxProps, BoxCollectedProps>(
+export default DragSource(
 	ItemTypes.BOX,
 	{
 		beginDrag(props: BoxProps) {
