@@ -3,7 +3,7 @@ declare var process: any
 
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
-import { DndComponentClass, DndComponent } from './interfaces'
+import { DndComponent } from './interfaces'
 import { Consumer } from './DragDropContext'
 import {
 	Disposable,
@@ -40,7 +40,7 @@ interface Handler<Props> {
 	receiveProps(props: Props): void
 }
 
-export default function decorateHandler<Props, ItemIdType>({
+export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,
@@ -50,7 +50,7 @@ export default function decorateHandler<Props, ItemIdType>({
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<Props, ItemIdType>): DndComponentClass<Props> {
+}: DecorateHandlerArgs<Props, ItemIdType>): DndComponent<Props> {
 	const { arePropsEqual = shallowEqual } = options
 	const Decorated: any = DecoratedComponent
 
@@ -240,8 +240,8 @@ export default function decorateHandler<Props, ItemIdType>({
 		}
 	}
 
-	return hoistStatics(
+	return (hoistStatics(
 		DragDropContainer,
 		DecoratedComponent,
-	) as DndComponentClass<Props>
+	) as any) as DndComponent<Props>
 }

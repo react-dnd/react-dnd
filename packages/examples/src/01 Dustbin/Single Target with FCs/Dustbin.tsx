@@ -49,7 +49,7 @@ const Dustbin: React.FC<DustbinCollectedProps> = ({
 		: null
 }
 
-export default DropTarget<{}, DustbinCollectedProps>(
+export default DropTarget(
 	ItemTypes.BOX,
 	{
 		drop() {
