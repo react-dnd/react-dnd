@@ -9,7 +9,7 @@ import createSourceFactory from './createSourceFactory'
 import DragSourceMonitorImpl from './DragSourceMonitorImpl'
 import SourceConnector from './SourceConnector'
 import isValidType from './utils/isValidType'
-import { DndDecoratedComponent } from './interfaces'
+import { DndComponentEnhancer } from './interfaces'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
@@ -20,11 +20,15 @@ const isPlainObject = require('lodash/isPlainObject')
  * @param collect The props collector function
  * @param options DnD options
  */
-export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
-	type: SourceType | ((props: Props) => SourceType),
-	spec: DragSourceSpec<Props, DragObject>,
-	collect: DragSourceCollector<CollectedProps, Props>,
-	options: DndOptions<Props> = {},
+export default function DragSource<
+	RequiredProps,
+	CollectedProps = {},
+	DragObject = {}
+>(
+	type: SourceType | ((props: RequiredProps) => SourceType),
+	spec: DragSourceSpec<RequiredProps, DragObject>,
+	collect: DragSourceCollector<CollectedProps, RequiredProps>,
+	options: DndOptions<RequiredProps> = {},
 ) {
 	checkDecoratorArguments(
 		'DragSource',
@@ -34,8 +38,8 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 		collect,
 		options,
 	)
-	let getType: (props: Props) => SourceType = type as ((
-		props: Props,
+	let getType: (props: RequiredProps) => SourceType = type as ((
+		props: RequiredProps,
 	) => SourceType)
 	if (typeof type !== 'function') {
 		invariant(
@@ -74,11 +78,11 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 	)
 
 	return function decorateSource<
-		ComponentType extends React.ComponentType<Props & CollectedProps>
+		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
 	>(
 		DecoratedComponent: ComponentType,
-	): DndDecoratedComponent<Props, CollectedProps, ComponentType> {
-		return decorateHandler<Props, SourceType>({
+	): DndComponentEnhancer<RequiredProps, CollectedProps> {
+		return decorateHandler<RequiredProps, CollectedProps, SourceType>({
 			containerDisplayName: 'DragSource',
 			createHandler: createSource as any,
 			registerHandler: registerSource,
@@ -89,6 +93,6 @@ export default function DragSource<Props, CollectedProps = {}, DragObject = {}>(
 			getType,
 			collect,
 			options,
-		}) as any
+		})
 	}
 }

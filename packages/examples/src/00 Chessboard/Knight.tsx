@@ -16,13 +16,13 @@ const knightStyle: React.CSSProperties = {
 	cursor: 'move',
 }
 
-export interface KnightProps {
+export interface CollectedKnightProps {
 	connectDragSource: ConnectDragSource
 	connectDragPreview: ConnectDragPreview
 	isDragging?: boolean
 }
 
-const Knight: React.FC<KnightProps> = ({
+const Knight: React.FC<CollectedKnightProps> = ({
 	connectDragSource,
 	connectDragPreview,
 	isDragging,
@@ -43,7 +43,7 @@ const Knight: React.FC<KnightProps> = ({
 	)
 }
 
-export default DragSource(
+export default DragSource<{}, CollectedKnightProps>(
 	ItemTypes.KNIGHT,
 	{
 		beginDrag: () => ({}),

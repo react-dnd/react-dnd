@@ -91,8 +91,12 @@ class Dustbin extends React.Component<
 		)
 	}
 }
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	isOverCurrent: monitor.isOver({ shallow: true }),
-}))(Dustbin)
+export default DropTarget<DustbinProps, DustbinCollectedProps>(
+	ItemTypes.BOX,
+	boxTarget,
+	(connect, monitor) => ({
+		connectDropTarget: connect.dropTarget(),
+		isOver: monitor.isOver(),
+		isOverCurrent: monitor.isOver({ shallow: true }),
+	}),
+)(Dustbin)

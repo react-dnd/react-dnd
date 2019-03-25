@@ -5,7 +5,7 @@ import {
 	DropTargetSpec,
 	DndOptions,
 	DropTargetCollector,
-	DndDecoratedComponent,
+	DndComponentEnhancer,
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
@@ -17,11 +17,11 @@ import TargetConnector from './TargetConnector'
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
-export default function DropTarget<Props, CollectedProps = {}>(
-	type: TargetType | ((props: Props) => TargetType),
-	spec: DropTargetSpec<Props>,
-	collect: DropTargetCollector<CollectedProps, Props>,
-	options: DndOptions<Props> = {},
+export default function DropTarget<RequiredProps, CollectedProps = {}>(
+	type: TargetType | ((props: RequiredProps) => TargetType),
+	spec: DropTargetSpec<RequiredProps>,
+	collect: DropTargetCollector<CollectedProps, RequiredProps>,
+	options: DndOptions<RequiredProps> = {},
 ) {
 	checkDecoratorArguments(
 		'DropTarget',
@@ -31,8 +31,8 @@ export default function DropTarget<Props, CollectedProps = {}>(
 		collect,
 		options,
 	)
-	let getType: (props: Props) => TargetType = type as ((
-		props: Props,
+	let getType: (props: RequiredProps) => TargetType = type as ((
+		props: RequiredProps,
 	) => TargetType)
 	if (typeof type !== 'function') {
 		invariant(
@@ -71,11 +71,11 @@ export default function DropTarget<Props, CollectedProps = {}>(
 	)
 
 	return function decorateTarget<
-		ComponentType extends React.ComponentType<Props & CollectedProps>
+		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
 	>(
 		DecoratedComponent: ComponentType,
-	): DndDecoratedComponent<Props, CollectedProps, ComponentType> {
-		return decorateHandler<Props, TargetType>({
+	): DndComponentEnhancer<RequiredProps, CollectedProps> {
+		return decorateHandler<RequiredProps, CollectedProps, TargetType>({
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget as any,
 			registerHandler: registerTarget,
@@ -86,6 +86,6 @@ export default function DropTarget<Props, CollectedProps = {}>(
 			getType,
 			collect,
 			options,
-		}) as any
+		})
 	}
 }

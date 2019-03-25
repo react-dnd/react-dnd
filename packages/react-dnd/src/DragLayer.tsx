@@ -5,7 +5,7 @@ import { DragDropManager, Unsubscribe } from 'dnd-core'
 import {
 	DragLayerCollector,
 	DndOptions,
-	DndDecoratedComponent,
+	DndComponentEnhancer,
 } from './interfaces'
 import { Consumer } from './DragDropContext'
 const hoistStatics = require('hoist-non-react-statics')
@@ -13,9 +13,9 @@ const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const shallowEqual = require('shallowequal')
 
-export default function DragLayer<Props, CollectedProps = {}>(
-	collect: DragLayerCollector<Props, CollectedProps>,
-	options: DndOptions<Props> = {},
+export default function DragLayer<RequiredProps, CollectedProps = {}>(
+	collect: DragLayerCollector<RequiredProps, CollectedProps>,
+	options: DndOptions<RequiredProps> = {},
 ) {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options)
 	invariant(
@@ -32,15 +32,15 @@ export default function DragLayer<Props, CollectedProps = {}>(
 	)
 
 	return function decorateLayer<
-		ComponentType extends React.ComponentType<Props & CollectedProps>
+		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
 	>(
 		DecoratedComponent: ComponentType,
-	): DndDecoratedComponent<Props, CollectedProps, ComponentType> {
+	): DndComponentEnhancer<RequiredProps, CollectedProps> {
 		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
 		const displayName = Decorated.displayName || Decorated.name || 'Component'
 
-		class DragLayerContainer extends React.Component<Props> {
+		class DragLayerContainer extends React.Component<RequiredProps> {
 			public static displayName = `DragLayer(${displayName})`
 			public static DecoratedComponent = DecoratedComponent
 
@@ -149,6 +149,6 @@ export default function DragLayer<Props, CollectedProps = {}>(
 		return hoistStatics(
 			DragLayerContainer,
 			DecoratedComponent,
-		) as DndDecoratedComponent<Props, CollectedProps, ComponentType>
+		) as DndComponentEnhancer<RequiredProps, CollectedProps>
 	}
 }

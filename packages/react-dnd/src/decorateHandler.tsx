@@ -3,7 +3,7 @@ declare var process: any
 
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
-import { DndComponentClass, DndComponent } from './interfaces'
+import { DndComponent, DndComponentEnhancer } from './interfaces'
 import { Consumer } from './DragDropContext'
 import {
 	Disposable,
@@ -40,7 +40,11 @@ interface Handler<Props> {
 	receiveProps(props: Props): void
 }
 
-export default function decorateHandler<Props, ItemIdType>({
+export default function decorateHandler<
+	RequiredProps,
+	CollectedProps,
+	ItemIdType
+>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,
@@ -50,15 +54,18 @@ export default function decorateHandler<Props, ItemIdType>({
 	getType,
 	collect,
 	options,
-}: DecorateHandlerArgs<Props, ItemIdType>): DndComponentClass<Props> {
+}: DecorateHandlerArgs<RequiredProps, ItemIdType>): DndComponentEnhancer<
+	RequiredProps,
+	CollectedProps
+> {
 	const { arePropsEqual = shallowEqual } = options
 	const Decorated: any = DecoratedComponent
 
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-	class DragDropContainer extends React.Component<Props>
-		implements DndComponent<Props> {
+	class DragDropContainer extends React.Component<RequiredProps>
+		implements DndComponent<RequiredProps> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 
@@ -67,11 +74,11 @@ export default function decorateHandler<Props, ItemIdType>({
 		private manager: DragDropManager<any> | undefined
 		private handlerMonitor: HandlerReceiver | undefined
 		private handlerConnector: Connector | undefined
-		private handler: Handler<Props> | undefined
+		private handler: Handler<RequiredProps> | undefined
 		private disposable: any
 		private currentType: any
 
-		constructor(props: Props) {
+		constructor(props: RequiredProps) {
 			super(props)
 			this.disposable = new SerialDisposable()
 			this.receiveProps(props)
@@ -104,7 +111,7 @@ export default function decorateHandler<Props, ItemIdType>({
 			this.handleChange()
 		}
 
-		public componentDidUpdate(prevProps: Props) {
+		public componentDidUpdate(prevProps: RequiredProps) {
 			if (!arePropsEqual(this.props, prevProps)) {
 				this.receiveProps(this.props)
 				this.handleChange()
@@ -243,5 +250,5 @@ export default function decorateHandler<Props, ItemIdType>({
 	return hoistStatics(
 		DragDropContainer,
 		DecoratedComponent,
-	) as DndComponentClass<Props>
+	) as DndComponentEnhancer<RequiredProps, CollectedProps>
 }
