@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as TestUtils from 'react-dom/test-utils'
-import { wrapInTestContext } from 'react-dnd-test-utils'
+import { wrapInTestContext } from '../../../react-dnd-test-utils/src/wrapInTestContext'
 import DropTarget from '../DropTarget'
 
 describe('Connectors', () => {
