@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-documentation-examples-hooks",
-	"version": "7.3.2",
+	"version": "7.4.0",
 	"private": true,
 	"description": "Drag and Drop for React",
 	"main": "lib/cjs/index.js",
@@ -22,7 +22,7 @@
 	"dependencies": {
 		"@types/faker": "^4.1.5",
 		"@types/query-string": "^6.2.0",
-		"dnd-core": "^7.2.0",
+		"dnd-core": "^7.4.0",
 		"faker": "^4.1.0",
 		"immutability-helper": "^3.0.0",
 		"lodash": "^4.17.11",
@@ -36,8 +36,8 @@
 		"@types/react-dom": "^16.8.2",
 		"npm-run-all": "^4.1.5",
 		"react": "link:../react-dnd/node_modules/react",
-		"react-dom": "link:../react-dnd/node_modules/react-dom",
 		"react-dnd-test-utils": "link:../react-dnd-test-utils",
+		"react-dom": "link:../react-dnd/node_modules/react-dom",
 		"rimraf": "^2.6.3",
 		"typescript": "^3.3.3333"
 	},
