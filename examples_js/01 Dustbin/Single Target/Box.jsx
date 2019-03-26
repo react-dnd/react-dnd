@@ -25,12 +25,18 @@ const boxSource = {
   },
 }
 class Box extends React.Component {
+  constructor() {
+    super(...arguments)
+    this.dragSource = React.createRef()
+  }
   render() {
-    const { isDragging, connectDragSource } = this.props
-    const { name } = this.props
+    const { name, isDragging, connectDragSource } = this.props
     const opacity = isDragging ? 0.4 : 1
-    return connectDragSource(
-      <div style={Object.assign({}, style, { opacity })}>{name}</div>,
+    connectDragSource(this.dragSource)
+    return (
+      <div ref={this.dragSource} style={Object.assign({}, style, { opacity })}>
+        {name}
+      </div>
     )
   }
 }

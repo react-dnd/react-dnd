@@ -9,33 +9,6 @@ const style = {
   marginBottom: '1.5rem',
   float: 'left',
 }
-const boxSource = {
-  beginDrag(props) {
-    return {
-      name: props.name,
-    }
-  },
-  endDrag(props, monitor) {
-    const item = monitor.getItem()
-    const dropResult = monitor.getDropResult()
-    if (dropResult) {
-      let alertMessage = ''
-      const isDropAllowed =
-        dropResult.allowedDropEffect === 'any' ||
-        dropResult.allowedDropEffect === dropResult.dropEffect
-      if (isDropAllowed) {
-        const isCopyAction = dropResult.dropEffect === 'copy'
-        const actionName = isCopyAction ? 'copied' : 'moved'
-        alertMessage = `You ${actionName} ${item.name} into ${dropResult.name}!`
-      } else {
-        alertMessage = `You cannot ${dropResult.dropEffect} an item into the ${
-          dropResult.name
-        }`
-      }
-      alert(alertMessage)
-    }
-  },
-}
 class Box extends React.Component {
   render() {
     const { isDragging, connectDragSource } = this.props
@@ -46,7 +19,39 @@ class Box extends React.Component {
     )
   }
 }
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging(),
-}))(Box)
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag(props) {
+      return {
+        name: props.name,
+      }
+    },
+    endDrag(props, monitor) {
+      const item = monitor.getItem()
+      const dropResult = monitor.getDropResult()
+      if (dropResult) {
+        let alertMessage = ''
+        const isDropAllowed =
+          dropResult.allowedDropEffect === 'any' ||
+          dropResult.allowedDropEffect === dropResult.dropEffect
+        if (isDropAllowed) {
+          const isCopyAction = dropResult.dropEffect === 'copy'
+          const actionName = isCopyAction ? 'copied' : 'moved'
+          alertMessage = `You ${actionName} ${item.name} into ${
+            dropResult.name
+          }!`
+        } else {
+          alertMessage = `You cannot ${
+            dropResult.dropEffect
+          } an item into the ${dropResult.name}`
+        }
+        alert(alertMessage)
+      }
+    },
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Box)

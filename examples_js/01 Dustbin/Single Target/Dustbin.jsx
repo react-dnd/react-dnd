@@ -14,24 +14,30 @@ const style = {
   float: 'left',
 }
 const boxTarget = {
-  drop() {
-    return { name: 'Dustbin' }
-  },
+  drop: () => ({ name: 'Dustbin' }),
 }
 class Dustbin extends React.Component {
+  constructor() {
+    super(...arguments)
+    this.dropTarget = React.createRef()
+  }
   render() {
     const { canDrop, isOver, connectDropTarget } = this.props
     const isActive = canDrop && isOver
+    connectDropTarget(this.dropTarget)
     let backgroundColor = '#222'
     if (isActive) {
       backgroundColor = 'darkgreen'
     } else if (canDrop) {
       backgroundColor = 'darkkhaki'
     }
-    return connectDropTarget(
-      <div style={Object.assign({}, style, { backgroundColor })}>
+    return (
+      <div
+        ref={this.dropTarget}
+        style={Object.assign({}, style, { backgroundColor })}
+      >
         {isActive ? 'Release to drop' : 'Drag a box here'}
-      </div>,
+      </div>
     )
   }
 }

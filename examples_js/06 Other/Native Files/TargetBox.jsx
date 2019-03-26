@@ -7,13 +7,6 @@ const style = {
   padding: '2rem',
   textAlign: 'center',
 }
-const boxTarget = {
-  drop(props, monitor) {
-    if (props.onDrop) {
-      props.onDrop(props, monitor)
-    }
-  },
-}
 class TargetBox extends React.Component {
   render() {
     const { canDrop, isOver, connectDropTarget } = this.props
@@ -27,7 +20,13 @@ class TargetBox extends React.Component {
 }
 export default DropTarget(
   props => props.accepts,
-  boxTarget,
+  {
+    drop(props, monitor) {
+      if (props.onDrop) {
+        props.onDrop(props, monitor)
+      }
+    },
+  },
   (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),

@@ -14,6 +14,7 @@ import sortableSimple from './04 Sortable/Simple'
 import sortableStressTest from './04 Sortable/Stress Test'
 import customizeDropEffects from './05 Customize/Drop Effects'
 import customizeHandlesAndPreviews from './05 Customize/Handles and Previews'
+import dragSourceRerender from './06 Other/Drag Source Rerender'
 import otherNativeFiles from './06 Other/Native Files'
 export * from './isDebugMode'
 export const componentIndex = {
@@ -33,5 +34,6 @@ export const componentIndex = {
   'sortable-stress-test': sortableStressTest,
   'customize-drop-effects': customizeDropEffects,
   'customize-handles-and-previews': customizeHandlesAndPreviews,
+  'other-drag-source-rerender': dragSourceRerender,
   'other-native-files': otherNativeFiles,
 }
