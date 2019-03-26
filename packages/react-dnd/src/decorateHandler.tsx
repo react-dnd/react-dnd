@@ -17,6 +17,15 @@ const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')
 
+function isRefForwardingComponent(C: any) {
+	return (
+		C && C.$$typeof && C.$$typeof.toString() === 'Symbol(react.forward_ref)'
+	)
+}
+function isRefForwardable(C: any): boolean {
+	return isClassComponent(C) || isRefForwardingComponent(C)
+}
+
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any
 	createMonitor: (manager: DragDropManager<any>) => HandlerReceiver
@@ -210,7 +219,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 								{...this.props}
 								{...this.getCurrentState()}
 								// NOTE: if Decorated is a Function Component, decoratedRef will not be populated unless it's a refforwarding component.
-								ref={isClassComponent(Decorated) ? this.decoratedRef : null}
+								ref={isRefForwardable(Decorated) ? this.decoratedRef : null}
 							/>
 						)
 					}}

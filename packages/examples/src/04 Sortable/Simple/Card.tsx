@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useImperativeHandle } from 'react'
 import { findDOMNode } from 'react-dom'
 import {
 	DragSource,
@@ -29,34 +29,34 @@ export interface CardProps {
 
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
-	connectDropTarget?: ConnectDropTarget
+	connectDropTarget: ConnectDropTarget
 }
 
 // NOTE: this must be a React.Component class because we use the component instance
 // in the hover function of the droptarget spec. We cannot get this instance on ref
-class Card extends React.Component<CardProps> {
-	public render() {
-		const {
-			text,
-			isDragging,
-			connectDragSource,
-			connectDropTarget,
-		} = this.props
+const Card: React.RefForwardingComponent<any, CardProps> = React.forwardRef(
+	({ text, isDragging, connectDragSource, connectDropTarget }, outerRef) => {
 		const opacity = isDragging ? 0 : 1
-		return connectDragSource(
-			connectDropTarget!(<div style={{ ...style, opacity }}>{text}</div>),
+		const elementRef = useRef(null)
+		connectDragSource(elementRef)
+		connectDropTarget(elementRef)
+
+		useImperativeHandle(outerRef, () => ({
+			getRef: () => elementRef,
+		}))
+
+		return (
+			<div ref={elementRef} style={{ ...style, opacity }}>
+				{text}
+			</div>
 		)
-	}
-}
+	},
+)
 
 export default DropTarget(
 	ItemTypes.CARD,
 	{
-		hover(
-			props: CardProps,
-			monitor: DropTargetMonitor,
-			component: Card | null,
-		) {
+		hover(props: CardProps, monitor: DropTargetMonitor, component: any | null) {
 			if (!component) {
 				return null
 			}
@@ -70,7 +70,7 @@ export default DropTarget(
 
 			// Determine rectangle on screen
 			const hoverBoundingRect = (findDOMNode(
-				component,
+				component.getRef().current,
 			) as Element).getBoundingClientRect()
 
 			// Get vertical middle
