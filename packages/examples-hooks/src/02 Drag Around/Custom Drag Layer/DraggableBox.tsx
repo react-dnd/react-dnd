@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import {
 	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
 	DragSourceMonitor,
@@ -37,18 +37,16 @@ export interface DraggableBoxProps {
 const DraggableBox: React.FC<DraggableBoxProps> = props => {
 	const { id, title, left, top } = props
 	const [{ isDragging }, drag, preview] = useDrag({
-		item: { type: ItemTypes.BOX, id },
-		previewOptions: {
-			// IE fallback: specify that we'd rather screenshot the node
-			// when it already knows it's being dragged so we can hide it with CSS.
-			captureDraggingState: true,
-		},
+		item: { type: ItemTypes.BOX, id, left, top },
 		collect: (monitor: DragSourceMonitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
 
-	preview(getEmptyImage())
+	useEffect(() => {
+		preview(getEmptyImage(), { captureDraggingState: true })
+	}, [])
+
 	return (
 		<div ref={drag} style={getStyles(left, top, isDragging)}>
 			<Box title={title} />

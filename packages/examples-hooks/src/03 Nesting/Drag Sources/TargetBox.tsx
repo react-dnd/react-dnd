@@ -1,5 +1,5 @@
 // tslint:disable max-classes-per-file
-import * as React from 'react'
+import React from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import Colors from './Colors'
 import { DragItem } from './interfaces'
@@ -60,28 +60,25 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 export interface StatefulTargetBoxState {
 	lastDroppedColor: string | null
 }
-export default class StatefulTargetBox extends React.Component<
-	{},
-	StatefulTargetBoxState
-> {
-	constructor(props: {}) {
-		super(props)
-		this.state = { lastDroppedColor: null }
-	}
-
-	public render() {
-		return (
-			<TargetBox
-				{...this.props}
-				lastDroppedColor={this.state.lastDroppedColor as string}
-				onDrop={((color: string) => this.handleDrop(color)) as any}
-			/>
-		)
-	}
-
-	private handleDrop(color: string) {
-		this.setState({
-			lastDroppedColor: color,
-		})
-	}
+export interface StatefulTargetBoxState {
+	lastDroppedColor: string | null
 }
+const StatefulTargetBox: React.FC = props => {
+	const [lastDroppedColor, setLastDroppedColor] = React.useState<string | null>(
+		null,
+	)
+	const handleDrop = React.useCallback(
+		(color: string) => setLastDroppedColor(color),
+		[],
+	)
+
+	return (
+		<TargetBox
+			{...props}
+			lastDroppedColor={lastDroppedColor as string}
+			onDrop={handleDrop}
+		/>
+	)
+}
+
+export default StatefulTargetBox

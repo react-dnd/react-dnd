@@ -8,6 +8,8 @@ import {
 	DndComponentEnhancer,
 } from './interfaces'
 import { Consumer } from './DragDropContext'
+import { isRefable } from './utils/isRefable'
+
 const hoistStatics = require('hoist-non-react-statics')
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
@@ -51,7 +53,7 @@ export default function DragLayer<RequiredProps, CollectedProps = {}>(
 			public getDecoratedComponentInstance() {
 				invariant(
 					this.ref.current,
-					'In order to access an instance of the decorated component it can not be a stateless component.',
+					'In order to access an instance of the decorated component, it must either be a class component or use React.forwardRef()',
 				)
 				return this.ref.current
 			}
@@ -94,7 +96,11 @@ export default function DragLayer<RequiredProps, CollectedProps = {}>(
 							}
 
 							return (
-								<Decorated {...this.props} {...this.state} ref={this.ref} />
+								<Decorated
+									{...this.props}
+									{...this.state}
+									ref={isRefable(Decorated) ? this.ref : null}
+								/>
 							)
 						}}
 					</Consumer>

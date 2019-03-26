@@ -1,6 +1,6 @@
 declare var require: any
 
-import * as React from 'react'
+import React from 'react'
 import {
 	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
 	DragDropContextProvider,
