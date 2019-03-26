@@ -7,10 +7,9 @@ import {
 	Identifier,
 } from '../../interfaces'
 import { DROP } from './types'
-
+import { isObject } from '../../utils/discount_lodash'
 declare var require: any
 const invariant = require('invariant')
-const isObject = require('lodash/isObject')
 
 export default function createDrop<Context>(manager: DragDropManager<Context>) {
 	return function drop(options = {}): void {

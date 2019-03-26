@@ -1,5 +1,3 @@
-declare var require: any
-
 import {
 	BEGIN_DRAG,
 	PUBLISH_DRAG_SOURCE,
@@ -16,7 +14,7 @@ import {
 import { Action } from '../interfaces'
 import { areArraysEqual } from '../utils/equality'
 import { NONE, ALL } from '../utils/dirtiness'
-const xor = require('lodash/xor')
+import { xor } from '../utils/discount_lodash'
 
 export type State = string[]
 

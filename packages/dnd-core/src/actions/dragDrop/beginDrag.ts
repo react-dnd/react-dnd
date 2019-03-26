@@ -10,8 +10,8 @@ import {
 	HandlerRegistry,
 } from '../../interfaces'
 import { setClientOffset } from './local/setClientOffset'
+import { isObject } from '../../utils/discount_lodash'
 const invariant = require('invariant')
-const isObject = require('lodash/isObject')
 
 import { BEGIN_DRAG, INIT_COORDS } from './types'
 

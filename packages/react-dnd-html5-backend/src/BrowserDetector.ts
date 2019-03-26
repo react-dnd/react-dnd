@@ -1,6 +1,4 @@
-declare var require: any
-
-const memoize = require('lodash/memoize')
+import { memoize } from './utils/discount_lodash'
 
 declare global {
 	// tslint:disable-next-line interface-name

@@ -1,6 +1,4 @@
-declare var require: any
-const isFunction = require('lodash/isFunction')
-const noop = require('lodash/noop')
+import { isFunction, noop } from '../discount_lodash'
 
 /**
  * Provides a set of static methods for creating Disposables.
