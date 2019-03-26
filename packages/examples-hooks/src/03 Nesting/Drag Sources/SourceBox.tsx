@@ -22,19 +22,14 @@ export interface SourceBoxProps {
 
 const SourceBox: React.FC<SourceBoxProps> = ({ color, children }) => {
 	const [forbidDrag, setForbidDrag] = useState(false)
-	const [{ isDragging }, drag] = useDrag(
-		useMemo(
-			() => ({
-				item: { type: `${color}` },
-				canDrag: () => !forbidDrag,
-				collect: (monitor: DragSourceMonitor) => ({
-					isDragging: monitor.isDragging(),
-				}),
-			}),
-			[forbidDrag, color],
-		),
-	)
-	const opacity = isDragging ? 0.4 : 1
+	const [{ isDragging }, drag] = useDrag({
+		item: { type: `${color}` },
+		canDrag: !forbidDrag,
+		collect: (monitor: DragSourceMonitor) => ({
+			isDragging: monitor.isDragging(),
+		}),
+	})
+
 	const onToggleForbidDrag = useCallback(() => {
 		setForbidDrag(!forbidDrag)
 	}, [forbidDrag])
@@ -54,10 +49,10 @@ const SourceBox: React.FC<SourceBoxProps> = ({ color, children }) => {
 		() => ({
 			...style,
 			backgroundColor,
-			opacity,
+			opacity: isDragging ? 0.4 : 1,
 			cursor: forbidDrag ? 'default' : 'move',
 		}),
-		[forbidDrag, backgroundColor],
+		[isDragging, forbidDrag, backgroundColor],
 	)
 
 	return (

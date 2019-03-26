@@ -51,7 +51,7 @@ export interface DragSourceHookSpec<
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: (monitor: DragSourceMonitor) => boolean
+	canDrag?: boolean | ((monitor: DragSourceMonitor) => boolean)
 
 	/**
 	 * Optional.
