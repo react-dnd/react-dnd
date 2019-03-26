@@ -6,7 +6,7 @@ import Box from '../Box'
 describe('Box', () => {
 	it('can be tested independently', () => {
 		// Obtain the reference to the component before React DnD wrapping
-		const OriginalBox = (Box as any).DecoratedComponent
+		const OriginalBox = Box.DecoratedComponent
 
 		// Stub the React DnD connector functions with an identity function
 		const identity = (x: any) => x
@@ -21,7 +21,7 @@ describe('Box', () => {
 		)
 		let div: HTMLDivElement = TestUtils.findRenderedDOMComponentWithTag(
 			root,
-			'div',
+			'div,',
 		) as HTMLDivElement
 		expect(div.style.opacity).toEqual('1')
 

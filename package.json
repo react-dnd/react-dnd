@@ -44,14 +44,13 @@
 		"test": "run-s lint build test_modules jest:cov",
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
-		"prepublish": "npm test",
+		"prepublishOnly": "npm test",
 		"start": "lerna run --parallel --stream start",
 		"watch": "lerna run --parallel --stream watch"
 	},
 	"husky": {
 		"hooks": {
 			"pre-commit": "lint-staged",
-			"pre-publish": "npm test",
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 		}
 	},

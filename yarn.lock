@@ -12173,18 +12173,18 @@ react-dev-utils@^4.2.1:
     text-table "0.2.0"
 
 "react-dnd-html5-backend@link:packages/react-dnd-html5-backend":
-  version "7.2.0"
+  version "7.4.0"
   dependencies:
-    dnd-core "^7.2.0"
+    dnd-core "^7.4.0"
     lodash "^4.17.11"
 
 "react-dnd-test-utils@link:packages/react-dnd-test-utils":
-  version "7.3.2"
+  version "7.4.0"
 
 "react-dnd@link:packages/react-dnd":
-  version "7.3.2"
+  version "7.4.1"
   dependencies:
-    dnd-core "^7.2.0"
+    dnd-core "^7.4.0"
     hoist-non-react-statics "^3.3.0"
     invariant "^2.1.0"
     lodash "^4.17.11"
