@@ -1,5 +1,3 @@
-declare var require: any
-
 import {
 	BEGIN_DRAG,
 	PUBLISH_DRAG_SOURCE,
@@ -9,7 +7,7 @@ import {
 } from '../actions/dragDrop'
 import { REMOVE_TARGET } from '../actions/registry'
 import { Identifier, Action } from '../interfaces'
-const without = require('lodash/without')
+import { without } from '../utils/discount_lodash'
 
 export interface State {
 	itemType: Identifier | Identifier[] | null

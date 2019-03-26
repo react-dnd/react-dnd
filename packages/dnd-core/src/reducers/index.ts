@@ -1,5 +1,3 @@
-declare var require: any
-
 import dragOffset, { State as DragOffsetState } from './dragOffset'
 import dragOperation, { State as DragOperationState } from './dragOperation'
 import refCount, { State as RefCountState } from './refCount'
@@ -7,7 +5,7 @@ import dirtyHandlerIds, {
 	State as DirtyHandlerIdsState,
 } from './dirtyHandlerIds'
 import stateId, { State as StateIdState } from './stateId'
-const get = require('lodash/get')
+import { get } from '../utils/discount_lodash'
 
 export interface State {
 	dirtyHandlerIds: DirtyHandlerIdsState
@@ -23,7 +21,7 @@ export default function reduce(state: State = {} as State, action: any) {
 			type: action.type,
 			payload: {
 				...action.payload,
-				prevTargetIds: get(state, 'dragOperation.targetIds', []),
+				prevTargetIds: get<string[]>(state, 'dragOperation.targetIds', []),
 			},
 		}),
 		dragOffset: dragOffset(state.dragOffset, action),

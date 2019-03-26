@@ -1,6 +1,4 @@
-declare var require: any
-
-const intersection = require('lodash/intersection')
+import { intersection } from './discount_lodash'
 
 export const NONE: string[] = []
 export const ALL: string[] = []
