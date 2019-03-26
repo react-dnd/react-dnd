@@ -1,4 +1,9 @@
 language: node_js
+os:
+  - windows
+  - linux
+  - osx
+
 addons:
   apt:
     update: true
