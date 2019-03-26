@@ -1,9 +1,19 @@
-import * as React from 'react'
+import React, { useState, useCallback } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
 import update from 'immutability-helper'
+
+interface DustbinState {
+	accepts: string[]
+	lastDroppedItem: any
+}
+
+interface BoxState {
+	name: string
+	type: string
+}
 
 export interface ContainerState {
 	droppedBoxNames: string[]
@@ -16,80 +26,75 @@ export interface ContainerState {
 		type: string
 	}>
 }
-export default class Container extends React.Component<{}, ContainerState> {
-	constructor(props: {}) {
-		super(props)
-		this.state = {
-			dustbins: [
-				{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
-				{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
-				{
-					accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL],
-					lastDroppedItem: null,
-				},
-				{ accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null },
-			],
-			boxes: [
-				{ name: 'Bottle', type: ItemTypes.GLASS },
-				{ name: 'Banana', type: ItemTypes.FOOD },
-				{ name: 'Magazine', type: ItemTypes.PAPER },
-			],
-			droppedBoxNames: [],
-		}
+
+const Container: React.FC = () => {
+	const [dustbins, setDustbins] = useState<DustbinState[]>([
+		{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
+		{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
+		{
+			accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL],
+			lastDroppedItem: null,
+		},
+		{ accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null },
+	])
+
+	const [boxes] = useState<BoxState[]>([
+		{ name: 'Bottle', type: ItemTypes.GLASS },
+		{ name: 'Banana', type: ItemTypes.FOOD },
+		{ name: 'Magazine', type: ItemTypes.PAPER },
+	])
+
+	const [droppedBoxNames, setDroppedBoxNames] = useState<string[]>([])
+
+	function isDropped(boxName: string) {
+		return droppedBoxNames.indexOf(boxName) > -1
 	}
 
-	public isDropped(boxName: string) {
-		return this.state.droppedBoxNames.indexOf(boxName) > -1
-	}
+	const handleDrop = useCallback(
+		(index: number, item: { name: string }) => {
+			const { name } = item
+			setDroppedBoxNames(
+				update(droppedBoxNames, name ? { $push: [name] } : { $push: [] }),
+			)
+			setDustbins(
+				update(dustbins, {
+					[index]: {
+						lastDroppedItem: {
+							$set: item,
+						},
+					},
+				}),
+			)
+		},
+		[droppedBoxNames, dustbins],
+	)
 
-	public render() {
-		const { boxes, dustbins } = this.state
-
-		return (
-			<div>
-				<h1>EXPERIMENTAL API</h1>
-				<div style={{ overflow: 'hidden', clear: 'both' }}>
-					{dustbins.map(({ accepts, lastDroppedItem }, index) => (
-						<Dustbin
-							accept={accepts}
-							lastDroppedItem={lastDroppedItem}
-							// tslint:disable-next-line jsx-no-lambda
-							onDrop={item => this.handleDrop(index, item)}
-							key={index}
-						/>
-					))}
-				</div>
-
-				<div style={{ overflow: 'hidden', clear: 'both' }}>
-					{boxes.map(({ name, type }, index) => (
-						<Box
-							name={name}
-							type={type}
-							isDropped={this.isDropped(name)}
-							key={index}
-						/>
-					))}
-				</div>
+	return (
+		<div>
+			<div style={{ overflow: 'hidden', clear: 'both' }}>
+				{dustbins.map(({ accepts, lastDroppedItem }, index) => (
+					<Dustbin
+						accept={accepts}
+						lastDroppedItem={lastDroppedItem}
+						// tslint:disable-next-line jsx-no-lambda
+						onDrop={item => handleDrop(index, item)}
+						key={index}
+					/>
+				))}
 			</div>
-		)
-	}
 
-	private handleDrop(index: number, item: { name: string }) {
-		const { name } = item
-		const droppedBoxNames = name ? { $push: [name] } : { $push: [] }
-		const dustbins = {
-			[index]: {
-				lastDroppedItem: {
-					$set: item,
-				},
-			},
-		}
-
-		this.setState(
-			update(this.state, {
-				dustbins,
-				droppedBoxNames,
-			}),
-		)
-	}
+			<div style={{ overflow: 'hidden', clear: 'both' }}>
+				{boxes.map(({ name, type }, index) => (
+					<Box
+						name={name}
+						type={type}
+						isDropped={isDropped(name)}
+						key={index}
+					/>
+				))}
+			</div>
+		</div>
+	)
 }
+
+export default Container

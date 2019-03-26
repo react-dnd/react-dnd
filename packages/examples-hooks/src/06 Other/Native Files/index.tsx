@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { useState, useCallback } from 'react'
 import { DropTargetMonitor } from 'react-dnd'
 import TargetBox from './TargetBox'

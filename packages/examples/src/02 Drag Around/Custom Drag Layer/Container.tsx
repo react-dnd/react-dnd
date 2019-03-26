@@ -1,5 +1,5 @@
 declare var require: any
-import * as React from 'react'
+import React from 'react'
 import {
 	DropTarget,
 	ConnectDropTarget,

@@ -17,7 +17,7 @@ const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(({ title }) => {
 	useEffect(function subscribeToIntervalTick() {
 		const interval = setInterval(() => setTickTock(!tickTock), 500)
 		return () => clearInterval(interval)
-	})
+	}, [])
 
 	return (
 		<div style={styles}>
