@@ -31,6 +31,10 @@ export interface CardProps {
 	connectDropTarget: ConnectDropTarget
 }
 
+interface CardInstance {
+	getNode(): HTMLDivElement | null
+}
+
 // NOTE: this must be a React.Component class because we use the component instance
 // in the hover function of the droptarget spec. We cannot get this instance on ref
 const Card: React.RefForwardingComponent<
@@ -43,7 +47,7 @@ const Card: React.RefForwardingComponent<
 		connectDropTarget(elementRef)
 
 		const opacity = isDragging ? 0 : 1
-		useImperativeHandle(ref, () => ({
+		useImperativeHandle<{}, CardInstance>(ref, () => ({
 			getNode: () => elementRef.current,
 		}))
 		return (
@@ -57,7 +61,11 @@ const Card: React.RefForwardingComponent<
 export default DropTarget(
 	ItemTypes.CARD,
 	{
-		hover(props: CardProps, monitor: DropTargetMonitor, component: any | null) {
+		hover(
+			props: CardProps,
+			monitor: DropTargetMonitor,
+			component: CardInstance,
+		) {
 			if (!component) {
 				return null
 			}
