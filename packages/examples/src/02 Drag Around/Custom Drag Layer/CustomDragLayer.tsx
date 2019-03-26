@@ -49,7 +49,7 @@ export interface CustomDragLayerProps {
 	snapToGrid: boolean
 }
 
-const CustomDragLayer: React.SFC<CustomDragLayerProps> = props => {
+const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
 	const { item, itemType, isDragging } = props
 
 	function renderItem() {
