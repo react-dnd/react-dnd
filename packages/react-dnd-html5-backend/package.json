@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-html5-backend",
-	"version": "7.2.0",
+	"version": "7.4.0",
 	"description": "HTML5 backend for React DnD",
 	"main": "lib/cjs/index.js",
 	"types": "lib/cjs/index.d.ts",
@@ -21,14 +21,14 @@
 		"start": "tsc -b tsconfig.esm.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
-		"dnd-core": "^7.2.0",
+		"dnd-core": "^7.4.0",
 		"lodash": "^4.17.11"
 	},
 	"devDependencies": {
 		"@types/react": "^16.8.7",
 		"npm-run-all": "^4.1.5",
 		"react": "link:../react-dnd/node_modules/react",
-		"react-dnd-test-backend": "^7.2.0",
+		"react-dnd-test-backend": "^7.4.0",
 		"react-dom": "link:../react-dnd/node_modules/react-dom",
 		"rimraf": "^2.6.3",
 		"ts-loader": "^5.3.3",
