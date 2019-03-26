@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-documentation-examples-hooks",
-	"version": "7.4.2",
+	"version": "7.4.3",
 	"private": true,
 	"description": "Drag and Drop for React",
 	"main": "lib/cjs/index.js",
