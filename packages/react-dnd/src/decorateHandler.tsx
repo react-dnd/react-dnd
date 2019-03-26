@@ -11,11 +11,17 @@ import {
 	SerialDisposable,
 } from './utils/disposables'
 import { Connector } from './SourceConnector'
-const isClassComponent = require('recompose/isClassComponent').default
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')
+
+const isClassComponent = (Component: any) =>
+  Boolean(
+    Component &&
+      Component.prototype &&
+      typeof Component.prototype.render === 'function'
+)
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any
