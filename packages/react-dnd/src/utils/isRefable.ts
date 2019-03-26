@@ -1,5 +1,10 @@
-declare var require: any
-const isClassComponent = require('recompose/isClassComponent').default
+function isClassComponent(Component: any): boolean {
+	return (
+		Component &&
+		Component.prototype &&
+		typeof Component.prototype.render === 'function'
+	)
+}
 
 export function isRefForwardingComponent(C: any) {
 	return (
