@@ -78,9 +78,13 @@
 			"js",
 			"jsx"
 		],
+		"modulePaths": [
+			"<rootDir>/packages"
+		],
 		"collectCoverageFrom": [
 			"packages/*/src/**/*.{ts,tsx}",
-			"!**/__tests__/**"
+			"!**/__tests__/**",
+			"!packages/documentation/**"
 		],
 		"testMatch": [
 			"<rootDir>/packages/**/__tests__/**/?(*.)(spec|test).(t|j)s(x|)"
@@ -92,12 +96,6 @@
 			"ts-jest": {
 				"tsConfig": "tsconfig.jest.json"
 			}
-		},
-		"moduleNameMapper": {
-			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
-			"react-dnd-html5-backend": "<rootDir>//packages/react-dnd-html5-backend/src",
-			"react-dnd-test-backend": "<rootDir>//packages/react-dnd-test-backend/src",
-			"dnd-core": "<rootDir>//packages/dnd-core/src"
 		}
 	},
 	"lint-staged": {
