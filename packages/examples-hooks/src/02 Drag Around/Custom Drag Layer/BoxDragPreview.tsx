@@ -18,10 +18,13 @@ export interface BoxDragPreviewState {
 const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(({ title }) => {
 	const [tickTock, setTickTock] = useState(false)
 
-	useEffect(function subscribeToIntervalTick() {
-		const interval = setInterval(() => setTickTock(!tickTock), 500)
-		return () => clearInterval(interval)
-	}, [])
+	useEffect(
+		function subscribeToIntervalTick() {
+			const interval = setInterval(() => setTickTock(!tickTock), 500)
+			return () => clearInterval(interval)
+		},
+		[tickTock],
+	)
 
 	return (
 		<div style={styles}>
