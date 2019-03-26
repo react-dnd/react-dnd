@@ -8,8 +8,6 @@ const style = {
   backgroundColor: 'white',
   cursor: 'move',
 }
-// NOTE: this must be a React.Component class because we use the component instance
-// in the hover function of the droptarget spec. We cannot get this instance on ref
 const Card = React.forwardRef(
   ({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
     const elementRef = useRef(null)
