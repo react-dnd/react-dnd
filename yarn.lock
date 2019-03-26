@@ -12178,9 +12178,6 @@ react-dev-utils@^4.2.1:
     dnd-core "^7.4.0"
     lodash "^4.17.11"
 
-"react-dnd-test-utils@link:packages/react-dnd-test-utils":
-  version "7.4.0"
-
 "react-dnd@link:packages/react-dnd":
   version "7.4.1"
   dependencies:
