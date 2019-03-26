@@ -4,9 +4,9 @@ import * as React from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
 import { getDecoratedComponent } from './utils/getDecoratedComponent'
+import { isPlainObject } from './utils/discount_lodash'
 
 const invariant = require('invariant')
-const isPlainObject = require('lodash/isPlainObject')
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']

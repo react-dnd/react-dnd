@@ -1,5 +1,3 @@
-declare var require: any
-
 import {
 	DragDropManager,
 	DragDropActions,
@@ -8,7 +6,10 @@ import {
 	HoverOptions,
 	Identifier,
 } from 'dnd-core'
-const noop = require('lodash/noop')
+
+function noop() {
+	// noop
+}
 
 export interface TestBackend {
 	didCallSetup: boolean

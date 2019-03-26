@@ -15,8 +15,8 @@ import createTargetFactory from './createTargetFactory'
 import isValidType from './utils/isValidType'
 import DropTargetMonitorImpl from './DropTargetMonitorImpl'
 import TargetConnector from './TargetConnector'
+import { isPlainObject } from './utils/discount_lodash'
 const invariant = require('invariant')
-const isPlainObject = require('lodash/isPlainObject')
 
 export default function DropTarget<RequiredProps, CollectedProps = {}>(
 	type: TargetType | ((props: RequiredProps) => TargetType),
