@@ -26,7 +26,6 @@ interface BoxProps {
 }
 const Box: React.FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
 	const opacity = isDragging ? 0.4 : 1
-
 	return (
 		<div ref={connectDragSource} style={{ ...style, opacity }}>
 			{name}
