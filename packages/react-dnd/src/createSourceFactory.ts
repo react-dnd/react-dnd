@@ -3,6 +3,7 @@ declare var process: any
 import * as React from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceSpec, DragSourceMonitor } from './interfaces'
+import { getDecoratedComponent } from './utils/getDecoratedComponent'
 
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
@@ -75,7 +76,7 @@ class SourceImpl<Props> implements Source {
 			return
 		}
 
-		this.spec.endDrag(this.props, this.monitor, this.ref.current)
+		this.spec.endDrag(this.props, this.monitor, getDecoratedComponent(this.ref))
 	}
 }
 

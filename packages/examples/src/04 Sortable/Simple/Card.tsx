@@ -1,5 +1,4 @@
-import React, { useRef, useImperativeHandle } from 'react'
-import { findDOMNode } from 'react-dom'
+import React, { useImperativeHandle, useRef } from 'react'
 import {
 	DragSource,
 	DropTarget,
@@ -34,17 +33,19 @@ export interface CardProps {
 
 // NOTE: this must be a React.Component class because we use the component instance
 // in the hover function of the droptarget spec. We cannot get this instance on ref
-const Card: React.RefForwardingComponent<any, CardProps> = React.forwardRef(
-	({ text, isDragging, connectDragSource, connectDropTarget }, outerRef) => {
-		const opacity = isDragging ? 0 : 1
+const Card: React.RefForwardingComponent<
+	HTMLDivElement,
+	CardProps
+> = React.forwardRef(
+	({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
 		const elementRef = useRef(null)
 		connectDragSource(elementRef)
 		connectDropTarget(elementRef)
 
-		useImperativeHandle(outerRef, () => ({
-			getRef: () => elementRef,
+		const opacity = isDragging ? 0 : 1
+		useImperativeHandle(ref, () => ({
+			getNode: () => elementRef.current,
 		}))
-
 		return (
 			<div ref={elementRef} style={{ ...style, opacity }}>
 				{text}
@@ -60,6 +61,12 @@ export default DropTarget(
 			if (!component) {
 				return null
 			}
+			// node = HTML Div element from imperative API
+			const node = component.getNode()
+			if (!node) {
+				return null
+			}
+
 			const dragIndex = monitor.getItem().index
 			const hoverIndex = props.index
 
@@ -69,9 +76,7 @@ export default DropTarget(
 			}
 
 			// Determine rectangle on screen
-			const hoverBoundingRect = (findDOMNode(
-				component.getRef().current,
-			) as Element).getBoundingClientRect()
+			const hoverBoundingRect = node.getBoundingClientRect()
 
 			// Get vertical middle
 			const hoverMiddleY =
