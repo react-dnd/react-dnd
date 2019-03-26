@@ -4,6 +4,8 @@ declare var process: any
 import * as React from 'react'
 import { DropTarget } from 'dnd-core'
 import { DropTargetSpec, DropTargetMonitor } from './interfaces'
+import { getDecoratedComponent } from './utils/getDecoratedComponent'
+
 const invariant = require('invariant')
 const isPlainObject = require('lodash/isPlainObject')
 
@@ -43,8 +45,11 @@ class TargetImpl<Props> implements Target {
 		if (!this.spec.hover) {
 			return
 		}
-
-		this.spec.hover(this.props as Props, this.monitor, this.ref.current)
+		this.spec.hover(
+			this.props as Props,
+			this.monitor,
+			getDecoratedComponent(this.ref),
+		)
 	}
 
 	public drop() {
