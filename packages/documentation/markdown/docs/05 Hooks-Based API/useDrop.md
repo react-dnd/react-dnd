@@ -27,7 +27,6 @@ function myDropTarget(props) {
 #### Parameters
 
 - **`spec`** A specification object, see below for details on how to construct this
-- **`memoization parameters`** - values to use when rebuilding the memoized specification
 
 #### Return Value Array
 
