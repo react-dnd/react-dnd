@@ -1,16 +1,12 @@
-declare var require: any
-
-const union = require('lodash/union')
-const without = require('lodash/without')
-
-type NodePredicate = (node: any) => boolean;
+import { union, without } from './utils/discount_lodash'
+type NodePredicate = (node: any) => boolean
 
 export default class EnterLeaveCounter {
 	private entered: any[] = []
 	private isNodeInDocument: NodePredicate
 
 	constructor(isNodeInDocument: NodePredicate) {
-		this.isNodeInDocument = isNodeInDocument;
+		this.isNodeInDocument = isNodeInDocument
 	}
 
 	public enter(enteringNode: any) {

@@ -21,8 +21,7 @@
 		"start": "tsc -b tsconfig.esm.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
-		"dnd-core": "^7.4.0",
-		"lodash": "^4.17.11"
+		"dnd-core": "^7.4.0"
 	},
 	"devDependencies": {
 		"@types/react": "^16.8.7",

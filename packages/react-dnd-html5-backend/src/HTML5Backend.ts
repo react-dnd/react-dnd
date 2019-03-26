@@ -1,5 +1,3 @@
-declare var require: any
-
 import {
 	Backend,
 	DragDropManager,
@@ -22,7 +20,6 @@ import {
 import * as NativeTypes from './NativeTypes'
 import { HTML5BackendContext } from './interfaces'
 import { NativeDragSource } from './NativeDragSources/NativeDragSource'
-const defaults = require('lodash/defaults')
 
 declare global {
 	// tslint:disable-next-line interface-name
@@ -216,9 +213,10 @@ export default class HTML5Backend implements Backend {
 		const sourceId = this.monitor.getSourceId() as string
 		const sourceNodeOptions = this.sourceNodeOptions.get(sourceId)
 
-		return defaults(sourceNodeOptions || {}, {
+		return {
 			dropEffect: this.altKeyPressed ? 'copy' : 'move',
-		})
+			...(sourceNodeOptions || {}),
+		}
 	}
 
 	private getCurrentDropEffect() {
@@ -234,11 +232,12 @@ export default class HTML5Backend implements Backend {
 		const sourceId = this.monitor.getSourceId() as string
 		const sourcePreviewNodeOptions = this.sourcePreviewNodeOptions.get(sourceId)
 
-		return defaults(sourcePreviewNodeOptions || {}, {
+		return {
 			anchorX: 0.5,
 			anchorY: 0.5,
 			captureDraggingState: false,
-		})
+			...(sourcePreviewNodeOptions || {}),
+		}
 	}
 
 	private getSourceClientOffset = (sourceId: string) => {
