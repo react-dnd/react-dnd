@@ -11,7 +11,7 @@ import {
 	SerialDisposable,
 } from './utils/disposables'
 import { Connector } from './SourceConnector'
-const isClassComponent = require('recompose/isClassComponent').default
+import { isRefable } from './utils/isRefable'
 const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
@@ -85,7 +85,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 		public getDecoratedComponentInstance() {
 			invariant(
 				this.decoratedRef.current,
-				'In order to access an instance of the decorated component it can not be a stateless component.',
+				'In order to access an instance of the decorated component, it must either be a class component or use React.forwardRef()',
 			)
 			return this.decoratedRef.current as any
 		}
@@ -210,7 +210,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 								{...this.props}
 								{...this.getCurrentState()}
 								// NOTE: if Decorated is a Function Component, decoratedRef will not be populated unless it's a refforwarding component.
-								ref={isClassComponent(Decorated) ? this.decoratedRef : null}
+								ref={isRefable(Decorated) ? this.decoratedRef : null}
 							/>
 						)
 					}}

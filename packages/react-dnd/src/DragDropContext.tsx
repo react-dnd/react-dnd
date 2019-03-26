@@ -8,8 +8,10 @@ import {
 } from 'dnd-core'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { ContextComponent } from './interfaces'
+import { isRefable } from './utils/isRefable'
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
+
 /**
  * The React context type
  */
@@ -92,7 +94,7 @@ export function DragDropContext(
 			public getDecoratedComponentInstance() {
 				invariant(
 					this.ref.current,
-					'In order to access an instance of the decorated component it can not be a stateless component.',
+					'In order to access an instance of the decorated component, it must either be a class component or use React.forwardRef()',
 				)
 				return this.ref.current
 			}
@@ -103,7 +105,10 @@ export function DragDropContext(
 				return (
 					<Provider value={childContext}>
 						{/* If decorated is an FC, then the reff will be blank */}
-						<Decorated {...this.props} ref={this.ref} />
+						<Decorated
+							{...this.props}
+							ref={isRefable(Decorated) ? this.ref : null}
+						/>
 					</Provider>
 				)
 			}

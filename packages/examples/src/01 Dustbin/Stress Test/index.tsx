@@ -1,6 +1,6 @@
 // tslint:disable jsx-no-lambda
 declare var require: any
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
@@ -23,97 +23,85 @@ export interface ContainerState {
 	dustbins: DustbinBox[]
 	droppedBoxNames: string[]
 }
-export default class Container extends React.Component<{}, ContainerState> {
-	private interval: any
 
-	constructor(props: {}) {
-		super(props)
-		this.state = {
-			dustbins: [
-				{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
-				{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
-				{
-					accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL],
-					lastDroppedItem: null,
-				},
-				{ accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null },
-			],
-			boxes: [
-				{ name: 'Bottle', type: ItemTypes.GLASS },
-				{ name: 'Banana', type: ItemTypes.FOOD },
-				{ name: 'Magazine', type: ItemTypes.PAPER },
-			],
-			droppedBoxNames: [],
-		}
-	}
+const Container: React.FC = () => {
+	const [dustbins, setDustbins] = useState<DustbinBox[]>([
+		{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
+		{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
+		{
+			accepts: [ItemTypes.PAPER, ItemTypes.GLASS, NativeTypes.URL],
+			lastDroppedItem: null,
+		},
+		{ accepts: [ItemTypes.PAPER, NativeTypes.FILE], lastDroppedItem: null },
+	])
+	const [boxes, setBoxes] = useState<SourceBox[]>([
+		{ name: 'Bottle', type: ItemTypes.GLASS },
+		{ name: 'Banana', type: ItemTypes.FOOD },
+		{ name: 'Magazine', type: ItemTypes.PAPER },
+	])
+	const [droppedBoxNames, setDroppedBoxNames] = useState<string[]>([])
 
-	public componentDidMount() {
-		this.interval = setInterval(() => this.tickTock(), 1000)
-	}
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setBoxes(shuffle(boxes))
+			setDustbins(shuffle(dustbins))
+		}, 1000)
+		return () => clearInterval(interval)
+	})
 
-	public tickTock() {
-		this.setState({
-			boxes: shuffle(this.state.boxes),
-			dustbins: shuffle(this.state.dustbins),
-		})
-	}
+	const isDropped = (boxName: string) => droppedBoxNames.indexOf(boxName) > -1
 
-	public componentWillUnmount() {
-		clearInterval(this.interval)
-	}
-
-	public isDropped(boxName: string) {
-		return this.state.droppedBoxNames.indexOf(boxName) > -1
-	}
-
-	public render() {
-		const { boxes, dustbins } = this.state
-
-		return (
-			<div>
-				<div style={{ overflow: 'hidden', clear: 'both' }}>
-					{dustbins.map(({ accepts, lastDroppedItem }, index) => (
-						<Dustbin
-							accepts={accepts}
-							lastDroppedItem={lastDroppedItem}
-							onDrop={item => this.handleDrop(index, item)}
-							key={index}
-						/>
-					))}
-				</div>
-
-				<div style={{ overflow: 'hidden', clear: 'both' }}>
-					{boxes.map(({ name, type }, index) => (
-						<Box
-							name={name}
-							type={type}
-							isDropped={this.isDropped(name)}
-							key={index}
-						/>
-					))}
-				</div>
-			</div>
-		)
-	}
-
-	public handleDrop(index: number, item: { name: string }) {
-		const { name } = item
-
-		this.setState(
-			update(this.state, {
-				dustbins: {
+	const handleDrop = useCallback(
+		(index: number, item: { name: string }) => {
+			const { name } = item
+			setDustbins(
+				update(dustbins, {
 					[index]: {
 						lastDroppedItem: {
 							$set: item,
 						},
 					},
-				},
-				droppedBoxNames: name
-					? {
-							$push: [name],
-					  }
-					: {},
-			}),
-		)
-	}
+				}),
+			)
+			setDroppedBoxNames(
+				update(
+					droppedBoxNames,
+					name
+						? {
+								$push: [name],
+						  }
+						: {},
+				),
+			)
+		},
+		[dustbins, droppedBoxNames],
+	)
+
+	return (
+		<div>
+			<div style={{ overflow: 'hidden', clear: 'both' }}>
+				{dustbins.map(({ accepts, lastDroppedItem }, index) => (
+					<Dustbin
+						accepts={accepts}
+						lastDroppedItem={lastDroppedItem}
+						onDrop={item => handleDrop(index, item)}
+						key={index}
+					/>
+				))}
+			</div>
+
+			<div style={{ overflow: 'hidden', clear: 'both' }}>
+				{boxes.map(({ name, type }, index) => (
+					<Box
+						name={name}
+						type={type}
+						isDropped={isDropped(name)}
+						key={index}
+					/>
+				))}
+			</div>
+		</div>
+	)
 }
+
+export default Container

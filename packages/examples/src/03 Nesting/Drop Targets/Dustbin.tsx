@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useImperativeHandle } from 'react'
 import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
@@ -18,32 +18,8 @@ function getStyle(backgroundColor: string): React.CSSProperties {
 	}
 }
 
-const boxTarget = {
-	drop(
-		props: DustbinProps,
-		monitor: DropTargetMonitor,
-		component: React.Component | null,
-	) {
-		if (!component) {
-			return
-		}
-		const hasDroppedOnChild = monitor.didDrop()
-		if (hasDroppedOnChild && !props.greedy) {
-			return
-		}
-
-		component.setState({
-			hasDropped: true,
-			hasDroppedOnChild,
-		})
-	},
-}
-
 export interface DustbinProps {
 	greedy?: boolean
-}
-
-interface DustbinCollectedProps {
 	isOver: boolean
 	isOverCurrent: boolean
 	connectDropTarget: ConnectDropTarget
@@ -54,24 +30,24 @@ export interface DustbinState {
 	hasDroppedOnChild: boolean
 }
 
-class Dustbin extends React.Component<
-	DustbinProps & DustbinCollectedProps,
-	DustbinState
-> {
-	public state: DustbinState = {
-		hasDropped: false,
-		hasDroppedOnChild: false,
-	}
+const Dustbin: React.RefForwardingComponent<
+	any,
+	DustbinProps
+> = React.forwardRef(
+	({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) => {
+		const [hasDropped, setHasDropped] = useState(false)
+		const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
 
-	public render() {
-		const {
-			greedy,
-			isOver,
-			isOverCurrent,
-			connectDropTarget,
-			children,
-		} = this.props
-		const { hasDropped, hasDroppedOnChild } = this.state
+		useImperativeHandle(
+			ref,
+			() => ({
+				onDrop: (onChild: boolean) => {
+					setHasDroppedOnChild(onChild)
+					setHasDropped(true)
+				},
+			}),
+			[],
+		)
 
 		const text = greedy ? 'greedy' : 'not greedy'
 		let backgroundColor = 'rgba(0, 0, 0, .5)'
@@ -85,14 +61,34 @@ class Dustbin extends React.Component<
 				{text}
 				<br />
 				{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
-
 				<div>{children}</div>
 			</div>,
 		)
-	}
-}
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	isOverCurrent: monitor.isOver({ shallow: true }),
-}))(Dustbin)
+	},
+)
+
+export default DropTarget(
+	ItemTypes.BOX,
+	{
+		drop(
+			props: DustbinProps,
+			monitor: DropTargetMonitor,
+			component: React.Component | null,
+		) {
+			if (!component) {
+				return
+			}
+			const hasDroppedOnChild = monitor.didDrop()
+			if (hasDroppedOnChild && !props.greedy) {
+				return
+			}
+
+			;(component as any).onDrop(hasDroppedOnChild)
+		},
+	},
+	(connect, monitor) => ({
+		connectDropTarget: connect.dropTarget(),
+		isOver: monitor.isOver(),
+		isOverCurrent: monitor.isOver({ shallow: true }),
+	}),
+)(Dustbin)

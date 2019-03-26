@@ -19,34 +19,34 @@ const handleStyle: React.CSSProperties = {
 	cursor: 'move',
 }
 
-const boxSource = {
-	beginDrag() {
-		return {}
-	},
-}
-
 export interface BoxWithHandleProps {
 	connectDragSource: ConnectDragSource
 	connectDragPreview: ConnectDragPreview
 	isDragging: boolean
 }
 
-class BoxWithHandle extends React.Component<BoxWithHandleProps> {
-	public render() {
-		const { isDragging, connectDragSource, connectDragPreview } = this.props
-		const opacity = isDragging ? 0.4 : 1
-
-		return connectDragPreview(
-			<div style={{ ...style, opacity }}>
-				{connectDragSource(<div style={handleStyle} />)}
-				Drag me by the handle
-			</div>,
-		)
-	}
+const BoxWithHandle: React.FC<BoxWithHandleProps> = ({
+	isDragging,
+	connectDragSource,
+	connectDragPreview,
+}) => {
+	const opacity = isDragging ? 0.4 : 1
+	return connectDragPreview(
+		<div style={{ ...style, opacity }}>
+			{connectDragSource(<div style={handleStyle} />)}
+			Drag me by the handle
+		</div>,
+	)
 }
 
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	connectDragPreview: connect.dragPreview(),
-	isDragging: monitor.isDragging(),
-}))(BoxWithHandle)
+export default DragSource(
+	ItemTypes.BOX,
+	{
+		beginDrag: () => ({}),
+	},
+	(connect, monitor) => ({
+		connectDragSource: connect.dragSource(),
+		connectDragPreview: connect.dragPreview(),
+		isDragging: monitor.isDragging(),
+	}),
+)(BoxWithHandle)

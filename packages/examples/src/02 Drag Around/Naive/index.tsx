@@ -1,42 +1,32 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import Container from './Container'
 
 export interface DragAroundNaiveState {
 	hideSourceOnDrag: boolean
 }
 
-export default class DragAroundNaive extends React.Component<
-	{},
-	DragAroundNaiveState
-> {
-	public state = {
-		hideSourceOnDrag: true,
-	}
+const DragAroundNaive: React.FC = () => {
+	const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true)
+	const handleHideSourceClick = useCallback(() => {
+		setHideSourceOnDrag(!hideSourceOnDrag)
+	}, [hideSourceOnDrag])
 
-	public render() {
-		const { hideSourceOnDrag } = this.state
-
-		return (
-			<div>
-				<Container hideSourceOnDrag={hideSourceOnDrag} />
-				<p>
-					<label htmlFor="hideSourceOnDrag">
-						<input
-							id="hideSourceOnDrag"
-							type="checkbox"
-							checked={hideSourceOnDrag}
-							onChange={this.handleHideSourceClick}
-						/>
-						<small>Hide the source item while dragging</small>
-					</label>
-				</p>
-			</div>
-		)
-	}
-
-	private handleHideSourceClick = () => {
-		this.setState({
-			hideSourceOnDrag: !this.state.hideSourceOnDrag,
-		})
-	}
+	return (
+		<div>
+			<Container hideSourceOnDrag={hideSourceOnDrag} />
+			<p>
+				<label htmlFor="hideSourceOnDrag">
+					<input
+						id="hideSourceOnDrag"
+						type="checkbox"
+						checked={hideSourceOnDrag}
+						onChange={handleHideSourceClick}
+					/>
+					<small>Hide the source item while dragging</small>
+				</label>
+			</p>
+		</div>
+	)
 }
+
+export default DragAroundNaive

@@ -1,6 +1,9 @@
 // tslint:disable max-classes-per-file jsx-no-lambda
-import * as React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import React, { useState, useCallback, useMemo } from 'react'
+import {
+	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
+	DragSourceMonitor,
+} from 'react-dnd'
 import Colors from './Colors'
 const {
 	useDrag,
@@ -14,47 +17,46 @@ const style: React.CSSProperties = {
 
 export interface SourceBoxProps {
 	color?: string
-	forbidDrag?: boolean
 	onToggleForbidDrag?: () => void
 }
 
-const SourceBox: React.FC<SourceBoxProps> = ({
-	color,
-	forbidDrag,
-	onToggleForbidDrag,
-	children,
-}) => {
+const SourceBox: React.FC<SourceBoxProps> = ({ color, children }) => {
+	const [forbidDrag, setForbidDrag] = useState(false)
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: `${color}` },
-		canDrag: () => !forbidDrag,
-		collect: monitor => ({
+		canDrag: !forbidDrag,
+		collect: (monitor: DragSourceMonitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
-	const opacity = isDragging ? 0.4 : 1
 
-	let backgroundColor
-	switch (color) {
-		case Colors.YELLOW:
-			backgroundColor = 'lightgoldenrodyellow'
-			break
-		case Colors.BLUE:
-			backgroundColor = 'lightblue'
-			break
-		default:
-			break
-	}
+	const onToggleForbidDrag = useCallback(() => {
+		setForbidDrag(!forbidDrag)
+	}, [forbidDrag])
+
+	const backgroundColor = useMemo(() => {
+		switch (color) {
+			case Colors.YELLOW:
+				return 'lightgoldenrodyellow'
+			case Colors.BLUE:
+				return 'lightblue'
+			default:
+				return 'lightgoldenrodyellow'
+		}
+	}, [color])
+
+	const containerStyle = useMemo(
+		() => ({
+			...style,
+			backgroundColor,
+			opacity: isDragging ? 0.4 : 1,
+			cursor: forbidDrag ? 'default' : 'move',
+		}),
+		[isDragging, forbidDrag, backgroundColor],
+	)
 
 	return (
-		<div
-			ref={drag}
-			style={{
-				...style,
-				backgroundColor,
-				opacity,
-				cursor: forbidDrag ? 'default' : 'move',
-			}}
-		>
+		<div ref={drag} style={containerStyle}>
 			<input
 				type="checkbox"
 				checked={forbidDrag}
@@ -66,37 +68,4 @@ const SourceBox: React.FC<SourceBoxProps> = ({
 	)
 }
 
-export interface StatefulSourceBoxProps {
-	color: string
-}
-
-export interface StatefulSourceBoxState {
-	forbidDrag: boolean
-}
-export default class StatefulSourceBox extends React.Component<
-	StatefulSourceBoxProps,
-	StatefulSourceBoxState
-> {
-	constructor(props: StatefulSourceBoxProps) {
-		super(props)
-		this.state = {
-			forbidDrag: false,
-		}
-	}
-
-	public render() {
-		return (
-			<SourceBox
-				{...this.props}
-				forbidDrag={this.state.forbidDrag}
-				onToggleForbidDrag={() => this.handleToggleForbidDrag()}
-			/>
-		)
-	}
-
-	private handleToggleForbidDrag() {
-		this.setState({
-			forbidDrag: !this.state.forbidDrag,
-		})
-	}
-}
+export default SourceBox
