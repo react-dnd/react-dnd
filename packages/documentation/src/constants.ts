@@ -165,10 +165,6 @@ export const ExamplePages: PageGroup[] = [
 				location: '/examples/dustbin/iframe',
 				title: 'Within an iframe',
 			},
-			DUSTBIN_FC: {
-				location: '/examples/dustbin/using-fcs',
-				title: 'Using FCs',
-			},
 			DUSTBIN_COPY_OR_MOVE: {
 				location: '/examples/dustbin/copy-or-move',
 				title: 'Copy or Move',
