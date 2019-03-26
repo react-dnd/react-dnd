@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Board from './Board'
 import { observe } from './Game'
 

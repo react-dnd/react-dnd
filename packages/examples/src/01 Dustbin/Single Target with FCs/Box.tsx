@@ -19,18 +19,13 @@ const style: React.CSSProperties = {
 
 export interface BoxProps {
 	name: string
-}
 
-interface BoxCollectedProps {
+	// Collected Props
 	isDragging?: boolean
 	connectDragSource?: ConnectDragSource
 }
 
-const Box: React.FC<BoxProps & BoxCollectedProps> = ({
-	isDragging,
-	connectDragSource,
-	name,
-}) => {
+const Box: React.FC<BoxProps> = ({ isDragging, connectDragSource, name }) => {
 	const opacity = isDragging ? 0.4 : 1
 	const ref = React.createRef()
 	return connectDragSource

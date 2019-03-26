@@ -3,7 +3,7 @@ import { name } from 'faker'
 import Card from './Card'
 import update from 'immutability-helper'
 
-const style = {
+const style: React.CSSProperties = {
 	width: 400,
 }
 

@@ -50,8 +50,13 @@ export function useDragHandler<
 				return item || {}
 			},
 			canDrag() {
-				const { canDrag } = spec.current
-				return canDrag ? canDrag(monitor) : true
+				if (typeof spec.current.canDrag === 'boolean') {
+					return spec.current.canDrag
+				} else if (typeof spec.current.canDrag === 'function') {
+					return spec.current.canDrag(monitor)
+				} else {
+					return true
+				}
 			},
 			isDragging(globalMonitor: DragDropMonitor, target) {
 				const { isDragging } = spec.current

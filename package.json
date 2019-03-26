@@ -44,14 +44,13 @@
 		"test": "run-s lint build test_modules jest:cov",
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
-		"prepublish": "npm test",
+		"prepublishOnly": "npm test",
 		"start": "lerna run --parallel --stream start",
 		"watch": "lerna run --parallel --stream watch"
 	},
 	"husky": {
 		"hooks": {
 			"pre-commit": "lint-staged",
-			"pre-publish": "npm test",
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 		}
 	},
@@ -79,9 +78,20 @@
 			"js",
 			"jsx"
 		],
+		"modulePaths": [
+			"<rootDir>/packages"
+		],
+		"moduleNameMapper": {
+			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
+			"^react-dnd-html5-backend$": "<rootDir>//packages/react-dnd-html5-backend/src",
+			"^react-dnd-test-backend$": "<rootDir>//packages/react-dnd-test-backend/src",
+			"^react-dnd-test-utils$": "<rootDir>//packages/react-dnd-test-utils/src",
+			"^dnd-core$": "<rootDir>//packages/dnd-core/src"
+		},
 		"collectCoverageFrom": [
 			"packages/*/src/**/*.{ts,tsx}",
-			"!**/__tests__/**"
+			"!**/__tests__/**",
+			"!packages/documentation/**"
 		],
 		"testMatch": [
 			"<rootDir>/packages/**/__tests__/**/?(*.)(spec|test).(t|j)s(x|)"
@@ -93,12 +103,6 @@
 			"ts-jest": {
 				"tsConfig": "tsconfig.jest.json"
 			}
-		},
-		"moduleNameMapper": {
-			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
-			"react-dnd-html5-backend": "<rootDir>//packages/react-dnd-html5-backend/src",
-			"react-dnd-test-backend": "<rootDir>//packages/react-dnd-test-backend/src",
-			"dnd-core": "<rootDir>//packages/dnd-core/src"
 		}
 	},
 	"lint-staged": {

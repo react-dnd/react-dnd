@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
 	ConnectDropTarget,
 	DropTarget,
@@ -19,33 +19,20 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-const dustbinTarget = {
-	drop(props: DustbinProps, monitor: DropTargetMonitor) {
-		props.onDrop(monitor.getItem())
-	},
-}
-
 export interface DustbinProps {
 	lastDroppedItem?: any
 	accepts: string[]
 	onDrop: (arg: any) => void
-}
 
-interface DustbinCollectedProps {
+	// Collected Props
+
 	connectDropTarget: ConnectDropTarget
 	isOver: boolean
 	canDrop: boolean
 }
 
-class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
-	public render() {
-		const {
-			accepts,
-			isOver,
-			canDrop,
-			connectDropTarget,
-			lastDroppedItem,
-		} = this.props
+const Dustbin: React.FC<DustbinProps> = memo(
+	({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem }) => {
 		const isActive = isOver && canDrop
 
 		let backgroundColor = '#222'
@@ -66,12 +53,16 @@ class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
 				)}
 			</div>,
 		)
-	}
-}
+	},
+)
 
 export default DropTarget(
 	(props: DustbinProps) => props.accepts,
-	dustbinTarget,
+	{
+		drop(props: DustbinProps, monitor: DropTargetMonitor) {
+			props.onDrop(monitor.getItem())
+		},
+	},
 	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),

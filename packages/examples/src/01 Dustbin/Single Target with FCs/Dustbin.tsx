@@ -20,13 +20,13 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-interface DustbinCollectedProps {
+interface DustbinProps {
 	canDrop?: boolean
 	isOver?: boolean
 	connectDropTarget?: ConnectDropTarget
 }
 
-const Dustbin: React.FC<DustbinCollectedProps> = ({
+const Dustbin: React.FC<DustbinProps> = ({
 	canDrop,
 	isOver,
 	connectDropTarget,
@@ -52,9 +52,7 @@ const Dustbin: React.FC<DustbinCollectedProps> = ({
 export default DropTarget(
 	ItemTypes.BOX,
 	{
-		drop() {
-			return { name: 'Dustbin' }
-		},
+		drop: () => ({ name: 'Dustbin' }),
 	},
 	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
 		connectDropTarget: connect.dropTarget(),
