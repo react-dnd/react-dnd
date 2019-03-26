@@ -202,7 +202,9 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 				<Consumer>
 					{({ dragDropManager }) => {
 						this.receiveDragDropManager(dragDropManager)
-						requestAnimationFrame(() => this.handlerConnector!.reconnect())
+						if (typeof requestAnimationFrame !== 'undefined') {
+							requestAnimationFrame(() => this.handlerConnector!.reconnect())
+						}
 						return (
 							<Decorated
 								{...this.props}
