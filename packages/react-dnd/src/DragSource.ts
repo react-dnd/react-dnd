@@ -10,8 +10,8 @@ import DragSourceMonitorImpl from './DragSourceMonitorImpl'
 import SourceConnector from './SourceConnector'
 import isValidType from './utils/isValidType'
 import { DndComponentEnhancer } from './interfaces'
+import { isPlainObject } from './utils/discount_lodash'
 const invariant = require('invariant')
-const isPlainObject = require('lodash/isPlainObject')
 
 /**
  * Decorates a component as a dragsource

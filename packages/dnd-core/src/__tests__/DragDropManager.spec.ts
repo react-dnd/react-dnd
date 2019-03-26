@@ -1,4 +1,3 @@
-declare var require: any
 declare var setImmediate: any
 
 import createTestBackend, { TestBackend } from 'react-dnd-test-backend'
@@ -13,7 +12,7 @@ import {
 } from './targets'
 import DragDropManagerImpl from '../DragDropManagerImpl'
 import { DragDropManager, HandlerRegistry } from '../interfaces'
-const isString = require('lodash/isString')
+import { isString } from '../utils/discount_lodash'
 
 describe('DragDropManager', () => {
 	let manager: DragDropManager<any>
