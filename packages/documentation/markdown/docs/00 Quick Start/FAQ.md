@@ -43,7 +43,9 @@ Because [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-
 
 ### Why is the `component` parameter always `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods?
 
-When using [function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), the `component` parameter will always be `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods. This is because it is not possible to attach a ref to a stateless function component as explained in [the React docs](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
+When using [function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), refs cannot normally be attached. However, if you use [React.forwardRef](https://reactjs.org/docs/forwarding-refs.html), then you can access the rendered component. If your component exposes an imperative API via the [useImperativeHandle hook](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), then you can expose functionality that way.
+
+If you use a tool like [babel-react-optimize](https://github.com/jamiebuilds/babel-react-optimize#transform-react-pure-class-to-function) preset or [babel-plugin-transform-react-pure-class-to-function](https://github.com/jamiebuilds/babel-react-optimize/tree/master/packages/babel-plugin-transform-react-pure-class-to-function), then be aware that your class definition may implicitly be transformed into a function component, which may result in a null argument.
 
 ```js
 import { DragSource } from 'react-dnd'
