@@ -17,17 +17,12 @@ const style: React.CSSProperties = {
 export interface TargetBoxProps {
 	accepts: string[]
 	onDrop: (props: TargetBoxProps, monitor: DropTargetMonitor) => void
-}
-
-interface TargetBoxCollectedProps {
 	isOver: boolean
 	canDrop: boolean
 	connectDropTarget: ConnectDropTarget
 }
 
-class TargetBox extends React.Component<
-	TargetBoxProps & TargetBoxCollectedProps
-> {
+class TargetBox extends React.Component<TargetBoxProps> {
 	public render() {
 		const { canDrop, isOver, connectDropTarget } = this.props
 		const isActive = canDrop && isOver

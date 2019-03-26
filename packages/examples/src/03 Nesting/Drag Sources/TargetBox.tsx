@@ -11,27 +11,17 @@ const style: React.CSSProperties = {
 	textAlign: 'center',
 }
 
-const ColorTarget = {
-	drop(props: TargetBoxProps, monitor: DropTargetMonitor) {
-		props.onDrop(monitor.getItemType())
-	},
-}
-
 export interface TargetBoxProps {
 	onDrop: (item: any) => void
 	lastDroppedColor?: string
-}
 
-interface TargetBoxCollectedProps {
 	isOver: boolean
 	canDrop: boolean
 	draggingColor: string
 	connectDropTarget: ConnectDropTarget
 }
 
-class TargetBoxRaw extends React.Component<
-	TargetBoxProps & TargetBoxCollectedProps
-> {
+class TargetBoxRaw extends React.Component<TargetBoxProps> {
 	public render() {
 		const {
 			canDrop,
@@ -68,7 +58,11 @@ class TargetBoxRaw extends React.Component<
 
 const TargetBox = DropTarget(
 	[Colors.YELLOW, Colors.BLUE],
-	ColorTarget,
+	{
+		drop(props: TargetBoxProps, monitor: DropTargetMonitor) {
+			props.onDrop(monitor.getItemType())
+		},
+	},
 	(connect, monitor) => ({
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),

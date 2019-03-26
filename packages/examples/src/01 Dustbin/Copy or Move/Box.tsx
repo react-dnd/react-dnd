@@ -17,15 +17,12 @@ const style: React.CSSProperties = {
 }
 
 export interface BoxProps {
+	isDragging: boolean
+	connectDragSource: ConnectDragSource
 	name: string
 }
 
-interface BoxCollectedProps {
-	isDragging: boolean
-	connectDragSource: ConnectDragSource
-}
-
-class Box extends React.Component<BoxProps & BoxCollectedProps> {
+class Box extends React.Component<BoxProps> {
 	public render() {
 		const { isDragging, connectDragSource } = this.props
 		const { name } = this.props

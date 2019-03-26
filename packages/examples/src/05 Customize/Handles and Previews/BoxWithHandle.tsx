@@ -19,12 +19,6 @@ const handleStyle: React.CSSProperties = {
 	cursor: 'move',
 }
 
-const boxSource = {
-	beginDrag() {
-		return {}
-	},
-}
-
 export interface BoxWithHandleProps {
 	connectDragSource: ConnectDragSource
 	connectDragPreview: ConnectDragPreview
@@ -45,8 +39,14 @@ class BoxWithHandle extends React.Component<BoxWithHandleProps> {
 	}
 }
 
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	connectDragPreview: connect.dragPreview(),
-	isDragging: monitor.isDragging(),
-}))(BoxWithHandle)
+export default DragSource(
+	ItemTypes.BOX,
+	{
+		beginDrag: () => ({}),
+	},
+	(connect, monitor) => ({
+		connectDragSource: connect.dragSource(),
+		connectDragPreview: connect.dragPreview(),
+		isDragging: monitor.isDragging(),
+	}),
+)(BoxWithHandle)

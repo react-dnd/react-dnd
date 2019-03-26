@@ -15,30 +15,16 @@ const style: React.CSSProperties = {
 	margin: '0.5rem',
 }
 
-const ColorSource = {
-	canDrag(props: SourceBoxProps) {
-		return !props.forbidDrag
-	},
-
-	beginDrag() {
-		return {}
-	},
-}
-
 export interface SourceBoxProps {
 	color?: string
 	forbidDrag?: boolean
 	onToggleForbidDrag?: () => void
-}
 
-interface SourceBoxCollectedProps {
 	connectDragSource: ConnectDragSource
 	isDragging: boolean
 }
 
-class SourceBoxRaw extends React.Component<
-	SourceBoxProps & SourceBoxCollectedProps
-> {
+class SourceBoxRaw extends React.Component<SourceBoxProps> {
 	public render() {
 		const {
 			color,
@@ -85,7 +71,10 @@ class SourceBoxRaw extends React.Component<
 
 const SourceBox = DragSource(
 	(props: SourceBoxProps) => props.color + '',
-	ColorSource,
+	{
+		canDrag: (props: SourceBoxProps) => !props.forbidDrag,
+		beginDrag: () => ({}),
+	},
 	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
 		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),

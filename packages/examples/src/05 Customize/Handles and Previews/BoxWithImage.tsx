@@ -12,12 +12,6 @@ const style = {
 	width: '20rem',
 }
 
-const BoxSource = {
-	beginDrag() {
-		return {}
-	},
-}
-
 export interface BoxWithImageProps {
 	connectDragSource: ConnectDragSource
 	connectDragPreview: ConnectDragPreview
@@ -41,8 +35,14 @@ class BoxWithImage extends React.Component<BoxWithImageProps> {
 		)
 	}
 }
-export default DragSource(ItemTypes.BOX, BoxSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	connectDragPreview: connect.dragPreview(),
-	isDragging: monitor.isDragging(),
-}))(BoxWithImage)
+export default DragSource(
+	ItemTypes.BOX,
+	{
+		beginDrag: () => ({}),
+	},
+	(connect, monitor) => ({
+		connectDragSource: connect.dragSource(),
+		connectDragPreview: connect.dragPreview(),
+		isDragging: monitor.isDragging(),
+	}),
+)(BoxWithImage)

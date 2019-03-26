@@ -15,26 +15,14 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-const boxTarget = {
-	drop({ allowedDropEffect }: DustbinProps) {
-		return {
-			name: `${allowedDropEffect} Dustbin`,
-			allowedDropEffect,
-		}
-	},
-}
-
 export interface DustbinProps {
 	allowedDropEffect: string
-}
-
-interface DustbinCollectedProps {
 	connectDropTarget: ConnectDropTarget
 	canDrop: boolean
 	isOver: boolean
 }
 
-class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
+class Dustbin extends React.Component<DustbinProps> {
 	public render() {
 		const { canDrop, isOver, allowedDropEffect, connectDropTarget } = this.props
 		const isActive = canDrop && isOver
@@ -57,8 +45,17 @@ class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
 	}
 }
 
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	canDrop: monitor.canDrop(),
-}))(Dustbin)
+export default DropTarget(
+	ItemTypes.BOX,
+	{
+		drop: ({ allowedDropEffect }: DustbinProps) => ({
+			name: `${allowedDropEffect} Dustbin`,
+			allowedDropEffect,
+		}),
+	},
+	(connect, monitor) => ({
+		connectDropTarget: connect.dropTarget(),
+		isOver: monitor.isOver(),
+		canDrop: monitor.canDrop(),
+	}),
+)(Dustbin)

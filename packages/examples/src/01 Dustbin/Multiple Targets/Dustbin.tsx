@@ -14,25 +14,18 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-const dustbinTarget = {
-	drop(props: DustbinProps, monitor: DropTargetMonitor) {
-		props.onDrop(monitor.getItem())
-	},
-}
-
 export interface DustbinProps {
 	accepts: string[]
 	lastDroppedItem?: any
 	onDrop: (item: any) => void
-}
 
-export interface DustbinCollectedProps {
+	// Collected Props
 	canDrop: boolean
 	isOver: boolean
 	connectDropTarget: ConnectDropTarget
 }
 
-class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
+class Dustbin extends React.Component<DustbinProps> {
 	public render() {
 		const {
 			accepts,
@@ -66,7 +59,11 @@ class Dustbin extends React.Component<DustbinProps & DustbinCollectedProps> {
 
 export default DropTarget(
 	(props: DustbinProps) => props.accepts,
-	dustbinTarget,
+	{
+		drop(props: DustbinProps, monitor: DropTargetMonitor) {
+			props.onDrop(monitor.getItem())
+		},
+	},
 	(connect, monitor) => ({
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),

@@ -3,7 +3,6 @@ import {
 	DropTarget,
 	DropTargetMonitor,
 	DropTargetConnector,
-	DropTargetCollector,
 	ConnectDropTarget,
 } from 'react-dnd'
 import { Square } from './Square'
@@ -11,39 +10,18 @@ import { canMoveKnight, moveKnight } from './Game'
 import ItemTypes from './ItemTypes'
 import Overlay from './Overlay'
 
-interface CollectedProps {
-	isOver: boolean
-	canDrop: boolean
-	connectDropTarget: ConnectDropTarget
-}
 export interface BoardSquareProps {
 	x: number
 	y: number
 	children: any
+
+	// Collected Props
+	isOver: boolean
+	canDrop: boolean
+	connectDropTarget: ConnectDropTarget
 }
 
-const squareTarget = {
-	canDrop(props: BoardSquareProps) {
-		return canMoveKnight(props.x, props.y)
-	},
-
-	drop(props: BoardSquareProps) {
-		moveKnight(props.x, props.y)
-	},
-}
-
-const collect: DropTargetCollector<CollectedProps, BoardSquareProps> = (
-	connect: DropTargetConnector,
-	monitor: DropTargetMonitor,
-) => {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: !!monitor.isOver(),
-		canDrop: !!monitor.canDrop(),
-	}
-}
-
-class BoardSquare extends React.Component<BoardSquareProps & CollectedProps> {
+class BoardSquare extends React.Component<BoardSquareProps> {
 	public render() {
 		const { x, y, connectDropTarget, isOver, canDrop, children } = this.props
 		const black = (x + y) % 2 === 1
@@ -65,4 +43,17 @@ class BoardSquare extends React.Component<BoardSquareProps & CollectedProps> {
 	}
 }
 
-export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare)
+export default DropTarget(
+	ItemTypes.KNIGHT,
+	{
+		canDrop: (props: BoardSquareProps) => canMoveKnight(props.x, props.y),
+		drop: (props: BoardSquareProps) => moveKnight(props.x, props.y),
+	},
+	(connect: DropTargetConnector, monitor: DropTargetMonitor) => {
+		return {
+			connectDropTarget: connect.dropTarget(),
+			isOver: !!monitor.isOver(),
+			canDrop: !!monitor.canDrop(),
+		}
+	},
+)(BoardSquare)

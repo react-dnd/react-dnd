@@ -18,32 +18,8 @@ function getStyle(backgroundColor: string): React.CSSProperties {
 	}
 }
 
-const boxTarget = {
-	drop(
-		props: DustbinProps,
-		monitor: DropTargetMonitor,
-		component: React.Component | null,
-	) {
-		if (!component) {
-			return
-		}
-		const hasDroppedOnChild = monitor.didDrop()
-		if (hasDroppedOnChild && !props.greedy) {
-			return
-		}
-
-		component.setState({
-			hasDropped: true,
-			hasDroppedOnChild,
-		})
-	},
-}
-
 export interface DustbinProps {
 	greedy?: boolean
-}
-
-interface DustbinCollectedProps {
 	isOver: boolean
 	isOverCurrent: boolean
 	connectDropTarget: ConnectDropTarget
@@ -54,10 +30,7 @@ export interface DustbinState {
 	hasDroppedOnChild: boolean
 }
 
-class Dustbin extends React.Component<
-	DustbinProps & DustbinCollectedProps,
-	DustbinState
-> {
+class Dustbin extends React.Component<DustbinProps, DustbinState> {
 	public state: DustbinState = {
 		hasDropped: false,
 		hasDroppedOnChild: false,
@@ -91,8 +64,31 @@ class Dustbin extends React.Component<
 		)
 	}
 }
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	isOverCurrent: monitor.isOver({ shallow: true }),
-}))(Dustbin)
+export default DropTarget(
+	ItemTypes.BOX,
+	{
+		drop(
+			props: DustbinProps,
+			monitor: DropTargetMonitor,
+			component: React.Component | null,
+		) {
+			if (!component) {
+				return
+			}
+			const hasDroppedOnChild = monitor.didDrop()
+			if (hasDroppedOnChild && !props.greedy) {
+				return
+			}
+
+			component.setState({
+				hasDropped: true,
+				hasDroppedOnChild,
+			})
+		},
+	},
+	(connect, monitor) => ({
+		connectDropTarget: connect.dropTarget(),
+		isOver: monitor.isOver(),
+		isOverCurrent: monitor.isOver({ shallow: true }),
+	}),
+)(Dustbin)

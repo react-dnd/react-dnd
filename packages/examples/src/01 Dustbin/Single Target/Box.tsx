@@ -19,31 +19,13 @@ const style: React.CSSProperties = {
 
 interface BoxProps {
 	name: string
-}
 
-interface BoxCollectedProps {
+	// Collected Props
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
 }
 
-const boxSource = {
-	beginDrag(props: BoxProps) {
-		return {
-			name: props.name,
-		}
-	},
-
-	endDrag(props: BoxProps, monitor: DragSourceMonitor) {
-		const item = monitor.getItem()
-		const dropResult = monitor.getDropResult()
-
-		if (dropResult) {
-			alert(`You dropped ${item.name} into ${dropResult.name}!`)
-		}
-	},
-}
-
-class Box extends React.Component<BoxProps & BoxCollectedProps> {
+class Box extends React.Component<BoxProps> {
 	private dragSource: React.RefObject<HTMLDivElement> = React.createRef()
 
 	public render() {
@@ -61,7 +43,17 @@ class Box extends React.Component<BoxProps & BoxCollectedProps> {
 
 export default DragSource(
 	ItemTypes.BOX,
-	boxSource,
+	{
+		beginDrag: (props: BoxProps) => ({ name: props.name }),
+		endDrag(props: BoxProps, monitor: DragSourceMonitor) {
+			const item = monitor.getItem()
+			const dropResult = monitor.getDropResult()
+
+			if (dropResult) {
+				alert(`You dropped ${item.name} into ${dropResult.name}!`)
+			}
+		},
+	},
 	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
 		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),

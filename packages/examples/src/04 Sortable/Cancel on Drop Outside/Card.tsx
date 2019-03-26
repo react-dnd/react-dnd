@@ -17,59 +17,18 @@ const style = {
 	cursor: 'move',
 }
 
-const cardSource = {
-	beginDrag(props: CardProps) {
-		return {
-			id: props.id,
-			originalIndex: props.findCard(props.id).index,
-		}
-	},
-
-	endDrag(props: CardProps, monitor: DragSourceMonitor) {
-		const { id: droppedId, originalIndex } = monitor.getItem()
-		const didDrop = monitor.didDrop()
-
-		if (!didDrop) {
-			props.moveCard(droppedId, originalIndex)
-		}
-	},
-}
-
-const cardTarget = {
-	canDrop() {
-		return false
-	},
-
-	hover(props: CardProps, monitor: DropTargetMonitor) {
-		const { id: draggedId } = monitor.getItem()
-		const { id: overId } = props
-
-		if (draggedId !== overId) {
-			const { index: overIndex } = props.findCard(overId)
-			props.moveCard(draggedId, overIndex)
-		}
-	},
-}
-
 export interface CardProps {
 	id: string
 	text: string
 	moveCard: (id: string, to: number) => void
 	findCard: (id: string) => { index: number }
-}
 
-interface CardSourceCollectedProps {
 	connectDragSource: ConnectDragSource
+	connectDropTarget: ConnectDropTarget
 	isDragging: boolean
 }
 
-interface CardTargetCollectedProps {
-	connectDropTarget: ConnectDropTarget
-}
-
-class Card extends React.Component<
-	CardProps & CardSourceCollectedProps & CardTargetCollectedProps
-> {
+class Card extends React.Component<CardProps> {
 	public render() {
 		const {
 			text,
@@ -85,11 +44,42 @@ class Card extends React.Component<
 	}
 }
 
-export default DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-	connectDropTarget: connect.dropTarget(),
-}))(
-	DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}))(Card),
+export default DropTarget(
+	ItemTypes.CARD,
+	{
+		canDrop: () => false,
+		hover(props: CardProps, monitor: DropTargetMonitor) {
+			const { id: draggedId } = monitor.getItem()
+			const { id: overId } = props
+
+			if (draggedId !== overId) {
+				const { index: overIndex } = props.findCard(overId)
+				props.moveCard(draggedId, overIndex)
+			}
+		},
+	},
+	connect => ({
+		connectDropTarget: connect.dropTarget(),
+	}),
+)(
+	DragSource(
+		ItemTypes.CARD,
+		{
+			beginDrag: (props: CardProps) => ({
+				id: props.id,
+				originalIndex: props.findCard(props.id).index,
+			}),
+			endDrag(props: CardProps, monitor: DragSourceMonitor) {
+				const { id: droppedId, originalIndex } = monitor.getItem()
+				const didDrop = monitor.didDrop()
+				if (!didDrop) {
+					props.moveCard(droppedId, originalIndex)
+				}
+			},
+		},
+		(connect, monitor) => ({
+			connectDragSource: connect.dragSource(),
+			isDragging: monitor.isDragging(),
+		}),
+	)(Card),
 )

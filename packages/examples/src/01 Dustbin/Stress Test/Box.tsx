@@ -16,30 +16,17 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-const boxSource = {
-	beginDrag(props: BoxProps) {
-		return {
-			name: props.name,
-		}
-	},
-
-	isDragging(props: BoxProps, monitor: DragSourceMonitor) {
-		const item = monitor.getItem()
-		return props.name === item.name
-	},
-}
-
 export interface BoxProps {
 	name: string
 	type: string
 	isDropped: boolean
-}
 
-interface BoxCollectedProps {
+	// Collected Props
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
 }
-class Box extends React.Component<BoxProps & BoxCollectedProps> {
+
+class Box extends React.Component<BoxProps> {
 	public render() {
 		const { name, isDropped, isDragging, connectDragSource } = this.props
 		const opacity = isDragging ? 0.4 : 1
@@ -54,7 +41,13 @@ class Box extends React.Component<BoxProps & BoxCollectedProps> {
 
 export default DragSource(
 	(props: BoxProps) => props.type,
-	boxSource,
+	{
+		beginDrag: (props: BoxProps) => ({ name: props.name }),
+		isDragging(props: BoxProps, monitor: DragSourceMonitor) {
+			const item = monitor.getItem()
+			return props.name === item.name
+		},
+	},
 	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
 		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),

@@ -16,29 +16,8 @@ const styles: React.CSSProperties = {
 	position: 'relative',
 }
 
-const boxTarget = {
-	drop(
-		props: ContainerProps,
-		monitor: DropTargetMonitor,
-		component: Container | null,
-	) {
-		if (!component) {
-			return
-		}
-		const item = monitor.getItem()
-		const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
-		const left = Math.round(item.left + delta.x)
-		const top = Math.round(item.top + delta.y)
-
-		component.moveBox(item.id, left, top)
-	},
-}
-
 export interface ContainerProps {
 	hideSourceOnDrag: boolean
-}
-
-interface ContainerCollectedProps {
 	connectDropTarget: ConnectDropTarget
 }
 
@@ -46,10 +25,7 @@ export interface ContainerState {
 	boxes: { [key: string]: { top: number; left: number; title: string } }
 }
 
-class Container extends React.Component<
-	ContainerProps & ContainerCollectedProps,
-	ContainerState
-> {
+class Container extends React.Component<ContainerProps, ContainerState> {
 	public state: ContainerState = {
 		boxes: {
 			a: { top: 20, left: 80, title: 'Drag me around' },
@@ -94,6 +70,26 @@ class Container extends React.Component<
 	}
 }
 
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect: any) => ({
-	connectDropTarget: connect.dropTarget(),
-}))(Container)
+export default DropTarget(
+	ItemTypes.BOX,
+	{
+		drop(
+			props: ContainerProps,
+			monitor: DropTargetMonitor,
+			component: Container | null,
+		) {
+			if (!component) {
+				return
+			}
+			const item = monitor.getItem()
+			const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
+			const left = Math.round(item.left + delta.x)
+			const top = Math.round(item.top + delta.y)
+
+			component.moveBox(item.id, left, top)
+		},
+	},
+	(connect: any) => ({
+		connectDropTarget: connect.dropTarget(),
+	}),
+)(Container)

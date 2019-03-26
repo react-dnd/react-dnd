@@ -10,12 +10,6 @@ const style: React.CSSProperties = {
 	textAlign: 'center',
 }
 
-const boxTarget = {
-	drop() {
-		//
-	},
-}
-
 export interface TargetBoxProps {
 	connectDropTarget: ConnectDropTarget
 	isOver: boolean
@@ -35,7 +29,7 @@ class TargetBox extends React.Component<TargetBoxProps> {
 	}
 }
 
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
+export default DropTarget(ItemTypes.BOX, {}, (connect, monitor) => ({
 	connectDropTarget: connect.dropTarget(),
 	isOver: monitor.isOver(),
 	canDrop: monitor.canDrop(),

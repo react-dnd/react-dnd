@@ -11,24 +11,13 @@ const style: React.CSSProperties = {
 	cursor: 'move',
 }
 
-const boxSource = {
-	beginDrag() {
-		return {}
-	},
-}
-
 export interface SourceBoxProps {
 	showCopyIcon?: boolean
-}
-
-interface SourceBoxCollectedProps {
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
 }
 
-class SourceBox extends React.Component<
-	SourceBoxProps & SourceBoxCollectedProps
-> {
+class SourceBox extends React.Component<SourceBoxProps> {
 	public render() {
 		const { isDragging, connectDragSource, showCopyIcon } = this.props
 		const opacity = isDragging ? 0.4 : 1
@@ -43,7 +32,13 @@ class SourceBox extends React.Component<
 	}
 }
 
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-	connectDragSource: connect.dragSource(),
-	isDragging: monitor.isDragging(),
-}))(SourceBox)
+export default DragSource(
+	ItemTypes.BOX,
+	{
+		beginDrag: () => ({}),
+	},
+	(connect, monitor) => ({
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging(),
+	}),
+)(SourceBox)

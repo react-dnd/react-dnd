@@ -20,10 +20,6 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-const boxTarget = {
-	drop: () => ({ name: 'Dustbin' }),
-}
-
 export interface DustbinProps {
 	canDrop: boolean
 	isOver: boolean
@@ -55,7 +51,9 @@ class Dustbin extends React.Component<DustbinProps> {
 
 export default DropTarget(
 	ItemTypes.BOX,
-	boxTarget,
+	{
+		drop: () => ({ name: 'Dustbin' }),
+	},
 	(connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),

@@ -16,40 +16,16 @@ const style: React.CSSProperties = {
 	cursor: 'move',
 }
 
-const cardSource = {
-	beginDrag(props: CardProps) {
-		return { id: props.id }
-	},
-}
-
-const cardTarget = {
-	hover(props: CardProps, monitor: DropTargetMonitor) {
-		const draggedId = monitor.getItem().id
-
-		if (draggedId !== props.id) {
-			props.moveCard(draggedId, props.id)
-		}
-	},
-}
-
 export interface CardProps {
 	id: any
 	text: string
 	moveCard: (draggedId: string, id: string) => void
-}
-
-interface CardSourceCollectedProps {
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
-}
-
-interface CardTargetCollectedProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-class Card extends React.Component<
-	CardProps & CardSourceCollectedProps & CardTargetCollectedProps
-> {
+class Card extends React.Component<CardProps> {
 	public render() {
 		const {
 			text,
@@ -65,11 +41,28 @@ class Card extends React.Component<
 	}
 }
 
-export default DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-	connectDropTarget: connect.dropTarget(),
-}))(
-	DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}))(Card),
+export default DropTarget(
+	ItemTypes.CARD,
+	{
+		hover(props: CardProps, monitor: DropTargetMonitor) {
+			const draggedId = monitor.getItem().id
+			if (draggedId !== props.id) {
+				props.moveCard(draggedId, props.id)
+			}
+		},
+	},
+	connect => ({
+		connectDropTarget: connect.dropTarget(),
+	}),
+)(
+	DragSource(
+		ItemTypes.CARD,
+		{
+			beginDrag: (props: CardProps) => ({ id: props.id }),
+		},
+		(connect, monitor) => ({
+			connectDragSource: connect.dragSource(),
+			isDragging: monitor.isDragging(),
+		}),
+	)(Card),
 )

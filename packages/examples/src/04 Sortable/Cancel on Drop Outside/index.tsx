@@ -8,12 +8,6 @@ const style = {
 	width: 400,
 }
 
-const cardTarget = {
-	drop() {
-		//
-	},
-}
-
 export interface ContainerProps {
 	connectDropTarget: ConnectDropTarget
 }
@@ -97,6 +91,6 @@ class Container extends React.Component<ContainerProps, ContainerState> {
 	}
 }
 
-export default DropTarget(ItemTypes.CARD, cardTarget, connect => ({
+export default DropTarget(ItemTypes.CARD, {}, connect => ({
 	connectDropTarget: connect.dropTarget(),
 }))(Container)
