@@ -85,10 +85,6 @@ export const APIPages: PageGroup[] = [
 				location: '/docs/api/use-drag-layer',
 				title: 'useDragLayer',
 			},
-			USE_DRAG_PREVIEW: {
-				location: '/docs/api/use-drag-preview',
-				title: 'useDragPreview',
-			},
 			USE_DROP: {
 				location: '/docs/api/use-drop',
 				title: 'useDrop',
