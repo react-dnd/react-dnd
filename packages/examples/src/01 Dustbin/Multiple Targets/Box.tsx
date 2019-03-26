@@ -26,17 +26,16 @@ export interface BoxProps {
 	isDragging: boolean
 }
 
-class Box extends React.Component<BoxProps> {
-	public render() {
-		const { name, isDropped, isDragging, connectDragSource } = this.props
-		const opacity = isDragging ? 0.4 : 1
-
-		return connectDragSource(
-			<div style={{ ...style, opacity }}>
-				{isDropped ? <s>{name}</s> : name}
-			</div>,
-		)
-	}
+const Box: React.FC<BoxProps> = ({
+	name,
+	isDropped,
+	isDragging,
+	connectDragSource,
+}) => {
+	const opacity = isDragging ? 0.4 : 1
+	return connectDragSource(
+		<div style={{ ...style, opacity }}>{isDropped ? <s>{name}</s> : name}</div>,
+	)
 }
 
 export default DragSource(

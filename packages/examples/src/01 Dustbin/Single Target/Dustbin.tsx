@@ -26,27 +26,24 @@ export interface DustbinProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-class Dustbin extends React.Component<DustbinProps> {
-	private dropTarget: React.RefObject<HTMLDivElement> = React.createRef()
-
-	public render() {
-		const { canDrop, isOver, connectDropTarget } = this.props
-		const isActive = canDrop && isOver
-		connectDropTarget(this.dropTarget)
-
-		let backgroundColor = '#222'
-		if (isActive) {
-			backgroundColor = 'darkgreen'
-		} else if (canDrop) {
-			backgroundColor = 'darkkhaki'
-		}
-
-		return (
-			<div ref={this.dropTarget} style={{ ...style, backgroundColor }}>
-				{isActive ? 'Release to drop' : 'Drag a box here'}
-			</div>
-		)
+const Dustbin: React.FC<DustbinProps> = ({
+	canDrop,
+	isOver,
+	connectDropTarget,
+}) => {
+	const isActive = canDrop && isOver
+	let backgroundColor = '#222'
+	if (isActive) {
+		backgroundColor = 'darkgreen'
+	} else if (canDrop) {
+		backgroundColor = 'darkkhaki'
 	}
+
+	return (
+		<div ref={connectDropTarget} style={{ ...style, backgroundColor }}>
+			{isActive ? 'Release to drop' : 'Drag a box here'}
+		</div>
+	)
 }
 
 export default DropTarget(

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 const styles: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -11,9 +11,9 @@ export interface BoxProps {
 	yellow?: boolean
 }
 
-const Box: React.FC<BoxProps> = ({ title, yellow }) => {
+const Box: React.FC<BoxProps> = memo(({ title, yellow }) => {
 	const backgroundColor = yellow ? 'yellow' : 'white'
 	return <div style={{ ...styles, backgroundColor }}>{title}</div>
-}
+})
 
 export default Box

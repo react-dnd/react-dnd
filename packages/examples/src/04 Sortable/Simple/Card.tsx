@@ -32,6 +32,8 @@ export interface CardProps {
 	connectDropTarget?: ConnectDropTarget
 }
 
+// NOTE: this must be a React.Component class because we use the component instance
+// in the hover function of the droptarget spec. We cannot get this instance on ref
 class Card extends React.Component<CardProps> {
 	public render() {
 		const {
@@ -41,7 +43,6 @@ class Card extends React.Component<CardProps> {
 			connectDropTarget,
 		} = this.props
 		const opacity = isDragging ? 0 : 1
-
 		return connectDragSource(
 			connectDropTarget!(<div style={{ ...style, opacity }}>{text}</div>),
 		)
@@ -113,12 +114,10 @@ export default DropTarget(
 	DragSource(
 		ItemTypes.CARD,
 		{
-			beginDrag(props: CardProps) {
-				return {
-					id: props.id,
-					index: props.index,
-				}
-			},
+			beginDrag: (props: CardProps) => ({
+				id: props.id,
+				index: props.index,
+			}),
 		},
 		(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
 			connectDragSource: connect.dragSource(),

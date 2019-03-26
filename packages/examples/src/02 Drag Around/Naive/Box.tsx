@@ -21,24 +21,21 @@ export interface BoxProps {
 	isDragging?: boolean
 }
 
-class Box extends React.Component<BoxProps> {
-	public render() {
-		const {
-			hideSourceOnDrag,
-			left,
-			top,
-			connectDragSource,
-			isDragging,
-			children,
-		} = this.props
-		if (isDragging && hideSourceOnDrag) {
-			return null
-		}
-
-		return connectDragSource(
-			<div style={{ ...style, left, top }}>{children}</div>,
-		)
+const Box: React.FC<BoxProps> = ({
+	hideSourceOnDrag,
+	left,
+	top,
+	connectDragSource,
+	isDragging,
+	children,
+}) => {
+	if (isDragging && hideSourceOnDrag) {
+		return null
 	}
+
+	return connectDragSource(
+		<div style={{ ...style, left, top }}>{children}</div>,
+	)
 }
 
 export default DragSource(

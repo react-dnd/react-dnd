@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
 	ConnectDropTarget,
 	DropTarget,
@@ -31,15 +31,8 @@ export interface DustbinProps {
 	canDrop: boolean
 }
 
-class Dustbin extends React.Component<DustbinProps> {
-	public render() {
-		const {
-			accepts,
-			isOver,
-			canDrop,
-			connectDropTarget,
-			lastDroppedItem,
-		} = this.props
+const Dustbin: React.FC<DustbinProps> = memo(
+	({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem }) => {
 		const isActive = isOver && canDrop
 
 		let backgroundColor = '#222'
@@ -60,8 +53,8 @@ class Dustbin extends React.Component<DustbinProps> {
 				)}
 			</div>,
 		)
-	}
-}
+	},
+)
 
 export default DropTarget(
 	(props: DustbinProps) => props.accepts,

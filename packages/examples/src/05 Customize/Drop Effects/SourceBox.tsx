@@ -17,19 +17,19 @@ export interface SourceBoxProps {
 	connectDragSource: ConnectDragSource
 }
 
-class SourceBox extends React.Component<SourceBoxProps> {
-	public render() {
-		const { isDragging, connectDragSource, showCopyIcon } = this.props
-		const opacity = isDragging ? 0.4 : 1
-		const dropEffect = showCopyIcon ? 'copy' : 'move'
-
-		return connectDragSource(
-			<div style={{ ...style, opacity }}>
-				When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
-			</div>,
-			{ dropEffect },
-		)
-	}
+const SourceBox: React.FC<SourceBoxProps> = ({
+	isDragging,
+	connectDragSource,
+	showCopyIcon,
+}) => {
+	const opacity = isDragging ? 0.4 : 1
+	const dropEffect = showCopyIcon ? 'copy' : 'move'
+	return connectDragSource(
+		<div style={{ ...style, opacity }}>
+			When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
+		</div>,
+		{ dropEffect },
+	)
 }
 
 export default DragSource(

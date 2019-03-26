@@ -21,26 +21,29 @@ export interface BoardSquareProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-class BoardSquare extends React.Component<BoardSquareProps> {
-	public render() {
-		const { x, y, connectDropTarget, isOver, canDrop, children } = this.props
-		const black = (x + y) % 2 === 1
+const boardSquareStyle: React.CSSProperties = {
+	position: 'relative',
+	width: '100%',
+	height: '100%',
+}
 
-		return connectDropTarget(
-			<div
-				style={{
-					position: 'relative',
-					width: '100%',
-					height: '100%',
-				}}
-			>
-				<Square black={black}>{children}</Square>
-				{isOver && !canDrop && <Overlay color="red" />}
-				{!isOver && canDrop && <Overlay color="yellow" />}
-				{isOver && canDrop && <Overlay color="green" />}
-			</div>,
-		)
-	}
+const BoardSquare: React.FC<BoardSquareProps> = ({
+	x,
+	y,
+	connectDropTarget,
+	isOver,
+	canDrop,
+	children,
+}) => {
+	const black = (x + y) % 2 === 1
+	return connectDropTarget(
+		<div style={boardSquareStyle}>
+			<Square black={black}>{children}</Square>
+			{isOver && !canDrop && <Overlay color="red" />}
+			{!isOver && canDrop && <Overlay color="yellow" />}
+			{isOver && canDrop && <Overlay color="green" />}
+		</div>,
+	)
 }
 
 export default DropTarget(

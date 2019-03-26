@@ -22,27 +22,29 @@ export interface DustbinProps {
 	isOver: boolean
 }
 
-class Dustbin extends React.Component<DustbinProps> {
-	public render() {
-		const { canDrop, isOver, allowedDropEffect, connectDropTarget } = this.props
-		const isActive = canDrop && isOver
+const Dustbin: React.FC<DustbinProps> = ({
+	canDrop,
+	isOver,
+	allowedDropEffect,
+	connectDropTarget,
+}) => {
+	const isActive = canDrop && isOver
 
-		let backgroundColor = '#222'
-		if (isActive) {
-			backgroundColor = 'darkgreen'
-		} else if (canDrop) {
-			backgroundColor = 'darkkhaki'
-		}
-
-		return connectDropTarget(
-			<div style={{ ...style, backgroundColor }}>
-				{`Works with ${allowedDropEffect} drop effect`}
-				<br />
-				<br />
-				{isActive ? 'Release to drop' : 'Drag a box here'}
-			</div>,
-		)
+	let backgroundColor = '#222'
+	if (isActive) {
+		backgroundColor = 'darkgreen'
+	} else if (canDrop) {
+		backgroundColor = 'darkkhaki'
 	}
+
+	return connectDropTarget(
+		<div style={{ ...style, backgroundColor }}>
+			{`Works with ${allowedDropEffect} drop effect`}
+			<br />
+			<br />
+			{isActive ? 'Release to drop' : 'Drag a box here'}
+		</div>,
+	)
 }
 
 export default DropTarget(

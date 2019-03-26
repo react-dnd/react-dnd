@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
 	DragSource,
 	DropTarget,
@@ -25,21 +25,14 @@ export interface CardProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-class Card extends React.Component<CardProps> {
-	public render() {
-		const {
-			text,
-			isDragging,
-			connectDragSource,
-			connectDropTarget,
-		} = this.props
+const Card: React.FC<CardProps> = memo(
+	({ text, isDragging, connectDragSource, connectDropTarget }) => {
 		const opacity = isDragging ? 0 : 1
-
 		return connectDragSource(
 			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
 		)
-	}
-}
+	},
+)
 
 export default DropTarget(
 	ItemTypes.CARD,

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
 	DragSource,
 	DragSourceConnector,
@@ -26,18 +26,16 @@ export interface BoxProps {
 	connectDragSource: ConnectDragSource
 }
 
-class Box extends React.Component<BoxProps> {
-	public render() {
-		const { name, isDropped, isDragging, connectDragSource } = this.props
+const Box: React.FC<BoxProps> = memo(
+	({ name, isDropped, isDragging, connectDragSource }) => {
 		const opacity = isDragging ? 0.4 : 1
-
 		return connectDragSource(
 			<div style={{ ...style, opacity }}>
 				{isDropped ? <s>{name}</s> : name}
 			</div>,
 		)
-	}
-}
+	},
+)
 
 export default DragSource(
 	(props: BoxProps) => props.type,

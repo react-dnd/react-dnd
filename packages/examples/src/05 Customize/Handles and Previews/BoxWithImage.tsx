@@ -1,5 +1,10 @@
 import React from 'react'
-import { DragSource, ConnectDragPreview, ConnectDragSource } from 'react-dnd'
+import {
+	DragSource,
+	ConnectDragPreview,
+	ConnectDragSource,
+	DragPreviewImage,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import boxImage from './boxImage'
 
@@ -18,23 +23,23 @@ export interface BoxWithImageProps {
 	isDragging: boolean
 }
 
-class BoxWithImage extends React.Component<BoxWithImageProps> {
-	public componentDidMount() {
-		const img = new Image()
-		img.onload = () =>
-			this.props.connectDragPreview && this.props.connectDragPreview(img)
-		img.src = boxImage
-	}
-
-	public render() {
-		const { isDragging, connectDragSource } = this.props
-		const opacity = isDragging ? 0.4 : 1
-
-		return connectDragSource(
-			<div style={{ ...style, opacity }}>Drag me to see an image</div>,
-		)
-	}
+const BoxWithImage: React.FC<BoxWithImageProps> = ({
+	isDragging,
+	connectDragSource,
+	connectDragPreview,
+}) => {
+	const opacity = isDragging ? 0.4 : 1
+	return (
+		<>
+			<DragPreviewImage connect={connectDragPreview} src={boxImage} />
+			<div ref={connectDragSource} style={{ ...style, opacity }}>
+				Drag me to see an image
+			</div>
+			,
+		</>
+	)
 }
+
 export default DragSource(
 	ItemTypes.BOX,
 	{

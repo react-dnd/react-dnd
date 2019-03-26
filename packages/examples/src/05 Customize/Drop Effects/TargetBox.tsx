@@ -16,17 +16,15 @@ export interface TargetBoxProps {
 	canDrop: boolean
 }
 
-class TargetBox extends React.Component<TargetBoxProps> {
-	public render() {
-		const { canDrop, isOver, connectDropTarget } = this.props
-		const isActive = canDrop && isOver
-
-		return connectDropTarget(
-			<div style={style}>
-				{isActive ? 'Release to drop' : 'Drag item here'}
-			</div>,
-		)
-	}
+const TargetBox: React.FC<TargetBoxProps> = ({
+	canDrop,
+	isOver,
+	connectDropTarget,
+}) => {
+	const isActive = canDrop && isOver
+	return connectDropTarget(
+		<div style={style}>{isActive ? 'Release to drop' : 'Drag item here'}</div>,
+	)
 }
 
 export default DropTarget(ItemTypes.BOX, {}, (connect, monitor) => ({

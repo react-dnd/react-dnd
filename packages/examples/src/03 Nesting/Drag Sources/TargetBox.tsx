@@ -1,5 +1,5 @@
 // tslint:disable max-classes-per-file
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import Colors from './Colors'
 
@@ -21,39 +21,33 @@ export interface TargetBoxProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-class TargetBoxRaw extends React.Component<TargetBoxProps> {
-	public render() {
-		const {
-			canDrop,
-			isOver,
-			draggingColor,
-			lastDroppedColor,
-			connectDropTarget,
-		} = this.props
-		const opacity = isOver ? 1 : 0.7
-
-		let backgroundColor = '#fff'
-		switch (draggingColor) {
-			case Colors.BLUE:
-				backgroundColor = 'lightblue'
-				break
-			case Colors.YELLOW:
-				backgroundColor = 'lightgoldenrodyellow'
-				break
-			default:
-				break
-		}
-
-		return connectDropTarget(
-			<div style={{ ...style, backgroundColor, opacity }}>
-				<p>Drop here.</p>
-
-				{!canDrop && lastDroppedColor && (
-					<p>Last dropped: {lastDroppedColor}</p>
-				)}
-			</div>,
-		)
+const TargetBoxRaw: React.FC<TargetBoxProps> = ({
+	canDrop,
+	isOver,
+	draggingColor,
+	lastDroppedColor,
+	connectDropTarget,
+}) => {
+	const opacity = isOver ? 1 : 0.7
+	let backgroundColor = '#fff'
+	switch (draggingColor) {
+		case Colors.BLUE:
+			backgroundColor = 'lightblue'
+			break
+		case Colors.YELLOW:
+			backgroundColor = 'lightgoldenrodyellow'
+			break
+		default:
+			break
 	}
+
+	return connectDropTarget(
+		<div style={{ ...style, backgroundColor, opacity }}>
+			<p>Drop here.</p>
+
+			{!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
+		</div>,
+	)
 }
 
 const TargetBox = DropTarget(
@@ -74,28 +68,20 @@ const TargetBox = DropTarget(
 export interface StatefulTargetBoxState {
 	lastDroppedColor: string | null
 }
-export default class StatefulTargetBox extends React.Component<
-	{},
-	StatefulTargetBoxState
-> {
-	constructor(props: {}) {
-		super(props)
-		this.state = { lastDroppedColor: null }
-	}
+const StatefulTargetBox: React.FC = props => {
+	const [lastDroppedColor, setLastDroppedColor] = useState<string | null>(null)
+	const handleDrop = useCallback(
+		(color: string) => setLastDroppedColor(color),
+		[],
+	)
 
-	public render() {
-		return (
-			<TargetBox
-				{...this.props}
-				lastDroppedColor={this.state.lastDroppedColor as string}
-				onDrop={((color: string) => this.handleDrop(color)) as any}
-			/>
-		)
-	}
-
-	private handleDrop(color: string) {
-		this.setState({
-			lastDroppedColor: color,
-		})
-	}
+	return (
+		<TargetBox
+			{...props}
+			lastDroppedColor={lastDroppedColor as string}
+			onDrop={handleDrop}
+		/>
+	)
 }
+
+export default StatefulTargetBox

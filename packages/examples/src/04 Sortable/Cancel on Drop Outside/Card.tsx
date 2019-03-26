@@ -28,20 +28,17 @@ export interface CardProps {
 	isDragging: boolean
 }
 
-class Card extends React.Component<CardProps> {
-	public render() {
-		const {
-			text,
-			isDragging,
-			connectDragSource,
-			connectDropTarget,
-		} = this.props
-		const opacity = isDragging ? 0 : 1
+const Card: React.FC<CardProps> = ({
+	text,
+	isDragging,
+	connectDragSource,
+	connectDropTarget,
+}) => {
+	const opacity = isDragging ? 0 : 1
 
-		return connectDragSource(
-			connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
-		)
-	}
+	return connectDragSource(
+		connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
+	)
 }
 
 export default DropTarget(

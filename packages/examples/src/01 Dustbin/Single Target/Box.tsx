@@ -24,21 +24,14 @@ interface BoxProps {
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
 }
+const Box: React.FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
+	const opacity = isDragging ? 0.4 : 1
 
-class Box extends React.Component<BoxProps> {
-	private dragSource: React.RefObject<HTMLDivElement> = React.createRef()
-
-	public render() {
-		const { name, isDragging, connectDragSource } = this.props
-		const opacity = isDragging ? 0.4 : 1
-		connectDragSource(this.dragSource)
-
-		return (
-			<div ref={this.dragSource} style={{ ...style, opacity }}>
-				{name}
-			</div>
-		)
-	}
+	return (
+		<div ref={connectDragSource} style={{ ...style, opacity }}>
+			{name}
+		</div>
+	)
 }
 
 export default DragSource(
