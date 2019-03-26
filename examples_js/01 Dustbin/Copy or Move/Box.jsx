@@ -9,24 +9,16 @@ const style = {
   marginBottom: '1.5rem',
   float: 'left',
 }
-class Box extends React.Component {
-  render() {
-    const { isDragging, connectDragSource } = this.props
-    const { name } = this.props
-    const opacity = isDragging ? 0.4 : 1
-    return connectDragSource(
-      <div style={Object.assign({}, style, { opacity })}>{name}</div>,
-    )
-  }
+const Box = ({ name, isDragging, connectDragSource }) => {
+  const opacity = isDragging ? 0.4 : 1
+  return connectDragSource(
+    <div style={Object.assign({}, style, { opacity })}>{name}</div>,
+  )
 }
 export default DragSource(
   ItemTypes.BOX,
   {
-    beginDrag(props) {
-      return {
-        name: props.name,
-      }
-    },
+    beginDrag: props => ({ name: props.name }),
     endDrag(props, monitor) {
       const item = monitor.getItem()
       const dropResult = monitor.getDropResult()

@@ -9,18 +9,6 @@ const styles = {
   border: '1px solid black',
   position: 'relative',
 }
-const boxTarget = {
-  drop(props, monitor, component) {
-    if (!component) {
-      return
-    }
-    const item = monitor.getItem()
-    const delta = monitor.getDifferenceFromInitialOffset()
-    const left = Math.round(item.left + delta.x)
-    const top = Math.round(item.top + delta.y)
-    component.moveBox(item.id, left, top)
-  },
-}
 class Container extends React.Component {
   constructor() {
     super(...arguments)
@@ -65,6 +53,21 @@ class Container extends React.Component {
     )
   }
 }
-export default DropTarget(ItemTypes.BOX, boxTarget, connect => ({
-  connectDropTarget: connect.dropTarget(),
-}))(Container)
+export default DropTarget(
+  ItemTypes.BOX,
+  {
+    drop(props, monitor, component) {
+      if (!component) {
+        return
+      }
+      const item = monitor.getItem()
+      const delta = monitor.getDifferenceFromInitialOffset()
+      const left = Math.round(item.left + delta.x)
+      const top = Math.round(item.top + delta.y)
+      component.moveBox(item.id, left, top)
+    },
+  },
+  connect => ({
+    connectDropTarget: connect.dropTarget(),
+  }),
+)(Container)

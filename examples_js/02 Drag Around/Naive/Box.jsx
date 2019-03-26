@@ -8,31 +8,31 @@ const style = {
   padding: '0.5rem 1rem',
   cursor: 'move',
 }
-const boxSource = {
-  beginDrag(props) {
-    const { id, left, top } = props
-    return { id, left, top }
-  },
-}
-class Box extends React.Component {
-  render() {
-    const {
-      hideSourceOnDrag,
-      left,
-      top,
-      connectDragSource,
-      isDragging,
-      children,
-    } = this.props
-    if (isDragging && hideSourceOnDrag) {
-      return null
-    }
-    return connectDragSource(
-      <div style={Object.assign({}, style, { left, top })}>{children}</div>,
-    )
+const Box = ({
+  hideSourceOnDrag,
+  left,
+  top,
+  connectDragSource,
+  isDragging,
+  children,
+}) => {
+  if (isDragging && hideSourceOnDrag) {
+    return null
   }
+  return connectDragSource(
+    <div style={Object.assign({}, style, { left, top })}>{children}</div>,
+  )
 }
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging(),
-}))(Box)
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag(props) {
+      const { id, left, top } = props
+      return { id, left, top }
+    },
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Box)

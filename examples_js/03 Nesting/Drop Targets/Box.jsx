@@ -8,17 +8,14 @@ const style = {
   backgroundColor: 'white',
   cursor: 'move',
 }
-const boxSource = {
-  beginDrag() {
-    return {}
+const Box = ({ connectDragSource }) =>
+  connectDragSource(<div style={style}>Drag me</div>)
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag: () => ({}),
   },
-}
-class Box extends React.Component {
-  render() {
-    const { connectDragSource } = this.props
-    return connectDragSource(<div style={style}>Drag me</div>)
-  }
-}
-export default DragSource(ItemTypes.BOX, boxSource, connect => ({
-  connectDragSource: connect.dragSource(),
-}))(Box)
+  connect => ({
+    connectDragSource: connect.dragSource(),
+  }),
+)(Box)

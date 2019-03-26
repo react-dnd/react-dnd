@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
@@ -9,21 +9,6 @@ const styles = {
   height: 300,
   border: '1px solid black',
   position: 'relative',
-}
-const boxTarget = {
-  drop(props, monitor, component) {
-    if (!component) {
-      return
-    }
-    const delta = monitor.getDifferenceFromInitialOffset()
-    const item = monitor.getItem()
-    let left = Math.round(item.left + delta.x)
-    let top = Math.round(item.top + delta.y)
-    if (props.snapToGrid) {
-      ;[left, top] = snapToGrid(left, top)
-    }
-    component.moveBox(item.id, left, top)
-  },
 }
 class Container extends React.PureComponent {
   constructor() {
@@ -59,6 +44,24 @@ class Container extends React.PureComponent {
     return <DraggableBox key={key} id={key} {...item} />
   }
 }
-export default DropTarget(ItemTypes.BOX, boxTarget, connect => ({
-  connectDropTarget: connect.dropTarget(),
-}))(Container)
+export default DropTarget(
+  ItemTypes.BOX,
+  {
+    drop(props, monitor, component) {
+      if (!component) {
+        return
+      }
+      const delta = monitor.getDifferenceFromInitialOffset()
+      const item = monitor.getItem()
+      let left = Math.round(item.left + delta.x)
+      let top = Math.round(item.top + delta.y)
+      if (props.snapToGrid) {
+        ;[left, top] = snapToGrid(left, top)
+      }
+      component.moveBox(item.id, left, top)
+    },
+  },
+  connect => ({
+    connectDropTarget: connect.dropTarget(),
+  }),
+)(Container)

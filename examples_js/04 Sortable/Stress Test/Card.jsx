@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const style = {
@@ -8,40 +8,38 @@ const style = {
   backgroundColor: 'white',
   cursor: 'move',
 }
-const cardSource = {
-  beginDrag(props) {
-    return { id: props.id }
-  },
-}
-const cardTarget = {
-  hover(props, monitor) {
-    const draggedId = monitor.getItem().id
-    if (draggedId !== props.id) {
-      props.moveCard(draggedId, props.id)
-    }
-  },
-}
-class Card extends React.Component {
-  render() {
-    const {
-      text,
-      isDragging,
-      connectDragSource,
-      connectDropTarget,
-    } = this.props
+const Card = memo(
+  ({ text, isDragging, connectDragSource, connectDropTarget }) => {
     const opacity = isDragging ? 0 : 1
     return connectDragSource(
       connectDropTarget(
         <div style={Object.assign({}, style, { opacity })}>{text}</div>,
       ),
     )
-  }
-}
-export default DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-  connectDropTarget: connect.dropTarget(),
-}))(
-  DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }))(Card),
+  },
+)
+export default DropTarget(
+  ItemTypes.CARD,
+  {
+    hover(props, monitor) {
+      const draggedId = monitor.getItem().id
+      if (draggedId !== props.id) {
+        props.moveCard(draggedId, props.id)
+      }
+    },
+  },
+  connect => ({
+    connectDropTarget: connect.dropTarget(),
+  }),
+)(
+  DragSource(
+    ItemTypes.CARD,
+    {
+      beginDrag: props => ({ id: props.id }),
+    },
+    (connect, monitor) => ({
+      connectDragSource: connect.dragSource(),
+      isDragging: monitor.isDragging(),
+    }),
+  )(Card),
 )

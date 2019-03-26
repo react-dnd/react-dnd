@@ -1,6 +1,6 @@
 import React from 'react'
 import BoardSquare from './BoardSquare'
-import Knight from './Knight'
+import { Piece } from './Piece'
 /** Styling properties applied to the board element */
 const boardStyle = {
   width: '100%',
@@ -21,14 +21,10 @@ const Board = ({ knightPosition: [knightX, knightY] }) => {
     return (
       <div key={i} style={squareStyle}>
         <BoardSquare x={x} y={y}>
-          {renderPiece(x, y)}
+          <Piece isKnight={x === knightX && y === knightY} />
         </BoardSquare>
       </div>
     )
-  }
-  function renderPiece(x, y) {
-    const isKnightHere = x === knightX && y === knightY
-    return isKnightHere ? <Knight /> : null
   }
   const squares = []
   for (let i = 0; i < 64; i += 1) {

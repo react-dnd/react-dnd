@@ -7,16 +7,11 @@ const style = {
   padding: '2rem',
   textAlign: 'center',
 }
-class TargetBox extends React.Component {
-  render() {
-    const { canDrop, isOver, connectDropTarget } = this.props
-    const isActive = canDrop && isOver
-    return connectDropTarget(
-      <div style={style}>
-        {isActive ? 'Release to drop' : 'Drag file here'}
-      </div>,
-    )
-  }
+const TargetBox = ({ canDrop, isOver, connectDropTarget }) => {
+  const isActive = canDrop && isOver
+  return connectDropTarget(
+    <div style={style}>{isActive ? 'Release to drop' : 'Drag file here'}</div>,
+  )
 }
 export default DropTarget(
   props => props.accepts,

@@ -3,12 +3,6 @@ import { DragSource } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
-const boxSource = {
-  beginDrag(props) {
-    const { id, title, left, top } = props
-    return { id, title, left, top }
-  },
-}
 function getStyles(props) {
   const { left, top, isDragging } = props
   const transform = `translate3d(${left}px, ${top}px, 0)`
@@ -44,8 +38,17 @@ class DraggableBox extends React.PureComponent {
     )
   }
 }
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  connectDragPreview: connect.dragPreview(),
-  isDragging: monitor.isDragging(),
-}))(DraggableBox)
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag(props) {
+      const { id, title, left, top } = props
+      return { id, title, left, top }
+    },
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging(),
+  }),
+)(DraggableBox)

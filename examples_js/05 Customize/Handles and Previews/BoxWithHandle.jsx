@@ -16,25 +16,27 @@ const handleStyle = {
   marginRight: '0.75rem',
   cursor: 'move',
 }
-const boxSource = {
-  beginDrag() {
-    return {}
+const BoxWithHandle = ({
+  isDragging,
+  connectDragSource,
+  connectDragPreview,
+}) => {
+  const opacity = isDragging ? 0.4 : 1
+  return connectDragPreview(
+    <div style={Object.assign({}, style, { opacity })}>
+      {connectDragSource(<div style={handleStyle} />)}
+      Drag me by the handle
+    </div>,
+  )
+}
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag: () => ({}),
   },
-}
-class BoxWithHandle extends React.Component {
-  render() {
-    const { isDragging, connectDragSource, connectDragPreview } = this.props
-    const opacity = isDragging ? 0.4 : 1
-    return connectDragPreview(
-      <div style={Object.assign({}, style, { opacity })}>
-        {connectDragSource(<div style={handleStyle} />)}
-        Drag me by the handle
-      </div>,
-    )
-  }
-}
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  connectDragPreview: connect.dragPreview(),
-  isDragging: monitor.isDragging(),
-}))(BoxWithHandle)
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging(),
+  }),
+)(BoxWithHandle)

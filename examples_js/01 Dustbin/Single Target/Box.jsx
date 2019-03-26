@@ -10,37 +10,28 @@ const style = {
   cursor: 'move',
   float: 'left',
 }
-const boxSource = {
-  beginDrag(props) {
-    return {
-      name: props.name,
-    }
-  },
-  endDrag(props, monitor) {
-    const item = monitor.getItem()
-    const dropResult = monitor.getDropResult()
-    if (dropResult) {
-      alert(`You dropped ${item.name} into ${dropResult.name}!`)
-    }
-  },
+const Box = ({ name, isDragging, connectDragSource }) => {
+  const opacity = isDragging ? 0.4 : 1
+  return (
+    <div ref={connectDragSource} style={Object.assign({}, style, { opacity })}>
+      {name}
+    </div>
+  )
 }
-class Box extends React.Component {
-  constructor() {
-    super(...arguments)
-    this.dragSource = React.createRef()
-  }
-  render() {
-    const { name, isDragging, connectDragSource } = this.props
-    const opacity = isDragging ? 0.4 : 1
-    connectDragSource(this.dragSource)
-    return (
-      <div ref={this.dragSource} style={Object.assign({}, style, { opacity })}>
-        {name}
-      </div>
-    )
-  }
-}
-export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging(),
-}))(Box)
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag: props => ({ name: props.name }),
+    endDrag(props, monitor) {
+      const item = monitor.getItem()
+      const dropResult = monitor.getDropResult()
+      if (dropResult) {
+        alert(`You dropped ${item.name} into ${dropResult.name}!`)
+      }
+    },
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Box)

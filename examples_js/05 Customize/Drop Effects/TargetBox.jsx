@@ -8,23 +8,13 @@ const style = {
   padding: '2rem',
   textAlign: 'center',
 }
-const boxTarget = {
-  drop() {
-    //
-  },
+const TargetBox = ({ canDrop, isOver, connectDropTarget }) => {
+  const isActive = canDrop && isOver
+  return connectDropTarget(
+    <div style={style}>{isActive ? 'Release to drop' : 'Drag item here'}</div>,
+  )
 }
-class TargetBox extends React.Component {
-  render() {
-    const { canDrop, isOver, connectDropTarget } = this.props
-    const isActive = canDrop && isOver
-    return connectDropTarget(
-      <div style={style}>
-        {isActive ? 'Release to drop' : 'Drag item here'}
-      </div>,
-    )
-  }
-}
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
+export default DropTarget(ItemTypes.BOX, {}, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop(),

@@ -13,36 +13,31 @@ const style = {
   lineHeight: 'normal',
   float: 'left',
 }
-const boxTarget = {
-  drop: () => ({ name: 'Dustbin' }),
-}
-class Dustbin extends React.Component {
-  constructor() {
-    super(...arguments)
-    this.dropTarget = React.createRef()
+const Dustbin = ({ canDrop, isOver, connectDropTarget }) => {
+  const isActive = canDrop && isOver
+  let backgroundColor = '#222'
+  if (isActive) {
+    backgroundColor = 'darkgreen'
+  } else if (canDrop) {
+    backgroundColor = 'darkkhaki'
   }
-  render() {
-    const { canDrop, isOver, connectDropTarget } = this.props
-    const isActive = canDrop && isOver
-    connectDropTarget(this.dropTarget)
-    let backgroundColor = '#222'
-    if (isActive) {
-      backgroundColor = 'darkgreen'
-    } else if (canDrop) {
-      backgroundColor = 'darkkhaki'
-    }
-    return (
-      <div
-        ref={this.dropTarget}
-        style={Object.assign({}, style, { backgroundColor })}
-      >
-        {isActive ? 'Release to drop' : 'Drag a box here'}
-      </div>
-    )
-  }
+  return (
+    <div
+      ref={connectDropTarget}
+      style={Object.assign({}, style, { backgroundColor })}
+    >
+      {isActive ? 'Release to drop' : 'Drag a box here'}
+    </div>
+  )
 }
-export default DropTarget(ItemTypes.BOX, boxTarget, (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  canDrop: monitor.canDrop(),
-}))(Dustbin)
+export default DropTarget(
+  ItemTypes.BOX,
+  {
+    drop: () => ({ name: 'Dustbin' }),
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  }),
+)(Dustbin)
