@@ -35,8 +35,6 @@ interface CardInstance {
 	getNode(): HTMLDivElement | null
 }
 
-// NOTE: this must be a React.Component class because we use the component instance
-// in the hover function of the droptarget spec. We cannot get this instance on ref
 const Card: React.RefForwardingComponent<
 	HTMLDivElement,
 	CardProps
