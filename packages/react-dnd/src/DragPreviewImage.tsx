@@ -10,9 +10,11 @@ interface DragPreviewImageProps {
  */
 const DragPreviewImage: React.FC<DragPreviewImageProps> = React.memo(
 	({ connect, src }) => {
-		const img = new Image()
-		img.src = src
-		img.onload = () => connect(img)
+		if (typeof Image !== 'undefined') {
+			const img = new Image()
+			img.src = src
+			img.onload = () => connect(img)
+		}
 		return null
 	},
 )
