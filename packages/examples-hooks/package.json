@@ -27,8 +27,8 @@
 		"immutability-helper": "^3.0.0",
 		"lodash": "^4.17.11",
 		"query-string": "^6.3.0",
-		"react-dnd": "link:../react-dnd",
-		"react-dnd-html5-backend": "link:../react-dnd-html5-backend",
+		"react-dnd": "7.4.3",
+		"react-dnd-html5-backend": "7.4.0",
 		"react-frame-component": "^4.1.0"
 	},
 	"devDependencies": {

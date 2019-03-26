@@ -12446,19 +12446,6 @@ react-dev-utils@^4.2.1:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-"react-dnd-html5-backend@link:packages/react-dnd-html5-backend":
-  version "7.4.0"
-  dependencies:
-    dnd-core "^7.4.0"
-
-"react-dnd@link:packages/react-dnd":
-  version "7.4.3"
-  dependencies:
-    dnd-core "^7.4.0"
-    hoist-non-react-statics "^3.3.0"
-    invariant "^2.1.0"
-    shallowequal "^1.1.0"
-
 react-dom@^16.8.4:
   version "16.8.5"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.5.tgz#b3e37d152b49e07faaa8de41fdf562be3463335e"
