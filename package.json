@@ -133,9 +133,6 @@
 	"workspaces": {
 		"packages": [
 			"packages/*"
-		],
-		"nohoist": [
-			"**"
 		]
 	}
 }
