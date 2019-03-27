@@ -49,12 +49,12 @@
 	"scripts": {
 		"clean": "rimraf .cache public apidocs static/examples_js",
 		"start": "gatsby develop",
-		"copy_example_source:js": "cp -r ../examples/lib/docs static/examples_js",
-		"copy_example_source:ts": "cp -r ../examples/src static/examples_ts",
-		"copy_example_source": "run-s copy_example_source:*",
-		"format_example_source": "prettier 'static/examples_js/**/*.js*' --use-tabs=false --write",
+		"copy_examples:js": "cp -r ../examples/lib/docs static/examples_js",
+		"copy_examples:ts": "cp -r ../examples/src static/examples_ts",
+		"copy_examples": "run-s copy_examples:*",
+		"format_examples": "prettier 'static/examples_*/**/*' --use-tabs=false --write",
 		"write_example_boilerplate": "node write_sample_boilerplate.js",
-		"process_examples": "run-s copy_example_source format_example_source write_example_boilerplate",
+		"process_examples": "run-s copy_examples format_examples write_example_boilerplate",
 		"build_static_site": "gatsby build --prefix-paths",
 		"publish_gh_pages": "NODE_DEBUG=gh-pages gh-pages -d public -t",
 		"release": "run-s clean process_examples build_static_site publish_gh_pages"
