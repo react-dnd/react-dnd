@@ -1,5 +1,5 @@
 import React from 'react'
-import ItemTypes from '../Single Target/ItemTypes'
+import ItemTypes from '../single-target/ItemTypes'
 
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 const {

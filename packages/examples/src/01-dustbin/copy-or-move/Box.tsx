@@ -5,7 +5,7 @@ import {
 	DragSourceConnector,
 	DragSourceMonitor,
 } from 'react-dnd'
-import ItemTypes from '../Single Target/ItemTypes'
+import ItemTypes from '../single-target/ItemTypes'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',

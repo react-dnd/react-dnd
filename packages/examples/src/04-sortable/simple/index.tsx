@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Card from './Card'
 import update from 'immutability-helper'
-import { ContainerProps } from '../../02 Drag Around/Naive/Container'
 
 const style = {
 	width: 400,
@@ -14,7 +13,7 @@ export interface ContainerState {
 	}>
 }
 
-const Container: React.FC<ContainerProps> = ({}) => {
+const Container: React.FC = () => {
 	{
 		const [cards, setCards] = useState([
 			{
