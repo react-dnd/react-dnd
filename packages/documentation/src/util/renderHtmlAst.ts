@@ -4,6 +4,7 @@ import { componentIndex } from 'react-dnd-examples/lib/esm/index'
 import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/esm/index'
 import { parse } from 'query-string'
 import processImages from './processImagesInMarkdownAst'
+import exampleTabs from '../components/exampleTabs'
 const log = require('debug')('site:renderHtmlAst')
 const rehypeReact = require('rehype-react')
 
@@ -20,6 +21,7 @@ export function isExperimentalApiMode() {
 const renderAst = new rehypeReact({
 	createElement,
 	components: {
+		'view-source': exampleTabs,
 		...(isExperimentalApiMode() ? hookComponentIndex : componentIndex),
 	},
 }).Compiler
