@@ -1,6 +1,6 @@
 import React from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
-import ItemTypes from '../Single Target/ItemTypes'
+import ItemTypes from '../single-target/ItemTypes'
 const {
 	useDrop,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
