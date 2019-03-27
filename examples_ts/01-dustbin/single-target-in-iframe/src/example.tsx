@@ -3,9 +3,8 @@ declare var require: any
 import React from 'react'
 import { DragDropContextProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-import Dustbin from '../single-target/Dustbin'
-import Box from '../single-target/Box'
-import { isDebugMode } from '../../isDebugMode'
+import Dustbin from './Dustbin'
+import Box from './Box'
 
 const {
   default: Frame,
@@ -15,11 +14,7 @@ const {
 const FrameBindingContext: React.FC = ({ children }) => (
   <FrameContextConsumer>
     {({ window }: any) => (
-      <DragDropContextProvider
-        backend={HTML5Backend}
-        context={window}
-        debugMode={isDebugMode()}
-      >
+      <DragDropContextProvider backend={HTML5Backend} context={window}>
         {children}
       </DragDropContextProvider>
     )}

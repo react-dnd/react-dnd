@@ -13,7 +13,7 @@ const style = {
   lineHeight: 'normal',
   float: 'left',
 }
-const Dustbin = ({ canDrop, isOver, allowedDropEffect, connectDropTarget }) => {
+const Dustbin = ({ canDrop, isOver, connectDropTarget }) => {
   const isActive = canDrop && isOver
   let backgroundColor = '#222'
   if (isActive) {
@@ -21,22 +21,19 @@ const Dustbin = ({ canDrop, isOver, allowedDropEffect, connectDropTarget }) => {
   } else if (canDrop) {
     backgroundColor = 'darkkhaki'
   }
-  return connectDropTarget(
-    <div style={Object.assign({}, style, { backgroundColor })}>
-      {`Works with ${allowedDropEffect} drop effect`}
-      <br />
-      <br />
+  return (
+    <div
+      ref={connectDropTarget}
+      style={Object.assign({}, style, { backgroundColor })}
+    >
       {isActive ? 'Release to drop' : 'Drag a box here'}
-    </div>,
+    </div>
   )
 }
 export default DropTarget(
   ItemTypes.BOX,
   {
-    drop: ({ allowedDropEffect }) => ({
-      name: `${allowedDropEffect} Dustbin`,
-      allowedDropEffect,
-    }),
+    drop: () => ({ name: 'Dustbin' }),
   },
   (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
