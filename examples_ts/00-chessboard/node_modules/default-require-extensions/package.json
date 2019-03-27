@@ -1,0 +1,43 @@
+{
+  "name": "default-require-extensions",
+  "version": "1.0.0",
+  "description": "Node's default require extensions as a separate module",
+  "license": "MIT",
+  "repository": "jamestalmage/default-require-extensions",
+  "author": {
+    "name": "James Talmage",
+    "email": "james@talmage.io",
+    "url": "github.com/jamestalmage"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && nyc ava"
+  },
+  "main": "js.js",
+  "files": [
+    "js.js",
+    "json.js"
+  ],
+  "keywords": [
+    "require",
+    "extension",
+    "default",
+    "node"
+  ],
+  "dependencies": {
+    "strip-bom": "^2.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.11.0",
+    "nyc": "^5.3.0",
+    "xo": "^0.12.1"
+  },
+  "nyc": {
+    "exclude": [
+      "test.js",
+      "fixture"
+    ]
+  }
+}

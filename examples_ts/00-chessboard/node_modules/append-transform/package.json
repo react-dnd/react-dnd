@@ -1,0 +1,46 @@
+{
+  "name": "append-transform",
+  "version": "0.4.0",
+  "description": "Install a transform to `require.extensions` that always runs last, even if additional extensions are added later.",
+  "license": "MIT",
+  "repository": "jamestalmage/append-transform",
+  "author": {
+    "name": "James Talmage",
+    "email": "james@talmage.io",
+    "url": "github.com/jamestalmage"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && nyc --reporter=lcov --reporter=text ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "transform",
+    "require",
+    "append",
+    "last",
+    "coverage",
+    "source-map",
+    "extension",
+    "module"
+  ],
+  "devDependencies": {
+    "ava": "^0.7.0",
+    "coveralls": "^2.11.6",
+    "fake-module-system": "^0.3.0",
+    "nyc": "^4.0.1",
+    "xo": "^0.11.2"
+  },
+  "xo": {
+    "ignores": [
+      "test.js"
+    ]
+  },
+  "dependencies": {
+    "default-require-extensions": "^1.0.0"
+  }
+}

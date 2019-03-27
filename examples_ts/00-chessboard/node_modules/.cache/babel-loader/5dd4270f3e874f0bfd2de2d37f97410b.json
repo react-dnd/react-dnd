@@ -1,0 +1,1 @@
+{"ast":null,"code":"var freeGlobal = require('./_freeGlobal');\n/** Detect free variable `self`. */\n\n\nvar freeSelf = typeof self == 'object' && self && self.Object === Object && self;\n/** Used as a reference to the global object. */\n\nvar root = freeGlobal || freeSelf || Function('return this')();\nmodule.exports = root;","map":null,"metadata":{},"sourceType":"script"}

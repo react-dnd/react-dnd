@@ -1,0 +1,55 @@
+{
+  "name": "shallow-clone",
+  "description": "Make a shallow clone of an object, array or primitive.",
+  "version": "0.1.2",
+  "homepage": "https://github.com/jonschlinkert/shallow-clone",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/shallow-clone",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/shallow-clone/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "utils.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "is-extendable": "^0.1.1",
+    "kind-of": "^2.0.1",
+    "lazy-cache": "^0.2.3",
+    "mixin-object": "^2.0.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "keywords": [
+    "array",
+    "clone",
+    "copy",
+    "extend",
+    "mixin",
+    "object",
+    "primitive",
+    "shallow"
+  ],
+  "verb": {
+    "related": {
+      "list": [
+        "clone-deep",
+        "is-plain-object",
+        "mixin-object",
+        "mixin-deep",
+        "extend-shallow",
+        "assign-deep"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"/** Detect free variable `global` from Node.js. */\nvar freeGlobal = typeof global == 'object' && global && global.Object === Object && global;\nmodule.exports = freeGlobal;","map":null,"metadata":{},"sourceType":"script"}

@@ -1,0 +1,34 @@
+{
+	"name": "is-root",
+	"version": "2.0.0",
+	"description": "Check if the process is running as root user, for example, one started with `sudo`",
+	"license": "MIT",
+	"repository": "sindresorhus/is-root",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"engines": {
+		"node": ">=6"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"sudo",
+		"root",
+		"user",
+		"permissions",
+		"uid",
+		"process",
+		"posix"
+	],
+	"devDependencies": {
+		"ava": "*",
+		"xo": "*"
+	}
+}

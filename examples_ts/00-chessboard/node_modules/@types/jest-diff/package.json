@@ -1,0 +1,23 @@
+{
+    "name": "@types/jest-diff",
+    "version": "20.0.1",
+    "description": "TypeScript definitions for jest-diff",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Alex Coles",
+            "url": "https://github.com/myabc",
+            "githubUsername": "myabc"
+        }
+    ],
+    "main": "",
+    "types": "index",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "c870fcddd40540a283942f82f668244cf72de020fb0110ae019708cb06b19ce2",
+    "typeScriptVersion": "2.2"
+}

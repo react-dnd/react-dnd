@@ -1,0 +1,1 @@
+{"ast":null,"code":"'use strict';\n\nmodule.exports = global.location || {\n  origin: 'http://localhost:80',\n  protocol: 'http:',\n  host: 'localhost',\n  port: 80,\n  href: 'http://localhost/',\n  hash: ''\n};","map":null,"metadata":{},"sourceType":"script"}

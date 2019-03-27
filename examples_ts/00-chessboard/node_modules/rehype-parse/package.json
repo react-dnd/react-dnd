@@ -1,0 +1,31 @@
+{
+  "name": "rehype-parse",
+  "version": "6.0.0",
+  "description": "HTML parser for rehype",
+  "license": "MIT",
+  "keywords": [
+    "html",
+    "abstract",
+    "syntax",
+    "tree",
+    "ast",
+    "parse"
+  ],
+  "homepage": "https://github.com/rehypejs/rehype",
+  "repository": "https://github.com/rehypejs/rehype/tree/master/packages/rehype-parse",
+  "bugs": "https://github.com/rehypejs/rehype/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "files": [
+    "index.js",
+    "errors.json"
+  ],
+  "dependencies": {
+    "hast-util-from-parse5": "^5.0.0",
+    "parse5": "^5.0.0",
+    "xtend": "^4.0.1"
+  },
+  "xo": false
+}

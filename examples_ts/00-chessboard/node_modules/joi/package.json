@@ -1,0 +1,33 @@
+{
+  "name": "joi",
+  "description": "Object schema validation",
+  "version": "11.4.0",
+  "homepage": "https://github.com/hapijs/joi",
+  "repository": "git://github.com/hapijs/joi",
+  "main": "lib/index.js",
+  "keywords": [
+    "hapi",
+    "schema",
+    "validation"
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "dependencies": {
+    "hoek": "4.x.x",
+    "isemail": "3.x.x",
+    "topo": "2.x.x"
+  },
+  "devDependencies": {
+    "hapitoc": "1.x.x",
+    "lab": "14.x.x"
+  },
+  "scripts": {
+    "test": "lab -t 100 -a code -L",
+    "test-debug": "lab -a code",
+    "test-cov-html": "lab -r html -o coverage.html -a code",
+    "toc": "hapitoc",
+    "version": "npm run toc && git add API.md README.md"
+  },
+  "license": "BSD-3-Clause"
+}

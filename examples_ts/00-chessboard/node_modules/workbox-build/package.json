@@ -1,0 +1,55 @@
+{
+  "name": "workbox-build",
+  "version": "3.6.3",
+  "description": "A module that integrates into your build process, helping you generate a manifest of local files that workbox-sw should precache.",
+  "keywords": [
+    "workbox",
+    "workboxjs",
+    "service worker",
+    "caching",
+    "fetch requests",
+    "offline",
+    "file manifest"
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "author": "Google's Web DevRel Team",
+  "license": "Apache-2.0",
+  "repository": "googlechrome/workbox",
+  "bugs": "https://github.com/GoogleChrome/workbox/issues",
+  "homepage": "https://github.com/GoogleChrome/workbox",
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "common-tags": "^1.4.0",
+    "fs-extra": "^4.0.2",
+    "glob": "^7.1.2",
+    "joi": "^11.1.1",
+    "lodash.template": "^4.4.0",
+    "pretty-bytes": "^4.0.2",
+    "stringify-object": "^3.2.2",
+    "strip-comments": "^1.0.2",
+    "workbox-background-sync": "^3.6.3",
+    "workbox-broadcast-cache-update": "^3.6.3",
+    "workbox-cache-expiration": "^3.6.3",
+    "workbox-cacheable-response": "^3.6.3",
+    "workbox-core": "^3.6.3",
+    "workbox-google-analytics": "^3.6.3",
+    "workbox-navigation-preload": "^3.6.3",
+    "workbox-precaching": "^3.6.3",
+    "workbox-range-requests": "^3.6.3",
+    "workbox-routing": "^3.6.3",
+    "workbox-strategies": "^3.6.3",
+    "workbox-streams": "^3.6.3",
+    "workbox-sw": "^3.6.3"
+  },
+  "main": "build/index.js",
+  "scripts": {
+    "build": "gulp build:update-cdn-details && gulp build-packages --package workbox-build",
+    "version": "npm run build",
+    "prepare": "npm run build"
+  },
+  "workbox": {
+    "packageType": "node"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "name": "eslint-loader",
+  "version": "2.1.1",
+  "description": "eslint loader (for webpack)",
+  "keywords": [
+    "lint",
+    "linter",
+    "eslint",
+    "loader",
+    "webpack"
+  ],
+  "repository": "https://github.com/webpack-contrib/eslint-loader.git",
+  "author": "Maxime Thirouin",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "eslint": ">=1.6.0 <6.0.0",
+    "webpack": ">=2.0.0 <5.0.0"
+  },
+  "dependencies": {
+    "loader-fs-cache": "^1.0.0",
+    "loader-utils": "^1.0.2",
+    "object-assign": "^4.0.1",
+    "object-hash": "^1.1.4",
+    "rimraf": "^2.6.1"
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "eslint": "^5.1.0",
+    "eslint-config-i-am-meticulous": "^11.0.0",
+    "eslint-friendly-formatter": "^2.0.4",
+    "husky": "^0.14.3",
+    "mkdirp": "^0.5.1",
+    "npmpub": "^4.0.1",
+    "prettier": "^1.13.7",
+    "pretty-quick": "^1.6.0",
+    "webpack": "^4.0.0"
+  },
+  "scripts": {
+    "precommit": "pretty-quick --staged",
+    "lint": "eslint .",
+    "ava": "ava",
+    "test": "npm run lint && npm run ava",
+    "release": "npmpub"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-i-am-meticulous",
+    "rules": {
+      "no-var": 0,
+      "prefer-const": 0
+    }
+  },
+  "ava": {
+    "files": [
+      "test/*.js"
+    ],
+    "verbose": true
+  }
+}

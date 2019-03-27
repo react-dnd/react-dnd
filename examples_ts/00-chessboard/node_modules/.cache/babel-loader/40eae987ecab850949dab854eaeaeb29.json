@@ -1,0 +1,1 @@
+{"ast":null,"code":"/**\n * This method returns `undefined`.\n *\n * @static\n * @memberOf _\n * @since 2.3.0\n * @category Util\n * @example\n *\n * _.times(2, _.noop);\n * // => [undefined, undefined]\n */\nfunction noop() {// No operation performed.\n}\n\nmodule.exports = noop;","map":null,"metadata":{},"sourceType":"script"}

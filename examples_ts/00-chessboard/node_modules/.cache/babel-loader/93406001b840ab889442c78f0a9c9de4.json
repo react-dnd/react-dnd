@@ -1,0 +1,1 @@
+{"ast":null,"code":"'use strict';\n\nvar inherits = require('inherits'),\n    Event = require('./event');\n\nfunction CloseEvent() {\n  Event.call(this);\n  this.initEvent('close', false, false);\n  this.wasClean = false;\n  this.code = 0;\n  this.reason = '';\n}\n\ninherits(CloseEvent, Event);\nmodule.exports = CloseEvent;","map":null,"metadata":{},"sourceType":"script"}

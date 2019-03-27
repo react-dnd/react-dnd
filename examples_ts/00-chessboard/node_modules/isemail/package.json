@@ -1,0 +1,36 @@
+{
+  "name": "isemail",
+  "description": "Validate an email address according to RFCs 5321, 5322, and others",
+  "version": "3.2.0",
+  "repository": "git://github.com/hapijs/isemail",
+  "files": [
+    "lib/"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "keywords": [
+    "isemail",
+    "validation",
+    "check",
+    "checking",
+    "verification",
+    "email",
+    "address",
+    "email address"
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "dependencies": {
+    "punycode": "2.x.x"
+  },
+  "devDependencies": {
+    "code": "^5.2.0",
+    "lab": "^16.1.0"
+  },
+  "scripts": {
+    "test": "lab -a code -t 100 -L -m 5000",
+    "test-cov-html": "lab -a code -r html -o coverage.html -m 5000"
+  },
+  "license": "BSD-3-Clause"
+}

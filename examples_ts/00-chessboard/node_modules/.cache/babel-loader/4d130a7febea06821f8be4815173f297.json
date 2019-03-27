@@ -1,0 +1,1 @@
+{"ast":null,"code":"'use strict';\n\nmodule.exports = {\n  stdout: false,\n  stderr: false\n};","map":null,"metadata":{},"sourceType":"script"}

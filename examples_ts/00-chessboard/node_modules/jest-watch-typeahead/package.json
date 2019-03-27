@@ -1,0 +1,66 @@
+{
+  "name": "jest-watch-typeahead",
+  "version": "0.2.1",
+  "main": "build/index.js",
+  "author": "Rogelio Guzman <rogelioguzmanh@gmail.com>",
+  "description": "Jest plugin for filtering by filename or test name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jest-community/jest-watch-typeahead.git"
+  },
+  "homepage": "https://github.com/jest-community/jest-watch-typeahead",
+  "files": [
+    "build/",
+    "filename.js",
+    "testname.js"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint .",
+    "watch": "babel src -w --ignore **/*.test.js,integration -d build",
+    "build": "babel src --ignore **/*.test.js,integration -d build",
+    "prepublish": "yarn build",
+    "format": "prettier --single-quote --trailing-comma all --write \"!(build)/**/*.js\""
+  },
+  "dependencies": {
+    "ansi-escapes": "^3.0.0",
+    "chalk": "^2.4.1",
+    "jest-watcher": "^23.1.0",
+    "slash": "^2.0.0",
+    "string-length": "^2.0.0",
+    "strip-ansi": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-flow": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.4.2",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-flowtype": "^3.2.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^22.1.3",
+    "eslint-plugin-prettier": "^3.0.1",
+    "flow-bin": "^0.91.0",
+    "jest": "^23.2.0",
+    "prettier": "^1.13.7"
+  },
+  "jest": {
+    "watchPlugins": [
+      "<rootDir>/filename",
+      "<rootDir>/testname"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/pretty-format/build/plugins/convert_ansi"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/.*",
+      "<rootDir>/src/__tests__/pluginTester.js"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "workbox-google-analytics",
+  "version": "3.6.3",
+  "license": "Apache-2.0",
+  "author": "Google's Web DevRel Team",
+  "description": "Queues failed requests and uses the Background Sync API to replay them when the network is available",
+  "repository": "googlechrome/workbox",
+  "bugs": "https://github.com/googlechrome/workbox/issues",
+  "homepage": "https://github.com/GoogleChrome/workbox",
+  "keywords": [
+    "workbox",
+    "workboxjs",
+    "service worker",
+    "sw",
+    "offline",
+    "google",
+    "analytics"
+  ],
+  "scripts": {
+    "build": "gulp build-packages --package workbox-google-analytics",
+    "version": "npm run build",
+    "prepare": "npm run build"
+  },
+  "workbox": {
+    "browserNamespace": "workbox.googleAnalytics",
+    "packageType": "browser"
+  },
+  "main": "build/workbox-google-analytics.prod.js",
+  "module": "index.mjs",
+  "dependencies": {
+    "workbox-background-sync": "^3.6.3",
+    "workbox-core": "^3.6.3",
+    "workbox-routing": "^3.6.3",
+    "workbox-strategies": "^3.6.3"
+  }
+}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"'use strict';\n\nif (process.env.NODE_ENV === 'production') {\n  module.exports = require('./cjs/react-is.production.min.js');\n} else {\n  module.exports = require('./cjs/react-is.development.js');\n}","map":null,"metadata":{},"sourceType":"script"}

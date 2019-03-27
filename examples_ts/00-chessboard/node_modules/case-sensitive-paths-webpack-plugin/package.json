@@ -1,0 +1,42 @@
+{
+  "name": "case-sensitive-paths-webpack-plugin",
+  "version": "2.2.0",
+  "description": "Enforces module path case sensitivity in Webpack",
+  "engines": {
+    "node": ">=4"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/",
+    "lint": "eslint index.js",
+    "lintfix": "eslint --fix index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Urthen/case-sensitive-paths-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "case sensitive",
+    "import",
+    "require"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "author": "Michael Pratt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Urthen/case-sensitive-paths-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/Urthen/case-sensitive-paths-webpack-plugin#readme",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "fs-extra": "^2.1.2",
+    "mocha": "^3.0.1",
+    "webpack": "^4.0.1"
+  }
+}
