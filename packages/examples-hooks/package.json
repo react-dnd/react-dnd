@@ -25,7 +25,6 @@
 		"dnd-core": "^7.4.0",
 		"faker": "^4.1.0",
 		"immutability-helper": "^3.0.0",
-		"lodash": "^4.17.11",
 		"query-string": "^6.3.0",
 		"react-dnd": "7.4.3",
 		"react-dnd-html5-backend": "7.4.0",
