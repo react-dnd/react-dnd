@@ -17,7 +17,7 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-interface BoxProps {
+export interface BoxProps {
 	name: string
 
 	// Collected Props
