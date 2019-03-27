@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import styled from 'styled-components'
+const styled = require('styled-components')
 import { Page, PageGroup } from '../constants'
 import theme from '../theme'
 

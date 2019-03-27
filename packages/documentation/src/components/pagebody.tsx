@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled from 'styled-components'
+const styled = require('styled-components')
 import theme from '../theme'
 
 export interface PageBodyProps {
