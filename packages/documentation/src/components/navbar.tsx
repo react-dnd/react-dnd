@@ -1,7 +1,7 @@
 // tslint:disable jsx-no-lambda
 import * as React from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import styled from 'styled-components'
+const styled = require('styled-components')
 import theme from '../theme'
 
 const NavBar: React.FC = () => (

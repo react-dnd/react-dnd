@@ -3,7 +3,7 @@ declare var require: any
 
 import * as React from 'react'
 import Helmet from 'react-helmet'
-import styled from 'styled-components'
+const styled = require('styled-components')
 import HTML5Backend from 'react-dnd-html5-backend'
 import { isDebugMode } from 'react-dnd-documentation-examples/lib/esm/index'
 
