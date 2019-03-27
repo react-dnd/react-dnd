@@ -1,5 +1,5 @@
 import * as React from 'react'
-const styled = require('styled-components')
+import styled from 'styled-components'
 import NavBar from './navbar'
 
 export interface HeaderProps {
