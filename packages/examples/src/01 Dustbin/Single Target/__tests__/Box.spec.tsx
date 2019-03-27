@@ -1,8 +1,9 @@
 import React from 'react'
-import * as TestUtils from 'react-dom/test-utils'
 import Box from '../Box'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
+import { TestBackend } from 'react-dnd-test-backend'
+import { ContextComponent } from 'react-dnd'
 
 describe('Box', () => {
 	// TODO: test utils are acting wonking with function components.
@@ -15,46 +16,48 @@ describe('Box', () => {
 		const identity = (x: any) => x
 
 		// Render with one set of props and test
-		let mounted = mount(
+		let root = mount(
 			<OriginalBox
 				name="test"
 				connectDragSource={identity}
 				isDragging={false}
 			/>,
 		)
-		let div = mounted.getDOMNode() as HTMLDivElement
+		let div = root.getDOMNode() as HTMLDivElement
 		expect(div.style.opacity).toEqual('1')
 
 		// Render with another set of props and test
-		mounted = mount(
+		root = mount(
 			<OriginalBox
 				name="test"
 				connectDragSource={identity}
 				isDragging={true}
 			/>,
 		)
-		div = mounted.getDOMNode() as HTMLDivElement
+		div = root.getDOMNode() as HTMLDivElement
 		expect(div.style.opacity).toEqual('0.4')
 	})
 
 	it('can be tested with the testing backend', () => {
 		// Render with the testing backend
 		const BoxContext = wrapInTestContext(Box)
-		const root: any = TestUtils.renderIntoDocument(<BoxContext name="test" />)
+		const root = mount(<BoxContext name="test" />)
 
 		// Obtain a reference to the backend
-		const backend = root.getManager().getBackend()
+		const element = root.instance() as ContextComponent<TestBackend>
+		const backend = (element.getManager().getBackend() as any) as TestBackend
+		expect(backend).toBeDefined()
 
 		// Check that the opacity is 1
-		let div: any = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
+		let div = root.getDOMNode() as HTMLDivElement
 		expect(div.style.opacity).toEqual('1')
 
 		// Find the drag source ID and use it to simulate the dragging state
-		const box: any = TestUtils.findRenderedComponentWithType(root, Box as any)
+		const box: any = root.find(Box).instance()
 		backend.simulateBeginDrag([box.getHandlerId()])
 
 		// Verify that the div changed its opacity
-		div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
+		div = root.getDOMNode() as HTMLDivElement
 		expect(div.style.opacity).toEqual('0.4')
 	})
 })
