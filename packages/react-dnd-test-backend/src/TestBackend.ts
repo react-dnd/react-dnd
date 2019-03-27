@@ -11,7 +11,7 @@ function noop() {
 	// noop
 }
 
-export interface TestBackend {
+export interface TestBackend extends Backend {
 	didCallSetup: boolean
 	didCallTeardown: boolean
 	simulateBeginDrag(sourceIds: Identifier[], options?: any): void

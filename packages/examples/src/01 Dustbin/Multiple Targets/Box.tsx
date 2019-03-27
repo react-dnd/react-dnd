@@ -26,7 +26,7 @@ export interface BoxProps {
 	isDragging: boolean
 }
 
-const Box: React.FC<BoxProps> = ({
+export const Box: React.FC<BoxProps> = ({
 	name,
 	isDropped,
 	isDragging,
