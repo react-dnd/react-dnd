@@ -1,7 +1,7 @@
 declare var require: any
 import { createElement } from 'react'
-import { componentIndex } from 'react-dnd-documentation-examples/lib/esm/index'
-import { componentIndex as hookComponentIndex } from 'react-dnd-documentation-examples-hooks/lib/esm/index'
+import { componentIndex } from 'react-dnd-examples/lib/esm/index'
+import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/esm/index'
 import { parse } from 'query-string'
 import processImages from './processImagesInMarkdownAst'
 const log = require('debug')('site:renderHtmlAst')

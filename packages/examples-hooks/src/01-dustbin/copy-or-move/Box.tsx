@@ -1,11 +1,10 @@
 import React from 'react'
-import {
-	DragSource,
-	ConnectDragSource,
-	DragSourceConnector,
-	DragSourceMonitor,
-} from 'react-dnd'
-import ItemTypes from '../Single Target/ItemTypes'
+import ItemTypes from '../single-target/ItemTypes'
+
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+const {
+	useDrag,
+} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -17,24 +16,20 @@ const style: React.CSSProperties = {
 }
 
 export interface BoxProps {
-	isDragging: boolean
-	connectDragSource: ConnectDragSource
 	name: string
 }
 
-const Box: React.FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
-	const opacity = isDragging ? 0.4 : 1
-	return connectDragSource(<div style={{ ...style, opacity }}>{name}</div>)
+interface DropResult {
+	allowedDropEffect: string
+	dropEffect: string
+	name: string
 }
 
-export default DragSource(
-	ItemTypes.BOX,
-	{
-		beginDrag: (props: BoxProps) => ({ name: props.name }),
-		endDrag(props: BoxProps, monitor: DragSourceMonitor) {
-			const item = monitor.getItem()
-			const dropResult = monitor.getDropResult()
-
+const Box: React.FC<BoxProps> = ({ name }) => {
+	const item = { name, type: ItemTypes.BOX }
+	const [{ opacity }, drag] = useDrag({
+		item,
+		end(dropResult?: DropResult) {
 			if (dropResult) {
 				let alertMessage = ''
 				const isDropAllowed =
@@ -55,9 +50,15 @@ export default DragSource(
 				alert(alertMessage)
 			}
 		},
-	},
-	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}),
-)(Box)
+		collect: (monitor: any) => ({
+			opacity: monitor.isDragging() ? 0.4 : 1,
+		}),
+	})
+
+	return (
+		<div ref={drag} style={{ ...style, opacity }}>
+			{name}
+		</div>
+	)
+}
+export default Box
