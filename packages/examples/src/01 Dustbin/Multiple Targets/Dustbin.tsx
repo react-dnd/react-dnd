@@ -25,7 +25,7 @@ export interface DustbinProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-const Dustbin: React.FC<DustbinProps> = ({
+export const Dustbin: React.FC<DustbinProps> = ({
 	accepts,
 	isOver,
 	canDrop,
