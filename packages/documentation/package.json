@@ -49,7 +49,9 @@
 	"scripts": {
 		"clean": "rimraf .cache public apidocs static/examples_js",
 		"start": "gatsby develop",
-		"copy_example_source": "cp -r ../examples/lib/docs static/examples_js",
+		"copy_example_source:js": "cp -r ../examples/lib/docs static/examples_js",
+		"copy_example_source:ts": "cp -r ../examples/src static/examples_ts",
+		"copy_example_source": "run-s copy_example_source:*",
 		"format_example_source": "prettier 'static/examples_js/**/*.js*' --use-tabs=false --write",
 		"write_example_boilerplate": "node write_sample_boilerplate.js",
 		"process_examples": "run-s copy_example_source format_example_source write_example_boilerplate",
