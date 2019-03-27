@@ -4,7 +4,7 @@ title: 'Stress Test'
 ---
 
 [JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/04-sortable/stress-test)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/04-sortable/stress-test)
+[TypeScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_ts/04-sortable/stress-test)
 
 How many items can React DnD handle at the same time? There are a
 thousand items in this list. With some optimizations like updating the

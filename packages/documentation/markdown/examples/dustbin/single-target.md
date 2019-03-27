@@ -4,7 +4,7 @@ title: 'Single Target'
 ---
 
 [JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/01-dustbin/single-target)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/01-dustbin/single-target)
+[TypeScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_ts/01-dustbin/single-target)
 
 This is the simplest example of drag and drop.
 
