@@ -80,6 +80,9 @@ const makePackageJson = (index, isTS) => {
 			'react-dnd': '*',
 			'react-dnd-html5-backend': '*',
 			'babel-jest': '23.6.0',
+			faker: '^4.1.0',
+			'immutability-helper': '^3.0.0',
+			'react-frame-component': '^4.1.0',
 		},
 		browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
 	}
