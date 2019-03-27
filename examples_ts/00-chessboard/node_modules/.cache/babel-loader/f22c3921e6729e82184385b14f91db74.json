@@ -1,1 +1,0 @@
-{"ast":null,"code":"'use strict';\n\nvar Driver = global.WebSocket || global.MozWebSocket;\n\nif (Driver) {\n  module.exports = function WebSocketBrowserDriver(url) {\n    return new Driver(url);\n  };\n} else {\n  module.exports = undefined;\n}","map":null,"metadata":{},"sourceType":"script"}

@@ -1,4 +1,0 @@
-{
-  "presets": [["react", {}, "before"], "typescript", ["react", {}, "after"]],
-  "throws": "Unexpected token, expected \"</>\" (1:6)"
-}

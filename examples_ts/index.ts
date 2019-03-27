@@ -19,23 +19,23 @@ import otherNativeFiles from './06-other/native-files'
 
 export * from './isDebugMode'
 export const componentIndex: {
-	[key: string]: React.ComponentClass<any> | React.FunctionComponent<any>
+  [key: string]: React.ComponentClass<any> | React.FunctionComponent<any>
 } = {
-	chessboard,
-	'dustbin-single-target': dustbinSingleTarget,
-	'dustbin-multiple-targets': dustbinMultipleTargets,
-	'dustbin-copy-or-move': dustbinCopyOrMove,
-	'dustbin-single-target-in-iframe': dustbinSingleTargetInIframe,
-	'dustbin-stress-test': dustbinStressTest,
-	'drag-around-custom-drag-layer': dragAroundCustomDragLayer,
-	'drag-around-naive': dragAroundNaive,
-	'nesting-drag-sources': nestingDragSources,
-	'nesting-drop-targets': nestingDropTargets,
-	'sortable-cancel-on-drop-outside': sortableCancelOnDropOutside as any,
-	'sortable-simple': sortableSimple,
-	'sortable-stress-test': sortableStressTest,
-	'customize-drop-effects': customizeDropEffects,
-	'customize-handles-and-previews': customizeHandlesAndPreviews,
-	'other-drag-source-rerender': dragSourceRerender,
-	'other-native-files': otherNativeFiles,
+  chessboard,
+  'dustbin-single-target': dustbinSingleTarget,
+  'dustbin-multiple-targets': dustbinMultipleTargets,
+  'dustbin-copy-or-move': dustbinCopyOrMove,
+  'dustbin-single-target-in-iframe': dustbinSingleTargetInIframe,
+  'dustbin-stress-test': dustbinStressTest,
+  'drag-around-custom-drag-layer': dragAroundCustomDragLayer,
+  'drag-around-naive': dragAroundNaive,
+  'nesting-drag-sources': nestingDragSources,
+  'nesting-drop-targets': nestingDropTargets,
+  'sortable-cancel-on-drop-outside': sortableCancelOnDropOutside as any,
+  'sortable-simple': sortableSimple,
+  'sortable-stress-test': sortableStressTest,
+  'customize-drop-effects': customizeDropEffects,
+  'customize-handles-and-previews': customizeHandlesAndPreviews,
+  'other-drag-source-rerender': dragSourceRerender,
+  'other-native-files': otherNativeFiles,
 }

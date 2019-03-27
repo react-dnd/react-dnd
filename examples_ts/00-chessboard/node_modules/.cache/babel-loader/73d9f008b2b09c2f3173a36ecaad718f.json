@@ -1,1 +1,0 @@
-{"ast":null,"code":"'use strict';\n\nvar inherits = require('inherits'),\n    Event = require('./event');\n\nfunction TransportMessageEvent(data) {\n  Event.call(this);\n  this.initEvent('message', false, false);\n  this.data = data;\n}\n\ninherits(TransportMessageEvent, Event);\nmodule.exports = TransportMessageEvent;","map":null,"metadata":{},"sourceType":"script"}
