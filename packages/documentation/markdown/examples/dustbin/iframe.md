@@ -4,7 +4,7 @@ title: 'iframe'
 ---
 
 [JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/01-dustbin/single-target-in-iframe)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/01-dustbin/single-target-in-iframe)
+[TypeScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_ts/01-dustbin/single-target-in-iframe)
 
 This is the same simple example, but nested in an iframe.
 

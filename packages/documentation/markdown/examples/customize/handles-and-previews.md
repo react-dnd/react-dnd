@@ -4,7 +4,7 @@ title: 'Handles and Previews'
 ---
 
 [JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/05-customize/handles-and-previews)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/05-customize/handles-and-previews)
+[TypeScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_ts/05-customize/handles-and-previews)
 
 React DnD lets you choose the draggable node, as well as the drag
 preview node in your component's `render` function.
