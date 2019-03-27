@@ -3,7 +3,7 @@ path: '/examples/dustbin/stress-test'
 title: 'Stress Test'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/01-dustbin/stress-test)
+[JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/01-dustbin/stress-test)
 [TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/01-dustbin/stress-test)
 
 This example is similar to the previous one, but props of both the

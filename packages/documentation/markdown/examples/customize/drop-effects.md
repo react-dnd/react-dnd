@@ -3,7 +3,7 @@ path: '/examples/customize/drop-effects'
 title: 'Drop Effects'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/05-customize/drop-effects)
+[JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/05-customize/drop-effects)
 [TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/05-customize/drop-effects)
 
 Some browsers let you specify the “drop effects” for the draggable
