@@ -3,8 +3,8 @@ path: '/examples/dustbin/stress-test'
 title: 'Stress Test'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/01%20Dustbin/Stress%20Test)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/01%20Dustbin/Stress%20Test)
+[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/01-dustbin/stress-test)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/01-dustbin/stress-test)
 
 This example is similar to the previous one, but props of both the
 drag sources and the drop targets change every second. It demonstrates

@@ -3,8 +3,8 @@ path: '/examples/dustbin/multiple-targets'
 title: 'Multiple Targets'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/01%20Dustbin/Multiple%20Targets)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/01%20Dustbin/Multiple%20Targets)
+[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/01-dustbin/multiple-targets)
+[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/01-dustbin/multiple-targets)
 
 This is a slightly more interesting example.
 It demonstrates how a single drop target may accept multiple types,
