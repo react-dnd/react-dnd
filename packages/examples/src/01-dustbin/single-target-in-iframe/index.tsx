@@ -3,8 +3,8 @@ declare var require: any
 import React from 'react'
 import { DragDropContextProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-import Dustbin from '../Single Target/Dustbin'
-import Box from '../Single Target/Box'
+import Dustbin from '../single-target/Dustbin'
+import Box from '../single-target/Box'
 import { isDebugMode } from '../../isDebugMode'
 
 const {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { DropTarget, ConnectDropTarget } from 'react-dnd'
-import ItemTypes from '../Single Target/ItemTypes'
+import ItemTypes from '../single-target/ItemTypes'
 
 const style: React.CSSProperties = {
 	height: '12rem',

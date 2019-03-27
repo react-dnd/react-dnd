@@ -29,8 +29,8 @@
 		"query-string": "^6.3.0",
 		"react": "^16.8.5",
 		"react-dnd": "^7.4.3",
-		"react-dnd-documentation-examples": "^7.4.3",
-		"react-dnd-documentation-examples-hooks": "^7.4.3",
+		"react-dnd-examples": "^7.4.3",
+		"react-dnd-examples-hooks": "^7.4.3",
 		"react-dnd-html5-backend": "^7.4.0",
 		"react-dnd-test-backend": "^7.4.0",
 		"react-dom": "^16.8.5",
@@ -51,8 +51,10 @@
 		"start": "gatsby develop",
 		"copy_example_source": "cp -r ../examples/lib/docs static/examples_js",
 		"format_example_source": "prettier 'static/examples_js/**/*.js*' --use-tabs=false --write",
+		"write_example_boilerplate": "node write_sample_boilerplate.js",
+		"process_examples": "run-s copy_example_source format_example_source write_example_boilerplate",
 		"build_static_site": "gatsby build --prefix-paths",
 		"publish_gh_pages": "NODE_DEBUG=gh-pages gh-pages -d public -t",
-		"release": "run-s clean copy_example_source format_example_source build_static_site publish_gh_pages"
+		"release": "run-s clean process_examples build_static_site publish_gh_pages"
 	}
 }
