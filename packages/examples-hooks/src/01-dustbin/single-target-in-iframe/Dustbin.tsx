@@ -1,6 +1,7 @@
 import React from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+
 const {
 	useDrop,
 } = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
@@ -18,42 +19,29 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-export interface DustbinProps {
-	allowedDropEffect: string
-}
-
-function selectBackgroundColor(isActive: boolean, canDrop: boolean) {
-	if (isActive) {
-		return 'darkgreen'
-	} else if (canDrop) {
-		return 'darkkhaki'
-	} else {
-		return '#222'
-	}
-}
-
-const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
+const Dustbin: React.FC = () => {
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: ItemTypes.BOX,
-		drop: () => ({
-			name: `${allowedDropEffect} Dustbin`,
-			allowedDropEffect,
-		}),
-		collect: (monitor: any) => ({
+		drop: () => ({ name: 'Dustbin' }),
+		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
 		}),
 	})
 
 	const isActive = canDrop && isOver
-	const backgroundColor = selectBackgroundColor(isActive, canDrop)
+	let backgroundColor = '#222'
+	if (isActive) {
+		backgroundColor = 'darkgreen'
+	} else if (canDrop) {
+		backgroundColor = 'darkkhaki'
+	}
+
 	return (
 		<div ref={drop} style={{ ...style, backgroundColor }}>
-			{`Works with ${allowedDropEffect} drop effect`}
-			<br />
-			<br />
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>
 	)
 }
+
 export default Dustbin
