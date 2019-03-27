@@ -47,7 +47,7 @@
 		"prettier": "^1.16.4"
 	},
 	"scripts": {
-		"clean": "rimraf .cache public apidocs static/examples_js",
+		"clean": "rimraf .cache public apidocs static/examples_js static/examples_ts",
 		"start": "gatsby develop",
 		"copy_examples:js": "cp -r ../examples/lib/docs static/examples_js",
 		"copy_examples:ts": "cp -r ../examples/src static/examples_ts",
