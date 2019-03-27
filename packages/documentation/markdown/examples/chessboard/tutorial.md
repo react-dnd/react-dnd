@@ -3,7 +3,7 @@ path: '/examples/tutorial'
 title: 'Tutorial'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/00-chessboard/)
+[JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/00-chessboard/)
 [TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/00-chessboard/)
 
 This is a sample app you'll build as you work through the [tutorial](/docs/tutorial)

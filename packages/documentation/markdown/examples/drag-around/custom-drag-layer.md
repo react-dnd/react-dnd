@@ -3,7 +3,7 @@ path: '/examples/drag-around/custom-drag-layer'
 title: 'Custom Drag Layer'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/02-drag-around/custom-drag-layer)
+[JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/02-drag-around/custom-drag-layer)
 [TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/02-drag-around/custom-drag-layer)
 
 The browser APIs provide no way to change the drag preview or its

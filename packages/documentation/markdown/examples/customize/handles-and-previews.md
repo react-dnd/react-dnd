@@ -3,7 +3,7 @@ path: '/examples/customize/handles-and-previews'
 title: 'Handles and Previews'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/05-customize/handles-and-previews)
+[JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/05-customize/handles-and-previews)
 [TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/05-customize/handles-and-previews)
 
 React DnD lets you choose the draggable node, as well as the drag
