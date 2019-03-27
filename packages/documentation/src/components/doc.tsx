@@ -1,6 +1,6 @@
 import * as React from 'react'
+import styled from 'styled-components'
 import renderAst from '../util/renderHtmlAst'
-const styled = require('styled-components')
 
 export interface DocProps {
 	docPage: {
