@@ -1,9 +1,9 @@
 import React from 'react'
 import {
 	DragSource,
+	DragSourceMonitor,
 	ConnectDragSource,
 	DragSourceConnector,
-	DragSourceMonitor,
 } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
@@ -13,18 +13,24 @@ const style: React.CSSProperties = {
 	padding: '0.5rem 1rem',
 	marginRight: '1.5rem',
 	marginBottom: '1.5rem',
+	cursor: 'move',
 	float: 'left',
 }
 
 export interface BoxProps {
+	name: string
+
+	// Collected Props
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
-	name: string
 }
-
 const Box: React.FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
 	const opacity = isDragging ? 0.4 : 1
-	return connectDragSource(<div style={{ ...style, opacity }}>{name}</div>)
+	return (
+		<div ref={connectDragSource} style={{ ...style, opacity }}>
+			{name}
+		</div>
+	)
 }
 
 export default DragSource(
@@ -36,23 +42,7 @@ export default DragSource(
 			const dropResult = monitor.getDropResult()
 
 			if (dropResult) {
-				let alertMessage = ''
-				const isDropAllowed =
-					dropResult.allowedDropEffect === 'any' ||
-					dropResult.allowedDropEffect === dropResult.dropEffect
-
-				if (isDropAllowed) {
-					const isCopyAction = dropResult.dropEffect === 'copy'
-					const actionName = isCopyAction ? 'copied' : 'moved'
-					alertMessage = `You ${actionName} ${item.name} into ${
-						dropResult.name
-					}!`
-				} else {
-					alertMessage = `You cannot ${
-						dropResult.dropEffect
-					} an item into the ${dropResult.name}`
-				}
-				alert(alertMessage)
+				alert(`You dropped ${item.name} into ${dropResult.name}!`)
 			}
 		},
 	},

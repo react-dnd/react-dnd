@@ -105,6 +105,10 @@
 		"testMatch": [
 			"<rootDir>/packages/**/__tests__/**/?(*.)(spec|test).(t|j)s(x|)"
 		],
+		"testPathIgnorePatterns": [
+			"/packages/documentation/static/",
+			"/packages/documentation/public/"
+		],
 		"transform": {
 			"^.+\\.(ts|tsx)$": "ts-jest"
 		},
