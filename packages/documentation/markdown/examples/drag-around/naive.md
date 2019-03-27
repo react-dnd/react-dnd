@@ -4,7 +4,7 @@ title: 'Naive'
 ---
 
 [JavaScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_js/02-drag-around/naive)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/02-drag-around/naive)
+[TypeScript](https://codesandbox.io/s/github/react-dnd/react-dnd/tree/gh-pages/examples_ts/02-drag-around/naive)
 
 This example naively relies on browser drag and drop implementation
 without much custom logic.
