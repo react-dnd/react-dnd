@@ -19,7 +19,7 @@ To use `DragLayer`, don't forget to wrap the top-level component of your app in 
 
 `DragLayer` uses partial application. After specifying its only parameter with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragLayer` usable as a decorator. Read the [overview](/docs/overview) for a more detailed explanation of the decorators and the higher-order components.
 
-```js
+```jsx
 import { DragLayer } from 'react-dnd'
 
 class CustomDragLayer {
@@ -58,7 +58,7 @@ For easier [testing](/docs/testing), it provides an API to reach into the intern
 
 ### Example
 
-```js
+```jsx
 import React from 'react'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'

@@ -17,7 +17,7 @@ A few test examples are included with the React DnD inside its `examples` folder
 
 If you are only interested in testing the _rendering_ of your components in isolation, and not their interaction, you may use the `DecoratedComponent` static property available on any class wrapped with React DnD to access the original class. You may then test it with the different props without any dependency on React DnD, supplying an identity function to stub the connector methods.
 
-```js
+```jsx
 import React from 'react'
 import TestUtils from 'react-dom/test-utils'
 import expect from 'expect'
@@ -60,7 +60,7 @@ npm install --save-dev react-dnd-test-backend
 
 Here are some examples to get you started:
 
-```js
+```jsx
 import React from 'react'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { DragDropContext } from 'react-dnd'
@@ -97,7 +97,7 @@ it('can be tested with the testing backend', () => {
 [Enzyme](https://github.com/airbnb/enzyme) is a commonly-used tool for testing React components.
 To use it with react-dnd, you'll need to call `.instance()` on `mount`-ed nodes to access the react-dnd helper methods:
 
-```js
+```jsx
 var root = Enzyme.mount(<BoxContext name="test" />)
 
 // ...

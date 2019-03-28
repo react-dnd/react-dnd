@@ -40,7 +40,7 @@ For each component that needs to track the drag and drop state, you can define a
 
 Let's say you want to highlight the Chess cells when a piece is being dragged. A collecting function for the `Cell` component might look like this:
 
-```js
+```jsx
 function collect(monitor) {
   return {
     highlighted: monitor.canDrop(),
@@ -57,7 +57,7 @@ If the backend handles the DOM events, but the components use React to describe 
 
 In fact, a connector is passed as the first argument to the _collecting function_ we described above. Let's see how we can use it to specify the drop target:
 
-```js
+```jsx
 function collect(connect, monitor) {
   return {
     highlighted: monitor.canDrop(),
@@ -69,7 +69,7 @@ function collect(connect, monitor) {
 
 In the component's `render` method, we are then able to access both the data obtained from the monitor, and the function obtained from the connector:
 
-```js
+```jsx
 render() {
   const { highlighted, hovered, connectDropTarget } = this.props;
 
@@ -107,7 +107,7 @@ In React DnD, [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api
 
 One caveat of using them is that they require _two_ function applications. For example, here's how to wrap `YourComponent` in a [`DragSource`](/docs/api/drag-source):
 
-```js
+```jsx
 import { DragSource } from 'react-dnd'
 
 class YourComponent {
@@ -119,7 +119,7 @@ export default DragSource(/* ... */)(YourComponent)
 
 Notice how, after specifying the [`DragSource`](/docs/api/drag-source) parameters in the first function call, there is a _second_ function call, where you finally pass your class. This is called [currying](http://en.wikipedia.org/wiki/Currying), or [partial application](http://en.wikipedia.org/wiki/Partial_application), and is necessary for the [decorator syntax](http://github.com/wycats/javascript-decorators) to work out of the box:
 
-```js
+```jsx
 import { DragSource } from 'react-dnd'
 
 @DragSource(/* ... */)
@@ -132,7 +132,7 @@ You don't have to use this syntax, but if you like it, you can enable it by tran
 
 Even if you don't plan to use decorators, the partial application can still be handy, because you can combine several [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-target) declarations in JavaScript using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). With decorators, you can just stack the decorators to achieve the same effect.
 
-```js
+```jsx
 import { DragSource, DropTarget } from 'react-dnd'
 import flow from 'lodash/flow'
 
@@ -156,7 +156,7 @@ export default flow(
 
 Below is an example of wrapping an existing `Card` component into a drag source.
 
-```js
+```jsx
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
