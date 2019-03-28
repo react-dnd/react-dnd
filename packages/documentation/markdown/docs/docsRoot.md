@@ -3,16 +3,21 @@ path: '/about'
 title: 'React DnD'
 ---
 
-React DnD is a set of React [higher-order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) components to help you build complex drag and drop interfaces while keeping your components decoupled. It is a perfect fit for apps like Trello and Storify, where dragging transfers data between different parts of the application, and the components change their appearance and the application state in response to the drag and drop events.
+React DnD is a set of React tools to help you build complex drag and drop interfaces while keeping your components decoupled. It is a perfect fit for building interfaces like Trello and Storify, where dragging transfers data between different parts of the application, and the components change their appearance and the application state in response to the drag and drop events.
 
 ## Installation
 
-```sh
-npm install --save react-dnd
-npm install --save react-dnd-html5-backend
+```bash
+# Using npm
+npm i -s react-dnd react-dnd-html5-backend
 ```
 
-The second package instructs React DnD to use [the HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop) under the hood. You may choose to use a third-party backend instead, such as [the touch backend](https://github.com/yahoo/react-dnd-touch-backend).
+```bash
+# Using yarn
+yarn add react-dnd react-dnd-html5-backend
+```
+
+The second package will allow React DnD to use [the HTML5 drag-and-drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop). You may choose to use a third-party backend instead, such as [the touch backend](https://github.com/yahoo/react-dnd-touch-backend).
 
 ## What's It Look Like?
 
@@ -23,35 +28,21 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './Constants'
 
-/**
- * Implements the drag source contract.
- */
-const cardSource = {
-  beginDrag(props) {
-    return {
-      text: props.text,
-    }
+function Card({ isDragging, dragSource, text }) {
+  const style = { opacity: isDragging ? 0.5 : 1 }
+  return dragSource(<div style={style}>{text}</div>)
+}
+
+export default DragSource(
+  ItemTypes.CARD,
+  {
+    beginDrag: props => ({ text: props.text }),
   },
-}
-
-/**
- * Specifies the props to inject into your component.
- */
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
+  (connect, monitor) => ({
+    dragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
-  }
-}
-
-function Card({ isDragging, connectDragSource, text }) {
-  return connectDragSource(
-    <div style={{ opacity: isDragging ? 0.5 : 1 }}>{text}</div>,
-  )
-}
-
-// Export the wrapped component:
-export default DragSource(ItemTypes.CARD, cardSource, collect)(Card)
+  }),
+)(Card)
 ```
 
 ## Features
@@ -72,17 +63,13 @@ HTML5 drag and drop has an awkward API full of pitfalls and browser inconsistenc
 
 React DnD uses the HTML5 drag and drop under the hood, but it also lets you supply a custom “backend”. You can create a custom DnD backend based on the touch events, the mouse events, or something else entirely. For example, a built-in simulation backend lets you test drag and drop interaction of your components in a Node environment.
 
-### It is ready for the future
-
-React DnD does not export mixins, and works equally great with any components, whether they are created using ES6 classes, `createReactClass` or alternative React frameworks such as Omniscient. Its API shines with ES7 decorators if you like to be on the bleeding edge, but it also feels natural in both ES5 and ES6.
-
 ## Touch Support
 
 For touch support, use React DnD with [the touch backend](https://github.com/yahoo/react-dnd-touch-backend) instead of the HTML5 backend.
 
 ## Non-Goals
 
-React DnD gives you a set of powerful primitives, but it does not contain any readymade components. It's lower level than [jQuery UI](https://jqueryui.com/) or [interact.js](http://interactjs.io/) and is focused on getting the drag and drop interaction right, leaving its visual aspects such as axis constraints or snapping to you. For example, React DnD doesn't plan to provide a `Sortable` component. Instead it makes it easy for you to build your own, with any rendering customizations that you need.
+React DnD gives you a set of powerful primitives, but it does not contain any ready-made components. It's lower level than [jQuery UI](https://jqueryui.com/) or [interact.js](http://interactjs.io/) and is focused on getting the drag and drop interaction right, leaving its visual aspects such as axis constraints or snapping to you. For example, React DnD doesn't plan to provide a `Sortable` component. Instead it makes it easy for you to build your own, with any rendering customizations that you need.
 
 ## Support and Contributions
 
