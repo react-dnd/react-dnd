@@ -1,5 +1,5 @@
 import React from 'react'
-import chessboard from './00-chessboard'
+import chessboard from './00-chessboard/final-result'
 import dustbinCopyOrMove from './01-dustbin/copy-or-move'
 import dustbinMultipleTargets from './01-dustbin/multiple-targets'
 import dustbinSingleTarget from './01-dustbin/single-target'
