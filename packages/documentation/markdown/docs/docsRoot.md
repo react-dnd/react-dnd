@@ -16,7 +16,7 @@ The second package instructs React DnD to use [the HTML5 drag and drop API](http
 
 ## What's It Look Like?
 
-```js
+```jsx
 // Let's make <Card text='Write the docs' /> draggable!
 
 import React from 'react'

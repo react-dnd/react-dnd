@@ -15,7 +15,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 ## Usage
 
-```js
+```jsx
 import React from 'react'
 import { DropTarget } from 'react-dnd'
 
