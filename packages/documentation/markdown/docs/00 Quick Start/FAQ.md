@@ -47,7 +47,7 @@ When using [function components](https://facebook.github.io/react/docs/reusable-
 
 If you use a tool like [babel-react-optimize](https://github.com/jamiebuilds/babel-react-optimize#transform-react-pure-class-to-function) preset or [babel-plugin-transform-react-pure-class-to-function](https://github.com/jamiebuilds/babel-react-optimize/tree/master/packages/babel-plugin-transform-react-pure-class-to-function), then be aware that your class definition may implicitly be transformed into a function component, which may result in a null argument.
 
-```js
+```jsx
 import { DragSource } from 'react-dnd'
 import flow from 'lodash/flow'
 
@@ -65,7 +65,7 @@ export default flow(
 
 If you are using the [HTML5 backend](/docs//backends/html5), you can register a drop target for one of the `NativeTypes` it exports:
 
-```js
+```jsx
 import React from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { DropTarget } from 'react-dnd'

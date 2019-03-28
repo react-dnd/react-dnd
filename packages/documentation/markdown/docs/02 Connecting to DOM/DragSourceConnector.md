@@ -37,7 +37,7 @@ The functions returned by the connector methods also accept options. They need t
 
 ## Usage
 
-```js
+```jsx
 import React from 'react';
 import { DragSource } from 'react-dnd';
 
