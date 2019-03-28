@@ -38,7 +38,7 @@ This problem may also appear if you have a duplicate React installation in your 
 React DnD does not provide a [default export](http://www.2ality.com/2014/09/es6-modules-final.html).
 Mind the difference:
 
-```js
+```jsx
 // Wrong:
 import DragSource from 'react-dnd'
 
@@ -50,7 +50,7 @@ import { DragSource } from 'react-dnd'
 
 For the [`DragSource`](/docs/api/drag-source), [`DropTarget`](/docs/api/drop-target), [`DragLayer`](/docs/api/drag-layer), and the [`DragDropContext`](/docs/api/drag-drop-context), it is important that you first pass them the configuration arguments, and _then_ inject your React component in a second call.
 
-```js
+```jsx
 // Wrong:
 export default DragSource(YourComponent)(/* ... */);
 export default DragSource(YourComponent, /* ... */);

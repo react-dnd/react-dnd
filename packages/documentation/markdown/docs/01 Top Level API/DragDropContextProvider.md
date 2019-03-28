@@ -13,7 +13,7 @@ injected with a backend via the `backend` prop, but it also can be injected with
 
 ### Usage
 
-```js
+```jsx
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContextProvider } from 'react-dnd'
 

@@ -15,7 +15,7 @@ To use `DragSource`, don't forget to wrap the top-level component of your app in
 
 `DragSource` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragSource` usable as a decorator. Read the [overview](/docs/overview) for a more detailed explanation of the decorators and the higher-order components.
 
-```js
+```jsx
 import { DragSource } from 'react-dnd'
 
 class MyComponent {
@@ -102,7 +102,7 @@ If a drag source is nested in another drag source, the innermost drag source of 
 
 Check out [the tutorial](/docs/tutorial) for more real examples!
 
-```js
+```jsx
 import React from 'react'
 import { DragSource } from 'react-dnd'
 

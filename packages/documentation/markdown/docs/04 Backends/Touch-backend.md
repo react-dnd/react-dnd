@@ -21,7 +21,7 @@ npm install --save react-dnd-touch-backend
 
 ### Usage
 
-```js
+```jsx
 import TouchBackend from 'react-dnd-touch-backend'
 import { DragDropContext } from 'react-dnd'
 
