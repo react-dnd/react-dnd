@@ -15,7 +15,7 @@ To use `DropTarget`, don't forget to wrap the top-level component of your app in
 
 `DropTarget` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DropTarget` usable as a decorator. Read the [overview](/docs/overview) for a more detailed explanation of the decorators and the higher-order components.
 
-```js
+```jsx
 import { DropTarget } from 'react-dnd'
 
 class MyComponent {
@@ -106,7 +106,7 @@ When using the [HTML5 backend](/docs/backends/html5), you can handle the file dr
 
 Check out [the tutorial](/docs/tutorial) for more real examples!
 
-```js
+```jsx
 import React from 'react'
 import { findDOMNode } from 'react-dom'
 import { DropTarget } from 'react-dnd'
