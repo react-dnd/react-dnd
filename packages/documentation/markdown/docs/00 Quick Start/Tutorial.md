@@ -5,7 +5,7 @@ title: 'Tutorial'
 
 # Tutorial
 
-Now that you've read [the overview](/docs/overview), it's dventure time!
+Now that you've read [the overview](/docs/overview), it's adventure time!
 
 ![Adventure Time!](https://media.giphy.com/media/132qeyvgJ2Al3i/giphy.gif)
 
