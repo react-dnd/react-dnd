@@ -17,19 +17,28 @@ We will use this example to demonstrate the data-driven philosophy of `react-dnd
 
 Now let's build something!
 
-#### Table of Contents
+### Table of Contents
 
 - [Setup](#setup)
-- [Identifying the Components](#identifying-the-components)
-- [Creating the Components](#creating-the-components)
-- [Adding Game State](#adding-game-state)
+- [Building the Game](#building-the-game)
+  - [Identifying the Components](#identifying-the-components)
+  - [Creating the Components](#creating-the-components)
+  - [Adding Game State](#adding-game-state)
 - [Adding Drag-and-Drop Interaction](#adding-drag-and-drop-interaction)
+  - [Setting up the Drag-and-Drop Context](#setting-up-the-drag-and-drop-context)
+  - [Define Drag Types](#define-drag-types)
+  - [Make the Knight Draggable](#make-the-knight-draggable)
+  - [Make the Board Squares Droppable](#make-the-board-squares-droppable)
+  - [Add a Drag Preview Image](#add-a-drag-preview-image)
+- [Concluding Words](#concluding-words)
 
-## Setup
+# Setup
 
 In this tutorial, the code examples are use function-components and modern JavaScript syntax. It's recommended to use a build-step to transpile these features into your target environment. We recommend using [create-react-app](https://github.com/facebook/create-react-app).
 
 The app we're going to build is [available as an example on this website](/examples/tutorial).
+
+# Building the Game
 
 ## Identifying the Components
 
@@ -302,11 +311,8 @@ Just to verify that this subscription API makes some sense, I'm going to write a
 
 ```jsx
 export function observe(receive) {
-  setInterval(
-    () =>
-      receive([Math.floor(Math.random() * 8), Math.floor(Math.random() * 8)]),
-    500,
-  )
+  const randPos = () => Math.floor(Math.random() * 8)
+  setInterval(() => receive([randPos(), randPos()]), 500)
 }
 ```
 
@@ -402,7 +408,7 @@ function handleSquareClick(toX, toY) {
 
 Working great so far!
 
-## Adding Drag and Drop Interaction
+# Adding Drag and Drop Interaction
 
 This is the part that actually prompted me to write this tutorial. We are now going to see how easy React DnD makes it to add some drag and drop interaction to your existing components.
 
@@ -416,7 +422,10 @@ yarn add react-dnd react-dnd-html5-backend
 
 In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://github.com/yahoo/react-dnd-touch-backend), but this is out of scope of this tutorial.
 
-The first thing we need to set up in our app is the [`DragDropContextProvider`](/docs/api/drag-drop-context-provider). We need it to specify that we're going to use the [`HTML5` backend](/docs/backends/html5) in our app.
+## Setting up the Drag and Drop Context
+
+The first thing we need to set up in our app is the [`DragDropContextProvider`](/docs/api/drag-drop-context-provider). This should be mounted near the top of our application.
+We need this to specify that we're going to use the [HTML5Backend](/docs/backends/html5).
 
 ```jsx
 import React from 'react'
@@ -433,6 +442,8 @@ function Board() {
 }
 ```
 
+## Define Drag Types
+
 Next, I'm going to create the constants for the draggable item types. We're only going to have a single item type in our game, a `KNIGHT`. I'm creating a `Constants` module that exports it:
 
 ```jsx
@@ -442,6 +453,8 @@ export const ItemTypes = {
 ```
 
 The preparation work is done now. Let's make the `Knight` draggable!
+
+## Make the Knight Draggable
 
 The [`DragSource`](/docs/api/drag-source) higher-order component accepts three parameters: `type`, `spec`, and `collect`. Our `type` is the constant we just defined, so now we need to write a drag source specification and a collecting function. For the `Knight`, the drag source specification is going to be ridiculously simple:
 
@@ -507,6 +520,8 @@ export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight)
 ```
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/3L1d0C203C0s1r1H2H0m/Screen%20Recording%202015-05-15%20at%2001.11%20pm.gif' width='404' height='445' alt='Screenshot'>
+
+## Make the Board Squares Droppable
 
 The `Knight` is now a drag source, but there are no drop targets to handle the drop yet. We're going to make the `Square` a drop target now.
 
@@ -709,11 +724,9 @@ export default DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare)
 
 <img src='https://s3.amazonaws.com/f.cl.ly/items/0X3c342g0i3u100p1o18/Screen%20Recording%202015-05-15%20at%2002.05%20pm.gif' width='404' height='445' alt='Screenshot'>
 
-### Final Touches
+## Add a Drag Preview Image
 
-This tutorial guided you through creating the React components, making the design decisions about them and the app's data layer, and finally adding the drag and drop interaction. My intention was to show you that React DnD fits great with the philosophy of React, and that you should think about the app architecture first before diving into implementing the complex interactions.
-
-The last thing I want to demonstrate is drag preview customization. Sure, the browser will screenshot the DOM node, but what if we want to show something different?
+The last thing I want to demonstrate is drag preview customization. Sure, the browser will screenshot the DOM node, but what if we want to show a custom image?
 
 We are lucky again, because it is easy to do with React DnD. We just need to add a `connect.dragPreview()` to the collecting function of the `Knight`:
 
@@ -736,6 +749,10 @@ componentDidMount() {
   img.onload = () => this.props.connectDragPreview(img);
 }
 ```
+
+# Concluding Words
+
+This tutorial guided you through creating the React components, making design decisions about them and the application state, and finally adding the drag and drop interaction. The goal of this tutorial was to show you that React DnD fits great with the philosophy of React, and that you should think about the app architecture first before diving into implementing the complex interactions.
 
 Happy dragging and dropping.
 
