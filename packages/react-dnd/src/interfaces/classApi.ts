@@ -220,7 +220,7 @@ export type Matching<InjectedProps, DecorationTargetProps> = {
  */
 export type Shared<
 	InjectedProps,
-	DecorationTargetProps extends Shared<InjectedProps, DecorationTargetProps>
+	DecorationTargetProps
 > = {
 	[P in Extract<
 		keyof InjectedProps,
