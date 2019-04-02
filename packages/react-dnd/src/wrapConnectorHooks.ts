@@ -1,5 +1,6 @@
 import { isValidElement, ReactElement } from 'react'
 import cloneWithRef from './utils/cloneWithRef'
+import './utils/polyfills/endsWith'
 
 function throwIfCompositeComponentElement(element: React.ReactElement<any>) {
 	// Custom components can no longer be wrapped directly in React DnD 2.0
