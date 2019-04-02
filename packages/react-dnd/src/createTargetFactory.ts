@@ -63,7 +63,7 @@ class TargetImpl<Props> implements Target {
 				typeof dropResult === 'undefined' || isPlainObject(dropResult),
 				'drop() must either return undefined, or an object that represents the drop result. ' +
 					'Instead received %s. ' +
-					'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+					'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target',
 				dropResult,
 			)
 		}
@@ -80,7 +80,7 @@ export default function createTargetFactory<Props>(
 			'Expected the drop target specification to only have ' +
 				'some of the following keys: %s. ' +
 				'Instead received a specification with an unexpected "%s" key. ' +
-				'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+				'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target',
 			ALLOWED_SPEC_METHODS.join(', '),
 			key,
 		)
@@ -88,7 +88,7 @@ export default function createTargetFactory<Props>(
 			typeof (spec as any)[key] === 'function',
 			'Expected %s in the drop target specification to be a function. ' +
 				'Instead received a specification with %s: %s. ' +
-				'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+				'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target',
 			key,
 			key,
 			(spec as any)[key],
