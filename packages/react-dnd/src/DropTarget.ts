@@ -41,7 +41,7 @@ export default function DropTarget<RequiredProps, CollectedProps = {}>(
 			'Expected "type" provided as the first argument to DropTarget to be ' +
 				'a string, an array of strings, or a function that returns either given ' +
 				'the current props. Instead, received %s. ' +
-				'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+				'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target',
 			type,
 		)
 		getType = () => type
@@ -50,7 +50,7 @@ export default function DropTarget<RequiredProps, CollectedProps = {}>(
 		isPlainObject(spec),
 		'Expected "spec" provided as the second argument to DropTarget to be ' +
 			'a plain object. Instead, received %s. ' +
-			'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+			'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target',
 		spec,
 	)
 	const createTarget = createTargetFactory(spec)
@@ -59,7 +59,7 @@ export default function DropTarget<RequiredProps, CollectedProps = {}>(
 		'Expected "collect" provided as the third argument to DropTarget to be ' +
 			'a function that returns a plain object of props to inject. ' +
 			'Instead, received %s. ' +
-			'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+			'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target',
 		collect,
 	)
 	invariant(
@@ -67,7 +67,7 @@ export default function DropTarget<RequiredProps, CollectedProps = {}>(
 		'Expected "options" provided as the fourth argument to DropTarget to be ' +
 			'a plain object when specified. ' +
 			'Instead, received %s. ' +
-			'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target.html',
+			'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target',
 		collect,
 	)
 

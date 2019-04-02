@@ -38,7 +38,7 @@ export default class DropTargetMonitorImpl implements DropTargetMonitor {
 		invariant(
 			!isCallingCanDrop,
 			'You may not call monitor.canDrop() inside your canDrop() implementation. ' +
-				'Read more: http://react-dnd.github.io/react-dnd/docs-drop-target-monitor.html',
+				'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target-monitor',
 		)
 
 		try {
