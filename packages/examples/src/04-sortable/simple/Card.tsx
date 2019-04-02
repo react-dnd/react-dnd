@@ -35,10 +35,7 @@ interface CardInstance {
 	getNode(): HTMLDivElement | null
 }
 
-const Card: React.RefForwardingComponent<
-	HTMLDivElement,
-	CardProps
-> = React.forwardRef(
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
 	({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
 		const elementRef = useRef(null)
 		connectDragSource(elementRef)
