@@ -12,7 +12,7 @@ import {
 } from './utils/disposables'
 import { Connector } from './SourceConnector'
 import { isRefable } from './utils/isRefable'
-const isPlainObject = require('lodash/isPlainObject')
+import { isPlainObject } from './utils/discount_lodash'
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')
