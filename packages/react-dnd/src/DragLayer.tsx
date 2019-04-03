@@ -9,9 +9,9 @@ import {
 } from './interfaces'
 import { Consumer } from './DragDropContext'
 import { isRefable } from './utils/isRefable'
+import { isPlainObject } from './utils/discount_lodash'
 
 const hoistStatics = require('hoist-non-react-statics')
-const isPlainObject = require('lodash/isPlainObject')
 const invariant = require('invariant')
 const shallowEqual = require('shallowequal')
 
