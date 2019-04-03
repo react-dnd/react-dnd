@@ -45,6 +45,9 @@ export default class DragSourceMonitorImpl implements DragSourceMonitor {
 	}
 
 	public isDragging() {
+		if (!this.sourceId) {
+			return false
+		}
 		invariant(
 			!isCallingIsDragging,
 			'You may not call monitor.isDragging() inside your isDragging() implementation. ' +
@@ -53,7 +56,7 @@ export default class DragSourceMonitorImpl implements DragSourceMonitor {
 
 		try {
 			isCallingIsDragging = true
-			return this.internalMonitor.isDraggingSource(this.sourceId!)
+			return this.internalMonitor.isDraggingSource(this.sourceId)
 		} finally {
 			isCallingIsDragging = false
 		}
