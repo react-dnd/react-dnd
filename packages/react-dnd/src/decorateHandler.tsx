@@ -12,7 +12,7 @@ import {
 } from './utils/disposables'
 import { Connector } from './SourceConnector'
 import { isRefable } from './utils/isRefable'
-const isPlainObject = require('lodash/isPlainObject')
+import { isPlainObject } from './utils/discount_lodash'
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')
@@ -227,7 +227,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 				dragDropManager !== undefined,
 				'Could not find the drag and drop manager in the context of %s. ' +
 					'Make sure to wrap the top-level component of your app with DragDropContext. ' +
-					'Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context',
+					'Read more: http://react-dnd.github.io/react-dnd/docs/troubleshooting#could-not-find-the-drag-and-drop-manager-in-the-context',
 				displayName,
 				displayName,
 			)

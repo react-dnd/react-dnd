@@ -3,9 +3,6 @@ path: '/examples/drag-around/custom-drag-layer'
 title: 'Custom Drag Layer'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/02%20Drag%20Around/Custom%20Drag%20Layer)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/02%20Drag%20Around/Custom%20Drag%20Layer)
-
 The browser APIs provide no way to change the drag preview or its
 behavior once drag has started. Libraries such as jQuery UI implement
 the drag and drop from scratch to work around this, but react-dnd only
@@ -21,4 +18,7 @@ layer if we wish so. It's not just a screenshot.
 With this approach, we miss out on default “return” animation when
 dropping outside the container. However, we get great flexibility in
 customizing drag feedback and zero flicker.
-<drag-around-custom-drag-layer></drag-around-custom-drag-layer>
+
+<view-source name="02-drag-around/custom-drag-layer">
+  <drag-around-custom-drag-layer></drag-around-custom-drag-layer>
+</view-source>

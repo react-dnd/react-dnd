@@ -29,7 +29,7 @@ Aside from the default export, the HTML5 backend module also provides a few extr
 
 ### Usage
 
-```js
+```jsx
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 

@@ -3,9 +3,6 @@ path: '/examples/drag-around/naive'
 title: 'Naive'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/02%20Drag%20Around/Naive)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/02%20Drag%20Around/Naive)
-
 This example naively relies on browser drag and drop implementation
 without much custom logic.
 
@@ -27,4 +24,6 @@ control what happens to dragged preview once the browser has drawn it.
 Check out the [custom rendering example](/examples/drag-around/custom-drag-layer)  
 if you'd rather trade more control for some more work.
 
-<drag-around-naive></drag-around-naive>
+<view-source name="02-drag-around/naive">
+  <drag-around-naive></drag-around-naive>
+</view-source>

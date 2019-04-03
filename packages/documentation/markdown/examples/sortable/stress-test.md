@@ -3,9 +3,6 @@ path: '/examples/sortable/stress-test'
 title: 'Stress Test'
 ---
 
-[JavaScript](https://github.com/react-dnd/react-dnd/tree/gh-pages/examples_js/04%20Sortable/Stress%20Test)
-[TypeScript](https://github.com/react-dnd/react-dnd/tree/master/packages/examples/src/04%20Sortable/Stress%20Test)
-
 How many items can React DnD handle at the same time? There are a
 thousand items in this list. With some optimizations like updating the
 state inside a `requestAnimationFrame` callback, it can
@@ -24,4 +21,6 @@ scrolling with a parent drop target that compares
 handler. In fact, you are welcome to contribute this functionality to
 this example!
 
-<sortable-stress-test></sortable-stress-test>
+<view-source name="04-sortable/stress-test">
+  <sortable-stress-test></sortable-stress-test>
+</view-source>

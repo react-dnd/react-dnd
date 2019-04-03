@@ -12,7 +12,7 @@ This lets you specify the backend, and sets up the shared DnD state behind the s
 
 ### Usage
 
-```js
+```jsx
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
