@@ -35,6 +35,12 @@ export default class DropTargetMonitorImpl implements DropTargetMonitor {
 	}
 
 	public canDrop() {
+		// Cut out early if the target id has not been set. This should prevent errors
+		// where the user has an older version of dnd-core like in
+		// https://github.com/react-dnd/react-dnd/issues/1310
+		if (!this.targetId) {
+			return false
+		}
 		invariant(
 			!isCallingCanDrop,
 			'You may not call monitor.canDrop() inside your canDrop() implementation. ' +
@@ -43,14 +49,17 @@ export default class DropTargetMonitorImpl implements DropTargetMonitor {
 
 		try {
 			isCallingCanDrop = true
-			return this.internalMonitor.canDropOnTarget(this.targetId!)
+			return this.internalMonitor.canDropOnTarget(this.targetId)
 		} finally {
 			isCallingCanDrop = false
 		}
 	}
 
 	public isOver(options: { shallow?: boolean }) {
-		return this.internalMonitor.isOverTarget(this.targetId!, options)
+		if (!this.targetId) {
+			return false
+		}
+		return this.internalMonitor.isOverTarget(this.targetId, options)
 	}
 
 	public getItemType() {
