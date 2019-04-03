@@ -56,7 +56,7 @@ export default class DragSourceMonitorImpl implements DragSourceMonitor {
 
 		try {
 			isCallingIsDragging = true
-			return this.internalMonitor.isDraggingSource(this.sourceId!)
+			return this.internalMonitor.isDraggingSource(this.sourceId)
 		} finally {
 			isCallingIsDragging = false
 		}
