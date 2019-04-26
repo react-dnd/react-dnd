@@ -71,6 +71,11 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 		private disposable: any
 		private currentType: any
 
+		// We're not using state here because this local state is derived from
+		// context and we want to have control on setting the default value
+		// after accessing context.
+		private localState = {}
+
 		constructor(props: Props) {
 			super(props)
 			this.disposable = new SerialDisposable()
@@ -90,18 +95,16 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 			return this.decoratedRef.current as any
 		}
 
-		public shouldComponentUpdate(nextProps: any, nextState: any) {
-			return (
-				!arePropsEqual(nextProps, this.props) ||
-				!shallowEqual(nextState, this.state)
-			)
+		public shouldComponentUpdate(nextProps: any) {
+			return !arePropsEqual(nextProps, this.props)
 		}
 
 		public componentDidMount() {
 			this.disposable = new SerialDisposable()
 			this.currentType = undefined
 			this.receiveProps(this.props)
-			this.handleChange()
+			// Skip updating here, only use it to update local state cache.
+			this.handleChange(false)
 		}
 
 		public componentDidUpdate(prevProps: Props) {
@@ -158,10 +161,11 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 			)
 		}
 
-		public handleChange = () => {
+		public handleChange = (update = true) => {
 			const nextState = this.getCurrentState()
-			if (!shallowEqual(nextState, this.state)) {
-				this.setState(nextState)
+			if (update && !shallowEqual(nextState, this.localState)) {
+				this.localState = nextState
+				this.forceUpdate()
 			}
 		}
 
