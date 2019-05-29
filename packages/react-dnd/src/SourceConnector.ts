@@ -93,18 +93,22 @@ export default class SourceConnector implements Connector {
 	}
 
 	private reconnectDragSource() {
+		// if nothing has changed then don't resubscribe
+		const didChange =
+			this.didHandlerIdChange() ||
+			this.didConnectedDragSourceChange() ||
+			this.didDragSourceOptionsChange()
+
+		if (didChange) {
+			this.disconnectDragSource()
+		}
+
 		const dragSource = this.dragSource
 		if (!this.handlerId || !dragSource) {
 			return
 		}
 
-		// if nothing has changed then don't resubscribe
-		if (
-			this.didHandlerIdChange() ||
-			this.didConnectedDragSourceChange() ||
-			this.didDragSourceOptionsChange()
-		) {
-			this.disconnectDragSource()
+		if (didChange) {
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDragSource = dragSource
 			this.lastConnectedDragSourceOptions = this.dragSourceOptions
@@ -117,18 +121,22 @@ export default class SourceConnector implements Connector {
 	}
 
 	private reconnectDragPreview() {
+		// if nothing has changed then don't resubscribe
+		const didChange =
+			this.didHandlerIdChange() ||
+			this.didConnectedDragPreviewChange() ||
+			this.didDragPreviewOptionsChange()
+
+		if (didChange) {
+			this.disconnectDragPreview()
+		}
+
 		const dragPreview = this.dragPreview
 		if (!this.handlerId || !dragPreview) {
 			return
 		}
 
-		// if nothing has changed then don't resubscribe
-		if (
-			this.didHandlerIdChange() ||
-			this.didConnectedDragPreviewChange() ||
-			this.didDragPreviewOptionsChange()
-		) {
-			this.disconnectDragPreview()
+		if (didChange) {
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDragPreview = dragPreview
 			this.lastConnectedDragPreviewOptions = this.dragPreviewOptions
