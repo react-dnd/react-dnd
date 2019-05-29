@@ -22,7 +22,7 @@
 		"start": "tsc -b tsconfig.cjs.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
-		"@types/hoist-non-react-statics": "^3.3.0",
+		"@types/hoist-non-react-statics": "^3.3.1",
 		"dnd-core": "^7.4.4",
 		"hoist-non-react-statics": "^3.3.0",
 		"invariant": "^2.1.0",
@@ -33,15 +33,15 @@
 		"@babel/core": "^7.3.4",
 		"@types/react": "^16.8.10",
 		"@types/react-dom": "^16.8.3",
-		"babel-loader": "^8.0.5",
+		"babel-loader": "^8.0.6",
 		"npm-run-all": "^4.1.5",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"rimraf": "^2.6.3",
-		"ts-loader": "^5.3.3",
-		"typescript": "^3.4.1",
-		"webpack": "^4.29.6",
-		"webpack-cli": "^3.2.3"
+		"ts-loader": "^6.0.1",
+		"typescript": "^3.4.5",
+		"webpack": "^4.32.2",
+		"webpack-cli": "^3.3.2"
 	},
 	"peerDependencies": {
 		"react": ">= 16.8",
