@@ -17,7 +17,7 @@
 		"react-dnd-test-backend": "^7.4.4",
 		"react-dom": "^16.8.6",
 		"rimraf": "^2.6.3",
-		"typescript": "^3.4.1"
+		"typescript": "^3.4.5"
 	},
 	"peerDependencies": {
 		"react": ">= 16.8.5",
