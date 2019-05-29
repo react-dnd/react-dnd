@@ -22,7 +22,7 @@
 		"start": "tsc -b tsconfig.cjs.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
-		"@types/hoist-non-react-statics": "^3.3.0",
+		"@types/hoist-non-react-statics": "^3.3.1",
 		"dnd-core": "^7.4.4",
 		"hoist-non-react-statics": "^3.3.0",
 		"invariant": "^2.1.0",
