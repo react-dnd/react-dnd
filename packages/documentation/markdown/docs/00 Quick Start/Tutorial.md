@@ -435,7 +435,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 function Board() {
   /* ... */
   return (
-    <DragDropContextProvider backend={html5Backend}>
+    <DragDropContextProvider backend={HTML5Backend}>
       ...
     </DragDropContextProvider>
   )
