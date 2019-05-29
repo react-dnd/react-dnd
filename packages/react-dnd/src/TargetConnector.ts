@@ -38,17 +38,22 @@ export default class TargetConnector implements Connector {
 	}
 
 	public reconnect() {
+		// if nothing has changed then don't resubscribe
+		const didChange =
+			this.didHandlerIdChange() ||
+			this.didDropTargetChange() ||
+			this.didOptionsChange()
+
+		if (didChange) {
+			this.disconnectDropTarget()
+		}
+
 		const dropTarget = this.dropTarget
 		if (!this.handlerId || !dropTarget) {
 			return
 		}
-		// if nothing has changed then don't resubscribe
-		if (
-			this.didHandlerIdChange() ||
-			this.didDropTargetChange() ||
-			this.didOptionsChange()
-		) {
-			this.disconnectDropTarget()
+
+		if (didChange) {
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDropTarget = dropTarget
 			this.lastConnectedDropTargetOptions = this.dropTargetOptions

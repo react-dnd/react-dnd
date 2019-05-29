@@ -3,6 +3,7 @@
 	"version": "7.4.4",
 	"license": "MIT",
 	"main": "lib/cjs/index.js",
+	"module": "lib/esm/index.js",
 	"scripts": {
 		"clean": "rimraf lib",
 		"build:cjs": "tsc -b tsconfig.cjs.json",
@@ -16,7 +17,7 @@
 		"react-dnd-test-backend": "^7.4.4",
 		"react-dom": "^16.8.6",
 		"rimraf": "^2.6.3",
-		"typescript": "^3.4.1"
+		"typescript": "^3.4.5"
 	},
 	"peerDependencies": {
 		"react": ">= 16.8.5",

@@ -3,6 +3,7 @@
 	"version": "7.4.4",
 	"description": "HTML5 backend for React DnD",
 	"main": "lib/cjs/index.js",
+	"module": "lib/esm/index.js",
 	"types": "lib/cjs/index.d.ts",
 	"license": "MIT",
 	"repository": {
@@ -30,9 +31,9 @@
 		"react-dnd-test-backend": "^7.4.4",
 		"react-dom": "^16.8.6",
 		"rimraf": "^2.6.3",
-		"ts-loader": "^5.3.3",
-		"typescript": "^3.4.1",
-		"webpack": "^4.29.6",
-		"webpack-cli": "^3.2.3"
+		"ts-loader": "^6.0.1",
+		"typescript": "^3.4.5",
+		"webpack": "^4.32.2",
+		"webpack-cli": "^3.3.2"
 	}
 }
