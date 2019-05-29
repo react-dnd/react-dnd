@@ -3,6 +3,7 @@
 	"version": "7.4.5",
 	"description": "Drag and Drop for React",
 	"main": "lib/cjs/index.js",
+	"module": "lib/esm/index.js",
 	"types": "lib/cjs/index.d.ts",
 	"repository": {
 		"type": "git",

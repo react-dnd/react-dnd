@@ -3,6 +3,7 @@
 	"version": "7.4.4",
 	"description": "A mock backend for testing React DnD apps",
 	"main": "lib/cjs/index.js",
+	"module": "lib/esm/index.js",
 	"types": "lib/cjs/index.d.ts",
 	"license": "MIT",
 	"repository": {
