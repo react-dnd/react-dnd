@@ -3,6 +3,7 @@
 	"version": "7.4.5",
 	"description": "Drag and Drop for React",
 	"main": "lib/cjs/index.js",
+	"module": "lib/esm/index.js",
 	"types": "lib/cjs/index.d.ts",
 	"repository": {
 		"type": "git",
@@ -21,6 +22,7 @@
 		"start": "tsc -b tsconfig.cjs.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
+		"@types/hoist-non-react-statics": "^3.3.0",
 		"dnd-core": "^7.4.4",
 		"hoist-non-react-statics": "^3.3.0",
 		"invariant": "^2.1.0",
@@ -29,7 +31,6 @@
 	"devDependencies": {
 		"@babel/cli": "^7.2.3",
 		"@babel/core": "^7.3.4",
-		"@types/hoist-non-react-statics": "^3.3.0",
 		"@types/react": "^16.8.10",
 		"@types/react-dom": "^16.8.3",
 		"babel-loader": "^8.0.5",
