@@ -28,6 +28,7 @@ To run these examples locally, clone the `react-dnd` repository, and run
 
 ```
 > yarn install
+> yarn build
 > yarn start
 ```
 
