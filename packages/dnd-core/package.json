@@ -4,6 +4,7 @@
 	"description": "Drag and drop sans the GUI",
 	"license": "MIT",
 	"main": "./lib/cjs/index.js",
+	"module": "./lib/esm/index.js",
 	"types": "./lib/cjs/index.d.ts",
 	"scripts": {
 		"build:esm": "tsc -b tsconfig.esm.json",
