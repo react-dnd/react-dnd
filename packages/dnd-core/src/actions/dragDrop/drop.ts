@@ -50,7 +50,7 @@ function determineDropResult(
 	monitor: DragDropMonitor,
 ) {
 	const target = registry.getTarget(targetId)
-	let dropResult = target.drop(monitor, targetId)
+	let dropResult = target ? target.drop(monitor, targetId) : undefined
 	verifyDropResultType(dropResult)
 	if (typeof dropResult === 'undefined') {
 		dropResult = index === 0 ? {} : monitor.getDropResult()
