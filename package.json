@@ -70,8 +70,8 @@
 		"prettier": "^1.17.1",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
-		"ts-jest": "^24.0.0",
-		"tslint": "^5.16.0",
+		"ts-jest": "^24.0.2",
+		"tslint": "^5.17.0",
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-react": "^4.0.0",
 		"typescript": "^3.5.1"
