@@ -1,6 +1,12 @@
 // tslint:disable max-classes-per-file
+import { createDragDropManager } from 'dnd-core'
 import * as React from 'react'
-import { DragDropContext } from '../index'
+import * as TestUtils from 'react-dom/test-utils'
+import {
+	DragDropContext,
+	DragDropContextProvider,
+	DragDropContextConsumer,
+} from '../index'
 import TestBackend from 'react-dnd-test-backend'
 
 describe('DragDropContext', () => {
@@ -23,5 +29,26 @@ describe('DragDropContext', () => {
 		const Context = DragDropContext(TestBackend)(ContextComponent)
 
 		expect(Context).toBeDefined()
+	})
+})
+
+describe('DragDropContextProvider', () => {
+	it('reuses DragDropManager provided to it', () => {
+		let capturedManager
+		const manager = createDragDropManager(TestBackend, {})
+
+		const ManagerCapture = () => (
+			<DragDropContextProvider manager={manager}>
+				<DragDropContextConsumer>
+					{({ dragDropManager }) => {
+						capturedManager = dragDropManager
+						return null
+					}}
+				</DragDropContextConsumer>
+			</DragDropContextProvider>
+		)
+
+		TestUtils.renderIntoDocument(<ManagerCapture />)
+		expect(capturedManager).toBe(manager)
 	})
 })

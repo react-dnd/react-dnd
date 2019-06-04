@@ -42,19 +42,26 @@ export function createChildContext<BackendContext>(
 	}
 }
 
-export interface DragDropContextProviderProps<BackendContext> {
-	backend: BackendFactory
-	context?: BackendContext
-	debugMode?: boolean
-}
+export type DragDropContextProviderProps<BackendContext> =
+	| {
+			manager: DragDropManager<BackendContext>
+	  }
+	| {
+			backend: BackendFactory
+			context?: BackendContext
+			debugMode?: boolean
+	  }
 
 /**
  * A React component that provides the React-DnD context
  */
 export const DragDropContextProvider: React.FC<
 	DragDropContextProviderProps<any>
-> = ({ backend, context, debugMode, children }) => {
-	const contextValue = createChildContext(backend, context, debugMode)
+> = ({ children, ...props }) => {
+	const contextValue =
+		'manager' in props
+			? { dragDropManager: props.manager }
+			: createChildContext(props.backend, props.context, props.debugMode)
 	return <Provider value={contextValue}>{children}</Provider>
 }
 
