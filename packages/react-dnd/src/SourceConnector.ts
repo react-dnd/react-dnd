@@ -104,7 +104,11 @@ export default class SourceConnector implements Connector {
 		}
 
 		const dragSource = this.dragSource
-		if (!this.handlerId || !dragSource) {
+		if (!this.handlerId) {
+			return
+		}
+		if (!dragSource) {
+			this.lastConnectedDragSource = dragSource
 			return
 		}
 
