@@ -23,7 +23,7 @@ export default class SourceConnector implements Connector {
 			if (isRef(node)) {
 				this.dragSourceRef = node as React.RefObject<any>
 			} else {
-				this.dragSourceNode = node
+				this.dragSourceRef = { current: node }
 			}
 			this.reconnectDragSource()
 		},
@@ -32,7 +32,7 @@ export default class SourceConnector implements Connector {
 			if (isRef(node)) {
 				this.dragPreviewRef = node
 			} else {
-				this.dragPreviewNode = node
+				this.dragPreviewRef = { current: node }
 			}
 			this.reconnectDragPreview()
 		},
@@ -40,14 +40,12 @@ export default class SourceConnector implements Connector {
 	private handlerId: Identifier | null = null
 
 	// The drop target may either be attached via ref or connect function
-	private dragSourceRef: React.RefObject<any> | null = null
-	private dragSourceNode: any
+	private dragSourceRef: React.RefObject<any> = { current: null }
 	private dragSourceOptionsInternal: DragSourceOptions | null = null
 	private dragSourceUnsubscribe: Unsubscribe | undefined
 
 	// The drag preview may either be attached via ref or connect function
-	private dragPreviewRef: React.RefObject<any> | null = null
-	private dragPreviewNode: any
+	private dragPreviewRef: React.RefObject<any> = { current: null }
 	private dragPreviewOptionsInternal: DragPreviewOptions | null = null
 	private dragPreviewUnsubscribe: Unsubscribe | undefined
 
@@ -104,13 +102,16 @@ export default class SourceConnector implements Connector {
 		}
 
 		const dragSource = this.dragSource
+		// gross, but corrects liveness issues until we remove the ability to connect on JSX trees
+		// (https://github.com/react-dnd/react-dnd/pull/1355#issuecomment-498559740)
+		this.lastConnectedDragSource = dragSource
+
 		if (!this.handlerId || !dragSource) {
 			return
 		}
 
 		if (didChange) {
 			this.lastConnectedHandlerId = this.handlerId
-			this.lastConnectedDragSource = dragSource
 			this.lastConnectedDragSourceOptions = this.dragSourceOptions
 			this.dragSourceUnsubscribe = this.backend.connectDragSource(
 				this.handlerId,
@@ -138,8 +139,8 @@ export default class SourceConnector implements Connector {
 
 		if (didChange) {
 			this.lastConnectedHandlerId = this.handlerId
-			this.lastConnectedDragPreview = dragPreview
 			this.lastConnectedDragPreviewOptions = this.dragPreviewOptions
+			this.lastConnectedDragPreview = dragPreview
 			this.dragPreviewUnsubscribe = this.backend.connectDragPreview(
 				this.handlerId,
 				dragPreview,
@@ -178,8 +179,7 @@ export default class SourceConnector implements Connector {
 		if (this.dragSourceUnsubscribe) {
 			this.dragSourceUnsubscribe()
 			this.dragSourceUnsubscribe = undefined
-			this.dragPreviewNode = null
-			this.dragPreviewRef = null
+			this.dragSourceRef = { current: null }
 		}
 	}
 
@@ -187,21 +187,15 @@ export default class SourceConnector implements Connector {
 		if (this.dragPreviewUnsubscribe) {
 			this.dragPreviewUnsubscribe()
 			this.dragPreviewUnsubscribe = undefined
-			this.dragPreviewNode = null
-			this.dragPreviewRef = null
+			this.dragPreviewRef = { current: null }
 		}
 	}
 
 	private get dragSource() {
-		return (
-			this.dragSourceNode || (this.dragSourceRef && this.dragSourceRef.current)
-		)
+		return this.dragSourceRef && this.dragSourceRef.current
 	}
 
 	private get dragPreview() {
-		return (
-			this.dragPreviewNode ||
-			(this.dragPreviewRef && this.dragPreviewRef.current)
-		)
+		return this.dragPreviewRef && this.dragPreviewRef.current
 	}
 }

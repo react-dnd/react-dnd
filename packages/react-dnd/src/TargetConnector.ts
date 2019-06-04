@@ -14,7 +14,7 @@ export default class TargetConnector implements Connector {
 			if (isRef(node)) {
 				this.dropTargetRef = node
 			} else {
-				this.dropTargetNode = node
+				this.dropTargetRef = { current: node }
 			}
 			this.reconnect()
 		},
@@ -22,8 +22,7 @@ export default class TargetConnector implements Connector {
 
 	private handlerId: Identifier | null = null
 	// The drop target may either be attached via ref or connect function
-	private dropTargetRef: React.RefObject<any> | null = null
-	private dropTargetNode: any
+	private dropTargetRef: React.RefObject<any> = { current: null }
 	private dropTargetOptionsInternal: any = null
 	private unsubscribeDropTarget: Unsubscribe | undefined
 
@@ -49,15 +48,15 @@ export default class TargetConnector implements Connector {
 		}
 
 		const dropTarget = this.dropTarget
+		this.lastConnectedDropTarget = dropTarget
+
 		if (!this.handlerId || !dropTarget) {
 			return
 		}
 
 		if (didChange) {
 			this.lastConnectedHandlerId = this.handlerId
-			this.lastConnectedDropTarget = dropTarget
 			this.lastConnectedDropTargetOptions = this.dropTargetOptions
-
 			this.unsubscribeDropTarget = this.backend.connectDropTarget(
 				this.handlerId,
 				dropTarget,
@@ -105,8 +104,6 @@ export default class TargetConnector implements Connector {
 	}
 
 	private get dropTarget() {
-		return (
-			this.dropTargetNode || (this.dropTargetRef && this.dropTargetRef.current)
-		)
+		return this.dropTargetRef && this.dropTargetRef.current
 	}
 }
