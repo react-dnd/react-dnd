@@ -29,17 +29,17 @@
 		"shallowequal": "^1.1.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.2.3",
-		"@babel/core": "^7.3.4",
-		"@types/react": "^16.8.10",
-		"@types/react-dom": "^16.8.3",
+		"@babel/cli": "^7.4.4",
+		"@babel/core": "^7.4.5",
+		"@types/react": "^16.8.19",
+		"@types/react-dom": "^16.8.4",
 		"babel-loader": "^8.0.6",
 		"npm-run-all": "^4.1.5",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"rimraf": "^2.6.3",
-		"ts-loader": "^6.0.1",
-		"typescript": "^3.4.5",
+		"ts-loader": "^6.0.2",
+		"typescript": "^3.5.1",
 		"webpack": "^4.32.2",
 		"webpack-cli": "^3.3.2"
 	},
