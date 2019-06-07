@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Container from './Container'
 import CustomDragLayer from './CustomDragLayer'
 
@@ -11,11 +11,11 @@ const DragAroundCustomDragLayer: React.FC = () => {
 	const [snapToGridAfterDrop, setSnapToGridAfterDrop] = useState(false)
 	const [snapToGridWhileDragging, setSnapToGridWhileDragging] = useState(false)
 
-	const handleSnapToGridAfterDropChange = React.useCallback(() => {
+	const handleSnapToGridAfterDropChange = useCallback(() => {
 		setSnapToGridAfterDrop(!snapToGridAfterDrop)
 	}, [snapToGridAfterDrop])
 
-	const handleSnapToGridWhileDraggingChange = React.useCallback(() => {
+	const handleSnapToGridWhileDraggingChange = useCallback(() => {
 		setSnapToGridWhileDragging(!snapToGridWhileDragging)
 	}, [snapToGridWhileDragging])
 

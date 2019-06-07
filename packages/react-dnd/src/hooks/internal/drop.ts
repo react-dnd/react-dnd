@@ -34,7 +34,6 @@ export function useDropHandler<
 
 	// Can't use createSourceFactory, as semantics are different
 	const handler = useMemo(() => {
-		// console.log('create drop target handler')
 		return {
 			canDrop() {
 				const { canDrop } = spec.current
@@ -57,7 +56,6 @@ export function useDropHandler<
 
 	useEffect(
 		function registerHandler() {
-			// console.log('register droptarget handler')
 			const [handlerId, unregister] = registerTarget(
 				spec.current.accept,
 				handler,

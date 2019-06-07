@@ -15,12 +15,11 @@ export function useMonitorOutput<Monitor extends HandlerManager, Collected>(
 			if (handlerId == null) {
 				return undefined
 			}
-			const unsubscribe = monitor.subscribeToStateChange(updateCollected, {
+			return monitor.subscribeToStateChange(updateCollected, {
 				handlerIds: [handlerId],
 			})
-			return unsubscribe
 		},
-		[monitor],
+		[monitor, updateCollected],
 	)
 
 	return collected

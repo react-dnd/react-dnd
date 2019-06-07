@@ -12,6 +12,22 @@ export interface ContainerState {
 	cardsByIndex: any[]
 }
 
+function buildCardData() {
+	const cardsById: { [key: string]: any } = {}
+	const cardsByIndex = []
+
+	for (let i = 0; i < 1000; i += 1) {
+		const card = { id: i, text: name.findName() }
+		cardsById[card.id] = card
+		cardsByIndex[i] = card
+	}
+
+	return {
+		cardsById,
+		cardsByIndex,
+	}
+}
+
 export default class Container extends React.Component<{}, ContainerState> {
 	// tslint:disable-next-line ban-types
 	private pendingUpdateFn: any
@@ -19,20 +35,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 
 	constructor(props: {}) {
 		super(props)
-
-		const cardsById: { [key: string]: any } = {}
-		const cardsByIndex = []
-
-		for (let i = 0; i < 1000; i += 1) {
-			const card = { id: i, text: name.findName() }
-			cardsById[card.id] = card
-			cardsByIndex[i] = card
-		}
-
-		this.state = {
-			cardsById,
-			cardsByIndex,
-		}
+		this.state = buildCardData()
 	}
 
 	public componentWillUnmount() {

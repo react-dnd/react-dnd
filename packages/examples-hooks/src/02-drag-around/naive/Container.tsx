@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
 	XYCoord,
@@ -28,7 +28,7 @@ export interface ContainerState {
 }
 
 const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
-	const [boxes, setBoxes] = React.useState<{
+	const [boxes, setBoxes] = useState<{
 		[key: string]: {
 			top: number
 			left: number

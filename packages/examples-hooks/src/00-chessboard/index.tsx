@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Board from './Board'
 import { observe } from './Game'
 
@@ -16,12 +16,10 @@ const containerStyle: React.CSSProperties = {
  * The Chessboard Tutorial Application
  */
 const ChessboardTutorialApp: React.FC = () => {
-	const [knightPos, setKnightPos] = React.useState<[number, number]>([1, 7])
+	const [knightPos, setKnightPos] = useState<[number, number]>([1, 7])
 
 	// the observe function will return an unsubscribe callback
-	React.useEffect(() =>
-		observe((newPos: [number, number]) => setKnightPos(newPos)),
-	)
+	useEffect(() => observe((newPos: [number, number]) => setKnightPos(newPos)))
 	return (
 		<div>
 			<h1>EXPERIMENTAL API</h1>

@@ -75,7 +75,6 @@ export function useDragHandler<
 	}, [])
 
 	useEffect(function registerHandler() {
-		// console.log('Register Handler')
 		const [handlerId, unregister] = registerSource(
 			spec.current.item.type,
 			handler,

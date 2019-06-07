@@ -1,6 +1,11 @@
 {
 	"defaultSeverity": "error",
-	"extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+	"extends": [
+		"tslint:recommended",
+		"tslint-react",
+		"tslint-react-hooks",
+		"tslint-config-prettier"
+	],
 	"jsRules": {},
 	"rules": {
 		// We handle this manually
