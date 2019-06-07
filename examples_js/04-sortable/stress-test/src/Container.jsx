@@ -58,7 +58,6 @@ export default class Container extends React.Component {
       </div>
     )
   }
-  // tslint:disable-next-line ban-types
   scheduleUpdate(updateFn) {
     this.pendingUpdateFn = updateFn
     if (!this.requestedFrame) {

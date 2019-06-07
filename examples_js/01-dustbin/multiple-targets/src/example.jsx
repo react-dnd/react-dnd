@@ -48,7 +48,6 @@ const Container = () => {
           <Dustbin
             accepts={accepts}
             lastDroppedItem={lastDroppedItem}
-            // tslint:disable-next-line jsx-no-lambda
             onDrop={item => handleDrop(index, item)}
             key={index}
           />

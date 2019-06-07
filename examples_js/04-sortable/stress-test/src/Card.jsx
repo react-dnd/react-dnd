@@ -18,6 +18,7 @@ const Card = memo(
     )
   },
 )
+Card.displayName = 'Card'
 export default DropTarget(
   ItemTypes.CARD,
   {

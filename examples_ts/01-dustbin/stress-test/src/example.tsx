@@ -1,4 +1,3 @@
-// tslint:disable jsx-no-lambda
 declare var require: any
 import React, { useState, useEffect, useCallback } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'

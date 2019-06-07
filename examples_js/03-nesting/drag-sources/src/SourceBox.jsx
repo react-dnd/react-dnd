@@ -1,4 +1,3 @@
-// tslint:disable max-classes-per-file jsx-no-lambda
 import React, { useState, useCallback } from 'react'
 import { DragSource } from 'react-dnd'
 import Colors from './Colors'
