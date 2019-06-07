@@ -1,6 +1,6 @@
 {
 	"name": "dnd-core",
-	"version": "7.5.0",
+	"version": "7.6.0",
 	"description": "Drag and drop sans the GUI",
 	"license": "MIT",
 	"main": "./lib/cjs/index.js",
