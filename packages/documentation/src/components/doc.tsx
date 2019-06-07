@@ -13,7 +13,7 @@ const Doc: React.FC<DocProps> = ({ docPage }) => {
 	return (
 		<Container>
 			<Gutter />
-			<HtmlContainer>{renderAst(docPage.htmlAst)}</HtmlContainer>>
+			<HtmlContainer>{renderAst(docPage.htmlAst)}</HtmlContainer>
 			<Gutter />
 		</Container>
 	)

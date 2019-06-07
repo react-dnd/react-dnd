@@ -8,7 +8,7 @@ export class CompositeDisposable {
 	private isDisposed = false
 	private disposables: Disposable[]
 
-	constructor(...disposables: Disposable[]) {
+	public constructor(...disposables: Disposable[]) {
 		this.disposables = disposables
 	}
 

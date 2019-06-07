@@ -37,7 +37,7 @@ export class Disposable {
 	private isDisposed = false
 	private action: () => void
 
-	constructor(action: any) {
+	public constructor(action: any) {
 		this.action = isFunction(action) ? action : noop
 	}
 

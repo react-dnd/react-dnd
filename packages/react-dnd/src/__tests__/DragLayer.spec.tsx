@@ -1,4 +1,3 @@
-// tslint:disable max-classes-per-file
 import * as React from 'react'
 import { DragLayer } from '../index'
 

@@ -11,7 +11,7 @@ export class NativeDragSource {
 				configurable: true, // This is needed to allow redefining it later
 				enumerable: true,
 				get() {
-					// tslint:disable-next-line no-console
+					// eslint-disable-next-line no-console
 					console.warn(
 						`Browser doesn't allow reading "${property}" until the drop event.`,
 					)

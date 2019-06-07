@@ -1,5 +1,3 @@
-// tslint:disable max-classes-per-file
-
 import DropTarget from './DropTargetImpl'
 import { DragDropMonitor } from '../interfaces'
 

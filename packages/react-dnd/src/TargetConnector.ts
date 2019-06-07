@@ -31,7 +31,7 @@ export default class TargetConnector implements Connector {
 	private lastConnectedDropTarget: any = null
 	private lastConnectedDropTargetOptions: any = null
 
-	constructor(private backend: Backend) {}
+	public constructor(private backend: Backend) {}
 
 	public get connectTarget() {
 		return this.dropTarget
