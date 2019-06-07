@@ -37,7 +37,7 @@ export interface DraggableBoxProps {
 const DraggableBox: React.FC<DraggableBoxProps> = props => {
 	const { id, title, left, top } = props
 	const [{ isDragging }, drag, preview] = useDrag({
-		item: { type: ItemTypes.BOX, id, left, top },
+		item: { type: ItemTypes.BOX, id, left, top, title },
 		collect: (monitor: DragSourceMonitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
