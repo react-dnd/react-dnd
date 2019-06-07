@@ -1,4 +1,3 @@
-// tslint:disable max-classes-per-file
 import React, { useState, useCallback } from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import Colors from './Colors'

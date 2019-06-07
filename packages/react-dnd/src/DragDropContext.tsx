@@ -1,4 +1,3 @@
-/* tslint:disable no-shadowed-variable */
 declare var require: any
 import * as React from 'react'
 import {

@@ -1,7 +1,6 @@
 import { memoize } from './utils/discount_lodash'
 
 declare global {
-	// tslint:disable-next-line interface-name
 	interface Window extends HTMLElement {
 		safari: any
 	}

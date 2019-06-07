@@ -18,5 +18,6 @@ const DragPreviewImage: React.FC<DragPreviewImageProps> = React.memo(
 		return null
 	},
 )
+DragPreviewImage.displayName = 'DragPreviewImage'
 
 export default DragPreviewImage

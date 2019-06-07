@@ -76,7 +76,6 @@ const Container: React.FC = () => {
 					<Dustbin
 						accept={accepts}
 						lastDroppedItem={lastDroppedItem}
-						// tslint:disable-next-line jsx-no-lambda
 						onDrop={item => handleDrop(index, item)}
 						key={index}
 					/>
