@@ -1,5 +1,5 @@
 {
-	"extends": "./tsconfig.esm.json",
+	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"allowSyntheticDefaultImports": true,
 		"jsx": "preserve",

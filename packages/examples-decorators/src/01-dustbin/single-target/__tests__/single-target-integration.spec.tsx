@@ -9,7 +9,7 @@ import {
 } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
 import { TestBackend } from 'react-dnd-test-backend'
-import { DndComponent } from 'react-dnd'
+import { DndComponent } from 'react-dnd-decorators'
 
 describe('Integration: Dustbin Single Target', () => {
 	it('can simulate a full drag and drop interaction', () => {

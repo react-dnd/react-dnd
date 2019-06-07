@@ -1,8 +1,8 @@
-declare var require: any
 import { useContext } from 'react'
 import { DragDropManager } from 'dnd-core'
 import { DndContext } from '../../DndContext'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 /**
  * A hook to retrieve the DragDropManager from Context

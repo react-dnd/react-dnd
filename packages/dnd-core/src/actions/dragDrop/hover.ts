@@ -1,5 +1,3 @@
-declare var require: any
-
 import {
 	Action,
 	DragDropManager,
@@ -10,8 +8,8 @@ import {
 } from '../../interfaces'
 import matchesType from '../../utils/matchesType'
 import { HOVER } from './types'
-
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 export default function createHover<Context>(
 	manager: DragDropManager<Context>,

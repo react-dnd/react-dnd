@@ -1,6 +1,6 @@
-declare var require: any
 import { cloneElement } from 'react'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 function setRef(ref: any, node: any) {
 	if (typeof ref === 'function') {

@@ -1,4 +1,4 @@
-import TargetConnector from '../TargetConnector'
+import { TargetConnector } from '../TargetConnector'
 
 describe('TargetConnector', () => {
 	it('unsubscribes drop target when clearing handler id', () => {

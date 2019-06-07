@@ -1,10 +1,12 @@
-declare var require: any
 declare var process: any
 
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndContext } from 'react-dnd'
-import { Connector, isPlainObject } from 'react-dnd/lib/esm/internals'
+import {
+	__Connector as Connector,
+	__isPlainObject as isPlainObject,
+} from 'react-dnd'
 import { DndComponent } from './interfaces'
 import {
 	Disposable,
@@ -12,9 +14,12 @@ import {
 	SerialDisposable,
 } from './utils/disposables'
 import { isRefable } from './utils/isRefable'
-const invariant = require('invariant')
-const hoistStatics = require('hoist-non-react-statics')
-const shallowEqual = require('shallowequal')
+// @ts-ignore
+import invariant from 'invariant'
+// @ts-ignore
+import hoistStatics from 'hoist-non-react-statics'
+// @ts-ignore
+import shallowEqual from 'shallowequal'
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any

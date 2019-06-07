@@ -1,15 +1,10 @@
-declare var require: any
-
 import React from 'react'
 import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
-
-const {
-	default: Frame,
-	FrameContextConsumer,
-} = require('react-frame-component')
+// @ts-ignore
+import Frame, { FrameContextConsumer } from 'react-frame-component'
 
 const FrameBindingContext: React.FC = ({ children }) => (
 	<FrameContextConsumer>
