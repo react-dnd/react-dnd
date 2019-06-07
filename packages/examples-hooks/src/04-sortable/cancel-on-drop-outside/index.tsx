@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import Card from './Card'
 import update from 'immutability-helper'
@@ -48,7 +48,7 @@ const ITEMS = [
 ]
 
 const Container: React.FC = () => {
-	const [cards, setCards] = React.useState(ITEMS)
+	const [cards, setCards] = useState(ITEMS)
 	const moveCard = (id: string, atIndex: number) => {
 		const { card, index } = findCard(id)
 		setCards(

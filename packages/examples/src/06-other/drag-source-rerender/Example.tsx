@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { DragSource, ConnectDragSource } from 'react-dnd'
 
 interface ParentProps {
@@ -30,8 +30,8 @@ interface ChildProps {
 }
 
 const Child: React.FC<ChildProps> = ({ connect, children }) => {
-	const [open, setOpen] = React.useState(true)
-	const toggle = React.useCallback(() => setOpen(!open), [open])
+	const [open, setOpen] = useState(true)
+	const toggle = useCallback(() => setOpen(!open), [open])
 
 	return (
 		<div

@@ -1,6 +1,6 @@
-// declare var require: any
-// const shallowEqual = require('shallowequal')
-import { useState } from 'react'
+declare var require: any
+const shallowEqual = require('shallowequal')
+import { useState, useCallback } from 'react'
 
 /**
  *
@@ -15,19 +15,15 @@ export function useCollector<T, S>(
 ): [S, () => void] {
 	const [collected, setCollected] = useState(() => collect(monitor))
 
-	const updateCollected = () => {
+	const updateCollected = useCallback(() => {
 		const nextValue = collect(monitor)
-		// TODO: we need this shallowequal check to work
-		// so that we can operate performantly, but the examples
-		// are broken with it in currently
-
-		// if (!shallowEqual(collected, nextValue)) {
-		setCollected(nextValue)
-		if (onUpdate) {
-			onUpdate()
+		if (!shallowEqual(collected, nextValue)) {
+			setCollected(nextValue)
+			if (onUpdate) {
+				onUpdate()
+			}
 		}
-		// }
-	}
+	}, [collected, monitor, onUpdate])
 
 	return [collected, updateCollected]
 }

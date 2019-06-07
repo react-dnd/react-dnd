@@ -74,6 +74,7 @@
 		"tslint": "^5.17.0",
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-react": "^4.0.0",
+		"tslint-react-hooks": "^2.1.0",
 		"typescript": "^3.5.1"
 	},
 	"jest": {

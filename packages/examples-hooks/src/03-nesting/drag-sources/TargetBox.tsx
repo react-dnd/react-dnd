@@ -1,5 +1,5 @@
 // tslint:disable max-classes-per-file
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import Colors from './Colors'
 import { DragItem } from './interfaces'
@@ -64,10 +64,8 @@ export interface StatefulTargetBoxState {
 	lastDroppedColor: string | null
 }
 const StatefulTargetBox: React.FC = props => {
-	const [lastDroppedColor, setLastDroppedColor] = React.useState<string | null>(
-		null,
-	)
-	const handleDrop = React.useCallback(
+	const [lastDroppedColor, setLastDroppedColor] = useState<string | null>(null)
+	const handleDrop = useCallback(
 		(color: string) => setLastDroppedColor(color),
 		[],
 	)
