@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import React, { memo, useMemo, useRef } from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const {
@@ -20,7 +20,7 @@ export interface CardProps {
 	moveCard: (draggedId: string, id: string) => void
 }
 
-const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
+const Card: React.FC<CardProps> = memo(({ id, text, moveCard }) => {
 	const ref = useRef(null)
 	const [{ isDragging }, connectDrag] = useDrag({
 		item: { id, type: ItemTypes.CARD },
@@ -50,6 +50,6 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 			{text}
 		</div>
 	)
-}
+})
 
 export default Card
