@@ -8,7 +8,7 @@ export default function checkDecoratorArguments(
 	if (process.env.NODE_ENV !== 'production') {
 		for (const arg of args) {
 			if (arg && arg.prototype && arg.prototype.render) {
-				// tslint:disable-next-line no-console
+				// eslint-disable-next-line no-console
 				console.error(
 					'You seem to be applying the arguments in the wrong order. ' +
 						`It should be ${functionName}(${signature})(Component), not the other way around. ` +

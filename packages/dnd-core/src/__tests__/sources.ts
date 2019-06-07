@@ -1,5 +1,3 @@
-// tslint:disable max-classes-per-file
-
 import DragSource from './DragSourceImpl'
 import { DragDropMonitor } from '../interfaces'
 
@@ -42,8 +40,7 @@ export class BadItemSource extends DragSource {
 }
 
 export class NumberSource extends DragSource {
-	// tslint:disable-next-line variable-name
-	constructor(public number: number, public allowDrag: boolean) {
+	public constructor(public number: number, public allowDrag: boolean) {
 		super()
 	}
 

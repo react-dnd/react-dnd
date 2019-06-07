@@ -22,7 +22,6 @@ import { HTML5BackendContext } from './interfaces'
 import { NativeDragSource } from './NativeDragSources/NativeDragSource'
 
 declare global {
-	// tslint:disable-next-line interface-name
 	interface Window {
 		__isReactDndBackendSetUp: boolean | undefined
 	}
