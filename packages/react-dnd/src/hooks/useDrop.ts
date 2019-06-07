@@ -21,6 +21,7 @@ export function useDrop<
 	spec: DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
 ): [CollectedProps, ConnectDropTarget] {
 	const specRef = useRef(spec)
+	specRef.current = spec
 	invariant(spec.accept != null, 'accept must be defined')
 
 	const [monitor, connector] = useDropTargetMonitor()
