@@ -22,6 +22,7 @@ export function useDrag<
 	spec: DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
 	const specRef = useRef(spec)
+	specRef.current = spec
 
 	// TODO: wire options into createSourceConnector
 	invariant(spec.item != null, 'item must be defined')
