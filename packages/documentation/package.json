@@ -58,8 +58,8 @@
 	"scripts": {
 		"clean": "rimraf .cache public apidocs static/examples_js static/examples_ts",
 		"start": "gatsby develop",
-		"copy_examples:js": "cp -r ../examples/lib/docs static/examples_js",
-		"copy_examples:ts": "cp -r ../examples/src static/examples_ts",
+		"copy_examples:js": "cp -r ../examples-hooks/lib/docs static/examples_js",
+		"copy_examples:ts": "cp -r ../examples-hooks/src static/examples_ts",
 		"copy_examples": "run-s copy_examples:*",
 		"prune_buildinfo": "rm static/examples_js/tsconfig.docs.tsbuildinfo",
 		"format_examples": "prettier 'static/examples_*/**/*' --use-tabs=false --write",
