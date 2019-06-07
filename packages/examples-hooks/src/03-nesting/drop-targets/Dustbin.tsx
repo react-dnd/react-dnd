@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const {
@@ -31,8 +31,8 @@ export interface DustbinState {
 }
 
 const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
-	const [hasDropped, setHasDropped] = React.useState(false)
-	const [hasDroppedOnChild, setHasDroppedOnChild] = React.useState(false)
+	const [hasDropped, setHasDropped] = useState(false)
+	const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
 
 	const [{ isOver, isOverCurrent }, drop] = useDrop({
 		accept: ItemTypes.BOX,

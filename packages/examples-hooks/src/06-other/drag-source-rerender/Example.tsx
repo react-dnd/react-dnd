@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import {
 	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
 	ConnectDragSource,
@@ -25,8 +25,8 @@ interface ChildProps {
 	drag: ConnectDragSource
 }
 const Child: React.FC<ChildProps> = ({ drag, children }) => {
-	const [open, setOpen] = React.useState(true)
-	const toggle = React.useCallback(() => setOpen(!open), [open])
+	const [open, setOpen] = useState(true)
+	const toggle = useCallback(() => setOpen(!open), [open])
 
 	return (
 		<div

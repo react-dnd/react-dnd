@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo, useRef } from 'react'
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const {
@@ -21,12 +21,15 @@ export interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
-	const ref = React.useRef(null)
+	const ref = useRef(null)
 	const [{ isDragging }, connectDrag] = useDrag({
 		item: { id, type: ItemTypes.CARD },
-		collect: (monitor: any) => ({
-			isDragging: monitor.isDragging(),
-		}),
+		collect: (monitor: any) => {
+			const result = {
+				isDragging: monitor.isDragging(),
+			}
+			return result
+		},
 	})
 
 	const [, connectDrop] = useDrop({
@@ -41,7 +44,7 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard }) => {
 	connectDrag(ref)
 	connectDrop(ref)
 	const opacity = isDragging ? 0 : 1
-	const containerStyle = React.useMemo(() => ({ ...style, opacity }), [opacity])
+	const containerStyle = useMemo(() => ({ ...style, opacity }), [opacity])
 	return (
 		<div ref={ref} style={containerStyle}>
 			{text}
