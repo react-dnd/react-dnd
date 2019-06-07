@@ -1,5 +1,5 @@
 import React from 'react'
-import { DragLayer } from 'react-dnd'
+import { useDragLayer } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'
 import snapToGrid from './snapToGrid'
@@ -12,15 +12,14 @@ const layerStyles = {
   width: '100%',
   height: '100%',
 }
-function getItemStyles(props) {
-  const { initialOffset, currentOffset } = props
+function getItemStyles(initialOffset, currentOffset, isSnapToGrid) {
   if (!initialOffset || !currentOffset) {
     return {
       display: 'none',
     }
   }
   let { x, y } = currentOffset
-  if (props.snapToGrid) {
+  if (isSnapToGrid) {
     x -= initialOffset.x
     y -= initialOffset.y
     ;[x, y] = snapToGrid(x, y)
@@ -34,7 +33,19 @@ function getItemStyles(props) {
   }
 }
 const CustomDragLayer = props => {
-  const { item, itemType, isDragging } = props
+  const {
+    itemType,
+    isDragging,
+    item,
+    initialOffset,
+    currentOffset,
+  } = useDragLayer(monitor => ({
+    item: monitor.getItem(),
+    itemType: monitor.getItemType(),
+    initialOffset: monitor.getInitialSourceClientOffset(),
+    currentOffset: monitor.getSourceClientOffset(),
+    isDragging: monitor.isDragging(),
+  }))
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
@@ -48,14 +59,12 @@ const CustomDragLayer = props => {
   }
   return (
     <div style={layerStyles}>
-      <div style={getItemStyles(props)}>{renderItem()}</div>
+      <div
+        style={getItemStyles(initialOffset, currentOffset, props.snapToGrid)}
+      >
+        {renderItem()}
+      </div>
     </div>
   )
 }
-export default DragLayer(monitor => ({
-  item: monitor.getItem(),
-  itemType: monitor.getItemType(),
-  initialOffset: monitor.getInitialSourceClientOffset(),
-  currentOffset: monitor.getSourceClientOffset(),
-  isDragging: monitor.isDragging(),
-}))(CustomDragLayer)
+export default CustomDragLayer

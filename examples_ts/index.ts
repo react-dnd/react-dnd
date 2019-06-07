@@ -1,5 +1,5 @@
 import React from 'react'
-import chessboard from './00-chessboard/final-result'
+import chessboard from './00-chessboard'
 import dustbinCopyOrMove from './01-dustbin/copy-or-move'
 import dustbinMultipleTargets from './01-dustbin/multiple-targets'
 import dustbinSingleTarget from './01-dustbin/single-target'
@@ -31,7 +31,7 @@ export const componentIndex: {
   'drag-around-naive': dragAroundNaive,
   'nesting-drag-sources': nestingDragSources,
   'nesting-drop-targets': nestingDropTargets,
-  'sortable-cancel-on-drop-outside': sortableCancelOnDropOutside as any,
+  'sortable-cancel-on-drop-outside': sortableCancelOnDropOutside,
   'sortable-simple': sortableSimple,
   'sortable-stress-test': sortableStressTest,
   'customize-drop-effects': customizeDropEffects,

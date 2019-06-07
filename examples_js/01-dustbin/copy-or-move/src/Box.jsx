@@ -1,6 +1,6 @@
 import React from 'react'
-import { DragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
+import { useDrag } from 'react-dnd'
 const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
@@ -9,19 +9,11 @@ const style = {
   marginBottom: '1.5rem',
   float: 'left',
 }
-const Box = ({ name, isDragging, connectDragSource }) => {
-  const opacity = isDragging ? 0.4 : 1
-  return connectDragSource(
-    <div style={Object.assign({}, style, { opacity })}>{name}</div>,
-  )
-}
-export default DragSource(
-  ItemTypes.BOX,
-  {
-    beginDrag: props => ({ name: props.name }),
-    endDrag(props, monitor) {
-      const item = monitor.getItem()
-      const dropResult = monitor.getDropResult()
+const Box = ({ name }) => {
+  const item = { name, type: ItemTypes.BOX }
+  const [{ opacity }, drag] = useDrag({
+    item,
+    end(dropResult) {
       if (dropResult) {
         let alertMessage = ''
         const isDropAllowed =
@@ -37,9 +29,14 @@ export default DragSource(
         alert(alertMessage)
       }
     },
-  },
-  (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }),
-)(Box)
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.4 : 1,
+    }),
+  })
+  return (
+    <div ref={drag} style={Object.assign({}, style, { opacity })}>
+      {name}
+    </div>
+  )
+}
+export default Box

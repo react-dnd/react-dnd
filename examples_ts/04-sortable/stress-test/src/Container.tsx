@@ -3,7 +3,7 @@ import { name } from 'faker'
 import Card from './Card'
 import update from 'immutability-helper'
 
-const style: React.CSSProperties = {
+const style = {
   width: 400,
 }
 
@@ -12,26 +12,29 @@ export interface ContainerState {
   cardsByIndex: any[]
 }
 
+function buildCardData() {
+  const cardsById: { [key: string]: any } = {}
+  const cardsByIndex = []
+
+  for (let i = 0; i < 1000; i += 1) {
+    const card = { id: i, text: name.findName() }
+    cardsById[card.id] = card
+    cardsByIndex[i] = card
+  }
+
+  return {
+    cardsById,
+    cardsByIndex,
+  }
+}
+
 export default class Container extends React.Component<{}, ContainerState> {
   private pendingUpdateFn: any
   private requestedFrame: number | undefined
 
   constructor(props: {}) {
     super(props)
-
-    const cardsById: { [key: string]: any } = {}
-    const cardsByIndex = []
-
-    for (let i = 0; i < 1000; i += 1) {
-      const card = { id: i, text: name.findName() }
-      cardsById[card.id] = card
-      cardsByIndex[i] = card
-    }
-
-    this.state = {
-      cardsById,
-      cardsByIndex,
-    }
+    this.state = buildCardData()
   }
 
   public componentWillUnmount() {
@@ -44,16 +47,18 @@ export default class Container extends React.Component<{}, ContainerState> {
     const { cardsByIndex } = this.state
 
     return (
-      <div style={style}>
-        {cardsByIndex.map(card => (
-          <Card
-            key={card.id}
-            id={card.id}
-            text={card.text}
-            moveCard={this.moveCard}
-          />
-        ))}
-      </div>
+      <>
+        <div style={style}>
+          {cardsByIndex.map(card => (
+            <Card
+              key={card.id}
+              id={card.id}
+              text={card.text}
+              moveCard={this.moveCard}
+            />
+          ))}
+        </div>
+      </>
     )
   }
 

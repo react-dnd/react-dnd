@@ -1,5 +1,5 @@
 import React from 'react'
-import { DropTarget } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const style = {
   height: '12rem',
@@ -13,7 +13,15 @@ const style = {
   lineHeight: 'normal',
   float: 'left',
 }
-const Dustbin = ({ canDrop, isOver, connectDropTarget }) => {
+const Dustbin = () => {
+  const [{ canDrop, isOver }, drop] = useDrop({
+    accept: ItemTypes.BOX,
+    drop: () => ({ name: 'Dustbin' }),
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  })
   const isActive = canDrop && isOver
   let backgroundColor = '#222'
   if (isActive) {
@@ -22,22 +30,9 @@ const Dustbin = ({ canDrop, isOver, connectDropTarget }) => {
     backgroundColor = 'darkkhaki'
   }
   return (
-    <div
-      ref={connectDropTarget}
-      style={Object.assign({}, style, { backgroundColor })}
-    >
+    <div ref={drop} style={Object.assign({}, style, { backgroundColor })}>
       {isActive ? 'Release to drop' : 'Drag a box here'}
     </div>
   )
 }
-export default DropTarget(
-  ItemTypes.BOX,
-  {
-    drop: () => ({ name: 'Dustbin' }),
-  },
-  (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    canDrop: monitor.canDrop(),
-  }),
-)(Dustbin)
+export default Dustbin

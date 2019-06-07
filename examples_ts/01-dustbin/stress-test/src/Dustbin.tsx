@@ -1,10 +1,5 @@
-import React, { memo } from 'react'
-import {
-  ConnectDropTarget,
-  DropTarget,
-  DropTargetMonitor,
-  DropTargetConnector,
-} from 'react-dnd'
+import React from 'react'
+import { useDrop } from 'react-dnd'
 
 const style: React.CSSProperties = {
   height: '12rem',
@@ -23,49 +18,41 @@ export interface DustbinProps {
   lastDroppedItem?: any
   accepts: string[]
   onDrop: (arg: any) => void
-
-  // Collected Props
-
-  connectDropTarget: ConnectDropTarget
-  isOver: boolean
-  canDrop: boolean
 }
 
-const Dustbin: React.FC<DustbinProps> = memo(
-  ({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem }) => {
-    const isActive = isOver && canDrop
+const Dustbin: React.FC<DustbinProps> = ({
+  lastDroppedItem,
+  accepts: accept,
+  onDrop,
+}) => {
+  const [{ isOver, canDrop }, drop] = useDrop({
+    accept,
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+    drop: item => onDrop(item),
+  })
 
-    let backgroundColor = '#222'
-    if (isActive) {
-      backgroundColor = 'darkgreen'
-    } else if (canDrop) {
-      backgroundColor = 'darkkhaki'
-    }
+  const isActive = isOver && canDrop
+  let backgroundColor = '#222'
+  if (isActive) {
+    backgroundColor = 'darkgreen'
+  } else if (canDrop) {
+    backgroundColor = 'darkkhaki'
+  }
 
-    return connectDropTarget(
-      <div style={{ ...style, backgroundColor }}>
-        {isActive
-          ? 'Release to drop'
-          : `This dustbin accepts: ${accepts.join(', ')}`}
+  return (
+    <div ref={drop} style={{ ...style, backgroundColor }}>
+      {isActive
+        ? 'Release to drop'
+        : `This dustbin accepts: ${accept.join(', ')}`}
 
-        {lastDroppedItem && (
-          <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
-        )}
-      </div>,
-    )
-  },
-)
+      {lastDroppedItem && (
+        <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
+      )}
+    </div>
+  )
+}
 
-export default DropTarget(
-  (props: DustbinProps) => props.accepts,
-  {
-    drop(props: DustbinProps, monitor: DropTargetMonitor) {
-      props.onDrop(monitor.getItem())
-    },
-  },
-  (connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    canDrop: monitor.canDrop(),
-  }),
-)(Dustbin)
+export default Dustbin

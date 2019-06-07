@@ -1,15 +1,11 @@
 import React, { useState, useCallback } from 'react'
 import Container from './Container'
 
-export interface DragAroundNaiveState {
-  hideSourceOnDrag: boolean
-}
-
-const DragAroundNaive: React.FC = () => {
+export default function DragAroundNaive() {
   const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true)
-  const handleHideSourceClick = useCallback(() => {
-    setHideSourceOnDrag(!hideSourceOnDrag)
-  }, [hideSourceOnDrag])
+  const toggle = useCallback(() => setHideSourceOnDrag(!hideSourceOnDrag), [
+    hideSourceOnDrag,
+  ])
 
   return (
     <div>
@@ -20,7 +16,7 @@ const DragAroundNaive: React.FC = () => {
             id="hideSourceOnDrag"
             type="checkbox"
             checked={hideSourceOnDrag}
-            onChange={handleHideSourceClick}
+            onChange={toggle}
           />
           <small>Hide the source item while dragging</small>
         </label>
@@ -28,5 +24,3 @@ const DragAroundNaive: React.FC = () => {
     </div>
   )
 }
-
-export default DragAroundNaive

@@ -5,6 +5,19 @@ import update from 'immutability-helper'
 const style = {
   width: 400,
 }
+function buildCardData() {
+  const cardsById = {}
+  const cardsByIndex = []
+  for (let i = 0; i < 1000; i += 1) {
+    const card = { id: i, text: name.findName() }
+    cardsById[card.id] = card
+    cardsByIndex[i] = card
+  }
+  return {
+    cardsById,
+    cardsByIndex,
+  }
+}
 export default class Container extends React.Component {
   constructor(props) {
     super(props)
@@ -26,17 +39,7 @@ export default class Container extends React.Component {
         },
       })
     }
-    const cardsById = {}
-    const cardsByIndex = []
-    for (let i = 0; i < 1000; i += 1) {
-      const card = { id: i, text: name.findName() }
-      cardsById[card.id] = card
-      cardsByIndex[i] = card
-    }
-    this.state = {
-      cardsById,
-      cardsByIndex,
-    }
+    this.state = buildCardData()
   }
   componentWillUnmount() {
     if (this.requestedFrame !== undefined) {
@@ -46,16 +49,18 @@ export default class Container extends React.Component {
   render() {
     const { cardsByIndex } = this.state
     return (
-      <div style={style}>
-        {cardsByIndex.map(card => (
-          <Card
-            key={card.id}
-            id={card.id}
-            text={card.text}
-            moveCard={this.moveCard}
-          />
-        ))}
-      </div>
+      <>
+        <div style={style}>
+          {cardsByIndex.map(card => (
+            <Card
+              key={card.id}
+              id={card.id}
+              text={card.text}
+              moveCard={this.moveCard}
+            />
+          ))}
+        </div>
+      </>
     )
   }
   scheduleUpdate(updateFn) {

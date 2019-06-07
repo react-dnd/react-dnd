@@ -5,10 +5,9 @@ function list(files) {
   return files.map(file => <li key={file.name}>{label(file)}</li>)
 }
 const FileList = ({ files }) => {
-  return files.length === 0 ? (
-    <div>Nothing to display</div>
-  ) : (
-    <div>{list(files)}</div>
-  )
+  if (files.length === 0) {
+    return <div>Nothing to display</div>
+  }
+  return <div>{list(files)}</div>
 }
 export default FileList

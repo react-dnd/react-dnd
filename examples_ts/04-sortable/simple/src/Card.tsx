@@ -1,14 +1,5 @@
-import React, { useImperativeHandle, useRef } from 'react'
-import {
-  DragSource,
-  DropTarget,
-  ConnectDropTarget,
-  ConnectDragSource,
-  DropTargetMonitor,
-  DropTargetConnector,
-  DragSourceConnector,
-  DragSourceMonitor,
-} from 'react-dnd'
+import React, { useRef } from 'react'
+import { useDrag, useDrop, DropTargetMonitor } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
 
@@ -25,53 +16,23 @@ export interface CardProps {
   text: string
   index: number
   moveCard: (dragIndex: number, hoverIndex: number) => void
-
-  isDragging: boolean
-  connectDragSource: ConnectDragSource
-  connectDropTarget: ConnectDropTarget
 }
 
-interface CardInstance {
-  getNode(): HTMLDivElement | null
+interface DragItem {
+  index: number
+  id: string
+  type: string
 }
-
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
-    const elementRef = useRef(null)
-    connectDragSource(elementRef)
-    connectDropTarget(elementRef)
-
-    const opacity = isDragging ? 0 : 1
-    useImperativeHandle<{}, CardInstance>(ref, () => ({
-      getNode: () => elementRef.current,
-    }))
-    return (
-      <div ref={elementRef} style={{ ...style, opacity }}>
-        {text}
-      </div>
-    )
-  },
-)
-
-export default DropTarget(
-  ItemTypes.CARD,
-  {
-    hover(
-      props: CardProps,
-      monitor: DropTargetMonitor,
-      component: CardInstance,
-    ) {
-      if (!component) {
-        return null
+const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
+  const ref = useRef<HTMLDivElement>(null)
+  const [, drop] = useDrop({
+    accept: ItemTypes.CARD,
+    hover(item: DragItem, monitor: DropTargetMonitor) {
+      if (!ref.current) {
+        return
       }
-      // node = HTML Div element from imperative API
-      const node = component.getNode()
-      if (!node) {
-        return null
-      }
-
-      const dragIndex = monitor.getItem().index
-      const hoverIndex = props.index
+      const dragIndex = item.index
+      const hoverIndex = index
 
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
@@ -79,7 +40,7 @@ export default DropTarget(
       }
 
       // Determine rectangle on screen
-      const hoverBoundingRect = node.getBoundingClientRect()
+      const hoverBoundingRect = ref.current!.getBoundingClientRect()
 
       // Get vertical middle
       const hoverMiddleY =
@@ -106,30 +67,30 @@ export default DropTarget(
       }
 
       // Time to actually perform the action
-      props.moveCard(dragIndex, hoverIndex)
+      moveCard(dragIndex, hoverIndex)
 
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
       // to avoid expensive index searches.
-      monitor.getItem().index = hoverIndex
+      item.index = hoverIndex
     },
-  },
-  (connect: DropTargetConnector) => ({
-    connectDropTarget: connect.dropTarget(),
-  }),
-)(
-  DragSource(
-    ItemTypes.CARD,
-    {
-      beginDrag: (props: CardProps) => ({
-        id: props.id,
-        index: props.index,
-      }),
-    },
-    (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-      connectDragSource: connect.dragSource(),
+  })
+
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: ItemTypes.CARD, id, index },
+    collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
-  )(Card),
-)
+  })
+
+  const opacity = isDragging ? 0 : 1
+  drag(drop(ref))
+  return (
+    <div ref={ref} style={{ ...style, opacity }}>
+      {text}
+    </div>
+  )
+}
+
+export default Card

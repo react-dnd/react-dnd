@@ -1,5 +1,5 @@
 import React from 'react'
-import { DragSource, DragPreviewImage } from 'react-dnd'
+import { DragPreviewImage, useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import boxImage from './boxImage'
 const style = {
@@ -10,33 +10,20 @@ const style = {
   cursor: 'move',
   width: '20rem',
 }
-const BoxWithImage = ({
-  isDragging,
-  connectDragSource,
-  connectDragPreview,
-}) => {
-  const opacity = isDragging ? 0.4 : 1
+const BoxWithImage = () => {
+  const [{ opacity }, drag, preview] = useDrag({
+    item: { type: ItemTypes.BOX },
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.4 : 1,
+    }),
+  })
   return (
     <>
-      <DragPreviewImage connect={connectDragPreview} src={boxImage} />
-      <div
-        ref={connectDragSource}
-        style={Object.assign({}, style, { opacity })}
-      >
+      <DragPreviewImage connect={preview} src={boxImage} />
+      <div ref={drag} style={Object.assign({}, style, { opacity })}>
         Drag me to see an image
       </div>
-      ,
     </>
   )
 }
-export default DragSource(
-  ItemTypes.BOX,
-  {
-    beginDrag: () => ({}),
-  },
-  (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging(),
-  }),
-)(BoxWithImage)
+export default BoxWithImage

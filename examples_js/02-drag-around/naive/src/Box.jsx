@@ -1,5 +1,5 @@
 import React from 'react'
-import { DragSource } from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const style = {
   position: 'absolute',
@@ -8,31 +8,20 @@ const style = {
   padding: '0.5rem 1rem',
   cursor: 'move',
 }
-const Box = ({
-  hideSourceOnDrag,
-  left,
-  top,
-  connectDragSource,
-  isDragging,
-  children,
-}) => {
+const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
+  const [{ isDragging }, drag] = useDrag({
+    item: { id, left, top, type: ItemTypes.BOX },
+    collect: monitor => ({
+      isDragging: monitor.isDragging(),
+    }),
+  })
   if (isDragging && hideSourceOnDrag) {
-    return null
+    return <div ref={drag} />
   }
-  return connectDragSource(
-    <div style={Object.assign({}, style, { left, top })}>{children}</div>,
+  return (
+    <div ref={drag} style={Object.assign({}, style, { left, top })}>
+      {children}
+    </div>
   )
 }
-export default DragSource(
-  ItemTypes.BOX,
-  {
-    beginDrag(props) {
-      const { id, left, top } = props
-      return { id, left, top }
-    },
-  },
-  (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }),
-)(Box)
+export default Box

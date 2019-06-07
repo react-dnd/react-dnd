@@ -46,7 +46,7 @@ const Container = () => {
       <div style={{ overflow: 'hidden', clear: 'both' }}>
         {dustbins.map(({ accepts, lastDroppedItem }, index) => (
           <Dustbin
-            accepts={accepts}
+            accept={accepts}
             lastDroppedItem={lastDroppedItem}
             onDrop={item => handleDrop(index, item)}
             key={index}

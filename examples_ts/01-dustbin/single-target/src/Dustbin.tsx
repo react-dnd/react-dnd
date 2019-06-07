@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  DropTarget,
-  ConnectDropTarget,
-  DropTargetMonitor,
-  DropTargetConnector,
-} from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -20,17 +15,16 @@ const style: React.CSSProperties = {
   float: 'left',
 }
 
-export interface DustbinProps {
-  canDrop: boolean
-  isOver: boolean
-  connectDropTarget: ConnectDropTarget
-}
+const Dustbin: React.FC = () => {
+  const [{ canDrop, isOver }, drop] = useDrop({
+    accept: ItemTypes.BOX,
+    drop: () => ({ name: 'Dustbin' }),
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  })
 
-const Dustbin: React.FC<DustbinProps> = ({
-  canDrop,
-  isOver,
-  connectDropTarget,
-}) => {
   const isActive = canDrop && isOver
   let backgroundColor = '#222'
   if (isActive) {
@@ -40,20 +34,10 @@ const Dustbin: React.FC<DustbinProps> = ({
   }
 
   return (
-    <div ref={connectDropTarget} style={{ ...style, backgroundColor }}>
+    <div ref={drop} style={{ ...style, backgroundColor }}>
       {isActive ? 'Release to drop' : 'Drag a box here'}
     </div>
   )
 }
 
-export default DropTarget(
-  ItemTypes.BOX,
-  {
-    drop: () => ({ name: 'Dustbin' }),
-  },
-  (connect: DropTargetConnector, monitor: DropTargetMonitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    canDrop: monitor.canDrop(),
-  }),
-)(Dustbin)
+export default Dustbin

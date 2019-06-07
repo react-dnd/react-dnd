@@ -1,5 +1,5 @@
 import React from 'react'
-import { DropTarget } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const style = {
   border: '1px solid gray',
@@ -8,14 +8,17 @@ const style = {
   padding: '2rem',
   textAlign: 'center',
 }
-const TargetBox = ({ canDrop, isOver, connectDropTarget }) => {
-  const isActive = canDrop && isOver
-  return connectDropTarget(
-    <div style={style}>{isActive ? 'Release to drop' : 'Drag item here'}</div>,
+const TargetBox = () => {
+  const [{ isActive }, drop] = useDrop({
+    accept: ItemTypes.BOX,
+    collect: monitor => ({
+      isActive: monitor.canDrop() && monitor.isOver(),
+    }),
+  })
+  return (
+    <div ref={drop} style={style}>
+      {isActive ? 'Release to drop' : 'Drag item here'}
+    </div>
   )
 }
-export default DropTarget(ItemTypes.BOX, {}, (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  canDrop: monitor.canDrop(),
-}))(TargetBox)
+export default TargetBox

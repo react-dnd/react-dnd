@@ -1,11 +1,5 @@
-import React, { memo } from 'react'
-import {
-  DragSource,
-  DropTarget,
-  ConnectDragSource,
-  ConnectDropTarget,
-  DropTargetMonitor,
-} from 'react-dnd'
+import React, { memo, useMemo, useRef } from 'react'
+import { useDrag, useDrop } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -20,43 +14,38 @@ export interface CardProps {
   id: any
   text: string
   moveCard: (draggedId: string, id: string) => void
-  isDragging: boolean
-  connectDragSource: ConnectDragSource
-  connectDropTarget: ConnectDropTarget
 }
 
-const Card: React.FC<CardProps> = memo(
-  ({ text, isDragging, connectDragSource, connectDropTarget }) => {
-    const opacity = isDragging ? 0 : 1
-    return connectDragSource(
-      connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
-    )
-  },
-)
-Card.displayName = 'Card'
+const Card: React.FC<CardProps> = memo(({ id, text, moveCard }) => {
+  const ref = useRef(null)
+  const [{ isDragging }, connectDrag] = useDrag({
+    item: { id, type: ItemTypes.CARD },
+    collect: (monitor: any) => {
+      const result = {
+        isDragging: monitor.isDragging(),
+      }
+      return result
+    },
+  })
 
-export default DropTarget(
-  ItemTypes.CARD,
-  {
-    hover(props: CardProps, monitor: DropTargetMonitor) {
-      const draggedId = monitor.getItem().id
-      if (draggedId !== props.id) {
-        props.moveCard(draggedId, props.id)
+  const [, connectDrop] = useDrop({
+    accept: ItemTypes.CARD,
+    hover({ id: draggedId }: { id: string; type: string }) {
+      if (draggedId !== id) {
+        moveCard(draggedId, id)
       }
     },
-  },
-  connect => ({
-    connectDropTarget: connect.dropTarget(),
-  }),
-)(
-  DragSource(
-    ItemTypes.CARD,
-    {
-      beginDrag: (props: CardProps) => ({ id: props.id }),
-    },
-    (connect, monitor) => ({
-      connectDragSource: connect.dragSource(),
-      isDragging: monitor.isDragging(),
-    }),
-  )(Card),
-)
+  })
+
+  connectDrag(ref)
+  connectDrop(ref)
+  const opacity = isDragging ? 0 : 1
+  const containerStyle = useMemo(() => ({ ...style, opacity }), [opacity])
+  return (
+    <div ref={ref} style={containerStyle}>
+      {text}
+    </div>
+  )
+})
+
+export default Card

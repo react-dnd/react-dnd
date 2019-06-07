@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
-import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import Colors from './Colors'
+import { DragItem } from './interfaces'
 
 const style: React.CSSProperties = {
   border: '1px solid gray',
@@ -13,20 +14,22 @@ const style: React.CSSProperties = {
 export interface TargetBoxProps {
   onDrop: (item: any) => void
   lastDroppedColor?: string
-
-  isOver: boolean
-  canDrop: boolean
-  draggingColor: string
-  connectDropTarget: ConnectDropTarget
 }
 
-const TargetBoxRaw: React.FC<TargetBoxProps> = ({
-  canDrop,
-  isOver,
-  draggingColor,
-  lastDroppedColor,
-  connectDropTarget,
-}) => {
+const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
+  const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
+    accept: [Colors.YELLOW, Colors.BLUE],
+    drop(item: DragItem) {
+      onDrop(item.type)
+      return undefined
+    },
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+      draggingColor: monitor.getItemType() as string,
+    }),
+  })
+
   const opacity = isOver ? 1 : 0.7
   let backgroundColor = '#fff'
   switch (draggingColor) {
@@ -40,30 +43,18 @@ const TargetBoxRaw: React.FC<TargetBoxProps> = ({
       break
   }
 
-  return connectDropTarget(
-    <div style={{ ...style, backgroundColor, opacity }}>
+  return (
+    <div ref={drop} style={{ ...style, backgroundColor, opacity }}>
       <p>Drop here.</p>
 
       {!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
-    </div>,
+    </div>
   )
 }
 
-const TargetBox = DropTarget(
-  [Colors.YELLOW, Colors.BLUE],
-  {
-    drop(props: TargetBoxProps, monitor: DropTargetMonitor) {
-      props.onDrop(monitor.getItemType())
-    },
-  },
-  (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    canDrop: monitor.canDrop(),
-    draggingColor: monitor.getItemType() as string,
-  }),
-)(TargetBoxRaw)
-
+export interface StatefulTargetBoxState {
+  lastDroppedColor: string | null
+}
 export interface StatefulTargetBoxState {
   lastDroppedColor: string | null
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { DragSource, ConnectDragPreview, ConnectDragSource } from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -19,34 +19,19 @@ const handleStyle: React.CSSProperties = {
   cursor: 'move',
 }
 
-export interface BoxWithHandleProps {
-  connectDragSource: ConnectDragSource
-  connectDragPreview: ConnectDragPreview
-  isDragging: boolean
-}
+const BoxWithHandle: React.FC = () => {
+  const [{ opacity }, drag, preview] = useDrag({
+    item: { type: ItemTypes.BOX },
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.4 : 1,
+    }),
+  })
 
-const BoxWithHandle: React.FC<BoxWithHandleProps> = ({
-  isDragging,
-  connectDragSource,
-  connectDragPreview,
-}) => {
-  const opacity = isDragging ? 0.4 : 1
-  return connectDragPreview(
-    <div style={{ ...style, opacity }}>
-      {connectDragSource(<div style={handleStyle} />)}
+  return (
+    <div ref={preview} style={{ ...style, opacity }}>
+      <div ref={drag} style={handleStyle} />
       Drag me by the handle
-    </div>,
+    </div>
   )
 }
-
-export default DragSource(
-  ItemTypes.BOX,
-  {
-    beginDrag: () => ({}),
-  },
-  (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging(),
-  }),
-)(BoxWithHandle)
+export default BoxWithHandle

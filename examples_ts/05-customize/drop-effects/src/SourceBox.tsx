@@ -1,5 +1,5 @@
 import React from 'react'
-import { DragSource, ConnectDragSource } from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -13,32 +13,23 @@ const style: React.CSSProperties = {
 
 export interface SourceBoxProps {
   showCopyIcon?: boolean
-  isDragging: boolean
-  connectDragSource: ConnectDragSource
 }
 
-const SourceBox: React.FC<SourceBoxProps> = ({
-  isDragging,
-  connectDragSource,
-  showCopyIcon,
-}) => {
-  const opacity = isDragging ? 0.4 : 1
-  const dropEffect = showCopyIcon ? 'copy' : 'move'
-  return connectDragSource(
-    <div style={{ ...style, opacity }}>
+const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
+  const [{ opacity }, drag] = useDrag({
+    item: { type: ItemTypes.BOX },
+    options: {
+      dropEffect: showCopyIcon ? 'copy' : 'move',
+    },
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.4 : 1,
+    }),
+  })
+
+  return (
+    <div ref={drag} style={{ ...style, opacity }}>
       When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
-    </div>,
-    { dropEffect },
+    </div>
   )
 }
-
-export default DragSource(
-  ItemTypes.BOX,
-  {
-    beginDrag: () => ({}),
-  },
-  (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }),
-)(SourceBox)
+export default SourceBox

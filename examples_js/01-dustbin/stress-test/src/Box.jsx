@@ -1,5 +1,5 @@
-import React, { memo } from 'react'
-import { DragSource } from 'react-dnd'
+import React from 'react'
+import { useDrag } from 'react-dnd'
 const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
@@ -9,25 +9,22 @@ const style = {
   cursor: 'move',
   float: 'left',
 }
-const Box = memo(({ name, isDropped, isDragging, connectDragSource }) => {
-  const opacity = isDragging ? 0.4 : 1
-  return connectDragSource(
-    <div style={Object.assign({}, style, { opacity })}>
-      {isDropped ? <s>{name}</s> : name}
-    </div>,
-  )
-})
-export default DragSource(
-  props => props.type,
-  {
-    beginDrag: props => ({ name: props.name }),
-    isDragging(props, monitor) {
+const Box = ({ name, type, isDropped }) => {
+  const [{ isDragging }, drag] = useDrag({
+    item: { name, type },
+    isDragging(monitor) {
       const item = monitor.getItem()
-      return props.name === item.name
+      return name === item.name
     },
-  },
-  (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }),
-)(Box)
+    collect: monitor => ({
+      isDragging: monitor.isDragging(),
+    }),
+  })
+  const opacity = isDragging ? 0.4 : 1
+  return (
+    <div ref={drag} style={Object.assign({}, style, { opacity })}>
+      {isDropped ? <s>{name}</s> : name}
+    </div>
+  )
+}
+export default Box
