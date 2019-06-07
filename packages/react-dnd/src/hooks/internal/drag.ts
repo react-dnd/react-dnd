@@ -6,10 +6,10 @@ import {
 	DragSourceMonitor,
 } from '../../interfaces'
 import { DragDropMonitor, DragSource } from 'dnd-core'
-import registerSource from '../../registerSource'
+import { registerSource } from '../../registration'
 import { useDragDropManager } from './useDragDropManager'
-import DragSourceMonitorImpl from '../../DragSourceMonitorImpl'
-import SourceConnector from '../../SourceConnector'
+import { DragSourceMonitorImpl } from '../../DragSourceMonitorImpl'
+import { SourceConnector } from '../../SourceConnector'
 const invariant = require('invariant')
 
 export function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {
@@ -33,8 +33,6 @@ export function useDragHandler<
 	connector: any,
 ) {
 	const manager = useDragDropManager()
-
-	// Can't use createSourceFactory, as semantics are different
 	const handler = useMemo(() => {
 		return {
 			beginDrag() {

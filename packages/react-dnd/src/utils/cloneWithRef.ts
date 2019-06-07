@@ -10,7 +10,7 @@ function setRef(ref: any, node: any) {
 	}
 }
 
-export default function cloneWithRef(
+export function cloneWithRef(
 	element: any,
 	newRef: any,
 ): React.ReactElement<any> {

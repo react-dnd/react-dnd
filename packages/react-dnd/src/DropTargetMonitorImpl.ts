@@ -11,7 +11,7 @@ const invariant = require('invariant')
 
 let isCallingCanDrop = false
 
-export default class DropTargetMonitorImpl implements DropTargetMonitor {
+export class DropTargetMonitorImpl implements DropTargetMonitor {
 	private internalMonitor: DragDropMonitor
 	private targetId: Identifier | null = null
 

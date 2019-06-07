@@ -13,7 +13,7 @@ export interface Connector {
 	reconnect(): void
 }
 
-export default class SourceConnector implements Connector {
+export class SourceConnector implements Connector {
 	public hooks = wrapConnectorHooks({
 		dragSource: (
 			node: Element | React.ReactElement | React.Ref<any>,

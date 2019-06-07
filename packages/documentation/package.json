@@ -31,7 +31,7 @@
 		"query-string": "^6.5.0",
 		"react": "^16.8.6",
 		"react-dnd": "^7.6.0",
-		"react-dnd-examples": "^7.6.0",
+		"react-dnd-examples-decorators": "^7.6.0",
 		"react-dnd-examples-hooks": "^7.6.0",
 		"react-dnd-html5-backend": "^7.6.0",
 		"react-dnd-test-backend": "^7.6.0",
