@@ -13,7 +13,7 @@ import { APIPages, ExamplePages } from '../constants'
 import Header from './header'
 import './layout.css'
 import { isLegacyMode } from '../util/renderHtmlAst'
-require('prismjs/themes/prism.css')
+import 'prismjs/themes/prism.css'
 const favicon = require('../favicon.png')
 
 export interface LayoutProps {

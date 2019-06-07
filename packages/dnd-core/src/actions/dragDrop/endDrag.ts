@@ -1,13 +1,11 @@
-declare var require: any
-
 import {
 	DragDropManager,
 	SentinelAction,
 	DragDropMonitor,
 } from '../../interfaces'
 import { END_DRAG } from './types'
-
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 export default function createEndDrag<Context>(
 	manager: DragDropManager<Context>,

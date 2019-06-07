@@ -1,4 +1,3 @@
-declare var require: any
 import {
 	DropTargetHookSpec,
 	ConnectDropTarget,
@@ -7,7 +6,8 @@ import {
 import { useMonitorOutput } from './internal/useMonitorOutput'
 import { useDropHandler, useDropTargetMonitor } from './internal/drop'
 import { useEffect, useRef, useMemo } from 'react'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 /**
  * useDropTarget Hook

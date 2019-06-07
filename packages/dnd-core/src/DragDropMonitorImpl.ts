@@ -1,5 +1,3 @@
-declare var require: any
-
 import { Store } from 'redux'
 import matchesType from './utils/matchesType'
 import {
@@ -16,7 +14,8 @@ import {
 	HandlerRegistry,
 	Identifier,
 } from './interfaces'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 export default class DragDropMonitorImpl implements DragDropMonitor {
 	constructor(private store: Store<State>, public registry: HandlerRegistry) {}

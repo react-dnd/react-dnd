@@ -1,4 +1,3 @@
-declare var require: any
 import { useEffect, useMemo, MutableRefObject } from 'react'
 import {
 	DragSourceHookSpec,
@@ -10,7 +9,8 @@ import { registerSource } from '../../registration'
 import { useDragDropManager } from './useDragDropManager'
 import { DragSourceMonitorImpl } from '../../DragSourceMonitorImpl'
 import { SourceConnector } from '../../SourceConnector'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 export function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {
 	const manager = useDragDropManager()

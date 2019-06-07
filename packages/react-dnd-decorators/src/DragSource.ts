@@ -1,4 +1,3 @@
-declare var require: any
 import * as React from 'react'
 import { SourceType, DragDropManager } from 'dnd-core'
 import { DndOptions } from 'react-dnd'
@@ -17,7 +16,8 @@ import {
 	isValidType,
 } from 'react-dnd/lib/internals'
 import createSourceFactory from './createSourceFactory'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 /**
  * Decorates a component as a dragsource

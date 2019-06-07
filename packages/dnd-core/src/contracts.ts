@@ -1,7 +1,6 @@
-declare var require: any
-
 import { DragSource, DropTarget, Identifier } from './interfaces'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 export function validateSourceContract(source: DragSource) {
 	invariant(

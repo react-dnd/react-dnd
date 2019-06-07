@@ -1,5 +1,3 @@
-declare var require: any
-
 import { Store } from 'redux'
 import {
 	addSource,
@@ -23,8 +21,10 @@ import {
 	validateTargetContract,
 	validateType,
 } from './contracts'
-const invariant = require('invariant')
-const asap = require('asap')
+// @ts-ignore
+import invariant from 'invariant'
+// @ts-ignore
+import asap from 'asap'
 
 function getNextHandlerId(role: HandlerRole): string {
 	const id = getNextUniqueId().toString()
