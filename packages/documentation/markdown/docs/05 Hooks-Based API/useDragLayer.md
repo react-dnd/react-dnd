@@ -3,8 +3,6 @@ path: '/docs/api/use-drag-layer'
 title: 'useDrag'
 ---
 
-## EXPERIMENTAL API - UNSTABLE
-
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
 # useDragLayer
@@ -12,8 +10,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 A hook to use the current component as a drag-layer.
 
 ```jsx
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd'
-const { useDragLayer } = dnd
+import { useDragLayer } from 'react-dnd'
 
 function DragLayerComponent(props) {
   const collectedProps = useDragLayer(spec)

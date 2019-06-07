@@ -1,12 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react'
-import {
-	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
-	DragSourceMonitor,
-} from 'react-dnd'
+import { useDrag, DragSourceMonitor } from 'react-dnd'
 import Colors from './Colors'
-const {
-	useDrag,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',

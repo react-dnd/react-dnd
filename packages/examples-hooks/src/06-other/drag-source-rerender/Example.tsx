@@ -1,12 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import {
-	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
-	ConnectDragSource,
-} from 'react-dnd'
-
-const {
-	useDrag,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
+import { useDrag, ConnectDragSource } from 'react-dnd'
 
 const Parent: React.FC = () => {
 	const [{ isDragging }, drag] = useDrag({

@@ -18,9 +18,9 @@ If you use a pattern that is not covered here, please submit a Pull Request to a
 For these examples, the following flags are available. To enable them add them to the end of your URL.
 
 - `?debug` - Enables **debug mode** of `dnd-core`. This registers `dnd-core` with the [Redux Devtools Chrome extension](https://github.com/zalmoxisus/redux-devtools-extension).
-- `?experimental` - Enables **experimental mode** examples using react-dnd hooks. This feature is in development, and this flag will go away when they are considered stable.
+- `?legacy` - Enables the legacy **decorator-based** examples.
 
-  The source code for the experimental examples are in the [examples-hooks package](https://github.com/react-dnd/react-dnd/tree/master/packages/examples-hooks/src) on GitHub.
+The source code for the hooks-based examples are in the [examples-hooks package](https://github.com/react-dnd/react-dnd/tree/master/packages/examples-hooks/src) on GitHub.
 
 ## Running Locally
 

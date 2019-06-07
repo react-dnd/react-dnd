@@ -29,7 +29,6 @@ export default function Container() {
 	// will just use the global window.
 	return (
 		<>
-			<h1>EXPERIMENTAL API</h1>
 			<Frame style={{ width: '100%', height: 400 }}>
 				<FrameBindingContext>
 					<div>

@@ -5,7 +5,6 @@ import Box from './Box'
 export default function Container() {
 	return (
 		<div>
-			<h1>EXPERIMENTAL API</h1>
 			<div style={{ overflow: 'hidden', clear: 'both' }}>
 				<Dustbin />
 			</div>

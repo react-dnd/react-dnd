@@ -4,7 +4,6 @@ import Example from './Example'
 const Container: React.FC = () => {
 	return (
 		<>
-			<h1>EXPERIMENTAL API</h1>
 			<h3>
 				Drag the box before hiding then hide it and show it again and try again.
 			</h3>
