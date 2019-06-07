@@ -2,7 +2,7 @@ import * as React from 'react'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { DndContext, DndOptions } from 'react-dnd'
-import { isPlainObject } from 'react-dnd/lib/internals'
+import { __isPlainObject as isPlainObject } from 'react-dnd'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable } from './utils/isRefable'
 

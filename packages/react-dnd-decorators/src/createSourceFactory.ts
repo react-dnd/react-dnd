@@ -2,7 +2,7 @@ declare var process: any
 import * as React from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceMonitor } from 'react-dnd'
-import { isPlainObject } from 'react-dnd/lib/internals'
+import { __isPlainObject as isPlainObject } from 'react-dnd'
 import { DragSourceSpec } from './interfaces'
 import { getDecoratedComponent } from './utils/getDecoratedComponent'
 // @ts-ignore

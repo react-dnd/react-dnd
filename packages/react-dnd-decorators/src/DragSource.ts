@@ -1,7 +1,13 @@
 import * as React from 'react'
 import { SourceType, DragDropManager } from 'dnd-core'
 import { DndOptions } from 'react-dnd'
-import { isPlainObject } from 'react-dnd/lib/internals'
+import {
+	__isPlainObject as isPlainObject,
+	__registerSource as registerSource,
+	__DragSourceMonitorImpl as DragSourceMonitorImpl,
+	__SourceConnector as SourceConnector,
+	__isValidType as isValidType,
+} from 'react-dnd'
 import {
 	DndComponentEnhancer,
 	DragSourceSpec,
@@ -9,12 +15,7 @@ import {
 } from './interfaces'
 import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import decorateHandler from './decorateHandler'
-import {
-	registerSource,
-	DragSourceMonitorImpl,
-	SourceConnector,
-	isValidType,
-} from 'react-dnd/lib/internals'
+
 import createSourceFactory from './createSourceFactory'
 // @ts-ignore
 import invariant from 'invariant'

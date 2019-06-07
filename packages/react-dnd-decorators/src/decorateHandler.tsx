@@ -3,7 +3,10 @@ declare var process: any
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndContext } from 'react-dnd'
-import { Connector, isPlainObject } from 'react-dnd/lib/internals'
+import {
+	__Connector as Connector,
+	__isPlainObject as isPlainObject,
+} from 'react-dnd'
 import { DndComponent } from './interfaces'
 import {
 	Disposable,

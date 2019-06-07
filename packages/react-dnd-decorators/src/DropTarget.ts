@@ -2,12 +2,12 @@ import * as React from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
 import { DndOptions } from 'react-dnd'
 import {
-	registerTarget,
-	isValidType,
-	TargetConnector,
-	DropTargetMonitorImpl,
-	isPlainObject,
-} from 'react-dnd/lib/internals'
+	__registerTarget as registerTarget,
+	__isValidType as isValidType,
+	__TargetConnector as TargetConnector,
+	__DropTargetMonitorImpl as DropTargetMonitorImpl,
+	__isPlainObject as isPlainObject,
+} from 'react-dnd'
 import {
 	DropTargetSpec,
 	DropTargetCollector,

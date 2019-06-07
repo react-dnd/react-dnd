@@ -4,5 +4,5 @@
 		"outDir": "./lib",
 		"baseUrl": "./"
 	},
-	"include": ["./src/index.ts", "./src/internals.ts"]
+	"include": ["./src/index.ts"]
 }
