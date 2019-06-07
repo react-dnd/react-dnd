@@ -4,8 +4,8 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
-import { isDebugMode } from 'react-dnd-examples/lib/esm/index'
-import { DragDropContextProvider } from 'react-dnd'
+import { isDebugMode } from 'react-dnd-examples-hooks/lib/esm/index'
+import { DndProvider } from 'react-dnd'
 import PageBody from './pagebody'
 import Sidebar from './sidebar'
 import { PageGroup } from '../constants'
@@ -48,7 +48,7 @@ const Layout: React.FC<LayoutProps> = props => {
 				/>
 			</Helmet>
 			<Header debugMode={debugMode} legacyMode={legacyMode} />
-			<DragDropContextProvider backend={HTML5Backend} debugMode={debugMode}>
+			<DndProvider backend={HTML5Backend} debugMode={debugMode}>
 				<ContentContainer>
 					<PageBody hasSidebar={sitepath !== '/about'}>
 						{hideSidebar ? null : (
@@ -62,7 +62,7 @@ const Layout: React.FC<LayoutProps> = props => {
 						<ChildrenContainer>{children}</ChildrenContainer>
 					</PageBody>
 				</ContentContainer>
-			</DragDropContextProvider>
+			</DndProvider>
 		</>
 	)
 }
