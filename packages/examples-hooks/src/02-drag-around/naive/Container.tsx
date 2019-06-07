@@ -1,16 +1,9 @@
 import React, { useState } from 'react'
-import {
-	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
-	XYCoord,
-} from 'react-dnd'
+import { useDrop, XYCoord } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
 import update from 'immutability-helper'
 import { DragItem } from './interfaces'
-
-const {
-	useDrop,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const styles: React.CSSProperties = {
 	width: 300,

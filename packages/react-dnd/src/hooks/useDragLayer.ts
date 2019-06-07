@@ -4,7 +4,7 @@ import { useDragDropManager } from './internal/useDragDropManager'
 import { useCollector } from './internal/useCollector'
 
 /**
- * useDragLayer Hook  (This API is experimental and subject to breaking changes in non-breaking versions)
+ * useDragLayer Hook
  * @param collector The property collector
  */
 export function useDragLayer<CollectedProps>(

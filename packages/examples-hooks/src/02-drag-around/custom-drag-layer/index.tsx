@@ -21,7 +21,7 @@ const DragAroundCustomDragLayer: React.FC = () => {
 
 	return (
 		<div>
-			<h1>EXPERIMENTAL API</h1>
+			<h1>Hooks-Based API</h1>
 			<Container snapToGrid={snapToGridAfterDrop} />
 			<CustomDragLayer snapToGrid={snapToGridWhileDragging} />
 			<p>

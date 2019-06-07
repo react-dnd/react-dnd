@@ -8,10 +8,10 @@ import exampleTabs from '../components/exampleTabs'
 const log = require('debug')('site:renderHtmlAst')
 const rehypeReact = require('rehype-react')
 
-export function isExperimentalApiMode() {
+export function isHooksMode() {
 	if (typeof window !== 'undefined') {
 		const queryObject = parse(window.location.search)
-		return queryObject.experimental !== undefined
+		return queryObject.hooks !== undefined
 	} else {
 		return false
 	}
@@ -22,7 +22,7 @@ const renderAst = new rehypeReact({
 	createElement,
 	components: {
 		'view-source': exampleTabs,
-		...(isExperimentalApiMode() ? hookComponentIndex : componentIndex),
+		...(isHooksMode() ? hookComponentIndex : componentIndex),
 	},
 }).Compiler
 

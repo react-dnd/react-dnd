@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import Card from './Card'
 import update from 'immutability-helper'
 import ItemTypes from './ItemTypes'
-
-const {
-	useDrop,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style = {
 	width: 400,
@@ -69,7 +65,7 @@ const Container: React.FC = () => {
 	const [, drop] = useDrop({ accept: ItemTypes.CARD })
 	return (
 		<>
-			<h1>EXPERIMENTAL API</h1>
+			<h1>Hooks-Based API</h1>
 			<div ref={drop} style={style}>
 				{cards.map(card => (
 					<Card

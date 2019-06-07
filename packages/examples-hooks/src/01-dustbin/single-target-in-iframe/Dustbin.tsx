@@ -1,10 +1,6 @@
 import React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import ItemTypes from './ItemTypes'
-
-const {
-	useDrop,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	height: '12rem',

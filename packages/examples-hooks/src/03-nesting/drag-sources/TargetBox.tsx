@@ -1,11 +1,7 @@
 import React, { useState, useCallback } from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import Colors from './Colors'
 import { DragItem } from './interfaces'
-
-const {
-	useDrop,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px solid gray',

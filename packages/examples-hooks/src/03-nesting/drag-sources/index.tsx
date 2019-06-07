@@ -6,7 +6,7 @@ import Colors from './Colors'
 export default function Container() {
 	return (
 		<>
-			<h1>EXPERIMENTAL API</h1>
+			<h1>Hooks-Based API</h1>
 			<div style={{ overflow: 'hidden', clear: 'both', margin: '-.5rem' }}>
 				<div style={{ float: 'left' }}>
 					<SourceBox color={Colors.BLUE}>
