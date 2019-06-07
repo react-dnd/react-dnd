@@ -38,7 +38,7 @@
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",
-		"lint": "tslint \"packages/**/*.{ts,tsx}\" -e \"**/{lib,node_modules}/**\"",
+		"lint": "eslint .",
 		"test_modules": "lerna run test --stream",
 		"publish_docs": "lerna run publish --scope react-dnd-documentation",
 		"test": "run-s lint build test_modules jest:cov",
@@ -58,8 +58,15 @@
 		"@commitlint/cli": "^8.0.0",
 		"@commitlint/config-conventional": "^8.0.0",
 		"@types/jest": "^24.0.13",
+		"@typescript-eslint/eslint-plugin": "^1.9.0",
+		"@typescript-eslint/parser": "^1.9.0",
 		"enzyme": "^3.9.0",
 		"enzyme-adapter-react-16": "^1.11.2",
+		"eslint": "^5.16.0",
+		"eslint-config-prettier": "^4.3.0",
+		"eslint-plugin-prettier": "^3.1.0",
+		"eslint-plugin-react": "^7.13.0",
+		"eslint-plugin-react-hooks": "^1.6.0",
 		"husky": "^2.3.0",
 		"jest": "^24.8.0",
 		"jest-environment-jsdom": "^24.8.0",
@@ -71,10 +78,6 @@
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"ts-jest": "^24.0.2",
-		"tslint": "^5.17.0",
-		"tslint-config-prettier": "^1.18.0",
-		"tslint-react": "^4.0.0",
-		"tslint-react-hooks": "^2.1.0",
 		"typescript": "^3.5.1"
 	},
 	"jest": {
@@ -125,7 +128,7 @@
 			"git add"
 		],
 		"*.{ts,tsx}": [
-			"tslint --fix",
+			"eslint --fix",
 			"prettier --write",
 			"git add"
 		]

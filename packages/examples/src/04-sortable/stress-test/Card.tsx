@@ -33,6 +33,7 @@ const Card: React.FC<CardProps> = memo(
 		)
 	},
 )
+Card.displayName = 'Card'
 
 export default DropTarget(
 	ItemTypes.CARD,

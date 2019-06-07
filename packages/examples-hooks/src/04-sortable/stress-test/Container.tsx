@@ -29,7 +29,6 @@ function buildCardData() {
 }
 
 export default class Container extends React.Component<{}, ContainerState> {
-	// tslint:disable-next-line ban-types
 	private pendingUpdateFn: any
 	private requestedFrame: number | undefined
 
@@ -64,7 +63,6 @@ export default class Container extends React.Component<{}, ContainerState> {
 		)
 	}
 
-	// tslint:disable-next-line ban-types
 	private scheduleUpdate(updateFn: any) {
 		this.pendingUpdateFn = updateFn
 

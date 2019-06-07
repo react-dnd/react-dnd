@@ -1,4 +1,3 @@
-// tslint:disable max-classes-per-file
 import { createDragDropManager } from 'dnd-core'
 import * as React from 'react'
 import * as TestUtils from 'react-dom/test-utils'

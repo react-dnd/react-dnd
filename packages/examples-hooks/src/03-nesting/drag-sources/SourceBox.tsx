@@ -1,4 +1,3 @@
-// tslint:disable max-classes-per-file jsx-no-lambda
 import React, { useState, useCallback, useMemo } from 'react'
 import {
 	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,

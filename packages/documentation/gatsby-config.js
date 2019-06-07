@@ -1,3 +1,4 @@
+/* eslint-disable */
 const siteMetadata = {
 	title: 'React DnD',
 	githubUrl: 'https://github.com/react-dnd/react-dnd/',
