@@ -5,7 +5,6 @@ import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { isDebugMode } from 'react-dnd-examples/lib/esm/index'
-
 import { DragDropContextProvider } from 'react-dnd'
 import PageBody from './pagebody'
 import Sidebar from './sidebar'
@@ -13,7 +12,7 @@ import { PageGroup } from '../constants'
 import { APIPages, ExamplePages } from '../constants'
 import Header from './header'
 import './layout.css'
-import { isExperimentalApiMode } from '../util/renderHtmlAst'
+import { isLegacyMode } from '../util/renderHtmlAst'
 require('prismjs/themes/prism.css')
 const favicon = require('../favicon.png')
 
@@ -31,7 +30,7 @@ const Layout: React.FC<LayoutProps> = props => {
 	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
 	const hideSidebar = props.hideSidebar || sitepath === '/about'
 	const debugMode = isDebugMode()
-	const experimentalMode = isExperimentalApiMode()
+	const legacyMode = isLegacyMode()
 	return (
 		<>
 			<Helmet
@@ -48,7 +47,7 @@ const Layout: React.FC<LayoutProps> = props => {
 					href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css"
 				/>
 			</Helmet>
-			<Header debugMode={debugMode} experimentalMode={experimentalMode} />
+			<Header debugMode={debugMode} legacyMode={legacyMode} />
 			<DragDropContextProvider backend={HTML5Backend} debugMode={debugMode}>
 				<ContentContainer>
 					<PageBody hasSidebar={sitepath !== '/about'}>

@@ -48,6 +48,31 @@ export const APIPages: PageGroup[] = [
 	{
 		title: 'Top-Level API',
 		pages: {
+			USE_DRAG: {
+				location: '/docs/api/use-drag',
+				title: 'useDrag',
+			},
+			USE_DROP: {
+				location: '/docs/api/use-drop',
+				title: 'useDrop',
+			},
+			USE_DRAG_LAYER: {
+				location: '/docs/api/use-drag-layer',
+				title: 'useDragLayer',
+			},
+			DRAG_DROP_CONTEXT_PROVIDER: {
+				location: '/docs/api/drag-drop-context-provider',
+				title: 'DragDropContextProvider',
+			},
+			DRAG_PREVIEW_IMAGE: {
+				location: '/docs/api/drag-preview-image',
+				title: 'DragPreviewImage',
+			},
+		},
+	},
+	{
+		title: 'Legacy Decorator API',
+		pages: {
 			DRAG_SOURCE: {
 				location: '/docs/api/drag-source',
 				title: 'DragSource',
@@ -60,34 +85,9 @@ export const APIPages: PageGroup[] = [
 				location: '/docs/api/drag-layer',
 				title: 'DragLayer',
 			},
-			DRAG_PREVIEW_IMAGE: {
-				location: '/docs/api/drag-preview-image',
-				title: 'DragPreviewImage',
-			},
 			DRAG_DROP_CONTEXT: {
 				location: '/docs/api/drag-drop-context',
 				title: 'DragDropContext',
-			},
-			DRAG_DROP_CONTEXT_PROVIDER: {
-				location: '/docs/api/drag-drop-context-provider',
-				title: 'DragDropContextProvider',
-			},
-		},
-	},
-	{
-		title: 'Hooks-Based API',
-		pages: {
-			USE_DRAG: {
-				location: '/docs/api/use-drag',
-				title: 'useDrag',
-			},
-			USE_DRAG_LAYER: {
-				location: '/docs/api/use-drag-layer',
-				title: 'useDragLayer',
-			},
-			USE_DROP: {
-				location: '/docs/api/use-drop',
-				title: 'useDrop',
 			},
 		},
 	},

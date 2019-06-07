@@ -9,7 +9,6 @@ export default function DragAroundNaive() {
 
 	return (
 		<div>
-			<h1>EXPERIMENTAL API</h1>
 			<Container hideSourceOnDrag={hideSourceOnDrag} />
 			<p>
 				<label htmlFor="hideSourceOnDrag">

@@ -1,9 +1,5 @@
 import React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
-
-const {
-	useDrag,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
+import { useDrag } from 'react-dnd'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',

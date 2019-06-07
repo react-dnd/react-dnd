@@ -10,7 +10,7 @@ import { useEffect, useRef, useMemo } from 'react'
 const invariant = require('invariant')
 
 /**
- * useDropTarget Hook (This API is experimental and subject to breaking changes in non-breaking versions)
+ * useDropTarget Hook
  * @param spec The drop target specification
  */
 export function useDrop<

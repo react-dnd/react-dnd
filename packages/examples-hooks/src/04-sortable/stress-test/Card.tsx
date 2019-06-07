@@ -1,10 +1,6 @@
 import React, { memo, useMemo, useRef } from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd'
 import ItemTypes from './ItemTypes'
-const {
-	useDrag,
-	useDrop,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
