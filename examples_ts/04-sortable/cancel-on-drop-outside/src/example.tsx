@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback } from 'react'
 import { DropTarget, ConnectDropTarget } from 'react-dnd'
 import Card from './Card'
 import ItemTypes from './ItemTypes'
@@ -17,6 +17,7 @@ export interface ContainerState {
 }
 
 const Container: React.FC<ContainerProps> = ({ connectDropTarget }) => {
+  const ref = useRef(null)
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -71,8 +72,9 @@ const Container: React.FC<ContainerProps> = ({ connectDropTarget }) => {
     [cards],
   )
 
-  return connectDropTarget(
-    <div style={style}>
+  connectDropTarget(ref)
+  return (
+    <div ref={ref} style={style}>
       {cards.map(card => (
         <Card
           key={card.id}
@@ -82,7 +84,7 @@ const Container: React.FC<ContainerProps> = ({ connectDropTarget }) => {
           findCard={findCard}
         />
       ))}
-    </div>,
+    </div>
   )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
   DragSource,
   DropTarget,
@@ -35,9 +35,15 @@ const Card: React.FC<CardProps> = ({
   connectDropTarget,
 }) => {
   const opacity = isDragging ? 0 : 1
+  const ref = useRef(null)
 
-  return connectDragSource(
-    connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>),
+  connectDragSource(ref)
+  connectDropTarget(ref)
+
+  return (
+    <div ref={ref} style={{ ...style, opacity }}>
+      {text}
+    </div>
   )
 }
 

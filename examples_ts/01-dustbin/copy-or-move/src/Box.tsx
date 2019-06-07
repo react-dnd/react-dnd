@@ -44,13 +44,9 @@ export default DragSource(
         if (isDropAllowed) {
           const isCopyAction = dropResult.dropEffect === 'copy'
           const actionName = isCopyAction ? 'copied' : 'moved'
-          alertMessage = `You ${actionName} ${item.name} into ${
-            dropResult.name
-          }!`
+          alertMessage = `You ${actionName} ${item.name} into ${dropResult.name}!`
         } else {
-          alertMessage = `You cannot ${
-            dropResult.dropEffect
-          } an item into the ${dropResult.name}`
+          alertMessage = `You cannot ${dropResult.dropEffect} an item into the ${dropResult.name}`
         }
         alert(alertMessage)
       }

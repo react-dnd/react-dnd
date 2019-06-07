@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const style = {
@@ -10,10 +10,13 @@ const style = {
 }
 const Card = ({ text, isDragging, connectDragSource, connectDropTarget }) => {
   const opacity = isDragging ? 0 : 1
-  return connectDragSource(
-    connectDropTarget(
-      <div style={Object.assign({}, style, { opacity })}>{text}</div>,
-    ),
+  const ref = useRef(null)
+  connectDragSource(ref)
+  connectDropTarget(ref)
+  return (
+    <div ref={ref} style={Object.assign({}, style, { opacity })}>
+      {text}
+    </div>
   )
 }
 export default DropTarget(

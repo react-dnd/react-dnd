@@ -30,16 +30,13 @@ export interface DustbinState {
   hasDroppedOnChild: boolean
 }
 
-const Dustbin: React.RefForwardingComponent<
-  any,
-  DustbinProps
-> = React.forwardRef(
+const Dustbin = React.forwardRef<HTMLDivElement, DustbinProps>(
   ({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) => {
     const [hasDropped, setHasDropped] = useState(false)
     const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
 
     useImperativeHandle(
-      ref,
+      ref as any,
       () => ({
         onDrop: (onChild: boolean) => {
           setHasDroppedOnChild(onChild)
