@@ -4,5 +4,5 @@
 		"outDir": "./lib/esm",
 		"baseUrl": "./"
 	},
-	"include": ["./src/index.ts"]
+	"include": ["./src/index.ts", "./src/internals.ts"]
 }

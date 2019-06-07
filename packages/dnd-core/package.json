@@ -3,15 +3,14 @@
 	"version": "7.6.0",
 	"description": "Drag and drop sans the GUI",
 	"license": "MIT",
-	"main": "./lib/cjs/index.js",
+	"main": "./lib/esm/index.js",
 	"module": "./lib/esm/index.js",
-	"types": "./lib/cjs/index.d.ts",
+	"types": "./lib/esm/index.d.ts",
 	"scripts": {
 		"build:esm": "tsc -b tsconfig.esm.json",
-		"build:cjs": "tsc -b tsconfig.cjs.json",
 		"build": "run-p build:*",
 		"clean": "rimraf lib",
-		"start": "tsc -b tsconfig.cjs.json -w --preserveWatchOutput",
+		"start": "tsc -b tsconfig.esm.json -w --preserveWatchOutput",
 		"test": "run-s clean build"
 	},
 	"repository": {

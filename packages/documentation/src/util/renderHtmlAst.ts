@@ -1,6 +1,6 @@
 declare var require: any
 import { createElement } from 'react'
-import { componentIndex } from 'react-dnd-examples/lib/esm/index'
+import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators/lib/esm/index'
 import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/esm/index'
 import { parse } from 'query-string'
 import processImages from './processImagesInMarkdownAst'
@@ -22,7 +22,7 @@ const renderAst = new rehypeReact({
 	createElement,
 	components: {
 		'view-source': exampleTabs,
-		...(isLegacyMode() ? componentIndex : hookComponentIndex),
+		...(isLegacyMode() ? decoratorComponentIndex : hookComponentIndex),
 	},
 }).Compiler
 

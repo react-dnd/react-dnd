@@ -13,7 +13,7 @@ const invariant = require('invariant')
 let isCallingCanDrag = false
 let isCallingIsDragging = false
 
-export default class DragSourceMonitorImpl implements DragSourceMonitor {
+export class DragSourceMonitorImpl implements DragSourceMonitor {
 	private internalMonitor: DragDropMonitor
 	private sourceId: Identifier | null = null
 

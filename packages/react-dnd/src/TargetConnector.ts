@@ -7,7 +7,7 @@ const shallowEqual = require('shallowequal')
 
 import { Connector } from './SourceConnector'
 
-export default class TargetConnector implements Connector {
+export class TargetConnector implements Connector {
 	public hooks = wrapConnectorHooks({
 		dropTarget: (node: any, options: any) => {
 			this.dropTargetOptions = options

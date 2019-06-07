@@ -8,7 +8,7 @@ interface DragPreviewImageProps {
 /*
  * A utility for rendering a drag preview image
  */
-const DragPreviewImage: React.FC<DragPreviewImageProps> = React.memo(
+export const DragPreviewImage: React.FC<DragPreviewImageProps> = React.memo(
 	({ connect, src }) => {
 		if (typeof Image !== 'undefined') {
 			const img = new Image()
@@ -19,5 +19,3 @@ const DragPreviewImage: React.FC<DragPreviewImageProps> = React.memo(
 	},
 )
 DragPreviewImage.displayName = 'DragPreviewImage'
-
-export default DragPreviewImage
