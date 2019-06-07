@@ -148,6 +148,6 @@ export function DragLayer<RequiredProps, CollectedProps = {}>(
 			}
 		}
 
-		return hoistStatics(DragLayerContainer, DecoratedComponent)
+		return hoistStatics(DragLayerContainer, DecoratedComponent) as any
 	} as any) as DndComponentEnhancer<CollectedProps>
 }

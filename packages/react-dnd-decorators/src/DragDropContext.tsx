@@ -65,9 +65,9 @@ export function DragDropContext(
 			}
 		}
 
-		return hoistStatics(
+		return (hoistStatics(
 			DragDropContextContainer,
 			DecoratedComponent,
-		) as TargetClass & DragDropContextContainer
+		) as any) as TargetClass & DragDropContextContainer
 	}
 }
