@@ -49,7 +49,11 @@ export default class TargetConnector implements Connector {
 		}
 
 		const dropTarget = this.dropTarget
-		if (!this.handlerId || !dropTarget) {
+		if (!this.handlerId) {
+			return
+		}
+		if (!dropTarget) {
+			this.lastConnectedDropTarget = dropTarget
 			return
 		}
 
