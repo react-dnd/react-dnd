@@ -163,7 +163,10 @@ walk_examples(path.join(__dirname, 'static/examples_js'), 'index.jsx', function(
 		)
 
 		const packageJsonFile = path.join(exampleDir, 'package.json')
-		fs.writeFileSync(packageJsonFile, JSON.stringify(makePackageJson(index)))
+		fs.writeFileSync(
+			packageJsonFile,
+			JSON.stringify(makePackageJson(index), null, 2),
+		)
 
 		const sandboxAppFile = path.join(srcDir, 'index.js')
 		fs.writeFileSync(sandboxAppFile, APP_FILE_CONTENT)
@@ -213,7 +216,7 @@ walk_examples(path.join(__dirname, 'static/examples_ts'), 'index.tsx', function(
 		const packageJsonFile = path.join(exampleDir, 'package.json')
 		fs.writeFileSync(
 			packageJsonFile,
-			JSON.stringify(makePackageJson(index, true)),
+			JSON.stringify(makePackageJson(index, true), null, 2),
 		)
 
 		const sandboxAppFile = path.join(srcDir, 'index.tsx')
