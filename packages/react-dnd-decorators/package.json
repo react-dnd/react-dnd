@@ -11,12 +11,8 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"clean": "rimraf lib dist",
-		"bundle:unmin": "webpack --mode development --output-filename=ReactDnD.js",
-		"bundle:min": "webpack --mode production --output-filename=ReactDnD.min.js",
-		"transpile:esm": "tsc -b tsconfig.json",
-		"transpile": "run-p transpile:*",
-		"build": "run-p bundle:* transpile",
+		"clean": "rimraf lib",
+		"build": "tsc -b tsconfig.json",
 		"test": "run-s clean build",
 		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
 	},
@@ -39,8 +35,6 @@
 		"rimraf": "^2.6.3",
 		"ts-loader": "^6.0.2",
 		"typescript": "^3.5.1",
-		"webpack": "^4.32.2",
-		"webpack-cli": "^3.3.2",
 		"react-dnd": "^7.6.0"
 	},
 	"peerDependencies": {
