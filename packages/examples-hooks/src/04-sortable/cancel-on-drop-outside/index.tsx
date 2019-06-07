@@ -65,7 +65,6 @@ const Container: React.FC = () => {
 	const [, drop] = useDrop({ accept: ItemTypes.CARD })
 	return (
 		<>
-			<h1>Hooks-Based API</h1>
 			<div ref={drop} style={style}>
 				{cards.map(card => (
 					<Card

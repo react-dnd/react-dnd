@@ -22,7 +22,6 @@ const ChessboardTutorialApp: React.FC = () => {
 	useEffect(() => observe((newPos: [number, number]) => setKnightPos(newPos)))
 	return (
 		<div>
-			<h1>Hooks-Based API</h1>
 			<div style={containerStyle}>
 				<Board knightPosition={knightPos} />
 			</div>

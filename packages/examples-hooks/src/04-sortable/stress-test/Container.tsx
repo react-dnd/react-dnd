@@ -48,7 +48,6 @@ export default class Container extends React.Component<{}, ContainerState> {
 
 		return (
 			<>
-				<h1>Hooks-Based API</h1>
 				<div style={style}>
 					{cardsByIndex.map(card => (
 						<Card

@@ -4,7 +4,6 @@ import Box from './Box'
 
 const Container: React.FC = () => (
 	<div>
-		<h1>Hooks-Based API</h1>
 		<div style={{ overflow: 'hidden', clear: 'both' }}>
 			<Dustbin allowedDropEffect="any" />
 			<Dustbin allowedDropEffect="copy" />
