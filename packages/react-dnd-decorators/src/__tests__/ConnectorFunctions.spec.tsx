@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as TestUtils from 'react-dom/test-utils'
 import { wrapInTestContext } from 'react-dnd-test-utils'
-import DropTarget from '../DropTarget'
+import { DropTarget } from '../DropTarget'
 
 describe('Connectors', () => {
 	it('transmit expected arguments to components', () => {
