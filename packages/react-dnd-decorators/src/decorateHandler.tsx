@@ -4,7 +4,7 @@ declare var process: any
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndContext } from 'react-dnd'
-import { Connector, isPlainObject } from 'react-dnd/lib/esm/internals'
+import { Connector, isPlainObject } from 'react-dnd/lib/internals'
 import { DndComponent } from './interfaces'
 import {
 	Disposable,

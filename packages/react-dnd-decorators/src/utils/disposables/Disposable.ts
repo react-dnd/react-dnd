@@ -1,4 +1,4 @@
-import { isFunction, noop } from 'react-dnd/lib/esm/internals'
+import { isFunction, noop } from 'react-dnd/lib/internals'
 
 /**
  * Provides a set of static methods for creating Disposables.

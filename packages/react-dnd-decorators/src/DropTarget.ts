@@ -8,7 +8,7 @@ import {
 	TargetConnector,
 	DropTargetMonitorImpl,
 	isPlainObject,
-} from 'react-dnd/lib/esm/internals'
+} from 'react-dnd/lib/internals'
 import {
 	DropTargetSpec,
 	DropTargetCollector,

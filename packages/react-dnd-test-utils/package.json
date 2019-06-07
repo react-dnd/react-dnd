@@ -2,13 +2,11 @@
 	"name": "react-dnd-test-utils",
 	"version": "7.6.0",
 	"license": "MIT",
-	"main": "lib/cjs/index.js",
-	"module": "lib/esm/index.js",
+	"main": "lib/index.js",
+	"module": "lib/index.js",
 	"scripts": {
 		"clean": "rimraf lib",
-		"build:cjs": "tsc -b tsconfig.cjs.json",
-		"build:esm": "tsc -b tsconfig.esm.json",
-		"build": "run-p build:*",
+		"build": "tsc -b tsconfig.json",
 		"test": "run-s clean build"
 	},
 	"devDependencies": {

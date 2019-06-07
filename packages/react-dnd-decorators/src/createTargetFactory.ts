@@ -4,7 +4,7 @@ declare var process: any
 import * as React from 'react'
 import { DropTarget } from 'dnd-core'
 import { DropTargetMonitor } from 'react-dnd'
-import { isPlainObject } from 'react-dnd/lib/esm/internals'
+import { isPlainObject } from 'react-dnd/lib/internals'
 import { DropTargetSpec } from './interfaces'
 import { getDecoratedComponent } from './utils/getDecoratedComponent'
 

@@ -2,7 +2,7 @@ declare var require: any
 import * as React from 'react'
 import { SourceType, DragDropManager } from 'dnd-core'
 import { DndOptions } from 'react-dnd'
-import { isPlainObject } from 'react-dnd/lib/esm/internals'
+import { isPlainObject } from 'react-dnd/lib/internals'
 import {
 	DndComponentEnhancer,
 	DragSourceSpec,
@@ -15,7 +15,7 @@ import {
 	DragSourceMonitorImpl,
 	SourceConnector,
 	isValidType,
-} from 'react-dnd/lib/esm/internals'
+} from 'react-dnd/lib/internals'
 import createSourceFactory from './createSourceFactory'
 const invariant = require('invariant')
 

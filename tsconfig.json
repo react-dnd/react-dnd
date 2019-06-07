@@ -1,6 +1,17 @@
 {
-	"extends": "./tsconfig.cjs.base.json",
+	"extends": "./tsconfig.json",
 	"compilerOptions": {
+		"incremental": true,
+		"target": "es2015",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"lib": ["esnext", "dom"],
+		"strict": true,
+		"experimentalDecorators": true,
+		"noUnusedLocals": true,
+		"jsx": "react",
+		"declaration": true,
+
 		"noEmit": true,
 		"baseUrl": ".",
 		"allowSyntheticDefaultImports": true,

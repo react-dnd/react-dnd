@@ -1,7 +1,7 @@
 declare var require: any
 import { createElement } from 'react'
-import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators/lib/esm/index'
-import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/esm/index'
+import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators/lib/index'
+import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/index'
 import { parse } from 'query-string'
 import processImages from './processImagesInMarkdownAst'
 import exampleTabs from '../components/exampleTabs'
