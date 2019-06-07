@@ -1,8 +1,5 @@
 import React from 'react'
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ } from 'react-dnd'
-const {
-	useDrop,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
+import { useDrop } from 'react-dnd'
 
 const style: React.CSSProperties = {
 	height: '12rem',

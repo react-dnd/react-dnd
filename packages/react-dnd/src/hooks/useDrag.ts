@@ -11,7 +11,7 @@ import { useEffect, useRef, useMemo } from 'react'
 const invariant = require('invariant')
 
 /**
- * useDragSource hook (This API is experimental and subject to breaking changes in non-major versions)
+ * useDragSource hook
  * @param sourceSpec The drag source specification *
  */
 export function useDrag<

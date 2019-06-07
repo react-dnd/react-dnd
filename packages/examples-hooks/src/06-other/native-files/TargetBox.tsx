@@ -1,12 +1,6 @@
 import React from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
-import {
-	__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__,
-	DropTargetMonitor,
-} from 'react-dnd'
-const {
-	useDrop,
-} = __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__
+import { useDrop, DropTargetMonitor } from 'react-dnd'
 
 const style: React.CSSProperties = {
 	border: '1px solid gray',
