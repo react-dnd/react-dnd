@@ -19,13 +19,13 @@ The second package will allow React DnD [the HTML5 drag and drop API](https://de
 // Let's make <Card text='Write the docs' /> draggable!
 
 import React from 'react'
-import { useDrag, DragSource } from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import { ItemTypes } from './Constants'
 
 /**
  * Your Component
  */
-export default function Card({ isDragging, dragSource, text }) {
+export default function Card({ isDragging, text }) {
   const [{ opacity }, dragRef] = useDrag({
     item: { type: ItemTypes.CARD, text },
     collect: monitor => ({
