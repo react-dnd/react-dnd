@@ -8,15 +8,6 @@ import rehypeReact from 'rehype-react'
 
 const log = debug('site:renderHtmlAst')
 
-export function isLegacyMode() {
-	if (typeof window !== 'undefined') {
-		const queryObject = parse(window.location.search)
-		return queryObject.legacy !== undefined
-	} else {
-		return false
-	}
-}
-
 // Registers the examples as custom components
 const renderAst = new rehypeReact({
 	createElement,
