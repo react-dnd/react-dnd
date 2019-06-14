@@ -5,7 +5,8 @@ module.exports = {
 	entry: './src/index',
 	mode: 'none',
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js'],
+		extensions: [".tsx", ".ts", ".js", ".json"], 
+		alias: { "dnd-core": require.resolve("dnd-core/lib/cjs") },
 		modules: [
 			path.join(__dirname, 'node_modules'),
 			path.join(__dirname, '..', 'dnd-core', 'node_modules'),
