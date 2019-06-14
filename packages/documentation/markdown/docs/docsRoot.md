@@ -8,11 +8,7 @@ React DnD is a set of React utilities to help you build complex drag and drop in
 ## Installation
 
 ```bash
-# Using npm
-npm i -s react-dnd react-dnd-html5-backend
-
-# Using yarn
-yarn add  react-dnd react-dnd-html5-backend
+yarn add react-dnd react-dnd-html5-backend
 ```
 
 The second package will allow React DnD [the HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop) under the hood. You may choose to use a third-party backend instead, such as [the touch backend](https://github.com/yahoo/react-dnd-touch-backend).
@@ -23,36 +19,25 @@ The second package will allow React DnD [the HTML5 drag and drop API](https://de
 // Let's make <Card text='Write the docs' /> draggable!
 
 import React from 'react'
-import { DragSource } from 'react-dnd'
+import { useDrag, DragSource } from 'react-dnd'
 import { ItemTypes } from './Constants'
 
 /**
  * Your Component
  */
-function Card({ isDragging, dragSource, text }) {
-  const opacity = isDragging ? 0.5 : 1
-  return dragSource(<div style={{ opacity }}>{text}</div>)
+export default function Card({ isDragging, dragSource, text }) {
+  const [{ opacity }, dragRef] = useDrag({
+    item: { type: ItemTypes.CARD, text },
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
+  })
+  return (
+    <div ref={dragRef} style={{ opacity }}>
+      {text}
+    </div>
+  )
 }
-
-/**
- * Implement the drag source contract.
- */
-const cardSource = {
-  beginDrag: props => ({ text: props.text }),
-}
-
-/**
- * Specifies the props to inject into your component.
- */
-function collect(connect, monitor) {
-  return {
-    dragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }
-}
-
-// Export the wrapped component:
-export default DragSource(ItemTypes.CARD, cardSource, collect)(Card)
 ```
 
 ## Features
