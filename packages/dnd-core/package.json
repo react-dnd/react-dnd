@@ -5,6 +5,7 @@
 	"license": "MIT",
 	"main": "./lib/index.js",
 	"module": "./lib/index.js",
+	"type": "module",
 	"types": "./lib/index.d.ts",
 	"scripts": {
 		"build": "tsc -b tsconfig.json",

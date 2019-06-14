@@ -2,6 +2,7 @@
 	"name": "react-dnd-html5-backend",
 	"version": "7.6.0",
 	"description": "HTML5 backend for React DnD",
+	"type": "module",
 	"main": "lib/index.js",
 	"module": "lib/index.js",
 	"types": "lib/index.d.ts",

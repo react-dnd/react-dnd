@@ -2,6 +2,7 @@
 	"name": "react-dnd-test-utils",
 	"version": "7.6.0",
 	"license": "MIT",
+	"type": "module",
 	"main": "lib/index.js",
 	"module": "lib/index.js",
 	"scripts": {

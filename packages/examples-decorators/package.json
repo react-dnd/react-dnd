@@ -4,6 +4,8 @@
 	"private": true,
 	"description": "Drag and Drop for React",
 	"main": "lib/index.js",
+	"type": "module",
+	"module": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"repository": {
 		"type": "git",
