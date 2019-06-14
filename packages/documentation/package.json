@@ -1,7 +1,7 @@
 {
 	"name": "react-dnd-documentation",
 	"description": "React DnD Docsite",
-	"version": "7.6.1",
+	"version": "7.6.2",
 	"private": true,
 	"license": "MIT",
 	"dependencies": {
@@ -31,9 +31,9 @@
 		"query-string": "^6.5.0",
 		"react": "^16.8.6",
 		"react-dnd": "^7.6.1",
-		"react-dnd-examples": "^7.6.1",
-		"react-dnd-examples-hooks": "^7.6.1",
-		"react-dnd-html5-backend": "^7.6.0",
+		"react-dnd-examples": "^7.6.2",
+		"react-dnd-examples-hooks": "^7.6.2",
+		"react-dnd-html5-backend": "^7.6.2",
 		"react-dnd-test-backend": "^7.6.0",
 		"react-dom": "^16.8.6",
 		"react-helmet": "^5.2.0",
