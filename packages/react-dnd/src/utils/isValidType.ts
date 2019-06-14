@@ -1,4 +1,4 @@
-export default function isValidType(type: any, allowArray?: boolean): boolean {
+export function isValidType(type: any, allowArray?: boolean): boolean {
 	return (
 		typeof type === 'string' ||
 		typeof type === 'symbol' ||

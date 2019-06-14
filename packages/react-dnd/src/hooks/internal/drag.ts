@@ -1,4 +1,3 @@
-declare var require: any
 import { useEffect, useMemo, MutableRefObject } from 'react'
 import {
 	DragSourceHookSpec,
@@ -6,11 +5,12 @@ import {
 	DragSourceMonitor,
 } from '../../interfaces'
 import { DragDropMonitor, DragSource } from 'dnd-core'
-import registerSource from '../../registerSource'
+import { registerSource } from '../../common/registration'
 import { useDragDropManager } from './useDragDropManager'
-import DragSourceMonitorImpl from '../../DragSourceMonitorImpl'
-import SourceConnector from '../../SourceConnector'
-const invariant = require('invariant')
+import { DragSourceMonitorImpl } from '../../common/DragSourceMonitorImpl'
+import { SourceConnector } from '../../common/SourceConnector'
+// @ts-ignore
+import invariant from 'invariant'
 
 export function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {
 	const manager = useDragDropManager()
@@ -33,8 +33,6 @@ export function useDragHandler<
 	connector: any,
 ) {
 	const manager = useDragDropManager()
-
-	// Can't use createSourceFactory, as semantics are different
 	const handler = useMemo(() => {
 		return {
 			beginDrag() {

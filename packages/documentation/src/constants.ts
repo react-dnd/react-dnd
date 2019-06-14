@@ -60,9 +60,9 @@ export const APIPages: PageGroup[] = [
 				location: '/docs/api/use-drag-layer',
 				title: 'useDragLayer',
 			},
-			DRAG_DROP_CONTEXT_PROVIDER: {
-				location: '/docs/api/drag-drop-context-provider',
-				title: 'DragDropContextProvider',
+			DND_PROVIDER: {
+				location: '/docs/api/dnd-provider',
+				title: 'DndProvider',
 			},
 			DRAG_PREVIEW_IMAGE: {
 				location: '/docs/api/drag-preview-image',
@@ -92,7 +92,7 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
-		title: 'Connecting to DOM',
+		title: 'Connecting Decorators to DOM',
 		pages: {
 			DRAG_SOURCE_CONNECTOR: {
 				location: '/docs/api/drag-source-connector',

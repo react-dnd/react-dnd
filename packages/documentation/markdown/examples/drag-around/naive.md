@@ -24,6 +24,5 @@ control what happens to dragged preview once the browser has drawn it.
 Check out the [custom rendering example](/examples/drag-around/custom-drag-layer)  
 if you'd rather trade more control for some more work.
 
-<view-source name="02-drag-around/naive">
-  <drag-around-naive></drag-around-naive>
+<view-source name="02-drag-around/naive" component="drag-around-naive">
 </view-source>

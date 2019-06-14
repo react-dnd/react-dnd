@@ -4,22 +4,14 @@ import NavBar from './navbar'
 
 export interface HeaderProps {
 	debugMode?: boolean
-	legacyMode?: boolean
 }
 
-const DebugModeFlag = ({ debugMode, legacyMode }: any) => {
-	if (!debugMode && !legacyMode) {
+const DebugModeFlag = ({ debugMode }: any) => {
+	if (!debugMode) {
 		return null
 	}
 
-	let text = ''
-	if (debugMode && legacyMode) {
-		text = 'Debug Legacy.'
-	} else if (debugMode) {
-		text = 'Debug'
-	} else if (legacyMode) {
-		text = 'Legacy'
-	}
+	const text = debugMode ? 'Debug' : ''
 	return (
 		<a className="github-fork-ribbon" data-ribbon={text} title={text}>
 			{text}
@@ -27,9 +19,9 @@ const DebugModeFlag = ({ debugMode, legacyMode }: any) => {
 	)
 }
 
-const Header: React.FC<HeaderProps> = ({ debugMode, legacyMode }) => (
+const Header: React.FC<HeaderProps> = ({ debugMode }) => (
 	<Container>
-		<DebugModeFlag debugMode={debugMode} legacyMode={legacyMode} />
+		<DebugModeFlag debugMode={debugMode} />
 		<NavBar />
 	</Container>
 )

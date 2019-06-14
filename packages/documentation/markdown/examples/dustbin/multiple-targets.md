@@ -9,6 +9,5 @@ and how those types may be derived from props. It also demonstrates
 the handling of native files and URLs (try dropping them onto the last
 two dustbins).
 
-<view-source name="01-dustbin/multiple-targets">
-  <dustbin-multiple-targets></dustbin-multiple-targets>
+<view-source name="01-dustbin/multiple-targets" component="dustbin-multiple-targets">
 </view-source>

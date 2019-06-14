@@ -2,5 +2,7 @@
 
 # Build directory
 /public
-/static/examples_js
-/static/examples_ts
+/static/examples_hooks_js
+/static/examples_hooks_ts
+/static/examples_decorators_js
+/static/examples_decorators_ts
