@@ -1,8 +1,9 @@
 import React from 'react'
-import { XYCoord, useDragLayer } from 'react-dnd'
+import { DragLayer, XYCoord } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'
 import snapToGrid from './snapToGrid'
+import { Identifier } from 'dnd-core'
 
 const layerStyles: React.CSSProperties = {
   position: 'fixed',
@@ -14,11 +15,8 @@ const layerStyles: React.CSSProperties = {
   height: '100%',
 }
 
-function getItemStyles(
-  initialOffset: XYCoord | null,
-  currentOffset: XYCoord | null,
-  isSnapToGrid: boolean,
-) {
+function getItemStyles(props: CustomDragLayerProps) {
+  const { initialOffset, currentOffset } = props
   if (!initialOffset || !currentOffset) {
     return {
       display: 'none',
@@ -27,7 +25,7 @@ function getItemStyles(
 
   let { x, y } = currentOffset
 
-  if (isSnapToGrid) {
+  if (props.snapToGrid) {
     x -= initialOffset.x
     y -= initialOffset.y
     ;[x, y] = snapToGrid(x, y)
@@ -43,23 +41,16 @@ function getItemStyles(
 }
 
 export interface CustomDragLayerProps {
+  item?: any
+  itemType?: Identifier | null
+  initialOffset?: XYCoord | null
+  currentOffset?: XYCoord | null
+  isDragging?: boolean
   snapToGrid: boolean
 }
 
 const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
-  const {
-    itemType,
-    isDragging,
-    item,
-    initialOffset,
-    currentOffset,
-  } = useDragLayer(monitor => ({
-    item: monitor.getItem(),
-    itemType: monitor.getItemType(),
-    initialOffset: monitor.getInitialSourceClientOffset(),
-    currentOffset: monitor.getSourceClientOffset(),
-    isDragging: monitor.isDragging(),
-  }))
+  const { item, itemType, isDragging } = props
 
   function renderItem() {
     switch (itemType) {
@@ -75,12 +66,15 @@ const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
   }
   return (
     <div style={layerStyles}>
-      <div
-        style={getItemStyles(initialOffset, currentOffset, props.snapToGrid)}
-      >
-        {renderItem()}
-      </div>
+      <div style={getItemStyles(props)}>{renderItem()}</div>
     </div>
   )
 }
-export default CustomDragLayer
+
+export default DragLayer(monitor => ({
+  item: monitor.getItem(),
+  itemType: monitor.getItemType(),
+  initialOffset: monitor.getInitialSourceClientOffset(),
+  currentOffset: monitor.getSourceClientOffset(),
+  isDragging: monitor.isDragging(),
+}))(CustomDragLayer)

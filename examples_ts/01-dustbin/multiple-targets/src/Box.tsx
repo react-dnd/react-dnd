@@ -1,5 +1,10 @@
 import React from 'react'
-import { useDrag } from 'react-dnd'
+import {
+  DragSource,
+  ConnectDragSource,
+  DragSourceConnector,
+  DragSourceMonitor,
+} from 'react-dnd'
 
 const style: React.CSSProperties = {
   border: '1px dashed gray',
@@ -15,21 +20,31 @@ export interface BoxProps {
   name: string
   type: string
   isDropped: boolean
+
+  // Collected Props
+  connectDragSource: ConnectDragSource
+  isDragging: boolean
 }
 
-const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
-  const [{ opacity }, drag] = useDrag({
-    item: { name, type },
-    collect: monitor => ({
-      opacity: monitor.isDragging() ? 0.4 : 1,
-    }),
-  })
-
-  return (
-    <div ref={drag} style={{ ...style, opacity }}>
-      {isDropped ? <s>{name}</s> : name}
-    </div>
+export const Box: React.FC<BoxProps> = ({
+  name,
+  isDropped,
+  isDragging,
+  connectDragSource,
+}) => {
+  const opacity = isDragging ? 0.4 : 1
+  return connectDragSource(
+    <div style={{ ...style, opacity }}>{isDropped ? <s>{name}</s> : name}</div>,
   )
 }
 
-export default Box
+export default DragSource(
+  (props: BoxProps) => props.type,
+  {
+    beginDrag: (props: BoxProps) => ({ name: props.name }),
+  },
+  (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Box)

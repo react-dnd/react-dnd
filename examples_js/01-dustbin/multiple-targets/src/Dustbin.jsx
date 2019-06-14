@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrop } from 'react-dnd'
+import { DropTarget } from 'react-dnd'
 const style = {
   height: '12rem',
   width: '12rem',
@@ -12,15 +12,13 @@ const style = {
   lineHeight: 'normal',
   float: 'left',
 }
-const Dustbin = ({ accept, lastDroppedItem, onDrop }) => {
-  const [{ isOver, canDrop }, drop] = useDrop({
-    accept,
-    drop: onDrop,
-    collect: monitor => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  })
+export const Dustbin = ({
+  accepts,
+  isOver,
+  canDrop,
+  connectDropTarget,
+  lastDroppedItem,
+}) => {
   const isActive = isOver && canDrop
   let backgroundColor = '#222'
   if (isActive) {
@@ -28,16 +26,28 @@ const Dustbin = ({ accept, lastDroppedItem, onDrop }) => {
   } else if (canDrop) {
     backgroundColor = 'darkkhaki'
   }
-  return (
-    <div ref={drop} style={Object.assign({}, style, { backgroundColor })}>
+  return connectDropTarget(
+    <div style={Object.assign({}, style, { backgroundColor })}>
       {isActive
         ? 'Release to drop'
-        : `This dustbin accepts: ${accept.join(', ')}`}
+        : `This dustbin accepts: ${accepts.join(', ')}`}
 
       {lastDroppedItem && (
         <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
       )}
-    </div>
+    </div>,
   )
 }
-export default Dustbin
+export default DropTarget(
+  props => props.accepts,
+  {
+    drop(props, monitor) {
+      props.onDrop(monitor.getItem())
+    },
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  }),
+)(Dustbin)

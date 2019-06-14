@@ -1,5 +1,10 @@
 import React from 'react'
-import { useDrag } from 'react-dnd'
+import {
+  DragSource,
+  DragSourceMonitor,
+  ConnectDragSource,
+  DragSourceConnector,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -12,29 +17,37 @@ const style: React.CSSProperties = {
   float: 'left',
 }
 
-interface BoxProps {
+export interface BoxProps {
   name: string
+
+  // Collected Props
+  isDragging: boolean
+  connectDragSource: ConnectDragSource
 }
-
-const Box: React.FC<BoxProps> = ({ name }) => {
-  const [{ isDragging }, drag] = useDrag({
-    item: { name, type: ItemTypes.BOX },
-    end: (dropResult?: { name: string }) => {
-      if (dropResult) {
-        alert(`You dropped ${name} into ${dropResult.name}!`)
-      }
-    },
-    collect: monitor => ({
-      isDragging: monitor.isDragging(),
-    }),
-  })
+const Box: React.FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
   const opacity = isDragging ? 0.4 : 1
-
   return (
-    <div ref={drag} style={{ ...style, opacity }}>
+    <div ref={connectDragSource} style={{ ...style, opacity }}>
       {name}
     </div>
   )
 }
 
-export default Box
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag: (props: BoxProps) => ({ name: props.name }),
+    endDrag(props: BoxProps, monitor: DragSourceMonitor) {
+      const item = monitor.getItem()
+      const dropResult = monitor.getDropResult()
+
+      if (dropResult) {
+        alert(`You dropped ${item.name} into ${dropResult.name}!`)
+      }
+    },
+  },
+  (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Box)

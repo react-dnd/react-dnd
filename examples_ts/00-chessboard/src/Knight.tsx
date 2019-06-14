@@ -1,5 +1,12 @@
 import React from 'react'
-import { DragPreviewImage, useDrag } from 'react-dnd'
+import {
+  DragSource,
+  ConnectDragSource,
+  ConnectDragPreview,
+  DragSourceConnector,
+  DragSourceMonitor,
+  DragPreviewImage,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
 
@@ -9,19 +16,22 @@ const knightStyle: React.CSSProperties = {
   cursor: 'move',
 }
 
-export const Knight: React.FC = () => {
-  const [{ isDragging }, drag, preview] = useDrag({
-    item: { type: ItemTypes.KNIGHT },
-    collect: monitor => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  })
+export interface KnightProps {
+  connectDragSource: ConnectDragSource
+  connectDragPreview: ConnectDragPreview
+  isDragging?: boolean
+}
 
+const Knight: React.FC<KnightProps> = ({
+  connectDragSource,
+  connectDragPreview,
+  isDragging,
+}) => {
   return (
     <>
-      <DragPreviewImage connect={preview} src={knightImage} />
+      <DragPreviewImage connect={connectDragPreview} src={knightImage} />
       <div
-        ref={drag}
+        ref={connectDragSource}
         style={{
           ...knightStyle,
           opacity: isDragging ? 0.5 : 1,
@@ -32,3 +42,15 @@ export const Knight: React.FC = () => {
     </>
   )
 }
+
+export default DragSource(
+  ItemTypes.KNIGHT,
+  {
+    beginDrag: () => ({}),
+  },
+  (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Knight)

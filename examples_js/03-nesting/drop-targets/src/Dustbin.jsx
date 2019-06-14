@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDrop } from 'react-dnd'
+import React, { useState, useImperativeHandle } from 'react'
+import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 function getStyle(backgroundColor) {
   return {
@@ -16,37 +16,52 @@ function getStyle(backgroundColor) {
     fontSize: '1rem',
   }
 }
-const Dustbin = ({ greedy, children }) => {
-  const [hasDropped, setHasDropped] = useState(false)
-  const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
-  const [{ isOver, isOverCurrent }, drop] = useDrop({
-    accept: ItemTypes.BOX,
-    drop(item, monitor) {
-      const didDrop = monitor.didDrop()
-      if (didDrop && !greedy) {
+const Dustbin = React.forwardRef(
+  ({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) => {
+    const [hasDropped, setHasDropped] = useState(false)
+    const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
+    useImperativeHandle(
+      ref,
+      () => ({
+        onDrop: onChild => {
+          setHasDroppedOnChild(onChild)
+          setHasDropped(true)
+        },
+      }),
+      [],
+    )
+    const text = greedy ? 'greedy' : 'not greedy'
+    let backgroundColor = 'rgba(0, 0, 0, .5)'
+    if (isOverCurrent || (isOver && greedy)) {
+      backgroundColor = 'darkgreen'
+    }
+    return connectDropTarget(
+      <div style={getStyle(backgroundColor)}>
+        {text}
+        <br />
+        {hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
+        <div>{children}</div>
+      </div>,
+    )
+  },
+)
+export default DropTarget(
+  ItemTypes.BOX,
+  {
+    drop(props, monitor, component) {
+      if (!component) {
         return
       }
-      setHasDropped(true)
-      setHasDroppedOnChild(didDrop)
+      const hasDroppedOnChild = monitor.didDrop()
+      if (hasDroppedOnChild && !props.greedy) {
+        return
+      }
+      component.onDrop(hasDroppedOnChild)
     },
-    collect: monitor => ({
-      isOver: monitor.isOver(),
-      isOverCurrent: monitor.isOver({ shallow: true }),
-    }),
-  })
-  const text = greedy ? 'greedy' : 'not greedy'
-  let backgroundColor = 'rgba(0, 0, 0, .5)'
-  if (isOverCurrent || (isOver && greedy)) {
-    backgroundColor = 'darkgreen'
-  }
-  return (
-    <div ref={drop} style={getStyle(backgroundColor)}>
-      {text}
-      <br />
-      {hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
-
-      <div>{children}</div>
-    </div>
-  )
-}
-export default Dustbin
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    isOverCurrent: monitor.isOver({ shallow: true }),
+  }),
+)(Dustbin)

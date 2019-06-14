@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { useDrop } from 'react-dnd'
+import { DropTarget } from 'react-dnd'
 import Colors from './Colors'
 const style = {
   border: '1px solid gray',
@@ -8,19 +8,13 @@ const style = {
   padding: '2rem',
   textAlign: 'center',
 }
-const TargetBox = ({ onDrop, lastDroppedColor }) => {
-  const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
-    accept: [Colors.YELLOW, Colors.BLUE],
-    drop(item) {
-      onDrop(item.type)
-      return undefined
-    },
-    collect: monitor => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-      draggingColor: monitor.getItemType(),
-    }),
-  })
+const TargetBoxRaw = ({
+  canDrop,
+  isOver,
+  draggingColor,
+  lastDroppedColor,
+  connectDropTarget,
+}) => {
   const opacity = isOver ? 1 : 0.7
   let backgroundColor = '#fff'
   switch (draggingColor) {
@@ -33,17 +27,28 @@ const TargetBox = ({ onDrop, lastDroppedColor }) => {
     default:
       break
   }
-  return (
-    <div
-      ref={drop}
-      style={Object.assign({}, style, { backgroundColor, opacity })}
-    >
+  return connectDropTarget(
+    <div style={Object.assign({}, style, { backgroundColor, opacity })}>
       <p>Drop here.</p>
 
       {!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
-    </div>
+    </div>,
   )
 }
+const TargetBox = DropTarget(
+  [Colors.YELLOW, Colors.BLUE],
+  {
+    drop(props, monitor) {
+      props.onDrop(monitor.getItemType())
+    },
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+    draggingColor: monitor.getItemType(),
+  }),
+)(TargetBoxRaw)
 const StatefulTargetBox = props => {
   const [lastDroppedColor, setLastDroppedColor] = useState(null)
   const handleDrop = useCallback(color => setLastDroppedColor(color), [])

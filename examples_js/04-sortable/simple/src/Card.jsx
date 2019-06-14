@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { useDrag, useDrop } from 'react-dnd'
+import React, { useImperativeHandle, useRef } from 'react'
+import { DragSource, DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const style = {
   border: '1px dashed gray',
@@ -8,22 +8,42 @@ const style = {
   backgroundColor: 'white',
   cursor: 'move',
 }
-const Card = ({ id, text, index, moveCard }) => {
-  const ref = useRef(null)
-  const [, drop] = useDrop({
-    accept: ItemTypes.CARD,
-    hover(item, monitor) {
-      if (!ref.current) {
-        return
+const Card = React.forwardRef(
+  ({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
+    const elementRef = useRef(null)
+    connectDragSource(elementRef)
+    connectDropTarget(elementRef)
+    const opacity = isDragging ? 0 : 1
+    useImperativeHandle(ref, () => ({
+      getNode: () => elementRef.current,
+    }))
+    return (
+      <div ref={elementRef} style={Object.assign({}, style, { opacity })}>
+        {text}
+      </div>
+    )
+  },
+)
+export default DropTarget(
+  ItemTypes.CARD,
+  {
+    hover(props, monitor, component) {
+      if (!component) {
+        return null
       }
-      const dragIndex = item.index
-      const hoverIndex = index
+      // node = HTML Div element from imperative API
+      const node = component.getNode()
+      if (!node) {
+        return null
+      }
+      const dragIndex = monitor.getItem().index
+      const hoverIndex = props.index
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
         return
       }
       // Determine rectangle on screen
-      const hoverBoundingRect = ref.current.getBoundingClientRect()
+      const hoverBoundingRect = node.getBoundingClientRect()
       // Get vertical middle
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
@@ -43,26 +63,29 @@ const Card = ({ id, text, index, moveCard }) => {
         return
       }
       // Time to actually perform the action
-      moveCard(dragIndex, hoverIndex)
+      props.moveCard(dragIndex, hoverIndex)
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
       // to avoid expensive index searches.
-      item.index = hoverIndex
+      monitor.getItem().index = hoverIndex
     },
-  })
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.CARD, id, index },
-    collect: monitor => ({
+  },
+  connect => ({
+    connectDropTarget: connect.dropTarget(),
+  }),
+)(
+  DragSource(
+    ItemTypes.CARD,
+    {
+      beginDrag: props => ({
+        id: props.id,
+        index: props.index,
+      }),
+    },
+    (connect, monitor) => ({
+      connectDragSource: connect.dragSource(),
       isDragging: monitor.isDragging(),
     }),
-  })
-  const opacity = isDragging ? 0 : 1
-  drag(drop(ref))
-  return (
-    <div ref={ref} style={Object.assign({}, style, { opacity })}>
-      {text}
-    </div>
-  )
-}
-export default Card
+  )(Card),
+)

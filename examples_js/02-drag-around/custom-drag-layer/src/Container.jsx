@@ -1,52 +1,67 @@
-import React, { useCallback, useState } from 'react'
-import { useDrop } from 'react-dnd'
+import React from 'react'
+import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
-import doSnapToGrid from './snapToGrid'
-import update from 'immutability-helper'
+import snapToGrid from './snapToGrid'
+const update = require('immutability-helper')
 const styles = {
   width: 300,
   height: 300,
   border: '1px solid black',
   position: 'relative',
 }
-function renderBox(item, key) {
-  return <DraggableBox key={key} id={key} {...item} />
-}
-const Container = ({ snapToGrid }) => {
-  const [boxes, setBoxes] = useState({
-    a: { top: 20, left: 80, title: 'Drag me around' },
-    b: { top: 180, left: 20, title: 'Drag me too' },
-  })
-  const moveBox = useCallback(
-    (id, left, top) => {
-      setBoxes(
-        update(boxes, {
+class Container extends React.PureComponent {
+  constructor() {
+    super(...arguments)
+    this.state = {
+      boxes: {
+        a: { top: 20, left: 80, title: 'Drag me around' },
+        b: { top: 180, left: 20, title: 'Drag me too' },
+      },
+    }
+  }
+  render() {
+    const { connectDropTarget } = this.props
+    const { boxes } = this.state
+    return connectDropTarget(
+      <div style={styles}>
+        {Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
+      </div>,
+    )
+  }
+  moveBox(id, left, top) {
+    this.setState(
+      update(this.state, {
+        boxes: {
           [id]: {
             $merge: { left, top },
           },
-        }),
-      )
-    },
-    [boxes],
-  )
-  const [, drop] = useDrop({
-    accept: ItemTypes.BOX,
-    drop(item, monitor) {
+        },
+      }),
+    )
+  }
+  renderBox(item, key) {
+    return <DraggableBox key={key} id={key} {...item} />
+  }
+}
+export default DropTarget(
+  ItemTypes.BOX,
+  {
+    drop(props, monitor, component) {
+      if (!component) {
+        return
+      }
       const delta = monitor.getDifferenceFromInitialOffset()
+      const item = monitor.getItem()
       let left = Math.round(item.left + delta.x)
       let top = Math.round(item.top + delta.y)
-      if (snapToGrid) {
-        ;[left, top] = doSnapToGrid(left, top)
+      if (props.snapToGrid) {
+        ;[left, top] = snapToGrid(left, top)
       }
-      moveBox(item.id, left, top)
-      return undefined
+      component.moveBox(item.id, left, top)
     },
-  })
-  return (
-    <div ref={drop} style={styles}>
-      {Object.keys(boxes).map(key => renderBox(boxes[key], key))}
-    </div>
-  )
-}
-export default Container
+  },
+  connect => ({
+    connectDropTarget: connect.dropTarget(),
+  }),
+)(Container)

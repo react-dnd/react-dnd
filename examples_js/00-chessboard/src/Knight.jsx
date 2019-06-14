@@ -1,5 +1,5 @@
 import React from 'react'
-import { DragPreviewImage, useDrag } from 'react-dnd'
+import { DragSource, DragPreviewImage } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
 const knightStyle = {
@@ -7,18 +7,12 @@ const knightStyle = {
   fontWeight: 'bold',
   cursor: 'move',
 }
-export const Knight = () => {
-  const [{ isDragging }, drag, preview] = useDrag({
-    item: { type: ItemTypes.KNIGHT },
-    collect: monitor => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  })
+const Knight = ({ connectDragSource, connectDragPreview, isDragging }) => {
   return (
     <>
-      <DragPreviewImage connect={preview} src={knightImage} />
+      <DragPreviewImage connect={connectDragPreview} src={knightImage} />
       <div
-        ref={drag}
+        ref={connectDragSource}
         style={Object.assign({}, knightStyle, {
           opacity: isDragging ? 0.5 : 1,
         })}
@@ -28,3 +22,14 @@ export const Knight = () => {
     </>
   )
 }
+export default DragSource(
+  ItemTypes.KNIGHT,
+  {
+    beginDrag: () => ({}),
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Knight)

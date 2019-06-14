@@ -74,7 +74,7 @@ const Container: React.FC = () => {
       <div style={{ overflow: 'hidden', clear: 'both' }}>
         {dustbins.map(({ accepts, lastDroppedItem }, index) => (
           <Dustbin
-            accept={accepts}
+            accepts={accepts}
             lastDroppedItem={lastDroppedItem}
             onDrop={item => handleDrop(index, item)}
             key={index}

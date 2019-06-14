@@ -1,10 +1,15 @@
-import React, { useCallback, useState } from 'react'
-import { useDrop } from 'react-dnd'
+declare var require: any
+import React from 'react'
+import {
+  DropTarget,
+  ConnectDropTarget,
+  DropTargetMonitor,
+  DropTargetConnector,
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
-import doSnapToGrid from './snapToGrid'
-import update from 'immutability-helper'
-import { DragItem } from './interfaces'
+import snapToGrid from './snapToGrid'
+const update = require('immutability-helper')
 
 const styles: React.CSSProperties = {
   width: 300,
@@ -15,59 +20,76 @@ const styles: React.CSSProperties = {
 
 export interface ContainerProps {
   snapToGrid: boolean
+  connectDropTarget: ConnectDropTarget
 }
 
-interface BoxMap {
-  [key: string]: { top: number; left: number; title: string }
+export interface ContainerState {
+  boxes: Record<string, { top: number; left: number; title: string }>
 }
 
-function renderBox(item: any, key: any) {
-  return <DraggableBox key={key} id={key} {...item} />
-}
+class Container extends React.PureComponent<ContainerProps, ContainerState> {
+  public state: ContainerState = {
+    boxes: {
+      a: { top: 20, left: 80, title: 'Drag me around' },
+      b: { top: 180, left: 20, title: 'Drag me too' },
+    },
+  }
 
-const Container: React.FC<ContainerProps> = ({ snapToGrid }) => {
-  const [boxes, setBoxes] = useState<BoxMap>({
-    a: { top: 20, left: 80, title: 'Drag me around' },
-    b: { top: 180, left: 20, title: 'Drag me too' },
-  })
+  public render() {
+    const { connectDropTarget } = this.props
+    const { boxes } = this.state
 
-  const moveBox = useCallback(
-    (id: string, left: number, top: number) => {
-      setBoxes(
-        update(boxes, {
+    return connectDropTarget(
+      <div style={styles}>
+        {Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
+      </div>,
+    )
+  }
+
+  public moveBox(id: string, left: number, top: number) {
+    this.setState(
+      update(this.state, {
+        boxes: {
           [id]: {
             $merge: { left, top },
           },
-        }),
-      )
-    },
-    [boxes],
-  )
+        },
+      }),
+    )
+  }
 
-  const [, drop] = useDrop({
-    accept: ItemTypes.BOX,
-    drop(item: DragItem, monitor) {
+  private renderBox(item: any, key: any) {
+    return <DraggableBox key={key} id={key} {...item} />
+  }
+}
+
+export default DropTarget(
+  ItemTypes.BOX,
+  {
+    drop(
+      props: ContainerProps,
+      monitor: DropTargetMonitor,
+      component: Container | null,
+    ) {
+      if (!component) {
+        return
+      }
       const delta = monitor.getDifferenceFromInitialOffset() as {
         x: number
         y: number
       }
+      const item = monitor.getItem()
 
       let left = Math.round(item.left + delta.x)
       let top = Math.round(item.top + delta.y)
-      if (snapToGrid) {
-        ;[left, top] = doSnapToGrid(left, top)
+      if (props.snapToGrid) {
+        ;[left, top] = snapToGrid(left, top)
       }
 
-      moveBox(item.id, left, top)
-      return undefined
+      component.moveBox(item.id, left, top)
     },
-  })
-
-  return (
-    <div ref={drop} style={styles}>
-      {Object.keys(boxes).map(key => renderBox(boxes[key], key))}
-    </div>
-  )
-}
-
-export default Container
+  },
+  (connect: DropTargetConnector) => ({
+    connectDropTarget: connect.dropTarget(),
+  }),
+)(Container)

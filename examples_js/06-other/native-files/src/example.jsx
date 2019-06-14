@@ -1,18 +1,19 @@
-import React from 'react'
-import { useState, useCallback } from 'react'
+import React, { useState, useMemo } from 'react'
+import { NativeTypes } from 'react-dnd-html5-backend'
 import TargetBox from './TargetBox'
 import FileList from './FileList'
+const { FILE } = NativeTypes
 const Container = () => {
   const [droppedFiles, setDroppedFiles] = useState([])
-  const handleFileDrop = useCallback((item, monitor) => {
+  const accepts = useMemo(() => [FILE], [])
+  const handleFileDrop = (item, monitor) => {
     if (monitor) {
-      const files = monitor.getItem().files
-      setDroppedFiles(files)
+      setDroppedFiles(monitor.getItem().files)
     }
-  }, [])
+  }
   return (
     <>
-      <TargetBox onDrop={handleFileDrop} />
+      <TargetBox accepts={accepts} onDrop={handleFileDrop} />
       <FileList files={droppedFiles} />
     </>
   )

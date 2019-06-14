@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrag } from 'react-dnd'
+import { DragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const style = {
   border: '1px dashed gray',
@@ -16,18 +16,27 @@ const handleStyle = {
   marginRight: '0.75rem',
   cursor: 'move',
 }
-const BoxWithHandle = () => {
-  const [{ opacity }, drag, preview] = useDrag({
-    item: { type: ItemTypes.BOX },
-    collect: monitor => ({
-      opacity: monitor.isDragging() ? 0.4 : 1,
-    }),
-  })
-  return (
-    <div ref={preview} style={Object.assign({}, style, { opacity })}>
-      <div ref={drag} style={handleStyle} />
+const BoxWithHandle = ({
+  isDragging,
+  connectDragSource,
+  connectDragPreview,
+}) => {
+  const opacity = isDragging ? 0.4 : 1
+  return connectDragPreview(
+    <div style={Object.assign({}, style, { opacity })}>
+      {connectDragSource(<div style={handleStyle} />)}
       Drag me by the handle
-    </div>
+    </div>,
   )
 }
-export default BoxWithHandle
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag: () => ({}),
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging(),
+  }),
+)(BoxWithHandle)

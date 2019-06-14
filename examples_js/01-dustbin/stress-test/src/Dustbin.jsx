@@ -1,5 +1,5 @@
-import React from 'react'
-import { useDrop } from 'react-dnd'
+import React, { memo } from 'react'
+import { DropTarget } from 'react-dnd'
 const style = {
   height: '12rem',
   width: '12rem',
@@ -12,32 +12,38 @@ const style = {
   lineHeight: 'normal',
   float: 'left',
 }
-const Dustbin = ({ lastDroppedItem, accepts: accept, onDrop }) => {
-  const [{ isOver, canDrop }, drop] = useDrop({
-    accept,
-    collect: monitor => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-    drop: item => onDrop(item),
-  })
-  const isActive = isOver && canDrop
-  let backgroundColor = '#222'
-  if (isActive) {
-    backgroundColor = 'darkgreen'
-  } else if (canDrop) {
-    backgroundColor = 'darkkhaki'
-  }
-  return (
-    <div ref={drop} style={Object.assign({}, style, { backgroundColor })}>
-      {isActive
-        ? 'Release to drop'
-        : `This dustbin accepts: ${accept.join(', ')}`}
+const Dustbin = memo(
+  ({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem }) => {
+    const isActive = isOver && canDrop
+    let backgroundColor = '#222'
+    if (isActive) {
+      backgroundColor = 'darkgreen'
+    } else if (canDrop) {
+      backgroundColor = 'darkkhaki'
+    }
+    return connectDropTarget(
+      <div style={Object.assign({}, style, { backgroundColor })}>
+        {isActive
+          ? 'Release to drop'
+          : `This dustbin accepts: ${accepts.join(', ')}`}
 
-      {lastDroppedItem && (
-        <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
-      )}
-    </div>
-  )
-}
-export default Dustbin
+        {lastDroppedItem && (
+          <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
+        )}
+      </div>,
+    )
+  },
+)
+export default DropTarget(
+  props => props.accepts,
+  {
+    drop(props, monitor) {
+      props.onDrop(monitor.getItem())
+    },
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  }),
+)(Dustbin)

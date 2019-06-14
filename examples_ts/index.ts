@@ -31,7 +31,7 @@ export const componentIndex: {
   'drag-around-naive': dragAroundNaive,
   'nesting-drag-sources': nestingDragSources,
   'nesting-drop-targets': nestingDropTargets,
-  'sortable-cancel-on-drop-outside': sortableCancelOnDropOutside,
+  'sortable-cancel-on-drop-outside': sortableCancelOnDropOutside as any,
   'sortable-simple': sortableSimple,
   'sortable-stress-test': sortableStressTest,
   'customize-drop-effects': customizeDropEffects,

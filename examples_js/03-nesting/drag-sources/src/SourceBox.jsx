@@ -1,44 +1,39 @@
-import React, { useState, useCallback, useMemo } from 'react'
-import { useDrag } from 'react-dnd'
+import React, { useState, useCallback } from 'react'
+import { DragSource } from 'react-dnd'
 import Colors from './Colors'
 const style = {
   border: '1px dashed gray',
   padding: '0.5rem',
   margin: '0.5rem',
 }
-const SourceBox = ({ color, children }) => {
-  const [forbidDrag, setForbidDrag] = useState(false)
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: `${color}` },
-    canDrag: !forbidDrag,
-    collect: monitor => ({
-      isDragging: monitor.isDragging(),
-    }),
-  })
-  const onToggleForbidDrag = useCallback(() => {
-    setForbidDrag(!forbidDrag)
-  }, [forbidDrag])
-  const backgroundColor = useMemo(() => {
-    switch (color) {
-      case Colors.YELLOW:
-        return 'lightgoldenrodyellow'
-      case Colors.BLUE:
-        return 'lightblue'
-      default:
-        return 'lightgoldenrodyellow'
-    }
-  }, [color])
-  const containerStyle = useMemo(
-    () =>
-      Object.assign({}, style, {
+const SourceBoxRaw = ({
+  color,
+  children,
+  isDragging,
+  connectDragSource,
+  forbidDrag,
+  onToggleForbidDrag,
+}) => {
+  const opacity = isDragging ? 0.4 : 1
+  let backgroundColor
+  switch (color) {
+    case Colors.YELLOW:
+      backgroundColor = 'lightgoldenrodyellow'
+      break
+    case Colors.BLUE:
+      backgroundColor = 'lightblue'
+      break
+    default:
+      break
+  }
+  return connectDragSource(
+    <div
+      style={Object.assign({}, style, {
         backgroundColor,
-        opacity: isDragging ? 0.4 : 1,
+        opacity,
         cursor: forbidDrag ? 'default' : 'move',
-      }),
-    [isDragging, forbidDrag, backgroundColor],
-  )
-  return (
-    <div ref={drag} style={containerStyle}>
+      })}
+    >
       <input
         type="checkbox"
         checked={forbidDrag}
@@ -46,7 +41,31 @@ const SourceBox = ({ color, children }) => {
       />
       <small>Forbid drag</small>
       {children}
-    </div>
+    </div>,
   )
 }
-export default SourceBox
+const SourceBox = DragSource(
+  props => props.color + '',
+  {
+    canDrag: props => !props.forbidDrag,
+    beginDrag: () => ({}),
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }),
+)(SourceBoxRaw)
+const StatefulSourceBox = props => {
+  const [forbidDrag, setForbidDrag] = useState(false)
+  const handleToggleForbidDrag = useCallback(() => {
+    setForbidDrag(!forbidDrag)
+  }, [forbidDrag])
+  return (
+    <SourceBox
+      {...props}
+      forbidDrag={forbidDrag}
+      onToggleForbidDrag={() => handleToggleForbidDrag()}
+    />
+  )
+}
+export default StatefulSourceBox

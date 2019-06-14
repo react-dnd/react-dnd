@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrop } from 'react-dnd'
+import { DropTarget, ConnectDropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -17,40 +17,47 @@ const style: React.CSSProperties = {
 
 export interface DustbinProps {
   allowedDropEffect: string
+  connectDropTarget: ConnectDropTarget
+  canDrop: boolean
+  isOver: boolean
 }
 
-function selectBackgroundColor(isActive: boolean, canDrop: boolean) {
-  if (isActive) {
-    return 'darkgreen'
-  } else if (canDrop) {
-    return 'darkkhaki'
-  } else {
-    return '#222'
-  }
-}
-
-const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
-  const [{ canDrop, isOver }, drop] = useDrop({
-    accept: ItemTypes.BOX,
-    drop: () => ({
-      name: `${allowedDropEffect} Dustbin`,
-      allowedDropEffect,
-    }),
-    collect: (monitor: any) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  })
-
+const Dustbin: React.FC<DustbinProps> = ({
+  canDrop,
+  isOver,
+  allowedDropEffect,
+  connectDropTarget,
+}) => {
   const isActive = canDrop && isOver
-  const backgroundColor = selectBackgroundColor(isActive, canDrop)
-  return (
-    <div ref={drop} style={{ ...style, backgroundColor }}>
+
+  let backgroundColor = '#222'
+  if (isActive) {
+    backgroundColor = 'darkgreen'
+  } else if (canDrop) {
+    backgroundColor = 'darkkhaki'
+  }
+
+  return connectDropTarget(
+    <div style={{ ...style, backgroundColor }}>
       {`Works with ${allowedDropEffect} drop effect`}
       <br />
       <br />
       {isActive ? 'Release to drop' : 'Drag a box here'}
-    </div>
+    </div>,
   )
 }
-export default Dustbin
+
+export default DropTarget(
+  ItemTypes.BOX,
+  {
+    drop: ({ allowedDropEffect }: DustbinProps) => ({
+      name: `${allowedDropEffect} Dustbin`,
+      allowedDropEffect,
+    }),
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  }),
+)(Dustbin)

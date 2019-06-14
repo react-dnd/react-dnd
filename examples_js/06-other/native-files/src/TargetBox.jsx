@@ -1,6 +1,5 @@
 import React from 'react'
-import { NativeTypes } from 'react-dnd-html5-backend'
-import { useDrop } from 'react-dnd'
+import { DropTarget } from 'react-dnd'
 const style = {
   border: '1px solid gray',
   height: '15rem',
@@ -8,25 +7,24 @@ const style = {
   padding: '2rem',
   textAlign: 'center',
 }
-const TargetBox = props => {
-  const { onDrop } = props
-  const [{ canDrop, isOver }, drop] = useDrop({
-    accept: [NativeTypes.FILE],
-    drop(item, monitor) {
-      if (onDrop) {
-        onDrop(props, monitor)
-      }
-    },
-    collect: monitor => ({
-      isOver: monitor.isOver,
-      canDrop: monitor.canDrop,
-    }),
-  })
+const TargetBox = ({ canDrop, isOver, connectDropTarget }) => {
   const isActive = canDrop && isOver
-  return (
-    <div ref={drop} style={style}>
-      {isActive ? 'Release to drop' : 'Drag file here'}
-    </div>
+  return connectDropTarget(
+    <div style={style}>{isActive ? 'Release to drop' : 'Drag file here'}</div>,
   )
 }
-export default TargetBox
+export default DropTarget(
+  props => props.accepts,
+  {
+    drop(props, monitor) {
+      if (props.onDrop) {
+        props.onDrop(props, monitor)
+      }
+    },
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  }),
+)(TargetBox)

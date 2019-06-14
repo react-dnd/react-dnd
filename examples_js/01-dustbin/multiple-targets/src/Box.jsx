@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrag } from 'react-dnd'
+import { DragSource } from 'react-dnd'
 const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
@@ -9,17 +9,21 @@ const style = {
   cursor: 'move',
   float: 'left',
 }
-const Box = ({ name, type, isDropped }) => {
-  const [{ opacity }, drag] = useDrag({
-    item: { name, type },
-    collect: monitor => ({
-      opacity: monitor.isDragging() ? 0.4 : 1,
-    }),
-  })
-  return (
-    <div ref={drag} style={Object.assign({}, style, { opacity })}>
+export const Box = ({ name, isDropped, isDragging, connectDragSource }) => {
+  const opacity = isDragging ? 0.4 : 1
+  return connectDragSource(
+    <div style={Object.assign({}, style, { opacity })}>
       {isDropped ? <s>{name}</s> : name}
-    </div>
+    </div>,
   )
 }
-export default Box
+export default DragSource(
+  props => props.type,
+  {
+    beginDrag: props => ({ name: props.name }),
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Box)

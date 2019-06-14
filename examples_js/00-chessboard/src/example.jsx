@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Board from './Board'
 import { observe } from './Game'
 const containerStyle = {
@@ -14,10 +14,8 @@ const ChessboardTutorialApp = () => {
   // the observe function will return an unsubscribe callback
   useEffect(() => observe(newPos => setKnightPos(newPos)))
   return (
-    <div>
-      <div style={containerStyle}>
-        <Board knightPosition={knightPos} />
-      </div>
+    <div style={containerStyle}>
+      <Board knightPosition={knightPos} />
     </div>
   )
 }

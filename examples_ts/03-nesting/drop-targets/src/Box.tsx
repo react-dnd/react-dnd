@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrag } from 'react-dnd'
+import { DragSource, ConnectDragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style = {
@@ -10,12 +10,19 @@ const style = {
   cursor: 'move',
 }
 
-const Box: React.FC = () => {
-  const [, drag] = useDrag({ item: { type: ItemTypes.BOX } })
-  return (
-    <div ref={drag} style={style}>
-      Drag me
-    </div>
-  )
+export interface BoxProps {
+  connectDragSource: ConnectDragSource
 }
-export default Box
+
+const Box: React.FC<BoxProps> = ({ connectDragSource }) =>
+  connectDragSource(<div style={style}>Drag me</div>)
+
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag: () => ({}),
+  },
+  connect => ({
+    connectDragSource: connect.dragSource(),
+  }),
+)(Box)

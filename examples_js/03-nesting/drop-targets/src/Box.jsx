@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrag } from 'react-dnd'
+import { DragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 const style = {
   display: 'inline-block',
@@ -8,12 +8,14 @@ const style = {
   backgroundColor: 'white',
   cursor: 'move',
 }
-const Box = () => {
-  const [, drag] = useDrag({ item: { type: ItemTypes.BOX } })
-  return (
-    <div ref={drag} style={style}>
-      Drag me
-    </div>
-  )
-}
-export default Box
+const Box = ({ connectDragSource }) =>
+  connectDragSource(<div style={style}>Drag me</div>)
+export default DragSource(
+  ItemTypes.BOX,
+  {
+    beginDrag: () => ({}),
+  },
+  connect => ({
+    connectDragSource: connect.dragSource(),
+  }),
+)(Box)

@@ -1,6 +1,6 @@
 import React from 'react'
-import { BoardSquare } from './BoardSquare'
-import { Knight } from './Knight'
+import BoardSquare from './BoardSquare'
+import { Piece } from './Piece'
 
 export interface BoardProps {
   knightPosition: [number, number]
@@ -30,14 +30,10 @@ const Board: React.FC<BoardProps> = ({
     return (
       <div key={i} style={squareStyle}>
         <BoardSquare x={x} y={y}>
-          {renderPiece(x, y)}
+          <Piece isKnight={x === knightX && y === knightY} />
         </BoardSquare>
       </div>
     )
-  }
-  function renderPiece(x: number, y: number) {
-    const isKnightHere = x === knightX && y === knightY
-    return isKnightHere ? <Knight /> : null
   }
 
   const squares = []

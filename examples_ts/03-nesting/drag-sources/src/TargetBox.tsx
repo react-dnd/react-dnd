@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { useDrop } from 'react-dnd'
+import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import Colors from './Colors'
-import { DragItem } from './interfaces'
 
 const style: React.CSSProperties = {
   border: '1px solid gray',
@@ -14,22 +13,20 @@ const style: React.CSSProperties = {
 export interface TargetBoxProps {
   onDrop: (item: any) => void
   lastDroppedColor?: string
+
+  isOver: boolean
+  canDrop: boolean
+  draggingColor: string
+  connectDropTarget: ConnectDropTarget
 }
 
-const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
-  const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
-    accept: [Colors.YELLOW, Colors.BLUE],
-    drop(item: DragItem) {
-      onDrop(item.type)
-      return undefined
-    },
-    collect: monitor => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-      draggingColor: monitor.getItemType() as string,
-    }),
-  })
-
+const TargetBoxRaw: React.FC<TargetBoxProps> = ({
+  canDrop,
+  isOver,
+  draggingColor,
+  lastDroppedColor,
+  connectDropTarget,
+}) => {
   const opacity = isOver ? 1 : 0.7
   let backgroundColor = '#fff'
   switch (draggingColor) {
@@ -43,18 +40,30 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
       break
   }
 
-  return (
-    <div ref={drop} style={{ ...style, backgroundColor, opacity }}>
+  return connectDropTarget(
+    <div style={{ ...style, backgroundColor, opacity }}>
       <p>Drop here.</p>
 
       {!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
-    </div>
+    </div>,
   )
 }
 
-export interface StatefulTargetBoxState {
-  lastDroppedColor: string | null
-}
+const TargetBox = DropTarget(
+  [Colors.YELLOW, Colors.BLUE],
+  {
+    drop(props: TargetBoxProps, monitor: DropTargetMonitor) {
+      props.onDrop(monitor.getItemType())
+    },
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+    draggingColor: monitor.getItemType() as string,
+  }),
+)(TargetBoxRaw)
+
 export interface StatefulTargetBoxState {
   lastDroppedColor: string | null
 }

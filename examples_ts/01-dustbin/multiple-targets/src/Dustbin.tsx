@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrop } from 'react-dnd'
+import { DropTarget, ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 
 const style: React.CSSProperties = {
   height: '12rem',
@@ -15,26 +15,25 @@ const style: React.CSSProperties = {
 }
 
 export interface DustbinProps {
-  accept: string[]
+  accepts: string[]
   lastDroppedItem?: any
   onDrop: (item: any) => void
+
+  // Collected Props
+  canDrop: boolean
+  isOver: boolean
+  connectDropTarget: ConnectDropTarget
 }
 
-const Dustbin: React.FC<DustbinProps> = ({
-  accept,
+export const Dustbin: React.FC<DustbinProps> = ({
+  accepts,
+  isOver,
+  canDrop,
+  connectDropTarget,
   lastDroppedItem,
-  onDrop,
 }) => {
-  const [{ isOver, canDrop }, drop] = useDrop({
-    accept,
-    drop: onDrop,
-    collect: monitor => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  })
-
   const isActive = isOver && canDrop
+
   let backgroundColor = '#222'
   if (isActive) {
     backgroundColor = 'darkgreen'
@@ -42,17 +41,29 @@ const Dustbin: React.FC<DustbinProps> = ({
     backgroundColor = 'darkkhaki'
   }
 
-  return (
-    <div ref={drop} style={{ ...style, backgroundColor }}>
+  return connectDropTarget(
+    <div style={{ ...style, backgroundColor }}>
       {isActive
         ? 'Release to drop'
-        : `This dustbin accepts: ${accept.join(', ')}`}
+        : `This dustbin accepts: ${accepts.join(', ')}`}
 
       {lastDroppedItem && (
         <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
       )}
-    </div>
+    </div>,
   )
 }
 
-export default Dustbin
+export default DropTarget(
+  (props: DustbinProps) => props.accepts,
+  {
+    drop(props: DustbinProps, monitor: DropTargetMonitor) {
+      props.onDrop(monitor.getItem())
+    },
+  },
+  (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  }),
+)(Dustbin)
