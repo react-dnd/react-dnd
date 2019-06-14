@@ -96,7 +96,6 @@
 		],
 		"moduleNameMapper": {
 			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
-			"^react-dnd-decorators$": "<rootDir>/packages/react-dnd-decorators/src",
 			"^react-dnd-html5-backend$": "<rootDir>//packages/react-dnd-html5-backend/src",
 			"^react-dnd-test-backend$": "<rootDir>//packages/react-dnd-test-backend/src",
 			"^react-dnd-test-utils$": "<rootDir>//packages/react-dnd-test-utils/src",
