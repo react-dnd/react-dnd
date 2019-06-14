@@ -429,16 +429,12 @@ We need this to specify that we're going to use the [HTML5Backend](/docs/backend
 
 ```jsx
 import React from 'react'
-import { DragDropContextProvider } from 'react-dnd'
+import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 function Board() {
   /* ... */
-  return (
-    <DragDropContextProvider backend={HTML5Backend}>
-      ...
-    </DragDropContextProvider>
-  )
+  return <DndProvider backend={HTML5Backend}>...</DndProvider>
 }
 ```
 
