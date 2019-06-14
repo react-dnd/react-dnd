@@ -1,6 +1,10 @@
 import React from 'react'
-import { DropTargetMonitor, ConnectDropTarget } from 'react-dnd'
-import { DropTarget, DropTargetConnector } from 'react-dnd'
+import {
+	DropTarget,
+	DropTargetMonitor,
+	DropTargetConnector,
+	ConnectDropTarget,
+} from 'react-dnd'
 import { Square } from './Square'
 import { canMoveKnight, moveKnight } from './Game'
 import ItemTypes from './ItemTypes'

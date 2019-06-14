@@ -1,11 +1,12 @@
 import React from 'react'
 import {
+	DragSource,
 	ConnectDragSource,
 	ConnectDragPreview,
+	DragSourceConnector,
 	DragSourceMonitor,
 	DragPreviewImage,
 } from 'react-dnd'
-import { DragSource, DragSourceConnector } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
 
