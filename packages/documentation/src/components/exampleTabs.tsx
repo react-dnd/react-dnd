@@ -39,13 +39,21 @@ const ExampleTabs: React.FC<ExampleTabsProps> = ({ name, component }) => {
 			<TabPanel>
 				<div style={{ height: '100%', width: '100%', position: 'relative' }}>
 					<button
-						style={{ top: 0, right: 0 }}
+						style={{
+							top: 0,
+							right: 0,
+							position: 'absolute',
+							backgroundColor: 'transparent',
+							border: '0.5 px solid lightgrey',
+							fontWeight: 300,
+							borderRadius: 5,
+						}}
 						onClick={useCallback(() => setShowHooks(!showHooks), [
 							showHooks,
 							setShowHooks,
 						])}
 					>
-						{showHooks ? 'Hooks Mode' : 'Decorator Mode'}
+						{showHooks ? 'Using Hooks' : 'Using Decorators'}
 					</button>
 					<ExampleComponent />
 				</div>
