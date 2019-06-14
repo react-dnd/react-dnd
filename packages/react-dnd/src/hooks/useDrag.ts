@@ -1,4 +1,3 @@
-declare var require: any
 import {
 	DragSourceHookSpec,
 	DragObjectWithType,
@@ -8,7 +7,8 @@ import {
 import { useMonitorOutput } from './internal/useMonitorOutput'
 import { useDragSourceMonitor, useDragHandler } from './internal/drag'
 import { useEffect, useRef, useMemo } from 'react'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 /**
  * useDragSource hook

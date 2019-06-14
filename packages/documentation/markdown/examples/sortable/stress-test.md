@@ -21,6 +21,5 @@ scrolling with a parent drop target that compares
 handler. In fact, you are welcome to contribute this functionality to
 this example!
 
-<view-source name="04-sortable/stress-test">
-  <sortable-stress-test></sortable-stress-test>
+<view-source name="04-sortable/stress-test" component="sortable-stress-test">
 </view-source>

@@ -132,11 +132,7 @@ function walk_examples(dir, look_for, done) {
 	})
 }
 
-// Write JS Examples
-walk_examples(path.join(__dirname, 'static/examples_js'), 'index.jsx', function(
-	err,
-	results,
-) {
+function handleJsExample(err, results) {
 	if (err) throw err
 	results.forEach((exampleIndex, index) => {
 		const exampleDir = path.dirname(exampleIndex)
@@ -181,13 +177,9 @@ walk_examples(path.join(__dirname, 'static/examples_js'), 'index.jsx', function(
 		const envFile = path.join(exampleDir, '.env')
 		fs.writeFileSync(envFile, `SKIP_PREFLIGHT_CHECK = true`)
 	})
-})
+}
 
-// Write TS Examples
-walk_examples(path.join(__dirname, 'static/examples_ts'), 'index.tsx', function(
-	err,
-	results,
-) {
+function handleTsExample(err, results) {
 	if (err) throw err
 	results.forEach((exampleIndex, index) => {
 		const exampleDir = path.dirname(exampleIndex)
@@ -232,4 +224,28 @@ walk_examples(path.join(__dirname, 'static/examples_ts'), 'index.tsx', function(
 		const envFile = path.join(exampleDir, '.env')
 		fs.writeFileSync(envFile, `SKIP_PREFLIGHT_CHECK = true`)
 	})
-})
+}
+
+// Write JS Examples
+walk_examples(
+	path.join(__dirname, 'static/examples_hooks_js'),
+	'index.jsx',
+	handleJsExample,
+)
+walk_examples(
+	path.join(__dirname, 'static/examples_decorators_js'),
+	'index.jsx',
+	handleJsExample,
+)
+
+// Write TS Examples
+walk_examples(
+	path.join(__dirname, 'static/examples_hooks_ts'),
+	'index.tsx',
+	handleTsExample,
+)
+walk_examples(
+	path.join(__dirname, 'static/examples_decorators_ts'),
+	'index.tsx',
+	handleTsExample,
+)
