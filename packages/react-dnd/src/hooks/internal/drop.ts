@@ -5,10 +5,10 @@ import {
 } from '../../interfaces'
 import { useEffect, useMemo, MutableRefObject } from 'react'
 import { DropTarget } from 'dnd-core'
-import registerTarget from '../../registerTarget'
+import { registerTarget } from '../../common/registration'
 import { useDragDropManager } from './useDragDropManager'
-import TargetConnector from '../../TargetConnector'
-import DropTargetMonitorImpl from '../../DropTargetMonitorImpl'
+import { TargetConnector } from '../../common/TargetConnector'
+import { DropTargetMonitorImpl } from '../../common/DropTargetMonitorImpl'
 
 export function useDropTargetMonitor(): [DropTargetMonitor, TargetConnector] {
 	const manager = useDragDropManager()
@@ -31,8 +31,6 @@ export function useDropHandler<
 	connector: any,
 ) {
 	const manager = useDragDropManager()
-
-	// Can't use createSourceFactory, as semantics are different
 	const handler = useMemo(() => {
 		return {
 			canDrop() {

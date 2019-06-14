@@ -8,8 +8,8 @@ import {
 } from '../../interfaces'
 import { DROP } from './types'
 import { isObject } from '../../utils/discount_lodash'
-declare var require: any
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 export default function createDrop<Context>(manager: DragDropManager<Context>) {
 	return function drop(options = {}): void {

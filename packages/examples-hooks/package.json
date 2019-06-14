@@ -3,8 +3,10 @@
 	"version": "7.6.2",
 	"private": true,
 	"description": "Drag and Drop for React",
-	"main": "lib/cjs/index.js",
-	"types": "lib/cjs/index.d.ts",
+	"type": "module",
+	"main": "lib/esm/index.js",
+	"types": "lib/esm/index.d.ts",
+	"module": "lib/esm/index.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/react-dnd/react-dnd.git"
@@ -12,21 +14,20 @@
 	"license": "MIT",
 	"scripts": {
 		"clean": "rimraf lib",
-		"build:cjs": "tsc -b tsconfig.cjs.json",
-		"build:esm": "tsc -b tsconfig.esm.json",
+		"build:ts": "tsc -b tsconfig.json",
 		"build:docs": "tsc -b tsconfig.docs.json",
 		"build": "run-p build:*",
 		"test": "run-s clean build",
-		"start": "tsc -b tsconfig.cjs.json -w --preserveWatchOutput"
+		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
 		"@types/faker": "^4.1.5",
 		"@types/query-string": "^6.2.0",
-		"dnd-core": "^7.6.0",
+		"dnd-core": "^7.6.2",
 		"faker": "^4.1.0",
 		"immutability-helper": "^3.0.0",
 		"query-string": "^6.5.0",
-		"react-dnd": "^7.6.1",
+		"react-dnd": "^7.6.2",
 		"react-dnd-html5-backend": "^7.6.2",
 		"react-frame-component": "^4.1.0"
 	},
@@ -35,7 +36,7 @@
 		"@types/react-dom": "^16.8.4",
 		"npm-run-all": "^4.1.5",
 		"react": "^16.8.6",
-		"react-dnd-test-utils": "^7.6.1",
+		"react-dnd-test-utils": "^7.6.2",
 		"react-dom": "^16.8.6",
 		"rimraf": "^2.6.3",
 		"typescript": "^3.5.1"

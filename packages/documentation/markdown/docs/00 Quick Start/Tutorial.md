@@ -424,7 +424,7 @@ In the future, you might want to explore alternative third-party backends, such 
 
 ## Setting up the Drag and Drop Context
 
-The first thing we need to set up in our app is the [`DragDropContextProvider`](/docs/api/drag-drop-context-provider). This should be mounted near the top of our application.
+The first thing we need to set up in our app is the [`DndProvider`](/docs/api/dnd-provider). This should be mounted near the top of our application.
 We need this to specify that we're going to use the [HTML5Backend](/docs/backends/html5).
 
 ```jsx
