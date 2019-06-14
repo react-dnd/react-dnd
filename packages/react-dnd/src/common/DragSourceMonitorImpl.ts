@@ -7,7 +7,7 @@ import {
 	Listener,
 	Identifier,
 } from 'dnd-core'
-import { DragSourceMonitor } from './interfaces'
+import { DragSourceMonitor } from '../interfaces'
 const invariant = require('invariant')
 
 let isCallingCanDrag = false

@@ -6,10 +6,10 @@ import {
 	DragSourceMonitor,
 } from '../../interfaces'
 import { DragDropMonitor, DragSource } from 'dnd-core'
-import { registerSource } from '../../registration'
+import { registerSource } from '../../common/registration'
 import { useDragDropManager } from './useDragDropManager'
-import { DragSourceMonitorImpl } from '../../DragSourceMonitorImpl'
-import { SourceConnector } from '../../SourceConnector'
+import { DragSourceMonitorImpl } from '../../common/DragSourceMonitorImpl'
+import { SourceConnector } from '../../common/SourceConnector'
 const invariant = require('invariant')
 
 export function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {

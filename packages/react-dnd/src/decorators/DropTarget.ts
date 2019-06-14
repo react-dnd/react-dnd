@@ -1,21 +1,19 @@
 declare var require: any
 import * as React from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
-import { DndOptions } from 'react-dnd'
-import {
-	registerTarget,
-	isValidType,
-	TargetConnector,
-	DropTargetMonitorImpl,
-	isPlainObject,
-} from 'react-dnd/lib/esm/internals'
+import { DndOptions } from '../interfaces'
+import { isPlainObject } from '../utils/discount_lodash'
+import { registerTarget } from '../common/registration'
+import { isValidType } from '../utils/isValidType'
+import { TargetConnector } from '../common/TargetConnector'
+import { DropTargetMonitorImpl } from '../common/DropTargetMonitorImpl'
 import {
 	DropTargetSpec,
 	DropTargetCollector,
 	DndComponentEnhancer,
 	DndComponent,
 } from './interfaces'
-import checkDecoratorArguments from './utils/checkDecoratorArguments'
+import { checkDecoratorArguments } from './utils'
 import decorateHandler from './decorateHandler'
 import createTargetFactory from './createTargetFactory'
 const invariant = require('invariant')

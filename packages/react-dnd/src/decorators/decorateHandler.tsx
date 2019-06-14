@@ -3,15 +3,16 @@ declare var process: any
 
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
-import { DndContext } from 'react-dnd'
-import { Connector, isPlainObject } from 'react-dnd/lib/esm/internals'
+import { DndContext } from '../index'
+import { isPlainObject } from '../utils/discount_lodash'
+import { Connector } from '../common/SourceConnector'
 import { DndComponent } from './interfaces'
 import {
 	Disposable,
 	CompositeDisposable,
 	SerialDisposable,
-} from './utils/disposables'
-import { isRefable } from './utils/isRefable'
+} from './disposables'
+import { isRefable } from './utils'
 const invariant = require('invariant')
 const hoistStatics = require('hoist-non-react-statics')
 const shallowEqual = require('shallowequal')

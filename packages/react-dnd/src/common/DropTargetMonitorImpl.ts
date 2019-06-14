@@ -6,7 +6,7 @@ import {
 	Listener,
 	Identifier,
 } from 'dnd-core'
-import { DropTargetMonitor } from './interfaces'
+import { DropTargetMonitor } from '../interfaces'
 const invariant = require('invariant')
 
 let isCallingCanDrop = false

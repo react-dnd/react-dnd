@@ -3,10 +3,10 @@ declare var process: any
 
 import * as React from 'react'
 import { DropTarget } from 'dnd-core'
-import { DropTargetMonitor } from 'react-dnd'
-import { isPlainObject } from 'react-dnd/lib/esm/internals'
+import { DropTargetMonitor } from '../interfaces'
+import { isPlainObject } from '../utils/discount_lodash'
 import { DropTargetSpec } from './interfaces'
-import { getDecoratedComponent } from './utils/getDecoratedComponent'
+import { getDecoratedComponent } from './utils'
 
 const invariant = require('invariant')
 

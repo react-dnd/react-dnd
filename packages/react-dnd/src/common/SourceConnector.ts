@@ -2,8 +2,8 @@ declare var require: any
 import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
-import { isRef } from './utils/isRef'
-import { DragSourceOptions, DragPreviewOptions } from './interfaces'
+import { isRef } from '../utils/isRef'
+import { DragSourceOptions, DragPreviewOptions } from '../interfaces'
 const shallowEqual = require('shallowequal')
 
 export interface Connector {

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ConnectDragPreview } from './interfaces'
+import { ConnectDragPreview } from '../interfaces'
 
 interface DragPreviewImageProps {
 	connect: ConnectDragPreview

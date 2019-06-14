@@ -2,7 +2,7 @@ declare var require: any
 import * as React from 'react'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
-import { isRef } from './utils/isRef'
+import { isRef } from '../utils/isRef'
 const shallowEqual = require('shallowequal')
 
 import { Connector } from './SourceConnector'

@@ -1,7 +1,7 @@
 declare var require: any
 import { useContext } from 'react'
 import { DragDropManager } from 'dnd-core'
-import { DndContext } from '../../DndContext'
+import { DndContext } from '../../common/DndContext'
 const invariant = require('invariant')
 
 /**

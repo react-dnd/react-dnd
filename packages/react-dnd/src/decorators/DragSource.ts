@@ -1,21 +1,19 @@
 declare var require: any
 import * as React from 'react'
 import { SourceType, DragDropManager } from 'dnd-core'
-import { DndOptions } from 'react-dnd'
-import { isPlainObject } from 'react-dnd/lib/esm/internals'
+import { DndOptions } from '../interfaces'
+import { isPlainObject } from '../utils/discount_lodash'
 import {
 	DndComponentEnhancer,
 	DragSourceSpec,
 	DragSourceCollector,
 } from './interfaces'
-import checkDecoratorArguments from './utils/checkDecoratorArguments'
+import { checkDecoratorArguments } from './utils'
 import decorateHandler from './decorateHandler'
-import {
-	registerSource,
-	DragSourceMonitorImpl,
-	SourceConnector,
-	isValidType,
-} from 'react-dnd/lib/esm/internals'
+import { registerSource } from '../common/registration'
+import { DragSourceMonitorImpl } from '../common/DragSourceMonitorImpl'
+import { SourceConnector } from '../common/SourceConnector'
+import { isValidType } from '../utils/isValidType'
 import createSourceFactory from './createSourceFactory'
 const invariant = require('invariant')
 

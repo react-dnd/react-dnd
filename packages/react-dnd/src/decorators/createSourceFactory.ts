@@ -2,10 +2,10 @@ declare var require: any
 declare var process: any
 import * as React from 'react'
 import { DragSource, DragDropMonitor } from 'dnd-core'
-import { DragSourceMonitor } from 'react-dnd'
-import { isPlainObject } from 'react-dnd/lib/esm/internals'
+import { DragSourceMonitor } from '../interfaces'
+import { isPlainObject } from '../utils/discount_lodash'
 import { DragSourceSpec } from './interfaces'
-import { getDecoratedComponent } from './utils/getDecoratedComponent'
+import { getDecoratedComponent } from './utils'
 
 const invariant = require('invariant')
 
