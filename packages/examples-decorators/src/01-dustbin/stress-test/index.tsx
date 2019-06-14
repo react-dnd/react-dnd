@@ -1,11 +1,11 @@
-declare var require: any
 import React, { useState, useEffect, useCallback } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
 import update from 'immutability-helper'
-const shuffle = require('lodash/shuffle')
+// @ts-ignore
+import shuffle from 'lodash/shuffle'
 
 export interface SourceBox {
 	name: string

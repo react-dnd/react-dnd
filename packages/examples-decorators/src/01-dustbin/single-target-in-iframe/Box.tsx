@@ -1,6 +1,6 @@
 import React from 'react'
 import { DragSourceMonitor, ConnectDragSource } from 'react-dnd'
-import { DragSource, DragSourceConnector } from 'react-dnd-decorators'
+import { DragSource, DragSourceConnector } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {

@@ -1,4 +1,3 @@
-declare var require: any
 import * as React from 'react'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { DndContext, DndOptions } from '../index'
@@ -6,9 +5,12 @@ import { isPlainObject } from '../utils/discount_lodash'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable, checkDecoratorArguments } from './utils'
 
-const hoistStatics = require('hoist-non-react-statics')
-const invariant = require('invariant')
-const shallowEqual = require('shallowequal')
+// @ts-ignore
+import hoistStatics from 'hoist-non-react-statics'
+// @ts-ignore
+import invariant from 'invariant'
+// @ts-ignore
+import shallowEqual from 'shallowequal'
 
 export function DragLayer<RequiredProps, CollectedProps = {}>(
 	collect: DragLayerCollector<RequiredProps, CollectedProps>,
@@ -145,6 +147,6 @@ export function DragLayer<RequiredProps, CollectedProps = {}>(
 			}
 		}
 
-		return hoistStatics(DragLayerContainer, DecoratedComponent)
+		return hoistStatics(DragLayerContainer, DecoratedComponent) as any
 	} as any) as DndComponentEnhancer<CollectedProps>
 }

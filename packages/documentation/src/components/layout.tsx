@@ -4,7 +4,7 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
-import { isDebugMode } from 'react-dnd-examples-hooks/lib/esm/index'
+import { isDebugMode } from 'react-dnd-examples-hooks/lib/index'
 import { DndProvider } from 'react-dnd'
 import PageBody from './pagebody'
 import Sidebar from './sidebar'
@@ -13,7 +13,7 @@ import { APIPages, ExamplePages } from '../constants'
 import Header from './header'
 import './layout.css'
 import { isLegacyMode } from '../util/renderHtmlAst'
-require('prismjs/themes/prism.css')
+import 'prismjs/themes/prism.css'
 const favicon = require('../favicon.png')
 
 export interface LayoutProps {

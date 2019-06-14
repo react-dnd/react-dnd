@@ -1,4 +1,3 @@
-declare var require: any
 declare var process: any
 
 import * as React from 'react'
@@ -8,8 +7,8 @@ import { isPlainObject } from '../utils/discount_lodash'
 import { DropTargetSpec } from './interfaces'
 import { getDecoratedComponent } from './utils'
 
-const invariant = require('invariant')
-
+// @ts-ignore
+import invariant from 'invariant'
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 
 export interface Target extends DropTarget {

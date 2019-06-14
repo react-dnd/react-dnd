@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConnectDropTarget, DropTargetMonitor, XYCoord } from 'react-dnd'
-import { DropTarget } from 'react-dnd-decorators'
+import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import Box from './Box'
 import update from 'immutability-helper'

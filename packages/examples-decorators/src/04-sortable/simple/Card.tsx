@@ -10,7 +10,7 @@ import {
 	DropTarget,
 	DropTargetConnector,
 	DragSourceConnector,
-} from 'react-dnd-decorators'
+} from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { XYCoord } from 'dnd-core'
 

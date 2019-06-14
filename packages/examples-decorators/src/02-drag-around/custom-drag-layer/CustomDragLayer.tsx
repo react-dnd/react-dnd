@@ -1,6 +1,6 @@
 import React from 'react'
 import { XYCoord } from 'react-dnd'
-import { DragLayer } from 'react-dnd-decorators'
+import { DragLayer } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import BoxDragPreview from './BoxDragPreview'
 import snapToGrid from './snapToGrid'

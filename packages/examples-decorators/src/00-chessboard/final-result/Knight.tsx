@@ -5,7 +5,7 @@ import {
 	DragSourceMonitor,
 	DragPreviewImage,
 } from 'react-dnd'
-import { DragSource, DragSourceConnector } from 'react-dnd-decorators'
+import { DragSource, DragSourceConnector } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import knightImage from './knightImage'
 

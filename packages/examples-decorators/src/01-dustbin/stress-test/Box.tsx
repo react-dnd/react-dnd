@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { DragSourceMonitor, ConnectDragSource } from 'react-dnd'
-import { DragSource, DragSourceConnector } from 'react-dnd-decorators'
+import { DragSource, DragSourceConnector } from 'react-dnd'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',

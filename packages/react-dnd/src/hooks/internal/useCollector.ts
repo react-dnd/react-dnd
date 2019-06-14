@@ -1,5 +1,5 @@
-declare var require: any
-const shallowEqual = require('shallowequal')
+// @ts-ignore
+import shallowEqual from 'shallowequal'
 import { useState, useCallback } from 'react'
 
 /**

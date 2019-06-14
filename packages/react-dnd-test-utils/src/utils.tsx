@@ -1,10 +1,6 @@
 import * as React from 'react'
 import TestBackendImpl, { TestBackend } from 'react-dnd-test-backend'
-import {
-	DragDropContext,
-	ContextComponent,
-	DndComponent,
-} from 'react-dnd-decorators'
+import { DragDropContext, ContextComponent, DndComponent } from 'react-dnd'
 import { Backend } from 'dnd-core'
 import { act } from 'react-dom/test-utils'
 

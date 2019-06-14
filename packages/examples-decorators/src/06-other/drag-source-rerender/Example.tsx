@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { ConnectDragSource } from 'react-dnd'
-import { DragSource } from 'react-dnd-decorators'
+import { DragSource } from 'react-dnd'
 
 interface ParentProps {
 	isDragging: boolean

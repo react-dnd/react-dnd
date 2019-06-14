@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"incremental": true,
-		"target": "es2015",
+		"target": "esnext",
 		"module": "esnext",
 		"moduleResolution": "node",
 		"lib": ["esnext", "dom"],

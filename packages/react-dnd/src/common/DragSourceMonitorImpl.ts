@@ -1,5 +1,3 @@
-declare var require: any
-
 import {
 	DragDropManager,
 	DragDropMonitor,
@@ -8,7 +6,8 @@ import {
 	Identifier,
 } from 'dnd-core'
 import { DragSourceMonitor } from '../interfaces'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 let isCallingCanDrag = false
 let isCallingIsDragging = false

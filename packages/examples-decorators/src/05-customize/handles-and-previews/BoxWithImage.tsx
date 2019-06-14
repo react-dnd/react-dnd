@@ -4,7 +4,7 @@ import {
 	ConnectDragSource,
 	DragPreviewImage,
 } from 'react-dnd'
-import { DragSource } from 'react-dnd-decorators'
+import { DragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import boxImage from './boxImage'
 

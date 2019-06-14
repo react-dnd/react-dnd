@@ -1,5 +1,5 @@
 import React, { useState, useImperativeHandle } from 'react'
-import { DropTarget } from 'react-dnd-decorators'
+import { DropTarget } from 'react-dnd'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 

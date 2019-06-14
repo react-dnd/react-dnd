@@ -1,8 +1,8 @@
 {
-	"extends": "../../tsconfig.esm.base.json",
+	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
 		"allowSyntheticDefaultImports": true,
-		"outDir": "./lib/esm",
+		"outDir": "./lib",
 		"baseUrl": "./"
 	},
 	"include": ["./src/index.ts"]

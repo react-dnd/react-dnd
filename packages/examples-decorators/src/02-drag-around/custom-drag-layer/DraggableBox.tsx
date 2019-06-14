@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConnectDragSource, ConnectDragPreview } from 'react-dnd'
-import { DragSource } from 'react-dnd-decorators'
+import { DragSource } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import ItemTypes from './ItemTypes'
 import Box from './Box'

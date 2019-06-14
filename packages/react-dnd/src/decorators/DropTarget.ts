@@ -1,4 +1,3 @@
-declare var require: any
 import * as React from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
 import { DndOptions } from '../interfaces'
@@ -16,7 +15,8 @@ import {
 import { checkDecoratorArguments } from './utils'
 import decorateHandler from './decorateHandler'
 import createTargetFactory from './createTargetFactory'
-const invariant = require('invariant')
+// @ts-ignore
+import invariant from 'invariant'
 
 export function DropTarget<RequiredProps, CollectedProps = {}>(
 	type: TargetType | ((props: RequiredProps) => TargetType),

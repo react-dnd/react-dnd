@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConnectDropTarget } from 'react-dnd'
-import { DropTarget } from 'react-dnd-decorators'
+import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {

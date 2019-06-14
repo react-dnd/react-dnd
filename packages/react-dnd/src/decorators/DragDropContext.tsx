@@ -1,11 +1,12 @@
-declare var require: any
 import * as React from 'react'
 import { DndContext, createDndContext } from '../common/DndContext'
 import { BackendFactory } from 'dnd-core'
 import { checkDecoratorArguments, isRefable } from './utils'
 import { ContextComponent } from './interfaces'
-const invariant = require('invariant')
-const hoistStatics = require('hoist-non-react-statics')
+// @ts-ignore
+import invariant from 'invariant'
+// @ts-ignore
+import hoistStatics from 'hoist-non-react-statics'
 
 /**
  * Wrap the root component of your application with DragDropContext decorator to set up React DnD.
@@ -63,9 +64,9 @@ export function DragDropContext(
 			}
 		}
 
-		return hoistStatics(
+		return (hoistStatics(
 			DragDropContextContainer,
 			DecoratedComponent,
-		) as TargetClass & DragDropContextContainer
+		) as any) as TargetClass & DragDropContextContainer
 	}
 }
