@@ -1,9 +1,8 @@
 import * as React from 'react'
-import { DndContext, createDndContext } from 'react-dnd'
+import { DndContext, createDndContext } from '../common/DndContext'
 import { BackendFactory } from 'dnd-core'
-import checkDecoratorArguments from './utils/checkDecoratorArguments'
+import { checkDecoratorArguments, isRefable } from './utils'
 import { ContextComponent } from './interfaces'
-import { isRefable } from './utils/isRefable'
 // @ts-ignore
 import invariant from 'invariant'
 // @ts-ignore

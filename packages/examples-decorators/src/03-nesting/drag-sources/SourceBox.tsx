@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { ConnectDragSource, DragSourceMonitor } from 'react-dnd'
-import { DragSource, DragSourceConnector } from 'react-dnd-decorators'
+import { DragSource, DragSourceConnector } from 'react-dnd'
 import Colors from './Colors'
 
 const style: React.CSSProperties = {

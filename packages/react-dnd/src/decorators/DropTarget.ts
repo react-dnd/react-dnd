@@ -1,20 +1,18 @@
 import * as React from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
-import { DndOptions } from 'react-dnd'
-import {
-	__registerTarget as registerTarget,
-	__isValidType as isValidType,
-	__TargetConnector as TargetConnector,
-	__DropTargetMonitorImpl as DropTargetMonitorImpl,
-	__isPlainObject as isPlainObject,
-} from 'react-dnd'
+import { DndOptions } from '../interfaces'
+import { isPlainObject } from '../utils/discount_lodash'
+import { registerTarget } from '../common/registration'
+import { isValidType } from '../utils/isValidType'
+import { TargetConnector } from '../common/TargetConnector'
+import { DropTargetMonitorImpl } from '../common/DropTargetMonitorImpl'
 import {
 	DropTargetSpec,
 	DropTargetCollector,
 	DndComponentEnhancer,
 	DndComponent,
 } from './interfaces'
-import checkDecoratorArguments from './utils/checkDecoratorArguments'
+import { checkDecoratorArguments } from './utils'
 import decorateHandler from './decorateHandler'
 import createTargetFactory from './createTargetFactory'
 // @ts-ignore

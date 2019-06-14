@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
-import { DropTarget, DropTargetConnector } from 'react-dnd-decorators'
+import { DropTarget, DropTargetConnector } from 'react-dnd'
 
 const style: React.CSSProperties = {
 	border: '1px solid gray',

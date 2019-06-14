@@ -5,7 +5,7 @@ import {
 	DragSourceMonitor,
 	DropTargetMonitor,
 } from 'react-dnd'
-import { DragSource, DropTarget } from 'react-dnd-decorators'
+import { DragSource, DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style = {

@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { DragSource, DropTarget } from 'react-dnd-decorators'
+import { DragSource, DropTarget } from 'react-dnd'
 import {
 	ConnectDragSource,
 	ConnectDropTarget,

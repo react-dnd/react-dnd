@@ -7,7 +7,7 @@ import {
 	ConnectDragPreview,
 	ConnectDropTarget,
 	ConnectDragSource,
-} from 'react-dnd'
+} from '../interfaces'
 import { NonReactStatics } from 'hoist-non-react-statics'
 
 /**

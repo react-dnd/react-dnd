@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
-import { DropTarget, DropTargetConnector } from 'react-dnd-decorators'
+import { DropTarget, DropTargetConnector } from 'react-dnd'
 
 const style: React.CSSProperties = {
 	height: '12rem',

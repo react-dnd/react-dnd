@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConnectDragSource } from 'react-dnd'
-import { DragSource } from 'react-dnd-decorators'
+import { DragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style = {

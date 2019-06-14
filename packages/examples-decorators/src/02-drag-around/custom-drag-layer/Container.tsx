@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
-import { DropTarget, DropTargetConnector } from 'react-dnd-decorators'
+import { DropTarget, DropTargetConnector } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'

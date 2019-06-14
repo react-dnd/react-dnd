@@ -4,6 +4,8 @@
 	"private": true,
 	"description": "Drag and Drop for React",
 	"main": "lib/index.js",
+	"type": "module",
+	"module": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"repository": {
 		"type": "git",
@@ -26,7 +28,6 @@
 		"immutability-helper": "^3.0.0",
 		"query-string": "^6.5.0",
 		"react-dnd": "^7.6.0",
-		"react-dnd-decorators": "^7.6.0",
 		"react-dnd-html5-backend": "^7.6.0",
 		"react-frame-component": "^4.1.0"
 	},

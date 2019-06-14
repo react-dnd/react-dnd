@@ -2,18 +2,16 @@ declare var process: any
 
 import * as React from 'react'
 import { DragDropManager, Identifier } from 'dnd-core'
-import { DndContext } from 'react-dnd'
-import {
-	__Connector as Connector,
-	__isPlainObject as isPlainObject,
-} from 'react-dnd'
+import { DndContext } from '../index'
+import { isPlainObject } from '../utils/discount_lodash'
+import { Connector } from '../common/SourceConnector'
 import { DndComponent } from './interfaces'
 import {
 	Disposable,
 	CompositeDisposable,
 	SerialDisposable,
-} from './utils/disposables'
-import { isRefable } from './utils/isRefable'
+} from './disposables'
+import { isRefable } from './utils'
 // @ts-ignore
 import invariant from 'invariant'
 // @ts-ignore

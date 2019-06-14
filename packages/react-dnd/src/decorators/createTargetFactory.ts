@@ -2,10 +2,10 @@ declare var process: any
 
 import * as React from 'react'
 import { DropTarget } from 'dnd-core'
-import { DropTargetMonitor } from 'react-dnd'
-import { __isPlainObject as isPlainObject } from 'react-dnd'
+import { DropTargetMonitor } from '../interfaces'
+import { isPlainObject } from '../utils/discount_lodash'
 import { DropTargetSpec } from './interfaces'
-import { getDecoratedComponent } from './utils/getDecoratedComponent'
+import { getDecoratedComponent } from './utils'
 
 // @ts-ignore
 import invariant from 'invariant'

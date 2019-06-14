@@ -9,7 +9,7 @@ import {
 } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
 import { TestBackend } from 'react-dnd-test-backend'
-import { DndComponent as DndC } from 'react-dnd-decorators'
+import { DndComponent as DndC } from 'react-dnd'
 
 describe('Dustbin: Multiple Targets', () => {
 	it('behaves as expected', () => {

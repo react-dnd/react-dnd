@@ -1,10 +1,9 @@
 import * as React from 'react'
-import checkDecoratorArguments from './utils/checkDecoratorArguments'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
-import { DndContext, DndOptions } from 'react-dnd'
-import { __isPlainObject as isPlainObject } from 'react-dnd'
+import { DndContext, DndOptions } from '../index'
+import { isPlainObject } from '../utils/discount_lodash'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
-import { isRefable } from './utils/isRefable'
+import { isRefable, checkDecoratorArguments } from './utils'
 
 // @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'

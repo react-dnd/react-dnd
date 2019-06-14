@@ -3,7 +3,7 @@ import Box from '../Box'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
 import { TestBackend } from 'react-dnd-test-backend'
-import { ContextComponent } from 'react-dnd-decorators'
+import { ContextComponent } from 'react-dnd'
 
 describe('Box', () => {
 	// TODO: test utils are acting wonking with function components.

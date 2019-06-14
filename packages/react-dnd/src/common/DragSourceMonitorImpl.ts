@@ -5,7 +5,7 @@ import {
 	Listener,
 	Identifier,
 } from 'dnd-core'
-import { DragSourceMonitor } from './interfaces'
+import { DragSourceMonitor } from '../interfaces'
 // @ts-ignore
 import invariant from 'invariant'
 

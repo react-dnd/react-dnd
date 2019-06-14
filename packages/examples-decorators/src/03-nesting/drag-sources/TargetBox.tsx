@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
-import { DropTarget } from 'react-dnd-decorators'
+import { DropTarget } from 'react-dnd'
 import Colors from './Colors'
 
 const style: React.CSSProperties = {
