@@ -1,7 +1,7 @@
 import { createDragDropManager } from 'dnd-core'
 import * as React from 'react'
 import * as TestUtils from 'react-dom/test-utils'
-import { DndContext } from '../DndContext'
+import { DndContext } from '..'
 import TestBackend from 'react-dnd-test-backend'
 
 describe('DragDropContextProvider', () => {

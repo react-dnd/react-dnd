@@ -5,11 +5,10 @@ title: 'DndProvider'
 
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
-# DragDropContextProvider
+# DndProvider
 
-As an alternative to the DragDropContext, you can use the DragDropContextProvider element
-to set up React DnD for your application. Similar to the DragDropContext, this may be
-injected with a backend via the `backend` prop, but it also can be injected with a `window` object.
+The DndProvider component provides React-DnD capabilities to your application. This must be
+injected with a backend via the `backend` prop, but it may can be injected with a `window` object.
 
 ### Usage
 
