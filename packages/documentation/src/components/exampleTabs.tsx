@@ -1,9 +1,8 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators/lib/index'
-import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/index'
-import { decorator } from '@babel/types'
+import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators/lib/esm/index'
+import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/esm/index'
 
 export interface ExampleTabsProps {
 	name: string
@@ -18,16 +17,17 @@ const frameStyle: React.CSSProperties = {
 	overflow: 'hidden',
 }
 
-const tsUrl = (name: string) =>
-	`https://codesandbox.io/embed/github/react-dnd/react-dnd/tree/gh-pages/examples_ts/${name}?fontsize=14`
-const jsUrl = (name: string) =>
-	`https://codesandbox.io/embed/github/react-dnd/react-dnd/tree/gh-pages/examples_js/${name}?fontsize=14`
+const tsUrl = (name: string, mode: 'decorators' | 'hooks') =>
+	`https://codesandbox.io/embed/github/react-dnd/react-dnd/tree/gh-pages/examples_${mode}_ts/${name}?fontsize=14`
+const jsUrl = (name: string, mode: 'decorators' | 'hooks') =>
+	`https://codesandbox.io/embed/github/react-dnd/react-dnd/tree/gh-pages/examples_${mode}_js/${name}?fontsize=14`
 
 const ExampleTabs: React.FC<ExampleTabsProps> = ({ name, component }) => {
 	const [showHooks, setShowHooks] = useState(true)
 	const ExampleComponent = showHooks
 		? hookComponentIndex[component]
 		: decoratorComponentIndex[component]
+	const mode = useMemo(() => (showHooks ? 'hooks' : 'decorators'), [showHooks])
 
 	return (
 		<Tabs>
@@ -60,14 +60,14 @@ const ExampleTabs: React.FC<ExampleTabsProps> = ({ name, component }) => {
 			</TabPanel>
 			<TabPanel>
 				<iframe
-					src={jsUrl(name)}
+					src={jsUrl(name, mode)}
 					style={frameStyle}
 					sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 				/>
 			</TabPanel>
 			<TabPanel>
 				<iframe
-					src={tsUrl(name)}
+					src={tsUrl(name, mode)}
 					style={frameStyle}
 					sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 				/>

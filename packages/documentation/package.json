@@ -56,12 +56,14 @@
 		"prettier": "^1.18.0"
 	},
 	"scripts": {
-		"clean": "rimraf .cache public apidocs static/examples_js static/examples_ts",
+		"clean": "rimraf .cache public apidocs static/examples_decorators_js static/examples_decorators_ts static/examples_hooks_js static/examples_hooks_ts",
 		"start": "gatsby develop",
-		"copy_examples:js": "cp -r ../examples-hooks/lib/docs static/examples_js",
-		"copy_examples:ts": "cp -r ../examples-hooks/src static/examples_ts",
+		"copy_examples:js_hooks": "cp -r ../examples-hooks/lib/docs static/examples_hooks_js",
+		"copy_examples:ts_hooks": "cp -r ../examples-hooks/src static/examples_hooks_ts",
+		"copy_examples:js_decorators": "cp -r ../examples-decorators/lib/docs static/examples_decorators_js",
+		"copy_examples:ts_decorators": "cp -r ../examples-decorators/src static/examples_decorators_ts",
 		"copy_examples": "run-s copy_examples:*",
-		"prune_buildinfo": "rm static/examples_js/tsconfig.docs.tsbuildinfo",
+		"prune_buildinfo": "rimraf static/examples_hooks_js/tsconfig.docs.tsbuildinfo static/examples_decorators_js/tsconfig.docs.tsbuildinfo",
 		"format_examples": "prettier 'static/examples_*/**/*' --use-tabs=false --write",
 		"write_example_boilerplate": "node write_sample_boilerplate.js",
 		"process_examples": "run-s copy_examples prune_buildinfo format_examples write_example_boilerplate",

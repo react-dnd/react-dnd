@@ -4,9 +4,9 @@
 	"private": true,
 	"description": "Drag and Drop for React",
 	"type": "module",
-	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
-	"module": "lib/index.js",
+	"main": "lib/esm/index.js",
+	"types": "lib/esm/index.d.ts",
+	"module": "lib/esm/index.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/react-dnd/react-dnd.git"

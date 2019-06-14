@@ -9,6 +9,7 @@
 		"experimentalDecorators": true,
 		"noUnusedLocals": true,
 		"jsx": "react",
+		"forceConsistentCasingInFileNames": true,
 		"declaration": true
 	}
 }
