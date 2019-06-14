@@ -1,14 +1,16 @@
-const webpack = require('webpack')
 const path = require('path')
 
-module.exports = {
-	entry: './src/index',
-	mode: 'none',
+const commonConfig = {
+	entry: './index.ts',
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js'],
+		extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+		alias: {
+			'dnd-core': path.join(__dirname, '..', 'dnd-core', 'src', 'index.ts'),
+		},
 		modules: [
-			path.join(__dirname, 'node_modules'),
+			path.join(__dirname, '..', 'react-dnd'),
 			path.join(__dirname, '..', 'dnd-core', 'node_modules'),
+			path.join(__dirname, '..', 'react-dnd', 'node_modules'),
 			path.join(__dirname, '..', '..', 'node_modules'),
 		],
 	},
@@ -18,12 +20,26 @@ module.exports = {
 			{
 				test: /\.ts(x|)$/,
 				exclude: /node_modules/,
-				use: {
-					loader: 'ts-loader',
-					options: { transpileOnly: true },
-				},
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							presets: ['@babel/preset-env'],
+						},
+					},
+					{
+						loader: 'ts-loader',
+						options: {
+							transpileOnly: true,
+						},
+					},
+				],
 			},
 		],
+	},
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		libraryTarget: 'umd',
 	},
 	externals: [
 		{
@@ -35,15 +51,29 @@ module.exports = {
 			},
 		},
 	],
-	output: {
-		libraryTarget: 'umd',
-		library: 'ReactDnD',
-	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('production'),
+}
+
+module.exports = (env, { mode }) => {
+	return [
+		{
+			...commonConfig,
+			context: path.resolve(__dirname, '../react-dnd/src'),
+			output: {
+				...commonConfig.output,
+				library: 'ReactDnD',
+				filename: `ReactDnD.${mode === 'production' ? 'min.' : ''}js`,
 			},
-		}),
-	],
+		},
+		{
+			...commonConfig,
+			context: path.resolve(__dirname, '../react-dnd-html5-backend/src'),
+			output: {
+				...commonConfig.output,
+				library: 'ReactDnDHTML5Backend',
+				filename: `ReactDnDHTML5Backend.${
+					mode === 'production' ? 'min.' : ''
+				}js`,
+			},
+		},
+	]
 }
