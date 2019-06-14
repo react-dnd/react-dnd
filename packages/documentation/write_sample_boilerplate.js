@@ -1,6 +1,9 @@
 /* eslint-disable */
 const fs = require('fs')
 const path = require('path')
+const reactDndVersion = require('../react-dnd/package.json').version
+const reactDndHtml5BackendVersion = require('../react-dnd-html5-backend/package.json')
+	.version
 
 const APP_FILE_CONTENT = `
 	import React from 'react'
@@ -78,8 +81,8 @@ const makePackageJson = (index, isTS) => {
 			react: '16.8.4',
 			'react-dom': '16.8.4',
 			'react-scripts': '2.1.8',
-			'react-dnd': '*',
-			'react-dnd-html5-backend': '*',
+			'react-dnd': reactDndVersion,
+			'react-dnd-html5-backend': reactDndHtml5BackendVersion,
 			'babel-jest': '23.6.0',
 			faker: '^4.1.0',
 			'immutability-helper': '^3.0.0',
