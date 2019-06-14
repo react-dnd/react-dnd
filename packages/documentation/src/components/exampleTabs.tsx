@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
+import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators/lib/index'
+import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/index'
+import { decorator } from '@babel/types'
 
 export interface ExampleTabsProps {
 	name: string
+	component: string
 }
 
 const frameStyle: React.CSSProperties = {
@@ -19,7 +23,12 @@ const tsUrl = (name: string) =>
 const jsUrl = (name: string) =>
 	`https://codesandbox.io/embed/github/react-dnd/react-dnd/tree/gh-pages/examples_js/${name}?fontsize=14`
 
-const ExampleTabs: React.FC<ExampleTabsProps> = ({ name, children }) => {
+const ExampleTabs: React.FC<ExampleTabsProps> = ({ name, component }) => {
+	const [showHooks, setShowHooks] = useState(true)
+	const ExampleComponent = showHooks
+		? hookComponentIndex[component]
+		: decoratorComponentIndex[component]
+
 	return (
 		<Tabs>
 			<TabList>
@@ -27,7 +36,20 @@ const ExampleTabs: React.FC<ExampleTabsProps> = ({ name, children }) => {
 				<Tab>JavaScript</Tab>
 				<Tab>TypeScript</Tab>
 			</TabList>
-			<TabPanel>{children}</TabPanel>
+			<TabPanel>
+				<div style={{ height: '100%', width: '100%', position: 'relative' }}>
+					<button
+						style={{ top: 0, right: 0 }}
+						onClick={useCallback(() => setShowHooks(!showHooks), [
+							showHooks,
+							setShowHooks,
+						])}
+					>
+						{showHooks ? 'Hooks Mode' : 'Decorator Mode'}
+					</button>
+					<ExampleComponent />
+				</div>
+			</TabPanel>
 			<TabPanel>
 				<iframe
 					src={jsUrl(name)}

@@ -8,6 +8,5 @@ you can tweak the behavior to the one your app needs.
 
 In this example, instead of moving the card inside the drop target's `drop()` handler, we do it inside the drag source's `endDrag()` handler. This let us check `monitor.didDrop()` and revert the drag operation if the card was dropped outside its container.
 
-<view-source name="04-sortable/cancel-on-drop-outside">
-  <sortable-cancel-on-drop-outside></sortable-cancel-on-drop-outside>
+<view-source name="04-sortable/cancel-on-drop-outside" component="sortable-cancel-on-drop-outside">
 </view-source>

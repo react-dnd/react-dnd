@@ -1,6 +1,4 @@
 import { createElement } from 'react'
-import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators/lib/index'
-import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/index'
 import { parse } from 'query-string'
 import processImages from './processImagesInMarkdownAst'
 import exampleTabs from '../components/exampleTabs'
@@ -24,7 +22,6 @@ const renderAst = new rehypeReact({
 	createElement,
 	components: {
 		'view-source': exampleTabs,
-		...(isLegacyMode() ? decoratorComponentIndex : hookComponentIndex),
 	},
 }).Compiler
 

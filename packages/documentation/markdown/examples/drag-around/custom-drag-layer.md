@@ -19,6 +19,5 @@ With this approach, we miss out on default “return” animation when
 dropping outside the container. However, we get great flexibility in
 customizing drag feedback and zero flicker.
 
-<view-source name="02-drag-around/custom-drag-layer">
-  <drag-around-custom-drag-layer></drag-around-custom-drag-layer>
+<view-source name="02-drag-around/custom-drag-layer" component="drag-around-custom-drag-layer">
 </view-source>

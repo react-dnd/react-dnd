@@ -9,6 +9,5 @@ It illustrates creating the drag sources and the drop targets, using
 the monitors to query the current drag state, and customizing the drag
 previews.
 
-<view-source name="00-chessboard">
-  <chessboard></chessboard>
+<view-source name="00-chessboard" component="chessboard">
 </view-source>
