@@ -1,0 +1,16 @@
+{
+	"name": "react-dnd-umd-builds",
+	"version": "7.6.0",
+	"license": "MIT",
+	"scripts": {},
+	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@babel/preset-env": "^7.4.5",
+		"babel-loader": "^8.0.6",
+		"react-dnd": "^7.6.0",
+		"react-dnd-html5-backend": "^7.6.0",
+		"webpack": "^4.34.0",
+		"webpack-cli": "^3.3.4"
+	},
+	"browserslist": "> 0.25%, not dead"
+}
