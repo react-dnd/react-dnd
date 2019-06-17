@@ -1,8 +1,8 @@
 /* eslint-disable */
 const fs = require('fs')
 const path = require('path')
-const reactDndVersion = require('../react-dnd/package.json').version
-const reactDndHtml5BackendVersion = require('../react-dnd-html5-backend/package.json')
+const reactDndVersion = require('../../core/react-dnd/package.json').version
+const reactDndHtml5BackendVersion = require('../../core/html5-backend/package.json')
 	.version
 
 const APP_FILE_CONTENT = `
