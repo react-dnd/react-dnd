@@ -47,6 +47,7 @@
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
 		"prepublishOnly": "npm test",
+		"preinstall": "node packages/alternative_builds/cjs/create_cjs_modules.js",
 		"start": "lerna run --parallel --stream start",
 		"watch": "lerna run --parallel --stream watch"
 	},
