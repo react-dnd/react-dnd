@@ -149,7 +149,11 @@
 	},
 	"workspaces": {
 		"packages": [
-			"packages/*"
+			"packages/alternative_builds/cjs/*",
+			"packages/alternative_builds/umd",
+			"packages/documentation/*",
+			"packages/testing/*",
+			"packages/core/*"
 		]
 	},
 	"dependencies": {

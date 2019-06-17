@@ -40,7 +40,9 @@ export default class MonotonicInterpolant {
 				dx = dxs[i]
 				const dxNext = dxs[i + 1]
 				const common = dx + dxNext
-				c1s.push(3 * common / ((common + dxNext) / m2 + (common + dx) / mNext))
+				c1s.push(
+					(3 * common) / ((common + dxNext) / m2 + (common + dx) / mNext),
+				)
 			}
 		}
 		c1s.push(ms[ms.length - 1])

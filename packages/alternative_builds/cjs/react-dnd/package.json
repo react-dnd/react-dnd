@@ -1,0 +1,9 @@
+{
+	"name": "react-dnd-cjs",
+	"main": "lib/index.js",
+	"typings": "lib/index.d.ts",
+	"version": "8.0.0",
+	"devDependencies": {
+		"react-dnd": "^8.0.0"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "dnd-core-cjs",
+	"main": "lib/index.js",
+	"typings": "lib/index.d.ts",
+	"version": "8.0.0",
+	"devDependencies": {
+		"dnd-core": "^8.0.0"
+	}
+}
