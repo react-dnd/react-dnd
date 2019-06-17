@@ -1,7 +1,0 @@
-{
-	"extends": "../tsconfig.json",
-	"compilerOptions": {
-		"outDir": "lib"
-	},
-	"files": ["../../../core/dnd-core/src/index.ts"]
-}

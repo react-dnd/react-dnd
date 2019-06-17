@@ -1,7 +1,0 @@
-{
-	"extends": "../tsconfig.json",
-	"compilerOptions": {
-		"outDir": "lib"
-	},
-	"files": ["../../../testing/test-utils/src/index.ts"]
-}
