@@ -20,7 +20,7 @@ function deleteFolderRecursive(filePath) {
 }
 
 const coreRoots = [
-	path.join(__dirname, '../../core/'),
+	path.join(__dirname, '../../core'),
 	path.join(__dirname, '../../testing'),
 ]
 coreRoots.forEach(coreRoot => {
@@ -35,6 +35,8 @@ coreRoots.forEach(coreRoot => {
 		const {
 			name,
 			version,
+			main,
+			typings,
 			dependencies = {},
 			license,
 			description,
@@ -62,6 +64,8 @@ coreRoots.forEach(coreRoot => {
 			version,
 			license,
 			description,
+			main,
+			typings,
 			scripts: {
 				build: 'tsc',
 				clean: 'rimraf lib',
