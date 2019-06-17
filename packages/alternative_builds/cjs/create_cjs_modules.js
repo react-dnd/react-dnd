@@ -89,6 +89,7 @@ coreRoots.forEach(coreRoot => {
 			compilerOptions: {
 				outDir: 'lib',
 			},
+			baseUrl: `${coreRoot}/corePackage/src`,
 			files: [`${coreRoot}/${corePackage}/src/index.ts`],
 		}
 
