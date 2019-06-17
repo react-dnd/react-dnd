@@ -17,7 +17,6 @@
 		"build:ts": "tsc -b tsconfig.json",
 		"build:docs": "tsc -b tsconfig.docs.json",
 		"build": "run-p build:*",
-		"test": "run-s clean build",
 		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
 	},
 	"dependencies": {

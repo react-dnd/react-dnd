@@ -14,7 +14,6 @@
 	"scripts": {
 		"clean": "rimraf lib",
 		"build": "tsc -b tsconfig.json",
-		"test": "run-s clean build",
 		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
 	},
 	"dependencies": {

@@ -10,8 +10,7 @@
 	"scripts": {
 		"build": "tsc -b tsconfig.json",
 		"clean": "rimraf lib",
-		"start": "tsc -b tsconfig.json -w --preserveWatchOutput",
-		"test": "run-s clean build"
+		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
 	},
 	"repository": {
 		"type": "git",
