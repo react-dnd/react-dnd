@@ -41,7 +41,7 @@
 		"lint": "eslint .",
 		"test_modules": "lerna run test --stream",
 		"publish_docs": "lerna run publish --scope react-dnd-documentation",
-		"test": "run-s lint build test_modules jest:cov",
+		"test": "run-s clean lint build test_modules jest:cov",
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
 		"prepublishOnly": "npm test",
@@ -78,7 +78,7 @@
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"ts-jest": "^24.0.2",
-		"typescript": "^3.5.1"
+		"typescript": "^3.5.2"
 	},
 	"jest": {
 		"clearMocks": true,
@@ -92,33 +92,36 @@
 			"jsx"
 		],
 		"modulePaths": [
-			"<rootDir>/packages"
+			"<rootDir>/packages/core/",
+			"<rootDir>/packages/testing/"
 		],
 		"moduleNameMapper": {
-			"^react-dnd$": "<rootDir>/packages/react-dnd/src",
-			"^react-dnd-html5-backend$": "<rootDir>//packages/react-dnd-html5-backend/src",
-			"^react-dnd-test-backend$": "<rootDir>//packages/react-dnd-test-backend/src",
-			"^react-dnd-test-utils$": "<rootDir>//packages/react-dnd-test-utils/src",
-			"^dnd-core$": "<rootDir>//packages/dnd-core/src"
+			"^dnd-core$": "<rootDir>/packages/core/dnd-core/src",
+			"^react-dnd$": "<rootDir>/packages/core/react-dnd/src",
+			"^react-dnd-html5-backend$": "<rootDir>/packages/core/html5-backend/src",
+			"^react-dnd-test-backend$": "<rootDir>/packages/testing/test-backend/src",
+			"^react-dnd-test-utils$": "<rootDir>/packages/testing/test-utils/src"
 		},
 		"collectCoverageFrom": [
-			"packages/*/src/**/*.{ts,tsx}",
-			"!**/__tests__/**",
-			"!packages/documentation/**"
+			"packages/core/**/*.{ts,tsx}",
+			"!**/node_modules/**",
+			"!**/lib/**",
+			"!**/__tests__/**"
 		],
 		"testMatch": [
-			"<rootDir>/packages/**/__tests__/**/?(*.)(spec|test).(t|j)s(x|)"
-		],
-		"testPathIgnorePatterns": [
-			"/packages/documentation/static/",
-			"/packages/documentation/public/"
+			"<rootDir>/packages/core/dnd-core/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
+			"<rootDir>/packages/core/react-dnd/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
+			"<rootDir>/packages/core/html5-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)"
 		],
 		"transform": {
 			"^.+\\.(ts|tsx)$": "ts-jest"
 		},
 		"globals": {
 			"ts-jest": {
-				"tsConfig": "tsconfig.jest.json"
+				"tsConfig": "tsconfig.jest.json",
+				"diagnostics": {
+					"pathRegex": "/.(spec|test).ts$/"
+				}
 			}
 		}
 	},
@@ -149,7 +152,11 @@
 	},
 	"workspaces": {
 		"packages": [
-			"packages/*"
+			"packages/alternative_builds/umd",
+			"packages/alternative_builds/cjs/*",
+			"packages/documentation/*",
+			"packages/testing/*",
+			"packages/core/*"
 		]
 	},
 	"dependencies": {
