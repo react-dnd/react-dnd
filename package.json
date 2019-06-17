@@ -41,7 +41,7 @@
 		"lint": "eslint .",
 		"test_modules": "lerna run test --stream",
 		"publish_docs": "lerna run publish --scope react-dnd-documentation",
-		"test": "run-s lint build test_modules jest:cov",
+		"test": "run-s clean lint build test_modules jest:cov",
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
 		"prepublishOnly": "npm test",
