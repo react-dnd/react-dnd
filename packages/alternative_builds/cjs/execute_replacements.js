@@ -1,4 +1,5 @@
 const replace = require('replace-in-file')
+const esmLibs = require('./esm-libs')
 
 replace.sync({
 	files: 'react-dnd/lib/**/*.js',

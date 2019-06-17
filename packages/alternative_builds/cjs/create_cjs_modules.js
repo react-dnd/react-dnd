@@ -1,23 +1,34 @@
 /* eslint-disable no-console */
 const fs = require('fs')
 const path = require('path')
-const rimraf = require('rimraf')
+const esmLibs = require('./esm-libs')
 
-const esmLibs = [
-	'dnd-core',
-	'react-dnd',
-	'react-dnd-html5-backend',
-	'react-dnd-test-backend',
-	'react-dnd-test-utils',
+function deleteFolderRecursive(filePath) {
+	if (fs.existsSync(filePath)) {
+		fs.readdirSync(filePath).forEach(function(file) {
+			var curPath = filePath + '/' + file
+			if (fs.lstatSync(curPath).isDirectory()) {
+				// recurse
+				deleteFolderRecursive(curPath)
+			} else {
+				// delete file
+				fs.unlinkSync(curPath)
+			}
+		})
+		fs.rmdirSync(filePath)
+	}
+}
+
+const coreRoots = [
+	path.join(__dirname, '../../core/'),
+	path.join(__dirname, '../../testing'),
 ]
-
-const coreRoots = ['../../core/', '../../testing']
 coreRoots.forEach(coreRoot => {
 	const corePackages = fs.readdirSync(coreRoot)
 	corePackages.forEach(corePackage => {
 		const cjsPackageRoot = path.join(__dirname, corePackage)
 		if (fs.existsSync(cjsPackageRoot)) {
-			rimraf.sync(cjsPackageRoot)
+			deleteFolderRecursive(cjsPackageRoot)
 		}
 		fs.mkdirSync(cjsPackageRoot)
 
