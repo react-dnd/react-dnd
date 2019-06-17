@@ -1,9 +1,0 @@
-{
-	"name": "react-dnd-html5-backend-cjs",
-	"main": "lib/index.js",
-	"typings": "lib/index.d.ts",
-	"version": "8.0.0",
-	"devDependencies": {
-		"react-dnd-html5-backend": "^8.0.0"
-	}
-}

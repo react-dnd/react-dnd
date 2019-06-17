@@ -31,13 +31,13 @@ function createWebpackConfiguration(browserslist) {
 		resolve: {
 			extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
 			alias: {
-				'dnd-core': path.join(__dirname, '..', 'dnd-core', 'src', 'index.ts'),
+				'dnd-core': path.join(__dirname, '../../core/dnd-core/src/index.ts'),
 			},
 			modules: [
-				path.join(__dirname, '..', 'react-dnd'),
-				path.join(__dirname, '..', 'dnd-core', 'node_modules'),
-				path.join(__dirname, '..', 'react-dnd', 'node_modules'),
-				path.join(__dirname, '..', '..', 'node_modules'),
+				path.join(__dirname, '../../core/react-dnd'),
+				path.join(__dirname, '../../core/dnd-core/node_modules'),
+				path.join(__dirname, '../../core/react-dnd/node_modules'),
+				path.join(__dirname, '../../../node_modules'),
 			],
 		},
 		module: {
@@ -76,7 +76,7 @@ module.exports = (env, { mode }) => {
 	return [
 		{
 			...commonConfig,
-			context: path.resolve(__dirname, '../react-dnd/src'),
+			context: path.resolve(__dirname, '../../core/react-dnd/src'),
 			output: {
 				...commonConfig.output,
 				library: 'ReactDnD',
@@ -85,7 +85,7 @@ module.exports = (env, { mode }) => {
 		},
 		{
 			...commonConfig,
-			context: path.resolve(__dirname, '../react-dnd-html5-backend/src'),
+			context: path.resolve(__dirname, '../../core/html5-backend/src'),
 			output: {
 				...commonConfig.output,
 				library: 'ReactDnDHTML5Backend',

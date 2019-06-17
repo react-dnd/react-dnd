@@ -3,5 +3,5 @@
 	"compilerOptions": {
 		"outDir": "lib"
 	},
-	"files": ["../../../backends/html5-backend/src/index.ts"]
+	"files": ["../../../core/html5-backend/src/index.ts"]
 }

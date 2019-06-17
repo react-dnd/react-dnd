@@ -37,7 +37,7 @@
 		"react-dom": "^16.8.6",
 		"rimraf": "^2.6.3",
 		"ts-loader": "^6.0.2",
-		"typescript": "^3.5.1"
+		"typescript": "^3.5.2"
 	},
 	"peerDependencies": {
 		"react": ">= 16.8",

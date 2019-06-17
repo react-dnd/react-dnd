@@ -1,5 +1,5 @@
 {
-	"name": "dnd-core-cjs",
+	"name": "react-dnd-html5-backend-cjs",
 	"main": "lib/index.js",
 	"typings": "lib/index.d.ts",
 	"license": "MIT",
@@ -9,7 +9,7 @@
 		"clean": "rimraf lib"
 	},
 	"devDependencies": {
-		"dnd-core": "^8.0.0",
+		"react-dnd-html5-backend": "^8.0.0",
 		"rimraf": "^2.6.3",
 		"typescript": "^3.5.2"
 	}
