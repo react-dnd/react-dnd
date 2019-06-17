@@ -34,7 +34,9 @@
 	"homepage": "https://github.com/react-dnd/react-dnd",
 	"scripts": {
 		"clean": "lerna run clean",
-		"build": "lerna run build --stream",
+		"build:packages": "lerna run build --stream",
+		"build:cjs": "node packages/alternative_builds/cjs/execute_replacements.js",
+		"build": "run-s build:packages build:cjs",
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",
@@ -77,6 +79,7 @@
 		"prettier": "^1.17.1",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
+		"replace-in-file": "^4.1.0",
 		"ts-jest": "^24.0.2",
 		"typescript": "^3.5.2"
 	},
