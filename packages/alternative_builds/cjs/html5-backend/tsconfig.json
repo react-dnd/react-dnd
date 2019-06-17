@@ -1,0 +1,7 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "lib"
+	},
+	"files": ["../../../core/html5-backend/src/index.ts"]
+}

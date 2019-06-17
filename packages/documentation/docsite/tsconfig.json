@@ -1,0 +1,12 @@
+{
+	"extends": "../../../tsconfig.base.json",
+	"compilerOptions": {
+		"outDir": "./lib",
+		"baseUrl": "./",
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"declaration": false,
+		"allowJs": true
+	},
+	"include": ["./src/index.ts"]
+}

@@ -1,0 +1,16 @@
+{
+	"name": "react-dnd-test-utils-cjs",
+	"main": "lib/index.js",
+	"typings": "lib/index.d.ts",
+	"license": "MIT",
+	"version": "8.0.0",
+	"scripts": {
+		"build": "tsc",
+		"clean": "rimraf lib"
+	},
+	"devDependencies": {
+		"react-dnd-test-utils": "^8.0.0",
+		"rimraf": "^2.6.3",
+		"typescript": "^3.5.2"
+	}
+}
