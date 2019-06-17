@@ -9,6 +9,8 @@ import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 
 /**
+ * @deprecated Use DnDProvider in your JSX tree instead. This will be removed in a future major version.
+ *
  * Wrap the root component of your application with DragDropContext decorator to set up React DnD.
  * This lets you specify the backend, and sets up the shared DnD state behind the scenes.
  * @param backendFactory The DnD backend factory
@@ -38,6 +40,13 @@ export function DragDropContext(
 			implements ContextComponent<any> {
 			public static DecoratedComponent = DecoratedComponent
 			public static displayName = `DragDropContext(${displayName})`
+			public constructor(props: any, context: any) {
+				super(props, context)
+				// eslint-disable-next-line no-console
+				console.warn(
+					`DragDropContext has been deprecated and will be removed in a future version. Please use DndProvider instead.`,
+				)
+			}
 
 			private ref: React.RefObject<any> = React.createRef()
 
