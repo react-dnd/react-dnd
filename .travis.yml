@@ -8,6 +8,9 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
   - node packages/alternative_builds/cjs/create_cjs_modules.js
 
+install:
+  - yarn install
+
 node_js:
   - 'lts/*'
   # Disabled until https://github.com/facebook/jest/issues/8069 is resolved
