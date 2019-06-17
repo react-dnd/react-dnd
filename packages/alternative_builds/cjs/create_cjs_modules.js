@@ -88,8 +88,18 @@ coreRoots.forEach(coreRoot => {
 			extends: '../tsconfig.json',
 			compilerOptions: {
 				outDir: 'lib',
+				baseUrl: `${coreRoot}/corePackage/src`,
+				paths: {
+					'dnd-core': ['../../../core/dnd-core/src/index'],
+					'dnd-core/*': ['../../../core/dnd-core/src/*'],
+					'react-dnd': ['../../../core/react-dnd/src/index'],
+					'react-dnd/*': ['../../../core/react-dnd/src/*'],
+					'react-dnd-html5-backend': ['../../../core/html5-backend/src/index'],
+					'react-dnd-html5-backend/*': ['../../../core/html5-backend/src/*'],
+					'react-dnd-test-backend': ['../../../testing/test-backend/src/index'],
+					'react-dnd-test-backend/*': ['../../../testing/test-backend/src/*'],
+				},
 			},
-			baseUrl: `${coreRoot}/corePackage/src`,
 			files: [`${coreRoot}/${corePackage}/src/index.ts`],
 		}
 
