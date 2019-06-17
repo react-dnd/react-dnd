@@ -1,0 +1,7 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "lib"
+	},
+	"files": ["../../../core/react-dnd/src/index.ts"]
+}
