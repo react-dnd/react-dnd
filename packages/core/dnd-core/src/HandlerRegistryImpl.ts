@@ -22,7 +22,7 @@ import {
 	validateType,
 } from './contracts'
 import { invariant } from './utils/invariant'
-import { asap } from './utils/asap'
+import asap from './utils/asap'
 
 function getNextHandlerId(role: HandlerRole): string {
 	const id = getNextUniqueId().toString()
