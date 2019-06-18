@@ -2,6 +2,7 @@
 	"extends": "../../../tsconfig.base.json",
 	"compilerOptions": {
 		"target": "es5",
-		"module": "commonjs"
+		"module": "commonjs",
+		"moduleResolution": "node"
 	}
 }

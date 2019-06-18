@@ -46,14 +46,12 @@ coreRoots.forEach(coreRoot => {
 
 		esmLibs.forEach(lib => {
 			if (dependencies[lib]) {
+				devDependencies[lib] = dependencies[lib]
 				dependencies[`${lib}-cjs`] = dependencies[lib]
 				delete dependencies[`${lib}`]
 			}
-			if (devDependencies[lib]) {
-				devDependencies[`${lib}-cjs`] = devDependencies[lib]
-				delete devDependencies[`${lib}`]
-			}
 			if (peerDependencies[lib]) {
+				devDependencies[lib] = dependencies[lib]
 				peerDependencies[`${lib}-cjs`] = peerDependencies[lib]
 				delete peerDependencies[`${lib}`]
 			}
@@ -71,10 +69,7 @@ coreRoots.forEach(coreRoot => {
 				clean: 'rimraf lib',
 			},
 			dependencies,
-			devDependencies: {
-				rimraf: devDependencies.rimraf,
-				typescript: devDependencies.typescript,
-			},
+			devDependencies,
 			peerDependencies,
 		}
 		console.log(`write ${name} package.json`)
