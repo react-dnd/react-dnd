@@ -49,10 +49,6 @@ coreRoots.forEach(coreRoot => {
 				dependencies[`${lib}-cjs`] = dependencies[lib]
 				delete dependencies[`${lib}`]
 			}
-			if (devDependencies[lib]) {
-				devDependencies[`${lib}-cjs`] = devDependencies[lib]
-				delete devDependencies[`${lib}`]
-			}
 			if (peerDependencies[lib]) {
 				peerDependencies[`${lib}-cjs`] = peerDependencies[lib]
 				delete peerDependencies[`${lib}`]
@@ -72,8 +68,9 @@ coreRoots.forEach(coreRoot => {
 			},
 			dependencies,
 			devDependencies: {
-				rimraf: devDependencies.rimraf,
-				typescript: devDependencies.typescript,
+				...devDependencies,
+				// this will ensure the source package builds before the CJS package in Lerna
+				[name]: version,
 			},
 			peerDependencies,
 		}
@@ -90,11 +87,15 @@ coreRoots.forEach(coreRoot => {
 				outDir: 'lib',
 				baseUrl: `${coreRoot}/${corePackage}/`,
 				paths: {
-					'dnd-core': ['../../core/dnd-core'],
-					'react-dnd': ['../../core/react-dnd'],
-					'react-dnd-html5-backend': ['../../core/html5-backend'],
-					'react-dnd-test-backend': ['../../testing/test-backend'],
-					'react-dnd-test-utils': ['../../testing/test-utils'],
+					'dnd-core': ['../../core/dnd-core/lib/index.d.ts'],
+					'react-dnd': ['../../core/react-dnd/lib/index.d.ts'],
+					'react-dnd-html5-backend': [
+						'../../core/html5-backend/lib/index.d.ts',
+					],
+					'react-dnd-test-backend': [
+						'../../testing/test-backend/lib/index.d.ts',
+					],
+					'react-dnd-test-utils': ['../../testing/test-utils/lib/index.d.ts'],
 				},
 			},
 			files: [`${coreRoot}/${corePackage}/src/index.ts`],

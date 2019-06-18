@@ -5,14 +5,14 @@
 		"baseUrl": ".",
 		"allowSyntheticDefaultImports": true,
 		"paths": {
-			"dnd-core": ["packages/dnd-core/src/index"],
-			"dnd-core/*": ["packages/dnd-core/src/*"],
-			"react-dnd": ["packages/react-dnd/src/index"],
-			"react-dnd/*": ["packages/react-dnd/src/*"],
-			"react-dnd-test-backend": ["packages/react-dnd-test-backend/src/index"],
-			"react-dnd-test-backend/*": ["packages/react-dnd-test-backend/src/*"],
-			"react-dnd-html5-backend": ["packages/react-dnd-html5-backend/src/index"],
-			"react-dnd-html5-backend/*": ["packages/react-dnd-html5-backend/src/*"]
+			"dnd-core": ["packages/core/dnd-core/src/index"],
+			"dnd-core/*": ["packages/core/dnd-core/src/*"],
+			"react-dnd": ["packages/core/react-dnd/src/index"],
+			"react-dnd/*": ["packages/core/react-dnd/src/*"],
+			"react-dnd-html5-backend": ["packages/core/html5-backend/src/index"],
+			"react-dnd-html5-backend/*": ["packages/core/html5-backend/src/*"],
+			"react-dnd-test-backend": ["packages/testing/test-backend/src/index"],
+			"react-dnd-test-backend/*": ["packages/testing/test-backend/src/*"]
 		}
 	},
 	"exclude": ["**/node_modules/**", "**/lib/**"]
