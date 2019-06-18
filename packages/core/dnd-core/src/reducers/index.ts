@@ -5,7 +5,7 @@ import dirtyHandlerIds, {
 	State as DirtyHandlerIdsState,
 } from './dirtyHandlerIds'
 import stateId, { State as StateIdState } from './stateId'
-import { get } from '../utils/discount_lodash'
+import { get } from '../utils/js_utils'
 
 export interface State {
 	dirtyHandlerIds: DirtyHandlerIdsState

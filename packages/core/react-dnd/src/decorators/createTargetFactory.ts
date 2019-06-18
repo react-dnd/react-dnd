@@ -4,7 +4,7 @@ import * as React from 'react'
 import { DropTarget } from 'dnd-core'
 import invariant from 'invariant'
 import { DropTargetMonitor } from '../interfaces'
-import { isPlainObject } from '../utils/discount_lodash'
+import { isPlainObject } from '../utils/js_utils'
 import { DropTargetSpec } from './interfaces'
 import { getDecoratedComponent } from './utils'
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']

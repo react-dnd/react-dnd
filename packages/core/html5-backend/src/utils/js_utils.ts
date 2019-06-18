@@ -1,3 +1,5 @@
+// cheap lodash replacements
+
 export function memoize<T>(fn: () => T): () => T {
 	let result: T | null = null
 	const memoized = () => {
