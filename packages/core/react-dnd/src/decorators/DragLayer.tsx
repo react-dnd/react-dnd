@@ -4,11 +4,10 @@ import { DndContext, DndOptions } from '../index'
 import { isPlainObject } from '../utils/discount_lodash'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable, checkDecoratorArguments } from './utils'
+import { invariant } from '../utils/invariant'
 
 // @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'
-// @ts-ignore
-import invariant from 'invariant'
 // @ts-ignore
 import shallowEqual from 'shallowequal'
 

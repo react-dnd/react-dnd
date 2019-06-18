@@ -9,8 +9,7 @@ import {
 } from '../../interfaces'
 import { setClientOffset } from './local/setClientOffset'
 import { isObject } from '../../utils/discount_lodash'
-// @ts-ignore
-import invariant from 'invariant'
+import { invariant } from '../../utils/invariant'
 
 import { BEGIN_DRAG, INIT_COORDS } from './types'
 

@@ -7,8 +7,7 @@ import {
 import { useMonitorOutput } from './internal/useMonitorOutput'
 import { useDragSourceMonitor, useDragHandler } from './internal/drag'
 import { useEffect, useRef, useMemo } from 'react'
-// @ts-ignore
-import invariant from 'invariant'
+import { invariant } from '../utils/invariant'
 
 /**
  * useDragSource hook

@@ -14,8 +14,7 @@ import { DragSourceMonitorImpl } from '../common/DragSourceMonitorImpl'
 import { SourceConnector } from '../common/SourceConnector'
 import { isValidType } from '../utils/isValidType'
 import createSourceFactory from './createSourceFactory'
-// @ts-ignore
-import invariant from 'invariant'
+import { invariant } from '../utils/invariant'
 
 /**
  * Decorates a component as a dragsource

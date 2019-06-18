@@ -3,8 +3,7 @@ import { DndContext, createDndContext } from '../common/DndContext'
 import { BackendFactory } from 'dnd-core'
 import { checkDecoratorArguments, isRefable } from './utils'
 import { ContextComponent } from './interfaces'
-// @ts-ignore
-import invariant from 'invariant'
+import { invariant } from '../utils/invariant'
 // @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'
 

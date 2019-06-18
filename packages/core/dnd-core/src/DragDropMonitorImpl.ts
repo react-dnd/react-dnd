@@ -14,8 +14,7 @@ import {
 	HandlerRegistry,
 	Identifier,
 } from './interfaces'
-// @ts-ignore
-import invariant from 'invariant'
+import { invariant } from './utils/invariant'
 
 export default class DragDropMonitorImpl implements DragDropMonitor {
 	constructor(private store: Store<State>, public registry: HandlerRegistry) {}

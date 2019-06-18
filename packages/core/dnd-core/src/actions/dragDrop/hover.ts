@@ -8,8 +8,7 @@ import {
 } from '../../interfaces'
 import matchesType from '../../utils/matchesType'
 import { HOVER } from './types'
-// @ts-ignore
-import invariant from 'invariant'
+import { invariant } from '../../utils/invariant'
 
 export default function createHover<Context>(
 	manager: DragDropManager<Context>,

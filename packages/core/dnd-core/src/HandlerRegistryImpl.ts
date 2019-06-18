@@ -21,8 +21,7 @@ import {
 	validateTargetContract,
 	validateType,
 } from './contracts'
-// @ts-ignore
-import invariant from 'invariant'
+import { invariant } from './utils/invariant'
 // @ts-ignore
 import asap from 'asap'
 

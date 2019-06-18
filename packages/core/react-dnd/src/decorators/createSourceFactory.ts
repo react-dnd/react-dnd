@@ -5,9 +5,7 @@ import { DragSourceMonitor } from '../interfaces'
 import { isPlainObject } from '../utils/discount_lodash'
 import { DragSourceSpec } from './interfaces'
 import { getDecoratedComponent } from './utils'
-
-// @ts-ignore
-import invariant from 'invariant'
+import { invariant } from '../utils/invariant'
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']
