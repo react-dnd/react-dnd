@@ -8,7 +8,13 @@ React DnD is a set of React utilities to help you build complex drag and drop in
 ## Installation
 
 ```bash
+# Using new-hotness ESModules
 yarn add react-dnd react-dnd-html5-backend
+```
+
+```bash
+# Using legacy, node-friendly CommonJS
+yarn add react-dnd-cjs react-dnd-html5-backend-cjs
 ```
 
 The second package will allow React DnD [the HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop) under the hood. You may choose to use a third-party backend instead, such as [the touch backend](https://github.com/yahoo/react-dnd-touch-backend).
