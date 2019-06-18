@@ -8,8 +8,7 @@ import { invariant } from '../utils/invariant'
 
 // @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'
-// @ts-ignore
-import shallowEqual from 'shallowequal'
+import { shallowEqual } from '../utils/shallowEqual'
 
 export function DragLayer<RequiredProps, CollectedProps = {}>(
 	collect: DragLayerCollector<RequiredProps, CollectedProps>,

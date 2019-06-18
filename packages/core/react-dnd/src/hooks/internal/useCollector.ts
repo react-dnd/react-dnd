@@ -1,5 +1,4 @@
-// @ts-ignore
-import shallowEqual from 'shallowequal'
+import { shallowEqual } from '../../utils/shallowEqual'
 import { useState, useCallback } from 'react'
 
 /**

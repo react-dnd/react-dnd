@@ -22,8 +22,7 @@ import {
 	validateType,
 } from './contracts'
 import { invariant } from './utils/invariant'
-// @ts-ignore
-import asap from 'asap'
+import { asap } from './utils/asap'
 
 function getNextHandlerId(role: HandlerRole): string {
 	const id = getNextUniqueId().toString()
