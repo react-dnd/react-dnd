@@ -69,6 +69,7 @@ coreRoots.forEach(coreRoot => {
 			dependencies,
 			devDependencies: {
 				...devDependencies,
+				// this will ensure the source package builds before the CJS package in Lerna
 				[name]: version,
 			},
 			peerDependencies,
