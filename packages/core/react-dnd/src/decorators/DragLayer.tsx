@@ -7,10 +7,8 @@ import { isRefable, checkDecoratorArguments } from './utils'
 
 // @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'
-// @ts-ignore
-import invariant from 'invariant'
-// @ts-ignore
-import shallowEqual from 'shallowequal'
+import invariant from '../utils/invariant'
+import shallowEqual from '../utils/shallowEqual'
 
 export function DragLayer<RequiredProps, CollectedProps = {}>(
 	collect: DragLayerCollector<RequiredProps, CollectedProps>,
