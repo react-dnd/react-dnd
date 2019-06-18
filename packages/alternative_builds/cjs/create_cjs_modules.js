@@ -85,11 +85,15 @@ coreRoots.forEach(coreRoot => {
 				outDir: 'lib',
 				baseUrl: `${coreRoot}/${corePackage}/`,
 				paths: {
-					'dnd-core': ['../../core/dnd-core'],
-					'react-dnd': ['../../core/react-dnd'],
-					'react-dnd-html5-backend': ['../../core/html5-backend'],
-					'react-dnd-test-backend': ['../../testing/test-backend'],
-					'react-dnd-test-utils': ['../../testing/test-utils'],
+					'dnd-core': ['../../core/dnd-core/lib/index.d.ts'],
+					'react-dnd': ['../../core/react-dnd/lib/index.d.ts'],
+					'react-dnd-html5-backend': [
+						'../../core/html5-backend/lib/index.d.ts',
+					],
+					'react-dnd-test-backend': [
+						'../../testing/test-backend/lib/index.d.ts',
+					],
+					'react-dnd-test-utils': ['../../testing/test-utils/lib/index.d.ts'],
 				},
 			},
 			files: [`${coreRoot}/${corePackage}/src/index.ts`],
