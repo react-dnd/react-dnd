@@ -1,4 +1,5 @@
 import * as React from 'react'
+import invariant from 'invariant'
 import { SourceType, DragDropManager } from 'dnd-core'
 import { DndOptions } from '../interfaces'
 import { isPlainObject } from '../utils/discount_lodash'
@@ -14,7 +15,6 @@ import { DragSourceMonitorImpl } from '../common/DragSourceMonitorImpl'
 import { SourceConnector } from '../common/SourceConnector'
 import { isValidType } from '../utils/isValidType'
 import createSourceFactory from './createSourceFactory'
-import invariant from '../utils/invariant'
 
 /**
  * Decorates a component as a dragsource

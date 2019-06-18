@@ -5,8 +5,8 @@ import {
 	Listener,
 	Identifier,
 } from 'dnd-core'
+import invariant from 'invariant'
 import { DropTargetMonitor } from '../interfaces'
-import invariant from '../utils/invariant'
 
 let isCallingCanDrop = false
 

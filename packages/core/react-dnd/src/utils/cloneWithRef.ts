@@ -1,5 +1,5 @@
 import { cloneElement } from 'react'
-import invariant from './invariant'
+import invariant from 'invariant'
 
 function setRef(ref: any, node: any) {
 	if (typeof ref === 'function') {
