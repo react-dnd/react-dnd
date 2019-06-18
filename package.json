@@ -161,7 +161,8 @@
 			"packages/documentation/*",
 			"packages/testing/*",
 			"packages/core/*"
-		]
+		],
+		"nohoist": ["**"]
 	},
 	"dependencies": {
 		"@types/enzyme": "^3.9.3"

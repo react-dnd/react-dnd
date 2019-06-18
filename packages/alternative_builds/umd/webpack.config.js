@@ -38,7 +38,11 @@ function createWebpackConfiguration(browserslist) {
 				path.join(__dirname, '../../core/dnd-core/node_modules'),
 				path.join(__dirname, '../../core/react-dnd/node_modules'),
 				path.join(__dirname, '../../../node_modules'),
+				path.join(__dirname, 'node_modules'),
 			],
+		},
+		resolveLoader: {
+			modules: [path.join(__dirname, 'node_modules')],
 		},
 		module: {
 			rules: [
