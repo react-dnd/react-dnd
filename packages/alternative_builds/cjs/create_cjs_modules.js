@@ -85,6 +85,7 @@ coreRoots.forEach(coreRoot => {
 			extends: '../tsconfig.json',
 			compilerOptions: {
 				outDir: 'lib',
+				allowSyntheticDefaultImports: true,
 				baseUrl: `${coreRoot}/${corePackage}/`,
 				paths: {
 					'dnd-core': ['../../core/dnd-core/lib/index.d.ts'],
