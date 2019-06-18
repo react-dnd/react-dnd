@@ -22,7 +22,6 @@ import {
 	validateType,
 } from './contracts'
 import invariant from './utils/invariant'
-// @ts-ignore
 import asap from 'asap'
 
 function getNextHandlerId(role: HandlerRole): string {

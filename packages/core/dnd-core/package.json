@@ -17,6 +17,7 @@
 		"url": "https://github.com/react-dnd/react-dnd.git"
 	},
 	"dependencies": {
+		"@types/asap": "^2.0.0",
 		"asap": "^2.0.6",
 		"redux": "^4.0.1"
 	},
