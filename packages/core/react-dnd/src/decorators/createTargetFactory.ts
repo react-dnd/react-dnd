@@ -6,9 +6,7 @@ import { DropTargetMonitor } from '../interfaces'
 import { isPlainObject } from '../utils/discount_lodash'
 import { DropTargetSpec } from './interfaces'
 import { getDecoratedComponent } from './utils'
-
-// @ts-ignore
-import invariant from 'invariant'
+import invariant from '../utils/invariant'
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 
 export interface Target extends DropTarget {
