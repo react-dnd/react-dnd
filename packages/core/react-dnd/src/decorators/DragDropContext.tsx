@@ -4,8 +4,7 @@ import { BackendFactory } from 'dnd-core'
 import { checkDecoratorArguments, isRefable } from './utils'
 import { ContextComponent } from './interfaces'
 import { invariant } from '../utils/invariant'
-// @ts-ignore
-import hoistStatics from 'hoist-non-react-statics'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 /**
  * @deprecated Use DnDProvider in your JSX tree instead. This will be removed in a future major version.
@@ -72,7 +71,7 @@ export function DragDropContext(
 			}
 		}
 
-		return (hoistStatics(
+		return (hoistNonReactStatics(
 			DragDropContextContainer,
 			DecoratedComponent,
 		) as any) as TargetClass & DragDropContextContainer

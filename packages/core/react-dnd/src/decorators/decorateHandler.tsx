@@ -13,8 +13,7 @@ import {
 } from './disposables'
 import { isRefable } from './utils'
 import { invariant } from '../utils/invariant'
-// @ts-ignore
-import hoistStatics from 'hoist-non-react-statics'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 import { shallowEqual } from '../utils/shallowEqual'
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
@@ -242,7 +241,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 		}
 	}
 
-	return (hoistStatics(
+	return (hoistNonReactStatics(
 		DragDropContainer,
 		DecoratedComponent,
 	) as any) as DndComponent<Props>

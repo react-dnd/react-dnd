@@ -1,13 +1,11 @@
 import * as React from 'react'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 import { DndContext, DndOptions } from '../index'
 import { isPlainObject } from '../utils/discount_lodash'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable, checkDecoratorArguments } from './utils'
 import { invariant } from '../utils/invariant'
-
-// @ts-ignore
-import hoistStatics from 'hoist-non-react-statics'
 import { shallowEqual } from '../utils/shallowEqual'
 
 export function DragLayer<RequiredProps, CollectedProps = {}>(
@@ -145,6 +143,6 @@ export function DragLayer<RequiredProps, CollectedProps = {}>(
 			}
 		}
 
-		return hoistStatics(DragLayerContainer, DecoratedComponent) as any
+		return hoistNonReactStatics(DragLayerContainer, DecoratedComponent) as any
 	} as any) as DndComponentEnhancer<CollectedProps>
 }
