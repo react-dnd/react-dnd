@@ -1,4 +1,4 @@
-import { union, without } from './utils/discount_lodash'
+import { union, without } from './utils/js_utils'
 type NodePredicate = (node: any) => boolean
 
 export default class EnterLeaveCounter {

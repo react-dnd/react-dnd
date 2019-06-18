@@ -1,3 +1,5 @@
+// cheap lodash replacements
+
 export function isFunction(input: any): boolean {
 	return typeof input === 'function'
 }

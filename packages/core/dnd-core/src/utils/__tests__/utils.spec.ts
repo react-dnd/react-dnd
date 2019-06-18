@@ -1,4 +1,4 @@
-import { xor, intersection } from '../discount_lodash'
+import { xor, intersection } from '../js_utils'
 
 describe('the utilities module', () => {
 	it('can compute xor', () => {

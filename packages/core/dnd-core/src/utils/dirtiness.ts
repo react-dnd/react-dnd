@@ -1,4 +1,4 @@
-import { intersection } from './discount_lodash'
+import { intersection } from './js_utils'
 
 export const NONE: string[] = []
 export const ALL: string[] = []
