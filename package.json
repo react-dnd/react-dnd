@@ -49,6 +49,7 @@
 		"prepublishOnly": "npm test",
 		"preinstall": "node packages/alternative_builds/cjs/create_cjs_modules.js",
 		"start": "lerna run --parallel --stream start",
+		"start_docs": "lerna run --stream start --scope react-dnd-documentation",
 		"watch": "lerna run --parallel --stream watch"
 	},
 	"husky": {
