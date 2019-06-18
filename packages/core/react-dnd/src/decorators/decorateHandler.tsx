@@ -16,8 +16,7 @@ import { isRefable } from './utils'
 import invariant from 'invariant'
 // @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'
-// @ts-ignore
-import shallowEqual from 'shallowequal'
+import shallowEqual from '../utils/shallowEqual'
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any
