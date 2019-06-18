@@ -4,8 +4,7 @@ import {
 	DragDropMonitor,
 } from '../../interfaces'
 import { END_DRAG } from './types'
-// @ts-ignore
-import invariant from 'invariant'
+import invariant from '../../utils/invariant'
 
 export default function createEndDrag<Context>(
 	manager: DragDropManager<Context>,

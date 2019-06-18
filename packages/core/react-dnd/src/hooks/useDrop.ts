@@ -6,8 +6,7 @@ import {
 import { useMonitorOutput } from './internal/useMonitorOutput'
 import { useDropHandler, useDropTargetMonitor } from './internal/drop'
 import { useEffect, useRef, useMemo } from 'react'
-// @ts-ignore
-import invariant from 'invariant'
+import invariant from '../utils/invariant'
 
 /**
  * useDropTarget Hook

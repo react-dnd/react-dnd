@@ -15,8 +15,7 @@ import {
 import { checkDecoratorArguments } from './utils'
 import decorateHandler from './decorateHandler'
 import createTargetFactory from './createTargetFactory'
-// @ts-ignore
-import invariant from 'invariant'
+import invariant from '../utils/invariant'
 
 export function DropTarget<RequiredProps, CollectedProps = {}>(
 	type: TargetType | ((props: RequiredProps) => TargetType),
