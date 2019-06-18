@@ -14,7 +14,7 @@ import {
 import { Action } from '../interfaces'
 import { areArraysEqual } from '../utils/equality'
 import { NONE, ALL } from '../utils/dirtiness'
-import { xor } from '../utils/discount_lodash'
+import { xor } from '../utils/js_utils'
 
 export type State = string[]
 

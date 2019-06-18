@@ -1,3 +1,5 @@
+// cheap lodash replacements
+
 /**
  * drop-in replacement for _.get
  * @param obj

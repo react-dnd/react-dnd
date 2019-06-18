@@ -1,4 +1,4 @@
-import { memoize } from './utils/discount_lodash'
+import { memoize } from './utils/js_utils'
 
 declare global {
 	interface Window extends HTMLElement {

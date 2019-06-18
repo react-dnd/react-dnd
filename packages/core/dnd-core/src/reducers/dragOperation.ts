@@ -7,7 +7,7 @@ import {
 } from '../actions/dragDrop'
 import { REMOVE_TARGET } from '../actions/registry'
 import { Identifier, Action } from '../interfaces'
-import { without } from '../utils/discount_lodash'
+import { without } from '../utils/js_utils'
 
 export interface State {
 	itemType: Identifier | Identifier[] | null

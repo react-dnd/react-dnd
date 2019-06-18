@@ -12,7 +12,7 @@ import {
 } from './targets'
 import DragDropManagerImpl from '../DragDropManagerImpl'
 import { DragDropManager, HandlerRegistry } from '../interfaces'
-import { isString } from '../utils/discount_lodash'
+import { isString } from '../utils/js_utils'
 
 describe('DragDropManager', () => {
 	let manager: DragDropManager<any>

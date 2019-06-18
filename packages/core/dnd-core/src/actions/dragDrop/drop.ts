@@ -8,7 +8,7 @@ import {
 	Identifier,
 } from '../../interfaces'
 import { DROP } from './types'
-import { isObject } from '../../utils/discount_lodash'
+import { isObject } from '../../utils/js_utils'
 
 export default function createDrop<Context>(manager: DragDropManager<Context>) {
 	return function drop(options = {}): void {

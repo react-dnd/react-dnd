@@ -3,7 +3,7 @@ import * as React from 'react'
 import invariant from 'invariant'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceMonitor } from '../interfaces'
-import { isPlainObject } from '../utils/discount_lodash'
+import { isPlainObject } from '../utils/js_utils'
 import { DragSourceSpec } from './interfaces'
 import { getDecoratedComponent } from './utils'
 

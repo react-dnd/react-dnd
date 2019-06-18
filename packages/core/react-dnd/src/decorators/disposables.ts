@@ -1,4 +1,4 @@
-import { isFunction, noop } from '../utils/discount_lodash'
+import { isFunction, noop } from '../utils/js_utils'
 
 /**
  * Provides a set of static methods for creating Disposables.
