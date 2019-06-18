@@ -9,7 +9,7 @@ import {
 	HandlerRegistry,
 } from '../../interfaces'
 import { setClientOffset } from './local/setClientOffset'
-import { isObject } from '../../utils/discount_lodash'
+import { isObject } from '../../utils/js_utils'
 
 import { BEGIN_DRAG, INIT_COORDS } from './types'
 

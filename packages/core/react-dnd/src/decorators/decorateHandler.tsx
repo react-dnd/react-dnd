@@ -6,7 +6,7 @@ import invariant from 'invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndContext } from '../index'
-import { isPlainObject } from '../utils/discount_lodash'
+import { isPlainObject } from '../utils/js_utils'
 import { Connector } from '../common/SourceConnector'
 import { DndComponent } from './interfaces'
 import {
