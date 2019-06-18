@@ -1,11 +1,11 @@
 declare var process: any
 import * as React from 'react'
+import invariant from 'invariant'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceMonitor } from '../interfaces'
 import { isPlainObject } from '../utils/discount_lodash'
 import { DragSourceSpec } from './interfaces'
 import { getDecoratedComponent } from './utils'
-import invariant from '../utils/invariant'
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, MutableRefObject } from 'react'
+import invariant from 'invariant'
 import {
 	DragSourceHookSpec,
 	DragObjectWithType,
@@ -9,7 +10,6 @@ import { registerSource } from '../../common/registration'
 import { useDragDropManager } from './useDragDropManager'
 import { DragSourceMonitorImpl } from '../../common/DragSourceMonitorImpl'
 import { SourceConnector } from '../../common/SourceConnector'
-import invariant from '../../utils/invariant'
 
 export function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {
 	const manager = useDragDropManager()

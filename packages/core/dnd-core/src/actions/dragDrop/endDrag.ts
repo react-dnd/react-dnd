@@ -1,10 +1,10 @@
+import invariant from 'invariant'
 import {
 	DragDropManager,
 	SentinelAction,
 	DragDropMonitor,
 } from '../../interfaces'
 import { END_DRAG } from './types'
-import invariant from '../../utils/invariant'
 
 export default function createEndDrag<Context>(
 	manager: DragDropManager<Context>,

@@ -1,3 +1,4 @@
+import invariant from 'invariant'
 import {
 	Action,
 	DragDropManager,
@@ -8,7 +9,6 @@ import {
 } from '../../interfaces'
 import { DROP } from './types'
 import { isObject } from '../../utils/discount_lodash'
-import invariant from '../../utils/invariant'
 
 export default function createDrop<Context>(manager: DragDropManager<Context>) {
 	return function drop(options = {}): void {
