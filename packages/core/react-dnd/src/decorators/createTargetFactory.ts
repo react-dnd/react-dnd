@@ -2,11 +2,11 @@ declare var process: any
 
 import * as React from 'react'
 import { DropTarget } from 'dnd-core'
+import invariant from 'invariant'
 import { DropTargetMonitor } from '../interfaces'
 import { isPlainObject } from '../utils/discount_lodash'
 import { DropTargetSpec } from './interfaces'
 import { getDecoratedComponent } from './utils'
-import invariant from '../utils/invariant'
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 
 export interface Target extends DropTarget {

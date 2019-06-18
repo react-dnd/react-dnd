@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { DndContext, createDndContext } from '../common/DndContext'
+import invariant from 'invariant'
 import { BackendFactory } from 'dnd-core'
+import hoistStatics from 'hoist-non-react-statics'
+import { DndContext, createDndContext } from '../common/DndContext'
 import { checkDecoratorArguments, isRefable } from './utils'
 import { ContextComponent } from './interfaces'
-import invariant from '../utils/invariant'
-import hoistStatics from 'hoist-non-react-statics'
 
 /**
  * @deprecated Use DnDProvider in your JSX tree instead. This will be removed in a future major version.

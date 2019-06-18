@@ -1,3 +1,4 @@
+import invariant from 'invariant'
 import {
 	Action,
 	DragDropManager,
@@ -9,7 +10,6 @@ import {
 } from '../../interfaces'
 import { setClientOffset } from './local/setClientOffset'
 import { isObject } from '../../utils/discount_lodash'
-import invariant from '../../utils/invariant'
 
 import { BEGIN_DRAG, INIT_COORDS } from './types'
 
