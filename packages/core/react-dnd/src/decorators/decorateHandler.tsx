@@ -12,8 +12,7 @@ import {
 	SerialDisposable,
 } from './disposables'
 import { isRefable } from './utils'
-// @ts-ignore
-import invariant from 'invariant'
+import invariant from '../utils/invariant'
 // @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'
 import shallowEqual from '../utils/shallowEqual'
