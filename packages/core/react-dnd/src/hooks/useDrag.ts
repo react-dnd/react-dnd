@@ -1,3 +1,5 @@
+import { useEffect, useRef, useMemo } from 'react'
+import invariant from 'invariant'
 import {
 	DragSourceHookSpec,
 	DragObjectWithType,
@@ -6,8 +8,6 @@ import {
 } from '../interfaces'
 import { useMonitorOutput } from './internal/useMonitorOutput'
 import { useDragSourceMonitor, useDragHandler } from './internal/drag'
-import { useEffect, useRef, useMemo } from 'react'
-import invariant from '../utils/invariant'
 
 /**
  * useDragSource hook

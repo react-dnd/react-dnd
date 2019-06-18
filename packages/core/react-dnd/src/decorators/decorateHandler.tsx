@@ -1,6 +1,9 @@
 declare var process: any
 
 import * as React from 'react'
+import shallowEqual from 'shallowequal'
+import invariant from 'invariant'
+import hoistStatics from 'hoist-non-react-statics'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndContext } from '../index'
 import { isPlainObject } from '../utils/discount_lodash'
@@ -12,9 +15,6 @@ import {
 	SerialDisposable,
 } from './disposables'
 import { isRefable } from './utils'
-import invariant from '../utils/invariant'
-import hoistStatics from 'hoist-non-react-statics'
-import shallowEqual from '../utils/shallowEqual'
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any

@@ -1,5 +1,5 @@
+import invariant from 'invariant'
 import { DragSource, DropTarget, Identifier } from './interfaces'
-import invariant from './utils/invariant'
 
 export function validateSourceContract(source: DragSource) {
 	invariant(

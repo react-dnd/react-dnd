@@ -1,4 +1,4 @@
-import shallowEqual from '../../utils/shallowEqual'
+import shallowEqual from 'shallowequal'
 import { useState, useCallback } from 'react'
 
 /**
