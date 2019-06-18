@@ -4,8 +4,6 @@ import { DndContext, DndOptions } from '../index'
 import { isPlainObject } from '../utils/discount_lodash'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable, checkDecoratorArguments } from './utils'
-
-// @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'
 import invariant from '../utils/invariant'
 import shallowEqual from '../utils/shallowEqual'
