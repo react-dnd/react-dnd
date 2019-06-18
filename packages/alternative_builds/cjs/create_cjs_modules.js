@@ -68,8 +68,8 @@ coreRoots.forEach(coreRoot => {
 			},
 			dependencies,
 			devDependencies: {
-				rimraf: devDependencies.rimraf,
-				typescript: devDependencies.typescript,
+				...devDependencies,
+				[name]: version,
 			},
 			peerDependencies,
 		}
