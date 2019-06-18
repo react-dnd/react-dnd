@@ -4,7 +4,6 @@ import { BackendFactory } from 'dnd-core'
 import { checkDecoratorArguments, isRefable } from './utils'
 import { ContextComponent } from './interfaces'
 import invariant from '../utils/invariant'
-// @ts-ignore
 import hoistStatics from 'hoist-non-react-statics'
 
 /**
