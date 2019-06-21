@@ -84,7 +84,7 @@ coreRoots.forEach(coreRoot => {
 		)
 
 		const tsConfigJson = {
-			extends: '../../../../../tsconfig.base.json',
+			extends: '../../../../tsconfig.base.json',
 			compilerOptions: {
 				target: 'es5',
 				module: 'commonjs',
