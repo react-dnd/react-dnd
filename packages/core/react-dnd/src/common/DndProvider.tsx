@@ -30,14 +30,20 @@ export const DndProvider: React.FC<DndProviderProps<any>> = memo(
 	},
 )
 
-let SINGLETON_DND_CONTEXT: DndContext<any> | undefined
+const instanceSymbol = Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')
 function createSingletonDndContext<BackendContext>(
 	backend: BackendFactory,
-	context?: BackendContext,
+	context: BackendContext = getGlobalContext(),
 	debugMode?: boolean,
 ) {
-	if (!SINGLETON_DND_CONTEXT) {
-		SINGLETON_DND_CONTEXT = createDndContext(backend, context, debugMode)
+	const ctx = context as any
+	if (!ctx[instanceSymbol]) {
+		ctx[instanceSymbol] = createDndContext(backend, context, debugMode)
 	}
-	return SINGLETON_DND_CONTEXT
+	return ctx[instanceSymbol]
+}
+
+declare var global: any
+function getGlobalContext() {
+	return typeof global !== 'undefined' ? global : (window as any)
 }
