@@ -1,0 +1,26 @@
+{
+  "name": "react-dnd-html5-backend-cjs",
+  "version": "8.0.3",
+  "license": "MIT",
+  "description": "HTML5 backend for React DnD",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib"
+  },
+  "dependencies": {
+    "dnd-core-cjs": "^8.0.3"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.19",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.8.6",
+    "react-dnd-test-backend": "^8.0.3",
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3",
+    "ts-loader": "^6.0.2",
+    "typescript": "^3.5.2",
+    "react-dnd-html5-backend": "8.0.3"
+  },
+  "peerDependencies": {}
+}
