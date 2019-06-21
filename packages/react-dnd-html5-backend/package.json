@@ -3,7 +3,6 @@
   "version": "7.6.2",
   "description": "HTML5 backend for React DnD",
   "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
   "types": "lib/cjs/index.d.ts",
   "license": "MIT",
   "repository": {

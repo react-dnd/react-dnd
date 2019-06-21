@@ -3,7 +3,6 @@
 	"version": "7.6.1",
 	"license": "MIT",
 	"main": "lib/cjs/index.js",
-	"module": "lib/esm/index.js",
 	"scripts": {
 		"clean": "rimraf lib",
 		"build:cjs": "tsc -b tsconfig.cjs.json",
