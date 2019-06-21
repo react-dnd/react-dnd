@@ -35,7 +35,7 @@
 	"scripts": {
 		"clean": "lerna run clean",
 		"build:packages": "lerna run build --stream",
-		"build:cjs": "node packages/alternative_builds/cjs/execute_replacements.js",
+		"build:cjs": "node scripts/execute_cjs_replacements.js",
 		"build": "run-s build:packages build:cjs",
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
@@ -47,7 +47,7 @@
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
 		"prepublishOnly": "npm test",
-		"preinstall": "node packages/alternative_builds/cjs/create_cjs_modules.js",
+		"preinstall": "node scripts/create_cjs_modules.js",
 		"start": "lerna run --parallel --stream start",
 		"start_docs": "lerna run --stream start --scope react-dnd-documentation",
 		"watch": "lerna run --parallel --stream watch"
