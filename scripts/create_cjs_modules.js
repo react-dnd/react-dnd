@@ -19,14 +19,16 @@ function deleteFolderRecursive(filePath) {
 	}
 }
 
+const cjsRoot = path.join(__dirname, '../packages/alternative_builds/cjs')
+
 const coreRoots = [
-	path.join(__dirname, '../../core'),
-	path.join(__dirname, '../../testing'),
+	path.join(__dirname, '../packages/core'),
+	path.join(__dirname, '../packages/testing'),
 ]
 coreRoots.forEach(coreRoot => {
 	const corePackages = fs.readdirSync(coreRoot)
 	corePackages.forEach(corePackage => {
-		const cjsPackageRoot = path.join(__dirname, corePackage)
+		const cjsPackageRoot = path.join(cjsRoot, corePackage)
 		if (fs.existsSync(cjsPackageRoot)) {
 			deleteFolderRecursive(cjsPackageRoot)
 		}
@@ -82,9 +84,12 @@ coreRoots.forEach(coreRoot => {
 		)
 
 		const tsConfigJson = {
-			extends: '../tsconfig.json',
+			extends: '../../../../../tsconfig.base.json',
 			compilerOptions: {
+				target: 'es5',
+				module: 'commonjs',
 				outDir: 'lib',
+				esModuleInterop: true,
 				baseUrl: `${coreRoot}/${corePackage}/`,
 				paths: {
 					'dnd-core': ['../../core/dnd-core/lib/index.d.ts'],

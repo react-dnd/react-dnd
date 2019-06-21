@@ -8,6 +8,3 @@ __site_prerender__
 coverage
 test-results.xml
 *-*.log
-packages/alternative_builds/cjs/
-!packages/alternative_builds/cjs/*.js
-!packages/alternative_builds/cjs/*.json

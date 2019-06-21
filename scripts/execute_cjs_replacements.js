@@ -3,10 +3,11 @@ const fs = require('fs')
 const path = require('path')
 const replace = require('replace-in-file')
 const esmLibs = require('./esm-libs')
+const cjsRoot = path.join(__dirname, '../packages/alternative_builds/cjs')
 
-const files = fs.readdirSync(__dirname)
+const files = fs.readdirSync(cjsRoot)
 files.forEach(file => {
-	const subdir = path.join(__dirname, file)
+	const subdir = path.join(cjsRoot, file)
 	if (fs.lstatSync(subdir).isDirectory()) {
 		console.log(`process module requires in ${subdir}`)
 		const jsReplaceSpec = {
