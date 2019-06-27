@@ -1,4 +1,4 @@
-import { useEffect, useMemo, MutableRefObject } from 'react'
+import { useLayoutEffect, useMemo, MutableRefObject } from 'react'
 import invariant from 'invariant'
 import {
 	DragSourceHookSpec,
@@ -71,7 +71,7 @@ export function useDragHandler<
 		} as DragSource
 	}, [])
 
-	useEffect(function registerHandler() {
+	useLayoutEffect(function registerHandler() {
 		const [handlerId, unregister] = registerSource(
 			spec.current.item.type,
 			handler,
