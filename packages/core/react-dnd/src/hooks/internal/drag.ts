@@ -71,7 +71,7 @@ export function useDragHandler<
 		} as DragSource
 	}, [])
 
-	const unregister = useMemo(function registerHandler() {
+	useEffect(function registerHandler() {
 		const [handlerId, unregister] = registerSource(
 			spec.current.item.type,
 			handler,
@@ -79,10 +79,6 @@ export function useDragHandler<
 		)
 		monitor.receiveHandlerId(handlerId)
 		connector.receiveHandlerId(handlerId)
-		return unregister
-	}, [])
-
-	useEffect(() => {
 		return unregister
 	}, [])
 }
