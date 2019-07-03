@@ -242,6 +242,10 @@ export const ExamplePages: PageGroup[] = [
 				location: '/examples/other/drag-source-rerender',
 				title: 'Drag Source Rerender',
 			},
+			OTHER_REMOUNT_WITH_CORRECT_PROPS: {
+				location: '/examples/other/remount-with-correct-props',
+				title: 'Drag Source Remount',
+			},
 			OTHER_NATIVE_FILES: {
 				location: '/examples/other/native-files',
 				title: 'Native Files',
