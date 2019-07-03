@@ -1,7 +1,7 @@
 import { DragDropMonitor, DragSource } from '../interfaces'
 
 export default class DragSourceImpl implements DragSource {
-	public canDrag(monitor: DragDropMonitor, handle: string) {
+	public canDrag() {
 		return true
 	}
 
@@ -9,11 +9,11 @@ export default class DragSourceImpl implements DragSource {
 		return handle === monitor.getSourceId()
 	}
 
-	public beginDrag(monitor: DragDropMonitor, handle: string) {
+	public beginDrag() {
 		// empty on purpose
 	}
 
-	public endDrag(monitor: DragDropMonitor, handle: string) {
+	public endDrag() {
 		// empty on purpose
 	}
 }

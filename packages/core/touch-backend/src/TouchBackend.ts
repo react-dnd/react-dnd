@@ -412,6 +412,7 @@ export default class TouchBackend implements Backend {
 		// If we're not dragging and we've moved a little, that counts as a drag start
 		if (
 			!this.monitor.isDragging() &&
+			// eslint-disable-next-line no-prototype-builtins
 			this._mouseClientOffset.hasOwnProperty('x') &&
 			moveStartSourceIds &&
 			distance(
@@ -455,6 +456,7 @@ export default class TouchBackend implements Backend {
 		// Extend list with parents that are not receiving elementsFromPoint events (size 0 elements and svg groups)
 		let elementsAtPointExtended = []
 		for (let nodeId in elementsAtPoint) {
+			// eslint-disable-next-line no-prototype-builtins
 			if (!elementsAtPoint.hasOwnProperty(nodeId)) {
 				continue
 			}

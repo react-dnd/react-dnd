@@ -10,11 +10,13 @@ import { act } from 'react-dom/test-utils'
  * @param DecoratedComponent The component to decorate
  */
 export function wrapInTestContext(DecoratedComponent: any): any {
-	return (props: any) => (
+	const result: React.FC<any> = (props: any) => (
 		<DndProvider backend={TestBackendImpl}>
 			<DecoratedComponent {...props} />
 		</DndProvider>
 	)
+	result.displayName = 'TestContextWrapper'
+	return result
 }
 
 /**

@@ -6,11 +6,13 @@ const style = {
 	width: 400,
 }
 
+export interface Item {
+	id: number
+	text: string
+}
+
 export interface ContainerState {
-	cards: Array<{
-		id: number
-		text: string
-	}>
+	cards: Item[]
 }
 
 const Container: React.FC = () => {
