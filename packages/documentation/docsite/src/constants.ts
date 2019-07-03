@@ -71,36 +71,6 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
-		title: 'Legacy Decorator API',
-		pages: {
-			DRAG_SOURCE: {
-				location: '/docs/api/drag-source',
-				title: 'DragSource',
-			},
-			DROP_TARGET: {
-				location: '/docs/api/drop-target',
-				title: 'DropTarget',
-			},
-			DRAG_LAYER: {
-				location: '/docs/api/drag-layer',
-				title: 'DragLayer',
-			},
-		},
-	},
-	{
-		title: 'Connecting Decorators to DOM',
-		pages: {
-			DRAG_SOURCE_CONNECTOR: {
-				location: '/docs/api/drag-source-connector',
-				title: 'DragSourceConnector',
-			},
-			DROP_TARGET_CONNECTOR: {
-				location: '/docs/api/drop-target-connector',
-				title: 'DropTargetConnector',
-			},
-		},
-	},
-	{
 		title: 'Monitoring State',
 		pages: {
 			DRAG_SOURCE_MONITOR: {
@@ -118,19 +88,44 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
+		title: 'Legacy Decorator API',
+		pages: {
+			DRAG_SOURCE: {
+				location: '/docs/api/drag-source',
+				title: 'DragSource',
+			},
+			DROP_TARGET: {
+				location: '/docs/api/drop-target',
+				title: 'DropTarget',
+			},
+			DRAG_LAYER: {
+				location: '/docs/api/drag-layer',
+				title: 'DragLayer',
+			},
+			DRAG_SOURCE_CONNECTOR: {
+				location: '/docs/api/drag-source-connector',
+				title: 'DragSourceConnector',
+			},
+			DROP_TARGET_CONNECTOR: {
+				location: '/docs/api/drop-target-connector',
+				title: 'DropTargetConnector',
+			},
+		},
+	},
+	{
 		title: 'Backends',
 		pages: {
 			HTML5_BACKEND: {
 				location: '/docs/backends/html5',
 				title: 'HTML5',
 			},
+			TOUCH_BACKEND: {
+				location: '/docs/backends/touch',
+				title: 'Touch',
+			},
 			TEST_BACKEND: {
 				location: '/docs/backends/test',
 				title: 'Test',
-			},
-			TOUCH_BACKEND: {
-				location: '/docs/backends/touch-backend',
-				title: 'Touch',
 			},
 		},
 	},
