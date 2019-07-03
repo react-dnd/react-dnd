@@ -34,6 +34,7 @@
 		"react-dnd-examples-decorators": "^8.0.3",
 		"react-dnd-examples-hooks": "^8.0.3",
 		"react-dnd-html5-backend": "^8.0.3",
+		"react-dnd-touch-backend": "^8.0.3",
 		"react-dnd-test-backend": "^8.0.3",
 		"react-dom": "^16.8.6",
 		"react-helmet": "^5.2.0",

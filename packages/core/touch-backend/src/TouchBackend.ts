@@ -1,13 +1,20 @@
 import invariant from 'invariant'
 import {
-	BackendFactory,
 	DragDropActions,
 	DragDropMonitor,
 	Backend,
 	Identifier,
 	XYCoord,
+	DragDropManager,
+	Unsubscribe,
 } from 'dnd-core'
-import { EventName, Opts, AngleRange, ListenerType } from './interfaces'
+import {
+	EventName,
+	TouchBackendOptions,
+	AngleRange,
+	ListenerType,
+	TouchBackendContext,
+} from './interfaces'
 import { eventShouldStartDrag, eventShouldEndDrag } from './utils/predicates'
 import { getEventClientOffset, getNodeClientOffset } from './utils/offsets'
 import { distance, inAngleRanges } from './utils/math'
@@ -56,7 +63,13 @@ export default class TouchBackend implements Backend {
 	private dragOverTargetIds: string[] | undefined
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
-	constructor(manager: Parameters<BackendFactory>[0], options: Opts = {}) {
+	private context: TouchBackendContext
+
+	constructor(
+		manager: DragDropManager<TouchBackendContext>,
+		options: TouchBackendOptions = {},
+	) {
+		this.context = manager.getContext()
 		options.delayTouchStart = options.delayTouchStart || options.delay
 
 		options = {
@@ -109,8 +122,26 @@ export default class TouchBackend implements Backend {
 		}
 	}
 
-	setup() {
-		if (typeof window === 'undefined') {
+	// public for test
+	public get window() {
+		if (this.context && this.context.window) {
+			return this.context.window
+		} else if (typeof window !== 'undefined') {
+			return window
+		}
+		return undefined
+	}
+
+	// public for test
+	public get document() {
+		if (this.window) {
+			return this.window.document
+		}
+		return undefined
+	}
+
+	public setup() {
+		if (!this.window) {
 			return
 		}
 
@@ -120,30 +151,34 @@ export default class TouchBackend implements Backend {
 		)
 		TouchBackend.isSetUp = true
 
-		this.addEventListener(window, 'start', this.getTopMoveStartHandler() as any)
 		this.addEventListener(
-			window,
+			this.window,
+			'start',
+			this.getTopMoveStartHandler() as any,
+		)
+		this.addEventListener(
+			this.window,
 			'start',
 			this.handleTopMoveStartCapture as any,
 			true,
 		)
-		this.addEventListener(window, 'move', this.handleTopMove as any)
-		this.addEventListener(window, 'move', this.handleTopMoveCapture, true)
+		this.addEventListener(this.window, 'move', this.handleTopMove as any)
+		this.addEventListener(this.window, 'move', this.handleTopMoveCapture, true)
 		this.addEventListener(
-			window,
+			this.window,
 			'end',
 			this.handleTopMoveEndCapture as any,
 			true,
 		)
 
 		if (this.enableMouseEvents && !this.ignoreContextMenu) {
-			this.addEventListener(window, 'contextmenu', this
+			this.addEventListener(this.window, 'contextmenu', this
 				.handleTopMoveEndCapture as any)
 		}
 
 		if (this.enableKeyboardEvents) {
 			this.addEventListener(
-				window,
+				this.window,
 				'keydown',
 				this.handleCancelOnEscape as any,
 				true,
@@ -152,7 +187,7 @@ export default class TouchBackend implements Backend {
 	}
 
 	teardown() {
-		if (typeof window === 'undefined') {
+		if (!this.window) {
 			return
 		}
 
@@ -160,29 +195,35 @@ export default class TouchBackend implements Backend {
 		this._mouseClientOffset = {}
 
 		this.removeEventListener(
-			window,
+			this.window,
 			'start',
 			this.handleTopMoveStartCapture as any,
 			true,
 		)
-		this.removeEventListener(window, 'start', this.handleTopMoveStart as any)
-		this.removeEventListener(window, 'move', this.handleTopMoveCapture, true)
-		this.removeEventListener(window, 'move', this.handleTopMove as any)
+		this.removeEventListener(this.window, 'start', this
+			.handleTopMoveStart as any)
 		this.removeEventListener(
-			window,
+			this.window,
+			'move',
+			this.handleTopMoveCapture,
+			true,
+		)
+		this.removeEventListener(this.window, 'move', this.handleTopMove as any)
+		this.removeEventListener(
+			this.window,
 			'end',
 			this.handleTopMoveEndCapture as any,
 			true,
 		)
 
 		if (this.enableMouseEvents && !this.ignoreContextMenu) {
-			this.removeEventListener(window, 'contextmenu', this
+			this.removeEventListener(this.window, 'contextmenu', this
 				.handleTopMoveEndCapture as any)
 		}
 
 		if (this.enableKeyboardEvents) {
 			this.removeEventListener(
-				window,
+				this.window,
 				'keydown',
 				this.handleCancelOnEscape as any,
 				true,
@@ -248,13 +289,17 @@ export default class TouchBackend implements Backend {
 		}
 	}
 
-	connectDropTarget(targetId: any, node: any) {
-		const handleMove = (e: MouseEvent | TouchEvent) => {
-			let coords
+	connectDropTarget(targetId: any, node: any): Unsubscribe {
+		if (!this.document) {
+			return () => null
+		}
 
-			if (!this.monitor.isDragging()) {
+		const handleMove = (e: MouseEvent | TouchEvent) => {
+			if (!this.document || !this.monitor.isDragging()) {
 				return
 			}
+
+			let coords
 
 			/**
 			 * Grab the coordinates for the current mouse/touch position
@@ -281,7 +326,7 @@ export default class TouchBackend implements Backend {
 			 */
 			let droppedOn =
 				coords != null
-					? document.elementFromPoint(coords.x, coords.y)
+					? this.document.elementFromPoint(coords.x, coords.y)
 					: undefined
 			let childMatch = droppedOn && node.contains(droppedOn)
 
@@ -293,12 +338,14 @@ export default class TouchBackend implements Backend {
 		/**
 		 * Attaching the event listener to the body so that touchmove will work while dragging over multiple target elements.
 		 */
-		this.addEventListener(document.body, 'move', handleMove as any)
+		this.addEventListener(this.document.body, 'move', handleMove as any)
 		this.targetNodes[targetId] = node
 
 		return () => {
-			delete this.targetNodes[targetId]
-			this.removeEventListener(document.body, 'move', handleMove as any)
+			if (this.document) {
+				delete this.targetNodes[targetId]
+				this.removeEventListener(this.document.body, 'move', handleMove as any)
+			}
 		}
 	}
 
@@ -377,10 +424,9 @@ export default class TouchBackend implements Backend {
 		if (this.timeout) {
 			clearTimeout(this.timeout)
 		}
-		if (this.waitingForDelay) {
+		if (!this.document || this.waitingForDelay) {
 			return
 		}
-
 		const {
 			moveStartSourceIds,
 			dragOverTargetIds,
@@ -450,7 +496,7 @@ export default class TouchBackend implements Backend {
 					clientOffset.y,
 					dragOverTargetNodes,
 			  )
-			: document.elementsFromPoint(clientOffset.x, clientOffset.y)
+			: this.document.elementsFromPoint(clientOffset.x, clientOffset.y)
 		// Extend list with parents that are not receiving elementsFromPoint events (size 0 elements and svg groups)
 		let elementsAtPointExtended = []
 		for (let nodeId in elementsAtPoint) {
@@ -555,10 +601,10 @@ export default class TouchBackend implements Backend {
 	}
 
 	resurrectSourceNode() {
-		if (this.draggedSourceNode) {
+		if (this.document && this.draggedSourceNode) {
 			this.draggedSourceNode.style.display = 'none'
 			this.draggedSourceNode.removeAttribute('data-reactid')
-			document.body.appendChild(this.draggedSourceNode)
+			this.document.body.appendChild(this.draggedSourceNode)
 		}
 	}
 
