@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react'
+import { useRef, useMemo, useLayoutEffect } from 'react'
 import invariant from 'invariant'
 import {
 	DropTargetHookSpec,
@@ -36,7 +36,7 @@ export function useDrop<
 		connector,
 	])
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		connector.dropTargetOptions = spec.options || null
 		connector.reconnect()
 	}, [spec.options])
