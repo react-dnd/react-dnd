@@ -1,5 +1,5 @@
 import shallowEqual from 'shallowequal'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useLayoutEffect } from 'react'
 
 /**
  *
@@ -23,6 +23,10 @@ export function useCollector<T, S>(
 			}
 		}
 	}, [collected, monitor, onUpdate])
+
+	// update the collected properties after the first render
+	// and the components are attached to dnd-core
+	useLayoutEffect(updateCollected, [])
 
 	return [collected, updateCollected]
 }
