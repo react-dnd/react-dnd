@@ -7,7 +7,12 @@ import {
 	Identifier,
 	XYCoord,
 } from 'dnd-core'
-import { EventName, Opts, AngleRange, ListenerType } from './interfaces'
+import {
+	EventName,
+	TouchBackendOptions,
+	AngleRange,
+	ListenerType,
+} from './interfaces'
 import { eventShouldStartDrag, eventShouldEndDrag } from './utils/predicates'
 import { getEventClientOffset, getNodeClientOffset } from './utils/offsets'
 import { distance, inAngleRanges } from './utils/math'
@@ -56,7 +61,10 @@ export default class TouchBackend implements Backend {
 	private dragOverTargetIds: string[] | undefined
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
-	constructor(manager: Parameters<BackendFactory>[0], options: Opts = {}) {
+	constructor(
+		manager: Parameters<BackendFactory>[0],
+		options: TouchBackendOptions = {},
+	) {
 		options.delayTouchStart = options.delayTouchStart || options.delay
 
 		options = {

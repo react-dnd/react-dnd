@@ -6,7 +6,7 @@ export interface EventName {
 	keydown?: 'keydown'
 }
 
-export interface Opts {
+export interface TouchBackendOptions {
 	delay?: number
 	delayTouchStart?: number
 	enableTouchEvents?: boolean
