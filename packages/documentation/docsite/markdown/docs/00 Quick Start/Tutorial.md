@@ -596,6 +596,7 @@ function BoardSquare({ x, y, children }) {
 
   return (
     <div
+      ref={drop}
       style={{
         position: 'relative',
         width: '100%',
@@ -665,6 +666,7 @@ function BoardSquare({ x, y, children }) {
 
   return (
     <div
+      ref={drop}
       style={{
         position: 'relative',
         width: '100%',
