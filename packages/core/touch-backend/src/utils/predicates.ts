@@ -1,6 +1,3 @@
-import { DragDropManager } from 'dnd-core'
-import { Opts } from '../interfaces'
-
 // Used for MouseEvent.buttons (note the s on the end).
 const MouseButtons = {
 	Left: 1,
@@ -41,10 +38,4 @@ export function isTouchEvent(
 	e: Touch | TouchEvent | MouseEvent,
 ): e is TouchEvent {
 	return !!(e as TouchEvent).targetTouches
-}
-
-export function isDragDropManager(
-	optionsOrManager: DragDropManager<any> | Opts,
-): optionsOrManager is DragDropManager<any> {
-	return !!(optionsOrManager as DragDropManager<any>).getMonitor
 }
