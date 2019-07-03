@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react'
+import { useRef, useMemo, useLayoutEffect } from 'react'
 import invariant from 'invariant'
 import {
 	DragSourceHookSpec,
@@ -42,11 +42,11 @@ export function useDrag<
 	const connectDragPreview = useMemo(() => connector.hooks.dragPreview(), [
 		connector,
 	])
-	useEffect(() => {
+	useLayoutEffect(() => {
 		connector.dragSourceOptions = specRef.current.options || null
 		connector.reconnect()
 	}, [connector])
-	useEffect(() => {
+	useLayoutEffect(() => {
 		connector.dragPreviewOptions = specRef.current.previewOptions || null
 		connector.reconnect()
 	}, [connector])

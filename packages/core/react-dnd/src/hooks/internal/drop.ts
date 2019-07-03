@@ -3,7 +3,7 @@ import {
 	DropTargetMonitor,
 	DropTargetHookSpec,
 } from '../../interfaces'
-import { useEffect, useMemo, MutableRefObject } from 'react'
+import { useMemo, MutableRefObject, useLayoutEffect } from 'react'
 import { DropTarget } from 'dnd-core'
 import { registerTarget } from '../../common/registration'
 import { useDragDropManager } from './useDragDropManager'
@@ -52,7 +52,7 @@ export function useDropHandler<
 		} as DropTarget
 	}, [monitor])
 
-	useEffect(
+	useLayoutEffect(
 		function registerHandler() {
 			const [handlerId, unregister] = registerTarget(
 				spec.current.accept,
