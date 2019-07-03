@@ -6,7 +6,7 @@ export interface EventName {
 	keydown?: 'keydown'
 }
 
-export interface Opts {
+export interface TouchBackendOptions {
 	delay?: number
 	delayTouchStart?: number
 	enableTouchEvents?: boolean
@@ -29,4 +29,8 @@ export const enum ListenerType {
 	mouse = 'mouse',
 	touch = 'touch',
 	keyboard = 'keyboard',
+}
+
+export interface TouchBackendContext {
+	window: Window
 }

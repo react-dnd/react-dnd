@@ -1,9 +1,9 @@
 import { parse } from 'query-string'
 
-export function isDebugMode() {
+export function isTouchBackend() {
 	if (typeof window !== 'undefined') {
 		const queryObject = parse(window.location.search)
-		return queryObject.debug !== undefined
+		return queryObject.touch !== undefined
 	} else {
 		return false
 	}

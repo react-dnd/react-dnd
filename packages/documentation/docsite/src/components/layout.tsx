@@ -4,7 +4,9 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
-import { isDebugMode } from 'react-dnd-examples-hooks/lib/esm/index'
+import createTouchBackend from 'react-dnd-touch-backend'
+import { isDebugMode } from '../util/isDebugMode'
+import { isTouchBackend } from '../util/isTouchBackend'
 import { DndProvider } from 'react-dnd'
 import PageBody from './pagebody'
 import Sidebar from './sidebar'
@@ -20,6 +22,8 @@ export interface LayoutProps {
 	hideSidebar?: boolean
 }
 
+const TouchBackend = createTouchBackend({ enableMouseEvents: true })
+
 const Layout: React.FC<LayoutProps> = props => {
 	const { children, location } = props
 	const sitepath = location && location.pathname
@@ -29,6 +33,7 @@ const Layout: React.FC<LayoutProps> = props => {
 	const sidebarItems: PageGroup[] = isExampleUrl ? ExamplePages : APIPages
 	const hideSidebar = props.hideSidebar || sitepath === '/about'
 	const debugMode = isDebugMode()
+	const touchBackend = isTouchBackend()
 	return (
 		<>
 			<Helmet
@@ -45,8 +50,11 @@ const Layout: React.FC<LayoutProps> = props => {
 					href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css"
 				/>
 			</Helmet>
-			<Header debugMode={debugMode} />
-			<DndProvider backend={HTML5Backend} debugMode={debugMode}>
+			<Header debugMode={debugMode} touchBackend={touchBackend} />
+			<DndProvider
+				backend={touchBackend ? TouchBackend : HTML5Backend}
+				debugMode={debugMode}
+			>
 				<ContentContainer>
 					<PageBody hasSidebar={sitepath !== '/about'}>
 						{hideSidebar ? null : (
