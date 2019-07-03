@@ -4,7 +4,7 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
-import createTouchBackend from 'react-dnd-touch-backend'
+import TouchBackend from 'react-dnd-touch-backend'
 import { isDebugMode } from '../util/isDebugMode'
 import { isTouchBackend } from '../util/isTouchBackend'
 import { DndProvider } from 'react-dnd'
@@ -22,7 +22,7 @@ export interface LayoutProps {
 	hideSidebar?: boolean
 }
 
-const TouchBackend = createTouchBackend({ enableMouseEvents: true })
+const touchBackendOptions = { enableMouseEvents: true }
 
 const Layout: React.FC<LayoutProps> = props => {
 	const { children, location } = props
@@ -54,6 +54,7 @@ const Layout: React.FC<LayoutProps> = props => {
 			<DndProvider
 				backend={touchBackend ? TouchBackend : HTML5Backend}
 				debugMode={debugMode}
+				options={touchBackend ? touchBackendOptions : undefined}
 			>
 				<ContentContainer>
 					<PageBody hasSidebar={sitepath !== '/about'}>
