@@ -1,9 +1,9 @@
 import shallowEqual from 'shallowequal'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useLayoutEffect } from 'react'
 
 /**
  *
- * @param monitor The monitor to colelct state from
+ * @param monitor The monitor to collect state from
  * @param collect The collecting function
  * @param onUpdate A method to invoke when updates occur
  */
@@ -23,6 +23,10 @@ export function useCollector<T, S>(
 			}
 		}
 	}, [collected, monitor, onUpdate])
+
+	// update the collected properties after the first render
+	// and the components are attached to dnd-core
+	useLayoutEffect(updateCollected, [])
 
 	return [collected, updateCollected]
 }
