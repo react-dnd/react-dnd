@@ -10,7 +10,6 @@ export class OptionsReader {
 		return undefined
 	}
 
-	// public for test
 	public get document() {
 		if (this.window) {
 			return this.window.document
