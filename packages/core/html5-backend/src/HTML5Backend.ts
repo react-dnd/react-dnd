@@ -351,6 +351,10 @@ export default class HTML5Backend implements Backend {
 	}
 
 	private handleDragStart(e: DragEvent, sourceId: string) {
+		if (e.defaultPrevented) {
+			return
+		}
+
 		if (!this.dragStartSourceIds) {
 			this.dragStartSourceIds = []
 		}
@@ -358,6 +362,10 @@ export default class HTML5Backend implements Backend {
 	}
 
 	private handleTopDragStart = (e: DragEvent) => {
+		if (e.defaultPrevented) {
+			return
+		}
+
 		const { dragStartSourceIds } = this
 		this.dragStartSourceIds = null
 
