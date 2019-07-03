@@ -15,13 +15,14 @@ import { DragDropManager, HandlerRegistry } from '../interfaces'
 import { isString } from '../utils/js_utils'
 
 describe('DragDropManager', () => {
-	let manager: DragDropManager<any>
+	let manager: DragDropManager
 	let backend: TestBackend
 	let registry: HandlerRegistry
 
 	beforeEach(() => {
-		manager = new DragDropManagerImpl(createTestBackend as any)
-		backend = (manager.getBackend() as any) as TestBackend
+		manager = new DragDropManagerImpl()
+		backend = createTestBackend(manager, null, null) as TestBackend
+		;(manager as any).receiveBackend(backend)
 		registry = manager.getRegistry()
 	})
 
