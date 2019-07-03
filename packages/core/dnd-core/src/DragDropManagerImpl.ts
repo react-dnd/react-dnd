@@ -6,7 +6,6 @@ import HandlerRegistryImpl from './HandlerRegistryImpl'
 import {
 	ActionCreator,
 	Backend,
-	BackendFactory,
 	DragDropActions,
 	DragDropMonitor,
 	DragDropManager,
@@ -31,31 +30,24 @@ function makeStoreInstance(debugMode: boolean) {
 	)
 }
 
-export default class DragDropManagerImpl<Context>
-	implements DragDropManager<Context> {
+export default class DragDropManagerImpl implements DragDropManager {
 	private store: Store<State>
 	private monitor: DragDropMonitor
-	private backend: Backend
+	private backend: Backend | undefined
 	private isSetUp: boolean = false
 
-	constructor(
-		createBackend: BackendFactory,
-		private context: Context = {} as Context,
-		debugMode = false,
-	) {
+	constructor(debugMode = false) {
 		const store = makeStoreInstance(debugMode)
 		this.store = store
 		this.monitor = new DragDropMonitorImpl(
 			store,
 			new HandlerRegistryImpl(store),
 		)
-		this.backend = createBackend(this)
-
 		store.subscribe(this.handleRefCountChange)
 	}
 
-	public getContext() {
-		return this.context
+	public receiveBackend(backend: Backend) {
+		this.backend = backend
 	}
 
 	public getMonitor(): DragDropMonitor {
@@ -63,7 +55,7 @@ export default class DragDropManagerImpl<Context>
 	}
 
 	public getBackend() {
-		return this.backend
+		return this.backend!
 	}
 
 	public getRegistry(): HandlerRegistry {
@@ -103,12 +95,14 @@ export default class DragDropManagerImpl<Context>
 
 	private handleRefCountChange = () => {
 		const shouldSetUp = this.store.getState().refCount > 0
-		if (shouldSetUp && !this.isSetUp) {
-			this.backend.setup()
-			this.isSetUp = true
-		} else if (!shouldSetUp && this.isSetUp) {
-			this.backend.teardown()
-			this.isSetUp = false
+		if (this.backend) {
+			if (shouldSetUp && !this.isSetUp) {
+				this.backend.setup()
+				this.isSetUp = true
+			} else if (!shouldSetUp && this.isSetUp) {
+				this.backend.teardown()
+				this.isSetUp = false
+			}
 		}
 	}
 }

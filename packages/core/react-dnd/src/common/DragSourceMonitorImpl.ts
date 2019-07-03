@@ -15,7 +15,7 @@ export class DragSourceMonitorImpl implements DragSourceMonitor {
 	private internalMonitor: DragDropMonitor
 	private sourceId: Identifier | null = null
 
-	constructor(manager: DragDropManager<any>) {
+	constructor(manager: DragDropManager) {
 		this.internalMonitor = manager.getMonitor()
 	}
 

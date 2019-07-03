@@ -1,9 +1,7 @@
 import { DragDropManager, SentinelAction } from '../../interfaces'
 import { PUBLISH_DRAG_SOURCE } from './types'
 
-export default function createPublishDragSource<Context>(
-	manager: DragDropManager<Context>,
-) {
+export default function createPublishDragSource(manager: DragDropManager) {
 	return function publishDragSource(): SentinelAction | undefined {
 		const monitor = manager.getMonitor()
 		if (monitor.isDragging()) {

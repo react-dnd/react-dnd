@@ -179,8 +179,7 @@ export interface DragDropActions {
 	endDrag(): SentinelAction
 }
 
-export interface DragDropManager<Context> {
-	getContext(): Context
+export interface DragDropManager {
 	getMonitor(): DragDropMonitor
 	getBackend(): Backend
 	getRegistry(): HandlerRegistry
@@ -188,7 +187,11 @@ export interface DragDropManager<Context> {
 	dispatch(action: any): void
 }
 
-export type BackendFactory = (dragDropManager: DragDropManager<any>) => Backend
+export type BackendFactory = (
+	manager: DragDropManager,
+	globalContext?: any,
+	configuration?: any,
+) => Backend
 
 export interface DragSource {
 	beginDrag(monitor: DragDropMonitor, targetId: Identifier): void

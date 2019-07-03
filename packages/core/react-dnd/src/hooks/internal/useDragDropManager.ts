@@ -6,8 +6,8 @@ import { DndContext } from '../../common/DndContext'
 /**
  * A hook to retrieve the DragDropManager from Context
  */
-export function useDragDropManager<Context>(): DragDropManager<Context> {
+export function useDragDropManager(): DragDropManager {
 	const { dragDropManager } = useContext(DndContext)
 	invariant(dragDropManager != null, 'Expected drag drop context')
-	return dragDropManager as DragDropManager<Context>
+	return dragDropManager as DragDropManager
 }

@@ -1,4 +1,4 @@
-import getEmptyImage from '../getEmptyImage'
+import { getEmptyImage } from '../getEmptyImage'
 
 describe('Get Empty Image', () => {
 	it('should return image', () => {

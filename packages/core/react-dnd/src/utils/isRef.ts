@@ -4,6 +4,7 @@ export interface Ref<T> {
 
 export function isRef(obj: any) {
 	return (
+		// eslint-disable-next-line no-prototype-builtins
 		obj !== null && typeof obj === 'object' && obj.hasOwnProperty('current')
 	)
 }

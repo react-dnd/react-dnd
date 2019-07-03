@@ -10,9 +10,7 @@ import {
 import matchesType from '../../utils/matchesType'
 import { HOVER } from './types'
 
-export default function createHover<Context>(
-	manager: DragDropManager<Context>,
-) {
+export default function createHover(manager: DragDropManager) {
 	return function hover(
 		targetIdsArg: string[],
 		{ clientOffset }: HoverOptions = {},

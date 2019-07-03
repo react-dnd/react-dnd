@@ -1,22 +1,21 @@
 declare var global: any
 
 import HTML5Backend from '../HTML5Backend'
+import createBackend from '../index'
 import { DragDropManager } from 'dnd-core'
-import { HTML5BackendContext } from '../interfaces'
 
 describe('The HTML5 Backend', () => {
 	describe('window injection', () => {
 		it('uses an undefined window when no window is available', () => {
-			const mockManager: DragDropManager<HTML5BackendContext> = {
+			const mockManager: DragDropManager = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
-				getContext: () => ({}),
 			} as any
 			const mockWindow = global.window
 			try {
 				delete global.window
-				const backend = new HTML5Backend(mockManager)
+				const backend = createBackend(mockManager) as HTML5Backend
 				expect(backend).toBeDefined()
 				expect(backend.window).toBeUndefined()
 			} finally {
@@ -25,13 +24,12 @@ describe('The HTML5 Backend', () => {
 		})
 
 		it('uses the ambient window global', () => {
-			const mockManager: DragDropManager<HTML5BackendContext> = {
+			const mockManager: DragDropManager = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
-				getContext: () => ({}),
 			} as any
-			const backend = new HTML5Backend(mockManager)
+			const backend = createBackend(mockManager, window) as HTML5Backend
 			expect(backend).toBeDefined()
 			expect(backend.window).toBeDefined()
 		})
@@ -40,15 +38,12 @@ describe('The HTML5 Backend', () => {
 			const fakeWindow = {
 				x: 1,
 			}
-			const mockManager: DragDropManager<HTML5BackendContext> = {
+			const mockManager: DragDropManager = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
-				getContext: () => ({
-					window: fakeWindow,
-				}),
 			} as any
-			const backend = new HTML5Backend(mockManager)
+			const backend = createBackend(mockManager, fakeWindow) as HTML5Backend
 			expect(backend).toBeDefined()
 			expect(backend.window).toBe(fakeWindow)
 		})
@@ -56,16 +51,13 @@ describe('The HTML5 Backend', () => {
 
 	describe('setup and teardown', () => {
 		let backend: HTML5Backend
-		let mockManager: DragDropManager<HTML5BackendContext>
+		let mockManager: DragDropManager
 		let fakeWindow: any = {}
 		beforeEach(() => {
 			mockManager = {
 				getActions: () => null,
 				getMonitor: () => null,
 				getRegistry: () => null,
-				getContext: () => ({
-					window: fakeWindow,
-				}),
 			} as any
 		})
 
@@ -74,7 +66,9 @@ describe('The HTML5 Backend', () => {
 		})
 
 		it('should throw error if two instances of html5 backend are setup', () => {
-			backend = new HTML5Backend(mockManager)
+			backend = createBackend(mockManager, {
+				window: fakeWindow,
+			}) as HTML5Backend
 			backend.setup()
 			try {
 				backend.setup()
@@ -86,20 +80,20 @@ describe('The HTML5 Backend', () => {
 		})
 
 		it('should set __isReactDndBackendSetUp on setup', () => {
-			backend = new HTML5Backend(mockManager)
+			backend = createBackend(mockManager, fakeWindow) as HTML5Backend
 			backend.setup()
 			expect(fakeWindow.__isReactDndBackendSetUp).toBeTruthy()
 		})
 
 		it('should unset ____isReactDndBackendSetUp on teardown', () => {
-			backend = new HTML5Backend(mockManager)
+			backend = createBackend(mockManager, fakeWindow) as HTML5Backend
 			backend.setup()
 			backend.teardown()
 			expect(fakeWindow.__isReactDndBackendSetUp).toBeFalsy()
 		})
 
 		it('should be able to call setup after teardown', () => {
-			backend = new HTML5Backend(mockManager)
+			backend = createBackend(mockManager, fakeWindow) as HTML5Backend
 			backend.setup()
 			backend.teardown()
 			backend.setup()
