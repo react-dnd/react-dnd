@@ -14,8 +14,8 @@ import sortableStressTest from './04-sortable/stress-test'
 import customizeDropEffects from './05-customize/drop-effects'
 import customizeHandlesAndPreviews from './05-customize/handles-and-previews'
 import dragSourceRerender from './06-other/drag-source-rerender'
+import remountWithCorrectProps from './06-other/remount-with-correct-props'
 import otherNativeFiles from './06-other/native-files'
-export * from './isDebugMode'
 export const componentIndex = {
   chessboard,
   'dustbin-single-target': dustbinSingleTarget,
@@ -33,5 +33,6 @@ export const componentIndex = {
   'customize-drop-effects': customizeDropEffects,
   'customize-handles-and-previews': customizeHandlesAndPreviews,
   'other-drag-source-rerender': dragSourceRerender,
+  'other-remount-with-correct-props': remountWithCorrectProps,
   'other-native-files': otherNativeFiles,
 }
