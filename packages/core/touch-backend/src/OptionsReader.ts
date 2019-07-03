@@ -12,7 +12,7 @@ export class OptionsReader implements TouchBackendOptions {
 	public delayMouseStart: number
 	public getDropTargetElementsAtPoint?: Function
 
-	constructor(incoming: TouchBackendOptions, private context: any) {
+	constructor(incoming: TouchBackendOptions, private context?: any) {
 		this.delayTouchStart = incoming.delayTouchStart || incoming.delay || 0
 		this.delayMouseStart = incoming.delayMouseStart || incoming.delay || 0
 

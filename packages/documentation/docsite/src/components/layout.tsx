@@ -53,8 +53,8 @@ const Layout: React.FC<LayoutProps> = props => {
 			<Header debugMode={debugMode} touchBackend={touchBackend} />
 			<DndProvider
 				backend={touchBackend ? TouchBackend : HTML5Backend}
-				debugMode={debugMode}
 				options={touchBackend ? touchBackendOptions : undefined}
+				debugMode={debugMode}
 			>
 				<ContentContainer>
 					<PageBody hasSidebar={sitepath !== '/about'}>
