@@ -7,9 +7,7 @@ import createEndDrag from './endDrag'
 
 export * from './types'
 
-export default function createDragDropActions<Context>(
-	manager: DragDropManager<Context>,
-) {
+export default function createDragDropActions(manager: DragDropManager) {
 	return {
 		beginDrag: createBeginDrag(manager),
 		publishDragSource: createPublishDragSource(manager),

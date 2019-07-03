@@ -21,9 +21,7 @@ const ResetCoordinatesAction = {
 	},
 }
 
-export default function createBeginDrag<Context>(
-	manager: DragDropManager<Context>,
-) {
+export default function createBeginDrag(manager: DragDropManager) {
 	return function beginDrag(
 		sourceIds: string[] = [],
 		options: BeginDragOptions = {
