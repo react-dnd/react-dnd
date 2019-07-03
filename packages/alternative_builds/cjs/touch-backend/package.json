@@ -9,7 +9,7 @@
     "clean": "rimraf lib"
   },
   "dependencies": {
-    "@types/invariant": "^2.2.29",
+    "@types/invariant": "^2.2.30",
     "invariant": "^2.2.4",
     "dnd-core-cjs": "^8.0.3"
   },
