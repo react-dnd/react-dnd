@@ -18,7 +18,6 @@ import dragSourceRerender from './06-other/drag-source-rerender'
 import remountWithCorrectProps from './06-other/remount-with-correct-props'
 import otherNativeFiles from './06-other/native-files'
 
-export * from './isDebugMode'
 export const componentIndex: {
 	[key: string]: React.ComponentClass<any> | React.FunctionComponent<any>
 } = {
