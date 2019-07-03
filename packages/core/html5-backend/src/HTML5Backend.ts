@@ -31,7 +31,6 @@ export default class HTML5Backend implements Backend {
 	private actions: DragDropActions
 	private monitor: DragDropMonitor
 	private registry: HandlerRegistry
-	private context: HTML5BackendContext
 
 	private enterLeaveCounter: EnterLeaveCounter
 
@@ -51,11 +50,10 @@ export default class HTML5Backend implements Backend {
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
 
-	constructor(manager: DragDropManager<any>) {
+	constructor(manager: DragDropManager, private context: HTML5BackendContext) {
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
-		this.context = manager.getContext()
 
 		this.enterLeaveCounter = new EnterLeaveCounter(this.isNodeInDocument)
 	}

@@ -104,6 +104,7 @@
 			"^dnd-core$": "<rootDir>/packages/core/dnd-core/src",
 			"^react-dnd$": "<rootDir>/packages/core/react-dnd/src",
 			"^react-dnd-html5-backend$": "<rootDir>/packages/core/html5-backend/src",
+			"^react-dnd-touch-backend$": "<rootDir>/packages/core/touch-backend/src",
 			"^react-dnd-test-backend$": "<rootDir>/packages/testing/test-backend/src",
 			"^react-dnd-test-utils$": "<rootDir>/packages/testing/test-utils/src"
 		},
@@ -116,7 +117,8 @@
 		"testMatch": [
 			"<rootDir>/packages/core/dnd-core/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
 			"<rootDir>/packages/core/react-dnd/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
-			"<rootDir>/packages/core/html5-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)"
+			"<rootDir>/packages/core/html5-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
+			"<rootDir>/packages/core/touch-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)"
 		],
 		"transform": {
 			"^.+\\.(ts|tsx)$": "ts-jest"

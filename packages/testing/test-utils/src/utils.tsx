@@ -1,6 +1,6 @@
 import * as React from 'react'
 import TestBackendImpl, { TestBackend } from 'react-dnd-test-backend'
-import { DragDropContext, ContextComponent, DndComponent } from 'react-dnd'
+import { ContextComponent, DndComponent, DndProvider } from 'react-dnd'
 import { Backend } from 'dnd-core'
 import { act } from 'react-dom/test-utils'
 
@@ -10,8 +10,11 @@ import { act } from 'react-dom/test-utils'
  * @param DecoratedComponent The component to decorate
  */
 export function wrapInTestContext(DecoratedComponent: any): any {
-	const TestStub = (props: any) => <DecoratedComponent {...props} />
-	return DragDropContext(TestBackendImpl)(TestStub)
+	return (props: any) => (
+		<DndProvider backend={TestBackendImpl}>
+			<DecoratedComponent {...props} />
+		</DndProvider>
+	)
 }
 
 /**
