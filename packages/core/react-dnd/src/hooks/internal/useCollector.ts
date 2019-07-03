@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react'
 
 /**
  *
- * @param monitor The monitor to colelct state from
+ * @param monitor The monitor to collect state from
  * @param collect The collecting function
  * @param onUpdate A method to invoke when updates occur
  */
