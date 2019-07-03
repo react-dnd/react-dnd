@@ -14,14 +14,15 @@ import {
 import DragDropManagerImpl from '../DragDropManagerImpl'
 
 describe.only('DragDropMonitor', () => {
-	let manager: DragDropManager<any>
+	let manager: DragDropManager
 	let backend: TestBackend
 	let registry: HandlerRegistry
 	let monitor: DragDropMonitor
 
 	beforeEach(() => {
-		manager = new DragDropManagerImpl(createTestBackend as any)
-		backend = (manager.getBackend() as any) as TestBackend
+		manager = new DragDropManagerImpl()
+		backend = createTestBackend(manager, null, null) as TestBackend
+		;(manager as any).receiveBackend(backend)
 		registry = manager.getRegistry()
 		monitor = manager.getMonitor()
 	})

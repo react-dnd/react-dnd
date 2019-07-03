@@ -1,6 +1,6 @@
 let emptyImage: HTMLImageElement | undefined
 
-export default function getEmptyImage(): HTMLImageElement {
+export function getEmptyImage(): HTMLImageElement {
 	if (!emptyImage) {
 		emptyImage = new Image()
 		emptyImage.src =

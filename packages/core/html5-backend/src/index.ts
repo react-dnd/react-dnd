@@ -1,12 +1,12 @@
-export * from './interfaces'
-
 import HTML5Backend from './HTML5Backend'
-import getEmptyImage from './getEmptyImage'
 import * as NativeTypes from './NativeTypes'
-import { DragDropManager } from 'dnd-core'
+import { DragDropManager, BackendFactory } from 'dnd-core'
+export { getEmptyImage } from './getEmptyImage'
+export { NativeTypes }
 
-export { NativeTypes, getEmptyImage }
+const createHTML5Backend: BackendFactory = (
+	manager: DragDropManager,
+	context: any,
+) => new HTML5Backend(manager, context)
 
-export default function createHTML5Backend(manager: DragDropManager<any>) {
-	return new HTML5Backend(manager)
-}
+export default createHTML5Backend

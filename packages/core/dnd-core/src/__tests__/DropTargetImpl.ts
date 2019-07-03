@@ -1,15 +1,15 @@
-import { DropTarget, DragDropMonitor } from '../interfaces'
+import { DropTarget } from '../interfaces'
 
 export default class DropTargetImpl implements DropTarget {
-	public canDrop(monitor: DragDropMonitor, targetId: string) {
+	public canDrop() {
 		return true
 	}
 
-	public hover(monitor: DragDropMonitor, targetId: string) {
+	public hover() {
 		// empty on purpose
 	}
 
-	public drop(monitor: DragDropMonitor, targetId: string) {
+	public drop() {
 		// empty on purpose
 	}
 }

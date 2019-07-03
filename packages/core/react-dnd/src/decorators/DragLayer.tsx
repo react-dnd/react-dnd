@@ -37,7 +37,7 @@ export function DragLayer<RequiredProps, CollectedProps = {}>(
 			public static displayName = `DragLayer(${displayName})`
 			public static DecoratedComponent = DecoratedComponent
 
-			private manager: DragDropManager<any> | undefined
+			private manager: DragDropManager | undefined
 			private isCurrentlyMounted: boolean = false
 			private unsubscribeFromOffsetChange: Unsubscribe | undefined
 			private unsubscribeFromStateChange: Unsubscribe | undefined
@@ -100,7 +100,7 @@ export function DragLayer<RequiredProps, CollectedProps = {}>(
 				)
 			}
 
-			private receiveDragDropManager(dragDropManager: DragDropManager<any>) {
+			private receiveDragDropManager(dragDropManager: DragDropManager) {
 				if (this.manager !== undefined) {
 					return
 				}

@@ -1,5 +1,4 @@
 import { createElement } from 'react'
-import { parse } from 'query-string'
 import processImages from './processImagesInMarkdownAst'
 import exampleTabs from '../components/exampleTabs'
 import debug from 'debug'
