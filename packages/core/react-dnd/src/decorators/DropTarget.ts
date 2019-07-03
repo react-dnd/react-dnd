@@ -77,7 +77,7 @@ export function DropTarget<RequiredProps, CollectedProps = {}>(
 			containerDisplayName: 'DropTarget',
 			createHandler: createTarget as any,
 			registerHandler: registerTarget,
-			createMonitor: (manager: DragDropManager<any>) =>
+			createMonitor: (manager: DragDropManager) =>
 				new DropTargetMonitorImpl(manager),
 			createConnector: (backend: any) => new TargetConnector(backend),
 			DecoratedComponent,

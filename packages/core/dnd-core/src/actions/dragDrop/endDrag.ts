@@ -6,9 +6,7 @@ import {
 } from '../../interfaces'
 import { END_DRAG } from './types'
 
-export default function createEndDrag<Context>(
-	manager: DragDropManager<Context>,
-) {
+export default function createEndDrag(manager: DragDropManager) {
 	return function endDrag(): SentinelAction {
 		const monitor = manager.getMonitor()
 		const registry = manager.getRegistry()

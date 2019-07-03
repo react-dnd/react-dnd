@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@types/asap": "^2.0.0",
-    "@types/invariant": "^2.2.29",
+    "@types/invariant": "^2.2.30",
     "asap": "^2.0.6",
     "invariant": "^2.2.4",
     "redux": "^4.0.1"

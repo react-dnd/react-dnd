@@ -18,8 +18,8 @@ import {
 	matchNativeItemType,
 } from './NativeDragSources'
 import * as NativeTypes from './NativeTypes'
-import { HTML5BackendContext } from './interfaces'
 import { NativeDragSource } from './NativeDragSources/NativeDragSource'
+import { OptionsReader } from './OptionsReader'
 
 declare global {
 	interface Window {
@@ -28,11 +28,14 @@ declare global {
 }
 
 export default class HTML5Backend implements Backend {
+	private options: OptionsReader
+
+	// React-Dnd Components
 	private actions: DragDropActions
 	private monitor: DragDropMonitor
 	private registry: HandlerRegistry
-	private context: HTML5BackendContext
 
+	// Internal State
 	private enterLeaveCounter: EnterLeaveCounter
 
 	private sourcePreviewNodes: Map<string, Element> = new Map()
@@ -51,23 +54,20 @@ export default class HTML5Backend implements Backend {
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
 
-	constructor(manager: DragDropManager<any>) {
+	constructor(manager: DragDropManager, globalContext: any) {
+		this.options = new OptionsReader(globalContext)
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
-		this.context = manager.getContext()
-
 		this.enterLeaveCounter = new EnterLeaveCounter(this.isNodeInDocument)
 	}
 
 	// public for test
 	public get window() {
-		if (this.context && this.context.window) {
-			return this.context.window
-		} else if (typeof window !== 'undefined') {
-			return window
-		}
-		return undefined
+		return this.options.window
+	}
+	public get document() {
+		return this.options.document
 	}
 
 	public setup() {
@@ -274,10 +274,7 @@ export default class HTML5Backend implements Backend {
 
 	private isNodeInDocument = (node: Node | null) => {
 		// Check the node either in the main document or in the current context
-		return (
-			(!!document && document.body.contains(node)) ||
-			(!!this.window && this.window.document.body.contains(node))
-		)
+		return this.document && this.document.body && document.body.contains(node)
 	}
 
 	private endDragIfSourceWasRemovedFromDOM = () => {

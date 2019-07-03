@@ -94,8 +94,8 @@ const makePackageJson = (index, isTS) => {
 		result.dependencies = {
 			...result.dependencies,
 			typescript: '^3.3.3333',
-			'@types/react': '^16.8.7',
-			'@types/react-dom': '^16.8.2',
+			'@types/react': '^16.8.23',
+			'@types/react-dom': '^16.8.4',
 			'@types/jest': '^24.0.9',
 			'@types/node': '^11.12.0',
 		}

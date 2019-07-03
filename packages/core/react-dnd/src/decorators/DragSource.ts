@@ -84,7 +84,7 @@ export function DragSource<RequiredProps, CollectedProps = {}, DragObject = {}>(
 			createHandler: createSource as any,
 			registerHandler: registerSource,
 			createConnector: (backend: any) => new SourceConnector(backend),
-			createMonitor: (manager: DragDropManager<any>) =>
+			createMonitor: (manager: DragDropManager) =>
 				new DragSourceMonitorImpl(manager),
 			DecoratedComponent,
 			getType,

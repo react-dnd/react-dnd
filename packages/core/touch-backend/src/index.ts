@@ -1,9 +1,11 @@
-import { DragDropManager } from 'dnd-core'
+import { DragDropManager, BackendFactory } from 'dnd-core'
 import { TouchBackendOptions } from './interfaces'
 import TouchBackend from './TouchBackend'
 
-export default function createTouchBackendFactory(
-	options: TouchBackendOptions,
-) {
-	return (manager: DragDropManager<any>) => new TouchBackend(manager, options)
-}
+const createTouchBackendFactory: BackendFactory = (
+	manager: DragDropManager,
+	context: any,
+	options: TouchBackendOptions = {},
+) => new TouchBackend(manager, context, options)
+
+export default createTouchBackendFactory

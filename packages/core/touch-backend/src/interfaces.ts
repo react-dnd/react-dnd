@@ -30,7 +30,3 @@ export const enum ListenerType {
 	touch = 'touch',
 	keyboard = 'keyboard',
 }
-
-export interface TouchBackendContext {
-	window: Window
-}

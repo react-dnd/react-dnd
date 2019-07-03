@@ -15,16 +15,19 @@ interface BoxState {
 	type: string
 }
 
+export interface DustbinSpec {
+	accepts: string[]
+	lastDroppedItem: any
+}
+export interface BoxSpec {
+	name: string
+	type: string
+}
+
 export interface ContainerState {
 	droppedBoxNames: string[]
-	dustbins: Array<{
-		accepts: string[]
-		lastDroppedItem: any
-	}>
-	boxes: Array<{
-		name: string
-		type: string
-	}>
+	dustbins: DustbinSpec[]
+	boxes: BoxSpec[]
 }
 
 const Container: React.FC = () => {

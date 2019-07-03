@@ -18,7 +18,7 @@ import { isRefable } from './utils'
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any
-	createMonitor: (manager: DragDropManager<any>) => HandlerReceiver
+	createMonitor: (manager: DragDropManager) => HandlerReceiver
 	createHandler: (
 		monitor: HandlerReceiver,
 		ref: React.RefObject<any>,
@@ -63,7 +63,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 
 		private decoratedRef = React.createRef()
 		private handlerId: string | undefined
-		private manager: DragDropManager<any> | undefined
+		private manager: DragDropManager | undefined
 		private handlerMonitor: HandlerReceiver | undefined
 		private handlerConnector: Connector | undefined
 		private handler: Handler<Props> | undefined
@@ -217,7 +217,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 			)
 		}
 
-		private receiveDragDropManager(dragDropManager?: DragDropManager<any>) {
+		private receiveDragDropManager(dragDropManager?: DragDropManager) {
 			if (this.manager !== undefined) {
 				return
 			}
