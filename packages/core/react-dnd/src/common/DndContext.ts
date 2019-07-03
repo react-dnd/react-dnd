@@ -8,14 +8,14 @@ import {
 /**
  * The React context type
  */
-export interface DndContext<BC> {
-	dragDropManager: DragDropManager<BC> | undefined
+export interface DndContext {
+	dragDropManager: DragDropManager | undefined
 }
 
 /**
  * Create the React Context
  */
-export const DndContext = React.createContext<DndContext<any>>({
+export const DndContext = React.createContext<DndContext>({
 	dragDropManager: undefined,
 })
 
@@ -24,12 +24,18 @@ export const DndContext = React.createContext<DndContext<any>>({
  * @param backend
  * @param context
  */
-export function createDndContext<BackendContext>(
+export function createDndContext<BackendContext, BackendOptions>(
 	backend: BackendFactory,
 	context?: BackendContext,
+	options?: BackendOptions,
 	debugMode?: boolean,
 ) {
 	return {
-		dragDropManager: createDragDropManager(backend, context, debugMode),
+		dragDropManager: createDragDropManager(
+			backend,
+			context,
+			options,
+			debugMode,
+		),
 	}
 }

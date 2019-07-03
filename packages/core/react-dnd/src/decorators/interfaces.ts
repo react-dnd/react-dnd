@@ -15,7 +15,7 @@ import { NonReactStatics } from 'hoist-non-react-statics'
  */
 export interface ContextComponent<Props> extends React.Component<Props> {
 	getDecoratedComponentInstance(): React.Component<Props>
-	getManager(): DragDropManager<any>
+	getManager(): DragDropManager
 }
 
 /**

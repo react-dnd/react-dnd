@@ -85,10 +85,6 @@ export const APIPages: PageGroup[] = [
 				location: '/docs/api/drag-layer',
 				title: 'DragLayer',
 			},
-			DRAG_DROP_CONTEXT: {
-				location: '/docs/api/drag-drop-context',
-				title: 'DragDropContext',
-			},
 		},
 	},
 	{
