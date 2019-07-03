@@ -189,8 +189,8 @@ export interface DragDropManager {
 
 export type BackendFactory = (
 	manager: DragDropManager,
-	context: any,
-	configuration: any,
+	globalContext?: any,
+	configuration?: any,
 ) => Backend
 
 export interface DragSource {

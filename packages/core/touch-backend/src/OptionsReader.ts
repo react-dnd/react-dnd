@@ -1,29 +1,41 @@
-import { TouchBackendOptions } from './interfaces'
+import { TouchBackendOptions, AngleRange } from './interfaces'
 
 export class OptionsReader implements TouchBackendOptions {
-	constructor(incoming: TouchBackendOptions) {
-		const delayTouchStart = incoming.delayTouchStart || incoming.delay || 0
-		const delayMouseStart = incoming.delayMouseStart || incoming.delay || 0
+	public enableTouchEvents = true
+	public enableMouseEvents = false
+	public enableKeyboardEvents = false
+	public ignoreContextMenu = false
+	public enableHoverOutsideTarget = false
+	public touchSlop = 0
+	public scrollAngleRanges: AngleRange[] | undefined = undefined
+	public delayTouchStart: number
+	public delayMouseStart: number
+	public getDropTargetElementsAtPoint?: Function
 
-		const options: TouchBackendOptions = {
-			enableTouchEvents: true,
-			enableMouseEvents: false,
-			enableKeyboardEvents: false,
-			ignoreContextMenu: false,
-			enableHoverOutsideTarget: false,
-			touchSlop: 0,
-			scrollAngleRanges: undefined,
-			...incoming,
-			delayTouchStart,
-			delayMouseStart,
-		}
+	constructor(incoming: TouchBackendOptions, private context: any) {
+		this.delayTouchStart = incoming.delayTouchStart || incoming.delay || 0
+		this.delayMouseStart = incoming.delayMouseStart || incoming.delay || 0
 
-		Object.keys(options).forEach(key => {
-			Object.defineProperty(this, key, {
-				enumerable: true,
-				get: () => (options as any)[key],
-				set: value => ((options as any)[key] = value),
-			})
+		Object.keys(incoming).forEach(key => {
+			if ((incoming as any)[key] != null) {
+				;(this as any)[key] = (incoming as any)[key]
+			}
 		})
+	}
+
+	public get window() {
+		if (this.context && this.context.window) {
+			return this.context.window
+		} else if (typeof window !== 'undefined') {
+			return window
+		}
+		return undefined
+	}
+
+	public get document() {
+		if (this.window) {
+			return this.window.document
+		}
+		return undefined
 	}
 }
