@@ -1,13 +1,12 @@
 import HTML5Backend from './HTML5Backend'
 import * as NativeTypes from './NativeTypes'
 import { DragDropManager, BackendFactory } from 'dnd-core'
-import { OptionsReader } from './OptionsReader'
 export { default as getEmptyImage } from './getEmptyImage'
 export { NativeTypes }
 
 const createHTML5Backend: BackendFactory = (
 	manager: DragDropManager,
 	context: any,
-) => new HTML5Backend(manager, new OptionsReader(context))
+) => new HTML5Backend(manager, context)
 
 export default createHTML5Backend

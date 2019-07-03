@@ -8,7 +8,7 @@ import {
 	DragDropManager,
 	Unsubscribe,
 } from 'dnd-core'
-import { EventName, ListenerType } from './interfaces'
+import { EventName, ListenerType, TouchBackendOptions } from './interfaces'
 import { eventShouldStartDrag, eventShouldEndDrag } from './utils/predicates'
 import { getEventClientOffset, getNodeClientOffset } from './utils/offsets'
 import { distance, inAngleRanges } from './utils/math'
@@ -33,6 +33,8 @@ const eventNames: Record<ListenerType, EventName> = {
 }
 
 export default class TouchBackend implements Backend {
+	private options: OptionsReader
+
 	// React-DnD Dependencies
 	private actions: DragDropActions
 	private monitor: DragDropMonitor
@@ -53,7 +55,12 @@ export default class TouchBackend implements Backend {
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
 
-	constructor(manager: DragDropManager, private options: OptionsReader) {
+	constructor(
+		manager: DragDropManager,
+		context: any,
+		options: TouchBackendOptions,
+	) {
+		this.options = new OptionsReader(options, context)
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 
