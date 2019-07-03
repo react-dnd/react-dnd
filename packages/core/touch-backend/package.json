@@ -1,13 +1,13 @@
 {
 	"name": "react-dnd-touch-backend",
-	"version": "8.0.3",	
-  "description": "Touch backend for react-dnd",
+	"version": "9.0.0",
+	"description": "Touch backend for react-dnd",
 	"type": "module",
 	"main": "lib/index.js",
 	"module": "lib/index.js",
 	"types": "lib/index.d.ts",
-  "license": "MIT",  
-  "author": "Long Ho <holevietlong@gmail.com>",
+	"license": "MIT",
+	"author": "Long Ho <holevietlong@gmail.com>",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/react-dnd/react-dnd.git"
@@ -18,9 +18,9 @@
 		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
-    "@types/invariant": "^2.2.30",
-		"dnd-core": "^8.0.3",
-    "invariant": "^2.2.4"
+		"@types/invariant": "^2.2.30",
+		"dnd-core": "^9.0.0",
+		"invariant": "^2.2.4"
 	},
 	"devDependencies": {
 		"npm-run-all": "^4.1.5",
