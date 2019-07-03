@@ -21,7 +21,7 @@
 		"gatsby-plugin-typography": "^2.2.8",
 		"gatsby-remark-autolink-headers": "^2.0.16",
 		"gatsby-remark-copy-linked-files": "^2.0.9",
-		"gatsby-remark-embed-snippet": "^3.2.2",
+		"gatsby-remark-embed-snippet": "^4.1.0",
 		"gatsby-remark-images": "^3.0.6",
 		"gatsby-remark-prismjs": "^3.2.4",
 		"gatsby-source-filesystem": "^2.0.23",
