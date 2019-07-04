@@ -7,17 +7,13 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # HTML5
 
-This is the only officially supported backend for React DnD. It uses [the HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop) under the hood and hides [its quirks](http://quirksmode.org/blog/archives/2009/09/the_html5_drag.html).
+This is the primary backend supported by React-DnD. It uses [the HTML5 drag and drop API](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop) under the hood and hides [its quirks](http://quirksmode.org/blog/archives/2009/09/the_html5_drag.html).
 
 ### Installation
 
-The HTML5 backend comes in a separate package:
-
 ```
-npm install --save react-dnd-html5-backend
+yarn add react-dnd-html5-backend
 ```
-
-While we suggest you to use NPM, you can find the precompiled UMD build in the `dist` folder available on the [latest](https://github.com/react-dnd/react-dnd-html5-backend/tree/latest/dist) branch as well as in every [tagged release](https://github.com/react-dnd/react-dnd-html5-backend/releases). This is where you can point Bower if that’s what you use.
 
 ### Extras
 
@@ -33,11 +29,13 @@ Aside from the default export, the HTML5 backend module also provides a few extr
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
-class YourApp {
-  /* ... */
+export default function MyReactApp() {
+  return (
+    <DndProvider backend={HTML5Backend}>
+      /* your drag-and-drop application */
+    </DndProvider>
+  )
 }
-
-export default DragDropContext(HTML5Backend)(YourApp)
 ```
 
 When you call `getItem()` on a monitor, the HTML5 backend exposes various data from the event, depending on the drop type:
