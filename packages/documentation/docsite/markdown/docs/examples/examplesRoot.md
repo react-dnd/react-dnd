@@ -15,7 +15,7 @@ If you use a pattern that is not covered here, please consider submitting a Pull
 
 ## Flags
 
-For these examples, the following flags are available. To enable them add them to the end of your URL.
+For these examples, the following flags are available. To enable them add them to the end the example URL.
 
 - `?debug` - Enables **debug mode** of `dnd-core`. This registers `dnd-core` with the [Redux Devtools Chrome extension](https://github.com/zalmoxisus/redux-devtools-extension).
 - `?touch` - Swaps out the backend used in the examples from `react-dnd-html5-backend` to the `react-dnd-touch-backend`.
