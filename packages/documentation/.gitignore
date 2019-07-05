@@ -1,6 +1,0 @@
-.cache
-
-# Build directory
-/public
-/static/examples_js
-/static/examples_ts

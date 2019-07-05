@@ -1,0 +1,30 @@
+{
+  "extends": "../../../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "lib",
+    "esModuleInterop": true,
+    "baseUrl": "/Users/christrevino/Workspace/oss/react-dnd/packages/core/dnd-core/",
+    "paths": {
+      "dnd-core": [
+        "../../core/dnd-core/lib/index.d.ts"
+      ],
+      "react-dnd": [
+        "../../core/react-dnd/lib/index.d.ts"
+      ],
+      "react-dnd-html5-backend": [
+        "../../core/html5-backend/lib/index.d.ts"
+      ],
+      "react-dnd-test-backend": [
+        "../../testing/test-backend/lib/index.d.ts"
+      ],
+      "react-dnd-test-utils": [
+        "../../testing/test-utils/lib/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "/Users/christrevino/Workspace/oss/react-dnd/packages/core/dnd-core/src/index.ts"
+  ]
+}

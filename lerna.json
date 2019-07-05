@@ -1,9 +1,13 @@
 {
-  "lerna": "2.9.0",
-  "version": "7.4.5",
-  "npmClient": "yarn",
-  "useWorkspaces": true,
-  "packages": [
-    "packages/*"
-  ]
+	"lerna": "2.9.0",
+	"version": "9.0.1",
+	"npmClient": "yarn",
+	"useWorkspaces": true,
+	"packages": [
+		"packages/alternative_builds/umd",
+		"packages/alternative_builds/cjs/*",
+		"packages/documentation/*",
+		"packages/testing/*",
+		"packages/core/*"
+	]
 }
