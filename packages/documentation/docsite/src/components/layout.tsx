@@ -22,8 +22,7 @@ export interface LayoutProps {
 	hideSidebar?: boolean
 }
 
-const touchBackendOptions = { enableMouseEvents: true }
-
+const touchBackendOptions = { delay: 5 }
 const Layout: React.FC<LayoutProps> = props => {
 	const { children, location } = props
 	const sitepath = location && location.pathname
