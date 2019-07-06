@@ -72,15 +72,15 @@ export default class TouchBackend implements Backend {
 		this._mouseClientOffset = {}
 		this._isScrolling = false
 
-		if (options.enableMouseEvents) {
+		if (this.options.enableMouseEvents) {
 			this.listenerTypes.push(ListenerType.mouse)
 		}
 
-		if (options.enableTouchEvents) {
+		if (this.options.enableTouchEvents) {
 			this.listenerTypes.push(ListenerType.touch)
 		}
 
-		if (options.enableKeyboardEvents) {
+		if (this.options.enableKeyboardEvents) {
 			this.listenerTypes.push(ListenerType.keyboard)
 		}
 	}
