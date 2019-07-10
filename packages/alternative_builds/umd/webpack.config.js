@@ -27,6 +27,12 @@ function createWebpackConfiguration() {
 					commonjs: 'react',
 					amd: 'react',
 				},
+				'react-dnd': {
+					root: 'ReactDnD',
+					commonjs2: 'react-dnd',
+					commonjs: 'react-dnd',
+					amd: 'react-dnd',
+				},
 			},
 		],
 	}
@@ -51,6 +57,17 @@ module.exports = (env, { mode }) => {
 				...commonConfig.output,
 				library: 'ReactDnDHTML5Backend',
 				filename: `ReactDnDHTML5Backend.${
+					mode === 'production' ? 'min.' : ''
+				}js`,
+			},
+		},
+		{
+			...commonConfig,
+			context: path.resolve(__dirname, '../../core/touch-backend'),
+			output: {
+				...commonConfig.output,
+				library: 'ReactDnDTouchBackend',
+				filename: `ReactDnDTouchBackend.${
 					mode === 'production' ? 'min.' : ''
 				}js`,
 			},
