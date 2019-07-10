@@ -6,17 +6,15 @@
 	"main": "lib/index.js",
 	"module": "lib/index.js",
 	"scripts": {
-		"clean": "rimraf lib",
-		"build": "tsc -b tsconfig.json"
+		"clean": "../../../scripts/clean_package.sh",
+		"build": "../../../scripts/build_package.sh",
+		"start": "../../../scripts/watch_package.sh"
 	},
 	"devDependencies": {
-		"npm-run-all": "^4.1.5",
 		"react": "^16.8.6",
 		"react-dnd": "^9.0.1",
 		"react-dnd-test-backend": "^9.0.0",
-		"react-dom": "^16.8.6",
-		"rimraf": "^2.6.3",
-		"typescript": "^3.5.2"
+		"react-dom": "^16.8.6"
 	},
 	"peerDependencies": {
 		"react": ">= 16.8.5",

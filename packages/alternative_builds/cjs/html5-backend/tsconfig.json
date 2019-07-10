@@ -6,6 +6,7 @@
     "outDir": "lib",
     "esModuleInterop": true,
     "baseUrl": "/Users/christrevino/Workspace/oss/react-dnd/packages/core/html5-backend/",
+    "emitDeclarationOnly": false,
     "paths": {
       "dnd-core": [
         "../../core/dnd-core/lib/index.d.ts"

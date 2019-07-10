@@ -16,12 +16,19 @@ export interface Target extends DropTarget {
 
 class TargetImpl<Props> implements Target {
 	private props: Props | null = null
+	private spec: DropTargetSpec<Props>
+	private monitor: DropTargetMonitor
+	private ref: React.RefObject<any>
 
-	constructor(
-		private spec: DropTargetSpec<Props>,
-		private monitor: DropTargetMonitor,
-		private ref: React.RefObject<any>,
-	) {}
+	public constructor(
+		spec: DropTargetSpec<Props>,
+		monitor: DropTargetMonitor,
+		ref: React.RefObject<any>,
+	) {
+		this.spec = spec
+		this.monitor = monitor
+		this.ref = ref
+	}
 
 	public receiveProps(props: Props) {
 		this.props = props

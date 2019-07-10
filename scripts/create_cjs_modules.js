@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, @typescript-eslint/no-var-requires */
 const fs = require('fs')
 const path = require('path')
 const esmLibs = require('./esm-libs')
@@ -66,7 +66,7 @@ coreRoots.forEach(coreRoot => {
 			typings,
 			scripts: {
 				build: 'tsc',
-				clean: 'rimraf lib',
+				clean: '../../../../scripts/clean_package.sh',
 			},
 			dependencies,
 			devDependencies: {
@@ -91,6 +91,7 @@ coreRoots.forEach(coreRoot => {
 				outDir: 'lib',
 				esModuleInterop: true,
 				baseUrl: `${coreRoot}/${corePackage}/`,
+				emitDeclarationOnly: false,
 				paths: {
 					'dnd-core': ['../../core/dnd-core/lib/index.d.ts'],
 					'react-dnd': ['../../core/react-dnd/lib/index.d.ts'],

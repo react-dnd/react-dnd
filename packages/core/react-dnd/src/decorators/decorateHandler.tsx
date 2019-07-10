@@ -70,7 +70,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 		private disposable: any
 		private currentType: any
 
-		constructor(props: Props) {
+		public constructor(props: Props) {
 			super(props)
 			this.disposable = new SerialDisposable()
 			this.receiveProps(props)

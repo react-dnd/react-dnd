@@ -3,8 +3,10 @@ import { DragDropMonitor } from 'dnd-core'
 
 export class NativeDragSource {
 	public item: any
+	private config: NativeItemConfig
 
-	constructor(private config: NativeItemConfig) {
+	public constructor(config: NativeItemConfig) {
+		this.config = config
 		this.item = {}
 		Object.keys(this.config.exposeProperties).forEach(property => {
 			Object.defineProperty(this.item, property, {

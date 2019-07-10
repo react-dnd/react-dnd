@@ -36,7 +36,7 @@ export default class DragDropManagerImpl implements DragDropManager {
 	private backend: Backend | undefined
 	private isSetUp: boolean = false
 
-	constructor(debugMode = false) {
+	public constructor(debugMode = false) {
 		const store = makeStoreInstance(debugMode)
 		this.store = store
 		this.monitor = new DragDropMonitorImpl(
