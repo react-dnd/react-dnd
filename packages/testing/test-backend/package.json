@@ -13,7 +13,7 @@
 	},
 	"scripts": {
 		"clean": "rimraf lib",
-		"build": "tsc -b tsconfig.json",
+		"build": "../../../scripts/build_package.sh",
 		"prepublish": "npm run test"
 	},
 	"dependencies": {

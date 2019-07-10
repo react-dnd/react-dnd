@@ -13,7 +13,7 @@
 	"license": "MIT",
 	"scripts": {
 		"clean": "rimraf lib",
-		"build": "tsc -b tsconfig.json",
+		"build": "../../../scripts/build_package.sh",
 		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
 	},
 	"dependencies": {
@@ -24,9 +24,6 @@
 		"shallowequal": "^1.1.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.4.4",
-		"@babel/core": "^7.4.5",
-		"@babel/preset-env": "^7.4.5",
 		"@types/react": "^16.8.23",
 		"@types/react-dom": "^16.8.4",
 		"babel-jest": "^24.8.0",

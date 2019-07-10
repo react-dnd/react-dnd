@@ -8,9 +8,9 @@
 	"type": "module",
 	"types": "./lib/index.d.ts",
 	"scripts": {
-		"build": "tsc -b tsconfig.json",
+		"build": "../../../scripts/build_package.sh",
 		"clean": "rimraf lib",
-		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
+		"start": "tsc -w --preserveWatchOutput"
 	},
 	"repository": {
 		"type": "git",

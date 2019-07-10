@@ -7,20 +7,21 @@
     "build": "tsc",
     "clean": "rimraf lib"
   },
+  "dependencies": {},
   "devDependencies": {
     "npm-run-all": "^4.1.5",
     "react": "^16.8.6",
     "react-dnd": "^9.0.1",
     "react-dnd-test-backend": "^9.0.0",
-    "react-dnd-test-utils": "^9.0.1",
     "react-dom": "^16.8.6",
     "rimraf": "^2.6.3",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
+    "react-dnd-test-utils": "9.0.1"
   },
   "peerDependencies": {
     "react": ">= 16.8.5",
+    "react-dom": ">= 16.8.5",
     "react-dnd-cjs": "^7.3.2",
-    "react-dnd-test-backend-cjs": "^7.2.0",
-    "react-dom": ">= 16.8.5"
+    "react-dnd-test-backend-cjs": "^7.2.0"
   }
 }
