@@ -5,7 +5,7 @@ function createWebpackConfiguration() {
 		entry: './lib/index.js',
 		resolve: {
 			alias: {
-				'dnd-core': path.join(__dirname, '../../core/dnd-core/lib/index.js'),
+				'dnd-core': path.join(__dirname, '../../core/dnd-core'),
 			},
 			modules: [
 				path.join(__dirname, '../../core/react-dnd'),
