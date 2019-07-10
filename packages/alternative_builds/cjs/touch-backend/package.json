@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend-cjs",
-  "version": "9.0.2",
+  "version": "9.1.0",
   "license": "MIT",
   "description": "Touch backend for react-dnd",
   "main": "lib/index.js",
@@ -10,11 +10,10 @@
   },
   "dependencies": {
     "@types/invariant": "^2.2.30",
-    "invariant": "^2.2.4",
-    "dnd-core-cjs": "^9.0.0"
+    "dnd-core-cjs": "^9.1.0",
+    "invariant": "^2.2.4"
   },
   "devDependencies": {
-    "react-dnd-touch-backend": "9.0.2"
-  },
-  "peerDependencies": {}
+    "react-dnd-touch-backend": "^9.1.0"
+  }
 }

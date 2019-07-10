@@ -1,6 +1,6 @@
 {
   "name": "dnd-core-cjs",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "license": "MIT",
   "description": "Drag and drop sans the GUI",
   "main": "./lib/index.js",
@@ -16,7 +16,6 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
-    "dnd-core": "9.0.0"
-  },
-  "peerDependencies": {}
+    "dnd-core": "^9.1.0"
+  }
 }
