@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-umd-builds",
-	"version": "9.0.1",
+	"version": "9.1.0",
 	"license": "MIT",
 	"scripts": {
 		"bundle:development": "webpack --mode development",
@@ -9,8 +9,8 @@
 	},
 	"devDependencies": {
 		"npm-run-all": "^4.1.5",
-		"react-dnd": "^9.0.1",
-		"react-dnd-html5-backend": "^9.0.0",
+		"react-dnd": "^9.1.0",
+		"react-dnd-html5-backend": "^9.1.0",
 		"webpack-cli": "^3.3.5"
 	}
 }
