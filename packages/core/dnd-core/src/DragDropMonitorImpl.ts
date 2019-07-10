@@ -17,7 +17,13 @@ import {
 } from './interfaces'
 
 export default class DragDropMonitorImpl implements DragDropMonitor {
-	constructor(private store: Store<State>, public registry: HandlerRegistry) {}
+	private store: Store<State>
+	public readonly registry: HandlerRegistry
+
+	public constructor(store: Store<State>, registry: HandlerRegistry) {
+		this.store = store
+		this.registry = registry
+	}
 
 	public subscribeToStateChange(
 		listener: Listener,

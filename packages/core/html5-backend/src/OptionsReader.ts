@@ -1,5 +1,9 @@
 export class OptionsReader {
-	constructor(private globalContext: any) {}
+	private globalContext: any
+
+	public constructor(globalContext: any) {
+		this.globalContext = globalContext
+	}
 
 	public get window() {
 		if (this.globalContext) {

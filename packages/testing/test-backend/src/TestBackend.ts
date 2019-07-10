@@ -26,7 +26,7 @@ export default class TestBackendImpl implements Backend, TestBackend {
 	public didCallTeardown: boolean = false
 	private actions: DragDropActions
 
-	constructor(manager: DragDropManager) {
+	public constructor(manager: DragDropManager) {
 		this.actions = manager.getActions()
 	}
 

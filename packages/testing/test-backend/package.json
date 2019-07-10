@@ -12,16 +12,11 @@
 		"url": "https://github.com/react-dnd/react-dnd.git"
 	},
 	"scripts": {
-		"clean": "rimraf lib",
-		"build": "tsc -b tsconfig.json",
-		"prepublish": "npm run test"
+		"clean": "../../../scripts/clean_package.sh",
+		"build": "../../../scripts/build_package.sh",
+		"start": "../../../scripts/watch_package.sh"
 	},
 	"dependencies": {
 		"dnd-core": "^9.0.0"
-	},
-	"devDependencies": {
-		"npm-run-all": "^4.1.5",
-		"rimraf": "^2.6.3",
-		"typescript": "^3.5.2"
 	}
 }

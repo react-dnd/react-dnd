@@ -6,6 +6,7 @@
 		"outDir": "./lib/docs",
 		"baseUrl": "./",
 		"declaration": false,
+		"emitDeclarationOnly": false,
 		"removeComments": false
 	},
 	"include": ["./src/index.ts"]

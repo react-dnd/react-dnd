@@ -5,7 +5,7 @@ export default class MonotonicInterpolant {
 	private c2s: any
 	private c3s: any
 
-	constructor(xs: number[], ys: number[]) {
+	public constructor(xs: number[], ys: number[]) {
 		const { length } = xs
 
 		// Rearrange xs and ys so that xs is sorted

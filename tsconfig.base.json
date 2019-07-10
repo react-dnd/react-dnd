@@ -10,6 +10,7 @@
 		"noUnusedLocals": true,
 		"jsx": "react",
 		"forceConsistentCasingInFileNames": true,
-		"declaration": true
+		"declaration": true,
+		"emitDeclarationOnly": true
 	}
 }

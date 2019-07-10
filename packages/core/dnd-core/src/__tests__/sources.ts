@@ -4,8 +4,9 @@ import { DragDropMonitor } from '../interfaces'
 export class NormalSource extends DragSource {
 	public didCallBeginDrag = false
 	public recordedDropResult: any
+	public item: any
 
-	constructor(public item?: any) {
+	public constructor(item?: any) {
 		super()
 		this.item = item || { baz: 42 }
 	}
@@ -40,8 +41,13 @@ export class BadItemSource extends DragSource {
 }
 
 export class NumberSource extends DragSource {
-	public constructor(public number: number, public allowDrag: boolean) {
+	public number: number
+	public allowDrag: boolean
+
+	public constructor(number: number, allowDrag: boolean) {
 		super()
+		this.number = number
+		this.allowDrag = allowDrag
 	}
 
 	public canDrag() {

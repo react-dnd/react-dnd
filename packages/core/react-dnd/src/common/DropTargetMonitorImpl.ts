@@ -14,7 +14,7 @@ export class DropTargetMonitorImpl implements DropTargetMonitor {
 	private internalMonitor: DragDropMonitor
 	private targetId: Identifier | null = null
 
-	constructor(manager: DragDropManager) {
+	public constructor(manager: DragDropManager) {
 		this.internalMonitor = manager.getMonitor()
 	}
 
