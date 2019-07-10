@@ -91,6 +91,7 @@ coreRoots.forEach(coreRoot => {
 				outDir: 'lib',
 				esModuleInterop: true,
 				baseUrl: `${coreRoot}/${corePackage}/`,
+				emitDeclarationOnly: false,
 				paths: {
 					'dnd-core': ['../../core/dnd-core/lib/index.d.ts'],
 					'react-dnd': ['../../core/react-dnd/lib/index.d.ts'],
