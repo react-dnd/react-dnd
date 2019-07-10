@@ -16,12 +16,19 @@ export interface Source extends DragSource {
 
 class SourceImpl<Props> implements Source {
 	private props: Props | null = null
+	private spec: DragSourceSpec<Props, any>
+	private monitor: DragSourceMonitor
+	private ref: React.RefObject<any>
 
-	constructor(
-		private spec: DragSourceSpec<Props, any>,
-		private monitor: DragSourceMonitor,
-		private ref: React.RefObject<any>,
-	) {}
+	public constructor(
+		spec: DragSourceSpec<Props, any>,
+		monitor: DragSourceMonitor,
+		ref: React.RefObject<any>,
+	) {
+		this.spec = spec
+		this.monitor = monitor
+		this.ref = ref
+	}
 
 	public receiveProps(props: Props) {
 		this.props = props

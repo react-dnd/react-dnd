@@ -5,7 +5,7 @@ export default class EnterLeaveCounter {
 	private entered: any[] = []
 	private isNodeInDocument: NodePredicate
 
-	constructor(isNodeInDocument: NodePredicate) {
+	public constructor(isNodeInDocument: NodePredicate) {
 		this.isNodeInDocument = isNodeInDocument
 	}
 

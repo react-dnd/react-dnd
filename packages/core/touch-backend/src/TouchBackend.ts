@@ -55,7 +55,7 @@ export default class TouchBackend implements Backend {
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
 
-	constructor(
+	public constructor(
 		manager: DragDropManager,
 		context: any,
 		options: TouchBackendOptions,

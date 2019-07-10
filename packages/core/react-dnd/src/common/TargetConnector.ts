@@ -28,8 +28,11 @@ export class TargetConnector implements Connector {
 	private lastConnectedHandlerId: Identifier | null = null
 	private lastConnectedDropTarget: any = null
 	private lastConnectedDropTargetOptions: any = null
+	private readonly backend: Backend
 
-	public constructor(private backend: Backend) {}
+	public constructor(backend: Backend) {
+		this.backend = backend
+	}
 
 	public get connectTarget() {
 		return this.dropTarget

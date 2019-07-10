@@ -13,7 +13,7 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"clean": "rimraf lib",
+		"clean": "../../../scripts/clean_package.sh",
 		"build:ts": "tsc -b tsconfig.json",
 		"build:docs": "tsc -b tsconfig.docs.json",
 		"build": "run-p build:*",
@@ -35,7 +35,6 @@
 		"react": "^16.8.6",
 		"react-dnd-test-utils": "^9.0.1",
 		"react-dom": "^16.8.6",
-		"rimraf": "^2.6.3",
 		"typescript": "^3.5.2"
 	},
 	"peerDependencies": {

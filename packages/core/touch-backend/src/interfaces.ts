@@ -25,7 +25,7 @@ export interface AngleRange {
 	end: number
 }
 
-export const enum ListenerType {
+export enum ListenerType {
 	mouse = 'mouse',
 	touch = 'touch',
 	keyboard = 'keyboard',
