@@ -58,7 +58,7 @@
 	},
 	"scripts": {
 		"clean": "rimraf .cache public apidocs static/examples_decorators_js static/examples_decorators_ts static/examples_hooks_js static/examples_hooks_ts",
-		"start": "gatsby develop",
+		"start": "gatsby develop -H 0.0.0.0",
 		"copy_examples:js_hooks": "cp -r ../examples-hooks/lib/docs static/examples_hooks_js",
 		"copy_examples:ts_hooks": "cp -r ../examples-hooks/src static/examples_hooks_ts",
 		"copy_examples:js_decorators": "cp -r ../examples-decorators/lib/docs static/examples_decorators_js",
