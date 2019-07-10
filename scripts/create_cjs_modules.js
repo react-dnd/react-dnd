@@ -66,7 +66,7 @@ coreRoots.forEach(coreRoot => {
 			typings,
 			scripts: {
 				build: 'tsc',
-				clean: 'rimraf lib',
+				clean: '../../../../scripts/clean_package.sh',
 			},
 			dependencies,
 			devDependencies: {

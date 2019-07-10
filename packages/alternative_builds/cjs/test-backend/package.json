@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "clean": "rimraf lib"
+    "clean": "../../../../scripts/clean_package.sh"
   },
   "dependencies": {
     "dnd-core-cjs": "^9.0.0"

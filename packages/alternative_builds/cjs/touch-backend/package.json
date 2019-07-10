@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "clean": "rimraf lib"
+    "clean": "../../../../scripts/clean_package.sh"
   },
   "dependencies": {
     "@types/invariant": "^2.2.30",
@@ -14,9 +14,6 @@
     "dnd-core-cjs": "^9.0.0"
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^2.6.3",
-    "typescript": "^3.5.2",
     "react-dnd-touch-backend": "9.0.2"
   },
   "peerDependencies": {}
