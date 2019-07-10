@@ -60,9 +60,11 @@ export class BadResultTarget extends DropTarget {
 export class TransformResultTarget extends DropTarget {
 	public didCallDrop: boolean = false
 	public didCallHover: boolean = false
+	private transform: (input: any) => any
 
-	constructor(public transform: any) {
+	constructor(transform: (input: any) => any) {
 		super()
+		this.transform = transform
 	}
 
 	public hover() {

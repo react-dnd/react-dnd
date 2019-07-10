@@ -69,8 +69,11 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 	private dropTargets: Map<string, DropTarget> = new Map()
 	private pinnedSourceId: string | null = null
 	private pinnedSource: any = null
+	private store: Store<State>
 
-	constructor(private store: Store<State>) {}
+	constructor(store: Store<State>) {
+		this.store = store
+	}
 
 	public addSource(type: SourceType, source: DragSource) {
 		validateType(type)

@@ -56,7 +56,11 @@ export class SourceConnector implements Connector {
 	private lastConnectedDragPreview: any = null
 	private lastConnectedDragPreviewOptions: any = null
 
-	public constructor(private backend: Backend) {}
+	private readonly backend: Backend
+
+	public constructor(backend: Backend) {
+		this.backend = backend
+	}
 
 	public receiveHandlerId(newHandlerId: Identifier | null) {
 		if (this.handlerId === newHandlerId) {
