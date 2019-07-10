@@ -1,7 +1,7 @@
 export class OptionsReader {
 	private globalContext: any
 
-	constructor(globalContext: any) {
+	public constructor(globalContext: any) {
 		this.globalContext = globalContext
 	}
 

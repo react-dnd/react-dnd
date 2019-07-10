@@ -20,7 +20,7 @@ class SourceImpl<Props> implements Source {
 	private monitor: DragSourceMonitor
 	private ref: React.RefObject<any>
 
-	constructor(
+	public constructor(
 		spec: DragSourceSpec<Props, any>,
 		monitor: DragSourceMonitor,
 		ref: React.RefObject<any>,

@@ -71,7 +71,7 @@ export class SourceConnector implements Connector {
 		this.reconnect()
 	}
 
-	get connectTarget() {
+	public get connectTarget() {
 		return this.dragSource
 	}
 

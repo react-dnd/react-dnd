@@ -20,7 +20,7 @@ class TargetImpl<Props> implements Target {
 	private monitor: DropTargetMonitor
 	private ref: React.RefObject<any>
 
-	constructor(
+	public constructor(
 		spec: DropTargetSpec<Props>,
 		monitor: DropTargetMonitor,
 		ref: React.RefObject<any>,

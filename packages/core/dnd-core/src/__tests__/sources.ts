@@ -6,7 +6,7 @@ export class NormalSource extends DragSource {
 	public recordedDropResult: any
 	public item: any
 
-	constructor(item?: any) {
+	public constructor(item?: any) {
 		super()
 		this.item = item || { baz: 42 }
 	}

@@ -54,7 +54,7 @@ export default class HTML5Backend implements Backend {
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
 
-	constructor(manager: DragDropManager, globalContext: any) {
+	public constructor(manager: DragDropManager, globalContext: any) {
 		this.options = new OptionsReader(globalContext)
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()

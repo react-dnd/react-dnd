@@ -6,7 +6,7 @@ export class NormalTarget extends DropTarget {
 	public didCallHover: boolean = false
 	public dropResult: any
 
-	constructor(dropResult?: any) {
+	public constructor(dropResult?: any) {
 		super()
 		this.dropResult = dropResult || { foo: 'bar' }
 	}
@@ -62,7 +62,7 @@ export class TransformResultTarget extends DropTarget {
 	public didCallHover: boolean = false
 	private transform: (input: any) => any
 
-	constructor(transform: (input: any) => any) {
+	public constructor(transform: (input: any) => any) {
 		super()
 		this.transform = transform
 	}
@@ -74,6 +74,6 @@ export class TransformResultTarget extends DropTarget {
 	public drop(monitor: DragDropMonitor) {
 		this.didCallDrop = true
 		const dropResult = monitor.getDropResult()
-		return this.transform(dropResult)
+		return this.transform(dropResult) as any
 	}
 }

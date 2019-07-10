@@ -71,7 +71,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 	private pinnedSource: any = null
 	private store: Store<State>
 
-	constructor(store: Store<State>) {
+	public constructor(store: Store<State>) {
 		this.store = store
 	}
 
