@@ -1,57 +1,17 @@
 const path = require('path')
 
-function babelLoader(browserslist) {
+function createWebpackConfiguration() {
 	return {
-		loader: 'babel-loader',
-		options: {
-			presets: [
-				[
-					'@babel/preset-env',
-					{
-						targets: browserslist,
-					},
-				],
-			],
-		},
-	}
-}
-
-function tsLoader() {
-	return {
-		loader: 'ts-loader',
-		options: {
-			transpileOnly: true,
-		},
-	}
-}
-
-function createWebpackConfiguration(browserslist) {
-	return {
-		entry: './index.ts',
+		entry: './lib/index.js',
 		resolve: {
-			extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
 			alias: {
-				'dnd-core': path.join(__dirname, '../../core/dnd-core/src/index.ts'),
+				'dnd-core': path.join(__dirname, '../../core/dnd-core/lib/index.js'),
 			},
 			modules: [
 				path.join(__dirname, '../../core/react-dnd'),
 				path.join(__dirname, '../../core/dnd-core/node_modules'),
 				path.join(__dirname, '../../core/react-dnd/node_modules'),
 				path.join(__dirname, '../../../node_modules'),
-			],
-		},
-		module: {
-			rules: [
-				{
-					test: /\.js$/,
-					exclude: /node_modules/,
-					use: [babelLoader(browserslist)],
-				},
-				{
-					test: /\.ts(x|)$/,
-					exclude: /node_modules/,
-					use: [babelLoader(browserslist), tsLoader()],
-				},
 			],
 		},
 		output: {
@@ -72,11 +32,11 @@ function createWebpackConfiguration(browserslist) {
 }
 
 module.exports = (env, { mode }) => {
-	const commonConfig = createWebpackConfiguration('> 0.25%, not dead')
+	const commonConfig = createWebpackConfiguration()
 	return [
 		{
 			...commonConfig,
-			context: path.resolve(__dirname, '../../core/react-dnd/src'),
+			context: path.resolve(__dirname, '../../core/react-dnd'),
 			output: {
 				...commonConfig.output,
 				library: 'ReactDnD',
@@ -85,7 +45,7 @@ module.exports = (env, { mode }) => {
 		},
 		{
 			...commonConfig,
-			context: path.resolve(__dirname, '../../core/html5-backend/src'),
+			context: path.resolve(__dirname, '../../core/html5-backend'),
 			output: {
 				...commonConfig.output,
 				library: 'ReactDnDHTML5Backend',
