@@ -8,14 +8,14 @@ import {
 /**
  * The React context type
  */
-export interface DndContext {
+export interface DndContextType {
 	dragDropManager: DragDropManager | undefined
 }
 
 /**
  * Create the React Context
  */
-export const DndContext = React.createContext<DndContext>({
+export const DndContext = React.createContext<DndContextType>({
 	dragDropManager: undefined,
 })
 
