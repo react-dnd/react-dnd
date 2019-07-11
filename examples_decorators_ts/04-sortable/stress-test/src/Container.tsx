@@ -16,7 +16,7 @@ export default class Container extends React.Component<{}, ContainerState> {
   private pendingUpdateFn: any
   private requestedFrame: number | undefined
 
-  constructor(props: {}) {
+  public constructor(props: {}) {
     super(props)
 
     const cardsById: { [key: string]: any } = {}
