@@ -1,6 +1,9 @@
 import * as React from 'react'
-import TestBackendImpl, { TestBackend } from 'react-dnd-test-backend'
-import { ContextComponent, DndComponent, DndProvider } from 'react-dnd'
+import TestBackendImpl, {
+	TestBackend,
+	getInstance,
+} from 'react-dnd-test-backend'
+import { DndComponent, DndProvider } from 'react-dnd'
 import { Backend } from 'dnd-core'
 import { act } from 'react-dom/test-utils'
 
@@ -24,12 +27,12 @@ export function wrapInTestContext(DecoratedComponent: any): any {
  * one emitted from `wrapinTestContext`
  *
  * @param instance The instance to extract the backend fram
+ * @deprecated - This is no longer useful since ContextComponent was removed. This will be removed in a major version cut.
  */
 export function getBackendFromInstance<T extends Backend>(
-	instance: ContextComponent<any>,
+	instance: DndComponent<any>,
 ): T {
-	// Obtain a reference to the backend
-	return (instance.getManager().getBackend() as any) as T
+	return getInstance() as any
 }
 
 export function simulateDragDropSequence(
