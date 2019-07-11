@@ -29,6 +29,7 @@ describe('DropTarget', () => {
 	})
 
 	it('throws an error if rendered outside a DragDropContext', () => {
+		console.error = jest.fn()
 		const Component: React.FC<{}> = () => null
 		const DecoratedComponent = DropTarget(
 			'abc',
@@ -41,5 +42,6 @@ describe('DropTarget', () => {
 		expect(() => {
 			TestUtils.renderIntoDocument(<DecoratedComponent />)
 		}).toThrow(/Could not find the drag and drop manager in the context/)
+		expect(console.error).toHaveBeenCalled()
 	})
 })

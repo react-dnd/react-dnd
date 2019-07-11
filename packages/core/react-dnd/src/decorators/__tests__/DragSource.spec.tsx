@@ -43,7 +43,8 @@ describe('DragSource', () => {
 		expect(DecoratedComponent).toBeDefined()
 	})
 
-	it('throws an error if rendered outside a DragDropContext', () => {
+	it('throws an error if rendered outside a DndContext', () => {
+		console.error = jest.fn()
 		const Component: React.FC<{}> = () => null
 		const DecoratedComponent = DragSource(
 			'abc',
