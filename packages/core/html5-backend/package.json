@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-html5-backend",
-	"version": "9.3.1",
+	"version": "9.3.2",
 	"description": "HTML5 backend for React DnD",
 	"type": "module",
 	"main": "./dist/esm/index.js",
@@ -17,12 +17,12 @@
 		"start": "../../../scripts/watch_package.sh"
 	},
 	"dependencies": {
-		"dnd-core": "^9.3.1"
+		"dnd-core": "^9.3.2"
 	},
 	"devDependencies": {
 		"@types/react": "^16.8.23",
 		"react": "^16.8.6",
-		"react-dnd-test-backend": "^9.3.1",
+		"react-dnd-test-backend": "^9.3.2",
 		"react-dom": "^16.8.6"
 	}
 }
