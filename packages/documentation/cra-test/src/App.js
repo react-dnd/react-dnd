@@ -11,6 +11,7 @@ const App = memo(() => (
 		<AppGuts />
 	</DndProvider>
 ))
+App.displayName = 'App'
 export default App
 
 function AppGuts() {
