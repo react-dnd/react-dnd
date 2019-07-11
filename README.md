@@ -20,8 +20,12 @@ Questions? Find us on the Reactiflux Discord Server (**#need-help**)
 
 https://www.reactiflux.com/
 
-### Browser Compatibility
-React-DnD ships with ES Modules, TypeScript typings, and is built with the browserlist target of `>0.25%, not dead`. There are packages for CJS+ES5 modules (react-dnd-cjs, dnd-core-cjs, react-dnd-html5-backend-cjs, etc..) and UMD modules (react-dnd-umd-builds).
+### Technical Details
+- ES Modules w/ Embedded CJS for Jest Testing
+- Ships w/ TS Typings
+- Browserlist Target: `>0.25%, not dead`
+- CJS builds: (react-dnd-cjs, react-dnd-html5-backend-cjs)
+- UMD builds: (react-dnd-umd-builds)
 
 ### Shoutouts 🙏
 <img src="/assets/browserstack-logo-600x315.png" height="80" title="BrowserStack Logo" alt="BrowserStack Logo" /> 
