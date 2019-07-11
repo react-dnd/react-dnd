@@ -108,12 +108,12 @@
 			"<rootDir>/packages/testing/"
 		],
 		"moduleNameMapper": {
-			"^dnd-core$": "<rootDir>/packages/core/dnd-core/src",
-			"^react-dnd$": "<rootDir>/packages/core/react-dnd/src",
-			"^react-dnd-html5-backend$": "<rootDir>/packages/core/html5-backend/src",
-			"^react-dnd-touch-backend$": "<rootDir>/packages/core/touch-backend/src",
-			"^react-dnd-test-backend$": "<rootDir>/packages/testing/test-backend/src",
-			"^react-dnd-test-utils$": "<rootDir>/packages/testing/test-utils/src"
+			"^dnd-core$": "dnd-core-cjs",
+			"^react-dnd$": "react-dnd-cjs",
+			"^react-dnd-html5-backend$": "react-dnd-html5-backend-cjs",
+			"^react-dnd-touch-backend$": "react-dnd-touch-backend-cjs",
+			"^react-dnd-test-backend$": "react-dnd-test-backend-cjs",
+			"^react-dnd-test-utils$": "react-dnd-test-utils-cjs"
 		},
 		"collectCoverageFrom": [
 			"packages/core/**/*.{ts,tsx}",
