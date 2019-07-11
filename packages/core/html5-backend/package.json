@@ -3,8 +3,8 @@
 	"version": "9.3.1",
 	"description": "HTML5 backend for React DnD",
 	"type": "module",
-	"main": "lib/index.js",
-	"module": "lib/index.js",
+	"main": "./dist/esm/index.js",
+	"module": "./dist/esm/index.js",
 	"types": "lib/index.d.ts",
 	"license": "MIT",
 	"repository": {
