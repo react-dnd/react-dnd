@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-touch-backend",
-	"version": "9.1.0",
+	"version": "9.3.0",
 	"description": "Touch backend for react-dnd",
 	"type": "module",
 	"main": "lib/index.js",
@@ -19,7 +19,7 @@
 	},
 	"dependencies": {
 		"@types/invariant": "^2.2.30",
-		"dnd-core": "^9.1.0",
+		"dnd-core": "^9.3.0",
 		"invariant": "^2.2.4"
 	}
 }

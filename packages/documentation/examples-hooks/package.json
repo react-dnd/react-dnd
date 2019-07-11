@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-examples-hooks",
-	"version": "9.2.1",
+	"version": "9.3.0",
 	"private": true,
 	"description": "Drag and Drop for React",
 	"type": "module",
@@ -21,12 +21,12 @@
 	},
 	"dependencies": {
 		"@types/faker": "^4.1.5",
-		"dnd-core": "^9.1.0",
+		"dnd-core": "^9.3.0",
 		"faker": "^4.1.0",
 		"immutability-helper": "^3.0.0",
 		"query-string": "^6.5.0",
-		"react-dnd": "^9.2.1",
-		"react-dnd-html5-backend": "^9.1.0",
+		"react-dnd": "^9.3.0",
+		"react-dnd-html5-backend": "^9.3.0",
 		"react-frame-component": "^4.1.0"
 	},
 	"devDependencies": {
@@ -34,7 +34,7 @@
 		"@types/react-dom": "^16.8.4",
 		"npm-run-all": "^4.1.5",
 		"react": "^16.8.6",
-		"react-dnd-test-utils": "^9.2.1",
+		"react-dnd-test-utils": "^9.3.0",
 		"react-dom": "^16.8.6",
 		"typescript": "^3.5.2"
 	},
