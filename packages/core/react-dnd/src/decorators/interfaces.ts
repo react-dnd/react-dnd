@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { DragDropManager, Identifier } from 'dnd-core'
+import { Identifier } from 'dnd-core'
 import {
 	DropTargetMonitor,
 	DragSourceMonitor,
@@ -11,28 +11,11 @@ import {
 import { NonReactStatics } from 'hoist-non-react-statics'
 
 /**
- * The React Component that manages the DragDropContext for its children.
- */
-export interface ContextComponent<Props> extends React.Component<Props> {
-	getDecoratedComponentInstance(): React.Component<Props>
-	getManager(): DragDropManager
-}
-
-/**
  * A DnD interactive component
  */
 export interface DndComponent<Props> extends React.Component<Props> {
 	getDecoratedComponentInstance(): React.Component<Props> | null
 	getHandlerId(): Identifier
-}
-
-/**
- * The class interface for a context component
- */
-export interface ContextComponentClass<Props>
-	extends React.ComponentClass<Props> {
-	DecoratedComponent: React.ComponentType<Props>
-	new (props?: Props, context?: any): ContextComponent<Props>
 }
 
 /**
