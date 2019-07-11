@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ConnectDragPreview } from '../interfaces'
 
-interface DragPreviewImageProps {
+export interface DragPreviewImageProps {
 	connect: ConnectDragPreview
 	src: string
 }

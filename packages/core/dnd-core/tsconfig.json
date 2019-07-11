@@ -3,8 +3,7 @@
 	"compilerOptions": {
 		"outDir": "lib",
 		"baseUrl": "./src",
-		"allowSyntheticDefaultImports": true,
-		"emitDeclarationOnly": true
+		"allowSyntheticDefaultImports": true
 	},
 	"include": ["src/index.ts"]
 }

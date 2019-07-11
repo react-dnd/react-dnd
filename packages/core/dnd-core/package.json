@@ -3,8 +3,8 @@
 	"version": "9.3.1",
 	"description": "Drag and drop sans the GUI",
 	"license": "MIT",
-	"main": "./lib/index.js",
-	"module": "./lib/index.js",
+	"main": "./dist/esm/index.js",
+	"module": "./dist/esm/index.js",
 	"type": "module",
 	"types": "./lib/index.d.ts",
 	"scripts": {
