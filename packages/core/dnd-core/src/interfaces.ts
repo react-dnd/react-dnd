@@ -1,5 +1,3 @@
-import { Unsubscribe } from 'redux'
-
 export type Identifier = string | symbol
 export type SourceType = Identifier
 export type TargetType = Identifier | Identifier[]
