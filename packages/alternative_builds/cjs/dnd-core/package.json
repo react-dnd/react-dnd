@@ -3,7 +3,7 @@
   "version": "9.3.1",
   "license": "MIT",
   "description": "Drag and drop sans the GUI",
-  "main": "./lib/index.js",
+  "main": "./dist/esm/index.js",
   "scripts": {
     "build": "tsc",
     "clean": "../../../../scripts/clean_package.sh"
@@ -16,6 +16,7 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
-    "dnd-core": "^9.3.1"
-  }
+    "dnd-core": "9.3.1"
+  },
+  "peerDependencies": {}
 }
