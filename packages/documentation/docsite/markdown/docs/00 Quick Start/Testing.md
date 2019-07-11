@@ -13,6 +13,21 @@ There are several different approaches to testing React components. React DnD is
 
 A few test examples are included with the React DnD inside its `examples` folder. Run `yarn` and `yarn test` inside the `react-dnd` root folder to start them.
 
+## Setup
+
+If you are using Jest, you may need to configure Jest's `moduleNameMapper` settings. Jest does not work well with ES Modules yet, but you can easily instruct it to use the CommonJS builds of the react-dnd libraries.
+
+```json
+"moduleNameMapper": {
+  "^dnd-core$": "dnd-core/dist/cjs",
+  "^react-dnd$": "react-dnd/dist/cjs",
+  "^react-dnd-html5-backend$": "html5-backend/dist/cjs",
+  "^react-dnd-touch-backend$": "touch-backend/dist/cjs",
+  "^react-dnd-test-backend$": "react-dnd-test-backend/dist/cjs",
+  "^react-dnd-test-utils$": "react-dnd-test-utils/dist/cjs"
+}
+```
+
 ### Testing the Components in Isolation
 
 If you are only interested in testing the _rendering_ of your components in isolation, and not their interaction, you may use the `DecoratedComponent` static property available on any class wrapped with React DnD to access the original class. You may then test it with the different props without any dependency on React DnD, supplying an identity function to stub the connector methods.

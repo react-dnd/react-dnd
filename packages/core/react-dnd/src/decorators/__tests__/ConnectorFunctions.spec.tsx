@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { mount } from 'enzyme'
 import { wrapInTestContext } from 'react-dnd-test-utils'
-import { DropTarget } from '../DropTarget'
+import { DropTarget } from 'react-dnd'
 
 describe('Connectors', () => {
 	it('transmit expected arguments to components', () => {
