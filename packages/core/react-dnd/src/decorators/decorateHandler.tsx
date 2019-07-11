@@ -225,7 +225,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 			invariant(
 				dragDropManager !== undefined,
 				'Could not find the drag and drop manager in the context of %s. ' +
-					'Make sure to wrap the top-level component of your app with DragDropContext. ' +
+					'Make sure to render a DndProvider component in your top-level component. ' +
 					'Read more: http://react-dnd.github.io/react-dnd/docs/troubleshooting#could-not-find-the-drag-and-drop-manager-in-the-context',
 				displayName,
 				displayName,
