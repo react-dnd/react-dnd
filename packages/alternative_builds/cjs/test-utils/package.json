@@ -1,24 +1,23 @@
 {
   "name": "react-dnd-test-utils-cjs",
-  "version": "9.3.1",
+  "version": "9.3.2",
   "license": "MIT",
   "main": "./dist/esm/index.js",
   "scripts": {
     "build": "tsc",
     "clean": "../../../../scripts/clean_package.sh"
   },
-  "dependencies": {},
   "devDependencies": {
     "react": "^16.8.6",
-    "react-dnd": "^9.3.1",
-    "react-dnd-test-backend": "^9.3.1",
-    "react-dom": "^16.8.6",
-    "react-dnd-test-utils": "9.3.1"
+    "react-dnd": "^9.3.2",
+    "react-dnd-test-backend": "^9.3.2",
+    "react-dnd-test-utils": "^9.3.2",
+    "react-dom": "^16.8.6"
   },
   "peerDependencies": {
     "react": ">= 16.8.5",
-    "react-dom": ">= 16.8.5",
     "react-dnd-cjs": "^7.3.2",
-    "react-dnd-test-backend-cjs": "^7.2.0"
+    "react-dnd-test-backend-cjs": "^7.2.0",
+    "react-dom": ">= 16.8.5"
   }
 }
