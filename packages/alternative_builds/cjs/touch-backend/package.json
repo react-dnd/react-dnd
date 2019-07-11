@@ -3,17 +3,18 @@
   "version": "9.3.1",
   "license": "MIT",
   "description": "Touch backend for react-dnd",
-  "main": "lib/index.js",
+  "main": "./dist/esm/index.js",
   "scripts": {
     "build": "tsc",
     "clean": "../../../../scripts/clean_package.sh"
   },
   "dependencies": {
     "@types/invariant": "^2.2.30",
-    "dnd-core-cjs": "^9.3.1",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "dnd-core-cjs": "^9.3.1"
   },
   "devDependencies": {
-    "react-dnd-touch-backend": "^9.3.1"
-  }
+    "react-dnd-touch-backend": "9.3.1"
+  },
+  "peerDependencies": {}
 }

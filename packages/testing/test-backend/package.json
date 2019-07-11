@@ -3,8 +3,8 @@
 	"version": "9.3.1",
 	"description": "A mock backend for testing React DnD apps",
 	"type": "module",
-	"main": "lib/index.js",
-	"module": "lib/index.js",
+	"main": "./dist/esm/index.js",
+	"module": "./dist/esm/index.js",
 	"types": "lib/index.d.ts",
 	"license": "MIT",
 	"repository": {

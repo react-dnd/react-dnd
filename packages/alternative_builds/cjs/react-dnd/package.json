@@ -3,7 +3,7 @@
   "version": "9.3.1",
   "license": "MIT",
   "description": "Drag and Drop for React",
-  "main": "lib/index.js",
+  "main": "./dist/esm/index.js",
   "scripts": {
     "build": "tsc",
     "clean": "../../../../scripts/clean_package.sh"
@@ -11,16 +11,16 @@
   "dependencies": {
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/shallowequal": "^1.1.1",
-    "dnd-core-cjs": "^9.3.1",
     "hoist-non-react-statics": "^3.3.0",
-    "shallowequal": "^1.1.0"
+    "shallowequal": "^1.1.0",
+    "dnd-core-cjs": "^9.3.1"
   },
   "devDependencies": {
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "react": "^16.8.6",
-    "react-dnd": "^9.3.1",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-dnd": "9.3.1"
   },
   "peerDependencies": {
     "react": ">= 16.8",
