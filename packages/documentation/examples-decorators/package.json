@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-examples-decorators",
-	"version": "9.3.2",
+	"version": "9.3.3",
 	"private": true,
 	"description": "Drag and Drop for React",
 	"main": "lib/esm/index.js",
@@ -33,7 +33,7 @@
 		"@types/react-dom": "^16.8.4",
 		"npm-run-all": "^4.1.5",
 		"react": "^16.8.6",
-		"react-dnd-test-utils": "^9.3.2",
+		"react-dnd-test-utils": "^9.3.3",
 		"react-dom": "^16.8.6",
 		"typescript": "^3.5.2"
 	},

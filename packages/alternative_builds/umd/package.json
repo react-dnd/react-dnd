@@ -1,6 +1,6 @@
 {
 	"name": "react-dnd-umd-builds",
-	"version": "9.3.2",
+	"version": "9.3.3",
 	"license": "MIT",
 	"scripts": {
 		"bundle:development": "webpack --mode development",
