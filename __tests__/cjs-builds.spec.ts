@@ -6,7 +6,7 @@ describe('CommonJS Builds', () => {
 	it('react-dnd-touch-backend', () =>
 		expect(require('react-dnd-touch-backend-cjs')).toBeDefined())
 	it('react-dnd-test-backend', () =>
-		expect(require('react-dnd-test-backend')).toBeDefined())
+		expect(require('react-dnd-test-backend-cjs')).toBeDefined())
 	it('react-dnd-test-utils', () =>
-		expect(require('react-dnd-test-utils')).toBeDefined())
+		expect(require('react-dnd-test-utils-cjs')).toBeDefined())
 })
