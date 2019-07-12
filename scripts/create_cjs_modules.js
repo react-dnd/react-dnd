@@ -62,7 +62,7 @@ coreRoots.forEach(coreRoot => {
 			version,
 			license,
 			description,
-			main,
+			main: 'lib/index.js',
 			typings,
 			scripts: {
 				build: 'tsc',
