@@ -84,9 +84,9 @@ function verifyInvariants(
 	registry: HandlerRegistry,
 ) {
 	invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
-	for (const s of sourceIds) {
-		invariant(registry.getSource(s), 'Expected sourceIds to be registered.')
-	}
+	sourceIds.forEach(function(sourceId) {
+		invariant(registry.getSource(sourceId), 'Expected sourceIds to be registered.')
+	})
 }
 
 function verifyGetSourceClientOffsetIsFunction(getSourceClientOffset: any) {
