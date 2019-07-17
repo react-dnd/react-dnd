@@ -72,6 +72,11 @@ export interface DragSourceMonitor extends HandlerManager, MonitorEventEmitter {
 	 * started, and the movement difference. Returns null if no item is being dragged.
 	 */
 	getSourceClientOffset(): XYCoord | null
+
+  /**
+	 * Returns the ids of the potential drop targets.
+	 */
+  getTargetIds(): Identifier[]
 }
 
 export interface MonitorEventEmitter {
