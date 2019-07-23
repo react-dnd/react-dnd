@@ -18,8 +18,8 @@ const TargetBox = props => {
       }
     },
     collect: monitor => ({
-      isOver: monitor.isOver,
-      canDrop: monitor.canDrop,
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
     }),
   })
   const isActive = canDrop && isOver
