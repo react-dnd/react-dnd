@@ -1,4 +1,4 @@
-import { useMemo, MutableRefObject, useLayoutEffect } from 'react'
+import { useMemo, MutableRefObject } from 'react'
 import invariant from 'invariant'
 import {
 	DragSourceHookSpec,
@@ -10,6 +10,7 @@ import { registerSource } from '../../common/registration'
 import { useDragDropManager } from './useDragDropManager'
 import { DragSourceMonitorImpl } from '../../common/DragSourceMonitorImpl'
 import { SourceConnector } from '../../common/SourceConnector'
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
 
 export function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {
 	const manager = useDragDropManager()
@@ -71,7 +72,7 @@ export function useDragHandler<
 		} as DragSource
 	}, [])
 
-	useLayoutEffect(function registerHandler() {
+	useIsomorphicLayoutEffect(function registerHandler() {
 		const [handlerId, unregister] = registerSource(
 			spec.current.item.type,
 			handler,
