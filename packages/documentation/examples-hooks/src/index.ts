@@ -17,6 +17,7 @@ import customizeHandlesAndPreviews from './05-customize/handles-and-previews'
 import dragSourceRerender from './06-other/drag-source-rerender'
 import remountWithCorrectProps from './06-other/remount-with-correct-props'
 import otherNativeFiles from './06-other/native-files'
+import otherChainedConnectors from './06-other/chained-connectors'
 
 export const componentIndex: {
 	[key: string]: React.ComponentClass<any> | React.FunctionComponent<any>
@@ -39,4 +40,5 @@ export const componentIndex: {
 	'other-drag-source-rerender': dragSourceRerender,
 	'other-remount-with-correct-props': remountWithCorrectProps,
 	'other-native-files': otherNativeFiles,
+	'other-chained-connectors': otherChainedConnectors,
 }
