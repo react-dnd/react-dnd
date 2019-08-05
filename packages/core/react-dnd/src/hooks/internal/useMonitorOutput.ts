@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
 import { useCollector } from './useCollector'
 import { HandlerManager, MonitorEventEmitter } from '../../interfaces'
 
@@ -9,7 +9,7 @@ export function useMonitorOutput<Monitor extends HandlerManager, Collected>(
 ): Collected {
 	const [collected, updateCollected] = useCollector(monitor, collect, onCollect)
 
-	useLayoutEffect(
+	useIsomorphicLayoutEffect(
 		function subscribeToMonitorStateChange() {
 			const handlerId = monitor.getHandlerId()
 			if (handlerId == null) {

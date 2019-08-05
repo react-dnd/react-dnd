@@ -3,12 +3,13 @@ import {
 	DropTargetMonitor,
 	DropTargetHookSpec,
 } from '../../interfaces'
-import { useMemo, MutableRefObject, useLayoutEffect } from 'react'
+import { useMemo, MutableRefObject } from 'react'
 import { DropTarget } from 'dnd-core'
 import { registerTarget } from '../../common/registration'
 import { useDragDropManager } from './useDragDropManager'
 import { TargetConnector } from '../../common/TargetConnector'
 import { DropTargetMonitorImpl } from '../../common/DropTargetMonitorImpl'
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
 
 export function useDropTargetMonitor(): [DropTargetMonitor, TargetConnector] {
 	const manager = useDragDropManager()
@@ -52,7 +53,7 @@ export function useDropHandler<
 		} as DropTarget
 	}, [monitor])
 
-	useLayoutEffect(
+	useIsomorphicLayoutEffect(
 		function registerHandler() {
 			const [handlerId, unregister] = registerTarget(
 				spec.current.accept,
