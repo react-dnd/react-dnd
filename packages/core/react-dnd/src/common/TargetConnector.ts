@@ -8,6 +8,7 @@ import { Connector } from './SourceConnector'
 export class TargetConnector implements Connector {
 	public hooks = wrapConnectorHooks({
 		dropTarget: (node: any, options: any) => {
+			this.clearDropTarget()
 			this.dropTargetOptions = options
 			if (isRef(node)) {
 				this.dropTargetRef = node
@@ -113,5 +114,10 @@ export class TargetConnector implements Connector {
 		return (
 			this.dropTargetNode || (this.dropTargetRef && this.dropTargetRef.current)
 		)
+	}
+
+	private clearDropTarget() {
+		this.dropTargetRef = null
+		this.dropTargetNode = null
 	}
 }

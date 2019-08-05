@@ -18,6 +18,7 @@ export class SourceConnector implements Connector {
 			node: Element | React.ReactElement | React.Ref<any>,
 			options?: DragSourceOptions,
 		) => {
+			this.clearDragSource()
 			this.dragSourceOptions = options || null
 			if (isRef(node)) {
 				this.dragSourceRef = node as React.RefObject<any>
@@ -27,6 +28,7 @@ export class SourceConnector implements Connector {
 			this.reconnectDragSource()
 		},
 		dragPreview: (node: any, options?: DragPreviewOptions) => {
+			this.clearDragPreview()
 			this.dragPreviewOptions = options || null
 			if (isRef(node)) {
 				this.dragPreviewRef = node
@@ -208,5 +210,15 @@ export class SourceConnector implements Connector {
 			this.dragPreviewNode ||
 			(this.dragPreviewRef && this.dragPreviewRef.current)
 		)
+	}
+
+	private clearDragSource() {
+		this.dragSourceNode = null
+		this.dragSourceRef = null
+	}
+
+	private clearDragPreview() {
+		this.dragPreviewNode = null
+		this.dragPreviewRef = null
 	}
 }
