@@ -1,4 +1,4 @@
-import { useRef, useMemo, useLayoutEffect } from 'react'
+import { useRef, useMemo } from 'react'
 import invariant from 'invariant'
 import {
 	DragSourceHookSpec,
@@ -7,6 +7,7 @@ import {
 	ConnectDragPreview,
 } from '../interfaces'
 import { useMonitorOutput } from './internal/useMonitorOutput'
+import { useIsomorphicLayoutEffect } from './internal/useIsomorphicLayoutEffect'
 import { useDragSourceMonitor, useDragHandler } from './internal/drag'
 
 /**
@@ -42,11 +43,11 @@ export function useDrag<
 	const connectDragPreview = useMemo(() => connector.hooks.dragPreview(), [
 		connector,
 	])
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		connector.dragSourceOptions = specRef.current.options || null
 		connector.reconnect()
 	}, [connector])
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		connector.dragPreviewOptions = specRef.current.previewOptions || null
 		connector.reconnect()
 	}, [connector])
