@@ -130,6 +130,7 @@ export class SourceConnector implements Connector {
 	}
 
 	private reconnectDragPreview() {
+		const dragPreview = this.dragPreview
 		// if nothing has changed then don't resubscribe
 		const didChange =
 			this.didHandlerIdChange() ||
@@ -142,12 +143,12 @@ export class SourceConnector implements Connector {
 
 		if (this.handlerId && this.dragPreview && didChange) {
 			this.lastConnectedHandlerId = this.handlerId
-			this.lastConnectedDragPreview = this.dragPreview
+			this.lastConnectedDragPreview = dragPreview
 			this.lastConnectedDragPreviewOptions = this.dragPreviewOptions
 			this.disconnectDragPreview()
 			this.dragPreviewUnsubscribe = this.backend.connectDragPreview(
 				this.handlerId,
-				this.dragPreview,
+				dragPreview,
 				this.dragPreviewOptions,
 			)
 		}

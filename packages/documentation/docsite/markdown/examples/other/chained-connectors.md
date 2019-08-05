@@ -1,6 +1,6 @@
 ---
 path: '/examples/other/chained-connectors'
-title: 'Chained Connecors'
+title: 'Chained Connectors'
 ---
 
 Example using chained connector functions. Regression example of [#1465](https://github.com/react-dnd/react-dnd/pull/1465)
