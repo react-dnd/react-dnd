@@ -1,4 +1,4 @@
-import { useRef, useMemo, useLayoutEffect } from 'react'
+import { useRef, useMemo } from 'react'
 import invariant from 'invariant'
 import {
 	DropTargetHookSpec,
@@ -6,6 +6,7 @@ import {
 	DragObjectWithType,
 } from '../interfaces'
 import { useMonitorOutput } from './internal/useMonitorOutput'
+import { useIsomorphicLayoutEffect } from './internal/useIsomorphicLayoutEffect'
 import { useDropHandler, useDropTargetMonitor } from './internal/drop'
 
 /**
@@ -36,7 +37,7 @@ export function useDrop<
 		connector,
 	])
 
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		connector.dropTargetOptions = spec.options || null
 		connector.reconnect()
 	}, [spec.options])
