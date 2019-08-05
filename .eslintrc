@@ -1,6 +1,6 @@
 {
 	"parser": "@typescript-eslint/parser",
-	"plugins": ["@typescript-eslint", "react-hooks"],
+	"plugins": ["@typescript-eslint", "react-hooks", "no-for-of-loops"],
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
@@ -20,6 +20,7 @@
 		"node": true
 	},
 	"rules": {
+		"no-for-of-loops/no-for-of-loops": 2,
 		"@typescript-eslint/explicit-function-return-type": 0,
 		"@typescript-eslint/no-explicit-any": 0,
 		"@typescript-eslint/no-object-literal-type-assertion": 0,
