@@ -35,7 +35,7 @@ const BoxWithHandleRaw: React.FC = () => {
 		preview(
 			<div style={{ ...style, opacity }}>
 				{drag(<div style={handleStyle} />)}
-				Drag me by the handle
+				Drag me by the handle, the whole box should drag
 			</div>,
 		),
 	)

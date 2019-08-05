@@ -42,7 +42,7 @@ const BoxWithHandleRaw: React.FC<BoxWithHandleProps> = ({
 		connectDragPreview(
 			<div style={{ ...style, opacity }}>
 				{connectDragSource(<div style={handleStyle} />)}
-				Drag me by the handle BAD
+				Drag me by the handle, the whole box should drag
 			</div>,
 		),
 	)
