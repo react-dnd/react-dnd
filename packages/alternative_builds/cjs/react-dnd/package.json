@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-cjs",
-  "version": "9.3.3",
+  "version": "9.3.2",
   "license": "MIT",
   "description": "Drag and Drop for React",
   "main": "lib/index.js",
@@ -11,16 +11,16 @@
   "dependencies": {
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/shallowequal": "^1.1.1",
-    "dnd-core-cjs": "^9.3.3",
     "hoist-non-react-statics": "^3.3.0",
-    "shallowequal": "^1.1.0"
+    "shallowequal": "^1.1.0",
+    "dnd-core-cjs": "^9.3.2"
   },
   "devDependencies": {
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "react": "^16.8.6",
-    "react-dnd": "9.3.2",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-dnd": "9.3.2"
   },
   "peerDependencies": {
     "react": ">= 16.8",
