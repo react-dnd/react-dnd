@@ -34,7 +34,8 @@ export function checkDecoratorArguments(
 	...args: any[]
 ) {
 	if (process.env.NODE_ENV !== 'production') {
-		for (const arg of args) {
+		for (let i = 0; i < args.length; i++) {
+			const arg = args[i]
 			if (arg && arg.prototype && arg.prototype.render) {
 				// eslint-disable-next-line no-console
 				console.error(
