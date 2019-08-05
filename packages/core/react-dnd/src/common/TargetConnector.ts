@@ -39,7 +39,6 @@ export class TargetConnector implements Connector {
 	}
 
 	public reconnect() {
-		const dropTarget = this.dropTarget
 		// if nothing has changed then don't resubscribe
 		const didChange =
 			this.didHandlerIdChange() ||
@@ -48,17 +47,27 @@ export class TargetConnector implements Connector {
 
 		if (didChange) {
 			this.disconnectDropTarget()
+		}
+
+		const dropTarget = this.dropTarget
+		if (!this.handlerId) {
+			return
+		}
+		if (!dropTarget) {
+			this.lastConnectedDropTarget = dropTarget
+			return
+		}
+
+		if (didChange) {
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDropTarget = dropTarget
 			this.lastConnectedDropTargetOptions = this.dropTargetOptions
 
-			if (dropTarget) {
-				this.unsubscribeDropTarget = this.backend.connectDropTarget(
-					this.handlerId,
-					dropTarget,
-					this.dropTargetOptions,
-				)
-			}
+			this.unsubscribeDropTarget = this.backend.connectDropTarget(
+				this.handlerId,
+				dropTarget,
+				this.dropTargetOptions,
+			)
 		}
 	}
 
