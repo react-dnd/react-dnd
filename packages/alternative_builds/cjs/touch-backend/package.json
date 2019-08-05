@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@types/invariant": "^2.2.30",
-    "dnd-core-cjs": "^9.3.3",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "dnd-core-cjs": "^9.3.2"
   },
   "devDependencies": {
-    "react-dnd-touch-backend": "^9.3.3"
-  }
+    "react-dnd-touch-backend": "9.3.3"
+  },
+  "peerDependencies": {}
 }
