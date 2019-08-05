@@ -18,6 +18,7 @@ export class SourceConnector implements Connector {
 			node: Element | React.ReactElement | React.Ref<any>,
 			options?: DragSourceOptions,
 		) => {
+			this.clearDragSource()
 			this.dragSourceOptions = options || null
 			if (isRef(node)) {
 				this.dragSourceRef = node as React.RefObject<any>
@@ -27,6 +28,7 @@ export class SourceConnector implements Connector {
 			this.reconnectDragSource()
 		},
 		dragPreview: (node: any, options?: DragPreviewOptions) => {
+			this.clearDragPreview()
 			this.dragPreviewOptions = options || null
 			if (isRef(node)) {
 				this.dragPreviewRef = node
@@ -96,6 +98,7 @@ export class SourceConnector implements Connector {
 	}
 
 	private reconnectDragSource() {
+		const dragSource = this.dragSource
 		// if nothing has changed then don't resubscribe
 		const didChange =
 			this.didHandlerIdChange() ||
@@ -106,7 +109,6 @@ export class SourceConnector implements Connector {
 			this.disconnectDragSource()
 		}
 
-		const dragSource = this.dragSource
 		if (!this.handlerId) {
 			return
 		}
@@ -128,25 +130,20 @@ export class SourceConnector implements Connector {
 	}
 
 	private reconnectDragPreview() {
+		const dragPreview = this.dragPreview
 		// if nothing has changed then don't resubscribe
 		const didChange =
 			this.didHandlerIdChange() ||
 			this.didConnectedDragPreviewChange() ||
 			this.didDragPreviewOptionsChange()
 
-		if (didChange) {
+		if (!this.handlerId) {
 			this.disconnectDragPreview()
-		}
-
-		const dragPreview = this.dragPreview
-		if (!this.handlerId || !dragPreview) {
-			return
-		}
-
-		if (didChange) {
+		} else if (this.dragPreview && didChange) {
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDragPreview = dragPreview
 			this.lastConnectedDragPreviewOptions = this.dragPreviewOptions
+			this.disconnectDragPreview()
 			this.dragPreviewUnsubscribe = this.backend.connectDragPreview(
 				this.handlerId,
 				dragPreview,
@@ -208,5 +205,15 @@ export class SourceConnector implements Connector {
 			this.dragPreviewNode ||
 			(this.dragPreviewRef && this.dragPreviewRef.current)
 		)
+	}
+
+	private clearDragSource() {
+		this.dragSourceNode = null
+		this.dragSourceRef = null
+	}
+
+	private clearDragPreview() {
+		this.dragPreviewNode = null
+		this.dragPreviewRef = null
 	}
 }

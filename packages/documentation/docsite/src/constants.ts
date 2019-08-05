@@ -241,6 +241,10 @@ export const ExamplePages: PageGroup[] = [
 				location: '/examples/other/native-files',
 				title: 'Native Files',
 			},
+			OTHER_CHAINED_CONNECTORS: {
+				location: '/examples/other/chained-connectors',
+				title: 'Chained Connectors',
+			},
 		},
 	},
 ]

@@ -26,14 +26,12 @@ export function cloneWithRef(
 		return cloneElement(element, {
 			ref: newRef,
 		})
-	}
-
-	return cloneElement(element, {
-		ref: (node: any) => {
-			setRef(newRef, node)
-			if (previousRef) {
+	} else {
+		return cloneElement(element, {
+			ref: (node: any) => {
 				setRef(previousRef, node)
-			}
-		},
-	})
+				setRef(newRef, node)
+			},
+		})
+	}
 }
