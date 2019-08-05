@@ -13,8 +13,9 @@ const Box = ({ name }) => {
   const item = { name, type: ItemTypes.BOX }
   const [{ opacity }, drag] = useDrag({
     item,
-    end(dropResult) {
-      if (dropResult) {
+    end(item, monitor) {
+      const dropResult = monitor.getDropResult()
+      if (item && dropResult) {
         let alertMessage = ''
         const isDropAllowed =
           dropResult.allowedDropEffect === 'any' ||

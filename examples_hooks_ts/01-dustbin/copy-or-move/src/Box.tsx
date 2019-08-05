@@ -1,6 +1,6 @@
 import React from 'react'
 import ItemTypes from './ItemTypes'
-import { useDrag } from 'react-dnd'
+import { useDrag, DragSourceMonitor } from 'react-dnd'
 
 const style: React.CSSProperties = {
   border: '1px dashed gray',
@@ -25,8 +25,9 @@ const Box: React.FC<BoxProps> = ({ name }) => {
   const item = { name, type: ItemTypes.BOX }
   const [{ opacity }, drag] = useDrag({
     item,
-    end(dropResult?: DropResult) {
-      if (dropResult) {
+    end(item: { name: string } | undefined, monitor: DragSourceMonitor) {
+      const dropResult: DropResult = monitor.getDropResult()
+      if (item && dropResult) {
         let alertMessage = ''
         const isDropAllowed =
           dropResult.allowedDropEffect === 'any' ||
