@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrag } from 'react-dnd'
+import { useDrag, DragSourceMonitor } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
@@ -19,9 +19,10 @@ interface BoxProps {
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const [{ isDragging }, drag] = useDrag({
 		item: { name, type: ItemTypes.BOX },
-		end: (dropResult?: { name: string }) => {
-			if (dropResult) {
-				alert(`You dropped ${name} into ${dropResult.name}!`)
+		end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
+			const dropResult = monitor.getDropResult()
+			if (item && dropResult) {
+				alert(`You dropped ${item.name} into ${dropResult.name}!`)
 			}
 		},
 		collect: monitor => ({
