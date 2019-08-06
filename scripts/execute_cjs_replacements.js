@@ -18,18 +18,28 @@ files.forEach(file => {
 
 		replace.sync(jsReplaceSpec)
 
-		let dtsReplaceSpec = {
+		// .d.ts files - standard imports
+		let replaceSpec = {
 			files: `${file}/lib/**/*.d.ts`,
 			from: esmLibs.map(esmLib => new RegExp(`from '${esmLib}'`, 'g')),
 			to: esmLibs.map(esmLib => `from '${esmLib}-cjs'`),
 		}
-		replace.sync(dtsReplaceSpec)
+		replace.sync(replaceSpec)
 
-		dtsReplaceSpec = {
+		// .d.ts - dynamic imports
+		replaceSpec = {
 			files: `${file}/lib/**/*.d.ts`,
 			from: esmLibs.map(esmLib => new RegExp(`import\\("${esmLib}"\\)`, 'g')),
 			to: esmLibs.map(esmLib => `import("${esmLib}-cjs")`),
 		}
-		replace.sync(dtsReplaceSpec)
+		replace.sync(replaceSpec)
+
+		// .js files - standard imports
+		replaceSpec = {
+			files: `${file}/lib/**/*.js`,
+			from: esmLibs.map(esmLib => new RegExp(`require\\("${esmLib}"\\)`, 'g')),
+			to: esmLibs.map(esmLib => `require("${esmLib}-cjs")`),
+		}
+		replace.sync(replaceSpec)
 	}
 })
