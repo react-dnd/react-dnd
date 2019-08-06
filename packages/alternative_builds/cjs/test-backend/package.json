@@ -1,18 +1,19 @@
 {
   "name": "react-dnd-test-backend-cjs",
-  "version": "9.3.5",
-  "debug_force": "1",
+  "version": "9.3.4",
   "license": "MIT",
   "description": "A mock backend for testing React DnD apps",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "clean": "../../../../scripts/clean_package.sh"
   },
   "dependencies": {
-    "dnd-core-cjs": "^9.3.5"
+    "dnd-core-cjs": "^9.3.4"
   },
   "devDependencies": {
-    "react-dnd-test-backend": "^9.3.4"
-  }
+    "react-dnd-test-backend": "9.3.4"
+  },
+  "peerDependencies": {}
 }

@@ -5,7 +5,7 @@
     "module": "commonjs",
     "outDir": "lib",
     "esModuleInterop": true,
-    "baseUrl": "/Users/christrevino/Workspace/oss/react-dnd/packages/core/dnd-core/",
+    "baseUrl": "../../../dnd-core/",
     "emitDeclarationOnly": false,
     "paths": {
       "dnd-core": [
@@ -26,6 +26,6 @@
     }
   },
   "files": [
-    "/Users/christrevino/Workspace/oss/react-dnd/packages/core/dnd-core/src/index.ts"
+    "../../../core/dnd-core/src/index.ts"
   ]
 }

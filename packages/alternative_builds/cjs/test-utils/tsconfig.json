@@ -5,7 +5,7 @@
     "module": "commonjs",
     "outDir": "lib",
     "esModuleInterop": true,
-    "baseUrl": "/Users/christrevino/Workspace/oss/react-dnd/packages/testing/test-utils/",
+    "baseUrl": "../../../test-utils/",
     "emitDeclarationOnly": false,
     "paths": {
       "dnd-core": [
@@ -26,6 +26,6 @@
     }
   },
   "files": [
-    "/Users/christrevino/Workspace/oss/react-dnd/packages/testing/test-utils/src/index.ts"
+    "../../../testing/test-utils/src/index.ts"
   ]
 }

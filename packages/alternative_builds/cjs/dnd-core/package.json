@@ -1,10 +1,10 @@
 {
   "name": "dnd-core-cjs",
-  "version": "9.3.5",
-  "debug_force": "1",
+  "version": "9.3.4",
   "license": "MIT",
   "description": "Drag and drop sans the GUI",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "clean": "../../../../scripts/clean_package.sh"
@@ -17,6 +17,7 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
-    "dnd-core": "^9.3.4"
-  }
+    "dnd-core": "9.3.4"
+  },
+  "peerDependencies": {}
 }
