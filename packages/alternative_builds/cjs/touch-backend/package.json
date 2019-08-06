@@ -1,7 +1,6 @@
 {
   "name": "react-dnd-touch-backend-cjs",
   "version": "9.3.7",
-  "publishSentinel": 1,
   "license": "MIT",
   "description": "Touch backend for react-dnd",
   "main": "lib/index.js",
