@@ -1,6 +1,7 @@
 {
   "name": "react-dnd-html5-backend-cjs",
   "version": "9.3.6",
+  "publishSentinel": 1,
   "license": "MIT",
   "description": "HTML5 backend for React DnD",
   "main": "lib/index.js",
