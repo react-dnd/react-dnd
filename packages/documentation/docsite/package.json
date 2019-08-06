@@ -1,7 +1,7 @@
 {
 	"name": "react-dnd-documentation",
 	"description": "React DnD Docsite",
-	"version": "9.3.4",
+	"version": "9.3.5",
 	"private": true,
 	"license": "MIT",
 	"dependencies": {
