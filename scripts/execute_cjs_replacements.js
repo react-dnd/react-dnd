@@ -10,36 +10,37 @@ files.forEach(file => {
 	const subdir = path.join(cjsRoot, file)
 	if (fs.lstatSync(subdir).isDirectory()) {
 		console.log(`process module requires in ${subdir}`)
-		const jsReplaceSpec = {
-			files: `${subdir}/lib/**/*.js`,
+		const files = [
+			path.join(subdir, 'lib/**/*.js'),
+			path.join(subdir, 'lib/**/*.d.ts'),
+		]
+
+		const executeReplacement = ({ ...opts }) => {
+			let results = replace.sync({
+				files,
+				...opts,
+			})
+			console.log(
+				`executed replacement pattern in ${results.length} files`,
+				results
+					.filter(r => r.hasChanged)
+					.map(r => r.file.replace(subdir, ''))
+					.join('\n\t'),
+			)
+		}
+
+		// Replace 'require' calls
+		executeReplacement({
 			from: esmLibs.map(esmLib => new RegExp(`require\\("${esmLib}"\\)`, 'g')),
 			to: esmLibs.map(esmLib => `require("${esmLib}-cjs")`),
-		}
-
-		replace.sync(jsReplaceSpec)
-
-		// .d.ts files - standard imports
-		let replaceSpec = {
-			files: `${file}/lib/**/*.d.ts`,
-			from: esmLibs.map(esmLib => new RegExp(`from '${esmLib}'`, 'g')),
-			to: esmLibs.map(esmLib => `from '${esmLib}-cjs'`),
-		}
-		replace.sync(replaceSpec)
-
-		// .d.ts - dynamic imports
-		replaceSpec = {
-			files: `${file}/lib/**/*.d.ts`,
+		})
+		executeReplacement({
+			from: esmLibs.map(esmLib => new RegExp(`from \'${esmLib}\'`, 'g')),
+			to: esmLibs.map(esmLib => `from \'${esmLib}-cjs\'`),
+		})
+		executeReplacement({
 			from: esmLibs.map(esmLib => new RegExp(`import\\("${esmLib}"\\)`, 'g')),
 			to: esmLibs.map(esmLib => `import("${esmLib}-cjs")`),
-		}
-		replace.sync(replaceSpec)
-
-		// .js files - standard imports
-		replaceSpec = {
-			files: `${file}/lib/**/*.js`,
-			from: esmLibs.map(esmLib => new RegExp(`require\\("${esmLib}"\\)`, 'g')),
-			to: esmLibs.map(esmLib => `require("${esmLib}-cjs")`),
-		}
-		replace.sync(replaceSpec)
+		})
 	}
 })
