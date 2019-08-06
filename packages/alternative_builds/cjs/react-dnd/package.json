@@ -1,6 +1,7 @@
 {
   "name": "react-dnd-cjs",
   "version": "9.3.6",
+  "publishSentinel": 1,
   "license": "MIT",
   "description": "Drag and Drop for React",
   "main": "lib/index.js",
