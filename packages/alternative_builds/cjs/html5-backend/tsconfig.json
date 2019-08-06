@@ -5,7 +5,7 @@
     "module": "commonjs",
     "outDir": "lib",
     "esModuleInterop": true,
-    "baseUrl": "/Users/christrevino/Workspace/oss/react-dnd/packages/core/html5-backend/",
+    "baseUrl": "../../../html5-backend/",
     "emitDeclarationOnly": false,
     "paths": {
       "dnd-core": [
@@ -26,6 +26,6 @@
     }
   },
   "files": [
-    "/Users/christrevino/Workspace/oss/react-dnd/packages/core/html5-backend/src/index.ts"
+    "../../../core/html5-backend/src/index.ts"
   ]
 }
