@@ -21,12 +21,10 @@ function deleteFolderRecursive(filePath) {
 
 const cjsRoot = path.join(__dirname, '../packages/alternative_builds/cjs')
 
-const coreRoots = [
-	path.join(__dirname, '../packages/core'),
-	path.join(__dirname, '../packages/testing'),
-]
+const coreRoots = ['core', 'testing']
 coreRoots.forEach(coreRoot => {
-	const corePackages = fs.readdirSync(coreRoot)
+	const absCoreRoot = path.join(__dirname, '../packages/', coreRoot)
+	const corePackages = fs.readdirSync(absCoreRoot)
 	corePackages.forEach(corePackage => {
 		const cjsPackageRoot = path.join(cjsRoot, corePackage)
 		if (fs.existsSync(cjsPackageRoot)) {
@@ -44,7 +42,7 @@ coreRoots.forEach(coreRoot => {
 			description,
 			devDependencies = {},
 			peerDependencies = {},
-		} = require(`${coreRoot}/${corePackage}/package.json`)
+		} = require(`${absCoreRoot}/${corePackage}/package.json`)
 
 		esmLibs.forEach(lib => {
 			if (dependencies[lib]) {
@@ -63,7 +61,7 @@ coreRoots.forEach(coreRoot => {
 			license,
 			description,
 			main: 'lib/index.js',
-			typings,
+			typings: 'lib/index.d.ts',
 			scripts: {
 				build: 'tsc',
 				clean: '../../../../scripts/clean_package.sh',
@@ -90,7 +88,7 @@ coreRoots.forEach(coreRoot => {
 				module: 'commonjs',
 				outDir: 'lib',
 				esModuleInterop: true,
-				baseUrl: `${coreRoot}/${corePackage}/`,
+				baseUrl: `../../../${corePackage}/`,
 				emitDeclarationOnly: false,
 				paths: {
 					'dnd-core': ['../../core/dnd-core/lib/index.d.ts'],
@@ -104,7 +102,7 @@ coreRoots.forEach(coreRoot => {
 					'react-dnd-test-utils': ['../../testing/test-utils/lib/index.d.ts'],
 				},
 			},
-			files: [`${coreRoot}/${corePackage}/src/index.ts`],
+			files: [`../../../${coreRoot}/${corePackage}/src/index.ts`],
 		}
 
 		console.log(`write ${name} tsconfig.json`)
