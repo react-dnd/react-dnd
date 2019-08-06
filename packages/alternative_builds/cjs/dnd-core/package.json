@@ -1,6 +1,6 @@
 {
   "name": "dnd-core-cjs",
-  "version": "9.3.6",
+  "version": "9.3.7",
   "publishSentinel": 1,
   "license": "MIT",
   "description": "Drag and drop sans the GUI",

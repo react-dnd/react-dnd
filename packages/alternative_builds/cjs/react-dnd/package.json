@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-cjs",
-  "version": "9.3.6",
+  "version": "9.3.7",
   "publishSentinel": 1,
   "license": "MIT",
   "description": "Drag and Drop for React",
@@ -13,7 +13,7 @@
   "dependencies": {
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/shallowequal": "^1.1.1",
-    "dnd-core-cjs": "^9.3.6",
+    "dnd-core-cjs": "^9.3.7",
     "hoist-non-react-statics": "^3.3.0",
     "shallowequal": "^1.1.0"
   },
