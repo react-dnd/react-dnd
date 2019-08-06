@@ -1,7 +1,6 @@
 {
   "name": "react-dnd-test-backend-cjs",
   "version": "9.3.6",
-  "publishSentinel": 1,
   "license": "MIT",
   "description": "A mock backend for testing React DnD apps",
   "main": "lib/index.js",
