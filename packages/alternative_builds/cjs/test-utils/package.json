@@ -1,6 +1,7 @@
 {
   "name": "react-dnd-test-utils-cjs",
   "version": "9.3.4",
+  "debug_force": "1",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
