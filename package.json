@@ -47,7 +47,7 @@
 		"test": "run-s clean lint build test_modules jest:cov",
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
-		"prepublishOnly": "run-s clean build:packages build:cjs",
+		"prepublishOnly": "yarn clean && yarn build",
 		"preinstall": "node scripts/create_cjs_modules.js",
 		"start": "lerna run --parallel --stream start",
 		"start_docs": "lerna run --stream start --scope react-dnd-documentation",
