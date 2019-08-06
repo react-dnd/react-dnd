@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-utils-cjs",
-  "version": "9.3.8",
+  "version": "9.3.9",
   "publishSentinel": 1,
   "license": "MIT",
   "main": "lib/index.js",
