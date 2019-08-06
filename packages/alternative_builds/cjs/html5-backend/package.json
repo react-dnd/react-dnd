@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-html5-backend-cjs",
-  "version": "9.3.8",
+  "version": "9.3.9",
   "publishSentinel": 1,
   "license": "MIT",
   "description": "HTML5 backend for React DnD",
@@ -11,7 +11,7 @@
     "clean": "../../../../scripts/clean_package.sh"
   },
   "dependencies": {
-    "dnd-core-cjs": "^9.3.8"
+    "dnd-core-cjs": "^9.3.9"
   },
   "devDependencies": {
     "@types/react": "^16.8.23",
