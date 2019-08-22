@@ -34,9 +34,12 @@
 	"homepage": "https://github.com/react-dnd/react-dnd",
 	"scripts": {
 		"clean": "lerna run clean",
-		"build:packages": "lerna run build --stream",
-		"build:cjs": "node scripts/execute_cjs_replacements.js",
-		"build": "run-s build:packages build:cjs",
+		"build_packages": "lerna run build --stream",
+		"build_cjs": "node scripts/execute_cjs_replacements.js",
+		"build": "run-s build_packages build_cjs bundle_umd_libs",
+		"bundle_umd_libs:development": "webpack --mode development",
+		"bundle_umd_libs:production": "webpack --mode production",
+		"bundle_umd_libs": "run-p bundle_umd_libs:*",
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",
@@ -93,7 +96,8 @@
 		"react-dom": "^16.8.6",
 		"replace-in-file": "^4.1.0",
 		"ts-jest": "^24.0.2",
-		"typescript": "^3.5.2"
+		"typescript": "^3.5.2",
+		"webpack-cli": "^3.3.5"
 	},
 	"jest": {
 		"clearMocks": true,
