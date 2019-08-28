@@ -28,6 +28,27 @@ If you are using Jest, you may need to configure Jest's `moduleNameMapper` setti
 }
 ```
 
+#### With create-react-app
+
+If you are using `create-react-app`, which uses Jest to drive unit tests, you can use the [react-app-rewired](https://github.com/timarney/react-app-rewired) to override the default Jest configuration without ejecting.
+
+```js
+/* config-overrides.js */
+module.exports = {
+  jest: config => {
+    config.moduleNameMapper = Object.assign({}, config.moduleNameMapper, {
+      '^dnd-core$': 'dnd-core/dist/cjs',
+      '^react-dnd$': 'react-dnd/dist/cjs',
+      '^react-dnd-html5-backend$': 'react-dnd-html5-backend/dist/cjs',
+      '^react-dnd-touch-backend$': 'react-dnd-touch-backend/dist/cjs',
+      '^react-dnd-test-backend$': 'react-dnd-test-backend/dist/cjs',
+      '^react-dnd-test-utils$': 'react-dnd-test-utils/dist/cjs',
+    })
+    return config
+  },
+}
+```
+
 ### Testing the Components in Isolation
 
 If you are only interested in testing the _rendering_ of your components in isolation, and not their interaction, you may use the `DecoratedComponent` static property available on any class wrapped with React DnD to access the original class. You may then test it with the different props without any dependency on React DnD, supplying an identity function to stub the connector methods.
