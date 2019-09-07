@@ -34,7 +34,7 @@ function DraggableComponent(props) {
 
 - **`item`**: Required. A plain JavaScript object describing the data being dragged. This is the _only_ information available to the drop targets about the drag source so it's important to pick the _minimal_ data they need to know. You may be tempted to put a complex reference here, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ type, id }` from this method.
 
-  `item.type` **must be set**, and it must be either a string, an ES6 symbol`. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to this item. Read the [overview](/docs/overview) to learn more about the items and types.
+  `item.type` **must be set**, and it must be either a string, an ES6 symbol. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to this item. Read the [overview](/docs/overview) to learn more about the items and types.
 
 - **`previewOptions`**: Optional. A plain JavaScript object describing drag preview options.
 
