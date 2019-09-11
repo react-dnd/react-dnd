@@ -35,8 +35,8 @@ files.forEach(file => {
 			to: esmLibs.map(esmLib => `require("${esmLib}-cjs")`),
 		})
 		executeReplacement({
-			from: esmLibs.map(esmLib => new RegExp(`from \'${esmLib}\'`, 'g')),
-			to: esmLibs.map(esmLib => `from \'${esmLib}-cjs\'`),
+			from: esmLibs.map(esmLib => new RegExp(`from '${esmLib}'`, 'g')),
+			to: esmLibs.map(esmLib => `from '${esmLib}-cjs'`),
 		})
 		executeReplacement({
 			from: esmLibs.map(esmLib => new RegExp(`import\\("${esmLib}"\\)`, 'g')),
