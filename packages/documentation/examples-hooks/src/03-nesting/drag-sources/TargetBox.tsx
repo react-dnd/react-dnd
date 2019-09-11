@@ -55,9 +55,6 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 export interface StatefulTargetBoxState {
 	lastDroppedColor: string | null
 }
-export interface StatefulTargetBoxState {
-	lastDroppedColor: string | null
-}
 const StatefulTargetBox: React.FC = props => {
 	const [lastDroppedColor, setLastDroppedColor] = useState<string | null>(null)
 	const handleDrop = useCallback(
