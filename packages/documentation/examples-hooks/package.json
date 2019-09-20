@@ -1,44 +1,45 @@
 {
-	"name": "react-dnd-examples-hooks",
-	"version": "9.3.4",
-	"private": true,
-	"description": "Drag and Drop for React",
-	"type": "module",
-	"main": "lib/esm/index.js",
-	"types": "lib/esm/index.d.ts",
-	"module": "lib/esm/index.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/react-dnd/react-dnd.git"
-	},
-	"license": "MIT",
-	"scripts": {
-		"clean": "../../../scripts/clean_package.sh",
-		"build:ts": "tsc -b tsconfig.json",
-		"build:docs": "tsc -b tsconfig.docs.json",
-		"build": "run-p build:*",
-		"start": "tsc -b tsconfig.json -w --preserveWatchOutput"
-	},
-	"dependencies": {
-		"@types/faker": "^4.1.5",
-		"dnd-core": "^9.3.4",
-		"faker": "^4.1.0",
-		"immutability-helper": "^3.0.0",
-		"react-dnd": "^9.3.4",
-		"react-dnd-html5-backend": "^9.3.4",
-		"react-frame-component": "^4.1.1"
-	},
-	"devDependencies": {
-		"@types/react": "^16.9.2",
-		"@types/react-dom": "^16.9.0",
-		"npm-run-all": "^4.1.5",
-		"react": "^16.9.0",
-		"react-dnd-test-utils": "^9.3.4",
-		"react-dom": "^16.9.0",
-		"typescript": "^3.6.3"
-	},
-	"peerDependencies": {
-		"react": ">= 16.8.5",
-		"react-dom": ">= 16.8.5"
-	}
+  "name": "react-dnd-examples-hooks",
+  "version": "9.3.4",
+  "private": true,
+  "description": "Drag and Drop for React",
+  "type": "module",
+  "main": "lib/esm/index.js",
+  "types": "lib/esm/index.d.ts",
+  "module": "lib/esm/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "../../../scripts/clean_package.sh",
+    "build:ts": "../../../node_modules/.bin/tsc -b tsconfig.json",
+    "build:docs": "tsc -b tsconfig.docs.json",
+    "build": "run-p build:*",
+    "start": "tsc -b tsconfig.json -w --preserveWatchOutput"
+  },
+  "dependencies": {
+    "@types/faker": "^4.1.5",
+    "@types/lodash": "^4.14.138",
+    "dnd-core": "^9.3.4",
+    "faker": "^4.1.0",
+    "immutability-helper": "^3.0.0",
+    "react-dnd": "^9.3.4",
+    "react-dnd-html5-backend": "^9.3.4",
+    "react-frame-component": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.9.0",
+    "react-dnd-test-utils": "^9.3.4",
+    "react-dom": "^16.9.0",
+    "typescript": "^3.6.3"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8.5",
+    "react-dom": ">= 16.8.5"
+  }
 }

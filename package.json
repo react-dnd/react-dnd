@@ -185,6 +185,9 @@
       "packages/documentation/*",
       "packages/testing/*",
       "packages/core/*"
+    ],
+    "nohoist": [
+      "react-dnd-documentation/**"
     ]
   },
   "dependencies": {

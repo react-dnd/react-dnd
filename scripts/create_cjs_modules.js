@@ -35,8 +35,6 @@ coreRoots.forEach(coreRoot => {
 		const {
 			name,
 			version,
-			main,
-			typings,
 			dependencies = {},
 			license,
 			description,
