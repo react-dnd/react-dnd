@@ -14,13 +14,14 @@ export type DndProviderProps<BackendContext, BackendOptions> =
 			debugMode?: boolean
 		}
 
-let globalContextRefCount = 0;
+let refCount = 0;
 
 /**
  * A React component that provides the React-DnD context
  */
 export const DndProvider: React.FC<DndProviderProps<any, any>> = memo(
 	({ children, ...props }) => {
+		const [manager, isGlobalInstance] = getDndContextValue(props) // memoized from props
 
 		/**
 		 * If the global context was used to store the DND context
@@ -28,41 +29,41 @@ export const DndProvider: React.FC<DndProviderProps<any, any>> = memo(
 		 * clean it up to avoid memory leaks
 		 */
 		React.useEffect(() => {
+			if (isGlobalInstance) {
+				refCount++
+		 	}
+
 			return () => {
-				if ('manager' in props || props.context) {
-					return
-				}
+				if (isGlobalInstance) {
+					refCount--
 
-				globalContextRefCount -= 1
-				if (globalContextRefCount > 0) {
-					return
-				}
-
-				const context = getGlobalContext()
-				context[instanceSymbol] = null
+          if (refCount === 0) {
+						const context = getGlobalContext()
+						context[instanceSymbol] = null
+          }
+      	}
 			}
-		})
+		}, [])
 
-		return <DndContext.Provider value={getDndContextValue(props)}>{children}</DndContext.Provider>
+		return <DndContext.Provider value={manager}>{children}</DndContext.Provider>
 	},
 )
 
-function getDndContextValue(props: any) {
+function getDndContextValue(props: DndProviderProps<any, any>) {
 	if ('manager' in props) {
-		return { dragDropManager: props.manager }
+		const manager = { dragDropManager: props.manager };
+		return [manager, false];
 	}
 
-	// If no context was provided, then global/window context will be used
-	if (!props.context) {
-		globalContextRefCount += 1
-	}
-
-	return createSingletonDndContext(
+	const manager = createSingletonDndContext(
 		props.backend,
 		props.context,
 		props.options,
 		props.debugMode,
-	)
+	);
+	const isGlobalInstance = !props.context;
+
+	return [manager, isGlobalInstance];
 }
 
 const instanceSymbol = Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')

@@ -46,7 +46,7 @@
 		"release:packages": "lerna publish",
 		"go_no_go": "node scripts/go_no_go.js",
 		"release_docs": "lerna run release --stream --scope react-dnd-documentation",
-		"test": "run-s clean lint build test_modules jest:cov",
+		"test": "run-s clean build test_modules",
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit": "lint-staged",
 		"preinstall": "node scripts/create_cjs_modules.js",
