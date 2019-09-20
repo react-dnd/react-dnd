@@ -1,4 +1,4 @@
-declare var global: any
+declare const global: any
 
 import HTML5Backend from '../HTML5Backend'
 import createBackend from '../index'

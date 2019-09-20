@@ -80,7 +80,7 @@ function createSingletonDndContext<BackendContext, BackendOptions>(
 	return ctx[instanceSymbol]
 }
 
-declare var global: any
+declare const global: any
 function getGlobalContext() {
 	return typeof global !== 'undefined' ? global : (window as any)
 }

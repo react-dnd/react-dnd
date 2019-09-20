@@ -58,7 +58,7 @@ function mapContainsValue<T>(map: Map<string, T>, searchValue: T) {
 		if (value === searchValue) {
 			return true
 		}
-		isDone = done
+		isDone = !!done
 	} while (!isDone)
 	return false
 }
