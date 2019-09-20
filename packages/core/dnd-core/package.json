@@ -1,26 +1,26 @@
 {
-	"name": "dnd-core",
-	"version": "9.3.4",
-	"description": "Drag and drop sans the GUI",
-	"license": "MIT",
-	"main": "./dist/esm/index.js",
-	"module": "./dist/esm/index.js",
-	"type": "module",
-	"types": "./lib/index.d.ts",
-	"scripts": {
-		"build": "../../../scripts/build_package.sh",
-		"clean": "../../../scripts/clean_package.sh",
-		"start": "../../../scripts/watch_package.sh"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/react-dnd/react-dnd.git"
-	},
-	"dependencies": {
-		"@types/asap": "^2.0.0",
-		"@types/invariant": "^2.2.30",
-		"asap": "^2.0.6",
-		"invariant": "^2.2.4",
-		"redux": "^4.0.4"
-	}
+  "name": "dnd-core",
+  "version": "9.4.0",
+  "description": "Drag and drop sans the GUI",
+  "license": "MIT",
+  "main": "./dist/esm/index.js",
+  "module": "./dist/esm/index.js",
+  "type": "module",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "../../../scripts/build_package.sh",
+    "clean": "../../../scripts/clean_package.sh",
+    "start": "../../../scripts/watch_package.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
+  "dependencies": {
+    "@types/asap": "^2.0.0",
+    "@types/invariant": "^2.2.30",
+    "asap": "^2.0.6",
+    "invariant": "^2.2.4",
+    "redux": "^4.0.4"
+  }
 }
