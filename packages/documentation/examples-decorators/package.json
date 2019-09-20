@@ -26,7 +26,7 @@
 		"immutability-helper": "^3.0.0",
 		"react-dnd": "^9.3.4",
 		"react-dnd-html5-backend": "^9.3.4",
-		"react-frame-component": "^4.1.0"
+		"react-frame-component": "^4.1.1"
 	},
 	"devDependencies": {
 		"@types/react": "^16.9.2",
@@ -35,7 +35,7 @@
 		"react": "^16.9.0",
 		"react-dnd-test-utils": "^9.3.4",
 		"react-dom": "^16.9.0",
-		"typescript": "^3.5.2"
+		"typescript": "^3.6.3"
 	},
 	"peerDependencies": {
 		"react": ">= 16.8.5",
