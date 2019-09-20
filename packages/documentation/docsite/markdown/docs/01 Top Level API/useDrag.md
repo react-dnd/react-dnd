@@ -38,7 +38,7 @@ function DraggableComponent(props) {
 
 - **`previewOptions`**: Optional. A plain JavaScript object describing drag preview options.
 
-* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom`arePropsEqual(props, otherProps)`function inside the`options` object can improve the performance. Unless you have performance problems, don't worry about it.
+* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)`function inside the`options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
 * **`begin(monitor)`**: Optional. Fired when a drag operation begins. Nothing needs to be returned, but if an object is returned it will override the default `item` property of the spec.
 
