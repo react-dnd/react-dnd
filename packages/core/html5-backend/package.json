@@ -1,28 +1,28 @@
 {
-	"name": "react-dnd-html5-backend",
-	"version": "9.3.4",
-	"description": "HTML5 backend for React DnD",
-	"type": "module",
-	"main": "./dist/esm/index.js",
-	"module": "./dist/esm/index.js",
-	"types": "lib/index.d.ts",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/react-dnd/react-dnd.git"
-	},
-	"scripts": {
-		"clean": "../../../scripts/clean_package.sh",
-		"build": "../../../scripts/build_package.sh",
-		"start": "../../../scripts/watch_package.sh"
-	},
-	"dependencies": {
-		"dnd-core": "^9.3.4"
-	},
-	"devDependencies": {
-		"@types/react": "^16.9.2",
-		"react": "^16.9.0",
-		"react-dnd-test-backend": "^9.3.4",
-		"react-dom": "^16.9.0"
-	}
+  "name": "react-dnd-html5-backend",
+  "version": "9.4.0",
+  "description": "HTML5 backend for React DnD",
+  "type": "module",
+  "main": "./dist/esm/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
+  "scripts": {
+    "clean": "../../../scripts/clean_package.sh",
+    "build": "../../../scripts/build_package.sh",
+    "start": "../../../scripts/watch_package.sh"
+  },
+  "dependencies": {
+    "dnd-core": "^9.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "react": "^16.9.0",
+    "react-dnd-test-backend": "^9.4.0",
+    "react-dom": "^16.9.0"
+  }
 }
