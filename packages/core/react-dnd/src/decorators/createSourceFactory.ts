@@ -1,4 +1,4 @@
-declare var process: any
+declare const process: any
 import * as React from 'react'
 import invariant from 'invariant'
 import { DragSource, DragDropMonitor } from 'dnd-core'

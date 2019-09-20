@@ -49,7 +49,7 @@ export default class HTML5Backend implements Backend {
 	private currentNativeSource: NativeDragSource | null = null
 	private currentNativeHandle: Identifier | null = null
 	private currentDragSourceNode: Element | null = null
-	private altKeyPressed: boolean = false
+	private altKeyPressed = false
 	private mouseMoveTimeoutTimer: number | null = null
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null

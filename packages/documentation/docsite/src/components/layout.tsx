@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-declare var require: any
+declare const require: any
 
 import * as React from 'react'
 import Helmet from 'react-helmet'
