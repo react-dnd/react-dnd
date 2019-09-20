@@ -25,6 +25,8 @@ module.exports = {
 		'gatsby-plugin-typescript',
 		'gatsby-plugin-react-helmet',
 		'gatsby-plugin-styled-components',
+		'gatsby-plugin-sharp',
+		'gatsby-transformer-sharp',
 
 		// Handle Markdown Content
 		{
@@ -35,6 +37,7 @@ module.exports = {
 					`gatsby-remark-autolink-headers`,
 					'gatsby-remark-copy-linked-files',
 					'gatsby-remark-prismjs',
+					'gatsby-remark-images',
 				],
 			},
 		},
