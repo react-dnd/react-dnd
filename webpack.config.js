@@ -6,13 +6,13 @@ function createWebpackConfiguration() {
 		entry: './lib/index.js',
 		resolve: {
 			alias: {
-				'dnd-core': path.join(__dirname, '../../core/dnd-core'),
+				'dnd-core': path.join(__dirname, 'packages/core/dnd-core'),
 			},
 			modules: [
-				path.join(__dirname, '../../core/react-dnd'),
-				path.join(__dirname, '../../core/dnd-core/node_modules'),
-				path.join(__dirname, '../../core/react-dnd/node_modules'),
-				path.join(__dirname, '../../../node_modules'),
+				path.join(__dirname, 'packages/core/react-dnd'),
+				path.join(__dirname, 'packages/core/dnd-core/node_modules'),
+				path.join(__dirname, 'packages/core/react-dnd/node_modules'),
+				path.join(__dirname, 'node_modules'),
 			],
 		},
 		output: {
@@ -43,18 +43,20 @@ module.exports = (env, { mode }) => {
 	return [
 		{
 			...commonConfig,
-			context: path.resolve(__dirname, '../../core/react-dnd'),
+			context: path.resolve(__dirname, 'packages/core/react-dnd'),
 			output: {
 				...commonConfig.output,
+				path: path.resolve(__dirname, 'packages/core/react-dnd/dist/umd'),
 				library: 'ReactDnD',
 				filename: `ReactDnD.${mode === 'production' ? 'min.' : ''}js`,
 			},
 		},
 		{
 			...commonConfig,
-			context: path.resolve(__dirname, '../../core/html5-backend'),
+			context: path.resolve(__dirname, 'packages/core/html5-backend'),
 			output: {
 				...commonConfig.output,
+				path: path.resolve(__dirname, 'packages/core/html5-backend/dist/umd'),
 				library: 'ReactDnDHTML5Backend',
 				filename: `ReactDnDHTML5Backend.${
 					mode === 'production' ? 'min.' : ''
@@ -63,9 +65,10 @@ module.exports = (env, { mode }) => {
 		},
 		{
 			...commonConfig,
-			context: path.resolve(__dirname, '../../core/touch-backend'),
+			context: path.resolve(__dirname, 'packages/core/touch-backend'),
 			output: {
 				...commonConfig.output,
+				path: path.resolve(__dirname, 'packages/core/touch-backend/dist/umd'),
 				library: 'ReactDnDTouchBackend',
 				filename: `ReactDnDTouchBackend.${
 					mode === 'production' ? 'min.' : ''
