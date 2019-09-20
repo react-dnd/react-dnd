@@ -1,30 +1,30 @@
 {
-	"name": "react-dnd-cjs",
-	"version": "9.3.4",
-	"license": "MIT",
-	"description": "Drag and Drop for React",
-	"main": "lib/index.js",
-	"typings": "lib/index.d.ts",
-	"scripts": {
-		"build": "tsc",
-		"clean": "../../../../scripts/clean_package.sh"
-	},
-	"dependencies": {
-		"@types/hoist-non-react-statics": "^3.3.1",
-		"@types/shallowequal": "^1.1.1",
-		"hoist-non-react-statics": "^3.3.0",
-		"shallowequal": "^1.1.0",
-		"dnd-core-cjs": "^9.3.4"
-	},
-	"devDependencies": {
-		"@types/react": "^16.9.2",
-		"@types/react-dom": "^16.9.0",
-		"react": "^16.9.0",
-		"react-dom": "^16.9.0",
-		"react-dnd": "9.3.4"
-	},
-	"peerDependencies": {
-		"react": ">= 16.8",
-		"react-dom": ">= 16.8"
-	}
+  "name": "react-dnd-cjs",
+  "version": "9.3.4",
+  "license": "MIT",
+  "description": "Drag and Drop for React",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "../../../../scripts/clean_package.sh"
+  },
+  "dependencies": {
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/shallowequal": "^1.1.1",
+    "hoist-non-react-statics": "^3.3.0",
+    "shallowequal": "^1.1.0",
+    "dnd-core-cjs": "^9.3.4"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-dnd": "9.3.4"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8",
+    "react-dom": ">= 16.8"
+  }
 }

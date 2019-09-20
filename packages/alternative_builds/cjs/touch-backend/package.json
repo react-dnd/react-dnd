@@ -1,21 +1,21 @@
 {
-	"name": "react-dnd-touch-backend-cjs",
-	"version": "9.3.4",
-	"license": "MIT",
-	"description": "Touch backend for react-dnd",
-	"main": "lib/index.js",
-	"typings": "lib/index.d.ts",
-	"scripts": {
-		"build": "tsc",
-		"clean": "../../../../scripts/clean_package.sh"
-	},
-	"dependencies": {
-		"@types/invariant": "^2.2.30",
-		"invariant": "^2.2.4",
-		"dnd-core-cjs": "^9.3.4"
-	},
-	"devDependencies": {
-		"react-dnd-touch-backend": "9.3.4"
-	},
-	"peerDependencies": {}
+  "name": "react-dnd-touch-backend-cjs",
+  "version": "9.3.4",
+  "license": "MIT",
+  "description": "Touch backend for react-dnd",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "../../../../scripts/clean_package.sh"
+  },
+  "dependencies": {
+    "@types/invariant": "^2.2.30",
+    "invariant": "^2.2.4",
+    "dnd-core-cjs": "^9.3.4"
+  },
+  "devDependencies": {
+    "react-dnd-touch-backend": "9.3.4"
+  },
+  "peerDependencies": {}
 }
