@@ -1,23 +1,23 @@
 {
-  "name": "react-dnd-html5-backend-cjs",
-  "version": "9.3.9",
-  "publishSentinel": 1,
-  "license": "MIT",
-  "description": "HTML5 backend for React DnD",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "clean": "../../../../scripts/clean_package.sh"
-  },
-  "dependencies": {
-    "dnd-core-cjs": "^9.3.9"
-  },
-  "devDependencies": {
-    "@types/react": "^16.8.23",
-    "react": "^16.8.6",
-    "react-dnd-html5-backend": "9.3.4",
-    "react-dnd-test-backend": "^9.3.4",
-    "react-dom": "^16.8.6"
-  }
+	"name": "react-dnd-html5-backend-cjs",
+	"version": "9.3.4",
+	"license": "MIT",
+	"description": "HTML5 backend for React DnD",
+	"main": "lib/index.js",
+	"typings": "lib/index.d.ts",
+	"scripts": {
+		"build": "tsc",
+		"clean": "../../../../scripts/clean_package.sh"
+	},
+	"dependencies": {
+		"dnd-core-cjs": "^9.3.4"
+	},
+	"devDependencies": {
+		"@types/react": "^16.9.2",
+		"react": "^16.9.0",
+		"react-dnd-test-backend": "^9.3.4",
+		"react-dom": "^16.9.0",
+		"react-dnd-html5-backend": "9.3.4"
+	},
+	"peerDependencies": {}
 }
