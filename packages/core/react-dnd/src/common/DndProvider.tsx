@@ -12,25 +12,58 @@ export type DndProviderProps<BackendContext, BackendOptions> =
 			context?: BackendContext
 			options?: BackendOptions
 			debugMode?: boolean
-	  }
+		}
+
+let globalContextRefCount = 0;
 
 /**
  * A React component that provides the React-DnD context
  */
 export const DndProvider: React.FC<DndProviderProps<any, any>> = memo(
 	({ children, ...props }) => {
-		const context =
-			'manager' in props
-				? { dragDropManager: props.manager }
-				: createSingletonDndContext(
-						props.backend,
-						props.context,
-						props.options,
-						props.debugMode,
-				  )
-		return <DndContext.Provider value={context}>{children}</DndContext.Provider>
+
+		/**
+		 * If the global context was used to store the DND context
+		 * then where theres no more references to it we should
+		 * clean it up to avoid memory leaks
+		 */
+		React.useEffect(() => {
+			return () => {
+				if ('manager' in props || props.context) {
+					return
+				}
+
+				globalContextRefCount -= 1
+				if (globalContextRefCount > 0) {
+					return
+				}
+
+				const context = getGlobalContext()
+				context[instanceSymbol] = null
+			}
+		})
+
+		return <DndContext.Provider value={getDndContextValue(props)}>{children}</DndContext.Provider>
 	},
 )
+
+function getDndContextValue(props: any) {
+	if ('manager' in props) {
+		return { dragDropManager: props.manager }
+	}
+
+	// If no context was provided, then global/window context will be used
+	if (!props.context) {
+		globalContextRefCount += 1
+	}
+
+	return createSingletonDndContext(
+		props.backend,
+		props.context,
+		props.options,
+		props.debugMode,
+	)
+}
 
 const instanceSymbol = Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')
 function createSingletonDndContext<BackendContext, BackendOptions>(
