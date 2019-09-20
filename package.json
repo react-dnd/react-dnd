@@ -54,7 +54,6 @@
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit:lint": "lint-staged",
 		"precommit:format": "pretty-quick --staged",
-		"precommit": "run-s precommit:format precommit:lint",
 		"preinstall": "node scripts/create_cjs_modules.js",
 		"start": "lerna run --parallel --stream start",
 		"start_docs": "lerna run --stream start --scope react-dnd-documentation",
@@ -62,7 +61,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lint-staged",
+			"pre-commit": "run-s precommit:lint precommit:format",
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 		}
 	},
