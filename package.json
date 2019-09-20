@@ -150,8 +150,8 @@
 		}
 	},
 	"lint-staged": {
-		"*": [
-			"pretty-quick"
+		"**/*": [
+			"pretty-quick --staged"
 		],
 		"*.{ts,tsx}": [
 			"eslint --fix",
