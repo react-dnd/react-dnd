@@ -1,187 +1,196 @@
 {
-	"name": "react-dnd-parent",
-	"private": true,
-	"description": "React-DnD Monorepo",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/react-dnd/react-dnd.git"
-	},
-	"keywords": [
-		"react",
-		"reactjs",
-		"file",
-		"drag",
-		"drop",
-		"html5",
-		"draggable",
-		"droppable",
-		"drag-and-drop",
-		"dnd",
-		"javascript",
-		"react-component",
-		"hoc"
-	],
-	"author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
-	"contributors": [
-		"Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)",
-		"Jordan Gensler (http://github.com/kesne)",
-		"Gagan (https://github.com/thetechie)"
-	],
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/react-dnd/react-dnd/issues"
-	},
-	"homepage": "https://github.com/react-dnd/react-dnd",
-	"scripts": {
-		"clean": "lerna run clean",
-		"build_packages": "lerna run build --stream",
-		"build_cjs": "node scripts/execute_cjs_replacements.js",
-		"build": "run-s build_packages build_cjs bundle_umd_libs copy_umd_libs",
-		"bundle_umd_libs:development": "webpack --mode development",
-		"bundle_umd_libs:production": "webpack --mode production",
-		"bundle_umd_libs": "run-p bundle_umd_libs:*",
-		"copy_umd_libs": "./scripts/copy_umd_packages.sh",
-		"unit_test": "jest",
-		"jest:watch": "jest --watch",
-		"jest:cov": "jest --coverage",
-		"lint": "eslint . --ext .js,.ts,.jsx,.tsx",
-		"changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
-		"release": "run-s clean build go_no_go release:packages changelog",
-		"release:packages": "lerna publish",
-		"test_modules": "CI=true lerna run test --stream",
-		"go_no_go": "node scripts/go_no_go.js",
-		"release_docs": "lerna run release --stream --scope react-dnd-documentation",
-		"test": "run-s clean lint build test_modules jest:cov",
-		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
-		"precommit:lint": "lint-staged",
-		"precommit:format": "pretty-quick --staged",
-		"preinstall": "node scripts/create_cjs_modules.js",
-		"start": "lerna run --parallel --stream start",
-		"start_docs": "lerna run --stream start --scope react-dnd-documentation",
-		"watch": "lerna run --parallel --stream watch"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "run-s precommit:lint precommit:format",
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-		}
-	},
-	"devDependencies": {
-		"@babel/cli": "^7.5.0",
-		"@babel/core": "^7.5.4",
-		"@babel/plugin-proposal-class-properties": "^7.5.0",
-		"@babel/plugin-proposal-object-rest-spread": "^7.5.4",
-		"@babel/preset-env": "^7.5.4",
-		"@commitlint/cli": "^8.0.0",
-		"@commitlint/config-conventional": "^8.0.0",
-		"@types/jest": "^24.0.15",
-		"@typescript-eslint/eslint-plugin": "^1.11.0",
-		"@typescript-eslint/parser": "^1.11.0",
-		"conventional-changelog-cli": "^2.0.23",
-		"enzyme": "^3.9.0",
-		"enzyme-adapter-react-16": "^1.11.2",
-		"eslint": "^6.0.1",
-		"eslint-config-prettier": "^6.0.0",
-		"eslint-config-react-app": "^4.0.1",
-		"eslint-plugin-no-for-of-loops": "^1.0.1",
-		"eslint-plugin-prettier": "^3.1.0",
-		"eslint-plugin-react": "^7.14.2",
-		"eslint-plugin-react-hooks": "^1.6.1",
-		"husky": "^3.0.0",
-		"inquirer": "^6.5.0",
-		"jest": "^24.8.0",
-		"jest-environment-jsdom": "^24.8.0",
-		"lerna": "^3.15.0",
-		"lint-staged": "^9.0.2",
-		"npm": "^6.9.0",
-		"npm-run-all": "^4.1.5",
-		"prettier": "^1.18.2",
-		"pretty-quick": "^1.11.1",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6",
-		"replace-in-file": "^4.1.0",
-		"ts-jest": "^24.0.2",
-		"typescript": "^3.5.2",
-		"webpack-cli": "^3.3.5"
-	},
-	"jest": {
-		"clearMocks": true,
-		"setupFilesAfterEnv": [
-			"<rootDir>/jest/setup-enzyme.js"
-		],
-		"moduleFileExtensions": [
-			"ts",
-			"tsx",
-			"js",
-			"jsx"
-		],
-		"modulePaths": [
-			"<rootDir>/packages/core/",
-			"<rootDir>/packages/testing/"
-		],
-		"moduleNameMapper": {
-			"^dnd-core$": "dnd-core/dist/cjs",
-			"^react-dnd$": "react-dnd/dist/cjs",
-			"^react-dnd-html5-backend$": "html5-backend/dist/cjs",
-			"^react-dnd-touch-backend$": "touch-backend/dist/cjs",
-			"^react-dnd-test-backend$": "react-dnd-test-backend/dist/cjs",
-			"^react-dnd-test-utils$": "react-dnd-test-utils/dist/cjs"
-		},
-		"collectCoverageFrom": [
-			"packages/core/**/*.{ts,tsx}",
-			"!**/node_modules/**",
-			"!**/lib/**",
-			"!**/__tests__/**"
-		],
-		"testMatch": [
-			"<rootDir>/__tests__/**/?(*.)(spec|test).ts(x|)",
-			"<rootDir>/packages/core/dnd-core/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
-			"<rootDir>/packages/core/react-dnd/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
-			"<rootDir>/packages/core/html5-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
-			"<rootDir>/packages/core/touch-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)"
-		],
-		"transform": {
-			"^.+\\.(ts|tsx)$": "ts-jest"
-		},
-		"globals": {
-			"ts-jest": {
-				"tsConfig": "tsconfig.jest.json",
-				"diagnostics": {
-					"pathRegex": "/.(spec|test).ts$/"
-				}
-			}
-		}
-	},
-	"lint-staged": {
-		"*.{ts,tsx}": [
-			"eslint --fix",
-			"git add"
-		]
-	},
-	"prettier": {
-		"semi": false,
-		"singleQuote": true,
-		"trailingComma": "all",
-		"useTabs": true,
-		"overrides": [
-			{
-				"files": "*.md",
-				"options": {
-					"useTabs": false
-				}
-			}
-		]
-	},
-	"workspaces": {
-		"packages": [
-			"packages/alternative_builds/umd",
-			"packages/alternative_builds/cjs/*",
-			"packages/documentation/*",
-			"packages/testing/*",
-			"packages/core/*"
-		]
-	},
-	"dependencies": {
-		"@types/enzyme": "^3.9.3"
-	}
+  "name": "react-dnd-parent",
+  "private": true,
+  "description": "React-DnD Monorepo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "file",
+    "drag",
+    "drop",
+    "html5",
+    "draggable",
+    "droppable",
+    "drag-and-drop",
+    "dnd",
+    "javascript",
+    "react-component",
+    "hoc"
+  ],
+  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "contributors": [
+    "Chris Trevino <darthtrevino@gmail.com> (http://github.com/darthtrevino)",
+    "Jordan Gensler (http://github.com/kesne)",
+    "Gagan (https://github.com/thetechie)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/react-dnd/react-dnd/issues"
+  },
+  "homepage": "https://github.com/react-dnd/react-dnd",
+  "scripts": {
+    "clean": "lerna run clean",
+    "build_packages": "lerna run build --stream",
+    "build_cjs": "node scripts/execute_cjs_replacements.js",
+    "build": "run-s build_packages build_cjs bundle_umd_libs copy_umd_libs",
+    "bundle_umd_libs:development": "webpack --mode development",
+    "bundle_umd_libs:production": "webpack --mode production",
+    "bundle_umd_libs": "run-p bundle_umd_libs:*",
+    "copy_umd_libs": "./scripts/copy_umd_packages.sh",
+    "unit_test": "jest",
+    "jest:watch": "jest --watch",
+    "jest:cov": "jest --coverage",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
+    "release": "run-s clean build go_no_go release:packages changelog",
+    "release:packages": "lerna publish",
+    "test_modules": "CI=true lerna run test --stream",
+    "go_no_go": "node scripts/go_no_go.js",
+    "release_docs": "lerna run release --stream --scope react-dnd-documentation",
+    "test": "run-s clean lint build test_modules jest:cov",
+    "prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
+    "precommit:lint": "lint-staged",
+    "precommit:format": "pretty-quick --staged",
+    "preinstall": "node scripts/create_cjs_modules.js",
+    "start": "lerna run --parallel --stream start",
+    "start_docs": "lerna run --stream start --scope react-dnd-documentation",
+    "watch": "lerna run --parallel --stream watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "run-s precommit:lint precommit:format",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.6.0",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "conventional-changelog-cli": "^2.0.23",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-no-for-of-loops": "^1.0.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "husky": "^3.0.5",
+    "inquirer": "^7.0.0",
+    "jest": "^24.9.0",
+    "jest-environment-jsdom": "^24.9.0",
+    "lerna": "^3.16.4",
+    "lint-staged": "^9.2.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "react": "^16.9.0",
+    "react-dom": "16.9.0",
+    "replace-in-file": "^4.1.3",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3",
+    "webpack-cli": "^3.3.9"
+  },
+  "jest": {
+    "clearMocks": true,
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest/setup-enzyme.js"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "modulePaths": [
+      "<rootDir>/packages/core/",
+      "<rootDir>/packages/testing/"
+    ],
+    "moduleNameMapper": {
+      "^dnd-core$": "dnd-core/dist/cjs",
+      "^react-dnd$": "react-dnd/dist/cjs",
+      "^react-dnd-html5-backend$": "html5-backend/dist/cjs",
+      "^react-dnd-touch-backend$": "touch-backend/dist/cjs",
+      "^react-dnd-test-backend$": "react-dnd-test-backend/dist/cjs",
+      "^react-dnd-test-utils$": "react-dnd-test-utils/dist/cjs"
+    },
+    "collectCoverageFrom": [
+      "packages/core/**/*.{ts,tsx}",
+      "!**/node_modules/**",
+      "!**/lib/**",
+      "!**/__tests__/**"
+    ],
+    "testMatch": [
+      "<rootDir>/__tests__/**/?(*.)(spec|test).ts(x|)",
+      "<rootDir>/packages/core/dnd-core/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
+      "<rootDir>/packages/core/react-dnd/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
+      "<rootDir>/packages/core/html5-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
+      "<rootDir>/packages/core/touch-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.jest.json",
+        "diagnostics": {
+          "pathRegex": "/.(spec|test).ts$/"
+        }
+      }
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "useTabs": true,
+    "overrides": [
+      {
+        "files": "*.md",
+        "options": {
+          "useTabs": false
+        }
+      },
+      {
+        "files": "*.json",
+        "options": {
+          "useTabs": false,
+          "tabWidth": 2
+        }
+      }
+    ]
+  },
+  "workspaces": {
+    "packages": [
+      "packages/alternative_builds/umd",
+      "packages/alternative_builds/cjs/*",
+      "packages/documentation/*",
+      "packages/testing/*",
+      "packages/core/*"
+    ],
+    "nohoist": [
+      "react-dnd-documentation/**"
+    ]
+  },
+  "dependencies": {
+    "@types/enzyme": "^3.10.3"
+  }
 }

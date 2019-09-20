@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 describe('CommonJS Builds', () => {
 	it('dnd-core', () => expect(require('dnd-core-cjs')).toBeDefined())
 	it('react-dnd', () => expect(require('react-dnd-cjs')).toBeDefined())

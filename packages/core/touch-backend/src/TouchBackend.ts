@@ -282,11 +282,11 @@ export default class TouchBackend implements Backend {
 			 * Use the coordinates to grab the element the drag ended on.
 			 * If the element is the same as the target node (or any of it's children) then we have hit a drop target and can handle the move.
 			 */
-			let droppedOn =
+			const droppedOn =
 				coords != null
 					? this.document.elementFromPoint(coords.x, coords.y)
 					: undefined
-			let childMatch = droppedOn && node.contains(droppedOn)
+			const childMatch = droppedOn && node.contains(droppedOn)
 
 			if (droppedOn === node || childMatch) {
 				return this.handleMove(e, targetId)
@@ -446,7 +446,7 @@ export default class TouchBackend implements Backend {
 			key => this.targetNodes[key],
 		)
 		// Get the a ordered list of nodes that are touched by
-		let elementsAtPoint = this.options.getDropTargetElementsAtPoint
+		const elementsAtPoint = this.options.getDropTargetElementsAtPoint
 			? this.options.getDropTargetElementsAtPoint(
 					clientOffset.x,
 					clientOffset.y,
@@ -454,8 +454,8 @@ export default class TouchBackend implements Backend {
 			  )
 			: this.document.elementsFromPoint(clientOffset.x, clientOffset.y)
 		// Extend list with parents that are not receiving elementsFromPoint events (size 0 elements and svg groups)
-		let elementsAtPointExtended = []
-		for (let nodeId in elementsAtPoint) {
+		const elementsAtPointExtended = []
+		for (const nodeId in elementsAtPoint) {
 			// eslint-disable-next-line no-prototype-builtins
 			if (!elementsAtPoint.hasOwnProperty(nodeId)) {
 				continue
@@ -469,12 +469,12 @@ export default class TouchBackend implements Backend {
 				}
 			}
 		}
-		let orderedDragOverTargetIds: string[] = elementsAtPointExtended
+		const orderedDragOverTargetIds: string[] = elementsAtPointExtended
 			// Filter off nodes that arent a hovered DropTargets nodes
 			.filter(node => dragOverTargetNodes.indexOf(node) > -1)
 			// Map back the nodes elements to targetIds
 			.map(node => {
-				for (let targetId in this.targetNodes) {
+				for (const targetId in this.targetNodes) {
 					if (node === this.targetNodes[targetId]) {
 						return targetId
 					}
@@ -487,7 +487,7 @@ export default class TouchBackend implements Backend {
 
 		// Invoke hover for drop targets when source node is still over and pointer is outside
 		if (enableHoverOutsideTarget) {
-			for (let targetId in this.targetNodes) {
+			for (const targetId in this.targetNodes) {
 				if (
 					this.targetNodes[targetId] &&
 					this.targetNodes[targetId].contains(sourceNode) &&

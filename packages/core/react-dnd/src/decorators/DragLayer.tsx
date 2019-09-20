@@ -38,7 +38,7 @@ export function DragLayer<RequiredProps, CollectedProps = {}>(
 			public static DecoratedComponent = DecoratedComponent
 
 			private manager: DragDropManager | undefined
-			private isCurrentlyMounted: boolean = false
+			private isCurrentlyMounted = false
 			private unsubscribeFromOffsetChange: Unsubscribe | undefined
 			private unsubscribeFromStateChange: Unsubscribe | undefined
 			private ref: React.RefObject<any> = React.createRef()
