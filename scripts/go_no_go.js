@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires no-console */
+/* eslint-disable @typescript-eslint/no-var-requires, no-console */
 const inquirer = require('inquirer')
 inquirer
 	.prompt([

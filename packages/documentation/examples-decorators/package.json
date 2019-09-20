@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@types/faker": "^4.1.5",
+    "@types/lodash": "^4.14.138",
     "dnd-core": "^9.3.4",
     "faker": "^4.1.0",
     "immutability-helper": "^3.0.0",
