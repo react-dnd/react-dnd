@@ -1,31 +1,31 @@
 {
-	"name": "cra-test",
-	"version": "9.3.4",
-	"private": true,
-	"dependencies": {
-		"react": "^16.9.0",
-		"react-dnd": "^9.3.4",
-		"react-dnd-examples-hooks": "^9.3.4",
-		"react-dnd-html5-backend": "^9.3.4",
-		"react-dom": "^16.9.0",
-		"react-scripts": "^3.1.2"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+  "name": "cra-test",
+  "version": "9.4.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dnd": "^9.4.0",
+    "react-dnd-examples-hooks": "^9.4.0",
+    "react-dnd-html5-backend": "^9.4.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "^3.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

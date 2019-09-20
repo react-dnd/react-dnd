@@ -1,36 +1,36 @@
 {
-	"name": "react-dnd",
-	"version": "9.3.4",
-	"description": "Drag and Drop for React",
-	"type": "module",
-	"main": "./dist/esm/index.js",
-	"module": "./dist/esm/index.js",
-	"types": "lib/index.d.ts",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/react-dnd/react-dnd.git"
-	},
-	"license": "MIT",
-	"scripts": {
-		"clean": "../../../scripts/clean_package.sh",
-		"build": "../../../scripts/build_package.sh",
-		"start": "../../../scripts/watch_package.sh"
-	},
-	"dependencies": {
-		"@types/hoist-non-react-statics": "^3.3.1",
-		"@types/shallowequal": "^1.1.1",
-		"dnd-core": "^9.3.4",
-		"hoist-non-react-statics": "^3.3.0",
-		"shallowequal": "^1.1.0"
-	},
-	"devDependencies": {
-		"@types/react": "^16.9.2",
-		"@types/react-dom": "^16.9.0",
-		"react": "^16.9.0",
-		"react-dom": "^16.9.0"
-	},
-	"peerDependencies": {
-		"react": ">= 16.8",
-		"react-dom": ">= 16.8"
-	}
+  "name": "react-dnd",
+  "version": "9.4.0",
+  "description": "Drag and Drop for React",
+  "type": "module",
+  "main": "./dist/esm/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "../../../scripts/clean_package.sh",
+    "build": "../../../scripts/build_package.sh",
+    "start": "../../../scripts/watch_package.sh"
+  },
+  "dependencies": {
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/shallowequal": "^1.1.1",
+    "dnd-core": "^9.4.0",
+    "hoist-non-react-statics": "^3.3.0",
+    "shallowequal": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8",
+    "react-dom": ">= 16.8"
+  }
 }
