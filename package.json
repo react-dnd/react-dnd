@@ -52,7 +52,9 @@
 		"release_docs": "lerna run release --stream --scope react-dnd-documentation",
 		"test": "run-s clean lint build test_modules jest:cov",
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
-		"precommit": "lint-staged",
+		"precommit:lint": "lint-staged",
+		"precommit:format": "pretty-quick --staged",
+		"precommit": "run-s precommit:lint procommit:format",
 		"preinstall": "node scripts/create_cjs_modules.js",
 		"start": "lerna run --parallel --stream start",
 		"start_docs": "lerna run --stream start --scope react-dnd-documentation",
@@ -150,12 +152,8 @@
 		}
 	},
 	"lint-staged": {
-		"**/*": [
-			"pretty-quick --staged"
-		],
 		"*.{ts,tsx}": [
 			"eslint --fix",
-			"prettier --write",
 			"git add"
 		]
 	},
