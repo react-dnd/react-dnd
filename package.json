@@ -36,10 +36,11 @@
 		"clean": "lerna run clean",
 		"build_packages": "lerna run build --stream",
 		"build_cjs": "node scripts/execute_cjs_replacements.js",
-		"build": "run-s build_packages build_cjs bundle_umd_libs",
+		"build": "run-s build_packages build_cjs bundle_umd_libs copy_umd_libs",
 		"bundle_umd_libs:development": "webpack --mode development",
 		"bundle_umd_libs:production": "webpack --mode production",
 		"bundle_umd_libs": "run-p bundle_umd_libs:*",
+		"copy_umd_libs": "./scripts/copy_umd_packages.sh",
 		"unit_test": "jest",
 		"jest:watch": "jest --watch",
 		"jest:cov": "jest --coverage",
@@ -174,6 +175,7 @@
 	},
 	"workspaces": {
 		"packages": [
+			"packages/alternative_builds/umd",
 			"packages/alternative_builds/cjs/*",
 			"packages/documentation/*",
 			"packages/testing/*",
