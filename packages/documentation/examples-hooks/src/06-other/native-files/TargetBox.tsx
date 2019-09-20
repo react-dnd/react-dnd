@@ -24,8 +24,8 @@ const TargetBox: React.FC<TargetBoxProps> = props => {
 			}
 		},
 		collect: monitor => ({
-			isOver: monitor.isOver,
-			canDrop: monitor.canDrop,
+			isOver: monitor.isOver(),
+			canDrop: monitor.canDrop(),
 		}),
 	})
 
