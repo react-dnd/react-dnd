@@ -16,7 +16,7 @@ files.forEach(file => {
 		]
 
 		const executeReplacement = ({ ...opts }) => {
-			let results = replace.sync({
+			const results = replace.sync({
 				files,
 				...opts,
 			})

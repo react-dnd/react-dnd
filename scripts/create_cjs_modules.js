@@ -6,7 +6,7 @@ const esmLibs = require('./esm-libs')
 function deleteFolderRecursive(filePath) {
 	if (fs.existsSync(filePath)) {
 		fs.readdirSync(filePath).forEach(function(file) {
-			var curPath = filePath + '/' + file
+			const curPath = filePath + '/' + file
 			if (fs.lstatSync(curPath).isDirectory()) {
 				// recurse
 				deleteFolderRecursive(curPath)
@@ -35,8 +35,6 @@ coreRoots.forEach(coreRoot => {
 		const {
 			name,
 			version,
-			main,
-			typings,
 			dependencies = {},
 			license,
 			description,
@@ -77,7 +75,7 @@ coreRoots.forEach(coreRoot => {
 		console.log(`write ${name} package.json`)
 		fs.writeFileSync(
 			path.join(cjsPackageRoot, 'package.json'),
-			JSON.stringify(cjsPackageJson, null, 2),
+			JSON.stringify(cjsPackageJson, null, 2) + '\n',
 			{ encoding: 'utf8' },
 		)
 

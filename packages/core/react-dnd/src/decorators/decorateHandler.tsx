@@ -1,4 +1,4 @@
-declare var process: any
+declare const process: any
 
 import * as React from 'react'
 import shallowEqual from 'shallowequal'

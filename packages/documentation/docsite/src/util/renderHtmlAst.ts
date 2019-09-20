@@ -2,7 +2,6 @@ import { createElement } from 'react'
 import processImages from './processImagesInMarkdownAst'
 import exampleTabs from '../components/exampleTabs'
 import debug from 'debug'
-// @ts-ignore
 import rehypeReact from 'rehype-react'
 
 const log = debug('site:renderHtmlAst')

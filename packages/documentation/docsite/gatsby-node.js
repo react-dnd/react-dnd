@@ -44,4 +44,16 @@ async function createPages({ actions, graphql }) {
 	})
 }
 
+function onCreateWebpackConfig({ actions }) {
+	actions.setWebpackConfig({
+		resolve: {
+			alias: {
+				react: path.resolve(__dirname, 'node_modules/react'),
+				'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+			},
+		},
+	})
+}
+
 exports.createPages = createPages
+exports.onCreateWebpackConfig = onCreateWebpackConfig

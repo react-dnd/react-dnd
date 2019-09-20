@@ -22,7 +22,7 @@ export class NormalSource extends DragSource {
 }
 
 export class NonDraggableSource extends DragSource {
-	public didCallBeginDrag: boolean = false
+	public didCallBeginDrag = false
 
 	public canDrag() {
 		return false

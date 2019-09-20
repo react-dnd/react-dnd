@@ -2,8 +2,8 @@ import DropTarget from './DropTargetImpl'
 import { DragDropMonitor } from '../interfaces'
 
 export class NormalTarget extends DropTarget {
-	public didCallDrop: boolean = false
-	public didCallHover: boolean = false
+	public didCallDrop = false
+	public didCallHover = false
 	public dropResult: any
 
 	public constructor(dropResult?: any) {
@@ -22,8 +22,8 @@ export class NormalTarget extends DropTarget {
 }
 
 export class NonDroppableTarget extends DropTarget {
-	public didCallDrop: boolean = false
-	public didCallHover: boolean = false
+	public didCallDrop = false
+	public didCallHover = false
 
 	public canDrop() {
 		return false
@@ -39,8 +39,8 @@ export class NonDroppableTarget extends DropTarget {
 }
 
 export class TargetWithNoDropResult extends DropTarget {
-	public didCallDrop: boolean = false
-	public didCallHover: boolean = false
+	public didCallDrop = false
+	public didCallHover = false
 
 	public hover() {
 		this.didCallHover = true
@@ -58,8 +58,8 @@ export class BadResultTarget extends DropTarget {
 }
 
 export class TransformResultTarget extends DropTarget {
-	public didCallDrop: boolean = false
-	public didCallHover: boolean = false
+	public didCallDrop = false
+	public didCallHover = false
 	private transform: (input: any) => any
 
 	public constructor(transform: (input: any) => any) {

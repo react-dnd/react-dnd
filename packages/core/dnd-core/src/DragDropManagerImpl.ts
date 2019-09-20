@@ -34,7 +34,7 @@ export default class DragDropManagerImpl implements DragDropManager {
 	private store: Store<State>
 	private monitor: DragDropMonitor
 	private backend: Backend | undefined
-	private isSetUp: boolean = false
+	private isSetUp = false
 
 	public constructor(debugMode = false) {
 		const store = makeStoreInstance(debugMode)
@@ -63,6 +63,7 @@ export default class DragDropManagerImpl implements DragDropManager {
 	}
 
 	public getActions(): DragDropActions {
+		/* eslint-disable-next-line @typescript-eslint/no-this-alias */
 		const manager = this
 		const { dispatch } = this.store
 
