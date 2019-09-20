@@ -9,7 +9,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 ## Usage
 
-### Where do I get the precompiled version?
+### Where do I get the pre-compiled version?
 
 ```
 npm install --save react-dnd
@@ -99,7 +99,7 @@ This is not currently documented, but you can take cues from the [HTML5](/docs/b
 
 ### I am getting a “Super expression must either be null or a function, not undefined” error
 
-React DnD requires React 0.13. Make sure you are using at least that version.
+React DnD requires React 16.8. Make sure you are using at least that version.
 
 ### Why won't my static methods and properties work?
 
