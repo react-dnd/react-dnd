@@ -54,7 +54,7 @@
 		"prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
 		"precommit:lint": "lint-staged",
 		"precommit:format": "pretty-quick --staged",
-		"precommit": "run-s precommit:lint procommit:format",
+		"precommit": "run-s precommit:lint precommit:format",
 		"preinstall": "node scripts/create_cjs_modules.js",
 		"start": "lerna run --parallel --stream start",
 		"start_docs": "lerna run --stream start --scope react-dnd-documentation",
