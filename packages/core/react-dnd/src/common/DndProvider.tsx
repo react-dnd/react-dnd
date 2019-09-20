@@ -12,9 +12,9 @@ export type DndProviderProps<BackendContext, BackendOptions> =
 			context?: BackendContext
 			options?: BackendOptions
 			debugMode?: boolean
-		}
+	  }
 
-let refCount = 0;
+let refCount = 0
 
 /**
  * A React component that provides the React-DnD context
@@ -31,28 +31,29 @@ export const DndProvider: React.FC<DndProviderProps<any, any>> = memo(
 		React.useEffect(() => {
 			if (isGlobalInstance) {
 				refCount++
-		 	}
+			}
 
 			return () => {
 				if (isGlobalInstance) {
 					refCount--
 
-          if (refCount === 0) {
+					if (refCount === 0) {
 						const context = getGlobalContext()
 						context[instanceSymbol] = null
-          }
-      	}
+					}
+				}
 			}
 		}, [])
 
 		return <DndContext.Provider value={manager}>{children}</DndContext.Provider>
 	},
 )
+DndProvider.displayName = 'DndProvider'
 
 function getDndContextValue(props: DndProviderProps<any, any>) {
 	if ('manager' in props) {
-		const manager = { dragDropManager: props.manager };
-		return [manager, false];
+		const manager = { dragDropManager: props.manager }
+		return [manager, false]
 	}
 
 	const manager = createSingletonDndContext(
@@ -60,10 +61,10 @@ function getDndContextValue(props: DndProviderProps<any, any>) {
 		props.context,
 		props.options,
 		props.debugMode,
-	);
-	const isGlobalInstance = !props.context;
+	)
+	const isGlobalInstance = !props.context
 
-	return [manager, isGlobalInstance];
+	return [manager, isGlobalInstance]
 }
 
 const instanceSymbol = Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')

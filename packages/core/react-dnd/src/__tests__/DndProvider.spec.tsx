@@ -17,7 +17,7 @@ describe('DndProvider', () => {
 						return null
 					}}
 				</DndContext.Consumer>
-			</DndContext.Provider>
+			</DndContext.Provider>,
 		)
 
 		expect(capturedManager).toBe(manager)
@@ -26,25 +26,34 @@ describe('DndProvider', () => {
 	it('stores DragDropManager in global context and cleans up on unmount', () => {
 		let capturedManager
 
-		const root = create(
-			<DndProvider backend={TestBackend}>
-				<DndContext.Consumer>
-					{({ dragDropManager }) => {
-						capturedManager = dragDropManager
-						return null
-					}}
-				</DndContext.Consumer>
-			</DndProvider>
-		)
+		const mountProvider = () =>
+			create(
+				<DndProvider backend={TestBackend}>
+					<DndContext.Consumer>
+						{({ dragDropManager }) => {
+							capturedManager = dragDropManager
+							return null
+						}}
+					</DndContext.Consumer>
+				</DndProvider>,
+			)
 
-		const instanceSymbol = Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')
+		const globalInstance = () =>
+			global[Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')]
 
-		// @ts-ignore
-		expect(global[instanceSymbol]).toEqual({ dragDropManager: capturedManager });
+		// Single mount & unmount works
+		const root = mountProvider()
+		expect(globalInstance().dragDropManager).toEqual(capturedManager)
+		root.unmount()
+		expect(globalInstance()).toEqual(null)
 
-		root.unmount();
-
-		// @ts-ignore
-		expect(global[instanceSymbol]).toEqual(null);
+		// Two mounted components do a refcount
+		const rootA = mountProvider()
+		const rootB = mountProvider()
+		expect(globalInstance().dragDropManager).toEqual(capturedManager)
+		rootA.unmount()
+		expect(globalInstance().dragDropManager).toEqual(capturedManager)
+		rootB.unmount()
+		expect(globalInstance()).toEqual(null)
 	})
 })
