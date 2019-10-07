@@ -131,19 +131,20 @@ it('can be tested with the testing backend', () => {
 ### Testing with Enzyme
 
 [Enzyme](https://github.com/airbnb/enzyme) is a commonly-used tool for testing React components.
-To use it with react-dnd, you'll need to call `.instance()` on `mount`-ed nodes to access the react-dnd helper methods:
+Because of a [bug in Enzyme](https://github.com/airbnb/enzyme/issues/1852), you'll want to wrap your component in a fragment when you mount it.
+You can then store a ref to your wrapped component and use this ref to access the current `DragDropMananger` instance and call its methods.
 
 ```jsx
-var root = Enzyme.mount(<BoxContext name="test" />)
+const BoxContext = wrapInTestContext(Box)
+
+const ref = React.createRef()
+const root = Enzyme.mount(
+  <>
+    <BoxContext ref={ref} name="test" />
+  </>,
+)
 
 // ...
 
-var backend = root
-  .instance()
-  .getManager()
-  .getBackend()
-
-// ...
-
-backend.simulateHover([dustbin.instance().getHandlerId()])
+const backend = ref.current.getManager().getBackend()
 ```

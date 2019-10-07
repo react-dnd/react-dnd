@@ -3,9 +3,13 @@ import TestBackendImpl, {
 	TestBackend,
 	getInstance,
 } from 'react-dnd-test-backend'
-import { DndComponent, DndProvider } from 'react-dnd'
-import { Backend } from 'dnd-core'
+import { DndComponent, DndContext, DndProvider } from 'react-dnd'
+import { Backend, DragDropManager } from 'dnd-core'
 import { act } from 'react-dom/test-utils'
+
+interface RefType {
+	getManager: () => DragDropManager | undefined
+}
 
 /**
  * Wrap a DnD component or test case in a DragDropContext
@@ -13,13 +17,28 @@ import { act } from 'react-dom/test-utils'
  * @param DecoratedComponent The component to decorate
  */
 export function wrapInTestContext(DecoratedComponent: any): any {
-	const result: React.FC<any> = (props: any) => (
-		<DndProvider backend={TestBackendImpl}>
-			<DecoratedComponent {...props} />
-		</DndProvider>
-	)
-	result.displayName = 'TestContextWrapper'
-	return result
+	const forwardedRefFunc = (props: any, ref: React.Ref<RefType>) => {
+		const dragDropManager = React.useRef<any>(undefined)
+
+		React.useImperativeHandle(ref, () => ({
+			getManager: () => dragDropManager.current,
+		}))
+
+		return (
+			<DndProvider backend={TestBackendImpl}>
+				<DndContext.Consumer>
+					{ctx => {
+						dragDropManager.current = ctx.dragDropManager
+						return null
+					}}
+				</DndContext.Consumer>
+				<DecoratedComponent {...props} />
+			</DndProvider>
+		)
+	}
+	forwardedRefFunc.displayName = 'TestContextWrapper'
+
+	return React.forwardRef(forwardedRefFunc)
 }
 
 /**
