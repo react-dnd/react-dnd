@@ -134,14 +134,14 @@ it('can be tested with the testing backend', () => {
 To use it with react-dnd, you'll need to call `.instance()` on `mount`-ed nodes to access the react-dnd helper methods:
 
 ```jsx
+import { getBackendFromInstance } from 'react-dnd-test-utils';
+
 var root = Enzyme.mount(<BoxContext name="test" />)
 
 // ...
 
-var backend = root
-  .instance()
-  .getManager()
-  .getBackend()
+var backend = getBackendFromInstance(root);
+var manager = backend.manager;
 
 // ...
 
