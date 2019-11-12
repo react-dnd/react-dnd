@@ -13,6 +13,7 @@
     "dnd-core-cjs": "^9.4.0"
   },
   "devDependencies": {
-    "react-dnd-test-backend": "^9.4.0"
-  }
+    "react-dnd-test-backend": "9.4.0"
+  },
+  "peerDependencies": {}
 }
