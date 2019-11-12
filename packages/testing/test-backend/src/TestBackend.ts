@@ -24,9 +24,11 @@ export interface TestBackend extends Backend {
 export default class TestBackendImpl implements Backend, TestBackend {
 	public didCallSetup = false
 	public didCallTeardown = false
+	public manager: DragDropManager;
 	private actions: DragDropActions
 
 	public constructor(manager: DragDropManager) {
+		this.manager = manager;
 		this.actions = manager.getActions()
 	}
 
