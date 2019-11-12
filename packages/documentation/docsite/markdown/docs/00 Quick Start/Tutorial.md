@@ -560,7 +560,7 @@ const [, drop] = useDrop({
 })
 ```
 
-See? The `drop` method has the receives the `props` of the `BoardSquare` in scope, so it knows _where_ to move the knight when it drops. In a real app, I might also use `monitor.getItem()` to retrieve _the dragged item_ that the drag source returned from `beginDrag`, but since we only have a single draggable thing in the whole application, I don't need it.
+See? The `drop` method has the `props` of the `BoardSquare` in scope, so it knows _where_ to move the knight when it drops. In a real app, I might also use `monitor.getItem()` to retrieve _the dragged item_ that the drag source returned from `beginDrag`, but since we only have a single draggable thing in the whole application, I don't need it.
 
 In my collecting function I'm going to ask the monitor whether the pointer is currently over the `BoardSquare` so I can highlight it:
 
