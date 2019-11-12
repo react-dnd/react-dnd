@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./dist/esm/index.js",
   "module": "./dist/esm/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "clean": "../../../scripts/clean_package.sh",
     "build": "../../../scripts/build_package.sh",
