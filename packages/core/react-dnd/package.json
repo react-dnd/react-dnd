@@ -24,10 +24,10 @@
     "shallowequal": "^1.1.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.2",
-    "@types/react-dom": "^16.9.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   },
   "peerDependencies": {
     "react": ">= 16.8",
