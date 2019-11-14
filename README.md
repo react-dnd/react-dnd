@@ -4,7 +4,7 @@
 
 # React _DnD_
 
-Drag and Drop for React
+Drag and Drop for React.
 
 See the docs, tutorials and examples on the website:
 
