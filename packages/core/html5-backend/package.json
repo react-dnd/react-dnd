@@ -21,9 +21,9 @@
     "dnd-core": "^9.4.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.2",
-    "react": "^16.9.0",
+    "@types/react": "^16.9.11",
+    "react": "^16.11.0",
     "react-dnd-test-backend": "^9.4.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.11.0"
   }
 }

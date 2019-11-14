@@ -1,0 +1,27 @@
+name: Node CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Cache
+      uses: actions/cache@v1.0.0  
+      with:
+        path: .yarn-cache
+        key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-cache
+     
+    - run: yarn install --cache-folder ./.yarn-cache
+    - run: yarn test
+      env:
+        CI: true
+    

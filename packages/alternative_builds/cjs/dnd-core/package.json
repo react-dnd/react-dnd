@@ -17,6 +17,7 @@
     "redux": "^4.0.4"
   },
   "devDependencies": {
-    "dnd-core": "^9.4.0"
-  }
+    "dnd-core": "9.4.0"
+  },
+  "peerDependencies": {}
 }
