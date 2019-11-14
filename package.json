@@ -112,6 +112,7 @@
   },
   "jest": {
     "clearMocks": true,
+    "cacheDirectory": ".jest-cache",
     "setupFilesAfterEnv": [
       "<rootDir>/jest/setup-enzyme.js"
     ],
