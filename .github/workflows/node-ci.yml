@@ -21,7 +21,13 @@ jobs:
         key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-cache
      
     - run: yarn install --cache-folder ./.yarn-cache
+      name: Install Dependencies
+      
     - run: yarn test
+      name: Execute Tests
       env:
         CI: true
-    
+        
+    - name: Publish Docsite
+      run: yarn lerna run release --scope react-dnd-documentation
+      if: success() && github.ref == 'master'
