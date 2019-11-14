@@ -28,27 +28,20 @@ jobs:
       with:
         path: .yarn-cache
         key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-cache
-
-    #
-    # yarn [set cache folder]
-    #
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: config set cache-folder .yarn-cache
      
     #
     # yarn install
     #
     - uses: borales/actions-yarn@v2.0.0
       with:
-        cmd: install
+        cmd: install --cache-folder ./yarn-cache
 
     #
     # yarn test
     #
     - uses: borales/actions-yarn@v2.0.0
       with:
-        cmd: test # will run `yarn test` command
+        cmd: test --cache-folder ./yarn-cache
       env:
         CI: true
     
