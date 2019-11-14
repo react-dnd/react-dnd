@@ -15,13 +15,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         
-    - name: Cache
-      uses: actions/cache@v1.0.0  
+    - name: Get yarn cache
+      id: yarn-cache
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - uses: actions/cache@v1
       with:
-        path: .yarn-cache
-        key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-cache
+        path: ${{ steps.yarn-cache.outputs.dir }}
+        key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ matrix.node-version }}-yarn-
      
-    - run: yarn install --cache-folder ./.yarn-cache
+    - run: yarn install
       name: Install Dependencies
       
     - run: yarn test
