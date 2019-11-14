@@ -16,6 +16,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         
     - name: Cache
+      id: cache-yarn-deps
       uses: actions/cache@v1.0.0  
       with:
         path: .yarn-cache
@@ -23,6 +24,7 @@ jobs:
      
     - run: yarn install --cache-folder ./.yarn-cache
       name: Install Dependencies
+      if: steps.cache-yarn-deps.outputs.cache-hit != 'true'
       
     - run: yarn test
       name: Execute Tests
