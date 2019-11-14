@@ -37,7 +37,7 @@ jobs:
 
     - run: yarn install
       name: Install Dependencies 
-      if: steps.cache-yarn-deps.outputs.cache-hit != 'true'
+      if: steps.cache-yarn-cache.outputs.cache-hit != 'true' || steps.cache-node-modules.outputs.cache-hit != 'true'
       
     - run: yarn test
       name: Execute Tests
