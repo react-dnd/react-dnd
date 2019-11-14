@@ -8,82 +8,89 @@ jobs:
         node-version: [8.x, 10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-        
-    - name: Get yarn cache path
-      id: yarn-cache
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/checkout@v1
 
-    - uses: actions/cache@v1
-      name: Cache yarn cache
-      id: cache-yarn-cache
-      with:
-        path: ${{ steps.yarn-cache.outputs.dir }}
-        key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-${{ matrix.node-version }}-yarn-
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - uses: actions/cache@v1
-      name: Cache node_modules
-      id: cache-node-modules
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-
-          
-    - uses: actions/cache@v1
-      name: Cache dnd-core/lib
-      id: cache-dnd-core
-      with:
-        path: packages/core/dnd-core/lib
-        key: ${{ runner.os }}-${{ matrix.node-version }}-dnd-core-${{ hashFiles('packages/core/dnd-core/**') }}
-    
-    - uses: actions/cache@v1
-      name: Cache html5-backend/lib
-      id: cache-html5-backend
-      with:
-        path: packages/core/html5-backend/lib
-        key: ${{ runner.os }}-${{ matrix.node-version }}-html5-backend-${{ hashFiles('packages/core/html5-backend/**') }}
+      - name: Get yarn cache path
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - uses: actions/cache@v1
-      name: Cache react-dnd/lib
-      id: cache-react-dnd
-      with:
-        path: packages/core/react-dnd/lib
-        key: ${{ runner.os }}-${{ matrix.node-version }}-react-dnd-${{ hashFiles('packages/core/react-dnd/**') }}
+      - uses: actions/cache@v1
+        name: Cache yarn cache
+        id: cache-yarn-cache
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-yarn-
 
-    - uses: actions/cache@v1
-      name: Cache touch-backend/lib
-      id: cache-touch-backend
-      with:
-        path: packages/core/touch-backend/lib
-        key: ${{ runner.os }}-${{ matrix.node-version }}-touch-backend-${{ hashFiles('packages/core/touch-backend/**') }}
+      - uses: actions/cache@v1
+        name: Cache Jest cache
+        id: cache-jest-cache
+        with:
+          path: .jest-cache
+          key: ${{ runner.os }}-${{ matrix.node-version }}-jest
 
-    - uses: actions/cache@v1
-      name: Cache test-backend/lib
-      id: cache-test-backend
-      with:
-        path: packages/core/test-backend/lib
-        key: ${{ runner.os }}-${{ matrix.node-version }}-test-backend-${{ hashFiles('packages/testing/test-backend/**') }}
+      - uses: actions/cache@v1
+        name: Cache node_modules
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-
 
-    - uses: actions/cache@v1
-      name: Cache test-utils/lib
-      id: cache-test-utils
-      with:
-        path: packages/core/test-utils/lib
-        key: ${{ runner.os }}-${{ matrix.node-version }}-test-utils-${{ hashFiles('packages/testing/test-utils/**') }}
+      - uses: actions/cache@v1
+        name: Cache dnd-core/lib
+        id: cache-dnd-core
+        with:
+          path: packages/core/dnd-core/lib
+          key: ${{ runner.os }}-${{ matrix.node-version }}-dnd-core-${{ hashFiles('packages/core/dnd-core/**') }}
 
-    - run: yarn install
-      name: Install Dependencies 
-      if: steps.cache-yarn-cache.outputs.cache-hit != 'true' || steps.cache-node-modules.outputs.cache-hit != 'true'
-      
-    - run: yarn ci
-      name: Execute Tests
-      env:
-        CI: true
+      - uses: actions/cache@v1
+        name: Cache html5-backend/lib
+        id: cache-html5-backend
+        with:
+          path: packages/core/html5-backend/lib
+          key: ${{ runner.os }}-${{ matrix.node-version }}-html5-backend-${{ hashFiles('packages/core/html5-backend/**') }}
+
+      - uses: actions/cache@v1
+        name: Cache react-dnd/lib
+        id: cache-react-dnd
+        with:
+          path: packages/core/react-dnd/lib
+          key: ${{ runner.os }}-${{ matrix.node-version }}-react-dnd-${{ hashFiles('packages/core/react-dnd/**') }}
+
+      - uses: actions/cache@v1
+        name: Cache touch-backend/lib
+        id: cache-touch-backend
+        with:
+          path: packages/core/touch-backend/lib
+          key: ${{ runner.os }}-${{ matrix.node-version }}-touch-backend-${{ hashFiles('packages/core/touch-backend/**') }}
+
+      - uses: actions/cache@v1
+        name: Cache test-backend/lib
+        id: cache-test-backend
+        with:
+          path: packages/core/test-backend/lib
+          key: ${{ runner.os }}-${{ matrix.node-version }}-test-backend-${{ hashFiles('packages/testing/test-backend/**') }}
+
+      - uses: actions/cache@v1
+        name: Cache test-utils/lib
+        id: cache-test-utils
+        with:
+          path: packages/core/test-utils/lib
+          key: ${{ runner.os }}-${{ matrix.node-version }}-test-utils-${{ hashFiles('packages/testing/test-utils/**') }}
+
+      - run: yarn install
+        name: Install Dependencies
+        if: steps.cache-yarn-cache.outputs.cache-hit != 'true' || steps.cache-node-modules.outputs.cache-hit != 'true'
+
+      - run: yarn ci
+        name: Execute Tests
+        env:
+          CI: true
