@@ -19,6 +19,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+  
+    #
+    # Cache libraries
+    #
+    - name: Cache
+      uses: actions/cache@v1.0.0  
+      with:
+        path: .yarn-cache
+        key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-cache
 
     #
     # yarn [set cache folder]
@@ -43,11 +52,3 @@ jobs:
       env:
         CI: true
     
-    #
-    # Cache libraries
-    #
-    - name: Cache
-      uses: actions/cache@v1.0.0  
-      with:
-        path: .yarn-cache
-        key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-cache
