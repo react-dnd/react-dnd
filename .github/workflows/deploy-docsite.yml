@@ -1,0 +1,16 @@
+name: Deploy Docsite
+
+on:
+  push:
+    branches: 
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - run: yarn run release --scope react-dnd-documentation --stream
