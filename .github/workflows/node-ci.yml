@@ -7,17 +7,47 @@ jobs:
       matrix:
         node-version: [8.x, 10.x, 12.x]
     steps:
+    # 
+    # Check out the project
+    #
     - uses: actions/checkout@v1
+    
+    #
+    # Use NodeJS
+    #
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        
+
+    #
+    # yarn [set cache folder]
+    #
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: config set cache-folder .yarn-cache
+     
+    #
+    # yarn install
+    #
     - uses: borales/actions-yarn@v2.0.0
       with:
         cmd: install
+
+    #
+    # yarn test
+    #
     - uses: borales/actions-yarn@v2.0.0
       with:
         cmd: test # will run `yarn test` command
       env:
         CI: true
+    
+    #
+    # Cache libraries
+    #
+    - name: Cache
+      uses: actions/cache@v1.0.0  
+      with:
+        path: .yarn-cache
+        key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-cache
