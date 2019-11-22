@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useMemo, useEffect } from 'react'
 
 export interface FileListProps {
-	files: any[]
+	files: File[]
 }
 
-function list(files: any[]) {
-	const label = (file: { size: string; name: string; type: string }) =>
+function list(files: File[]) {
+	const label = (file: File) =>
 		`'${file.name}' of size '${file.size}' and type '${file.type}'`
 	return files.map(file => <li key={file.name}>{label(file)}</li>)
 }
@@ -14,7 +14,8 @@ const FileList: React.FC<FileListProps> = ({ files }) => {
 	if (files.length === 0) {
 		return <div>Nothing to display</div>
 	}
-	return <div>{list(files)}</div>
+	const fileList = useMemo(() => list(files), [files])
+	return <div>{fileList}</div>
 }
 
 export default FileList
