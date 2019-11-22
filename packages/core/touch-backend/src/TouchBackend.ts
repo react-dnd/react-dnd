@@ -130,8 +130,11 @@ export default class TouchBackend implements Backend {
 		)
 
 		if (this.options.enableMouseEvents && !this.options.ignoreContextMenu) {
-			this.addEventListener(this.window, 'contextmenu', this
-				.handleTopMoveEndCapture as any)
+			this.addEventListener(
+				this.window,
+				'contextmenu',
+				this.handleTopMoveEndCapture as any,
+			)
 		}
 
 		if (this.options.enableKeyboardEvents) {
@@ -158,8 +161,11 @@ export default class TouchBackend implements Backend {
 			this.handleTopMoveStartCapture as any,
 			true,
 		)
-		this.removeEventListener(this.window, 'start', this
-			.handleTopMoveStart as any)
+		this.removeEventListener(
+			this.window,
+			'start',
+			this.handleTopMoveStart as any,
+		)
 		this.removeEventListener(
 			this.window,
 			'move',
@@ -175,8 +181,11 @@ export default class TouchBackend implements Backend {
 		)
 
 		if (this.options.enableMouseEvents && !this.options.ignoreContextMenu) {
-			this.removeEventListener(this.window, 'contextmenu', this
-				.handleTopMoveEndCapture as any)
+			this.removeEventListener(
+				this.window,
+				'contextmenu',
+				this.handleTopMoveEndCapture as any,
+			)
 		}
 
 		if (this.options.enableKeyboardEvents) {

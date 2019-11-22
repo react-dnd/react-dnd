@@ -31,9 +31,9 @@ export function DropTarget<RequiredProps, CollectedProps = {}>(
 		collect,
 		options,
 	)
-	let getType: (props: RequiredProps) => TargetType = type as ((
+	let getType: (props: RequiredProps) => TargetType = type as (
 		props: RequiredProps,
-	) => TargetType)
+	) => TargetType
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type, true),
