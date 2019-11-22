@@ -3,6 +3,8 @@ path: '/examples/drag-around/naive'
 title: 'Naive'
 ---
 
+<!--alex disable clearly-->
+
 This example naively relies on browser drag and drop implementation
 without much custom logic.
 
@@ -12,7 +14,7 @@ drag preview. When the is released, we draw it at the new coordinates.
 If you try to drag the box outside the container, the browser will
 animate its return.
 
-While this approach works for simple cases, it flickers on drop. This
+While this approach works for trivial cases, it flickers on drop. This
 happens because the browser removes the drag preview before we have a
 chance to make the dragged item visible. This might not be a problem
 if you dim the original item instead of hiding it, but it's
