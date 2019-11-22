@@ -27,7 +27,7 @@ export class NativeDragSource {
 		})
 	}
 
-	public loadDataTransfer(dataTransfer: DataTransfer | null) {
+	public loadDataTransfer(dataTransfer?: DataTransfer) {
 		if (dataTransfer) {
 			const newProperties: PropertyDescriptorMap = {}
 			Object.keys(this.config.exposeProperties).forEach(property => {

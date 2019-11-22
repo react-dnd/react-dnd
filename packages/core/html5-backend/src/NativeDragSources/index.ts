@@ -6,9 +6,7 @@ export function createNativeDragSource(
 	dataTransfer?: DataTransfer,
 ): NativeDragSource {
 	const result = new NativeDragSource(nativeTypesConfig[type])
-	if (dataTransfer != null) {
-		result.loadDataTransfer(dataTransfer)
-	}
+	result.loadDataTransfer(dataTransfer)
 	return result
 }
 
