@@ -614,7 +614,7 @@ export default class HTML5Backend implements Backend {
 		e.preventDefault()
 
 		if (this.isDraggingNativeItem()) {
-			this.currentNativeSource!.mutateItemByReadingDataTransfer(e.dataTransfer)
+			this.currentNativeSource!.loadDataTransfer(e.dataTransfer)
 		}
 
 		this.enterLeaveCounter.reset()

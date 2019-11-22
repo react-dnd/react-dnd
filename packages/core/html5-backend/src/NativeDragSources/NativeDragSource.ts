@@ -5,31 +5,31 @@ export class NativeDragSource {
 	public item: any
 	private config: NativeItemConfig
 
-	public constructor(config: NativeItemConfig, dataTransfer?: DataTransfer) {
+	public constructor(config: NativeItemConfig) {
 		this.config = config
 		this.item = {}
-		if (!dataTransfer) {
-			Object.keys(this.config.exposeProperties).forEach(property => {
-				Object.defineProperty(this.item, property, {
-					configurable: true, // This is needed to allow redefining it later
-					enumerable: true,
-					get() {
-						// eslint-disable-next-line no-console
-						console.warn(
-							`Browser doesn't allow reading "${property}" until the drop event.`,
-						)
-						return null
-					},
-				})
-			})
-		} else {
-			this.mutateItemByReadingDataTransfer(dataTransfer)
-		}
+		this.initializeExposedProperties()
 	}
 
-	public mutateItemByReadingDataTransfer(dataTransfer: DataTransfer | null) {
-		const newProperties: PropertyDescriptorMap = {}
+	private initializeExposedProperties() {
+		Object.keys(this.config.exposeProperties).forEach(property => {
+			Object.defineProperty(this.item, property, {
+				configurable: true, // This is needed to allow redefining it later
+				enumerable: true,
+				get() {
+					// eslint-disable-next-line no-console
+					console.warn(
+						`Browser doesn't allow reading "${property}" until the drop event.`,
+					)
+					return null
+				},
+			})
+		})
+	}
+
+	public loadDataTransfer(dataTransfer: DataTransfer | null) {
 		if (dataTransfer) {
+			const newProperties: PropertyDescriptorMap = {}
 			Object.keys(this.config.exposeProperties).forEach(property => {
 				newProperties[property] = {
 					value: this.config.exposeProperties[property](
@@ -40,8 +40,8 @@ export class NativeDragSource {
 					enumerable: true,
 				}
 			})
+			Object.defineProperties(this.item, newProperties)
 		}
-		Object.defineProperties(this.item, newProperties)
 	}
 
 	public canDrag() {
