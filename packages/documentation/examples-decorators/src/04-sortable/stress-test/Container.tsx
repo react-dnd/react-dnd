@@ -84,7 +84,10 @@ export default class Container extends React.Component<{}, ContainerState> {
 
 		this.scheduleUpdate({
 			cardsByIndex: {
-				$splice: [[cardIndex, 1], [afterIndex, 0, card]],
+				$splice: [
+					[cardIndex, 1],
+					[afterIndex, 0, card],
+				],
 			},
 		})
 	}
