@@ -8,6 +8,10 @@ export class NativeDragSource {
 	public constructor(config: NativeItemConfig) {
 		this.config = config
 		this.item = {}
+		this.initializeExposedProperties()
+	}
+
+	private initializeExposedProperties() {
 		Object.keys(this.config.exposeProperties).forEach(property => {
 			Object.defineProperty(this.item, property, {
 				configurable: true, // This is needed to allow redefining it later
@@ -23,19 +27,21 @@ export class NativeDragSource {
 		})
 	}
 
-	public mutateItemByReadingDataTransfer(dataTransfer: DataTransfer | null) {
-		const newProperties: PropertyDescriptorMap = {}
+	public loadDataTransfer(dataTransfer: DataTransfer | null | undefined) {
 		if (dataTransfer) {
+			const newProperties: PropertyDescriptorMap = {}
 			Object.keys(this.config.exposeProperties).forEach(property => {
 				newProperties[property] = {
 					value: this.config.exposeProperties[property](
 						dataTransfer,
 						this.config.matchesTypes,
 					),
+					configurable: true,
+					enumerable: true,
 				}
 			})
+			Object.defineProperties(this.item, newProperties)
 		}
-		Object.defineProperties(this.item, newProperties)
 	}
 
 	public canDrag() {
