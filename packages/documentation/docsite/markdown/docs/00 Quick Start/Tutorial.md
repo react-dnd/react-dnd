@@ -3,13 +3,15 @@ path: '/docs/tutorial'
 title: 'Tutorial'
 ---
 
+<!--alex disable special color white black  -->
+
 # Tutorial
 
 Now that you've read [the overview](/docs/overview), it's adventure time!
 
 ![Adventure Time!](https://media.giphy.com/media/132qeyvgJ2Al3i/giphy.gif)
 
-In this tutorial, we're going to build a Chess game with React and React DnD. Just kidding! Writing a full-blown Chess game is totally out of scope of this tutorial. What we're going to build is a [tiny app with a Chess board and a lonely Knight](/examples/tutorial). The Knight will be draggable according to the Chess rules.
+In this tutorial, we're going to build a Chess game with React and React DnD. I'm kidding! Writing a full-blown Chess game is totally out of scope of this tutorial. What we're going to build is a [tiny app with a Chess board and a lonely Knight](/examples/tutorial). The Knight will be draggable according to the Chess rules.
 
 If you're comfortable with React already, feel free to skip ahead to the final section: [Adding Drag-and-Drop Interaction](#adding-drag-and-drop-interaction)
 

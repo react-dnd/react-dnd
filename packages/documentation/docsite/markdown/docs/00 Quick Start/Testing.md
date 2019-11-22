@@ -15,7 +15,7 @@ A few test examples are included with the React DnD inside its `examples` folder
 
 ## Setup
 
-If you are using Jest, you may need to configure Jest's `moduleNameMapper` settings. Jest does not work well with ES Modules yet, but you can easily instruct it to use the CommonJS builds of the react-dnd libraries.
+If you are using Jest, you may need to configure Jest's `moduleNameMapper` settings. Jest does not work well with ES Modules yet, but you can instruct it to use the CommonJS builds of the react-dnd libraries.
 
 ```json
 "moduleNameMapper": {
@@ -84,7 +84,7 @@ it('can be tested independently', () => {
 
 ### Testing the Drag and Drop Interaction
 
-If you want to test the whole interaction, and not just the individual component rendering, you should use the [test backend](/docs/backends/test). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) just fine.
+If you want to test the whole interaction, and not only the individual component rendering, you should use the [test backend](/docs/backends/test). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering).
 
 This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/react-dnd/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/react-dnd/dnd-core/tree/v1.1.0/src/__tests__).
 
@@ -134,14 +134,14 @@ it('can be tested with the testing backend', () => {
 To use it with react-dnd, you'll need to call `.instance()` on `mount`-ed nodes to access the react-dnd helper methods:
 
 ```jsx
-import { getBackendFromInstance } from 'react-dnd-test-utils';
+import { getBackendFromInstance } from 'react-dnd-test-utils'
 
 var root = Enzyme.mount(<BoxContext name="test" />)
 
 // ...
 
-var backend = getBackendFromInstance(root);
-var manager = backend.manager;
+var backend = getBackendFromInstance(root)
+var manager = backend.manager
 
 // ...
 
