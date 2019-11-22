@@ -5,22 +5,26 @@ export class NativeDragSource {
 	public item: any
 	private config: NativeItemConfig
 
-	public constructor(config: NativeItemConfig) {
+	public constructor(config: NativeItemConfig, dataTransfer?: DataTransfer) {
 		this.config = config
 		this.item = {}
-		Object.keys(this.config.exposeProperties).forEach(property => {
-			Object.defineProperty(this.item, property, {
-				configurable: true, // This is needed to allow redefining it later
-				enumerable: true,
-				get() {
-					// eslint-disable-next-line no-console
-					console.warn(
-						`Browser doesn't allow reading "${property}" until the drop event.`,
-					)
-					return null
-				},
+		if (!dataTransfer) {
+			Object.keys(this.config.exposeProperties).forEach(property => {
+				Object.defineProperty(this.item, property, {
+					configurable: true, // This is needed to allow redefining it later
+					enumerable: true,
+					get() {
+						// eslint-disable-next-line no-console
+						console.warn(
+							`Browser doesn't allow reading "${property}" until the drop event.`,
+						)
+						return null
+					},
+				})
 			})
-		})
+		} else {
+			this.mutateItemByReadingDataTransfer(dataTransfer)
+		}
 	}
 
 	public mutateItemByReadingDataTransfer(dataTransfer: DataTransfer | null) {
@@ -32,6 +36,8 @@ export class NativeDragSource {
 						dataTransfer,
 						this.config.matchesTypes,
 					),
+					configurable: true,
+					enumerable: true,
 				}
 			})
 		}

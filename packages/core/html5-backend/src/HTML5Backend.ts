@@ -147,12 +147,16 @@ export default class HTML5Backend implements Backend {
 		if (!target.addEventListener) {
 			return
 		}
-		target.addEventListener('dragstart', this
-			.handleTopDragStart as EventListener)
+		target.addEventListener(
+			'dragstart',
+			this.handleTopDragStart as EventListener,
+		)
 		target.addEventListener('dragstart', this.handleTopDragStartCapture, true)
 		target.addEventListener('dragend', this.handleTopDragEndCapture, true)
-		target.addEventListener('dragenter', this
-			.handleTopDragEnter as EventListener)
+		target.addEventListener(
+			'dragenter',
+			this.handleTopDragEnter as EventListener,
+		)
 		target.addEventListener(
 			'dragenter',
 			this.handleTopDragEnterCapture as EventListener,
@@ -185,8 +189,10 @@ export default class HTML5Backend implements Backend {
 			true,
 		)
 		target.removeEventListener('dragend', this.handleTopDragEndCapture, true)
-		target.removeEventListener('dragenter', this
-			.handleTopDragEnter as EventListener)
+		target.removeEventListener(
+			'dragenter',
+			this.handleTopDragEnter as EventListener,
+		)
 		target.removeEventListener(
 			'dragenter',
 			this.handleTopDragEnterCapture as EventListener,
@@ -197,8 +203,10 @@ export default class HTML5Backend implements Backend {
 			this.handleTopDragLeaveCapture as EventListener,
 			true,
 		)
-		target.removeEventListener('dragover', this
-			.handleTopDragOver as EventListener)
+		target.removeEventListener(
+			'dragover',
+			this.handleTopDragOver as EventListener,
+		)
 		target.removeEventListener('dragover', this.handleTopDragOverCapture, true)
 		target.removeEventListener('drop', this.handleTopDrop as EventListener)
 		target.removeEventListener(
@@ -250,10 +258,10 @@ export default class HTML5Backend implements Backend {
 		)
 	}
 
-	private beginDragNativeItem(type: string) {
+	private beginDragNativeItem(type: string, dataTransfer?: DataTransfer) {
 		this.clearCurrentDragSourceNode()
 
-		this.currentNativeSource = createNativeDragSource(type)
+		this.currentNativeSource = createNativeDragSource(type, dataTransfer)
 		this.currentNativeHandle = this.registry.addSource(
 			type,
 			this.currentNativeSource,
@@ -491,7 +499,7 @@ export default class HTML5Backend implements Backend {
 
 		if (nativeType) {
 			// A native item (such as file or URL) dragged from outside the document
-			this.beginDragNativeItem(nativeType)
+			this.beginDragNativeItem(nativeType, dataTransfer as DataTransfer)
 		}
 	}
 
