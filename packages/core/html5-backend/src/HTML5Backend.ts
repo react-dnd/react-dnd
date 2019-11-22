@@ -258,10 +258,10 @@ export default class HTML5Backend implements Backend {
 		)
 	}
 
-	private beginDragNativeItem(type: string) {
+	private beginDragNativeItem(type: string, dataTransfer?: DataTransfer) {
 		this.clearCurrentDragSourceNode()
 
-		this.currentNativeSource = createNativeDragSource(type)
+		this.currentNativeSource = createNativeDragSource(type, dataTransfer)
 		this.currentNativeHandle = this.registry.addSource(
 			type,
 			this.currentNativeSource,
@@ -499,7 +499,7 @@ export default class HTML5Backend implements Backend {
 
 		if (nativeType) {
 			// A native item (such as file or URL) dragged from outside the document
-			this.beginDragNativeItem(nativeType)
+			this.beginDragNativeItem(nativeType, dataTransfer as DataTransfer)
 		}
 	}
 
@@ -614,7 +614,7 @@ export default class HTML5Backend implements Backend {
 		e.preventDefault()
 
 		if (this.isDraggingNativeItem()) {
-			this.currentNativeSource!.mutateItemByReadingDataTransfer(e.dataTransfer)
+			this.currentNativeSource!.loadDataTransfer(e.dataTransfer)
 		}
 
 		this.enterLeaveCounter.reset()
