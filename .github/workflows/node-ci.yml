@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-           node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node-version }}
 
       - name: Get yarn cache path
         id: yarn-cache
@@ -94,3 +94,9 @@ jobs:
         name: Execute Tests
         env:
           CI: true
+
+      - name: Publish coverage to codecov.io
+        uses: codecov/codecov-action@v1.0.3
+        if: success() && matrix.node-version == '12.x'
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
