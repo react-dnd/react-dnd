@@ -3,7 +3,7 @@ path: '/examples/sortable/simple'
 title: 'Simple'
 ---
 
-It is easy to implement a sortable interface with React DnD. Just make
+React DnD gives you the tools to be able to create sortable lists. To do this, make
 the same component both a drag source and a drop target, and reorder
 the data in the `hover` handler.
 
