@@ -37,9 +37,9 @@ export function DragSource<RequiredProps, CollectedProps = {}, DragObject = {}>(
 		collect,
 		options,
 	)
-	let getType: (props: RequiredProps) => SourceType = type as ((
+	let getType: (props: RequiredProps) => SourceType = type as (
 		props: RequiredProps,
-	) => SourceType)
+	) => SourceType
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type),

@@ -59,6 +59,7 @@
     "run_tests": "run-p test_modules jest:cov",
     "test": "run-s clean verify_source run_tests",
     "ci": "run-s verify_source run_tests",
+    "prettify:source": "prettier 'packages/*/*/src/**/*.ts*'",
     "prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
     "precommit:lint": "lint-staged",
     "precommit:format": "pretty-quick --staged",
