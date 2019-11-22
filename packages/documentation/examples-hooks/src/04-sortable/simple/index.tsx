@@ -54,7 +54,10 @@ const Container: React.FC = () => {
 				const dragCard = cards[dragIndex]
 				setCards(
 					update(cards, {
-						$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+						$splice: [
+							[dragIndex, 1],
+							[hoverIndex, 0, dragCard],
+						],
 					}),
 				)
 			},

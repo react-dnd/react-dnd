@@ -3,7 +3,7 @@ path: '/examples/dustbin/iframe'
 title: 'iframe'
 ---
 
-This is the same simple example, but nested in an iframe.
+This is the same dustbin example, but nested in an iframe.
 
 When you are using the [react-dnd-html5-backend](/docs/backends/html5), you are limited to
 drag-and-drop within a single HTML document.

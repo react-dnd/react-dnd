@@ -70,7 +70,7 @@ For touch support, use React DnD with [the touch backend](https://github.com/yah
 
 ## Non-Goals
 
-React DnD gives you a set of powerful primitives, but it does not contain any readymade components. It's lower level than [jQuery UI](https://jqueryui.com/) or [interact.js](http://interactjs.io/) and is focused on getting the drag and drop interaction right, leaving its visual aspects such as axis constraints or snapping to you. For example, React DnD doesn't plan to provide a `Sortable` component. Instead it makes it easy for you to build your own, with any rendering customizations that you need.
+React DnD gives you a set of powerful primitives, but it does not contain any readymade components. It's lower level than [jQuery UI](https://jqueryui.com/) or [interact.js](http://interactjs.io/) and is focused on getting the drag and drop interaction right, leaving its visual aspects such as axis constraints or snapping to you. For example, React DnD doesn't plan to provide a `Sortable` component. Instead it gives you the tools you need to build your own with any rendering customizations that you need.
 
 ## Support and Contributions
 

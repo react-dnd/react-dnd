@@ -13,7 +13,7 @@ browser an empty image as drag preview. This library provides a
 `DragLayer` that you can use to implement a fixed layer on
 top of your app where you'd draw a custom drag preview component.
 Note that we can draw a completely different component on our drag
-layer if we wish so. It's not just a screenshot.
+layer if we wish so. It's not only a screenshot.
 
 With this approach, we miss out on default “return” animation when
 dropping outside the container. However, we get great flexibility in
