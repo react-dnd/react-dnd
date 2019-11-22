@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+           node-version: ${{ matrix.node-version }}
 
       - name: Get yarn cache path
         id: yarn-cache
@@ -94,3 +94,20 @@ jobs:
         name: Execute Tests
         env:
           CI: true
+          
+  automerge:
+    name: Merge pull request
+    needs: build  
+    runs-on: [ubuntu-latest]
+    if: github.base_ref == 'master' && github.actor == 'dependabot[bot]'
+    steps:
+       - name: Merge
+         uses: actions/github-script@0.2.0
+         with:
+           script: |
+             github.pullRequests.merge({
+              owner: context.payload.repository.owner.login,
+              repo: context.payload.repository.name,
+              pull_number: context.payload.pull_request.number
+             })
+           github_token: ${{github.token}}
