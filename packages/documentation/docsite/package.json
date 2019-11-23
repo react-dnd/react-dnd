@@ -54,7 +54,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.1.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1"
   },
@@ -71,8 +70,6 @@
     "write_example_boilerplate": "node write_sample_boilerplate.js",
     "process_examples": "run-s copy_examples prune_buildinfo format_examples write_example_boilerplate",
     "build_gatsby": "gatsby build --prefix-paths",
-    "publish_gh_pages": "NODE_DEBUG=gh-pages gh-pages -d public -t",
-    "build_site": "run-s process_examples build_gatsby",
-    "release": "run-s clean build_site publish_gh_pages"
+    "build_site": "run-s process_examples build_gatsby"
   }
 }
