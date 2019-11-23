@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 function list(files) {
   const label = file =>
     `'${file.name}' of size '${file.size}' and type '${file.type}'`
@@ -8,6 +8,7 @@ const FileList = ({ files }) => {
   if (files.length === 0) {
     return <div>Nothing to display</div>
   }
-  return <div>{list(files)}</div>
+  const fileList = useMemo(() => list(files), [files])
+  return <div>{fileList}</div>
 }
 export default FileList

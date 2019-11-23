@@ -4,7 +4,6 @@ import { DropTarget, DropTargetConnector } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import DraggableBox from './DraggableBox'
 import snapToGrid from './snapToGrid'
-// @ts-ignore
 import update from 'immutability-helper'
 
 const styles: React.CSSProperties = {

@@ -1,18 +1,59 @@
-import React from 'react'
-import Example from './Example'
+import React, { useState, useCallback } from 'react'
+import { ConnectDragSource } from 'react-dnd'
+import { DragSource } from 'react-dnd'
 
-const Container: React.FC = () => {
+interface ParentProps {
+  isDragging: boolean
+  connectDragSource: ConnectDragSource
+}
+const Parent: React.FC<ParentProps> = ({ isDragging, connectDragSource }) => {
   return (
-    <>
-      <h3>
-        Drag the box before hiding then hide it and show it again and try again.
-      </h3>
-      <h5>
-        Note: this is more of a test-case then a usage demo. It will go away in
-        the future.
-      </h5>
-      <Example />
-    </>
+    <Child connect={connectDragSource}>
+      {isDragging ? 'Dragging' : 'Drag me'}
+    </Child>
   )
 }
-export default Container
+
+const Example = DragSource(
+  'KNIGHT',
+  {
+    beginDrag: () => ({}),
+  },
+  (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }),
+)(Parent)
+export default Example
+
+interface ChildProps {
+  connect: ConnectDragSource
+}
+
+const Child: React.FC<ChildProps> = ({ connect, children }) => {
+  const [open, setOpen] = useState(true)
+  const toggle = useCallback(() => setOpen(!open), [open])
+
+  return (
+    <div
+      style={{
+        padding: 16,
+        width: 400,
+      }}
+    >
+      <button onClick={toggle}>{open ? 'Hide' : 'Show'}</button>
+      {open ? (
+        <div
+          ref={node => connect(node)}
+          style={{
+            padding: 32,
+            marginTop: 16,
+            background: '#eee',
+          }}
+        >
+          {children}
+        </div>
+      ) : null}
+    </div>
+  )
+}

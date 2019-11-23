@@ -4,7 +4,6 @@ import Dustbin from './Dustbin'
 import Box from './Box'
 import ItemTypes from './ItemTypes'
 import update from 'immutability-helper'
-// @ts-ignore
 import shuffle from 'lodash/shuffle'
 
 export interface SourceBox {

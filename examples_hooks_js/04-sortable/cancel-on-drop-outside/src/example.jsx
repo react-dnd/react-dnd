@@ -42,7 +42,10 @@ const Container = () => {
     const { card, index } = findCard(id)
     setCards(
       update(cards, {
-        $splice: [[index, 1], [atIndex, 0, card]],
+        $splice: [
+          [index, 1],
+          [atIndex, 0, card],
+        ],
       }),
     )
   }

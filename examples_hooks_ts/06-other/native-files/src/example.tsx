@@ -5,7 +5,7 @@ import TargetBox from './TargetBox'
 import FileList from './FileList'
 
 const Container: React.FC = () => {
-  const [droppedFiles, setDroppedFiles] = useState([])
+  const [droppedFiles, setDroppedFiles] = useState<File[]>([])
 
   const handleFileDrop = useCallback(
     (item: any, monitor: DropTargetMonitor) => {
