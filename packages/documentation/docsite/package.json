@@ -70,8 +70,9 @@
     "format_examples": "prettier 'static/examples_*/**/*' --use-tabs=false --write",
     "write_example_boilerplate": "node write_sample_boilerplate.js",
     "process_examples": "run-s copy_examples prune_buildinfo format_examples write_example_boilerplate",
-    "build_static_site": "gatsby build --prefix-paths",
+    "build_gatsby": "gatsby build --prefix-paths",
     "publish_gh_pages": "NODE_DEBUG=gh-pages gh-pages -d public -t",
-    "release": "run-s clean process_examples build_static_site publish_gh_pages"
+    "build_site": "run-s process_examples build_gatsby",
+    "release": "run-s clean build_site publish_gh_pages"
   }
 }
