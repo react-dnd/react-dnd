@@ -7,6 +7,7 @@
   "type": "module",
   "module": "lib/esm/index.js",
   "types": "lib/esm/index.d.ts",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git"
