@@ -8,20 +8,28 @@ export default {
 	input: path.resolve(__dirname, 'packages/core/react-dnd/lib/index.js'),
 	output: [
 		{
+			name: 'ReactDnD',
 			file: path.resolve(
 				__dirname,
-				'packages/core/react-dnd/dist/umd/ReacDnD.js',
+				'packages/core/react-dnd/dist/umd/ReactDnD.js',
 			),
 			format: 'umd',
 		},
 		{
+			name: 'ReactDnD',
 			file: path.resolve(
 				__dirname,
-				'packgages/core/react-dnd/dist/umd/ReacDnD.min.js',
+				'packages/core/react-dnd/dist/umd/ReactDnD.min.js',
 			),
 			format: 'umd',
+			plugins: [terser()],
 		},
 	],
+	external: ['react', 'react-dom'],
+	globals: {
+		react: 'React',
+		'react-dom': 'ReactDOM',
+	},
 	plugins: [
 		resolve(),
 		commonjs(),
@@ -43,6 +51,5 @@ export default {
 				],
 			],
 		}),
-		terser(),
 	],
 }
