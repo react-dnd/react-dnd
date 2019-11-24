@@ -3,7 +3,7 @@ const path = require('path')
 
 function createWebpackConfiguration() {
 	return {
-		entry: './lib/index.js',
+		entry: './dist/esm/index.js',
 		resolve: {
 			alias: {
 				'dnd-core': path.join(__dirname, 'packages/core/dnd-core'),
