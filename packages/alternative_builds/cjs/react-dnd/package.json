@@ -17,10 +17,10 @@
     "dnd-core-cjs": "^9.4.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.11",
+    "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-dnd": "9.4.0"
   },
   "peerDependencies": {
