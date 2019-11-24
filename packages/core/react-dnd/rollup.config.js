@@ -5,22 +5,16 @@ import commonjs from 'rollup-plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 
 export default {
-	input: path.resolve(__dirname, 'packages/core/react-dnd/lib/index.js'),
+	input: path.resolve(__dirname, 'lib/index.js'),
 	output: [
 		{
 			name: 'ReactDnD',
-			file: path.resolve(
-				__dirname,
-				'packages/core/react-dnd/dist/umd/ReactDnD.js',
-			),
+			file: path.resolve(__dirname, 'dist/umd/ReactDnD.js'),
 			format: 'umd',
 		},
 		{
 			name: 'ReactDnD',
-			file: path.resolve(
-				__dirname,
-				'packages/core/react-dnd/dist/umd/ReactDnD.min.js',
-			),
+			file: path.resolve(__dirname, 'dist/umd/ReactDnD.min.js'),
 			format: 'umd',
 			plugins: [terser()],
 		},
