@@ -3,6 +3,7 @@ import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
+import replace from '@rollup/plugin-replace'
 
 export default {
 	input: path.resolve(__dirname, 'lib/index.js'),
@@ -11,12 +12,24 @@ export default {
 			name: 'ReactDnDHTML5Backend',
 			file: path.resolve(__dirname, 'dist/umd/ReactDnDHTML5Backend.js'),
 			format: 'umd',
+			plugins: [
+				replace({
+					values: { 'process.env.NODE_ENV': JSON.stringify('development') },
+					delimiters: ['', ''],
+				}),
+			],
 		},
 		{
 			name: 'ReactDnDHTML5Backend',
 			file: path.resolve(__dirname, 'dist/umd/ReactDnDHTML5Backend.min.js'),
 			format: 'umd',
-			plugins: [terser()],
+			plugins: [
+				terser(),
+				replace({
+					values: { 'process.env.NODE_ENV': JSON.stringify('production') },
+					delimiters: ['', ''],
+				}),
+			],
 		},
 	],
 	external: ['react', 'react-dom', 'react-dnd'],

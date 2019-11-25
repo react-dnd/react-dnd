@@ -2536,6 +2536,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@rollup/plugin-replace@darthtrevino/rollup-replace-temp-deleteme#master":
+  version "0.0.1"
+  resolved "https://codeload.github.com/darthtrevino/rollup-replace-temp-deleteme/tar.gz/a05405567e108ba401304e5b305784d4b30aa3b3"
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
