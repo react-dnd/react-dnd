@@ -1,5 +1,5 @@
 {
-  "name": "react-dnd-example-13",
+  "name": "react-dnd-example-15",
   "main": "src/index.tsx",
   "description": "auto-generated package for codesandbox import",
   "private": true,
@@ -20,9 +20,9 @@
     "faker": "^4.1.0",
     "immutability-helper": "^3.0.0",
     "react-frame-component": "^4.1.0",
-    "typescript": "^3.3.3333",
-    "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.4",
+    "typescript": "^3.7.2",
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
     "@types/jest": "^24.0.9",
     "@types/node": "^11.12.0"
   },
