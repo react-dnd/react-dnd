@@ -110,6 +110,7 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "@rollup/plugin-replace": "darthtrevino/rollup-replace-temp-deleteme#master",
     "rollup-plugin-terser": "^5.1.2",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2"
