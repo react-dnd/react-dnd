@@ -1,0 +1,56 @@
+<script
+	crossorigin
+	src="https://unpkg.com/react@16/umd/react.development.js"
+></script>
+<script
+	crossorigin
+	src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+></script>
+<script src="dist/ReactDnD.js"></script>
+<script src="dist/ReactDnDHTML5Backend.js"></script>
+<script src="dist/ReactDnDTouchBackend.js"></script>
+
+<div id="root"></div>
+
+<script>
+	const root = document.getElementById('root')
+	const announce = input => {
+		const element = document.createElement('div')
+		element.innerText = input
+		return element
+	}
+
+	if (typeof React !== 'undefined') {
+		root.appendChild(announce('react exists'))
+	} else {
+		root.appendChild(announce('react does not exist'))
+	}
+
+	if (typeof ReactDOM !== 'undefined') {
+		root.appendChild(announce('react-dom exists'))
+	} else {
+		root.appendChild(announce('react-dom does not exist'))
+	}
+
+	if (typeof ReactDnD !== 'undefined') {
+		root.appendChild(announce('react-dnd exists'))
+	} else {
+		root.appendChild(announce('react-dnd does not exist'))
+	}
+
+	if (typeof ReactDnDHTML5Backend !== 'undefined') {
+		root.appendChild(announce('react-dnd-html5-backend exists'))
+	} else {
+		root.appendChild(announce('react-dnd-html5-backend does not exist'))
+	}
+
+	if (typeof ReactDnDTouchBackend !== 'undefined') {
+		root.appendChild(announce('react-dnd-touch-backend exists'))
+	} else {
+		root.appendChild(announce('react-dnd-touch-backend does not exist'))
+	}
+
+	console.log('ReactDnD', ReactDnD)
+	console.log('ReactDnDHTML5Backend', ReactDnDHTML5Backend)
+	console.log('ReactDnDTouchBackend', ReactDnDTouchBackend)
+</script>
