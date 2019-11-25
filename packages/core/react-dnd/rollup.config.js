@@ -52,7 +52,6 @@ export default {
 							node: 8,
 							ie: '11',
 						},
-						useBuiltIns: 'usage',
 					},
 				],
 			],
