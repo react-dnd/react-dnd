@@ -79,6 +79,7 @@
     "@babel/preset-env": "^7.7.4",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@rollup/plugin-replace": "darthtrevino/rollup-replace-temp-deleteme#master",
     "@types/jest": "^24.0.23",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
@@ -110,7 +111,6 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "@rollup/plugin-replace": "darthtrevino/rollup-replace-temp-deleteme#master",
     "rollup-plugin-terser": "^5.1.2",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2"

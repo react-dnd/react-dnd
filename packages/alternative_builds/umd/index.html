@@ -11,46 +11,81 @@
 <script src="dist/ReactDnDTouchBackend.js"></script>
 
 <div id="root"></div>
+<style>
+	th,
+	tr {
+		background-color: #eee;
+		color: #444;
+	}
 
+	.pass {
+		text-align: center;
+		color: green;
+	}
+
+	.fail {
+		color: red;
+		text-align: center;
+	}
+</style>
 <script>
 	const root = document.getElementById('root')
-	const announce = input => {
-		const element = document.createElement('div')
-		element.innerText = input
-		return element
+	const tree = React.createElement(
+		'table',
+		{},
+		React.createElement(
+			'thead',
+			{},
+			React.createElement(
+				'tr',
+				{},
+				React.createElement('th', {}, 'Library'),
+				React.createElement('th', {}, 'IsValid'),
+			),
+		),
+		React.createElement(
+			'tbody',
+			{},
+			React.createElement(LibraryEntry, {
+				name: 'ReactDnD',
+				pass: typeof ReactDnD !== 'undefined',
+			}),
+			React.createElement(LibraryEntry, {
+				name: 'ReactDndHTML5Backend',
+				pass: typeof ReactDnDHTML5Backend !== 'undefined',
+			}),
+			React.createElement(LibraryEntry, {
+				name: 'ReactDndTouchBackend',
+				pass: typeof ReactDnDTouchBackend !== 'undefined',
+			}),
+		),
+	)
+
+	function Pass() {
+		return React.createElement('td', { className: 'pass' }, '✔')
+	}
+	function Fail() {
+		return React.createElement('td', { className: 'fail' }, '✔')
 	}
 
-	if (typeof React !== 'undefined') {
-		root.appendChild(announce('react exists'))
-	} else {
-		root.appendChild(announce('react does not exist'))
+	function LibraryEntry({ name, pass }) {
+		return React.createElement(
+			'tr',
+			{},
+			React.createElement('td', {}, name),
+			pass ? React.createElement(Pass) : React.createElement(Fail),
+		)
 	}
 
-	if (typeof ReactDOM !== 'undefined') {
-		root.appendChild(announce('react-dom exists'))
-	} else {
-		root.appendChild(announce('react-dom does not exist'))
-	}
+	ReactDOM.render(tree, root)
 
-	if (typeof ReactDnD !== 'undefined') {
-		root.appendChild(announce('react-dnd exists'))
-	} else {
-		root.appendChild(announce('react-dnd does not exist'))
-	}
-
-	if (typeof ReactDnDHTML5Backend !== 'undefined') {
-		root.appendChild(announce('react-dnd-html5-backend exists'))
-	} else {
-		root.appendChild(announce('react-dnd-html5-backend does not exist'))
-	}
-
-	if (typeof ReactDnDTouchBackend !== 'undefined') {
-		root.appendChild(announce('react-dnd-touch-backend exists'))
-	} else {
-		root.appendChild(announce('react-dnd-touch-backend does not exist'))
-	}
-
-	console.log('ReactDnD', ReactDnD)
-	console.log('ReactDnDHTML5Backend', ReactDnDHTML5Backend)
-	console.log('ReactDnDTouchBackend', ReactDnDTouchBackend)
+	console.log('ReactDnD', typeof ReactDnD !== 'undefined' && ReactDnD)
+	console.log(
+		'ReactDnDHTML5Backend',
+		typeof ReactDnDHTML5Backend !== 'undefined' && ReactDnDHTML5Backend,
+	)
+	console.log(
+		'ReactDnDTouchBackend',
+		typeof ReactDnDTouchBackend !== 'undefined' && ReactDnDTouchBackend,
+	)
 </script>
