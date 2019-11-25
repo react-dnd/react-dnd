@@ -1,6 +1,6 @@
 {
   "name": "dnd-core",
-  "version": "9.4.0",
+  "version": "9.5.0",
   "description": "Drag and drop sans the GUI",
   "license": "MIT",
   "main": "./dist/esm/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "9.4.0",
+  "version": "9.5.0",
   "description": "Drag and Drop for React",
   "type": "module",
   "main": "./dist/esm/index.js",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/shallowequal": "^1.1.1",
-    "dnd-core": "^9.4.0",
+    "dnd-core": "^9.5.0",
     "hoist-non-react-statics": "^3.3.0",
     "shallowequal": "^1.1.0"
   },

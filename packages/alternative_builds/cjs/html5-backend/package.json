@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-html5-backend-cjs",
-  "version": "9.4.0",
+  "version": "9.5.0",
   "license": "MIT",
   "description": "HTML5 backend for React DnD",
   "main": "lib/index.js",
@@ -10,14 +10,13 @@
     "clean": "../../../../scripts/clean_package.sh"
   },
   "dependencies": {
-    "dnd-core-cjs": "^9.4.0"
+    "dnd-core-cjs": "^9.5.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.13",
     "react": "^16.12.0",
-    "react-dnd-test-backend": "^9.4.0",
-    "react-dom": "^16.12.0",
-    "react-dnd-html5-backend": "9.4.0"
-  },
-  "peerDependencies": {}
+    "react-dnd-html5-backend": "^9.5.0",
+    "react-dnd-test-backend": "^9.5.0",
+    "react-dom": "^16.12.0"
+  }
 }
