@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-backend",
-  "version": "9.5.0",
+  "version": "9.5.1",
   "description": "A mock backend for testing React DnD apps",
   "type": "module",
   "main": "./dist/esm/index.js",
@@ -18,6 +18,6 @@
     "start": "../../../scripts/watch_package.sh"
   },
   "dependencies": {
-    "dnd-core": "^9.5.0"
+    "dnd-core": "^9.5.1"
   }
 }
