@@ -10,7 +10,6 @@
     "noUnusedLocals": true,
     "jsx": "react",
     "forceConsistentCasingInFileNames": true,
-    "declaration": true,
-    "allowSyntheticDefaultImports": true
+    "declaration": true
   }
 }
