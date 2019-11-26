@@ -1,4 +1,4 @@
-import shallowEqual from 'shallowequal'
+import shallowEqual from '@darthtrevino/shallowequal'
 import { useState, useCallback } from 'react'
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
 

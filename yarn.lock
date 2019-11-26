@@ -1194,6 +1194,11 @@
   resolved "https://registry.yarnpkg.com/@darthtrevino/invariant/-/invariant-1.0.1.tgz#e35bcd71769ee33b026a3af5f10c405351f55abf"
   integrity sha512-t1BIFgUDHb9/7RD+THhWx0YbPtQvpGEnzvdLMhuxGLmJ0vbReTznOWFIs88gufsY8Gdd/eyIzfe8T1P7x7l/zw==
 
+"@darthtrevino/shallowequal@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@darthtrevino/shallowequal/-/shallowequal-1.1.0.tgz#ca2670bd08816b742e99b51ec3c4074eda0abaea"
+  integrity sha512-ik4GreLW+hGJIQMs4Unm+BuF8dontkInqiDHVdJJtoAgzxOTN8wpAIrNTYFkCcc7gcvWCNw91zyH5CNiISYUzA==
+
 "@emotion/is-prop-valid@^0.8.1":
   version "0.8.5"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.5.tgz#2dda0791f0eafa12b7a0a5b39858405cc7bde983"
@@ -2938,11 +2943,6 @@
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-6.2.0.tgz#d688d574400d96c5b0114968705366f431831e1a"
   integrity sha512-1OzrNb4RuAzIT7wHSsgZRlMBlNsJl+do6UblR7JMW4oB7bbR+uBEYtUh7gEc/jM84GGilh68lSOokyM/zNUlBA==
-
-"@types/shallowequal@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@types/shallowequal/-/shallowequal-1.1.1.tgz#aad262bb3f2b1257d94c71d545268d592575c9b1"
-  integrity sha512-Lhni3aX80zbpdxRuWhnuYPm8j8UQaa571lHP/xI4W+7BAFhSIhRReXnqjEgT/XzPoXZTJkCqstFMJ8CZTK6IlQ==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"

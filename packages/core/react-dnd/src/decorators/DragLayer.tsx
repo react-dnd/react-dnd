@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
-import shallowEqual from 'shallowequal'
+import shallowEqual from '@darthtrevino/shallowequal'
 import hoistStatics from 'hoist-non-react-statics'
 import invariant from '@darthtrevino/invariant'
 import { DndContext, DndOptions } from '../index'

@@ -11,9 +11,8 @@
   },
   "dependencies": {
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/shallowequal": "^1.1.1",
     "hoist-non-react-statics": "^3.3.0",
-    "shallowequal": "^1.1.0",
+    "@darthtrevino/shallowequal": "^1.1.0",
     "dnd-core-cjs": "^9.5.0"
   },
   "devDependencies": {
