@@ -48,7 +48,7 @@
     "lint": "run-s lint:*",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "release_canary": "lerna publish -c --preid next --yes",
-    "release": "run-s clean build go_no_go release:packages changelog",
+    "release": "run-s clean test go_no_go release:packages changelog",
     "release:packages": "lerna publish",
     "test_modules": "CI=true lerna run test --stream",
     "go_no_go": "node scripts/go_no_go.js",
