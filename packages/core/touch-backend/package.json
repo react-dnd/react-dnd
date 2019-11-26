@@ -19,8 +19,7 @@
     "start": "../../../scripts/watch_package.sh"
   },
   "dependencies": {
-    "@types/invariant": "^2.2.30",
     "dnd-core": "^9.5.1",
-    "invariant": "^2.2.4"
+    "@react-dnd/invariant": "^1.0.1"
   }
 }
