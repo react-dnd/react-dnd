@@ -11,6 +11,14 @@
     "jsx": "react",
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "allowSyntheticDefaultImports": true
+    /**
+     * SDIs can interfere with client usage patterns of react
+     * e.g. import React from 'react' is normative, but not spec
+     * compliant, as react does not expose a default export.
+     *
+     * Library code should use `import * as React`
+     * Documentation code and examples may use `import React`
+     */
+    "allowSyntheticDefaultImports": false
   }
 }
