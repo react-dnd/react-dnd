@@ -88,6 +88,8 @@ coreRoots.forEach(coreRoot => {
 				esModuleInterop: true,
 				baseUrl: `../../../${corePackage}/`,
 				emitDeclarationOnly: false,
+				// enable these until we can get pure ESM from all of our dependencies
+				allowSyntheticDefaultImports: true,
 				paths: {
 					'dnd-core': ['../../core/dnd-core/lib/index.d.ts'],
 					'react-dnd': ['../../core/react-dnd/lib/index.d.ts'],

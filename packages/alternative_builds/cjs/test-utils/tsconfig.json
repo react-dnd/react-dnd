@@ -7,25 +7,14 @@
     "esModuleInterop": true,
     "baseUrl": "../../../test-utils/",
     "emitDeclarationOnly": false,
+    "allowSyntheticDefaultImports": true,
     "paths": {
-      "dnd-core": [
-        "../../core/dnd-core/lib/index.d.ts"
-      ],
-      "react-dnd": [
-        "../../core/react-dnd/lib/index.d.ts"
-      ],
-      "react-dnd-html5-backend": [
-        "../../core/html5-backend/lib/index.d.ts"
-      ],
-      "react-dnd-test-backend": [
-        "../../testing/test-backend/lib/index.d.ts"
-      ],
-      "react-dnd-test-utils": [
-        "../../testing/test-utils/lib/index.d.ts"
-      ]
+      "dnd-core": ["../../core/dnd-core/lib/index.d.ts"],
+      "react-dnd": ["../../core/react-dnd/lib/index.d.ts"],
+      "react-dnd-html5-backend": ["../../core/html5-backend/lib/index.d.ts"],
+      "react-dnd-test-backend": ["../../testing/test-backend/lib/index.d.ts"],
+      "react-dnd-test-utils": ["../../testing/test-utils/lib/index.d.ts"]
     }
   },
-  "files": [
-    "../../../testing/test-utils/src/index.ts"
-  ]
+  "files": ["../../../testing/test-utils/src/index.ts"]
 }

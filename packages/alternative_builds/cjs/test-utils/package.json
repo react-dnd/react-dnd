@@ -8,17 +8,18 @@
     "build": "tsc",
     "clean": "../../../../scripts/clean_package.sh"
   },
+  "dependencies": {},
   "devDependencies": {
     "react": "^16.12.0",
     "react-dnd": "^9.5.0",
     "react-dnd-test-backend": "^9.5.0",
-    "react-dnd-test-utils": "^9.5.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-dnd-test-utils": "9.5.0"
   },
   "peerDependencies": {
     "react": ">= 16.8.5",
+    "react-dom": ">= 16.8.5",
     "react-dnd-cjs": "^7.3.2",
-    "react-dnd-test-backend-cjs": "^7.2.0",
-    "react-dom": ">= 16.8.5"
+    "react-dnd-test-backend-cjs": "^7.2.0"
   }
 }

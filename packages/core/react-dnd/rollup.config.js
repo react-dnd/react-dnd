@@ -12,6 +12,10 @@ export default {
 			name: 'ReactDnD',
 			file: path.resolve(__dirname, 'dist/umd/ReactDnD.js'),
 			format: 'umd',
+			globals: {
+				react: 'React',
+				'react-dom': 'ReactDOM',
+			},
 			plugins: [
 				replace({
 					values: { 'process.env.NODE_ENV': JSON.stringify('development') },
@@ -23,6 +27,10 @@ export default {
 			name: 'ReactDnD',
 			file: path.resolve(__dirname, 'dist/umd/ReactDnD.min.js'),
 			format: 'umd',
+			globals: {
+				react: 'React',
+				'react-dom': 'ReactDOM',
+			},
 			plugins: [
 				terser(),
 				replace({
@@ -33,10 +41,6 @@ export default {
 		},
 	],
 	external: ['react', 'react-dom'],
-	globals: {
-		react: 'React',
-		'react-dom': 'ReactDOM',
-	},
 	plugins: [
 		resolve(),
 		commonjs(),
@@ -46,7 +50,6 @@ export default {
 					'@babel/env',
 					{
 						modules: 'false',
-						corejs: '3.0.0',
 						targets: {
 							browsers: '> 0.25%, not dead',
 							node: 8,
