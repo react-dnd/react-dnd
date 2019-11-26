@@ -1,5 +1,5 @@
 import { useRef, useMemo } from 'react'
-import invariant from 'invariant'
+import invariant from '@darthtrevino/invariant'
 import {
 	DragSourceHookSpec,
 	DragObjectWithType,

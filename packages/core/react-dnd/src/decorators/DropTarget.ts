@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
-import invariant from 'invariant'
+import invariant from '@darthtrevino/invariant'
 import { DndOptions } from '../interfaces'
 import { isPlainObject } from '../utils/js_utils'
 import { registerTarget } from '../common/registration'

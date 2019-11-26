@@ -1,5 +1,5 @@
 import { Store } from 'redux'
-import invariant from 'invariant'
+import invariant from '@darthtrevino/invariant'
 import matchesType from './utils/matchesType'
 import {
 	getSourceClientOffset,

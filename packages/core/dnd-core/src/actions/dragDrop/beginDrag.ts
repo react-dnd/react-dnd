@@ -1,4 +1,4 @@
-import invariant from 'invariant'
+import invariant from '@darthtrevino/invariant'
 import {
 	Action,
 	DragDropManager,
