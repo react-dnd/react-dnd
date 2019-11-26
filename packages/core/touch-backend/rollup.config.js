@@ -12,6 +12,11 @@ export default {
 			name: 'ReactDnDTouchBackend',
 			file: path.resolve(__dirname, 'dist/umd/ReactDnDTouchBackend.js'),
 			format: 'umd',
+			globals: {
+				react: 'React',
+				'react-dom': 'ReactDOM',
+				'react-dnd': 'ReactDnD',
+			},
 			plugins: [
 				replace({
 					values: { 'process.env.NODE_ENV': JSON.stringify('development') },
@@ -23,6 +28,11 @@ export default {
 			name: 'ReactDnDTouchBackend',
 			file: path.resolve(__dirname, 'dist/umd/ReactDnDTouchBackend.min.js'),
 			format: 'umd',
+			globals: {
+				react: 'React',
+				'react-dom': 'ReactDOM',
+				'react-dnd': 'ReactDnD',
+			},
 			plugins: [
 				terser(),
 				replace({
@@ -33,11 +43,6 @@ export default {
 		},
 	],
 	external: ['react', 'react-dom', 'react-dnd'],
-	globals: {
-		react: 'React',
-		'react-dom': 'ReactDOM',
-		'react-dnd': 'ReactDnD',
-	},
 	plugins: [
 		resolve(),
 		commonjs(),
@@ -48,7 +53,6 @@ export default {
 					'@babel/env',
 					{
 						modules: 'false',
-						corejs: '3.0.0',
 						targets: {
 							browsers: '> 0.25%, not dead',
 							node: 8,
