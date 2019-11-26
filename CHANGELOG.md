@@ -1,4 +1,19 @@
-# [](https://github.com/react-dnd/react-dnd/compare/v9.5.0...v) (2019-11-25)
+# [](https://github.com/react-dnd/react-dnd/compare/v9.5.1...v) (2019-11-26)
+
+## [9.5.1](https://github.com/react-dnd/react-dnd/compare/v9.5.0...v9.5.1) (2019-11-26)
+
+### patch
+
+- Remove syntheticDefaultImport usage of react in react-dnd (#1629)
+
+### build
+
+- add test to release script ([c82797d](https://github.com/react-dnd/react-dnd/commit/c82797d73a3060a5d2362d01a115c5ddbc68d333))
+- update bash scripts to emit errors (#1630) ([65f343f](https://github.com/react-dnd/react-dnd/commit/65f343f3c7012089e066f651fe706daa2d5f37eb)), closes [#1630](https://github.com/react-dnd/react-dnd/issues/1630)
+
+### chore
+
+- tsconfig updates' ([dee71e0](https://github.com/react-dnd/react-dnd/commit/dee71e0b0e1fbbe6ccdafa5e68ae6c02e860e11f))
 
 # [9.5.0](https://github.com/react-dnd/react-dnd/compare/v9.4.0...v9.5.0) (2019-11-25)
 
