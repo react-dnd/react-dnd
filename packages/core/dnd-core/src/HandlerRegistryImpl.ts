@@ -1,6 +1,6 @@
 import { Store } from 'redux'
 import asap from 'asap'
-import invariant from '@darthtrevino/invariant'
+import invariant from 'invariant'
 import {
 	addSource,
 	addTarget,

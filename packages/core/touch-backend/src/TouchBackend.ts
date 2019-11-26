@@ -1,4 +1,4 @@
-import invariant from '@darthtrevino/invariant'
+import invariant from 'invariant'
 import {
 	DragDropActions,
 	DragDropMonitor,

@@ -5,7 +5,7 @@ import {
 	Listener,
 	Identifier,
 } from 'dnd-core'
-import invariant from '@darthtrevino/invariant'
+import invariant from 'invariant'
 import { DragSourceMonitor } from '../interfaces'
 
 let isCallingCanDrag = false

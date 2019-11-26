@@ -1,5 +1,5 @@
 import * as React from 'react'
-import shallowEqual from '@darthtrevino/shallowequal'
+import shallowEqual from 'shallowequal'
 import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from '../utils/isRef'

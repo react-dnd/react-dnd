@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "dnd-core": "^9.5.0",
-    "@darthtrevino/invariant": "^1.0.1"
+    "invariant": "^2.2.4",
+    "@types/invariant": "^2.2.30"
   }
 }

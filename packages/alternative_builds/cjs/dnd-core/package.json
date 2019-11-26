@@ -12,7 +12,8 @@
   "dependencies": {
     "@types/asap": "^2.0.0",
     "asap": "^2.0.6",
-    "@darthtrevino/invariant": "^1.0.1",
+    "invariant": "^2.2.4",
+    "@types/invariant": "^2.2.30",
     "redux": "^4.0.4"
   },
   "devDependencies": {
