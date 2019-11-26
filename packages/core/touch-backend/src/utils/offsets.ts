@@ -12,17 +12,25 @@ export function getNodeClientOffset(node: any): XYCoord | undefined {
 	return { x: left, y: top }
 }
 
-export function getEventClientTouchOffset(e: TouchEvent): XYCoord | undefined {
+export function getEventClientTouchOffset(
+	e: TouchEvent,
+	lastTargetTouchFallback?: Touch,
+): XYCoord | undefined {
 	if (e.targetTouches.length === 1) {
 		return getEventClientOffset(e.targetTouches[0])
+	} else if (lastTargetTouchFallback && e.touches.length === 1) {
+		if (e.touches[0].target === lastTargetTouchFallback.target) {
+			return getEventClientOffset(e.touches[0])
+		}
 	}
 }
 
 export function getEventClientOffset(
 	e: TouchEvent | Touch | MouseEvent,
+	lastTargetTouchFallback?: Touch,
 ): XYCoord | undefined {
 	if (isTouchEvent(e)) {
-		return getEventClientTouchOffset(e)
+		return getEventClientTouchOffset(e, lastTargetTouchFallback)
 	} else {
 		return {
 			x: e.clientX,

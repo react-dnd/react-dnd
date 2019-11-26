@@ -9,7 +9,11 @@ import {
 	Unsubscribe,
 } from 'dnd-core'
 import { EventName, ListenerType, TouchBackendOptions } from './interfaces'
-import { eventShouldStartDrag, eventShouldEndDrag } from './utils/predicates'
+import {
+	eventShouldStartDrag,
+	eventShouldEndDrag,
+	isTouchEvent,
+} from './utils/predicates'
 import { getEventClientOffset, getNodeClientOffset } from './utils/offsets'
 import { distance, inAngleRanges } from './utils/math'
 import supportsPassive from './utils/supportsPassive'
@@ -54,6 +58,9 @@ export default class TouchBackend implements Backend {
 	private dragOverTargetIds: string[] | undefined
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
+
+	// Patch for iOS 13, discussion over #1585
+	private lastTargetTouchFallback: Touch | undefined
 
 	public constructor(
 		manager: DragDropManager,
@@ -356,6 +363,9 @@ export default class TouchBackend implements Backend {
 
 		const clientOffset = getEventClientOffset(e)
 		if (clientOffset) {
+			if (isTouchEvent(e)) {
+				this.lastTargetTouchFallback = e.targetTouches[0]
+			}
 			this._mouseClientOffset = clientOffset
 		}
 		this.waitingForDelay = false
@@ -396,7 +406,8 @@ export default class TouchBackend implements Backend {
 		}
 		const { moveStartSourceIds, dragOverTargetIds } = this
 		const enableHoverOutsideTarget = this.options.enableHoverOutsideTarget
-		const clientOffset = getEventClientOffset(e)
+
+		const clientOffset = getEventClientOffset(e, this.lastTargetTouchFallback)
 
 		if (!clientOffset) {
 			return
@@ -518,6 +529,7 @@ export default class TouchBackend implements Backend {
 
 	private handleTopMoveEndCapture = (e: Event) => {
 		this._isScrolling = false
+		this.lastTargetTouchFallback = undefined
 
 		if (!eventShouldEndDrag(e)) {
 			return
