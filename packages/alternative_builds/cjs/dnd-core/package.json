@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "@types/asap": "^2.0.0",
-    "@types/invariant": "^2.2.30",
     "asap": "^2.0.6",
-    "invariant": "^2.2.4",
+    "@react-dnd/invariant": "^2.0.0",
     "redux": "^4.0.4"
   },
   "devDependencies": {
-    "dnd-core": "^9.5.1"
-  }
+    "dnd-core": "9.5.1"
+  },
+  "peerDependencies": {}
 }

@@ -1,4 +1,4 @@
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import {
 	Action,
 	DragDropManager,
