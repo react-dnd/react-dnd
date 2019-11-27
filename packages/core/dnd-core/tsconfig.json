@@ -2,11 +2,7 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "lib",
-    "baseUrl": "./src",
-    /**
-     * Needed for asap
-     */
-    "allowSyntheticDefaultImports": true
+    "baseUrl": "./src"
   },
   "include": ["src/index.ts"]
 }
