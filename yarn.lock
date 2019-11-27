@@ -8330,13 +8330,13 @@ gatsby-plugin-manifest@^2.2.27:
     sharp "^0.23.3"
 
 gatsby-plugin-offline@^3.0.19:
-  version "3.0.23"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.0.23.tgz#4fb7b86f6be3ed3282854c99aad8c4799d52efb8"
-  integrity sha512-+gFRXjcKpoPdrqmmy4Ortpb9mynhz4UUJVmllxWLKtmP9BFKe9CtJBvdw2ykQ3dnaG5judY0/pYLbn9TLM46UQ==
+  version "3.0.24"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.0.24.tgz#2af84d9ac431d6023f6ffa8d9d053f7142a4792e"
+  integrity sha512-Y+nFNKj1YGZykIZdXMaTK/W+fIm/SGI+G5AJBjp/+73HpZmvxyzaAeHwVfactsPbEFozfUfdBvDnLcy7ohvt8w==
   dependencies:
-    "@babel/runtime" "^7.7.2"
+    "@babel/runtime" "^7.7.4"
     cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^1.0.20"
+    gatsby-core-utils "^1.0.21"
     glob "^7.1.6"
     idb-keyval "^3.2.0"
     lodash "^4.17.15"
