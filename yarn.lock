@@ -2536,6 +2536,11 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@react-dnd/invariant@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@react-dnd/invariant/-/invariant-2.0.0.tgz#09d2e81cd39e0e767d7da62df9325860f24e517e"
+  integrity sha512-xL4RCQBCBDJ+GRwKTFhGUW8GXa4yoDfJrPbLblc3U09ciS+9ZJXJ3Qrcs/x2IODOdIE5kQxvMmE2UKyqUictUw==
+
 "@rollup/plugin-replace@darthtrevino/rollup-replace-temp-deleteme#master":
   version "0.0.1"
   resolved "https://codeload.github.com/darthtrevino/rollup-replace-temp-deleteme/tar.gz/a05405567e108ba401304e5b305784d4b30aa3b3"
@@ -2785,11 +2790,6 @@
   dependencies:
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
-
-"@types/invariant@^2.2.30":
-  version "2.2.30"
-  resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.30.tgz#20efa342807606ada5483731a8137cb1561e5fe9"
-  integrity sha512-98fB+yo7imSD2F7PF7GIpELNgtLNgo5wjivu0W5V4jx+KVVJxo6p/qN4zdzSTBWy4/sN3pPyXwnhRSD28QX+ag==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
