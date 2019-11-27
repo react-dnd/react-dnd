@@ -2536,10 +2536,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@react-dnd/invariant@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@react-dnd/invariant/-/invariant-1.0.1.tgz#ede642e6d547cbed15cc8b0d8b20eb7643d899e7"
-  integrity sha512-sq0FfbQDJyAXhIBycu/PfYEQfv0qVly6iz15YvMaDkfU9xhWA+Jg5xGIhcf+eSOZLCY6w8HBSPzuNrVRt9V2WQ==
+"@react-dnd/invariant@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@react-dnd/invariant/-/invariant-2.0.0.tgz#09d2e81cd39e0e767d7da62df9325860f24e517e"
+  integrity sha512-xL4RCQBCBDJ+GRwKTFhGUW8GXa4yoDfJrPbLblc3U09ciS+9ZJXJ3Qrcs/x2IODOdIE5kQxvMmE2UKyqUictUw==
 
 "@rollup/plugin-replace@darthtrevino/rollup-replace-temp-deleteme#master":
   version "0.0.1"

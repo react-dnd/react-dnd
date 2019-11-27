@@ -10,7 +10,7 @@
     "clean": "../../../../scripts/clean_package.sh"
   },
   "dependencies": {
-    "@react-dnd/invariant": "^1.0.1",
+    "@react-dnd/invariant": "^2.0.0",
     "dnd-core-cjs": "^9.5.1"
   },
   "devDependencies": {

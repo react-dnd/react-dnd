@@ -20,6 +20,6 @@
   },
   "dependencies": {
     "dnd-core": "^9.5.1",
-    "@react-dnd/invariant": "^1.0.1"
+    "@react-dnd/invariant": "^2.0.0"
   }
 }
