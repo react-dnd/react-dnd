@@ -3882,7 +3882,7 @@ babel-plugin-named-asset-import@^0.3.4:
   resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-0.3.4.tgz#4a8fc30e9a3e2b1f5ed36883386ab2d84e1089bd"
   integrity sha512-S6d+tEzc5Af1tKIMbsf2QirCcPdQ+mKUCY2H1nJj1DyA1ShwpsoxEOAwbWsG5gcXNV/olpvQd9vrUWRx4bnhpw==
 
-babel-plugin-remove-graphql-queries@^2.7.16, babel-plugin-remove-graphql-queries@^2.7.17:
+babel-plugin-remove-graphql-queries@^2.7.17:
   version "2.7.17"
   resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.7.17.tgz#8660d06259255f50b191d4afd7abb9f7e61e8bef"
   integrity sha512-zPAq5DEtucSMppt4U2zB1i9SiGMLOYtjNGoOo5PLw8f5jlihLTYYaPG3Sg2S4+tiB9k+tiWMa07FKXb6lV+rRA==
@@ -8485,17 +8485,17 @@ gatsby-remark-prismjs@^3.3.22:
     unist-util-visit "^1.4.1"
 
 gatsby-source-filesystem@^2.1.36:
-  version "2.1.38"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.38.tgz#174fbef19826844c92e5679cb2e379eeb52acf80"
-  integrity sha512-GMsuE2lVvvKwngGSULYiLlwErU0og5TSDaSz8B/yqgqGw0EGaZc3vdcpk4PioEzHQSIR6usDCjubfmN0t3zRYw==
+  version "2.1.39"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.39.tgz#5d0ae6e532e31378b52101ee82a1aae8941c1bc2"
+  integrity sha512-fOSgq1MdVL4LluGioRQR5eVxQ6j7PlGHXwBjaVug3QM6n1yiYWiHECwyXrjJc6YqKt64l3wShw6CUArjEChVPA==
   dependencies:
-    "@babel/runtime" "^7.7.2"
+    "@babel/runtime" "^7.7.4"
     better-queue "^3.8.10"
     bluebird "^3.7.1"
     chokidar "3.3.0"
     file-type "^12.4.0"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^1.0.20"
+    gatsby-core-utils "^1.0.21"
     got "^7.1.0"
     md5-file "^3.2.3"
     mime "^2.4.4"
@@ -16942,7 +16942,7 @@ shallowequal@^1.0.1, shallowequal@^1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharp@^0.23.2, sharp@^0.23.3:
+sharp@^0.23.3:
   version "0.23.3"
   resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.23.3.tgz#549770a4c671b9bd221f00639452a3eb803a0ed1"
   integrity sha512-pjT4zyviQteXMC1Z8USIiSwQFQbZTlU5J59/UoygE25hh+sSb7PSYI/MZ2MCB1COtxWQuoUAaG3TYIOLon26Mg==
