@@ -8330,9 +8330,9 @@ gatsby-plugin-manifest@^2.2.27:
     sharp "^0.23.3"
 
 gatsby-plugin-offline@^3.0.19:
-  version "3.0.24"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.0.24.tgz#2af84d9ac431d6023f6ffa8d9d053f7142a4792e"
-  integrity sha512-Y+nFNKj1YGZykIZdXMaTK/W+fIm/SGI+G5AJBjp/+73HpZmvxyzaAeHwVfactsPbEFozfUfdBvDnLcy7ohvt8w==
+  version "3.0.25"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.0.25.tgz#25ae9ed42244d4c9b8eb9b05a26d02300e1ce89e"
+  integrity sha512-WcMofHahGjCWUlcTdImYSjNTV6gVNZ0KjLqcuq6QpmYRRndK3TrlL1M/YUj6LD3m83n2khXtPmbvNtePCBkTdQ==
   dependencies:
     "@babel/runtime" "^7.7.4"
     cheerio "^1.0.0-rc.3"
