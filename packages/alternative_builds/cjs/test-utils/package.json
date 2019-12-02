@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-utils-cjs",
-  "version": "9.5.0",
+  "version": "9.5.1",
   "license": "MIT",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -11,10 +11,10 @@
   "dependencies": {},
   "devDependencies": {
     "react": "^16.12.0",
-    "react-dnd": "^9.5.0",
-    "react-dnd-test-backend": "^9.5.0",
+    "react-dnd": "^9.5.1",
+    "react-dnd-test-backend": "^9.5.1",
     "react-dom": "^16.12.0",
-    "react-dnd-test-utils": "9.5.0"
+    "react-dnd-test-utils": "9.5.1"
   },
   "peerDependencies": {
     "react": ">= 16.8.5",

@@ -1,12 +1,12 @@
 {
   "name": "cra-test",
-  "version": "9.5.0",
+  "version": "9.5.1",
   "private": true,
   "dependencies": {
     "react": "^16.12.0",
-    "react-dnd": "^9.5.0",
-    "react-dnd-examples-hooks": "^9.5.0",
-    "react-dnd-html5-backend": "^9.5.0",
+    "react-dnd": "^9.5.1",
+    "react-dnd-examples-hooks": "^9.5.1",
+    "react-dnd-html5-backend": "^9.5.1",
     "react-dom": "^16.12.0",
     "react-scripts": "^3.2.0"
   },

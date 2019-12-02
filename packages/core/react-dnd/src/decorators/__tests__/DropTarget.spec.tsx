@@ -1,6 +1,8 @@
 import * as React from 'react'
 import * as TestUtils from 'react-dom/test-utils'
 import { DropTarget } from '../index'
+import { invariant } from '@react-dnd/invariant'
+console.log('IV', invariant)
 
 describe('DropTarget', () => {
 	it('can apply via composition', () => {

@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "9.5.0",
+  "version": "9.5.1",
   "description": "Touch backend for react-dnd",
   "type": "module",
   "main": "./dist/esm/index.js",
@@ -19,8 +19,7 @@
     "start": "../../../scripts/watch_package.sh"
   },
   "dependencies": {
-    "dnd-core": "^9.5.0",
-    "invariant": "^2.2.4",
-    "@types/invariant": "^2.2.30"
+    "dnd-core": "^9.5.1",
+    "@react-dnd/invariant": "^2.0.0"
   }
 }
