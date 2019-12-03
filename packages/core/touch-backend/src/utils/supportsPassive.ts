@@ -4,7 +4,9 @@ const supportsPassive = (() => {
 	try {
 		addEventListener(
 			'test',
-			() => {},
+			() => {
+				// do nothing
+			},
 			Object.defineProperty({}, 'passive', {
 				get() {
 					supported = true
