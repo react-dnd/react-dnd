@@ -67,15 +67,16 @@
     }
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-env": "^7.7.5",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@rollup/plugin-replace": "darthtrevino/rollup-replace-temp-deleteme#master",
     "@types/jest": "^24.0.23",
+    "@types/enzyme": "^3.10.4",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
     "alex": "^8.0.1",
@@ -196,8 +197,5 @@
     "nohoist": [
       "react-dnd-documentation/**"
     ]
-  },
-  "dependencies": {
-    "@types/enzyme": "^3.10.3"
   }
 }
