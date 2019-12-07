@@ -3,9 +3,9 @@
   "version": "9.5.1",
   "private": true,
   "description": "Drag and Drop for React",
-  "main": "lib/cjs/index.js",
+  "main": "dist/cjs/index.js",
   "types": "lib/esm/index.d.ts",
-  "module": "lib/esm/index.js",
+  "module": "dist/esm/index.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
