@@ -4,9 +4,7 @@ import { DragDropManager, BackendFactory } from 'dnd-core'
 export { getEmptyImage } from './getEmptyImage'
 export { NativeTypes }
 
-const createHTML5Backend: BackendFactory = (
+export const Backend: BackendFactory = (
 	manager: DragDropManager,
 	context: any,
 ) => new HTML5Backend(manager, context)
-
-export default createHTML5Backend

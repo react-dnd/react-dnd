@@ -1,12 +1,11 @@
 import path from 'path'
-import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import replace from '@rollup/plugin-replace'
 
 export default {
-	input: path.resolve(__dirname, 'lib/index.js'),
+	input: path.resolve(__dirname, 'dist/esm/index.js'),
 	output: [
 		{
 			name: 'ReactDnDHTML5Backend',
@@ -43,24 +42,5 @@ export default {
 		},
 	],
 	external: ['react', 'react-dom', 'react-dnd'],
-	plugins: [
-		resolve(),
-		commonjs(),
-		babel({
-			exclude: 'node_modules/**',
-			presets: [
-				[
-					'@babel/env',
-					{
-						modules: 'false',
-						targets: {
-							browsers: '> 0.25%, not dead',
-							node: 8,
-							ie: '11',
-						},
-					},
-				],
-			],
-		}),
-	],
+	plugins: [resolve(), commonjs()],
 }
