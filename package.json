@@ -34,11 +34,7 @@
   "homepage": "https://github.com/react-dnd/react-dnd",
   "scripts": {
     "clean": "lerna run clean",
-    "build_packages": "lerna run build --stream",
-    "build_cjs": "node scripts/execute_cjs_replacements.js",
-    "prepare_alternate_builds": "run-p build_cjs copy_umd_libs",
-    "build": "run-s build_packages prepare_alternate_builds",
-    "copy_umd_libs": "./scripts/copy_umd_packages.sh",
+    "build": "lerna run build --stream",
     "unit_test": "jest",
     "jest:watch": "jest --watch",
     "jest:cov": "jest --coverage",
@@ -60,7 +56,6 @@
     "prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
     "precommit:lint": "lint-staged",
     "precommit:format": "pretty-quick --staged",
-    "preinstall": "node scripts/create_cjs_modules.js",
     "start": "lerna run --parallel --stream start",
     "start_docs": "lerna run --stream start --scope react-dnd-documentation",
     "watch": "lerna run --parallel --stream watch"
@@ -72,15 +67,16 @@
     }
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-env": "^7.7.5",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@rollup/plugin-replace": "darthtrevino/rollup-replace-temp-deleteme#master",
     "@types/jest": "^24.0.23",
+    "@types/enzyme": "^3.10.4",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
     "alex": "^8.0.1",
@@ -108,7 +104,6 @@
     "react-dom": "^16.12.0",
     "replace-in-file": "^4.2.0",
     "rollup": "^1.27.4",
-    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
@@ -202,8 +197,5 @@
     "nohoist": [
       "react-dnd-documentation/**"
     ]
-  },
-  "dependencies": {
-    "@types/enzyme": "^3.10.3"
   }
 }
