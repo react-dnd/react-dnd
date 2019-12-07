@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "9.5.1",
+  "version": "10.0.0",
   "description": "Drag and Drop for React",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -17,10 +17,10 @@
     "start": "../../../scripts/watch_package.sh"
   },
   "dependencies": {
+    "@react-dnd/shallowequal": "^2.0.0",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "dnd-core": "^9.5.1",
-    "hoist-non-react-statics": "^3.3.0",
-    "@react-dnd/shallowequal": "^2.0.0"
+    "dnd-core": "^10.0.0",
+    "hoist-non-react-statics": "^3.3.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.13",
