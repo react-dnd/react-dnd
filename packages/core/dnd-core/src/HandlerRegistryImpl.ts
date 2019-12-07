@@ -1,5 +1,4 @@
 import { Store } from 'redux'
-import { asap } from '@react-dnd/asap'
 import { invariant } from '@react-dnd/invariant'
 import {
 	addSource,
@@ -23,6 +22,7 @@ import {
 	validateTargetContract,
 	validateType,
 } from './contracts'
+import asap from 'asap'
 
 function getNextHandlerId(role: HandlerRole): string {
 	const id = getNextUniqueId().toString()
