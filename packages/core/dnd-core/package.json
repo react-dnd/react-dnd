@@ -18,8 +18,7 @@
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
-    "@types/asap": "^2.0.0",
-    "asap": "^2.0.6",
+    "@react-dnd/asap": "^4.0.0",
     "redux": "^4.0.4"
   }
 }

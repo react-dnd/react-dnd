@@ -22,7 +22,7 @@ import {
 	validateTargetContract,
 	validateType,
 } from './contracts'
-import asap from 'asap'
+import { asap } from '@react-dnd/asap'
 
 function getNextHandlerId(role: HandlerRole): string {
 	const id = getNextUniqueId().toString()
