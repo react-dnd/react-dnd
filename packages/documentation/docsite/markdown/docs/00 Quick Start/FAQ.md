@@ -145,10 +145,6 @@ I know, it's only drag and drop, [but I like it](http://www.youtube.com/watch?v=
 
 [Stampsy](http://stampsy.com) has been using this library, as well as its non-React predecessor that it was based on, since 2013. It's central to the Stampsy user experience, because all the content is created in a drag and drop post editor that uses React DnD.
 
-### What is the roadmap?
-
-The library is pretty much complete, and there are no new big features planned. Most of the new development now occurs outside React DnD—for example, there is an ongoing work on [the touch backend](https://github.com/yahoo/react-dnd-touch-backend) for it.
-
 ### Who made it and why?
 
 React DnD was created by [Dan Abramov](http://github.com/gaearon).
