@@ -1,5 +1,5 @@
 import * as React from 'react'
-import TestBackendImpl, {
+import BackendFactory, {
 	TestBackend,
 	getInstance,
 } from 'react-dnd-test-backend'
@@ -14,7 +14,7 @@ import { act } from 'react-dom/test-utils'
  */
 export function wrapInTestContext(DecoratedComponent: any): any {
 	const result: React.FC<any> = (props: any) => (
-		<DndProvider backend={TestBackendImpl}>
+		<DndProvider backend={BackendFactory}>
 			<DecoratedComponent {...props} />
 		</DndProvider>
 	)

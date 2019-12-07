@@ -12,7 +12,8 @@ export function clearInstance() {
 	instance = undefined
 }
 
-export const Backend: BackendFactory = (manager: DragDropManager) => {
+const createBackend: BackendFactory = (manager: DragDropManager) => {
 	instance = new TestBackend(manager)
 	return instance
 }
+export default createBackend

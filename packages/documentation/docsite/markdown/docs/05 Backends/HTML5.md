@@ -26,7 +26,7 @@ Aside from the default export, the HTML5 backend module also provides a few extr
 ### Usage
 
 ```jsx
-import { Backend } from 'react-dnd-html5-backend'
+import Backend from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 
 export default function MyReactApp() {

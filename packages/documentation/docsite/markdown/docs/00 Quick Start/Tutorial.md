@@ -432,7 +432,7 @@ We need this to specify that we're going to use the [HTML5Backend](/docs/backend
 ```jsx
 import React from 'react'
 import { DndProvider } from 'react-dnd'
-import { Backend } from 'react-dnd-html5-backend'
+import Backend from 'react-dnd-html5-backend'
 
 function Board() {
   /* ... */

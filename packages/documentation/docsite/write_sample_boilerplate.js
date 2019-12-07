@@ -10,7 +10,7 @@ const APP_FILE_CONTENT = `
 	import ReactDOM from 'react-dom'
 	import Example from './example'
 	import { DndProvider } from 'react-dnd'
-	import { Backend } from 'react-dnd-html5-backend'
+	import Backend from 'react-dnd-html5-backend'
 
 	function App() {
 		return (
