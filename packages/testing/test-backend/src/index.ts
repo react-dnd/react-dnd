@@ -16,5 +16,4 @@ const createBackend: BackendFactory = (manager: DragDropManager) => {
 	instance = new TestBackend(manager)
 	return instance
 }
-
 export default createBackend

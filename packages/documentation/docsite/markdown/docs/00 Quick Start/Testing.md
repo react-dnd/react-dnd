@@ -13,21 +13,6 @@ There are several different approaches to testing React components. React DnD is
 
 A few test examples are included with the React DnD inside its `examples` folder. Run `yarn` and `yarn test` inside the `react-dnd` root folder to start them.
 
-## Setup
-
-If you are using Jest, you may need to configure Jest's `moduleNameMapper` settings. Jest does not work well with ES Modules yet, but you can instruct it to use the CommonJS builds of the react-dnd libraries.
-
-```json
-"moduleNameMapper": {
-  "^dnd-core$": "dnd-core/dist/cjs",
-  "^react-dnd$": "react-dnd/dist/cjs",
-  "^react-dnd-html5-backend$": "react-dnd-html5-backend/dist/cjs",
-  "^react-dnd-touch-backend$": "react-dnd-touch-backend/dist/cjs",
-  "^react-dnd-test-backend$": "react-dnd-test-backend/dist/cjs",
-  "^react-dnd-test-utils$": "react-dnd-test-utils/dist/cjs"
-}
-```
-
 #### With create-react-app
 
 If you are using `create-react-app`, which uses Jest to drive unit tests, you can use the [react-app-rewired](https://github.com/timarney/react-app-rewired) to override the default Jest configuration without ejecting.

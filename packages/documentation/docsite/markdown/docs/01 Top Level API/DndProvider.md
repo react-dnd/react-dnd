@@ -13,7 +13,7 @@ injected with a backend via the `backend` prop, but it may can be injected with 
 ### Usage
 
 ```jsx
-import HTML5Backend from 'react-dnd-html5-backend'
+import Backend from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 
 export default class YourApp {
