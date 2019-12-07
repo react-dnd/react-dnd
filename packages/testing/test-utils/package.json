@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-utils",
-  "version": "10.0.1",
+  "version": "10.0.2",
   "license": "MIT",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -13,8 +13,8 @@
   },
   "devDependencies": {
     "react": "^16.12.0",
-    "react-dnd": "^10.0.1",
-    "react-dnd-test-backend": "^10.0.1",
+    "react-dnd": "^10.0.2",
+    "react-dnd-test-backend": "^10.0.2",
     "react-dom": "^16.12.0"
   },
   "peerDependencies": {
