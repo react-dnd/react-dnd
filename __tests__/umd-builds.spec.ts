@@ -5,27 +5,27 @@ import touch from 'react-dnd-touch-backend'
 /* eslint-disable @typescript-eslint/no-var-requires */
 describe('UMD Builds', () => {
 	it('ReactDnD', () => {
-		const library = require('../packages/alternative_builds/umd/dist/ReactDnD.js')
+		const library = require('../packages/core/react-dnd/dist/umd/ReactDnD.js')
 		checkKeyMatch(library, rdnd)
 	})
 	it('ReactDnD.min', () => {
-		const library = require('../packages/alternative_builds/umd/dist/ReactDnD.min.js')
+		const library = require('../packages/core/react-dnd/dist/umd/ReactDnD.min.js')
 		checkKeyMatch(library, rdnd)
 	})
 	it('ReactDnDHTML5Backend', () => {
-		const library = require('../packages/alternative_builds/umd/dist/ReactDnDHTML5Backend.js')
+		const library = require('../packages/core/react-dnd-html5-backend/dist/umd/ReactDnDHTML5Backend.js')
 		checkKeyMatch(library, html5)
 	})
 	it('ReactDnDHTML5Backend.min', () => {
-		const library = require('../packages/alternative_builds/umd/dist/ReactDnDHTML5Backend.min.js')
+		const library = require('../packages/core/react-dnd-html5-backend/dist/umd/ReactDnDHTML5Backend.min.js')
 		checkKeyMatch(library, html5)
 	})
 	it('ReactDnDTouchBackend', () => {
-		const library = require('../packages/alternative_builds/umd/dist/ReactDnDTouchBackend.js')
+		const library = require('../packages/core/react-dnd-test-backend/dist/umd/ReactDnDTouchBackend.js')
 		checkKeyMatch(library, touch)
 	})
 	it('ReactDnDTouchBackend.min', () => {
-		const library = require('../packages/alternative_builds/umd/dist/ReactDnDTouchBackend.min.js')
+		const library = require('../packages/core/react-dnd-test-backend/dist/umd/ReactDnDTouchBackend.min.js')
 		checkKeyMatch(library, touch)
 	})
 })

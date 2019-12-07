@@ -34,11 +34,7 @@
   "homepage": "https://github.com/react-dnd/react-dnd",
   "scripts": {
     "clean": "lerna run clean",
-    "build_packages": "lerna run build --stream",
-    "build_cjs": "node scripts/execute_cjs_replacements.js",
-    "prepare_alternate_builds": "run-p build_cjs copy_umd_libs",
-    "build": "run-s build_packages prepare_alternate_builds",
-    "copy_umd_libs": "./scripts/copy_umd_packages.sh",
+    "build": "lerna run build --stream",
     "unit_test": "jest",
     "jest:watch": "jest --watch",
     "jest:cov": "jest --coverage",
@@ -60,7 +56,6 @@
     "prettify": "prettier 'packages/*/**/*.js' 'examples/**/*.js' 'site/**/*.js'",
     "precommit:lint": "lint-staged",
     "precommit:format": "pretty-quick --staged",
-    "preinstall": "node scripts/create_cjs_modules.js",
     "start": "lerna run --parallel --stream start",
     "start_docs": "lerna run --stream start --scope react-dnd-documentation",
     "watch": "lerna run --parallel --stream watch"
