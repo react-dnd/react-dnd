@@ -1,6 +1,6 @@
 {
   "name": "dnd-core",
-  "version": "10.0.1",
+  "version": "10.0.2",
   "description": "Drag and drop sans the GUI",
   "license": "MIT",
   "main": "./dist/cjs/index.js",
@@ -17,8 +17,8 @@
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "dependencies": {
-    "@react-dnd/invariant": "^2.0.0",
     "@react-dnd/asap": "^4.0.0",
+    "@react-dnd/invariant": "^2.0.0",
     "redux": "^4.0.4"
   }
 }
