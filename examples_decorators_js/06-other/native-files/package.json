@@ -1,5 +1,5 @@
 {
-  "name": "react-dnd-example-15",
+  "name": "react-dnd-example-17",
   "main": "src/index.js",
   "description": "auto-generated package for codesandbox import",
   "private": true,
@@ -14,8 +14,8 @@
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-scripts": "2.1.8",
-    "react-dnd": "10.0.0",
-    "react-dnd-html5-backend": "10.0.0",
+    "react-dnd": "10.0.1",
+    "react-dnd-html5-backend": "10.0.1",
     "babel-jest": "23.6.0",
     "faker": "^4.1.0",
     "immutability-helper": "^3.0.0",
