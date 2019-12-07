@@ -42,5 +42,5 @@ export default {
 		},
 	],
 	external: ['react', 'react-dom', 'react-dnd'],
-	plugins: [resolve(), commonjs()],
+	plugins: [resolve({ browser: true }), commonjs()],
 }
