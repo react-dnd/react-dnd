@@ -12,7 +12,6 @@ A Component to render an HTML Image element as a disconnected drag preview.
 ### Usage
 
 ```jsx
-import HTML5Backend from 'react-dnd-html5-backend'
 import { DragSource, DragPreviewImage } from 'react-dnd'
 
 function DraggableHouse({ connectDragSource, connectDragPreview }) {

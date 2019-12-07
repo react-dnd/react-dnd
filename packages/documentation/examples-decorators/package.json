@@ -3,9 +3,8 @@
   "version": "9.5.1",
   "private": true,
   "description": "Drag and Drop for React",
-  "main": "lib/esm/index.js",
-  "type": "module",
-  "module": "lib/esm/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "types": "lib/esm/index.d.ts",
   "sideEffects": false,
   "repository": {
@@ -14,11 +13,11 @@
   },
   "license": "MIT",
   "scripts": {
+    "build": "run-s build:pkg build:docs",
     "clean": "../../../scripts/clean_package.sh",
-    "build:ts": "tsc -b tsconfig.json",
-    "build:docs": "tsc -b tsconfig.docs.json",
-    "build": "run-p build:*",
-    "start": "tsc -b tsconfig.json -w --preserveWatchOutput"
+    "start": "../../../scripts/watch_package.sh",
+    "build:pkg": "../../../scripts/build_package.sh",
+    "build:docs": "tsc -b tsconfig.docs.json"
   },
   "dependencies": {
     "@types/faker": "^4.1.7",

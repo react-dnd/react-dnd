@@ -24,8 +24,6 @@ https://www.reactiflux.com/
 - ES Modules w/ Embedded CJS for Jest Testing
 - Ships w/ TS Typings
 - Browserlist Target: `>0.25%, not dead`
-- CJS builds: (react-dnd-cjs, react-dnd-html5-backend-cjs)
-- UMD builds: (react-dnd-umd-builds)
 
 ### Shoutouts 🙏
 
