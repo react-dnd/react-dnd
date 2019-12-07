@@ -422,7 +422,7 @@ We're going to start by installing React DnD and the HTML5 backend for it:
 yarn add react-dnd react-dnd-html5-backend
 ```
 
-In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://github.com/yahoo/react-dnd-touch-backend), but this is out of scope of this tutorial.
+In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://npmjs.com/package/react-dnd-touch-backend), but this is out of scope of this tutorial.
 
 ## Setting up the Drag and Drop Context
 
