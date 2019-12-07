@@ -13,19 +13,19 @@ describe('UMD Builds', () => {
 		checkKeyMatch(library, rdnd)
 	})
 	it('ReactDnDHTML5Backend', () => {
-		const library = require('../packages/core/react-dnd-html5-backend/dist/umd/ReactDnDHTML5Backend.js')
+		const library = require('../packages/core/html5-backend/dist/umd/ReactDnDHTML5Backend.js')
 		checkKeyMatch(library, html5)
 	})
 	it('ReactDnDHTML5Backend.min', () => {
-		const library = require('../packages/core/react-dnd-html5-backend/dist/umd/ReactDnDHTML5Backend.min.js')
+		const library = require('../packages/core/html5-backend/dist/umd/ReactDnDHTML5Backend.min.js')
 		checkKeyMatch(library, html5)
 	})
 	it('ReactDnDTouchBackend', () => {
-		const library = require('../packages/core/react-dnd-test-backend/dist/umd/ReactDnDTouchBackend.js')
+		const library = require('../packages/core/touch-backend/dist/umd/ReactDnDTouchBackend.js')
 		checkKeyMatch(library, touch)
 	})
 	it('ReactDnDTouchBackend.min', () => {
-		const library = require('../packages/core/react-dnd-test-backend/dist/umd/ReactDnDTouchBackend.min.js')
+		const library = require('../packages/core/touch-backend/dist/umd/ReactDnDTouchBackend.min.js')
 		checkKeyMatch(library, touch)
 	})
 })
