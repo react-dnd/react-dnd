@@ -3864,7 +3864,7 @@ babel-plugin-named-asset-import@^0.3.5:
   resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-0.3.5.tgz#d3fa1a7f1f4babd4ed0785b75e2f926df0d70d0d"
   integrity sha512-sGhfINU+AuMw9oFAdIn/nD5sem3pn/WgxAfDZ//Q3CnF+5uaho7C7shh2rKLk6sKE/XkfmyibghocwKdVjLIKg==
 
-babel-plugin-remove-graphql-queries@^2.7.17, babel-plugin-remove-graphql-queries@^2.7.19:
+babel-plugin-remove-graphql-queries@^2.7.19:
   version "2.7.19"
   resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.7.19.tgz#063b369cbf0123cbcebeffb75eab465d8f0b16c8"
   integrity sha512-/DS620ztyyrqrqjmz/KHDt++ktn+4RdvfDf5KCUmt6iJOglgNm7uHkE+snuvvL/xhNNuuPBLErc23Q0cR6MSiQ==
@@ -8371,13 +8371,13 @@ gatsby-plugin-manifest@^2.2.27:
     sharp "^0.23.4"
 
 gatsby-plugin-offline@^3.0.19:
-  version "3.0.27"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.0.27.tgz#ae8a7582a6aff2daf3bb83baeaf84d4153fc2bb8"
-  integrity sha512-RvVD0IJnlyp180FaRxCt1Dafb1502myIshSWU+pP8epWy/ugG89YEqsZrZ3IIBUS3EfSP6RcNx8b5l7FMUMPhw==
+  version "3.0.29"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.0.29.tgz#514db6b950770b7ab2c1eacf435bfb16a45c1a16"
+  integrity sha512-5EJ6p6kIiOEjdI6NMHTC0GgXDj8QflV4dzYi/2BvcT4Ad609IbXRrebWPhcVCtT5Ki5Jg2TTjYjcGrHa4QSc6A==
   dependencies:
-    "@babel/runtime" "^7.7.4"
+    "@babel/runtime" "^7.7.6"
     cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^1.0.22"
+    gatsby-core-utils "^1.0.24"
     glob "^7.1.6"
     idb-keyval "^3.2.0"
     lodash "^4.17.15"
@@ -17018,7 +17018,7 @@ shallowequal@^1.0.1, shallowequal@^1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharp@^0.23.3, sharp@^0.23.4:
+sharp@^0.23.4:
   version "0.23.4"
   resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.23.4.tgz#ca36067cb6ff7067fa6c77b01651cb9a890f8eb3"
   integrity sha512-fJMagt6cT0UDy9XCsgyLi0eiwWWhQRxbwGmqQT6sY8Av4s0SVsT/deg8fobBQCTDU5iXRgz0rAeXoE2LBZ8g+Q==
