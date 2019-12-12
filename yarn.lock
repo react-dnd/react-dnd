@@ -3864,7 +3864,7 @@ babel-plugin-named-asset-import@^0.3.5:
   resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-0.3.5.tgz#d3fa1a7f1f4babd4ed0785b75e2f926df0d70d0d"
   integrity sha512-sGhfINU+AuMw9oFAdIn/nD5sem3pn/WgxAfDZ//Q3CnF+5uaho7C7shh2rKLk6sKE/XkfmyibghocwKdVjLIKg==
 
-babel-plugin-remove-graphql-queries@^2.7.17, babel-plugin-remove-graphql-queries@^2.7.19:
+babel-plugin-remove-graphql-queries@^2.7.19:
   version "2.7.19"
   resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.7.19.tgz#063b369cbf0123cbcebeffb75eab465d8f0b16c8"
   integrity sha512-/DS620ztyyrqrqjmz/KHDt++ktn+4RdvfDf5KCUmt6iJOglgNm7uHkE+snuvvL/xhNNuuPBLErc23Q0cR6MSiQ==
@@ -4144,7 +4144,7 @@ blob@0.0.5:
   resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
   integrity sha512-gaqbzQPqOoamawKg0LGVd7SzLgXS+JH61oWprSLH+P+abTczqJbhTR8CmJ2u9/bUYNmHTGJx/UEmn6doAvvuig==
 
-bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.1, bluebird@^3.7.2:
+bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -8526,17 +8526,17 @@ gatsby-remark-prismjs@^3.3.22:
     unist-util-visit "^1.4.1"
 
 gatsby-source-filesystem@^2.1.36:
-  version "2.1.40"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.40.tgz#482f87a3b1617132b4f4faa64a75d350d8581646"
-  integrity sha512-lCiuNbrb7yl97JjViP+O/TM0rtgDAFJsiebTsY3aUXOzlzIcfVDS7j7ag/H+aGAk9vs1BgGoa+8XSWjP3i90Og==
+  version "2.1.42"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.42.tgz#422fb6452ce86859df8b2d8c9f6953e2b492eae6"
+  integrity sha512-kX1Uclv4M9C+MB6tfvY7URkpQ7Zl6+ESrf5DhcBN2+faaXLjaN7DzbWOlyzMI/lBlvA39ukCh9gSSlx807TJsA==
   dependencies:
-    "@babel/runtime" "^7.7.4"
+    "@babel/runtime" "^7.7.6"
     better-queue "^3.8.10"
-    bluebird "^3.7.1"
+    bluebird "^3.7.2"
     chokidar "3.3.0"
     file-type "^12.4.0"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^1.0.22"
+    gatsby-core-utils "^1.0.24"
     got "^7.1.0"
     md5-file "^3.2.3"
     mime "^2.4.4"
@@ -8544,7 +8544,7 @@ gatsby-source-filesystem@^2.1.36:
     progress "^2.0.3"
     read-chunk "^3.2.0"
     valid-url "^1.0.9"
-    xstate "^4.6.7"
+    xstate "^4.7.2"
 
 gatsby-telemetry@^1.1.44:
   version "1.1.44"
@@ -17018,7 +17018,7 @@ shallowequal@^1.0.1, shallowequal@^1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharp@^0.23.3, sharp@^0.23.4:
+sharp@^0.23.4:
   version "0.23.4"
   resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.23.4.tgz#ca36067cb6ff7067fa6c77b01651cb9a890f8eb3"
   integrity sha512-fJMagt6cT0UDy9XCsgyLi0eiwWWhQRxbwGmqQT6sY8Av4s0SVsT/deg8fobBQCTDU5iXRgz0rAeXoE2LBZ8g+Q==
@@ -19920,7 +19920,7 @@ xmlhttprequest-ssl@~1.5.4:
   resolved "https://registry.yarnpkg.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.5.tgz#c2876b06168aadc40e57d97e81191ac8f4398b3e"
   integrity sha1-wodrBhaKrcQOV9l+gRkayPQ5iz4=
 
-xstate@^4.6.7, xstate@^4.7.2:
+xstate@^4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.7.2.tgz#d777b83053fb21b346cc944df887ba27a18dd758"
   integrity sha512-vAIEf5CuLPNgH5obVP7WS1U+I91L+vSKLpradVn6AhbyFrccWlNQwFVuYktInafgkvA6z4w9rLkuRKBZ5izkSA==
