@@ -951,7 +951,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.4", "@babel/runtime@^7.7.6":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6":
   version "7.7.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.6.tgz#d18c511121aff1b4f2cd1d452f1bac9601dd830f"
   integrity sha512-BWAJxpNVa0QlE5gZdWjSxXtemZyZ9RmrmVozxt3NUXeZhVIJ5ANyqmMc0JDrivBZyxUuQvFxlvH4OWWOogGfUw==
@@ -8315,7 +8315,7 @@ gatsby-cli@^2.8.18:
     ink "^2.6.0"
     ink-spinner "^3.0.1"
 
-gatsby-core-utils@^1.0.22, gatsby-core-utils@^1.0.24:
+gatsby-core-utils@^1.0.24:
   version "1.0.24"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.0.24.tgz#b2b39440ad4f717de1b68f02d139130f844bdb32"
   integrity sha512-2GPJVnqVTDO1xyZWR2lITilGTzw/hP3EE5Lq/QEjvmOPX6sLes1Gd3mTewd0PpOVZkjzn93u7kZKWEGidQO2vw==
@@ -8502,9 +8502,9 @@ gatsby-remark-embed-snippet@^4.1.14:
     unist-util-map "^1.0.5"
 
 gatsby-remark-images@^3.1.30:
-  version "3.1.37"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.1.37.tgz#e270630e208470326faf51e9cec34ffd3cded09c"
-  integrity sha512-6eQ82CxzOFyTzI3CaxzTI6j16Xbm28CNJYu/Wdbl8QZdAnznJnLIAdlE074VYyo60QhKyQwu8a3wV5bhrHSfQQ==
+  version "3.1.38"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.1.38.tgz#9e66ba43b3a0211f3a08167badc33bd7d0653bb3"
+  integrity sha512-eMEq3anD/cCgCh2ZgcWhR/ejvd25R1tki2bS3jLEl0ceafJbOGvWD1hpSDL/N9KtpsX2zyVOTZn56tg5oRhTrQ==
   dependencies:
     "@babel/runtime" "^7.7.6"
     chalk "^2.4.2"
