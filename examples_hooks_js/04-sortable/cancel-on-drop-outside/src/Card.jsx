@@ -15,6 +15,13 @@ const Card = ({ id, text, moveCard, findCard }) => {
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
+    end: (dropResult, monitor) => {
+      const { id: droppedId, originalIndex } = monitor.getItem()
+      const didDrop = monitor.didDrop()
+      if (!didDrop) {
+        moveCard(droppedId, originalIndex)
+      }
+    },
   })
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
