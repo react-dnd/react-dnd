@@ -1,21 +1,24 @@
-import React, { useState, useMemo } from 'react'
-import { NativeTypes } from 'react-dnd-html5-backend'
-import TargetBox from './TargetBox'
-import FileList from './FileList'
-const { FILE } = NativeTypes
-const Container = () => {
-  const [droppedFiles, setDroppedFiles] = useState([])
-  const accepts = useMemo(() => [FILE], [])
-  const handleFileDrop = (item, monitor) => {
+import React from "react";
+import TargetBox from "./TargetBox";
+import FileList from "./FileList";
+
+class Container extends React.PureComponent {
+  state = { droppedFiles: [] };
+
+  handleFileDrop = (_, monitor) => {
     if (monitor) {
-      setDroppedFiles(monitor.getItem().files)
+      const files = monitor.getItem().files;
+      this.setState({ droppedFiles: files });
     }
+  };
+
+  render() {
+    return (
+      <>
+        <TargetBox onDrop={this.handleFileDrop} />
+        <FileList files={this.state.droppedFiles} />
+      </>
+    );
   }
-  return (
-    <>
-      <TargetBox accepts={accepts} onDrop={handleFileDrop} />
-      <FileList files={droppedFiles} />
-    </>
-  )
 }
-export default Container
+export default Container;
