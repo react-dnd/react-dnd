@@ -456,7 +456,10 @@ export default class HTML5Backend implements Backend {
 				// will abruptly end the dragging, which is not obvious.
 				//
 				// This is the reason such behavior is strictly opt-in.
-				this.actions.publishDragSource()
+				//
+				// We need this setTimeout to avoid chrome bug when mutating DOM right
+				// within dragstart event handler immediately firing dragend event
+				setTimeout(() => this.actions.publishDragSource(), 0)
 			}
 		} else if (nativeType) {
 			// A native item (such as URL) dragged from inside the document
