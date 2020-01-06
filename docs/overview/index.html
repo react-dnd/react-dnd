@@ -103,8 +103,8 @@ This is not a coincidence, as React DnD uses Redux internally.</p>
 <p>Let&#x27;s say you want to highlight the Chess cells when a piece is being dragged. A collecting function for the <code class="language-text">Cell</code> component might look like this:</p>
 <div class="gatsby-highlight" data-language="jsx"><pre class="language-jsx"><code class="language-jsx"><span class="token keyword">function</span> <span class="token function">collect</span><span class="token punctuation">(</span><span class="token parameter">monitor</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    highlighted<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">canDrop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    hovered<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    highlighted<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">canDrop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    hovered<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>It instructs React DnD to pass the up-to-date values of <code class="language-text">highlighted</code> and <code class="language-text">hovered</code> to all the <code class="language-text">Cell</code> instances as props.</p>
@@ -113,9 +113,9 @@ This is not a coincidence, as React DnD uses Redux internally.</p>
 <p>In fact, a connector is passed as the first argument to the <em>collecting function</em> we described above. Let&#x27;s see how we can use it to specify the drop target:</p>
 <div class="gatsby-highlight" data-language="jsx"><pre class="language-jsx"><code class="language-jsx"><span class="token keyword">function</span> <span class="token function">collect</span><span class="token punctuation">(</span><span class="token parameter">connect<span class="token punctuation">,</span> monitor</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    highlighted<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">canDrop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    hovered<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    connectDropTarget<span class="token punctuation">:</span> connect<span class="token punctuation">.</span><span class="token function">dropTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    highlighted<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">canDrop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    hovered<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    connectDropTarget<span class="token operator">:</span> connect<span class="token punctuation">.</span><span class="token function">dropTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>In the component&#x27;s <code class="language-text">render</code> method, we are then able to access both the data obtained from the monitor, and the function obtained from the connector:</p>
@@ -124,9 +124,9 @@ This is not a coincidence, as React DnD uses Redux internally.</p>
 
   <span class="token keyword">return</span> <span class="token function">connectDropTarget</span><span class="token punctuation">(</span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token function">classSet</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      <span class="token string">&#x27;Cell&#x27;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-      <span class="token string">&#x27;Cell--highlighted&#x27;</span><span class="token punctuation">:</span> highlighted<span class="token punctuation">,</span>
-      <span class="token string">&#x27;Cell--hovered&#x27;</span><span class="token punctuation">:</span> hovered
+      <span class="token string">&#x27;Cell&#x27;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token string">&#x27;Cell--highlighted&#x27;</span><span class="token operator">:</span> highlighted<span class="token punctuation">,</span>
+      <span class="token string">&#x27;Cell--hovered&#x27;</span><span class="token operator">:</span> hovered
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
       </span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">}</span><span class="token plain-text">
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
@@ -183,7 +183,7 @@ This is not a coincidence, as React DnD uses Redux internally.</p>
 <span class="token comment">// You want to keep types in a separate file with</span>
 <span class="token comment">// the rest of your app&#x27;s constants.</span>
 <span class="token keyword">const</span> Types <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token constant">CARD</span><span class="token punctuation">:</span> <span class="token string">&#x27;card&#x27;</span><span class="token punctuation">,</span>
+  <span class="token constant">CARD</span><span class="token operator">:</span> <span class="token string">&#x27;card&#x27;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">/**
@@ -193,7 +193,7 @@ This is not a coincidence, as React DnD uses Redux internally.</p>
 <span class="token keyword">const</span> cardSource <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token function">beginDrag</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Return the data describing the dragged item</span>
-    <span class="token keyword">const</span> item <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> props<span class="token punctuation">.</span>id <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> item <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token operator">:</span> props<span class="token punctuation">.</span>id <span class="token punctuation">}</span>
     <span class="token keyword">return</span> item
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
@@ -216,9 +216,9 @@ This is not a coincidence, as React DnD uses Redux internally.</p>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
     <span class="token comment">// Call this function inside render()</span>
     <span class="token comment">// to let React DnD handle the drag events:</span>
-    connectDragSource<span class="token punctuation">:</span> connect<span class="token punctuation">.</span><span class="token function">dragSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    connectDragSource<span class="token operator">:</span> connect<span class="token punctuation">.</span><span class="token function">dragSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token comment">// You can ask the monitor about the current drag state:</span>
-    isDragging<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">isDragging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    isDragging<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isDragging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 

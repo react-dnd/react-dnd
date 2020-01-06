@@ -158,7 +158,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
 <span class="token comment">// You want to keep types in a separate file with</span>
 <span class="token comment">// the rest of your app&#x27;s constants.</span>
 <span class="token keyword">const</span> Types <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token constant">CARD</span><span class="token punctuation">:</span> <span class="token string">&#x27;card&#x27;</span><span class="token punctuation">,</span>
+  <span class="token constant">CARD</span><span class="token operator">:</span> <span class="token string">&#x27;card&#x27;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">/**
@@ -181,7 +181,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
 
   <span class="token function">beginDrag</span><span class="token punctuation">(</span><span class="token parameter">props<span class="token punctuation">,</span> monitor<span class="token punctuation">,</span> component</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Return the data describing the dragged item</span>
-    <span class="token keyword">const</span> item <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> props<span class="token punctuation">.</span>id <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> item <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token operator">:</span> props<span class="token punctuation">.</span>id <span class="token punctuation">}</span>
     <span class="token keyword">return</span> item
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
@@ -213,9 +213,9 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
     <span class="token comment">// Call this function inside render()</span>
     <span class="token comment">// to let React DnD handle the drag events:</span>
-    connectDragSource<span class="token punctuation">:</span> connect<span class="token punctuation">.</span><span class="token function">dragSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    connectDragSource<span class="token operator">:</span> connect<span class="token punctuation">.</span><span class="token function">dragSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token comment">// You can ask the monitor about the current drag state:</span>
-    isDragging<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">isDragging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    isDragging<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isDragging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 

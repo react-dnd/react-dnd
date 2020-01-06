@@ -128,28 +128,28 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
 <span class="token keyword">import</span> <span class="token punctuation">{</span> DragLayer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&#x27;react-dnd&#x27;</span>
 
 <span class="token keyword">const</span> layerStyles <span class="token operator">=</span> <span class="token punctuation">{</span>
-  position<span class="token punctuation">:</span> <span class="token string">&#x27;fixed&#x27;</span><span class="token punctuation">,</span>
-  pointerEvents<span class="token punctuation">:</span> <span class="token string">&#x27;none&#x27;</span><span class="token punctuation">,</span>
-  zIndex<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
-  left<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  top<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-  width<span class="token punctuation">:</span> <span class="token string">&#x27;100%&#x27;</span><span class="token punctuation">,</span>
-  height<span class="token punctuation">:</span> <span class="token string">&#x27;100%&#x27;</span><span class="token punctuation">,</span>
+  position<span class="token operator">:</span> <span class="token string">&#x27;fixed&#x27;</span><span class="token punctuation">,</span>
+  pointerEvents<span class="token operator">:</span> <span class="token string">&#x27;none&#x27;</span><span class="token punctuation">,</span>
+  zIndex<span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+  left<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  top<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  width<span class="token operator">:</span> <span class="token string">&#x27;100%&#x27;</span><span class="token punctuation">,</span>
+  height<span class="token operator">:</span> <span class="token string">&#x27;100%&#x27;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token function">getItemStyles</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> <span class="token punctuation">{</span> currentOffset <span class="token punctuation">}</span> <span class="token operator">=</span> props
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>currentOffset<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">{</span>
-      display<span class="token punctuation">:</span> <span class="token string">&#x27;none&#x27;</span><span class="token punctuation">,</span>
+      display<span class="token operator">:</span> <span class="token string">&#x27;none&#x27;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 
   <span class="token keyword">const</span> <span class="token punctuation">{</span> x<span class="token punctuation">,</span> y <span class="token punctuation">}</span> <span class="token operator">=</span> currentOffset
   <span class="token keyword">const</span> transform <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">translate(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>x<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>y<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px)</span><span class="token template-punctuation string">`</span></span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    transform<span class="token punctuation">:</span> transform<span class="token punctuation">,</span>
-    WebkitTransform<span class="token punctuation">:</span> transform<span class="token punctuation">,</span>
+    transform<span class="token operator">:</span> transform<span class="token punctuation">,</span>
+    WebkitTransform<span class="token operator">:</span> transform<span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
@@ -160,7 +160,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
 
   <span class="token keyword">function</span> <span class="token function">renderItem</span><span class="token punctuation">(</span><span class="token parameter">type<span class="token punctuation">,</span> item</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">switch</span> <span class="token punctuation">(</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">case</span> ItemTypes<span class="token punctuation">.</span><span class="token constant">BOX</span><span class="token punctuation">:</span>
+      <span class="token keyword">case</span> ItemTypes<span class="token punctuation">.</span><span class="token constant">BOX</span><span class="token operator">:</span>
         <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">BoxDragPreview</span></span> <span class="token attr-name">title</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>item<span class="token punctuation">.</span>title<span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
@@ -174,10 +174,10 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
 
 <span class="token keyword">function</span> <span class="token function">collect</span><span class="token punctuation">(</span><span class="token parameter">monitor</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    item<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    itemType<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">getItemType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    currentOffset<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">getSourceClientOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    isDragging<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">isDragging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    item<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    itemType<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">getItemType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    currentOffset<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">getSourceClientOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    isDragging<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isDragging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 

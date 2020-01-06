@@ -161,7 +161,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
 <span class="token comment">// You want to keep types in a separate file with</span>
 <span class="token comment">// the rest of your app&#x27;s constants.</span>
 <span class="token keyword">const</span> Types <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token constant">CHESSPIECE</span><span class="token punctuation">:</span> <span class="token string">&#x27;chesspiece&#x27;</span><span class="token punctuation">,</span>
+  <span class="token constant">CHESSPIECE</span><span class="token operator">:</span> <span class="token string">&#x27;chesspiece&#x27;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">/**
@@ -186,7 +186,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
     <span class="token keyword">const</span> componentRect <span class="token operator">=</span> <span class="token function">findDOMNode</span><span class="token punctuation">(</span>component<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBoundingClientRect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
     <span class="token comment">// You can check whether we&#x27;re over a nested drop target</span>
-    <span class="token keyword">const</span> isOnlyThisOne <span class="token operator">=</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">{</span> shallow<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> isOnlyThisOne <span class="token operator">=</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">{</span> shallow<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
     <span class="token comment">// You will receive hover() even for items for which canDrop() is false</span>
     <span class="token keyword">const</span> canDrop <span class="token operator">=</span> monitor<span class="token punctuation">.</span><span class="token function">canDrop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -208,7 +208,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
     <span class="token comment">// You can also do nothing and return a drop result,</span>
     <span class="token comment">// which will be available as monitor.getDropResult()</span>
     <span class="token comment">// in the drag source&#x27;s endDrag() method</span>
-    <span class="token keyword">return</span> <span class="token punctuation">{</span> moved<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> moved<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
@@ -219,12 +219,12 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
     <span class="token comment">// Call this function inside render()</span>
     <span class="token comment">// to let React DnD handle the drag events:</span>
-    connectDropTarget<span class="token punctuation">:</span> connect<span class="token punctuation">.</span><span class="token function">dropTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    connectDropTarget<span class="token operator">:</span> connect<span class="token punctuation">.</span><span class="token function">dropTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token comment">// You can ask the monitor about the current drag state:</span>
-    isOver<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    isOverCurrent<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">{</span> shallow<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    canDrop<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">canDrop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    itemType<span class="token punctuation">:</span> monitor<span class="token punctuation">.</span><span class="token function">getItemType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    isOver<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    isOverCurrent<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isOver</span><span class="token punctuation">(</span><span class="token punctuation">{</span> shallow<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    canDrop<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">canDrop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    itemType<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">getItemType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
