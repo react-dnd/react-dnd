@@ -9911,9 +9911,9 @@ hunspell-spellchecker@^1.0.2:
   integrity sha1-oQsL0voAplq2Kkxrc0zkltMYkQ4=
 
 husky@^4.0.0:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-4.0.3.tgz#8a082455f8c76a602ec00f9a6a6f9f458860f49e"
-  integrity sha512-pI4e5iC8hFkPAjOdJGdBubVdjKGhoZq0l0kkHpqGN1uf3U1Iq0wLloBm26R5OhdWYqhuBYRdRjRAclDg59+c5A==
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-4.0.6.tgz#b64206220ab940f091cb5f1c75672453eb39fc9f"
+  integrity sha512-OxsXXQXu/FYauV5GGhNpyN1yhQPQoDFUJwzHoshYc3wO//gC0PB9YNYLgBxKckfEce0FGEbzb498UecR3jNdZw==
   dependencies:
     chalk "^3.0.0"
     ci-info "^2.0.0"
