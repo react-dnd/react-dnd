@@ -22,7 +22,7 @@
     "hoc"
   ],
   "engines": {
-    "node": ">= 8.0"
+    "node": ">= 10.0"
   },
   "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
   "contributors": [
