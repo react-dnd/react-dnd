@@ -8588,9 +8588,9 @@ gatsby-plugin-sharp@^2.2.37:
     uuid "^3.3.3"
 
 gatsby-plugin-styled-components@^3.1.12:
-  version "3.1.17"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-3.1.17.tgz#d17ee15608b42b33a82b25035f2824e80c77a64c"
-  integrity sha512-RdAcFroqVSXvxcjqVlrvj6ptHq1AUZlI8Zv9iSE+wyr1ONx27wnOyS55ArChFeevC5FimQvRghEUiVgQN5gkuQ==
+  version "3.1.18"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-3.1.18.tgz#f9ae0c100aff9fb769aa224bbceea6edd36104f9"
+  integrity sha512-JPNCcc4Ubnkilh7yooDk8grelg2WkuJfmhBB66pH4ccbBEgIPStSvqTv7puUyUYgW3J6+LLsCZgsWU+Ag38g9g==
   dependencies:
     "@babel/runtime" "^7.7.6"
 
