@@ -165,7 +165,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
-      "git add"
+      "prettier"
     ]
   },
   "prettier": {
