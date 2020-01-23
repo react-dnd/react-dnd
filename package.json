@@ -95,7 +95,7 @@
     "eslint-plugin-react-hooks": "^2.3.0",
     "husky": "^4.x",
     "inquirer": "^7.0.0",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "jest-environment-jsdom": "^25.1.0",
     "lerna": "^3.19.0",
     "lint-staged": "^10.0.0",
@@ -110,7 +110,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
-    "ts-jest": "^24.1.0",
+    "ts-jest": "^25.0.0",
     "typescript": "^3.7.2"
   },
   "jest": {
