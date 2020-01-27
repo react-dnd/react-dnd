@@ -3598,9 +3598,9 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5:
     uri-js "^4.2.2"
 
 alex@^8.0.1:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/alex/-/alex-8.1.0.tgz#0f9999a0289d53c774515ed5fb25aefe6216dcd6"
-  integrity sha512-k4uSG3M7wm4y8OlZoKEEmeLnGPMla658tLUCCqW1e8kDyMyVB3qEoCwWKM6HkCuNe1JbUlEWzpycQbG4+7Onfw==
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/alex/-/alex-8.1.1.tgz#361bc91f1d8e540c4441937e0f40de6303cbf064"
+  integrity sha512-WH3BEF0fr+Pj7N8caH6Y+DInOUIB2VnRyT8UJ/39cmHivCu6raX++d0ZcYwbD/ONLTWU+VMAiQjCYaNywIZAjw==
   dependencies:
     meow "^5.0.0"
     rehype-parse "^6.0.0"
