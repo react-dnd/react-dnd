@@ -19,7 +19,7 @@ import { DndProvider } from 'react-dnd'
 export default class YourApp {
   render() {
     return (
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={Backend}>
         /* Your Drag-and-Drop Application */
       </DndProvider>
     )
