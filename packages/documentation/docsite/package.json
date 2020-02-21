@@ -11,7 +11,7 @@
     "@types/react-helmet": "^5.0.14",
     "@types/react-tabs": "^2.3.1",
     "@types/rehype-react": "^4.0.0",
-    "@types/styled-components": "^4.4.0",
+    "@types/styled-components": "^5.0.0",
     "gatsby": "^2.17.11",
     "gatsby-image": "^2.2.31",
     "gatsby-plugin-manifest": "^2.2.27",
