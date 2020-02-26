@@ -3099,9 +3099,9 @@
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
 
 "@types/styled-components@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.0.0.tgz#0ed43d0e6003358f8b1f74304de010de19cbda66"
-  integrity sha512-fnLlZKZfDCySbq0M25wh9nAXRuy2FaHCFHlRl4LkoKJXqk/bbd8FwYPctv6mVnEe6rqs3JLx1COVy3a0Nmrv+w==
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.0.1.tgz#44d210b0a0218a70df998d1a8e1f69c82d9cc68b"
+  integrity sha512-1yRYO1dAE2MGEuYKF1yQFeMdoyerIQn6ZDnFFkxZamcs3rn8RQVn98edPsTROAxbTz81tqnVN4BJ3Qs1cm/tKg==
   dependencies:
     "@types/hoist-non-react-statics" "*"
     "@types/react" "*"
