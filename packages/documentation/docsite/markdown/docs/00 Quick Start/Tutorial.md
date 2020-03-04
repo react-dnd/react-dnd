@@ -361,7 +361,7 @@ import { moveKnight } from './Game'
 
 /* ... */
 
-function renderSquare(i, knightPosition) {
+function renderSquare(i, [knightX, knightY]) {
   /* ... */
   return <div onClick={() => handleSquareClick(x, y)}>{/* ... */}</div>
 }
