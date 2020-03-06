@@ -21,11 +21,16 @@ interface DropResult {
 	name: string
 }
 
+interface DragItem {
+	name: string
+	type: string
+}
+
 const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
 	const [{ opacity }, drag] = useDrag({
 		item,
-		end(item: { name: string } | undefined, monitor: DragSourceMonitor) {
+		end(item: DragItem | undefined, monitor: DragSourceMonitor) {
 			const dropResult: DropResult = monitor.getDropResult()
 			if (item && dropResult) {
 				let alertMessage = ''
