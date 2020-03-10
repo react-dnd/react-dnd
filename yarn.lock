@@ -8970,9 +8970,9 @@ gatsby-remark-copy-linked-files@^2.1.29:
     unist-util-visit "^1.4.1"
 
 gatsby-remark-embed-snippet@^4.1.14:
-  version "4.1.22"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-embed-snippet/-/gatsby-remark-embed-snippet-4.1.22.tgz#eac784ebc3a3d79b63de20e4a8399ecca7fc9ada"
-  integrity sha512-Lz5hibNoiAz6AuPIeMOHNHqopO6LJJ9e1Nh040jf4Ad+ndf5lv9cbPjU2dvqpz5TjN5IiZhhYXUERnM0RZBEeA==
+  version "4.1.23"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-embed-snippet/-/gatsby-remark-embed-snippet-4.1.23.tgz#8886e1e83285754481a8b13112b3afda04c77758"
+  integrity sha512-w4Hevn1KWedmW1vQqWhqPD/AJhUvFbV8gnstnoe5vsY5ulGcRk7oBwpCZap/cB1zrgDcRfsf29IWKgQoBYOxQA==
   dependencies:
     "@babel/runtime" "^7.7.6"
     normalize-path "^2.1.1"
