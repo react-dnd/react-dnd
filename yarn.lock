@@ -9064,9 +9064,9 @@ gatsby-transformer-remark@^2.6.33:
     unist-util-visit "^1.4.1"
 
 gatsby-transformer-sharp@^2.3.3:
-  version "2.3.17"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.3.17.tgz#465609abbfb6e9664a3e1acc7a2bd3e8eb157000"
-  integrity sha512-cFVzZ6PzBtwWTuyqluawuJbtAAmUlMZM6+99LUgosOntKse66qK1cSHna8rz1W7i2VZ/mddY76HPs+7XX/ewTg==
+  version "2.3.18"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.3.18.tgz#fca5a444ca46d565a98d82088c31292bab83955b"
+  integrity sha512-6jMsaClslgLw4ZuaqVe/mRFIH1X9q2Xo3+sVAbnSnyoPTqv79U4vChtuVr8t6SB/T7Lc8gdA1RmCInQlxqTWzg==
   dependencies:
     "@babel/runtime" "^7.7.6"
     bluebird "^3.7.2"
