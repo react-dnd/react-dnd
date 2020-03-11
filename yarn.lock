@@ -8828,12 +8828,12 @@ gatsby-page-utils@^0.0.43:
     micromatch "^3.1.10"
 
 gatsby-plugin-manifest@^2.2.27:
-  version "2.2.45"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.2.45.tgz#30c3b427d61292e80f1a2b533acfbe383154ea39"
-  integrity sha512-K9A0hw3xs+yd9iSg8ztObtrKTKybStnv8aydgby+CREgVNIUsziL89Wq5MgKvPegjt+9snTBF4ar5tE9EBaHhw==
+  version "2.2.46"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.2.46.tgz#09458f6f25820aba931c1f29162fca2fbb6c58c5"
+  integrity sha512-B6NBxjG8zgUBr4Nt80NurGEz7bOT9QZgFyPQjhVamBkqVvoEXanKuppt/NcmdlUp6hLg0n8URbzwLU2qM/xvDQ==
   dependencies:
     "@babel/runtime" "^7.7.6"
-    gatsby-core-utils "^1.0.31"
+    gatsby-core-utils "^1.0.32"
     semver "^5.7.1"
     sharp "^0.23.4"
 
