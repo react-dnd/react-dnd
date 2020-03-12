@@ -8934,15 +8934,15 @@ gatsby-plugin-react-helmet@^3.1.14:
     "@babel/runtime" "^7.7.6"
 
 gatsby-plugin-sharp@^2.2.37:
-  version "2.4.10"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.4.10.tgz#6cf816c8afce9bc9619738ffda78f9c3ebd1bcb0"
-  integrity sha512-HAvJEbbYHWFho72ikcAH8l7Wzrr4K+7yuIZOltFbYNfhngdM6cYx7sSyFzocnSYx7PXpF7rSp7NSOx6WS4gbYw==
+  version "2.4.11"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.4.11.tgz#96386b89fb05f875f2503f11f77674b5d2aaa4e7"
+  integrity sha512-nozPmlLLitkNECyjU5vWiHpGErw8x1xbY51izad4pEvbMqPpreHLOaHNxOo+SUATuJPLl8k0avQDOxUfy9w3lw==
   dependencies:
     "@babel/runtime" "^7.7.6"
     async "^2.6.3"
     bluebird "^3.7.2"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^1.0.32"
+    gatsby-core-utils "^1.0.33"
     got "^8.3.2"
     imagemin "^6.1.0"
     imagemin-mozjpeg "^8.0.0"
