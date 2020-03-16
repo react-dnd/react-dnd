@@ -8967,9 +8967,9 @@ gatsby-plugin-styled-components@^3.1.12:
     "@babel/runtime" "^7.7.6"
 
 gatsby-plugin-typescript@^2.1.16:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-2.2.2.tgz#37ab70aaf96b28e7c1cc5852fae26df55ea8a75a"
-  integrity sha512-U4fYeDIgMF6jHf0UajxeUubtQblQZIHZrX5ZdD39nJsDTuEZ4aHrrATZ7+cqsRRRfH3aNcqMOUPRuBZ9/YjSUQ==
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-2.2.3.tgz#1025e40914c18454c0611cc30d7dbf1bc86c97ea"
+  integrity sha512-qxy0e6ZH46xW0abJqPnkyKkpSGbfaEDsMV1+RJP/EjjuWYz0WagdKoM86dEeTEMQuZ/ELVH1HPboYwMOcUB6oQ==
   dependencies:
     "@babel/core" "^7.7.5"
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.7.4"
@@ -8977,7 +8977,7 @@ gatsby-plugin-typescript@^2.1.16:
     "@babel/plugin-proposal-optional-chaining" "^7.7.5"
     "@babel/preset-typescript" "^7.7.4"
     "@babel/runtime" "^7.7.6"
-    babel-plugin-remove-graphql-queries "^2.7.24"
+    babel-plugin-remove-graphql-queries "^2.7.25"
 
 gatsby-plugin-typography@^2.3.16:
   version "2.3.24"
