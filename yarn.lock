@@ -9994,17 +9994,17 @@ hast-to-hyperscript@^5.0.0:
     unist-util-is "^2.0.0"
     web-namespaces "^1.1.2"
 
-hast-to-hyperscript@^7.0.0:
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/hast-to-hyperscript/-/hast-to-hyperscript-7.0.4.tgz#7c4c037d9a8ea19b0a3fdb676a26448ad922353d"
-  integrity sha512-vmwriQ2H0RPS9ho4Kkbf3n3lY436QKLq6VaGA1pzBh36hBi3tm1DO9bR+kaJIbpT10UqaANDkMjxvjVfr+cnOA==
+hast-to-hyperscript@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/hast-to-hyperscript/-/hast-to-hyperscript-8.0.0.tgz#ad1182144366ed8d4f65f1a771c7f1da6f812648"
+  integrity sha512-WgSlKtcjhDeCa6USBnoJwjOmRo81/Ib/MPSASOjTH99XLoPO+R5/1LrCjHJnftM8KTbnf6OV9czQj25mqBXYHw==
   dependencies:
     comma-separated-tokens "^1.0.0"
-    property-information "^5.3.0"
+    property-information "^5.0.0"
     space-separated-tokens "^1.0.0"
-    style-to-object "^0.2.1"
-    unist-util-is "^3.0.0"
-    web-namespaces "^1.1.2"
+    style-to-object "^0.3.0"
+    unist-util-is "^4.0.0"
+    web-namespaces "^1.0.0"
 
 hast-util-embedded@^1.0.0:
   version "1.0.4"
@@ -16319,7 +16319,7 @@ property-information@^4.0.0:
   dependencies:
     xtend "^4.0.1"
 
-property-information@^5.0.0, property-information@^5.3.0:
+property-information@^5.0.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/property-information/-/property-information-5.3.0.tgz#bc87ac82dc4e72a31bb62040544b1bf9653da039"
   integrity sha512-IslotQn1hBCZDY7SaJ3zmCjVea219VTwmOk6Pu3z9haU9m4+T8GwaDubur+6NMHEU+Fjs/6/p66z6QULPkcL1w==
@@ -17220,13 +17220,13 @@ rehype-parse@^6.0.0:
     parse5 "^5.0.0"
     xtend "^4.0.0"
 
-rehype-react@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/rehype-react/-/rehype-react-4.0.1.tgz#fcb79e99b49ee056cfc266c4992ecfae939e8efa"
-  integrity sha512-xg6PZHqWJLTBQM6ECvzWEZhVqRpbxrx8eAPaWQAoRK7v9lkAuBelBym3AVUvGRzlQsZky9MdKrDzyYTTm1cejQ==
+rehype-react@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-react/-/rehype-react-5.0.0.tgz#7c08017b125d86839a13577851512cb4e23a2be4"
+  integrity sha512-siBd7cyMAgJv8yoLOm5Dh2izha2aoKMw01SKN0DTjeEO1r5mSQUjb6LZnGxWs/ip2Lfaso+CjZUXuPlJqC3S4g==
   dependencies:
     "@mapbox/hast-util-table-cell-style" "^0.1.3"
-    hast-to-hyperscript "^7.0.0"
+    hast-to-hyperscript "^8.0.0"
 
 rehype-retext@^2.0.1:
   version "2.0.3"
@@ -19046,6 +19046,13 @@ style-to-object@^0.2.1:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/style-to-object/-/style-to-object-0.2.3.tgz#afcf42bc03846b1e311880c55632a26ad2780bcb"
   integrity sha512-1d/k4EY2N7jVLOqf2j04dTc37TPOv/hHxZmvpg8Pdh8UYydxeu/C1W1U4vD8alzf5V2Gt7rLsmkr4dxAlDm9ng==
+  dependencies:
+    inline-style-parser "0.1.1"
+
+style-to-object@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/style-to-object/-/style-to-object-0.3.0.tgz#b1b790d205991cc783801967214979ee19a76e46"
+  integrity sha512-CzFnRRXhzWIdItT3OmF8SQfWyahHhjq3HwcMNCNLn+N7klOOqPjMeG/4JSu77D7ypZdGvSzvkrbyeTMizz2VrA==
   dependencies:
     inline-style-parser "0.1.1"
 
