@@ -48,7 +48,7 @@ const Container = () => {
           <Dustbin
             accepts={accepts}
             lastDroppedItem={lastDroppedItem}
-            onDrop={item => handleDrop(index, item)}
+            onDrop={(item) => handleDrop(index, item)}
             key={index}
           />
         ))}

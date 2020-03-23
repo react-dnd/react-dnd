@@ -36,7 +36,7 @@ class Container extends React.PureComponent<ContainerProps, ContainerState> {
 
     return connectDropTarget(
       <div style={styles}>
-        {Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
+        {Object.keys(boxes).map((key) => this.renderBox(boxes[key], key))}
       </div>,
     )
   }

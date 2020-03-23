@@ -24,7 +24,7 @@ const BoxWithHandleRaw = () => {
     item: {
       type: ItemTypes.BOX,
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })

@@ -11,7 +11,7 @@ const style = {
 const TargetBox = () => {
   const [{ isActive }, drop] = useDrop({
     accept: ItemTypes.BOX,
-    collect: monitor => ({
+    collect: (monitor) => ({
       isActive: monitor.canDrop() && monitor.isOver(),
     }),
   })

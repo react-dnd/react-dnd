@@ -65,7 +65,7 @@ const Container: React.FC<ContainerProps> = ({ snapToGrid }) => {
 
   return (
     <div ref={drop} style={styles}>
-      {Object.keys(boxes).map(key => renderBox(boxes[key], key))}
+      {Object.keys(boxes).map((key) => renderBox(boxes[key], key))}
     </div>
   )
 }

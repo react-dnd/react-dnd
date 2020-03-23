@@ -33,7 +33,7 @@ function getItemStyles(props) {
     WebkitTransform: transform,
   }
 }
-const CustomDragLayer = props => {
+const CustomDragLayer = (props) => {
   const { item, itemType, isDragging } = props
   function renderItem() {
     switch (itemType) {
@@ -52,7 +52,7 @@ const CustomDragLayer = props => {
     </div>
   )
 }
-export default DragLayer(monitor => ({
+export default DragLayer((monitor) => ({
   item: monitor.getItem(),
   itemType: monitor.getItemType(),
   initialOffset: monitor.getInitialSourceClientOffset(),

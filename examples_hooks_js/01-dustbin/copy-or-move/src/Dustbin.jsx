@@ -29,7 +29,7 @@ const Dustbin = ({ allowedDropEffect }) => {
       name: `${allowedDropEffect} Dustbin`,
       allowedDropEffect,
     }),
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),

@@ -16,9 +16,9 @@ const Box = memo(({ name, isDropped, isDragging, connectDragSource }) => {
   )
 })
 export default DragSource(
-  props => props.type,
+  (props) => props.type,
   {
-    beginDrag: props => ({ name: props.name }),
+    beginDrag: (props) => ({ name: props.name }),
     isDragging(props, monitor) {
       const item = monitor.getItem()
       return props.name === item.name

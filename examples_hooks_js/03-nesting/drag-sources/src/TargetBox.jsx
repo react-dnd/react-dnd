@@ -15,7 +15,7 @@ const TargetBox = ({ onDrop, lastDroppedColor }) => {
       onDrop(item.type)
       return undefined
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
       draggingColor: monitor.getItemType(),
@@ -41,9 +41,9 @@ const TargetBox = ({ onDrop, lastDroppedColor }) => {
     </div>
   )
 }
-const StatefulTargetBox = props => {
+const StatefulTargetBox = (props) => {
   const [lastDroppedColor, setLastDroppedColor] = useState(null)
-  const handleDrop = useCallback(color => setLastDroppedColor(color), [])
+  const handleDrop = useCallback((color) => setLastDroppedColor(color), [])
   return (
     <TargetBox
       {...props}

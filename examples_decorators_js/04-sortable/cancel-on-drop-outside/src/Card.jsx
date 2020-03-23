@@ -32,14 +32,14 @@ export default DropTarget(
       }
     },
   },
-  connect => ({
+  (connect) => ({
     connectDropTarget: connect.dropTarget(),
   }),
 )(
   DragSource(
     ItemTypes.CARD,
     {
-      beginDrag: props => ({
+      beginDrag: (props) => ({
         id: props.id,
         originalIndex: props.findCard(props.id).index,
       }),

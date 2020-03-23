@@ -12,7 +12,7 @@ const containerStyle = {
 const ChessboardTutorialApp = () => {
   const [knightPos, setKnightPos] = useState([1, 7])
   // the observe function will return an unsubscribe callback
-  useEffect(() => observe(newPos => setKnightPos(newPos)))
+  useEffect(() => observe((newPos) => setKnightPos(newPos)))
   return (
     <div>
       <div style={containerStyle}>

@@ -30,8 +30,8 @@ const BoardSquare = ({
 export default DropTarget(
   ItemTypes.KNIGHT,
   {
-    canDrop: props => canMoveKnight(props.x, props.y),
-    drop: props => moveKnight(props.x, props.y),
+    canDrop: (props) => canMoveKnight(props.x, props.y),
+    drop: (props) => moveKnight(props.x, props.y),
   },
   (connect, monitor) => {
     return {

@@ -31,7 +31,7 @@ const Child = ({ connect, children }) => {
       <button onClick={toggle}>{open ? 'Hide' : 'Show'}</button>
       {open ? (
         <div
-          ref={node => connect(node)}
+          ref={(node) => connect(node)}
           style={{
             padding: 32,
             marginTop: 16,

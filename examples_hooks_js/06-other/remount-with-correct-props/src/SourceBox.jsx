@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
-const getStyle = isDragging => ({
+const getStyle = (isDragging) => ({
   display: 'inline-block',
   padding: '0.5rem 1rem',
   cursor: 'pointer',
@@ -12,8 +12,8 @@ const getStyle = isDragging => ({
 export const SourceBox = ({ id, onBeginDrag, onEndDrag }) => {
   const [{ isDragging }, drag] = useDrag({
     item: { type: ItemTypes.BOX, id },
-    isDragging: monitor => monitor.getItem().id === id,
-    collect: monitor => ({ isDragging: monitor.isDragging() }),
+    isDragging: (monitor) => monitor.getItem().id === id,
+    collect: (monitor) => ({ isDragging: monitor.isDragging() }),
     begin: onBeginDrag,
     end: onEndDrag,
   })

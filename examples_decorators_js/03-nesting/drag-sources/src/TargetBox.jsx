@@ -49,9 +49,9 @@ const TargetBox = DropTarget(
     draggingColor: monitor.getItemType(),
   }),
 )(TargetBoxRaw)
-const StatefulTargetBox = props => {
+const StatefulTargetBox = (props) => {
   const [lastDroppedColor, setLastDroppedColor] = useState(null)
-  const handleDrop = useCallback(color => setLastDroppedColor(color), [])
+  const handleDrop = useCallback((color) => setLastDroppedColor(color), [])
   return (
     <TargetBox
       {...props}

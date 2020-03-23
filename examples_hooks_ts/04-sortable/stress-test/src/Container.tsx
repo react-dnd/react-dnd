@@ -49,7 +49,7 @@ export default class Container extends React.Component<{}, ContainerState> {
     return (
       <>
         <div style={style}>
-          {cardsByIndex.map(card => (
+          {cardsByIndex.map((card) => (
             <Card
               key={card.id}
               id={card.id}

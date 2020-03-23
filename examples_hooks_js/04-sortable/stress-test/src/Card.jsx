@@ -12,7 +12,7 @@ const Card = memo(({ id, text, moveCard }) => {
   const ref = useRef(null)
   const [{ isDragging }, connectDrag] = useDrag({
     item: { id, type: ItemTypes.CARD },
-    collect: monitor => {
+    collect: (monitor) => {
       const result = {
         isDragging: monitor.isDragging(),
       }

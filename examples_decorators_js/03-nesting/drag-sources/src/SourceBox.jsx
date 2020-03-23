@@ -46,9 +46,9 @@ const SourceBoxRaw = ({
   )
 }
 const SourceBox = DragSource(
-  props => props.color + '',
+  (props) => props.color + '',
   {
-    canDrag: props => !props.forbidDrag,
+    canDrag: (props) => !props.forbidDrag,
     beginDrag: () => ({}),
   },
   (connect, monitor) => ({
@@ -56,7 +56,7 @@ const SourceBox = DragSource(
     isDragging: monitor.isDragging(),
   }),
 )(SourceBoxRaw)
-const StatefulSourceBox = props => {
+const StatefulSourceBox = (props) => {
   const [forbidDrag, setForbidDrag] = useState(false)
   const handleToggleForbidDrag = useCallback(() => {
     setForbidDrag(!forbidDrag)

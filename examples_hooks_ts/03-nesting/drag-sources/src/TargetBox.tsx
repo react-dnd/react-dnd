@@ -23,7 +23,7 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
       onDrop(item.type)
       return undefined
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
       draggingColor: monitor.getItemType() as string,
@@ -55,7 +55,7 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 export interface StatefulTargetBoxState {
   lastDroppedColor: string | null
 }
-const StatefulTargetBox: React.FC = props => {
+const StatefulTargetBox: React.FC = (props) => {
   const [lastDroppedColor, setLastDroppedColor] = useState<string | null>(null)
   const handleDrop = useCallback(
     (color: string) => setLastDroppedColor(color),

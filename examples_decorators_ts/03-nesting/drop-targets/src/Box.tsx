@@ -23,7 +23,7 @@ export default DragSource(
   {
     beginDrag: () => ({}),
   },
-  connect => ({
+  (connect) => ({
     connectDragSource: connect.dragSource(),
   }),
 )(Box)

@@ -25,10 +25,7 @@ describe('Integration: Dustbin Single Target', () => {
     const backend = getBackendFromInstance<TestBackend>(root.instance() as any)
 
     // Find the drag source ID and use it to simulate the dragging operation
-    const box: DndComponent<BoxProps> = root
-      .find(Box)
-      .at(0)
-      .instance() as any
+    const box: DndComponent<BoxProps> = root.find(Box).at(0).instance() as any
     const dustbin: DndComponent<DustbinProps> = root
       .find(Dustbin)
       .instance() as any

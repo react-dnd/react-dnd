@@ -46,14 +46,14 @@ export interface CustomDragLayerProps {
   snapToGrid: boolean
 }
 
-const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
+const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   const {
     itemType,
     isDragging,
     item,
     initialOffset,
     currentOffset,
-  } = useDragLayer(monitor => ({
+  } = useDragLayer((monitor) => ({
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
     initialOffset: monitor.getInitialSourceClientOffset(),

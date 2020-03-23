@@ -11,7 +11,7 @@ const SourceBox = ({ color, children }) => {
   const [{ isDragging }, drag] = useDrag({
     item: { type: `${color}` },
     canDrag: !forbidDrag,
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })

@@ -49,8 +49,8 @@ const Container = () => {
       }),
     )
   }
-  const findCard = id => {
-    const card = cards.filter(c => `${c.id}` === id)[0]
+  const findCard = (id) => {
+    const card = cards.filter((c) => `${c.id}` === id)[0]
     return {
       card,
       index: cards.indexOf(card),
@@ -60,7 +60,7 @@ const Container = () => {
   return (
     <>
       <div ref={drop} style={style}>
-        {cards.map(card => (
+        {cards.map((card) => (
           <Card
             key={card.id}
             id={`${card.id}`}

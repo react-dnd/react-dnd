@@ -16,7 +16,7 @@ const Box = ({ name, type, isDropped }) => {
       const item = monitor.getItem()
       return name === item.name
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })

@@ -15,7 +15,7 @@ const style = {
 const BoxWithImage: React.FC = () => {
   const [{ opacity }, drag, preview] = useDrag({
     item: { type: ItemTypes.BOX },
-    collect: monitor => ({
+    collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.4 : 1,
     }),
   })

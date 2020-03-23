@@ -1,13 +1,13 @@
 let knightPosition = [1, 7]
 let observers = []
 function emitChange() {
-  observers.forEach(o => o && o(knightPosition))
+  observers.forEach((o) => o && o(knightPosition))
 }
 export function observe(o) {
   observers.push(o)
   emitChange()
   return () => {
-    observers = observers.filter(t => t !== o)
+    observers = observers.filter((t) => t !== o)
   }
 }
 export function canMoveKnight(toX, toY) {

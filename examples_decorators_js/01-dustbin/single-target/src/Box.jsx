@@ -21,7 +21,7 @@ const Box = ({ name, isDragging, connectDragSource }) => {
 export default DragSource(
   ItemTypes.BOX,
   {
-    beginDrag: props => ({ name: props.name }),
+    beginDrag: (props) => ({ name: props.name }),
     endDrag(props, monitor) {
       const item = monitor.getItem()
       const dropResult = monitor.getDropResult()

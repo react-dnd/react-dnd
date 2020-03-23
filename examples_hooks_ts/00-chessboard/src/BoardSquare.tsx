@@ -20,7 +20,7 @@ export const BoardSquare: React.FC<BoardSquareProps> = ({
     accept: ItemTypes.KNIGHT,
     canDrop: () => canMoveKnight(x, y),
     drop: () => moveKnight(x, y),
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: !!monitor.isOver(),
       canDrop: !!monitor.canDrop(),
     }),

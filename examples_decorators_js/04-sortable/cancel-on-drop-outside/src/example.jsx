@@ -53,8 +53,8 @@ const Container = ({ connectDropTarget }) => {
     [cards],
   )
   const findCard = useCallback(
-    id => {
-      const card = cards.filter(c => `${c.id}` === id)[0]
+    (id) => {
+      const card = cards.filter((c) => `${c.id}` === id)[0]
       return {
         card,
         index: cards.indexOf(card),
@@ -65,7 +65,7 @@ const Container = ({ connectDropTarget }) => {
   connectDropTarget(ref)
   return (
     <div ref={ref} style={style}>
-      {cards.map(card => (
+      {cards.map((card) => (
         <Card
           key={card.id}
           id={`${card.id}`}
@@ -77,6 +77,6 @@ const Container = ({ connectDropTarget }) => {
     </div>
   )
 }
-export default DropTarget(ItemTypes.CARD, {}, connect => ({
+export default DropTarget(ItemTypes.CARD, {}, (connect) => ({
   connectDropTarget: connect.dropTarget(),
 }))(Container)

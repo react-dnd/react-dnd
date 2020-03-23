@@ -3,7 +3,7 @@ import { useDrag } from 'react-dnd'
 const Parent = () => {
   const [{ isDragging }, drag] = useDrag({
     item: { type: 'KNIGHT' },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })

@@ -19,7 +19,7 @@ const Dustbin: React.FC = () => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.BOX,
     drop: () => ({ name: 'Dustbin' }),
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),

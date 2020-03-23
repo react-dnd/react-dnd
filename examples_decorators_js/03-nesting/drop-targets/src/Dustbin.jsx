@@ -23,7 +23,7 @@ const Dustbin = React.forwardRef(
     useImperativeHandle(
       ref,
       () => ({
-        onDrop: onChild => {
+        onDrop: (onChild) => {
           setHasDroppedOnChild(onChild)
           setHasDropped(true)
         },

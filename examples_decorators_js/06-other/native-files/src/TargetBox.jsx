@@ -14,7 +14,7 @@ const TargetBox = ({ canDrop, isOver, connectDropTarget }) => {
   )
 }
 export default DropTarget(
-  props => props.accepts,
+  (props) => props.accepts,
   {
     drop(props, monitor) {
       if (props.onDrop) {

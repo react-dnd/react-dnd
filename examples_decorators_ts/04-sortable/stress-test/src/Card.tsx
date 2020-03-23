@@ -44,7 +44,7 @@ export default DropTarget(
       }
     },
   },
-  connect => ({
+  (connect) => ({
     connectDropTarget: connect.dropTarget(),
   }),
 )(

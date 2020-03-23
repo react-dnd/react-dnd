@@ -3,7 +3,7 @@ let observers: PositionObserver[] = []
 export type PositionObserver = ((position: [number, number]) => void) | null
 
 function emitChange() {
-  observers.forEach(o => o && o(knightPosition))
+  observers.forEach((o) => o && o(knightPosition))
 }
 
 export function observe(o: PositionObserver) {
@@ -11,7 +11,7 @@ export function observe(o: PositionObserver) {
   emitChange()
 
   return () => {
-    observers = observers.filter(t => t !== o)
+    observers = observers.filter((t) => t !== o)
   }
 }
 

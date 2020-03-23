@@ -24,7 +24,7 @@ class Container extends React.Component {
     const { boxes } = this.state
     return connectDropTarget(
       <div style={styles}>
-        {Object.keys(boxes).map(key => {
+        {Object.keys(boxes).map((key) => {
           const { left, top, title } = boxes[key]
           return (
             <Box
@@ -67,7 +67,7 @@ export default DropTarget(
       component.moveBox(item.id, left, top)
     },
   },
-  connect => ({
+  (connect) => ({
     connectDropTarget: connect.dropTarget(),
   }),
 )(Container)

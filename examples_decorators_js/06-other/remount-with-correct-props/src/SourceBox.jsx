@@ -1,7 +1,7 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 import ItemTypes from './ItemTypes'
-const getStyle = isDragging => ({
+const getStyle = (isDragging) => ({
   display: 'inline-block',
   padding: '0.5rem 1rem',
   cursor: 'pointer',
@@ -15,11 +15,11 @@ const SourceBox = ({ isDragging, connectDragSource }) => {
 export default DragSource(
   ItemTypes.BOX,
   {
-    beginDrag: props => {
+    beginDrag: (props) => {
       props.onBeginDrag()
       return { id: props.id }
     },
-    endDrag: props => {
+    endDrag: (props) => {
       props.onEndDrag()
     },
     isDragging: (props, monitor) => monitor.getItem().id === props.id,

@@ -25,7 +25,7 @@ class Container extends React.PureComponent {
     const { boxes } = this.state
     return connectDropTarget(
       <div style={styles}>
-        {Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
+        {Object.keys(boxes).map((key) => this.renderBox(boxes[key], key))}
       </div>,
     )
   }
@@ -61,7 +61,7 @@ export default DropTarget(
       component.moveBox(item.id, left, top)
     },
   },
-  connect => ({
+  (connect) => ({
     connectDropTarget: connect.dropTarget(),
   }),
 )(Container)

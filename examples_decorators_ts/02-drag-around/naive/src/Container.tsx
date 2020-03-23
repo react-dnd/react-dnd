@@ -35,7 +35,7 @@ class Container extends React.Component<ContainerProps, ContainerState> {
 
     return connectDropTarget(
       <div style={styles}>
-        {Object.keys(boxes).map(key => {
+        {Object.keys(boxes).map((key) => {
           const { left, top, title } = boxes[key]
           return (
             <Box

@@ -19,7 +19,7 @@ const Box = ({ name }) => {
         alert(`You dropped ${item.name} into ${dropResult.name}!`)
       }
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })

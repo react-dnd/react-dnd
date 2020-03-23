@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 function list(files) {
-  const label = file =>
+  const label = (file) =>
     `'${file.name}' of size '${file.size}' and type '${file.type}'`
-  return files.map(file => <li key={file.name}>{label(file)}</li>)
+  return files.map((file) => <li key={file.name}>{label(file)}</li>)
 }
 const FileList = ({ files }) => {
   if (files.length === 0) {

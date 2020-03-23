@@ -12,7 +12,7 @@ const style = {
 const Box = ({ name, type, isDropped }) => {
   const [{ opacity }, drag] = useDrag({
     item: { name, type },
-    collect: monitor => ({
+    collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.4 : 1,
     }),
   })

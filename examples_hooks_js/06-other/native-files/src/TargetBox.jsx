@@ -8,7 +8,7 @@ const style = {
   padding: '2rem',
   textAlign: 'center',
 }
-const TargetBox = props => {
+const TargetBox = (props) => {
   const { onDrop } = props
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: [NativeTypes.FILE],
@@ -17,7 +17,7 @@ const TargetBox = props => {
         onDrop(props, monitor)
       }
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),

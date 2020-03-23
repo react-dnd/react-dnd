@@ -41,7 +41,7 @@ const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
       setHasDropped(true)
       setHasDroppedOnChild(didDrop)
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver(),
       isOverCurrent: monitor.isOver({ shallow: true }),
     }),

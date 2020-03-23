@@ -78,7 +78,7 @@ const Container: React.FC = () => {
           <Dustbin
             accept={accepts}
             lastDroppedItem={lastDroppedItem}
-            onDrop={item => handleDrop(index, item)}
+            onDrop={(item) => handleDrop(index, item)}
             key={index}
           />
         ))}

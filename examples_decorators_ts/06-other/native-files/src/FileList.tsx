@@ -3,7 +3,7 @@ import React from 'react'
 function list(files: any[]) {
   const label = (file: { size: string; name: string; type: string }) =>
     `'${file.name}' of size '${file.size}' and type '${file.type}'`
-  return files.map(file => <li key={file.name}>{label(file)}</li>)
+  return files.map((file) => <li key={file.name}>{label(file)}</li>)
 }
 
 export interface FileListProps {

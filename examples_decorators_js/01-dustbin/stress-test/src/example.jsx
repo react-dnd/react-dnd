@@ -28,7 +28,7 @@ const Container = () => {
     }, 1000)
     return () => clearInterval(interval)
   })
-  const isDropped = boxName => droppedBoxNames.indexOf(boxName) > -1
+  const isDropped = (boxName) => droppedBoxNames.indexOf(boxName) > -1
   const handleDrop = useCallback(
     (index, item) => {
       const { name } = item
@@ -61,7 +61,7 @@ const Container = () => {
           <Dustbin
             accepts={accepts}
             lastDroppedItem={lastDroppedItem}
-            onDrop={item => handleDrop(index, item)}
+            onDrop={(item) => handleDrop(index, item)}
             key={index}
           />
         ))}

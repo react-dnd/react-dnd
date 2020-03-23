@@ -14,7 +14,7 @@ export interface TargetBoxProps {
   onDrop: (props: TargetBoxProps, monitor: DropTargetMonitor) => void
 }
 
-const TargetBox: React.FC<TargetBoxProps> = props => {
+const TargetBox: React.FC<TargetBoxProps> = (props) => {
   const { onDrop } = props
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: [NativeTypes.FILE],
@@ -23,7 +23,7 @@ const TargetBox: React.FC<TargetBoxProps> = props => {
         onDrop(props, monitor)
       }
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),

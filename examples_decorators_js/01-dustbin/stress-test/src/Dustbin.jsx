@@ -35,7 +35,7 @@ const Dustbin = memo(
   },
 )
 export default DropTarget(
-  props => props.accepts,
+  (props) => props.accepts,
   {
     drop(props, monitor) {
       props.onDrop(monitor.getItem())

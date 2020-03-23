@@ -32,14 +32,14 @@ function getItemStyles(initialOffset, currentOffset, isSnapToGrid) {
     WebkitTransform: transform,
   }
 }
-const CustomDragLayer = props => {
+const CustomDragLayer = (props) => {
   const {
     itemType,
     isDragging,
     item,
     initialOffset,
     currentOffset,
-  } = useDragLayer(monitor => ({
+  } = useDragLayer((monitor) => ({
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
     initialOffset: monitor.getInitialSourceClientOffset(),

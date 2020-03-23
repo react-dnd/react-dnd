@@ -11,7 +11,7 @@ const style = {
 const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
   const [{ isDragging }, drag] = useDrag({
     item: { id, left, top, type: ItemTypes.BOX },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })

@@ -71,14 +71,14 @@ export default DropTarget(
       monitor.getItem().index = hoverIndex
     },
   },
-  connect => ({
+  (connect) => ({
     connectDropTarget: connect.dropTarget(),
   }),
 )(
   DragSource(
     ItemTypes.CARD,
     {
-      beginDrag: props => ({
+      beginDrag: (props) => ({
         id: props.id,
         index: props.index,
       }),

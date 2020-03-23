@@ -55,7 +55,7 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 
   return (
     <div ref={drop} style={styles}>
-      {Object.keys(boxes).map(key => {
+      {Object.keys(boxes).map((key) => {
         const { left, top, title } = boxes[key]
         return (
           <Box

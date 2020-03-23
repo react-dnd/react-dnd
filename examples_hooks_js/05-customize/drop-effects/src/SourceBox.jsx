@@ -15,7 +15,7 @@ const SourceBox = ({ showCopyIcon }) => {
     options: {
       dropEffect: showCopyIcon ? 'copy' : 'move',
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.4 : 1,
     }),
   })
