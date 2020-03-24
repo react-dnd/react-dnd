@@ -9085,14 +9085,14 @@ gatsby-remark-embed-snippet@^4.1.14:
     unist-util-map "^1.0.5"
 
 gatsby-remark-images@^3.1.30:
-  version "3.1.50"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.1.50.tgz#eeaba2407346b7579ab6faa63d9ecfc1a4798ea1"
-  integrity sha512-lY3hTNB6KUGlmKUKoc2D3U+9FJrlPjwqvKVDXbGGj71xKkXtBt4ns1AqmdTiX+v8m2OpgzEcwlAxA/4wHF+dTg==
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.2.1.tgz#0f767fda76c85cb0ddca2f7ff1b82ca5b4fb716a"
+  integrity sha512-3zzLRjfTiXG4u8kFK17tZYpu3FNIirfdaOt7ZtNyfaowLcB+Ok67KCweZlHlvr/+Zvj+gvXAHWycMnMQqlK0iw==
   dependencies:
     "@babel/runtime" "^7.8.7"
     chalk "^2.4.2"
     cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^1.0.34"
+    gatsby-core-utils "^1.1.1"
     is-relative-url "^3.0.0"
     lodash "^4.17.15"
     mdast-util-definitions "^1.2.5"
