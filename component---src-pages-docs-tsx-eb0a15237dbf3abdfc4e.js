@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{HPWl:function(e,n,t){"use strict";t.r(n);var a=t("q1tI"),i=t("9Dj+"),d=t("Wbzz");n.default=()=>("undefined"!=typeof window&&Object(d.navigate)("/about"),a.createElement(i.a,{hideSidebar:!0},null))}}]);
+//# sourceMappingURL=component---src-pages-docs-tsx-eb0a15237dbf3abdfc4e.js.map
