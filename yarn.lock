@@ -8833,10 +8833,10 @@ functions-have-names@^1.2.0:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.0.tgz#83da7583e4ea0c9ac5ff530f73394b033e0bf77d"
   integrity sha512-zKXyzksTeaCSw5wIX79iCA40YAa6CJMJgNg9wdkU/ERBrIdPSimPICYiLp65lRbSBqtiHql/HZfS2DyI/AH6tQ==
 
-gatsby-cli@^2.11.3:
-  version "2.11.3"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.11.3.tgz#c445a1791f9920ff4ebbb9349a9313a24e459e9f"
-  integrity sha512-ek1L/CVB2ak+tbRgPUriotf2MhYVnZIQUogldD5PxPqLizN7expOTjoDcnV5DHG1zsmD19/TfXBj1hp6+DuOpQ==
+gatsby-cli@^2.11.4:
+  version "2.11.4"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.11.4.tgz#2ce22a0eceff16d283eae5639522bf6596c97192"
+  integrity sha512-+Rrec8glPGqd1nTgkcCrelsh7hfWm/TSjniS8AAypGwmI704UfxfdrwM6LrckpBuwwFnGshS/Y0twjZd+oU/kg==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/runtime" "^7.8.7"
@@ -8854,7 +8854,7 @@ gatsby-cli@^2.11.3:
     fs-exists-cached "^1.0.0"
     fs-extra "^8.1.0"
     gatsby-core-utils "^1.1.1"
-    gatsby-telemetry "^1.2.2"
+    gatsby-telemetry "^1.2.3"
     hosted-git-info "^3.0.4"
     is-valid-path "^0.1.1"
     lodash "^4.17.15"
@@ -9115,10 +9115,10 @@ gatsby-source-filesystem@^2.1.36:
     valid-url "^1.0.9"
     xstate "^4.8.0"
 
-gatsby-telemetry@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.2.2.tgz#12d7e03373f67e7bd69dedbeda4239f3ff601183"
-  integrity sha512-I1RkcbLIR7jg+SRu71FT5c7eEqDScmJ8/sZ/mfYVwARo6Kq6obB0VzlYHVYd+KjdeiuQb6YIHhlxUn37eGq7Vw==
+gatsby-telemetry@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.2.3.tgz#0b38068bbc85a597afb7ee407fb0240997cec6ef"
+  integrity sha512-butEEIfuGAWZ9cVISrS6XVXMFPweFTDNO2Z5jj+mA1GkHlriahF4BtbVX3b4miQbQW16g2TfzNw/ztwIUfy0RQ==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/runtime" "^7.8.7"
@@ -9179,9 +9179,9 @@ gatsby-transformer-sharp@^2.3.3:
     sharp "^0.25.1"
 
 gatsby@^2.17.11:
-  version "2.20.9"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.20.9.tgz#a32a0e74fb518b792b8fb348bb9a8ea32c4658d7"
-  integrity sha512-qvLBT3SvMpFMaEIFMm9q8YGKyBD6/T/xbQN0Ong0I9ecnqCUY3y9riPnhTsqHCcs1jVCRcUxgavf5BjRhTLfvg==
+  version "2.20.10"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.20.10.tgz#29ed10965a424cabc621430020f78fda79700fbb"
+  integrity sha512-q4AJENlZSa8DT1GSyVHVZ7mt79XR1CS/tXVyZyCD3XqPvpYYgP3NBymyeH9yun81vEe/b4TMjqcfxdVmSO3DCg==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/core" "^7.8.7"
@@ -9244,13 +9244,13 @@ gatsby@^2.17.11:
     flat "^4.1.0"
     fs-exists-cached "1.0.0"
     fs-extra "^8.1.0"
-    gatsby-cli "^2.11.3"
+    gatsby-cli "^2.11.4"
     gatsby-core-utils "^1.1.1"
     gatsby-graphiql-explorer "^0.3.1"
     gatsby-link "^2.3.1"
     gatsby-plugin-page-creator "^2.2.1"
     gatsby-react-router-scroll "^2.2.1"
-    gatsby-telemetry "^1.2.2"
+    gatsby-telemetry "^1.2.3"
     glob "^7.1.6"
     got "8.3.2"
     graphql "^14.6.0"
