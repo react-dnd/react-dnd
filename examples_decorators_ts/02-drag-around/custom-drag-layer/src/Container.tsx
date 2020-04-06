@@ -69,10 +69,12 @@ export default DropTarget(
       if (!component) {
         return
       }
-      const delta = monitor.getDifferenceFromInitialOffset() as {
-        x: number
-        y: number
-      }
+      const delta =
+        monitor.getDifferenceFromInitialOffset() as
+        {
+          x: number
+          y: number
+        }
       const item = monitor.getItem()
 
       let left = Math.round(item.left + delta.x)

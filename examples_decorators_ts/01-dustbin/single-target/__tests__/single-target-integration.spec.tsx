@@ -26,9 +26,8 @@ describe('Integration: Dustbin Single Target', () => {
 
     // Find the drag source ID and use it to simulate the dragging operation
     const box: DndComponent<BoxProps> = root.find(Box).at(0).instance() as any
-    const dustbin: DndComponent<DustbinProps> = root
-      .find(Dustbin)
-      .instance() as any
+    const dustbin: DndComponent<DustbinProps> =
+      root.find(Dustbin).instance() as any
 
     window.alert = jest.fn()
     simulateDragDropSequence(box, dustbin, backend)
