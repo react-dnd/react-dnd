@@ -47,12 +47,10 @@ const Container: React.FC<ContainerProps> = ({ snapToGrid }) => {
   const [, drop] = useDrop({
     accept: ItemTypes.BOX,
     drop(item: DragItem, monitor) {
-      const delta =
-        monitor.getDifferenceFromInitialOffset() as
-        {
-          x: number
-          y: number
-        }
+      const delta = monitor.getDifferenceFromInitialOffset() as {
+        x: number
+        y: number
+      }
 
       let left = Math.round(item.left + delta.x)
       let top = Math.round(item.top + delta.y)
