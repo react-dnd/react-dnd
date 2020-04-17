@@ -4730,7 +4730,7 @@ babel-plugin-named-asset-import@^0.3.6:
   resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-0.3.6.tgz#c9750a1b38d85112c9e166bf3ef7c5dbc605f4be"
   integrity sha512-1aGDUfL1qOOIoqk9QKGIo2lANk+C7ko/fqH0uIyC71x3PEGz0uVP8ISgfEsFuG+FKmjHTvFK/nNM8dowpmUxLA==
 
-babel-plugin-remove-graphql-queries@^2.8.1, babel-plugin-remove-graphql-queries@^2.8.2:
+babel-plugin-remove-graphql-queries@^2.8.2:
   version "2.8.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.8.2.tgz#a2968ea62e2e39ceaabf95157d915dfee77ee36e"
   integrity sha512-zzsJdkeE4zoozow1NECllMYed5yQGVSLt532kWec7G4mWCzZaFTz/E5TM4c3/RbBs32qyFkXi7ahRsB2DbW3hQ==
@@ -9737,9 +9737,9 @@ gatsby-transformer-remark@^2.6.33:
     unist-util-visit "^1.4.1"
 
 gatsby-transformer-sharp@^2.3.3:
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.4.4.tgz#f43410bca43d8cdfee8e3f159501592569ff2a3d"
-  integrity sha512-LqaCvmpHBFiMvTmQjlogFn/3jgGOiWQxJsR/wclXlvgMAV1ffxiR6zr5OKwivuRueQ4gwn33adjCeLp3/iQtAA==
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.4.5.tgz#1341230be31a8c64bd3fe1ce407ead53dbc83018"
+  integrity sha512-4b/fX5dA0HtZWwrLSTPOdxPfOUd1jyOBa1SqlcEKRfNp5TXlf6398VA0Vp4zkRJdhtZm99oVxDYdqE6ShVxukg==
   dependencies:
     "@babel/runtime" "^7.8.7"
     bluebird "^3.7.2"
