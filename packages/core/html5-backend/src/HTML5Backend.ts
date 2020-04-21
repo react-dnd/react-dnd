@@ -366,7 +366,7 @@ export default class HTML5Backend implements Backend {
 		this.dragStartSourceIds.unshift(sourceId)
 	}
 
-	private handleTopDragStart = (e: DragEvent) => {
+	public handleTopDragStart = (e: DragEvent) => {
 		if (e.defaultPrevented) {
 			return
 		}
