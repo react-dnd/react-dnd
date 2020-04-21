@@ -9430,7 +9430,7 @@ gatsby-cli@^2.11.13:
     ink "^2.7.1"
     ink-spinner "^3.0.1"
 
-gatsby-core-utils@^1.1.2, gatsby-core-utils@^1.1.3:
+gatsby-core-utils@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.1.3.tgz#1011ae6ae252b809c66fe62fe9da9d419bd29650"
   integrity sha512-PntSiNCFo1/ZKjp00qgLBj2jdwY7M+maV21RXb1k7Ud9Vv9j0dGQsaVb9YXFTqXAf8bG0Xyqsqq4mPU1iNYLDw==
@@ -9705,9 +9705,9 @@ gatsby-remark-prismjs@^3.3.22:
     unist-util-visit "^1.4.1"
 
 gatsby-source-filesystem@^2.1.36:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.2.3.tgz#69af8b5f221e9ed88f2e0fa40ec9f8328bf171be"
-  integrity sha512-r6YPwOSz8IBkVMLKmE8bkPSFCc2n0ebUsTha/t4RbWf0ux+L4eqzf1DQBTBVMYGiHiOYhIKkDKhF71coKAoS3w==
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.2.4.tgz#5526e90efa3fd1dd56df587bdbcd87cb6280aa29"
+  integrity sha512-Tf5HKAYcVmVFj7DhWi7+opDH312em8vkuoH/fTVLReBrN0yfi8maDha9EaZj4lL1fTtLk6WG0TwOM6GkyYiqgw==
   dependencies:
     "@babel/runtime" "^7.8.7"
     better-queue "^3.8.10"
@@ -9715,7 +9715,7 @@ gatsby-source-filesystem@^2.1.36:
     chokidar "3.3.1"
     file-type "^12.4.2"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^1.1.2"
+    gatsby-core-utils "^1.1.3"
     got "^9.6.0"
     md5-file "^3.2.3"
     mime "^2.4.4"
