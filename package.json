@@ -105,7 +105,7 @@
     "pretty-quick": "^2.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "replace-in-file": "^5.0.2",
+    "replace-in-file": "^6.0.0",
     "rollup": "^2.6.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
