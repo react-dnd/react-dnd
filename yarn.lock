@@ -9664,19 +9664,19 @@ gatsby-remark-embed-snippet@^4.1.14:
     unist-util-map "^1.0.5"
 
 gatsby-remark-images@^3.1.30:
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.2.6.tgz#7e4836075de9e7a066862d99eb058bb283d67976"
-  integrity sha512-2Yp4PH5HHDf+7Iw1nEhpPIxWqbXKVsalDwkuudSB289l+xs29IdW/XchbJ/94PuS0eeUoUDqaISvW/4Q5moAfQ==
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.3.0.tgz#1ce581c13043feda315b5cd9029a76600044d59c"
+  integrity sha512-I60o3Mfc51yk8hPDD0J3pR883fuvy3VN9Eba8U8EkQDH71wjeu3leoF9ReRDfg6StYIRW+xug7OZyjCfdvvz5w==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.9.2"
     chalk "^2.4.2"
     cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^1.1.4"
+    gatsby-core-utils "^1.2.0"
     is-relative-url "^3.0.0"
     lodash "^4.17.15"
     mdast-util-definitions "^1.2.5"
-    potrace "^2.1.5"
-    query-string "^6.11.1"
+    potrace "^2.1.6"
+    query-string "^6.12.1"
     unist-util-select "^1.5.0"
     unist-util-visit-parents "^2.1.2"
 
@@ -17380,7 +17380,7 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-query-string@*, query-string@^6.11.1, query-string@^6.8.3:
+query-string@*, query-string@^6.12.1, query-string@^6.8.3:
   version "6.12.1"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.12.1.tgz#2ae4d272db4fba267141665374e49a1de09e8a7c"
   integrity sha512-OHj+zzfRMyj3rmo/6G8a5Ifvw3AleL/EbcHMD27YA31Q+cO5lfmQxECkImuNVjcskLcvBRVHNAB3w6udMs1eAA==
