@@ -2871,7 +2871,7 @@
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
-"@mdx-js/mdx@^1.5.9", "@mdx-js/mdx@^1.6.0":
+"@mdx-js/mdx@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.6.0.tgz#176c7851be2092afd0cf8c10ce41ed21c30512b5"
   integrity sha512-e4RZtMWU3jM0mA02fL0fvAOcxzGMTL8awDUHv/7bbU7z5JnfMAX4wSvR3Mp2y0J+hNjQ723696CP5zL92xVjyw==
@@ -2896,12 +2896,12 @@
     unist-builder "2.0.3"
     unist-util-visit "2.0.2"
 
-"@mdx-js/react@^1.5.9", "@mdx-js/react@^1.6.0":
+"@mdx-js/react@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.6.0.tgz#96ec0c153beca0e1fc7111460f7b6982f092aeb4"
   integrity sha512-Sn9Rm7/C02PzrpzusM12etSMdZHFUNJGgY1t7nR8Ds10S9hnFKWxnQ1J2b4YrQfzRKn1fOm4wv/KAEUy3oubPA==
 
-"@mdx-js/runtime@^1.5.9":
+"@mdx-js/runtime@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@mdx-js/runtime/-/runtime-1.6.0.tgz#1be34077050eb3bbd1fa83ebbaf70567b56514f1"
   integrity sha512-t/68csm4yjTkEVW/GBFOpNb51FD/EdpgHHufjL2K1iQd2//9Q06J5F49Zb106QDWBUOdw84PRxZnqeWmGVSdXQ==
@@ -9400,10 +9400,10 @@ functions-have-names@^1.2.0:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.0.tgz#83da7583e4ea0c9ac5ff530f73394b033e0bf77d"
   integrity sha512-zKXyzksTeaCSw5wIX79iCA40YAa6CJMJgNg9wdkU/ERBrIdPSimPICYiLp65lRbSBqtiHql/HZfS2DyI/AH6tQ==
 
-gatsby-cli@^2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.0.tgz#fc973c00ee06434fa0ed2309b552a7db33cf52ad"
-  integrity sha512-AT1vI09OvfEbjjpKgS2EFWC7UDdZzUJYe6Da2hN7dlcyzk9Z/qNrLu7j6PMtFbjKM3EMK2zSCX8NZ4g9igAIeg==
+gatsby-cli@^2.12.1:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.1.tgz#fdf32b7a47d64f814e39e911b9d4865654679902"
+  integrity sha512-ZD3keYu0dtMQvssFREejyB3qA277rZQqzZnPAua7Gy6ExILseNXjbOewz9M9CymfqFZjAovpBmoIrcGe5lge4Q==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/runtime" "^7.9.2"
@@ -9421,7 +9421,7 @@ gatsby-cli@^2.12.0:
     fs-exists-cached "^1.0.0"
     fs-extra "^8.1.0"
     gatsby-core-utils "^1.2.0"
-    gatsby-recipes "^0.1.0"
+    gatsby-recipes "^0.1.1"
     gatsby-telemetry "^1.3.0"
     hosted-git-info "^3.0.4"
     is-valid-path "^0.1.1"
@@ -9601,10 +9601,10 @@ gatsby-react-router-scroll@^2.3.0:
     scroll-behavior "^0.9.12"
     warning "^3.0.0"
 
-gatsby-recipes@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.0.tgz#657de2778204e71c720f49bd7166818345f5e1f3"
-  integrity sha512-HKg9q+/Pgaw4KxTXwksZds2qjyv25IbzXABMNwtFD8V4Nh/l0szYKwJxZcptfyp2ftMv1WnK9cjF5CT1HjpwDw==
+gatsby-recipes@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.1.tgz#337130a829df700e435ba0b9d3d470bd15ed4702"
+  integrity sha512-c84NqjeTo2vAPPmokSkQ0eyj1+Vp8MXRtoHntCnTog/RE2HmM1SoIU8IWy6+O14Nr2i8MbagEjve4KklQ3/tVw==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/generator" "^7.9.5"
@@ -9612,9 +9612,9 @@ gatsby-recipes@^0.1.0:
     "@babel/template" "^7.8.6"
     "@babel/types" "^7.9.5"
     "@hapi/joi" "^15.1.1"
-    "@mdx-js/mdx" "^1.5.9"
-    "@mdx-js/react" "^1.5.9"
-    "@mdx-js/runtime" "^1.5.9"
+    "@mdx-js/mdx" "^1.6.0"
+    "@mdx-js/react" "^1.6.0"
+    "@mdx-js/runtime" "^1.6.0"
     acorn "^7.1.1"
     acorn-jsx "^5.2.0"
     babel-core "7.0.0-bridge.0"
@@ -9814,9 +9814,9 @@ gatsby-transformer-sharp@^2.3.3:
     sharp "^0.25.1"
 
 gatsby@^2.17.11:
-  version "2.21.0"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.21.0.tgz#0e4abc974efd181aad248547daabb832cbcb0b3f"
-  integrity sha512-+BU+WM15IOfJeagmo0kcbogL4oCY4E8k4qlIeC98cyucCvbkaDK9R1cuXZgslA73ZJOdnWUfea7NwWLiFndXRw==
+  version "2.21.1"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.21.1.tgz#60f649fdfb579860cba7f6395e59dc0572f79075"
+  integrity sha512-Pf8pAC3QZMxD1cTOA4T1vFVxricZYlVf02ei0Dba/Y/NVABpDsEqpKqs59BQVvRk5GcuLaBEHv7Q93tNSfDBsA==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/core" "^7.9.0"
@@ -9879,7 +9879,7 @@ gatsby@^2.17.11:
     flat "^4.1.0"
     fs-exists-cached "1.0.0"
     fs-extra "^8.1.0"
-    gatsby-cli "^2.12.0"
+    gatsby-cli "^2.12.1"
     gatsby-core-utils "^1.2.0"
     gatsby-graphiql-explorer "^0.4.0"
     gatsby-link "^2.4.0"
@@ -9919,7 +9919,7 @@ gatsby@^2.17.11:
     parseurl "^1.3.3"
     physical-cpu-count "^2.0.0"
     pnp-webpack-plugin "^1.6.4"
-    postcss-flexbugs-fixes "^4.2.0"
+    postcss-flexbugs-fixes "^4.2.1"
     postcss-loader "^3.0.0"
     prompts "^2.3.2"
     prop-types "^15.7.2"
@@ -13192,15 +13192,7 @@ jest-worker@^24.6.0, jest-worker@^24.9.0:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
 
-jest-worker@^25.1.0:
-  version "25.4.0"
-  resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-25.4.0.tgz#ee0e2ceee5a36ecddf5172d6d7e0ab00df157384"
-  integrity sha512-ghAs/1FtfYpMmYQ0AHqxV62XPvKdUDIBBApMZfly+E9JEmYh2K45G0R5dWxx986RN12pRCxsViwQVtGl+N4whw==
-  dependencies:
-    merge-stream "^2.0.0"
-    supports-color "^7.0.0"
-
-jest-worker@^25.5.0:
+jest-worker@^25.1.0, jest-worker@^25.5.0:
   version "25.5.0"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-25.5.0.tgz#2611d071b79cea0f43ee57a3d118593ac1547db1"
   integrity sha512-/dsSmUkIy5EBGfv/IjjqmFxrNAUpBERfGs1oHROyD7yxjG/w+t0GOJDX8O1k32ySmd7+a5IhnJU2qQFcJ4n1vw==
@@ -16569,10 +16561,10 @@ postcss-flexbugs-fixes@4.1.0:
   dependencies:
     postcss "^7.0.0"
 
-postcss-flexbugs-fixes@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/postcss-flexbugs-fixes/-/postcss-flexbugs-fixes-4.2.0.tgz#662b3dcb6354638b9213a55eed8913bcdc8d004a"
-  integrity sha512-QRE0n3hpkxxS/OGvzOa+PDuy4mh/Jg4o9ui22/ko5iGYOG3M5dfJabjnAZjTdh2G9F85c7Hv8hWcEDEKW/xceQ==
+postcss-flexbugs-fixes@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/postcss-flexbugs-fixes/-/postcss-flexbugs-fixes-4.2.1.tgz#9218a65249f30897deab1033aced8578562a6690"
+  integrity sha512-9SiofaZ9CWpQWxOwRh1b/r85KD5y7GgvsNt1056k6OYLvWUun0czCvogfJgylC22uJTwW1KzY3Gz65NZRlvoiQ==
   dependencies:
     postcss "^7.0.26"
 
