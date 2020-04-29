@@ -9451,11 +9451,11 @@ gatsby-graphiql-explorer@^0.4.0:
     "@babel/runtime" "^7.9.2"
 
 gatsby-image@^2.2.31:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.3.5.tgz#4af29abf3e3e0bd3a6d9168bc44461d58fbc0f91"
-  integrity sha512-FRbmYrE+bFENiI2QGUwy0SKvNTOsxYHh6qNMdO3qwil0mtkiQax64ydExdEq1BciUVbvMqomd5n/yKu+cnuJVg==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.4.0.tgz#25bfefed7a046184c44cf2cb5edd2a03be822594"
+  integrity sha512-VkGZ5SiIi0eC1tt45rIWqu19ZA2P1lMmNgCIqM4AK4q+ib1x0WhiGOeIEsIYk7udlfLXEy7A0uzadsv8EZSy/w==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.9.2"
     object-fit-images "^3.2.4"
     prop-types "^15.7.2"
 
