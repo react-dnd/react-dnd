@@ -1142,10 +1142,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
-  version "7.9.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
-  integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2", "@babel/runtime@^7.9.6":
+  version "7.9.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.6.tgz#a9102eb5cadedf3f31d08a9ecf294af7827ea29f"
+  integrity sha512-64AF1xY3OAkFHqOb9s4jpgk1Mm5vDZ4L3acHvAml+53nO1XbXLuDodsVpO4OIUsmemlUHMxNdYMNJmsvOwLrvQ==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -9390,10 +9390,10 @@ gatsby-cli@^2.12.8:
     ink "^2.7.1"
     ink-spinner "^3.0.1"
 
-gatsby-core-utils@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.2.0.tgz#3289b2183d3b0172356cf403bfc2bbf99adae670"
-  integrity sha512-JBsVbniXObn26Hms8Je1vJdhMW04GesochBVLcaTraZC5dfqZDExPix65jrye/voC0YfFtXIngm59yspYZm1OQ==
+gatsby-core-utils@^1.2.0, gatsby-core-utils@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.2.1.tgz#9d5e89d0cf7b9e5d7d77a9dcb47071684f68ffd5"
+  integrity sha512-uyXgjvKdzfJ0yB8oTYmBjMUqM0AACx7aA8Ioubn6k/51C4tE5+LzrG/iG42di2UaTIbcBj6vcwrvRosNKWeeBQ==
   dependencies:
     ci-info "2.0.0"
     configstore "^5.0.1"
@@ -9439,12 +9439,12 @@ gatsby-page-utils@^0.2.0:
     micromatch "^3.1.10"
 
 gatsby-plugin-manifest@^2.2.27:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.4.1.tgz#57381d3cc2d3b8aaa0d40bfcb7595323490f8708"
-  integrity sha512-OdpqwRdhJJn/BtwWBqRbNllIbNAFAHF1ntkZQqi7LvvaUeSdeKewi7IhYRab6O/fAZ5oQsLq1DWVjpyLEt0czg==
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.4.2.tgz#0a9605a778a8e30ce047b9b3701031b9bde61d6b"
+  integrity sha512-G6MB1/Me4waG/z3Aj1GEqXCfY/yftyMLKp8g83uGvuBDtgLGN5unVgYqdmKAyBFQTvczsUghZ7jBrApHeaTn4w==
   dependencies:
-    "@babel/runtime" "^7.9.2"
-    gatsby-core-utils "^1.2.0"
+    "@babel/runtime" "^7.9.6"
+    gatsby-core-utils "^1.2.1"
     semver "^5.7.1"
     sharp "^0.25.1"
 
