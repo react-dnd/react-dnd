@@ -9390,10 +9390,10 @@ gatsby-cli@^2.12.8:
     ink "^2.7.1"
     ink-spinner "^3.0.1"
 
-gatsby-core-utils@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.2.0.tgz#3289b2183d3b0172356cf403bfc2bbf99adae670"
-  integrity sha512-JBsVbniXObn26Hms8Je1vJdhMW04GesochBVLcaTraZC5dfqZDExPix65jrye/voC0YfFtXIngm59yspYZm1OQ==
+gatsby-core-utils@^1.2.0, gatsby-core-utils@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.2.1.tgz#9d5e89d0cf7b9e5d7d77a9dcb47071684f68ffd5"
+  integrity sha512-uyXgjvKdzfJ0yB8oTYmBjMUqM0AACx7aA8Ioubn6k/51C4tE5+LzrG/iG42di2UaTIbcBj6vcwrvRosNKWeeBQ==
   dependencies:
     ci-info "2.0.0"
     configstore "^5.0.1"
@@ -9482,15 +9482,15 @@ gatsby-plugin-react-helmet@^3.1.14:
     "@babel/runtime" "^7.9.2"
 
 gatsby-plugin-sharp@^2.2.37:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.6.0.tgz#0f438d9e3bb3ac76c0a61921537a69eafad5d893"
-  integrity sha512-Bx6Nmnf26rtEplf424eF8X9QIQui6y7Eq8mUxxYvkiq/aKZQtSCwc7yzgovW7xgzrjujbOG00+6q3oFKqW7qOA==
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.6.1.tgz#7d7d25610cdb28359a50ffbcc7eb9b2a7e24ec45"
+  integrity sha512-gfZtAvMx/Q81hZXsGlkcgEVx02fZJwVz7+IaWtHC30jfvF6ViQ+NKRNBsOnGL7y3HyIvd2qeF6bvL0TUoA60Wg==
   dependencies:
-    "@babel/runtime" "^7.9.2"
+    "@babel/runtime" "^7.9.6"
     async "^2.6.3"
     bluebird "^3.7.2"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^1.2.0"
+    gatsby-core-utils "^1.2.1"
     got "^8.3.2"
     imagemin "^6.1.0"
     imagemin-mozjpeg "^8.0.0"
