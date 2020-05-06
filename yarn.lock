@@ -9632,11 +9632,11 @@ gatsby-plugin-typescript@^2.1.16, gatsby-plugin-typescript@^2.4.2:
     babel-plugin-remove-graphql-queries "^2.9.1"
 
 gatsby-plugin-typography@^2.3.16:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-typography/-/gatsby-plugin-typography-2.5.0.tgz#1a8423e0a868733d2b978774cb22dd6c42adcb4c"
-  integrity sha512-XYW0FZ1Q+hJypWIt34sR/xh4jh4RAcj0l+3dz7qO2nl0r8YBsRnxRZR6gIL7r+v4HGarmRuK4qJskvyxzeRXCw==
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-typography/-/gatsby-plugin-typography-2.5.1.tgz#4084f1625c8def86b0fcb932f33804aa4ee3a1ff"
+  integrity sha512-beBV5mFtgaoUqmWKtC++ZpFVzLJVZUdqOAFSwXlMGzUuYAWL+BvkTAYTTSes9rJRJzK/WCE/q9H3LwTl9n287Q==
   dependencies:
-    "@babel/runtime" "^7.9.2"
+    "@babel/runtime" "^7.9.6"
 
 gatsby-react-router-scroll@^2.3.1:
   version "2.3.1"
