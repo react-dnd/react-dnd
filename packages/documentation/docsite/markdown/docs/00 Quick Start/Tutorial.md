@@ -679,7 +679,7 @@ function BoardSquare({ x, y, children }) {
       {isOver && !canDrop && <Overlay color="red" />}
       {!isOver && canDrop && <Overlay color="yellow" />}
       {isOver && canDrop && <Overlay color="green" />}
-    </div>,
+    </div>
   )
 }
 
