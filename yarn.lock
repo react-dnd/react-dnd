@@ -9816,9 +9816,9 @@ gatsby-remark-embed-snippet@^4.1.14:
     unist-util-map "^1.0.5"
 
 gatsby-remark-images@^3.1.30:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.3.1.tgz#d9bd27f8f158f6b7fd2a228c755708c109ec5474"
-  integrity sha512-yojrFWNK5iUlbcBifZ3rI2ahetziP+TYhutQGB5WeCozUd9MO+N/mrFdyE/Dk5ARoTnsOQhAR2vSgXQH6Lm6DQ==
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-3.3.2.tgz#8548fc88c141f51564817ac23157c60d2414a011"
+  integrity sha512-5RPkWenWZXtbvA055KW6UiaxmMf1FTzIAxGoQstUjYq67/5zGdkWEAp53ZSKYifPafTqiteVlT699N4+bJf4GA==
   dependencies:
     "@babel/runtime" "^7.9.6"
     chalk "^2.4.2"
