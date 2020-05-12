@@ -1,5 +1,5 @@
 {
-  "name": "cra-test",
+  "name": "react-dnd-cra-test",
   "version": "10.0.2",
   "private": true,
   "dependencies": {

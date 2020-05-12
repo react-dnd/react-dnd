@@ -78,8 +78,8 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@rollup/plugin-replace": "^2.3.0",
-    "@types/jest": "^25.1.0",
     "@types/enzyme": "^3.10.4",
+    "@types/jest": "^25.1.0",
     "@typescript-eslint/eslint-plugin": "^2.32.0",
     "@typescript-eslint/parser": "^2.32.0",
     "alex": "^8.0.1",
@@ -198,7 +198,8 @@
       "packages/core/*"
     ],
     "nohoist": [
-      "react-dnd-documentation/**"
+      "react-dnd-documentation/**",
+      "react-dnd-cra-test/**"
     ]
   }
 }
