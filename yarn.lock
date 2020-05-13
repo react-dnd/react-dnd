@@ -9879,13 +9879,13 @@ gatsby-telemetry@^1.3.4:
     uuid "3.4.0"
 
 gatsby-transformer-remark@^2.6.33:
-  version "2.8.7"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.8.7.tgz#2b81d8a9672f91673ba890896459a0515cae5925"
-  integrity sha512-AaBJyQipTWFt28cmZEcrTctGBw86gbCidhyamTXpOfPQago3nX2NjmSfdEhUr5HAZwflfy/GIQhGTzo5BZ556w==
+  version "2.8.8"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.8.8.tgz#90c348f23e72c650eec9b821962fc6db1410d1f0"
+  integrity sha512-nRQnATO2tUOtG5KpjssGl+GVdwsDKIgPavggiiYC+L39GTDVfF6hqEu1AsjomZyaSIB1uCBNNIfZF/aSbRQdkA==
   dependencies:
     "@babel/runtime" "^7.9.6"
     bluebird "^3.7.2"
-    gatsby-core-utils "^1.2.1"
+    gatsby-core-utils "^1.2.2"
     gray-matter "^4.0.2"
     hast-util-raw "^4.0.0"
     hast-util-to-html "^4.0.1"
