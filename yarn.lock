@@ -9553,7 +9553,7 @@ gatsby-cli@^2.12.18:
     ink "^2.7.1"
     ink-spinner "^3.0.1"
 
-gatsby-core-utils@^1.2.1, gatsby-core-utils@^1.2.2:
+gatsby-core-utils@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.2.2.tgz#19ad6e3917e4748333d952a04ec30ade02fe81fd"
   integrity sha512-EdVUq0K7C9t32V7wndldUmUGzZp8EwU8gNMc1dtI1whyDUaUuZa6zlkbkpJwbwhPhRHdao5zhvHJXydhgzTEog==
@@ -9774,9 +9774,9 @@ gatsby-recipes@^0.1.16:
     xstate "^4.9.1"
 
 gatsby-remark-autolink-headers@^2.1.17:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-autolink-headers/-/gatsby-remark-autolink-headers-2.3.1.tgz#2f7077444a310543361ba298a26c45b5f4680304"
-  integrity sha512-VFtmQkP2cF2XE5+5sZyQ1ttR0zwTgO9ECJEBRTXMqGfiv94GzuSdW9qkw8LJqxHpgo5tt8oC7W4DSqSlln2qrw==
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-autolink-headers/-/gatsby-remark-autolink-headers-2.3.2.tgz#4981805e84d37d2d09b5b656c3eece0adabce812"
+  integrity sha512-hw1O9zQPaL7D2xv9lDZpoOFtzncu/ou/EpzzLkOoMidwKnHC25R9csaZKfWlMLdXMJ3awHPs2QKvC0BPTfGCSQ==
   dependencies:
     "@babel/runtime" "^7.9.6"
     github-slugger "^1.3.0"
