@@ -9920,9 +9920,9 @@ gatsby-transformer-sharp@^2.3.3:
     sharp "^0.25.1"
 
 gatsby@^2.17.11:
-  version "2.21.30"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.21.30.tgz#e6d33d083afd3cb83c0ce9709ec554491d100d97"
-  integrity sha512-p/Qi9icLbCW0SZLAyPC4IAbLSWZl8ozRKqlIHsa91fkcuArIszSQXrpY5jMJ0QmWSWZAKhG4o1gSpjKSUeOxhQ==
+  version "2.21.31"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.21.31.tgz#dd8c71c224062307968a3eb508d1f19aad2e9dcd"
+  integrity sha512-eT3vr5xk99oo/aEjmQZVVi6ZPJ3VTUEgBNHeXbOqgx0LmpJUVnx5cBHxnilv9yGgmW4AW0piZtWti3yGVOP8Rg==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/core" "^7.9.6"
