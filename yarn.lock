@@ -9836,9 +9836,9 @@ gatsby-remark-prismjs@^3.3.22:
     unist-util-visit "^1.4.1"
 
 gatsby-source-filesystem@^2.1.36:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.3.3.tgz#16a7be93c577da11137654cd04d4bcf0c73c1867"
-  integrity sha512-RsA6xssBKEel2e0Rj1hQZRNtPQ1lOh2ZlpXZr3CpE3W52F8bSrGnIBnqkmp4aPmtDGYgcw3okid0UNhBmUeiuA==
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.3.4.tgz#8f2b9ae1de6857d929e30a2b789c9c40d41689e0"
+  integrity sha512-8j2ZRMNTmgUA778OiTinFJghOLj4L9WLrxVyWhSaEArnJOKJOvIZPvj7klgM49IBaSPZTx3uKuG6RXOs4iFjNg==
   dependencies:
     "@babel/runtime" "^7.9.6"
     better-queue "^3.8.10"
@@ -9846,7 +9846,7 @@ gatsby-source-filesystem@^2.1.36:
     chokidar "3.4.0"
     file-type "^12.4.2"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^1.2.2"
+    gatsby-core-utils "^1.2.3"
     got "^9.6.0"
     md5-file "^3.2.3"
     mime "^2.4.5"
