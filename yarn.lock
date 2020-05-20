@@ -3581,16 +3581,6 @@
     regexpp "^3.0.0"
     tsutils "^3.17.1"
 
-"@typescript-eslint/experimental-utils@2.33.0":
-  version "2.33.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-2.33.0.tgz#000f1e5f344fbea1323dc91cc174805d75f99a03"
-  integrity sha512-qzPM2AuxtMrRq78LwyZa8Qn6gcY8obkIrBs1ehqmQADwkYzTE1Pb4y2W+U3rE/iFkSWcWHG2LS6MJfj6SmHApg==
-  dependencies:
-    "@types/json-schema" "^7.0.3"
-    "@typescript-eslint/typescript-estree" "2.33.0"
-    eslint-scope "^5.0.0"
-    eslint-utils "^2.0.0"
-
 "@typescript-eslint/experimental-utils@2.34.0":
   version "2.34.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-2.34.0.tgz#d3524b644cdb40eebceca67f8cf3e4cc9c8f980f"
@@ -3610,19 +3600,6 @@
     "@typescript-eslint/experimental-utils" "2.34.0"
     "@typescript-eslint/typescript-estree" "2.34.0"
     eslint-visitor-keys "^1.1.0"
-
-"@typescript-eslint/typescript-estree@2.33.0":
-  version "2.33.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-2.33.0.tgz#33504c050ccafd38f397a645d4e9534d2eccbb5c"
-  integrity sha512-d8rY6/yUxb0+mEwTShCQF2zYQdLlqihukNfG9IUlLYz5y1CH6G/9XYbrxQLq3Z14RNvkCC6oe+OcFlyUpwUbkg==
-  dependencies:
-    debug "^4.1.1"
-    eslint-visitor-keys "^1.1.0"
-    glob "^7.1.6"
-    is-glob "^4.0.1"
-    lodash "^4.17.15"
-    semver "^7.3.2"
-    tsutils "^3.17.1"
 
 "@typescript-eslint/typescript-estree@2.34.0":
   version "2.34.0"
@@ -9566,7 +9543,7 @@ gatsby-cli@^2.12.24:
     ink "^2.7.1"
     ink-spinner "^3.0.1"
 
-gatsby-core-utils@^1.2.2, gatsby-core-utils@^1.2.3:
+gatsby-core-utils@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.2.3.tgz#24d6fd7ebb607e08aa8356f77d6990cb4563e387"
   integrity sha512-NjCPNpGqOuaNAJqU4m9z2pXVmv0DdifnRiFvJiVnz2pi/0qaVHGMErmOnkOJfaxD76LOcWEjPm9HOsB+GHgN7g==
@@ -19037,9 +19014,9 @@ rollup-pluginutils@^2.8.1, rollup-pluginutils@^2.8.2:
     estree-walker "^0.6.1"
 
 rollup@^2.6.1:
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.10.4.tgz#ec2f91519c597c214cdf45e50600ed8ea356358e"
-  integrity sha512-aYvoYjeu9DwrUTEfRlHiugW1eoHz7EGxETaOISpw+zkH9oOaQLO85eG+14ky4vyYgi3mUofbpWJgb+yLBE0PKw==
+  version "2.10.5"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.10.5.tgz#a2e6735fbcbd64453f8aa5d7b5ec1b421974f92c"
+  integrity sha512-05WRM/tjmPYwhOBvm/G9Qwa/HnAqn0TK0XxLDLQzoM4XdSmKjPBvhBl+U+Q/C6VJsucljyTQjGkZD503mjbPQg==
   optionalDependencies:
     fsevents "~2.1.2"
 
