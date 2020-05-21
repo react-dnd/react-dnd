@@ -656,7 +656,7 @@ import { useDrop } from 'react-dnd'
 
 function BoardSquare({ x, y, children }) {
   const black = (x + y) % 2 === 1
-  const [{ isOver }, drop] = useDrop({
+  const [{ isOver, canDrop }, drop] = useDrop({
     accept: ItemTypes.KNIGHT,
     drop: () => moveKnight(x, y),
     canDrop: () => canMoveKnight(x, y),
