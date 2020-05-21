@@ -483,9 +483,9 @@ import { useDrag } from 'react-dnd'
 function Knight() {
   const [{isDragging}, drag] = useDrag({
     item: { type: ItemTypes.KNIGHT },
-		collect: monitor => ({
-			isDragging: !!monitor.isDragging(),
-		}),
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging(),
+    }),
   })
 
   return (
@@ -588,13 +588,13 @@ import { useDrop } from 'react-dnd'
 
 function BoardSquare({ x, y, children }) {
   const black = (x + y) % 2 === 1
-	const [{ isOver }, drop] = useDrop({
-		accept: ItemTypes.KNIGHT,
-		drop: () => moveKnight(x, y),
-		collect: monitor => ({
-			isOver: !!monitor.isOver(),
-		}),
-	})
+  const [{ isOver }, drop] = useDrop({
+    accept: ItemTypes.KNIGHT,
+    drop: () => moveKnight(x, y),
+    collect: monitor => ({
+      isOver: !!monitor.isOver(),
+    }),
+  })
 
   return (
     <div
@@ -679,7 +679,7 @@ function BoardSquare({ x, y, children }) {
       {isOver && !canDrop && <Overlay color="red" />}
       {!isOver && canDrop && <Overlay color="yellow" />}
       {isOver && canDrop && <Overlay color="green" />}
-    </div>,
+    </div>
   )
 }
 
