@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators/lib/esm/index'
-import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks/lib/esm/index'
+import { componentIndex as decoratorComponentIndex } from 'react-dnd-examples-decorators'
+import { componentIndex as hookComponentIndex } from 'react-dnd-examples-hooks'
 
 export interface ExampleTabsProps {
 	name: string

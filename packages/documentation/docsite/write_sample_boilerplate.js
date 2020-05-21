@@ -10,20 +10,20 @@ const APP_FILE_CONTENT = `
 	import ReactDOM from 'react-dom'
 	import Example from './example'
 	import { DndProvider } from 'react-dnd'
-	import HTML5Backend from 'react-dnd-html5-backend'
-	
+	import Backend from 'react-dnd-html5-backend'
+
 	function App() {
 		return (
 			<div className="App">
-				<DndProvider backend={HTML5Backend}>
+				<DndProvider backend={Backend}>
 					<Example />
 				</DndProvider>
 			</div>
 		)
 	}
-	
+
 	const rootElement = document.getElementById('root')
-	ReactDOM.render(<App />, rootElement)	
+	ReactDOM.render(<App />, rootElement)
 `
 
 const MANIFEST_FILE_CONTENT = `
@@ -93,9 +93,9 @@ const makePackageJson = (index, isTS) => {
 	if (isTS) {
 		result.dependencies = {
 			...result.dependencies,
-			typescript: '^3.3.3333',
-			'@types/react': '^16.8.23',
-			'@types/react-dom': '^16.8.4',
+			typescript: '^3.7.2',
+			'@types/react': '^16.9.13',
+			'@types/react-dom': '^16.9.4',
 			'@types/jest': '^24.0.9',
 			'@types/node': '^11.12.0',
 		}

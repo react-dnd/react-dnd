@@ -9,12 +9,12 @@ export interface SideBarProps {
 	location: string
 }
 
-const SideBar: React.FC<SideBarProps> = ({ groups, location }) => {
+export const Sidebar: React.FC<SideBarProps> = ({ groups, location }) => {
 	function renderGroup({ title, pages }: PageGroup, index: number) {
 		return (
 			<Group key={index}>
 				<GroupTitle>{title}</GroupTitle>
-				{Object.keys(pages).map(key => renderLink(pages[key], key))}
+				{Object.keys(pages).map((key) => renderLink(pages[key], key))}
 			</Group>
 		)
 	}
@@ -34,7 +34,6 @@ const SideBar: React.FC<SideBarProps> = ({ groups, location }) => {
 
 	return <Container>{groups.map(renderGroup)}</Container>
 }
-export default SideBar
 
 const Container = styled.div`
 	flex-shrink: 0;

@@ -3,13 +3,15 @@ path: '/docs/tutorial'
 title: 'Tutorial'
 ---
 
+<!--alex disable special color white black  -->
+
 # Tutorial
 
 Now that you've read [the overview](/docs/overview), it's adventure time!
 
 ![Adventure Time!](https://media.giphy.com/media/132qeyvgJ2Al3i/giphy.gif)
 
-In this tutorial, we're going to build a Chess game with React and React DnD. Just kidding! Writing a full-blown Chess game is totally out of scope of this tutorial. What we're going to build is a [tiny app with a Chess board and a lonely Knight](/examples/tutorial). The Knight will be draggable according to the Chess rules.
+In this tutorial, we're going to build a Chess game with React and React DnD. I'm kidding! Writing a full-blown Chess game is totally out of scope of this tutorial. What we're going to build is a [tiny app with a Chess board and a lonely Knight](/examples/tutorial). The Knight will be draggable according to the Chess rules.
 
 If you're comfortable with React already, feel free to skip ahead to the final section: [Adding Drag-and-Drop Interaction](#adding-drag-and-drop-interaction)
 
@@ -113,7 +115,7 @@ ReactDOM.render(
   <Square black>
     <Knight />
   </Square>,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 ```
 
@@ -138,7 +140,7 @@ export default function Square({ black, children }) {
         backgroundColor: fill,
         color: stroke,
         width: '100%',
-        height: '100%',
+        height: '100%'
       }}
     >
       {children}
@@ -176,7 +178,7 @@ import Board from './Board'
 
 ReactDOM.render(
   <Board knightPosition={[0, 0]} />,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 ```
 
@@ -204,7 +206,7 @@ export default function Board({ knightPosition }) {
     <div
       style={{
         width: '100%',
-        height: '100%',
+        height: '100%'
       }}
     >
       {renderSquare(0, 0, knightPosition)}
@@ -250,7 +252,7 @@ export default function Board({ knightPosition }) {
         width: '100%',
         height: '100%',
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'wrap'
       }}
     >
       {squares}
@@ -272,7 +274,7 @@ import Board from './Board'
 
 ReactDOM.render(
   <Board knightPosition={[7, 4]} />,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 ```
 
@@ -300,8 +302,8 @@ import { observe } from './Game'
 
 const root = document.getElementById('root')
 
-observe(knightPosition =>
-  ReactDOM.render(<Board knightPosition={knightPosition} />, root),
+observe((knightPosition) =>
+  ReactDOM.render(<Board knightPosition={knightPosition} />, root)
 )
 ```
 
@@ -420,7 +422,7 @@ We're going to start by installing React DnD and the HTML5 backend for it:
 yarn add react-dnd react-dnd-html5-backend
 ```
 
-In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://github.com/yahoo/react-dnd-touch-backend), but this is out of scope of this tutorial.
+In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://npmjs.com/package/react-dnd-touch-backend), but this is out of scope of this tutorial.
 
 ## Setting up the Drag and Drop Context
 
@@ -430,11 +432,11 @@ We need this to specify that we're going to use the [HTML5Backend](/docs/backend
 ```jsx
 import React from 'react'
 import { DndProvider } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+import Backend from 'react-dnd-html5-backend'
 
 function Board() {
   /* ... */
-  return <DndProvider backend={HTML5Backend}>...</DndProvider>
+  return <DndProvider backend={Backend}>...</DndProvider>
 }
 ```
 
@@ -444,7 +446,7 @@ Next, I'm going to create the constants for the draggable item types. We're only
 
 ```jsx
 export const ItemTypes = {
-  KNIGHT: 'knight',
+  KNIGHT: 'knight'
 }
 ```
 
@@ -457,9 +459,9 @@ The [`useDrag`](/docs/api/use-drag) hook accepts a specification object. In this
 ```jsx
 const [{ isDragging }, drag] = useDrag({
   item: { type: ItemTypes.KNIGHT },
-  collect: monitor => ({
-    isDragging: !!monitor.isDragging(),
-  }),
+  collect: (monitor) => ({
+    isDragging: !!monitor.isDragging()
+  })
 })
 ```
 
@@ -556,7 +558,7 @@ Let's now wrap the `BoardSquare` with a [`useDrop`](/docs/api/use-drop) hook. I'
 ```jsx
 const [, drop] = useDrop({
   accept: ItemTypes.KNIGHT,
-  drop: () => moveKnight(x, y),
+  drop: () => moveKnight(x, y)
 })
 ```
 
@@ -568,10 +570,10 @@ In my collecting function I'm going to ask the monitor whether the pointer is cu
 const [{ isOver, canDrop }, drop] = useDrop({
   accept: ItemTypes.KNIGHT,
   drop: () => moveKnight(x, y),
-  collect: mon => ({
+  collect: (mon) => ({
     isOver: !!mon.isOver(),
-    canDrop: !!mon.canDrop(),
-  }),
+    canDrop: !!mon.canDrop()
+  })
 })
 ```
 
@@ -636,10 +638,10 @@ const [{ isOver, canDrop }, drop] = useDrop({
   accept: ItemTypes.KNIGHT,
   canDrop: () => canMoveKnight(x, y),
   drop: () => moveKnight(x, y),
-  collect: monitor => ({
+  collect: (monitor) => ({
     isOver: !!monitor.isOver(),
-    canDrop: !!monitor.canDrop(),
-  }),
+    canDrop: !!monitor.canDrop()
+  })
 })
 ```
 
@@ -654,7 +656,7 @@ import { useDrop } from 'react-dnd'
 
 function BoardSquare({ x, y, children }) {
   const black = (x + y) % 2 === 1
-  const [{ isOver }, drop] = useDrop({
+  const [{ isOver, canDrop }, drop] = useDrop({
     accept: ItemTypes.KNIGHT,
     drop: () => moveKnight(x, y),
     canDrop: () => canMoveKnight(x, y),
@@ -695,9 +697,9 @@ We are lucky again, because it is easy to do with React DnD. We just need to use
 ```jsx
 const [{ isDragging }, drag, preview] = useDrag({
   item: { type: ItemTypes.KNIGHT },
-  collect: monitor => ({
-    isDragging: !!monitor.isDragging(),
-  }),
+  collect: (monitor) => ({
+    isDragging: !!monitor.isDragging()
+  })
 })
 ```
 

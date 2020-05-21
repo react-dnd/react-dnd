@@ -3,6 +3,8 @@ path: '/docs/api/drag-layer'
 title: 'DragLayer'
 ---
 
+<!--alex disable primitive -->
+
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
 # DragLayer
@@ -11,7 +13,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 For the most use cases, the default rendering of the [HTML5 backend](/docs/backends/html5) should suffice. However, its drag preview has certain limitations. For example, it has to be an existing node screenshot or an image, and it cannot change midflight.
 
-Sometimes you might want to perform the custom rendering. This also becomes necessary if you're using a custom backend. `DragLayer` lets you perform the rendering of the drag preview yourself using just the React components. It is a higher-order component accepting one required parameter that is described below.
+Sometimes you might want to perform the custom rendering. This also becomes necessary if you're using a custom backend. `DragLayer` lets you perform the rendering of the drag preview yourself using only the React components. It is a higher-order component accepting one required parameter that is described below.
 
 To use `DragLayer`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](/docs/api/drag-drop-context).
 

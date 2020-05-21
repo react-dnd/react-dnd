@@ -2,20 +2,21 @@
 declare const require: any
 
 import * as React from 'react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import HTML5Backend from 'react-dnd-html5-backend'
 import TouchBackend from 'react-dnd-touch-backend'
 import { isDebugMode } from '../util/isDebugMode'
 import { isTouchBackend } from '../util/isTouchBackend'
 import { DndProvider } from 'react-dnd'
-import PageBody from './pagebody'
-import Sidebar from './sidebar'
+import { PageBody } from './pagebody'
+import { Sidebar } from './sidebar'
 import { PageGroup } from '../constants'
 import { APIPages, ExamplePages } from '../constants'
-import Header from './header'
+import { Header } from './header'
 import './layout.css'
 import 'prismjs/themes/prism.css'
+
 const favicon = require('../favicon.png')
 
 export interface LayoutProps {
@@ -24,7 +25,15 @@ export interface LayoutProps {
 }
 
 const touchBackendOptions = { delay: 5 }
-const Layout: React.FC<LayoutProps> = props => {
+const HEADER_META = [
+	{ name: 'description', content: 'Drag and Drop for React' },
+	{ name: 'keywords', content: 'react, drag drop, html5' },
+]
+const HEADER_LINK = [
+	{ rel: 'shortcut icon', type: 'image/png', href: `${favicon}` },
+]
+
+const Layout: React.FC<LayoutProps> = (props) => {
 	const { children, location } = props
 	const sitepath = location && location.pathname
 	const isExampleUrl = (sitepath || '')
@@ -36,14 +45,7 @@ const Layout: React.FC<LayoutProps> = props => {
 	const touchBackend = isTouchBackend()
 	return (
 		<>
-			<Helmet
-				title="React DnD"
-				meta={[
-					{ name: 'description', content: 'Drag and Drop for React' },
-					{ name: 'keywords', content: 'react, drag drop, html5' },
-				]}
-				link={[{ rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }]}
-			>
+			<Helmet title="React DnD" meta={HEADER_META} link={HEADER_LINK}>
 				<html lang="en" />
 				<link
 					rel="stylesheet"

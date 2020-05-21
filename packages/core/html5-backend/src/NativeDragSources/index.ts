@@ -1,8 +1,13 @@
 import { nativeTypesConfig } from './nativeTypesConfig'
 import { NativeDragSource } from './NativeDragSource'
 
-export function createNativeDragSource(type: string): NativeDragSource {
-	return new NativeDragSource(nativeTypesConfig[type])
+export function createNativeDragSource(
+	type: string,
+	dataTransfer?: DataTransfer,
+): NativeDragSource {
+	const result = new NativeDragSource(nativeTypesConfig[type])
+	result.loadDataTransfer(dataTransfer)
+	return result
 }
 
 export function matchNativeItemType(

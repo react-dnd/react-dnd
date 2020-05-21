@@ -1,11 +1,11 @@
 {
   "name": "react-dnd-html5-backend",
-  "version": "9.4.0",
+  "version": "10.0.2",
   "description": "HTML5 backend for React DnD",
-  "type": "module",
-  "main": "./dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "lib/index.d.ts",
+  "sideEffects": false,
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,12 +17,12 @@
     "start": "../../../scripts/watch_package.sh"
   },
   "dependencies": {
-    "dnd-core": "^9.4.0"
+    "dnd-core": "^10.0.2"
   },
   "devDependencies": {
-    "@types/react": "^16.9.11",
-    "react": "^16.11.0",
-    "react-dnd-test-backend": "^9.4.0",
-    "react-dom": "^16.11.0"
+    "@types/react": "^16.9.35",
+    "react": "^16.12.0",
+    "react-dnd-test-backend": "^10.0.2",
+    "react-dom": "^16.12.0"
   }
 }

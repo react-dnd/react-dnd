@@ -3,6 +3,8 @@ path: '/docs/api/use-drag'
 title: 'useDrag'
 ---
 
+<!--alex disable hook -->
+
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
 # useDrag

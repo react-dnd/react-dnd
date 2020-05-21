@@ -21,7 +21,7 @@ yarn add react-dnd-touch-backend
 
 ```jsx
 import TouchBackend from 'react-dnd-touch-backend'
-import { DragDropContext } from 'react-dnd'
+import { DndProvider } from 'react-dnd'
 
 class YourApp {
   <DndProvider backend={TouchBackend} options={opts}>

@@ -3,6 +3,8 @@ path: '/docs/api/drag-source'
 title: 'DragSource'
 ---
 
+<!--alex disable primitive -->
+
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
 # DragSource
@@ -45,7 +47,7 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 - **`endDrag(props, monitor, component)`**: Optional. When the dragging stops, `endDrag` is called. For every `beginDrag` call, a corresponding `endDrag` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a _drop result_ by returning a plain object from its `drop()` method, it will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. _Note: If the component is unmounted while dragging, `component` parameter is set to be `null`._
 
-- **`canDrag(props, monitor)`**: Optional. Use it to specify whether the dragging is currently allowed. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dragging based on some predicate over `props`. _Note: You may not call `monitor.canDrag()` inside this method._
+- **`canDrag(props, monitor)`**: Optional. Use it to specify whether the dragging is currently allowed. If you want to always allow it, then omit this method. Specifying it is handy if you'd like to disable dragging based on some predicate over `props`. _Note: You may not call `monitor.canDrag()` inside this method._
 
 - **`isDragging(props, monitor)`**: Optional. By default, only the drag source that initiated the drag operation is considered to be dragging. You can override this behavior by defining a custom `isDragging` method. It might return something like `props.id === monitor.getItem().id`. Do this if the original component may be unmounted during the dragging and later “resurrected” with a different parent. For example, when moving a card across the lists in a Kanban board, you want it to retain the dragged appearance—even though technically, the component gets unmounted and a different one gets mounted every time you move it to another list. _Note: You may not call `monitor.isDragging()` inside this method._
 
@@ -55,7 +57,7 @@ The second `spec` parameter must be a plain object implementing the drag source 
 
 - **`monitor`**: An instance of [`DragSourceMonitor`](/docs/api/drag-source-monitor). Use it to query the information about the current drag state, such as the currently dragged item and its type, the current and initial coordinates and offsets, and whether it was dropped yet. Read the [`DragSourceMonitor` documentation](/docs/api/drag-source-monitor) for a complete list of `monitor` methods, or read the [overview](/docs/overview) for an introduction to the monitors.
 
-- **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `isDragging` and `canDrag` because the instance may not be available by the time they are called. If you want these methods to depend on the component's state, consider lifting the state to the parent component, so that you can just use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
+- **`component`**: When specified, it is the instance of your component. Use it to access the underlying DOM node for position or size measurements, or to call `setState`, and other component methods. It is purposefully missing from `isDragging` and `canDrag` because the instance may not be available by the time they are called. If you want these methods to depend on the component's state, consider lifting the state to the parent component, so that you can use `props`. Generally your code will be cleaner if you rely on `props` instead whenever possible.
 
 ### The Collecting Function
 

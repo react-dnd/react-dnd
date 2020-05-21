@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import { DndOptions } from '../interfaces'
 import { isPlainObject } from '../utils/js_utils'
 import { registerTarget } from '../common/registration'
@@ -17,7 +17,7 @@ import { checkDecoratorArguments } from './utils'
 import decorateHandler from './decorateHandler'
 import createTargetFactory from './createTargetFactory'
 
-export function DropTarget<RequiredProps, CollectedProps = {}>(
+export function DropTarget<RequiredProps, CollectedProps = any>(
 	type: TargetType | ((props: RequiredProps) => TargetType),
 	spec: DropTargetSpec<RequiredProps>,
 	collect: DropTargetCollector<CollectedProps, RequiredProps>,
@@ -31,9 +31,9 @@ export function DropTarget<RequiredProps, CollectedProps = {}>(
 		collect,
 		options,
 	)
-	let getType: (props: RequiredProps) => TargetType = type as ((
+	let getType: (props: RequiredProps) => TargetType = type as (
 		props: RequiredProps,
-	) => TargetType)
+	) => TargetType
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type, true),

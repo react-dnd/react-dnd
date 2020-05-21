@@ -73,10 +73,10 @@ export interface DragSourceMonitor extends HandlerManager, MonitorEventEmitter {
 	 */
 	getSourceClientOffset(): XYCoord | null
 
-  /**
+	/**
 	 * Returns the ids of the potential drop targets.
 	 */
-  getTargetIds(): Identifier[]
+	getTargetIds(): Identifier[]
 }
 
 export interface MonitorEventEmitter {
