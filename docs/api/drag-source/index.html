@@ -168,7 +168,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
 <span class="token comment">// You want to keep types in a separate file with</span>
 <span class="token comment">// the rest of your app&#x27;s constants.</span>
 <span class="token keyword">const</span> Types <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token constant">CARD</span><span class="token operator">:</span> <span class="token string">&#x27;card&#x27;</span><span class="token punctuation">,</span>
+  <span class="token constant">CARD</span><span class="token operator">:</span> <span class="token string">&#x27;card&#x27;</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">/**
@@ -213,7 +213,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
 
     <span class="token comment">// This is a good place to call some Flux action</span>
     CardActions<span class="token punctuation">.</span><span class="token function">moveCardToList</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>id<span class="token punctuation">,</span> dropResult<span class="token punctuation">.</span>listId<span class="token punctuation">)</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">/**
@@ -225,7 +225,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
     <span class="token comment">// to let React DnD handle the drag events:</span>
     connectDragSource<span class="token operator">:</span> connect<span class="token punctuation">.</span><span class="token function">dragSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token comment">// You can ask the monitor about the current drag state:</span>
-    isDragging<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isDragging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    isDragging<span class="token operator">:</span> monitor<span class="token punctuation">.</span><span class="token function">isDragging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
@@ -242,7 +242,7 @@ For easier <a href="/react-dnd/docs/testing">testing</a>, it provides an API to 
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
         I am a draggable card number </span><span class="token punctuation">{</span>id<span class="token punctuation">}</span><span class="token plain-text">
         </span><span class="token punctuation">{</span>isDragging <span class="token operator">&amp;&amp;</span> <span class="token string">&#x27; (and I am being dragged now)&#x27;</span><span class="token punctuation">}</span><span class="token plain-text">
-      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">,</span>
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
     <span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
