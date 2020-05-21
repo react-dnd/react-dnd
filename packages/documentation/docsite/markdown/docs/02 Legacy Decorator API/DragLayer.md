@@ -74,14 +74,14 @@ const layerStyles = {
   left: 0,
   top: 0,
   width: '100%',
-  height: '100%',
+  height: '100%'
 }
 
 function getItemStyles(props) {
   const { currentOffset } = props
   if (!currentOffset) {
     return {
-      display: 'none',
+      display: 'none'
     }
   }
 
@@ -89,7 +89,7 @@ function getItemStyles(props) {
   const transform = `translate(${x}px, ${y}px)`
   return {
     transform: transform,
-    WebkitTransform: transform,
+    WebkitTransform: transform
   }
 }
 
@@ -117,7 +117,7 @@ function collect(monitor) {
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
     currentOffset: monitor.getSourceClientOffset(),
-    isDragging: monitor.isDragging(),
+    isDragging: monitor.isDragging()
   }
 }
 

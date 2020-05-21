@@ -8,7 +8,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 # DndProvider
 
 The DndProvider component provides React-DnD capabilities to your application. This must be
-injected with a backend via the `backend` prop, but it may can be injected with a `window` object.
+injected with a backend via the `backend` prop, but it may be injected with a `window` object.
 
 ### Usage
 

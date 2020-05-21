@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [10.x, 12.x, 14.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -93,12 +93,13 @@ jobs:
 
       - name: Publish coverage to codecov.io
         uses: codecov/codecov-action@v1.0.3
-        if: success() && matrix.node-version == '12.x'
+        if: success() && matrix.node-version == '14.x'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
   auto-merge:
     name: Auto-Merge Dependabot PRs
+    if: ${{github.actor == 'dependabot-preview'}}
     runs-on: ubuntu-latest
     needs:
       - build

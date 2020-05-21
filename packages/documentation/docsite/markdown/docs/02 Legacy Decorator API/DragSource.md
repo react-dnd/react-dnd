@@ -113,7 +113,7 @@ import { DragSource } from 'react-dnd'
 // You want to keep types in a separate file with
 // the rest of your app's constants.
 const Types = {
-  CARD: 'card',
+  CARD: 'card'
 }
 
 /**
@@ -158,7 +158,7 @@ const cardSource = {
 
     // This is a good place to call some Flux action
     CardActions.moveCardToList(item.id, dropResult.listId)
-  },
+  }
 }
 
 /**
@@ -170,7 +170,7 @@ function collect(connect, monitor) {
     // to let React DnD handle the drag events:
     connectDragSource: connect.dragSource(),
     // You can ask the monitor about the current drag state:
-    isDragging: monitor.isDragging(),
+    isDragging: monitor.isDragging()
   }
 }
 
@@ -187,7 +187,7 @@ class Card {
       <div>
         I am a draggable card number {id}
         {isDragging && ' (and I am being dragged now)'}
-      </div>,
+      </div>
     )
   }
 }

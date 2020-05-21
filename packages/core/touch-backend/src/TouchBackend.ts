@@ -459,7 +459,7 @@ export default class TouchBackend implements Backend {
 		this.installSourceNodeRemovalObserver(sourceNode)
 		this.actions.publishDragSource()
 
-		e.preventDefault()
+		if (e.cancelable) e.preventDefault()
 
 		// Get the node elements of the hovered DropTargets
 		const dragOverTargetNodes = (dragOverTargetIds || []).map(
@@ -540,7 +540,7 @@ export default class TouchBackend implements Backend {
 			return
 		}
 
-		e.preventDefault()
+		if (e.cancelable) e.preventDefault()
 
 		this._mouseClientOffset = {}
 
