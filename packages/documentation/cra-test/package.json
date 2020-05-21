@@ -1,5 +1,5 @@
 {
-  "name": "cra-test",
+  "name": "react-dnd-cra-test",
   "version": "10.0.2",
   "private": true,
   "dependencies": {
@@ -10,10 +10,12 @@
     "react-dom": "^16.12.0",
     "react-scripts": "^3.2.0"
   },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "browserslist": {

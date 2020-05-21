@@ -47,7 +47,7 @@ export default class TouchBackend implements Backend {
 	private static isSetUp: boolean
 	private sourceNodes: Record<Identifier, HTMLElement>
 	private sourcePreviewNodes: Record<string, HTMLElement>
-	private sourcePreviewNodeOptions: Record<string, {}>
+	private sourcePreviewNodeOptions: Record<string, any>
 	private targetNodes: Record<string, HTMLElement>
 	private _mouseClientOffset: Partial<XYCoord>
 	private _isScrolling: boolean
@@ -215,7 +215,7 @@ export default class TouchBackend implements Backend {
 	) {
 		const options = supportsPassive ? { capture, passive: false } : capture
 
-		this.listenerTypes.forEach(function(listenerType) {
+		this.listenerTypes.forEach(function (listenerType) {
 			const evt = eventNames[listenerType][event]
 
 			if (evt) {
@@ -232,7 +232,7 @@ export default class TouchBackend implements Backend {
 	) {
 		const options = supportsPassive ? { capture, passive: false } : capture
 
-		this.listenerTypes.forEach(function(listenerType) {
+		this.listenerTypes.forEach(function (listenerType) {
 			const evt = eventNames[listenerType][event]
 
 			if (evt) {
@@ -463,7 +463,7 @@ export default class TouchBackend implements Backend {
 
 		// Get the node elements of the hovered DropTargets
 		const dragOverTargetNodes = (dragOverTargetIds || []).map(
-			key => this.targetNodes[key],
+			(key) => this.targetNodes[key],
 		)
 		// Get the a ordered list of nodes that are touched by
 		const elementsAtPoint = this.options.getDropTargetElementsAtPoint
@@ -491,9 +491,9 @@ export default class TouchBackend implements Backend {
 		}
 		const orderedDragOverTargetIds: string[] = elementsAtPointExtended
 			// Filter off nodes that arent a hovered DropTargets nodes
-			.filter(node => dragOverTargetNodes.indexOf(node) > -1)
+			.filter((node) => dragOverTargetNodes.indexOf(node) > -1)
 			// Map back the nodes elements to targetIds
-			.map(node => {
+			.map((node) => {
 				for (const targetId in this.targetNodes) {
 					if (node === this.targetNodes[targetId]) {
 						return targetId
@@ -502,7 +502,7 @@ export default class TouchBackend implements Backend {
 				return undefined
 			})
 			// Filter off possible null rows
-			.filter(node => !!node)
+			.filter((node) => !!node)
 			.filter((id, index, ids) => ids.indexOf(id) === index) as string[]
 
 		// Invoke hover for drop targets when source node is still over and pointer is outside
