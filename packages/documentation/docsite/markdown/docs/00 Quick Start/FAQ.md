@@ -72,7 +72,7 @@ import { DropTarget } from 'react-dnd'
 const fileTarget = {
   drop(props, monitor) {
     console.log(monitor.getItem().files)
-  },
+  }
 }
 
 function FileDropZone({ connectDropTarget, isOver, canDrop }) {
@@ -81,14 +81,14 @@ function FileDropZone({ connectDropTarget, isOver, canDrop }) {
       {!isOver && !canDrop && 'Drag files from the hard drive'}
       {!isOver && canDrop && 'Drag the files here'}
       {isOver && 'Drop the files'}
-    </div>,
+    </div>
   )
 }
 
 export default DropTarget(NativeTypes.FILE, fileTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
-  canDrop: monitor.canDrop(),
+  canDrop: monitor.canDrop()
 }))(FileDropZone)
 ```
 
@@ -128,7 +128,7 @@ class Page {
 }
 
 Page = DragDropContext(HTML5Backend)(Page)
-Page.willTransitionTo = function(transition, params) {
+Page.willTransitionTo = function (transition, params) {
   /* ... */
 }
 

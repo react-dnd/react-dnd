@@ -1,4 +1,0 @@
-ratings:
-  paths:
-  - "**.js"
-exclude_paths:

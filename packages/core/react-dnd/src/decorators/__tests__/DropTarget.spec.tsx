@@ -18,7 +18,7 @@ describe('DropTarget', () => {
 	})
 
 	it('can apply to an function component', () => {
-		const Component: React.FC<{}> = () => null
+		const Component: React.FC = () => null
 		const DecoratedComponent = DropTarget(
 			'abc',
 			{
@@ -32,7 +32,7 @@ describe('DropTarget', () => {
 
 	it('throws an error if rendered outside a DragDropContext', () => {
 		console.error = jest.fn()
-		const Component: React.FC<{}> = () => null
+		const Component: React.FC = () => null
 		const DecoratedComponent = DropTarget(
 			'abc',
 			{

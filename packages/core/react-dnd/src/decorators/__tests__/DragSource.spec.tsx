@@ -14,7 +14,7 @@ describe('DragSource', () => {
 	})
 
 	it('can apply to an SFC', () => {
-		const Component: React.FC<{}> = () => null
+		const Component: React.FC = () => null
 		const DecoratedComponent = DragSource(
 			'abc',
 			{ beginDrag: () => null },
@@ -45,7 +45,7 @@ describe('DragSource', () => {
 
 	it('throws an error if rendered outside a DndContext', () => {
 		console.error = jest.fn()
-		const Component: React.FC<{}> = () => null
+		const Component: React.FC = () => null
 		const DecoratedComponent = DragSource(
 			'abc',
 			{ beginDrag: () => null },
