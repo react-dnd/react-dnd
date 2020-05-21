@@ -79,7 +79,7 @@ class TargetImpl<Props> implements Target {
 export default function createTargetFactory<Props>(
 	spec: DropTargetSpec<Props>,
 ) {
-	Object.keys(spec).forEach(key => {
+	Object.keys(spec).forEach((key) => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
 			'Expected the drop target specification to only have ' +

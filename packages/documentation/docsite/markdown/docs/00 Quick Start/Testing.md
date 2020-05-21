@@ -20,17 +20,17 @@ If you are using `create-react-app`, which uses Jest to drive unit tests, you ca
 ```js
 /* config-overrides.js */
 module.exports = {
-  jest: config => {
+  jest: (config) => {
     config.moduleNameMapper = Object.assign({}, config.moduleNameMapper, {
       '^dnd-core$': 'dnd-core/dist/cjs',
       '^react-dnd$': 'react-dnd/dist/cjs',
       '^react-dnd-html5-backend$': 'react-dnd-html5-backend/dist/cjs',
       '^react-dnd-touch-backend$': 'react-dnd-touch-backend/dist/cjs',
       '^react-dnd-test-backend$': 'react-dnd-test-backend/dist/cjs',
-      '^react-dnd-test-utils$': 'react-dnd-test-utils/dist/cjs',
+      '^react-dnd-test-utils$': 'react-dnd-test-utils/dist/cjs'
     })
     return config
-  },
+  }
 }
 ```
 
@@ -49,18 +49,18 @@ it('can be tested independently', () => {
   const OriginalBox = Box.DecoratedComponent
 
   // Stub the React DnD connector functions with an identity function
-  const identity = el => el
+  const identity = (el) => el
 
   // Render with one set of props and test
   let root = TestUtils.renderIntoDocument(
-    <OriginalBox name="test" connectDragSource={identity} />,
+    <OriginalBox name="test" connectDragSource={identity} />
   )
   let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
   expect(div.props.style.opacity).toEqual(1)
 
   // Render with another set of props and test
   root = TestUtils.renderIntoDocument(
-    <OriginalBox name="test" connectDragSource={identity} isDragging />,
+    <OriginalBox name="test" connectDragSource={identity} isDragging />
   )
   div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
   expect(div.props.style.opacity).toEqual(0.4)
@@ -116,19 +116,20 @@ it('can be tested with the testing backend', () => {
 ### Testing with Enzyme
 
 [Enzyme](https://github.com/airbnb/enzyme) is a commonly-used tool for testing React components.
-To use it with react-dnd, you'll need to call `.instance()` on `mount`-ed nodes to access the react-dnd helper methods:
+Because of a [bug in Enzyme](https://github.com/airbnb/enzyme/issues/1852), you'll want to wrap your component in a fragment when you mount it.
+You can then store a ref to your wrapped component and use this ref to access the current `DragDropMananger` instance and call its methods.
 
 ```jsx
-import { getBackendFromInstance } from 'react-dnd-test-utils'
+const BoxContext = wrapInTestContext(Box)
 
-var root = Enzyme.mount(<BoxContext name="test" />)
+const ref = React.createRef()
+const root = Enzyme.mount(
+  <>
+    <BoxContext ref={ref} name="test" />
+  </>
+)
 
 // ...
 
-var backend = getBackendFromInstance(root)
-var manager = backend.manager
-
-// ...
-
-backend.simulateHover([dustbin.instance().getHandlerId()])
+const backend = ref.current.getManager().getBackend()
 ```

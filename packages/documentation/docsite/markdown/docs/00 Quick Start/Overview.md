@@ -44,7 +44,7 @@ Let's say you want to highlight the Chess cells when a piece is being dragged. A
 function collect(monitor) {
   return {
     highlighted: monitor.canDrop(),
-    hovered: monitor.isOver(),
+    hovered: monitor.isOver()
   }
 }
 ```
@@ -62,7 +62,7 @@ function collect(connect, monitor) {
   return {
     highlighted: monitor.canDrop(),
     hovered: monitor.isOver(),
-    connectDropTarget: connect.dropTarget(),
+    connectDropTarget: connect.dropTarget()
   }
 }
 ```
@@ -140,7 +140,7 @@ class YourComponent {
   render() {
     const { connectDragSource, connectDropTarget } = this.props
     return connectDragSource(
-      connectDropTarget(),
+      connectDropTarget()
       /* ... */
     )
   }
@@ -162,7 +162,7 @@ import { DragSource } from 'react-dnd'
 // You want to keep types in a separate file with
 // the rest of your app's constants.
 const Types = {
-  CARD: 'card',
+  CARD: 'card'
 }
 
 /**
@@ -185,7 +185,7 @@ const cardSource = {
     const item = monitor.getItem()
     const dropResult = monitor.getDropResult()
     CardActions.moveCardToList(item.id, dropResult.listId)
-  },
+  }
 }
 
 /**
@@ -197,7 +197,7 @@ function collect(connect, monitor) {
     // to let React DnD handle the drag events:
     connectDragSource: connect.dragSource(),
     // You can ask the monitor about the current drag state:
-    isDragging: monitor.isDragging(),
+    isDragging: monitor.isDragging()
   }
 }
 
@@ -213,7 +213,7 @@ function Card(props) {
     <div>
       I am a draggable card number {id}
       {isDragging && ' (and I am being dragged now)'}
-    </div>,
+    </div>
   )
 }
 
