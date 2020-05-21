@@ -23,7 +23,11 @@ import createSourceFactory from './createSourceFactory'
  * @param collect The props collector function
  * @param options DnD options
  */
-export function DragSource<RequiredProps, CollectedProps = {}, DragObject = {}>(
+export function DragSource<
+	RequiredProps,
+	CollectedProps = any,
+	DragObject = any
+>(
 	type: SourceType | ((props: RequiredProps) => SourceType),
 	spec: DragSourceSpec<RequiredProps, DragObject>,
 	collect: DragSourceCollector<CollectedProps, RequiredProps>,

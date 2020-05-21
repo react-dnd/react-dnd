@@ -1,3 +1,5 @@
 #!/bin/sh
 set -e
-npx babel --config-file=../../../babel.config.js src --ignore="src/**/__tests__/**" --out-dir lib --extensions '.ts,.tsx' -w --verbose
+npx tsc -w --preserveWatchOutput&
+npx babel --config-file=../../../babel.config.js lib --out-dir dist/esm -w&
+npx babel --config-file=../../../babel.config.cjs.js lib --out-dir dist/cjs -w

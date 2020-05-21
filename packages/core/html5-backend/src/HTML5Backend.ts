@@ -528,7 +528,7 @@ export default class HTML5Backend implements Backend {
 			})
 		}
 
-		const canDrop = dragEnterTargetIds.some(targetId =>
+		const canDrop = dragEnterTargetIds.some((targetId) =>
 			this.monitor.canDropOnTarget(targetId),
 		)
 
@@ -572,7 +572,7 @@ export default class HTML5Backend implements Backend {
 			clientOffset: getEventClientOffset(e),
 		})
 
-		const canDrop = (dragOverTargetIds || []).some(targetId =>
+		const canDrop = (dragOverTargetIds || []).some((targetId) =>
 			this.monitor.canDropOnTarget(targetId),
 		)
 
