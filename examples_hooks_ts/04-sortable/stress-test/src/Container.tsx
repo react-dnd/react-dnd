@@ -28,11 +28,17 @@ function buildCardData() {
   }
 }
 
-export default class Container extends React.Component<{}, ContainerState> {
+/* eslint-disable-next-line @typescript-eslint/no-empty-interface */
+export interface ContainerProps {}
+
+export default class Container extends React.Component<
+  ContainerProps,
+  ContainerState
+> {
   private pendingUpdateFn: any
   private requestedFrame: number | undefined
 
-  public constructor(props: {}) {
+  public constructor(props: ContainerProps) {
     super(props)
     this.state = buildCardData()
   }
