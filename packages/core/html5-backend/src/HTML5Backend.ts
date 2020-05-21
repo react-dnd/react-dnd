@@ -350,12 +350,12 @@ export default class HTML5Backend implements Backend {
 		return false
 	}
 
-	private handleTopDragStartCapture = () => {
+	public handleTopDragStartCapture = () => {
 		this.clearCurrentDragSourceNode()
 		this.dragStartSourceIds = []
 	}
 
-	private handleDragStart(e: DragEvent, sourceId: string) {
+	public handleDragStart(e: DragEvent, sourceId: string) {
 		if (e.defaultPrevented) {
 			return
 		}
@@ -366,7 +366,7 @@ export default class HTML5Backend implements Backend {
 		this.dragStartSourceIds.unshift(sourceId)
 	}
 
-	private handleTopDragStart = (e: DragEvent) => {
+	public handleTopDragStart = (e: DragEvent) => {
 		if (e.defaultPrevented) {
 			return
 		}
@@ -477,7 +477,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleTopDragEndCapture = () => {
+	public handleTopDragEndCapture = () => {
 		if (this.clearCurrentDragSourceNode()) {
 			// Firefox can dispatch this event in an infinite loop
 			// if dragend handler does something like showing an alert.
@@ -486,7 +486,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleTopDragEnterCapture = (e: DragEvent) => {
+	public handleTopDragEnterCapture = (e: DragEvent) => {
 		this.dragEnterTargetIds = []
 
 		const isFirstEnter = this.enterLeaveCounter.enter(e.target)
@@ -503,11 +503,11 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleDragEnter(e: DragEvent, targetId: string) {
+	public handleDragEnter(e: DragEvent, targetId: string) {
 		this.dragEnterTargetIds.unshift(targetId)
 	}
 
-	private handleTopDragEnter = (e: DragEvent) => {
+	public handleTopDragEnter = (e: DragEvent) => {
 		const { dragEnterTargetIds } = this
 		this.dragEnterTargetIds = []
 
@@ -541,18 +541,18 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleTopDragOverCapture = () => {
+	public handleTopDragOverCapture = () => {
 		this.dragOverTargetIds = []
 	}
 
-	private handleDragOver(e: DragEvent, targetId: string) {
+	public handleDragOver(e: DragEvent, targetId: string) {
 		if (this.dragOverTargetIds === null) {
 			this.dragOverTargetIds = []
 		}
 		this.dragOverTargetIds.unshift(targetId)
 	}
 
-	private handleTopDragOver = (e: DragEvent) => {
+	public handleTopDragOver = (e: DragEvent) => {
 		const { dragOverTargetIds } = this
 		this.dragOverTargetIds = []
 
@@ -594,7 +594,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleTopDragLeaveCapture = (e: DragEvent) => {
+	public handleTopDragLeaveCapture = (e: DragEvent) => {
 		if (this.isDraggingNativeItem()) {
 			e.preventDefault()
 		}
@@ -609,7 +609,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleTopDropCapture = (e: DragEvent) => {
+	public handleTopDropCapture = (e: DragEvent) => {
 		this.dropTargetIds = []
 		e.preventDefault()
 
@@ -620,11 +620,11 @@ export default class HTML5Backend implements Backend {
 		this.enterLeaveCounter.reset()
 	}
 
-	private handleDrop(e: DragEvent, targetId: string) {
+	public handleDrop(e: DragEvent, targetId: string) {
 		this.dropTargetIds.unshift(targetId)
 	}
 
-	private handleTopDrop = (e: DragEvent) => {
+	public handleTopDrop = (e: DragEvent) => {
 		const { dropTargetIds } = this
 		this.dropTargetIds = []
 
@@ -640,7 +640,7 @@ export default class HTML5Backend implements Backend {
 		}
 	}
 
-	private handleSelectStart = (e: DragEvent) => {
+	public handleSelectStart = (e: DragEvent) => {
 		const target = e.target as HTMLElement & { dragDrop: () => void }
 
 		// Only IE requires us to explicitly say
