@@ -12,11 +12,17 @@ export interface ContainerState {
 	cardsByIndex: any[]
 }
 
-export default class Container extends React.Component<void, ContainerState> {
+/* eslint-disable-next-line @typescript-eslint/no-empty-interface */
+export interface ContainerProps {}
+
+export default class Container extends React.Component<
+	ContainerProps,
+	ContainerState
+> {
 	private pendingUpdateFn: any
 	private requestedFrame: number | undefined
 
-	public constructor(props: void) {
+	public constructor(props: ContainerProps) {
 		super(props)
 
 		const cardsById: Record<string, any> = {}
