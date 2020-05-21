@@ -44,6 +44,7 @@
     "lint:code": "eslint . --ext .js,.ts,.jsx,.tsx",
     "lint:spelling": "mdspell 'packages/documentation/docsite/markdown/**/*.md' --en-us --report",
     "lint:tone": "alex .",
+    "lint:formatting": "pretty-quick --check",
     "lint": "run-s lint:*",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "release_canary": "lerna publish -c --preid next --yes",
@@ -172,7 +173,8 @@
       {
         "files": "*.md",
         "options": {
-          "useTabs": false
+          "useTabs": false,
+          "trailingComma": "none"
         }
       },
       {
