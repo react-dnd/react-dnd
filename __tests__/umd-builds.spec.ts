@@ -31,10 +31,10 @@ describe('UMD Builds', () => {
 })
 
 function checkKeyMatch(lib: any, expected: any): void {
-	Object.keys(expected).forEach(key => {
+	Object.keys(expected).forEach((key) => {
 		expect(typeof lib[key]).toEqual(typeof expected[key])
 	})
-	Object.keys(lib).forEach(key => {
+	Object.keys(lib).forEach((key) => {
 		expect(typeof expected[key]).toEqual(typeof lib[key])
 	})
 }

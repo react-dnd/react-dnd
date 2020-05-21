@@ -33,7 +33,7 @@ async function createPages({ actions, graphql }) {
 		const {
 			frontmatter: { path: pagePath },
 		} = node
-		const category = (pagePath || '/').split('/').filter(t => !!t)[0]
+		const category = (pagePath || '/').split('/').filter((t) => !!t)[0]
 		const isExample = category === 'examples'
 		console.log(`create page for ${pagePath} - type is ${category}`)
 		actions.createPage({

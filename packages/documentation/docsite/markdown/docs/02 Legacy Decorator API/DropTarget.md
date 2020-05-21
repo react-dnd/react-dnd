@@ -118,7 +118,7 @@ import { DropTarget } from 'react-dnd'
 // You want to keep types in a separate file with
 // the rest of your app's constants.
 const Types = {
-  CHESSPIECE: 'chesspiece',
+  CHESSPIECE: 'chesspiece'
 }
 
 /**
@@ -166,7 +166,7 @@ const chessSquareTarget = {
     // which will be available as monitor.getDropResult()
     // in the drag source's endDrag() method
     return { moved: true }
-  },
+  }
 }
 
 /**
@@ -181,7 +181,7 @@ function collect(connect, monitor) {
     isOver: monitor.isOver(),
     isOverCurrent: monitor.isOver({ shallow: true }),
     canDrop: monitor.canDrop(),
-    itemType: monitor.getItemType(),
+    itemType: monitor.getItemType()
   }
 }
 
@@ -214,7 +214,7 @@ class ChessSquare {
         {isOver && canDrop && <div class="green" />}
         {!isOver && canDrop && <div class="yellow" />}
         {isOver && !canDrop && <div class="red" />}
-      </div>,
+      </div>
     )
   }
 }
@@ -222,6 +222,6 @@ class ChessSquare {
 export default DropTarget(
   Types.CHESSPIECE,
   chessSquareTarget,
-  collect,
+  collect
 )(ChessSquare)
 ```

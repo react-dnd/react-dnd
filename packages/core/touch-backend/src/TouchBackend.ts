@@ -47,7 +47,7 @@ export default class TouchBackend implements Backend {
 	private static isSetUp: boolean
 	private sourceNodes: Record<Identifier, HTMLElement>
 	private sourcePreviewNodes: Record<string, HTMLElement>
-	private sourcePreviewNodeOptions: Record<string, {}>
+	private sourcePreviewNodeOptions: Record<string, any>
 	private targetNodes: Record<string, HTMLElement>
 	private _mouseClientOffset: Partial<XYCoord>
 	private _isScrolling: boolean

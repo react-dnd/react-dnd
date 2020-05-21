@@ -44,7 +44,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 		connectDropTarget(elementRef)
 
 		const opacity = isDragging ? 0 : 1
-		useImperativeHandle<{}, CardInstance>(ref, () => ({
+		useImperativeHandle<any, CardInstance>(ref, () => ({
 			getNode: () => elementRef.current,
 		}))
 		return (
