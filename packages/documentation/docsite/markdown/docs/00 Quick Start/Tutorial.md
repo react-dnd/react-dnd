@@ -115,7 +115,7 @@ ReactDOM.render(
   <Square black>
     <Knight />
   </Square>,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 ```
 
@@ -140,7 +140,7 @@ export default function Square({ black, children }) {
         backgroundColor: fill,
         color: stroke,
         width: '100%',
-        height: '100%',
+        height: '100%'
       }}
     >
       {children}
@@ -178,7 +178,7 @@ import Board from './Board'
 
 ReactDOM.render(
   <Board knightPosition={[0, 0]} />,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 ```
 
@@ -206,7 +206,7 @@ export default function Board({ knightPosition }) {
     <div
       style={{
         width: '100%',
-        height: '100%',
+        height: '100%'
       }}
     >
       {renderSquare(0, 0, knightPosition)}
@@ -252,7 +252,7 @@ export default function Board({ knightPosition }) {
         width: '100%',
         height: '100%',
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'wrap'
       }}
     >
       {squares}
@@ -274,7 +274,7 @@ import Board from './Board'
 
 ReactDOM.render(
   <Board knightPosition={[7, 4]} />,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 ```
 
@@ -302,8 +302,8 @@ import { observe } from './Game'
 
 const root = document.getElementById('root')
 
-observe(knightPosition =>
-  ReactDOM.render(<Board knightPosition={knightPosition} />, root),
+observe((knightPosition) =>
+  ReactDOM.render(<Board knightPosition={knightPosition} />, root)
 )
 ```
 
@@ -446,7 +446,7 @@ Next, I'm going to create the constants for the draggable item types. We're only
 
 ```jsx
 export const ItemTypes = {
-  KNIGHT: 'knight',
+  KNIGHT: 'knight'
 }
 ```
 
@@ -459,9 +459,9 @@ The [`useDrag`](/docs/api/use-drag) hook accepts a specification object. In this
 ```jsx
 const [{ isDragging }, drag] = useDrag({
   item: { type: ItemTypes.KNIGHT },
-  collect: monitor => ({
-    isDragging: !!monitor.isDragging(),
-  }),
+  collect: (monitor) => ({
+    isDragging: !!monitor.isDragging()
+  })
 })
 ```
 
@@ -558,7 +558,7 @@ Let's now wrap the `BoardSquare` with a [`useDrop`](/docs/api/use-drop) hook. I'
 ```jsx
 const [, drop] = useDrop({
   accept: ItemTypes.KNIGHT,
-  drop: () => moveKnight(x, y),
+  drop: () => moveKnight(x, y)
 })
 ```
 
@@ -570,10 +570,10 @@ In my collecting function I'm going to ask the monitor whether the pointer is cu
 const [{ isOver, canDrop }, drop] = useDrop({
   accept: ItemTypes.KNIGHT,
   drop: () => moveKnight(x, y),
-  collect: mon => ({
+  collect: (mon) => ({
     isOver: !!mon.isOver(),
-    canDrop: !!mon.canDrop(),
-  }),
+    canDrop: !!mon.canDrop()
+  })
 })
 ```
 
@@ -638,10 +638,10 @@ const [{ isOver, canDrop }, drop] = useDrop({
   accept: ItemTypes.KNIGHT,
   canDrop: () => canMoveKnight(x, y),
   drop: () => moveKnight(x, y),
-  collect: monitor => ({
+  collect: (monitor) => ({
     isOver: !!monitor.isOver(),
-    canDrop: !!monitor.canDrop(),
-  }),
+    canDrop: !!monitor.canDrop()
+  })
 })
 ```
 
@@ -697,9 +697,9 @@ We are lucky again, because it is easy to do with React DnD. We just need to use
 ```jsx
 const [{ isDragging }, drag, preview] = useDrag({
   item: { type: ItemTypes.KNIGHT },
-  collect: monitor => ({
-    isDragging: !!monitor.isDragging(),
-  }),
+  collect: (monitor) => ({
+    isDragging: !!monitor.isDragging()
+  })
 })
 ```
 

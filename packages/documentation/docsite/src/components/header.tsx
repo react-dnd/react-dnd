@@ -27,14 +27,12 @@ const DebugModeFlag: React.FC<HeaderProps> = ({ debugMode, touchBackend }) => {
 	)
 }
 
-const Header: React.FC<HeaderProps> = props => (
+export const Header: React.FC<HeaderProps> = (props) => (
 	<Container>
 		<DebugModeFlag {...props} />
 		<NavBar />
 	</Container>
 )
-
-export default Header
 
 const Container = styled.header`
 	overflow: hidden;
