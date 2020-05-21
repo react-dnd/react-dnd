@@ -8,7 +8,7 @@ import { isPlainObject } from '../utils/js_utils'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable, checkDecoratorArguments } from './utils'
 
-export function DragLayer<RequiredProps, CollectedProps = {}>(
+export function DragLayer<RequiredProps, CollectedProps = any>(
 	collect: DragLayerCollector<RequiredProps, CollectedProps>,
 	options: DndOptions<RequiredProps> = {},
 ): DndComponentEnhancer<CollectedProps> {

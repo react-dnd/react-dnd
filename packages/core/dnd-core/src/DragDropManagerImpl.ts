@@ -13,7 +13,7 @@ import {
 } from './interfaces'
 import { State } from './reducers'
 
-function makeStoreInstance(debugMode: boolean) {
+function makeStoreInstance(debugMode: boolean): Store<State> {
 	// TODO: if we ever make a react-native version of this,
 	// we'll need to consider how to pull off dev-tooling
 	const reduxDevTools =
