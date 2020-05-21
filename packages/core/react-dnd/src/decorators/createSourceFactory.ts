@@ -86,10 +86,10 @@ class SourceImpl<Props> implements Source {
 	}
 }
 
-export default function createSourceFactory<Props, DragObject = {}>(
+export default function createSourceFactory<Props, DragObject = any>(
 	spec: DragSourceSpec<Props, DragObject>,
 ) {
-	Object.keys(spec).forEach(key => {
+	Object.keys(spec).forEach((key) => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
 			'Expected the drag source specification to only have ' +
@@ -109,7 +109,7 @@ export default function createSourceFactory<Props, DragObject = {}>(
 			(spec as any)[key],
 		)
 	})
-	REQUIRED_SPEC_METHODS.forEach(key => {
+	REQUIRED_SPEC_METHODS.forEach((key) => {
 		invariant(
 			typeof (spec as any)[key] === 'function',
 			'Expected %s in the drag source specification to be a function. ' +

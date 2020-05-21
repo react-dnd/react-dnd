@@ -12,14 +12,14 @@ export interface ContainerState {
 	cardsByIndex: any[]
 }
 
-export default class Container extends React.Component<{}, ContainerState> {
+export default class Container extends React.Component<void, ContainerState> {
 	private pendingUpdateFn: any
 	private requestedFrame: number | undefined
 
-	public constructor(props: {}) {
+	public constructor(props: void) {
 		super(props)
 
-		const cardsById: { [key: string]: any } = {}
+		const cardsById: Record<string, any> = {}
 		const cardsByIndex = []
 
 		for (let i = 0; i < 1000; i += 1) {
@@ -45,7 +45,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 
 		return (
 			<div style={style}>
-				{cardsByIndex.map(card => (
+				{cardsByIndex.map((card) => (
 					<Card
 						key={card.id}
 						id={card.id}

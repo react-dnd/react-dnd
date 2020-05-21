@@ -28,11 +28,11 @@ function buildCardData() {
 	}
 }
 
-export default class Container extends React.Component<{}, ContainerState> {
+export default class Container extends React.Component<void, ContainerState> {
 	private pendingUpdateFn: any
 	private requestedFrame: number | undefined
 
-	public constructor(props: {}) {
+	public constructor(props: void) {
 		super(props)
 		this.state = buildCardData()
 	}
@@ -49,7 +49,7 @@ export default class Container extends React.Component<{}, ContainerState> {
 		return (
 			<>
 				<div style={style}>
-					{cardsByIndex.map(card => (
+					{cardsByIndex.map((card) => (
 						<Card
 							key={card.id}
 							id={card.id}
