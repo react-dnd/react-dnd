@@ -245,6 +245,10 @@ export const ExamplePages: PageGroup[] = [
 				location: '/examples/other/chained-connectors',
 				title: 'Chained Connectors',
 			},
+			OTHER_PREVIEWN_MEMORY_LEAK: {
+				location: '/examples/other/previews-memory-leak',
+				title: 'Previews Memory Leak',
+			},
 		},
 	},
 ]
