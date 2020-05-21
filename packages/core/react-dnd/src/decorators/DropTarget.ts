@@ -17,7 +17,7 @@ import { checkDecoratorArguments } from './utils'
 import decorateHandler from './decorateHandler'
 import createTargetFactory from './createTargetFactory'
 
-export function DropTarget<RequiredProps, CollectedProps = {}>(
+export function DropTarget<RequiredProps, CollectedProps = any>(
 	type: TargetType | ((props: RequiredProps) => TargetType),
 	spec: DropTargetSpec<RequiredProps>,
 	collect: DropTargetCollector<CollectedProps, RequiredProps>,

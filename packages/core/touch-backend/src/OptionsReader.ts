@@ -10,7 +10,11 @@ export class OptionsReader implements TouchBackendOptions {
 	public scrollAngleRanges: AngleRange[] | undefined = undefined
 	public delayTouchStart: number
 	public delayMouseStart: number
-	public getDropTargetElementsAtPoint?: Function
+	public getDropTargetElementsAtPoint?: (
+		x: number,
+		y: number,
+		elements: HTMLElement[],
+	) => HTMLElement[]
 	private context: any
 
 	public constructor(incoming: TouchBackendOptions, context?: any) {
@@ -18,7 +22,7 @@ export class OptionsReader implements TouchBackendOptions {
 		this.delayTouchStart = incoming.delayTouchStart || incoming.delay || 0
 		this.delayMouseStart = incoming.delayMouseStart || incoming.delay || 0
 
-		Object.keys(incoming).forEach(key => {
+		Object.keys(incoming).forEach((key) => {
 			if ((incoming as any)[key] != null) {
 				;(this as any)[key] = (incoming as any)[key]
 			}

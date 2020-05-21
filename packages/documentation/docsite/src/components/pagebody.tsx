@@ -5,7 +5,7 @@ import theme from '../theme'
 export interface PageBodyProps {
 	hasSidebar: boolean
 }
-const PageBody: React.FC<PageBodyProps> = props => {
+export const PageBody: React.FC<PageBodyProps> = (props) => {
 	const { hasSidebar, children } = props
 	const Content = hasSidebar ? SidebarContent : PlainContent
 	return (
@@ -38,4 +38,3 @@ const SidebarContent = styled.div`
 		margin-left: 15em;
 	}
 `
-export default PageBody
