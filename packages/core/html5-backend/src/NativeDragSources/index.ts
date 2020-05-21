@@ -19,10 +19,10 @@ export function matchNativeItemType(
 
 	const dataTransferTypes = Array.prototype.slice.call(dataTransfer.types || [])
 	return (
-		Object.keys(nativeTypesConfig).filter(nativeItemType => {
+		Object.keys(nativeTypesConfig).filter((nativeItemType) => {
 			const { matchesTypes } = nativeTypesConfig[nativeItemType]
 			return (matchesTypes as string[]).some(
-				t => dataTransferTypes.indexOf(t) > -1,
+				(t) => dataTransferTypes.indexOf(t) > -1,
 			)
 		})[0] || null
 	)

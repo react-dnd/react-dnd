@@ -36,7 +36,7 @@ export function validateType(
 	allowArray?: boolean,
 ) {
 	if (allowArray && Array.isArray(type)) {
-		type.forEach(t => validateType(t, false))
+		type.forEach((t) => validateType(t, false))
 		return
 	}
 

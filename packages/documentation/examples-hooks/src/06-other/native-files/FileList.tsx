@@ -7,7 +7,7 @@ export interface FileListProps {
 function list(files: File[]) {
 	const label = (file: File) =>
 		`'${file.name}' of size '${file.size}' and type '${file.type}'`
-	return files.map(file => <li key={file.name}>{label(file)}</li>)
+	return files.map((file) => <li key={file.name}>{label(file)}</li>)
 }
 
 const FileList: React.FC<FileListProps> = ({ files }) => {

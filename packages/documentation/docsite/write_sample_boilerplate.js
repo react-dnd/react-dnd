@@ -115,7 +115,7 @@ function walk_examples(dir, look_for, done) {
 			return done(null, results)
 		}
 
-		list.forEach(file => {
+		list.forEach((file) => {
 			file = path.resolve(dir, file)
 
 			fs.stat(file, (err, stat) => {
@@ -148,7 +148,7 @@ function handleJsExample(err, results) {
 		fs.mkdirSync(publicDir, { recursive: true })
 
 		const exampleFiles = fs.readdirSync(exampleDir)
-		exampleFiles.forEach(file => {
+		exampleFiles.forEach((file) => {
 			if (file.endsWith('.js') || file.endsWith('.jsx')) {
 				const sourcePath = path.join(exampleDir, file)
 				const targetPath = path.join(srcDir, file)
@@ -195,7 +195,7 @@ function handleTsExample(err, results) {
 		fs.mkdirSync(publicDir, { recursive: true })
 
 		const exampleFiles = fs.readdirSync(exampleDir)
-		exampleFiles.forEach(file => {
+		exampleFiles.forEach((file) => {
 			if (file.endsWith('.ts') || file.endsWith('.tsx')) {
 				const sourcePath = path.join(exampleDir, file)
 				const targetPath = path.join(srcDir, file)

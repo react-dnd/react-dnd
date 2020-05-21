@@ -26,8 +26,8 @@ export default DragSource(
   /* ... */
   (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-  }),
+    connectDragPreview: connect.dragPreview()
+  })
 )
 ```
 
