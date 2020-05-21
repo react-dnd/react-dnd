@@ -103,8 +103,6 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.1",
     "pretty-quick": "^2.0.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
     "replace-in-file": "^6.0.0",
     "rollup": "^2.6.1",
     "rollup-plugin-commonjs": "^10.1.0",
@@ -198,8 +196,7 @@
       "packages/core/*"
     ],
     "nohoist": [
-      "react-dnd-documentation/**",
-      "react-dnd-cra-test/**"
+      "react-dnd-documentation/**"
     ]
   }
 }
