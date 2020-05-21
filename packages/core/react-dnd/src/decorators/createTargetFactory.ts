@@ -2,7 +2,7 @@ declare const process: any
 
 import * as React from 'react'
 import { DropTarget } from 'dnd-core'
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import { DropTargetMonitor } from '../interfaces'
 import { isPlainObject } from '../utils/js_utils'
 import { DropTargetSpec } from './interfaces'
@@ -79,7 +79,7 @@ class TargetImpl<Props> implements Target {
 export default function createTargetFactory<Props>(
 	spec: DropTargetSpec<Props>,
 ) {
-	Object.keys(spec).forEach(key => {
+	Object.keys(spec).forEach((key) => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
 			'Expected the drop target specification to only have ' +

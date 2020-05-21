@@ -43,7 +43,10 @@ export interface DragSourceHookSpec<
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	end?: (dropResult: DropResult | undefined, monitor: DragSourceMonitor) => void
+	end?: (
+		draggedItem: DragObject | undefined,
+		monitor: DragSourceMonitor,
+	) => void
 
 	/**
 	 * Optional.

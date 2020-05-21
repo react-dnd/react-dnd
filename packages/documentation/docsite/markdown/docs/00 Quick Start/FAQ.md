@@ -3,6 +3,8 @@ path: '/docs/faq'
 title: 'FAQ'
 ---
 
+<!--alex disable hook -->
+
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
 # FAQ
@@ -39,7 +41,7 @@ Both [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-tar
 
 ### How do I combine several drag sources and drop targets in a single component?
 
-Because [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-target) use the partial application, you may compose them using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). With decorators, you can just stack the decorators to achieve the same effect.
+Because [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-target) use the partial application, you may compose them using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). With decorators, you can stack the decorators to achieve the same effect.
 
 ### Why is the `component` parameter always `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods?
 
@@ -55,10 +57,7 @@ class YourComponent {
   /* ... */
 }
 
-export default flow(
-  DragSource(/* ... */),
-  DropTarget(/* ... */),
-)(YourComponent)
+export default flow(DragSource(/* ... */), DropTarget(/* ... */))(YourComponent)
 ```
 
 ### How do I register a drop target for the native files?
@@ -73,7 +72,7 @@ import { DropTarget } from 'react-dnd'
 const fileTarget = {
   drop(props, monitor) {
     console.log(monitor.getItem().files)
-  },
+  }
 }
 
 function FileDropZone({ connectDropTarget, isOver, canDrop }) {
@@ -82,14 +81,14 @@ function FileDropZone({ connectDropTarget, isOver, canDrop }) {
       {!isOver && !canDrop && 'Drag files from the hard drive'}
       {!isOver && canDrop && 'Drag the files here'}
       {isOver && 'Drop the files'}
-    </div>,
+    </div>
   )
 }
 
 export default DropTarget(NativeTypes.FILE, fileTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
-  canDrop: monitor.canDrop(),
+  canDrop: monitor.canDrop()
 }))(FileDropZone)
 ```
 
@@ -119,7 +118,7 @@ class Page {
 export default DragDropContext(HTML5Backend)(Page)
 ```
 
-It might surprise you that your route handler's `willTransitionTo` (or a similar method) won't get triggered in this case! React DnD doesn't proxy your components' static methods and properties. This is too fragile and full of edge cases, so you must do it yourself. It's not hard! Just put your statics onto the components returned by React DnD instead:
+It might surprise you that your route handler's `willTransitionTo` (or a similar method) won't get triggered in this case! React DnD doesn't proxy your components' static methods and properties. This is too fragile and full of edge cases, so you must do it yourself. To do this, put your statics onto the components returned by React DnD instead:
 
 ```javascript
 class Page {
@@ -129,7 +128,7 @@ class Page {
 }
 
 Page = DragDropContext(HTML5Backend)(Page)
-Page.willTransitionTo = function(transition, params) {
+Page.willTransitionTo = function (transition, params) {
   /* ... */
 }
 
@@ -145,10 +144,6 @@ I know, it's only drag and drop, [but I like it](http://www.youtube.com/watch?v=
 ### How stable is it?
 
 [Stampsy](http://stampsy.com) has been using this library, as well as its non-React predecessor that it was based on, since 2013. It's central to the Stampsy user experience, because all the content is created in a drag and drop post editor that uses React DnD.
-
-### What is the roadmap?
-
-The library is pretty much complete, and there are no new big features planned. Most of the new development now occurs outside React DnD—for example, there is an ongoing work on [the touch backend](https://github.com/yahoo/react-dnd-touch-backend) for it.
 
 ### Who made it and why?
 

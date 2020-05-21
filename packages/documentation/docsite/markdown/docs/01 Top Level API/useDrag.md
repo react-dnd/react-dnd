@@ -3,6 +3,8 @@ path: '/docs/api/use-drag'
 title: 'useDrag'
 ---
 
+<!--alex disable hook -->
+
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
 # useDrag
@@ -14,7 +16,7 @@ import { useDrag } from 'react-dnd'
 
 function DraggableComponent(props) {
   const [collectedProps, drag] = useDrag({
-    item: { id, type },
+    item: { id, type }
   })
   return <div ref={drag}>...</div>
 }

@@ -49,13 +49,16 @@ const Container: React.FC = () => {
 		const { card, index } = findCard(id)
 		setCards(
 			update(cards, {
-				$splice: [[index, 1], [atIndex, 0, card]],
+				$splice: [
+					[index, 1],
+					[atIndex, 0, card],
+				],
 			}),
 		)
 	}
 
 	const findCard = (id: string) => {
-		const card = cards.filter(c => `${c.id}` === id)[0]
+		const card = cards.filter((c) => `${c.id}` === id)[0]
 		return {
 			card,
 			index: cards.indexOf(card),
@@ -66,7 +69,7 @@ const Container: React.FC = () => {
 	return (
 		<>
 			<div ref={drop} style={style}>
-				{cards.map(card => (
+				{cards.map((card) => (
 					<Card
 						key={card.id}
 						id={`${card.id}`}

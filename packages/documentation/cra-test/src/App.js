@@ -1,13 +1,13 @@
 import React, { memo, useState, useMemo, useCallback } from 'react'
 import { DndProvider } from 'react-dnd'
 import { componentIndex } from 'react-dnd-examples-hooks'
-import HTML5Backend from 'react-dnd-html5-backend'
+import Backend from 'react-dnd-html5-backend'
 import './App.css'
 
 const exampleNames = Object.keys(componentIndex)
 
 const App = memo(() => (
-	<DndProvider backend={HTML5Backend}>
+	<DndProvider backend={Backend}>
 		<AppGuts />
 	</DndProvider>
 ))
@@ -21,9 +21,9 @@ function AppGuts() {
 	return (
 		<div className="App">
 			<select
-				onChange={useCallback(evt => setName(evt.target.value), [setName])}
+				onChange={useCallback((evt) => setName(evt.target.value), [setName])}
 			>
-				{exampleNames.map(n => (
+				{exampleNames.map((n) => (
 					<option key={n} value={n}>
 						{n}
 					</option>

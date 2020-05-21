@@ -1,4 +1,4 @@
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import {
 	DragDropActions,
 	DragDropMonitor,
@@ -9,7 +9,11 @@ import {
 	Unsubscribe,
 } from 'dnd-core'
 import { EventName, ListenerType, TouchBackendOptions } from './interfaces'
-import { eventShouldStartDrag, eventShouldEndDrag } from './utils/predicates'
+import {
+	eventShouldStartDrag,
+	eventShouldEndDrag,
+	isTouchEvent,
+} from './utils/predicates'
 import { getEventClientOffset, getNodeClientOffset } from './utils/offsets'
 import { distance, inAngleRanges } from './utils/math'
 import supportsPassive from './utils/supportsPassive'
@@ -43,7 +47,7 @@ export default class TouchBackend implements Backend {
 	private static isSetUp: boolean
 	private sourceNodes: Record<Identifier, HTMLElement>
 	private sourcePreviewNodes: Record<string, HTMLElement>
-	private sourcePreviewNodeOptions: Record<string, {}>
+	private sourcePreviewNodeOptions: Record<string, any>
 	private targetNodes: Record<string, HTMLElement>
 	private _mouseClientOffset: Partial<XYCoord>
 	private _isScrolling: boolean
@@ -54,6 +58,9 @@ export default class TouchBackend implements Backend {
 	private dragOverTargetIds: string[] | undefined
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
+
+	// Patch for iOS 13, discussion over #1585
+	private lastTargetTouchFallback: Touch | undefined
 
 	public constructor(
 		manager: DragDropManager,
@@ -130,8 +137,11 @@ export default class TouchBackend implements Backend {
 		)
 
 		if (this.options.enableMouseEvents && !this.options.ignoreContextMenu) {
-			this.addEventListener(this.window, 'contextmenu', this
-				.handleTopMoveEndCapture as any)
+			this.addEventListener(
+				this.window,
+				'contextmenu',
+				this.handleTopMoveEndCapture as any,
+			)
 		}
 
 		if (this.options.enableKeyboardEvents) {
@@ -158,8 +168,11 @@ export default class TouchBackend implements Backend {
 			this.handleTopMoveStartCapture as any,
 			true,
 		)
-		this.removeEventListener(this.window, 'start', this
-			.handleTopMoveStart as any)
+		this.removeEventListener(
+			this.window,
+			'start',
+			this.handleTopMoveStart as any,
+		)
 		this.removeEventListener(
 			this.window,
 			'move',
@@ -175,8 +188,11 @@ export default class TouchBackend implements Backend {
 		)
 
 		if (this.options.enableMouseEvents && !this.options.ignoreContextMenu) {
-			this.removeEventListener(this.window, 'contextmenu', this
-				.handleTopMoveEndCapture as any)
+			this.removeEventListener(
+				this.window,
+				'contextmenu',
+				this.handleTopMoveEndCapture as any,
+			)
 		}
 
 		if (this.options.enableKeyboardEvents) {
@@ -199,7 +215,7 @@ export default class TouchBackend implements Backend {
 	) {
 		const options = supportsPassive ? { capture, passive: false } : capture
 
-		this.listenerTypes.forEach(function(listenerType) {
+		this.listenerTypes.forEach(function (listenerType) {
 			const evt = eventNames[listenerType][event]
 
 			if (evt) {
@@ -216,7 +232,7 @@ export default class TouchBackend implements Backend {
 	) {
 		const options = supportsPassive ? { capture, passive: false } : capture
 
-		this.listenerTypes.forEach(function(listenerType) {
+		this.listenerTypes.forEach(function (listenerType) {
 			const evt = eventNames[listenerType][event]
 
 			if (evt) {
@@ -347,6 +363,9 @@ export default class TouchBackend implements Backend {
 
 		const clientOffset = getEventClientOffset(e)
 		if (clientOffset) {
+			if (isTouchEvent(e)) {
+				this.lastTargetTouchFallback = e.targetTouches[0]
+			}
 			this._mouseClientOffset = clientOffset
 		}
 		this.waitingForDelay = false
@@ -387,7 +406,8 @@ export default class TouchBackend implements Backend {
 		}
 		const { moveStartSourceIds, dragOverTargetIds } = this
 		const enableHoverOutsideTarget = this.options.enableHoverOutsideTarget
-		const clientOffset = getEventClientOffset(e)
+
+		const clientOffset = getEventClientOffset(e, this.lastTargetTouchFallback)
 
 		if (!clientOffset) {
 			return
@@ -443,7 +463,7 @@ export default class TouchBackend implements Backend {
 
 		// Get the node elements of the hovered DropTargets
 		const dragOverTargetNodes = (dragOverTargetIds || []).map(
-			key => this.targetNodes[key],
+			(key) => this.targetNodes[key],
 		)
 		// Get the a ordered list of nodes that are touched by
 		const elementsAtPoint = this.options.getDropTargetElementsAtPoint
@@ -471,9 +491,9 @@ export default class TouchBackend implements Backend {
 		}
 		const orderedDragOverTargetIds: string[] = elementsAtPointExtended
 			// Filter off nodes that arent a hovered DropTargets nodes
-			.filter(node => dragOverTargetNodes.indexOf(node) > -1)
+			.filter((node) => dragOverTargetNodes.indexOf(node) > -1)
 			// Map back the nodes elements to targetIds
-			.map(node => {
+			.map((node) => {
 				for (const targetId in this.targetNodes) {
 					if (node === this.targetNodes[targetId]) {
 						return targetId
@@ -482,7 +502,7 @@ export default class TouchBackend implements Backend {
 				return undefined
 			})
 			// Filter off possible null rows
-			.filter(node => !!node)
+			.filter((node) => !!node)
 			.filter((id, index, ids) => ids.indexOf(id) === index) as string[]
 
 		// Invoke hover for drop targets when source node is still over and pointer is outside
@@ -509,6 +529,7 @@ export default class TouchBackend implements Backend {
 
 	private handleTopMoveEndCapture = (e: Event) => {
 		this._isScrolling = false
+		this.lastTargetTouchFallback = undefined
 
 		if (!eventShouldEndDrag(e)) {
 			return

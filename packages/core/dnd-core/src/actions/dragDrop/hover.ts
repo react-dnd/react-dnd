@@ -1,4 +1,4 @@
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import {
 	Action,
 	DragDropManager,
@@ -80,7 +80,7 @@ function hoverAllTargets(
 	registry: HandlerRegistry,
 ) {
 	// Finally call hover on all matching targets.
-	targetIds.forEach(function(targetId) {
+	targetIds.forEach(function (targetId) {
 		const target = registry.getTarget(targetId)
 		target.hover(monitor, targetId)
 	})

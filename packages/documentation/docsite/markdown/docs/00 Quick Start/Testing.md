@@ -13,21 +13,6 @@ There are several different approaches to testing React components. React DnD is
 
 A few test examples are included with the React DnD inside its `examples` folder. Run `yarn` and `yarn test` inside the `react-dnd` root folder to start them.
 
-## Setup
-
-If you are using Jest, you may need to configure Jest's `moduleNameMapper` settings. Jest does not work well with ES Modules yet, but you can easily instruct it to use the CommonJS builds of the react-dnd libraries.
-
-```json
-"moduleNameMapper": {
-  "^dnd-core$": "dnd-core/dist/cjs",
-  "^react-dnd$": "react-dnd/dist/cjs",
-  "^react-dnd-html5-backend$": "react-dnd-html5-backend/dist/cjs",
-  "^react-dnd-touch-backend$": "react-dnd-touch-backend/dist/cjs",
-  "^react-dnd-test-backend$": "react-dnd-test-backend/dist/cjs",
-  "^react-dnd-test-utils$": "react-dnd-test-utils/dist/cjs"
-}
-```
-
 #### With create-react-app
 
 If you are using `create-react-app`, which uses Jest to drive unit tests, you can use the [react-app-rewired](https://github.com/timarney/react-app-rewired) to override the default Jest configuration without ejecting.
@@ -35,17 +20,17 @@ If you are using `create-react-app`, which uses Jest to drive unit tests, you ca
 ```js
 /* config-overrides.js */
 module.exports = {
-  jest: config => {
+  jest: (config) => {
     config.moduleNameMapper = Object.assign({}, config.moduleNameMapper, {
       '^dnd-core$': 'dnd-core/dist/cjs',
       '^react-dnd$': 'react-dnd/dist/cjs',
       '^react-dnd-html5-backend$': 'react-dnd-html5-backend/dist/cjs',
       '^react-dnd-touch-backend$': 'react-dnd-touch-backend/dist/cjs',
       '^react-dnd-test-backend$': 'react-dnd-test-backend/dist/cjs',
-      '^react-dnd-test-utils$': 'react-dnd-test-utils/dist/cjs',
+      '^react-dnd-test-utils$': 'react-dnd-test-utils/dist/cjs'
     })
     return config
-  },
+  }
 }
 ```
 
@@ -64,18 +49,18 @@ it('can be tested independently', () => {
   const OriginalBox = Box.DecoratedComponent
 
   // Stub the React DnD connector functions with an identity function
-  const identity = el => el
+  const identity = (el) => el
 
   // Render with one set of props and test
   let root = TestUtils.renderIntoDocument(
-    <OriginalBox name="test" connectDragSource={identity} />,
+    <OriginalBox name="test" connectDragSource={identity} />
   )
   let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
   expect(div.props.style.opacity).toEqual(1)
 
   // Render with another set of props and test
   root = TestUtils.renderIntoDocument(
-    <OriginalBox name="test" connectDragSource={identity} isDragging />,
+    <OriginalBox name="test" connectDragSource={identity} isDragging />
   )
   div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
   expect(div.props.style.opacity).toEqual(0.4)
@@ -84,7 +69,7 @@ it('can be tested independently', () => {
 
 ### Testing the Drag and Drop Interaction
 
-If you want to test the whole interaction, and not just the individual component rendering, you should use the [test backend](/docs/backends/test). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) just fine.
+If you want to test the whole interaction, and not only the individual component rendering, you should use the [test backend](/docs/backends/test). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering).
 
 This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/react-dnd/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/react-dnd/dnd-core/tree/v1.1.0/src/__tests__).
 
@@ -141,7 +126,7 @@ const ref = React.createRef()
 const root = Enzyme.mount(
   <>
     <BoxContext ref={ref} name="test" />
-  </>,
+  </>
 )
 
 // ...

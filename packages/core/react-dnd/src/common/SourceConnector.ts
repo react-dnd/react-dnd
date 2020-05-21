@@ -3,7 +3,7 @@ import wrapConnectorHooks from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from '../utils/isRef'
 import { DragSourceOptions, DragPreviewOptions } from '../interfaces'
-import shallowEqual from 'shallowequal'
+import { shallowEqual } from '@react-dnd/shallowequal'
 
 export interface Connector {
 	hooks: any

@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
-import shallowEqual from 'shallowequal'
+import { shallowEqual } from '@react-dnd/shallowequal'
 import hoistStatics from 'hoist-non-react-statics'
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import { DndContext, DndOptions } from '../index'
 import { isPlainObject } from '../utils/js_utils'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable, checkDecoratorArguments } from './utils'
 
-export function DragLayer<RequiredProps, CollectedProps = {}>(
+export function DragLayer<RequiredProps, CollectedProps = any>(
 	collect: DragLayerCollector<RequiredProps, CollectedProps>,
 	options: DndOptions<RequiredProps> = {},
 ): DndComponentEnhancer<CollectedProps> {

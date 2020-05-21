@@ -21,7 +21,7 @@ yarn add react-dnd-touch-backend
 
 ```jsx
 import TouchBackend from 'react-dnd-touch-backend'
-import { DragDropContext } from 'react-dnd'
+import { DndProvider } from 'react-dnd'
 
 class YourApp {
   <DndProvider backend={TouchBackend} options={opts}>
@@ -73,11 +73,14 @@ class YourApp {
   ```jsx
   // allow vertical scrolling
   const options = {
-    scrollAngleRanges: [{ start: 30, end: 150 }, { start: 210, end: 330 }],
+    scrollAngleRanges: [
+      { start: 30, end: 150 },
+      { start: 210, end: 330 }
+    ]
   }
   // allow horizontal scrolling
   const options = {
-    scrollAngleRanges: [{ start: 300 }, { end: 60 }, { start: 120, end: 240 }],
+    scrollAngleRanges: [{ start: 300 }, { end: 60 }, { start: 120, end: 240 }]
   }
   ```
 

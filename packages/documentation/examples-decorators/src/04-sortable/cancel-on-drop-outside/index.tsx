@@ -55,7 +55,10 @@ const Container: React.FC<ContainerProps> = ({ connectDropTarget }) => {
 			const { card, index } = findCard(id)
 			setCards(
 				update(cards, {
-					$splice: [[index, 1], [atIndex, 0, card]],
+					$splice: [
+						[index, 1],
+						[atIndex, 0, card],
+					],
 				}),
 			)
 		},
@@ -64,7 +67,7 @@ const Container: React.FC<ContainerProps> = ({ connectDropTarget }) => {
 
 	const findCard = useCallback(
 		(id: string) => {
-			const card = cards.filter(c => `${c.id}` === id)[0]
+			const card = cards.filter((c) => `${c.id}` === id)[0]
 			return {
 				card,
 				index: cards.indexOf(card),
@@ -76,7 +79,7 @@ const Container: React.FC<ContainerProps> = ({ connectDropTarget }) => {
 	connectDropTarget(ref)
 	return (
 		<div ref={ref} style={style}>
-			{cards.map(card => (
+			{cards.map((card) => (
 				<Card
 					key={card.id}
 					id={`${card.id}`}
@@ -89,6 +92,6 @@ const Container: React.FC<ContainerProps> = ({ connectDropTarget }) => {
 	)
 }
 
-export default DropTarget(ItemTypes.CARD, {}, connect => ({
+export default DropTarget(ItemTypes.CARD, {}, (connect) => ({
 	connectDropTarget: connect.dropTarget(),
 }))(Container)

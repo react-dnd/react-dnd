@@ -1,4 +1,4 @@
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import {
 	Action,
 	DragDropManager,
@@ -84,8 +84,11 @@ function verifyInvariants(
 	registry: HandlerRegistry,
 ) {
 	invariant(!monitor.isDragging(), 'Cannot call beginDrag while dragging.')
-	sourceIds.forEach(function(sourceId) {
-		invariant(registry.getSource(sourceId), 'Expected sourceIds to be registered.')
+	sourceIds.forEach(function (sourceId) {
+		invariant(
+			registry.getSource(sourceId),
+			'Expected sourceIds to be registered.',
+		)
 	})
 }
 

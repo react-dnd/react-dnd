@@ -1,11 +1,11 @@
 {
   "name": "react-dnd",
-  "version": "9.4.0",
+  "version": "10.0.2",
   "description": "Drag and Drop for React",
-  "type": "module",
-  "main": "./dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "lib/index.d.ts",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git"
@@ -17,20 +17,19 @@
     "start": "../../../scripts/watch_package.sh"
   },
   "dependencies": {
+    "@react-dnd/shallowequal": "^2.0.0",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/shallowequal": "^1.1.1",
-    "dnd-core": "^9.4.0",
-    "hoist-non-react-statics": "^3.3.0",
-    "shallowequal": "^1.1.0"
+    "dnd-core": "^10.0.2",
+    "hoist-non-react-statics": "^3.3.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.11",
-    "@types/react-dom": "^16.9.4",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "peerDependencies": {
-    "react": ">= 16.8",
-    "react-dom": ">= 16.8"
+    "react": ">= 16.9.0",
+    "react-dom": ">= 16.9.0"
   }
 }

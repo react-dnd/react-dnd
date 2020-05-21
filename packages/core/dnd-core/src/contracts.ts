@@ -1,4 +1,4 @@
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import { DragSource, DropTarget, Identifier } from './interfaces'
 
 export function validateSourceContract(source: DragSource) {
@@ -36,7 +36,7 @@ export function validateType(
 	allowArray?: boolean,
 ) {
 	if (allowArray && Array.isArray(type)) {
-		type.forEach(t => validateType(t, false))
+		type.forEach((t) => validateType(t, false))
 		return
 	}
 

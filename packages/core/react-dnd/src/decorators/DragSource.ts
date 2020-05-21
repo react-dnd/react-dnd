@@ -1,5 +1,5 @@
 import * as React from 'react'
-import invariant from 'invariant'
+import { invariant } from '@react-dnd/invariant'
 import { SourceType, DragDropManager } from 'dnd-core'
 import { DndOptions } from '../interfaces'
 import { isPlainObject } from '../utils/js_utils'
@@ -23,7 +23,11 @@ import createSourceFactory from './createSourceFactory'
  * @param collect The props collector function
  * @param options DnD options
  */
-export function DragSource<RequiredProps, CollectedProps = {}, DragObject = {}>(
+export function DragSource<
+	RequiredProps,
+	CollectedProps = any,
+	DragObject = any
+>(
 	type: SourceType | ((props: RequiredProps) => SourceType),
 	spec: DragSourceSpec<RequiredProps, DragObject>,
 	collect: DragSourceCollector<CollectedProps, RequiredProps>,
@@ -37,9 +41,9 @@ export function DragSource<RequiredProps, CollectedProps = {}, DragObject = {}>(
 		collect,
 		options,
 	)
-	let getType: (props: RequiredProps) => SourceType = type as ((
+	let getType: (props: RequiredProps) => SourceType = type as (
 		props: RequiredProps,
-	) => SourceType)
+	) => SourceType
 	if (typeof type !== 'function') {
 		invariant(
 			isValidType(type),

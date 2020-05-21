@@ -1,26 +1,28 @@
 {
   "name": "react-dnd-test-utils",
-  "version": "9.4.0",
+  "version": "10.0.2",
   "license": "MIT",
-  "type": "module",
-  "main": "./dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "lib/index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "clean": "../../../scripts/clean_package.sh",
     "build": "../../../scripts/build_package.sh",
     "start": "../../../scripts/watch_package.sh"
   },
   "devDependencies": {
-    "react": "^16.11.0",
-    "react-dnd": "^9.4.0",
-    "react-dnd-test-backend": "^9.4.0",
-    "react-dom": "^16.11.0"
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.12.0",
+    "react-dnd": "^10.0.2",
+    "react-dnd-test-backend": "^10.0.2",
+    "react-dom": "^16.12.0"
   },
   "peerDependencies": {
-    "react": ">= 16.8.5",
-    "react-dnd": "^7.3.2",
-    "react-dnd-test-backend": "^7.2.0",
-    "react-dom": ">= 16.8.5"
+    "react": ">= 16.9.0",
+    "react-dom": ">= 16.9.0",
+    "react-dnd": ">= 10.0.0",
+    "react-dnd-test-backend": ">= 10.0.0"
   }
 }

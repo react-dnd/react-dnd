@@ -1,8 +1,8 @@
 declare const process: any
 
 import * as React from 'react'
-import shallowEqual from 'shallowequal'
-import invariant from 'invariant'
+import { shallowEqual } from '@react-dnd/shallowequal'
+import { invariant } from '@react-dnd/invariant'
 import hoistStatics from 'hoist-non-react-statics'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndContext } from '../index'

@@ -27,9 +27,16 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 	const originalIndex = findCard(id).index
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: ItemTypes.CARD, id, originalIndex },
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
+		end: (dropResult, monitor) => {
+			const { id: droppedId, originalIndex } = monitor.getItem()
+			const didDrop = monitor.didDrop()
+			if (!didDrop) {
+				moveCard(droppedId, originalIndex)
+			}
+		},
 	})
 
 	const [, drop] = useDrop({
@@ -45,7 +52,7 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 
 	const opacity = isDragging ? 0 : 1
 	return (
-		<div ref={node => drag(drop(node))} style={{ ...style, opacity }}>
+		<div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
 			{text}
 		</div>
 	)

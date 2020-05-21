@@ -3,6 +3,8 @@ path: '/docs/api/use-drop'
 title: 'useDrop'
 ---
 
+<!--alex disable hook -->
+
 _New to React DnD? [Read the overview](/docs/overview) before jumping into the docs._
 
 # useDrop
@@ -14,7 +16,7 @@ import { useDrop } from 'react-dnd'
 
 function myDropTarget(props) {
   const [collectedProps, drop] = useDrop({
-    accept,
+    accept
   })
 
   return <div ref={drop}>Drop Target</div>

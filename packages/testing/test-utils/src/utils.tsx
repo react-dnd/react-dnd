@@ -27,7 +27,7 @@ export function wrapInTestContext(DecoratedComponent: any): any {
 		return (
 			<DndProvider backend={TestBackendImpl}>
 				<DndContext.Consumer>
-					{ctx => {
+					{(ctx) => {
 						dragDropManager.current = ctx.dragDropManager
 						return null
 					}}
