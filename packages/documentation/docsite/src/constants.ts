@@ -5,6 +5,7 @@ export interface Page {
 
 export interface PageGroup {
 	title: string
+	debug?: boolean
 	pages: { [key: string]: Page }
 }
 
@@ -237,6 +238,7 @@ export const ExamplePages: PageGroup[] = [
 	},
 	{
 		title: 'Regressions',
+		debug: true,
 		pages: {
 			REGRESSION_DRAG_SOURCE_RERENDER: {
 				location: '/examples/regression/drag-source-rerender',
