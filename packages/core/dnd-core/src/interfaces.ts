@@ -20,6 +20,7 @@ export interface Backend {
 	connectDragSource(sourceId: any, node?: any, options?: any): Unsubscribe
 	connectDragPreview(sourceId: any, node?: any, options?: any): Unsubscribe
 	connectDropTarget(targetId: any, node?: any, options?: any): Unsubscribe
+	profile(): Record<string, number>
 }
 
 export interface DragDropMonitor {

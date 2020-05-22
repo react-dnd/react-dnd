@@ -27,7 +27,7 @@ declare global {
 	}
 }
 
-export default class HTML5Backend implements Backend {
+export class HTML5Backend implements Backend {
 	private options: OptionsReader
 
 	// React-Dnd Components
@@ -60,6 +60,22 @@ export default class HTML5Backend implements Backend {
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
 		this.enterLeaveCounter = new EnterLeaveCounter(this.isNodeInDocument)
+	}
+
+	/**
+	 * Generate profiling statistics for the HTML5Backend.
+	 */
+	public profile(): Record<string, number> {
+		return {
+			sourcePreviewNodes: this.sourcePreviewNodes.size,
+			sourcePreviewNodeOptions: this.sourcePreviewNodeOptions.size,
+			sourceNodeOptions: this.sourceNodeOptions.size,
+			sourceNodes: this.sourceNodes.size,
+			dragStartSourceIds: this.dragStartSourceIds?.length || 0,
+			dropTargetIds: this.dropTargetIds.length,
+			dragEnterTargetIds: this.dragEnterTargetIds.length,
+			dragOverTargetIds: this.dragOverTargetIds?.length || 0,
+		}
 	}
 
 	// public for test

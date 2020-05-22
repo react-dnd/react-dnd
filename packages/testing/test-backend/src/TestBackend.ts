@@ -32,6 +32,10 @@ export default class TestBackendImpl implements Backend, TestBackend {
 		this.actions = manager.getActions()
 	}
 
+	public profile() {
+		return {}
+	}
+
 	public setup() {
 		this.didCallSetup = true
 	}
