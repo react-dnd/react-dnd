@@ -9538,12 +9538,12 @@ gatsby-page-utils@^0.2.6:
     micromatch "^3.1.10"
 
 gatsby-plugin-manifest@^2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.4.2.tgz#0a9605a778a8e30ce047b9b3701031b9bde61d6b"
-  integrity sha512-G6MB1/Me4waG/z3Aj1GEqXCfY/yftyMLKp8g83uGvuBDtgLGN5unVgYqdmKAyBFQTvczsUghZ7jBrApHeaTn4w==
+  version "2.4.9"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.4.9.tgz#f211d87cf3d06a5bfd0619b6844b156abd837d43"
+  integrity sha512-uFz6/VsepGqai9jaCI2EWTbg2ICX60ZM63RxeCm8xO9m6B3VLxh0NShpU81IoWi7aQfj9iyD2LZiIu3JcnSj+g==
   dependencies:
     "@babel/runtime" "^7.9.6"
-    gatsby-core-utils "^1.2.1"
+    gatsby-core-utils "^1.3.3"
     semver "^5.7.1"
     sharp "^0.25.1"
 
