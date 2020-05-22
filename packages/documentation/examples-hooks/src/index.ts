@@ -18,6 +18,7 @@ import dragSourceRerender from './06-other/drag-source-rerender'
 import remountWithCorrectProps from './06-other/remount-with-correct-props'
 import otherNativeFiles from './06-other/native-files'
 import otherChainedConnectors from './06-other/chained-connectors'
+import otherPreviewsMemoryLeak from './06-other/previews-memory-leak'
 
 export const componentIndex: {
 	[key: string]: React.ComponentClass<any> | React.FunctionComponent<any>
@@ -41,4 +42,5 @@ export const componentIndex: {
 	'other-remount-with-correct-props': remountWithCorrectProps,
 	'other-native-files': otherNativeFiles,
 	'other-chained-connectors': otherChainedConnectors,
+	'other-previews-memory-leak': otherPreviewsMemoryLeak,
 }

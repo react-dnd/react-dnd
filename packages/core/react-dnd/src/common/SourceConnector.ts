@@ -137,13 +137,22 @@ export class SourceConnector implements Connector {
 			this.didConnectedDragPreviewChange() ||
 			this.didDragPreviewOptionsChange()
 
-		if (!this.handlerId) {
+		if (didChange) {
 			this.disconnectDragPreview()
-		} else if (this.dragPreview && didChange) {
+		}
+
+		if (!this.handlerId) {
+			return
+		}
+		if (!dragPreview) {
+			this.lastConnectedDragPreview = dragPreview
+			return
+		}
+
+		if (didChange) {
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDragPreview = dragPreview
 			this.lastConnectedDragPreviewOptions = this.dragPreviewOptions
-			this.disconnectDragPreview()
 			this.dragPreviewUnsubscribe = this.backend.connectDragPreview(
 				this.handlerId,
 				dragPreview,
