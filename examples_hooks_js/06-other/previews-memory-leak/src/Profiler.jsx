@@ -10,7 +10,15 @@ export function Profiler() {
     }, 100)
     return () => clearTimeout(timeout)
   })
+  const profile = backend?.profile() || {}
+  const profileElements = Object.keys(profile).map((key) => (
+    <li key={key}>
+      {key}: {profile[key]}
+    </li>
+  ))
   return (
-    <div key={key}>Previews in memory: {backend?.sourcePreviewNodes?.size}</div>
+    <div key={key}>
+      <ul>{profileElements}</ul>
+    </div>
   )
 }
