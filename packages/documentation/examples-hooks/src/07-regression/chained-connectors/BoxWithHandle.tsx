@@ -26,7 +26,7 @@ const BoxWithHandleRaw: React.FC = () => {
 		item: {
 			type: ItemTypes.BOX,
 		},
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})

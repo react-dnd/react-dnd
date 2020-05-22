@@ -3,6 +3,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import { Page, PageGroup } from '../constants'
 import theme from '../theme'
+import { isDebugMode } from '../util/isDebugMode'
 
 export interface SideBarProps {
 	groups: PageGroup[]
@@ -10,13 +11,14 @@ export interface SideBarProps {
 }
 
 export const Sidebar: React.FC<SideBarProps> = ({ groups, location }) => {
-	function renderGroup({ title, pages }: PageGroup, index: number) {
-		return (
+	function renderGroup({ title, pages, debug }: PageGroup, index: number) {
+		const isRendered = !debug || isDebugMode()
+		return isRendered ? (
 			<Group key={index}>
 				<GroupTitle>{title}</GroupTitle>
 				{Object.keys(pages).map((key) => renderLink(pages[key], key))}
 			</Group>
-		)
+		) : null
 	}
 
 	function renderLink({ title, location: pageLocation }: Page, key: string) {
