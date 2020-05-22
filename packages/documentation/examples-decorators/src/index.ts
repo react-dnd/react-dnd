@@ -14,10 +14,10 @@ import sortableSimple from './04-sortable/simple'
 import sortableStressTest from './04-sortable/stress-test'
 import customizeDropEffects from './05-customize/drop-effects'
 import customizeHandlesAndPreviews from './05-customize/handles-and-previews'
-import dragSourceRerender from './06-other/drag-source-rerender'
-import remountWithCorrectProps from './06-other/remount-with-correct-props'
 import otherNativeFiles from './06-other/native-files'
-import otherChainedConnectors from './06-other/chained-connectors'
+import dragSourceRerender from './07-regression/drag-source-rerender'
+import remountWithCorrectProps from './07-regression/remount-with-correct-props'
+import otherChainedConnectors from './07-regression/chained-connectors'
 
 export const componentIndex: {
 	[key: string]: React.ComponentClass<any> | React.FunctionComponent<any>

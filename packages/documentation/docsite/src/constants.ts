@@ -229,25 +229,32 @@ export const ExamplePages: PageGroup[] = [
 	{
 		title: 'Other Cases',
 		pages: {
-			OTHER_DRAG_SOURCE_RERENDER: {
-				location: '/examples/other/drag-source-rerender',
-				title: 'Drag Source Rerender',
-			},
-			OTHER_REMOUNT_WITH_CORRECT_PROPS: {
-				location: '/examples/other/remount-with-correct-props',
-				title: 'Drag Source Remount',
-			},
 			OTHER_NATIVE_FILES: {
 				location: '/examples/other/native-files',
 				title: 'Native Files',
 			},
-			OTHER_CHAINED_CONNECTORS: {
-				location: '/examples/other/chained-connectors',
-				title: 'Chained Connectors',
+		},
+	},
+	{
+		title: 'Regressions',
+		pages: {
+			REGRESSION_DRAG_SOURCE_RERENDER: {
+				location: '/examples/regression/drag-source-rerender',
+				title: 'Drag Source Rerender',
 			},
-			OTHER_PREVIEWN_MEMORY_LEAK: {
-				location: '/examples/other/previews-memory-leak',
+			REGRESSION_REMOUNT_WITH_CORRECT_PROPS: {
+				location: '/examples/regression/remount-with-correct-props',
+				title: 'Drag Source Remount',
+			},
+
+			REGRESSION_PREVIEWN_MEMORY_LEAK: {
+				location: '/examples/regression/previews-memory-leak',
 				title: 'Previews Memory Leak',
+			},
+
+			REGRESSION_CHAINED_CONNECTORS: {
+				location: '/examples/regression/chained-connectors',
+				title: 'Chained Connectors',
 			},
 		},
 	},

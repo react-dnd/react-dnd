@@ -23,8 +23,8 @@ export const SourceBox: React.FC<SourceBoxProps> = ({
 }) => {
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: ItemTypes.BOX, id },
-		isDragging: monitor => monitor.getItem().id === id,
-		collect: monitor => ({ isDragging: monitor.isDragging() }),
+		isDragging: (monitor) => monitor.getItem().id === id,
+		collect: (monitor) => ({ isDragging: monitor.isDragging() }),
 		begin: onBeginDrag,
 		end: onEndDrag,
 	})
