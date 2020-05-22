@@ -36,7 +36,7 @@ const eventNames: Record<ListenerType, EventName> = {
 	},
 }
 
-export default class TouchBackend implements Backend {
+export class TouchBackend implements Backend {
 	private options: OptionsReader
 
 	// React-DnD Dependencies
@@ -45,10 +45,10 @@ export default class TouchBackend implements Backend {
 
 	// Internal State
 	private static isSetUp: boolean
-	private sourceNodes: Record<Identifier, HTMLElement>
-	private sourcePreviewNodes: Record<string, HTMLElement>
-	private sourcePreviewNodeOptions: Record<string, any>
-	private targetNodes: Record<string, HTMLElement>
+	private sourceNodes: Map<Identifier, HTMLElement>
+	private sourcePreviewNodes: Map<string, HTMLElement>
+	private sourcePreviewNodeOptions: Map<string, any>
+	private targetNodes: Map<string, HTMLElement>
 	private _mouseClientOffset: Partial<XYCoord>
 	private _isScrolling: boolean
 	private listenerTypes: ListenerType[]
@@ -71,10 +71,10 @@ export default class TouchBackend implements Backend {
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 
-		this.sourceNodes = {}
-		this.sourcePreviewNodes = {}
-		this.sourcePreviewNodeOptions = {}
-		this.targetNodes = {}
+		this.sourceNodes = new Map()
+		this.sourcePreviewNodes = new Map()
+		this.sourcePreviewNodeOptions = new Map()
+		this.targetNodes = new Map()
 		this.listenerTypes = []
 		this._mouseClientOffset = {}
 		this._isScrolling = false
@@ -89,6 +89,19 @@ export default class TouchBackend implements Backend {
 
 		if (this.options.enableKeyboardEvents) {
 			this.listenerTypes.push(ListenerType.keyboard)
+		}
+	}
+
+	/**
+	 * Generate profiling statistics for the HTML5Backend.
+	 */
+	public profile(): Record<string, number> {
+		return {
+			sourceNodes: this.sourceNodes.size,
+			sourcePreviewNodes: this.sourcePreviewNodes.size,
+			sourcePreviewNodeOptions: this.sourcePreviewNodeOptions.size,
+			targetNodes: this.targetNodes.size,
+			dragOverTargetIds: this.dragOverTargetIds?.length || 0,
 		}
 	}
 
@@ -243,23 +256,23 @@ export default class TouchBackend implements Backend {
 
 	public connectDragSource(sourceId: string, node: HTMLElement) {
 		const handleMoveStart = this.handleMoveStart.bind(this, sourceId)
-		this.sourceNodes[sourceId] = node
+		this.sourceNodes.set(sourceId, node)
 
 		this.addEventListener(node, 'start', handleMoveStart)
 
 		return () => {
-			delete this.sourceNodes[sourceId]
+			this.sourceNodes.delete(sourceId)
 			this.removeEventListener(node, 'start', handleMoveStart)
 		}
 	}
 
 	public connectDragPreview(sourceId: string, node: HTMLElement, options: any) {
-		this.sourcePreviewNodeOptions[sourceId] = options
-		this.sourcePreviewNodes[sourceId] = node
+		this.sourcePreviewNodeOptions.set(sourceId, options)
+		this.sourcePreviewNodes.set(sourceId, node)
 
 		return () => {
-			delete this.sourcePreviewNodes[sourceId]
-			delete this.sourcePreviewNodeOptions[sourceId]
+			this.sourcePreviewNodes.delete(sourceId)
+			this.sourcePreviewNodeOptions.delete(sourceId)
 		}
 	}
 
@@ -313,18 +326,18 @@ export default class TouchBackend implements Backend {
 		 * Attaching the event listener to the body so that touchmove will work while dragging over multiple target elements.
 		 */
 		this.addEventListener(this.document.body, 'move', handleMove as any)
-		this.targetNodes[targetId] = node
+		this.targetNodes.set(targetId, node)
 
 		return () => {
 			if (this.document) {
-				delete this.targetNodes[targetId]
+				this.targetNodes.delete(targetId)
 				this.removeEventListener(this.document.body, 'move', handleMove as any)
 			}
 		}
 	}
 
 	private getSourceClientOffset = (sourceId: string) => {
-		return getNodeClientOffset(this.sourceNodes[sourceId])
+		return getNodeClientOffset(this.sourceNodes.get(sourceId))
 	}
 
 	private handleTopMoveStartCapture = (e: Event) => {
@@ -455,16 +468,19 @@ export default class TouchBackend implements Backend {
 			return
 		}
 
-		const sourceNode = this.sourceNodes[this.monitor.getSourceId() as string]
+		const sourceNode = this.sourceNodes.get(
+			this.monitor.getSourceId() as string,
+		)
 		this.installSourceNodeRemovalObserver(sourceNode)
 		this.actions.publishDragSource()
 
 		if (e.cancelable) e.preventDefault()
 
 		// Get the node elements of the hovered DropTargets
-		const dragOverTargetNodes = (dragOverTargetIds || []).map(
-			(key) => this.targetNodes[key],
-		)
+		const dragOverTargetNodes: HTMLElement[] = (dragOverTargetIds || [])
+			.map((key) => this.targetNodes.get(key))
+			.filter((e) => !!e) as HTMLElement[]
+
 		// Get the a ordered list of nodes that are touched by
 		const elementsAtPoint = this.options.getDropTargetElementsAtPoint
 			? this.options.getDropTargetElementsAtPoint(
@@ -495,7 +511,7 @@ export default class TouchBackend implements Backend {
 			// Map back the nodes elements to targetIds
 			.map((node) => {
 				for (const targetId in this.targetNodes) {
-					if (node === this.targetNodes[targetId]) {
+					if (node === this.targetNodes.get(targetId)) {
 						return targetId
 					}
 				}
@@ -508,9 +524,11 @@ export default class TouchBackend implements Backend {
 		// Invoke hover for drop targets when source node is still over and pointer is outside
 		if (enableHoverOutsideTarget) {
 			for (const targetId in this.targetNodes) {
+				const targetNode = this.targetNodes.get(targetId)
 				if (
-					this.targetNodes[targetId] &&
-					this.targetNodes[targetId].contains(sourceNode) &&
+					sourceNode &&
+					targetNode &&
+					targetNode.contains(sourceNode) &&
 					orderedDragOverTargetIds.indexOf(targetId) === -1
 				) {
 					orderedDragOverTargetIds.unshift(targetId)

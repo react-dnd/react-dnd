@@ -1,6 +1,6 @@
 import * as rdnd from 'react-dnd'
 import * as html5 from 'react-dnd-html5-backend'
-import touch from 'react-dnd-touch-backend'
+import * as touch from 'react-dnd-touch-backend'
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 describe('UMD Builds', () => {
@@ -32,9 +32,11 @@ describe('UMD Builds', () => {
 
 function checkKeyMatch(lib: any, expected: any): void {
 	Object.keys(expected).forEach((key) => {
+		console.log(`verify expected key ${key}`)
 		expect(typeof lib[key]).toEqual(typeof expected[key])
 	})
 	Object.keys(lib).forEach((key) => {
+		console.log(`verify existing key ${key}`)
 		expect(typeof expected[key]).toEqual(typeof lib[key])
 	})
 }
