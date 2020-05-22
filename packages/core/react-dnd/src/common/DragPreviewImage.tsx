@@ -25,7 +25,7 @@ export const DragPreviewImage: React.FC<DragPreviewImageProps> = React.memo(
 					connect(null)
 				}
 			}
-		}, [])
+		})
 
 		return null
 	},
