@@ -10,11 +10,23 @@ export interface DragPreviewImageProps {
  */
 export const DragPreviewImage: React.FC<DragPreviewImageProps> = React.memo(
 	({ connect, src }) => {
-		if (typeof Image !== 'undefined') {
+		React.useEffect(() => {
+			if (typeof Image === 'undefined') return
+
+			let connected = false
 			const img = new Image()
 			img.src = src
-			img.onload = () => connect(img)
-		}
+			img.onload = () => {
+				connect(img)
+				connected = true
+			}
+			return () => {
+				if (connected) {
+					connect(null)
+				}
+			}
+		})
+
 		return null
 	},
 )
