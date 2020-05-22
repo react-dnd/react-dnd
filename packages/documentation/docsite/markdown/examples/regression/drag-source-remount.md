@@ -1,5 +1,5 @@
 ---
-path: '/examples/other/remount-with-correct-props'
+path: '/examples/regression/remount-with-correct-props'
 title: 'Drag Source Remounts with Correct Props'
 ---
 
@@ -7,5 +7,5 @@ Regression example based on [#1429](https://github.com/react-dnd/react-dnd/pull/
 
 The box at the drag-source location should flash red while the item is being dragged around.
 
-<view-source name="06-other/remount-with-correct-props" component="other-remount-with-correct-props">
+<view-source name="07-regression/remount-with-correct-props" component="other-remount-with-correct-props">
 </view-source>

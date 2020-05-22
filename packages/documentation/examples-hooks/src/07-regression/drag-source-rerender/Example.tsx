@@ -4,7 +4,7 @@ import { useDrag, ConnectDragSource } from 'react-dnd'
 const Parent: React.FC = () => {
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: 'KNIGHT' },
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
