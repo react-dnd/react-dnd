@@ -1,13 +1,15 @@
-import { DragDropManager } from '../../interfaces'
-import createBeginDrag from './beginDrag'
-import createPublishDragSource from './publishDragSource'
-import createHover from './hover'
-import createDrop from './drop'
-import createEndDrag from './endDrag'
+import { DragDropManager, DragDropActions } from '../../interfaces'
+import { createBeginDrag } from './beginDrag'
+import { createPublishDragSource } from './publishDragSource'
+import { createHover } from './hover'
+import { createDrop } from './drop'
+import { createEndDrag } from './endDrag'
 
 export * from './types'
 
-export default function createDragDropActions(manager: DragDropManager) {
+export function createDragDropActions(
+	manager: DragDropManager,
+): DragDropActions {
 	return {
 		beginDrag: createBeginDrag(manager),
 		publishDragSource: createPublishDragSource(manager),

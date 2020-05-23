@@ -5,8 +5,8 @@ import {
 	DragPreviewImage,
 } from 'react-dnd'
 import { DragSource } from 'react-dnd'
-import ItemTypes from './ItemTypes'
-import boxImage from './boxImage'
+import { ItemTypes } from './ItemTypes'
+import { boxImage } from './boxImage'
 
 const style = {
 	border: '1px dashed gray',

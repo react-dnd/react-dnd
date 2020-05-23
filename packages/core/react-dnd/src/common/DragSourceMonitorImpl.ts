@@ -4,6 +4,7 @@ import {
 	Unsubscribe,
 	Listener,
 	Identifier,
+	XYCoord,
 } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
 import { DragSourceMonitor } from '../interfaces'
@@ -19,7 +20,7 @@ export class DragSourceMonitorImpl implements DragSourceMonitor {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	public receiveHandlerId(sourceId: Identifier | null) {
+	public receiveHandlerId(sourceId: Identifier | null): void {
 		this.sourceId = sourceId
 	}
 
@@ -27,7 +28,7 @@ export class DragSourceMonitorImpl implements DragSourceMonitor {
 		return this.sourceId
 	}
 
-	public canDrag() {
+	public canDrag(): boolean {
 		invariant(
 			!isCallingCanDrag,
 			'You may not call monitor.canDrag() inside your canDrag() implementation. ' +
@@ -42,7 +43,7 @@ export class DragSourceMonitorImpl implements DragSourceMonitor {
 		}
 	}
 
-	public isDragging() {
+	public isDragging(): boolean {
 		if (!this.sourceId) {
 			return false
 		}
@@ -102,39 +103,39 @@ export class DragSourceMonitorImpl implements DragSourceMonitor {
 		return this.internalMonitor.canDropOnTarget(targetId)
 	}
 
-	public getItemType() {
+	public getItemType(): Identifier | null {
 		return this.internalMonitor.getItemType()
 	}
 
-	public getItem() {
+	public getItem(): any {
 		return this.internalMonitor.getItem()
 	}
 
-	public getDropResult() {
+	public getDropResult(): any {
 		return this.internalMonitor.getDropResult()
 	}
 
-	public didDrop() {
+	public didDrop(): boolean {
 		return this.internalMonitor.didDrop()
 	}
 
-	public getInitialClientOffset() {
+	public getInitialClientOffset(): XYCoord | null {
 		return this.internalMonitor.getInitialClientOffset()
 	}
 
-	public getInitialSourceClientOffset() {
+	public getInitialSourceClientOffset(): XYCoord | null {
 		return this.internalMonitor.getInitialSourceClientOffset()
 	}
 
-	public getSourceClientOffset() {
+	public getSourceClientOffset(): XYCoord | null {
 		return this.internalMonitor.getSourceClientOffset()
 	}
 
-	public getClientOffset() {
+	public getClientOffset(): XYCoord | null {
 		return this.internalMonitor.getClientOffset()
 	}
 
-	public getDifferenceFromInitialOffset() {
+	public getDifferenceFromInitialOffset(): XYCoord | null {
 		return this.internalMonitor.getDifferenceFromInitialOffset()
 	}
 }

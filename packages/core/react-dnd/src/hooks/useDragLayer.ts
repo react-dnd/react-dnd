@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { DragLayerMonitor } from '../interfaces'
-import { useDragDropManager } from './internal/useDragDropManager'
+import { useDragDropManager } from './useDragDropManager'
 import { useCollector } from './internal/useCollector'
 
 /**

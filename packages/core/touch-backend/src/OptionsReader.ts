@@ -1,4 +1,8 @@
-import { TouchBackendOptions, AngleRange } from './interfaces'
+import {
+	TouchBackendOptions,
+	AngleRange,
+	TouchBackendContext,
+} from './interfaces'
 
 export class OptionsReader implements TouchBackendOptions {
 	public enableTouchEvents = true
@@ -15,9 +19,12 @@ export class OptionsReader implements TouchBackendOptions {
 		y: number,
 		elements: HTMLElement[],
 	) => HTMLElement[]
-	private context: any
+	private context: TouchBackendContext
 
-	public constructor(incoming: TouchBackendOptions, context?: any) {
+	public constructor(
+		incoming: TouchBackendOptions,
+		context: TouchBackendContext,
+	) {
 		this.context = context
 		this.delayTouchStart = incoming.delayTouchStart || incoming.delay || 0
 		this.delayMouseStart = incoming.delayMouseStart || incoming.delay || 0
@@ -29,7 +36,7 @@ export class OptionsReader implements TouchBackendOptions {
 		})
 	}
 
-	public get window() {
+	public get window(): Window | undefined {
 		if (this.context && this.context.window) {
 			return this.context.window
 		} else if (typeof window !== 'undefined') {
@@ -38,7 +45,7 @@ export class OptionsReader implements TouchBackendOptions {
 		return undefined
 	}
 
-	public get document() {
+	public get document(): Document | undefined {
 		if (this.window) {
 			return this.window.document
 		}

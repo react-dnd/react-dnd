@@ -86,7 +86,7 @@ class SourceImpl<Props> implements Source {
 	}
 }
 
-export default function createSourceFactory<Props, DragObject = any>(
+export function createSourceFactory<Props, DragObject = any>(
 	spec: DragSourceSpec<Props, DragObject>,
 ) {
 	Object.keys(spec).forEach((key) => {

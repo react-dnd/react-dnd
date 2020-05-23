@@ -1,4 +1,4 @@
-import matchesType from '../matchesType'
+import { matchesType } from '../matchesType'
 
 describe('matchesType', () => {
 	it('should match type for single source and single target', () => {

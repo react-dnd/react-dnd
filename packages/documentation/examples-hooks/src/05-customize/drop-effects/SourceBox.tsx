@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -15,13 +15,13 @@ export interface SourceBoxProps {
 	showCopyIcon?: boolean
 }
 
-const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
+export const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
 	const [{ opacity }, drag] = useDrag({
 		item: { type: ItemTypes.BOX },
 		options: {
 			dropEffect: showCopyIcon ? 'copy' : 'move',
 		},
-		collect: monitor => ({
+		collect: (monitor) => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
 	})
@@ -32,4 +32,3 @@ const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
 		</div>
 	)
 }
-export default SourceBox

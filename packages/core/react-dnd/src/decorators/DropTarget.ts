@@ -14,8 +14,8 @@ import {
 	DndComponent,
 } from './interfaces'
 import { checkDecoratorArguments } from './utils'
-import decorateHandler from './decorateHandler'
-import createTargetFactory from './createTargetFactory'
+import { decorateHandler } from './decorateHandler'
+import { createTargetFactory } from './createTargetFactory'
 
 export function DropTarget<RequiredProps, CollectedProps = any>(
 	type: TargetType | ((props: RequiredProps) => TargetType),

@@ -1,9 +1,9 @@
 import React from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import { DropTarget, DropTargetConnector } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 import DraggableBox from './DraggableBox'
-import snapToGrid from './snapToGrid'
+import { snapToGrid } from './snapToGrid'
 import update from 'immutability-helper'
 
 const styles: React.CSSProperties = {
@@ -36,7 +36,7 @@ class Container extends React.PureComponent<ContainerProps, ContainerState> {
 
 		return connectDropTarget(
 			<div style={styles}>
-				{Object.keys(boxes).map(key => this.renderBox(boxes[key], key))}
+				{Object.keys(boxes).map((key) => this.renderBox(boxes[key], key))}
 			</div>,
 		)
 	}

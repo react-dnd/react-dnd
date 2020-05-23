@@ -10,21 +10,20 @@ export function getDecoratedComponent(instanceRef: React.RefObject<any>) {
 	}
 }
 
-export function isClassComponent(Component: any): boolean {
+export function isClassComponent(Component: unknown): boolean {
 	return (
 		Component &&
-		Component.prototype &&
-		typeof Component.prototype.render === 'function'
+		(Component as any).prototype &&
+		typeof (Component as any).prototype.render === 'function'
 	)
 }
 
-export function isRefForwardingComponent(C: any) {
-	return (
-		C && C.$$typeof && C.$$typeof.toString() === 'Symbol(react.forward_ref)'
-	)
+export function isRefForwardingComponent(C: unknown): boolean {
+	const item = C as any
+	return item?.$$typeof?.toString() === 'Symbol(react.forward_ref)'
 }
 
-export function isRefable(C: any): boolean {
+export function isRefable(C: unknown): boolean {
 	return isClassComponent(C) || isRefForwardingComponent(C)
 }
 
@@ -32,7 +31,7 @@ export function checkDecoratorArguments(
 	functionName: string,
 	signature: string,
 	...args: any[]
-) {
+): void {
 	if (process.env.NODE_ENV !== 'production') {
 		for (let i = 0; i < args.length; i++) {
 			const arg = args[i]

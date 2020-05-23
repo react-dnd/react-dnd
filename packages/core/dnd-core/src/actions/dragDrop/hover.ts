@@ -6,11 +6,12 @@ import {
 	HoverOptions,
 	DragDropMonitor,
 	HandlerRegistry,
+	Identifier,
 } from '../../interfaces'
-import matchesType from '../../utils/matchesType'
+import { matchesType } from '../../utils/matchesType'
 import { HOVER } from './types'
 
-export default function createHover(manager: DragDropManager) {
+export function createHover(manager: DragDropManager) {
 	return function hover(
 		targetIdsArg: string[],
 		{ clientOffset }: HoverOptions = {},
@@ -60,7 +61,7 @@ function checkInvariants(
 function removeNonMatchingTargetIds(
 	targetIds: string[],
 	registry: HandlerRegistry,
-	draggedItemType: string | symbol | null,
+	draggedItemType: Identifier | null,
 ) {
 	// Remove those targetIds that don't match the targetType.  This
 	// fixes shallow isOver which would only be non-shallow because of

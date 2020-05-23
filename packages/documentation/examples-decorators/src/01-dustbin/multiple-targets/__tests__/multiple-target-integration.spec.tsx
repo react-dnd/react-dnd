@@ -7,14 +7,14 @@ import {
 	simulateDragDropSequence,
 } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
-import { getInstance } from 'react-dnd-test-backend'
+import { getInstance, TestBackend } from 'react-dnd-test-backend'
 import { DndComponent as DndC } from 'react-dnd'
 
 describe('Dustbin: Multiple Targets', () => {
 	it('behaves as expected', () => {
 		const Wrapped = wrapInTestContext(Example)
 		const root = mount(<Wrapped />)
-		const backend = getInstance()!
+		const backend = getInstance() as TestBackend
 
 		// Verify that all of the key components mounted
 		const dustbins = root.find(DndDustbin)

@@ -3,19 +3,19 @@ let observers: PositionObserver[] = []
 export type PositionObserver = ((position: [number, number]) => void) | null
 
 function emitChange() {
-	observers.forEach(o => o && o(knightPosition))
+	observers.forEach((o) => o && o(knightPosition))
 }
 
-export function observe(o: PositionObserver) {
+export function observe(o: PositionObserver): () => void {
 	observers.push(o)
 	emitChange()
 
-	return () => {
-		observers = observers.filter(t => t !== o)
+	return (): void => {
+		observers = observers.filter((t) => t !== o)
 	}
 }
 
-export function canMoveKnight(toX: number, toY: number) {
+export function canMoveKnight(toX: number, toY: number): boolean {
 	const [x, y] = knightPosition
 	const dx = toX - x
 	const dy = toY - y
@@ -26,7 +26,7 @@ export function canMoveKnight(toX: number, toY: number) {
 	)
 }
 
-export function moveKnight(toX: number, toY: number) {
+export function moveKnight(toX: number, toY: number): void {
 	knightPosition = [toX, toY]
 	emitChange()
 }

@@ -11,9 +11,7 @@ export interface BoxProps {
 	yellow?: boolean
 }
 
-const Box: React.FC<BoxProps> = ({ title, yellow }) => {
+export const Box: React.FC<BoxProps> = ({ title, yellow }) => {
 	const backgroundColor = yellow ? 'yellow' : 'white'
 	return <div style={{ ...styles, backgroundColor }}>{title}</div>
 }
-
-export default Box

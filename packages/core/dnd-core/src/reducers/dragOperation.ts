@@ -29,7 +29,7 @@ const initialState: State = {
 	isSourcePublic: null,
 }
 
-export default function dragOperation(
+export function reduce(
 	state: State = initialState,
 	action: Action<{
 		itemType: Identifier | Identifier[]
@@ -40,7 +40,7 @@ export default function dragOperation(
 		isSourcePublic: boolean
 		dropResult: any
 	}>,
-) {
+): State {
 	const { payload } = action
 	switch (action.type) {
 		case BEGIN_DRAG:

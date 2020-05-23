@@ -41,10 +41,10 @@ function wrapHookToRecognizeElement(hook: (node: any, options: any) => void) {
 	}
 }
 
-export default function wrapConnectorHooks(hooks: any) {
+export function wrapConnectorHooks(hooks: any) {
 	const wrappedHooks: any = {}
 
-	Object.keys(hooks).forEach(key => {
+	Object.keys(hooks).forEach((key) => {
 		const hook = hooks[key]
 
 		// ref objects should be passed straight through without wrapping

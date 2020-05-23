@@ -1,8 +1,8 @@
-import { createStore, Store } from 'redux'
-import reducer from './reducers'
-import dragDropActions from './actions/dragDrop'
-import DragDropMonitorImpl from './DragDropMonitorImpl'
-import HandlerRegistryImpl from './HandlerRegistryImpl'
+import { createStore, Store, Action } from 'redux'
+import { reduce } from './reducers'
+import { createDragDropActions } from './actions/dragDrop'
+import { DragDropMonitorImpl } from './DragDropMonitorImpl'
+import { HandlerRegistryImpl } from './HandlerRegistryImpl'
 import {
 	ActionCreator,
 	Backend,
@@ -20,7 +20,7 @@ function makeStoreInstance(debugMode: boolean): Store<State> {
 		typeof window !== 'undefined' &&
 		(window as any).__REDUX_DEVTOOLS_EXTENSION__
 	return createStore(
-		reducer,
+		reduce,
 		debugMode &&
 			reduxDevTools &&
 			reduxDevTools({
@@ -30,7 +30,7 @@ function makeStoreInstance(debugMode: boolean): Store<State> {
 	)
 }
 
-export default class DragDropManagerImpl implements DragDropManager {
+export class DragDropManagerImpl implements DragDropManager {
 	private store: Store<State>
 	private monitor: DragDropMonitor
 	private backend: Backend | undefined
@@ -46,7 +46,7 @@ export default class DragDropManagerImpl implements DragDropManager {
 		store.subscribe(this.handleRefCountChange)
 	}
 
-	public receiveBackend(backend: Backend) {
+	public receiveBackend(backend: Backend): void {
 		this.backend = backend
 	}
 
@@ -54,8 +54,8 @@ export default class DragDropManagerImpl implements DragDropManager {
 		return this.monitor
 	}
 
-	public getBackend() {
-		return this.backend!
+	public getBackend(): Backend {
+		return this.backend as Backend
 	}
 
 	public getRegistry(): HandlerRegistry {
@@ -76,7 +76,7 @@ export default class DragDropManagerImpl implements DragDropManager {
 			}
 		}
 
-		const actions = dragDropActions(this)
+		const actions = createDragDropActions(this)
 
 		return Object.keys(actions).reduce(
 			(boundActions: DragDropActions, key: string) => {
@@ -90,11 +90,11 @@ export default class DragDropManagerImpl implements DragDropManager {
 		)
 	}
 
-	public dispatch(action: any) {
+	public dispatch(action: Action<any>): void {
 		this.store.dispatch(action)
 	}
 
-	private handleRefCountChange = () => {
+	private handleRefCountChange = (): void => {
 		const shouldSetUp = this.store.getState().refCount > 0
 		if (this.backend) {
 			if (shouldSetUp && !this.isSetUp) {

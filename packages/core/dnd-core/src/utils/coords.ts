@@ -33,7 +33,7 @@ export function subtract(a: XYCoord, b: XYCoord): XYCoord {
  *
  * @param state The offset state to compute from
  */
-export function getSourceClientOffset(state: State) {
+export function getSourceClientOffset(state: State): XYCoord | null {
 	const { clientOffset, initialClientOffset, initialSourceClientOffset } = state
 	if (!clientOffset || !initialClientOffset || !initialSourceClientOffset) {
 		return null

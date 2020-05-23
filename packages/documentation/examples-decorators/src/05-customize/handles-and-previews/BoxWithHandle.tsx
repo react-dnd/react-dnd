@@ -1,7 +1,7 @@
 import React from 'react'
 import { ConnectDragPreview, ConnectDragSource } from 'react-dnd'
 import { DragSource } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',

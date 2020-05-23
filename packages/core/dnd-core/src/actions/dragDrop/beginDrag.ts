@@ -7,6 +7,7 @@ import {
 	BeginDragOptions,
 	DragDropMonitor,
 	HandlerRegistry,
+	Identifier,
 } from '../../interfaces'
 import { setClientOffset } from './local/setClientOffset'
 import { isObject } from '../../utils/js_utils'
@@ -21,9 +22,9 @@ const ResetCoordinatesAction = {
 	},
 }
 
-export default function createBeginDrag(manager: DragDropManager) {
+export function createBeginDrag(manager: DragDropManager) {
 	return function beginDrag(
-		sourceIds: string[] = [],
+		sourceIds: Identifier[] = [],
 		options: BeginDragOptions = {
 			publishSource: true,
 		},
@@ -51,8 +52,11 @@ export default function createBeginDrag(manager: DragDropManager) {
 		// Get the source client offset
 		let sourceClientOffset: XYCoord | null = null
 		if (clientOffset) {
+			if (!getSourceClientOffset) {
+				throw new Error('getSourceClientOffset must be defined')
+			}
 			verifyGetSourceClientOffsetIsFunction(getSourceClientOffset)
-			sourceClientOffset = getSourceClientOffset!(sourceId)
+			sourceClientOffset = getSourceClientOffset(sourceId)
 		}
 
 		// Initialize the full coordinates
@@ -79,7 +83,7 @@ export default function createBeginDrag(manager: DragDropManager) {
 }
 
 function verifyInvariants(
-	sourceIds: string[],
+	sourceIds: Identifier[],
 	monitor: DragDropMonitor,
 	registry: HandlerRegistry,
 ) {
@@ -103,7 +107,7 @@ function verifyItemIsObject(item: any) {
 	invariant(isObject(item), 'Item must be an object.')
 }
 
-function getDraggableSource(sourceIds: string[], monitor: DragDropMonitor) {
+function getDraggableSource(sourceIds: Identifier[], monitor: DragDropMonitor) {
 	let sourceId = null
 	for (let i = sourceIds.length - 1; i >= 0; i--) {
 		if (monitor.canDragSource(sourceIds[i])) {

@@ -39,7 +39,7 @@ interface Handler<Props> {
 	receiveProps(props: Props): void
 }
 
-export default function decorateHandler<Props, CollectedProps, ItemIdType>({
+export function decorateHandler<Props, CollectedProps, ItemIdType>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,
@@ -202,7 +202,7 @@ export default function decorateHandler<Props, CollectedProps, ItemIdType>({
 					{({ dragDropManager }) => {
 						this.receiveDragDropManager(dragDropManager)
 						if (typeof requestAnimationFrame !== 'undefined') {
-							requestAnimationFrame(() => this.handlerConnector!.reconnect())
+							requestAnimationFrame(() => this.handlerConnector?.reconnect())
 						}
 						return (
 							<Decorated

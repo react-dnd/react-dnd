@@ -1,7 +1,7 @@
 import React from 'react'
 import { ConnectDragSource } from 'react-dnd'
 import { DragSource } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
 	display: 'inline-block',
@@ -23,7 +23,7 @@ export default DragSource(
 	{
 		beginDrag: () => ({}),
 	},
-	connect => ({
+	(connect) => ({
 		connectDragSource: connect.dragSource(),
 	}),
 )(Box)

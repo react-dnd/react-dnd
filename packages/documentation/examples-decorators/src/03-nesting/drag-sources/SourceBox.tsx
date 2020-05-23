@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { ConnectDragSource, DragSourceMonitor } from 'react-dnd'
 import { DragSource, DragSourceConnector } from 'react-dnd'
-import Colors from './Colors'
+import { Colors } from './Colors'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -76,7 +76,7 @@ export interface StatefulSourceBoxProps {
 	color: string
 }
 
-const StatefulSourceBox: React.FC<StatefulSourceBoxProps> = props => {
+const StatefulSourceBox: React.FC<StatefulSourceBoxProps> = (props) => {
 	const [forbidDrag, setForbidDrag] = useState(false)
 	const handleToggleForbidDrag = useCallback(() => {
 		setForbidDrag(!forbidDrag)

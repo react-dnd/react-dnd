@@ -10,7 +10,7 @@ import {
 import { DROP } from './types'
 import { isObject } from '../../utils/js_utils'
 
-export default function createDrop(manager: DragDropManager) {
+export function createDrop(manager: DragDropManager) {
 	return function drop(options = {}): void {
 		const monitor = manager.getMonitor()
 		const registry = manager.getRegistry()

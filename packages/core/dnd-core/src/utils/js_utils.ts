@@ -15,15 +15,15 @@ export function get<T>(obj: any, path: string, defaultValue: T): T {
 /**
  * drop-in replacement for _.without
  */
-export function without<T>(items: T[], item: T) {
-	return items.filter(i => i !== item)
+export function without<T>(items: T[], item: T): T[] {
+	return items.filter((i) => i !== item)
 }
 
 /**
  * drop-in replacement for _.isString
  * @param input
  */
-export function isString(input: any) {
+export function isString(input: any): boolean {
 	return typeof input === 'string'
 }
 
@@ -31,7 +31,7 @@ export function isString(input: any) {
  * drop-in replacement for _.isString
  * @param input
  */
-export function isObject(input: any) {
+export function isObject(input: any): boolean {
 	return typeof input === 'object'
 }
 
@@ -42,8 +42,9 @@ export function isObject(input: any) {
  */
 export function xor<T extends string | number>(itemsA: T[], itemsB: T[]): T[] {
 	const map = new Map<T, number>()
-	const insertItem = (item: T) =>
-		map.set(item, map.has(item) ? map.get(item)! + 1 : 1)
+	const insertItem = (item: T) => {
+		map.set(item, map.has(item) ? (map.get(item) as number) + 1 : 1)
+	}
 	itemsA.forEach(insertItem)
 	itemsB.forEach(insertItem)
 
@@ -61,6 +62,6 @@ export function xor<T extends string | number>(itemsA: T[], itemsB: T[]): T[] {
  * @param itemsA
  * @param itemsB
  */
-export function intersection<T>(itemsA: T[], itemsB: T[]) {
-	return itemsA.filter(t => itemsB.indexOf(t) > -1)
+export function intersection<T>(itemsA: T[], itemsB: T[]): T[] {
+	return itemsA.filter((t) => itemsB.indexOf(t) > -1)
 }

@@ -1,6 +1,6 @@
 import { parse } from 'query-string'
 
-export function isTouchBackend() {
+export function isTouchBackend(): boolean {
 	if (typeof window !== 'undefined') {
 		const queryObject = parse(window.location.search)
 		return (

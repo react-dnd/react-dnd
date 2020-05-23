@@ -16,7 +16,7 @@ const MouseButton = {
  * Only touch events and mouse events where the left button is pressed should initiate a drag.
  * @param {MouseEvent | TouchEvent} e The event
  */
-export function eventShouldStartDrag(e: any) {
+export function eventShouldStartDrag(e: MouseEvent): boolean {
 	// For touch events, button will be undefined. If e.button is defined,
 	// then it should be MouseButton.Left.
 	return e.button === undefined || e.button === MouseButton.Left
@@ -28,7 +28,7 @@ export function eventShouldStartDrag(e: any) {
  * We don't want releasing the right mouse button to end the drag.
  * @param {MouseEvent | TouchEvent} e The event
  */
-export function eventShouldEndDrag(e: any) {
+export function eventShouldEndDrag(e: MouseEvent): boolean {
 	// Touch events will have buttons be undefined, while mouse events will have e.buttons's left button
 	// bit field unset if the left mouse button has been released
 	return e.buttons === undefined || (e.buttons & MouseButtons.Left) === 0

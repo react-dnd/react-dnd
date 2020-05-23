@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style: React.CSSProperties = {
 	position: 'absolute',
@@ -17,7 +17,7 @@ export interface BoxProps {
 	hideSourceOnDrag?: boolean
 }
 
-const Box: React.FC<BoxProps> = ({
+export const Box: React.FC<BoxProps> = ({
 	id,
 	left,
 	top,
@@ -26,7 +26,7 @@ const Box: React.FC<BoxProps> = ({
 }) => {
 	const [{ isDragging }, drag] = useDrag({
 		item: { id, left, top, type: ItemTypes.BOX },
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
@@ -40,5 +40,3 @@ const Box: React.FC<BoxProps> = ({
 		</div>
 	)
 }
-
-export default Box

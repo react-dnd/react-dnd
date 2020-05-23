@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 import { getEmptyImage } from 'react-dnd-html5-backend'
-import Box from './Box'
+import { Box } from './Box'
 
 function getStyles(
 	left: number,
@@ -28,7 +28,7 @@ export interface DraggableBoxProps {
 	top: number
 }
 
-const DraggableBox: React.FC<DraggableBoxProps> = props => {
+export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
 	const { id, title, left, top } = props
 	const [{ isDragging }, drag, preview] = useDrag({
 		item: { type: ItemTypes.BOX, id, left, top, title },
@@ -47,5 +47,3 @@ const DraggableBox: React.FC<DraggableBoxProps> = props => {
 		</div>
 	)
 }
-
-export default DraggableBox

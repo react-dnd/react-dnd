@@ -1,6 +1,6 @@
 import React from 'react'
 import { DragSource, DropTarget, useDrop, useDrag } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
 	border: '1px dashed gray',

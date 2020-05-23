@@ -6,7 +6,7 @@ import {
 	ConnectDragPreview,
 	ConnectDropTarget,
 } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
 	border: '1px dashed gray',

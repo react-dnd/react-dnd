@@ -1,7 +1,7 @@
 import React from 'react'
 import { DragPreviewImage, useDrag } from 'react-dnd'
-import ItemTypes from './ItemTypes'
-import boxImage from './boxImage'
+import { ItemTypes } from './ItemTypes'
+import { boxImage } from './boxImage'
 
 const style = {
 	border: '1px dashed gray',
@@ -12,10 +12,10 @@ const style = {
 	width: '20rem',
 }
 
-const BoxWithImage: React.FC = () => {
+export const BoxWithImage: React.FC = () => {
 	const [{ opacity }, drag, preview] = useDrag({
 		item: { type: ItemTypes.BOX },
-		collect: monitor => ({
+		collect: (monitor) => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
 	})
@@ -29,4 +29,3 @@ const BoxWithImage: React.FC = () => {
 		</>
 	)
 }
-export default BoxWithImage

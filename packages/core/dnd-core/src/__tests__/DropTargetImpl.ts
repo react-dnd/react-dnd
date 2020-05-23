@@ -1,15 +1,16 @@
-import { DropTarget } from '../interfaces'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { DropTarget, DragDropMonitor, Identifier } from '../interfaces'
 
-export default class DropTargetImpl implements DropTarget {
-	public canDrop() {
+export class DropTargetImpl implements DropTarget {
+	public canDrop(_monitor: DragDropMonitor, _targetId: Identifier): boolean {
 		return true
 	}
 
-	public hover() {
+	public hover(_monitor: DragDropMonitor, _targetId: Identifier): void {
 		// empty on purpose
 	}
 
-	public drop() {
+	public drop(_monitor: DragDropMonitor, _targetId: Identifier): void {
 		// empty on purpose
 	}
 }

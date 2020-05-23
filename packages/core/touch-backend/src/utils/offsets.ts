@@ -3,7 +3,7 @@ import { isTouchEvent } from './predicates'
 
 const ELEMENT_NODE = 1
 
-export function getNodeClientOffset(node: any): XYCoord | undefined {
+export function getNodeClientOffset(node: Element): XYCoord | undefined {
 	const el = node.nodeType === ELEMENT_NODE ? node : node.parentElement
 	if (!el) {
 		return undefined

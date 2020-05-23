@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDrop } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 function getStyle(backgroundColor: string): React.CSSProperties {
 	return {
@@ -27,7 +27,7 @@ export interface DustbinState {
 	hasDroppedOnChild: boolean
 }
 
-const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
+export const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
 	const [hasDropped, setHasDropped] = useState(false)
 	const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
 
@@ -41,7 +41,7 @@ const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
 			setHasDropped(true)
 			setHasDroppedOnChild(didDrop)
 		},
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 			isOverCurrent: monitor.isOver({ shallow: true }),
 		}),
@@ -64,5 +64,3 @@ const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
 		</div>
 	)
 }
-
-export default Dustbin

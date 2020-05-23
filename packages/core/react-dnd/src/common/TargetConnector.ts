@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { shallowEqual } from '@react-dnd/shallowequal'
-import wrapConnectorHooks from './wrapConnectorHooks'
+import { wrapConnectorHooks } from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from '../utils/isRef'
 import { Connector } from './SourceConnector'
@@ -35,11 +35,11 @@ export class TargetConnector implements Connector {
 		this.backend = backend
 	}
 
-	public get connectTarget() {
+	public get connectTarget(): any {
 		return this.dropTarget
 	}
 
-	public reconnect() {
+	public reconnect(): void {
 		// if nothing has changed then don't resubscribe
 		const didChange =
 			this.didHandlerIdChange() ||
@@ -72,7 +72,7 @@ export class TargetConnector implements Connector {
 		}
 	}
 
-	public receiveHandlerId(newHandlerId: Identifier | null) {
+	public receiveHandlerId(newHandlerId: Identifier | null): void {
 		if (newHandlerId === this.handlerId) {
 			return
 		}
@@ -81,7 +81,7 @@ export class TargetConnector implements Connector {
 		this.reconnect()
 	}
 
-	public get dropTargetOptions() {
+	public get dropTargetOptions(): any {
 		return this.dropTargetOptionsInternal
 	}
 	public set dropTargetOptions(options: any) {
