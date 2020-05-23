@@ -306,7 +306,9 @@ export class HTML5Backend implements Backend {
 		}
 
 		this.actions.endDrag()
-		this.registry.removeSource(this.currentNativeHandle!)
+		if (this.currentNativeHandle) {
+			this.registry.removeSource(this.currentNativeHandle)
+		}
 		this.currentNativeHandle = null
 		this.currentNativeSource = null
 	}
@@ -463,7 +465,7 @@ export class HTML5Backend implements Backend {
 
 			try {
 				// Firefox won't drag without setting data
-				dataTransfer!.setData('application/json', {} as any)
+				dataTransfer?.setData('application/json', {} as any)
 			} catch (err) {
 				// IE doesn't support MIME types in setData
 			}
@@ -650,7 +652,7 @@ export class HTML5Backend implements Backend {
 		e.preventDefault()
 
 		if (this.isDraggingNativeItem()) {
-			this.currentNativeSource!.loadDataTransfer(e.dataTransfer)
+			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		}
 
 		this.enterLeaveCounter.reset()

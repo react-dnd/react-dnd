@@ -13,9 +13,11 @@ export function createEndDrag(manager: DragDropManager) {
 		verifyIsDragging(monitor)
 
 		const sourceId = monitor.getSourceId()
-		const source = registry.getSource(sourceId!, true)
-		source.endDrag(monitor, sourceId!)
-		registry.unpinSource()
+		if (sourceId != null) {
+			const source = registry.getSource(sourceId, true)
+			source.endDrag(monitor, sourceId)
+			registry.unpinSource()
+		}
 		return { type: END_DRAG }
 	}
 }

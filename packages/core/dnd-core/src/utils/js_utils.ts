@@ -42,8 +42,9 @@ export function isObject(input: any): boolean {
  */
 export function xor<T extends string | number>(itemsA: T[], itemsB: T[]): T[] {
 	const map = new Map<T, number>()
-	const insertItem = (item: T) =>
-		map.set(item, map.has(item) ? map.get(item)! + 1 : 1)
+	const insertItem = (item: T) => {
+		map.set(item, map.has(item) ? (map.get(item) as number) + 1 : 1)
+	}
 	itemsA.forEach(insertItem)
 	itemsB.forEach(insertItem)
 

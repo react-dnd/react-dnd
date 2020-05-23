@@ -50,7 +50,7 @@ class TargetImpl<Props> implements Target {
 		if (!this.spec.hover) {
 			return
 		}
-		this.spec.hover(this.props!, this.monitor, getDecoratedComponent(this.ref))
+		this.spec.hover(this.props, this.monitor, getDecoratedComponent(this.ref))
 	}
 
 	public drop() {

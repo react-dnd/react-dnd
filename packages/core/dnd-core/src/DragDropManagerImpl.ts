@@ -55,7 +55,7 @@ export class DragDropManagerImpl implements DragDropManager {
 	}
 
 	public getBackend(): Backend {
-		return this.backend!
+		return this.backend as Backend
 	}
 
 	public getRegistry(): HandlerRegistry {

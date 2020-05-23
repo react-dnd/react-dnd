@@ -40,7 +40,7 @@ export const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 			}
 
 			// Determine rectangle on screen
-			const hoverBoundingRect = ref.current!.getBoundingClientRect()
+			const hoverBoundingRect = ref.current?.getBoundingClientRect()
 
 			// Get vertical middle
 			const hoverMiddleY =

@@ -25,7 +25,7 @@ export function getEventClientOffset(e: MouseEvent): XYCoord {
 function isImageNode(node: any) {
 	return (
 		node.nodeName === 'IMG' &&
-		(isFirefox() || !document.documentElement!.contains(node))
+		(isFirefox() || !document.documentElement?.contains(node))
 	)
 }
 

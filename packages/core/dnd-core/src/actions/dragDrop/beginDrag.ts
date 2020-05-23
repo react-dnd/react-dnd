@@ -51,9 +51,9 @@ export function createBeginDrag(manager: DragDropManager) {
 
 		// Get the source client offset
 		let sourceClientOffset: XYCoord | null = null
-		if (clientOffset) {
+		if (clientOffset && getSourceClientOffset) {
 			verifyGetSourceClientOffsetIsFunction(getSourceClientOffset)
-			sourceClientOffset = getSourceClientOffset!(sourceId)
+			sourceClientOffset = getSourceClientOffset(sourceId)
 		}
 
 		// Initialize the full coordinates
