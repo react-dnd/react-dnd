@@ -274,7 +274,7 @@ export class TouchBackend implements Backend {
 	public connectDragPreview(
 		sourceId: string,
 		node: HTMLElement,
-		options: any,
+		options: unknown,
 	): Unsubscribe {
 		this.sourcePreviewNodeOptions.set(sourceId, options)
 		this.sourcePreviewNodes.set(sourceId, node)
@@ -348,11 +348,12 @@ export class TouchBackend implements Backend {
 	}
 
 	private getSourceClientOffset = (sourceId: string): XYCoord | undefined => {
-		return getNodeClientOffset(this.sourceNodes.get(sourceId))
+		const element = this.sourceNodes.get(sourceId)
+		return element && getNodeClientOffset(element)
 	}
 
 	public handleTopMoveStartCapture = (e: Event): void => {
-		if (!eventShouldStartDrag(e)) {
+		if (!eventShouldStartDrag(e as MouseEvent)) {
 			return
 		}
 
@@ -376,7 +377,7 @@ export class TouchBackend implements Backend {
 	}
 
 	public handleTopMoveStart = (e: MouseEvent | TouchEvent): void => {
-		if (!eventShouldStartDrag(e)) {
+		if (!eventShouldStartDrag(e as MouseEvent)) {
 			return
 		}
 
@@ -396,7 +397,7 @@ export class TouchBackend implements Backend {
 	}
 
 	public handleTopMoveStartDelay = (e: Event): void => {
-		if (!eventShouldStartDrag(e)) {
+		if (!eventShouldStartDrag(e as MouseEvent)) {
 			return
 		}
 
@@ -566,7 +567,7 @@ export class TouchBackend implements Backend {
 		this._isScrolling = false
 		this.lastTargetTouchFallback = undefined
 
-		if (!eventShouldEndDrag(e)) {
+		if (!eventShouldEndDrag(e as MouseEvent)) {
 			return
 		}
 

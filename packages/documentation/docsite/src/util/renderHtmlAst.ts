@@ -1,5 +1,8 @@
 import { createElement } from 'react'
-import { processImagesInMarkdownAst as processImages } from './processImagesInMarkdownAst'
+import {
+	processImagesInMarkdownAst as processImages,
+	MarkdownAstNode,
+} from './processImagesInMarkdownAst'
 import { ExampleTabs } from '../components/exampleTabs'
 import debug from 'debug'
 import rehypeReact from 'rehype-react'
@@ -14,7 +17,7 @@ const renderAst = new rehypeReact({
 	},
 }).Compiler
 
-export function renderHtmlAst(node: any) {
+export function renderHtmlAst(node: MarkdownAstNode): any {
 	try {
 		processImages(node)
 		const result = renderAst(node)

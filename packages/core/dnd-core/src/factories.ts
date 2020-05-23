@@ -3,8 +3,8 @@ import { DragDropManager, BackendFactory } from './interfaces'
 
 export function createDragDropManager(
 	backendFactory: BackendFactory,
-	globalContext: any,
-	backendOptions: any,
+	globalContext: unknown,
+	backendOptions: unknown,
 	debugMode?: boolean,
 ): DragDropManager {
 	const manager = new DragDropManagerImpl(debugMode)

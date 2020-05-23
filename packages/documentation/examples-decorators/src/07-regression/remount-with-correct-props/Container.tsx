@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { memo, useState, useEffect, useCallback } from 'react'
 import SourceBox from './SourceBox'
 import TargetBox from './TargetBox'
 
-export function Container() {
+export const Container: React.FC = memo(function Container() {
 	const [isMounted, setIsMounted] = useState(true)
 	const [isDragging, setIsDragging] = useState(false)
 	useEffect(
@@ -40,4 +40,4 @@ export function Container() {
 			</div>
 		</>
 	)
-}
+})

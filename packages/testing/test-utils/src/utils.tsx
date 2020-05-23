@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react'
 import {
 	TestBackendFactory,
@@ -17,7 +18,9 @@ interface RefType {
  *
  * @param DecoratedComponent The component to decorate
  */
-export function wrapInTestContext(DecoratedComponent: any): any {
+export function wrapInTestContext(
+	DecoratedComponent: React.ComponentType,
+): any {
 	const forwardedRefFunc = (props: any, ref: React.Ref<RefType>) => {
 		const dragDropManager = React.useRef<any>(undefined)
 

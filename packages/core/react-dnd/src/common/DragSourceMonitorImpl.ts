@@ -103,7 +103,7 @@ export class DragSourceMonitorImpl implements DragSourceMonitor {
 		return this.internalMonitor.canDropOnTarget(targetId)
 	}
 
-	public getItemType(): string | symbol | null {
+	public getItemType(): Identifier | null {
 		return this.internalMonitor.getItemType()
 	}
 

@@ -24,6 +24,7 @@ export interface DirtyHandlerIdPayload {
 }
 
 export function reduce(
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	_state: State = NONE,
 	action: Action<DirtyHandlerIdPayload>,
 ): State {

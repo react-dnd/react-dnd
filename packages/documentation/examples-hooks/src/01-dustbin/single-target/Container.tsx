@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Dustbin } from './Dustbin'
 import { Box } from './Box'
 
-export function Container() {
+export const Container: React.FC = memo(function Container() {
 	return (
 		<div>
 			<div style={{ overflow: 'hidden', clear: 'both' }}>
@@ -15,4 +15,4 @@ export function Container() {
 			</div>
 		</div>
 	)
-}
+})
