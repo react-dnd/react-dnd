@@ -20,7 +20,7 @@ export function isClassComponent(Component: unknown): boolean {
 
 export function isRefForwardingComponent(C: unknown): boolean {
 	const item = C as any
-	return item?.$$typeof.toString() === 'Symbol(react.forward_ref)'
+	return item?.$$typeof?.toString() === 'Symbol(react.forward_ref)'
 }
 
 export function isRefable(C: unknown): boolean {

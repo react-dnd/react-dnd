@@ -277,9 +277,9 @@ export class HTML5BackendImpl implements Backend {
 		}
 	}
 
-	private getSourceClientOffset = (sourceId: string): XYCoord | undefined => {
+	private getSourceClientOffset = (sourceId: string): XYCoord | null => {
 		const source = this.sourceNodes.get(sourceId)
-		return source && getNodeClientOffset(source as HTMLElement)
+		return (source && getNodeClientOffset(source as HTMLElement)) || null
 	}
 
 	private isDraggingNativeItem() {

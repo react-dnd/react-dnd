@@ -4,14 +4,14 @@ import { XYCoord } from 'dnd-core'
 
 const ELEMENT_NODE = 1
 
-export function getNodeClientOffset(node: HTMLElement): XYCoord | undefined {
+export function getNodeClientOffset(node: Node): XYCoord | null {
 	const el = node.nodeType === ELEMENT_NODE ? node : node.parentElement
 
 	if (!el) {
-		return undefined
+		return null
 	}
 
-	const { top, left } = el.getBoundingClientRect()
+	const { top, left } = (el as HTMLElement).getBoundingClientRect()
 	return { x: left, y: top }
 }
 
