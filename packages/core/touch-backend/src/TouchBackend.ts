@@ -8,7 +8,12 @@ import {
 	DragDropManager,
 	Unsubscribe,
 } from 'dnd-core'
-import { EventName, ListenerType, TouchBackendOptions } from './interfaces'
+import {
+	EventName,
+	ListenerType,
+	TouchBackendOptions,
+	TouchBackendContext,
+} from './interfaces'
 import {
 	eventShouldStartDrag,
 	eventShouldEndDrag,
@@ -64,7 +69,7 @@ export class TouchBackend implements Backend {
 
 	public constructor(
 		manager: DragDropManager,
-		context: any,
+		context: TouchBackendContext,
 		options: TouchBackendOptions,
 	) {
 		this.options = new OptionsReader(options, context)
@@ -106,19 +111,19 @@ export class TouchBackend implements Backend {
 	}
 
 	// public for test
-	public get window() {
+	public get window(): Window | undefined {
 		return this.options.window
 	}
 
 	// public for test
-	public get document() {
+	public get document(): Document | undefined {
 		if (this.window) {
 			return this.window.document
 		}
 		return undefined
 	}
 
-	public setup() {
+	public setup(): void {
 		if (!this.window) {
 			return
 		}
@@ -167,7 +172,7 @@ export class TouchBackend implements Backend {
 		}
 	}
 
-	public teardown() {
+	public teardown(): void {
 		if (!this.window) {
 			return
 		}
@@ -254,23 +259,27 @@ export class TouchBackend implements Backend {
 		})
 	}
 
-	public connectDragSource(sourceId: string, node: HTMLElement) {
+	public connectDragSource(sourceId: string, node: HTMLElement): Unsubscribe {
 		const handleMoveStart = this.handleMoveStart.bind(this, sourceId)
 		this.sourceNodes.set(sourceId, node)
 
 		this.addEventListener(node, 'start', handleMoveStart)
 
-		return () => {
+		return (): void => {
 			this.sourceNodes.delete(sourceId)
 			this.removeEventListener(node, 'start', handleMoveStart)
 		}
 	}
 
-	public connectDragPreview(sourceId: string, node: HTMLElement, options: any) {
+	public connectDragPreview(
+		sourceId: string,
+		node: HTMLElement,
+		options: any,
+	): Unsubscribe {
 		this.sourcePreviewNodeOptions.set(sourceId, options)
 		this.sourcePreviewNodes.set(sourceId, node)
 
-		return () => {
+		return (): void => {
 			this.sourcePreviewNodes.delete(sourceId)
 			this.sourcePreviewNodeOptions.delete(sourceId)
 		}
@@ -278,7 +287,9 @@ export class TouchBackend implements Backend {
 
 	public connectDropTarget(targetId: string, node: HTMLElement): Unsubscribe {
 		if (!this.document) {
-			return () => null
+			return (): void => {
+				/* noop */
+			}
 		}
 
 		const handleMove = (e: MouseEvent | TouchEvent) => {
@@ -328,7 +339,7 @@ export class TouchBackend implements Backend {
 		this.addEventListener(this.document.body, 'move', handleMove as any)
 		this.targetNodes.set(targetId, node)
 
-		return () => {
+		return (): void => {
 			if (this.document) {
 				this.targetNodes.delete(targetId)
 				this.removeEventListener(this.document.body, 'move', handleMove as any)
@@ -336,11 +347,11 @@ export class TouchBackend implements Backend {
 		}
 	}
 
-	private getSourceClientOffset = (sourceId: string) => {
+	private getSourceClientOffset = (sourceId: string): XYCoord | undefined => {
 		return getNodeClientOffset(this.sourceNodes.get(sourceId))
 	}
 
-	private handleTopMoveStartCapture = (e: Event) => {
+	public handleTopMoveStartCapture = (e: Event): void => {
 		if (!eventShouldStartDrag(e)) {
 			return
 		}
@@ -348,7 +359,7 @@ export class TouchBackend implements Backend {
 		this.moveStartSourceIds = []
 	}
 
-	private handleMoveStart = (sourceId: string) => {
+	public handleMoveStart = (sourceId: string): void => {
 		// Just because we received an event doesn't necessarily mean we need to collect drag sources.
 		// We only collect start collecting drag sources on touch and left mouse events.
 		if (Array.isArray(this.moveStartSourceIds)) {
@@ -364,7 +375,7 @@ export class TouchBackend implements Backend {
 		return this.handleTopMoveStartDelay
 	}
 
-	private handleTopMoveStart = (e: MouseEvent | TouchEvent) => {
+	public handleTopMoveStart = (e: MouseEvent | TouchEvent): void => {
 		if (!eventShouldStartDrag(e)) {
 			return
 		}
@@ -384,7 +395,7 @@ export class TouchBackend implements Backend {
 		this.waitingForDelay = false
 	}
 
-	private handleTopMoveStartDelay = (e: Event) => {
+	public handleTopMoveStartDelay = (e: Event): void => {
 		if (!eventShouldStartDrag(e)) {
 			return
 		}
@@ -400,17 +411,20 @@ export class TouchBackend implements Backend {
 		this.waitingForDelay = true
 	}
 
-	private handleTopMoveCapture = () => {
+	public handleTopMoveCapture = (): void => {
 		this.dragOverTargetIds = []
 	}
 
-	private handleMove = (_: any, targetId: string) => {
+	public handleMove = (
+		_evt: MouseEvent | TouchEvent,
+		targetId: string,
+	): void => {
 		if (this.dragOverTargetIds) {
 			this.dragOverTargetIds.unshift(targetId)
 		}
 	}
 
-	private handleTopMove = (e: TouchEvent | MouseEvent) => {
+	public handleTopMove = (e: TouchEvent | MouseEvent): void => {
 		if (this.timeout) {
 			clearTimeout(this.timeout)
 		}
@@ -490,24 +504,27 @@ export class TouchBackend implements Backend {
 			  )
 			: this.document.elementsFromPoint(clientOffset.x, clientOffset.y)
 		// Extend list with parents that are not receiving elementsFromPoint events (size 0 elements and svg groups)
-		const elementsAtPointExtended = []
+		const elementsAtPointExtended: Element[] = []
 		for (const nodeId in elementsAtPoint) {
 			// eslint-disable-next-line no-prototype-builtins
 			if (!elementsAtPoint.hasOwnProperty(nodeId)) {
 				continue
 			}
-			let currentNode = elementsAtPoint[nodeId]
+			let currentNode: Element | null = elementsAtPoint[nodeId]
 			elementsAtPointExtended.push(currentNode)
 			while (currentNode) {
 				currentNode = currentNode.parentElement
-				if (elementsAtPointExtended.indexOf(currentNode) === -1) {
+				if (
+					currentNode &&
+					elementsAtPointExtended.indexOf(currentNode) === -1
+				) {
 					elementsAtPointExtended.push(currentNode)
 				}
 			}
 		}
 		const orderedDragOverTargetIds: string[] = elementsAtPointExtended
 			// Filter off nodes that arent a hovered DropTargets nodes
-			.filter((node) => dragOverTargetNodes.indexOf(node) > -1)
+			.filter((node) => dragOverTargetNodes.indexOf(node as HTMLElement) > -1)
 			// Map back the nodes elements to targetIds
 			.map((node) => {
 				for (const targetId in this.targetNodes) {
@@ -545,7 +562,7 @@ export class TouchBackend implements Backend {
 		})
 	}
 
-	private handleTopMoveEndCapture = (e: Event) => {
+	public handleTopMoveEndCapture = (e: Event): void => {
 		this._isScrolling = false
 		this.lastTargetTouchFallback = undefined
 
@@ -567,7 +584,7 @@ export class TouchBackend implements Backend {
 		this.actions.endDrag()
 	}
 
-	private handleCancelOnEscape = (e: KeyboardEvent) => {
+	public handleCancelOnEscape = (e: KeyboardEvent): void => {
 		if (e.key === 'Escape' && this.monitor.isDragging()) {
 			this._mouseClientOffset = {}
 
