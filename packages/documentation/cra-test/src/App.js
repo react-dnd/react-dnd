@@ -6,13 +6,12 @@ import './App.css'
 
 const exampleNames = Object.keys(componentIndex)
 
-const App = memo(() => (
+export const App = memo(() => (
 	<DndProvider backend={HTML5BackendFactory}>
 		<AppGuts />
 	</DndProvider>
 ))
 App.displayName = 'App'
-export default App
 
 function AppGuts() {
 	const [name, setName] = useState('chessboard')

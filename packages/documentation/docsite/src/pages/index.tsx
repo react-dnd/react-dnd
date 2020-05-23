@@ -3,7 +3,6 @@ import { Layout } from '../components/layout'
 import { navigate } from 'gatsby'
 
 const IndexPage: React.FC = memo(function IndexPage(props) {
-	console.log('INDEXPAGE')
 	if (typeof window !== 'undefined') {
 		navigate('/about')
 	}
