@@ -171,8 +171,11 @@ export interface SourceIdPayload {
 }
 
 export interface DragDropActions {
-	beginDrag(sourceIds: Identifier[], options?: any): Action<BeginDragPayload>
-	publishDragSource(): SentinelAction
+	beginDrag(
+		sourceIds?: Identifier[],
+		options?: any,
+	): Action<BeginDragPayload> | undefined
+	publishDragSource(): SentinelAction | undefined
 	hover(targetIds: Identifier[], options?: any): Action<HoverPayload>
 	drop(options?: any): void
 	endDrag(): SentinelAction

@@ -10,7 +10,7 @@ const style = {
 	cursor: 'move',
 	width: '20rem',
 }
-const BoxWithImage = () => {
+export const BoxWithImage: React.FC = () => {
 	const [{ opacity }, drag, preview] = useDrag({
 		item: { type: ItemTypes.BOX },
 		collect: (monitor) => ({
@@ -26,4 +26,3 @@ const BoxWithImage = () => {
 		</>
 	)
 }
-export default BoxWithImage

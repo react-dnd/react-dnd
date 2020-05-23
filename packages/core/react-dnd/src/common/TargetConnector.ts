@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { shallowEqual } from '@react-dnd/shallowequal'
-import wrapConnectorHooks from './wrapConnectorHooks'
+import { wrapConnectorHooks } from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from '../utils/isRef'
 import { Connector } from './SourceConnector'

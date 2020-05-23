@@ -16,7 +16,7 @@ const handleStyle = {
 	marginRight: '0.75rem',
 	cursor: 'move',
 }
-const BoxWithHandle = () => {
+export const BoxWithHandle: React.FC = () => {
 	const [{ opacity }, drag, preview] = useDrag({
 		item: { type: ItemTypes.BOX },
 		collect: (monitor) => ({
@@ -30,4 +30,3 @@ const BoxWithHandle = () => {
 		</div>
 	)
 }
-export default BoxWithHandle

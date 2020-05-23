@@ -43,13 +43,13 @@ export default class Container extends React.Component<
 		this.state = buildCardData()
 	}
 
-	public componentWillUnmount() {
+	public componentWillUnmount(): void {
 		if (this.requestedFrame !== undefined) {
 			cancelAnimationFrame(this.requestedFrame)
 		}
 	}
 
-	public render() {
+	public render(): JSX.Element {
 		const { cardsByIndex } = this.state
 
 		return (
@@ -76,7 +76,7 @@ export default class Container extends React.Component<
 		}
 	}
 
-	private drawFrame = () => {
+	private drawFrame = (): void => {
 		const nextState = update(this.state, this.pendingUpdateFn)
 		this.setState(nextState)
 
@@ -84,7 +84,7 @@ export default class Container extends React.Component<
 		this.requestedFrame = undefined
 	}
 
-	private moveCard = (id: string, afterId: string) => {
+	private moveCard = (id: string, afterId: string): void => {
 		const { cardsById, cardsByIndex } = this.state
 
 		const card = cardsById[id]

@@ -7,10 +7,10 @@ import {
 	DragDropMonitor,
 	HandlerRegistry,
 } from '../../interfaces'
-import matchesType from '../../utils/matchesType'
+import { matchesType } from '../../utils/matchesType'
 import { HOVER } from './types'
 
-export default function createHover(manager: DragDropManager) {
+export function createHover(manager: DragDropManager) {
 	return function hover(
 		targetIdsArg: string[],
 		{ clientOffset }: HoverOptions = {},

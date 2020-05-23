@@ -1,8 +1,8 @@
 import React from 'react'
-import SourceBox from './SourceBox'
-import TargetBox from './TargetBox'
+import { SourceBox } from './SourceBox'
+import { TargetBox } from './TargetBox'
 
-export default function Container() {
+export const Container: React.FC = () => {
 	return (
 		<>
 			<div style={{ overflow: 'hidden', clear: 'both', marginTop: '1.5rem' }}>

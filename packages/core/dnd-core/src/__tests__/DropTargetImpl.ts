@@ -1,15 +1,15 @@
 import { DropTarget } from '../interfaces'
 
-export default class DropTargetImpl implements DropTarget {
-	public canDrop() {
+export class DropTargetImpl implements DropTarget {
+	public canDrop(): boolean {
 		return true
 	}
 
-	public hover() {
+	public hover(): void {
 		// empty on purpose
 	}
 
-	public drop() {
+	public drop(): void {
 		// empty on purpose
 	}
 }

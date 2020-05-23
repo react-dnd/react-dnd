@@ -20,13 +20,13 @@ const initialState: State = {
 	clientOffset: null,
 }
 
-export default function dragOffset(
+export function reduce(
 	state: State = initialState,
 	action: Action<{
 		sourceClientOffset: XYCoord
 		clientOffset: XYCoord
 	}>,
-) {
+): State {
 	const { payload } = action
 	switch (action.type) {
 		case INIT_COORDS:

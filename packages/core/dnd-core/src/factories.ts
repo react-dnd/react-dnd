@@ -1,4 +1,4 @@
-import DragDropManagerImpl from './DragDropManagerImpl'
+import { DragDropManagerImpl } from './DragDropManagerImpl'
 import { DragDropManager, BackendFactory } from './interfaces'
 
 export function createDragDropManager(

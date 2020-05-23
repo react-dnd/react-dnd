@@ -20,6 +20,7 @@ import {
 import * as NativeTypes from './NativeTypes'
 import { NativeDragSource } from './NativeDragSources/NativeDragSource'
 import { OptionsReader } from './OptionsReader'
+import { HTML5BackendContext } from 'types'
 
 declare global {
 	interface Window {
@@ -54,7 +55,10 @@ export class HTML5Backend implements Backend {
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
 
-	public constructor(manager: DragDropManager, globalContext: any) {
+	public constructor(
+		manager: DragDropManager,
+		globalContext: HTML5BackendContext,
+	) {
 		this.options = new OptionsReader(globalContext)
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
@@ -296,12 +300,14 @@ export class HTML5Backend implements Backend {
 		this.currentNativeSource = null
 	}
 
-	private isNodeInDocument = (node: Node | null) => {
+	private isNodeInDocument = (node: Node | null): boolean => {
 		// Check the node either in the main document or in the current context
-		return this.document && this.document.body && document.body.contains(node)
+		return Boolean(
+			this.document && this.document.body && document.body.contains(node),
+		)
 	}
 
-	private endDragIfSourceWasRemovedFromDOM = () => {
+	private endDragIfSourceWasRemovedFromDOM = (): void => {
 		const node = this.currentDragSourceNode
 		if (this.isNodeInDocument(node)) {
 			return
@@ -382,7 +388,7 @@ export class HTML5Backend implements Backend {
 		this.dragStartSourceIds.unshift(sourceId)
 	}
 
-	public handleTopDragStart = (e: DragEvent) => {
+	public handleTopDragStart = (e: DragEvent): void => {
 		if (e.defaultPrevented) {
 			return
 		}

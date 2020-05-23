@@ -10,10 +10,10 @@ const style: React.CSSProperties = {
 	textAlign: 'center',
 }
 
-const TargetBox: React.FC = () => {
+export const TargetBox: React.FC = () => {
 	const [{ isActive }, drop] = useDrop({
 		accept: ItemTypes.BOX,
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isActive: monitor.canDrop() && monitor.isOver(),
 		}),
 	})
@@ -24,5 +24,3 @@ const TargetBox: React.FC = () => {
 		</div>
 	)
 }
-
-export default TargetBox

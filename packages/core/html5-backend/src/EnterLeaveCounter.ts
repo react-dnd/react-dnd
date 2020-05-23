@@ -1,5 +1,6 @@
 import { union, without } from './utils/js_utils'
-type NodePredicate = (node: any) => boolean
+
+type NodePredicate = (node: Node | undefined) => boolean
 
 export default class EnterLeaveCounter {
 	private entered: any[] = []
@@ -9,10 +10,10 @@ export default class EnterLeaveCounter {
 		this.isNodeInDocument = isNodeInDocument
 	}
 
-	public enter(enteringNode: any) {
+	public enter(enteringNode: Node): boolean {
 		const previousLength = this.entered.length
 
-		const isNodeEntered = (node: any) =>
+		const isNodeEntered = (node: Node): boolean =>
 			this.isNodeInDocument(node) &&
 			(!node.contains || node.contains(enteringNode))
 
@@ -21,7 +22,7 @@ export default class EnterLeaveCounter {
 		return previousLength === 0 && this.entered.length > 0
 	}
 
-	public leave(leavingNode: any) {
+	public leave(leavingNode: Node): boolean {
 		const previousLength = this.entered.length
 
 		this.entered = without(
@@ -32,7 +33,7 @@ export default class EnterLeaveCounter {
 		return previousLength > 0 && this.entered.length === 0
 	}
 
-	public reset() {
+	public reset(): void {
 		this.entered = []
 	}
 }

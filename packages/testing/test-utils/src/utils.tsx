@@ -58,7 +58,7 @@ export function simulateDragDropSequence(
 	source: DndComponent<any>,
 	target: DndComponent<any>,
 	backend: TestBackend,
-) {
+): void {
 	act(() => {
 		backend.simulateBeginDrag([source.getHandlerId()])
 		backend.simulateHover([target.getHandlerId()])
@@ -71,7 +71,7 @@ export function simulateHoverSequence(
 	source: DndComponent<any>,
 	target: DndComponent<any>,
 	backend: TestBackend,
-) {
+): void {
 	act(() => {
 		backend.simulateBeginDrag([source.getHandlerId()])
 		backend.simulateHover([target.getHandlerId()])

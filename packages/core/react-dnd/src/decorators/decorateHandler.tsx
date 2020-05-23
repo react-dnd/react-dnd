@@ -39,7 +39,7 @@ interface Handler<Props> {
 	receiveProps(props: Props): void
 }
 
-export default function decorateHandler<Props, CollectedProps, ItemIdType>({
+export function decorateHandler<Props, CollectedProps, ItemIdType>({
 	DecoratedComponent,
 	createHandler,
 	createMonitor,

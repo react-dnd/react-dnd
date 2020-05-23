@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { SourceBox } from './SourceBox'
 import TargetBox from './TargetBox'
 
-export default function Container() {
+export const Container: React.FC = () => {
 	const [isMounted, setIsMounted] = useState(true)
 	const [isDragging, setIsDragging] = useState(false)
 	useEffect(
@@ -41,3 +41,5 @@ export default function Container() {
 		</>
 	)
 }
+
+export default Container

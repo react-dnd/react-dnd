@@ -4,11 +4,11 @@ export { TestBackend } from './TestBackend'
 
 let instance: TestBackend | undefined
 
-export function getInstance() {
+export function getInstance(): TestBackend | undefined {
 	return instance
 }
 
-export function clearInstance() {
+export function clearInstance(): void {
 	instance = undefined
 }
 

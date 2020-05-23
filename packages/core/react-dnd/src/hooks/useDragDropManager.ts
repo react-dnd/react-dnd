@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { DragDropManager } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
-import { DndContext } from '../../common/DndContext'
+import { DndContext } from '../common/DndContext'
 
 /**
  * A hook to retrieve the DragDropManager from Context

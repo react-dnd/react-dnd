@@ -1,6 +1,6 @@
 import { Store } from 'redux'
 import { invariant } from '@react-dnd/invariant'
-import matchesType from './utils/matchesType'
+import { matchesType } from './utils/matchesType'
 import {
 	getSourceClientOffset,
 	getDifferenceFromInitialOffset,
@@ -16,7 +16,7 @@ import {
 	Identifier,
 } from './interfaces'
 
-export default class DragDropMonitorImpl implements DragDropMonitor {
+export class DragDropMonitorImpl implements DragDropMonitor {
 	private store: Store<State>
 	public readonly registry: HandlerRegistry
 
@@ -107,7 +107,7 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		)
 	}
 
-	public isDragging() {
+	public isDragging(): boolean {
 		return Boolean(this.getItemType())
 	}
 
@@ -135,7 +135,7 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 	public isOverTarget(
 		targetId: string | undefined,
 		options = { shallow: false },
-	) {
+	): boolean {
 		// undefined on initial render
 		if (!targetId) {
 			return false
@@ -165,32 +165,32 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		}
 	}
 
-	public getItemType() {
+	public getItemType(): Identifier {
 		return this.store.getState().dragOperation.itemType as Identifier
 	}
 
-	public getItem() {
+	public getItem(): any {
 		return this.store.getState().dragOperation.item
 	}
 
-	public getSourceId() {
+	public getSourceId(): string | null {
 		return this.store.getState().dragOperation.sourceId
 	}
 
-	public getTargetIds() {
+	public getTargetIds(): string[] {
 		return this.store.getState().dragOperation.targetIds
 	}
 
-	public getDropResult() {
+	public getDropResult(): any {
 		return this.store.getState().dragOperation.dropResult
 	}
 
-	public didDrop() {
+	public didDrop(): boolean {
 		return this.store.getState().dragOperation.didDrop
 	}
 
-	public isSourcePublic() {
-		return this.store.getState().dragOperation.isSourcePublic
+	public isSourcePublic(): boolean {
+		return Boolean(this.store.getState().dragOperation.isSourcePublic)
 	}
 
 	public getInitialClientOffset(): XYCoord | null {
@@ -209,7 +209,7 @@ export default class DragDropMonitorImpl implements DragDropMonitor {
 		return getSourceClientOffset(this.store.getState().dragOffset)
 	}
 
-	public getDifferenceFromInitialOffset() {
+	public getDifferenceFromInitialOffset(): XYCoord | null {
 		return getDifferenceFromInitialOffset(this.store.getState().dragOffset)
 	}
 }

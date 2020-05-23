@@ -1,5 +1,5 @@
 let nextUniqueId = 0
 
-export default function getNextUniqueId(): number {
+export function getNextUniqueId(): number {
 	return nextUniqueId++
 }

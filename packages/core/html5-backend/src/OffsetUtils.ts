@@ -4,18 +4,18 @@ import { XYCoord } from 'dnd-core'
 
 const ELEMENT_NODE = 1
 
-export function getNodeClientOffset(node: any) {
+export function getNodeClientOffset(node: HTMLElement): XYCoord | undefined {
 	const el = node.nodeType === ELEMENT_NODE ? node : node.parentElement
 
 	if (!el) {
-		return null
+		return undefined
 	}
 
 	const { top, left } = el.getBoundingClientRect()
 	return { x: left, y: top }
 }
 
-export function getEventClientOffset(e: any) {
+export function getEventClientOffset(e: MouseEvent): XYCoord {
 	return {
 		x: e.clientX,
 		y: e.clientY,
@@ -47,12 +47,12 @@ function getDragPreviewSize(
 }
 
 export function getDragPreviewOffset(
-	sourceNode: any,
-	dragPreview: any,
+	sourceNode: HTMLElement,
+	dragPreview: HTMLElement,
 	clientOffset: XYCoord,
-	anchorPoint: any,
-	offsetPoint: any,
-) {
+	anchorPoint: { anchorX: number; anchorY: number },
+	offsetPoint: { offsetX: number; offsetY: number },
+): XYCoord {
 	// The browsers will use the image intrinsic size under different conditions.
 	// Firefox only cares if it's an image, but WebKit also wants it to be detached.
 	const isImage = isImageNode(dragPreview)

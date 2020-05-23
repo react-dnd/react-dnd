@@ -1,11 +1,13 @@
-export class OptionsReader {
-	private globalContext: any
+import { HTML5BackendContext } from './types'
 
-	public constructor(globalContext: any) {
+export class OptionsReader {
+	private globalContext: HTML5BackendContext
+
+	public constructor(globalContext: HTML5BackendContext) {
 		this.globalContext = globalContext
 	}
 
-	public get window() {
+	public get window(): Window | undefined {
 		if (this.globalContext) {
 			return this.globalContext
 		} else if (typeof window !== 'undefined') {
@@ -14,7 +16,7 @@ export class OptionsReader {
 		return undefined
 	}
 
-	public get document() {
+	public get document(): Document | undefined {
 		if (this.window) {
 			return this.window.document
 		}
