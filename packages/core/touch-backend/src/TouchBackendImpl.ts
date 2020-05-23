@@ -129,10 +129,10 @@ export class TouchBackendImpl implements Backend {
 		}
 
 		invariant(
-			!TouchBackend.isSetUp,
+			!TouchBackendImpl.isSetUp,
 			'Cannot have two Touch backends at the same time.',
 		)
-		TouchBackend.isSetUp = true
+		TouchBackendImpl.isSetUp = true
 
 		this.addEventListener(
 			this.window,
@@ -177,7 +177,7 @@ export class TouchBackendImpl implements Backend {
 			return
 		}
 
-		TouchBackend.isSetUp = false
+		TouchBackendImpl.isSetUp = false
 		this._mouseClientOffset = {}
 
 		this.removeEventListener(

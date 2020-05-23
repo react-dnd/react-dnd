@@ -47,7 +47,7 @@ class TargetImpl<Props> implements Target {
 	}
 
 	public hover() {
-		if (!this.spec.hover) {
+		if (!this.spec.hover || !this.props) {
 			return
 		}
 		this.spec.hover(this.props, this.monitor, getDecoratedComponent(this.ref))
