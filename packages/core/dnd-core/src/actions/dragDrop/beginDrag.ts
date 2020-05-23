@@ -51,7 +51,10 @@ export function createBeginDrag(manager: DragDropManager) {
 
 		// Get the source client offset
 		let sourceClientOffset: XYCoord | null = null
-		if (clientOffset && getSourceClientOffset) {
+		if (clientOffset) {
+			if (!getSourceClientOffset) {
+				throw new Error('getSourceClientOffset must be defined')
+			}
 			verifyGetSourceClientOffsetIsFunction(getSourceClientOffset)
 			sourceClientOffset = getSourceClientOffset(sourceId)
 		}
