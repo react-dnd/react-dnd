@@ -1,5 +1,5 @@
 import { isSafari, isFirefox } from './BrowserDetector'
-import MonotonicInterpolant from './MonotonicInterpolant'
+import { MonotonicInterpolant } from './MonotonicInterpolant'
 import { XYCoord } from 'dnd-core'
 
 const ELEMENT_NODE = 1
