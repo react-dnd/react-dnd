@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import Doc from '../components/doc'
+import { Doc } from '../components/doc'
 
-export default function Template(props: any) {
+export function Template(props: any) {
 	const { currentPage } = props.data
 
 	return (

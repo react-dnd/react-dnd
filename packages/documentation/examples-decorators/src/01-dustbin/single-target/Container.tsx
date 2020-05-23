@@ -4,12 +4,10 @@ import Box from './Box'
 
 const rowStyle: React.CSSProperties = { overflow: 'hidden', clear: 'both' }
 
-const Container: React.FC = () => (
+export const Container: React.FC = () => (
 	<div>
 		<div style={rowStyle}>
-			<Dustbin allowedDropEffect="any" />
-			<Dustbin allowedDropEffect="copy" />
-			<Dustbin allowedDropEffect="move" />
+			<Dustbin />
 		</div>
 		<div style={rowStyle}>
 			<Box name="Glass" />
@@ -18,5 +16,3 @@ const Container: React.FC = () => (
 		</div>
 	</div>
 )
-
-export default Container

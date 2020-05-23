@@ -14,7 +14,7 @@ const renderAst = new rehypeReact({
 	},
 }).Compiler
 
-export default function renderHtmlAst(node: any) {
+export function renderHtmlAst(node: any) {
 	try {
 		processImages(node)
 		const result = renderAst(node)

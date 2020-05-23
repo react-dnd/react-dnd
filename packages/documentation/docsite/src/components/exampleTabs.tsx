@@ -23,7 +23,10 @@ const tsUrl = (name: string, mode: 'decorators' | 'hooks') =>
 const jsUrl = (name: string, mode: 'decorators' | 'hooks') =>
 	`https://codesandbox.io/embed/github/react-dnd/react-dnd/tree/gh-pages/examples_${mode}_js/${name}?fontsize=14`
 
-const ExampleTabs: React.FC<ExampleTabsProps> = ({ name, component }) => {
+export const ExampleTabs: React.FC<ExampleTabsProps> = ({
+	name,
+	component,
+}) => {
 	const [showHooks, setShowHooks] = useState(true)
 	const hookComponent = hookComponentIndex[component]
 	const decoratorComponent = decoratorComponentIndex[component]
@@ -76,8 +79,6 @@ const ExampleTabs: React.FC<ExampleTabsProps> = ({ name, component }) => {
 		</Tabs>
 	)
 }
-
-export default ExampleTabs
 
 interface NotFoundProps {
 	name: string

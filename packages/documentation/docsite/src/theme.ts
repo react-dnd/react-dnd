@@ -1,4 +1,4 @@
-export default {
+export const theme = {
 	color: {
 		accent: '#0074D9',
 		accentRGB: [0, 116, 217],

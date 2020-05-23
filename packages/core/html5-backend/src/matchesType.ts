@@ -3,7 +3,7 @@
 //
 import { Identifier, SourceType, TargetType } from 'dnd-core'
 
-export default function matchesType(
+export function matchesType(
 	targetType: TargetType | null,
 	draggedItemType: SourceType | null,
 ): boolean {

@@ -2,7 +2,7 @@ import React from 'react'
 import Dustbin from './Dustbin'
 import Box from './Box'
 
-const Container: React.FC = () => (
+export const Container: React.FC = () => (
 	<div>
 		<div style={{ overflow: 'hidden', clear: 'both', margin: '-1rem' }}>
 			<Dustbin greedy={true}>
@@ -22,5 +22,3 @@ const Container: React.FC = () => (
 		</div>
 	</div>
 )
-
-export default Container

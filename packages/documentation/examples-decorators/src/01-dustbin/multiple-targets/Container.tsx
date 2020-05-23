@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 import update from 'immutability-helper'
 
 interface DustbinState {
@@ -30,7 +30,7 @@ export interface ContainerState {
 	boxes: BoxSpec[]
 }
 
-const Container: React.FC = () => {
+export const Container: React.FC = () => {
 	const [dustbins, setDustbins] = useState<DustbinState[]>([
 		{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
 		{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
@@ -79,7 +79,7 @@ const Container: React.FC = () => {
 					<Dustbin
 						accepts={accepts}
 						lastDroppedItem={lastDroppedItem}
-						onDrop={item => handleDrop(index, item)}
+						onDrop={(item) => handleDrop(index, item)}
 						key={index}
 					/>
 				))}
@@ -98,5 +98,3 @@ const Container: React.FC = () => {
 		</div>
 	)
 }
-
-export default Container

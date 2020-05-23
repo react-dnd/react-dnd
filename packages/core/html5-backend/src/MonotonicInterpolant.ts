@@ -1,4 +1,4 @@
-export default class MonotonicInterpolant {
+export class MonotonicInterpolant {
 	private xs: any
 	private ys: any
 	private c1s: any

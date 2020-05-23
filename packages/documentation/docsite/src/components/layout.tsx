@@ -4,8 +4,8 @@ declare const require: any
 import * as React from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
-import HTML5Backend from 'react-dnd-html5-backend'
-import TouchBackend from 'react-dnd-touch-backend'
+import { HTML5BackendFactory } from 'react-dnd-html5-backend'
+import { TouchBackendFactory } from 'react-dnd-touch-backend'
 import { isDebugMode } from '../util/isDebugMode'
 import { isTouchBackend } from '../util/isTouchBackend'
 import { DndProvider } from 'react-dnd'
@@ -54,7 +54,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
 			</Helmet>
 			<Header debugMode={debugMode} touchBackend={touchBackend} />
 			<DndProvider
-				backend={touchBackend ? TouchBackend : HTML5Backend}
+				backend={touchBackend ? TouchBackendFactory : HTML5BackendFactory}
 				options={touchBackend ? touchBackendOptions : undefined}
 				debugMode={debugMode}
 			>

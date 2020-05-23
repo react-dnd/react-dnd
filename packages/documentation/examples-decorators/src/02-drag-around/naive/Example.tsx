@@ -5,7 +5,7 @@ export interface DragAroundNaiveState {
 	hideSourceOnDrag: boolean
 }
 
-const DragAroundNaive: React.FC = () => {
+export const Example: React.FC = () => {
 	const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true)
 	const handleHideSourceClick = useCallback(() => {
 		setHideSourceOnDrag(!hideSourceOnDrag)
@@ -28,5 +28,3 @@ const DragAroundNaive: React.FC = () => {
 		</div>
 	)
 }
-
-export default DragAroundNaive

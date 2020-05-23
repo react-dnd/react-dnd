@@ -7,8 +7,8 @@ import {
 	DragSourceMonitor,
 	DragPreviewImage,
 } from 'react-dnd'
-import ItemTypes from './ItemTypes'
-import knightImage from './knightImage'
+import { ItemTypes } from './ItemTypes'
+import { knightImage } from './knightImage'
 
 const knightStyle: React.CSSProperties = {
 	fontSize: 40,

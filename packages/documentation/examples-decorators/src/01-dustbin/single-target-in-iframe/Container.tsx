@@ -18,7 +18,7 @@ const FrameBindingContext: React.FC = ({ children }) => (
 )
 
 // Don't use the decorator, embed the DnD context within the iframe
-const Container: React.FC = () => (
+export const Container: React.FC = () => (
 	// The react-frame-component will pass the iframe's 'window' global as a context value
 	// to the DragDropContext provider. You could also directly inject it in via a prop.
 	// If neither the prop or the context value for 'window' are present, the DndProvider
@@ -38,5 +38,3 @@ const Container: React.FC = () => (
 		</FrameBindingContext>
 	</Frame>
 )
-
-export default Container

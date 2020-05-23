@@ -2,7 +2,7 @@ import React from 'react'
 import BoxWithImage from './BoxWithImage'
 import BoxWithHandle from './BoxWithHandle'
 
-const Container: React.FC = () => (
+export const Container: React.FC = () => (
 	<div>
 		<div style={{ marginTop: '1.5rem' }}>
 			<BoxWithHandle />
@@ -10,5 +10,3 @@ const Container: React.FC = () => (
 		</div>
 	</div>
 )
-
-export default Container

@@ -7,7 +7,7 @@ export interface DragAroundCustomDragLayerState {
 	snapToGridWhileDragging: boolean
 }
 
-const DragAroundCustomDragLayer: React.FC = () => {
+export const Example: React.FC = () => {
 	const [snapToGridAfterDrop, setSnapToGridAfterDrop] = useState(false)
 	const [snapToGridWhileDragging, setSnapToGridWhileDragging] = useState(false)
 
@@ -47,5 +47,3 @@ const DragAroundCustomDragLayer: React.FC = () => {
 		</div>
 	)
 }
-
-export default DragAroundCustomDragLayer

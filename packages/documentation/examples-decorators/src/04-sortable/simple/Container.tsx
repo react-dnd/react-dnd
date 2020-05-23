@@ -14,7 +14,7 @@ export interface ContainerState {
 	cards: Item[]
 }
 
-const Container: React.FC = () => {
+export const Container: React.FC = () => {
 	{
 		const [cards, setCards] = useState([
 			{
@@ -75,5 +75,3 @@ const Container: React.FC = () => {
 		)
 	}
 }
-
-export default Container

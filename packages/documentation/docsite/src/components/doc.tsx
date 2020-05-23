@@ -9,7 +9,7 @@ export interface DocProps {
 	}
 }
 
-const Doc: React.FC<DocProps> = ({ docPage }) => {
+export const Doc: React.FC<DocProps> = ({ docPage }) => {
 	return (
 		<Container>
 			<Gutter />
@@ -33,5 +33,3 @@ const Container = styled.div`
 const Gutter = styled.div`
 	flex: 1;
 `
-
-export default Doc

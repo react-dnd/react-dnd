@@ -3,7 +3,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import theme from '../theme'
 
-const NavBar: React.FC = () => (
+export const NavBar: React.FC = () => (
 	<Container>
 		<ContentContainer>
 			<LogoContainer>
@@ -22,7 +22,6 @@ const NavBar: React.FC = () => (
 		</ContentContainer>
 	</Container>
 )
-export default NavBar
 
 const Container = styled.div`
 	z-index: 3;
