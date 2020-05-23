@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback } from 'react'
 import { DropTarget } from 'react-dnd'
 import Card from './Card'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 import update from 'immutability-helper'
 const style = {
   width: 400,
