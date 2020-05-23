@@ -21,7 +21,7 @@ import {
 } from './utils/predicates'
 import { getEventClientOffset, getNodeClientOffset } from './utils/offsets'
 import { distance, inAngleRanges } from './utils/math'
-import supportsPassive from './utils/supportsPassive'
+import { supportsPassive } from './utils/supportsPassive'
 import { OptionsReader } from './OptionsReader'
 
 const eventNames: Record<ListenerType, EventName> = {

@@ -5,8 +5,10 @@ import {
 	DragDropMonitor,
 	HandlerRegistry,
 	Identifier,
+	XYCoord,
+	Unsubscribe,
 } from 'dnd-core'
-import EnterLeaveCounter from './EnterLeaveCounter'
+import { EnterLeaveCounter } from './EnterLeaveCounter'
 import { isFirefox } from './BrowserDetector'
 import {
 	getNodeClientOffset,
@@ -20,7 +22,7 @@ import {
 import * as NativeTypes from './NativeTypes'
 import { NativeDragSource } from './NativeDragSources/NativeDragSource'
 import { OptionsReader } from './OptionsReader'
-import { HTML5BackendContext } from 'types'
+import { HTML5BackendContext } from './types'
 
 declare global {
 	interface Window {
@@ -57,7 +59,7 @@ export class HTML5Backend implements Backend {
 
 	public constructor(
 		manager: DragDropManager,
-		globalContext: HTML5BackendContext,
+		globalContext?: HTML5BackendContext,
 	) {
 		this.options = new OptionsReader(globalContext)
 		this.actions = manager.getActions()
@@ -83,14 +85,14 @@ export class HTML5Backend implements Backend {
 	}
 
 	// public for test
-	public get window() {
+	public get window(): Window | undefined {
 		return this.options.window
 	}
-	public get document() {
+	public get document(): Document | undefined {
 		return this.options.document
 	}
 
-	public setup() {
+	public setup(): void {
 		if (this.window === undefined) {
 			return
 		}
@@ -102,7 +104,7 @@ export class HTML5Backend implements Backend {
 		this.addEventListeners(this.window as Element)
 	}
 
-	public teardown() {
+	public teardown(): void {
 		if (this.window === undefined) {
 			return
 		}
@@ -115,17 +117,25 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public connectDragPreview(sourceId: string, node: Element, options: any) {
+	public connectDragPreview(
+		sourceId: string,
+		node: Element,
+		options: any,
+	): Unsubscribe {
 		this.sourcePreviewNodeOptions.set(sourceId, options)
 		this.sourcePreviewNodes.set(sourceId, node)
 
-		return () => {
+		return (): void => {
 			this.sourcePreviewNodes.delete(sourceId)
 			this.sourcePreviewNodeOptions.delete(sourceId)
 		}
 	}
 
-	public connectDragSource(sourceId: string, node: Element, options: any) {
+	public connectDragSource(
+		sourceId: string,
+		node: Element,
+		options: any,
+	): Unsubscribe {
 		this.sourceNodes.set(sourceId, node)
 		this.sourceNodeOptions.set(sourceId, options)
 
@@ -136,7 +146,7 @@ export class HTML5Backend implements Backend {
 		node.addEventListener('dragstart', handleDragStart)
 		node.addEventListener('selectstart', handleSelectStart)
 
-		return () => {
+		return (): void => {
 			this.sourceNodes.delete(sourceId)
 			this.sourceNodeOptions.delete(sourceId)
 
@@ -146,7 +156,7 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public connectDropTarget(targetId: string, node: HTMLElement) {
+	public connectDropTarget(targetId: string, node: HTMLElement): Unsubscribe {
 		const handleDragEnter = (e: DragEvent) => this.handleDragEnter(e, targetId)
 		const handleDragOver = (e: DragEvent) => this.handleDragOver(e, targetId)
 		const handleDrop = (e: DragEvent) => this.handleDrop(e, targetId)
@@ -155,7 +165,7 @@ export class HTML5Backend implements Backend {
 		node.addEventListener('dragover', handleDragOver)
 		node.addEventListener('drop', handleDrop)
 
-		return () => {
+		return (): void => {
 			node.removeEventListener('dragenter', handleDragEnter)
 			node.removeEventListener('dragover', handleDragOver)
 			node.removeEventListener('drop', handleDrop)
@@ -267,8 +277,9 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	private getSourceClientOffset = (sourceId: string) => {
-		return getNodeClientOffset(this.sourceNodes.get(sourceId))
+	private getSourceClientOffset = (sourceId: string): XYCoord | undefined => {
+		const source = this.sourceNodes.get(sourceId)
+		return source && getNodeClientOffset(source as HTMLElement)
 	}
 
 	private isDraggingNativeItem() {
@@ -289,7 +300,7 @@ export class HTML5Backend implements Backend {
 		this.actions.beginDrag([this.currentNativeHandle])
 	}
 
-	private endDragNativeItem = () => {
+	private endDragNativeItem = (): void => {
 		if (!this.isDraggingNativeItem()) {
 			return
 		}
@@ -300,10 +311,13 @@ export class HTML5Backend implements Backend {
 		this.currentNativeSource = null
 	}
 
-	private isNodeInDocument = (node: Node | null): boolean => {
+	private isNodeInDocument = (node: Node | null | undefined): boolean => {
 		// Check the node either in the main document or in the current context
 		return Boolean(
-			this.document && this.document.body && document.body.contains(node),
+			node &&
+				this.document &&
+				this.document.body &&
+				document.body.contains(node),
 		)
 	}
 
@@ -372,12 +386,12 @@ export class HTML5Backend implements Backend {
 		return false
 	}
 
-	public handleTopDragStartCapture = () => {
+	public handleTopDragStartCapture = (): void => {
 		this.clearCurrentDragSourceNode()
 		this.dragStartSourceIds = []
 	}
 
-	public handleDragStart(e: DragEvent, sourceId: string) {
+	public handleDragStart(e: DragEvent, sourceId: string): void {
 		if (e.defaultPrevented) {
 			return
 		}
@@ -432,8 +446,8 @@ export class HTML5Backend implements Backend {
 					const anchorPoint = { anchorX, anchorY }
 					const offsetPoint = { offsetX, offsetY }
 					const dragPreviewOffset = getDragPreviewOffset(
-						sourceNode,
-						dragPreview,
+						sourceNode as HTMLElement,
+						dragPreview as HTMLElement,
 						clientOffset,
 						anchorPoint,
 						offsetPoint,
@@ -499,7 +513,7 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public handleTopDragEndCapture = () => {
+	public handleTopDragEndCapture = (): void => {
 		if (this.clearCurrentDragSourceNode()) {
 			// Firefox can dispatch this event in an infinite loop
 			// if dragend handler does something like showing an alert.
@@ -508,7 +522,7 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public handleTopDragEnterCapture = (e: DragEvent) => {
+	public handleTopDragEnterCapture = (e: DragEvent): void => {
 		this.dragEnterTargetIds = []
 
 		const isFirstEnter = this.enterLeaveCounter.enter(e.target)
@@ -525,11 +539,11 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public handleDragEnter(e: DragEvent, targetId: string) {
+	public handleDragEnter(e: DragEvent, targetId: string): void {
 		this.dragEnterTargetIds.unshift(targetId)
 	}
 
-	public handleTopDragEnter = (e: DragEvent) => {
+	public handleTopDragEnter = (e: DragEvent): void => {
 		const { dragEnterTargetIds } = this
 		this.dragEnterTargetIds = []
 
@@ -563,18 +577,18 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public handleTopDragOverCapture = () => {
+	public handleTopDragOverCapture = (): void => {
 		this.dragOverTargetIds = []
 	}
 
-	public handleDragOver(e: DragEvent, targetId: string) {
+	public handleDragOver(e: DragEvent, targetId: string): void {
 		if (this.dragOverTargetIds === null) {
 			this.dragOverTargetIds = []
 		}
 		this.dragOverTargetIds.unshift(targetId)
 	}
 
-	public handleTopDragOver = (e: DragEvent) => {
+	public handleTopDragOver = (e: DragEvent): void => {
 		const { dragOverTargetIds } = this
 		this.dragOverTargetIds = []
 
@@ -616,7 +630,7 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public handleTopDragLeaveCapture = (e: DragEvent) => {
+	public handleTopDragLeaveCapture = (e: DragEvent): void => {
 		if (this.isDraggingNativeItem()) {
 			e.preventDefault()
 		}
@@ -631,7 +645,7 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public handleTopDropCapture = (e: DragEvent) => {
+	public handleTopDropCapture = (e: DragEvent): void => {
 		this.dropTargetIds = []
 		e.preventDefault()
 
@@ -642,11 +656,11 @@ export class HTML5Backend implements Backend {
 		this.enterLeaveCounter.reset()
 	}
 
-	public handleDrop(e: DragEvent, targetId: string) {
+	public handleDrop(e: DragEvent, targetId: string): void {
 		this.dropTargetIds.unshift(targetId)
 	}
 
-	public handleTopDrop = (e: DragEvent) => {
+	public handleTopDrop = (e: DragEvent): void => {
 		const { dropTargetIds } = this
 		this.dropTargetIds = []
 
@@ -662,7 +676,7 @@ export class HTML5Backend implements Backend {
 		}
 	}
 
-	public handleSelectStart = (e: DragEvent) => {
+	public handleSelectStart = (e: DragEvent): void => {
 		const target = e.target as HTMLElement & { dragDrop: () => void }
 
 		// Only IE requires us to explicitly say

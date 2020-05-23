@@ -1,13 +1,13 @@
 import React, { memo, useState, useMemo, useCallback } from 'react'
 import { DndProvider } from 'react-dnd'
 import { componentIndex } from 'react-dnd-examples-hooks'
-import Backend from 'react-dnd-html5-backend'
+import { HTML5BackendFactory } from 'react-dnd-html5-backend'
 import './App.css'
 
 const exampleNames = Object.keys(componentIndex)
 
 const App = memo(() => (
-	<DndProvider backend={Backend}>
+	<DndProvider backend={HTML5BackendFactory}>
 		<AppGuts />
 	</DndProvider>
 ))

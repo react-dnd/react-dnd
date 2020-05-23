@@ -1,5 +1,6 @@
 import * as React from 'react'
-import TestBackendImpl, {
+import {
+	TestBackendFactory,
 	TestBackend,
 	getInstance,
 } from 'react-dnd-test-backend'
@@ -25,7 +26,7 @@ export function wrapInTestContext(DecoratedComponent: any): any {
 		}))
 
 		return (
-			<DndProvider backend={TestBackendImpl}>
+			<DndProvider backend={TestBackendFactory}>
 				<DndContext.Consumer>
 					{(ctx) => {
 						dragDropManager.current = ctx.dragDropManager
@@ -49,7 +50,7 @@ export function wrapInTestContext(DecoratedComponent: any): any {
  * @deprecated - This is no longer useful since ContextComponent was removed. This will be removed in a major version cut.
  */
 export function getBackendFromInstance<T extends Backend>(
-	instance: DndComponent<any>,
+	_instance: DndComponent<any>,
 ): T {
 	return getInstance() as any
 }

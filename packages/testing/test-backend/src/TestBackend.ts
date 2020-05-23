@@ -22,7 +22,7 @@ export interface TestBackend extends Backend {
 	simulateEndDrag(): void
 }
 
-export default class TestBackendImpl implements Backend, TestBackend {
+export class TestBackendImpl implements Backend, TestBackend {
 	public didCallSetup = false
 	public didCallTeardown = false
 	public manager: DragDropManager

@@ -1,6 +1,6 @@
 import React from 'react'
 import { DndProvider } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+import { HTML5BackendFactory } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -10,7 +10,7 @@ import Frame, { FrameContextConsumer } from 'react-frame-component'
 const FrameBindingContext: React.FC = ({ children }) => (
 	<FrameContextConsumer>
 		{({ window }: any) => (
-			<DndProvider backend={HTML5Backend} context={window}>
+			<DndProvider backend={HTML5BackendFactory} context={window}>
 				{children}
 			</DndProvider>
 		)}
@@ -18,7 +18,7 @@ const FrameBindingContext: React.FC = ({ children }) => (
 )
 
 // Don't use the decorator, embed the DnD context within the iframe
-export default function Container() {
+export const Container: React.FC = () => {
 	// The react-frame-component will pass the iframe's 'window' global as a context value
 	// to the DragDropContext provider. You could also directly inject it in via a prop.
 	// If neither the prop or the context value for 'window' are present, the DndProvider

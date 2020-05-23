@@ -1,1 +1,1 @@
-export type HTML5BackendContext = Window
+export type HTML5BackendContext = Window | undefined
