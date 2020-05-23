@@ -15,10 +15,7 @@ export interface ContainerState {
 /* eslint-disable-next-line @typescript-eslint/no-empty-interface */
 export interface ContainerProps {}
 
-export default class Container extends React.Component<
-	ContainerProps,
-	ContainerState
-> {
+export class Container extends React.Component<ContainerProps, ContainerState> {
 	private pendingUpdateFn: any
 	private requestedFrame: number | undefined
 
@@ -40,13 +37,13 @@ export default class Container extends React.Component<
 		}
 	}
 
-	public componentWillUnmount() {
+	public componentWillUnmount(): void {
 		if (this.requestedFrame !== undefined) {
 			cancelAnimationFrame(this.requestedFrame)
 		}
 	}
 
-	public render() {
+	public render(): JSX.Element {
 		const { cardsByIndex } = this.state
 
 		return (
@@ -71,7 +68,7 @@ export default class Container extends React.Component<
 		}
 	}
 
-	private drawFrame = () => {
+	private drawFrame = (): void => {
 		const nextState = update(this.state, this.pendingUpdateFn)
 		this.setState(nextState)
 
@@ -79,7 +76,7 @@ export default class Container extends React.Component<
 		this.requestedFrame = undefined
 	}
 
-	private moveCard = (id: string, afterId: string) => {
+	private moveCard = (id: string, afterId: string): void => {
 		const { cardsById, cardsByIndex } = this.state
 
 		const card = cardsById[id]

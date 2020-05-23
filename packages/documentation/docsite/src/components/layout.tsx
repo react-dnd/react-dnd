@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 declare const require: any
 
-import * as React from 'react'
+import React, { memo } from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
-import HTML5Backend from 'react-dnd-html5-backend'
-import TouchBackend from 'react-dnd-touch-backend'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { TouchBackend } from 'react-dnd-touch-backend'
 import { isDebugMode } from '../util/isDebugMode'
 import { isTouchBackend } from '../util/isTouchBackend'
 import { DndProvider } from 'react-dnd'
@@ -33,7 +33,7 @@ const HEADER_LINK = [
 	{ rel: 'shortcut icon', type: 'image/png', href: `${favicon}` },
 ]
 
-const Layout: React.FC<LayoutProps> = (props) => {
+export const Layout: React.FC<LayoutProps> = memo(function Layout(props) {
 	const { children, location } = props
 	const sitepath = location && location.pathname
 	const isExampleUrl = (sitepath || '')
@@ -74,7 +74,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
 			</DndProvider>
 		</>
 	)
-}
+})
 
 const SidebarContainer = styled.div`
 	flex: 1;
@@ -92,5 +92,3 @@ const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 `
-
-export default Layout

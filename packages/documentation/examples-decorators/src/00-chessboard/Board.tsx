@@ -20,7 +20,7 @@ const squareStyle: React.CSSProperties = { width: '12.5%', height: '12.5%' }
  * The chessboard component
  * @param props The react props
  */
-const Board: React.FC<BoardProps> = ({
+export const Board: React.FC<BoardProps> = ({
 	knightPosition: [knightX, knightY],
 }) => {
 	function renderSquare(i: number) {
@@ -42,4 +42,3 @@ const Board: React.FC<BoardProps> = ({
 	}
 	return <div style={boardStyle}>{squares}</div>
 }
-export default Board

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -16,7 +16,7 @@ interface BoxProps {
 	name: string
 }
 
-const Box: React.FC<BoxProps> = ({ name }) => {
+export const Box: React.FC<BoxProps> = ({ name }) => {
 	const [{ isDragging }, drag] = useDrag({
 		item: { name, type: ItemTypes.BOX },
 		end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
@@ -25,7 +25,7 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 				alert(`You dropped ${item.name} into ${dropResult.name}!`)
 			}
 		},
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	})
@@ -37,5 +37,3 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 		</div>
 	)
 }
-
-export default Box

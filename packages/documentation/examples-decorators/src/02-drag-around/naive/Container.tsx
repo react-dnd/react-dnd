@@ -1,7 +1,7 @@
 import React from 'react'
 import { ConnectDropTarget, DropTargetMonitor, XYCoord } from 'react-dnd'
 import { DropTarget } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 import Box from './Box'
 import update from 'immutability-helper'
 
@@ -35,7 +35,7 @@ class Container extends React.Component<ContainerProps, ContainerState> {
 
 		return connectDropTarget(
 			<div style={styles}>
-				{Object.keys(boxes).map(key => {
+				{Object.keys(boxes).map((key) => {
 					const { left, top, title } = boxes[key]
 					return (
 						<Box

@@ -5,13 +5,14 @@ import {
 	BeginDragOptions,
 	HoverOptions,
 	Identifier,
+	Unsubscribe,
 } from 'dnd-core'
 
 function noop() {
 	// noop
 }
 
-export interface TestBackend extends Backend {
+export interface ITestBackend extends Backend {
 	didCallSetup: boolean
 	didCallTeardown: boolean
 	simulateBeginDrag(sourceIds: Identifier[], options?: any): void
@@ -21,7 +22,7 @@ export interface TestBackend extends Backend {
 	simulateEndDrag(): void
 }
 
-export default class TestBackendImpl implements Backend, TestBackend {
+export class TestBackendImpl implements Backend, ITestBackend {
 	public didCallSetup = false
 	public didCallTeardown = false
 	public manager: DragDropManager
@@ -32,47 +33,50 @@ export default class TestBackendImpl implements Backend, TestBackend {
 		this.actions = manager.getActions()
 	}
 
-	public profile() {
+	public profile(): Record<string, number> {
 		return {}
 	}
 
-	public setup() {
+	public setup(): void {
 		this.didCallSetup = true
 	}
 
-	public teardown() {
+	public teardown(): void {
 		this.didCallTeardown = true
 	}
 
-	public connectDragSource() {
+	public connectDragSource(): Unsubscribe {
 		return noop
 	}
 
-	public connectDragPreview() {
+	public connectDragPreview(): Unsubscribe {
 		return noop
 	}
 
-	public connectDropTarget() {
+	public connectDropTarget(): Unsubscribe {
 		return noop
 	}
 
-	public simulateBeginDrag(sourceIds: Identifier[], options: BeginDragOptions) {
+	public simulateBeginDrag(
+		sourceIds: Identifier[],
+		options: BeginDragOptions,
+	): void {
 		this.actions.beginDrag(sourceIds, options)
 	}
 
-	public simulatePublishDragSource() {
+	public simulatePublishDragSource(): void {
 		this.actions.publishDragSource()
 	}
 
-	public simulateHover(targetIds: Identifier[], options: HoverOptions) {
+	public simulateHover(targetIds: Identifier[], options: HoverOptions): void {
 		this.actions.hover(targetIds, options)
 	}
 
-	public simulateDrop() {
+	public simulateDrop(): void {
 		this.actions.drop()
 	}
 
-	public simulateEndDrag() {
+	public simulateEndDrag(): void {
 		this.actions.endDrag()
 	}
 }

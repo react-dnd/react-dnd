@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDrop } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style: React.CSSProperties = {
 	height: '12rem',
@@ -29,7 +29,7 @@ function selectBackgroundColor(isActive: boolean, canDrop: boolean) {
 	}
 }
 
-const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
+export const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop: () => ({
@@ -53,4 +53,3 @@ const Dustbin: React.FC<DustbinProps> = ({ allowedDropEffect }) => {
 		</div>
 	)
 }
-export default Dustbin

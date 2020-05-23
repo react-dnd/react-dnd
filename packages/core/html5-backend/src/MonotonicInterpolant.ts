@@ -1,4 +1,4 @@
-export default class MonotonicInterpolant {
+export class MonotonicInterpolant {
 	private xs: any
 	private ys: any
 	private c1s: any
@@ -67,7 +67,7 @@ export default class MonotonicInterpolant {
 		this.c3s = c3s
 	}
 
-	public interpolate(x: number) {
+	public interpolate(x: number): number {
 		const { xs, ys, c1s, c2s, c3s } = this
 
 		// The rightmost point in the dataset should give an exact result

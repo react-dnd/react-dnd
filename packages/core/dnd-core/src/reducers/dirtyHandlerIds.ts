@@ -23,10 +23,11 @@ export interface DirtyHandlerIdPayload {
 	prevTargetIds: string[]
 }
 
-export default function dirtyHandlerIds(
-	state: State = NONE,
+export function reduce(
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	_state: State = NONE,
 	action: Action<DirtyHandlerIdPayload>,
-) {
+): State {
 	switch (action.type) {
 		case HOVER:
 			break

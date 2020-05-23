@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
 	display: 'inline-block',
@@ -10,7 +10,7 @@ const style = {
 	cursor: 'move',
 }
 
-const Box: React.FC = () => {
+export const Box: React.FC = () => {
 	const [, drag] = useDrag({ item: { type: ItemTypes.BOX } })
 	return (
 		<div ref={drag} style={style}>
@@ -18,4 +18,3 @@ const Box: React.FC = () => {
 		</div>
 	)
 }
-export default Box

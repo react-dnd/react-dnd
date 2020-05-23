@@ -1,7 +1,7 @@
 import { invariant } from '@react-dnd/invariant'
 import { DragSource, DropTarget, Identifier } from './interfaces'
 
-export function validateSourceContract(source: DragSource) {
+export function validateSourceContract(source: DragSource): void {
 	invariant(
 		typeof source.canDrag === 'function',
 		'Expected canDrag to be a function.',
@@ -16,7 +16,7 @@ export function validateSourceContract(source: DragSource) {
 	)
 }
 
-export function validateTargetContract(target: DropTarget) {
+export function validateTargetContract(target: DropTarget): void {
 	invariant(
 		typeof target.canDrop === 'function',
 		'Expected canDrop to be a function.',
@@ -34,7 +34,7 @@ export function validateTargetContract(target: DropTarget) {
 export function validateType(
 	type: Identifier | Identifier[],
 	allowArray?: boolean,
-) {
+): void {
 	if (allowArray && Array.isArray(type)) {
 		type.forEach((t) => validateType(t, false))
 		return

@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
-import { DndContext, DndContextType } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import React, { useState } from 'react'
+import { useDragDropManager } from 'react-dnd'
 
-export function Profiler() {
-	const dndContext: DndContextType = useContext(DndContext)
-	const backend = dndContext?.dragDropManager?.getBackend() as HTML5Backend
+export const Profiler: React.FC = () => {
+	const dragDropManager = useDragDropManager()
+	const backend = dragDropManager?.getBackend()
 	const [key, setKey] = useState(0)
 
 	React.useEffect(() => {

@@ -16,8 +16,8 @@ export class Disposable {
 	 * @param {Object} Object to test whether it has a dispose method
 	 * @returns {Boolean} true if a disposable object, else false.
 	 */
-	public static isDisposable(d: any) {
-		return d && isFunction(d.dispose)
+	public static isDisposable(d: any): boolean {
+		return Boolean(d && isFunction(d.dispose))
 	}
 
 	public static _fixup(result: any) {
@@ -30,7 +30,7 @@ export class Disposable {
 	 * The action is guaranteed to be run at most once.
 	 * @return {Disposable} The disposable object that runs the given action upon disposal.
 	 */
-	public static create(action: any) {
+	public static create(action: any): Disposable {
 		return new Disposable(action)
 	}
 
@@ -66,7 +66,7 @@ export class CompositeDisposable {
 	 * Adds a disposable to the CompositeDisposable or disposes the disposable if the CompositeDisposable is disposed.
 	 * @param {Any} item Disposable to add.
 	 */
-	public add(item: Disposable) {
+	public add(item: Disposable): void {
 		if (this.isDisposed) {
 			item.dispose()
 		} else {
@@ -79,7 +79,7 @@ export class CompositeDisposable {
 	 * @param {Any} item Disposable to remove.
 	 * @returns {Boolean} true if found; false otherwise.
 	 */
-	public remove(item: Disposable) {
+	public remove(item: Disposable): boolean {
 		let shouldDispose = false
 		if (!this.isDisposed) {
 			const idx = this.disposables.indexOf(item)
@@ -96,7 +96,7 @@ export class CompositeDisposable {
 	 *  Disposes all disposables in the group and removes them from the group but
 	 *  does not dispose the CompositeDisposable.
 	 */
-	public clear() {
+	public clear(): void {
 		if (!this.isDisposed) {
 			const len = this.disposables.length
 			const currentDisposables = new Array(len)
@@ -114,7 +114,7 @@ export class CompositeDisposable {
 	/**
 	 *  Disposes all disposables in the group and removes them from the group.
 	 */
-	public dispose() {
+	public dispose(): void {
 		if (!this.isDisposed) {
 			this.isDisposed = true
 			const len = this.disposables.length
@@ -144,11 +144,11 @@ export class SerialDisposable {
 	 * Gets the underlying disposable.
 	 * @returns {Any} the underlying disposable.
 	 */
-	public getDisposable() {
+	public getDisposable(): Disposable | undefined {
 		return this.current
 	}
 
-	public setDisposable(value: Disposable) {
+	public setDisposable(value: Disposable): void {
 		const shouldDispose = this.isDisposed
 		if (!shouldDispose) {
 			const old = this.current
@@ -164,7 +164,7 @@ export class SerialDisposable {
 	}
 
 	/** Performs the task of cleaning up resources. */
-	public dispose() {
+	public dispose(): void {
 		if (!this.isDisposed) {
 			this.isDisposed = true
 			const old = this.current

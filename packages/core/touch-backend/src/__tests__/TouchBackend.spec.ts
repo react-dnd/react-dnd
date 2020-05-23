@@ -1,14 +1,14 @@
-import { TouchBackend } from '../TouchBackend'
+import { TouchBackend } from '../index'
 import { DragDropManager } from 'dnd-core'
 
 describe('TouchBackend', () => {
 	it('can be constructed', () => {
-		const backend = new TouchBackend(mockManager(), {}, {})
+		const backend = TouchBackend(mockManager(), {}, {})
 		expect(backend).toBeDefined()
 	})
 
 	it('can be constructed', () => {
-		const backend = new TouchBackend(mockManager(), {}, {})
+		const backend = TouchBackend(mockManager(), {}, {})
 		expect(backend).toBeDefined()
 		const profile = backend.profile()
 		expect(profile).toBeDefined()

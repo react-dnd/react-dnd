@@ -1,5 +1,5 @@
 export type State = number
 
-export default function stateId(state: State = 0) {
+export function reduce(state: State = 0): State {
 	return state + 1
 }

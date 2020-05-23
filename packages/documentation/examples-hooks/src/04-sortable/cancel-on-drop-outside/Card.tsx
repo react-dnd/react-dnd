@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
 	border: '1px dashed gray',
@@ -23,7 +23,7 @@ interface Item {
 	originalIndex: string
 }
 
-const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
+export const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 	const originalIndex = findCard(id).index
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: ItemTypes.CARD, id, originalIndex },
@@ -57,5 +57,3 @@ const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 		</div>
 	)
 }
-
-export default Card

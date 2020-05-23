@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Box from './Box'
+import { Box } from './Box'
 
 const styles = {
 	display: 'inline-block',
@@ -11,7 +11,7 @@ export interface BoxDragPreviewProps {
 	title: string
 }
 
-const BoxDragPreview: React.FC<BoxDragPreviewProps> = ({ title }) => {
+export const BoxDragPreview: React.FC<BoxDragPreviewProps> = ({ title }) => {
 	const [tickTock, setTickTock] = useState(false)
 
 	useEffect(
@@ -30,5 +30,3 @@ const BoxDragPreview: React.FC<BoxDragPreviewProps> = ({ title }) => {
 		</div>
 	)
 }
-
-export default BoxDragPreview

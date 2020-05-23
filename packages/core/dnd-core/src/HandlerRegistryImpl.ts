@@ -6,7 +6,7 @@ import {
 	removeSource,
 	removeTarget,
 } from './actions/registry'
-import getNextUniqueId from './utils/getNextUniqueId'
+import { getNextUniqueId } from './utils/getNextUniqueId'
 import { State } from './reducers'
 import {
 	DragSource,
@@ -63,7 +63,7 @@ function mapContainsValue<T>(map: Map<string, T>, searchValue: T) {
 	return false
 }
 
-export default class HandlerRegistryImpl implements HandlerRegistry {
+export class HandlerRegistryImpl implements HandlerRegistry {
 	private types: Map<string, SourceType | TargetType> = new Map()
 	private dragSources: Map<string, DragSource> = new Map()
 	private dropTargets: Map<string, DropTarget> = new Map()
@@ -75,7 +75,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		this.store = store
 	}
 
-	public addSource(type: SourceType, source: DragSource) {
+	public addSource(type: SourceType, source: DragSource): string {
 		validateType(type)
 		validateSourceContract(source)
 
@@ -84,7 +84,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		return sourceId
 	}
 
-	public addTarget(type: TargetType, target: DropTarget) {
+	public addTarget(type: TargetType, target: DropTarget): string {
 		validateType(type, true)
 		validateTargetContract(target)
 
@@ -93,7 +93,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		return targetId
 	}
 
-	public containsHandler(handler: DragSource | DropTarget) {
+	public containsHandler(handler: DragSource | DropTarget): boolean {
 		return (
 			mapContainsValue(this.dragSources, handler) ||
 			mapContainsValue(this.dropTargets, handler)
@@ -112,7 +112,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		return this.dropTargets.get(targetId) as DropTarget
 	}
 
-	public getSourceType(sourceId: string) {
+	public getSourceType(sourceId: string): Identifier {
 		invariant(this.isSourceId(sourceId), 'Expected a valid source ID.')
 		return this.types.get(sourceId) as Identifier
 	}
@@ -122,17 +122,17 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		return this.types.get(targetId) as Identifier | Identifier[]
 	}
 
-	public isSourceId(handlerId: string) {
+	public isSourceId(handlerId: string): boolean {
 		const role = parseRoleFromHandlerId(handlerId)
 		return role === HandlerRole.SOURCE
 	}
 
-	public isTargetId(handlerId: string) {
+	public isTargetId(handlerId: string): boolean {
 		const role = parseRoleFromHandlerId(handlerId)
 		return role === HandlerRole.TARGET
 	}
 
-	public removeSource(sourceId: string) {
+	public removeSource(sourceId: string): void {
 		invariant(this.getSource(sourceId), 'Expected an existing source.')
 		this.store.dispatch(removeSource(sourceId))
 		asap(() => {
@@ -141,14 +141,14 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		})
 	}
 
-	public removeTarget(targetId: string) {
+	public removeTarget(targetId: string): void {
 		invariant(this.getTarget(targetId), 'Expected an existing target.')
 		this.store.dispatch(removeTarget(targetId))
 		this.dropTargets.delete(targetId)
 		this.types.delete(targetId)
 	}
 
-	public pinSource(sourceId: string) {
+	public pinSource(sourceId: string): void {
 		const source = this.getSource(sourceId)
 		invariant(source, 'Expected an existing source.')
 
@@ -156,7 +156,7 @@ export default class HandlerRegistryImpl implements HandlerRegistry {
 		this.pinnedSource = source
 	}
 
-	public unpinSource() {
+	public unpinSource(): void {
 		invariant(this.pinnedSource, 'No source is pinned at the time.')
 
 		this.pinnedSourceId = null

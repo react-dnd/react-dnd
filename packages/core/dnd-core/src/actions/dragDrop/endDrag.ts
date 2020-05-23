@@ -6,16 +6,18 @@ import {
 } from '../../interfaces'
 import { END_DRAG } from './types'
 
-export default function createEndDrag(manager: DragDropManager) {
+export function createEndDrag(manager: DragDropManager) {
 	return function endDrag(): SentinelAction {
 		const monitor = manager.getMonitor()
 		const registry = manager.getRegistry()
 		verifyIsDragging(monitor)
 
 		const sourceId = monitor.getSourceId()
-		const source = registry.getSource(sourceId!, true)
-		source.endDrag(monitor, sourceId!)
-		registry.unpinSource()
+		if (sourceId != null) {
+			const source = registry.getSource(sourceId, true)
+			source.endDrag(monitor, sourceId)
+			registry.unpinSource()
+		}
 		return { type: END_DRAG }
 	}
 }

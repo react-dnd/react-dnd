@@ -14,7 +14,7 @@ const Parent: React.FC<ParentProps> = ({ isDragging, connectDragSource }) => {
 	)
 }
 
-const Example = DragSource(
+export const Example = DragSource(
 	'KNIGHT',
 	{
 		beginDrag: () => ({}),
@@ -24,7 +24,6 @@ const Example = DragSource(
 		isDragging: monitor.isDragging(),
 	}),
 )(Parent)
-export default Example
 
 interface ChildProps {
 	connect: ConnectDragSource

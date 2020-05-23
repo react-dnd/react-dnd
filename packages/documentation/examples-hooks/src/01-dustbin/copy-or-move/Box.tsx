@@ -1,5 +1,5 @@
 import React from 'react'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 
 const style: React.CSSProperties = {
@@ -26,7 +26,7 @@ interface DragItem {
 	type: string
 }
 
-const Box: React.FC<BoxProps> = ({ name }) => {
+export const Box: React.FC<BoxProps> = ({ name }) => {
 	const item = { name, type: ItemTypes.BOX }
 	const [{ opacity }, drag] = useDrag({
 		item,
@@ -59,4 +59,3 @@ const Box: React.FC<BoxProps> = ({ name }) => {
 		</div>
 	)
 }
-export default Box

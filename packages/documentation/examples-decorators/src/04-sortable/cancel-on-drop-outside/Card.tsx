@@ -6,7 +6,7 @@ import {
 	DropTargetMonitor,
 } from 'react-dnd'
 import { DragSource, DropTarget } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
 	border: '1px dashed gray',
@@ -60,7 +60,7 @@ export default DropTarget(
 			}
 		},
 	},
-	connect => ({
+	(connect) => ({
 		connectDropTarget: connect.dropTarget(),
 	}),
 )(

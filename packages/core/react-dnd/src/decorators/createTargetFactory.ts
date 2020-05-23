@@ -47,10 +47,10 @@ class TargetImpl<Props> implements Target {
 	}
 
 	public hover() {
-		if (!this.spec.hover) {
+		if (!this.spec.hover || !this.props) {
 			return
 		}
-		this.spec.hover(this.props!, this.monitor, getDecoratedComponent(this.ref))
+		this.spec.hover(this.props, this.monitor, getDecoratedComponent(this.ref))
 	}
 
 	public drop() {
@@ -76,9 +76,7 @@ class TargetImpl<Props> implements Target {
 	}
 }
 
-export default function createTargetFactory<Props>(
-	spec: DropTargetSpec<Props>,
-) {
+export function createTargetFactory<Props>(spec: DropTargetSpec<Props>) {
 	Object.keys(spec).forEach((key) => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,

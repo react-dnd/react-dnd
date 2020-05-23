@@ -4,6 +4,7 @@ import {
 	Unsubscribe,
 	Listener,
 	Identifier,
+	XYCoord,
 } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
 import { DropTargetMonitor } from '../interfaces'
@@ -18,7 +19,7 @@ export class DropTargetMonitorImpl implements DropTargetMonitor {
 		this.internalMonitor = manager.getMonitor()
 	}
 
-	public receiveHandlerId(targetId: Identifier | null) {
+	public receiveHandlerId(targetId: Identifier | null): void {
 		this.targetId = targetId
 	}
 
@@ -33,7 +34,7 @@ export class DropTargetMonitorImpl implements DropTargetMonitor {
 		return this.internalMonitor.subscribeToStateChange(listener, options)
 	}
 
-	public canDrop() {
+	public canDrop(): boolean {
 		// Cut out early if the target id has not been set. This should prevent errors
 		// where the user has an older version of dnd-core like in
 		// https://github.com/react-dnd/react-dnd/issues/1310
@@ -54,46 +55,46 @@ export class DropTargetMonitorImpl implements DropTargetMonitor {
 		}
 	}
 
-	public isOver(options: { shallow?: boolean }) {
+	public isOver(options: { shallow?: boolean }): boolean {
 		if (!this.targetId) {
 			return false
 		}
 		return this.internalMonitor.isOverTarget(this.targetId, options)
 	}
 
-	public getItemType() {
+	public getItemType(): Identifier | null {
 		return this.internalMonitor.getItemType()
 	}
 
-	public getItem() {
+	public getItem(): any {
 		return this.internalMonitor.getItem()
 	}
 
-	public getDropResult() {
+	public getDropResult(): any {
 		return this.internalMonitor.getDropResult()
 	}
 
-	public didDrop() {
+	public didDrop(): boolean {
 		return this.internalMonitor.didDrop()
 	}
 
-	public getInitialClientOffset() {
+	public getInitialClientOffset(): XYCoord | null {
 		return this.internalMonitor.getInitialClientOffset()
 	}
 
-	public getInitialSourceClientOffset() {
+	public getInitialSourceClientOffset(): XYCoord | null {
 		return this.internalMonitor.getInitialSourceClientOffset()
 	}
 
-	public getSourceClientOffset() {
+	public getSourceClientOffset(): XYCoord | null {
 		return this.internalMonitor.getSourceClientOffset()
 	}
 
-	public getClientOffset() {
+	public getClientOffset(): XYCoord | null {
 		return this.internalMonitor.getClientOffset()
 	}
 
-	public getDifferenceFromInitialOffset() {
+	public getDifferenceFromInitialOffset(): XYCoord | null {
 		return this.internalMonitor.getDifferenceFromInitialOffset()
 	}
 }
