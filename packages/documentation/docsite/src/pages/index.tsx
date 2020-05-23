@@ -1,8 +1,9 @@
-import * as React from 'react'
+import React, { memo } from 'react'
 import { Layout } from '../components/layout'
 import { navigate } from 'gatsby'
 
-const IndexPage: React.FC = (props) => {
+const IndexPage: React.FC = memo(function IndexPage(props) {
+	console.log('INDEXPAGE')
 	if (typeof window !== 'undefined') {
 		navigate('/about')
 	}
@@ -11,6 +12,6 @@ const IndexPage: React.FC = (props) => {
 			{null}
 		</Layout>
 	)
-}
+})
 
 export default IndexPage

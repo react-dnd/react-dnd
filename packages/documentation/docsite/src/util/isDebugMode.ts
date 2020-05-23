@@ -1,6 +1,6 @@
 import { parse } from 'query-string'
 
-export function isDebugMode() {
+export function isDebugMode(): boolean {
 	if (typeof window !== 'undefined') {
 		const queryObject = parse(window.location.search)
 		return (

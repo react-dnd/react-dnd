@@ -1,6 +1,6 @@
 import { createElement } from 'react'
-import processImages from './processImagesInMarkdownAst'
-import exampleTabs from '../components/exampleTabs'
+import { processImagesInMarkdownAst as processImages } from './processImagesInMarkdownAst'
+import { ExampleTabs } from '../components/exampleTabs'
 import debug from 'debug'
 import rehypeReact from 'rehype-react'
 
@@ -10,7 +10,7 @@ const log = debug('site:renderHtmlAst')
 const renderAst = new rehypeReact({
 	createElement,
 	components: {
-		'view-source': exampleTabs,
+		'view-source': ExampleTabs,
 	},
 }).Compiler
 

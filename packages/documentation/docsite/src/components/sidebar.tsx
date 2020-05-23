@@ -1,8 +1,8 @@
-import * as React from 'react'
+import React, { memo } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import { Page, PageGroup } from '../constants'
-import theme from '../theme'
+import { theme } from '../theme'
 import { isDebugMode } from '../util/isDebugMode'
 
 export interface SideBarProps {
@@ -10,7 +10,10 @@ export interface SideBarProps {
 	location: string
 }
 
-export const Sidebar: React.FC<SideBarProps> = ({ groups, location }) => {
+export const Sidebar: React.FC<SideBarProps> = memo(function Sidebar({
+	groups,
+	location,
+}) {
 	function renderGroup({ title, pages, debug }: PageGroup, index: number) {
 		const isRendered = !debug || isDebugMode()
 		return isRendered ? (
@@ -35,7 +38,7 @@ export const Sidebar: React.FC<SideBarProps> = ({ groups, location }) => {
 	}
 
 	return <Container>{groups.map(renderGroup)}</Container>
-}
+})
 
 const Container = styled.div`
 	flex-shrink: 0;

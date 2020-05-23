@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 declare const require: any
 
-import * as React from 'react'
+import React, { memo } from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import { HTML5BackendFactory } from 'react-dnd-html5-backend'
@@ -33,7 +33,7 @@ const HEADER_LINK = [
 	{ rel: 'shortcut icon', type: 'image/png', href: `${favicon}` },
 ]
 
-export const Layout: React.FC<LayoutProps> = (props) => {
+export const Layout: React.FC<LayoutProps> = memo(function Layout(props) {
 	const { children, location } = props
 	const sitepath = location && location.pathname
 	const isExampleUrl = (sitepath || '')
@@ -74,7 +74,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
 			</DndProvider>
 		</>
 	)
-}
+})
 
 const SidebarContainer = styled.div`
 	flex: 1;
