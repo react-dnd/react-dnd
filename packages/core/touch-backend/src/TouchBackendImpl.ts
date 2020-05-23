@@ -41,7 +41,7 @@ const eventNames: Record<ListenerType, EventName> = {
 	},
 }
 
-export class TouchBackend implements Backend {
+export class TouchBackendImpl implements Backend {
 	private options: OptionsReader
 
 	// React-DnD Dependencies

@@ -1,10 +1,10 @@
 import { DragDropManager, BackendFactory } from 'dnd-core'
-import { TestBackend, TestBackendImpl } from './TestBackend'
+import { ITestBackend, TestBackendImpl } from './TestBackend'
 export * from './TestBackend'
 
-let instance: TestBackend | undefined
+let instance: ITestBackend | undefined
 
-export function getInstance(): TestBackend | undefined {
+export function getInstance(): ITestBackend | undefined {
 	return instance
 }
 
@@ -12,9 +12,9 @@ export function clearInstance(): void {
 	instance = undefined
 }
 
-export const TestBackendFactory: BackendFactory = function createBackend(
+export const TestBackend: BackendFactory = function createBackend(
 	manager: DragDropManager,
-): TestBackend {
+): ITestBackend {
 	instance = new TestBackendImpl(manager)
 	return instance
 }

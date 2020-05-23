@@ -12,7 +12,7 @@ function noop() {
 	// noop
 }
 
-export interface TestBackend extends Backend {
+export interface ITestBackend extends Backend {
 	didCallSetup: boolean
 	didCallTeardown: boolean
 	simulateBeginDrag(sourceIds: Identifier[], options?: any): void
@@ -22,7 +22,7 @@ export interface TestBackend extends Backend {
 	simulateEndDrag(): void
 }
 
-export class TestBackendImpl implements Backend, TestBackend {
+export class TestBackendImpl implements Backend, ITestBackend {
 	public didCallSetup = false
 	public didCallTeardown = false
 	public manager: DragDropManager

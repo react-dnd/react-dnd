@@ -1,6 +1,6 @@
 import React from 'react'
 import { DndProvider } from 'react-dnd'
-import { HTML5BackendFactory } from 'react-dnd-html5-backend'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -10,7 +10,7 @@ import Frame, { FrameContextConsumer } from 'react-frame-component'
 const FrameBindingContext: React.FC = ({ children }) => (
 	<FrameContextConsumer>
 		{({ window }: any) => (
-			<DndProvider backend={HTML5BackendFactory} context={window}>
+			<DndProvider backend={HTML5Backend} context={window}>
 				{children}
 			</DndProvider>
 		)}

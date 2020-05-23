@@ -30,7 +30,7 @@ declare global {
 	}
 }
 
-export class HTML5Backend implements Backend {
+export class HTML5BackendImpl implements Backend {
 	private options: OptionsReader
 
 	// React-Dnd Components

@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react'
-import {
-	TestBackendFactory,
-	TestBackend,
-	getInstance,
-} from 'react-dnd-test-backend'
+import { TestBackend, getInstance, ITestBackend } from 'react-dnd-test-backend'
 import { DndComponent, DndContext, DndProvider } from 'react-dnd'
 import { Backend, DragDropManager } from 'dnd-core'
 import { act } from 'react-dom/test-utils'
@@ -29,7 +25,7 @@ export function wrapInTestContext(
 		}))
 
 		return (
-			<DndProvider backend={TestBackendFactory}>
+			<DndProvider backend={TestBackend}>
 				<DndContext.Consumer>
 					{(ctx) => {
 						dragDropManager.current = ctx.dragDropManager
@@ -61,7 +57,7 @@ export function getBackendFromInstance<T extends Backend>(
 export function simulateDragDropSequence(
 	source: DndComponent<any>,
 	target: DndComponent<any>,
-	backend: TestBackend,
+	backend: ITestBackend,
 ): void {
 	act(() => {
 		backend.simulateBeginDrag([source.getHandlerId()])
@@ -74,7 +70,7 @@ export function simulateDragDropSequence(
 export function simulateHoverSequence(
 	source: DndComponent<any>,
 	target: DndComponent<any>,
-	backend: TestBackend,
+	backend: ITestBackend,
 ): void {
 	act(() => {
 		backend.simulateBeginDrag([source.getHandlerId()])

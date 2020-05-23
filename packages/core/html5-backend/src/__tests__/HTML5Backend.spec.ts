@@ -1,7 +1,7 @@
 declare const global: any
 
-import { HTML5Backend } from '../HTML5Backend'
-import createBackend from '../index'
+import { HTML5BackendImpl } from '../HTML5BackendImpl'
+import { HTML5Backend } from '../index'
 import { DragDropManager } from 'dnd-core'
 
 describe('The HTML5 Backend', () => {
@@ -10,7 +10,7 @@ describe('The HTML5 Backend', () => {
 			const mockWindow = global.window
 			try {
 				delete global.window
-				const backend = createBackend(mockManager()) as HTML5Backend
+				const backend = HTML5Backend(mockManager()) as HTML5BackendImpl
 				expect(backend).toBeDefined()
 				expect(backend.window).toBeUndefined()
 			} finally {
@@ -19,7 +19,7 @@ describe('The HTML5 Backend', () => {
 		})
 
 		it('can generate a profiling object', () => {
-			const backend = createBackend(mockManager()) as HTML5Backend
+			const backend = HTML5Backend(mockManager()) as HTML5BackendImpl
 			expect(backend).toBeDefined()
 
 			// Expect an initially empty profile
@@ -31,7 +31,7 @@ describe('The HTML5 Backend', () => {
 		})
 
 		it('uses the ambient window global', () => {
-			const backend = createBackend(mockManager(), window) as HTML5Backend
+			const backend = HTML5Backend(mockManager(), window) as HTML5BackendImpl
 			expect(backend).toBeDefined()
 			expect(backend.window).toBeDefined()
 		})
@@ -40,14 +40,17 @@ describe('The HTML5 Backend', () => {
 			const fakeWindow = {
 				x: 1,
 			}
-			const backend = createBackend(mockManager(), fakeWindow) as HTML5Backend
+			const backend = HTML5Backend(
+				mockManager(),
+				fakeWindow,
+			) as HTML5BackendImpl
 			expect(backend).toBeDefined()
 			expect(backend.window).toBe(fakeWindow)
 		})
 	})
 
 	describe('setup and teardown', () => {
-		let backend: HTML5Backend
+		let backend: HTML5BackendImpl
 		let mgr: DragDropManager
 		let fakeWindow: any = {}
 		beforeEach(() => {
@@ -59,9 +62,9 @@ describe('The HTML5 Backend', () => {
 		})
 
 		it('should throw error if two instances of html5 backend are setup', () => {
-			backend = createBackend(mgr, {
+			backend = HTML5Backend(mgr, {
 				window: fakeWindow,
-			}) as HTML5Backend
+			}) as HTML5BackendImpl
 			backend.setup()
 			try {
 				backend.setup()
@@ -73,20 +76,20 @@ describe('The HTML5 Backend', () => {
 		})
 
 		it('should set __isReactDndBackendSetUp on setup', () => {
-			backend = createBackend(mgr, fakeWindow) as HTML5Backend
+			backend = HTML5Backend(mgr, fakeWindow) as HTML5BackendImpl
 			backend.setup()
 			expect(fakeWindow.__isReactDndBackendSetUp).toBeTruthy()
 		})
 
 		it('should unset ____isReactDndBackendSetUp on teardown', () => {
-			backend = createBackend(mgr, fakeWindow) as HTML5Backend
+			backend = HTML5Backend(mgr, fakeWindow) as HTML5BackendImpl
 			backend.setup()
 			backend.teardown()
 			expect(fakeWindow.__isReactDndBackendSetUp).toBeFalsy()
 		})
 
 		it('should be able to call setup after teardown', () => {
-			backend = createBackend(mgr, fakeWindow) as HTML5Backend
+			backend = HTML5Backend(mgr, fakeWindow) as HTML5BackendImpl
 			backend.setup()
 			backend.teardown()
 			backend.setup()
