@@ -20,7 +20,7 @@ export interface DustbinProps {
 	onDrop: (item: any) => void
 }
 
-const Dustbin: React.FC<DustbinProps> = ({
+export const Dustbin: React.FC<DustbinProps> = ({
 	accept,
 	lastDroppedItem,
 	onDrop,
@@ -28,7 +28,7 @@ const Dustbin: React.FC<DustbinProps> = ({
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept,
 		drop: onDrop,
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
 		}),
@@ -54,5 +54,3 @@ const Dustbin: React.FC<DustbinProps> = ({
 		</div>
 	)
 }
-
-export default Dustbin

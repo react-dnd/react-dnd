@@ -1,6 +1,6 @@
 import React from 'react'
 import { DropTarget, ConnectDropTarget } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style: React.CSSProperties = {
 	border: '1px solid gray',

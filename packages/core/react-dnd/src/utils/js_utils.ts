@@ -1,10 +1,10 @@
 // cheap lodash replacements
 
-export function isFunction(input: any): boolean {
+export function isFunction(input: unknown): boolean {
 	return typeof input === 'function'
 }
 
-export function noop() {
+export function noop(): void {
 	// noop
 }
 
@@ -12,7 +12,7 @@ function isObjectLike(input: any) {
 	return typeof input === 'object' && input !== null
 }
 
-export function isPlainObject(input: any) {
+export function isPlainObject(input: unknown): boolean {
 	if (!isObjectLike(input)) {
 		return false
 	}

@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
-import theme from '../theme'
+import { theme } from '../theme'
 
 export interface PageBodyProps {
 	hasSidebar: boolean
 }
-export const PageBody: React.FC<PageBodyProps> = (props) => {
+export const PageBody: React.FC<PageBodyProps> = memo(function PageBody(props) {
 	const { hasSidebar, children } = props
 	const Content = hasSidebar ? SidebarContent : PlainContent
 	return (
@@ -13,7 +13,7 @@ export const PageBody: React.FC<PageBodyProps> = (props) => {
 			<Content>{children}</Content>
 		</Container>
 	)
-}
+})
 
 const Container = styled.div`
 	padding: 6em 1.5em;

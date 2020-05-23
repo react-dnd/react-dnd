@@ -29,7 +29,7 @@ export function createDndContext<BackendContext, BackendOptions>(
 	context?: BackendContext,
 	options?: BackendOptions,
 	debugMode?: boolean,
-) {
+): DndContextType {
 	return {
 		dragDropManager: createDragDropManager(
 			backend,

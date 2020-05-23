@@ -1,7 +1,7 @@
 import { XYCoord } from '../interfaces'
 
 export type EqualityCheck<T> = (a: T, b: T) => boolean
-export const strictEquality = <T>(a: T, b: T) => a === b
+export const strictEquality = <T>(a: T, b: T): boolean => a === b
 
 /**
  * Determine if two cartesian coordinate offsets are equal
@@ -11,7 +11,7 @@ export const strictEquality = <T>(a: T, b: T) => a === b
 export function areCoordsEqual(
 	offsetA: XYCoord | null | undefined,
 	offsetB: XYCoord | null | undefined,
-) {
+): boolean {
 	if (!offsetA && !offsetB) {
 		return true
 	} else if (!offsetA || !offsetB) {
@@ -30,7 +30,7 @@ export function areArraysEqual<T>(
 	a: T[],
 	b: T[],
 	isEqual: EqualityCheck<T> = strictEquality,
-) {
+): boolean {
 	if (a.length !== b.length) {
 		return false
 	}

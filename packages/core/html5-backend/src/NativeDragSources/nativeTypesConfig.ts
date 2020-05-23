@@ -18,22 +18,23 @@ export const nativeTypesConfig: {
 } = {
 	[NativeTypes.FILE]: {
 		exposeProperties: {
-			files: (dataTransfer: DataTransfer) =>
+			files: (dataTransfer: DataTransfer): File[] =>
 				Array.prototype.slice.call(dataTransfer.files),
-			items: (dataTransfer: DataTransfer) => dataTransfer.items,
+			items: (dataTransfer: DataTransfer): DataTransferItemList =>
+				dataTransfer.items,
 		},
 		matchesTypes: ['Files'],
 	},
 	[NativeTypes.URL]: {
 		exposeProperties: {
-			urls: (dataTransfer: DataTransfer, matchesTypes: string[]) =>
+			urls: (dataTransfer: DataTransfer, matchesTypes: string[]): string[] =>
 				getDataFromDataTransfer(dataTransfer, matchesTypes, '').split('\n'),
 		},
 		matchesTypes: ['Url', 'text/uri-list'],
 	},
 	[NativeTypes.TEXT]: {
 		exposeProperties: {
-			text: (dataTransfer: DataTransfer, matchesTypes: string[]) =>
+			text: (dataTransfer: DataTransfer, matchesTypes: string[]): string =>
 				getDataFromDataTransfer(dataTransfer, matchesTypes, ''),
 		},
 		matchesTypes: ['Text', 'text/plain'],

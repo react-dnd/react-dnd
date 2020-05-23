@@ -9,12 +9,12 @@ import {
 	DragSourceCollector,
 } from './interfaces'
 import { checkDecoratorArguments } from './utils'
-import decorateHandler from './decorateHandler'
+import { decorateHandler } from './decorateHandler'
 import { registerSource } from '../common/registration'
 import { DragSourceMonitorImpl } from '../common/DragSourceMonitorImpl'
 import { SourceConnector } from '../common/SourceConnector'
 import { isValidType } from '../utils/isValidType'
-import createSourceFactory from './createSourceFactory'
+import { createSourceFactory } from './createSourceFactory'
 
 /**
  * Decorates a component as a dragsource

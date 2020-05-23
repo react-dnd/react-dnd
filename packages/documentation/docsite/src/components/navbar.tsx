@@ -1,28 +1,29 @@
-import * as React from 'react'
+import React, { memo } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
-import theme from '../theme'
+import { theme } from '../theme'
 
-const NavBar: React.FC = () => (
-	<Container>
-		<ContentContainer>
-			<LogoContainer>
-				<LogoTitle to="/">
-					React <i>DnD</i>
-				</LogoTitle>
-				<LogoDescription>Drag and Drop for React</LogoDescription>
-			</LogoContainer>
-			<div>
-				<StyledGatsbyLink to={'/docs/overview'}>Docs</StyledGatsbyLink>
-				<StyledGatsbyLink to={'/examples'}>Examples</StyledGatsbyLink>
-				<StyledWebLink href={'https://github.com/react-dnd/react-dnd/'}>
-					GitHub
-				</StyledWebLink>
-			</div>
-		</ContentContainer>
-	</Container>
-)
-export default NavBar
+export const NavBar: React.FC = memo(function NavBar() {
+	return (
+		<Container>
+			<ContentContainer>
+				<LogoContainer>
+					<LogoTitle to="/">
+						React <i>DnD</i>
+					</LogoTitle>
+					<LogoDescription>Drag and Drop for React</LogoDescription>
+				</LogoContainer>
+				<div>
+					<StyledGatsbyLink to={'/docs/overview'}>Docs</StyledGatsbyLink>
+					<StyledGatsbyLink to={'/examples'}>Examples</StyledGatsbyLink>
+					<StyledWebLink href={'https://github.com/react-dnd/react-dnd/'}>
+						GitHub
+					</StyledWebLink>
+				</div>
+			</ContentContainer>
+		</Container>
+	)
+})
 
 const Container = styled.div`
 	z-index: 3;

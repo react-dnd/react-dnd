@@ -7,8 +7,8 @@ import {
 } from 'react-dnd'
 import { Square } from './Square'
 import { canMoveKnight, moveKnight } from './Game'
-import ItemTypes from './ItemTypes'
-import Overlay from './Overlay'
+import { ItemTypes } from './ItemTypes'
+import { Overlay } from './Overlay'
 
 export interface BoardSquareProps {
 	x: number

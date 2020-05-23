@@ -1,9 +1,9 @@
-import * as React from 'react'
+import React, { memo } from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/layout'
-import Doc from '../components/doc'
+import { Layout } from '../components/layout'
+import { Doc } from '../components/doc'
 
-export default function Template(props: any) {
+export const Template: React.FC<any> = memo(function Template(props) {
 	const { currentPage } = props.data
 
 	return (
@@ -11,7 +11,7 @@ export default function Template(props: any) {
 			<Doc docPage={currentPage} />
 		</Layout>
 	)
-}
+})
 
 export const pageQuery = graphql`
 	query($path: String!) {
@@ -38,3 +38,4 @@ export const pageQuery = graphql`
 		}
 	}
 `
+export default Template

@@ -1,4 +1,4 @@
-import createTestBackend, { TestBackend } from 'react-dnd-test-backend'
+import { ITestBackend, TestBackend } from 'react-dnd-test-backend'
 import * as Types from './types'
 import { NormalSource, NonDraggableSource, NumberSource } from './sources'
 import {
@@ -11,17 +11,17 @@ import {
 	HandlerRegistry,
 	DragDropMonitor,
 } from '../interfaces'
-import DragDropManagerImpl from '../DragDropManagerImpl'
+import { DragDropManagerImpl } from '../DragDropManagerImpl'
 
 describe.only('DragDropMonitor', () => {
 	let manager: DragDropManager
-	let backend: TestBackend
+	let backend: ITestBackend
 	let registry: HandlerRegistry
 	let monitor: DragDropMonitor
 
 	beforeEach(() => {
 		manager = new DragDropManagerImpl()
-		backend = createTestBackend(manager, null, null) as TestBackend
+		backend = TestBackend(manager, null, null) as ITestBackend
 		;(manager as any).receiveBackend(backend)
 		registry = manager.getRegistry()
 		monitor = manager.getMonitor()
@@ -96,7 +96,7 @@ describe.only('DragDropMonitor', () => {
 			expect(raisedChange).toEqual(false)
 		})
 
-		it('raises global change event on beginDrag()', done => {
+		it('raises global change event on beginDrag()', (done) => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 
@@ -104,7 +104,7 @@ describe.only('DragDropMonitor', () => {
 			backend.simulateBeginDrag([sourceId])
 		})
 
-		it('raises global change event on beginDrag() even if a subscriber causes other changes', done => {
+		it('raises global change event on beginDrag() even if a subscriber causes other changes', (done) => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 			const target = new NormalTarget()
@@ -504,7 +504,7 @@ describe.only('DragDropMonitor', () => {
 			expect(raisedChangeForTargetD).toEqual(false)
 		})
 
-		it('raises global change event on endDrag()', done => {
+		it('raises global change event on endDrag()', (done) => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 			const target = new NormalTarget()
@@ -515,7 +515,7 @@ describe.only('DragDropMonitor', () => {
 			backend.simulateEndDrag()
 		})
 
-		it('raises global change event on drop()', done => {
+		it('raises global change event on drop()', (done) => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 			const target = new NormalTarget()
@@ -835,7 +835,7 @@ describe.only('DragDropMonitor', () => {
 			expect(monitor.getDifferenceFromInitialOffset()).toEqual(null)
 		})
 
-		it('raises offset change event on beginDrag()', done => {
+		it('raises offset change event on beginDrag()', (done) => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 
@@ -846,7 +846,7 @@ describe.only('DragDropMonitor', () => {
 			})
 		})
 
-		it('raises offset change event on hover() if clientOffset changed', done => {
+		it('raises offset change event on hover() if clientOffset changed', (done) => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 			const target = new NormalTarget()
@@ -910,7 +910,7 @@ describe.only('DragDropMonitor', () => {
 			expect(raisedChange).toEqual(true)
 		})
 
-		it('raises offset change event on endDrag()', done => {
+		it('raises offset change event on endDrag()', (done) => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 			const target = new NormalTarget()
@@ -921,7 +921,7 @@ describe.only('DragDropMonitor', () => {
 			backend.simulateEndDrag()
 		})
 
-		it('raises offset change event on drop()', done => {
+		it('raises offset change event on drop()', (done) => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 			const target = new NormalTarget()

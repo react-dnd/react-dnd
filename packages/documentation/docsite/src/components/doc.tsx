@@ -1,6 +1,6 @@
-import * as React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
-import renderAst from '../util/renderHtmlAst'
+import { renderHtmlAst } from '../util/renderHtmlAst'
 
 export interface DocProps {
 	docPage: {
@@ -9,15 +9,15 @@ export interface DocProps {
 	}
 }
 
-const Doc: React.FC<DocProps> = ({ docPage }) => {
+export const Doc: React.FC<DocProps> = memo(function Doc({ docPage }) {
 	return (
 		<Container>
 			<Gutter />
-			<HtmlContainer>{renderAst(docPage.htmlAst)}</HtmlContainer>
+			<HtmlContainer>{renderHtmlAst(docPage.htmlAst)}</HtmlContainer>
 			<Gutter />
 		</Container>
 	)
-}
+})
 
 const HtmlContainer = styled.div`
 	width: 75%;
@@ -33,5 +33,3 @@ const Container = styled.div`
 const Gutter = styled.div`
 	flex: 1;
 `
-
-export default Doc

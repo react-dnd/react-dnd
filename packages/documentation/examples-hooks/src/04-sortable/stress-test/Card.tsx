@@ -1,6 +1,6 @@
 import React, { memo, useMemo, useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style: React.CSSProperties = {
 	border: '1px dashed gray',
@@ -16,7 +16,7 @@ export interface CardProps {
 	moveCard: (draggedId: string, id: string) => void
 }
 
-const Card: React.FC<CardProps> = memo(({ id, text, moveCard }) => {
+export const Card: React.FC<CardProps> = memo(({ id, text, moveCard }) => {
 	const ref = useRef(null)
 	const [{ isDragging }, connectDrag] = useDrag({
 		item: { id, type: ItemTypes.CARD },
@@ -47,5 +47,3 @@ const Card: React.FC<CardProps> = memo(({ id, text, moveCard }) => {
 		</div>
 	)
 })
-
-export default Card

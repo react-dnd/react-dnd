@@ -6,7 +6,7 @@ import {
 import { useMemo, MutableRefObject } from 'react'
 import { DropTarget } from 'dnd-core'
 import { registerTarget } from '../../common/registration'
-import { useDragDropManager } from './useDragDropManager'
+import { useDragDropManager } from '../useDragDropManager'
 import { TargetConnector } from '../../common/TargetConnector'
 import { DropTargetMonitorImpl } from '../../common/DropTargetMonitorImpl'
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'

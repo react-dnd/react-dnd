@@ -1,5 +1,5 @@
 import * as React from 'react'
-import wrapConnectorHooks from './wrapConnectorHooks'
+import { wrapConnectorHooks } from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from '../utils/isRef'
 import { DragSourceOptions, DragPreviewOptions } from '../interfaces'
@@ -64,7 +64,7 @@ export class SourceConnector implements Connector {
 		this.backend = backend
 	}
 
-	public receiveHandlerId(newHandlerId: Identifier | null) {
+	public receiveHandlerId(newHandlerId: Identifier | null): void {
 		if (this.handlerId === newHandlerId) {
 			return
 		}
@@ -73,18 +73,18 @@ export class SourceConnector implements Connector {
 		this.reconnect()
 	}
 
-	public get connectTarget() {
+	public get connectTarget(): any {
 		return this.dragSource
 	}
 
-	public get dragSourceOptions() {
+	public get dragSourceOptions(): DragSourceOptions | null {
 		return this.dragSourceOptionsInternal
 	}
 	public set dragSourceOptions(options: DragSourceOptions | null) {
 		this.dragSourceOptionsInternal = options
 	}
 
-	public get dragPreviewOptions() {
+	public get dragPreviewOptions(): DragPreviewOptions | null {
 		return this.dragPreviewOptionsInternal
 	}
 
@@ -92,7 +92,7 @@ export class SourceConnector implements Connector {
 		this.dragPreviewOptionsInternal = options
 	}
 
-	public reconnect() {
+	public reconnect(): void {
 		this.reconnectDragSource()
 		this.reconnectDragPreview()
 	}

@@ -2,8 +2,8 @@ import React from 'react'
 import { useDrop } from 'react-dnd'
 import { Square } from './Square'
 import { canMoveKnight, moveKnight } from './Game'
-import ItemTypes from './ItemTypes'
-import Overlay from './Overlay'
+import { ItemTypes } from './ItemTypes'
+import { Overlay } from './Overlay'
 
 export interface BoardSquareProps {
 	x: number
@@ -20,7 +20,7 @@ export const BoardSquare: React.FC<BoardSquareProps> = ({
 		accept: ItemTypes.KNIGHT,
 		canDrop: () => canMoveKnight(x, y),
 		drop: () => moveKnight(x, y),
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
 			canDrop: !!monitor.canDrop(),
 		}),

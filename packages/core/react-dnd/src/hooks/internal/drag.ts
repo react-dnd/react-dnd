@@ -7,7 +7,7 @@ import {
 } from '../../interfaces'
 import { DragDropMonitor, DragSource } from 'dnd-core'
 import { registerSource } from '../../common/registration'
-import { useDragDropManager } from './useDragDropManager'
+import { useDragDropManager } from '../useDragDropManager'
 import { DragSourceMonitorImpl } from '../../common/DragSourceMonitorImpl'
 import { SourceConnector } from '../../common/SourceConnector'
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'

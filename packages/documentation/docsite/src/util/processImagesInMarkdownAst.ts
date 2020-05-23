@@ -13,7 +13,7 @@ export interface MarkdownAstNode {
 	data: any
 }
 
-export default function processImagesInMarkdownAst(ast: MarkdownAstNode): void {
+export function processImagesInMarkdownAst(ast: MarkdownAstNode): void {
 	checkNode(ast)
 }
 
@@ -29,5 +29,5 @@ function checkNode(node: MarkdownAstNode) {
 		}
 	}
 	const children = node.children || []
-	children.forEach(child => checkNode(child))
+	children.forEach((child) => checkNode(child))
 }

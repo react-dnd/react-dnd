@@ -1,6 +1,11 @@
 import { AngleRange } from '../interfaces'
 
-export function distance(x1: number, y1: number, x2: number, y2: number) {
+export function distance(
+	x1: number,
+	y1: number,
+	x2: number,
+	y2: number,
+): number {
 	return Math.sqrt(
 		Math.pow(Math.abs(x2 - x1), 2) + Math.pow(Math.abs(y2 - y1), 2),
 	)
@@ -12,7 +17,7 @@ export function inAngleRanges(
 	x2: number,
 	y2: number,
 	angleRanges?: AngleRange[],
-) {
+): boolean {
 	if (!angleRanges) {
 		return false
 	}

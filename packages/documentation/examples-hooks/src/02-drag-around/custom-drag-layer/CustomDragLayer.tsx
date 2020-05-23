@@ -1,8 +1,8 @@
 import React from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
-import ItemTypes from './ItemTypes'
-import BoxDragPreview from './BoxDragPreview'
-import snapToGrid from './snapToGrid'
+import { ItemTypes } from './ItemTypes'
+import { BoxDragPreview } from './BoxDragPreview'
+import { snapToGrid } from './snapToGrid'
 
 const layerStyles: React.CSSProperties = {
 	position: 'fixed',
@@ -46,14 +46,14 @@ export interface CustomDragLayerProps {
 	snapToGrid: boolean
 }
 
-const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
+export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
 	const {
 		itemType,
 		isDragging,
 		item,
 		initialOffset,
 		currentOffset,
-	} = useDragLayer(monitor => ({
+	} = useDragLayer((monitor) => ({
 		item: monitor.getItem(),
 		itemType: monitor.getItemType(),
 		initialOffset: monitor.getInitialSourceClientOffset(),
@@ -83,4 +83,3 @@ const CustomDragLayer: React.FC<CustomDragLayerProps> = props => {
 		</div>
 	)
 }
-export default CustomDragLayer

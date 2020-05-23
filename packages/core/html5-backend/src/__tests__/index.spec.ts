@@ -1,4 +1,4 @@
-import createHTML5Backend from '../index'
+import { HTML5Backend } from '../index'
 import { DragDropManager } from 'dnd-core'
 
 describe('index', () => {
@@ -8,7 +8,7 @@ describe('index', () => {
 			getMonitor: () => null,
 			getRegistry: () => null,
 		} as any
-		const backend = createHTML5Backend(mockManager)
+		const backend = HTML5Backend(mockManager)
 		expect(backend).toBeDefined()
 	})
 })
