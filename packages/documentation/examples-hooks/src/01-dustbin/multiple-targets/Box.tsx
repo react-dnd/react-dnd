@@ -17,10 +17,10 @@ export interface BoxProps {
 	isDropped: boolean
 }
 
-const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
+export const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
 	const [{ opacity }, drag] = useDrag({
 		item: { name, type },
-		collect: monitor => ({
+		collect: (monitor) => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
 	})
@@ -31,5 +31,3 @@ const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
 		</div>
 	)
 }
-
-export default Box

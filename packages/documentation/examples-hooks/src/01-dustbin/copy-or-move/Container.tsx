@@ -1,8 +1,8 @@
 import React from 'react'
-import Dustbin from './Dustbin'
-import Box from './Box'
+import { Dustbin } from './Dustbin'
+import { Box } from './Box'
 
-const Container: React.FC = () => (
+export const Container: React.FC = () => (
 	<div>
 		<div style={{ overflow: 'hidden', clear: 'both' }}>
 			<Dustbin allowedDropEffect="any" />
@@ -16,4 +16,3 @@ const Container: React.FC = () => (
 		</div>
 	</div>
 )
-export default Container

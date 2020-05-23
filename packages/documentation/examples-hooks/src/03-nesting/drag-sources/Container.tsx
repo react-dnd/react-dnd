@@ -1,9 +1,9 @@
 import React from 'react'
-import SourceBox from './SourceBox'
-import TargetBox from './TargetBox'
-import Colors from './Colors'
+import { SourceBox } from './SourceBox'
+import { StatefulTargetBox as TargetBox } from './TargetBox'
+import { Colors } from './Colors'
 
-export default function Container() {
+export function Container() {
 	return (
 		<>
 			<div style={{ overflow: 'hidden', clear: 'both', margin: '-.5rem' }}>

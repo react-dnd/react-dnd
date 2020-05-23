@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { SourceBox } from './SourceBox'
-import TargetBox from './TargetBox'
+import { TargetBox } from './TargetBox'
 
 export const Container: React.FC = () => {
 	const [isMounted, setIsMounted] = useState(true)
@@ -41,5 +41,3 @@ export const Container: React.FC = () => {
 		</>
 	)
 }
-
-export default Container

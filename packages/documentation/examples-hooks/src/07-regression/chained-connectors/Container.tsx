@@ -13,7 +13,7 @@ export interface ContainerState {
 	cards: Item[]
 }
 
-const Container: React.FC = () => {
+export const Container: React.FC = () => {
 	{
 		return (
 			<div style={style}>
@@ -22,5 +22,3 @@ const Container: React.FC = () => {
 		)
 	}
 }
-
-export default Container

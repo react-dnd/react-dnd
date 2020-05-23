@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
-import Dustbin from './Dustbin'
-import Box from './Box'
-import ItemTypes from './ItemTypes'
+import { Dustbin } from './Dustbin'
+import { Box } from './Box'
+import { ItemTypes } from './ItemTypes'
 import update from 'immutability-helper'
 import shuffle from 'lodash/shuffle'
 
@@ -22,7 +22,7 @@ export interface ContainerState {
 	droppedBoxNames: string[]
 }
 
-const Container: React.FC = () => {
+export const Container: React.FC = () => {
 	const [dustbins, setDustbins] = useState<DustbinBox[]>([
 		{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
 		{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
@@ -82,7 +82,7 @@ const Container: React.FC = () => {
 					<Dustbin
 						accepts={accepts}
 						lastDroppedItem={lastDroppedItem}
-						onDrop={item => handleDrop(index, item)}
+						onDrop={(item) => handleDrop(index, item)}
 						key={index}
 					/>
 				))}
@@ -101,5 +101,3 @@ const Container: React.FC = () => {
 		</div>
 	)
 }
-
-export default Container

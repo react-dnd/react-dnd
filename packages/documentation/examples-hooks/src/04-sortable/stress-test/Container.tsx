@@ -1,6 +1,6 @@
 import React from 'react'
 import { name } from 'faker'
-import Card from './Card'
+import { Card } from './Card'
 import update from 'immutability-helper'
 
 const style = {
@@ -31,10 +31,7 @@ function buildCardData() {
 /* eslint-disable-next-line @typescript-eslint/no-empty-interface */
 export interface ContainerProps {}
 
-export default class Container extends React.Component<
-	ContainerProps,
-	ContainerState
-> {
+export class Container extends React.Component<ContainerProps, ContainerState> {
 	private pendingUpdateFn: any
 	private requestedFrame: number | undefined
 

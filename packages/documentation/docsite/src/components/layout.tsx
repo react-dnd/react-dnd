@@ -33,7 +33,7 @@ const HEADER_LINK = [
 	{ rel: 'shortcut icon', type: 'image/png', href: `${favicon}` },
 ]
 
-const Layout: React.FC<LayoutProps> = (props) => {
+export const Layout: React.FC<LayoutProps> = (props) => {
 	const { children, location } = props
 	const sitepath = location && location.pathname
 	const isExampleUrl = (sitepath || '')
@@ -92,5 +92,3 @@ const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 `
-
-export default Layout

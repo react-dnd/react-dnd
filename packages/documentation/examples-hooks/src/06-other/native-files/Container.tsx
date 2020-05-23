@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState, useCallback } from 'react'
 import { DropTargetMonitor } from 'react-dnd'
-import TargetBox from './TargetBox'
-import FileList from './FileList'
+import { TargetBox } from './TargetBox'
+import { FileList } from './FileList'
 
-const Container: React.FC = () => {
+export const Container: React.FC = () => {
 	const [droppedFiles, setDroppedFiles] = useState<File[]>([])
 
 	const handleFileDrop = useCallback(
@@ -24,4 +24,3 @@ const Container: React.FC = () => {
 		</>
 	)
 }
-export default Container

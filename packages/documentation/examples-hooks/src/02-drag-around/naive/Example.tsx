@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
-import Container from './Container'
+import { Container } from './Container'
 
-export default function DragAroundNaive() {
+export const Example: React.FC = () => {
 	const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true)
 	const toggle = useCallback(() => setHideSourceOnDrag(!hideSourceOnDrag), [
 		hideSourceOnDrag,

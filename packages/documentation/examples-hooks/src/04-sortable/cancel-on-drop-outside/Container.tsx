@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useDrop } from 'react-dnd'
-import Card from './Card'
+import { Card } from './Card'
 import update from 'immutability-helper'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
 	width: 400,
@@ -43,7 +43,7 @@ const ITEMS = [
 	},
 ]
 
-const Container: React.FC = () => {
+export const Container: React.FC = () => {
 	const [cards, setCards] = useState(ITEMS)
 	const moveCard = (id: string, atIndex: number) => {
 		const { card, index } = findCard(id)
@@ -82,4 +82,3 @@ const Container: React.FC = () => {
 		</>
 	)
 }
-export default Container

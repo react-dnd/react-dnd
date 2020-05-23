@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useDrag, useDrop, DropTargetMonitor } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import { ItemTypes } from './ItemTypes'
 import { XYCoord } from 'dnd-core'
 
 const style = {
@@ -23,7 +23,7 @@ interface DragItem {
 	id: string
 	type: string
 }
-const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
+export const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const [, drop] = useDrop({
 		accept: ItemTypes.CARD,
@@ -92,5 +92,3 @@ const Card: React.FC<CardProps> = ({ id, text, index, moveCard }) => {
 		</div>
 	)
 }
-
-export default Card

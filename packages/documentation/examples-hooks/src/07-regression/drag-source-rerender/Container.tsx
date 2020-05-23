@@ -1,7 +1,7 @@
 import React from 'react'
-import Example from './Example'
+import { Example } from './Example'
 
-const Container: React.FC = () => {
+export const Container: React.FC = () => {
 	return (
 		<>
 			<h3>
@@ -15,4 +15,3 @@ const Container: React.FC = () => {
 		</>
 	)
 }
-export default Container

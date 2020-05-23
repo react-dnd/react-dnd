@@ -3,7 +3,7 @@ import React from 'react'
 import { Example } from './example'
 import { Profiler } from './Profiler'
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
 	return (
 		<div className="App">
 			<Example />
@@ -11,5 +11,3 @@ const App: React.FC = () => {
 		</div>
 	)
 }
-
-export default App

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { useDrag, ConnectDragSource } from 'react-dnd'
 
-const Parent: React.FC = () => {
+export const Example: React.FC = () => {
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: 'KNIGHT' },
 		collect: (monitor) => ({
@@ -11,8 +11,6 @@ const Parent: React.FC = () => {
 
 	return <Child drag={drag}>{isDragging ? 'Dragging' : 'Drag me'}</Child>
 }
-
-export default Parent
 
 interface ChildProps {
 	drag: ConnectDragSource

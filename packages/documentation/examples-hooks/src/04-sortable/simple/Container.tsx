@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import Card from './Card'
+import { Card } from './Card'
 import update from 'immutability-helper'
 
 const style = {
@@ -15,7 +15,7 @@ export interface ContainerState {
 	cards: Item[]
 }
 
-const Container: React.FC = () => {
+export const Container: React.FC = () => {
 	{
 		const [cards, setCards] = useState([
 			{
@@ -83,5 +83,3 @@ const Container: React.FC = () => {
 		)
 	}
 }
-
-export default Container

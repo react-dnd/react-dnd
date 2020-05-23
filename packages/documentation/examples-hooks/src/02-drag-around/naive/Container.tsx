@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDrop, XYCoord } from 'react-dnd'
-import ItemTypes from './ItemTypes'
-import Box from './Box'
+import { ItemTypes } from './ItemTypes'
+import { Box } from './Box'
 import update from 'immutability-helper'
 import { DragItem } from './interfaces'
 
@@ -20,7 +20,7 @@ export interface ContainerState {
 	boxes: { [key: string]: { top: number; left: number; title: string } }
 }
 
-const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
+export const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 	const [boxes, setBoxes] = useState<{
 		[key: string]: {
 			top: number
@@ -55,7 +55,7 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 
 	return (
 		<div ref={drop} style={styles}>
-			{Object.keys(boxes).map(key => {
+			{Object.keys(boxes).map((key) => {
 				const { left, top, title } = boxes[key]
 				return (
 					<Box
@@ -72,4 +72,3 @@ const Container: React.FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 		</div>
 	)
 }
-export default Container

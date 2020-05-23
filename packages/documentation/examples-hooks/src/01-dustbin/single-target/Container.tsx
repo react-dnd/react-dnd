@@ -1,8 +1,8 @@
 import React from 'react'
-import Dustbin from './Dustbin'
-import Box from './Box'
+import { Dustbin } from './Dustbin'
+import { Box } from './Box'
 
-export default function Container() {
+export function Container() {
 	return (
 		<div>
 			<div style={{ overflow: 'hidden', clear: 'both' }}>

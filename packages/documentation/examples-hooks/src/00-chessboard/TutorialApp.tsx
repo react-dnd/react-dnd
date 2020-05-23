@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Board from './Board'
+import { Board } from './Board'
 import { observe } from './Game'
 
 export interface ChessboardTutorialAppState {
@@ -15,7 +15,7 @@ const containerStyle: React.CSSProperties = {
 /**
  * The Chessboard Tutorial Application
  */
-const ChessboardTutorialApp: React.FC = () => {
+export const TutorialApp: React.FC = () => {
 	const [knightPos, setKnightPos] = useState<[number, number]>([1, 7])
 
 	// the observe function will return an unsubscribe callback
@@ -28,5 +28,3 @@ const ChessboardTutorialApp: React.FC = () => {
 		</div>
 	)
 }
-
-export default ChessboardTutorialApp
