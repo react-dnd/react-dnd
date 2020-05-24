@@ -1,7 +1,8 @@
 /* eslint-disable */
 const fs = require('fs')
 const path = require('path')
-const reactDndVersion = require('../../core/react-dnd/package.json').version
+const rootPkgJson = require('../../../package.json')
+const reactDndPkgJson = require('../../core/react-dnd/package.json')
 const reactDndHtml5BackendVersion = require('../../core/html5-backend/package.json')
 	.version
 
@@ -10,12 +11,12 @@ const APP_FILE_CONTENT = `
 	import ReactDOM from 'react-dom'
 	import Example from './example'
 	import { DndProvider } from 'react-dnd'
-	import Backend from 'react-dnd-html5-backend'
+	import { HTML5Backend } from 'react-dnd-html5-backend'
 
 	function App() {
 		return (
 			<div className="App">
-				<DndProvider backend={Backend}>
+				<DndProvider backend={HTML5Backend}>
 					<Example />
 				</DndProvider>
 			</div>
@@ -78,10 +79,10 @@ const makePackageJson = (index, isTS) => {
 			eject: 'react-scripts eject',
 		},
 		dependencies: {
-			react: '16.8.4',
-			'react-dom': '16.8.4',
-			'react-scripts': '2.1.8',
-			'react-dnd': reactDndVersion,
+			react: reactDndPkgJson.devDependencies.react,
+			'react-dom': reactDndPkgJson.devDependencies['react-dom'],
+			'react-scripts': '3.2.0',
+			'react-dnd': reactDndPkgJson.version,
 			'react-dnd-html5-backend': reactDndHtml5BackendVersion,
 			'babel-jest': '23.6.0',
 			faker: '^4.1.0',
@@ -93,11 +94,11 @@ const makePackageJson = (index, isTS) => {
 	if (isTS) {
 		result.dependencies = {
 			...result.dependencies,
-			typescript: '^3.7.2',
-			'@types/react': '^16.9.13',
-			'@types/react-dom': '^16.9.4',
-			'@types/jest': '^24.0.9',
-			'@types/node': '^11.12.0',
+			typescript: rootPkgJson.devDependencies.typescript,
+			'@types/react': reactDndPkgJson.devDependencies['@types/react'],
+			'@types/react-dom': reactDndPkgJson.devDependencies['@types/react-dom'],
+			'@types/jest': rootPkgJson.devDependencies['@types/jest'],
+			'@types/node': '*',
 		}
 	}
 	return result
@@ -158,8 +159,8 @@ function handleJsExample(err, results) {
 
 		// Rename index.jsx to example.jsx. Reserve index. for the bootstrapping codes
 		fs.renameSync(
-			path.join(srcDir, 'index.jsx'),
-			path.join(srcDir, 'example.jsx'),
+			path.join(srcDir, 'index.js'),
+			path.join(srcDir, 'example.js'),
 		)
 
 		const packageJsonFile = path.join(exampleDir, 'package.json')
@@ -205,8 +206,8 @@ function handleTsExample(err, results) {
 
 		// Rename index.jsx to example.jsx. Reserve index. for the bootstrapping codes
 		fs.renameSync(
-			path.join(srcDir, 'index.tsx'),
-			path.join(srcDir, 'example.tsx'),
+			path.join(srcDir, 'index.ts'),
+			path.join(srcDir, 'example.ts'),
 		)
 
 		const packageJsonFile = path.join(exampleDir, 'package.json')
@@ -228,27 +229,28 @@ function handleTsExample(err, results) {
 		fs.writeFileSync(envFile, `SKIP_PREFLIGHT_CHECK = true`)
 	})
 }
-
 // Write JS Examples
 walk_examples(
 	path.join(__dirname, 'static/examples_hooks_js'),
-	'index.jsx',
+	'index.js',
 	handleJsExample,
 )
 walk_examples(
 	path.join(__dirname, 'static/examples_decorators_js'),
-	'index.jsx',
+	'index.js',
 	handleJsExample,
 )
 
 // Write TS Examples
 walk_examples(
 	path.join(__dirname, 'static/examples_hooks_ts'),
-	'index.tsx',
+	'index.ts',
 	handleTsExample,
 )
 walk_examples(
 	path.join(__dirname, 'static/examples_decorators_ts'),
-	'index.tsx',
+	'index.ts',
 	handleTsExample,
 )
+
+console.log('done')
