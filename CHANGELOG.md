@@ -2,6 +2,10 @@
 
 # [11.0.0](https://github.com/react-dnd/react-dnd/compare/v10.0.2...v11.0.0) (2020-05-24)
 
+### Breaking Changes
+
+- Change Backend exports from default exports to named exports. Update module structure in general to minimize usage of default exports.
+
 ### build
 
 - add formatting check to lint stage (#2464) ([9db96b4](https://github.com/react-dnd/react-dnd/commit/9db96b4baf6f56ed51f1eb1e72a6a6992026b265)), closes [#2464](https://github.com/react-dnd/react-dnd/issues/2464)
