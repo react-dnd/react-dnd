@@ -1,0 +1,35 @@
+{
+  "name": "react-dnd-example-12",
+  "main": "src/index.tsx",
+  "description": "auto-generated package for codesandbox import",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.2.0",
+    "react-dnd": "10.0.2",
+    "react-dnd-html5-backend": "10.0.2",
+    "babel-jest": "23.6.0",
+    "faker": "^4.1.0",
+    "immutability-helper": "^3.0.0",
+    "react-frame-component": "^4.1.0",
+    "typescript": "^3.7.2",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "@types/jest": "^25.1.0",
+    "@types/node": "*"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
