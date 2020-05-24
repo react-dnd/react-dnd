@@ -13,13 +13,13 @@ injected with a backend via the `backend` prop, but it may be injected with a `w
 ### Usage
 
 ```jsx
-import Backend from 'react-dnd-html5-backend'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 
 export default class YourApp {
   render() {
     return (
-      <DndProvider backend={Backend}>
+      <DndProvider backend={HTML5Backend}>
         /* Your Drag-and-Drop Application */
       </DndProvider>
     )
