@@ -432,11 +432,11 @@ We need this to specify that we're going to use the [HTML5Backend](/docs/backend
 ```jsx
 import React from 'react'
 import { DndProvider } from 'react-dnd'
-import Backend from 'react-dnd-html5-backend'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 function Board() {
   /* ... */
-  return <DndProvider backend={Backend}>...</DndProvider>
+  return <DndProvider backend={HTML5Backend}>...</DndProvider>
 }
 ```
 
@@ -660,10 +660,10 @@ function BoardSquare({ x, y, children }) {
     accept: ItemTypes.KNIGHT,
     drop: () => moveKnight(x, y),
     canDrop: () => canMoveKnight(x, y),
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: !!monitor.isOver(),
-      canDrop: !!monitor.canDrop(),
-    }),
+      canDrop: !!monitor.canDrop()
+    })
   })
 
   return (
@@ -672,7 +672,7 @@ function BoardSquare({ x, y, children }) {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100%',
+        height: '100%'
       }}
     >
       <Square black={black}>{children}</Square>
