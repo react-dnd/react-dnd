@@ -15,7 +15,7 @@ interface RefType {
  * @param DecoratedComponent The component to decorate
  */
 export function wrapInTestContext(
-	DecoratedComponent: React.ComponentType,
+	DecoratedComponent: React.ComponentType<any>,
 ): any {
 	const forwardedRefFunc = (props: any, ref: React.Ref<RefType>) => {
 		const dragDropManager = React.useRef<any>(undefined)
