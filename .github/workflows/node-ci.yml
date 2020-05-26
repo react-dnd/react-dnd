@@ -103,11 +103,12 @@ jobs:
   auto-merge:
     name: Auto-Merge Dependabot PRs
     runs-on: ubuntu-latest
+    if: github.actor == 'dependabot-preview[bot]'
     needs:
       - build
     steps:
       - name: auto-merge
-        if: ${{github.actor}} == 'dependabot-preview[bot]'
+        if: github.actor == 'dependabot-preview[bot]'
         uses: ridedott/dependabot-auto-merge-action@master
         with:
           GITHUB_TOKEN: ${{ secrets.AUTOMERGE_PAT }}
