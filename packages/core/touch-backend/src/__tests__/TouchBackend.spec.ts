@@ -1,5 +1,6 @@
 import { TouchBackend } from '../index'
 import { DragDropManager } from 'dnd-core'
+import { TouchBackendImpl } from '../TouchBackendImpl'
 
 describe('TouchBackend', () => {
 	it('can be constructed', () => {
@@ -15,6 +16,15 @@ describe('TouchBackend', () => {
 		Object.keys(profile).forEach((profilingKey) =>
 			expect(profile[profilingKey]).toEqual(0),
 		)
+	})
+
+	it('can determine target ids', () => {
+		const mockNode = {} as HTMLElement
+		const backend = TouchBackend(mockManager(), {}, {}) as TouchBackendImpl
+		backend.targetNodes.set('abc', mockNode)
+
+		expect(backend._getDropTargetId(mockNode)).toEqual('abc')
+		expect(backend._getDropTargetId({} as Element)).toEqual(undefined)
 	})
 })
 

@@ -50,10 +50,10 @@ export class TouchBackendImpl implements Backend {
 
 	// Internal State
 	private static isSetUp: boolean
-	private sourceNodes: Map<Identifier, HTMLElement>
-	private sourcePreviewNodes: Map<string, HTMLElement>
-	private sourcePreviewNodeOptions: Map<string, any>
-	private targetNodes: Map<string, HTMLElement>
+	public sourceNodes: Map<Identifier, HTMLElement>
+	public sourcePreviewNodes: Map<string, HTMLElement>
+	public sourcePreviewNodeOptions: Map<string, any>
+	public targetNodes: Map<string, HTMLElement>
 	private _mouseClientOffset: Partial<XYCoord>
 	private _isScrolling: boolean
 	private listenerTypes: ListenerType[]
@@ -527,14 +527,7 @@ export class TouchBackendImpl implements Backend {
 			// Filter off nodes that arent a hovered DropTargets nodes
 			.filter((node) => dragOverTargetNodes.indexOf(node as HTMLElement) > -1)
 			// Map back the nodes elements to targetIds
-			.map((node) => {
-				for (const targetId in this.targetNodes) {
-					if (node === this.targetNodes.get(targetId)) {
-						return targetId
-					}
-				}
-				return undefined
-			})
+			.map((node) => this._getDropTargetId(node))
 			// Filter off possible null rows
 			.filter((node) => !!node)
 			.filter((id, index, ids) => ids.indexOf(id) === index) as string[]
@@ -561,6 +554,24 @@ export class TouchBackendImpl implements Backend {
 		this.actions.hover(orderedDragOverTargetIds, {
 			clientOffset: clientOffset,
 		})
+	}
+
+	/**
+	 *
+	 * visible for testing
+	 */
+	public _getDropTargetId = (node: Element): Identifier | undefined => {
+		const keys = this.targetNodes.keys()
+		let next = keys.next()
+		const targetId = next.value
+		while (next.done === false) {
+			if (node === this.targetNodes.get(targetId)) {
+				return targetId
+			} else {
+				next = keys.next()
+			}
+		}
+		return undefined
 	}
 
 	public handleTopMoveEndCapture = (e: Event): void => {
