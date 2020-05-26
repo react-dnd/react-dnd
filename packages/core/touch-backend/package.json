@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "11.1.0",
+  "version": "11.1.1",
   "description": "Touch backend for react-dnd",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
-    "dnd-core": "^11.1.0"
+    "dnd-core": "^11.1.1"
   }
 }
