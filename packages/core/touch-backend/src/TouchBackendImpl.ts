@@ -528,9 +528,14 @@ export class TouchBackendImpl implements Backend {
 			.filter((node) => dragOverTargetNodes.indexOf(node as HTMLElement) > -1)
 			// Map back the nodes elements to targetIds
 			.map((node) => {
-				for (const targetId of this.targetNodes.keys()) {
+				const keys = this.targetNodes.keys()
+				let next = keys.next()
+				const targetId = next.value
+				while (next.done === false) {
 					if (node === this.targetNodes.get(targetId)) {
 						return targetId
+					} else {
+						next = keys.next()
 					}
 				}
 				return undefined
