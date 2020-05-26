@@ -6,7 +6,8 @@ import { Backend, DragDropManager } from 'dnd-core'
 import { act } from 'react-dom/test-utils'
 
 interface RefType {
-	getManager: () => DragDropManager | undefined
+	getManager: () => DragDropManager | undefined,
+	getDecoratedComponent<T>(): T
 }
 
 /**
@@ -19,9 +20,11 @@ export function wrapInTestContext(
 ): any {
 	const forwardedRefFunc = (props: any, ref: React.Ref<RefType>) => {
 		const dragDropManager = React.useRef<any>(undefined)
+		const decoratedComponentRef = React.useRef<any>(undefined)
 
 		React.useImperativeHandle(ref, () => ({
 			getManager: () => dragDropManager.current,
+			getDecoratedComponent: () => decoratedComponentRef.current
 		}))
 
 		return (
@@ -32,7 +35,7 @@ export function wrapInTestContext(
 						return null
 					}}
 				</DndContext.Consumer>
-				<DecoratedComponent {...props} />
+				<DecoratedComponent ref={decoratedComponentRef} {...props} />
 			</DndProvider>
 		)
 	}
