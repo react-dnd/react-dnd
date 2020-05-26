@@ -560,7 +560,7 @@ export class TouchBackendImpl implements Backend {
 	 *
 	 * visible for testing
 	 */
-	public _getDropTargetId(node: Element): Identifier | undefined {
+	public _getDropTargetId = (node: Element): Identifier | undefined => {
 		const keys = this.targetNodes.keys()
 		let next = keys.next()
 		const targetId = next.value
