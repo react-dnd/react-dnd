@@ -19,11 +19,14 @@ describe('TouchBackend', () => {
 	})
 
 	it('can determine target ids', () => {
-		const mockNode = {} as HTMLElement
+		const mockNode1 = {} as HTMLElement
+		const mockNode2 = {} as HTMLElement
 		const backend = TouchBackend(mockManager(), {}, {}) as TouchBackendImpl
-		backend.targetNodes.set('abc', mockNode)
+		backend.targetNodes.set('abc', mockNode1)
+		backend.targetNodes.set('def', mockNode2)
 
-		expect(backend._getDropTargetId(mockNode)).toEqual('abc')
+		expect(backend._getDropTargetId(mockNode1)).toEqual('abc')
+		expect(backend._getDropTargetId(mockNode2)).toEqual('def')
 		expect(backend._getDropTargetId({} as Element)).toEqual(undefined)
 	})
 })
