@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "11.1.1",
+  "version": "11.1.2",
   "description": "Touch backend for react-dnd",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",

@@ -1,24 +1,25 @@
-# [](https://github.com/react-dnd/react-dnd/compare/v11.0.0...v) (2020-05-24)
+# [](https://github.com/react-dnd/react-dnd/compare/v11.1.2...v) (2020-05-27)
 
-# [11.0.0](https://github.com/react-dnd/react-dnd/compare/v10.0.2...v11.0.0) (2020-05-24)
+## [11.1.2](https://github.com/react-dnd/react-dnd/compare/v11.1.1...v11.1.2) (2020-05-27)
 
-### Breaking Changes
+### docs
 
-- Change Backend exports from default exports to named exports. Update module structure in general to minimize usage of default exports.
+- update changelog ([64c80cf](https://github.com/react-dnd/react-dnd/commit/64c80cfe3b352b7814941d4baf17febee58ec232))
+
+## [11.1.1](https://github.com/react-dnd/react-dnd/compare/v10.0.2...v11.1.1) (2020-05-26)
 
 ### build
 
 - add formatting check to lint stage (#2464) ([9db96b4](https://github.com/react-dnd/react-dnd/commit/9db96b4baf6f56ed51f1eb1e72a6a6992026b265)), closes [#2464](https://github.com/react-dnd/react-dnd/issues/2464)
+- move automerge if-statement to automerge step (#2489) ([68a1879](https://github.com/react-dnd/react-dnd/commit/68a187985a372a1282c34ace93499b1a6355a05e)), closes [#2489](https://github.com/react-dnd/react-dnd/issues/2489)
+- update dependabot if statement (#2490) ([af84889](https://github.com/react-dnd/react-dnd/commit/af8488955dc0a9a3d731c04dc826c913739b3ed5)), closes [#2490](https://github.com/react-dnd/react-dnd/issues/2490)
 - update node support spec to 10.x (#1850) ([0b06951](https://github.com/react-dnd/react-dnd/commit/0b0695136bf86593717f9ec31f91b0182603f642)), closes [#1850](https://github.com/react-dnd/react-dnd/issues/1850)
-
-### docs
-
-- update backend import documentation ([92ce39b](https://github.com/react-dnd/react-dnd/commit/92ce39b072dfea74de40ea4e79e05048dc18e0f5))
 
 ### fix
 
 - correct issue with example generation due to example structure refactoring (#2480) ([efc251b](https://github.com/react-dnd/react-dnd/commit/efc251b2e6ea403db4d8ff7bcb9a8b37b4e716d4)), closes [#2480](https://github.com/react-dnd/react-dnd/issues/2480)
 - do not cancel touch events if they are non-cancelable (#2190) ([1b4019e](https://github.com/react-dnd/react-dnd/commit/1b4019e612f5f20aadc7113482dfa764c3124f4a)), closes [#2190](https://github.com/react-dnd/react-dnd/issues/2190)
+- remove circular dependencies (#2491) ([52eaace](https://github.com/react-dnd/react-dnd/commit/52eaacebbc523815f5fd2f977b9a26432552c1a2)), closes [#2491](https://github.com/react-dnd/react-dnd/issues/2491)
 - update wrapInTestContext to expose `getManager()` method (#1570) ([4ad004c](https://github.com/react-dnd/react-dnd/commit/4ad004c1a223c0bf3b31a0c1e0a7e5797d8b1291)), closes [#1570](https://github.com/react-dnd/react-dnd/issues/1570)
 
 ## [10.0.2](https://github.com/react-dnd/react-dnd/compare/v10.0.1...v10.0.2) (2019-12-07)
