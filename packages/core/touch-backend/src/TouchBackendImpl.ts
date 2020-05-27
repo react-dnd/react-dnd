@@ -563,8 +563,8 @@ export class TouchBackendImpl implements Backend {
 	public _getDropTargetId = (node: Element): Identifier | undefined => {
 		const keys = this.targetNodes.keys()
 		let next = keys.next()
-		const targetId = next.value
 		while (next.done === false) {
+			const targetId = next.value
 			if (node === this.targetNodes.get(targetId)) {
 				return targetId
 			} else {
