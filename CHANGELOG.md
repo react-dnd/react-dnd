@@ -1,4 +1,10 @@
-# [](https://github.com/react-dnd/react-dnd/compare/v11.1.1...v) (2020-05-26)
+# [](https://github.com/react-dnd/react-dnd/compare/v11.1.2...v) (2020-05-27)
+
+## [11.1.2](https://github.com/react-dnd/react-dnd/compare/v11.1.1...v11.1.2) (2020-05-27)
+
+### docs
+
+- update changelog ([64c80cf](https://github.com/react-dnd/react-dnd/commit/64c80cfe3b352b7814941d4baf17febee58ec232))
 
 ## [11.1.1](https://github.com/react-dnd/react-dnd/compare/v10.0.2...v11.1.1) (2020-05-26)
 
