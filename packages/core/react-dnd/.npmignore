@@ -1,3 +1,4 @@
 src
-webpack.config.js
+rollup.config.js
 tsconfig.json
+*.tsbuildinfo
