@@ -11907,11 +11907,9 @@ immer@1.10.0:
   integrity sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
 
 immutability-helper@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-3.0.2.tgz#e9187158b47c93368a92e84c31714c4b3dff30b0"
-  integrity sha512-fcrJ26wpvUcuGRpoGY4hyQ/JOeR1HAunMmE3C0XYXSe6plAGtgTlB2S4BzueBANCPrDJ7AByL1yrIRLIlVfwpA==
-  dependencies:
-    invariant "^2.2.4"
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-3.1.1.tgz#2b86b2286ed3b1241c9e23b7b21e0444f52f77b7"
+  integrity sha512-Q0QaXjPjwIju/28TsugCHNEASwoCcJSyJV3uO1sOIQGI0jKgm9f41Lvz0DZj3n46cNCyAZTsEYoY4C2bVRUzyQ==
 
 immutable@~3.7.6:
   version "3.7.6"
