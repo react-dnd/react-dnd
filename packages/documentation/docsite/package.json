@@ -42,7 +42,7 @@
     "react-helmet": "^6.0.0",
     "react-tabs": "^3.0.0",
     "react-typography": "^0.16.19",
-    "rehype-react": "^5.0.0",
+    "rehype-react": "^6.0.0",
     "styled-components": "^5.0.0",
     "typography": "^0.16.19",
     "typography-theme-github": "^0.16.19"
