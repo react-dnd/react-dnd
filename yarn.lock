@@ -12892,9 +12892,9 @@ inquirer@^6.2.0:
     through "^2.3.6"
 
 inquirer@^7.0.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.1.0.tgz#1298a01859883e17c7264b82870ae1034f92dd29"
-  integrity sha512-5fJMWEmikSYu0nv/flMc475MhGbB7TSPd/2IpFV4I4rMklboCH2rQjYY5kKiYGHqUF9gvaambupcJFFG9dvReg==
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.2.0.tgz#63ce99d823090de7eb420e4bb05e6f3449aa389a"
+  integrity sha512-E0c4rPwr9ByePfNlTIB8z51kK1s2n6jrHuJeEHENl/sbq2G/S1auvibgEwNR4uSyiU+PiYHqSwsgGiXjG8p5ZQ==
   dependencies:
     ansi-escapes "^4.2.1"
     chalk "^3.0.0"
@@ -20160,14 +20160,7 @@ rx@^4.1.0:
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
   integrity sha1-pfE/957zt0D+MKqAP7CfmIBdR4I=
 
-rxjs@^6.4.0, rxjs@^6.5.3:
-  version "6.5.3"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.3.tgz#510e26317f4db91a7eb1de77d9dd9ba0a4899a3a"
-  integrity sha512-wuYsAYYFdWTAnAaPoKGNhfpWwKZbJW+HgAJ+mImp+Epl7BG8oNWBCTyRM8gba9k4lk8BgWdoYm21Mo/RYhhbgA==
-  dependencies:
-    tslib "^1.9.0"
-
-rxjs@^6.5.5:
+rxjs@^6.4.0, rxjs@^6.5.3, rxjs@^6.5.5:
   version "6.5.5"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
   integrity sha512-WfQI+1gohdf0Dai/Bbmk5L5ItH5tYqm3ki2c5GdWhKjalzjg93N3avFjVStyZZz+A2Em+ZxKH5bNghw9UeylGQ==
