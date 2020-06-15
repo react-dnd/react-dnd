@@ -109,6 +109,6 @@ jobs:
     steps:
       - name: auto-merge
         if: github.actor == 'dependabot-preview[bot]'
-        uses: ridedott/dependabot-auto-merge-action@master
+        uses: ridedott/dependabot-auto-merge-action@main
         with:
           GITHUB_TOKEN: ${{ secrets.AUTOMERGE_PAT }}
