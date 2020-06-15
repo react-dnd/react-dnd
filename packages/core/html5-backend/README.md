@@ -1,5 +1,5 @@
 [![npm package](https://img.shields.io/npm/v/react-dnd-html5-backend.svg?style=flat-square)](https://www.npmjs.org/package/react-dnd-html5-backend)
-[![Build Status](https://travis-ci.org/react-dnd/react-dnd-html5-backend.svg?branch=master)](https://travis-ci.org/react-dnd/react-dnd-html5-backend)
+[![Build Status](https://travis-ci.org/react-dnd/react-dnd-html5-backend.svg?branch=main)](https://travis-ci.org/react-dnd/react-dnd-html5-backend)
 [![dependencies Status](https://david-dm.org/react-dnd/react-dnd-html5-backend/status.svg)](https://david-dm.org/react-dnd/react-dnd-html5-backend)
 [![devDependencies Status](https://david-dm.org/react-dnd/react-dnd-html5-backend/dev-status.svg)](https://david-dm.org/react-dnd/react-dnd-html5-backend?type=dev)
 [![peerDependencies Status](https://david-dm.org/react-dnd/react-dnd-html5-backend/peer-status.svg)](https://david-dm.org/react-dnd/react-dnd-html5-backend?type=peer)

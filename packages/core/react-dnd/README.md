@@ -1,6 +1,6 @@
 [![npm version](https://img.shields.io/npm/v/react-dnd.svg?style=flat-square)](https://www.npmjs.com/package/react-dnd)
 [![npm downloads](https://img.shields.io/npm/dm/react-dnd.svg?style=flat-square)](https://www.npmjs.com/package/react-dnd)
-[![Build Status](https://travis-ci.org/react-dnd/react-dnd.svg?branch=master)](https://travis-ci.org/react-dnd/react-dnd)
+[![Build Status](https://travis-ci.org/react-dnd/react-dnd.svg?branch=main)](https://travis-ci.org/react-dnd/react-dnd)
 
 # React _DnD_
 

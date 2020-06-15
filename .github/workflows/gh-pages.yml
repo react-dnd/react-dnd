@@ -3,13 +3,13 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy-documentation:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
