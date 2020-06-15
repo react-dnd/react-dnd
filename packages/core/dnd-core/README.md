@@ -1,5 +1,5 @@
 [![npm package](https://img.shields.io/npm/v/dnd-core.svg?style=flat-square)](https://www.npmjs.org/package/dnd-core)
-[![Build Status](https://travis-ci.org/react-dnd/dnd-core.svg?branch=master)](https://travis-ci.org/react-dnd/dnd-core)
+[![Build Status](https://travis-ci.org/react-dnd/dnd-core.svg?branch=main)](https://travis-ci.org/react-dnd/dnd-core)
 [![Test Coverage](https://codeclimate.com/github/react-dnd/dnd-core/badges/coverage.svg)](https://codeclimate.com/github/react-dnd/dnd-core)
 
 # dnd-core
@@ -29,6 +29,6 @@ As it turns out, these problems are much easier to solve when DOM is thrown out 
 
 ## What's the API like?
 
-[Tests](https://github.com/react-dnd/dnd-core/tree/master/test) should give you some idea. You register drag sources and drop targets, connect a backend (you can use barebones `TestBackend` or implement a fancy real one yourself), and your drag sources and drop targets magically begin to interact.
+[Tests](https://github.com/react-dnd/dnd-core/tree/main/test) should give you some idea. You register drag sources and drop targets, connect a backend (you can use barebones `TestBackend` or implement a fancy real one yourself), and your drag sources and drop targets magically begin to interact.
 
 ![](http://i.imgur.com/6l8CpxZ.png)
