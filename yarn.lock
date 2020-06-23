@@ -10619,10 +10619,10 @@ gatsby-cli@^2.12.45:
     yargs "^15.3.1"
     yurnalist "^1.1.2"
 
-gatsby-core-utils@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.3.5.tgz#3c8f2dc940cec6570d1317f02ba028f327d1e773"
-  integrity sha512-kbwJ5BeQ8OixJVuBb1AGRL6vdkFz9nFBa6gXqjQ6AAXHhYDrjOYrRMIENT1QLoabWo6tlh0Hyl1agfWaQwW8lg==
+gatsby-core-utils@^1.3.5, gatsby-core-utils@^1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.3.7.tgz#235797092a8566454229fff0959f669089225c91"
+  integrity sha512-AF8cLRlVzH8xAGLGxa9YbY3Pkf1PaqqI/fGGBPsvsh4C4vx6yoOjNOMQ3KaG4pSc/0EYeVafV7De0H7IU+CfUQ==
   dependencies:
     ci-info "2.0.0"
     configstore "^5.0.1"
@@ -10708,13 +10708,13 @@ gatsby-plugin-manifest@^2.4.9:
     sharp "^0.25.1"
 
 gatsby-plugin-offline@^3.2.7:
-  version "3.2.9"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.2.9.tgz#23cb90ace60ea586f0b9c62e4f37806e5f00e2a3"
-  integrity sha512-AyW0DDdyqlSrseMlEcyPWxLAGGWFLNP2psP6WeuSifEQJrNIFV5FHU3prd925jXYW+aJ84qjLjKDDvNN/6c8xw==
+  version "3.2.12"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.2.12.tgz#5a6a88b8d4f130487769e2be3a3bb609ab135fec"
+  integrity sha512-Vu+sgPwD4sGyXP0ENafvr6Lp2si6CqNkYVA6d8o2G05nyuhjaCU+UloAOXaXWISiG/uNyg7/keVBdfbtTAKtXw==
   dependencies:
     "@babel/runtime" "^7.10.2"
     cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^1.3.5"
+    gatsby-core-utils "^1.3.7"
     glob "^7.1.6"
     idb-keyval "^3.2.0"
     lodash "^4.17.15"
