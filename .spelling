@@ -116,3 +116,8 @@ A1
 submethods
 360
 16.8.
+jsdom
+DragEvent
+DataTransfer
+dataTransfer
+DevTools
