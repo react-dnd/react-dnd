@@ -52,11 +52,19 @@ For the [`DragSource`](/docs/api/drag-source), [`DropTarget`](/docs/api/drop-tar
 
 ```jsx
 // Wrong:
-export default DragSource(YourComponent)(/* ... */);
-export default DragSource(YourComponent, /* ... */);
+export default DragSource(YourComponent)(/* ... */)
+export default DragSource(YourComponent /* ... */)
 
 // Correct:
-export default DragSource(/* ... */)(YourComponent);
+export default DragSource(/* ... */)(YourComponent)
 ```
 
 Remember, **the component comes last!**
+
+### You want to inspect what's happening internally with Redux.
+
+You can enable [Redux DevTools](https://github.com/reduxjs/redux-devtools) by adding a `debugMode` prop to your [provider](/docs/api/dnd-provider), with the value of `true`.
+
+```jsx
+<DndProvider debugMode={true} backend={HTML5Backend}>
+```
