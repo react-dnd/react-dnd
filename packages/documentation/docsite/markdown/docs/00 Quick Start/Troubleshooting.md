@@ -63,7 +63,7 @@ Remember, **the component comes last!**
 
 ### You want to inspect what's happening internally with Redux.
 
-You can enable [Redux devtools](https://github.com/reduxjs/redux-devtools) by adding a `debugMode` prop to your [provider](/docs/api/dnd-provider), with the value of `true`.
+You can enable [Redux DevTools](https://github.com/reduxjs/redux-devtools) by adding a `debugMode` prop to your [provider](/docs/api/dnd-provider), with the value of `true`.
 
 ```jsx
 <DndProvider debugMode={true} backend={HTML5Backend}>

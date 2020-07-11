@@ -96,34 +96,13 @@ it('can be tested with the testing backend', () => {
 
 #### Simulate the DOM
 
-You can test drag and drop interactions using the [HTML 5 backend](/docs/backends/html5) or [touch backend](/docs/backends/touch) with [JSDOM](https://github.com/jsdom/jsdom) in your testing library. Many testing libraries, like [Jest](https://jestjs.io/docs/en/configuration#testenvironment-string), use JSDOM by default.
+You can test drag and drop interactions using the [HTML 5 backend](/docs/backends/html5) or [touch backend](/docs/backends/touch) with [jsdom](https://github.com/jsdom/jsdom) in your testing library. Many testing libraries, like [Jest](https://jestjs.io/docs/en/configuration#testenvironment-string), use jsdom by default.
 
-Note that JSDOM does not have a DragEvent or [DataTransfer](https://github.com/jsdom/jsdom/issues/1568) object, which will affect the preview image during drag and file drag testing. Events interactions will also not properties to do with rendering, like element widths, or coordinates.
+Note that jsdom does not have a DragEvent or [DataTransfer](https://github.com/jsdom/jsdom/issues/1568) object, which will affect the preview image during drag and file drag testing. Events interactions will also not properties to do with rendering, like element widths, or coordinates.
 
 You can add these values to your event object properties yourself, however.
 
 ### Libraries
-
-#### With create-react-app
-
-If you are using `create-react-app`, which uses Jest to drive unit tests, you can use the [react-app-rewired](https://github.com/timarney/react-app-rewired) to override the default Jest configuration without ejecting.
-
-```js
-/* config-overrides.js */
-module.exports = {
-  jest: (config) => {
-    config.moduleNameMapper = Object.assign({}, config.moduleNameMapper, {
-      '^dnd-core$': 'dnd-core/dist/cjs',
-      '^react-dnd$': 'react-dnd/dist/cjs',
-      '^react-dnd-html5-backend$': 'react-dnd-html5-backend/dist/cjs',
-      '^react-dnd-touch-backend$': 'react-dnd-touch-backend/dist/cjs',
-      '^react-dnd-test-backend$': 'react-dnd-test-backend/dist/cjs',
-      '^react-dnd-test-utils$': 'react-dnd-test-utils/dist/cjs'
-    })
-    return config
-  }
-}
-```
 
 #### Enzyme
 
