@@ -9,30 +9,9 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 React DnD is test-friendly. The whole drag and drop interaction, including the rendering of your components, as well as the side effects you perform in response to the drag and drop events, can be tested.
 
-There are several different approaches to testing React components. React DnD is not opinionated and lets you use either of them. **Neither of those approaches require the browser event system to be available.**
+There are several different approaches to testing React components. React DnD is not opinionated and lets you use any of them. **Not all approaches require that the browser event system be available.**
 
 A few test examples are included with the React DnD inside its `examples` folder. Run `yarn` and `yarn test` inside the `react-dnd` root folder to start them.
-
-#### With create-react-app
-
-If you are using `create-react-app`, which uses Jest to drive unit tests, you can use the [react-app-rewired](https://github.com/timarney/react-app-rewired) to override the default Jest configuration without ejecting.
-
-```js
-/* config-overrides.js */
-module.exports = {
-  jest: (config) => {
-    config.moduleNameMapper = Object.assign({}, config.moduleNameMapper, {
-      '^dnd-core$': 'dnd-core/dist/cjs',
-      '^react-dnd$': 'react-dnd/dist/cjs',
-      '^react-dnd-html5-backend$': 'react-dnd-html5-backend/dist/cjs',
-      '^react-dnd-touch-backend$': 'react-dnd-touch-backend/dist/cjs',
-      '^react-dnd-test-backend$': 'react-dnd-test-backend/dist/cjs',
-      '^react-dnd-test-utils$': 'react-dnd-test-utils/dist/cjs'
-    })
-    return config
-  }
-}
-```
 
 ### Testing the Components in Isolation
 
@@ -69,7 +48,9 @@ it('can be tested independently', () => {
 
 ### Testing the Drag and Drop Interaction
 
-If you want to test the whole interaction, and not only the individual component rendering, you should use the [test backend](/docs/backends/test). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering).
+#### Test Backend
+
+If you want to test the whole interaction, and not only the individual component rendering, you can use the [test backend](/docs/backends/test). **The test backend does not require the DOM** so you can also use it with [`ReactShallowRenderer`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering).
 
 This is currently the least documented part of React DnD because it exposes the underlying concepts from the [DnD Core](https://github.com/react-dnd/dnd-core), the library powering React DnD inside. You can learn more about the test backend and its methods from the [DnD Core tests](https://github.com/react-dnd/dnd-core/tree/v1.1.0/src/__tests__).
 
@@ -113,7 +94,17 @@ it('can be tested with the testing backend', () => {
 })
 ```
 
-### Testing with Enzyme
+#### Simulate the DOM
+
+You can test drag and drop interactions using the [HTML 5 backend](/docs/backends/html5) or [touch backend](/docs/backends/touch) with [jsdom](https://github.com/jsdom/jsdom) in your testing library. Many testing libraries, like [Jest](https://jestjs.io/docs/en/configuration#testenvironment-string), use jsdom by default.
+
+Note that jsdom does not have a DragEvent or [DataTransfer](https://github.com/jsdom/jsdom/issues/1568) object, which will affect the preview image during drag and file drag testing. Events interactions will also not properties to do with rendering, like element widths, or coordinates.
+
+You can add these values to your event object properties yourself, however.
+
+### Libraries
+
+#### Enzyme
 
 [Enzyme](https://github.com/airbnb/enzyme) is a commonly-used tool for testing React components.
 Because of a [bug in Enzyme](https://github.com/airbnb/enzyme/issues/1852), you'll want to wrap your component in a fragment when you mount it.
@@ -133,3 +124,21 @@ const root = Enzyme.mount(
 
 const backend = ref.current.getManager().getBackend()
 ```
+
+#### React Testing Library
+
+Here is an example of testing DOM interactions directly, using the HTML5 backend:
+
+```jsx
+render(<Board />)
+let boardSquares = screen.getAllByRole('gridcell')
+let dropSquare = boardSquares[0]
+let knight = boardSquares[18].firstChild
+
+fireEvent.dragStart(knight)
+fireEvent.dragEnter(dropSquare)
+fireEvent.dragOver(dropSquare)
+fireEvent.drop(dropSquare)
+```
+
+If you need dataTransfer properties, these can also [be added](https://testing-library.com/docs/dom-testing-library/api-events).
