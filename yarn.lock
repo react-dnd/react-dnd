@@ -1295,10 +1295,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2", "@babel/runtime@^7.9.6":
-  version "7.10.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
-  integrity sha512-6sF3uQw2ivImfVIl62RZ7MXhO2tap69WeWK57vAaimT6AZbE4FbqjdEJIN1UqoD6wI6B+1n9UiagafH1sxjOtg==
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2", "@babel/runtime@^7.9.6":
+  version "7.11.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
+  integrity sha512-TeWkU52so0mPtDcaCTxNBI/IHiz0pZgr8VEFqXFtZWpYD08ZB6FaSwVAS8MKRQAP3bYKiVjwysOJgMFY28o6Tw==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -10619,10 +10619,10 @@ gatsby-cli@^2.12.45:
     yargs "^15.3.1"
     yurnalist "^1.1.2"
 
-gatsby-core-utils@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.3.5.tgz#3c8f2dc940cec6570d1317f02ba028f327d1e773"
-  integrity sha512-kbwJ5BeQ8OixJVuBb1AGRL6vdkFz9nFBa6gXqjQ6AAXHhYDrjOYrRMIENT1QLoabWo6tlh0Hyl1agfWaQwW8lg==
+gatsby-core-utils@^1.3.15, gatsby-core-utils@^1.3.5:
+  version "1.3.15"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.3.15.tgz#6fad76a238df514afa70fed0f94427fbb39762ca"
+  integrity sha512-np1tJCGejhCHtgHdFl6+y5EwVAzdrieJZ3hdvpeOrJ22bL9ktl5XVLy4K937ThgxHLp8+ElMDVdziNun5tC8eg==
   dependencies:
     ci-info "2.0.0"
     configstore "^5.0.1"
@@ -10990,13 +10990,13 @@ gatsby-telemetry@^1.3.11:
     uuid "3.4.0"
 
 gatsby-transformer-remark@^2.8.13:
-  version "2.8.15"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.8.15.tgz#fede4f0048dc3daadd1e35efab0563505bdbac75"
-  integrity sha512-rrczI9oRECjVeGEVg0pFPsfSKz6E9reh2MX9/z20p8yCxORHfBKgDlRVrtgHsMSs7dmpDZzccLB69dWMzrzuUw==
+  version "2.8.28"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.8.28.tgz#e3e05c7c953303cff8569d0f885c38641d42e7bd"
+  integrity sha512-89f3ouvgXx7ZMvqk7zggdnbucvGs0w9z0k8Gqn8RMhipPRWeGngh2+WOh9q9ekus1e8wyMJxTe0kFdn37KHykg==
   dependencies:
-    "@babel/runtime" "^7.10.2"
+    "@babel/runtime" "^7.10.3"
     bluebird "^3.7.2"
-    gatsby-core-utils "^1.3.5"
+    gatsby-core-utils "^1.3.15"
     gray-matter "^4.0.2"
     hast-util-raw "^4.0.0"
     hast-util-to-html "^4.0.1"
@@ -11009,7 +11009,7 @@ gatsby-transformer-remark@^2.8.13:
     remark-retext "^3.1.3"
     remark-stringify "6.0.4"
     retext-english "^3.0.4"
-    sanitize-html "^1.25.0"
+    sanitize-html "^1.27.0"
     underscore.string "^3.3.5"
     unified "^6.2.0"
     unist-util-remove-position "^1.1.4"
@@ -17283,6 +17283,11 @@ parse-path@^4.0.0:
     is-ssh "^1.3.0"
     protocols "^1.4.0"
 
+parse-srcset@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/parse-srcset/-/parse-srcset-1.0.2.tgz#f2bd221f6cc970a938d88556abc589caaaa2bde1"
+  integrity sha1-8r0iH2zJcKk42IVWq8WJyqqiveE=
+
 parse-unit@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parse-unit/-/parse-unit-1.0.1.tgz#7e1bb6d5bef3874c28e392526a2541170291eecf"
@@ -20204,17 +20209,15 @@ sane@^4.0.3:
     minimist "^1.1.1"
     walker "~1.0.5"
 
-sanitize-html@^1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/sanitize-html/-/sanitize-html-1.25.0.tgz#e55ceac80ac6ea979f0a88400af4b9f67f938179"
-  integrity sha512-SyXESgCXWsclj/SyG53C1bmcOpmdcDYTCgr9nPE/Z9mUhTgj6d/wXDN1HS+U7ahf4DALgUPXSnm7d9koYimMdw==
+sanitize-html@^1.27.0:
+  version "1.27.2"
+  resolved "https://registry.yarnpkg.com/sanitize-html/-/sanitize-html-1.27.2.tgz#08c0cee76e594c677ab1c466594f72cb1142f399"
+  integrity sha512-REZETvhFFChM3zyQS8XoR02j5U56HtyQkxsc8cb5HEi3XU0AAX9TuKvWe3ESR0F0IA81ZghA+5YpJg8C35AFyQ==
   dependencies:
-    chalk "^2.4.1"
     htmlparser2 "^4.1.0"
     lodash "^4.17.15"
+    parse-srcset "^1.0.2"
     postcss "^7.0.27"
-    srcset "^2.0.1"
-    xtend "^4.0.1"
 
 sanitize.css@^10.0.0:
   version "10.0.0"
@@ -21042,11 +21045,6 @@ squeak@^1.0.0:
     chalk "^1.0.0"
     console-stream "^0.1.1"
     lpad-align "^1.0.1"
-
-srcset@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/srcset/-/srcset-2.0.1.tgz#8f842d357487eb797f413d9c309de7a5149df5ac"
-  integrity sha512-00kZI87TdRKwt+P8jj8UZxbfp7mK2ufxcIMWvhAOZNJTRROimpHeruWrGvCZneiuVDLqdyHefVp748ECTnyUBQ==
 
 sshpk@^1.7.0:
   version "1.16.1"
