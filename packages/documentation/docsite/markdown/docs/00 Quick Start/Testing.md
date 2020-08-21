@@ -141,4 +141,6 @@ fireEvent.dragOver(dropSquare)
 fireEvent.drop(dropSquare)
 ```
 
+- [React Testing Library & React DnD Chessboard Example](https://github.com/laststance/react-testing-library-react-dnd-chessboard-example)
+
 If you need dataTransfer properties, these can also [be added](https://testing-library.com/docs/dom-testing-library/api-events).
