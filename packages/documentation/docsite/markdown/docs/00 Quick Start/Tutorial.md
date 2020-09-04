@@ -567,12 +567,11 @@ See? The `drop` method has the `props` of the `BoardSquare` in scope, so it know
 In my collecting function I'm going to ask the monitor whether the pointer is currently over the `BoardSquare` so I can highlight it:
 
 ```jsx
-const [{ isOver, canDrop }, drop] = useDrop({
+const [{ isOver }, drop] = useDrop({
   accept: ItemTypes.KNIGHT,
   drop: () => moveKnight(x, y),
-  collect: (mon) => ({
-    isOver: !!mon.isOver(),
-    canDrop: !!mon.canDrop()
+  collect: monitor => ({
+    isOver: !!monitor.isOver(),
   })
 })
 ```
