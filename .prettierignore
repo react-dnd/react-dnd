@@ -1,0 +1,6 @@
+node_modules/
+dist/
+lib/
+build/
+pnpm-lock.yaml
+pnpm-workspace.yaml
