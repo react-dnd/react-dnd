@@ -1,5 +1,5 @@
 #!/bin/sh
 set -e
-npx tsc -w --preserveWatchOutput&
-npx babel --config-file=../../../babel.config.js lib --out-dir dist/esm -w&
-npx babel --config-file=../../../babel.config.cjs.js lib --out-dir dist/cjs -w
+tsc -w --preserveWatchOutput&
+babel --config-file=../../../babel.config.js lib --out-dir dist/esm -w&
+babel --config-file=../../../babel.config.cjs.js lib --out-dir dist/cjs -w
