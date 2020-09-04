@@ -36,6 +36,10 @@ importers:
       npm-run-all: 4.1.5
       prettier: 2.1.1
       pretty-quick: 3.0.0_prettier@2.1.1
+      react-dnd: 'link:packages/core/react-dnd'
+      react-dnd-html5-backend: 'link:packages/core/html5-backend'
+      react-dnd-test-utils: 'link:packages/testing/test-utils'
+      react-dnd-touch-backend: 'link:packages/core/touch-backend'
       replace-in-file: 6.1.0
       rimraf: 3.0.2
       rollup: 2.26.10
@@ -79,6 +83,10 @@ importers:
       npm-run-all: ^4.1.5
       prettier: ^2.1.1
       pretty-quick: ^3.0.0
+      react-dnd: ^11.1.3
+      react-dnd-html5-backend: 11.1.3
+      react-dnd-test-utils: 11.1.3
+      react-dnd-touch-backend: 11.1.3
       replace-in-file: ^6.1.0
       rimraf: ^3.0.2
       rollup: ^2.26.10
@@ -91,9 +99,12 @@ importers:
       '@react-dnd/asap': 4.0.0
       '@react-dnd/invariant': 2.0.0
       redux: 4.0.5
+    devDependencies:
+      react-dnd-test-backend: 'link:../../testing/test-backend'
     specifiers:
       '@react-dnd/asap': ^4.0.0
       '@react-dnd/invariant': ^2.0.0
+      react-dnd-test-backend: ^11.1.3
       redux: ^4.0.4
   packages/core/html5-backend:
     dependencies:
@@ -120,6 +131,7 @@ importers:
       '@types/react': 16.9.49
       '@types/react-dom': 16.9.8
       react: 16.13.1
+      react-dnd-test-backend: 'link:../../testing/test-backend'
       react-dom: 16.13.1_react@16.13.1
     specifiers:
       '@react-dnd/invariant': ^2.0.0
@@ -130,6 +142,7 @@ importers:
       dnd-core: ^11.1.3
       hoist-non-react-statics: ^3.3.0
       react: ^16.12.0
+      react-dnd-test-backend: ^11.1.3
       react-dom: ^16.12.0
   packages/core/touch-backend:
     dependencies:
