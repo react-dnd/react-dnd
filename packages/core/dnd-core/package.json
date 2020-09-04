@@ -20,8 +20,5 @@
     "@react-dnd/asap": "^4.0.0",
     "@react-dnd/invariant": "^2.0.0",
     "redux": "^4.0.4"
-  },
-  "devDependencies": {
-    "react-dnd-test-backend": "^11.1.3"
   }
 }
