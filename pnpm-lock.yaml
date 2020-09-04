@@ -37,6 +37,7 @@ importers:
       prettier: 2.1.1
       pretty-quick: 3.0.0_prettier@2.1.1
       replace-in-file: 6.1.0
+      rimraf: 3.0.2
       rollup: 2.26.10
       rollup-plugin-terser: 7.0.2_rollup@2.26.10
       shx: 0.3.2
@@ -79,6 +80,7 @@ importers:
       prettier: ^2.1.1
       pretty-quick: ^3.0.0
       replace-in-file: ^6.1.0
+      rimraf: ^3.0.2
       rollup: ^2.26.10
       rollup-plugin-terser: ^7.0.2
       shx: ^0.3.2

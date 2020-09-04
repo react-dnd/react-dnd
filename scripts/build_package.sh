@@ -7,5 +7,5 @@ wait
 
 if [ -f ./rollup.config.js ]
 then
-  npx rollup -c rollup.config.js
+  rollup -c rollup.config.js
 fi
