@@ -25,9 +25,9 @@ For these examples, the following flags are available. To enable them add them t
 To run these examples locally, clone the `react-dnd` repository, and run
 
 ```
-> yarn install
-> yarn build
-> yarn start
+> pnpm install
+> pnpm build
+> pnpm start
 ```
 
 It will take a while to start, but after the site is built, you can access the examples by opening [http://localhost:8000/](http://localhost:8000/) and clicking “Examples” in the navigation bar.

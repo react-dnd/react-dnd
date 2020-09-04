@@ -17,6 +17,7 @@
     "start": "../../../scripts/watch_package.sh"
   },
   "dependencies": {
+    "@react-dnd/invariant": "^2.0.0",
     "@react-dnd/shallowequal": "^2.0.0",
     "@types/hoist-non-react-statics": "^3.3.1",
     "dnd-core": "^11.1.3",
