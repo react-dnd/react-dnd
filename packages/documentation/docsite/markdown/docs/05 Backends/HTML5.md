@@ -12,7 +12,7 @@ This is the primary backend supported by React-DnD. It uses [the HTML5 drag and 
 ### Installation
 
 ```
-yarn add react-dnd-html5-backend
+npm install react-dnd-html5-backend
 ```
 
 ### Extras
