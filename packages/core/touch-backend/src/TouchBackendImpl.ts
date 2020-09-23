@@ -376,9 +376,9 @@ export class TouchBackendImpl implements Backend {
 		return this.handleTopMoveStartDelay
 	}
 
-	public handleTopMoveStart = (e: MouseEvent | TouchEvent): void => {
+	public handleTopMoveStart = (e: MouseEvent | TouchEvent): boolean => {
 		if (!eventShouldStartDrag(e as MouseEvent)) {
-			return
+			return false
 		}
 
 		// Don't prematurely preventDefault() here since it might:
@@ -394,6 +394,8 @@ export class TouchBackendImpl implements Backend {
 			this._mouseClientOffset = clientOffset
 		}
 		this.waitingForDelay = false
+
+		return true
 	}
 
 	public handleTopMoveStartDelay = (e: Event): void => {
@@ -405,10 +407,20 @@ export class TouchBackendImpl implements Backend {
 			e.type === eventNames.touch.start
 				? this.options.delayTouchStart
 				: this.options.delayMouseStart
-		this.timeout = (setTimeout(
-			this.handleTopMoveStart.bind(this, e as any),
-			delay,
-		) as any) as ReturnType<typeof setTimeout>
+
+		this.timeout = (setTimeout(() => {
+			const started = this.handleTopMoveStart(e as any)
+
+			if (this.options.delayedStartBeginsDrag && started) {
+				const moveStartSourceIds = this.moveStartSourceIds
+				this.moveStartSourceIds = undefined
+				this.actions.beginDrag(moveStartSourceIds, {
+					clientOffset: this._mouseClientOffset,
+					getSourceClientOffset: this.getSourceClientOffset,
+					publishSource: false,
+				})
+			}
+		}, delay) as any) as ReturnType<typeof setTimeout>
 		this.waitingForDelay = true
 	}
 
