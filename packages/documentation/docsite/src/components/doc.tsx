@@ -20,7 +20,8 @@ export const Doc: React.FC<DocProps> = memo(function Doc({ docPage }) {
 })
 
 const HtmlContainer = styled.div`
-	width: 75%;
+	width: 100%;
+	max-width: 34rem;
 `
 
 const Container = styled.div`
