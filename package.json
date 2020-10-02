@@ -47,7 +47,7 @@
     "lint:spelling": "mdspell 'packages/documentation/docsite/markdown/**/*.md' --en-us --report",
     "lint:tone": "alex .",
     "lint:formatting": "pretty-quick --check",
-    "lint": "run-s lint:*",
+    "lint": "run-s 'lint:*'",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "release_canary": "lerna publish -c --preid next --yes",
     "release": "run-s clean test go_no_go release:packages changelog",
