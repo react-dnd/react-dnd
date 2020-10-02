@@ -1,5 +1,5 @@
 {
-  "name": "react-dnd-example-6",
+  "name": "react-dnd-example-5",
   "main": "src/index.js",
   "description": "auto-generated package for codesandbox import",
   "private": true,
@@ -11,8 +11,8 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-scripts": "3.2.0",
     "react-dnd": "11.1.3",
     "react-dnd-html5-backend": "11.1.3",

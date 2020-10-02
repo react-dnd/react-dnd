@@ -1,14 +1,12 @@
-import React from 'react'
-import { BoxWithHandle } from './BoxWithHandle'
+import React from 'react';
+import { BoxWithHandle } from './BoxWithHandle';
 const style = {
-  width: 400,
-}
+    width: 400,
+};
 export const Container = () => {
-  {
-    return (
-      <div style={style}>
-        <BoxWithHandle />
-      </div>
-    )
-  }
-}
+    {
+        return (<div style={style}>
+				<BoxWithHandle />
+			</div>);
+    }
+};

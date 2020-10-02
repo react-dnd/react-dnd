@@ -1,13 +1,11 @@
-import React from 'react'
-import { BoxWithImage } from './BoxWithImage'
-import { BoxWithHandle } from './BoxWithHandle'
+import React from 'react';
+import { BoxWithImage } from './BoxWithImage';
+import { BoxWithHandle } from './BoxWithHandle';
 export const Container = () => {
-  return (
-    <div>
-      <div style={{ marginTop: '1.5rem' }}>
-        <BoxWithHandle />
-        <BoxWithImage />
-      </div>
-    </div>
-  )
-}
+    return (<div>
+			<div style={{ marginTop: '1.5rem' }}>
+				<BoxWithHandle />
+				<BoxWithImage />
+			</div>
+		</div>);
+};

@@ -1,8 +1,6 @@
-import React from 'react'
+import React from 'react';
 export const Overlay = ({ color }) => {
-  return (
-    <div
-      style={{
+    return (<div style={{
         position: 'absolute',
         top: 0,
         left: 0,
@@ -11,7 +9,5 @@ export const Overlay = ({ color }) => {
         zIndex: 1,
         opacity: 0.5,
         backgroundColor: color,
-      }}
-    />
-  )
-}
+    }}/>);
+};
