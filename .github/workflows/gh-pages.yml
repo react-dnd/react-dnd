@@ -17,7 +17,7 @@ jobs:
 
       - run: yarn install
       - run: yarn build
-      - run: yarn lerna run build_site --scope react-dnd-documentation
+      - run: yarn build_docsite
 
       - name: deploy
         uses: peaceiris/actions-gh-pages@v2.10.1
