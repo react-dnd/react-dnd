@@ -11,7 +11,7 @@ React DnD is test-friendly. The whole drag and drop interaction, including the r
 
 There are several different approaches to testing React components. React DnD is not opinionated and lets you use any of them. **Not all approaches require that the browser event system be available.**
 
-A few test examples are included with the React DnD inside its `examples` folder. Run `pnpm install` and `pnpm test` inside the `react-dnd` root folder to start them.
+A few test examples are included with the React DnD inside its `examples` folder. Run `yarn install` and `yarn test` inside the `react-dnd` root folder to start them.
 
 ### Testing the Components in Isolation
 

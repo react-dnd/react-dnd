@@ -2,8 +2,8 @@
   "name": "react-dnd",
   "version": "11.1.3",
   "description": "Drag and Drop for React",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "types": "lib/index.d.ts",
   "sideEffects": false,
   "repository": {
@@ -19,15 +19,16 @@
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
     "@react-dnd/shallowequal": "^2.0.0",
-    "@types/hoist-non-react-statics": "^3.3.1",
     "dnd-core": "^11.1.3",
-    "hoist-non-react-statics": "^3.3.0"
+    "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@types/react": "^16.9.35",
+    "@types/enzyme": "^3.10.7",
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/react": "^16.9.50",
     "@types/react-dom": "^16.9.8",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "peerDependencies": {
     "react": ">= 16.9.0",

@@ -15,9 +15,8 @@ jobs:
         with:
           node-version: 12.x
 
-      - run: npm i -g pnpm
-      - run: pnpm install
-      - run: pnpm build
+      - run: yarn install
+      - run: yarn build
       - run: yarn lerna run build_site --scope react-dnd-documentation
 
       - name: deploy
