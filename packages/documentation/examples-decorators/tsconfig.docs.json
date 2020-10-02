@@ -3,7 +3,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
-    "outDir": "./dist/docs",
+    "outDir": "dist/docs",
     "baseUrl": "./",
     "declaration": false,
     "emitDeclarationOnly": false,
