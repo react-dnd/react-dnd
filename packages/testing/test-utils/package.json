@@ -7,11 +7,12 @@
   "types": "lib/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "clean": "../../../scripts/clean_package.sh",
-    "build": "../../../scripts/build_package.sh",
+    "clean": "just-scripts clean",
+    "build": "just-scripts build",
     "start": "../../../scripts/watch_package.sh"
   },
   "devDependencies": {
+    "@react-dnd/build": "^11.1.3",
     "@types/react": "^16.9.50",
     "@types/react-dom": "^16.9.8",
     "dnd-core": "^11.1.3",

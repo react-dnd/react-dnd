@@ -14,9 +14,9 @@
   "license": "MIT",
   "scripts": {
     "build": "run-s build:pkg build:docs",
-    "clean": "../../../scripts/clean_package.sh",
+    "clean": "just-scripts clean",
     "start": "../../../scripts/watch_package.sh",
-    "build:pkg": "../../../scripts/build_package.sh",
+    "build:pkg": "just-scripts build",
     "build:docs": "tsc -b tsconfig.docs.json"
   },
   "dependencies": {
@@ -29,6 +29,7 @@
     "react-frame-component": "^4.1.3"
   },
   "devDependencies": {
+    "@react-dnd/build": "^11.1.3",
     "@types/enzyme": "^3.10.7",
     "@types/faker": "^5.1.2",
     "@types/lodash": "^4.14.161",

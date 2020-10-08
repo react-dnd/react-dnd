@@ -8,8 +8,8 @@
   "types": "./lib/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "../../../scripts/build_package.sh",
-    "clean": "../../../scripts/clean_package.sh",
+    "build": "just-scripts build",
+    "clean": "just-scripts clean",
     "start": "../../../scripts/watch_package.sh"
   },
   "repository": {
@@ -20,5 +20,8 @@
     "@react-dnd/asap": "^4.0.0",
     "@react-dnd/invariant": "^2.0.0",
     "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@react-dnd/build": "^11.1.3"
   }
 }

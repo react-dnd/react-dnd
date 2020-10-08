@@ -68,6 +68,7 @@
     }
   },
   "workspaces": [
+    "scripts",
     "packages/*/*"
   ],
   "devDependencies": {
@@ -190,7 +191,9 @@
     ]
   },
   "resolutions": {
-    "@types/react": "16.9.50",
-    "@types/react-dom": "16.9.8"
+    "@types/react": "16.9.51",
+    "@types/react-dom": "16.9.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }

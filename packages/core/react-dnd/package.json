@@ -12,8 +12,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "clean": "../../../scripts/clean_package.sh",
-    "build": "../../../scripts/build_package.sh",
+    "clean": "just-scripts clean",
+    "build": "just-scripts build",
     "start": "../../../scripts/watch_package.sh"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
+    "@react-dnd/build": "^11.1.3",
     "@types/enzyme": "^3.10.7",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^16.9.50",
