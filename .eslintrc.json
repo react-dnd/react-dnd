@@ -1,0 +1,30 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react-hooks", "no-for-of-loops"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "settings": {
+    "react": {
+      "version": "16.8"
+    }
+  },
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "no-for-of-loops/no-for-of-loops": 2,
+    "react/prop-types": 0,
+
+    // TODO: re-enable
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0
+  }
+}

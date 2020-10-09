@@ -37,10 +37,10 @@
   "homepage": "https://github.com/react-dnd/react-dnd",
   "scripts": {
     "preinstall": "npx only-allow yarn",
-    "pkgs:clean": "yarn workspaces foreach -pv run clean",
+    "clean": "yarn workspaces foreach -pv run clean",
     "pkgs:build": "yarn workspaces foreach -pv --topological-dev run build",
     "pkgs:test": "yarn workspaces foreach -pv run test",
-    "pipeline": "run-s pkgs:clean pkgs:build pkgs:test",
+    "pipeline": "run-s pkgs:build pkgs:test",
     "build_docsite": "yarn build:docsite",
     "unit_test": "jest",
     "unit_test:watch": "jest --watch",
@@ -59,22 +59,11 @@
     "watch": "yarn workspaces foreach -pvi run watch",
     "git-is-clean": "git diff-index --quiet HEAD"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "run-s precommit:lint precommit:format",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "workspaces": [
     "scripts",
     "packages/*/*"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
-    "@babel/preset-env": "^7.11.5",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@types/jest": "^26.0.14",
@@ -112,75 +101,6 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
-  },
-  "jest": {
-    "clearMocks": true,
-    "cacheDirectory": ".jest-cache",
-    "setupFilesAfterEnv": [
-      "<rootDir>/jest/setup-enzyme.js"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx"
-    ],
-    "modulePaths": [
-      "<rootDir>/packages/core/",
-      "<rootDir>/packages/testing/"
-    ],
-    "collectCoverageFrom": [
-      "packages/core/**/*.{ts,tsx}",
-      "!**/node_modules/**",
-      "!**/lib/**",
-      "!**/__tests__/**"
-    ],
-    "testMatch": [
-      "<rootDir>/__tests__/**/?(*.)(spec|test).ts(x|)",
-      "<rootDir>/packages/core/dnd-core/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
-      "<rootDir>/packages/core/react-dnd/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
-      "<rootDir>/packages/core/html5-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)",
-      "<rootDir>/packages/core/touch-backend/src/**/__tests__/**/?(*.)(spec|test).ts(x|)"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.jest.json",
-        "diagnostics": {
-          "pathRegex": "/.(spec|test).ts$/"
-        }
-      }
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier"
-    ]
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "useTabs": true,
-    "overrides": [
-      {
-        "files": "*.md",
-        "options": {
-          "useTabs": false,
-          "trailingComma": "none"
-        }
-      },
-      {
-        "files": "*.json",
-        "options": {
-          "useTabs": false,
-          "tabWidth": 2
-        }
-      }
-    ]
   },
   "resolutions": {
     "@types/react": "16.9.51",

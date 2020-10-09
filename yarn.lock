@@ -14,31 +14,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/cli@npm:^7.11.6":
-  version: 7.11.6
-  resolution: "@babel/cli@npm:7.11.6"
-  dependencies:
-    chokidar: ^2.1.8
-    commander: ^4.0.1
-    convert-source-map: ^1.1.0
-    fs-readdir-recursive: ^1.1.0
-    glob: ^7.0.0
-    lodash: ^4.17.19
-    make-dir: ^2.1.0
-    slash: ^2.0.0
-    source-map: ^0.5.0
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  dependenciesMeta:
-    chokidar:
-      optional: true
-  bin:
-    babel: ./bin/babel.js
-    babel-external-helpers: ./bin/babel-external-helpers.js
-  checksum: b52d62e3c751b3357130a458487c1d7f08a0c348a56f5da200f6e12ac6a1b8b560190c50085abb12f4cba9b2a84c8478e155acf3621912d42e67b248da0c40c1
-  languageName: node
-  linkType: hard
-
 "@babel/code-frame@npm:7.8.3":
   version: 7.8.3
   resolution: "@babel/code-frame@npm:7.8.3"
@@ -3389,6 +3364,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@react-dnd/build@workspace:scripts"
   dependencies:
+    "@babel/core": ^7.11.6
+    "@babel/plugin-proposal-class-properties": ^7.10.4
+    "@babel/plugin-proposal-object-rest-spread": ^7.11.0
+    "@babel/preset-env": ^7.11.5
     "@rollup/plugin-commonjs": ^15.1.0
     "@rollup/plugin-node-resolve": ^9.0.0
     "@rollup/plugin-replace": ^2.3.3
@@ -8185,7 +8164,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^4.0.1, commander@npm:^4.1.1":
+"commander@npm:^4.1.1":
   version: 4.1.1
   resolution: "commander@npm:4.1.1"
   checksum: 448585071bf8fb4c0bf9dd52abaee43dea086f801334caec2c8e8c9f456f8abc224c1614ccbbdbf7da5ac2524d230f13cf1fc86c233cf8a041ebecea7df106e9
@@ -8683,7 +8662,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"convert-source-map@npm:1.7.0, convert-source-map@npm:^1.1.0, convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
+"convert-source-map@npm:1.7.0, convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
   version: 1.7.0
   resolution: "convert-source-map@npm:1.7.0"
   dependencies:
@@ -12561,13 +12540,6 @@ __metadata:
     graceful-fs: ^4.1.11
     through2: ^2.0.3
   checksum: a432e19f94af5eefa6a5268ada83994caf94b4ba4898116261ce541c8680858144e23258cb6239aa49a991f94f51e07411e9b2612df1e6ea1f41be094e3e1f67
-  languageName: node
-  linkType: hard
-
-"fs-readdir-recursive@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "fs-readdir-recursive@npm:1.1.0"
-  checksum: dec853d7418a9a2c1295d0dbf602505655bebed76474d656d68ed3e06bc84db651325b795509221f186955791965ec0add261919d464cae76dd3b8564f462054
   languageName: node
   linkType: hard
 
@@ -23523,11 +23495,6 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "react-dnd-parent@workspace:."
   dependencies:
-    "@babel/cli": ^7.11.6
-    "@babel/core": ^7.11.6
-    "@babel/plugin-proposal-class-properties": ^7.10.4
-    "@babel/plugin-proposal-object-rest-spread": ^7.11.0
-    "@babel/preset-env": ^7.11.5
     "@commitlint/cli": ^11.0.0
     "@commitlint/config-conventional": ^11.0.0
     "@types/jest": ^26.0.14

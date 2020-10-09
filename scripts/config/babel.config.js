@@ -1,7 +1,7 @@
 module.exports = {
 	presets: [
 		[
-			'@babel/preset-env',
+			require.resolve('@babel/preset-env'),
 			{
 				modules: false,
 				targets: {
@@ -11,7 +11,7 @@ module.exports = {
 		],
 	],
 	plugins: [
-		'@babel/proposal-class-properties',
-		'@babel/proposal-object-rest-spread',
+		require.resolve('@babel/plugin-proposal-class-properties'),
+		require.resolve('@babel/plugin-proposal-object-rest-spread'),
 	],
 }
