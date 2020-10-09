@@ -3575,6 +3575,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@react-dnd/build@workspace:scripts"
   dependencies:
+    "@rollup/plugin-commonjs": ^15.1.0
+    "@rollup/plugin-node-resolve": ^9.0.0
+    "@rollup/plugin-replace": ^2.3.3
     "@types/chalk": ^2.2.0
     "@types/fancy-log": ^1.3.1
     "@types/gulp": ^4.0.7
@@ -3585,6 +3588,7 @@ __metadata:
     "@types/rimraf": ^3.0.0
     "@types/through2": ^2.0.36
     "@types/undertaker": ^1.2.3
+    "@types/vinyl-source-stream": ^0.0.30
     "@types/webpack": ^4.41.22
     "@types/webpack-merge": ^4.1.5
     "@types/yargs": ^15.0.7
@@ -3594,9 +3598,11 @@ __metadata:
     gulp-babel: ^8.0.0
     gulp-debug: ^4.0.0
     gulp-plumber: ^1.2.1
-    gulp-shell: ^0.8.0
     gulp-typescript: ^6.0.0-alpha.1
     rimraf: ^3.0.2
+    rollup: ^2.29.0
+    rollup-plugin-terser: ^7.0.2
+    rollup-stream: ^1.24.1
     through2: ^4.0.2
     typescript: ^4.0.3
     yargs: ^16.0.3
@@ -4656,6 +4662,15 @@ __metadata:
     "@types/node": "*"
     "@types/vinyl": "*"
   checksum: 6e97c6403cbd50b016f75daaf057189c0528baba1229aa5832284cf862edd5ab59f341f518ce0ca26d27ea87a88fd3a8891e1e1fa3fbc7973b0a1e5c558c0eca
+  languageName: node
+  linkType: hard
+
+"@types/vinyl-source-stream@npm:^0.0.30":
+  version: 0.0.30
+  resolution: "@types/vinyl-source-stream@npm:0.0.30"
+  dependencies:
+    "@types/node": "*"
+  checksum: bd29f4e7a850353cc5a4092f3c7c7f5d37a8fa912810a3151c5f0594a484f806263c3df53d3bc01a6622f6d177ced261fb4585a6fa29b082eae112cb335889da
   languageName: node
   linkType: hard
 
@@ -14629,7 +14644,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gulp-shell@npm:*, gulp-shell@npm:^0.8.0":
+"gulp-shell@npm:*":
   version: 0.8.0
   resolution: "gulp-shell@npm:0.8.0"
   dependencies:
@@ -23980,9 +23995,6 @@ fsevents@^1.2.7:
     "@babel/preset-env": ^7.11.5
     "@commitlint/cli": ^11.0.0
     "@commitlint/config-conventional": ^11.0.0
-    "@rollup/plugin-commonjs": ^15.1.0
-    "@rollup/plugin-node-resolve": ^9.0.0
-    "@rollup/plugin-replace": ^2.3.3
     "@types/jest": ^26.0.14
     "@typescript-eslint/eslint-plugin": ^4.3.0
     "@typescript-eslint/parser": ^4.3.0
@@ -24017,8 +24029,6 @@ fsevents@^1.2.7:
     react-test-renderer: ^16.13.1
     replace-in-file: ^6.1.0
     rimraf: ^3.0.2
-    rollup: ^2.28.2
-    rollup-plugin-terser: ^7.0.2
     shx: ^0.3.2
     ts-jest: ^26.4.1
     typescript: ^4.0.3
@@ -24064,7 +24074,6 @@ fsevents@^1.2.7:
     "@react-dnd/invariant": ^2.0.0
     dnd-core: ^11.1.3
     gulp: ^4.0.2
-    rollup: ^2.28.2
   languageName: unknown
   linkType: soft
 
@@ -25633,9 +25642,27 @@ resolve@1.15.0:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.28.2":
-  version: 2.28.2
-  resolution: "rollup@npm:2.28.2"
+"rollup-stream@npm:^1.24.1":
+  version: 1.24.1
+  resolution: "rollup-stream@npm:1.24.1"
+  dependencies:
+    rollup: ^0.49.2
+  checksum: 0ab11f0878c4e948c823d5e608a8ccdcc3c99e5aa21b8e8870de5673d9e4164abc72e20e0b4d87b56380265827c9dc7d668ea159574d665252dab5b30b7e71fb
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^0.49.2":
+  version: 0.49.3
+  resolution: "rollup@npm:0.49.3"
+  bin:
+    rollup: ./bin/rollup
+  checksum: b2137c756b6a299639fc00d441c76a95286a399900eac10066fcb07a6a943aa0695d33b39201cef858f1d1320c1c05b7c5827d9b25ab0dcd8cd924600c377927
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^2.29.0":
+  version: 2.29.0
+  resolution: "rollup@npm:2.29.0"
   dependencies:
     fsevents: ~2.1.2
   dependenciesMeta:
@@ -25643,7 +25670,7 @@ resolve@1.15.0:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: a0cfb9b5f7a3bd6b1528c18de5b86fa9befa78ee5358fe697c058ddd72325ce4d4b72df2391c8b06c538c92827035e26943b09ffa82b99a35bf3034ebd64e4f9
+  checksum: c5d8b9d8b19a5213e854132cea54bc4d3c9c3e7b66e994de590032c85ff74193721789b1867595182f91e6b15e9a2caaaca4262840957da9cdc3369940754c86
   languageName: node
   linkType: hard
 

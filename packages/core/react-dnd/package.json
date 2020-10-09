@@ -35,5 +35,17 @@
   "peerDependencies": {
     "react": ">= 16.9.0",
     "react-dom": ">= 16.9.0"
+  },
+  "umd": {
+    "name": "ReactDnD",
+    "input": "./lib/index.js",
+    "external": [
+      "react",
+      "react-dom"
+    ],
+    "globals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
+    }
   }
 }
