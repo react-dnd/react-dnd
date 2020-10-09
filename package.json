@@ -37,7 +37,6 @@
   "homepage": "https://github.com/react-dnd/react-dnd",
   "scripts": {
     "preinstall": "npx only-allow yarn",
-    "postinstall": "shx rm -rf node_modules/@types/react-native",
     "build_docsite": "yarn docsite:build",
     "unit_test": "jest",
     "unit_test:watch": "jest --watch",
@@ -111,7 +110,6 @@
     "react-test-renderer": "^16.13.1",
     "replace-in-file": "^6.1.0",
     "rimraf": "^3.0.2",
-    "shx": "^0.3.2",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
   },

@@ -23909,6 +23909,7 @@ fsevents@^1.2.7:
     react-typography: ^0.16.19
     rehype-react: ^6.1.0
     shallow-compare: ^1.2.2
+    shx: ^0.3.2
     styled-components: ^5.2.0
     typography: ^0.16.19
     typography-theme-github: ^0.16.19
@@ -24029,7 +24030,6 @@ fsevents@^1.2.7:
     react-test-renderer: ^16.13.1
     replace-in-file: ^6.1.0
     rimraf: ^3.0.2
-    shx: ^0.3.2
     ts-jest: ^26.4.1
     typescript: ^4.0.3
   languageName: unknown
