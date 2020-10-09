@@ -1,12 +1,12 @@
-import { task, parallel } from 'just-scripts'
+import { parallel, TaskFunction } from 'gulp'
 import rimraf = require('rimraf')
 
-export function defineClean(): void {
+export function defineClean(): TaskFunction {
 	function cleanLib(cb: (err: Error | undefined) => void) {
 		rimraf('lib', cb)
 	}
 	function cleanDist(cb: (err: Error | undefined) => void) {
 		rimraf('dist', cb)
 	}
-	task('clean', parallel(cleanLib, cleanDist))
+	return parallel(cleanLib, cleanDist)
 }

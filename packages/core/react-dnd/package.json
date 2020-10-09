@@ -4,7 +4,7 @@
   "description": "Drag and Drop for React",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "types": "lib/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -12,9 +12,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "clean": "just-scripts clean",
-    "build": "just-scripts build",
-    "start": "../../../scripts/watch_package.sh"
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "watch": "gulp watch"
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
@@ -28,6 +28,7 @@
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^16.9.50",
     "@types/react-dom": "^16.9.8",
+    "gulp": "^4.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
