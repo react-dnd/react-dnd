@@ -55,8 +55,7 @@
     "precommit:lint": "lint-staged",
     "precommit:format": "pretty-quick --staged",
     "watch": "yarn workspaces foreach -pvi run watch",
-    "git-is-clean": "git diff-index --quiet HEAD",
-    "lage": "lage"
+    "git-is-clean": "git diff-index --quiet HEAD"
   },
   "husky": {
     "hooks": {
