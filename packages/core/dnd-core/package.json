@@ -10,7 +10,7 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "start": "gulp watch"
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",

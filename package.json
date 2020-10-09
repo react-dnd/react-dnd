@@ -55,7 +55,6 @@
     "prettify": "pretty-quick --fix",
     "precommit:lint": "lint-staged",
     "precommit:format": "pretty-quick --staged",
-    "start": "yarn workspaces foreach -pvi run start",
     "watch": "yarn workspaces foreach -pvi run watch",
     "git-is-clean": "git diff-index --quiet HEAD",
     "lage": "lage"
