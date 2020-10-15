@@ -34,11 +34,11 @@
     "@types/react-dom": "^16.9.8",
     "enzyme": "^3.11.0",
     "gulp": "^4.0.2",
-    "react": "^17.0.0-rc.3",
+    "react": "^16.14.0",
     "react-dnd-test-backend": "portal:../../testing/test-backend",
     "react-dnd-test-utils": "portal:../../testing/test-utils",
-    "react-dom": "^17.0.0-rc.3",
-    "react-test-renderer": "^17.0.0-rc.3"
+    "react-dom": "^16.14.0",
+    "react-test-renderer": "^16.14.0"
   },
   "peerDependencies": {
     "@types/hoist-non-react-statics": ">= 3.3.1",
