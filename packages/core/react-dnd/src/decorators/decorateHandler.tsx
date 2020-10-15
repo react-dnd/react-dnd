@@ -3,7 +3,7 @@ declare const process: any
 import * as React from 'react'
 import { shallowEqual } from '@react-dnd/shallowequal'
 import { invariant } from '@react-dnd/invariant'
-import hoistStatics from 'hoist-non-react-statics'
+import * as hoistStatics from 'hoist-non-react-statics'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndContext } from '../common/DndContext'
 import { isPlainObject } from '../utils/js_utils'
@@ -56,7 +56,8 @@ export function decorateHandler<Props, CollectedProps, ItemIdType>({
 	const displayName =
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
-	class DragDropContainer extends React.Component<Props>
+	class DragDropContainer
+		extends React.Component<Props>
 		implements DndComponent<Props> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`

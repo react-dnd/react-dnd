@@ -45,7 +45,20 @@
     "react-dom": "^16.14.0"
   },
   "peerDependencies": {
-    "react": ">= 16.9.0",
-    "react-dom": ">= 16.9.0"
+    "@types/node": ">= 12",
+    "prop-types": ">= 15",
+    "react": ">= 16.9",
+    "react-dom": ">= 16.9"
+  },
+  "peerDependenciesMeta": {
+    "@types/node": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
+      "optional": true
+    }
   }
 }
