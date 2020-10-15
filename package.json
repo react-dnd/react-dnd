@@ -38,7 +38,7 @@
   "scripts": {
     "preinstall": "npx only-allow yarn",
     "clean_all": "yarn workspaces foreach -pv run clean",
-    "build_all": "yarn workspaces foreach -pvt run build",
+    "build_all": "yarn workspaces foreach -pv --topological-dev run build",
     "test_all": "yarn workspaces foreach -pv run test",
     "build_docsite": "yarn build:docsite",
     "unit_test": "jest",
