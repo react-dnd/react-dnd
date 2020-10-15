@@ -2,9 +2,12 @@
   "name": "react-dnd",
   "version": "11.1.3",
   "description": "Drag and Drop for React",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "lib/index.d.ts",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/types/index.d.ts"
+  },
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -12,9 +15,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "clean": "../../../scripts/clean_package.sh",
-    "build": "../../../scripts/build_package.sh",
-    "start": "../../../scripts/watch_package.sh"
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "watch": "gulp watch"
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
@@ -23,15 +26,52 @@
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
+    "@react-dnd/build": "^11.1.3",
     "@types/enzyme": "^3.10.7",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/react": "^16.9.50",
+    "@types/node": "^14.11.8",
+    "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.8",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "enzyme": "^3.11.0",
+    "gulp": "^4.0.2",
+    "react": "^16.14.0",
+    "react-dnd-test-backend": "portal:../../testing/test-backend",
+    "react-dnd-test-utils": "portal:../../testing/test-utils",
+    "react-dom": "^16.14.0",
+    "react-test-renderer": "^16.14.0"
   },
   "peerDependencies": {
-    "react": ">= 16.9.0",
-    "react-dom": ">= 16.9.0"
+    "@types/hoist-non-react-statics": ">= 3.3.1",
+    "@types/node": ">= 12",
+    "@types/react": ">= 16.9",
+    "@types/react-dom": ">= 16.9",
+    "react": ">= 16.9",
+    "react-dom": ">= 16.9"
+  },
+  "peerDependenciesMeta": {
+    "@types/hoist-non-react-statics": {
+      "optional": true
+    },
+    "@types/node": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
+      "optional": true
+    }
+  },
+  "umd": {
+    "name": "ReactDnD",
+    "input": "./dist/esm/index.js",
+    "external": [
+      "react",
+      "react-dom"
+    ],
+    "globals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
+    }
   }
 }

@@ -4,7 +4,7 @@
 
 # dnd-core
 
-Drag and drop sans the GUI.
+Drag and Drop stateful engine - no GUI.
 
 This is a clean implementation of drag and drop primitives that does not depend on the browser.
 It powers [React DnD](https://github.com/react-dnd/react-dnd) internally.
