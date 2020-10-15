@@ -14,8 +14,7 @@ import {
 	SerialDisposable,
 } from './disposables'
 import { isRefable } from './utils'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const hoistStatics = require('hoist-non-react-statics')
+import hoistStatics from 'hoist-non-react-statics'
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any
