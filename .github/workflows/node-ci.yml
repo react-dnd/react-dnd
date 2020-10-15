@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Changelog Chcek
+        run: yarn version check
+
       - run: yarn install
         name: Install Dependencies
 

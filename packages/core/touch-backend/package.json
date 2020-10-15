@@ -2,9 +2,12 @@
   "name": "react-dnd-touch-backend",
   "version": "11.1.3",
   "description": "Touch backend for react-dnd",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "lib/index.d.ts",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/types/index.d.ts"
+  },
   "sideEffects": false,
   "license": "MIT",
   "author": "Long Ho <holevietlong@gmail.com>",
@@ -12,13 +15,31 @@
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
+  "umd": {
+    "name": "ReactDnDTouchBackend",
+    "input": "./dist/esm/index.js",
+    "external": [
+      "react",
+      "react-dom",
+      "react-dnd"
+    ],
+    "globals": {
+      "react": "React",
+      "react-dom": "ReactDOM",
+      "react-dnd": "ReactDnD"
+    }
+  },
   "scripts": {
-    "clean": "../../../scripts/clean_package.sh",
-    "build": "../../../scripts/build_package.sh",
-    "start": "../../../scripts/watch_package.sh"
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "watch": "gulp watch"
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
     "dnd-core": "^11.1.3"
+  },
+  "devDependencies": {
+    "@react-dnd/build": "^11.1.3",
+    "gulp": "^4.0.2"
   }
 }

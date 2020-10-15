@@ -1,0 +1,11 @@
+declined:
+  - dnd-core
+  - react-dnd-html5-backend
+  - react-dnd
+  - react-dnd-touch-backend
+  - react-dnd-documentation
+  - react-dnd-examples-decorators
+  - react-dnd-examples-hooks
+  - react-dnd-test-backend
+  - react-dnd-test-utils
+  - "@react-dnd/build"
