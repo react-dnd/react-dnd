@@ -10,7 +10,7 @@ import {
 } from './dirtyHandlerIds'
 import { reduce as stateId, State as StateIdState } from './stateId'
 import { get } from '../utils/js_utils'
-import { Action } from 'interfaces'
+import { Action } from '../interfaces'
 
 export interface State {
 	dirtyHandlerIds: DirtyHandlerIdsState

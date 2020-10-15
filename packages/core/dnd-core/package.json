@@ -3,14 +3,18 @@
   "version": "11.1.3",
   "description": "Drag and drop sans the GUI",
   "license": "MIT",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "src/index.ts",
+  "main:bundle": "dist/esm/index.js",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/types/index.d.ts"
+  },
   "sideEffects": false,
   "scripts": {
-    "build": "../../../scripts/build_package.sh",
-    "clean": "../../../scripts/clean_package.sh",
-    "start": "../../../scripts/watch_package.sh"
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
@@ -20,5 +24,10 @@
     "@react-dnd/asap": "^4.0.0",
     "@react-dnd/invariant": "^2.0.0",
     "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@react-dnd/build": "^11.1.3",
+    "gulp": "^4.0.2",
+    "react-dnd-test-backend": "portal:../../testing/test-backend"
   }
 }

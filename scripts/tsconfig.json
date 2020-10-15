@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": false,
+    "lib": ["DOM", "ES2018"],
+    "outDir": "lib"
+  },
+  "include": ["src/index.ts"]
+}

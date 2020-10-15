@@ -3,11 +3,7 @@
   "compilerOptions": {
     "outDir": "./lib",
     "baseUrl": "./",
-    /**
-     * This should be disabled, but we need to allow for synthetic imports to
-     * use the hoist-non-react-statics library.
-     */
-
+    // This is needed because of hoist-non-react-statics
     "allowSyntheticDefaultImports": true
   },
   "include": ["./src/index.ts"]
