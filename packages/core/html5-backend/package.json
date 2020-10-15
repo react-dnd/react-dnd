@@ -29,7 +29,7 @@
   },
   "umd": {
     "name": "ReactDnDHTML5Backend",
-    "input": "./lib/index.js",
+    "input": "./dist/esm/index.js",
     "external": [
       "react",
       "react-dom",
