@@ -98,7 +98,7 @@ function debugConfig({
 		input,
 		external,
 		plugins: [
-			nodeResolve({ browser: true }),
+			nodeResolve(NODE_RESOLVE_OPTS),
 			commonjs(),
 			replaceNodeEnv('development'),
 		],
@@ -120,7 +120,7 @@ function minConfig({
 		input,
 		external,
 		plugins: [
-			nodeResolve({ browser: true }),
+			nodeResolve(NODE_RESOLVE_OPTS),
 			commonjs(),
 			replaceNodeEnv('production'),
 			terser(),
@@ -132,4 +132,9 @@ function minConfig({
 			globals,
 		},
 	}
+}
+
+const NODE_RESOLVE_OPTS = {
+	browser: true,
+	mainFields: ['main:bundle', 'module', 'main'],
 }

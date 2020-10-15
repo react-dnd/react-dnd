@@ -28,6 +28,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-stream": "^1.24.1",
     "through2": "^4.0.2",
+    "tslib": "^2.0.3",
     "yargs": "^16.0.3"
   },
   "devDependencies": {

@@ -3670,6 +3670,7 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-stream: ^1.24.1
     through2: ^4.0.2
+    tslib: ^2.0.3
     typescript: ^4.0.3
     yargs: ^16.0.3
   languageName: unknown
@@ -10340,7 +10341,7 @@ __metadata:
     "@react-dnd/build": ^11.1.3
     "@react-dnd/invariant": ^2.0.0
     gulp: ^4.0.2
-    react-dnd-test-backend: "workspace:packages/testing/test-backend"
+    react-dnd-test-backend: "portal:../../testing/test-backend"
     redux: ^4.0.5
   languageName: unknown
   linkType: soft
@@ -23708,14 +23709,11 @@ fsevents@^1.2.7:
     npm-run-all: ^4.1.5
     prettier: ^2.1.2
     pretty-quick: ^3.1.0
-    react: ^16.14.0
     react-dnd: ^11.1.3
     react-dnd-html5-backend: 11.1.3
     react-dnd-test-backend: 11.1.3
     react-dnd-test-utils: 11.1.3
     react-dnd-touch-backend: 11.1.3
-    react-dom: ^16.14.0
-    react-test-renderer: ^16.14.0
     replace-in-file: ^6.1.0
     rimraf: ^3.0.2
     ts-jest: ^26.4.1
@@ -23731,6 +23729,26 @@ fsevents@^1.2.7:
     dnd-core: ^11.1.3
     gulp: ^4.0.2
   languageName: unknown
+  linkType: soft
+
+"react-dnd-test-backend@portal:../../testing/test-backend::locator=dnd-core%40workspace%3Apackages%2Fcore%2Fdnd-core":
+  version: 0.0.0-use.local
+  resolution: "react-dnd-test-backend@portal:../../testing/test-backend::locator=dnd-core%40workspace%3Apackages%2Fcore%2Fdnd-core"
+  dependencies:
+    "@react-dnd/build": ^11.1.3
+    dnd-core: ^11.1.3
+    gulp: ^4.0.2
+  languageName: node
+  linkType: soft
+
+"react-dnd-test-backend@portal:../../testing/test-backend::locator=react-dnd%40workspace%3Apackages%2Fcore%2Freact-dnd":
+  version: 0.0.0-use.local
+  resolution: "react-dnd-test-backend@portal:../../testing/test-backend::locator=react-dnd%40workspace%3Apackages%2Fcore%2Freact-dnd"
+  dependencies:
+    "@react-dnd/build": ^11.1.3
+    dnd-core: ^11.1.3
+    gulp: ^4.0.2
+  languageName: node
   linkType: soft
 
 "react-dnd-test-utils@11.1.3, react-dnd-test-utils@^11.1.3, react-dnd-test-utils@workspace:packages/testing/test-utils":
@@ -23752,6 +23770,27 @@ fsevents@^1.2.7:
     react-dnd-test-backend: ">= 10.0.0"
     react-dom: ">= 16.9.0"
   languageName: unknown
+  linkType: soft
+
+"react-dnd-test-utils@portal:../../testing/test-utils::locator=react-dnd%40workspace%3Apackages%2Fcore%2Freact-dnd":
+  version: 0.0.0-use.local
+  resolution: "react-dnd-test-utils@portal:../../testing/test-utils::locator=react-dnd%40workspace%3Apackages%2Fcore%2Freact-dnd"
+  dependencies:
+    "@react-dnd/build": ^11.1.3
+    "@types/react": ^16.9.52
+    "@types/react-dom": ^16.9.8
+    dnd-core: ^11.1.3
+    gulp: ^4.0.2
+    react: ^16.14.0
+    react-dnd: ^11.1.3
+    react-dnd-test-backend: ^11.1.3
+    react-dom: ^16.14.0
+  peerDependencies:
+    react: ">= 16.9.0"
+    react-dnd: ">= 10.0.0"
+    react-dnd-test-backend: ">= 10.0.0"
+    react-dom: ">= 16.9.0"
+  languageName: node
   linkType: soft
 
 "react-dnd-touch-backend@11.1.3, react-dnd-touch-backend@^11.1.3, react-dnd-touch-backend@workspace:packages/core/touch-backend":
@@ -23781,8 +23820,8 @@ fsevents@^1.2.7:
     gulp: ^4.0.2
     hoist-non-react-statics: ^3.3.2
     react: ^16.14.0
-    react-dnd-test-backend: "workspace:packages/testing/test-backend"
-    react-dnd-test-utils: "workspace:packages/testing/test-utils"
+    react-dnd-test-backend: "portal:../../testing/test-backend"
+    react-dnd-test-utils: "portal:../../testing/test-utils"
     react-dom: ^16.14.0
     react-test-renderer: ^16.14.0
   peerDependencies:
@@ -28046,6 +28085,13 @@ resolve@1.15.0:
   version: 2.0.1
   resolution: "tslib@npm:2.0.1"
   checksum: 7b42337a07f536c9650c72471cdf51317f07eb981692e91b8979fee3f6e20136a8f047e6ecdc5f2f3201132a6cc4e0096fa3c58655eba3803bf7fe739ccd088e
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "tslib@npm:2.0.3"
+  checksum: 447bfca5deaa157806c3f77eaba74d05dd0b38b014e47ce79d98b5c77ce7d91b00a687ba13ca1b5a74d35ca1098ac7a072c0a97fad06f0266612f2a03a6c8e8f
   languageName: node
   linkType: hard
 

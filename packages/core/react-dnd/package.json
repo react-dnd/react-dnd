@@ -2,9 +2,12 @@
   "name": "react-dnd",
   "version": "11.1.3",
   "description": "Drag and Drop for React",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/types/index.d.ts"
+  },
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -31,8 +34,8 @@
     "enzyme": "^3.11.0",
     "gulp": "^4.0.2",
     "react": "^16.14.0",
-    "react-dnd-test-backend": "workspace:packages/testing/test-backend",
-    "react-dnd-test-utils": "workspace:packages/testing/test-utils",
+    "react-dnd-test-backend": "portal:../../testing/test-backend",
+    "react-dnd-test-utils": "portal:../../testing/test-utils",
     "react-dom": "^16.14.0",
     "react-test-renderer": "^16.14.0"
   },
@@ -42,7 +45,7 @@
   },
   "umd": {
     "name": "ReactDnD",
-    "input": "./lib/index.js",
+    "input": "./dist/esm/index.js",
     "external": [
       "react",
       "react-dom"
