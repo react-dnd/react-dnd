@@ -3,7 +3,6 @@ declare const process: any
 import * as React from 'react'
 import { shallowEqual } from '@react-dnd/shallowequal'
 import { invariant } from '@react-dnd/invariant'
-import hoistStatics from 'hoist-non-react-statics'
 import { DragDropManager, Identifier } from 'dnd-core'
 import { DndContext } from '../common/DndContext'
 import { isPlainObject } from '../utils/js_utils'
@@ -15,6 +14,8 @@ import {
 	SerialDisposable,
 } from './disposables'
 import { isRefable } from './utils'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const hoistStatics = require('hoist-non-react-statics')
 
 export interface DecorateHandlerArgs<Props, ItemIdType> {
 	DecoratedComponent: any

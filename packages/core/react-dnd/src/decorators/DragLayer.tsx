@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { shallowEqual } from '@react-dnd/shallowequal'
-import hoistStatics from 'hoist-non-react-statics'
 import { invariant } from '@react-dnd/invariant'
 import { DndContext } from '../common/DndContext'
 import { DndOptions } from '../interfaces'
 import { isPlainObject } from '../utils/js_utils'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable, checkDecoratorArguments } from './utils'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const hoistStatics = require('hoist-non-react-statics')
 
 export function DragLayer<RequiredProps, CollectedProps = any>(
 	collect: DragLayerCollector<RequiredProps, CollectedProps>,
