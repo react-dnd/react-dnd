@@ -73,8 +73,8 @@
     "format_examples": "prettier 'static/examples_*/**/*.(js|ts|tsx)' --use-tabs=false --write",
     "write_example_boilerplate": "node write_sample_boilerplate.js",
     "process_examples": "run-s copy_examples prune_buildinfo format_examples write_example_boilerplate",
-    "build_gatsby": "gatsby build --prefix-paths",
+    "build:gatsby": "gatsby build --prefix-paths",
     "start:docsite": "gatsby develop -H 0.0.0.0",
-    "build:docsite": "run-s process_examples build_gatsby"
+    "build:docsite": "run-s process_examples build:gatsby"
   }
 }
