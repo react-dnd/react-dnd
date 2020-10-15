@@ -31,14 +31,14 @@
   "devDependencies": {
     "@react-dnd/build": "^11.1.3",
     "@types/faker": "^5.1.2",
-    "@types/lodash": "^4.14.161",
-    "@types/react": "^16.9.51",
+    "@types/lodash": "^4.14.162",
+    "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.8",
     "gulp": "^4.0.2",
     "npm-run-all": "^4.1.5",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-dnd-test-utils": "^11.1.3",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.14.0"
   },
   "peerDependencies": {
     "react": ">= 16.9.0",
