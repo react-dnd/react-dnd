@@ -104,13 +104,6 @@
   },
   "resolutions": {
     "@types/react": "16.9.51",
-    "@types/react-dom": "16.9.8",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
-  },
-  "dependenciesMeta": {
-    "react@16.14.0": {
-      "unplugged": true
-    }
+    "@types/react-dom": "16.9.8"
   }
 }
