@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { shallowEqual } from '@react-dnd/shallowequal'
-import * as hoistStatics from 'hoist-non-react-statics'
+import hoistStatics from 'hoist-non-react-statics'
 import { invariant } from '@react-dnd/invariant'
 import { DndContext } from '../common/DndContext'
 import { DndOptions } from '../interfaces'
