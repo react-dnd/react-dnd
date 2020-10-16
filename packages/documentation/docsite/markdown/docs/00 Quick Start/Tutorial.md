@@ -419,7 +419,7 @@ This part assumes you are at least somewhat familiar with the concepts presented
 We're going to start by installing React DnD and the HTML5 backend for it:
 
 ```
-yarn add react-dnd react-dnd-html5-backend
+npm install react-dnd react-dnd-html5-backend
 ```
 
 In the future, you might want to explore alternative third-party backends, such as the [touch backend](https://npmjs.com/package/react-dnd-touch-backend), but this is out of scope of this tutorial.
@@ -567,12 +567,11 @@ See? The `drop` method has the `props` of the `BoardSquare` in scope, so it know
 In my collecting function I'm going to ask the monitor whether the pointer is currently over the `BoardSquare` so I can highlight it:
 
 ```jsx
-const [{ isOver, canDrop }, drop] = useDrop({
+const [{ isOver }, drop] = useDrop({
   accept: ItemTypes.KNIGHT,
   drop: () => moveKnight(x, y),
-  collect: (mon) => ({
-    isOver: !!mon.isOver(),
-    canDrop: !!mon.canDrop()
+  collect: monitor => ({
+    isOver: !!monitor.isOver(),
   })
 })
 ```

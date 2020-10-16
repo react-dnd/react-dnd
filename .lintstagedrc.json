@@ -1,0 +1,3 @@
+{
+  "*.{ts,tsx}": ["eslint --fix", "prettier"]
+}

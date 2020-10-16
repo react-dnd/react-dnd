@@ -1,16 +1,22 @@
 {
-	"search.exclude": {
-		"**/node_modules": true,
-		"**/bower_components": true
-	},
-	"editor.tabSize": 2,
-	"[markdown]": {
-		"editor.formatOnSave": true
-	},
-	"[typescript]": {
-		"editor.formatOnSave": true
-	},
-	"[typescriptreact]": {
-		"editor.formatOnSave": true
-	}
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "editor.tabSize": 2,
+  "[markdown]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "eslint.nodePath": ".yarn/sdks",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

@@ -14,7 +14,7 @@ The test backend lets you test the drag and drop interaction of your components 
 The test backend comes in a separate package:
 
 ```
-yarn add --dev react-dnd-test-backend
+npm install -D react-dnd-test-backend
 ```
 
 ### Usage

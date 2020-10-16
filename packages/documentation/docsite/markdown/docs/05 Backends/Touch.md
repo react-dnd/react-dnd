@@ -14,7 +14,7 @@ The HTML5 backend does not support the touch events. So it will not work on tabl
 Run the following command to install the touch backend.
 
 ```
-yarn add react-dnd-touch-backend
+npm install react-dnd-touch-backend
 ```
 
 ### Usage
