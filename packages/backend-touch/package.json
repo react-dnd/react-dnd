@@ -1,0 +1,42 @@
+{
+  "name": "react-dnd-touch-backend",
+  "version": "11.1.3",
+  "description": "Touch backend for react-dnd",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": "Long Ho <holevietlong@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
+  "umd": {
+    "name": "ReactDnDTouchBackend",
+    "input": "./dist/esm/index.js",
+    "external": [
+      "react",
+      "react-dom",
+      "react-dnd"
+    ],
+    "globals": {
+      "react": "React",
+      "react-dom": "ReactDOM",
+      "react-dnd": "ReactDnD"
+    }
+  },
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "watch": "gulp watch"
+  },
+  "dependencies": {
+    "@react-dnd/invariant": "^2.0.0",
+    "dnd-core": "workspace:packages/dnd-core"
+  },
+  "devDependencies": {
+    "@react-dnd/build": "workspace:packages/build",
+    "gulp": "^4.0.2"
+  }
+}

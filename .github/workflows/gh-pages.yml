@@ -16,7 +16,7 @@ jobs:
           node-version: 12.x
 
       - run: yarn install
-      - run: yarn build
+      - run: yarn build_all
       - run: yarn build_docsite
 
       - name: deploy
