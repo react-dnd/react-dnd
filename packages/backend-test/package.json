@@ -1,0 +1,26 @@
+{
+  "name": "react-dnd-test-backend",
+  "version": "11.1.3",
+  "description": "A mock backend for testing React DnD apps",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git"
+  },
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "watch": "gulp watch"
+  },
+  "dependencies": {
+    "dnd-core": "workspace:packages/dnd-core"
+  },
+  "devDependencies": {
+    "@react-dnd/build": "workspace:packages/build",
+    "gulp": "^4.0.2"
+  }
+}
