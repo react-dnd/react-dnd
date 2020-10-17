@@ -20867,6 +20867,7 @@ fsevents@^1.2.7:
     react: ^16.14.0
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
+    react-dnd-test-backend: "workspace:packages/backend-test"
     react-dnd-test-utils: "workspace:packages/test-utils"
     react-dom: ^16.14.0
     react-frame-component: ^4.1.3
