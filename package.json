@@ -50,7 +50,7 @@
     "lint:formatting": "pretty-quick --check",
     "lint": "run-s 'lint:*'",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
-    "ci": "run-s build_all test_all lint unit_test:coverage build_docsite git-is-clean",
+    "ci": "npm-run-all -s build_all -p test_all lint unit_test:coverage build_docsite -s git-is-clean",
     "prettify:source": "prettier 'packages/*/*/src/**/*.ts*'",
     "prettify": "pretty-quick --fix",
     "precommit:lint": "lint-staged",
