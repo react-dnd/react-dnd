@@ -28,7 +28,7 @@ jobs:
           CI: true
 
       - name: Publish coverage to codecov.io
-        uses: codecov/codecov-action@v1.0.3
+        uses: codecov/codecov-action@v1.0.13
         if: success() && matrix.node-version == '14.x'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
