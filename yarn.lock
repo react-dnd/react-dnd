@@ -20838,6 +20838,7 @@ fsevents@^1.2.7:
     react-tabs: ^3.1.1
     react-typography: ^0.16.19
     rehype-react: ^6.1.0
+    rimraf: ^3.0.2
     shallow-compare: ^1.2.2
     shx: ^0.3.2
     styled-components: ^5.2.0

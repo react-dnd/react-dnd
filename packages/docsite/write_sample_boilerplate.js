@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const rootPkgJson = require('../../package.json')
 const reactDndPkgJson = require('../react-dnd/package.json')
-const reactDndHtml5BackendVersion = require('../html5-backend/package.json')
+const reactDndHtml5BackendVersion = require('../backend-html5/package.json')
 	.version
 
 const APP_FILE_CONTENT = `

@@ -24437,6 +24437,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-tabs", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:3.1.1"],
             ["react-typography", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:0.16.19"],
             ["rehype-react", "npm:6.1.0"],
+            ["rimraf", "npm:3.0.2"],
             ["shallow-compare", "npm:1.2.2"],
             ["shx", "npm:0.3.2"],
             ["styled-components", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:5.2.0"],
