@@ -10,16 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Debug Action
-        uses: hmarr/debug-action@v1.0.0
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Changelog Chcek
-        run: yarn version check
+      - run: yarn version check
+        if: "!contains(github.ref , 'release/') && !contains(github.head_ref , 'release/')"
+        name: Version Check
 
       - run: yarn install
         name: Install Dependencies
@@ -30,7 +28,7 @@ jobs:
           CI: true
 
       - name: Publish coverage to codecov.io
-        uses: codecov/codecov-action@v1.0.3
+        uses: codecov/codecov-action@v1.0.13
         if: success() && matrix.node-version == '14.x'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": false,
+    "outDir": "./lib",
+    "baseUrl": "./"
+  },
+  "include": ["./src/index.ts"]
+}
