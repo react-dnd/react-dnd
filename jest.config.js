@@ -9,7 +9,7 @@ module.exports = {
 		'!packages/build/**',
 		'!packages/docsite/**',
 		'!packages/examples-*/**',
-		'!packages/test-*/**',
+		'!packages/*test*/**',
 	],
 	testMatch: [
 		'<rootDir>/__tests__/**/?(*.)(spec|test).ts(x|)',
