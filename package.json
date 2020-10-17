@@ -59,8 +59,7 @@
     "git-is-clean": "git diff-index --quiet HEAD"
   },
   "workspaces": [
-    "scripts",
-    "packages/*/*"
+    "packages/*"
   ],
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",

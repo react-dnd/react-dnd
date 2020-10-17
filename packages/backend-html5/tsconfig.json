@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./lib",
+    "baseUrl": "./src"
+  },
+  "exclude": [
+    "../../../node_modules/@types/enzyme/node_modules/@types/react/index.d.ts"
+  ],
+  "include": ["./src/index.ts"]
+}

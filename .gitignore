@@ -1,14 +1,18 @@
-node_modules
-dist
-lib
-.DS_Store
-.idea
+node_modules/
+packages/*/dist
+packages/*/lib
 __site__
 __site_prerender__
-coverage
+
+# Test Artifacts
+coverage/
 test-results.xml
-*-*.log
 .jest-cache
+
+# Misc
+*-*.log
+.idea
+.DS_Store
 
 # Yarn v2
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
@@ -18,4 +22,3 @@ test-results.xml
 !.yarn/sdks
 !.yarn/versions
 !.yarn/cache
-.pnp.*
