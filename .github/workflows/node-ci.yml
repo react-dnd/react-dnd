@@ -16,7 +16,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: yarn version check
-        if: "!contains(github.ref , 'release/') && !contains(github.head_ref , 'release/')"
+        if: "github.actor != 'dependabot-preview[bot]' && !contains(github.ref , 'release/') && !contains(github.head_ref , 'release/')"
         name: Version Check
 
       - run: yarn install
