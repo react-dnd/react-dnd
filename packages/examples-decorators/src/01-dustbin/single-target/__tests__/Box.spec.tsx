@@ -2,8 +2,7 @@ import React from 'react'
 import Box from '../Box'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
-import { TestBackend } from 'react-dnd-test-backend'
-import { ContextComponent } from 'react-dnd'
+import { getInstance, ITestBackend } from 'react-dnd-test-backend'
 
 describe('Box', () => {
 	// TODO: test utils are acting wonking with function components.
@@ -44,12 +43,12 @@ describe('Box', () => {
 		const root = mount(<BoxContext name="test" />)
 
 		// Obtain a reference to the backend
-		const element = root.instance() as ContextComponent<TestBackend>
-		const backend = (element.getManager().getBackend() as any) as TestBackend
+		const backend = getInstance() as ITestBackend
 		expect(backend).toBeDefined()
 
 		// Check that the opacity is 1
-		let div = root.getDOMNode() as HTMLDivElement
+		const div = (root.getDOMNode() as any)[1] as HTMLDivElement
+		expect(div).toBeDefined()
 		expect(div.style.opacity).toEqual('1')
 
 		// Find the drag source ID and use it to simulate the dragging state
@@ -57,7 +56,6 @@ describe('Box', () => {
 		backend.simulateBeginDrag([box.getHandlerId()])
 
 		// Verify that the div changed its opacity
-		div = root.getDOMNode() as HTMLDivElement
 		expect(div.style.opacity).toEqual('0.4')
 	})
 })
