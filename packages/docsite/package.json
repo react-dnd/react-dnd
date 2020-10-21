@@ -30,7 +30,7 @@
     "react-dnd-html5-backend": "workspace:packages/backend-html5",
     "react-dnd-test-backend": "workspace:packages/backend-test",
     "react-dnd-touch-backend": "workspace:packages/backend-touch",
-    "react-dom": "^16.14.0",
+    "react-dom": "^17.0.0",
     "react-error-overlay": "^6.0.7",
     "react-helmet": "^6.1.0",
     "react-is": "^16.13.1",
