@@ -9,7 +9,6 @@ import {
 	Unsubscribe,
 } from 'dnd-core'
 import { EnterLeaveCounter } from './EnterLeaveCounter'
-import { isFirefox } from './BrowserDetector'
 import {
 	getNodeClientOffset,
 	getEventClientOffset,
@@ -556,11 +555,10 @@ export class HTML5BackendImpl implements Backend {
 
 		this.altKeyPressed = e.altKey
 
-		if (!isFirefox()) {
-			// Don't emit hover in `dragenter` on Firefox due to an edge case.
-			// If the target changes position as the result of `dragenter`, Firefox
-			// will still happily dispatch `dragover` despite target being no longer
-			// there. The easy solution is to only fire `hover` in `dragover` on FF.
+		// If the target changes position as the result of `dragenter`, `dragover` might still
+		// get dispatched despite target being no longer there. The easy solution is to check
+		// whether there actually is a target before firing `hover`.
+		if (dragEnterTargetIds.length > 0) {
 			this.actions.hover(dragEnterTargetIds, {
 				clientOffset: getEventClientOffset(e),
 			})
