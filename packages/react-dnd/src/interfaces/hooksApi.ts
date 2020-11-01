@@ -126,4 +126,5 @@ export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 
 export interface DragObjectWithType {
 	type: SourceType
+	id?: string
 }
