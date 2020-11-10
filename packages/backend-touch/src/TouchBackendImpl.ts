@@ -111,18 +111,8 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	// public for test
-	public get window(): Window | undefined {
-		return this.options.window
-	}
-
-	// public for test
 	public get document(): Document | undefined {
-		
-		if (this.window) {
-			return this.window.document
-		}
-
-		return undefined
+		return this.options.document
 	}
 
 	public setup(): void {
