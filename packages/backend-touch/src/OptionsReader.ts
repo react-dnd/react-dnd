@@ -5,7 +5,6 @@ import {
 } from './interfaces'
 
 export class OptionsReader implements TouchBackendOptions {
-	public ownerDocument: Document | null = null
 	public enableTouchEvents = true
 	public enableMouseEvents = false
 	public enableKeyboardEvents = false
@@ -38,7 +37,6 @@ export class OptionsReader implements TouchBackendOptions {
 	}
 
 	public get window(): Window | undefined {
-
 		if (this.context && this.context.window) {
 			return this.context.window
 		} else if (typeof window !== 'undefined') {
@@ -48,9 +46,8 @@ export class OptionsReader implements TouchBackendOptions {
 	}
 
 	public get document(): Document | undefined {
-
-		if (this.ownerDocument) {
-			return this.ownerDocument
+		if (this.context?.document) {
+			return this.context.document
 		}
 
 		if (this.window) {
