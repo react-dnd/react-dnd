@@ -1,4 +1,5 @@
 module.exports = {
+	rootDir: __dirname,
 	setupFilesAfterEnv: ['<rootDir>/jest/setup-enzyme.js'],
 	collectCoverageFrom: [
 		'packages/*/src/**/*.{ts,tsx}',
