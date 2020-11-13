@@ -20247,7 +20247,7 @@ fsevents@^1.2.7:
     "@types/react-dom": ^16.9.9
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
-    react: ^16
+    react: ^16.14.0
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dom: ^16.14.0
@@ -20502,7 +20502,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:^16, react@npm:^16.14.0":
+"react@npm:^16.14.0":
   version: 16.14.0
   resolution: "react@npm:16.14.0"
   dependencies:
@@ -23307,7 +23307,7 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
-"supports-color@npm:^7.0.0, supports-color@npm:^7.1.0":
+"supports-color@npm:^7.0.0, supports-color@npm:^7.1.0, supports-color@npm:^7.2.0":
   version: 7.2.0
   resolution: "supports-color@npm:7.2.0"
   dependencies:

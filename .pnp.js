@@ -5736,6 +5736,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["retext-english", "npm:3.0.4"],
             ["retext-equality", "npm:5.5.0"],
             ["retext-profanities", "npm:6.1.0"],
+            ["supports-color", "npm:7.2.0"],
             ["unified", "npm:9.2.0"],
             ["unified-diff", "npm:3.0.1"],
             ["unified-engine", "npm:8.0.0"],
