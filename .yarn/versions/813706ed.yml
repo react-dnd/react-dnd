@@ -1,0 +1,13 @@
+releases:
+  "@react-dnd/build": patch
+
+declined:
+  - react-dnd-html5-backend
+  - react-dnd-test-backend
+  - react-dnd-touch-backend
+  - dnd-core
+  - react-dnd-documentation
+  - react-dnd-examples-decorators
+  - react-dnd-examples-hooks
+  - react-dnd
+  - react-dnd-test-utils
