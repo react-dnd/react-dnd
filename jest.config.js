@@ -1,8 +1,5 @@
 module.exports = {
-	clearMocks: true,
 	setupFilesAfterEnv: ['<rootDir>/jest/setup-enzyme.js'],
-	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-	modulePaths: ['<rootDir>/packages/'],
 	collectCoverageFrom: [
 		'packages/*/src/**/*.{ts,tsx}',
 		'!**/__tests__/**',
