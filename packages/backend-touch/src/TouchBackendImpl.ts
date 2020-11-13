@@ -111,20 +111,12 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	// public for test
-	public get window(): Window | undefined {
-		return this.options.window
-	}
-
-	// public for test
 	public get document(): Document | undefined {
-		if (this.window) {
-			return this.window.document
-		}
-		return undefined
+		return this.options.document
 	}
 
 	public setup(): void {
-		if (!this.window) {
+		if (!this.document) {
 			return
 		}
 
@@ -135,20 +127,20 @@ export class TouchBackendImpl implements Backend {
 		TouchBackendImpl.isSetUp = true
 
 		this.addEventListener(
-			this.window,
+			this.document,
 			'start',
 			this.getTopMoveStartHandler() as any,
 		)
 		this.addEventListener(
-			this.window,
+			this.document,
 			'start',
 			this.handleTopMoveStartCapture as any,
 			true,
 		)
-		this.addEventListener(this.window, 'move', this.handleTopMove as any)
-		this.addEventListener(this.window, 'move', this.handleTopMoveCapture, true)
+		this.addEventListener(this.document, 'move', this.handleTopMove as any)
+		this.addEventListener(this.document, 'move', this.handleTopMoveCapture, true)
 		this.addEventListener(
-			this.window,
+			this.document,
 			'end',
 			this.handleTopMoveEndCapture as any,
 			true,
@@ -156,7 +148,7 @@ export class TouchBackendImpl implements Backend {
 
 		if (this.options.enableMouseEvents && !this.options.ignoreContextMenu) {
 			this.addEventListener(
-				this.window,
+				this.document,
 				'contextmenu',
 				this.handleTopMoveEndCapture as any,
 			)
@@ -164,7 +156,7 @@ export class TouchBackendImpl implements Backend {
 
 		if (this.options.enableKeyboardEvents) {
 			this.addEventListener(
-				this.window,
+				this.document,
 				'keydown',
 				this.handleCancelOnEscape as any,
 				true,
@@ -173,7 +165,7 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	public teardown(): void {
-		if (!this.window) {
+		if (!this.document) {
 			return
 		}
 
@@ -181,25 +173,25 @@ export class TouchBackendImpl implements Backend {
 		this._mouseClientOffset = {}
 
 		this.removeEventListener(
-			this.window,
+			this.document,
 			'start',
 			this.handleTopMoveStartCapture as any,
 			true,
 		)
 		this.removeEventListener(
-			this.window,
+			this.document,
 			'start',
 			this.handleTopMoveStart as any,
 		)
 		this.removeEventListener(
-			this.window,
+			this.document,
 			'move',
 			this.handleTopMoveCapture,
 			true,
 		)
-		this.removeEventListener(this.window, 'move', this.handleTopMove as any)
+		this.removeEventListener(this.document, 'move', this.handleTopMove as any)
 		this.removeEventListener(
-			this.window,
+			this.document,
 			'end',
 			this.handleTopMoveEndCapture as any,
 			true,
@@ -207,7 +199,7 @@ export class TouchBackendImpl implements Backend {
 
 		if (this.options.enableMouseEvents && !this.options.ignoreContextMenu) {
 			this.removeEventListener(
-				this.window,
+				this.document,
 				'contextmenu',
 				this.handleTopMoveEndCapture as any,
 			)
@@ -215,7 +207,7 @@ export class TouchBackendImpl implements Backend {
 
 		if (this.options.enableKeyboardEvents) {
 			this.removeEventListener(
-				this.window,
+				this.document,
 				'keydown',
 				this.handleCancelOnEscape as any,
 				true,
@@ -226,7 +218,7 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	private addEventListener<K extends keyof EventName>(
-		subject: HTMLElement | Window,
+		subject: HTMLElement | Window | Document,
 		event: K,
 		handler: (e: any) => void,
 		capture?: boolean,
@@ -243,7 +235,7 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	private removeEventListener<K extends keyof EventName>(
-		subject: HTMLElement | Window,
+		subject: HTMLElement | Window | Document,
 		event: K,
 		handler: (e: any) => void,
 		capture?: boolean,

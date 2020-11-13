@@ -46,9 +46,14 @@ export class OptionsReader implements TouchBackendOptions {
 	}
 
 	public get document(): Document | undefined {
+		if (this.context?.document) {
+			return this.context.document
+		}
+
 		if (this.window) {
 			return this.window.document
 		}
+
 		return undefined
 	}
 }
