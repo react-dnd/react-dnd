@@ -15,15 +15,4 @@ module.exports = {
 		'<rootDir>/__tests__/**/?(*.)(spec|test).ts(x|)',
 		'<rootDir>/packages/*/src/**/__tests__/**/?(*.)(spec|test).ts(x|)',
 	],
-	transform: {
-		'^.+\\.(ts|tsx)$': 'ts-jest',
-	},
-	globals: {
-		'ts-jest': {
-			tsConfig: '<rootDir>/tsconfig.jest.json',
-			diagnostics: {
-				pathRegex: '/.(spec|test).ts$/',
-			},
-		},
-	},
 }
