@@ -8156,7 +8156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.2.0, debug@npm:^4.3.0":
+"debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.2.0":
   version: 4.3.0
   resolution: "debug@npm:4.3.0"
   dependencies:
@@ -20030,7 +20030,7 @@ fsevents@^1.2.7:
     "@types/rehype-react": ^4.0.0
     "@types/styled-components": ^5.1.4
     babel-plugin-styled-components: ^1.11.1
-    debug: ^4.3.0
+    debug: ^4.2.0
     gatsby: ~2.26.1
     gatsby-plugin-manifest: ^2.6.0
     gatsby-plugin-react-helmet: ^3.4.0
@@ -20051,17 +20051,17 @@ fsevents@^1.2.7:
     prismjs: ^1.22.0
     prop-types: ^15.7.2
     query-string: ^6.13.7
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-examples-decorators: "workspace:packages/examples-decorators"
     react-dnd-examples-hooks: "workspace:packages/examples-hooks"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dnd-touch-backend: "workspace:packages/backend-touch"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
     react-error-overlay: ^6.0.8
     react-helmet: ^6.1.0
-    react-is: ^16.13.1
+    react-is: ^17.0.1
     react-tabs: ^3.1.1
     react-typography: ^0.16.19
     rehype-react: ^6.1.0
@@ -20092,12 +20092,12 @@ fsevents@^1.2.7:
     immutability-helper: ^3.1.1
     lodash: ^4.17.20
     npm-run-all: ^4.1.5
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dnd-test-utils: "workspace:packages/test-utils"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
     react-frame-component: ^4.1.3
   peerDependencies:
     "@types/node": ">= 12"
@@ -20130,11 +20130,11 @@ fsevents@^1.2.7:
     immutability-helper: ^3.1.1
     lodash: ^4.17.20
     npm-run-all: ^4.1.5
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-utils: "workspace:packages/test-utils"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
     react-frame-component: ^4.1.3
   peerDependencies:
     "@types/node": ">= 12"
@@ -20269,10 +20269,10 @@ fsevents@^1.2.7:
     "@types/react-dom": ^16.9.9
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-test-backend: "workspace:packages/backend-test"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
   peerDependencies:
     react: ">= 16.9"
     react-dnd: ">= 10.0.0"
@@ -20309,11 +20309,11 @@ fsevents@^1.2.7:
     enzyme: ^3.11.0
     gulp: ^4.0.2
     hoist-non-react-statics: ^3.3.2
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd-test-backend: "portal:../backend-test"
     react-dnd-test-utils: "portal:../test-utils"
-    react-dom: ^16.14.0
-    react-test-renderer: ^16.14.0
+    react-dom: ^17.0.1
+    react-test-renderer: ^17.0.1
   peerDependencies:
     "@types/hoist-non-react-statics": ">= 3.3.1"
     "@types/node": ">= 12"
@@ -20344,6 +20344,19 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ^16.14.0
   checksum: a13558f0e7c6d1a98684214460bcd4b9005500015b5048fb1b0d2856786b8764dbc713e6b078a5b1a56e17866400e1d862183c7a0a513ae8351de11f6f6749d2
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-dom@npm:17.0.1"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+    scheduler: ^0.20.1
+  peerDependencies:
+    react: 17.0.1
+  checksum: 6a70028fbe3c95e0056c5e8ce065b4a9b8d4ff3bffde9b016454072bde5e4b012af7668ca45b7235ace428267d5be5237b68ea87ce8c296e54e81a8d678a4355
   languageName: node
   linkType: hard
 
@@ -20416,17 +20429,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-is@npm:^16.12.0 || ^17.0.0, react-is@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-is@npm:17.0.1"
+  checksum: 5a83dfc78e7adcb93d632bf367b0733db650e3abd2e9c57c33b87e50d201212c1884b0d7bcf13e692f1556189fa1b87f9f3e0ba10fe858fd6aebe83ed4fcd1ea
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.12.0, react-is@npm:^16.13.1, react-is@npm:^16.7.0, react-is@npm:^16.8.1, react-is@npm:^16.8.6":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 11bcf1267a314a522615f626f3ce3727a3a24cdbf61c4d452add3550a7875326669631326cfb1ba3e92b6f72244c32ffecf93ad21c0cad8455d3e169d0e3f060
-  languageName: node
-  linkType: hard
-
-"react-is@npm:^17.0.1":
-  version: 17.0.1
-  resolution: "react-is@npm:17.0.1"
-  checksum: 5a83dfc78e7adcb93d632bf367b0733db650e3abd2e9c57c33b87e50d201212c1884b0d7bcf13e692f1556189fa1b87f9f3e0ba10fe858fd6aebe83ed4fcd1ea
   languageName: node
   linkType: hard
 
@@ -20441,6 +20454,18 @@ fsevents@^1.2.7:
   version: 0.8.3
   resolution: "react-refresh@npm:0.8.3"
   checksum: 38f06df8e0a20701b96e5d680838a3528d66cfb53db79843d30cb9517df3262ec596607147439975267bf0634bee77101db37298ea79b5742cc28664632f3c76
+  languageName: node
+  linkType: hard
+
+"react-shallow-renderer@npm:^16.13.1":
+  version: 16.14.1
+  resolution: "react-shallow-renderer@npm:16.14.1"
+  dependencies:
+    object-assign: ^4.1.1
+    react-is: ^16.12.0 || ^17.0.0
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0
+  checksum: d52cb869e25605b00d4a67ff16598dbbf2826b0f09535de499b2f21a339cabf8b954d4b8855e0e6bdaf0a95603a2b6702e2b47eca8797a7d6bf7e6170ab8b2f3
   languageName: node
   linkType: hard
 
@@ -20479,17 +20504,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-test-renderer@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "react-test-renderer@npm:16.14.0"
+"react-test-renderer@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-test-renderer@npm:17.0.1"
   dependencies:
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    react-is: ^16.8.6
-    scheduler: ^0.19.1
+    react-is: ^17.0.1
+    react-shallow-renderer: ^16.13.1
+    scheduler: ^0.20.1
   peerDependencies:
-    react: ^16.14.0
-  checksum: 0905787bfd68865098743ca2d18d874ef09929b80730131c017ced55bcf7082e84f66ec76685799a759812d376de6db718f6d643a2705779a491003d01d45956
+    react: 17.0.1
+  checksum: 6ec269430beea4356180d90868a9959399781a03ae8de6a29f2edc29d6ca41432653d4103991467ebcc47be5bd2d9197789411e913da66369c2aa2f13311105f
   languageName: node
   linkType: hard
 
@@ -20510,6 +20535,16 @@ fsevents@^1.2.7:
     object-assign: ^4.1.1
     prop-types: ^15.6.2
   checksum: 2769580b22952a52de3b5b2ea0f09cb904030b762d759739f49ab4da0b1f550e5c087ce3728c4be90f423d09481e0c075483c0c30b1ea9c549445c8b12020fd3
+  languageName: node
+  linkType: hard
+
+"react@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react@npm:17.0.1"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: a76d86ec973eb4b25a46071ac7f974adfd66ed89ad1db63043be1d976ec25417520a210e6d724b0ad937422b706afcf9962cedda9e92125992a8c0e8a95f2051
   languageName: node
   linkType: hard
 
@@ -21735,6 +21770,16 @@ resolve@^1.18.1:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
   checksum: 804f990b9f370cca6d42b65f3cba2cc2bfed4973ee5623bed1ea36a6627842db8c891e2e5ac003f06f9ee892d1d3396921e27fa077346caf0213af05776e8dee
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.20.1":
+  version: 0.20.1
+  resolution: "scheduler@npm:0.20.1"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: 377b4ad0d8313c4548bac7374bc38409e9d142799979ce396787efa04d1bcabf2591540f243f2131e3df8e56e7f5b29c5415248523e88ecb60f13a32db2e076f
   languageName: node
   linkType: hard
 
