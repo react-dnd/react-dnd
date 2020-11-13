@@ -20247,10 +20247,10 @@ fsevents@^1.2.7:
     "@types/react-dom": ^16.9.9
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-test-backend: "workspace:packages/backend-test"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
   peerDependencies:
     react: ">= 16.9"
     react-dnd: ">= 10.0.0"
@@ -20332,20 +20332,6 @@ fsevents@^1.2.7:
       optional: true
   languageName: unknown
   linkType: soft
-
-"react-dom@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "react-dom@npm:16.14.0"
-  dependencies:
-    loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    scheduler: ^0.19.1
-  peerDependencies:
-    react: ^16.14.0
-  checksum: a13558f0e7c6d1a98684214460bcd4b9005500015b5048fb1b0d2856786b8764dbc713e6b078a5b1a56e17866400e1d862183c7a0a513ae8351de11f6f6749d2
-  languageName: node
-  linkType: hard
 
 "react-dom@npm:^17.0.1":
   version: 17.0.1
@@ -20524,17 +20510,6 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ^0.14.0 || ^15.0.0 || ^16.0.0
   checksum: 9b31cbca4f914ddec1193a1df826417bc3e5b63c2900af319823d6aae917f9715fe55545cdbafdaf47260b33806b03ce490192dce0260fe60322150ee76727fb
-  languageName: node
-  linkType: hard
-
-"react@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "react@npm:16.14.0"
-  dependencies:
-    loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-    prop-types: ^15.6.2
-  checksum: 2769580b22952a52de3b5b2ea0f09cb904030b762d759739f49ab4da0b1f550e5c087ce3728c4be90f423d09481e0c075483c0c30b1ea9c549445c8b12020fd3
   languageName: node
   linkType: hard
 
