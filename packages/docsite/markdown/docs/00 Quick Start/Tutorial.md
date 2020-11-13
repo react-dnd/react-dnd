@@ -36,7 +36,7 @@ Now let's build something!
 
 # Setup
 
-In this tutorial, the code examples are use function-components and modern JavaScript syntax. It's recommended to use a build-step to transpile these features into your target environment. We recommend using [create-react-app](https://github.com/facebook/create-react-app).
+In this tutorial, the code examples are using function-components and modern JavaScript syntax. It's recommended to use a build-step to transpile these features into your target environment. We recommend using [create-react-app](https://github.com/facebook/create-react-app).
 
 The app we're going to build is [available as an example on this website](/examples/tutorial).
 
