@@ -37,4 +37,5 @@ export enum ListenerType {
 
 export interface TouchBackendContext {
 	window?: Window
+	document?: Document
 }

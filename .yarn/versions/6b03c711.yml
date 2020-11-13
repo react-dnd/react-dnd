@@ -1,0 +1,8 @@
+releases:
+  react-dnd-html5-backend: minor
+  react-dnd-touch-backend: minor
+
+declined:
+  - react-dnd-documentation
+  - react-dnd-examples-decorators
+  - react-dnd-examples-hooks
