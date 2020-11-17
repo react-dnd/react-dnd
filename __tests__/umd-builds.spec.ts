@@ -1,6 +1,6 @@
 import * as rdnd from 'react-dnd'
 import * as html5 from 'react-dnd-html5-backend'
-import * as touch from 'react-dnd-touch-backend'
+import * as touch from '@pspdfkit/react-dnd-touch-backend'
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 describe('UMD Builds', () => {
