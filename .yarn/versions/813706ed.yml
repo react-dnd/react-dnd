@@ -1,6 +1,3 @@
-releases:
-  "@react-dnd/build": patch
-
 declined:
   - react-dnd-html5-backend
   - react-dnd-test-backend
