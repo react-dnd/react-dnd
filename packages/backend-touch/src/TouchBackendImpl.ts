@@ -369,6 +369,7 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	public handleTopMoveStart = (e: MouseEvent | TouchEvent): void => {
+		
 		if (!eventShouldStartDrag(e as MouseEvent)) {
 			return
 		}
@@ -384,11 +385,24 @@ export class TouchBackendImpl implements Backend {
 				this.lastTargetTouchFallback = e.targetTouches[0]
 			}
 			this._mouseClientOffset = clientOffset
+
+			if (
+				!this.monitor.isDragging() && this.waitingForDelay) {
+
+					const { moveStartSourceIds } = this
+
+					this.actions.beginDrag(moveStartSourceIds, {
+						clientOffset: this._mouseClientOffset,
+						getSourceClientOffset: this.getSourceClientOffset,
+						publishSource: false,
+					})
+				}
 		}
 		this.waitingForDelay = false
 	}
 
 	public handleTopMoveStartDelay = (e: Event): void => {
+		
 		if (!eventShouldStartDrag(e as MouseEvent)) {
 			return
 		}
