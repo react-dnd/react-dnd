@@ -385,9 +385,14 @@ export class TouchBackendImpl implements Backend {
 				this.lastTargetTouchFallback = e.targetTouches[0]
 			}
 			this._mouseClientOffset = clientOffset
+			
+			const delay =
+			e.type === eventNames.touch.start
+				? this.options.delayTouchStart
+				: this.options.delayMouseStart
 
 			if (
-				!this.monitor.isDragging() && this.waitingForDelay) {
+				!this.monitor.isDragging() && this.waitingForDelay && delay > 0) {
 
 					const { moveStartSourceIds } = this
 
@@ -411,6 +416,7 @@ export class TouchBackendImpl implements Backend {
 			e.type === eventNames.touch.start
 				? this.options.delayTouchStart
 				: this.options.delayMouseStart
+
 		this.timeout = (setTimeout(
 			this.handleTopMoveStart.bind(this, e as any),
 			delay,
