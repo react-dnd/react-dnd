@@ -10,7 +10,7 @@
     "gatsby-plugin-manifest": "^2.6.0",
     "gatsby-plugin-react-helmet": "^3.4.0",
     "gatsby-plugin-sharp": "^2.8.0",
-    "gatsby-plugin-styled-components": "^3.4.0",
+    "gatsby-plugin-styled-components": "^3.6.0",
     "gatsby-plugin-typescript": "^2.6.0",
     "gatsby-plugin-typography": "^2.6.0",
     "gatsby-remark-autolink-headers": "^2.5.0",
