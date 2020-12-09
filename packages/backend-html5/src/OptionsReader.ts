@@ -1,11 +1,20 @@
-import { HTML5BackendContext } from './types'
+import { HTML5BackendContext, HTML5BackendOptions } from './types'
 
 export class OptionsReader {
 	public ownerDocument: Document | null = null
 	private globalContext: HTML5BackendContext
 
-	public constructor(globalContext: HTML5BackendContext) {
+	public constructor(
+		incoming: HTML5BackendOptions,
+		globalContext: HTML5BackendContext) {
+
 		this.globalContext = globalContext
+
+		Object.keys(incoming).forEach((key) => {
+			if ((incoming as any)[key] != null) {
+				;(this as any)[key] = (incoming as any)[key]
+			}
+		})
 	}
 
 	public get window(): Window | undefined {
@@ -18,7 +27,10 @@ export class OptionsReader {
 	}
 
 	public get document(): Document | undefined {
-		if (this.globalContext?.document) {
+
+		if (this.ownerDocument) {
+			return this.ownerDocument
+		} else if (this.globalContext?.document) {
 			return this.globalContext.document
 		} else if (this.window) {
 			return this.window.document

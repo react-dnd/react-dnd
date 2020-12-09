@@ -21,7 +21,7 @@ import {
 import * as NativeTypes from './NativeTypes'
 import { NativeDragSource } from './NativeDragSources/NativeDragSource'
 import { OptionsReader } from './OptionsReader'
-import { HTML5BackendContext } from './types'
+import { HTML5BackendContext, HTML5BackendOptions } from './types'
 
 declare global {
 	interface Window {
@@ -58,9 +58,10 @@ export class HTML5BackendImpl implements Backend {
 
 	public constructor(
 		manager: DragDropManager,
-		globalContext?: HTML5BackendContext,
+		context?: HTML5BackendContext,
+		options: HTML5BackendOptions = {},
 	) {
-		this.options = new OptionsReader(globalContext)
+		this.options = new OptionsReader(options, context)
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
@@ -97,10 +98,11 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		if (this.window.__isReactDndBackendSetUp) {
-			throw new Error('Cannot have two HTML5 backends at the same time.')
+			throw new Error('Cannot have twL5 backends at the same time.')
 		}
 		this.window.__isReactDndBackendSetUp = true
-		this.addEventListeners(this.window as Element)
+
+		this.addEventListeners(this.document as Node)
 	}
 
 	public teardown(): void {
@@ -173,6 +175,7 @@ export class HTML5BackendImpl implements Backend {
 
 	private addEventListeners(target: Node) {
 		// SSR Fix (https://github.com/react-dnd/react-dnd/pull/813
+
 		if (!target.addEventListener) {
 			return
 		}
@@ -393,6 +396,7 @@ export class HTML5BackendImpl implements Backend {
 	}
 
 	public handleDragStart(e: DragEvent, sourceId: string): void {
+		
 		if (e.defaultPrevented) {
 			return
 		}
@@ -404,6 +408,7 @@ export class HTML5BackendImpl implements Backend {
 	}
 
 	public handleTopDragStart = (e: DragEvent): void => {
+
 		if (e.defaultPrevented) {
 			return
 		}
@@ -475,6 +480,7 @@ export class HTML5BackendImpl implements Backend {
 
 			// Now we are ready to publish the drag source.. or are we not?
 			const { captureDraggingState } = this.getCurrentSourcePreviewNodeOptions()
+			
 			if (!captureDraggingState) {
 				// Usually we want to publish it in the next tick so that browser
 				// is able to screenshot the current (not yet dragging) state.
@@ -515,6 +521,7 @@ export class HTML5BackendImpl implements Backend {
 	}
 
 	public handleTopDragEndCapture = (): void => {
+
 		if (this.clearCurrentDragSourceNode()) {
 			// Firefox can dispatch this event in an infinite loop
 			// if dragend handler does something like showing an alert.
