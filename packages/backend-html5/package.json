@@ -1,6 +1,6 @@
 {
   "name": "@pspdfkit-labs/react-dnd-html5-backend",
-  "version": "11.1.4",
+  "version": "11.1.5",
   "description": "HTML5 backend for React DnD",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

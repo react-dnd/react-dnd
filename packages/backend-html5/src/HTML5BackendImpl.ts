@@ -29,6 +29,11 @@ declare global {
 	}
 }
 
+// To avoid overloading react - how much should we we wait before sending
+// a new update
+// 
+const UPDATE_INTERVAL = 50 // in ms
+
 export class HTML5BackendImpl implements Backend {
 	private options: OptionsReader
 
@@ -55,6 +60,9 @@ export class HTML5BackendImpl implements Backend {
 	private mouseMoveTimeoutTimer: number | null = null
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
+
+	private lastClientOffset: XYCoord | null = null
+	private hoverUpdateTimer: number | null = null
 
 	public constructor(
 		manager: DragDropManager,
@@ -610,10 +618,21 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		this.altKeyPressed = e.altKey
+		this.lastClientOffset = getEventClientOffset(e)
 
-		this.actions.hover(dragOverTargetIds || [], {
-			clientOffset: getEventClientOffset(e),
-		})
+		if (this.hoverUpdateTimer === null) {
+
+
+			this.hoverUpdateTimer = setTimeout(() => {
+
+				this.actions.hover(dragOverTargetIds || [], {
+					clientOffset: this.lastClientOffset,
+				})
+
+				this.hoverUpdateTimer = null
+
+			}, UPDATE_INTERVAL)
+		}
 
 		const canDrop = (dragOverTargetIds || []).some((targetId) =>
 			this.monitor.canDropOnTarget(targetId),
