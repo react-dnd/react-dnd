@@ -29,11 +29,6 @@ declare global {
 	}
 }
 
-// To avoid overloading react - how much should we we wait before sending
-// a new update
-// 
-const UPDATE_INTERVAL = 50 // in ms
-
 export class HTML5BackendImpl implements Backend {
 	private options: OptionsReader
 
@@ -623,7 +618,7 @@ export class HTML5BackendImpl implements Backend {
 		if (this.hoverUpdateTimer === null) {
 
 
-			this.hoverUpdateTimer = setTimeout(() => {
+			this.hoverUpdateTimer = requestAnimationFrame(() => {
 
 				this.actions.hover(dragOverTargetIds || [], {
 					clientOffset: this.lastClientOffset,
@@ -631,7 +626,7 @@ export class HTML5BackendImpl implements Backend {
 
 				this.hoverUpdateTimer = null
 
-			}, UPDATE_INTERVAL)
+			})
 		}
 
 		const canDrop = (dragOverTargetIds || []).some((targetId) =>
