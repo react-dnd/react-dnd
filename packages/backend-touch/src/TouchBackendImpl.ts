@@ -63,6 +63,8 @@ export class TouchBackendImpl implements Backend {
 	private dragOverTargetIds: string[] | undefined
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
+	private lastClientOffset: XYCoord | null = null
+	private updateTimer: number | null = null
 
 	// Patch for iOS 13, discussion over #1585
 	private lastTargetTouchFallback: Touch | undefined
@@ -570,9 +572,21 @@ export class TouchBackendImpl implements Backend {
 		// Reverse order because dnd-core reverse it before calling the DropTarget drop methods
 		orderedDragOverTargetIds.reverse()
 
-		this.actions.hover(orderedDragOverTargetIds, {
-			clientOffset: clientOffset,
-		})
+		this.lastClientOffset = clientOffset
+
+		if (!this.updateTimer) {
+
+			this.updateTimer = requestAnimationFrame(() => {
+
+				this.updateTimer = null
+
+				if (!this.monitor.isDragging()) return
+
+				this.actions.hover(orderedDragOverTargetIds, {
+					clientOffset: this.lastClientOffset,
+				})
+			})
+		}
 	}
 
 	/**
