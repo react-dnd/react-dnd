@@ -96,6 +96,7 @@ export class HTML5BackendImpl implements Backend {
 	}
 
 	public setup(): void {
+
 		if (this.window === undefined) {
 			return
 		}
@@ -103,8 +104,8 @@ export class HTML5BackendImpl implements Backend {
 		if (this.window.__isReactDndBackendSetUp) {
 			throw new Error('Cannot have twL5 backends at the same time.')
 		}
-		this.window.__isReactDndBackendSetUp = true
 
+		this.window.__isReactDndBackendSetUp = true
 		this.addEventListeners(this.document as Node)
 	}
 
@@ -114,7 +115,7 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		this.window.__isReactDndBackendSetUp = false
-		this.removeEventListeners(this.window as Element)
+		this.removeEventListeners(this.document as Node)
 		this.clearCurrentDragSourceNode()
 		if (this.asyncEndDragFrameId) {
 			this.window.cancelAnimationFrame(this.asyncEndDragFrameId)
