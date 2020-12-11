@@ -116,6 +116,7 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	public setup(): void {
+
 		if (!this.document) {
 			return
 		}
@@ -396,6 +397,7 @@ export class TouchBackendImpl implements Backend {
 
 					const { moveStartSourceIds } = this
 
+
 					this.actions.beginDrag(moveStartSourceIds, {
 						clientOffset: this._mouseClientOffset,
 						getSourceClientOffset: this.getSourceClientOffset,
@@ -421,6 +423,7 @@ export class TouchBackendImpl implements Backend {
 			this.handleTopMoveStart.bind(this, e as any),
 			delay,
 		) as any) as ReturnType<typeof setTimeout>
+
 		this.waitingForDelay = true
 	}
 
@@ -438,16 +441,20 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	public handleTopMove = (e: TouchEvent | MouseEvent): void => {
-		if (this.timeout) {
-			clearTimeout(this.timeout)
-		}
+
 		if (!this.document || this.waitingForDelay) {
 			return
 		}
+
+		if (this.timeout) {
+			clearTimeout(this.timeout)
+		}
+
 		const { moveStartSourceIds, dragOverTargetIds } = this
 		const enableHoverOutsideTarget = this.options.enableHoverOutsideTarget
 
 		const clientOffset = getEventClientOffset(e, this.lastTargetTouchFallback)
+
 
 		if (!clientOffset) {
 			return
