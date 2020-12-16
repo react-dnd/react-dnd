@@ -64,6 +64,7 @@ export class TouchBackendImpl implements Backend {
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
 	private lastClientOffset: XYCoord | null = null
+	private lastDragOverTargetIds: string[] = []
 	private updateTimer: number | null = null
 
 	// Patch for iOS 13, discussion over #1585
@@ -220,6 +221,19 @@ export class TouchBackendImpl implements Backend {
 		this.uninstallSourceNodeRemovalObserver()
 	}
 
+	private throttle(callback: (e: Event) => void, limit: number) {
+		let wait = false;
+		return function (e: Event) {
+			if (!wait) {
+				callback(e)
+				wait = true;
+				setTimeout(function () {
+					wait = false;
+				}, limit);
+			}
+		}
+	}
+
 	private addEventListener<K extends keyof EventName>(
 		subject: HTMLElement | Window | Document,
 		event: K,
@@ -227,12 +241,13 @@ export class TouchBackendImpl implements Backend {
 		capture?: boolean,
 	) {
 		const options = supportsPassive ? { capture, passive: false } : capture
+		const callback = this.throttle(handler as any, 50)
 
 		this.listenerTypes.forEach(function (listenerType) {
 			const evt = eventNames[listenerType][event]
 
 			if (evt) {
-				subject.addEventListener(evt as any, handler as any, options)
+				subject.addEventListener(evt as any, callback as any, options)
 			}
 		})
 	}
@@ -570,21 +585,24 @@ export class TouchBackendImpl implements Backend {
 		}
 
 		// Reverse order because dnd-core reverse it before calling the DropTarget drop methods
-		orderedDragOverTargetIds.reverse()
-
+		this.lastDragOverTargetIds = orderedDragOverTargetIds.reverse()
 		this.lastClientOffset = clientOffset
 
 		if (!this.updateTimer) {
 
-			this.updateTimer = requestAnimationFrame(() => {
-
-				this.updateTimer = null
+			const updateState = () => {
 
 				if (!this.monitor.isDragging()) return
 
-				this.actions.hover(orderedDragOverTargetIds, {
+				this.actions.hover(this.lastDragOverTargetIds, {
 					clientOffset: this.lastClientOffset,
 				})
+
+				this.updateTimer = requestAnimationFrame(updateState)
+			}
+
+			this.updateTimer = requestAnimationFrame(() => {
+				updateState()
 			})
 		}
 	}
@@ -627,6 +645,9 @@ export class TouchBackendImpl implements Backend {
 		this.uninstallSourceNodeRemovalObserver()
 		this.actions.drop()
 		this.actions.endDrag()
+
+		if (this.updateTimer) cancelAnimationFrame(this.updateTimer)
+		this.updateTimer = null
 	}
 
 	public handleCancelOnEscape = (e: KeyboardEvent): void => {
