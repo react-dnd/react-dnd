@@ -84,7 +84,7 @@ export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 	accept: TargetType
 
 	/**
-	 * The drop target optinos
+	 * The drop target options
 	 */
 	options?: any
 
