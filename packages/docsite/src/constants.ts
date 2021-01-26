@@ -234,6 +234,10 @@ export const ExamplePages: PageGroup[] = [
 				location: '/examples/other/native-files',
 				title: 'Native Files',
 			},
+			OTHER_HTML_FILES: {
+				location: '/examples/other/native-html',
+				title: 'Native Html',
+			},
 		},
 	},
 	{
