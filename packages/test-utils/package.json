@@ -18,7 +18,7 @@
     "@types/react-dom": "^16.9.10",
     "dnd-core": "workspace:packages/dnd-core",
     "gulp": "^4.0.2",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-test-backend": "workspace:packages/backend-test",
     "react-dom": "^16.14.0"

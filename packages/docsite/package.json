@@ -23,7 +23,7 @@
     "lodash": "^4.17.20",
     "prismjs": "^1.23.0",
     "query-string": "^6.13.8",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-examples-decorators": "workspace:packages/examples-decorators",
     "react-dnd-examples-hooks": "workspace:packages/examples-hooks",
