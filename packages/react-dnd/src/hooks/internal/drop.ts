@@ -64,6 +64,6 @@ export function useDropHandler<
 			connector.receiveHandlerId(handlerId)
 			return unregister
 		},
-		[monitor, connector],
+		[monitor, connector, spec.current.accept],
 	)
 }
