@@ -15,6 +15,7 @@ import sortableStressTest from './04-sortable/stress-test'
 import customizeDropEffects from './05-customize/drop-effects'
 import customizeHandlesAndPreviews from './05-customize/handles-and-previews'
 import otherNativeFiles from './06-other/native-files'
+import otherNativeHtml from './06-other/native-html'
 import dragSourceRerender from './07-regression/drag-source-rerender'
 import remountWithCorrectProps from './07-regression/remount-with-correct-props'
 import otherChainedConnectors from './07-regression/chained-connectors'
@@ -41,6 +42,7 @@ export const componentIndex: {
 	'other-drag-source-rerender': dragSourceRerender,
 	'other-remount-with-correct-props': remountWithCorrectProps,
 	'other-native-files': otherNativeFiles,
+	'other-native-html': otherNativeHtml,
 	'other-chained-connectors': otherChainedConnectors,
 	'other-previews-memory-leak': otherPreviewsMemoryLeak,
 }
