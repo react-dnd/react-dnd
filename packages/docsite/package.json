@@ -36,6 +36,7 @@
     "react-is": "^16.13.1",
     "react-tabs": "^3.2.0",
     "react-typography": "^0.16.19",
+    "regenerator-runtime": "^0.13.7",
     "rehype-react": "^6.2.0",
     "shallow-compare": "^1.2.2",
     "styled-components": "^5.2.1",
