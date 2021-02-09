@@ -6584,15 +6584,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rollup/plugin-replace", "virtual:a4b16e182a0d5be1f51008fd86e27f5f91d2ff1d35cd925d6663482eb993c2133f16b41922f78571490b147d705095670a9bcae798ad076cd488c05490fe3e77#npm:2.3.4"],
             ["@types/chalk", "npm:2.2.0"],
             ["@types/fancy-log", "npm:1.3.1"],
-            ["@types/gulp", "npm:4.0.8"],
-            ["@types/gulp-babel", "npm:6.1.29"],
-            ["@types/gulp-debug", "npm:2.0.31"],
-            ["@types/gulp-plumber", "npm:0.0.32"],
-            ["@types/gulp-shell", "npm:0.7.0"],
             ["@types/node", "npm:14.14.25"],
             ["@types/rimraf", "npm:3.0.0"],
             ["@types/through2", "npm:2.0.36"],
-            ["@types/undertaker", "npm:1.2.6"],
             ["@types/vinyl-source-stream", "npm:0.0.30"],
             ["@types/webpack", "npm:4.41.26"],
             ["@types/webpack-merge", "npm:4.1.5"],
@@ -7037,15 +7031,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@types/expect", [
-        ["npm:1.20.4", {
-          "packageLocation": "./.yarn/cache/@types-expect-npm-1.20.4-9b033f86cb-426f19a8b2.zip/node_modules/@types/expect/",
-          "packageDependencies": [
-            ["@types/expect", "npm:1.20.4"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["@types/faker", [
         ["npm:5.1.6", {
           "packageLocation": "./.yarn/cache/@types-faker-npm-5.1.6-8254c3c94e-4fb5005a72.zip/node_modules/@types/faker/",
@@ -7094,75 +7079,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@types/glob-stream", [
-        ["npm:6.1.0", {
-          "packageLocation": "./.yarn/cache/@types-glob-stream-npm-6.1.0-509c75f094-9b71924d3d.zip/node_modules/@types/glob-stream/",
-          "packageDependencies": [
-            ["@types/glob-stream", "npm:6.1.0"],
-            ["@types/glob", "npm:7.1.3"],
-            ["@types/node", "npm:14.11.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["@types/graceful-fs", [
         ["npm:4.1.3", {
           "packageLocation": "./.yarn/cache/@types-graceful-fs-npm-4.1.3-fa91c32dd0-5e2ec610a9.zip/node_modules/@types/graceful-fs/",
           "packageDependencies": [
             ["@types/graceful-fs", "npm:4.1.3"],
             ["@types/node", "npm:14.11.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/gulp", [
-        ["npm:4.0.8", {
-          "packageLocation": "./.yarn/cache/@types-gulp-npm-4.0.8-e42f280c4c-7506229236.zip/node_modules/@types/gulp/",
-          "packageDependencies": [
-            ["@types/gulp", "npm:4.0.8"],
-            ["@types/undertaker", "npm:1.2.3"],
-            ["@types/vinyl-fs", "npm:2.4.11"],
-            ["chokidar", "npm:3.4.3"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/gulp-babel", [
-        ["npm:6.1.29", {
-          "packageLocation": "./.yarn/cache/@types-gulp-babel-npm-6.1.29-cfd9503526-fdb9ca36fa.zip/node_modules/@types/gulp-babel/",
-          "packageDependencies": [
-            ["@types/gulp-babel", "npm:6.1.29"],
-            ["@types/node", "npm:14.11.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/gulp-debug", [
-        ["npm:2.0.31", {
-          "packageLocation": "./.yarn/cache/@types-gulp-debug-npm-2.0.31-9a05b9bcce-5b79bc1e55.zip/node_modules/@types/gulp-debug/",
-          "packageDependencies": [
-            ["@types/gulp-debug", "npm:2.0.31"],
-            ["@types/node", "npm:14.11.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/gulp-plumber", [
-        ["npm:0.0.32", {
-          "packageLocation": "./.yarn/cache/@types-gulp-plumber-npm-0.0.32-2fd1dcd3f1-f160230427.zip/node_modules/@types/gulp-plumber/",
-          "packageDependencies": [
-            ["@types/gulp-plumber", "npm:0.0.32"],
-            ["@types/node", "npm:14.11.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/gulp-shell", [
-        ["npm:0.7.0", {
-          "packageLocation": "./.yarn/cache/@types-gulp-shell-npm-0.7.0-421c90667a-452a08dcf1.zip/node_modules/@types/gulp-shell/",
-          "packageDependencies": [
-            ["@types/gulp-shell", "npm:0.7.0"],
-            ["gulp-shell", "npm:0.8.0"]
           ],
           "linkType": "HARD",
         }]
@@ -7340,13 +7262,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/",
           "packageDependencies": [
             ["@types/node", "npm:14.14.25"]
-          ],
-          "linkType": "HARD",
-        }],
-        ["npm:14.14.7", {
-          "packageLocation": "./.yarn/cache/@types-node-npm-14.14.7-e4d93f4d9a-4fc8434bfe.zip/node_modules/@types/node/",
-          "packageDependencies": [
-            ["@types/node", "npm:14.14.7"]
           ],
           "linkType": "HARD",
         }],
@@ -7613,36 +7528,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@types/undertaker", [
-        ["npm:1.2.3", {
-          "packageLocation": "./.yarn/cache/@types-undertaker-npm-1.2.3-b4b75d0f12-518a891ea7.zip/node_modules/@types/undertaker/",
-          "packageDependencies": [
-            ["@types/undertaker", "npm:1.2.3"],
-            ["@types/node", "npm:14.11.2"],
-            ["@types/undertaker-registry", "npm:1.0.1"]
-          ],
-          "linkType": "HARD",
-        }],
-        ["npm:1.2.6", {
-          "packageLocation": "./.yarn/cache/@types-undertaker-npm-1.2.6-d3d3da6cee-b9637b7799.zip/node_modules/@types/undertaker/",
-          "packageDependencies": [
-            ["@types/undertaker", "npm:1.2.6"],
-            ["@types/node", "npm:14.11.2"],
-            ["@types/undertaker-registry", "npm:1.0.1"],
-            ["async-done", "npm:1.3.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/undertaker-registry", [
-        ["npm:1.0.1", {
-          "packageLocation": "./.yarn/cache/@types-undertaker-registry-npm-1.0.1-eb85640750-7b1d6a0d64.zip/node_modules/@types/undertaker-registry/",
-          "packageDependencies": [
-            ["@types/undertaker-registry", "npm:1.0.1"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["@types/unist", [
         ["npm:2.0.3", {
           "packageLocation": "./.yarn/cache/@types-unist-npm-2.0.3-4b26dedfde-42e0dc4ac7.zip/node_modules/@types/unist/",
@@ -7671,29 +7556,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/vfile-message", "npm:1.0.1"],
             ["@types/node", "npm:14.11.2"],
             ["@types/unist", "npm:2.0.3"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/vinyl", [
-        ["npm:2.0.4", {
-          "packageLocation": "./.yarn/cache/@types-vinyl-npm-2.0.4-b4ba792eb0-276311ea72.zip/node_modules/@types/vinyl/",
-          "packageDependencies": [
-            ["@types/vinyl", "npm:2.0.4"],
-            ["@types/expect", "npm:1.20.4"],
-            ["@types/node", "npm:14.11.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/vinyl-fs", [
-        ["npm:2.4.11", {
-          "packageLocation": "./.yarn/cache/@types-vinyl-fs-npm-2.4.11-c098d00490-6e97c6403c.zip/node_modules/@types/vinyl-fs/",
-          "packageDependencies": [
-            ["@types/vinyl-fs", "npm:2.4.11"],
-            ["@types/glob-stream", "npm:6.1.0"],
-            ["@types/node", "npm:14.11.2"],
-            ["@types/vinyl", "npm:2.0.4"]
           ],
           "linkType": "HARD",
         }]
@@ -18274,7 +18136,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/gulp-debug-virtual-83961f1d26/0/cache/gulp-debug-npm-4.0.0-e6de8ace8e-2fe4414632.zip/node_modules/gulp-debug/",
           "packageDependencies": [
             ["gulp-debug", "virtual:a4b16e182a0d5be1f51008fd86e27f5f91d2ff1d35cd925d6663482eb993c2133f16b41922f78571490b147d705095670a9bcae798ad076cd488c05490fe3e77#npm:4.0.0"],
-            ["@types/gulp", "npm:4.0.8"],
+            ["@types/gulp", null],
             ["chalk", "npm:2.4.2"],
             ["fancy-log", "npm:1.3.3"],
             ["gulp", "npm:4.0.2"],
@@ -18299,21 +18161,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fancy-log", "npm:1.3.3"],
             ["plugin-error", "npm:0.1.2"],
             ["through2", "npm:2.0.5"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["gulp-shell", [
-        ["npm:0.8.0", {
-          "packageLocation": "./.yarn/cache/gulp-shell-npm-0.8.0-72834dc949-73ac0bf2d9.zip/node_modules/gulp-shell/",
-          "packageDependencies": [
-            ["gulp-shell", "npm:0.8.0"],
-            ["chalk", "npm:3.0.0"],
-            ["fancy-log", "npm:1.3.3"],
-            ["lodash.template", "npm:4.5.0"],
-            ["plugin-error", "npm:1.0.1"],
-            ["through2", "npm:3.0.2"],
-            ["tslib", "npm:1.14.1"]
           ],
           "linkType": "HARD",
         }]
@@ -27354,7 +27201,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["react-dnd-test-utils", "virtual:89275b349e657289ee4fa20f5ffac2237821d64559e5ceac2ba59083785489a449cc1b4dd68555cdab498b3fff985440597050330392c60cc25356163825c963#portal:../test-utils::locator=react-dnd%40workspace%3Apackages%2Freact-dnd"],
             ["@react-dnd/build", "workspace:packages/build"],
-            ["@types/node", "npm:14.14.7"],
+            ["@types/node", "npm:14.14.25"],
             ["@types/react", "npm:16.9.51"],
             ["@types/react-dnd", null],
             ["@types/react-dnd-test-backend", null],
@@ -27411,7 +27258,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["react-dnd-test-utils", "virtual:9e368138a395567f9e7f04ae8a46c627835e5c2bf7567854d2a47759f885ada0cc04c4337d647e9c7e01403d292956ca40780aea5aafb90feb3d9feef7800183#portal:../test-utils::locator=react-dnd%40workspace%3Apackages%2Freact-dnd"],
             ["@react-dnd/build", "workspace:packages/build"],
-            ["@types/node", "npm:14.14.7"],
+            ["@types/node", "npm:14.14.25"],
             ["@types/react", "npm:16.9.51"],
             ["@types/react-dnd", null],
             ["@types/react-dnd-test-backend", null],
@@ -27440,7 +27287,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["react-dnd-test-utils", "virtual:cb776bfc46bbecfb4acbc423f08da2f97d166e51a3c07ff252e278de98133250ca3b050a7ad54990e85da5f7ad5cdd6930589cf7baf4fdef78b350712f0ab6a0#portal:../test-utils::locator=react-dnd%40workspace%3Apackages%2Freact-dnd"],
             ["@react-dnd/build", "workspace:packages/build"],
-            ["@types/node", "npm:14.14.7"],
+            ["@types/node", "npm:14.14.25"],
             ["@types/react", "npm:16.9.51"],
             ["@types/react-dnd", null],
             ["@types/react-dnd-test-backend", null],
@@ -27469,7 +27316,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["react-dnd-test-utils", "virtual:ea42280ea91331989f5987709c627c3701ff09d3d99512b6c0986bd280bd565cf39443fafe4bce0d854708fe9c71cb5bde272158f07867e011683707b180fb9d#portal:../test-utils::locator=react-dnd%40workspace%3Apackages%2Freact-dnd"],
             ["@react-dnd/build", "workspace:packages/build"],
-            ["@types/node", "npm:14.14.7"],
+            ["@types/node", "npm:14.14.25"],
             ["@types/react", "npm:16.9.51"],
             ["@types/react-dnd", null],
             ["@types/react-dnd-test-backend", null],

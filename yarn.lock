@@ -3900,15 +3900,9 @@ __metadata:
     "@rollup/plugin-replace": ^2.3.4
     "@types/chalk": ^2.2.0
     "@types/fancy-log": ^1.3.1
-    "@types/gulp": ^4.0.8
-    "@types/gulp-babel": ^6.1.29
-    "@types/gulp-debug": ^2.0.31
-    "@types/gulp-plumber": ^0.0.32
-    "@types/gulp-shell": ^0.7.0
     "@types/node": ^14.14.25
     "@types/rimraf": ^3.0.0
     "@types/through2": ^2.0.36
-    "@types/undertaker": ^1.2.6
     "@types/vinyl-source-stream": ^0.0.30
     "@types/webpack": ^4.41.26
     "@types/webpack-merge": ^4.1.5
@@ -4256,13 +4250,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/expect@npm:^1.20.4":
-  version: 1.20.4
-  resolution: "@types/expect@npm:1.20.4"
-  checksum: 426f19a8b25374c6647c78392bde02ad687e750519911ef43a25b25bde641c91aac89bbe6a2c6325a36b44eff4e062610e5e2de71827aa9d60a4e650e486b6e6
-  languageName: node
-  linkType: hard
-
 "@types/faker@npm:^5.1.6":
   version: 5.1.6
   resolution: "@types/faker@npm:5.1.6"
@@ -4281,16 +4268,6 @@ __metadata:
   version: 3.2.0
   resolution: "@types/get-port@npm:3.2.0"
   checksum: 49109dfbd9b185d234d3d88d6be994ecfeb7296fbe9a4373cbd914f8b4a2c0b7abda76af889c6182666a2dfada689416276fd10a63ae3374f05d7ae44cea3797
-  languageName: node
-  linkType: hard
-
-"@types/glob-stream@npm:*":
-  version: 6.1.0
-  resolution: "@types/glob-stream@npm:6.1.0"
-  dependencies:
-    "@types/glob": "*"
-    "@types/node": "*"
-  checksum: 9b71924d3de8d2064b4ce76decb4f1d368e910c269dfb5c793d9d0cf9230c391e5290b532347a666d420986b00908a2ac7bb0d46810cdfec32e373504bd577a6
   languageName: node
   linkType: hard
 
@@ -4321,53 +4298,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 5e2ec610a96de2a7b13ee1e071a31a225b68df07880f80f1112a3540299288d943c69c0f1114a60480aa137d424333392c11732969f14b964c1c419fae48a6f0
-  languageName: node
-  linkType: hard
-
-"@types/gulp-babel@npm:^6.1.29":
-  version: 6.1.29
-  resolution: "@types/gulp-babel@npm:6.1.29"
-  dependencies:
-    "@types/node": "*"
-  checksum: fdb9ca36fa8907bc3c4d193455b2e75b95e43dd6d6b498463ec131e23def3dd9283371692ed72c57bae08f65aa74ccaf4cdcde1b6d1054cce0cd236903669615
-  languageName: node
-  linkType: hard
-
-"@types/gulp-debug@npm:^2.0.31":
-  version: 2.0.31
-  resolution: "@types/gulp-debug@npm:2.0.31"
-  dependencies:
-    "@types/node": "*"
-  checksum: 5b79bc1e5535b652ebcf3d45cf87f39082077758c62f1d621231f91a4daed240bbd77d6e5c1a7a038aca5a4e0210a420a3df87ddc2a29da745ce603922501f16
-  languageName: node
-  linkType: hard
-
-"@types/gulp-plumber@npm:^0.0.32":
-  version: 0.0.32
-  resolution: "@types/gulp-plumber@npm:0.0.32"
-  dependencies:
-    "@types/node": "*"
-  checksum: f160230427e9e910dfca00f64d201883e0e9cc84d993b2254a7f09c0eb42808b214a9bc5575d9ff6d142124eecf2e33b8005aee36204e9eb8493fc114e37f00d
-  languageName: node
-  linkType: hard
-
-"@types/gulp-shell@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@types/gulp-shell@npm:0.7.0"
-  dependencies:
-    gulp-shell: "*"
-  checksum: 452a08dcf1f95530469f0fac3bd9f50ce8d3ffb0b603ea25a2fc4b1cadc08d619282c0678886b7634564b84f284edc3c86eed5d4209f894693a005ee62df2159
-  languageName: node
-  linkType: hard
-
-"@types/gulp@npm:^4.0.8":
-  version: 4.0.8
-  resolution: "@types/gulp@npm:4.0.8"
-  dependencies:
-    "@types/undertaker": "*"
-    "@types/vinyl-fs": "*"
-    chokidar: ^3.3.1
-  checksum: 75062292369343b86d37927038f8e38a0d3b437f55f05a8d1b315c2211ab61cedf2ceba35c2621b94aa8b6dadc52003da488cb347ca1c87a0dddbead9ab73f95
   languageName: node
   linkType: hard
 
@@ -4532,13 +4462,6 @@ __metadata:
   version: 14.14.25
   resolution: "@types/node@npm:14.14.25"
   checksum: 64c42730f4169e49ec378870622ef06c5d820b31340e224cc1b45bf06c8b0cfa28daa587b4ae2b8ea1f712ef049bae4d9c92925b157ba9ba7cde3b22ff552513
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^14.14.7":
-  version: 14.14.7
-  resolution: "@types/node@npm:14.14.7"
-  checksum: 4fc8434bfe81c2a3102fa76777712ecee9e9177d43ec5929ba0dfd5a77a6c459cf10a37df64ea880a328f06973f6210eabf04b312428e309b2e8998147a6cd63
   languageName: node
   linkType: hard
 
@@ -4760,34 +4683,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/undertaker-registry@npm:*":
-  version: 1.0.1
-  resolution: "@types/undertaker-registry@npm:1.0.1"
-  checksum: 7b1d6a0d6410bbdc419ec248e99c2575d638925a75a36783ee28985fe37b3bf4c6dc7f7841460103e410e6a8921fcbae8219ec92c188bf934d8674a091bc1342
-  languageName: node
-  linkType: hard
-
-"@types/undertaker@npm:*":
-  version: 1.2.3
-  resolution: "@types/undertaker@npm:1.2.3"
-  dependencies:
-    "@types/node": "*"
-    "@types/undertaker-registry": "*"
-  checksum: 518a891ea72b036f57f3ccd606c6eba1ecf4c7e53690d7162675dad491b667a6700b5e1b41402c9b99edee707a378a9456474c733620f24d1a533b4a24a257ac
-  languageName: node
-  linkType: hard
-
-"@types/undertaker@npm:^1.2.6":
-  version: 1.2.6
-  resolution: "@types/undertaker@npm:1.2.6"
-  dependencies:
-    "@types/node": "*"
-    "@types/undertaker-registry": "*"
-    async-done: ~1.3.2
-  checksum: b9637b779931b0a1f486a1d180e979dc5500d890114c9e40489237399654101c653d7904fa808d0eb4eed71578c94879f84e405920e075313a78388c31435d40
-  languageName: node
-  linkType: hard
-
 "@types/unist@npm:*, @types/unist@npm:^2.0.0, @types/unist@npm:^2.0.2, @types/unist@npm:^2.0.3":
   version: 2.0.3
   resolution: "@types/unist@npm:2.0.3"
@@ -4816,33 +4711,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/vinyl-fs@npm:*":
-  version: 2.4.11
-  resolution: "@types/vinyl-fs@npm:2.4.11"
-  dependencies:
-    "@types/glob-stream": "*"
-    "@types/node": "*"
-    "@types/vinyl": "*"
-  checksum: 6e97c6403cbd50b016f75daaf057189c0528baba1229aa5832284cf862edd5ab59f341f518ce0ca26d27ea87a88fd3a8891e1e1fa3fbc7973b0a1e5c558c0eca
-  languageName: node
-  linkType: hard
-
 "@types/vinyl-source-stream@npm:^0.0.30":
   version: 0.0.30
   resolution: "@types/vinyl-source-stream@npm:0.0.30"
   dependencies:
     "@types/node": "*"
   checksum: bd29f4e7a850353cc5a4092f3c7c7f5d37a8fa912810a3151c5f0594a484f806263c3df53d3bc01a6622f6d177ced261fb4585a6fa29b082eae112cb335889da
-  languageName: node
-  linkType: hard
-
-"@types/vinyl@npm:*":
-  version: 2.0.4
-  resolution: "@types/vinyl@npm:2.0.4"
-  dependencies:
-    "@types/expect": ^1.20.4
-    "@types/node": "*"
-  checksum: 276311ea721697b0d42878ec256b08027d95836544ab5d04452f56661c4d775f290f3d412078523708d41b0dfcc72d33788ad7ac0afb3cdfaf7b57e40cdfcbf2
   languageName: node
   linkType: hard
 
@@ -6124,7 +5998,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async-done@npm:^1.2.0, async-done@npm:^1.2.2, async-done@npm:~1.3.2":
+"async-done@npm:^1.2.0, async-done@npm:^1.2.2":
   version: 1.3.2
   resolution: "async-done@npm:1.3.2"
   dependencies:
@@ -7628,7 +7502,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.3.1, chokidar@npm:^3.4.1, chokidar@npm:^3.4.2, chokidar@npm:^3.4.3":
+"chokidar@npm:^3.4.1, chokidar@npm:^3.4.2, chokidar@npm:^3.4.3":
   version: 3.4.3
   resolution: "chokidar@npm:3.4.3"
   dependencies:
@@ -13744,20 +13618,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"gulp-shell@npm:*":
-  version: 0.8.0
-  resolution: "gulp-shell@npm:0.8.0"
-  dependencies:
-    chalk: ^3.0.0
-    fancy-log: ^1.3.3
-    lodash.template: ^4.5.0
-    plugin-error: ^1.0.1
-    through2: ^3.0.1
-    tslib: ^1.10.0
-  checksum: 73ac0bf2d90137b1223a1dd7bd28e233266d654bc1b4d2478f968adf200624f37dbe19670c1c3ab10601ea06d1047670533d28f9d7e704a77b52a9d7d51e8bab
-  languageName: node
-  linkType: hard
-
 "gulp-typescript@npm:^6.0.0-alpha.1":
   version: 6.0.0-alpha.1
   resolution: "gulp-typescript@npm:6.0.0-alpha.1"
@@ -17223,7 +17083,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"lodash.template@npm:^4.0.2, lodash.template@npm:^4.5.0":
+"lodash.template@npm:^4.0.2":
   version: 4.5.0
   resolution: "lodash.template@npm:4.5.0"
   dependencies:
@@ -21683,9 +21543,9 @@ fsevents@~2.3.1:
   resolution: "react-dnd-test-utils@portal:../test-utils::locator=react-dnd%40workspace%3Apackages%2Freact-dnd"
   dependencies:
     "@react-dnd/build": "workspace:packages/build"
-    "@types/node": ^14.14.7
-    "@types/react": ^16.9.56
-    "@types/react-dom": ^16.9.9
+    "@types/node": ^14.14.25
+    "@types/react": ^16.14.3
+    "@types/react-dom": ^16.9.10
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
     react: ^16.14.0
