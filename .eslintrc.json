@@ -10,7 +10,7 @@
   ],
   "settings": {
     "react": {
-      "version": "16.8"
+      "version": "17"
     }
   },
   "env": {
@@ -22,6 +22,7 @@
   "rules": {
     "no-for-of-loops/no-for-of-loops": 2,
     "react/prop-types": 0,
+    "react/react-in-jsx-scope": 0,
 
     // TODO: re-enable
     "@typescript-eslint/no-explicit-any": 0,

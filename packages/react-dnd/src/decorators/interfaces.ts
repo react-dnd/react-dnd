@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { Component, ComponentType, ComponentClass } from 'react'
 import { Identifier } from 'dnd-core'
 import {
 	DropTargetMonitor,
@@ -13,8 +13,8 @@ import { NonReactStatics } from 'hoist-non-react-statics'
 /**
  * A DnD interactive component
  */
-export interface DndComponent<Props> extends React.Component<Props> {
-	getDecoratedComponentInstance(): React.Component<Props> | null
+export interface DndComponent<Props> extends Component<Props> {
+	getDecoratedComponentInstance(): Component<Props> | null
 	getHandlerId(): Identifier
 }
 
@@ -200,10 +200,10 @@ export type Shared<InjectedProps, DecorationTargetProps> = {
 /**
  * Gets the props interface of a component using inference
  */
-export type GetProps<C> = C extends React.ComponentType<infer P> ? P : never
+export type GetProps<C> = C extends ComponentType<infer P> ? P : never
 
 export type DndComponentEnhancer<CollectedProps> = <
-	C extends React.ComponentType<Matching<CollectedProps, GetProps<C>>>
+	C extends ComponentType<Matching<CollectedProps, GetProps<C>>>
 >(
 	component: C,
 ) => DndComponentClass<
@@ -213,8 +213,7 @@ export type DndComponentEnhancer<CollectedProps> = <
 
 // Applies LibraryManagedAttributes (proper handling of defaultProps
 // and propTypes), as well as defines WrappedComponent.
-export type DndComponentClass<
-	C extends React.ComponentType<any>,
-	P
-> = React.ComponentClass<JSX.LibraryManagedAttributes<C, P>> &
+export type DndComponentClass<C extends ComponentType<any>, P> = ComponentClass<
+	JSX.LibraryManagedAttributes<C, P>
+> &
 	NonReactStatics<C> & { DecoratedComponent: C }

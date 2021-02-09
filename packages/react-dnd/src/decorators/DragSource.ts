@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { ComponentType as RComponentType } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { SourceType, DragDropManager } from 'dnd-core'
 import { DndOptions } from '../interfaces'
@@ -81,7 +81,7 @@ export function DragSource<
 	)
 
 	return (function decorateSource<
-		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
+		ComponentType extends RComponentType<RequiredProps & CollectedProps>
 	>(DecoratedComponent: ComponentType) {
 		return decorateHandler<RequiredProps, CollectedProps, SourceType>({
 			containerDisplayName: 'DragSource',

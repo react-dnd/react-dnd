@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import * as React from 'react'
+import {
+	Ref,
+	ComponentType,
+	useRef,
+	useImperativeHandle,
+	forwardRef,
+} from 'react'
 import { TestBackend, getInstance, ITestBackend } from 'react-dnd-test-backend'
 import { DndComponent, DndContext, DndProvider } from 'react-dnd'
 import { Backend, DragDropManager } from 'dnd-core'
@@ -16,13 +22,13 @@ interface RefType {
  * @param DecoratedComponent The component to decorate
  */
 export function wrapInTestContext<T>(
-	DecoratedComponent: React.ComponentType<T>,
-): React.ComponentType<T> {
-	const forwardedRefFunc = (props: any, ref: React.Ref<RefType>) => {
-		const dragDropManager = React.useRef<any>(undefined)
-		const decoratedComponentRef = React.useRef<any>(undefined)
+	DecoratedComponent: ComponentType<T>,
+): ComponentType<T> {
+	const forwardedRefFunc = (props: any, ref: Ref<RefType>) => {
+		const dragDropManager = useRef<any>(undefined)
+		const decoratedComponentRef = useRef<any>(undefined)
 
-		React.useImperativeHandle(ref, () => ({
+		useImperativeHandle(ref, () => ({
 			getManager: () => dragDropManager.current,
 			getDecoratedComponent: () => decoratedComponentRef.current,
 		}))
@@ -41,7 +47,7 @@ export function wrapInTestContext<T>(
 	}
 	forwardedRefFunc.displayName = 'TestContextWrapper'
 
-	return React.forwardRef(forwardedRefFunc)
+	return forwardRef(forwardedRefFunc)
 }
 
 /**

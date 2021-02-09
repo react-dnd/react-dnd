@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { useEffect, memo } from 'react'
+import { FC, useEffect, memo } from 'react'
 import { BackendFactory, DragDropManager } from 'dnd-core'
 import { DndContext, createDndContext } from './DndContext'
 
@@ -20,7 +19,7 @@ const INSTANCE_SYM = Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')
 /**
  * A React component that provides the React-DnD context
  */
-export const DndProvider: React.FC<DndProviderProps<any, any>> = memo(
+export const DndProvider: FC<DndProviderProps<any, any>> = memo(
 	function DndProvider({ children, ...props }) {
 		const [manager, isGlobalInstance] = getDndContextValue(props) // memoized from props
 

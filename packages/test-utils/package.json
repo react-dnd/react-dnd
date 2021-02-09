@@ -27,9 +27,9 @@
     "react-dom": "^17.0.1"
   },
   "peerDependencies": {
-    "react": ">= 16.9",
+    "react": ">= 17",
     "react-dnd": ">= 10.0.0",
     "react-dnd-test-backend": ">= 10.0.0",
-    "react-dom": ">= 16.9"
+    "react-dom": ">= 17"
   }
 }

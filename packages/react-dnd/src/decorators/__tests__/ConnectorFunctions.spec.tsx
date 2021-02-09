@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { mount } from 'enzyme'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { DropTarget } from 'react-dnd'

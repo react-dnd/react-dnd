@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { ComponentType as RComponentType } from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
 import { DndOptions } from '../interfaces'
@@ -71,7 +71,7 @@ export function DropTarget<RequiredProps, CollectedProps = any>(
 	)
 
 	return (function decorateTarget<
-		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
+		ComponentType extends RComponentType<RequiredProps & CollectedProps>
 	>(DecoratedComponent: ComponentType): DndComponent<RequiredProps> {
 		return decorateHandler<RequiredProps, CollectedProps, TargetType>({
 			containerDisplayName: 'DropTarget',

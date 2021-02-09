@@ -4454,12 +4454,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:16.9.8":
-  version: 16.9.8
-  resolution: "@types/react-dom@npm:16.9.8"
+"@types/react-dom@npm:17.0.0":
+  version: 17.0.0
+  resolution: "@types/react-dom@npm:17.0.0"
   dependencies:
     "@types/react": "*"
-  checksum: 53a223c0266178bca9161301d18ee6199e8f75f88caed5c4601c5aaedaf4c68f03bd72f6aafa979254beb20759f0b68a542ce04295d704eb67ae179769c50813
+  checksum: 7ca9351b6c2523327cd7afe40082a37034898f65e9d86700236682efed910ba7c9cec10e9a3b829aa7b804b18791a28743ce468fcb42e9a788bfc33b84137e45
   languageName: node
   linkType: hard
 
@@ -4481,13 +4481,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:16.9.51":
-  version: 16.9.51
-  resolution: "@types/react@npm:16.9.51"
+"@types/react@npm:17.0.1":
+  version: 17.0.1
+  resolution: "@types/react@npm:17.0.1"
   dependencies:
     "@types/prop-types": "*"
     csstype: ^3.0.2
-  checksum: 2244f20526c284e3d81ff50422222fce609034f4a1e29ea71733ab9e2c2c9894f062e4a270e327d5a81d11b02a6de24e418babcfb039a7139549b21179fc1942
+  checksum: 5b490728c5210ea20b20377dd8c69b12ba7283058788d431d8b35ff4d18d03aa3a0f0cc6fe83691c8b9707d3e7ee8e9aae4e50d3989e094c907030d045d0e4e2
   languageName: node
   linkType: hard
 
@@ -21205,9 +21205,9 @@ fsevents@~2.3.1:
   peerDependencies:
     "@types/node": ">= 12"
     prop-types: ">= 15"
-    react: ">= 16.9"
+    react: ">= 17"
     react-dnd: ">11.1.3"
-    react-dom: ">= 16.9"
+    react-dom: ">= 17"
   peerDependenciesMeta:
     "@types/node":
       optional: true
@@ -21244,12 +21244,12 @@ fsevents@~2.3.1:
     react-frame-component: ^4.1.3
   peerDependencies:
     "@types/node": ">= 12"
-    "@types/react": ">= 16.9"
-    "@types/react-dom": ">= 16.9"
+    "@types/react": ">= 17"
+    "@types/react-dom": ">= 17"
     prop-types: ">= 15"
-    react: ">= 16.9"
+    react: ">= 17"
     react-dnd: ">11.1.3"
-    react-dom: ">= 16.9"
+    react-dom: ">= 17"
   peerDependenciesMeta:
     "@types/node":
       optional: true
@@ -21352,19 +21352,19 @@ fsevents@~2.3.1:
   dependencies:
     "@react-dnd/build": "workspace:packages/build"
     "@types/node": ^14.14.25
-    "@types/react": ^16.14.3
-    "@types/react-dom": ^16.9.10
+    "@types/react": ^17.0.1
+    "@types/react-dom": ^17.0.0
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-test-backend: "workspace:packages/backend-test"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
   peerDependencies:
-    react: ">= 16.9"
+    react: ">= 17"
     react-dnd: ">= 10.0.0"
     react-dnd-test-backend: ">= 10.0.0"
-    react-dom: ">= 16.9"
+    react-dom: ">= 17"
   languageName: node
   linkType: soft
 
@@ -21383,10 +21383,10 @@ fsevents@~2.3.1:
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dom: ^17.0.1
   peerDependencies:
-    react: ">= 16.9"
+    react: ">= 17"
     react-dnd: ">= 10.0.0"
     react-dnd-test-backend: ">= 10.0.0"
-    react-dom: ">= 16.9"
+    react-dom: ">= 17"
   languageName: unknown
   linkType: soft
 
@@ -21426,10 +21426,10 @@ fsevents@~2.3.1:
   peerDependencies:
     "@types/hoist-non-react-statics": ">= 3.3.1"
     "@types/node": ">= 12"
-    "@types/react": ">= 16.9"
-    "@types/react-dom": ">= 16.9"
-    react: ">= 16.9"
-    react-dom: ">= 16.9"
+    "@types/react": ">= 17"
+    "@types/react-dom": ">= 17"
+    react: ">= 17"
+    react-dom: ">= 17"
   peerDependenciesMeta:
     "@types/hoist-non-react-statics":
       optional: true
@@ -21441,20 +21441,6 @@ fsevents@~2.3.1:
       optional: true
   languageName: unknown
   linkType: soft
-
-"react-dom@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "react-dom@npm:16.14.0"
-  dependencies:
-    loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    scheduler: ^0.19.1
-  peerDependencies:
-    react: ^16.14.0
-  checksum: a13558f0e7c6d1a98684214460bcd4b9005500015b5048fb1b0d2856786b8764dbc713e6b078a5b1a56e17866400e1d862183c7a0a513ae8351de11f6f6749d2
-  languageName: node
-  linkType: hard
 
 "react-dom@npm:^17.0.1":
   version: 17.0.1
@@ -21633,17 +21619,6 @@ fsevents@~2.3.1:
   peerDependencies:
     react: ^0.14.0 || ^15.0.0 || ^16.0.0
   checksum: 9b31cbca4f914ddec1193a1df826417bc3e5b63c2900af319823d6aae917f9715fe55545cdbafdaf47260b33806b03ce490192dce0260fe60322150ee76727fb
-  languageName: node
-  linkType: hard
-
-"react@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "react@npm:16.14.0"
-  dependencies:
-    loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-    prop-types: ^15.6.2
-  checksum: 2769580b22952a52de3b5b2ea0f09cb904030b762d759739f49ab4da0b1f550e5c087ce3728c4be90f423d09481e0c075483c0c30b1ea9c549445c8b12020fd3
   languageName: node
   linkType: hard
 
