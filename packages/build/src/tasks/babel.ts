@@ -8,7 +8,7 @@ import plumber = require('gulp-plumber')
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const babelCjsConfig = require('../../config/babel.config.cjs')
-const babelEsmConfig = require('../../config/babel.config.cjs')
+const babelEsmConfig = require('../../config/babel.config')
 /* eslint-enable  @typescript-eslint/no-var-requires */
 
 const BABEL_GLOBS = ['lib/**/*.js']
