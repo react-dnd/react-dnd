@@ -1,12 +1,12 @@
 import { FSWatcher } from 'fs'
 import { noopStep } from './common'
 import { subtaskSuccess, subtaskFail } from '../log'
-import { src, dest, watch, TaskFunction, parallel } from 'gulp'
-import babel = require('gulp-babel')
-import debug = require('gulp-debug')
-import plumber = require('gulp-plumber')
-
+import { TaskFunction } from '../types'
 /* eslint-disable @typescript-eslint/no-var-requires */
+const { src, dest, watch, parallel } = require('gulp')
+const plumber = require('gulp-plumber')
+const debug = require('gulp-debug')
+const babel = require('gulp-babel')
 const babelCjsConfig = require('../../config/babel.config.cjs')
 const babelEsmConfig = require('../../config/babel.config')
 /* eslint-enable  @typescript-eslint/no-var-requires */

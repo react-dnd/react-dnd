@@ -1,4 +1,4 @@
-import { TaskFunction } from 'gulp'
+import { TaskFunction } from '../types'
 import through2 = require('through2')
 
 export const noopStep = (): any => through2.obj()

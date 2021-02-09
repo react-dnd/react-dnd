@@ -1,12 +1,15 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
 import { noopStep } from './common'
-import { TaskFunction, src, dest, watch, parallel } from 'gulp'
-import * as debug from 'gulp-debug'
-import * as plumber from 'gulp-plumber'
-import * as ts from 'gulp-typescript'
 import { FileWatcher } from 'typescript'
 import { subtaskFail, subtaskSuccess } from '../log'
+import { TaskFunction } from '../types'
+import ts = require('gulp-typescript')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { src, dest, watch, parallel } = require('gulp')
+const debug = require('gulp-debug')
+const plumber = require('gulp-plumber')
+/* eslint-enable @typescript-eslint/no-var-requires */
 
 const TYPESCRIPT_GLOBS = ['src/**/*.ts*', '!**/__tests__/**']
 
