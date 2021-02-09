@@ -1,10 +1,12 @@
 import { noopTask } from './common'
 import { join } from 'path'
-import { parallel, TaskFunction } from 'gulp'
+import { TaskFunction } from '../types'
 import { subtaskFail, subtaskSuccess } from '../log'
 import { terser } from 'rollup-plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import rollup = require('rollup')
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const { parallel } = require('gulp')
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const commonjs = require('@rollup/plugin-commonjs')
