@@ -25,6 +25,12 @@ export const nativeTypesConfig: {
 		},
 		matchesTypes: ['Files'],
 	},
+	[NativeTypes.HTML]: {
+		exposeProperties: {
+			html: (dataTransfer: DataTransfer, matchesTypes: string[]): string => getDataFromDataTransfer(dataTransfer, matchesTypes, ''),
+		},
+		matchesTypes: ['Html', 'text/html'],
+	},
 	[NativeTypes.URL]: {
 		exposeProperties: {
 			urls: (dataTransfer: DataTransfer, matchesTypes: string[]): string[] =>
