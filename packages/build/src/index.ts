@@ -1,5 +1,6 @@
-import gulp = require('gulp')
 export { preset } from './preset'
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const gulp = require('gulp')
 
 gulp.on('error', (...args: any[]) => {
 	console.error('caught gulp error', ...args)

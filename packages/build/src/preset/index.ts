@@ -1,4 +1,4 @@
-import { TaskFunction } from 'gulp'
+import { TaskFunction } from '../types'
 import { defineClean } from './defineClean'
 import { defineBuild } from './defineBuild'
 import { defineWatch } from './defineWatch'

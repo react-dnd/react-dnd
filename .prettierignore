@@ -6,3 +6,4 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 .yarn/
 .pnp.js
+yarn.lock
