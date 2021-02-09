@@ -20,10 +20,10 @@
     "faker": "^4.1.0",
     "immutability-helper": "^3.0.0",
     "react-frame-component": "^4.1.0",
-    "typescript": "^4.0.5",
-    "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.9",
-    "@types/jest": "^26.0.15",
+    "typescript": "^4.1.4",
+    "@types/react": "^16.14.3",
+    "@types/react-dom": "^16.9.10",
+    "@types/jest": "^26.0.20",
     "@types/node": "*"
   },
   "browserslist": [
