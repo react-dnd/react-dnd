@@ -10,7 +10,7 @@ without much custom logic.
 
 When the box is dragged, we remove its original DOM node by returning
 `null` from `render()` and let browser draw the
-drag preview. When the is released, we draw it at the new coordinates.
+drag preview. When the box is released, we draw it at the new coordinates.
 If you try to drag the box outside the container, the browser will
 animate its return.
 
