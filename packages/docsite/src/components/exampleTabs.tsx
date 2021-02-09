@@ -31,15 +31,12 @@ export const ExampleTabs: React.FC<ExampleTabsProps> = memo(
 		const ExampleComponent =
 			// use the selected component
 			(showHooks ? hookComponent : decoratorComponent) ||
-			// fall back to other impl
-			(showHooks ? decoratorComponent : hookComponent) ||
-			// final fallback to error
+			// fallback to error
 			(() => <NotFound name={component} />)
 		const mode = useMemo(() => (showHooks ? 'hooks' : 'decorators'), [
 			showHooks,
 		])
 		const showHooksVisible = !!hookComponent && !!decoratorComponent
-
 		return (
 			<Tabs>
 				<TabList>

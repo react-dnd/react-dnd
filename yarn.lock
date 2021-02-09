@@ -21405,6 +21405,7 @@ fsevents@~2.3.1:
     "@types/node": ">= 12"
     prop-types: ">= 15"
     react: ">= 16.9"
+    react-dnd: ">11.1.3"
     react-dom: ">= 16.9"
   peerDependenciesMeta:
     "@types/node":
@@ -21413,6 +21414,8 @@ fsevents@~2.3.1:
       optional: true
     "@types/react-dom":
       optional: true
+    react-dnd:
+      optional: false
   languageName: unknown
   linkType: soft
 
@@ -21444,6 +21447,7 @@ fsevents@~2.3.1:
     "@types/react-dom": ">= 16.9"
     prop-types: ">= 15"
     react: ">= 16.9"
+    react-dnd: ">11.1.3"
     react-dom: ">= 16.9"
   peerDependenciesMeta:
     "@types/node":
@@ -21452,6 +21456,8 @@ fsevents@~2.3.1:
       optional: true
     "@types/react-dom":
       optional: true
+    react-dnd:
+      optional: false
   languageName: unknown
   linkType: soft
 
