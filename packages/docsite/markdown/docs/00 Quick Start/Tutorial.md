@@ -373,7 +373,7 @@ function handleSquareClick(toX, toY) {
 
 We could have also added an `onClick` prop to `Square` and used it instead, but since we're going to remove the click handler in favor of the drag and drop interface later anyway, why bother.
 
-The last missing piece right now is the Chess rule check. The `Knight` can't just move to an arbitrary square, it is only allowed to make [L-shaped moves](http://en.wikipedia.org/wiki/Knight_%28chess%29#Movement). I'm adding a `canMoveKnight(toX, toY)` function to the `Game` and changing the initial position to A2 to match the Chess rules:
+The last missing piece right now is the Chess rule check. The `Knight` can't just move to an arbitrary square, it is only allowed to make [L-shaped moves](http://en.wikipedia.org/wiki/Knight_%28chess%29#Movement). I'm adding a `canMoveKnight(toX, toY)` function to the `Game` and changing the initial position to B1 to match the Chess rules:
 
 ```jsx
 let knightPosition = [1, 7]
