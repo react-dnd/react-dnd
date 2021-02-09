@@ -62,17 +62,5 @@
     "@types/react-dom": {
       "optional": true
     }
-  },
-  "umd": {
-    "name": "ReactDnD",
-    "input": "./dist/esm/index.js",
-    "external": [
-      "react",
-      "react-dom"
-    ],
-    "globals": {
-      "react": "React",
-      "react-dom": "ReactDOM"
-    }
   }
 }

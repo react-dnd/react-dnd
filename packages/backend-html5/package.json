@@ -25,19 +25,5 @@
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
     "gulp": "^4.0.2"
-  },
-  "umd": {
-    "name": "ReactDnDHTML5Backend",
-    "input": "./dist/esm/index.js",
-    "external": [
-      "react",
-      "react-dom",
-      "react-dnd"
-    ],
-    "globals": {
-      "react": "React",
-      "react-dom": "ReactDOM",
-      "react-dnd": "ReactDnD"
-    }
   }
 }

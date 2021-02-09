@@ -15,20 +15,6 @@
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
-  "umd": {
-    "name": "ReactDnDTouchBackend",
-    "input": "./dist/esm/index.js",
-    "external": [
-      "react",
-      "react-dom",
-      "react-dnd"
-    ],
-    "globals": {
-      "react": "React",
-      "react-dom": "ReactDOM",
-      "react-dnd": "ReactDnD"
-    }
-  },
   "scripts": {
     "clean": "gulp clean",
     "build": "gulp build",
