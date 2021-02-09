@@ -3903,7 +3903,7 @@ __metadata:
     "@types/vinyl-source-stream": ^0.0.30
     "@types/webpack": ^4.41.26
     "@types/webpack-merge": ^4.1.5
-    "@types/yargs": ^15.0.13
+    "@types/yargs": ^16.0.0
     chalk: ^4.1.0
     fancy-log: ^1.3.3
     gulp: ^4.0.2
@@ -4706,12 +4706,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/yargs@npm:^15.0.13":
-  version: 15.0.13
-  resolution: "@types/yargs@npm:15.0.13"
+"@types/yargs@npm:^16.0.0":
+  version: 16.0.0
+  resolution: "@types/yargs@npm:16.0.0"
   dependencies:
     "@types/yargs-parser": "*"
-  checksum: fa1a5b0a07dbbff1657a27d1191d586632412d170321000f6f417f279547a8c191d7058dbf4d4187c188a5a1aeb2473ddb25fe316b206fccdfe1de6fad976619
+  checksum: a17fa2814a4c19b7d327c0d6e6ecb9ca6a68fbfded0c1966d0ef6557540c055f7b9c1c1eadde48acb584f75708d4ec96ba59e58e77b8edbb602c23ed3bee76b9
   languageName: node
   linkType: hard
 
@@ -7873,13 +7873,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compare-versions@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "compare-versions@npm:3.6.0"
-  checksum: 09525264502bda1f6667ad2429eaf5520b543d997e79e7a94b66a5896df8921cdc3a97140dfff75af6c9ba1859c872de1921c3cf8a6c48ed807bbf9f582cf093
-  languageName: node
-  linkType: hard
-
 "compass-vertical-rhythm@npm:^1.4.5":
   version: 1.4.5
   resolution: "compass-vertical-rhythm@npm:1.4.5"
@@ -10314,16 +10307,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^6.15.0":
-  version: 6.15.0
-  resolution: "eslint-config-prettier@npm:6.15.0"
-  dependencies:
-    get-stdin: ^6.0.0
+"eslint-config-prettier@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "eslint-config-prettier@npm:7.2.0"
   peerDependencies:
-    eslint: ">=3.14.1"
+    eslint: ">=7.0.0"
   bin:
-    eslint-config-prettier-check: bin/cli.js
-  checksum: a790bc61699e43a2edc5453488576cd977fad3b3cf99c129c10760ce6970d422923fddf80b65b2b10a93c00af0180a854e4b7824cc268e5957826cbe5b969e90
+    eslint-config-prettier: bin/cli.js
+  checksum: 6812150ea49703cd64035527205b4905bc1edcd34646e71f71665e1acff9ab4648f872598389bdb209964093ad73993830a2c821ba12642764a5293513b92a58
   languageName: node
   linkType: hard
 
@@ -11658,15 +11649,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-versions@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "find-versions@npm:4.0.0"
-  dependencies:
-    semver-regex: ^3.1.2
-  checksum: 05174128349e522f0746cc343a509f2ce1c8c765e24968ff2ac6f82fda4e4c680f5f71c6a781ce28406d19addc32a205116ac14ee83cb2e336635dd803f56cbd
-  languageName: node
-  linkType: hard
-
 "findup-sync@npm:^2.0.0":
   version: 2.0.0
   resolution: "findup-sync@npm:2.0.0"
@@ -12813,13 +12795,6 @@ fsevents@~2.3.1:
   version: 4.0.1
   resolution: "get-stdin@npm:4.0.1"
   checksum: ba122b05691e29aa1c93f9dfe76671c23b311e5f299c4205c030c00a656045fcf56d2bb5a924b6cd576f278563643b6689b50aa54fc87abcdc2e6e8eda09920e
-  languageName: node
-  linkType: hard
-
-"get-stdin@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "get-stdin@npm:6.0.0"
-  checksum: b51d664838aef7f8353dc57371ce59cea54d8d584fec015a9d89d24561e95b97806d5b5ba120bc81574c9ed63cb3e210176ffa0ff9263c7e7ba4d56d0fe54913
   languageName: node
   linkType: hard
 
@@ -14276,24 +14251,12 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"husky@npm:^4.3.8":
-  version: 4.3.8
-  resolution: "husky@npm:4.3.8"
-  dependencies:
-    chalk: ^4.0.0
-    ci-info: ^2.0.0
-    compare-versions: ^3.6.0
-    cosmiconfig: ^7.0.0
-    find-versions: ^4.0.0
-    opencollective-postinstall: ^2.0.2
-    pkg-dir: ^5.0.0
-    please-upgrade-node: ^3.2.0
-    slash: ^3.0.0
-    which-pm-runs: ^1.0.0
+"husky@npm:^5.0.9":
+  version: 5.0.9
+  resolution: "husky@npm:5.0.9"
   bin:
-    husky-run: bin/run.js
-    husky-upgrade: lib/upgrader/bin.js
-  checksum: 1ac4fb51ffd93547ec861f185d86bdbfbac8ee24ce60417d531dbe5222e33fc754436e87e4e2b37a44dcefdc78c151f9ba4ac57c05773f5c36377cc4eb73732b
+    husky: lib/bin.js
+  checksum: 135129469a7225bf34a8542e1575a3fbe32656f813234093f0ff43084c34e4384eb4c496923422d59aea7fb8187d26a2c8c7a43cd33647a5d02eb59c2161877a
   languageName: node
   linkType: hard
 
@@ -18928,15 +18891,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"opencollective-postinstall@npm:^2.0.2":
-  version: 2.0.3
-  resolution: "opencollective-postinstall@npm:2.0.3"
-  bin:
-    opencollective-postinstall: index.js
-  checksum: d75b06b80eb426aaf099307ca4398f3119c8c86ff3806a95cfe234b979b80c07080040734fe2dc3c51fed5b15bd98dae88340807980bdc74aa1ebf045c74ef06
-  languageName: node
-  linkType: hard
-
 "opentracing@npm:^0.14.4":
   version: 0.14.4
   resolution: "opentracing@npm:0.14.4"
@@ -19959,15 +19913,6 @@ fsevents@~2.3.1:
   dependencies:
     find-up: ^4.0.0
   checksum: 1956ebf3cf5cc36a5d20e93851fcadd5a786774eb08667078561e72e0ab8ace91fc36a028d5305f0bfe7c89f9bf51886e2a3c8cb2c2620accfa3feb8da3c256b
-  languageName: node
-  linkType: hard
-
-"pkg-dir@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "pkg-dir@npm:5.0.0"
-  dependencies:
-    find-up: ^5.0.0
-  checksum: 86f6ecee1787d8fe1606fd831f823f967c6ea0d760ce714af6afd2fec076ce71fbedcb57b339d93b84edf90ccdd81d4e6e2c10fcde21684ef3ffee5e05fd37dc
   languageName: node
   linkType: hard
 
@@ -21180,8 +21125,8 @@ fsevents@~2.3.1:
   resolution: "react-dnd-documentation@workspace:packages/docsite"
   dependencies:
     "@types/query-string": ^6.3.0
-    "@types/react": ^16.14.3
-    "@types/react-dom": ^16.9.10
+    "@types/react": ^17.0.1
+    "@types/react-dom": ^17.0.0
     "@types/react-helmet": ^6.1.0
     "@types/react-tabs": ^2.3.2
     "@types/rehype-react": ^4.0.0
@@ -21208,17 +21153,17 @@ fsevents@~2.3.1:
     prismjs: ^1.23.0
     prop-types: ^15.7.2
     query-string: ^6.13.8
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-examples-decorators: "workspace:packages/examples-decorators"
     react-dnd-examples-hooks: "workspace:packages/examples-hooks"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dnd-touch-backend: "workspace:packages/backend-touch"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
     react-error-overlay: ^6.0.9
     react-helmet: ^6.1.0
-    react-is: ^16.13.1
+    react-is: ^17.0.1
     react-tabs: ^3.2.0
     react-typography: ^0.16.19
     regenerator-runtime: ^0.13.7
@@ -21241,8 +21186,8 @@ fsevents@~2.3.1:
     "@types/faker": ^5.1.6
     "@types/jest": ^26.0.20
     "@types/lodash": ^4.14.168
-    "@types/react": ^16.14.3
-    "@types/react-dom": ^16.9.10
+    "@types/react": ^17.0.1
+    "@types/react-dom": ^17.0.0
     dnd-core: "workspace:packages/dnd-core"
     enzyme: ^3.11.0
     faker: ^5.3.1
@@ -21250,12 +21195,12 @@ fsevents@~2.3.1:
     immutability-helper: ^3.1.1
     lodash: ^4.17.20
     npm-run-all: ^4.1.5
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dnd-test-utils: "workspace:packages/test-utils"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
     react-frame-component: ^4.1.3
   peerDependencies:
     "@types/node": ">= 12"
@@ -21283,19 +21228,19 @@ fsevents@~2.3.1:
     "@types/faker": ^5.1.6
     "@types/lodash": ^4.14.168
     "@types/node": ^14.14.25
-    "@types/react": ^16.14.3
-    "@types/react-dom": ^16.9.10
+    "@types/react": ^17.0.1
+    "@types/react-dom": ^17.0.0
     dnd-core: "workspace:packages/dnd-core"
     faker: ^5.3.1
     gulp: ^4.0.2
     immutability-helper: ^3.1.1
     lodash: ^4.17.20
     npm-run-all: ^4.1.5
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-utils: "workspace:packages/test-utils"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
     react-frame-component: ^4.1.3
   peerDependencies:
     "@types/node": ">= 12"
@@ -21346,13 +21291,13 @@ fsevents@~2.3.1:
     enzyme: ^3.11.0
     enzyme-adapter-react-16: ^1.15.6
     eslint: ^7.19.0
-    eslint-config-prettier: ^6.15.0
+    eslint-config-prettier: ^7.2.0
     eslint-config-react-app: ^6.0.0
     eslint-plugin-no-for-of-loops: ^1.0.1
     eslint-plugin-prettier: ^3.3.1
     eslint-plugin-react: ^7.22.0
     eslint-plugin-react-hooks: ^4.2.0
-    husky: ^4.3.8
+    husky: ^5.0.9
     inquirer: ^7.3.3
     jest: ~26.6.3
     jest-environment-jsdom: ^26.6.2
@@ -21429,14 +21374,14 @@ fsevents@~2.3.1:
   dependencies:
     "@react-dnd/build": "workspace:packages/build"
     "@types/node": ^14.14.25
-    "@types/react": ^16.14.3
-    "@types/react-dom": ^16.9.10
+    "@types/react": ^17.0.1
+    "@types/react-dom": ^17.0.0
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-test-backend: "workspace:packages/backend-test"
-    react-dom: ^16.14.0
+    react-dom: ^17.0.1
   peerDependencies:
     react: ">= 16.9"
     react-dnd: ">= 10.0.0"
@@ -21467,17 +21412,17 @@ fsevents@~2.3.1:
     "@types/hoist-non-react-statics": ^3.3.1
     "@types/jest": ^26.0.20
     "@types/node": ^14.14.25
-    "@types/react": ^16.14.3
-    "@types/react-dom": ^16.9.10
+    "@types/react": ^17.0.1
+    "@types/react-dom": ^17.0.0
     dnd-core: "workspace:packages/dnd-core"
     enzyme: ^3.11.0
     gulp: ^4.0.2
     hoist-non-react-statics: ^3.3.2
-    react: ^16.14.0
+    react: ^17.0.1
     react-dnd-test-backend: "portal:../backend-test"
     react-dnd-test-utils: "portal:../test-utils"
-    react-dom: ^16.14.0
-    react-test-renderer: ^16.14.0
+    react-dom: ^17.0.1
+    react-test-renderer: ^17.0.1
   peerDependencies:
     "@types/hoist-non-react-statics": ">= 3.3.1"
     "@types/node": ">= 12"
@@ -21508,6 +21453,19 @@ fsevents@~2.3.1:
   peerDependencies:
     react: ^16.14.0
   checksum: a13558f0e7c6d1a98684214460bcd4b9005500015b5048fb1b0d2856786b8764dbc713e6b078a5b1a56e17866400e1d862183c7a0a513ae8351de11f6f6749d2
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-dom@npm:17.0.1"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+    scheduler: ^0.20.1
+  peerDependencies:
+    react: 17.0.1
+  checksum: 6a70028fbe3c95e0056c5e8ce065b4a9b8d4ff3bffde9b016454072bde5e4b012af7668ca45b7235ace428267d5be5237b68ea87ce8c296e54e81a8d678a4355
   languageName: node
   linkType: hard
 
@@ -21580,17 +21538,17 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"react-is@npm:^16.12.0 || ^17.0.0, react-is@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-is@npm:17.0.1"
+  checksum: 5a83dfc78e7adcb93d632bf367b0733db650e3abd2e9c57c33b87e50d201212c1884b0d7bcf13e692f1556189fa1b87f9f3e0ba10fe858fd6aebe83ed4fcd1ea
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.12.0, react-is@npm:^16.13.1, react-is@npm:^16.7.0, react-is@npm:^16.8.1, react-is@npm:^16.8.6":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 11bcf1267a314a522615f626f3ce3727a3a24cdbf61c4d452add3550a7875326669631326cfb1ba3e92b6f72244c32ffecf93ad21c0cad8455d3e169d0e3f060
-  languageName: node
-  linkType: hard
-
-"react-is@npm:^17.0.1":
-  version: 17.0.1
-  resolution: "react-is@npm:17.0.1"
-  checksum: 5a83dfc78e7adcb93d632bf367b0733db650e3abd2e9c57c33b87e50d201212c1884b0d7bcf13e692f1556189fa1b87f9f3e0ba10fe858fd6aebe83ed4fcd1ea
   languageName: node
   linkType: hard
 
@@ -21605,6 +21563,18 @@ fsevents@~2.3.1:
   version: 0.8.3
   resolution: "react-refresh@npm:0.8.3"
   checksum: 38f06df8e0a20701b96e5d680838a3528d66cfb53db79843d30cb9517df3262ec596607147439975267bf0634bee77101db37298ea79b5742cc28664632f3c76
+  languageName: node
+  linkType: hard
+
+"react-shallow-renderer@npm:^16.13.1":
+  version: 16.14.1
+  resolution: "react-shallow-renderer@npm:16.14.1"
+  dependencies:
+    object-assign: ^4.1.1
+    react-is: ^16.12.0 || ^17.0.0
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0
+  checksum: d52cb869e25605b00d4a67ff16598dbbf2826b0f09535de499b2f21a339cabf8b954d4b8855e0e6bdaf0a95603a2b6702e2b47eca8797a7d6bf7e6170ab8b2f3
   languageName: node
   linkType: hard
 
@@ -21643,17 +21613,17 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react-test-renderer@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "react-test-renderer@npm:16.14.0"
+"react-test-renderer@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-test-renderer@npm:17.0.1"
   dependencies:
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    react-is: ^16.8.6
-    scheduler: ^0.19.1
+    react-is: ^17.0.1
+    react-shallow-renderer: ^16.13.1
+    scheduler: ^0.20.1
   peerDependencies:
-    react: ^16.14.0
-  checksum: 0905787bfd68865098743ca2d18d874ef09929b80730131c017ced55bcf7082e84f66ec76685799a759812d376de6db718f6d643a2705779a491003d01d45956
+    react: 17.0.1
+  checksum: 6ec269430beea4356180d90868a9959399781a03ae8de6a29f2edc29d6ca41432653d4103991467ebcc47be5bd2d9197789411e913da66369c2aa2f13311105f
   languageName: node
   linkType: hard
 
@@ -21674,6 +21644,16 @@ fsevents@~2.3.1:
     object-assign: ^4.1.1
     prop-types: ^15.6.2
   checksum: 2769580b22952a52de3b5b2ea0f09cb904030b762d759739f49ab4da0b1f550e5c087ce3728c4be90f423d09481e0c075483c0c30b1ea9c549445c8b12020fd3
+  languageName: node
+  linkType: hard
+
+"react@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react@npm:17.0.1"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: a76d86ec973eb4b25a46071ac7f974adfd66ed89ad1db63043be1d976ec25417520a210e6d724b0ad937422b706afcf9962cedda9e92125992a8c0e8a95f2051
   languageName: node
   linkType: hard
 
@@ -22856,6 +22836,16 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
+"scheduler@npm:^0.20.1":
+  version: 0.20.1
+  resolution: "scheduler@npm:0.20.1"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: 377b4ad0d8313c4548bac7374bc38409e9d142799979ce396787efa04d1bcabf2591540f243f2131e3df8e56e7f5b29c5415248523e88ecb60f13a32db2e076f
+  languageName: node
+  linkType: hard
+
 "schema-utils@npm:^0.4.5":
   version: 0.4.7
   resolution: "schema-utils@npm:0.4.7"
@@ -22962,13 +22952,6 @@ resolve@^1.18.1:
   version: 2.0.0
   resolution: "semver-regex@npm:2.0.0"
   checksum: 9b96cc8bd559c1d46968b334ccc88115a2d9d2f7a2125d6838471114ed0c52057e77aae760fbe4932aee06687584733b32aed6d2c9654b2db33e383bfb8f26ce
-  languageName: node
-  linkType: hard
-
-"semver-regex@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "semver-regex@npm:3.1.2"
-  checksum: 6a83740f3fc24379629be068e677c71c57e0d9df4977eb56d863f26a7830b85f14d9f1af71ca3a84df9ac70fcd9ce8821466064f5652ffa0dc343b50ded86698
   languageName: node
   linkType: hard
 
