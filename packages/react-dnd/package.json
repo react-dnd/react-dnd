@@ -35,7 +35,7 @@
     "react": "^16.14.0",
     "react-dnd-test-backend": "portal:../backend-test",
     "react-dnd-test-utils": "portal:../test-utils",
-    "react-dom": "^16.14.0",
+    "react-dom": "^17.0.1",
     "react-test-renderer": "^16.14.0"
   },
   "peerDependencies": {

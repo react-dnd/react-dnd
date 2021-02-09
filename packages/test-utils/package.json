@@ -21,7 +21,7 @@
     "react": "^16.14.0",
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-test-backend": "workspace:packages/backend-test",
-    "react-dom": "^16.14.0"
+    "react-dom": "^17.0.1"
   },
   "peerDependencies": {
     "react": ">= 16.9",
