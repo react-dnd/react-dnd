@@ -51,7 +51,7 @@
   "devDependencies": {
     "@types/query-string": "^6.3.0",
     "@types/react": "^16.14.3",
-    "@types/react-dom": "^16.9.10",
+    "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
     "@types/react-tabs": "^2.3.2",
     "@types/rehype-react": "^4.0.0",
