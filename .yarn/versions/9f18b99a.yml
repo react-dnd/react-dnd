@@ -1,13 +1,11 @@
 releases:
-  "@react-dnd/build": patch
-  dnd-core: patch
-  react-dnd: patch
-  react-dnd-examples-decorators: patch
-  react-dnd-examples-hooks: patch
-  react-dnd-html5-backend: patch
-  react-dnd-test-backend: patch
-  react-dnd-test-utils: patch
-  react-dnd-touch-backend: patch
-
-declined:
-  - react-dnd-documentation
+  "@react-dnd/build": major
+  dnd-core: major
+  react-dnd: major
+  react-dnd-documentation: major
+  react-dnd-examples-decorators: major
+  react-dnd-examples-hooks: major
+  react-dnd-html5-backend: major
+  react-dnd-test-backend: major
+  react-dnd-test-utils: major
+  react-dnd-touch-backend: major
