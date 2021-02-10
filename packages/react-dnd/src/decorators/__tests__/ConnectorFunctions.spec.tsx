@@ -1,9 +1,8 @@
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { DropTarget } from 'react-dnd'
 
 describe('Connectors', () => {
-	afterEach(() => cleanup())
 	it('transmit expected arguments to components', () => {
 		let connectorFired = false
 		let connectArgs: any[] = []
