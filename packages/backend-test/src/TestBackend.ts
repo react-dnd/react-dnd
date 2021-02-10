@@ -7,6 +7,7 @@ import {
 	Identifier,
 	Unsubscribe,
 } from 'dnd-core'
+import { TestBackendContext } from 'index'
 
 function noop() {
 	// noop
@@ -26,10 +27,12 @@ export class TestBackendImpl implements Backend, ITestBackend {
 	public didCallSetup = false
 	public didCallTeardown = false
 	public manager: DragDropManager
+	private context: TestBackendContext
 	private actions: DragDropActions
 
-	public constructor(manager: DragDropManager) {
+	public constructor(manager: DragDropManager, context: TestBackendContext) {
 		this.manager = manager
+		this.context = context
 		this.actions = manager.getActions()
 	}
 

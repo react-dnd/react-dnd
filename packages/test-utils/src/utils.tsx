@@ -1,20 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Ref, ComponentType, Component, forwardRef } from 'react'
 import {
-	Ref,
-	ComponentType,
-	useRef,
-	useImperativeHandle,
-	forwardRef,
-} from 'react'
-import { TestBackend, getInstance, ITestBackend } from 'react-dnd-test-backend'
-import { DndComponent, DndContext, DndProvider } from 'react-dnd'
-import { Backend, DragDropManager } from 'dnd-core'
+	TestBackend,
+	ITestBackend,
+	TestBackendOptions,
+} from 'react-dnd-test-backend'
+import { DndComponent, DndProvider } from 'react-dnd'
 import { act } from 'react-dom/test-utils'
-
-interface RefType {
-	getManager: () => DragDropManager | undefined
-	getDecoratedComponent<T>(): T
-}
 
 /**
  * Wrap a DnD component or test case in a DragDropContext
@@ -23,44 +15,38 @@ interface RefType {
  */
 export function wrapInTestContext<T>(
 	DecoratedComponent: ComponentType<T>,
-): ComponentType<T> {
-	const forwardedRefFunc = (props: any, ref: Ref<RefType>) => {
-		const dragDropManager = useRef<any>(undefined)
-		const decoratedComponentRef = useRef<any>(undefined)
-
-		useImperativeHandle(ref, () => ({
-			getManager: () => dragDropManager.current,
-			getDecoratedComponent: () => decoratedComponentRef.current,
-		}))
-
-		return (
-			<DndProvider backend={TestBackend}>
-				<DndContext.Consumer>
-					{(ctx) => {
-						dragDropManager.current = ctx.dragDropManager
-						return null
-					}}
-				</DndContext.Consumer>
-				<DecoratedComponent ref={decoratedComponentRef} {...props} />
-			</DndProvider>
-		)
+): [ComponentType<T>, () => ITestBackend | undefined] {
+	let backend: ITestBackend | undefined
+	const testBackendOptions: TestBackendOptions = {
+		onCreate(be) {
+			backend = be
+		},
 	}
-	forwardedRefFunc.displayName = 'TestContextWrapper'
 
-	return forwardRef(forwardedRefFunc)
-}
+	class TestContextWrapper extends Component<
+		T & {
+			forwardedRef: Ref<any>
+		}
+	> {
+		public render() {
+			const { forwardedRef, ...rest } = this.props
+			return (
+				<DndProvider backend={TestBackend} options={testBackendOptions}>
+					<DecoratedComponent ref={forwardedRef} {...(rest as T)} />
+				</DndProvider>
+			)
+		}
+	}
+	const ForwardedComponent = forwardRef<unknown, T>(
+		function ForwardedTestContextWrapper(props, ref) {
+			return <TestContextWrapper {...props} forwardedRef={ref} />
+		},
+	)
 
-/**
- * Extracts a Backend instance from a TestContext component, such as
- * one emitted from `wrapinTestContext`
- *
- * @param instance The instance to extract the backend fram
- * @deprecated - This is no longer useful since ContextComponent was removed. This will be removed in a major version cut.
- */
-export function getBackendFromInstance<T extends Backend>(
-	_instance: DndComponent<any>,
-): T {
-	return getInstance() as any
+	return [
+		(ForwardedComponent as unknown) as React.ComponentType<T>,
+		() => backend,
+	]
 }
 
 export function simulateDragDropSequence(

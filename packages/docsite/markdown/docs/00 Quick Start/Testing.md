@@ -72,11 +72,8 @@ import Box from './components/Box'
 
 it('can be tested with the testing backend', () => {
   // Render with the test context that uses the test backend
-  const BoxContext = wrapInTestContext(Box)
+  const [BoxContext, getBackend] = wrapInTestContext(Box)
   const root = TestUtils.renderIntoDocument(<BoxContext name="test" />)
-
-  // Obtain a reference to the backend
-  const backend = root.getManager().getBackend()
 
   // Test that the opacity is 1
   let div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
@@ -84,13 +81,13 @@ it('can be tested with the testing backend', () => {
 
   // Find the drag source ID and use it to simulate the dragging operation
   const box = TestUtils.findRenderedComponentWithType(root, Box)
-  backend.simulateBeginDrag([box.getHandlerId()])
+  getBackend().simulateBeginDrag([box.getHandlerId()])
 
   // Verify that the div changed its opacity
   div = TestUtils.findRenderedDOMComponentWithTag(root, 'div')
   expect(div.style.opacity).toEqual(0.4)
 
-  // See other backend.simulate* methods for more!
+  // See other TestBackend.simulate* methods for more!
 })
 ```
 
@@ -111,7 +108,7 @@ Because of a [bug in Enzyme](https://github.com/airbnb/enzyme/issues/1852), you'
 You can then store a ref to your wrapped component and use this ref to access the current `DragDropMananger` instance and call its methods.
 
 ```jsx
-const BoxContext = wrapInTestContext(Box)
+const [BoxContext] = wrapInTestContext(Box)
 
 const ref = React.createRef()
 const root = Enzyme.mount(
