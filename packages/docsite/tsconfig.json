@@ -5,7 +5,8 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "declaration": false,
-    "allowJs": true
+    "allowJs": true,
+    "lib": ["DOM", "ESNext"]
   },
   "include": ["./src/index.ts"]
 }

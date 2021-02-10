@@ -22,7 +22,6 @@ module.exports = {
 	siteMetadata,
 	pathPrefix: '/react-dnd',
 	plugins: [
-		'gatsby-plugin-typescript',
 		'gatsby-plugin-react-helmet',
 		'gatsby-plugin-styled-components',
 		'gatsby-plugin-sharp',
