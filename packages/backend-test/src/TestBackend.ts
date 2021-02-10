@@ -7,20 +7,10 @@ import {
 	Identifier,
 	Unsubscribe,
 } from 'dnd-core'
-import { TestBackendContext } from 'index'
+import { ITestBackend, TestBackendContext } from './types'
 
 function noop() {
 	// noop
-}
-
-export interface ITestBackend extends Backend {
-	didCallSetup: boolean
-	didCallTeardown: boolean
-	simulateBeginDrag(sourceIds: Identifier[], options?: any): void
-	simulatePublishDragSource(): void
-	simulateHover(targetIds: Identifier[], options?: any): void
-	simulateDrop(): void
-	simulateEndDrag(): void
 }
 
 export class TestBackendImpl implements Backend, ITestBackend {
