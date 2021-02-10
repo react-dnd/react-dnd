@@ -1,14 +1,15 @@
 import { createDragDropManager } from 'dnd-core'
-import { create } from 'react-test-renderer'
+import { render, cleanup } from '@testing-library/react'
 import { DndContext, DndProvider } from '..'
 import { TestBackend } from 'react-dnd-test-backend'
 
 describe('DndProvider', () => {
+	afterEach(() => cleanup())
 	it('reuses DragDropManager provided to it', () => {
 		let capturedManager
 		const manager = createDragDropManager(TestBackend, {}, {})
 
-		create(
+		render(
 			<DndContext.Provider value={{ dragDropManager: manager }}>
 				<DndContext.Consumer>
 					{({ dragDropManager }) => {
@@ -26,7 +27,7 @@ describe('DndProvider', () => {
 		let capturedManager
 
 		const mountProvider = () =>
-			create(
+			render(
 				<DndProvider backend={TestBackend}>
 					<DndContext.Consumer>
 						{({ dragDropManager }) => {

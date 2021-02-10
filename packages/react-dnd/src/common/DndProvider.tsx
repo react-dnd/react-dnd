@@ -22,7 +22,6 @@ const INSTANCE_SYM = Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')
 export const DndProvider: FC<DndProviderProps<any, any>> = memo(
 	function DndProvider({ children, ...props }) {
 		const [manager, isGlobalInstance] = getDndContextValue(props) // memoized from props
-
 		/**
 		 * If the global context was used to store the DND context
 		 * then where theres no more references to it we should

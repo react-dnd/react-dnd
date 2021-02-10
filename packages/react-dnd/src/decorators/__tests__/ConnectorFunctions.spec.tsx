@@ -1,8 +1,9 @@
-import { mount } from 'enzyme'
+import { render, cleanup } from '@testing-library/react'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { DropTarget } from 'react-dnd'
 
 describe('Connectors', () => {
+	afterEach(() => cleanup())
 	it('transmit expected arguments to components', () => {
 		let connectorFired = false
 		let connectArgs: any[] = []
@@ -21,7 +22,7 @@ describe('Connectors', () => {
 
 		// Render with the test context that uses the test backend
 		const [WrappedTarget] = wrapInTestContext(Target)
-		mount(<WrappedTarget x={1} y={2} />)
+		render(<WrappedTarget x={1} y={2} />)
 
 		expect(connectorFired).toBeTruthy()
 		expect(connectArgs.length).toEqual(3)
