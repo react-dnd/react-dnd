@@ -3914,7 +3914,7 @@ __metadata:
     rimraf: ^3.0.2
     through2: ^4.0.2
     tslib: ^2.1.0
-    typescript: ^4.1.4
+    typescript: ^4.1.5
     yargs: ^16.2.0
   languageName: unknown
   linkType: soft
@@ -9631,6 +9631,8 @@ __metadata:
     gulp: ^4.0.2
     react-dnd-test-backend: "portal:../backend-test"
     redux: ^4.0.5
+  peerDependencies:
+    react-refresh: "*"
   languageName: unknown
   linkType: soft
 
@@ -11247,10 +11249,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"faker@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "faker@npm:5.3.1"
-  checksum: 40f3e92fe392f4269d5891b85ab787e1049fd2dfceb51e703a8142dc1a02aeb823b1beef986f0222eb17eac3968474cdc90a9d6128440b5b14be4df20391d731
+"faker@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "faker@npm:5.4.0"
+  checksum: f29deef14c3e91ac4f67b8dd02d0d5147d42ef44e9a6051f8aa5a0b63083d42302af9679a3de7d92bb7c36ef8e2b1b31e3b36813e678fc0483026e3c30d6cbe5
   languageName: node
   linkType: hard
 
@@ -11584,6 +11586,13 @@ __metadata:
   dependencies:
     to-regex-range: ^5.0.1
   checksum: efca43d59b487ad4bc0b2b1cb9e51617c75a7b0159db51fa190c75c3d634ea5fad1ff4750d7c14346add4cd065e3c46e8f99af333edf2b4ec2a424f87e491a85
+  languageName: node
+  linkType: hard
+
+"filter-obj@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "filter-obj@npm:1.1.0"
+  checksum: 1049ac0c306198edf2c090375f7a80545a01e798b4996dbde13398a263cd923b5eb8a240dfadb03260621249a404a686e1a55980c6e59af70ee3880323998703
   languageName: node
   linkType: hard
 
@@ -21014,14 +21023,15 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"query-string@npm:^6.13.8":
-  version: 6.13.8
-  resolution: "query-string@npm:6.13.8"
+"query-string@npm:^6.14.0":
+  version: 6.14.0
+  resolution: "query-string@npm:6.14.0"
   dependencies:
     decode-uri-component: ^0.2.0
+    filter-obj: ^1.1.0
     split-on-first: ^1.0.0
     strict-uri-encode: ^2.0.0
-  checksum: 5d52ccd5988d60bb17990b287f2fa03d7d4eb3358f6716da7fc32c865196acf957cbdaa9272a36d60de80f06be67cbc7985c21432fecd75ab0166bbf06d87ff9
+  checksum: 70af3a82fe9babc51b72ed9d68cd5485754ee84456b8d1ab80c8f8fdda9302630513b91d96ed89e701cbdf04619bbcde1695b061ea47b91b099c9f79e4080bba
   languageName: node
   linkType: hard
 
@@ -21222,7 +21232,7 @@ fsevents@~2.3.1:
     prettier: ^2.2.1
     prismjs: ^1.23.0
     prop-types: ^15.7.2
-    query-string: ^6.13.8
+    query-string: ^6.14.0
     react: ^17.0.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-examples-decorators: "workspace:packages/examples-decorators"
@@ -21234,6 +21244,7 @@ fsevents@~2.3.1:
     react-error-overlay: ^6.0.9
     react-helmet: ^6.1.0
     react-is: ^17.0.1
+    react-refresh: ^0.9.0
     react-tabs: ^3.2.0
     react-typography: ^0.16.19
     regenerator-runtime: ^0.13.7
@@ -21261,7 +21272,7 @@ fsevents@~2.3.1:
     "@types/react-dom": ^17.0.0
     dnd-core: "workspace:packages/dnd-core"
     enzyme: ^3.11.0
-    faker: ^5.3.1
+    faker: ^5.4.0
     gulp: ^4.0.2
     immutability-helper: ^3.1.1
     lodash: ^4.17.20
@@ -21280,6 +21291,7 @@ fsevents@~2.3.1:
     react: ">= 17"
     react-dnd: ">11.1.3"
     react-dom: ">= 17"
+    react-refresh: "*"
   peerDependenciesMeta:
     "@types/node":
       optional: true
@@ -21304,7 +21316,7 @@ fsevents@~2.3.1:
     "@types/react": ^17.0.1
     "@types/react-dom": ^17.0.0
     dnd-core: "workspace:packages/dnd-core"
-    faker: ^5.3.1
+    faker: ^5.4.0
     gulp: ^4.0.2
     immutability-helper: ^3.1.1
     lodash: ^4.17.20
@@ -21324,6 +21336,7 @@ fsevents@~2.3.1:
     react: ">= 17"
     react-dnd: ">11.1.3"
     react-dom: ">= 17"
+    react-refresh: "*"
   peerDependenciesMeta:
     "@types/node":
       optional: true
@@ -21343,6 +21356,8 @@ fsevents@~2.3.1:
     "@react-dnd/build": "workspace:packages/build"
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
+  peerDependencies:
+    react-refresh: "*"
   languageName: unknown
   linkType: soft
 
@@ -21387,7 +21402,7 @@ fsevents@~2.3.1:
     react-dnd-test-utils: "workspace:packages/test-utils"
     react-dnd-touch-backend: "workspace:packages/backend-touch"
     rimraf: ^3.0.2
-    typescript: ^4.1.4
+    typescript: ^4.1.5
   languageName: unknown
   linkType: soft
 
@@ -21473,6 +21488,8 @@ fsevents@~2.3.1:
     "@react-dnd/invariant": ^2.0.0
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
+  peerDependencies:
+    react-refresh: "*"
   languageName: unknown
   linkType: soft
 
@@ -21504,6 +21521,7 @@ fsevents@~2.3.1:
     "@types/react-dom": ">= 17"
     react: ">= 17"
     react-dom: ">= 17"
+    react-refresh: "*"
   peerDependenciesMeta:
     "@types/hoist-non-react-statics":
       optional: true
@@ -21623,6 +21641,13 @@ fsevents@~2.3.1:
   version: 0.8.3
   resolution: "react-refresh@npm:0.8.3"
   checksum: 38f06df8e0a20701b96e5d680838a3528d66cfb53db79843d30cb9517df3262ec596607147439975267bf0634bee77101db37298ea79b5742cc28664632f3c76
+  languageName: node
+  linkType: hard
+
+"react-refresh@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "react-refresh@npm:0.9.0"
+  checksum: 300dc431389f4c532bdfec08d5bc59b591c8c440486a7d5770c8954adf3afe62501b659c5acbdb7831751e8be506eb90a6f72491fab40352f3b3fba16897acf6
   languageName: node
   linkType: hard
 
@@ -25379,16 +25404,6 @@ resolve@^1.18.1:
   languageName: node
   linkType: hard
 
-typescript@^4.1.4:
-  version: 4.1.4
-  resolution: "typescript@npm:4.1.4"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 2da55c253179d360bbc846436c42a5cbbffba99dfed69593450143b1c7f46fe43eab145b84a80f51d8e6d1be6dd4a6a0885e78495a42fc34c4a768595131e148
-  languageName: node
-  linkType: hard
-
 typescript@^4.1.5:
   version: 4.1.5
   resolution: "typescript@npm:4.1.5"
@@ -25396,16 +25411,6 @@ typescript@^4.1.5:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 29157c84426ac94ce97aac836264f303a26bd9fb30865650229e3406a36ca2e89735ef4b8878075ba1b95fa4d3ff9810057b64888700c28e20b4034a6db4da83
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.1.4#builtin<compat/typescript>":
-  version: 4.1.4
-  resolution: "typescript@patch:typescript@npm%3A4.1.4#builtin<compat/typescript>::version=4.1.4&hash=cc6730"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: d913f9d92f15437627d35ec24bb28740c5f550843a0442977cb61be0973aa760d618b33f4426205ccff920442ed38256b7d4b48731cfb7084ce0977c07e35404
   languageName: node
   linkType: hard
 
