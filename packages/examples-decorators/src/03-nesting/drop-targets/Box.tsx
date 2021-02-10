@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { ConnectDragSource } from 'react-dnd'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
@@ -15,7 +15,7 @@ export interface BoxProps {
 	connectDragSource: ConnectDragSource
 }
 
-const Box: React.FC<BoxProps> = ({ connectDragSource }) =>
+const Box: FC<BoxProps> = ({ connectDragSource }) =>
 	connectDragSource(<div style={style}>Drag me</div>)
 
 export default DragSource(

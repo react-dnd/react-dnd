@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 
 function list(files: any[]) {
 	const label = (file: { size: string; name: string; type: string }) =>
@@ -10,7 +10,7 @@ export interface FileListProps {
 	files: any[]
 }
 
-export const FileList: React.FC<FileListProps> = ({ files }) => {
+export const FileList: FC<FileListProps> = ({ files }) => {
 	return files.length === 0 ? (
 		<div>Nothing to display</div>
 	) : (

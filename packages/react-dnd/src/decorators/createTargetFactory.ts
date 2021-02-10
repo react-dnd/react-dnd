@@ -100,7 +100,7 @@ export function createTargetFactory<Props>(spec: DropTargetSpec<Props>) {
 
 	return function createTarget(
 		monitor: DropTargetMonitor,
-		ref: React.RefObject<any>,
+		ref: RefObject<any>,
 	): Target {
 		return new TargetImpl(spec, monitor, ref)
 	}

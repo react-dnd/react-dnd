@@ -1,8 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "allowSyntheticDefaultImports": true
+    "baseUrl": "."
   },
   "exclude": ["**/node_modules/**", "**/lib/**"]
 }

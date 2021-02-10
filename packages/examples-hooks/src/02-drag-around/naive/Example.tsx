@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react'
+import { FC, useState, useCallback } from 'react'
 import { Container } from './Container'
 
-export const Example: React.FC = () => {
+export const Example: FC = () => {
 	const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true)
 	const toggle = useCallback(() => setHideSourceOnDrag(!hideSourceOnDrag), [
 		hideSourceOnDrag,

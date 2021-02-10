@@ -123,7 +123,7 @@ export function createSourceFactory<Props, DragObject = any>(
 
 	return function createSource(
 		monitor: DragSourceMonitor,
-		ref: React.RefObject<any>,
+		ref: RefObject<any>,
 	) {
 		return new SourceImpl(spec, monitor, ref) as Source
 	}

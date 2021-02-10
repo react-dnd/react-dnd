@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { useDrop, DropTargetMonitor } from 'react-dnd'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px solid gray',
 	height: '15rem',
 	width: '15rem',
@@ -14,7 +14,7 @@ export interface TargetBoxProps {
 	onDrop: (props: TargetBoxProps, monitor: DropTargetMonitor) => void
 }
 
-export const TargetBox: React.FC<TargetBoxProps> = (props) => {
+export const TargetBox: FC<TargetBoxProps> = (props) => {
 	const { onDrop } = props
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: [NativeTypes.HTML],

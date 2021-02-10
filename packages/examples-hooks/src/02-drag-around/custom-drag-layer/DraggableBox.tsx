@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { CSSProperties, FC, useEffect } from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 import { getEmptyImage } from 'react-dnd-html5-backend'
@@ -8,7 +8,7 @@ function getStyles(
 	left: number,
 	top: number,
 	isDragging: boolean,
-): React.CSSProperties {
+): CSSProperties {
 	const transform = `translate3d(${left}px, ${top}px, 0)`
 	return {
 		position: 'absolute',
@@ -28,7 +28,7 @@ export interface DraggableBoxProps {
 	top: number
 }
 
-export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
+export const DraggableBox: FC<DraggableBoxProps> = (props) => {
 	const { id, title, left, top } = props
 	const [{ isDragging }, drag, preview] = useDrag({
 		item: { type: ItemTypes.BOX, id, left, top, title },

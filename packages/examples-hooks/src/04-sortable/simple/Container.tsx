@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { FC, useState, useCallback } from 'react'
 import { Card } from './Card'
 import update from 'immutability-helper'
 
@@ -15,7 +15,7 @@ export interface ContainerState {
 	cards: Item[]
 }
 
-export const Container: React.FC = () => {
+export const Container: FC = () => {
 	{
 		const [cards, setCards] = useState([
 			{

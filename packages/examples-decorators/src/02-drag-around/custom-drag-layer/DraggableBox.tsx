@@ -1,11 +1,11 @@
-import React from 'react'
+import { CSSProperties, PureComponent } from 'react'
 import { ConnectDragSource, ConnectDragPreview } from 'react-dnd'
 import { DragSource } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import { ItemTypes } from './ItemTypes'
 import { Box } from './Box'
 
-function getStyles(props: DraggableBoxProps): React.CSSProperties {
+function getStyles(props: DraggableBoxProps): CSSProperties {
 	const { left, top, isDragging } = props
 	const transform = `translate3d(${left}px, ${top}px, 0)`
 
@@ -30,7 +30,7 @@ export interface DraggableBoxProps {
 	top: number
 }
 
-class DraggableBox extends React.PureComponent<DraggableBoxProps> {
+class DraggableBox extends PureComponent<DraggableBoxProps> {
 	public componentDidMount() {
 		const { connectDragPreview } = this.props
 		if (connectDragPreview) {

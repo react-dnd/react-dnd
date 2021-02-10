@@ -1,10 +1,10 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import Dustbin from './Dustbin'
 import Box from './Box'
 
-const rowStyle: React.CSSProperties = { overflow: 'hidden', clear: 'both' }
+const rowStyle: CSSProperties = { overflow: 'hidden', clear: 'both' }
 
-export const Container: React.FC = () => (
+export const Container: FC = () => (
 	<div>
 		<div style={rowStyle}>
 			<Dustbin />

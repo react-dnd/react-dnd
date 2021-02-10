@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "./lib",
     "baseUrl": "./",
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "declaration": false,
     "allowJs": true

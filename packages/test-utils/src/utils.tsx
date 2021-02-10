@@ -43,10 +43,7 @@ export function wrapInTestContext<T>(
 		},
 	)
 
-	return [
-		(ForwardedComponent as unknown) as React.ComponentType<T>,
-		() => backend,
-	]
+	return [(ForwardedComponent as unknown) as ComponentType<T>, () => backend]
 }
 
 export function simulateDragDropSequence(

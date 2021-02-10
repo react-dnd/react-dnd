@@ -1,4 +1,3 @@
-import React from 'react'
 import Example from '../index'
 import Box, { BoxProps } from '../Box'
 import Dustbin, { DustbinProps } from '../Dustbin'

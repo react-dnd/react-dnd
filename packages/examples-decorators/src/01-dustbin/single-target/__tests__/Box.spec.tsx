@@ -1,4 +1,3 @@
-import React from 'react'
 import Box from '../Box'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'

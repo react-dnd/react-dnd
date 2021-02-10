@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 
 export interface SquareProps {
 	black: boolean
@@ -10,7 +10,7 @@ const squareStyle = {
 	height: '100%',
 }
 
-export const Square: React.FC<SquareProps> = ({ black, children }) => {
+export const Square: FC<SquareProps> = ({ black, children }) => {
 	const backgroundColor = black ? 'black' : 'white'
 	const color = black ? 'white' : 'black'
 	return (

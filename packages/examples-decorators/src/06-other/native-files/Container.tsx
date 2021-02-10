@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import { FC, useState, useMemo } from 'react'
 import { DropTargetMonitor } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import TargetBox from './TargetBox'
@@ -10,7 +10,7 @@ export interface ContainerState {
 	droppedFiles: any[]
 }
 
-export const Container: React.FC = () => {
+export const Container: FC = () => {
 	const [droppedFiles, setDroppedFiles] = useState<any[]>([])
 	const accepts = useMemo(() => [FILE], [])
 	const handleFileDrop = (item: any, monitor: DropTargetMonitor) => {
