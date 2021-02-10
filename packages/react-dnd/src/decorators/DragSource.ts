@@ -18,6 +18,7 @@ import { createSourceFactory } from './createSourceFactory'
 
 /**
  * Decorates a component as a dragsource
+ * @deprecated - The decorator-based API will be removed in a future major version
  * @param type The dragsource type
  * @param spec The drag source specification
  * @param collect The props collector function
