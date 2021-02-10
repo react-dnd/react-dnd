@@ -1,4 +1,5 @@
 releases:
+  "@react-dnd/build": patch
   dnd-core: patch
   react-dnd: patch
   react-dnd-examples-decorators: patch
