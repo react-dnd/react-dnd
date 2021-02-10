@@ -27,7 +27,7 @@ export class TestBackendImpl implements Backend, ITestBackend {
 	public didCallSetup = false
 	public didCallTeardown = false
 	public manager: DragDropManager
-	private context: TestBackendContext
+	public context: TestBackendContext
 	private actions: DragDropActions
 
 	public constructor(manager: DragDropManager, context: TestBackendContext) {
