@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { ComponentType as RComponentType } from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
 import { DndOptions } from '../interfaces'
@@ -17,6 +17,12 @@ import { checkDecoratorArguments } from './utils'
 import { decorateHandler } from './decorateHandler'
 import { createTargetFactory } from './createTargetFactory'
 
+/**
+ * @param type The accepted target type
+ * @param spec The DropTarget specification
+ * @param collect The props collector function
+ * @param options Options
+ */
 export function DropTarget<RequiredProps, CollectedProps = any>(
 	type: TargetType | ((props: RequiredProps) => TargetType),
 	spec: DropTargetSpec<RequiredProps>,
@@ -71,7 +77,7 @@ export function DropTarget<RequiredProps, CollectedProps = any>(
 	)
 
 	return (function decorateTarget<
-		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
+		ComponentType extends RComponentType<RequiredProps & CollectedProps>
 	>(DecoratedComponent: ComponentType): DndComponent<RequiredProps> {
 		return decorateHandler<RequiredProps, CollectedProps, TargetType>({
 			containerDisplayName: 'DropTarget',

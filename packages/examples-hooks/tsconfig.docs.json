@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "outDir": "dist/docs",
     "baseUrl": "./",

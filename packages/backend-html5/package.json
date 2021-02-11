@@ -2,9 +2,12 @@
   "name": "react-dnd-html5-backend",
   "version": "11.1.3",
   "description": "HTML5 backend for React DnD",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/types/index.d.ts"
+  },
   "sideEffects": false,
   "license": "MIT",
   "repository": {
@@ -14,7 +17,8 @@
   "scripts": {
     "clean": "gulp clean",
     "build": "gulp build",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "bundle": "gulp bundle"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core"
@@ -22,6 +26,9 @@
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
     "gulp": "^4.0.2"
+  },
+  "peerDependencies": {
+    "react-refresh": "*"
   },
   "umd": {
     "name": "ReactDnDHTML5Backend",
@@ -35,6 +42,10 @@
       "react": "React",
       "react-dom": "ReactDOM",
       "react-dnd": "ReactDnD"
+    },
+    "alias": {
+      "dnd-core": "dnd-core/dist/esm/index",
+      "react-dnd": "react-dnd/dist/esm/index"
     }
   }
 }

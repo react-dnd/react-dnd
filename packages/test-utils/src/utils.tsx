@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import * as React from 'react'
-import { TestBackend, getInstance, ITestBackend } from 'react-dnd-test-backend'
-import { DndComponent, DndContext, DndProvider } from 'react-dnd'
-import { Backend, DragDropManager } from 'dnd-core'
+import { Ref, ComponentType, Component, forwardRef } from 'react'
+import { Identifier } from 'dnd-core'
+import {
+	TestBackend,
+	ITestBackend,
+	TestBackendOptions,
+} from 'react-dnd-test-backend'
+import { DndComponent, DndProvider } from 'react-dnd'
 import { act } from 'react-dom/test-utils'
-
-interface RefType {
-	getManager: () => DragDropManager | undefined
-	getDecoratedComponent<T>(): T
-}
 
 /**
  * Wrap a DnD component or test case in a DragDropContext
@@ -16,68 +15,79 @@ interface RefType {
  * @param DecoratedComponent The component to decorate
  */
 export function wrapInTestContext<T>(
-	DecoratedComponent: React.ComponentType<T>,
-): React.ComponentType<T> {
-	const forwardedRefFunc = (props: any, ref: React.Ref<RefType>) => {
-		const dragDropManager = React.useRef<any>(undefined)
-		const decoratedComponentRef = React.useRef<any>(undefined)
-
-		React.useImperativeHandle(ref, () => ({
-			getManager: () => dragDropManager.current,
-			getDecoratedComponent: () => decoratedComponentRef.current,
-		}))
-
-		return (
-			<DndProvider backend={TestBackend}>
-				<DndContext.Consumer>
-					{(ctx) => {
-						dragDropManager.current = ctx.dragDropManager
-						return null
-					}}
-				</DndContext.Consumer>
-				<DecoratedComponent ref={decoratedComponentRef} {...props} />
-			</DndProvider>
-		)
+	DecoratedComponent: ComponentType<T>,
+): [ComponentType<T>, () => ITestBackend | undefined] {
+	let backend: ITestBackend | undefined
+	const testBackendOptions: TestBackendOptions = {
+		onCreate(be) {
+			backend = be
+		},
 	}
-	forwardedRefFunc.displayName = 'TestContextWrapper'
 
-	return React.forwardRef(forwardedRefFunc)
-}
+	class TestContextWrapper extends Component<
+		T & {
+			forwardedRef: Ref<any>
+		}
+	> {
+		public render() {
+			const { forwardedRef, ...rest } = this.props
+			return (
+				<DndProvider backend={TestBackend} options={testBackendOptions}>
+					<DecoratedComponent ref={forwardedRef} {...(rest as T)} />
+				</DndProvider>
+			)
+		}
+	}
+	const ForwardedComponent = forwardRef<unknown, T>(
+		function ForwardedTestContextWrapper(props, ref) {
+			return <TestContextWrapper {...props} forwardedRef={ref} />
+		},
+	)
 
-/**
- * Extracts a Backend instance from a TestContext component, such as
- * one emitted from `wrapinTestContext`
- *
- * @param instance The instance to extract the backend fram
- * @deprecated - This is no longer useful since ContextComponent was removed. This will be removed in a major version cut.
- */
-export function getBackendFromInstance<T extends Backend>(
-	_instance: DndComponent<any>,
-): T {
-	return getInstance() as any
+	return [(ForwardedComponent as unknown) as ComponentType<T>, () => backend]
 }
 
 export function simulateDragDropSequence(
-	source: DndComponent<any>,
-	target: DndComponent<any>,
+	source: HandlerIdProvider,
+	target: HandlerIdProvider,
 	backend: ITestBackend,
 ): void {
+	const sourceHandlerId = getHandlerId(source)
+	const targetHandlerId = getHandlerId(target)
 	act(() => {
-		backend.simulateBeginDrag([source.getHandlerId()])
-		backend.simulateHover([target.getHandlerId()])
+		backend.simulateBeginDrag([sourceHandlerId])
+		backend.simulateHover([targetHandlerId])
 		backend.simulateDrop()
 		backend.simulateEndDrag()
 	})
 }
 
 export function simulateHoverSequence(
-	source: DndComponent<any>,
-	target: DndComponent<any>,
+	source: HandlerIdProvider,
+	target: HandlerIdProvider,
 	backend: ITestBackend,
 ): void {
+	const sourceHandlerId = getHandlerId(source)
+	const targetHandlerId = getHandlerId(target)
 	act(() => {
-		backend.simulateBeginDrag([source.getHandlerId()])
-		backend.simulateHover([target.getHandlerId()])
+		backend.simulateBeginDrag([sourceHandlerId])
+		backend.simulateHover([targetHandlerId])
 		backend.simulateEndDrag()
 	})
 }
+
+function getHandlerId(provider: HandlerIdProvider): Identifier {
+	if (typeof provider === 'string' || typeof provider === 'symbol') {
+		return provider
+	} else if (typeof provider === 'function') {
+		return provider() as Identifier
+	} else if (typeof provider?.getHandlerId === 'function') {
+		return provider.getHandlerId()
+	} else {
+		throw new Error('Could not get handlerId from DnD source')
+	}
+}
+export type HandlerIdProvider =
+	| Identifier
+	| DndComponent<any>
+	| (() => Identifier | null)

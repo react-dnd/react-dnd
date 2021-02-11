@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { createContext } from 'react'
 import {
 	DragDropManager,
 	BackendFactory,
@@ -15,7 +15,7 @@ export interface DndContextType {
 /**
  * Create the React Context
  */
-export const DndContext = React.createContext<DndContextType>({
+export const DndContext = createContext<DndContextType>({
 	dragDropManager: undefined,
 })
 

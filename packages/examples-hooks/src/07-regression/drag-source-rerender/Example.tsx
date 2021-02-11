@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react'
+import { FC, useState, useCallback } from 'react'
 import { useDrag, ConnectDragSource } from 'react-dnd'
 
-export const Example: React.FC = () => {
+export const Example: FC = () => {
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: 'KNIGHT' },
 		collect: (monitor) => ({
@@ -15,7 +15,7 @@ export const Example: React.FC = () => {
 interface ChildProps {
 	drag: ConnectDragSource
 }
-const Child: React.FC<ChildProps> = ({ drag, children }) => {
+const Child: FC<ChildProps> = ({ drag, children }) => {
 	const [open, setOpen] = useState(true)
 	const toggle = useCallback(() => setOpen(!open), [open])
 

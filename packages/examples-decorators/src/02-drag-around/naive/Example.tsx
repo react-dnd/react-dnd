@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from 'react'
+import { FC, useState, useCallback } from 'react'
 import Container from './Container'
 
 export interface DragAroundNaiveState {
 	hideSourceOnDrag: boolean
 }
 
-export const Example: React.FC = () => {
+export const Example: FC = () => {
 	const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true)
 	const handleHideSourceClick = useCallback(() => {
 		setHideSourceOnDrag(!hideSourceOnDrag)

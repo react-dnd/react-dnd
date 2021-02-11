@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@testing-library/react'
 import { wrapInTestContext } from 'react-dnd-test-utils'
 import { DropTarget } from 'react-dnd'
 
@@ -21,8 +20,8 @@ describe('Connectors', () => {
 		)((props: any) => props.drop(<div>test target</div>))
 
 		// Render with the test context that uses the test backend
-		const WrappedTarget = wrapInTestContext(Target)
-		mount(<WrappedTarget x={1} y={2} />)
+		const [WrappedTarget] = wrapInTestContext(Target)
+		render(<WrappedTarget x={1} y={2} />)
 
 		expect(connectorFired).toBeTruthy()
 		expect(connectArgs.length).toEqual(3)

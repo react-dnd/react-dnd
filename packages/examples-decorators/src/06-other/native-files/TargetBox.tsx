@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import { DropTarget, DropTargetConnector } from 'react-dnd'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px solid gray',
 	height: '15rem',
 	width: '15rem',
@@ -18,7 +18,7 @@ export interface TargetBoxProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-const TargetBox: React.FC<TargetBoxProps> = ({
+const TargetBox: FC<TargetBoxProps> = ({
 	canDrop,
 	isOver,
 	connectDropTarget,

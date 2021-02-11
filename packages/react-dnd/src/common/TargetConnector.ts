@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { RefObject } from 'react'
 import { shallowEqual } from '@react-dnd/shallowequal'
 import { wrapConnectorHooks } from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
@@ -21,7 +21,7 @@ export class TargetConnector implements Connector {
 
 	private handlerId: Identifier | null = null
 	// The drop target may either be attached via ref or connect function
-	private dropTargetRef: React.RefObject<any> | null = null
+	private dropTargetRef: RefObject<any> | null = null
 	private dropTargetNode: any
 	private dropTargetOptionsInternal: any = null
 	private unsubscribeDropTarget: Unsubscribe | undefined

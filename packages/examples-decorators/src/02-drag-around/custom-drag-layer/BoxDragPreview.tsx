@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { Box } from './Box'
 
 const styles = {
@@ -11,7 +11,7 @@ export interface BoxDragPreviewProps {
 	title: string
 }
 
-export const BoxDragPreview: React.FC<BoxDragPreviewProps> = ({ title }) => {
+export const BoxDragPreview: FC<BoxDragPreviewProps> = ({ title }) => {
 	const [tickTock, setTickTock] = useState(false)
 
 	useEffect(

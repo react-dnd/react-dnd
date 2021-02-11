@@ -1,9 +1,9 @@
-import React, { memo } from 'react'
+import { FC, memo } from 'react'
 import { SourceBox } from './SourceBox'
 import { StatefulTargetBox as TargetBox } from './TargetBox'
 import { Colors } from './Colors'
 
-export const Container: React.FC = memo(function Container() {
+export const Container: FC = memo(function Container() {
 	return (
 		<>
 			<div style={{ overflow: 'hidden', clear: 'both', margin: '-.5rem' }}>

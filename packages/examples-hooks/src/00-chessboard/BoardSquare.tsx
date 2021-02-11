@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { useDrop } from 'react-dnd'
 import { Square } from './Square'
 import { canMoveKnight, moveKnight } from './Game'
@@ -11,7 +11,7 @@ export interface BoardSquareProps {
 	children: any
 }
 
-export const BoardSquare: React.FC<BoardSquareProps> = ({
+export const BoardSquare: FC<BoardSquareProps> = ({
 	x,
 	y,
 	children,

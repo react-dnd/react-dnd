@@ -1,6 +1,6 @@
 declare const process: any
 
-import * as React from 'react'
+import { RefObject } from 'react'
 import { DropTarget } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
 import { DropTargetMonitor } from '../interfaces'
@@ -18,12 +18,12 @@ class TargetImpl<Props> implements Target {
 	private props: Props | null = null
 	private spec: DropTargetSpec<Props>
 	private monitor: DropTargetMonitor
-	private ref: React.RefObject<any>
+	private ref: RefObject<any>
 
 	public constructor(
 		spec: DropTargetSpec<Props>,
 		monitor: DropTargetMonitor,
-		ref: React.RefObject<any>,
+		ref: RefObject<any>,
 	) {
 		this.spec = spec
 		this.monitor = monitor
@@ -100,7 +100,7 @@ export function createTargetFactory<Props>(spec: DropTargetSpec<Props>) {
 
 	return function createTarget(
 		monitor: DropTargetMonitor,
-		ref: React.RefObject<any>,
+		ref: RefObject<any>,
 	): Target {
 		return new TargetImpl(spec, monitor, ref)
 	}

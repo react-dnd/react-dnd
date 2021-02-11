@@ -1,4 +1,9 @@
-import * as React from 'react'
+import {
+	createRef,
+	RefObject,
+	Component,
+	ComponentType as RComponentType,
+} from 'react'
 import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { shallowEqual } from '@react-dnd/shallowequal'
 import { invariant } from '@react-dnd/invariant'
@@ -9,6 +14,10 @@ import { isPlainObject } from '../utils/js_utils'
 import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
 import { isRefable, checkDecoratorArguments } from './utils'
 
+/**
+ * @param collect The props collector function
+ * @param options The DnD options
+ */
 export function DragLayer<RequiredProps, CollectedProps = any>(
 	collect: DragLayerCollector<RequiredProps, CollectedProps>,
 	options: DndOptions<RequiredProps> = {},
@@ -28,13 +37,13 @@ export function DragLayer<RequiredProps, CollectedProps = any>(
 	)
 
 	return (function decorateLayer<
-		ComponentType extends React.ComponentType<RequiredProps & CollectedProps>
+		ComponentType extends RComponentType<RequiredProps & CollectedProps>
 	>(DecoratedComponent: ComponentType): DndComponentEnhancer<CollectedProps> {
 		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
 		const displayName = Decorated.displayName || Decorated.name || 'Component'
 
-		class DragLayerContainer extends React.Component<RequiredProps> {
+		class DragLayerContainer extends Component<RequiredProps> {
 			public static displayName = `DragLayer(${displayName})`
 			public static DecoratedComponent = DecoratedComponent
 
@@ -42,7 +51,7 @@ export function DragLayer<RequiredProps, CollectedProps = any>(
 			private isCurrentlyMounted = false
 			private unsubscribeFromOffsetChange: Unsubscribe | undefined
 			private unsubscribeFromStateChange: Unsubscribe | undefined
-			private ref: React.RefObject<any> = React.createRef()
+			private ref: RefObject<any> = createRef()
 
 			public getDecoratedComponentInstance() {
 				invariant(

@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	height: '12rem',
 	width: '12rem',
 	marginRight: '1.5rem',
@@ -15,13 +15,14 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-export const Dustbin: React.FC = () => {
-	const [{ canDrop, isOver }, drop] = useDrop({
+export const Dustbin: FC = () => {
+	const [{ canDrop, isOver, handlerId }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop: () => ({ name: 'Dustbin' }),
 		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
+			handlerId: monitor.getHandlerId(),
 		}),
 	})
 
@@ -34,7 +35,11 @@ export const Dustbin: React.FC = () => {
 	}
 
 	return (
-		<div ref={drop} style={{ ...style, backgroundColor }}>
+		<div
+			ref={drop}
+			style={{ ...style, backgroundColor }}
+			data-handler-id={handlerId}
+		>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>
 	)

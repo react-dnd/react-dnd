@@ -1,9 +1,9 @@
-import React from 'react'
+import { FC } from 'react'
 import SourceBox from './SourceBox'
 import TargetBox from './TargetBox'
 import { Colors } from './Colors'
 
-export const Container: React.FC = () => (
+export const Container: FC = () => (
 	<div style={{ overflow: 'hidden', clear: 'both', margin: '-.5rem' }}>
 		<div style={{ float: 'left' }}>
 			<SourceBox color={Colors.BLUE}>

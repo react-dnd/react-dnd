@@ -1,11 +1,11 @@
-import React, { memo } from 'react'
+import { FC, memo } from 'react'
 import styled from 'styled-components'
 import { theme } from '../theme'
 
 export interface PageBodyProps {
 	hasSidebar: boolean
 }
-export const PageBody: React.FC<PageBodyProps> = memo(function PageBody(props) {
+export const PageBody: FC<PageBodyProps> = memo(function PageBody(props) {
 	const { hasSidebar, children } = props
 	const Content = hasSidebar ? SidebarContent : PlainContent
 	return (

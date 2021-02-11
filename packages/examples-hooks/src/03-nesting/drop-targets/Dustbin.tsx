@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { CSSProperties, FC, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-function getStyle(backgroundColor: string): React.CSSProperties {
+function getStyle(backgroundColor: string): CSSProperties {
 	return {
 		border: '1px solid rgba(0,0,0,0.2)',
 		minHeight: '8rem',
@@ -27,7 +27,7 @@ export interface DustbinState {
 	hasDroppedOnChild: boolean
 }
 
-export const Dustbin: React.FC<DustbinProps> = ({ greedy, children }) => {
+export const Dustbin: FC<DustbinProps> = ({ greedy, children }) => {
 	const [hasDropped, setHasDropped] = useState(false)
 	const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
 

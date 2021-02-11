@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { FC, memo } from 'react'
 import styled from 'styled-components'
 import { renderHtmlAst } from '../util/renderHtmlAst'
 
@@ -9,7 +9,7 @@ export interface DocProps {
 	}
 }
 
-export const Doc: React.FC<DocProps> = memo(function Doc({ docPage }) {
+export const Doc: FC<DocProps> = memo(function Doc({ docPage }) {
 	return (
 		<Container>
 			<Gutter />

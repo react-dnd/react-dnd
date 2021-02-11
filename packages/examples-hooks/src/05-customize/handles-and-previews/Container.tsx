@@ -1,8 +1,8 @@
-import React from 'react'
+import { FC } from 'react'
 import { BoxWithImage } from './BoxWithImage'
 import { BoxWithHandle } from './BoxWithHandle'
 
-export const Container: React.FC = () => {
+export const Container: FC = () => {
 	return (
 		<div>
 			<div style={{ marginTop: '1.5rem' }}>

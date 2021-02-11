@@ -1,9 +1,15 @@
-import React, { useState, useImperativeHandle } from 'react'
+import {
+	CSSProperties,
+	forwardRef,
+	Component,
+	useState,
+	useImperativeHandle,
+} from 'react'
 import { DropTarget } from 'react-dnd'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-function getStyle(backgroundColor: string): React.CSSProperties {
+function getStyle(backgroundColor: string): CSSProperties {
 	return {
 		border: '1px solid rgba(0,0,0,0.2)',
 		minHeight: '8rem',
@@ -31,7 +37,7 @@ export interface DustbinState {
 	hasDroppedOnChild: boolean
 }
 
-const Dustbin = React.forwardRef<HTMLDivElement, DustbinProps>(
+const Dustbin = forwardRef<HTMLDivElement, DustbinProps>(
 	({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) => {
 		const [hasDropped, setHasDropped] = useState(false)
 		const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
@@ -71,7 +77,7 @@ export default DropTarget(
 		drop(
 			props: DustbinProps,
 			monitor: DropTargetMonitor,
-			component: React.Component | null,
+			component: Component | null,
 		) {
 			if (!component) {
 				return

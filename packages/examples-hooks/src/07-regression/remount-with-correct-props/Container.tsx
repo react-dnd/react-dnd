@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { FC, useState, useEffect, useCallback } from 'react'
 import { SourceBox } from './SourceBox'
 import { TargetBox } from './TargetBox'
 
-export const Container: React.FC = () => {
+export const Container: FC = () => {
 	const [isMounted, setIsMounted] = useState(true)
 	const [isDragging, setIsDragging] = useState(false)
 	useEffect(

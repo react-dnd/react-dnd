@@ -1,4 +1,4 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import {
 	DropTarget,
 	DropTargetMonitor,
@@ -21,13 +21,13 @@ export interface BoardSquareProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-const boardSquareStyle: React.CSSProperties = {
+const boardSquareStyle: CSSProperties = {
 	position: 'relative',
 	width: '100%',
 	height: '100%',
 }
 
-const BoardSquare: React.FC<BoardSquareProps> = ({
+const BoardSquare: FC<BoardSquareProps> = ({
 	x,
 	y,
 	connectDropTarget,

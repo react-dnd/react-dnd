@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useRef } from 'react'
+import { forwardRef, useImperativeHandle, useRef } from 'react'
 import {
 	ConnectDropTarget,
 	ConnectDragSource,
@@ -37,7 +37,7 @@ interface CardInstance {
 	getNode(): HTMLDivElement | null
 }
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
+const Card = forwardRef<HTMLDivElement, CardProps>(
 	({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
 		const elementRef = useRef(null)
 		connectDragSource(elementRef)

@@ -1,8 +1,8 @@
-import React, { memo } from 'react'
+import { CSSProperties, FC, memo } from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import { DropTarget, DropTargetConnector } from 'react-dnd'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	height: '12rem',
 	width: '12rem',
 	marginRight: '1.5rem',
@@ -27,7 +27,7 @@ export interface DustbinProps {
 	canDrop: boolean
 }
 
-const Dustbin: React.FC<DustbinProps> = memo(
+const Dustbin: FC<DustbinProps> = memo(
 	({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem }) => {
 		const isActive = isOver && canDrop
 

@@ -3,7 +3,8 @@
     "**/node_modules": true,
     "**/bower_components": true,
     "**/.yarn": true,
-    "**/.pnp.*": true
+    "**/.pnp.*": true,
+    "**/.rollup.cache": true
   },
   "editor.tabSize": 2,
   "[markdown]": {

@@ -1,4 +1,4 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { BoardSquare } from './BoardSquare'
 import { Knight } from './Knight'
 
@@ -7,20 +7,20 @@ export interface BoardProps {
 }
 
 /** Styling properties applied to the board element */
-const boardStyle: React.CSSProperties = {
+const boardStyle: CSSProperties = {
 	width: '100%',
 	height: '100%',
 	display: 'flex',
 	flexWrap: 'wrap',
 }
 /** Styling properties applied to each square element */
-const squareStyle: React.CSSProperties = { width: '12.5%', height: '12.5%' }
+const squareStyle: CSSProperties = { width: '12.5%', height: '12.5%' }
 
 /**
  * The chessboard component
  * @param props The react props
  */
-export const Board: React.FC<BoardProps> = ({
+export const Board: FC<BoardProps> = ({
 	knightPosition: [knightX, knightY],
 }) => {
 	function renderSquare(i: number) {

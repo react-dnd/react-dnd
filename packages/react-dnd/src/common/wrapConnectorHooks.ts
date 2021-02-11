@@ -1,7 +1,7 @@
 import { isValidElement, ReactElement } from 'react'
 import { cloneWithRef } from '../utils/cloneWithRef'
 
-function throwIfCompositeComponentElement(element: React.ReactElement<any>) {
+function throwIfCompositeComponentElement(element: ReactElement<any>) {
 	// Custom components can no longer be wrapped directly in React DnD 2.0
 	// so that we don't need to depend on findDOMNode() from react-dom.
 	if (typeof element.type === 'string') {

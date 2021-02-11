@@ -1,4 +1,3 @@
-import React from 'react'
 import Example from '..'
 import DndDustbin, { DustbinProps } from '../Dustbin'
 import DndBox, { BoxProps } from '../Box'
@@ -7,14 +6,12 @@ import {
 	simulateDragDropSequence,
 } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
-import { getInstance, ITestBackend } from 'react-dnd-test-backend'
 import { DndComponent as DndC } from 'react-dnd'
 
 describe('Dustbin: Multiple Targets', () => {
 	it('behaves as expected', () => {
-		const Wrapped = wrapInTestContext(Example)
+		const [Wrapped, getBackend] = wrapInTestContext(Example)
 		const root = mount(<Wrapped />)
-		const backend = getInstance() as ITestBackend
 
 		// Verify that all of the key components mounted
 		const dustbins = root.find(DndDustbin)
@@ -40,19 +37,19 @@ describe('Dustbin: Multiple Targets', () => {
 		// interactions
 
 		// drop bottle into glass bin
-		simulateDragDropSequence(bottleBox, glassBin, backend)
+		simulateDragDropSequence(bottleBox, glassBin, getBackend())
 		expect(glassBin.props.lastDroppedItem.name).toEqual(bottleBox.props.name)
 
 		// food won't drop into the glass bin
-		simulateDragDropSequence(bananaBox, glassBin, backend)
+		simulateDragDropSequence(bananaBox, glassBin, getBackend())
 		expect(glassBin.props.lastDroppedItem.name).toEqual(bottleBox.props.name)
 
 		// glass won't drop into the food box...
-		simulateDragDropSequence(bottleBox, foodBin, backend)
+		simulateDragDropSequence(bottleBox, foodBin, getBackend())
 		expect(foodBin.props.lastDroppedItem).toBeNull()
 
 		// but some food will work
-		simulateDragDropSequence(bananaBox, foodBin, backend)
+		simulateDragDropSequence(bananaBox, foodBin, getBackend())
 		expect(foodBin.props.lastDroppedItem.name).toEqual(bananaBox.props.name)
 	})
 })

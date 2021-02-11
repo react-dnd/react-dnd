@@ -1,7 +1,7 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrag } from 'react-dnd'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	backgroundColor: 'white',
 	padding: '0.5rem 1rem',
@@ -17,7 +17,7 @@ export interface BoxProps {
 	isDropped: boolean
 }
 
-export const Box: React.FC<BoxProps> = ({ name, type, isDropped }) => {
+export const Box: FC<BoxProps> = ({ name, type, isDropped }) => {
 	const [{ isDragging }, drag] = useDrag({
 		item: { name, type },
 		isDragging(monitor) {

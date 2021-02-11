@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react'
+import { FC, useRef, useState, useCallback } from 'react'
 import { ConnectDropTarget } from 'react-dnd'
 import { DropTarget } from 'react-dnd'
 import Card from './Card'
@@ -17,7 +17,7 @@ export interface ContainerState {
 	cards: any[]
 }
 
-const Container: React.FC<ContainerProps> = ({ connectDropTarget }) => {
+const Container: FC<ContainerProps> = ({ connectDropTarget }) => {
 	const ref = useRef(null)
 	const [cards, setCards] = useState([
 		{
