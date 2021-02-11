@@ -3,7 +3,6 @@ import { NativeTypes } from 'react-dnd-html5-backend'
 import { Dustbin } from './Dustbin'
 import { Box } from './Box'
 import { ItemTypes } from './ItemTypes'
-import update from 'immutability-helper'
 
 interface DustbinState {
 	accepts: string[]
@@ -55,18 +54,10 @@ export const Container: FC = () => {
 	const handleDrop = useCallback(
 		(index: number, item: { name: string }) => {
 			const { name } = item
-			setDroppedBoxNames(
-				update(droppedBoxNames, name ? { $push: [name] } : { $push: [] }),
-			)
-			setDustbins(
-				update(dustbins, {
-					[index]: {
-						lastDroppedItem: {
-							$set: item,
-						},
-					},
-				}),
-			)
+			setDroppedBoxNames([...droppedBoxNames, ...(name ? [name] : [])])
+			const newDustbins = [...dustbins]
+			newDustbins[index].lastDroppedItem = item
+			setDustbins(newDustbins)
 		},
 		[droppedBoxNames, dustbins],
 	)

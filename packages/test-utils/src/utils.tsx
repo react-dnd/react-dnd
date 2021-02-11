@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Ref, ComponentType, Component, forwardRef } from 'react'
+import { Identifier } from 'dnd-core'
 import {
 	TestBackend,
 	ITestBackend,
@@ -47,26 +48,46 @@ export function wrapInTestContext<T>(
 }
 
 export function simulateDragDropSequence(
-	source: DndComponent<any>,
-	target: DndComponent<any>,
+	source: HandlerIdProvider,
+	target: HandlerIdProvider,
 	backend: ITestBackend,
 ): void {
+	const sourceHandlerId = getHandlerId(source)
+	const targetHandlerId = getHandlerId(target)
 	act(() => {
-		backend.simulateBeginDrag([source.getHandlerId()])
-		backend.simulateHover([target.getHandlerId()])
+		backend.simulateBeginDrag([sourceHandlerId])
+		backend.simulateHover([targetHandlerId])
 		backend.simulateDrop()
 		backend.simulateEndDrag()
 	})
 }
 
 export function simulateHoverSequence(
-	source: DndComponent<any>,
-	target: DndComponent<any>,
+	source: HandlerIdProvider,
+	target: HandlerIdProvider,
 	backend: ITestBackend,
 ): void {
+	const sourceHandlerId = getHandlerId(source)
+	const targetHandlerId = getHandlerId(target)
 	act(() => {
-		backend.simulateBeginDrag([source.getHandlerId()])
-		backend.simulateHover([target.getHandlerId()])
+		backend.simulateBeginDrag([sourceHandlerId])
+		backend.simulateHover([targetHandlerId])
 		backend.simulateEndDrag()
 	})
 }
+
+function getHandlerId(provider: HandlerIdProvider): Identifier {
+	if (typeof provider === 'string' || typeof provider === 'symbol') {
+		return provider
+	} else if (typeof provider === 'function') {
+		return provider() as Identifier
+	} else if (typeof provider?.getHandlerId === 'function') {
+		return provider.getHandlerId()
+	} else {
+		throw new Error('Could not get handlerId from DnD source')
+	}
+}
+export type HandlerIdProvider =
+	| Identifier
+	| DndComponent<any>
+	| (() => Identifier | null)

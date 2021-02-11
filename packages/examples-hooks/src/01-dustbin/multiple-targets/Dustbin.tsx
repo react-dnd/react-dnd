@@ -25,12 +25,13 @@ export const Dustbin: FC<DustbinProps> = ({
 	lastDroppedItem,
 	onDrop,
 }) => {
-	const [{ isOver, canDrop }, drop] = useDrop({
+	const [{ isOver, canDrop, handlerId }, drop] = useDrop({
 		accept,
 		drop: onDrop,
 		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
+			handlerId: monitor.getHandlerId(),
 		}),
 	})
 
@@ -43,7 +44,11 @@ export const Dustbin: FC<DustbinProps> = ({
 	}
 
 	return (
-		<div ref={drop} style={{ ...style, backgroundColor }}>
+		<div
+			ref={drop}
+			style={{ ...style, backgroundColor }}
+			data-handler-id={handlerId}
+		>
 			{isActive
 				? 'Release to drop'
 				: `This dustbin accepts: ${accept.join(', ')}`}

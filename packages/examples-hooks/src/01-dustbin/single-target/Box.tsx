@@ -12,12 +12,12 @@ const style: CSSProperties = {
 	float: 'left',
 }
 
-interface BoxProps {
+export interface BoxProps {
 	name: string
 }
 
-export const Box: FC<BoxProps> = ({ name }) => {
-	const [{ isDragging }, drag] = useDrag({
+export const Box: FC<BoxProps> = function Box({ name }) {
+	const [{ isDragging, handlerId }, drag] = useDrag({
 		item: { name, type: ItemTypes.BOX },
 		end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
 			const dropResult = monitor.getDropResult()
@@ -27,12 +27,12 @@ export const Box: FC<BoxProps> = ({ name }) => {
 		},
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
+			handlerId: monitor.getHandlerId(),
 		}),
 	})
 	const opacity = isDragging ? 0.4 : 1
-
 	return (
-		<div ref={drag} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }} data-handler-id={handlerId}>
 			{name}
 		</div>
 	)

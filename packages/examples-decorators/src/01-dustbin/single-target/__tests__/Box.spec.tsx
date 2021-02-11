@@ -3,8 +3,6 @@ import { wrapInTestContext } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
 
 describe('Box', () => {
-	// TODO: test utils are acting wonking with function components.
-	// take a pass at making the tests behave better
 	it('can be tested independently', () => {
 		// Obtain the reference to the component before React DnD wrapping
 		const OriginalBox = Box.DecoratedComponent

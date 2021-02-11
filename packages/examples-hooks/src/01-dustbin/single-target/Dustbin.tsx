@@ -16,12 +16,13 @@ const style: CSSProperties = {
 }
 
 export const Dustbin: FC = () => {
-	const [{ canDrop, isOver }, drop] = useDrop({
+	const [{ canDrop, isOver, handlerId }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop: () => ({ name: 'Dustbin' }),
 		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
+			handlerId: monitor.getHandlerId(),
 		}),
 	})
 
@@ -34,7 +35,11 @@ export const Dustbin: FC = () => {
 	}
 
 	return (
-		<div ref={drop} style={{ ...style, backgroundColor }}>
+		<div
+			ref={drop}
+			style={{ ...style, backgroundColor }}
+			data-handler-id={handlerId}
+		>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>
 	)

@@ -18,15 +18,16 @@ export interface BoxProps {
 }
 
 export const Box: FC<BoxProps> = ({ name, type, isDropped }) => {
-	const [{ opacity }, drag] = useDrag({
+	const [{ opacity, handlerId }, drag] = useDrag({
 		item: { name, type },
 		collect: (monitor) => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
+			handlerId: monitor.getHandlerId(),
 		}),
 	})
 
 	return (
-		<div ref={drag} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }} data-handler-id={handlerId}>
 			{isDropped ? <s>{name}</s> : name}
 		</div>
 	)
