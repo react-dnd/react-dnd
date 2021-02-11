@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import { DropTarget } from 'react-dnd'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	height: '12rem',
 	width: '12rem',
 	marginRight: '1.5rem',
@@ -26,7 +26,7 @@ export interface DustbinProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-export const Dustbin: React.FC<DustbinProps> = ({
+export const Dustbin: FC<DustbinProps> = ({
 	accepts,
 	isOver,
 	canDrop,

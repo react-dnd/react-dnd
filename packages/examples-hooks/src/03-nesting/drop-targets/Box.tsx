@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
@@ -10,7 +10,7 @@ const style = {
 	cursor: 'move',
 }
 
-export const Box: React.FC = () => {
+export const Box: FC = () => {
 	const [, drag] = useDrag({ item: { type: ItemTypes.BOX } })
 	return (
 		<div ref={drag} style={style}>

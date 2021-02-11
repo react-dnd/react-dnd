@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem 1rem',
 	marginBottom: '.5rem',
@@ -23,7 +23,7 @@ interface Item {
 	originalIndex: string
 }
 
-export const Card: React.FC<CardProps> = ({ id, text, moveCard, findCard }) => {
+export const Card: FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 	const originalIndex = findCard(id).index
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: ItemTypes.CARD, id, originalIndex },

@@ -1,9 +1,9 @@
-import React from 'react'
+import { CSSProperties, Component } from 'react'
 import { name } from 'faker'
 import { Card } from './Card'
 import update from 'immutability-helper'
 
-const style = {
+const style: CSSProperties = {
 	width: 400,
 }
 
@@ -31,7 +31,7 @@ function buildCardData() {
 /* eslint-disable-next-line @typescript-eslint/no-empty-interface */
 export interface ContainerProps {}
 
-export class Container extends React.Component<ContainerProps, ContainerState> {
+export class Container extends Component<ContainerProps, ContainerState> {
 	private pendingUpdateFn: any
 	private requestedFrame: number | undefined
 

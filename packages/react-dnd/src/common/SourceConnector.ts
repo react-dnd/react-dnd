@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { ReactElement, Ref, RefObject } from 'react'
 import { wrapConnectorHooks } from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from '../utils/isRef'
@@ -15,13 +15,13 @@ export interface Connector {
 export class SourceConnector implements Connector {
 	public hooks = wrapConnectorHooks({
 		dragSource: (
-			node: Element | React.ReactElement | React.Ref<any>,
+			node: Element | ReactElement | Ref<any>,
 			options?: DragSourceOptions,
 		) => {
 			this.clearDragSource()
 			this.dragSourceOptions = options || null
 			if (isRef(node)) {
-				this.dragSourceRef = node as React.RefObject<any>
+				this.dragSourceRef = node as RefObject<any>
 			} else {
 				this.dragSourceNode = node
 			}
@@ -41,13 +41,13 @@ export class SourceConnector implements Connector {
 	private handlerId: Identifier | null = null
 
 	// The drop target may either be attached via ref or connect function
-	private dragSourceRef: React.RefObject<any> | null = null
+	private dragSourceRef: RefObject<any> | null = null
 	private dragSourceNode: any
 	private dragSourceOptionsInternal: DragSourceOptions | null = null
 	private dragSourceUnsubscribe: Unsubscribe | undefined
 
 	// The drag preview may either be attached via ref or connect function
-	private dragPreviewRef: React.RefObject<any> | null = null
+	private dragPreviewRef: RefObject<any> | null = null
 	private dragPreviewNode: any
 	private dragPreviewOptionsInternal: DragPreviewOptions | null = null
 	private dragPreviewUnsubscribe: Unsubscribe | undefined

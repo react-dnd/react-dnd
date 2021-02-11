@@ -1,4 +1,4 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { XYCoord } from 'react-dnd'
 import { DragLayer } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
@@ -6,7 +6,7 @@ import { BoxDragPreview } from './BoxDragPreview'
 import { snapToGrid } from './snapToGrid'
 import { Identifier } from 'dnd-core'
 
-const layerStyles: React.CSSProperties = {
+const layerStyles: CSSProperties = {
 	position: 'fixed',
 	pointerEvents: 'none',
 	zIndex: 100,
@@ -50,7 +50,7 @@ export interface CustomDragLayerProps {
 	snapToGrid: boolean
 }
 
-const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
+const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
 	const { item, itemType, isDragging } = props
 
 	function renderItem() {

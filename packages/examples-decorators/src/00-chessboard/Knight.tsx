@@ -1,4 +1,4 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import {
 	DragSource,
 	ConnectDragSource,
@@ -10,7 +10,7 @@ import {
 import { ItemTypes } from './ItemTypes'
 import { knightImage } from './knightImage'
 
-const knightStyle: React.CSSProperties = {
+const knightStyle: CSSProperties = {
 	fontSize: 40,
 	fontWeight: 'bold',
 	cursor: 'move',
@@ -22,7 +22,7 @@ export interface KnightProps {
 	isDragging?: boolean
 }
 
-const Knight: React.FC<KnightProps> = ({
+const Knight: FC<KnightProps> = ({
 	connectDragSource,
 	connectDragPreview,
 	isDragging,

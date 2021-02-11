@@ -1,9 +1,9 @@
-import React from 'react'
+import { FC, CSSProperties } from 'react'
 import { ConnectDropTarget } from 'react-dnd'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px solid gray',
 	height: '15rem',
 	width: '15rem',
@@ -17,7 +17,7 @@ export interface TargetBoxProps {
 	canDrop: boolean
 }
 
-const TargetBox: React.FC<TargetBoxProps> = ({
+const TargetBox: FC<TargetBoxProps> = ({
 	canDrop,
 	isOver,
 	connectDropTarget,

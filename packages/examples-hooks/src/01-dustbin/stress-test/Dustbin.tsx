@@ -1,7 +1,7 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrop } from 'react-dnd'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	height: '12rem',
 	width: '12rem',
 	marginRight: '1.5rem',
@@ -20,7 +20,7 @@ export interface DustbinProps {
 	onDrop: (arg: any) => void
 }
 
-export const Dustbin: React.FC<DustbinProps> = ({
+export const Dustbin: FC<DustbinProps> = ({
 	lastDroppedItem,
 	accepts: accept,
 	onDrop,

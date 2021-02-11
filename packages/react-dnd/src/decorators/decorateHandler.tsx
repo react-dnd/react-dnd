@@ -1,6 +1,6 @@
 declare const process: any
 
-import * as React from 'react'
+import { RefObject, createRef, Component } from 'react'
 import { shallowEqual } from '@react-dnd/shallowequal'
 import { invariant } from '@react-dnd/invariant'
 import { DragDropManager, Identifier } from 'dnd-core'
@@ -21,7 +21,7 @@ export interface DecorateHandlerArgs<Props, ItemIdType> {
 	createMonitor: (manager: DragDropManager) => HandlerReceiver
 	createHandler: (
 		monitor: HandlerReceiver,
-		ref: React.RefObject<any>,
+		ref: RefObject<any>,
 	) => Handler<Props>
 	createConnector: any
 	registerHandler: any
@@ -35,7 +35,7 @@ interface HandlerReceiver {
 	receiveHandlerId: (handlerId: Identifier | null) => void
 }
 interface Handler<Props> {
-	ref: React.RefObject<any>
+	ref: RefObject<any>
 	receiveProps(props: Props): void
 }
 
@@ -57,12 +57,12 @@ export function decorateHandler<Props, CollectedProps, ItemIdType>({
 		DecoratedComponent.displayName || DecoratedComponent.name || 'Component'
 
 	class DragDropContainer
-		extends React.Component<Props>
+		extends Component<Props>
 		implements DndComponent<Props> {
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 
-		private decoratedRef = React.createRef()
+		private decoratedRef = createRef()
 		private handlerId: string | undefined
 		private manager: DragDropManager | undefined
 		private handlerMonitor: HandlerReceiver | undefined

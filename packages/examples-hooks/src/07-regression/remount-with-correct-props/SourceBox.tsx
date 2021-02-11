@@ -1,8 +1,8 @@
-import React from 'react'
+import { FC, CSSProperties } from 'react'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const getStyle = (isDragging: boolean) => ({
+const getStyle = (isDragging: boolean): CSSProperties => ({
 	display: 'inline-block',
 	padding: '0.5rem 1rem',
 	cursor: 'pointer',
@@ -16,7 +16,7 @@ export interface SourceBoxProps {
 	onBeginDrag: () => void
 	onEndDrag: () => void
 }
-export const SourceBox: React.FC<SourceBoxProps> = ({
+export const SourceBox: FC<SourceBoxProps> = ({
 	id,
 	onBeginDrag,
 	onEndDrag,

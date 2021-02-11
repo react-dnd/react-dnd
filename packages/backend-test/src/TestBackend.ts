@@ -7,29 +7,22 @@ import {
 	Identifier,
 	Unsubscribe,
 } from 'dnd-core'
+import { ITestBackend, TestBackendContext } from './types'
 
 function noop() {
 	// noop
-}
-
-export interface ITestBackend extends Backend {
-	didCallSetup: boolean
-	didCallTeardown: boolean
-	simulateBeginDrag(sourceIds: Identifier[], options?: any): void
-	simulatePublishDragSource(): void
-	simulateHover(targetIds: Identifier[], options?: any): void
-	simulateDrop(): void
-	simulateEndDrag(): void
 }
 
 export class TestBackendImpl implements Backend, ITestBackend {
 	public didCallSetup = false
 	public didCallTeardown = false
 	public manager: DragDropManager
+	public context: TestBackendContext
 	private actions: DragDropActions
 
-	public constructor(manager: DragDropManager) {
+	public constructor(manager: DragDropManager, context: TestBackendContext) {
 		this.manager = manager
+		this.context = context
 		this.actions = manager.getActions()
 	}
 

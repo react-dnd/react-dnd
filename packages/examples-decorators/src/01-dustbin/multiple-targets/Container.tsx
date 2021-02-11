@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { FC, useState, useCallback } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
 import Box from './Box'
@@ -30,7 +30,7 @@ export interface ContainerState {
 	boxes: BoxSpec[]
 }
 
-export const Container: React.FC = () => {
+export const Container: FC = () => {
 	const [dustbins, setDustbins] = useState<DustbinState[]>([
 		{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
 		{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { FC, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { Card } from './Card'
 import update from 'immutability-helper'
@@ -43,7 +43,7 @@ const ITEMS = [
 	},
 ]
 
-export const Container: React.FC = () => {
+export const Container: FC = () => {
 	const [cards, setCards] = useState(ITEMS)
 	const moveCard = (id: string, atIndex: number) => {
 		const { card, index } = findCard(id)

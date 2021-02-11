@@ -1,4 +1,4 @@
-import React from 'react'
+import { ComponentClass, FunctionComponent } from 'react'
 import chessboard from './00-chessboard'
 import dustbinCopyOrMove from './01-dustbin/copy-or-move'
 import dustbinMultipleTargets from './01-dustbin/multiple-targets'
@@ -20,7 +20,7 @@ import remountWithCorrectProps from './07-regression/remount-with-correct-props'
 import otherChainedConnectors from './07-regression/chained-connectors'
 
 export const componentIndex: {
-	[key: string]: React.ComponentClass<any> | React.FunctionComponent<any>
+	[key: string]: ComponentClass<any> | FunctionComponent<any>
 } = {
 	chessboard,
 	'dustbin-single-target': dustbinSingleTarget,

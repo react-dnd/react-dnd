@@ -1,4 +1,4 @@
-import React from 'react'
+import { CSSProperties, PureComponent } from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import { DropTarget, DropTargetConnector } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
@@ -6,7 +6,7 @@ import DraggableBox from './DraggableBox'
 import { snapToGrid } from './snapToGrid'
 import update from 'immutability-helper'
 
-const styles: React.CSSProperties = {
+const styles: CSSProperties = {
 	width: 300,
 	height: 300,
 	border: '1px solid black',
@@ -22,7 +22,7 @@ export interface ContainerState {
 	boxes: Record<string, { top: number; left: number; title: string }>
 }
 
-class Container extends React.PureComponent<ContainerProps, ContainerState> {
+class Container extends PureComponent<ContainerProps, ContainerState> {
 	public state: ContainerState = {
 		boxes: {
 			a: { top: 20, left: 80, title: 'Drag me around' },

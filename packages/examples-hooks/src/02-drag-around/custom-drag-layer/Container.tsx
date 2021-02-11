@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { CSSProperties, FC, useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 import { DraggableBox } from './DraggableBox'
@@ -6,7 +6,7 @@ import { snapToGrid as doSnapToGrid } from './snapToGrid'
 import update from 'immutability-helper'
 import { DragItem } from './interfaces'
 
-const styles: React.CSSProperties = {
+const styles: CSSProperties = {
 	width: 300,
 	height: 300,
 	border: '1px solid black',
@@ -25,7 +25,7 @@ function renderBox(item: any, key: any) {
 	return <DraggableBox key={key} id={key} {...item} />
 }
 
-export const Container: React.FC<ContainerProps> = ({ snapToGrid }) => {
+export const Container: FC<ContainerProps> = ({ snapToGrid }) => {
 	const [boxes, setBoxes] = useState<BoxMap>({
 		a: { top: 20, left: 80, title: 'Drag me around' },
 		b: { top: 180, left: 20, title: 'Drag me too' },

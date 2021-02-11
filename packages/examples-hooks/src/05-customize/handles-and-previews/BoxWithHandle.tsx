@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem 1rem',
 	marginBottom: '.5rem',
@@ -10,7 +10,7 @@ const style: React.CSSProperties = {
 	width: '20rem',
 }
 
-const handleStyle: React.CSSProperties = {
+const handleStyle: CSSProperties = {
 	backgroundColor: 'green',
 	width: '1rem',
 	height: '1rem',
@@ -19,7 +19,7 @@ const handleStyle: React.CSSProperties = {
 	cursor: 'move',
 }
 
-export const BoxWithHandle: React.FC = () => {
+export const BoxWithHandle: FC = () => {
 	const [{ opacity }, drag, preview] = useDrag({
 		item: { type: ItemTypes.BOX },
 		collect: (monitor) => ({

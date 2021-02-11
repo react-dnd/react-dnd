@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { DragSource, ConnectDragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
@@ -18,10 +18,7 @@ export interface SourceBoxProps {
 	onBeginDrag: () => void
 	onEndDrag: () => void
 }
-const SourceBox: React.FC<SourceBoxProps> = ({
-	isDragging,
-	connectDragSource,
-}) => {
+const SourceBox: FC<SourceBoxProps> = ({ isDragging, connectDragSource }) => {
 	return connectDragSource(<div style={getStyle(isDragging)}>Drag me</div>)
 }
 

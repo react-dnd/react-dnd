@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { FC, useState, useCallback } from 'react'
 import { ConnectDragSource } from 'react-dnd'
 import { DragSource } from 'react-dnd'
 
@@ -6,7 +6,7 @@ interface ParentProps {
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
 }
-const Parent: React.FC<ParentProps> = ({ isDragging, connectDragSource }) => {
+const Parent: FC<ParentProps> = ({ isDragging, connectDragSource }) => {
 	return (
 		<Child connect={connectDragSource}>
 			{isDragging ? 'Dragging' : 'Drag me'}
@@ -29,7 +29,7 @@ interface ChildProps {
 	connect: ConnectDragSource
 }
 
-const Child: React.FC<ChildProps> = ({ connect, children }) => {
+const Child: FC<ChildProps> = ({ connect, children }) => {
 	const [open, setOpen] = useState(true)
 	const toggle = useCallback(() => setOpen(!open), [open])
 

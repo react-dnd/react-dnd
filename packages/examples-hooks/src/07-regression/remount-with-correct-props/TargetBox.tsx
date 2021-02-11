@@ -1,8 +1,8 @@
-import React from 'react'
+import { FC, CSSProperties } from 'react'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px solid gray',
 	height: '15rem',
 	width: '15rem',
@@ -10,7 +10,7 @@ const style: React.CSSProperties = {
 	textAlign: 'center',
 }
 
-export const TargetBox: React.FC = () => {
+export const TargetBox: FC = () => {
 	const [{ isActive }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		collect: (monitor) => ({

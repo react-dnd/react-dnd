@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { FC, useRef } from 'react'
 import {
 	ConnectDragSource,
 	ConnectDropTarget,
@@ -27,7 +27,7 @@ export interface CardProps {
 	isDragging: boolean
 }
 
-const Card: React.FC<CardProps> = ({
+const Card: FC<CardProps> = ({
 	text,
 	isDragging,
 	connectDragSource,

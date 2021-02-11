@@ -1,9 +1,9 @@
-import React, { memo } from 'react'
+import { FC, memo } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import { theme } from '../theme'
 
-export const NavBar: React.FC = memo(function NavBar() {
+export const NavBar: FC = memo(function NavBar() {
 	return (
 		<Container>
 			<ContentContainer>

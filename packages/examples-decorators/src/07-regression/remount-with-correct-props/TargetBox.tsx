@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { DropTarget, ConnectDropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px solid gray',
 	height: '15rem',
 	width: '15rem',
@@ -14,10 +14,7 @@ export interface TargetBoxProps {
 	connectDropTarget: ConnectDropTarget
 	isActive: boolean
 }
-const TargetBox: React.FC<TargetBoxProps> = ({
-	connectDropTarget,
-	isActive,
-}) => {
+const TargetBox: FC<TargetBoxProps> = ({ connectDropTarget, isActive }) => {
 	return connectDropTarget(
 		<div style={style}>{isActive ? 'Release to drop' : 'Drag item here'}</div>,
 	)

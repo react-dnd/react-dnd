@@ -5,12 +5,12 @@ import { subtaskFail, subtaskSuccess } from '../log'
 import { terser } from 'rollup-plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import rollup = require('rollup')
-/* eslint-disable-next-line @typescript-eslint/no-var-requires */
-const { parallel } = require('gulp')
 
 /* eslint-disable @typescript-eslint/no-var-requires */
+const { parallel } = require('gulp')
 const commonjs = require('@rollup/plugin-commonjs')
 const replace = require('@rollup/plugin-replace')
+const alias = require('@rollup/plugin-alias')
 /* eslint-enable @typescript-eslint/no-var-requires */
 
 function getUmdConfiguration(): UmdConfig | undefined {
@@ -46,6 +46,7 @@ interface UmdConfig {
 	external: string[]
 	input: string
 	globals: Record<string, string>
+	alias: Record<string, string>
 }
 
 async function rollupDebug(config: UmdConfig) {
@@ -95,13 +96,17 @@ function debugConfig({
 	input,
 	external,
 	globals,
+	alias: aliases = {}
 }: UmdConfig): rollup.RollupOptions {
 	return {
 		input,
 		external,
 		plugins: [
+			alias({
+				entries: aliases
+			}),
 			nodeResolve(NODE_RESOLVE_OPTS),
-			commonjs(),
+			commonjs(CJS_OPTS),
 			replaceNodeEnv('development'),
 		],
 		output: {
@@ -117,15 +122,19 @@ function minConfig({
 	input,
 	external,
 	globals,
+	alias: aliases = {}
 }: UmdConfig): rollup.RollupOptions {
 	return {
 		input,
 		external,
 		plugins: [
+			alias({
+				entries: aliases
+			}),
 			nodeResolve(NODE_RESOLVE_OPTS),
-			commonjs(),
+			commonjs(CJS_OPTS),
 			replaceNodeEnv('production'),
-			terser(),
+			terser()
 		],
 		output: {
 			name,
@@ -139,4 +148,8 @@ function minConfig({
 const NODE_RESOLVE_OPTS = {
 	browser: true,
 	mainFields: ['main:bundle', 'module', 'main'],
+	extensions: ['.mjs', '.js', '.json', '.node']
+}
+const CJS_OPTS = {
+	extensions: ['.js']
 }

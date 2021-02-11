@@ -44,4 +44,13 @@ async function createPages({ actions, graphql }) {
 	})
 }
 
+exports.onCreateBabelConfig = ({ actions }) => {
+	actions.setBabelPlugin({
+		name: require.resolve('@babel/plugin-transform-react-jsx'),
+		options: {
+			runtime: 'automatic',
+		},
+	})
+}
+
 exports.createPages = createPages

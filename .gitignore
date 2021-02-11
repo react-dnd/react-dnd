@@ -13,6 +13,7 @@ test-results.xml
 *-*.log
 .idea
 .DS_Store
+.rollup.cache/
 
 # Yarn v2
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored

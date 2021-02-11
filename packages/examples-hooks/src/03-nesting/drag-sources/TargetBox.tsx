@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react'
+import { CSSProperties, FC, useState, useCallback } from 'react'
 import { useDrop } from 'react-dnd'
 import { Colors } from './Colors'
 import { DragItem } from './interfaces'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px solid gray',
 	height: '15rem',
 	width: '15rem',
@@ -16,7 +16,7 @@ export interface TargetBoxProps {
 	lastDroppedColor?: string
 }
 
-const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
+const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 	const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
 		accept: [Colors.YELLOW, Colors.BLUE],
 		drop(item: DragItem) {
@@ -55,7 +55,7 @@ const TargetBox: React.FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 export interface StatefulTargetBoxState {
 	lastDroppedColor: string | null
 }
-export const StatefulTargetBox: React.FC = (props) => {
+export const StatefulTargetBox: FC = (props) => {
 	const [lastDroppedColor, setLastDroppedColor] = useState<string | null>(null)
 	const handleDrop = useCallback(
 		(color: string) => setLastDroppedColor(color),

@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	backgroundColor: 'white',
 	padding: '0.5rem 1rem',
@@ -12,12 +12,12 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-interface BoxProps {
+export interface BoxProps {
 	name: string
 }
 
-export const Box: React.FC<BoxProps> = ({ name }) => {
-	const [{ isDragging }, drag] = useDrag({
+export const Box: FC<BoxProps> = function Box({ name }) {
+	const [{ isDragging, handlerId }, drag] = useDrag({
 		item: { name, type: ItemTypes.BOX },
 		end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
 			const dropResult = monitor.getDropResult()
@@ -27,12 +27,12 @@ export const Box: React.FC<BoxProps> = ({ name }) => {
 		},
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
+			handlerId: monitor.getHandlerId(),
 		}),
 	})
 	const opacity = isDragging ? 0.4 : 1
-
 	return (
-		<div ref={drag} style={{ ...style, opacity }}>
+		<div ref={drag} style={{ ...style, opacity }} data-handler-id={handlerId}>
 			{name}
 		</div>
 	)

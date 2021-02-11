@@ -1,5 +1,5 @@
 declare const process: any
-import * as React from 'react'
+import { RefObject } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { DragSource, DragDropMonitor } from 'dnd-core'
 import { DragSourceMonitor } from '../interfaces'
@@ -18,12 +18,12 @@ class SourceImpl<Props> implements Source {
 	private props: Props | null = null
 	private spec: DragSourceSpec<Props, any>
 	private monitor: DragSourceMonitor
-	private ref: React.RefObject<any>
+	private ref: RefObject<any>
 
 	public constructor(
 		spec: DragSourceSpec<Props, any>,
 		monitor: DragSourceMonitor,
-		ref: React.RefObject<any>,
+		ref: RefObject<any>,
 	) {
 		this.spec = spec
 		this.monitor = monitor
@@ -123,7 +123,7 @@ export function createSourceFactory<Props, DragObject = any>(
 
 	return function createSource(
 		monitor: DragSourceMonitor,
-		ref: React.RefObject<any>,
+		ref: RefObject<any>,
 	) {
 		return new SourceImpl(spec, monitor, ref) as Source
 	}
