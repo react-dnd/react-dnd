@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { Box } from './Box';
 const styles = {
     display: 'inline-block',
@@ -12,6 +12,6 @@ export const BoxDragPreview = memo(({ title }) => {
         return () => clearInterval(interval);
     }, [tickTock]);
     return (<div style={styles}>
-				<Box title={title} yellow={tickTock}/>
-			</div>);
+			<Box title={title} yellow={tickTock}/>
+		</div>);
 });

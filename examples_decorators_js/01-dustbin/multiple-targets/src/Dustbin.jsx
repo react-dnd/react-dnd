@@ -1,4 +1,3 @@
-import React from 'react';
 import { DropTarget } from 'react-dnd';
 const style = {
     height: '12rem',

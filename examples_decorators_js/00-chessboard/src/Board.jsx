@@ -1,4 +1,3 @@
-import React from 'react';
 import BoardSquare from './BoardSquare';
 import { Piece } from './Piece';
 /** Styling properties applied to the board element */

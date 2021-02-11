@@ -1,4 +1,3 @@
-import React from 'react';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const getStyle = (isDragging) => ({
@@ -9,7 +8,7 @@ const getStyle = (isDragging) => ({
     backgroundColor: isDragging ? 'red' : undefined,
     opacity: isDragging ? 0.4 : 1,
 });
-const SourceBox = ({ isDragging, connectDragSource, }) => {
+const SourceBox = ({ isDragging, connectDragSource }) => {
     return connectDragSource(<div style={getStyle(isDragging)}>Drag me</div>);
 };
 export default DragSource(ItemTypes.BOX, {

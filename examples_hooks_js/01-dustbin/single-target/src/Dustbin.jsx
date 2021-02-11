@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {
@@ -14,12 +13,13 @@ const style = {
     float: 'left',
 };
 export const Dustbin = () => {
-    const [{ canDrop, isOver }, drop] = useDrop({
+    const [{ canDrop, isOver, handlerId }, drop] = useDrop({
         accept: ItemTypes.BOX,
         drop: () => ({ name: 'Dustbin' }),
         collect: (monitor) => ({
             isOver: monitor.isOver(),
             canDrop: monitor.canDrop(),
+            handlerId: monitor.getHandlerId(),
         }),
     });
     const isActive = canDrop && isOver;
@@ -30,7 +30,7 @@ export const Dustbin = () => {
     else if (canDrop) {
         backgroundColor = 'darkkhaki';
     }
-    return (<div ref={drop} style={{ ...style, backgroundColor }}>
+    return (<div ref={drop} style={{ ...style, backgroundColor }} data-handler-id={handlerId}>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>);
 };

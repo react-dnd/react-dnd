@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {

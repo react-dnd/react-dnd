@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { SourceBox } from './SourceBox';
 import { TargetBox } from './TargetBox';
 export const Container = () => {

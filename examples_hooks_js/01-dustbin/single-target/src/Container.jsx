@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Dustbin } from './Dustbin';
 import { Box } from './Box';
 export const Container = memo(function Container() {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDrop } from 'react-dnd';
 import { Square } from './Square';
 import { canMoveKnight, moveKnight } from './Game';

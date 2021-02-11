@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle } from 'react';
+import { forwardRef, useState, useImperativeHandle, } from 'react';
 import { DropTarget } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 function getStyle(backgroundColor) {
@@ -16,7 +16,7 @@ function getStyle(backgroundColor) {
         fontSize: '1rem',
     };
 }
-const Dustbin = React.forwardRef(({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) => {
+const Dustbin = forwardRef(({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) => {
     const [hasDropped, setHasDropped] = useState(false);
     const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false);
     useImperativeHandle(ref, () => ({

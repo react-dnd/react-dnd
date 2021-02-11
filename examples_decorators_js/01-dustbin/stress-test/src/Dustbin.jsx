@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { DropTarget } from 'react-dnd';
 const style = {
     height: '12rem',

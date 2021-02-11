@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container } from './Container';
 export const Example = () => {
     // Avoid rendering on server because the big data list is generated

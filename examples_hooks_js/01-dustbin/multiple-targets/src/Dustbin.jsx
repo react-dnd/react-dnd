@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDrop } from 'react-dnd';
 const style = {
     height: '12rem',
@@ -13,12 +12,13 @@ const style = {
     float: 'left',
 };
 export const Dustbin = ({ accept, lastDroppedItem, onDrop, }) => {
-    const [{ isOver, canDrop }, drop] = useDrop({
+    const [{ isOver, canDrop, handlerId }, drop] = useDrop({
         accept,
         drop: onDrop,
         collect: (monitor) => ({
             isOver: monitor.isOver(),
             canDrop: monitor.canDrop(),
+            handlerId: monitor.getHandlerId(),
         }),
     });
     const isActive = isOver && canDrop;
@@ -29,7 +29,7 @@ export const Dustbin = ({ accept, lastDroppedItem, onDrop, }) => {
     else if (canDrop) {
         backgroundColor = 'darkkhaki';
     }
-    return (<div ref={drop} style={{ ...style, backgroundColor }}>
+    return (<div ref={drop} style={{ ...style, backgroundColor }} data-handler-id={handlerId}>
 			{isActive
         ? 'Release to drop'
         : `This dustbin accepts: ${accept.join(', ')}`}

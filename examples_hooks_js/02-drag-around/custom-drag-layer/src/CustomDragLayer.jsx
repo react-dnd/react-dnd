@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDragLayer } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 import { BoxDragPreview } from './BoxDragPreview';

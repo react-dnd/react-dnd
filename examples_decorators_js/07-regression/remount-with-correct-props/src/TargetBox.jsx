@@ -1,4 +1,3 @@
-import React from 'react';
 import { DropTarget } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {
@@ -8,7 +7,7 @@ const style = {
     padding: '2rem',
     textAlign: 'center',
 };
-const TargetBox = ({ connectDropTarget, isActive, }) => {
+const TargetBox = ({ connectDropTarget, isActive }) => {
     return connectDropTarget(<div style={style}>{isActive ? 'Release to drop' : 'Drag item here'}</div>);
 };
 export default DropTarget(ItemTypes.BOX, {}, (connect, monitor) => {

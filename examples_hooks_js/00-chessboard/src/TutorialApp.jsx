@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Board } from './Board';
 import { observe } from './Game';
 const containerStyle = {

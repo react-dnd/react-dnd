@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{HPWl:function(e,n,t){"use strict";t.r(n);var a=t("vZY1"),i=t.n(a),o=t("9Dj+"),u=t("Wbzz"),c=Object(a.memo)((function(){return"undefined"!=typeof window&&Object(u.navigate)("/about"),i.a.createElement(o.a,{hideSidebar:!0},null)}));n.default=c}}]);
-//# sourceMappingURL=component---src-pages-docs-tsx-82e8c3118845ddae9635.js.map

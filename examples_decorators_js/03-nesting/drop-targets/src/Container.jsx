@@ -1,4 +1,3 @@
-import React from 'react';
 import Dustbin from './Dustbin';
 import Box from './Box';
 export const Container = () => (<div>

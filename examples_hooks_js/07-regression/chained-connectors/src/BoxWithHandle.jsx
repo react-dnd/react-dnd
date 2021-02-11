@@ -1,4 +1,3 @@
-import React from 'react';
 import { DragSource, DropTarget, useDrop, useDrag } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {

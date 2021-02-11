@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {

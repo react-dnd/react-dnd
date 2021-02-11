@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Container } from './Container';
 export const Example = () => {
     const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true);

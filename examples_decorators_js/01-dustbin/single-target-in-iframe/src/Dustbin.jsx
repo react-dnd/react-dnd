@@ -1,4 +1,3 @@
-import React from 'react';
 import { DropTarget } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {
@@ -13,7 +12,7 @@ const style = {
     lineHeight: 'normal',
     float: 'left',
 };
-const Dustbin = ({ canDrop, isOver, connectDropTarget, }) => {
+const Dustbin = ({ canDrop, isOver, connectDropTarget }) => {
     const isActive = canDrop && isOver;
     let backgroundColor = '#222';
     if (isActive) {

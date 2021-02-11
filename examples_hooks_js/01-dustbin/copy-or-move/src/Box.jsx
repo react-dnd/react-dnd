@@ -1,4 +1,3 @@
-import React from 'react';
 import { ItemTypes } from './ItemTypes';
 import { useDrag } from 'react-dnd';
 const style = {

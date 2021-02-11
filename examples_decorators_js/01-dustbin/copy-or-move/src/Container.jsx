@@ -1,4 +1,3 @@
-import React from 'react';
 import Dustbin from './Dustbin';
 import Box from './Box';
 const rowStyle = { overflow: 'hidden', clear: 'both' };

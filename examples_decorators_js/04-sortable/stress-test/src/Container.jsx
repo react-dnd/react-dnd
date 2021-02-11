@@ -1,11 +1,11 @@
-import React from 'react';
+import { Component } from 'react';
 import { name } from 'faker';
 import Card from './Card';
 import update from 'immutability-helper';
 const style = {
     width: 400,
 };
-export class Container extends React.Component {
+export class Container extends Component {
     constructor(props) {
         super(props);
         this.drawFrame = () => {

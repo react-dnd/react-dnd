@@ -1,4 +1,4 @@
-import React from 'react';
+import { PureComponent } from 'react';
 import { DropTarget } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 import DraggableBox from './DraggableBox';
@@ -10,7 +10,7 @@ const styles = {
     border: '1px solid black',
     position: 'relative',
 };
-class Container extends React.PureComponent {
+class Container extends PureComponent {
     constructor() {
         super(...arguments);
         this.state = {

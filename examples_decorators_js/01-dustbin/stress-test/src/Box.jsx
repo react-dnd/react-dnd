@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { DragSource } from 'react-dnd';
 const style = {
     border: '1px dashed gray',

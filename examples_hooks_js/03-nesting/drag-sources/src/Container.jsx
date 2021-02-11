@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { SourceBox } from './SourceBox';
 import { StatefulTargetBox as TargetBox } from './TargetBox';
 import { Colors } from './Colors';

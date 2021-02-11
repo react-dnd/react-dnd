@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { DropTarget } from 'react-dnd';
 import Card from './Card';
 import { ItemTypes } from './ItemTypes';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useCallback } from 'react';
 import { TargetBox } from './TargetBox';
 import { FileList } from './FileList';

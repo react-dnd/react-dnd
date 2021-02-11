@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 import Box from './Box';
@@ -9,7 +9,7 @@ const styles = {
     border: '1px solid black',
     position: 'relative',
 };
-class Container extends React.Component {
+class Container extends Component {
     constructor() {
         super(...arguments);
         this.state = {

@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {
@@ -8,7 +8,7 @@ const style = {
     backgroundColor: 'white',
     cursor: 'move',
 };
-const Card = React.forwardRef(({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
+const Card = forwardRef(({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
     const elementRef = useRef(null);
     connectDragSource(elementRef);
     connectDropTarget(elementRef);

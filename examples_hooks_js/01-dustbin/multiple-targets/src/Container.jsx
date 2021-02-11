@@ -1,9 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { NativeTypes } from 'react-dnd-html5-backend';
 import { Dustbin } from './Dustbin';
 import { Box } from './Box';
 import { ItemTypes } from './ItemTypes';
-import update from 'immutability-helper';
 export const Container = () => {
     const [dustbins, setDustbins] = useState([
         { accepts: [ItemTypes.GLASS], lastDroppedItem: null },
@@ -25,14 +24,10 @@ export const Container = () => {
     }
     const handleDrop = useCallback((index, item) => {
         const { name } = item;
-        setDroppedBoxNames(update(droppedBoxNames, name ? { $push: [name] } : { $push: [] }));
-        setDustbins(update(dustbins, {
-            [index]: {
-                lastDroppedItem: {
-                    $set: item,
-                },
-            },
-        }));
+        setDroppedBoxNames([...droppedBoxNames, ...(name ? [name] : [])]);
+        const newDustbins = [...dustbins];
+        newDustbins[index].lastDroppedItem = item;
+        setDustbins(newDustbins);
     }, [droppedBoxNames, dustbins]);
     return (<div>
 			<div style={{ overflow: 'hidden', clear: 'both' }}>

@@ -1,9 +1,9 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { BoxWithImage } from './BoxWithImage';
 import { BoxWithHandle } from './BoxWithHandle';
 export const Example = () => {
-    const [key, setKey] = React.useState(0);
-    React.useEffect(() => {
+    const [key, setKey] = useState(0);
+    useEffect(() => {
         const timeout = setTimeout(() => {
             setKey(Math.random());
         }, 100);

@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useCallback } from 'react';
+import { memo, useState, useEffect, useCallback } from 'react';
 import SourceBox from './SourceBox';
 import TargetBox from './TargetBox';
 export const Container = memo(function Container() {

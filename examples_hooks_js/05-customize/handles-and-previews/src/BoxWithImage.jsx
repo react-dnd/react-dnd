@@ -1,4 +1,3 @@
-import React from 'react';
 import { DragPreviewImage, useDrag } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 import { boxImage } from './boxImage';

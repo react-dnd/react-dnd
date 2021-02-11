@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {
@@ -10,8 +9,8 @@ const style = {
     cursor: 'move',
     float: 'left',
 };
-export const Box = ({ name }) => {
-    const [{ isDragging }, drag] = useDrag({
+export const Box = function Box({ name }) {
+    const [{ isDragging, handlerId }, drag] = useDrag({
         item: { name, type: ItemTypes.BOX },
         end: (item, monitor) => {
             const dropResult = monitor.getDropResult();
@@ -21,10 +20,11 @@ export const Box = ({ name }) => {
         },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
+            handlerId: monitor.getHandlerId(),
         }),
     });
     const opacity = isDragging ? 0.4 : 1;
-    return (<div ref={drag} style={{ ...style, opacity }}>
+    return (<div ref={drag} style={{ ...style, opacity }} data-handler-id={handlerId}>
 			{name}
 		</div>);
 };

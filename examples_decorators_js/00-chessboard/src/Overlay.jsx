@@ -1,4 +1,3 @@
-import React from 'react';
 export const Overlay = ({ color }) => {
     return (<div style={{
         position: 'absolute',

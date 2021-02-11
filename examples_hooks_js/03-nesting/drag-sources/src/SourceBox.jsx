@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useDrag } from 'react-dnd';
 import { Colors } from './Colors';
 const style = {

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useDrag } from 'react-dnd';
 export const Example = () => {
     const [{ isDragging }, drag] = useDrag({
