@@ -1,32 +1,37 @@
-let knightPosition: [number, number] = [1, 7]
-let observers: PositionObserver[] = []
-export type PositionObserver = ((position: [number, number]) => void) | null
+export type Position = [number, number]
+export type PositionObserver = ((position: Position) => void) | null
 
-function emitChange() {
-	observers.forEach((o) => o && o(knightPosition))
-}
+export class Game {
+	public knightPosition: Position = [1, 7]
+	private observers: PositionObserver[] = []
 
-export function observe(o: PositionObserver): () => void {
-	observers.push(o)
-	emitChange()
+	public observe(o: PositionObserver): () => void {
+		this.observers.push(o)
+		this.emitChange()
 
-	return (): void => {
-		observers = observers.filter((t) => t !== o)
+		return (): void => {
+			this.observers = this.observers.filter((t) => t !== o)
+		}
 	}
-}
 
-export function canMoveKnight(toX: number, toY: number): boolean {
-	const [x, y] = knightPosition
-	const dx = toX - x
-	const dy = toY - y
+	public moveKnight(toX: number, toY: number): void {
+		this.knightPosition = [toX, toY]
+		this.emitChange()
+	}
 
-	return (
-		(Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
-		(Math.abs(dx) === 1 && Math.abs(dy) === 2)
-	)
-}
+	public canMoveKnight(toX: number, toY: number): boolean {
+		const [x, y] = this.knightPosition
+		const dx = toX - x
+		const dy = toY - y
 
-export function moveKnight(toX: number, toY: number): void {
-	knightPosition = [toX, toY]
-	emitChange()
+		return (
+			(Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
+			(Math.abs(dx) === 1 && Math.abs(dy) === 2)
+		)
+	}
+
+	private emitChange() {
+		const pos = this.knightPosition
+		this.observers.forEach((o) => o && o(pos))
+	}
 }
