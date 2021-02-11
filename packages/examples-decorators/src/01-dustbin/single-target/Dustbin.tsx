@@ -32,7 +32,11 @@ const Dustbin: FC<DustbinProps> = ({ canDrop, isOver, connectDropTarget }) => {
 	}
 
 	return (
-		<div ref={connectDropTarget} style={{ ...style, backgroundColor }}>
+		<div
+			ref={connectDropTarget}
+			style={{ ...style, backgroundColor }}
+			role="Dustbin"
+		>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>
 	)

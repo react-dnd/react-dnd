@@ -1,30 +1,16 @@
-import '@testing-library/jest-dom'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { render, screen, fireEvent, RenderResult } from '@testing-library/react'
+import { render, screen, RenderResult } from '@testing-library/react'
 import { Game } from '../Game'
 import { Board } from '../Board'
 import { OverlayType } from '../Overlay'
+import {
+	wrapWithBackend,
+	fireDragHover,
+	fireDragDrop,
+} from 'react-dnd-test-utils'
 
-function dragAndDrop(knight: HTMLElement, space: HTMLElement) {
-	fireEvent.dragStart(knight)
-	fireEvent.dragEnter(space)
-	fireEvent.dragOver(space)
-	fireEvent.drop(space)
-}
-
-function dragHold(knight: HTMLElement, space: HTMLElement) {
-	fireEvent.dragStart(knight)
-	fireEvent.dragEnter(space)
-	fireEvent.dragOver(space)
-}
-
+const TestBoard = wrapWithBackend(Board)
 function renderGame(game: Game): RenderResult {
-	return render(
-		<DndProvider backend={HTML5Backend}>
-			<Board game={game} />
-		</DndProvider>,
-	)
+	return render(<TestBoard game={game} />)
 }
 
 describe('The Chess Example', () => {
@@ -86,7 +72,7 @@ describe('The Chess Example', () => {
 		it('highlights legal positions when the knight is drag-held', async () => {
 			const knight = screen.getByText('♘')
 
-			dragHold(knight, screen.getByTestId('(1,7)'))
+			await fireDragHover(knight, screen.getByTestId('(1,7)'))
 
 			// Yellow cell is knight moving range
 			const legalMoves = screen.getAllByRole(OverlayType.PossibleMove)
@@ -102,33 +88,31 @@ describe('The Chess Example', () => {
 		})
 
 		// Knight initially has moving position 'index: 40 42 51' of 64 cell array
-		it('can move to (0,5)', () => {
+		it('can move to (0,5)', async () => {
 			const knight = screen.getByText('♘')
 			const targetSpace = screen.getByTestId('(0,5)')
-			dragAndDrop(knight, targetSpace)
+			await fireDragDrop(knight, targetSpace)
 			expect(targetSpace).toHaveTextContent('♘')
 		})
 
-		it('can move to space (2,5))', () => {
+		it('can move to space (2,5))', async () => {
 			const knight = screen.getByText('♘')
 			const targetSpace = screen.getByTestId('(2,5)')
-			dragAndDrop(knight, targetSpace)
+			await fireDragDrop(knight, targetSpace)
 			expect(targetSpace).toHaveTextContent('♘')
 		})
 
-		it('can move to space (3,6))', () => {
+		it('can move to space (3,6))', async () => {
 			const knight = screen.getByText('♘')
 			const targetSpace = screen.getByTestId('(3,6)')
-			dragAndDrop(knight, targetSpace)
+			await fireDragDrop(knight, targetSpace)
 			expect(targetSpace).toHaveTextContent('♘')
 		})
 
-		it('cannot move to an illegal space', () => {
+		it('cannot move to an illegal space', async () => {
 			const knight = screen.getByText('♘')
 			const illegalSpace = screen.getByTestId('(0,7)')
-
-			dragAndDrop(knight, illegalSpace)
-
+			await fireDragDrop(knight, illegalSpace)
 			expect(illegalSpace).not.toHaveTextContent('♘')
 		})
 	})

@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, memo } from 'react'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
 import { DropTarget } from 'react-dnd'
 
@@ -26,13 +26,13 @@ export interface DustbinProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-export const Dustbin: FC<DustbinProps> = ({
+export const Dustbin: FC<DustbinProps> = memo(function Dustbin({
 	accepts,
 	isOver,
 	canDrop,
 	connectDropTarget,
 	lastDroppedItem,
-}) => {
+}) {
 	const isActive = isOver && canDrop
 
 	let backgroundColor = '#222'
@@ -43,7 +43,11 @@ export const Dustbin: FC<DustbinProps> = ({
 	}
 
 	return connectDropTarget(
-		<div style={{ ...style, backgroundColor }}>
+		<div
+			ref={connectDropTarget}
+			style={{ ...style, backgroundColor }}
+			role="Dustbin"
+		>
 			{isActive
 				? 'Release to drop'
 				: `This dustbin accepts: ${accepts.join(', ')}`}
@@ -53,7 +57,7 @@ export const Dustbin: FC<DustbinProps> = ({
 			)}
 		</div>,
 	)
-}
+})
 
 export default DropTarget(
 	(props: DustbinProps) => props.accepts,
