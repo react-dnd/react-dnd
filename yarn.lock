@@ -19729,10 +19729,12 @@ fsevents@^1.2.7:
     typescript: ^4.1.5
   peerDependencies:
     "@types/node": ">= 12"
+    "@types/react": ">= 16"
+    "@types/react-dom": ">= 16"
     prop-types: ">= 15"
-    react: ">= 17"
+    react: ">= 16.14"
     react-dnd: ">11.1.3"
-    react-dom: ">= 17"
+    react-dom: ">= 16.14"
     react-refresh: "*"
   peerDependenciesMeta:
     "@types/node":
@@ -19774,12 +19776,12 @@ fsevents@^1.2.7:
     typescript: ^4.1.5
   peerDependencies:
     "@types/node": ">= 12"
-    "@types/react": ">= 17"
-    "@types/react-dom": ">= 17"
+    "@types/react": ">= 16"
+    "@types/react-dom": ">= 16"
     prop-types: ">= 15"
-    react: ">= 17"
+    react: ">= 16.14"
     react-dnd: ">11.1.3"
-    react-dom: ">= 17"
+    react-dom: ">= 16.14"
     react-refresh: "*"
   peerDependenciesMeta:
     "@types/node":
@@ -19895,10 +19897,13 @@ fsevents@^1.2.7:
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dom: ^17.0.1
   peerDependencies:
-    react: ">= 17"
+    "@types/node": "*"
+    "@types/react": ">= 16"
+    "@types/react-dom": ">= 16"
+    react: ">= 16.14"
     react-dnd: ">= 10.0.0"
     react-dnd-test-backend: ">= 10.0.0"
-    react-dom: ">= 17"
+    react-dom: ">= 16.14"
   languageName: node
   linkType: soft
 
@@ -19917,10 +19922,13 @@ fsevents@^1.2.7:
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dom: ^17.0.1
   peerDependencies:
-    react: ">= 17"
+    "@types/node": "*"
+    "@types/react": ">= 16"
+    "@types/react-dom": ">= 16"
+    react: ">= 16.14"
     react-dnd: ">= 10.0.0"
     react-dnd-test-backend: ">= 10.0.0"
-    react-dom: ">= 17"
+    react-dom: ">= 16.14"
   languageName: unknown
   linkType: soft
 
@@ -19961,10 +19969,10 @@ fsevents@^1.2.7:
   peerDependencies:
     "@types/hoist-non-react-statics": ">= 3.3.1"
     "@types/node": ">= 12"
-    "@types/react": ">= 17"
-    "@types/react-dom": ">= 17"
-    react: ">= 17"
-    react-dom: ">= 17"
+    "@types/react": ">= 16"
+    "@types/react-dom": ">= 16"
+    react: ">= 16.14"
+    react-dom: ">= 16.14"
     react-refresh: "*"
   peerDependenciesMeta:
     "@types/hoist-non-react-statics":

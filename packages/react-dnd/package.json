@@ -43,10 +43,10 @@
   "peerDependencies": {
     "@types/hoist-non-react-statics": ">= 3.3.1",
     "@types/node": ">= 12",
-    "@types/react": ">= 17",
-    "@types/react-dom": ">= 17",
-    "react": ">= 17",
-    "react-dom": ">= 17",
+    "@types/react": ">= 16",
+    "@types/react-dom": ">= 16",
+    "react": ">= 16.14",
+    "react-dom": ">= 16.14",
     "react-refresh": "*"
   },
   "peerDependenciesMeta": {
