@@ -1,9 +1,7 @@
 import '@testing-library/jest-dom'
-import { render, fireEvent, act } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import Box from '../Box'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd'
-import { tick, wrapWithBackend } from 'react-dnd-test-utils'
+import { fireDrag, wrapWithBackend } from 'react-dnd-test-utils'
 
 describe('Box', () => {
 	it('can be tested independently', () => {
@@ -47,10 +45,7 @@ describe('Box', () => {
 		expect(box).toHaveStyle({ opacity: '1' })
 
 		// Opacity drops on Drag
-		await act(async () => {
-			fireEvent.dragStart(box)
-			await tick()
-		})
+		await fireDrag(box)
 		expect(rendered.getByTestId('box-test')).toHaveStyle({ opacity: '0.4' })
 
 		// Opacity returns on dragend

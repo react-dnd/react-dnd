@@ -1,7 +1,7 @@
 import Example from '../index'
 import '@testing-library/jest-dom'
-import { render, act, fireEvent } from '@testing-library/react'
-import { wrapWithBackend } from 'react-dnd-test-utils'
+import { render } from '@testing-library/react'
+import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
 
 describe('Integration: Dustbin Single Target', () => {
 	it('can simulate a full drag and drop interaction', async () => {
@@ -13,12 +13,7 @@ describe('Integration: Dustbin Single Target', () => {
 		expect(box).toBeDefined()
 		expect(dustbin).toBeDefined()
 
-		await act(async () => {
-			fireEvent.dragStart(box)
-			fireEvent.dragEnter(dustbin)
-			fireEvent.dragOver(dustbin)
-			fireEvent.drop(dustbin)
-		})
+		await fireDragDrop(box, dustbin)
 		expect(window.alert).toHaveBeenCalledWith(`You dropped Glass into Dustbin!`)
 	})
 })
