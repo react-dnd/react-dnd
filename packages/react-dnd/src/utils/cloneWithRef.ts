@@ -1,4 +1,4 @@
-import { cloneElement } from 'react'
+import { cloneElement, ReactElement } from 'react'
 import { invariant } from '@react-dnd/invariant'
 
 function setRef(ref: any, node: any) {
@@ -9,10 +9,7 @@ function setRef(ref: any, node: any) {
 	}
 }
 
-export function cloneWithRef(
-	element: any,
-	newRef: any,
-): React.ReactElement<any> {
+export function cloneWithRef(element: any, newRef: any): ReactElement<any> {
 	const previousRef = element.ref
 	invariant(
 		typeof previousRef !== 'string',

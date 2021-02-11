@@ -1,7 +1,7 @@
-import React from 'react'
+import { FC } from 'react'
 import { Example } from './Example'
 
-export const Container: React.FC = () => {
+export const Container: FC = () => {
 	return (
 		<>
 			<h3>

@@ -1,12 +1,10 @@
-import * as React from 'react'
+import { FC, Component } from 'react'
 import * as TestUtils from 'react-dom/test-utils'
 import { DropTarget } from '../index'
-import { invariant } from '@react-dnd/invariant'
-console.log('IV', invariant)
 
 describe('DropTarget', () => {
 	it('can apply via composition', () => {
-		class ContextClass extends React.Component {}
+		class ContextClass extends Component {}
 		const DecoratedClass = DropTarget(
 			'abc',
 			{
@@ -18,7 +16,7 @@ describe('DropTarget', () => {
 	})
 
 	it('can apply to an function component', () => {
-		const Component: React.FC = () => null
+		const Component: FC = () => null
 		const DecoratedComponent = DropTarget(
 			'abc',
 			{
@@ -32,7 +30,7 @@ describe('DropTarget', () => {
 
 	it('throws an error if rendered outside a DragDropContext', () => {
 		console.error = jest.fn()
-		const Component: React.FC = () => null
+		const Component: FC = () => null
 		const DecoratedComponent = DropTarget(
 			'abc',
 			{

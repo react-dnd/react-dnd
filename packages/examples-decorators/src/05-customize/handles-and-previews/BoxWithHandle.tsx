@@ -1,9 +1,9 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { ConnectDragPreview, ConnectDragSource } from 'react-dnd'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem 1rem',
 	marginBottom: '.5rem',
@@ -11,7 +11,7 @@ const style: React.CSSProperties = {
 	width: '20rem',
 }
 
-const handleStyle: React.CSSProperties = {
+const handleStyle: CSSProperties = {
 	backgroundColor: 'green',
 	width: '1rem',
 	height: '1rem',
@@ -26,7 +26,7 @@ export interface BoxWithHandleProps {
 	isDragging: boolean
 }
 
-const BoxWithHandle: React.FC<BoxWithHandleProps> = ({
+const BoxWithHandle: FC<BoxWithHandleProps> = ({
 	isDragging,
 	connectDragSource,
 	connectDragPreview,

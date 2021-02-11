@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react'
+import { FC, CSSProperties, useState, useCallback } from 'react'
 import { ConnectDragSource, DragSourceMonitor } from 'react-dnd'
 import { DragSource, DragSourceConnector } from 'react-dnd'
 import { Colors } from './Colors'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem',
 	margin: '0.5rem',
@@ -18,7 +18,7 @@ export interface SourceBoxProps {
 	isDragging: boolean
 }
 
-const SourceBoxRaw: React.FC<SourceBoxProps> = ({
+const SourceBoxRaw: FC<SourceBoxProps> = ({
 	color,
 	children,
 	isDragging,
@@ -76,7 +76,7 @@ export interface StatefulSourceBoxProps {
 	color: string
 }
 
-const StatefulSourceBox: React.FC<StatefulSourceBoxProps> = (props) => {
+const StatefulSourceBox: FC<StatefulSourceBoxProps> = (props) => {
 	const [forbidDrag, setForbidDrag] = useState(false)
 	const handleToggleForbidDrag = useCallback(() => {
 		setForbidDrag(!forbidDrag)

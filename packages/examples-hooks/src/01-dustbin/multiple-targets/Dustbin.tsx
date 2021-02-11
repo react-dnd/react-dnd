@@ -1,7 +1,7 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrop } from 'react-dnd'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	height: '12rem',
 	width: '12rem',
 	marginRight: '1.5rem',
@@ -20,17 +20,18 @@ export interface DustbinProps {
 	onDrop: (item: any) => void
 }
 
-export const Dustbin: React.FC<DustbinProps> = ({
+export const Dustbin: FC<DustbinProps> = ({
 	accept,
 	lastDroppedItem,
 	onDrop,
 }) => {
-	const [{ isOver, canDrop }, drop] = useDrop({
+	const [{ isOver, canDrop, handlerId }, drop] = useDrop({
 		accept,
 		drop: onDrop,
 		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
+			handlerId: monitor.getHandlerId(),
 		}),
 	})
 
@@ -43,7 +44,11 @@ export const Dustbin: React.FC<DustbinProps> = ({
 	}
 
 	return (
-		<div ref={drop} style={{ ...style, backgroundColor }}>
+		<div
+			ref={drop}
+			style={{ ...style, backgroundColor }}
+			data-handler-id={handlerId}
+		>
 			{isActive
 				? 'Release to drop'
 				: `This dustbin accepts: ${accept.join(', ')}`}

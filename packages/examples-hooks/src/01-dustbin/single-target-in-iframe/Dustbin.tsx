@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	height: '12rem',
 	width: '12rem',
 	marginRight: '1.5rem',
@@ -15,7 +15,7 @@ const style: React.CSSProperties = {
 	float: 'left',
 }
 
-export const Dustbin: React.FC = () => {
+export const Dustbin: FC = () => {
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		drop: () => ({ name: 'Dustbin' }),

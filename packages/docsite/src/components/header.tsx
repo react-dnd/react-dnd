@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { FC, memo } from 'react'
 import styled from 'styled-components'
 import { NavBar } from './navbar'
 
@@ -7,7 +7,7 @@ export interface HeaderProps {
 	touchBackend?: boolean
 }
 
-const DebugModeFlag: React.FC<HeaderProps> = ({ debugMode, touchBackend }) => {
+const DebugModeFlag: FC<HeaderProps> = ({ debugMode, touchBackend }) => {
 	if (!debugMode && !touchBackend) {
 		return null
 	}
@@ -27,7 +27,7 @@ const DebugModeFlag: React.FC<HeaderProps> = ({ debugMode, touchBackend }) => {
 	)
 }
 
-export const Header: React.FC<HeaderProps> = memo(function Header(props) {
+export const Header: FC<HeaderProps> = memo(function Header(props) {
 	return (
 		<Container>
 			<DebugModeFlag {...props} />

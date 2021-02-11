@@ -1,11 +1,11 @@
-import React from 'react'
+import { FC, useState, useEffect } from 'react'
 import { BoxWithImage } from './BoxWithImage'
 import { BoxWithHandle } from './BoxWithHandle'
 
-export const Example: React.FC = () => {
-	const [key, setKey] = React.useState(0)
+export const Example: FC = () => {
+	const [key, setKey] = useState(0)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setKey(Math.random())
 		}, 100)

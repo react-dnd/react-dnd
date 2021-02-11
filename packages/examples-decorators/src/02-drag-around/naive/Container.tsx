@@ -1,11 +1,11 @@
-import React from 'react'
+import { CSSProperties, Component } from 'react'
 import { ConnectDropTarget, DropTargetMonitor, XYCoord } from 'react-dnd'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 import Box from './Box'
 import update from 'immutability-helper'
 
-const styles: React.CSSProperties = {
+const styles: CSSProperties = {
 	width: 300,
 	height: 300,
 	border: '1px solid black',
@@ -21,7 +21,7 @@ export interface ContainerState {
 	boxes: { [key: string]: { top: number; left: number; title: string } }
 }
 
-class Container extends React.Component<ContainerProps, ContainerState> {
+class Container extends Component<ContainerProps, ContainerState> {
 	public state: ContainerState = {
 		boxes: {
 			a: { top: 20, left: 80, title: 'Drag me around' },

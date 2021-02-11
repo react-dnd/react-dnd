@@ -1,8 +1,8 @@
-import React, { memo } from 'react'
+import { CSSProperties, FC, memo } from 'react'
 import { DragSourceMonitor, ConnectDragSource } from 'react-dnd'
 import { DragSource, DragSourceConnector } from 'react-dnd'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	backgroundColor: 'white',
 	padding: '0.5rem 1rem',
@@ -22,7 +22,7 @@ export interface BoxProps {
 	connectDragSource: ConnectDragSource
 }
 
-const Box: React.FC<BoxProps> = memo(
+const Box: FC<BoxProps> = memo(
 	({ name, isDropped, isDragging, connectDragSource }) => {
 		const opacity = isDragging ? 0.4 : 1
 		return connectDragSource(

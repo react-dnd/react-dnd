@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import {
 	DragSource,
 	DropTarget,
@@ -31,7 +31,7 @@ export interface BoxWithHandleProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-const BoxWithHandleRaw: React.FC<BoxWithHandleProps> = ({
+const BoxWithHandleRaw: FC<BoxWithHandleProps> = ({
 	isDragging,
 	connectDragSource,
 	connectDragPreview,

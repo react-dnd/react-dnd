@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	backgroundColor: 'white',
 	padding: '0.5rem 1rem',
@@ -15,7 +15,7 @@ export interface SourceBoxProps {
 	showCopyIcon?: boolean
 }
 
-export const SourceBox: React.FC<SourceBoxProps> = ({ showCopyIcon }) => {
+export const SourceBox: FC<SourceBoxProps> = ({ showCopyIcon }) => {
 	const [{ opacity }, drag] = useDrag({
 		item: { type: ItemTypes.BOX },
 		options: {

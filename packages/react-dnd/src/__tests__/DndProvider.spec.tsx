@@ -1,15 +1,15 @@
 import { createDragDropManager } from 'dnd-core'
-import * as React from 'react'
-import { create } from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { DndContext, DndProvider } from '..'
 import { TestBackend } from 'react-dnd-test-backend'
+import { DndContextType } from '../common'
 
 describe('DndProvider', () => {
 	it('reuses DragDropManager provided to it', () => {
 		let capturedManager
 		const manager = createDragDropManager(TestBackend, {}, {})
 
-		create(
+		render(
 			<DndContext.Provider value={{ dragDropManager: manager }}>
 				<DndContext.Consumer>
 					{({ dragDropManager }) => {
@@ -27,7 +27,7 @@ describe('DndProvider', () => {
 		let capturedManager
 
 		const mountProvider = () =>
-			create(
+			render(
 				<DndProvider backend={TestBackend}>
 					<DndContext.Consumer>
 						{({ dragDropManager }) => {
@@ -38,8 +38,8 @@ describe('DndProvider', () => {
 				</DndProvider>,
 			)
 
-		const globalInstance = () =>
-			global[Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')]
+		const globalInstance = (): DndContextType =>
+			(global as any)[Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')] as any
 
 		// Single mount & unmount works
 		const root = mountProvider()

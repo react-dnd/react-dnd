@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { FC, useMemo } from 'react'
 
 export interface FileListProps {
 	files: File[]
@@ -10,7 +10,7 @@ function list(files: File[]) {
 	return files.map((file) => <li key={file.name}>{label(file)}</li>)
 }
 
-export const FileList: React.FC<FileListProps> = ({ files }) => {
+export const FileList: FC<FileListProps> = ({ files }) => {
 	if (files.length === 0) {
 		return <div>Nothing to display</div>
 	}

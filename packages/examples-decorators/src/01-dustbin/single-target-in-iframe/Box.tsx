@@ -1,9 +1,9 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { DragSourceMonitor, ConnectDragSource } from 'react-dnd'
 import { DragSource, DragSourceConnector } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	backgroundColor: 'white',
 	padding: '0.5rem 1rem',
@@ -20,7 +20,7 @@ export interface BoxProps {
 	isDragging: boolean
 	connectDragSource: ConnectDragSource
 }
-const Box: React.FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
+const Box: FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
 	const opacity = isDragging ? 0.4 : 1
 	return (
 		<div ref={connectDragSource} style={{ ...style, opacity }}>

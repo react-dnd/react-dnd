@@ -1,8 +1,8 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	position: 'absolute',
 	border: '1px dashed gray',
 	backgroundColor: 'white',
@@ -17,7 +17,7 @@ export interface BoxProps {
 	hideSourceOnDrag?: boolean
 }
 
-export const Box: React.FC<BoxProps> = ({
+export const Box: FC<BoxProps> = ({
 	id,
 	left,
 	top,

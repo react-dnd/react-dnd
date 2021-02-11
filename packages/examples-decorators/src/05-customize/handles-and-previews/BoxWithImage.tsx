@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import {
 	ConnectDragPreview,
 	ConnectDragSource,
@@ -23,7 +23,7 @@ export interface BoxWithImageProps {
 	isDragging: boolean
 }
 
-const BoxWithImage: React.FC<BoxWithImageProps> = ({
+const BoxWithImage: FC<BoxWithImageProps> = ({
 	isDragging,
 	connectDragSource,
 	connectDragPreview,

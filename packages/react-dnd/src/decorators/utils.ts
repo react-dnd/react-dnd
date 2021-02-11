@@ -1,4 +1,6 @@
-export function getDecoratedComponent(instanceRef: React.RefObject<any>) {
+import { RefObject } from 'react'
+
+export function getDecoratedComponent(instanceRef: RefObject<any>) {
 	const currentRef = instanceRef.current
 	if (currentRef == null) {
 		return null

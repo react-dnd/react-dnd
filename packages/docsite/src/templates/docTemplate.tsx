@@ -1,9 +1,9 @@
-import React, { memo } from 'react'
+import { FC, memo } from 'react'
 import { graphql } from 'gatsby'
 import { Doc } from '../components/doc'
 import { Layout } from '../components/layout'
 
-export const Template: React.FC<any> = memo(function Template(props) {
+export const Template: FC<any> = memo(function Template(props) {
 	const { currentPage } = props.data
 
 	return (

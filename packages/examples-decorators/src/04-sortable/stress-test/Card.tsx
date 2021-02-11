@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { CSSProperties, FC, memo } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 import {
 	ConnectDragSource,
@@ -7,7 +7,7 @@ import {
 } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem 1rem',
 	marginBottom: '.5rem',
@@ -24,7 +24,7 @@ export interface CardProps {
 	connectDropTarget: ConnectDropTarget
 }
 
-const Card: React.FC<CardProps> = memo(
+const Card: FC<CardProps> = memo(
 	({ text, isDragging, connectDragSource, connectDropTarget }) => {
 		const opacity = isDragging ? 0 : 1
 		return connectDragSource(

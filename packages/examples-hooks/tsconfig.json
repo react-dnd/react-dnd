@@ -4,7 +4,8 @@
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": false,
     "outDir": "./lib",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["./src/index.ts"]
 }

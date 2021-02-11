@@ -1,7 +1,7 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { BoxWithHandle } from './BoxWithHandle'
 
-const style = {
+const style: CSSProperties = {
 	width: 400,
 }
 
@@ -13,7 +13,7 @@ export interface ContainerState {
 	cards: Item[]
 }
 
-export const Container: React.FC = () => {
+export const Container: FC = () => {
 	{
 		return (
 			<div style={style}>

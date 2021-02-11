@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { FC, memo } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import { Page, PageGroup } from '../constants'
@@ -10,7 +10,7 @@ export interface SideBarProps {
 	location: string
 }
 
-export const Sidebar: React.FC<SideBarProps> = memo(function Sidebar({
+export const Sidebar: FC<SideBarProps> = memo(function Sidebar({
 	groups,
 	location,
 }) {

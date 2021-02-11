@@ -1,15 +1,15 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { DragPreviewImage, useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 import { knightImage } from './knightImage'
 
-const knightStyle: React.CSSProperties = {
+const knightStyle: CSSProperties = {
 	fontSize: 40,
 	fontWeight: 'bold',
 	cursor: 'move',
 }
 
-export const Knight: React.FC = () => {
+export const Knight: FC = () => {
 	const [{ isDragging }, drag, preview] = useDrag({
 		item: { type: ItemTypes.KNIGHT },
 		collect: (monitor) => ({

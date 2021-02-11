@@ -1,15 +1,15 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { DragSource, DropTarget, useDrop, useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style = {
+const style: CSSProperties = {
 	border: '1px dashed gray',
 	padding: '0.5rem 1rem',
 	marginBottom: '.5rem',
 	backgroundColor: 'white',
 	width: '20rem',
 }
-const handleStyle = {
+const handleStyle: CSSProperties = {
 	backgroundColor: 'green',
 	width: '1rem',
 	height: '1rem',
@@ -18,7 +18,7 @@ const handleStyle = {
 	cursor: 'move',
 }
 
-const BoxWithHandleRaw: React.FC = () => {
+const BoxWithHandleRaw: FC = () => {
 	const [, drop] = useDrop({
 		accept: ItemTypes.BOX,
 	})

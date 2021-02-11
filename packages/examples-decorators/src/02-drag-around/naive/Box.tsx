@@ -1,9 +1,9 @@
-import React from 'react'
+import { CSSProperties, FC } from 'react'
 import { ConnectDragSource } from 'react-dnd'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const style: React.CSSProperties = {
+const style: CSSProperties = {
 	position: 'absolute',
 	border: '1px dashed gray',
 	backgroundColor: 'white',
@@ -22,7 +22,7 @@ export interface BoxProps {
 	isDragging?: boolean
 }
 
-const Box: React.FC<BoxProps> = ({
+const Box: FC<BoxProps> = ({
 	hideSourceOnDrag,
 	left,
 	top,

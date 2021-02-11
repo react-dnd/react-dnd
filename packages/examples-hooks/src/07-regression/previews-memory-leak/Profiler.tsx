@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useDragDropManager } from 'react-dnd'
 
-export const Profiler: React.FC = () => {
+export const Profiler: FC = () => {
 	const dragDropManager = useDragDropManager()
 	const backend = dragDropManager?.getBackend()
 	const [key, setKey] = useState(0)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setKey(Math.random())
 		}, 100)
