@@ -1,17 +1,12 @@
 import '@testing-library/jest-dom'
 import { render, fireEvent, act } from '@testing-library/react'
 import { Box } from '../Box'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd'
-import { tick } from 'react-dnd-test-utils'
+import { wrapWithBackend, tick } from 'react-dnd-test-utils'
 
 describe('Box', () => {
 	it('can be tested with a backend', async () => {
-		const rendered = render(
-			<DndProvider backend={HTML5Backend}>
-				<Box name="test" />
-			</DndProvider>,
-		)
+		const TestBox = wrapWithBackend(Box)
+		const rendered = render(<TestBox name="test" />)
 
 		// Check that the opacity is 1
 		const box = rendered.getByTestId('box-test')
