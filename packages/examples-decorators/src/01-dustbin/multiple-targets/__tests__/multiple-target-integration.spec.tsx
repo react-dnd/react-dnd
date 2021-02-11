@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom'
 import Example from '..'
 import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
 import { render } from '@testing-library/react'

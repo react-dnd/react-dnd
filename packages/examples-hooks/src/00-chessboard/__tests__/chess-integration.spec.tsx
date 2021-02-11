@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom'
 import { render, screen, RenderResult } from '@testing-library/react'
 import { Game } from '../Game'
 import { Board } from '../Board'

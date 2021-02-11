@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom'
 import { render, fireEvent } from '@testing-library/react'
 import Box from '../Box'
 import { fireDrag, wrapWithBackend } from 'react-dnd-test-utils'

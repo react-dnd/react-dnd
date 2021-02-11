@@ -17,7 +17,7 @@ export interface BoxProps {
 }
 
 export const Box: FC<BoxProps> = function Box({ name }) {
-	const [{ isDragging, handlerId }, drag] = useDrag({
+	const [{ isDragging }, drag] = useDrag({
 		item: { name, type: ItemTypes.BOX },
 		end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
 			const dropResult = monitor.getDropResult()
@@ -37,7 +37,6 @@ export const Box: FC<BoxProps> = function Box({ name }) {
 			ref={drag}
 			role="Box"
 			style={{ ...style, opacity }}
-			data-handler-id={handlerId}
 			data-testid={`box-${name}`}
 		>
 			{name}
