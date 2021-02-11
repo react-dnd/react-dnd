@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, act } from '@testing-library/react'
 import Box from '../Box'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 import { tick } from 'react-dnd-test-utils'
-import { act } from 'react-dom/test-utils'
 
 describe('Box', () => {
 	it('can be tested independently', () => {
