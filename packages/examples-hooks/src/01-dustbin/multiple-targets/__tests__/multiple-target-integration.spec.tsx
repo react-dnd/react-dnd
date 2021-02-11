@@ -3,14 +3,14 @@ import { Dustbin } from '../Dustbin'
 import { Box } from '../Box'
 import { Identifier } from 'dnd-core'
 import {
-	wrapInTestContext,
+	wrapWithTestBackend,
 	simulateDragDropSequence,
 } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
 
 describe('Dustbin: Multiple Targets', () => {
 	it('behaves as expected', async () => {
-		const [Wrapped, getBackend] = wrapInTestContext(Example)
+		const [Wrapped, getBackend] = wrapWithTestBackend(Example)
 		const root = mount(<Wrapped />)
 
 		// Verify that all of the key components mounted

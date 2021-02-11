@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { wrapInTestContext } from 'react-dnd-test-utils'
+import { wrapWithTestBackend } from 'react-dnd-test-utils'
 import { DropTarget } from 'react-dnd'
 
 describe('Connectors', () => {
@@ -20,7 +20,7 @@ describe('Connectors', () => {
 		)((props: any) => props.drop(<div>test target</div>))
 
 		// Render with the test context that uses the test backend
-		const [WrappedTarget] = wrapInTestContext(Target)
+		const [WrappedTarget] = wrapWithTestBackend(Target)
 		render(<WrappedTarget x={1} y={2} />)
 
 		expect(connectorFired).toBeTruthy()

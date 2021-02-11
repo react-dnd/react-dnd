@@ -2,7 +2,7 @@ import Example from '..'
 import DndDustbin, { DustbinProps } from '../Dustbin'
 import DndBox, { BoxProps } from '../Box'
 import {
-	wrapInTestContext,
+	wrapWithTestBackend,
 	simulateDragDropSequence,
 } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
@@ -10,7 +10,7 @@ import { DndComponent as DndC } from 'react-dnd'
 
 describe('Dustbin: Multiple Targets', () => {
 	it('behaves as expected', () => {
-		const [Wrapped, getBackend] = wrapInTestContext(Example)
+		const [Wrapped, getBackend] = wrapWithTestBackend(Example)
 		const root = mount(<Wrapped />)
 
 		// Verify that all of the key components mounted
