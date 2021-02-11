@@ -18,7 +18,6 @@ import { decorateHandler } from './decorateHandler'
 import { createTargetFactory } from './createTargetFactory'
 
 /**
- * @deprecated - The decorator-based API will be removed in a future major version
  * @param type The accepted target type
  * @param spec The DropTarget specification
  * @param collect The props collector function
