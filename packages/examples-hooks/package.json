@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
+    "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@types/enzyme": "^3.10.8",
     "@types/faker": "^5.1.6",
