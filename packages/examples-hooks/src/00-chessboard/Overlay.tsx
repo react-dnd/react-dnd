@@ -1,12 +1,20 @@
 import { FC } from 'react'
 
+export enum OverlayType {
+	IllegalMoveHover = 'Illegal',
+	LegalMoveHover = 'Legal',
+	PossibleMove = 'Possible',
+}
 export interface OverlayProps {
-	color: string
+	type: OverlayType
 }
 
-export const Overlay: FC<OverlayProps> = ({ color }) => {
+export const Overlay: FC<OverlayProps> = ({ type }) => {
+	const color = getOverlayColor(type)
 	return (
 		<div
+			className="overlay"
+			role={type}
 			style={{
 				position: 'absolute',
 				top: 0,
@@ -19,4 +27,15 @@ export const Overlay: FC<OverlayProps> = ({ color }) => {
 			}}
 		/>
 	)
+}
+
+function getOverlayColor(type: OverlayType): string {
+	switch (type) {
+		case OverlayType.IllegalMoveHover:
+			return 'red'
+		case OverlayType.LegalMoveHover:
+			return 'green'
+		case OverlayType.PossibleMove:
+			return 'yellow'
+	}
 }

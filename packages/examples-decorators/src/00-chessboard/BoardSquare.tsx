@@ -6,14 +6,15 @@ import {
 	ConnectDropTarget,
 } from 'react-dnd'
 import { Square } from './Square'
-import { canMoveKnight, moveKnight } from './Game'
 import { ItemTypes } from './ItemTypes'
-import { Overlay } from './Overlay'
+import { Overlay, OverlayType } from './Overlay'
+import { Game } from './Game'
 
 export interface BoardSquareProps {
 	x: number
 	y: number
 	children: any
+	game: Game
 
 	// Collected Props
 	isOver: boolean
@@ -37,11 +38,11 @@ const BoardSquare: FC<BoardSquareProps> = ({
 }) => {
 	const black = (x + y) % 2 === 1
 	return connectDropTarget(
-		<div style={boardSquareStyle}>
+		<div role="Space" data-testid={`(${x},${y})`} style={boardSquareStyle}>
 			<Square black={black}>{children}</Square>
-			{isOver && !canDrop && <Overlay color="red" />}
-			{!isOver && canDrop && <Overlay color="yellow" />}
-			{isOver && canDrop && <Overlay color="green" />}
+			{isOver && !canDrop && <Overlay type={OverlayType.IllegalMoveHover} />}
+			{!isOver && canDrop && <Overlay type={OverlayType.PossibleMove} />}
+			{isOver && canDrop && <Overlay type={OverlayType.LegalMoveHover} />}
 		</div>,
 	)
 }
@@ -49,8 +50,8 @@ const BoardSquare: FC<BoardSquareProps> = ({
 export default DropTarget(
 	ItemTypes.KNIGHT,
 	{
-		canDrop: (props: BoardSquareProps) => canMoveKnight(props.x, props.y),
-		drop: (props: BoardSquareProps) => moveKnight(props.x, props.y),
+		canDrop: ({ game, x, y }: BoardSquareProps) => game.canMoveKnight(x, y),
+		drop: ({ game, x, y }: BoardSquareProps) => game.moveKnight(x, y),
 	},
 	(connect: DropTargetConnector, monitor: DropTargetMonitor) => {
 		return {
