@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, memo } from 'react'
 import { ConnectDragSource, DragSourceMonitor } from 'react-dnd'
 import { DragSource, DragSourceConnector } from 'react-dnd'
 
@@ -22,17 +22,19 @@ export interface BoxProps {
 	isDragging: boolean
 }
 
-export const Box: FC<BoxProps> = ({
+export const Box: FC<BoxProps> = memo(function Box({
 	name,
 	isDropped,
 	isDragging,
 	connectDragSource,
-}) => {
+}) {
 	const opacity = isDragging ? 0.4 : 1
 	return connectDragSource(
-		<div style={{ ...style, opacity }}>{isDropped ? <s>{name}</s> : name}</div>,
+		<div role="Box" style={{ ...style, opacity }}>
+			{isDropped ? <s>{name}</s> : name}
+		</div>,
 	)
-}
+})
 
 export default DragSource(
 	(props: BoxProps) => props.type,

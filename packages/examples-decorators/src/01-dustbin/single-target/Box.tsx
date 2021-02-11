@@ -23,7 +23,12 @@ export interface BoxProps {
 const Box: FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
 	const opacity = isDragging ? 0.4 : 1
 	return (
-		<div ref={connectDragSource} style={{ ...style, opacity }}>
+		<div
+			ref={connectDragSource}
+			role={'Box'}
+			data-testid={`box-${name}`}
+			style={{ ...style, opacity }}
+		>
 			{name}
 		</div>
 	)
@@ -32,7 +37,9 @@ const Box: FC<BoxProps> = ({ name, isDragging, connectDragSource }) => {
 export default DragSource(
 	ItemTypes.BOX,
 	{
-		beginDrag: (props: BoxProps) => ({ name: props.name }),
+		beginDrag: (props: BoxProps) => {
+			return { name: props.name }
+		},
 		endDrag(props: BoxProps, monitor: DragSourceMonitor) {
 			const item = monitor.getItem()
 			const dropResult = monitor.getDropResult()
@@ -42,8 +49,10 @@ export default DragSource(
 			}
 		},
 	},
-	(connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging(),
-	}),
+	(connect: DragSourceConnector, monitor: DragSourceMonitor) => {
+		return {
+			connectDragSource: connect.dragSource(),
+			isDragging: monitor.isDragging(),
+		}
+	},
 )(Box)

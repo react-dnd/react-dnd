@@ -1,80 +1,51 @@
 import Example from '..'
-import { Dustbin } from '../Dustbin'
-import { Box } from '../Box'
-import { Identifier } from 'dnd-core'
-import {
-	wrapInTestContext,
-	simulateDragDropSequence,
-} from 'react-dnd-test-utils'
-import { mount } from 'enzyme'
+import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
+import { render } from '@testing-library/react'
 
 describe('Dustbin: Multiple Targets', () => {
 	it('behaves as expected', async () => {
-		const [Wrapped, getBackend] = wrapInTestContext(Example)
-		const root = mount(<Wrapped />)
+		const TestExample = wrapWithBackend(Example)
+		const rendered = render(<TestExample />)
 
 		// Verify that all of the key components mounted
-		const dustbins = root.find(Dustbin)
-		const boxes = root.find(Box)
+		const dustbins = await rendered.findAllByRole('Dustbin')
+		const boxes = await rendered.findAllByRole('Box')
 		expect(dustbins.length).toEqual(4)
 		expect(boxes.length).toEqual(3)
 
 		window.alert = jest.fn()
 
 		// Bin Types
-		const glassBin = () => root.find(Dustbin).at(0)
-		const foodBin = () => root.find(Dustbin).at(1)
+		const glassBin = dustbins[0]
+		const foodBin = dustbins[1]
 
 		// Box Types
-		const bottleBox = () => root.find(Box).at(0)
-		const bananaBox = () => root.find(Box).at(1)
+		const bottleBox = boxes[0] as HTMLDivElement
+		const bananaBox = boxes[1]
 
 		// interactions
 
-		const getHandlerId = (c: any): Identifier =>
-			c.find('[data-handler-id]').props()['data-handler-id']
-
 		// drop bottle into glass bin
-		simulateDragDropSequence(
-			getHandlerId(bottleBox()),
-			getHandlerId(glassBin()),
-			getBackend(),
-		)
-		root.update()
-		expect(glassBin().props().lastDroppedItem).not.toBeNull()
-		expect(glassBin().props().lastDroppedItem.name).toEqual(
-			bottleBox().props().name,
+		await fireDragDrop(bottleBox, glassBin)
+		expect(glassBin.textContent).toContain(
+			JSON.stringify({ name: 'Bottle', type: 'glass' }),
 		)
 
 		// food won't drop into the glass bin
-		simulateDragDropSequence(
-			getHandlerId(bananaBox()),
-			getHandlerId(glassBin()),
-			getBackend(),
-		)
-		root.update()
-		expect(glassBin().props().lastDroppedItem.name).toEqual(
-			bottleBox().props().name,
+		await fireDragDrop(bananaBox, glassBin)
+		expect(glassBin.textContent).toContain(
+			JSON.stringify({ name: 'Bottle', type: 'glass' }),
 		)
 
 		// glass won't drop into the food box...
-		simulateDragDropSequence(
-			getHandlerId(bottleBox()),
-			getHandlerId(foodBin()),
-			getBackend(),
-		)
-		root.update()
-		expect(foodBin().props().lastDroppedItem).toBeNull()
+		await fireDragDrop(bottleBox, foodBin)
+		expect(foodBin.textContent).not.toContain('Last dropped')
 
 		// but some food will work
-		simulateDragDropSequence(
-			getHandlerId(bananaBox()),
-			getHandlerId(foodBin()),
-			getBackend(),
-		)
-		root.update()
-		expect(foodBin().props().lastDroppedItem.name).toEqual(
-			bananaBox().props().name,
+		await fireDragDrop(bananaBox, foodBin)
+		expect(foodBin.textContent).toContain('Last dropped')
+		expect(foodBin.textContent).toContain(
+			JSON.stringify({ name: 'Banana', type: 'food' }),
 		)
 	})
 })

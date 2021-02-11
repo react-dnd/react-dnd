@@ -5,6 +5,6 @@
     "target": "ES2015",
     "esModuleInterop": true,
     "allowJs": true,
-    "types": ["node", "jest"]
+    "types": ["node", "jest", "testing-library__jest-dom"]
   }
 }

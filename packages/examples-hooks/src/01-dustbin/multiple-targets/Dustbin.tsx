@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, memo } from 'react'
 import { useDrop } from 'react-dnd'
 
 const style: CSSProperties = {
@@ -20,18 +20,17 @@ export interface DustbinProps {
 	onDrop: (item: any) => void
 }
 
-export const Dustbin: FC<DustbinProps> = ({
+export const Dustbin: FC<DustbinProps> = memo(function Dustbin({
 	accept,
 	lastDroppedItem,
 	onDrop,
-}) => {
-	const [{ isOver, canDrop, handlerId }, drop] = useDrop({
+}) {
+	const [{ isOver, canDrop }, drop] = useDrop({
 		accept,
 		drop: onDrop,
 		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
-			handlerId: monitor.getHandlerId(),
 		}),
 	})
 
@@ -44,11 +43,7 @@ export const Dustbin: FC<DustbinProps> = ({
 	}
 
 	return (
-		<div
-			ref={drop}
-			style={{ ...style, backgroundColor }}
-			data-handler-id={handlerId}
-		>
+		<div ref={drop} role="Dustbin" style={{ ...style, backgroundColor }}>
 			{isActive
 				? 'Release to drop'
 				: `This dustbin accepts: ${accept.join(', ')}`}
@@ -58,4 +53,4 @@ export const Dustbin: FC<DustbinProps> = ({
 			)}
 		</div>
 	)
-}
+})
