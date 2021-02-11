@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { Board } from './Board';
-import { observe } from './Game';
+import { Game } from './Game';
 const containerStyle = {
     width: 500,
     height: 500,
@@ -10,10 +10,8 @@ const containerStyle = {
  * The Chessboard Tutorial Application
  */
 export const TutorialApp = () => {
-    const [knightPos, setKnightPos] = useState([1, 7]);
-    // the observe function will return an unsubscribe callback
-    useEffect(() => observe((newPos) => setKnightPos(newPos)));
+    const game = useMemo(() => new Game(), []);
     return (<div style={containerStyle}>
-			<Board knightPosition={knightPos}/>
+			<Board game={game}/>
 		</div>);
 };

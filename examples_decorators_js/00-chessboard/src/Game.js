@@ -1,25 +1,30 @@
-let knightPosition = [1, 7]
-let observers = []
-function emitChange() {
-  observers.forEach((o) => o && o(knightPosition))
-}
-export function observe(o) {
-  observers.push(o)
-  emitChange()
-  return () => {
-    observers = observers.filter((t) => t !== o)
+export class Game {
+  constructor() {
+    this.knightPosition = [1, 7]
+    this.observers = []
   }
-}
-export function canMoveKnight(toX, toY) {
-  const [x, y] = knightPosition
-  const dx = toX - x
-  const dy = toY - y
-  return (
-    (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
-    (Math.abs(dx) === 1 && Math.abs(dy) === 2)
-  )
-}
-export function moveKnight(toX, toY) {
-  knightPosition = [toX, toY]
-  emitChange()
+  observe(o) {
+    this.observers.push(o)
+    this.emitChange()
+    return () => {
+      this.observers = this.observers.filter((t) => t !== o)
+    }
+  }
+  moveKnight(toX, toY) {
+    this.knightPosition = [toX, toY]
+    this.emitChange()
+  }
+  canMoveKnight(toX, toY) {
+    const [x, y] = this.knightPosition
+    const dx = toX - x
+    const dy = toY - y
+    return (
+      (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
+      (Math.abs(dx) === 1 && Math.abs(dy) === 2)
+    )
+  }
+  emitChange() {
+    const pos = this.knightPosition
+    this.observers.forEach((o) => o && o(pos))
+  }
 }

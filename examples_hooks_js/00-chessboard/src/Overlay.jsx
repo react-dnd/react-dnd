@@ -1,5 +1,12 @@
-export const Overlay = ({ color }) => {
-    return (<div style={{
+export var OverlayType;
+(function (OverlayType) {
+    OverlayType["IllegalMoveHover"] = "Illegal";
+    OverlayType["LegalMoveHover"] = "Legal";
+    OverlayType["PossibleMove"] = "Possible";
+})(OverlayType || (OverlayType = {}));
+export const Overlay = ({ type }) => {
+    const color = getOverlayColor(type);
+    return (<div className="overlay" role={type} style={{
         position: 'absolute',
         top: 0,
         left: 0,
@@ -10,3 +17,13 @@ export const Overlay = ({ color }) => {
         backgroundColor: color,
     }}/>);
 };
+function getOverlayColor(type) {
+    switch (type) {
+        case OverlayType.IllegalMoveHover:
+            return 'red';
+        case OverlayType.LegalMoveHover:
+            return 'green';
+        case OverlayType.PossibleMove:
+            return 'yellow';
+    }
+}

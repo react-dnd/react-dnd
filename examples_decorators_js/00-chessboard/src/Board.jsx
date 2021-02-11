@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import BoardSquare from './BoardSquare';
 import { Piece } from './Piece';
 /** Styling properties applied to the board element */
@@ -13,12 +14,14 @@ const squareStyle = { width: '12.5%', height: '12.5%' };
  * The chessboard component
  * @param props The react props
  */
-export const Board = ({ knightPosition: [knightX, knightY], }) => {
+export const Board = ({ game }) => {
+    const [[knightX, knightY], setKnightPos] = useState(game.knightPosition);
+    useEffect(() => game.observe(setKnightPos));
     function renderSquare(i) {
         const x = i % 8;
         const y = Math.floor(i / 8);
         return (<div key={i} style={squareStyle}>
-				<BoardSquare x={x} y={y}>
+				<BoardSquare x={x} y={y} game={game}>
 					<Piece isKnight={x === knightX && y === knightY}/>
 				</BoardSquare>
 			</div>);
