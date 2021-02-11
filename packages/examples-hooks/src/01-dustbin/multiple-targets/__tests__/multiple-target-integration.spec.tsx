@@ -2,10 +2,7 @@ import Example from '..'
 import { Dustbin } from '../Dustbin'
 import { Box } from '../Box'
 import { Identifier } from 'dnd-core'
-import {
-	wrapWithTestBackend,
-	simulateDragDropSequence,
-} from 'react-dnd-test-utils'
+import { wrapWithTestBackend, simulateDragDrop } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
 
 describe('Dustbin: Multiple Targets', () => {
@@ -35,7 +32,7 @@ describe('Dustbin: Multiple Targets', () => {
 			c.find('[data-handler-id]').props()['data-handler-id']
 
 		// drop bottle into glass bin
-		simulateDragDropSequence(
+		simulateDragDrop(
 			getHandlerId(bottleBox()),
 			getHandlerId(glassBin()),
 			getBackend(),
@@ -47,7 +44,7 @@ describe('Dustbin: Multiple Targets', () => {
 		)
 
 		// food won't drop into the glass bin
-		simulateDragDropSequence(
+		simulateDragDrop(
 			getHandlerId(bananaBox()),
 			getHandlerId(glassBin()),
 			getBackend(),
@@ -58,7 +55,7 @@ describe('Dustbin: Multiple Targets', () => {
 		)
 
 		// glass won't drop into the food box...
-		simulateDragDropSequence(
+		simulateDragDrop(
 			getHandlerId(bottleBox()),
 			getHandlerId(foodBin()),
 			getBackend(),
@@ -67,7 +64,7 @@ describe('Dustbin: Multiple Targets', () => {
 		expect(foodBin().props().lastDroppedItem).toBeNull()
 
 		// but some food will work
-		simulateDragDropSequence(
+		simulateDragDrop(
 			getHandlerId(bananaBox()),
 			getHandlerId(foodBin()),
 			getBackend(),

@@ -1,10 +1,7 @@
 import Example from '..'
 import DndDustbin, { DustbinProps } from '../Dustbin'
 import DndBox, { BoxProps } from '../Box'
-import {
-	wrapWithTestBackend,
-	simulateDragDropSequence,
-} from 'react-dnd-test-utils'
+import { wrapWithTestBackend, simulateDragDrop } from 'react-dnd-test-utils'
 import { mount } from 'enzyme'
 import { DndComponent as DndC } from 'react-dnd'
 
@@ -37,19 +34,19 @@ describe('Dustbin: Multiple Targets', () => {
 		// interactions
 
 		// drop bottle into glass bin
-		simulateDragDropSequence(bottleBox, glassBin, getBackend())
+		simulateDragDrop(bottleBox, glassBin, getBackend())
 		expect(glassBin.props.lastDroppedItem.name).toEqual(bottleBox.props.name)
 
 		// food won't drop into the glass bin
-		simulateDragDropSequence(bananaBox, glassBin, getBackend())
+		simulateDragDrop(bananaBox, glassBin, getBackend())
 		expect(glassBin.props.lastDroppedItem.name).toEqual(bottleBox.props.name)
 
 		// glass won't drop into the food box...
-		simulateDragDropSequence(bottleBox, foodBin, getBackend())
+		simulateDragDrop(bottleBox, foodBin, getBackend())
 		expect(foodBin.props.lastDroppedItem).toBeNull()
 
 		// but some food will work
-		simulateDragDropSequence(bananaBox, foodBin, getBackend())
+		simulateDragDrop(bananaBox, foodBin, getBackend())
 		expect(foodBin.props.lastDroppedItem.name).toEqual(bananaBox.props.name)
 	})
 })
