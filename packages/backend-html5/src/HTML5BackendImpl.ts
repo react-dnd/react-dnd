@@ -649,7 +649,7 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			e.preventDefault();
+			e.preventDefault()
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		}
 
@@ -672,7 +672,7 @@ export class HTML5BackendImpl implements Backend {
 		if (this.isDraggingNativeItem()) {
 			this.endDragNativeItem()
 		} else {
-			this.endDragIfSourceWasRemovedFromDOM()
+			this.actions.endDrag()
 		}
 	}
 

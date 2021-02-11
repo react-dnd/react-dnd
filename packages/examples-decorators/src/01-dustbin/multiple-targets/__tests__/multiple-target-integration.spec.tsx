@@ -1,55 +1,45 @@
 import Example from '..'
-import DndDustbin, { DustbinProps } from '../Dustbin'
-import DndBox, { BoxProps } from '../Box'
-import {
-	wrapInTestContext,
-	simulateDragDropSequence,
-} from 'react-dnd-test-utils'
-import { mount } from 'enzyme'
-import { DndComponent as DndC } from 'react-dnd'
+import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
+import { render } from '@testing-library/react'
 
 describe('Dustbin: Multiple Targets', () => {
-	it('behaves as expected', () => {
-		const [Wrapped, getBackend] = wrapInTestContext(Example)
-		const root = mount(<Wrapped />)
+	it('behaves as expected', async () => {
+		const TestExample = wrapWithBackend(Example)
+		const rendered = render(<TestExample />)
 
 		// Verify that all of the key components mounted
-		const dustbins = root.find(DndDustbin)
-		const boxes = root.find(DndBox)
+		const dustbins = await rendered.findAllByRole('Dustbin')
+		const boxes = await rendered.findAllByRole('Box')
 		expect(dustbins.length).toEqual(4)
 		expect(boxes.length).toEqual(3)
 
 		window.alert = jest.fn()
 
 		// Bin Types
-		const glassBin: DndC<DustbinProps> = dustbins.at(0).instance() as any
-		const foodBin: DndC<DustbinProps> = dustbins.at(1).instance() as any
-		// const paperGlassUrlBin: DndC<DustbinProps> = dustbins
-		// 	.at(2)
-		// 	.instance() as any
-		// const paperFileBin: DndC<DustbinProps> = dustbins.at(3).instance() as any
+		const glassBin = dustbins[0]
+		const foodBin = dustbins[1]
 
 		// Box Types
-		const bottleBox: DndC<BoxProps> = boxes.at(0).instance() as any
-		const bananaBox: DndC<BoxProps> = boxes.at(1).instance() as any
-		// const magazineBox: DndC<BoxProps> = boxes.at(2).instance() as any
+		const bottleBox = boxes[0] as HTMLDivElement
+		const bananaBox = boxes[1]
 
 		// interactions
 
 		// drop bottle into glass bin
-		simulateDragDropSequence(bottleBox, glassBin, getBackend())
-		expect(glassBin.props.lastDroppedItem.name).toEqual(bottleBox.props.name)
+		await fireDragDrop(bottleBox, glassBin)
+		expect(glassBin.textContent).toContain(JSON.stringify({ name: 'Bottle' }))
 
 		// food won't drop into the glass bin
-		simulateDragDropSequence(bananaBox, glassBin, getBackend())
-		expect(glassBin.props.lastDroppedItem.name).toEqual(bottleBox.props.name)
+		await fireDragDrop(bananaBox, glassBin)
+		expect(glassBin.textContent).toContain(JSON.stringify({ name: 'Bottle' }))
 
 		// glass won't drop into the food box...
-		simulateDragDropSequence(bottleBox, foodBin, getBackend())
-		expect(foodBin.props.lastDroppedItem).toBeNull()
+		await fireDragDrop(bottleBox, foodBin)
+		expect(foodBin.textContent).not.toContain('Last dropped')
 
 		// but some food will work
-		simulateDragDropSequence(bananaBox, foodBin, getBackend())
-		expect(foodBin.props.lastDroppedItem.name).toEqual(bananaBox.props.name)
+		await fireDragDrop(bananaBox, foodBin)
+		expect(foodBin.textContent).toContain('Last dropped')
+		expect(foodBin.textContent).toContain(JSON.stringify({ name: 'Banana' }))
 	})
 })

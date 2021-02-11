@@ -1,6 +1,6 @@
+import { render, fireEvent } from '@testing-library/react'
 import Box from '../Box'
-import { wrapInTestContext } from 'react-dnd-test-utils'
-import { mount } from 'enzyme'
+import { fireDrag, wrapWithBackend } from 'react-dnd-test-utils'
 
 describe('Box', () => {
 	it('can be tested independently', () => {
@@ -11,43 +11,44 @@ describe('Box', () => {
 		const identity = (x: any) => x
 
 		// Render with one set of props and test
-		let root = mount(
+		const rendered = render(
 			<OriginalBox
 				name="test"
 				connectDragSource={identity}
 				isDragging={false}
 			/>,
 		)
-		let div = root.getDOMNode() as HTMLDivElement
-		expect(div.style.opacity).toEqual('1')
+
+		let box = rendered.getByTestId('box-test')
+		expect(box).toHaveStyle({ opacity: '1' })
 
 		// Render with another set of props and test
-		root = mount(
+		rendered.rerender(
 			<OriginalBox
 				name="test"
 				connectDragSource={identity}
 				isDragging={true}
 			/>,
 		)
-		div = root.getDOMNode() as HTMLDivElement
-		expect(div.style.opacity).toEqual('0.4')
+		box = rendered.getByTestId('box-test')
+		expect(box).toHaveStyle({ opacity: '0.4' })
 	})
 
-	it('can be tested with the testing backend', () => {
-		// Render with the testing backend
-		const [BoxContext, getBackend] = wrapInTestContext(Box)
-		const root = mount(<BoxContext name="test" />)
+	it('can be tested with a backend', async () => {
+		const BoxTest = wrapWithBackend(Box)
+		const rendered = render(<BoxTest name="test" />)
 
 		// Check that the opacity is 1
-		const div = (root.getDOMNode() as any) as HTMLDivElement
-		expect(div).toBeDefined()
-		expect(div.style.opacity).toEqual('1')
+		const box = rendered.getByTestId('box-test')
+		expect(box).toBeDefined()
+		expect(box).toHaveStyle({ opacity: '1' })
 
-		// Find the drag source ID and use it to simulate the dragging state
-		const box: any = root.find(Box).instance()
-		getBackend().simulateBeginDrag([box.getHandlerId()])
+		// Opacity drops on Drag
+		await fireDrag(box)
+		expect(rendered.getByTestId('box-test')).toHaveStyle({ opacity: '0.4' })
 
-		// Verify that the div changed its opacity
-		expect(div.style.opacity).toEqual('0.4')
+		// Opacity returns on dragend
+		fireEvent.dragEnd(box)
+		expect(rendered.getByTestId('box-test')).toHaveStyle({ opacity: '1' })
 	})
 })
