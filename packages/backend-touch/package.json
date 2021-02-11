@@ -18,7 +18,8 @@
   "scripts": {
     "clean": "gulp clean",
     "build": "gulp build",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "bundle": "gulp bundle"
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
@@ -30,5 +31,23 @@
   },
   "peerDependencies": {
     "react-refresh": "*"
+  },
+  "umd": {
+    "name": "ReactDnDTouchBackend",
+    "input": "./dist/esm/index.js",
+    "external": [
+      "react",
+      "react-dom",
+      "react-dnd"
+    ],
+    "globals": {
+      "react": "React",
+      "react-dom": "ReactDOM",
+      "react-dnd": "ReactDnD"
+    },
+    "alias": {
+      "dnd-core": "dnd-core/dist/esm/index",
+      "react-dnd": "react-dnd/dist/esm/index"
+    }
   }
 }

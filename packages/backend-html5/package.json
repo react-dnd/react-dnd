@@ -17,7 +17,8 @@
   "scripts": {
     "clean": "gulp clean",
     "build": "gulp build",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "bundle": "gulp bundle"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core"
@@ -28,5 +29,23 @@
   },
   "peerDependencies": {
     "react-refresh": "*"
+  },
+  "umd": {
+    "name": "ReactDnDHTML5Backend",
+    "input": "./dist/esm/index.js",
+    "external": [
+      "react",
+      "react-dom",
+      "react-dnd"
+    ],
+    "globals": {
+      "react": "React",
+      "react-dom": "ReactDOM",
+      "react-dnd": "ReactDnD"
+    },
+    "alias": {
+      "dnd-core": "dnd-core/dist/esm/index",
+      "react-dnd": "react-dnd/dist/esm/index"
+    }
   }
 }

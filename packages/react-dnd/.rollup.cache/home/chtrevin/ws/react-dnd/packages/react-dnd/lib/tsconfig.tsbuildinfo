@@ -1,0 +1,2082 @@
+{
+  "program": {
+    "fileInfos": {
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es5.d.ts": {
+        "version": "9622e8bd7cc72a7dab819a8011ecbf81d443638082e5cb99ecf2e75ff56ffc9d",
+        "signature": "9622e8bd7cc72a7dab819a8011ecbf81d443638082e5cb99ecf2e75ff56ffc9d",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.d.ts": {
+        "version": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
+        "signature": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2016.d.ts": {
+        "version": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
+        "signature": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.d.ts": {
+        "version": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
+        "signature": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.d.ts": {
+        "version": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
+        "signature": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.d.ts": {
+        "version": "e6b724280c694a9f588847f754198fb96c43d805f065c3a5b28bbc9594541c84",
+        "signature": "e6b724280c694a9f588847f754198fb96c43d805f065c3a5b28bbc9594541c84",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.d.ts": {
+        "version": "e21c071ca3e1b4a815d5f04a7475adcaeea5d64367e840dd0154096d705c3940",
+        "signature": "e21c071ca3e1b4a815d5f04a7475adcaeea5d64367e840dd0154096d705c3940",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.d.ts": {
+        "version": "fc7a21dd3ee27fd0a9ff1c46534efcd9c3cec51a445b479bb326d871c0aa8302",
+        "signature": "fc7a21dd3ee27fd0a9ff1c46534efcd9c3cec51a445b479bb326d871c0aa8302",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.dom.d.ts": {
+        "version": "abadddbf660adeec27e9a56584907d52fa1d6e1e1dc49f639a921baa951b7a84",
+        "signature": "abadddbf660adeec27e9a56584907d52fa1d6e1e1dc49f639a921baa951b7a84",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.core.d.ts": {
+        "version": "46ee15e9fefa913333b61eaf6b18885900b139867d89832a515059b62cf16a17",
+        "signature": "46ee15e9fefa913333b61eaf6b18885900b139867d89832a515059b62cf16a17",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.collection.d.ts": {
+        "version": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
+        "signature": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.generator.d.ts": {
+        "version": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
+        "signature": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
+        "version": "8b2a5df1ce95f78f6b74f1a555ccdb6baab0486b42d8345e0871dd82811f9b9a",
+        "signature": "8b2a5df1ce95f78f6b74f1a555ccdb6baab0486b42d8345e0871dd82811f9b9a",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.promise.d.ts": {
+        "version": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c",
+        "signature": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
+        "version": "7207e317a2cb07a177e7d963ab7b8c0e85dde7f9ddb50351f830239bf597569e",
+        "signature": "7207e317a2cb07a177e7d963ab7b8c0e85dde7f9ddb50351f830239bf597569e",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
+        "version": "cb609802a8698aa28b9c56331d4b53f590ca3c1c3a255350304ae3d06017779d",
+        "signature": "cb609802a8698aa28b9c56331d4b53f590ca3c1c3a255350304ae3d06017779d",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
+        "version": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
+        "signature": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
+        "version": "9d122b7e8c1a5c72506eea50c0973cba55b92b5532d5cafa8a6ce2c547d57551",
+        "signature": "9d122b7e8c1a5c72506eea50c0973cba55b92b5532d5cafa8a6ce2c547d57551",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2016.array.include.d.ts": {
+        "version": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
+        "signature": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.object.d.ts": {
+        "version": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
+        "signature": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts": {
+        "version": "7ce9f0bde3307ca1f944119f6365f2d776d281a393b576a18a2f2893a2d75c98",
+        "signature": "7ce9f0bde3307ca1f944119f6365f2d776d281a393b576a18a2f2893a2d75c98",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.string.d.ts": {
+        "version": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
+        "signature": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.intl.d.ts": {
+        "version": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
+        "signature": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts": {
+        "version": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
+        "signature": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts": {
+        "version": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
+        "signature": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts": {
+        "version": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
+        "signature": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.intl.d.ts": {
+        "version": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
+        "signature": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.promise.d.ts": {
+        "version": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
+        "signature": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.regexp.d.ts": {
+        "version": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
+        "signature": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.array.d.ts": {
+        "version": "9d57b2b5d15838ed094aa9ff1299eecef40b190722eb619bac4616657a05f951",
+        "signature": "9d57b2b5d15838ed094aa9ff1299eecef40b190722eb619bac4616657a05f951",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.object.d.ts": {
+        "version": "6c51b5dd26a2c31dbf37f00cfc32b2aa6a92e19c995aefb5b97a3a64f1ac99de",
+        "signature": "6c51b5dd26a2c31dbf37f00cfc32b2aa6a92e19c995aefb5b97a3a64f1ac99de",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.string.d.ts": {
+        "version": "93544ca2f26a48716c1b6c5091842cad63129daac422dfa4bc52460465f22bb1",
+        "signature": "93544ca2f26a48716c1b6c5091842cad63129daac422dfa4bc52460465f22bb1",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.symbol.d.ts": {
+        "version": "2ad234885a4240522efccd77de6c7d99eecf9b4de0914adb9a35c0c22433f993",
+        "signature": "2ad234885a4240522efccd77de6c7d99eecf9b4de0914adb9a35c0c22433f993",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.bigint.d.ts": {
+        "version": "7b5a10e3c897fabece5a51aa85b4111727d7adb53c2734b5d37230ff96802a09",
+        "signature": "7b5a10e3c897fabece5a51aa85b4111727d7adb53c2734b5d37230ff96802a09",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.promise.d.ts": {
+        "version": "7435b75fdf3509622e79622dbe5091cf4b09688410ee2034e4fc17d0c99d0862",
+        "signature": "7435b75fdf3509622e79622dbe5091cf4b09688410ee2034e4fc17d0c99d0862",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.sharedmemory.d.ts": {
+        "version": "e7e8e1d368290e9295ef18ca23f405cf40d5456fa9f20db6373a61ca45f75f40",
+        "signature": "e7e8e1d368290e9295ef18ca23f405cf40d5456fa9f20db6373a61ca45f75f40",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.string.d.ts": {
+        "version": "faf0221ae0465363c842ce6aa8a0cbda5d9296940a8e26c86e04cc4081eea21e",
+        "signature": "faf0221ae0465363c842ce6aa8a0cbda5d9296940a8e26c86e04cc4081eea21e",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts": {
+        "version": "936d7d2e8851af9ccfa5333b15e877a824417d352b1d7fd06388639dc69ef80a",
+        "signature": "936d7d2e8851af9ccfa5333b15e877a824417d352b1d7fd06388639dc69ef80a",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.intl.d.ts": {
+        "version": "31e8df2398e328077079c17ea4f1664bad0a34adf8b0608837e504e310e329a1",
+        "signature": "31e8df2398e328077079c17ea4f1664bad0a34adf8b0608837e504e310e329a1",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.intl.d.ts": {
+        "version": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
+        "signature": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.string.d.ts": {
+        "version": "fb4416144c1bf0323ccbc9afb0ab289c07312214e8820ad17d709498c865a3fe",
+        "signature": "fb4416144c1bf0323ccbc9afb0ab289c07312214e8820ad17d709498c865a3fe",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.promise.d.ts": {
+        "version": "cd6efb9467a8b6338ece2e2855e37765700f2cd061ca54b01b33878cf5c7677e",
+        "signature": "cd6efb9467a8b6338ece2e2855e37765700f2cd061ca54b01b33878cf5c7677e",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.weakref.d.ts": {
+        "version": "1e61418f41d404e744b6536af9f8c6f6674dd4d54c12335cd0c4f7eded69cf3f",
+        "signature": "1e61418f41d404e744b6536af9f8c6f6674dd4d54c12335cd0c4f7eded69cf3f",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/global.d.ts": {
+        "version": "ecf78e637f710f340ec08d5d92b3f31b134a46a4fcf2e758690d8c46ce62cba6",
+        "signature": "ecf78e637f710f340ec08d5d92b3f31b134a46a4fcf2e758690d8c46ce62cba6",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/csstype-npm-3.0.6-57c059c166-ebdca96d26.zip/node_modules/csstype/index.d.ts": {
+        "version": "2421504d4ad8486abdb522b7bcdd4caafbcf4a320cdf7b19e780df258c639d7f",
+        "signature": "2421504d4ad8486abdb522b7bcdd4caafbcf4a320cdf7b19e780df258c639d7f",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-prop-types-npm-15.7.3-084e0015c6-bd0eab69d5.zip/node_modules/@types/prop-types/index.d.ts": {
+        "version": "a7e32dcb90bf0c1b7a1e4ac89b0f7747cbcba25e7beddc1ebf17be1e161842ad",
+        "signature": "a7e32dcb90bf0c1b7a1e4ac89b0f7747cbcba25e7beddc1ebf17be1e161842ad",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts": {
+        "version": "666fe380406dec2e0d3f05a0089b6a9f5a363dfd8e902a09552e2d27a50a8ea4",
+        "signature": "666fe380406dec2e0d3f05a0089b6a9f5a363dfd8e902a09552e2d27a50a8ea4",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts": {
+        "version": "af7fd2870746deed40e130fc0a3966de74e8f52a97ec114d0fbb35876ab05ca9",
+        "signature": "af7fd2870746deed40e130fc0a3966de74e8f52a97ec114d0fbb35876ab05ca9",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts": {
+        "version": "f91bd8b29409f411a80a1bab0989c4beeda61aebf3020d32f75dbd5580c621bd",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/symbol-observable-npm-1.2.0-9e812a0a39-268834a1d4.zip/node_modules/symbol-observable/index.d.ts": {
+        "version": "7ccece60f62968f5765383f1f5322ace6937e42c3a2068834ac214fe24f9b7bc",
+        "signature": "7ccece60f62968f5765383f1f5322ace6937e42c3a2068834ac214fe24f9b7bc",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/index.d.ts": {
+        "version": "dc7b63bcdfaf08b68a9fabeab720173481db52014bbb40314f5a6757387b6516",
+        "signature": "dc7b63bcdfaf08b68a9fabeab720173481db52014bbb40314f5a6757387b6516",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts": {
+        "version": "75ac6900460d909ed06f4d90b2cee9afb3426b5e4c71ab8e712c39f23c665e45",
+        "signature": "75ac6900460d909ed06f4d90b2cee9afb3426b5e4c71ab8e712c39f23c665e45",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts": {
+        "version": "b13b2f2eb182e23e5e93aae4c9be2077f88fd95e11e54709e0b04c6af87aadc7",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/local/setClientOffset.ts": {
+        "version": "c3fa1105d15a2446d2eb471bda7e0ce2e15b10a586018214aeaffd2650f59983",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/js_utils.ts": {
+        "version": "ea198dfa60d2fd15b07f500263022c95f3193085d5da6bcfc8c90434e49ef7a7",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/beginDrag.ts": {
+        "version": "6b935c2be92d8bbdd0b61a747e5b5aa5be45277d7de1cfdd84ed7e5fa31de72f",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/publishDragSource.ts": {
+        "version": "f26b2d5db10984935d5c75f55534b72681196725fa28ea3530df5ee9758421de",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/matchesType.ts": {
+        "version": "762f6fd28e18a14d08c0d72302dec072230835042df6278dca11e7a1f15015e3",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/hover.ts": {
+        "version": "f68ea009d5a968006ceb6b3efa652ba5d06d286ac381f0d34820e8af0011a3f5",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/drop.ts": {
+        "version": "cf1847c707395e24004d00de196fa55a5839a72d60d26342a971fef5327a64e2",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/endDrag.ts": {
+        "version": "739fe43f0ffed8eedfe1c2e2a58eea442c5bddcc6d476abc198de94a635a95d9",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/index.ts": {
+        "version": "a2c7722ab474bbf4c459e549d7d444f89c9082751be5ae05bcc3ab41bd794de5",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/equality.ts": {
+        "version": "515f4079b9e06c62e9a6e9723696fbac8a21f8fa8a4d860531129a6a58fb57df",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOffset.ts": {
+        "version": "229456d25c722b3830f8dfbdd95d40c304cab89ce7b43742cbd299d185f4253d",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/registry.ts": {
+        "version": "ca1c55d357592aa3627e4059252f6b2ad4b0912a79d27f2e20f00993b0c02a7a",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOperation.ts": {
+        "version": "8bf72ce3c1612ffcdc4f4565a44a54bb3922181addab1a976dceb7e553412d21",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/refCount.ts": {
+        "version": "2408d18cfc4c6a103f8143973a06bd262b70ceb5cabe2d971a2d31f432c1e1ef",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/dirtiness.ts": {
+        "version": "0f01d97187504cdf43c350308529ac161a52e08598b507bbdca0b456ece1b2be",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dirtyHandlerIds.ts": {
+        "version": "5a140f904763cd6ce07c9e5bc678ab2ef8acd109523375c8530e680c9492875e",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/stateId.ts": {
+        "version": "8682d128f16aff1055fc7d9f2d98ff595e63397abddcc94248ea6a0bbec8c056",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/index.ts": {
+        "version": "07aedb998a162ce9adb783ad3017749da70221bd44a29a30aa45385b4727a3fd",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/coords.ts": {
+        "version": "213731cbf87eda3967ae1d440c2407dc82b8d162fcf16267f17f409b27a6efaa",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/DragDropMonitorImpl.ts": {
+        "version": "d1f754cff2528cf6ff0f36430e14f6069e3a10910769ea15e1bbbed60e428bdf",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/getNextUniqueId.ts": {
+        "version": "331dbaf9742e759bc63bf67f22da7a954f7c8cdb140c460db113e78d32234940",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/contracts.ts": {
+        "version": "0ebf6c452be52656b356dfb9cc0cc67f1b8ac4db258b0d975659766ad1505ad7",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/types.d.ts": {
+        "version": "7060b457889b6478115fede12663d77255257f29f4cc46ea255177846754b155",
+        "signature": "7060b457889b6478115fede12663d77255257f29f4cc46ea255177846754b155",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/asap.d.ts": {
+        "version": "b0f09fbf11dc1b86cc447272ff7811b459fb718f3778d5b3e4c60067679a4d68",
+        "signature": "b0f09fbf11dc1b86cc447272ff7811b459fb718f3778d5b3e4c60067679a4d68",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/index.d.ts": {
+        "version": "9bc4d38ababdafa7d38b05d73828cffb6108d6d2991e9a2519b2d814b27dc068",
+        "signature": "9bc4d38ababdafa7d38b05d73828cffb6108d6d2991e9a2519b2d814b27dc068",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/HandlerRegistryImpl.ts": {
+        "version": "10f8b2eea4be17d56b56ef04d1d72535900026306fda7a7c4909a60c79b68de9",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/DragDropManagerImpl.ts": {
+        "version": "bcf444d1d4d92950404ebe368e59743e783f5e1624276717c881ac4ebaa2e2f7",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/factories.ts": {
+        "version": "93564d7027d4b6b391266783b188c5e7e60e2f9641eb0c40114d22a901828fef",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts": {
+        "version": "dc80117926d6438d829060b16c2f296499a02cfbdb2858da41744c39502cec7a",
+        "affectsGlobalScope": false
+      },
+      "../src/common/DndContext.ts": {
+        "version": "3e692ef83f52b5d1b6dbc7e689393bfd212de245c692ef7dbb9e37a6310aabbd",
+        "signature": "8dc913c06f041c8a6e6e9fdb5d3be9db2e13437c8095409717601e48ab101232",
+        "affectsGlobalScope": false
+      },
+      "../src/common/DndProvider.tsx": {
+        "version": "5b3ef40cd165c10d6276d116f42a824ae164081879ea7da18f6c00b6f5e0af5f",
+        "signature": "d8230551ed416cc44394f0b87e8c5c822212b9c565a6312261312c6add5a700e",
+        "affectsGlobalScope": false
+      },
+      "../src/interfaces/monitors.ts": {
+        "version": "cf6918aaaa948633838b53fddf3b5c47ec9786a395c0d4d5e28ac5cee51e5a0e",
+        "signature": "c8687fea36542ec8919ed30cb87d81d97f7d57142a2ee4930f5b1b0ef0a275e6",
+        "affectsGlobalScope": false
+      },
+      "../src/interfaces/options.ts": {
+        "version": "dcbcd45137cc54b53133d745f6ffc13574cea8fe9e0eca4188b9e71d4281a20b",
+        "signature": "ded501ad7b17828636c8683ee6e6928416061db0e1c81055fc09a0113b34918a",
+        "affectsGlobalScope": false
+      },
+      "../src/interfaces/hooksApi.ts": {
+        "version": "f5c11c720c3b1ba31ed759530967c290c6d285d0de132b5e189b1744a219b541",
+        "signature": "c4a44a44e49f7f9ad0a0b8192f823029c64c62516cc2e8ac480a443e51830eff",
+        "affectsGlobalScope": false
+      },
+      "../src/interfaces/connectors.ts": {
+        "version": "91f8157e054c2fd347fd030d72f462ed116d2a691693075120630bf5b2be6daa",
+        "signature": "447be980c722816d1b679711ef7b2a06b8471fd95cc13b0b2200512e8a5584cc",
+        "affectsGlobalScope": false
+      },
+      "../src/interfaces/index.ts": {
+        "version": "d89bfff696d7352a146ee53c5fee6954e1e417dab6b2e750e3c7e0f28911bb0d",
+        "signature": "d060604f272d7b7ecd57d909b478247f1feb478dd7bdf0c388f7803201ff6aeb",
+        "affectsGlobalScope": false
+      },
+      "../src/common/DragPreviewImage.tsx": {
+        "version": "ce18fd0473eee1fe6a598a4237da7b924624167419929139ab24924d7508f5fe",
+        "signature": "4cb308db111358e5246e5faa04835f232cb36586e355bf5c2fda7ed1437676cc",
+        "affectsGlobalScope": false
+      },
+      "../src/common/index.ts": {
+        "version": "9d91392c157a3fa0779671408eb2dc0ab8251144c3c45b1e18fa1a6d0a160b60",
+        "signature": "f0be0355a90b9f0f8e214242cf90144ba3ad666958e2020834da2ce7b9b988de",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/internal/useIsomorphicLayoutEffect.ts": {
+        "version": "720c4fe4534597f8cbe8cb4d39206107465d3f5e0fa7d3f3596ee86987457247",
+        "signature": "3a32ba0a30c13e6af55c86515b3dc44bd1576f61b8e4f7536c529dd2a3c8c3cc",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@react-dnd-shallowequal-npm-2.0.0-2a10dca275-cbac47721d.zip/node_modules/@react-dnd/shallowequal/dist/index.d.ts": {
+        "version": "18d7c145b70be2634385eef9364c52c76c70eae15261b6f88aee629e75ff5e96",
+        "signature": "18d7c145b70be2634385eef9364c52c76c70eae15261b6f88aee629e75ff5e96",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/internal/useCollector.ts": {
+        "version": "9daebcf4b3f6ba09da65d641ec2b5ecc8e141ccb98d0cbe389d2f7551adbd599",
+        "signature": "cc5cdd071f7c11043d3ce1d6f33e5ebd4fdfd78050b86ca56c84ae086728b67a",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/internal/useMonitorOutput.ts": {
+        "version": "f59669d341ba8acde3646b7c084374b09f421614f95b71b294d091a4d38df7d7",
+        "signature": "4464f80da5e1df779f0c93e72d430181bff6a9857ca1431296f6778ab034fdfd",
+        "affectsGlobalScope": false
+      },
+      "../src/common/registration.ts": {
+        "version": "9be5f2a545ba959f35659b83418cd436bc9605f67e210a0d557b2477b623a2e9",
+        "signature": "537062620f96e8bbf0b7a9d53a593d3847d03d796123e5d82e6a8cf83cff50b4",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/useDragDropManager.ts": {
+        "version": "ae47592beeb343911c6e33575b0f183d002f975f0f9c8d3f59cc6b649e8dd77e",
+        "signature": "8f1931fb0e5be592fabdd8be525c7a7b3b1bc4a8ef43da7f0d59def18a20f29d",
+        "affectsGlobalScope": false
+      },
+      "../src/common/DragSourceMonitorImpl.ts": {
+        "version": "5387754e6e360ae2ed670af5f245a0d15f05f17607859a68b2a3028daa4b7445",
+        "signature": "24a4791b54384b70f576efe33237906a11494edfa461c699961aeaea0636d579",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/cloneWithRef.ts": {
+        "version": "10a3337f5d4f8e657dbb9485418dc7e3e91bb7c46689e85108ecc912b7b2d804",
+        "signature": "b081ef66cf6e5b1696ea98dabf272ef3be458276b6c9492fd7e5f5537787b051",
+        "affectsGlobalScope": false
+      },
+      "../src/common/wrapConnectorHooks.ts": {
+        "version": "cbe5123fad8cff111c6f62c097e5c257f22c43c5184fd759c36e50e6e87d4c18",
+        "signature": "8b97a9a11a8a5773b9624c88d8ee590e0acd0d7c278d2f6b162b8aa7030f10d0",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/isRef.ts": {
+        "version": "0419d94a966f8ff0468ada10b712c2467e2a7a90e1b3bd0f934524e072a3472b",
+        "signature": "24f41b41c5afa8043caa092c2fde9055d8ae870fb5b681b581af7deedafb66a6",
+        "affectsGlobalScope": false
+      },
+      "../src/common/SourceConnector.ts": {
+        "version": "10223219e59a2fe6742eb858d40857502c0a951263611ec9849e6071a464373b",
+        "signature": "0a9c9cf8649ddc6dca8f6151999b265f35400eb29442d9d0a98b23232922f647",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/internal/drag.ts": {
+        "version": "c029a8b20c7e67aa9885f4e8823657bd7069e9cad9a494253f73a816fdb2f14c",
+        "signature": "95993a13cdeb2f1a4ac20d77b541f7c73a1495e4a8c1782c6a6de6054d92dace",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/useDrag.ts": {
+        "version": "3398fc06dfbbe9956b7f05388d3dfdaeb00909884bbcabe073040d9fbfbcf435",
+        "signature": "22c358c1a187cb57eb624343e2161ac1318e5a3eeaf7a971a21c1bc6052001af",
+        "affectsGlobalScope": false
+      },
+      "../src/common/TargetConnector.ts": {
+        "version": "d8d61fd1af9802754da076cebbe370a3581cb83824790136941a2c70a3506a2d",
+        "signature": "aca42dc833cd499290c36250b023d7cb202a91b0592240bfde6445dd0dfab519",
+        "affectsGlobalScope": false
+      },
+      "../src/common/DropTargetMonitorImpl.ts": {
+        "version": "0858761132cc688fb48e9591be9182b50e08145c2dc791325821b5055d2a332a",
+        "signature": "45e19a06dc0c19c82c7303b2e97cfd78258a912871e00c2678c6c46ae893e2bd",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/internal/drop.ts": {
+        "version": "b5fb430eadde4c24762f35f9543df90a89e131e2bf2a694b6c384a24efb0b04c",
+        "signature": "e696b721a44ed78d96f9ee699fea3342e771b3be74c358021b91ad0d0abc47a9",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/useDrop.ts": {
+        "version": "c4a2e4b53ff8520e25e9c7408210f06b5f9b412f7816c64aaec013392e865c7b",
+        "signature": "dd75e98f9d3669e82812ba633e59e9a727dcd657417dd5e5dbb1f77520eb27a1",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/useDragLayer.ts": {
+        "version": "b58c3988e495f52b0c002cc35a51f4efb6a7c857f36e58d73d4488c93bc156ff",
+        "signature": "4b319db89ccdb7f272e84373e3aeb8f7def0f24fa258b82cbe4e239f2aa43715",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/index.ts": {
+        "version": "1093ad4be5459af2263a0bf6ac44948412f71de093dd4f88a4a465c656fc9e24",
+        "signature": "0ecfec44f841ce00925de90f32e4d3aac6da616403df3cb6e90645d22476d4bd",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/js_utils.ts": {
+        "version": "e1293947af95ba8dd7a12330a7eafcf3a5c61b4cdb74057cb48e50d3670b5941",
+        "signature": "62300c47c6e3628cbc32140450ecfe39beed70751e959d9c6df04c259d979674",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-16ab4c45d4.zip/node_modules/@types/hoist-non-react-statics/index.d.ts": {
+        "version": "bfe1b52cf71aea9bf8815810cc5d9490fa9617313e3d3c2ee3809a28b80d0bb4",
+        "signature": "bfe1b52cf71aea9bf8815810cc5d9490fa9617313e3d3c2ee3809a28b80d0bb4",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/interfaces.ts": {
+        "version": "dc2b53b5617efc62c64fcbdef2e780c7814b3b30a46393244455a9ef3c18630b",
+        "signature": "6a9f6388685e6d6d4d4039c282468a3d0121a196d2b8a84984c658f35aab9cf8",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/utils.ts": {
+        "version": "d6ce2c416dacc93242a7d1985ab05488d3d88d134baed52e54cb1ee9c879b555",
+        "signature": "5735ebf0ae66b2f723663df11239c9239f2141e1ea8ad3ef70bbb7e5d73fe36a",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/disposables.ts": {
+        "version": "c0dbeafa1f017c92bc57bf2badcffb068fb1c89cdf597535f04e5e0546165280",
+        "signature": "de5734b182ed8377431961037ce27194d8e6b5cead1b6fc74c4b60acbbb4dc1b",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/decorateHandler.tsx": {
+        "version": "471b1a66decd8428120c4a6fb694a4bdccdf8bdb191c778310aefc48eaeae48b",
+        "signature": "83b42aa64440877e6b70691e0ad4f4eea04b17a91892dd296bb1c5b157b815e4",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/isValidType.ts": {
+        "version": "05b0c15b7728518e17e1a1a0304cd137c8293f90ab335e22cdbd155b5f3f4dc8",
+        "signature": "a0dc5773ccfb7178e56c675cb79ad33e96b670b25c5f5258f79e204def680de6",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/createSourceFactory.ts": {
+        "version": "c43447f7424bccee33dbd9993585cd4d1f91c2ab44c8c66a6eb61576a083d1ba",
+        "signature": "4488995497d37f126d7ecbe02cc257b33fe669c8a7ba011ca9ccf5b1d9b3927f",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/DragSource.ts": {
+        "version": "85166b407e4af4045c658c6b5a06cb501bdf55f933d360124806e15461e84e79",
+        "signature": "ba7daebdfe524c71fcaa2b5fb2503764e8fad0d2b477c96ad52a9078668bae48",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/createTargetFactory.ts": {
+        "version": "14b5f9982b81682acf548e5a92fd948047c9a8a67534ceb84b2df62c3d02365f",
+        "signature": "e8b22ed97b9d418a930b1a2e440b0282a8580b70b02ae111d6c75b2f7b6bdb89",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/DropTarget.ts": {
+        "version": "29fd126460c6ae726790e4e175deebbc24abf504e84474422c8190681e502e93",
+        "signature": "3c2d32a9d88ffc633e302cc5ca36dc08737c4d9c997b91f26bc2f7ce27529f03",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/DragLayer.tsx": {
+        "version": "c660781dfdee5803ff194330bf9300bb6768d7a98ac6b6a66f10e0eaeb960598",
+        "signature": "50ffa5a78cea708d0b0236b867dec0a02a32eef65b753006d0d879d5ec589fd3",
+        "affectsGlobalScope": false
+      },
+      "../src/decorators/index.ts": {
+        "version": "9f9b38e61fd86b733e48d1f0da152762ae4fe0ae80a1226f50f0a27402eac515",
+        "signature": "16b3dbc9f7330635a52f11803b663b8f46bc29739768cb16d8e575ff58809e82",
+        "affectsGlobalScope": false
+      },
+      "../src/index.ts": {
+        "version": "a41ee9492217d1e8bf496775827dd1e3dba42995ef6ddbfe6419721fb79141dc",
+        "signature": "376f8d831ec78d43506cdf97df72ed1351a3f9c26795b3c9fcfdb775a13d9940",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/cleanupSemantic.d.ts": {
+        "version": "d8aab31ba8e618cc3eea10b0945de81cb93b7e8150a013a482332263b9305322",
+        "signature": "d8aab31ba8e618cc3eea10b0945de81cb93b7e8150a013a482332263b9305322",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/types.d.ts": {
+        "version": "69da61a7b5093dac77fa3bec8be95dcf9a74c95a0e9161edb98bb24e30e439d2",
+        "signature": "69da61a7b5093dac77fa3bec8be95dcf9a74c95a0e9161edb98bb24e30e439d2",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/diffLines.d.ts": {
+        "version": "561eca7a381b96d6ccac6e4061e6d2ae53f5bc44203f3fd9f5b26864c32ae6e9",
+        "signature": "561eca7a381b96d6ccac6e4061e6d2ae53f5bc44203f3fd9f5b26864c32ae6e9",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/printDiffs.d.ts": {
+        "version": "62ea38627e3ebab429f7616812a9394d327c2bc271003dfba985de9b4137369f",
+        "signature": "62ea38627e3ebab429f7616812a9394d327c2bc271003dfba985de9b4137369f",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/index.d.ts": {
+        "version": "b4439890c168d646357928431100daac5cbdee1d345a34e6bf6eca9f3abe22bc",
+        "signature": "b4439890c168d646357928431100daac5cbdee1d345a34e6bf6eca9f3abe22bc",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/types.d.ts": {
+        "version": "5d72971a459517c44c1379dab9ed248e87a61ba0a1e0f25c9d67e1e640cd9a09",
+        "signature": "5d72971a459517c44c1379dab9ed248e87a61ba0a1e0f25c9d67e1e640cd9a09",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/index.d.ts": {
+        "version": "02d734976af36f4273d930bea88b3e62adf6b078cf120c1c63d49aa8d8427c5c",
+        "signature": "02d734976af36f4273d930bea88b3e62adf6b078cf120c1c63d49aa8d8427c5c",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-jest-npm-26.0.20-e4c9c054bf-221e39c7c9.zip/node_modules/@types/jest/index.d.ts": {
+        "version": "71f30fba971582dc744373cbc8b06c1eb64dc24a6ccbc9b457f94fb68c67cb4e",
+        "signature": "71f30fba971582dc744373cbc8b06c1eb64dc24a6ccbc9b457f94fb68c67cb4e",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/globals.d.ts": {
+        "version": "215d8d9a2c480fd460127edc048d68d9931d3b27f95132253a6e71975f060bb1",
+        "signature": "215d8d9a2c480fd460127edc048d68d9931d3b27f95132253a6e71975f060bb1",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/async_hooks.d.ts": {
+        "version": "c438b413e94ff76dfa20ae005f33a1c84f2480d1d66e0fd687501020d0de9b50",
+        "signature": "c438b413e94ff76dfa20ae005f33a1c84f2480d1d66e0fd687501020d0de9b50",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/buffer.d.ts": {
+        "version": "bc6a78961535181265845bf9b9e8a147ffd0ca275097ceb670a9b92afa825152",
+        "signature": "bc6a78961535181265845bf9b9e8a147ffd0ca275097ceb670a9b92afa825152",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/child_process.d.ts": {
+        "version": "a4b5411d87995b9fb847f491f4388b38f829d8ab39be3e2fd65a3e40709f29a8",
+        "signature": "a4b5411d87995b9fb847f491f4388b38f829d8ab39be3e2fd65a3e40709f29a8",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/cluster.d.ts": {
+        "version": "123ec69e4b3a686eb49afd94ebe3292a5c84a867ecbcb6bb84bdd720a12af803",
+        "signature": "123ec69e4b3a686eb49afd94ebe3292a5c84a867ecbcb6bb84bdd720a12af803",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/console.d.ts": {
+        "version": "eb5197aade83cb0e360ac407289c53a8009e8fdae7939892a0240d30444496b6",
+        "signature": "eb5197aade83cb0e360ac407289c53a8009e8fdae7939892a0240d30444496b6",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/constants.d.ts": {
+        "version": "90c85ddbb8de82cd19198bda062065fc51b7407c0f206f2e399e65a52e979720",
+        "signature": "90c85ddbb8de82cd19198bda062065fc51b7407c0f206f2e399e65a52e979720",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts": {
+        "version": "3d9c3ccc05ebc6e288bef007bcc47a2fc0dce748ea634093ef0732b9be743805",
+        "signature": "3d9c3ccc05ebc6e288bef007bcc47a2fc0dce748ea634093ef0732b9be743805",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dgram.d.ts": {
+        "version": "7e050b767ed10c7ffbc01f314defbf420bf0b5d54ce666e1c87507c035dfc191",
+        "signature": "7e050b767ed10c7ffbc01f314defbf420bf0b5d54ce666e1c87507c035dfc191",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts": {
+        "version": "51f82a7e0819a91c170eb1ad39ad1917a0cbb8f9354fdaed66a5189745f63f71",
+        "signature": "51f82a7e0819a91c170eb1ad39ad1917a0cbb8f9354fdaed66a5189745f63f71",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/domain.d.ts": {
+        "version": "2866a528b2708aa272ec3eaafd3c980abb23aec1ef831cfc5eb2186b98c37ce5",
+        "signature": "2866a528b2708aa272ec3eaafd3c980abb23aec1ef831cfc5eb2186b98c37ce5",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts": {
+        "version": "153d835dc32985120790e10102834b0a5bd979bb5e42bfbb33c0ff6260cf03ce",
+        "signature": "153d835dc32985120790e10102834b0a5bd979bb5e42bfbb33c0ff6260cf03ce",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts": {
+        "version": "2e204fb437b8e98937c933cb7e739b24b871872161997d7dfe98841b861a14f0",
+        "signature": "2e204fb437b8e98937c933cb7e739b24b871872161997d7dfe98841b861a14f0",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts": {
+        "version": "1c0692002778565d9b3ee0edea6ca133caadd714597228525fec8e2fd9846755",
+        "signature": "1c0692002778565d9b3ee0edea6ca133caadd714597228525fec8e2fd9846755",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts": {
+        "version": "f2f8a385694fd71a421616cbaca477a539f30f4098f11261b1d188d72dc3478a",
+        "signature": "f2f8a385694fd71a421616cbaca477a539f30f4098f11261b1d188d72dc3478a",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http2.d.ts": {
+        "version": "f15f1f1104aaf47d25124de81949375416e3f8ee704e3d221bea339e35421edb",
+        "signature": "f15f1f1104aaf47d25124de81949375416e3f8ee704e3d221bea339e35421edb",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/https.d.ts": {
+        "version": "c969bf4c7cdfe4d5dd28aa09432f99d09ad1d8d8b839959646579521d0467d1a",
+        "signature": "c969bf4c7cdfe4d5dd28aa09432f99d09ad1d8d8b839959646579521d0467d1a",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/inspector.d.ts": {
+        "version": "6c3857edaeeaaf43812f527830ebeece9266b6e8eb5271ab6d2f0008306c9947",
+        "signature": "6c3857edaeeaaf43812f527830ebeece9266b6e8eb5271ab6d2f0008306c9947",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/module.d.ts": {
+        "version": "bc6a77e750f4d34584e46b1405b771fb69a224197dd6bafe5b0392a29a70b665",
+        "signature": "bc6a77e750f4d34584e46b1405b771fb69a224197dd6bafe5b0392a29a70b665",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts": {
+        "version": "3c5edfced8c5cd35e3680789deabbe4f478b67a42b26d82d91eea9d3f07f4771",
+        "signature": "3c5edfced8c5cd35e3680789deabbe4f478b67a42b26d82d91eea9d3f07f4771",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/os.d.ts": {
+        "version": "ed4ae81196cccc10f297d228bca8d02e31058e6d723a3c5bc4be5fb3c61c6a34",
+        "signature": "ed4ae81196cccc10f297d228bca8d02e31058e6d723a3c5bc4be5fb3c61c6a34",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/path.d.ts": {
+        "version": "84044697c8b3e08ef24e4b32cfe6440143d07e469a5e34bda0635276d32d9f35",
+        "signature": "84044697c8b3e08ef24e4b32cfe6440143d07e469a5e34bda0635276d32d9f35",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/perf_hooks.d.ts": {
+        "version": "4982d94cb6427263c8839d8d6324a8bbe129e931deb61a7380f8fad17ba2cfc0",
+        "signature": "4982d94cb6427263c8839d8d6324a8bbe129e931deb61a7380f8fad17ba2cfc0",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/process.d.ts": {
+        "version": "ae4bc1dd4d9de7bbea6ce419db45af82a81358e6014c9e1235b5d252e06f8ab8",
+        "signature": "ae4bc1dd4d9de7bbea6ce419db45af82a81358e6014c9e1235b5d252e06f8ab8",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/punycode.d.ts": {
+        "version": "3f6a1fd73c9dc3bd7f4b79bc075297ca6527904df69b0f2c2c94e4c4c7d9a32c",
+        "signature": "3f6a1fd73c9dc3bd7f4b79bc075297ca6527904df69b0f2c2c94e4c4c7d9a32c",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/querystring.d.ts": {
+        "version": "884560fda6c3868f925f022adc3a1289fe6507bbb45adb10fa1bbcc73a941bb0",
+        "signature": "884560fda6c3868f925f022adc3a1289fe6507bbb45adb10fa1bbcc73a941bb0",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/readline.d.ts": {
+        "version": "6b2bb67b0942bcfce93e1d6fad5f70afd54940a2b13df7f311201fba54b2cbe9",
+        "signature": "6b2bb67b0942bcfce93e1d6fad5f70afd54940a2b13df7f311201fba54b2cbe9",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/repl.d.ts": {
+        "version": "acbed967a379b3e9f73237ba9473f8b337eeea14b7dc64d445430b5d695751da",
+        "signature": "acbed967a379b3e9f73237ba9473f8b337eeea14b7dc64d445430b5d695751da",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts": {
+        "version": "e7b5a3f40f19d9eea71890c70dfb37ac5dd82cbffe5f95bc8f23c536455732d0",
+        "signature": "e7b5a3f40f19d9eea71890c70dfb37ac5dd82cbffe5f95bc8f23c536455732d0",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/string_decoder.d.ts": {
+        "version": "d67e08745494b000da9410c1ae2fdc9965fc6d593fe0f381a47491f75417d457",
+        "signature": "d67e08745494b000da9410c1ae2fdc9965fc6d593fe0f381a47491f75417d457",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/timers.d.ts": {
+        "version": "b40652bf8ce4a18133b31349086523b219724dca8df3448c1a0742528e7ad5b9",
+        "signature": "b40652bf8ce4a18133b31349086523b219724dca8df3448c1a0742528e7ad5b9",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts": {
+        "version": "01c351e71743ff26450789ec4ca6a1421c647c9c459aa8007e9e1914073b5db2",
+        "signature": "01c351e71743ff26450789ec4ca6a1421c647c9c459aa8007e9e1914073b5db2",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/trace_events.d.ts": {
+        "version": "a77fdb357c78b70142b2fdbbfb72958d69e8f765fd2a3c69946c1018e89d4638",
+        "signature": "a77fdb357c78b70142b2fdbbfb72958d69e8f765fd2a3c69946c1018e89d4638",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tty.d.ts": {
+        "version": "3c2ac350c3baa61fd2b1925844109e098f4376d0768a4643abc82754fd752748",
+        "signature": "3c2ac350c3baa61fd2b1925844109e098f4376d0768a4643abc82754fd752748",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts": {
+        "version": "4001971b90f18161f7bd46d68150d32a5da47e3f177956a267a2b29a2771896a",
+        "signature": "4001971b90f18161f7bd46d68150d32a5da47e3f177956a267a2b29a2771896a",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/util.d.ts": {
+        "version": "f28704c27e1bd58068052f5407541a3306f0ffc77f068e2891f46527a4569e25",
+        "signature": "f28704c27e1bd58068052f5407541a3306f0ffc77f068e2891f46527a4569e25",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/v8.d.ts": {
+        "version": "289be113bad7ee27ee7fa5b1e373c964c9789a5e9ed7db5ddcb631371120b953",
+        "signature": "289be113bad7ee27ee7fa5b1e373c964c9789a5e9ed7db5ddcb631371120b953",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/vm.d.ts": {
+        "version": "baf0b82ffc5d2616f44a6fb1f81e8d798545bebf0c30f5d8b003a1dba1acfb3f",
+        "signature": "baf0b82ffc5d2616f44a6fb1f81e8d798545bebf0c30f5d8b003a1dba1acfb3f",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/worker_threads.d.ts": {
+        "version": "c6a5b34f1e725019445754f1e733585f113e0dced75f137bd3c4af5853d3f6ab",
+        "signature": "c6a5b34f1e725019445754f1e733585f113e0dced75f137bd3c4af5853d3f6ab",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/zlib.d.ts": {
+        "version": "15fbe50526244954eb2f933546bca6cdcf0db16c9428d099b3b386c1db5799ab",
+        "signature": "15fbe50526244954eb2f933546bca6cdcf0db16c9428d099b3b386c1db5799ab",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.4/base.d.ts": {
+        "version": "d44028ae0127eb3e9fcfa5f55a8b81d64775ce15aca1020fe25c511bbb055834",
+        "signature": "d44028ae0127eb3e9fcfa5f55a8b81d64775ce15aca1020fe25c511bbb055834",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/globals.global.d.ts": {
+        "version": "2708349d5a11a5c2e5f3a0765259ebe7ee00cdcc8161cb9990cb4910328442a1",
+        "signature": "2708349d5a11a5c2e5f3a0765259ebe7ee00cdcc8161cb9990cb4910328442a1",
+        "affectsGlobalScope": true
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/wasi.d.ts": {
+        "version": "4e0a4d84b15692ea8669fe4f3d05a4f204567906b1347da7a58b75f45bae48d3",
+        "signature": "4e0a4d84b15692ea8669fe4f3d05a4f204567906b1347da7a58b75f45bae48d3",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.6/base.d.ts": {
+        "version": "ad1ae5ae98eceb9af99061e83e867b9897d267aebc8f3b938c9424deabadf4bb",
+        "signature": "ad1ae5ae98eceb9af99061e83e867b9897d267aebc8f3b938c9424deabadf4bb",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/assert.d.ts": {
+        "version": "b3593bd345ebea5e4d0a894c03251a3774b34df3d6db57075c18e089a599ba76",
+        "signature": "b3593bd345ebea5e4d0a894c03251a3774b34df3d6db57075c18e089a599ba76",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/base.d.ts": {
+        "version": "e61a21e9418f279bc480394a94d1581b2dee73747adcbdef999b6737e34d721b",
+        "signature": "e61a21e9418f279bc480394a94d1581b2dee73747adcbdef999b6737e34d721b",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/index.d.ts": {
+        "version": "744e6430bafc6f39f66c4fc1e6a0d8c9551260ffd1782aa7e3f5166ac6aa1f86",
+        "signature": "744e6430bafc6f39f66c4fc1e6a0d8c9551260ffd1782aa7e3f5166ac6aa1f86",
+        "affectsGlobalScope": false
+      },
+      "../../../.yarn/cache/@types-react-dom-npm-17.0.0-c3b70f60e6-7ca9351b6c.zip/node_modules/@types/react-dom/index.d.ts": {
+        "version": "5e7837730e7ef63981cbd8d878388c4b37acc70dc3190881e230a23e3b4f9514",
+        "signature": "5e7837730e7ef63981cbd8d878388c4b37acc70dc3190881e230a23e3b4f9514",
+        "affectsGlobalScope": false
+      }
+    },
+    "options": {
+      "incremental": true,
+      "target": 99,
+      "module": 99,
+      "moduleResolution": 2,
+      "lib": [
+        "lib.esnext.d.ts",
+        "lib.dom.d.ts"
+      ],
+      "strict": true,
+      "experimentalDecorators": true,
+      "noUnusedLocals": true,
+      "jsx": 4,
+      "forceConsistentCasingInFileNames": true,
+      "declaration": true,
+      "allowSyntheticDefaultImports": true,
+      "skipLibCheck": true,
+      "outDir": "./",
+      "baseUrl": "..",
+      "configFilePath": "../tsconfig.json",
+      "noEmitHelpers": true,
+      "importHelpers": true,
+      "noEmit": false,
+      "emitDeclarationOnly": false,
+      "noResolve": false,
+      "sourceMap": true,
+      "inlineSources": true
+    },
+    "referencedMap": {
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/DragDropManagerImpl.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/DragDropMonitorImpl.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/HandlerRegistryImpl.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/index.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/index.ts",
+        "../../../.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/DragDropMonitorImpl.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/index.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/coords.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/dirtiness.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/matchesType.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/HandlerRegistryImpl.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/registry.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/contracts.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/index.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/getNextUniqueId.ts",
+        "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/index.d.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/beginDrag.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/local/setClientOffset.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/js_utils.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/drop.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/js_utils.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/endDrag.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/hover.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/matchesType.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/index.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/beginDrag.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/drop.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/endDrag.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/hover.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/publishDragSource.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/local/setClientOffset.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/publishDragSource.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/registry.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/contracts.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/factories.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/DragDropManagerImpl.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/factories.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dirtyHandlerIds.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/index.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/registry.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/dirtiness.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/equality.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/js_utils.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOffset.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/index.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/equality.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOperation.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/index.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/registry.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/js_utils.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/index.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dirtyHandlerIds.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOffset.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOperation.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/refCount.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/stateId.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/js_utils.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/refCount.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/registry.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/coords.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOffset.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/dirtiness.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/js_utils.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/equality.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts"
+      ],
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/matchesType.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts"
+      ],
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/asap.d.ts": [
+        "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/types.d.ts"
+      ],
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/index.d.ts": [
+        "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/asap.d.ts"
+      ],
+      "../../../.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-16ab4c45d4.zip/node_modules/@types/hoist-non-react-statics/index.d.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../../../.yarn/cache/@types-jest-npm-26.0.20-e4c9c054bf-221e39c7c9.zip/node_modules/@types/jest/index.d.ts": [
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/index.d.ts",
+        "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/index.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/base.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/assert.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.6/base.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/child_process.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/cluster.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/child_process.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/console.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/util.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/constants.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/os.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dgram.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/domain.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http2.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/https.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/index.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/base.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/inspector.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/module.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/perf_hooks.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/async_hooks.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/process.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tty.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/readline.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/repl.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/readline.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/util.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/vm.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.4/base.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/async_hooks.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/buffer.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/child_process.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/cluster.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/console.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/constants.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dgram.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/domain.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/globals.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http2.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/https.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/inspector.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/module.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/os.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/path.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/perf_hooks.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/process.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/punycode.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/querystring.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/readline.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/repl.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/string_decoder.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/timers.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/trace_events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tty.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/util.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/v8.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/vm.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/worker_threads.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/zlib.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.6/base.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/globals.global.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.4/base.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/wasi.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tty.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/querystring.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/v8.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/worker_threads.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/vm.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/zlib.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-react-dom-npm-17.0.0-c3b70f60e6-7ca9351b6c.zip/node_modules/@types/react-dom/index.d.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts": [
+        "../../../.yarn/cache/@types-prop-types-npm-15.7.3-084e0015c6-bd0eab69d5.zip/node_modules/@types/prop-types/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/global.d.ts",
+        "../../../.yarn/cache/csstype-npm-3.0.6-57c059c166-ebdca96d26.zip/node_modules/csstype/index.d.ts"
+      ],
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/diffLines.d.ts": [
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/types.d.ts"
+      ],
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/index.d.ts": [
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/diffLines.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/printDiffs.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/types.d.ts"
+      ],
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/printDiffs.d.ts": [
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/types.d.ts"
+      ],
+      "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/index.d.ts": [
+        "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/types.d.ts"
+      ],
+      "../../../.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/index.d.ts": [
+        "../../../.yarn/cache/symbol-observable-npm-1.2.0-9e812a0a39-268834a1d4.zip/node_modules/symbol-observable/index.d.ts"
+      ],
+      "../src/common/DndContext.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/common/DndProvider.tsx": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DndContext.ts"
+      ],
+      "../src/common/DragPreviewImage.tsx": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/common/DragSourceMonitorImpl.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/common/DropTargetMonitorImpl.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/common/SourceConnector.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-shallowequal-npm-2.0.0-2a10dca275-cbac47721d.zip/node_modules/@react-dnd/shallowequal/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/wrapConnectorHooks.ts",
+        "../src/interfaces/index.ts",
+        "../src/utils/isRef.ts"
+      ],
+      "../src/common/TargetConnector.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-shallowequal-npm-2.0.0-2a10dca275-cbac47721d.zip/node_modules/@react-dnd/shallowequal/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/SourceConnector.ts",
+        "../src/common/wrapConnectorHooks.ts",
+        "../src/utils/isRef.ts"
+      ],
+      "../src/common/index.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DndContext.ts",
+        "../src/common/DndProvider.tsx",
+        "../src/common/DragPreviewImage.tsx"
+      ],
+      "../src/common/registration.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/common/wrapConnectorHooks.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/utils/cloneWithRef.ts"
+      ],
+      "../src/decorators/DragLayer.tsx": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@react-dnd-shallowequal-npm-2.0.0-2a10dca275-cbac47721d.zip/node_modules/@react-dnd/shallowequal/dist/index.d.ts",
+        "../../../.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-16ab4c45d4.zip/node_modules/@types/hoist-non-react-statics/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DndContext.ts",
+        "../src/decorators/interfaces.ts",
+        "../src/decorators/utils.ts",
+        "../src/interfaces/index.ts",
+        "../src/utils/js_utils.ts"
+      ],
+      "../src/decorators/DragSource.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DragSourceMonitorImpl.ts",
+        "../src/common/SourceConnector.ts",
+        "../src/common/registration.ts",
+        "../src/decorators/createSourceFactory.ts",
+        "../src/decorators/decorateHandler.tsx",
+        "../src/decorators/interfaces.ts",
+        "../src/decorators/utils.ts",
+        "../src/interfaces/index.ts",
+        "../src/utils/isValidType.ts",
+        "../src/utils/js_utils.ts"
+      ],
+      "../src/decorators/DropTarget.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DropTargetMonitorImpl.ts",
+        "../src/common/TargetConnector.ts",
+        "../src/common/registration.ts",
+        "../src/decorators/createTargetFactory.ts",
+        "../src/decorators/decorateHandler.tsx",
+        "../src/decorators/interfaces.ts",
+        "../src/decorators/utils.ts",
+        "../src/interfaces/index.ts",
+        "../src/utils/isValidType.ts",
+        "../src/utils/js_utils.ts"
+      ],
+      "../src/decorators/createSourceFactory.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/decorators/interfaces.ts",
+        "../src/decorators/utils.ts",
+        "../src/interfaces/index.ts",
+        "../src/utils/js_utils.ts"
+      ],
+      "../src/decorators/createTargetFactory.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/decorators/interfaces.ts",
+        "../src/decorators/utils.ts",
+        "../src/interfaces/index.ts",
+        "../src/utils/js_utils.ts"
+      ],
+      "../src/decorators/decorateHandler.tsx": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@react-dnd-shallowequal-npm-2.0.0-2a10dca275-cbac47721d.zip/node_modules/@react-dnd/shallowequal/dist/index.d.ts",
+        "../../../.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-16ab4c45d4.zip/node_modules/@types/hoist-non-react-statics/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DndContext.ts",
+        "../src/common/SourceConnector.ts",
+        "../src/decorators/disposables.ts",
+        "../src/decorators/interfaces.ts",
+        "../src/decorators/utils.ts",
+        "../src/utils/js_utils.ts"
+      ],
+      "../src/decorators/disposables.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/utils/js_utils.ts"
+      ],
+      "../src/decorators/index.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/decorators/DragLayer.tsx",
+        "../src/decorators/DragSource.ts",
+        "../src/decorators/DropTarget.ts",
+        "../src/decorators/interfaces.ts"
+      ],
+      "../src/decorators/interfaces.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-16ab4c45d4.zip/node_modules/@types/hoist-non-react-statics/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/decorators/utils.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/hooks/index.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/hooks/useDrag.ts",
+        "../src/hooks/useDragDropManager.ts",
+        "../src/hooks/useDragLayer.ts",
+        "../src/hooks/useDrop.ts"
+      ],
+      "../src/hooks/internal/drag.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DragSourceMonitorImpl.ts",
+        "../src/common/SourceConnector.ts",
+        "../src/common/registration.ts",
+        "../src/hooks/internal/useIsomorphicLayoutEffect.ts",
+        "../src/hooks/useDragDropManager.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/internal/drop.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DropTargetMonitorImpl.ts",
+        "../src/common/TargetConnector.ts",
+        "../src/common/registration.ts",
+        "../src/hooks/internal/useIsomorphicLayoutEffect.ts",
+        "../src/hooks/useDragDropManager.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/internal/useCollector.ts": [
+        "../../../.yarn/cache/@react-dnd-shallowequal-npm-2.0.0-2a10dca275-cbac47721d.zip/node_modules/@react-dnd/shallowequal/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/hooks/internal/useIsomorphicLayoutEffect.ts"
+      ],
+      "../src/hooks/internal/useIsomorphicLayoutEffect.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/hooks/internal/useMonitorOutput.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/hooks/internal/useCollector.ts",
+        "../src/hooks/internal/useIsomorphicLayoutEffect.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/useDrag.ts": [
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/hooks/internal/drag.ts",
+        "../src/hooks/internal/useIsomorphicLayoutEffect.ts",
+        "../src/hooks/internal/useMonitorOutput.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/useDragDropManager.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/DndContext.ts"
+      ],
+      "../src/hooks/useDragLayer.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/hooks/internal/useCollector.ts",
+        "../src/hooks/useDragDropManager.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/useDrop.ts": [
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/hooks/internal/drop.ts",
+        "../src/hooks/internal/useIsomorphicLayoutEffect.ts",
+        "../src/hooks/internal/useMonitorOutput.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/index.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/common/index.ts",
+        "../src/decorators/index.ts",
+        "../src/hooks/index.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/interfaces/connectors.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/interfaces/hooksApi.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/interfaces/monitors.ts",
+        "../src/interfaces/options.ts"
+      ],
+      "../src/interfaces/index.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+        "../src/interfaces/connectors.ts",
+        "../src/interfaces/hooksApi.ts",
+        "../src/interfaces/monitors.ts",
+        "../src/interfaces/options.ts"
+      ],
+      "../src/interfaces/monitors.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/interfaces/options.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/utils/cloneWithRef.ts": [
+        "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/utils/isRef.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/utils/isValidType.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ],
+      "../src/utils/js_utils.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts"
+      ]
+    },
+    "exportedModulesMap": {
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/asap.d.ts": [
+        "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/types.d.ts"
+      ],
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/index.d.ts": [
+        "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/asap.d.ts"
+      ],
+      "../../../.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-16ab4c45d4.zip/node_modules/@types/hoist-non-react-statics/index.d.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../../../.yarn/cache/@types-jest-npm-26.0.20-e4c9c054bf-221e39c7c9.zip/node_modules/@types/jest/index.d.ts": [
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/index.d.ts",
+        "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/index.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/base.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/assert.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.6/base.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/child_process.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/cluster.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/child_process.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/console.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/util.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/constants.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/os.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dgram.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/domain.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http2.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/https.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/index.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/base.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/inspector.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/module.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/perf_hooks.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/async_hooks.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/process.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tty.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/readline.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/repl.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/readline.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/util.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/vm.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.4/base.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/async_hooks.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/buffer.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/child_process.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/cluster.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/console.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/constants.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dgram.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/domain.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/globals.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http2.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/https.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/inspector.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/module.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/os.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/path.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/perf_hooks.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/process.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/punycode.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/querystring.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/readline.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/repl.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/string_decoder.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/timers.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/trace_events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tty.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/util.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/v8.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/vm.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/worker_threads.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/zlib.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.6/base.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/globals.global.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.4/base.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/wasi.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tty.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/querystring.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/v8.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/worker_threads.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts",
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/vm.d.ts"
+      ],
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/zlib.d.ts": [
+        "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts"
+      ],
+      "../../../.yarn/cache/@types-react-dom-npm-17.0.0-c3b70f60e6-7ca9351b6c.zip/node_modules/@types/react-dom/index.d.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts": [
+        "../../../.yarn/cache/@types-prop-types-npm-15.7.3-084e0015c6-bd0eab69d5.zip/node_modules/@types/prop-types/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/global.d.ts",
+        "../../../.yarn/cache/csstype-npm-3.0.6-57c059c166-ebdca96d26.zip/node_modules/csstype/index.d.ts"
+      ],
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/diffLines.d.ts": [
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/types.d.ts"
+      ],
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/index.d.ts": [
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/diffLines.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/printDiffs.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/types.d.ts"
+      ],
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/printDiffs.d.ts": [
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/types.d.ts"
+      ],
+      "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/index.d.ts": [
+        "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/types.d.ts"
+      ],
+      "../../../.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/index.d.ts": [
+        "../../../.yarn/cache/symbol-observable-npm-1.2.0-9e812a0a39-268834a1d4.zip/node_modules/symbol-observable/index.d.ts"
+      ],
+      "../src/common/DndContext.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../src/common/DndProvider.tsx": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../src/common/DragPreviewImage.tsx": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/common/DragSourceMonitorImpl.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/common/DropTargetMonitorImpl.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/common/SourceConnector.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/common/TargetConnector.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../src/common/SourceConnector.ts"
+      ],
+      "../src/common/index.ts": [
+        "../src/common/DndContext.ts",
+        "../src/common/DndProvider.tsx",
+        "../src/common/DragPreviewImage.tsx"
+      ],
+      "../src/common/registration.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts"
+      ],
+      "../src/decorators/DragLayer.tsx": [
+        "../src/decorators/interfaces.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/decorators/DragSource.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../src/decorators/interfaces.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/decorators/DropTarget.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../src/decorators/interfaces.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/decorators/createSourceFactory.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../src/decorators/interfaces.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/decorators/createTargetFactory.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../src/decorators/interfaces.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/decorators/decorateHandler.tsx": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../src/decorators/interfaces.ts"
+      ],
+      "../src/decorators/disposables.ts": [
+        "../src/utils/js_utils.ts"
+      ],
+      "../src/decorators/index.ts": [
+        "../src/decorators/DragLayer.tsx",
+        "../src/decorators/DragSource.ts",
+        "../src/decorators/DropTarget.ts",
+        "../src/decorators/interfaces.ts"
+      ],
+      "../src/decorators/interfaces.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../../../.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-16ab4c45d4.zip/node_modules/@types/hoist-non-react-statics/index.d.ts",
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/decorators/utils.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../src/hooks/index.ts": [
+        "../src/hooks/useDrag.ts",
+        "../src/hooks/useDragDropManager.ts",
+        "../src/hooks/useDragLayer.ts",
+        "../src/hooks/useDrop.ts"
+      ],
+      "../src/hooks/internal/drag.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../src/common/SourceConnector.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/internal/drop.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../src/common/TargetConnector.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/internal/useIsomorphicLayoutEffect.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ],
+      "../src/hooks/internal/useMonitorOutput.ts": [
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/useDrag.ts": [
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/useDragDropManager.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts"
+      ],
+      "../src/hooks/useDragLayer.ts": [
+        "../src/interfaces/index.ts"
+      ],
+      "../src/hooks/useDrop.ts": [
+        "../src/interfaces/index.ts"
+      ],
+      "../src/index.ts": [
+        "../src/common/index.ts",
+        "../src/decorators/index.ts",
+        "../src/hooks/index.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/interfaces/connectors.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+        "../src/interfaces/index.ts"
+      ],
+      "../src/interfaces/hooksApi.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+        "../src/interfaces/monitors.ts",
+        "../src/interfaces/options.ts"
+      ],
+      "../src/interfaces/index.ts": [
+        "../src/interfaces/connectors.ts",
+        "../src/interfaces/hooksApi.ts",
+        "../src/interfaces/monitors.ts",
+        "../src/interfaces/options.ts"
+      ],
+      "../src/interfaces/monitors.ts": [
+        "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts"
+      ],
+      "../src/utils/cloneWithRef.ts": [
+        "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts"
+      ]
+    },
+    "semanticDiagnosticsPerFile": [
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/DragDropManagerImpl.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/DragDropMonitorImpl.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/HandlerRegistryImpl.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/beginDrag.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/drop.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/endDrag.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/hover.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/index.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/local/setClientOffset.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/publishDragSource.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/dragDrop/types.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/actions/registry.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/contracts.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/factories.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/index.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/interfaces.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dirtyHandlerIds.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOffset.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/dragOperation.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/index.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/refCount.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/reducers/stateId.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/coords.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/dirtiness.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/equality.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/getNextUniqueId.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/js_utils.ts",
+      "../../../.yarn/$$virtual/dnd-core-virtual-34e97de937/1/packages/dnd-core/src/utils/matchesType.ts",
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/asap.d.ts",
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/node/index.d.ts",
+      "../../../.yarn/cache/@react-dnd-asap-npm-4.0.0-f6b65c5b5b-d3fd66488e.zip/node_modules/@react-dnd/asap/lib/types.d.ts",
+      "../../../.yarn/cache/@react-dnd-invariant-npm-2.0.0-e055f1025b-2217a3c256.zip/node_modules/@react-dnd/invariant/dist/index.d.ts",
+      "../../../.yarn/cache/@react-dnd-shallowequal-npm-2.0.0-2a10dca275-cbac47721d.zip/node_modules/@react-dnd/shallowequal/dist/index.d.ts",
+      "../../../.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-16ab4c45d4.zip/node_modules/@types/hoist-non-react-statics/index.d.ts",
+      "../../../.yarn/cache/@types-jest-npm-26.0.20-e4c9c054bf-221e39c7c9.zip/node_modules/@types/jest/index.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/assert.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/async_hooks.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/base.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/buffer.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/child_process.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/cluster.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/console.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/constants.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/crypto.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dgram.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/dns.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/domain.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/events.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/fs/promises.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/globals.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/globals.global.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/http2.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/https.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/index.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/inspector.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/module.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/net.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/os.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/path.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/perf_hooks.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/process.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/punycode.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/querystring.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/readline.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/repl.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/stream.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/string_decoder.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/timers.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tls.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/trace_events.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.4/base.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/ts3.6/base.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/tty.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/url.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/util.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/v8.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/vm.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/wasi.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/worker_threads.d.ts",
+      "../../../.yarn/cache/@types-node-npm-14.14.25-cd44243469-64c42730f4.zip/node_modules/@types/node/zlib.d.ts",
+      "../../../.yarn/cache/@types-prop-types-npm-15.7.3-084e0015c6-bd0eab69d5.zip/node_modules/@types/prop-types/index.d.ts",
+      "../../../.yarn/cache/@types-react-dom-npm-17.0.0-c3b70f60e6-7ca9351b6c.zip/node_modules/@types/react-dom/index.d.ts",
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/global.d.ts",
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/index.d.ts",
+      "../../../.yarn/cache/@types-react-npm-17.0.1-d29bd2301b-5b490728c5.zip/node_modules/@types/react/jsx-runtime.d.ts",
+      "../../../.yarn/cache/csstype-npm-3.0.6-57c059c166-ebdca96d26.zip/node_modules/csstype/index.d.ts",
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/diffLines.d.ts",
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/index.d.ts",
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/printDiffs.d.ts",
+      "../../../.yarn/cache/jest-diff-npm-26.6.2-06ca2a96ca-05d0f1bdba.zip/node_modules/jest-diff/build/types.d.ts",
+      "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/index.d.ts",
+      "../../../.yarn/cache/pretty-format-npm-26.6.2-6edfcf7149-5ad34fc128.zip/node_modules/pretty-format/build/types.d.ts",
+      "../../../.yarn/cache/redux-npm-4.0.5-aca53e621f-112739c2fb.zip/node_modules/redux/index.d.ts",
+      "../../../.yarn/cache/symbol-observable-npm-1.2.0-9e812a0a39-268834a1d4.zip/node_modules/symbol-observable/index.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.dom.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2016.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.intl.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.object.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.string.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.intl.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.promise.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.array.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.object.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.string.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2019.symbol.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.bigint.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.intl.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.promise.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.sharedmemory.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.string.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.es5.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.promise.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.string.d.ts",
+      "../../../.yarn/cache/typescript-patch-66c7d3b992-58cc7786be.zip/node_modules/typescript/lib/lib.esnext.weakref.d.ts",
+      "../src/common/DndContext.ts",
+      "../src/common/DndProvider.tsx",
+      "../src/common/DragPreviewImage.tsx",
+      "../src/common/DragSourceMonitorImpl.ts",
+      "../src/common/DropTargetMonitorImpl.ts",
+      "../src/common/SourceConnector.ts",
+      "../src/common/TargetConnector.ts",
+      "../src/common/index.ts",
+      "../src/common/registration.ts",
+      "../src/common/wrapConnectorHooks.ts",
+      "../src/decorators/DragLayer.tsx",
+      "../src/decorators/DragSource.ts",
+      "../src/decorators/DropTarget.ts",
+      "../src/decorators/createSourceFactory.ts",
+      "../src/decorators/createTargetFactory.ts",
+      "../src/decorators/decorateHandler.tsx",
+      "../src/decorators/disposables.ts",
+      "../src/decorators/index.ts",
+      "../src/decorators/interfaces.ts",
+      "../src/decorators/utils.ts",
+      "../src/hooks/index.ts",
+      "../src/hooks/internal/drag.ts",
+      "../src/hooks/internal/drop.ts",
+      "../src/hooks/internal/useCollector.ts",
+      "../src/hooks/internal/useIsomorphicLayoutEffect.ts",
+      "../src/hooks/internal/useMonitorOutput.ts",
+      "../src/hooks/useDrag.ts",
+      "../src/hooks/useDragDropManager.ts",
+      "../src/hooks/useDragLayer.ts",
+      "../src/hooks/useDrop.ts",
+      "../src/index.ts",
+      "../src/interfaces/connectors.ts",
+      "../src/interfaces/hooksApi.ts",
+      "../src/interfaces/index.ts",
+      "../src/interfaces/monitors.ts",
+      "../src/interfaces/options.ts",
+      "../src/utils/cloneWithRef.ts",
+      "../src/utils/isRef.ts",
+      "../src/utils/isValidType.ts",
+      "../src/utils/js_utils.ts"
+    ]
+  },
+  "version": "4.1.5"
+}

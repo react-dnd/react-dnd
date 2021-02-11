@@ -17,7 +17,8 @@
   "scripts": {
     "clean": "gulp clean",
     "build": "gulp build",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "bundle": "gulp bundle"
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
@@ -61,6 +62,21 @@
     },
     "@types/react-dom": {
       "optional": true
+    }
+  },
+  "umd": {
+    "name": "ReactDnD",
+    "input": "dist/esm/index.js",
+    "external": [
+      "react",
+      "react-dom"
+    ],
+    "globals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
+    },
+    "alias": {
+      "dnd-core": "dnd-core/dist/esm/index"
     }
   }
 }
