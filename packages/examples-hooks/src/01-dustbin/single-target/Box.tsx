@@ -30,9 +30,16 @@ export const Box: FC<BoxProps> = function Box({ name }) {
 			handlerId: monitor.getHandlerId(),
 		}),
 	})
+
 	const opacity = isDragging ? 0.4 : 1
 	return (
-		<div ref={drag} style={{ ...style, opacity }} data-handler-id={handlerId}>
+		<div
+			ref={drag}
+			role="Box"
+			style={{ ...style, opacity }}
+			data-handler-id={handlerId}
+			data-testid={`box-${name}`}
+		>
 			{name}
 		</div>
 	)

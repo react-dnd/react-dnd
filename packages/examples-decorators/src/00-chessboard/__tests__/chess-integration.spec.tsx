@@ -1,22 +1,32 @@
 import '@testing-library/jest-dom'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { render, screen, fireEvent, RenderResult } from '@testing-library/react'
+import {
+	render,
+	screen,
+	fireEvent,
+	RenderResult,
+	act,
+} from '@testing-library/react'
 import { Game } from '../Game'
 import { Board } from '../Board'
 import { OverlayType } from '../Overlay'
 
 function dragAndDrop(knight: HTMLElement, space: HTMLElement) {
-	fireEvent.dragStart(knight)
-	fireEvent.dragEnter(space)
-	fireEvent.dragOver(space)
-	fireEvent.drop(space)
+	act(() => {
+		fireEvent.dragStart(knight)
+		fireEvent.dragEnter(space)
+		fireEvent.dragOver(space)
+		fireEvent.drop(space)
+	})
 }
 
 function dragHold(knight: HTMLElement, space: HTMLElement) {
-	fireEvent.dragStart(knight)
-	fireEvent.dragEnter(space)
-	fireEvent.dragOver(space)
+	act(() => {
+		fireEvent.dragStart(knight)
+		fireEvent.dragEnter(space)
+		fireEvent.dragOver(space)
+	})
 }
 
 function renderGame(game: Game): RenderResult {

@@ -76,7 +76,7 @@ export function simulateHoverSequence(
 	})
 }
 
-function getHandlerId(provider: HandlerIdProvider): Identifier {
+export function getHandlerId(provider: HandlerIdProvider): Identifier {
 	if (typeof provider === 'string' || typeof provider === 'symbol') {
 		return provider
 	} else if (typeof provider === 'function') {
@@ -91,3 +91,12 @@ export type HandlerIdProvider =
 	| Identifier
 	| DndComponent<any>
 	| (() => Identifier | null)
+
+/**
+ * A tick that users can use to work through the event queue
+ */
+export function tick() {
+	return new Promise((resolve) => {
+		setTimeout(resolve, 0)
+	})
+}

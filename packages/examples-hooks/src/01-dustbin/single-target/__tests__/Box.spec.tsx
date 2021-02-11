@@ -1,30 +1,32 @@
+import '@testing-library/jest-dom'
+import { render, fireEvent, act } from '@testing-library/react'
 import { Box } from '../Box'
-import { wrapInTestContext } from 'react-dnd-test-utils'
-import { Identifier } from 'dnd-core'
-import { mount } from 'enzyme'
-import { act } from 'react-dom/test-utils'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
+import { tick } from 'react-dnd-test-utils'
 
 describe('Box', () => {
-	it('can be tested with the testing backend', () => {
-		// Render with the testing backend
-		const [BoxContext, getBackend] = wrapInTestContext(Box)
-		const root = mount(<BoxContext name="test" />)
+	it('can be tested with a backend', async () => {
+		const rendered = render(
+			<DndProvider backend={HTML5Backend}>
+				<Box name="test" />
+			</DndProvider>,
+		)
 
 		// Check that the opacity is 1
-		const div = (root.getDOMNode() as any) as HTMLDivElement
-		expect(div).toBeDefined()
-		expect(div.style.opacity).toEqual('1')
+		const box = rendered.getByTestId('box-test')
+		expect(box).toBeDefined()
+		expect(box).toHaveStyle({ opacity: '1' })
 
-		// Find the drag source ID and use it to simulate the dragging state
-		const box: any = root.find(Box)
-		const getHandlerId = (c: any): Identifier =>
-			c.find('[data-handler-id]').props()['data-handler-id']
-
-		act(() => {
-			getBackend().simulateBeginDrag([getHandlerId(box)])
+		// Opacity drops on Drag
+		await act(async () => {
+			fireEvent.dragStart(box)
+			await tick()
 		})
+		expect(box).toHaveStyle({ opacity: '0.4' })
 
-		// Verify that the div changed its opacity
-		expect(div.style.opacity).toEqual('0.4')
+		// Opacity returns on dragend
+		fireEvent.dragEnd(box)
+		expect(box).toHaveStyle({ opacity: '1' })
 	})
 })

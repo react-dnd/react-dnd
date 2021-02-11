@@ -43,7 +43,7 @@ export const Dustbin: FC<DustbinProps> = ({
 	}
 
 	return connectDropTarget(
-		<div style={{ ...style, backgroundColor }}>
+		<div style={{ ...style, backgroundColor }} role="Dustbin">
 			{isActive
 				? 'Release to drop'
 				: `This dustbin accepts: ${accepts.join(', ')}`}

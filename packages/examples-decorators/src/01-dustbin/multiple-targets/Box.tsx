@@ -30,7 +30,9 @@ export const Box: FC<BoxProps> = ({
 }) => {
 	const opacity = isDragging ? 0.4 : 1
 	return connectDragSource(
-		<div style={{ ...style, opacity }}>{isDropped ? <s>{name}</s> : name}</div>,
+		<div role="Box" style={{ ...style, opacity }}>
+			{isDropped ? <s>{name}</s> : name}
+		</div>,
 	)
 }
 
