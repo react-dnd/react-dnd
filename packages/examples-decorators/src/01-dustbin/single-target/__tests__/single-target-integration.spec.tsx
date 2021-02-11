@@ -1,33 +1,30 @@
 import Example from '../index'
-import Box, { BoxProps } from '../Box'
-import Dustbin, { DustbinProps } from '../Dustbin'
-import {
-	wrapInTestContext,
-	simulateDragDropSequence,
-} from 'react-dnd-test-utils'
-import { mount } from 'enzyme'
-import { DndComponent } from 'react-dnd'
+import '@testing-library/jest-dom'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { render, act, fireEvent } from '@testing-library/react'
+import { tick } from 'react-dnd-test-utils'
+import { DndProvider } from 'react-dnd'
 
 describe('Integration: Dustbin Single Target', () => {
-	it('can simulate a full drag and drop interaction', () => {
-		function TestCase() {
-			return <Example />
-		}
-		const [WrappedTestCase, getBackend] = wrapInTestContext(TestCase)
-
-		// Render with the test context that uses the test backend
-		const root = mount(<WrappedTestCase />)
-
-		// Find the drag source ID and use it to simulate the dragging operation
-		const box: DndComponent<BoxProps> = root.find(Box).at(0).instance() as any
-		const dustbin: DndComponent<DustbinProps> = root
-			.find(Dustbin)
-			.instance() as any
-
-		window.alert = jest.fn()
-		simulateDragDropSequence(box, dustbin, getBackend())
-		expect(window.alert).toHaveBeenCalledWith(
-			`You dropped ${box.props.name} into Dustbin!`,
+	it('can simulate a full drag and drop interaction', async () => {
+		const rendered = render(
+			<DndProvider backend={HTML5Backend}>
+				<Example />
+			</DndProvider>,
 		)
+		window.alert = jest.fn()
+		const box = (await rendered.findAllByRole('Box'))[0]
+		const dustbin = await rendered.findByRole('Dustbin')
+		expect(box).toBeDefined()
+		expect(dustbin).toBeDefined()
+
+		await act(async () => {
+			fireEvent.dragStart(box)
+			fireEvent.dragEnter(dustbin)
+			fireEvent.dragOver(dustbin)
+			fireEvent.drop(dustbin)
+		})
+
+		expect(window.alert).toHaveBeenCalledWith(`You dropped Glass into Dustbin!`)
 	})
 })
