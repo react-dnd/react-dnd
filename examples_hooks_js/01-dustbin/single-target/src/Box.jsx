@@ -10,7 +10,7 @@ const style = {
     float: 'left',
 };
 export const Box = function Box({ name }) {
-    const [{ isDragging, handlerId }, drag] = useDrag({
+    const [{ isDragging }, drag] = useDrag({
         item: { name, type: ItemTypes.BOX },
         end: (item, monitor) => {
             const dropResult = monitor.getDropResult();
@@ -24,7 +24,7 @@ export const Box = function Box({ name }) {
         }),
     });
     const opacity = isDragging ? 0.4 : 1;
-    return (<div ref={drag} style={{ ...style, opacity }} data-handler-id={handlerId}>
+    return (<div ref={drag} role="Box" style={{ ...style, opacity }} data-testid={`box-${name}`}>
 			{name}
 		</div>);
 };

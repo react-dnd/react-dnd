@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useDrag } from 'react-dnd';
 const style = {
     border: '1px dashed gray',
@@ -8,15 +9,14 @@ const style = {
     cursor: 'move',
     float: 'left',
 };
-export const Box = ({ name, type, isDropped }) => {
-    const [{ opacity, handlerId }, drag] = useDrag({
+export const Box = memo(function Box({ name, type, isDropped }) {
+    const [{ opacity }, drag] = useDrag({
         item: { name, type },
         collect: (monitor) => ({
             opacity: monitor.isDragging() ? 0.4 : 1,
-            handlerId: monitor.getHandlerId(),
         }),
     });
-    return (<div ref={drag} style={{ ...style, opacity }} data-handler-id={handlerId}>
+    return (<div ref={drag} role="Box" style={{ ...style, opacity }}>
 			{isDropped ? <s>{name}</s> : name}
 		</div>);
-};
+});

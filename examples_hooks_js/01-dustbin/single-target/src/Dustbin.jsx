@@ -13,13 +13,12 @@ const style = {
     float: 'left',
 };
 export const Dustbin = () => {
-    const [{ canDrop, isOver, handlerId }, drop] = useDrop({
+    const [{ canDrop, isOver }, drop] = useDrop({
         accept: ItemTypes.BOX,
         drop: () => ({ name: 'Dustbin' }),
         collect: (monitor) => ({
             isOver: monitor.isOver(),
             canDrop: monitor.canDrop(),
-            handlerId: monitor.getHandlerId(),
         }),
     });
     const isActive = canDrop && isOver;
@@ -30,7 +29,7 @@ export const Dustbin = () => {
     else if (canDrop) {
         backgroundColor = 'darkkhaki';
     }
-    return (<div ref={drop} style={{ ...style, backgroundColor }} data-handler-id={handlerId}>
+    return (<div ref={drop} role={'Dustbin'} style={{ ...style, backgroundColor }}>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>);
 };

@@ -11,12 +11,14 @@ const style = {
 };
 const Box = ({ name, isDragging, connectDragSource }) => {
     const opacity = isDragging ? 0.4 : 1;
-    return (<div ref={connectDragSource} style={{ ...style, opacity }}>
+    return (<div ref={connectDragSource} role={'Box'} data-testid={`box-${name}`} style={{ ...style, opacity }}>
 			{name}
 		</div>);
 };
 export default DragSource(ItemTypes.BOX, {
-    beginDrag: (props) => ({ name: props.name }),
+    beginDrag: (props) => {
+        return { name: props.name };
+    },
     endDrag(props, monitor) {
         const item = monitor.getItem();
         const dropResult = monitor.getDropResult();
@@ -24,7 +26,9 @@ export default DragSource(ItemTypes.BOX, {
             alert(`You dropped ${item.name} into ${dropResult.name}!`);
         }
     },
-}, (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-}))(Box);
+}, (connect, monitor) => {
+    return {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging(),
+    };
+})(Box);

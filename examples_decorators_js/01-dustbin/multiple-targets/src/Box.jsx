@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { DragSource } from 'react-dnd';
 const style = {
     border: '1px dashed gray',
@@ -8,10 +9,12 @@ const style = {
     cursor: 'move',
     float: 'left',
 };
-export const Box = ({ name, isDropped, isDragging, connectDragSource, }) => {
+export const Box = memo(function Box({ name, isDropped, isDragging, connectDragSource, }) {
     const opacity = isDragging ? 0.4 : 1;
-    return connectDragSource(<div style={{ ...style, opacity }}>{isDropped ? <s>{name}</s> : name}</div>);
-};
+    return connectDragSource(<div role="Box" style={{ ...style, opacity }}>
+			{isDropped ? <s>{name}</s> : name}
+		</div>);
+});
 export default DragSource((props) => props.type, {
     beginDrag: (props) => ({ name: props.name }),
 }, (connect, monitor) => ({

@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
+import { memo, useState, useCallback } from 'react';
 import { NativeTypes } from 'react-dnd-html5-backend';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import { ItemTypes } from './ItemTypes';
 import update from 'immutability-helper';
-export const Container = () => {
+export const Container = memo(function Container() {
     const [dustbins, setDustbins] = useState([
         { accepts: [ItemTypes.GLASS], lastDroppedItem: null },
         { accepts: [ItemTypes.FOOD], lastDroppedItem: null },
@@ -43,4 +43,4 @@ export const Container = () => {
 				{boxes.map(({ name, type }, index) => (<Box name={name} type={type} isDropped={isDropped(name)} key={index}/>))}
 			</div>
 		</div>);
-};
+});

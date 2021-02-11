@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { DropTarget } from 'react-dnd';
 const style = {
     height: '12rem',
@@ -11,7 +12,7 @@ const style = {
     lineHeight: 'normal',
     float: 'left',
 };
-export const Dustbin = ({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem, }) => {
+export const Dustbin = memo(function Dustbin({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem, }) {
     const isActive = isOver && canDrop;
     let backgroundColor = '#222';
     if (isActive) {
@@ -20,14 +21,14 @@ export const Dustbin = ({ accepts, isOver, canDrop, connectDropTarget, lastDropp
     else if (canDrop) {
         backgroundColor = 'darkkhaki';
     }
-    return connectDropTarget(<div style={{ ...style, backgroundColor }}>
+    return connectDropTarget(<div ref={connectDropTarget} style={{ ...style, backgroundColor }} role="Dustbin">
 			{isActive
         ? 'Release to drop'
         : `This dustbin accepts: ${accepts.join(', ')}`}
 
 			{lastDroppedItem && (<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>)}
 		</div>);
-};
+});
 export default DropTarget((props) => props.accepts, {
     drop(props, monitor) {
         props.onDrop(monitor.getItem());

@@ -21,7 +21,7 @@ const Dustbin = ({ canDrop, isOver, connectDropTarget }) => {
     else if (canDrop) {
         backgroundColor = 'darkkhaki';
     }
-    return (<div ref={connectDropTarget} style={{ ...style, backgroundColor }}>
+    return (<div ref={connectDropTarget} style={{ ...style, backgroundColor }} role="Dustbin">
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>);
 };
