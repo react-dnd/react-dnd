@@ -42,7 +42,11 @@ export const DraggableBox: FC<DraggableBoxProps> = (props) => {
 	}, [])
 
 	return (
-		<div ref={drag} style={getStyles(left, top, isDragging)}>
+		<div
+			ref={drag}
+			style={getStyles(left, top, isDragging)}
+			role="DraggableBox"
+		>
 			<Box title={title} />
 		</div>
 	)

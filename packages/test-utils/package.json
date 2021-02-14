@@ -17,9 +17,9 @@
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
     "@testing-library/react": "^11.2.5",
-    "@types/node": "^14.14.25",
-    "@types/react": "^17.0.1",
-    "@types/react-dom": "^17.0.0",
+    "@types/node": "^14.14.27",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
     "dnd-core": "workspace:packages/dnd-core",
     "gulp": "^4.0.2",
     "react": "^17.0.1",

@@ -1,5 +1,5 @@
 import { CSSProperties, FC } from 'react'
-import { DragSource, DropTarget, useDrop, useDrag } from 'react-dnd'
+import { useDrop, useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
 const style: CSSProperties = {
@@ -18,7 +18,7 @@ const handleStyle: CSSProperties = {
 	cursor: 'move',
 }
 
-const BoxWithHandleRaw: FC = () => {
+export const BoxWithHandle: FC = () => {
 	const [, drop] = useDrop({
 		accept: ItemTypes.BOX,
 	})
@@ -40,21 +40,3 @@ const BoxWithHandleRaw: FC = () => {
 		),
 	)
 }
-
-export const BoxWithHandle = DragSource(
-	ItemTypes.BOX,
-	{
-		beginDrag: () => ({}),
-	},
-	(connect, monitor) => ({
-		connectDragSource: connect.dragSource(),
-		connectDragPreview: connect.dragPreview(),
-		isDragging: monitor.isDragging(),
-	}),
-)(
-	DropTarget(ItemTypes.BOX, {}, (connect, monitor) => ({
-		connectDropTarget: connect.dropTarget(),
-		isDraggingHover: monitor.isOver({ shallow: true }),
-		isOver: monitor.isOver(),
-	}))(BoxWithHandleRaw),
-)

@@ -9,9 +9,17 @@ const styles: CSSProperties = {
 export interface BoxProps {
 	title: string
 	yellow?: boolean
+	preview?: boolean
 }
 
-export const Box: FC<BoxProps> = ({ title, yellow }) => {
+export const Box: FC<BoxProps> = ({ title, yellow, preview }) => {
 	const backgroundColor = yellow ? 'yellow' : 'white'
-	return <div style={{ ...styles, backgroundColor }}>{title}</div>
+	return (
+		<div
+			style={{ ...styles, backgroundColor }}
+			role={preview ? 'Box-Preview' : 'Box'}
+		>
+			{title}
+		</div>
+	)
 }
