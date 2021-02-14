@@ -1,0 +1,9 @@
+releases:
+  react-dnd-test-utils: patch
+
+declined:
+  - "@react-dnd/build"
+  - react-dnd-documentation
+  - react-dnd-examples-decorators
+  - react-dnd-examples-hooks
+  - react-dnd
