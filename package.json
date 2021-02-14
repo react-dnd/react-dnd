@@ -100,5 +100,9 @@
     "react-dnd-touch-backend": "workspace:packages/backend-touch",
     "rimraf": "^3.0.2",
     "typescript": "^4.1.5"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.1"
   }
 }
