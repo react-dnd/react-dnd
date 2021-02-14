@@ -26,7 +26,7 @@ export const DraggableBox = (props) => {
     useEffect(() => {
         preview(getEmptyImage(), { captureDraggingState: true });
     }, []);
-    return (<div ref={drag} style={getStyles(left, top, isDragging)}>
+    return (<div ref={drag} style={getStyles(left, top, isDragging)} role="DraggableBox">
 			<Box title={title}/>
 		</div>);
 };

@@ -12,6 +12,6 @@ export const BoxDragPreview = memo(({ title }) => {
         return () => clearInterval(interval);
     }, [tickTock]);
     return (<div style={styles}>
-			<Box title={title} yellow={tickTock}/>
+			<Box title={title} yellow={tickTock} preview/>
 		</div>);
 });

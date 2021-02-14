@@ -10,9 +10,6 @@ const styles = {
     border: '1px solid black',
     position: 'relative',
 };
-function renderBox(item, key) {
-    return <DraggableBox key={key} id={key} {...item}/>;
-}
 export const Container = ({ snapToGrid }) => {
     const [boxes, setBoxes] = useState({
         a: { top: 20, left: 80, title: 'Drag me around' },
@@ -40,6 +37,6 @@ export const Container = ({ snapToGrid }) => {
         },
     });
     return (<div ref={drop} style={styles}>
-			{Object.keys(boxes).map((key) => renderBox(boxes[key], key))}
+			{Object.keys(boxes).map((key) => (<DraggableBox key={key} id={key} {...boxes[key]}/>))}
 		</div>);
 };

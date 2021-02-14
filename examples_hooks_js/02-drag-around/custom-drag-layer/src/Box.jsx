@@ -3,7 +3,9 @@ const styles = {
     padding: '0.5rem 1rem',
     cursor: 'move',
 };
-export const Box = ({ title, yellow }) => {
+export const Box = ({ title, yellow, preview }) => {
     const backgroundColor = yellow ? 'yellow' : 'white';
-    return <div style={{ ...styles, backgroundColor }}>{title}</div>;
+    return (<div style={{ ...styles, backgroundColor }} role={preview ? 'Box-Preview' : 'Box'}>
+			{title}
+		</div>);
 };

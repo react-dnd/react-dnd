@@ -1,4 +1,4 @@
-import { DragSource, DropTarget, useDrop, useDrag } from 'react-dnd';
+import { useDrop, useDrag } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {
     border: '1px dashed gray',
@@ -15,7 +15,7 @@ const handleStyle = {
     marginRight: '0.75rem',
     cursor: 'move',
 };
-const BoxWithHandleRaw = () => {
+export const BoxWithHandle = () => {
     const [, drop] = useDrop({
         accept: ItemTypes.BOX,
     });
@@ -33,14 +33,3 @@ const BoxWithHandleRaw = () => {
 				Drag me by the handle, the whole box should drag
 			</div>));
 };
-export const BoxWithHandle = DragSource(ItemTypes.BOX, {
-    beginDrag: () => ({}),
-}, (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging(),
-}))(DropTarget(ItemTypes.BOX, {}, (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isDraggingHover: monitor.isOver({ shallow: true }),
-    isOver: monitor.isOver(),
-}))(BoxWithHandleRaw));

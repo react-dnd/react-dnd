@@ -17,7 +17,7 @@ export const Box = ({ id, left, top, hideSourceOnDrag, children, }) => {
     if (isDragging && hideSourceOnDrag) {
         return <div ref={drag}/>;
     }
-    return (<div ref={drag} style={{ ...style, left, top }}>
+    return (<div ref={drag} style={{ ...style, left, top }} role="Box">
 			{children}
 		</div>);
 };

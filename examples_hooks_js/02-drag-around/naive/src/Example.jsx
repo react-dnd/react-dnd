@@ -9,7 +9,7 @@ export const Example = () => {
 			<Container hideSourceOnDrag={hideSourceOnDrag}/>
 			<p>
 				<label htmlFor="hideSourceOnDrag">
-					<input id="hideSourceOnDrag" type="checkbox" checked={hideSourceOnDrag} onChange={toggle}/>
+					<input id="hideSourceOnDrag" type="checkbox" role="checkbox" checked={hideSourceOnDrag} onChange={toggle}/>
 					<small>Hide the source item while dragging</small>
 				</label>
 			</p>
