@@ -21,10 +21,6 @@ interface BoxMap {
 	[key: string]: { top: number; left: number; title: string }
 }
 
-function renderBox(item: any, key: any) {
-	return <DraggableBox key={key} id={key} {...item} />
-}
-
 export const Container: FC<ContainerProps> = ({ snapToGrid }) => {
 	const [boxes, setBoxes] = useState<BoxMap>({
 		a: { top: 20, left: 80, title: 'Drag me around' },
@@ -65,7 +61,9 @@ export const Container: FC<ContainerProps> = ({ snapToGrid }) => {
 
 	return (
 		<div ref={drop} style={styles}>
-			{Object.keys(boxes).map((key) => renderBox(boxes[key], key))}
+			{Object.keys(boxes).map((key) => (
+				<DraggableBox key={key} id={key} {...boxes[key]} />
+			))}
 		</div>
 	)
 }

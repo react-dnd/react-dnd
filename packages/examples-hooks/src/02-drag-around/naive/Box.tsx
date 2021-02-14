@@ -35,7 +35,7 @@ export const Box: FC<BoxProps> = ({
 		return <div ref={drag} />
 	}
 	return (
-		<div ref={drag} style={{ ...style, left, top }}>
+		<div ref={drag} style={{ ...style, left, top }} role="Box">
 			{children}
 		</div>
 	)
