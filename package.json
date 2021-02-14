@@ -62,22 +62,22 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
     "@babel/preset-react": "^7.12.13",
-    "@babel/preset-typescript": "^7.12.13",
+    "@babel/preset-typescript": "^7.12.16",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.25",
-    "@types/testing-library__jest-dom": "^5",
+    "@types/node": "^14.14.27",
+    "@types/testing-library__jest-dom": "^5.9.5",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
     "alex": "^9.1.0",
     "conventional-changelog-cli": "^2.1.1",
-    "eslint": "^7.19.0",
+    "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-no-for-of-loops": "^1.0.1",
@@ -100,5 +100,9 @@
     "react-dnd-touch-backend": "workspace:packages/backend-touch",
     "rimraf": "^3.0.2",
     "typescript": "^4.1.5"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.1"
   }
 }
