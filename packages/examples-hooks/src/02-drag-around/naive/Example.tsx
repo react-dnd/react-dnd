@@ -15,6 +15,7 @@ export const Example: FC = () => {
 					<input
 						id="hideSourceOnDrag"
 						type="checkbox"
+						role="checkbox"
 						checked={hideSourceOnDrag}
 						onChange={toggle}
 					/>
