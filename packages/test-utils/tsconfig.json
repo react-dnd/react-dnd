@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./lib",
-    "baseUrl": "./src",
-    // for hoist-non-react-statics
-    "allowSyntheticDefaultImports": true
+    "baseUrl": "./src"
   },
   "include": ["src/index.ts"]
 }
