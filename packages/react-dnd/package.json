@@ -28,11 +28,15 @@
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
+    "@testing-library/react": "^11.2.5",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/node": "^14.14.28",
     "@types/react": "^17.0.2",
     "gulp": "^4.0.2",
-    "react": "^17.0.1"
+    "react": "^17.0.1",
+    "react-dnd-test-backend": "portal:../backend-test",
+    "react-dnd-test-utils": "portal:../test-utils",
+    "react-dom": "^17.0.1"
   },
   "peerDependencies": {
     "@types/hoist-non-react-statics": ">= 3.3.1",

@@ -29,21 +29,17 @@
     "react-dom": "^17.0.1"
   },
   "peerDependencies": {
-    "@react-dnd/core": ">= 11.1.3",
-    "@react-dnd/decorators": ">= 11.1.3",
     "@testing-library/react": ">= 11",
     "@types/node": "*",
     "@types/react": ">= 16",
     "@types/react-dom": ">= 16",
     "react": ">= 16.14",
+    "react-dnd": ">= 11.1.3",
     "react-dnd-html5-backend": ">= 11.1.3",
     "react-dnd-test-backend": ">= 10.0.0",
     "react-dom": ">= 16.14"
   },
   "peerDependenciesMeta": {
-    "@react-dnd/decorators": {
-      "optional": true
-    },
     "@testing-library/react": {
       "optional": true
     },

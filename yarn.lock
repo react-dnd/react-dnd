@@ -19809,6 +19809,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: soft
 
+"react-dnd-test-backend@portal:../backend-test::locator=react-dnd%40workspace%3Apackages%2Freact-dnd":
+  version: 0.0.0-use.local
+  resolution: "react-dnd-test-backend@portal:../backend-test::locator=react-dnd%40workspace%3Apackages%2Freact-dnd"
+  dependencies:
+    "@react-dnd/build": "workspace:packages/build"
+    dnd-core: "workspace:packages/dnd-core"
+    gulp: ^4.0.2
+  languageName: node
+  linkType: soft
+
 "react-dnd-test-backend@workspace:packages/backend-test":
   version: 0.0.0-use.local
   resolution: "react-dnd-test-backend@workspace:packages/backend-test"
@@ -19817,6 +19827,46 @@ fsevents@^1.2.7:
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
   languageName: unknown
+  linkType: soft
+
+"react-dnd-test-utils@portal:../test-utils::locator=react-dnd%40workspace%3Apackages%2Freact-dnd":
+  version: 0.0.0-use.local
+  resolution: "react-dnd-test-utils@portal:../test-utils::locator=react-dnd%40workspace%3Apackages%2Freact-dnd"
+  dependencies:
+    "@react-dnd/build": "workspace:packages/build"
+    "@testing-library/react": ^11.2.5
+    "@types/node": ^14.14.28
+    "@types/react": ^17.0.2
+    "@types/react-dom": ^17.0.1
+    dnd-core: "workspace:packages/dnd-core"
+    gulp: ^4.0.2
+    react: ^17.0.1
+    react-dnd: "workspace:packages/react-dnd"
+    react-dnd-html5-backend: "workspace:packages/backend-html5"
+    react-dnd-test-backend: "workspace:packages/backend-test"
+    react-dom: ^17.0.1
+  peerDependencies:
+    "@testing-library/react": ">= 11"
+    "@types/node": "*"
+    "@types/react": ">= 16"
+    "@types/react-dom": ">= 16"
+    react: ">= 16.14"
+    react-dnd: ">= 11.1.3"
+    react-dnd-html5-backend: ">= 11.1.3"
+    react-dnd-test-backend: ">= 10.0.0"
+    react-dom: ">= 16.14"
+  peerDependenciesMeta:
+    "@testing-library/react":
+      optional: true
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+    react-dnd-html5-backend:
+      optional: true
+    react-dnd-test-backend:
+      optional: true
+  languageName: node
   linkType: soft
 
 "react-dnd-test-utils@workspace:packages/test-utils":
@@ -19836,19 +19886,16 @@ fsevents@^1.2.7:
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dom: ^17.0.1
   peerDependencies:
-    "@react-dnd/core": ">= 11.1.3"
-    "@react-dnd/decorators": ">= 11.1.3"
     "@testing-library/react": ">= 11"
     "@types/node": "*"
     "@types/react": ">= 16"
     "@types/react-dom": ">= 16"
     react: ">= 16.14"
+    react-dnd: ">= 11.1.3"
     react-dnd-html5-backend: ">= 11.1.3"
     react-dnd-test-backend: ">= 10.0.0"
     react-dom: ">= 16.14"
   peerDependenciesMeta:
-    "@react-dnd/decorators":
-      optional: true
     "@testing-library/react":
       optional: true
     "@types/react":
@@ -19880,6 +19927,7 @@ fsevents@^1.2.7:
     "@react-dnd/build": "workspace:packages/build"
     "@react-dnd/invariant": ^2.0.0
     "@react-dnd/shallowequal": ^2.0.0
+    "@testing-library/react": ^11.2.5
     "@types/hoist-non-react-statics": ^3.3.1
     "@types/node": ^14.14.28
     "@types/react": ^17.0.2
@@ -19887,6 +19935,9 @@ fsevents@^1.2.7:
     gulp: ^4.0.2
     hoist-non-react-statics: ^3.3.2
     react: ^17.0.1
+    react-dnd-test-backend: "portal:../backend-test"
+    react-dnd-test-utils: "portal:../test-utils"
+    react-dom: ^17.0.1
   peerDependencies:
     "@types/hoist-non-react-statics": ">= 3.3.1"
     "@types/node": ">= 12"
