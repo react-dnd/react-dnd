@@ -48,6 +48,12 @@
     "@testing-library/react": {
       "optional": true
     },
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
+      "optional": true
+    },
     "react-dnd-html5-backend": {
       "optional": true
     },

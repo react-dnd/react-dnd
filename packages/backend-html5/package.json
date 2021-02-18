@@ -27,9 +27,6 @@
     "@react-dnd/build": "workspace:packages/build",
     "gulp": "^4.0.2"
   },
-  "peerDependencies": {
-    "react-refresh": "*"
-  },
   "umd": {
     "name": "ReactDnDHTML5Backend",
     "input": "./dist/esm/index.js",

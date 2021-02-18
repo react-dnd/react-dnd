@@ -29,8 +29,7 @@
     "gulp": "^4.0.2"
   },
   "peerDependencies": {
-    "@types/react": ">= 16",
-    "react-refresh": "*"
+    "@types/react": ">= 16"
   },
   "peerDependenciesMeta": {
     "@types/react": {

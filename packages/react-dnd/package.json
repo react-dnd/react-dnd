@@ -35,10 +35,7 @@
     "@types/hoist-non-react-statics": ">= 3.3.1",
     "@types/node": ">= 12",
     "@types/react": ">= 16",
-    "@types/react-dom": ">= 16",
-    "react": ">= 16.14",
-    "react-dom": ">= 16.14",
-    "react-refresh": "*"
+    "react": ">= 16.14"
   },
   "peerDependenciesMeta": {
     "@types/hoist-non-react-statics": {
@@ -48,9 +45,6 @@
       "optional": true
     },
     "@types/react": {
-      "optional": true
-    },
-    "@types/react-dom": {
       "optional": true
     }
   },
