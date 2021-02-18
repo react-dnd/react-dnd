@@ -3271,7 +3271,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^14.14.27":
+"@types/node@npm:*":
   version: 14.14.27
   resolution: "@types/node@npm:14.14.27"
   checksum: efc78cf6e698e09925a2542bbea932dfe092408f4ce39b8f260b71df502221d76c925fd3227bc1f7427edd9cfb6f8c81c68a56b9ab690f08425e7e6e177e61e0
@@ -19851,7 +19851,7 @@ fsevents@^1.2.7:
   dependencies:
     "@react-dnd/build": "workspace:packages/build"
     "@testing-library/react": ^11.2.5
-    "@types/node": ^14.14.27
+    "@types/node": ^14.14.28
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
     dnd-core: "workspace:packages/dnd-core"
