@@ -1,3 +1,4 @@
-export * from '@react-dnd/core'
-export * from '@react-dnd/hooks'
-export * from '@react-dnd/decorators'
+export * from './types'
+export * from './core'
+export * from './decorators'
+export * from './hooks'

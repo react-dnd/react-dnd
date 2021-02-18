@@ -21,14 +21,16 @@
     "bundle": "gulp bundle"
   },
   "dependencies": {
-    "@react-dnd/core": "workspace:packages/react-dnd-core",
-    "@react-dnd/decorators": "workspace:packages/react-dnd-decorators",
-    "@react-dnd/hooks": "workspace:packages/react-dnd-hooks"
+    "@react-dnd/invariant": "^2.0.0",
+    "@react-dnd/shallowequal": "^2.0.0",
+    "dnd-core": "workspace:packages/dnd-core",
+    "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/node": "^14.14.28",
+    "@types/react": "^17.0.2",
     "gulp": "^4.0.2",
     "react": "^17.0.1"
   },
@@ -61,12 +63,7 @@
       "react-dom": "ReactDOM"
     },
     "alias": {
-      "dnd-core": "dnd-core/dist/esm/index",
-      "@react-dnd/core": "@react-dnd/core/dist/esm/index",
-      "@react-dnd/hooks": "@react-dnd/hooks/dist/esm/index",
-      "@react-dnd/decorators": "@react-dnd/decorators/dist/esm/index",
-      "@react-dnd/types": "@react-dnd/types/dist/esm/index",
-      "@react-dnd/internals": "@react-dnd/internals/dist/esm/index"
+      "dnd-core": "dnd-core/dist/esm/index"
     }
   }
 }
