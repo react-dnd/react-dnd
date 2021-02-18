@@ -4,5 +4,6 @@ releases:
 
 declined:
   - "@react-dnd/build"
+  - react-dnd-documentation
   - react-dnd-examples-decorators
   - react-dnd-examples-hooks
