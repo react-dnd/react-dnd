@@ -29,7 +29,8 @@
     "@react-dnd/build": "workspace:packages/build",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/node": "^14.14.28",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "react": "^17.0.1"
   },
   "peerDependencies": {
     "@types/hoist-non-react-statics": ">= 3.3.1",
