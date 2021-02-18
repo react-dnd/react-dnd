@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Identifier } from 'dnd-core'
 import { ITestBackend } from 'react-dnd-test-backend'
-import { DndComponent } from 'react-dnd'
+import { DndComponent } from '@react-dnd/decorators'
 import { act } from 'react-dom/test-utils'
 
 /**

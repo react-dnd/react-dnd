@@ -1,8 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "emitDeclarationOnly": false,
-    "outDir": "./lib/",
+    "outDir": "./lib",
     "baseUrl": "./"
   },
   "include": ["./src/index.ts"]
