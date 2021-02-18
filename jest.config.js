@@ -6,7 +6,6 @@ module.exports = {
 		'!**/__tests__/**',
 		'!packages/build/**',
 		'!packages/docsite/**',
-		'!packages/examples-*/**',
 		'!packages/*test*/**',
 	],
 	testMatch: [
