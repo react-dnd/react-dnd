@@ -1,9 +1,4 @@
-releases:
-  "@react-dnd/core": major
-  "@react-dnd/decorators": major
-  "@react-dnd/hooks": major
-  "@react-dnd/internals": major
-  "@react-dnd/types": major
+releases:  
   dnd-core: major
   react-dnd: major
   react-dnd-documentation: major
