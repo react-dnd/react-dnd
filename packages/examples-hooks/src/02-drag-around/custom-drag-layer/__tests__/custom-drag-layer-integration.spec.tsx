@@ -24,7 +24,7 @@ describe('Drag Around: Custom Drag Layer', () => {
 		expect(first).toHaveStyle({ opacity: 0 })
 		expect(second).toHaveStyle({ opacity: 1 })
 
-		const preview = await rendered.findByRole('Box-Preview')
+		const preview = await rendered.findByRole('BoxPreview')
 		expect(preview).toHaveStyle({ backgroundColor: 'white' })
 
 		act(() => {
