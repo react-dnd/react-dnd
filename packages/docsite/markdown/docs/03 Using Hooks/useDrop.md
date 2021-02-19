@@ -9,7 +9,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # useDrop
 
-A hook to use the current component as a drop target.
+The `useDrop` hook provides a way for you to wire in your component into the DnD system as a _drop target_. By passing in a specification object into the `useDrop` hook, you can specify including what types of data items the drop-target will `accept`, what props to `collect`, and more. This function returns an array containing a ref to attach to the Drop Target node and the collected props.
 
 ```jsx
 import { useDrop } from 'react-dnd'
@@ -29,8 +29,8 @@ function myDropTarget(props) {
 
 #### Return Value Array
 
-- **`Index 0`**: An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
-- **`Index 1`**: A connector function for the drop target. This must be attached to the drop-target portion of the DOM.
+- **`[0] - Collected Props`**: An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
+- **`[1] - DropTarget Ref`**: A connector function for the drop target. This must be attached to the drop-target portion of the DOM.
 
 ### Specification Object Members
 

@@ -18,7 +18,7 @@ export const Pages: { [key: string]: Page } = {
 
 export const APIPages: PageGroup[] = [
 	{
-		title: 'Quick Start',
+		title: 'Topics',
 		pages: {
 			OVERVIEW: {
 				location: '/docs/overview',
@@ -47,20 +47,8 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
-		title: 'Top-Level API',
+		title: 'Common Components',
 		pages: {
-			USE_DRAG: {
-				location: '/docs/api/use-drag',
-				title: 'useDrag',
-			},
-			USE_DROP: {
-				location: '/docs/api/use-drop',
-				title: 'useDrop',
-			},
-			USE_DRAG_LAYER: {
-				location: '/docs/api/use-drag-layer',
-				title: 'useDragLayer',
-			},
 			DND_PROVIDER: {
 				location: '/docs/api/dnd-provider',
 				title: 'DndProvider',
@@ -89,8 +77,37 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
-		title: 'Legacy Decorator API',
+		title: 'Hooks API',
 		pages: {
+			OVERVIEW: {
+				location: '/docs/api/hooks-overview',
+				title: 'Overview',
+			},
+			USE_DRAG: {
+				location: '/docs/api/use-drag',
+				title: 'useDrag',
+			},
+			USE_DROP: {
+				location: '/docs/api/use-drop',
+				title: 'useDrop',
+			},
+			USE_DRAG_LAYER: {
+				location: '/docs/api/use-drag-layer',
+				title: 'useDragLayer',
+			},
+			USE_DRAG_DROP_MANAGER: {
+				location: '/docs/api/use-drag-drop-manager',
+				title: 'useDragDropManager',
+			},
+		},
+	},
+	{
+		title: 'Decorator API',
+		pages: {
+			OVERVIEW: {
+				location: '/docs/api/decorators-overview',
+				title: 'Overview',
+			},
 			DRAG_SOURCE: {
 				location: '/docs/api/drag-source',
 				title: 'DragSource',
