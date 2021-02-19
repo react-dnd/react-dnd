@@ -16,8 +16,8 @@ jobs:
           node-version: 12.x
 
       - run: yarn install
-      - run: yarn build_all
-      - run: yarn build_docsite
+      - run: yarn build:all
+      - run: yarn build:docsite
 
       - name: deploy
         uses: peaceiris/actions-gh-pages@v2.10.1

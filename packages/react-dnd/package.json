@@ -30,25 +30,19 @@
     "@react-dnd/build": "workspace:packages/build",
     "@testing-library/react": "^11.2.5",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/jest": "^26.0.20",
     "@types/node": "^14.14.28",
     "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
     "gulp": "^4.0.2",
     "react": "^17.0.1",
     "react-dnd-test-backend": "portal:../backend-test",
     "react-dnd-test-utils": "portal:../test-utils",
-    "react-dom": "^17.0.1",
-    "react-test-renderer": "^17.0.1"
+    "react-dom": "^17.0.1"
   },
   "peerDependencies": {
     "@types/hoist-non-react-statics": ">= 3.3.1",
     "@types/node": ">= 12",
     "@types/react": ">= 16",
-    "@types/react-dom": ">= 16",
-    "react": ">= 16.14",
-    "react-dom": ">= 16.14",
-    "react-refresh": "*"
+    "react": ">= 16.14"
   },
   "peerDependenciesMeta": {
     "@types/hoist-non-react-statics": {
@@ -58,9 +52,6 @@
       "optional": true
     },
     "@types/react": {
-      "optional": true
-    },
-    "@types/react-dom": {
       "optional": true
     }
   },

@@ -2,10 +2,9 @@ declare const process: any
 import { RefObject } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { DragSource, DragDropMonitor } from 'dnd-core'
-import { DragSourceMonitor } from '../interfaces'
-import { isPlainObject } from '../utils/js_utils'
-import { DragSourceSpec } from './interfaces'
-import { getDecoratedComponent } from './utils'
+import { DragSourceMonitor } from '../types'
+import { isPlainObject, getDecoratedComponent } from './utils'
+import { DragSourceSpec } from './types'
 
 const ALLOWED_SPEC_METHODS = ['canDrag', 'beginDrag', 'isDragging', 'endDrag']
 const REQUIRED_SPEC_METHODS = ['beginDrag']

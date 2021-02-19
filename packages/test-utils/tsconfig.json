@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./lib",
-    "baseUrl": "./src",
-    // This is needed because of hoist-non-react-statics in react-dnd
-    "allowSyntheticDefaultImports": true
+    "baseUrl": "./src"
   },
   "include": ["src/index.ts"]
 }

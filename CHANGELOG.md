@@ -1,749 +1,2487 @@
-# [](https://github.com/react-dnd/react-dnd/compare/v11.1.2...v) (2020-05-27)
-
-## [11.1.2](https://github.com/react-dnd/react-dnd/compare/v11.1.1...v11.1.2) (2020-05-27)
-
-### docs
-
-- update changelog ([64c80cf](https://github.com/react-dnd/react-dnd/commit/64c80cfe3b352b7814941d4baf17febee58ec232))
-
-## [11.1.1](https://github.com/react-dnd/react-dnd/compare/v10.0.2...v11.1.1) (2020-05-26)
-
-### build
-
-- add formatting check to lint stage (#2464) ([9db96b4](https://github.com/react-dnd/react-dnd/commit/9db96b4baf6f56ed51f1eb1e72a6a6992026b265)), closes [#2464](https://github.com/react-dnd/react-dnd/issues/2464)
-- move automerge if-statement to automerge step (#2489) ([68a1879](https://github.com/react-dnd/react-dnd/commit/68a187985a372a1282c34ace93499b1a6355a05e)), closes [#2489](https://github.com/react-dnd/react-dnd/issues/2489)
-- update dependabot if statement (#2490) ([af84889](https://github.com/react-dnd/react-dnd/commit/af8488955dc0a9a3d731c04dc826c913739b3ed5)), closes [#2490](https://github.com/react-dnd/react-dnd/issues/2490)
-- update node support spec to 10.x (#1850) ([0b06951](https://github.com/react-dnd/react-dnd/commit/0b0695136bf86593717f9ec31f91b0182603f642)), closes [#1850](https://github.com/react-dnd/react-dnd/issues/1850)
-
-### fix
-
-- correct issue with example generation due to example structure refactoring (#2480) ([efc251b](https://github.com/react-dnd/react-dnd/commit/efc251b2e6ea403db4d8ff7bcb9a8b37b4e716d4)), closes [#2480](https://github.com/react-dnd/react-dnd/issues/2480)
-- do not cancel touch events if they are non-cancelable (#2190) ([1b4019e](https://github.com/react-dnd/react-dnd/commit/1b4019e612f5f20aadc7113482dfa764c3124f4a)), closes [#2190](https://github.com/react-dnd/react-dnd/issues/2190)
-- remove circular dependencies (#2491) ([52eaace](https://github.com/react-dnd/react-dnd/commit/52eaacebbc523815f5fd2f977b9a26432552c1a2)), closes [#2491](https://github.com/react-dnd/react-dnd/issues/2491)
-- update wrapInTestContext to expose `getManager()` method (#1570) ([4ad004c](https://github.com/react-dnd/react-dnd/commit/4ad004c1a223c0bf3b31a0c1e0a7e5797d8b1291)), closes [#1570](https://github.com/react-dnd/react-dnd/issues/1570)
-
-## [10.0.2](https://github.com/react-dnd/react-dnd/compare/v10.0.1...v10.0.2) (2019-12-07)
-
-### build
-
-- use updated react-dnd/asap (#1685) ([ada6555](https://github.com/react-dnd/react-dnd/commit/ada65550b758a5de44b810a7b68753e7eaee24ac)), closes [#1685](https://github.com/react-dnd/react-dnd/issues/1685)
-
-## [10.0.1](https://github.com/react-dnd/react-dnd/compare/v10.0.0...v10.0.1) (2019-12-07)
-
-### docs
-
-- remove old links to TouchBackend ([6ac18e1](https://github.com/react-dnd/react-dnd/commit/6ac18e14dd1326c8f7a241ad0b376f49e08d8ce2)), closes [#1661](https://github.com/react-dnd/react-dnd/issues/1661)
-
-# [10.0.0](https://github.com/react-dnd/react-dnd/compare/v9.5.1...v10.0.0) (2019-12-07)
-
-### chore
-
-- update changelog ([7edc76e](https://github.com/react-dnd/react-dnd/commit/7edc76e2667f5648851fb1c510a83cd3cf4edc39))
-
-### fix
-
-- patch TouchBackend to solve e.targetTouches bug in iOS 13 (#1631) ([f6286ca](https://github.com/react-dnd/react-dnd/commit/f6286ca3a91e23e89d1e1a3150fa4b3a93ca92e2)), closes [#1631](https://github.com/react-dnd/react-dnd/issues/1631)
-
-## [9.5.1](https://github.com/react-dnd/react-dnd/compare/v9.5.0...v9.5.1) (2019-11-26)
-
-### build
-
-- add test to release script ([c82797d](https://github.com/react-dnd/react-dnd/commit/c82797d73a3060a5d2362d01a115c5ddbc68d333))
-- update bash scripts to emit errors (#1630) ([65f343f](https://github.com/react-dnd/react-dnd/commit/65f343f3c7012089e066f651fe706daa2d5f37eb)), closes [#1630](https://github.com/react-dnd/react-dnd/issues/1630)
-
-### chore
-
-- tsconfig updates' ([dee71e0](https://github.com/react-dnd/react-dnd/commit/dee71e0b0e1fbbe6ccdafa5e68ae6c02e860e11f))
-
-# [9.5.0](https://github.com/react-dnd/react-dnd/compare/v9.4.0...v9.5.0) (2019-11-25)
-
-### build
-
-- add codecov step to ci (#1619) ([9e3bdca](https://github.com/react-dnd/react-dnd/commit/9e3bdca766eea7017df9ea65953a725c1120e4c5)), closes [#1619](https://github.com/react-dnd/react-dnd/issues/1619)
-- parallelize some build tasks (#1606) ([9edc60d](https://github.com/react-dnd/react-dnd/commit/9edc60d7c94df7b52bac5c258bd46a32c6f5aef6)), closes [#1606](https://github.com/react-dnd/react-dnd/issues/1606)
-- remove release_docs script, add release_canary script ([fba55c2](https://github.com/react-dnd/react-dnd/commit/fba55c286d3a9bac7abdb0547246f32a7358df13))
-
-### chore
-
-- remove gh-pages dependency ([ae3f2c0](https://github.com/react-dnd/react-dnd/commit/ae3f2c00d3dca494922701fb249a0ca573772c51))
-- run prettier on source files ([c331998](https://github.com/react-dnd/react-dnd/commit/c331998305c0e0f798b406f6aded7635ee9865e0))
-- update changelog ([080df3f](https://github.com/react-dnd/react-dnd/commit/080df3f3e3b3971b8fef548d13d054e5860f791f))
-
-### docs
-
-- add alex for tonal linting (#1611) ([d45f55f](https://github.com/react-dnd/react-dnd/commit/d45f55f9ead7e606045a07b1258aa9a692a6e76e)), closes [#1611](https://github.com/react-dnd/react-dnd/issues/1611)
-- add build_site script to docsite ([a047bf7](https://github.com/react-dnd/react-dnd/commit/a047bf7503290fbe712300f70243d0b65f85be15))
-- add github action to merge dependabot PRs (#1617) ([2cb2bc9](https://github.com/react-dnd/react-dnd/commit/2cb2bc98a84a90144c7e4205472b660806f42729)), closes [#1617](https://github.com/react-dnd/react-dnd/issues/1617)
-- add spelling verification to the linting process (#1546) ([704245d](https://github.com/react-dnd/react-dnd/commit/704245d47892f9d465b1b4465203f5c8464eb5a7)), closes [#1546](https://github.com/react-dnd/react-dnd/issues/1546)
-
-### feat
-
-- declared packages side effects free (#1577) ([0ad2e58](https://github.com/react-dnd/react-dnd/commit/0ad2e58364e2fa461448c6ce38cb8f73fdb2ceb9)), closes [#1577](https://github.com/react-dnd/react-dnd/issues/1577)
-
-### fix
-
-- filemetadata available on dragstart (#1610) ([1b5c2a3](https://github.com/react-dnd/react-dnd/commit/1b5c2a324ea85f48721738e31556babc4aa80ec0)), closes [#1610](https://github.com/react-dnd/react-dnd/issues/1610)
-
-# [9.4.0](https://github.com/react-dnd/react-dnd/compare/v9.3.9...v9.4.0) (2019-09-20)
-
-### docs
-
-- add a section on using react-app-rewired to override jest configuration ([a2922fe](https://github.com/react-dnd/react-dnd/commit/a2922fe4dbc1a1afb95d03b209c21732f67e32fe))
-
-### fix
-
-- correct linting issues in scripts ([1dbe882](https://github.com/react-dnd/react-dnd/commit/1dbe882702b7d014624694273c5b397548881275))
-- typo (#1531) ([ae7a05b](https://github.com/react-dnd/react-dnd/commit/ae7a05b4216d10b95e7bfab47829332b867f0d23)), closes [#1531](https://github.com/react-dnd/react-dnd/issues/1531)
-
-### refactor
-
-- remove duplicate code in example (#1525) ([d154684](https://github.com/react-dnd/react-dnd/commit/d154684e64ace4430ea5e7abd586b5cb82b2c19d)), closes [#1525](https://github.com/react-dnd/react-dnd/issues/1525)
-
-## [9.3.9](https://github.com/react-dnd/react-dnd/compare/v9.3.8...v9.3.9) (2019-08-06)
-
-### build
-
-- add build sentinels to cjs packgaes ([8f5e933](https://github.com/react-dnd/react-dnd/commit/8f5e9337c6e29f5ad387cacd803e2ca69457a12b))
-- remove prepublishonly script. Move release process to release script ([7efcc49](https://github.com/react-dnd/react-dnd/commit/7efcc49c4a9b4dfc843229318fd1c5226edf4dba))
-
-## [9.3.8](https://github.com/react-dnd/react-dnd/compare/v9.3.7...v9.3.8) (2019-08-06)
-
-### build
-
-- add manual go/no-go script to prepublish ([a3bbee1](https://github.com/react-dnd/react-dnd/commit/a3bbee10d86ef713079b770bfdd7cc5ccd30e3d8))
-- don't use npm-run-all in prepublish script ([4fae3ca](https://github.com/react-dnd/react-dnd/commit/4fae3ca26677dad011537f4a7b7cb892bbf426f9))
-
-## [9.3.7](https://github.com/react-dnd/react-dnd/compare/v9.3.6...v9.3.7) (2019-08-06)
-
-### build
-
-- add publication sentinel to cjs ([7fda488](https://github.com/react-dnd/react-dnd/commit/7fda488e2dfe82403a6397faea980959c46186ca))
-- re-add publish sentinels so that lerna will pick up the changes ([e856b1e](https://github.com/react-dnd/react-dnd/commit/e856b1e45daaab09c6ea5dce20f65b804dfbd806))
-- re-add publish sentinels so that lerna will pick up the changes ([c4e128a](https://github.com/react-dnd/react-dnd/commit/c4e128acdd34f02236b376344303f92e148b0713))
-- remove publish sentinel ([d3e37c7](https://github.com/react-dnd/react-dnd/commit/d3e37c77f67f8e68bda75979695f80af382f75ca))
-- update prepublish script ([352a412](https://github.com/react-dnd/react-dnd/commit/352a4121852928356c5ba6d956c9f8cfe3693094))
-
-## [9.3.6](https://github.com/react-dnd/react-dnd/compare/v9.3.5...v9.3.6) (2019-08-06)
-
-### build
-
-- add release scripts ([17b2ba7](https://github.com/react-dnd/react-dnd/commit/17b2ba79e6d8caf886eee10d07cdb5c3bd9bf388))
-- use correct lerna command in release script ([de5355b](https://github.com/react-dnd/react-dnd/commit/de5355ba6b40ef6e415aa931b2261105660ee66c))
-
-### fix
-
-- update cjs_module creation to include typings field ([8ebdc2c](https://github.com/react-dnd/react-dnd/commit/8ebdc2cc86f5cb6225e2de103c5bb237d8e8c19e))
-
-## [9.3.5](https://github.com/react-dnd/react-dnd/compare/v9.3.4...v9.3.5) (2019-08-06)
-
-### docs
-
-- remove gzip size badges ([1868fcd](https://github.com/react-dnd/react-dnd/commit/1868fcde6f8fb3c2d1b9b88fe6c75565afcc22c0))
-
-### fix
-
-- actually correct the cjs replacements ([0ccf7da](https://github.com/react-dnd/react-dnd/commit/0ccf7dabf33ce4b389553aff8565533bd04d5ec6))
-- add a sentinel change to the cjs package.json files to force a publish of them ([287d23d](https://github.com/react-dnd/react-dnd/commit/287d23d96102e76b438ad9356713da6c92f8cd60))
-- correct execute_cjs_replacements script to execute replacement scripts in .js files as well (#1502) ([dd17b6e](https://github.com/react-dnd/react-dnd/commit/dd17b6e6987e477c81dfb7b031ea1d8da3fe3153)), closes [#1502](https://github.com/react-dnd/react-dnd/issues/1502)
-
-## [9.3.4](https://github.com/react-dnd/react-dnd/compare/v9.3.3...v9.3.4) (2019-08-05)
-
-### build
-
-- add lint rule to prevent for..of loop usage in older browsers (#1498) ([87f032f](https://github.com/react-dnd/react-dnd/commit/87f032f99a937423ac7c32a3e6c6b095b471a0d9)), closes [#1498](https://github.com/react-dnd/react-dnd/issues/1498)
-- cjs package.json updates ([ff8ea26](https://github.com/react-dnd/react-dnd/commit/ff8ea267c4d32495f0edcd83b4b84362cf736321))
-
-### docs
-
-- correct more dustbin examples ([b6cbabe](https://github.com/react-dnd/react-dnd/commit/b6cbabe69148d62ee56d5d6801429bf08d4b117c))
-
-### fix
-
-- correct hooks-based single-target example (#1499) ([6acca1c](https://github.com/react-dnd/react-dnd/commit/6acca1c4968853e9910758399ac22b77e0e54415)), closes [#1499](https://github.com/react-dnd/react-dnd/issues/1499)
-- suppress the useLayoutEffect warning on server side (#1497) ([1953c85](https://github.com/react-dnd/react-dnd/commit/1953c85e15fe6285f8d83cc8e2558aa44c739892)), closes [#1497](https://github.com/react-dnd/react-dnd/issues/1497)
-
-## [9.3.3](https://github.com/react-dnd/react-dnd/compare/v9.3.2...v9.3.3) (2019-07-12)
-
-### build
-
-- add license files ([3aa6aee](https://github.com/react-dnd/react-dnd/commit/3aa6aeebd69da950a8a9aee5b7a47ac5be6c82e0))
-
-### test
-
-- use CI=true when testing packages, prune prepublish tasks ([f52bd8e](https://github.com/react-dnd/react-dnd/commit/f52bd8eef19c35220f750cc45f1937ed1519978b))
-
-## [9.3.2](https://github.com/react-dnd/react-dnd/compare/v9.3.1...v9.3.2) (2019-07-11)
-
-## [9.3.1](https://github.com/react-dnd/react-dnd/compare/v9.2.1...v9.3.1) (2019-07-11)
-
-### fix
-
-- rename interafce DndContext => DndContextType to correct some babel transpile issues (#1459) ([465344e](https://github.com/react-dnd/react-dnd/commit/465344e0d7bf64de9d5639ccbcce8eb722fbb1aa)), closes [#1459](https://github.com/react-dnd/react-dnd/issues/1459)
-
-## [9.2.1](https://github.com/react-dnd/react-dnd/compare/v9.2.0...v9.2.1) (2019-07-11)
-
-### build
-
-- parallelize the build_package task (#1452) ([802f96e](https://github.com/react-dnd/react-dnd/commit/802f96eb4154f708068e20658c1ab44379ea99a1)), closes [#1452](https://github.com/react-dnd/react-dnd/issues/1452)
-
-### fix
-
-- define the XYCoord interface in react-dnd (#1454) ([d02a17c](https://github.com/react-dnd/react-dnd/commit/d02a17ce0d6bb088f780e9fe3d3edd95a41ba926)), closes [#1454](https://github.com/react-dnd/react-dnd/issues/1454)
-
-### test
-
-- use cjs aliases for jest ([4046569](https://github.com/react-dnd/react-dnd/commit/4046569023e982615cb44e0d0058914581c52825))
-
-# [9.2.0](https://github.com/react-dnd/react-dnd/compare/v9.1.0...v9.2.0) (2019-07-10)
-
-### build
-
-- cjs package update (#1449) ([3e3e0ff](https://github.com/react-dnd/react-dnd/commit/3e3e0ffcd13059a4727433454d39c01660dc491f)), closes [#1449](https://github.com/react-dnd/react-dnd/issues/1449)
-
-# [9.1.0](https://github.com/react-dnd/react-dnd/compare/v9.0.2...v9.1.0) (2019-07-10)
-
-### build
-
-- cjs package update ([529a4d9](https://github.com/react-dnd/react-dnd/commit/529a4d9f87dc42271a935d9ad4fe05223b663fda))
-
-### docs
-
-- use -H flag on gatsby develop for us inside WSL ([9d84a4c](https://github.com/react-dnd/react-dnd/commit/9d84a4c89983af9fafc31569143b0b8ff14cb018))
-
-## [9.0.2](https://github.com/react-dnd/react-dnd/compare/v9.0.1...v9.0.2) (2019-07-06)
-
-### build
-
-- update stalebot conf ([cef21a6](https://github.com/react-dnd/react-dnd/commit/cef21a63a039594928c46e5ea7aa92ad020fc78a))
-
-### docs
-
-- add codesandbox link to github issue template ([7ab58db](https://github.com/react-dnd/react-dnd/commit/7ab58db013c27111ddad317b68de80ee4e9ef1c4))
-
-### fix
-
-- get touchBackend working with default options (#1444) ([4aa600f](https://github.com/react-dnd/react-dnd/commit/4aa600f1e610e91f5a9fe65ba7ff46c4615a67aa)), closes [#1444](https://github.com/react-dnd/react-dnd/issues/1444)
-
-## [9.0.1](https://github.com/react-dnd/react-dnd/compare/v9.0.0...v9.0.1) (2019-07-04)
-
-### build
-
-- rebuild cjs package.json files ([763eca8](https://github.com/react-dnd/react-dnd/commit/763eca808c48590a38fba0f439856ae6f1080d5c))
-
-### docs
-
-- expand the touchbackend section, add docs on the `options` flag for DndProvider ([cbc58cf](https://github.com/react-dnd/react-dnd/commit/cbc58cf8371e46323cdab206a97a368cadd6065f))
-- slight wording change about queryargs in examples ([3ddac3d](https://github.com/react-dnd/react-dnd/commit/3ddac3d728e3301c8515ea1177ee711be505caff))
-
-### fix
-
-- #1428 - remove code that detached dragpreviews when dragsources where disconnected (#1441) ([e741f3a](https://github.com/react-dnd/react-dnd/commit/e741f3a2765b5c02fd9b7e43d45f0f06805deb54)), closes [#1428](https://github.com/react-dnd/react-dnd/issues/1428) [#1441](https://github.com/react-dnd/react-dnd/issues/1441)
-
-# [9.0.0](https://github.com/react-dnd/react-dnd/compare/v8.0.3...v9.0.0) (2019-07-03)
-
-### docs
-
-- add the missing drop ref in tutorial (#1415) ([d25a66f](https://github.com/react-dnd/react-dnd/commit/d25a66f74888591123a78f7c31974112c2b59b57)), closes [#1415](https://github.com/react-dnd/react-dnd/issues/1415)
-- Fix end callback arguments of useDrag hook (#1432) ([ce58e73](https://github.com/react-dnd/react-dnd/commit/ce58e73e00a69f5d7e6dff1336e35c0c1d3f4648)), closes [#1432](https://github.com/react-dnd/react-dnd/issues/1432)
-
-### Documentation
-
-- Add Touch Backend Flag (#1438) ([36ae075](https://github.com/react-dnd/react-dnd/commit/36ae07538ee1d11fa710bf21a8a3eecb730e40d5)), closes [#1438](https://github.com/react-dnd/react-dnd/issues/1438)
-
-### fix
-
-- don't handle dragstart event if default is prevented (#1426) ([3a70c80](https://github.com/react-dnd/react-dnd/commit/3a70c801c7f17da1b43d001084ed339fec50ab37)), closes [#1426](https://github.com/react-dnd/react-dnd/issues/1426)
-- stale state in useMonitorOutput (#1430) ([384580c](https://github.com/react-dnd/react-dnd/commit/384580c507c9344319d9a9af1c57f5e30ad7e985)), closes [#1430](https://github.com/react-dnd/react-dnd/issues/1430)
-
-## [8.0.3](https://github.com/react-dnd/react-dnd/compare/v8.0.2...v8.0.3) (2019-06-21)
-
-### build
-
-- move CJS package creation scripts to top-level scripts/ folder ([5e3c52c](https://github.com/react-dnd/react-dnd/commit/5e3c52cec5910080ecd880b13c743c1dbb8aac7e))
-
-### fix
-
-- correct dynamic tsconfig files ([c5cc337](https://github.com/react-dnd/react-dnd/commit/c5cc337fc248e713a0c653a4918e74ebc29a6d70))
-- update DndProvider to use a singleton instance of the DndContext per BackendContext (#1423) ([5628208](https://github.com/react-dnd/react-dnd/commit/562820816c5d6be1c94b27d77f29dfb91bdc2b79)), closes [#1423](https://github.com/react-dnd/react-dnd/issues/1423)
-
-## [8.0.2](https://github.com/react-dnd/react-dnd/compare/v8.0.1...v8.0.2) (2019-06-18)
-
-### build
-
-- add start_docs script ([5e02b54](https://github.com/react-dnd/react-dnd/commit/5e02b54d057adcf2ed485d51738ec0d86c031d48))
-- move dynamic module generation to a preinstall script (#1403) ([283f1b4](https://github.com/react-dnd/react-dnd/commit/283f1b4eb97c4948dde2d5e32ca45b91b1767ab8)), closes [#1403](https://github.com/react-dnd/react-dnd/issues/1403)
-- version bump ([54d0bf6](https://github.com/react-dnd/react-dnd/commit/54d0bf68d4f7dae39021f2c70719d4a9541d9fff))
-
-### docs
-
-- add a comment in the docsroot about esm vs cjs installation ([50f82a4](https://github.com/react-dnd/react-dnd/commit/50f82a49077acb2c19768d76c1e64f4bfda58087))
-
-### fix
-
-- rename the discount_lodash modules in case of special plugins looking for 'lodash' in the module names (#1410) ([ddfb020](https://github.com/react-dnd/react-dnd/commit/ddfb0204676a39c8a57dc56a7263cd8f23e265c7)), closes [#1410](https://github.com/react-dnd/react-dnd/issues/1410)
-
-## [8.0.1](https://github.com/react-dnd/react-dnd/compare/v8.0.0...v8.0.1) (2019-06-18)
-
-### build
-
-- update create_cjs_modules ([46157a5](https://github.com/react-dnd/react-dnd/commit/46157a5cc8a4c37c4677494f73c99e51d6d08c51))
-
-### chore
-
-- add deprecation warning to DragDropContext (#1398) ([ab41381](https://github.com/react-dnd/react-dnd/commit/ab41381d407ad43a5725a189bd37d3f305cd77c0)), closes [#1398](https://github.com/react-dnd/react-dnd/issues/1398)
-- upgrade lerna ([13d2d6a](https://github.com/react-dnd/react-dnd/commit/13d2d6a38beec2829bc1758ecdab6ba7f93a97f7))
-
-### docs
-
-- clean up examples-root ([2dba35a](https://github.com/react-dnd/react-dnd/commit/2dba35a21a78974c21c9fe02ffc019733147850f))
-- clean up root page ([5574568](https://github.com/react-dnd/react-dnd/commit/55745683d768b31ca399b085385a78d75f9e70cb))
-- udate DndContext documentation ([1da4e7f](https://github.com/react-dnd/react-dnd/commit/1da4e7f6d8daaadc5592c1ff6a503e06089ae2c4))
-- use pinned react-dnd versions in examples ([23c4d0e](https://github.com/react-dnd/react-dnd/commit/23c4d0e0b710bf545e9e05bcd9b7b603acb5638d))
-
-# [8.0.0](https://github.com/react-dnd/react-dnd/compare/v7.6.2...v8.0.0) (2019-06-14)
-
-### build
-
-- configure umd-loader to use babel/preset-env on all js modules ([d27b77b](https://github.com/react-dnd/react-dnd/commit/d27b77b8148b51903bf139f631af6eab088ade70))
-
-### docs
-
-- correct drop-target markdown attribute ([8a958b5](https://github.com/react-dnd/react-dnd/commit/8a958b50423b31f55d0d619808aaab4dfe10572d))
-
-## [7.6.2](https://github.com/react-dnd/react-dnd/compare/v7.6.1...v7.6.2) (2019-06-14)
-
-### build
-
-- add dnd-core cjs alias to html5 backend ([5986485](https://github.com/react-dnd/react-dnd/commit/5986485eb84c3020dcd2285894f5fc91458938ff))
-
-## [7.6.1](https://github.com/react-dnd/react-dnd/compare/v7.6.0...v7.6.1) (2019-06-14)
-
-### docs
-
-- fix knight example (#1394) ([fe6f8cc](https://github.com/react-dnd/react-dnd/commit/fe6f8cc948e491b675e2baba880f9ebaf81155c1)), closes [#1394](https://github.com/react-dnd/react-dnd/issues/1394)
-
-# [7.6.0](https://github.com/react-dnd/react-dnd/compare/v7.5.0...v7.6.0) (2019-06-07)
-
-### chore
-
-- replace tslint with eslint (#1380) ([fc44aee](https://github.com/react-dnd/react-dnd/commit/fc44aee46c7d3d7fcc7cd56fd60b83c7c2b61228)), closes [#1380](https://github.com/react-dnd/react-dnd/issues/1380)
-
-### fix
-
-- add memoization to hooks example to improve performance ([497afda](https://github.com/react-dnd/react-dnd/commit/497afdaaee5d17c309c1333e913e187857627df7))
-- documentation fixes ([6630373](https://github.com/react-dnd/react-dnd/commit/6630373e396cae9ac79ec680df4c08701c351b4e))
-- improve performance in the sortable stress test example ([a1584d9](https://github.com/react-dnd/react-dnd/commit/a1584d9e479b3d0374ee7f0a9c4b1cecb425c2fa))
-
-# [7.5.0](https://github.com/react-dnd/react-dnd/compare/v7.4.5...v7.5.0) (2019-06-07)
-
-### build
-
-- add "module" field to package.json (#1319) ([ead0bca](https://github.com/react-dnd/react-dnd/commit/ead0bca30dc8dfebf65e3bb9c1ed02d2352beb2f)), closes [#1319](https://github.com/react-dnd/react-dnd/issues/1319)
-
-### chore
-
-- promote host-non-react-statics to dependency (#1338) ([696faab](https://github.com/react-dnd/react-dnd/commit/696faaba526ebf86fa3e05ccef4faaa776b47898)), closes [#1338](https://github.com/react-dnd/react-dnd/issues/1338) [#1334](https://github.com/react-dnd/react-dnd/issues/1334)
-- remove .editorconfig file (#1358) ([82ac197](https://github.com/react-dnd/react-dnd/commit/82ac1973bf31560909e3330af9713fd82c9c4e26)), closes [#1358](https://github.com/react-dnd/react-dnd/issues/1358)
-- update vscode tslint recommended package (#1335) ([9637955](https://github.com/react-dnd/react-dnd/commit/9637955692e054a24c7ec14d5ce2b1ddfe2f3d44)), closes [#1335](https://github.com/react-dnd/react-dnd/issues/1335)
-
-### feat
-
-- let DragDropContextProvider reuse a manager (#1362) ([884c6ff](https://github.com/react-dnd/react-dnd/commit/884c6ff90f04976a32898f0a11af4db9df2ff899)), closes [#1362](https://github.com/react-dnd/react-dnd/issues/1362)
-
-### fix
-
-- always unsubscribe backend when connector reconnects (#1355) ([aeeb7c4](https://github.com/react-dnd/react-dnd/commit/aeeb7c4ee933bf936f364c20d6d1c7215a2cb8de)), closes [#1355](https://github.com/react-dnd/react-dnd/issues/1355)
-- correct build issues, cancel-on-drop-outside example (#1373) ([31ac4c5](https://github.com/react-dnd/react-dnd/commit/31ac4c52e105ac7ed0a771655bb4cb320323e3d2)), closes [#1373](https://github.com/react-dnd/react-dnd/issues/1373)
-- correct drag source reconnection (#1375) ([32a69c6](https://github.com/react-dnd/react-dnd/commit/32a69c66d7800af5bfa29a8995df92781c021f48)), closes [#1375](https://github.com/react-dnd/react-dnd/issues/1375)
-- correct useDrag, useDrop specRef instance ([617c225](https://github.com/react-dnd/react-dnd/commit/617c2255e2cb0dd573cc95019e32a5443e241cd8))
-- declare module on dnd-core (#1366) ([8b3e132](https://github.com/react-dnd/react-dnd/commit/8b3e132cfbb875511127c80a79a4f6ec1305975c)), closes [#1366](https://github.com/react-dnd/react-dnd/issues/1366)
-- fix draggable box issue in hooks ([bc9b81f](https://github.com/react-dnd/react-dnd/commit/bc9b81f9967af35a21ea98cb3226c63beef200af))
-- prevent crash in determineDropResult (react-dnd#1281) (#1367) ([5c8af9a](https://github.com/react-dnd/react-dnd/commit/5c8af9aa7c9d664648f4cb19476ee7ca3b85904f)), closes [react-dnd#1281](https://github.com/react-dnd/issues/1281) [#1367](https://github.com/react-dnd/react-dnd/issues/1367) [#31](https://github.com/react-dnd/react-dnd/issues/31) [#1281](https://github.com/react-dnd/react-dnd/issues/1281)
-- update the isRef check to only check for the existence of a 'current' property (#1359) ([80e44fa](https://github.com/react-dnd/react-dnd/commit/80e44fa4ba602a79b5613d3f1491eae976dd1f7a)), closes [#1359](https://github.com/react-dnd/react-dnd/issues/1359)
-
-## [7.4.5](https://github.com/react-dnd/react-dnd/compare/v7.4.4...v7.4.5) (2019-04-03)
-
-### chore
-
-- rebuild yarn.lock ([4d39ad2](https://github.com/react-dnd/react-dnd/commit/4d39ad2a3ffb9ec39390a6fd7b60be802dbc915c))
-- remove lodash from react-dnd (#1317) ([dc636b9](https://github.com/react-dnd/react-dnd/commit/dc636b9e0937272d0b125f595c4d22ffaf3e00ec)), closes [#1317](https://github.com/react-dnd/react-dnd/issues/1317)
-
-## [7.4.4](https://github.com/react-dnd/react-dnd/compare/v7.4.3...v7.4.4) (2019-04-02)
-
-### build
-
-- remove nohoist settings (#1296) ([a9f340b](https://github.com/react-dnd/react-dnd/commit/a9f340bfb1d72824c5b277c7b546934dc91e9119)), closes [#1296](https://github.com/react-dnd/react-dnd/issues/1296)
-
-### docs
-
-- add missing deps to examples for codepen ([64672a5](https://github.com/react-dnd/react-dnd/commit/64672a5a07c6a92b1ef18f104da58de5b754309e))
-- add some more headings to the section on adding drag-and-drop interaction ([1b83846](https://github.com/react-dnd/react-dnd/commit/1b838469356bc7a0af2a711a9f6a1d9c310a46c9))
-- fix gutters, add toc to example (#1304) ([6ed66bf](https://github.com/react-dnd/react-dnd/commit/6ed66bf12a82877a3f37cb1286d64e9abab4fc53)), closes [#1304](https://github.com/react-dnd/react-dnd/issues/1304)
-- fromat ts examples ([f94a642](https://github.com/react-dnd/react-dnd/commit/f94a642580489e93dbdc6923fea30aae78f567ba))
-- move the chessboard example so that we can model each step of the tutorial as different example envs ([c028840](https://github.com/react-dnd/react-dnd/commit/c0288407e952ec23338cfe1d67c58472bd649058))
-- remove example cross-referencing ([ec096a5](https://github.com/react-dnd/react-dnd/commit/ec096a5a8ab9769db1056fb2f657b56f1ef8fc37))
-- remove gatsby-plugin-styled-components from config ([429caf5](https://github.com/react-dnd/react-dnd/commit/429caf54dd100f785e29e65efc4eb40b97f08fc9))
-- remove outdated comment ([d2133ea](https://github.com/react-dnd/react-dnd/commit/d2133ea8effcc3035d60db56616bce696a9191d3))
-- revert styled-components removal, but don't use typings ([c85d9d7](https://github.com/react-dnd/react-dnd/commit/c85d9d7f0fed1c309d18a2b6513422e65bef459e))
-- spelling fix ([95fc213](https://github.com/react-dnd/react-dnd/commit/95fc213a7a54ddece763b25ded4865fcb73a9910))
-- update clean target ([ba4ec05](https://github.com/react-dnd/react-dnd/commit/ba4ec05e9fe97b18b1fcec43f522a69384b69252))
-- use codesandbox for typescript examples ([6356a2f](https://github.com/react-dnd/react-dnd/commit/6356a2f5e6169b8f5d0734f2a7af3cd9e30603db))
-- use codesandbox links for javascript example source ([c58d331](https://github.com/react-dnd/react-dnd/commit/c58d3313db7ac6351fca8faab198d8d74c6dd02c))
-- use embedded codesandbox examples ([4af62bf](https://github.com/react-dnd/react-dnd/commit/4af62bf652ab3c0efcb950bfecbf1292d0d5b90e))
-- wording streamline ([107b009](https://github.com/react-dnd/react-dnd/commit/107b009747e98e2febadf251f1f25fc8643f9edd))
-- write cra apps for ts examples ([3dc7539](https://github.com/react-dnd/react-dnd/commit/3dc75393a6090a99dca39a4eb42c90ff97533f31))
-
-### fix
-
-- add endsWith polyfill (#1312) ([69dbcce](https://github.com/react-dnd/react-dnd/commit/69dbccea7ae27dfa1866d27a657a4deb709ae1d9)), closes [#1312](https://github.com/react-dnd/react-dnd/issues/1312)
-- apply effect fix to hooks version of dragpreview ([fdf3cf3](https://github.com/react-dnd/react-dnd/commit/fdf3cf3e6668fc21030b43e50a686d7946fa3168))
-- corret the dragpreview example by adding an effect dependency ([a608c5e](https://github.com/react-dnd/react-dnd/commit/a608c5eb113317fdcbb2308a14814a01cd4dd32b))
-- documentation ([9752600](https://github.com/react-dnd/react-dnd/commit/9752600e1f2ba2506a8b4eac4a0265ba8d21a7c9))
-
-## [7.4.3](https://github.com/react-dnd/react-dnd/compare/v7.4.2...v7.4.3) (2019-03-26)
-
-### docs
-
-- remove example highlighting FCs, since they are now normative ([74296f6](https://github.com/react-dnd/react-dnd/commit/74296f6c91e2162729d11e7130e0d580a9940cda))
-
-### fix
-
-- add typings to the card imperative handle ([8d601b8](https://github.com/react-dnd/react-dnd/commit/8d601b82da74fcd8d8c1a7fc1e0ef664b6cf3f83))
-- tiny cleanup ([9992e3b](https://github.com/react-dnd/react-dnd/commit/9992e3b7d29c2a2150db9f016d175c06eaabe976))
-- unwrap the decorator ref when using forwarded refs ([6440c54](https://github.com/react-dnd/react-dnd/commit/6440c548a72f4076d4c9de4b9e91d14fdf99caf4))
-
-## [7.4.2](https://github.com/react-dnd/react-dnd/compare/v7.4.1...v7.4.2) (2019-03-26)
-
-### docs
-
-- remove useDragPreview, eliminated argument ([eece551](https://github.com/react-dnd/react-dnd/commit/eece551e078a5329c6727a3012f96b9cf08ad153))
-
-### refactor
-
-- remove recompose dependency ([978384e](https://github.com/react-dnd/react-dnd/commit/978384e8f25ffa72245a6ec55cd13938eb7bdce8))
-
-## [7.4.1](https://github.com/react-dnd/react-dnd/compare/v7.4.0...v7.4.1) (2019-03-26)
-
-### fix
-
-- ssr fixes ([d781184](https://github.com/react-dnd/react-dnd/commit/d7811843c212eea9ac78cc806bcff6da29200cd0))
-
-# [7.4.0](https://github.com/react-dnd/react-dnd/compare/v7.3.2...v7.4.0) (2019-03-26)
-
-### build
-
-- fixed the order as lerna was not building in proper order (#1289) ([6876ef9](https://github.com/react-dnd/react-dnd/commit/6876ef9cf9ea54b1ad9f5d1c9d43aba9074f6246)), closes [#1289](https://github.com/react-dnd/react-dnd/issues/1289)
-
-### docs
-
-- document the props arg to the collector fns ([9840c38](https://github.com/react-dnd/react-dnd/commit/9840c3812a01935db9ebaa55df99de682c7634db))
-- fixed markdown in droptarget top level api (#1288) ([874f33a](https://github.com/react-dnd/react-dnd/commit/874f33a17d7d73fac381725c005792d0c54d4ed7)), closes [#1288](https://github.com/react-dnd/react-dnd/issues/1288)
-- reference the react-dnd-test-utils package in the testing doc ([ffd92e5](https://github.com/react-dnd/react-dnd/commit/ffd92e58dabd847fd318d48591860aedd5c416f4))
-
-### feat
-
-- add the target component props to the collector funtion signature ([2a7a237](https://github.com/react-dnd/react-dnd/commit/2a7a23703c75371c79a02801c1867f7df8c75767))
-
-### fix
-
-- remove cyclic dependency ([dcbda3c](https://github.com/react-dnd/react-dnd/commit/dcbda3cf29052f598bfd68a1dd2d8e0dfdde6e36))
-- remove the useEffect invocation from DragDropContextProvider (#1277) ([cff33ab](https://github.com/react-dnd/react-dnd/commit/cff33ab0650bb9885b3e2a8629a0df32c702a12b)), closes [#1277](https://github.com/react-dnd/react-dnd/issues/1277)
-- throw error when a DragSource or DropTarget is rendered outside DragDropContext (#1132) (#1286) ([7fb94a5](https://github.com/react-dnd/react-dnd/commit/7fb94a57d05f4e9af85f9db726500f300073870d)), closes [#1132](https://github.com/react-dnd/react-dnd/issues/1132) [#1286](https://github.com/react-dnd/react-dnd/issues/1286)
-
-### revert
-
-- use recompose for the isClassComponent check ([e6e7cb5](https://github.com/react-dnd/react-dnd/commit/e6e7cb550e9485b9e466d79cc5dcb9f47619e766))
-
-### test
-
-- add test-utils package, add test for connector functions ([5682439](https://github.com/react-dnd/react-dnd/commit/56824398dd06ca834980180c6c1825de5c9723b3))
-- added unit tests for react-dnd-html5-backend (#1283) ([27e4a06](https://github.com/react-dnd/react-dnd/commit/27e4a06dd0922e625362183a59bba49b59778d62)), closes [#1283](https://github.com/react-dnd/react-dnd/issues/1283)
-- fix tests ([34b87b1](https://github.com/react-dnd/react-dnd/commit/34b87b18708b2dc49974a5dbfbfc3ec8e09c66f2))
-- work on tests ([576d148](https://github.com/react-dnd/react-dnd/commit/576d148fc8e43094e623bd2e3c2ee9b131a61ca8))
-
-## [7.3.2](https://github.com/react-dnd/react-dnd/compare/v7.3.1...v7.3.2) (2019-03-13)
-
-### docs
-
-- correct some issues with the hooks docs ([155555c](https://github.com/react-dnd/react-dnd/commit/155555c462cc6a5c9dafa244ba7d42beaa536f0e))
-- improve useDrag/useDrop documentation ([0e3a406](https://github.com/react-dnd/react-dnd/commit/0e3a406642a3dd46cd903b6d9be4daf2cf2da687))
-- improve usedraglayer, usedragpreview docs ([dc8927e](https://github.com/react-dnd/react-dnd/commit/dc8927e4aa3dec39772417a91b6d6b306dcb676a))
-
-## [7.3.1](https://github.com/react-dnd/react-dnd/compare/v7.3.0...v7.3.1) (2019-03-10)
-
-### docs
-
-- add link to examples-hooks package ([78cef8f](https://github.com/react-dnd/react-dnd/commit/78cef8f87cdc28afe4c03accfa58deac51dba8a4))
-- improve examples root page ([2eaafb0](https://github.com/react-dnd/react-dnd/commit/2eaafb01272ade05451350c2d2dc411779a1c061))
-
-# [7.3.0](https://github.com/react-dnd/react-dnd/compare/v7.2.1...v7.3.0) (2019-03-08)
-
-### fix
-
-- update the hooks to pass the right monitor impl to specs (#1259) ([b146a1a](https://github.com/react-dnd/react-dnd/commit/b146a1a32bc9fd4f6ca47b65ab35ac8d1790a8a6)), closes [#1259](https://github.com/react-dnd/react-dnd/issues/1259)
-
-## [7.2.1](https://github.com/react-dnd/react-dnd/compare/v7.2.0...v7.2.1) (2019-03-08)
-
-### docs
-
-- add a link to the example index in the docs sidebar (#1253) ([646a26c](https://github.com/react-dnd/react-dnd/commit/646a26c02bb205ed09a14fc3feb769a070092cac)), closes [#1253](https://github.com/react-dnd/react-dnd/issues/1253)
-- correct spelling issue ([aa4605c](https://github.com/react-dnd/react-dnd/commit/aa4605c856effe2edf4b5f827c4590168eb65b76))
-
-# [7.2.0](https://github.com/react-dnd/react-dnd/compare/v7.1.0...v7.2.0) (2019-03-07)
-
-### docs
-
-- add note about hook APIs being experimental ([7dd475c](https://github.com/react-dnd/react-dnd/commit/7dd475cb7ef3c83c79fa33cd8b78f8f9bd831296))
-
-### fix
-
-- update testbackend to use identifiers ([5a4005b](https://github.com/react-dnd/react-dnd/commit/5a4005b5db592e07aad6dc57eb417d019fdd6d6a))
-- use ES5 for CJS builds (#1250) ([983f9da](https://github.com/react-dnd/react-dnd/commit/983f9dac7c90954f95c8ca5994412422f4da5cac)), closes [#1250](https://github.com/react-dnd/react-dnd/issues/1250)
-
-### refactor
-
-- use identifiers types in react-dnd utils ([ed2fc9d](https://github.com/react-dnd/react-dnd/commit/ed2fc9d375c85cf20d3ef83b4aec224f26a56e42))
-
-# [7.1.0](https://github.com/react-dnd/react-dnd/compare/v7.0.2...v7.1.0) (2019-03-06)
-
-### fix
-
-- doc url (#1214) ([b1cd7d1](https://github.com/react-dnd/react-dnd/commit/b1cd7d1bc41bddfa85c8db637071aaa1b17e7c0f)), closes [#1214](https://github.com/react-dnd/react-dnd/issues/1214)
-- fix #1146 ensure children mount first (#1220) ([0feb250](https://github.com/react-dnd/react-dnd/commit/0feb250b7ee90483e31f3bc159ebf946980d53a7)), closes [#1146](https://github.com/react-dnd/react-dnd/issues/1146) [#1220](https://github.com/react-dnd/react-dnd/issues/1220)
-- resolve issue with native dnd (#1240) ([f25f61e](https://github.com/react-dnd/react-dnd/commit/f25f61e6b4c4bee5f4192d4f8cee02ffe26702bb)), closes [#1240](https://github.com/react-dnd/react-dnd/issues/1240)
-
-## [7.0.2](https://github.com/react-dnd/react-dnd/compare/v7.0.1...v7.0.2) (2018-12-03)
-
-### docs
-
-- fixed documentation to make it more clear ([e8fef74](https://github.com/react-dnd/react-dnd/commit/e8fef74b5ac6b5af8a76590107e9f88947172421))
-- fixed typos ([36adaf0](https://github.com/react-dnd/react-dnd/commit/36adaf00fa667dcb6e5d3ff14143e0f321591a2f))
-- updated documentation for touch backend ([c6467b0](https://github.com/react-dnd/react-dnd/commit/c6467b00d7f7456a4f205715837946704a07713b))
-
-### fix
-
-- added MIT license to inner packages (#1197) ([e925162](https://github.com/react-dnd/react-dnd/commit/e9251623b94e412076e39d0632d85f128b484bb1)), closes [#1197](https://github.com/react-dnd/react-dnd/issues/1197)
-- BSD -> MIT for react-dnd-parent package (#1198) ([785a371](https://github.com/react-dnd/react-dnd/commit/785a3716795dae2be2d610520b63cfece8f31e46)), closes [#1198](https://github.com/react-dnd/react-dnd/issues/1198)
-
-## [7.0.1](https://github.com/react-dnd/react-dnd/compare/v7.0.0...v7.0.1) (2018-11-30)
-
-### fix
-
-- use typeof check for window existence to correct SSR (#1193) ([ba37b02](https://github.com/react-dnd/react-dnd/commit/ba37b02f667a8e1e42b3a322b6eada849d51f36a)), closes [#1193](https://github.com/react-dnd/react-dnd/issues/1193)
-
-# [7.0.0](https://github.com/react-dnd/react-dnd/compare/v6.0.0...v7.0.0) (2018-11-27)
-
-### build
-
-- upgrade npm-run-all for security (#1186) ([c025cd7](https://github.com/react-dnd/react-dnd/commit/c025cd7e1d5505492c6a59ea5a41a3b541655b9e)), closes [#1186](https://github.com/react-dnd/react-dnd/issues/1186)
-
-### chore
-
-- add stalebot config ([6f451ee](https://github.com/react-dnd/react-dnd/commit/6f451ee49e3d9e97459f627880ea21cbbfedd25a))
-
-### ci
-
-- upgrade har-vlidator to fix CI corrupt (#1184) ([478f5b5](https://github.com/react-dnd/react-dnd/commit/478f5b504f7272d4480775a207feb6b64ceade06)), closes [#1184](https://github.com/react-dnd/react-dnd/issues/1184)
-
-### docs
-
-- fix examples page URL (#1181) (#1183) ([6430c45](https://github.com/react-dnd/react-dnd/commit/6430c4591a0c7ae492f00d7e439f447e9e6e3fb4)), closes [#1181](https://github.com/react-dnd/react-dnd/issues/1181) [#1183](https://github.com/react-dnd/react-dnd/issues/1183) [#1181](https://github.com/react-dnd/react-dnd/issues/1181)
-- fix link in root page (#1189) ([ffda6c7](https://github.com/react-dnd/react-dnd/commit/ffda6c7cc3f284cac42af452867911febae7d2a8)), closes [#1189](https://github.com/react-dnd/react-dnd/issues/1189)
-
-### fix
-
-- clientOffset and initialClientOffset are null in canDrag #1175 (#1176) ([8718ae5](https://github.com/react-dnd/react-dnd/commit/8718ae5adabe51f160187749953a1cee5ffe3b6b)), closes [#1175](https://github.com/react-dnd/react-dnd/issues/1175) [#1176](https://github.com/react-dnd/react-dnd/issues/1176)
-- make DecoratedComponent as static property (#1177) (#1185) ([95d90b3](https://github.com/react-dnd/react-dnd/commit/95d90b3079ac64ff6676dd512224c20413aac253)), closes [#1177](https://github.com/react-dnd/react-dnd/issues/1177) [#1185](https://github.com/react-dnd/react-dnd/issues/1185)
-- remove initClientOffset action - merge it into initCoords (#1191) ([6b58b8b](https://github.com/react-dnd/react-dnd/commit/6b58b8b2b242259b1655e215ba90f3a6040abb06)), closes [#1191](https://github.com/react-dnd/react-dnd/issues/1191)
-
-# [6.0.0](https://github.com/react-dnd/react-dnd/compare/v5.0.1...v6.0.0) (2018-11-09)
-
-### docs
-
-- check for pathprefix when selecting sidebar content ([48a1bf2](https://github.com/react-dnd/react-dnd/commit/48a1bf21addb7b726f8da0b22c7ffc515c811f99))
-- correct underline in draglayer markdown ([28cb1f9](https://github.com/react-dnd/react-dnd/commit/28cb1f9f198c7999d061f60cf4c959b8e01dff97))
-- fix another link address ([848ab8d](https://github.com/react-dnd/react-dnd/commit/848ab8d941d67bf8ca841d847bfeb0d23e0c4141))
-- link fixes ([59086d4](https://github.com/react-dnd/react-dnd/commit/59086d4e0b3add16461771ce5f3ac940251a0032))
-- update gatsby, remove static queries ([32a7a57](https://github.com/react-dnd/react-dnd/commit/32a7a57487f2a63bb567b536ab95ec511dfaa0e7))
-- update react-helmet config to include favicon ([3e0f0af](https://github.com/react-dnd/react-dnd/commit/3e0f0af79c7ae8ddf730434e04b02bb3ed4249dd))
-- update sidebar link coloring, selection bolding ([4449a26](https://github.com/react-dnd/react-dnd/commit/4449a2650997ccaf38a7609defbf96e140e1816f))
-- update site meta ([13a2499](https://github.com/react-dnd/react-dnd/commit/13a24995a96dd4aa632ec3d6fd16081fc0c11e6f))
-- updates for static site building ([2504a37](https://github.com/react-dnd/react-dnd/commit/2504a377e8df46548b01e48503a85e6b0d9b8785))
-
-### fix
-
-- revert #1120 due to breaking change with File example ([d13e9c1](https://github.com/react-dnd/react-dnd/commit/d13e9c1f203ba6b6feb6bf4b966c423e5ccaa0f6)), closes [#1120](https://github.com/react-dnd/react-dnd/issues/1120)
-
-### refactor
-
-- replace .bind calls with class binds ([a403c42](https://github.com/react-dnd/react-dnd/commit/a403c42f8ed1e02c97633dc5116789fbfb9f49a3))
-
-### WIP
-
-- Split Documentation examples between Markdown and Code (#1158) ([00b6a66](https://github.com/react-dnd/react-dnd/commit/00b6a66e09c377e50c8890174dedb80963a39147)), closes [#1158](https://github.com/react-dnd/react-dnd/issues/1158)
-
-## [5.0.1](https://github.com/react-dnd/react-dnd/compare/v5.0.0...v5.0.1) (2018-06-19)
-
-# [5.0.0](https://github.com/react-dnd/react-dnd/compare/v4.0.6...v5.0.0) (2018-06-19)
-
-## [4.0.6](https://github.com/react-dnd/react-dnd/compare/v4.0.5...v4.0.6) (2018-06-18)
-
-## [4.0.5](https://github.com/react-dnd/react-dnd/compare/v4.0.4...v4.0.5) (2018-06-13)
-
-## [4.0.4](https://github.com/react-dnd/react-dnd/compare/v4.0.2...v4.0.4) (2018-06-06)
-
-## [4.0.2](https://github.com/react-dnd/react-dnd/compare/v4.0.1...v4.0.2) (2018-06-02)
-
-## [4.0.1](https://github.com/react-dnd/react-dnd/compare/v4.0.0...v4.0.1) (2018-06-01)
-
-# [4.0.0](https://github.com/react-dnd/react-dnd/compare/v3.0.2...v4.0.0) (2018-06-01)
-
-## [3.0.2](https://github.com/react-dnd/react-dnd/compare/v3.0.1...v3.0.2) (2018-05-29)
-
-## [3.0.1](https://github.com/react-dnd/react-dnd/compare/v3.0.0...v3.0.1) (2018-05-29)
-
-# [3.0.0](https://github.com/react-dnd/react-dnd/compare/v2.6.0...v3.0.0) (2018-05-02)
-
-# [2.6.0](https://github.com/react-dnd/react-dnd/compare/v2.5.4...v2.6.0) (2018-03-21)
-
-## [2.5.4](https://github.com/react-dnd/react-dnd/compare/v2.5.3...v2.5.4) (2017-10-07)
-
-## [2.5.3](https://github.com/react-dnd/react-dnd/compare/v2.5.2...v2.5.3) (2017-09-27)
-
-## [2.5.2](https://github.com/react-dnd/react-dnd/compare/v2.5.0...v2.5.2) (2017-09-27)
-
-# [2.4.0](https://github.com/react-dnd/react-dnd/compare/v2.1.4...v2.4.0) (2017-05-09)
-
-### fix
-
-- delete duplicate content (#711) ([64ccf46](https://github.com/react-dnd/react-dnd/commit/64ccf465757230c3fab15c9e940769ffdf80794b)), closes [#711](https://github.com/react-dnd/react-dnd/issues/711)
-
-## [2.1.4](https://github.com/react-dnd/react-dnd/compare/v2.1.3...v2.1.4) (2016-04-02)
-
-## [2.1.3](https://github.com/react-dnd/react-dnd/compare/v2.1.2...v2.1.3) (2016-03-13)
-
-## [2.1.2](https://github.com/react-dnd/react-dnd/compare/v2.1.1...v2.1.2) (2016-02-19)
-
-## [2.1.1](https://github.com/react-dnd/react-dnd/compare/v2.1.0...v2.1.1) (2016-02-17)
-
-# [2.1.0](https://github.com/react-dnd/react-dnd/compare/v1.1.8...v2.1.0) (2016-02-14)
-
-## [1.1.8](https://github.com/react-dnd/react-dnd/compare/v1.1.7...v1.1.8) (2015-09-17)
-
-## [1.1.7](https://github.com/react-dnd/react-dnd/compare/v1.1.6...v1.1.7) (2015-09-15)
-
-## [1.1.6](https://github.com/react-dnd/react-dnd/compare/v1.1.5...v1.1.6) (2015-09-15)
-
-## [1.1.5](https://github.com/react-dnd/react-dnd/compare/v1.1.4...v1.1.5) (2015-08-22)
-
-## [1.1.4](https://github.com/react-dnd/react-dnd/compare/v1.1.3...v1.1.4) (2015-07-13)
-
-## [1.1.3](https://github.com/react-dnd/react-dnd/compare/v1.1.2...v1.1.3) (2015-06-13)
-
-## [1.1.2](https://github.com/react-dnd/react-dnd/compare/v1.1.1...v1.1.2) (2015-06-04)
-
-## [1.1.1](https://github.com/react-dnd/react-dnd/compare/v1.1.0...v1.1.1) (2015-05-27)
-
-# [1.1.0](https://github.com/react-dnd/react-dnd/compare/v1.0.0...v1.1.0) (2015-05-26)
-
-# [1.0.0](https://github.com/react-dnd/react-dnd/compare/v1.0.0-rc...v1.0.0) (2015-05-19)
-
-# [1.0.0-alpha.1](https://github.com/react-dnd/react-dnd/compare/v1.0.0-alpha...v1.0.0-alpha.1) (2015-04-30)
-
-## [0.9.8](https://github.com/react-dnd/react-dnd/compare/v0.9.7...v0.9.8) (2015-03-16)
-
-## [0.9.7](https://github.com/react-dnd/react-dnd/compare/v0.9.6...v0.9.7) (2015-03-15)
-
-# [1.0.0-rc](https://github.com/react-dnd/react-dnd/compare/v1.0.0-beta.0...v1.0.0-rc) (2015-05-11)
-
-# [1.0.0-beta.0](https://github.com/react-dnd/react-dnd/compare/v1.0.0-alpha.2...v1.0.0-beta.0) (2015-05-08)
-
-# [1.0.0-alpha.2](https://github.com/react-dnd/react-dnd/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2015-05-04)
-
-# [1.0.0-alpha](https://github.com/react-dnd/react-dnd/compare/v0.9.8...v1.0.0-alpha) (2015-04-20)
-
-# [1.0.0-alpha.1](https://github.com/react-dnd/react-dnd/compare/v1.0.0-alpha...v1.0.0-alpha.1) (2015-04-30)
-
-## [0.9.8](https://github.com/react-dnd/react-dnd/compare/v0.9.7...v0.9.8) (2015-03-16)
-
-## [0.9.7](https://github.com/react-dnd/react-dnd/compare/v0.9.6...v0.9.7) (2015-03-15)
-
-# [1.0.0-alpha](https://github.com/react-dnd/react-dnd/compare/v0.9.8...v1.0.0-alpha) (2015-04-20)
-
-## [0.9.8](https://github.com/react-dnd/react-dnd/compare/v0.9.7...v0.9.8) (2015-03-16)
-
-## [0.9.7](https://github.com/react-dnd/react-dnd/compare/v0.9.6...v0.9.7) (2015-03-15)
-
-## [0.9.6](https://github.com/react-dnd/react-dnd/compare/v0.9.5...v0.9.6) (2015-03-11)
-
-## [0.9.5](https://github.com/react-dnd/react-dnd/compare/v0.9.4...v0.9.5) (2015-03-11)
-
-## [0.9.4](https://github.com/react-dnd/react-dnd/compare/v0.9.3...v0.9.4) (2015-03-10)
-
-## [0.9.3](https://github.com/react-dnd/react-dnd/compare/v0.9.2...v0.9.3) (2015-03-02)
-
-## [0.9.2](https://github.com/react-dnd/react-dnd/compare/v0.9.1...v0.9.2) (2015-03-01)
-
-## [0.9.1](https://github.com/react-dnd/react-dnd/compare/v0.9.0...v0.9.1) (2015-02-27)
-
-# [0.9.0](https://github.com/react-dnd/react-dnd/compare/v0.8.2...v0.9.0) (2015-02-26)
-
-## [0.8.2](https://github.com/react-dnd/react-dnd/compare/v0.8.1...v0.8.2) (2015-02-25)
-
-## [0.8.1](https://github.com/react-dnd/react-dnd/compare/v0.8.0...v0.8.1) (2015-02-18)
-
-# [0.8.0](https://github.com/react-dnd/react-dnd/compare/v0.7.0...v0.8.0) (2015-02-17)
-
-# [0.7.0](https://github.com/react-dnd/react-dnd/compare/v0.6.4...v0.7.0) (2015-02-11)
-
-### fixes
-
-- #38 ([2404d35](https://github.com/react-dnd/react-dnd/commit/2404d35c77a8cb0ac92294182030a79302110692)), closes [#38](https://github.com/react-dnd/react-dnd/issues/38)
-
-## [0.6.4](https://github.com/react-dnd/react-dnd/compare/v0.6.3...v0.6.4) (2015-02-10)
-
-## [0.6.3](https://github.com/react-dnd/react-dnd/compare/v0.6.2...v0.6.3) (2015-01-27)
-
-## [0.6.2](https://github.com/react-dnd/react-dnd/compare/v0.6.1...v0.6.2) (2014-12-08)
-
-## [0.6.1](https://github.com/react-dnd/react-dnd/compare/v0.6.0...v0.6.1) (2014-11-20)
-
-# [0.6.0](https://github.com/react-dnd/react-dnd/compare/v0.5.1...v0.6.0) (2014-11-11)
-
-## [0.5.1](https://github.com/react-dnd/react-dnd/compare/v0.5.0...v0.5.1) (2014-11-11)
-
-# [0.5.0](https://github.com/react-dnd/react-dnd/compare/v0.4.2...v0.5.0) (2014-11-04)
-
-## [0.4.2](https://github.com/react-dnd/react-dnd/compare/v0.4.1...v0.4.2) (2014-11-04)
-
-## [0.4.1](https://github.com/react-dnd/react-dnd/compare/v0.4.0...v0.4.1) (2014-11-03)
-
-# [0.4.0](https://github.com/react-dnd/react-dnd/compare/v0.3.2...v0.4.0) (2014-10-31)
-
-## [0.3.2](https://github.com/react-dnd/react-dnd/compare/v0.3.1...v0.3.2) (2014-10-30)
-
-## [0.3.1](https://github.com/react-dnd/react-dnd/compare/v0.3.0...v0.3.1) (2014-10-28)
-
-# [0.3.0](https://github.com/react-dnd/react-dnd/compare/v0.2.1...v0.3.0) (2014-10-27)
-
-## [0.2.1](https://github.com/react-dnd/react-dnd/compare/v0.2.0...v0.2.1) (2014-10-27)
-
-# [0.2.0](https://github.com/react-dnd/react-dnd/compare/v0.1.8...v0.2.0) (2014-10-24)
-
-## [0.1.8](https://github.com/react-dnd/react-dnd/compare/v0.1.7...v0.1.8) (2014-10-22)
-
-## [0.1.7](https://github.com/react-dnd/react-dnd/compare/v0.1.6...v0.1.7) (2014-10-21)
-
-## [0.1.6](https://github.com/react-dnd/react-dnd/compare/v0.1.5...v0.1.6) (2014-10-20)
-
-## [0.1.5](https://github.com/react-dnd/react-dnd/compare/v0.1.4...v0.1.5) (2014-10-20)
-
-## [0.1.4](https://github.com/react-dnd/react-dnd/compare/v0.1.3...v0.1.4) (2014-10-20)
-
-## [0.1.3](https://github.com/react-dnd/react-dnd/compare/v0.1.2...v0.1.3) (2014-10-20)
-
-## [0.1.2](https://github.com/react-dnd/react-dnd/compare/v0.1.1...v0.1.2) (2014-10-20)
-
-## [0.1.1](https://github.com/react-dnd/react-dnd/compare/v0.1.0...v0.1.1) (2014-10-19)
-
-# 0.1.0 (2014-10-19)
+## (2021-02-19)
+
+- build: fix docsite build (#2766) ([5ff9fbf](https://github.com/react-dnd/react-dnd/commit/5ff9fbf)), closes [#2766](https://github.com/react-dnd/react-dnd/issues/2766)
+- build: fix main branch switch (#2608) ([3ab1d9d](https://github.com/react-dnd/react-dnd/commit/3ab1d9d)), closes [#2608](https://github.com/react-dnd/react-dnd/issues/2608)
+- build: nvm ([e104673](https://github.com/react-dnd/react-dnd/commit/e104673))
+- build: switch default branch to main ([64c4060](https://github.com/react-dnd/react-dnd/commit/64c4060))
+- build(deps-dev): bump @babel/cli from 7.10.0 to 7.10.1 ([4f16bfc](https://github.com/react-dnd/react-dnd/commit/4f16bfc))
+- build(deps-dev): bump @babel/cli from 7.8.4 to 7.10.0 ([e239dc0](https://github.com/react-dnd/react-dnd/commit/e239dc0))
+- build(deps-dev): bump @babel/core from 7.10.0 to 7.10.1 ([4489bda](https://github.com/react-dnd/react-dnd/commit/4489bda))
+- build(deps-dev): bump @babel/core from 7.10.1 to 7.10.2 ([dcafae9](https://github.com/react-dnd/react-dnd/commit/dcafae9))
+- build(deps-dev): bump @babel/core from 7.9.6 to 7.10.0 ([02ced25](https://github.com/react-dnd/react-dnd/commit/02ced25))
+- build(deps-dev): bump @babel/plugin-proposal-class-properties ([3a486d6](https://github.com/react-dnd/react-dnd/commit/3a486d6))
+- build(deps-dev): bump @babel/plugin-proposal-object-rest-spread ([05777c3](https://github.com/react-dnd/react-dnd/commit/05777c3))
+- build(deps-dev): bump @babel/plugin-proposal-object-rest-spread from 7.10.0 to 7.10.1 ([2ab32b5](https://github.com/react-dnd/react-dnd/commit/2ab32b5))
+- build(deps-dev): bump @babel/preset-env from 7.10.0 to 7.10.1 ([bd40091](https://github.com/react-dnd/react-dnd/commit/bd40091))
+- build(deps-dev): bump @babel/preset-env from 7.10.1 to 7.10.2 ([d1a9118](https://github.com/react-dnd/react-dnd/commit/d1a9118))
+- build(deps-dev): bump @babel/preset-env from 7.9.6 to 7.10.0 ([d82be21](https://github.com/react-dnd/react-dnd/commit/d82be21))
+- build(deps-dev): bump @rollup/plugin-commonjs from 12.0.0 to 13.0.0 ([e42dfc1](https://github.com/react-dnd/react-dnd/commit/e42dfc1))
+- build(deps-dev): bump @rollup/plugin-node-resolve from 8.0.0 to 8.0.1 ([f35a681](https://github.com/react-dnd/react-dnd/commit/f35a681))
+- build(deps-dev): bump @rollup/plugin-replace from 2.3.2 to 2.3.3 ([5e0e229](https://github.com/react-dnd/react-dnd/commit/5e0e229))
+- build(deps-dev): bump @types/jest from 25.2.3 to 26.0.0 ([ad5d320](https://github.com/react-dnd/react-dnd/commit/ad5d320))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([9e35cf4](https://github.com/react-dnd/react-dnd/commit/9e35cf4))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([2f48bc8](https://github.com/react-dnd/react-dnd/commit/2f48bc8))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([d03b611](https://github.com/react-dnd/react-dnd/commit/d03b611))
+- build(deps-dev): bump @typescript-eslint/parser from 3.0.1 to 3.0.2 ([5fdafb9](https://github.com/react-dnd/react-dnd/commit/5fdafb9))
+- build(deps-dev): bump @typescript-eslint/parser from 3.0.2 to 3.1.0 ([d534aea](https://github.com/react-dnd/react-dnd/commit/d534aea))
+- build(deps-dev): bump @typescript-eslint/parser from 3.1.0 to 3.2.0 ([35de0a3](https://github.com/react-dnd/react-dnd/commit/35de0a3))
+- build(deps-dev): bump eslint from 7.1.0 to 7.2.0 ([270fc8c](https://github.com/react-dnd/react-dnd/commit/270fc8c))
+- build(deps-dev): bump eslint-plugin-prettier from 3.1.3 to 3.1.4 ([ca7fd04](https://github.com/react-dnd/react-dnd/commit/ca7fd04))
+- build(deps-dev): bump eslint-plugin-react-hooks from 4.0.2 to 4.0.4 ([b165118](https://github.com/react-dnd/react-dnd/commit/b165118))
+- build(deps-dev): bump inquirer from 7.1.0 to 7.2.0 ([6221fa0](https://github.com/react-dnd/react-dnd/commit/6221fa0))
+- build(deps-dev): bump lerna from 3.22.0 to 3.22.1 ([d0b41a1](https://github.com/react-dnd/react-dnd/commit/d0b41a1))
+- build(deps-dev): bump lint-staged from 10.2.6 to 10.2.7 ([62deef5](https://github.com/react-dnd/react-dnd/commit/62deef5))
+- build(deps-dev): bump lint-staged from 10.2.7 to 10.2.8 ([5588119](https://github.com/react-dnd/react-dnd/commit/5588119))
+- build(deps-dev): bump lint-staged from 10.2.8 to 10.2.9 ([26921f2](https://github.com/react-dnd/react-dnd/commit/26921f2))
+- build(deps-dev): bump lint-staged from 10.2.9 to 10.2.10 ([4f34b4d](https://github.com/react-dnd/react-dnd/commit/4f34b4d))
+- build(deps-dev): bump replace-in-file from 6.0.0 to 6.1.0 ([04ad5d0](https://github.com/react-dnd/react-dnd/commit/04ad5d0))
+- build(deps-dev): bump rollup from 2.10.9 to 2.11.2 ([dc3b903](https://github.com/react-dnd/react-dnd/commit/dc3b903))
+- build(deps-dev): bump rollup from 2.11.2 to 2.12.0 ([7a237b2](https://github.com/react-dnd/react-dnd/commit/7a237b2))
+- build(deps-dev): bump rollup from 2.12.0 to 2.12.1 ([1d2956c](https://github.com/react-dnd/react-dnd/commit/1d2956c))
+- build(deps-dev): bump rollup from 2.12.1 to 2.13.1 ([1aec55f](https://github.com/react-dnd/react-dnd/commit/1aec55f))
+- build(deps-dev): bump rollup from 2.13.1 to 2.15.0 ([88333d9](https://github.com/react-dnd/react-dnd/commit/88333d9))
+- build(deps-dev): bump rollup from 2.15.0 to 2.16.1 ([2962619](https://github.com/react-dnd/react-dnd/commit/2962619))
+- build(deps-dev): bump ts-jest from 26.0.0 to 26.1.0 ([be32f1d](https://github.com/react-dnd/react-dnd/commit/be32f1d))
+- build(deps-dev): bump typescript from 3.9.3 to 3.9.5 ([839f594](https://github.com/react-dnd/react-dnd/commit/839f594))
+- build(deps): [security] bump graphql-playground-html from 1.6.19 to 1.6.25 ([c2584cb](https://github.com/react-dnd/react-dnd/commit/c2584cb))
+- build(deps): [security] bump websocket-extensions from 0.1.3 to 0.1.4 ([009b9e0](https://github.com/react-dnd/react-dnd/commit/009b9e0))
+- build(deps): bump @types/lodash from 4.14.152 to 4.14.153 ([222722d](https://github.com/react-dnd/react-dnd/commit/222722d))
+- build(deps): bump @types/lodash from 4.14.153 to 4.14.154 ([d36a69d](https://github.com/react-dnd/react-dnd/commit/d36a69d))
+- build(deps): bump @types/lodash from 4.14.154 to 4.14.155 ([94091cb](https://github.com/react-dnd/react-dnd/commit/94091cb))
+- build(deps): bump @types/react from 16.9.35 to 16.9.36 ([e7c52d9](https://github.com/react-dnd/react-dnd/commit/e7c52d9))
+- build(deps): bump gatsby from 2.22.10 to 2.22.11 ([f19e644](https://github.com/react-dnd/react-dnd/commit/f19e644))
+- build(deps): bump gatsby from 2.22.11 to 2.22.12 ([c253db9](https://github.com/react-dnd/react-dnd/commit/c253db9))
+- build(deps): bump gatsby from 2.22.12 to 2.22.15 ([adb7ac1](https://github.com/react-dnd/react-dnd/commit/adb7ac1))
+- build(deps): bump gatsby from 2.22.15 to 2.22.17 ([ba69e27](https://github.com/react-dnd/react-dnd/commit/ba69e27))
+- build(deps): bump gatsby from 2.22.17 to 2.23.0 ([a34f37d](https://github.com/react-dnd/react-dnd/commit/a34f37d))
+- build(deps): bump gatsby from 2.23.0 to 2.23.1 ([728267c](https://github.com/react-dnd/react-dnd/commit/728267c))
+- build(deps): bump gatsby from 2.23.1 to 2.23.2 ([84d9837](https://github.com/react-dnd/react-dnd/commit/84d9837))
+- build(deps): bump gatsby from 2.23.1 to 2.23.3 ([3ba8b29](https://github.com/react-dnd/react-dnd/commit/3ba8b29))
+- build(deps): bump gatsby-image from 2.4.5 to 2.4.6 ([ebb0151](https://github.com/react-dnd/react-dnd/commit/ebb0151))
+- build(deps): bump gatsby-image from 2.4.6 to 2.4.7 ([3323a08](https://github.com/react-dnd/react-dnd/commit/3323a08))
+- build(deps): bump gatsby-plugin-manifest from 2.4.10 to 2.4.11 ([892f3b1](https://github.com/react-dnd/react-dnd/commit/892f3b1))
+- build(deps): bump gatsby-plugin-manifest from 2.4.9 to 2.4.10 ([d2e53a5](https://github.com/react-dnd/react-dnd/commit/d2e53a5))
+- build(deps): bump gatsby-plugin-offline from 3.2.7 to 3.2.8 ([0356581](https://github.com/react-dnd/react-dnd/commit/0356581))
+- build(deps): bump gatsby-plugin-offline from 3.2.8 to 3.2.9 ([5c6ac1c](https://github.com/react-dnd/react-dnd/commit/5c6ac1c))
+- build(deps): bump gatsby-plugin-react-helmet from 3.3.2 to 3.3.3 ([a000867](https://github.com/react-dnd/react-dnd/commit/a000867))
+- build(deps): bump gatsby-plugin-react-helmet from 3.3.3 to 3.3.4 ([39ffe03](https://github.com/react-dnd/react-dnd/commit/39ffe03))
+- build(deps): bump gatsby-plugin-sharp from 2.6.10 to 2.6.11 ([66507d2](https://github.com/react-dnd/react-dnd/commit/66507d2))
+- build(deps): bump gatsby-plugin-sharp from 2.6.9 to 2.6.10 ([5d5b1c5](https://github.com/react-dnd/react-dnd/commit/5d5b1c5))
+- build(deps): bump gatsby-plugin-styled-components from 3.3.2 to 3.3.3 ([0b5fdbb](https://github.com/react-dnd/react-dnd/commit/0b5fdbb))
+- build(deps): bump gatsby-plugin-styled-components from 3.3.3 to 3.3.4 ([b0b2762](https://github.com/react-dnd/react-dnd/commit/b0b2762))
+- build(deps): bump gatsby-plugin-typescript from 2.4.3 to 2.4.4 ([42ef0c7](https://github.com/react-dnd/react-dnd/commit/42ef0c7))
+- build(deps): bump gatsby-plugin-typography from 2.5.2 to 2.5.3 ([8a4acdb](https://github.com/react-dnd/react-dnd/commit/8a4acdb))
+- build(deps): bump gatsby-plugin-typography from 2.5.3 to 2.5.4 ([f77447e](https://github.com/react-dnd/react-dnd/commit/f77447e))
+- build(deps): bump gatsby-remark-autolink-headers from 2.3.3 to 2.3.4 ([4952c25](https://github.com/react-dnd/react-dnd/commit/4952c25))
+- build(deps): bump gatsby-remark-autolink-headers from 2.3.4 to 2.3.5 ([1c23c59](https://github.com/react-dnd/react-dnd/commit/1c23c59))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.3.3 to 2.3.4 ([23f298a](https://github.com/react-dnd/react-dnd/commit/23f298a))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.3.4 to 2.3.5 ([ea18056](https://github.com/react-dnd/react-dnd/commit/ea18056))
+- build(deps): bump gatsby-remark-embed-snippet from 4.3.2 to 4.3.3 ([756ee64](https://github.com/react-dnd/react-dnd/commit/756ee64))
+- build(deps): bump gatsby-remark-embed-snippet from 4.3.3 to 4.3.4 ([c5dcec6](https://github.com/react-dnd/react-dnd/commit/c5dcec6))
+- build(deps): bump gatsby-remark-embed-snippet from 4.3.3 to 4.3.5 ([f253804](https://github.com/react-dnd/react-dnd/commit/f253804))
+- build(deps): bump gatsby-remark-images from 3.3.8 to 3.3.9 ([866f5a1](https://github.com/react-dnd/react-dnd/commit/866f5a1))
+- build(deps): bump gatsby-remark-images from 3.3.9 to 3.3.10 ([f6b8976](https://github.com/react-dnd/react-dnd/commit/f6b8976))
+- build(deps): bump gatsby-remark-prismjs from 3.5.2 to 3.5.3 ([241fdd3](https://github.com/react-dnd/react-dnd/commit/241fdd3))
+- build(deps): bump gatsby-remark-prismjs from 3.5.3 to 3.5.4 ([f8a4f69](https://github.com/react-dnd/react-dnd/commit/f8a4f69))
+- build(deps): bump gatsby-source-filesystem from 2.3.10 to 2.3.11 ([c426114](https://github.com/react-dnd/react-dnd/commit/c426114))
+- build(deps): bump gatsby-source-filesystem from 2.3.8 to 2.3.10 ([72f2335](https://github.com/react-dnd/react-dnd/commit/72f2335))
+- build(deps): bump gatsby-transformer-remark from 2.8.13 to 2.8.14 ([0d27a6e](https://github.com/react-dnd/react-dnd/commit/0d27a6e))
+- build(deps): bump gatsby-transformer-remark from 2.8.14 to 2.8.15 ([030286b](https://github.com/react-dnd/react-dnd/commit/030286b))
+- build(deps): bump gatsby-transformer-sharp from 2.5.3 to 2.5.4 ([f652325](https://github.com/react-dnd/react-dnd/commit/f652325))
+- build(deps): bump gatsby-transformer-sharp from 2.5.4 to 2.5.5 ([8c86c46](https://github.com/react-dnd/react-dnd/commit/8c86c46))
+- build(deps): bump immutability-helper from 3.0.2 to 3.1.1 ([e6551b5](https://github.com/react-dnd/react-dnd/commit/e6551b5))
+- build(deps): bump query-string from 6.12.1 to 6.13.0 ([d2638a4](https://github.com/react-dnd/react-dnd/commit/d2638a4))
+- build(deps): bump query-string from 6.13.0 to 6.13.1 ([1956be1](https://github.com/react-dnd/react-dnd/commit/1956be1))
+- build(deps): bump react-helmet from 6.0.0 to 6.1.0 ([53f5d34](https://github.com/react-dnd/react-dnd/commit/53f5d34))
+- build(deps): bump rehype-react from 5.0.1 to 6.0.0 ([81eba64](https://github.com/react-dnd/react-dnd/commit/81eba64))
+- ci: remove redundant build script ([2216548](https://github.com/react-dnd/react-dnd/commit/2216548))
+- chore: cut major semver due to re-layout ([0df6f91](https://github.com/react-dnd/react-dnd/commit/0df6f91))
+- chore: cut semver ([6958693](https://github.com/react-dnd/react-dnd/commit/6958693))
+- chore: update semver document ([7fdfa35](https://github.com/react-dnd/react-dnd/commit/7fdfa35))
+- refactor: break out react-dnd's internal package structure ([4ef0d84](https://github.com/react-dnd/react-dnd/commit/4ef0d84))
+- refactor: roll pkgs back into react-dnd using a flattened folder structure ([bfc61a9](https://github.com/react-dnd/react-dnd/commit/bfc61a9))
+- refactor: update DragDropManager construction; fix tests/linting ([dd23483](https://github.com/react-dnd/react-dnd/commit/dd23483))
+- fix: accept props can not update (#2732) (#2936) ([2ad4337](https://github.com/react-dnd/react-dnd/commit/2ad4337)), closes [#2732](https://github.com/react-dnd/react-dnd/issues/2732) [#2936](https://github.com/react-dnd/react-dnd/issues/2936)
+- fix: jest tests ([5ca9a80](https://github.com/react-dnd/react-dnd/commit/5ca9a80))
+- fix: remove extraneous deps ([bfc5d33](https://github.com/react-dnd/react-dnd/commit/bfc5d33))
+- fix: tsconfig updates ([ceb9af7](https://github.com/react-dnd/react-dnd/commit/ceb9af7))
+- fix: update npmignore files (#2524) ([929f123](https://github.com/react-dnd/react-dnd/commit/929f123)), closes [#2524](https://github.com/react-dnd/react-dnd/issues/2524)
+- add html handling in native types (#2949) ([cd4f4f1](https://github.com/react-dnd/react-dnd/commit/cd4f4f1)), closes [#2949](https://github.com/react-dnd/react-dnd/issues/2949)
+- Add initial tests to drag-around examples (#3032) ([2ba22bf](https://github.com/react-dnd/react-dnd/commit/2ba22bf)), closes [#3032](https://github.com/react-dnd/react-dnd/issues/3032)
+- Build Stabilization, Dep Upgrades (#3018) ([4337d5c](https://github.com/react-dnd/react-dnd/commit/4337d5c)), closes [#3018](https://github.com/react-dnd/react-dnd/issues/3018)
+- Build/yarn 2 3 (#2765) ([55d8bc9](https://github.com/react-dnd/react-dnd/commit/55d8bc9)), closes [#2765](https://github.com/react-dnd/react-dnd/issues/2765)
+- define a maximum number of characters per line for better readability (#2760) ([7857c62](https://github.com/react-dnd/react-dnd/commit/7857c62)), closes [#2760](https://github.com/react-dnd/react-dnd/issues/2760)
+- Don't swallow drop events (#2852) ([d5380ce](https://github.com/react-dnd/react-dnd/commit/d5380ce)), closes [#2852](https://github.com/react-dnd/react-dnd/issues/2852)
+- Extend #2848 (#2859) ([2755dc9](https://github.com/react-dnd/react-dnd/commit/2755dc9)), closes [#2848](https://github.com/react-dnd/react-dnd/issues/2848) [#2859](https://github.com/react-dnd/react-dnd/issues/2859)
+- Fix babelEsmConfig path (#2990) ([d3fd9cb](https://github.com/react-dnd/react-dnd/commit/d3fd9cb)), closes [#2990](https://github.com/react-dnd/react-dnd/issues/2990)
+- Fix inaccurate position with custom drag layers (#2818) ([9934fe5](https://github.com/react-dnd/react-dnd/commit/9934fe5)), closes [#2818](https://github.com/react-dnd/react-dnd/issues/2818)
+- Fix link of callback ref (#2906) ([cab86e2](https://github.com/react-dnd/react-dnd/commit/cab86e2)), closes [#2906](https://github.com/react-dnd/react-dnd/issues/2906)
+- Fix touch backend bug in \_getDropTargetId (#2507) ([7ec5c37](https://github.com/react-dnd/react-dnd/commit/7ec5c37)), closes [#2507](https://github.com/react-dnd/react-dnd/issues/2507)
+- Fix typo (#2869) ([4841b27](https://github.com/react-dnd/react-dnd/commit/4841b27)), closes [#2869](https://github.com/react-dnd/react-dnd/issues/2869)
+- Fix typo in Naive example (#3002) ([cc032b0](https://github.com/react-dnd/react-dnd/commit/cc032b0)), closes [#3002](https://github.com/react-dnd/react-dnd/issues/3002)
+- Fix wrapInTestContext type signature (#2637) ([debc898](https://github.com/react-dnd/react-dnd/commit/debc898)), closes [#2637](https://github.com/react-dnd/react-dnd/issues/2637)
+- Flatten the Monorepo Structure (#2790) ([75c981c](https://github.com/react-dnd/react-dnd/commit/75c981c)), closes [#2790](https://github.com/react-dnd/react-dnd/issues/2790)
+- Improve build tooling (#2775) ([d6fc37a](https://github.com/react-dnd/react-dnd/commit/d6fc37a)), closes [#2775](https://github.com/react-dnd/react-dnd/issues/2775)
+- Include Examples Packages in Test Coverage (#3037) ([120a6bf](https://github.com/react-dnd/react-dnd/commit/120a6bf)), closes [#3037](https://github.com/react-dnd/react-dnd/issues/3037)
+- Migrate Chess Example Tests from PR (#3025) ([7a89d46](https://github.com/react-dnd/react-dnd/commit/7a89d46)), closes [#3025](https://github.com/react-dnd/react-dnd/issues/3025)
+- Migrate tests to testing-library (#3027) ([75b37f9](https://github.com/react-dnd/react-dnd/commit/75b37f9)), closes [#3027](https://github.com/react-dnd/react-dnd/issues/3027)
+- Pre-Release Updates (#3019) ([d12b62d](https://github.com/react-dnd/react-dnd/commit/d12b62d)), closes [#3019](https://github.com/react-dnd/react-dnd/issues/3019)
+- Replace ts-jest with babel-jest; upgrade libraries (#2861) ([ed963cd](https://github.com/react-dnd/react-dnd/commit/ed963cd)), closes [#2861](https://github.com/react-dnd/react-dnd/issues/2861)
+- Replace Yarn with pnpm (#2748) ([046def8](https://github.com/react-dnd/react-dnd/commit/046def8)), closes [#2748](https://github.com/react-dnd/react-dnd/issues/2748)
+- Small wording change for Tutorial.md (#2809) ([2fdd08a](https://github.com/react-dnd/react-dnd/commit/2fdd08a)), closes [#2809](https://github.com/react-dnd/react-dnd/issues/2809)
+- Testing docs (#2665) ([abd3132](https://github.com/react-dnd/react-dnd/commit/abd3132)), closes [#2665](https://github.com/react-dnd/react-dnd/issues/2665)
+- Typo in initial knight's chess position (#2960) ([1a035c4](https://github.com/react-dnd/react-dnd/commit/1a035c4)), closes [#2960](https://github.com/react-dnd/react-dnd/issues/2960)
+- Update Docsite Build Path in GitHub Pages Deployment (#2791) ([c94105d](https://github.com/react-dnd/react-dnd/commit/c94105d)), closes [#2791](https://github.com/react-dnd/react-dnd/issues/2791)
+- Update Tutorial.md (#2740) ([d641504](https://github.com/react-dnd/react-dnd/commit/d641504)), closes [#2740](https://github.com/react-dnd/react-dnd/issues/2740)
+- v11.1.2 (#2508) ([45992df](https://github.com/react-dnd/react-dnd/commit/45992df)), closes [#2508](https://github.com/react-dnd/react-dnd/issues/2508)
+- v11.1.3 (#2525) ([21a45f9](https://github.com/react-dnd/react-dnd/commit/21a45f9)), closes [#2525](https://github.com/react-dnd/react-dnd/issues/2525)
+- docs: add contributing document, initial FAQ (#2860) ([734d171](https://github.com/react-dnd/react-dnd/commit/734d171)), closes [#2860](https://github.com/react-dnd/react-dnd/issues/2860)
+
+## <small>11.1.1 (2020-05-26)</small>
+
+- Add a profile() function to Backend interface (#2476) ([512bf2b](https://github.com/react-dnd/react-dnd/commit/512bf2b)), closes [#2476](https://github.com/react-dnd/react-dnd/issues/2476)
+- Dependency Updates & Build Fixes (#2399) ([72127b1](https://github.com/react-dnd/react-dnd/commit/72127b1)), closes [#2399](https://github.com/react-dnd/react-dnd/issues/2399)
+- Fix grammatical typo in DndProvider doc page (#2217) ([84d89a5](https://github.com/react-dnd/react-dnd/commit/84d89a5)), closes [#2217](https://github.com/react-dnd/react-dnd/issues/2217)
+- Fix import in TouchBackend documentation (#1729) ([6e79650](https://github.com/react-dnd/react-dnd/commit/6e79650)), closes [#1729](https://github.com/react-dnd/react-dnd/issues/1729)
+- Fix memory leak in drag preview, un-subscriber not called (#2423) ([2ad2747](https://github.com/react-dnd/react-dnd/commit/2ad2747)), closes [#2423](https://github.com/react-dnd/react-dnd/issues/2423)
+- Fix name mismatch in DndProvider example (#1947) ([048b07f](https://github.com/react-dnd/react-dnd/commit/048b07f)), closes [#1947](https://github.com/react-dnd/react-dnd/issues/1947) [/github.com/react-dnd/react-dnd/pull/1683/files#diff-5ce06c996535249b437e40d20021c66aR16](https://github.com//github.com/react-dnd/react-dnd/pull/1683/files/issues/diff-5ce06c996535249b437e40d20021c66aR16)
+- Fix Node 8 Build (#1831) ([4392d78](https://github.com/react-dnd/react-dnd/commit/4392d78)), closes [#1831](https://github.com/react-dnd/react-dnd/issues/1831)
+- fix tab indents and remove redundant comma (#2387) ([ab42c4d](https://github.com/react-dnd/react-dnd/commit/ab42c4d)), closes [#2387](https://github.com/react-dnd/react-dnd/issues/2387)
+- Fix typo on tutorial (#2224) ([f1ecb8c](https://github.com/react-dnd/react-dnd/commit/f1ecb8c)), closes [#2224](https://github.com/react-dnd/react-dnd/issues/2224)
+- Fixes cancel not reverting to original index (#1693) ([3456675](https://github.com/react-dnd/react-dnd/commit/3456675)), closes [#1693](https://github.com/react-dnd/react-dnd/issues/1693)
+- make handleTopDragStart public for extension (#2280) ([d83f250](https://github.com/react-dnd/react-dnd/commit/d83f250)), closes [#2280](https://github.com/react-dnd/react-dnd/issues/2280)
+- Move Dependabot workflow to CI (#1849) ([a291334](https://github.com/react-dnd/react-dnd/commit/a291334)), closes [#1849](https://github.com/react-dnd/react-dnd/issues/1849)
+- Release Prep Cleanup (#2478) ([4e57a34](https://github.com/react-dnd/react-dnd/commit/4e57a34)), closes [#2478](https://github.com/react-dnd/react-dnd/issues/2478)
+- Release/v11 1 0 (#2492) ([8ae8813](https://github.com/react-dnd/react-dnd/commit/8ae8813)), closes [#2492](https://github.com/react-dnd/react-dnd/issues/2492)
+- TouchBackend - impossible to drop item (#2499) ([4c0e847](https://github.com/react-dnd/react-dnd/commit/4c0e847)), closes [#2499](https://github.com/react-dnd/react-dnd/issues/2499)
+- Update actions-gh-pages (#1871) ([2410a38](https://github.com/react-dnd/react-dnd/commit/2410a38)), closes [#1871](https://github.com/react-dnd/react-dnd/issues/1871)
+- Update node-ci.yml ([2466f12](https://github.com/react-dnd/react-dnd/commit/2466f12))
+- Update node-ci.yml ([aeb85c8](https://github.com/react-dnd/react-dnd/commit/aeb85c8))
+- Update node-ci.yml ([43413b8](https://github.com/react-dnd/react-dnd/commit/43413b8))
+- Update Regression Examples in Documentation (#2477) ([5c4a0e5](https://github.com/react-dnd/react-dnd/commit/5c4a0e5)), closes [#2477](https://github.com/react-dnd/react-dnd/issues/2477)
+- Update test-utils peerDependencies (#1576) ([2059c83](https://github.com/react-dnd/react-dnd/commit/2059c83)), closes [#1576](https://github.com/react-dnd/react-dnd/issues/1576)
+- Update utils.tsx (#2486) ([33ccb77](https://github.com/react-dnd/react-dnd/commit/33ccb77)), closes [#2486](https://github.com/react-dnd/react-dnd/issues/2486)
+- Update utils.tsx (#2488) ([c452af2](https://github.com/react-dnd/react-dnd/commit/c452af2)), closes [#2488](https://github.com/react-dnd/react-dnd/issues/2488)
+- v11.0.0 Release (#2481) ([e6f588a](https://github.com/react-dnd/react-dnd/commit/e6f588a)), closes [#2481](https://github.com/react-dnd/react-dnd/issues/2481)
+- v11.1.1 ([e036601](https://github.com/react-dnd/react-dnd/commit/e036601))
+- Wrong type in end function (#1983) ([b80b683](https://github.com/react-dnd/react-dnd/commit/b80b683)), closes [#1983](https://github.com/react-dnd/react-dnd/issues/1983)
+- build: add formatting check to lint stage (#2464) ([9db96b4](https://github.com/react-dnd/react-dnd/commit/9db96b4)), closes [#2464](https://github.com/react-dnd/react-dnd/issues/2464)
+- build: move automerge if-statement to automerge step (#2489) ([68a1879](https://github.com/react-dnd/react-dnd/commit/68a1879)), closes [#2489](https://github.com/react-dnd/react-dnd/issues/2489)
+- build: update dependabot if statement (#2490) ([af84889](https://github.com/react-dnd/react-dnd/commit/af84889)), closes [#2490](https://github.com/react-dnd/react-dnd/issues/2490)
+- build: update node support spec to 10.x (#1850) ([0b06951](https://github.com/react-dnd/react-dnd/commit/0b06951)), closes [#1850](https://github.com/react-dnd/react-dnd/issues/1850)
+- build(deps-dev): bump @babel/cli from 7.7.5 to 7.7.7 ([05c0f12](https://github.com/react-dnd/react-dnd/commit/05c0f12))
+- build(deps-dev): bump @babel/cli from 7.7.7 to 7.8.0 ([dd46f57](https://github.com/react-dnd/react-dnd/commit/dd46f57))
+- build(deps-dev): bump @babel/cli from 7.8.0 to 7.8.3 ([ae98025](https://github.com/react-dnd/react-dnd/commit/ae98025))
+- build(deps-dev): bump @babel/cli from 7.8.3 to 7.8.4 ([dfeb25b](https://github.com/react-dnd/react-dnd/commit/dfeb25b))
+- build(deps-dev): bump @babel/core from 7.7.5 to 7.7.7 ([2fcbc02](https://github.com/react-dnd/react-dnd/commit/2fcbc02))
+- build(deps-dev): bump @babel/core from 7.7.7 to 7.8.0 ([a89f7ab](https://github.com/react-dnd/react-dnd/commit/a89f7ab))
+- build(deps-dev): bump @babel/core from 7.8.0 to 7.8.3 ([d675d25](https://github.com/react-dnd/react-dnd/commit/d675d25))
+- build(deps-dev): bump @babel/core from 7.8.3 to 7.8.4 ([3dc78a5](https://github.com/react-dnd/react-dnd/commit/3dc78a5))
+- build(deps-dev): bump @babel/core from 7.8.4 to 7.8.6 ([0d51e4f](https://github.com/react-dnd/react-dnd/commit/0d51e4f))
+- build(deps-dev): bump @babel/core from 7.8.6 to 7.8.7 ([74668bc](https://github.com/react-dnd/react-dnd/commit/74668bc))
+- build(deps-dev): bump @babel/core from 7.8.7 to 7.9.0 ([4613ea5](https://github.com/react-dnd/react-dnd/commit/4613ea5))
+- build(deps-dev): bump @babel/core from 7.9.0 to 7.9.6 ([9936fad](https://github.com/react-dnd/react-dnd/commit/9936fad))
+- build(deps-dev): bump @babel/plugin-proposal-class-properties from 7.7.4 to 7.8.0 ([835feef](https://github.com/react-dnd/react-dnd/commit/835feef))
+- build(deps-dev): bump @babel/plugin-proposal-class-properties from 7.8.0 to 7.8.3 ([8c262b4](https://github.com/react-dnd/react-dnd/commit/8c262b4))
+- build(deps-dev): bump @babel/plugin-proposal-object-rest-spread ([3039a97](https://github.com/react-dnd/react-dnd/commit/3039a97))
+- build(deps-dev): bump @babel/plugin-proposal-object-rest-spread ([d989747](https://github.com/react-dnd/react-dnd/commit/d989747))
+- build(deps-dev): bump @babel/plugin-proposal-object-rest-spread from 7.7.4 to 7.7.7 ([14594e2](https://github.com/react-dnd/react-dnd/commit/14594e2))
+- build(deps-dev): bump @babel/plugin-proposal-object-rest-spread from 7.7.7 to 7.8.0 ([dc5b2cd](https://github.com/react-dnd/react-dnd/commit/dc5b2cd))
+- build(deps-dev): bump @babel/preset-env from 7.7.5 to 7.7.6 ([35fc9c6](https://github.com/react-dnd/react-dnd/commit/35fc9c6))
+- build(deps-dev): bump @babel/preset-env from 7.7.6 to 7.7.7 ([75fd81c](https://github.com/react-dnd/react-dnd/commit/75fd81c))
+- build(deps-dev): bump @babel/preset-env from 7.7.7 to 7.8.2 ([0ef8a38](https://github.com/react-dnd/react-dnd/commit/0ef8a38))
+- build(deps-dev): bump @babel/preset-env from 7.8.2 to 7.8.3 ([c8727ba](https://github.com/react-dnd/react-dnd/commit/c8727ba))
+- build(deps-dev): bump @babel/preset-env from 7.8.3 to 7.8.4 ([d1840d3](https://github.com/react-dnd/react-dnd/commit/d1840d3))
+- build(deps-dev): bump @babel/preset-env from 7.8.4 to 7.8.6 ([7f54866](https://github.com/react-dnd/react-dnd/commit/7f54866))
+- build(deps-dev): bump @babel/preset-env from 7.8.6 to 7.8.7 ([3a44bfc](https://github.com/react-dnd/react-dnd/commit/3a44bfc))
+- build(deps-dev): bump @babel/preset-env from 7.8.7 to 7.9.0 ([f151767](https://github.com/react-dnd/react-dnd/commit/f151767))
+- build(deps-dev): bump @babel/preset-env from 7.9.0 to 7.9.5 ([881d000](https://github.com/react-dnd/react-dnd/commit/881d000))
+- build(deps-dev): bump @babel/preset-env from 7.9.5 to 7.9.6 ([28f06a0](https://github.com/react-dnd/react-dnd/commit/28f06a0))
+- build(deps-dev): bump @commitlint/cli from 8.2.0 to 8.3.3 ([2cf0ae4](https://github.com/react-dnd/react-dnd/commit/2cf0ae4))
+- build(deps-dev): bump @commitlint/cli from 8.3.3 to 8.3.4 ([7ba7c77](https://github.com/react-dnd/react-dnd/commit/7ba7c77))
+- build(deps-dev): bump @commitlint/cli from 8.3.4 to 8.3.5 ([2419ce5](https://github.com/react-dnd/react-dnd/commit/2419ce5))
+- build(deps-dev): bump @commitlint/config-conventional from 8.2.0 to 8.3.3 ([be287eb](https://github.com/react-dnd/react-dnd/commit/be287eb))
+- build(deps-dev): bump @commitlint/config-conventional from 8.3.3 to 8.3.4 ([1e981f1](https://github.com/react-dnd/react-dnd/commit/1e981f1))
+- build(deps-dev): bump @rollup/plugin-replace from 2.3.0 to 2.3.1 ([e0cad3f](https://github.com/react-dnd/react-dnd/commit/e0cad3f))
+- build(deps-dev): bump @rollup/plugin-replace from 2.3.1 to 2.3.2 ([b2118e6](https://github.com/react-dnd/react-dnd/commit/b2118e6))
+- build(deps-dev): bump @types/enzyme from 3.10.4 to 3.10.5 ([bbf4c96](https://github.com/react-dnd/react-dnd/commit/bbf4c96))
+- build(deps-dev): bump @types/jest from 24.0.23 to 24.0.24 ([ba19e43](https://github.com/react-dnd/react-dnd/commit/ba19e43))
+- build(deps-dev): bump @types/jest from 24.0.24 to 24.0.25 ([c624812](https://github.com/react-dnd/react-dnd/commit/c624812))
+- build(deps-dev): bump @types/jest from 24.0.25 to 24.9.0 ([e1f5e67](https://github.com/react-dnd/react-dnd/commit/e1f5e67))
+- build(deps-dev): bump @types/jest from 24.9.0 to 24.9.1 ([7c99a9d](https://github.com/react-dnd/react-dnd/commit/7c99a9d))
+- build(deps-dev): bump @types/jest from 24.9.1 to 25.1.0 ([38f8e9d](https://github.com/react-dnd/react-dnd/commit/38f8e9d))
+- build(deps-dev): bump @types/jest from 25.1.0 to 25.1.1 ([abdf4a8](https://github.com/react-dnd/react-dnd/commit/abdf4a8))
+- build(deps-dev): bump @types/jest from 25.1.1 to 25.1.2 ([73eb336](https://github.com/react-dnd/react-dnd/commit/73eb336))
+- build(deps-dev): bump @types/jest from 25.1.2 to 25.1.3 ([05e191c](https://github.com/react-dnd/react-dnd/commit/05e191c))
+- build(deps-dev): bump @types/jest from 25.1.3 to 25.1.4 ([3bb7f44](https://github.com/react-dnd/react-dnd/commit/3bb7f44))
+- build(deps-dev): bump @types/jest from 25.1.4 to 25.1.5 ([de5fa4a](https://github.com/react-dnd/react-dnd/commit/de5fa4a))
+- build(deps-dev): bump @types/jest from 25.1.5 to 25.2.1 ([5d28173](https://github.com/react-dnd/react-dnd/commit/5d28173))
+- build(deps-dev): bump @types/jest from 25.2.1 to 25.2.2 ([578ac1e](https://github.com/react-dnd/react-dnd/commit/578ac1e))
+- build(deps-dev): bump @types/jest from 25.2.2 to 25.2.3 ([8705bb8](https://github.com/react-dnd/react-dnd/commit/8705bb8))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([902e926](https://github.com/react-dnd/react-dnd/commit/902e926))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([fa8d8cd](https://github.com/react-dnd/react-dnd/commit/fa8d8cd))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([89e0226](https://github.com/react-dnd/react-dnd/commit/89e0226))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([ad4d7d5](https://github.com/react-dnd/react-dnd/commit/ad4d7d5))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([463def5](https://github.com/react-dnd/react-dnd/commit/463def5))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([c545f78](https://github.com/react-dnd/react-dnd/commit/c545f78))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([2176483](https://github.com/react-dnd/react-dnd/commit/2176483))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([f61f4ae](https://github.com/react-dnd/react-dnd/commit/f61f4ae))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([64ba674](https://github.com/react-dnd/react-dnd/commit/64ba674))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([ca15512](https://github.com/react-dnd/react-dnd/commit/ca15512))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([c31b33e](https://github.com/react-dnd/react-dnd/commit/c31b33e))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([49be863](https://github.com/react-dnd/react-dnd/commit/49be863))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin ([0583f8c](https://github.com/react-dnd/react-dnd/commit/0583f8c))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.10.0 to 2.11.0 ([dbfbdff](https://github.com/react-dnd/react-dnd/commit/dbfbdff))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.11.0 to 2.12.0 ([f713041](https://github.com/react-dnd/react-dnd/commit/f713041))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.12.0 to 2.13.0 ([df3c189](https://github.com/react-dnd/react-dnd/commit/df3c189))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.13.0 to 2.14.0 ([88c64c6](https://github.com/react-dnd/react-dnd/commit/88c64c6))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.14.0 to 2.15.0 ([63fe529](https://github.com/react-dnd/react-dnd/commit/63fe529))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.15.0 to 2.16.0 ([2cc330f](https://github.com/react-dnd/react-dnd/commit/2cc330f))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.19.0 to 2.19.2 ([ae6c85c](https://github.com/react-dnd/react-dnd/commit/ae6c85c))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.19.2 to 2.20.0 ([aa450b8](https://github.com/react-dnd/react-dnd/commit/aa450b8))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.23.0 to 2.24.0 ([9fac7ad](https://github.com/react-dnd/react-dnd/commit/9fac7ad))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.28.0 to 2.29.0 ([8779bc7](https://github.com/react-dnd/react-dnd/commit/8779bc7))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.30.0 to 2.31.0 ([fe245ce](https://github.com/react-dnd/react-dnd/commit/fe245ce))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.31.0 to 2.32.0 ([1b5a6c0](https://github.com/react-dnd/react-dnd/commit/1b5a6c0))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.33.0 to 2.34.0 ([49e5cd7](https://github.com/react-dnd/react-dnd/commit/49e5cd7))
+- build(deps-dev): bump @typescript-eslint/parser from 2.10.0 to 2.11.0 ([6bd4333](https://github.com/react-dnd/react-dnd/commit/6bd4333))
+- build(deps-dev): bump @typescript-eslint/parser from 2.11.0 to 2.12.0 ([f3b4298](https://github.com/react-dnd/react-dnd/commit/f3b4298))
+- build(deps-dev): bump @typescript-eslint/parser from 2.12.0 to 2.13.0 ([54bbfaf](https://github.com/react-dnd/react-dnd/commit/54bbfaf))
+- build(deps-dev): bump @typescript-eslint/parser from 2.13.0 to 2.14.0 ([85a234e](https://github.com/react-dnd/react-dnd/commit/85a234e))
+- build(deps-dev): bump @typescript-eslint/parser from 2.14.0 to 2.15.0 ([44d13c5](https://github.com/react-dnd/react-dnd/commit/44d13c5))
+- build(deps-dev): bump @typescript-eslint/parser from 2.15.0 to 2.16.0 ([05173d8](https://github.com/react-dnd/react-dnd/commit/05173d8))
+- build(deps-dev): bump @typescript-eslint/parser from 2.16.0 to 2.17.0 ([36c17b0](https://github.com/react-dnd/react-dnd/commit/36c17b0))
+- build(deps-dev): bump @typescript-eslint/parser from 2.17.0 to 2.18.0 ([4fcd21c](https://github.com/react-dnd/react-dnd/commit/4fcd21c))
+- build(deps-dev): bump @typescript-eslint/parser from 2.18.0 to 2.19.0 ([319565a](https://github.com/react-dnd/react-dnd/commit/319565a))
+- build(deps-dev): bump @typescript-eslint/parser from 2.19.0 to 2.19.2 ([be5e291](https://github.com/react-dnd/react-dnd/commit/be5e291))
+- build(deps-dev): bump @typescript-eslint/parser from 2.19.2 to 2.20.0 ([8ddd674](https://github.com/react-dnd/react-dnd/commit/8ddd674))
+- build(deps-dev): bump @typescript-eslint/parser from 2.20.0 to 2.21.0 ([fbda7ff](https://github.com/react-dnd/react-dnd/commit/fbda7ff))
+- build(deps-dev): bump @typescript-eslint/parser from 2.21.0 to 2.22.0 ([5f348e8](https://github.com/react-dnd/react-dnd/commit/5f348e8))
+- build(deps-dev): bump @typescript-eslint/parser from 2.22.0 to 2.23.0 ([7b8c512](https://github.com/react-dnd/react-dnd/commit/7b8c512))
+- build(deps-dev): bump @typescript-eslint/parser from 2.23.0 to 2.24.0 ([844b46f](https://github.com/react-dnd/react-dnd/commit/844b46f))
+- build(deps-dev): bump @typescript-eslint/parser from 2.24.0 to 2.25.0 ([ca435e3](https://github.com/react-dnd/react-dnd/commit/ca435e3))
+- build(deps-dev): bump @typescript-eslint/parser from 2.25.0 to 2.26.0 ([57a6765](https://github.com/react-dnd/react-dnd/commit/57a6765))
+- build(deps-dev): bump @typescript-eslint/parser from 2.26.0 to 2.27.0 ([0f4a7ba](https://github.com/react-dnd/react-dnd/commit/0f4a7ba))
+- build(deps-dev): bump @typescript-eslint/parser from 2.27.0 to 2.28.0 ([9480cad](https://github.com/react-dnd/react-dnd/commit/9480cad))
+- build(deps-dev): bump @typescript-eslint/parser from 2.28.0 to 2.29.0 ([37aea86](https://github.com/react-dnd/react-dnd/commit/37aea86))
+- build(deps-dev): bump @typescript-eslint/parser from 2.29.0 to 2.30.0 ([f251f6c](https://github.com/react-dnd/react-dnd/commit/f251f6c))
+- build(deps-dev): bump @typescript-eslint/parser from 2.30.0 to 2.31.0 ([d9571b4](https://github.com/react-dnd/react-dnd/commit/d9571b4))
+- build(deps-dev): bump @typescript-eslint/parser from 2.31.0 to 2.32.0 ([1b24815](https://github.com/react-dnd/react-dnd/commit/1b24815))
+- build(deps-dev): bump @typescript-eslint/parser from 2.32.0 to 2.33.0 ([adf61f3](https://github.com/react-dnd/react-dnd/commit/adf61f3))
+- build(deps-dev): bump @typescript-eslint/parser from 2.33.0 to 2.34.0 ([4e4b3db](https://github.com/react-dnd/react-dnd/commit/4e4b3db))
+- build(deps-dev): bump @typescript-eslint/parser from 3.0.0 to 3.0.1 ([8b00657](https://github.com/react-dnd/react-dnd/commit/8b00657))
+- build(deps-dev): bump alex from 8.1.0 to 8.1.1 ([570bcbb](https://github.com/react-dnd/react-dnd/commit/570bcbb))
+- build(deps-dev): bump conventional-changelog-cli from 2.0.28 to 2.0.31 ([7acda71](https://github.com/react-dnd/react-dnd/commit/7acda71))
+- build(deps-dev): bump conventional-changelog-cli from 2.0.31 to 2.0.34 ([e3de739](https://github.com/react-dnd/react-dnd/commit/e3de739))
+- build(deps-dev): bump enzyme from 3.10.0 to 3.11.0 ([153aaf6](https://github.com/react-dnd/react-dnd/commit/153aaf6))
+- build(deps-dev): bump enzyme-adapter-react-16 from 1.15.1 to 1.15.2 ([a185819](https://github.com/react-dnd/react-dnd/commit/a185819))
+- build(deps-dev): bump eslint from 6.7.2 to 6.8.0 ([bf5dfb6](https://github.com/react-dnd/react-dnd/commit/bf5dfb6))
+- build(deps-dev): bump eslint-config-prettier from 6.10.0 to 6.10.1 ([2691573](https://github.com/react-dnd/react-dnd/commit/2691573))
+- build(deps-dev): bump eslint-config-prettier from 6.10.1 to 6.11.0 ([631b81f](https://github.com/react-dnd/react-dnd/commit/631b81f))
+- build(deps-dev): bump eslint-config-prettier from 6.7.0 to 6.8.0 ([2b1a59d](https://github.com/react-dnd/react-dnd/commit/2b1a59d))
+- build(deps-dev): bump eslint-config-prettier from 6.8.0 to 6.9.0 ([6eb2093](https://github.com/react-dnd/react-dnd/commit/6eb2093))
+- build(deps-dev): bump eslint-config-prettier from 6.9.0 to 6.10.0 ([b3feb54](https://github.com/react-dnd/react-dnd/commit/b3feb54))
+- build(deps-dev): bump eslint-config-react-app from 5.1.0 to 5.2.0 ([a86aa91](https://github.com/react-dnd/react-dnd/commit/a86aa91))
+- build(deps-dev): bump eslint-config-react-app from 5.2.0 to 5.2.1 ([6147ddb](https://github.com/react-dnd/react-dnd/commit/6147ddb))
+- build(deps-dev): bump eslint-plugin-prettier from 3.1.1 to 3.1.2 ([3ee388c](https://github.com/react-dnd/react-dnd/commit/3ee388c))
+- build(deps-dev): bump eslint-plugin-prettier from 3.1.2 to 3.1.3 ([a668439](https://github.com/react-dnd/react-dnd/commit/a668439))
+- build(deps-dev): bump eslint-plugin-react from 7.17.0 to 7.18.0 ([ddf64aa](https://github.com/react-dnd/react-dnd/commit/ddf64aa))
+- build(deps-dev): bump eslint-plugin-react from 7.18.0 to 7.18.3 ([81ab218](https://github.com/react-dnd/react-dnd/commit/81ab218))
+- build(deps-dev): bump eslint-plugin-react from 7.18.3 to 7.19.0 ([da541bf](https://github.com/react-dnd/react-dnd/commit/da541bf))
+- build(deps-dev): bump eslint-plugin-react-hooks from 2.3.0 to 2.4.0 ([642d4ef](https://github.com/react-dnd/react-dnd/commit/642d4ef))
+- build(deps-dev): bump eslint-plugin-react-hooks from 2.4.0 to 2.5.0 ([f287b78](https://github.com/react-dnd/react-dnd/commit/f287b78))
+- build(deps-dev): bump eslint-plugin-react-hooks from 2.5.0 to 2.5.1 ([b02c534](https://github.com/react-dnd/react-dnd/commit/b02c534))
+- build(deps-dev): bump husky from 3.1.0 to 4.0.0 ([cddeb48](https://github.com/react-dnd/react-dnd/commit/cddeb48))
+- build(deps-dev): bump husky from 3.1.0 to 4.0.10 ([6ed5715](https://github.com/react-dnd/react-dnd/commit/6ed5715))
+- build(deps-dev): bump husky from 3.1.0 to 4.0.9 ([ac31881](https://github.com/react-dnd/react-dnd/commit/ac31881))
+- build(deps-dev): bump husky from 4.0.0 to 4.0.1 ([ce22b50](https://github.com/react-dnd/react-dnd/commit/ce22b50))
+- build(deps-dev): bump husky from 4.0.1 to 4.0.3 ([ae73b20](https://github.com/react-dnd/react-dnd/commit/ae73b20))
+- build(deps-dev): bump husky from 4.0.10 to 4.2.0 ([ef35c88](https://github.com/react-dnd/react-dnd/commit/ef35c88))
+- build(deps-dev): bump husky from 4.0.3 to 4.0.6 ([41ce33b](https://github.com/react-dnd/react-dnd/commit/41ce33b))
+- build(deps-dev): bump husky from 4.0.6 to 4.0.7 ([2e70544](https://github.com/react-dnd/react-dnd/commit/2e70544))
+- build(deps-dev): bump husky from 4.0.9 to 4.0.10 ([ed124f3](https://github.com/react-dnd/react-dnd/commit/ed124f3))
+- build(deps-dev): bump husky from 4.2.0 to 4.2.1 ([69bc087](https://github.com/react-dnd/react-dnd/commit/69bc087))
+- build(deps-dev): bump husky from 4.2.1 to 4.2.2 ([228ad7c](https://github.com/react-dnd/react-dnd/commit/228ad7c))
+- build(deps-dev): bump husky from 4.2.2 to 4.2.3 ([2678ea8](https://github.com/react-dnd/react-dnd/commit/2678ea8))
+- build(deps-dev): bump husky from 4.2.3 to 4.2.5 ([57ed7ae](https://github.com/react-dnd/react-dnd/commit/57ed7ae))
+- build(deps-dev): bump inquirer from 7.0.0 to 7.0.1 ([0246454](https://github.com/react-dnd/react-dnd/commit/0246454))
+- build(deps-dev): bump inquirer from 7.0.1 to 7.0.2 ([4e306f7](https://github.com/react-dnd/react-dnd/commit/4e306f7))
+- build(deps-dev): bump inquirer from 7.0.2 to 7.0.3 ([ce813ec](https://github.com/react-dnd/react-dnd/commit/ce813ec))
+- build(deps-dev): bump inquirer from 7.0.3 to 7.0.4 ([4e83089](https://github.com/react-dnd/react-dnd/commit/4e83089))
+- build(deps-dev): bump inquirer from 7.0.4 to 7.0.5 ([9b8162b](https://github.com/react-dnd/react-dnd/commit/9b8162b))
+- build(deps-dev): bump inquirer from 7.0.5 to 7.0.6 ([1bbda5d](https://github.com/react-dnd/react-dnd/commit/1bbda5d))
+- build(deps-dev): bump inquirer from 7.0.6 to 7.1.0 ([0eb6187](https://github.com/react-dnd/react-dnd/commit/0eb6187))
+- build(deps-dev): bump jest and ts-jest ([3a56459](https://github.com/react-dnd/react-dnd/commit/3a56459))
+- build(deps-dev): bump jest from 25.1.0 to 25.2.1 ([25412aa](https://github.com/react-dnd/react-dnd/commit/25412aa))
+- build(deps-dev): bump jest from 25.2.1 to 25.2.4 ([c6b80e6](https://github.com/react-dnd/react-dnd/commit/c6b80e6))
+- build(deps-dev): bump jest from 25.2.4 to 25.2.7 ([fe0ccc1](https://github.com/react-dnd/react-dnd/commit/fe0ccc1))
+- build(deps-dev): bump jest from 25.2.7 to 25.3.0 ([6aaf7c1](https://github.com/react-dnd/react-dnd/commit/6aaf7c1))
+- build(deps-dev): bump jest from 25.3.0 to 25.4.0 ([8402e55](https://github.com/react-dnd/react-dnd/commit/8402e55))
+- build(deps-dev): bump jest from 25.4.0 to 25.5.0 ([3f7c9ab](https://github.com/react-dnd/react-dnd/commit/3f7c9ab))
+- build(deps-dev): bump jest from 25.5.0 to 25.5.2 ([b7aeb5a](https://github.com/react-dnd/react-dnd/commit/b7aeb5a))
+- build(deps-dev): bump jest from 25.5.2 to 25.5.3 ([e1b39ca](https://github.com/react-dnd/react-dnd/commit/e1b39ca))
+- build(deps-dev): bump jest from 25.5.3 to 25.5.4 ([6a5663e](https://github.com/react-dnd/react-dnd/commit/6a5663e))
+- build(deps-dev): bump jest-environment-jsdom from 24.9.0 to 25.1.0 ([8d57ec1](https://github.com/react-dnd/react-dnd/commit/8d57ec1))
+- build(deps-dev): bump jest-environment-jsdom from 25.1.0 to 25.2.1 ([903fc4f](https://github.com/react-dnd/react-dnd/commit/903fc4f))
+- build(deps-dev): bump jest-environment-jsdom from 25.2.1 to 25.2.3 ([091c06e](https://github.com/react-dnd/react-dnd/commit/091c06e))
+- build(deps-dev): bump jest-environment-jsdom from 25.2.3 to 25.2.4 ([198e765](https://github.com/react-dnd/react-dnd/commit/198e765))
+- build(deps-dev): bump jest-environment-jsdom from 25.2.4 to 25.2.6 ([3501fb2](https://github.com/react-dnd/react-dnd/commit/3501fb2))
+- build(deps-dev): bump jest-environment-jsdom from 25.2.6 to 25.3.0 ([5890f28](https://github.com/react-dnd/react-dnd/commit/5890f28))
+- build(deps-dev): bump jest-environment-jsdom from 25.3.0 to 25.4.0 ([e5e2052](https://github.com/react-dnd/react-dnd/commit/e5e2052))
+- build(deps-dev): bump jest-environment-jsdom from 25.4.0 to 25.5.0 ([3556f59](https://github.com/react-dnd/react-dnd/commit/3556f59))
+- build(deps-dev): bump jest-environment-jsdom from 25.5.0 to 26.0.0 ([9a61697](https://github.com/react-dnd/react-dnd/commit/9a61697))
+- build(deps-dev): bump jest-environment-jsdom from 26.0.0 to 26.0.1 ([03295b8](https://github.com/react-dnd/react-dnd/commit/03295b8))
+- build(deps-dev): bump lerna from 3.19.0 to 3.20.1 ([c5b6856](https://github.com/react-dnd/react-dnd/commit/c5b6856))
+- build(deps-dev): bump lerna from 3.20.1 to 3.20.2 ([cfd8e14](https://github.com/react-dnd/react-dnd/commit/cfd8e14))
+- build(deps-dev): bump lerna from 3.20.2 to 3.21.0 ([cad9433](https://github.com/react-dnd/react-dnd/commit/cad9433))
+- build(deps-dev): bump lerna from 3.21.0 to 3.22.0 ([d8a84ac](https://github.com/react-dnd/react-dnd/commit/d8a84ac))
+- build(deps-dev): bump lint-staged from 10.0.0 to 10.0.1 ([b096fa6](https://github.com/react-dnd/react-dnd/commit/b096fa6))
+- build(deps-dev): bump lint-staged from 10.0.1 to 10.0.2 ([607a6f7](https://github.com/react-dnd/react-dnd/commit/607a6f7))
+- build(deps-dev): bump lint-staged from 10.0.10 to 10.1.0 ([709f387](https://github.com/react-dnd/react-dnd/commit/709f387))
+- build(deps-dev): bump lint-staged from 10.0.2 to 10.0.3 ([7c7a0fc](https://github.com/react-dnd/react-dnd/commit/7c7a0fc))
+- build(deps-dev): bump lint-staged from 10.0.3 to 10.0.4 ([e8d728c](https://github.com/react-dnd/react-dnd/commit/e8d728c))
+- build(deps-dev): bump lint-staged from 10.0.4 to 10.0.5 ([3b1985c](https://github.com/react-dnd/react-dnd/commit/3b1985c))
+- build(deps-dev): bump lint-staged from 10.0.5 to 10.0.7 ([048ff6f](https://github.com/react-dnd/react-dnd/commit/048ff6f))
+- build(deps-dev): bump lint-staged from 10.0.7 to 10.0.8 ([64d8a26](https://github.com/react-dnd/react-dnd/commit/64d8a26))
+- build(deps-dev): bump lint-staged from 10.0.8 to 10.0.9 ([1e799e5](https://github.com/react-dnd/react-dnd/commit/1e799e5))
+- build(deps-dev): bump lint-staged from 10.0.9 to 10.0.10 ([8a1230a](https://github.com/react-dnd/react-dnd/commit/8a1230a))
+- build(deps-dev): bump lint-staged from 10.1.0 to 10.1.1 ([b0e6464](https://github.com/react-dnd/react-dnd/commit/b0e6464))
+- build(deps-dev): bump lint-staged from 10.1.1 to 10.1.2 ([e6872f9](https://github.com/react-dnd/react-dnd/commit/e6872f9))
+- build(deps-dev): bump lint-staged from 10.1.2 to 10.1.3 ([5ecc9b9](https://github.com/react-dnd/react-dnd/commit/5ecc9b9))
+- build(deps-dev): bump lint-staged from 10.1.3 to 10.1.6 ([61bee17](https://github.com/react-dnd/react-dnd/commit/61bee17))
+- build(deps-dev): bump lint-staged from 10.1.6 to 10.1.7 ([e561a28](https://github.com/react-dnd/react-dnd/commit/e561a28))
+- build(deps-dev): bump lint-staged from 10.1.7 to 10.2.0 ([c89df89](https://github.com/react-dnd/react-dnd/commit/c89df89))
+- build(deps-dev): bump lint-staged from 10.2.0 to 10.2.2 ([6614b28](https://github.com/react-dnd/react-dnd/commit/6614b28))
+- build(deps-dev): bump lint-staged from 10.2.2 to 10.2.4 ([eb8c38a](https://github.com/react-dnd/react-dnd/commit/eb8c38a))
+- build(deps-dev): bump lint-staged from 10.2.4 to 10.2.6 ([bd7e713](https://github.com/react-dnd/react-dnd/commit/bd7e713))
+- build(deps-dev): bump lint-staged from 9.5.0 to 10.0.0 ([61b8326](https://github.com/react-dnd/react-dnd/commit/61b8326))
+- build(deps-dev): bump prettier from 1.19.1 to 2.0.1 ([a24a5be](https://github.com/react-dnd/react-dnd/commit/a24a5be))
+- build(deps-dev): bump prettier from 2.0.1 to 2.0.2 ([2edd55d](https://github.com/react-dnd/react-dnd/commit/2edd55d))
+- build(deps-dev): bump prettier from 2.0.2 to 2.0.3 ([fa168fc](https://github.com/react-dnd/react-dnd/commit/fa168fc))
+- build(deps-dev): bump prettier from 2.0.3 to 2.0.4 ([0a43e11](https://github.com/react-dnd/react-dnd/commit/0a43e11))
+- build(deps-dev): bump prettier from 2.0.4 to 2.0.5 ([2604211](https://github.com/react-dnd/react-dnd/commit/2604211))
+- build(deps-dev): bump replace-in-file from 4.2.0 to 5.0.2 ([426fdcc](https://github.com/react-dnd/react-dnd/commit/426fdcc))
+- build(deps-dev): bump replace-in-file from 5.0.2 to 6.0.0 ([2b6c77d](https://github.com/react-dnd/react-dnd/commit/2b6c77d))
+- build(deps-dev): bump rollup from 1.27.10 to 1.27.11 ([672d771](https://github.com/react-dnd/react-dnd/commit/672d771))
+- build(deps-dev): bump rollup from 1.27.11 to 1.27.12 ([dbda234](https://github.com/react-dnd/react-dnd/commit/dbda234))
+- build(deps-dev): bump rollup from 1.27.12 to 1.27.13 ([827f932](https://github.com/react-dnd/react-dnd/commit/827f932))
+- build(deps-dev): bump rollup from 1.27.13 to 1.27.14 ([bf29545](https://github.com/react-dnd/react-dnd/commit/bf29545))
+- build(deps-dev): bump rollup from 1.27.14 to 1.28.0 ([9b2cc47](https://github.com/react-dnd/react-dnd/commit/9b2cc47))
+- build(deps-dev): bump rollup from 1.27.8 to 1.27.9 ([4f045a2](https://github.com/react-dnd/react-dnd/commit/4f045a2))
+- build(deps-dev): bump rollup from 1.27.9 to 1.27.10 ([9260460](https://github.com/react-dnd/react-dnd/commit/9260460))
+- build(deps-dev): bump rollup from 1.28.0 to 1.29.0 ([2bb1693](https://github.com/react-dnd/react-dnd/commit/2bb1693))
+- build(deps-dev): bump rollup from 1.29.0 to 1.29.1 ([6628c5b](https://github.com/react-dnd/react-dnd/commit/6628c5b))
+- build(deps-dev): bump rollup from 1.29.1 to 1.30.0 ([c41c3c6](https://github.com/react-dnd/react-dnd/commit/c41c3c6))
+- build(deps-dev): bump rollup from 1.30.0 to 1.30.1 ([371e606](https://github.com/react-dnd/react-dnd/commit/371e606))
+- build(deps-dev): bump rollup from 1.30.1 to 1.31.0 ([569ee28](https://github.com/react-dnd/react-dnd/commit/569ee28))
+- build(deps-dev): bump rollup from 1.31.0 to 1.31.1 ([4105ca0](https://github.com/react-dnd/react-dnd/commit/4105ca0))
+- build(deps-dev): bump rollup from 1.31.1 to 1.32.0 ([c77d800](https://github.com/react-dnd/react-dnd/commit/c77d800))
+- build(deps-dev): bump rollup from 1.32.0 to 1.32.1 ([9673a95](https://github.com/react-dnd/react-dnd/commit/9673a95))
+- build(deps-dev): bump rollup from 1.32.1 to 2.6.1 ([ca198ab](https://github.com/react-dnd/react-dnd/commit/ca198ab))
+- build(deps-dev): bump rollup from 2.10.0 to 2.10.2 ([11add33](https://github.com/react-dnd/react-dnd/commit/11add33))
+- build(deps-dev): bump rollup from 2.10.2 to 2.10.4 ([be0f95a](https://github.com/react-dnd/react-dnd/commit/be0f95a))
+- build(deps-dev): bump rollup from 2.10.4 to 2.10.5 ([15ede3b](https://github.com/react-dnd/react-dnd/commit/15ede3b))
+- build(deps-dev): bump rollup from 2.10.5 to 2.10.9 ([9a2353d](https://github.com/react-dnd/react-dnd/commit/9a2353d))
+- build(deps-dev): bump rollup from 2.6.1 to 2.7.1 ([bcce37a](https://github.com/react-dnd/react-dnd/commit/bcce37a))
+- build(deps-dev): bump rollup from 2.7.1 to 2.7.2 ([0e0cf9f](https://github.com/react-dnd/react-dnd/commit/0e0cf9f))
+- build(deps-dev): bump rollup from 2.7.2 to 2.7.3 ([436e234](https://github.com/react-dnd/react-dnd/commit/436e234))
+- build(deps-dev): bump rollup from 2.7.3 to 2.7.5 ([0295fa6](https://github.com/react-dnd/react-dnd/commit/0295fa6))
+- build(deps-dev): bump rollup from 2.7.5 to 2.7.6 ([73238cf](https://github.com/react-dnd/react-dnd/commit/73238cf))
+- build(deps-dev): bump rollup from 2.7.6 to 2.8.0 ([e6073d7](https://github.com/react-dnd/react-dnd/commit/e6073d7))
+- build(deps-dev): bump rollup from 2.8.0 to 2.8.2 ([8730d75](https://github.com/react-dnd/react-dnd/commit/8730d75))
+- build(deps-dev): bump rollup from 2.8.2 to 2.9.1 ([7598af9](https://github.com/react-dnd/react-dnd/commit/7598af9))
+- build(deps-dev): bump rollup from 2.9.1 to 2.10.0 ([6b306a8](https://github.com/react-dnd/react-dnd/commit/6b306a8))
+- build(deps-dev): bump rollup-plugin-terser from 5.1.2 to 5.1.3 ([f4e8963](https://github.com/react-dnd/react-dnd/commit/f4e8963))
+- build(deps-dev): bump rollup-plugin-terser from 5.1.3 to 5.2.0 ([66a375e](https://github.com/react-dnd/react-dnd/commit/66a375e))
+- build(deps-dev): bump rollup-plugin-terser from 5.2.0 to 5.3.0 ([05a97ef](https://github.com/react-dnd/react-dnd/commit/05a97ef))
+- build(deps-dev): bump rollup-plugin-terser from 5.3.0 to 6.1.0 ([b9d228a](https://github.com/react-dnd/react-dnd/commit/b9d228a))
+- build(deps-dev): bump ts-jest from 24.2.0 to 24.3.0 ([4bb26e1](https://github.com/react-dnd/react-dnd/commit/4bb26e1))
+- build(deps-dev): bump ts-jest from 25.0.0 to 25.1.0 ([1163f9c](https://github.com/react-dnd/react-dnd/commit/1163f9c))
+- build(deps-dev): bump ts-jest from 25.1.0 to 25.2.0 ([a87062d](https://github.com/react-dnd/react-dnd/commit/a87062d))
+- build(deps-dev): bump ts-jest from 25.2.0 to 25.2.1 ([0dc9867](https://github.com/react-dnd/react-dnd/commit/0dc9867))
+- build(deps-dev): bump ts-jest from 25.2.1 to 25.3.0 ([30fb2d6](https://github.com/react-dnd/react-dnd/commit/30fb2d6))
+- build(deps-dev): bump ts-jest from 25.3.0 to 25.3.1 ([4c82914](https://github.com/react-dnd/react-dnd/commit/4c82914))
+- build(deps-dev): bump ts-jest from 25.3.1 to 25.4.0 ([524f593](https://github.com/react-dnd/react-dnd/commit/524f593))
+- build(deps-dev): bump ts-jest from 25.4.0 to 25.5.0 ([5655341](https://github.com/react-dnd/react-dnd/commit/5655341))
+- build(deps-dev): bump ts-jest from 25.5.0 to 25.5.1 ([9e07b77](https://github.com/react-dnd/react-dnd/commit/9e07b77))
+- build(deps-dev): bump typescript from 3.7.3 to 3.7.4 ([322edbf](https://github.com/react-dnd/react-dnd/commit/322edbf))
+- build(deps-dev): bump typescript from 3.7.4 to 3.7.5 ([ebc0467](https://github.com/react-dnd/react-dnd/commit/ebc0467))
+- build(deps-dev): bump typescript from 3.7.5 to 3.8.2 ([2a3e2db](https://github.com/react-dnd/react-dnd/commit/2a3e2db))
+- build(deps-dev): bump typescript from 3.8.2 to 3.8.3 ([0e93adc](https://github.com/react-dnd/react-dnd/commit/0e93adc))
+- build(deps-dev): bump typescript from 3.8.3 to 3.9.2 ([e7f6930](https://github.com/react-dnd/react-dnd/commit/e7f6930))
+- build(deps-dev): bump typescript from 3.9.2 to 3.9.3 ([1ef9a35](https://github.com/react-dnd/react-dnd/commit/1ef9a35))
+- build(deps): [security] bump acorn from 5.7.3 to 5.7.4 ([ce1d6ce](https://github.com/react-dnd/react-dnd/commit/ce1d6ce))
+- build(deps): [security] bump handlebars from 4.5.3 to 4.7.6 ([66e512b](https://github.com/react-dnd/react-dnd/commit/66e512b))
+- build(deps): bump @types/faker from 4.1.10 to 4.1.11 ([5d95b7b](https://github.com/react-dnd/react-dnd/commit/5d95b7b))
+- build(deps): bump @types/faker from 4.1.11 to 4.1.12 ([55fe836](https://github.com/react-dnd/react-dnd/commit/55fe836))
+- build(deps): bump @types/faker from 4.1.8 to 4.1.9 ([c265045](https://github.com/react-dnd/react-dnd/commit/c265045))
+- build(deps): bump @types/faker from 4.1.9 to 4.1.10 ([1ac64d4](https://github.com/react-dnd/react-dnd/commit/1ac64d4))
+- build(deps): bump @types/lodash from 4.14.149 to 4.14.150 ([f67bb40](https://github.com/react-dnd/react-dnd/commit/f67bb40))
+- build(deps): bump @types/lodash from 4.14.150 to 4.14.151 ([6b32a7e](https://github.com/react-dnd/react-dnd/commit/6b32a7e))
+- build(deps): bump @types/lodash from 4.14.151 to 4.14.152 ([d7da8a5](https://github.com/react-dnd/react-dnd/commit/d7da8a5))
+- build(deps): bump @types/react from 16.9.15 to 16.9.16 ([6aa410d](https://github.com/react-dnd/react-dnd/commit/6aa410d))
+- build(deps): bump @types/react from 16.9.16 to 16.9.17 ([42c7d13](https://github.com/react-dnd/react-dnd/commit/42c7d13))
+- build(deps): bump @types/react from 16.9.17 to 16.9.18 ([eceabb9](https://github.com/react-dnd/react-dnd/commit/eceabb9))
+- build(deps): bump @types/react from 16.9.18 to 16.9.19 ([538715d](https://github.com/react-dnd/react-dnd/commit/538715d))
+- build(deps): bump @types/react from 16.9.19 to 16.9.20 ([7a466bc](https://github.com/react-dnd/react-dnd/commit/7a466bc))
+- build(deps): bump @types/react from 16.9.20 to 16.9.21 ([37d4759](https://github.com/react-dnd/react-dnd/commit/37d4759))
+- build(deps): bump @types/react from 16.9.21 to 16.9.22 ([279a6e1](https://github.com/react-dnd/react-dnd/commit/279a6e1))
+- build(deps): bump @types/react from 16.9.22 to 16.9.23 ([4300223](https://github.com/react-dnd/react-dnd/commit/4300223))
+- build(deps): bump @types/react from 16.9.23 to 16.9.25 ([b1432fe](https://github.com/react-dnd/react-dnd/commit/b1432fe))
+- build(deps): bump @types/react from 16.9.25 to 16.9.26 ([b2f1f36](https://github.com/react-dnd/react-dnd/commit/b2f1f36))
+- build(deps): bump @types/react from 16.9.26 to 16.9.27 ([6e0c215](https://github.com/react-dnd/react-dnd/commit/6e0c215))
+- build(deps): bump @types/react from 16.9.27 to 16.9.29 ([ee7f378](https://github.com/react-dnd/react-dnd/commit/ee7f378))
+- build(deps): bump @types/react from 16.9.29 to 16.9.31 ([d140710](https://github.com/react-dnd/react-dnd/commit/d140710))
+- build(deps): bump @types/react from 16.9.31 to 16.9.32 ([84e6181](https://github.com/react-dnd/react-dnd/commit/84e6181))
+- build(deps): bump @types/react from 16.9.32 to 16.9.33 ([e4a6922](https://github.com/react-dnd/react-dnd/commit/e4a6922))
+- build(deps): bump @types/react from 16.9.33 to 16.9.34 ([0c76c08](https://github.com/react-dnd/react-dnd/commit/0c76c08))
+- build(deps): bump @types/react from 16.9.34 to 16.9.35 ([ea8c28e](https://github.com/react-dnd/react-dnd/commit/ea8c28e))
+- build(deps): bump @types/react-dom from 16.9.4 to 16.9.5 ([8f5b304](https://github.com/react-dnd/react-dnd/commit/8f5b304))
+- build(deps): bump @types/react-dom from 16.9.5 to 16.9.6 ([6213578](https://github.com/react-dnd/react-dnd/commit/6213578))
+- build(deps): bump @types/react-dom from 16.9.6 to 16.9.7 ([fc24320](https://github.com/react-dnd/react-dnd/commit/fc24320))
+- build(deps): bump @types/react-dom from 16.9.7 to 16.9.8 ([bc0933c](https://github.com/react-dnd/react-dnd/commit/bc0933c))
+- build(deps): bump @types/react-helmet from 5.0.14 to 5.0.15 ([5f2eb03](https://github.com/react-dnd/react-dnd/commit/5f2eb03))
+- build(deps): bump @types/react-helmet from 5.0.15 to 6.0.0 ([9680710](https://github.com/react-dnd/react-dnd/commit/9680710))
+- build(deps): bump @types/rehype-react from 3.1.0 to 4.0.0 ([0d78123](https://github.com/react-dnd/react-dnd/commit/0d78123))
+- build(deps): bump @types/styled-components from 4.4.0 to 4.4.1 ([bc0b069](https://github.com/react-dnd/react-dnd/commit/bc0b069))
+- build(deps): bump @types/styled-components from 4.4.1 to 4.4.2 ([f03be0e](https://github.com/react-dnd/react-dnd/commit/f03be0e))
+- build(deps): bump @types/styled-components from 4.4.2 to 4.4.3 ([5f39028](https://github.com/react-dnd/react-dnd/commit/5f39028))
+- build(deps): bump @types/styled-components from 4.4.3 to 5.0.0 ([fbda7fd](https://github.com/react-dnd/react-dnd/commit/fbda7fd))
+- build(deps): bump @types/styled-components from 5.0.0 to 5.0.1 ([a797f35](https://github.com/react-dnd/react-dnd/commit/a797f35))
+- build(deps): bump @types/styled-components from 5.0.1 to 5.1.0 ([540157e](https://github.com/react-dnd/react-dnd/commit/540157e))
+- build(deps): bump gatsby from 2.18.10 to 2.18.11 ([83195b9](https://github.com/react-dnd/react-dnd/commit/83195b9))
+- build(deps): bump gatsby from 2.18.11 to 2.18.12 ([e26eae6](https://github.com/react-dnd/react-dnd/commit/e26eae6))
+- build(deps): bump gatsby from 2.18.12 to 2.18.13 ([f8cb43a](https://github.com/react-dnd/react-dnd/commit/f8cb43a))
+- build(deps): bump gatsby from 2.18.13 to 2.18.14 ([5684359](https://github.com/react-dnd/react-dnd/commit/5684359))
+- build(deps): bump gatsby from 2.18.14 to 2.18.15 ([6ec066d](https://github.com/react-dnd/react-dnd/commit/6ec066d))
+- build(deps): bump gatsby from 2.18.15 to 2.18.16 ([58cf140](https://github.com/react-dnd/react-dnd/commit/58cf140))
+- build(deps): bump gatsby from 2.18.16 to 2.18.17 ([8764187](https://github.com/react-dnd/react-dnd/commit/8764187))
+- build(deps): bump gatsby from 2.18.17 to 2.18.18 ([882e0a2](https://github.com/react-dnd/react-dnd/commit/882e0a2))
+- build(deps): bump gatsby from 2.18.18 to 2.18.21 ([8220b06](https://github.com/react-dnd/react-dnd/commit/8220b06))
+- build(deps): bump gatsby from 2.18.21 to 2.18.22 ([cf2a357](https://github.com/react-dnd/react-dnd/commit/cf2a357))
+- build(deps): bump gatsby from 2.18.22 to 2.18.23 ([fc6f102](https://github.com/react-dnd/react-dnd/commit/fc6f102))
+- build(deps): bump gatsby from 2.18.23 to 2.18.25 ([cb05c11](https://github.com/react-dnd/react-dnd/commit/cb05c11))
+- build(deps): bump gatsby from 2.18.25 to 2.19.0 ([162ba69](https://github.com/react-dnd/react-dnd/commit/162ba69))
+- build(deps): bump gatsby from 2.18.25 to 2.19.0 ([76fca6b](https://github.com/react-dnd/react-dnd/commit/76fca6b))
+- build(deps): bump gatsby from 2.18.7 to 2.18.8 ([059b07d](https://github.com/react-dnd/react-dnd/commit/059b07d))
+- build(deps): bump gatsby from 2.18.8 to 2.18.10 ([3103772](https://github.com/react-dnd/react-dnd/commit/3103772))
+- build(deps): bump gatsby from 2.19.0 to 2.19.1 ([a833408](https://github.com/react-dnd/react-dnd/commit/a833408))
+- build(deps): bump gatsby from 2.19.1 to 2.19.2 ([a8ef989](https://github.com/react-dnd/react-dnd/commit/a8ef989))
+- build(deps): bump gatsby from 2.19.10 to 2.19.12 ([56fb98f](https://github.com/react-dnd/react-dnd/commit/56fb98f))
+- build(deps): bump gatsby from 2.19.12 to 2.19.16 ([08eae43](https://github.com/react-dnd/react-dnd/commit/08eae43))
+- build(deps): bump gatsby from 2.19.16 to 2.19.17 ([bb35030](https://github.com/react-dnd/react-dnd/commit/bb35030))
+- build(deps): bump gatsby from 2.19.17 to 2.19.18 ([2bc8e03](https://github.com/react-dnd/react-dnd/commit/2bc8e03))
+- build(deps): bump gatsby from 2.19.18 to 2.19.19 ([4fd11a6](https://github.com/react-dnd/react-dnd/commit/4fd11a6))
+- build(deps): bump gatsby from 2.19.19 to 2.19.21 ([d0095fd](https://github.com/react-dnd/react-dnd/commit/d0095fd))
+- build(deps): bump gatsby from 2.19.2 to 2.19.3 ([82c71a8](https://github.com/react-dnd/react-dnd/commit/82c71a8))
+- build(deps): bump gatsby from 2.19.21 to 2.19.22 ([7388ddc](https://github.com/react-dnd/react-dnd/commit/7388ddc))
+- build(deps): bump gatsby from 2.19.22 to 2.19.24 ([e01f11e](https://github.com/react-dnd/react-dnd/commit/e01f11e))
+- build(deps): bump gatsby from 2.19.24 to 2.19.25 ([ae44ead](https://github.com/react-dnd/react-dnd/commit/ae44ead))
+- build(deps): bump gatsby from 2.19.25 to 2.19.28 ([4c4f560](https://github.com/react-dnd/react-dnd/commit/4c4f560))
+- build(deps): bump gatsby from 2.19.28 to 2.19.29 ([44d1f20](https://github.com/react-dnd/react-dnd/commit/44d1f20))
+- build(deps): bump gatsby from 2.19.29 to 2.19.32 ([ef20fa1](https://github.com/react-dnd/react-dnd/commit/ef20fa1))
+- build(deps): bump gatsby from 2.19.3 to 2.19.5 ([6981763](https://github.com/react-dnd/react-dnd/commit/6981763))
+- build(deps): bump gatsby from 2.19.32 to 2.19.34 ([c49fed7](https://github.com/react-dnd/react-dnd/commit/c49fed7))
+- build(deps): bump gatsby from 2.19.34 to 2.19.37 ([8a126cd](https://github.com/react-dnd/react-dnd/commit/8a126cd))
+- build(deps): bump gatsby from 2.19.37 to 2.19.39 ([02d8b2e](https://github.com/react-dnd/react-dnd/commit/02d8b2e))
+- build(deps): bump gatsby from 2.19.39 to 2.19.41 ([560a3cd](https://github.com/react-dnd/react-dnd/commit/560a3cd))
+- build(deps): bump gatsby from 2.19.41 to 2.19.43 ([bed62ef](https://github.com/react-dnd/react-dnd/commit/bed62ef))
+- build(deps): bump gatsby from 2.19.43 to 2.19.45 ([eada1ce](https://github.com/react-dnd/react-dnd/commit/eada1ce))
+- build(deps): bump gatsby from 2.19.45 to 2.19.49 ([2320901](https://github.com/react-dnd/react-dnd/commit/2320901))
+- build(deps): bump gatsby from 2.19.49 to 2.20.2 ([1d70523](https://github.com/react-dnd/react-dnd/commit/1d70523))
+- build(deps): bump gatsby from 2.19.5 to 2.19.7 ([ff93ce2](https://github.com/react-dnd/react-dnd/commit/ff93ce2))
+- build(deps): bump gatsby from 2.19.7 to 2.19.8 ([0aacdb4](https://github.com/react-dnd/react-dnd/commit/0aacdb4))
+- build(deps): bump gatsby from 2.19.8 to 2.19.10 ([fde1407](https://github.com/react-dnd/react-dnd/commit/fde1407))
+- build(deps): bump gatsby from 2.20.10 to 2.20.11 ([3674de1](https://github.com/react-dnd/react-dnd/commit/3674de1))
+- build(deps): bump gatsby from 2.20.11 to 2.20.12 ([827baee](https://github.com/react-dnd/react-dnd/commit/827baee))
+- build(deps): bump gatsby from 2.20.12 to 2.20.13 ([c650382](https://github.com/react-dnd/react-dnd/commit/c650382))
+- build(deps): bump gatsby from 2.20.13 to 2.20.15 ([3cd3f32](https://github.com/react-dnd/react-dnd/commit/3cd3f32))
+- build(deps): bump gatsby from 2.20.15 to 2.20.18 ([88df5e6](https://github.com/react-dnd/react-dnd/commit/88df5e6))
+- build(deps): bump gatsby from 2.20.18 to 2.20.19 ([07935d4](https://github.com/react-dnd/react-dnd/commit/07935d4))
+- build(deps): bump gatsby from 2.20.19 to 2.20.21 ([ab475ca](https://github.com/react-dnd/react-dnd/commit/ab475ca))
+- build(deps): bump gatsby from 2.20.2 to 2.20.3 ([b6407a7](https://github.com/react-dnd/react-dnd/commit/b6407a7))
+- build(deps): bump gatsby from 2.20.21 to 2.20.22 ([9d61eab](https://github.com/react-dnd/react-dnd/commit/9d61eab))
+- build(deps): bump gatsby from 2.20.22 to 2.20.23 ([872064b](https://github.com/react-dnd/react-dnd/commit/872064b))
+- build(deps): bump gatsby from 2.20.23 to 2.20.26 ([c4488cd](https://github.com/react-dnd/react-dnd/commit/c4488cd))
+- build(deps): bump gatsby from 2.20.26 to 2.20.27 ([81f166c](https://github.com/react-dnd/react-dnd/commit/81f166c))
+- build(deps): bump gatsby from 2.20.27 to 2.20.29 ([4074649](https://github.com/react-dnd/react-dnd/commit/4074649))
+- build(deps): bump gatsby from 2.20.29 to 2.21.0 ([593e3d4](https://github.com/react-dnd/react-dnd/commit/593e3d4))
+- build(deps): bump gatsby from 2.20.3 to 2.20.5 ([9d362d7](https://github.com/react-dnd/react-dnd/commit/9d362d7))
+- build(deps): bump gatsby from 2.20.5 to 2.20.7 ([1b830b7](https://github.com/react-dnd/react-dnd/commit/1b830b7))
+- build(deps): bump gatsby from 2.20.7 to 2.20.8 ([bc2249a](https://github.com/react-dnd/react-dnd/commit/bc2249a))
+- build(deps): bump gatsby from 2.20.8 to 2.20.9 ([17462bd](https://github.com/react-dnd/react-dnd/commit/17462bd))
+- build(deps): bump gatsby from 2.20.9 to 2.20.10 ([a838bbd](https://github.com/react-dnd/react-dnd/commit/a838bbd))
+- build(deps): bump gatsby from 2.21.0 to 2.21.1 ([447fe30](https://github.com/react-dnd/react-dnd/commit/447fe30))
+- build(deps): bump gatsby from 2.21.1 to 2.21.6 ([e72156d](https://github.com/react-dnd/react-dnd/commit/e72156d))
+- build(deps): bump gatsby from 2.21.10 to 2.21.11 ([6587b79](https://github.com/react-dnd/react-dnd/commit/6587b79))
+- build(deps): bump gatsby from 2.21.10 to 2.21.12 ([61d32f0](https://github.com/react-dnd/react-dnd/commit/61d32f0))
+- build(deps): bump gatsby from 2.21.12 to 2.21.13 ([03879a0](https://github.com/react-dnd/react-dnd/commit/03879a0))
+- build(deps): bump gatsby from 2.21.13 to 2.21.16 ([d9e0cad](https://github.com/react-dnd/react-dnd/commit/d9e0cad))
+- build(deps): bump gatsby from 2.21.16 to 2.21.19 ([ee9c53d](https://github.com/react-dnd/react-dnd/commit/ee9c53d))
+- build(deps): bump gatsby from 2.21.19 to 2.21.21 ([c9def9d](https://github.com/react-dnd/react-dnd/commit/c9def9d))
+- build(deps): bump gatsby from 2.21.21 to 2.21.22 ([325d0dd](https://github.com/react-dnd/react-dnd/commit/325d0dd))
+- build(deps): bump gatsby from 2.21.22 to 2.21.25 ([b7852e3](https://github.com/react-dnd/react-dnd/commit/b7852e3))
+- build(deps): bump gatsby from 2.21.25 to 2.21.30 ([b52d06d](https://github.com/react-dnd/react-dnd/commit/b52d06d))
+- build(deps): bump gatsby from 2.21.30 to 2.21.31 ([fd4ae4c](https://github.com/react-dnd/react-dnd/commit/fd4ae4c))
+- build(deps): bump gatsby from 2.21.31 to 2.21.33 ([f7e1079](https://github.com/react-dnd/react-dnd/commit/f7e1079))
+- build(deps): bump gatsby from 2.21.33 to 2.21.39 ([9f19d4b](https://github.com/react-dnd/react-dnd/commit/9f19d4b))
+- build(deps): bump gatsby from 2.21.39 to 2.22.3 ([3896c88](https://github.com/react-dnd/react-dnd/commit/3896c88))
+- build(deps): bump gatsby from 2.21.6 to 2.21.7 ([27fcc4b](https://github.com/react-dnd/react-dnd/commit/27fcc4b))
+- build(deps): bump gatsby from 2.21.7 to 2.21.10 ([2c9046f](https://github.com/react-dnd/react-dnd/commit/2c9046f))
+- build(deps): bump gatsby from 2.22.3 to 2.22.4 ([efbd7d9](https://github.com/react-dnd/react-dnd/commit/efbd7d9))
+- build(deps): bump gatsby from 2.22.9 to 2.22.10 ([55957e3](https://github.com/react-dnd/react-dnd/commit/55957e3))
+- build(deps): bump gatsby-image from 2.2.34 to 2.2.36 ([8f8bb3a](https://github.com/react-dnd/react-dnd/commit/8f8bb3a))
+- build(deps): bump gatsby-image from 2.2.36 to 2.2.37 ([a83f354](https://github.com/react-dnd/react-dnd/commit/a83f354))
+- build(deps): bump gatsby-image from 2.2.37 to 2.2.38 ([0215047](https://github.com/react-dnd/react-dnd/commit/0215047))
+- build(deps): bump gatsby-image from 2.2.38 to 2.2.39 ([c6ebd26](https://github.com/react-dnd/react-dnd/commit/c6ebd26))
+- build(deps): bump gatsby-image from 2.2.39 to 2.2.40 ([47b1e01](https://github.com/react-dnd/react-dnd/commit/47b1e01))
+- build(deps): bump gatsby-image from 2.2.40 to 2.2.41 ([9f16c2c](https://github.com/react-dnd/react-dnd/commit/9f16c2c))
+- build(deps): bump gatsby-image from 2.2.41 to 2.2.42 ([993ed6a](https://github.com/react-dnd/react-dnd/commit/993ed6a))
+- build(deps): bump gatsby-image from 2.2.42 to 2.2.43 ([219f3b6](https://github.com/react-dnd/react-dnd/commit/219f3b6))
+- build(deps): bump gatsby-image from 2.2.43 to 2.2.44 ([c710997](https://github.com/react-dnd/react-dnd/commit/c710997))
+- build(deps): bump gatsby-image from 2.2.44 to 2.2.45 ([27e5f0d](https://github.com/react-dnd/react-dnd/commit/27e5f0d))
+- build(deps): bump gatsby-image from 2.2.45 to 2.3.0 ([751d24f](https://github.com/react-dnd/react-dnd/commit/751d24f))
+- build(deps): bump gatsby-image from 2.3.0 to 2.3.1 ([b1139b5](https://github.com/react-dnd/react-dnd/commit/b1139b5))
+- build(deps): bump gatsby-image from 2.3.1 to 2.3.2 ([d42483a](https://github.com/react-dnd/react-dnd/commit/d42483a))
+- build(deps): bump gatsby-image from 2.3.2 to 2.3.3 ([c21e658](https://github.com/react-dnd/react-dnd/commit/c21e658))
+- build(deps): bump gatsby-image from 2.3.3 to 2.3.4 ([ad6244b](https://github.com/react-dnd/react-dnd/commit/ad6244b))
+- build(deps): bump gatsby-image from 2.3.4 to 2.3.5 ([a001e0b](https://github.com/react-dnd/react-dnd/commit/a001e0b))
+- build(deps): bump gatsby-image from 2.3.5 to 2.4.0 ([7afd9b3](https://github.com/react-dnd/react-dnd/commit/7afd9b3))
+- build(deps): bump gatsby-image from 2.4.0 to 2.4.1 ([3164e2f](https://github.com/react-dnd/react-dnd/commit/3164e2f))
+- build(deps): bump gatsby-image from 2.4.1 to 2.4.2 ([34ee8e2](https://github.com/react-dnd/react-dnd/commit/34ee8e2))
+- build(deps): bump gatsby-image from 2.4.2 to 2.4.3 ([71bb011](https://github.com/react-dnd/react-dnd/commit/71bb011))
+- build(deps): bump gatsby-image from 2.4.3 to 2.4.4 ([164cf96](https://github.com/react-dnd/react-dnd/commit/164cf96))
+- build(deps): bump gatsby-image from 2.4.3 to 2.4.5 ([8791734](https://github.com/react-dnd/react-dnd/commit/8791734))
+- build(deps): bump gatsby-image from 2.4.4 to 2.4.5 ([874d4d1](https://github.com/react-dnd/react-dnd/commit/874d4d1))
+- build(deps): bump gatsby-plugin-manifest from 2.2.31 to 2.2.33 ([2c62d17](https://github.com/react-dnd/react-dnd/commit/2c62d17))
+- build(deps): bump gatsby-plugin-manifest from 2.2.33 to 2.2.34 ([738fc19](https://github.com/react-dnd/react-dnd/commit/738fc19))
+- build(deps): bump gatsby-plugin-manifest from 2.2.34 to 2.2.37 ([0533132](https://github.com/react-dnd/react-dnd/commit/0533132))
+- build(deps): bump gatsby-plugin-manifest from 2.2.37 to 2.2.38 ([a6e5bd7](https://github.com/react-dnd/react-dnd/commit/a6e5bd7))
+- build(deps): bump gatsby-plugin-manifest from 2.2.38 to 2.2.39 ([4a88897](https://github.com/react-dnd/react-dnd/commit/4a88897))
+- build(deps): bump gatsby-plugin-manifest from 2.2.39 to 2.2.40 ([9263cb2](https://github.com/react-dnd/react-dnd/commit/9263cb2))
+- build(deps): bump gatsby-plugin-manifest from 2.2.40 to 2.2.41 ([e007060](https://github.com/react-dnd/react-dnd/commit/e007060))
+- build(deps): bump gatsby-plugin-manifest from 2.2.41 to 2.2.42 ([56a30c0](https://github.com/react-dnd/react-dnd/commit/56a30c0))
+- build(deps): bump gatsby-plugin-manifest from 2.2.42 to 2.2.44 ([5f8211a](https://github.com/react-dnd/react-dnd/commit/5f8211a))
+- build(deps): bump gatsby-plugin-manifest from 2.2.44 to 2.2.45 ([5e76a60](https://github.com/react-dnd/react-dnd/commit/5e76a60))
+- build(deps): bump gatsby-plugin-manifest from 2.2.45 to 2.2.46 ([235e13f](https://github.com/react-dnd/react-dnd/commit/235e13f))
+- build(deps): bump gatsby-plugin-manifest from 2.2.46 to 2.2.47 ([bbcbd13](https://github.com/react-dnd/react-dnd/commit/bbcbd13))
+- build(deps): bump gatsby-plugin-manifest from 2.2.47 to 2.2.48 ([756e62c](https://github.com/react-dnd/react-dnd/commit/756e62c))
+- build(deps): bump gatsby-plugin-manifest from 2.2.48 to 2.3.2 ([3d5cf8b](https://github.com/react-dnd/react-dnd/commit/3d5cf8b))
+- build(deps): bump gatsby-plugin-manifest from 2.3.2 to 2.3.3 ([c6f16da](https://github.com/react-dnd/react-dnd/commit/c6f16da))
+- build(deps): bump gatsby-plugin-manifest from 2.3.3 to 2.3.4 ([fca6bd2](https://github.com/react-dnd/react-dnd/commit/fca6bd2))
+- build(deps): bump gatsby-plugin-manifest from 2.3.4 to 2.3.5 ([39f0d3b](https://github.com/react-dnd/react-dnd/commit/39f0d3b))
+- build(deps): bump gatsby-plugin-manifest from 2.3.5 to 2.3.6 ([36126e8](https://github.com/react-dnd/react-dnd/commit/36126e8))
+- build(deps): bump gatsby-plugin-manifest from 2.3.6 to 2.3.7 ([1de2b7d](https://github.com/react-dnd/react-dnd/commit/1de2b7d))
+- build(deps): bump gatsby-plugin-manifest from 2.3.7 to 2.4.0 ([c46a3a0](https://github.com/react-dnd/react-dnd/commit/c46a3a0))
+- build(deps): bump gatsby-plugin-manifest from 2.4.0 to 2.4.1 ([c8032d7](https://github.com/react-dnd/react-dnd/commit/c8032d7))
+- build(deps): bump gatsby-plugin-manifest from 2.4.1 to 2.4.2 ([8662e26](https://github.com/react-dnd/react-dnd/commit/8662e26))
+- build(deps): bump gatsby-plugin-manifest from 2.4.2 to 2.4.3 ([13ab871](https://github.com/react-dnd/react-dnd/commit/13ab871))
+- build(deps): bump gatsby-plugin-manifest from 2.4.2 to 2.4.9 ([c8bf8b8](https://github.com/react-dnd/react-dnd/commit/c8bf8b8))
+- build(deps): bump gatsby-plugin-manifest from 2.4.3 to 2.4.5 ([a6576ce](https://github.com/react-dnd/react-dnd/commit/a6576ce))
+- build(deps): bump gatsby-plugin-manifest from 2.4.5 to 2.4.8 ([57fa343](https://github.com/react-dnd/react-dnd/commit/57fa343))
+- build(deps): bump gatsby-plugin-offline from 3.0.27 to 3.0.29 ([73dbfd3](https://github.com/react-dnd/react-dnd/commit/73dbfd3))
+- build(deps): bump gatsby-plugin-offline from 3.0.29 to 3.0.30 ([7603970](https://github.com/react-dnd/react-dnd/commit/7603970))
+- build(deps): bump gatsby-plugin-offline from 3.0.30 to 3.0.31 ([8c42102](https://github.com/react-dnd/react-dnd/commit/8c42102))
+- build(deps): bump gatsby-plugin-offline from 3.0.31 to 3.0.32 ([4d17f55](https://github.com/react-dnd/react-dnd/commit/4d17f55))
+- build(deps): bump gatsby-plugin-offline from 3.0.32 to 3.0.33 ([0f318cc](https://github.com/react-dnd/react-dnd/commit/0f318cc))
+- build(deps): bump gatsby-plugin-offline from 3.0.33 to 3.0.34 ([712f0d2](https://github.com/react-dnd/react-dnd/commit/712f0d2))
+- build(deps): bump gatsby-plugin-offline from 3.0.34 to 3.0.35 ([3fb3188](https://github.com/react-dnd/react-dnd/commit/3fb3188))
+- build(deps): bump gatsby-plugin-offline from 3.0.35 to 3.0.37 ([62ae4e9](https://github.com/react-dnd/react-dnd/commit/62ae4e9))
+- build(deps): bump gatsby-plugin-offline from 3.0.37 to 3.0.38 ([72c96cf](https://github.com/react-dnd/react-dnd/commit/72c96cf))
+- build(deps): bump gatsby-plugin-offline from 3.0.38 to 3.0.39 ([3dd7ec3](https://github.com/react-dnd/react-dnd/commit/3dd7ec3))
+- build(deps): bump gatsby-plugin-offline from 3.0.39 to 3.0.40 ([b5838ed](https://github.com/react-dnd/react-dnd/commit/b5838ed))
+- build(deps): bump gatsby-plugin-offline from 3.0.40 to 3.0.41 ([d2fe3a9](https://github.com/react-dnd/react-dnd/commit/d2fe3a9))
+- build(deps): bump gatsby-plugin-offline from 3.0.41 to 3.0.42 ([3e7c755](https://github.com/react-dnd/react-dnd/commit/3e7c755))
+- build(deps): bump gatsby-plugin-offline from 3.0.42 to 3.1.0 ([362eb54](https://github.com/react-dnd/react-dnd/commit/362eb54))
+- build(deps): bump gatsby-plugin-offline from 3.1.0 to 3.1.1 ([7012532](https://github.com/react-dnd/react-dnd/commit/7012532))
+- build(deps): bump gatsby-plugin-offline from 3.1.1 to 3.1.2 ([95dbcf8](https://github.com/react-dnd/react-dnd/commit/95dbcf8))
+- build(deps): bump gatsby-plugin-offline from 3.1.2 to 3.1.4 ([c3c245c](https://github.com/react-dnd/react-dnd/commit/c3c245c))
+- build(deps): bump gatsby-plugin-offline from 3.1.4 to 3.1.5 ([fdc09e4](https://github.com/react-dnd/react-dnd/commit/fdc09e4))
+- build(deps): bump gatsby-plugin-offline from 3.1.5 to 3.2.0 ([e550c43](https://github.com/react-dnd/react-dnd/commit/e550c43))
+- build(deps): bump gatsby-plugin-offline from 3.2.0 to 3.2.1 ([0d1ca32](https://github.com/react-dnd/react-dnd/commit/0d1ca32))
+- build(deps): bump gatsby-plugin-offline from 3.2.1 to 3.2.2 ([2769a80](https://github.com/react-dnd/react-dnd/commit/2769a80))
+- build(deps): bump gatsby-plugin-offline from 3.2.2 to 3.2.3 ([00b6d35](https://github.com/react-dnd/react-dnd/commit/00b6d35))
+- build(deps): bump gatsby-plugin-offline from 3.2.3 to 3.2.6 ([983746b](https://github.com/react-dnd/react-dnd/commit/983746b))
+- build(deps): bump gatsby-plugin-react-helmet from 3.1.16 to 3.1.18 ([b2b9925](https://github.com/react-dnd/react-dnd/commit/b2b9925))
+- build(deps): bump gatsby-plugin-react-helmet from 3.1.18 to 3.1.21 ([ccda306](https://github.com/react-dnd/react-dnd/commit/ccda306))
+- build(deps): bump gatsby-plugin-react-helmet from 3.1.21 to 3.1.22 ([caf5b50](https://github.com/react-dnd/react-dnd/commit/caf5b50))
+- build(deps): bump gatsby-plugin-react-helmet from 3.1.22 to 3.1.23 ([b5605eb](https://github.com/react-dnd/react-dnd/commit/b5605eb))
+- build(deps): bump gatsby-plugin-react-helmet from 3.1.23 to 3.1.24 ([9edb5db](https://github.com/react-dnd/react-dnd/commit/9edb5db))
+- build(deps): bump gatsby-plugin-react-helmet from 3.1.24 to 3.2.1 ([ffb83ea](https://github.com/react-dnd/react-dnd/commit/ffb83ea))
+- build(deps): bump gatsby-plugin-react-helmet from 3.2.1 to 3.2.2 ([cb69c03](https://github.com/react-dnd/react-dnd/commit/cb69c03))
+- build(deps): bump gatsby-plugin-react-helmet from 3.2.2 to 3.2.3 ([e2e0a08](https://github.com/react-dnd/react-dnd/commit/e2e0a08))
+- build(deps): bump gatsby-plugin-react-helmet from 3.2.3 to 3.2.4 ([3456461](https://github.com/react-dnd/react-dnd/commit/3456461))
+- build(deps): bump gatsby-plugin-react-helmet from 3.2.4 to 3.2.5 ([0214db9](https://github.com/react-dnd/react-dnd/commit/0214db9))
+- build(deps): bump gatsby-plugin-react-helmet from 3.2.5 to 3.3.0 ([ea4411c](https://github.com/react-dnd/react-dnd/commit/ea4411c))
+- build(deps): bump gatsby-plugin-react-helmet from 3.3.0 to 3.3.1 ([b21ee66](https://github.com/react-dnd/react-dnd/commit/b21ee66))
+- build(deps): bump gatsby-plugin-react-helmet from 3.3.1 to 3.3.2 ([40a9204](https://github.com/react-dnd/react-dnd/commit/40a9204))
+- build(deps): bump gatsby-plugin-react-helmet from 3.3.1 to 3.3.2 (#2466) ([7cab802](https://github.com/react-dnd/react-dnd/commit/7cab802)), closes [#2466](https://github.com/react-dnd/react-dnd/issues/2466)
+- build(deps): bump gatsby-plugin-sharp from 2.3.10 to 2.3.13 ([e7da889](https://github.com/react-dnd/react-dnd/commit/e7da889))
+- build(deps): bump gatsby-plugin-sharp from 2.3.13 to 2.4.0 ([34fa7a1](https://github.com/react-dnd/react-dnd/commit/34fa7a1))
+- build(deps): bump gatsby-plugin-sharp from 2.3.5 to 2.3.7 ([48ab3f7](https://github.com/react-dnd/react-dnd/commit/48ab3f7))
+- build(deps): bump gatsby-plugin-sharp from 2.3.7 to 2.3.8 ([7130196](https://github.com/react-dnd/react-dnd/commit/7130196))
+- build(deps): bump gatsby-plugin-sharp from 2.3.8 to 2.3.9 ([f43e163](https://github.com/react-dnd/react-dnd/commit/f43e163))
+- build(deps): bump gatsby-plugin-sharp from 2.3.9 to 2.3.10 ([d0e0235](https://github.com/react-dnd/react-dnd/commit/d0e0235))
+- build(deps): bump gatsby-plugin-sharp from 2.4.0 to 2.4.3 ([1e39f86](https://github.com/react-dnd/react-dnd/commit/1e39f86))
+- build(deps): bump gatsby-plugin-sharp from 2.4.10 to 2.4.11 ([b5b4a5e](https://github.com/react-dnd/react-dnd/commit/b5b4a5e))
+- build(deps): bump gatsby-plugin-sharp from 2.4.11 to 2.4.12 ([f0e93be](https://github.com/react-dnd/react-dnd/commit/f0e93be))
+- build(deps): bump gatsby-plugin-sharp from 2.4.12 to 2.4.13 ([e65e235](https://github.com/react-dnd/react-dnd/commit/e65e235))
+- build(deps): bump gatsby-plugin-sharp from 2.4.13 to 2.5.1 ([bd2bac3](https://github.com/react-dnd/react-dnd/commit/bd2bac3))
+- build(deps): bump gatsby-plugin-sharp from 2.4.3 to 2.4.4 ([150f8e0](https://github.com/react-dnd/react-dnd/commit/150f8e0))
+- build(deps): bump gatsby-plugin-sharp from 2.4.4 to 2.4.5 ([dd712c8](https://github.com/react-dnd/react-dnd/commit/dd712c8))
+- build(deps): bump gatsby-plugin-sharp from 2.4.5 to 2.4.7 ([5d85a87](https://github.com/react-dnd/react-dnd/commit/5d85a87))
+- build(deps): bump gatsby-plugin-sharp from 2.4.7 to 2.4.8 ([4047b66](https://github.com/react-dnd/react-dnd/commit/4047b66))
+- build(deps): bump gatsby-plugin-sharp from 2.4.8 to 2.4.10 ([1d7dca4](https://github.com/react-dnd/react-dnd/commit/1d7dca4))
+- build(deps): bump gatsby-plugin-sharp from 2.5.1 to 2.5.2 ([b7534a6](https://github.com/react-dnd/react-dnd/commit/b7534a6))
+- build(deps): bump gatsby-plugin-sharp from 2.5.2 to 2.5.3 ([34bd651](https://github.com/react-dnd/react-dnd/commit/34bd651))
+- build(deps): bump gatsby-plugin-sharp from 2.5.3 to 2.5.4 ([0dbe08f](https://github.com/react-dnd/react-dnd/commit/0dbe08f))
+- build(deps): bump gatsby-plugin-sharp from 2.5.4 to 2.5.6 ([dc4e7ed](https://github.com/react-dnd/react-dnd/commit/dc4e7ed))
+- build(deps): bump gatsby-plugin-sharp from 2.5.6 to 2.5.7 ([2e3bb7d](https://github.com/react-dnd/react-dnd/commit/2e3bb7d))
+- build(deps): bump gatsby-plugin-sharp from 2.5.7 to 2.6.0 ([b7a583a](https://github.com/react-dnd/react-dnd/commit/b7a583a))
+- build(deps): bump gatsby-plugin-sharp from 2.6.0 to 2.6.1 ([ff7a335](https://github.com/react-dnd/react-dnd/commit/ff7a335))
+- build(deps): bump gatsby-plugin-sharp from 2.6.1 to 2.6.2 ([d9f1636](https://github.com/react-dnd/react-dnd/commit/d9f1636))
+- build(deps): bump gatsby-plugin-sharp from 2.6.2 to 2.6.3 ([a4e657c](https://github.com/react-dnd/react-dnd/commit/a4e657c))
+- build(deps): bump gatsby-plugin-sharp from 2.6.2 to 2.6.9 (#2472) ([0e181ec](https://github.com/react-dnd/react-dnd/commit/0e181ec)), closes [#2472](https://github.com/react-dnd/react-dnd/issues/2472)
+- build(deps): bump gatsby-plugin-sharp from 2.6.3 to 2.6.5 ([1d5d3b0](https://github.com/react-dnd/react-dnd/commit/1d5d3b0))
+- build(deps): bump gatsby-plugin-sharp from 2.6.5 to 2.6.8 ([4ed3305](https://github.com/react-dnd/react-dnd/commit/4ed3305))
+- build(deps): bump gatsby-plugin-styled-components from 3.1.14 to 3.1.16 ([8115422](https://github.com/react-dnd/react-dnd/commit/8115422))
+- build(deps): bump gatsby-plugin-styled-components from 3.1.16 to 3.1.17 ([a599242](https://github.com/react-dnd/react-dnd/commit/a599242))
+- build(deps): bump gatsby-plugin-styled-components from 3.1.17 to 3.1.18 ([1ce5e7b](https://github.com/react-dnd/react-dnd/commit/1ce5e7b))
+- build(deps): bump gatsby-plugin-styled-components from 3.1.18 to 3.1.19 ([b9288dc](https://github.com/react-dnd/react-dnd/commit/b9288dc))
+- build(deps): bump gatsby-plugin-styled-components from 3.1.19 to 3.1.20 ([084b573](https://github.com/react-dnd/react-dnd/commit/084b573))
+- build(deps): bump gatsby-plugin-styled-components from 3.1.20 to 3.1.21 ([63fb38e](https://github.com/react-dnd/react-dnd/commit/63fb38e))
+- build(deps): bump gatsby-plugin-styled-components from 3.1.21 to 3.2.1 ([9f0501d](https://github.com/react-dnd/react-dnd/commit/9f0501d))
+- build(deps): bump gatsby-plugin-styled-components from 3.2.1 to 3.2.2 ([79b075e](https://github.com/react-dnd/react-dnd/commit/79b075e))
+- build(deps): bump gatsby-plugin-styled-components from 3.2.2 to 3.2.3 ([f909356](https://github.com/react-dnd/react-dnd/commit/f909356))
+- build(deps): bump gatsby-plugin-styled-components from 3.2.3 to 3.2.4 ([cf6755e](https://github.com/react-dnd/react-dnd/commit/cf6755e))
+- build(deps): bump gatsby-plugin-styled-components from 3.2.4 to 3.3.0 ([27de983](https://github.com/react-dnd/react-dnd/commit/27de983))
+- build(deps): bump gatsby-plugin-styled-components from 3.3.0 to 3.3.1 ([935ed0e](https://github.com/react-dnd/react-dnd/commit/935ed0e))
+- build(deps): bump gatsby-plugin-styled-components from 3.3.1 to 3.3.2 ([389a717](https://github.com/react-dnd/react-dnd/commit/389a717))
+- build(deps): bump gatsby-plugin-typescript from 2.1.20 to 2.1.22 ([e1f1c52](https://github.com/react-dnd/react-dnd/commit/e1f1c52))
+- build(deps): bump gatsby-plugin-typescript from 2.1.22 to 2.1.23 ([bf0b373](https://github.com/react-dnd/react-dnd/commit/bf0b373))
+- build(deps): bump gatsby-plugin-typescript from 2.1.23 to 2.1.26 ([650306c](https://github.com/react-dnd/react-dnd/commit/650306c))
+- build(deps): bump gatsby-plugin-typescript from 2.1.26 to 2.1.27 ([59d3836](https://github.com/react-dnd/react-dnd/commit/59d3836))
+- build(deps): bump gatsby-plugin-typescript from 2.1.27 to 2.2.0 ([f06011d](https://github.com/react-dnd/react-dnd/commit/f06011d))
+- build(deps): bump gatsby-plugin-typescript from 2.2.0 to 2.2.2 ([256ac16](https://github.com/react-dnd/react-dnd/commit/256ac16))
+- build(deps): bump gatsby-plugin-typescript from 2.2.2 to 2.2.3 ([5baa85e](https://github.com/react-dnd/react-dnd/commit/5baa85e))
+- build(deps): bump gatsby-plugin-typescript from 2.2.3 to 2.2.5 ([a96f8ab](https://github.com/react-dnd/react-dnd/commit/a96f8ab))
+- build(deps): bump gatsby-plugin-typescript from 2.2.5 to 2.3.0 ([ff6ef25](https://github.com/react-dnd/react-dnd/commit/ff6ef25))
+- build(deps): bump gatsby-plugin-typescript from 2.3.0 to 2.3.1 ([9bca3e9](https://github.com/react-dnd/react-dnd/commit/9bca3e9))
+- build(deps): bump gatsby-plugin-typescript from 2.3.1 to 2.3.2 ([1f4c27c](https://github.com/react-dnd/react-dnd/commit/1f4c27c))
+- build(deps): bump gatsby-plugin-typescript from 2.3.2 to 2.3.3 ([d277735](https://github.com/react-dnd/react-dnd/commit/d277735))
+- build(deps): bump gatsby-plugin-typescript from 2.3.3 to 2.4.0 ([069e17c](https://github.com/react-dnd/react-dnd/commit/069e17c))
+- build(deps): bump gatsby-plugin-typescript from 2.4.0 to 2.4.1 ([b4c7da3](https://github.com/react-dnd/react-dnd/commit/b4c7da3))
+- build(deps): bump gatsby-plugin-typescript from 2.4.2 to 2.4.3 (#2474) ([25b29ea](https://github.com/react-dnd/react-dnd/commit/25b29ea)), closes [#2474](https://github.com/react-dnd/react-dnd/issues/2474)
+- build(deps): bump gatsby-plugin-typography from 2.3.18 to 2.3.20 ([fb36b1a](https://github.com/react-dnd/react-dnd/commit/fb36b1a))
+- build(deps): bump gatsby-plugin-typography from 2.3.20 to 2.3.21 ([b2e84af](https://github.com/react-dnd/react-dnd/commit/b2e84af))
+- build(deps): bump gatsby-plugin-typography from 2.3.21 to 2.3.22 ([7ea3ee1](https://github.com/react-dnd/react-dnd/commit/7ea3ee1))
+- build(deps): bump gatsby-plugin-typography from 2.3.22 to 2.3.23 ([dd34228](https://github.com/react-dnd/react-dnd/commit/dd34228))
+- build(deps): bump gatsby-plugin-typography from 2.3.23 to 2.3.24 ([9c3ff27](https://github.com/react-dnd/react-dnd/commit/9c3ff27))
+- build(deps): bump gatsby-plugin-typography from 2.3.24 to 2.3.25 ([395ba73](https://github.com/react-dnd/react-dnd/commit/395ba73))
+- build(deps): bump gatsby-plugin-typography from 2.3.25 to 2.4.0 ([07dc6a0](https://github.com/react-dnd/react-dnd/commit/07dc6a0))
+- build(deps): bump gatsby-plugin-typography from 2.4.0 to 2.4.1 ([2da89e2](https://github.com/react-dnd/react-dnd/commit/2da89e2))
+- build(deps): bump gatsby-plugin-typography from 2.4.1 to 2.4.2 ([8e98a7d](https://github.com/react-dnd/react-dnd/commit/8e98a7d))
+- build(deps): bump gatsby-plugin-typography from 2.4.2 to 2.4.3 ([3f2fa87](https://github.com/react-dnd/react-dnd/commit/3f2fa87))
+- build(deps): bump gatsby-plugin-typography from 2.4.3 to 2.5.0 ([505b228](https://github.com/react-dnd/react-dnd/commit/505b228))
+- build(deps): bump gatsby-plugin-typography from 2.5.0 to 2.5.1 ([5906854](https://github.com/react-dnd/react-dnd/commit/5906854))
+- build(deps): bump gatsby-plugin-typography from 2.5.1 to 2.5.2 ([c3524e0](https://github.com/react-dnd/react-dnd/commit/c3524e0))
+- build(deps): bump gatsby-plugin-typography from 2.5.1 to 2.5.2 ([871c6de](https://github.com/react-dnd/react-dnd/commit/871c6de))
+- build(deps): bump gatsby-remark-autolink-headers from 2.1.19 to 2.1.21 ([224adcd](https://github.com/react-dnd/react-dnd/commit/224adcd))
+- build(deps): bump gatsby-remark-autolink-headers from 2.1.21 to 2.1.22 ([f95d8de](https://github.com/react-dnd/react-dnd/commit/f95d8de))
+- build(deps): bump gatsby-remark-autolink-headers from 2.1.22 to 2.1.23 ([5e289e8](https://github.com/react-dnd/react-dnd/commit/5e289e8))
+- build(deps): bump gatsby-remark-autolink-headers from 2.1.23 to 2.1.24 ([f15373a](https://github.com/react-dnd/react-dnd/commit/f15373a))
+- build(deps): bump gatsby-remark-autolink-headers from 2.1.24 to 2.1.25 ([b55b80d](https://github.com/react-dnd/react-dnd/commit/b55b80d))
+- build(deps): bump gatsby-remark-autolink-headers from 2.1.25 to 2.1.26 ([bcb853d](https://github.com/react-dnd/react-dnd/commit/bcb853d))
+- build(deps): bump gatsby-remark-autolink-headers from 2.1.26 to 2.2.0 ([08c5863](https://github.com/react-dnd/react-dnd/commit/08c5863))
+- build(deps): bump gatsby-remark-autolink-headers from 2.2.0 to 2.2.1 ([f383bb5](https://github.com/react-dnd/react-dnd/commit/f383bb5))
+- build(deps): bump gatsby-remark-autolink-headers from 2.2.1 to 2.2.3 ([c12b265](https://github.com/react-dnd/react-dnd/commit/c12b265))
+- build(deps): bump gatsby-remark-autolink-headers from 2.2.3 to 2.2.4 ([aa98eac](https://github.com/react-dnd/react-dnd/commit/aa98eac))
+- build(deps): bump gatsby-remark-autolink-headers from 2.2.4 to 2.3.0 ([034d3d4](https://github.com/react-dnd/react-dnd/commit/034d3d4))
+- build(deps): bump gatsby-remark-autolink-headers from 2.3.0 to 2.3.1 ([6014b08](https://github.com/react-dnd/react-dnd/commit/6014b08))
+- build(deps): bump gatsby-remark-autolink-headers from 2.3.1 to 2.3.2 ([326406f](https://github.com/react-dnd/react-dnd/commit/326406f))
+- build(deps): bump gatsby-remark-autolink-headers from 2.3.1 to 2.3.3 ([a236325](https://github.com/react-dnd/react-dnd/commit/a236325))
+- build(deps): bump gatsby-remark-autolink-headers from 2.3.2 to 2.3.3 ([f27824f](https://github.com/react-dnd/react-dnd/commit/f27824f))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.1.31 to 2.1.33 ([2dd4eaa](https://github.com/react-dnd/react-dnd/commit/2dd4eaa))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.1.33 to 2.1.36 ([f857478](https://github.com/react-dnd/react-dnd/commit/f857478))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.1.36 to 2.1.37 ([f0a0bee](https://github.com/react-dnd/react-dnd/commit/f0a0bee))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.1.37 to 2.1.38 ([79d6466](https://github.com/react-dnd/react-dnd/commit/79d6466))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.1.38 to 2.1.39 ([cf8ef50](https://github.com/react-dnd/react-dnd/commit/cf8ef50))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.1.39 to 2.1.40 ([311fe30](https://github.com/react-dnd/react-dnd/commit/311fe30))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.1.40 to 2.2.1 ([4170a93](https://github.com/react-dnd/react-dnd/commit/4170a93))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.2.1 to 2.2.2 ([239b04c](https://github.com/react-dnd/react-dnd/commit/239b04c))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.2.2 to 2.2.3 ([01f8296](https://github.com/react-dnd/react-dnd/commit/01f8296))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.2.3 to 2.2.4 ([161aa00](https://github.com/react-dnd/react-dnd/commit/161aa00))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.2.4 to 2.3.0 ([2ce5356](https://github.com/react-dnd/react-dnd/commit/2ce5356))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.3.0 to 2.3.1 ([b9a1950](https://github.com/react-dnd/react-dnd/commit/b9a1950))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.3.1 to 2.3.2 ([48e1d52](https://github.com/react-dnd/react-dnd/commit/48e1d52))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.3.2 to 2.3.3 ([63d0537](https://github.com/react-dnd/react-dnd/commit/63d0537))
+- build(deps): bump gatsby-remark-embed-snippet from 4.1.16 to 4.1.18 ([958a4b3](https://github.com/react-dnd/react-dnd/commit/958a4b3))
+- build(deps): bump gatsby-remark-embed-snippet from 4.1.18 to 4.1.21 ([a9f41b7](https://github.com/react-dnd/react-dnd/commit/a9f41b7))
+- build(deps): bump gatsby-remark-embed-snippet from 4.1.21 to 4.1.22 ([6aa40ee](https://github.com/react-dnd/react-dnd/commit/6aa40ee))
+- build(deps): bump gatsby-remark-embed-snippet from 4.1.22 to 4.1.23 ([82858da](https://github.com/react-dnd/react-dnd/commit/82858da))
+- build(deps): bump gatsby-remark-embed-snippet from 4.1.23 to 4.1.24 ([810e636](https://github.com/react-dnd/react-dnd/commit/810e636))
+- build(deps): bump gatsby-remark-embed-snippet from 4.1.24 to 4.2.0 ([01ecab9](https://github.com/react-dnd/react-dnd/commit/01ecab9))
+- build(deps): bump gatsby-remark-embed-snippet from 4.2.0 to 4.2.1 ([da0b75c](https://github.com/react-dnd/react-dnd/commit/da0b75c))
+- build(deps): bump gatsby-remark-embed-snippet from 4.2.1 to 4.2.2 ([de70ff2](https://github.com/react-dnd/react-dnd/commit/de70ff2))
+- build(deps): bump gatsby-remark-embed-snippet from 4.2.2 to 4.2.3 ([876f634](https://github.com/react-dnd/react-dnd/commit/876f634))
+- build(deps): bump gatsby-remark-embed-snippet from 4.2.3 to 4.2.4 ([aa0d515](https://github.com/react-dnd/react-dnd/commit/aa0d515))
+- build(deps): bump gatsby-remark-embed-snippet from 4.2.4 to 4.2.5 ([239c091](https://github.com/react-dnd/react-dnd/commit/239c091))
+- build(deps): bump gatsby-remark-embed-snippet from 4.2.5 to 4.3.0 ([b86f3d3](https://github.com/react-dnd/react-dnd/commit/b86f3d3))
+- build(deps): bump gatsby-remark-embed-snippet from 4.3.0 to 4.3.1 ([c207c13](https://github.com/react-dnd/react-dnd/commit/c207c13))
+- build(deps): bump gatsby-remark-embed-snippet from 4.3.1 to 4.3.2 ([22b87a0](https://github.com/react-dnd/react-dnd/commit/22b87a0))
+- build(deps): bump gatsby-remark-embed-snippet from 4.3.1 to 4.3.2 (#2473) ([31b0b22](https://github.com/react-dnd/react-dnd/commit/31b0b22)), closes [#2473](https://github.com/react-dnd/react-dnd/issues/2473)
+- build(deps): bump gatsby-remark-images from 3.1.35 to 3.1.37 ([f9c50d5](https://github.com/react-dnd/react-dnd/commit/f9c50d5))
+- build(deps): bump gatsby-remark-images from 3.1.37 to 3.1.38 ([17f3a40](https://github.com/react-dnd/react-dnd/commit/17f3a40))
+- build(deps): bump gatsby-remark-images from 3.1.38 to 3.1.39 ([619a1a9](https://github.com/react-dnd/react-dnd/commit/619a1a9))
+- build(deps): bump gatsby-remark-images from 3.1.39 to 3.1.42 ([2094419](https://github.com/react-dnd/react-dnd/commit/2094419))
+- build(deps): bump gatsby-remark-images from 3.1.42 to 3.1.43 ([c074773](https://github.com/react-dnd/react-dnd/commit/c074773))
+- build(deps): bump gatsby-remark-images from 3.1.43 to 3.1.44 ([fd69058](https://github.com/react-dnd/react-dnd/commit/fd69058))
+- build(deps): bump gatsby-remark-images from 3.1.44 to 3.1.47 ([57088cf](https://github.com/react-dnd/react-dnd/commit/57088cf))
+- build(deps): bump gatsby-remark-images from 3.1.47 to 3.1.48 ([801e142](https://github.com/react-dnd/react-dnd/commit/801e142))
+- build(deps): bump gatsby-remark-images from 3.1.48 to 3.1.49 ([e9c2ece](https://github.com/react-dnd/react-dnd/commit/e9c2ece))
+- build(deps): bump gatsby-remark-images from 3.1.49 to 3.1.50 ([9f57c0e](https://github.com/react-dnd/react-dnd/commit/9f57c0e))
+- build(deps): bump gatsby-remark-images from 3.1.50 to 3.2.1 ([6182db1](https://github.com/react-dnd/react-dnd/commit/6182db1))
+- build(deps): bump gatsby-remark-images from 3.2.1 to 3.2.2 ([7aacb9b](https://github.com/react-dnd/react-dnd/commit/7aacb9b))
+- build(deps): bump gatsby-remark-images from 3.2.2 to 3.2.3 ([0e3e222](https://github.com/react-dnd/react-dnd/commit/0e3e222))
+- build(deps): bump gatsby-remark-images from 3.2.3 to 3.2.4 ([00f4018](https://github.com/react-dnd/react-dnd/commit/00f4018))
+- build(deps): bump gatsby-remark-images from 3.2.4 to 3.2.5 ([1417ff6](https://github.com/react-dnd/react-dnd/commit/1417ff6))
+- build(deps): bump gatsby-remark-images from 3.2.5 to 3.2.6 ([85531e1](https://github.com/react-dnd/react-dnd/commit/85531e1))
+- build(deps): bump gatsby-remark-images from 3.2.6 to 3.3.0 ([73ae461](https://github.com/react-dnd/react-dnd/commit/73ae461))
+- build(deps): bump gatsby-remark-images from 3.3.0 to 3.3.1 ([25fdce5](https://github.com/react-dnd/react-dnd/commit/25fdce5))
+- build(deps): bump gatsby-remark-images from 3.3.1 to 3.3.2 ([044d1f7](https://github.com/react-dnd/react-dnd/commit/044d1f7))
+- build(deps): bump gatsby-remark-images from 3.3.2 to 3.3.3 ([ad6e0c9](https://github.com/react-dnd/react-dnd/commit/ad6e0c9))
+- build(deps): bump gatsby-remark-images from 3.3.3 to 3.3.4 ([84567f9](https://github.com/react-dnd/react-dnd/commit/84567f9))
+- build(deps): bump gatsby-remark-images from 3.3.4 to 3.3.7 ([252d7fa](https://github.com/react-dnd/react-dnd/commit/252d7fa))
+- build(deps): bump gatsby-remark-prismjs from 3.3.25 to 3.3.27 ([ab65910](https://github.com/react-dnd/react-dnd/commit/ab65910))
+- build(deps): bump gatsby-remark-prismjs from 3.3.27 to 3.3.28 ([91aa082](https://github.com/react-dnd/react-dnd/commit/91aa082))
+- build(deps): bump gatsby-remark-prismjs from 3.3.28 to 3.3.29 ([5089274](https://github.com/react-dnd/react-dnd/commit/5089274))
+- build(deps): bump gatsby-remark-prismjs from 3.3.29 to 3.3.30 ([0679af3](https://github.com/react-dnd/react-dnd/commit/0679af3))
+- build(deps): bump gatsby-remark-prismjs from 3.3.30 to 3.3.31 ([5bd78be](https://github.com/react-dnd/react-dnd/commit/5bd78be))
+- build(deps): bump gatsby-remark-prismjs from 3.3.31 to 3.3.32 ([a9d120b](https://github.com/react-dnd/react-dnd/commit/a9d120b))
+- build(deps): bump gatsby-remark-prismjs from 3.3.32 to 3.3.33 ([2659975](https://github.com/react-dnd/react-dnd/commit/2659975))
+- build(deps): bump gatsby-remark-prismjs from 3.3.33 to 3.3.34 ([94141ce](https://github.com/react-dnd/react-dnd/commit/94141ce))
+- build(deps): bump gatsby-remark-prismjs from 3.3.34 to 3.3.35 ([66933b1](https://github.com/react-dnd/react-dnd/commit/66933b1))
+- build(deps): bump gatsby-remark-prismjs from 3.3.35 to 3.3.36 ([fd2730a](https://github.com/react-dnd/react-dnd/commit/fd2730a))
+- build(deps): bump gatsby-remark-prismjs from 3.3.36 to 3.4.0 ([65e4534](https://github.com/react-dnd/react-dnd/commit/65e4534))
+- build(deps): bump gatsby-remark-prismjs from 3.4.0 to 3.4.1 ([25aec41](https://github.com/react-dnd/react-dnd/commit/25aec41))
+- build(deps): bump gatsby-remark-prismjs from 3.4.1 to 3.4.2 ([2ffce80](https://github.com/react-dnd/react-dnd/commit/2ffce80))
+- build(deps): bump gatsby-remark-prismjs from 3.4.2 to 3.4.4 ([8882659](https://github.com/react-dnd/react-dnd/commit/8882659))
+- build(deps): bump gatsby-remark-prismjs from 3.4.4 to 3.5.0 ([e1d74dc](https://github.com/react-dnd/react-dnd/commit/e1d74dc))
+- build(deps): bump gatsby-remark-prismjs from 3.5.0 to 3.5.1 ([8b2a706](https://github.com/react-dnd/react-dnd/commit/8b2a706))
+- build(deps): bump gatsby-remark-prismjs from 3.5.1 to 3.5.2 ([ac360d6](https://github.com/react-dnd/react-dnd/commit/ac360d6))
+- build(deps): bump gatsby-source-filesystem from 2.1.40 to 2.1.42 ([1260d8a](https://github.com/react-dnd/react-dnd/commit/1260d8a))
+- build(deps): bump gatsby-source-filesystem from 2.1.42 to 2.1.43 ([1ffc610](https://github.com/react-dnd/react-dnd/commit/1ffc610))
+- build(deps): bump gatsby-source-filesystem from 2.1.43 to 2.1.46 ([6d46b78](https://github.com/react-dnd/react-dnd/commit/6d46b78))
+- build(deps): bump gatsby-source-filesystem from 2.1.46 to 2.1.47 ([7fa6994](https://github.com/react-dnd/react-dnd/commit/7fa6994))
+- build(deps): bump gatsby-source-filesystem from 2.1.47 to 2.1.48 ([db28412](https://github.com/react-dnd/react-dnd/commit/db28412))
+- build(deps): bump gatsby-source-filesystem from 2.1.48 to 2.1.51 ([8b5b447](https://github.com/react-dnd/react-dnd/commit/8b5b447))
+- build(deps): bump gatsby-source-filesystem from 2.1.51 to 2.1.52 ([6f2650d](https://github.com/react-dnd/react-dnd/commit/6f2650d))
+- build(deps): bump gatsby-source-filesystem from 2.1.52 to 2.1.53 ([9d5794e](https://github.com/react-dnd/react-dnd/commit/9d5794e))
+- build(deps): bump gatsby-source-filesystem from 2.1.53 to 2.1.54 ([fc173c8](https://github.com/react-dnd/react-dnd/commit/fc173c8))
+- build(deps): bump gatsby-source-filesystem from 2.1.54 to 2.1.55 ([adaaa28](https://github.com/react-dnd/react-dnd/commit/adaaa28))
+- build(deps): bump gatsby-source-filesystem from 2.1.55 to 2.1.56 ([36789c8](https://github.com/react-dnd/react-dnd/commit/36789c8))
+- build(deps): bump gatsby-source-filesystem from 2.1.56 to 2.1.57 ([24556a1](https://github.com/react-dnd/react-dnd/commit/24556a1))
+- build(deps): bump gatsby-source-filesystem from 2.1.57 to 2.2.1 ([d958f9b](https://github.com/react-dnd/react-dnd/commit/d958f9b))
+- build(deps): bump gatsby-source-filesystem from 2.2.1 to 2.2.2 ([b44224f](https://github.com/react-dnd/react-dnd/commit/b44224f))
+- build(deps): bump gatsby-source-filesystem from 2.2.2 to 2.2.3 ([0db7aca](https://github.com/react-dnd/react-dnd/commit/0db7aca))
+- build(deps): bump gatsby-source-filesystem from 2.2.3 to 2.2.4 ([94a905f](https://github.com/react-dnd/react-dnd/commit/94a905f))
+- build(deps): bump gatsby-source-filesystem from 2.2.4 to 2.2.5 ([ecf31e8](https://github.com/react-dnd/react-dnd/commit/ecf31e8))
+- build(deps): bump gatsby-source-filesystem from 2.2.5 to 2.3.0 ([9f2c047](https://github.com/react-dnd/react-dnd/commit/9f2c047))
+- build(deps): bump gatsby-source-filesystem from 2.3.0 to 2.3.1 ([acda0ab](https://github.com/react-dnd/react-dnd/commit/acda0ab))
+- build(deps): bump gatsby-source-filesystem from 2.3.1 to 2.3.3 ([edaed75](https://github.com/react-dnd/react-dnd/commit/edaed75))
+- build(deps): bump gatsby-source-filesystem from 2.3.3 to 2.3.4 ([a8e72b0](https://github.com/react-dnd/react-dnd/commit/a8e72b0))
+- build(deps): bump gatsby-source-filesystem from 2.3.4 to 2.3.7 ([9d07daf](https://github.com/react-dnd/react-dnd/commit/9d07daf))
+- build(deps): bump gatsby-transformer-remark from 2.6.39 to 2.6.42 ([09c64d3](https://github.com/react-dnd/react-dnd/commit/09c64d3))
+- build(deps): bump gatsby-transformer-remark from 2.6.42 to 2.6.43 ([17ece0a](https://github.com/react-dnd/react-dnd/commit/17ece0a))
+- build(deps): bump gatsby-transformer-remark from 2.6.43 to 2.6.44 ([4e7f99f](https://github.com/react-dnd/react-dnd/commit/4e7f99f))
+- build(deps): bump gatsby-transformer-remark from 2.6.44 to 2.6.45 ([26a8d6c](https://github.com/react-dnd/react-dnd/commit/26a8d6c))
+- build(deps): bump gatsby-transformer-remark from 2.6.45 to 2.6.48 ([7ac9d84](https://github.com/react-dnd/react-dnd/commit/7ac9d84))
+- build(deps): bump gatsby-transformer-remark from 2.6.48 to 2.6.49 ([86c2b96](https://github.com/react-dnd/react-dnd/commit/86c2b96))
+- build(deps): bump gatsby-transformer-remark from 2.6.49 to 2.6.50 ([0c06c0e](https://github.com/react-dnd/react-dnd/commit/0c06c0e))
+- build(deps): bump gatsby-transformer-remark from 2.6.50 to 2.6.51 ([8ce5297](https://github.com/react-dnd/react-dnd/commit/8ce5297))
+- build(deps): bump gatsby-transformer-remark from 2.6.51 to 2.6.52 ([7426bde](https://github.com/react-dnd/react-dnd/commit/7426bde))
+- build(deps): bump gatsby-transformer-remark from 2.6.52 to 2.6.53 ([d72d81d](https://github.com/react-dnd/react-dnd/commit/d72d81d))
+- build(deps): bump gatsby-transformer-remark from 2.6.53 to 2.6.55 ([7f21306](https://github.com/react-dnd/react-dnd/commit/7f21306))
+- build(deps): bump gatsby-transformer-remark from 2.6.55 to 2.6.56 ([0a959fa](https://github.com/react-dnd/react-dnd/commit/0a959fa))
+- build(deps): bump gatsby-transformer-remark from 2.6.56 to 2.6.57 ([0a82fd8](https://github.com/react-dnd/react-dnd/commit/0a82fd8))
+- build(deps): bump gatsby-transformer-remark from 2.6.57 to 2.6.58 ([c556cdf](https://github.com/react-dnd/react-dnd/commit/c556cdf))
+- build(deps): bump gatsby-transformer-remark from 2.6.58 to 2.6.59 ([a7b3f53](https://github.com/react-dnd/react-dnd/commit/a7b3f53))
+- build(deps): bump gatsby-transformer-remark from 2.6.59 to 2.7.1 ([538809d](https://github.com/react-dnd/react-dnd/commit/538809d))
+- build(deps): bump gatsby-transformer-remark from 2.7.1 to 2.7.2 ([4eeb4bb](https://github.com/react-dnd/react-dnd/commit/4eeb4bb))
+- build(deps): bump gatsby-transformer-remark from 2.7.2 to 2.7.3 ([6e65cb9](https://github.com/react-dnd/react-dnd/commit/6e65cb9))
+- build(deps): bump gatsby-transformer-remark from 2.7.3 to 2.7.4 ([681d506](https://github.com/react-dnd/react-dnd/commit/681d506))
+- build(deps): bump gatsby-transformer-remark from 2.7.4 to 2.7.5 ([35285a1](https://github.com/react-dnd/react-dnd/commit/35285a1))
+- build(deps): bump gatsby-transformer-remark from 2.7.5 to 2.8.0 ([3a8438c](https://github.com/react-dnd/react-dnd/commit/3a8438c))
+- build(deps): bump gatsby-transformer-remark from 2.8.0 to 2.8.3 ([894b9fc](https://github.com/react-dnd/react-dnd/commit/894b9fc))
+- build(deps): bump gatsby-transformer-remark from 2.8.3 to 2.8.5 ([1606568](https://github.com/react-dnd/react-dnd/commit/1606568))
+- build(deps): bump gatsby-transformer-remark from 2.8.5 to 2.8.6 ([5172e8a](https://github.com/react-dnd/react-dnd/commit/5172e8a))
+- build(deps): bump gatsby-transformer-remark from 2.8.6 to 2.8.7 ([ee9b699](https://github.com/react-dnd/react-dnd/commit/ee9b699))
+- build(deps): bump gatsby-transformer-remark from 2.8.7 to 2.8.8 ([675bc44](https://github.com/react-dnd/react-dnd/commit/675bc44))
+- build(deps): bump gatsby-transformer-remark from 2.8.8 to 2.8.9 ([ce91b02](https://github.com/react-dnd/react-dnd/commit/ce91b02))
+- build(deps): bump gatsby-transformer-remark from 2.8.9 to 2.8.12 ([714e42b](https://github.com/react-dnd/react-dnd/commit/714e42b))
+- build(deps): bump gatsby-transformer-sharp from 2.3.12 to 2.3.13 ([1402816](https://github.com/react-dnd/react-dnd/commit/1402816))
+- build(deps): bump gatsby-transformer-sharp from 2.3.13 to 2.3.14 ([123c2b8](https://github.com/react-dnd/react-dnd/commit/123c2b8))
+- build(deps): bump gatsby-transformer-sharp from 2.3.14 to 2.3.16 ([28676c8](https://github.com/react-dnd/react-dnd/commit/28676c8))
+- build(deps): bump gatsby-transformer-sharp from 2.3.16 to 2.3.17 ([66766cc](https://github.com/react-dnd/react-dnd/commit/66766cc))
+- build(deps): bump gatsby-transformer-sharp from 2.3.17 to 2.3.18 ([96f5e20](https://github.com/react-dnd/react-dnd/commit/96f5e20))
+- build(deps): bump gatsby-transformer-sharp from 2.3.18 to 2.3.19 ([7eec2c3](https://github.com/react-dnd/react-dnd/commit/7eec2c3))
+- build(deps): bump gatsby-transformer-sharp from 2.3.19 to 2.4.1 ([58c576d](https://github.com/react-dnd/react-dnd/commit/58c576d))
+- build(deps): bump gatsby-transformer-sharp from 2.3.7 to 2.3.9 ([7c23618](https://github.com/react-dnd/react-dnd/commit/7c23618))
+- build(deps): bump gatsby-transformer-sharp from 2.3.9 to 2.3.12 ([7d96401](https://github.com/react-dnd/react-dnd/commit/7d96401))
+- build(deps): bump gatsby-transformer-sharp from 2.4.1 to 2.4.2 ([5192ce9](https://github.com/react-dnd/react-dnd/commit/5192ce9))
+- build(deps): bump gatsby-transformer-sharp from 2.4.2 to 2.4.3 ([9047ffa](https://github.com/react-dnd/react-dnd/commit/9047ffa))
+- build(deps): bump gatsby-transformer-sharp from 2.4.3 to 2.4.4 ([b63f4c4](https://github.com/react-dnd/react-dnd/commit/b63f4c4))
+- build(deps): bump gatsby-transformer-sharp from 2.4.4 to 2.4.5 ([8a2de0a](https://github.com/react-dnd/react-dnd/commit/8a2de0a))
+- build(deps): bump gatsby-transformer-sharp from 2.4.5 to 2.4.6 ([1f8a613](https://github.com/react-dnd/react-dnd/commit/1f8a613))
+- build(deps): bump gatsby-transformer-sharp from 2.4.6 to 2.4.7 ([826234a](https://github.com/react-dnd/react-dnd/commit/826234a))
+- build(deps): bump gatsby-transformer-sharp from 2.4.7 to 2.5.0 ([4302939](https://github.com/react-dnd/react-dnd/commit/4302939))
+- build(deps): bump gatsby-transformer-sharp from 2.5.0 to 2.5.1 ([5b9a285](https://github.com/react-dnd/react-dnd/commit/5b9a285))
+- build(deps): bump gatsby-transformer-sharp from 2.5.1 to 2.5.2 ([2596237](https://github.com/react-dnd/react-dnd/commit/2596237))
+- build(deps): bump gatsby-transformer-sharp from 2.5.2 to 2.5.3 ([0001644](https://github.com/react-dnd/react-dnd/commit/0001644))
+- build(deps): bump gatsby-transformer-sharp from 2.5.2 to 2.5.3 (#2475) ([31915cb](https://github.com/react-dnd/react-dnd/commit/31915cb)), closes [#2475](https://github.com/react-dnd/react-dnd/issues/2475)
+- build(deps): bump hoist-non-react-statics from 3.3.1 to 3.3.2 ([b8a3ee8](https://github.com/react-dnd/react-dnd/commit/b8a3ee8))
+- build(deps): bump immutability-helper from 3.0.1 to 3.0.2 ([1094a9c](https://github.com/react-dnd/react-dnd/commit/1094a9c))
+- build(deps): bump prismjs from 1.17.1 to 1.18.0 ([c84b1f2](https://github.com/react-dnd/react-dnd/commit/c84b1f2))
+- build(deps): bump prismjs from 1.18.0 to 1.19.0 ([2aa8f57](https://github.com/react-dnd/react-dnd/commit/2aa8f57))
+- build(deps): bump prismjs from 1.19.0 to 1.20.0 ([64ace2c](https://github.com/react-dnd/react-dnd/commit/64ace2c))
+- build(deps): bump query-string from 6.10.1 to 6.11.0 ([4c62ff7](https://github.com/react-dnd/react-dnd/commit/4c62ff7))
+- build(deps): bump query-string from 6.11.0 to 6.11.1 ([bdf84f7](https://github.com/react-dnd/react-dnd/commit/bdf84f7))
+- build(deps): bump query-string from 6.11.1 to 6.12.0 ([8db2b51](https://github.com/react-dnd/react-dnd/commit/8db2b51))
+- build(deps): bump query-string from 6.12.0 to 6.12.1 ([527313a](https://github.com/react-dnd/react-dnd/commit/527313a))
+- build(deps): bump query-string from 6.9.0 to 6.10.1 ([eeaf5ac](https://github.com/react-dnd/react-dnd/commit/eeaf5ac))
+- build(deps): bump react from 16.12.0 to 16.13.0 ([9d1ef45](https://github.com/react-dnd/react-dnd/commit/9d1ef45))
+- build(deps): bump react from 16.13.0 to 16.13.1 ([5a5f581](https://github.com/react-dnd/react-dnd/commit/5a5f581))
+- build(deps): bump react-dom from 16.12.0 to 16.13.0 ([a8e3857](https://github.com/react-dnd/react-dnd/commit/a8e3857))
+- build(deps): bump react-dom from 16.13.0 to 16.13.1 ([2a8d239](https://github.com/react-dnd/react-dnd/commit/2a8d239))
+- build(deps): bump react-frame-component from 4.1.1 to 4.1.2 ([cc7e7da](https://github.com/react-dnd/react-dnd/commit/cc7e7da))
+- build(deps): bump react-helmet from 5.2.1 to 6.0.0 ([757b88f](https://github.com/react-dnd/react-dnd/commit/757b88f))
+- build(deps): bump react-scripts from 3.3.0 to 3.3.1 ([b76bd27](https://github.com/react-dnd/react-dnd/commit/b76bd27))
+- build(deps): bump react-scripts from 3.3.1 to 3.4.0 ([89b8e19](https://github.com/react-dnd/react-dnd/commit/89b8e19))
+- build(deps): bump react-scripts from 3.4.0 to 3.4.1 ([a402b6f](https://github.com/react-dnd/react-dnd/commit/a402b6f))
+- build(deps): bump react-tabs from 3.0.0 to 3.1.0 ([c437b3b](https://github.com/react-dnd/react-dnd/commit/c437b3b))
+- build(deps): bump react-tabs from 3.1.0 to 3.1.1 ([5080852](https://github.com/react-dnd/react-dnd/commit/5080852))
+- build(deps): bump redux from 4.0.4 to 4.0.5 ([6fbf848](https://github.com/react-dnd/react-dnd/commit/6fbf848))
+- build(deps): bump rehype-react from 4.0.1 to 5.0.0 ([c8e487b](https://github.com/react-dnd/react-dnd/commit/c8e487b))
+- build(deps): bump rehype-react from 5.0.0 to 5.0.1 ([116d79d](https://github.com/react-dnd/react-dnd/commit/116d79d))
+- build(deps): bump styled-components from 5.0.0 to 5.0.1 ([7a85a50](https://github.com/react-dnd/react-dnd/commit/7a85a50))
+- build(deps): bump styled-components from 5.0.1 to 5.1.0 ([b4089f1](https://github.com/react-dnd/react-dnd/commit/b4089f1))
+- build(deps): bump styled-components from 5.1.0 to 5.1.1 ([c200ef4](https://github.com/react-dnd/react-dnd/commit/c200ef4))
+- fix: correct issue with example generation due to example structure refactoring (#2480) ([efc251b](https://github.com/react-dnd/react-dnd/commit/efc251b)), closes [#2480](https://github.com/react-dnd/react-dnd/issues/2480)
+- fix: do not cancel touch events if they are non-cancelable (#2190) ([1b4019e](https://github.com/react-dnd/react-dnd/commit/1b4019e)), closes [#2190](https://github.com/react-dnd/react-dnd/issues/2190)
+- fix: remove circular dependencies (#2491) ([52eaace](https://github.com/react-dnd/react-dnd/commit/52eaace)), closes [#2491](https://github.com/react-dnd/react-dnd/issues/2491)
+- fix: update wrapInTestContext to expose `getManager()` method (#1570) ([4ad004c](https://github.com/react-dnd/react-dnd/commit/4ad004c)), closes [#1570](https://github.com/react-dnd/react-dnd/issues/1570)
+
+## <small>10.0.2 (2019-12-07)</small>
+
+- v10.0.2 ([5d16ab0](https://github.com/react-dnd/react-dnd/commit/5d16ab0))
+- build: use updated react-dnd/asap (#1685) ([ada6555](https://github.com/react-dnd/react-dnd/commit/ada6555)), closes [#1685](https://github.com/react-dnd/react-dnd/issues/1685)
+
+## <small>10.0.1 (2019-12-07)</small>
+
+- v10.0.1 ([9b59c24](https://github.com/react-dnd/react-dnd/commit/9b59c24))
+- fix(umd): update rollup configs to look for 'browser' field. Use upstream asap for now (#1684) ([2d63a4f](https://github.com/react-dnd/react-dnd/commit/2d63a4f)), closes [#1684](https://github.com/react-dnd/react-dnd/issues/1684) [#1652](https://github.com/react-dnd/react-dnd/issues/1652)
+- docs: remove old links to TouchBackend ([6ac18e1](https://github.com/react-dnd/react-dnd/commit/6ac18e1)), closes [#1661](https://github.com/react-dnd/react-dnd/issues/1661)
+
+## 10.0.0 (2019-12-07)
+
+- Breaking Change: Use CommonJS by default (#1683) ([9efbb6b](https://github.com/react-dnd/react-dnd/commit/9efbb6b)), closes [#1683](https://github.com/react-dnd/react-dnd/issues/1683)
+- Replace asap with @react-dnd/asap (#1634) ([4719a6f](https://github.com/react-dnd/react-dnd/commit/4719a6f)), closes [#1634](https://github.com/react-dnd/react-dnd/issues/1634)
+- Replace invariant dependency with @react-dnd/invariant (#1632) ([03b3820](https://github.com/react-dnd/react-dnd/commit/03b3820)), closes [#1632](https://github.com/react-dnd/react-dnd/issues/1632)
+- v10.0.0 ([6aa1fb1](https://github.com/react-dnd/react-dnd/commit/6aa1fb1))
+- docs(site): correct examples import ([8aacb15](https://github.com/react-dnd/react-dnd/commit/8aacb15))
+- build(deps-dev): bump @typescript-eslint/eslint-plugin from 2.9.0 to 2.10.0 ([9d8e5a1](https://github.com/react-dnd/react-dnd/commit/9d8e5a1))
+- build(deps-dev): bump @typescript-eslint/parser from 2.9.0 to 2.10.0 ([2147a13](https://github.com/react-dnd/react-dnd/commit/2147a13))
+- build(deps-dev): bump alex from 8.0.1 to 8.1.0 ([dd952ea](https://github.com/react-dnd/react-dnd/commit/dd952ea))
+- build(deps-dev): bump eslint from 6.7.1 to 6.7.2 ([e8d7d87](https://github.com/react-dnd/react-dnd/commit/e8d7d87))
+- build(deps-dev): bump eslint-plugin-react from 7.16.0 to 7.17.0 ([b50e1e2](https://github.com/react-dnd/react-dnd/commit/b50e1e2))
+- build(deps-dev): bump lint-staged from 9.4.3 to 9.5.0 ([da876e9](https://github.com/react-dnd/react-dnd/commit/da876e9))
+- build(deps-dev): bump rollup from 1.27.5 to 1.27.8 ([7b9e441](https://github.com/react-dnd/react-dnd/commit/7b9e441))
+- build(deps-dev): bump typescript from 3.7.2 to 3.7.3 ([97b0f5d](https://github.com/react-dnd/react-dnd/commit/97b0f5d))
+- build(deps): bump @types/faker from 4.1.7 to 4.1.8 ([8090f41](https://github.com/react-dnd/react-dnd/commit/8090f41))
+- build(deps): bump @types/react from 16.9.13 to 16.9.14 ([96b6ef4](https://github.com/react-dnd/react-dnd/commit/96b6ef4))
+- build(deps): bump @types/react from 16.9.14 to 16.9.15 ([2188936](https://github.com/react-dnd/react-dnd/commit/2188936))
+- build(deps): bump gatsby from 2.18.3 to 2.18.4 ([e78390a](https://github.com/react-dnd/react-dnd/commit/e78390a))
+- build(deps): bump gatsby from 2.18.4 to 2.18.5 ([5df11f2](https://github.com/react-dnd/react-dnd/commit/5df11f2))
+- build(deps): bump gatsby from 2.18.5 to 2.18.6 ([9250eaf](https://github.com/react-dnd/react-dnd/commit/9250eaf))
+- build(deps): bump gatsby from 2.18.6 to 2.18.7 ([aa96480](https://github.com/react-dnd/react-dnd/commit/aa96480))
+- build(deps): bump gatsby-image from 2.2.33 to 2.2.34 ([a4f9382](https://github.com/react-dnd/react-dnd/commit/a4f9382))
+- build(deps): bump gatsby-plugin-manifest from 2.2.29 to 2.2.30 ([413d918](https://github.com/react-dnd/react-dnd/commit/413d918))
+- build(deps): bump gatsby-plugin-manifest from 2.2.30 to 2.2.31 ([62e3b35](https://github.com/react-dnd/react-dnd/commit/62e3b35))
+- build(deps): bump gatsby-plugin-offline from 3.0.23 to 3.0.24 ([cce5eb3](https://github.com/react-dnd/react-dnd/commit/cce5eb3))
+- build(deps): bump gatsby-plugin-offline from 3.0.24 to 3.0.25 ([ad1feb3](https://github.com/react-dnd/react-dnd/commit/ad1feb3))
+- build(deps): bump gatsby-plugin-offline from 3.0.25 to 3.0.26 ([550bef2](https://github.com/react-dnd/react-dnd/commit/550bef2))
+- build(deps): bump gatsby-plugin-offline from 3.0.26 to 3.0.27 ([540ab60](https://github.com/react-dnd/react-dnd/commit/540ab60))
+- build(deps): bump gatsby-plugin-react-helmet from 3.1.15 to 3.1.16 ([2c2add1](https://github.com/react-dnd/react-dnd/commit/2c2add1))
+- build(deps): bump gatsby-plugin-sharp from 2.3.3 to 2.3.4 ([45a0293](https://github.com/react-dnd/react-dnd/commit/45a0293))
+- build(deps): bump gatsby-plugin-sharp from 2.3.4 to 2.3.5 ([7389c50](https://github.com/react-dnd/react-dnd/commit/7389c50))
+- build(deps): bump gatsby-plugin-styled-components from 3.1.13 to 3.1.14 ([81c96ee](https://github.com/react-dnd/react-dnd/commit/81c96ee))
+- build(deps): bump gatsby-plugin-typescript from 2.1.19 to 2.1.20 ([164acaa](https://github.com/react-dnd/react-dnd/commit/164acaa))
+- build(deps): bump gatsby-plugin-typography from 2.3.17 to 2.3.18 ([d7e3daa](https://github.com/react-dnd/react-dnd/commit/d7e3daa))
+- build(deps): bump gatsby-remark-autolink-headers from 2.1.18 to 2.1.19 ([6475b18](https://github.com/react-dnd/react-dnd/commit/6475b18))
+- build(deps): bump gatsby-remark-copy-linked-files from 2.1.30 to 2.1.31 ([0b50802](https://github.com/react-dnd/react-dnd/commit/0b50802))
+- build(deps): bump gatsby-remark-embed-snippet from 4.1.15 to 4.1.16 ([a6ab05c](https://github.com/react-dnd/react-dnd/commit/a6ab05c))
+- build(deps): bump gatsby-remark-images from 3.1.33 to 3.1.34 ([1372a9e](https://github.com/react-dnd/react-dnd/commit/1372a9e))
+- build(deps): bump gatsby-remark-images from 3.1.34 to 3.1.35 ([551171b](https://github.com/react-dnd/react-dnd/commit/551171b))
+- build(deps): bump gatsby-remark-prismjs from 3.3.24 to 3.3.25 ([3a1dabb](https://github.com/react-dnd/react-dnd/commit/3a1dabb))
+- build(deps): bump gatsby-source-filesystem from 2.1.38 to 2.1.39 ([feb9a4a](https://github.com/react-dnd/react-dnd/commit/feb9a4a))
+- build(deps): bump gatsby-source-filesystem from 2.1.39 to 2.1.40 ([239c190](https://github.com/react-dnd/react-dnd/commit/239c190))
+- build(deps): bump gatsby-transformer-remark from 2.6.37 to 2.6.38 ([924d8bc](https://github.com/react-dnd/react-dnd/commit/924d8bc))
+- build(deps): bump gatsby-transformer-remark from 2.6.38 to 2.6.39 ([123ad35](https://github.com/react-dnd/react-dnd/commit/123ad35))
+- build(deps): bump gatsby-transformer-sharp from 2.3.5 to 2.3.6 ([8409c30](https://github.com/react-dnd/react-dnd/commit/8409c30))
+- build(deps): bump gatsby-transformer-sharp from 2.3.6 to 2.3.7 ([e17d801](https://github.com/react-dnd/react-dnd/commit/e17d801))
+- build(deps): bump react-scripts from 3.2.0 to 3.3.0 ([60521f0](https://github.com/react-dnd/react-dnd/commit/60521f0))
+- build(esm): remove SDI from touchBackend ([7e7915f](https://github.com/react-dnd/react-dnd/commit/7e7915f))
+- build(esm): replace shallowequal with @react-dnd/shallowequal (#1633) ([4c56d40](https://github.com/react-dnd/react-dnd/commit/4c56d40)), closes [#1633](https://github.com/react-dnd/react-dnd/issues/1633)
+- fix: patch TouchBackend to solve e.targetTouches bug in iOS 13 (#1631) ([f6286ca](https://github.com/react-dnd/react-dnd/commit/f6286ca)), closes [#1631](https://github.com/react-dnd/react-dnd/issues/1631)
+- fix(lint): correct linting issue ([03206f8](https://github.com/react-dnd/react-dnd/commit/03206f8))
+- chore: update changelog ([7edc76e](https://github.com/react-dnd/react-dnd/commit/7edc76e))
+
+## <small>9.5.1 (2019-11-26)</small>
+
+- Remove react synthetic default imports; improve build (#1629) ([36aecde](https://github.com/react-dnd/react-dnd/commit/36aecde)), closes [#1629](https://github.com/react-dnd/react-dnd/issues/1629) [#1628](https://github.com/react-dnd/react-dnd/issues/1628)
+- Update node-ci.yml ([befe6c5](https://github.com/react-dnd/react-dnd/commit/befe6c5))
+- v9.5.1 ([db9e93e](https://github.com/react-dnd/react-dnd/commit/db9e93e))
+- chore: tsconfig updates' ([dee71e0](https://github.com/react-dnd/react-dnd/commit/dee71e0))
+- chore(build): update changelog ([33b71c0](https://github.com/react-dnd/react-dnd/commit/33b71c0))
+- build: add test to release script ([c82797d](https://github.com/react-dnd/react-dnd/commit/c82797d))
+- build: update bash scripts to emit errors (#1630) ([65f343f](https://github.com/react-dnd/react-dnd/commit/65f343f)), closes [#1630](https://github.com/react-dnd/react-dnd/issues/1630)
+- build(deps-dev): bump eslint from 6.7.0 to 6.7.1 ([e41605a](https://github.com/react-dnd/react-dnd/commit/e41605a))
+- build(deps-dev): bump rollup from 1.27.4 to 1.27.5 ([4a09e29](https://github.com/react-dnd/react-dnd/commit/4a09e29))
+- build(deps): bump gatsby-plugin-sharp from 2.3.2 to 2.3.3 ([d1ab259](https://github.com/react-dnd/react-dnd/commit/d1ab259))
+
+## 9.5.0 (2019-11-25)
+
+- Add manager to test backend (#1564) ([2a50f87](https://github.com/react-dnd/react-dnd/commit/2a50f87)), closes [#1564](https://github.com/react-dnd/react-dnd/issues/1564)
+- Add rollup replacements for process.env.NODE_ENV (#1622) ([46e165c](https://github.com/react-dnd/react-dnd/commit/46e165c)), closes [#1622](https://github.com/react-dnd/react-dnd/issues/1622)
+- Add types property to test-utils package.json (#1597) ([c93d1e9](https://github.com/react-dnd/react-dnd/commit/c93d1e9)), closes [#1597](https://github.com/react-dnd/react-dnd/issues/1597)
+- Create auto-merge-dependabot.yml (#1618) ([6f1503d](https://github.com/react-dnd/react-dnd/commit/6f1503d)), closes [#1618](https://github.com/react-dnd/react-dnd/issues/1618)
+- Create automerge-dependabot.yml ([bf28501](https://github.com/react-dnd/react-dnd/commit/bf28501))
+- Create CODEOWNERS ([cbd73a6](https://github.com/react-dnd/react-dnd/commit/cbd73a6))
+- Create gh-pages.yml ([83883b8](https://github.com/react-dnd/react-dnd/commit/83883b8))
+- Delete auto-merge-dependabot.yml ([043e55a](https://github.com/react-dnd/react-dnd/commit/043e55a))
+- Delete stale.yml ([9378bb3](https://github.com/react-dnd/react-dnd/commit/9378bb3))
+- Improve yarn caching (#1605) ([7d1f308](https://github.com/react-dnd/react-dnd/commit/7d1f308)), closes [#1605](https://github.com/react-dnd/react-dnd/issues/1605)
+- Library Updates (#1598) ([ae95816](https://github.com/react-dnd/react-dnd/commit/ae95816)), closes [#1598](https://github.com/react-dnd/react-dnd/issues/1598)
+- Migrate to GitHub Actions (#1601) ([d338111](https://github.com/react-dnd/react-dnd/commit/d338111)), closes [#1601](https://github.com/react-dnd/react-dnd/issues/1601)
+- Remove docsite publish task ([c3b826d](https://github.com/react-dnd/react-dnd/commit/c3b826d))
+- Replace Webpack UMD Build with Rollup (#1621) ([1863f11](https://github.com/react-dnd/react-dnd/commit/1863f11)), closes [#1621](https://github.com/react-dnd/react-dnd/issues/1621)
+- Update gh-pages.yml ([be7230c](https://github.com/react-dnd/react-dnd/commit/be7230c))
+- Update node-ci.yml (#1603) ([d00abe3](https://github.com/react-dnd/react-dnd/commit/d00abe3)), closes [#1603](https://github.com/react-dnd/react-dnd/issues/1603)
+- Update README.md ([e45e21c](https://github.com/react-dnd/react-dnd/commit/e45e21c))
+- Update Tutorial.md (#1586) ([68de9c9](https://github.com/react-dnd/react-dnd/commit/68de9c9)), closes [#1586](https://github.com/react-dnd/react-dnd/issues/1586)
+- Use github actions badge ([8e87943](https://github.com/react-dnd/react-dnd/commit/8e87943))
+- v9.5.0 ([fa7ba41](https://github.com/react-dnd/react-dnd/commit/fa7ba41))
+- test(umd): add umd package verification ([5ccce7b](https://github.com/react-dnd/react-dnd/commit/5ccce7b))
+- build: add codecov step to ci (#1619) ([9e3bdca](https://github.com/react-dnd/react-dnd/commit/9e3bdca)), closes [#1619](https://github.com/react-dnd/react-dnd/issues/1619)
+- build: parallelize some build tasks (#1606) ([9edc60d](https://github.com/react-dnd/react-dnd/commit/9edc60d)), closes [#1606](https://github.com/react-dnd/react-dnd/issues/1606)
+- build: remove release_docs script, add release_canary script ([fba55c2](https://github.com/react-dnd/react-dnd/commit/fba55c2))
+- build(deps-dev): bump conventional-changelog-cli from 2.0.27 to 2.0.28 (#1612) ([e08c510](https://github.com/react-dnd/react-dnd/commit/e08c510)), closes [#1612](https://github.com/react-dnd/react-dnd/issues/1612)
+- build(deps-dev): bump lint-staged from 9.4.2 to 9.4.3 (#1616) ([710deb9](https://github.com/react-dnd/react-dnd/commit/710deb9)), closes [#1616](https://github.com/react-dnd/react-dnd/issues/1616)
+- build(deps-dev): bump ts-jest from 24.1.0 to 24.2.0 (#1615) ([467e004](https://github.com/react-dnd/react-dnd/commit/467e004)), closes [#1615](https://github.com/react-dnd/react-dnd/issues/1615)
+- build(deps): bump @types/react from 16.9.11 to 16.9.12 (#1614) ([eae46f7](https://github.com/react-dnd/react-dnd/commit/eae46f7)), closes [#1614](https://github.com/react-dnd/react-dnd/issues/1614)
+- build(deps): bump gatsby-plugin-typography from 2.3.16 to 2.3.17 (#1613) ([e924a8e](https://github.com/react-dnd/react-dnd/commit/e924a8e)), closes [#1613](https://github.com/react-dnd/react-dnd/issues/1613)
+- chore: remove gh-pages dependency ([ae3f2c0](https://github.com/react-dnd/react-dnd/commit/ae3f2c0))
+- chore: run prettier on source files ([c331998](https://github.com/react-dnd/react-dnd/commit/c331998))
+- chore: update changelog ([080df3f](https://github.com/react-dnd/react-dnd/commit/080df3f))
+- docs: add alex for tonal linting (#1611) ([d45f55f](https://github.com/react-dnd/react-dnd/commit/d45f55f)), closes [#1611](https://github.com/react-dnd/react-dnd/issues/1611)
+- docs: add build_site script to docsite ([a047bf7](https://github.com/react-dnd/react-dnd/commit/a047bf7))
+- docs: add github action to merge dependabot PRs (#1617) ([2cb2bc9](https://github.com/react-dnd/react-dnd/commit/2cb2bc9)), closes [#1617](https://github.com/react-dnd/react-dnd/issues/1617)
+- docs: add spelling verification to the linting process (#1546) ([704245d](https://github.com/react-dnd/react-dnd/commit/704245d)), closes [#1546](https://github.com/react-dnd/react-dnd/issues/1546)
+- feat: declared packages side effects free (#1577) ([0ad2e58](https://github.com/react-dnd/react-dnd/commit/0ad2e58)), closes [#1577](https://github.com/react-dnd/react-dnd/issues/1577)
+- fix: filemetadata available on dragstart (#1610) ([1b5c2a3](https://github.com/react-dnd/react-dnd/commit/1b5c2a3)), closes [#1610](https://github.com/react-dnd/react-dnd/issues/1610)
+
+## 9.4.0 (2019-09-20)
+
+- Create CODE_OF_CONDUCT.md ([09c0f70](https://github.com/react-dnd/react-dnd/commit/09c0f70))
+- Fix typo (#1529) ([600d824](https://github.com/react-dnd/react-dnd/commit/600d824)), closes [#1529](https://github.com/react-dnd/react-dnd/issues/1529)
+- Keep track of number of references to global context and cleanup (#1543) ([c5a9abc](https://github.com/react-dnd/react-dnd/commit/c5a9abc)), closes [#1543](https://github.com/react-dnd/react-dnd/issues/1543)
+- Move UMD bundling to top-level, deploy UMD builds in core packages (#1520) ([1d1c158](https://github.com/react-dnd/react-dnd/commit/1d1c158)), closes [#1520](https://github.com/react-dnd/react-dnd/issues/1520)
+- Update Libraries (#1545) ([c090ee4](https://github.com/react-dnd/react-dnd/commit/c090ee4)), closes [#1545](https://github.com/react-dnd/react-dnd/issues/1545)
+- v9.4.0 ([4e80bc3](https://github.com/react-dnd/react-dnd/commit/4e80bc3))
+- fix: correct linting issues in scripts ([1dbe882](https://github.com/react-dnd/react-dnd/commit/1dbe882))
+- fix: typo (#1531) ([ae7a05b](https://github.com/react-dnd/react-dnd/commit/ae7a05b)), closes [#1531](https://github.com/react-dnd/react-dnd/issues/1531)
+- refactor: remove duplicate code in example (#1525) ([d154684](https://github.com/react-dnd/react-dnd/commit/d154684)), closes [#1525](https://github.com/react-dnd/react-dnd/issues/1525)
+- docs: add a section on using react-app-rewired to override jest configuration ([a2922fe](https://github.com/react-dnd/react-dnd/commit/a2922fe))
+
+## <small>9.3.9 (2019-08-06)</small>
+
+- v9.3.9 ([2807482](https://github.com/react-dnd/react-dnd/commit/2807482))
+- build: add build sentinels to cjs packgaes ([8f5e933](https://github.com/react-dnd/react-dnd/commit/8f5e933))
+- build: remove prepublishonly script. Move release process to release script ([7efcc49](https://github.com/react-dnd/react-dnd/commit/7efcc49))
+
+## <small>9.3.8 (2019-08-06)</small>
+
+- v9.3.8 ([f90709e](https://github.com/react-dnd/react-dnd/commit/f90709e))
+- build: add manual go/no-go script to prepublish ([a3bbee1](https://github.com/react-dnd/react-dnd/commit/a3bbee1))
+- build: don't use npm-run-all in prepublish script ([4fae3ca](https://github.com/react-dnd/react-dnd/commit/4fae3ca))
+
+## <small>9.3.7 (2019-08-06)</small>
+
+- v9.3.7 ([7496fa9](https://github.com/react-dnd/react-dnd/commit/7496fa9))
+- build: add publication sentinel to cjs ([7fda488](https://github.com/react-dnd/react-dnd/commit/7fda488))
+- build: re-add publish sentinels so that lerna will pick up the changes ([e856b1e](https://github.com/react-dnd/react-dnd/commit/e856b1e))
+- build: re-add publish sentinels so that lerna will pick up the changes ([c4e128a](https://github.com/react-dnd/react-dnd/commit/c4e128a))
+- build: remove publish sentinel ([d3e37c7](https://github.com/react-dnd/react-dnd/commit/d3e37c7))
+- build: update prepublish script ([352a412](https://github.com/react-dnd/react-dnd/commit/352a412))
+
+## <small>9.3.6 (2019-08-06)</small>
+
+- v9.3.6 ([72b15af](https://github.com/react-dnd/react-dnd/commit/72b15af))
+- build: add release scripts ([17b2ba7](https://github.com/react-dnd/react-dnd/commit/17b2ba7))
+- build: use correct lerna command in release script ([de5355b](https://github.com/react-dnd/react-dnd/commit/de5355b))
+- fix: update cjs_module creation to include typings field ([8ebdc2c](https://github.com/react-dnd/react-dnd/commit/8ebdc2c))
+
+## <small>9.3.5 (2019-08-06)</small>
+
+- Fix typo: DragDropContext (#1501) ([105fb11](https://github.com/react-dnd/react-dnd/commit/105fb11)), closes [#1501](https://github.com/react-dnd/react-dnd/issues/1501)
+- v9.3.5 ([698ac4c](https://github.com/react-dnd/react-dnd/commit/698ac4c))
+- fix: actually correct the cjs replacements ([0ccf7da](https://github.com/react-dnd/react-dnd/commit/0ccf7da))
+- fix: add a sentinel change to the cjs package.json files to force a publish of them ([287d23d](https://github.com/react-dnd/react-dnd/commit/287d23d))
+- fix: correct execute_cjs_replacements script to execute replacement scripts in .js files as well (#1 ([dd17b6e](https://github.com/react-dnd/react-dnd/commit/dd17b6e)), closes [#1502](https://github.com/react-dnd/react-dnd/issues/1502)
+- docs: remove gzip size badges ([1868fcd](https://github.com/react-dnd/react-dnd/commit/1868fcd))
+
+## <small>9.3.4 (2019-08-05)</small>
+
+- Correct DragPreview connection logic (#1500) ([99a038e](https://github.com/react-dnd/react-dnd/commit/99a038e)), closes [#1500](https://github.com/react-dnd/react-dnd/issues/1500)
+- getTargetIds() is missing in DragSourceMonitor (#1478) ([69ca80b](https://github.com/react-dnd/react-dnd/commit/69ca80b)), closes [#1478](https://github.com/react-dnd/react-dnd/issues/1478) [/github.com/react-dnd/react-dnd/blob/master/packages/core/react-dnd/src/common/DragSourceMonitorImpl.ts#L81](https://github.com//github.com/react-dnd/react-dnd/blob/master/packages/core/react-dnd/src/common/DragSourceMonitorImpl.ts/issues/L81)
+- replace for...of statement (#1474) ([383f51e](https://github.com/react-dnd/react-dnd/commit/383f51e)), closes [#1474](https://github.com/react-dnd/react-dnd/issues/1474)
+- v9.3.4 ([e44cd9b](https://github.com/react-dnd/react-dnd/commit/e44cd9b))
+- docs: correct more dustbin examples ([b6cbabe](https://github.com/react-dnd/react-dnd/commit/b6cbabe))
+- build: add lint rule to prevent for..of loop usage in older browsers (#1498) ([87f032f](https://github.com/react-dnd/react-dnd/commit/87f032f)), closes [#1498](https://github.com/react-dnd/react-dnd/issues/1498)
+- build: cjs package.json updates ([ff8ea26](https://github.com/react-dnd/react-dnd/commit/ff8ea26))
+- fix: correct hooks-based single-target example (#1499) ([6acca1c](https://github.com/react-dnd/react-dnd/commit/6acca1c)), closes [#1499](https://github.com/react-dnd/react-dnd/issues/1499)
+- fix: suppress the useLayoutEffect warning on server side (#1497) ([1953c85](https://github.com/react-dnd/react-dnd/commit/1953c85)), closes [#1497](https://github.com/react-dnd/react-dnd/issues/1497)
+
+## <small>9.3.3 (2019-07-12)</small>
+
+- Fix CJS package entrypoints (#1467) ([544e9e8](https://github.com/react-dnd/react-dnd/commit/544e9e8)), closes [#1467](https://github.com/react-dnd/react-dnd/issues/1467)
+- v9.3.3 ([15b5c0d](https://github.com/react-dnd/react-dnd/commit/15b5c0d))
+- fix(docs): moduleNameMapper settings for jest, close #1463 (#1464) ([221b12c](https://github.com/react-dnd/react-dnd/commit/221b12c)), closes [#1463](https://github.com/react-dnd/react-dnd/issues/1463) [#1464](https://github.com/react-dnd/react-dnd/issues/1464)
+- test: use CI=true when testing packages, prune prepublish tasks ([f52bd8e](https://github.com/react-dnd/react-dnd/commit/f52bd8e))
+- build: add license files ([3aa6aee](https://github.com/react-dnd/react-dnd/commit/3aa6aee))
+
+## <small>9.3.2 (2019-07-11)</small>
+
+- Update README.md ([765af2f](https://github.com/react-dnd/react-dnd/commit/765af2f))
+- Use TSC & Babel Chained Together (#1462) ([86a13e9](https://github.com/react-dnd/react-dnd/commit/86a13e9)), closes [#1462](https://github.com/react-dnd/react-dnd/issues/1462)
+- v9.3.2 ([ee93d22](https://github.com/react-dnd/react-dnd/commit/ee93d22))
+
+## <small>9.3.1 (2019-07-11)</small>
+
+- Add CJS bundles to core libs for testing, provide better Jest guidance (#1460) ([f1198ff](https://github.com/react-dnd/react-dnd/commit/f1198ff)), closes [#1460](https://github.com/react-dnd/react-dnd/issues/1460)
+- Jest Testing & Documentation Updates (#1455) ([73650fb](https://github.com/react-dnd/react-dnd/commit/73650fb)), closes [#1455](https://github.com/react-dnd/react-dnd/issues/1455)
+- v9.3.0 ([8801962](https://github.com/react-dnd/react-dnd/commit/8801962))
+- v9.3.1 ([0493eaa](https://github.com/react-dnd/react-dnd/commit/0493eaa))
+- fix: rename interafce DndContext => DndContextType to correct some babel transpile issues (#1459) ([465344e](https://github.com/react-dnd/react-dnd/commit/465344e)), closes [#1459](https://github.com/react-dnd/react-dnd/issues/1459)
+
+## <small>9.2.1 (2019-07-11)</small>
+
+- v9.2.1 ([065fc03](https://github.com/react-dnd/react-dnd/commit/065fc03))
+- test: use cjs aliases for jest ([4046569](https://github.com/react-dnd/react-dnd/commit/4046569))
+- fix: define the XYCoord interface in react-dnd (#1454) ([d02a17c](https://github.com/react-dnd/react-dnd/commit/d02a17c)), closes [#1454](https://github.com/react-dnd/react-dnd/issues/1454)
+- build: parallelize the build_package task (#1452) ([802f96e](https://github.com/react-dnd/react-dnd/commit/802f96e)), closes [#1452](https://github.com/react-dnd/react-dnd/issues/1452)
+
+## 9.2.0 (2019-07-10)
+
+- Update README.md ([fe128da](https://github.com/react-dnd/react-dnd/commit/fe128da))
+- v9.2.0 ([b1f3b3a](https://github.com/react-dnd/react-dnd/commit/b1f3b3a))
+- build: cjs package update (#1449) ([3e3e0ff](https://github.com/react-dnd/react-dnd/commit/3e3e0ff)), closes [#1449](https://github.com/react-dnd/react-dnd/issues/1449)
+
+## 9.1.0 (2019-07-10)
+
+- Use Babel for TypeScript Transpilation (#1448) ([72cf7e0](https://github.com/react-dnd/react-dnd/commit/72cf7e0)), closes [#1448](https://github.com/react-dnd/react-dnd/issues/1448)
+- v9.1.0 ([446e8f9](https://github.com/react-dnd/react-dnd/commit/446e8f9))
+- build: cjs package update ([529a4d9](https://github.com/react-dnd/react-dnd/commit/529a4d9))
+- docs: use -H flag on gatsby develop for us inside WSL ([9d84a4c](https://github.com/react-dnd/react-dnd/commit/9d84a4c))
+
+## <small>9.0.2 (2019-07-06)</small>
+
+- v9.0.2 ([39b1e64](https://github.com/react-dnd/react-dnd/commit/39b1e64))
+- fix: get touchBackend working with default options (#1444) ([4aa600f](https://github.com/react-dnd/react-dnd/commit/4aa600f)), closes [#1444](https://github.com/react-dnd/react-dnd/issues/1444)
+- build: update stalebot conf ([cef21a6](https://github.com/react-dnd/react-dnd/commit/cef21a6))
+- docs: add codesandbox link to github issue template ([7ab58db](https://github.com/react-dnd/react-dnd/commit/7ab58db))
+
+## <small>9.0.1 (2019-07-04)</small>
+
+- v9.0.1 ([5069427](https://github.com/react-dnd/react-dnd/commit/5069427))
+- docs: expand the touchbackend section, add docs on the `options` flag for DndProvider ([cbc58cf](https://github.com/react-dnd/react-dnd/commit/cbc58cf))
+- docs: slight wording change about queryargs in examples ([3ddac3d](https://github.com/react-dnd/react-dnd/commit/3ddac3d))
+- fix: #1428 - remove code that detached dragpreviews when dragsources where disconnected (#1441) ([e741f3a](https://github.com/react-dnd/react-dnd/commit/e741f3a)), closes [#1428](https://github.com/react-dnd/react-dnd/issues/1428) [#1441](https://github.com/react-dnd/react-dnd/issues/1441)
+- build: rebuild cjs package.json files ([763eca8](https://github.com/react-dnd/react-dnd/commit/763eca8))
+
+## 9.0.0 (2019-07-03)
+
+- Add react-dnd-touch-backend (#1425) ([707f4ae](https://github.com/react-dnd/react-dnd/commit/707f4ae)), closes [#1425](https://github.com/react-dnd/react-dnd/issues/1425)
+- Refactor Backend Startup (#1439) ([a73227c](https://github.com/react-dnd/react-dnd/commit/a73227c)), closes [#1439](https://github.com/react-dnd/react-dnd/issues/1439)
+- Task/use layout effects for registration (#1437) ([a1fbcd2](https://github.com/react-dnd/react-dnd/commit/a1fbcd2)), closes [#1437](https://github.com/react-dnd/react-dnd/issues/1437) [#1429](https://github.com/react-dnd/react-dnd/issues/1429)
+- v9.0.0 ([f591828](https://github.com/react-dnd/react-dnd/commit/f591828))
+- Documentation: Add Touch Backend Flag (#1438) ([36ae075](https://github.com/react-dnd/react-dnd/commit/36ae075)), closes [#1438](https://github.com/react-dnd/react-dnd/issues/1438)
+- docs: add the missing drop ref in tutorial (#1415) ([d25a66f](https://github.com/react-dnd/react-dnd/commit/d25a66f)), closes [#1415](https://github.com/react-dnd/react-dnd/issues/1415)
+- docs: Fix end callback arguments of useDrag hook (#1432) ([ce58e73](https://github.com/react-dnd/react-dnd/commit/ce58e73)), closes [#1432](https://github.com/react-dnd/react-dnd/issues/1432)
+- fix: don't handle dragstart event if default is prevented (#1426) ([3a70c80](https://github.com/react-dnd/react-dnd/commit/3a70c80)), closes [#1426](https://github.com/react-dnd/react-dnd/issues/1426)
+- fix: stale state in useMonitorOutput (#1430) ([384580c](https://github.com/react-dnd/react-dnd/commit/384580c)), closes [#1430](https://github.com/react-dnd/react-dnd/issues/1430)
+
+## <small>8.0.3 (2019-06-21)</small>
+
+- fix: correct dynamic tsconfig files ([c5cc337](https://github.com/react-dnd/react-dnd/commit/c5cc337))
+- fix: update DndProvider to use a singleton instance of the DndContext per BackendContext (#1423) ([5628208](https://github.com/react-dnd/react-dnd/commit/5628208)), closes [#1423](https://github.com/react-dnd/react-dnd/issues/1423)
+- build: move CJS package creation scripts to top-level scripts/ folder ([5e3c52c](https://github.com/react-dnd/react-dnd/commit/5e3c52c))
+- Use a Singleton DndContext instance when rerendering DndProvider (#1422) ([c7253d7](https://github.com/react-dnd/react-dnd/commit/c7253d7)), closes [#1422](https://github.com/react-dnd/react-dnd/issues/1422)
+- v8.0.3 ([0db6845](https://github.com/react-dnd/react-dnd/commit/0db6845))
+
+## <small>8.0.2 (2019-06-18)</small>
+
+- build: add start_docs script ([5e02b54](https://github.com/react-dnd/react-dnd/commit/5e02b54))
+- build: move dynamic module generation to a preinstall script (#1403) ([283f1b4](https://github.com/react-dnd/react-dnd/commit/283f1b4)), closes [#1403](https://github.com/react-dnd/react-dnd/issues/1403)
+- build: version bump ([54d0bf6](https://github.com/react-dnd/react-dnd/commit/54d0bf6))
+- fix: rename the discount_lodash modules in case of special plugins looking for 'lodash' in the modul ([ddfb020](https://github.com/react-dnd/react-dnd/commit/ddfb020)), closes [#1410](https://github.com/react-dnd/react-dnd/issues/1410)
+- CJS Fix: Remove @ts-ignore usage from hoist-non-react-statics (#1408) ([32543b6](https://github.com/react-dnd/react-dnd/commit/32543b6)), closes [#1408](https://github.com/react-dnd/react-dnd/issues/1408)
+- CJS Fix: remove invariant dependency, clear up some @ts-ignore usage (#1406) ([5036db0](https://github.com/react-dnd/react-dnd/commit/5036db0)), closes [#1406](https://github.com/react-dnd/react-dnd/issues/1406)
+- CJS Fix: Remove shallowequal dependency (#1407) ([d300c1e](https://github.com/react-dnd/react-dnd/commit/d300c1e)), closes [#1407](https://github.com/react-dnd/react-dnd/issues/1407)
+- CJS Fix: Use typed libraries for utility packages (#1409) ([917c7b5](https://github.com/react-dnd/react-dnd/commit/917c7b5)), closes [#1409](https://github.com/react-dnd/react-dnd/issues/1409)
+- Correct the Dynamic CJS Module Generation Script (#1404) ([e135410](https://github.com/react-dnd/react-dnd/commit/e135410)), closes [#1404](https://github.com/react-dnd/react-dnd/issues/1404)
+- docs: add a comment in the docsroot about esm vs cjs installation ([50f82a4](https://github.com/react-dnd/react-dnd/commit/50f82a4))
+
+## <small>8.0.1 (2019-06-18)</small>
+
+- Add CommonJS Packages (#1400) ([09838c9](https://github.com/react-dnd/react-dnd/commit/09838c9)), closes [#1400](https://github.com/react-dnd/react-dnd/issues/1400)
+- Move CJS Module Generation to a Script (#1401) ([1e881a8](https://github.com/react-dnd/react-dnd/commit/1e881a8)), closes [#1401](https://github.com/react-dnd/react-dnd/issues/1401)
+- Update UMD Build Configuration (#1399) ([155332b](https://github.com/react-dnd/react-dnd/commit/155332b)), closes [#1399](https://github.com/react-dnd/react-dnd/issues/1399)
+- v8.0.1 ([6d1634e](https://github.com/react-dnd/react-dnd/commit/6d1634e))
+- chore: add deprecation warning to DragDropContext (#1398) ([ab41381](https://github.com/react-dnd/react-dnd/commit/ab41381)), closes [#1398](https://github.com/react-dnd/react-dnd/issues/1398)
+- chore: upgrade lerna ([13d2d6a](https://github.com/react-dnd/react-dnd/commit/13d2d6a))
+- build: update create_cjs_modules ([46157a5](https://github.com/react-dnd/react-dnd/commit/46157a5))
+- docs: clean up examples-root ([2dba35a](https://github.com/react-dnd/react-dnd/commit/2dba35a))
+- docs: clean up root page ([5574568](https://github.com/react-dnd/react-dnd/commit/5574568))
+- docs: udate DndContext documentation ([1da4e7f](https://github.com/react-dnd/react-dnd/commit/1da4e7f))
+- docs: use pinned react-dnd versions in examples ([23c4d0e](https://github.com/react-dnd/react-dnd/commit/23c4d0e))
+
+## 8.0.0 (2019-06-14)
+
+- React-DnD Version 8 (#1384) ([0c5b9fd](https://github.com/react-dnd/react-dnd/commit/0c5b9fd)), closes [#1384](https://github.com/react-dnd/react-dnd/issues/1384) [#1382](https://github.com/react-dnd/react-dnd/issues/1382) [#1383](https://github.com/react-dnd/react-dnd/issues/1383) [#1392](https://github.com/react-dnd/react-dnd/issues/1392) [#1393](https://github.com/react-dnd/react-dnd/issues/1393)
+- v8.0.0 ([1ac1094](https://github.com/react-dnd/react-dnd/commit/1ac1094))
+- docs: correct drop-target markdown attribute ([8a958b5](https://github.com/react-dnd/react-dnd/commit/8a958b5))
+- build: configure umd-loader to use babel/preset-env on all js modules ([d27b77b](https://github.com/react-dnd/react-dnd/commit/d27b77b))
+
+## <small>7.6.2 (2019-06-14)</small>
+
+- v7.6.2 ([3edb904](https://github.com/react-dnd/react-dnd/commit/3edb904))
+- build: add dnd-core cjs alias to html5 backend ([5986485](https://github.com/react-dnd/react-dnd/commit/5986485))
+
+## <small>7.6.1 (2019-06-14)</small>
+
+- Added fix for uglify error on build (#1388) ([fec74f2](https://github.com/react-dnd/react-dnd/commit/fec74f2)), closes [#1388](https://github.com/react-dnd/react-dnd/issues/1388)
+- v7.6.1 ([e883871](https://github.com/react-dnd/react-dnd/commit/e883871))
+- docs: fix knight example (#1394) ([fe6f8cc](https://github.com/react-dnd/react-dnd/commit/fe6f8cc)), closes [#1394](https://github.com/react-dnd/react-dnd/issues/1394)
+
+## 7.6.0 (2019-06-07)
+
+- Release the Hooks API (#1381) ([a5b0242](https://github.com/react-dnd/react-dnd/commit/a5b0242)), closes [#1381](https://github.com/react-dnd/react-dnd/issues/1381)
+- v7.6.0 ([c08efd5](https://github.com/react-dnd/react-dnd/commit/c08efd5))
+- chore: replace tslint with eslint (#1380) ([fc44aee](https://github.com/react-dnd/react-dnd/commit/fc44aee)), closes [#1380](https://github.com/react-dnd/react-dnd/issues/1380)
+- fix: add memoization to hooks example to improve performance ([497afda](https://github.com/react-dnd/react-dnd/commit/497afda))
+- fix: documentation fixes ([6630373](https://github.com/react-dnd/react-dnd/commit/6630373))
+- fix: improve performance in the sortable stress test example ([a1584d9](https://github.com/react-dnd/react-dnd/commit/a1584d9))
+
+## 7.5.0 (2019-06-07)
+
+- fix (#1379) ([c608315](https://github.com/react-dnd/react-dnd/commit/c608315)), closes [#1379](https://github.com/react-dnd/react-dnd/issues/1379)
+- Fix typo in tutorial html5Backend -> HTML5Backend (#1331) ([1068068](https://github.com/react-dnd/react-dnd/commit/1068068)), closes [#1331](https://github.com/react-dnd/react-dnd/issues/1331)
+- Library Updates (#1357) ([f59978e](https://github.com/react-dnd/react-dnd/commit/f59978e)), closes [#1357](https://github.com/react-dnd/react-dnd/issues/1357)
+- Update Libraries (#1372) ([955fcef](https://github.com/react-dnd/react-dnd/commit/955fcef)), closes [#1372](https://github.com/react-dnd/react-dnd/issues/1372)
+- v7.5.0 ([d14ea60](https://github.com/react-dnd/react-dnd/commit/d14ea60))
+- fix: always unsubscribe backend when connector reconnects (#1355) ([aeeb7c4](https://github.com/react-dnd/react-dnd/commit/aeeb7c4)), closes [#1355](https://github.com/react-dnd/react-dnd/issues/1355)
+- fix: correct build issues, cancel-on-drop-outside example (#1373) ([31ac4c5](https://github.com/react-dnd/react-dnd/commit/31ac4c5)), closes [#1373](https://github.com/react-dnd/react-dnd/issues/1373)
+- fix: correct drag source reconnection (#1375) ([32a69c6](https://github.com/react-dnd/react-dnd/commit/32a69c6)), closes [#1375](https://github.com/react-dnd/react-dnd/issues/1375)
+- fix: correct useDrag, useDrop specRef instance ([617c225](https://github.com/react-dnd/react-dnd/commit/617c225))
+- fix: declare module on dnd-core (#1366) ([8b3e132](https://github.com/react-dnd/react-dnd/commit/8b3e132)), closes [#1366](https://github.com/react-dnd/react-dnd/issues/1366)
+- fix: fix draggable box issue in hooks ([bc9b81f](https://github.com/react-dnd/react-dnd/commit/bc9b81f))
+- fix: prevent crash in determineDropResult (react-dnd#1281) (#1367) ([5c8af9a](https://github.com/react-dnd/react-dnd/commit/5c8af9a)), closes [react-dnd#1281](https://github.com/react-dnd/issues/1281) [#1367](https://github.com/react-dnd/react-dnd/issues/1367) [#31](https://github.com/react-dnd/react-dnd/issues/31) [#1281](https://github.com/react-dnd/react-dnd/issues/1281)
+- fix: update the isRef check to only check for the existence of a 'current' property (#1359) ([80e44fa](https://github.com/react-dnd/react-dnd/commit/80e44fa)), closes [#1359](https://github.com/react-dnd/react-dnd/issues/1359)
+- fix(typescript): declare hoist-non-react-statics type dependency (#1330) ([f4193c3](https://github.com/react-dnd/react-dnd/commit/f4193c3)), closes [#1330](https://github.com/react-dnd/react-dnd/issues/1330)
+- feat: let DragDropContextProvider reuse a manager (#1362) ([884c6ff](https://github.com/react-dnd/react-dnd/commit/884c6ff)), closes [#1362](https://github.com/react-dnd/react-dnd/issues/1362)
+- chore: promote host-non-react-statics to dependency (#1338) ([696faab](https://github.com/react-dnd/react-dnd/commit/696faab)), closes [#1338](https://github.com/react-dnd/react-dnd/issues/1338) [#1334](https://github.com/react-dnd/react-dnd/issues/1334)
+- chore: remove .editorconfig file (#1358) ([82ac197](https://github.com/react-dnd/react-dnd/commit/82ac197)), closes [#1358](https://github.com/react-dnd/react-dnd/issues/1358)
+- chore: update vscode tslint recommended package (#1335) ([9637955](https://github.com/react-dnd/react-dnd/commit/9637955)), closes [#1335](https://github.com/react-dnd/react-dnd/issues/1335)
+- docs(example): add script command line at docs to run this project locally (#1347) ([8fe1ee3](https://github.com/react-dnd/react-dnd/commit/8fe1ee3)), closes [#1347](https://github.com/react-dnd/react-dnd/issues/1347)
+- build: add "module" field to package.json (#1319) ([ead0bca](https://github.com/react-dnd/react-dnd/commit/ead0bca)), closes [#1319](https://github.com/react-dnd/react-dnd/issues/1319)
+
+## <small>7.4.5 (2019-04-03)</small>
+
+- Check handlerIds In DragSource/DropTarget Monitors (#1315) ([039d463](https://github.com/react-dnd/react-dnd/commit/039d463)), closes [#1315](https://github.com/react-dnd/react-dnd/issues/1315)
+- Correct links to documentation in error messages (#1314) ([ae7ffe2](https://github.com/react-dnd/react-dnd/commit/ae7ffe2)), closes [#1314](https://github.com/react-dnd/react-dnd/issues/1314)
+- v7.4.5 ([5fefffc](https://github.com/react-dnd/react-dnd/commit/5fefffc))
+- chore: rebuild yarn.lock ([4d39ad2](https://github.com/react-dnd/react-dnd/commit/4d39ad2))
+- chore: remove lodash from react-dnd (#1317) ([dc636b9](https://github.com/react-dnd/react-dnd/commit/dc636b9)), closes [#1317](https://github.com/react-dnd/react-dnd/issues/1317)
+
+## <small>7.4.4 (2019-04-02)</small>
+
+- Improve Testing (#1298) ([f0aa2fa](https://github.com/react-dnd/react-dnd/commit/f0aa2fa)), closes [#1298](https://github.com/react-dnd/react-dnd/issues/1298)
+- Make each example a CRA app (#1300) ([6c9eaa2](https://github.com/react-dnd/react-dnd/commit/6c9eaa2)), closes [#1300](https://github.com/react-dnd/react-dnd/issues/1300)
+- Remove Lodash (#1294) ([0a54e41](https://github.com/react-dnd/react-dnd/commit/0a54e41)), closes [#1294](https://github.com/react-dnd/react-dnd/issues/1294)
+- Remove useless constraint (#1306) ([e8fab37](https://github.com/react-dnd/react-dnd/commit/e8fab37)), closes [#1306](https://github.com/react-dnd/react-dnd/issues/1306)
+- Update Libraries, Correct some Invariant Issues (#1313) ([676d9f8](https://github.com/react-dnd/react-dnd/commit/676d9f8)), closes [#1313](https://github.com/react-dnd/react-dnd/issues/1313)
+- v7.4.4 ([5b58d29](https://github.com/react-dnd/react-dnd/commit/5b58d29))
+- fix: add endsWith polyfill (#1312) ([69dbcce](https://github.com/react-dnd/react-dnd/commit/69dbcce)), closes [#1312](https://github.com/react-dnd/react-dnd/issues/1312)
+- fix: apply effect fix to hooks version of dragpreview ([fdf3cf3](https://github.com/react-dnd/react-dnd/commit/fdf3cf3))
+- fix: corret the dragpreview example by adding an effect dependency ([a608c5e](https://github.com/react-dnd/react-dnd/commit/a608c5e))
+- fix: documentation ([9752600](https://github.com/react-dnd/react-dnd/commit/9752600))
+- docs: add missing deps to examples for codepen ([64672a5](https://github.com/react-dnd/react-dnd/commit/64672a5))
+- docs: add some more headings to the section on adding drag-and-drop interaction ([1b83846](https://github.com/react-dnd/react-dnd/commit/1b83846))
+- docs: fix gutters, add toc to example (#1304) ([6ed66bf](https://github.com/react-dnd/react-dnd/commit/6ed66bf)), closes [#1304](https://github.com/react-dnd/react-dnd/issues/1304)
+- docs: fromat ts examples ([f94a642](https://github.com/react-dnd/react-dnd/commit/f94a642))
+- docs: move the chessboard example so that we can model each step of the tutorial as different exampl ([c028840](https://github.com/react-dnd/react-dnd/commit/c028840))
+- docs: remove example cross-referencing ([ec096a5](https://github.com/react-dnd/react-dnd/commit/ec096a5))
+- docs: remove gatsby-plugin-styled-components from config ([429caf5](https://github.com/react-dnd/react-dnd/commit/429caf5))
+- docs: remove outdated comment ([d2133ea](https://github.com/react-dnd/react-dnd/commit/d2133ea))
+- docs: revert styled-components removal, but don't use typings ([c85d9d7](https://github.com/react-dnd/react-dnd/commit/c85d9d7))
+- docs: spelling fix ([95fc213](https://github.com/react-dnd/react-dnd/commit/95fc213))
+- docs: update clean target ([ba4ec05](https://github.com/react-dnd/react-dnd/commit/ba4ec05))
+- docs: use codesandbox for typescript examples ([6356a2f](https://github.com/react-dnd/react-dnd/commit/6356a2f))
+- docs: use codesandbox links for javascript example source ([c58d331](https://github.com/react-dnd/react-dnd/commit/c58d331))
+- docs: use embedded codesandbox examples ([4af62bf](https://github.com/react-dnd/react-dnd/commit/4af62bf))
+- docs: wording streamline ([107b009](https://github.com/react-dnd/react-dnd/commit/107b009))
+- docs: write cra apps for ts examples ([3dc7539](https://github.com/react-dnd/react-dnd/commit/3dc7539))
+- build: remove nohoist settings (#1296) ([a9f340b](https://github.com/react-dnd/react-dnd/commit/a9f340b)), closes [#1296](https://github.com/react-dnd/react-dnd/issues/1296)
+
+## <small>7.4.3 (2019-03-26)</small>
+
+- v7.4.3 ([7ce51e4](https://github.com/react-dnd/react-dnd/commit/7ce51e4))
+- fix: add typings to the card imperative handle ([8d601b8](https://github.com/react-dnd/react-dnd/commit/8d601b8))
+- fix: tiny cleanup ([9992e3b](https://github.com/react-dnd/react-dnd/commit/9992e3b))
+- fix: unwrap the decorator ref when using forwarded refs ([6440c54](https://github.com/react-dnd/react-dnd/commit/6440c54))
+- docs: remove example highlighting FCs, since they are now normative ([74296f6](https://github.com/react-dnd/react-dnd/commit/74296f6))
+
+## <small>7.4.2 (2019-03-26)</small>
+
+- Docs Cleanup, Pass refs to Ref-Forwarded components (#1292) ([2ea6629](https://github.com/react-dnd/react-dnd/commit/2ea6629)), closes [#1292](https://github.com/react-dnd/react-dnd/issues/1292)
+- v7.4.2 ([30579d2](https://github.com/react-dnd/react-dnd/commit/30579d2))
+- refactor: remove recompose dependency ([978384e](https://github.com/react-dnd/react-dnd/commit/978384e))
+- docs: remove useDragPreview, eliminated argument ([eece551](https://github.com/react-dnd/react-dnd/commit/eece551))
+
+## <small>7.4.1 (2019-03-26)</small>
+
+- v7.4.1 ([383a7f6](https://github.com/react-dnd/react-dnd/commit/383a7f6))
+- fix: ssr fixes ([d781184](https://github.com/react-dnd/react-dnd/commit/d781184))
+
+## 7.4.0 (2019-03-26)
+
+- #1273 fix typescript link issues (#1274) ([34b2ae7](https://github.com/react-dnd/react-dnd/commit/34b2ae7)), closes [#1274](https://github.com/react-dnd/react-dnd/issues/1274)
+- Connector Ref Updates (#1278) ([786ef85](https://github.com/react-dnd/react-dnd/commit/786ef85)), closes [#1278](https://github.com/react-dnd/react-dnd/issues/1278)
+- Don't create native drags out of an array, and make them enumerable (#1270) ([0d717e9](https://github.com/react-dnd/react-dnd/commit/0d717e9)), closes [#1270](https://github.com/react-dnd/react-dnd/issues/1270)
+- Hooks Ref'ing Updates (#1280) ([1d7207e](https://github.com/react-dnd/react-dnd/commit/1d7207e)), closes [#1280](https://github.com/react-dnd/react-dnd/issues/1280)
+- Improve Decorator Typings (#1291) ([e891105](https://github.com/react-dnd/react-dnd/commit/e891105)), closes [#1291](https://github.com/react-dnd/react-dnd/issues/1291) [#1287](https://github.com/react-dnd/react-dnd/issues/1287)
+- New Feature Proposal: Connect with Ref Objects (#1267) ([0958d67](https://github.com/react-dnd/react-dnd/commit/0958d67)), closes [#1267](https://github.com/react-dnd/react-dnd/issues/1267)
+- Remove unused code (#1279) ([4505852](https://github.com/react-dnd/react-dnd/commit/4505852)), closes [#1279](https://github.com/react-dnd/react-dnd/issues/1279)
+- Use DragDropContextProvider in Tutorial (#1272) ([bfbb756](https://github.com/react-dnd/react-dnd/commit/bfbb756)), closes [#1272](https://github.com/react-dnd/react-dnd/issues/1272)
+- v7.4.0 ([941dc2e](https://github.com/react-dnd/react-dnd/commit/941dc2e))
+- docs: document the props arg to the collector fns ([9840c38](https://github.com/react-dnd/react-dnd/commit/9840c38))
+- docs: fixed markdown in droptarget top level api (#1288) ([874f33a](https://github.com/react-dnd/react-dnd/commit/874f33a)), closes [#1288](https://github.com/react-dnd/react-dnd/issues/1288)
+- docs: reference the react-dnd-test-utils package in the testing doc ([ffd92e5](https://github.com/react-dnd/react-dnd/commit/ffd92e5))
+- fix: remove cyclic dependency ([dcbda3c](https://github.com/react-dnd/react-dnd/commit/dcbda3c))
+- fix: remove the useEffect invocation from DragDropContextProvider (#1277) ([cff33ab](https://github.com/react-dnd/react-dnd/commit/cff33ab)), closes [#1277](https://github.com/react-dnd/react-dnd/issues/1277)
+- fix: throw error when a DragSource or DropTarget is rendered outside DragDropContext (#1132) (#1286) ([7fb94a5](https://github.com/react-dnd/react-dnd/commit/7fb94a5)), closes [#1132](https://github.com/react-dnd/react-dnd/issues/1132) [#1286](https://github.com/react-dnd/react-dnd/issues/1286)
+- build: fixed the order as lerna was not building in proper order (#1289) ([6876ef9](https://github.com/react-dnd/react-dnd/commit/6876ef9)), closes [#1289](https://github.com/react-dnd/react-dnd/issues/1289)
+- revert: use recompose for the isClassComponent check ([e6e7cb5](https://github.com/react-dnd/react-dnd/commit/e6e7cb5))
+- test: add test-utils package, add test for connector functions ([5682439](https://github.com/react-dnd/react-dnd/commit/5682439))
+- test: added unit tests for react-dnd-html5-backend (#1283) ([27e4a06](https://github.com/react-dnd/react-dnd/commit/27e4a06)), closes [#1283](https://github.com/react-dnd/react-dnd/issues/1283)
+- test: fix tests ([34b87b1](https://github.com/react-dnd/react-dnd/commit/34b87b1))
+- test: work on tests ([576d148](https://github.com/react-dnd/react-dnd/commit/576d148))
+- feat: add the target component props to the collector funtion signature ([2a7a237](https://github.com/react-dnd/react-dnd/commit/2a7a237))
+
+## <small>7.3.2 (2019-03-13)</small>
+
+- Handler Refactorings (#1264) ([24345bd](https://github.com/react-dnd/react-dnd/commit/24345bd)), closes [#1264](https://github.com/react-dnd/react-dnd/issues/1264)
+- Hooks API: dragSpec.begin() may now return a DragObject (#1266) ([391dc04](https://github.com/react-dnd/react-dnd/commit/391dc04)), closes [#1266](https://github.com/react-dnd/react-dnd/issues/1266)
+- Update the connector typings (#1265) ([3719610](https://github.com/react-dnd/react-dnd/commit/3719610)), closes [#1265](https://github.com/react-dnd/react-dnd/issues/1265) [#1213](https://github.com/react-dnd/react-dnd/issues/1213)
+- v7.3.2 ([e3fb069](https://github.com/react-dnd/react-dnd/commit/e3fb069))
+- docs: correct some issues with the hooks docs ([155555c](https://github.com/react-dnd/react-dnd/commit/155555c))
+- docs: improve useDrag/useDrop documentation ([0e3a406](https://github.com/react-dnd/react-dnd/commit/0e3a406))
+- docs: improve usedraglayer, usedragpreview docs ([dc8927e](https://github.com/react-dnd/react-dnd/commit/dc8927e))
+
+## <small>7.3.1 (2019-03-10)</small>
+
+- Hooks API Refactorings (#1261) ([46b7893](https://github.com/react-dnd/react-dnd/commit/46b7893)), closes [#1261](https://github.com/react-dnd/react-dnd/issues/1261)
+- v7.3.1 ([dcac7a5](https://github.com/react-dnd/react-dnd/commit/dcac7a5))
+- docs: add link to examples-hooks package ([78cef8f](https://github.com/react-dnd/react-dnd/commit/78cef8f))
+- docs: improve examples root page ([2eaafb0](https://github.com/react-dnd/react-dnd/commit/2eaafb0))
+
+## 7.3.0 (2019-03-08)
+
+- Add experimental hook-based examples (#1256) ([e649b6a](https://github.com/react-dnd/react-dnd/commit/e649b6a)), closes [#1256](https://github.com/react-dnd/react-dnd/issues/1256)
+- Export the DragDropContextConsume from the top-level react-dnd API (#1260) ([4d86bb4](https://github.com/react-dnd/react-dnd/commit/4d86bb4)), closes [#1260](https://github.com/react-dnd/react-dnd/issues/1260)
+- v7.3.0 ([532d11f](https://github.com/react-dnd/react-dnd/commit/532d11f))
+- fix: update the hooks to pass the right monitor impl to specs (#1259) ([b146a1a](https://github.com/react-dnd/react-dnd/commit/b146a1a)), closes [#1259](https://github.com/react-dnd/react-dnd/issues/1259)
+
+## <small>7.2.1 (2019-03-08)</small>
+
+- Enable syntheticDefaultImports in TypeScript examples (#1254) ([c8ad24b](https://github.com/react-dnd/react-dnd/commit/c8ad24b)), closes [#1254](https://github.com/react-dnd/react-dnd/issues/1254)
+- Hooks API Updates (#1255) ([d047a1a](https://github.com/react-dnd/react-dnd/commit/d047a1a)), closes [#1255](https://github.com/react-dnd/react-dnd/issues/1255)
+- Update examples to link to JS and TS source code (#1252) ([f43fb00](https://github.com/react-dnd/react-dnd/commit/f43fb00)), closes [#1252](https://github.com/react-dnd/react-dnd/issues/1252)
+- v7.2.1 ([35352b2](https://github.com/react-dnd/react-dnd/commit/35352b2))
+- docs: add a link to the example index in the docs sidebar (#1253) ([646a26c](https://github.com/react-dnd/react-dnd/commit/646a26c)), closes [#1253](https://github.com/react-dnd/react-dnd/issues/1253)
+- docs: correct spelling issue ([aa4605c](https://github.com/react-dnd/react-dnd/commit/aa4605c))
+
+## 7.2.0 (2019-03-07)
+
+- Check for uninitialized source/target ID parameters in the DragDropMonitor (#1249) ([20ded76](https://github.com/react-dnd/react-dnd/commit/20ded76)), closes [#1249](https://github.com/react-dnd/react-dnd/issues/1249)
+- Hooks API (#1244) ([3b19a79](https://github.com/react-dnd/react-dnd/commit/3b19a79)), closes [#1244](https://github.com/react-dnd/react-dnd/issues/1244)
+- Prepare Hooks API for Initial Release (#1251) ([7f78a8b](https://github.com/react-dnd/react-dnd/commit/7f78a8b)), closes [#1251](https://github.com/react-dnd/react-dnd/issues/1251)
+- v7.2.0 ([e4f7ebc](https://github.com/react-dnd/react-dnd/commit/e4f7ebc))
+- fix: update testbackend to use identifiers ([5a4005b](https://github.com/react-dnd/react-dnd/commit/5a4005b))
+- fix: use ES5 for CJS builds (#1250) ([983f9da](https://github.com/react-dnd/react-dnd/commit/983f9da)), closes [#1250](https://github.com/react-dnd/react-dnd/issues/1250)
+- docs: add note about hook APIs being experimental ([7dd475c](https://github.com/react-dnd/react-dnd/commit/7dd475c))
+- refactor: use identifiers types in react-dnd utils ([ed2fc9d](https://github.com/react-dnd/react-dnd/commit/ed2fc9d))
+
+## 7.1.0 (2019-03-06)
+
+- Expose `dataTransfer.items` for files (#1241) ([96ff9ca](https://github.com/react-dnd/react-dnd/commit/96ff9ca)), closes [#1241](https://github.com/react-dnd/react-dnd/issues/1241) [#712](https://github.com/react-dnd/react-dnd/issues/712)
+- Fix tutorial code snippets (#1223) ([3899877](https://github.com/react-dnd/react-dnd/commit/3899877)), closes [#1223](https://github.com/react-dnd/react-dnd/issues/1223)
+- Refresh Libraries (#1243) ([fd1bae4](https://github.com/react-dnd/react-dnd/commit/fd1bae4)), closes [#1243](https://github.com/react-dnd/react-dnd/issues/1243)
+- v7.1.0 ([3c1a012](https://github.com/react-dnd/react-dnd/commit/3c1a012))
+- WIP - Generate esmodule Output (#1205) ([fcbe0e0](https://github.com/react-dnd/react-dnd/commit/fcbe0e0)), closes [#1205](https://github.com/react-dnd/react-dnd/issues/1205)
+- work with elements that have Ref's generated using the Hooks API (#1242) ([4ecc043](https://github.com/react-dnd/react-dnd/commit/4ecc043)), closes [#1242](https://github.com/react-dnd/react-dnd/issues/1242)
+- fix: doc url (#1214) ([b1cd7d1](https://github.com/react-dnd/react-dnd/commit/b1cd7d1)), closes [#1214](https://github.com/react-dnd/react-dnd/issues/1214)
+- fix: fix #1146 ensure children mount first (#1220) ([0feb250](https://github.com/react-dnd/react-dnd/commit/0feb250)), closes [#1146](https://github.com/react-dnd/react-dnd/issues/1146) [#1220](https://github.com/react-dnd/react-dnd/issues/1220)
+- fix: resolve issue with native dnd (#1240) ([f25f61e](https://github.com/react-dnd/react-dnd/commit/f25f61e)), closes [#1240](https://github.com/react-dnd/react-dnd/issues/1240)
+
+## <small>7.0.2 (2018-12-03)</small>
+
+- v7.0.2 ([22666e7](https://github.com/react-dnd/react-dnd/commit/22666e7))
+- docs: fixed documentation to make it more clear ([e8fef74](https://github.com/react-dnd/react-dnd/commit/e8fef74))
+- docs: fixed typos ([36adaf0](https://github.com/react-dnd/react-dnd/commit/36adaf0))
+- docs: updated documentation for touch backend ([c6467b0](https://github.com/react-dnd/react-dnd/commit/c6467b0))
+- fix: added MIT license to inner packages (#1197) ([e925162](https://github.com/react-dnd/react-dnd/commit/e925162)), closes [#1197](https://github.com/react-dnd/react-dnd/issues/1197)
+- fix: BSD -> MIT for react-dnd-parent package (#1198) ([785a371](https://github.com/react-dnd/react-dnd/commit/785a371)), closes [#1198](https://github.com/react-dnd/react-dnd/issues/1198)
+
+## <small>7.0.1 (2018-11-30)</small>
+
+- Update README.md ([70d87f3](https://github.com/react-dnd/react-dnd/commit/70d87f3))
+- v7.0.1 ([e9fb7fd](https://github.com/react-dnd/react-dnd/commit/e9fb7fd))
+- fix: use typeof check for window existence to correct SSR (#1193) ([ba37b02](https://github.com/react-dnd/react-dnd/commit/ba37b02)), closes [#1193](https://github.com/react-dnd/react-dnd/issues/1193)
+
+## 7.0.0 (2018-11-27)
+
+- Add 'debugMode' option to DndContext (#1190) ([572955b](https://github.com/react-dnd/react-dnd/commit/572955b)), closes [#1190](https://github.com/react-dnd/react-dnd/issues/1190)
+- fix typo in Tutorial (#1169) ([46fd5ae](https://github.com/react-dnd/react-dnd/commit/46fd5ae)), closes [#1169](https://github.com/react-dnd/react-dnd/issues/1169)
+- Fixed the typo in functional component example link (#1180) ([e4722ff](https://github.com/react-dnd/react-dnd/commit/e4722ff)), closes [#1180](https://github.com/react-dnd/react-dnd/issues/1180)
+- Update naive.md (#1168) ([3a5e0d4](https://github.com/react-dnd/react-dnd/commit/3a5e0d4)), closes [#1168](https://github.com/react-dnd/react-dnd/issues/1168)
+- Update README.md ([c0e6cf5](https://github.com/react-dnd/react-dnd/commit/c0e6cf5))
+- v7.0.0 ([f294f68](https://github.com/react-dnd/react-dnd/commit/f294f68))
+- fix: clientOffset and initialClientOffset are null in canDrag #1175 (#1176) ([8718ae5](https://github.com/react-dnd/react-dnd/commit/8718ae5)), closes [#1175](https://github.com/react-dnd/react-dnd/issues/1175) [#1176](https://github.com/react-dnd/react-dnd/issues/1176)
+- fix: make DecoratedComponent as static property (#1177) (#1185) ([95d90b3](https://github.com/react-dnd/react-dnd/commit/95d90b3)), closes [#1177](https://github.com/react-dnd/react-dnd/issues/1177) [#1185](https://github.com/react-dnd/react-dnd/issues/1185)
+- fix: remove initClientOffset action - merge it into initCoords (#1191) ([6b58b8b](https://github.com/react-dnd/react-dnd/commit/6b58b8b)), closes [#1191](https://github.com/react-dnd/react-dnd/issues/1191)
+- docs: fix examples page URL (#1181) (#1183) ([6430c45](https://github.com/react-dnd/react-dnd/commit/6430c45)), closes [#1181](https://github.com/react-dnd/react-dnd/issues/1181) [#1183](https://github.com/react-dnd/react-dnd/issues/1183) [#1181](https://github.com/react-dnd/react-dnd/issues/1181)
+- docs: fix link in root page (#1189) ([ffda6c7](https://github.com/react-dnd/react-dnd/commit/ffda6c7)), closes [#1189](https://github.com/react-dnd/react-dnd/issues/1189)
+- build: upgrade npm-run-all for security (#1186) ([c025cd7](https://github.com/react-dnd/react-dnd/commit/c025cd7)), closes [#1186](https://github.com/react-dnd/react-dnd/issues/1186)
+- ci: upgrade har-vlidator to fix CI corrupt (#1184) ([478f5b5](https://github.com/react-dnd/react-dnd/commit/478f5b5)), closes [#1184](https://github.com/react-dnd/react-dnd/issues/1184)
+- chore: add stalebot config ([6f451ee](https://github.com/react-dnd/react-dnd/commit/6f451ee))
+
+## 6.0.0 (2018-11-09)
+
+- Add DATA_TRANSFER NativeType (#1120) ([c6d7649](https://github.com/react-dnd/react-dnd/commit/c6d7649)), closes [#1120](https://github.com/react-dnd/react-dnd/issues/1120)
+- Default `publishSource` to true when options passed to `beginDrag` (#1161) ([76cca25](https://github.com/react-dnd/react-dnd/commit/76cca25)), closes [#1161](https://github.com/react-dnd/react-dnd/issues/1161)
+- fix case where coords are null in beginDrag (#1082) ([84db06e](https://github.com/react-dnd/react-dnd/commit/84db06e)), closes [#1082](https://github.com/react-dnd/react-dnd/issues/1082)
+- Fix for drag in scrolling container: set dropEffect to 'none' when canDrop is false (#1131) ([7c255dc](https://github.com/react-dnd/react-dnd/commit/7c255dc)), closes [#1131](https://github.com/react-dnd/react-dnd/issues/1131)
+- Fix typings for DropTarget and DragSource decorators (#1134) ([b0364b1](https://github.com/react-dnd/react-dnd/commit/b0364b1)), closes [#1134](https://github.com/react-dnd/react-dnd/issues/1134)
+- fix/typo: 'optinos' -> 'options' in DragSource documentation. (#1123) ([6275b2c](https://github.com/react-dnd/react-dnd/commit/6275b2c)), closes [#1123](https://github.com/react-dnd/react-dnd/issues/1123)
+- fixed wrong link address (#1160) ([53ea0d7](https://github.com/react-dnd/react-dnd/commit/53ea0d7)), closes [#1160](https://github.com/react-dnd/react-dnd/issues/1160)
+- Lib Upgrades (WIP) (#1149) ([b144696](https://github.com/react-dnd/react-dnd/commit/b144696)), closes [#1149](https://github.com/react-dnd/react-dnd/issues/1149)
+- Library Refresh, Prep for Release (#1159) ([760cef3](https://github.com/react-dnd/react-dnd/commit/760cef3)), closes [#1159](https://github.com/react-dnd/react-dnd/issues/1159)
+- Migrate Documentation site to Gatsby (#1154) ([ff82af8](https://github.com/react-dnd/react-dnd/commit/ff82af8)), closes [#1154](https://github.com/react-dnd/react-dnd/issues/1154)
+- Remove DragDropContextProvider (#1106) ([87bf9c4](https://github.com/react-dnd/react-dnd/commit/87bf9c4)), closes [#1106](https://github.com/react-dnd/react-dnd/issues/1106)
+- Replace "SFC" with "FC" or Function Component nomenclature. (#1153) ([247407d](https://github.com/react-dnd/react-dnd/commit/247407d)), closes [#1153](https://github.com/react-dnd/react-dnd/issues/1153)
+- use isDocumentInNode directly in EnterLeaveCounter ([bf731e2](https://github.com/react-dnd/react-dnd/commit/bf731e2))
+- Use isNodeInDocument directly in HTML5Backend ([2646492](https://github.com/react-dnd/react-dnd/commit/2646492))
+- Use the configurable window in the Enter/Leave counter. ([278cf85](https://github.com/react-dnd/react-dnd/commit/278cf85))
+- v6.0.0 ([21b878d](https://github.com/react-dnd/react-dnd/commit/21b878d))
+- fix: revert #1120 due to breaking change with File example ([d13e9c1](https://github.com/react-dnd/react-dnd/commit/d13e9c1)), closes [#1120](https://github.com/react-dnd/react-dnd/issues/1120)
+- refactor: replace .bind calls with class binds ([a403c42](https://github.com/react-dnd/react-dnd/commit/a403c42))
+- docs: check for pathprefix when selecting sidebar content ([48a1bf2](https://github.com/react-dnd/react-dnd/commit/48a1bf2))
+- docs: correct underline in draglayer markdown ([28cb1f9](https://github.com/react-dnd/react-dnd/commit/28cb1f9))
+- docs: fix another link address ([848ab8d](https://github.com/react-dnd/react-dnd/commit/848ab8d))
+- docs: link fixes ([59086d4](https://github.com/react-dnd/react-dnd/commit/59086d4))
+- docs: update gatsby, remove static queries ([32a7a57](https://github.com/react-dnd/react-dnd/commit/32a7a57))
+- docs: update react-helmet config to include favicon ([3e0f0af](https://github.com/react-dnd/react-dnd/commit/3e0f0af))
+- docs: update sidebar link coloring, selection bolding ([4449a26](https://github.com/react-dnd/react-dnd/commit/4449a26))
+- docs: update site meta ([13a2499](https://github.com/react-dnd/react-dnd/commit/13a2499))
+- docs: updates for static site building ([2504a37](https://github.com/react-dnd/react-dnd/commit/2504a37))
+- WIP: Split Documentation examples between Markdown and Code (#1158) ([00b6a66](https://github.com/react-dnd/react-dnd/commit/00b6a66)), closes [#1158](https://github.com/react-dnd/react-dnd/issues/1158)
+
+## <small>5.0.1 (2018-06-19)</small>
+
+- Remove react-dnd dependency from the backends (#1089) ([24f929f](https://github.com/react-dnd/react-dnd/commit/24f929f)), closes [#1089](https://github.com/react-dnd/react-dnd/issues/1089)
+- v5.0.1 ([934efc8](https://github.com/react-dnd/react-dnd/commit/934efc8))
+
+## 5.0.0 (2018-06-19)
+
+- DnD Spec Updates (Semver Major) (#1088) ([b726222](https://github.com/react-dnd/react-dnd/commit/b726222)), closes [#1088](https://github.com/react-dnd/react-dnd/issues/1088)
+- v5.0.0 ([6f842bf](https://github.com/react-dnd/react-dnd/commit/6f842bf))
+
+## <small>4.0.6 (2018-06-18)</small>
+
+- Remove react peer dependency on html5 backend (#1087) ([362eaa9](https://github.com/react-dnd/react-dnd/commit/362eaa9)), closes [#1087](https://github.com/react-dnd/react-dnd/issues/1087)
+- v4.0.6 ([12e3dbf](https://github.com/react-dnd/react-dnd/commit/12e3dbf))
+
+## <small>4.0.5 (2018-06-13)</small>
+
+- Remove the esModuleInterop setting in tsconfig.json (#1078) ([dbba380](https://github.com/react-dnd/react-dnd/commit/dbba380)), closes [#1078](https://github.com/react-dnd/react-dnd/issues/1078)
+- Replace lodash/isArray usage with Arrays.isArray (#1072) ([f2b0a3a](https://github.com/react-dnd/react-dnd/commit/f2b0a3a)), closes [#1072](https://github.com/react-dnd/react-dnd/issues/1072)
+- Run 'build' as part of the test script; fix issues in the docs ([3dd41f4](https://github.com/react-dnd/react-dnd/commit/3dd41f4))
+- Task/remove proptypes (#1077) ([0bc9d08](https://github.com/react-dnd/react-dnd/commit/0bc9d08)), closes [#1077](https://github.com/react-dnd/react-dnd/issues/1077)
+- v4.0.5 ([bd989b4](https://github.com/react-dnd/react-dnd/commit/bd989b4))
+
+## <small>4.0.4 (2018-06-06)</small>
+
+- Add local deps to documentation package ([3e8e66c](https://github.com/react-dnd/react-dnd/commit/3e8e66c))
+- Add tsconfig.json and src/ directories to the npmignore of the packages (#1066) ([85012f7](https://github.com/react-dnd/react-dnd/commit/85012f7)), closes [#1066](https://github.com/react-dnd/react-dnd/issues/1066)
+- Upgrade to Typescript 2.9 (#1067) ([b3e5c43](https://github.com/react-dnd/react-dnd/commit/b3e5c43)), closes [#1067](https://github.com/react-dnd/react-dnd/issues/1067)
+- v4.0.4 ([ef2c0d0](https://github.com/react-dnd/react-dnd/commit/ef2c0d0))
+
+## <small>4.0.2 (2018-06-02)</small>
+
+- Since setImmediate is not official or supported, bring asap back to dnd-core (#1057) ([ac35813](https://github.com/react-dnd/react-dnd/commit/ac35813)), closes [#1057](https://github.com/react-dnd/react-dnd/issues/1057)
+- v4.0.2 ([536f0b0](https://github.com/react-dnd/react-dnd/commit/536f0b0))
+
+## <small>4.0.1 (2018-06-01)</small>
+
+- Move react to dev dependencies (#1054) ([6d05276](https://github.com/react-dnd/react-dnd/commit/6d05276)), closes [#1054](https://github.com/react-dnd/react-dnd/issues/1054)
+- v4.0.1 ([dcc6600](https://github.com/react-dnd/react-dnd/commit/dcc6600))
+
+## 4.0.0 (2018-06-01)
+
+- Add issue templates (#1043) ([e3b5890](https://github.com/react-dnd/react-dnd/commit/e3b5890)), closes [#1043](https://github.com/react-dnd/react-dnd/issues/1043)
+- Include BrowserStack Logo (#1048) ([03a909d](https://github.com/react-dnd/react-dnd/commit/03a909d)), closes [#1048](https://github.com/react-dnd/react-dnd/issues/1048)
+- React 17 Preparation (#1033) ([4d8e364](https://github.com/react-dnd/react-dnd/commit/4d8e364)), closes [#1033](https://github.com/react-dnd/react-dnd/issues/1033)
+- Remove 'require' statements from main code (#1050) ([c4bab9a](https://github.com/react-dnd/react-dnd/commit/c4bab9a)), closes [#1050](https://github.com/react-dnd/react-dnd/issues/1050)
+- Remove @redux/types dependency (#1038) ([765887e](https://github.com/react-dnd/react-dnd/commit/765887e)), closes [#1038](https://github.com/react-dnd/react-dnd/issues/1038)
+- Remove bithound references (#1047) ([e97e747](https://github.com/react-dnd/react-dnd/commit/e97e747)), closes [#1047](https://github.com/react-dnd/react-dnd/issues/1047)
+- Remove Node Types (#1039) ([f3dd6cc](https://github.com/react-dnd/react-dnd/commit/f3dd6cc)), closes [#1039](https://github.com/react-dnd/react-dnd/issues/1039)
+- Remove the isClassComponent check (#1052) ([8c1594b](https://github.com/react-dnd/react-dnd/commit/8c1594b)), closes [#1052](https://github.com/react-dnd/react-dnd/issues/1052)
+- Replace objects with frequent deletes in the HTML5Backend with ES6 maps (#1053) ([c98fa9b](https://github.com/react-dnd/react-dnd/commit/c98fa9b)), closes [#1053](https://github.com/react-dnd/react-dnd/issues/1053)
+- v4.0.0 ([4112cb0](https://github.com/react-dnd/react-dnd/commit/4112cb0))
+
+## <small>3.0.2 (2018-05-29)</small>
+
+- docsite updates ([5e94b70](https://github.com/react-dnd/react-dnd/commit/5e94b70))
+- Upgrade React version in docs ([7fd9f9e](https://github.com/react-dnd/react-dnd/commit/7fd9f9e))
+- Use ES5 as the typescript target to support users in older browsers (#1035) ([30ede38](https://github.com/react-dnd/react-dnd/commit/30ede38)), closes [#1035](https://github.com/react-dnd/react-dnd/issues/1035)
+- v3.0.2 ([0e52f5e](https://github.com/react-dnd/react-dnd/commit/0e52f5e))
+
+## <small>3.0.1 (2018-05-29)</small>
+
+- Improve Typings (#1031) ([be36357](https://github.com/react-dnd/react-dnd/commit/be36357)), closes [#1031](https://github.com/react-dnd/react-dnd/issues/1031)
+- v3.0.1 ([f20fa04](https://github.com/react-dnd/react-dnd/commit/f20fa04))
+
+## 3.0.0 (2018-05-02)
+
+- (#1010) - Upgrade to redux 4 (#1013) ([164a804](https://github.com/react-dnd/react-dnd/commit/164a804)), closes [#1010](https://github.com/react-dnd/react-dnd/issues/1010) [#1013](https://github.com/react-dnd/react-dnd/issues/1013)
+- Improve documentation for testing (#976) ([42e1221](https://github.com/react-dnd/react-dnd/commit/42e1221)), closes [#976](https://github.com/react-dnd/react-dnd/issues/976)
+- Move the publish_docs script to the top-level ([232d0d4](https://github.com/react-dnd/react-dnd/commit/232d0d4))
+- support react 16.3 statics (#1015) ([f6cf73a](https://github.com/react-dnd/react-dnd/commit/f6cf73a)), closes [#1015](https://github.com/react-dnd/react-dnd/issues/1015)
+- Typescript Migration (#1017) ([56de346](https://github.com/react-dnd/react-dnd/commit/56de346)), closes [#1017](https://github.com/react-dnd/react-dnd/issues/1017)
+- Update Documentation Source Links ([aee9863](https://github.com/react-dnd/react-dnd/commit/aee9863))
+- v3.0.0 ([4d37ad5](https://github.com/react-dnd/react-dnd/commit/4d37ad5))
+
+## 2.6.0 (2018-03-21)
+
+- #869 - Fix issue which causes drag operation to not work on newer Fir… (#928) ([80645fb](https://github.com/react-dnd/react-dnd/commit/80645fb)), closes [#928](https://github.com/react-dnd/react-dnd/issues/928) [#869](https://github.com/react-dnd/react-dnd/issues/869)
+- Add publish_site script to top level package.json ([485d7ff](https://github.com/react-dnd/react-dnd/commit/485d7ff))
+- Build Updates (#988) ([6d0b0e3](https://github.com/react-dnd/react-dnd/commit/6d0b0e3)), closes [#988](https://github.com/react-dnd/react-dnd/issues/988)
+- Fix typos (#938) ([05a3f6e](https://github.com/react-dnd/react-dnd/commit/05a3f6e)), closes [#938](https://github.com/react-dnd/react-dnd/issues/938)
+- Missing imports and incorrect style access (#919) ([60ee308](https://github.com/react-dnd/react-dnd/commit/60ee308)), closes [#919](https://github.com/react-dnd/react-dnd/issues/919)
+- Pass props to DragLayer (#979) ([7b1e169](https://github.com/react-dnd/react-dnd/commit/7b1e169)), closes [#979](https://github.com/react-dnd/react-dnd/issues/979)
+- removing the Firefox quirk as they have improvised recently (> 57.0.2) - https://bugzilla.mozilla.or ([4beec55](https://github.com/react-dnd/react-dnd/commit/4beec55)), closes [#970](https://github.com/react-dnd/react-dnd/issues/970)
+- Use JSX in the decorateHandler component. Add some comments to recent changes to the HTML5Backend ([0cba179](https://github.com/react-dnd/react-dnd/commit/0cba179))
+- v2.6.0 ([af675a7](https://github.com/react-dnd/react-dnd/commit/af675a7))
+
+## <small>2.5.4 (2017-10-07)</small>
+
+- Add jsconfig.json file to eliminate warnings about decorators in Visual Studio Code ([879f2ea](https://github.com/react-dnd/react-dnd/commit/879f2ea))
+- do not attach refs on the stateless components (#898) ([4c1c940](https://github.com/react-dnd/react-dnd/commit/4c1c940)), closes [#898](https://github.com/react-dnd/react-dnd/issues/898) [#896](https://github.com/react-dnd/react-dnd/issues/896)
+- DragDropContextProvider don't recreate child context (#859) ([0dfa63b](https://github.com/react-dnd/react-dnd/commit/0dfa63b)), closes [#859](https://github.com/react-dnd/react-dnd/issues/859)
+- Format merge into the DragDropContextProvider ([75a66db](https://github.com/react-dnd/react-dnd/commit/75a66db))
+- Tooling Updates (#901) ([c6bf3af](https://github.com/react-dnd/react-dnd/commit/c6bf3af)), closes [#901](https://github.com/react-dnd/react-dnd/issues/901)
+- v2.5.4 ([e298334](https://github.com/react-dnd/react-dnd/commit/e298334))
+
+## <small>2.5.3 (2017-09-27)</small>
+
+- Update some deprecated references (#892) ([3be2d95](https://github.com/react-dnd/react-dnd/commit/3be2d95)), closes [#892](https://github.com/react-dnd/react-dnd/issues/892)
+- v2.5.3 ([52633a2](https://github.com/react-dnd/react-dnd/commit/52633a2))
+
+## <small>2.5.2 (2017-09-27)</small>
+
+- Add missing imports to Overview HOC examples (#755) ([45460b7](https://github.com/react-dnd/react-dnd/commit/45460b7)), closes [#755](https://github.com/react-dnd/react-dnd/issues/755)
+- Add React 16 to peer dependencies (#860) ([c6123fa](https://github.com/react-dnd/react-dnd/commit/c6123fa)), closes [#860](https://github.com/react-dnd/react-dnd/issues/860)
+- Add repository fields to the packages (#836) ([7b655bf](https://github.com/react-dnd/react-dnd/commit/7b655bf)), closes [#836](https://github.com/react-dnd/react-dnd/issues/836)
+- Change manual knight position to match screenshot (#470) ([f43cdbf](https://github.com/react-dnd/react-dnd/commit/f43cdbf)), closes [#470](https://github.com/react-dnd/react-dnd/issues/470)
+- Changed URL for browsing source to point to correct location (#724) ([40fbec9](https://github.com/react-dnd/react-dnd/commit/40fbec9)), closes [#724](https://github.com/react-dnd/react-dnd/issues/724)
+- Check for presence of add/removeEventListener on target object (#813) ([5c8b343](https://github.com/react-dnd/react-dnd/commit/5c8b343)), closes [#813](https://github.com/react-dnd/react-dnd/issues/813)
+- Clean up OffsetUtils.js (#795) ([3e9a3fe](https://github.com/react-dnd/react-dnd/commit/3e9a3fe)), closes [#795](https://github.com/react-dnd/react-dnd/issues/795)
+- Create index.md (#796) ([ac0da13](https://github.com/react-dnd/react-dnd/commit/ac0da13)), closes [#796](https://github.com/react-dnd/react-dnd/issues/796)
+- current the >> the current (#797) ([4004f7a](https://github.com/react-dnd/react-dnd/commit/4004f7a)), closes [#797](https://github.com/react-dnd/react-dnd/issues/797)
+- Cut v2.4.1 (#765) ([fd0513e](https://github.com/react-dnd/react-dnd/commit/fd0513e)), closes [#765](https://github.com/react-dnd/react-dnd/issues/765)
+- Cut v2.5.1 (#867) ([cde41ef](https://github.com/react-dnd/react-dnd/commit/cde41ef)), closes [#867](https://github.com/react-dnd/react-dnd/issues/867)
+- Docs fix (#833) ([d402e6a](https://github.com/react-dnd/react-dnd/commit/d402e6a)), closes [#833](https://github.com/react-dnd/react-dnd/issues/833)
+- End drag before starting a new one (#820) ([fbc13d1](https://github.com/react-dnd/react-dnd/commit/fbc13d1)), closes [#820](https://github.com/react-dnd/react-dnd/issues/820)
+- Fix cross-browser discrepancies for non-images (#762) ([93c5580](https://github.com/react-dnd/react-dnd/commit/93c5580)), closes [#762](https://github.com/react-dnd/react-dnd/issues/762)
+- Fix grammatical mistake (#790) ([bf4be9a](https://github.com/react-dnd/react-dnd/commit/bf4be9a)), closes [#790](https://github.com/react-dnd/react-dnd/issues/790)
+- Fix typo in native files example (#774) ([a64154e](https://github.com/react-dnd/react-dnd/commit/a64154e)), closes [#774](https://github.com/react-dnd/react-dnd/issues/774)
+- Fixing DragLayer sample code bug (#863) ([0e47490](https://github.com/react-dnd/react-dnd/commit/0e47490)), closes [#863](https://github.com/react-dnd/react-dnd/issues/863)
+- Fixing typo in Tutorial (#718) ([e51bafd](https://github.com/react-dnd/react-dnd/commit/e51bafd)), closes [#718](https://github.com/react-dnd/react-dnd/issues/718)
+- Move babel-preset-env to devDependencies (#827) ([c3b11da](https://github.com/react-dnd/react-dnd/commit/c3b11da)), closes [#827](https://github.com/react-dnd/react-dnd/issues/827)
+- Pass offsetX and offsetY as createDragPreview options to force offsets (#776) ([d1f078b](https://github.com/react-dnd/react-dnd/commit/d1f078b)), closes [#776](https://github.com/react-dnd/react-dnd/issues/776)
+- Perform the check in the right place when used in iframes (#850) ([05d9800](https://github.com/react-dnd/react-dnd/commit/05d9800)), closes [#850](https://github.com/react-dnd/react-dnd/issues/850)
+- Remove peerDependency in `react-dnd-html5-backend` depending on `react-dnd` in order to use with `pr ([2dbac3a](https://github.com/react-dnd/react-dnd/commit/2dbac3a)), closes [#884](https://github.com/react-dnd/react-dnd/issues/884)
+- Replace babel-preset-latest with babel-preset-env; upgrade react, remove react-addons-test-utils (#8 ([f47a91f](https://github.com/react-dnd/react-dnd/commit/f47a91f)), closes [#825](https://github.com/react-dnd/react-dnd/issues/825)
+- Replace yarn with npm5 (#837) ([920aba6](https://github.com/react-dnd/react-dnd/commit/920aba6)), closes [#837](https://github.com/react-dnd/react-dnd/issues/837)
+- Revert "Simplify the even flow, end drag whenever receiving mousemove after dragstart instead of dep ([81831e0](https://github.com/react-dnd/react-dnd/commit/81831e0)), closes [#799](https://github.com/react-dnd/react-dnd/issues/799) [#835](https://github.com/react-dnd/react-dnd/issues/835)
+- Simplify the even flow, end drag whenever receiving mousemove after dragstart instead of depending o ([8a3eb74](https://github.com/react-dnd/react-dnd/commit/8a3eb74)), closes [#801](https://github.com/react-dnd/react-dnd/issues/801)
+- update tutorial.md link (#848) ([312269a](https://github.com/react-dnd/react-dnd/commit/312269a)), closes [#848](https://github.com/react-dnd/react-dnd/issues/848)
+- Upgrade lerna (#823) ([9fcdca0](https://github.com/react-dnd/react-dnd/commit/9fcdca0)), closes [#823](https://github.com/react-dnd/react-dnd/issues/823)
+- Upgrade Webpack and Webpack Loaders (#826) ([1ae43dd](https://github.com/react-dnd/react-dnd/commit/1ae43dd)), closes [#826](https://github.com/react-dnd/react-dnd/issues/826)
+- v2.5.0 ([6a3fea6](https://github.com/react-dnd/react-dnd/commit/6a3fea6))
+- v2.5.2 ([12a1d69](https://github.com/react-dnd/react-dnd/commit/12a1d69))
+- vundefined ([0466ef7](https://github.com/react-dnd/react-dnd/commit/0466ef7))
+- docs(DropTargetMonitor): fix semantic and grammatical errors (#824) ([aaf3cfb](https://github.com/react-dnd/react-dnd/commit/aaf3cfb)), closes [#824](https://github.com/react-dnd/react-dnd/issues/824)
+- docs(index.md): add missing extends Component (#828) ([b5747f2](https://github.com/react-dnd/react-dnd/commit/b5747f2)), closes [#828](https://github.com/react-dnd/react-dnd/issues/828)
+- fix(docs): overview example (#727) ([3a5ef9a](https://github.com/react-dnd/react-dnd/commit/3a5ef9a)), closes [#727](https://github.com/react-dnd/react-dnd/issues/727) [#716](https://github.com/react-dnd/react-dnd/issues/716)
+- fix(DragLayer.md): extend React.Component (#814) ([212ac7c](https://github.com/react-dnd/react-dnd/commit/212ac7c)), closes [#814](https://github.com/react-dnd/react-dnd/issues/814)
+
+## 2.4.0 (2017-05-09)
+
+- (#639) - Correct Example Rendering with Firefox (#684) ([11e3df6](https://github.com/react-dnd/react-dnd/commit/11e3df6)), closes [#639](https://github.com/react-dnd/react-dnd/issues/639) [#684](https://github.com/react-dnd/react-dnd/issues/684)
+- (#645) - Use 'typeof window' to check for window existence in HTML5 B… (#646) ([b3807e0](https://github.com/react-dnd/react-dnd/commit/b3807e0)), closes [#645](https://github.com/react-dnd/react-dnd/issues/645) [#646](https://github.com/react-dnd/react-dnd/issues/646) [#645](https://github.com/react-dnd/react-dnd/issues/645) [#645](https://github.com/react-dnd/react-dnd/issues/645) [#645](https://github.com/react-dnd/react-dnd/issues/645)
+- 2.2.0 (#642) ([643992a](https://github.com/react-dnd/react-dnd/commit/643992a)), closes [#642](https://github.com/react-dnd/react-dnd/issues/642)
+- Add an invariant(..) validation before accessing the decorated instance ([89763d1](https://github.com/react-dnd/react-dnd/commit/89763d1))
+- Add bundling, babel scripts to package.json ([de5285f](https://github.com/react-dnd/react-dnd/commit/de5285f))
+- Add clean script, update 'npm test' ([9eea7db](https://github.com/react-dnd/react-dnd/commit/9eea7db))
+- Add dependency badges ([400c47c](https://github.com/react-dnd/react-dnd/commit/400c47c))
+- Add gzip size badge (#692) ([0933e3f](https://github.com/react-dnd/react-dnd/commit/0933e3f)), closes [#692](https://github.com/react-dnd/react-dnd/issues/692)
+- Add HTML5 backend gzip size (#697) ([551b80e](https://github.com/react-dnd/react-dnd/commit/551b80e)), closes [#697](https://github.com/react-dnd/react-dnd/issues/697)
+- Add License Field to Sub-Packages (#670) ([6d7dc97](https://github.com/react-dnd/react-dnd/commit/6d7dc97)), closes [#670](https://github.com/react-dnd/react-dnd/issues/670) [#667](https://github.com/react-dnd/react-dnd/issues/667)
+- Add myself to contributor list ([0a5e37e](https://github.com/react-dnd/react-dnd/commit/0a5e37e))
+- Add Reactiflux Discord Link (#663) ([4f12fb0](https://github.com/react-dnd/react-dnd/commit/4f12fb0)), closes [#663](https://github.com/react-dnd/react-dnd/issues/663)
+- Adding a React Component for establishing Context via React Trees [v2] (#632) ([1153d82](https://github.com/react-dnd/react-dnd/commit/1153d82)), closes [#632](https://github.com/react-dnd/react-dnd/issues/632)
+- adding Redux instead of or in addition to Flux in documentation per issue: #222 ([6b5f1a6](https://github.com/react-dnd/react-dnd/commit/6b5f1a6)), closes [#222](https://github.com/react-dnd/react-dnd/issues/222)
+- Adding statics hoisting to HOCs ([7aa0cac](https://github.com/react-dnd/react-dnd/commit/7aa0cac))
+- Adds require for Box component to Testing.md (#606) ([61baa4b](https://github.com/react-dnd/react-dnd/commit/61baa4b)), closes [#606](https://github.com/react-dnd/react-dnd/issues/606)
+- Build system, documentation updates ([4b04f90](https://github.com/react-dnd/react-dnd/commit/4b04f90))
+- Build updates ([b9c5236](https://github.com/react-dnd/react-dnd/commit/b9c5236))
+- clarifying DropTarget and DragSource composition ([24926f4](https://github.com/react-dnd/react-dnd/commit/24926f4))
+- Copy readme from react-dnd package (#644) ([d8b1fa8](https://github.com/react-dnd/react-dnd/commit/d8b1fa8)), closes [#644](https://github.com/react-dnd/react-dnd/issues/644)
+- Correct linting issues from upstream merge ([b5c8f03](https://github.com/react-dnd/react-dnd/commit/b5c8f03))
+- created stub function to better reproduce reality ([b5aded4](https://github.com/react-dnd/react-dnd/commit/b5aded4))
+- Fix an example of the tutorial ([b6f3f81](https://github.com/react-dnd/react-dnd/commit/b6f3f81))
+- Fix intermittent problems with dropping a native file in FF (#713) ([bfa8165](https://github.com/react-dnd/react-dnd/commit/bfa8165)), closes [#713](https://github.com/react-dnd/react-dnd/issues/713) [#539](https://github.com/react-dnd/react-dnd/issues/539)
+- Fix ReactTestUtils dependency ([d3e4e4c](https://github.com/react-dnd/react-dnd/commit/d3e4e4c))
+- Fix syntax error ([bce3808](https://github.com/react-dnd/react-dnd/commit/bce3808))
+- fix typo (#656) ([5442d31](https://github.com/react-dnd/react-dnd/commit/5442d31)), closes [#656](https://github.com/react-dnd/react-dnd/issues/656)
+- Fix typo on DragLayerMonitor doc (#707) ([1cbc990](https://github.com/react-dnd/react-dnd/commit/1cbc990)), closes [#707](https://github.com/react-dnd/react-dnd/issues/707)
+- fixed es5 example ([36926b5](https://github.com/react-dnd/react-dnd/commit/36926b5))
+- fixed invisible square ([183ee4d](https://github.com/react-dnd/react-dnd/commit/183ee4d))
+- fixed invisible square at es7 example ([bc6f61f](https://github.com/react-dnd/react-dnd/commit/bc6f61f))
+- fixed mistake about collect function parameters ([19348c3](https://github.com/react-dnd/react-dnd/commit/19348c3))
+- Fixes #566 - documentation mistake regarding first vs second argument. ([4fff699](https://github.com/react-dnd/react-dnd/commit/4fff699)), closes [#566](https://github.com/react-dnd/react-dnd/issues/566)
+- Initializing class state in the Backend Constructor (#695) ([39576c8](https://github.com/react-dnd/react-dnd/commit/39576c8)), closes [#695](https://github.com/react-dnd/react-dnd/issues/695)
+- Make alt drag work for drop sources that can take either copy or move drag operations (#675) ([1573fe9](https://github.com/react-dnd/react-dnd/commit/1573fe9)), closes [#675](https://github.com/react-dnd/react-dnd/issues/675)
+- Migrated deprecated React.PropTypes in example + same for React.createClass in docs (#729) ([abbe4c7](https://github.com/react-dnd/react-dnd/commit/abbe4c7)), closes [#729](https://github.com/react-dnd/react-dnd/issues/729)
+- Missed a spot of Flux ([0f2504e](https://github.com/react-dnd/react-dnd/commit/0f2504e))
+- Missing comma in Overview example ([3e6c0ae](https://github.com/react-dnd/react-dnd/commit/3e6c0ae))
+- Project Updates & Cleanup (#650) ([23aac6c](https://github.com/react-dnd/react-dnd/commit/23aac6c)), closes [#650](https://github.com/react-dnd/react-dnd/issues/650)
+- Remove .vscode settings ([7cd860b](https://github.com/react-dnd/react-dnd/commit/7cd860b))
+- Remove duplicated 'canDrag' of ALLOWED_SPEC_METHODS ([d502238](https://github.com/react-dnd/react-dnd/commit/d502238))
+- Remove Gitter Links ([02ade2e](https://github.com/react-dnd/react-dnd/commit/02ade2e))
+- Remove unused import from docs ([55723db](https://github.com/react-dnd/react-dnd/commit/55723db))
+- Remove vestigial rule removals ([aee325a](https://github.com/react-dnd/react-dnd/commit/aee325a))
+- Remove vscode conf ([2961b41](https://github.com/react-dnd/react-dnd/commit/2961b41))
+- Replace 'Thinking in React' URL with link to English doc ([e12cc93](https://github.com/react-dnd/react-dnd/commit/e12cc93))
+- Replace npmcdn.com with unpkg.com ([f3c2be4](https://github.com/react-dnd/react-dnd/commit/f3c2be4))
+- Replace ref String Attribute with ref Callback Attribute ([e33d431](https://github.com/react-dnd/react-dnd/commit/e33d431))
+- Revert "Upgrade React to stable (15.0.1)" ([8a96d85](https://github.com/react-dnd/react-dnd/commit/8a96d85))
+- Set up Lerna Monorepo (WIP) (#643) ([ca10e68](https://github.com/react-dnd/react-dnd/commit/ca10e68)), closes [#643](https://github.com/react-dnd/react-dnd/issues/643)
+- Turn on 'comma-dangle' in the examples/ folder ([cf3ff00](https://github.com/react-dnd/react-dnd/commit/cf3ff00))
+- Turn on 'comma-dangle' in the src/ folder ([c2de0ed](https://github.com/react-dnd/react-dnd/commit/c2de0ed))
+- Turn on 'consistent-return' ([f8fc637](https://github.com/react-dnd/react-dnd/commit/f8fc637))
+- Turn on 'jsx-a11y/label-has-for' rule ([d3ebb39](https://github.com/react-dnd/react-dnd/commit/d3ebb39))
+- Turn on 'no-plusplus' ([b128097](https://github.com/react-dnd/react-dnd/commit/b128097))
+- Turn on 'object-curly-spacing' rule ([6c63d93](https://github.com/react-dnd/react-dnd/commit/6c63d93))
+- Turn on 'object-shorthand' rule ([1c89429](https://github.com/react-dnd/react-dnd/commit/1c89429))
+- Turn on 'prefer-template' rule ([50182a5](https://github.com/react-dnd/react-dnd/commit/50182a5))
+- Turn on 'quote-props' rule ([8a26e17](https://github.com/react-dnd/react-dnd/commit/8a26e17))
+- Turn on 'react-jsx-first-prop-new-line', 'react-jsx-indent-props', and 'react-jsx-closing-bracket-lo ([0dd5977](https://github.com/react-dnd/react-dnd/commit/0dd5977))
+- Turn on arrow-parens rule in examples ([eec158c](https://github.com/react-dnd/react-dnd/commit/eec158c))
+- Turn on import-ordering rule ([4a4ee46](https://github.com/react-dnd/react-dnd/commit/4a4ee46))
+- Turn on indent rule ([c11d1eb](https://github.com/react-dnd/react-dnd/commit/c11d1eb))
+- Turn on no-mixed-operators rule ([f7832d1](https://github.com/react-dnd/react-dnd/commit/f7832d1))
+- Update #687 - Native File Example (#696) ([9e062eb](https://github.com/react-dnd/react-dnd/commit/9e062eb)), closes [#687](https://github.com/react-dnd/react-dnd/issues/687) [#696](https://github.com/react-dnd/react-dnd/issues/696)
+- Update badges ([e1871af](https://github.com/react-dnd/react-dnd/commit/e1871af))
+- Update dependencies ([4e0123f](https://github.com/react-dnd/react-dnd/commit/4e0123f))
+- Update dnd-core dep version (#641) ([d59ba75](https://github.com/react-dnd/react-dnd/commit/d59ba75)), closes [#641](https://github.com/react-dnd/react-dnd/issues/641)
+- Update doc site stuff ([2e0aa35](https://github.com/react-dnd/react-dnd/commit/2e0aa35))
+- Update DropTarget.md ([71c13cf](https://github.com/react-dnd/react-dnd/commit/71c13cf))
+- Update FAQ.md ([bdcd120](https://github.com/react-dnd/react-dnd/commit/bdcd120))
+- Update Github URLs ([5d6d740](https://github.com/react-dnd/react-dnd/commit/5d6d740))
+- Update Lerna (#678) ([27e1822](https://github.com/react-dnd/react-dnd/commit/27e1822)), closes [#678](https://github.com/react-dnd/react-dnd/issues/678)
+- Update LICENSE ([d527941](https://github.com/react-dnd/react-dnd/commit/d527941))
+- Update linting rules, add editorconfig, correct static site issues ([91c6684](https://github.com/react-dnd/react-dnd/commit/91c6684))
+- Update the CodeBlock component so that newer JS syntax is shown first (#654) ([ad4102d](https://github.com/react-dnd/react-dnd/commit/ad4102d)), closes [#654](https://github.com/react-dnd/react-dnd/issues/654)
+- Update the documentation devServer's webpack configuration so that dnd-core may be npm/yarn-linked ([4fdd8e6](https://github.com/react-dnd/react-dnd/commit/4fdd8e6))
+- Update Tutorial.md ([9c640de](https://github.com/react-dnd/react-dnd/commit/9c640de))
+- Update walkthrough code to use yarn instead of npm (#671) ([ad1e992](https://github.com/react-dnd/react-dnd/commit/ad1e992)), closes [#671](https://github.com/react-dnd/react-dnd/issues/671)
+- Update yarn.lock files (#653) ([f7fb8b3](https://github.com/react-dnd/react-dnd/commit/f7fb8b3)), closes [#653](https://github.com/react-dnd/react-dnd/issues/653)
+- Updated reactiflux discord channel to #need-help (#703) ([a7ffa6e](https://github.com/react-dnd/react-dnd/commit/a7ffa6e)), closes [#703](https://github.com/react-dnd/react-dnd/issues/703)
+- upgrade React to stable (15.0.1) ([19f32f2](https://github.com/react-dnd/react-dnd/commit/19f32f2))
+- Use Babel 6, Update ESLint and Airbnb config ([3b3a521](https://github.com/react-dnd/react-dnd/commit/3b3a521))
+- Use Lerna Fixed Mode for Versioning (#651) ([7c34642](https://github.com/react-dnd/react-dnd/commit/7c34642)), closes [#651](https://github.com/react-dnd/react-dnd/issues/651)
+- v2.2.3 (#652) ([87b5ad5](https://github.com/react-dnd/react-dnd/commit/87b5ad5)), closes [#652](https://github.com/react-dnd/react-dnd/issues/652)
+- v2.2.4 Version Cut (#674) ([d1d901e](https://github.com/react-dnd/react-dnd/commit/d1d901e)), closes [#674](https://github.com/react-dnd/react-dnd/issues/674)
+- v2.3.0 (#710) ([8a42cb5](https://github.com/react-dnd/react-dnd/commit/8a42cb5)), closes [#710](https://github.com/react-dnd/react-dnd/issues/710)
+- v2.4.0 ([8721c09](https://github.com/react-dnd/react-dnd/commit/8721c09))
+- when rendering on the server window is undefined so no need to return it (#672) ([dc28a61](https://github.com/react-dnd/react-dnd/commit/dc28a61)), closes [#672](https://github.com/react-dnd/react-dnd/issues/672)
+- fix: delete duplicate content (#711) ([64ccf46](https://github.com/react-dnd/react-dnd/commit/64ccf46)), closes [#711](https://github.com/react-dnd/react-dnd/issues/711)
+
+## <small>2.1.4 (2016-04-02)</small>
+
+- 2.1.4 ([48a8d92](https://github.com/react-dnd/react-dnd/commit/48a8d92))
+- Adds support for React 15 and upgrades current website to React 15 RC2. ([b668430](https://github.com/react-dnd/react-dnd/commit/b668430))
+- Fix whitespace change ([c7c7e99](https://github.com/react-dnd/react-dnd/commit/c7c7e99))
+- Update DragSource.md ([e7d218a](https://github.com/react-dnd/react-dnd/commit/e7d218a))
+- Update DropTarget.md ([66725d5](https://github.com/react-dnd/react-dnd/commit/66725d5))
+
+## <small>2.1.3 (2016-03-13)</small>
+
+- 2.1.3 ([0f1b5d8](https://github.com/react-dnd/react-dnd/commit/0f1b5d8))
+- add missing parenthesis to getClientOffset ([5e2d104](https://github.com/react-dnd/react-dnd/commit/5e2d104))
+- Remove development message React DnD does not provide a default export. closes #408 ([28177fe](https://github.com/react-dnd/react-dnd/commit/28177fe)), closes [#408](https://github.com/react-dnd/react-dnd/issues/408)
+- Remove the info about the dist folder ([efb0fef](https://github.com/react-dnd/react-dnd/commit/efb0fef))
+
+## <small>2.1.2 (2016-02-19)</small>
+
+- 2.1.2 ([ca22720](https://github.com/react-dnd/react-dnd/commit/ca22720))
+- Add thanks to BrowserStack ([fa749f3](https://github.com/react-dnd/react-dnd/commit/fa749f3))
+
+## <small>2.1.1 (2016-02-17)</small>
+
+- 2.1.1 ([3543db7](https://github.com/react-dnd/react-dnd/commit/3543db7))
+- Clean up subscriptions before mounting ([6d06642](https://github.com/react-dnd/react-dnd/commit/6d06642))
+- Fix the filename in the link ([3a702ee](https://github.com/react-dnd/react-dnd/commit/3a702ee))
+- Optimize unnecessary allocations ([d023c63](https://github.com/react-dnd/react-dnd/commit/d023c63))
+
+## 2.1.0 (2016-02-14)
+
+- 2.0.1 ([97c82ee](https://github.com/react-dnd/react-dnd/commit/97c82ee))
+- 2.0.2 ([017ce3e](https://github.com/react-dnd/react-dnd/commit/017ce3e))
+- 2.1.0 ([88cdf84](https://github.com/react-dnd/react-dnd/commit/88cdf84))
+- Add .travis.yml ([ed92dea](https://github.com/react-dnd/react-dnd/commit/ed92dea))
+- Add badges ([874a56e](https://github.com/react-dnd/react-dnd/commit/874a56e))
+- Add index to Card propTypes ([306ae30](https://github.com/react-dnd/react-dnd/commit/306ae30))
+- Add linting as a build step ([1d83221](https://github.com/react-dnd/react-dnd/commit/1d83221))
+- build both dev and minified versions to dist ([cb1e699](https://github.com/react-dnd/react-dnd/commit/cb1e699))
+- Bump deps ([d653066](https://github.com/react-dnd/react-dnd/commit/d653066))
+- Clarify the mutation ([559f8ff](https://github.com/react-dnd/react-dnd/commit/559f8ff))
+- Delete unexpected comma. ([4b3a586](https://github.com/react-dnd/react-dnd/commit/4b3a586))
+- Don't allow to call connect\* methods on the composite component elements ([96d4c30](https://github.com/react-dnd/react-dnd/commit/96d4c30))
+- Don't throw on undefined options when nodes are equal ([faded79](https://github.com/react-dnd/react-dnd/commit/faded79)), closes [#261](https://github.com/react-dnd/react-dnd/issues/261)
+- Don't throw when options changed from falsy to object ([b33c941](https://github.com/react-dnd/react-dnd/commit/b33c941)), closes [#261](https://github.com/react-dnd/react-dnd/issues/261)
+- DragLayer should not call setState() after being unmounted ([1e6f3e3](https://github.com/react-dnd/react-dnd/commit/1e6f3e3)), closes [#307](https://github.com/react-dnd/react-dnd/issues/307)
+- Exclude testing from Travis ([5e67908](https://github.com/react-dnd/react-dnd/commit/5e67908))
+- Extract HTML5 backend into a separate repo and update docs with examples ([f37dc94](https://github.com/react-dnd/react-dnd/commit/f37dc94))
+- Fix broken link in example. ([9e978ac](https://github.com/react-dnd/react-dnd/commit/9e978ac))
+- Fix DragLayer ES5 documentation example. ([7043fcc](https://github.com/react-dnd/react-dnd/commit/7043fcc))
+- Fix lint ([7fb9ea5](https://github.com/react-dnd/react-dnd/commit/7fb9ea5))
+- Fix localhost-link ([93761e9](https://github.com/react-dnd/react-dnd/commit/93761e9))
+- Fix syntax error in Testing.md ([bca8f7d](https://github.com/react-dnd/react-dnd/commit/bca8f7d))
+- Fix test runner ([b6381a6](https://github.com/react-dnd/react-dnd/commit/b6381a6))
+- Fix typo ([94cd292](https://github.com/react-dnd/react-dnd/commit/94cd292))
+- Handlers should not call setState() after being unmounted (related to #307) ([237ba41](https://github.com/react-dnd/react-dnd/commit/237ba41)), closes [#307](https://github.com/react-dnd/react-dnd/issues/307)
+- Improved docs (consistent naming, improved performance) ([ee1a23d](https://github.com/react-dnd/react-dnd/commit/ee1a23d))
+- Remove Karma test from Travis ([92fe1d2](https://github.com/react-dnd/react-dnd/commit/92fe1d2))
+- Revert "Subscribe DragLayer only to state changes, which include offset changes" ([0f94199](https://github.com/react-dnd/react-dnd/commit/0f94199))
+- Subscribe DragLayers to state change ([503869e](https://github.com/react-dnd/react-dnd/commit/503869e))
+- Travis is no fun ([c43b492](https://github.com/react-dnd/react-dnd/commit/c43b492))
+- Update dependencies and remove deprecated publish-latest ([f6cf8f3](https://github.com/react-dnd/react-dnd/commit/f6cf8f3))
+- Update dnd-core to fix #296 ([52d5ad0](https://github.com/react-dnd/react-dnd/commit/52d5ad0)), closes [#296](https://github.com/react-dnd/react-dnd/issues/296)
+- update lodash to v4 ([2f97cda](https://github.com/react-dnd/react-dnd/commit/2f97cda))
+- Update UMD location ([5e358e1](https://github.com/react-dnd/react-dnd/commit/5e358e1))
+- Use IO2 for Travis ([07d2281](https://github.com/react-dnd/react-dnd/commit/07d2281))
+- fix(docs): update examples to use findDOMNode from react-dom ([de29f65](https://github.com/react-dnd/react-dnd/commit/de29f65))
+
+## <small>1.1.8 (2015-09-17)</small>
+
+- 1.1.8 ([a7f6a26](https://github.com/react-dnd/react-dnd/commit/a7f6a26))
+- Do not navigate to bad URL when dropping text with selection on Firefox ([2299ece](https://github.com/react-dnd/react-dnd/commit/2299ece)), closes [#219](https://github.com/react-dnd/react-dnd/issues/219) [#259](https://github.com/react-dnd/react-dnd/issues/259)
+- hover() can handle different heights of elements ([22da86b](https://github.com/react-dnd/react-dnd/commit/22da86b))
+- Only handle selectstart in IE. ([0a36033](https://github.com/react-dnd/react-dnd/commit/0a36033)), closes [#178](https://github.com/react-dnd/react-dnd/issues/178)
+- Pass the correct card ID ([422674e](https://github.com/react-dnd/react-dnd/commit/422674e))
+
+## <small>1.1.7 (2015-09-15)</small>
+
+- 1.1.7 ([898d3a5](https://github.com/react-dnd/react-dnd/commit/898d3a5))
+- Clarify the import in docs ([306ca72](https://github.com/react-dnd/react-dnd/commit/306ca72))
+- Enforce dnd-core@1.2.1 as it should help with #277 ([76e60f5](https://github.com/react-dnd/react-dnd/commit/76e60f5)), closes [#277](https://github.com/react-dnd/react-dnd/issues/277)
+- Perform receiving new type in correct order. Fixes #277 ([687d2b8](https://github.com/react-dnd/react-dnd/commit/687d2b8)), closes [#277](https://github.com/react-dnd/react-dnd/issues/277)
+- Rebuild dist for Bower ([95cfd15](https://github.com/react-dnd/react-dnd/commit/95cfd15))
+- Typo fix. ([5ed8656](https://github.com/react-dnd/react-dnd/commit/5ed8656))
+
+## <small>1.1.6 (2015-09-15)</small>
+
+- 1.1.6 ([20d47f8](https://github.com/react-dnd/react-dnd/commit/20d47f8))
+- Update dependencies ([809c369](https://github.com/react-dnd/react-dnd/commit/809c369))
+
+## <small>1.1.5 (2015-08-22)</small>
+
+- 1.1.5: Allow all React 0.14 betas as valid ([5f8667e](https://github.com/react-dnd/react-dnd/commit/5f8667e))
+- missing parameter in docs example ([9ecf532](https://github.com/react-dnd/react-dnd/commit/9ecf532))
+
+## <small>1.1.4 (2015-07-13)</small>
+
+- 1.1.4 ([809c825](https://github.com/react-dnd/react-dnd/commit/809c825))
+- Added a note about `clientOffset` to the testing tutorial ([82a8665](https://github.com/react-dnd/react-dnd/commit/82a8665))
+- Allow 0.14.0-beta1 as peerDep ([804b837](https://github.com/react-dnd/react-dnd/commit/804b837))
+- fix script to use local webpack ([0e009b8](https://github.com/react-dnd/react-dnd/commit/0e009b8))
+- Fixes to Drag Layer API documentation. ([9773ac9](https://github.com/react-dnd/react-dnd/commit/9773ac9))
+- Minor fixes to tutorial and intro docs ([b760a73](https://github.com/react-dnd/react-dnd/commit/b760a73))
+- Rebuild dist ([b0c8fdf](https://github.com/react-dnd/react-dnd/commit/b0c8fdf))
+- Swapping parameters in overview docs ([e30acc1](https://github.com/react-dnd/react-dnd/commit/e30acc1))
+
+## <small>1.1.3 (2015-06-13)</small>
+
+- 1.1.3 ([775f7ed](https://github.com/react-dnd/react-dnd/commit/775f7ed))
+- Add minified builds back to NPM/Bower ([66df486](https://github.com/react-dnd/react-dnd/commit/66df486))
+
+## <small>1.1.2 (2015-06-04)</small>
+
+- 1.1.2 ([97e2a3a](https://github.com/react-dnd/react-dnd/commit/97e2a3a))
+- add missing parenthesis to `getClientOffset ` indicating that this is a method ([22b33d8](https://github.com/react-dnd/react-dnd/commit/22b33d8))
+- Amend the docs to fix #177 ([c4f23b0](https://github.com/react-dnd/react-dnd/commit/c4f23b0)), closes [#177](https://github.com/react-dnd/react-dnd/issues/177)
+- Document how to deal with static methods and properties ([f77c2f7](https://github.com/react-dnd/react-dnd/commit/f77c2f7))
+- Fix the doc link. #181 ([c879261](https://github.com/react-dnd/react-dnd/commit/c879261)), closes [#181](https://github.com/react-dnd/react-dnd/issues/181)
+- Require invariant ^2.1.0. Fixes #182 ([2e8f81b](https://github.com/react-dnd/react-dnd/commit/2e8f81b)), closes [#182](https://github.com/react-dnd/react-dnd/issues/182)
+- Tweak the example and the wording ([4d25feb](https://github.com/react-dnd/react-dnd/commit/4d25feb))
+
+## <small>1.1.1 (2015-05-27)</small>
+
+- 1.1.1 ([070453f](https://github.com/react-dnd/react-dnd/commit/070453f))
+- Fix dataTransfer.types being null crash in Safari ([050193d](https://github.com/react-dnd/react-dnd/commit/050193d)), closes [/github.com/gaearon/react-dnd/issues/155#issuecomment-105822784](https://github.com//github.com/gaearon/react-dnd/issues/155/issues/issuecomment-105822784)
+
+## 1.1.0 (2015-05-26)
+
+- 1.1.0 ([91f4743](https://github.com/react-dnd/react-dnd/commit/91f4743))
+- Add NativeTypes.TEXT, generalize native type support ([6d54bb5](https://github.com/react-dnd/react-dnd/commit/6d54bb5)), closes [#158](https://github.com/react-dnd/react-dnd/issues/158)
+- Fix a typo in docs ([7eb9e43](https://github.com/react-dnd/react-dnd/commit/7eb9e43))
+- Fix doc styles in Firefox ([694772d](https://github.com/react-dnd/react-dnd/commit/694772d))
+- Fix missing function application in tutorial ([065aa94](https://github.com/react-dnd/react-dnd/commit/065aa94))
+- Fix the argument name in the docs ([a9b4e44](https://github.com/react-dnd/react-dnd/commit/a9b4e44))
+- Fix the broken links ([203bd16](https://github.com/react-dnd/react-dnd/commit/203bd16))
+- Fix the docs ([0b76136](https://github.com/react-dnd/react-dnd/commit/0b76136))
+- grammar ([fd665e7](https://github.com/react-dnd/react-dnd/commit/fd665e7))
+- Link to example source code ([f13e130](https://github.com/react-dnd/react-dnd/commit/f13e130))
+- Replace instanceof check with duck typing. Fixes #155 ([fe3b891](https://github.com/react-dnd/react-dnd/commit/fe3b891)), closes [#155](https://github.com/react-dnd/react-dnd/issues/155)
+
+## 1.0.0 (2015-05-19)
+
+- "fix" flex ([caced06](https://github.com/react-dnd/react-dnd/commit/caced06))
+- "who" is weird ([c35353f](https://github.com/react-dnd/react-dnd/commit/c35353f))
+- Add all examples ([4a3c08f](https://github.com/react-dnd/react-dnd/commit/4a3c08f))
+- Add basic example ([8ecfafb](https://github.com/react-dnd/react-dnd/commit/8ecfafb))
+- Add basic example page ([056989c](https://github.com/react-dnd/react-dnd/commit/056989c))
+- Add connector to public API ([62b7c8d](https://github.com/react-dnd/react-dnd/commit/62b7c8d))
+- Add FAQ ([f7ad4dc](https://github.com/react-dnd/react-dnd/commit/f7ad4dc))
+- Add hot reloading to docs ([e897fc8](https://github.com/react-dnd/react-dnd/commit/e897fc8))
+- Add initial site skeleton taken from fixed-data-table ([130e242](https://github.com/react-dnd/react-dnd/commit/130e242))
+- Add tabbed examples (lol) ([2470285](https://github.com/react-dnd/react-dnd/commit/2470285))
+- Add the draft of Tutorial ([589f6b1](https://github.com/react-dnd/react-dnd/commit/589f6b1))
+- Add tutorial app ([a972e96](https://github.com/react-dnd/react-dnd/commit/a972e96))
+- Document testing ([fd2e486](https://github.com/react-dnd/react-dnd/commit/fd2e486))
+- drag around examples ([902da88](https://github.com/react-dnd/react-dnd/commit/902da88))
+- dustbin examples ([da94533](https://github.com/react-dnd/react-dnd/commit/da94533))
+- ES6ify the website ([0e94907](https://github.com/react-dnd/react-dnd/commit/0e94907))
+- example tuning ([c6497ca](https://github.com/react-dnd/react-dnd/commit/c6497ca))
+- Exclude dev tools from the prod website configuration ([0c3f1ff](https://github.com/react-dnd/react-dnd/commit/0c3f1ff))
+- Expose some internals for easier testing ([19f6740](https://github.com/react-dnd/react-dnd/commit/19f6740))
+- Expose some internals for easier testing ([664ead3](https://github.com/react-dnd/react-dnd/commit/664ead3))
+- Final updates ([6fa22fc](https://github.com/react-dnd/react-dnd/commit/6fa22fc))
+- Fix less ([0d74773](https://github.com/react-dnd/react-dnd/commit/0d74773))
+- Fix rendering in Safari ([699172e](https://github.com/react-dnd/react-dnd/commit/699172e))
+- Fix server rendering ([8d4f0e9](https://github.com/react-dnd/react-dnd/commit/8d4f0e9))
+- Fix server rendering ([97526af](https://github.com/react-dnd/react-dnd/commit/97526af))
+- Fix the site publish script ([6b44a27](https://github.com/react-dnd/react-dnd/commit/6b44a27))
+- Internal renames ([c8ad695](https://github.com/react-dnd/react-dnd/commit/c8ad695))
+- Make backend connector keys stable ([62971c7](https://github.com/react-dnd/react-dnd/commit/62971c7))
+- Make sidebar grouped ([b07b80c](https://github.com/react-dnd/react-dnd/commit/b07b80c))
+- minor ([a78c898](https://github.com/react-dnd/react-dnd/commit/a78c898))
+- Minor ([022b3f4](https://github.com/react-dnd/react-dnd/commit/022b3f4))
+- Minor doc tweaks ([d2a71b6](https://github.com/react-dnd/react-dnd/commit/d2a71b6))
+- Moar docs ftw ([97adff8](https://github.com/react-dnd/react-dnd/commit/97adff8))
+- Moar docs! ([f98d909](https://github.com/react-dnd/react-dnd/commit/f98d909))
+- More docs ([50dc7f0](https://github.com/react-dnd/react-dnd/commit/50dc7f0))
+- More docs ([7064373](https://github.com/react-dnd/react-dnd/commit/7064373))
+- More docs ([261d054](https://github.com/react-dnd/react-dnd/commit/261d054))
+- Move example folders around ([0dd12db](https://github.com/react-dnd/react-dnd/commit/0dd12db))
+- Move examples, delete old files and add basic testing example ([b22aae3](https://github.com/react-dnd/react-dnd/commit/b22aae3))
+- nesting examples ([d3d5622](https://github.com/react-dnd/react-dnd/commit/d3d5622))
+- other examples ([c7c7164](https://github.com/react-dnd/react-dnd/commit/c7c7164))
+- Point warning URLs to the new website ([e971f3e](https://github.com/react-dnd/react-dnd/commit/e971f3e))
+- Point warning URLs to the new website ([cd95bb2](https://github.com/react-dnd/react-dnd/commit/cd95bb2))
+- Rebuild dist ([968259e](https://github.com/react-dnd/react-dnd/commit/968259e))
+- Rebuild dist for 1.0 ([40f8521](https://github.com/react-dnd/react-dnd/commit/40f8521))
+- Remove build products before building ([eeb4203](https://github.com/react-dnd/react-dnd/commit/eeb4203))
+- Rename API sections ([dcd99d3](https://github.com/react-dnd/react-dnd/commit/dcd99d3))
+- Rename folders ([f47e4a7](https://github.com/react-dnd/react-dnd/commit/f47e4a7))
+- site update ([eaf72e1](https://github.com/react-dnd/react-dnd/commit/eaf72e1))
+- Some initial copy ([1d5e03f](https://github.com/react-dnd/react-dnd/commit/1d5e03f))
+- Split docs in folders ([f78197e](https://github.com/react-dnd/react-dnd/commit/f78197e))
+- styles for header, logo and hr ([7a1a1ea](https://github.com/react-dnd/react-dnd/commit/7a1a1ea))
+- Un-tersify it ([3ddabad](https://github.com/react-dnd/react-dnd/commit/3ddabad))
+- Update ([95e905b](https://github.com/react-dnd/react-dnd/commit/95e905b))
+- Update ([f7fa020](https://github.com/react-dnd/react-dnd/commit/f7fa020))
+- Update ([0ef5670](https://github.com/react-dnd/react-dnd/commit/0ef5670))
+- Update descriptions ([4801f08](https://github.com/react-dnd/react-dnd/commit/4801f08))
+- Update docs ([58b1ebb](https://github.com/react-dnd/react-dnd/commit/58b1ebb))
+- Update docs ([2a1daed](https://github.com/react-dnd/react-dnd/commit/2a1daed))
+- Update docs ([139c74e](https://github.com/react-dnd/react-dnd/commit/139c74e))
+- Update docs ([0728267](https://github.com/react-dnd/react-dnd/commit/0728267))
+- Update docs ([987253b](https://github.com/react-dnd/react-dnd/commit/987253b))
+- Update docs ([c06d47c](https://github.com/react-dnd/react-dnd/commit/c06d47c))
+- Update docs ([efc6aff](https://github.com/react-dnd/react-dnd/commit/efc6aff))
+- Update docs ([28a0eef](https://github.com/react-dnd/react-dnd/commit/28a0eef))
+- Update docs index ([3ac10dd](https://github.com/react-dnd/react-dnd/commit/3ac10dd))
+- Update docs index ([987d50b](https://github.com/react-dnd/react-dnd/commit/987d50b))
+- Update docs index ([d90d513](https://github.com/react-dnd/react-dnd/commit/d90d513))
+- Update docs! Minor fixes ([f9b46c6](https://github.com/react-dnd/react-dnd/commit/f9b46c6))
+- Update meta ([5398bf1](https://github.com/react-dnd/react-dnd/commit/5398bf1))
+- Update README.md ([733d694](https://github.com/react-dnd/react-dnd/commit/733d694))
+- Update README.md ([39d64ec](https://github.com/react-dnd/react-dnd/commit/39d64ec))
+- Update the publish script ([b2c9b17](https://github.com/react-dnd/react-dnd/commit/b2c9b17))
+- Updates ([dd3458f](https://github.com/react-dnd/react-dnd/commit/dd3458f))
+- Watch da scroll ([f412ea8](https://github.com/react-dnd/react-dnd/commit/f412ea8))
+- whatever ([37e20e0](https://github.com/react-dnd/react-dnd/commit/37e20e0))
+- Write some docs ([55f3b27](https://github.com/react-dnd/react-dnd/commit/55f3b27))
+
+## 1.0.0-alpha.1 (2015-04-30)
+
+- dragPreivew -> dragPreview ([c1155bc](https://github.com/react-dnd/react-dnd/commit/c1155bc))
+- Header styling ([3584567](https://github.com/react-dnd/react-dnd/commit/3584567))
+- Item returned in beginDrag should be an object ([7b382a8](https://github.com/react-dnd/react-dnd/commit/7b382a8))
+- Rebuild examples ([ae60f85](https://github.com/react-dnd/react-dnd/commit/ae60f85))
+- Update bower.json to allow React 0.13.x. ([6e656be](https://github.com/react-dnd/react-dnd/commit/6e656be))
+- Update README.md ([3fb25d1](https://github.com/react-dnd/react-dnd/commit/3fb25d1))
+- Update Walkthrough.md ([57dcf1c](https://github.com/react-dnd/react-dnd/commit/57dcf1c))
+- Update Walkthrough.md ([4f99a36](https://github.com/react-dnd/react-dnd/commit/4f99a36))
+- Wrap checkboxes and text with <label> ([098e538](https://github.com/react-dnd/react-dnd/commit/098e538))
+
+## <small>0.9.8 (2015-03-16)</small>
+
+- 0.9.8 ([6e958c5](https://github.com/react-dnd/react-dnd/commit/6e958c5))
+- Catch dragenter and dragleave at capture phase. Fixes #119 ([5ac65bd](https://github.com/react-dnd/react-dnd/commit/5ac65bd)), closes [#119](https://github.com/react-dnd/react-dnd/issues/119)
+
+## <small>0.9.7 (2015-03-15)</small>
+
+- 0.9.7 ([b5e6eca](https://github.com/react-dnd/react-dnd/commit/b5e6eca))
+- Add a link to the Future of Drag and Drop APIs ([8b0c84d](https://github.com/react-dnd/react-dnd/commit/8b0c84d))
+- Exposes more variables in getDragLayerState() ([0c67434](https://github.com/react-dnd/react-dnd/commit/0c67434))
+- Split long lines ([88f1491](https://github.com/react-dnd/react-dnd/commit/88f1491))
+- Update API documentation for new object exposed in getDragLayerState() ([486328a](https://github.com/react-dnd/react-dnd/commit/486328a))
+
+## 1.0.0-rc (2015-05-11)
+
+- 1.0.0-rc ([237e504](https://github.com/react-dnd/react-dnd/commit/237e504))
+- Include HTML5 backend in UMD build ([61a2268](https://github.com/react-dnd/react-dnd/commit/61a2268))
+- Make refs an implementation detail ([5722a99](https://github.com/react-dnd/react-dnd/commit/5722a99))
+- Rebuild dist ([867c228](https://github.com/react-dnd/react-dnd/commit/867c228))
+
+## 1.0.0-beta.0 (2015-05-08)
+
+- 1.0.0-beta.0 ([4d43cf9](https://github.com/react-dnd/react-dnd/commit/4d43cf9))
+- Add guards for stack overflow ([e02db71](https://github.com/react-dnd/react-dnd/commit/e02db71))
+- Add more warnings ([ce80087](https://github.com/react-dnd/react-dnd/commit/ce80087))
+- Add sortable-cancelable example. Addresses #144 ([6aec28c](https://github.com/react-dnd/react-dnd/commit/6aec28c)), closes [#144](https://github.com/react-dnd/react-dnd/issues/144)
+- Better naming in the API and internally ([461196c](https://github.com/react-dnd/react-dnd/commit/461196c))
+- Rebuild dist ([2544a37](https://github.com/react-dnd/react-dnd/commit/2544a37))
+- Rewrite for simpler API ([71eaf34](https://github.com/react-dnd/react-dnd/commit/71eaf34))
+
+## 1.0.0-alpha.2 (2015-05-04)
+
+- Add a way to make custom drag layer work on IE11 ([de264ff](https://github.com/react-dnd/react-dnd/commit/de264ff))
+- Add decorator arguments safety checks ([57cc346](https://github.com/react-dnd/react-dnd/commit/57cc346))
+- Add early invariants for bad method results ([18a2cad](https://github.com/react-dnd/react-dnd/commit/18a2cad))
+- Add modules to .gitignore ([e50c604](https://github.com/react-dnd/react-dnd/commit/e50c604))
+- Add precise spec verification ([fdad029](https://github.com/react-dnd/react-dnd/commit/fdad029))
+- Add sanity check for configure() return value ([0a5aa79](https://github.com/react-dnd/react-dnd/commit/0a5aa79))
+- Better IE support ([6872060](https://github.com/react-dnd/react-dnd/commit/6872060))
+- Better warnings ([ac8ddb9](https://github.com/react-dnd/react-dnd/commit/ac8ddb9))
+- Correct comment ([d092ea8](https://github.com/react-dnd/react-dnd/commit/d092ea8))
+- Don't use prod mode for examples in dev ([ef26599](https://github.com/react-dnd/react-dnd/commit/ef26599))
+- Expect plain objects and validate props ([6735baa](https://github.com/react-dnd/react-dnd/commit/6735baa))
+- Fix image drag preview coordinates ([0be5806](https://github.com/react-dnd/react-dnd/commit/0be5806))
+- Fix proptype ([c255aaa](https://github.com/react-dnd/react-dnd/commit/c255aaa))
+- Fix propType ([2f79d99](https://github.com/react-dnd/react-dnd/commit/2f79d99))
+- Make missing manager warning descriptive ([f6f4c05](https://github.com/react-dnd/react-dnd/commit/f6f4c05))
+- Rebuild dist for 1.0.0-alpha.1 ([e84d675](https://github.com/react-dnd/react-dnd/commit/e84d675))
+- Rebuild dist for 1.0.0-alpha.2 ([21b1792](https://github.com/react-dnd/react-dnd/commit/21b1792))
+- Remove multiple backends syntax because it is of no benefit now ([c71a85f](https://github.com/react-dnd/react-dnd/commit/c71a85f))
+- Remove old TODOs ([3f0988b](https://github.com/react-dnd/react-dnd/commit/3f0988b))
+- Support symbol types ([d80c266](https://github.com/react-dnd/react-dnd/commit/d80c266))
+- Tweak displayNames ([3113e13](https://github.com/react-dnd/react-dnd/commit/3113e13))
+- Tweak displayNames again ([ff4031e](https://github.com/react-dnd/react-dnd/commit/ff4031e))
+- Tweak parameter order ([953e770](https://github.com/react-dnd/react-dnd/commit/953e770))
+- Update TODO ([457acc5](https://github.com/react-dnd/react-dnd/commit/457acc5))
+- Update TODO ([ce3fe81](https://github.com/react-dnd/react-dnd/commit/ce3fe81))
+- Warn that react-dnd has no default export ([fae8799](https://github.com/react-dnd/react-dnd/commit/fae8799))
+
+## 1.0.0-alpha (2015-04-20)
+
+- 1.0.0-alpha ([701ff6a](https://github.com/react-dnd/react-dnd/commit/701ff6a))
+- Add a todo ([09f1a39](https://github.com/react-dnd/react-dnd/commit/09f1a39))
+- Add comment ([e673826](https://github.com/react-dnd/react-dnd/commit/e673826))
+- Add enter/leave tracking for dragging files or links out of window ([60cffe9](https://github.com/react-dnd/react-dnd/commit/60cffe9))
+- Add image drag preview example ([0ef96a1](https://github.com/react-dnd/react-dnd/commit/0ef96a1))
+- Add in-progress drag handle example ([36df14b](https://github.com/react-dnd/react-dnd/commit/36df14b))
+- Add less verbose single handler API ([b29eae2](https://github.com/react-dnd/react-dnd/commit/b29eae2))
+- Add nested example ([1129ca7](https://github.com/react-dnd/react-dnd/commit/1129ca7))
+- Add nesting sources example ([c0209ea](https://github.com/react-dnd/react-dnd/commit/c0209ea))
+- Add observe draft ([7f8f5e8](https://github.com/react-dnd/react-dnd/commit/7f8f5e8))
+- Add sortable ([3764e2b](https://github.com/react-dnd/react-dnd/commit/3764e2b))
+- Add sortable stress test ([fd700f6](https://github.com/react-dnd/react-dnd/commit/fd700f6))
+- add todo ([48ed284](https://github.com/react-dnd/react-dnd/commit/48ed284))
+- Add use strict for linter ([258206f](https://github.com/react-dnd/react-dnd/commit/258206f))
+- amend TODO ([22f6feb](https://github.com/react-dnd/react-dnd/commit/22f6feb))
+- bikeshed ([f37f5b7](https://github.com/react-dnd/react-dnd/commit/f37f5b7))
+- Bump Babel ([ead1345](https://github.com/react-dnd/react-dnd/commit/ead1345))
+- Bust cache ([32f7811](https://github.com/react-dnd/react-dnd/commit/32f7811))
+- Change API to a less verbose one ([5bab482](https://github.com/react-dnd/react-dnd/commit/5bab482))
+- Change API to accept two functions ([305686b](https://github.com/react-dnd/react-dnd/commit/305686b))
+- Complex hover handling with drop targets changing under cursor ([3215e89](https://github.com/react-dnd/react-dnd/commit/3215e89))
+- Convert another example ([553695a](https://github.com/react-dnd/react-dnd/commit/553695a))
+- Decorators all the way ([b63a29d](https://github.com/react-dnd/react-dnd/commit/b63a29d))
+- Disable all but the simplest example ([f1afb03](https://github.com/react-dnd/react-dnd/commit/f1afb03))
+- Don't export backend by default ([a0ab900](https://github.com/react-dnd/react-dnd/commit/a0ab900))
+- Don't pass actual props ([a87131c](https://github.com/react-dnd/react-dnd/commit/a87131c))
+- Don't use React internal modules ([47a34f7](https://github.com/react-dnd/react-dnd/commit/47a34f7))
+- edge ([8b642ee](https://github.com/react-dnd/react-dnd/commit/8b642ee))
+- ES6 all the way ([c861472](https://github.com/react-dnd/react-dnd/commit/c861472))
+- Extract module ([03dcdde](https://github.com/react-dnd/react-dnd/commit/03dcdde))
+- Fix ([15ba58d](https://github.com/react-dnd/react-dnd/commit/15ba58d))
+- Fix an edge case when a file is dropped outside <body> ([0b23fe3](https://github.com/react-dnd/react-dnd/commit/0b23fe3))
+- Fix disposal ([1a645a4](https://github.com/react-dnd/react-dnd/commit/1a645a4))
+- Fix examples, make perf opt-in ([8dfa342](https://github.com/react-dnd/react-dnd/commit/8dfa342))
+- Fix IE ([a384bb8](https://github.com/react-dnd/react-dnd/commit/a384bb8))
+- Fix linting with latest ESLint ([83fff54](https://github.com/react-dnd/react-dnd/commit/83fff54))
+- Fix native beginDrag call ([c34cf3f](https://github.com/react-dnd/react-dnd/commit/c34cf3f))
+- Fix sortable on Firefox ([02c5527](https://github.com/react-dnd/react-dnd/commit/02c5527))
+- Fixes for conflicting HTML5 backends ([ddc3e52](https://github.com/react-dnd/react-dnd/commit/ddc3e52))
+- HOC might be a better fit after all ([f8a5610](https://github.com/react-dnd/react-dnd/commit/f8a5610))
+- Improve perf ([c41ba87](https://github.com/react-dnd/react-dnd/commit/c41ba87))
+- initial attempt at having the first example use dnd-core ([57d65cc](https://github.com/react-dnd/react-dnd/commit/57d65cc))
+- Initial drag image offset implementation ([77beee4](https://github.com/react-dnd/react-dnd/commit/77beee4))
+- Initial support for native item types ([c27c1e2](https://github.com/react-dnd/react-dnd/commit/c27c1e2))
+- It sort of works, but not the right way ([21715c9](https://github.com/react-dnd/react-dnd/commit/21715c9))
+- It works ([4658cb1](https://github.com/react-dnd/react-dnd/commit/4658cb1))
+- Make anchors truly customizable ([b11f2cf](https://github.com/react-dnd/react-dnd/commit/b11f2cf))
+- Make cards have limited width ([3e89883](https://github.com/react-dnd/react-dnd/commit/3e89883))
+- Make it look more fashionable ([9228f86](https://github.com/react-dnd/react-dnd/commit/9228f86))
+- Memoize to fix perf ([f96f772](https://github.com/react-dnd/react-dnd/commit/f96f772))
+- Minor ([b1eb175](https://github.com/react-dnd/react-dnd/commit/b1eb175))
+- More nasty example ([f39d0eb](https://github.com/react-dnd/react-dnd/commit/f39d0eb))
+- Move code around ([d5570ea](https://github.com/react-dnd/react-dnd/commit/d5570ea))
+- Move connect to the top ([b6eace8](https://github.com/react-dnd/react-dnd/commit/b6eace8))
+- Move some stuff around ([d0a2cb7](https://github.com/react-dnd/react-dnd/commit/d0a2cb7))
+- Move utils to separate files ([8bb1277](https://github.com/react-dnd/react-dnd/commit/8bb1277))
+- Naming ([76f5576](https://github.com/react-dnd/react-dnd/commit/76f5576))
+- Pass component as last parameter to allow DOM access for methods where it is safe ([4ff7a1c](https://github.com/react-dnd/react-dnd/commit/4ff7a1c))
+- Playing around with higher-order API ([9ffb6b7](https://github.com/react-dnd/react-dnd/commit/9ffb6b7))
+- Port dustbin-interesting ([403834a](https://github.com/react-dnd/react-dnd/commit/403834a))
+- Prevent animating an item back to incorrect position if its rect changed ([a72a01b](https://github.com/react-dnd/react-dnd/commit/a72a01b))
+- Proof of concept of decorator API ([84b0ec4](https://github.com/react-dnd/react-dnd/commit/84b0ec4))
+- Proof of concept of observe polyfill ([1db3dd5](https://github.com/react-dnd/react-dnd/commit/1db3dd5))
+- Push disposables out of the backend ([1f74ac8](https://github.com/react-dnd/react-dnd/commit/1f74ac8))
+- React is external when minifying ([ddca3ae](https://github.com/react-dnd/react-dnd/commit/ddca3ae))
+- Rebuild dist ([37ffa80](https://github.com/react-dnd/react-dnd/commit/37ffa80))
+- Rebuild dist ([ef35926](https://github.com/react-dnd/react-dnd/commit/ef35926))
+- Rebuild dist ([1ad2e11](https://github.com/react-dnd/react-dnd/commit/1ad2e11))
+- Rebuild dist ([8709ca7](https://github.com/react-dnd/react-dnd/commit/8709ca7))
+- Rebuild dist ([efcff3d](https://github.com/react-dnd/react-dnd/commit/efcff3d))
+- Rebuild dist with a fix ([f480730](https://github.com/react-dnd/react-dnd/commit/f480730))
+- Refactor and improve perf 10x ([3a6cd7f](https://github.com/react-dnd/react-dnd/commit/3a6cd7f))
+- Remove all code lol ([bbd342c](https://github.com/react-dnd/react-dnd/commit/bbd342c))
+- Remove classic function API, use decorator desugaring instead ([43c4aa3](https://github.com/react-dnd/react-dnd/commit/43c4aa3))
+- Remove React dependency from HTML5 backend ([4ca94f2](https://github.com/react-dnd/react-dnd/commit/4ca94f2))
+- Rename inject => collect ([a1489a6](https://github.com/react-dnd/react-dnd/commit/a1489a6))
+- Reset hover when drag ends ([460377f](https://github.com/react-dnd/react-dnd/commit/460377f))
+- Separate stress test example ([ae1f4be](https://github.com/react-dnd/react-dnd/commit/ae1f4be))
+- Simpler connect API ([fbabc65](https://github.com/react-dnd/react-dnd/commit/fbabc65))
+- Simplify API by passing props ([75dc904](https://github.com/react-dnd/react-dnd/commit/75dc904))
+- simplify example ([8bcdb95](https://github.com/react-dnd/react-dnd/commit/8bcdb95))
+- Simplify the code with beginDrag(array) ([16cd843](https://github.com/react-dnd/react-dnd/commit/16cd843))
+- Slightly better guards ([4d00c2e](https://github.com/react-dnd/react-dnd/commit/4d00c2e))
+- Sortable. Work in progress ([3517eb1](https://github.com/react-dnd/react-dnd/commit/3517eb1))
+- Start by removing all examples except the simplest one ([8c41048](https://github.com/react-dnd/react-dnd/commit/8c41048))
+- Start work on drag around naive ([dbdeb3f](https://github.com/react-dnd/react-dnd/commit/dbdeb3f))
+- Support custom drag layer ([f6feb37](https://github.com/react-dnd/react-dnd/commit/f6feb37))
+- Support custom drag previews ([ca3ac0e](https://github.com/react-dnd/react-dnd/commit/ca3ac0e))
+- Support custom drop effects ([7956b21](https://github.com/react-dnd/react-dnd/commit/7956b21))
+- Support naive coordinate tracking ([030a825](https://github.com/react-dnd/react-dnd/commit/030a825))
+- Support source DOM node being removed from DOM ([6da684c](https://github.com/react-dnd/react-dnd/commit/6da684c))
+- This is getting seriously fun ([de7c27f](https://github.com/react-dnd/react-dnd/commit/de7c27f))
+- todo ([30ec27a](https://github.com/react-dnd/react-dnd/commit/30ec27a))
+- Tweak manager key API ([cb3e02b](https://github.com/react-dnd/react-dnd/commit/cb3e02b))
+- Unsubscribe on unmounting ([ef68100](https://github.com/react-dnd/react-dnd/commit/ef68100))
+- Update API ([027a6bb](https://github.com/react-dnd/react-dnd/commit/027a6bb))
+- Update Babel ([47908c6](https://github.com/react-dnd/react-dnd/commit/47908c6))
+- Update coordinate code ([66947a6](https://github.com/react-dnd/react-dnd/commit/66947a6))
+- Update dist ([76ef9fc](https://github.com/react-dnd/react-dnd/commit/76ef9fc))
+- Update dnd-core and misc ([d878e39](https://github.com/react-dnd/react-dnd/commit/d878e39))
+- Update examples to new proposed API ([00862fd](https://github.com/react-dnd/react-dnd/commit/00862fd))
+- update the dragState to show drop hint ([911e1e6](https://github.com/react-dnd/react-dnd/commit/911e1e6))
+- Update to React 0.13 ([9f2598e](https://github.com/react-dnd/react-dnd/commit/9f2598e))
+- update TODO ([f689cdf](https://github.com/react-dnd/react-dnd/commit/f689cdf))
+- update TODO ([25e4f0f](https://github.com/react-dnd/react-dnd/commit/25e4f0f))
+- update TODO ([3fbb63e](https://github.com/react-dnd/react-dnd/commit/3fbb63e))
+- Update todo ([b2c112b](https://github.com/react-dnd/react-dnd/commit/b2c112b))
+- Use disposables for cleaner contract, temporarily depend on rx-lite ([725b01b](https://github.com/react-dnd/react-dnd/commit/725b01b))
+- Use disposables instead of rx-lite ([82f59ba](https://github.com/react-dnd/react-dnd/commit/82f59ba))
+- Use ES6 classes in example ([c2d8b0a](https://github.com/react-dnd/react-dnd/commit/c2d8b0a))
+- Use hover() for sortable ([d2dbf37](https://github.com/react-dnd/react-dnd/commit/d2dbf37))
+- Use just shallowEqual for state ([ee6d51b](https://github.com/react-dnd/react-dnd/commit/ee6d51b))
+- Use rAF for performance ([d1b68b0](https://github.com/react-dnd/react-dnd/commit/d1b68b0))
+- Use shallowEqualScalar by default ([28242c4](https://github.com/react-dnd/react-dnd/commit/28242c4))
+- Whitespace ([4c9e344](https://github.com/react-dnd/react-dnd/commit/4c9e344))
+- Whoops ([38b1933](https://github.com/react-dnd/react-dnd/commit/38b1933))
+- work in progress ([3d2d4fe](https://github.com/react-dnd/react-dnd/commit/3d2d4fe))
+- Working HOC proof of concept ([8f42428](https://github.com/react-dnd/react-dnd/commit/8f42428))
+
+## 1.0.0-alpha.1 (2015-04-30)
+
+- dragPreivew -> dragPreview ([c1155bc](https://github.com/react-dnd/react-dnd/commit/c1155bc))
+- Header styling ([3584567](https://github.com/react-dnd/react-dnd/commit/3584567))
+- Item returned in beginDrag should be an object ([7b382a8](https://github.com/react-dnd/react-dnd/commit/7b382a8))
+- Rebuild examples ([ae60f85](https://github.com/react-dnd/react-dnd/commit/ae60f85))
+- Update bower.json to allow React 0.13.x. ([6e656be](https://github.com/react-dnd/react-dnd/commit/6e656be))
+- Update README.md ([3fb25d1](https://github.com/react-dnd/react-dnd/commit/3fb25d1))
+- Update Walkthrough.md ([57dcf1c](https://github.com/react-dnd/react-dnd/commit/57dcf1c))
+- Update Walkthrough.md ([4f99a36](https://github.com/react-dnd/react-dnd/commit/4f99a36))
+- Wrap checkboxes and text with <label> ([098e538](https://github.com/react-dnd/react-dnd/commit/098e538))
+
+## <small>0.9.8 (2015-03-16)</small>
+
+- 0.9.8 ([6e958c5](https://github.com/react-dnd/react-dnd/commit/6e958c5))
+- Catch dragenter and dragleave at capture phase. Fixes #119 ([5ac65bd](https://github.com/react-dnd/react-dnd/commit/5ac65bd)), closes [#119](https://github.com/react-dnd/react-dnd/issues/119)
+
+## <small>0.9.7 (2015-03-15)</small>
+
+- 0.9.7 ([b5e6eca](https://github.com/react-dnd/react-dnd/commit/b5e6eca))
+- Add a link to the Future of Drag and Drop APIs ([8b0c84d](https://github.com/react-dnd/react-dnd/commit/8b0c84d))
+- Exposes more variables in getDragLayerState() ([0c67434](https://github.com/react-dnd/react-dnd/commit/0c67434))
+- Split long lines ([88f1491](https://github.com/react-dnd/react-dnd/commit/88f1491))
+- Update API documentation for new object exposed in getDragLayerState() ([486328a](https://github.com/react-dnd/react-dnd/commit/486328a))
+
+## 1.0.0-alpha (2015-04-20)
+
+- 1.0.0-alpha ([701ff6a](https://github.com/react-dnd/react-dnd/commit/701ff6a))
+- Add a todo ([09f1a39](https://github.com/react-dnd/react-dnd/commit/09f1a39))
+- Add comment ([e673826](https://github.com/react-dnd/react-dnd/commit/e673826))
+- Add enter/leave tracking for dragging files or links out of window ([60cffe9](https://github.com/react-dnd/react-dnd/commit/60cffe9))
+- Add image drag preview example ([0ef96a1](https://github.com/react-dnd/react-dnd/commit/0ef96a1))
+- Add in-progress drag handle example ([36df14b](https://github.com/react-dnd/react-dnd/commit/36df14b))
+- Add less verbose single handler API ([b29eae2](https://github.com/react-dnd/react-dnd/commit/b29eae2))
+- Add nesting sources example ([c0209ea](https://github.com/react-dnd/react-dnd/commit/c0209ea))
+- Add observe draft ([7f8f5e8](https://github.com/react-dnd/react-dnd/commit/7f8f5e8))
+- Add sortable ([3764e2b](https://github.com/react-dnd/react-dnd/commit/3764e2b))
+- Add sortable stress test ([fd700f6](https://github.com/react-dnd/react-dnd/commit/fd700f6))
+- add todo ([48ed284](https://github.com/react-dnd/react-dnd/commit/48ed284))
+- Add use strict for linter ([258206f](https://github.com/react-dnd/react-dnd/commit/258206f))
+- amend TODO ([22f6feb](https://github.com/react-dnd/react-dnd/commit/22f6feb))
+- bikeshed ([f37f5b7](https://github.com/react-dnd/react-dnd/commit/f37f5b7))
+- Bump Babel ([ead1345](https://github.com/react-dnd/react-dnd/commit/ead1345))
+- Bust cache ([32f7811](https://github.com/react-dnd/react-dnd/commit/32f7811))
+- Change API to a less verbose one ([5bab482](https://github.com/react-dnd/react-dnd/commit/5bab482))
+- Change API to accept two functions ([305686b](https://github.com/react-dnd/react-dnd/commit/305686b))
+- Complex hover handling with drop targets changing under cursor ([3215e89](https://github.com/react-dnd/react-dnd/commit/3215e89))
+- Convert another example ([553695a](https://github.com/react-dnd/react-dnd/commit/553695a))
+- Decorators all the way ([b63a29d](https://github.com/react-dnd/react-dnd/commit/b63a29d))
+- Disable all but the simplest example ([f1afb03](https://github.com/react-dnd/react-dnd/commit/f1afb03))
+- Don't export backend by default ([a0ab900](https://github.com/react-dnd/react-dnd/commit/a0ab900))
+- Don't pass actual props ([a87131c](https://github.com/react-dnd/react-dnd/commit/a87131c))
+- Don't use React internal modules ([47a34f7](https://github.com/react-dnd/react-dnd/commit/47a34f7))
+- edge ([8b642ee](https://github.com/react-dnd/react-dnd/commit/8b642ee))
+- ES6 all the way ([c861472](https://github.com/react-dnd/react-dnd/commit/c861472))
+- Extract module ([03dcdde](https://github.com/react-dnd/react-dnd/commit/03dcdde))
+- Fix ([15ba58d](https://github.com/react-dnd/react-dnd/commit/15ba58d))
+- Fix an edge case when a file is dropped outside <body> ([0b23fe3](https://github.com/react-dnd/react-dnd/commit/0b23fe3))
+- Fix disposal ([1a645a4](https://github.com/react-dnd/react-dnd/commit/1a645a4))
+- Fix examples, make perf opt-in ([8dfa342](https://github.com/react-dnd/react-dnd/commit/8dfa342))
+- Fix IE ([a384bb8](https://github.com/react-dnd/react-dnd/commit/a384bb8))
+- Fix linting with latest ESLint ([83fff54](https://github.com/react-dnd/react-dnd/commit/83fff54))
+- Fix native beginDrag call ([c34cf3f](https://github.com/react-dnd/react-dnd/commit/c34cf3f))
+- Fix sortable on Firefox ([02c5527](https://github.com/react-dnd/react-dnd/commit/02c5527))
+- Fixes for conflicting HTML5 backends ([ddc3e52](https://github.com/react-dnd/react-dnd/commit/ddc3e52))
+- HOC might be a better fit after all ([f8a5610](https://github.com/react-dnd/react-dnd/commit/f8a5610))
+- Improve perf ([c41ba87](https://github.com/react-dnd/react-dnd/commit/c41ba87))
+- initial attempt at having the first example use dnd-core ([57d65cc](https://github.com/react-dnd/react-dnd/commit/57d65cc))
+- Initial drag image offset implementation ([77beee4](https://github.com/react-dnd/react-dnd/commit/77beee4))
+- Initial support for native item types ([c27c1e2](https://github.com/react-dnd/react-dnd/commit/c27c1e2))
+- It sort of works, but not the right way ([21715c9](https://github.com/react-dnd/react-dnd/commit/21715c9))
+- It works ([4658cb1](https://github.com/react-dnd/react-dnd/commit/4658cb1))
+- Make anchors truly customizable ([b11f2cf](https://github.com/react-dnd/react-dnd/commit/b11f2cf))
+- Make cards have limited width ([3e89883](https://github.com/react-dnd/react-dnd/commit/3e89883))
+- Make it look more fashionable ([9228f86](https://github.com/react-dnd/react-dnd/commit/9228f86))
+- Memoize to fix perf ([f96f772](https://github.com/react-dnd/react-dnd/commit/f96f772))
+- Minor ([b1eb175](https://github.com/react-dnd/react-dnd/commit/b1eb175))
+- More nasty example ([f39d0eb](https://github.com/react-dnd/react-dnd/commit/f39d0eb))
+- Move code around ([d5570ea](https://github.com/react-dnd/react-dnd/commit/d5570ea))
+- Move connect to the top ([b6eace8](https://github.com/react-dnd/react-dnd/commit/b6eace8))
+- Move some stuff around ([d0a2cb7](https://github.com/react-dnd/react-dnd/commit/d0a2cb7))
+- Move utils to separate files ([8bb1277](https://github.com/react-dnd/react-dnd/commit/8bb1277))
+- Naming ([76f5576](https://github.com/react-dnd/react-dnd/commit/76f5576))
+- Pass component as last parameter to allow DOM access for methods where it is safe ([4ff7a1c](https://github.com/react-dnd/react-dnd/commit/4ff7a1c))
+- Playing around with higher-order API ([9ffb6b7](https://github.com/react-dnd/react-dnd/commit/9ffb6b7))
+- Port dustbin-interesting ([403834a](https://github.com/react-dnd/react-dnd/commit/403834a))
+- Prevent animating an item back to incorrect position if its rect changed ([a72a01b](https://github.com/react-dnd/react-dnd/commit/a72a01b))
+- Proof of concept of decorator API ([84b0ec4](https://github.com/react-dnd/react-dnd/commit/84b0ec4))
+- Proof of concept of observe polyfill ([1db3dd5](https://github.com/react-dnd/react-dnd/commit/1db3dd5))
+- Push disposables out of the backend ([1f74ac8](https://github.com/react-dnd/react-dnd/commit/1f74ac8))
+- React is external when minifying ([ddca3ae](https://github.com/react-dnd/react-dnd/commit/ddca3ae))
+- Rebuild dist ([37ffa80](https://github.com/react-dnd/react-dnd/commit/37ffa80))
+- Rebuild dist ([ef35926](https://github.com/react-dnd/react-dnd/commit/ef35926))
+- Rebuild dist ([1ad2e11](https://github.com/react-dnd/react-dnd/commit/1ad2e11))
+- Rebuild dist ([8709ca7](https://github.com/react-dnd/react-dnd/commit/8709ca7))
+- Rebuild dist ([efcff3d](https://github.com/react-dnd/react-dnd/commit/efcff3d))
+- Rebuild dist with a fix ([f480730](https://github.com/react-dnd/react-dnd/commit/f480730))
+- Refactor and improve perf 10x ([3a6cd7f](https://github.com/react-dnd/react-dnd/commit/3a6cd7f))
+- Remove all code lol ([bbd342c](https://github.com/react-dnd/react-dnd/commit/bbd342c))
+- Remove classic function API, use decorator desugaring instead ([43c4aa3](https://github.com/react-dnd/react-dnd/commit/43c4aa3))
+- Remove React dependency from HTML5 backend ([4ca94f2](https://github.com/react-dnd/react-dnd/commit/4ca94f2))
+- Rename inject => collect ([a1489a6](https://github.com/react-dnd/react-dnd/commit/a1489a6))
+- Reset hover when drag ends ([460377f](https://github.com/react-dnd/react-dnd/commit/460377f))
+- Separate stress test example ([ae1f4be](https://github.com/react-dnd/react-dnd/commit/ae1f4be))
+- Simpler connect API ([fbabc65](https://github.com/react-dnd/react-dnd/commit/fbabc65))
+- Simplify API by passing props ([75dc904](https://github.com/react-dnd/react-dnd/commit/75dc904))
+- Simplify the code with beginDrag(array) ([16cd843](https://github.com/react-dnd/react-dnd/commit/16cd843))
+- Slightly better guards ([4d00c2e](https://github.com/react-dnd/react-dnd/commit/4d00c2e))
+- Sortable. Work in progress ([3517eb1](https://github.com/react-dnd/react-dnd/commit/3517eb1))
+- Start by removing all examples except the simplest one ([8c41048](https://github.com/react-dnd/react-dnd/commit/8c41048))
+- Start work on drag around naive ([dbdeb3f](https://github.com/react-dnd/react-dnd/commit/dbdeb3f))
+- Support custom drag layer ([f6feb37](https://github.com/react-dnd/react-dnd/commit/f6feb37))
+- Support custom drag previews ([ca3ac0e](https://github.com/react-dnd/react-dnd/commit/ca3ac0e))
+- Support custom drop effects ([7956b21](https://github.com/react-dnd/react-dnd/commit/7956b21))
+- Support naive coordinate tracking ([030a825](https://github.com/react-dnd/react-dnd/commit/030a825))
+- Support source DOM node being removed from DOM ([6da684c](https://github.com/react-dnd/react-dnd/commit/6da684c))
+- This is getting seriously fun ([de7c27f](https://github.com/react-dnd/react-dnd/commit/de7c27f))
+- todo ([30ec27a](https://github.com/react-dnd/react-dnd/commit/30ec27a))
+- Tweak manager key API ([cb3e02b](https://github.com/react-dnd/react-dnd/commit/cb3e02b))
+- Unsubscribe on unmounting ([ef68100](https://github.com/react-dnd/react-dnd/commit/ef68100))
+- Update API ([027a6bb](https://github.com/react-dnd/react-dnd/commit/027a6bb))
+- Update Babel ([47908c6](https://github.com/react-dnd/react-dnd/commit/47908c6))
+- Update coordinate code ([66947a6](https://github.com/react-dnd/react-dnd/commit/66947a6))
+- Update dist ([76ef9fc](https://github.com/react-dnd/react-dnd/commit/76ef9fc))
+- Update dnd-core and misc ([d878e39](https://github.com/react-dnd/react-dnd/commit/d878e39))
+- Update examples to new proposed API ([00862fd](https://github.com/react-dnd/react-dnd/commit/00862fd))
+- update the dragState to show drop hint ([911e1e6](https://github.com/react-dnd/react-dnd/commit/911e1e6))
+- Update to React 0.13 ([9f2598e](https://github.com/react-dnd/react-dnd/commit/9f2598e))
+- update TODO ([f689cdf](https://github.com/react-dnd/react-dnd/commit/f689cdf))
+- update TODO ([25e4f0f](https://github.com/react-dnd/react-dnd/commit/25e4f0f))
+- update TODO ([3fbb63e](https://github.com/react-dnd/react-dnd/commit/3fbb63e))
+- Update todo ([b2c112b](https://github.com/react-dnd/react-dnd/commit/b2c112b))
+- Use disposables for cleaner contract, temporarily depend on rx-lite ([725b01b](https://github.com/react-dnd/react-dnd/commit/725b01b))
+- Use disposables instead of rx-lite ([82f59ba](https://github.com/react-dnd/react-dnd/commit/82f59ba))
+- Use ES6 classes in example ([c2d8b0a](https://github.com/react-dnd/react-dnd/commit/c2d8b0a))
+- Use hover() for sortable ([d2dbf37](https://github.com/react-dnd/react-dnd/commit/d2dbf37))
+- Use just shallowEqual for state ([ee6d51b](https://github.com/react-dnd/react-dnd/commit/ee6d51b))
+- Use rAF for performance ([d1b68b0](https://github.com/react-dnd/react-dnd/commit/d1b68b0))
+- Use shallowEqualScalar by default ([28242c4](https://github.com/react-dnd/react-dnd/commit/28242c4))
+- Whitespace ([4c9e344](https://github.com/react-dnd/react-dnd/commit/4c9e344))
+- Whoops ([38b1933](https://github.com/react-dnd/react-dnd/commit/38b1933))
+- work in progress ([3d2d4fe](https://github.com/react-dnd/react-dnd/commit/3d2d4fe))
+- Working HOC proof of concept ([8f42428](https://github.com/react-dnd/react-dnd/commit/8f42428))
+
+## <small>0.9.8 (2015-03-16)</small>
+
+- 0.9.8 ([6e958c5](https://github.com/react-dnd/react-dnd/commit/6e958c5))
+- Catch dragenter and dragleave at capture phase. Fixes #119 ([5ac65bd](https://github.com/react-dnd/react-dnd/commit/5ac65bd)), closes [#119](https://github.com/react-dnd/react-dnd/issues/119)
+
+## <small>0.9.7 (2015-03-15)</small>
+
+- 0.9.7 ([b5e6eca](https://github.com/react-dnd/react-dnd/commit/b5e6eca))
+- Add a link to the Future of Drag and Drop APIs ([8b0c84d](https://github.com/react-dnd/react-dnd/commit/8b0c84d))
+- Exposes more variables in getDragLayerState() ([0c67434](https://github.com/react-dnd/react-dnd/commit/0c67434))
+- Split long lines ([88f1491](https://github.com/react-dnd/react-dnd/commit/88f1491))
+- Update API documentation for new object exposed in getDragLayerState() ([486328a](https://github.com/react-dnd/react-dnd/commit/486328a))
+
+## <small>0.9.6 (2015-03-11)</small>
+
+- 0.9.6 ([0c40081](https://github.com/react-dnd/react-dnd/commit/0c40081))
+- Update peerDependencies ([15026bb](https://github.com/react-dnd/react-dnd/commit/15026bb))
+
+## <small>0.9.5 (2015-03-11)</small>
+
+- 0.9.5 ([3dcc4fc](https://github.com/react-dnd/react-dnd/commit/3dcc4fc))
+- exposes initial container offset through drag drop context in order to support offset when dragging ([efa49b4](https://github.com/react-dnd/react-dnd/commit/efa49b4))
+- Nulls all offsets on drag end ([5d6dd21](https://github.com/react-dnd/react-dnd/commit/5d6dd21))
+
+## <small>0.9.4 (2015-03-10)</small>
+
+- 0.9.4 ([b09265b](https://github.com/react-dnd/react-dnd/commit/b09265b))
+- Only interpret dragstart as dragging a link if no drag source caught an event ([2451bb9](https://github.com/react-dnd/react-dnd/commit/2451bb9)), closes [#113](https://github.com/react-dnd/react-dnd/issues/113)
+- Update README.md ([a361930](https://github.com/react-dnd/react-dnd/commit/a361930))
+
+## <small>0.9.3 (2015-03-02)</small>
+
+- 0.9.3 ([73e44f6](https://github.com/react-dnd/react-dnd/commit/73e44f6))
+- Fix a crash when dragging a text node ([602023a](https://github.com/react-dnd/react-dnd/commit/602023a))
+- Fix dragging links in the same document ([a1ccd0f](https://github.com/react-dnd/react-dnd/commit/a1ccd0f))
+- Mention Babel explicitly ([af3ec63](https://github.com/react-dnd/react-dnd/commit/af3ec63))
+- Rewrite examples to take advantage of Babel ([ed9f3dd](https://github.com/react-dnd/react-dnd/commit/ed9f3dd))
+
+## <small>0.9.2 (2015-03-01)</small>
+
+- 0.9.2 ([2c34aaa](https://github.com/react-dnd/react-dnd/commit/2c34aaa))
+- Add .eslintrc ([5d2826f](https://github.com/react-dnd/react-dnd/commit/5d2826f))
+- Add (broken) nested drag source example ([8dc0d73](https://github.com/react-dnd/react-dnd/commit/8dc0d73))
+- Fix linter warnings ([0489848](https://github.com/react-dnd/react-dnd/commit/0489848))
+- Fix nested drag sources ([43a9802](https://github.com/react-dnd/react-dnd/commit/43a9802))
+
+## <small>0.9.1 (2015-02-27)</small>
+
+- 0.9.1 ([c7b4424](https://github.com/react-dnd/react-dnd/commit/c7b4424))
+- Add a note about performance ([6c95eb1](https://github.com/react-dnd/react-dnd/commit/6c95eb1))
+- Add getInitialOffsetFromClient and getCurrentOffsetFromClient to DragDropContext ([2e785fc](https://github.com/react-dnd/react-dnd/commit/2e785fc))
+- Add PureRenderMixin to drag-around-custom example to improve perf ([fcfc494](https://github.com/react-dnd/react-dnd/commit/fcfc494))
+- Added support for native url drag and drop. This allow dragging links from multiple other window bro ([6142176](https://github.com/react-dnd/react-dnd/commit/6142176))
+- allow data types to be represented as ES6 symbols ([e0257ce](https://github.com/react-dnd/react-dnd/commit/e0257ce))
+- Document NativeDragItemTypes.URL ([62595f9](https://github.com/react-dnd/react-dnd/commit/62595f9))
+- Document new context methods ([435bf84](https://github.com/react-dnd/react-dnd/commit/435bf84))
+- Refactor and fix style ([4daec53](https://github.com/react-dnd/react-dnd/commit/4daec53))
+- Update README.md ([572fdae](https://github.com/react-dnd/react-dnd/commit/572fdae))
+- Update UPGRADE_GUIDE.md ([067056c](https://github.com/react-dnd/react-dnd/commit/067056c))
+
+## 0.9.0 (2015-02-26)
+
+- “DnD” looks like Jake the Dog's face, I like that styling ([18134e7](https://github.com/react-dnd/react-dnd/commit/18134e7))
+- 0.9.0 ([b9af842](https://github.com/react-dnd/react-dnd/commit/b9af842))
+- Add .idea to .gitignore ([60bd8a4](https://github.com/react-dnd/react-dnd/commit/60bd8a4))
+- Add docs/UPGRADE_GUIDE.md ([f1d8ad7](https://github.com/react-dnd/react-dnd/commit/f1d8ad7))
+- Breaking change: don't pass event anymore ([3850764](https://github.com/react-dnd/react-dnd/commit/3850764))
+- Remove support for deprecated API ([2147e8b](https://github.com/react-dnd/react-dnd/commit/2147e8b))
+- Update API.md ([d3e415b](https://github.com/react-dnd/react-dnd/commit/d3e415b))
+- Update README.md ([a23f3ae](https://github.com/react-dnd/react-dnd/commit/a23f3ae))
+- Update Walkthrough.md ([dc3809b](https://github.com/react-dnd/react-dnd/commit/dc3809b))
+
+## <small>0.8.2 (2015-02-25)</small>
+
+- 0.8.2 ([ecd2211](https://github.com/react-dnd/react-dnd/commit/ecd2211))
+- allow React >=0.13.0-beta.1 ([eed38ce](https://github.com/react-dnd/react-dnd/commit/eed38ce))
+- Update bower ([e5ab408](https://github.com/react-dnd/react-dnd/commit/e5ab408))
+
+## <small>0.8.1 (2015-02-18)</small>
+
+- 0.8.1 ([0a4457c](https://github.com/react-dnd/react-dnd/commit/0a4457c))
+- Add "Production Usage" ([0d693b2](https://github.com/react-dnd/react-dnd/commit/0d693b2))
+- Don't subscribe to non-existing event, use capture phase for mousemove ([5c6cb32](https://github.com/react-dnd/react-dnd/commit/5c6cb32))
+- Fix dragOver event in Internet Explorer ([e646649](https://github.com/react-dnd/react-dnd/commit/e646649))
+- Update README.md ([0fd6438](https://github.com/react-dnd/react-dnd/commit/0fd6438))
+- Update README.md ([c734e74](https://github.com/react-dnd/react-dnd/commit/c734e74))
+
+## 0.8.0 (2015-02-17)
+
+- 0.8.0 ([b0ee125](https://github.com/react-dnd/react-dnd/commit/b0ee125))
+- Add DragLayerMixin and refactor to prepare for alt backends ([2b026a8](https://github.com/react-dnd/react-dnd/commit/2b026a8))
+- Add DragLayerMixin#getDragLayerState ([830dd40](https://github.com/react-dnd/react-dnd/commit/830dd40))
+- Bump bower version ([1f691f9](https://github.com/react-dnd/react-dnd/commit/1f691f9))
+- Extract docs ([86b9ba7](https://github.com/react-dnd/react-dnd/commit/86b9ba7))
+- Rebuild dist ([f5a3b14](https://github.com/react-dnd/react-dnd/commit/f5a3b14))
+- Rebuild examples ([4625938](https://github.com/react-dnd/react-dnd/commit/4625938))
+- registerType => register ([3435419](https://github.com/react-dnd/react-dnd/commit/3435419))
+- Tweak style in examples and fix warnings ([a62bfe9](https://github.com/react-dnd/react-dnd/commit/a62bfe9))
+- Update API.md ([f09691c](https://github.com/react-dnd/react-dnd/commit/f09691c))
+- Update API.md ([95a501f](https://github.com/react-dnd/react-dnd/commit/95a501f))
+- Update API.md ([09ea1d4](https://github.com/react-dnd/react-dnd/commit/09ea1d4))
+- Update API.md ([4960ada](https://github.com/react-dnd/react-dnd/commit/4960ada))
+- Update package descriptions ([df82b85](https://github.com/react-dnd/react-dnd/commit/df82b85))
+- Update README.md ([ef1804a](https://github.com/react-dnd/react-dnd/commit/ef1804a))
+- Use context in naive example ([ae30f3b](https://github.com/react-dnd/react-dnd/commit/ae30f3b))
+
+## 0.7.0 (2015-02-11)
+
+- 0.7.0 ([69e91b5](https://github.com/react-dnd/react-dnd/commit/69e91b5))
+- lodash-node is deprecated; use lodash 3.1.0 ([ea8374d](https://github.com/react-dnd/react-dnd/commit/ea8374d)), closes [#58](https://github.com/react-dnd/react-dnd/issues/58)
+- Remove behavior difference between old and new API ([db97efb](https://github.com/react-dnd/react-dnd/commit/db97efb))
+- Remove extra variable ([38b6f19](https://github.com/react-dnd/react-dnd/commit/38b6f19))
+- Update bower package to 0.6.4 ([0464b2e](https://github.com/react-dnd/react-dnd/commit/0464b2e))
+- Update jsx-loader and react-router ([5ba69e2](https://github.com/react-dnd/react-dnd/commit/5ba69e2))
+- Use 6to5 for building module tree ([757b93c](https://github.com/react-dnd/react-dnd/commit/757b93c))
+- Use 6to5 instead of jsx ([923d3f9](https://github.com/react-dnd/react-dnd/commit/923d3f9))
+- Use ES6 rest call syntax to clarify intent ([a13e29e](https://github.com/react-dnd/react-dnd/commit/a13e29e))
+- fixes: #38 ([2404d35](https://github.com/react-dnd/react-dnd/commit/2404d35)), closes [#38](https://github.com/react-dnd/react-dnd/issues/38)
+
+## <small>0.6.4 (2015-02-10)</small>
+
+- 0.6.4 ([5d0a8b0](https://github.com/react-dnd/react-dnd/commit/5d0a8b0))
+- Add bower.json for bower support ([42d090d](https://github.com/react-dnd/react-dnd/commit/42d090d))
+- Added Gitter badge ([3a228c2](https://github.com/react-dnd/react-dnd/commit/3a228c2))
+- api changes implementing #54 ([66cf2ca](https://github.com/react-dnd/react-dnd/commit/66cf2ca)), closes [#54](https://github.com/react-dnd/react-dnd/issues/54)
+- clean up html5 event handlers after unmounting ([076ee15](https://github.com/react-dnd/react-dnd/commit/076ee15))
+- Document API changes (making configureDragDrop static) ([c921fd2](https://github.com/react-dnd/react-dnd/commit/c921fd2))
+- Refcount setup and teardown calls ([d3940de](https://github.com/react-dnd/react-dnd/commit/d3940de))
+- Tweak build options ([ababf9a](https://github.com/react-dnd/react-dnd/commit/ababf9a))
+- Tweak the warning wording ([27a0129](https://github.com/react-dnd/react-dnd/commit/27a0129))
+- Update README.md ([8f49631](https://github.com/react-dnd/react-dnd/commit/8f49631))
+- use react-hot-loader and cli webpack-dev-server ([01220b4](https://github.com/react-dnd/react-dnd/commit/01220b4))
+
+## <small>0.6.3 (2015-01-27)</small>
+
+- 0.6.3 ([0f361c2](https://github.com/react-dnd/react-dnd/commit/0f361c2))
+- Add mousemove listeners at drag start, remove when drag finishes. ([0e8ee2c](https://github.com/react-dnd/react-dnd/commit/0e8ee2c))
+- It's stable, yo ([d309adc](https://github.com/react-dnd/react-dnd/commit/d309adc))
+- Use mouse events to unambiguously know that dragging has ended ([0786317](https://github.com/react-dnd/react-dnd/commit/0786317))
+
+## <small>0.6.2 (2014-12-08)</small>
+
+- 0.6.2 ([8c2c221](https://github.com/react-dnd/react-dnd/commit/8c2c221))
+- Don't panic ([f11d9f4](https://github.com/react-dnd/react-dnd/commit/f11d9f4))
+- Don't rely on node.contains if it doesn't exist (IE) ([c5e975c](https://github.com/react-dnd/react-dnd/commit/c5e975c))
+- Remove .module-cache ([7130162](https://github.com/react-dnd/react-dnd/commit/7130162))
+- Update README.md ([6fd0bfa](https://github.com/react-dnd/react-dnd/commit/6fd0bfa))
+- Use document.body.contains instead of document.contains (IE) ([6c05661](https://github.com/react-dnd/react-dnd/commit/6c05661))
+
+## <small>0.6.1 (2014-11-20)</small>
+
+- 0.6.1 ([988957d](https://github.com/react-dnd/react-dnd/commit/988957d))
+- Add a couple of shells scripts ([9e23db2](https://github.com/react-dnd/react-dnd/commit/9e23db2))
+- Add ES5-compatible dist-modules and point package.json to it ([a7c21fa](https://github.com/react-dnd/react-dnd/commit/a7c21fa))
+- Replace `npm run` with `npm start` ([bec7be2](https://github.com/react-dnd/react-dnd/commit/bec7be2))
+- Update README.md ([28177d9](https://github.com/react-dnd/react-dnd/commit/28177d9))
+
+## 0.6.0 (2014-11-11)
+
+- 0.6.0 ([284becf](https://github.com/react-dnd/react-dnd/commit/284becf))
+- Update code and examples to React 0.12 ([e70b3d4](https://github.com/react-dnd/react-dnd/commit/e70b3d4))
+
+## <small>0.5.1 (2014-11-11)</small>
+
+- 0.5.1 ([e1f97ec](https://github.com/react-dnd/react-dnd/commit/e1f97ec))
+- Use Copy as drop effect for files ([fbb4677](https://github.com/react-dnd/react-dnd/commit/fbb4677))
+
+## 0.5.0 (2014-11-04)
+
+- 0.5.0 ([4f5252c](https://github.com/react-dnd/react-dnd/commit/4f5252c))
+- Change acceptDrop signature to (item, e, isHandled, effect?) ([85d94c3](https://github.com/react-dnd/react-dnd/commit/85d94c3))
+
+## <small>0.4.2 (2014-11-04)</small>
+
+- 0.4.2 ([5b281e3](https://github.com/react-dnd/react-dnd/commit/5b281e3))
+- Take drag handle offset into account ([1370ed9](https://github.com/react-dnd/react-dnd/commit/1370ed9))
+
+## <small>0.4.1 (2014-11-03)</small>
+
+- 0.4.1 ([52f07b8](https://github.com/react-dnd/react-dnd/commit/52f07b8))
+- Always prevent default file drop action. Fixes #20 ([9adac68](https://github.com/react-dnd/react-dnd/commit/9adac68)), closes [#20](https://github.com/react-dnd/react-dnd/issues/20)
+- Bump dev dependencies ([54c5f55](https://github.com/react-dnd/react-dnd/commit/54c5f55))
+
+## 0.4.0 (2014-10-31)
+
+- 0.4.0 ([a85d098](https://github.com/react-dnd/react-dnd/commit/a85d098))
+- Add API for effectsAllowed and getDropEffect with sane defaults ([b80ea00](https://github.com/react-dnd/react-dnd/commit/b80ea00))
+- Refactor to explicitly implement optional methods ([541c061](https://github.com/react-dnd/react-dnd/commit/541c061))
+- Rename DragDropEffects to DropEffects since that's what they are ([e213023](https://github.com/react-dnd/react-dnd/commit/e213023))
+- Update docs ([b8b22b9](https://github.com/react-dnd/react-dnd/commit/b8b22b9))
+- Update README.md ([2b15475](https://github.com/react-dnd/react-dnd/commit/2b15475))
+- Update README.md ([07f607e](https://github.com/react-dnd/react-dnd/commit/07f607e))
+
+## <small>0.3.2 (2014-10-30)</small>
+
+- 0.3.2 ([f99ace7](https://github.com/react-dnd/react-dnd/commit/f99ace7))
+- Memoize .bind results to increase performance ([6104e74](https://github.com/react-dnd/react-dnd/commit/6104e74))
+
+## <small>0.3.1 (2014-10-28)</small>
+
+- 0.3.1 ([12b7096](https://github.com/react-dnd/react-dnd/commit/12b7096))
+- Add invariants with more helpful error messages ([67be3eb](https://github.com/react-dnd/react-dnd/commit/67be3eb))
+- Add sortable example ([266d82d](https://github.com/react-dnd/react-dnd/commit/266d82d))
+- Fix an example that was working out of coincidence ([e6d24ec](https://github.com/react-dnd/react-dnd/commit/e6d24ec))
+
+## 0.3.0 (2014-10-27)
+
+- 0.3.0 ([c3c0f3e](https://github.com/react-dnd/react-dnd/commit/c3c0f3e))
+- calculateDragPreviewSize -> getDragImageScale ([f3c7c5a](https://github.com/react-dnd/react-dnd/commit/f3c7c5a))
+
+## <small>0.2.1 (2014-10-27)</small>
+
+- 0.2.1 ([74a2624](https://github.com/react-dnd/react-dnd/commit/74a2624))
+- Add first examples ([94e59d0](https://github.com/react-dnd/react-dnd/commit/94e59d0))
+- Don't set isDragging too early so browser screenshots neutral state ([7059dc7](https://github.com/react-dnd/react-dnd/commit/7059dc7))
+- Expose browser DragDropEffects as constants ([6b3b925](https://github.com/react-dnd/react-dnd/commit/6b3b925))
+- Fix path to bundle ([d16498a](https://github.com/react-dnd/react-dnd/commit/d16498a))
+- Update README.md ([29f849e](https://github.com/react-dnd/react-dnd/commit/29f849e))
+- Use location=hash for examples on server ([5d36981](https://github.com/react-dnd/react-dnd/commit/5d36981))
+- You'd expect `endDrag` not to be called on an unmounted component ([884ada4](https://github.com/react-dnd/react-dnd/commit/884ada4))
+
+## 0.2.0 (2014-10-24)
+
+- 0.1.9 ([9d21373](https://github.com/react-dnd/react-dnd/commit/9d21373))
+- 0.2.0 ([cd6acc6](https://github.com/react-dnd/react-dnd/commit/cd6acc6))
+- Add react-dropzone to prior work ([e83ba41](https://github.com/react-dnd/react-dnd/commit/e83ba41))
+- Disable browser fixes when mixin is inactive ([48b2ba8](https://github.com/react-dnd/react-dnd/commit/48b2ba8))
+- Document file drop targets ([be197bf](https://github.com/react-dnd/react-dnd/commit/be197bf))
+- Fire dragleave even if nested element was removed from DOM ([5bba8c6](https://github.com/react-dnd/react-dnd/commit/5bba8c6))
+- Refactor and add support for native file drag and drop ([66aa7fe](https://github.com/react-dnd/react-dnd/commit/66aa7fe))
+
+## <small>0.1.8 (2014-10-22)</small>
+
+- 0.1.8 ([8060c8a](https://github.com/react-dnd/react-dnd/commit/8060c8a))
+- Emulate dragend if source node was removed ([5e5b0ca](https://github.com/react-dnd/react-dnd/commit/5e5b0ca)), closes [#9](https://github.com/react-dnd/react-dnd/issues/9)
+
+## <small>0.1.7 (2014-10-21)</small>
+
+- 0.1.7 ([beb0a04](https://github.com/react-dnd/react-dnd/commit/beb0a04))
+- Author link updates ([7b6ebb3](https://github.com/react-dnd/react-dnd/commit/7b6ebb3))
+- For Webkit, listen to window dragover and prevent animation if node moved ([2ec9e2b](https://github.com/react-dnd/react-dnd/commit/2ec9e2b)), closes [#8](https://github.com/react-dnd/react-dnd/issues/8)
+- Update README.md ([ba613c6](https://github.com/react-dnd/react-dnd/commit/ba613c6))
+- Update README.md ([0e94426](https://github.com/react-dnd/react-dnd/commit/0e94426))
+- Update README.md ([9b4fcec](https://github.com/react-dnd/react-dnd/commit/9b4fcec))
+- Update README.md ([c48329b](https://github.com/react-dnd/react-dnd/commit/c48329b))
+- Updated readme for ImagePreloaderMixin ([67f2727](https://github.com/react-dnd/react-dnd/commit/67f2727))
+
+## <small>0.1.6 (2014-10-20)</small>
+
+- 0.1.6 ([237a5a2](https://github.com/react-dnd/react-dnd/commit/237a5a2))
+- Add UMD build ([a2af539](https://github.com/react-dnd/react-dnd/commit/a2af539))
+
+## <small>0.1.5 (2014-10-20)</small>
+
+- 0.1.5 ([97c177d](https://github.com/react-dnd/react-dnd/commit/97c177d))
+- If acceptDrop returns false, didDrop passed to endDrag should be false ([b727c0b](https://github.com/react-dnd/react-dnd/commit/b727c0b))
+- Update README.md ([dd84f61](https://github.com/react-dnd/react-dnd/commit/dd84f61))
+
+## <small>0.1.4 (2014-10-20)</small>
+
+- 0.1.4 ([612af0d](https://github.com/react-dnd/react-dnd/commit/612af0d))
+- Add optional canDrop(item) ([2eda2e8](https://github.com/react-dnd/react-dnd/commit/2eda2e8))
+
+## <small>0.1.3 (2014-10-20)</small>
+
+- 0.1.3 ([9db2836](https://github.com/react-dnd/react-dnd/commit/9db2836))
+- Fix cross-browser discrepancies (works on Chrome, Safari, FF, IE, both retina and not) ([ac08bd5](https://github.com/react-dnd/react-dnd/commit/ac08bd5)), closes [#4](https://github.com/react-dnd/react-dnd/issues/4)
+
+## <small>0.1.2 (2014-10-20)</small>
+
+- 0.1.2 ([8e803cd](https://github.com/react-dnd/react-dnd/commit/8e803cd))
+- Fix Safari 8 issues and allow to specify drag anchors for both axes ([756301b](https://github.com/react-dnd/react-dnd/commit/756301b)), closes [#1](https://github.com/react-dnd/react-dnd/issues/1)
+- Update README.md ([e7d4e2b](https://github.com/react-dnd/react-dnd/commit/e7d4e2b))
+
+## <small>0.1.1 (2014-10-19)</small>
+
+- Update README.md ([8e25729](https://github.com/react-dnd/react-dnd/commit/8e25729))
+- Update README.md ([3ae21ad](https://github.com/react-dnd/react-dnd/commit/3ae21ad))
+- Update README.md ([1fdcf3b](https://github.com/react-dnd/react-dnd/commit/1fdcf3b))
+- Update README.md ([4cdaff4](https://github.com/react-dnd/react-dnd/commit/4cdaff4))
+- Update README.md ([36b5371](https://github.com/react-dnd/react-dnd/commit/36b5371))
+- Updated readme, make it 0.1.1 ([6123d73](https://github.com/react-dnd/react-dnd/commit/6123d73))
+
+## 0.1.0 (2014-10-19)
+
+- Add package.json ([5fba8a5](https://github.com/react-dnd/react-dnd/commit/5fba8a5))
+- Fix package.json ([ab2a582](https://github.com/react-dnd/react-dnd/commit/ab2a582))
+- Initial code dump ([c10492f](https://github.com/react-dnd/react-dnd/commit/c10492f))
+- Initial commit ([78576bd](https://github.com/react-dnd/react-dnd/commit/78576bd))
+- Update README.md ([190bcf2](https://github.com/react-dnd/react-dnd/commit/190bcf2))

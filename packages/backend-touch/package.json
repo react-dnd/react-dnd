@@ -29,9 +29,6 @@
     "@react-dnd/build": "workspace:packages/build",
     "gulp": "^4.0.2"
   },
-  "peerDependencies": {
-    "react-refresh": "*"
-  },
   "umd": {
     "name": "ReactDnDTouchBackend",
     "input": "./dist/esm/index.js",

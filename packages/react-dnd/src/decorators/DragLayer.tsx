@@ -8,11 +8,9 @@ import { DragDropManager, Unsubscribe } from 'dnd-core'
 import { shallowEqual } from '@react-dnd/shallowequal'
 import { invariant } from '@react-dnd/invariant'
 import hoistStatics from 'hoist-non-react-statics'
-import { DndContext } from '../common/DndContext'
-import { DndOptions } from '../interfaces'
-import { isPlainObject } from '../utils/js_utils'
-import { DragLayerCollector, DndComponentEnhancer } from './interfaces'
-import { isRefable, checkDecoratorArguments } from './utils'
+import { DndContext } from '../core'
+import { DragLayerCollector, DndComponentEnhancer, DndOptions } from './types'
+import { isRefable, checkDecoratorArguments, isPlainObject } from './utils'
 
 /**
  * @param collect The props collector function

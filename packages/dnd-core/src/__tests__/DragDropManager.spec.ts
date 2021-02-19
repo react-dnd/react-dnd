@@ -10,9 +10,9 @@ import {
 	BadResultTarget,
 	TransformResultTarget,
 } from './targets'
-import { DragDropManagerImpl } from '../DragDropManagerImpl'
 import { DragDropManager, HandlerRegistry } from '../interfaces'
 import { isString } from '../utils/js_utils'
+import { createDragDropManager } from '../createDragDropManager'
 
 describe('DragDropManager', () => {
 	let manager: DragDropManager
@@ -20,8 +20,8 @@ describe('DragDropManager', () => {
 	let registry: HandlerRegistry
 
 	beforeEach(() => {
-		manager = new DragDropManagerImpl()
-		backend = TestBackend(manager, null, null) as ITestBackend
+		manager = createDragDropManager(TestBackend)
+		backend = manager.getBackend() as ITestBackend
 		;(manager as any).receiveBackend(backend)
 		registry = manager.getRegistry()
 	})

@@ -7,7 +7,7 @@ import {
 	XYCoord,
 } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
-import { DropTargetMonitor } from '../interfaces'
+import { DropTargetMonitor } from '../types'
 
 let isCallingCanDrop = false
 

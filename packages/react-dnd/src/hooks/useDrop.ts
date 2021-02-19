@@ -1,13 +1,16 @@
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, MutableRefObject } from 'react'
 import { invariant } from '@react-dnd/invariant'
+import { DropTarget } from 'dnd-core'
+import { ConnectDropTarget, DropTargetMonitor } from '../types'
+import { useMonitorOutput } from './useMonitorOutput'
+import { DropTargetHookSpec, DragObjectWithType } from './types'
 import {
-	DropTargetHookSpec,
-	ConnectDropTarget,
-	DragObjectWithType,
-} from '../interfaces'
-import { useMonitorOutput } from './internal/useMonitorOutput'
-import { useIsomorphicLayoutEffect } from './internal/useIsomorphicLayoutEffect'
-import { useDropHandler, useDropTargetMonitor } from './internal/drop'
+	registerTarget,
+	DropTargetMonitorImpl,
+	TargetConnector,
+} from '../internals'
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
+import { useDragDropManager } from './useDragDropManager'
 
 /**
  * useDropTarget Hook
@@ -42,4 +45,61 @@ export function useDrop<
 		connector.reconnect()
 	}, [spec.options])
 	return [result, connectDropTarget]
+}
+
+function useDropTargetMonitor(): [DropTargetMonitor, TargetConnector] {
+	const manager = useDragDropManager()
+	const monitor = useMemo(() => new DropTargetMonitorImpl(manager), [manager])
+	const connector = useMemo(() => new TargetConnector(manager.getBackend()), [
+		manager,
+	])
+	return [monitor, connector]
+}
+
+function useDropHandler<
+	DragObject extends DragObjectWithType,
+	DropResult,
+	CustomProps
+>(
+	spec: MutableRefObject<
+		DropTargetHookSpec<DragObject, DropResult, CustomProps>
+	>,
+	monitor: DropTargetMonitor,
+	connector: any,
+) {
+	const manager = useDragDropManager()
+	const handler = useMemo(() => {
+		return {
+			canDrop() {
+				const { canDrop } = spec.current
+				return canDrop ? canDrop(monitor.getItem(), monitor) : true
+			},
+			hover() {
+				const { hover } = spec.current
+				if (hover) {
+					hover(monitor.getItem(), monitor)
+				}
+			},
+			drop() {
+				const { drop } = spec.current
+				if (drop) {
+					return drop(monitor.getItem(), monitor)
+				}
+			},
+		} as DropTarget
+	}, [monitor])
+
+	useIsomorphicLayoutEffect(
+		function registerHandler() {
+			const [handlerId, unregister] = registerTarget(
+				spec.current.accept,
+				handler,
+				manager,
+			)
+			monitor.receiveHandlerId(handlerId)
+			connector.receiveHandlerId(handlerId)
+			return unregister
+		},
+		[monitor, connector, spec.current.accept],
+	)
 }

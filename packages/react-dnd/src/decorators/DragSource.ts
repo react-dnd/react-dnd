@@ -1,19 +1,19 @@
 import { ComponentType as RComponentType } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { SourceType, DragDropManager } from 'dnd-core'
-import { DndOptions } from '../interfaces'
-import { isPlainObject } from '../utils/js_utils'
 import {
+	registerSource,
+	DragSourceMonitorImpl,
+	SourceConnector,
+} from '../internals'
+import {
+	DndOptions,
 	DndComponentEnhancer,
 	DragSourceSpec,
 	DragSourceCollector,
-} from './interfaces'
-import { checkDecoratorArguments } from './utils'
+} from './types'
+import { checkDecoratorArguments, isPlainObject, isValidType } from './utils'
 import { decorateHandler } from './decorateHandler'
-import { registerSource } from '../common/registration'
-import { DragSourceMonitorImpl } from '../common/DragSourceMonitorImpl'
-import { SourceConnector } from '../common/SourceConnector'
-import { isValidType } from '../utils/isValidType'
 import { createSourceFactory } from './createSourceFactory'
 
 /**

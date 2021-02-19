@@ -49,3 +49,40 @@ export function checkDecoratorArguments(
 		}
 	}
 }
+
+export function isFunction(input: unknown): boolean {
+	return typeof input === 'function'
+}
+
+export function noop(): void {
+	// noop
+}
+
+function isObjectLike(input: any) {
+	return typeof input === 'object' && input !== null
+}
+
+export function isPlainObject(input: unknown): boolean {
+	if (!isObjectLike(input)) {
+		return false
+	}
+
+	if (Object.getPrototypeOf(input) === null) {
+		return true
+	}
+	let proto = input
+	while (Object.getPrototypeOf(proto) !== null) {
+		proto = Object.getPrototypeOf(proto)
+	}
+	return Object.getPrototypeOf(input) === proto
+}
+
+export function isValidType(type: unknown, allowArray?: boolean): boolean {
+	return (
+		typeof type === 'string' ||
+		typeof type === 'symbol' ||
+		(!!allowArray &&
+			Array.isArray(type) &&
+			type.every((t) => isValidType(t, false)))
+	)
+}
