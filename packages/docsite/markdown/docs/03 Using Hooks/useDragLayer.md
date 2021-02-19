@@ -9,13 +9,15 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # useDragLayer
 
-A hook to use the current component as a drag-layer.
+The `useDragLayer` hook allows you to wire a component into the DnD system as a _drag layer_.
 
 ```jsx
 import { useDragLayer } from 'react-dnd'
 
 function DragLayerComponent(props) {
-  const collectedProps = useDragLayer(spec)
+  const collectedProps = useDragLayer(
+    monitor => /* Collected Props */
+  )
   return <div>...</div>
 }
 ```
