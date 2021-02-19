@@ -1,8 +1,6 @@
-import { createStore, Store, Action } from 'redux'
-import { reduce } from './reducers'
-import { createDragDropActions } from './actions/dragDrop'
+import { Store, Action } from 'redux'
+import { createDragDropActions } from '../actions/dragDrop'
 import { DragDropMonitorImpl } from './DragDropMonitorImpl'
-import { HandlerRegistryImpl } from './HandlerRegistryImpl'
 import {
 	ActionCreator,
 	Backend,
@@ -10,25 +8,8 @@ import {
 	DragDropMonitor,
 	DragDropManager,
 	HandlerRegistry,
-} from './interfaces'
-import { State } from './reducers'
-
-function makeStoreInstance(debugMode: boolean): Store<State> {
-	// TODO: if we ever make a react-native version of this,
-	// we'll need to consider how to pull off dev-tooling
-	const reduxDevTools =
-		typeof window !== 'undefined' &&
-		(window as any).__REDUX_DEVTOOLS_EXTENSION__
-	return createStore(
-		reduce,
-		debugMode &&
-			reduxDevTools &&
-			reduxDevTools({
-				name: 'dnd-core',
-				instanceId: 'dnd-core',
-			}),
-	)
-}
+} from '../interfaces'
+import { State } from '../reducers'
 
 export class DragDropManagerImpl implements DragDropManager {
 	private store: Store<State>
@@ -36,13 +17,9 @@ export class DragDropManagerImpl implements DragDropManager {
 	private backend: Backend | undefined
 	private isSetUp = false
 
-	public constructor(debugMode = false) {
-		const store = makeStoreInstance(debugMode)
+	public constructor(store: Store<State>, monitor: DragDropMonitor) {
 		this.store = store
-		this.monitor = new DragDropMonitorImpl(
-			store,
-			new HandlerRegistryImpl(store),
-		)
+		this.monitor = monitor
 		store.subscribe(this.handleRefCountChange)
 	}
 

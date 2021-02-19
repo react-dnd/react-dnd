@@ -8359,8 +8359,6 @@ __metadata:
     gulp: ^4.0.2
     react-dnd-test-backend: "portal:../backend-test"
     redux: ^4.0.5
-  peerDependencies:
-    react-refresh: "*"
   languageName: unknown
   linkType: soft
 
@@ -19675,7 +19673,6 @@ fsevents@^1.2.7:
     "@types/lodash": ^4.14.168
     "@types/node": ^14.14.28
     "@types/react": ^17.0.2
-    "@types/react-dom": ^17.0.1
     "@types/testing-library__jest-dom": ^5.9.5
     dnd-core: "workspace:packages/dnd-core"
     faker: ^5.4.0
@@ -19688,24 +19685,18 @@ fsevents@^1.2.7:
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dnd-test-utils: "workspace:packages/test-utils"
-    react-dom: ^17.0.1
     react-frame-component: ^4.1.3
     typescript: ^4.1.5
   peerDependencies:
     "@types/node": ">= 12"
     "@types/react": ">= 16"
-    "@types/react-dom": ">= 16"
     prop-types: ">= 15"
     react: ">= 16.14"
     react-dnd: ">11.1.3"
-    react-dom: ">= 16.14"
-    react-refresh: "*"
   peerDependenciesMeta:
     "@types/node":
       optional: true
     "@types/react":
-      optional: true
-    "@types/react-dom":
       optional: true
     react-dnd:
       optional: false
@@ -19723,7 +19714,6 @@ fsevents@^1.2.7:
     "@types/lodash": ^4.14.168
     "@types/node": ^14.14.28
     "@types/react": ^17.0.2
-    "@types/react-dom": ^17.0.1
     dnd-core: "workspace:packages/dnd-core"
     faker: ^5.4.0
     gulp: ^4.0.2
@@ -19734,24 +19724,18 @@ fsevents@^1.2.7:
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-utils: "workspace:packages/test-utils"
-    react-dom: ^17.0.1
     react-frame-component: ^4.1.3
     typescript: ^4.1.5
   peerDependencies:
     "@types/node": ">= 12"
     "@types/react": ">= 16"
-    "@types/react-dom": ">= 16"
     prop-types: ">= 15"
     react: ">= 16.14"
     react-dnd: ">11.1.3"
-    react-dom: ">= 16.14"
-    react-refresh: "*"
   peerDependenciesMeta:
     "@types/node":
       optional: true
     "@types/react":
-      optional: true
-    "@types/react-dom":
       optional: true
     react-dnd:
       optional: false
@@ -19765,8 +19749,6 @@ fsevents@^1.2.7:
     "@react-dnd/build": "workspace:packages/build"
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
-  peerDependencies:
-    react-refresh: "*"
   languageName: unknown
   linkType: soft
 
@@ -19784,6 +19766,8 @@ fsevents@^1.2.7:
     "@testing-library/react": ^11.2.5
     "@types/jest": ^26.0.20
     "@types/node": ^14.14.28
+    "@types/react": ^17.0.2
+    "@types/react-dom": ^17.0.1
     "@types/testing-library__jest-dom": ^5.9.5
     "@typescript-eslint/eslint-plugin": ^4.15.1
     "@typescript-eslint/parser": ^4.15.1
@@ -19867,12 +19851,16 @@ fsevents@^1.2.7:
     "@types/react": ">= 16"
     "@types/react-dom": ">= 16"
     react: ">= 16.14"
-    react-dnd: ">= 10.0.0"
+    react-dnd: ">= 11.1.3"
     react-dnd-html5-backend: ">= 11.1.3"
     react-dnd-test-backend: ">= 10.0.0"
     react-dom: ">= 16.14"
   peerDependenciesMeta:
     "@testing-library/react":
+      optional: true
+    "@types/react":
+      optional: true
+    "@types/react-dom":
       optional: true
     react-dnd-html5-backend:
       optional: true
@@ -19903,12 +19891,16 @@ fsevents@^1.2.7:
     "@types/react": ">= 16"
     "@types/react-dom": ">= 16"
     react: ">= 16.14"
-    react-dnd: ">= 10.0.0"
+    react-dnd: ">= 11.1.3"
     react-dnd-html5-backend: ">= 11.1.3"
     react-dnd-test-backend: ">= 10.0.0"
     react-dom: ">= 16.14"
   peerDependenciesMeta:
     "@testing-library/react":
+      optional: true
+    "@types/react":
+      optional: true
+    "@types/react-dom":
       optional: true
     react-dnd-html5-backend:
       optional: true
@@ -19925,8 +19917,6 @@ fsevents@^1.2.7:
     "@react-dnd/invariant": ^2.0.0
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
-  peerDependencies:
-    react-refresh: "*"
   languageName: unknown
   linkType: soft
 
@@ -19939,10 +19929,8 @@ fsevents@^1.2.7:
     "@react-dnd/shallowequal": ^2.0.0
     "@testing-library/react": ^11.2.5
     "@types/hoist-non-react-statics": ^3.3.1
-    "@types/jest": ^26.0.20
     "@types/node": ^14.14.28
     "@types/react": ^17.0.2
-    "@types/react-dom": ^17.0.1
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
     hoist-non-react-statics: ^3.3.2
@@ -19950,23 +19938,17 @@ fsevents@^1.2.7:
     react-dnd-test-backend: "portal:../backend-test"
     react-dnd-test-utils: "portal:../test-utils"
     react-dom: ^17.0.1
-    react-test-renderer: ^17.0.1
   peerDependencies:
     "@types/hoist-non-react-statics": ">= 3.3.1"
     "@types/node": ">= 12"
     "@types/react": ">= 16"
-    "@types/react-dom": ">= 16"
     react: ">= 16.14"
-    react-dom: ">= 16.14"
-    react-refresh: "*"
   peerDependenciesMeta:
     "@types/hoist-non-react-statics":
       optional: true
     "@types/node":
       optional: true
     "@types/react":
-      optional: true
-    "@types/react-dom":
       optional: true
   languageName: unknown
   linkType: soft
@@ -20053,7 +20035,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-is@npm:17.0.1, react-is@npm:^16.12.0 || ^17.0.0, react-is@npm:^17.0.1":
+"react-is@npm:17.0.1, react-is@npm:^17.0.1":
   version: 17.0.1
   resolution: "react-is@npm:17.0.1"
   checksum: 5a83dfc78e7adcb93d632bf367b0733db650e3abd2e9c57c33b87e50d201212c1884b0d7bcf13e692f1556189fa1b87f9f3e0ba10fe858fd6aebe83ed4fcd1ea
@@ -20088,18 +20070,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-shallow-renderer@npm:^16.13.1":
-  version: 16.14.1
-  resolution: "react-shallow-renderer@npm:16.14.1"
-  dependencies:
-    object-assign: ^4.1.1
-    react-is: ^16.12.0 || ^17.0.0
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0
-  checksum: d52cb869e25605b00d4a67ff16598dbbf2826b0f09535de499b2f21a339cabf8b954d4b8855e0e6bdaf0a95603a2b6702e2b47eca8797a7d6bf7e6170ab8b2f3
-  languageName: node
-  linkType: hard
-
 "react-side-effect@npm:^2.1.0":
   version: 2.1.1
   resolution: "react-side-effect@npm:2.1.1"
@@ -20118,20 +20088,6 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0-0
   checksum: 1f29a87938f0e2df25d2722f5e69efea0fd9c1b9945e7b01d21e8cb0df91bb959a88a56a51d4b45e3201112800b39f712cccc2ac484f32d52b4027a7b324b61d
-  languageName: node
-  linkType: hard
-
-"react-test-renderer@npm:^17.0.1":
-  version: 17.0.1
-  resolution: "react-test-renderer@npm:17.0.1"
-  dependencies:
-    object-assign: ^4.1.1
-    react-is: ^17.0.1
-    react-shallow-renderer: ^16.13.1
-    scheduler: ^0.20.1
-  peerDependencies:
-    react: 17.0.1
-  checksum: 6ec269430beea4356180d90868a9959399781a03ae8de6a29f2edc29d6ca41432653d4103991467ebcc47be5bd2d9197789411e913da66369c2aa2f13311105f
   languageName: node
   linkType: hard
 

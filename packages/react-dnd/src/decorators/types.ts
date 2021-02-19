@@ -7,8 +7,15 @@ import {
 	ConnectDragPreview,
 	ConnectDropTarget,
 	ConnectDragSource,
-} from '../interfaces'
+} from '../types'
 import { NonReactStatics } from 'hoist-non-react-statics'
+
+/**
+ * Options for the Drag Sources, Drop Targets, and Drag Layers decorators
+ */
+export interface DndOptions<Props> {
+	arePropsEqual?: (first: Props, second: Props) => boolean
+}
 
 /**
  * A DnD interactive component

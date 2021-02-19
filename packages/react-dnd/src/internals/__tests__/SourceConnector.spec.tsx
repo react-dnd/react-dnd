@@ -1,4 +1,4 @@
-import { SourceConnector } from '../common/SourceConnector'
+import { SourceConnector } from '../SourceConnector'
 import { Backend } from 'dnd-core'
 
 describe('SourceConnector', () => {
