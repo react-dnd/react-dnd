@@ -5,7 +5,7 @@ const styles = {
 };
 export const Box = ({ title, yellow, preview }) => {
     const backgroundColor = yellow ? 'yellow' : 'white';
-    return (<div style={{ ...styles, backgroundColor }} role={preview ? 'Box-Preview' : 'Box'}>
+    return (<div style={{ ...styles, backgroundColor }} role={preview ? 'BoxPreview' : 'Box'}>
 			{title}
 		</div>);
 };
