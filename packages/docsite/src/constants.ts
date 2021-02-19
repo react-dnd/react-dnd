@@ -18,7 +18,7 @@ export const Pages: { [key: string]: Page } = {
 
 export const APIPages: PageGroup[] = [
 	{
-		title: 'Quick Start',
+		title: 'Topics',
 		pages: {
 			OVERVIEW: {
 				location: '/docs/overview',
@@ -47,8 +47,25 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
-		title: 'Top-Level API',
+		title: 'Common Components',
 		pages: {
+			DND_PROVIDER: {
+				location: '/docs/api/dnd-provider',
+				title: 'DndProvider',
+			},
+			DRAG_PREVIEW_IMAGE: {
+				location: '/docs/api/drag-preview-image',
+				title: 'DragPreviewImage',
+			},
+		},
+	},
+	{
+		title: 'Hooks API',
+		pages: {
+			OVERVIEW: {
+				location: '/docs/api/hooks-overview',
+				title: 'Overview',
+			},
 			USE_DRAG: {
 				location: '/docs/api/use-drag',
 				title: 'useDrag',
@@ -61,36 +78,19 @@ export const APIPages: PageGroup[] = [
 				location: '/docs/api/use-drag-layer',
 				title: 'useDragLayer',
 			},
-			DND_PROVIDER: {
-				location: '/docs/api/dnd-provider',
-				title: 'DndProvider',
-			},
-			DRAG_PREVIEW_IMAGE: {
-				location: '/docs/api/drag-preview-image',
-				title: 'DragPreviewImage',
+			USE_DRAG_DROP_MANAGER: {
+				location: '/docs/api/use-drag-drop-manager',
+				title: 'useDragDropManager',
 			},
 		},
 	},
 	{
-		title: 'Monitoring State',
+		title: 'Decorator API',
 		pages: {
-			DRAG_SOURCE_MONITOR: {
-				location: '/docs/api/drag-source-monitor',
-				title: 'DragSourceMonitor',
+			OVERVIEW: {
+				location: '/docs/api/decorators-overview',
+				title: 'Overview',
 			},
-			DROP_TARGET_MONITOR: {
-				location: '/docs/api/drop-target-monitor',
-				title: 'DropTargetMonitor',
-			},
-			DRAG_LAYER_MONITOR: {
-				location: '/docs/api/drag-layer-monitor',
-				title: 'DragLayerMonitor',
-			},
-		},
-	},
-	{
-		title: 'Legacy Decorator API',
-		pages: {
 			DRAG_SOURCE: {
 				location: '/docs/api/drag-source',
 				title: 'DragSource',
@@ -110,6 +110,23 @@ export const APIPages: PageGroup[] = [
 			DROP_TARGET_CONNECTOR: {
 				location: '/docs/api/drop-target-connector',
 				title: 'DropTargetConnector',
+			},
+		},
+	},
+	{
+		title: 'Monitoring State',
+		pages: {
+			DRAG_SOURCE_MONITOR: {
+				location: '/docs/api/drag-source-monitor',
+				title: 'DragSourceMonitor',
+			},
+			DROP_TARGET_MONITOR: {
+				location: '/docs/api/drop-target-monitor',
+				title: 'DropTargetMonitor',
+			},
+			DRAG_LAYER_MONITOR: {
+				location: '/docs/api/drag-layer-monitor',
+				title: 'DragLayerMonitor',
 			},
 		},
 	},
