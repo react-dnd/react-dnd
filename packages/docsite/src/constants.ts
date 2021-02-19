@@ -60,23 +60,6 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
-		title: 'Monitoring State',
-		pages: {
-			DRAG_SOURCE_MONITOR: {
-				location: '/docs/api/drag-source-monitor',
-				title: 'DragSourceMonitor',
-			},
-			DROP_TARGET_MONITOR: {
-				location: '/docs/api/drop-target-monitor',
-				title: 'DropTargetMonitor',
-			},
-			DRAG_LAYER_MONITOR: {
-				location: '/docs/api/drag-layer-monitor',
-				title: 'DragLayerMonitor',
-			},
-		},
-	},
-	{
 		title: 'Hooks API',
 		pages: {
 			OVERVIEW: {
@@ -127,6 +110,23 @@ export const APIPages: PageGroup[] = [
 			DROP_TARGET_CONNECTOR: {
 				location: '/docs/api/drop-target-connector',
 				title: 'DropTargetConnector',
+			},
+		},
+	},
+	{
+		title: 'Monitoring State',
+		pages: {
+			DRAG_SOURCE_MONITOR: {
+				location: '/docs/api/drag-source-monitor',
+				title: 'DragSourceMonitor',
+			},
+			DROP_TARGET_MONITOR: {
+				location: '/docs/api/drop-target-monitor',
+				title: 'DropTargetMonitor',
+			},
+			DRAG_LAYER_MONITOR: {
+				location: '/docs/api/drag-layer-monitor',
+				title: 'DragLayerMonitor',
 			},
 		},
 	},
