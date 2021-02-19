@@ -17,7 +17,7 @@ export const Box: FC<BoxProps> = ({ title, yellow, preview }) => {
 	return (
 		<div
 			style={{ ...styles, backgroundColor }}
-			role={preview ? 'Box-Preview' : 'Box'}
+			role={preview ? 'BoxPreview' : 'Box'}
 		>
 			{title}
 		</div>
