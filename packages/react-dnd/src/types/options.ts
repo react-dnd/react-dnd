@@ -1,10 +1,3 @@
-/**
- * Options for the Drag Sources, Drop Tragets, and Drag Layers annotation
- */
-export interface DndOptions<Props> {
-	arePropsEqual?: (first: Props, second: Props) => boolean
-}
-
 export interface DragSourceOptions {
 	/**
 	 * Optional. A string. By default, 'move'. In the browsers that support this feature, specifying 'copy'

@@ -1,6 +1,10 @@
 import { FC, useEffect, memo } from 'react'
-import { BackendFactory, DragDropManager } from 'dnd-core'
-import { DndContext, createDndContext } from './DndContext'
+import {
+	BackendFactory,
+	DragDropManager,
+	createDragDropManager,
+} from 'dnd-core'
+import { DndContext } from './DndContext'
 
 export type DndProviderProps<BackendContext, BackendOptions> =
 	| {
@@ -69,7 +73,14 @@ function createSingletonDndContext<BackendContext, BackendOptions>(
 ) {
 	const ctx = context as any
 	if (!ctx[INSTANCE_SYM]) {
-		ctx[INSTANCE_SYM] = createDndContext(backend, context, options, debugMode)
+		ctx[INSTANCE_SYM] = {
+			dragDropManager: createDragDropManager(
+				backend,
+				context,
+				options,
+				debugMode,
+			),
+		}
 	}
 	return ctx[INSTANCE_SYM]
 }

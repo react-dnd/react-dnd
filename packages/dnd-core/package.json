@@ -29,8 +29,5 @@
     "@react-dnd/build": "workspace:packages/build",
     "gulp": "^4.0.2",
     "react-dnd-test-backend": "portal:../backend-test"
-  },
-  "peerDependencies": {
-    "react-refresh": "*"
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, FC } from 'react'
 import { DragLayer } from '../index'
 
 describe('DragLayer', () => {

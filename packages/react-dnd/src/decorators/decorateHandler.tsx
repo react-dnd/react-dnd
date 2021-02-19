@@ -4,10 +4,10 @@ import { RefObject, createRef, Component } from 'react'
 import { shallowEqual } from '@react-dnd/shallowequal'
 import { invariant } from '@react-dnd/invariant'
 import { DragDropManager, Identifier } from 'dnd-core'
-import { DndContext } from '../common/DndContext'
-import { isPlainObject } from '../utils/js_utils'
-import { Connector } from '../common/SourceConnector'
-import { DndComponent } from './interfaces'
+import { DndContext } from '../core'
+import { Connector } from '../internals'
+import { isPlainObject } from './utils'
+import { DndComponent } from './types'
 import {
 	Disposable,
 	CompositeDisposable,

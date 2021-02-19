@@ -1,18 +1,19 @@
 import { ComponentType as RComponentType } from 'react'
 import { TargetType, DragDropManager } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
-import { DndOptions } from '../interfaces'
-import { isPlainObject } from '../utils/js_utils'
-import { registerTarget } from '../common/registration'
-import { isValidType } from '../utils/isValidType'
-import { TargetConnector } from '../common/TargetConnector'
-import { DropTargetMonitorImpl } from '../common/DropTargetMonitorImpl'
 import {
+	TargetConnector,
+	DropTargetMonitorImpl,
+	registerTarget,
+} from '../internals'
+import { isPlainObject, isValidType } from './utils'
+import {
+	DndOptions,
 	DropTargetSpec,
 	DropTargetCollector,
 	DndComponentEnhancer,
 	DndComponent,
-} from './interfaces'
+} from './types'
 import { checkDecoratorArguments } from './utils'
 import { decorateHandler } from './decorateHandler'
 import { createTargetFactory } from './createTargetFactory'

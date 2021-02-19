@@ -1,8 +1,8 @@
 import { createDragDropManager } from 'dnd-core'
 import { render } from '@testing-library/react'
-import { DndContext, DndProvider } from '..'
+import { DndContext, DndContextType } from '../DndContext'
+import { DndProvider } from '../DndProvider'
 import { TestBackend } from 'react-dnd-test-backend'
-import { DndContextType } from '../common'
 
 describe('DndProvider', () => {
 	it('reuses DragDropManager provided to it', () => {

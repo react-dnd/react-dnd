@@ -1,6 +1,10 @@
 import { TargetType, SourceType } from 'dnd-core'
-import { DropTargetMonitor, DragSourceMonitor } from './monitors'
-import { DragSourceOptions, DragPreviewOptions } from './options'
+import {
+	DropTargetMonitor,
+	DragSourceMonitor,
+	DragSourceOptions,
+	DragPreviewOptions,
+} from '../types'
 
 export interface DragSourceHookSpec<
 	DragObject extends DragObjectWithType,

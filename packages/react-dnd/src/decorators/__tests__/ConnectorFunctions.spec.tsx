@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { wrapWithTestBackend } from 'react-dnd-test-utils'
-import { DropTarget } from 'react-dnd'
+import { DropTarget } from '..'
 
 describe('Connectors', () => {
 	it('transmit expected arguments to components', () => {

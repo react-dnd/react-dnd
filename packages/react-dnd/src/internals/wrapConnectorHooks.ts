@@ -1,5 +1,5 @@
-import { isValidElement, ReactElement } from 'react'
-import { cloneWithRef } from '../utils/cloneWithRef'
+import { invariant } from '@react-dnd/invariant'
+import { cloneElement, isValidElement, ReactElement } from 'react'
 
 function throwIfCompositeComponentElement(element: ReactElement<any>) {
 	// Custom components can no longer be wrapped directly in React DnD 2.0
@@ -57,4 +57,36 @@ export function wrapConnectorHooks(hooks: any) {
 	})
 
 	return wrappedHooks
+}
+
+function setRef(ref: any, node: any) {
+	if (typeof ref === 'function') {
+		ref(node)
+	} else {
+		ref.current = node
+	}
+}
+
+function cloneWithRef(element: any, newRef: any): ReactElement<any> {
+	const previousRef = element.ref
+	invariant(
+		typeof previousRef !== 'string',
+		'Cannot connect React DnD to an element with an existing string ref. ' +
+			'Please convert it to use a callback ref instead, or wrap it into a <span> or <div>. ' +
+			'Read more: https://reactjs.org/docs/refs-and-the-dom.html#callback-refs',
+	)
+
+	if (!previousRef) {
+		// When there is no ref on the element, use the new ref directly
+		return cloneElement(element, {
+			ref: newRef,
+		})
+	} else {
+		return cloneElement(element, {
+			ref: (node: any) => {
+				setRef(previousRef, node)
+				setRef(newRef, node)
+			},
+		})
+	}
 }

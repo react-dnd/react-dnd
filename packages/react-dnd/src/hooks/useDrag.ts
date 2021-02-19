@@ -1,14 +1,20 @@
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, MutableRefObject } from 'react'
 import { invariant } from '@react-dnd/invariant'
+import { DragDropMonitor, DragSource } from 'dnd-core'
 import {
-	DragSourceHookSpec,
-	DragObjectWithType,
 	ConnectDragSource,
 	ConnectDragPreview,
-} from '../interfaces'
-import { useMonitorOutput } from './internal/useMonitorOutput'
-import { useIsomorphicLayoutEffect } from './internal/useIsomorphicLayoutEffect'
-import { useDragSourceMonitor, useDragHandler } from './internal/drag'
+	DragSourceMonitor,
+} from '../types'
+import { DragSourceHookSpec, DragObjectWithType } from './types'
+import {
+	registerSource,
+	DragSourceMonitorImpl,
+	SourceConnector,
+} from '../internals'
+import { useMonitorOutput } from './useMonitorOutput'
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
+import { useDragDropManager } from './useDragDropManager'
 
 /**
  * useDragSource hook
@@ -52,4 +58,76 @@ export function useDrag<
 		connector.reconnect()
 	}, [connector])
 	return [result, connectDragSource, connectDragPreview]
+}
+
+function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {
+	const manager = useDragDropManager()
+	const monitor = useMemo(() => new DragSourceMonitorImpl(manager), [manager])
+	const connector = useMemo(() => new SourceConnector(manager.getBackend()), [
+		manager,
+	])
+	return [monitor, connector]
+}
+
+function useDragHandler<
+	DragObject extends DragObjectWithType,
+	DropResult,
+	CustomProps
+>(
+	spec: MutableRefObject<
+		DragSourceHookSpec<DragObject, DropResult, CustomProps>
+	>,
+	monitor: DragSourceMonitor,
+	connector: any,
+) {
+	const manager = useDragDropManager()
+	const handler = useMemo(() => {
+		return {
+			beginDrag() {
+				const { begin, item } = spec.current
+				if (begin) {
+					const beginResult = begin(monitor)
+					invariant(
+						beginResult == null || typeof beginResult === 'object',
+						'dragSpec.begin() must either return an object, undefined, or null',
+					)
+					return beginResult || item || {}
+				}
+				return item || {}
+			},
+			canDrag() {
+				if (typeof spec.current.canDrag === 'boolean') {
+					return spec.current.canDrag
+				} else if (typeof spec.current.canDrag === 'function') {
+					return spec.current.canDrag(monitor)
+				} else {
+					return true
+				}
+			},
+			isDragging(globalMonitor: DragDropMonitor, target) {
+				const { isDragging } = spec.current
+				return isDragging
+					? isDragging(monitor)
+					: target === globalMonitor.getSourceId()
+			},
+			endDrag() {
+				const { end } = spec.current
+				if (end) {
+					end(monitor.getItem(), monitor)
+				}
+				connector.reconnect()
+			},
+		} as DragSource
+	}, [])
+
+	useIsomorphicLayoutEffect(function registerHandler() {
+		const [handlerId, unregister] = registerSource(
+			spec.current.item.type,
+			handler,
+			manager,
+		)
+		monitor.receiveHandlerId(handlerId)
+		connector.receiveHandlerId(handlerId)
+		return unregister
+	}, [])
 }

@@ -3,10 +3,9 @@ declare const process: any
 import { RefObject } from 'react'
 import { DropTarget } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
-import { DropTargetMonitor } from '../interfaces'
-import { isPlainObject } from '../utils/js_utils'
-import { DropTargetSpec } from './interfaces'
-import { getDecoratedComponent } from './utils'
+import { DropTargetMonitor } from '../types'
+import { isPlainObject, getDecoratedComponent } from './utils'
+import { DropTargetSpec } from './types'
 const ALLOWED_SPEC_METHODS = ['canDrop', 'hover', 'drop']
 
 export interface Target extends DropTarget {
