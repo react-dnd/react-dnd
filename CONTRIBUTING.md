@@ -6,7 +6,7 @@ So you want to contibute to React-DnD? Thank you! This library is a community ef
 
 ### _What do I need to get started?_
 
-You just need Node and Yarn 1 installed in your CLI. This project uses Yarn v2, but Yarn v1 will pick up the relevant binaries on this repository.
+You only need Node and Yarn 1 installed in your CLI. This project uses Yarn v2, but Yarn v1 will pick up the relevant binaries on this repository.
 
 - node (https://nodejs.org)
 - yarn (npm i -g yarn)
