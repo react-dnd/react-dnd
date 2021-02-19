@@ -9,16 +9,21 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # useDrag
 
-A hook to use the current component as a drag-source.
+The `useDrag`hook provides a way to wire your component into the DnD system as a _drag source_. By passing in a specification object into `useDrag`, you declaratively describe the data `item` that will be passed to the DnD system, describe what props to `collect`, and more. The `useDrag` hooks returns a few key items: a set of collected props, and refs that may be attached to _drag source_ and _drag preview_ elements
 
 ```jsx
 import { useDrag } from 'react-dnd'
 
 function DraggableComponent(props) {
-  const [collectedProps, drag] = useDrag({
+  const [collected, drag, dragPreview] = useDrag({
     item: { id, type }
   })
-  return <div ref={drag}>...</div>
+  return collected.isDragging ?
+    <div ref={dragPreview> : (
+    <div ref={drag} {...collected}>
+      ...
+    </div>
+  )
 }
 ```
 
@@ -28,9 +33,9 @@ function DraggableComponent(props) {
 
 #### Return Value Array
 
-- **`Index 0`**: An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
-- **`Index 1`**: A connector function for the drag source. This must be attached to the draggable portion of the DOM.
-- **`Index 2`**: A connector function for the drag preview. This may be attached to the preview portion of the DOM.
+- **`[0] - Collected Props`**: An object containing collected properties from the collect function. If no `collect` function is defined, an empty object is returned.
+- **`[1] - DragSource Ref`**: A connector function for the drag source. This must be attached to the draggable portion of the DOM.
+- **`[2] - DragPreview Ref`**: A connector function for the drag preview. This may be attached to the preview portion of the DOM.
 
 ### Specification Object Members
 

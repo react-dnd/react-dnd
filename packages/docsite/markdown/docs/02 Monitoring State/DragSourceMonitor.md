@@ -7,7 +7,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # DragSourceMonitor
 
-`DragSourceMonitor` is an object passed to a collecting function of the [`DragSource`](/docs/api/drag-source). Its methods let you get information about the drag state of a specific drag source. The specific drag source bound to that monitor is called the monitor's _owner_ below.
+`DragSourceMonitor` is an object passed to a collecting function of a [hooks-based](/docs/api/use-drag) or [decorator-based](/docs/api/drag-source) dragging source. Its methods let you get information about the drag state of a specific drag source. The specific drag source bound to that monitor is called the monitor's _owner_ below.
 
 ### Methods
 
