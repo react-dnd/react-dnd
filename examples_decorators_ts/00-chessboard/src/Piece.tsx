@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import Knight from './Knight'
+import React, { FC } from "react";
+import Knight from "./Knight";
 
 export interface PieceProps {
-  isKnight: boolean
+  isKnight: boolean;
 }
 
 export const Piece: FC<PieceProps> = ({ isKnight }) =>
-  isKnight ? <Knight /> : null
+  isKnight ? <Knight /> : null;
