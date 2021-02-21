@@ -88,13 +88,6 @@ function useDropHandler<
 		} as DropTarget
 	}, [monitor, spec])
 
-	/**
-	 * If we pass in spec.current.accept directly, the React hook will
-	 * re-fire when the array-instance changes. Instead, we pass the
-	 * accept items directly into the deps if it's an array
-	 */
-	const specAccept = Array.isArray(spec.accept) ? spec.accept : [spec.accept]
-
 	useIsomorphicLayoutEffect(
 		function registerHandler() {
 			const [handlerId, unregister] = registerTarget(
@@ -106,6 +99,6 @@ function useDropHandler<
 			connector.receiveHandlerId(handlerId)
 			return unregister
 		},
-		[manager, monitor, handler, connector, ...specAccept],
+		[manager, monitor, handler, connector],
 	)
 }
