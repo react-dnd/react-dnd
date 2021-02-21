@@ -32,6 +32,10 @@ export class OptionsReader {
 		}
 	}
 
+	public get rootElement(): Node | undefined {
+		return this.optionsArgs?.rootElement || this.window
+	}
+
 	public get unblockNativeTypeEvents(): boolean {
 		return this.optionsArgs?.unblockNativeTypeEvents || false
 	}

@@ -5,6 +5,10 @@ export type HTML5BackendContext = Window | undefined
  */
 export interface HTML5BackendOptions {
 	/**
+	 * The root DOM node for subscribing to events
+	 */
+	rootElement: Node
+	/**
 	 * Unblocks processing of drag events for native types (e.g. files, etc..).
 	 * This may cause unexpected behavior in systems where these events are not
 	 * captured and handled by applications.

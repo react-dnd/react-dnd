@@ -91,6 +91,12 @@ export class HTML5BackendImpl implements Backend {
 	public get document(): Document | undefined {
 		return this.options.document
 	}
+	/**
+	 * Get the root element to use for event subscriptions
+	 */
+	public get rootElement(): Node | undefined {
+		return this.options.rootElement as Node
+	}
 
 	public setup(): void {
 		if (this.window === undefined) {
@@ -101,7 +107,7 @@ export class HTML5BackendImpl implements Backend {
 			throw new Error('Cannot have two HTML5 backends at the same time.')
 		}
 		this.window.__isReactDndBackendSetUp = true
-		this.addEventListeners(this.window as Element)
+		this.addEventListeners(this.options.rootElement as Node)
 	}
 
 	public teardown(): void {
@@ -110,7 +116,7 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		this.window.__isReactDndBackendSetUp = false
-		this.removeEventListeners(this.window as Element)
+		this.removeEventListeners(this.rootElement as Element)
 		this.clearCurrentDragSourceNode()
 		if (this.asyncEndDragFrameId) {
 			this.window.cancelAnimationFrame(this.asyncEndDragFrameId)
@@ -357,13 +363,10 @@ export class HTML5BackendImpl implements Backend {
 		//   * https://github.com/react-dnd/react-dnd/issues/869
 		//
 		this.mouseMoveTimeoutTimer = (setTimeout(() => {
-			return (
-				this.window &&
-				this.window.addEventListener(
-					'mousemove',
-					this.endDragIfSourceWasRemovedFromDOM,
-					true,
-				)
+			return this.rootElement?.addEventListener(
+				'mousemove',
+				this.endDragIfSourceWasRemovedFromDOM,
+				true,
 			)
 		}, MOUSE_MOVE_TIMEOUT) as any) as number
 	}
@@ -372,9 +375,9 @@ export class HTML5BackendImpl implements Backend {
 		if (this.currentDragSourceNode) {
 			this.currentDragSourceNode = null
 
-			if (this.window) {
-				this.window.clearTimeout(this.mouseMoveTimeoutTimer || undefined)
-				this.window.removeEventListener(
+			if (this.rootElement) {
+				this.window?.clearTimeout(this.mouseMoveTimeoutTimer || undefined)
+				this.rootElement.removeEventListener(
 					'mousemove',
 					this.endDragIfSourceWasRemovedFromDOM,
 					true,
