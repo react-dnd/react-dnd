@@ -634,9 +634,9 @@ export class HTML5BackendImpl implements Backend {
 
 	public handleTopDragLeaveCapture = (e: DragEvent): void => {
 		if (this.isDraggingNativeItem()) {
-			// if (!this.options.unblockNativeTypeEvents) {
-			e.preventDefault()
-			// }
+			if (!this.options.unblockNativeTypeEvents) {
+				e.preventDefault()
+			}
 		}
 
 		const isLastLeave = this.enterLeaveCounter.leave(e.target)
@@ -653,9 +653,9 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			// if (!this.options.unblockNativeTypeEvents) {
-			e.preventDefault()
-			// }
+			if (!this.options.unblockNativeTypeEvents) {
+				e.preventDefault()
+			}
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		}
 
@@ -701,6 +701,9 @@ export class HTML5BackendImpl implements Backend {
 			return
 		}
 
+		// For other targets, ask IE
+		// to enable drag and drop
+		e.preventDefault()
 		target.dragDrop()
 	}
 }
