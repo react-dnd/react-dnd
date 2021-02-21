@@ -23,11 +23,7 @@ import { NativeDragSource } from './NativeDragSources/NativeDragSource'
 import { OptionsReader } from './OptionsReader'
 import { HTML5BackendContext, HTML5BackendOptions } from './types'
 
-declare global {
-	interface Window {
-		__isReactDndBackendSetUp: boolean | undefined
-	}
-}
+type RootNode = Node & { __isReactDndBackendSetUp: boolean | undefined }
 
 export class HTML5BackendImpl implements Backend {
 	private options: OptionsReader
@@ -99,27 +95,29 @@ export class HTML5BackendImpl implements Backend {
 	}
 
 	public setup(): void {
-		if (this.window === undefined) {
+		const root = this.rootElement as RootNode | undefined
+		if (root === undefined) {
 			return
 		}
 
-		if (this.window.__isReactDndBackendSetUp) {
+		if (root.__isReactDndBackendSetUp) {
 			throw new Error('Cannot have two HTML5 backends at the same time.')
 		}
-		this.window.__isReactDndBackendSetUp = true
-		this.addEventListeners(this.options.rootElement as Node)
+		root.__isReactDndBackendSetUp = true
+		this.addEventListeners(root)
 	}
 
 	public teardown(): void {
-		if (this.window === undefined) {
+		const root = this.rootElement as RootNode
+		if (root === undefined) {
 			return
 		}
 
-		this.window.__isReactDndBackendSetUp = false
+		root.__isReactDndBackendSetUp = false
 		this.removeEventListeners(this.rootElement as Element)
 		this.clearCurrentDragSourceNode()
 		if (this.asyncEndDragFrameId) {
-			this.window.cancelAnimationFrame(this.asyncEndDragFrameId)
+			this.window?.cancelAnimationFrame(this.asyncEndDragFrameId)
 		}
 	}
 
@@ -502,6 +500,19 @@ export class HTML5BackendImpl implements Backend {
 		} else if (nativeType) {
 			// A native item (such as URL) dragged from inside the document
 			this.beginDragNativeItem(nativeType)
+		} else if (
+			dataTransfer &&
+			!dataTransfer.types &&
+			((e.target && !(e.target as Element).hasAttribute) ||
+				!(e.target as Element).hasAttribute('draggable'))
+		) {
+			// Looks like a Safari bug: dataTransfer.types is null, but there was no draggable.
+			// Just let it drag. It's a native type (URL or text) and will be picked up in
+			// dragenter handler.
+			return
+		} else {
+			// If by this time no drag source reacted, tell browser not to drag.
+			e.preventDefault()
 		}
 	}
 
