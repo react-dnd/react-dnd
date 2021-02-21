@@ -5,30 +5,30 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x]
 
     steps:
       - uses: actions/checkout@v1
-
-      - name: Debug Action
-        uses: hmarr/debug-action@v1.0.0
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: npm i -g pnpm
-      - run: pnpm install
+      - run: yarn version check
+        if: "github.actor != 'dependabot-preview[bot]' && !contains(github.ref , 'release/') && !contains(github.head_ref , 'release/')"
+        name: Version Check
+
+      - run: yarn install
         name: Install Dependencies
 
-      - run: pnpm ci
+      - run: yarn ci
         name: Execute Tests
         env:
           CI: true
 
       - name: Publish coverage to codecov.io
-        uses: codecov/codecov-action@v1.0.3
+        uses: codecov/codecov-action@v1.0.13
         if: success() && matrix.node-version == '14.x'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

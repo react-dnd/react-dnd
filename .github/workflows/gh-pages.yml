@@ -15,14 +15,13 @@ jobs:
         with:
           node-version: 12.x
 
-      - run: npm i -g pnpm
-      - run: pnpm install
-      - run: pnpm build
-      - run: yarn lerna run build_site --scope react-dnd-documentation
+      - run: yarn install
+      - run: yarn build:all
+      - run: yarn build:docsite
 
       - name: deploy
         uses: peaceiris/actions-gh-pages@v2.10.1
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./packages/documentation/docsite/public
+          PUBLISH_DIR: ./packages/docsite/public
