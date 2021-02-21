@@ -90,7 +90,7 @@ export class HTML5BackendImpl implements Backend {
 	/**
 	 * Get the root element to use for event subscriptions
 	 */
-	public get rootElement(): Node | undefined {
+	private get rootElement(): Node | undefined {
 		return this.options.rootElement as Node
 	}
 
@@ -634,9 +634,7 @@ export class HTML5BackendImpl implements Backend {
 
 	public handleTopDragLeaveCapture = (e: DragEvent): void => {
 		if (this.isDraggingNativeItem()) {
-			if (!this.options.unblockNativeTypeEvents) {
-				e.preventDefault()
-			}
+			e.preventDefault()
 		}
 
 		const isLastLeave = this.enterLeaveCounter.leave(e.target)
@@ -653,9 +651,7 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			if (!this.options.unblockNativeTypeEvents) {
-				e.preventDefault()
-			}
+			e.preventDefault()
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		}
 
