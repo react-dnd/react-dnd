@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-examples-hooks",
-  "version": "11.1.3",
+  "version": "12.0.0",
   "private": true,
   "description": "Drag and Drop for React",
   "main": "src/index.ts",

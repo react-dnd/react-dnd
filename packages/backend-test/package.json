@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-backend",
-  "version": "11.1.3",
+  "version": "12.0.0",
   "description": "A mock backend for testing React DnD apps",
   "main": "src/index.ts",
   "publishConfig": {
