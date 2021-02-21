@@ -20216,6 +20216,7 @@ fsevents@^1.2.7:
     "@types/hoist-non-react-statics": ^3.3.1
     "@types/node": ^14.14.30
     "@types/react": ^17.0.2
+    "@types/react-dom": ^17.0.1
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
     hoist-non-react-statics: ^3.3.2
