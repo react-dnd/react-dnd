@@ -21,7 +21,7 @@ import {
 import * as NativeTypes from './NativeTypes'
 import { NativeDragSource } from './NativeDragSources/NativeDragSource'
 import { OptionsReader } from './OptionsReader'
-import { HTML5BackendContext } from './types'
+import { HTML5BackendContext, HTML5BackendOptions } from './types'
 
 declare global {
 	interface Window {
@@ -59,8 +59,9 @@ export class HTML5BackendImpl implements Backend {
 	public constructor(
 		manager: DragDropManager,
 		globalContext?: HTML5BackendContext,
+		options?: HTML5BackendOptions,
 	) {
-		this.options = new OptionsReader(globalContext)
+		this.options = new OptionsReader(globalContext, options)
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
@@ -498,19 +499,6 @@ export class HTML5BackendImpl implements Backend {
 		} else if (nativeType) {
 			// A native item (such as URL) dragged from inside the document
 			this.beginDragNativeItem(nativeType)
-		} else if (
-			dataTransfer &&
-			!dataTransfer.types &&
-			((e.target && !(e.target as Element).hasAttribute) ||
-				!(e.target as Element).hasAttribute('draggable'))
-		) {
-			// Looks like a Safari bug: dataTransfer.types is null, but there was no draggable.
-			// Just let it drag. It's a native type (URL or text) and will be picked up in
-			// dragenter handler.
-			return
-		} else {
-			// If by this time no drag source reacted, tell browser not to drag.
-			e.preventDefault()
 		}
 	}
 
@@ -591,9 +579,6 @@ export class HTML5BackendImpl implements Backend {
 		this.dragOverTargetIds = []
 
 		if (!this.monitor.isDragging()) {
-			// This is probably a native item type we don't understand.
-			// Prevent default "drop and blow away the whole document" action.
-			e.preventDefault()
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = 'none'
 			}
@@ -616,12 +601,7 @@ export class HTML5BackendImpl implements Backend {
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
 			}
-		} else if (this.isDraggingNativeItem()) {
-			// Don't show a nice cursor but still prevent default
-			// "drop and blow away the whole document" action.
-			e.preventDefault()
 		} else {
-			e.preventDefault()
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = 'none'
 			}
@@ -630,6 +610,9 @@ export class HTML5BackendImpl implements Backend {
 
 	public handleTopDragLeaveCapture = (e: DragEvent): void => {
 		if (this.isDraggingNativeItem()) {
+			if (!this.options.unblockNativeTypeEvents) {
+				!this.options.unblockNativeTypeEvents
+			}
 			e.preventDefault()
 		}
 
@@ -647,7 +630,9 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			e.preventDefault()
+			if (!this.options.unblockNativeTypeEvents) {
+				e.preventDefault()
+			}
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		}
 
