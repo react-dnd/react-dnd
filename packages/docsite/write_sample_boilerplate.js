@@ -7,8 +7,7 @@ const reactDndHtml5BackendVersion = require('../backend-html5/package.json')
 	.version
 
 const APP_FILE_CONTENT = `
-	import React from 'react'
-	import ReactDOM from 'react-dom'
+	import { render } from 'react-dom'
 	import Example from './example'
 	import { DndProvider } from 'react-dnd'
 	import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -24,7 +23,7 @@ const APP_FILE_CONTENT = `
 	}
 
 	const rootElement = document.getElementById('root')
-	ReactDOM.render(<App />, rootElement)
+	render(<App />, rootElement)
 `
 
 const MANIFEST_FILE_CONTENT = `
@@ -65,6 +64,30 @@ const HTML_FILE_CONTENT = `
 </html>
 `
 
+const TS_CONFIG = {
+	compilerOptions: {
+		target: 'es5',
+		lib: ['dom', 'dom.iterable', 'esnext'],
+		allowJs: true,
+		skipLibCheck: true,
+		esModuleInterop: true,
+		allowSyntheticDefaultImports: true,
+		strict: true,
+		forceConsistentCasingInFileNames: true,
+		noFallthroughCasesInSwitch: true,
+		module: 'esnext',
+		moduleResolution: 'node',
+		resolveJsonModule: true,
+		isolatedModules: true,
+		noEmit: true,
+		jsx: 'react-jsx',
+		rootDir: './src',
+		experimentalDecorators: true,
+		useDefineForClassFields: true,
+	},
+	include: ['src'],
+}
+
 const makePackageJson = (index, isTS) => {
 	const result = {
 		name: `react-dnd-example-${index}`,
@@ -81,15 +104,25 @@ const makePackageJson = (index, isTS) => {
 		dependencies: {
 			react: reactDndPkgJson.devDependencies.react,
 			'react-dom': reactDndPkgJson.devDependencies['react-dom'],
-			'react-scripts': '3.2.0',
+			'react-scripts': '^4.0.2',
 			'react-dnd': reactDndPkgJson.version,
 			'react-dnd-html5-backend': reactDndHtml5BackendVersion,
-			'babel-jest': '23.6.0',
-			faker: '^4.1.0',
-			'immutability-helper': '^3.0.0',
-			'react-frame-component': '^4.1.0',
+			'babel-jest': '^26.6.3',
+			faker: '^5.4.0',
+			'immutability-helper': '^3.1.1',
+			'react-frame-component': '^4.1.3',
 		},
-		browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
+		eslintConfig: {
+			extends: ['react-app', 'react-app/jest'],
+		},
+		browserslist: {
+			production: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
+			development: [
+				'last 1 chrome version',
+				'last 1 firefox version',
+				'last 1 safari version',
+			],
+		},
 	}
 	if (isTS) {
 		result.dependencies = {
@@ -215,6 +248,9 @@ function handleTsExample(err, results) {
 			packageJsonFile,
 			JSON.stringify(makePackageJson(index, true), null, 2),
 		)
+
+		const tsConfigFile = path.join(exampleDir, 'tsconfig.json')
+		fs.writeFileSync(tsConfigFile, JSON.stringify(TS_CONFIG, null, 4))
 
 		const sandboxAppFile = path.join(srcDir, 'index.tsx')
 		fs.writeFileSync(sandboxAppFile, APP_FILE_CONTENT)
