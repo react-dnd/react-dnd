@@ -611,9 +611,8 @@ export class HTML5BackendImpl implements Backend {
 	public handleTopDragLeaveCapture = (e: DragEvent): void => {
 		if (this.isDraggingNativeItem()) {
 			if (!this.options.unblockNativeTypeEvents) {
-				!this.options.unblockNativeTypeEvents
+				e.preventDefault()
 			}
-			e.preventDefault()
 		}
 
 		const isLastLeave = this.enterLeaveCounter.leave(e.target)
