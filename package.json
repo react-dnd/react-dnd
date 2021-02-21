@@ -40,6 +40,7 @@
     "clean:all": "yarn workspaces foreach --exclude @react-dnd/build -pv run clean",
     "build:all": "yarn workspaces foreach -pv --topological-dev run build",
     "test:all": "yarn workspaces foreach -pv run test",
+    "release:all": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude '@react-dnd/build' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples-hooks' --exclude 'react-dnd-examples-decorators' -pv npm publish --tolerate-republish",
     "lint": "run-s 'lint:*'",
     "jest": "jest",
     "jest:watch": "jest --watch",
