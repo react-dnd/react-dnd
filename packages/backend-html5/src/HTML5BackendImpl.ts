@@ -569,8 +569,6 @@ export class HTML5BackendImpl implements Backend {
 		)
 
 		if (canDrop) {
-			// IE requires this to fire dragover events
-			e.preventDefault()
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
 			}
