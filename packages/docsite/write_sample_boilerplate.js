@@ -112,7 +112,17 @@ const makePackageJson = (index, isTS) => {
 			'immutability-helper': '^3.1.1',
 			'react-frame-component': '^4.1.3',
 		},
-		browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
+		eslintConfig: {
+			extends: ['react-app', 'react-app/jest'],
+		},
+		browserslist: {
+			production: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
+			development: [
+				'last 1 chrome version',
+				'last 1 firefox version',
+				'last 1 safari version',
+			],
+		},
 	}
 	if (isTS) {
 		result.dependencies = {
