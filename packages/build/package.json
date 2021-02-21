@@ -1,6 +1,6 @@
 {
   "name": "@react-dnd/build",
-  "version": "11.1.3",
+  "version": "12.0.0",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
