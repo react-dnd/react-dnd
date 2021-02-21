@@ -571,6 +571,8 @@ export class HTML5BackendImpl implements Backend {
 		)
 
 		if (canDrop) {
+			// IE requires this to fire dragover events
+			e.preventDefault()
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
 			}
@@ -593,6 +595,9 @@ export class HTML5BackendImpl implements Backend {
 		this.dragOverTargetIds = []
 
 		if (!this.monitor.isDragging()) {
+			// This is probably a native item type we don't understand.
+			// Prevent default "drop and blow away the whole document" action.
+			e.preventDefault()
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = 'none'
 			}
@@ -615,7 +620,12 @@ export class HTML5BackendImpl implements Backend {
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
 			}
+		} else if (this.isDraggingNativeItem()) {
+			// Don't show a nice cursor but still prevent default
+			// "drop and blow away the whole document" action.
+			e.preventDefault()
 		} else {
+			e.preventDefault()
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = 'none'
 			}
@@ -624,9 +634,9 @@ export class HTML5BackendImpl implements Backend {
 
 	public handleTopDragLeaveCapture = (e: DragEvent): void => {
 		if (this.isDraggingNativeItem()) {
-			if (!this.options.unblockNativeTypeEvents) {
-				e.preventDefault()
-			}
+			// if (!this.options.unblockNativeTypeEvents) {
+			e.preventDefault()
+			// }
 		}
 
 		const isLastLeave = this.enterLeaveCounter.leave(e.target)
@@ -643,9 +653,9 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			if (!this.options.unblockNativeTypeEvents) {
-				e.preventDefault()
-			}
+			// if (!this.options.unblockNativeTypeEvents) {
+			e.preventDefault()
+			// }
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		}
 
