@@ -15,17 +15,20 @@ export interface SourceBoxProps {
 
 export const SourceBox: FC<SourceBoxProps> = ({ color, children }) => {
 	const [forbidDrag, setForbidDrag] = useState(false)
-	const [{ isDragging }, drag] = useDrag({
-		item: { type: `${color}` },
-		canDrag: !forbidDrag,
-		collect: (monitor: DragSourceMonitor) => ({
-			isDragging: monitor.isDragging(),
+	const [{ isDragging }, drag] = useDrag(
+		() => ({
+			item: { type: `${color}` },
+			canDrag: !forbidDrag,
+			collect: (monitor: DragSourceMonitor) => ({
+				isDragging: monitor.isDragging(),
+			}),
 		}),
-	})
+		[forbidDrag, color],
+	)
 
 	const onToggleForbidDrag = useCallback(() => {
 		setForbidDrag(!forbidDrag)
-	}, [forbidDrag])
+	}, [forbidDrag, setForbidDrag])
 
 	const backgroundColor = useMemo(() => {
 		switch (color) {

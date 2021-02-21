@@ -18,7 +18,7 @@ export interface CardProps {
 
 export const Card: FC<CardProps> = memo(({ id, text, moveCard }) => {
 	const ref = useRef(null)
-	const [{ isDragging }, connectDrag] = useDrag({
+	const [{ isDragging }, connectDrag] = useDrag(() => ({
 		item: { id, type: ItemTypes.CARD },
 		collect: (monitor: any) => {
 			const result = {
@@ -26,16 +26,19 @@ export const Card: FC<CardProps> = memo(({ id, text, moveCard }) => {
 			}
 			return result
 		},
-	})
+	}))
 
-	const [, connectDrop] = useDrop({
-		accept: ItemTypes.CARD,
-		hover({ id: draggedId }: { id: string; type: string }) {
-			if (draggedId !== id) {
-				moveCard(draggedId, id)
-			}
-		},
-	})
+	const [, connectDrop] = useDrop(
+		() => ({
+			accept: ItemTypes.CARD,
+			hover({ id: draggedId }: { id: string; type: string }) {
+				if (draggedId !== id) {
+					moveCard(draggedId, id)
+				}
+			},
+		}),
+		[id, moveCard],
+	)
 
 	connectDrag(ref)
 	connectDrop(ref)
