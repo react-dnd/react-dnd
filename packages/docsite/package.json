@@ -66,7 +66,9 @@
     "shx": "^0.3.3"
   },
   "scripts": {
-    "clean": "rimraf .cache public apidocs static/examples_decorators_js static/examples_decorators_ts static/examples_hooks_js static/examples_hooks_ts",
+    "clean_examples": "rimraf static/examples_decorators_js static/examples_decorators_ts static/examples_hooks_js static/examples_hooks_ts",
+    "clean_docsite": "rimraf .cache public apidocs",
+    "clean": "run-s clean_examples clean_docsite",
     "copy_examples:js_hooks": "shx cp -r ../examples-hooks/dist/docs static/examples_hooks_js",
     "copy_examples:ts_hooks": "shx cp -r ../examples-hooks/src static/examples_hooks_ts",
     "copy_examples:js_decorators": "shx cp -r ../examples-decorators/dist/docs static/examples_decorators_js",
@@ -75,7 +77,8 @@
     "prune_buildinfo": "rimraf static/examples_hooks_js/tsconfig.docs.tsbuildinfo static/examples_decorators_js/tsconfig.docs.tsbuildinfo",
     "format_examples": "prettier 'static/examples_*/**/*.(js|ts|tsx)' --use-tabs=false --write",
     "write_example_boilerplate": "node write_sample_boilerplate.js",
-    "process_examples": "run-s copy_examples prune_buildinfo format_examples write_example_boilerplate",
+    "echo_finished_examples": "shx echo 'finished processing examples'",
+    "process_examples": "run-s clean_examples copy_examples prune_buildinfo format_examples write_example_boilerplate echo_finished_examples",
     "build:gatsby": "gatsby build --prefix-paths",
     "start:docsite": "gatsby develop -H 0.0.0.0",
     "build:docsite": "run-s process_examples build:gatsby"
