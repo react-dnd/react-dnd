@@ -329,11 +329,11 @@ export class HTML5BackendImpl implements Backend {
 
 	private endDragIfSourceWasRemovedFromDOM = (): void => {
 		const node = this.currentDragSourceNode
-		if (this.isNodeInDocument(node)) {
+		if (node == null || this.isNodeInDocument(node)) {
 			return
 		}
 
-		if (this.clearCurrentDragSourceNode()) {
+		if (this.clearCurrentDragSourceNode() && this.monitor.isDragging()) {
 			this.actions.endDrag()
 		}
 	}
@@ -517,7 +517,7 @@ export class HTML5BackendImpl implements Backend {
 	}
 
 	public handleTopDragEndCapture = (): void => {
-		if (this.clearCurrentDragSourceNode()) {
+		if (this.clearCurrentDragSourceNode() && this.monitor.isDragging()) {
 			// Firefox can dispatch this event in an infinite loop
 			// if dragend handler does something like showing an alert.
 			// Only proceed if we have not handled it already.
@@ -643,7 +643,7 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		if (this.isDraggingNativeItem()) {
-			this.endDragNativeItem()
+			setTimeout(() => this.endDragNativeItem(), 0)
 		}
 	}
 
@@ -673,7 +673,7 @@ export class HTML5BackendImpl implements Backend {
 
 		if (this.isDraggingNativeItem()) {
 			this.endDragNativeItem()
-		} else {
+		} else if (this.monitor.isDragging()) {
 			this.actions.endDrag()
 		}
 	}
