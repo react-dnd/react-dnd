@@ -693,9 +693,6 @@ export class HTML5BackendImpl implements Backend {
 			return
 		}
 
-		// For other targets, ask IE
-		// to enable drag and drop
-		e.preventDefault()
 		target.dragDrop()
 	}
 }
