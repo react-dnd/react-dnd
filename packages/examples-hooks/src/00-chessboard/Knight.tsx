@@ -10,12 +10,15 @@ const knightStyle: CSSProperties = {
 }
 
 export const Knight: FC = () => {
-	const [{ isDragging }, drag, preview] = useDrag({
-		item: { type: ItemTypes.KNIGHT },
-		collect: (monitor) => ({
-			isDragging: !!monitor.isDragging(),
+	const [{ isDragging }, drag, preview] = useDrag(
+		() => ({
+			item: { type: ItemTypes.KNIGHT },
+			collect: (monitor) => ({
+				isDragging: !!monitor.isDragging(),
+			}),
 		}),
-	})
+		[],
+	)
 
 	return (
 		<>

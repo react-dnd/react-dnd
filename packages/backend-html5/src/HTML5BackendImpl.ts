@@ -21,13 +21,9 @@ import {
 import * as NativeTypes from './NativeTypes'
 import { NativeDragSource } from './NativeDragSources/NativeDragSource'
 import { OptionsReader } from './OptionsReader'
-import { HTML5BackendContext } from './types'
+import { HTML5BackendContext, HTML5BackendOptions } from './types'
 
-declare global {
-	interface Window {
-		__isReactDndBackendSetUp: boolean | undefined
-	}
-}
+type RootNode = Node & { __isReactDndBackendSetUp: boolean | undefined }
 
 export class HTML5BackendImpl implements Backend {
 	private options: OptionsReader
@@ -59,8 +55,9 @@ export class HTML5BackendImpl implements Backend {
 	public constructor(
 		manager: DragDropManager,
 		globalContext?: HTML5BackendContext,
+		options?: HTML5BackendOptions,
 	) {
-		this.options = new OptionsReader(globalContext)
+		this.options = new OptionsReader(globalContext, options)
 		this.actions = manager.getActions()
 		this.monitor = manager.getMonitor()
 		this.registry = manager.getRegistry()
@@ -90,29 +87,37 @@ export class HTML5BackendImpl implements Backend {
 	public get document(): Document | undefined {
 		return this.options.document
 	}
+	/**
+	 * Get the root element to use for event subscriptions
+	 */
+	private get rootElement(): Node | undefined {
+		return this.options.rootElement as Node
+	}
 
 	public setup(): void {
-		if (this.window === undefined) {
+		const root = this.rootElement as RootNode | undefined
+		if (root === undefined) {
 			return
 		}
 
-		if (this.window.__isReactDndBackendSetUp) {
+		if (root.__isReactDndBackendSetUp) {
 			throw new Error('Cannot have two HTML5 backends at the same time.')
 		}
-		this.window.__isReactDndBackendSetUp = true
-		this.addEventListeners(this.window as Element)
+		root.__isReactDndBackendSetUp = true
+		this.addEventListeners(root)
 	}
 
 	public teardown(): void {
-		if (this.window === undefined) {
+		const root = this.rootElement as RootNode
+		if (root === undefined) {
 			return
 		}
 
-		this.window.__isReactDndBackendSetUp = false
-		this.removeEventListeners(this.window as Element)
+		root.__isReactDndBackendSetUp = false
+		this.removeEventListeners(this.rootElement as Element)
 		this.clearCurrentDragSourceNode()
 		if (this.asyncEndDragFrameId) {
-			this.window.cancelAnimationFrame(this.asyncEndDragFrameId)
+			this.window?.cancelAnimationFrame(this.asyncEndDragFrameId)
 		}
 	}
 
@@ -324,11 +329,11 @@ export class HTML5BackendImpl implements Backend {
 
 	private endDragIfSourceWasRemovedFromDOM = (): void => {
 		const node = this.currentDragSourceNode
-		if (this.isNodeInDocument(node)) {
+		if (node == null || this.isNodeInDocument(node)) {
 			return
 		}
 
-		if (this.clearCurrentDragSourceNode()) {
+		if (this.clearCurrentDragSourceNode() && this.monitor.isDragging()) {
 			this.actions.endDrag()
 		}
 	}
@@ -356,13 +361,10 @@ export class HTML5BackendImpl implements Backend {
 		//   * https://github.com/react-dnd/react-dnd/issues/869
 		//
 		this.mouseMoveTimeoutTimer = (setTimeout(() => {
-			return (
-				this.window &&
-				this.window.addEventListener(
-					'mousemove',
-					this.endDragIfSourceWasRemovedFromDOM,
-					true,
-				)
+			return this.rootElement?.addEventListener(
+				'mousemove',
+				this.endDragIfSourceWasRemovedFromDOM,
+				true,
 			)
 		}, MOUSE_MOVE_TIMEOUT) as any) as number
 	}
@@ -371,9 +373,9 @@ export class HTML5BackendImpl implements Backend {
 		if (this.currentDragSourceNode) {
 			this.currentDragSourceNode = null
 
-			if (this.window) {
-				this.window.clearTimeout(this.mouseMoveTimeoutTimer || undefined)
-				this.window.removeEventListener(
+			if (this.rootElement) {
+				this.window?.clearTimeout(this.mouseMoveTimeoutTimer || undefined)
+				this.rootElement.removeEventListener(
 					'mousemove',
 					this.endDragIfSourceWasRemovedFromDOM,
 					true,
@@ -515,7 +517,7 @@ export class HTML5BackendImpl implements Backend {
 	}
 
 	public handleTopDragEndCapture = (): void => {
-		if (this.clearCurrentDragSourceNode()) {
+		if (this.clearCurrentDragSourceNode() && this.monitor.isDragging()) {
 			// Firefox can dispatch this event in an infinite loop
 			// if dragend handler does something like showing an alert.
 			// Only proceed if we have not handled it already.
@@ -641,7 +643,7 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		if (this.isDraggingNativeItem()) {
-			this.endDragNativeItem()
+			setTimeout(() => this.endDragNativeItem(), 0)
 		}
 	}
 
@@ -671,7 +673,7 @@ export class HTML5BackendImpl implements Backend {
 
 		if (this.isDraggingNativeItem()) {
 			this.endDragNativeItem()
-		} else {
+		} else if (this.monitor.isDragging()) {
 			this.actions.endDrag()
 		}
 	}

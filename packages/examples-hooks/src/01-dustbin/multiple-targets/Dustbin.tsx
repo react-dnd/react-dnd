@@ -25,14 +25,17 @@ export const Dustbin: FC<DustbinProps> = memo(function Dustbin({
 	lastDroppedItem,
 	onDrop,
 }) {
-	const [{ isOver, canDrop }, drop] = useDrop({
-		accept,
-		drop: onDrop,
-		collect: (monitor) => ({
-			isOver: monitor.isOver(),
-			canDrop: monitor.canDrop(),
+	const [{ isOver, canDrop }, drop] = useDrop(
+		() => ({
+			accept,
+			drop: onDrop,
+			collect: (monitor) => ({
+				isOver: monitor.isOver(),
+				canDrop: monitor.canDrop(),
+			}),
 		}),
-	})
+		[accept, onDrop],
+	)
 
 	const isActive = isOver && canDrop
 	let backgroundColor = '#222'

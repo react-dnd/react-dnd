@@ -40,24 +40,27 @@ export const Container: FC<ContainerProps> = ({ snapToGrid }) => {
 		[boxes],
 	)
 
-	const [, drop] = useDrop({
-		accept: ItemTypes.BOX,
-		drop(item: DragItem, monitor) {
-			const delta = monitor.getDifferenceFromInitialOffset() as {
-				x: number
-				y: number
-			}
+	const [, drop] = useDrop(
+		() => ({
+			accept: ItemTypes.BOX,
+			drop(item: DragItem, monitor) {
+				const delta = monitor.getDifferenceFromInitialOffset() as {
+					x: number
+					y: number
+				}
 
-			let left = Math.round(item.left + delta.x)
-			let top = Math.round(item.top + delta.y)
-			if (snapToGrid) {
-				;[left, top] = doSnapToGrid(left, top)
-			}
+				let left = Math.round(item.left + delta.x)
+				let top = Math.round(item.top + delta.y)
+				if (snapToGrid) {
+					;[left, top] = doSnapToGrid(left, top)
+				}
 
-			moveBox(item.id, left, top)
-			return undefined
-		},
-	})
+				moveBox(item.id, left, top)
+				return undefined
+			},
+		}),
+		[moveBox],
+	)
 
 	return (
 		<div ref={drop} style={styles}>

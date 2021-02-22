@@ -17,15 +17,18 @@ export const BoardSquare: FC<BoardSquareProps> = ({
 	children,
 	game,
 }: BoardSquareProps) => {
-	const [{ isOver, canDrop }, drop] = useDrop({
-		accept: ItemTypes.KNIGHT,
-		canDrop: () => game.canMoveKnight(x, y),
-		drop: () => game.moveKnight(x, y),
-		collect: (monitor) => ({
-			isOver: !!monitor.isOver(),
-			canDrop: !!monitor.canDrop(),
+	const [{ isOver, canDrop }, drop] = useDrop(
+		() => ({
+			accept: ItemTypes.KNIGHT,
+			canDrop: () => game.canMoveKnight(x, y),
+			drop: () => game.moveKnight(x, y),
+			collect: (monitor) => ({
+				isOver: !!monitor.isOver(),
+				canDrop: !!monitor.canDrop(),
+			}),
 		}),
-	})
+		[game],
+	)
 	const black = (x + y) % 2 === 1
 
 	return (
