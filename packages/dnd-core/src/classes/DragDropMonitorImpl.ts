@@ -79,7 +79,7 @@ export class DragDropMonitorImpl implements DragDropMonitor {
 			return false
 		}
 		const source = this.registry.getSource(sourceId)
-		invariant(source, 'Expected to find a valid source.')
+		invariant(source, `Expected to find a valid source. sourceId=${sourceId}`)
 
 		if (this.isDragging()) {
 			return false
@@ -94,7 +94,7 @@ export class DragDropMonitorImpl implements DragDropMonitor {
 			return false
 		}
 		const target = this.registry.getTarget(targetId)
-		invariant(target, 'Expected to find a valid target.')
+		invariant(target, `Expected to find a valid target. targetId=${targetId}`)
 
 		if (!this.isDragging() || this.didDrop()) {
 			return false
@@ -117,7 +117,7 @@ export class DragDropMonitorImpl implements DragDropMonitor {
 			return false
 		}
 		const source = this.registry.getSource(sourceId, true)
-		invariant(source, 'Expected to find a valid source.')
+		invariant(source, `Expected to find a valid source. sourceId=${sourceId}`)
 
 		if (!this.isDragging() || !this.isSourcePublic()) {
 			return false

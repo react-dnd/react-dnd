@@ -27,31 +27,33 @@ interface DragItem {
 }
 
 export const Box: FC<BoxProps> = ({ name }) => {
-	const item = { name, type: ItemTypes.BOX }
-	const [{ opacity }, drag] = useDrag({
-		item,
-		end(item: DragItem | undefined, monitor: DragSourceMonitor) {
-			const dropResult: DropResult = monitor.getDropResult()
-			if (item && dropResult) {
-				let alertMessage = ''
-				const isDropAllowed =
-					dropResult.allowedDropEffect === 'any' ||
-					dropResult.allowedDropEffect === dropResult.dropEffect
+	const [{ opacity }, drag] = useDrag(
+		() => ({
+			item: { name, type: ItemTypes.BOX },
+			end(item: DragItem | undefined, monitor: DragSourceMonitor) {
+				const dropResult: DropResult = monitor.getDropResult()
+				if (item && dropResult) {
+					let alertMessage = ''
+					const isDropAllowed =
+						dropResult.allowedDropEffect === 'any' ||
+						dropResult.allowedDropEffect === dropResult.dropEffect
 
-				if (isDropAllowed) {
-					const isCopyAction = dropResult.dropEffect === 'copy'
-					const actionName = isCopyAction ? 'copied' : 'moved'
-					alertMessage = `You ${actionName} ${item.name} into ${dropResult.name}!`
-				} else {
-					alertMessage = `You cannot ${dropResult.dropEffect} an item into the ${dropResult.name}`
+					if (isDropAllowed) {
+						const isCopyAction = dropResult.dropEffect === 'copy'
+						const actionName = isCopyAction ? 'copied' : 'moved'
+						alertMessage = `You ${actionName} ${item.name} into ${dropResult.name}!`
+					} else {
+						alertMessage = `You cannot ${dropResult.dropEffect} an item into the ${dropResult.name}`
+					}
+					alert(alertMessage)
 				}
-				alert(alertMessage)
-			}
-		},
-		collect: (monitor: any) => ({
-			opacity: monitor.isDragging() ? 0.4 : 1,
+			},
+			collect: (monitor: any) => ({
+				opacity: monitor.isDragging() ? 0.4 : 1,
+			}),
 		}),
-	})
+		[name],
+	)
 
 	return (
 		<div ref={drag} style={{ ...style, opacity }}>

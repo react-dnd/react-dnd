@@ -17,18 +17,21 @@ interface BoxProps {
 }
 
 export const Box: FC<BoxProps> = ({ name }) => {
-	const [{ isDragging }, drag] = useDrag({
-		item: { name, type: ItemTypes.BOX },
-		end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
-			const dropResult = monitor.getDropResult()
-			if (item && dropResult) {
-				alert(`You dropped ${item.name} into ${dropResult.name}!`)
-			}
-		},
-		collect: (monitor) => ({
-			isDragging: monitor.isDragging(),
+	const [{ isDragging }, drag] = useDrag(
+		() => ({
+			item: { name, type: ItemTypes.BOX },
+			end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
+				const dropResult = monitor.getDropResult()
+				if (item && dropResult) {
+					alert(`You dropped ${item.name} into ${dropResult.name}!`)
+				}
+			},
+			collect: (monitor) => ({
+				isDragging: monitor.isDragging(),
+			}),
 		}),
-	})
+		[name],
+	)
 	const opacity = isDragging ? 0.4 : 1
 
 	return (

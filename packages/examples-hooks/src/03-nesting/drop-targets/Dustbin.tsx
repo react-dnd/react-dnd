@@ -31,21 +31,24 @@ export const Dustbin: FC<DustbinProps> = ({ greedy, children }) => {
 	const [hasDropped, setHasDropped] = useState(false)
 	const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
 
-	const [{ isOver, isOverCurrent }, drop] = useDrop({
-		accept: ItemTypes.BOX,
-		drop(item, monitor) {
-			const didDrop = monitor.didDrop()
-			if (didDrop && !greedy) {
-				return
-			}
-			setHasDropped(true)
-			setHasDroppedOnChild(didDrop)
-		},
-		collect: (monitor) => ({
-			isOver: monitor.isOver(),
-			isOverCurrent: monitor.isOver({ shallow: true }),
+	const [{ isOver, isOverCurrent }, drop] = useDrop(
+		() => ({
+			accept: ItemTypes.BOX,
+			drop(item: unknown, monitor) {
+				const didDrop = monitor.didDrop()
+				if (didDrop && !greedy) {
+					return
+				}
+				setHasDropped(true)
+				setHasDroppedOnChild(didDrop)
+			},
+			collect: (monitor) => ({
+				isOver: monitor.isOver(),
+				isOverCurrent: monitor.isOver({ shallow: true }),
+			}),
 		}),
-	})
+		[greedy, setHasDropped, setHasDroppedOnChild],
+	)
 
 	const text = greedy ? 'greedy' : 'not greedy'
 	let backgroundColor = 'rgba(0, 0, 0, .5)'
