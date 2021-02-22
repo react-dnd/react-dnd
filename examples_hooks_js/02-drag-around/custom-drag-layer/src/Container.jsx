@@ -22,7 +22,7 @@ export const Container = ({ snapToGrid }) => {
             },
         }));
     }, [boxes]);
-    const [, drop] = useDrop({
+    const [, drop] = useDrop(() => ({
         accept: ItemTypes.BOX,
         drop(item, monitor) {
             const delta = monitor.getDifferenceFromInitialOffset();
@@ -35,7 +35,7 @@ export const Container = ({ snapToGrid }) => {
             moveBox(item.id, left, top);
             return undefined;
         },
-    });
+    }), [moveBox]);
     return (<div ref={drop} style={styles}>
 			{Object.keys(boxes).map((key) => (<DraggableBox key={key} id={key} {...boxes[key]}/>))}
 		</div>);

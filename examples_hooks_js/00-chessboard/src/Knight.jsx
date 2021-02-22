@@ -7,12 +7,12 @@ const knightStyle = {
     cursor: 'move',
 };
 export const Knight = () => {
-    const [{ isDragging }, drag, preview] = useDrag({
+    const [{ isDragging }, drag, preview] = useDrag(() => ({
         item: { type: ItemTypes.KNIGHT },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
-    });
+    }), []);
     return (<>
 			<DragPreviewImage connect={preview} src={knightImage}/>
 			<div ref={drag} style={{

@@ -9,7 +9,7 @@ const style = {
     float: 'left',
 };
 export const Box = ({ name, type, isDropped }) => {
-    const [{ isDragging }, drag] = useDrag({
+    const [{ isDragging }, drag] = useDrag(() => ({
         item: { name, type },
         isDragging(monitor) {
             const item = monitor.getItem();
@@ -18,7 +18,7 @@ export const Box = ({ name, type, isDropped }) => {
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-    });
+    }), [name, type]);
     const opacity = isDragging ? 0.4 : 1;
     return (<div ref={drag} style={{ ...style, opacity }}>
 			{isDropped ? <s>{name}</s> : name}

@@ -9,7 +9,7 @@ const style = {
 };
 export const Card = ({ id, text, moveCard, findCard }) => {
     const originalIndex = findCard(id).index;
-    const [{ isDragging }, drag] = useDrag({
+    const [{ isDragging }, drag] = useDrag(() => ({
         item: { type: ItemTypes.CARD, id, originalIndex },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
@@ -21,8 +21,8 @@ export const Card = ({ id, text, moveCard, findCard }) => {
                 moveCard(droppedId, originalIndex);
             }
         },
-    });
-    const [, drop] = useDrop({
+    }), [id, originalIndex]);
+    const [, drop] = useDrop(() => ({
         accept: ItemTypes.CARD,
         canDrop: () => false,
         hover({ id: draggedId }) {
@@ -31,7 +31,7 @@ export const Card = ({ id, text, moveCard, findCard }) => {
                 moveCard(draggedId, overIndex);
             }
         },
-    });
+    }));
     const opacity = isDragging ? 0 : 1;
     return (<div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
 			{text}

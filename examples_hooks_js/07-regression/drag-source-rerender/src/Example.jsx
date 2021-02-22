@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react';
 import { useDrag } from 'react-dnd';
 export const Example = () => {
-    const [{ isDragging }, drag] = useDrag({
+    const [{ isDragging }, drag] = useDrag(() => ({
         item: { type: 'KNIGHT' },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-    });
+    }));
     return <Child drag={drag}>{isDragging ? 'Dragging' : 'Drag me'}</Child>;
 };
 const Child = ({ drag, children }) => {

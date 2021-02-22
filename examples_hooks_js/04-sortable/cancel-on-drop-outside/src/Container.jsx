@@ -54,7 +54,7 @@ export const Container = () => {
             index: cards.indexOf(card),
         };
     };
-    const [, drop] = useDrop({ accept: ItemTypes.CARD });
+    const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
     return (<>
 			<div ref={drop} style={style}>
 				{cards.map((card) => (<Card key={card.id} id={`${card.id}`} text={card.text} moveCard={moveCard} findCard={findCard}/>))}

@@ -9,7 +9,7 @@ const style = {
     cursor: 'move',
 };
 export const SourceBox = ({ showCopyIcon }) => {
-    const [{ opacity }, drag] = useDrag({
+    const [{ opacity }, drag] = useDrag(() => ({
         item: { type: ItemTypes.BOX },
         options: {
             dropEffect: showCopyIcon ? 'copy' : 'move',
@@ -17,7 +17,7 @@ export const SourceBox = ({ showCopyIcon }) => {
         collect: (monitor) => ({
             opacity: monitor.isDragging() ? 0.4 : 1,
         }),
-    });
+    }), [showCopyIcon]);
     return (<div ref={drag} style={{ ...style, opacity }}>
 			When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
 		</div>);

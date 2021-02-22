@@ -16,17 +16,17 @@ const handleStyle = {
     cursor: 'move',
 };
 export const BoxWithHandle = () => {
-    const [, drop] = useDrop({
+    const [, drop] = useDrop(() => ({
         accept: ItemTypes.BOX,
-    });
-    const [{ isDragging }, drag, preview] = useDrag({
+    }));
+    const [{ isDragging }, drag, preview] = useDrag(() => ({
         item: {
             type: ItemTypes.BOX,
         },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-    });
+    }));
     const opacity = isDragging ? 0.4 : 1;
     return drop(preview(<div style={{ ...style, opacity }}>
 				{drag(<div style={handleStyle}/>)}

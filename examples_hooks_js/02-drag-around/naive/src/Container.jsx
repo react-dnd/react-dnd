@@ -14,7 +14,7 @@ export const Container = ({ hideSourceOnDrag }) => {
         a: { top: 20, left: 80, title: 'Drag me around' },
         b: { top: 180, left: 20, title: 'Drag me too' },
     });
-    const [, drop] = useDrop({
+    const [, drop] = useDrop(() => ({
         accept: ItemTypes.BOX,
         drop(item, monitor) {
             const delta = monitor.getDifferenceFromInitialOffset();
@@ -23,7 +23,7 @@ export const Container = ({ hideSourceOnDrag }) => {
             moveBox(item.id, left, top);
             return undefined;
         },
-    });
+    }));
     const moveBox = (id, left, top) => {
         setBoxes(update(boxes, {
             [id]: {

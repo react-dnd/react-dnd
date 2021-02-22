@@ -9,7 +9,7 @@ const style = {
     textAlign: 'center',
 };
 const TargetBox = ({ onDrop, lastDroppedColor }) => {
-    const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
+    const [{ isOver, draggingColor, canDrop }, drop] = useDrop(() => ({
         accept: [Colors.YELLOW, Colors.BLUE],
         drop(item) {
             onDrop(item.type);
@@ -20,7 +20,7 @@ const TargetBox = ({ onDrop, lastDroppedColor }) => {
             canDrop: monitor.canDrop(),
             draggingColor: monitor.getItemType(),
         }),
-    });
+    }), [onDrop]);
     const opacity = isOver ? 1 : 0.7;
     let backgroundColor = '#fff';
     switch (draggingColor) {

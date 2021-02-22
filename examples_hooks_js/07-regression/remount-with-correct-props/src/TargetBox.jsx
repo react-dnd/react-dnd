@@ -8,12 +8,12 @@ const style = {
     textAlign: 'center',
 };
 export const TargetBox = () => {
-    const [{ isActive }, drop] = useDrop({
+    const [{ isActive }, drop] = useDrop(() => ({
         accept: ItemTypes.BOX,
         collect: (monitor) => ({
             isActive: monitor.canDrop() && monitor.isOver(),
         }),
-    });
+    }));
     return (<div ref={drop} style={style}>
 			{isActive ? 'Release to drop' : 'Drag item here'}
 		</div>);

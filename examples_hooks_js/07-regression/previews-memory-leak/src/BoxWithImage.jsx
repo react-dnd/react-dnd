@@ -10,12 +10,12 @@ const style = {
     width: '20rem',
 };
 export const BoxWithImage = () => {
-    const [{ opacity }, drag, preview] = useDrag({
+    const [{ opacity }, drag, preview] = useDrag(() => ({
         item: { type: ItemTypes.BOX },
         collect: (monitor) => ({
             opacity: monitor.isDragging() ? 0.4 : 1,
         }),
-    });
+    }));
     return (<>
 			<DragPreviewImage connect={preview} src={boxImage}/>
 			<div ref={drag} style={{ ...style, opacity }}>

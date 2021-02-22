@@ -9,7 +9,7 @@ const style = {
 };
 export const TargetBox = (props) => {
     const { onDrop } = props;
-    const [{ canDrop, isOver }, drop] = useDrop({
+    const [{ canDrop, isOver }, drop] = useDrop(() => ({
         accept: [NativeTypes.FILE],
         drop(item, monitor) {
             if (onDrop) {
@@ -20,7 +20,7 @@ export const TargetBox = (props) => {
             isOver: monitor.isOver(),
             canDrop: monitor.canDrop(),
         }),
-    });
+    }), [props]);
     const isActive = canDrop && isOver;
     return (<div ref={drop} style={style}>
 			{isActive ? 'Release to drop' : 'Drag file here'}

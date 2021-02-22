@@ -8,16 +8,16 @@ const style = {
 };
 export const SourceBox = ({ color, children }) => {
     const [forbidDrag, setForbidDrag] = useState(false);
-    const [{ isDragging }, drag] = useDrag({
+    const [{ isDragging }, drag] = useDrag(() => ({
         item: { type: `${color}` },
         canDrag: !forbidDrag,
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-    });
+    }), [forbidDrag, color]);
     const onToggleForbidDrag = useCallback(() => {
         setForbidDrag(!forbidDrag);
-    }, [forbidDrag]);
+    }, [forbidDrag, setForbidDrag]);
     const backgroundColor = useMemo(() => {
         switch (color) {
             case Colors.YELLOW:

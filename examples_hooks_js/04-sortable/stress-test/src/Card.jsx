@@ -10,7 +10,7 @@ const style = {
 };
 export const Card = memo(({ id, text, moveCard }) => {
     const ref = useRef(null);
-    const [{ isDragging }, connectDrag] = useDrag({
+    const [{ isDragging }, connectDrag] = useDrag(() => ({
         item: { id, type: ItemTypes.CARD },
         collect: (monitor) => {
             const result = {
@@ -18,15 +18,15 @@ export const Card = memo(({ id, text, moveCard }) => {
             };
             return result;
         },
-    });
-    const [, connectDrop] = useDrop({
+    }));
+    const [, connectDrop] = useDrop(() => ({
         accept: ItemTypes.CARD,
         hover({ id: draggedId }) {
             if (draggedId !== id) {
                 moveCard(draggedId, id);
             }
         },
-    });
+    }), [id, moveCard]);
     connectDrag(ref);
     connectDrop(ref);
     const opacity = isDragging ? 0 : 1;
