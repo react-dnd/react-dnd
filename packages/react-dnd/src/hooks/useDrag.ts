@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { invariant } from '@react-dnd/invariant'
-import { DragDropMonitor, DragSource } from 'dnd-core'
+import { DragDropMonitor, DragSource, Identifier } from 'dnd-core'
 import {
 	ConnectDragSource,
 	ConnectDragPreview,
@@ -11,6 +11,7 @@ import {
 	registerSource,
 	DragSourceMonitorImpl,
 	SourceConnector,
+	Connector,
 } from '../internals'
 import { useMonitorOutput } from './useMonitorOutput'
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
@@ -73,54 +74,13 @@ function useDragSourceMonitor(): [DragSourceMonitor, SourceConnector] {
 	return [monitor, connector]
 }
 
-function useDragHandler<
-	DragObject extends DragObjectWithType,
-	DropResult,
-	CustomProps
->(
-	spec: DragSourceHookSpec<DragObject, DropResult, CustomProps>,
+function useDragHandler<O extends DragObjectWithType, R, P>(
+	spec: DragSourceHookSpec<O, R, P>,
 	monitor: DragSourceMonitor,
 	connector: any,
 ) {
 	const manager = useDragDropManager()
-	const handler = useMemo(() => {
-		return {
-			beginDrag() {
-				const { begin, item } = spec
-				if (begin) {
-					const beginResult = begin(monitor)
-					invariant(
-						beginResult == null || typeof beginResult === 'object',
-						'dragSpec.begin() must either return an object, undefined, or null',
-					)
-					return beginResult || item || {}
-				}
-				return item || {}
-			},
-			canDrag() {
-				if (typeof spec.canDrag === 'boolean') {
-					return spec.canDrag
-				} else if (typeof spec.canDrag === 'function') {
-					return spec.canDrag(monitor)
-				} else {
-					return true
-				}
-			},
-			isDragging(globalMonitor: DragDropMonitor, target) {
-				const { isDragging } = spec
-				return isDragging
-					? isDragging(monitor)
-					: target === globalMonitor.getSourceId()
-			},
-			endDrag() {
-				const { end } = spec
-				if (end) {
-					end(monitor.getItem(), monitor)
-				}
-				connector.reconnect()
-			},
-		} as DragSource
-	}, [monitor, connector, spec])
+	const handler = useDragSource(spec, monitor, connector)
 
 	useIsomorphicLayoutEffect(
 		function registerHandler() {
@@ -135,4 +95,74 @@ function useDragHandler<
 		},
 		[manager, monitor, connector, handler],
 	)
+}
+
+function useDragSource<O extends DragObjectWithType, R, P>(
+	spec: DragSourceHookSpec<O, R, P>,
+	monitor: DragSourceMonitor,
+	connector: any,
+) {
+	const handler = useMemo(() => new DragSourceImpl(spec, monitor, connector), [
+		monitor,
+		connector,
+	])
+	useEffect(() => {
+		handler.spec = spec
+	}, [spec])
+	return handler
+}
+
+class DragSourceImpl<O extends DragObjectWithType, R, P> implements DragSource {
+	public constructor(
+		public spec: DragSourceHookSpec<O, R, P>,
+		private monitor: DragSourceMonitor,
+		private connector: Connector,
+	) {}
+
+	public beginDrag() {
+		const spec = this.spec
+		const monitor = this.monitor
+		const { begin, item } = spec
+		if (begin) {
+			const beginResult = begin(monitor)
+			invariant(
+				beginResult == null || typeof beginResult === 'object',
+				'dragSpec.begin() must either return an object, undefined, or null',
+			)
+			return beginResult || item || {}
+		}
+		return item || {}
+	}
+
+	public canDrag() {
+		const spec = this.spec
+		const monitor = this.monitor
+		if (typeof spec.canDrag === 'boolean') {
+			return spec.canDrag
+		} else if (typeof spec.canDrag === 'function') {
+			return spec.canDrag(monitor)
+		} else {
+			return true
+		}
+	}
+
+	public isDragging(globalMonitor: DragDropMonitor, target: Identifier) {
+		const spec = this.spec
+		const monitor = this.monitor
+		const { isDragging } = spec
+		return isDragging
+			? isDragging(monitor)
+			: target === globalMonitor.getSourceId()
+	}
+
+	public endDrag() {
+		const spec = this.spec
+		const monitor = this.monitor
+		const connector = this.connector
+		const { end } = spec
+		if (end) {
+			end(monitor.getItem(), monitor)
+		}
+		connector.reconnect()
+	}
 }

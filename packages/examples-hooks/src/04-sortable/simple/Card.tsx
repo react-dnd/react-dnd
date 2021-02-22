@@ -25,9 +25,14 @@ interface DragItem {
 }
 export const Card: FC<CardProps> = ({ id, text, index, moveCard }) => {
 	const ref = useRef<HTMLDivElement>(null)
-	const [, drop] = useDrop(
+	const [{ handlerId }, drop] = useDrop(
 		() => ({
 			accept: ItemTypes.CARD,
+			collect(monitor) {
+				return {
+					handlerId: monitor.getHandlerId(),
+				}
+			},
 			hover(item: DragItem, monitor: DropTargetMonitor) {
 				if (!ref.current) {
 					return
@@ -93,7 +98,7 @@ export const Card: FC<CardProps> = ({ id, text, index, moveCard }) => {
 	const opacity = isDragging ? 0 : 1
 	drag(drop(ref))
 	return (
-		<div ref={ref} style={{ ...style, opacity }}>
+		<div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
 			{text}
 		</div>
 	)

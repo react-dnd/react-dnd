@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { DropTarget } from 'dnd-core'
 import { ConnectDropTarget, DropTargetMonitor } from '../types'
@@ -61,48 +61,64 @@ function useDropTargetMonitor(): [DropTargetMonitor, TargetConnector] {
 	return [monitor, connector]
 }
 
-function useDropHandler<
-	DragObject extends DragObjectWithType,
-	DropResult,
-	CustomProps
->(
-	spec: DropTargetHookSpec<DragObject, DropResult, CustomProps>,
+function useDropHandler<O extends DragObjectWithType, R, P>(
+	spec: DropTargetHookSpec<O, R, P>,
 	monitor: DropTargetMonitor,
 	connector: any,
 ) {
 	const manager = useDragDropManager()
-	const handler = useMemo(() => {
-		return {
-			canDrop() {
-				const { canDrop } = spec
-				return canDrop ? canDrop(monitor.getItem(), monitor) : true
-			},
-			hover() {
-				const { hover } = spec
-				if (hover) {
-					hover(monitor.getItem(), monitor)
-				}
-			},
-			drop() {
-				const { drop } = spec
-				if (drop) {
-					return drop(monitor.getItem(), monitor)
-				}
-			},
-		} as DropTarget
-	}, [monitor, spec])
+	const dropTarget = useDropTarget(spec, monitor)
 
 	useIsomorphicLayoutEffect(
 		function registerHandler() {
 			const [handlerId, unregister] = registerTarget(
 				spec.accept,
-				handler,
+				dropTarget,
 				manager,
 			)
 			monitor.receiveHandlerId(handlerId)
 			connector.receiveHandlerId(handlerId)
 			return unregister
 		},
-		[manager, monitor, handler, connector],
+		[manager, monitor, dropTarget, connector],
 	)
+}
+
+function useDropTarget<O extends DragObjectWithType, R, P>(
+	spec: DropTargetHookSpec<O, R, P>,
+	monitor: DropTargetMonitor,
+) {
+	const dropTarget = useMemo(() => new DropTargetImpl(spec, monitor), [monitor])
+	useEffect(() => {
+		dropTarget.spec = spec
+	}, [spec])
+	return dropTarget
+}
+
+class DropTargetImpl<O extends DragObjectWithType, R, P> implements DropTarget {
+	public constructor(
+		public spec: DropTargetHookSpec<O, R, P>,
+		private monitor: DropTargetMonitor,
+	) {}
+
+	public canDrop() {
+		const spec = this.spec
+		const monitor = this.monitor
+		return spec.canDrop ? spec.canDrop(monitor.getItem(), monitor) : true
+	}
+	public hover() {
+		const spec = this.spec
+		const monitor = this.monitor
+		if (spec.hover) {
+			spec.hover(monitor.getItem(), monitor)
+		}
+	}
+
+	public drop() {
+		const spec = this.spec
+		const monitor = this.monitor
+		if (spec.drop) {
+			return spec.drop(monitor.getItem(), monitor)
+		}
+	}
 }

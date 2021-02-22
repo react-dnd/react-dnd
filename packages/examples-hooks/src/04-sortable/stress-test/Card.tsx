@@ -18,10 +18,11 @@ export interface CardProps {
 
 export const Card: FC<CardProps> = memo(({ id, text, moveCard }) => {
 	const ref = useRef(null)
-	const [{ isDragging }, connectDrag] = useDrag(() => ({
+	const [{ isDragging, handlerId }, connectDrag] = useDrag(() => ({
 		item: { id, type: ItemTypes.CARD },
-		collect: (monitor: any) => {
+		collect: (monitor) => {
 			const result = {
+				handlerId: monitor.getHandlerId(),
 				isDragging: monitor.isDragging(),
 			}
 			return result
@@ -45,7 +46,7 @@ export const Card: FC<CardProps> = memo(({ id, text, moveCard }) => {
 	const opacity = isDragging ? 0 : 1
 	const containerStyle = useMemo(() => ({ ...style, opacity }), [opacity])
 	return (
-		<div ref={ref} style={containerStyle}>
+		<div ref={ref} style={containerStyle} data-handler-id={handlerId}>
 			{text}
 		</div>
 	)
