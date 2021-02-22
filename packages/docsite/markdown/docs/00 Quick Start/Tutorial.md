@@ -486,7 +486,7 @@ function Knight() {
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
-  }), [])
+  }))
 
   return (
     <div
