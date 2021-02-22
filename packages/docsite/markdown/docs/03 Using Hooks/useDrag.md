@@ -9,7 +9,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # useDrag
 
-The `useDrag`hook provides a way to wire your component into the DnD system as a _drag source_. By passing in a specification object into `useDrag`, you declaratively describe the data `item` that will be passed to the DnD system, describe what props to `collect`, and more. The `useDrag` hooks returns a few key items: a set of collected props, and refs that may be attached to _drag source_ and _drag preview_ elements
+The `useDrag`hook provides a way to wire your component into the DnD system as a _drag source_. By passing in a specification into `useDrag`, you declaratively describe the data `item` that will be passed to the DnD system, describe what props to `collect`, and more. The `useDrag` hooks returns a few key items: a set of collected props, and refs that may be attached to _drag source_ and _drag preview_ elements
 
 ```jsx
 import { useDrag } from 'react-dnd'
@@ -29,7 +29,7 @@ function DraggableComponent(props) {
 
 #### Parameters
 
-- **`spec`** A function that creates a specification object (recommended), or a specification object. See below for details on how to construct this
+- **`spec`** A function that creates a specification object. See below for details on how to construct this
 - **`deps`** A dependency array used for memoization. This behaves like the built-in `useMemo` React hook. The default value is an empty array for function spec, and an array containing the spec for an object spec.
 
 #### Return Value Array

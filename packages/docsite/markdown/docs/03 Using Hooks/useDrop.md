@@ -9,7 +9,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # useDrop
 
-The `useDrop` hook provides a way for you to wire in your component into the DnD system as a _drop target_. By passing in a specification object into the `useDrop` hook, you can specify including what types of data items the drop-target will `accept`, what props to `collect`, and more. This function returns an array containing a ref to attach to the Drop Target node and the collected props.
+The `useDrop` hook provides a way for you to wire in your component into the DnD system as a _drop target_. By passing in a specification into the `useDrop` hook, you can specify including what types of data items the drop-target will `accept`, what props to `collect`, and more. This function returns an array containing a ref to attach to the Drop Target node and the collected props.
 
 ```jsx
 import { useDrop } from 'react-dnd'
@@ -25,7 +25,7 @@ function myDropTarget(props) {
 
 #### Parameters
 
-- **`spec`** A function that creates a specification object (recommended), or a specification object. See below for details on how to construct this
+- **`spec`** A function that creates a specification object. See below for details on how to construct this
 - **`deps`** A dependency array used for memoization. This behaves like the built-in `useMemo` React hook. The default value is an empty array for function spec, and an array containing the spec for an object spec.
 
 #### Return Value Array
