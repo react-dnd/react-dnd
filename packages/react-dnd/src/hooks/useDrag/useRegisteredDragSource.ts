@@ -1,4 +1,4 @@
-import { DragSourceMonitor } from 'src/types'
+import { DragSourceMonitor } from '../../types'
 import { registerSource, SourceConnector } from '../../internals'
 import { DragObjectWithType, DragSourceHookSpec } from '../types'
 import { useDragDropManager } from '../useDragDropManager'
