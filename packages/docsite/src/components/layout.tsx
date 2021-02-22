@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 declare const require: any
 
-import { FC, memo } from 'react'
+import { FC, memo, useMemo, useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -43,6 +43,9 @@ export const Layout: FC<LayoutProps> = memo(function Layout(props) {
 	const hideSidebar = props.hideSidebar || sitepath === '/about'
 	const debugMode = isDebugMode()
 	const touchBackend = isTouchBackend()
+	const [dndArea, setDndArea] = useState<HTMLDivElement | null>(null)
+	const html5Options = useMemo(() => ({ rootElement: dndArea }), [dndArea])
+
 	return (
 		<>
 			<Helmet title="React DnD" meta={HEADER_META} link={HEADER_LINK}>
@@ -53,25 +56,30 @@ export const Layout: FC<LayoutProps> = memo(function Layout(props) {
 				/>
 			</Helmet>
 			<Header debugMode={debugMode} touchBackend={touchBackend} />
-			<DndProvider
-				backend={touchBackend ? TouchBackend : HTML5Backend}
-				options={touchBackend ? touchBackendOptions : undefined}
-				debugMode={debugMode}
-			>
-				<ContentContainer>
-					<PageBody hasSidebar={sitepath !== '/about'}>
-						{hideSidebar ? null : (
-							<SidebarContainer>
-								<Sidebar
-									groups={sidebarItems}
-									location={location ? location.pathname : '/'}
-								/>
-							</SidebarContainer>
+
+			<ContentContainer>
+				<PageBody hasSidebar={sitepath !== '/about'}>
+					{hideSidebar ? null : (
+						<SidebarContainer>
+							<Sidebar
+								groups={sidebarItems}
+								location={location ? location.pathname : '/'}
+							/>
+						</SidebarContainer>
+					)}
+					<ChildrenContainer ref={useCallback((node) => setDndArea(node), [])}>
+						{dndArea == null ? null : (
+							<DndProvider
+								backend={touchBackend ? TouchBackend : HTML5Backend}
+								options={touchBackend ? touchBackendOptions : html5Options}
+								debugMode={debugMode}
+							>
+								{children}
+							</DndProvider>
 						)}
-						<ChildrenContainer>{children}</ChildrenContainer>
-					</PageBody>
-				</ContentContainer>
-			</DndProvider>
+					</ChildrenContainer>
+				</PageBody>
+			</ContentContainer>
 		</>
 	)
 })
