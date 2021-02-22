@@ -1,8 +1,11 @@
 releases:
-  react-dnd: patch
+  dnd-core: patch
+  react-dnd: major
   react-dnd-html5-backend: minor
 
 declined:
+  - react-dnd-test-backend
+  - react-dnd-touch-backend
   - react-dnd-documentation
   - react-dnd-examples-decorators
   - react-dnd-examples-hooks

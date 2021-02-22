@@ -24,12 +24,15 @@ export const Box: FC<BoxProps> = ({
 	hideSourceOnDrag,
 	children,
 }) => {
-	const [{ isDragging }, drag] = useDrag({
-		item: { id, left, top, type: ItemTypes.BOX },
-		collect: (monitor) => ({
-			isDragging: monitor.isDragging(),
+	const [{ isDragging }, drag] = useDrag(
+		() => ({
+			item: { id, left, top, type: ItemTypes.BOX },
+			collect: (monitor) => ({
+				isDragging: monitor.isDragging(),
+			}),
 		}),
-	})
+		[id, left, top],
+	)
 
 	if (isDragging && hideSourceOnDrag) {
 		return <div ref={drag} />

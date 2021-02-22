@@ -1,5 +1,5 @@
 import { CSSProperties, FC, useState, useCallback } from 'react'
-import { useDrop } from 'react-dnd'
+import { useDrop, DropTargetMonitor } from 'react-dnd'
 import { Colors } from './Colors'
 import { DragItem } from './interfaces'
 
@@ -17,18 +17,21 @@ export interface TargetBoxProps {
 }
 
 const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
-	const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
-		accept: [Colors.YELLOW, Colors.BLUE],
-		drop(item: DragItem) {
-			onDrop(item.type)
-			return undefined
-		},
-		collect: (monitor) => ({
-			isOver: monitor.isOver(),
-			canDrop: monitor.canDrop(),
-			draggingColor: monitor.getItemType() as string,
+	const [{ isOver, draggingColor, canDrop }, drop] = useDrop(
+		() => ({
+			accept: [Colors.YELLOW, Colors.BLUE],
+			drop(item: DragItem) {
+				onDrop(item.type)
+				return undefined
+			},
+			collect: (monitor: DropTargetMonitor) => ({
+				isOver: monitor.isOver(),
+				canDrop: monitor.canDrop(),
+				draggingColor: monitor.getItemType() as string,
+			}),
 		}),
-	})
+		[onDrop],
+	)
 
 	const opacity = isOver ? 1 : 0.7
 	let backgroundColor = '#fff'

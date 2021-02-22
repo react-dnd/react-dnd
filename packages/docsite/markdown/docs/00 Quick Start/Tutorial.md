@@ -454,15 +454,15 @@ The preparation work is done now. Let's make the `Knight` draggable!
 
 ## Make the Knight Draggable
 
-The [`useDrag`](/docs/api/use-drag) hook accepts a specification object. In this object, `item.type` is set to the constant we just defined, so now we need to write a collecting function.
+The [`useDrag`](/docs/api/use-drag) hook accepts a memoization function that returns a specification object. In this object, `item.type` is set to the constant we just defined, so now we need to write a collecting function.
 
 ```jsx
-const [{ isDragging }, drag] = useDrag({
+const [{ isDragging }, drag] = useDrag(() => ({
   item: { type: ItemTypes.KNIGHT },
   collect: (monitor) => ({
     isDragging: !!monitor.isDragging()
   })
-})
+}))
 ```
 
 Let's break this down:
@@ -481,12 +481,12 @@ import { ItemTypes } from './Constants'
 import { useDrag } from 'react-dnd'
 
 function Knight() {
-  const [{isDragging}, drag] = useDrag({
+  const [{isDragging}, drag] = useDrag(() => ({
     item: { type: ItemTypes.KNIGHT },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
-  })
+  }), [])
 
   return (
     <div
@@ -556,10 +556,13 @@ function renderPiece(x, y, [knightX, knightY]) {
 Let's now wrap the `BoardSquare` with a [`useDrop`](/docs/api/use-drop) hook. I'm going to write a drop target specification that only handles the `drop` event:
 
 ```jsx
-const [, drop] = useDrop({
-  accept: ItemTypes.KNIGHT,
-  drop: () => moveKnight(x, y)
-})
+const [, drop] = useDrop(
+  () => ({
+    accept: ItemTypes.KNIGHT,
+    drop: () => moveKnight(x, y)
+  }),
+  [x, y]
+)
 ```
 
 See? The `drop` method has the `props` of the `BoardSquare` in scope, so it knows _where_ to move the knight when it drops. In a real app, I might also use `monitor.getItem()` to retrieve _the dragged item_ that the drag source returned from `beginDrag`, but since we only have a single draggable thing in the whole application, I don't need it.
@@ -567,13 +570,16 @@ See? The `drop` method has the `props` of the `BoardSquare` in scope, so it know
 In my collecting function I'm going to ask the monitor whether the pointer is currently over the `BoardSquare` so I can highlight it:
 
 ```jsx
-const [{ isOver }, drop] = useDrop({
-  accept: ItemTypes.KNIGHT,
-  drop: () => moveKnight(x, y),
-  collect: (monitor) => ({
-    isOver: !!monitor.isOver()
-  })
-})
+const [{ isOver }, drop] = useDrop(
+  () => ({
+    accept: ItemTypes.KNIGHT,
+    drop: () => moveKnight(x, y),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver()
+    })
+  }),
+  [x, y]
+)
 ```
 
 After changing the `render` function to connect the drop target and show the highlight overlay, here is what `BoardSquare` came to be:
@@ -587,13 +593,13 @@ import { useDrop } from 'react-dnd'
 
 function BoardSquare({ x, y, children }) {
   const black = (x + y) % 2 === 1
-  const [{ isOver }, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.KNIGHT,
     drop: () => moveKnight(x, y),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
     }),
-  })
+  }), [x, y])
 
   return (
     <div
@@ -633,15 +639,18 @@ This is starting to look good! There is just one change left to complete this tu
 Thankfully, it is really easy to do with React DnD. I just need to define a `canDrop` method in my drop target specification:
 
 ```jsx
-const [{ isOver, canDrop }, drop] = useDrop({
-  accept: ItemTypes.KNIGHT,
-  canDrop: () => canMoveKnight(x, y),
-  drop: () => moveKnight(x, y),
-  collect: (monitor) => ({
-    isOver: !!monitor.isOver(),
-    canDrop: !!monitor.canDrop()
-  })
-})
+const [{ isOver, canDrop }, drop] = useDrop(
+  () => ({
+    accept: ItemTypes.KNIGHT,
+    canDrop: () => canMoveKnight(x, y),
+    drop: () => moveKnight(x, y),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+      canDrop: !!monitor.canDrop()
+    })
+  }),
+  [x, y]
+)
 ```
 
 I'm also adding `monitor.canDrop()` to my collecting function, as well as some overlay rendering code to the component:
@@ -655,15 +664,18 @@ import { useDrop } from 'react-dnd'
 
 function BoardSquare({ x, y, children }) {
   const black = (x + y) % 2 === 1
-  const [{ isOver, canDrop }, drop] = useDrop({
-    accept: ItemTypes.KNIGHT,
-    drop: () => moveKnight(x, y),
-    canDrop: () => canMoveKnight(x, y),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-      canDrop: !!monitor.canDrop()
-    })
-  })
+  const [{ isOver, canDrop }, drop] = useDrop(
+    () => ({
+      accept: ItemTypes.KNIGHT,
+      drop: () => moveKnight(x, y),
+      canDrop: () => canMoveKnight(x, y),
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+        canDrop: !!monitor.canDrop()
+      })
+    }),
+    [x, y]
+  )
 
   return (
     <div
@@ -694,12 +706,12 @@ The last thing I want to demonstrate is drag preview customization. Sure, the br
 We are lucky again, because it is easy to do with React DnD. We just need to use the preview ref provided by the `useDrag` hook.
 
 ```jsx
-const [{ isDragging }, drag, preview] = useDrag({
+const [{ isDragging }, drag, preview] = useDrag(() => ({
   item: { type: ItemTypes.KNIGHT },
   collect: (monitor) => ({
     isDragging: !!monitor.isDragging()
   })
-})
+}))
 ```
 
 This lets us connect up a `dragPreview` in `render` method, just like we used for drag items. `react-dnd` also provides a utility component, `DragPreviewImage`, which presents an image as a drag preview using this ref.
