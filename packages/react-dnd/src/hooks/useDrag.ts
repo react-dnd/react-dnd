@@ -29,6 +29,10 @@ export function useDrag<
 	specFn: () => DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
 	deps?: unknown[],
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
+	invariant(
+		typeof specFn === 'function',
+		'useDrag expects a function that returns a spec object',
+	)
 	const spec = useMemo(specFn, deps || [])
 	// TODO: wire options into createSourceConnector
 	invariant(spec.item != null, 'item must be defined')

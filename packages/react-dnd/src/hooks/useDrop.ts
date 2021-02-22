@@ -25,6 +25,10 @@ export function useDrop<
 	specFn: () => DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
 	deps?: unknown[],
 ): [CollectedProps, ConnectDropTarget] {
+	invariant(
+		typeof specFn === 'function',
+		'useDrop expects a function that returns a spec object',
+	)
 	const spec = useMemo(specFn, deps || [])
 	invariant(spec.accept != null, 'accept must be defined')
 
