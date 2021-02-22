@@ -2,9 +2,14 @@ import { useMemo } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { ConnectDropTarget } from '../../types'
 import { useMonitorOutput } from '../useMonitorOutput'
-import { DropTargetHookSpec, DragObjectWithType } from '../types'
+import {
+	DropTargetHookSpec,
+	DragObjectWithType,
+	FactoryOrInstance,
+} from '../types'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useRegisteredDropTarget } from './useRegisteredDropTarget'
+import { useOptionalFactory } from '../useOptionalFactory'
 
 /**
  * useDropTarget Hook
@@ -16,14 +21,12 @@ export function useDrop<
 	DropResult,
 	CollectedProps
 >(
-	specFn: () => DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
+	specArg: FactoryOrInstance<
+		DropTargetHookSpec<DragObject, DropResult, CollectedProps>
+	>,
 	deps?: unknown[],
 ): [CollectedProps, ConnectDropTarget] {
-	invariant(
-		typeof specFn === 'function',
-		'useDrop expects a function that returns a spec object',
-	)
-	const spec = useMemo(specFn, deps || [])
+	const spec = useOptionalFactory(specArg, deps)
 	invariant(spec.accept != null, 'accept must be defined')
 
 	const [monitor, connector] = useRegisteredDropTarget(spec)
