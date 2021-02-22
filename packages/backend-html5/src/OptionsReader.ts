@@ -1,11 +1,16 @@
-import { HTML5BackendContext } from './types'
+import { HTML5BackendContext, HTML5BackendOptions } from './types'
 
 export class OptionsReader {
 	public ownerDocument: Document | null = null
 	private globalContext: HTML5BackendContext
+	private optionsArgs?: HTML5BackendOptions
 
-	public constructor(globalContext: HTML5BackendContext) {
+	public constructor(
+		globalContext: HTML5BackendContext,
+		options?: HTML5BackendOptions,
+	) {
 		this.globalContext = globalContext
+		this.optionsArgs = options
 	}
 
 	public get window(): Window | undefined {
@@ -25,5 +30,9 @@ export class OptionsReader {
 		} else {
 			return undefined
 		}
+	}
+
+	public get rootElement(): Node | undefined {
+		return this.optionsArgs?.rootElement || this.window
 	}
 }
