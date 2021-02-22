@@ -69,10 +69,13 @@ function useDropHandler<O extends DragObjectWithType, R, P>(
 	const manager = useDragDropManager()
 	const dropTarget = useDropTarget(spec, monitor)
 
+	// Reconnect on accept change
+	const accept = useAccept(spec)
+
 	useIsomorphicLayoutEffect(
 		function registerHandler() {
 			const [handlerId, unregister] = registerTarget(
-				spec.accept,
+				accept,
 				dropTarget,
 				manager,
 			)
@@ -80,7 +83,17 @@ function useDropHandler<O extends DragObjectWithType, R, P>(
 			connector.receiveHandlerId(handlerId)
 			return unregister
 		},
-		[manager, monitor, dropTarget, connector],
+		[manager, monitor, dropTarget, connector, ...accept],
+	)
+}
+
+function useAccept<O extends DragObjectWithType, R, P>(
+	spec: DropTargetHookSpec<O, R, P>,
+) {
+	const specAccept = spec.accept
+	return useMemo(
+		() => (Array.isArray(specAccept) ? specAccept : [specAccept]),
+		[specAccept],
 	)
 }
 
