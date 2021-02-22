@@ -16,15 +16,18 @@ export interface SourceBoxProps {
 }
 
 export const SourceBox: FC<SourceBoxProps> = ({ showCopyIcon }) => {
-	const [{ opacity }, drag] = useDrag({
-		item: { type: ItemTypes.BOX },
-		options: {
-			dropEffect: showCopyIcon ? 'copy' : 'move',
-		},
-		collect: (monitor) => ({
-			opacity: monitor.isDragging() ? 0.4 : 1,
+	const [{ opacity }, drag] = useDrag(
+		() => ({
+			item: { type: ItemTypes.BOX },
+			options: {
+				dropEffect: showCopyIcon ? 'copy' : 'move',
+			},
+			collect: (monitor) => ({
+				opacity: monitor.isDragging() ? 0.4 : 1,
+			}),
 		}),
-	})
+		[showCopyIcon],
+	)
 
 	return (
 		<div ref={drag} style={{ ...style, opacity }}>

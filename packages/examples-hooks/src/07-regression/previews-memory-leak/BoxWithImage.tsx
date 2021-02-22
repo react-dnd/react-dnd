@@ -12,12 +12,12 @@ const style: CSSProperties = {
 	width: '20rem',
 }
 export const BoxWithImage: FC = () => {
-	const [{ opacity }, drag, preview] = useDrag({
+	const [{ opacity }, drag, preview] = useDrag(() => ({
 		item: { type: ItemTypes.BOX },
 		collect: (monitor) => ({
 			opacity: monitor.isDragging() ? 0.4 : 1,
 		}),
-	})
+	}))
 	return (
 		<>
 			<DragPreviewImage connect={preview} src={boxImage} />

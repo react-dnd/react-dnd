@@ -65,7 +65,7 @@ export const Container: FC = () => {
 		}
 	}
 
-	const [, drop] = useDrop({ accept: ItemTypes.CARD })
+	const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }))
 	return (
 		<>
 			<div ref={drop} style={style}>

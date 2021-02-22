@@ -1,4 +1,4 @@
-import { useRef, useMemo, MutableRefObject } from 'react'
+import { useMemo } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { DropTarget } from 'dnd-core'
 import { ConnectDropTarget, DropTargetMonitor } from '../types'
@@ -14,25 +14,26 @@ import { useDragDropManager } from './useDragDropManager'
 
 /**
  * useDropTarget Hook
- * @param spec The drop target specification
+ * @param spec The drop target specification (object or function, function preferred)
+ * @param deps The memoization deps array to use when evaluating spec changes
  */
 export function useDrop<
 	DragObject extends DragObjectWithType,
 	DropResult,
 	CollectedProps
 >(
-	spec: DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
+	specFn: () => DropTargetHookSpec<DragObject, DropResult, CollectedProps>,
+	deps?: unknown[],
 ): [CollectedProps, ConnectDropTarget] {
-	const specRef = useRef(spec)
-	specRef.current = spec
+	const spec = useMemo(specFn, deps || [])
 	invariant(spec.accept != null, 'accept must be defined')
 
 	const [monitor, connector] = useDropTargetMonitor()
-	useDropHandler(specRef, monitor, connector)
+	useDropHandler(spec, monitor, connector)
 
 	const result: CollectedProps = useMonitorOutput(
 		monitor,
-		specRef.current.collect || (() => ({} as CollectedProps)),
+		spec.collect || (() => ({} as CollectedProps)),
 		() => connector.reconnect(),
 	)
 
@@ -61,9 +62,7 @@ function useDropHandler<
 	DropResult,
 	CustomProps
 >(
-	spec: MutableRefObject<
-		DropTargetHookSpec<DragObject, DropResult, CustomProps>
-	>,
+	spec: DropTargetHookSpec<DragObject, DropResult, CustomProps>,
 	monitor: DropTargetMonitor,
 	connector: any,
 ) {
@@ -71,36 +70,28 @@ function useDropHandler<
 	const handler = useMemo(() => {
 		return {
 			canDrop() {
-				const { canDrop } = spec.current
+				const { canDrop } = spec
 				return canDrop ? canDrop(monitor.getItem(), monitor) : true
 			},
 			hover() {
-				const { hover } = spec.current
+				const { hover } = spec
 				if (hover) {
 					hover(monitor.getItem(), monitor)
 				}
 			},
 			drop() {
-				const { drop } = spec.current
+				const { drop } = spec
 				if (drop) {
 					return drop(monitor.getItem(), monitor)
 				}
 			},
 		} as DropTarget
-	}, [monitor])
+	}, [monitor, spec])
 
-	/**
-	 * If we pass in spec.current.accept directly, the React hook will
-	 * re-fire when the array-instance changes. Instead, we pass the
-	 * accept items directly into the deps if it's an array
-	 */
-	const specDeps = Array.isArray(spec.current?.accept)
-		? spec.current?.accept
-		: [spec.current.accept]
 	useIsomorphicLayoutEffect(
 		function registerHandler() {
 			const [handlerId, unregister] = registerTarget(
-				spec.current.accept,
+				spec.accept,
 				handler,
 				manager,
 			)
@@ -108,6 +99,6 @@ function useDropHandler<
 			connector.receiveHandlerId(handlerId)
 			return unregister
 		},
-		[monitor, connector, ...specDeps],
+		[manager, monitor, handler, connector],
 	)
 }

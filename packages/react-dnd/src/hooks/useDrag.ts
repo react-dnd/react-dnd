@@ -1,4 +1,4 @@
-import { useRef, useMemo, MutableRefObject } from 'react'
+import { useMemo } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { DragDropMonitor, DragSource } from 'dnd-core'
 import {
@@ -18,28 +18,28 @@ import { useDragDropManager } from './useDragDropManager'
 
 /**
  * useDragSource hook
- * @param sourceSpec The drag source specification *
+ * @param sourceSpec The drag source specification (object or function, function preferred)
+ * @param deps The memoization deps array to use when evaluating spec changes
  */
 export function useDrag<
 	DragObject extends DragObjectWithType,
 	DropResult,
 	CollectedProps
 >(
-	spec: DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
+	specFn: () => DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
+	deps?: unknown[],
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
-	const specRef = useRef(spec)
-	specRef.current = spec
-
+	const spec = useMemo(specFn, deps || [])
 	// TODO: wire options into createSourceConnector
 	invariant(spec.item != null, 'item must be defined')
 	invariant(spec.item.type != null, 'item type must be defined')
 
 	const [monitor, connector] = useDragSourceMonitor()
-	useDragHandler(specRef, monitor, connector)
+	useDragHandler(spec, monitor, connector)
 
 	const result: CollectedProps = useMonitorOutput(
 		monitor,
-		specRef.current.collect || (() => ({} as CollectedProps)),
+		spec.collect || (() => ({} as CollectedProps)),
 		() => connector.reconnect(),
 	)
 
@@ -50,13 +50,13 @@ export function useDrag<
 		connector,
 	])
 	useIsomorphicLayoutEffect(() => {
-		connector.dragSourceOptions = specRef.current.options || null
+		connector.dragSourceOptions = spec.options || null
 		connector.reconnect()
-	}, [connector])
+	}, [connector, spec.options])
 	useIsomorphicLayoutEffect(() => {
-		connector.dragPreviewOptions = specRef.current.previewOptions || null
+		connector.dragPreviewOptions = spec.previewOptions || null
 		connector.reconnect()
-	}, [connector])
+	}, [connector, spec.previewOptions])
 	return [result, connectDragSource, connectDragPreview]
 }
 
@@ -74,9 +74,7 @@ function useDragHandler<
 	DropResult,
 	CustomProps
 >(
-	spec: MutableRefObject<
-		DragSourceHookSpec<DragObject, DropResult, CustomProps>
-	>,
+	spec: DragSourceHookSpec<DragObject, DropResult, CustomProps>,
 	monitor: DragSourceMonitor,
 	connector: any,
 ) {
@@ -84,7 +82,7 @@ function useDragHandler<
 	const handler = useMemo(() => {
 		return {
 			beginDrag() {
-				const { begin, item } = spec.current
+				const { begin, item } = spec
 				if (begin) {
 					const beginResult = begin(monitor)
 					invariant(
@@ -96,38 +94,41 @@ function useDragHandler<
 				return item || {}
 			},
 			canDrag() {
-				if (typeof spec.current.canDrag === 'boolean') {
-					return spec.current.canDrag
-				} else if (typeof spec.current.canDrag === 'function') {
-					return spec.current.canDrag(monitor)
+				if (typeof spec.canDrag === 'boolean') {
+					return spec.canDrag
+				} else if (typeof spec.canDrag === 'function') {
+					return spec.canDrag(monitor)
 				} else {
 					return true
 				}
 			},
 			isDragging(globalMonitor: DragDropMonitor, target) {
-				const { isDragging } = spec.current
+				const { isDragging } = spec
 				return isDragging
 					? isDragging(monitor)
 					: target === globalMonitor.getSourceId()
 			},
 			endDrag() {
-				const { end } = spec.current
+				const { end } = spec
 				if (end) {
 					end(monitor.getItem(), monitor)
 				}
 				connector.reconnect()
 			},
 		} as DragSource
-	}, [])
+	}, [monitor, connector, spec])
 
-	useIsomorphicLayoutEffect(function registerHandler() {
-		const [handlerId, unregister] = registerSource(
-			spec.current.item.type,
-			handler,
-			manager,
-		)
-		monitor.receiveHandlerId(handlerId)
-		connector.receiveHandlerId(handlerId)
-		return unregister
-	}, [])
+	useIsomorphicLayoutEffect(
+		function registerHandler() {
+			const [handlerId, unregister] = registerSource(
+				spec.item.type,
+				handler,
+				manager,
+			)
+			monitor.receiveHandlerId(handlerId)
+			connector.receiveHandlerId(handlerId)
+			return unregister
+		},
+		[manager, monitor, connector, handler],
+	)
 }
