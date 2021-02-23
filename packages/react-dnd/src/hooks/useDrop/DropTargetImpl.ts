@@ -14,6 +14,7 @@ export class DropTargetImpl<O extends DragObjectWithType, R, P>
 		const monitor = this.monitor
 		return spec.canDrop ? spec.canDrop(monitor.getItem(), monitor) : true
 	}
+
 	public hover() {
 		const spec = this.spec
 		const monitor = this.monitor
