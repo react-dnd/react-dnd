@@ -14,7 +14,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "^4.0.2",
-    "react-dnd": "13.0.1",
+    "react-dnd": "13.1.0",
     "react-dnd-html5-backend": "12.1.0",
     "babel-jest": "^26.6.3",
     "faker": "^5.4.0",
