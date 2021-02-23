@@ -1,15 +1,16 @@
-import { useMemo } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { ConnectDropTarget } from '../../types'
-import { useMonitorOutput } from '../useMonitorOutput'
 import {
 	DropTargetHookSpec,
 	DragObjectWithType,
 	FactoryOrInstance,
 } from '../types'
-import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useRegisteredDropTarget } from './useRegisteredDropTarget'
 import { useOptionalFactory } from '../useOptionalFactory'
+import { useDropTargetMonitor } from './useDropTargetMonitor'
+import { useDropTargetConnector } from './useDropTargetConnector'
+import { useCollectedProps } from './useCollectedProps'
+import { useConnectDropTarget } from './connectors'
 
 /**
  * useDropTarget Hook
@@ -29,21 +30,12 @@ export function useDrop<
 	const spec = useOptionalFactory(specArg, deps)
 	invariant(spec.accept != null, 'accept must be defined')
 
-	const [monitor, connector] = useRegisteredDropTarget(spec)
+	const monitor = useDropTargetMonitor()
+	const connector = useDropTargetConnector(spec.options)
+	useRegisteredDropTarget(spec, monitor, connector)
 
-	const collected: CollectedProps = useMonitorOutput(
-		monitor,
-		spec.collect || (() => ({} as CollectedProps)),
-		() => connector.reconnect(),
-	)
-
-	const connectDropTarget = useMemo(() => connector.hooks.dropTarget(), [
-		connector,
-	])
-
-	useIsomorphicLayoutEffect(() => {
-		connector.dropTargetOptions = spec.options || null
-		connector.reconnect()
-	}, [spec.options])
-	return [collected, connectDropTarget]
+	return [
+		useCollectedProps(spec.collect, monitor, connector),
+		useConnectDropTarget(connector),
+	]
 }

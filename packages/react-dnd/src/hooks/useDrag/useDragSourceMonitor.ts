@@ -1,14 +1,9 @@
-import { DragDropManager } from 'dnd-core'
 import { useMemo } from 'react'
-import { DragSourceMonitorImpl, SourceConnector } from '../../internals'
+import { DragSourceMonitorImpl } from '../../internals'
 import { DragSourceMonitor } from '../../types'
+import { useDragDropManager } from '../useDragDropManager'
 
-export function useDragSourceMonitor(
-	manager: DragDropManager,
-): [DragSourceMonitor, SourceConnector] {
-	const monitor = useMemo(() => new DragSourceMonitorImpl(manager), [manager])
-	const connector = useMemo(() => new SourceConnector(manager.getBackend()), [
-		manager,
-	])
-	return [monitor, connector]
+export function useDragSourceMonitor(): DragSourceMonitor {
+	const manager = useDragDropManager()
+	return useMemo(() => new DragSourceMonitorImpl(manager), [manager])
 }

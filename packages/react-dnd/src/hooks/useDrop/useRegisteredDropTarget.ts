@@ -5,21 +5,18 @@ import { useDragDropManager } from '../useDragDropManager'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useAccept } from './useAccept'
 import { useDropTarget } from './useDropTarget'
-import { useDropTargetMonitor } from './useDropTargetMonitor'
 
 export function useRegisteredDropTarget<O extends DragObjectWithType, R, P>(
 	spec: DropTargetHookSpec<O, R, P>,
-): [DropTargetMonitor, TargetConnector] {
+	monitor: DropTargetMonitor,
+	connector: TargetConnector,
+): void {
 	const manager = useDragDropManager()
-	const [monitor, connector] = useDropTargetMonitor(manager)
-
 	const dropTarget = useDropTarget(spec, monitor)
-
-	// Reconnect on accept change
 	const accept = useAccept(spec)
 
 	useIsomorphicLayoutEffect(
-		function registerHandler() {
+		function registerDropTarget() {
 			const [handlerId, unregister] = registerTarget(
 				accept,
 				dropTarget,
@@ -31,5 +28,4 @@ export function useRegisteredDropTarget<O extends DragObjectWithType, R, P>(
 		},
 		[manager, monitor, dropTarget, connector, ...accept],
 	)
-	return [monitor, connector]
 }
