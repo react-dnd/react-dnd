@@ -21,6 +21,24 @@ describe('The useDrop hook', () => {
 		}
 	})
 
+	it('throws if accept is null', () => {
+		function Component() {
+			const [, drag] = useDrop(() => ({
+				accept: null,
+			}))
+			return <div ref={drag} />
+		}
+
+		const err = console.error
+		try {
+			const errorMock = jest.fn()
+			console.error = errorMock
+			expect(() => render(<Component />)).toThrow(/accept must be defined/)
+		} finally {
+			console.error = err
+		}
+	})
+
 	it('can be used inside of a React-DnD context', async () => {
 		const Wrapped = wrapWithBackend(function Component() {
 			const [, drag] = useDrop(() => ({
