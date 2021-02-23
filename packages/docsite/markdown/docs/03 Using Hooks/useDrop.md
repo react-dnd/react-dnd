@@ -25,7 +25,7 @@ function myDropTarget(props) {
 
 #### Parameters
 
-- **`spec`** A function that creates a specification object. See below for details on how to construct this
+- **`spec`** A specification object or a function that creates a specification object. See below for details on the specification object
 - **`deps`** A dependency array used for memoization. This behaves like the built-in `useMemo` React hook. The default value is an empty array for function spec, and an array containing the spec for an object spec.
 
 #### Return Value Array
