@@ -15,8 +15,6 @@ export function useRegisteredDropTarget<O extends DragObjectWithType, R, P>(
 	const monitor = useDropTargetMonitor(manager)
 	const connector = useDropTargetConnector(manager)
 	const dropTarget = useDropTarget(spec, monitor)
-
-	// Reconnect on accept change
 	const accept = useAccept(spec)
 
 	useIsomorphicLayoutEffect(
