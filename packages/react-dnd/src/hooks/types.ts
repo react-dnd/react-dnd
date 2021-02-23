@@ -6,6 +6,7 @@ import {
 	DragPreviewOptions,
 } from '../types'
 
+export type FactoryOrInstance<T> = T | (() => T)
 export interface DragSourceHookSpec<
 	DragObject extends DragObjectWithType,
 	DropResult,
