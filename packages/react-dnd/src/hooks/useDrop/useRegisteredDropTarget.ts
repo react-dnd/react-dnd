@@ -20,7 +20,7 @@ export function useRegisteredDropTarget<O extends DragObjectWithType, R, P>(
 	const accept = useAccept(spec)
 
 	useIsomorphicLayoutEffect(
-		function registerHandler() {
+		function registerDropTarget() {
 			const [handlerId, unregister] = registerTarget(
 				accept,
 				dropTarget,

@@ -14,19 +14,16 @@ export function useRegisteredDragSource<O extends DragObjectWithType, R, P>(
 	const monitor = useDragSourceMonitor(manager)
 	const connector = useDragSourceConnector(manager)
 	const handler = useDragSource(spec, monitor, connector)
+	const itemType = spec.item.type
 
 	useIsomorphicLayoutEffect(
-		function registerHandler() {
-			const [handlerId, unregister] = registerSource(
-				spec.item.type,
-				handler,
-				manager,
-			)
+		function registerDragSource() {
+			const [handlerId, unregister] = registerSource(itemType, handler, manager)
 			monitor.receiveHandlerId(handlerId)
 			connector.receiveHandlerId(handlerId)
 			return unregister
 		},
-		[manager, monitor, connector, handler],
+		[manager, monitor, connector, handler, itemType],
 	)
 	return [monitor, connector]
 }
