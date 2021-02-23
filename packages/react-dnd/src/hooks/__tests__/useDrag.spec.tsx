@@ -21,6 +21,42 @@ describe('The useDrag hook', () => {
 		}
 	})
 
+	it('throws if item is null', () => {
+		function Component() {
+			const [, drag] = useDrag(() => ({
+				item: null,
+			}))
+			return <div ref={drag} />
+		}
+
+		const err = console.error
+		try {
+			const errorMock = jest.fn()
+			console.error = errorMock
+			expect(() => render(<Component />)).toThrow(/item must be defined/)
+		} finally {
+			console.error = err
+		}
+	})
+
+	it('throws if item type is null', () => {
+		function Component() {
+			const [, drag] = useDrag(() => ({
+				item: { type: null },
+			}))
+			return <div ref={drag} />
+		}
+
+		const err = console.error
+		try {
+			const errorMock = jest.fn()
+			console.error = errorMock
+			expect(() => render(<Component />)).toThrow(/item type must be defined/)
+		} finally {
+			console.error = err
+		}
+	})
+
 	it('can be used inside of a React-DnD context', async () => {
 		const Wrapped = wrapWithBackend(function Component() {
 			const [, drag] = useDrag(() => ({

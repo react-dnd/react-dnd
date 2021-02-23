@@ -44,3 +44,5 @@ export interface DragPreviewOptions {
 	 */
 	offsetY?: number
 }
+
+export type DropTargetOptions = any
