@@ -22,9 +22,9 @@ export class DragSourceImpl<O extends DragObjectWithType, R, P>
 				beginResult == null || typeof beginResult === 'object',
 				'dragSpec.begin() must either return an object, undefined, or null',
 			)
-			return beginResult || item || {}
+			return beginResult ?? item ?? {}
 		}
-		return item || {}
+		return item ?? {}
 	}
 
 	public canDrag() {
