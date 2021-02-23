@@ -5,12 +5,14 @@ import { useDragDropManager } from '../useDragDropManager'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useDragSource } from './useDragSource'
 import { useDragSourceMonitor } from './useDragSourceMonitor'
+import { useDragSourceConnector } from './useDragSourceConnector'
 
 export function useRegisteredDragSource<O extends DragObjectWithType, R, P>(
 	spec: DragSourceHookSpec<O, R, P>,
 ): [DragSourceMonitor, SourceConnector] {
 	const manager = useDragDropManager()
-	const [monitor, connector] = useDragSourceMonitor(manager)
+	const monitor = useDragSourceMonitor(manager)
+	const connector = useDragSourceConnector(manager)
 	const handler = useDragSource(spec, monitor, connector)
 
 	useIsomorphicLayoutEffect(
