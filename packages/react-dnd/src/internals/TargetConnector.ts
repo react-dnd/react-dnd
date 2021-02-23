@@ -4,7 +4,7 @@ import { wrapConnectorHooks } from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from './isRef'
 import { Connector } from './SourceConnector'
-import { DropTargetOptions } from 'src/types'
+import { DropTargetOptions } from '../types'
 
 export class TargetConnector implements Connector {
 	public hooks = wrapConnectorHooks({
