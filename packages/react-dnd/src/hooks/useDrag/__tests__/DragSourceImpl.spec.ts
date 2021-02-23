@@ -13,6 +13,9 @@ describe('The Hooks DragSourceImpl', () => {
 		)
 		expect(impl.canDrag()).toEqual(true)
 
+		impl = new DragSourceImpl({} as any, monitor, {} as any)
+		expect(impl.canDrag()).toEqual(true)
+
 		impl = new DragSourceImpl(
 			{
 				canDrag: false,

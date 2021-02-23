@@ -9,7 +9,7 @@ import { useRegisteredDropTarget } from './useRegisteredDropTarget'
 import { useOptionalFactory } from '../useOptionalFactory'
 import { useDropTargetMonitor } from './useDropTargetMonitor'
 import { useDropTargetConnector } from './useDropTargetConnector'
-import { useCollectedProps } from './useCollectedProps'
+import { useCollectedProps } from '../useCollectedProps'
 import { useConnectDropTarget } from './connectors'
 
 /**
