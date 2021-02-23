@@ -9,7 +9,7 @@ import { useRegisteredDragSource } from './useRegisteredDragSource'
 import { useOptionalFactory } from '../useOptionalFactory'
 import { useDragSourceMonitor } from './useDragSourceMonitor'
 import { useDragSourceConnector } from './useDragSourceConnector'
-import { useCollectedProps } from './useCollectedProps'
+import { useCollectedProps } from '../useCollectedProps'
 import { useConnectDragPreview, useConnectDragSource } from './connectors'
 
 /**

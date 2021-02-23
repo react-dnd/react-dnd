@@ -4,10 +4,11 @@ import { wrapConnectorHooks } from './wrapConnectorHooks'
 import { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from './isRef'
 import { Connector } from './SourceConnector'
+import { DropTargetOptions } from '../types'
 
 export class TargetConnector implements Connector {
 	public hooks = wrapConnectorHooks({
-		dropTarget: (node: any, options: any) => {
+		dropTarget: (node: any, options: DropTargetOptions) => {
 			this.clearDropTarget()
 			this.dropTargetOptions = options
 			if (isRef(node)) {
@@ -23,12 +24,12 @@ export class TargetConnector implements Connector {
 	// The drop target may either be attached via ref or connect function
 	private dropTargetRef: RefObject<any> | null = null
 	private dropTargetNode: any
-	private dropTargetOptionsInternal: any = null
+	private dropTargetOptionsInternal: DropTargetOptions | null = null
 	private unsubscribeDropTarget: Unsubscribe | undefined
 
 	private lastConnectedHandlerId: Identifier | null = null
 	private lastConnectedDropTarget: any = null
-	private lastConnectedDropTargetOptions: any = null
+	private lastConnectedDropTargetOptions: DropTargetOptions | null = null
 	private readonly backend: Backend
 
 	public constructor(backend: Backend) {
@@ -81,10 +82,10 @@ export class TargetConnector implements Connector {
 		this.reconnect()
 	}
 
-	public get dropTargetOptions(): any {
+	public get dropTargetOptions(): DropTargetOptions {
 		return this.dropTargetOptionsInternal
 	}
-	public set dropTargetOptions(options: any) {
+	public set dropTargetOptions(options: DropTargetOptions) {
 		this.dropTargetOptionsInternal = options
 	}
 
