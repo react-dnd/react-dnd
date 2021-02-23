@@ -28,7 +28,6 @@ export function useDrag<
 	deps?: unknown[],
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
 	const spec = useOptionalFactory(specArg, deps)
-	// TODO: wire options into createSourceConnector
 	invariant(spec.item != null, 'item must be defined')
 	invariant(spec.item.type != null, 'item type must be defined')
 
