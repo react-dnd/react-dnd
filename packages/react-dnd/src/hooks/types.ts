@@ -4,6 +4,7 @@ import {
 	DragSourceMonitor,
 	DragSourceOptions,
 	DragPreviewOptions,
+	DropTargetOptions,
 } from '../types'
 
 export type FactoryOrInstance<T> = T | (() => T)
@@ -91,7 +92,7 @@ export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 	/**
 	 * The drop target options
 	 */
-	options?: any
+	options?: DropTargetOptions
 
 	/**
 	 * Optional.

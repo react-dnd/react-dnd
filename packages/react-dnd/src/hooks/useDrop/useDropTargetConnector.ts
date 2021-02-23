@@ -1,9 +1,19 @@
-import { DragDropManager } from 'dnd-core'
 import { useMemo } from 'react'
 import { TargetConnector } from '../../internals'
+import { DropTargetOptions } from '../../types'
+import { useDragDropManager } from '../useDragDropManager'
+import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 
 export function useDropTargetConnector(
-	manager: DragDropManager,
+	options: DropTargetOptions,
 ): TargetConnector {
-	return useMemo(() => new TargetConnector(manager.getBackend()), [manager])
+	const manager = useDragDropManager()
+	const connector = useMemo(() => new TargetConnector(manager.getBackend()), [
+		manager,
+	])
+	useIsomorphicLayoutEffect(() => {
+		connector.dropTargetOptions = options || null
+		connector.reconnect()
+	}, [options])
+	return connector
 }

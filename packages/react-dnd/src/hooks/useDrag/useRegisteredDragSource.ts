@@ -1,18 +1,16 @@
 import { DragSourceMonitor } from '../../types'
 import { registerSource, SourceConnector } from '../../internals'
 import { DragObjectWithType, DragSourceHookSpec } from '../types'
-import { useDragDropManager } from '../useDragDropManager'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useDragSource } from './useDragSource'
-import { useDragSourceMonitor } from './useDragSourceMonitor'
-import { useDragSourceConnector } from './useDragSourceConnector'
+import { useDragDropManager } from '../useDragDropManager'
 
 export function useRegisteredDragSource<O extends DragObjectWithType, R, P>(
 	spec: DragSourceHookSpec<O, R, P>,
-): [DragSourceMonitor, SourceConnector] {
+	monitor: DragSourceMonitor,
+	connector: SourceConnector,
+): void {
 	const manager = useDragDropManager()
-	const monitor = useDragSourceMonitor(manager)
-	const connector = useDragSourceConnector(manager)
 	const handler = useDragSource(spec, monitor, connector)
 	const itemType = spec.item.type
 
@@ -25,5 +23,4 @@ export function useRegisteredDragSource<O extends DragObjectWithType, R, P>(
 		},
 		[manager, monitor, connector, handler, itemType],
 	)
-	return [monitor, connector]
 }
