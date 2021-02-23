@@ -10,8 +10,13 @@ const style = {
 };
 export const Card = ({ id, text, index, moveCard }) => {
     const ref = useRef(null);
-    const [, drop] = useDrop(() => ({
+    const [{ handlerId }, drop] = useDrop(() => ({
         accept: ItemTypes.CARD,
+        collect(monitor) {
+            return {
+                handlerId: monitor.getHandlerId(),
+            };
+        },
         hover(item, monitor) {
             if (!ref.current) {
                 return;
@@ -58,7 +63,7 @@ export const Card = ({ id, text, index, moveCard }) => {
     }), [id, index]);
     const opacity = isDragging ? 0 : 1;
     drag(drop(ref));
-    return (<div ref={ref} style={{ ...style, opacity }}>
+    return (<div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
 			{text}
 		</div>);
 };
