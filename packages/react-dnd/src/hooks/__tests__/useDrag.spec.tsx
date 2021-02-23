@@ -3,14 +3,6 @@ import { wrapWithBackend } from 'react-dnd-test-utils'
 import { render } from '@testing-library/react'
 
 describe('The useDrag hook', () => {
-	it('throws an error if a spect object is passed in', () => {
-		expect(() =>
-			useDrag({
-				item: { type: 'box' },
-			} as any),
-		).toThrow(/useDrag expects a function that returns a spec object/)
-	})
-
 	it('throws if rendered outside of a React-DnD tree', () => {
 		function Component() {
 			const [, drag] = useDrag(() => ({

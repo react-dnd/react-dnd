@@ -1,10 +1,15 @@
 import { useMemo } from 'react'
 import { invariant } from '@react-dnd/invariant'
 import { ConnectDragSource, ConnectDragPreview } from '../../types'
-import { DragSourceHookSpec, DragObjectWithType } from '../types'
+import {
+	DragSourceHookSpec,
+	DragObjectWithType,
+	FactoryOrInstance,
+} from '../types'
 import { useMonitorOutput } from '../useMonitorOutput'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useRegisteredDragSource } from './useRegisteredDragSource'
+import { useOptionalFactory } from '../useOptionalFactory'
 
 /**
  * useDragSource hook
@@ -16,14 +21,12 @@ export function useDrag<
 	DropResult,
 	CollectedProps
 >(
-	specFn: () => DragSourceHookSpec<DragObject, DropResult, CollectedProps>,
+	specArg: FactoryOrInstance<
+		DragSourceHookSpec<DragObject, DropResult, CollectedProps>
+	>,
 	deps?: unknown[],
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
-	invariant(
-		typeof specFn === 'function',
-		'useDrag expects a function that returns a spec object',
-	)
-	const spec = useMemo(specFn, deps || [])
+	const spec = useOptionalFactory(specArg, deps)
 	// TODO: wire options into createSourceConnector
 	invariant(spec.item != null, 'item must be defined')
 	invariant(spec.item.type != null, 'item type must be defined')
