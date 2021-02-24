@@ -48,6 +48,8 @@ const SourceBoxRaw: FC<SourceBoxProps> = ({
 				opacity,
 				cursor: forbidDrag ? 'default' : 'move',
 			}}
+			role="SourceBox"
+			data-color={color}
 		>
 			<input
 				type="checkbox"
