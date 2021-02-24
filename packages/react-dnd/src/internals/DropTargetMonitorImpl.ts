@@ -55,7 +55,7 @@ export class DropTargetMonitorImpl implements DropTargetMonitor {
 		}
 	}
 
-	public isOver(options: { shallow?: boolean }): boolean {
+	public isOver(options?: { shallow?: boolean }): boolean {
 		if (!this.targetId) {
 			return false
 		}
