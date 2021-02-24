@@ -21,7 +21,7 @@ https://www.reactiflux.com/
 
 ### Technical Details
 
-- ES Modules w/ Embedded CJS for Jest Testing
+- ESM/CJS Module Support
 - Ships w/ TS Typings
 - Browserlist Target: `>0.25%, not dead`
 
