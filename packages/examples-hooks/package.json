@@ -26,7 +26,7 @@
     "dnd-core": "workspace:packages/dnd-core",
     "faker": "^5.4.0",
     "immutability-helper": "^3.1.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-html5-backend": "workspace:packages/backend-html5",
     "react-frame-component": "^4.1.3"
