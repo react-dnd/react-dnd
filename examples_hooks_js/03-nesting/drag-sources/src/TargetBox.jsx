@@ -33,7 +33,7 @@ const TargetBox = ({ onDrop, lastDroppedColor }) => {
         default:
             break;
     }
-    return (<div ref={drop} style={{ ...style, backgroundColor, opacity }}>
+    return (<div ref={drop} data-color={lastDroppedColor} style={{ ...style, backgroundColor, opacity }} role="TargetBox">
 			<p>Drop here.</p>
 
 			{!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}

@@ -34,7 +34,7 @@ export const SourceBox = ({ color, children }) => {
         opacity: isDragging ? 0.4 : 1,
         cursor: forbidDrag ? 'default' : 'move',
     }), [isDragging, forbidDrag, backgroundColor]);
-    return (<div ref={drag} style={containerStyle}>
+    return (<div ref={drag} style={containerStyle} role="SourceBox" data-color={color}>
 			<input type="checkbox" checked={forbidDrag} onChange={onToggleForbidDrag}/>
 			<small>Forbid drag</small>
 			{children}

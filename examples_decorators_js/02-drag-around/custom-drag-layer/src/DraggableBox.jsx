@@ -31,7 +31,7 @@ class DraggableBox extends PureComponent {
     }
     render() {
         const { title, connectDragSource } = this.props;
-        return connectDragSource(<div style={getStyles(this.props)}>
+        return connectDragSource(<div style={getStyles(this.props)} role="DraggableBox">
 				<Box title={title}/>
 			</div>);
     }

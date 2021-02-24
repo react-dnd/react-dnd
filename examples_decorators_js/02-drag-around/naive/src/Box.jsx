@@ -11,7 +11,9 @@ const Box = ({ hideSourceOnDrag, left, top, connectDragSource, isDragging, child
     if (isDragging && hideSourceOnDrag) {
         return null;
     }
-    return connectDragSource(<div style={{ ...style, left, top }}>{children}</div>);
+    return connectDragSource(<div style={{ ...style, left, top }} role="Box">
+			{children}
+		</div>);
 };
 export default DragSource(ItemTypes.BOX, {
     beginDrag(props) {

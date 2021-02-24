@@ -13,7 +13,7 @@ export const BoxDragPreview = ({ title }) => {
         }, 500);
         return () => clearInterval(interval);
     }, [tickTock]);
-    return (<div style={styles}>
+    return (<div style={styles} role="BoxPreview">
 			<Box title={title} yellow={tickTock}/>
 		</div>);
 };

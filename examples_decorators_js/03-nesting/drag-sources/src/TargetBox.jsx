@@ -21,7 +21,7 @@ const TargetBoxRaw = ({ canDrop, isOver, draggingColor, lastDroppedColor, connec
         default:
             break;
     }
-    return connectDropTarget(<div style={{ ...style, backgroundColor, opacity }}>
+    return connectDropTarget(<div style={{ ...style, backgroundColor, opacity }} role="TargetBox" data-color={lastDroppedColor}>
 			<p>Drop here.</p>
 
 			{!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
