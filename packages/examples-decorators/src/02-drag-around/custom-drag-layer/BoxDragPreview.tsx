@@ -25,7 +25,7 @@ export const BoxDragPreview: FC<BoxDragPreviewProps> = ({ title }) => {
 	)
 
 	return (
-		<div style={styles}>
+		<div style={styles} role="BoxPreview">
 			<Box title={title} yellow={tickTock} />
 		</div>
 	)

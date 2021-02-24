@@ -35,7 +35,9 @@ const Box: FC<BoxProps> = ({
 	}
 
 	return connectDragSource(
-		<div style={{ ...style, left, top }}>{children}</div>,
+		<div style={{ ...style, left, top }} role="Box">
+			{children}
+		</div>,
 	)
 }
 

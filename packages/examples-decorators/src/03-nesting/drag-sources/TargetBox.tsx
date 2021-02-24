@@ -42,7 +42,11 @@ const TargetBoxRaw: FC<TargetBoxProps> = ({
 	}
 
 	return connectDropTarget(
-		<div style={{ ...style, backgroundColor, opacity }}>
+		<div
+			style={{ ...style, backgroundColor, opacity }}
+			role="TargetBox"
+			data-color={lastDroppedColor}
+		>
 			<p>Drop here.</p>
 
 			{!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}

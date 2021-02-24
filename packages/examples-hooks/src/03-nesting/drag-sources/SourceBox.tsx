@@ -52,7 +52,7 @@ export const SourceBox: FC<SourceBoxProps> = ({ color, children }) => {
 	)
 
 	return (
-		<div ref={drag} style={containerStyle}>
+		<div ref={drag} style={containerStyle} role="SourceBox" data-color={color}>
 			<input
 				type="checkbox"
 				checked={forbidDrag}
