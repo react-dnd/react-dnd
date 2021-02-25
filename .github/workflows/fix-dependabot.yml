@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot-preview[bot]'
     steps:
       - uses: actions/checkout@v2
         with:
@@ -33,7 +32,18 @@ jobs:
           git config --local http.$GITHUB_SERVER_URL/.extraheader "AUTHORIZATION: basic $BASIC_AUTH"
 
       - name: Commit changes
+        shell: bash
         run: |
-          git add yarn.lock .yarn/cache .pnp.*
-          git commit -m "Dependabot autofix"
-          git push
+          git diff-index --quiet HEAD
+          result=$?
+
+          set -e
+          if [ result == 0 ]
+          then
+            echo "no changes detected"  
+          else
+            echo "changes detected"
+            git add yarn.lock .yarn/cache .pnp.*
+            git commit -m "Dependabot autofix"
+            git push
+          fi
