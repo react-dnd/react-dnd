@@ -44,7 +44,8 @@ jobs:
         run: echo "actor is $GITHUB_ACTOR"
 
       - name: auto-merge
-        if: github.actor == 'dependabot-preview[bot]' || github.actor == 'dependabot[bot]'
+        # Because the fix-dependabot.yml worfklow uses my own PAT to patch dependabot updates
+        if: (github.actor == 'dependabot-preview[bot]' || github.actor == 'darthtrevino') && contains(github.ref, 'dependabot/npm_and_yarn')
         uses: ridedott/merge-me-action@v1
         with:
           # This must be used as GitHub Actions token does not support
