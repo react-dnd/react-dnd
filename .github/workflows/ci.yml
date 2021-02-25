@@ -33,15 +33,8 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  auto-merge:
-    name: Auto-Merge Dependabot PRs
-    runs-on: ubuntu-latest
-    if: github.actor == 'dependabot-preview[bot]'
-    needs:
-      - build
-    steps:
       - name: auto-merge
-        if: github.actor == 'dependabot-preview[bot]'
+        if: success() && matrix.node-version == '14.x' && github.actor == 'dependabot-preview[bot]'
         uses: ridedott/dependabot-auto-merge-action@main
         with:
           GITHUB_TOKEN: ${{ secrets.AUTOMERGE_PAT }}
