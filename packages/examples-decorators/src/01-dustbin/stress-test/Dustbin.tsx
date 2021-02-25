@@ -27,30 +27,34 @@ export interface DustbinProps {
 	canDrop: boolean
 }
 
-const Dustbin: FC<DustbinProps> = memo(
-	({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem }) => {
-		const isActive = isOver && canDrop
+const Dustbin: FC<DustbinProps> = memo(function Dustbin({
+	accepts,
+	isOver,
+	canDrop,
+	connectDropTarget,
+	lastDroppedItem,
+}) {
+	const isActive = isOver && canDrop
 
-		let backgroundColor = '#222'
-		if (isActive) {
-			backgroundColor = 'darkgreen'
-		} else if (canDrop) {
-			backgroundColor = 'darkkhaki'
-		}
+	let backgroundColor = '#222'
+	if (isActive) {
+		backgroundColor = 'darkgreen'
+	} else if (canDrop) {
+		backgroundColor = 'darkkhaki'
+	}
 
-		return connectDropTarget(
-			<div style={{ ...style, backgroundColor }}>
-				{isActive
-					? 'Release to drop'
-					: `This dustbin accepts: ${accepts.join(', ')}`}
+	return connectDropTarget(
+		<div style={{ ...style, backgroundColor }}>
+			{isActive
+				? 'Release to drop'
+				: `This dustbin accepts: ${accepts.join(', ')}`}
 
-				{lastDroppedItem && (
-					<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
-				)}
-			</div>,
-		)
-	},
-)
+			{lastDroppedItem && (
+				<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
+			)}
+		</div>,
+	)
+})
 
 export default DropTarget(
 	(props: DustbinProps) => props.accepts,

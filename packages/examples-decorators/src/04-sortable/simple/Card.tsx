@@ -37,23 +37,24 @@ interface CardInstance {
 	getNode(): HTMLDivElement | null
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps>(
-	({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
-		const elementRef = useRef(null)
-		connectDragSource(elementRef)
-		connectDropTarget(elementRef)
+const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
+	{ text, isDragging, connectDragSource, connectDropTarget },
+	ref,
+) {
+	const elementRef = useRef(null)
+	connectDragSource(elementRef)
+	connectDropTarget(elementRef)
 
-		const opacity = isDragging ? 0 : 1
-		useImperativeHandle<any, CardInstance>(ref, () => ({
-			getNode: () => elementRef.current,
-		}))
-		return (
-			<div ref={elementRef} style={{ ...style, opacity }}>
-				{text}
-			</div>
-		)
-	},
-)
+	const opacity = isDragging ? 0 : 1
+	useImperativeHandle<any, CardInstance>(ref, () => ({
+		getNode: () => elementRef.current,
+	}))
+	return (
+		<div ref={elementRef} style={{ ...style, opacity }}>
+			{text}
+		</div>
+	)
+})
 
 export default DropTarget(
 	ItemTypes.CARD,
