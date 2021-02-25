@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    if: github.actor == 'dependabot-preview[bot]'
 
     steps:
       - uses: actions/checkout@v2
@@ -23,17 +23,15 @@ jobs:
       - name: Autofix Yarn Dependencies
         run: |
           yarn install
-        env:
-          YARN_ENABLE_SCRIPTS: 0 # disable postinstall scripts
 
-      - name: Config Git
-        run: |
-          # use personal access token to allow triggering new workflow
-          BASIC_AUTH=$(echo -n "x-access-token:${{ secrets.GITHUB_TOKEN }}" | base64)
-          echo "::add-mask::$BASIC_AUTH"
-          git config --global user.name '${{ github.event.commits[0].author.name }}'
-          git config --global user.email '${{ github.event.commits[0].author.email }}'
-          git config --local http.$GITHUB_SERVER_URL/.extraheader "AUTHORIZATION: basic $BASIC_AUTH"
+      # - name: Config Git
+      #   run: |
+      #     # use personal access token to allow triggering new workflow
+      #     BASIC_AUTH=$(echo -n "x-access-token:${{ secrets.GITHUB_TOKEN }}" | base64)
+      #     echo "::add-mask::$BASIC_AUTH"
+      #     git config --global user.name '${{ github.event.commits[0].author.name }}'
+      #     git config --global user.email '${{ github.event.commits[0].author.email }}'
+      #     git config --local http.$GITHUB_SERVER_URL/.extraheader "AUTHORIZATION: basic $BASIC_AUTH"
 
       - name: Commit changes
         run: |
