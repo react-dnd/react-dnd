@@ -33,6 +33,14 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+  # This is a separate step to allow for the full matrix build to complete
+  auto-merge:
+    name: Auto-Merge Dependabot PRs
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot-preview[bot]'
+    needs:
+      - build
+    steps:
       - name: auto-merge
         if: success() && matrix.node-version == '14.x' && github.actor == 'dependabot-preview[bot]'
         uses: ridedott/merge-me-action@v1
