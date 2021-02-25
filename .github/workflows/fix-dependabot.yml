@@ -27,7 +27,7 @@ jobs:
       - name: Config Git
         run: |
           # use personal access token to allow triggering new workflow
-          BASIC_AUTH=$(echo -n "x-access-token:${{ secrets.GITHUB_TOKEN }}" | base64)
+          BASIC_AUTH=$(echo -n "x-access-token:${{ secrets.AUTOMERGE_PAT }}" | base64)
           echo "::add-mask::$BASIC_AUTH"
           git config --global user.name '${{ github.event.commits[0].author.name }}'
           git config --global user.email '${{ github.event.commits[0].author.email }}'
