@@ -1,4 +1,4 @@
-name: Dependabot
+name: Fix Dependabot PR
 
 on:
   push:
