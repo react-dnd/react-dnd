@@ -18,10 +18,6 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Autofix Yarn Dependencies
-        run: |
-          yarn install
-
       - name: Config Git
         run: |
           # use personal access token to allow triggering new workflow
@@ -31,6 +27,7 @@ jobs:
           git config --global user.email '${{ github.event.commits[0].author.email }}'
           git config --local http.$GITHUB_SERVER_URL/.extraheader "AUTHORIZATION: basic $BASIC_AUTH"
 
-      - name: Commit changes
+      - name: Autofix Yarn Dependencies
         run: |
+          yarn install
           ./scripts/dependabot-autofix.sh
