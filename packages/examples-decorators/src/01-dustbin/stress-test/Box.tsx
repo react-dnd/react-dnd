@@ -22,16 +22,17 @@ export interface BoxProps {
 	connectDragSource: ConnectDragSource
 }
 
-const Box: FC<BoxProps> = memo(
-	({ name, isDropped, isDragging, connectDragSource }) => {
-		const opacity = isDragging ? 0.4 : 1
-		return connectDragSource(
-			<div style={{ ...style, opacity }}>
-				{isDropped ? <s>{name}</s> : name}
-			</div>,
-		)
-	},
-)
+const Box: FC<BoxProps> = memo(function Box({
+	name,
+	isDropped,
+	isDragging,
+	connectDragSource,
+}) {
+	const opacity = isDragging ? 0.4 : 1
+	return connectDragSource(
+		<div style={{ ...style, opacity }}>{isDropped ? <s>{name}</s> : name}</div>,
+	)
+})
 
 export default DragSource(
 	(props: BoxProps) => props.type,
