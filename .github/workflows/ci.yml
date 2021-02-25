@@ -35,6 +35,8 @@ jobs:
 
       - name: auto-merge
         if: success() && matrix.node-version == '14.x' && github.actor == 'dependabot-preview[bot]'
-        uses: ridedott/dependabot-auto-merge-action@main
+        uses: ridedott/merge-me-action@v1
         with:
+          # This must be used as GitHub Actions token does not support
+          # pushing to protected branches.
           GITHUB_TOKEN: ${{ secrets.AUTOMERGE_PAT }}
