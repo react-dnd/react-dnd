@@ -1,5 +1,5 @@
 import { DragPreviewImage } from '../DragPreviewImage'
-import { tick, wrapWithBackend } from 'react-dnd-test-utils'
+import { wrapWithBackend } from 'react-dnd-test-utils'
 import { render } from '@testing-library/react'
 import { useDrag } from '../../hooks'
 

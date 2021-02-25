@@ -37,39 +37,40 @@ export interface DustbinState {
 	hasDroppedOnChild: boolean
 }
 
-const Dustbin = forwardRef<HTMLDivElement, DustbinProps>(
-	({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) => {
-		const [hasDropped, setHasDropped] = useState(false)
-		const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
+const Dustbin = forwardRef<HTMLDivElement, DustbinProps>(function Dustbin(
+	{ greedy, isOver, isOverCurrent, connectDropTarget, children },
+	ref,
+) {
+	const [hasDropped, setHasDropped] = useState(false)
+	const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false)
 
-		useImperativeHandle(
-			ref as any,
-			() => ({
-				onDrop: (onChild: boolean) => {
-					setHasDroppedOnChild(onChild)
-					setHasDropped(true)
-				},
-			}),
-			[],
-		)
+	useImperativeHandle(
+		ref as any,
+		() => ({
+			onDrop: (onChild: boolean) => {
+				setHasDroppedOnChild(onChild)
+				setHasDropped(true)
+			},
+		}),
+		[],
+	)
 
-		const text = greedy ? 'greedy' : 'not greedy'
-		let backgroundColor = 'rgba(0, 0, 0, .5)'
+	const text = greedy ? 'greedy' : 'not greedy'
+	let backgroundColor = 'rgba(0, 0, 0, .5)'
 
-		if (isOverCurrent || (isOver && greedy)) {
-			backgroundColor = 'darkgreen'
-		}
+	if (isOverCurrent || (isOver && greedy)) {
+		backgroundColor = 'darkgreen'
+	}
 
-		return connectDropTarget(
-			<div style={getStyle(backgroundColor)}>
-				{text}
-				<br />
-				{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
-				<div>{children}</div>
-			</div>,
-		)
-	},
-)
+	return connectDropTarget(
+		<div style={getStyle(backgroundColor)}>
+			{text}
+			<br />
+			{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
+			<div>{children}</div>
+		</div>,
+	)
+})
 
 export default DropTarget(
 	ItemTypes.BOX,

@@ -172,15 +172,15 @@ export function decorateHandler<Props, CollectedProps, ItemIdType>({
 			}
 		}
 
-		public getCurrentState() {
+		public getCurrentState(): CollectedProps {
 			if (!this.handlerConnector) {
-				return {}
+				return {} as CollectedProps
 			}
 			const nextState = collect(
 				this.handlerConnector.hooks,
 				this.handlerMonitor,
 				this.props,
-			)
+			) as CollectedProps
 
 			if (process.env.NODE_ENV !== 'production') {
 				invariant(
