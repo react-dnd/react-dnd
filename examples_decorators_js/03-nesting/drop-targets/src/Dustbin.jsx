@@ -16,7 +16,7 @@ function getStyle(backgroundColor) {
         fontSize: '1rem',
     };
 }
-const Dustbin = forwardRef(({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) => {
+const Dustbin = forwardRef(function Dustbin({ greedy, isOver, isOverCurrent, connectDropTarget, children }, ref) {
     const [hasDropped, setHasDropped] = useState(false);
     const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false);
     useImperativeHandle(ref, () => ({
@@ -31,11 +31,11 @@ const Dustbin = forwardRef(({ greedy, isOver, isOverCurrent, connectDropTarget, 
         backgroundColor = 'darkgreen';
     }
     return connectDropTarget(<div style={getStyle(backgroundColor)}>
-				{text}
-				<br />
-				{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
-				<div>{children}</div>
-			</div>);
+			{text}
+			<br />
+			{hasDropped && <span>dropped {hasDroppedOnChild && ' on child'}</span>}
+			<div>{children}</div>
+		</div>);
 });
 export default DropTarget(ItemTypes.BOX, {
     drop(props, monitor, component) {

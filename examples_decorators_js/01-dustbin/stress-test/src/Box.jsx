@@ -9,11 +9,9 @@ const style = {
     cursor: 'move',
     float: 'left',
 };
-const Box = memo(({ name, isDropped, isDragging, connectDragSource }) => {
+const Box = memo(function Box({ name, isDropped, isDragging, connectDragSource, }) {
     const opacity = isDragging ? 0.4 : 1;
-    return connectDragSource(<div style={{ ...style, opacity }}>
-				{isDropped ? <s>{name}</s> : name}
-			</div>);
+    return connectDragSource(<div style={{ ...style, opacity }}>{isDropped ? <s>{name}</s> : name}</div>);
 });
 export default DragSource((props) => props.type, {
     beginDrag: (props) => ({ name: props.name }),

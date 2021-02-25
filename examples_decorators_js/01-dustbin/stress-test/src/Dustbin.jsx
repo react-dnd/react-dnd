@@ -12,7 +12,7 @@ const style = {
     lineHeight: 'normal',
     float: 'left',
 };
-const Dustbin = memo(({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem }) => {
+const Dustbin = memo(function Dustbin({ accepts, isOver, canDrop, connectDropTarget, lastDroppedItem, }) {
     const isActive = isOver && canDrop;
     let backgroundColor = '#222';
     if (isActive) {
@@ -22,12 +22,12 @@ const Dustbin = memo(({ accepts, isOver, canDrop, connectDropTarget, lastDropped
         backgroundColor = 'darkkhaki';
     }
     return connectDropTarget(<div style={{ ...style, backgroundColor }}>
-				{isActive
+			{isActive
         ? 'Release to drop'
         : `This dustbin accepts: ${accepts.join(', ')}`}
 
-				{lastDroppedItem && (<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>)}
-			</div>);
+			{lastDroppedItem && (<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>)}
+		</div>);
 });
 export default DropTarget((props) => props.accepts, {
     drop(props, monitor) {

@@ -8,7 +8,7 @@ const style = {
     backgroundColor: 'white',
     cursor: 'move',
 };
-const Card = forwardRef(({ text, isDragging, connectDragSource, connectDropTarget }, ref) => {
+const Card = forwardRef(function Card({ text, isDragging, connectDragSource, connectDropTarget }, ref) {
     const elementRef = useRef(null);
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
@@ -17,8 +17,8 @@ const Card = forwardRef(({ text, isDragging, connectDragSource, connectDropTarge
         getNode: () => elementRef.current,
     }));
     return (<div ref={elementRef} style={{ ...style, opacity }}>
-				{text}
-			</div>);
+			{text}
+		</div>);
 });
 export default DropTarget(ItemTypes.CARD, {
     hover(props, monitor, component) {
