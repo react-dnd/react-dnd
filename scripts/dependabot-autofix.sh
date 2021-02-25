@@ -5,9 +5,10 @@ result=$?
 set -e
 if [ result == 0 ]
 then
-	echo "no changes detected"  
+	echo "no changes detected: $result"  
 else
-	echo "changes detected"
+	echo "changes detected: $result"
+	git status
 	git add yarn.lock .yarn/cache .pnp.*
 	git commit -m "Dependabot autofix"
 	git push
