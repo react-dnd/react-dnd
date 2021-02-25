@@ -7,8 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # if: github.actor == 'dependabot-preview[bot]'
-
+    if: github.actor == 'dependabot-preview[bot]'
     steps:
       - uses: actions/checkout@v2
         with:
