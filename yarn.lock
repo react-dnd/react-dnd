@@ -11037,6 +11037,21 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"gatsby-core-utils@npm:^1.10.1":
+  version: 1.10.1
+  resolution: "gatsby-core-utils@npm:1.10.1"
+  dependencies:
+    ci-info: 2.0.0
+    configstore: ^5.0.1
+    fs-extra: ^8.1.0
+    node-object-hash: ^2.0.0
+    proper-lockfile: ^4.1.1
+    tmp: ^0.2.1
+    xdg-basedir: ^4.0.0
+  checksum: 2a210249b1d7adb5ca187a9524eece6a34e1bed2d64473d904c98a66fa28e7fb2c92a598a4a14142476dbd261a029ddc57a8d8a6e1b303cb1547829a0098cb99
+  languageName: node
+  linkType: hard
+
 "gatsby-graphiql-explorer@npm:^0.11.0":
   version: 0.11.0
   resolution: "gatsby-graphiql-explorer@npm:0.11.0"
@@ -11086,18 +11101,18 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-manifest@npm:^2.12.0":
-  version: 2.12.0
-  resolution: "gatsby-plugin-manifest@npm:2.12.0"
+"gatsby-plugin-manifest@npm:^2.12.1":
+  version: 2.12.1
+  resolution: "gatsby-plugin-manifest@npm:2.12.1"
   dependencies:
     "@babel/runtime": ^7.12.5
-    gatsby-core-utils: ^1.10.0
+    gatsby-core-utils: ^1.10.1
     gatsby-plugin-utils: ^0.9.0
     semver: ^7.3.2
     sharp: ^0.27.0
   peerDependencies:
     gatsby: ^2.25.0
-  checksum: 1d5270ec9accd2a6947d6767359f988608a98b576eac24b018f49257b17de492bcc711e5521f59fb04dc4c3a979d2e9b1b4fbd6d14a0e3d514773653f02c6407
+  checksum: 6560a4dd73738f5e59c90a3e44aa226305865650d2366510201c0db77728c50769d59d76e6616fce04a11ead6419ab2b7b488d0d3b9e04fc172e3c6d8baf7e1d
   languageName: node
   linkType: hard
 
@@ -19903,7 +19918,7 @@ fsevents@^1.2.7:
     babel-plugin-styled-components: ^1.12.0
     debug: ^4.2.0
     gatsby: ~2.32.4
-    gatsby-plugin-manifest: ^2.12.0
+    gatsby-plugin-manifest: ^2.12.1
     gatsby-plugin-react-helmet: ^3.10.0
     gatsby-plugin-sharp: ^2.14.1
     gatsby-plugin-styled-components: ^3.10.0
