@@ -37,11 +37,14 @@ jobs:
   auto-merge:
     name: Auto-Merge Dependabot PRs
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot-preview[bot]'
     needs:
       - build
     steps:
+      - name: check actor
+        run: echo "actor is $GITHUB_ACTOR"
+
       - name: auto-merge
+        if: github.actor == 'dependabot-preview[bot]' || github.actor == 'dependabot[bot]'
         uses: ridedott/merge-me-action@v1
         with:
           # This must be used as GitHub Actions token does not support
