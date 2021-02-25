@@ -50,4 +50,5 @@ jobs:
         with:
           # This must be used as GitHub Actions token does not support
           # pushing to protected branches.
+          GITHUB_LOGIN: darthtrevino
           GITHUB_TOKEN: ${{ secrets.AUTOMERGE_PAT }}
