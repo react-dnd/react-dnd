@@ -2924,7 +2924,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^17.1.0
     "@rollup/plugin-node-resolve": ^11.2.0
-    "@rollup/plugin-replace": ^2.3.4
+    "@rollup/plugin-replace": ^2.4.1
     "@types/babel__core": ^7.1.12
     "@types/chalk": ^2.2.0
     "@types/fancy-log": ^1.3.1
@@ -3027,15 +3027,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-replace@npm:^2.3.4":
-  version: 2.3.4
-  resolution: "@rollup/plugin-replace@npm:2.3.4"
+"@rollup/plugin-replace@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "@rollup/plugin-replace@npm:2.4.1"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     magic-string: ^0.25.7
   peerDependencies:
     rollup: ^1.20.0 || ^2.0.0
-  checksum: 97ae11600a959b7668105d9e28801319f9158b01a1d9dbf4f910136491463d8798c1bb1d62e47bf04d5ff08c9c5b3f333aa39ccad57a4e5531d8edaa38ffd74e
+  checksum: cbb79ee0176bd333c4c3a9def89c05394363ec7bd496e1298f40f012b48f2093413bfd618eb1b7b39f0f00f2976b56cfcd4f40a2eed1c2a99386c537c816ff7b
   languageName: node
   linkType: hard
 
