@@ -3944,13 +3944,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.14.30":
-  version: 14.14.30
-  resolution: "@types/node@npm:14.14.30"
-  checksum: 9283bf3233cb1508a06df34d078107b014bf737efd14f656769608e9b4190d118c045ff6172ab04fc1e2c61ff10712df92ac0403542886e063f5500b5f654538
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^8.5.7":
   version: 8.10.66
   resolution: "@types/node@npm:8.10.66"
@@ -20454,7 +20447,7 @@ fsevents@^1.2.7:
   dependencies:
     "@react-dnd/build": "workspace:packages/build"
     "@testing-library/react": ^11.2.5
-    "@types/node": ^14.14.30
+    "@types/node": ^14.14.31
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
     dnd-core: "workspace:packages/dnd-core"
