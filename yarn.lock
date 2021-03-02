@@ -11338,16 +11338,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gatsby-source-filesystem@npm:^2.11.0":
-  version: 2.11.0
-  resolution: "gatsby-source-filesystem@npm:2.11.0"
+"gatsby-source-filesystem@npm:^2.11.1":
+  version: 2.11.1
+  resolution: "gatsby-source-filesystem@npm:2.11.1"
   dependencies:
     "@babel/runtime": ^7.12.5
     better-queue: ^3.8.10
     chokidar: ^3.4.3
     file-type: ^16.0.0
     fs-extra: ^8.1.0
-    gatsby-core-utils: ^1.10.0
+    gatsby-core-utils: ^1.10.1
     got: ^9.6.0
     md5-file: ^5.0.0
     mime: ^2.4.6
@@ -11357,7 +11357,7 @@ fsevents@^1.2.7:
     xstate: ^4.14.0
   peerDependencies:
     gatsby: ^2.2.0
-  checksum: 220807cfb7905c7d9a82e53a99b463a4d6dc5c369608957be7c8ba565b3d29b288602753f5122d79113f43aa1af254a180aa692aefd70c4f8723efb0ec8c64b8
+  checksum: e134434eca75ee6bb820b8a48b45ce7ecb70afbfbeb36cb121ebaa48178275b2fd594c240f696b36bdc9d766c6a9e6a4c6ff1db524bab8dec3815abf97ec18f7
   languageName: node
   linkType: hard
 
@@ -19839,7 +19839,7 @@ fsevents@^1.2.7:
     gatsby-remark-copy-linked-files: ^2.10.0
     gatsby-remark-images: ^3.11.0
     gatsby-remark-prismjs: ^3.13.0
-    gatsby-source-filesystem: ^2.11.0
+    gatsby-source-filesystem: ^2.11.1
     gatsby-transformer-remark: ^2.16.0
     gatsby-transformer-sharp: ^2.12.0
     lodash: ^4.17.20
