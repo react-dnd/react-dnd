@@ -10357,7 +10357,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-type@npm:^16.0.0":
+"file-type@npm:^16.0.0, file-type@npm:^16.2.0":
   version: 16.2.0
   resolution: "file-type@npm:16.2.0"
   dependencies:
@@ -11012,6 +11012,22 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"gatsby-core-utils@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "gatsby-core-utils@npm:2.0.0"
+  dependencies:
+    ci-info: 2.0.0
+    configstore: ^5.0.1
+    file-type: ^16.2.0
+    fs-extra: ^8.1.0
+    node-object-hash: ^2.0.0
+    proper-lockfile: ^4.1.1
+    tmp: ^0.2.1
+    xdg-basedir: ^4.0.0
+  checksum: 8b94deb418662f363a2efb227ecc2e43d8df56ce5dfe7635170b8862962545b9fe46ccf647d16bca1a628f65b8f5e1e4c9486178bf1313056c3196a99fb1b8e1
+  languageName: node
+  linkType: hard
+
 "gatsby-graphiql-explorer@npm:^0.11.0":
   version: 0.11.0
   resolution: "gatsby-graphiql-explorer@npm:0.11.0"
@@ -11302,14 +11318,14 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gatsby-remark-images@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "gatsby-remark-images@npm:3.11.0"
+"gatsby-remark-images@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "gatsby-remark-images@npm:4.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
     chalk: ^4.1.0
     cheerio: ^1.0.0-rc.3
-    gatsby-core-utils: ^1.10.0
+    gatsby-core-utils: ^2.0.0
     is-relative-url: ^3.0.0
     lodash: ^4.17.20
     mdast-util-definitions: ^1.2.5
@@ -11318,9 +11334,9 @@ fsevents@^1.2.7:
     unist-util-select: ^1.5.0
     unist-util-visit-parents: ^2.1.2
   peerDependencies:
-    gatsby: ^2.0.0
-    gatsby-plugin-sharp: ^2.0.0-beta.5
-  checksum: 7cb48f22ae84fcb6b4d5ff6da367590b079b923420d06522dad34c9235ec9a149cfad8fb617d9f2fc8b907b605fa0eae5c0b2897c69fe4cbe6aff76e81bef808
+    gatsby: ^3.0.0-next.0
+    gatsby-plugin-sharp: ^3.0.0-next.0
+  checksum: c48254784ee9ce77feca777bfc2c756e42a6532ec55450bd37ac57a5af17cf00a8831b2713e76520b1984b91fe028e3eb488d3547eeb45ddce3b82c7ca5abdab
   languageName: node
   linkType: hard
 
@@ -19837,7 +19853,7 @@ fsevents@^1.2.7:
     gatsby-plugin-typography: ^2.12.0
     gatsby-remark-autolink-headers: ^2.11.0
     gatsby-remark-copy-linked-files: ^2.10.0
-    gatsby-remark-images: ^3.11.0
+    gatsby-remark-images: ^4.0.0
     gatsby-remark-prismjs: ^3.13.0
     gatsby-source-filesystem: ^2.11.1
     gatsby-transformer-remark: ^2.16.0

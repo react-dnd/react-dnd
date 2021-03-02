@@ -16712,6 +16712,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["xdg-basedir", "npm:4.0.0"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/gatsby-core-utils-npm-2.0.0-ad2222fe82-8b94deb418.zip/node_modules/gatsby-core-utils/",
+          "packageDependencies": [
+            ["gatsby-core-utils", "npm:2.0.0"],
+            ["ci-info", "npm:2.0.0"],
+            ["configstore", "npm:5.0.1"],
+            ["file-type", "npm:16.2.0"],
+            ["fs-extra", "npm:8.1.0"],
+            ["node-object-hash", "npm:2.1.2"],
+            ["proper-lockfile", "npm:4.1.2"],
+            ["tmp", "npm:0.2.1"],
+            ["xdg-basedir", "npm:4.0.0"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["gatsby-graphiql-explorer", [
@@ -17173,24 +17188,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["gatsby-remark-images", [
-        ["npm:3.11.0", {
-          "packageLocation": "./.yarn/cache/gatsby-remark-images-npm-3.11.0-2eb70c7e78-7cb48f22ae.zip/node_modules/gatsby-remark-images/",
+        ["npm:4.0.0", {
+          "packageLocation": "./.yarn/cache/gatsby-remark-images-npm-4.0.0-ba49f672ec-c48254784e.zip/node_modules/gatsby-remark-images/",
           "packageDependencies": [
-            ["gatsby-remark-images", "npm:3.11.0"]
+            ["gatsby-remark-images", "npm:4.0.0"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:3.11.0", {
-          "packageLocation": "./.yarn/$$virtual/gatsby-remark-images-virtual-df8fa15ca7/0/cache/gatsby-remark-images-npm-3.11.0-2eb70c7e78-7cb48f22ae.zip/node_modules/gatsby-remark-images/",
+        ["virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:4.0.0", {
+          "packageLocation": "./.yarn/$$virtual/gatsby-remark-images-virtual-0eead23218/0/cache/gatsby-remark-images-npm-4.0.0-ba49f672ec-c48254784e.zip/node_modules/gatsby-remark-images/",
           "packageDependencies": [
-            ["gatsby-remark-images", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:3.11.0"],
+            ["gatsby-remark-images", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:4.0.0"],
             ["@babel/runtime", "npm:7.12.13"],
             ["@types/gatsby", null],
             ["@types/gatsby-plugin-sharp", null],
             ["chalk", "npm:4.1.0"],
             ["cheerio", "npm:1.0.0-rc.5"],
             ["gatsby", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:2.32.9"],
-            ["gatsby-core-utils", "npm:1.10.0"],
+            ["gatsby-core-utils", "npm:2.0.0"],
             ["gatsby-plugin-sharp", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:2.14.3"],
             ["is-relative-url", "npm:3.0.0"],
             ["lodash", "npm:4.17.20"],
@@ -26697,7 +26712,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["gatsby-plugin-typography", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:2.12.0"],
             ["gatsby-remark-autolink-headers", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:2.11.0"],
             ["gatsby-remark-copy-linked-files", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:2.10.0"],
-            ["gatsby-remark-images", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:3.11.0"],
+            ["gatsby-remark-images", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:4.0.0"],
             ["gatsby-remark-prismjs", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:3.13.0"],
             ["gatsby-source-filesystem", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:2.11.1"],
             ["gatsby-transformer-remark", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:2.16.0"],
