@@ -11432,9 +11432,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gatsby@npm:~2.32.8":
-  version: 2.32.8
-  resolution: "gatsby@npm:2.32.8"
+"gatsby@npm:~2.32.9":
+  version: 2.32.9
+  resolution: "gatsby@npm:2.32.9"
   dependencies:
     "@babel/code-frame": ^7.10.4
     "@babel/core": ^7.12.3
@@ -11595,7 +11595,7 @@ fsevents@^1.2.7:
     react-dom: ^16.4.2 || ^17.0.0
   bin:
     gatsby: ./cli.js
-  checksum: 0a1909b2584287f76359230bb1743b7b787e0bd07a835a7df3dbf5f088b8b267ac78bdb663a59ef5339140f96611d7ccc04a4586ad60968e800375f5f05a37a2
+  checksum: 505d06ddc5c6ac838de4ab4389533dcce606033c95eaf23319e449dfac88d90e6097082cefe9c63aeb529aa3b999bdcaa958d8b8b2ec0295694f73208e03bf2b
   languageName: node
   linkType: hard
 
@@ -19829,7 +19829,7 @@ fsevents@^1.2.7:
     "@types/styled-components": ^5.1.7
     babel-plugin-styled-components: ^1.12.0
     debug: ^4.2.0
-    gatsby: ~2.32.8
+    gatsby: ~2.32.9
     gatsby-plugin-manifest: ^2.12.1
     gatsby-plugin-react-helmet: ^3.10.0
     gatsby-plugin-sharp: ^2.14.3
