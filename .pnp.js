@@ -6954,7 +6954,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["gulp-plumber", "npm:1.2.1"],
             ["gulp-typescript", "virtual:a4b16e182a0d5be1f51008fd86e27f5f91d2ff1d35cd925d6663482eb993c2133f16b41922f78571490b147d705095670a9bcae798ad076cd488c05490fe3e77#npm:6.0.0-alpha.1"],
             ["rimraf", "npm:3.0.2"],
-            ["rollup", "npm:2.39.0"],
+            ["rollup", "npm:2.40.0"],
             ["rollup-plugin-terser", "virtual:a4b16e182a0d5be1f51008fd86e27f5f91d2ff1d35cd925d6663482eb993c2133f16b41922f78571490b147d705095670a9bcae798ad076cd488c05490fe3e77#npm:7.0.2"],
             ["through2", "npm:4.0.2"],
             ["tslib", "npm:2.1.0"],
@@ -6995,7 +6995,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@rollup/plugin-alias", "virtual:a4b16e182a0d5be1f51008fd86e27f5f91d2ff1d35cd925d6663482eb993c2133f16b41922f78571490b147d705095670a9bcae798ad076cd488c05490fe3e77#npm:3.1.2"],
             ["@types/rollup", null],
-            ["rollup", "npm:2.39.0"],
+            ["rollup", "npm:2.40.0"],
             ["slash", "npm:3.0.0"]
           ],
           "packagePeers": [
@@ -7023,7 +7023,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/babel__core", "npm:7.1.12"],
             ["@types/rollup", null],
             ["@types/types__babel__core", null],
-            ["rollup", "npm:2.39.0"]
+            ["rollup", "npm:2.40.0"]
           ],
           "packagePeers": [
             "@babel/core",
@@ -7055,7 +7055,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-reference", "npm:1.2.1"],
             ["magic-string", "npm:0.25.7"],
             ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
-            ["rollup", "npm:2.39.0"]
+            ["rollup", "npm:2.40.0"]
           ],
           "packagePeers": [
             "@types/rollup",
@@ -7083,7 +7083,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["deepmerge", "npm:4.2.2"],
             ["is-module", "npm:1.0.0"],
             ["resolve", "patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"],
-            ["rollup", "npm:2.39.0"]
+            ["rollup", "npm:2.40.0"]
           ],
           "packagePeers": [
             "@types/rollup",
@@ -7107,7 +7107,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rollup/pluginutils", "virtual:935863bd5eea834191c1fe04d80283d8b434e21e8b7aad8da3de69ec9496bda603e885c7d78c331ea7a404cca2b023244bda07fc43ebe892bfed39c953a18ca7#npm:3.1.0"],
             ["@types/rollup", null],
             ["magic-string", "npm:0.25.7"],
-            ["rollup", "npm:2.39.0"]
+            ["rollup", "npm:2.40.0"]
           ],
           "packagePeers": [
             "@types/rollup",
@@ -7132,7 +7132,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/rollup", null],
             ["estree-walker", "npm:1.0.1"],
             ["picomatch", "npm:2.2.2"],
-            ["rollup", "npm:2.39.0"]
+            ["rollup", "npm:2.40.0"]
           ],
           "packagePeers": [
             "@types/rollup",
@@ -28531,10 +28531,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["rollup", [
-        ["npm:2.39.0", {
-          "packageLocation": "./.yarn/cache/rollup-npm-2.39.0-d94e133c08-b504b080e4.zip/node_modules/rollup/",
+        ["npm:2.40.0", {
+          "packageLocation": "./.yarn/cache/rollup-npm-2.40.0-f6c7b660f3-c512236087.zip/node_modules/rollup/",
           "packageDependencies": [
-            ["rollup", "npm:2.39.0"],
+            ["rollup", "npm:2.40.0"],
             ["fsevents", "patch:fsevents@npm%3A2.3.2#builtin<compat/fsevents>::version=2.3.2&hash=11e9ea"]
           ],
           "linkType": "HARD",
@@ -28555,7 +28555,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/code-frame", "npm:7.12.13"],
             ["@types/rollup", null],
             ["jest-worker", "npm:26.6.2"],
-            ["rollup", "npm:2.39.0"],
+            ["rollup", "npm:2.40.0"],
             ["serialize-javascript", "npm:4.0.0"],
             ["terser", "npm:5.6.0"]
           ],

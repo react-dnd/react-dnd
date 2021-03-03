@@ -2962,7 +2962,7 @@ __metadata:
     gulp-plumber: ^1.2.1
     gulp-typescript: ^6.0.0-alpha.1
     rimraf: ^3.0.2
-    rollup: ^2.39.0
+    rollup: ^2.40.0
     rollup-plugin-terser: ^7.0.2
     through2: ^4.0.2
     tslib: ^2.1.0
@@ -21339,9 +21339,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.39.0":
-  version: 2.39.0
-  resolution: "rollup@npm:2.39.0"
+"rollup@npm:^2.40.0":
+  version: 2.40.0
+  resolution: "rollup@npm:2.40.0"
   dependencies:
     fsevents: ~2.3.1
   dependenciesMeta:
@@ -21349,7 +21349,7 @@ fsevents@^1.2.7:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: b504b080e41382b1f7ff4327c970446458a10e9e083e080175435a1848df5403c10106440551276bfa2d23e56be2810ba52ec19794c74b50854ca89817e36b61
+  checksum: c512236087c32f661181d65489341a01fdd8a41ff3992479d049e999d9070387b20c8b37a5fbdda6af9507fce435e0b9dc510dbf058573575a157d3e61bd2bd4
   languageName: node
   linkType: hard
 
