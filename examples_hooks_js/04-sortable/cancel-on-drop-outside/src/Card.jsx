@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 const style = {
@@ -7,7 +8,7 @@ const style = {
     backgroundColor: 'white',
     cursor: 'move',
 };
-export const Card = ({ id, text, moveCard, findCard }) => {
+export const Card = memo(function Card({ id, text, moveCard, findCard, }) {
     const originalIndex = findCard(id).index;
     const [{ isDragging }, drag] = useDrag(() => ({
         item: { type: ItemTypes.CARD, id, originalIndex },
@@ -21,7 +22,7 @@ export const Card = ({ id, text, moveCard, findCard }) => {
                 moveCard(droppedId, originalIndex);
             }
         },
-    }), [id, originalIndex]);
+    }), [id, originalIndex, moveCard]);
     const [, drop] = useDrop(() => ({
         accept: ItemTypes.CARD,
         canDrop: () => false,
@@ -31,9 +32,9 @@ export const Card = ({ id, text, moveCard, findCard }) => {
                 moveCard(draggedId, overIndex);
             }
         },
-    }));
+    }), [findCard, moveCard]);
     const opacity = isDragging ? 0 : 1;
     return (<div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
 			{text}
 		</div>);
-};
+});
