@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, memo } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
@@ -23,7 +23,12 @@ interface Item {
 	originalIndex: string
 }
 
-export const Card: FC<CardProps> = ({ id, text, moveCard, findCard }) => {
+export const Card: FC<CardProps> = memo(function Card({
+	id,
+	text,
+	moveCard,
+	findCard,
+}) {
 	const originalIndex = findCard(id).index
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
@@ -39,19 +44,22 @@ export const Card: FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 				}
 			},
 		}),
-		[id, originalIndex],
+		[id, originalIndex, moveCard],
 	)
 
-	const [, drop] = useDrop(() => ({
-		accept: ItemTypes.CARD,
-		canDrop: () => false,
-		hover({ id: draggedId }: Item) {
-			if (draggedId !== id) {
-				const { index: overIndex } = findCard(id)
-				moveCard(draggedId, overIndex)
-			}
-		},
-	}))
+	const [, drop] = useDrop(
+		() => ({
+			accept: ItemTypes.CARD,
+			canDrop: () => false,
+			hover({ id: draggedId }: Item) {
+				if (draggedId !== id) {
+					const { index: overIndex } = findCard(id)
+					moveCard(draggedId, overIndex)
+				}
+			},
+		}),
+		[findCard, moveCard],
+	)
 
 	const opacity = isDragging ? 0 : 1
 	return (
@@ -59,4 +67,4 @@ export const Card: FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 			{text}
 		</div>
 	)
-}
+})
