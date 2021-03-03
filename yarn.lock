@@ -11430,21 +11430,22 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gatsby-transformer-sharp@npm:^2.12.0":
-  version: 2.12.0
-  resolution: "gatsby-transformer-sharp@npm:2.12.0"
+"gatsby-transformer-sharp@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "gatsby-transformer-sharp@npm:3.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
     bluebird: ^3.7.2
+    common-tags: ^1.8.0
     fs-extra: ^9.1.0
     potrace: ^2.1.8
     probe-image-size: ^6.0.0
     semver: ^7.3.4
     sharp: ^0.27.0
   peerDependencies:
-    gatsby: ^2.12.1
-    gatsby-plugin-sharp: ^2.0.0-beta.3
-  checksum: b830d5355bdd5856403623db9729ffa5eab0d760bc28bc5715730d3ec6f4223c0826162c814bca08ca84a62b99aa6ef4c74c92573ba0d2bbaba06f6ec0004018
+    gatsby: ^3.0.0-next.0
+    gatsby-plugin-sharp: ^3.0.0-next.0
+  checksum: 2ad9f2460943ff9855b084e29eee8b8e7792987af508023fdc81b265468caef20d85fcd5d1b551e825c7c55bfcd87be56efb6ceb2c7a38dc82cd1bb26f7a3c7b
   languageName: node
   linkType: hard
 
@@ -19857,7 +19858,7 @@ fsevents@^1.2.7:
     gatsby-remark-prismjs: ^3.13.0
     gatsby-source-filesystem: ^2.11.1
     gatsby-transformer-remark: ^2.16.0
-    gatsby-transformer-sharp: ^2.12.0
+    gatsby-transformer-sharp: ^3.0.0
     lodash: ^4.17.20
     npm-run-all: ^4.1.5
     prettier: ^2.2.1
