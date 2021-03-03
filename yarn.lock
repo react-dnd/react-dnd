@@ -11300,9 +11300,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gatsby-remark-copy-linked-files@npm:^2.10.0":
-  version: 2.10.0
-  resolution: "gatsby-remark-copy-linked-files@npm:2.10.0"
+"gatsby-remark-copy-linked-files@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "gatsby-remark-copy-linked-files@npm:3.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
     cheerio: ^1.0.0-rc.3
@@ -11313,8 +11313,8 @@ fsevents@^1.2.7:
     probe-image-size: ^6.0.0
     unist-util-visit: ^1.4.1
   peerDependencies:
-    gatsby: ^2.0.0
-  checksum: 526f77732a02f45b6a562cd244e66638a6eabc1000cd729d6f6c6b3a8c1e5862f77344c40c162afb83b6f22047dea9d035dabb5fc83a3c4f2a550843f3d4f5e5
+    gatsby: ^3.0.0-next.0
+  checksum: 3180cf399747d5f8943bb76b37c04360db92e1fa563e10b75f38b49940de0f84a2c145713b453354fb8a2ace3722ece8e6bf79cf1e5c9cade2a9c69b9b550ff6
   languageName: node
   linkType: hard
 
@@ -19852,7 +19852,7 @@ fsevents@^1.2.7:
     gatsby-plugin-styled-components: ^3.10.0
     gatsby-plugin-typography: ^2.12.0
     gatsby-remark-autolink-headers: ^2.11.0
-    gatsby-remark-copy-linked-files: ^2.10.0
+    gatsby-remark-copy-linked-files: ^3.0.0
     gatsby-remark-images: ^4.0.0
     gatsby-remark-prismjs: ^3.13.0
     gatsby-source-filesystem: ^2.11.1
