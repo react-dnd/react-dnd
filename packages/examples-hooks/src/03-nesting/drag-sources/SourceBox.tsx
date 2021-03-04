@@ -17,7 +17,7 @@ export const SourceBox: FC<SourceBoxProps> = ({ color, children }) => {
 	const [forbidDrag, setForbidDrag] = useState(false)
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
-			item: { type: `${color}` },
+			type: `${color}`,
 			canDrag: !forbidDrag,
 			collect: (monitor: DragSourceMonitor) => ({
 				isDragging: monitor.isDragging(),

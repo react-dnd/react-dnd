@@ -1,9 +1,8 @@
 import { DropTarget } from 'dnd-core'
 import { DropTargetMonitor } from '../../types'
-import { DragObjectWithType, DropTargetHookSpec } from '../types'
+import { DropTargetHookSpec } from '../types'
 
-export class DropTargetImpl<O extends DragObjectWithType, R, P>
-	implements DropTarget {
+export class DropTargetImpl<O, R, P> implements DropTarget {
 	public constructor(
 		public spec: DropTargetHookSpec<O, R, P>,
 		private monitor: DropTargetMonitor,

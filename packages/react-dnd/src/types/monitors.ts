@@ -30,14 +30,14 @@ export interface DragSourceMonitor extends HandlerManager, MonitorEventEmitter {
 	 * Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from its beginDrag() method.
 	 * Returns null if no item is being dragged.
 	 */
-	getItem(): any
+	getItem<T>(): T
 
 	/**
 	 * Returns a plain object representing the last recorded drop result. The drop targets may optionally specify it by returning an object from their
 	 * drop() methods. When a chain of drop() is dispatched for the nested targets, bottom up, any parent that explicitly returns its own result from drop()
 	 * overrides the child drop result previously set by the child. Returns null if called outside endDrag().
 	 */
-	getDropResult(): any
+	getDropResult<T>(): T
 
 	/**
 	 *  Returns true if some drop target has handled the drop event, false otherwise. Even if a target did not return a drop result, didDrop() returns true.

@@ -23,9 +23,7 @@ export const BoxWithHandle: FC = () => {
 		accept: ItemTypes.BOX,
 	}))
 	const [{ isDragging }, drag, preview] = useDrag(() => ({
-		item: {
-			type: ItemTypes.BOX,
-		},
+		type: ItemTypes.BOX,
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),

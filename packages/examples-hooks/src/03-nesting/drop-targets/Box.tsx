@@ -11,7 +11,7 @@ const style = {
 }
 
 export const Box: FC = () => {
-	const [, drag] = useDrag(() => ({ item: { type: ItemTypes.BOX } }))
+	const [, drag] = useDrag(() => ({ type: ItemTypes.BOX }))
 	return (
 		<div ref={drag} style={style}>
 			Drag me

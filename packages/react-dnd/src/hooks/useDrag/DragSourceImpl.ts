@@ -2,12 +2,11 @@ import { invariant } from '@react-dnd/invariant'
 import { DragDropMonitor, DragSource, Identifier } from 'dnd-core'
 import { Connector } from '../../internals'
 import { DragSourceMonitor } from '../../types'
-import { DragObjectWithType, DragSourceHookSpec } from '../types'
+import { DragObjectFactory, DragSourceHookSpec } from '../types'
 
-export class DragSourceImpl<O extends DragObjectWithType, R, P>
-	implements DragSource {
+export class DragSourceImpl<O, P> implements DragSource {
 	public constructor(
-		public spec: DragSourceHookSpec<O, R, P>,
+		public spec: DragSourceHookSpec<O, P>,
 		private monitor: DragSourceMonitor,
 		private connector: Connector,
 	) {}
@@ -15,16 +14,30 @@ export class DragSourceImpl<O extends DragObjectWithType, R, P>
 	public beginDrag() {
 		const spec = this.spec
 		const monitor = this.monitor
-		const { begin, item } = spec
-		if (begin) {
-			const beginResult = begin(monitor)
+		const { item } = spec
+
+		invariant(
+			typeof item === 'undefined' ||
+				typeof item === 'function' ||
+				typeof item === 'object',
+			'dragSpec.item() must either be an object or a function',
+		)
+
+		let result: O | null = null
+		if (typeof item === 'function') {
+			result = (item as DragObjectFactory<O>)(monitor)
 			invariant(
-				beginResult == null || typeof beginResult === 'object',
-				'dragSpec.begin() must either return an object, undefined, or null',
+				result == null || typeof result === 'object',
+				'dragSpec.item() must either return an object, undefined, or null',
 			)
-			return beginResult ?? item ?? {}
+		} else if (typeof item == 'object') {
+			result = item as O
+		} else {
+			// This is useful in the scenario when the user defines spec.type, but not spec.item
+			result = {} as O
 		}
-		return item ?? {}
+
+		return result
 	}
 
 	public canDrag() {

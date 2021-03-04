@@ -28,7 +28,8 @@ import { ItemTypes } from './Constants'
 export default function Card({ isDragging, text }) {
   const [{ opacity }, dragRef] = useDrag(
     () => ({
-      item: { type: ItemTypes.CARD, text },
+      type: ItemTypes.CARD,
+      item: { text },
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0.5 : 1
       })

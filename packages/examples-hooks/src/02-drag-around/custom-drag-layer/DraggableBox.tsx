@@ -32,7 +32,8 @@ export const DraggableBox: FC<DraggableBoxProps> = (props) => {
 	const { id, title, left, top } = props
 	const [{ isDragging }, drag, preview] = useDrag(
 		() => ({
-			item: { type: ItemTypes.BOX, id, left, top, title },
+			type: ItemTypes.BOX,
+			item: { id, left, top, title },
 			collect: (monitor: DragSourceMonitor) => ({
 				isDragging: monitor.isDragging(),
 			}),
