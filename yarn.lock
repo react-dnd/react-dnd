@@ -11642,9 +11642,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gatsby-remark-autolink-headers@npm:^2.11.0":
-  version: 2.11.0
-  resolution: "gatsby-remark-autolink-headers@npm:2.11.0"
+"gatsby-remark-autolink-headers@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "gatsby-remark-autolink-headers@npm:3.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
     github-slugger: ^1.3.0
@@ -11652,8 +11652,10 @@ fsevents@^1.2.7:
     mdast-util-to-string: ^1.1.0
     unist-util-visit: ^1.4.1
   peerDependencies:
-    gatsby: ^2.0.0
-  checksum: 86284a8161f0bcd3e2daa8f26ccf922461df1429f490d43f36f3368dff265bcbf1ffdcfe7efc3a4c2091fc8db716b8b8c1a68347bc83551d9ee2c8a5425aba9b
+    gatsby: ^3.0.0-next.0
+    react: ^16.9.0 || ^17.0.0
+    react-dom: ^16.9.0 || ^17.0.0
+  checksum: 4885d8b820d2a42608f0f67538f2ac4afd680060fd9c2bb6470013011bd0a9e562aa934eaa2c658b10b8355f574f7d764a66394664661f81e2d5e380d0ded625
   languageName: node
   linkType: hard
 
@@ -20235,7 +20237,7 @@ fsevents@^1.2.7:
     gatsby-plugin-sharp: ^2.14.3
     gatsby-plugin-styled-components: ^3.10.0
     gatsby-plugin-typography: ^2.12.0
-    gatsby-remark-autolink-headers: ^2.11.0
+    gatsby-remark-autolink-headers: ^3.0.0
     gatsby-remark-copy-linked-files: ^3.0.0
     gatsby-remark-images: ^4.0.0
     gatsby-remark-prismjs: ^3.13.0
