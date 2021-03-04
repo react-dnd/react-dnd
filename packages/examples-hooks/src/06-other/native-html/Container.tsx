@@ -10,7 +10,7 @@ export const Container: FC = () => {
 	const handleHTMLDrop = useCallback(
 		(item: any, monitor: DropTargetMonitor) => {
 			if (monitor) {
-				const html = monitor.getItem().html
+				const html = monitor.getItem<{ html: any }>().html
 				setDroppedHTML(html)
 			}
 		},

@@ -10,7 +10,7 @@ export const Container: FC = () => {
 	const handleFileDrop = useCallback(
 		(item: any, monitor: DropTargetMonitor) => {
 			if (monitor) {
-				const files = monitor.getItem().files
+				const files = monitor.getItem<{ files: any[] }>().files
 				setDroppedFiles(files)
 			}
 		},
