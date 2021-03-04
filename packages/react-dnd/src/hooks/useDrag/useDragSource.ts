@@ -4,8 +4,8 @@ import { DragSourceMonitor } from '../../types'
 import { DragSourceHookSpec } from '../types'
 import { DragSourceImpl } from './DragSourceImpl'
 
-export function useDragSource<O, P>(
-	spec: DragSourceHookSpec<O, P>,
+export function useDragSource<O, R, P>(
+	spec: DragSourceHookSpec<O, R, P>,
 	monitor: DragSourceMonitor,
 	connector: Connector,
 ) {

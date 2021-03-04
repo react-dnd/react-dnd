@@ -4,9 +4,9 @@ import { Connector } from '../../internals'
 import { DragSourceMonitor } from '../../types'
 import { DragObjectFactory, DragSourceHookSpec } from '../types'
 
-export class DragSourceImpl<O, P> implements DragSource {
+export class DragSourceImpl<O, R, P> implements DragSource {
 	public constructor(
-		public spec: DragSourceHookSpec<O, P>,
+		public spec: DragSourceHookSpec<O, R, P>,
 		private monitor: DragSourceMonitor,
 		private connector: Connector,
 	) {}

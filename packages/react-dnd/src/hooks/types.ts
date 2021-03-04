@@ -9,7 +9,7 @@ import {
 
 export type FactoryOrInstance<T> = T | (() => T)
 export type DragObjectFactory<T> = (monitor: DragSourceMonitor) => T | null
-export interface DragSourceHookSpec<DragObject, CollectedProps> {
+export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	/**
 	 * The type of item being dragged.
 	 */

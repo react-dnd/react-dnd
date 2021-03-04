@@ -12,8 +12,10 @@ import { useConnectDragPreview, useConnectDragSource } from './connectors'
  * @param sourceSpec The drag source specification (object or function, function preferred)
  * @param deps The memoization deps array to use when evaluating spec changes
  */
-export function useDrag<DragObject, CollectedProps>(
-	specArg: FactoryOrInstance<DragSourceHookSpec<DragObject, CollectedProps>>,
+export function useDrag<DragObject, DropResult, CollectedProps>(
+	specArg: FactoryOrInstance<
+		DragSourceHookSpec<DragObject, DropResult, CollectedProps>
+	>,
 	deps?: unknown[],
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
 	const spec = useOptionalFactory(specArg, deps)

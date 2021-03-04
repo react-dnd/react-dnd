@@ -6,8 +6,8 @@ import { useDragSource } from './useDragSource'
 import { useDragDropManager } from '../useDragDropManager'
 import { invariant } from '@react-dnd/invariant'
 
-export function useRegisteredDragSource<O, P>(
-	spec: DragSourceHookSpec<O, P>,
+export function useRegisteredDragSource<O, R, P>(
+	spec: DragSourceHookSpec<O, R, P>,
 	monitor: DragSourceMonitor,
 	connector: SourceConnector,
 ): void {
