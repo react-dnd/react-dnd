@@ -5,7 +5,7 @@ import { DropTargetHookSpec } from '../types'
 export class DropTargetImpl<O, R, P> implements DropTarget {
 	public constructor(
 		public spec: DropTargetHookSpec<O, R, P>,
-		private monitor: DropTargetMonitor,
+		private monitor: DropTargetMonitor<O, R>,
 	) {}
 
 	public canDrop() {

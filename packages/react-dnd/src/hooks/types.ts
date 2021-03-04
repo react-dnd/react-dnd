@@ -8,7 +8,7 @@ import {
 } from '../types'
 
 export type FactoryOrInstance<T> = T | (() => T)
-export type DragObjectFactory<T> = (monitor: DragSourceMonitor) => T | null
+export type DragObjectFactory<T> = (monitor: DragSourceMonitor<T>) => T | null
 export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	/**
 	 * The type of item being dragged.
@@ -50,7 +50,10 @@ export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	end?: (draggedItem: DragObject, monitor: DragSourceMonitor) => void
+	end?: (
+		draggedItem: DragObject,
+		monitor: DragSourceMonitor<DragObject, DropResult>,
+	) => void
 
 	/**
 	 * Optional.
@@ -58,7 +61,9 @@ export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: boolean | ((monitor: DragSourceMonitor) => boolean)
+	canDrag?:
+		| boolean
+		| ((monitor: DragSourceMonitor<DragObject, DropResult>) => boolean)
 
 	/**
 	 * Optional.
@@ -70,12 +75,14 @@ export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	 *
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
-	isDragging?: (monitor: DragSourceMonitor) => boolean
+	isDragging?: (monitor: DragSourceMonitor<DragObject, DropResult>) => boolean
 
 	/**
 	 * A function to collect rendering properties
 	 */
-	collect?: (monitor: DragSourceMonitor) => CollectedProps
+	collect?: (
+		monitor: DragSourceMonitor<DragObject, DropResult>,
+	) => CollectedProps
 }
 
 /**

@@ -8,7 +8,7 @@ import { invariant } from '@react-dnd/invariant'
 
 export function useRegisteredDragSource<O, R, P>(
 	spec: DragSourceHookSpec<O, R, P>,
-	monitor: DragSourceMonitor,
+	monitor: DragSourceMonitor<O, R>,
 	connector: SourceConnector,
 ): void {
 	const manager = useDragDropManager()

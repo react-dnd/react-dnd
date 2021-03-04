@@ -7,7 +7,7 @@ import { DragObjectFactory, DragSourceHookSpec } from '../types'
 export class DragSourceImpl<O, R, P> implements DragSource {
 	public constructor(
 		public spec: DragSourceHookSpec<O, R, P>,
-		private monitor: DragSourceMonitor,
+		private monitor: DragSourceMonitor<O, R>,
 		private connector: Connector,
 	) {}
 

@@ -19,7 +19,7 @@ export function useDrag<DragObject, DropResult, CollectedProps>(
 	deps?: unknown[],
 ): [CollectedProps, ConnectDragSource, ConnectDragPreview] {
 	const spec = useOptionalFactory(specArg, deps)
-	const monitor = useDragSourceMonitor()
+	const monitor = useDragSourceMonitor<DragObject, DropResult>()
 	const connector = useDragSourceConnector(spec.options, spec.previewOptions)
 	useRegisteredDragSource(spec, monitor, connector)
 

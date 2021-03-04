@@ -10,7 +10,9 @@ export interface HandlerManager {
 	getHandlerId: () => Identifier | null
 }
 
-export interface DragSourceMonitor extends HandlerManager, MonitorEventEmitter {
+export interface DragSourceMonitor<DragObject = unknown, DropResult = unknown>
+	extends HandlerManager,
+		MonitorEventEmitter {
 	/**
 	 * Returns true if no drag operation is in progress, and the owner's canDrag() returns true or is not defined.
 	 */
@@ -30,14 +32,14 @@ export interface DragSourceMonitor extends HandlerManager, MonitorEventEmitter {
 	 * Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from its beginDrag() method.
 	 * Returns null if no item is being dragged.
 	 */
-	getItem<T>(): T
+	getItem<T = DragObject>(): T
 
 	/**
 	 * Returns a plain object representing the last recorded drop result. The drop targets may optionally specify it by returning an object from their
 	 * drop() methods. When a chain of drop() is dispatched for the nested targets, bottom up, any parent that explicitly returns its own result from drop()
 	 * overrides the child drop result previously set by the child. Returns null if called outside endDrag().
 	 */
-	getDropResult<T>(): T
+	getDropResult<T = DropResult>(): T | null
 
 	/**
 	 *  Returns true if some drop target has handled the drop event, false otherwise. Even if a target did not return a drop result, didDrop() returns true.
@@ -86,7 +88,9 @@ export interface MonitorEventEmitter {
 	): Unsubscribe
 }
 
-export interface DropTargetMonitor extends HandlerManager, MonitorEventEmitter {
+export interface DropTargetMonitor<DragObject = unknown, DropResult = unknown>
+	extends HandlerManager,
+		MonitorEventEmitter {
 	/**
 	 * Returns true if there is a drag operation in progress, and the owner's canDrop() returns true or is not defined.
 	 */
@@ -108,14 +112,14 @@ export interface DropTargetMonitor extends HandlerManager, MonitorEventEmitter {
 	 * Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from
 	 * its beginDrag() method. Returns null if no item is being dragged.
 	 */
-	getItem(): any
+	getItem<T = DragObject>(): T
 
 	/**
 	 * Returns a plain object representing the last recorded drop result. The drop targets may optionally specify it by returning an
 	 * object from their drop() methods. When a chain of drop() is dispatched for the nested targets, bottom up, any parent that explicitly
 	 * returns its own result from drop() overrides the drop result previously set by the child. Returns null if called outside drop().
 	 */
-	getDropResult(): any
+	getDropResult<T = DropResult>(): T | null
 
 	/**
 	 *  Returns true if some drop target has handled the drop event, false otherwise. Even if a target did not return a drop result,

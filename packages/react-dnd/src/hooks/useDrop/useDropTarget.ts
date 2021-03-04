@@ -5,7 +5,7 @@ import { DropTargetImpl } from './DropTargetImpl'
 
 export function useDropTarget<O, R, P>(
 	spec: DropTargetHookSpec<O, R, P>,
-	monitor: DropTargetMonitor,
+	monitor: DropTargetMonitor<O, R>,
 ) {
 	const dropTarget = useMemo(() => new DropTargetImpl(spec, monitor), [monitor])
 	useEffect(() => {

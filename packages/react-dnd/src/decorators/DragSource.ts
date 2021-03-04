@@ -26,10 +26,11 @@ import { createSourceFactory } from './createSourceFactory'
 export function DragSource<
 	RequiredProps,
 	CollectedProps = any,
-	DragObject = any
+	DragObject = any,
+	DropResult = any
 >(
 	type: SourceType | ((props: RequiredProps) => SourceType),
-	spec: DragSourceSpec<RequiredProps, DragObject>,
+	spec: DragSourceSpec<RequiredProps, DragObject, DropResult>,
 	collect: DragSourceCollector<CollectedProps, RequiredProps>,
 	options: DndOptions<RequiredProps> = {},
 ): DndComponentEnhancer<CollectedProps> {

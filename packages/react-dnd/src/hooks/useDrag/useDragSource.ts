@@ -6,7 +6,7 @@ import { DragSourceImpl } from './DragSourceImpl'
 
 export function useDragSource<O, R, P>(
 	spec: DragSourceHookSpec<O, R, P>,
-	monitor: DragSourceMonitor,
+	monitor: DragSourceMonitor<O, R>,
 	connector: Connector,
 ) {
 	const handler = useMemo(() => new DragSourceImpl(spec, monitor, connector), [

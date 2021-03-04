@@ -13,6 +13,7 @@ import {
 } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 import { XYCoord } from 'dnd-core'
+import { CardDragObject } from './ItemTypes'
 
 const style = {
 	border: '1px dashed gray',
@@ -73,7 +74,7 @@ export default DropTarget(
 				return null
 			}
 
-			const dragIndex = monitor.getItem().index
+			const dragIndex = monitor.getItem<CardDragObject>().index
 			const hoverIndex = props.index
 
 			// Don't replace items with themselves
@@ -115,7 +116,7 @@ export default DropTarget(
 			// Generally it's better to avoid mutations,
 			// but it's good here for the sake of performance
 			// to avoid expensive index searches.
-			monitor.getItem().index = hoverIndex
+			monitor.getItem<CardDragObject>().index = hoverIndex
 		},
 	},
 	(connect: DropTargetConnector) => ({

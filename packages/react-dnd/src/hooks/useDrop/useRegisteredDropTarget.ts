@@ -8,7 +8,7 @@ import { useDropTarget } from './useDropTarget'
 
 export function useRegisteredDropTarget<O, R, P>(
 	spec: DropTargetHookSpec<O, R, P>,
-	monitor: DropTargetMonitor,
+	monitor: DropTargetMonitor<O, R>,
 	connector: TargetConnector,
 ): void {
 	const manager = useDragDropManager()
