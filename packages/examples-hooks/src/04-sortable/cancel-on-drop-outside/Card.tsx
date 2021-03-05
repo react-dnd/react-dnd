@@ -39,19 +39,22 @@ export const Card: FC<CardProps> = ({ id, text, moveCard, findCard }) => {
 				}
 			},
 		}),
-		[id, originalIndex],
+		[id, originalIndex, moveCard],
 	)
 
-	const [, drop] = useDrop(() => ({
-		accept: ItemTypes.CARD,
-		canDrop: () => false,
-		hover({ id: draggedId }: Item) {
-			if (draggedId !== id) {
-				const { index: overIndex } = findCard(id)
-				moveCard(draggedId, overIndex)
-			}
-		},
-	}))
+	const [, drop] = useDrop(
+		() => ({
+			accept: ItemTypes.CARD,
+			canDrop: () => false,
+			hover({ id: draggedId }: Item) {
+				if (draggedId !== id) {
+					const { index: overIndex } = findCard(id)
+					moveCard(draggedId, overIndex)
+				}
+			},
+		}),
+		[moveCard],
+	)
 
 	const opacity = isDragging ? 0 : 1
 	return (

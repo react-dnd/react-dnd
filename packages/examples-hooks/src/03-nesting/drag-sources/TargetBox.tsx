@@ -1,5 +1,4 @@
-import { DragDropMonitor } from 'dnd-core'
-import { CSSProperties, FC, useState, useCallback } from 'react'
+import { CSSProperties, FC, useState, useCallback, memo } from 'react'
 import { useDrop, DropTargetMonitor } from 'react-dnd'
 import { Colors } from './Colors'
 import { DragItem } from './interfaces'
@@ -17,7 +16,10 @@ export interface TargetBoxProps {
 	lastDroppedColor?: string
 }
 
-const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
+const TargetBox: FC<TargetBoxProps> = memo(function TargetBox({
+	onDrop,
+	lastDroppedColor,
+}) {
 	const [{ isOver, draggingColor, canDrop }, drop] = useDrop(
 		() => ({
 			accept: [Colors.YELLOW, Colors.BLUE],
@@ -59,7 +61,7 @@ const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 			{!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
 		</div>
 	)
-}
+})
 
 export interface StatefulTargetBoxState {
 	lastDroppedColor: string | null
