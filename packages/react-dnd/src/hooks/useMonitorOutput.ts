@@ -13,7 +13,7 @@ export function useMonitorOutput<Monitor extends HandlerManager, Collected>(
 		function subscribeToMonitorStateChange() {
 			const handlerId = monitor.getHandlerId()
 			if (handlerId == null) {
-				return undefined
+				return
 			}
 			return monitor.subscribeToStateChange(updateCollected, {
 				handlerIds: [handlerId],

@@ -25,9 +25,10 @@ export function useCollector<T, S>(
 		}
 	}, [collected, monitor, onUpdate])
 
-	// update the collected properties after the first render
-	// and the components are attached to dnd-core
-	useIsomorphicLayoutEffect(updateCollected, [])
+	// update the collected properties after react renders.
+	// Note that the "Dustbin Stress Test" fails if this is not
+	// done when the component updates
+	useIsomorphicLayoutEffect(updateCollected)
 
 	return [collected, updateCollected]
 }
