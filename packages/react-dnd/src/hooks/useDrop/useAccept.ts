@@ -7,10 +7,12 @@ import { DropTargetHookSpec } from '../types'
  * The main utility here is that we aren't creating a new array on every render if a non-array spec.accept is passed in.
  * @param spec
  */
-export function useAccept<O, R, P>(spec: DropTargetHookSpec<O, R, P>) {
+export function useAccept<O, R, P>(spec: DropTargetHookSpec<O, R, P>): string {
 	const { accept } = spec
 	return useMemo(() => {
 		invariant(spec.accept != null, 'accept must be defined')
-		return Array.isArray(accept) ? accept : [accept]
+		return Array.isArray(accept)
+			? accept.map((a) => a.toString()).join('|')
+			: accept.toString()
 	}, [accept])
 }

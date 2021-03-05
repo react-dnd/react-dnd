@@ -26,6 +26,6 @@ export function useRegisteredDropTarget<O, R, P>(
 			connector.receiveHandlerId(handlerId)
 			return unregister
 		},
-		[manager, monitor, dropTarget, connector, ...accept],
+		[manager, monitor, dropTarget, connector, accept],
 	)
 }
