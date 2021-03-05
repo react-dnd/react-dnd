@@ -1,3 +1,4 @@
+import { DragDropMonitor } from 'dnd-core'
 import { CSSProperties, FC, useState, useCallback } from 'react'
 import { useDrop, DropTargetMonitor } from 'react-dnd'
 import { Colors } from './Colors'
@@ -20,8 +21,8 @@ const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 	const [{ isOver, draggingColor, canDrop }, drop] = useDrop(
 		() => ({
 			accept: [Colors.YELLOW, Colors.BLUE],
-			drop(item: DragItem) {
-				onDrop(item.type)
+			drop(_item: DragItem, monitor) {
+				onDrop(monitor.getItemType())
 				return undefined
 			},
 			collect: (monitor: DropTargetMonitor) => ({
@@ -49,7 +50,7 @@ const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 	return (
 		<div
 			ref={drop}
-			data-color={lastDroppedColor}
+			data-color={lastDroppedColor || 'none'}
 			style={{ ...style, backgroundColor, opacity }}
 			role="TargetBox"
 		>

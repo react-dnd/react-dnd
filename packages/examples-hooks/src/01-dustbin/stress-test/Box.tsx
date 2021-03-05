@@ -18,20 +18,17 @@ export interface BoxProps {
 }
 
 export const Box: FC<BoxProps> = ({ name, type, isDropped }) => {
-	const [{ isDragging }, drag] = useDrag(
-		() => ({
-			type,
-			item: { name },
-			isDragging(monitor) {
-				const item = monitor.getItem<{ name: string }>()
-				return name === item.name
-			},
-			collect: (monitor) => ({
-				isDragging: monitor.isDragging(),
-			}),
+	const [{ isDragging }, drag] = useDrag({
+		type,
+		item: { name },
+		isDragging(monitor) {
+			const item = monitor.getItem()
+			return name === item.name
+		},
+		collect: (monitor) => ({
+			isDragging: monitor.isDragging(),
 		}),
-		[name, type],
-	)
+	})
 
 	const opacity = isDragging ? 0.4 : 1
 

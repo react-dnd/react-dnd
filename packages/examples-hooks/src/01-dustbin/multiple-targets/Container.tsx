@@ -1,4 +1,4 @@
-import { FC, useState, useCallback } from 'react'
+import { FC, useState, useCallback, memo } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { Dustbin } from './Dustbin'
 import { Box } from './Box'
@@ -29,7 +29,7 @@ export interface ContainerState {
 	boxes: BoxSpec[]
 }
 
-export const Container: FC = () => {
+export const Container: FC = memo(function Container() {
 	const [dustbins, setDustbins] = useState<DustbinState[]>([
 		{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
 		{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
@@ -96,4 +96,4 @@ export const Container: FC = () => {
 			</div>
 		</div>
 	)
-}
+})
