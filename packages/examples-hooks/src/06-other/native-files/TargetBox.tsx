@@ -11,7 +11,7 @@ const style: CSSProperties = {
 }
 
 export interface TargetBoxProps {
-	onDrop: (props: TargetBoxProps, monitor: DropTargetMonitor) => void
+	onDrop: (item: { files: any[] }) => void
 }
 
 export const TargetBox: FC<TargetBoxProps> = (props) => {
@@ -19,9 +19,9 @@ export const TargetBox: FC<TargetBoxProps> = (props) => {
 	const [{ canDrop, isOver }, drop] = useDrop(
 		() => ({
 			accept: [NativeTypes.FILE],
-			drop(item: unknown, monitor: DropTargetMonitor) {
+			drop(item: { files: any[] }) {
 				if (onDrop) {
-					onDrop(props, monitor)
+					onDrop(item)
 				}
 			},
 			collect: (monitor: DropTargetMonitor) => ({
