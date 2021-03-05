@@ -11,7 +11,7 @@ describe('The DragPreviewImage component', () => {
 		const onConnect = jest.fn()
 		function Knight() {
 			const [{ isDragging }, drag, preview] = useDrag({
-				item: { type: 'KNIGHT' },
+				type: 'KNIGHT',
 				collect(monitor) {
 					return { isDragging: monitor.isDragging() }
 				},

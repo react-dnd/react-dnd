@@ -37,7 +37,7 @@ export class DragSourceImpl<O, R, P> implements DragSource {
 			result = {} as O
 		}
 
-		return result
+		return result ?? null
 	}
 
 	public canDrag() {

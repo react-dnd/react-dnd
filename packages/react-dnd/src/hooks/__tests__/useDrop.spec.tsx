@@ -28,12 +28,13 @@ describe('The useDrop hook', () => {
 			}))
 			return <div ref={drag} />
 		}
+		const Wrapped = wrapWithBackend(Component)
 
 		const err = console.error
 		try {
 			const errorMock = jest.fn()
 			console.error = errorMock
-			expect(() => render(<Component />)).toThrow(/accept must be defined/)
+			expect(() => render(<Wrapped />)).toThrow(/accept must be defined/)
 		} finally {
 			console.error = err
 		}
