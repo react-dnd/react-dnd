@@ -6,8 +6,8 @@ describe('The useDrag hook', () => {
 	it('throws if rendered outside of a React-DnD tree', () => {
 		function Component() {
 			const [, drag] = useDrag({
-				item: { type: 'box' },
-			} as any)
+				type: 'box',
+			})
 			return <div ref={drag} />
 		}
 
