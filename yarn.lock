@@ -11699,17 +11699,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"gatsby-remark-prismjs@npm:^3.13.0":
-  version: 3.13.0
-  resolution: "gatsby-remark-prismjs@npm:3.13.0"
+"gatsby-remark-prismjs@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "gatsby-remark-prismjs@npm:4.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
     parse-numeric-range: ^0.0.2
     unist-util-visit: ^1.4.1
   peerDependencies:
-    gatsby: ^2.0.0
+    gatsby: ^3.0.0-next.0
     prismjs: ^1.15.0
-  checksum: a47f1041e53d75d0cd78dcd03026f8d77e6d47d8392bc3e845d68e2a201afd5d490bf461b662237e8f492588866aab2d92e4b74dc0b796268d8843755b518d7f
+  checksum: 11a1efcc6dd8c21b082fa9110653696cf18180de695f34bb893a19b6fdf0cc228ed99492545af1d619bf3878a3ebc255da9e6a730626fbcd2f0d0f4a344012a6
   languageName: node
   linkType: hard
 
@@ -20240,7 +20240,7 @@ fsevents@^1.2.7:
     gatsby-remark-autolink-headers: ^3.0.0
     gatsby-remark-copy-linked-files: ^3.0.0
     gatsby-remark-images: ^4.0.0
-    gatsby-remark-prismjs: ^3.13.0
+    gatsby-remark-prismjs: ^4.0.0
     gatsby-source-filesystem: ^3.0.0
     gatsby-transformer-remark: ^3.0.0
     gatsby-transformer-sharp: ^3.0.0
