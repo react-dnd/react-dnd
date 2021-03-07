@@ -11,7 +11,9 @@ export type FactoryOrInstance<T> = T | (() => T)
 export type DragObjectFactory<T> = (monitor: DragSourceMonitor<T>) => T | null
 export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	/**
-	 * The type of item being dragged. This is required when using the function form of spec.item
+	 * The type of item being dragged. This is required when using the function form of spec.item.
+	 * If spec.item is a static object, the type may either be defined on that object as `item.type`, or it may
+	 * be defined here.
 	 */
 	type?: SourceType
 
@@ -31,14 +33,6 @@ export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	 *
 	 */
 	item?: DragObject | DragObjectWithType | DragObjectFactory<DragObject>
-
-	/**
-	 * @deprecated - shorthand for function form of spec.item(). This will not be invoked if the function form
-	 * of .item() is defined
-	 */
-	begin?:
-		| DragObjectFactory<DragObject>
-		| ((monitor: DragSourceMonitor<DragObject, DropResult>) => void)
 
 	/**
 	 * The drag source options
