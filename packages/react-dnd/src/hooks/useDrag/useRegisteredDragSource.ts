@@ -4,7 +4,7 @@ import { DragSourceHookSpec } from '../types'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useDragSource } from './useDragSource'
 import { useDragDropManager } from '../useDragDropManager'
-import { invariant } from '@react-dnd/invariant'
+import { useDragType } from './useDragType'
 
 export function useRegisteredDragSource<O, R, P>(
 	spec: DragSourceHookSpec<O, R, P>,
@@ -13,8 +13,7 @@ export function useRegisteredDragSource<O, R, P>(
 ): void {
 	const manager = useDragDropManager()
 	const handler = useDragSource(spec, monitor, connector)
-	const itemType = spec.type
-	invariant(itemType != null, 'spec.type must be defined')
+	const itemType = useDragType(spec)
 
 	useIsomorphicLayoutEffect(
 		function registerDragSource() {

@@ -1,4 +1,4 @@
-import { TargetType, SourceType } from 'dnd-core'
+import { TargetType, SourceType, Identifier } from 'dnd-core'
 import {
 	DropTargetMonitor,
 	DragSourceMonitor,
@@ -11,9 +11,9 @@ export type FactoryOrInstance<T> = T | (() => T)
 export type DragObjectFactory<T> = (monitor: DragSourceMonitor<T>) => T | null
 export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	/**
-	 * The type of item being dragged.
+	 * The type of item being dragged. This is required when using the function form of spec.item
 	 */
-	type: SourceType
+	type?: SourceType
 
 	/**
 	 * This property generates or defines a plain javascript item describing
@@ -30,7 +30,15 @@ export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	 * If the function returns null, the drag is canceled
 	 *
 	 */
-	item?: DragObject | DragObjectFactory<DragObject>
+	item?: DragObject | DragObjectWithType | DragObjectFactory<DragObject>
+
+	/**
+	 * @deprecated - shorthand for function form of spec.item(). This will not be invoked if the function form
+	 * of .item() is defined
+	 */
+	begin?:
+		| DragObjectFactory<DragObject>
+		| ((monitor: DragSourceMonitor<DragObject, DropResult>) => void)
 
 	/**
 	 * The drag source options
@@ -133,4 +141,8 @@ export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 	 * A function to collect rendering properties
 	 */
 	collect?: (monitor: DropTargetMonitor) => CollectedProps
+}
+
+export interface DragObjectWithType {
+	type: Identifier
 }

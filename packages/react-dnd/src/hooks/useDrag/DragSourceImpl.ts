@@ -14,30 +14,27 @@ export class DragSourceImpl<O, R, P> implements DragSource {
 	public beginDrag() {
 		const spec = this.spec
 		const monitor = this.monitor
-		const { item } = spec
-
-		invariant(
-			typeof item === 'undefined' ||
-				typeof item === 'function' ||
-				typeof item === 'object',
-			'dragSpec.item() must either be an object or a function',
-		)
+		const { item, begin } = spec
 
 		let result: O | null = null
-		if (typeof item === 'function') {
-			result = (item as DragObjectFactory<O>)(monitor)
-			invariant(
-				result == null || typeof result === 'object',
-				'dragSpec.item() must either return an object, undefined, or null',
-			)
-		} else if (typeof item == 'object') {
-			result = item as O
-		} else {
-			// This is useful in the scenario when the user defines spec.type, but not spec.item
-			result = {} as O
+
+		// Use .item by default
+		if (typeof spec.item === 'object') {
+			return spec.item as O
+		} else if (typeof spec.item === 'function') {
+			return (spec.item as DragObjectFactory<O>)(monitor)
+		} else if (typeof spec.begin === 'function') {
+			const beginResult = spec.begin(monitor)
+			if (beginResult != null) {
+				result = beginResult
+			}
 		}
 
-		return result ?? null
+		invariant(
+			item != null,
+			`dragSpec must declare or generate a dragItem in spec.item, spec.item(), or spec.begin()`,
+		)
+		return result
 	}
 
 	public canDrag() {
