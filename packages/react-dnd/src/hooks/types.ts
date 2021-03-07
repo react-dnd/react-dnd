@@ -1,4 +1,4 @@
-import { TargetType, SourceType, Identifier } from 'dnd-core'
+import { TargetType, SourceType } from 'dnd-core'
 import {
 	DropTargetMonitor,
 	DragSourceMonitor,
@@ -15,7 +15,7 @@ export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	 * If spec.item is a static object, the type may either be defined on that object as `item.type`, or it may
 	 * be defined here.
 	 */
-	type?: SourceType
+	type: SourceType
 
 	/**
 	 * This property generates or defines a plain javascript item describing
@@ -32,10 +32,7 @@ export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	 * If the function returns null, the drag is canceled
 	 *
 	 */
-	item?:
-		| DragObject
-		| (DragObject & DragObjectWithType)
-		| DragObjectFactory<DragObject>
+	item?: DragObject | DragObjectFactory<DragObject>
 
 	/**
 	 * The drag source options
@@ -138,8 +135,4 @@ export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 	 * A function to collect rendering properties
 	 */
 	collect?: (monitor: DropTargetMonitor) => CollectedProps
-}
-
-export interface DragObjectWithType {
-	type: Identifier
 }

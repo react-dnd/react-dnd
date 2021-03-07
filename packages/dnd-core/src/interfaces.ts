@@ -48,7 +48,7 @@ export interface DragDropMonitor {
 	): boolean
 
 	/**
-	 * Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns null if no item is being dragged.
+	 * Returns a string or a symbol identifying the type of the current dragged item. Returns null if no item is being dragged.
 	 */
 	getItemType(): Identifier | null
 

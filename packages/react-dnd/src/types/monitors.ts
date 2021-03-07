@@ -24,7 +24,7 @@ export interface DragSourceMonitor<DragObject = unknown, DropResult = unknown>
 	isDragging(): boolean
 
 	/**
-	 * Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns null if no item is being dragged.
+	 * Returns a string or a symbol identifying the type of the current dragged item. Returns null if no item is being dragged.
 	 */
 	getItemType(): Identifier | null
 
@@ -104,7 +104,7 @@ export interface DropTargetMonitor<DragObject = unknown, DropResult = unknown>
 	isOver(options?: { shallow?: boolean }): boolean
 
 	/**
-	 * Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns null if no item is being dragged.
+	 * Returns a string or a symbol identifying the type of the current dragged item. Returns null if no item is being dragged.
 	 */
 	getItemType(): Identifier | null
 
@@ -165,7 +165,7 @@ export interface DragLayerMonitor {
 	isDragging(): boolean
 
 	/**
-	 * Returns a string or an ES6 symbol identifying the type of the current dragged item.
+	 * Returns a string or a symbol identifying the type of the current dragged item.
 	 * Returns null if no item is being dragged.
 	 */
 	getItemType(): Identifier | null

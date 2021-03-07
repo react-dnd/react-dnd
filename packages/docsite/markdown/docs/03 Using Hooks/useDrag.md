@@ -41,7 +41,7 @@ function DraggableComponent(props) {
 
 ### Specification Object Members
 
-- **`type` or `item.type`**: Required. This must be either a string or an ES6 symbol. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to this item. Read the [overview](/docs/overview) to learn more about the items and types.
+- **`type`**: Required. This must be either a string or a symbol. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to this item. Read the [overview](/docs/overview) to learn more about the items and types.
 
 - **`item`**: Required _(object or function)_.
 
