@@ -32,7 +32,10 @@ export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	 * If the function returns null, the drag is canceled
 	 *
 	 */
-	item?: DragObject | DragObjectWithType | DragObjectFactory<DragObject>
+	item?:
+		| DragObject
+		| (DragObject & DragObjectWithType)
+		| DragObjectFactory<DragObject>
 
 	/**
 	 * The drag source options
