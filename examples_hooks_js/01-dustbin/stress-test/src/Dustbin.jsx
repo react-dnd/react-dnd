@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useDrop } from 'react-dnd';
 const style = {
     height: '12rem',
@@ -11,7 +12,7 @@ const style = {
     lineHeight: 'normal',
     float: 'left',
 };
-export const Dustbin = ({ lastDroppedItem, accepts: accept, onDrop, }) => {
+export const Dustbin = memo(function Dustbin({ lastDroppedItem, accepts: accept, onDrop, }) {
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept,
         collect: (monitor) => ({
@@ -19,7 +20,7 @@ export const Dustbin = ({ lastDroppedItem, accepts: accept, onDrop, }) => {
             canDrop: monitor.canDrop(),
         }),
         drop: (item) => onDrop(item),
-    }));
+    }), [accept]);
     const isActive = isOver && canDrop;
     let backgroundColor = '#222';
     if (isActive) {
@@ -35,4 +36,4 @@ export const Dustbin = ({ lastDroppedItem, accepts: accept, onDrop, }) => {
 
 			{lastDroppedItem && (<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>)}
 		</div>);
-};
+});

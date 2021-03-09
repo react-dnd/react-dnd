@@ -10,7 +10,8 @@ const getStyle = (isDragging) => ({
 });
 export const SourceBox = ({ id, onBeginDrag, onEndDrag, }) => {
     const [{ isDragging }, drag] = useDrag(() => ({
-        item: { type: ItemTypes.BOX, id },
+        type: ItemTypes.BOX,
+        item: { id },
         isDragging: (monitor) => monitor.getItem().id === id,
         collect: (monitor) => ({ isDragging: monitor.isDragging() }),
         begin: onBeginDrag,

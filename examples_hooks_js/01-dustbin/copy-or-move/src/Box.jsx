@@ -10,7 +10,8 @@ const style = {
 };
 export const Box = ({ name }) => {
     const [{ opacity }, drag] = useDrag(() => ({
-        item: { name, type: ItemTypes.BOX },
+        type: ItemTypes.BOX,
+        item: { name },
         end(item, monitor) {
             const dropResult = monitor.getDropResult();
             if (item && dropResult) {

@@ -11,7 +11,8 @@ const style = {
 export const Card = memo(({ id, text, moveCard }) => {
     const ref = useRef(null);
     const [{ isDragging, handlerId }, connectDrag] = useDrag({
-        item: { id, type: ItemTypes.CARD },
+        type: ItemTypes.CARD,
+        item: { id },
         collect: (monitor) => {
             const result = {
                 handlerId: monitor.getHandlerId(),

@@ -56,7 +56,10 @@ export const Card = ({ id, text, index, moveCard }) => {
         },
     });
     const [{ isDragging }, drag] = useDrag({
-        item: { type: ItemTypes.CARD, id, index },
+        type: ItemTypes.CARD,
+        item: () => {
+            return { id, index };
+        },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),

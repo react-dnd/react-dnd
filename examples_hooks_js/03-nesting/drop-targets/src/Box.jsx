@@ -8,7 +8,7 @@ const style = {
     cursor: 'move',
 };
 export const Box = () => {
-    const [, drag] = useDrag(() => ({ item: { type: ItemTypes.BOX } }));
+    const [, drag] = useDrag(() => ({ type: ItemTypes.BOX }));
     return (<div ref={drag} style={style}>
 			Drag me
 		</div>);

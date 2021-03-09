@@ -11,9 +11,9 @@ export const TargetBox = (props) => {
     const { onDrop } = props;
     const [{ canDrop, isOver }, drop] = useDrop(() => ({
         accept: [NativeTypes.HTML],
-        drop(item, monitor) {
+        drop(item) {
             if (onDrop) {
-                onDrop(props, monitor);
+                onDrop(item);
             }
         },
         collect: (monitor) => ({

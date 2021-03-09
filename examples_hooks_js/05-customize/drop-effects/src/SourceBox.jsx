@@ -10,7 +10,7 @@ const style = {
 };
 export const SourceBox = ({ showCopyIcon }) => {
     const [{ opacity }, drag] = useDrag(() => ({
-        item: { type: ItemTypes.BOX },
+        type: ItemTypes.BOX,
         options: {
             dropEffect: showCopyIcon ? 'copy' : 'move',
         },

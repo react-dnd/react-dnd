@@ -11,12 +11,13 @@ const style = {
 export const Card = memo(function Card({ id, text, moveCard, findCard, }) {
     const originalIndex = findCard(id).index;
     const [{ isDragging }, drag] = useDrag(() => ({
-        item: { type: ItemTypes.CARD, id, originalIndex },
+        type: ItemTypes.CARD,
+        item: { id, originalIndex },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-        end: (dropResult, monitor) => {
-            const { id: droppedId, originalIndex } = monitor.getItem();
+        end: (item, monitor) => {
+            const { id: droppedId, originalIndex } = item;
             const didDrop = monitor.didDrop();
             if (!didDrop) {
                 moveCard(droppedId, originalIndex);

@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { useDrag } from 'react-dnd';
 export const Example = () => {
     const [{ isDragging }, drag] = useDrag(() => ({
-        item: { type: 'KNIGHT' },
+        type: 'KNIGHT',
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),

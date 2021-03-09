@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 import { getEmptyImage } from 'react-dnd-html5-backend';
@@ -15,10 +15,11 @@ function getStyles(left, top, isDragging) {
         height: isDragging ? 0 : '',
     };
 }
-export const DraggableBox = (props) => {
+export const DraggableBox = memo(function DraggableBox(props) {
     const { id, title, left, top } = props;
     const [{ isDragging }, drag, preview] = useDrag(() => ({
-        item: { type: ItemTypes.BOX, id, left, top, title },
+        type: ItemTypes.BOX,
+        item: { id, left, top, title },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
@@ -29,4 +30,4 @@ export const DraggableBox = (props) => {
     return (<div ref={drag} style={getStyles(left, top, isDragging)} role="DraggableBox">
 			<Box title={title}/>
 		</div>);
-};
+});

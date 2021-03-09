@@ -13,14 +13,14 @@ const style = {
     float: 'left',
 };
 export const Dustbin = memo(function Dustbin({ accept, lastDroppedItem, onDrop, }) {
-    const [{ isOver, canDrop }, drop] = useDrop(() => ({
+    const [{ isOver, canDrop }, drop] = useDrop({
         accept,
         drop: onDrop,
         collect: (monitor) => ({
             isOver: monitor.isOver(),
             canDrop: monitor.canDrop(),
         }),
-    }), [accept, onDrop]);
+    });
     const isActive = isOver && canDrop;
     let backgroundColor = '#222';
     if (isActive) {

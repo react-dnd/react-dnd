@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, memo } from 'react';
 import { useDrag } from 'react-dnd';
 import { Colors } from './Colors';
 const style = {
@@ -6,10 +6,10 @@ const style = {
     padding: '0.5rem',
     margin: '0.5rem',
 };
-export const SourceBox = ({ color, children }) => {
+export const SourceBox = memo(function SourceBox({ color, children, }) {
     const [forbidDrag, setForbidDrag] = useState(false);
     const [{ isDragging }, drag] = useDrag(() => ({
-        item: { type: `${color}` },
+        type: color,
         canDrag: !forbidDrag,
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
@@ -39,4 +39,4 @@ export const SourceBox = ({ color, children }) => {
 			<small>Forbid drag</small>
 			{children}
 		</div>);
-};
+});

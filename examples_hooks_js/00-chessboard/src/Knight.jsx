@@ -8,7 +8,7 @@ const knightStyle = {
 };
 export const Knight = () => {
     const [{ isDragging }, drag, preview] = useDrag(() => ({
-        item: { type: ItemTypes.KNIGHT },
+        type: ItemTypes.KNIGHT,
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),

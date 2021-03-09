@@ -17,7 +17,7 @@ const handleStyle = {
 };
 export const BoxWithHandle = () => {
     const [{ opacity }, drag, preview] = useDrag(() => ({
-        item: { type: ItemTypes.BOX },
+        type: ItemTypes.BOX,
         collect: (monitor) => ({
             opacity: monitor.isDragging() ? 0.4 : 1,
         }),
