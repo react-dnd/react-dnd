@@ -34,9 +34,7 @@ describe('The useDrag hook', () => {
 		try {
 			const errorMock = jest.fn()
 			console.error = errorMock
-			expect(() => render(<Wrapped />)).toThrow(
-				/spec.type or spec.item.type must be defined/,
-			)
+			expect(() => render(<Wrapped />)).toThrow(/spec.type must be defined/)
 		} finally {
 			console.error = err
 		}

@@ -7,9 +7,8 @@ export function useDragType(
 	spec: DragSourceHookSpec<any, any, any>,
 ): Identifier {
 	return useMemo(() => {
-		const result: Identifier | null =
-			spec.type ?? (spec.item?.type as Identifier) ?? null
-		invariant(result != null, 'spec.type or spec.item.type must be defined')
+		const result: Identifier = spec.type
+		invariant(result != null, 'spec.type must be defined')
 		return result
 	}, [spec])
 }
