@@ -458,7 +458,7 @@ The [`useDrag`](/docs/api/use-drag) hook accepts a memoization function that ret
 
 ```jsx
 const [{ isDragging }, drag] = useDrag(() => ({
-  item: { type: ItemTypes.KNIGHT },
+  type: ItemTypes.KNIGHT,
   collect: (monitor) => ({
     isDragging: !!monitor.isDragging()
   })
@@ -482,7 +482,7 @@ import { useDrag } from 'react-dnd'
 
 function Knight() {
   const [{isDragging}, drag] = useDrag(() => ({
-    item: { type: ItemTypes.KNIGHT },
+    type: ItemTypes.KNIGHT,
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -707,7 +707,7 @@ We are lucky again, because it is easy to do with React DnD. We just need to use
 
 ```jsx
 const [{ isDragging }, drag, preview] = useDrag(() => ({
-  item: { type: ItemTypes.KNIGHT },
+  type: ItemTypes.KNIGHT,
   collect: (monitor) => ({
     isDragging: !!monitor.isDragging()
   })

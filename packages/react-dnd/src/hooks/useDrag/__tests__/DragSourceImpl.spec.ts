@@ -16,7 +16,7 @@ describe('The Hooks DragSourceImpl', () => {
 		it('returns the result of canDrag if it is a boolean', () => {
 			let impl = new DragSourceImpl(
 				{
-					item: { type: 'box' },
+					type: 'box',
 					canDrag: true,
 				},
 				monitor,
@@ -26,7 +26,7 @@ describe('The Hooks DragSourceImpl', () => {
 
 			impl = new DragSourceImpl(
 				{
-					item: { type: 'box' },
+					type: 'box',
 					canDrag: false,
 				},
 				monitor,
@@ -57,40 +57,42 @@ describe('The Hooks DragSourceImpl', () => {
 		})
 
 		it('returns the dragItem from the spec', () => {
-			const item = { type: 'test' }
-			const impl = new DragSourceImpl({ item }, monitor, connector)
-			expect(impl.beginDrag()).toEqual(item)
-		})
-
-		it('will return the result of begin() if it is defined', () => {
-			const item = { type: 'test' }
-			const item2 = { type: 'test1' }
+			const item = {}
 			const impl = new DragSourceImpl(
-				{ item, begin: () => item2 },
-				monitor,
-				connector,
-			)
-			expect(impl.beginDrag()).toEqual(item2)
-		})
-
-		it('will return the configured item if begin() returns a nullish value', () => {
-			const item = { type: 'test' }
-			let impl = new DragSourceImpl(
-				{ item, begin: () => null },
+				{ type: 'test', item },
 				monitor,
 				connector,
 			)
 			expect(impl.beginDrag()).toEqual(item)
+		})
+
+		it('will return the result of item() if it is defined', () => {
+			const item = {}
+			const impl = new DragSourceImpl(
+				{ type: 'test', item: () => item },
+				monitor,
+				connector,
+			)
+			expect(impl.beginDrag()).toEqual(item)
+		})
+
+		it('will return null if begin() returns a nullish value', () => {
+			let impl = new DragSourceImpl(
+				{ type: 'test', item: () => null },
+				monitor,
+				connector,
+			)
+			expect(impl.beginDrag()).toEqual(null)
 
 			impl = new DragSourceImpl(
 				{
-					item,
-					begin: () => undefined,
+					type: 'test',
+					item: () => undefined,
 				},
 				monitor,
 				connector,
 			)
-			expect(impl.beginDrag()).toEqual(item)
+			expect(impl.beginDrag()).toEqual(null)
 		})
 
 		it('will return an empty object if begin return a nullish value and item is nullish', () => {
@@ -108,25 +110,21 @@ describe('The Hooks DragSourceImpl', () => {
 			const globalMon = ({
 				getSourceId: () => '1',
 			} as any) as DragDropMonitor
-			const impl = new DragSourceImpl(
-				{ item: { type: 'box' } },
-				monitor,
-				connector,
-			)
+			const impl = new DragSourceImpl({ type: 'box' }, monitor, connector)
 			expect(impl.isDragging(globalMon, '1')).toBeTruthy()
 			expect(impl.isDragging(globalMon, '2')).toBeFalsy()
 		})
 
 		it('will invoke isDragging()', () => {
 			let impl = new DragSourceImpl(
-				{ item: { type: 'box' }, isDragging: () => true },
+				{ type: 'box', isDragging: () => true },
 				monitor,
 				connector,
 			)
 			expect(impl.isDragging(null as any, '1')).toBeTruthy()
 
 			impl = new DragSourceImpl(
-				{ item: { type: 'box' }, isDragging: () => false },
+				{ type: 'box', isDragging: () => false },
 				monitor,
 				connector,
 			)
@@ -137,7 +135,7 @@ describe('The Hooks DragSourceImpl', () => {
 	describe('endDrag()', () => {
 		it('will reconnect by default', () => {
 			const reconnect = jest.fn()
-			const impl = new DragSourceImpl({ item: { type: 'box' } }, monitor, {
+			const impl = new DragSourceImpl({ type: 'box' }, monitor, {
 				reconnect,
 			} as any)
 			impl.endDrag()
@@ -149,7 +147,7 @@ describe('The Hooks DragSourceImpl', () => {
 			const end = jest.fn()
 			const item = { x: 1 }
 			const impl = new DragSourceImpl(
-				{ item: { type: 'box' }, end },
+				{ type: 'box', end },
 				{
 					getItem: () => item,
 				} as any,

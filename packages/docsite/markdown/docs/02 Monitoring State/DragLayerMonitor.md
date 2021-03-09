@@ -13,7 +13,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 - **`isDragging()`**: Returns `true` if a drag operation is in progress. Returns `false` otherwise.
 
-- **`getItemType()`**: Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns `null` if no item is being dragged.
+- **`getItemType()`**: Returns a string or a symbol identifying the type of the current dragged item. Returns `null` if no item is being dragged.
 
 - **`getItem()`**: Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from its `beginDrag()` method. Returns `null` if no item is being dragged.
 

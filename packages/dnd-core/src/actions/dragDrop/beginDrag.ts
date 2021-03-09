@@ -64,6 +64,10 @@ export function createBeginDrag(manager: DragDropManager) {
 
 		const source = registry.getSource(sourceId)
 		const item = source.beginDrag(monitor, sourceId)
+		// If source.beginDrag returns null, this is an indicator to cancel the drag
+		if (item == null) {
+			return undefined
+		}
 		verifyItemIsObject(item)
 		registry.pinSource(sourceId)
 

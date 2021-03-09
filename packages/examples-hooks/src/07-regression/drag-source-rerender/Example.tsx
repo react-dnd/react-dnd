@@ -3,7 +3,7 @@ import { useDrag, ConnectDragSource } from 'react-dnd'
 
 export const Example: FC = () => {
 	const [{ isDragging }, drag] = useDrag(() => ({
-		item: { type: 'KNIGHT' },
+		type: 'KNIGHT',
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),

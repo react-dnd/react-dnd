@@ -18,9 +18,8 @@ export interface CardProps {
 }
 
 interface Item {
-	type: string
 	id: string
-	originalIndex: string
+	originalIndex: number
 }
 
 export const Card: FC<CardProps> = memo(function Card({
@@ -32,12 +31,13 @@ export const Card: FC<CardProps> = memo(function Card({
 	const originalIndex = findCard(id).index
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
-			item: { type: ItemTypes.CARD, id, originalIndex },
+			type: ItemTypes.CARD,
+			item: { id, originalIndex },
 			collect: (monitor) => ({
 				isDragging: monitor.isDragging(),
 			}),
-			end: (dropResult: unknown, monitor) => {
-				const { id: droppedId, originalIndex } = monitor.getItem()
+			end: (item, monitor) => {
+				const { id: droppedId, originalIndex } = item
 				const didDrop = monitor.didDrop()
 				if (!didDrop) {
 					moveCard(droppedId, originalIndex)
@@ -58,7 +58,7 @@ export const Card: FC<CardProps> = memo(function Card({
 				}
 			},
 		}),
-		[findCard, moveCard],
+		[findCard, moveCard]
 	)
 
 	const opacity = isDragging ? 0 : 1

@@ -24,9 +24,14 @@ import { createTargetFactory } from './createTargetFactory'
  * @param collect The props collector function
  * @param options Options
  */
-export function DropTarget<RequiredProps, CollectedProps = any>(
+export function DropTarget<
+	RequiredProps,
+	CollectedProps = any,
+	DragObject = any,
+	DropResult = any
+>(
 	type: TargetType | ((props: RequiredProps) => TargetType),
-	spec: DropTargetSpec<RequiredProps>,
+	spec: DropTargetSpec<RequiredProps, DragObject, DropResult>,
 	collect: DropTargetCollector<CollectedProps, RequiredProps>,
 	options: DndOptions<RequiredProps> = {},
 ): DndComponentEnhancer<CollectedProps> {

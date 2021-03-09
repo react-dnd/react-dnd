@@ -1,7 +1,7 @@
 import { CSSProperties, Component } from 'react'
 import { ConnectDropTarget, DropTargetMonitor, XYCoord } from 'react-dnd'
 import { DropTarget } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import { BoxDragItem, ItemTypes } from './ItemTypes'
 import Box from './Box'
 import update from 'immutability-helper'
 
@@ -77,7 +77,7 @@ export default DropTarget(
 			if (!component) {
 				return
 			}
-			const item = monitor.getItem()
+			const item = monitor.getItem<BoxDragItem>()
 			const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
 			const left = Math.round(item.left + delta.x)
 			const top = Math.round(item.top + delta.y)

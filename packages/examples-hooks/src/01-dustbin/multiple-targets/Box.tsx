@@ -20,7 +20,8 @@ export interface BoxProps {
 export const Box: FC<BoxProps> = memo(function Box({ name, type, isDropped }) {
 	const [{ opacity }, drag] = useDrag(
 		() => ({
-			item: { name, type },
+			type,
+			item: { name },
 			collect: (monitor) => ({
 				opacity: monitor.isDragging() ? 0.4 : 1,
 			}),

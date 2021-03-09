@@ -21,17 +21,13 @@ interface DropResult {
 	name: string
 }
 
-interface DragItem {
-	name: string
-	type: string
-}
-
 export const Box: FC<BoxProps> = ({ name }) => {
 	const [{ opacity }, drag] = useDrag(
 		() => ({
-			item: { name, type: ItemTypes.BOX },
-			end(item: DragItem | undefined, monitor: DragSourceMonitor) {
-				const dropResult: DropResult = monitor.getDropResult()
+			type: ItemTypes.BOX,
+			item: { name },
+			end(item, monitor) {
+				const dropResult = monitor.getDropResult() as DropResult
 				if (item && dropResult) {
 					let alertMessage = ''
 					const isDropAllowed =
@@ -48,7 +44,7 @@ export const Box: FC<BoxProps> = ({ name }) => {
 					alert(alertMessage)
 				}
 			},
-			collect: (monitor: any) => ({
+			collect: (monitor: DragSourceMonitor) => ({
 				opacity: monitor.isDragging() ? 0.4 : 1,
 			}),
 		}),

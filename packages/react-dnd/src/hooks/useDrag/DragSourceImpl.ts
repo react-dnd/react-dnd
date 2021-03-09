@@ -1,30 +1,28 @@
-import { invariant } from '@react-dnd/invariant'
 import { DragDropMonitor, DragSource, Identifier } from 'dnd-core'
 import { Connector } from '../../internals'
 import { DragSourceMonitor } from '../../types'
-import { DragObjectWithType, DragSourceHookSpec } from '../types'
+import { DragObjectFactory, DragSourceHookSpec } from '../types'
 
-export class DragSourceImpl<O extends DragObjectWithType, R, P>
-	implements DragSource {
+export class DragSourceImpl<O, R, P> implements DragSource {
 	public constructor(
 		public spec: DragSourceHookSpec<O, R, P>,
-		private monitor: DragSourceMonitor,
+		private monitor: DragSourceMonitor<O, R>,
 		private connector: Connector,
 	) {}
 
 	public beginDrag() {
 		const spec = this.spec
 		const monitor = this.monitor
-		const { begin, item } = spec
-		if (begin) {
-			const beginResult = begin(monitor)
-			invariant(
-				beginResult == null || typeof beginResult === 'object',
-				'dragSpec.begin() must either return an object, undefined, or null',
-			)
-			return beginResult ?? item ?? {}
+
+		let result: O | null = null
+		if (typeof spec.item === 'object') {
+			result = spec.item as O
+		} else if (typeof spec.item === 'function') {
+			result = (spec.item as DragObjectFactory<O>)(monitor)
+		} else {
+			result = {} as O
 		}
-		return item ?? {}
+		return result ?? null
 	}
 
 	public canDrag() {
