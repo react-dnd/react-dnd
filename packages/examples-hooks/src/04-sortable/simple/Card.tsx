@@ -23,6 +23,7 @@ interface DragItem {
 	id: string
 	type: string
 }
+
 export const Card: FC<CardProps> = ({ id, text, index, moveCard }) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const [{ handlerId }, drop] = useDrop({
@@ -83,7 +84,10 @@ export const Card: FC<CardProps> = ({ id, text, index, moveCard }) => {
 	})
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: ItemTypes.CARD, id, index },
+		type: ItemTypes.CARD,
+		item: () => {
+			return { id, index }
+		},
 		collect: (monitor: any) => ({
 			isDragging: monitor.isDragging(),
 		}),

@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useState, useCallback, useMemo } from 'react'
+import { CSSProperties, FC, useState, useCallback, useMemo, memo } from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 import { Colors } from './Colors'
 
@@ -9,15 +9,18 @@ const style: CSSProperties = {
 }
 
 export interface SourceBoxProps {
-	color?: string
+	color: string
 	onToggleForbidDrag?: () => void
 }
 
-export const SourceBox: FC<SourceBoxProps> = ({ color, children }) => {
+export const SourceBox: FC<SourceBoxProps> = memo(function SourceBox({
+	color,
+	children,
+}) {
 	const [forbidDrag, setForbidDrag] = useState(false)
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
-			item: { type: `${color}` },
+			type: color,
 			canDrag: !forbidDrag,
 			collect: (monitor: DragSourceMonitor) => ({
 				isDragging: monitor.isDragging(),
@@ -62,4 +65,4 @@ export const SourceBox: FC<SourceBoxProps> = ({ color, children }) => {
 			{children}
 		</div>
 	)
-}
+})

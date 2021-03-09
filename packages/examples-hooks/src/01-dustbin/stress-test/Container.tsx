@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback } from 'react'
+import { FC, useState, useEffect, useCallback, memo } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { Dustbin } from './Dustbin'
 import { Box } from './Box'
@@ -22,7 +22,7 @@ export interface ContainerState {
 	droppedBoxNames: string[]
 }
 
-export const Container: FC = () => {
+export const Container: FC = memo(function Container() {
 	const [dustbins, setDustbins] = useState<DustbinBox[]>([
 		{ accepts: [ItemTypes.GLASS], lastDroppedItem: null },
 		{ accepts: [ItemTypes.FOOD], lastDroppedItem: null },
@@ -43,7 +43,7 @@ export const Container: FC = () => {
 		const interval = setInterval(() => {
 			setBoxes(shuffle(boxes))
 			setDustbins(shuffle(dustbins))
-		}, 1000)
+		}, 4000)
 		return () => clearInterval(interval)
 	})
 
@@ -100,4 +100,4 @@ export const Container: FC = () => {
 			</div>
 		</div>
 	)
-}
+})

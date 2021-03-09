@@ -1,6 +1,6 @@
 import { CSSProperties, FC } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
-import { useDrop, DropTargetMonitor } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 
 const style: CSSProperties = {
 	border: '1px solid gray',
@@ -11,7 +11,7 @@ const style: CSSProperties = {
 }
 
 export interface TargetBoxProps {
-	onDrop: (props: TargetBoxProps, monitor: DropTargetMonitor) => void
+	onDrop: (arg: { html: any }) => void
 }
 
 export const TargetBox: FC<TargetBoxProps> = (props) => {
@@ -19,12 +19,12 @@ export const TargetBox: FC<TargetBoxProps> = (props) => {
 	const [{ canDrop, isOver }, drop] = useDrop(
 		() => ({
 			accept: [NativeTypes.HTML],
-			drop(item: unknown, monitor: DropTargetMonitor) {
+			drop(item: { html: any }) {
 				if (onDrop) {
-					onDrop(props, monitor)
+					onDrop(item)
 				}
 			},
-			collect: (monitor: DropTargetMonitor) => ({
+			collect: (monitor) => ({
 				isOver: monitor.isOver(),
 				canDrop: monitor.canDrop(),
 			}),

@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, memo } from 'react'
 
 const styles: CSSProperties = {
 	border: '1px dashed gray',
@@ -12,7 +12,7 @@ export interface BoxProps {
 	preview?: boolean
 }
 
-export const Box: FC<BoxProps> = ({ title, yellow, preview }) => {
+export const Box: FC<BoxProps> = memo(function Box({ title, yellow, preview }) {
 	const backgroundColor = yellow ? 'yellow' : 'white'
 	return (
 		<div
@@ -22,4 +22,4 @@ export const Box: FC<BoxProps> = ({ title, yellow, preview }) => {
 			{title}
 		</div>
 	)
-}
+})

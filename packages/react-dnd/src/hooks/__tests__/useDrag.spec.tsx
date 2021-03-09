@@ -5,9 +5,9 @@ import { render } from '@testing-library/react'
 describe('The useDrag hook', () => {
 	it('throws if rendered outside of a React-DnD tree', () => {
 		function Component() {
-			const [, drag] = useDrag(() => ({
-				item: { type: 'box' },
-			}))
+			const [, drag] = useDrag({
+				type: 'box',
+			})
 			return <div ref={drag} />
 		}
 
@@ -21,37 +21,22 @@ describe('The useDrag hook', () => {
 		}
 	})
 
-	it('throws if item is null', () => {
+	it('throws if type is null', () => {
 		function Component() {
-			const [, drag] = useDrag(() => ({
-				item: null,
-			}))
+			const [, drag] = useDrag({
+				type: null,
+			})
 			return <div ref={drag} />
 		}
+		const Wrapped = wrapWithBackend(Component)
 
 		const err = console.error
 		try {
 			const errorMock = jest.fn()
 			console.error = errorMock
-			expect(() => render(<Component />)).toThrow(/item must be defined/)
-		} finally {
-			console.error = err
-		}
-	})
-
-	it('throws if item type is null', () => {
-		function Component() {
-			const [, drag] = useDrag(() => ({
-				item: { type: null },
-			}))
-			return <div ref={drag} />
-		}
-
-		const err = console.error
-		try {
-			const errorMock = jest.fn()
-			console.error = errorMock
-			expect(() => render(<Component />)).toThrow(/item type must be defined/)
+			expect(() => render(<Wrapped />)).toThrow(
+				/spec.type or spec.item.type must be defined/,
+			)
 		} finally {
 			console.error = err
 		}
@@ -59,9 +44,9 @@ describe('The useDrag hook', () => {
 
 	it('can be used inside of a React-DnD context', async () => {
 		const Wrapped = wrapWithBackend(function Component() {
-			const [, drag] = useDrag(() => ({
-				item: { type: 'box' },
-			}))
+			const [, drag] = useDrag({
+				type: 'box',
+			})
 			return <div ref={drag} role="root" />
 		})
 		const result = render(<Wrapped />)

@@ -39,7 +39,7 @@ export default DragSource(
 	{
 		beginDrag: (props: BoxProps) => ({ name: props.name }),
 		isDragging(props: BoxProps, monitor: DragSourceMonitor) {
-			const item = monitor.getItem()
+			const item = monitor.getItem<{ name: string }>()
 			return props.name === item.name
 		},
 	},

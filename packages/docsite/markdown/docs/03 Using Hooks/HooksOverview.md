@@ -28,7 +28,7 @@ import { useDrag } from 'react-dnd'
 function Box() {
   const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
 		// "type" is required. It is used by the "accept" specification of drop targets.
-    item: { type: 'BOX' },
+    type: 'BOX',
 		// The collect function utilizes a "monitor" instance (see the Overview for what this is)
 		// to pull important pieces of state from the DnD system.
     collect: (monitor) => ({

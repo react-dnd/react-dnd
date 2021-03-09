@@ -1,5 +1,5 @@
 import { CSSProperties, FC } from 'react'
-import { useDrag, DragSourceMonitor } from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
 const style: CSSProperties = {
@@ -16,11 +16,16 @@ export interface BoxProps {
 	name: string
 }
 
+interface DropResult {
+	name: string
+}
+
 export const Box: FC<BoxProps> = function Box({ name }) {
 	const [{ isDragging }, drag] = useDrag(() => ({
-		item: { name, type: ItemTypes.BOX },
-		end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
-			const dropResult = monitor.getDropResult()
+		type: ItemTypes.BOX,
+		item: { name },
+		end: (item, monitor) => {
+			const dropResult = monitor.getDropResult<DropResult>()
 			if (item && dropResult) {
 				alert(`You dropped ${item.name} into ${dropResult.name}!`)
 			}

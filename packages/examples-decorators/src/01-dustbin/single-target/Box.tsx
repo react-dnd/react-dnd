@@ -41,8 +41,8 @@ export default DragSource(
 			return { name: props.name }
 		},
 		endDrag(props: BoxProps, monitor: DragSourceMonitor) {
-			const item = monitor.getItem()
-			const dropResult = monitor.getDropResult()
+			const item = monitor.getItem<{ name: string }>()
+			const dropResult = monitor.getDropResult<{ name: string }>()
 
 			if (dropResult) {
 				alert(`You dropped ${item.name} into ${dropResult.name}!`)

@@ -6,7 +6,7 @@ import {
 	DropTargetMonitor,
 } from 'react-dnd'
 import { DragSource, DropTarget } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import { CardDragObject, ItemTypes } from './ItemTypes'
 
 const style = {
 	border: '1px dashed gray',
@@ -51,7 +51,7 @@ export default DropTarget(
 	{
 		canDrop: () => false,
 		hover(props: CardProps, monitor: DropTargetMonitor) {
-			const { id: draggedId } = monitor.getItem()
+			const { id: draggedId } = monitor.getItem<CardDragObject>()
 			const { id: overId } = props
 
 			if (draggedId !== overId) {
@@ -72,7 +72,10 @@ export default DropTarget(
 				originalIndex: props.findCard(props.id).index,
 			}),
 			endDrag(props: CardProps, monitor: DragSourceMonitor) {
-				const { id: droppedId, originalIndex } = monitor.getItem()
+				const {
+					id: droppedId,
+					originalIndex,
+				} = monitor.getItem<CardDragObject>()
 				const didDrop = monitor.didDrop()
 				if (!didDrop) {
 					props.moveCard(droppedId, originalIndex)

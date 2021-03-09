@@ -29,7 +29,7 @@ export default DragSource(type, spec, collect)(MyComponent)
 
 ### Parameters
 
-- **`type`**: Required. Either a string, an ES6 symbol, or a function that returns either given the component's `props`. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to the items produced by this drag source. Read the [overview](/docs/overview) to learn more about the items and types.
+- **`type`**: Required. Either a string, a symbol, or a function that returns either given the component's `props`. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to the items produced by this drag source. Read the [overview](/docs/overview) to learn more about the items and types.
 
 - **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drag source reacts to the drag and drop events. See the drag source specification described in detail in the next section.
 

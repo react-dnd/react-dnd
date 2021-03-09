@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useState, useCallback } from 'react'
+import { CSSProperties, FC, useState, useCallback, memo } from 'react'
 import { useDrop, DropTargetMonitor } from 'react-dnd'
 import { Colors } from './Colors'
 import { DragItem } from './interfaces'
@@ -16,12 +16,15 @@ export interface TargetBoxProps {
 	lastDroppedColor?: string
 }
 
-const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
+const TargetBox: FC<TargetBoxProps> = memo(function TargetBox({
+	onDrop,
+	lastDroppedColor,
+}) {
 	const [{ isOver, draggingColor, canDrop }, drop] = useDrop(
 		() => ({
 			accept: [Colors.YELLOW, Colors.BLUE],
-			drop(item: DragItem) {
-				onDrop(item.type)
+			drop(_item: DragItem, monitor) {
+				onDrop(monitor.getItemType())
 				return undefined
 			},
 			collect: (monitor: DropTargetMonitor) => ({
@@ -49,7 +52,7 @@ const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 	return (
 		<div
 			ref={drop}
-			data-color={lastDroppedColor}
+			data-color={lastDroppedColor || 'none'}
 			style={{ ...style, backgroundColor, opacity }}
 			role="TargetBox"
 		>
@@ -58,7 +61,7 @@ const TargetBox: FC<TargetBoxProps> = ({ onDrop, lastDroppedColor }) => {
 			{!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
 		</div>
 	)
-}
+})
 
 export interface StatefulTargetBoxState {
 	lastDroppedColor: string | null

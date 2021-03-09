@@ -13,15 +13,15 @@ export interface Source extends DragSource {
 	receiveProps(props: any): void
 }
 
-class SourceImpl<Props> implements Source {
+class SourceImpl<Props, DragObject, DropResult> implements Source {
 	private props: Props | null = null
-	private spec: DragSourceSpec<Props, any>
-	private monitor: DragSourceMonitor
+	private spec: DragSourceSpec<Props, DragObject, DropResult>
+	private monitor: DragSourceMonitor<DragObject, DropResult>
 	private ref: RefObject<any>
 
 	public constructor(
-		spec: DragSourceSpec<Props, any>,
-		monitor: DragSourceMonitor,
+		spec: DragSourceSpec<Props, DragObject, DropResult>,
+		monitor: DragSourceMonitor<DragObject, DropResult>,
 		ref: RefObject<any>,
 	) {
 		this.spec = spec
@@ -85,8 +85,8 @@ class SourceImpl<Props> implements Source {
 	}
 }
 
-export function createSourceFactory<Props, DragObject = any>(
-	spec: DragSourceSpec<Props, DragObject>,
+export function createSourceFactory<Props, DragObject, DropResult>(
+	spec: DragSourceSpec<Props, DragObject, DropResult>,
 ) {
 	Object.keys(spec).forEach((key) => {
 		invariant(
@@ -121,7 +121,7 @@ export function createSourceFactory<Props, DragObject = any>(
 	})
 
 	return function createSource(
-		monitor: DragSourceMonitor,
+		monitor: DragSourceMonitor<DragObject, DropResult>,
 		ref: RefObject<any>,
 	) {
 		return new SourceImpl(spec, monitor, ref) as Source
