@@ -73,7 +73,7 @@ export default DropTarget(
 				x: number
 				y: number
 			}
-			const item = monitor.getItem()
+			const item = monitor.getItem<{ id: string; top: number; left: number }>()
 
 			let left = Math.round(item.left + delta.x)
 			let top = Math.round(item.top + delta.y)

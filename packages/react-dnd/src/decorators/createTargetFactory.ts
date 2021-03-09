@@ -13,15 +13,15 @@ export interface Target extends DropTarget {
 	receiveMonitor(monitor: any): void
 }
 
-class TargetImpl<Props> implements Target {
+class TargetImpl<Props, DragObject, DropResult> implements Target {
 	private props: Props | null = null
-	private spec: DropTargetSpec<Props>
-	private monitor: DropTargetMonitor
+	private spec: DropTargetSpec<Props, DragObject, DropResult>
+	private monitor: DropTargetMonitor<DragObject, DropResult>
 	private ref: RefObject<any>
 
 	public constructor(
-		spec: DropTargetSpec<Props>,
-		monitor: DropTargetMonitor,
+		spec: DropTargetSpec<Props, DragObject, DropResult>,
+		monitor: DropTargetMonitor<DragObject, DropResult>,
 		ref: RefObject<any>,
 	) {
 		this.spec = spec
@@ -33,7 +33,7 @@ class TargetImpl<Props> implements Target {
 		this.props = props
 	}
 
-	public receiveMonitor(monitor: DropTargetMonitor) {
+	public receiveMonitor(monitor: DropTargetMonitor<DragObject, DropResult>) {
 		this.monitor = monitor
 	}
 
@@ -75,7 +75,9 @@ class TargetImpl<Props> implements Target {
 	}
 }
 
-export function createTargetFactory<Props>(spec: DropTargetSpec<Props>) {
+export function createTargetFactory<Props, DragObject, DropResult>(
+	spec: DropTargetSpec<Props, DragObject, DropResult>,
+) {
 	Object.keys(spec).forEach((key) => {
 		invariant(
 			ALLOWED_SPEC_METHODS.indexOf(key) > -1,
@@ -98,7 +100,7 @@ export function createTargetFactory<Props>(spec: DropTargetSpec<Props>) {
 	})
 
 	return function createTarget(
-		monitor: DropTargetMonitor,
+		monitor: DropTargetMonitor<DragObject, DropResult>,
 		ref: RefObject<any>,
 	): Target {
 		return new TargetImpl(spec, monitor, ref)

@@ -15,7 +15,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 - **`isOver(options)`**: Returns `true` if there is a drag operation in progress, and the pointer is currently hovering over the owner. You may optionally pass `{ shallow: true }` to strictly check whether _only_ the owner is being hovered, as opposed to a nested target.
 
-- **`getItemType()`**: Returns a string or an ES6 symbol identifying the type of the current dragged item. Returns `null` if no item is being dragged.
+- **`getItemType()`**: Returns a string or a symbol identifying the type of the current dragged item. Returns `null` if no item is being dragged.
 
 - **`getItem()`**: Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from its `beginDrag()` method. Returns `null` if no item is being dragged.
 

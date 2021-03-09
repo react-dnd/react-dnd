@@ -29,7 +29,7 @@ export default DropTarget(types, spec, collect)(MyComponent)
 
 ### Parameters
 
-- **`types`**: Required. A string, an ES6 symbol, an array of either, or a function that returns either of those, given component's `props`. This drop target will only react to the items produced by the [drag sources](/docs/api/drag-source) of the specified type or types. Read the [overview](/docs/overview) to learn more about the items and types.
+- **`types`**: Required. A string, a symbol, an array of either, or a function that returns either of those, given component's `props`. This drop target will only react to the items produced by the [drag sources](/docs/api/drag-source) of the specified type or types. Read the [overview](/docs/overview) to learn more about the items and types.
 
 - **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drop target reacts to the drag and drop events. See the drop target specification described in detail in the next section.
 

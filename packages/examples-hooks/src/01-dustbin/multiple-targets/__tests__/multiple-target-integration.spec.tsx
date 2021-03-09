@@ -27,15 +27,11 @@ describe('Dustbin: Multiple Targets', () => {
 
 		// drop bottle into glass bin
 		await fireDragDrop(bottleBox, glassBin)
-		expect(glassBin.textContent).toContain(
-			JSON.stringify({ name: 'Bottle', type: 'glass' }),
-		)
+		expect(glassBin.textContent).toContain(JSON.stringify({ name: 'Bottle' }))
 
 		// food won't drop into the glass bin
 		await fireDragDrop(bananaBox, glassBin)
-		expect(glassBin.textContent).toContain(
-			JSON.stringify({ name: 'Bottle', type: 'glass' }),
-		)
+		expect(glassBin.textContent).toContain(JSON.stringify({ name: 'Bottle' }))
 
 		// glass won't drop into the food box...
 		await fireDragDrop(bottleBox, foodBin)
@@ -44,8 +40,6 @@ describe('Dustbin: Multiple Targets', () => {
 		// but some food will work
 		await fireDragDrop(bananaBox, foodBin)
 		expect(foodBin.textContent).toContain('Last dropped')
-		expect(foodBin.textContent).toContain(
-			JSON.stringify({ name: 'Banana', type: 'food' }),
-		)
+		expect(foodBin.textContent).toContain(JSON.stringify({ name: 'Banana' }))
 	})
 })

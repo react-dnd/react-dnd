@@ -8,23 +8,31 @@ import {
 } from '../types'
 
 export type FactoryOrInstance<T> = T | (() => T)
-export interface DragSourceHookSpec<
-	DragObject extends DragObjectWithType,
-	DropResult,
-	CollectedProps
-> {
+export type DragObjectFactory<T> = (monitor: DragSourceMonitor<T>) => T | null
+export interface DragSourceHookSpec<DragObject, DropResult, CollectedProps> {
 	/**
-	 * A plain javascript item describing the data being dragged.
-	 * This is the only information available to the drop targets about the drag
-	 * source so it's important to pick the minimal data they need to know.
+	 * The type of item being dragged. This is required when using the function form of spec.item.
+	 * If spec.item is a static object, the type may either be defined on that object as `item.type`, or it may
+	 * be defined here.
+	 */
+	type: SourceType
+
+	/**
+	 * This property generates or defines a plain javascript item describing
+	 * the data being dragged. This is the only information available to the
+	 * drop targets about the drag source so it's important to pick the minimal
+	 * data they need to know.
 	 *
 	 * You may be tempted to put a reference to the component or complex object here,
-	 * but you shouldx try very hard to avoid doing this because it couples the
+	 * but you should try very hard to avoid doing this because it couples the
 	 * drag sources and drop targets. It's a good idea to use something like
 	 * { id: props.id }
 	 *
+	 * If a function-form is used, it is invoked when the drag begins and returns a draggable item.
+	 * If the function returns null, the drag is canceled
+	 *
 	 */
-	item: DragObject
+	item?: DragObject | DragObjectFactory<DragObject>
 
 	/**
 	 * The drag source options
@@ -37,11 +45,6 @@ export interface DragSourceHookSpec<
 	previewOptions?: DragPreviewOptions
 
 	/**
-	 * When the dragging starts, beginDrag is called. If an object is returned from this function it will overide the default dragItem
-	 */
-	begin?: (monitor: DragSourceMonitor) => DragObject | undefined | void
-
-	/**
 	 * Optional.
 	 * When the dragging stops, endDrag is called. For every beginDrag call, a corresponding endDrag call is guaranteed.
 	 * You may call monitor.didDrop() to check whether or not the drop was handled by a compatible drop target. If it was handled,
@@ -50,8 +53,8 @@ export interface DragSourceHookSpec<
 	 * component parameter is set to be null.
 	 */
 	end?: (
-		draggedItem: DragObject | undefined,
-		monitor: DragSourceMonitor,
+		draggedItem: DragObject,
+		monitor: DragSourceMonitor<DragObject, DropResult>,
 	) => void
 
 	/**
@@ -60,7 +63,9 @@ export interface DragSourceHookSpec<
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: boolean | ((monitor: DragSourceMonitor) => boolean)
+	canDrag?:
+		| boolean
+		| ((monitor: DragSourceMonitor<DragObject, DropResult>) => boolean)
 
 	/**
 	 * Optional.
@@ -72,12 +77,14 @@ export interface DragSourceHookSpec<
 	 *
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
-	isDragging?: (monitor: DragSourceMonitor) => boolean
+	isDragging?: (monitor: DragSourceMonitor<DragObject, DropResult>) => boolean
 
 	/**
 	 * A function to collect rendering properties
 	 */
-	collect?: (monitor: DragSourceMonitor) => CollectedProps
+	collect?: (
+		monitor: DragSourceMonitor<DragObject, DropResult>,
+	) => CollectedProps
 }
 
 /**
@@ -128,8 +135,4 @@ export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 	 * A function to collect rendering properties
 	 */
 	collect?: (monitor: DropTargetMonitor) => CollectedProps
-}
-
-export interface DragObjectWithType {
-	type: SourceType
 }

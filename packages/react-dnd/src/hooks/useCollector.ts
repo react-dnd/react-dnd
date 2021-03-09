@@ -1,4 +1,4 @@
-import { shallowEqual } from '@react-dnd/shallowequal'
+import equal from 'fast-deep-equal'
 import { useState, useCallback } from 'react'
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
 
@@ -17,7 +17,9 @@ export function useCollector<T, S>(
 
 	const updateCollected = useCallback(() => {
 		const nextValue = collect(monitor)
-		if (!shallowEqual(collected, nextValue)) {
+		// This needs to be a deep-equality check because some monitor-collected values
+		// include XYCoord objects that may be equivalent, but do not have instance equality.
+		if (!equal(collected, nextValue)) {
 			setCollected(nextValue)
 			if (onUpdate) {
 				onUpdate()
@@ -25,9 +27,10 @@ export function useCollector<T, S>(
 		}
 	}, [collected, monitor, onUpdate])
 
-	// update the collected properties after the first render
-	// and the components are attached to dnd-core
-	useIsomorphicLayoutEffect(updateCollected, [])
+	// update the collected properties after react renders.
+	// Note that the "Dustbin Stress Test" fails if this is not
+	// done when the component updates
+	useIsomorphicLayoutEffect(updateCollected)
 
 	return [collected, updateCollected]
 }

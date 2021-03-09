@@ -23,7 +23,7 @@ const INSTANCE_SYM = Symbol.for('__REACT_DND_CONTEXT_INSTANCE__')
 /**
  * A React component that provides the React-DnD context
  */
-export const DndProvider: FC<DndProviderProps<any, any>> = memo(
+export const DndProvider: FC<DndProviderProps<unknown, unknown>> = memo(
 	function DndProvider({ children, ...props }) {
 		const [manager, isGlobalInstance] = getDndContextValue(props) // memoized from props
 		/**
@@ -48,7 +48,7 @@ export const DndProvider: FC<DndProviderProps<any, any>> = memo(
 	},
 )
 
-function getDndContextValue(props: DndProviderProps<any, any>) {
+function getDndContextValue(props: DndProviderProps<unknown, unknown>) {
 	if ('manager' in props) {
 		const manager = { dragDropManager: props.manager }
 		return [manager, false]

@@ -1,14 +1,14 @@
 import { registerTarget, TargetConnector } from '../../internals'
 import { DropTargetMonitor } from '../../types'
-import { DragObjectWithType, DropTargetHookSpec } from '../types'
+import { DropTargetHookSpec } from '../types'
 import { useDragDropManager } from '../useDragDropManager'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useAccept } from './useAccept'
 import { useDropTarget } from './useDropTarget'
 
-export function useRegisteredDropTarget<O extends DragObjectWithType, R, P>(
+export function useRegisteredDropTarget<O, R, P>(
 	spec: DropTargetHookSpec<O, R, P>,
-	monitor: DropTargetMonitor,
+	monitor: DropTargetMonitor<O, R>,
 	connector: TargetConnector,
 ): void {
 	const manager = useDragDropManager()
@@ -26,6 +26,12 @@ export function useRegisteredDropTarget<O extends DragObjectWithType, R, P>(
 			connector.receiveHandlerId(handlerId)
 			return unregister
 		},
-		[manager, monitor, dropTarget, connector, ...accept],
+		[
+			manager,
+			monitor,
+			dropTarget,
+			connector,
+			accept.map((a) => a.toString()).join('|'),
+		],
 	)
 }

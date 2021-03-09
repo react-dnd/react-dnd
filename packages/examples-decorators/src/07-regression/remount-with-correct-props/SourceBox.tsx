@@ -33,7 +33,7 @@ export default DragSource(
 			props.onEndDrag()
 		},
 		isDragging: (props: SourceBoxProps, monitor) =>
-			monitor.getItem().id === props.id,
+			monitor.getItem<{ id: string }>().id === props.id,
 	},
 	(connect, monitor) => ({
 		connectDragSource: connect.dragSource(),

@@ -27,7 +27,7 @@ const DragLayer: FC = () => {
 
 const Box: FC = () => {
 	const [, drag] = useDrag({
-		item: { type: 'box' },
+		type: 'box',
 	})
 	return <div role="box" ref={drag} />
 }

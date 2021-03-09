@@ -15,7 +15,7 @@ export const Container: FC = () => {
 	const accepts = useMemo(() => [FILE], [])
 	const handleFileDrop = (item: any, monitor: DropTargetMonitor) => {
 		if (monitor) {
-			setDroppedFiles(monitor.getItem().files)
+			setDroppedFiles(monitor.getItem<{ files: any[] }>().files)
 		}
 	}
 	return (

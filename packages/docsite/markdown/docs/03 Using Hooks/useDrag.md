@@ -9,14 +9,15 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 # useDrag
 
-The `useDrag`hook provides a way to wire your component into the DnD system as a _drag source_. By passing in a specification into `useDrag`, you declaratively describe the data `item` that will be passed to the DnD system, describe what props to `collect`, and more. The `useDrag` hooks returns a few key items: a set of collected props, and refs that may be attached to _drag source_ and _drag preview_ elements
+The `useDrag`hook provides a way to wire your component into the DnD system as a _drag source_. By passing in a specification into `useDrag`, you declaratively describe the `type` of draggable being generated, the `item` object representing the drag source, what props to `collect`, and more. The `useDrag` hooks returns a few key items: a set of collected props, and refs that may be attached to _drag source_ and _drag preview_ elements
 
 ```jsx
 import { useDrag } from 'react-dnd'
 
 function DraggableComponent(props) {
   const [collected, drag, dragPreview] = useDrag(() => ({
-    item: { id, type }
+    type,
+    item: { id }
   }))
   return collected.isDragging ?
     <div ref={dragPreview> : (
@@ -40,15 +41,16 @@ function DraggableComponent(props) {
 
 ### Specification Object Members
 
-- **`item`**: Required. A plain JavaScript object describing the data being dragged. This is the _only_ information available to the drop targets about the drag source so it's important to pick the _minimal_ data they need to know. You may be tempted to put a complex reference here, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ type, id }` from this method.
+- **`type`**: Required. This must be either a string or a symbol. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to this item. Read the [overview](/docs/overview) to learn more about the items and types.
 
-  `item.type` **must be set**, and it must be either a string, an ES6 symbol. Only the [drop targets](/docs/api/drop-target) registered for the same type will react to this item. Read the [overview](/docs/overview) to learn more about the items and types.
+- **`item`**: Required _(object or function)_.
+
+  - When this is an object, it is a plain JavaScript object describing the data being dragged. This is the _only_ information available to the drop targets about the drag source so it's important to pick the _minimal_ data they need to know. You may be tempted to put a complex reference here, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to use something like `{ id }`.
+  - When this is a function, it is fired at the beginning of the drag operation and returns an object representing the drag operation (see first bullet). If null is returned, the drag operation is cancelled.
 
 - **`previewOptions`**: Optional. A plain JavaScript object describing drag preview options.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)`function inside the`options` object can improve the performance. Unless you have performance problems, don't worry about it.
-
-* **`begin(monitor)`**: Optional. Fired when a drag operation begins. Nothing needs to be returned, but if an object is returned it will override the default `item` property of the spec.
 
 * **`end(item, monitor)`**: Optional. When the dragging stops, `end` is called. For every `begin` call, a corresponding `end` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a _drop result_ by returning a plain object from its `drop()` method, it will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. _Note: If the component is unmounted while dragging, `component` parameter is set to be `null`._
 

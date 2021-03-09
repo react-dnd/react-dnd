@@ -26,7 +26,8 @@ export const Box: FC<BoxProps> = ({
 }) => {
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
-			item: { id, left, top, type: ItemTypes.BOX },
+			type: ItemTypes.BOX,
+			item: { id, left, top },
 			collect: (monitor) => ({
 				isDragging: monitor.isDragging(),
 			}),

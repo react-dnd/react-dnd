@@ -28,7 +28,7 @@ export interface DndComponent<Props> extends Component<Props> {
 /**
  * Interface for the DropTarget specification object
  */
-export interface DropTargetSpec<Props> {
+export interface DropTargetSpec<Props, DragObject = any, DropResult = any> {
 	/**
 	 * Optional.
 	 * Called when a compatible item is dropped on the target. You may either return undefined, or a plain object.
@@ -39,7 +39,11 @@ export interface DropTargetSpec<Props> {
 	 * the source's endDrag method are good places to fire Flux actions. This method will not be called if canDrop()
 	 * is defined and returns false.
 	 */
-	drop?: (props: Props, monitor: DropTargetMonitor, component: any) => any
+	drop?: (
+		props: Props,
+		monitor: DropTargetMonitor<DragObject, DropResult>,
+		component: any,
+	) => DropResult | undefined
 
 	/**
 	 * Optional.
@@ -47,17 +51,24 @@ export interface DropTargetSpec<Props> {
 	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
-	hover?: (props: Props, monitor: DropTargetMonitor, component: any) => void
+	hover?: (
+		props: Props,
+		monitor: DropTargetMonitor<DragObject, DropResult>,
+		component: any,
+	) => void
 
 	/**
 	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
 	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
-	canDrop?: (props: Props, monitor: DropTargetMonitor) => boolean
+	canDrop?: (
+		props: Props,
+		monitor: DropTargetMonitor<DragObject, DropResult>,
+	) => boolean
 }
 
-export interface DragSourceSpec<Props, DragObject> {
+export interface DragSourceSpec<Props, DragObject = any, DropResult = any> {
 	/**
 	 * Required.
 	 * When the dragging starts, beginDrag is called. You must return a plain JavaScript object describing the
@@ -68,7 +79,7 @@ export interface DragSourceSpec<Props, DragObject> {
 	 */
 	beginDrag: (
 		props: Props,
-		monitor: DragSourceMonitor,
+		monitor: DragSourceMonitor<DragObject, DropResult>,
 		component: any,
 	) => DragObject
 
@@ -80,7 +91,11 @@ export interface DragSourceSpec<Props, DragObject> {
 	 * monitor.getDropResult(). This method is a good place to fire a Flux action. Note: If the component is unmounted while dragging,
 	 * component parameter is set to be null.
 	 */
-	endDrag?: (props: Props, monitor: DragSourceMonitor, component: any) => void
+	endDrag?: (
+		props: Props,
+		monitor: DragSourceMonitor<DragObject, DropResult>,
+		component: any,
+	) => void
 
 	/**
 	 * Optional.
@@ -88,7 +103,10 @@ export interface DragSourceSpec<Props, DragObject> {
 	 * Specifying it is handy if you'd like to disable dragging based on some predicate over props. Note: You may not call
 	 * monitor.canDrag() inside this method.
 	 */
-	canDrag?: (props: Props, monitor: DragSourceMonitor) => boolean
+	canDrag?: (
+		props: Props,
+		monitor: DragSourceMonitor<DragObject, DropResult>,
+	) => boolean
 
 	/**
 	 * Optional.
@@ -100,7 +118,10 @@ export interface DragSourceSpec<Props, DragObject> {
 	 *
 	 * Note: You may not call monitor.isDragging() inside this method.
 	 */
-	isDragging?: (props: Props, monitor: DragSourceMonitor) => boolean
+	isDragging?: (
+		props: Props,
+		monitor: DragSourceMonitor<DragObject, DropResult>,
+	) => boolean
 }
 
 /**

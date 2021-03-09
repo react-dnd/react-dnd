@@ -10535,7 +10535,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-deep-equal@npm:^3.1.1":
+"fast-deep-equal@npm:^3.1.1, fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
   resolution: "fast-deep-equal@npm:3.1.3"
   checksum: 451526766b219503131d11e823eaadd1533080b0be4860e316670b039dcaf31cd1007c2fe036a9b922abba7c040dfad5e942ed79d21f2ff849e50049f36e0fb7
@@ -20547,6 +20547,7 @@ fsevents@^1.2.7:
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
     dnd-core: "workspace:packages/dnd-core"
+    fast-deep-equal: ^3.1.3
     gulp: ^4.0.2
     hoist-non-react-statics: ^3.3.2
     react: ^17.0.1
