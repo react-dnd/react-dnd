@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "12.0.0",
+  "version": "14.0.0",
   "description": "Touch backend for react-dnd",
   "main": "src/index.ts",
   "publishConfig": {
