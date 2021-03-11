@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useState } from 'react'
+import { CSSProperties, FC, useCallback, useState } from 'react'
 import { useDrop, XYCoord } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 import { Box } from './Box'
@@ -32,26 +32,32 @@ export const Container: FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 		b: { top: 180, left: 20, title: 'Drag me too' },
 	})
 
-	const [, drop] = useDrop(() => ({
-		accept: ItemTypes.BOX,
-		drop(item: DragItem, monitor) {
-			const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
-			const left = Math.round(item.left + delta.x)
-			const top = Math.round(item.top + delta.y)
-			moveBox(item.id, left, top)
-			return undefined
+	const moveBox = useCallback(
+		(id: string, left: number, top: number) => {
+			setBoxes(
+				update(boxes, {
+					[id]: {
+						$merge: { left, top },
+					},
+				}),
+			)
 		},
-	}))
+		[boxes, setBoxes],
+	)
 
-	const moveBox = (id: string, left: number, top: number) => {
-		setBoxes(
-			update(boxes, {
-				[id]: {
-					$merge: { left, top },
-				},
-			}),
-		)
-	}
+	const [, drop] = useDrop(
+		() => ({
+			accept: ItemTypes.BOX,
+			drop(item: DragItem, monitor) {
+				const delta = monitor.getDifferenceFromInitialOffset() as XYCoord
+				const left = Math.round(item.left + delta.x)
+				const top = Math.round(item.top + delta.y)
+				moveBox(item.id, left, top)
+				return undefined
+			},
+		}),
+		[moveBox],
+	)
 
 	return (
 		<div ref={drop} style={styles}>
