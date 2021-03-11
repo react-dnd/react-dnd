@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 import { Box } from './Box';
@@ -14,6 +14,13 @@ export const Container = ({ hideSourceOnDrag }) => {
         a: { top: 20, left: 80, title: 'Drag me around' },
         b: { top: 180, left: 20, title: 'Drag me too' },
     });
+    const moveBox = useCallback((id, left, top) => {
+        setBoxes(update(boxes, {
+            [id]: {
+                $merge: { left, top },
+            },
+        }));
+    }, [boxes, setBoxes]);
     const [, drop] = useDrop(() => ({
         accept: ItemTypes.BOX,
         drop(item, monitor) {
@@ -23,14 +30,7 @@ export const Container = ({ hideSourceOnDrag }) => {
             moveBox(item.id, left, top);
             return undefined;
         },
-    }));
-    const moveBox = (id, left, top) => {
-        setBoxes(update(boxes, {
-            [id]: {
-                $merge: { left, top },
-            },
-        }));
-    };
+    }), [moveBox]);
     return (<div ref={drop} style={styles}>
 			{Object.keys(boxes).map((key) => {
         const { left, top, title } = boxes[key];
