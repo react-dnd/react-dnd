@@ -66,7 +66,7 @@ function Bucket() {
       role={'Dustbin'}
       style={{ backgroundColor: isOver ? 'red' : 'white' }}
     >
-      {isOver ? 'Release to drop' : 'Drag a box here'}
+      {canDrop ? 'Release to drop' : 'Drag a box here'}
     </div>
   )
 }
