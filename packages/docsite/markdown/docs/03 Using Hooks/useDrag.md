@@ -20,7 +20,7 @@ function DraggableComponent(props) {
     item: { id }
   }))
   return collected.isDragging ?
-    <div ref={dragPreview> : (
+    <div ref={dragPreview}/> : (
     <div ref={drag} {...collected}>
       ...
     </div>
