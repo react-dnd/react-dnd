@@ -21,6 +21,30 @@ describe('The useDrag hook', () => {
 		}
 	})
 
+	it('throws if "begin" is defined', () => {
+		function Component() {
+			const [, drag] = useDrag({
+				type: 'box',
+				begin() {
+					return { id: 1 }
+				},
+			} as any)
+			return <div ref={drag} />
+		}
+		const Wrapped = wrapWithBackend(Component)
+
+		const err = console.error
+		try {
+			const errorMock = jest.fn()
+			console.error = errorMock
+			expect(() => render(<Wrapped />)).toThrow(
+				'useDrag::spec.begin was deprecated in v14. Replace spec.begin() with spec.item(). (see more here - https://react-dnd.github.io/react-dnd/docs/api/use-drag)',
+			)
+		} finally {
+			console.error = err
+		}
+	})
+
 	it('throws if type is null', () => {
 		function Component() {
 			const [, drag] = useDrag({
