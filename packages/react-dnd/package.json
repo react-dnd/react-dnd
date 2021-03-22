@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "description": "Drag and Drop for React",
   "main": "src/index.ts",
   "publishConfig": {
