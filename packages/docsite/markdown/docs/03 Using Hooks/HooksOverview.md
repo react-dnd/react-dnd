@@ -64,9 +64,9 @@ function Bucket() {
     <div
       ref={drop}
       role={'Dustbin'}
-      style={{ backgroundColor: isActive ? 'red' : 'white' }}
+      style={{ backgroundColor: isOver ? 'red' : 'white' }}
     >
-      {isActive ? 'Release to drop' : 'Drag a box here'}
+      {canDrop ? 'Release to drop' : 'Drag a box here'}
     </div>
   )
 }
