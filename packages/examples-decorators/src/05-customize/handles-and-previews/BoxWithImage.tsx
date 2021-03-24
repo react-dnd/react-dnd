@@ -35,7 +35,6 @@ const BoxWithImage: FC<BoxWithImageProps> = ({
 			<div ref={connectDragSource} style={{ ...style, opacity }}>
 				Drag me to see an image
 			</div>
-			,
 		</>
 	)
 }
