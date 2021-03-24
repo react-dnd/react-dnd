@@ -17,7 +17,6 @@ const BoxWithImage = ({ isDragging, connectDragSource, connectDragPreview, }) =>
 			<div ref={connectDragSource} style={{ ...style, opacity }}>
 				Drag me to see an image
 			</div>
-			,
 		</>);
 };
 export default DragSource(ItemTypes.BOX, {
