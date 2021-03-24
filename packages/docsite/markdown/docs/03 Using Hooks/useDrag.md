@@ -19,8 +19,9 @@ function DraggableComponent(props) {
     type,
     item: { id }
   }))
-  return collected.isDragging ?
-    <div ref={dragPreview}/> : (
+  return collected.isDragging ? (
+    <div ref={dragPreview} />
+  ) : (
     <div ref={drag} {...collected}>
       ...
     </div>
@@ -50,7 +51,9 @@ function DraggableComponent(props) {
 
 - **`previewOptions`**: Optional. A plain JavaScript object describing drag preview options.
 
-* **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)`function inside the`options` object can improve the performance. Unless you have performance problems, don't worry about it.
+* **`options`**: Optional. A plain object optionally containing any of the following properties:
+
+  - **`dropEffect`**: Optional: The type of drop effect to use on this drag. ("move" or "copy" are valid values.)
 
 * **`end(item, monitor)`**: Optional. When the dragging stops, `end` is called. For every `begin` call, a corresponding `end` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a _drop result_ by returning a plain object from its `drop()` method, it will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. _Note: If the component is unmounted while dragging, `component` parameter is set to be `null`._
 
