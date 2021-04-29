@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, DragEvent } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { useDrop } from 'react-dnd'
 
@@ -9,7 +9,7 @@ const style: CSSProperties = {
 	padding: '2rem',
 	textAlign: 'center',
 }
-const preventDefault = e => e.preventDefault();
+const preventDefault = (e: DragEvent) => e.preventDefault();
 export interface TargetBoxProps {
 	onDrop: (arg: { html: any }) => void
 }
