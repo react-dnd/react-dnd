@@ -651,7 +651,6 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			e.preventDefault()
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		}
 
