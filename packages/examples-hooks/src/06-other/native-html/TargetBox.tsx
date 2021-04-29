@@ -9,7 +9,7 @@ const style: CSSProperties = {
 	padding: '2rem',
 	textAlign: 'center',
 }
-
+const preventDefault = e => e.preventDefault();
 export interface TargetBoxProps {
 	onDrop: (arg: { html: any }) => void
 }
@@ -34,7 +34,7 @@ export const TargetBox: FC<TargetBoxProps> = (props) => {
 
 	const isActive = canDrop && isOver
 	return (
-		<div ref={drop} style={style}>
+		<div ref={drop} style={style} onDrop={preventDefault}>
 			{isActive ? 'Release to drop' : 'Drag HTML here'}
 		</div>
 	)
