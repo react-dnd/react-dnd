@@ -369,20 +369,24 @@ export class HTML5BackendImpl implements Backend {
 		}, MOUSE_MOVE_TIMEOUT) as any) as number
 	}
 
+	private resetMouseMoveTimer() {
+		if (this.rootElement) {
+			this.window?.clearTimeout(this.mouseMoveTimeoutTimer || undefined)
+			this.rootElement.removeEventListener(
+				'mousemove',
+				this.endDragIfSourceWasRemovedFromDOM,
+				true,
+			)
+		}
+
+		this.mouseMoveTimeoutTimer = null
+	}
+
 	private clearCurrentDragSourceNode() {
+		this.resetMouseMoveTimer();
+
 		if (this.currentDragSourceNode) {
 			this.currentDragSourceNode = null
-
-			if (this.rootElement) {
-				this.window?.clearTimeout(this.mouseMoveTimeoutTimer || undefined)
-				this.rootElement.removeEventListener(
-					'mousemove',
-					this.endDragIfSourceWasRemovedFromDOM,
-					true,
-				)
-			}
-
-			this.mouseMoveTimeoutTimer = null
 			return true
 		}
 
