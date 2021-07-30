@@ -371,8 +371,8 @@ export class HTML5BackendImpl implements Backend {
 
 	private resetMouseMoveTimer() {
 		if (this.rootElement) {
-			this.window?.clearTimeout(this.mouseMoveTimeoutTimer || undefined)
-			this.rootElement.removeEventListener(
+			this.window?.clearTimeout?.(this.mouseMoveTimeoutTimer || undefined)
+			this.rootElement.removeEventListener?.(
 				'mousemove',
 				this.endDragIfSourceWasRemovedFromDOM,
 				true,
