@@ -95,7 +95,7 @@ Unfortunately, the HTML5 drag and drop API also has some downsides. It does not 
 
 This is why **the HTML5 drag and drop support is implemented in a pluggable way** in React DnD. You don't have to use it. You can write a different implementation, based on touch events, mouse events, or something else entirely. Such pluggable implementations are called the _backends_ in React DnD.
 
-The library currently ships with the [HTML backend](docs/backends/html5), which should be sufficient for most web applications. There is also a [Touch backend](/docs/backend/touch) that can be used for mobile web applications.
+The library currently ships with the [HTML backend](/docs/backends/html5), which should be sufficient for most web applications. There is also a [Touch backend](/docs/backends/touch) that can be used for mobile web applications.
 
 The backends perform a similar role to that of React's synthetic event system: **they abstract away the browser differences and process the native DOM events.** Despite the similarities, React DnD backends do not have a dependency on React or its synthetic event system. Under the hood, all the backends do is translate the DOM events into the internal Redux actions that React DnD can process.
 
@@ -113,7 +113,7 @@ Now let's talk about how these pieces come together in your components. You have
 
 ### Hooks
 
-Modern React applications have replaced the Higher-Order-Component pattern with hooks. Hooks are a feature of React, introduced in 16.8, that allow for developers to write stateful function components. They also fantastic for managing stateful components, and also for interacting with external stateful systems (\***cough**\* like a Drag-and-Drop engine \***cough**\*).
+Modern React applications have replaced the Higher-Order-Component pattern with hooks. Hooks are a feature of React, introduced in 16.8, that allow for developers to write stateful function components. They are also fantastic for managing stateful components, and also for interacting with external stateful systems (\***cough**\* like a Drag-and-Drop engine \***cough**\*).
 
 If you are unfamiliar with React hooks, refer to the React blog post, [Introducing Hooks](https://reactjs.org/docs/hooks-intro.html).
 
