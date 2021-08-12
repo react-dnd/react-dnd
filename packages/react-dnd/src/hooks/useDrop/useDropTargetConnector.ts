@@ -15,6 +15,7 @@ export function useDropTargetConnector(
 	useIsomorphicLayoutEffect(() => {
 		connector.dropTargetOptions = options || null
 		connector.reconnect()
+		return () => connector.disconnectDropTarget()
 	}, [options])
 	return connector
 }
