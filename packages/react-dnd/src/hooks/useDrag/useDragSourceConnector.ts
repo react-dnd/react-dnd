@@ -16,10 +16,12 @@ export function useDragSourceConnector(
 	useIsomorphicLayoutEffect(() => {
 		connector.dragSourceOptions = dragSourceOptions || null
 		connector.reconnect()
+		return () => connector.disconnectDragSource()
 	}, [connector, dragSourceOptions])
 	useIsomorphicLayoutEffect(() => {
 		connector.dragPreviewOptions = dragPreviewOptions || null
 		connector.reconnect()
+		return () => connector.disconnectDragPreview()
 	}, [connector, dragPreviewOptions])
 	return connector
 }
