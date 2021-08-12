@@ -1,0 +1,5 @@
+declined:
+  - react-dnd-examples-decorators
+  - react-dnd-examples-hooks
+  - react-dnd
+  - react-dnd-test-utils

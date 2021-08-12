@@ -4,7 +4,7 @@ import { wrapWithBackend, tick } from 'react-dnd-test-utils'
 
 describe('Drag Around: Custom Drag Layer', () => {
 	it('toggles the overlay layer over time', async () => {
-		jest.useFakeTimers()
+		jest.useFakeTimers('modern')
 		const TestExample = wrapWithBackend(Example)
 		const rendered = render(<TestExample />)
 		const draggableBoxes = await rendered.findAllByRole('DraggableBox')
