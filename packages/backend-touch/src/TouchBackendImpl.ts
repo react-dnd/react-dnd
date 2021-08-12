@@ -117,7 +117,6 @@ export class TouchBackendImpl implements Backend {
 
 	public setup(): void {
 		const root = this.options.rootElement
-		console.log('ROOT is ', root)
 		if (!root) {
 			return
 		}
@@ -269,14 +268,14 @@ export class TouchBackendImpl implements Backend {
 
 	public connectDropTarget(targetId: string, node: HTMLElement): Unsubscribe {
 		const root = this.options.rootElement
-		if (!root) {
+		if (!this.document || !root) {
 			return (): void => {
 				/* noop */
 			}
 		}
 
 		const handleMove = (e: MouseEvent | TouchEvent) => {
-			if (!root || !this.monitor.isDragging()) {
+			if (!this.document || !root || !this.monitor.isDragging()) {
 				return
 			}
 
@@ -307,7 +306,7 @@ export class TouchBackendImpl implements Backend {
 			 */
 			const droppedOn =
 				coords != null
-					? this.document?.elementFromPoint(coords.x, coords.y)
+					? this.document.elementFromPoint(coords.x, coords.y)
 					: undefined
 			const childMatch = droppedOn && node.contains(droppedOn)
 
@@ -319,13 +318,13 @@ export class TouchBackendImpl implements Backend {
 		/**
 		 * Attaching the event listener to the body so that touchmove will work while dragging over multiple target elements.
 		 */
-		this.addEventListener(root, 'move', handleMove as any)
+		this.addEventListener(this.document.body, 'move', handleMove as any)
 		this.targetNodes.set(targetId, node)
 
 		return (): void => {
 			if (this.document) {
 				this.targetNodes.delete(targetId)
-				this.removeEventListener(root, 'move', handleMove as any)
+				this.removeEventListener(this.document.body, 'move', handleMove as any)
 			}
 		}
 	}

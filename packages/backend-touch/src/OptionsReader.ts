@@ -78,6 +78,6 @@ export class OptionsReader implements TouchBackendOptions {
 	}
 
 	public get rootElement(): Node | undefined {
-		return this.args?.rootElement || (this.window as any as Node)
+		return this.args?.rootElement || (this.document as any as Node)
 	}
 }
