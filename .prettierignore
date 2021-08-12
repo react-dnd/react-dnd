@@ -2,6 +2,7 @@ node_modules/
 dist/
 lib/
 build/
+public/
 pnpm-lock.yaml
 pnpm-workspace.yaml
 .yarn/

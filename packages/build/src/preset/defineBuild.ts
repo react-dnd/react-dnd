@@ -14,7 +14,7 @@ export function defineBuild(): TaskFunction {
 		compileTypescript(),
 		emitTypings(stripInternalTypes),
 		buildBabel(),
-		rollupBundle()
+		rollupBundle(),
 	)
 	build.flags = {
 		'--stripInternalTypes': 'removes types marked as @internal',
