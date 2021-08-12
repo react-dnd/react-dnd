@@ -20636,12 +20636,21 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.0.5, prettier@npm:^2.2.1":
+"prettier@npm:^2.0.5":
   version: 2.2.1
   resolution: "prettier@npm:2.2.1"
   bin:
     prettier: bin-prettier.js
   checksum: 800de2df3d37067ab24478c7f32c60ca0c57b01742133287829feeb4a70d239a7bf6bccb56196784777af591ad80fb9ba70c1a49b0fcecf9f5622a764d513edb
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "prettier@npm:2.3.2"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 17ce5784ac67621c292df58e2da60b2ee150c2d6aebea22a6ad9e52fcd6a5e66c349d0a8436ea3bd8ff9d778920a5f68000d7625b74f43558718a49755aa5259
   languageName: node
   linkType: hard
 
@@ -21201,7 +21210,7 @@ fsevents@^1.2.7:
     gatsby-transformer-sharp: ^3.0.0
     lodash: ^4.17.21
     npm-run-all: ^4.1.5
-    prettier: ^2.2.1
+    prettier: ^2.3.2
     prismjs: ^1.23.0
     prop-types: ^15.7.2
     query-string: ^6.14.1
@@ -21356,7 +21365,7 @@ fsevents@^1.2.7:
     lint-staged: ^10.5.4
     markdown-spellcheck: ^1.3.1
     npm-run-all: ^4.1.5
-    prettier: ^2.2.1
+    prettier: ^2.3.2
     pretty-quick: ^3.1.1
     react-dnd: "workspace:packages/react-dnd"
     react-dnd-html5-backend: "workspace:packages/backend-html5"
