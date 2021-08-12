@@ -1,5 +1,4 @@
-declare const setImmediate: any
-
+import 'setimmediate'
 import { TestBackend, ITestBackend } from 'react-dnd-test-backend'
 import * as Types from './types'
 import { NormalSource, NonDraggableSource, BadItemSource } from './sources'
