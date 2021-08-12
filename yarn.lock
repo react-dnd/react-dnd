@@ -4141,25 +4141,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^7.28.1":
-  version: 7.29.4
-  resolution: "@testing-library/dom@npm:7.29.4"
+"@testing-library/dom@npm:^8.0.0":
+  version: 8.1.0
+  resolution: "@testing-library/dom@npm:8.1.0"
   dependencies:
     "@babel/code-frame": ^7.10.4
     "@babel/runtime": ^7.12.5
     "@types/aria-query": ^4.2.0
     aria-query: ^4.2.2
     chalk: ^4.1.0
-    dom-accessibility-api: ^0.5.4
+    dom-accessibility-api: ^0.5.6
     lz-string: ^1.4.4
-    pretty-format: ^26.6.2
-  checksum: 205d125e1e8d5f711f2592f2f3d25994f481641f6bad17724f8e077431042c3204ae585a8c7df483d84ea8562e75229bf915cb6090a4657c5897fbd3f742a3b9
+    pretty-format: ^27.0.2
+  checksum: 8d3778b59c08dba4f1ba62823c0dad0990d2fcbd0396fcf0b8a2c4ce7420f8c5adbcae708f8f58a75ead749bd06d9ef4285187763abb18ac464ed47c2f8e332b
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^5.11.9":
-  version: 5.11.9
-  resolution: "@testing-library/jest-dom@npm:5.11.9"
+"@testing-library/jest-dom@npm:^5.14.1":
+  version: 5.14.1
+  resolution: "@testing-library/jest-dom@npm:5.14.1"
   dependencies:
     "@babel/runtime": ^7.9.2
     "@types/testing-library__jest-dom": ^5.9.1
@@ -4167,22 +4167,23 @@ __metadata:
     chalk: ^3.0.0
     css: ^3.0.0
     css.escape: ^1.5.1
+    dom-accessibility-api: ^0.5.6
     lodash: ^4.17.15
     redent: ^3.0.0
-  checksum: 80234da7011631bb2674c1009a464bc2ce081dbf9ac72347d6886b941fb83893b0834ee2236005a66adf40cb8ab7037873cdb5afeed5c48d6d2109c0a0b15358
+  checksum: eeba37ba10be550bd9ab7dd0dda77d9011a96d9a4f75c70ed57d7bf120fe4126b251ccfb1444da1746c19773bbe4efbd96a0408f970d98c9cd1d399b2455d2c1
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:^11.2.5":
-  version: 11.2.5
-  resolution: "@testing-library/react@npm:11.2.5"
+"@testing-library/react@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@testing-library/react@npm:12.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
-    "@testing-library/dom": ^7.28.1
+    "@testing-library/dom": ^8.0.0
   peerDependencies:
     react: "*"
     react-dom: "*"
-  checksum: d30daf11a52b17af845faa5757e0ea36c89feb8053cbf26ac273195b774da74ecd1d76377031d44d3741841ff0809ce2a294b2f64f3025d08a5015274bfca54d
+  checksum: 07f0ba4092f7cd3232c2c61329353b2f2fa65388fc58666780be80f99f75daaf897a09a9897ac53f213d7b2d57e3cecb8127fd940da8cfd4275fa4a281e5b32c
   languageName: node
   linkType: hard
 
@@ -9807,10 +9808,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dom-accessibility-api@npm:^0.5.4":
-  version: 0.5.4
-  resolution: "dom-accessibility-api@npm:0.5.4"
-  checksum: 1fb22b351984564212b41bd7265ad1288322ad72e7367753f589facaeb98c2e3515502396acf2463f71dbaa1e238d6e006ec144a6217f1cd42e962b9bebd2dee
+"dom-accessibility-api@npm:^0.5.6":
+  version: 0.5.7
+  resolution: "dom-accessibility-api@npm:0.5.7"
+  checksum: 16161688087510bc31e9103be3a0b0b7d3b044fd4ca03059ac97950f391958008198627c688bd94346757169de91c2500903b14ee9e420c006961a25770b8c62
   languageName: node
   linkType: hard
 
@@ -20866,7 +20867,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^27.0.0, pretty-format@npm:^27.0.6":
+"pretty-format@npm:^27.0.0, pretty-format@npm:^27.0.2, pretty-format@npm:^27.0.6":
   version: 27.0.6
   resolution: "pretty-format@npm:27.0.6"
   dependencies:
@@ -21409,8 +21410,8 @@ fsevents@^1.2.7:
   resolution: "react-dnd-examples-decorators@workspace:packages/examples-decorators"
   dependencies:
     "@react-dnd/build": "workspace:packages/build"
-    "@testing-library/jest-dom": ^5.11.9
-    "@testing-library/react": ^11.2.5
+    "@testing-library/jest-dom": ^5.14.1
+    "@testing-library/react": ^12.0.0
     "@types/faker": ^5.1.7
     "@types/jest": ^27.0.1
     "@types/lodash": ^4.14.168
@@ -21451,8 +21452,8 @@ fsevents@^1.2.7:
   resolution: "react-dnd-examples-hooks@workspace:packages/examples-hooks"
   dependencies:
     "@react-dnd/build": "workspace:packages/build"
-    "@testing-library/jest-dom": ^5.11.9
-    "@testing-library/react": ^11.2.5
+    "@testing-library/jest-dom": ^5.14.1
+    "@testing-library/react": ^12.0.0
     "@types/faker": ^5.1.7
     "@types/lodash": ^4.14.168
     "@types/node": ^14.17.9
@@ -21505,8 +21506,8 @@ fsevents@^1.2.7:
     "@babel/preset-typescript": ^7.15.0
     "@commitlint/cli": ^11.0.0
     "@commitlint/config-conventional": ^11.0.0
-    "@testing-library/jest-dom": ^5.11.9
-    "@testing-library/react": ^11.2.5
+    "@testing-library/jest-dom": ^5.14.1
+    "@testing-library/react": ^12.0.0
     "@types/jest": ^27.0.1
     "@types/node": ^14.17.9
     "@types/react": ^17.0.17
@@ -21598,7 +21599,7 @@ fsevents@^1.2.7:
   resolution: "react-dnd-test-utils@workspace:packages/test-utils"
   dependencies:
     "@react-dnd/build": "workspace:packages/build"
-    "@testing-library/react": ^11.2.5
+    "@testing-library/react": ^12.0.0
     "@types/node": ^14.17.9
     "@types/react": ^17.0.17
     "@types/react-dom": ^17.0.9
@@ -21651,7 +21652,7 @@ fsevents@^1.2.7:
     "@react-dnd/build": "workspace:packages/build"
     "@react-dnd/invariant": ^2.0.0
     "@react-dnd/shallowequal": ^2.0.0
-    "@testing-library/react": ^11.2.5
+    "@testing-library/react": ^12.0.0
     "@types/hoist-non-react-statics": ^3.3.1
     "@types/node": ^14.17.9
     "@types/react": ^17.0.17
