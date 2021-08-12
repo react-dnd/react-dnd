@@ -1,4 +1,6 @@
 declined:
+  - react-dnd-html5-backend
+  - react-dnd-touch-backend
   - react-dnd-examples-decorators
   - react-dnd-examples-hooks
   - react-dnd
