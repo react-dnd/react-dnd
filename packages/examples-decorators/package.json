@@ -46,7 +46,7 @@
     "react": "^17.0.1",
     "react-dnd-test-backend": "workspace:packages/backend-test",
     "react-dnd-test-utils": "workspace:packages/test-utils",
-    "typescript": "^4.1.5"
+    "typescript": "^4.3.5"
   },
   "peerDependencies": {
     "@types/node": ">= 12",

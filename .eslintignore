@@ -5,4 +5,5 @@
 **/static/
 packages/documentation/cra-test/build/
 .pnp.js
+.pnp.cjs
 .yarn/
