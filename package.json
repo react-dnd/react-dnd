@@ -53,7 +53,7 @@
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "ci": "run-s build: test: lint: test:unit build_docsite git-is-clean",
     "precommit": "lint-staged",
-    "git-is-clean": "git diff-index --quiet HEAD"
+    "git-is-clean": "git status && git diff-index HEAD"
   },
   "workspaces": [
     "packages/*"
