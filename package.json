@@ -40,7 +40,8 @@
     "clean:": "yarn workspaces foreach --exclude @react-dnd/build -pv run clean",
     "build:": "yarn workspaces foreach -pv --topological-dev run build",
     "test:": "yarn workspaces foreach -pv run test",
-    "release:all": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude '@react-dnd/build' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples-hooks' --exclude 'react-dnd-examples-decorators' -pv npm publish --tolerate-republish",
+    "watch:": "yarn workspaces foreach -pvi run watch",
+    "release:": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude '@react-dnd/build' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples-hooks' --exclude 'react-dnd-examples-decorators' -pv npm publish --tolerate-republish",
     "lint:": "run-s 'lint:*'",
     "test:unit": "jest --coverage",
     "lint:code": "eslint . --ext .js,.ts,.jsx,.tsx",
@@ -51,7 +52,6 @@
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "ci": "run-s build: test: lint: test:unit build_docsite git-is-clean",
     "precommit": "lint-staged",
-    "watch": "yarn workspaces foreach -pvi run watch",
     "git-is-clean": "git diff-index --quiet HEAD"
   },
   "workspaces": [
