@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-utils",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "license": "MIT",
   "main": "src/index.ts",
   "publishConfig": {
