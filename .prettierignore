@@ -9,3 +9,6 @@ pnpm-workspace.yaml
 .pnp.js
 .pnp.cjs
 yarn.lock
+coverage/
+.cache/
+static/
