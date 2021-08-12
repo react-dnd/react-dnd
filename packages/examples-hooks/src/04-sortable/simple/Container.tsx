@@ -36,8 +36,7 @@ export const Container: FC = () => {
 			},
 			{
 				id: 5,
-				text:
-					'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
+				text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
 			},
 			{
 				id: 6,

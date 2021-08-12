@@ -14,7 +14,7 @@ export const Template: FC<any> = memo(function Template(props) {
 })
 
 export const pageQuery = graphql`
-	query($path: String!) {
+	query ($path: String!) {
 		currentPage: markdownRemark(frontmatter: { path: { eq: $path } }) {
 			html
 			htmlAst

@@ -58,7 +58,8 @@ export function decorateHandler<Props, CollectedProps, ItemIdType>({
 
 	class DragDropContainer
 		extends Component<Props>
-		implements DndComponent<Props> {
+		implements DndComponent<Props>
+	{
 		public static DecoratedComponent = DecoratedComponent
 		public static displayName = `${containerDisplayName}(${displayName})`
 
@@ -242,8 +243,8 @@ export function decorateHandler<Props, CollectedProps, ItemIdType>({
 		}
 	}
 
-	return (hoistStatics(
+	return hoistStatics(
 		DragDropContainer,
 		DecoratedComponent,
-	) as any) as DndComponent<Props>
+	) as any as DndComponent<Props>
 }

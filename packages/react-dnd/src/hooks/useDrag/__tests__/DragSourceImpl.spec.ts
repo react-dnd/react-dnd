@@ -107,9 +107,9 @@ describe('The Hooks DragSourceImpl', () => {
 
 	describe('isDragging()', () => {
 		it('performs an ID check by default', () => {
-			const globalMon = ({
+			const globalMon = {
 				getSourceId: () => '1',
-			} as any) as DragDropMonitor
+			} as any as DragDropMonitor
 			const impl = new DragSourceImpl({ type: 'box' }, monitor, connector)
 			expect(impl.isDragging(globalMon, '1')).toBeTruthy()
 			expect(impl.isDragging(globalMon, '2')).toBeFalsy()

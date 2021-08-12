@@ -34,8 +34,8 @@ export function DragLayer<RequiredProps, CollectedProps = any>(
 		options,
 	)
 
-	return (function decorateLayer<
-		ComponentType extends RComponentType<RequiredProps & CollectedProps>
+	return function decorateLayer<
+		ComponentType extends RComponentType<RequiredProps & CollectedProps>,
 	>(DecoratedComponent: ComponentType): DndComponentEnhancer<CollectedProps> {
 		const Decorated = DecoratedComponent as any
 		const { arePropsEqual = shallowEqual } = options
@@ -152,5 +152,5 @@ export function DragLayer<RequiredProps, CollectedProps = any>(
 		}
 
 		return hoistStatics(DragLayerContainer, DecoratedComponent) as any
-	} as any) as DndComponentEnhancer<CollectedProps>
+	} as any as DndComponentEnhancer<CollectedProps>
 }

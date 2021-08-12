@@ -96,14 +96,14 @@ function debugConfig({
 	input,
 	external,
 	globals,
-	alias: aliases = {}
+	alias: aliases = {},
 }: UmdConfig): rollup.RollupOptions {
 	return {
 		input,
 		external,
 		plugins: [
 			alias({
-				entries: aliases
+				entries: aliases,
 			}),
 			nodeResolve(NODE_RESOLVE_OPTS),
 			commonjs(CJS_OPTS),
@@ -122,19 +122,19 @@ function minConfig({
 	input,
 	external,
 	globals,
-	alias: aliases = {}
+	alias: aliases = {},
 }: UmdConfig): rollup.RollupOptions {
 	return {
 		input,
 		external,
 		plugins: [
 			alias({
-				entries: aliases
+				entries: aliases,
 			}),
 			nodeResolve(NODE_RESOLVE_OPTS),
 			commonjs(CJS_OPTS),
 			replaceNodeEnv('production'),
-			terser()
+			terser(),
 		],
 		output: {
 			name,
@@ -148,8 +148,8 @@ function minConfig({
 const NODE_RESOLVE_OPTS = {
 	browser: true,
 	mainFields: ['main:bundle', 'module', 'main'],
-	extensions: ['.mjs', '.js', '.json', '.node']
+	extensions: ['.mjs', '.js', '.json', '.node'],
 }
 const CJS_OPTS = {
-	extensions: ['.js']
+	extensions: ['.js'],
 }

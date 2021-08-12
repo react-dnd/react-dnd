@@ -58,7 +58,7 @@ export const Card: FC<CardProps> = memo(function Card({
 				}
 			},
 		}),
-		[findCard, moveCard]
+		[findCard, moveCard],
 	)
 
 	const opacity = isDragging ? 0 : 1

@@ -38,15 +38,15 @@
     "@types/faker": "^5.1.7",
     "@types/jest": "^26.0.20",
     "@types/lodash": "^4.14.168",
-    "@types/node": "^14.14.31",
-    "@types/react": "^17.0.2",
+    "@types/node": "^14.17.9",
+    "@types/react": "^17.0.17",
     "@types/testing-library__jest-dom": "^5.9.5",
     "gulp": "^4.0.2",
     "npm-run-all": "^4.1.5",
-    "react": "^17.0.1",
+    "react": "^17.0.2",
     "react-dnd-test-backend": "workspace:packages/backend-test",
     "react-dnd-test-utils": "workspace:packages/test-utils",
-    "typescript": "^4.1.5"
+    "typescript": "^4.3.5"
   },
   "peerDependencies": {
     "@types/node": ">= 12",
