@@ -9,7 +9,7 @@
     "gatsby": "~2.32.9",
     "gatsby-plugin-manifest": "^2.12.1",
     "gatsby-plugin-react-helmet": "^3.10.0",
-    "gatsby-plugin-sharp": "^2.14.3",
+    "gatsby-plugin-sharp": "^2.14.4",
     "gatsby-plugin-styled-components": "^3.10.0",
     "gatsby-plugin-typography": "^2.12.0",
     "gatsby-remark-autolink-headers": "^3.0.0",
