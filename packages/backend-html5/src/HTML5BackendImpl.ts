@@ -647,14 +647,13 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			e.preventDefault()
+			this.maybePreventDefaultOn(e)
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		} else if (matchNativeItemType(e.dataTransfer)) {
 			// Dragging some elements, like <a> and <img> may still behave like a native drag event,
 			// even if the current drag event matches a user-defined type.
 			// Stop the default behavior when we're not expecting a native item to be dropped.
-
-			e.preventDefault();
+			e.preventDefault()
 		}
 
 		this.enterLeaveCounter.reset()
@@ -703,5 +702,11 @@ export class HTML5BackendImpl implements Backend {
 		// to enable drag and drop
 		e.preventDefault()
 		target.dragDrop()
+	}
+
+	private maybePreventDefaultOn = (evt: DragEvent) => {
+		if (this.options.isNativeItemDefaultPrevented) {
+			evt.preventDefault()
+		}
 	}
 }
