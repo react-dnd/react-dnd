@@ -138,7 +138,12 @@ export class TouchBackendImpl implements Backend {
 			true,
 		)
 		this.addEventListener(this.document, 'move', this.handleTopMove as any)
-		this.addEventListener(this.document, 'move', this.handleTopMoveCapture, true)
+		this.addEventListener(
+			this.document,
+			'move',
+			this.handleTopMoveCapture,
+			true,
+		)
 		this.addEventListener(
 			this.document,
 			'end',
