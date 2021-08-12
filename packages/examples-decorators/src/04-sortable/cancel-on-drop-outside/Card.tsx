@@ -72,10 +72,8 @@ export default DropTarget(
 				originalIndex: props.findCard(props.id).index,
 			}),
 			endDrag(props: CardProps, monitor: DragSourceMonitor) {
-				const {
-					id: droppedId,
-					originalIndex,
-				} = monitor.getItem<CardDragObject>()
+				const { id: droppedId, originalIndex } =
+					monitor.getItem<CardDragObject>()
 				const didDrop = monitor.didDrop()
 				if (!didDrop) {
 					props.moveCard(droppedId, originalIndex)

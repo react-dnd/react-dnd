@@ -138,7 +138,12 @@ export class TouchBackendImpl implements Backend {
 			true,
 		)
 		this.addEventListener(this.document, 'move', this.handleTopMove as any)
-		this.addEventListener(this.document, 'move', this.handleTopMoveCapture, true)
+		this.addEventListener(
+			this.document,
+			'move',
+			this.handleTopMoveCapture,
+			true,
+		)
 		this.addEventListener(
 			this.document,
 			'end',
@@ -397,10 +402,10 @@ export class TouchBackendImpl implements Backend {
 			e.type === eventNames.touch.start
 				? this.options.delayTouchStart
 				: this.options.delayMouseStart
-		this.timeout = (setTimeout(
+		this.timeout = setTimeout(
 			this.handleTopMoveStart.bind(this, e as any),
 			delay,
-		) as any) as ReturnType<typeof setTimeout>
+		) as any as ReturnType<typeof setTimeout>
 		this.waitingForDelay = true
 	}
 

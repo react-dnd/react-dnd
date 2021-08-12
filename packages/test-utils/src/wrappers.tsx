@@ -59,5 +59,5 @@ export function wrapWithBackend<T>(
 			return <TestContextWrapper {...props} forwardedRef={ref} />
 		},
 	)
-	return (ForwardedComponent as unknown) as ComponentType<T>
+	return ForwardedComponent as unknown as ComponentType<T>
 }

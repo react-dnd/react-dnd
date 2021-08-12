@@ -48,10 +48,10 @@ export const ExampleTabs: FC<ExampleTabsProps> = memo(function ExampleTabs({
 				<Panel>
 					{!showHooksVisible ? null : (
 						<ShowHooksButton
-							onClick={useCallback(() => setShowHooks(!showHooks), [
-								showHooks,
-								setShowHooks,
-							])}
+							onClick={useCallback(
+								() => setShowHooks(!showHooks),
+								[showHooks, setShowHooks],
+							)}
 						>
 							{showHooks ? 'Using Hooks' : 'Using Decorators'}
 						</ShowHooksButton>

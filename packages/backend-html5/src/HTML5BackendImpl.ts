@@ -360,13 +360,13 @@ export class HTML5BackendImpl implements Backend {
 		//   * https://github.com/react-dnd/react-dnd/pull/928
 		//   * https://github.com/react-dnd/react-dnd/issues/869
 		//
-		this.mouseMoveTimeoutTimer = (setTimeout(() => {
+		this.mouseMoveTimeoutTimer = setTimeout(() => {
 			return this.rootElement?.addEventListener(
 				'mousemove',
 				this.endDragIfSourceWasRemovedFromDOM,
 				true,
 			)
-		}, MOUSE_MOVE_TIMEOUT) as any) as number
+		}, MOUSE_MOVE_TIMEOUT) as any as number
 	}
 
 	private clearCurrentDragSourceNode() {
@@ -440,12 +440,8 @@ export class HTML5BackendImpl implements Backend {
 				const dragPreview = this.sourcePreviewNodes.get(sourceId) || sourceNode
 
 				if (dragPreview) {
-					const {
-						anchorX,
-						anchorY,
-						offsetX,
-						offsetY,
-					} = this.getCurrentSourcePreviewNodeOptions()
+					const { anchorX, anchorY, offsetX, offsetY } =
+						this.getCurrentSourcePreviewNodeOptions()
 					const anchorPoint = { anchorX, anchorY }
 					const offsetPoint = { offsetX, offsetY }
 					const dragPreviewOffset = getDragPreviewOffset(
