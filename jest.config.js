@@ -1,5 +1,6 @@
 module.exports = {
 	rootDir: __dirname,
+	testEnvironment: 'jsdom',
 	setupFilesAfterEnv: ['<rootDir>/jest/setup-testing-library.js'],
 	collectCoverageFrom: [
 		'packages/*/src/**/*.tsx',

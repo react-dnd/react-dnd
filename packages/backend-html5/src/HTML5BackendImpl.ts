@@ -654,7 +654,7 @@ export class HTML5BackendImpl implements Backend {
 			// even if the current drag event matches a user-defined type.
 			// Stop the default behavior when we're not expecting a native item to be dropped.
 
-			e.preventDefault();
+			e.preventDefault()
 		}
 
 		this.enterLeaveCounter.reset()
