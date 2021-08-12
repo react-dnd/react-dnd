@@ -9,9 +9,10 @@ export function useDragSourceConnector(
 	dragPreviewOptions: DragPreviewOptions | undefined,
 ): SourceConnector {
 	const manager = useDragDropManager()
-	const connector = useMemo(() => new SourceConnector(manager.getBackend()), [
-		manager,
-	])
+	const connector = useMemo(
+		() => new SourceConnector(manager.getBackend()),
+		[manager],
+	)
 	useIsomorphicLayoutEffect(() => {
 		connector.dragSourceOptions = dragSourceOptions || null
 		connector.reconnect()

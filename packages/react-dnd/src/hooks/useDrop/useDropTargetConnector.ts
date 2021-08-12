@@ -8,9 +8,10 @@ export function useDropTargetConnector(
 	options: DropTargetOptions,
 ): TargetConnector {
 	const manager = useDragDropManager()
-	const connector = useMemo(() => new TargetConnector(manager.getBackend()), [
-		manager,
-	])
+	const connector = useMemo(
+		() => new TargetConnector(manager.getBackend()),
+		[manager],
+	)
 	useIsomorphicLayoutEffect(() => {
 		connector.dropTargetOptions = options || null
 		connector.reconnect()

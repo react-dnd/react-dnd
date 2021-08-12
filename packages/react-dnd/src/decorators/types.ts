@@ -231,7 +231,7 @@ export type Shared<InjectedProps, DecorationTargetProps> = {
 export type GetProps<C> = C extends ComponentType<infer P> ? P : never
 
 export type DndComponentEnhancer<CollectedProps> = <
-	C extends ComponentType<Matching<CollectedProps, GetProps<C>>>
+	C extends ComponentType<Matching<CollectedProps, GetProps<C>>>,
 >(
 	component: C,
 ) => DndComponentClass<

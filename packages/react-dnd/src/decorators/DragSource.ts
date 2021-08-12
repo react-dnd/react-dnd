@@ -27,7 +27,7 @@ export function DragSource<
 	RequiredProps,
 	CollectedProps = any,
 	DragObject = any,
-	DropResult = any
+	DropResult = any,
 >(
 	type: SourceType | ((props: RequiredProps) => SourceType),
 	spec: DragSourceSpec<RequiredProps, DragObject, DropResult>,
@@ -81,8 +81,8 @@ export function DragSource<
 		collect,
 	)
 
-	return (function decorateSource<
-		ComponentType extends RComponentType<RequiredProps & CollectedProps>
+	return function decorateSource<
+		ComponentType extends RComponentType<RequiredProps & CollectedProps>,
 	>(DecoratedComponent: ComponentType) {
 		return decorateHandler<RequiredProps, CollectedProps, SourceType>({
 			containerDisplayName: 'DragSource',
@@ -96,5 +96,5 @@ export function DragSource<
 			collect,
 			options,
 		})
-	} as any) as DndComponentEnhancer<CollectedProps>
+	} as any as DndComponentEnhancer<CollectedProps>
 }

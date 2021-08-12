@@ -28,7 +28,7 @@ export function DropTarget<
 	RequiredProps,
 	CollectedProps = any,
 	DragObject = any,
-	DropResult = any
+	DropResult = any,
 >(
 	type: TargetType | ((props: RequiredProps) => TargetType),
 	spec: DropTargetSpec<RequiredProps, DragObject, DropResult>,
@@ -82,8 +82,8 @@ export function DropTarget<
 		collect,
 	)
 
-	return (function decorateTarget<
-		ComponentType extends RComponentType<RequiredProps & CollectedProps>
+	return function decorateTarget<
+		ComponentType extends RComponentType<RequiredProps & CollectedProps>,
 	>(DecoratedComponent: ComponentType): DndComponent<RequiredProps> {
 		return decorateHandler<RequiredProps, CollectedProps, TargetType>({
 			containerDisplayName: 'DropTarget',
@@ -97,5 +97,5 @@ export function DropTarget<
 			collect,
 			options,
 		})
-	} as any) as DndComponentEnhancer<CollectedProps>
+	} as any as DndComponentEnhancer<CollectedProps>
 }
