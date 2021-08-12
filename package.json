@@ -49,7 +49,7 @@
     "lint:formatting": "prettier --write \"**/*.(ts|tsx|js|json|md)\"",
     "build_docsite": "yarn build:docsite",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
-    "ci": "run-s build: test: lint: test:unit build_docsite git-is-clean",    
+    "ci": "run-s build: test: lint: test:unit build_docsite git-is-clean",
     "prettify:source": "prettier 'packages/*/*/src/**/*.ts*'",
     "prettify": "pretty-quick --fix",
     "precommit:lint": "lint-staged",
