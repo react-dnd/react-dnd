@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-examples-decorators",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "private": true,
   "description": "Drag and Drop for React",
   "main": "src/index.ts",
