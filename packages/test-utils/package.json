@@ -8,6 +8,11 @@
     "module": "dist/esm/index.js",
     "types": "dist/types/index.d.ts"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git",
+    "directory": "packages/test-utils"
+  },
   "sideEffects": false,
   "scripts": {
     "clean": "gulp clean",

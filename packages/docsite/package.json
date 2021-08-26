@@ -42,6 +42,11 @@
     "typography": "^0.16.19",
     "typography-theme-github": "^0.16.19"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git",
+    "directory": "packages/docsite"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
