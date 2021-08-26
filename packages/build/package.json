@@ -7,6 +7,11 @@
     "clean": "rimraf lib",
     "build": "tsc -b"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd.git",
+    "directory": "packages/build"
+  },
   "dependencies": {
     "@babel/core": "^7.15.0",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
