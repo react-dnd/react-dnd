@@ -4,10 +4,10 @@ import { TaskFunction } from '../types'
 const { parallel } = require('gulp')
 
 export function defineClean(): TaskFunction {
-	function cleanLib(cb: (err: Error | undefined) => void) {
+	function cleanLib(cb: (err: Error | null | undefined) => void) {
 		rimraf('lib', cb)
 	}
-	function cleanDist(cb: (err: Error | undefined) => void) {
+	function cleanDist(cb: (err: Error | null | undefined) => void) {
 		rimraf('dist', cb)
 	}
 	return parallel(cleanLib, cleanDist)
