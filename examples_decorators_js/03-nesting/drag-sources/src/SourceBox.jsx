@@ -20,11 +20,11 @@ const SourceBoxRaw = ({ color, children, isDragging, connectDragSource, forbidDr
             break;
     }
     return connectDragSource(<div style={{
-        ...style,
-        backgroundColor,
-        opacity,
-        cursor: forbidDrag ? 'default' : 'move',
-    }} role="SourceBox" data-color={color}>
+            ...style,
+            backgroundColor,
+            opacity,
+            cursor: forbidDrag ? 'default' : 'move',
+        }} role="SourceBox" data-color={color}>
 			<input type="checkbox" checked={forbidDrag} onChange={onToggleForbidDrag}/>
 			<small>Forbid drag</small>
 			{children}

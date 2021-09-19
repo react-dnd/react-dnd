@@ -23,8 +23,8 @@ export const Dustbin = memo(function Dustbin({ accepts, isOver, canDrop, connect
     }
     return connectDropTarget(<div ref={connectDropTarget} style={{ ...style, backgroundColor }} role="Dustbin">
 			{isActive
-        ? 'Release to drop'
-        : `This dustbin accepts: ${accepts.join(', ')}`}
+            ? 'Release to drop'
+            : `This dustbin accepts: ${accepts.join(', ')}`}
 
 			{lastDroppedItem && (<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>)}
 		</div>);

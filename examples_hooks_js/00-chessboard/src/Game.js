@@ -1,8 +1,6 @@
 export class Game {
-  constructor() {
-    this.knightPosition = [1, 7]
-    this.observers = []
-  }
+  knightPosition = [1, 7]
+  observers = []
   observe(o) {
     this.observers.push(o)
     this.emitChange()

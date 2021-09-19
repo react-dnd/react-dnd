@@ -14,10 +14,10 @@ export const BoardSquare = ({ x, y, children, game, }) => {
     }), [game]);
     const black = (x + y) % 2 === 1;
     return (<div ref={drop} role="Space" data-testid={`(${x},${y})`} style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-    }}>
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+        }}>
 			<Square black={black}>{children}</Square>
 			{isOver && !canDrop && <Overlay type={OverlayType.IllegalMoveHover}/>}
 			{!isOver && canDrop && <Overlay type={OverlayType.PossibleMove}/>}

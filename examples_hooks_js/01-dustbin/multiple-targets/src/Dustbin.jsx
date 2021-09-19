@@ -31,8 +31,8 @@ export const Dustbin = memo(function Dustbin({ accept, lastDroppedItem, onDrop, 
     }
     return (<div ref={drop} role="Dustbin" style={{ ...style, backgroundColor }}>
 			{isActive
-        ? 'Release to drop'
-        : `This dustbin accepts: ${accept.join(', ')}`}
+            ? 'Release to drop'
+            : `This dustbin accepts: ${accept.join(', ')}`}
 
 			{lastDroppedItem && (<p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>)}
 		</div>);

@@ -11,11 +11,11 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-scripts": "^4.0.2",
-    "react-dnd": "14.0.2",
-    "react-dnd-html5-backend": "14.0.0",
+    "react-dnd": "14.0.3",
+    "react-dnd-html5-backend": "14.0.1",
     "babel-jest": "^26.6.3",
     "faker": "^5.4.0",
     "immutability-helper": "^3.1.1",

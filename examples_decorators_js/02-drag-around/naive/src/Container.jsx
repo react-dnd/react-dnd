@@ -10,25 +10,22 @@ const styles = {
     position: 'relative',
 };
 class Container extends Component {
-    constructor() {
-        super(...arguments);
-        this.state = {
-            boxes: {
-                a: { top: 20, left: 80, title: 'Drag me around' },
-                b: { top: 180, left: 20, title: 'Drag me too' },
-            },
-        };
-    }
+    state = {
+        boxes: {
+            a: { top: 20, left: 80, title: 'Drag me around' },
+            b: { top: 180, left: 20, title: 'Drag me too' },
+        },
+    };
     render() {
         const { hideSourceOnDrag, connectDropTarget } = this.props;
         const { boxes } = this.state;
         return connectDropTarget(<div style={styles}>
 				{Object.keys(boxes).map((key) => {
-            const { left, top, title } = boxes[key];
-            return (<Box key={key} id={key} left={left} top={top} hideSourceOnDrag={hideSourceOnDrag}>
+                const { left, top, title } = boxes[key];
+                return (<Box key={key} id={key} left={left} top={top} hideSourceOnDrag={hideSourceOnDrag}>
 							{title}
 						</Box>);
-        })}
+            })}
 			</div>);
     }
     moveBox(id, left, top) {

@@ -10,9 +10,9 @@ const Knight = ({ connectDragSource, connectDragPreview, isDragging, }) => {
     return (<>
 			<DragPreviewImage connect={connectDragPreview} src={knightImage}/>
 			<div ref={connectDragSource} style={{
-        ...knightStyle,
-        opacity: isDragging ? 0.5 : 1,
-    }}>
+            ...knightStyle,
+            opacity: isDragging ? 0.5 : 1,
+        }}>
 				♘
 			</div>
 		</>);

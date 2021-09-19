@@ -6,29 +6,10 @@ const style = {
     width: 400,
 };
 export class Container extends Component {
+    pendingUpdateFn;
+    requestedFrame;
     constructor(props) {
         super(props);
-        this.drawFrame = () => {
-            const nextState = update(this.state, this.pendingUpdateFn);
-            this.setState(nextState);
-            this.pendingUpdateFn = undefined;
-            this.requestedFrame = undefined;
-        };
-        this.moveCard = (id, afterId) => {
-            const { cardsById, cardsByIndex } = this.state;
-            const card = cardsById[id];
-            const afterCard = cardsById[afterId];
-            const cardIndex = cardsByIndex.indexOf(card);
-            const afterIndex = cardsByIndex.indexOf(afterCard);
-            this.scheduleUpdate({
-                cardsByIndex: {
-                    $splice: [
-                        [cardIndex, 1],
-                        [afterIndex, 0, card],
-                    ],
-                },
-            });
-        };
         const cardsById = {};
         const cardsByIndex = [];
         for (let i = 0; i < 1000; i += 1) {
@@ -58,4 +39,25 @@ export class Container extends Component {
             this.requestedFrame = requestAnimationFrame(this.drawFrame);
         }
     }
+    drawFrame = () => {
+        const nextState = update(this.state, this.pendingUpdateFn);
+        this.setState(nextState);
+        this.pendingUpdateFn = undefined;
+        this.requestedFrame = undefined;
+    };
+    moveCard = (id, afterId) => {
+        const { cardsById, cardsByIndex } = this.state;
+        const card = cardsById[id];
+        const afterCard = cardsById[afterId];
+        const cardIndex = cardsByIndex.indexOf(card);
+        const afterIndex = cardsByIndex.indexOf(afterCard);
+        this.scheduleUpdate({
+            cardsByIndex: {
+                $splice: [
+                    [cardIndex, 1],
+                    [afterIndex, 0, card],
+                ],
+            },
+        });
+    };
 }

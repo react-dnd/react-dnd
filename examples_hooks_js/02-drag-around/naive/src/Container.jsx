@@ -33,10 +33,10 @@ export const Container = ({ hideSourceOnDrag }) => {
     }), [moveBox]);
     return (<div ref={drop} style={styles}>
 			{Object.keys(boxes).map((key) => {
-        const { left, top, title } = boxes[key];
-        return (<Box key={key} id={key} left={left} top={top} hideSourceOnDrag={hideSourceOnDrag}>
+            const { left, top, title } = boxes[key];
+            return (<Box key={key} id={key} left={left} top={top} hideSourceOnDrag={hideSourceOnDrag}>
 						{title}
 					</Box>);
-    })}
+        })}
 		</div>);
 };

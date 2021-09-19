@@ -16,9 +16,9 @@ export const Knight = () => {
     return (<>
 			<DragPreviewImage connect={preview} src={knightImage}/>
 			<div ref={drag} style={{
-        ...knightStyle,
-        opacity: isDragging ? 0.5 : 1,
-    }}>
+            ...knightStyle,
+            opacity: isDragging ? 0.5 : 1,
+        }}>
 				♘
 			</div>
 		</>);
