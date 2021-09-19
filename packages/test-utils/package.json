@@ -21,9 +21,9 @@
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
-    "@testing-library/react": "^12.0.0",
-    "@types/node": "^14.17.9",
-    "@types/react": "^17.0.17",
+    "@testing-library/react": "^12.1.0",
+    "@types/node": "^14.17.17",
+    "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
     "dnd-core": "workspace:packages/dnd-core",
     "gulp": "^4.0.2",
@@ -31,7 +31,7 @@
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-html5-backend": "workspace:packages/backend-html5",
     "react-dnd-test-backend": "workspace:packages/backend-test",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.2"
   },
   "peerDependencies": {
     "@testing-library/react": ">= 11",

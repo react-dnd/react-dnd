@@ -29,16 +29,16 @@
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
-    "@testing-library/react": "^12.0.0",
+    "@testing-library/react": "^12.1.0",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/node": "^14.17.9",
-    "@types/react": "^17.0.17",
+    "@types/node": "^14.17.17",
+    "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
     "gulp": "^4.0.2",
     "react": "^17.0.2",
     "react-dnd-test-backend": "portal:../backend-test",
     "react-dnd-test-utils": "portal:../test-utils",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.2"
   },
   "peerDependencies": {
     "@types/hoist-non-react-statics": ">= 3.3.1",

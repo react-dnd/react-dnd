@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core",
-    "faker": "^5.4.0",
+    "faker": "^5.5.3",
     "immutability-helper": "^3.1.1",
     "lodash": "^4.17.21",
     "react-dnd": "workspace:packages/react-dnd",
@@ -34,19 +34,19 @@
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
-    "@types/faker": "^5.1.7",
+    "@testing-library/react": "^12.1.0",
+    "@types/faker": "^5.5.8",
     "@types/jest": "^27.0.1",
-    "@types/lodash": "^4.14.168",
-    "@types/node": "^14.17.9",
-    "@types/react": "^17.0.17",
-    "@types/testing-library__jest-dom": "^5.9.5",
+    "@types/lodash": "^4.14.173",
+    "@types/node": "^14.17.17",
+    "@types/react": "^17.0.21",
+    "@types/testing-library__jest-dom": "^5.14.1",
     "gulp": "^4.0.2",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
     "react-dnd-test-backend": "workspace:packages/backend-test",
     "react-dnd-test-utils": "workspace:packages/test-utils",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.3"
   },
   "peerDependencies": {
     "@types/node": ">= 12",
