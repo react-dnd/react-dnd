@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "14.0.3",
+  "version": "14.0.4",
   "description": "Drag and Drop for React",
   "main": "src/index.ts",
   "publishConfig": {
@@ -31,8 +31,8 @@
     "@react-dnd/build": "workspace:packages/build",
     "@testing-library/react": "^12.1.0",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/node": "^14.17.17",
-    "@types/react": "^17.0.21",
+    "@types/node": "^14.17.19",
+    "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "gulp": "^4.0.2",
     "react": "^17.0.2",

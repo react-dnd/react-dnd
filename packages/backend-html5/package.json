@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-html5-backend",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "description": "HTML5 backend for React DnD",
   "main": "src/index.ts",
   "publishConfig": {
