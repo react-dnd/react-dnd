@@ -1,6 +1,6 @@
 {
   "name": "dnd-core",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "description": "Drag and drop sans the GUI",
   "license": "MIT",
   "main": "src/index.ts",
