@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, ReactNode } from 'react'
 import { ConnectDragSource } from 'react-dnd'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
@@ -16,6 +16,7 @@ export interface BoxProps {
 	left: number
 	top: number
 	hideSourceOnDrag?: boolean
+	children?: ReactNode
 
 	// Collected Props
 	connectDragSource: ConnectDragSource

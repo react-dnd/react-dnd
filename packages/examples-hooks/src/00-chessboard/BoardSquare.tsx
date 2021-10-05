@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { useDrop } from 'react-dnd'
 import { Square } from './Square'
 import { ItemTypes } from './ItemTypes'
@@ -7,7 +7,7 @@ import { Game } from './Game'
 export interface BoardSquareProps {
 	x: number
 	y: number
-	children: any
+	children?: ReactNode
 	game: Game
 }
 

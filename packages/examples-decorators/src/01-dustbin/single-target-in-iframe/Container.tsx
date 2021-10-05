@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import Dustbin from './Dustbin'
@@ -7,7 +7,7 @@ import Box from './Box'
 // @ts-ignore
 import Frame, { FrameContextConsumer } from 'react-frame-component'
 
-const FrameBindingContext: FC = ({ children }) => (
+const FrameBindingContext: FC<{ children?: ReactNode }> = ({ children }) => (
 	<FrameContextConsumer>
 		{({ window }: any) => (
 			<DndProvider backend={HTML5Backend} context={window}>
