@@ -1,8 +1,8 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 export interface SquareProps {
 	black: boolean
-	children: JSX.Element
+	children?: ReactNode
 }
 
 const squareStyle = {

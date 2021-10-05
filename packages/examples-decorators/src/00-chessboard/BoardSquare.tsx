@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, ReactNode } from 'react'
 import {
 	DropTarget,
 	DropTargetMonitor,
@@ -13,7 +13,7 @@ import { Game } from './Game'
 export interface BoardSquareProps {
 	x: number
 	y: number
-	children: any
+	children?: ReactNode
 	game: Game
 
 	// Collected Props

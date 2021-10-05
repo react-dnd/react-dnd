@@ -1,4 +1,12 @@
-import { CSSProperties, FC, useState, useCallback, useMemo, memo } from 'react'
+import {
+	CSSProperties,
+	FC,
+	useState,
+	useCallback,
+	useMemo,
+	memo,
+	ReactNode,
+} from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 import { Colors } from './Colors'
 
@@ -11,6 +19,7 @@ const style: CSSProperties = {
 export interface SourceBoxProps {
 	color: string
 	onToggleForbidDrag?: () => void
+	children?: ReactNode
 }
 
 export const SourceBox: FC<SourceBoxProps> = memo(function SourceBox({

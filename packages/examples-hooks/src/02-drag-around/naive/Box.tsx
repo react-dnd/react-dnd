@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, ReactNode } from 'react'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
@@ -15,6 +15,7 @@ export interface BoxProps {
 	left: number
 	top: number
 	hideSourceOnDrag?: boolean
+	children?: ReactNode
 }
 
 export const Box: FC<BoxProps> = ({

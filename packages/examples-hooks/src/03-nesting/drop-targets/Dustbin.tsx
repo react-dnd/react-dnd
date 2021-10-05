@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useState } from 'react'
+import { CSSProperties, FC, ReactNode, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
@@ -20,6 +20,7 @@ function getStyle(backgroundColor: string): CSSProperties {
 
 export interface DustbinProps {
 	greedy?: boolean
+	children?: ReactNode
 }
 
 export interface DustbinState {

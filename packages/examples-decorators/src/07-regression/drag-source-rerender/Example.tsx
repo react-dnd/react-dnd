@@ -1,4 +1,4 @@
-import { FC, useState, useCallback } from 'react'
+import { FC, useState, useCallback, ReactNode } from 'react'
 import { ConnectDragSource } from 'react-dnd'
 import { DragSource } from 'react-dnd'
 
@@ -27,6 +27,7 @@ export const Example = DragSource(
 
 interface ChildProps {
 	connect: ConnectDragSource
+	children?: ReactNode
 }
 
 const Child: FC<ChildProps> = ({ connect, children }) => {

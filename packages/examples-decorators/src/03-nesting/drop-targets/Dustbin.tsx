@@ -4,6 +4,7 @@ import {
 	Component,
 	useState,
 	useImperativeHandle,
+	ReactNode,
 } from 'react'
 import { DropTarget } from 'react-dnd'
 import { ConnectDropTarget, DropTargetMonitor } from 'react-dnd'
@@ -30,6 +31,7 @@ export interface DustbinProps {
 	isOver: boolean
 	isOverCurrent: boolean
 	connectDropTarget: ConnectDropTarget
+	children?: ReactNode
 }
 
 export interface DustbinState {
