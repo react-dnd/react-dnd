@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/react-dnd/react-dnd",
   "scripts": {
-    "preinstall": "npx only-allow yarn",
+    "preinstall": "npx only-allow yarn && yarn husky install",
     "clean:": "yarn workspaces foreach --exclude @react-dnd/build -pv run clean",
     "build:": "yarn workspaces foreach -pv --topological-dev run build",
     "test:": "yarn workspaces foreach -pv run test",

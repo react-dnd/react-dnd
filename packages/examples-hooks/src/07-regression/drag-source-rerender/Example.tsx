@@ -1,4 +1,4 @@
-import { FC, useState, useCallback } from 'react'
+import { FC, useState, useCallback, ReactNode } from 'react'
 import { useDrag, ConnectDragSource } from 'react-dnd'
 
 export const Example: FC = () => {
@@ -14,6 +14,7 @@ export const Example: FC = () => {
 
 interface ChildProps {
 	drag: ConnectDragSource
+	children?: ReactNode
 }
 const Child: FC<ChildProps> = ({ drag, children }) => {
 	const [open, setOpen] = useState(true)

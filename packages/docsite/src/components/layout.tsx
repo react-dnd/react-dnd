@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 declare const require: any
 
-import { FC, memo, useMemo, useCallback, useState } from 'react'
+import { FC, memo, useMemo, useCallback, useState, ReactNode } from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -22,6 +22,7 @@ const favicon = require('../favicon.png')
 export interface LayoutProps {
 	location?: { pathname: string }
 	hideSidebar?: boolean
+	children?: ReactNode
 }
 
 const touchBackendOptions: Partial<TouchBackendOptions> = {

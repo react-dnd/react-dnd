@@ -1,4 +1,4 @@
-import { FC, CSSProperties, useState, useCallback } from 'react'
+import { FC, CSSProperties, useState, useCallback, ReactNode } from 'react'
 import { ConnectDragSource, DragSourceMonitor } from 'react-dnd'
 import { DragSource, DragSourceConnector } from 'react-dnd'
 import { Colors } from './Colors'
@@ -13,6 +13,7 @@ export interface SourceBoxProps {
 	color?: string
 	forbidDrag?: boolean
 	onToggleForbidDrag?: () => void
+	children?: ReactNode
 
 	connectDragSource: ConnectDragSource
 	isDragging: boolean

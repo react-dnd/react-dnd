@@ -1,0 +1,6 @@
+releases:
+  react-dnd: patch
+  react-dnd-documentation: patch
+  react-dnd-examples-decorators: patch
+  react-dnd-examples-hooks: patch
+  react-dnd-test-utils: patch
