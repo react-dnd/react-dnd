@@ -52,6 +52,9 @@ export class HTML5BackendImpl implements Backend {
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
 
+	private lastClientOffset: XYCoord | null = null
+	private hoverRafId: number | null = null
+
 	public constructor(
 		manager: DragDropManager,
 		globalContext?: HTML5BackendContext,
@@ -601,10 +604,19 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		this.altKeyPressed = e.altKey
+		this.lastClientOffset = getEventClientOffset(e)
 
-		this.actions.hover(dragOverTargetIds || [], {
-			clientOffset: getEventClientOffset(e),
-		})
+		if (this.hoverRafId === null) {
+			this.hoverRafId = requestAnimationFrame(() => {
+				if (this.monitor.isDragging()) {
+					this.actions.hover(dragOverTargetIds || [], {
+						clientOffset: this.lastClientOffset,
+					})
+				}
+
+				this.hoverRafId = null
+			})
+		}
 
 		const canDrop = (dragOverTargetIds || []).some((targetId) =>
 			this.monitor.canDropOnTarget(targetId),
