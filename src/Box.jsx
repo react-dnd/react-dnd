@@ -3,8 +3,8 @@ import { useDrag } from "react-dnd";
 const style = {
   backgroundColor: "#ccc",
   padding: "0.5rem 1rem",
-  marginRight: "1.5rem",
-  marginBottom: "1.5rem",
+  marginRight: "5px",
+  marginBottom: "5px",
   cursor: "move",
   width: '150px',
   float: "left"

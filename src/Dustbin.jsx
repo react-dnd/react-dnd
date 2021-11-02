@@ -4,8 +4,8 @@ import { uniq, uniqBy } from "lodash";
 const style = {
   height: "12rem",
   width: "12rem",
-  marginRight: "1.5rem",
-  marginBottom: "1.5rem",
+  marginRight: "5px",
+  marginBottom: "5px",
   color: "black",
   padding: "1rem",
   textAlign: "center",
@@ -16,9 +16,10 @@ const style = {
 };
 const boxStyle = {
   backgroundColor: "#ccc",
-  padding: "0.5rem 1rem",
-  marginRight: "1.5rem",
-  marginBottom: "1.5rem",
+  padding: "4px",
+  marginRight: "5px",
+  marginBottom: "5px",
+  marginTop: "5px",
   cursor: "move",
   width: "150px",
   float: "left"
@@ -57,8 +58,8 @@ export const Dustbin = memo(function Dustbin({
         ? dropValue.map((obj, index) => (
             <div style={{ display: 'flex'}}>
               <div style={{ ...boxStyle }}>{obj.name}</div>
-              <input style={{ height: '28px', margin: '0 2px', padding: '2px' }} type="text" name='keyMessage' placeHolder="Key Message" onChange={(e) => {obj.keyMessage = [e.target.value]}} />
-              <input style={{ height: '28px', margin: '0 2px', padding: '2px' }} type="text"  name='tagTranslator' placeHolder="Tag Translation" onChange={(e) => {obj.tagTranslator = [e.target.value]}} />
+              <input style={{ height: '24px', margin: '2px', padding: '2px' }} type="text" name='keyMessage' placeHolder="Key Message" onChange={(e) => {obj.keyMessage = [e.target.value]}} />
+              <input style={{ height: '24px', margin: '2px', padding: '2px' }} type="text"  name='tagTranslator' placeHolder="Tag Translation" onChange={(e) => {obj.tagTranslator = [e.target.value]}} />
             </div>
           ))
         : ""}

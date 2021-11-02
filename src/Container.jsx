@@ -1,22 +1,23 @@
 import { useState, useCallback, memo } from "react";
-import { NativeTypes } from "react-dnd-html5-backend";
+// import { NativeTypes } from "react-dnd-html5-backend";
 import { Dustbin } from "./Dustbin";
 import { Box } from "./Box";
-import { ItemTypes } from "./ItemTypes";
+// import { ItemTypes } from "./ItemTypes";
 import update from "immutability-helper";
 
 const style = {
-  height: "12rem",
+  height: "13.5rem",
   width: "12rem",
-  marginRight: "1.5rem",
-  marginBottom: "1.5rem",
+  marginRight: "5px",
+  marginBottom: "5px",
+  marginLeft: '5px',
   color: "black",
-  padding: "1rem",
+  padding: "4px",
   textAlign: "center",
   fontSize: "1rem",
   lineHeight: "normal",
   float: "left",
-  border: "1px solid red"
+  border: "1px solid gray"
 };
 export const Container = memo(function Container() {
   const [dropBox, setDropBox] = useState([
@@ -80,19 +81,20 @@ export const Container = memo(function Container() {
       <input 
       type="text"
        value={input}
-       style={{ padding: '2px', margin: '2px'}} 
+        placeHolder="Type to add List"
+       style={{ padding: '2px', margin: '2px 0 0 4px'}} 
        onChange={(e) => setInput(e.target.value)} />
       <button onClick={() => {
         boxes.push({name: input, type: 'str' });
         setBoxes([...boxes]);
         setInput('');
         }}
-       style={{ padding: '2px', margin: '2px'}}
+       style={{ padding: '2px', margin: '2px', width: '50px'}}
        >Add</button>
       <div style={{ display: "flex" }}>
         <div style={{ ...style, maxheight: '400xp', overflow: 'auto' }}>
-          <div style={{ overflow: "hidden", clear: "both" }}>
-            {boxes.map(({ name, type, id }, index) => (
+          <div style={{ overflow: "hidden", clear: "both", marginLeft:'5px' }}>
+            {boxes.map(({ name, type }, index) => (
               <Box
                 name={name}
                 type={type}
