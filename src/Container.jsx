@@ -19,15 +19,34 @@ const style = {
   border: "1px solid red"
 };
 export const Container = memo(function Container() {
-  const [dustbins, setDustbins] = useState([
+  const [dropBox, setDropBox] = useState([
     { accepts: "", lastDroppedItem: null }
   ]);
   const [input, setInput] = useState('');
   const [boxes, setBoxes] = useState([
-    { name: "apple", type: "str" },
-    { name: "Banana", type: "str" },
-    { name: "orange", type: "str" }
+    { name: "apple", type: "str", id: 1 },
+    { name: "Banana", type: "str", id: 2 },
+    { name: "orange", type: "str", id:3 },
   ]);
+
+  const [cards, setCards] = useState(boxes);
+    // const findCard = useCallback((id) => {
+    //     const card = cards.filter((c) => `${c.id}` === id)[0];
+    //     return {
+    //         card,
+    //         index: cards.indexOf(card),
+    //     };
+    // }, [cards]);
+    // const moveCard = useCallback((id, atIndex) => {
+    //     const { card, index } = findCard(id);
+    //     setCards(update(cards, {
+    //         $splice: [
+    //             [index, 1],
+    //             [atIndex, 0, card],
+    //         ],
+    //     }));
+    //     setBoxes(cards)
+    // }, [findCard, cards, setCards]);
 
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
 
@@ -43,8 +62,8 @@ export const Container = memo(function Container() {
       setDroppedBoxNames(
         update(droppedBoxNames, name ? { $push: [name] } : { $push: [] })
       );
-      setDustbins(
-        update(dustbins, {
+      setDropBox(
+        update(dropBox, {
           [index]: {
             lastDroppedItem: {
               $set: item
@@ -53,7 +72,7 @@ export const Container = memo(function Container() {
         })
       );
     },
-    [droppedBoxNames, dustbins]
+    [droppedBoxNames, dropBox]
   );
 
   return (
@@ -73,18 +92,21 @@ export const Container = memo(function Container() {
       <div style={{ display: "flex" }}>
         <div style={{ ...style, maxheight: '400xp', overflow: 'auto' }}>
           <div style={{ overflow: "hidden", clear: "both" }}>
-            {boxes.map(({ name, type }, index) => (
+            {boxes.map(({ name, type, id }, index) => (
               <Box
                 name={name}
                 type={type}
                 isDropped={isDropped(name)}
-                key={index}
+                // moveCard={moveCard} // it will use for reverse drag / rearrange
+                // findCard={findCard}
+                // key={id} 
+                // id={`${id}`}
               />
             ))}
           </div>
         </div>
         <div style={{ overflow: "hidden", clear: "both" }}>
-          {dustbins.map(({ accepts, lastDroppedItem }, index) => (
+          {dropBox.map(({ accepts, lastDroppedItem }, index) => (
             <Dustbin
               accept={accepts}
               lastDroppedItem={lastDroppedItem}
