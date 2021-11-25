@@ -7,8 +7,8 @@ import { useCollector } from './useCollector'
  * useDragLayer Hook
  * @param collector The property collector
  */
-export function useDragLayer<CollectedProps>(
-	collect: (monitor: DragLayerMonitor) => CollectedProps,
+export function useDragLayer<CollectedProps, DragObject = any>(
+	collect: (monitor: DragLayerMonitor<DragObject>) => CollectedProps,
 ): CollectedProps {
 	const dragDropManager = useDragDropManager()
 	const monitor = dragDropManager.getMonitor()

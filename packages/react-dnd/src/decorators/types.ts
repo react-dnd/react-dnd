@@ -176,8 +176,8 @@ export type DropTargetCollector<CollectedProps, TargetProps> = (
 	props: TargetProps,
 ) => CollectedProps
 
-export type DragLayerCollector<TargetProps, CollectedProps> = (
-	monitor: DragLayerMonitor,
+export type DragLayerCollector<TargetProps, CollectedProps, DragObject = any,> = (
+	monitor: DragLayerMonitor<DragObject>,
 	props: TargetProps,
 ) => CollectedProps
 

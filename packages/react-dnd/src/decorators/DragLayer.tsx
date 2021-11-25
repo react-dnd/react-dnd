@@ -16,8 +16,8 @@ import { isRefable, checkDecoratorArguments, isPlainObject } from './utils'
  * @param collect The props collector function
  * @param options The DnD options
  */
-export function DragLayer<RequiredProps, CollectedProps = any>(
-	collect: DragLayerCollector<RequiredProps, CollectedProps>,
+export function DragLayer<RequiredProps, CollectedProps = any, DragObject = any,>(
+	collect: DragLayerCollector<RequiredProps, CollectedProps, DragObject>,
 	options: DndOptions<RequiredProps> = {},
 ): DndComponentEnhancer<CollectedProps> {
 	checkDecoratorArguments('DragLayer', 'collect[, options]', collect, options)
