@@ -1,4 +1,4 @@
-import { render, screen, RenderResult } from '@testing-library/react'
+import { render, screen, RenderResult, cleanup } from '@testing-library/react'
 import { Game } from '../Game'
 import { Board } from '../Board'
 import { OverlayType } from '../Overlay'
@@ -24,6 +24,8 @@ describe('The Chess Example', () => {
 		game = new Game()
 		renderGame(game)
 	})
+
+	afterEach(cleanup)
 
 	describe('initial state', () => {
 		it('renders the Knight appropriately', () => {

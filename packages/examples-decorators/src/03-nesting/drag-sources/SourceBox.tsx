@@ -89,7 +89,7 @@ const StatefulSourceBox: FC<StatefulSourceBoxProps> = (props) => {
 		<SourceBox
 			{...props}
 			forbidDrag={forbidDrag}
-			onToggleForbidDrag={() => handleToggleForbidDrag()}
+			onToggleForbidDrag={handleToggleForbidDrag}
 		/>
 	)
 }

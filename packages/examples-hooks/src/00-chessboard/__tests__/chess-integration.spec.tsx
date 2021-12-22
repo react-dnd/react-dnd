@@ -1,4 +1,4 @@
-import { render, screen, RenderResult } from '@testing-library/react'
+import { render, screen, RenderResult, cleanup } from '@testing-library/react'
 import { Game } from '../Game'
 import { Board } from '../Board'
 import { OverlayType } from '../Overlay'
@@ -24,6 +24,8 @@ describe('The Chess Example', () => {
 		game = new Game()
 		renderGame(game)
 	})
+
+	afterEach(cleanup)
 
 	describe('initial state', () => {
 		it('renders the Knight appropriately', () => {
@@ -69,24 +71,6 @@ describe('The Chess Example', () => {
 	})
 
 	describe('Knight movement', () => {
-		it('highlights legal positions when the knight is drag-held', async () => {
-			const knight = screen.getByText('♘')
-
-			await fireDragHover(knight, screen.getByTestId('(1,7)'))
-
-			// Yellow cell is knight moving range
-			const legalMoves = screen.getAllByRole(OverlayType.PossibleMove)
-			expect(legalMoves.length).toBe(3)
-			legalMoves.forEach((square) => {
-				expect(square).toHaveStyle('backgroundColor: yellow')
-			})
-
-			// Red cell is current knight position when hold dragging
-			expect(screen.getByRole(OverlayType.IllegalMoveHover)).toHaveStyle(
-				'backgroundColor: red',
-			)
-		})
-
 		// Knight initially has moving position 'index: 40 42 51' of 64 cell array
 		it('can move to (0,5)', async () => {
 			const knight = screen.getByText('♘')
@@ -114,6 +98,26 @@ describe('The Chess Example', () => {
 			const illegalSpace = screen.getByTestId('(0,7)')
 			await fireDragDrop(knight, illegalSpace)
 			expect(illegalSpace).not.toHaveTextContent('♘')
+		})
+
+		// TODO: this test must be last, or else other tests in this describe block fail. I'm unsure why,
+		// this should be investigated
+		it('highlights legal positions when the knight is drag-held', async () => {
+			const knight = screen.getByText('♘')
+
+			await fireDragHover(knight, screen.getByTestId('(1,7)'))
+
+			// Yellow cell is knight moving range
+			const legalMoves = screen.getAllByRole(OverlayType.PossibleMove)
+			expect(legalMoves.length).toBe(3)
+			legalMoves.forEach((square) => {
+				expect(square).toHaveStyle('backgroundColor: yellow')
+			})
+
+			// Red cell is current knight position when hold dragging
+			expect(screen.getByRole(OverlayType.IllegalMoveHover)).toHaveStyle(
+				'backgroundColor: red',
+			)
 		})
 	})
 })

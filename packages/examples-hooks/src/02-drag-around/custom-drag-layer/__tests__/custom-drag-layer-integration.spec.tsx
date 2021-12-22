@@ -1,8 +1,10 @@
 import Example from '../index'
-import { act, fireEvent, render } from '@testing-library/react'
+import { act, fireEvent, render, cleanup } from '@testing-library/react'
 import { wrapWithBackend, tick } from 'react-dnd-test-utils'
 
 describe('Drag Around: Custom Drag Layer', () => {
+	afterEach(cleanup)
+
 	it('toggles the overlay layer over time', async () => {
 		jest.useFakeTimers('modern')
 		const TestExample = wrapWithBackend(Example)
