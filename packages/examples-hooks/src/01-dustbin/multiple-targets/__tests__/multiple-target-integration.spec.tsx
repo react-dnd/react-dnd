@@ -1,8 +1,10 @@
 import Example from '..'
 import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 
 describe('Dustbin: Multiple Targets', () => {
+	afterEach(cleanup)
+
 	it('behaves as expected', async () => {
 		const TestExample = wrapWithBackend(Example)
 		const rendered = render(<TestExample />)

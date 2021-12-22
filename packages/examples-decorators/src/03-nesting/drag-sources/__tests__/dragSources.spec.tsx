@@ -1,8 +1,10 @@
-import { act, fireEvent, render } from '@testing-library/react'
+import { act, fireEvent, render, cleanup } from '@testing-library/react'
 import Example from '../index'
 import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
 
 describe('the drag sources example', () => {
+	afterEach(cleanup)
+
 	it('can drag and drop a box', async () => {
 		const Wrapped = wrapWithBackend(Example)
 		const rendered = render(<Wrapped />)

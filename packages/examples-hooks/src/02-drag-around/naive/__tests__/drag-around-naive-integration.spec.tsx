@@ -1,5 +1,5 @@
 import Example from '../index'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, cleanup } from '@testing-library/react'
 import {
 	wrapWithBackend,
 	fireDrag,
@@ -8,6 +8,8 @@ import {
 } from 'react-dnd-test-utils'
 
 describe('Drag Around: Naive', () => {
+	afterEach(cleanup)
+
 	it('can hide the source node on drag', async () => {
 		const TestExample = wrapWithBackend(Example)
 		const rendered = render(<TestExample />)

@@ -1,8 +1,10 @@
 import { useDrag } from '../useDrag'
 import { wrapWithBackend } from 'react-dnd-test-utils'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 
 describe('The useDrag hook', () => {
+	afterEach(cleanup)
+
 	it('throws if rendered outside of a React-DnD tree', () => {
 		function Component() {
 			const [, drag] = useDrag({

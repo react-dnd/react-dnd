@@ -1,8 +1,10 @@
 import Example from '../index'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
 
 describe('Integration: Dustbin Single Target', () => {
+	afterEach(cleanup)
+
 	it('can simulate a full drag and drop interaction', async () => {
 		const TestExample = wrapWithBackend(Example)
 		const rendered = render(<TestExample />)

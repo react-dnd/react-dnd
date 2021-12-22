@@ -13,7 +13,7 @@ module.exports = {
 	],
 	//coverageProvider: 'v8',
 	testMatch: [
-		'<rootDir>/__tests__/**/?(*.)(spec|test).ts(x|)',
-		'<rootDir>/packages/*/src/**/__tests__/**/?(*.)(spec|test).ts(x|)',
+		'<rootDir>/__tests__/**/*.(spec|test).ts(x|)',
+		'<rootDir>/packages/*/src/**/__tests__/**/*.(spec|test).ts(x|)',
 	],
 }
