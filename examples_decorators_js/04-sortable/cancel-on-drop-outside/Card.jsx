@@ -18,7 +18,6 @@ const Card = ({ text, isDragging, connectDragSource, connectDropTarget, }) => {
 		</div>);
 };
 export default DropTarget(ItemTypes.CARD, {
-    canDrop: () => false,
     hover(props, monitor) {
         const { id: draggedId } = monitor.getItem();
         const { id: overId } = props;
