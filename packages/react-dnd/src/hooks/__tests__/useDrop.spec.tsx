@@ -1,8 +1,10 @@
 import { useDrop } from '../useDrop'
 import { wrapWithBackend } from 'react-dnd-test-utils'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 
 describe('The useDrop hook', () => {
+	afterEach(cleanup)
+
 	it('throws if rendered outside of a React-DnD tree', () => {
 		function Component() {
 			const [, drag] = useDrop(() => ({
