@@ -50,7 +50,6 @@ export const Card: FC<CardProps> = memo(function Card({
 	const [, drop] = useDrop(
 		() => ({
 			accept: ItemTypes.CARD,
-			canDrop: () => false,
 			hover({ id: draggedId }: Item) {
 				if (draggedId !== id) {
 					const { index: overIndex } = findCard(id)

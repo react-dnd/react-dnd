@@ -49,7 +49,6 @@ const Card: FC<CardProps> = ({
 export default DropTarget(
 	ItemTypes.CARD,
 	{
-		canDrop: () => false,
 		hover(props: CardProps, monitor: DropTargetMonitor) {
 			const { id: draggedId } = monitor.getItem<CardDragObject>()
 			const { id: overId } = props
