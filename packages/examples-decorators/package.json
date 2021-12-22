@@ -33,10 +33,10 @@
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.1.0",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
     "@types/faker": "^5.5.8",
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^27.0.3",
     "@types/lodash": "^4.14.174",
     "@types/node": "^14.17.19",
     "@types/react": "^17.0.24",

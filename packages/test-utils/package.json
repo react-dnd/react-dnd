@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
-    "@testing-library/react": "^12.1.0",
+    "@testing-library/react": "^12.1.2",
     "@types/node": "^14.17.19",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",

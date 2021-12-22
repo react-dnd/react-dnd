@@ -27,6 +27,7 @@ describe('the drag sources example', () => {
 		})
 		const box3Color = box3.attributes['data-color'].value
 		fireDragDrop(box3, target)
+		console.log('target is', target.attributes)
 		expect(target.attributes['data-color'].value).not.toEqual(box3Color)
 	})
 })
