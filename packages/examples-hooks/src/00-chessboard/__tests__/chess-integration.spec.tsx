@@ -1,4 +1,4 @@
-import { render, screen, RenderResult } from '@testing-library/react'
+import { render, screen, RenderResult, cleanup } from '@testing-library/react'
 import { Game } from '../Game'
 import { Board } from '../Board'
 import { OverlayType } from '../Overlay'
@@ -24,6 +24,8 @@ describe('The Chess Example', () => {
 		game = new Game()
 		renderGame(game)
 	})
+
+	afterEach(cleanup)
 
 	describe('initial state', () => {
 		it('renders the Knight appropriately', () => {
@@ -98,6 +100,8 @@ describe('The Chess Example', () => {
 			expect(illegalSpace).not.toHaveTextContent('♘')
 		})
 
+		// TODO: this test must be last, or else other tests in this describe block fail. I'm unsure why,
+		// this should be investigated
 		it('highlights legal positions when the knight is drag-held', async () => {
 			const knight = screen.getByText('♘')
 

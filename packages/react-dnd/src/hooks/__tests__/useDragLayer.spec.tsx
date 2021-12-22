@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import { wrapWithBackend, fireDrag } from 'react-dnd-test-utils'
 import { FC } from 'react'
 import { useDrag } from '../useDrag'
@@ -33,6 +33,8 @@ const Box: FC = () => {
 }
 
 describe('useDragLayer()', () => {
+	afterEach(cleanup)
+
 	it('can be used to retrieve information from the dnd monitor', async () => {
 		const Example = () => (
 			<div>

@@ -1,8 +1,9 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 import Box from '../Box'
 import { fireDrag, wrapWithBackend } from 'react-dnd-test-utils'
 
 describe('Box', () => {
+	afterEach(cleanup)
 	it('can be tested independently', () => {
 		// Obtain the reference to the component before React DnD wrapping
 		const OriginalBox = Box.DecoratedComponent

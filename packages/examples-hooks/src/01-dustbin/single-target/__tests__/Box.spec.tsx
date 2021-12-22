@@ -1,8 +1,10 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 import { Box } from '../Box'
 import { wrapWithBackend, fireDrag } from 'react-dnd-test-utils'
 
 describe('Box', () => {
+	afterEach(cleanup)
+
 	it('can be tested with a backend', async () => {
 		const TestBox = wrapWithBackend(Box)
 		const rendered = render(<TestBox name="test" />)
