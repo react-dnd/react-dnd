@@ -42,6 +42,6 @@ const StatefulSourceBox = (props) => {
     const handleToggleForbidDrag = useCallback(() => {
         setForbidDrag(!forbidDrag);
     }, [forbidDrag]);
-    return (<SourceBox {...props} forbidDrag={forbidDrag} onToggleForbidDrag={() => handleToggleForbidDrag()}/>);
+    return (<SourceBox {...props} forbidDrag={forbidDrag} onToggleForbidDrag={handleToggleForbidDrag}/>);
 };
 export default StatefulSourceBox;
