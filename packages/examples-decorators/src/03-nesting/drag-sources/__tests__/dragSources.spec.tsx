@@ -2,7 +2,7 @@ import { act, fireEvent, render } from '@testing-library/react'
 import Example from '../index'
 import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
 
-describe('the drag sources example', () => {
+describe.only('the drag sources example', () => {
 	it('can drag and drop a box', async () => {
 		const Wrapped = wrapWithBackend(Example)
 		const rendered = render(<Wrapped />)
@@ -15,7 +15,7 @@ describe('the drag sources example', () => {
 		expect(target.attributes['data-color'].value).toEqual(box3Color)
 	})
 
-	it('can prevent a drag-and-drop', async () => {
+	it.only('can prevent a drag-and-drop', async () => {
 		const Wrapped = wrapWithBackend(Example)
 		const rendered = render(<Wrapped />)
 
@@ -25,7 +25,8 @@ describe('the drag sources example', () => {
 		act(() => {
 			fireEvent.click(box3.children[0])
 		})
+		const box3Color = box3.attributes['data-color'].value
 		fireDragDrop(box3, target)
-		expect(target.innerHTML).toEqual(`<p>Drop here.</p>`)
+		expect(target.attributes['data-color'].value).not.toEqual(box3Color)
 	})
 })
