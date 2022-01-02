@@ -606,7 +606,10 @@ export class HTML5BackendImpl implements Backend {
 		this.altKeyPressed = e.altKey
 		this.lastClientOffset = getEventClientOffset(e)
 
-		if (this.hoverRafId === null) {
+		if (
+			this.hoverRafId === null &&
+			typeof requestAnimationFrame !== 'undefined'
+		) {
 			this.hoverRafId = requestAnimationFrame(() => {
 				if (this.monitor.isDragging()) {
 					this.actions.hover(dragOverTargetIds || [], {
