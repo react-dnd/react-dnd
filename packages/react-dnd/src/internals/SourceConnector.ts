@@ -93,8 +93,8 @@ export class SourceConnector implements Connector {
 	}
 
 	public reconnect(): void {
-		this.reconnectDragSource()
-		this.reconnectDragPreview()
+		const didChange = this.reconnectDragSource()
+		this.reconnectDragPreview(didChange)
 	}
 
 	private reconnectDragSource() {
@@ -110,11 +110,11 @@ export class SourceConnector implements Connector {
 		}
 
 		if (!this.handlerId) {
-			return
+			return didChange
 		}
 		if (!dragSource) {
 			this.lastConnectedDragSource = dragSource
-			return
+			return didChange
 		}
 
 		if (didChange) {
@@ -127,12 +127,14 @@ export class SourceConnector implements Connector {
 				this.dragSourceOptions,
 			)
 		}
+		return didChange
 	}
 
-	private reconnectDragPreview() {
+	private reconnectDragPreview(forceDidChange : boolean) {
 		const dragPreview = this.dragPreview
 		// if nothing has changed then don't resubscribe
 		const didChange =
+			forceDidChange ||
 			this.didHandlerIdChange() ||
 			this.didConnectedDragPreviewChange() ||
 			this.didDragPreviewOptionsChange()
