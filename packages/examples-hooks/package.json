@@ -38,12 +38,12 @@
     "@types/faker": "^5.5.8",
     "@types/lodash": "^4.14.174",
     "@types/node": "^14.17.19",
-    "@types/react": "^17.0.24",
+    "@types/react": "^17.0.38",
     "gulp": "^4.0.2",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
     "react-dnd-test-utils": "workspace:packages/test-utils",
-    "typescript": "^4.4.3"
+    "typescript": "^4.5.5"
   },
   "peerDependencies": {
     "@types/node": ">= 12",
