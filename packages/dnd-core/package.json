@@ -12,7 +12,7 @@
   },
   "sideEffects": false,
   "scripts": {
-    "build": "gulp build",
+    "build": "dndbuild",
     "clean": "shx rm -rf dist/ lib/",
     "typecheck": "tsc -b ."
   },
@@ -28,7 +28,6 @@
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
     "@types/setimmediate": "^1.0.2",
-    "gulp": "^4.0.2",
     "react-dnd-test-backend": "portal:../backend-test",
     "setimmediate": "^1.0.5",
     "shx": "^0.3.4",

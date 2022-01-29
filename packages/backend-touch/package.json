@@ -17,8 +17,7 @@
   },
   "scripts": {
     "clean": "shx rm -rf dist/ lib/",
-    "build": "gulp build",
-    "bundle": "gulp bundle",
+    "build": "dndbuild",
     "typecheck": "tsc -b ."
   },
   "dependencies": {
@@ -27,7 +26,6 @@
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
-    "gulp": "^4.0.2",
     "shx": "^0.3.4",
     "typescript": "^4.5.5"
   }

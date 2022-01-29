@@ -16,7 +16,7 @@
   "sideEffects": false,
   "scripts": {
     "clean": "shx rm -rf dist/ lib/",
-    "build": "gulp build",
+    "build": "dndbuild",
     "typecheck": "tsc -b ."
   },
   "devDependencies": {
@@ -26,7 +26,6 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "dnd-core": "workspace:packages/dnd-core",
-    "gulp": "^4.0.2",
     "react": "^17.0.2",
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-html5-backend": "workspace:packages/backend-html5",

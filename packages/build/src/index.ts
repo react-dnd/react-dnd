@@ -1,11 +1,13 @@
-export { preset } from './preset'
-/* eslint-disable-next-line @typescript-eslint/no-var-requires */
-const gulp = require('gulp')
+import { compile } from './typescript'
+import { getSourceFiles } from './getSourceFiles'
 
-gulp.on('error', (...args: any[]) => {
-	console.error('caught gulp error', ...args)
-	process.exit(1)
-})
+build()
+.catch(err => console.error('error building', err))
+
+async function build(): Promise<void> {
+	const sourceFiles = await getSourceFiles()
+	await compile(sourceFiles)
+}
 
 process
 	.on('unhandledRejection', (reason, p) => {

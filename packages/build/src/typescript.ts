@@ -7,7 +7,7 @@ import * as  fs from 'fs/promises'
 import * as path from 'path'
 import { performance } from 'perf_hooks'
 import * as swc from '@swc/core'
-import * as log from '../log'
+import * as log from './log'
 
 const ESM_PATH = 'dist/esm'
 const CJS_PATH = 'dist/cjs'
@@ -69,9 +69,9 @@ function writeOutput(
 	options: swc.Options,
 ) {
 	return swc.transform(code, options).then(async ({ code, map }) => {
-		const outputFile = path.join(outputRoot, filename).replace(/\.tsx?$/, '.js')
+		const outputFile = path.join(outputRoot, filename.replace(/^src/, '')).replace(/\.tsx?$/, '.js')
 		const mapFile = `${outputFile}.map`
-		const outputDir = path.dirname(outputFile).replace(/^src/, outputRoot)
+		const outputDir = path.dirname(outputFile)
 
 		await fs.mkdir(outputDir, { recursive: true })
 		await Promise.all([

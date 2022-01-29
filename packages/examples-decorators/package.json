@@ -19,7 +19,7 @@
     "build": "run-s build:pkg build:docs",
     "clean": "shx rm -rf dist/ lib/",
     "typecheck": "tsc -b .",
-    "build:pkg": "gulp build",
+    "build:pkg": "dndbuild",
     "build:docs": "tsc -b tsconfig.docs.json"
   },
   "dependencies": {
@@ -41,7 +41,6 @@
     "@types/node": "^14.17.19",
     "@types/react": "^17.0.38",
     "@types/testing-library__jest-dom": "^5.14.1",
-    "gulp": "^4.0.2",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
     "react-dnd-test-backend": "workspace:packages/backend-test",

@@ -1,15 +1,9 @@
 import * as glob from 'glob'
-import { compile } from '../tasks/typescript'
-
-export async function build(): Promise<void> {
-	const sourceFiles = await getSourceFiles()
-	await compile(sourceFiles)
-}
 
 const SOURCE_GLOB = 'src/**/*.ts*'
 const TEST_GLOB = 'src/**/__tests__/**'
 
-async function getSourceFiles(): Promise<string[]> {
+export async function getSourceFiles(): Promise<string[]> {
 	const [sourceFiles, testFiles] = await Promise.all([
 		resolveGlob(SOURCE_GLOB),
 		resolveGlob(TEST_GLOB),
