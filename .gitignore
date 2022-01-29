@@ -1,6 +1,8 @@
 node_modules/
 packages/*/dist
 packages/*/lib
+.swc/
+tsconfig.tsbuildinfo
 
 # Docsite Artifacts
 packages/docsite/public

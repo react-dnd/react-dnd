@@ -1,104 +1,82 @@
-import { existsSync } from 'fs'
-import { join } from 'path'
-import { noopStep } from './common'
-import { FileWatcher } from 'typescript'
-import { subtaskFail, subtaskSuccess } from '../log'
-import { TaskFunction } from '../types'
-import ts = require('gulp-typescript')
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { src, dest, watch, parallel } = require('gulp')
-const debug = require('gulp-debug')
-const plumber = require('gulp-plumber')
-/* eslint-enable @typescript-eslint/no-var-requires */
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+/* eslint-disable @essex/adjacent-await */
+import * as  fs from 'fs/promises'
+import * as path from 'path'
+import { performance } from 'perf_hooks'
+import * as swc from '@swc/core'
+import * as log from '../log'
 
-const TYPESCRIPT_GLOBS = ['src/**/*.ts*', '!**/__tests__/**']
+const ESM_PATH = 'dist/esm'
+const CJS_PATH = 'dist/cjs'
 
-function createTsProject(overrides?: ts.Settings | undefined) {
-	const cwd = process.cwd()
-	const tsConfigPath = join(cwd, 'tsconfig.json')
-	if (!existsSync(tsConfigPath)) {
-		throw new Error('tsconfig.json file must exist')
-	}
-
-	return ts.createProject(tsConfigPath, overrides)
+const ENV_CONFIG: swc.EnvConfig = {
+	coreJs: '3',
+	targets: {
+		node: 14,
+		browsers: ['>0.5%', 'not IE 11', 'not dead'],
+	},
+	mode: 'usage',
 }
 
-function executeCompile(logFiles: boolean, listen: boolean): TaskFunction {
-	const project = createTsProject()
-	const title = 'tsc'
-	return function execute(): NodeJS.ReadWriteStream {
-		const task = src(TYPESCRIPT_GLOBS)
-			.pipe(
-				plumber({
-					errorHandler: !listen,
-				}),
-			)
-			.pipe(project())
-			.pipe(logFiles ? debug({ title }) : noopStep())
-			.pipe(dest('lib'))
-
-		if (listen) {
-			task.on('end', () => subtaskSuccess(title))
-			task.on('error', () => subtaskFail(title))
-		}
-		return task
-	}
+export async function compile(
+	fileNames: string[]
+): Promise<void> {
+	const start = performance.now()
+	await createOutputFolders()
+	await Promise.all(fileNames.map(transpileFile))
+	log.subtaskSuccess('transpile')
 }
 
-function executeTypeEmit(
-	stripInternal: boolean,
-	logFiles: boolean,
-	listen: boolean,
-): TaskFunction {
-	const project = createTsProject({
-		declaration: true,
-		emitDeclarationOnly: true,
-		stripInternal,
+function createOutputFolders() {
+	return Promise.all([
+		fs.mkdir(ESM_PATH, { recursive: true }),
+		fs.mkdir(CJS_PATH, { recursive: true }),
+	])
+}
+
+async function transpileFile(filename: string) {
+	const code = await fs.readFile(filename, { encoding: 'utf8' })
+	const esmResult = writeOutput(code, filename, ESM_PATH, {
+		filename,
+		sourceMaps: true,
+		isModule: true,
+		env: ENV_CONFIG,
+		outputPath: path.dirname(filename).replace(/^src/, CJS_PATH),
+		module: {
+			type: 'es6',
+		},
 	})
-	const title = 'typings'
-	return function execute(): NodeJS.ReadWriteStream {
-		const task = src(TYPESCRIPT_GLOBS)
-			.pipe(
-				plumber({
-					errorHandler: !listen,
-				}),
-			)
-			.pipe(project())
-			.pipe(logFiles ? debug({ title }) : noopStep())
-			.pipe(dest('dist/types'))
-
-		if (listen) {
-			task
-				.on('end', () => subtaskSuccess(title))
-				.on('error', () => subtaskFail(title))
-		}
-		return task
-	}
+	const cjsResult = writeOutput(code, filename, CJS_PATH, {
+		filename,
+		sourceMaps: true,
+		isModule: true,
+		env: ENV_CONFIG,
+		outputPath: path.dirname(filename).replace(/^src/, CJS_PATH),
+		module: {
+			type: 'commonjs',
+		},
+	})
+	await Promise.all([esmResult, cjsResult])
 }
 
-/**
- * Compiles typescript from src/ to the lib/ folder
- */
-export function compileTypescript(): TaskFunction {
-	return executeCompile(false, true)
-}
+function writeOutput(
+	code: string,
+	filename: string,
+	outputRoot: string,
+	options: swc.Options,
+) {
+	return swc.transform(code, options).then(async ({ code, map }) => {
+		const outputFile = path.join(outputRoot, filename).replace(/\.tsx?$/, '.js')
+		const mapFile = `${outputFile}.map`
+		const outputDir = path.dirname(outputFile).replace(/^src/, outputRoot)
 
-/**
- * Watches typescript from src/ to the lib/ folder
- */
-export function watchTypescript(stripInternalTypes: boolean): FileWatcher {
-	return watch(
-		TYPESCRIPT_GLOBS,
-		parallel(
-			executeCompile(true, false),
-			executeTypeEmit(stripInternalTypes, true, false),
-		),
-	)
-}
-
-/**
- * Emits typings files into dist/types
- */
-export function emitTypings(stripInternal: boolean): TaskFunction {
-	return executeTypeEmit(stripInternal, false, true)
+		await fs.mkdir(outputDir, { recursive: true })
+		await Promise.all([
+			fs.writeFile(outputFile, code, { encoding: 'utf8' }),
+			map ? fs.writeFile(mapFile, map, { encoding: 'utf8' }) : null,
+		])
+	})
 }

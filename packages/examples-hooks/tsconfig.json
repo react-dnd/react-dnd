@@ -1,10 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "emitDeclarationOnly": false,
-    "outDir": "./lib",
     "baseUrl": "./",
-    "lib": ["ESNext", "DOM"]
+    "lib": ["ESNext", "DOM"],
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist/types"
   },
   "include": ["./src/index.ts"]
 }

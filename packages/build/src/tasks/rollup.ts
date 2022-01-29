@@ -1,13 +1,10 @@
-import { noopTask } from './common'
 import { join } from 'path'
-import { TaskFunction } from '../types'
 import { subtaskFail, subtaskSuccess } from '../log'
 import { terser } from 'rollup-plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import rollup = require('rollup')
 
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { parallel } = require('gulp')
 const commonjs = require('@rollup/plugin-commonjs')
 const replace = require('@rollup/plugin-replace')
 const alias = require('@rollup/plugin-alias')
@@ -19,26 +16,26 @@ function getUmdConfiguration(): UmdConfig | undefined {
 	return umd
 }
 
-export function rollupBundle(): TaskFunction {
+export async function rollupBundle(): Promise<void> {
 	const umd = getUmdConfiguration()
-	return umd == null
-		? noopTask
-		: parallel(
-				() =>
-					rollupDebug(umd)
-						.then(() => subtaskSuccess('rollup-dbg'))
-						.catch((err: Error) => {
-							subtaskFail('rollup-dbg')
-							throw err
-						}),
-				() =>
-					rollupMin(umd)
-						.then(() => subtaskSuccess('rollup-min'))
-						.catch((err: Error) => {
-							subtaskFail('rollup-min')
-							throw err
-						}),
-		  )
+	if (!umd) {
+		return
+	}
+
+	await Promise.all([
+		rollupDebug(umd)
+		.then(() => subtaskSuccess('rollup-dbg'))
+		.catch((err: Error) => {
+			subtaskFail('rollup-dbg')
+			throw err
+		}),
+		rollupMin(umd)
+		.then(() => subtaskSuccess('rollup-min'))
+		.catch((err: Error) => {
+			subtaskFail('rollup-min')
+			throw err
+		}),
+	])
 }
 
 interface UmdConfig {

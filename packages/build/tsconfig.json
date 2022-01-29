@@ -6,7 +6,9 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": false,
     "lib": ["DOM", "ES2018"],
-    "outDir": "lib"
+    "outDir": "lib",
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true
   },
   "include": ["src/index.ts"]
 }
