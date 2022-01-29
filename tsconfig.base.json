@@ -9,6 +9,7 @@
     "strict": true,
     "experimentalDecorators": true,
     "noUnusedLocals": true,
+    "noImplicitOverride": true,
     "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,
     "declaration": true,

@@ -91,28 +91,28 @@ export function decorateHandler<Props, CollectedProps, ItemIdType>({
 			return this.decoratedRef.current as any
 		}
 
-		public shouldComponentUpdate(nextProps: any, nextState: any) {
+		public override shouldComponentUpdate(nextProps: any, nextState: any) {
 			return (
 				!arePropsEqual(nextProps, this.props) ||
 				!shallowEqual(nextState, this.state)
 			)
 		}
 
-		public componentDidMount() {
+		public override componentDidMount() {
 			this.disposable = new SerialDisposable()
 			this.currentType = undefined
 			this.receiveProps(this.props)
 			this.handleChange()
 		}
 
-		public componentDidUpdate(prevProps: Props) {
+		public override componentDidUpdate(prevProps: Props) {
 			if (!arePropsEqual(this.props, prevProps)) {
 				this.receiveProps(this.props)
 				this.handleChange()
 			}
 		}
 
-		public componentWillUnmount() {
+		public override componentWillUnmount() {
 			this.dispose()
 		}
 
@@ -198,7 +198,7 @@ export function decorateHandler<Props, CollectedProps, ItemIdType>({
 			return nextState
 		}
 
-		public render() {
+		public override render() {
 			return (
 				<DndContext.Consumer>
 					{({ dragDropManager }) => {

@@ -1,4 +1,4 @@
-import { Store } from 'redux'
+import type { Store } from 'redux'
 import { invariant } from '@react-dnd/invariant'
 import { matchesType } from '../utils/matchesType'
 import {
@@ -7,7 +7,7 @@ import {
 } from '../utils/coords'
 import { areDirty } from '../utils/dirtiness'
 import { State } from '../reducers'
-import {
+import type {
 	DragDropMonitor,
 	Listener,
 	Unsubscribe,

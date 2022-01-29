@@ -15,7 +15,7 @@
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "scripts": {
-    "clean": "gulp clean",
+    "clean": "shx rm -rf dist/ lib/",
     "build": "gulp build",
     "watch": "gulp watch",
     "bundle": "gulp bundle"
@@ -25,7 +25,8 @@
   },
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "shx": "^0.3.4"
   },
   "umd": {
     "name": "ReactDnDHTML5Backend",

@@ -31,7 +31,7 @@ export interface DraggableBoxProps {
 }
 
 class DraggableBox extends PureComponent<DraggableBoxProps> {
-	public componentDidMount() {
+	public override componentDidMount() {
 		const { connectDragPreview } = this.props
 		if (connectDragPreview) {
 			// Use empty image as a drag preview so browsers don't draw it
@@ -44,7 +44,7 @@ class DraggableBox extends PureComponent<DraggableBoxProps> {
 		}
 	}
 
-	public render() {
+	public override render() {
 		const { title, connectDragSource } = this.props
 
 		return connectDragSource(

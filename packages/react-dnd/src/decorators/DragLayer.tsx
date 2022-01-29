@@ -59,19 +59,19 @@ export function DragLayer<RequiredProps, CollectedProps = any>(
 				return this.ref.current
 			}
 
-			public shouldComponentUpdate(nextProps: any, nextState: any) {
+			public override shouldComponentUpdate(nextProps: any, nextState: any) {
 				return (
 					!arePropsEqual(nextProps, this.props) ||
 					!shallowEqual(nextState, this.state)
 				)
 			}
 
-			public componentDidMount() {
+			public override componentDidMount() {
 				this.isCurrentlyMounted = true
 				this.handleChange()
 			}
 
-			public componentWillUnmount() {
+			public override componentWillUnmount() {
 				this.isCurrentlyMounted = false
 				if (this.unsubscribeFromOffsetChange) {
 					this.unsubscribeFromOffsetChange()
@@ -83,7 +83,7 @@ export function DragLayer<RequiredProps, CollectedProps = any>(
 				}
 			}
 
-			public render() {
+			public override render() {
 				return (
 					<DndContext.Consumer>
 						{({ dragDropManager }) => {

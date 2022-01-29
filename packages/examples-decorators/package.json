@@ -17,7 +17,7 @@
   "license": "MIT",
   "scripts": {
     "build": "run-s build:pkg build:docs",
-    "clean": "gulp clean",
+    "clean": "shx rm -rf dist/ lib/",
     "watch": "gulp watch",
     "build:pkg": "gulp build",
     "build:docs": "tsc -b tsconfig.docs.json"
@@ -46,6 +46,7 @@
     "react": "^17.0.2",
     "react-dnd-test-backend": "workspace:packages/backend-test",
     "react-dnd-test-utils": "workspace:packages/test-utils",
+    "shx": "^0.3.4",
     "typescript": "^4.5.5"
   },
   "peerDependencies": {

@@ -40,13 +40,13 @@ export class Container extends Component<ContainerProps, ContainerState> {
 		this.state = buildCardData()
 	}
 
-	public componentWillUnmount(): void {
+	public override componentWillUnmount(): void {
 		if (this.requestedFrame !== undefined) {
 			cancelAnimationFrame(this.requestedFrame)
 		}
 	}
 
-	public render(): JSX.Element {
+	public override render(): JSX.Element {
 		const { cardsByIndex } = this.state
 
 		return (

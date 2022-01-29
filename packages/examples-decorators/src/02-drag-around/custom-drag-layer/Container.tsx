@@ -23,14 +23,14 @@ export interface ContainerState {
 }
 
 class Container extends PureComponent<ContainerProps, ContainerState> {
-	public state: ContainerState = {
+	public override state: ContainerState = {
 		boxes: {
 			a: { top: 20, left: 80, title: 'Drag me around' },
 			b: { top: 180, left: 20, title: 'Drag me too' },
 		},
 	}
 
-	public render() {
+	public override render() {
 		const { connectDropTarget } = this.props
 		const { boxes } = this.state
 

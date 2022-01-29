@@ -11,7 +11,7 @@ import {
 	REMOVE_SOURCE,
 	REMOVE_TARGET,
 } from '../actions/registry'
-import { Action } from '../interfaces'
+import type { Action } from '../interfaces'
 import { areArraysEqual } from '../utils/equality'
 import { NONE, ALL } from '../utils/dirtiness'
 import { xor } from '../utils/js_utils'

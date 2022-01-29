@@ -9932,6 +9932,7 @@ __metadata:
     react-dnd-test-backend: "portal:../backend-test"
     redux: ^4.1.1
     setimmediate: ^1.0.5
+    shx: ^0.3.4
   languageName: unknown
   linkType: soft
 
@@ -20215,6 +20216,7 @@ fsevents@^1.2.7:
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dnd-test-utils: "workspace:packages/test-utils"
     react-frame-component: ^4.1.3
+    shx: ^0.3.4
     typescript: ^4.5.5
   peerDependencies:
     "@types/node": ">= 12"
@@ -20254,6 +20256,7 @@ fsevents@^1.2.7:
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-utils: "workspace:packages/test-utils"
     react-frame-component: ^4.1.3
+    shx: ^0.3.4
     typescript: ^4.5.5
   peerDependencies:
     "@types/node": ">= 12"
@@ -20278,6 +20281,7 @@ fsevents@^1.2.7:
     "@react-dnd/build": "workspace:packages/build"
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
+    shx: ^0.3.4
   languageName: unknown
   linkType: soft
 
@@ -20349,6 +20353,7 @@ fsevents@^1.2.7:
     "@react-dnd/build": "workspace:packages/build"
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
+    shx: ^0.3.4
   languageName: unknown
   linkType: soft
 
@@ -20395,6 +20400,7 @@ fsevents@^1.2.7:
     react-dnd-html5-backend: "workspace:packages/backend-html5"
     react-dnd-test-backend: "workspace:packages/backend-test"
     react-dom: ^17.0.2
+    shx: ^0.3.4
   peerDependencies:
     "@testing-library/react": ">= 11"
     "@types/node": "*"
@@ -20427,6 +20433,7 @@ fsevents@^1.2.7:
     "@react-dnd/invariant": ^2.0.0
     dnd-core: "workspace:packages/dnd-core"
     gulp: ^4.0.2
+    shx: ^0.3.4
   languageName: unknown
   linkType: soft
 
@@ -20450,6 +20457,7 @@ fsevents@^1.2.7:
     react-dnd-test-backend: "portal:../backend-test"
     react-dnd-test-utils: "portal:../test-utils"
     react-dom: ^17.0.2
+    shx: ^0.3.4
   peerDependencies:
     "@types/hoist-non-react-statics": ">= 3.3.1"
     "@types/node": ">= 12"
