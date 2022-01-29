@@ -121,7 +121,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dnd-test-backend", "workspace:packages/backend-test"],
             ["react-dnd-test-utils", "virtual:7b71f47ded5886fc1def2de8946e0ca48b1e5ac2847fd3e4970b7539e6f69859f16438f62db2d25d065d58c64f6b5921b555f396cc9220799d98b296b63dea31#workspace:packages/test-utils"],
             ["react-dnd-touch-backend", "workspace:packages/backend-touch"],
-            ["rimraf", "npm:3.0.2"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"]
           ],
           "linkType": "SOFT",
@@ -8928,7 +8927,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/chalk", "npm:2.2.0"],
             ["@types/fancy-log", "npm:1.3.1"],
             ["@types/node", "npm:14.17.19"],
-            ["@types/rimraf", "npm:3.0.2"],
             ["@types/through2", "npm:2.0.36"],
             ["@types/vinyl-source-stream", "npm:0.0.30"],
             ["@types/webpack", "npm:4.41.31"],
@@ -8941,9 +8939,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["gulp-debug", "virtual:a4b16e182a0d5be1f51008fd86e27f5f91d2ff1d35cd925d6663482eb993c2133f16b41922f78571490b147d705095670a9bcae798ad076cd488c05490fe3e77#npm:4.0.0"],
             ["gulp-plumber", "npm:1.2.1"],
             ["gulp-typescript", "virtual:a4b16e182a0d5be1f51008fd86e27f5f91d2ff1d35cd925d6663482eb993c2133f16b41922f78571490b147d705095670a9bcae798ad076cd488c05490fe3e77#npm:6.0.0-alpha.1"],
-            ["rimraf", "npm:3.0.2"],
             ["rollup", "npm:2.57.0"],
             ["rollup-plugin-terser", "virtual:a4b16e182a0d5be1f51008fd86e27f5f91d2ff1d35cd925d6663482eb993c2133f16b41922f78571490b147d705095670a9bcae798ad076cd488c05490fe3e77#npm:7.0.2"],
+            ["shx", "npm:0.3.4"],
             ["through2", "npm:4.0.2"],
             ["tslib", "npm:2.3.1"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
@@ -10063,15 +10061,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-rimraf-npm-2.0.4-186e436a00-8304d3d98f.zip/node_modules/@types/rimraf/",
           "packageDependencies": [
             ["@types/rimraf", "npm:2.0.4"],
-            ["@types/glob", "npm:7.1.3"],
-            ["@types/node", "npm:14.14.27"]
-          ],
-          "linkType": "HARD",
-        }],
-        ["npm:3.0.2", {
-          "packageLocation": "./.yarn/cache/@types-rimraf-npm-3.0.2-dd6eb5de99-b47fa302f4.zip/node_modules/@types/rimraf/",
-          "packageDependencies": [
-            ["@types/rimraf", "npm:3.0.2"],
             ["@types/glob", "npm:7.1.3"],
             ["@types/node", "npm:14.14.27"]
           ],
@@ -27757,7 +27746,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-typography", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:0.16.20"],
             ["regenerator-runtime", "npm:0.13.9"],
             ["rehype-react", "npm:6.2.1"],
-            ["rimraf", "npm:3.0.2"],
             ["shallow-compare", "npm:1.2.2"],
             ["shx", "npm:0.3.4"],
             ["styled-components", "virtual:e1e5e5f16941c4ee39f3320d4cfa49fc95b0e947f7c40f2997c4caea9ea68da4436c3864bfd17ad67608a933cae8acb6dd79048df8de3112a54f962cbd507d29#npm:5.3.3"],
@@ -27961,7 +27949,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dnd-test-backend", "workspace:packages/backend-test"],
             ["react-dnd-test-utils", "virtual:7b71f47ded5886fc1def2de8946e0ca48b1e5ac2847fd3e4970b7539e6f69859f16438f62db2d25d065d58c64f6b5921b555f396cc9220799d98b296b63dea31#workspace:packages/test-utils"],
             ["react-dnd-touch-backend", "workspace:packages/backend-touch"],
-            ["rimraf", "npm:3.0.2"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"]
           ],
           "linkType": "SOFT",
