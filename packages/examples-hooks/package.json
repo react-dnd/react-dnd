@@ -18,7 +18,7 @@
   "scripts": {
     "build": "run-s build:pkg build:docs",
     "clean": "shx rm -rf dist/ lib/",
-    "watch": "gulp watch",
+    "typecheck": "tsc -b .",
     "build:pkg": "gulp build",
     "build:docs": "tsc -b tsconfig.docs.json"
   },

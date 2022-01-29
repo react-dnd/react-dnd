@@ -18,8 +18,8 @@
   "scripts": {
     "clean": "shx rm -rf dist/ lib/",
     "build": "gulp build",
-    "watch": "gulp watch",
-    "bundle": "gulp bundle"
+    "bundle": "gulp bundle",
+    "typecheck": "tsc -b ."
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
@@ -28,7 +28,8 @@
   "devDependencies": {
     "@react-dnd/build": "workspace:packages/build",
     "gulp": "^4.0.2",
-    "shx": "^0.3.4"
+    "shx": "^0.3.4",
+    "typescript": "^4.5.5"
   },
   "umd": {
     "name": "ReactDnDTouchBackend",
