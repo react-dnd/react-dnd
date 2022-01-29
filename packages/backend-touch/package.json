@@ -30,23 +30,5 @@
     "gulp": "^4.0.2",
     "shx": "^0.3.4",
     "typescript": "^4.5.5"
-  },
-  "umd": {
-    "name": "ReactDnDTouchBackend",
-    "input": "./dist/esm/index.js",
-    "external": [
-      "react",
-      "react-dom",
-      "react-dnd"
-    ],
-    "globals": {
-      "react": "React",
-      "react-dom": "ReactDOM",
-      "react-dnd": "ReactDnD"
-    },
-    "alias": {
-      "dnd-core": "dnd-core/dist/esm/index",
-      "react-dnd": "react-dnd/dist/esm/index"
-    }
   }
 }
