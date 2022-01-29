@@ -18,7 +18,6 @@
   "scripts": {
     "build": "run-s build:pkg build:docs",
     "clean": "shx rm -rf dist/ lib/",
-    "typecheck": "tsc -b .",
     "build:pkg": "dndbuild",
     "build:docs": "tsc -b tsconfig.docs.json"
   },

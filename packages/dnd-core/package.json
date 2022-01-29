@@ -13,8 +13,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "dndbuild",
-    "clean": "shx rm -rf dist/ lib/",
-    "typecheck": "tsc -b ."
+    "clean": "shx rm -rf dist/ lib/"
   },
   "repository": {
     "type": "git",

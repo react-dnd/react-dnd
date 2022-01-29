@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "lib": ["ESNext", "DOM"],
-    "emitDeclarationOnly": true,
-    "declarationDir": "dist/types"
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["./src/index.ts"]
 }

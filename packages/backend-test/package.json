@@ -16,8 +16,7 @@
   },
   "scripts": {
     "clean": "shx rm -rf dist/ lib/",
-    "build": "dndbuild",
-    "typecheck": "tsc -b ."
+    "build": "dndbuild"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core"

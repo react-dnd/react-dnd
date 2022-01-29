@@ -17,8 +17,7 @@
   },
   "scripts": {
     "clean": "shx rm -rf dist/ lib/",
-    "build": "dndbuild",
-    "typecheck": "tsc -b ."
+    "build": "dndbuild"
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
