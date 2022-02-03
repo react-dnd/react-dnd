@@ -1,5 +1,6 @@
 import { DragPreviewImage } from '../DragPreviewImage'
-import { wrapWithBackend } from 'react-dnd-test-utils'
+import { DndProvider } from '../../core'
+import { TestBackend } from 'react-dnd-test-backend'
 import { render, cleanup } from '@testing-library/react'
 import { useDrag } from '../../hooks'
 
@@ -42,8 +43,11 @@ describe('The DragPreviewImage component', () => {
 			)
 		}
 
-		const KnightWrapped = wrapWithBackend(Knight)
-		render(<KnightWrapped />)
+		render(
+			<DndProvider backend={TestBackend}>
+				<Knight></Knight>
+			</DndProvider>,
+		)
 
 		// TODO: verifying that the image was created appears untestable
 		// expect(onConnect.mock.calls.length).toEqual(1)

@@ -1,5 +1,5 @@
 import { DragDropManagerImpl } from './classes/DragDropManagerImpl'
-import { DragDropManager, BackendFactory } from './interfaces'
+import type { DragDropManager, BackendFactory } from './interfaces'
 import { createStore, Store } from 'redux'
 import { reduce, State } from './reducers'
 import { DragDropMonitorImpl } from './classes/DragDropMonitorImpl'
