@@ -205,7 +205,11 @@ export class HTML5BackendImpl implements Backend {
 			true,
 		)
 		target.addEventListener('dragover', this.handleTopDragOver as EventListener)
-		target.addEventListener('dragover', this.handleTopDragOverCapture, true)
+		target.addEventListener(
+			'dragover',
+			this.handleTopDragOverCapture as EventListener,
+			true,
+		)
 		target.addEventListener('drop', this.handleTopDrop as EventListener)
 		target.addEventListener(
 			'drop',
@@ -244,7 +248,11 @@ export class HTML5BackendImpl implements Backend {
 			'dragover',
 			this.handleTopDragOver as EventListener,
 		)
-		target.removeEventListener('dragover', this.handleTopDragOverCapture, true)
+		target.removeEventListener(
+			'dragover',
+			this.handleTopDragOverCapture as EventListener,
+			true,
+		)
 		target.removeEventListener('drop', this.handleTopDrop as EventListener)
 		target.removeEventListener(
 			'drop',
@@ -527,6 +535,10 @@ export class HTML5BackendImpl implements Backend {
 	public handleTopDragEnterCapture = (e: DragEvent): void => {
 		this.dragEnterTargetIds = []
 
+		if (this.isDraggingNativeItem()) {
+			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
+		}
+
 		const isFirstEnter = this.enterLeaveCounter.enter(e.target)
 		if (!isFirstEnter || this.monitor.isDragging()) {
 			return
@@ -578,8 +590,12 @@ export class HTML5BackendImpl implements Backend {
 		}
 	}
 
-	public handleTopDragOverCapture = (): void => {
+	public handleTopDragOverCapture = (e: DragEvent): void => {
 		this.dragOverTargetIds = []
+
+		if (this.isDraggingNativeItem()) {
+			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
+		}
 	}
 
 	public handleDragOver(e: DragEvent, targetId: string): void {
