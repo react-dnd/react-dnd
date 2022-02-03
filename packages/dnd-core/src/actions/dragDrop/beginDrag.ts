@@ -1,5 +1,5 @@
 import { invariant } from '@react-dnd/invariant'
-import {
+import type {
 	Action,
 	DragDropManager,
 	XYCoord,
@@ -11,7 +11,6 @@ import {
 } from '../../interfaces'
 import { setClientOffset } from './local/setClientOffset'
 import { isObject } from '../../utils/js_utils'
-
 import { BEGIN_DRAG, INIT_COORDS } from './types'
 
 const ResetCoordinatesAction = {

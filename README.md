@@ -20,12 +20,6 @@ Questions? Find us on the Reactiflux Discord Server (**#need-help**)
 
 https://www.reactiflux.com/
 
-### Technical Details
-
-- ESM/CJS Module Support
-- Ships w/ TS Typings
-- Browserlist Target: `>0.25%, not dead`
-
 ### Shoutouts 🙏
 
 <img src="/assets/browserstack-logo-600x315.png" height="80" title="BrowserStack Logo" alt="BrowserStack Logo" />

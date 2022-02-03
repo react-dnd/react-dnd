@@ -45,7 +45,7 @@ export function wrapWithBackend<T>(
 			forwardedRef: Ref<any>
 		}
 	> {
-		public render() {
+		public override render() {
 			const { forwardedRef, ...rest } = this.props
 			return (
 				<DndProvider backend={Backend} options={backendOptions}>

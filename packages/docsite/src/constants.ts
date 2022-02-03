@@ -47,7 +47,7 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
-		title: 'Common Components',
+		title: 'Components',
 		pages: {
 			DND_PROVIDER: {
 				location: '/docs/api/dnd-provider',
@@ -60,7 +60,7 @@ export const APIPages: PageGroup[] = [
 		},
 	},
 	{
-		title: 'Hooks API',
+		title: 'Hooks',
 		pages: {
 			OVERVIEW: {
 				location: '/docs/api/hooks-overview',
@@ -81,35 +81,6 @@ export const APIPages: PageGroup[] = [
 			USE_DRAG_DROP_MANAGER: {
 				location: '/docs/api/use-drag-drop-manager',
 				title: 'useDragDropManager',
-			},
-		},
-	},
-	{
-		title: 'Decorator API',
-		pages: {
-			OVERVIEW: {
-				location: '/docs/api/decorators-overview',
-				title: 'Overview',
-			},
-			DRAG_SOURCE: {
-				location: '/docs/api/drag-source',
-				title: 'DragSource',
-			},
-			DROP_TARGET: {
-				location: '/docs/api/drop-target',
-				title: 'DropTarget',
-			},
-			DRAG_LAYER: {
-				location: '/docs/api/drag-layer',
-				title: 'DragLayer',
-			},
-			DRAG_SOURCE_CONNECTOR: {
-				location: '/docs/api/drag-source-connector',
-				title: 'DragSourceConnector',
-			},
-			DROP_TARGET_CONNECTOR: {
-				location: '/docs/api/drop-target-connector',
-				title: 'DropTargetConnector',
 			},
 		},
 	},

@@ -1,5 +1,5 @@
-import { State } from '../reducers/dragOffset'
-import { XYCoord } from '..'
+import type { State } from '../reducers/dragOffset'
+import type { XYCoord } from '..'
 
 /**
  * Coordinate addition

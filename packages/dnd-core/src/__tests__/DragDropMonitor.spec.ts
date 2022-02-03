@@ -13,7 +13,16 @@ import {
 } from '../interfaces'
 import { createDragDropManager } from '../createDragDropManager'
 
-describe.only('DragDropMonitor', () => {
+const onlyOnce = (cb: (...args: unknown[]) => void) => {
+	let triggered = false
+	return (...args: unknown[]) => {
+		if (!triggered) {
+			triggered = true
+			cb(...args)
+		}
+	}
+}
+describe('DragDropMonitor', () => {
 	let manager: DragDropManager
 	let backend: ITestBackend
 	let registry: HandlerRegistry
@@ -100,7 +109,7 @@ describe.only('DragDropMonitor', () => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 
-			monitor.subscribeToStateChange(done)
+			monitor.subscribeToStateChange(onlyOnce(done))
 			backend.simulateBeginDrag([sourceId])
 		})
 
@@ -117,7 +126,7 @@ describe.only('DragDropMonitor', () => {
 				}
 			})
 
-			monitor.subscribeToStateChange(done)
+			monitor.subscribeToStateChange(onlyOnce(done))
 			backend.simulateBeginDrag([sourceId])
 		})
 
@@ -839,7 +848,7 @@ describe.only('DragDropMonitor', () => {
 			const source = new NormalSource()
 			const sourceId = registry.addSource(Types.FOO, source)
 
-			monitor.subscribeToOffsetChange(done)
+			monitor.subscribeToOffsetChange(onlyOnce(done))
 			backend.simulateBeginDrag([sourceId], {
 				clientOffset: { x: 0, y: 0 },
 				getSourceClientOffset: () => ({ x: 0, y: 0 }),
