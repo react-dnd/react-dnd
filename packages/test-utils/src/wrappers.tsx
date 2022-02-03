@@ -45,7 +45,7 @@ export function wrapWithBackend<T>(
 			forwardedRef: Ref<any>
 		}
 	> {
-		public render() {
+		public override render() {
 			const { forwardedRef, ...rest } = this.props
 			return (
 				<DndProvider backend={Backend} options={backendOptions}>
@@ -59,5 +59,5 @@ export function wrapWithBackend<T>(
 			return <TestContextWrapper {...props} forwardedRef={ref} />
 		},
 	)
-	return (ForwardedComponent as unknown) as ComponentType<T>
+	return ForwardedComponent as unknown as ComponentType<T>
 }

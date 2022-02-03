@@ -1,9 +1,14 @@
+.yarn/
 node_modules/
 dist/
 lib/
 build/
+public/
+static/
+.cache/
+coverage/
 pnpm-lock.yaml
 pnpm-workspace.yaml
-.yarn/
 .pnp.js
+.pnp.cjs
 yarn.lock

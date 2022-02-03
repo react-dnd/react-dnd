@@ -4,14 +4,21 @@ const {existsSync} = require(`fs`);
 const {createRequire, createRequireFromPath} = require(`module`);
 const {resolve} = require(`path`);
 
-const relPnpApiPath = "../../../../.pnp.js";
+const relPnpApiPath = "../../../../.pnp.cjs";
 
 const absPnpApiPath = resolve(__dirname, relPnpApiPath);
 const absRequire = (createRequire || createRequireFromPath)(absPnpApiPath);
 
 const moduleWrapper = tsserver => {
+  if (!process.versions.pnp) {
+    return tsserver;
+  }
+
   const {isAbsolute} = require(`path`);
   const pnpApi = require(`pnpapi`);
+
+  const isVirtual = str => str.match(/\/(\$\$virtual|__virtual__)\//);
+  const normalize = str => str.replace(/\\/g, `/`).replace(/^\/?/, `/`);
 
   const dependencyTreeRoots = new Set(pnpApi.getDependencyTreeRoots().map(locator => {
     return `${locator.name}@${locator.reference}`;
@@ -23,9 +30,9 @@ const moduleWrapper = tsserver => {
 
   function toEditorPath(str) {
     // We add the `zip:` prefix to both `.zip/` paths and virtual paths
-    if (isAbsolute(str) && !str.match(/^\^zip:/) && (str.match(/\.zip\//) || str.match(/\$\$virtual\//))) {
+    if (isAbsolute(str) && !str.match(/^\^?(zip:|\/zip\/)/) && (str.match(/\.zip\//) || isVirtual(str))) {
       // We also take the opportunity to turn virtual paths into physical ones;
-      // this makes is much easier to work with workspaces that list peer
+      // this makes it much easier to work with workspaces that list peer
       // dependencies, since otherwise Ctrl+Click would bring us to the virtual
       // file instances instead of the real ones.
       //
@@ -34,26 +41,57 @@ const moduleWrapper = tsserver => {
       // with peer dep (otherwise jumping into react-dom would show resolution
       // errors on react).
       //
-      const resolved = pnpApi.resolveVirtual(str);
+      const resolved = isVirtual(str) ? pnpApi.resolveVirtual(str) : str;
       if (resolved) {
         const locator = pnpApi.findPackageLocator(resolved);
         if (locator && dependencyTreeRoots.has(`${locator.name}@${locator.reference}`)) {
-         str = resolved;
+          str = resolved;
         }
       }
 
-      str = str.replace(/\\/g, `/`)
-      str = str.replace(/^\/?/, `/`);
+      str = normalize(str);
 
-      // Absolute VSCode `Uri.fsPath`s need to start with a slash.
-      // VSCode only adds it automatically for supported schemes,
-      // so we have to do it manually for the `zip` scheme.
-      // The path needs to start with a caret otherwise VSCode doesn't handle the protocol
-      //
-      // Ref: https://github.com/microsoft/vscode/issues/105014#issuecomment-686760910
-      //
       if (str.match(/\.zip\//)) {
-        str = `${isVSCode ? `^` : ``}zip:${str}`;
+        switch (hostInfo) {
+          // Absolute VSCode `Uri.fsPath`s need to start with a slash.
+          // VSCode only adds it automatically for supported schemes,
+          // so we have to do it manually for the `zip` scheme.
+          // The path needs to start with a caret otherwise VSCode doesn't handle the protocol
+          //
+          // Ref: https://github.com/microsoft/vscode/issues/105014#issuecomment-686760910
+          //
+          // Update Oct 8 2021: VSCode changed their format in 1.61.
+          // Before | ^zip:/c:/foo/bar.zip/package.json
+          // After  | ^/zip//c:/foo/bar.zip/package.json
+          //
+          case `vscode <1.61`: {
+            str = `^zip:${str}`;
+          } break;
+
+          case `vscode`: {
+            str = `^/zip/${str}`;
+          } break;
+
+          // To make "go to definition" work,
+          // We have to resolve the actual file system path from virtual path
+          // and convert scheme to supported by [vim-rzip](https://github.com/lbrayner/vim-rzip)
+          case `coc-nvim`: {
+            str = normalize(resolved).replace(/\.zip\//, `.zip::`);
+            str = resolve(`zipfile:${str}`);
+          } break;
+
+          // Support neovim native LSP and [typescript-language-server](https://github.com/theia-ide/typescript-language-server)
+          // We have to resolve the actual file system path from virtual path,
+          // everything else is up to neovim
+          case `neovim`: {
+            str = normalize(resolved).replace(/\.zip\//, `.zip::`);
+            str = `zipfile:${str}`;
+          } break;
+
+          default: {
+            str = `zip:${str}`;
+          } break;
+        }
       }
     }
 
@@ -61,10 +99,40 @@ const moduleWrapper = tsserver => {
   }
 
   function fromEditorPath(str) {
-    return process.platform === `win32`
-      ? str.replace(/^\^?zip:\//, ``)
-      : str.replace(/^\^?zip:/, ``);
+    switch (hostInfo) {
+      case `coc-nvim`:
+      case `neovim`: {
+        str = str.replace(/\.zip::/, `.zip/`);
+        // The path for coc-nvim is in format of /<pwd>/zipfile:/<pwd>/.yarn/...
+        // So in order to convert it back, we use .* to match all the thing
+        // before `zipfile:`
+        return process.platform === `win32`
+          ? str.replace(/^.*zipfile:\//, ``)
+          : str.replace(/^.*zipfile:/, ``);
+      } break;
+
+      case `vscode`:
+      default: {
+        return process.platform === `win32`
+          ? str.replace(/^\^?(zip:|\/zip)\/+/, ``)
+          : str.replace(/^\^?(zip:|\/zip)\/+/, `/`);
+      } break;
+    }
   }
+
+  // Force enable 'allowLocalPluginLoads'
+  // TypeScript tries to resolve plugins using a path relative to itself
+  // which doesn't work when using the global cache
+  // https://github.com/microsoft/TypeScript/blob/1b57a0395e0bff191581c9606aab92832001de62/src/server/project.ts#L2238
+  // VSCode doesn't want to enable 'allowLocalPluginLoads' due to security concerns but
+  // TypeScript already does local loads and if this code is running the user trusts the workspace
+  // https://github.com/microsoft/vscode/issues/45856
+  const ConfiguredProject = tsserver.server.ConfiguredProject;
+  const {enablePluginsWithOptions: originalEnablePluginsWithOptions} = ConfiguredProject.prototype;
+  ConfiguredProject.prototype.enablePluginsWithOptions = function() {
+    this.projectService.allowLocalPluginLoads = true;
+    return originalEnablePluginsWithOptions.apply(this, arguments);
+  };
 
   // And here is the point where we hijack the VSCode <-> TS communications
   // by adding ourselves in the middle. We locate everything that looks
@@ -72,24 +140,33 @@ const moduleWrapper = tsserver => {
 
   const Session = tsserver.server.Session;
   const {onMessage: originalOnMessage, send: originalSend} = Session.prototype;
-  let isVSCode = false;
+  let hostInfo = `unknown`;
 
-  return Object.assign(Session.prototype, {
-    onMessage(/** @type {string} */ message) {
-      const parsedMessage = JSON.parse(message)
+  Object.assign(Session.prototype, {
+    onMessage(/** @type {string | object} */ message) {
+      const isStringMessage = typeof message === 'string';
+      const parsedMessage = isStringMessage ? JSON.parse(message) : message;
 
       if (
         parsedMessage != null &&
         typeof parsedMessage === `object` &&
         parsedMessage.arguments &&
-        parsedMessage.arguments.hostInfo === `vscode`
+        typeof parsedMessage.arguments.hostInfo === `string`
       ) {
-        isVSCode = true;
+        hostInfo = parsedMessage.arguments.hostInfo;
+        if (hostInfo === `vscode` && process.env.VSCODE_IPC_HOOK && process.env.VSCODE_IPC_HOOK.match(/Code\/1\.([1-5][0-9]|60)\./)) {
+          hostInfo += ` <1.61`;
+        }
       }
 
-      return originalOnMessage.call(this, JSON.stringify(parsedMessage, (key, value) => {
-        return typeof value === `string` ? fromEditorPath(value) : value;
-      }));
+      const processedMessageJSON = JSON.stringify(parsedMessage, (key, value) => {
+        return typeof value === 'string' ? fromEditorPath(value) : value;
+      });
+
+      return originalOnMessage.call(
+        this,
+        isStringMessage ? processedMessageJSON : JSON.parse(processedMessageJSON)
+      );
     },
 
     send(/** @type {any} */ msg) {
@@ -98,6 +175,8 @@ const moduleWrapper = tsserver => {
       })));
     }
   });
+
+  return tsserver;
 };
 
 if (existsSync(absPnpApiPath)) {

@@ -3,8 +3,8 @@ const fs = require('fs')
 const path = require('path')
 const rootPkgJson = require('../../package.json')
 const reactDndPkgJson = require('../react-dnd/package.json')
-const reactDndHtml5BackendVersion = require('../backend-html5/package.json')
-	.version
+const reactDndHtml5BackendVersion =
+	require('../backend-html5/package.json').version
 
 const APP_FILE_CONTENT = `
 	import { render } from 'react-dom'
@@ -267,24 +267,14 @@ function handleTsExample(err, results) {
 }
 // Write JS Examples
 walk_examples(
-	path.join(__dirname, 'static/examples_hooks_js'),
-	'index.js',
-	handleJsExample,
-)
-walk_examples(
-	path.join(__dirname, 'static/examples_decorators_js'),
+	path.join(__dirname, 'static/examples_js'),
 	'index.js',
 	handleJsExample,
 )
 
 // Write TS Examples
 walk_examples(
-	path.join(__dirname, 'static/examples_hooks_ts'),
-	'index.ts',
-	handleTsExample,
-)
-walk_examples(
-	path.join(__dirname, 'static/examples_decorators_ts'),
+	path.join(__dirname, 'static/examples_ts'),
 	'index.ts',
 	handleTsExample,
 )

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 declare const require: any
 
-import { FC, memo, useMemo, useCallback, useState } from 'react'
+import { FC, memo, useMemo, useCallback, useState, ReactNode } from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { TouchBackend } from 'react-dnd-touch-backend'
+import { TouchBackend, TouchBackendOptions } from 'react-dnd-touch-backend'
 import { isDebugMode } from '../util/isDebugMode'
 import { isTouchBackend } from '../util/isTouchBackend'
 import { DndProvider } from 'react-dnd'
@@ -22,9 +22,14 @@ const favicon = require('../favicon.png')
 export interface LayoutProps {
 	location?: { pathname: string }
 	hideSidebar?: boolean
+	children?: ReactNode
 }
 
-const touchBackendOptions = { delay: 5 }
+const touchBackendOptions: Partial<TouchBackendOptions> = {
+	delay: 5,
+	enableMouseEvents: true,
+	enableTouchEvents: true,
+}
 const HEADER_META = [
 	{ name: 'description', content: 'Drag and Drop for React' },
 	{ name: 'keywords', content: 'react, drag drop, html5' },

@@ -1,8 +1,11 @@
+.yarn/
 **/node_modules/
-**/lib/
 **/dist/
+**/lib/
+**/build/
 **/public/
 **/static/
-packages/documentation/cra-test/build/
+**/.cache/
+**/coverage/
 .pnp.js
-.yarn/
+.pnp.cjs

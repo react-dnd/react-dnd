@@ -113,7 +113,7 @@ export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 	 */
 	drop?: (
 		item: DragObject,
-		monitor: DropTargetMonitor,
+		monitor: DropTargetMonitor<DragObject, DropResult>,
 	) => DropResult | undefined
 
 	/**
@@ -122,17 +122,25 @@ export interface DropTargetHookSpec<DragObject, DropResult, CollectedProps> {
 	 * the hover happens over just the current target, or over a nested one. Unlike drop(), this method will be called even
 	 * if canDrop() is defined and returns false. You can check monitor.canDrop() to test whether this is the case.
 	 */
-	hover?: (item: DragObject, monitor: DropTargetMonitor) => void
+	hover?: (
+		item: DragObject,
+		monitor: DropTargetMonitor<DragObject, DropResult>,
+	) => void
 
 	/**
 	 * Optional. Use it to specify whether the drop target is able to accept the item. If you want to always allow it, just
 	 * omit this method. Specifying it is handy if you'd like to disable dropping based on some predicate over props or
 	 * monitor.getItem(). Note: You may not call monitor.canDrop() inside this method.
 	 */
-	canDrop?: (item: DragObject, monitor: DropTargetMonitor) => boolean
+	canDrop?: (
+		item: DragObject,
+		monitor: DropTargetMonitor<DragObject, DropResult>,
+	) => boolean
 
 	/**
 	 * A function to collect rendering properties
 	 */
-	collect?: (monitor: DropTargetMonitor) => CollectedProps
+	collect?: (
+		monitor: DropTargetMonitor<DragObject, DropResult>,
+	) => CollectedProps
 }
