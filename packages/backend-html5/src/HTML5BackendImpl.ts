@@ -146,7 +146,9 @@ export class HTML5BackendImpl implements Backend {
 		const handleDragStart = (e: any) => this.handleDragStart(e, sourceId)
 		const handleSelectStart = (e: any) => this.handleSelectStart(e)
 
-		node.setAttribute('draggable', this.monitor.canDragSource(sourceId))
+		if (this.monitor.canDragSource(sourceId)) {
+			node.setAttribute('draggable', 'true')
+		}
 		node.addEventListener('dragstart', handleDragStart)
 		node.addEventListener('selectstart', handleSelectStart)
 
