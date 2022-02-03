@@ -17,16 +17,16 @@ export const TargetBox = (props) => {
             }
         },
         canDrop(item) {
-            console.log('canDrop', item.files[0], item.items[0]);
+            console.log('canDrop', item.files, item.items);
             return true;
         },
         hover(item) {
-            console.log('hover', item.files[0], item.items[0]);
+            console.log('hover', item.files, item.items);
         },
         collect: (monitor) => {
             const item = monitor.getItem();
             if (item) {
-                console.log('collect', item.files[0], item.items[0]);
+                console.log('collect', item.files, item.items);
             }
             return {
                 isOver: monitor.isOver(),
