@@ -2,12 +2,9 @@
   "name": "react-dnd",
   "version": "14.0.5",
   "description": "Drag and Drop for React",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
-    "types": "dist/types/index.d.ts"
-  },
+  "type": "module",
+  "exports": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -15,8 +12,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "clean": "shx rm -rf dist/ lib/",
-    "build": "dndbuild"
+    "clean": "shx rm -rf lib/",
+    "build": "tsc -b . && swc src -d lib"
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
@@ -26,7 +23,8 @@
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@react-dnd/build": "workspace:packages/build",
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.135",
     "@testing-library/react": "^12.1.2",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/node": "^14.17.19",

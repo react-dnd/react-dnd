@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
-    "lib": ["ESNext", "DOM"]
+    "baseUrl": "./src",
+    "outDir": "lib",
+    "emitDeclarationOnly": true
   },
   "include": ["./src/index.ts"]
 }

@@ -2,12 +2,9 @@
   "name": "react-dnd-html5-backend",
   "version": "14.1.0",
   "description": "HTML5 backend for React DnD",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
-    "types": "dist/types/index.d.ts"
-  },
+  "type": "module",
+  "exports": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
   "repository": {
@@ -15,14 +12,13 @@
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "scripts": {
-    "clean": "shx rm -rf dist/ lib/",
-    "build": "dndbuild"
+    "clean": "shx rm -rf lib/",
+    "build": "tsc -b . && swc src -d lib"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core"
   },
   "devDependencies": {
-    "@react-dnd/build": "workspace:packages/build",
     "@swc/cli": "^0.1.55",
     "@swc/core": "^1.2.135",
     "shx": "^0.3.4",
