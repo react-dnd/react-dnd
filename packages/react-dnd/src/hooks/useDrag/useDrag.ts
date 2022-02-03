@@ -13,7 +13,11 @@ import { invariant } from '@react-dnd/invariant'
  * @param sourceSpec The drag source specification (object or function, function preferred)
  * @param deps The memoization deps array to use when evaluating spec changes
  */
-export function useDrag<DragObject, DropResult, CollectedProps>(
+export function useDrag<
+	DragObject = unknown,
+	DropResult = unknown,
+	CollectedProps = unknown,
+>(
 	specArg: FactoryOrInstance<
 		DragSourceHookSpec<DragObject, DropResult, CollectedProps>
 	>,

@@ -1,7 +1,7 @@
 import { FC, useRef } from 'react'
-import { useDrag, useDrop, DropTargetMonitor } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
-import { XYCoord } from 'dnd-core'
+import { XYCoord, Identifier } from 'dnd-core'
 
 const style = {
 	border: '1px dashed gray',
@@ -26,14 +26,18 @@ interface DragItem {
 
 export const Card: FC<CardProps> = ({ id, text, index, moveCard }) => {
 	const ref = useRef<HTMLDivElement>(null)
-	const [{ handlerId }, drop] = useDrop({
+	const [{ handlerId }, drop] = useDrop<
+		DragItem,
+		void,
+		{ handlerId: Identifier | null }
+	>({
 		accept: ItemTypes.CARD,
 		collect(monitor) {
 			return {
 				handlerId: monitor.getHandlerId(),
 			}
 		},
-		hover(item: DragItem, monitor: DropTargetMonitor) {
+		hover(item: DragItem, monitor) {
 			if (!ref.current) {
 				return
 			}
