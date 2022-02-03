@@ -2,7 +2,6 @@ import { useDrag } from '../useDrag'
 import { DndProvider } from '../../core'
 import { TestBackend } from 'react-dnd-test-backend'
 import { render, cleanup } from '@testing-library/react'
-import { nextTick } from 'process'
 
 describe('The useDrag hook', () => {
 	afterEach(cleanup)
