@@ -1,6 +1,24 @@
 module.exports = {
 	rootDir: __dirname,
 	testEnvironment: 'jsdom',
+	transform: {
+		'^.+\\.(t|j)sx?$': [
+			require.resolve('@swc/jest'),
+			{
+				sourceMaps: true,
+				jsc: {
+					target: 'es2017',
+					parser: {
+						syntax: 'typescript',
+						tsx: true,
+					},
+					transform: {
+						react: { runtime: 'automatic', useBuiltins: true },
+					},
+				},
+			},
+		],
+	},
 	setupFilesAfterEnv: ['<rootDir>/jest/setup-testing-library.js'],
 	collectCoverageFrom: [
 		'packages/*/src/**/*.tsx',

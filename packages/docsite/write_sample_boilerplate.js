@@ -267,24 +267,14 @@ function handleTsExample(err, results) {
 }
 // Write JS Examples
 walk_examples(
-	path.join(__dirname, 'static/examples_hooks_js'),
-	'index.js',
-	handleJsExample,
-)
-walk_examples(
-	path.join(__dirname, 'static/examples_decorators_js'),
+	path.join(__dirname, 'static/examples_js'),
 	'index.js',
 	handleJsExample,
 )
 
 // Write TS Examples
 walk_examples(
-	path.join(__dirname, 'static/examples_hooks_ts'),
-	'index.ts',
-	handleTsExample,
-)
-walk_examples(
-	path.join(__dirname, 'static/examples_decorators_ts'),
+	path.join(__dirname, 'static/examples_ts'),
 	'index.ts',
 	handleTsExample,
 )

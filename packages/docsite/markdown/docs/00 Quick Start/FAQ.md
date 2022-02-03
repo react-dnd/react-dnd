@@ -11,7 +11,7 @@ _New to React DnD? [Read the overview](/docs/overview) before jumping into the d
 
 ## Usage
 
-### Where do I get the pre-compiled version?
+### How can I install React DnD?
 
 ```
 npm install --save react-dnd
@@ -33,27 +33,17 @@ By default, you can't constrain the drag preview movement because the drag previ
 
 ### How do I register a drag source or a drop target when the type depends on props?
 
-Both [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-target) let you pass a function as the first parameter instead of a string or a symbol. If you pass a function, it will be given the current props, and it should return a string, a symbol, or (for drop targets only) an array of either.
+Both [`useDrag`](/docs/api/useDrag) and [`useDrop`](/docs/api/useDrop) can accept a type argument. This can be changed depending on your prop value, similar to how the `useMemo()` React built-in hook works.
 
 ### How do I combine several drag sources and drop targets in a single component?
 
-Because [`DragSource`](/docs/api/drag-source) and [`DropTarget`](/docs/api/drop-target) use the partial application, you may compose them using a functional composition helper such as [`_.flow`](https://lodash.com/docs#flow). With decorators, you can stack the decorators to achieve the same effect.
+Both [`useDrag`](/docs/api/useDrag) and [`useDrop`](/docs/api/useDrop) return functions that may be chained against within a node's ref function. For example:
 
-### Why is the `component` parameter always `null` in the `beginDrag`/`endDrag`/`drop`/`hover` methods?
+```js
+const [, drag] = useDrag(...args)
+const [, drop] = useDrop(...args)
 
-When using [function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions), refs cannot normally be attached. However, if you use [React.forwardRef](https://reactjs.org/docs/forwarding-refs.html), then you can access the rendered component. If your component exposes an imperative API via the [useImperativeHandle hook](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), then you can expose functionality that way.
-
-If you use a tool like [babel-react-optimize](https://github.com/jamiebuilds/babel-react-optimize#transform-react-pure-class-to-function) preset or [babel-plugin-transform-react-pure-class-to-function](https://github.com/jamiebuilds/babel-react-optimize/tree/master/packages/babel-plugin-transform-react-pure-class-to-function), then be aware that your class definition may implicitly be transformed into a function component, which may result in a null argument.
-
-```jsx
-import { DragSource } from 'react-dnd'
-import flow from 'lodash/flow'
-
-class YourComponent {
-  /* ... */
-}
-
-export default flow(DragSource(/* ... */), DropTarget(/* ... */))(YourComponent)
+return <div ref={(node) => drag(drop(node))}></div>
 ```
 
 ### How do I register a drop target for the native files?
@@ -61,31 +51,20 @@ export default flow(DragSource(/* ... */), DropTarget(/* ... */))(YourComponent)
 If you are using the [HTML5 backend](/docs/backends/html5), you can register a drop target for one of the `NativeTypes` it exports:
 
 ```jsx
-import React from 'react'
-import { NativeTypes } from 'react-dnd-html5-backend'
-import { DropTarget } from 'react-dnd'
-
-const fileTarget = {
-  drop(props, monitor) {
-    console.log(monitor.getItem().files)
-  }
-}
-
-function FileDropZone({ connectDropTarget, isOver, canDrop }) {
-  return connectDropTarget(
-    <div>
-      {!isOver && !canDrop && 'Drag files from the hard drive'}
-      {!isOver && canDrop && 'Drag the files here'}
-      {isOver && 'Drop the files'}
-    </div>
+export const TargetBox = ({ onDrop }) => {
+  const [, drop] = useDrop(
+    () => ({
+      accept: [NativeTypes.FILE],
+      drop(item) {
+        if (onDrop) {
+          onDrop(item)
+        }
+      }
+    }),
+    [onDrop]
   )
+  return <div ref={drop}>Drop Here</div>
 }
-
-export default DropTarget(NativeTypes.FILE, fileTarget, (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  canDrop: monitor.canDrop()
-}))(FileDropZone)
 ```
 
 ### How do I write a custom backend?

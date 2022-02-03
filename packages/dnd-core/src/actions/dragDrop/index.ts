@@ -1,4 +1,4 @@
-import { DragDropManager, DragDropActions } from '../../interfaces'
+import type { DragDropManager, DragDropActions } from '../../interfaces'
 import { createBeginDrag } from './beginDrag'
 import { createPublishDragSource } from './publishDragSource'
 import { createHover } from './hover'

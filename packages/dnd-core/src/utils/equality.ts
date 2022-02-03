@@ -1,4 +1,4 @@
-import { XYCoord } from '../interfaces'
+import type { XYCoord } from '../interfaces'
 
 export type EqualityCheck<T> = (a: T, b: T) => boolean
 export const strictEquality = <T>(a: T, b: T): boolean => a === b

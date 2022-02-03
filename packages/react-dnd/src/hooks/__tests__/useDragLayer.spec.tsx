@@ -1,8 +1,10 @@
 import { render, cleanup } from '@testing-library/react'
-import { wrapWithBackend, fireDrag } from 'react-dnd-test-utils'
+import { fireDrag } from 'react-dnd-test-utils'
 import { FC } from 'react'
 import { useDrag } from '../useDrag'
 import { useDragLayer } from '../useDragLayer'
+import { DndProvider } from '../..'
+import { TestBackend } from 'react-dnd-test-backend'
 
 const DragLayer: FC = () => {
 	const { isDragging, item } = useDragLayer((monitor) => ({
@@ -42,8 +44,11 @@ describe('useDragLayer()', () => {
 				<DragLayer />
 			</div>
 		)
-		const Wrapped = wrapWithBackend(Example)
-		const rendered = render(<Wrapped />)
+		const rendered = render(
+			<DndProvider backend={TestBackend}>
+				<Example />
+			</DndProvider>,
+		)
 		const box = await rendered.findByRole('box')
 		let dragLayer = rendered.queryByRole('drag-layer')
 		expect(box).toBeDefined()
