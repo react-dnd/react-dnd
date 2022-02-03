@@ -37,17 +37,16 @@ export const Container = () => {
             },
         ]);
         const moveCard = useCallback((dragIndex, hoverIndex) => {
-            const dragCard = cards[dragIndex];
-            setCards(update(cards, {
+            setCards((prevCards) => update(prevCards, {
                 $splice: [
                     [dragIndex, 1],
-                    [hoverIndex, 0, dragCard],
+                    [hoverIndex, 0, prevCards[dragIndex]],
                 ],
             }));
-        }, [cards]);
-        const renderCard = (card, index) => {
+        }, []);
+        const renderCard = useCallback((card, index) => {
             return (<Card key={card.id} index={index} id={card.id} text={card.text} moveCard={moveCard}/>);
-        };
+        }, []);
         return (<>
 				<div style={style}>{cards.map((card, i) => renderCard(card, i))}</div>
 			</>);
