@@ -16,10 +16,23 @@ export const TargetBox = (props) => {
                 onDrop(item);
             }
         },
-        collect: (monitor) => ({
-            isOver: monitor.isOver(),
-            canDrop: monitor.canDrop(),
-        }),
+        canDrop(item) {
+            console.log('canDrop', item.files[0], item.items[0]);
+            return true;
+        },
+        hover(item) {
+            console.log('hover', item.files[0], item.items[0]);
+        },
+        collect: (monitor) => {
+            const item = monitor.getItem();
+            if (item) {
+                console.log('collect', item.files[0], item.items[0]);
+            }
+            return {
+                isOver: monitor.isOver(),
+                canDrop: monitor.canDrop(),
+            };
+        },
     }), [props]);
     const isActive = canDrop && isOver;
     return (<div ref={drop} style={style}>
