@@ -7,10 +7,8 @@ tsconfig.tsbuildinfo
 # Docsite Artifacts
 packages/docsite/public
 packages/docsite/.cache
-packages/docsite/static/examples_hooks_js
-packages/docsite/static/examples_hooks_ts
-packages/docsite/static/examples_decorators_js
-packages/docsite/static/examples_decorators_ts
+packages/docsite/static/examples_js
+packages/docsite/static/examples_ts
 
 __site__
 __site_prerender__
