@@ -1,3 +1,5 @@
-src
 tsconfig.json
 *.tsbuildinfo
+__tests__
+.swcrc
+.swc
