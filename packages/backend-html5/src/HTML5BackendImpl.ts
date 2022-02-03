@@ -205,7 +205,11 @@ export class HTML5BackendImpl implements Backend {
 			true,
 		)
 		target.addEventListener('dragover', this.handleTopDragOver as EventListener)
-		target.addEventListener('dragover', this.handleTopDragOverCapture as EventListener, true)
+		target.addEventListener(
+			'dragover',
+			this.handleTopDragOverCapture as EventListener,
+			true,
+		)
 		target.addEventListener('drop', this.handleTopDrop as EventListener)
 		target.addEventListener(
 			'drop',
@@ -244,7 +248,11 @@ export class HTML5BackendImpl implements Backend {
 			'dragover',
 			this.handleTopDragOver as EventListener,
 		)
-		target.removeEventListener('dragover', this.handleTopDragOverCapture as EventListener, true)
+		target.removeEventListener(
+			'dragover',
+			this.handleTopDragOverCapture as EventListener,
+			true,
+		)
 		target.removeEventListener('drop', this.handleTopDrop as EventListener)
 		target.removeEventListener(
 			'drop',
