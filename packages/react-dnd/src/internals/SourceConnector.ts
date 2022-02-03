@@ -97,7 +97,7 @@ export class SourceConnector implements Connector {
 		this.reconnectDragPreview(didChange)
 	}
 
-	private reconnectDragSource() {
+	private reconnectDragSource(): boolean {
 		const dragSource = this.dragSource
 		// if nothing has changed then don't resubscribe
 		const didChange =
@@ -130,7 +130,7 @@ export class SourceConnector implements Connector {
 		return didChange
 	}
 
-	private reconnectDragPreview(forceDidChange : boolean) {
+	private reconnectDragPreview(forceDidChange: boolean): void {
 		const dragPreview = this.dragPreview
 		// if nothing has changed then don't resubscribe
 		const didChange =

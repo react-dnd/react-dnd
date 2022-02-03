@@ -1,4 +1,4 @@
-import { Store } from 'redux'
+import type { Store } from 'redux'
 import { invariant } from '@react-dnd/invariant'
 import {
 	addSource,
@@ -7,7 +7,7 @@ import {
 	removeTarget,
 } from '../actions/registry'
 import { getNextUniqueId } from '../utils/getNextUniqueId'
-import { State } from '../reducers'
+import type { State } from '../reducers'
 import {
 	DragSource,
 	DropTarget,

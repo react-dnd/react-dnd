@@ -109,8 +109,6 @@ Now you should have an understanding of the various moving pieces of React DnD:
 - Collector functions for turning monitor output into consumable props
 - Connectors for attaching the DnD state machine to view nodes (e.g. DOM elements)
 
-Now let's talk about how these pieces come together in your components. You have two options: a modern hooks-based API and the classic Decorators-based API.
-
 ### Hooks
 
 Modern React applications have replaced the Higher-Order-Component pattern with hooks. Hooks are a feature of React, introduced in 16.8, that allow for developers to write stateful function components. They are also fantastic for managing stateful components, and also for interacting with external stateful systems (\***cough**\* like a Drag-and-Drop engine \***cough**\*).
@@ -121,9 +119,7 @@ React-DnD provides hooks that connect your components to the DnD engine, and all
 
 For an overview of the hooks-based API, refer to the [Hooks Overview](/docs/api/hooks-overview) page.
 
-### Higher-Order Components and Decorators
-
 ### Conclusion
 
 Now you know enough about React DnD to explore the rest of the documentation!  
-The [hooks overview](/docs/api/hooks-overview) and [decorators overview](/docs/api/decorators-overview) documentation pages are great places to start. Or jump straight into the [tutorial app](/docs/tutorial) and build a chess game!
+The [hooks overview](/docs/api/hooks-overview) documentation page is great places to start. Or jump straight into the [tutorial app](/docs/tutorial) and build a chess game!

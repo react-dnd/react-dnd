@@ -2,12 +2,9 @@
   "name": "react-dnd-test-utils",
   "version": "14.1.0",
   "license": "MIT",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
-    "types": "dist/types/index.d.ts"
-  },
+  "type": "module",
+  "exports": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git",
@@ -15,23 +12,24 @@
   },
   "sideEffects": false,
   "scripts": {
-    "clean": "gulp clean",
-    "build": "gulp build",
-    "watch": "gulp watch"
+    "clean": "shx rm -rf lib/",
+    "build": "tsc -b . && swc src -d lib"
   },
   "devDependencies": {
-    "@react-dnd/build": "workspace:packages/build",
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.135",
     "@testing-library/react": "^12.1.2",
     "@types/node": "^14.17.19",
-    "@types/react": "^17.0.24",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "dnd-core": "workspace:packages/dnd-core",
-    "gulp": "^4.0.2",
     "react": "^17.0.2",
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-html5-backend": "workspace:packages/backend-html5",
     "react-dnd-test-backend": "workspace:packages/backend-test",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "shx": "^0.3.4",
+    "typescript": "^4.5.5"
   },
   "peerDependencies": {
     "@testing-library/react": ">= 11",

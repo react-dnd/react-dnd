@@ -3,18 +3,13 @@
   "version": "14.0.1",
   "description": "Drag and drop sans the GUI",
   "license": "MIT",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main:bundle": "dist/esm/index.js",
-    "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
-    "types": "dist/types/index.d.ts"
-  },
+  "type": "module",
+  "exports": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "gulp build",
-    "clean": "gulp clean",
-    "watch": "gulp watch"
+    "build": "tsc -b . && swc src -d lib",
+    "clean": "shx rm -rf dist/ lib/"
   },
   "repository": {
     "type": "git",
@@ -26,10 +21,12 @@
     "redux": "^4.1.1"
   },
   "devDependencies": {
-    "@react-dnd/build": "workspace:packages/build",
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.135",
     "@types/setimmediate": "^1.0.2",
-    "gulp": "^4.0.2",
     "react-dnd-test-backend": "portal:../backend-test",
-    "setimmediate": "^1.0.5"
+    "setimmediate": "^1.0.5",
+    "shx": "^0.3.4",
+    "typescript": "^4.5.5"
   }
 }

@@ -40,10 +40,9 @@
     "clean:": "yarn workspaces foreach --exclude @react-dnd/build -pv run clean",
     "build:": "yarn workspaces foreach -pv --topological-dev run build",
     "test:": "yarn workspaces foreach -pv run test",
-    "watch:": "yarn workspaces foreach -pvi run watch",
-    "release:": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude '@react-dnd/build' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples-hooks' --exclude 'react-dnd-examples-decorators' -pv npm publish --tolerate-republish",
+    "release:": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude '@react-dnd/build' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples' -pv npm publish --tolerate-republish",
     "lint:": "run-s 'lint:*'",
-    "test:unit": "jest --coverage",
+    "jest:": "jest --coverage",
     "lint:code": "eslint . --ext .js,.ts,.jsx,.tsx",
     "lint:spelling": "mdspell 'packages/documentation/docsite/markdown/**/*.md' --en-us --report",
     "lint:tone": "alex .",
@@ -51,7 +50,7 @@
     "build_docsite": "yarn build:docsite",
     "format:": "prettier --write \"**/*.(ts|tsx|js|json|md)\"",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
-    "ci": "run-s build: test: lint: test:unit build_docsite git-is-clean",
+    "ci": "run-s build: test: lint: jest: build_docsite git-is-clean",
     "precommit": "lint-staged",
     "git-is-clean": "git status && git diff-index HEAD"
   },
@@ -59,21 +58,19 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6",
-    "@babel/preset-react": "^7.14.5",
-    "@babel/preset-typescript": "^7.15.0",
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
+    "@swc/core": "^1.2.136",
+    "@swc/jest": "^0.2.17",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^27.0.3",
     "@types/node": "^14.17.19",
-    "@types/react": "^17.0.24",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "@types/testing-library__jest-dom": "^5.14.1",
-    "@typescript-eslint/eslint-plugin": "^4.31.2",
-    "@typescript-eslint/parser": "^4.31.2",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
     "alex": "^9.1.0",
     "conventional-changelog-cli": "^2.1.1",
     "eslint": "^7.32.0",
@@ -85,7 +82,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^7.0.2",
     "inquirer": "^7.3.3",
-    "jest": "~27.4.5",
+    "jest": "~27.4.7",
     "lint-staged": "^11.1.2",
     "markdown-spellcheck": "^1.3.1",
     "npm-run-all": "^4.1.5",
@@ -95,12 +92,11 @@
     "react-dnd-test-backend": "workspace:packages/backend-test",
     "react-dnd-test-utils": "workspace:packages/test-utils",
     "react-dnd-touch-backend": "workspace:packages/backend-touch",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.4.3"
+    "typescript": "^4.5.5"
   },
   "resolutions": {
     "@types/react": "17.0.17",
     "@types/react-dom": "17.0.9"
   },
-  "packageManager": "yarn@3.0.2"
+  "packageManager": "yarn@3.1.1"
 }

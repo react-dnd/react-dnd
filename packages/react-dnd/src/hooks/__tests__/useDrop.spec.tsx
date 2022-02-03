@@ -1,6 +1,7 @@
 import { useDrop } from '../useDrop'
-import { wrapWithBackend } from 'react-dnd-test-utils'
 import { render, cleanup } from '@testing-library/react'
+import { DndProvider } from '../..'
+import { TestBackend } from 'react-dnd-test-backend'
 
 describe('The useDrop hook', () => {
 	afterEach(cleanup)
@@ -30,26 +31,35 @@ describe('The useDrop hook', () => {
 			}))
 			return <div ref={drag} />
 		}
-		const Wrapped = wrapWithBackend(Component)
 
 		const err = console.error
 		try {
 			const errorMock = jest.fn()
 			console.error = errorMock
-			expect(() => render(<Wrapped />)).toThrow(/accept must be defined/)
+			expect(() =>
+				render(
+					<DndProvider backend={TestBackend}>
+						<Component></Component>
+					</DndProvider>,
+				),
+			).toThrow(/accept must be defined/)
 		} finally {
 			console.error = err
 		}
 	})
 
 	it('can be used inside of a React-DnD context', async () => {
-		const Wrapped = wrapWithBackend(function Component() {
+		const Component = function Component() {
 			const [, drag] = useDrop(() => ({
 				accept: 'box',
 			}))
 			return <div ref={drag} role="root" />
-		})
-		const result = render(<Wrapped />)
+		}
+		const result = render(
+			<DndProvider backend={TestBackend}>
+				<Component></Component>
+			</DndProvider>,
+		)
 		const root = await result.findByRole('root')
 		expect(root).toBeDefined()
 	})

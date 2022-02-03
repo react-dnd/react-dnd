@@ -4,7 +4,7 @@ import {
 	REMOVE_SOURCE,
 	REMOVE_TARGET,
 } from '../actions/registry'
-import { Action } from '../interfaces'
+import type { Action } from '../interfaces'
 
 export type State = number
 
