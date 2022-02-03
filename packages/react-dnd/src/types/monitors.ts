@@ -158,7 +158,7 @@ export interface DropTargetMonitor<DragObject = unknown, DropResult = unknown>
 	getSourceClientOffset(): XYCoord | null
 }
 
-export interface DragLayerMonitor {
+export interface DragLayerMonitor<DragObject = unknown> {
 	/**
 	 * Returns true if a drag operation is in progress. Returns false otherwise.
 	 */
@@ -175,7 +175,7 @@ export interface DragLayerMonitor {
 	 * Every drag source must specify it by returning an object from its beginDrag() method.
 	 * Returns null if no item is being dragged.
 	 */
-	getItem(): any
+	getItem<T = DragObject>(): T
 
 	/**
 	 * Returns the { x, y } client offset of the pointer at the time when the current drag operation has started.

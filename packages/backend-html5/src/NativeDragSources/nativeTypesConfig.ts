@@ -22,12 +22,15 @@ export const nativeTypesConfig: {
 				Array.prototype.slice.call(dataTransfer.files),
 			items: (dataTransfer: DataTransfer): DataTransferItemList =>
 				dataTransfer.items,
+			dataTransfer: (dataTransfer: DataTransfer): DataTransfer => dataTransfer,
 		},
 		matchesTypes: ['Files'],
 	},
 	[NativeTypes.HTML]: {
 		exposeProperties: {
-			html: (dataTransfer: DataTransfer, matchesTypes: string[]): string => getDataFromDataTransfer(dataTransfer, matchesTypes, ''),
+			html: (dataTransfer: DataTransfer, matchesTypes: string[]): string =>
+				getDataFromDataTransfer(dataTransfer, matchesTypes, ''),
+			dataTransfer: (dataTransfer: DataTransfer): DataTransfer => dataTransfer,
 		},
 		matchesTypes: ['Html', 'text/html'],
 	},
@@ -35,6 +38,7 @@ export const nativeTypesConfig: {
 		exposeProperties: {
 			urls: (dataTransfer: DataTransfer, matchesTypes: string[]): string[] =>
 				getDataFromDataTransfer(dataTransfer, matchesTypes, '').split('\n'),
+			dataTransfer: (dataTransfer: DataTransfer): DataTransfer => dataTransfer,
 		},
 		matchesTypes: ['Url', 'text/uri-list'],
 	},
@@ -42,6 +46,7 @@ export const nativeTypesConfig: {
 		exposeProperties: {
 			text: (dataTransfer: DataTransfer, matchesTypes: string[]): string =>
 				getDataFromDataTransfer(dataTransfer, matchesTypes, ''),
+			dataTransfer: (dataTransfer: DataTransfer): DataTransfer => dataTransfer,
 		},
 		matchesTypes: ['Text', 'text/plain'],
 	},

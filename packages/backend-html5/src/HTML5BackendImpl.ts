@@ -52,6 +52,9 @@ export class HTML5BackendImpl implements Backend {
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
 
+	private lastClientOffset: XYCoord | null = null
+	private hoverRafId: number | null = null
+
 	public constructor(
 		manager: DragDropManager,
 		globalContext?: HTML5BackendContext,
@@ -323,7 +326,7 @@ export class HTML5BackendImpl implements Backend {
 			node &&
 				this.document &&
 				this.document.body &&
-				document.body.contains(node),
+				this.document.body.contains(node),
 		)
 	}
 
@@ -360,13 +363,13 @@ export class HTML5BackendImpl implements Backend {
 		//   * https://github.com/react-dnd/react-dnd/pull/928
 		//   * https://github.com/react-dnd/react-dnd/issues/869
 		//
-		this.mouseMoveTimeoutTimer = (setTimeout(() => {
+		this.mouseMoveTimeoutTimer = setTimeout(() => {
 			return this.rootElement?.addEventListener(
 				'mousemove',
 				this.endDragIfSourceWasRemovedFromDOM,
 				true,
 			)
-		}, MOUSE_MOVE_TIMEOUT) as any) as number
+		}, MOUSE_MOVE_TIMEOUT) as any as number
 	}
 
 	private clearCurrentDragSourceNode() {
@@ -440,12 +443,8 @@ export class HTML5BackendImpl implements Backend {
 				const dragPreview = this.sourcePreviewNodes.get(sourceId) || sourceNode
 
 				if (dragPreview) {
-					const {
-						anchorX,
-						anchorY,
-						offsetX,
-						offsetY,
-					} = this.getCurrentSourcePreviewNodeOptions()
+					const { anchorX, anchorY, offsetX, offsetY } =
+						this.getCurrentSourcePreviewNodeOptions()
 					const anchorPoint = { anchorX, anchorY }
 					const offsetPoint = { offsetX, offsetY }
 					const dragPreviewOffset = getDragPreviewOffset(
@@ -613,10 +612,22 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		this.altKeyPressed = e.altKey
+		this.lastClientOffset = getEventClientOffset(e)
 
-		this.actions.hover(dragOverTargetIds || [], {
-			clientOffset: getEventClientOffset(e),
-		})
+		if (
+			this.hoverRafId === null &&
+			typeof requestAnimationFrame !== 'undefined'
+		) {
+			this.hoverRafId = requestAnimationFrame(() => {
+				if (this.monitor.isDragging()) {
+					this.actions.hover(dragOverTargetIds || [], {
+						clientOffset: this.lastClientOffset,
+					})
+				}
+
+				this.hoverRafId = null
+			})
+		}
 
 		const canDrop = (dragOverTargetIds || []).some((targetId) =>
 			this.monitor.canDropOnTarget(targetId),
@@ -661,6 +672,12 @@ export class HTML5BackendImpl implements Backend {
 		if (this.isDraggingNativeItem()) {
 			e.preventDefault()
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
+		} else if (matchNativeItemType(e.dataTransfer)) {
+			// Dragging some elements, like <a> and <img> may still behave like a native drag event,
+			// even if the current drag event matches a user-defined type.
+			// Stop the default behavior when we're not expecting a native item to be dropped.
+
+			e.preventDefault()
 		}
 
 		this.enterLeaveCounter.reset()

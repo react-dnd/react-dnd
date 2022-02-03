@@ -33,34 +33,6 @@ If you have this error in a test, [read the testing guide](/docs/testing) for in
 
 This problem may also appear if you have a duplicate React installation in your Browserify or Webpack build. [This article](https://medium.com/@dan_abramov/two-weird-tricks-that-fix-react-7cf9bbdef375) explains both the problem and the solution to it.
 
-### React DnD does not provide a default export
-
-React DnD does not provide a [default export](http://www.2ality.com/2014/09/es6-modules-final.html).
-Mind the difference:
-
-```jsx
-// Wrong:
-import DragSource from 'react-dnd'
-
-// Correct:
-import { DragSource } from 'react-dnd'
-```
-
-### You seem to be applying the arguments in the wrong order
-
-For the [`DragSource`](/docs/api/drag-source), [`DropTarget`](/docs/api/drop-target), [`DragLayer`](/docs/api/drag-layer), and the [`DragDropContext`](/docs/api/drag-drop-context), it is important that you first pass them the configuration arguments, and _then_ inject your React component in a second call.
-
-```jsx
-// Wrong:
-export default DragSource(YourComponent)(/* ... */)
-export default DragSource(YourComponent /* ... */)
-
-// Correct:
-export default DragSource(/* ... */)(YourComponent)
-```
-
-Remember, **the component comes last!**
-
 ### You want to inspect what's happening internally with Redux.
 
 You can enable [Redux DevTools](https://github.com/reduxjs/redux-devtools) by adding a `debugMode` prop to your [provider](/docs/api/dnd-provider), with the value of `true`.

@@ -5,7 +5,7 @@ import {
 	END_DRAG,
 	DROP,
 } from '../actions/dragDrop'
-import { XYCoord, Action } from '../interfaces'
+import type { XYCoord, Action } from '../interfaces'
 import { areCoordsEqual } from '../utils/equality'
 
 export interface State {

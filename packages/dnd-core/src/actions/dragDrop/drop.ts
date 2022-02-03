@@ -1,5 +1,5 @@
 import { invariant } from '@react-dnd/invariant'
-import {
+import type {
 	Action,
 	DragDropManager,
 	DropPayload,
