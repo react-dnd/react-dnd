@@ -36,7 +36,7 @@ export function isObject(input: any): boolean {
 }
 
 /**
- * repalcement for _.xor
+ * replacement for _.xor
  * @param itemsA
  * @param itemsB
  */

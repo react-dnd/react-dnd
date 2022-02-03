@@ -27,7 +27,7 @@ export async function fireDrag(source: Element) {
 	})
 }
 
-export async function fireReleaseDrag(source: Element) {
+export async function fireReleaseDrag() {
 	await act(async () => {
 		fireEvent.drop(window)
 		await tick()
