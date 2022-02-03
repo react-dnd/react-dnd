@@ -1,6 +1,8 @@
 import { useDrag } from '../useDrag'
-import { wrapWithBackend } from 'react-dnd-test-utils'
+import { DndProvider } from '../../core'
+import { TestBackend } from 'react-dnd-test-backend'
 import { render, cleanup } from '@testing-library/react'
+import { nextTick } from 'process'
 
 describe('The useDrag hook', () => {
 	afterEach(cleanup)
@@ -33,13 +35,17 @@ describe('The useDrag hook', () => {
 			} as any)
 			return <div ref={drag} />
 		}
-		const Wrapped = wrapWithBackend(Component)
-
 		const err = console.error
 		try {
 			const errorMock = jest.fn()
 			console.error = errorMock
-			expect(() => render(<Wrapped />)).toThrow(
+			expect(() =>
+				render(
+					<DndProvider backend={TestBackend}>
+						<Component />
+					</DndProvider>,
+				),
+			).toThrow(
 				'useDrag::spec.begin was deprecated in v14. Replace spec.begin() with spec.item(). (see more here - https://react-dnd.github.io/react-dnd/docs/api/use-drag)',
 			)
 		} finally {
@@ -54,27 +60,36 @@ describe('The useDrag hook', () => {
 			})
 			return <div ref={drag} />
 		}
-		const Wrapped = wrapWithBackend(Component)
 
 		const err = console.error
 		try {
 			const errorMock = jest.fn()
 			console.error = errorMock
-			expect(() => render(<Wrapped />)).toThrow(/spec.type must be defined/)
+			expect(() =>
+				render(
+					<DndProvider backend={TestBackend}>
+						<Component />
+					</DndProvider>,
+				),
+			).toThrow(/spec.type must be defined/)
 		} finally {
 			console.error = err
 		}
 	})
 
 	it('can be used inside of a React-DnD context', async () => {
-		const Wrapped = wrapWithBackend(function Component() {
+		const TestCase = function Component() {
 			const [, drag] = useDrag({
 				type: 'box',
 			})
 			return <div ref={drag} role="root" />
-		})
-		const result = render(<Wrapped />)
+		}
+		const result = render(
+			<DndProvider backend={TestBackend}>
+				<TestCase />
+			</DndProvider>,
+		)
 		const root = await result.findByRole('root')
-		expect(root.draggable).toBeTruthy()
+		expect(root).toBeDefined()
 	})
 })

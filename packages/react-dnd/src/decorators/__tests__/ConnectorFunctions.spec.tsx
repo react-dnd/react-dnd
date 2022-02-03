@@ -1,6 +1,7 @@
 import { render, cleanup } from '@testing-library/react'
-import { wrapWithTestBackend } from 'react-dnd-test-utils'
+import { TestBackend } from 'react-dnd-test-backend'
 import { DropTarget } from '..'
+import { DndProvider } from '../..'
 
 describe('Connectors', () => {
 	afterEach(cleanup)
@@ -21,9 +22,11 @@ describe('Connectors', () => {
 			},
 		)((props: any) => props.drop(<div>test target</div>))
 
-		// Render with the test context that uses the test backend
-		const [WrappedTarget] = wrapWithTestBackend(Target)
-		render(<WrappedTarget x={1} y={2} />)
+		render(
+			<DndProvider backend={TestBackend}>
+				<Target x={1} y={2} />
+			</DndProvider>,
+		)
 
 		expect(connectorFired).toBeTruthy()
 		expect(connectArgs.length).toEqual(3)
