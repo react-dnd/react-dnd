@@ -1,4 +1,4 @@
-import { FC, useEffect, memo } from 'react'
+import { FC, useEffect, memo, ReactNode } from 'react'
 import {
 	BackendFactory,
 	DragDropManager,
@@ -8,10 +8,12 @@ import { DndContext } from './DndContext'
 
 export type DndProviderProps<BackendContext, BackendOptions> =
 	| {
+			children?: ReactNode
 			manager: DragDropManager
 	  }
 	| {
 			backend: BackendFactory
+			children?: ReactNode
 			context?: BackendContext
 			options?: BackendOptions
 			debugMode?: boolean

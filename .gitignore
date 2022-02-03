@@ -1,14 +1,14 @@
 node_modules/
 packages/*/dist
 packages/*/lib
+.swc/
+tsconfig.tsbuildinfo
 
 # Docsite Artifacts
 packages/docsite/public
 packages/docsite/.cache
-packages/docsite/static/examples_hooks_js
-packages/docsite/static/examples_hooks_ts
-packages/docsite/static/examples_decorators_js
-packages/docsite/static/examples_decorators_ts
+packages/docsite/static/examples_js
+packages/docsite/static/examples_ts
 
 __site__
 __site_prerender__
@@ -26,9 +26,10 @@ test-results.xml
 
 # Yarn v2
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
+.pnp.*
 .yarn/*
-!.yarn/releases
+!.yarn/patches
 !.yarn/plugins
+!.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-!.yarn/cache

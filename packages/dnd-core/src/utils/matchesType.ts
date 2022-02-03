@@ -1,4 +1,4 @@
-import { Identifier } from '../interfaces'
+import type { Identifier } from '../interfaces'
 
 export function matchesType(
 	targetType: Identifier | Identifier[] | null,

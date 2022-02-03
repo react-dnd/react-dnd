@@ -1,8 +1,10 @@
-import { render } from '@testing-library/react'
-import { wrapWithBackend, fireDrag } from 'react-dnd-test-utils'
+import { render, cleanup } from '@testing-library/react'
+import { fireDrag } from 'react-dnd-test-utils'
 import { FC } from 'react'
 import { useDrag } from '../useDrag'
 import { useDragLayer } from '../useDragLayer'
+import { DndProvider } from '../..'
+import { TestBackend } from 'react-dnd-test-backend'
 
 const DragLayer: FC = () => {
 	const { isDragging, item } = useDragLayer((monitor) => ({
@@ -33,6 +35,8 @@ const Box: FC = () => {
 }
 
 describe('useDragLayer()', () => {
+	afterEach(cleanup)
+
 	it('can be used to retrieve information from the dnd monitor', async () => {
 		const Example = () => (
 			<div>
@@ -40,8 +44,11 @@ describe('useDragLayer()', () => {
 				<DragLayer />
 			</div>
 		)
-		const Wrapped = wrapWithBackend(Example)
-		const rendered = render(<Wrapped />)
+		const rendered = render(
+			<DndProvider backend={TestBackend}>
+				<Example />
+			</DndProvider>,
+		)
 		const box = await rendered.findByRole('box')
 		let dragLayer = rendered.queryByRole('drag-layer')
 		expect(box).toBeDefined()

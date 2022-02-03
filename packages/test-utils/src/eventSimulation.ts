@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Identifier } from 'dnd-core'
 import { ITestBackend } from 'react-dnd-test-backend'
-import { DndComponent } from 'react-dnd'
 import { act } from 'react-dom/test-utils'
 
 /**
@@ -65,13 +64,8 @@ export function getHandlerId(provider: HandlerIdProvider): Identifier {
 		return provider
 	} else if (typeof provider === 'function') {
 		return provider() as Identifier
-	} else if (typeof provider?.getHandlerId === 'function') {
-		return provider.getHandlerId()
 	} else {
 		throw new Error('Could not get handlerId from DnD source')
 	}
 }
-export type HandlerIdProvider =
-	| Identifier
-	| DndComponent<any>
-	| (() => Identifier | null)
+export type HandlerIdProvider = () => Identifier | null
