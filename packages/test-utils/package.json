@@ -13,14 +13,20 @@
   "sideEffects": false,
   "scripts": {
     "clean": "shx rm -rf dist/",
-    "build": "tsc -b tsconfig.cjs.json && tsc -b tsconfig.esm.json && tsc -b tsconfig.types.json"
+    "build_types": "tsc -b .",
+    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
+    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
+    "build": "run-s build_types build_esm build_cjs"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.136",
     "@testing-library/react": "^12.1.2",
     "@types/node": "^14.17.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "dnd-core": "workspace:packages/dnd-core",
+    "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-html5-backend": "workspace:packages/backend-html5",
