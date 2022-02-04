@@ -21,7 +21,7 @@ export const Dustbin = ({ greedy, children }) => {
     const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false);
     const [{ isOver, isOverCurrent }, drop] = useDrop(() => ({
         accept: ItemTypes.BOX,
-        drop(item, monitor) {
+        drop(_item, monitor) {
             const didDrop = monitor.didDrop();
             if (didDrop && !greedy) {
                 return;

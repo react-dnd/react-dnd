@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { useState, useCallback } from 'react'
 import { TargetBox } from './TargetBox'
 import { FileList } from './FileList'

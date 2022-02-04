@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Example } from './example'
 import { Profiler } from './Profiler'
 

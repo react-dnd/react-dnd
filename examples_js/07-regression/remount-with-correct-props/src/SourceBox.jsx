@@ -1,13 +1,18 @@
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
-const getStyle = (isDragging) => ({
-    display: 'inline-block',
-    padding: '0.5rem 1rem',
-    cursor: 'pointer',
-    border: '1px dashed gray',
-    backgroundColor: isDragging ? 'red' : undefined,
-    opacity: isDragging ? 0.4 : 1,
-});
+const getStyle = (isDragging) => {
+    const result = {
+        display: 'inline-block',
+        padding: '0.5rem 1rem',
+        cursor: 'pointer',
+        border: '1px dashed gray',
+        opacity: isDragging ? 0.4 : 1,
+    };
+    if (isDragging) {
+        result.backgroundColor = 'red';
+    }
+    return result;
+};
 export const SourceBox = ({ id, onBeginDrag, onEndDrag, }) => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemTypes.BOX,

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { SourceBox } from './SourceBox'
 import { TargetBox } from './TargetBox'
 

@@ -1,6 +1,6 @@
 import { CSSProperties, FC, useEffect, useState } from 'react'
 import { BoardSquare } from './BoardSquare'
-import { Game, Position } from './Game'
+import type { Game, Position } from './Game'
 import { Piece } from './Piece'
 
 export interface BoardProps {
