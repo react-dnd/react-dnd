@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-utils",
-  "version": "15.0.1",
+  "version": "15.0.2",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-backend",
-  "version": "15.0.1",
+  "version": "15.0.2",
   "description": "A mock backend for testing React DnD apps",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
