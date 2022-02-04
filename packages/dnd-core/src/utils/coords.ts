@@ -1,4 +1,4 @@
-import type { State } from '../reducers/dragOffset'
+import type { State } from '../reducers/dragOffset.js'
 import type { XYCoord } from '..'
 
 /**

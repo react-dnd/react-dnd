@@ -4,10 +4,10 @@ import {
 	HOVER,
 	END_DRAG,
 	DROP,
-} from '../actions/dragDrop'
-import { REMOVE_TARGET } from '../actions/registry'
-import type { Identifier, Action } from '../interfaces'
-import { without } from '../utils/js_utils'
+} from '../actions/dragDrop/index.js'
+import { REMOVE_TARGET } from '../actions/registry.js'
+import type { Identifier, Action } from '../interfaces.js'
+import { without } from '../utils/js_utils.js'
 
 export interface State {
 	itemType: Identifier | Identifier[] | null

@@ -1,12 +1,12 @@
 import type { Store } from 'redux'
 import { invariant } from '@react-dnd/invariant'
-import { matchesType } from '../utils/matchesType'
+import { matchesType } from '../utils/matchesType.js'
 import {
 	getSourceClientOffset,
 	getDifferenceFromInitialOffset,
-} from '../utils/coords'
-import { areDirty } from '../utils/dirtiness'
-import type { State } from '../reducers'
+} from '../utils/coords.js'
+import { areDirty } from '../utils/dirtiness.js'
+import type { State } from '../reducers/index.js'
 import type {
 	DragDropMonitor,
 	Listener,
@@ -14,7 +14,7 @@ import type {
 	XYCoord,
 	HandlerRegistry,
 	Identifier,
-} from '../interfaces'
+} from '../interfaces.js'
 
 export class DragDropMonitorImpl implements DragDropMonitor {
 	private store: Store<State>
