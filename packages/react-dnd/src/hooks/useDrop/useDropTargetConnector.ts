@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { TargetConnector } from '../../internals'
-import { DropTargetOptions } from '../../types'
+import type { DropTargetOptions } from '../../types'
 import { useDragDropManager } from '../useDragDropManager'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 

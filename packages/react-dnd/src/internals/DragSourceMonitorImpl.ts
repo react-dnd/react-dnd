@@ -1,4 +1,4 @@
-import {
+import type {
 	DragDropManager,
 	DragDropMonitor,
 	Unsubscribe,
@@ -7,7 +7,7 @@ import {
 	XYCoord,
 } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
-import { DragSourceMonitor } from '../types'
+import type { DragSourceMonitor } from '../types'
 
 let isCallingCanDrag = false
 let isCallingIsDragging = false
@@ -63,7 +63,7 @@ export class DragSourceMonitorImpl implements DragSourceMonitor {
 
 	public subscribeToStateChange(
 		listener: Listener,
-		options?: { handlerIds: Identifier[] | undefined },
+		options?: { handlerIds?: Identifier[] },
 	): Unsubscribe {
 		return this.internalMonitor.subscribeToStateChange(listener, options)
 	}

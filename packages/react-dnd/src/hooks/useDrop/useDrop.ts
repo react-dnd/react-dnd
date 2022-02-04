@@ -1,5 +1,5 @@
-import { ConnectDropTarget } from '../../types'
-import { DropTargetHookSpec, FactoryOrInstance } from '../types'
+import type { ConnectDropTarget } from '../../types'
+import type { DropTargetHookSpec, FactoryOrInstance } from '../types'
 import { useRegisteredDropTarget } from './useRegisteredDropTarget'
 import { useOptionalFactory } from '../useOptionalFactory'
 import { useDropTargetMonitor } from './useDropTargetMonitor'

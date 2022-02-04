@@ -1,5 +1,5 @@
-import { ConnectDragSource, ConnectDragPreview } from '../../types'
-import { DragSourceHookSpec, FactoryOrInstance } from '../types'
+import type { ConnectDragSource, ConnectDragPreview } from '../../types'
+import type { DragSourceHookSpec, FactoryOrInstance } from '../types'
 import { useRegisteredDragSource } from './useRegisteredDragSource'
 import { useOptionalFactory } from '../useOptionalFactory'
 import { useDragSourceMonitor } from './useDragSourceMonitor'

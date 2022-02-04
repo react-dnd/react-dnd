@@ -1,6 +1,6 @@
-import { DropTarget } from 'dnd-core'
-import { DropTargetMonitor } from '../../types'
-import { DropTargetHookSpec } from '../types'
+import type { DropTarget } from 'dnd-core'
+import type { DropTargetMonitor } from '../../types'
+import type { DropTargetHookSpec } from '../types'
 
 export class DropTargetImpl<O, R, P> implements DropTarget {
 	public constructor(
@@ -28,5 +28,6 @@ export class DropTargetImpl<O, R, P> implements DropTarget {
 		if (spec.drop) {
 			return spec.drop(monitor.getItem(), monitor)
 		}
+		return
 	}
 }

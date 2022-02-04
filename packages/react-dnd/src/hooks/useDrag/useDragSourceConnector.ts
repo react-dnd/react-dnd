@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { SourceConnector } from '../../internals'
-import { DragPreviewOptions, DragSourceOptions } from '../../types'
+import type { DragPreviewOptions, DragSourceOptions } from '../../types'
 import { useDragDropManager } from '../useDragDropManager'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 

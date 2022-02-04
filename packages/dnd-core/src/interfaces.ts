@@ -27,7 +27,7 @@ export interface DragDropMonitor {
 	subscribeToStateChange(
 		listener: Listener,
 		options?: {
-			handlerIds: Identifier[] | undefined
+			handlerIds?: Identifier[]
 		},
 	): Unsubscribe
 	subscribeToOffsetChange(listener: Listener): Unsubscribe
