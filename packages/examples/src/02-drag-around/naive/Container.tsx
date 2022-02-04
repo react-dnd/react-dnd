@@ -3,7 +3,7 @@ import { useDrop, XYCoord } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 import { Box } from './Box'
 import update from 'immutability-helper'
-import { DragItem } from './interfaces'
+import type { DragItem } from './interfaces'
 
 const styles: CSSProperties = {
 	width: 300,
@@ -62,7 +62,11 @@ export const Container: FC<ContainerProps> = ({ hideSourceOnDrag }) => {
 	return (
 		<div ref={drop} style={styles}>
 			{Object.keys(boxes).map((key) => {
-				const { left, top, title } = boxes[key]
+				const { left, top, title } = boxes[key] as {
+					top: number
+					left: number
+					title: string
+				}
 				return (
 					<Box
 						key={key}

@@ -4,7 +4,7 @@ import { ItemTypes } from './ItemTypes'
 import { DraggableBox } from './DraggableBox'
 import { snapToGrid as doSnapToGrid } from './snapToGrid'
 import update from 'immutability-helper'
-import { DragItem } from './interfaces'
+import type { DragItem } from './interfaces'
 
 const styles: CSSProperties = {
 	width: 300,
@@ -65,7 +65,11 @@ export const Container: FC<ContainerProps> = ({ snapToGrid }) => {
 	return (
 		<div ref={drop} style={styles}>
 			{Object.keys(boxes).map((key) => (
-				<DraggableBox key={key} id={key} {...boxes[key]} />
+				<DraggableBox
+					key={key}
+					id={key}
+					{...(boxes[key] as { top: number; left: number; title: string })}
+				/>
 			))}
 		</div>
 	)

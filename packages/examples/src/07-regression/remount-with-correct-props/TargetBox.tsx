@@ -1,4 +1,4 @@
-import { FC, CSSProperties } from 'react'
+import type { FC, CSSProperties } from 'react'
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
