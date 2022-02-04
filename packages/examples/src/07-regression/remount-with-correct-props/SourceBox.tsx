@@ -1,15 +1,20 @@
-import { FC, CSSProperties } from 'react'
+import type { FC, CSSProperties } from 'react'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const getStyle = (isDragging: boolean): CSSProperties => ({
-	display: 'inline-block',
-	padding: '0.5rem 1rem',
-	cursor: 'pointer',
-	border: '1px dashed gray',
-	backgroundColor: isDragging ? 'red' : undefined,
-	opacity: isDragging ? 0.4 : 1,
-})
+const getStyle = (isDragging: boolean): CSSProperties => {
+	const result: CSSProperties = {
+		display: 'inline-block',
+		padding: '0.5rem 1rem',
+		cursor: 'pointer',
+		border: '1px dashed gray',
+		opacity: isDragging ? 0.4 : 1,
+	}
+	if (isDragging) {
+		result.backgroundColor = 'red'
+	}
+	return result
+}
 
 export interface SourceBoxProps {
 	id: string

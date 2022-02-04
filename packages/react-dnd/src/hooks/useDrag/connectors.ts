@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { SourceConnector } from '../../internals'
+import type { SourceConnector } from '../../internals'
 
 export function useConnectDragSource(connector: SourceConnector) {
 	return useMemo(() => connector.hooks.dragSource(), [connector])

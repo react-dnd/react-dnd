@@ -1,6 +1,6 @@
-import { DragSourceMonitor } from '../../types'
+import type { DragSourceMonitor } from '../../types'
 import { registerSource, SourceConnector } from '../../internals'
-import { DragSourceHookSpec } from '../types'
+import type { DragSourceHookSpec } from '../types'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useDragSource } from './useDragSource'
 import { useDragDropManager } from '../useDragDropManager'
@@ -27,6 +27,7 @@ export function useRegisteredDragSource<O, R, P>(
 				connector.receiveHandlerId(handlerId)
 				return unregister
 			}
+			return
 		},
 		[manager, monitor, connector, handler, itemType],
 	)

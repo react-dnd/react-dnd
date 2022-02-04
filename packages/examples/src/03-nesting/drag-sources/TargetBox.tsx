@@ -1,7 +1,7 @@
 import { CSSProperties, FC, useState, useCallback, memo } from 'react'
 import { useDrop, DropTargetMonitor } from 'react-dnd'
 import { Colors } from './Colors'
-import { DragItem } from './interfaces'
+import type { DragItem } from './interfaces'
 
 const style: CSSProperties = {
 	border: '1px solid gray',

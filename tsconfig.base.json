@@ -1,16 +1,11 @@
 {
+  "extends": "@tsconfig/strictest",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "strict": true,
-    "experimentalDecorators": true,
-    "noUnusedLocals": true,
-    "noImplicitOverride": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ESNext", "DOM"],
     "jsx": "react-jsx",
-    "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true
   }

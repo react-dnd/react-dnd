@@ -1,5 +1,5 @@
 import { FC, useEffect, memo } from 'react'
-import { ConnectDragPreview } from '../types'
+import type { ConnectDragPreview } from '../types'
 
 export interface DragPreviewImageProps {
 	connect: ConnectDragPreview

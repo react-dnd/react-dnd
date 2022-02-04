@@ -43,7 +43,7 @@ export function createBeginDrag(manager: DragDropManager) {
 
 		// Get the draggable source
 		const sourceId = getDraggableSource(sourceIds, monitor)
-		if (sourceId === null) {
+		if (sourceId == null) {
 			manager.dispatch(ResetCoordinatesAction)
 			return
 		}

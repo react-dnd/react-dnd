@@ -1,4 +1,4 @@
-import { XYCoord } from 'dnd-core'
+import type { XYCoord } from 'dnd-core'
 import { isTouchEvent } from './predicates'
 
 const ELEMENT_NODE = 1
@@ -17,12 +17,13 @@ export function getEventClientTouchOffset(
 	lastTargetTouchFallback?: Touch,
 ): XYCoord | undefined {
 	if (e.targetTouches.length === 1) {
-		return getEventClientOffset(e.targetTouches[0])
+		return getEventClientOffset(e.targetTouches[0] as Touch)
 	} else if (lastTargetTouchFallback && e.touches.length === 1) {
-		if (e.touches[0].target === lastTargetTouchFallback.target) {
-			return getEventClientOffset(e.touches[0])
+		if ((e.touches[0] as Touch).target === lastTargetTouchFallback.target) {
+			return getEventClientOffset(e.touches[0] as Touch)
 		}
 	}
+	return
 }
 
 export function getEventClientOffset(

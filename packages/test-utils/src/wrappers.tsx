@@ -6,7 +6,7 @@ import {
 } from 'react-dnd-test-backend'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
-import { BackendFactory } from 'dnd-core'
+import type { BackendFactory } from 'dnd-core'
 
 /**
  * Wrap a Component with a DnDContext using the TestBackend

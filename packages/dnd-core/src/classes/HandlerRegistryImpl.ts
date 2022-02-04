@@ -43,7 +43,7 @@ function parseRoleFromHandlerId(handlerId: string) {
 		case 'T':
 			return HandlerRole.TARGET
 		default:
-			invariant(false, `Cannot parse handler ID: ${handlerId}`)
+			throw new Error(`Cannot parse handler ID: ${handlerId}`)
 	}
 }
 

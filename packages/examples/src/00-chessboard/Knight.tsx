@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import type { CSSProperties, FC } from 'react'
 import { DragPreviewImage, useDrag } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 import { knightImage } from './knightImage'

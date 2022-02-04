@@ -1,5 +1,5 @@
 import { invariant } from '@react-dnd/invariant'
-import {
+import type {
 	DragDropActions,
 	DragDropMonitor,
 	Backend,
@@ -210,7 +210,7 @@ export class TouchBackendImpl implements Backend {
 		subject: Node,
 		event: K,
 		handler: (e: any) => void,
-		capture?: boolean,
+		capture = false,
 	) {
 		const options = supportsPassive ? { capture, passive: false } : capture
 
@@ -227,7 +227,7 @@ export class TouchBackendImpl implements Backend {
 		subject: Node,
 		event: K,
 		handler: (e: any) => void,
-		capture?: boolean,
+		capture = false,
 	) {
 		const options = supportsPassive ? { capture, passive: false } : capture
 
@@ -294,8 +294,8 @@ export class TouchBackendImpl implements Backend {
 
 				case eventNames.touch.move:
 					coords = {
-						x: (e as TouchEvent).touches[0].clientX,
-						y: (e as TouchEvent).touches[0].clientY,
+						x: (e as TouchEvent).touches[0]?.clientX || 0,
+						y: (e as TouchEvent).touches[0]?.clientY || 0,
 					}
 					break
 			}
@@ -493,8 +493,10 @@ export class TouchBackendImpl implements Backend {
 			if (!elementsAtPoint.hasOwnProperty(nodeId)) {
 				continue
 			}
-			let currentNode: Element | null = elementsAtPoint[nodeId]
-			elementsAtPointExtended.push(currentNode)
+			let currentNode: Element | undefined | null = elementsAtPoint[nodeId]
+			if (currentNode != null) {
+				elementsAtPointExtended.push(currentNode)
+			}
 			while (currentNode) {
 				currentNode = currentNode.parentElement
 				if (

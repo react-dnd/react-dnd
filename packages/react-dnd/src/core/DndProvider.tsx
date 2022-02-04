@@ -44,6 +44,7 @@ export const DndProvider: FC<DndProviderProps<unknown, unknown>> = memo(
 					}
 				}
 			}
+			return
 		}, [])
 
 		return <DndContext.Provider value={manager}>{children}</DndContext.Provider>

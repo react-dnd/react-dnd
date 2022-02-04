@@ -16,14 +16,12 @@ export interface TouchBackendOptions {
 	enableHoverOutsideTarget: boolean
 	delayMouseStart: number
 	touchSlop: number
-	scrollAngleRanges?: AngleRange[]
+	scrollAngleRanges?: AngleRange[] | undefined
 	rootElement: Node | undefined
 
-	getDropTargetElementsAtPoint?: (
-		x: number,
-		y: number,
-		dropTargets: HTMLElement[],
-	) => HTMLElement[]
+	getDropTargetElementsAtPoint?:
+		| undefined
+		| ((x: number, y: number, dropTargets: HTMLElement[]) => HTMLElement[])
 }
 
 export interface AngleRange {

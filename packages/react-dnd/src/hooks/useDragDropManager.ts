@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { DragDropManager } from 'dnd-core'
+import type { DragDropManager } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
 import { DndContext } from '../core'
 

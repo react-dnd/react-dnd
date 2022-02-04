@@ -1,4 +1,4 @@
-import { HandlerManager, MonitorEventEmitter } from '../types'
+import type { HandlerManager, MonitorEventEmitter } from '../types'
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
 import { useCollector } from './useCollector'
 

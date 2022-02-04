@@ -1,6 +1,6 @@
 import { registerTarget, TargetConnector } from '../../internals'
-import { DropTargetMonitor } from '../../types'
-import { DropTargetHookSpec } from '../types'
+import type { DropTargetMonitor } from '../../types'
+import type { DropTargetHookSpec } from '../types'
 import { useDragDropManager } from '../useDragDropManager'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
 import { useAccept } from './useAccept'

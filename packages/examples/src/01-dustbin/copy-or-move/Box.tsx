@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import type { CSSProperties, FC } from 'react'
 import { ItemTypes } from './ItemTypes'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 

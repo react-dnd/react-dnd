@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
-import { Connector } from '../../internals'
-import { DragSourceMonitor } from '../../types'
-import { DragSourceHookSpec } from '../types'
+import type { Connector } from '../../internals'
+import type { DragSourceMonitor } from '../../types'
+import type { DragSourceHookSpec } from '../types'
 import { DragSourceImpl } from './DragSourceImpl'
 
 export function useDragSource<O, R, P>(

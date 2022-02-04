@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { DragDropManager } from 'dnd-core'
+import type { DragDropManager } from 'dnd-core'
 
 /**
  * The React context type

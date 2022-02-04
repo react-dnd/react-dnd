@@ -1,5 +1,5 @@
-import { TargetType, SourceType } from 'dnd-core'
-import {
+import type { TargetType, SourceType } from 'dnd-core'
+import type {
 	DropTargetMonitor,
 	DragSourceMonitor,
 	DragSourceOptions,

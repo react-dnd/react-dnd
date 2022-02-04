@@ -1,7 +1,7 @@
 import { invariant } from '@react-dnd/invariant'
-import { Identifier } from 'dnd-core'
+import type { Identifier } from 'dnd-core'
 import { useMemo } from 'react'
-import { DropTargetHookSpec } from '../types'
+import type { DropTargetHookSpec } from '../types'
 
 /**
  * Internal utility hook to get an array-version of spec.accept.

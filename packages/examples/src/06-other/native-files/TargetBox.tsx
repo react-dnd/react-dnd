@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react'
+import type { CSSProperties, FC } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import { useDrop, DropTargetMonitor } from 'react-dnd'
 

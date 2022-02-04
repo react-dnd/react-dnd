@@ -53,7 +53,7 @@ export const Container: FC = () => {
 				update(prevCards, {
 					$splice: [
 						[dragIndex, 1],
-						[hoverIndex, 0, prevCards[dragIndex]],
+						[hoverIndex, 0, prevCards[dragIndex] as Item],
 					],
 				}),
 			)

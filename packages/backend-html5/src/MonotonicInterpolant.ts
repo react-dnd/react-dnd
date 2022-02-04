@@ -13,7 +13,7 @@ export class MonotonicInterpolant {
 		for (let i = 0; i < length; i++) {
 			indexes.push(i)
 		}
-		indexes.sort((a, b) => (xs[a] < xs[b] ? -1 : 1))
+		indexes.sort((a, b) => ((xs[a] as number) < (xs[b] as number) ? -1 : 1))
 
 		// Get consecutive differences and slopes
 		const dys = []
@@ -22,8 +22,8 @@ export class MonotonicInterpolant {
 		let dx
 		let dy
 		for (let i = 0; i < length - 1; i++) {
-			dx = xs[i + 1] - xs[i]
-			dy = ys[i + 1] - ys[i]
+			dx = (xs[i + 1] as number) - (xs[i] as number)
+			dy = (ys[i + 1] as number) - (ys[i] as number)
 			dxs.push(dx)
 			dys.push(dy)
 			ms.push(dy / dx)
@@ -32,13 +32,13 @@ export class MonotonicInterpolant {
 		// Get degree-1 coefficients
 		const c1s = [ms[0]]
 		for (let i = 0; i < dxs.length - 1; i++) {
-			const m2 = ms[i]
-			const mNext = ms[i + 1]
+			const m2 = ms[i] as number
+			const mNext = ms[i + 1] as number
 			if (m2 * mNext <= 0) {
 				c1s.push(0)
 			} else {
-				dx = dxs[i]
-				const dxNext = dxs[i + 1]
+				dx = dxs[i] as number
+				const dxNext = dxs[i + 1] as number
 				const common = dx + dxNext
 				c1s.push(
 					(3 * common) / ((common + dxNext) / m2 + (common + dx) / mNext),
@@ -52,10 +52,10 @@ export class MonotonicInterpolant {
 		const c3s = []
 		let m
 		for (let i = 0; i < c1s.length - 1; i++) {
-			m = ms[i]
-			const c1 = c1s[i]
-			const invDx = 1 / dxs[i]
-			const common = c1 + c1s[i + 1] - m - m
+			m = ms[i] as number
+			const c1 = c1s[i] as number
+			const invDx = 1 / (dxs[i] as number)
+			const common = c1 + (c1s[i + 1] as number) - m - m
 			c2s.push((m - c1 - common) * invDx)
 			c3s.push(common * invDx * invDx)
 		}
