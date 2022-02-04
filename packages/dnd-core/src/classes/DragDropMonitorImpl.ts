@@ -6,7 +6,7 @@ import {
 	getDifferenceFromInitialOffset,
 } from '../utils/coords'
 import { areDirty } from '../utils/dirtiness'
-import { State } from '../reducers'
+import type { State } from '../reducers'
 import type {
 	DragDropMonitor,
 	Listener,

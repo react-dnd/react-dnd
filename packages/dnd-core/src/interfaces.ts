@@ -132,7 +132,7 @@ export type ActionCreator<Payload> = (args: any[]) => Action<Payload>
 export interface BeginDragOptions {
 	publishSource?: boolean
 	clientOffset?: XYCoord
-	getSourceClientOffset?: (sourceId: Identifier) => XYCoord
+	getSourceClientOffset?: (sourceId: Identifier | undefined) => XYCoord
 }
 
 export interface InitCoordsPayload {

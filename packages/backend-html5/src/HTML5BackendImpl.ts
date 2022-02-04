@@ -1,4 +1,4 @@
-import {
+import type {
 	Backend,
 	DragDropManager,
 	DragDropActions,
@@ -19,9 +19,9 @@ import {
 	matchNativeItemType,
 } from './NativeDragSources'
 import * as NativeTypes from './NativeTypes'
-import { NativeDragSource } from './NativeDragSources/NativeDragSource'
+import type { NativeDragSource } from './NativeDragSources/NativeDragSource'
 import { OptionsReader } from './OptionsReader'
-import { HTML5BackendContext, HTML5BackendOptions } from './types'
+import type { HTML5BackendContext, HTML5BackendOptions } from './types'
 
 type RootNode = Node & { __isReactDndBackendSetUp: boolean | undefined }
 

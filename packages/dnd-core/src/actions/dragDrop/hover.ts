@@ -47,7 +47,7 @@ function checkInvariants(
 	invariant(monitor.isDragging(), 'Cannot call hover while not dragging.')
 	invariant(!monitor.didDrop(), 'Cannot call hover after drop.')
 	for (let i = 0; i < targetIds.length; i++) {
-		const targetId = targetIds[i]
+		const targetId = targetIds[i] as string
 		invariant(
 			targetIds.lastIndexOf(targetId) === i,
 			'Expected targetIds to be unique in the passed array.',
@@ -67,7 +67,7 @@ function removeNonMatchingTargetIds(
 	// fixes shallow isOver which would only be non-shallow because of
 	// non-matching targets.
 	for (let i = targetIds.length - 1; i >= 0; i--) {
-		const targetId = targetIds[i]
+		const targetId = targetIds[i] as string
 		const targetType = registry.getTargetType(targetId)
 		if (!matchesType(targetType, draggedItemType)) {
 			targetIds.splice(i, 1)

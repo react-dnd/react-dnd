@@ -7,5 +7,6 @@ export function createPublishDragSource(manager: DragDropManager) {
 		if (monitor.isDragging()) {
 			return { type: PUBLISH_DRAG_SOURCE }
 		}
+		return
 	}
 }
