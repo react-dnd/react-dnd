@@ -1,5 +1,5 @@
-import { NativeItemConfig } from './nativeTypesConfig'
-import { DragDropMonitor } from 'dnd-core'
+import type { NativeItemConfig } from './nativeTypesConfig'
+import type { DragDropMonitor } from 'dnd-core'
 
 export class NativeDragSource {
 	public item: any
@@ -31,13 +31,13 @@ export class NativeDragSource {
 		if (dataTransfer) {
 			const newProperties: PropertyDescriptorMap = {}
 			Object.keys(this.config.exposeProperties).forEach((property) => {
-				newProperties[property] = {
-					value: this.config.exposeProperties[property](
-						dataTransfer,
-						this.config.matchesTypes,
-					),
-					configurable: true,
-					enumerable: true,
+				const propertyFn = this.config.exposeProperties[property]
+				if (propertyFn != null) {
+					newProperties[property] = {
+						value: propertyFn(dataTransfer, this.config.matchesTypes),
+						configurable: true,
+						enumerable: true,
+					}
 				}
 			})
 			Object.defineProperties(this.item, newProperties)

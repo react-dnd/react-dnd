@@ -1,9 +1,9 @@
-import { HTML5BackendContext, HTML5BackendOptions } from './types'
+import type { HTML5BackendContext, HTML5BackendOptions } from './types'
 
 export class OptionsReader {
 	public ownerDocument: Document | null = null
 	private globalContext: HTML5BackendContext
-	private optionsArgs?: HTML5BackendOptions
+	private optionsArgs: HTML5BackendOptions | undefined
 
 	public constructor(
 		globalContext: HTML5BackendContext,

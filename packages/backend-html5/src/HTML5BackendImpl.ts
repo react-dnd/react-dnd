@@ -553,7 +553,7 @@ export class HTML5BackendImpl implements Backend {
 		}
 	}
 
-	public handleDragEnter(e: DragEvent, targetId: string): void {
+	public handleDragEnter(_e: DragEvent, targetId: string): void {
 		this.dragEnterTargetIds.unshift(targetId)
 	}
 
@@ -598,7 +598,7 @@ export class HTML5BackendImpl implements Backend {
 		}
 	}
 
-	public handleDragOver(e: DragEvent, targetId: string): void {
+	public handleDragOver(_e: DragEvent, targetId: string): void {
 		if (this.dragOverTargetIds === null) {
 			this.dragOverTargetIds = []
 		}
@@ -691,7 +691,7 @@ export class HTML5BackendImpl implements Backend {
 		this.enterLeaveCounter.reset()
 	}
 
-	public handleDrop(e: DragEvent, targetId: string): void {
+	public handleDrop(_e: DragEvent, targetId: string): void {
 		this.dropTargetIds.unshift(targetId)
 	}
 
