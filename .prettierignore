@@ -9,6 +9,5 @@ static/
 coverage/
 pnpm-lock.yaml
 pnpm-workspace.yaml
-.pnp.js
-.pnp.cjs
+.pnp.*
 yarn.lock
