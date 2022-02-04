@@ -6,7 +6,7 @@ import {
 	NonDroppableTarget,
 	TargetWithNoDropResult,
 } from './targets'
-import {
+import type {
 	DragDropManager,
 	HandlerRegistry,
 	DragDropMonitor,

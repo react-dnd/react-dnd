@@ -42,7 +42,7 @@
     "test:": "yarn workspaces foreach -pv run test",
     "release:": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude '@react-dnd/build' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples' -pv npm publish --tolerate-republish",
     "lint:": "run-s 'lint:*'",
-    "jest:": "jest --coverage",
+    "jest:": "yarn node --experimental-vm-modules $(yarn bin jest) --coverage",
     "lint:code": "eslint . --ext .js,.ts,.jsx,.tsx",
     "lint:spelling": "mdspell 'packages/documentation/docsite/markdown/**/*.md' --en-us --report",
     "lint:tone": "alex .",
