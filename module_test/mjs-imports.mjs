@@ -3,4 +3,4 @@
 
 // console.log(Object.keys(core))
 
-console.log("TODO: implement ESM support when React supports it")
+console.log('TODO: implement ESM support when React supports it')
