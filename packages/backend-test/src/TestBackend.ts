@@ -1,4 +1,4 @@
-import {
+import type {
 	DragDropManager,
 	DragDropActions,
 	Backend,
@@ -7,7 +7,7 @@ import {
 	Identifier,
 	Unsubscribe,
 } from 'dnd-core'
-import { ITestBackend, TestBackendContext } from './types'
+import type { ITestBackend, TestBackendContext } from './types'
 
 function noop() {
 	// noop

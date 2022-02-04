@@ -1,6 +1,10 @@
-import { DragDropManager, BackendFactory } from 'dnd-core'
+import type { DragDropManager, BackendFactory } from 'dnd-core'
 import { TestBackendImpl } from './TestBackend'
-import { ITestBackend, TestBackendContext, TestBackendOptions } from './types'
+import type {
+	ITestBackend,
+	TestBackendContext,
+	TestBackendOptions,
+} from './types'
 
 export * from './types'
 export * from './TestBackend'
