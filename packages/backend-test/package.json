@@ -13,12 +13,18 @@
   },
   "scripts": {
     "clean": "shx rm -rf dist/",
-    "build": "tsc -b tsconfig.cjs.json && tsc -b tsconfig.esm.json && tsc -b tsconfig.types.json"
+    "build_types": "tsc -b .",
+    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
+    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
+    "build": "run-s build_types build_esm build_cjs"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.136",
+    "npm-run-all": "^4.1.5",
     "shx": "^0.3.4",
     "typescript": "^4.5.5"
   }
