@@ -1,7 +1,0 @@
-releases:
-  react-dnd-examples: patch
-  react-dnd-html5-backend: patch
-  react-dnd-test-utils: patch
-
-declined:
-  - react-dnd-documentation

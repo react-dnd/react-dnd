@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-examples",
-  "version": "14.1.0",
+  "version": "15.0.0",
   "private": true,
   "description": "Drag and Drop for React",
   "type": "module",
