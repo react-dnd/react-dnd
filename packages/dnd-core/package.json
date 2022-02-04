@@ -3,13 +3,13 @@
   "version": "15.0.0",
   "description": "Drag and drop sans the GUI",
   "license": "MIT",
-  "type": "module",
-  "exports": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "tsc -b . && swc src -d lib",
-    "clean": "shx rm -rf dist/ lib/"
+    "clean": "shx rm -rf dist/",
+    "build": "tsc -b tsconfig.cjs.json && tsc -b tsconfig.esm.json && tsc -b tsconfig.types.json"
   },
   "repository": {
     "type": "git",
@@ -21,8 +21,6 @@
     "redux": "^4.1.1"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.135",
     "@types/setimmediate": "^1.0.2",
     "react-dnd-test-backend": "portal:../backend-test",
     "setimmediate": "^1.0.5",

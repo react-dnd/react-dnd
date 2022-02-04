@@ -2,9 +2,9 @@
   "name": "react-dnd-test-utils",
   "version": "15.0.0",
   "license": "MIT",
-  "type": "module",
-  "exports": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git",
@@ -12,12 +12,10 @@
   },
   "sideEffects": false,
   "scripts": {
-    "clean": "shx rm -rf lib/",
-    "build": "tsc -b . && swc src -d lib"
+    "clean": "shx rm -rf dist/",
+    "build": "tsc -b tsconfig.cjs.json && tsc -b tsconfig.esm.json && tsc -b tsconfig.types.json"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.135",
     "@testing-library/react": "^12.1.2",
     "@types/node": "^14.17.19",
     "@types/react": "^17.0.38",

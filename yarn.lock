@@ -3790,45 +3790,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/cli@npm:^0.1.55":
-  version: 0.1.55
-  resolution: "@swc/cli@npm:0.1.55"
-  dependencies:
-    commander: ^7.1.0
-    fast-glob: ^3.2.5
-    slash: 3.0.0
-    source-map: ^0.7.3
-  peerDependencies:
-    "@swc/core": ^1.2.66
-    chokidar: ^3.5.1
-  peerDependenciesMeta:
-    chokidar:
-      optional: true
-  bin:
-    spack: bin/spack.js
-    swc: bin/swc.js
-  checksum: db6a727716acffd6202158bb47ab1541f9b43f1a8146c8588b33a969330f08ffbc59d813bad192929acb67f6675aabeee20618522b0b7533a9f77b35c49edaa1
-  languageName: node
-  linkType: hard
-
-"@swc/core-android-arm-eabi@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-android-arm-eabi@npm:1.2.135"
-  conditions: os=android & cpu=arm
-  languageName: node
-  linkType: hard
-
 "@swc/core-android-arm-eabi@npm:1.2.136":
   version: 1.2.136
   resolution: "@swc/core-android-arm-eabi@npm:1.2.136"
   conditions: os=android & cpu=arm
-  languageName: node
-  linkType: hard
-
-"@swc/core-android-arm64@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-android-arm64@npm:1.2.135"
-  conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -3839,24 +3804,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-darwin-arm64@npm:1.2.135"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@swc/core-darwin-arm64@npm:1.2.136":
   version: 1.2.136
   resolution: "@swc/core-darwin-arm64@npm:1.2.136"
   conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@swc/core-darwin-x64@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-darwin-x64@npm:1.2.135"
-  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -3867,24 +3818,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-freebsd-x64@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-freebsd-x64@npm:1.2.135"
-  conditions: os=freebsd & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@swc/core-freebsd-x64@npm:1.2.136":
   version: 1.2.136
   resolution: "@swc/core-freebsd-x64@npm:1.2.136"
   conditions: os=freebsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@swc/core-linux-arm-gnueabihf@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.135"
-  conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
@@ -3895,23 +3832,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.135"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@swc/core-linux-arm64-gnu@npm:1.2.136":
   version: 1.2.136
   resolution: "@swc/core-linux-arm64-gnu@npm:1.2.136"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@swc/core-linux-arm64-musl@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-linux-arm64-musl@npm:1.2.135"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
@@ -3923,23 +3846,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-linux-x64-gnu@npm:1.2.135"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@swc/core-linux-x64-gnu@npm:1.2.136":
   version: 1.2.136
   resolution: "@swc/core-linux-x64-gnu@npm:1.2.136"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@swc/core-linux-x64-musl@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-linux-x64-musl@npm:1.2.135"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
@@ -3951,24 +3860,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.135"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@swc/core-win32-arm64-msvc@npm:1.2.136":
   version: 1.2.136
   resolution: "@swc/core-win32-arm64-msvc@npm:1.2.136"
   conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@swc/core-win32-ia32-msvc@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.135"
-  conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
@@ -3979,65 +3874,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core-win32-x64-msvc@npm:1.2.135"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@swc/core-win32-x64-msvc@npm:1.2.136":
   version: 1.2.136
   resolution: "@swc/core-win32-x64-msvc@npm:1.2.136"
   conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@swc/core@npm:^1.2.135":
-  version: 1.2.135
-  resolution: "@swc/core@npm:1.2.135"
-  dependencies:
-    "@swc/core-android-arm-eabi": 1.2.135
-    "@swc/core-android-arm64": 1.2.135
-    "@swc/core-darwin-arm64": 1.2.135
-    "@swc/core-darwin-x64": 1.2.135
-    "@swc/core-freebsd-x64": 1.2.135
-    "@swc/core-linux-arm-gnueabihf": 1.2.135
-    "@swc/core-linux-arm64-gnu": 1.2.135
-    "@swc/core-linux-arm64-musl": 1.2.135
-    "@swc/core-linux-x64-gnu": 1.2.135
-    "@swc/core-linux-x64-musl": 1.2.135
-    "@swc/core-win32-arm64-msvc": 1.2.135
-    "@swc/core-win32-ia32-msvc": 1.2.135
-    "@swc/core-win32-x64-msvc": 1.2.135
-  dependenciesMeta:
-    "@swc/core-android-arm-eabi":
-      optional: true
-    "@swc/core-android-arm64":
-      optional: true
-    "@swc/core-darwin-arm64":
-      optional: true
-    "@swc/core-darwin-x64":
-      optional: true
-    "@swc/core-freebsd-x64":
-      optional: true
-    "@swc/core-linux-arm-gnueabihf":
-      optional: true
-    "@swc/core-linux-arm64-gnu":
-      optional: true
-    "@swc/core-linux-arm64-musl":
-      optional: true
-    "@swc/core-linux-x64-gnu":
-      optional: true
-    "@swc/core-linux-x64-musl":
-      optional: true
-    "@swc/core-win32-arm64-msvc":
-      optional: true
-    "@swc/core-win32-ia32-msvc":
-      optional: true
-    "@swc/core-win32-x64-msvc":
-      optional: true
-  checksum: 5110d6c4f0a4963d6855ca36348fe6ec858677d4a0b04fa8c3b19b4361a2fc687282522e0c18461084f9ced067fb759b307515a6f587f4c62ece8d010b648ce0
   languageName: node
   linkType: hard
 
@@ -7278,7 +7118,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^7.1.0, commander@npm:^7.2.0":
+"commander@npm:^7.2.0":
   version: 7.2.0
   resolution: "commander@npm:7.2.0"
   checksum: 53501cbeee61d5157546c0bef0fedb6cdfc763a882136284bed9a07225f09a14b82d2a84e7637edfd1a679fb35ed9502fd58ef1d091e6287f60d790147f68ddc
@@ -8639,8 +8479,6 @@ __metadata:
   dependencies:
     "@react-dnd/asap": ^4.0.0
     "@react-dnd/invariant": ^2.0.0
-    "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.135
     "@types/setimmediate": ^1.0.2
     react-dnd-test-backend: "portal:../backend-test"
     redux: ^4.1.1
@@ -10013,19 +9851,6 @@ __metadata:
     micromatch: ^4.0.2
     picomatch: ^2.2.1
   checksum: 5d6772c9b63dbb739d60b5630851e1f2cbf9744119e0968eac44c9f8cbc2d3d5cb4f2f0c74715ccb23daa336c87bea42186ed367e6c991afee61cd3d967320eb
-  languageName: node
-  linkType: hard
-
-"fast-glob@npm:^3.2.5":
-  version: 3.2.11
-  resolution: "fast-glob@npm:3.2.11"
-  dependencies:
-    "@nodelib/fs.stat": ^2.0.2
-    "@nodelib/fs.walk": ^1.2.3
-    glob-parent: ^5.1.2
-    merge2: ^1.3.0
-    micromatch: ^4.0.4
-  checksum: f473105324a7780a20c06de842e15ddbb41d3cb7e71d1e4fe6e8373204f22245d54f5ab9e2061e6a1c613047345954d29b022e0e76f5c28b1df9858179a0e6d7
   languageName: node
   linkType: hard
 
@@ -18176,8 +18001,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-dnd-examples@workspace:packages/examples"
   dependencies:
-    "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.135
     "@testing-library/jest-dom": ^5.16.1
     "@testing-library/react": ^12.1.2
     "@types/faker": ^5.5.8
@@ -18216,8 +18039,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-dnd-html5-backend@workspace:packages/backend-html5"
   dependencies:
-    "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.135
     dnd-core: "workspace:packages/dnd-core"
     shx: ^0.3.4
     typescript: ^4.5.5
@@ -18244,6 +18065,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.10.1
     alex: ^9.1.0
     conventional-changelog-cli: ^2.1.1
+    dnd-core: "workspace:packages/dnd-core"
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-config-react-app: ^6.0.0
@@ -18287,8 +18109,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-dnd-test-backend@workspace:packages/backend-test"
   dependencies:
-    "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.135
     dnd-core: "workspace:packages/dnd-core"
     shx: ^0.3.4
     typescript: ^4.5.5
@@ -18326,8 +18146,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-dnd-test-utils@workspace:packages/test-utils"
   dependencies:
-    "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.135
     "@testing-library/react": ^12.1.2
     "@types/node": ^14.17.19
     "@types/react": ^17.0.38
@@ -18369,8 +18187,6 @@ __metadata:
   resolution: "react-dnd-touch-backend@workspace:packages/backend-touch"
   dependencies:
     "@react-dnd/invariant": ^2.0.0
-    "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.135
     dnd-core: "workspace:packages/dnd-core"
     shx: ^0.3.4
     typescript: ^4.5.5
@@ -18383,8 +18199,6 @@ __metadata:
   dependencies:
     "@react-dnd/invariant": ^2.0.0
     "@react-dnd/shallowequal": ^2.0.0
-    "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.135
     "@testing-library/react": ^12.1.2
     "@types/hoist-non-react-statics": ^3.3.1
     "@types/node": ^14.17.19
@@ -19886,7 +19700,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"slash@npm:3.0.0, slash@npm:^3.0.0":
+"slash@npm:^3.0.0":
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
   checksum: 94a93fff615f25a999ad4b83c9d5e257a7280c90a32a7cb8b4a87996e4babf322e469c42b7f649fd5796edd8687652f3fb452a86dc97a816f01113183393f11c

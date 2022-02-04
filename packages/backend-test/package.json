@@ -2,9 +2,9 @@
   "name": "react-dnd-test-backend",
   "version": "15.0.0",
   "description": "A mock backend for testing React DnD apps",
-  "type": "module",
-  "exports": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
   "repository": {
@@ -12,15 +12,13 @@
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "scripts": {
-    "clean": "shx rm -rf lib/",
-    "build": "tsc -b . && swc src -d lib"
+    "clean": "shx rm -rf dist/",
+    "build": "tsc -b tsconfig.cjs.json && tsc -b tsconfig.esm.json && tsc -b tsconfig.types.json"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.135",
     "shx": "^0.3.4",
     "typescript": "^4.5.5"
   }
