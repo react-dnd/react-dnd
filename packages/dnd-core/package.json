@@ -21,8 +21,6 @@
     "redux": "^4.1.1"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.135",
     "@types/setimmediate": "^1.0.2",
     "react-dnd-test-backend": "portal:../backend-test",
     "setimmediate": "^1.0.5",

@@ -1,6 +1,6 @@
-import type { XYCoord } from '../../../interfaces.js'
+import type { XYCoord } from '../../../interfaces'
 import type { AnyAction } from 'redux'
-import { INIT_COORDS } from '../types.js'
+import { INIT_COORDS } from '../types'
 
 export function setClientOffset(
 	clientOffset: XYCoord | null | undefined,

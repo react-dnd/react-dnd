@@ -21,8 +21,6 @@
     "dnd-core": "workspace:packages/dnd-core"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.135",
     "shx": "^0.3.4",
     "typescript": "^4.5.5"
   }

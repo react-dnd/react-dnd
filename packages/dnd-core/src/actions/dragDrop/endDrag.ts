@@ -3,8 +3,8 @@ import type {
 	DragDropManager,
 	SentinelAction,
 	DragDropMonitor,
-} from '../../interfaces.js'
-import { END_DRAG } from './types.js'
+} from '../../interfaces'
+import { END_DRAG } from './types'
 
 export function createEndDrag(manager: DragDropManager) {
 	return function endDrag(): SentinelAction {

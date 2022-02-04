@@ -5,9 +5,9 @@ import {
 	addTarget,
 	removeSource,
 	removeTarget,
-} from '../actions/registry.js'
-import { getNextUniqueId } from '../utils/getNextUniqueId.js'
-import type { State } from '../reducers/index.js'
+} from '../actions/registry'
+import { getNextUniqueId } from '../utils/getNextUniqueId'
+import type { State } from '../reducers'
 import {
 	DragSource,
 	DropTarget,
@@ -16,12 +16,12 @@ import {
 	Identifier,
 	HandlerRole,
 	HandlerRegistry,
-} from '../interfaces.js'
+} from '../interfaces'
 import {
 	validateSourceContract,
 	validateTargetContract,
 	validateType,
-} from '../contracts.js'
+} from '../contracts'
 import { asap } from '@react-dnd/asap'
 
 function getNextHandlerId(role: HandlerRole): string {

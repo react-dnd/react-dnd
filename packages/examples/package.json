@@ -15,7 +15,7 @@
   "scripts": {
     "build": "run-s build:pkg build:docs",
     "clean": "shx rm -rf lib/",
-    "build:pkg": "tsc -b . && swc src -d lib",
+    "build:pkg": "tsc -b .",
     "build:docs": "tsc -b tsconfig.docs.json"
   },
   "dependencies": {
@@ -28,8 +28,6 @@
     "react-frame-component": "^4.1.3"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.135",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/faker": "^5.5.8",

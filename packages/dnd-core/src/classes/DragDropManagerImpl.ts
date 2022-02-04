@@ -1,6 +1,6 @@
 import type { Store, Action } from 'redux'
-import type { DragDropMonitorImpl } from './DragDropMonitorImpl.js'
-import type { State } from '../reducers/index.js'
+import type { DragDropMonitorImpl } from './DragDropMonitorImpl'
+import type { State } from '../reducers'
 import type {
 	ActionCreator,
 	Backend,
@@ -8,8 +8,8 @@ import type {
 	DragDropMonitor,
 	DragDropManager,
 	HandlerRegistry,
-} from '../interfaces.js'
-import { createDragDropActions } from '../actions/dragDrop/index.js'
+} from '../interfaces'
+import { createDragDropActions } from '../actions/dragDrop'
 
 export class DragDropManagerImpl implements DragDropManager {
 	private store: Store<State>
