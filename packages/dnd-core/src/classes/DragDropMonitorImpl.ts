@@ -27,7 +27,7 @@ export class DragDropMonitorImpl implements DragDropMonitor {
 
 	public subscribeToStateChange(
 		listener: Listener,
-		options: { handlerIds: string[] | undefined } = { handlerIds: undefined },
+		options: { handlerIds?: string[] } = {},
 	): Unsubscribe {
 		const { handlerIds } = options
 		invariant(typeof listener === 'function', 'listener must be a function.')
