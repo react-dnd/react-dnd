@@ -149,7 +149,7 @@ export class HTML5BackendImpl implements Backend {
 		const handleDragStart = (e: any) => this.handleDragStart(e, sourceId)
 		const handleSelectStart = (e: any) => this.handleSelectStart(e)
 
-		node.setAttribute('draggable', '' + this.monitor.canDragSource(sourceId))
+		node.setAttribute('draggable', 'true')
 		node.addEventListener('dragstart', handleDragStart)
 		node.addEventListener('selectstart', handleSelectStart)
 
@@ -205,11 +205,7 @@ export class HTML5BackendImpl implements Backend {
 			true,
 		)
 		target.addEventListener('dragover', this.handleTopDragOver as EventListener)
-		target.addEventListener(
-			'dragover',
-			this.handleTopDragOverCapture as EventListener,
-			true,
-		)
+		target.addEventListener('dragover', this.handleTopDragOverCapture, true)
 		target.addEventListener('drop', this.handleTopDrop as EventListener)
 		target.addEventListener(
 			'drop',
@@ -248,11 +244,7 @@ export class HTML5BackendImpl implements Backend {
 			'dragover',
 			this.handleTopDragOver as EventListener,
 		)
-		target.removeEventListener(
-			'dragover',
-			this.handleTopDragOverCapture as EventListener,
-			true,
-		)
+		target.removeEventListener('dragover', this.handleTopDragOverCapture, true)
 		target.removeEventListener('drop', this.handleTopDrop as EventListener)
 		target.removeEventListener(
 			'drop',
@@ -535,10 +527,6 @@ export class HTML5BackendImpl implements Backend {
 	public handleTopDragEnterCapture = (e: DragEvent): void => {
 		this.dragEnterTargetIds = []
 
-		if (this.isDraggingNativeItem()) {
-			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
-		}
-
 		const isFirstEnter = this.enterLeaveCounter.enter(e.target)
 		if (!isFirstEnter || this.monitor.isDragging()) {
 			return
@@ -590,12 +578,8 @@ export class HTML5BackendImpl implements Backend {
 		}
 	}
 
-	public handleTopDragOverCapture = (e: DragEvent): void => {
+	public handleTopDragOverCapture = (): void => {
 		this.dragOverTargetIds = []
-
-		if (this.isDraggingNativeItem()) {
-			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
-		}
 	}
 
 	public handleDragOver(e: DragEvent, targetId: string): void {
@@ -678,13 +662,12 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			e.preventDefault()
+			this.maybePreventDefaultOn(e)
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		} else if (matchNativeItemType(e.dataTransfer)) {
 			// Dragging some elements, like <a> and <img> may still behave like a native drag event,
 			// even if the current drag event matches a user-defined type.
 			// Stop the default behavior when we're not expecting a native item to be dropped.
-
 			e.preventDefault()
 		}
 
@@ -734,5 +717,11 @@ export class HTML5BackendImpl implements Backend {
 		// to enable drag and drop
 		e.preventDefault()
 		target.dragDrop()
+	}
+
+	private maybePreventDefaultOn = (evt: DragEvent) => {
+		if (this.options.isNativeItemDefaultPrevented) {
+			evt.preventDefault()
+		}
 	}
 }
