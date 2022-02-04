@@ -1,4 +1,4 @@
-import {
+import type {
 	TouchBackendOptions,
 	AngleRange,
 	TouchBackendContext,
