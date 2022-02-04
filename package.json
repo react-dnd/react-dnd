@@ -40,6 +40,9 @@
     "clean:": "yarn workspaces foreach --exclude @react-dnd/build -pv run clean",
     "build:": "yarn workspaces foreach -pv --topological-dev run build",
     "test:": "yarn workspaces foreach -pv run test",
+    "modules:cjs": "node ./module_test/cjs-imports.cjs",
+    "modules:mjs": "node ./module_test/mjs-imports.mjs",
+    "modules:": "run-s 'modules:*'",
     "release:": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude '@react-dnd/build' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples' -pv npm publish --tolerate-republish",
     "lint:": "run-s 'lint:*'",
     "jest:": "yarn node --experimental-vm-modules $(yarn bin jest) --coverage",
@@ -50,7 +53,7 @@
     "build_docsite": "yarn build:docsite",
     "format:": "prettier --write \"**/*.(ts|tsx|js|json|md)\"",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
-    "ci": "run-s build: test: lint: jest: build_docsite git-is-clean",
+    "ci": "run-s build: test: lint: jest: modules: build_docsite git-is-clean",
     "precommit": "lint-staged",
     "git-is-clean": "git status && git diff-index HEAD"
   },
