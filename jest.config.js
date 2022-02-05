@@ -29,6 +29,7 @@ module.exports = {
 		'!packages/docsite/**',
 		'!packages/backend-test/**',
 		'!packages/test-utils/**',
+		'!packages/test-suite-*/**',
 	],
 	//coverageProvider: 'v8',
 	testMatch: [
