@@ -4,6 +4,7 @@ import path from 'path'
 
 const hasImport = (l) => l.indexOf('import ') !== -1
 const hasExport = (l) => l.indexOf('export ') !== -1
+const isSourceMap = (l) => l.indexOf('//# sourceMappingURL=') !== -1
 
 async function processDir(dir) {
 	const entries = await fs.readdir(dir)
@@ -32,7 +33,10 @@ function js2mjsName(entryPath) {
 async function js2mjsRefs(entryPath) {
 	const content = await fs.readFile(entryPath, 'utf8')
 	const lines = content.split('\n').map((l) => {
-		if ((hasImport(l) || hasExport(l)) && l.indexOf('.js') !== -1) {
+		if (
+			(hasImport(l) || hasExport(l) || isSourceMap(l)) &&
+			l.indexOf('.js') !== -1
+		) {
 			console.log('->', l)
 			return l.replace('.js', '.mjs')
 		}

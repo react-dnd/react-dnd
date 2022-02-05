@@ -3,9 +3,9 @@
   "version": "15.0.2",
   "private": true,
   "description": "Drag and Drop for React",
-  "type": "module",
-  "exports": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -13,10 +13,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "run-s build:pkg build:docs",
-    "clean": "shx rm -rf lib/",
-    "build:pkg": "tsc -b .",
-    "build:docs": "tsc -b tsconfig.docs.json"
+    "build": "run-s build_esm build_cjs build_types build_docs",
+    "clean": "shx rm -rf dist/",
+    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
+    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
+    "build_types": "tsc -b tsconfig.json",
+    "build_docs": "tsc -b tsconfig.docs.json"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core",
@@ -28,6 +30,8 @@
     "react-frame-component": "^4.1.3"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.136",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/faker": "^5.5.8",
