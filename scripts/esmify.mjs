@@ -2,8 +2,8 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-const hasImport = l => l.indexOf('import ') !== -1
-const hasExport = l => l.indexOf('export ') !== -1
+const hasImport = (l) => l.indexOf('import ') !== -1
+const hasExport = (l) => l.indexOf('export ') !== -1
 
 async function processDir(dir) {
 	const entries = await fs.readdir(dir)
@@ -31,15 +31,14 @@ function js2mjsName(entryPath) {
 
 async function js2mjsRefs(entryPath) {
 	const content = await fs.readFile(entryPath, 'utf8')
-	const lines = content.split('\n').map(l => {
+	const lines = content.split('\n').map((l) => {
 		if ((hasImport(l) || hasExport(l)) && l.indexOf('.js') !== -1) {
-			console.log("->", l)
+			console.log('->', l)
 			return l.replace('.js', '.mjs')
 		}
 		return l
 	})
-	await fs.writeFile(entryPath, lines.join("\n"), 'utf8')
+	await fs.writeFile(entryPath, lines.join('\n'), 'utf8')
 }
 
 await processDir('./dist/esm')
-
