@@ -4,9 +4,9 @@ import {
 	HOVER,
 	END_DRAG,
 	DROP,
-} from '../actions/dragDrop'
-import type { XYCoord, Action } from '../interfaces'
-import { areCoordsEqual } from '../utils/equality'
+} from '../actions/dragDrop/index.js'
+import type { XYCoord, Action } from '../interfaces.js'
+import { areCoordsEqual } from '../utils/equality.js'
 
 export interface State {
 	initialSourceClientOffset: XYCoord | null

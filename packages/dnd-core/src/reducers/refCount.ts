@@ -3,8 +3,8 @@ import {
 	ADD_TARGET,
 	REMOVE_SOURCE,
 	REMOVE_TARGET,
-} from '../actions/registry'
-import type { Action } from '../interfaces'
+} from '../actions/registry.js'
+import type { Action } from '../interfaces.js'
 
 export type State = number
 

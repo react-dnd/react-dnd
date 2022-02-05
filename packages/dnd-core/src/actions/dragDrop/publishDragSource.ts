@@ -1,5 +1,5 @@
-import type { DragDropManager, SentinelAction } from '../../interfaces'
-import { PUBLISH_DRAG_SOURCE } from './types'
+import type { DragDropManager, SentinelAction } from '../../interfaces.js'
+import { PUBLISH_DRAG_SOURCE } from './types.js'
 
 export function createPublishDragSource(manager: DragDropManager) {
 	return function publishDragSource(): SentinelAction | undefined {
