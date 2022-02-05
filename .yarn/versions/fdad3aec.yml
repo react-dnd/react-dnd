@@ -1,3 +1,7 @@
-declined:
-  - react-dnd-examples
-  - test-suite-vite
+releases:
+  react-dnd: minor
+  react-dnd-documentation: minor
+  react-dnd-examples: minor
+  react-dnd-test-utils: minor
+  test-suite-cra: minor
+  test-suite-vite: minor
