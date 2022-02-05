@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-examples",
-  "version": "15.0.2",
+  "version": "15.1.0",
   "private": true,
   "description": "Drag and Drop for React",
   "main": "dist/cjs/index.js",
