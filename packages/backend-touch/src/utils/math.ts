@@ -1,4 +1,4 @@
-import type { AngleRange } from '../interfaces'
+import type { AngleRange } from '../interfaces.js'
 
 export function distance(
 	x1: number,
