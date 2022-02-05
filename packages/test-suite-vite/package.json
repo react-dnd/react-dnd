@@ -1,6 +1,6 @@
 {
   "name": "test-suite-vite",
-  "version": "0.0.0",
+  "version": "15.0.2",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
