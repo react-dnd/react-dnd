@@ -1,8 +1,8 @@
 import { memo, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
+import { ItemTypes } from './ItemTypes.js';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import { Box } from './Box';
+import { Box } from './Box.js';
 function getStyles(left, top, isDragging) {
     const transform = `translate3d(${left}px, ${top}px, 0)`;
     return {

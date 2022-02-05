@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Container } from './Container';
+import { Container } from './Container.js';
 export const Example = () => {
     const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true);
     const toggle = useCallback(() => setHideSourceOnDrag(!hideSourceOnDrag), [hideSourceOnDrag]);

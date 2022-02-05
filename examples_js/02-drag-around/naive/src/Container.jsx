@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useDrop } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
-import { Box } from './Box';
+import { ItemTypes } from './ItemTypes.js';
+import { Box } from './Box.js';
 import update from 'immutability-helper';
 const styles = {
     width: 300,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container } from './Container';
+import { Container } from './Container.js';
 export const SortableStressTest = () => {
     // Avoid rendering on server because the big data list is generated
     const [shouldRender, setShouldRender] = useState(false);

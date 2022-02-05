@@ -1,8 +1,8 @@
 import { FC, useState, useCallback, memo } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
-import { Dustbin } from './Dustbin'
-import { Box } from './Box'
-import { ItemTypes } from './ItemTypes'
+import { Dustbin } from './Dustbin.js'
+import { Box } from './Box.js'
+import { ItemTypes } from './ItemTypes.js'
 import update from 'immutability-helper'
 
 interface DustbinState {

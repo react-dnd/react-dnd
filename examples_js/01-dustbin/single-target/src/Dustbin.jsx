@@ -1,5 +1,5 @@
 import { useDrop } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
+import { ItemTypes } from './ItemTypes.js';
 const style = {
     height: '12rem',
     width: '12rem',

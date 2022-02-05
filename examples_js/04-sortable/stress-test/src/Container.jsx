@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import { name } from 'faker';
-import { Card } from './Card';
+import Faker from 'faker';
+import { Card } from './Card.js';
 import update from 'immutability-helper';
 const style = {
     width: 400,
@@ -9,7 +9,7 @@ function buildCardData() {
     const cardsById = {};
     const cardsByIndex = [];
     for (let i = 0; i < 1000; i += 1) {
-        const card = { id: i, text: name.findName() };
+        const card = { id: i, text: Faker.name.findName() };
         cardsById[card.id] = card;
         cardsByIndex[i] = card;
     }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { SourceBox } from './SourceBox';
-import { TargetBox } from './TargetBox';
+import { SourceBox } from './SourceBox.js';
+import { TargetBox } from './TargetBox.js';
 export const Container = () => {
     const [isMounted, setIsMounted] = useState(true);
     const [isDragging, setIsDragging] = useState(false);

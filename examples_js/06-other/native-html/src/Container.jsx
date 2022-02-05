@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { TargetBox } from './TargetBox';
-import { HTMLContent } from './HTMLContent';
+import { TargetBox } from './TargetBox.js';
+import { HTMLContent } from './HTMLContent.js';
 export const Container = () => {
     const [droppedHTML, setDroppedHTML] = useState('');
     const handleHTMLDrop = useCallback((item) => {

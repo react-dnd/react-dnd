@@ -1,6 +1,6 @@
 import { useState, useCallback, memo } from 'react';
 import { useDrop } from 'react-dnd';
-import { Colors } from './Colors';
+import { Colors } from './Colors.js';
 const style = {
     border: '1px solid gray',
     height: '15rem',

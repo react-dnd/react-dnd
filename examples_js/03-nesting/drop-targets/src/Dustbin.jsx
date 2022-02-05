@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDrop } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
+import { ItemTypes } from './ItemTypes.js';
 function getStyle(backgroundColor) {
     return {
         border: '1px solid rgba(0,0,0,0.2)',
