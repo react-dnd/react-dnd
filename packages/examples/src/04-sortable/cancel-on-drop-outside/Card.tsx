@@ -1,6 +1,6 @@
 import { CSSProperties, FC, memo } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import { ItemTypes } from './ItemTypes.js'
 
 const style: CSSProperties = {
 	border: '1px dashed gray',

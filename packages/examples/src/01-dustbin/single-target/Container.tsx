@@ -1,6 +1,6 @@
 import { FC, memo } from 'react'
-import { Dustbin } from './Dustbin'
-import { Box } from './Box'
+import { Dustbin } from './Dustbin.js'
+import { Box } from './Box.js'
 
 export const Container: FC = memo(function Container() {
 	return (

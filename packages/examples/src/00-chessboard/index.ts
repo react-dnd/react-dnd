@@ -1,1 +1,1 @@
-export { TutorialApp as default } from './TutorialApp'
+export { TutorialApp as default } from './TutorialApp.js'

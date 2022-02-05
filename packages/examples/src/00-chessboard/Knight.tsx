@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react'
 import { DragPreviewImage, useDrag } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
-import { knightImage } from './knightImage'
+import { ItemTypes } from './ItemTypes.js'
+import { knightImage } from './knightImage.js'
 
 const knightStyle: CSSProperties = {
 	fontSize: 40,

@@ -1,6 +1,6 @@
 import { CSSProperties, FC, ReactNode, useState } from 'react'
 import { useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import { ItemTypes } from './ItemTypes.js'
 
 function getStyle(backgroundColor: string): CSSProperties {
 	return {

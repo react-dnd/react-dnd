@@ -40,5 +40,8 @@
     "wrapWithTestBackend": true,
     "__esModule": true,
     "default": true
+  },
+  "examples": {
+    "componentIndex": true
   }
 }
