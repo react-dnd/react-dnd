@@ -19,6 +19,7 @@ module.exports = {
 			},
 		],
 	},
+	resolver: 'jest-ts-webcompat-resolver',
 	setupFilesAfterEnv: ['<rootDir>/jest/setup-testing-library.js'],
 	collectCoverageFrom: [
 		'packages/*/src/**/*.tsx',
