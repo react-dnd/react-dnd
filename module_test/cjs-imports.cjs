@@ -5,22 +5,7 @@ const htmlBackend = require('react-dnd-html5-backend')
 const touchBackend = require('react-dnd-touch-backend')
 const testBackend = require('react-dnd-test-backend')
 const testUtils = require('react-dnd-test-utils')
-
-const api = require('./api.json')
-
-function check(imported, libKey) {
-	console.log('checking', libKey)
-	Object.keys(imported).forEach((key) => {
-		if (!imported[key]) {
-			throw new Error(`missing export: ${key}`)
-		}
-	})
-	Object.keys(imported).forEach((key) => {
-		if (!api[libKey][key]) {
-			throw new Error(`uneexpected export: ${key}`)
-		}
-	})
-}
+const { check } = require('./common.js')
 
 check(core, 'core')
 check(dnd, 'dnd')
