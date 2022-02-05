@@ -1,8 +1,8 @@
 declare const global: any
 
-import { HTML5BackendImpl } from '../HTML5BackendImpl'
+import type { HTML5BackendImpl } from '../HTML5BackendImpl'
 import { HTML5Backend } from '../index'
-import { DragDropManager } from 'dnd-core'
+import type { DragDropManager } from 'dnd-core'
 
 describe('The HTML5 Backend', () => {
 	describe('window injection', () => {
@@ -68,7 +68,7 @@ describe('The HTML5 Backend', () => {
 			backend.setup()
 			try {
 				backend.setup()
-			} catch (e) {
+			} catch (e: any) {
 				expect(e.message).toEqual(
 					'Cannot have two HTML5 backends at the same time.',
 				)

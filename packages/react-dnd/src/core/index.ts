@@ -1,3 +1,3 @@
-export * from './DndContext'
-export * from './DndProvider'
-export * from './DragPreviewImage'
+export * from './DndContext.js'
+export * from './DndProvider.js'
+export * from './DragPreviewImage.js'

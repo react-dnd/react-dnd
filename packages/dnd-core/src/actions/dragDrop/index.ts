@@ -1,11 +1,11 @@
-import type { DragDropManager, DragDropActions } from '../../interfaces'
-import { createBeginDrag } from './beginDrag'
-import { createPublishDragSource } from './publishDragSource'
-import { createHover } from './hover'
-import { createDrop } from './drop'
-import { createEndDrag } from './endDrag'
+import type { DragDropManager, DragDropActions } from '../../interfaces.js'
+import { createBeginDrag } from './beginDrag.js'
+import { createPublishDragSource } from './publishDragSource.js'
+import { createHover } from './hover.js'
+import { createDrop } from './drop.js'
+import { createEndDrag } from './endDrag.js'
 
-export * from './types'
+export * from './types.js'
 
 export function createDragDropActions(
 	manager: DragDropManager,

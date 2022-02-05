@@ -7,7 +7,7 @@ import type {
 	XYCoord,
 } from 'dnd-core'
 import { invariant } from '@react-dnd/invariant'
-import type { DragSourceMonitor } from '../types'
+import type { DragSourceMonitor } from '../types/index.js'
 
 let isCallingCanDrag = false
 let isCallingIsDragging = false

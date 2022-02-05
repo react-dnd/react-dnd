@@ -1,6 +1,6 @@
-import { DragDropMonitor } from 'dnd-core'
-import { Connector } from '../../../internals'
-import { DragSourceMonitor } from '../../../types'
+import type { DragDropMonitor } from 'dnd-core'
+import type { Connector } from '../../../internals'
+import type { DragSourceMonitor } from '../../../types'
 import { DragSourceImpl } from '../DragSourceImpl'
 
 describe('The Hooks DragSourceImpl', () => {
@@ -38,7 +38,7 @@ describe('The Hooks DragSourceImpl', () => {
 		it('will invoke canDrag if it is a function', () => {
 			const impl = new DragSourceImpl(
 				{
-					canDrag: (m) => {
+					canDrag: (m: any) => {
 						expect(m).toEqual(monitor)
 						return true
 					},

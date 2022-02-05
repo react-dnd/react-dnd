@@ -7,9 +7,9 @@ import type {
 	DragDropMonitor,
 	HandlerRegistry,
 	Identifier,
-} from '../../interfaces'
-import { matchesType } from '../../utils/matchesType'
-import { HOVER } from './types'
+} from '../../interfaces.js'
+import { matchesType } from '../../utils/matchesType.js'
+import { HOVER } from './types.js'
 
 export function createHover(manager: DragDropManager) {
 	return function hover(

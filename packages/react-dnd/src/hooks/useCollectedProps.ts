@@ -1,6 +1,6 @@
-import type { Connector } from '../internals'
-import type { HandlerManager, MonitorEventEmitter } from '../types'
-import { useMonitorOutput } from './useMonitorOutput'
+import type { Connector } from '../internals/index.js'
+import type { HandlerManager, MonitorEventEmitter } from '../types/index.js'
+import { useMonitorOutput } from './useMonitorOutput.js'
 
 export function useCollectedProps<Collected, Monitor extends HandlerManager>(
 	collector: ((monitor: Monitor) => Collected) | undefined,

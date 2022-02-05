@@ -7,7 +7,7 @@ import type {
 	Identifier,
 	Unsubscribe,
 } from 'dnd-core'
-import type { ITestBackend, TestBackendContext } from './types'
+import type { ITestBackend, TestBackendContext } from './types.js'
 
 function noop() {
 	// noop

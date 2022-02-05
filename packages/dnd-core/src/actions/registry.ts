@@ -1,4 +1,4 @@
-import type { Action, SourceIdPayload, TargetIdPayload } from '../interfaces'
+import type { Action, SourceIdPayload, TargetIdPayload } from '../interfaces.js'
 
 export const ADD_SOURCE = 'dnd-core/ADD_SOURCE'
 export const ADD_TARGET = 'dnd-core/ADD_TARGET'

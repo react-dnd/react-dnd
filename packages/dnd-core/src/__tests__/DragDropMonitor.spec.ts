@@ -6,7 +6,7 @@ import {
 	NonDroppableTarget,
 	TargetWithNoDropResult,
 } from './targets'
-import {
+import type {
 	DragDropManager,
 	HandlerRegistry,
 	DragDropMonitor,
@@ -30,7 +30,7 @@ describe('DragDropMonitor', () => {
 
 	beforeEach(() => {
 		manager = createDragDropManager(TestBackend)
-		backend = manager.getBackend() as ITestBackend
+		backend = manager.getBackend() as unknown as ITestBackend
 		;(manager as any).receiveBackend(backend)
 		registry = manager.getRegistry()
 		monitor = manager.getMonitor()

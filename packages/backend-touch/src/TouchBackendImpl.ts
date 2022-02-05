@@ -13,16 +13,16 @@ import {
 	ListenerType,
 	TouchBackendOptions,
 	TouchBackendContext,
-} from './interfaces'
+} from './interfaces.js'
 import {
 	eventShouldStartDrag,
 	eventShouldEndDrag,
 	isTouchEvent,
-} from './utils/predicates'
-import { getEventClientOffset, getNodeClientOffset } from './utils/offsets'
-import { distance, inAngleRanges } from './utils/math'
-import { supportsPassive } from './utils/supportsPassive'
-import { OptionsReader } from './OptionsReader'
+} from './utils/predicates.js'
+import { getEventClientOffset, getNodeClientOffset } from './utils/offsets.js'
+import { distance, inAngleRanges } from './utils/math.js'
+import { supportsPassive } from './utils/supportsPassive.js'
+import { OptionsReader } from './OptionsReader.js'
 
 const eventNames: Record<ListenerType, EventName> = {
 	[ListenerType.mouse]: {

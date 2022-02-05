@@ -1,5 +1,5 @@
 import { DropTargetImpl as DropTarget } from './DropTargetImpl'
-import { DragDropMonitor } from '../interfaces'
+import type { DragDropMonitor } from '../interfaces'
 
 export class NormalTarget extends DropTarget {
 	public didCallDrop = false
@@ -11,11 +11,11 @@ export class NormalTarget extends DropTarget {
 		this.dropResult = dropResult || { foo: 'bar' }
 	}
 
-	public hover(): void {
+	public override hover(): void {
 		this.didCallHover = true
 	}
 
-	public drop(): any {
+	public override drop(): any {
 		this.didCallDrop = true
 		return this.dropResult
 	}
@@ -25,15 +25,15 @@ export class NonDroppableTarget extends DropTarget {
 	public didCallDrop = false
 	public didCallHover = false
 
-	public canDrop(): boolean {
+	public override canDrop(): boolean {
 		return false
 	}
 
-	public hover(): void {
+	public override hover(): void {
 		this.didCallHover = true
 	}
 
-	public drop(): void {
+	public override drop(): void {
 		this.didCallDrop = true
 	}
 }
@@ -42,17 +42,17 @@ export class TargetWithNoDropResult extends DropTarget {
 	public didCallDrop = false
 	public didCallHover = false
 
-	public hover(): void {
+	public override hover(): void {
 		this.didCallHover = true
 	}
 
-	public drop(): void {
+	public override drop(): void {
 		this.didCallDrop = true
 	}
 }
 
 export class BadResultTarget extends DropTarget {
-	public drop(): any {
+	public override drop(): any {
 		return 42
 	}
 }
@@ -67,11 +67,11 @@ export class TransformResultTarget extends DropTarget {
 		this.transform = transform
 	}
 
-	public hover(): void {
+	public override hover(): void {
 		this.didCallHover = true
 	}
 
-	public drop(monitor: DragDropMonitor): any {
+	public override drop(monitor: DragDropMonitor): any {
 		this.didCallDrop = true
 		const dropResult = monitor.getDropResult()
 		return this.transform(dropResult) as any

@@ -5,7 +5,7 @@ import type {
 	DragSourceOptions,
 	DragPreviewOptions,
 	DropTargetOptions,
-} from '../types'
+} from '../types/index.js'
 
 export type FactoryOrInstance<T> = T | (() => T)
 export type DragObjectFactory<T> = (monitor: DragSourceMonitor<T>) => T | null

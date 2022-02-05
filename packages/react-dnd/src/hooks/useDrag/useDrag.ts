@@ -1,11 +1,14 @@
-import type { ConnectDragSource, ConnectDragPreview } from '../../types'
-import type { DragSourceHookSpec, FactoryOrInstance } from '../types'
-import { useRegisteredDragSource } from './useRegisteredDragSource'
-import { useOptionalFactory } from '../useOptionalFactory'
-import { useDragSourceMonitor } from './useDragSourceMonitor'
-import { useDragSourceConnector } from './useDragSourceConnector'
-import { useCollectedProps } from '../useCollectedProps'
-import { useConnectDragPreview, useConnectDragSource } from './connectors'
+import type {
+	ConnectDragSource,
+	ConnectDragPreview,
+} from '../../types/index.js'
+import type { DragSourceHookSpec, FactoryOrInstance } from '../types.js'
+import { useRegisteredDragSource } from './useRegisteredDragSource.js'
+import { useOptionalFactory } from '../useOptionalFactory.js'
+import { useDragSourceMonitor } from './useDragSourceMonitor.js'
+import { useDragSourceConnector } from './useDragSourceConnector.js'
+import { useCollectedProps } from '../useCollectedProps.js'
+import { useConnectDragPreview, useConnectDragSource } from './connectors.js'
 import { invariant } from '@react-dnd/invariant'
 
 /**

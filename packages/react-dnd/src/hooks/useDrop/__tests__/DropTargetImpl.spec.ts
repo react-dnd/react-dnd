@@ -1,4 +1,4 @@
-import { DropTargetMonitor } from '../../../types'
+import type { DropTargetMonitor } from '../../../types'
 import { DropTargetImpl } from '../DropTargetImpl'
 
 describe('The Hooks DropTargetImpl', () => {
@@ -12,7 +12,7 @@ describe('The Hooks DropTargetImpl', () => {
 
 			impl = new DropTargetImpl(
 				{
-					canDrop(item, mon) {
+					canDrop(_item: any, mon: any) {
 						expect(mon).toEqual(monitor)
 						return false
 					},

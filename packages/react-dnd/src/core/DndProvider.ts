@@ -1,10 +1,10 @@
-import { FC, useEffect, memo, ReactNode } from 'react'
+import { FC, useEffect, memo, ReactNode, createElement } from 'react'
 import {
 	BackendFactory,
 	DragDropManager,
 	createDragDropManager,
 } from 'dnd-core'
-import { DndContext } from './DndContext'
+import { DndContext } from './DndContext.js'
 
 export type DndProviderProps<BackendContext, BackendOptions> =
 	| {
@@ -47,7 +47,7 @@ export const DndProvider: FC<DndProviderProps<unknown, unknown>> = memo(
 			return
 		}, [])
 
-		return <DndContext.Provider value={manager}>{children}</DndContext.Provider>
+		return createElement(DndContext.Provider, { value: manager }, children)
 	},
 )
 

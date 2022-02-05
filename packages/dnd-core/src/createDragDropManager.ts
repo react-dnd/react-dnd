@@ -1,9 +1,9 @@
-import { DragDropManagerImpl } from './classes/DragDropManagerImpl'
-import type { DragDropManager, BackendFactory } from './interfaces'
+import { DragDropManagerImpl } from './classes/DragDropManagerImpl.js'
+import type { DragDropManager, BackendFactory } from './interfaces.js'
 import { createStore, Store } from 'redux'
-import { reduce, State } from './reducers'
-import { DragDropMonitorImpl } from './classes/DragDropMonitorImpl'
-import { HandlerRegistryImpl } from './classes/HandlerRegistryImpl'
+import { reduce, State } from './reducers/index.js'
+import { DragDropMonitorImpl } from './classes/DragDropMonitorImpl.js'
+import { HandlerRegistryImpl } from './classes/HandlerRegistryImpl.js'
 
 export function createDragDropManager(
 	backendFactory: BackendFactory,

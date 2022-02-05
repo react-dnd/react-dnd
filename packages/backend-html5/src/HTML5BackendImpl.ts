@@ -8,20 +8,20 @@ import type {
 	XYCoord,
 	Unsubscribe,
 } from 'dnd-core'
-import { EnterLeaveCounter } from './EnterLeaveCounter'
+import { EnterLeaveCounter } from './EnterLeaveCounter.js'
 import {
 	getNodeClientOffset,
 	getEventClientOffset,
 	getDragPreviewOffset,
-} from './OffsetUtils'
+} from './OffsetUtils.js'
 import {
 	createNativeDragSource,
 	matchNativeItemType,
-} from './NativeDragSources'
-import * as NativeTypes from './NativeTypes'
-import type { NativeDragSource } from './NativeDragSources/NativeDragSource'
-import { OptionsReader } from './OptionsReader'
-import type { HTML5BackendContext, HTML5BackendOptions } from './types'
+} from './NativeDragSources/index.js'
+import * as NativeTypes from './NativeTypes.js'
+import type { NativeDragSource } from './NativeDragSources/NativeDragSource.js'
+import { OptionsReader } from './OptionsReader.js'
+import type { HTML5BackendContext, HTML5BackendOptions } from './types.js'
 
 type RootNode = Node & { __isReactDndBackendSetUp: boolean | undefined }
 

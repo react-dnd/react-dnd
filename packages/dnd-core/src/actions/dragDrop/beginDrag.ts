@@ -8,10 +8,10 @@ import type {
 	DragDropMonitor,
 	HandlerRegistry,
 	Identifier,
-} from '../../interfaces'
-import { setClientOffset } from './local/setClientOffset'
-import { isObject } from '../../utils/js_utils'
-import { BEGIN_DRAG, INIT_COORDS } from './types'
+} from '../../interfaces.js'
+import { setClientOffset } from './local/setClientOffset.js'
+import { isObject } from '../../utils/js_utils.js'
+import { BEGIN_DRAG, INIT_COORDS } from './types.js'
 
 const ResetCoordinatesAction = {
 	type: INIT_COORDS,

@@ -68,8 +68,8 @@ describe('The DropTargetMonitorImpl', () => {
 
 		THUNK_METHODS.forEach((method) => {
 			const mock = jest.fn()
-			manager.getMonitor()[method] = mock
-			monitor[method]()
+			;(manager.getMonitor() as any)[method] = mock
+			;(monitor as any)[method]()
 			expect(mock.mock.calls).toHaveLength(1)
 		})
 	})

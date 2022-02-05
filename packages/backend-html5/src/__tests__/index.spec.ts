@@ -1,5 +1,5 @@
 import { HTML5Backend } from '../index'
-import { DragDropManager } from 'dnd-core'
+import type { DragDropManager } from 'dnd-core'
 
 describe('index', () => {
 	it('should return HTML5 backend', () => {

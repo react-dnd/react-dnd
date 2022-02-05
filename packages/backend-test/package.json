@@ -3,8 +3,12 @@
   "version": "15.0.2",
   "description": "A mock backend for testing React DnD apps",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.mjs",
+    "require": "./dist/cjs/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
   "sideEffects": false,
   "license": "MIT",
   "repository": {
@@ -16,7 +20,8 @@
     "build_types": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist/esm src/",
     "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "build": "run-s build_types build_esm build_cjs"
+    "esm_hack": "node ../../scripts/esmify.mjs",
+    "build": "run-s build_types build_esm build_cjs esm_hack"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core"

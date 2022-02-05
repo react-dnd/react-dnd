@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import type { DragLayerMonitor } from '../types'
-import { useDragDropManager } from './useDragDropManager'
-import { useCollector } from './useCollector'
+import type { DragLayerMonitor } from '../types/index.js'
+import { useDragDropManager } from './useDragDropManager.js'
+import { useCollector } from './useCollector.js'
 
 /**
  * useDragLayer Hook

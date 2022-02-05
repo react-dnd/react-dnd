@@ -4,17 +4,17 @@ import {
 	HOVER,
 	END_DRAG,
 	DROP,
-} from '../actions/dragDrop'
+} from '../actions/dragDrop/index.js'
 import {
 	ADD_SOURCE,
 	ADD_TARGET,
 	REMOVE_SOURCE,
 	REMOVE_TARGET,
-} from '../actions/registry'
-import type { Action } from '../interfaces'
-import { areArraysEqual } from '../utils/equality'
-import { NONE, ALL } from '../utils/dirtiness'
-import { xor } from '../utils/js_utils'
+} from '../actions/registry.js'
+import type { Action } from '../interfaces.js'
+import { areArraysEqual } from '../utils/equality.js'
+import { NONE, ALL } from '../utils/dirtiness.js'
+import { xor } from '../utils/js_utils.js'
 
 export type State = string[]
 

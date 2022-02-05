@@ -1,0 +1,44 @@
+{
+  "core": {
+    "createDragDropManager": true,
+    "HandlerRole": true
+  },
+  "dnd": {
+    "DndContext": true,
+    "DndProvider": true,
+    "DragPreviewImage": true,
+    "useDrag": true,
+    "useDragDropManager": true,
+    "useDragLayer": true,
+    "useDrop": true
+  },
+  "htmlBackend": {
+    "HTML5Backend": true,
+    "NativeTypes": true,
+    "getEmptyImage": true
+  },
+  "touchBackend": {
+    "ListenerType": true,
+    "TouchBackend": true,
+    "TouchBackendImpl": true
+  },
+  "testBackend": {
+    "TestBackend": true,
+    "TestBackendImpl": true
+  },
+  "testUtils": {
+    "fireDrag": true,
+    "fireDragDrop": true,
+    "fireDragHover": true,
+    "fireReleaseDrag": true,
+    "getHandlerId": true,
+    "simulateDrag": true,
+    "simulateDragDrop": true,
+    "simulateDragHover": true,
+    "tick": true,
+    "wrapWithBackend": true,
+    "wrapWithTestBackend": true,
+    "__esModule": true,
+    "default": true
+  }
+}
