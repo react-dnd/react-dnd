@@ -22703,9 +22703,6 @@ __metadata:
     react-dnd-test-utils: "workspace:packages/test-utils"
     react-dnd-touch-backend: "workspace:packages/backend-touch"
     typescript: ^4.5.5
-  dependenciesMeta:
-    react@17.0.2:
-      unplugged: true
   languageName: unknown
   linkType: soft
 

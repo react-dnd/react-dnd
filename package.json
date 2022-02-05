@@ -104,10 +104,5 @@
     "@types/react": "17.0.17",
     "@types/react-dom": "17.0.9"
   },
-  "packageManager": "yarn@3.1.1",
-  "dependenciesMeta": {
-    "react@17.0.2": {
-      "unplugged": true
-    }
-  }
+  "packageManager": "yarn@3.1.1"
 }
