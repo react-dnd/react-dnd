@@ -1,5 +1,5 @@
-import * as NativeTypes from '../NativeTypes'
-import { getDataFromDataTransfer } from './getDataFromDataTransfer'
+import * as NativeTypes from '../NativeTypes.js'
+import { getDataFromDataTransfer } from './getDataFromDataTransfer.js'
 
 export interface NativeItemConfigExposePropreties {
 	[property: string]: (

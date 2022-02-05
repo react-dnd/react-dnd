@@ -1,4 +1,4 @@
-import { union, without } from './utils/js_utils'
+import { union, without } from './utils/js_utils.js'
 
 type NodePredicate = (node: Node | null | undefined) => boolean
 

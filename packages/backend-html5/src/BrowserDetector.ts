@@ -1,4 +1,4 @@
-import { memoize } from './utils/js_utils'
+import { memoize } from './utils/js_utils.js'
 
 declare global {
 	interface Window extends HTMLElement {
