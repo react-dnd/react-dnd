@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-html5-backend",
-  "version": "15.0.2",
+  "version": "15.1.0",
   "description": "HTML5 backend for React DnD",
   "main": "dist/cjs/index.js",
   "types": "dist/types/index.d.ts",

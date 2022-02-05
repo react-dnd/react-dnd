@@ -1,6 +1,6 @@
 {
   "name": "test-suite-cra",
-  "version": "15.0.2",
+  "version": "15.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -20,7 +20,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start:cra": "react-scripts start",
     "build": "react-scripts build"
   },
   "browserslist": {

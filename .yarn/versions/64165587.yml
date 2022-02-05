@@ -1,9 +1,0 @@
-releases:
-  dnd-core: minor
-  react-dnd: minor
-  react-dnd-documentation: minor
-  react-dnd-examples: minor
-  react-dnd-html5-backend: minor
-  react-dnd-test-backend: minor
-  react-dnd-test-utils: minor
-  react-dnd-touch-backend: minor

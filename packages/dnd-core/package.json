@@ -1,6 +1,6 @@
 {
   "name": "dnd-core",
-  "version": "15.0.2",
+  "version": "15.1.0",
   "description": "Drag and drop sans the GUI",
   "license": "MIT",
   "exports": {
