@@ -55,7 +55,7 @@ describe('The useDrag hook', () => {
 	it('throws if type is null', () => {
 		function Component() {
 			const [, drag] = useDrag({
-				type: null,
+				type: null as any,
 			})
 			return <div ref={drag} />
 		}

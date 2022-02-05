@@ -17,7 +17,7 @@ describe('OffsetUtils', () => {
 		it('should return get parent node client offset if element type is not ELEMENT NODE', () => {
 			const el = document.createElement('p')
 			el.textContent = 'Text inside paragraph'
-			expect(getNodeClientOffset(el.firstChild)).toEqual({
+			expect(getNodeClientOffset(el.firstChild!)).toEqual({
 				x: 0,
 				y: 0,
 			})

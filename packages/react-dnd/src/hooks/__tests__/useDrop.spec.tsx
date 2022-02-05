@@ -26,9 +26,12 @@ describe('The useDrop hook', () => {
 
 	it('throws if accept is null', () => {
 		function Component() {
-			const [, drag] = useDrop(() => ({
-				accept: null,
-			}))
+			const [, drag] = useDrop(
+				() =>
+					({
+						accept: null,
+					} as any),
+			)
 			return <div ref={drag} />
 		}
 

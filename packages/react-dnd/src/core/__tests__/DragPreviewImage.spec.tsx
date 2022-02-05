@@ -22,7 +22,7 @@ describe('The DragPreviewImage component', () => {
 			const knightStyle = {
 				color: 'black',
 			}
-			const connectPreview = (a, b) => {
+			const connectPreview = (a: any, b: any) => {
 				onConnect(a, b)
 				return preview(a, b)
 			}

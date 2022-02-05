@@ -1,6 +1,6 @@
 import { TouchBackend } from '../index'
-import { DragDropManager } from 'dnd-core'
-import { TouchBackendImpl } from '../TouchBackendImpl'
+import type { DragDropManager } from 'dnd-core'
+import type { TouchBackendImpl } from '../TouchBackendImpl'
 
 describe('TouchBackend', () => {
 	it('can be constructed', () => {

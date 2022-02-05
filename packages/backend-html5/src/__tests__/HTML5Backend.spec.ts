@@ -68,7 +68,7 @@ describe('The HTML5 Backend', () => {
 			backend.setup()
 			try {
 				backend.setup()
-			} catch (e) {
+			} catch (e: any) {
 				expect(e.message).toEqual(
 					'Cannot have two HTML5 backends at the same time.',
 				)
