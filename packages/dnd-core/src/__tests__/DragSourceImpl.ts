@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DragDropMonitor, DragSource, Identifier } from '../interfaces'
+import type { DragDropMonitor, DragSource, Identifier } from '../interfaces'
 
 export class DragSourceImpl implements DragSource {
 	public canDrag(_monitor: DragDropMonitor, _targetId: Identifier): boolean {

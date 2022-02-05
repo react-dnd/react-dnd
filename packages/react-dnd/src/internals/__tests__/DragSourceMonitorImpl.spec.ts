@@ -23,7 +23,7 @@ describe('The DragSourceMonitorImpl', () => {
 	it('throws if canDrag is used in a loop', () => {
 		const manager = createDragDropManager(TestBackend)
 		const monitor = new DragSourceMonitorImpl(manager)
-		manager.getMonitor().canDragSource = (a) => monitor.canDrag(a)
+		manager.getMonitor().canDragSource = (a: any) => (monitor as any).canDrag(a)
 
 		expect(() => monitor.canDragSource('123')).toThrow(
 			'You may not call monitor.canDrag() inside your canDrag() implementation. Read more: http://react-dnd.github.io/react-dnd/docs/api/drag-source-monitor',
@@ -51,8 +51,8 @@ describe('The DragSourceMonitorImpl', () => {
 
 		THUNK_METHODS.forEach((method) => {
 			const mock = jest.fn()
-			manager.getMonitor()[method] = mock
-			monitor[method]()
+			;(manager.getMonitor() as any)[method] = mock
+			;(monitor as any)[method]()
 			expect(mock.mock.calls).toHaveLength(1)
 		})
 	})

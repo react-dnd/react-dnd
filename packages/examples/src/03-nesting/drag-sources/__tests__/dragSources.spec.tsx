@@ -23,9 +23,9 @@ describe('the drag sources example', () => {
 
 		const boxes = await rendered.findAllByRole('SourceBox')
 		const target = await rendered.findByRole('TargetBox')
-		const box3 = boxes[3]
+		const box3 = boxes[3]!
 		act(() => {
-			fireEvent.click(box3.children[0])
+			fireEvent.click(box3.children[0]!)
 		})
 		const box3Color = box3.attributes['data-color'].value
 		fireDragDrop(box3, target)

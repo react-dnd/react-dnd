@@ -1,5 +1,5 @@
 import { SourceConnector } from '../SourceConnector'
-import { Backend } from 'dnd-core'
+import type { Backend } from 'dnd-core'
 
 describe('SourceConnector', () => {
 	let backend: jest.Mocked<Backend>
@@ -12,6 +12,7 @@ describe('SourceConnector', () => {
 			connectDragSource: jest.fn(),
 			connectDragPreview: jest.fn(),
 			connectDropTarget: jest.fn(),
+			profile: jest.fn(),
 		}
 		connector = new SourceConnector(backend)
 	})

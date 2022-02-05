@@ -2,7 +2,7 @@ import type {
 	TouchBackendOptions,
 	AngleRange,
 	TouchBackendContext,
-} from './interfaces'
+} from './interfaces.js'
 
 export class OptionsReader implements TouchBackendOptions {
 	public constructor(

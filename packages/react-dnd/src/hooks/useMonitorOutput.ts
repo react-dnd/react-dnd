@@ -1,6 +1,6 @@
-import type { HandlerManager, MonitorEventEmitter } from '../types'
-import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
-import { useCollector } from './useCollector'
+import type { HandlerManager, MonitorEventEmitter } from '../types/index.js'
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect.js'
+import { useCollector } from './useCollector.js'
 
 export function useMonitorOutput<Monitor extends HandlerManager, Collected>(
 	monitor: Monitor & MonitorEventEmitter,

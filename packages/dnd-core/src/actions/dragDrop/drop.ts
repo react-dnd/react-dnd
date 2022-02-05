@@ -6,9 +6,9 @@ import type {
 	DragDropMonitor,
 	HandlerRegistry,
 	Identifier,
-} from '../../interfaces'
-import { DROP } from './types'
-import { isObject } from '../../utils/js_utils'
+} from '../../interfaces.js'
+import { DROP } from './types.js'
+import { isObject } from '../../utils/js_utils.js'
 
 export function createDrop(manager: DragDropManager) {
 	return function drop(options = {}): void {

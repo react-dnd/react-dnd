@@ -1,10 +1,10 @@
-import { registerTarget, TargetConnector } from '../../internals'
-import type { DropTargetMonitor } from '../../types'
-import type { DropTargetHookSpec } from '../types'
-import { useDragDropManager } from '../useDragDropManager'
-import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect'
-import { useAccept } from './useAccept'
-import { useDropTarget } from './useDropTarget'
+import { registerTarget, TargetConnector } from '../../internals/index.js'
+import type { DropTargetMonitor } from '../../types/index.js'
+import type { DropTargetHookSpec } from '../types.js'
+import { useDragDropManager } from '../useDragDropManager.js'
+import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect.js'
+import { useAccept } from './useAccept.js'
+import { useDropTarget } from './useDropTarget.js'
 
 export function useRegisteredDropTarget<O, R, P>(
 	spec: DropTargetHookSpec<O, R, P>,

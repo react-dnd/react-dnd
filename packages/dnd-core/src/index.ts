@@ -1,2 +1,2 @@
-export * from './interfaces'
-export * from './createDragDropManager'
+export * from './interfaces.js'
+export * from './createDragDropManager.js'

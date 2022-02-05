@@ -1,6 +1,6 @@
 import { render, cleanup } from '@testing-library/react'
 import { fireDrag } from 'react-dnd-test-utils'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { useDrag } from '../useDrag'
 import { useDragLayer } from '../useDragLayer'
 import { DndProvider } from '../..'

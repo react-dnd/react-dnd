@@ -1,4 +1,4 @@
-import { intersection } from './js_utils'
+import { intersection } from './js_utils.js'
 
 export const NONE: string[] = []
 export const ALL: string[] = []

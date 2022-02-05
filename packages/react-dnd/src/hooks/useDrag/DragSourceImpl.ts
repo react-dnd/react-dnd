@@ -1,7 +1,7 @@
 import type { DragDropMonitor, DragSource, Identifier } from 'dnd-core'
-import type { Connector } from '../../internals'
-import type { DragSourceMonitor } from '../../types'
-import type { DragObjectFactory, DragSourceHookSpec } from '../types'
+import type { Connector } from '../../internals/index.js'
+import type { DragSourceMonitor } from '../../types/index.js'
+import type { DragObjectFactory, DragSourceHookSpec } from '../types.js'
 
 export class DragSourceImpl<O, R, P> implements DragSource {
 	public constructor(

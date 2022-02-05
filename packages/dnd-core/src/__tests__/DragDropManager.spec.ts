@@ -9,7 +9,7 @@ import {
 	BadResultTarget,
 	TransformResultTarget,
 } from './targets'
-import { DragDropManager, HandlerRegistry } from '../interfaces'
+import type { DragDropManager, HandlerRegistry } from '../interfaces'
 import { isString } from '../utils/js_utils'
 import { createDragDropManager } from '../createDragDropManager'
 
@@ -20,7 +20,7 @@ describe('DragDropManager', () => {
 
 	beforeEach(() => {
 		manager = createDragDropManager(TestBackend)
-		backend = manager.getBackend() as ITestBackend
+		backend = manager.getBackend() as unknown as ITestBackend
 		;(manager as any).receiveBackend(backend)
 		registry = manager.getRegistry()
 	})

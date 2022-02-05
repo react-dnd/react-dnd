@@ -3,8 +3,12 @@
   "version": "15.0.2",
   "description": "Drag and Drop for React",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.mjs",
+    "require": "./dist/cjs/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -16,7 +20,8 @@
     "build_types": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist/esm src/",
     "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "build": "run-s build_types build_esm build_cjs"
+    "esm_hack": "node ../../scripts/esmify.mjs",
+    "build": "run-s build_types build_esm build_cjs esm_hack"
   },
   "dependencies": {
     "@react-dnd/invariant": "^2.0.0",
@@ -30,6 +35,7 @@
     "@swc/core": "^1.2.136",
     "@testing-library/react": "^12.1.2",
     "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/jest": "^27.4.0",
     "@types/node": "^14.17.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",

@@ -1,5 +1,5 @@
 import { DragSourceImpl as DragSource } from './DragSourceImpl'
-import { DragDropMonitor } from '../interfaces'
+import type { DragDropMonitor } from '../interfaces'
 
 export class NormalSource extends DragSource {
 	public didCallBeginDrag = false
@@ -11,12 +11,12 @@ export class NormalSource extends DragSource {
 		this.item = item || { baz: 42 }
 	}
 
-	public beginDrag(): any {
+	public override beginDrag(): any {
 		this.didCallBeginDrag = true
 		return this.item
 	}
 
-	public endDrag(monitor: DragDropMonitor): void {
+	public override endDrag(monitor: DragDropMonitor): void {
 		this.recordedDropResult = monitor.getDropResult()
 	}
 }
@@ -24,18 +24,18 @@ export class NormalSource extends DragSource {
 export class NonDraggableSource extends DragSource {
 	public didCallBeginDrag = false
 
-	public canDrag(): boolean {
+	public override canDrag(): boolean {
 		return false
 	}
 
-	public beginDrag(): any {
+	public override beginDrag(): any {
 		this.didCallBeginDrag = true
 		return {}
 	}
 }
 
 export class BadItemSource extends DragSource {
-	public beginDrag(): any {
+	public override beginDrag(): any {
 		return 42
 	}
 }
@@ -50,16 +50,16 @@ export class NumberSource extends DragSource {
 		this.allowDrag = allowDrag
 	}
 
-	public canDrag(): boolean {
+	public override canDrag(): boolean {
 		return this.allowDrag
 	}
 
-	public isDragging(monitor: DragDropMonitor): boolean {
+	public override isDragging(monitor: DragDropMonitor): boolean {
 		const item = monitor.getItem()
 		return item.number === this.number
 	}
 
-	public beginDrag(): any {
+	public override beginDrag(): any {
 		return {
 			number: this.number,
 		}
