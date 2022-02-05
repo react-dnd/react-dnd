@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import type { FactoryOrInstance } from './types'
+import type { FactoryOrInstance } from './types.js'
 
 export function useOptionalFactory<T>(
 	arg: FactoryOrInstance<T>,

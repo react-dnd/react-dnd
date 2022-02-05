@@ -1,10 +1,10 @@
 import type { RefObject } from 'react'
 import { shallowEqual } from '@react-dnd/shallowequal'
-import { wrapConnectorHooks } from './wrapConnectorHooks'
+import { wrapConnectorHooks } from './wrapConnectorHooks.js'
 import type { Backend, Unsubscribe, Identifier } from 'dnd-core'
-import { isRef } from './isRef'
-import type { Connector } from './SourceConnector'
-import type { DropTargetOptions } from '../types'
+import { isRef } from './isRef.js'
+import type { Connector } from './SourceConnector.js'
+import type { DropTargetOptions } from '../types/index.js'
 
 export class TargetConnector implements Connector {
 	public hooks = wrapConnectorHooks({

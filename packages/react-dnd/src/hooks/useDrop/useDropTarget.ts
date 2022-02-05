@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
-import type { DropTargetMonitor } from '../../types'
-import type { DropTargetHookSpec } from '../types'
-import { DropTargetImpl } from './DropTargetImpl'
+import type { DropTargetMonitor } from '../../types/index.js'
+import type { DropTargetHookSpec } from '../types.js'
+import { DropTargetImpl } from './DropTargetImpl.js'
 
 export function useDropTarget<O, R, P>(
 	spec: DropTargetHookSpec<O, R, P>,

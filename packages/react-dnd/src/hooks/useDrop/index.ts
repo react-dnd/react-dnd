@@ -1,1 +1,1 @@
-export * from './useDrop'
+export * from './useDrop.js'
