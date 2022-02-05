@@ -1,0 +1,24 @@
+{
+  "name": "test-suite-vite",
+  "version": "15.0.2",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dnd": "workspace:packages/react-dnd",
+    "react-dnd-examples": "workspace:packages/examples",
+    "react-dnd-html5-backend": "workspace:packages/backend-html5",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@tsconfig/strictest": "^1.0.0",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "typescript": "^4.5.5",
+    "vite": "^2.7.13",
+    "vite-react-jsx": "^1.1.2"
+  }
+}

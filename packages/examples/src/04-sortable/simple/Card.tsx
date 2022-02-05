@@ -1,6 +1,6 @@
 import { FC, useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import { ItemTypes } from './ItemTypes.js'
 import type { XYCoord, Identifier } from 'dnd-core'
 
 const style = {

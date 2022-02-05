@@ -37,8 +37,9 @@
     "simulateDragHover": true,
     "tick": true,
     "wrapWithBackend": true,
-    "wrapWithTestBackend": true,
-    "__esModule": true,
-    "default": true
+    "wrapWithTestBackend": true
+  },
+  "examples": {
+    "componentIndex": true
   }
 }

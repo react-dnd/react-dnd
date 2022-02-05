@@ -1,4 +1,4 @@
-import { tick } from './utils'
+import { tick } from './utils.js'
 import { fireEvent, act } from '@testing-library/react'
 
 export async function fireDragDrop(source: Element, target: Element) {

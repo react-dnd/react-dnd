@@ -19,7 +19,7 @@ module.exports = {
 			},
 		],
 	},
-	resolver: 'jest-ts-webcompat-resolver',
+	resolver: './jest/resolver.js',
 	setupFilesAfterEnv: ['<rootDir>/jest/setup-testing-library.js'],
 	collectCoverageFrom: [
 		'packages/*/src/**/*.tsx',
@@ -29,6 +29,7 @@ module.exports = {
 		'!packages/docsite/**',
 		'!packages/backend-test/**',
 		'!packages/test-utils/**',
+		'!packages/test-suite-*/**',
 	],
 	//coverageProvider: 'v8',
 	testMatch: [

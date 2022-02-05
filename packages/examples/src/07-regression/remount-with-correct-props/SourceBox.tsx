@@ -1,6 +1,6 @@
 import type { FC, CSSProperties } from 'react'
 import { useDrag } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import { ItemTypes } from './ItemTypes.js'
 
 const getStyle = (isDragging: boolean): CSSProperties => {
 	const result: CSSProperties = {

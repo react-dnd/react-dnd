@@ -2,9 +2,10 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-const hasImport = (l) => l.indexOf('import ') !== -1
+const hasImport = (l) => l.indexOf('import ') !== -1 && l.indexOf('./') !== -1
 const hasExport = (l) => l.indexOf('export ') !== -1
 const isSourceMap = (l) => l.indexOf('//# sourceMappingURL=') !== -1
+const isReactImport = (l) => l.indexOf('react/jsx-runtime') !== -1
 
 async function processDir(dir) {
 	const entries = await fs.readdir(dir)
@@ -39,6 +40,9 @@ async function js2mjsRefs(entryPath) {
 		) {
 			console.log('->', l)
 			return l.replace('.js', '.mjs')
+		}
+		if (isReactImport(l)) {
+			return l.replace('react/jsx-runtime', 'react/jsx-runtime.js')
 		}
 		return l
 	})

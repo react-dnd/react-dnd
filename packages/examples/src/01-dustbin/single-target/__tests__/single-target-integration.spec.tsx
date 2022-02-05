@@ -14,7 +14,7 @@ describe('Integration: Dustbin Single Target', () => {
 		expect(box).toBeDefined()
 		expect(dustbin).toBeDefined()
 
-		await fireDragDrop(box, dustbin)
+		await fireDragDrop(box!, dustbin)
 		expect(window.alert).toHaveBeenCalledWith(`You dropped Glass into Dustbin!`)
 	})
 })

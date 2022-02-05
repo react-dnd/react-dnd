@@ -8,7 +8,7 @@ import {
 	ReactNode,
 } from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
-import { Colors } from './Colors'
+import { Colors } from './Colors.js'
 
 const style: CSSProperties = {
 	border: '1px dashed gray',

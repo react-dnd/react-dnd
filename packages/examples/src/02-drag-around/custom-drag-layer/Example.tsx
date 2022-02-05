@@ -1,6 +1,6 @@
 import { FC, useState, useCallback } from 'react'
-import { Container } from './Container'
-import { CustomDragLayer } from './CustomDragLayer'
+import { Container } from './Container.js'
+import { CustomDragLayer } from './CustomDragLayer.js'
 
 export const Example: FC = () => {
 	const [snapToGridAfterDrop, setSnapToGridAfterDrop] = useState(false)
