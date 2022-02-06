@@ -22,8 +22,9 @@
     "build_esm": "swc -C module.type=es6 -d dist/esm src/",
     "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
     "esm_hack": "node ../../scripts/esmify.mjs",
+    "jsx_hack": "node ../../scripts/unjsxify.mjs dist/docs",
     "build_docs": "tsc -b tsconfig.docs.json",
-    "build": "run-s build_types build_esm build_cjs build_docs esm_hack"
+    "build": "run-s build_types build_esm build_cjs build_docs esm_hack jsx_hack"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core",
