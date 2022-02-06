@@ -3,7 +3,7 @@ import fs from 'fs/promises'
 import path from 'path'
 
 const pathArg = process.argv[2]
-console.log("process path ", pathArg)
+console.log('process path ', pathArg)
 
 async function processDir(dir) {
 	const entries = await fs.readdir(dir)
