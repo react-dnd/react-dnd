@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { act, fireEvent, render, cleanup } from '@testing-library/react'
 import Example from '../index'
 import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
