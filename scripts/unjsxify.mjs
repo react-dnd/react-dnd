@@ -1,23 +1,16 @@
 /* eslint-disable */
 import fs from 'fs/promises'
-import path from 'path'
+import { walk } from './walk.mjs'
 
 const pathArg = process.argv[2]
 console.log('process path ', pathArg)
 
 async function processDir(dir) {
-	const entries = await fs.readdir(dir)
-	for (const entry of entries) {
-		const entryPath = path.join(dir, entry)
-		const stat = await fs.stat(entryPath)
-		if (stat.isDirectory()) {
-			await processDir(entryPath)
-		} else {
-			if (entryPath.endsWith('.jsx')) {
-				await jsx2jsName(entryPath)
-			}
+	await walk(dir, async (entryPath) => {
+		if (entryPath.endsWith('.jsx')) {
+			await jsx2jsName(entryPath)
 		}
-	}
+	})
 }
 
 function jsx2jsName(entryPath) {
