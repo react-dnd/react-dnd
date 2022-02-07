@@ -3,10 +3,10 @@
 [![Build Status](https://travis-ci.org/kriskowal/asap.png?branch=master)](https://travis-ci.org/kriskowal/asap)
 
 Promise and asynchronous observer libraries, as well as hand-rolled callback
-programs and libraries, often need a mechanism to postpone the execution of a
+programs and libraries, often need a mechanism to postpone the running of a
 callback until the next available event.
 (See [Designing API’s for Asynchrony][zalgo].)
-The `asap` function executes a task **as soon as possible** but not before it
+The `asap` function runs a task **as soon as possible** but not before it
 returns, waiting only for the completion of the current event and previously
 scheduled tasks.
 
@@ -19,14 +19,14 @@ asap(function () {
 [zalgo]: http://blog.izs.me/post/59142742143/designing-apis-for-asynchrony
 
 This CommonJS package provides an `asap` module that exports a function that
-executes a task function _as soon as possible_.
+ruts a task function _as soon as possible_.
 
 ASAP strives to schedule events to occur before yielding for IO, reflow,
 or redrawing.
 Each event receives an independent stack, with only platform code in parent
 frames and the events run in the order they are scheduled.
 
-ASAP provides a fast event queue that will execute tasks until it is
+ASAP provides a fast event queue that will run tasks until it is
 empty before yielding to the JavaScript engine's underlying event-loop.
 When a task gets added to a previously empty event queue, ASAP schedules a flush
 event, preferring for that event to occur before the JavaScript engine has an
@@ -60,7 +60,7 @@ ASAP can sustain infinite recursive calls without warning.
 It will not halt from a stack overflow, and it will not consume unbounded
 memory.
 This is behaviorally equivalent to an infinite loop.
-Just as with infinite loops, you can monitor a Node.js process for this behavior
+As with infinite loops, you can monitor a Node.js process for this behavior
 with a heart-beat signal.
 As with infinite loops, a very small amount of caution goes a long way to
 avoiding problems.
@@ -132,7 +132,7 @@ When a task is added to an empty event queue, it is not always possible to
 guarantee that the task queue will begin flushing immediately after the current
 event.
 However, once the task queue begins flushing, it will not yield until the queue
-is empty, even if the queue grows while executing tasks.
+is empty, even if the queue grows while running tasks.
 
 The following browsers allow the use of [DOM mutation observers][] to access
 the HTML [microtask queue][], and thus begin flushing ASAP's task queue
