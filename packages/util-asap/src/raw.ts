@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals, @typescript-eslint/ban-ts-comment, @typescript-eslint/no-unused-vars */
-import type { Task } from '../types.js'
+import type { Task } from './types.js'
 
 // Use the fastest means possible to execute a task in its own turn, with
 // priority over other events including IO, animation, reflow, and redraw
@@ -50,7 +50,7 @@ function flush() {
 		// Advance the index before calling the task. This ensures that we will
 		// begin flushing on the next task the task throws an error.
 		index = index + 1
-		queue[currentIndex].call()
+		queue[currentIndex]!()
 		// Prevent leaking memory for long chains of recursive calls to `asap`.
 		// If we call `asap` within tasks scheduled by `asap`, the queue will
 		// grow, but to avoid an O(n) walk for every task we execute, we don't
@@ -64,7 +64,7 @@ function flush() {
 				scan < newLength;
 				scan++
 			) {
-				queue[scan] = queue[scan + index]
+				queue[scan] = queue[scan + index]!
 			}
 			queue.length -= index
 			index = 0

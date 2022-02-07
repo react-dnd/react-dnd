@@ -1,5 +1,5 @@
-import { rawAsap } from './raw'
-import type { Task } from '../types'
+import { rawAsap } from './raw.js'
+import type { Task } from './types.js'
 
 // rawAsap provides everything we need except exception management.
 // RawTasks are recycled to reduce GC churn.
