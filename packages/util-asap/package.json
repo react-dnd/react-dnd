@@ -1,6 +1,6 @@
 {
   "name": "@react-dnd/asap",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "High-priority task queue for Node.js and browsers",
   "keywords": [
     "event",
