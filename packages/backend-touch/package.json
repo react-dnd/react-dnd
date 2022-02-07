@@ -25,7 +25,7 @@
     "build": "run-s build_types build_esm build_cjs esm_hack"
   },
   "dependencies": {
-    "@react-dnd/invariant": "^2.0.0",
+    "@react-dnd/invariant": "workspace:packages/util-invariant",
     "dnd-core": "workspace:packages/dnd-core"
   },
   "devDependencies": {
