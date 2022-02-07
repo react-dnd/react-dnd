@@ -5063,6 +5063,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-dnd/asap@workspace:packages/util-asap":
+  version: 0.0.0-use.local
+  resolution: "@react-dnd/asap@workspace:packages/util-asap"
+  dependencies:
+    "@swc/cli": ^0.1.55
+    "@swc/core": ^1.2.136
+    "@types/jest": ^24.0.23
+    "@types/node": ^17.0.15
+    npm-run-all: ^4.0.2
+    typescript: ^4.5.5
+  languageName: unknown
+  linkType: soft
+
 "@react-dnd/invariant@workspace:packages/util-invariant":
   version: 0.0.0-use.local
   resolution: "@react-dnd/invariant@workspace:packages/util-invariant"
@@ -19838,7 +19851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-run-all@npm:^4.1.5":
+"npm-run-all@npm:^4.0.2, npm-run-all@npm:^4.1.5":
   version: 4.1.5
   resolution: "npm-run-all@npm:4.1.5"
   dependencies:

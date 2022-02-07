@@ -1,0 +1,47 @@
+{
+  "name": "@react-dnd/asap",
+  "version": "3.0.0",
+  "description": "High-priority task queue for Node.js and browsers",
+  "keywords": [
+    "event",
+    "task",
+    "queue"
+  ],
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.mjs",
+    "require": "./dist/cjs/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
+  "scripts": {
+    "clean": "shx rm -rf dist/",
+    "build_types": "tsc -b .",
+    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
+    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
+    "esm_hack": "node ../../scripts/esmify.mjs",
+    "build": "run-s build_types build_esm build_cjs esm_hack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-dnd/react-dnd"
+  },
+  "react-native": {
+    "domain": false
+  },
+  "browser": {
+    "./asap": "./dist/esm/browser/asap.js",
+    "./asap.js": "./dist/esm/browser/asap.js",
+    "./raw": "./dist/esm/browser/raw.js",
+    "./raw.js": "./dist/esm/browser/raw.js"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.136",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^17.0.15",
+    "npm-run-all": "^4.0.2",
+    "typescript": "^4.5.5"
+  }
+}
