@@ -5077,13 +5077,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@react-dnd/shallowequal@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@react-dnd/shallowequal@npm:2.0.0"
-  checksum: b5bbdc795d65945bb7ba2322bed5cf8d4c6fe91dced98c3b10e3d16822c438f558751135ff296f8d1aa1eaa9d0037dacab2b522ca5eb812175123b9996966dcb
-  languageName: node
-  linkType: hard
-
 "@rollup/plugin-babel@npm:^5.2.0":
   version: 5.3.0
   resolution: "@rollup/plugin-babel@npm:5.3.0"
@@ -23120,7 +23113,6 @@ __metadata:
   resolution: "react-dnd@workspace:packages/react-dnd"
   dependencies:
     "@react-dnd/invariant": "workspace:packages/util-invariant"
-    "@react-dnd/shallowequal": ^2.0.0
     "@swc/cli": ^0.1.55
     "@swc/core": ^1.2.136
     "@testing-library/react": ^12.1.2

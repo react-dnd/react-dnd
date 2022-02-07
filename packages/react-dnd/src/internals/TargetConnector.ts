@@ -1,5 +1,5 @@
 import type { RefObject } from 'react'
-import { shallowEqual } from '@react-dnd/shallowequal'
+import { shallowEqual } from './shallowEqual.js'
 import { wrapConnectorHooks } from './wrapConnectorHooks.js'
 import type { Backend, Unsubscribe, Identifier } from 'dnd-core'
 import { isRef } from './isRef.js'

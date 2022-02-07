@@ -8,7 +8,7 @@
   ],
   "license": "MIT",
   "author": "Andres Suarez <zertosh@gmail.com>",
-  "repository": "https://github.com/react-dnd/invariant",
+  "repository": "https://github.com/react-dnd/react-dnd",
   "main": "dist/cjs/index.js",
   "types": "dist/types/index.d.ts",
   "exports": {
