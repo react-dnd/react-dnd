@@ -11,3 +11,4 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 .pnp.*
 yarn.lock
+.next/
