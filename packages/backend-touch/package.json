@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "15.1.0",
+  "version": "15.1.1",
   "description": "Touch backend for react-dnd",
   "main": "dist/cjs/index.js",
   "types": "dist/types/index.d.ts",
