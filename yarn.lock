@@ -5056,13 +5056,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-dnd/asap@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@react-dnd/asap@npm:4.0.0"
-  checksum: 4c37ef5c4efd5bb37ba938276074e6896f102b459ed462e2e7560bdb5e75500f2beeafd7e089e1ffea4a9fb337f15be7992952a78a9b56d80f372aadadc31eca
-  languageName: node
-  linkType: hard
-
 "@react-dnd/asap@workspace:packages/util-asap":
   version: 0.0.0-use.local
   resolution: "@react-dnd/asap@workspace:packages/util-asap"
@@ -11227,7 +11220,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "dnd-core@workspace:packages/dnd-core"
   dependencies:
-    "@react-dnd/asap": ^4.0.0
+    "@react-dnd/asap": "workspace:packages/util-asap"
     "@react-dnd/invariant": "workspace:packages/util-invariant"
     "@swc/cli": ^0.1.55
     "@swc/core": ^1.2.136

@@ -24,7 +24,7 @@
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "dependencies": {
-    "@react-dnd/asap": "^4.0.0",
+    "@react-dnd/asap": "workspace:packages/util-asap",
     "@react-dnd/invariant": "workspace:packages/util-invariant",
     "redux": "^4.1.1"
   },

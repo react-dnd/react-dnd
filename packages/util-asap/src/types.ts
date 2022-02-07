@@ -1,2 +1,4 @@
-export type Task = any
-export type Domain = any
+export interface Task {
+	call(): void
+}
+export type TaskFn = () => void
