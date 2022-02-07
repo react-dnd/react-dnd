@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { act, fireEvent, render, cleanup } from '@testing-library/react'
 import Example from '../index'
 import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
@@ -11,7 +12,7 @@ describe('the drag sources example', () => {
 
 		const boxes = await rendered.findAllByRole('SourceBox')
 		const target = await rendered.findByRole('TargetBox')
-		const box3 = boxes[3]
+		const box3 = boxes[3]!
 		const box3Color = box3.attributes['data-color'].value
 		await fireDragDrop(box3, target)
 		expect(target.attributes['data-color'].value).toEqual(box3Color)
