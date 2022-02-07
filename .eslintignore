@@ -9,3 +9,4 @@
 **/coverage/
 .pnp.js
 .pnp.cjs
+.next/

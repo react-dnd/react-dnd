@@ -1,16 +1,20 @@
 {
-  "name": "dnd-core",
-  "version": "15.1.0",
-  "description": "Drag and drop sans the GUI",
+  "name": "@react-dnd/asap",
+  "version": "3.0.0",
+  "description": "High-priority task queue for Node.js and browsers",
+  "keywords": [
+    "event",
+    "task",
+    "queue"
+  ],
   "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/index.d.ts",
   "exports": {
     "import": "./dist/esm/index.mjs",
     "require": "./dist/cjs/index.js",
     "types": "./dist/types/index.d.ts"
   },
-  "main": "dist/cjs/index.js",
-  "types": "dist/types/index.d.ts",
-  "sideEffects": false,
   "scripts": {
     "clean": "shx rm -rf dist/",
     "build_types": "tsc -b .",
@@ -21,21 +25,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-dnd/react-dnd.git"
-  },
-  "dependencies": {
-    "@react-dnd/asap": "workspace:packages/util-asap",
-    "@react-dnd/invariant": "workspace:packages/util-invariant",
-    "redux": "^4.1.1"
+    "url": "https://github.com/react-dnd/react-dnd"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.55",
     "@swc/core": "^1.2.136",
-    "@types/jest": "^27.4.0",
-    "@types/setimmediate": "^1.0.2",
-    "npm-run-all": "^4.1.5",
-    "react-dnd-test-backend": "portal:../backend-test",
-    "setimmediate": "^1.0.5",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^16",
+    "npm-run-all": "^4.0.2",
     "shx": "^0.3.4",
     "typescript": "^4.5.5"
   }
