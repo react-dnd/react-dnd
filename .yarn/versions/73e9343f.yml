@@ -1,0 +1,7 @@
+releases:
+  "@react-dnd/asap": major
+  "@react-dnd/invariant": major
+  "@react-dnd/shallowequal": major
+  dnd-core: patch
+  react-dnd: patch
+  react-dnd-touch-backend: patch
