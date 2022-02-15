@@ -1,6 +1,6 @@
 import { CSSProperties, Component } from 'react'
 import Faker from 'faker'
-import { Card } from './Card.js'
+import { Card } from './Card'
 import update from 'immutability-helper'
 
 const style: CSSProperties = {

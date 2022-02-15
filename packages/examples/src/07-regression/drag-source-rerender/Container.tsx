@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Example } from './Example.js'
+import { Example } from './Example'
 
 export const Container: FC = () => {
 	return (

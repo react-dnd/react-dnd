@@ -1,10 +1,10 @@
 import { CSSProperties, FC, useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes.js'
-import { DraggableBox } from './DraggableBox.js'
-import { snapToGrid as doSnapToGrid } from './snapToGrid.js'
+import { ItemTypes } from './ItemTypes'
+import { DraggableBox } from './DraggableBox'
+import { snapToGrid as doSnapToGrid } from './snapToGrid'
 import update from 'immutability-helper'
-import type { DragItem } from './interfaces.js'
+import type { DragItem } from './interfaces'
 
 const styles: CSSProperties = {
 	width: 300,

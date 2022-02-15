@@ -1,9 +1,9 @@
 import { CSSProperties, FC, useCallback, useState } from 'react'
 import { useDrop, XYCoord } from 'react-dnd'
-import { ItemTypes } from './ItemTypes.js'
-import { Box } from './Box.js'
+import { ItemTypes } from './ItemTypes'
+import { Box } from './Box'
 import update from 'immutability-helper'
-import type { DragItem } from './interfaces.js'
+import type { DragItem } from './interfaces'
 
 const styles: CSSProperties = {
 	width: 300,
