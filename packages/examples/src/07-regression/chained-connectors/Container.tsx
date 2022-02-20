@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import { BoxWithHandle } from './BoxWithHandle.js'
+import { BoxWithHandle } from './BoxWithHandle'
 
 const style: CSSProperties = {
 	width: 400,

@@ -38,8 +38,5 @@
     "tick": true,
     "wrapWithBackend": true,
     "wrapWithTestBackend": true
-  },
-  "examples": {
-    "componentIndex": true
   }
 }

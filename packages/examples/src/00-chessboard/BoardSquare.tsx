@@ -1,9 +1,9 @@
 import type { FC, ReactNode } from 'react'
 import { useDrop } from 'react-dnd'
-import { Square } from './Square.js'
-import { ItemTypes } from './ItemTypes.js'
-import { Overlay, OverlayType } from './Overlay.js'
-import type { Game } from './Game.js'
+import { Square } from './Square'
+import { ItemTypes } from './ItemTypes'
+import { Overlay, OverlayType } from './Overlay'
+import type { Game } from './Game'
 export interface BoardSquareProps {
 	x: number
 	y: number
