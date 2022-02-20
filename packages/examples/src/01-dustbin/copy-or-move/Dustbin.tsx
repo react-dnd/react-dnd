@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from 'react'
 import { useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes.js'
+import { ItemTypes } from './ItemTypes'
 
 const style: CSSProperties = {
 	height: '12rem',

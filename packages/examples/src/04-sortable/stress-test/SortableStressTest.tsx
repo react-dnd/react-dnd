@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react'
-import { Container } from './Container.js'
+import { Container } from './Container'
 
 export const SortableStressTest: FC = () => {
 	// Avoid rendering on server because the big data list is generated

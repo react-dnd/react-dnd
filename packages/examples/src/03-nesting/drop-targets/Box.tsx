@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { useDrag } from 'react-dnd'
-import { ItemTypes } from './ItemTypes.js'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
 	display: 'inline-block',

@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from 'react'
-import { ItemTypes } from './ItemTypes.js'
+import { ItemTypes } from './ItemTypes'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 
 const style: CSSProperties = {

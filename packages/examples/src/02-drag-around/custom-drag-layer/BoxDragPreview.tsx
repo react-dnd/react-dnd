@@ -1,5 +1,5 @@
 import { FC, CSSProperties, useEffect, useState, memo } from 'react'
-import { Box } from './Box.js'
+import { Box } from './Box'
 
 const styles: CSSProperties = {
 	display: 'inline-block',
