@@ -1,7 +1,6 @@
 {
   "name": "@react-dnd/shallowequal",
   "version": "3.0.0",
-  "private": false,
   "description": "Like lodash isEqualWith but for shallow equal.",
   "keywords": [
     "shallowequal",

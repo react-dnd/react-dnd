@@ -4,12 +4,8 @@
   "private": true,
   "description": "Drag and Drop for React",
   "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
-  "exports": {
-    "import": "./dist/esm/index.mjs",
-    "require": "./dist/cjs/index.js",
-    "types": "./dist/types/index.d.ts"
-  },
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -21,10 +17,8 @@
     "build_types": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist/esm src/",
     "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "esm_hack": "node ../../scripts/esmify.mjs",
-    "jsx_hack": "node ../../scripts/unjsxify.mjs dist/docs",
     "build_docs": "tsc -b tsconfig.docs.json",
-    "build": "run-s build_types build_esm build_cjs build_docs esm_hack jsx_hack"
+    "build": "run-s build_types build_esm build_cjs build_docs"
   },
   "dependencies": {
     "dnd-core": "workspace:packages/dnd-core",
