@@ -1,0 +1,16 @@
+name: Version Check
+on: [push, pull_request]
+env:
+  DEFAULT_NODE_VERSION: 16
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    if: "github.ref != 'main' &&  github.head_ref != 'main' && !contains(github.ref , 'release/') && !contains(github.head_ref , 'release/') && !contains(github.ref , 'dependabot/') && !contains(github.head_ref , 'dependabot/')"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{env.DEFAULT_NODE_VERSION}}
+      - run: yarn version check

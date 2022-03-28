@@ -28,11 +28,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
-      - run: yarn version check
-        if: "github.actor != 'dependabot[bot]' && !contains(github.ref , 'release/') && !contains(github.head_ref , 'release/')"
-        name: Version Check
-
+            
       - run: yarn install
         name: Install Dependencies
 
