@@ -16,7 +16,7 @@ export interface CardProps {
 	moveCard: (draggedId: string, id: string) => void
 }
 
-export const Card: FC<CardProps> = memo(({ id, text, moveCard }) => {
+export const Card: FC<CardProps> = memo(function Card({ id, text, moveCard }) {
 	const ref = useRef(null)
 	const [{ isDragging, handlerId }, connectDrag] = useDrag({
 		type: ItemTypes.CARD,

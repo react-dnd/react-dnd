@@ -26,17 +26,17 @@
   "dependencies": {
     "@react-dnd/asap": "workspace:packages/util-asap",
     "@react-dnd/invariant": "workspace:packages/util-invariant",
-    "redux": "^4.1.1"
+    "redux": "^4.1.2"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.136",
-    "@types/jest": "^27.4.0",
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.161",
+    "@types/jest": "^27.4.1",
     "@types/setimmediate": "^1.0.2",
     "npm-run-all": "^4.1.5",
     "react-dnd-test-backend": "portal:../backend-test",
     "setimmediate": "^1.0.5",
     "shx": "^0.3.4",
-    "typescript": "^4.5.5"
+    "typescript": "^4.6.3"
   }
 }
