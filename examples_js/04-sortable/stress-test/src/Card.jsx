@@ -8,7 +8,7 @@ const style = {
     backgroundColor: 'white',
     cursor: 'move',
 };
-export const Card = memo(({ id, text, moveCard }) => {
+export const Card = memo(function Card({ id, text, moveCard }) {
     const ref = useRef(null);
     const [{ isDragging, handlerId }, connectDrag] = useDrag({
         type: ItemTypes.CARD,
