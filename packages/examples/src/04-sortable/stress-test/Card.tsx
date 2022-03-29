@@ -1,5 +1,6 @@
 import { CSSProperties, FC, memo, useMemo, useRef } from 'react'
-import { useDrag, useDrop, DragDropMonitor } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd'
+import type { DragDropMonitor } from 'dnd-core'
 import { ItemTypes } from './ItemTypes'
 
 const style: CSSProperties = {
