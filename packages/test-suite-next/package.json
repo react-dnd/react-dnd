@@ -3,8 +3,7 @@
   "private": true,
   "scripts": {
     "start:next": "next dev",
-    "//build-about": "next build isn't working atm, need to investigate why",
-    "//build": "next build",
+    "build": "next build",
     "lint": "next lint"
   },
   "dependencies": {
