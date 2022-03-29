@@ -27,7 +27,7 @@ function AppGuts() {
 					</option>
 				))}
 			</select>
-			<Example />
+			{typeof window !== 'undefined' ? <Example /> : null}
 		</div>
 	)
 }
