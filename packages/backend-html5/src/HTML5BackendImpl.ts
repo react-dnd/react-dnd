@@ -406,9 +406,6 @@ export class HTML5BackendImpl implements Backend {
 			this.hoverRafId === null &&
 			typeof requestAnimationFrame !== 'undefined'
 		) {
-			// cancel any existing hover if present
-			this.cancelHover()
-
 			this.hoverRafId = requestAnimationFrame(() => {
 				if (this.monitor.isDragging()) {
 					this.actions.hover(dragOverTargetIds || [], {
