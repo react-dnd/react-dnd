@@ -1,6 +1,6 @@
 # Contributing to React-DnD
 
-So you want to contibute to React-DnD? Thank you! This library is a community effort, and your contributions are greatly appreciated.
+So you want to contribute to React-DnD? Thank you! This library is a community effort, and your contributions are greatly appreciated.
 
 ## FAQ
 

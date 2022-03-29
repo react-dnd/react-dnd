@@ -347,6 +347,7 @@ export class HTML5BackendImpl implements Backend {
 		if (this.clearCurrentDragSourceNode() && this.monitor.isDragging()) {
 			this.actions.endDrag()
 		}
+		this.cancelHover()
 	}
 
 	private setCurrentDragSourceNode(node: Element | null) {
@@ -400,6 +401,36 @@ export class HTML5BackendImpl implements Backend {
 		return false
 	}
 
+	private scheduleHover = (dragOverTargetIds: string[] | null) => {
+		if (
+			this.hoverRafId === null &&
+			typeof requestAnimationFrame !== 'undefined'
+		) {
+			// cancel any existing hover if present
+			this.cancelHover()
+
+			this.hoverRafId = requestAnimationFrame(() => {
+				if (this.monitor.isDragging()) {
+					this.actions.hover(dragOverTargetIds || [], {
+						clientOffset: this.lastClientOffset,
+					})
+				}
+
+				this.hoverRafId = null
+			})
+		}
+	}
+
+	private cancelHover = () => {
+		if (
+			this.hoverRafId !== null &&
+			typeof cancelAnimationFrame !== 'undefined'
+		) {
+			cancelAnimationFrame(this.hoverRafId)
+			this.hoverRafId = null
+		}
+	}
+
 	public handleTopDragStartCapture = (): void => {
 		this.clearCurrentDragSourceNode()
 		this.dragStartSourceIds = []
@@ -429,6 +460,7 @@ export class HTML5BackendImpl implements Backend {
 		// Avoid crashing if we missed a drop event or our previous drag died
 		if (this.monitor.isDragging()) {
 			this.actions.endDrag()
+			this.cancelHover()
 		}
 
 		// Don't publish the source just yet (see why below)
@@ -530,6 +562,7 @@ export class HTML5BackendImpl implements Backend {
 			// Only proceed if we have not handled it already.
 			this.actions.endDrag()
 		}
+		this.cancelHover()
 	}
 
 	public handleTopDragEnterCapture = (e: DragEvent): void => {
@@ -622,20 +655,7 @@ export class HTML5BackendImpl implements Backend {
 		this.altKeyPressed = e.altKey
 		this.lastClientOffset = getEventClientOffset(e)
 
-		if (
-			this.hoverRafId === null &&
-			typeof requestAnimationFrame !== 'undefined'
-		) {
-			this.hoverRafId = requestAnimationFrame(() => {
-				if (this.monitor.isDragging()) {
-					this.actions.hover(dragOverTargetIds || [], {
-						clientOffset: this.lastClientOffset,
-					})
-				}
-
-				this.hoverRafId = null
-			})
-		}
+		this.scheduleHover(dragOverTargetIds)
 
 		const canDrop = (dragOverTargetIds || []).some((targetId) =>
 			this.monitor.canDropOnTarget(targetId),
@@ -672,6 +692,7 @@ export class HTML5BackendImpl implements Backend {
 		if (this.isDraggingNativeItem()) {
 			setTimeout(() => this.endDragNativeItem(), 0)
 		}
+		this.cancelHover()
 	}
 
 	public handleTopDropCapture = (e: DragEvent): void => {
@@ -709,6 +730,7 @@ export class HTML5BackendImpl implements Backend {
 		} else if (this.monitor.isDragging()) {
 			this.actions.endDrag()
 		}
+		this.cancelHover()
 	}
 
 	public handleSelectStart = (e: DragEvent): void => {
