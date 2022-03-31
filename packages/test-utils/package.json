@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-test-utils",
-  "version": "15.1.1",
+  "version": "15.1.2",
   "license": "MIT",
   "exports": {
     "import": "./dist/esm/index.mjs",

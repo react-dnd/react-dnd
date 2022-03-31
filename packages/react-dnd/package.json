@@ -1,6 +1,6 @@
 {
   "name": "react-dnd",
-  "version": "15.1.1",
+  "version": "15.1.2",
   "description": "Drag and Drop for React",
   "main": "dist/cjs/index.js",
   "types": "dist/types/index.d.ts",

@@ -1,5 +1,0 @@
-declined:
-  - react-dnd-examples
-  - "@react-dnd/asap"
-  - "@react-dnd/invariant"
-  - "@react-dnd/shallowequal"
