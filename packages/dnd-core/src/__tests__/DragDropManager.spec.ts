@@ -1,17 +1,20 @@
 import 'setimmediate'
-import { TestBackend, ITestBackend } from 'react-dnd-test-backend'
-import * as Types from './types'
-import { NormalSource, NonDraggableSource, BadItemSource } from './sources'
+
+import type { ITestBackend } from 'react-dnd-test-backend'
+import { TestBackend } from 'react-dnd-test-backend'
+
+import { createDragDropManager } from '../createDragDropManager.js'
+import type { DragDropManager, HandlerRegistry } from '../interfaces.js'
+import { isString } from '../utils/js_utils.js'
+import { BadItemSource, NonDraggableSource, NormalSource } from './sources.js'
 import {
-	NormalTarget,
-	NonDroppableTarget,
-	TargetWithNoDropResult,
 	BadResultTarget,
+	NonDroppableTarget,
+	NormalTarget,
+	TargetWithNoDropResult,
 	TransformResultTarget,
-} from './targets'
-import type { DragDropManager, HandlerRegistry } from '../interfaces'
-import { isString } from '../utils/js_utils'
-import { createDragDropManager } from '../createDragDropManager'
+} from './targets.js'
+import * as Types from './types.js'
 
 describe('DragDropManager', () => {
 	let manager: DragDropManager

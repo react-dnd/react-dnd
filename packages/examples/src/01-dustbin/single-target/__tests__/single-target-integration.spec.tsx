@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import Example from '../index'
-import { render, cleanup } from '@testing-library/react'
-import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
+import { cleanup, render } from '@testing-library/react'
+import jest from 'jest-mock'
+import { fireDragDrop, wrapWithBackend } from 'react-dnd-test-utils'
+
+import Example from '../index.js'
 
 describe('Integration: Dustbin Single Target', () => {
 	afterEach(cleanup)

@@ -1,13 +1,14 @@
 module.exports = {
 	rootDir: __dirname,
 	testEnvironment: 'jsdom',
+	extensionsToTreatAsEsm: ['.ts', '.tsx'],
 	transform: {
 		'^.+\\.(t|j)sx?$': [
 			require.resolve('@swc/jest'),
 			{
 				sourceMaps: true,
 				jsc: {
-					target: 'es2017',
+					target: 'es2019',
 					parser: {
 						syntax: 'typescript',
 						tsx: true,

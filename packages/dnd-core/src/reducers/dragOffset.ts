@@ -1,11 +1,11 @@
 import {
-	INIT_COORDS,
 	BEGIN_DRAG,
-	HOVER,
-	END_DRAG,
 	DROP,
+	END_DRAG,
+	HOVER,
+	INIT_COORDS,
 } from '../actions/dragDrop/index.js'
-import type { XYCoord, Action } from '../interfaces.js'
+import type { Action, XYCoord } from '../interfaces.js'
 import { areCoordsEqual } from '../utils/equality.js'
 
 export interface State {

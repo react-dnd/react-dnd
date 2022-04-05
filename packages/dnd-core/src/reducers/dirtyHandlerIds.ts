@@ -1,9 +1,9 @@
 import {
 	BEGIN_DRAG,
-	PUBLISH_DRAG_SOURCE,
-	HOVER,
-	END_DRAG,
 	DROP,
+	END_DRAG,
+	HOVER,
+	PUBLISH_DRAG_SOURCE,
 } from '../actions/dragDrop/index.js'
 import {
 	ADD_SOURCE,
@@ -12,8 +12,8 @@ import {
 	REMOVE_TARGET,
 } from '../actions/registry.js'
 import type { Action } from '../interfaces.js'
+import { ALL, NONE } from '../utils/dirtiness.js'
 import { areArraysEqual } from '../utils/equality.js'
-import { NONE, ALL } from '../utils/dirtiness.js'
 import { xor } from '../utils/js_utils.js'
 
 export type State = string[]

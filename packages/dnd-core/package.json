@@ -3,36 +3,31 @@
   "version": "15.1.2",
   "description": "Drag and drop sans the GUI",
   "license": "MIT",
-  "exports": {
-    "import": "./dist/esm/index.mjs",
-    "require": "./dist/cjs/index.js",
-    "types": "./dist/types/index.d.ts"
-  },
-  "main": "dist/cjs/index.js",
-  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "clean": "shx rm -rf dist/",
     "build_types": "tsc -b .",
-    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
-    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "esm_hack": "node ../../scripts/esmify.mjs",
-    "build": "run-s build_types build_esm build_cjs esm_hack"
+    "build_esm": "swc -C module.type=es6 -d dist src/",
+    "build": "run-s build_types build_esm"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
   "dependencies": {
-    "@react-dnd/asap": "workspace:packages/util-asap",
-    "@react-dnd/invariant": "workspace:packages/util-invariant",
+    "@react-dnd/asap": "workspace:^",
+    "@react-dnd/invariant": "workspace:^",
     "redux": "^4.1.2"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.161",
+    "@swc/core": "^1.2.163",
     "@types/jest": "^27.4.1",
     "@types/setimmediate": "^1.0.2",
+    "jest-mock": "^27.5.1",
     "npm-run-all": "^4.1.5",
     "react-dnd-test-backend": "portal:../backend-test",
     "setimmediate": "^1.0.5",

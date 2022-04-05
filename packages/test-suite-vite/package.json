@@ -7,18 +7,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dnd": "workspace:packages/react-dnd",
-    "react-dnd-examples": "workspace:packages/examples",
-    "react-dnd-html5-backend": "workspace:packages/backend-html5",
-    "react-dom": "^17.0.2"
+    "react": "^18.0.0",
+    "react-dnd": "workspace:^",
+    "react-dnd-examples": "workspace:^",
+    "react-dnd-html5-backend": "workspace:^",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^1.0.0",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "typescript": "^4.6.3",
-    "vite": "^2.8.6",
+    "vite": "^2.9.1",
     "vite-react-jsx": "^1.1.2"
   }
 }

@@ -1,4 +1,5 @@
 import type { XYCoord } from 'dnd-core'
+
 import { isTouchEvent } from './predicates.js'
 
 const ELEMENT_NODE = 1

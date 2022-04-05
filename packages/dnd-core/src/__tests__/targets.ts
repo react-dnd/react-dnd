@@ -1,5 +1,5 @@
-import { DropTargetImpl as DropTarget } from './DropTargetImpl'
-import type { DragDropMonitor } from '../interfaces'
+import type { DragDropMonitor } from '../interfaces.js'
+import { DropTargetImpl as DropTarget } from './DropTargetImpl.js'
 
 export class NormalTarget extends DropTarget {
 	public didCallDrop = false

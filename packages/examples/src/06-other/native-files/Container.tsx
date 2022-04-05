@@ -1,7 +1,8 @@
 import type { FC } from 'react'
-import { useState, useCallback } from 'react'
-import { TargetBox } from './TargetBox'
-import { FileList } from './FileList'
+import { useCallback, useState } from 'react'
+
+import { FileList } from './FileList.js'
+import { TargetBox } from './TargetBox.js'
 
 export const Container: FC = () => {
 	const [droppedFiles, setDroppedFiles] = useState<File[]>([])

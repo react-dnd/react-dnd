@@ -1,9 +1,8 @@
-import { FC, useEffect, memo, ReactNode } from 'react'
-import {
-	BackendFactory,
-	DragDropManager,
-	createDragDropManager,
-} from 'dnd-core'
+import type { BackendFactory, DragDropManager } from 'dnd-core'
+import { createDragDropManager } from 'dnd-core'
+import type { FC, ReactNode } from 'react'
+import { memo, useEffect } from 'react'
+
 import { DndContext } from './DndContext.js'
 
 export type DndProviderProps<BackendContext, BackendOptions> =

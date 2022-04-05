@@ -2,13 +2,9 @@
   "name": "react-dnd-test-utils",
   "version": "15.1.2",
   "license": "MIT",
-  "exports": {
-    "import": "./dist/esm/index.mjs",
-    "require": "./dist/cjs/index.js",
-    "types": "./dist/types/index.d.ts"
-  },
-  "main": "dist/cjs/index.js",
-  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git",
@@ -18,25 +14,23 @@
   "scripts": {
     "clean": "shx rm -rf dist/",
     "build_types": "tsc -b .",
-    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
-    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "esm_hack": "node ../../scripts/esmify.mjs",
-    "build": "run-s build_types build_esm build_cjs esm_hack"
+    "build_esm": "swc -C module.type=es6 -d dist src/",
+    "build": "run-s build_types build_esm"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.161",
-    "@testing-library/react": "^12.1.4",
+    "@swc/core": "^1.2.163",
+    "@testing-library/react": "^13.0.0",
     "@types/node": "^17.0.23",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
-    "dnd-core": "workspace:packages/dnd-core",
+    "dnd-core": "workspace:^",
     "npm-run-all": "^4.1.5",
-    "react": "^17.0.2",
-    "react-dnd": "workspace:packages/react-dnd",
-    "react-dnd-html5-backend": "workspace:packages/backend-html5",
-    "react-dnd-test-backend": "workspace:packages/backend-test",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dnd": "workspace:^",
+    "react-dnd-html5-backend": "workspace:^",
+    "react-dnd-test-backend": "workspace:^",
+    "react-dom": "^18.0.0",
     "shx": "^0.3.4",
     "typescript": "^4.6.3"
   },

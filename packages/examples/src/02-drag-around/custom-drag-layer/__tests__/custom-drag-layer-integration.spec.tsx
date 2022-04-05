@@ -1,6 +1,8 @@
-import Example from '../index'
-import { act, fireEvent, render, cleanup } from '@testing-library/react'
-import { wrapWithBackend, tick } from 'react-dnd-test-utils'
+import { jest } from '@jest/globals'
+import { act, cleanup, fireEvent, render } from '@testing-library/react'
+import { tick, wrapWithBackend } from 'react-dnd-test-utils'
+
+import Example from '../index.js'
 
 describe('Drag Around: Custom Drag Layer', () => {
 	afterEach(cleanup)

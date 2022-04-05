@@ -1,14 +1,15 @@
 import { invariant } from '@react-dnd/invariant'
+
 import type {
 	Action,
 	DragDropManager,
-	DropPayload,
 	DragDropMonitor,
+	DropPayload,
 	HandlerRegistry,
 	Identifier,
 } from '../../interfaces.js'
-import { DROP } from './types.js'
 import { isObject } from '../../utils/js_utils.js'
+import { DROP } from './types.js'
 
 export function createDrop(manager: DragDropManager) {
 	return function drop(options = {}): void {

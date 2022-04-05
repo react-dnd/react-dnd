@@ -1,5 +1,5 @@
-import { OptionsReader } from '../OptionsReader'
-import type { TouchBackendOptions } from '../interfaces'
+import type { TouchBackendOptions } from '../interfaces.js'
+import { OptionsReader } from '../OptionsReader.js'
 
 describe('The Touch Backend Options Reader', () => {
 	it('can be constructed and emits some defaults', () => {

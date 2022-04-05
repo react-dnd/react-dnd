@@ -1,7 +1,9 @@
-import { FC, memo } from 'react'
-import { SourceBox } from './SourceBox'
-import { StatefulTargetBox as TargetBox } from './TargetBox'
-import { Colors } from './Colors'
+import type { FC } from 'react'
+import { memo } from 'react'
+
+import { Colors } from './Colors.js'
+import { SourceBox } from './SourceBox.js'
+import { StatefulTargetBox as TargetBox } from './TargetBox.js'
 
 export const Container: FC = memo(function Container() {
 	return (

@@ -1,6 +1,8 @@
-import { FC, useState, useEffect, useCallback } from 'react'
-import { SourceBox } from './SourceBox'
-import { TargetBox } from './TargetBox'
+import type { FC } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+
+import { SourceBox } from './SourceBox.js'
+import { TargetBox } from './TargetBox.js'
 
 export const Container: FC = () => {
 	const [isMounted, setIsMounted] = useState(true)

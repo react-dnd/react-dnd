@@ -1,7 +1,8 @@
 import type { FC } from 'react'
-import { useState, useCallback } from 'react'
-import { TargetBox } from './TargetBox'
-import { HTMLContent } from './HTMLContent'
+import { useCallback, useState } from 'react'
+
+import { HTMLContent } from './HTMLContent.js'
+import { TargetBox } from './TargetBox.js'
 
 export const Container: FC = () => {
 	const [droppedHTML, setDroppedHTML] = useState<string>('')

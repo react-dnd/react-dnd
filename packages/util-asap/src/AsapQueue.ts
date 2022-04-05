@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals, @typescript-eslint/ban-ts-comment, @typescript-eslint/no-unused-vars, @typescript-eslint/no-non-null-assertion */
-import type { Task } from './types.js'
 import { makeRequestCall, makeRequestCallFromTimer } from './makeRequestCall.js'
+import type { Task } from './types.js'
 
 export class AsapQueue {
 	private queue: Task[] = []

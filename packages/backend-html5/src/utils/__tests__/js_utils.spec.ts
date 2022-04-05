@@ -1,4 +1,4 @@
-import { memoize, union } from '../js_utils'
+import { memoize, union } from '../js_utils.js'
 
 describe('lodash replacement', () => {
 	it('can memoize', () => {

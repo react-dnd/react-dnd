@@ -1,8 +1,9 @@
-declare const global: any
-
-import type { HTML5BackendImpl } from '../HTML5BackendImpl'
-import { HTML5Backend } from '../index'
 import type { DragDropManager } from 'dnd-core'
+
+import type { HTML5BackendImpl } from '../HTML5BackendImpl.js'
+import { HTML5Backend } from '../index.js'
+
+declare const global: any
 
 describe('The HTML5 Backend', () => {
 	describe('window injection', () => {

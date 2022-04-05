@@ -1,4 +1,4 @@
-import { isFirefox } from '../BrowserDetector'
+import { isFirefox } from '../BrowserDetector.js'
 
 describe('BrowserDetector', () => {
 	it('should detect firefox', () => {

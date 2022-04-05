@@ -1,11 +1,11 @@
 import type {
 	DragDropManager,
-	DropTarget,
-	Unsubscribe,
-	Identifier,
-	TargetType,
-	SourceType,
 	DragSource,
+	DropTarget,
+	Identifier,
+	SourceType,
+	TargetType,
+	Unsubscribe,
 } from 'dnd-core'
 
 export function registerTarget(

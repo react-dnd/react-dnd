@@ -1,4 +1,4 @@
-import { MonotonicInterpolant } from '../MonotonicInterpolant'
+import { MonotonicInterpolant } from '../MonotonicInterpolant.js'
 
 describe('The MonotonicInterpolant', () => {
 	it('can be constructed', () => {

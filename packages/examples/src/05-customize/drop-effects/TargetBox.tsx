@@ -1,6 +1,7 @@
 import type { CSSProperties, FC } from 'react'
 import { useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+
+import { ItemTypes } from './ItemTypes.js'
 
 const style: CSSProperties = {
 	border: '1px solid gray',

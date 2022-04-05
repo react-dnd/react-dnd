@@ -1,5 +1,5 @@
-import { nativeTypesConfig } from './nativeTypesConfig.js'
 import { NativeDragSource } from './NativeDragSource.js'
+import { nativeTypesConfig } from './nativeTypesConfig.js'
 
 export function createNativeDragSource(
 	type: string,

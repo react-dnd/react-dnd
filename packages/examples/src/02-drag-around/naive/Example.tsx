@@ -1,5 +1,7 @@
-import { FC, useState, useCallback } from 'react'
-import { Container } from './Container'
+import type { FC } from 'react'
+import { useCallback, useState } from 'react'
+
+import { Container } from './Container.js'
 
 export const Example: FC = () => {
 	const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true)

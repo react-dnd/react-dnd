@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "emitDeclarationOnly": true,
-    "outDir": "dist/types",
+    "outDir": "dist",
     "types": ["node", "jest"]
   },
   "include": ["./src"]

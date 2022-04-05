@@ -1,12 +1,14 @@
-import { render, screen, RenderResult, cleanup } from '@testing-library/react'
-import { Game } from '../Game'
-import { Board } from '../Board'
-import { OverlayType } from '../Overlay'
+import type { RenderResult } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import {
-	wrapWithBackend,
-	fireDragHover,
 	fireDragDrop,
+	fireDragHover,
+	wrapWithBackend,
 } from 'react-dnd-test-utils'
+
+import { Board } from '../Board.js'
+import { Game } from '../Game.js'
+import { OverlayType } from '../Overlay.js'
 
 const TestBoard = wrapWithBackend(Board)
 function renderGame(game: Game): RenderResult {

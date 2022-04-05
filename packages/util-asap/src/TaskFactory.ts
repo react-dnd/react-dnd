@@ -1,5 +1,5 @@
-import type { Task } from './types.js'
 import { RawTask } from './RawTask.js'
+import type { Task } from './types.js'
 
 export class TaskFactory {
 	private freeTasks: RawTask[] = []

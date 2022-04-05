@@ -1,8 +1,10 @@
 import type { CSSProperties, FC } from 'react'
-import { XYCoord, useDragLayer } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
-import { BoxDragPreview } from './BoxDragPreview'
-import { snapToGrid } from './snapToGrid'
+import type { XYCoord } from 'react-dnd'
+import { useDragLayer } from 'react-dnd'
+
+import { BoxDragPreview } from './BoxDragPreview.js'
+import { ItemTypes } from './ItemTypes.js'
+import { snapToGrid } from './snapToGrid.js'
 
 const layerStyles: CSSProperties = {
 	position: 'fixed',

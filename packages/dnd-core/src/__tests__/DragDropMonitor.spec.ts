@@ -1,17 +1,19 @@
-import { ITestBackend, TestBackend } from 'react-dnd-test-backend'
-import * as Types from './types'
-import { NormalSource, NonDraggableSource, NumberSource } from './sources'
-import {
-	NormalTarget,
-	NonDroppableTarget,
-	TargetWithNoDropResult,
-} from './targets'
+import type { ITestBackend } from 'react-dnd-test-backend'
+import { TestBackend } from 'react-dnd-test-backend'
+
+import { createDragDropManager } from '../createDragDropManager.js'
 import type {
 	DragDropManager,
-	HandlerRegistry,
 	DragDropMonitor,
-} from '../interfaces'
-import { createDragDropManager } from '../createDragDropManager'
+	HandlerRegistry,
+} from '../interfaces.js'
+import { NonDraggableSource, NormalSource, NumberSource } from './sources.js'
+import {
+	NonDroppableTarget,
+	NormalTarget,
+	TargetWithNoDropResult,
+} from './targets.js'
+import * as Types from './types.js'
 
 const onlyOnce = (cb: (...args: unknown[]) => void) => {
 	let triggered = false

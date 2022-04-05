@@ -1,4 +1,4 @@
-import { EnterLeaveCounter } from '../EnterLeaveCounter'
+import { EnterLeaveCounter } from '../EnterLeaveCounter.js'
 
 describe('EnterLeaveCounter', () => {
 	const parentDiv = document.createElement('div')

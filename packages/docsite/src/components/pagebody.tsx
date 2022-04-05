@@ -1,5 +1,6 @@
 import { FC, memo, ReactNode } from 'react'
 import styled from 'styled-components'
+
 import { theme } from '../theme'
 
 export interface PageBodyProps {

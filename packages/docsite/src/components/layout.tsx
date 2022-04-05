@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-declare const require: any
-
-import { FC, memo, useMemo, useCallback, useState, ReactNode } from 'react'
-import { Helmet } from 'react-helmet'
-import styled from 'styled-components'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { TouchBackend, TouchBackendOptions } from 'react-dnd-touch-backend'
-import { isDebugMode } from '../util/isDebugMode'
-import { isTouchBackend } from '../util/isTouchBackend'
-import { DndProvider } from 'react-dnd'
-import { PageBody } from './pagebody'
-import { Sidebar } from './sidebar'
-import { PageGroup } from '../constants'
-import { APIPages, ExamplePages } from '../constants'
-import { Header } from './header'
 import './layout.css'
 import 'prismjs/themes/prism.css'
+
+import { FC, memo, ReactNode, useCallback, useMemo, useState } from 'react'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { TouchBackend, TouchBackendOptions } from 'react-dnd-touch-backend'
+import { Helmet } from 'react-helmet'
+import styled from 'styled-components'
+
+import { PageGroup } from '../constants'
+import { APIPages, ExamplePages } from '../constants'
+import { isDebugMode } from '../util/isDebugMode'
+import { isTouchBackend } from '../util/isTouchBackend'
+import { Header } from './header'
+import { PageBody } from './pagebody'
+import { Sidebar } from './sidebar'
+
+declare const require: any
 
 const favicon = require('../favicon.png')
 

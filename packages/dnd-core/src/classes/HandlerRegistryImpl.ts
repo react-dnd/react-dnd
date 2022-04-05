@@ -1,28 +1,29 @@
-import type { Store } from 'redux'
+import { asap } from '@react-dnd/asap'
 import { invariant } from '@react-dnd/invariant'
+import type { Store } from 'redux'
+
 import {
 	addSource,
 	addTarget,
 	removeSource,
 	removeTarget,
 } from '../actions/registry.js'
-import { getNextUniqueId } from '../utils/getNextUniqueId.js'
-import type { State } from '../reducers/index.js'
-import {
-	DragSource,
-	DropTarget,
-	SourceType,
-	TargetType,
-	Identifier,
-	HandlerRole,
-	HandlerRegistry,
-} from '../interfaces.js'
 import {
 	validateSourceContract,
 	validateTargetContract,
 	validateType,
 } from '../contracts.js'
-import { asap } from '@react-dnd/asap'
+import type {
+	DragSource,
+	DropTarget,
+	HandlerRegistry,
+	Identifier,
+	SourceType,
+	TargetType,
+} from '../interfaces.js'
+import { HandlerRole } from '../interfaces.js'
+import type { State } from '../reducers/index.js'
+import { getNextUniqueId } from '../utils/getNextUniqueId.js'
 
 function getNextHandlerId(role: HandlerRole): string {
 	const id = getNextUniqueId().toString()

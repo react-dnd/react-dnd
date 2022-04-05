@@ -1,6 +1,7 @@
 import type { CSSProperties, FC } from 'react'
+import type { DropTargetMonitor } from 'react-dnd'
+import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
-import { useDrop, DropTargetMonitor } from 'react-dnd'
 
 const style: CSSProperties = {
 	border: '1px solid gray',

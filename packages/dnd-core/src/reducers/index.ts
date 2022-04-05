@@ -1,16 +1,15 @@
-import { reduce as dragOffset, State as DragOffsetState } from './dragOffset.js'
-import {
-	reduce as dragOperation,
-	State as DragOperationState,
-} from './dragOperation.js'
-import { reduce as refCount, State as RefCountState } from './refCount.js'
-import {
-	reduce as dirtyHandlerIds,
-	State as DirtyHandlerIdsState,
-} from './dirtyHandlerIds.js'
-import { reduce as stateId, State as StateIdState } from './stateId.js'
-import { get } from '../utils/js_utils.js'
 import type { Action } from '../interfaces.js'
+import { get } from '../utils/js_utils.js'
+import type { State as DirtyHandlerIdsState } from './dirtyHandlerIds.js'
+import { reduce as dirtyHandlerIds } from './dirtyHandlerIds.js'
+import type { State as DragOffsetState } from './dragOffset.js'
+import { reduce as dragOffset } from './dragOffset.js'
+import type { State as DragOperationState } from './dragOperation.js'
+import { reduce as dragOperation } from './dragOperation.js'
+import type { State as RefCountState } from './refCount.js'
+import { reduce as refCount } from './refCount.js'
+import type { State as StateIdState } from './stateId.js'
+import { reduce as stateId } from './stateId.js'
 
 export interface State {
 	dirtyHandlerIds: DirtyHandlerIdsState

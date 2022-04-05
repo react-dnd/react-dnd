@@ -1,8 +1,11 @@
-import { CSSProperties, FC, memo, useEffect } from 'react'
-import { useDrag, DragSourceMonitor } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import type { CSSProperties, FC } from 'react'
+import { memo, useEffect } from 'react'
+import type { DragSourceMonitor } from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
-import { Box } from './Box'
+
+import { Box } from './Box.js'
+import { ItemTypes } from './ItemTypes.js'
 
 function getStyles(
 	left: number,

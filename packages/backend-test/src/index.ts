@@ -1,4 +1,5 @@
-import type { DragDropManager, BackendFactory } from 'dnd-core'
+import type { BackendFactory, DragDropManager } from 'dnd-core'
+
 import { TestBackendImpl } from './TestBackend.js'
 import type {
 	ITestBackend,
@@ -6,8 +7,8 @@ import type {
 	TestBackendOptions,
 } from './types.js'
 
-export * from './types.js'
 export * from './TestBackend.js'
+export * from './types.js'
 
 export const TestBackend: BackendFactory = function createBackend(
 	manager: DragDropManager,

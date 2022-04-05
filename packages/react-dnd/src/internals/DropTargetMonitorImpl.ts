@@ -1,12 +1,13 @@
+import { invariant } from '@react-dnd/invariant'
 import type {
 	DragDropManager,
 	DragDropMonitor,
-	Unsubscribe,
-	Listener,
 	Identifier,
+	Listener,
+	Unsubscribe,
 	XYCoord,
 } from 'dnd-core'
-import { invariant } from '@react-dnd/invariant'
+
 import type { DropTargetMonitor } from '../types/index.js'
 
 let isCallingCanDrop = false

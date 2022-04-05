@@ -1,28 +1,29 @@
 import { invariant } from '@react-dnd/invariant'
 import type {
-	DragDropActions,
-	DragDropMonitor,
 	Backend,
-	Identifier,
-	XYCoord,
+	DragDropActions,
 	DragDropManager,
+	DragDropMonitor,
+	Identifier,
 	Unsubscribe,
+	XYCoord,
 } from 'dnd-core'
-import {
+
+import type {
 	EventName,
-	ListenerType,
-	TouchBackendOptions,
 	TouchBackendContext,
+	TouchBackendOptions,
 } from './interfaces.js'
+import { ListenerType } from './interfaces.js'
+import { OptionsReader } from './OptionsReader.js'
+import { distance, inAngleRanges } from './utils/math.js'
+import { getEventClientOffset, getNodeClientOffset } from './utils/offsets.js'
 import {
-	eventShouldStartDrag,
 	eventShouldEndDrag,
+	eventShouldStartDrag,
 	isTouchEvent,
 } from './utils/predicates.js'
-import { getEventClientOffset, getNodeClientOffset } from './utils/offsets.js'
-import { distance, inAngleRanges } from './utils/math.js'
 import { supportsPassive } from './utils/supportsPassive.js'
-import { OptionsReader } from './OptionsReader.js'
 
 const eventNames: Record<ListenerType, EventName> = {
 	[ListenerType.mouse]: {

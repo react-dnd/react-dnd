@@ -1,5 +1,6 @@
-import { FC, memo } from 'react'
 import { graphql } from 'gatsby'
+import { FC, memo } from 'react'
+
 import { Doc } from '../components/doc'
 import { Layout } from '../components/layout'
 

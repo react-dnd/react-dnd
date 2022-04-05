@@ -1,23 +1,28 @@
-import { TargetConnector } from '../TargetConnector'
+import type { Backend } from 'dnd-core'
+import jest from 'jest-mock'
+
+import { TargetConnector } from '../TargetConnector.js'
 
 describe('TargetConnector', () => {
 	it('unsubscribes drop target when clearing handler id', () => {
-		const backend = {
+		const connectDropTarget = jest.fn()
+		const backend: Backend = {
 			setup: jest.fn(),
 			teardown: jest.fn(),
 			connectDragSource: jest.fn(),
 			connectDragPreview: jest.fn(),
-			connectDropTarget: jest.fn(),
+			connectDropTarget,
+			profile: jest.fn(),
 		}
 		const connector = new TargetConnector(backend)
 		const unsubscribeDropTarget = jest.fn()
-		backend.connectDropTarget.mockReturnValueOnce(unsubscribeDropTarget)
+		connectDropTarget.mockReturnValueOnce(unsubscribeDropTarget)
 
 		connector.receiveHandlerId('test')
 		connector.hooks.dropTarget()({})
 		expect(backend.connectDropTarget).toHaveBeenCalled()
 		expect(unsubscribeDropTarget).not.toHaveBeenCalled()
-		backend.connectDropTarget.mockClear()
+		connectDropTarget.mockClear()
 
 		connector.receiveHandlerId(null)
 		expect(backend.connectDropTarget).not.toHaveBeenCalled()

@@ -7,18 +7,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.1.2",
-    "react": "17.0.2",
-    "react-dnd": "workspace:packages/react-dnd",
-    "react-dnd-examples": "workspace:packages/examples",
-    "react-dnd-html5-backend": "workspace:packages/backend-html5",
-    "react-dom": "17.0.2"
+    "next": "12.1.4",
+    "react": "18.0.0",
+    "react-dnd": "workspace:^",
+    "react-dnd-examples": "workspace:^",
+    "react-dnd-html5-backend": "workspace:^",
+    "react-dom": "18.0.0"
   },
   "devDependencies": {
     "@types/eslint": "^8.4.1",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "eslint": "8.12.0",
-    "eslint-config-next": "12.1.2"
+    "eslint-config-next": "12.1.4"
   }
 }

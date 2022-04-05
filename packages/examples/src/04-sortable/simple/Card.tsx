@@ -1,7 +1,9 @@
-import { FC, useRef } from 'react'
+import type { Identifier, XYCoord } from 'dnd-core'
+import type { FC } from 'react'
+import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
-import type { XYCoord, Identifier } from 'dnd-core'
+
+import { ItemTypes } from './ItemTypes.js'
 
 const style = {
 	border: '1px dashed gray',

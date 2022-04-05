@@ -2,13 +2,9 @@
   "name": "react-dnd-touch-backend",
   "version": "15.1.2",
   "description": "Touch backend for react-dnd",
-  "main": "dist/cjs/index.js",
-  "types": "dist/types/index.d.ts",
-  "exports": {
-    "import": "./dist/esm/index.mjs",
-    "require": "./dist/cjs/index.js",
-    "types": "./dist/types/index.d.ts"
-  },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
   "author": "Long Ho <holevietlong@gmail.com>",
@@ -19,18 +15,16 @@
   "scripts": {
     "clean": "shx rm -rf dist/",
     "build_types": "tsc -b .",
-    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
-    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "esm_hack": "node ../../scripts/esmify.mjs",
-    "build": "run-s build_types build_esm build_cjs esm_hack"
+    "build_esm": "swc -C module.type=es6 -d dist src/",
+    "build": "run-s build_types build_esm"
   },
   "dependencies": {
-    "@react-dnd/invariant": "workspace:packages/util-invariant",
-    "dnd-core": "workspace:packages/dnd-core"
+    "@react-dnd/invariant": "workspace:^",
+    "dnd-core": "workspace:^"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.161",
+    "@swc/core": "^1.2.163",
     "@types/jest": "^27.4.1",
     "npm-run-all": "^4.1.5",
     "shx": "^0.3.4",

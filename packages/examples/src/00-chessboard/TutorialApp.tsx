@@ -1,6 +1,8 @@
-import { CSSProperties, FC, useMemo } from 'react'
-import { Board } from './Board'
-import { Game } from './Game'
+import type { CSSProperties, FC } from 'react'
+import { useMemo } from 'react'
+
+import { Board } from './Board.js'
+import { Game } from './Game.js'
 
 export interface ChessboardTutorialAppState {
 	knightPosition: [number, number]

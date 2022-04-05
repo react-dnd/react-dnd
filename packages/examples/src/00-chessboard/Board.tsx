@@ -1,7 +1,9 @@
-import { CSSProperties, FC, useEffect, useState } from 'react'
-import { BoardSquare } from './BoardSquare'
-import type { Game, Position } from './Game'
-import { Piece } from './Piece'
+import type { CSSProperties, FC } from 'react'
+import { useEffect, useState } from 'react'
+
+import { BoardSquare } from './BoardSquare.js'
+import type { Game, Position } from './Game.js'
+import { Piece } from './Piece.js'
 
 export interface BoardProps {
 	game: Game

@@ -1,7 +1,8 @@
-import { FC, memo } from 'react'
 import { graphql } from 'gatsby'
-import { Layout } from '../components/layout'
+import { FC, memo } from 'react'
+
 import { Doc } from '../components/doc'
+import { Layout } from '../components/layout'
 
 export const Template: FC<any> = memo(function Template(props) {
 	const { currentPage } = props.data
