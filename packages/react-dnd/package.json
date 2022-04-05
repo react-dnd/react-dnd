@@ -18,9 +18,9 @@
     "build": "run-s build_types build_esm"
   },
   "dependencies": {
-    "@react-dnd/invariant": "workspace:packages/util-invariant",
-    "@react-dnd/shallowequal": "workspace:packages/util-shallowequal",
-    "dnd-core": "workspace:packages/dnd-core",
+    "@react-dnd/invariant": "workspace:^",
+    "@react-dnd/shallowequal": "workspace:^",
+    "dnd-core": "workspace:^",
     "fast-deep-equal": "^3.1.3",
     "hoist-non-react-statics": "^3.3.2"
   },

@@ -18,7 +18,7 @@
     "build": "run-s build_types build_esm"
   },
   "dependencies": {
-    "dnd-core": "workspace:packages/dnd-core"
+    "dnd-core": "workspace:^"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
