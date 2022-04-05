@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_dnd_documentation=self.webpackChunkreact_dnd_documentation||[]).push([[823],{88505:function(e,n,t){t.r(n),t.d(n,{Template:function(){return d}});var a=t(71378),c=t(25151),r=t(54964),u=t(72783),d=(0,a.memo)((function(e){var n=e.data.currentPage;return(0,u.jsx)(r.A,Object.assign({},e,{children:(0,u.jsx)(c.Q,{docPage:n})}))}));n.default=d}}]);
+//# sourceMappingURL=component---src-templates-example-template-tsx-f4e6dfc4ce95c1310d18.js.map

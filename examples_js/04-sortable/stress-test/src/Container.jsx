@@ -19,11 +19,11 @@ function buildCardData() {
     };
 }
 export class Container extends Component {
-    pendingUpdateFn;
     requestedFrame;
+    cardState = buildCardData();
     constructor(props) {
         super(props);
-        this.state = buildCardData();
+        this.state = STATE;
     }
     componentWillUnmount() {
         if (this.requestedFrame !== undefined) {
@@ -31,32 +31,20 @@ export class Container extends Component {
         }
     }
     render() {
-        const { cardsByIndex } = this.state;
+        const { cardsByIndex } = this.cardState;
         return (<>
 				<div style={style}>
 					{cardsByIndex.map((card) => (<Card key={card.id} id={card.id} text={card.text} moveCard={this.moveCard}/>))}
 				</div>
 			</>);
     }
-    scheduleUpdate(updateFn) {
-        this.pendingUpdateFn = updateFn;
-        if (!this.requestedFrame) {
-            this.requestedFrame = requestAnimationFrame(this.drawFrame);
-        }
-    }
-    drawFrame = () => {
-        const nextState = update(this.state, this.pendingUpdateFn);
-        this.setState(nextState);
-        this.pendingUpdateFn = undefined;
-        this.requestedFrame = undefined;
-    };
     moveCard = (id, afterId) => {
-        const { cardsById, cardsByIndex } = this.state;
+        const { cardsById, cardsByIndex } = this.cardState;
         const card = cardsById[id];
         const afterCard = cardsById[afterId];
         const cardIndex = cardsByIndex.indexOf(card);
         const afterIndex = cardsByIndex.indexOf(afterCard);
-        this.scheduleUpdate({
+        this.cardState = update(this.cardState, {
             cardsByIndex: {
                 $splice: [
                     [cardIndex, 1],
@@ -64,5 +52,16 @@ export class Container extends Component {
                 ],
             },
         });
+        this.scheduleUpdate();
+    };
+    scheduleUpdate() {
+        if (!this.requestedFrame) {
+            this.requestedFrame = requestAnimationFrame(this.drawFrame);
+        }
+    }
+    drawFrame = () => {
+        this.setState(STATE);
+        this.requestedFrame = undefined;
     };
 }
+const STATE = {};
