@@ -14,9 +14,8 @@
   "scripts": {
     "clean": "shx rm -rf dist/",
     "build_types": "tsc -b .",
-    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
-    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "build": "run-s build_types build_esm build_cjs"
+    "build_esm": "swc -C module.type=es6 -d dist src/",
+    "build": "run-s build_types build_esm"
   },
   "dependencies": {
     "@react-dnd/invariant": "workspace:packages/util-invariant",
@@ -28,7 +27,7 @@
   "devDependencies": {
     "@swc/cli": "^0.1.57",
     "@swc/core": "^1.2.161",
-    "@testing-library/react": "^12.1.4",
+    "@testing-library/react": "^13.0.0",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",
