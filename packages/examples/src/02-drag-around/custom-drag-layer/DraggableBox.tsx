@@ -1,5 +1,7 @@
-import { CSSProperties, FC, memo, useEffect } from 'react'
-import { DragSourceMonitor, useDrag } from 'react-dnd'
+import type { CSSProperties, FC } from 'react'
+import { memo, useEffect } from 'react'
+import type { DragSourceMonitor } from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 
 import { Box } from './Box.js'

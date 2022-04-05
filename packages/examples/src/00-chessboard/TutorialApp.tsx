@@ -1,4 +1,5 @@
-import { CSSProperties, FC, useMemo } from 'react'
+import type { CSSProperties, FC } from 'react'
+import { useMemo } from 'react'
 
 import { Board } from './Board.js'
 import { Game } from './Game.js'

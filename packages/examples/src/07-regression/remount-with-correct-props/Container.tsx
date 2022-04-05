@@ -1,4 +1,5 @@
-import { FC, useCallback, useEffect, useState } from 'react'
+import type { FC } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { SourceBox } from './SourceBox.js'
 import { TargetBox } from './TargetBox.js'

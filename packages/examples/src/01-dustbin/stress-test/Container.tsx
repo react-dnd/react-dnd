@@ -1,6 +1,7 @@
 import update from 'immutability-helper'
 import shuffle from 'lodash/shuffle.js'
-import { FC, memo, useCallback, useEffect, useState } from 'react'
+import type { FC } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 
 import { Box } from './Box.js'

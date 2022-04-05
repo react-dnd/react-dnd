@@ -24,9 +24,10 @@
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.161",
+    "@swc/core": "^1.2.163",
     "@types/jest": "^27.4.1",
     "@types/setimmediate": "^1.0.2",
+    "jest-mock": "^27.5.1",
     "npm-run-all": "^4.1.5",
     "react-dnd-test-backend": "portal:../backend-test",
     "setimmediate": "^1.0.5",

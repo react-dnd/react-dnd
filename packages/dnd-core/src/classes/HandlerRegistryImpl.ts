@@ -13,15 +13,15 @@ import {
 	validateTargetContract,
 	validateType,
 } from '../contracts.js'
-import {
+import type {
 	DragSource,
 	DropTarget,
 	HandlerRegistry,
-	HandlerRole,
 	Identifier,
 	SourceType,
 	TargetType,
 } from '../interfaces.js'
+import { HandlerRole } from '../interfaces.js'
 import type { State } from '../reducers/index.js'
 import { getNextUniqueId } from '../utils/getNextUniqueId.js'
 

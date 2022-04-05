@@ -1,4 +1,5 @@
-import { FC, memo } from 'react'
+import type { FC } from 'react'
+import { memo } from 'react'
 
 import { Box } from './Box.js'
 import { Dustbin } from './Dustbin.js'

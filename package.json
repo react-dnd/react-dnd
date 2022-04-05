@@ -45,7 +45,7 @@
     "modules:": "run-s 'modules:*'",
     "release:": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude '@react-dnd/build' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples' --exclude 'test-suite-*' -pv npm publish --tolerate-republish --access public",
     "lint:": "run-s 'lint:*'",
-    "jest:": "yarn node --experimental-vm-modules $(yarn bin jest) --coverage",
+    "jest:": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --coverage",
     "lint:code": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
     "lint:spelling": "mdspell 'packages/documentation/docsite/markdown/**/*.md' --en-us --report",
     "lint:formatting": "prettier --check \"**/*.(ts|tsx|js|json|md|cjs|mjs|cts|mts)\"",
@@ -62,7 +62,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
-    "@swc/core": "^1.2.161",
+    "@swc/core": "^1.2.163",
     "@swc/jest": "^0.2.20",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.0",

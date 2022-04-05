@@ -9,12 +9,12 @@ import type {
 	XYCoord,
 } from 'dnd-core'
 
-import {
+import type {
 	EventName,
-	ListenerType,
 	TouchBackendContext,
 	TouchBackendOptions,
 } from './interfaces.js'
+import { ListenerType } from './interfaces.js'
 import { OptionsReader } from './OptionsReader.js'
 import { distance, inAngleRanges } from './utils/math.js'
 import { getEventClientOffset, getNodeClientOffset } from './utils/offsets.js'

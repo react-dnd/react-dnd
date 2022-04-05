@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.161",
+    "@swc/core": "^1.2.163",
     "@testing-library/react": "^13.0.0",
     "@types/node": "^17.0.23",
     "@types/react": "^17.0.43",

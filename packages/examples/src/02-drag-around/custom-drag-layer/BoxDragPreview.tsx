@@ -1,4 +1,5 @@
-import { CSSProperties, FC, memo, useEffect, useState } from 'react'
+import type { CSSProperties, FC } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { Box } from './Box.js'
 

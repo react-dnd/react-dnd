@@ -1,4 +1,5 @@
-import { registerSource, SourceConnector } from '../../internals/index.js'
+import type { SourceConnector } from '../../internals/index.js'
+import { registerSource } from '../../internals/index.js'
 import type { DragSourceMonitor } from '../../types/index.js'
 import type { DragSourceHookSpec } from '../types.js'
 import { useDragDropManager } from '../useDragDropManager.js'

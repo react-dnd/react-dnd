@@ -1,4 +1,5 @@
-import { CSSProperties, FC, useEffect, useState } from 'react'
+import type { CSSProperties, FC } from 'react'
+import { useEffect, useState } from 'react'
 
 import { BoardSquare } from './BoardSquare.js'
 import type { Game, Position } from './Game.js'

@@ -1,5 +1,6 @@
 import type { Identifier, XYCoord } from 'dnd-core'
-import { FC, useRef } from 'react'
+import type { FC } from 'react'
+import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
 import { ItemTypes } from './ItemTypes.js'

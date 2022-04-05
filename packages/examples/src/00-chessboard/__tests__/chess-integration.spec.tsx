@@ -1,4 +1,5 @@
-import { cleanup, render, RenderResult, screen } from '@testing-library/react'
+import type { RenderResult } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import {
 	fireDragDrop,
 	fireDragHover,

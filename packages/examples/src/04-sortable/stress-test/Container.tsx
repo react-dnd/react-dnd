@@ -1,6 +1,7 @@
 import Faker from 'faker'
 import update from 'immutability-helper'
-import { Component, CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
+import { Component } from 'react'
 
 import { Card } from './Card.js'
 

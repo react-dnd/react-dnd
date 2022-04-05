@@ -1,3 +1,5 @@
+import jest from 'jest-mock'
+
 import type { DropTargetMonitor } from '../../../types/index.js'
 import { DropTargetImpl } from '../DropTargetImpl.js'
 

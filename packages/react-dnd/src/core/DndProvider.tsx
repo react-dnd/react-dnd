@@ -1,9 +1,7 @@
-import {
-	BackendFactory,
-	createDragDropManager,
-	DragDropManager,
-} from 'dnd-core'
-import { FC, memo, ReactNode, useEffect } from 'react'
+import type { BackendFactory, DragDropManager } from 'dnd-core'
+import { createDragDropManager } from 'dnd-core'
+import type { FC, ReactNode } from 'react'
+import { memo, useEffect } from 'react'
 
 import { DndContext } from './DndContext.js'
 

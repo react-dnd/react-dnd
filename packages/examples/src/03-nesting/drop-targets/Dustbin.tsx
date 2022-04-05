@@ -1,4 +1,5 @@
-import { CSSProperties, FC, ReactNode, useState } from 'react'
+import type { CSSProperties, FC, ReactNode } from 'react'
+import { useState } from 'react'
 import { useDrop } from 'react-dnd'
 
 import { ItemTypes } from './ItemTypes.js'

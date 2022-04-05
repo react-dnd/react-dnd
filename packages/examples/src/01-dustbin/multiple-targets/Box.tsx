@@ -1,4 +1,5 @@
-import { CSSProperties, FC, memo } from 'react'
+import type { CSSProperties, FC } from 'react'
+import { memo } from 'react'
 import { useDrag } from 'react-dnd'
 
 const style: CSSProperties = {

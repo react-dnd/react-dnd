@@ -1,4 +1,5 @@
-import { FC, memo, useEffect } from 'react'
+import type { FC } from 'react'
+import { memo, useEffect } from 'react'
 
 import type { ConnectDragPreview } from '../types/index.js'
 

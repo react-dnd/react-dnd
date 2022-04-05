@@ -32,9 +32,17 @@
 		"import/extensions": ["error", "always", { "ignorePackages": true }],
 		// use simple-import-sort
 		"import/order": "off",
+
 		// https://github.com/lydell/eslint-plugin-simple-import-sort#usage
 		"simple-import-sort/imports": "error",
 		"simple-import-sort/exports": "error",
+
+		"@typescript-eslint/consistent-type-imports": [
+			"error",
+			{
+				"prefer": "type-imports"
+			}
+		],
 
 		"no-for-of-loops/no-for-of-loops": 2,
 		"react/prop-types": 0,
@@ -48,13 +56,15 @@
 		{
 			"files": "packages/test-suite-*/**/*",
 			"rules": {
-				"import/extensions": ["error", "never"]
+				"import/extensions": ["error", "never"],
+				"@typescript-eslint/consistent-type-imports": "off"
 			}
 		},
 		{
 			"files": "packages/docsite/**/*",
 			"rules": {
-				"import/extensions": ["error", "never"]
+				"import/extensions": ["error", "never"],
+				"@typescript-eslint/consistent-type-imports": "off"
 			}
 		}
 	]

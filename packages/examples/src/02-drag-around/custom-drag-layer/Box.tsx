@@ -1,4 +1,5 @@
-import { CSSProperties, FC, memo } from 'react'
+import type { CSSProperties, FC } from 'react'
+import { memo } from 'react'
 
 const styles: CSSProperties = {
 	border: '1px dashed gray',

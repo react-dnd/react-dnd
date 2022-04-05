@@ -1,5 +1,6 @@
 import update from 'immutability-helper'
-import { CSSProperties, FC, useCallback, useState } from 'react'
+import type { CSSProperties, FC } from 'react'
+import { useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 
 import { DraggableBox } from './DraggableBox.js'

@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { cleanup, render } from '@testing-library/react'
+import jest from 'jest-mock'
 import { fireDragDrop, wrapWithBackend } from 'react-dnd-test-utils'
 
 import Example from '..'
@@ -19,12 +21,12 @@ describe('Dustbin: Multiple Targets', () => {
 		window.alert = jest.fn()
 
 		// Bin Types
-		const glassBin = dustbins[0]
-		const foodBin = dustbins[1]
+		const glassBin = dustbins[0]!
+		const foodBin = dustbins[1]!
 
 		// Box Types
 		const bottleBox = boxes[0] as HTMLDivElement
-		const bananaBox = boxes[1]
+		const bananaBox = boxes[1]!
 
 		// interactions
 
