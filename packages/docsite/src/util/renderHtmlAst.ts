@@ -11,12 +11,12 @@ import {
 const log = debug('site:renderHtmlAst')
 
 // Registers the examples as custom components
-const renderAst = rehypeReact({
+const renderAst = new (rehypeReact as any)({
 	createElement,
 	components: {
 		'view-source': ExampleTabs,
 	},
-} as any).Compiler
+}).Compiler
 
 export function renderHtmlAst(node: MarkdownAstNode): any {
 	try {
