@@ -26,7 +26,7 @@
     "lodash": "^4.17.21",
     "react-dnd": "workspace:^",
     "react-dnd-html5-backend": "workspace:^",
-    "react-frame-component": "^4.1.3"
+    "react-frame-component": "^5.2.1"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
