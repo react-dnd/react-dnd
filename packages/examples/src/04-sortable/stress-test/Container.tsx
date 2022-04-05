@@ -9,14 +9,19 @@ const style: CSSProperties = {
 	width: 400,
 }
 
-export interface ContainerState {
-	cardsById: { [key: string]: any }
-	cardsByIndex: any[]
+interface CardItem {
+	id: number
+	text: string
+}
+
+export interface CardState {
+	cardsById: Record<string, CardItem>
+	cardsByIndex: CardItem[]
 }
 
 function buildCardData() {
-	const cardsById: { [key: string]: any } = {}
-	const cardsByIndex = []
+	const cardsById: Record<string, CardItem> = {}
+	const cardsByIndex: CardItem[] = []
 
 	for (let i = 0; i < 1000; i += 1) {
 		const card = { id: i, text: Faker.name.findName() }
@@ -33,13 +38,16 @@ function buildCardData() {
 /* eslint-disable-next-line @typescript-eslint/no-empty-interface */
 export interface ContainerProps {}
 
-export class Container extends Component<ContainerProps, ContainerState> {
-	private pendingUpdateFn: any
+export class Container extends Component<
+	ContainerProps,
+	Record<string, unknown>
+> {
 	private requestedFrame: number | undefined
+	private cardState: CardState = buildCardData()
 
 	public constructor(props: ContainerProps) {
 		super(props)
-		this.state = buildCardData()
+		this.state = STATE
 	}
 
 	public override componentWillUnmount(): void {
@@ -49,7 +57,7 @@ export class Container extends Component<ContainerProps, ContainerState> {
 	}
 
 	public override render(): JSX.Element {
-		const { cardsByIndex } = this.state
+		const { cardsByIndex } = this.cardState
 
 		return (
 			<>
@@ -67,32 +75,14 @@ export class Container extends Component<ContainerProps, ContainerState> {
 		)
 	}
 
-	private scheduleUpdate(updateFn: any) {
-		this.pendingUpdateFn = updateFn
-
-		if (!this.requestedFrame) {
-			this.requestedFrame = requestAnimationFrame(this.drawFrame)
-		}
-	}
-
-	private drawFrame = (): void => {
-		const nextState = update(this.state, this.pendingUpdateFn)
-		this.setState(nextState)
-
-		this.pendingUpdateFn = undefined
-		this.requestedFrame = undefined
-	}
-
 	private moveCard = (id: string, afterId: string): void => {
-		const { cardsById, cardsByIndex } = this.state
+		const { cardsById, cardsByIndex } = this.cardState
 
-		const card = cardsById[id]
-		const afterCard = cardsById[afterId]
-
+		const card = cardsById[id] as CardItem
+		const afterCard = cardsById[afterId] as CardItem
 		const cardIndex = cardsByIndex.indexOf(card)
 		const afterIndex = cardsByIndex.indexOf(afterCard)
-
-		this.scheduleUpdate({
+		this.cardState = update(this.cardState, {
 			cardsByIndex: {
 				$splice: [
 					[cardIndex, 1],
@@ -100,5 +90,19 @@ export class Container extends Component<ContainerProps, ContainerState> {
 				],
 			},
 		})
+		this.scheduleUpdate()
+	}
+
+	private scheduleUpdate() {
+		if (!this.requestedFrame) {
+			this.requestedFrame = requestAnimationFrame(this.drawFrame)
+		}
+	}
+
+	private drawFrame = (): void => {
+		this.setState(STATE)
+		this.requestedFrame = undefined
 	}
 }
+
+const STATE = {}

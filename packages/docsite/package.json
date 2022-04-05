@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "debug": "^4.3.4",
-    "gatsby": "~4.11.1",
+    "gatsby": "~4.11.2",
     "gatsby-plugin-manifest": "^4.11.1",
     "gatsby-plugin-react-helmet": "^5.11.0",
     "gatsby-plugin-sharp": "^4.11.1",
@@ -20,7 +20,7 @@
     "gatsby-transformer-remark": "^5.11.1",
     "gatsby-transformer-sharp": "^4.11.0",
     "lodash": "^4.17.21",
-    "prismjs": "^1.25.0",
+    "prismjs": "^1.27.0",
     "query-string": "^6.14.1",
     "react": "^18.0.0",
     "react-dnd": "workspace:^",
