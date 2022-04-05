@@ -7,11 +7,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^17.0.2",
+    "react": "^18.0.0",
     "react-dnd": "workspace:packages/react-dnd",
     "react-dnd-examples": "workspace:packages/examples",
     "react-dnd-html5-backend": "workspace:packages/backend-html5",
-    "react-dom": "^17.0.2"
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^1.0.0",

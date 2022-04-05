@@ -29,8 +29,7 @@
     "build_types": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist/esm src/",
     "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "esm_hack": "node ../../scripts/esmify.mjs",
-    "build": "run-s build_types build_esm build_cjs esm_hack"
+    "build": "run-s build_types build_esm build_cjs"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
