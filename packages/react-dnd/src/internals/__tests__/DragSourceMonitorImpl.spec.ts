@@ -1,6 +1,7 @@
-import { DragSourceMonitorImpl } from '../DragSourceMonitorImpl'
 import { createDragDropManager } from 'dnd-core'
 import { TestBackend } from 'react-dnd-test-backend'
+
+import { DragSourceMonitorImpl } from '../DragSourceMonitorImpl.js'
 
 describe('The DragSourceMonitorImpl', () => {
 	it('can be constructed', () => {

@@ -1,7 +1,8 @@
 import type { DragDropMonitor } from 'dnd-core'
-import type { Connector } from '../../../internals'
-import type { DragSourceMonitor } from '../../../types'
-import { DragSourceImpl } from '../DragSourceImpl'
+
+import type { Connector } from '../../../internals/index.js'
+import type { DragSourceMonitor } from '../../../types/index.js'
+import { DragSourceImpl } from '../DragSourceImpl.js'
 
 describe('The Hooks DragSourceImpl', () => {
 	const monitor = {} as DragSourceMonitor

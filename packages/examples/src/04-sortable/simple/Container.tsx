@@ -1,6 +1,7 @@
-import { FC, useState, useCallback } from 'react'
-import { Card } from './Card'
 import update from 'immutability-helper'
+import { FC, useCallback, useState } from 'react'
+
+import { Card } from './Card.js'
 
 const style = {
 	width: 400,

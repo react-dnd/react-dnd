@@ -1,5 +1,5 @@
-import type { State } from '../reducers/dragOffset.js'
 import type { XYCoord } from '../interfaces.js'
+import type { State } from '../reducers/dragOffset.js'
 
 /**
  * Coordinate addition

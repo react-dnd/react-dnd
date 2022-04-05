@@ -1,7 +1,8 @@
-import { useDrag } from '../useDrag'
-import { DndProvider } from '../../core'
+import { cleanup, render } from '@testing-library/react'
 import { TestBackend } from 'react-dnd-test-backend'
-import { render, cleanup } from '@testing-library/react'
+
+import { DndProvider } from '../../core/index.js'
+import { useDrag } from '../useDrag/index.js'
 
 describe('The useDrag hook', () => {
 	afterEach(cleanup)

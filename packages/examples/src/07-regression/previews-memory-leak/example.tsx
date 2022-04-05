@@ -1,6 +1,7 @@
-import { FC, useState, useEffect } from 'react'
-import { BoxWithImage } from './BoxWithImage'
-import { BoxWithHandle } from './BoxWithHandle'
+import { FC, useEffect, useState } from 'react'
+
+import { BoxWithHandle } from './BoxWithHandle.js'
+import { BoxWithImage } from './BoxWithImage.js'
 
 export const Example: FC = () => {
 	const [key, setKey] = useState(0)

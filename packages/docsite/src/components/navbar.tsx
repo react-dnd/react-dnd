@@ -1,6 +1,7 @@
-import { FC, memo } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
+import { FC, memo } from 'react'
 import styled from 'styled-components'
+
 import { theme } from '../theme'
 
 export const NavBar: FC = memo(function NavBar() {

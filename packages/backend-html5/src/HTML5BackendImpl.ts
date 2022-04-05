@@ -1,25 +1,26 @@
 import type {
 	Backend,
-	DragDropManager,
 	DragDropActions,
+	DragDropManager,
 	DragDropMonitor,
 	HandlerRegistry,
 	Identifier,
-	XYCoord,
 	Unsubscribe,
+	XYCoord,
 } from 'dnd-core'
+
 import { EnterLeaveCounter } from './EnterLeaveCounter.js'
-import {
-	getNodeClientOffset,
-	getEventClientOffset,
-	getDragPreviewOffset,
-} from './OffsetUtils.js'
 import {
 	createNativeDragSource,
 	matchNativeItemType,
 } from './NativeDragSources/index.js'
-import * as NativeTypes from './NativeTypes.js'
 import type { NativeDragSource } from './NativeDragSources/NativeDragSource.js'
+import * as NativeTypes from './NativeTypes.js'
+import {
+	getDragPreviewOffset,
+	getEventClientOffset,
+	getNodeClientOffset,
+} from './OffsetUtils.js'
 import { OptionsReader } from './OptionsReader.js'
 import type { HTML5BackendContext, HTML5BackendOptions } from './types.js'
 

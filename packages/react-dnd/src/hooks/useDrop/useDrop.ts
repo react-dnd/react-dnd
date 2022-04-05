@@ -1,11 +1,11 @@
 import type { ConnectDropTarget } from '../../types/index.js'
 import type { DropTargetHookSpec, FactoryOrInstance } from '../types.js'
-import { useRegisteredDropTarget } from './useRegisteredDropTarget.js'
-import { useOptionalFactory } from '../useOptionalFactory.js'
-import { useDropTargetMonitor } from './useDropTargetMonitor.js'
-import { useDropTargetConnector } from './useDropTargetConnector.js'
 import { useCollectedProps } from '../useCollectedProps.js'
+import { useOptionalFactory } from '../useOptionalFactory.js'
 import { useConnectDropTarget } from './connectors.js'
+import { useDropTargetConnector } from './useDropTargetConnector.js'
+import { useDropTargetMonitor } from './useDropTargetMonitor.js'
+import { useRegisteredDropTarget } from './useRegisteredDropTarget.js'
 
 /**
  * useDropTarget Hook

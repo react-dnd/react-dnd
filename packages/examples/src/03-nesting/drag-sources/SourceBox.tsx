@@ -1,14 +1,15 @@
 import {
 	CSSProperties,
 	FC,
-	useState,
-	useCallback,
-	useMemo,
 	memo,
 	ReactNode,
+	useCallback,
+	useMemo,
+	useState,
 } from 'react'
-import { useDrag, DragSourceMonitor } from 'react-dnd'
-import { Colors } from './Colors'
+import { DragSourceMonitor, useDrag } from 'react-dnd'
+
+import { Colors } from './Colors.js'
 
 const style: CSSProperties = {
 	border: '1px dashed gray',

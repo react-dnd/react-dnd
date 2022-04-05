@@ -1,4 +1,4 @@
-import { useLayoutEffect, useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 
 // suppress the useLayoutEffect warning on server side.
 export const useIsomorphicLayoutEffect =

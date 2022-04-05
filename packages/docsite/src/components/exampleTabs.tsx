@@ -1,7 +1,8 @@
-import { CSSProperties, FC, memo } from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
+
+import { CSSProperties, FC, memo } from 'react'
 import { componentIndex } from 'react-dnd-examples'
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 
 export interface ExampleTabsProps {
 	name: string

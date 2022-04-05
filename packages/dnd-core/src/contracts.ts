@@ -1,4 +1,5 @@
 import { invariant } from '@react-dnd/invariant'
+
 import type { DragSource, DropTarget, Identifier } from './interfaces.js'
 
 export function validateSourceContract(source: DragSource): void {

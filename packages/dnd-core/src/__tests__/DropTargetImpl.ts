@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { DropTarget, DragDropMonitor, Identifier } from '../interfaces'
+import type { DragDropMonitor, DropTarget, Identifier } from '../interfaces.js'
 
 export class DropTargetImpl implements DropTarget {
 	public canDrop(_monitor: DragDropMonitor, _targetId: Identifier): boolean {

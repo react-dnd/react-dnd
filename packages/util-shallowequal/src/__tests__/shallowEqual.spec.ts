@@ -1,4 +1,4 @@
-import { shallowEqual } from '../index'
+import { shallowEqual } from '../index.js'
 
 describe('shallowequal', function () {
 	// eslint-disable-next-line no-sparse-arrays

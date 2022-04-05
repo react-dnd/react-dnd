@@ -1,5 +1,6 @@
-import { SourceConnector } from '../SourceConnector'
 import type { Backend } from 'dnd-core'
+
+import { SourceConnector } from '../SourceConnector.js'
 
 describe('SourceConnector', () => {
 	let backend: jest.Mocked<Backend>

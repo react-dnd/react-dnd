@@ -1,9 +1,9 @@
-import type { DragSourceMonitor } from '../../types/index.js'
 import { registerSource, SourceConnector } from '../../internals/index.js'
+import type { DragSourceMonitor } from '../../types/index.js'
 import type { DragSourceHookSpec } from '../types.js'
+import { useDragDropManager } from '../useDragDropManager.js'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect.js'
 import { useDragSource } from './useDragSource.js'
-import { useDragDropManager } from '../useDragDropManager.js'
 import { useDragType } from './useDragType.js'
 
 export function useRegisteredDragSource<O, R, P>(

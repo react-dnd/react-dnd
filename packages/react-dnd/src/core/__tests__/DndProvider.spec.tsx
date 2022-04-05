@@ -1,8 +1,9 @@
+import { cleanup, render } from '@testing-library/react'
 import { createDragDropManager } from 'dnd-core'
-import { render, cleanup } from '@testing-library/react'
-import { DndContext, DndContextType } from '../DndContext'
-import { DndProvider } from '../DndProvider'
 import { TestBackend } from 'react-dnd-test-backend'
+
+import { DndContext, DndContextType } from '../DndContext.js'
+import { DndProvider } from '../DndProvider.js'
 
 describe('DndProvider', () => {
 	afterEach(cleanup)

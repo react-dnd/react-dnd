@@ -1,11 +1,12 @@
-import Example from '../index'
-import { fireEvent, render, cleanup } from '@testing-library/react'
+import { cleanup, fireEvent, render } from '@testing-library/react'
 import {
-	wrapWithBackend,
 	fireDrag,
 	fireReleaseDrag,
 	tick,
+	wrapWithBackend,
 } from 'react-dnd-test-utils'
+
+import Example from '../index.js'
 
 describe('Drag Around: Naive', () => {
 	afterEach(cleanup)

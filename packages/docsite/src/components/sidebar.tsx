@@ -1,6 +1,7 @@
-import { FC, memo } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
+import { FC, memo } from 'react'
 import styled from 'styled-components'
+
 import { Page, PageGroup } from '../constants'
 import { theme } from '../theme'
 import { isDebugMode } from '../util/isDebugMode'

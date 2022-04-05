@@ -1,5 +1,6 @@
 import equal from 'fast-deep-equal'
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
+
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect.js'
 
 /**

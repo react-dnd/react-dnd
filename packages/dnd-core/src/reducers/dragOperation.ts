@@ -1,12 +1,12 @@
 import {
 	BEGIN_DRAG,
-	PUBLISH_DRAG_SOURCE,
-	HOVER,
-	END_DRAG,
 	DROP,
+	END_DRAG,
+	HOVER,
+	PUBLISH_DRAG_SOURCE,
 } from '../actions/dragDrop/index.js'
 import { REMOVE_TARGET } from '../actions/registry.js'
-import type { Identifier, Action } from '../interfaces.js'
+import type { Action, Identifier } from '../interfaces.js'
 import { without } from '../utils/js_utils.js'
 
 export interface State {

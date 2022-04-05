@@ -1,5 +1,6 @@
-import type { DragDropManager, BackendFactory } from 'dnd-core'
-import type { TouchBackendOptions, TouchBackendContext } from './interfaces.js'
+import type { BackendFactory, DragDropManager } from 'dnd-core'
+
+import type { TouchBackendContext, TouchBackendOptions } from './interfaces.js'
 import { TouchBackendImpl } from './TouchBackendImpl.js'
 
 export * from './interfaces.js'

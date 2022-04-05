@@ -1,7 +1,8 @@
-import { useDrop } from '../useDrop'
-import { render, cleanup } from '@testing-library/react'
-import { DndProvider } from '../..'
+import { cleanup, render } from '@testing-library/react'
 import { TestBackend } from 'react-dnd-test-backend'
+
+import { DndProvider } from '../../index.js'
+import { useDrop } from '../useDrop.js'
 
 describe('The useDrop hook', () => {
 	afterEach(cleanup)

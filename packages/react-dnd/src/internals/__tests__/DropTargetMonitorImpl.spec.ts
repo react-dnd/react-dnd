@@ -1,6 +1,7 @@
-import { DropTargetMonitorImpl } from '../DropTargetMonitorImpl'
 import { createDragDropManager } from 'dnd-core'
 import { TestBackend } from 'react-dnd-test-backend'
+
+import { DropTargetMonitorImpl } from '../DropTargetMonitorImpl.js'
 
 describe('The DropTargetMonitorImpl', () => {
 	it('can be constructed', () => {

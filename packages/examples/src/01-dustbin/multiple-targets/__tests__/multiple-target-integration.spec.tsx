@@ -1,6 +1,7 @@
+import { cleanup, render } from '@testing-library/react'
+import { fireDragDrop, wrapWithBackend } from 'react-dnd-test-utils'
+
 import Example from '..'
-import { wrapWithBackend, fireDragDrop } from 'react-dnd-test-utils'
-import { render, cleanup } from '@testing-library/react'
 
 describe('Dustbin: Multiple Targets', () => {
 	afterEach(cleanup)

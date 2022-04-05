@@ -1,4 +1,5 @@
 import type { DropTarget } from 'dnd-core'
+
 import type { DropTargetMonitor } from '../../types/index.js'
 import type { DropTargetHookSpec } from '../types.js'
 

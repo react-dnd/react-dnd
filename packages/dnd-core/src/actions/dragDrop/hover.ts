@@ -1,11 +1,12 @@
 import { invariant } from '@react-dnd/invariant'
+
 import type {
 	Action,
 	DragDropManager,
-	HoverPayload,
-	HoverOptions,
 	DragDropMonitor,
 	HandlerRegistry,
+	HoverOptions,
+	HoverPayload,
 	Identifier,
 } from '../../interfaces.js'
 import { matchesType } from '../../utils/matchesType.js'

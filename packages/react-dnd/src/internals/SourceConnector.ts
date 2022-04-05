@@ -1,9 +1,10 @@
-import type { ReactElement, Ref, RefObject } from 'react'
-import { wrapConnectorHooks } from './wrapConnectorHooks.js'
-import type { Backend, Unsubscribe, Identifier } from 'dnd-core'
-import { isRef } from './isRef.js'
-import type { DragSourceOptions, DragPreviewOptions } from '../types/index.js'
 import { shallowEqual } from '@react-dnd/shallowequal'
+import type { Backend, Identifier, Unsubscribe } from 'dnd-core'
+import type { ReactElement, Ref, RefObject } from 'react'
+
+import type { DragPreviewOptions, DragSourceOptions } from '../types/index.js'
+import { isRef } from './isRef.js'
+import { wrapConnectorHooks } from './wrapConnectorHooks.js'
 
 export interface Connector {
 	hooks: any

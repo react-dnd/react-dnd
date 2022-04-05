@@ -1,6 +1,7 @@
-import { render, fireEvent, cleanup } from '@testing-library/react'
-import { Box } from '../Box'
-import { wrapWithBackend, fireDrag } from 'react-dnd-test-utils'
+import { cleanup, fireEvent, render } from '@testing-library/react'
+import { fireDrag, wrapWithBackend } from 'react-dnd-test-utils'
+
+import { Box } from '../Box.js'
 
 describe('Box', () => {
 	afterEach(cleanup)

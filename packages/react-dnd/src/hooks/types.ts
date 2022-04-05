@@ -1,9 +1,10 @@
-import type { TargetType, SourceType } from 'dnd-core'
+import type { SourceType, TargetType } from 'dnd-core'
+
 import type {
-	DropTargetMonitor,
+	DragPreviewOptions,
 	DragSourceMonitor,
 	DragSourceOptions,
-	DragPreviewOptions,
+	DropTargetMonitor,
 	DropTargetOptions,
 } from '../types/index.js'
 

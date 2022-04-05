@@ -1,5 +1,5 @@
-import type { DropTargetMonitor } from '../../../types'
-import { DropTargetImpl } from '../DropTargetImpl'
+import type { DropTargetMonitor } from '../../../types/index.js'
+import { DropTargetImpl } from '../DropTargetImpl.js'
 
 describe('The Hooks DropTargetImpl', () => {
 	describe('canDrag()', () => {

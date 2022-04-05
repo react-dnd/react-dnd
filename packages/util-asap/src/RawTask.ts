@@ -1,6 +1,6 @@
 // We wrap tasks with recyclable task objects.  A task object implements
 
-import type { TaskFn, Task } from 'types'
+import type { Task, TaskFn } from 'types'
 
 // `call`, just like a function.
 export class RawTask implements Task {

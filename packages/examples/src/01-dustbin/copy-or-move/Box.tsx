@@ -1,6 +1,7 @@
 import type { CSSProperties, FC } from 'react'
-import { ItemTypes } from './ItemTypes'
-import { useDrag, DragSourceMonitor } from 'react-dnd'
+import { DragSourceMonitor, useDrag } from 'react-dnd'
+
+import { ItemTypes } from './ItemTypes.js'
 
 const style: CSSProperties = {
 	border: '1px dashed gray',

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-	getNodeClientOffset,
-	getEventClientOffset,
 	getDragPreviewOffset,
-} from '../OffsetUtils'
+	getEventClientOffset,
+	getNodeClientOffset,
+} from '../OffsetUtils.js'
 
 describe('OffsetUtils', () => {
 	describe('getNodeClientOffset', () => {

@@ -1,10 +1,11 @@
-import { FC, useState, useEffect, useCallback, memo } from 'react'
-import { NativeTypes } from 'react-dnd-html5-backend'
-import { Dustbin } from './Dustbin'
-import { Box } from './Box'
-import { ItemTypes } from './ItemTypes'
 import update from 'immutability-helper'
 import shuffle from 'lodash/shuffle'
+import { FC, memo, useCallback, useEffect, useState } from 'react'
+import { NativeTypes } from 'react-dnd-html5-backend'
+
+import { Box } from './Box.js'
+import { Dustbin } from './Dustbin.js'
+import { ItemTypes } from './ItemTypes.js'
 
 export interface SourceBox {
 	name: string

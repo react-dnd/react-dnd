@@ -1,5 +1,5 @@
-import { DragSourceImpl as DragSource } from './DragSourceImpl'
 import type { DragDropMonitor } from '../interfaces'
+import { DragSourceImpl as DragSource } from './DragSourceImpl.js'
 
 export class NormalSource extends DragSource {
 	public didCallBeginDrag = false

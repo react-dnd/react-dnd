@@ -1,4 +1,4 @@
-import { xor, intersection } from '../js_utils'
+import { intersection, xor } from '../js_utils.js'
 
 describe('the utilities module', () => {
 	it('can compute xor', () => {
