@@ -1,7 +1,7 @@
 import { useDragLayer } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
-import { BoxDragPreview } from './BoxDragPreview';
-import { snapToGrid } from './snapToGrid';
+import { BoxDragPreview } from './BoxDragPreview.js';
+import { ItemTypes } from './ItemTypes.js';
+import { snapToGrid } from './snapToGrid.js';
 const layerStyles = {
     position: 'fixed',
     pointerEvents: 'none',

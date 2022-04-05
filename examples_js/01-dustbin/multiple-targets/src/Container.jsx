@@ -1,9 +1,9 @@
-import { useState, useCallback, memo } from 'react';
-import { NativeTypes } from 'react-dnd-html5-backend';
-import { Dustbin } from './Dustbin';
-import { Box } from './Box';
-import { ItemTypes } from './ItemTypes';
 import update from 'immutability-helper';
+import { memo, useCallback, useState } from 'react';
+import { NativeTypes } from 'react-dnd-html5-backend';
+import { Box } from './Box.js';
+import { Dustbin } from './Dustbin.js';
+import { ItemTypes } from './ItemTypes.js';
 export const Container = memo(function Container() {
     const [dustbins, setDustbins] = useState([
         { accepts: [ItemTypes.GLASS], lastDroppedItem: null },

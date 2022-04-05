@@ -1,7 +1,7 @@
-import { Component } from 'react';
 import Faker from 'faker';
-import { Card } from './Card';
 import update from 'immutability-helper';
+import { Component } from 'react';
+import { Card } from './Card.js';
 const style = {
     width: 400,
 };

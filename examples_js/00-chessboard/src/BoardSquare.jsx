@@ -1,7 +1,7 @@
 import { useDrop } from 'react-dnd';
-import { Square } from './Square';
-import { ItemTypes } from './ItemTypes';
-import { Overlay, OverlayType } from './Overlay';
+import { ItemTypes } from './ItemTypes.js';
+import { Overlay, OverlayType } from './Overlay.js';
+import { Square } from './Square.js';
 export const BoardSquare = ({ x, y, children, game, }) => {
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: ItemTypes.KNIGHT,

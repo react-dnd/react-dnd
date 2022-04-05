@@ -1,6 +1,6 @@
 import { DragPreviewImage, useDrag } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
-import { knightImage } from './knightImage';
+import { ItemTypes } from './ItemTypes.js';
+import { knightImage } from './knightImage.js';
 const knightStyle = {
     fontSize: 40,
     fontWeight: 'bold',

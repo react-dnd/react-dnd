@@ -1,4 +1,4 @@
-import { BoxWithHandle } from './BoxWithHandle';
+import { BoxWithHandle } from './BoxWithHandle.js';
 const style = {
     width: 400,
 };

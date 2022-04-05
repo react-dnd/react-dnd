@@ -1,6 +1,6 @@
 import { DragPreviewImage, useDrag } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
-import { boxImage } from './boxImage';
+import { boxImage } from './boxImage.js';
+import { ItemTypes } from './ItemTypes.js';
 const style = {
     border: '1px dashed gray',
     padding: '0.5rem 1rem',

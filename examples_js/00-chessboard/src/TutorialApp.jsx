@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { Board } from './Board';
-import { Game } from './Game';
+import { Board } from './Board.js';
+import { Game } from './Game.js';
 const containerStyle = {
     width: 500,
     height: 500,

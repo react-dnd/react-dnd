@@ -1,4 +1,4 @@
-import { Example } from './Example';
+import { Example } from './Example.js';
 export const Container = () => {
     return (<>
 			<h3>

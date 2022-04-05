@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import { SourceBox } from './SourceBox';
-import { StatefulTargetBox as TargetBox } from './TargetBox';
-import { Colors } from './Colors';
+import { Colors } from './Colors.js';
+import { SourceBox } from './SourceBox.js';
+import { StatefulTargetBox as TargetBox } from './TargetBox.js';
 export const Container = memo(function Container() {
     return (<div style={{ overflow: 'hidden', clear: 'both', margin: '-.5rem' }}>
 			<div style={{ float: 'left' }}>

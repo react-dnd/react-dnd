@@ -1,5 +1,5 @@
-import { SourceBox } from './SourceBox';
-import { TargetBox } from './TargetBox';
+import { SourceBox } from './SourceBox.js';
+import { TargetBox } from './TargetBox.js';
 export const Container = () => {
     return (<>
 			<div style={{ overflow: 'hidden', clear: 'both', marginTop: '1.5rem' }}>

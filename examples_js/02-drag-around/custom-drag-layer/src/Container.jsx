@@ -1,9 +1,9 @@
+import update from 'immutability-helper';
 import { useCallback, useState } from 'react';
 import { useDrop } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
-import { DraggableBox } from './DraggableBox';
-import { snapToGrid as doSnapToGrid } from './snapToGrid';
-import update from 'immutability-helper';
+import { DraggableBox } from './DraggableBox.js';
+import { ItemTypes } from './ItemTypes.js';
+import { snapToGrid as doSnapToGrid } from './snapToGrid.js';
 const styles = {
     width: 300,
     height: 300,

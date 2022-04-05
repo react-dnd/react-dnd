@@ -1,5 +1,5 @@
-import { NativeTypes } from 'react-dnd-html5-backend';
 import { useDrop } from 'react-dnd';
+import { NativeTypes } from 'react-dnd-html5-backend';
 const style = {
     border: '1px solid gray',
     height: '15rem',
