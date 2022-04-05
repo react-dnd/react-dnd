@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Identifier } from 'dnd-core'
 import type { ITestBackend } from 'react-dnd-test-backend'
-// @ts-expect-error no-typings-provided
-import { act } from 'react-dom/test-utils.js'
+import { act } from 'react-dom/test-utils'
 
 /**
  * Simulates a drag/drop sequence using the Test Backend
