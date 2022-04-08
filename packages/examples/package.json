@@ -17,7 +17,8 @@
     "build_types": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist src/",
     "build_docs": "tsc -b tsconfig.docs.json",
-    "build": "run-s build_types build_esm build_docs"
+    "unjsxify": "yarn node ../../scripts/unjsxify.mjs ./dist/docs",
+    "build": "run-s build_types build_esm build_docs unjsxify"
   },
   "dependencies": {
     "dnd-core": "workspace:^",
