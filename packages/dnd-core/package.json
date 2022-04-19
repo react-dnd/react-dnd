@@ -20,7 +20,7 @@
   "dependencies": {
     "@react-dnd/asap": "workspace:^",
     "@react-dnd/invariant": "workspace:^",
-    "redux": "^4.1.2"
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
