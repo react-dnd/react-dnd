@@ -8,7 +8,7 @@ export const Container: FC = () => {
 	const [droppedFiles, setDroppedFiles] = useState<File[]>([])
 
 	const handleFileDrop = useCallback(
-		(item) => {
+		(item: { files: any[] }) => {
 			if (item) {
 				const files = item.files
 				setDroppedFiles(files)

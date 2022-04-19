@@ -20,11 +20,11 @@
   "dependencies": {
     "@react-dnd/asap": "workspace:^",
     "@react-dnd/invariant": "workspace:^",
-    "redux": "^4.1.2"
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.163",
+    "@swc/core": "^1.2.168",
     "@types/jest": "^27.4.1",
     "@types/setimmediate": "^1.0.2",
     "jest-mock": "^27.5.1",

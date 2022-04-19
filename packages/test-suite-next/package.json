@@ -7,7 +7,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.1.4",
+    "next": "12.1.5",
     "react": "18.0.0",
     "react-dnd": "workspace:^",
     "react-dnd-examples": "workspace:^",
@@ -16,9 +16,9 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.4.1",
-    "@types/react": "^17.0.43",
-    "@types/react-dom": "^17.0.14",
-    "eslint": "8.12.0",
-    "eslint-config-next": "12.1.4"
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "eslint": "8.13.0",
+    "eslint-config-next": "12.1.5"
   }
 }
