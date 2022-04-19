@@ -1,6 +1,6 @@
 {
   "name": "test-suite-cra",
-  "version": "15.1.1",
+  "version": "15.1.2",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
