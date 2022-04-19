@@ -648,7 +648,10 @@ describe('DragDropManager', () => {
 				).toThrow()
 			})
 
-			it('throws in hover() if it contains the same target twice (even if wrong type)', () => {
+			/**
+			 * Disabled with https://github.com/react-dnd/react-dnd/pull/3432
+			 */
+			it.skip('throws in hover() if it contains the same target twice (even if wrong type)', () => {
 				const source = new NormalSource()
 				const sourceId = registry.addSource(Types.FOO, source)
 				const targetA = new NormalTarget()

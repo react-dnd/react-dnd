@@ -21,9 +21,9 @@ export function createHover(manager: DragDropManager) {
 		const targetIds = targetIdsArg.slice(0)
 		const monitor = manager.getMonitor()
 		const registry = manager.getRegistry()
-		checkInvariants(targetIds, monitor, registry)
 		const draggedItemType = monitor.getItemType()
 		removeNonMatchingTargetIds(targetIds, registry, draggedItemType)
+		checkInvariants(targetIds, monitor, registry)
 		hoverAllTargets(targetIds, monitor, registry)
 
 		return {
