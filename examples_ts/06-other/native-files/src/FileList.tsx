@@ -12,9 +12,9 @@ function list(files: File[]) {
 }
 
 export const FileList: FC<FileListProps> = ({ files }) => {
+  const fileList = useMemo(() => list(files), [files])
   if (files.length === 0) {
     return <div>Nothing to display</div>
   }
-  const fileList = useMemo(() => list(files), [files])
   return <div>{fileList}</div>
 }

@@ -1,8 +1,8 @@
 import type { CSSProperties, FC } from 'react'
 import { DragPreviewImage, useDrag } from 'react-dnd'
 
-import { boxImage } from './boxImage.js'
-import { ItemTypes } from './ItemTypes.js'
+import { boxImage } from './boxImage'
+import { ItemTypes } from './ItemTypes'
 
 const style: CSSProperties = {
   border: '1px dashed gray',

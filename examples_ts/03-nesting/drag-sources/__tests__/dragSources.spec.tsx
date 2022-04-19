@@ -2,7 +2,7 @@
 import { act, cleanup, fireEvent, render } from '@testing-library/react'
 import { fireDragDrop, wrapWithBackend } from 'react-dnd-test-utils'
 
-import Example from '../index.js'
+import Example from '../src/example'
 
 describe('the drag sources example', () => {
   afterEach(cleanup)

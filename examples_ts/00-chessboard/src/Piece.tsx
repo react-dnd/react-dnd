@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import { Knight } from './Knight.js'
+import { Knight } from './Knight'
 
 export interface PieceProps {
   isKnight: boolean

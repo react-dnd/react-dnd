@@ -3,7 +3,7 @@ import { cleanup, render } from '@testing-library/react'
 import jest from 'jest-mock'
 import { fireDragDrop, wrapWithBackend } from 'react-dnd-test-utils'
 
-import Example from '../index.js'
+import Example from '../src/example'
 
 describe('Integration: Dustbin Single Target', () => {
   afterEach(cleanup)

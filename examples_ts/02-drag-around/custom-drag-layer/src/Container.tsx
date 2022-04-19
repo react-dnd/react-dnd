@@ -3,10 +3,10 @@ import type { CSSProperties, FC } from 'react'
 import { useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 
-import { DraggableBox } from './DraggableBox.js'
+import { DraggableBox } from './DraggableBox'
 import type { DragItem } from './interfaces'
-import { ItemTypes } from './ItemTypes.js'
-import { snapToGrid as doSnapToGrid } from './snapToGrid.js'
+import { ItemTypes } from './ItemTypes'
+import { snapToGrid as doSnapToGrid } from './snapToGrid'
 
 const styles: CSSProperties = {
   width: 300,

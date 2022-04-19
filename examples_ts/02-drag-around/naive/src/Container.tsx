@@ -4,9 +4,9 @@ import { useCallback, useState } from 'react'
 import type { XYCoord } from 'react-dnd'
 import { useDrop } from 'react-dnd'
 
-import { Box } from './Box.js'
-import type { DragItem } from './interfaces.js'
-import { ItemTypes } from './ItemTypes.js'
+import { Box } from './Box'
+import type { DragItem } from './interfaces'
+import { ItemTypes } from './ItemTypes'
 
 const styles: CSSProperties = {
   width: 300,

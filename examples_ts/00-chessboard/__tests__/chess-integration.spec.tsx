@@ -6,9 +6,9 @@ import {
   wrapWithBackend,
 } from 'react-dnd-test-utils'
 
-import { Board } from '../Board.js'
-import { Game } from '../Game.js'
-import { OverlayType } from '../Overlay.js'
+import { Board } from '../Board'
+import { Game } from '../Game'
+import { OverlayType } from '../Overlay'
 
 const TestBoard = wrapWithBackend(Board)
 function renderGame(game: Game): RenderResult {

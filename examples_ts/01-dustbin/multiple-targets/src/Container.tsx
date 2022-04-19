@@ -3,9 +3,9 @@ import type { FC } from 'react'
 import { memo, useCallback, useState } from 'react'
 import { NativeTypes } from 'react-dnd-html5-backend'
 
-import { Box } from './Box.js'
-import { Dustbin } from './Dustbin.js'
-import { ItemTypes } from './ItemTypes.js'
+import { Box } from './Box'
+import { Dustbin } from './Dustbin'
+import { ItemTypes } from './ItemTypes'
 
 interface DustbinState {
   accepts: string[]

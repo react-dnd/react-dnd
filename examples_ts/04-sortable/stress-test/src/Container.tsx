@@ -3,7 +3,7 @@ import update from 'immutability-helper'
 import type { CSSProperties } from 'react'
 import { Component } from 'react'
 
-import { Card } from './Card.js'
+import { Card } from './Card'
 
 const style: CSSProperties = {
   width: 400,

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 
-import { BoxWithHandle } from './BoxWithHandle.js'
-import { BoxWithImage } from './BoxWithImage.js'
+import { BoxWithHandle } from './BoxWithHandle'
+import { BoxWithImage } from './BoxWithImage'
 
 export const Container: FC = () => {
   return (
