@@ -2,12 +2,12 @@
 import fs from 'fs'
 import path from 'path'
 import { removeImportExtensions } from '../../scripts/removeImportExtensions.mjs'
-import { createRequire } from "module";
-import {fileURLToPath} from 'url';
+import { createRequire } from 'module'
+import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const require = createRequire(import.meta.url)
 
 const rootPkgJson = require('../../package.json')
 const reactDndPkgJson = require('../react-dnd/package.json')
@@ -15,7 +15,6 @@ const craTesterPkgJson = require('../test-suite-cra/package.json')
 const examplesPkgJson = require('../examples/package.json')
 const reactDndHtml5BackendVersion =
 	require('../backend-html5/package.json').version
-
 
 const APP_FILE_CONTENT = `
 	import { render } from 'react-dom'
