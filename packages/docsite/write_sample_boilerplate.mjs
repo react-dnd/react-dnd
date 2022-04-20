@@ -116,6 +116,7 @@ const makePackageJson = (index, isTS) => {
 			...examplesPkgJson['dependencies'],
 			'react-dnd': reactDndPkgJson.version,
 			'react-dnd-html5-backend': reactDndHtml5BackendVersion,
+			'prop-types': '*',
 			'dnd-core': undefined,
 			'react-dnd-examples': undefined,
 		},
