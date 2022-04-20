@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
-import { ItemTypes } from './ItemTypes.js'
+import { ItemTypes } from './ItemTypes'
 
 const style = {
   border: '1px dashed gray',

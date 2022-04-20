@@ -3,8 +3,8 @@ import { memo, useCallback, useState } from 'react'
 import type { DropTargetMonitor } from 'react-dnd'
 import { useDrop } from 'react-dnd'
 
-import { Colors } from './Colors.js'
-import type { DragItem } from './interfaces.js'
+import { Colors } from './Colors'
+import type { DragItem } from './interfaces'
 
 const style: CSSProperties = {
   border: '1px solid gray',

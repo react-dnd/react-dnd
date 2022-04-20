@@ -1,1 +1,1 @@
-export { SortableStressTest as default } from './SortableStressTest.js'
+export { SortableStressTest as default } from './SortableStressTest'
