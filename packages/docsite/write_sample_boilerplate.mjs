@@ -76,7 +76,9 @@ const HTML_FILE_CONTENT = `
 
 const TS_CONFIG = {
 	compilerOptions: {
-		target: 'es5',
+		target: 'ESNext',
+		module: 'ESNext',
+		moduleResolution: 'Node',
 		lib: ['dom', 'dom.iterable', 'esnext'],
 		allowJs: true,
 		skipLibCheck: true,
@@ -85,8 +87,6 @@ const TS_CONFIG = {
 		strict: true,
 		forceConsistentCasingInFileNames: true,
 		noFallthroughCasesInSwitch: true,
-		module: 'esnext',
-		moduleResolution: 'node',
 		resolveJsonModule: true,
 		isolatedModules: true,
 		noEmit: true,
