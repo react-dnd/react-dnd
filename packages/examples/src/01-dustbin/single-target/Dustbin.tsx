@@ -35,7 +35,7 @@ export const Dustbin: FC = () => {
 	}
 
 	return (
-		<div ref={drop} role={'Dustbin'} style={{ ...style, backgroundColor }}>
+		<div ref={drop} style={{ ...style, backgroundColor }}>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
 		</div>
 	)
