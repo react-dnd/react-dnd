@@ -11,7 +11,7 @@ describe('Box', () => {
 		const rendered = render(<TestBox name="test" />)
 
 		// Check that the opacity is 1
-		const box = rendered.getByTestId('box-test')
+		const box = rendered.getByTestId('box')
 		expect(box).toBeDefined()
 		expect(box).toHaveStyle({ opacity: '1' })
 

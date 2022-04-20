@@ -44,7 +44,7 @@ export const Dustbin: FC<DustbinProps> = memo(function Dustbin({
 	}
 
 	return (
-		<div ref={drop} role="Dustbin" style={{ ...style, backgroundColor }}>
+		<div ref={drop} style={{ ...style, backgroundColor }} data-testid="dustbin">
 			{isActive
 				? 'Release to drop'
 				: `This dustbin accepts: ${accept.join(', ')}`}

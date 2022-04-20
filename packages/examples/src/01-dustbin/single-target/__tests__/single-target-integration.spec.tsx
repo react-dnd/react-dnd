@@ -12,8 +12,8 @@ describe('Integration: Dustbin Single Target', () => {
 		const TestExample = wrapWithBackend(Example)
 		const rendered = render(<TestExample />)
 		window.alert = jest.fn()
-		const box = (await rendered.findAllByRole('Box'))[0]
-		const dustbin = await rendered.findByRole('Dustbin')
+		const box = (await rendered.findAllByTestId('box'))[0]
+		const dustbin = (await rendered.findAllByTestId('dustbin'))[0]
 		expect(box).toBeDefined()
 		expect(dustbin).toBeDefined()
 

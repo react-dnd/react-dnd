@@ -13,8 +13,8 @@ describe('Dustbin: Multiple Targets', () => {
 		const rendered = render(<TestExample />)
 
 		// Verify that all of the key components mounted
-		const dustbins = await rendered.findAllByRole('Dustbin')
-		const boxes = await rendered.findAllByRole('Box')
+		const dustbins = await rendered.findAllByTestId('dustbin')
+		const boxes = await rendered.findAllByTestId('box')
 		expect(dustbins.length).toEqual(4)
 		expect(boxes.length).toEqual(3)
 

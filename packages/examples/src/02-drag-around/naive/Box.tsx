@@ -41,7 +41,12 @@ export const Box: FC<BoxProps> = ({
 		return <div ref={drag} />
 	}
 	return (
-		<div ref={drag} style={{ ...style, left, top }}>
+		<div
+			className="box"
+			ref={drag}
+			style={{ ...style, left, top }}
+			data-testid="box"
+		>
 			{children}
 		</div>
 	)

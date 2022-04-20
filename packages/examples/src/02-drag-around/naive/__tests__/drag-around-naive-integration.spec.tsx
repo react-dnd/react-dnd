@@ -14,7 +14,7 @@ describe('Drag Around: Naive', () => {
 	it('can hide the source node on drag', async () => {
 		const TestExample = wrapWithBackend(Example)
 		const rendered = render(<TestExample />)
-		const getBoxes = () => rendered.findAllByRole('Box')
+		const getBoxes = () => rendered.findAllByTestId('box')
 		const boxes = await getBoxes()
 		expect(boxes.length).toEqual(2)
 		const first = boxes[0]
@@ -32,7 +32,7 @@ describe('Drag Around: Naive', () => {
 	it('can disable source hiding', async () => {
 		const TestExample = wrapWithBackend(Example)
 		const rendered = render(<TestExample />)
-		const getBoxes = () => rendered.findAllByRole('Box')
+		const getBoxes = () => rendered.findAllByTestId('box')
 		const boxes = await getBoxes()
 		const checkbox = await rendered.findByRole('checkbox')
 		expect(boxes.length).toEqual(2)
