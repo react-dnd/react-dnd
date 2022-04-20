@@ -1,12 +1,21 @@
 /* eslint-disable */
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
+import { removeImportExtensions } from '../../scripts/removeImportExtensions.mjs'
+import { createRequire } from "module";
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
+
 const rootPkgJson = require('../../package.json')
 const reactDndPkgJson = require('../react-dnd/package.json')
 const craTesterPkgJson = require('../test-suite-cra/package.json')
 const examplesPkgJson = require('../examples/package.json')
 const reactDndHtml5BackendVersion =
 	require('../backend-html5/package.json').version
+
 
 const APP_FILE_CONTENT = `
 	import { render } from 'react-dom'
@@ -216,7 +225,7 @@ function handleJsExample(err, results) {
 
 function handleTsExample(err, results) {
 	if (err) throw err
-	results.forEach((exampleIndex, index) => {
+	results.forEach(async (exampleIndex, index) => {
 		const exampleDir = path.dirname(exampleIndex)
 		console.log('processing example', exampleDir)
 
@@ -261,6 +270,8 @@ function handleTsExample(err, results) {
 
 		const envFile = path.join(exampleDir, '.env')
 		fs.writeFileSync(envFile, `SKIP_PREFLIGHT_CHECK = true`)
+
+		await removeImportExtensions(path.join(exampleDir, 'src'))
 	})
 }
 // Write JS Examples

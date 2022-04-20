@@ -75,7 +75,7 @@
     "copy_examples": "run-s 'copy_examples:*'",
     "prune_buildinfo": "shx rm -rf static/examples_js/tsconfig.docs.tsbuildinfo",
     "format_examples": "prettier 'static/examples_*/**/*.(js|ts|tsx)' --use-tabs=false --write",
-    "write_example_boilerplate": "node write_sample_boilerplate.js",
+    "write_example_boilerplate": "node write_sample_boilerplate.mjs",
     "echo_finished_examples": "shx echo 'finished processing examples'",
     "process_examples": "run-s clean_examples copy_examples prune_buildinfo format_examples write_example_boilerplate echo_finished_examples",
     "build:gatsby": "gatsby build --prefix-paths",
