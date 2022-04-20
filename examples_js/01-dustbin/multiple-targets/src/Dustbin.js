@@ -33,7 +33,7 @@ export const Dustbin = memo(function Dustbin({
     backgroundColor = 'darkkhaki'
   }
   return (
-    <div ref={drop} role="Dustbin" style={{ ...style, backgroundColor }}>
+    <div ref={drop} style={{ ...style, backgroundColor }} data-testid="dustbin">
       {isActive
         ? 'Release to drop'
         : `This dustbin accepts: ${accept.join(', ')}`}

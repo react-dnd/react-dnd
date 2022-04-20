@@ -22,7 +22,12 @@ export const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
     return <div ref={drag} />
   }
   return (
-    <div ref={drag} style={{ ...style, left, top }}>
+    <div
+      className="box"
+      ref={drag}
+      style={{ ...style, left, top }}
+      data-testid="box"
+    >
       {children}
     </div>
   )
