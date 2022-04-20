@@ -21,7 +21,7 @@ export const Box = memo(function Box({ name, type, isDropped }) {
     [name, type],
   )
   return (
-    <div ref={drag} role="Box" style={{ ...style, opacity }}>
+    <div ref={drag} style={{ ...style, opacity }}>
       {isDropped ? <s>{name}</s> : name}
     </div>
   )

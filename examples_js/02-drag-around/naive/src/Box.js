@@ -22,7 +22,7 @@ export const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
     return <div ref={drag} />
   }
   return (
-    <div ref={drag} style={{ ...style, left, top }} role="Box">
+    <div ref={drag} style={{ ...style, left, top }}>
       {children}
     </div>
   )
