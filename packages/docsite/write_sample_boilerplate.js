@@ -3,6 +3,8 @@ const fs = require('fs')
 const path = require('path')
 const rootPkgJson = require('../../package.json')
 const reactDndPkgJson = require('../react-dnd/package.json')
+const craTesterPkgJson = require('../test-suite-cra/package.json')
+const examplesPkgJson = require('../examples/package.json')
 const reactDndHtml5BackendVersion =
 	require('../backend-html5/package.json').version
 
@@ -102,15 +104,15 @@ const makePackageJson = (index, isTS) => {
 			eject: 'react-scripts eject',
 		},
 		dependencies: {
-			react: reactDndPkgJson.devDependencies.react,
-			'react-dom': reactDndPkgJson.devDependencies['react-dom'],
-			'react-scripts': '^4.0.2',
+			...craTesterPkgJson['dependencies'],
+			...examplesPkgJson['dependencies'],
 			'react-dnd': reactDndPkgJson.version,
 			'react-dnd-html5-backend': reactDndHtml5BackendVersion,
-			'babel-jest': '^26.6.3',
-			faker: '^5.4.0',
-			'immutability-helper': '^3.1.1',
-			'react-frame-component': '^4.1.3',
+			'dnd-core': undefined,
+			'react-dnd-examples': undefined,
+		},
+		devDependencies: {
+			...craTesterPkgJson['devDependencies'],
 		},
 		eslintConfig: {
 			extends: ['react-app', 'react-app/jest'],
@@ -125,13 +127,9 @@ const makePackageJson = (index, isTS) => {
 		},
 	}
 	if (isTS) {
-		result.dependencies = {
-			...result.dependencies,
+		result.devDependencies = {
+			...result.devDependencies,
 			typescript: rootPkgJson.devDependencies.typescript,
-			'@types/react': reactDndPkgJson.devDependencies['@types/react'],
-			'@types/react-dom': reactDndPkgJson.devDependencies['@types/react-dom'],
-			'@types/jest': rootPkgJson.devDependencies['@types/jest'],
-			'@types/node': '*',
 		}
 	}
 	return result
