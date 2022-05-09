@@ -98,6 +98,11 @@ export class HTML5BackendImpl implements Backend {
 		return this.options.rootElement as Node
 	}
 
+	public targetIsProsemirror(event): boolean {
+		console.log('target', event.target)
+		return event.target.classList.contains('ProseMirror')
+	}
+
 	public setup(): void {
 		const root = this.rootElement as RootNode | undefined
 		if (root === undefined) {
@@ -549,7 +554,9 @@ export class HTML5BackendImpl implements Backend {
 			return
 		} else {
 			// If by this time no drag source reacted, tell browser not to drag.
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 		}
 	}
 
@@ -614,7 +621,9 @@ export class HTML5BackendImpl implements Backend {
 
 		if (canDrop) {
 			// IE requires this to fire dragover events
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
 			}
@@ -643,7 +652,9 @@ export class HTML5BackendImpl implements Backend {
 		if (!this.monitor.isDragging()) {
 			// This is probably a native item type we don't understand.
 			// Prevent default "drop and blow away the whole document" action.
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = 'none'
 			}
@@ -661,16 +672,22 @@ export class HTML5BackendImpl implements Backend {
 
 		if (canDrop) {
 			// Show user-specified drop effect.
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
 			}
 		} else if (this.isDraggingNativeItem()) {
 			// Don't show a nice cursor but still prevent default
 			// "drop and blow away the whole document" action.
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 		} else {
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 			if (e.dataTransfer) {
 				e.dataTransfer.dropEffect = 'none'
 			}
@@ -679,7 +696,9 @@ export class HTML5BackendImpl implements Backend {
 
 	public handleTopDragLeaveCapture = (e: DragEvent): void => {
 		if (this.isDraggingNativeItem()) {
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 		}
 
 		const isLastLeave = this.enterLeaveCounter.leave(e.target)
@@ -697,14 +716,18 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		} else if (matchNativeItemType(e.dataTransfer)) {
 			// Dragging some elements, like <a> and <img> may still behave like a native drag event,
 			// even if the current drag event matches a user-defined type.
 			// Stop the default behavior when we're not expecting a native item to be dropped.
 
-			e.preventDefault()
+			if (!this.targetIsProsemirror(e)) {
+				e.preventDefault()
+			}
 		}
 
 		this.enterLeaveCounter.reset()
@@ -752,7 +775,9 @@ export class HTML5BackendImpl implements Backend {
 
 		// For other targets, ask IE
 		// to enable drag and drop
-		e.preventDefault()
+		if (!this.targetIsProsemirror(e)) {
+			e.preventDefault()
+		}
 		target.dragDrop()
 	}
 }
