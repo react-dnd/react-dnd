@@ -4,6 +4,9 @@ on:
   push:
     branches: [dependabot/npm_and_yarn/**]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest

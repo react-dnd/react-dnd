@@ -2,6 +2,9 @@ name: Version Check
 on: [push, pull_request]
 env:
   DEFAULT_NODE_VERSION: 16
+permissions:
+  contents: read
+
 jobs:
   version-check:
     runs-on: ubuntu-latest
