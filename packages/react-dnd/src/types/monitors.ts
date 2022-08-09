@@ -32,7 +32,7 @@ export interface DragSourceMonitor<DragObject = unknown, DropResult = unknown>
 	 * Returns a plain object representing the currently dragged item. Every drag source must specify it by returning an object from its beginDrag() method.
 	 * Returns null if no item is being dragged.
 	 */
-	getItem<T = DragObject>(): T
+	getItem<T = DragObject>(): T | null
 
 	/**
 	 * Returns a plain object representing the last recorded drop result. The drop targets may optionally specify it by returning an object from their
