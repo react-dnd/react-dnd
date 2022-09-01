@@ -26,9 +26,18 @@ describe('TouchBackend', () => {
 		backend.targetNodes.set('abc', mockNode1)
 		backend.targetNodes.set('def', mockNode2)
 
-		expect(backend._getDropTargetId(mockNode1)).toEqual('abc')
-		expect(backend._getDropTargetId(mockNode2)).toEqual('def')
-		expect(backend._getDropTargetId({} as Element)).toEqual(undefined)
+		expect(backend._getDropTargetIds(mockNode1)).toEqual(['abc'])
+		expect(backend._getDropTargetIds(mockNode2)).toEqual(['def'])
+		expect(backend._getDropTargetIds({} as Element)).toEqual([])
+	})
+
+	it('can handle the same node being used more than once', () => {
+		const mockNode = {} as HTMLElement
+		const backend = TouchBackend(mockManager(), {}, {}) as TouchBackendImpl
+		backend.targetNodes.set('abc', mockNode)
+		backend.targetNodes.set('def', mockNode)
+
+		expect(backend._getDropTargetIds(mockNode)).toEqual(['abc', 'def'])
 	})
 })
 

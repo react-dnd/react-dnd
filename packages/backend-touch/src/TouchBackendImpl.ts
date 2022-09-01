@@ -512,7 +512,10 @@ export class TouchBackendImpl implements Backend {
 			// Filter off nodes that arent a hovered DropTargets nodes
 			.filter((node) => dragOverTargetNodes.indexOf(node as HTMLElement) > -1)
 			// Map back the nodes elements to targetIds
-			.map((node) => this._getDropTargetId(node))
+			.reduce<Identifier[]>(
+				(allIds, node) => allIds.concat(this._getDropTargetIds(node)),
+				[],
+			)
 			// Filter off possible null rows
 			.filter((node) => !!node)
 			.filter((id, index, ids) => ids.indexOf(id) === index) as string[]
@@ -545,18 +548,19 @@ export class TouchBackendImpl implements Backend {
 	 *
 	 * visible for testing
 	 */
-	public _getDropTargetId = (node: Element): Identifier | undefined => {
+	public _getDropTargetIds = (node: Element): Identifier[] => {
 		const keys = this.targetNodes.keys()
 		let next = keys.next()
+		const idsForNode = []
 		while (next.done === false) {
 			const targetId = next.value
 			if (node === this.targetNodes.get(targetId)) {
-				return targetId
-			} else {
-				next = keys.next()
+				idsForNode.push(targetId)
 			}
+
+			next = keys.next()
 		}
-		return undefined
+		return idsForNode
 	}
 
 	public handleTopMoveEndCapture = (e: Event): void => {
