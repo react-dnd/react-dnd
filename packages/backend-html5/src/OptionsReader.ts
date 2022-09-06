@@ -38,7 +38,7 @@ export class OptionsReader {
 
 	public isCopying(e: DragEvent): boolean {
 		if (this.optionsArgs?.copyKey === undefined) {
-			return false
+			return e.altKey
 		}
 		switch (this.optionsArgs?.copyKey) {
 			case 'shift':
