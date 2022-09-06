@@ -35,4 +35,21 @@ export class OptionsReader {
 	public get rootElement(): Node | undefined {
 		return this.optionsArgs?.rootElement || this.window
 	}
+
+	public isCopying(e: DragEvent): boolean {
+		if (this.optionsArgs?.copyKey === undefined) {
+			return false
+		}
+		switch (this.optionsArgs?.copyKey) {
+			case 'shift':
+				return e.shiftKey
+			case 'ctrl':
+				return e.ctrlKey
+			case 'alt':
+				return e.altKey
+			case 'meta':
+				return e.metaKey
+		}
+		return this.optionsArgs?.copyKey(e)
+	}
 }
