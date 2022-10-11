@@ -40,7 +40,7 @@ export class OptionsReader {
 		if (this.optionsArgs?.copyKey === undefined) {
 			return e.altKey
 		}
-		switch (this.optionsArgs?.copyKey) {
+		switch (this.optionsArgs.copyKey) {
 			case 'shift':
 				return e.shiftKey
 			case 'ctrl':
