@@ -50,7 +50,7 @@ export const Container: FC = memo(function Container() {
 
 	const findCard = useCallback(
 		(id: string) => {
-			const card = cards.filter((c) => `${c.id}` === id)[0] as {
+			const card = cards.find((c) => `${c.id}` === id) as {
 				id: number
 				text: string
 			}
