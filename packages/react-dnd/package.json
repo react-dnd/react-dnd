@@ -1,10 +1,17 @@
 {
   "name": "react-dnd",
-  "version": "16.0.1",
+  "version": "17.0.0",
   "description": "Drag and Drop for React",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -14,8 +21,10 @@
   "scripts": {
     "clean": "shx rm -rf dist/",
     "build_types": "tsc -b .",
-    "build_esm": "swc -C module.type=es6 -d dist src/",
-    "build": "run-s build_types build_esm"
+    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
+    "build_commonjs": "swc -C module.type=commonjs -d dist/cjs src/",
+    "add_pkgjson": "node ../../scripts/createDistPackageJson.mjs",
+    "build": "run-s clean build_types build_esm build_commonjs add_pkgjson"
   },
   "dependencies": {
     "@react-dnd/invariant": "workspace:^",
