@@ -14,6 +14,11 @@ export class DragSourceImpl<O, R, P> implements DragSource {
 	public beginDrag() {
 		const spec = this.spec
 		const monitor = this.monitor
+		
+		const { begin } = spec
+		if (begin) {
+			begin(monitor.getItem(), monitor)
+		}
 
 		let result: O | null = null
 		if (typeof spec.item === 'object') {
