@@ -52,7 +52,8 @@
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "ci": "run-s build: test: lint: jest: modules: build_docsite git-is-clean",
     "precommit": "lint-staged",
-    "git-is-clean": "git status && git diff-index HEAD"
+    "git-is-clean": "git status && git diff-index HEAD",
+    "update_sdks": "yarn dlx @yarnpkg/sdks vscode"
   },
   "workspaces": [
     "packages/*"
