@@ -24,14 +24,14 @@
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.168",
-    "@types/jest": "^27.4.1",
+    "@swc/core": "^1.3.23",
+    "@types/jest": "^29.2.4",
     "@types/setimmediate": "^1.0.2",
-    "jest-mock": "^27.5.1",
+    "jest-mock": "^29.3.1",
     "npm-run-all": "^4.1.5",
     "react-dnd-test-backend": "portal:../backend-test",
     "setimmediate": "^1.0.5",
     "shx": "^0.3.4",
-    "typescript": "^4.6.3"
+    "typescript": "~4.8.4"
   }
 }
