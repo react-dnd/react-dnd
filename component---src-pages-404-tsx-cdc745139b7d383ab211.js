@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_dnd_documentation=self.webpackChunkreact_dnd_documentation||[]).push([[218],{88892:function(e,t,n){n.r(t);var s=n(91987),d=n(36423),u=n(61261),a=(0,s.memo)((function(){return(0,u.jsxs)(d.A,{hideSidebar:!0,children:[(0,u.jsx)("h1",{children:"NOT FOUND"}),(0,u.jsx)("p",{children:"You just hit a route that doesn't exist... the sadness."})]})}));t.default=a}}]);
+//# sourceMappingURL=component---src-pages-404-tsx-cdc745139b7d383ab211.js.map
