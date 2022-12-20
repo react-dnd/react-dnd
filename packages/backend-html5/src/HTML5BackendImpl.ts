@@ -105,7 +105,7 @@ export class HTML5BackendImpl implements Backend {
 		}
 
 		if (root.__isReactDndBackendSetUp) {
-			throw new Error('Cannot have two HTML5 backends at the same time.')
+			throw new Error('Cannot setup two HTML5 backends at the same time.')
 		}
 		root.__isReactDndBackendSetUp = true
 		this.addEventListeners(root)
