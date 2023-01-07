@@ -284,7 +284,6 @@ export class HTML5BackendImpl implements Backend {
 			)
 
 		const sourceId = this.monitor.getSourceId() as string
-
 		const sourceNodeOptions = this.sourceNodeOptions.get(sourceId)
 
 		return (
