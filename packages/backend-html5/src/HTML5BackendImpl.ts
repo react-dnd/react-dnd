@@ -275,18 +275,21 @@ export class HTML5BackendImpl implements Backend {
 			return 'copy'
 		}
 
-		const bestDropTargetId = [...dragOverTargetIds]
+		const dropTargetEffect = [...dragOverTargetIds]
 			.reverse()
-			.filter((targetId) => this.monitor.canDropOnTarget(targetId))[0]
+			.find(
+				(targetId) =>
+					this.monitor.canDropOnTarget(targetId) &&
+					this.dropTargetOptions.get(targetId)?.dropEffect,
+			)
+
 		const sourceId = this.monitor.getSourceId() as string
 
 		const sourceNodeOptions = this.sourceNodeOptions.get(sourceId)
-		const dropTargetOptions =
-			bestDropTargetId && this.dropTargetOptions.get(bestDropTargetId)
 
 		return (
 			sourceNodeOptions?.dropEffect ??
-			dropTargetOptions?.dropEffect ??
+			dropTargetEffect ??
 			(this.altKeyPressed ? 'copy' : 'move')
 		)
 	}
