@@ -41,6 +41,7 @@ export class HTML5BackendImpl implements Backend {
 	private sourcePreviewNodeOptions: Map<string, any> = new Map()
 	private sourceNodes: Map<string, Element> = new Map()
 	private sourceNodeOptions: Map<string, any> = new Map()
+	private dropTargetOptions: Map<string, any> = new Map()
 
 	private dragStartSourceIds: string[] | null = null
 	private dropTargetIds: string[] = []
@@ -164,16 +165,22 @@ export class HTML5BackendImpl implements Backend {
 		}
 	}
 
-	public connectDropTarget(targetId: string, node: HTMLElement): Unsubscribe {
+	public connectDropTarget(
+		targetId: string,
+		node: HTMLElement,
+		options: any,
+	): Unsubscribe {
 		const handleDragEnter = (e: DragEvent) => this.handleDragEnter(e, targetId)
 		const handleDragOver = (e: DragEvent) => this.handleDragOver(e, targetId)
 		const handleDrop = (e: DragEvent) => this.handleDrop(e, targetId)
+		this.dropTargetOptions.set(targetId, options)
 
 		node.addEventListener('dragenter', handleDragEnter)
 		node.addEventListener('dragover', handleDragOver)
 		node.addEventListener('drop', handleDrop)
 
 		return (): void => {
+			this.dropTargetOptions.delete(targetId)
 			node.removeEventListener('dragenter', handleDragEnter)
 			node.removeEventListener('dragover', handleDragOver)
 			node.removeEventListener('drop', handleDrop)
@@ -262,23 +269,26 @@ export class HTML5BackendImpl implements Backend {
 		)
 	}
 
-	private getCurrentSourceNodeOptions() {
-		const sourceId = this.monitor.getSourceId() as string
-		const sourceNodeOptions = this.sourceNodeOptions.get(sourceId)
-
-		return {
-			dropEffect: this.altKeyPressed ? 'copy' : 'move',
-			...(sourceNodeOptions || {}),
-		}
-	}
-
-	private getCurrentDropEffect() {
+	private getCurrentDropEffect(dragOverTargetIds: string[]) {
 		if (this.isDraggingNativeItem()) {
 			// It makes more sense to default to 'copy' for native resources
 			return 'copy'
 		}
 
-		return this.getCurrentSourceNodeOptions().dropEffect
+		const bestDropTargetId = [...dragOverTargetIds]
+			.reverse()
+			.filter((targetId) => this.monitor.canDropOnTarget(targetId))[0]
+		const sourceId = this.monitor.getSourceId() as string
+
+		const sourceNodeOptions = this.sourceNodeOptions.get(sourceId)
+		const dropTargetOptions =
+			bestDropTargetId && this.dropTargetOptions.get(bestDropTargetId)
+
+		return (
+			sourceNodeOptions?.dropEffect ??
+			dropTargetOptions?.dropEffect ??
+			(this.altKeyPressed ? 'copy' : 'move')
+		)
 	}
 
 	private getCurrentSourcePreviewNodeOptions() {
@@ -616,7 +626,8 @@ export class HTML5BackendImpl implements Backend {
 			// IE requires this to fire dragover events
 			e.preventDefault()
 			if (e.dataTransfer) {
-				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
+				e.dataTransfer.dropEffect =
+					this.getCurrentDropEffect(dragEnterTargetIds)
 			}
 		}
 	}
@@ -663,7 +674,12 @@ export class HTML5BackendImpl implements Backend {
 			// Show user-specified drop effect.
 			e.preventDefault()
 			if (e.dataTransfer) {
-				e.dataTransfer.dropEffect = this.getCurrentDropEffect()
+				e.dataTransfer.dropEffect = this.getCurrentDropEffect(
+					dragOverTargetIds || [],
+				)
+				console.log('dropeffect', e.dataTransfer.dropEffect)
+			} else {
+				console.log('sorry my guy')
 			}
 		} else if (this.isDraggingNativeItem()) {
 			// Don't show a nice cursor but still prevent default
@@ -721,7 +737,7 @@ export class HTML5BackendImpl implements Backend {
 		this.actions.hover(dropTargetIds, {
 			clientOffset: getEventClientOffset(e),
 		})
-		this.actions.drop({ dropEffect: this.getCurrentDropEffect() })
+		this.actions.drop({ dropEffect: this.getCurrentDropEffect(dropTargetIds) })
 
 		if (this.isDraggingNativeItem()) {
 			this.endDragNativeItem()
