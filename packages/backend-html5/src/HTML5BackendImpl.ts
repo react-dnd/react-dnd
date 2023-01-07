@@ -677,9 +677,6 @@ export class HTML5BackendImpl implements Backend {
 				e.dataTransfer.dropEffect = this.getCurrentDropEffect(
 					dragOverTargetIds || [],
 				)
-				console.log('dropeffect', e.dataTransfer.dropEffect)
-			} else {
-				console.log('sorry my guy')
 			}
 		} else if (this.isDraggingNativeItem()) {
 			// Don't show a nice cursor but still prevent default
