@@ -1,6 +1,6 @@
 {
   "name": "@react-dnd/invariant",
-  "version": "5.0.0",
+  "version": "4.0.2",
   "description": "invariantx",
   "keywords": [
     "test",
@@ -9,7 +9,6 @@
   "license": "MIT",
   "author": "Andres Suarez <zertosh@gmail.com>",
   "repository": "https://github.com/react-dnd/react-dnd",
-  "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",

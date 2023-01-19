@@ -1,6 +1,6 @@
 {
   "name": "@react-dnd/shallowequal",
-  "version": "5.0.0",
+  "version": "4.0.2",
   "description": "Like lodash isEqualWith but for shallow equal.",
   "keywords": [
     "shallowequal",
@@ -17,7 +17,6 @@
     "url": "https://github.com/dashed"
   },
   "repository": "https://github.com/react-dnd/react-dnd",
-  "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
