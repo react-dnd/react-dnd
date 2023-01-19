@@ -21,7 +21,7 @@ function getItemStyles(
 	currentOffset: XYCoord | null,
 	isSnapToGrid: boolean,
 ) {
-	if (!initialOffset || !currentOffset) {
+	if (initialOffset == null || currentOffset == null) {
 		return {
 			display: 'none',
 		}

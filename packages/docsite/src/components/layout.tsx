@@ -9,7 +9,7 @@ import { TouchBackend, TouchBackendOptions } from 'react-dnd-touch-backend'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 
-import { PageGroup } from '../constants'
+import type { PageGroup } from '../constants'
 import { APIPages, ExamplePages } from '../constants'
 import { isDebugMode } from '../util/isDebugMode'
 import { isTouchBackend } from '../util/isTouchBackend'
@@ -42,7 +42,7 @@ const HEADER_LINK = [
 
 export const Layout: FC<LayoutProps> = memo(function Layout(props) {
 	const { children, location } = props
-	const sitepath = location && location.pathname
+	const sitepath = location?.pathname
 	const isExampleUrl = (sitepath || '')
 		.replace('/react-dnd', '')
 		.startsWith('/examples')
@@ -74,7 +74,9 @@ export const Layout: FC<LayoutProps> = memo(function Layout(props) {
 							/>
 						</SidebarContainer>
 					)}
-					<ChildrenContainer ref={useCallback((node) => setDndArea(node), [])}>
+					<ChildrenContainer
+						ref={useCallback((node: HTMLDivElement) => setDndArea(node), [])}
+					>
 						{dndArea == null ? null : (
 							<DndProvider
 								backend={touchBackend ? TouchBackend : HTML5Backend}

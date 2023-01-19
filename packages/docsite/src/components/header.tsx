@@ -9,7 +9,7 @@ export interface HeaderProps {
 }
 
 const DebugModeFlag: FC<HeaderProps> = ({ debugMode, touchBackend }) => {
-	if (!debugMode && !touchBackend) {
+	if (!(debugMode || touchBackend)) {
 		return null
 	}
 
@@ -22,7 +22,7 @@ const DebugModeFlag: FC<HeaderProps> = ({ debugMode, touchBackend }) => {
 		text = 'Debug'
 	}
 	return (
-		<a className="github-fork-ribbon" data-ribbon={text} title={text}>
+		<a className="github-fork-ribbon" href="/" data-ribbon={text} title={text}>
 			{text}
 		</a>
 	)

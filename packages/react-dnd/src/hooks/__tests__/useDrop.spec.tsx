@@ -44,7 +44,7 @@ describe('The useDrop hook', () => {
 			expect(() =>
 				render(
 					<DndProvider backend={TestBackend}>
-						<Component></Component>
+						<Component />
 					</DndProvider>,
 				),
 			).toThrow(/accept must be defined/)
@@ -62,7 +62,7 @@ describe('The useDrop hook', () => {
 		}
 		const result = render(
 			<DndProvider backend={TestBackend}>
-				<Component></Component>
+				<Component />
 			</DndProvider>,
 		)
 		const root = await result.findByRole('root')

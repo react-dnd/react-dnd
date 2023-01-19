@@ -47,7 +47,7 @@ describe('The DragPreviewImage component', () => {
 
 		render(
 			<DndProvider backend={TestBackend}>
-				<Knight></Knight>
+				<Knight />
 			</DndProvider>,
 		)
 

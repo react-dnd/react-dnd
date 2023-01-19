@@ -10,7 +10,7 @@ describe('The HTML5 Backend', () => {
 		it('uses an undefined window when no window is available', () => {
 			const mockWindow = global.window
 			try {
-				delete global.window
+				global.window = undefined
 				const backend = HTML5Backend(mockManager()) as HTML5BackendImpl
 				expect(backend).toBeDefined()
 				expect(backend.window).toBeUndefined()
