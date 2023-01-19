@@ -9,5 +9,6 @@
 		"transform": {
 			"react": { "runtime": "automatic", "useBuiltins": true }
 		}
-	}
+	},
+	"exclude": ["__tests__"]
 }
