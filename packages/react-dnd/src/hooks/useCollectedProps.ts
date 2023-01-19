@@ -7,7 +7,7 @@ export function useCollectedProps<Collected, Monitor extends HandlerManager>(
 	monitor: Monitor & MonitorEventEmitter,
 	connector: Connector,
 ) {
-	return useMonitorOutput(monitor, collector || (() => ({} as Collected)), () =>
+	return useMonitorOutput(monitor, collector || (() => ({}) as Collected), () =>
 		connector.reconnect(),
 	)
 }

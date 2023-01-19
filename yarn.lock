@@ -3913,6 +3913,48 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rometools/cli-darwin-arm64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-darwin-arm64@npm:11.0.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-darwin-x64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-darwin-x64@npm:11.0.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-linux-arm64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-linux-arm64@npm:11.0.0"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-linux-x64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-linux-x64@npm:11.0.0"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-win32-arm64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-win32-arm64@npm:11.0.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rometools/cli-win32-x64@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@rometools/cli-win32-x64@npm:11.0.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@rushstack/eslint-patch@npm:^1.1.0, @rushstack/eslint-patch@npm:^1.1.3":
   version: 1.2.0
   resolution: "@rushstack/eslint-patch@npm:1.2.0"
@@ -21129,13 +21171,13 @@ __metadata:
     lint-staged: ^13.1.0
     markdown-spellcheck: ^1.3.1
     npm-run-all: ^4.1.5
-    prettier: ^2.8.3
     react-dnd: "workspace:^"
     react-dnd-examples: "workspace:^"
     react-dnd-html5-backend: "workspace:^"
     react-dnd-test-backend: "workspace:^"
     react-dnd-test-utils: "workspace:^"
     react-dnd-touch-backend: "workspace:^"
+    rome: ^11.0.0
     typescript: ~4.9.4
   languageName: unknown
   linkType: soft
@@ -22247,6 +22289,35 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: 6a2bf167b3587d4df709b37d149ad0300692cc5deb510f89ac7bdc77c8738c9546ae3de9322b0968e1ed2b0e984571f5f55aae28fa7de4cfcb1bc5402a4e2be6
+  languageName: node
+  linkType: hard
+
+"rome@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "rome@npm:11.0.0"
+  dependencies:
+    "@rometools/cli-darwin-arm64": 11.0.0
+    "@rometools/cli-darwin-x64": 11.0.0
+    "@rometools/cli-linux-arm64": 11.0.0
+    "@rometools/cli-linux-x64": 11.0.0
+    "@rometools/cli-win32-arm64": 11.0.0
+    "@rometools/cli-win32-x64": 11.0.0
+  dependenciesMeta:
+    "@rometools/cli-darwin-arm64":
+      optional: true
+    "@rometools/cli-darwin-x64":
+      optional: true
+    "@rometools/cli-linux-arm64":
+      optional: true
+    "@rometools/cli-linux-x64":
+      optional: true
+    "@rometools/cli-win32-arm64":
+      optional: true
+    "@rometools/cli-win32-x64":
+      optional: true
+  bin:
+    rome: bin/rome
+  checksum: 3c92a47c78a66c62f94b6a3a72ead92a20c23326d2d73785ce88c03897b60b8114c285a636acc24bd11039381ded48f8c58c6cc5c4cc46ce7eed092c90d9a054
   languageName: node
   linkType: hard
 

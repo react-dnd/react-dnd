@@ -32,7 +32,7 @@ describe('The useDrop hook', () => {
 				() =>
 					({
 						accept: null,
-					} as any),
+					}) as any,
 			)
 			return <div ref={drag} />
 		}
