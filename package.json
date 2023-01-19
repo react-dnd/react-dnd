@@ -42,7 +42,7 @@
     "_check_modules": "run-s _modules_esm _modules_cjs",
     "_check_spelling": "mdspell 'packages/documentation/docsite/markdown/**/*.md' --en-us --report",
     "_check_rome": "rome check .",
-    "_release_packages": "yarn workspaces foreach -pv --exclude 'react-dnd-parent' --exclude 'react-dnd-documentation' --exclude 'react-dnd-examples' --exclude 'test-suite-*' -pv npm publish --tolerate-republish --access public",
+    "_release_packages": "turbo run release",
     "_ci_packages": "turbo run ci",
     "check_packages": "turbo run check",
     "clean:": "yarn clean",

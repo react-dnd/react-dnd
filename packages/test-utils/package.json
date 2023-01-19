@@ -24,7 +24,8 @@
     "_prepare_esm": "node ../../scripts/esmify.mjs",
     "clean": "shx rm -rf dist/",
     "build": "npm-run-all -p _build_dts _build_esm _build_cjs -s _prepare_esm",
-    "check": "eslint src --ext .js,.jsx,.mjs,.cjs,.ts,.tsx,.cts,.mts --resolve-plugins-relative-to ../eslint-config"
+    "check": "eslint src --ext .js,.jsx,.mjs,.cjs,.ts,.tsx,.cts,.mts --resolve-plugins-relative-to ../eslint-config",
+    "release": "yarn npm publish --tolerate-republish --access public"
   },
   "devDependencies": {
     "@react-dnd/eslint-config": "workspace:^",

@@ -25,6 +25,9 @@
 		},
 		"ci": {
 			"dependsOn": ["build", "check", "test"]
+		},
+		"release": {
+			"cache": false
 		}
 	}
 }
