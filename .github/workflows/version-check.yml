@@ -5,7 +5,7 @@ env:
 jobs:
   version-check:
     runs-on: ubuntu-latest
-    if: "github.ref != 'main' &&  github.head_ref != 'main' && !contains(github.ref , 'release/') && !contains(github.head_ref , 'release/') && !contains(github.ref , 'dependabot/') && !contains(github.head_ref , 'dependabot/')"
+    if: "!contains(github.ref , 'release/') && !contains(github.head_ref , 'release/')"
     steps:
       - uses: actions/checkout@v3
         with:
