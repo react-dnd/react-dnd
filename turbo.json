@@ -14,6 +14,13 @@
 				"static/examples_js",
 				"static/examples_ts"
 			]
+		},
+		"test": {
+			"dependsOn": ["build", "^build"],
+			"outputs": ["coverage"]
+		},
+		"ci": {
+			"dependsOn": ["build", "test"]
 		}
 	}
 }

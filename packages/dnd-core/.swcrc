@@ -12,6 +12,5 @@
 				"useBuiltins": true
 			}
 		}
-	},
-	"exclude": ["__tests__"]
+	}
 }
