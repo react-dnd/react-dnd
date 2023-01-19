@@ -60,6 +60,9 @@
     "@types/react": {
       "optional": true
     },
+    "prop-types": {
+      "optional": true
+    },
     "react-dnd": {
       "optional": false
     }

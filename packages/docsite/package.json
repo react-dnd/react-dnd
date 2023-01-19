@@ -52,6 +52,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/core": "^7.20.12",
     "@babel/plugin-transform-react-jsx": "^7.20.7",
     "@types/query-string": "^6.3.0",
     "@types/react": "^18.0.27",
