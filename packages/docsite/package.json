@@ -68,19 +68,21 @@
     "shx": "^0.3.4"
   },
   "scripts": {
-    "clean_examples": "shx rm -rf static/examples_js static/examples_ts",
-    "clean_docsite": "shx rm -rf .cache public apidocs",
-    "clean": "run-s clean_examples clean_docsite",
-    "copy_examples:js_hooks": "shx cp -r ../examples/dist/docs static/examples_js",
-    "copy_examples:ts_hooks": "shx cp -r ../examples/src static/examples_ts",
-    "copy_examples": "run-s 'copy_examples:*'",
-    "prune_buildinfo": "shx rm -rf static/examples_js/tsconfig.docs.tsbuildinfo",
-    "format_examples": "rome format static/examples_js static/examples_ts --write",
-    "write_example_boilerplate": "node write_sample_boilerplate.mjs",
-    "echo_finished_examples": "shx echo 'finished processing examples'",
-    "process_examples": "run-s clean_examples copy_examples prune_buildinfo format_examples write_example_boilerplate echo_finished_examples",
-    "build:gatsby": "gatsby build --prefix-paths",
-    "start:docsite": "gatsby develop -H 0.0.0.0",
-    "build:docsite": "run-s process_examples build:gatsby"
+    "_clean_examples": "shx rm -rf static/examples_js static/examples_ts",
+    "_clean_docsite": "shx rm -rf .cache public apidocs",
+    "_copy_js_examples": "shx cp -r ../examples/dist/docs static/examples_js",
+    "_copy_ts_examples": "shx cp -r ../examples/src static/examples_ts",
+    "_copy_examples": "run-p _copy_js_examples _copy_ts_examples",
+    "_prune_buildinfo": "shx rm -rf static/examples_js/tsconfig.docs.tsbuildinfo",
+    "_format_examples": "rome format static/examples_js static/examples_ts --write",
+    "_write_example_boilerplate": "node write_sample_boilerplate.mjs",
+    "_echo_finished": "shx echo 'finished processing examples'",
+    "_process_examples": "run-s _clean_examples _copy_examples _prune_buildinfo _format_examples _write_example_boilerplate _echo_finished",
+    "_gatsby_build": "gatsby build --prefix-paths",
+    "build:docsite": "yarn build",
+    "start:docsite": "yarn start",
+    "clean": "run-s _clean_examples _clean_docsite",
+    "build": "run-s _process_examples _gatsby_build",
+    "start": "gatsby develop -H 0.0.0.0"
   }
 }
