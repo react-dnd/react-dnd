@@ -18,12 +18,12 @@
   },
   "repository": "https://github.com/react-dnd/react-dnd",
   "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "module": "./dist/esm/index.mjs",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.js"
+      "import": "./dist/esm/index.mjs"
     }
   },
   "scripts": {
@@ -31,8 +31,8 @@
     "build_dts": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist/esm src/",
     "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "create_dist_pkg": "node ../../scripts/createDistPkgJson.mjs",
-    "build": "npm-run-all -p build_dts build_esm build_cjs -s create_dist_pkg"
+    "prepare_esm": "node ../../scripts/esmify.mjs",
+    "build": "npm-run-all -p build_dts build_esm build_cjs -s prepare_esm"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
