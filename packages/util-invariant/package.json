@@ -19,12 +19,12 @@
     }
   },
   "scripts": {
+    "_build_dts": "tsc -b .",
+    "_build_esm": "swc -C module.type=es6 -d dist/esm src/",
+    "_build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
+    "_prepare_esm": "node ../../scripts/esmify.mjs",
     "clean": "shx rm -rf dist/",
-    "build_dts": "tsc -b .",
-    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
-    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "prepare_esm": "node ../../scripts/esmify.mjs",
-    "build": "npm-run-all -p build_dts build_esm build_cjs -s prepare_esm"
+    "build": "npm-run-all -p _build_dts _build_esm _build_cjs -s _prepare_esm"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.59",

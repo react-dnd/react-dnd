@@ -13,12 +13,12 @@
   },
   "license": "MIT",
   "scripts": {
+    "_build_dts": "tsc -b .",
+    "_build_esm": "swc -C module.type=es6 -d dist src/",
+    "_build_docs": "tsc -b tsconfig.docs.json",
+    "_unjsxify": "yarn node ../../scripts/unjsxify.mjs ./dist/docs",
     "clean": "shx rm -rf dist/",
-    "build_dts": "tsc -b .",
-    "build_esm": "swc -C module.type=es6 -d dist src/",
-    "build_docs": "tsc -b tsconfig.docs.json",
-    "unjsxify": "yarn node ../../scripts/unjsxify.mjs ./dist/docs",
-    "build": "npm-run-all -p build_dts build_esm -s build_docs unjsxify"
+    "build": "npm-run-all -p _build_dts _build_esm -s _build_docs _unjsxify"
   },
   "dependencies": {
     "dnd-core": "workspace:^",
