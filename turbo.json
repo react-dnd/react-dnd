@@ -15,12 +15,16 @@
 				"static/examples_ts"
 			]
 		},
+		"check": {
+			"dependsOn": ["^build"],
+			"outputs": []
+		},
 		"test": {
 			"dependsOn": ["build", "^build"],
 			"outputs": ["coverage"]
 		},
 		"ci": {
-			"dependsOn": ["build", "test"]
+			"dependsOn": ["build", "check", "test"]
 		}
 	}
 }

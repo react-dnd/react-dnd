@@ -12,6 +12,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@react-dnd/eslint-config": "workspace:^",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -19,11 +20,13 @@
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "eslint": "^8.32.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
     "start:cra": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "check": "eslint src --ext .js,.jsx,.mjs,.cjs,.ts,.tsx,.cts,.mts --resolve-plugins-relative-to ../eslint-config"
   },
   "browserslist": {
     "production": [

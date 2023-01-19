@@ -1,9 +1,0 @@
-{
-  "*.{md,json}": [
-    "yarn format:"
-  ],
-  "*.{js,jsx,ts,tsx}": [
-    "eslint --fix",
-    "yarn format:"
-  ]
-}

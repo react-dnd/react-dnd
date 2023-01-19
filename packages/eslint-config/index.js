@@ -1,5 +1,5 @@
-{
-	"parser": "@typescript-eslint/parser",
+module.exports = {
+	"parser": require.resolve("@typescript-eslint/parser"),
 	"plugins": [
 		"@typescript-eslint",
 		"react-hooks",
@@ -49,21 +49,5 @@
 
 		// TODO: re-enable
 		"@typescript-eslint/explicit-module-boundary-types": 0
-	},
-	"overrides": [
-		{
-			"files": "packages/test-suite-*/**/*",
-			"rules": {
-				"import/extensions": ["error", "never"],
-				"@typescript-eslint/consistent-type-imports": "off"
-			}
-		},
-		{
-			"files": "packages/docsite/**/*",
-			"rules": {
-				"import/extensions": ["error", "never"],
-				"@typescript-eslint/consistent-type-imports": "off"
-			}
-		}
-	]
+	}
 }

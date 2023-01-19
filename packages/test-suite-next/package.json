@@ -4,7 +4,8 @@
   "scripts": {
     "start:next": "next dev",
     "build": "next build",
-    "lint": "next lint"
+    "next-check": "next lint",
+    "check": "eslint pages --ext .js,.jsx,.mjs,.cjs,.ts,.tsx,.cts,.mts --resolve-plugins-relative-to ../eslint-config"
   },
   "dependencies": {
     "next": "12.3.4",
@@ -15,6 +16,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@react-dnd/eslint-config": "workspace:^",
     "@types/eslint": "^8.4.10",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
