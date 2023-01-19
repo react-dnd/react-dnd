@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 export class MonotonicInterpolant {
 	private xs: number[]
 	private ys: number[]
