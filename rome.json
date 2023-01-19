@@ -5,9 +5,11 @@
       "dist",
       "build",
       "storybook-static",
+      "public",
       ".turbo",
       ".next",
       ".yarn",
+      ".cache",
       ".pnp.cjs",
       ".pnp.loader.mjs"
     ]
