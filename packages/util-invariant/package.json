@@ -9,14 +9,22 @@
   "license": "MIT",
   "author": "Andres Suarez <zertosh@gmail.com>",
   "repository": "https://github.com/react-dnd/react-dnd",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.mjs"
+    }
+  },
   "scripts": {
     "clean": "shx rm -rf dist/",
-    "build_types": "tsc -b .",
-    "build_esm": "swc -C module.type=es6 -d dist src/",
-    "build": "run-s build_types build_esm"
+    "build_dts": "tsc -b .",
+    "build_esm": "swc -C module.type=es6 -d dist/esm src/",
+    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
+    "prepare_esm": "node ../../scripts/esmify.mjs",
+    "build": "npm-run-all -p build_dts build_esm build_cjs -s prepare_esm"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",

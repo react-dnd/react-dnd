@@ -1,5 +1,6 @@
 node_modules/
 packages/*/dist
+packages/*/commonjs
 packages/*/lib
 .swc/
 tsconfig.tsbuildinfo

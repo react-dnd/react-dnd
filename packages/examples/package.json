@@ -14,11 +14,11 @@
   "license": "MIT",
   "scripts": {
     "clean": "shx rm -rf dist/",
-    "build_types": "tsc -b .",
+    "build_dts": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist src/",
     "build_docs": "tsc -b tsconfig.docs.json",
     "unjsxify": "yarn node ../../scripts/unjsxify.mjs ./dist/docs",
-    "build": "run-s build_types build_esm build_docs unjsxify"
+    "build": "npm-run-all -p build_dts build_esm -s build_docs unjsxify"
   },
   "dependencies": {
     "dnd-core": "workspace:^",

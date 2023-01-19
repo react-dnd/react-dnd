@@ -1,0 +1,16 @@
+releases:
+  "@react-dnd/asap": major
+  "@react-dnd/invariant": major
+  "@react-dnd/shallowequal": major
+  dnd-core: major
+  react-dnd: major
+  react-dnd-html5-backend: major
+  react-dnd-test-backend: major
+  react-dnd-test-utils: major
+  react-dnd-touch-backend: major
+
+declined:
+  - react-dnd-documentation
+  - react-dnd-examples
+  - test-suite-cra
+  - test-suite-vite

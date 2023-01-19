@@ -15,4 +15,4 @@ check(touchBackend, 'touchBackend')
 check(testBackend, 'testBackend')
 check(testUtils, 'testUtils')
 
-console.log('👍 ESModules OK')
+console.log('👍 ESM OK')
