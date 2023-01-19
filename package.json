@@ -99,7 +99,7 @@
     "react-dnd-touch-backend": "workspace:^",
     "typescript": "~4.8.4"
   },
-  "packageManager": "yarn@3.3.0",
+  "packageManager": "yarn@3.3.1",
   "dependencies": {
     "eslint-plugin-simple-import-sort": "^8.0.0"
   },
