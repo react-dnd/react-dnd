@@ -10,9 +10,11 @@ const DIST_FOLDERS = [
 	{ folder: 'cjs', type: 'commonjs' }
 ]
 const PACKAGE_JSON_PATH = path.join(process.cwd(), 'package.json')
+const JSON_ENCODING = { encoding: 'utf-8' }
 
 const toJson = obj => JSON.stringify(obj, null, 2)
-const readJson = async file => JSON.parse(await fs.readFile(file, { encoding: 'utf-8' }))
+const readJson = async file => JSON.parse(await fs.readFile(file, JSON_ENCODING))
+const writeJson = async (file, content) => fs.writeFile(file, content, JSON_ENCODING)
 
 /**
  * This function injects a package.json file into dist/esm and dist/cjs to 
@@ -23,10 +25,8 @@ async function injectResolverPackageJsonFiles() {
 	const name = pkgJson.name
 
 	return Promise.all(DIST_FOLDERS.map(({ folder, type }) => {
-		fs.writeFile(
-			path.join(process.cwd(), 'dist', folder, 'package.json'),
-			toJson({ name, type })
-		)
+		const distPkgJsonPath = path.join(process.cwd(), 'dist', folder, 'package.json')
+		return writeJson(distPkgJsonPath, toJson({ name, type }))
 	}))
 }
 
