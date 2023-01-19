@@ -65,6 +65,7 @@
     "prettier": "^2.8.3",
     "prop-types": "^15.8.1",
     "react-refresh": "^0.14.0",
+    "rome": "^11.0.0",
     "shx": "^0.3.4"
   },
   "scripts": {
@@ -75,7 +76,7 @@
     "copy_examples:ts_hooks": "shx cp -r ../examples/src static/examples_ts",
     "copy_examples": "run-s 'copy_examples:*'",
     "prune_buildinfo": "shx rm -rf static/examples_js/tsconfig.docs.tsbuildinfo",
-    "format_examples": "prettier 'static/examples_*/**/*.(js|ts|tsx)' --use-tabs=false --write",
+    "format_examples": "rome format static/examples_js static/examples_ts --write",
     "write_example_boilerplate": "node write_sample_boilerplate.mjs",
     "echo_finished_examples": "shx echo 'finished processing examples'",
     "process_examples": "run-s clean_examples copy_examples prune_buildinfo format_examples write_example_boilerplate echo_finished_examples",

@@ -21042,6 +21042,7 @@ __metadata:
     react-tabs: ^5.2.0
     react-typography: ^0.16.23
     rehype-react: ^6.2.1
+    rome: ^11.0.0
     shallow-compare: ^1.2.2
     shx: ^0.3.4
     styled-components: ^5.3.6
