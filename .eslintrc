@@ -3,15 +3,12 @@
 	"plugins": [
 		"@typescript-eslint",
 		"react-hooks",
-		"no-for-of-loops",
-		"import",
-		"simple-import-sort"
+		"import"
 	],
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
-		"plugin:@typescript-eslint/recommended",
-		"prettier"
+		"plugin:@typescript-eslint/recommended"
 	],
 	"settings": {
 		"react": {
@@ -25,17 +22,16 @@
 		"node": true
 	},
 	"rules": {
+		// Formatting Rules - formatting is external now
+		"no-mixed-spaces-and-tabs": "off",
+
+		// Import Rules
 		"import/first": "error",
 		"import/no-amd": "error",
 		"import/no-anonymous-default-export": "warn",
 		"import/no-webpack-loader-syntax": "error",
 		"import/extensions": ["error", "always", { "ignorePackages": true }],
-		// use simple-import-sort
 		"import/order": "off",
-
-		// https://github.com/lydell/eslint-plugin-simple-import-sort#usage
-		"simple-import-sort/imports": "error",
-		"simple-import-sort/exports": "error",
 
 		"@typescript-eslint/consistent-type-imports": [
 			"error",
@@ -44,12 +40,14 @@
 			}
 		],
 
-		"no-for-of-loops/no-for-of-loops": 2,
-		"react/prop-types": 0,
-		"react/react-in-jsx-scope": 0,
+		"react/prop-types": "off",
+		"react/react-in-jsx-scope": "off",
+
+		// Covered by Rome
+		"@typescript-eslint/no-explicit-any": "off",
+		"no-delete-var": "off",
 
 		// TODO: re-enable
-		"@typescript-eslint/no-explicit-any": 0,
 		"@typescript-eslint/explicit-module-boundary-types": 0
 	},
 	"overrides": [
