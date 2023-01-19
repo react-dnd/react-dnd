@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "shx rm -rf dist/",
-    "build_types": "tsc -b .",
+    "build_dts": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist src/",
     "build_docs": "tsc -b tsconfig.docs.json",
     "unjsxify": "yarn node ../../scripts/unjsxify.mjs ./dist/docs",

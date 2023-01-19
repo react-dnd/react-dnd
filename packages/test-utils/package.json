@@ -19,11 +19,10 @@
   "sideEffects": false,
   "scripts": {
     "clean": "shx rm -rf dist/",
-    "build_types": "tsc -b .",
+    "build_dts": "tsc -b .",
     "build_esm": "swc -C module.type=es6 -d dist/esm src/",
-    "build_commonjs": "swc -C module.type=commonjs -d dist/cjs src/",
-    "add_pkgjson": "node ../../scripts/createDistPackageJson.mjs",
-    "build": "run-s clean build_types build_esm build_commonjs add_pkgjson"
+    "build_cjs": "swc -C module.type=commonjs -d dist/cjs src/",
+    "build": "run-p build_dts build_esm build_cjs"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.57",
