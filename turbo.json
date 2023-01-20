@@ -7,12 +7,12 @@
 		"build": {
 			"dependsOn": ["^build"],
 			"outputs": [
-				"dist",
-				"build",
-				".next",
-				"public",
-				"static/examples_js",
-				"static/examples_ts"
+				"dist/**/*",
+				"build/**/*",
+				".next/**/*",
+				"public/**/*",
+				"static/examples_js/**/*",
+				"static/examples_ts/**/*"
 			]
 		},
 		"check": {
@@ -21,7 +21,7 @@
 		},
 		"test": {
 			"dependsOn": ["build", "^build"],
-			"outputs": ["coverage"]
+			"outputs": ["coverage/**/*"]
 		},
 		"ci": {
 			"dependsOn": ["build", "check", "test"]
