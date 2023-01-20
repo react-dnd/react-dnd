@@ -85,19 +85,14 @@ export const Container: FC = memo(function Container() {
 						accepts={accepts}
 						lastDroppedItem={lastDroppedItem}
 						onDrop={(item) => handleDrop(index, item)}
-						key={index}
+						key={accepts.join('|')}
 					/>
 				))}
 			</div>
 
 			<div style={{ overflow: 'hidden', clear: 'both' }}>
-				{boxes.map(({ name, type }, index) => (
-					<Box
-						name={name}
-						type={type}
-						isDropped={isDropped(name)}
-						key={index}
-					/>
+				{boxes.map(({ name, type }) => (
+					<Box name={name} type={type} isDropped={isDropped(name)} key={name} />
 				))}
 			</div>
 		</div>

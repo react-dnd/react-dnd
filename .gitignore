@@ -2,6 +2,7 @@ node_modules/
 packages/*/dist
 packages/*/commonjs
 packages/*/lib
+.turbo/
 .swc/
 tsconfig.tsbuildinfo
 

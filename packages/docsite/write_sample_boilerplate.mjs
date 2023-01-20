@@ -160,7 +160,7 @@ function walk_examples(dir, look_for, done) {
 			file = path.resolve(dir, file)
 
 			fs.stat(file, (err, stat) => {
-				if (stat && stat.isDirectory()) {
+				if (stat?.isDirectory()) {
 					walk_examples(file, look_for, (err, res) => {
 						results = results.concat(res)
 						if (!--pending) done(null, results)
@@ -219,7 +219,7 @@ function handleJsExample(err, results) {
 		fs.writeFileSync(manifestFile, MANIFEST_FILE_CONTENT)
 
 		const envFile = path.join(exampleDir, '.env')
-		fs.writeFileSync(envFile, `SKIP_PREFLIGHT_CHECK = true`)
+		fs.writeFileSync(envFile, 'SKIP_PREFLIGHT_CHECK = true')
 	})
 }
 
@@ -269,7 +269,7 @@ function handleTsExample(err, results) {
 		fs.writeFileSync(manifestFile, MANIFEST_FILE_CONTENT)
 
 		const envFile = path.join(exampleDir, '.env')
-		fs.writeFileSync(envFile, `SKIP_PREFLIGHT_CHECK = true`)
+		fs.writeFileSync(envFile, 'SKIP_PREFLIGHT_CHECK = true')
 
 		await removeImportExtensions(path.join(exampleDir, 'src'))
 	})

@@ -54,7 +54,7 @@ export const Container: FC<ContainerProps> = ({ snapToGrid }) => {
 				let left = Math.round(item.left + delta.x)
 				let top = Math.round(item.top + delta.y)
 				if (snapToGrid) {
-					;[left, top] = doSnapToGrid(left, top)
+					[left, top] = doSnapToGrid(left, top)
 				}
 
 				moveBox(item.id, left, top)

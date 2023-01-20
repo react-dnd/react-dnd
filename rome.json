@@ -1,0 +1,37 @@
+{
+  "files": {
+    "ignore": [
+      "coverage",
+      "dist",
+      "build",
+      "storybook-static",
+      "public",
+      ".turbo",
+      ".next",
+      ".yarn",
+      ".cache",
+      ".pnp.cjs",
+      ".pnp.loader.mjs"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "asNeeded",
+      "quoteStyle": "single",
+      "trailingComma": "all",
+      "quoteProperties": "asNeeded"
+    }
+  },
+  "formatter": {
+    "indentStyle": "tab"
+  }
+}

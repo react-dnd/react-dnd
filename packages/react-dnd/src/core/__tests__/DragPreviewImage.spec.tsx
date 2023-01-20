@@ -1,5 +1,5 @@
 import { cleanup, render } from '@testing-library/react'
-import jest from 'jest-mock'
+
 import { TestBackend } from 'react-dnd-test-backend'
 
 import { DndProvider } from '../../core/index.js'
@@ -47,7 +47,7 @@ describe('The DragPreviewImage component', () => {
 
 		render(
 			<DndProvider backend={TestBackend}>
-				<Knight></Knight>
+				<Knight />
 			</DndProvider>,
 		)
 
