@@ -48,7 +48,7 @@ export class HTML5BackendImpl implements Backend {
 	private currentNativeSource: NativeDragSource | null = null
 	private currentNativeHandle: Identifier | null = null
 	private currentDragSourceNode: Element | null = null
-	private altKeyPressed = false
+	private isCopying = false
 	private mouseMoveTimeoutTimer: number | null = null
 	private asyncEndDragFrameId: number | null = null
 	private dragOverTargetIds: string[] | null = null
@@ -267,7 +267,7 @@ export class HTML5BackendImpl implements Backend {
 		const sourceNodeOptions = this.sourceNodeOptions.get(sourceId)
 
 		return {
-			dropEffect: this.altKeyPressed ? 'copy' : 'move',
+			dropEffect: this.isCopying ? 'copy' : 'move',
 			...(sourceNodeOptions || {}),
 		}
 	}
@@ -597,7 +597,7 @@ export class HTML5BackendImpl implements Backend {
 			return
 		}
 
-		this.altKeyPressed = e.altKey
+		this.isCopying = this.options.isCopying(e)
 
 		// If the target changes position as the result of `dragenter`, `dragover` might still
 		// get dispatched despite target being no longer there. The easy solution is to check
@@ -650,7 +650,7 @@ export class HTML5BackendImpl implements Backend {
 			return
 		}
 
-		this.altKeyPressed = e.altKey
+		this.isCopying = this.options.isCopying(e)
 		this.lastClientOffset = getEventClientOffset(e)
 
 		this.scheduleHover(dragOverTargetIds)
