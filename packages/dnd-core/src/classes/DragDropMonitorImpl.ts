@@ -120,7 +120,7 @@ export class DragDropMonitorImpl implements DragDropMonitor {
 		const source = this.registry.getSource(sourceId, true)
 		invariant(source, `Expected to find a valid source. sourceId=${sourceId}`)
 
-		if (!this.isDragging() || !this.isSourcePublic()) {
+		if (!(this.isDragging() && this.isSourcePublic())) {
 			return false
 		}
 

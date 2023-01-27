@@ -113,9 +113,7 @@ export class TargetConnector implements Connector {
 	}
 
 	private get dropTarget() {
-		return (
-			this.dropTargetNode || (this.dropTargetRef && this.dropTargetRef.current)
-		)
+		return this.dropTargetNode || this.dropTargetRef?.current
 	}
 
 	private clearDropTarget() {

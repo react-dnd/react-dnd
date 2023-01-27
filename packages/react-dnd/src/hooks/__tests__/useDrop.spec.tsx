@@ -1,5 +1,5 @@
 import { cleanup, render } from '@testing-library/react'
-import jest from 'jest-mock'
+
 import { TestBackend } from 'react-dnd-test-backend'
 
 import { DndProvider } from '../../index.js'
@@ -32,7 +32,7 @@ describe('The useDrop hook', () => {
 				() =>
 					({
 						accept: null,
-					} as any),
+					}) as any,
 			)
 			return <div ref={drag} />
 		}
@@ -44,7 +44,7 @@ describe('The useDrop hook', () => {
 			expect(() =>
 				render(
 					<DndProvider backend={TestBackend}>
-						<Component></Component>
+						<Component />
 					</DndProvider>,
 				),
 			).toThrow(/accept must be defined/)
@@ -62,7 +62,7 @@ describe('The useDrop hook', () => {
 		}
 		const result = render(
 			<DndProvider backend={TestBackend}>
-				<Component></Component>
+				<Component />
 			</DndProvider>,
 		)
 		const root = await result.findByRole('root')

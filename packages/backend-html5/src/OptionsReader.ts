@@ -14,22 +14,11 @@ export class OptionsReader {
 	}
 
 	public get window(): Window | undefined {
-		if (this.globalContext) {
-			return this.globalContext
-		} else if (typeof window !== 'undefined') {
-			return window
-		}
-		return undefined
+		return this.globalContext ?? (typeof window !== 'undefined' ? window : undefined)
 	}
 
 	public get document(): Document | undefined {
-		if (this.globalContext?.document) {
-			return this.globalContext.document
-		} else if (this.window) {
-			return this.window.document
-		} else {
-			return undefined
-		}
+		return this.globalContext?.document ?? this.window?.document
 	}
 
 	public get rootElement(): Node | undefined {
