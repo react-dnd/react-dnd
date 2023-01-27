@@ -6,7 +6,7 @@ import { useDragDropManager } from '../useDragDropManager.js'
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect.js'
 
 export function useDropTargetConnector(
-	options: DropTargetOptions,
+	options: DropTargetOptions | undefined,
 ): TargetConnector {
 	const manager = useDragDropManager()
 	const connector = useMemo(

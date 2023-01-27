@@ -11,9 +11,18 @@ const style: CSSProperties = {
 	textAlign: 'center',
 }
 
-export const TargetBox: FC = () => {
+interface TargetBoxProps {
+	dropEffect?: 'copy' | 'move'
+}
+
+export const TargetBox: FC<TargetBoxProps> = ({
+	dropEffect,
+}: TargetBoxProps) => {
 	const [{ isActive }, drop] = useDrop(() => ({
 		accept: ItemTypes.BOX,
+		options: {
+			dropEffect,
+		},
 		collect: (monitor) => ({
 			isActive: monitor.canDrop() && monitor.isOver(),
 		}),
@@ -21,7 +30,8 @@ export const TargetBox: FC = () => {
 
 	return (
 		<div ref={drop} style={style}>
-			{isActive ? 'Release to drop' : 'Drag item here'}
+			<p>{isActive ? 'Release to drop' : 'Drag item here'}</p>
+			<p>I have a {dropEffect || 'undefined'} dropEffect</p>
 		</div>
 	)
 }
