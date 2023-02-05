@@ -668,7 +668,9 @@ export class HTML5BackendImpl implements Backend {
 		} else if (this.isDraggingNativeItem()) {
 			// Don't show a nice cursor but still prevent default
 			// "drop and blow away the whole document" action.
-			e.preventDefault()
+			if (this.monitor.getItemType() === NativeTypes.FILE) {
+				e.preventDefault()
+			}
 		} else {
 			e.preventDefault()
 			if (e.dataTransfer) {
@@ -697,7 +699,9 @@ export class HTML5BackendImpl implements Backend {
 		this.dropTargetIds = []
 
 		if (this.isDraggingNativeItem()) {
-			e.preventDefault()
+			if (this.monitor.getItemType() === NativeTypes.FILE) {
+				e.preventDefault()
+			}
 			this.currentNativeSource?.loadDataTransfer(e.dataTransfer)
 		} else if (matchNativeItemType(e.dataTransfer)) {
 			// Dragging some elements, like <a> and <img> may still behave like a native drag event,
