@@ -10,7 +10,7 @@
  */
 
 export function invariant(condition: any, format: string, ...args: any[]) {
-	if (isProduction()) {
+	if (process.env.NODE_ENV === 'production') {
 		if (format === undefined) {
 			throw new Error('invariant requires an error message argument')
 		}
@@ -35,10 +35,4 @@ export function invariant(condition: any, format: string, ...args: any[]) {
 		(error as any).framesToPop = 1 // we don't care about invariant's own frame
 		throw error
 	}
-}
-
-function isProduction() {
-	return (
-		typeof process !== 'undefined' && process.env['NODE_ENV'] === 'production'
-	)
 }
