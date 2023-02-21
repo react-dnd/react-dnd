@@ -1,78 +1,72 @@
 import { useState } from "react";
 import { PieceType } from "./elements/Piece";
 
-// Define the game state as a 2D array of PieceType objects
-export type GameState = { type: PieceType }[][];
+// Define GameState as an object that maps strings to objects with a "type" property
+export type GameState = { [key: string]: { type: PieceType } };
 
-// Custom hook that manages the game state
-export const useGameState = (
-	// The initial game state (defaults to a single empty square)
-	initialGameState: GameState = [[{ type: PieceType.EMPTY }]]
-) => {
-	// The current game state
+// Set an initial state for the game, using the GameState type
+const initialState: GameState = {
+	"0,0": { type: PieceType.EMPTY },
+};
+
+// Define a hook that returns the game state and methods to modify it
+export const useGameState = (initialGameState: GameState = initialState) => {
+	// Set up state using the initial game state
 	const [game, setGame] = useState(initialGameState);
 
-	// Checks if a move is valid for a given piece type and relative position
+	// Check if a move is valid based on the piece type and the change in position
 	const _checkValidMove = (type: PieceType, dx: number, dy: number) => {
+		// Determine the absolute value of the change in position
 		const adx = Math.abs(dx);
 		const ady = Math.abs(dy);
-
 		switch (type) {
 			case PieceType.KNIGHT:
+				// Knights can move 2 spaces in one direction and 1 in the other, or vice versa
 				return (adx === 2 && ady === 1) || (adx === 1 && ady === 2);
 			case PieceType.BISHOP:
+				// Bishops can move diagonally, so the change in x and y must be the same
 				return adx === ady;
 			case PieceType.ROOK:
+				// Rooks can move horizontally or vertically, but not diagonally
 				return adx !== ady && (adx === 0 || ady === 0);
 			case PieceType.QUEEN:
+				// Queens can move horizontally, vertically, or diagonally
 				return (adx !== ady && (adx === 0 || ady === 0)) || adx === ady;
 			case PieceType.KING:
+				// Kings can move one space in any direction
 				return adx in [0, 1] && ady in [0, 1];
-			case PieceType.PAWN:
+			// Pawns can only move one space forward, so the change in x must be 1 and y must be 0
+			case PieceType.WHITEPAWN:
 				return dx === 1 && dy === 0;
+			case PieceType.BLACKPAWN:
+				return dx === -1 && dy === 0;
 			default:
 				return false;
 		}
 	};
 
-	// Moves a piece from one square to another
-	const move: (
-		fromX: number,
-		fromY: number,
-		toX: number,
-		toY: number
-	) => void = (fromX, fromY, toX, toY) => {
-		// Check that the move is not a no-op (i.e. the piece is actually moving)
-		if (fromX !== toX || fromY !== toY) {
-			// Create a copy of the current game state
-			const newGame: GameState = game.map((row) => [...row]);
-
-			// Get the piece being moved and ensure it is valid
-			const fromPiece = game?.[fromX]?.[fromY] || { type: PieceType.EMPTY };
-
-			// Check that the destination square is within the bounds of the game board
-			if (toX >= 0 && toX < game.length && toY >= 0 && toY < game[toX].length) {
-				// Update the game state to reflect the move
-				newGame[toX][toY] = { type: fromPiece.type };
-				newGame[fromX][fromY] = { type: PieceType.EMPTY };
-				setGame(newGame);
-			}
+	// Move a piece from one position to another
+	const move = (fromX: number, fromY: number, toX: number, toY: number) => {
+		const fromKey = `${fromX},${fromY}`;
+		const toKey = `${toX},${toY}`;
+		const fromPiece = game[fromKey] || { type: PieceType.EMPTY };
+		if (_checkValidMove(fromPiece.type, toX - fromX, toY - fromY)) {
+			// Create a new object for the game state with the piece moved
+			const newGame = { ...game };
+			delete newGame[fromKey];
+			newGame[toKey] = { type: fromPiece.type };
+			setGame(newGame);
 		}
 	};
 
-	// Checks if a piece can move from one square to another
-	const canMove: (
-		fromX: number,
-		fromY: number,
-		toX: number,
-		toY: number
-	) => boolean = (fromX, fromY, toX, toY) => {
-		// Calculate the relative position of the move
+	// Check if a move is valid without modifying the game state
+	const canMove = (fromX: number, fromY: number, toX: number, toY: number) => {
+		const fromKey = `${fromX},${fromY}`;
+		const fromPiece = game[fromKey] || { type: PieceType.EMPTY };
 		const dx = toX - fromX;
 		const dy = toY - fromY;
 
-		// Check if the move is valid based on the piece type and relative position
-		return _checkValidMove(game[fromX][fromY].type, dx, dy);
+		return _checkValidMove(fromPiece.type, dx, dy);
 	};
 
 	return { game, move, canMove };

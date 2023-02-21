@@ -8,7 +8,8 @@ export enum PieceType {
   ROOK = "rook",
   QUEEN = "queen",
   KING = "king",
-  PAWN = "pawn",
+  WHITEPAWN = "whitepawn",
+  BLACKPAWN = "blackpawn",
   EMPTY = "",
 }
 
