@@ -36,12 +36,21 @@ export const useGameState = (
 		toY: number
 	) => void = (fromX, fromY, toX, toY) => {
 		if (fromX !== toX || fromY !== toY) {
+<<<<<<< HEAD
 			const newGame: GameState = game.map((row) => [...row]);
 			const fromPiece = game?.[fromX]?.[fromY] || { type: PieceType.EMPTY };
 			if (toX >= 0 && toX < game.length && toY >= 0 && toY < game[toX].length) {
 				newGame[toX][toY] = { type: fromPiece.type };
 				newGame[fromX][fromY] = { type: PieceType.EMPTY };
 				setGame(newGame);
+=======
+			const newGame: GameState = game.map((row) => [...row])
+			const fromPiece = game?.[fromX]?.[fromY] || { type: PieceType.EMPTY }
+			if (toX >= 0 && toX < game.length && toY >= 0 && toY < game?.[toX].length) {
+				newGame?[toX]?.[toY] = { type: fromPiece.type }
+				newGame[fromX][fromY] = { type: PieceType.EMPTY }
+				setGame(newGame)
+>>>>>>> 90df997cea392ed2143aff6f5021bb0e3852439a
 			}
 		}
 	};
