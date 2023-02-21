@@ -1,11 +1,17 @@
-import BoardSquare from "./BoardSquare";
-import Piece from "../elements/Piece";
-import useGameState from "../game.js";
+import type { FC } from 'react'
+import { BoardSquare } from "./BoardSquare";
+import { Piece } from "../elements/Piece";
+import {useGameState, GameState} from "../game.js";
 
-export default function Board({
+
+export interface BoardProps {
+	initialGameState: GameState
+}
+
+export const Board:FC<BoardProps> = ({
   initialGameState=[[]]
-}) {
-  const [game, move, canMove] = useGameState(initialGameState);
+}) => {
+  const {game, move, canMove} = useGameState(initialGameState);
   return (
     <main
       style={{
@@ -15,8 +21,8 @@ export default function Board({
         flexWrap: "wrap",
       }}
     >
-      {game.map((row, x) =>
-        row.map(({ type }, y) => (
+      {game.map((row, x: number) =>
+        row.map(({ type }, y: number) => (
           <div key={`${x};${y}`} style={{ width: "12.5%", height: "12.5%" }}>
             <BoardSquare x={x} y={y} move={move} canMove={canMove}>
               {type && <Piece x={x} y={y} type={type} />}
