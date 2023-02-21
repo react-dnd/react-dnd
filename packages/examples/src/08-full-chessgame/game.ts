@@ -15,7 +15,11 @@ export const useGameState = (initialGameState: GameState = initialState) => {
 	const [game, setGame] = useState(initialGameState);
 
 	// Check if a move is valid based on the piece type and the change in position
-	const _checkValidMove = (type: PieceType, dx: number, dy: number) => {
+	const _checkValidMove = (
+		type: PieceType,
+		dx: number,
+		dy: number
+	): boolean => {
 		// Determine the absolute value of the change in position
 		const adx = Math.abs(dx);
 		const ady = Math.abs(dy);
@@ -60,7 +64,12 @@ export const useGameState = (initialGameState: GameState = initialState) => {
 	};
 
 	// Check if a move is valid without modifying the game state
-	const canMove = (fromX: number, fromY: number, toX: number, toY: number) => {
+	const canMove = (
+		fromX: number,
+		fromY: number,
+		toX: number,
+		toY: number
+	): boolean => {
 		const fromKey = `${fromX},${fromY}`;
 		const fromPiece = game[fromKey] || { type: PieceType.EMPTY };
 		const dx = toX - fromX;
