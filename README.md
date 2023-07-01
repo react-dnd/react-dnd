@@ -20,7 +20,7 @@ Questions? Find us on the Reactiflux Discord Server (**#need-help**)
 
 https://www.reactiflux.com/
 
-### Shoutouts 🙏
+### Shoutouts 
 
 <img src="/assets/browserstack-logo-600x315.png" height="80" title="BrowserStack Logo" alt="BrowserStack Logo" />
 
