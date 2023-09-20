@@ -15,12 +15,18 @@ export const Sidebar: FC<SideBarProps> = memo(function Sidebar({
 	groups,
 	location,
 }) {
+	const navigationName = location.split('/')[1]
 	function renderGroup({ title, pages, debug }: PageGroup, index: number) {
+		const id = `${title}-${index}`
 		const isRendered = !debug || isDebugMode()
 		return isRendered ? (
 			<Group key={index}>
-				<GroupTitle>{title}</GroupTitle>
-				{Object.keys(pages).map((key) => renderLink(pages[key], key))}
+				<div role="presentation" aria-hidden="true">
+					<GroupTitle id={id}>{title}</GroupTitle>
+				</div>
+				<List aria-labelledby={id}>
+					{Object.keys(pages).map((key) => renderLink(pages[key], key))}
+				</List>
 			</Group>
 		) : null
 	}
@@ -31,17 +37,23 @@ export const Sidebar: FC<SideBarProps> = memo(function Sidebar({
 		const Link = isSelected ? SelectedSidebarItem : SidebarItem
 
 		return (
-			<Link key={key} to={pageLocation}>
-				<span>{title}</span>
-				{arrow}
-			</Link>
+			<ListItem key={key}>
+				<Link to={pageLocation}>
+					<span>{title}</span>
+					{arrow}
+				</Link>
+			</ListItem>
 		)
 	}
 
-	return <Container>{groups.map(renderGroup)}</Container>
+	return (
+		<Container aria-label={`${navigationName}`}>
+			<List>{groups.map(renderGroup)}</List>
+		</Container>
+	)
 })
 
-const Container = styled.div`
+const Container = styled.nav`
 	flex-shrink: 0;
 	flex-grow: 1;
 
@@ -56,14 +68,35 @@ const Container = styled.div`
 	}
 `
 
-const Group = styled.div`
-	margin-bottom: ${theme.dimensions.content.padding};
+const List = styled.ul`
+	list-style: none;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	padding: 0;
+	margin: 0;
 `
 
-const GroupTitle = styled.h4`
+const ListItem = styled.li`
+	list-style: none;
+	margin: 0;
+	margin-block-start: 0;
+  margin-block-end: 0;
+`
+
+const Group = styled.li`
+	list-style: none;
+	margin: 0;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin-bottom: 1.5em;
+`
+
+const GroupTitle = styled.span`
 	border-bottom: 2px solid fade(${theme.color.accent}, 10%);
-	padding-bottom: 0.5em;
-	margin: 0 0 0.5em 0;
+	padding-bottom: 1em;
+	display: block;
+	font-weight: bold;
+	font-size: 1rem;
 `
 
 const SidebarItem = styled(GatsbyLink)`
