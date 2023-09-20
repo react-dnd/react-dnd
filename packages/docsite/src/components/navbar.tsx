@@ -14,13 +14,13 @@ export const NavBar: FC = memo(function NavBar() {
 					</LogoTitle>
 					<LogoDescription>Drag and Drop for React</LogoDescription>
 				</LogoContainer>
-				<div>
+				<nav aria-label="main">
 					<StyledGatsbyLink to={'/docs/overview'}>Docs</StyledGatsbyLink>
 					<StyledGatsbyLink to={'/examples'}>Examples</StyledGatsbyLink>
 					<StyledWebLink href={'https://github.com/react-dnd/react-dnd/'}>
 						GitHub
 					</StyledWebLink>
-				</div>
+				</nav>
 			</ContentContainer>
 		</Container>
 	)
