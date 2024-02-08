@@ -15,6 +15,7 @@ export class OptionsReader implements TouchBackendOptions {
 	public scrollAngleRanges: AngleRange[] | undefined = undefined
 	public delayTouchStart: number
 	public delayMouseStart: number
+	public isShadowRoot = false
 	public getDropTargetElementsAtPoint?: (
 		x: number,
 		y: number,

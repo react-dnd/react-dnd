@@ -332,14 +332,25 @@ export class TouchBackendImpl implements Backend {
 			 * Use the coordinates to grab the element the drag ended on.
 			 * If the element is the same as the target node (or any of it's children) then we have hit a drop target and can handle the move.
 			 */
-			const droppedOn =
-				coords != null
-					? this.document.elementFromPoint(coords.x, coords.y)
-					: undefined
-			const childMatch = droppedOn && node.contains(droppedOn)
 
-			if (droppedOn === node || childMatch) {
-				return this.handleMove(e, targetId)
+			// Extract reusable method
+			const getDropTargetElementsAtPoint = (x: number, y: number) => {
+					if (!this.options.getDropTargetElementsAtPoint) return undefined  // If not provided, return undefined
+					return this.options.getDropTargetElementsAtPoint(x, y, [])?.[0]  // If provided, use its return value
+				}
+
+			// Utilize getDropTargetElementsAtPoint and document.elementFromPoint
+			const getDroppedOn = (coords: { x: number; y: number } | null | undefined) => {
+				if (coords == null) return undefined  // If no coordinates, return undefined
+				return getDropTargetElementsAtPoint(coords.x, coords.y) || this.document?.elementFromPoint(coords.x, coords.y)
+			}
+
+			// Inline the returned value with easier readability
+			const droppedOn = getDroppedOn(coords)
+
+			if (!this.options.isShadowRoot) {
+				const isChildMatch = droppedOn && node.contains(droppedOn)
+				if (droppedOn === node || isChildMatch) return this.handleMove(e, targetId)
 			}
 		}
 
@@ -387,7 +398,7 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	public handleTopMoveStart = (e: MouseEvent | TouchEvent): void => {
-		
+
 		if (!eventShouldStartDrag(e as MouseEvent)) {
 			return
 		}
@@ -403,7 +414,7 @@ export class TouchBackendImpl implements Backend {
 				this.lastTargetTouchFallback = e.targetTouches[0]
 			}
 			this._mouseClientOffset = clientOffset
-			
+
 			const delay =
 			e.type === eventNames.touch.start
 				? this.options.delayTouchStart
@@ -426,7 +437,7 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	public handleTopMoveStartDelay = (e: Event): void => {
-		
+
 		if (!eventShouldStartDrag(e as MouseEvent)) {
 			return
 		}
