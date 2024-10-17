@@ -499,7 +499,7 @@ function Knight() {
       }}
     >
       ♘
-    </div>,
+    </div>
   )
 }
 
@@ -625,7 +625,7 @@ function BoardSquare({ x, y, children }) {
           }}
         />
       )}
-    </div>,
+    </div>
   )
 }
 
