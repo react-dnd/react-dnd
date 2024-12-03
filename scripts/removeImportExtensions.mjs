@@ -13,7 +13,7 @@ console.log('process path ', pathArg)
 export async function removeImportExtensions(dir) {
 	await walk(dir, async (entryPath) => {
 		if (entryPath.endsWith('.ts') || entryPath.endsWith('.tsx')) {
-			console.log('handle entry ' + entryPath)
+			console.log(`handle entry ${entryPath}`)
 			const content = await fs.readFile(entryPath, 'utf8')
 			const newContent = content
 				.split('\n')

@@ -1,0 +1,16 @@
+releases:
+  "@react-dnd/asap": patch
+  "@react-dnd/invariant": patch
+  "@react-dnd/shallowequal": patch
+  dnd-core: patch
+  react-dnd: patch
+  react-dnd-examples: patch
+  react-dnd-html5-backend: patch
+  react-dnd-test-backend: patch
+  react-dnd-test-utils: patch
+  react-dnd-touch-backend: patch
+
+declined:
+  - react-dnd-documentation
+  - test-suite-cra
+  - test-suite-vite

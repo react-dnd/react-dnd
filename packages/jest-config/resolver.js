@@ -4,6 +4,7 @@ const exts = ['.ts', '.tsx', '.cts', '.mts']
 module.exports = (request, options) => {
 	const defaultResolver =
 		options.defaultResolver ||
+		// eslint-disable-next-line
 		require('jest-resolve/build/defaultResolver').default
 	try {
 		return defaultResolver(request, options)

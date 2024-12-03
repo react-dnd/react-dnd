@@ -9,5 +9,4 @@
 .gitattributes text eol=lf
 .gitignore text eol=lf
 .eslintignore text eol=lf
-.prettierignore text eol=lf
 yarn.lock text eol=lf

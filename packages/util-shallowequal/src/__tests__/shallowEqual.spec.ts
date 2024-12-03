@@ -2,7 +2,7 @@ import { shallowEqual } from '../index.js'
 
 describe('shallowequal', function () {
 	// eslint-disable-next-line no-sparse-arrays
-	const falsey = [, '', 0, false, NaN, null, undefined]
+	const falsey = [undefined, '', 0, false, NaN, null, undefined]
 
 	// test cases copied from https://github.com/facebook/fbjs/blob/82247de1c33e6f02a199778203643eaee16ea4dc/src/core/__tests__/shallowEqual-test.js
 	it('returns false if either argument is null', () => {

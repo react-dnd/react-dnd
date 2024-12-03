@@ -1,4 +1,3 @@
-/* eslint-disable no-for-of-loops/no-for-of-loops */
 import fs from 'fs/promises'
 import path from 'path'
 

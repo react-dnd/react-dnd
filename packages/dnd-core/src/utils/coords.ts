@@ -35,7 +35,11 @@ export function subtract(a: XYCoord, b: XYCoord): XYCoord {
  */
 export function getSourceClientOffset(state: State): XYCoord | null {
 	const { clientOffset, initialClientOffset, initialSourceClientOffset } = state
-	if (!clientOffset || !initialClientOffset || !initialSourceClientOffset) {
+	if (
+		clientOffset == null ||
+		initialClientOffset == null ||
+		initialSourceClientOffset == null
+	) {
 		return null
 	}
 	return subtract(
@@ -51,7 +55,7 @@ export function getSourceClientOffset(state: State): XYCoord | null {
  */
 export function getDifferenceFromInitialOffset(state: State): XYCoord | null {
 	const { clientOffset, initialClientOffset } = state
-	if (!clientOffset || !initialClientOffset) {
+	if (clientOffset == null || initialClientOffset == null) {
 		return null
 	}
 	return subtract(clientOffset, initialClientOffset)

@@ -1,5 +1,5 @@
 import { createDragDropManager } from 'dnd-core'
-import jest from 'jest-mock'
+
 import { TestBackend } from 'react-dnd-test-backend'
 
 import { DropTargetMonitorImpl } from '../DropTargetMonitorImpl.js'

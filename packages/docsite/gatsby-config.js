@@ -33,7 +33,7 @@ module.exports = {
 			options: {
 				gfm: true,
 				plugins: [
-					`gatsby-remark-autolink-headers`,
+					'gatsby-remark-autolink-headers',
 					'gatsby-remark-copy-linked-files',
 					'gatsby-remark-prismjs',
 					'gatsby-remark-images',
@@ -51,14 +51,14 @@ module.exports = {
 
 		// Load Markdown Content
 		{
-			resolve: `gatsby-source-filesystem`,
+			resolve: 'gatsby-source-filesystem',
 			options: {
 				path: `${__dirname}/markdown`,
 				name: 'markdown-pages',
 			},
 		},
 		{
-			resolve: `gatsby-plugin-manifest`,
+			resolve: 'gatsby-plugin-manifest',
 			options: {
 				name: 'gatsby-starter-default',
 				short_name: 'starter',
