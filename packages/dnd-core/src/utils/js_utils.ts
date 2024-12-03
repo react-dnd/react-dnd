@@ -9,7 +9,7 @@
 export function get<T>(obj: any, path: string, defaultValue: T): T {
 	return path
 		.split('.')
-		.reduce((a, c) => (a && a[c] ? a[c] : defaultValue || null), obj) as T
+		.reduce((a, c) => (a?.[c] ? a[c] : defaultValue || null), obj) as T
 }
 
 /**

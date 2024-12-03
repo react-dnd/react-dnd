@@ -1,5 +1,5 @@
 import type { DragDropMonitor } from 'dnd-core'
-import jest from 'jest-mock'
+
 
 import type { Connector } from '../../../internals/index.js'
 import type { DragSourceMonitor } from '../../../types/index.js'

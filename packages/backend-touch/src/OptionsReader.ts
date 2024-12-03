@@ -57,7 +57,7 @@ export class OptionsReader implements TouchBackendOptions {
 	}
 
 	public get window(): Window | undefined {
-		if (this.context && this.context.window) {
+		if (this.context?.window) {
 			return this.context.window
 		} else if (typeof window !== 'undefined') {
 			return window

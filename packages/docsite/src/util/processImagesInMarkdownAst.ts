@@ -18,9 +18,9 @@ function checkNode(node: MarkdownAstNode) {
 	}
 	if (node.tagName === 'img') {
 		const properties = node.properties as { [key: string]: any }
-		const imageSrc: string = (properties && properties.src) || ''
+		const imageSrc: string = properties?.['src'] || ''
 		if (imageSrc.startsWith('/images')) {
-			properties.src = withPrefix(imageSrc)
+			properties['src'] = withPrefix(imageSrc)
 		}
 	}
 	const children = node.children || []

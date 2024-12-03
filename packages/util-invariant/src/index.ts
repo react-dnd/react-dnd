@@ -32,8 +32,7 @@ export function invariant(condition: any, format: string, ...args: any[]) {
 			)
 			error.name = 'Invariant Violation'
 		}
-
-		;(error as any).framesToPop = 1 // we don't care about invariant's own frame
+		(error as any).framesToPop = 1 // we don't care about invariant's own frame
 		throw error
 	}
 }

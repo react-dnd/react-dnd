@@ -12,9 +12,9 @@ export function areCoordsEqual(
 	offsetA: XYCoord | null | undefined,
 	offsetB: XYCoord | null | undefined,
 ): boolean {
-	if (!offsetA && !offsetB) {
+	if (offsetA == null && offsetB == null) {
 		return true
-	} else if (!offsetA || !offsetB) {
+	} else if (offsetA == null || offsetB == null) {
 		return false
 	} else {
 		return offsetA.x === offsetB.x && offsetA.y === offsetB.y
