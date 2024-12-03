@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 export class MonotonicInterpolant {
-	private xs: any
-	private ys: any
-	private c1s: any
-	private c2s: any
-	private c3s: any
+	private xs: number[]
+	private ys: number[]
+	private c1s: number[]
+	private c2s: number[]
+	private c3s: number[]
 
 	public constructor(xs: number[], ys: number[]) {
 		const { length } = xs
@@ -30,7 +31,7 @@ export class MonotonicInterpolant {
 		}
 
 		// Get degree-1 coefficients
-		const c1s = [ms[0]]
+		const c1s: number[] = [ms[0]!]
 		for (let i = 0; i < dxs.length - 1; i++) {
 			const m2 = ms[i] as number
 			const mNext = ms[i + 1] as number
@@ -45,7 +46,7 @@ export class MonotonicInterpolant {
 				)
 			}
 		}
-		c1s.push(ms[ms.length - 1])
+		c1s.push(ms[ms.length - 1]!)
 
 		// Get degree-2 and degree-3 coefficients
 		const c2s = []
@@ -73,7 +74,7 @@ export class MonotonicInterpolant {
 		// The rightmost point in the dataset should give an exact result
 		let i = xs.length - 1
 		if (x === xs[i]) {
-			return ys[i]
+			return ys[i]!
 		}
 
 		// Search for the interval x is in, returning the corresponding y if x is one of the original xs
@@ -82,20 +83,20 @@ export class MonotonicInterpolant {
 		let mid
 		while (low <= high) {
 			mid = Math.floor(0.5 * (low + high))
-			const xHere = xs[mid]
+			const xHere = xs[mid]!
 			if (xHere < x) {
 				low = mid + 1
 			} else if (xHere > x) {
 				high = mid - 1
 			} else {
-				return ys[mid]
+				return ys[mid]!
 			}
 		}
 		i = Math.max(0, high)
 
 		// Interpolate
-		const diff = x - xs[i]
+		const diff = x - xs[i]!
 		const diffSq = diff * diff
-		return ys[i] + c1s[i] * diff + c2s[i] * diffSq + c3s[i] * diff * diffSq
+		return ys[i]! + c1s[i]! * diff + c2s[i]! * diffSq + c3s[i]! * diff * diffSq
 	}
 }

@@ -269,14 +269,14 @@ export class TouchBackendImpl implements Backend {
 
 	public connectDropTarget(targetId: string, node: HTMLElement): Unsubscribe {
 		const root = this.options.rootElement
-		if (!this.document || !root) {
+		if (this.document == null || root == null) {
 			return (): void => {
 				/* noop */
 			}
 		}
 
 		const handleMove = (e: MouseEvent | TouchEvent) => {
-			if (!this.document || !root || !this.monitor.isDragging()) {
+			if (this.document == null || root == null || !this.monitor.isDragging()) {
 				return
 			}
 
@@ -352,7 +352,10 @@ export class TouchBackendImpl implements Backend {
 	}
 
 	private getTopMoveStartHandler() {
-		if (!this.options.delayTouchStart && !this.options.delayMouseStart) {
+		if (
+			this.options.delayTouchStart == null &&
+			this.options.delayMouseStart == null
+		) {
 			return this.handleTopMoveStart
 		}
 
@@ -601,7 +604,7 @@ export class TouchBackendImpl implements Backend {
 			}
 		})
 
-		if (!node || !node.parentElement) {
+		if (node?.parentElement == null) {
 			return
 		}
 

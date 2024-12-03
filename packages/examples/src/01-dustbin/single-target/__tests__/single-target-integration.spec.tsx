@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { cleanup, render } from '@testing-library/react'
-import jest from 'jest-mock'
+
 import { fireDragDrop, wrapWithBackend } from 'react-dnd-test-utils'
 
 import Example from '../index.js'
@@ -18,6 +18,6 @@ describe('Integration: Dustbin Single Target', () => {
 		expect(dustbin).toBeDefined()
 
 		await fireDragDrop(box!, dustbin)
-		expect(window.alert).toHaveBeenCalledWith(`You dropped Glass into Dustbin!`)
+		expect(window.alert).toHaveBeenCalledWith('You dropped Glass into Dustbin!')
 	})
 })

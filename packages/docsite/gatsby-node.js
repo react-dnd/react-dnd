@@ -20,8 +20,8 @@ async function createPages({ actions, graphql }) {
 			}
 		`)
 
-	const exampleTemplate = path.resolve(`src/templates/exampleTemplate.tsx`)
-	const docTemplate = path.resolve(`src/templates/docTemplate.tsx`)
+	const exampleTemplate = path.resolve('src/templates/exampleTemplate.tsx')
+	const docTemplate = path.resolve('src/templates/docTemplate.tsx')
 	const result = await retrieveMarkdownPages()
 
 	if (result.errors) {

@@ -207,16 +207,11 @@ export class SourceConnector implements Connector {
 	}
 
 	private get dragSource() {
-		return (
-			this.dragSourceNode || (this.dragSourceRef && this.dragSourceRef.current)
-		)
+		return this.dragSourceNode || this.dragSourceRef?.current
 	}
 
 	private get dragPreview() {
-		return (
-			this.dragPreviewNode ||
-			(this.dragPreviewRef && this.dragPreviewRef.current)
-		)
+		return this.dragPreviewNode || this.dragPreviewRef?.current
 	}
 
 	private clearDragSource() {

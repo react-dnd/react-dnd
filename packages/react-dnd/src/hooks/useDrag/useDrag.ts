@@ -30,7 +30,7 @@ export function useDrag<
 	const spec = useOptionalFactory(specArg, deps)
 	invariant(
 		!(spec as any).begin,
-		`useDrag::spec.begin was deprecated in v14. Replace spec.begin() with spec.item(). (see more here - https://react-dnd.github.io/react-dnd/docs/api/use-drag)`,
+		'useDrag::spec.begin was deprecated in v14. Replace spec.begin() with spec.item(). (see more here - https://react-dnd.github.io/react-dnd/docs/api/use-drag)',
 	)
 
 	const monitor = useDragSourceMonitor<DragObject, DropResult>()

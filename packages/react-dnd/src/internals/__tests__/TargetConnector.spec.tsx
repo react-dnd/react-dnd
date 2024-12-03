@@ -1,6 +1,4 @@
 import type { Backend } from 'dnd-core'
-import jest from 'jest-mock'
-
 import { TargetConnector } from '../TargetConnector.js'
 
 describe('TargetConnector', () => {

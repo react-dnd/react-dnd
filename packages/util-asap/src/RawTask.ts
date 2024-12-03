@@ -13,7 +13,7 @@ export class RawTask implements Task {
 
 	public call() {
 		try {
-			this.task && this.task()
+			this.task?.()
 		} catch (error) {
 			this.onError(error)
 		} finally {
