@@ -1,5 +1,12 @@
 name: Version Check
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      
 env:
   DEFAULT_NODE_VERSION: 20
 jobs:
