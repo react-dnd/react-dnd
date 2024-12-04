@@ -1,7 +1,7 @@
 name: Version Check
 on: [push, pull_request]
 env:
-  DEFAULT_NODE_VERSION: 16
+  DEFAULT_NODE_VERSION: 20
 jobs:
   version-check:
     runs-on: ubuntu-latest
@@ -10,7 +10,8 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{env.DEFAULT_NODE_VERSION}}
+          cache: 'yarn'
       - run: yarn version check

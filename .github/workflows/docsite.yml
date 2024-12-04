@@ -7,21 +7,22 @@ on:
 
 jobs:
   deploy-documentation:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 20.x
+          cache: 'yarn'
 
       - run: yarn install
       - run: 'yarn build:'
       - run: yarn build:docsite
 
       - name: deploy
-        uses: peaceiris/actions-gh-pages@v2.10.1
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./packages/docsite/public
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_branch: gh-pages
+          publish_dir: ./packages/docsite/public
