@@ -26,6 +26,9 @@ jobs:
           yarn config set nodeLinker node-modules
           yarn config set enableGlobalCache false
 
+      - name: Install Dependencies
+        run: yarn install
+        
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v2
         with:
@@ -42,6 +45,3 @@ jobs:
 
       - name: Publish coverage to codecov.io
         uses: codecov/codecov-action@v3
-        if: success() && matrix.node-version == '20.x'
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
