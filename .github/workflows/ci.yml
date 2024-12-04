@@ -18,8 +18,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
 
-      - run: yarn install
-        name: Install Dependencies
+      - name: Enable Corepack
+        run: corepack enable
+  
+      - name: Configure Yarn
+        run: |
+          yarn config set nodeLinker node-modules
+          yarn config set enableGlobalCache false
 
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v2
