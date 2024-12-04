@@ -13,6 +13,4 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{env.DEFAULT_NODE_VERSION}}
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
       - run: yarn version check
