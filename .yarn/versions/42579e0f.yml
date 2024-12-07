@@ -1,0 +1,9 @@
+releases:
+  react-dnd: patch
+
+declined:
+  - react-dnd-documentation
+  - react-dnd-examples
+  - test-suite-cra
+  - test-suite-vite
+  - react-dnd-test-utils
