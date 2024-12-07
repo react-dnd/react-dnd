@@ -23,7 +23,6 @@ import {
 	eventShouldStartDrag,
 	isTouchEvent,
 } from './utils/predicates.js'
-import { supportsPassive } from './utils/supportsPassive.js'
 
 const eventNames: Record<ListenerType, EventName> = {
 	[ListenerType.mouse]: {
@@ -213,7 +212,7 @@ export class TouchBackendImpl implements Backend {
 		handler: (e: any) => void,
 		capture = false,
 	) {
-		const options = supportsPassive ? { capture, passive: false } : capture
+		const options = { capture, passive: false }
 
 		this.listenerTypes.forEach(function (listenerType) {
 			const evt = eventNames[listenerType][event]
@@ -230,7 +229,7 @@ export class TouchBackendImpl implements Backend {
 		handler: (e: any) => void,
 		capture = false,
 	) {
-		const options = supportsPassive ? { capture, passive: false } : capture
+		const options = { capture, passive: false }
 
 		this.listenerTypes.forEach(function (listenerType) {
 			const evt = eventNames[listenerType][event]
