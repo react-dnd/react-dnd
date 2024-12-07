@@ -4,23 +4,42 @@ on:
   push:
     branches:
       - main
+      
+  # temporary solution for testing
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deploy-documentation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
           node-version: 20.x
           cache: 'yarn'
 
-      - run: yarn install
-      - run: 'yarn build:'
-      - run: yarn build:docsite
+      - name: Enable Corepack
+        run: corepack enable
+  
+      - name: Configure Yarn
+        run: |
+          yarn config set nodeLinker node-modules
+          yarn config set enableGlobalCache false
 
-      - name: deploy
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build Packages
+        run: yarn build
+
+      - name: Build Documentation
+        run: yarn build:docsite
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
