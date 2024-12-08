@@ -5231,10 +5231,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/strictest@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@tsconfig/strictest@npm:1.0.2"
-  checksum: 2ebf63d6507d3642f360798ef5c3247bf61d338a4d89cee703e6d75ce6007fa4ac0ccad5066a4e8840bec1503bef01454d4b75c0cc6678f31fa554d7175122ac
+"@tsconfig/strictest@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@tsconfig/strictest@npm:2.0.5"
+  checksum: c1dfc581c6b46218034aa05a0ea2d0284ae8dc3508a38bee7014dd6868ed681e6b88d4d13a8e1b7f35221e84cd020ffab18f3991bc9e652ce441775e2fcbad57
   languageName: node
   linkType: hard
 
@@ -21475,7 +21475,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-dnd-parent@workspace:."
   dependencies:
-    "@tsconfig/strictest": ^1.0.2
+    "@tsconfig/strictest": ^2.0.5
     "@types/node": ^18.11.18
     "@types/react": ^18.0.27
     "@types/react-dom": ^18.0.10
