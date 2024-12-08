@@ -17,6 +17,7 @@
     "_build_esm": "swc -C module.type=es6 -d dist src/",
     "_build_docs": "tsc -b tsconfig.docs.json",
     "_unjsxify": "yarn node ../../scripts/unjsxify.mjs ./dist/docs",
+    "watch": "tsc -w & swc -w src -d dist",
     "clean": "shx rm -rf dist/",
     "build": "npm-run-all -p _build_dts _build_esm -s _build_docs _unjsxify",
     "test": "jest --coverage",

@@ -51,7 +51,6 @@
     "test:": "yarn test",
     "release:": "yarn release",
     "format:": "yarn format",
-    "dev": "turbo run dev --parallel",
     "watch": "turbo run watch --parallel",
     "clean": "turbo run clean",
     "build": "turbo run build",

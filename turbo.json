@@ -1,20 +1,20 @@
 {
 	"$schema": "https://turborepo.org/schema.json",
 	"tasks": {
-			"watch": {
-					"cache": false,
-					"persistent": true,
-					"outputs": [
-							"dist/**/*",
-							"build/**/*",
-							".next/**/*",
-							"public/**/*",
-							"static/examples_js/**/*",
-							"static/examples_ts/**/*"
-					]
-			},
 			"clean": {
 					"cache": false
+			},
+			"watch": {
+				"cache": false,
+				"persistent": true,
+				"outputs": [
+						"dist/**/*",
+						"build/**/*",
+						".next/**/*",
+						"public/**/*",
+						"static/examples_js/**/*",
+						"static/examples_ts/**/*"
+				]
 			},
 			"build": {
 					"dependsOn": ["^build"],
