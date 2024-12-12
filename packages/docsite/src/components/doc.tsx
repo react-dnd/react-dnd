@@ -22,7 +22,7 @@ export const Doc: FC<DocProps> = memo(function Doc({ docPage }) {
 
 const HtmlContainer = styled.div`
 	width: 100%;
-	max-width: 34rem;
+	max-width: 64rem;
 `
 
 const Container = styled.div`
