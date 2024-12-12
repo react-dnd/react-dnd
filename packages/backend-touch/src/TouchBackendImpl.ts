@@ -174,7 +174,7 @@ export class TouchBackendImpl implements Backend {
 		this.removeEventListener(
 			root,
 			'start',
-			this.handleTopMoveStartCapture as any,
+			this.getTopMoveStartHandler() as any,
 			true,
 		)
 		this.removeEventListener(root, 'start', this.handleTopMoveStart as any)
