@@ -25,7 +25,7 @@ import { ItemTypes } from './Constants'
 /**
  * Your Component
  */
-export default function Card({ isDragging, text }) {
+export default function Card({ text }) {
   const [{ opacity }, dragRef] = useDrag(
     () => ({
       type: ItemTypes.CARD,
