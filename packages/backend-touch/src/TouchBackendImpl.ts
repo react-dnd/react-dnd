@@ -391,6 +391,7 @@ export class TouchBackendImpl implements Backend {
 			e.type === eventNames.touch.start
 				? this.options.delayTouchStart
 				: this.options.delayMouseStart
+		clearTimeout(this.timeout)
 		this.timeout = setTimeout(
 			this.handleTopMoveStart.bind(this, e as any),
 			delay,
