@@ -146,7 +146,7 @@ export interface DropTargetMonitor<DragObject = unknown, DropResult = unknown>
 	getClientOffset(): XYCoord | null
 
 	/**
-	 * Returns the { x, y } difference between the last recorded client offset of the pointer and the client offset when current the drag operation has
+	 * Returns the { x, y } difference between the last recorded client offset of the pointer and the client offset when the current drag operation has
 	 * started. Returns null if no item is being dragged.
 	 */
 	getDifferenceFromInitialOffset(): XYCoord | null
@@ -197,7 +197,7 @@ export interface DragLayerMonitor<DragObject = unknown> {
 
 	/**
 	 * Returns the { x, y } difference between the last recorded client offset of the pointer and the client
-	 * offset when current the drag operation has started. Returns null if no item is being dragged.
+	 * offset when the current drag operation has started. Returns null if no item is being dragged.
 	 */
 	getDifferenceFromInitialOffset(): XYCoord | null
 
