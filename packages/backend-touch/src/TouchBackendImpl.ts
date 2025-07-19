@@ -64,6 +64,7 @@ export class TouchBackendImpl implements Backend {
 	private dragOverTargetIds: string[] | undefined
 	private draggedSourceNode: HTMLElement | undefined
 	private draggedSourceNodeRemovalObserver: MutationObserver | undefined
+	private isListeningBodyMove: boolean
 
 	// Patch for iOS 13, discussion over #1585
 	private lastTargetTouchFallback: Touch | undefined
@@ -84,6 +85,7 @@ export class TouchBackendImpl implements Backend {
 		this.listenerTypes = []
 		this._mouseClientOffset = {}
 		this._isScrolling = false
+		this.isListeningBodyMove = false
 
 		if (this.options.enableMouseEvents) {
 			this.listenerTypes.push(ListenerType.mouse)
@@ -275,57 +277,67 @@ export class TouchBackendImpl implements Backend {
 			}
 		}
 
-		const handleMove = (e: MouseEvent | TouchEvent) => {
-			if (this.document == null || root == null || !this.monitor.isDragging()) {
-				return
-			}
-
-			let coords
-
-			/**
-			 * Grab the coordinates for the current mouse/touch position
-			 */
-			switch (e.type) {
-				case eventNames.mouse.move:
-					coords = {
-						x: (e as MouseEvent).clientX,
-						y: (e as MouseEvent).clientY,
-					}
-					break
-
-				case eventNames.touch.move:
-					coords = {
-						x: (e as TouchEvent).touches[0]?.clientX || 0,
-						y: (e as TouchEvent).touches[0]?.clientY || 0,
-					}
-					break
-			}
-
-			/**
-			 * Use the coordinates to grab the element the drag ended on.
-			 * If the element is the same as the target node (or any of it's children) then we have hit a drop target and can handle the move.
-			 */
-			const droppedOn =
-				coords != null
-					? this.document.elementFromPoint(coords.x, coords.y)
-					: undefined
-			const childMatch = droppedOn && node.contains(droppedOn)
-
-			if (droppedOn === node || childMatch) {
-				return this.handleMove(e, targetId)
-			}
-		}
-
 		/**
 		 * Attaching the event listener to the body so that touchmove will work while dragging over multiple target elements.
 		 */
-		this.addEventListener(this.document.body, 'move', handleMove as any)
+		if (!this.isListeningBodyMove) {
+			this.isListeningBodyMove = true
+			this.addEventListener(this.document.body, 'move', this.handleBodyMove as any)
+		}
 		this.targetNodes.set(targetId, node)
 
 		return (): void => {
 			if (this.document) {
 				this.targetNodes.delete(targetId)
-				this.removeEventListener(this.document.body, 'move', handleMove as any)
+				if (this.targetNodes.size === 0) {
+					this.isListeningBodyMove = false
+					this.removeEventListener(this.document.body, 'move', this.handleBodyMove as any)
+				}
+			}
+		}
+	}
+
+	private handleBodyMove = (e: MouseEvent | TouchEvent): void => {
+		const root = this.options.rootElement
+		if (this.document == null || root == null || !this.monitor.isDragging()) {
+			return
+		}
+
+		let coords
+
+		/**
+		 * Grab the coordinates for the current mouse/touch position
+		 */
+		switch (e.type) {
+			case eventNames.mouse.move:
+				coords = {
+					x: (e as MouseEvent).clientX,
+					y: (e as MouseEvent).clientY,
+				}
+				break
+
+			case eventNames.touch.move:
+				coords = {
+					x: (e as TouchEvent).touches[0]?.clientX || 0,
+					y: (e as TouchEvent).touches[0]?.clientY || 0,
+				}
+				break
+		}
+
+		/**
+		 * Use the coordinates to grab the element the drag ended on.
+		 * If the element is the same as the target node (or any of it's children) then we have hit a drop target and can handle the move.
+		 */
+		const droppedOn =
+			coords != null
+				? this.document.elementFromPoint(coords.x, coords.y)
+				: undefined
+
+		for (const [targetId, node] of this.targetNodes) {
+			const childMatch = droppedOn && node.contains(droppedOn)
+
+			if (droppedOn === node || childMatch) {
+				return this.handleMove(e, targetId)
 			}
 		}
 	}
