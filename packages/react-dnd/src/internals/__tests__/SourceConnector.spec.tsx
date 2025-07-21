@@ -34,6 +34,48 @@ describe('SourceConnector', () => {
 		expect(unsubscribeDragSource).toHaveBeenCalled()
 	})
 
+	it('handles disconnect and immediate reconnect', () => {
+		const unsubscribeDragSource = jest.fn()
+		const unsubscribeDragPreview = jest.fn()
+		backend.connectDragSource.mockReturnValue(unsubscribeDragSource)
+		backend.connectDragPreview.mockReturnValue(unsubscribeDragPreview)
+
+		connector.receiveHandlerId('test')
+		connector.hooks.dragSource()({})
+		connector.hooks.dragPreview()({})
+		expect(backend.connectDragSource).toHaveBeenCalled()
+		expect(backend.connectDragPreview).toHaveBeenCalled()
+		expect(unsubscribeDragSource).not.toHaveBeenCalled()
+		expect(unsubscribeDragPreview).not.toHaveBeenCalled()
+		backend.connectDragSource.mockClear()
+		backend.connectDragPreview.mockClear()
+
+		connector.disconnectDragSource()
+		connector.disconnectDragPreview()
+		expect(backend.connectDragSource).not.toHaveBeenCalled()
+		expect(backend.connectDragPreview).not.toHaveBeenCalled()
+		expect(unsubscribeDragSource).toHaveBeenCalled()
+		expect(unsubscribeDragPreview).toHaveBeenCalled()
+		unsubscribeDragSource.mockClear()
+		unsubscribeDragPreview.mockClear()
+
+		// Source & preview should be connected after disconnect
+		connector.reconnect()
+		expect(backend.connectDragSource).toHaveBeenCalled()
+		expect(backend.connectDragPreview).toHaveBeenCalled()
+		expect(unsubscribeDragSource).not.toHaveBeenCalled()
+		expect(unsubscribeDragPreview).not.toHaveBeenCalled()
+		backend.connectDragSource.mockClear()
+		backend.connectDragPreview.mockClear()
+
+		// Source & preview should not be connected a second time
+		connector.reconnect()
+		expect(backend.connectDragSource).not.toHaveBeenCalled()
+		expect(backend.connectDragPreview).not.toHaveBeenCalled()
+		expect(unsubscribeDragSource).not.toHaveBeenCalled()
+		expect(unsubscribeDragPreview).not.toHaveBeenCalled()
+	})
+
 	it('unsubscribes drag preview when hook is called without node', () => {
 		const unsubscribeDragSource = jest.fn()
 		backend.connectDragSource.mockReturnValueOnce(unsubscribeDragSource)

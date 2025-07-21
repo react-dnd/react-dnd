@@ -53,6 +53,8 @@ export class SourceConnector implements Connector {
 	private dragPreviewOptionsInternal: DragPreviewOptions | null = null
 	private dragPreviewUnsubscribe: Unsubscribe | undefined
 
+	private isDragSourceConnected = false
+	private isDragPreviewConnected = false
 	private lastConnectedHandlerId: Identifier | null = null
 	private lastConnectedDragSource: any = null
 	private lastConnectedDragSourceOptions: any = null
@@ -118,7 +120,7 @@ export class SourceConnector implements Connector {
 			return didChange
 		}
 
-		if (didChange) {
+		if (didChange || !this.isDragSourceConnected) {
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDragSource = dragSource
 			this.lastConnectedDragSourceOptions = this.dragSourceOptions
@@ -127,6 +129,7 @@ export class SourceConnector implements Connector {
 				dragSource,
 				this.dragSourceOptions,
 			)
+			this.isDragSourceConnected = true
 		}
 		return didChange
 	}
@@ -152,7 +155,7 @@ export class SourceConnector implements Connector {
 			return
 		}
 
-		if (didChange) {
+		if (didChange || !this.isDragPreviewConnected) {
 			this.lastConnectedHandlerId = this.handlerId
 			this.lastConnectedDragPreview = dragPreview
 			this.lastConnectedDragPreviewOptions = this.dragPreviewOptions
@@ -161,6 +164,7 @@ export class SourceConnector implements Connector {
 				dragPreview,
 				this.dragPreviewOptions,
 			)
+			this.isDragPreviewConnected = true
 		}
 	}
 
@@ -195,15 +199,15 @@ export class SourceConnector implements Connector {
 			this.dragSourceUnsubscribe()
 			this.dragSourceUnsubscribe = undefined
 		}
+		this.isDragSourceConnected = false
 	}
 
 	public disconnectDragPreview() {
 		if (this.dragPreviewUnsubscribe) {
 			this.dragPreviewUnsubscribe()
 			this.dragPreviewUnsubscribe = undefined
-			this.dragPreviewNode = null
-			this.dragPreviewRef = null
 		}
+		this.isDragPreviewConnected = false
 	}
 
 	private get dragSource() {
