@@ -21,6 +21,7 @@ import otherChainedConnectors from './07-regression/chained-connectors/index.js'
 import dragSourceRerender from './07-regression/drag-source-rerender/index.js'
 import otherPreviewsMemoryLeak from './07-regression/previews-memory-leak/index.js'
 import remountWithCorrectProps from './07-regression/remount-with-correct-props/index.js'
+import fullChessGame from './08-full-chessgame/index.js'
 
 export const componentIndex: {
 	[key: string]: ComponentClass<any> | FunctionComponent<any>
@@ -46,4 +47,5 @@ export const componentIndex: {
 	'other-native-html': otherNativeHtml,
 	'other-chained-connectors': otherChainedConnectors,
 	'other-previews-memory-leak': otherPreviewsMemoryLeak,
+  'full-chess-game': fullChessGame
 }
