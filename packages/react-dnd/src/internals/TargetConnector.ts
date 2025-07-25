@@ -83,10 +83,10 @@ export class TargetConnector implements Connector {
 		this.reconnect()
 	}
 
-	public get dropTargetOptions(): DropTargetOptions {
+	public get dropTargetOptions(): DropTargetOptions | null {
 		return this.dropTargetOptionsInternal
 	}
-	public set dropTargetOptions(options: DropTargetOptions) {
+	public set dropTargetOptions(options: DropTargetOptions | null) {
 		this.dropTargetOptionsInternal = options
 	}
 

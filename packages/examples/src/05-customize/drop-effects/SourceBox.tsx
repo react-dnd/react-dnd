@@ -1,4 +1,6 @@
 import type { CSSProperties, FC } from 'react'
+import { useMemo } from 'react'
+import type { DragSourceOptions } from 'react-dnd'
 import { useDrag } from 'react-dnd'
 
 import { ItemTypes } from './ItemTypes.js'
@@ -13,26 +15,32 @@ const style: CSSProperties = {
 }
 
 export interface SourceBoxProps {
-	showCopyIcon?: boolean
+	dropEffect?: string
 }
 
-export const SourceBox: FC<SourceBoxProps> = ({ showCopyIcon }) => {
+export const SourceBox: FC<SourceBoxProps> = ({ dropEffect }) => {
+	const options = useMemo(() => {
+		const result: DragSourceOptions = {}
+		if (dropEffect) {
+			result.dropEffect = dropEffect
+		}
+		return result
+	}, [dropEffect])
+
 	const [{ opacity }, drag] = useDrag(
 		() => ({
 			type: ItemTypes.BOX,
-			options: {
-				dropEffect: showCopyIcon ? 'copy' : 'move',
-			},
+			options,
 			collect: (monitor) => ({
 				opacity: monitor.isDragging() ? 0.4 : 1,
 			}),
 		}),
-		[showCopyIcon],
+		[options],
 	)
 
 	return (
 		<div ref={drag} style={{ ...style, opacity }}>
-			When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
+			I have a {dropEffect || 'undefined'} dropEffect
 		</div>
 	)
 }

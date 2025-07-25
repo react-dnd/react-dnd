@@ -6,12 +6,15 @@ import { TargetBox } from './TargetBox.js'
 export const Container: FC = () => {
 	return (
 		<>
-			<div style={{ overflow: 'hidden', clear: 'both', marginTop: '1.5rem' }}>
-				<div style={{ float: 'left' }}>
-					<SourceBox showCopyIcon={true} />
+			<div style={{ overflow: 'hidden', marginTop: '1.5rem' }}>
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
+					<SourceBox dropEffect="copy" />
+					<SourceBox dropEffect="move" />
 					<SourceBox />
 				</div>
-				<div style={{ float: 'left' }}>
+				<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+					<TargetBox dropEffect="copy" />
+					<TargetBox dropEffect="move" />
 					<TargetBox />
 				</div>
 			</div>

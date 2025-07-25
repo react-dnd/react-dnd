@@ -24,7 +24,7 @@ export function useDrop<
 ): [CollectedProps, ConnectDropTarget] {
 	const spec = useOptionalFactory(specArg, deps)
 	const monitor = useDropTargetMonitor<DragObject, DropResult>()
-	const connector = useDropTargetConnector(spec.options)
+	const connector = useDropTargetConnector(spec.options ?? {})
 	useRegisteredDropTarget(spec, monitor, connector)
 
 	return [
