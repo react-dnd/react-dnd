@@ -52,10 +52,16 @@ export const Layout: FC<LayoutProps> = memo(function Layout(props) {
 	const touchBackend = isTouchBackend()
 	const [dndArea, setDndArea] = useState<HTMLDivElement | null>(null)
 	const html5Options = useMemo(() => ({ rootElement: dndArea }), [dndArea])
-
+	const topicTitle: string = location?.pathname?.split('/').pop()
 	return (
 		<>
-			<Helmet title="React DnD" meta={HEADER_META} link={HEADER_LINK}>
+			<Helmet
+				title={`React DnD ${topicTitle ? '·' : ''} ${
+					topicTitle.charAt(0).toUpperCase() + topicTitle.slice(1)
+				}`}
+				meta={HEADER_META}
+				link={HEADER_LINK}
+			>
 				<html lang="en" />
 				<link
 					rel="stylesheet"
