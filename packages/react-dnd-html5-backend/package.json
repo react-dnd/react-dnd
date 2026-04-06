@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-html5-backend",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "description": "HTML5 backend for React DnD",
   "main": "lib/index.js",
   "license": "BSD-3-Clause",
@@ -20,6 +20,6 @@
     "react-dnd": "^2.5.4"
   },
   "dependencies": {
-    "lodash": "^4.2.0"
+    "lodash": "^4.18.0"
   }
 }
