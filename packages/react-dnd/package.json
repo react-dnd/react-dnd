@@ -16,6 +16,9 @@
     "type": "git",
     "url": "https://github.com/react-dnd/react-dnd.git"
   },
+  "bugs": {
+    "url": "https://github.com/react-dnd/react-dnd/issues"
+  },
   "license": "MIT",
   "scripts": {
     "_build_dts": "tsc -b .",
